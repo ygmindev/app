@@ -8,6 +8,7 @@ import { ACCOUNT } from '@lib/shared/user/user.constants';
 describe('sign in', () => {
   test('works', async () => {
     await withTestScreen(async (screen) => {
+      console.warn('HELLO');
       await signIn({ isSnapshot: true, screen });
       await screen.open(`${ACCOUNT}/${PERSONAL}`);
       await screen.find({ type: SELECTOR_TYPE.TEXT, value: USER_FIXTURE.email ?? '' });

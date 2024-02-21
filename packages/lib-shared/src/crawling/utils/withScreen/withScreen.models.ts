@@ -1,3 +1,4 @@
+import { type PartialModel } from '@lib/shared/core/core.models';
 import {
   type _WithScreenModel,
   type _WithScreenParamsModel,
@@ -8,7 +9,10 @@ import {
 } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
 import { type UriModel } from '@lib/shared/route/route.models';
 
-export type WithScreenParamsModel = _WithScreenParamsModel[0];
+export type WithScreenParamsModel = [
+  callback: _WithScreenParamsModel[0],
+  options?: PartialModel<_WithScreenParamsModel[1]>,
+];
 
 export type WithScreenModel = _WithScreenModel;
 

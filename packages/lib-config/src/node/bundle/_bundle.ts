@@ -21,7 +21,7 @@ import { existsSync } from 'fs';
 import { getTsconfig } from 'get-tsconfig';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
-import { visualizer } from 'rollup-plugin-visualizer';
+// import { visualizer } from 'rollup-plugin-visualizer';
 import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import circleDependency from 'vite-plugin-circular-dependency';
@@ -189,7 +189,7 @@ export const _bundle = ({
           skipPreflightCheck: true,
         } as RollupBabelInputPluginOptions),
 
-      process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
+      // process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
 
       circleDependency({}),
     ]),

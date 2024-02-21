@@ -10,23 +10,25 @@ import { slug } from '@lib/shared/core/utils/slug/slug';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 
 export const withTestScreen = async (
-  callback: WithTestScreenParamsModel,
+  ...[callback, options]: WithTestScreenParamsModel
 ): Promise<WithTestScreenModel> => {
   const { outputPath } = testConfig();
-  return withScreen((screen) =>
-    callback({
-      ...screen,
-      snapshot: async (params) => {
-        const img = await screen.snapshot({ ...params, filename: undefined });
-        expect(img).toMatchImageSnapshot({
-          customDiffDir: fromWorking(outputPath, 'diffs'),
-          customReceivedDir: fromWorking(outputPath, 'received'),
-          customSnapshotIdentifier: ({ counter, currentTestName }) =>
-            joinPaths([slug(currentTestName), counter.toString(), params?.filename]),
-          customSnapshotsDir: fromWorking(screenConfig.snapshotPath),
-        });
-        return img;
-      },
-    }),
+  return withScreen(
+    (screen) =>
+      callback({
+        ...screen,
+        snapshot: async (params) => {
+          const img = await screen.snapshot({ ...params, filename: undefined });
+          expect(img).toMatchImageSnapshot({
+            customDiffDir: fromWorking(outputPath, 'diffs'),
+            customReceivedDir: fromWorking(outputPath, 'received'),
+            customSnapshotIdentifier: ({ counter, currentTestName }) =>
+              joinPaths([slug(currentTestName), counter.toString(), params?.filename]),
+            customSnapshotsDir: fromWorking(screenConfig.snapshotPath),
+          });
+          return img;
+        },
+      }),
+    options,
   );
 };

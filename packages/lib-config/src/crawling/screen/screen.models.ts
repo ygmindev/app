@@ -3,8 +3,6 @@ import { type RequiredModel } from '@lib/shared/core/core.models';
 import { type PuppeteerLaunchOptions } from 'puppeteer';
 
 export type ScreenConfigModel = {
-  cachePath: string;
-
   delay: number;
 
   delayDefault: number;
@@ -16,8 +14,6 @@ export type ScreenConfigModel = {
   isIgnoreImage?: boolean;
 
   isIgnoreStyle?: boolean;
-
-  maxConcurrency: number;
 
   snapshotPath: string;
 
