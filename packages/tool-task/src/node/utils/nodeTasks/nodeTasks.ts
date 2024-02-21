@@ -19,7 +19,6 @@ import {
   type NodeTasksMdoel,
   type NodeTasksParamsModel,
 } from '@tool/task/node/utils/nodeTasks/nodeTasks.models';
-import range from 'lodash/range';
 
 export const nodeTasks = ({
   additionalTasks,
@@ -54,10 +53,7 @@ export const nodeTasks = ({
         task: [
           [
             [({ target }) => `run ${target}-${testBase.name}`, ...(eteTasks ?? [])],
-            {
-              condition: PARALLEL_CONDITION.FIRST,
-              silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
-            },
+            { condition: PARALLEL_CONDITION.FIRST },
             { environment: ENVIRONMENT.TEST },
           ],
         ],

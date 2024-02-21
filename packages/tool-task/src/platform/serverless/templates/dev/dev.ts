@@ -9,7 +9,12 @@ export const dev: TaskParamsModel<unknown> = {
 
   name: 'dev',
 
-  task: [fromExecutable('sls offline start --reloadHandler --verbose')],
+  task: [
+    () =>
+      fromExecutable(
+        `sls offline start ${process.env.SERVER_IS_DISABLE_HOT_RELOAD ? '' : '--reloadHandler'} --verbose`,
+      ),
+  ],
 
   variables: () => {
     const httpConfigF = httpConfig();

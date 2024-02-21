@@ -31,6 +31,8 @@ export type EnvironmentConfigModel = {
   SERVER_APP_OTP_LENGTH: string;
   SERVER_APP_PORT: string;
   SERVER_APP_SECRET: string;
+  SERVER_APP_STATIC_HOST: string;
+  SERVER_APP_STATIC_PORT: number;
   SERVER_APP_WEBSOCKET_HOST: string;
   SERVER_APP_WEBSOCKET_PORT: number;
   SERVER_DB_MONGO_NAME: string;
@@ -45,6 +47,7 @@ export type EnvironmentConfigModel = {
   SERVER_FIREBASE_ADMIN_EMAIL: string;
   SERVER_FIREBASE_ADMIN_PROJECT_ID: string;
   SERVER_FIREBASE_ADMIN_SECRET: string;
+  SERVER_IS_DISABLE_HOT_RELOAD?: boolean;
   SERVER_IV_LENGTH: string;
   SERVER_KEY_LENGTH: string;
   SERVER_OTP_STATIC?: string;
@@ -65,8 +68,6 @@ export type EnvironmentConfigModel = {
   SERVER_TWILIO_FROM: string;
   SERVER_TWILIO_SID: string;
   SERVER_TWILIO_TOKEN: string;
-  SERVER_APP_STATIC_HOST: string;
-  SERVER_APP_STATIC_PORT: number;
   TEST_IS_ETE?: BooleanStringModel;
   TEST_MATCH?: string;
   __DEV__: BooleanStringModel;

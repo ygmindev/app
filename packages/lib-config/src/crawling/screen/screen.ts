@@ -5,6 +5,8 @@ import { type ScreenConfigModel } from '@lib/config/crawling/screen/screen.model
 
 const { config } = defineConfig({
   config: {
+    cachePath: joinPaths([fileConfig.buildPath, 'cache']),
+
     delay: 4000,
 
     delayDefault: 500,
@@ -12,6 +14,10 @@ const { config } = defineConfig({
     dimension: { height: 2000, width: 1200 },
 
     isHeadless: true,
+
+    isIgnoreImage: true,
+
+    isIgnoreStyle: true,
 
     maxConcurrency: 3,
 

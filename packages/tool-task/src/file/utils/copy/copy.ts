@@ -16,12 +16,14 @@ export const copy = async ({
   to,
 }: CopyParamsModel): Promise<void> => {
   let toF = to;
-  if ((!excludes && !includes) || every(excludes.map((pattern) => !minimatch(toF, pattern)))) {
+  if (
+    existsSync(from) &&
+    ((!excludes && !includes) || every(excludes.map((pattern) => !minimatch(toF, pattern))))
+  ) {
     overrides && forEach(overrides, (v, k) => (toF = toF.replaceAll(k, v)));
     if (statSync(from).isDirectory()) {
       existsSync(toF) && isOverwrite && rmSync(toF, { force: true, recursive: true });
       !existsSync(toF) && mkdirSync(toF, { recursive: true });
-
       for (const child of readdirSync(from)) {
         await copy({ from: join(from, child), isOverwrite, overrides, to: join(toF, child) });
       }

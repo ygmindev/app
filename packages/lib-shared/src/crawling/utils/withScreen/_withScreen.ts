@@ -43,7 +43,18 @@ const getSelector = (selector: SelectorModel): string => {
 export const _withScreen = async (
   ...[
     callback,
-    { delay, delayDefault, dimension, isHeadless, maxConcurrency, snapshotPath, timeout },
+    {
+      cachePath,
+      delay,
+      delayDefault,
+      dimension,
+      isHeadless,
+      isIgnoreImage,
+      isIgnoreStyle,
+      maxConcurrency,
+      snapshotPath,
+      timeout,
+    },
   ]: _WithScreenParamsModel
 ): Promise<_WithScreenModel> => {
   const cluster = await Cluster.launch({
@@ -56,11 +67,25 @@ export const _withScreen = async (
       ignoreDefaultArgs: ['--hide-scrollbars'],
       ignoreHTTPSErrors: true,
       protocolTimeout: 0,
+      userDataDir: cachePath,
     },
   });
 
   await cluster.task(async ({ data, page }) => {
-    await page.goto(data as string, { timeout, waitUntil: 'domcontentloaded' });
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      const type = req.resourceType();
+      if (
+        (isIgnoreImage && type === 'image') ||
+        (isIgnoreStyle && (type === 'stylesheet' || type === 'font'))
+      ) {
+        void req.abort();
+      } else {
+        void req.continue();
+      }
+    });
+
+    await page.goto(data as string, { timeout, waitUntil: 'networkidle2' });
 
     const findF = async (
       selector: SelectorModel,

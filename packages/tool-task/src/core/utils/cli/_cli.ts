@@ -6,7 +6,7 @@ import gulp from 'gulp';
 import noop from 'lodash/noop';
 
 export const _cli = async ({ task }: _CliParamsModel): Promise<_CliModel> => {
-  const taskF = gulp.task(task ?? 'default');
+  const taskF = gulp.task(task || 'default');
   if (taskF) {
     return taskF(noop);
   }

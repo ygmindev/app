@@ -36,7 +36,7 @@ export const _serverless = ({
       },
 
       'serverless-offline': {
-        allowCache: false,
+        allowCache: process.env.SERVER_IS_DISABLE_HOT_RELOAD,
         host: host?.split('://')[1],
         httpPort: port,
         httpsProtocol: certificateDir,
@@ -111,7 +111,8 @@ export const _serverless = ({
       'serverless-dotenv-plugin',
       platform === PLATFORM.NODE && 'serverless-plugin-layer-manager',
       platform === PLATFORM.NODE && 'serverless-esbuild',
-      process.env.NODE_ENV === 'development' && 'serverless-offline',
+      (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
+        'serverless-offline',
     ]),
 
     provider: {
