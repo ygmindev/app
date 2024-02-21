@@ -6,7 +6,6 @@ import {
   type WithScreenModel,
   type WithScreenParamsModel,
 } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
-import { APP_URI } from '@lib/shared/http/http.constants';
 
 export const withScreen = async (
   ...[callback, options]: WithScreenParamsModel
@@ -15,8 +14,7 @@ export const withScreen = async (
     (screen) =>
       callback({
         ...screen,
-        open: async (pathname) =>
-          screen.open(pathname.startsWith('/') ? `${APP_URI}${trimPathname(pathname)}` : pathname),
+        open: async (pathname) => screen.open(trimPathname(pathname)),
       }),
     merge([options, screenConfig]),
   );

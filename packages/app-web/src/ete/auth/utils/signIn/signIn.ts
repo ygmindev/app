@@ -9,9 +9,7 @@ import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.
 import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
 
 export const signIn = async ({ isSnapshot, screen }: SignInParamsModel): Promise<SignInModel> => {
-  console.warn(`@@@${screen.uri().host}`);
   screen.uri().pathname !== trimPathname(SIGN_IN) && (await screen.open(SIGN_IN));
-  console.warn(`@@@ after ${screen.uri().host}`);
   await screen
     .find({ key: 'data-test-id', type: SELECTOR_TYPE.DATA, value: 'email' })
     .then((h) => h?.type(USER_FIXTURE.email ?? ''));

@@ -17,8 +17,6 @@ const { config } = defineConfig({
 
     isIgnoreStyle: true,
 
-    maxConcurrency: 1,
-
     snapshotPath: joinPaths([fileConfig.buildPath, 'snapshots']),
 
     timeout: 15000,

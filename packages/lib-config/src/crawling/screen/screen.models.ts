@@ -15,6 +15,8 @@ export type ScreenConfigModel = {
 
   isIgnoreStyle?: boolean;
 
+  rootUri?: string;
+
   snapshotPath: string;
 
   timeout: number;

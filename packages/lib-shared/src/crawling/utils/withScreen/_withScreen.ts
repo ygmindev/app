@@ -49,6 +49,7 @@ export const _withScreen = async (
       isHeadless,
       isIgnoreImage,
       isIgnoreStyle,
+      rootUri,
       snapshotPath,
       timeout,
     },
@@ -235,7 +236,10 @@ export const _withScreen = async (
     },
 
     open: async (uri) => {
-      await page.goto(uri, { timeout, waitUntil: 'networkidle2' });
+      await page.goto(`${rootUri ?? ''}${uri}`, {
+        timeout,
+        waitUntil: 'networkidle2',
+      });
     },
 
     snapshot: async ({ filename } = {}) => {
@@ -260,5 +264,9 @@ export const _withScreen = async (
     },
   };
 
-  await callback(screen);
+  try {
+    await callback(screen);
+  } finally {
+    await screen.close();
+  }
 };
