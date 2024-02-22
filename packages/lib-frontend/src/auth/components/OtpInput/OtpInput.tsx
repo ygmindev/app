@@ -4,6 +4,7 @@ import {
   type OtpInputRefModel,
 } from '@lib/frontend/auth/components/OtpInput/OtpInput.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Link } from '@lib/frontend/core/components/Link/Link';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -12,11 +13,14 @@ import { type MeasureModel, type RLFCModel } from '@lib/frontend/core/core.model
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { AUTH } from '@lib/shared/auth/auth.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { withId } from '@lib/shared/core/utils/withId/withId';
 import range from 'lodash/range';
@@ -28,7 +32,8 @@ const otpLength = toNumber(process.env.SERVER_APP_OTP_LENGTH);
 const IDS = withId(range(otpLength));
 
 export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forwardRef(
-  ({ elementState, error, onChange, onSubmit, testID, value, ...props }, ref) => {
+  ({ elementState, error, onBack, onChange, onSubmit, testID, value, ...props }, ref) => {
+    const { t } = useTranslation([AUTH]);
     const { wrapperProps } = useLayoutStyles({ props });
     const theme = useTheme();
     const { valueControlled, valueControlledSet } = useValueControlled({
@@ -45,7 +50,8 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
       <Wrapper
         {...wrapperProps}
         isCenter
-        isFullWidth>
+        isFullWidth
+        s>
         <Wrapper
           isAlign
           isRow
@@ -131,6 +137,12 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
             </Wrapper>
           </Wrapper>
         </Wrapper>
+
+        <Link
+          align={FONT_ALIGN.CENTER}
+          onPress={onBack}>
+          {t('auth:otpDidntGet')}
+        </Link>
       </Wrapper>
     );
   },
