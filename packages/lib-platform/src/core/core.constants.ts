@@ -11,5 +11,6 @@ export enum PLATFORM {
 }
 
 export const CONTEXT_FIXTURE: ContextModel = {
+  requestId: '',
   user: SIGN_IN_TOKEN_FIXTURE,
 };
