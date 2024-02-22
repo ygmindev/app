@@ -25,23 +25,27 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ indices: [['email'], ['phone']], isRepository: true, name: USER_RESOURCE_NAME })
 export class User extends EntityResource implements UserModel {
-  @withEmbeddedResourceField({ Resource: () => Access, root: USER_RESOURCE_NAME })
-  [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel> = new Collection(this);
-
-  @withEmbeddedResourceField({ Resource: () => Bank, root: USER_RESOURCE_NAME })
-  [BANK_RESOURCE_NAME]?: Array<BankModel>;
-
-  @withEmbeddedResourceField({ Resource: () => Card, root: USER_RESOURCE_NAME })
-  [CARD_RESOURCE_NAME]?: Array<CardModel>;
-
-  @withEmbeddedResourceField({ Resource: () => LinkedUser, root: USER_RESOURCE_NAME })
-  [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
-
   @withEmbeddedResourceField({
-    Resource: () => PaymentMethod,
-    isRepository: false,
+    Resource: () => Access,
+    isRepository: true,
     root: USER_RESOURCE_NAME,
   })
+  [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel> = new Collection(this);
+
+  @withEmbeddedResourceField({ Resource: () => Bank, isRepository: true, root: USER_RESOURCE_NAME })
+  [BANK_RESOURCE_NAME]?: Array<BankModel>;
+
+  @withEmbeddedResourceField({ Resource: () => Card, isRepository: true, root: USER_RESOURCE_NAME })
+  [CARD_RESOURCE_NAME]?: Array<CardModel>;
+
+  @withEmbeddedResourceField({
+    Resource: () => LinkedUser,
+    isRepository: true,
+    root: USER_RESOURCE_NAME,
+  })
+  [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
+
+  @withEmbeddedResourceField({ Resource: () => PaymentMethod, root: USER_RESOURCE_NAME })
   [PAYMENT_METHOD_RESOURCE_NAME]?: Array<PaymentMethodModel>;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })

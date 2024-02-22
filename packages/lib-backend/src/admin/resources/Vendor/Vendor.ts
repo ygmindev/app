@@ -14,7 +14,11 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isRepository: true, name: VENDOR_RESOURCE_NAME })
 export class Vendor extends EntityResource implements VendorModel {
-  @withEmbeddedResourceField({ Resource: () => Utility, root: VENDOR_RESOURCE_NAME })
+  @withEmbeddedResourceField({
+    Resource: () => Utility,
+    isRepository: true,
+    root: VENDOR_RESOURCE_NAME,
+  })
   [UTILITY_RESOURCE_NAME]?: Array<UtilityModel>;
 
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
