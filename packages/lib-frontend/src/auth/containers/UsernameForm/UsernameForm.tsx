@@ -1,7 +1,4 @@
-import {
-  USERNAME_FORM_TEST_ID,
-  USERNAME_FORM_VALIDATORS,
-} from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.constants';
+import { USERNAME_FORM_VALIDATORS } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.constants';
 import {
   type UsernameFormModel,
   type UsernameFormPropsModel,
@@ -143,7 +140,6 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
       isVerticalCenter
       onComplete={onComplete}
       onSubmit={handleSubmit}
-      testID={USERNAME_FORM_TEST_ID}
       validators={USERNAME_FORM_VALIDATORS}
     />
   );

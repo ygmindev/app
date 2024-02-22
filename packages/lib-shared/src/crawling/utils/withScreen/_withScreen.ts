@@ -93,10 +93,9 @@ export const _withScreen = async (
     const selectorF = getSelector(selector);
     try {
       debug(`Finding ${stringify(selector)}...`);
-      timeout &&
-        (await (handle ?? page).waitForSelector(selectorF, {
-          timeout: isNumber(timeoutF) ? timeoutF : timeout,
-        }));
+      await (handle ?? page).waitForSelector(selectorF, {
+        timeout: isNumber(timeoutF) ? timeoutF : timeout,
+      });
     } catch (e) {}
     let selected;
     if (index >= 0) {
@@ -121,10 +120,9 @@ export const _withScreen = async (
     const selectorF = getSelector(selector);
     try {
       debug(`Finding all ${stringify(selector)}...`);
-      timeout &&
-        (await (handle ?? page).waitForSelector(selectorF, {
-          timeout: isNumber(timeoutF) ? timeoutF : timeout,
-        }));
+      await (handle ?? page).waitForSelector(selectorF, {
+        timeout: isNumber(timeoutF) ? timeoutF : timeout,
+      });
     } catch (e) {}
     const selected = await (handle ?? page).$$(selectorF);
     if (selected) {
@@ -243,17 +241,10 @@ export const _withScreen = async (
     },
 
     snapshot: async ({ filename } = {}) => {
-      await page.$eval('[banneroffsetheight="0"]', (h) => h?.remove());
-      const element = await page.$('#bookingFunnelBody > div').then((h) => h?.boundingBox());
       const dirname = joinPaths([fromWorking(), snapshotPath]);
       !existsSync(dirname) && mkdirSync(dirname, { recursive: true });
       return page.screenshot({
-        clip: {
-          height: element?.height ?? dimension.height,
-          width: element?.width ?? dimension.width,
-          x: 0,
-          y: 0,
-        },
+        clip: { height: dimension.height, width: dimension.width, x: 0, y: 0 },
         path: filename ? joinPaths([dirname, `${filename}.png`]) : undefined,
       });
     },

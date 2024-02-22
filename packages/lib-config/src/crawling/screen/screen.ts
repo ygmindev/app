@@ -9,7 +9,8 @@ const { config } = defineConfig({
 
     delayDefault: 500,
 
-    dimension: { height: 2000, width: 1200 },
+    // dimension: { height: 2000, width: 1200 },
+    dimension: { height: 600, width: 600 },
 
     isHeadless: false,
 
@@ -19,7 +20,7 @@ const { config } = defineConfig({
 
     snapshotPath: joinPaths([fileConfig.buildPath, 'snapshots']),
 
-    timeout: 15000,
+    timeout: 30000,
   } satisfies ScreenConfigModel,
 });
 

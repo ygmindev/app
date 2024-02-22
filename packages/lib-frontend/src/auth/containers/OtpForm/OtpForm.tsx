@@ -1,8 +1,5 @@
 import { OtpInput } from '@lib/frontend/auth/components/OtpInput/OtpInput';
-import {
-  OTP_FORM_TEST_ID,
-  OTP_FORM_VALIDATORS,
-} from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
+import { OTP_FORM_VALIDATORS } from '@lib/frontend/auth/containers/OtpForm/OtpForm.constants';
 import { type OtpFormPropsModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
 import { Link } from '@lib/frontend/core/components/Link/Link';
 import { Text } from '@lib/frontend/core/components/Text/Text';
@@ -55,7 +52,6 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
-      testID={OTP_FORM_TEST_ID}
       topElement={() =>
         data?.email && (
           <Wrapper isCenter>

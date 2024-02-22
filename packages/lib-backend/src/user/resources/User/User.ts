@@ -37,7 +37,11 @@ export class User extends EntityResource implements UserModel {
   @withEmbeddedResourceField({ Resource: () => LinkedUser, root: USER_RESOURCE_NAME })
   [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
 
-  @withEmbeddedResourceField({ Resource: () => PaymentMethod, root: USER_RESOURCE_NAME })
+  @withEmbeddedResourceField({
+    Resource: () => PaymentMethod,
+    isRepository: false,
+    root: USER_RESOURCE_NAME,
+  })
   [PAYMENT_METHOD_RESOURCE_NAME]?: Array<PaymentMethodModel>;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })

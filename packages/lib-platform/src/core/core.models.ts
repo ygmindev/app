@@ -8,6 +8,6 @@ export type ContextModel = {
   database?: DatabaseModel;
   group?: string;
   pathname?: string;
-  requestId?: string;
+  requestId: string;
   user?: SignInTokenModel;
 };

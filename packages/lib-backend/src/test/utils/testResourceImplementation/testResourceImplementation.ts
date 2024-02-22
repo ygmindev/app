@@ -33,15 +33,19 @@ export const testResourceImplementation = ({
 
   const findAll = (
     data: Array<PartialModel<TestableEntityResourceModel>> | undefined,
-    filters: Array<FilterModel<TestableEntityResourceModel>>,
+    filters?: Array<FilterModel<TestableEntityResourceModel>>,
   ): Array<PartialModel<TestableEntityResourceModel>> =>
-    (_filter(data, getFilter(filters)) as Array<PartialModel<TestableEntityResourceModel>>) ?? [];
+    (filters
+      ? (_filter(data, getFilter(filters)) as Array<PartialModel<TestableEntityResourceModel>>)
+      : data) ?? [];
 
   const findF = (
     data: Array<PartialModel<TestableEntityResourceModel>> | undefined,
-    filters: Array<FilterModel<TestableEntityResourceModel>>,
+    filters?: Array<FilterModel<TestableEntityResourceModel>>,
   ): PartialModel<TestableEntityResourceModel> | null =>
-    (find(data, getFilter(filters)) as PartialModel<TestableEntityResourceModel>) ?? null;
+    (filters
+      ? (find(data, getFilter(filters)) as PartialModel<TestableEntityResourceModel>)
+      : null) ?? null;
 
   const PROJECT_FIELDS = ['_id', 'stringFieldOptional'] satisfies Array<
     keyof TestableEntityResourceModel
@@ -302,7 +306,7 @@ export const testResourceImplementation = ({
       update: { $pull: { stringArrayField: 'stringArrayFieldElement1' } },
     } as InputModel<RESOURCE_METHOD_TYPE.UPDATE, TestableEntityResourceModel>;
     const { result } = await implementation.update(input);
-    const expected = _filter(data[0].stringArrayField, input.update.$pull);
+    const expected = _filter(data[0].stringArrayField, input.update?.$pull);
     expect(result?.stringArrayField ?? []).toStrictEqual(expected);
   });
 

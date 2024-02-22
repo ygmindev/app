@@ -15,7 +15,7 @@ export const main = createLambdaHandler({
       case '$connect': {
         if (user) {
           await socketImplementation.create({
-            form: { connectionId: context.requestId, name: 'test' },
+            form: { connections: [context.requestId], name: 'test' },
           });
         }
         return {
@@ -38,7 +38,7 @@ export const main = createLambdaHandler({
         });
         return {
           body,
-          requestId: result?.connectionId,
+          requestId: '',
         };
       }
     }

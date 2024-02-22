@@ -28,7 +28,7 @@ const otpLength = toNumber(process.env.SERVER_APP_OTP_LENGTH);
 const IDS = withId(range(otpLength));
 
 export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forwardRef(
-  ({ elementState, error, onChange, onSubmit, value, ...props }, ref) => {
+  ({ elementState, error, onChange, onSubmit, testID, value, ...props }, ref) => {
     const { wrapperProps } = useLayoutStyles({ props });
     const theme = useTheme();
     const { valueControlled, valueControlledSet } = useValueControlled({
@@ -71,6 +71,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
               onFocus={() => isFocusedSet(true)}
               ref={ref}
               size={THEME_SIZE.MEDIUM}
+              testID={testID}
               value={valueControlled}
             />
           </Wrapper>

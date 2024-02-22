@@ -28,10 +28,10 @@ export const createProtectedResoureImplementation = <
   TForm extends EntityResourceDataModel<TType> = EntityResourceDataModel<TType>,
 >({
   ...params
-}: CreateProtectedResoureImplementationParamsModel<TType, TForm>): CreateProtectedResoureImplementationModel<
+}: CreateProtectedResoureImplementationParamsModel<
   TType,
   TForm
-> => {
+>): CreateProtectedResoureImplementationModel<TType, TForm> => {
   class ProtectedResourceImplementation extends createEntityResourceImplementation<TType, TForm>({
     ...params,
   }) {

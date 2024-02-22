@@ -67,6 +67,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       placeholder,
       rightElement,
       size,
+      testID,
       value,
       width,
       ...props
@@ -255,6 +256,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
             onSubmit={onSubmit}
             placeholder={placeholder}
             ref={inputRef}
+            testID={testID}
             value={valueControlled}
           />
 
