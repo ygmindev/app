@@ -218,8 +218,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         elementState={elementStateF}
         height={height ?? (isNumber(sizeF) ? sizeF : theme.shape.size[sizeF])}
         onElementStateChange={onElementStateChangeF}
-        pLeft
-        pRight={THEME_SIZE.SMALL}
+        pLeft={!isCenter}
+        pRight={isCenter ? THEME_SIZE.SMALL : undefined}
         position={SHAPE_POSITION.RELATIVE}
         ref={focusableRef}
         width={width}>
