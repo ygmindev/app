@@ -6,6 +6,7 @@ import { _serverless } from '@lib/config/platform/serverless/_serverless';
 import { type ServerlessConfigModel } from '@lib/config/platform/serverless/serverless.models';
 import { PLATFORM } from '@lib/platform/core/core.constants';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
+import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 
 const { _config, config } = defineConfig({
   _config: _serverless,
@@ -17,6 +18,14 @@ const { _config, config } = defineConfig({
       dotenv: () => setEnvironment(),
 
       environment: process.env.NODE_ENV,
+
+      functions: {
+        [PING]: {
+          handler: 'src/functions/ping/ping.main',
+          method: HTTP_METHOD.GET,
+          pathname: `/api/${PING}`,
+        },
+      },
 
       host: process.env.SERVER_APP_HOST,
 

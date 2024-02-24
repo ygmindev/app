@@ -20,6 +20,8 @@ export type EnvironmentConfigModel = {
   APP_TRACKING_NAME: string;
   APP_UPTRACE_SOURCE: string;
   APP_USERNAME: string;
+  AWS_ACCESS_KEY_ID: string;
+  AWS_SECRET_ACCESS_KEY: string;
   CAROOT: string;
   ENV_NAME: string;
   ENV_PLATFORM: PlatformModel;

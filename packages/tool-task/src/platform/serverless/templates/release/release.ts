@@ -13,6 +13,9 @@ export const release: TaskParamsModel<unknown> = {
   name: 'release',
 
   task: [
+    () =>
+      `npx serverless config credentials --provider aws --profile default --overwrite --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY}`,
+
     async () => {
       const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');
       return copy({
@@ -24,7 +27,7 @@ export const release: TaskParamsModel<unknown> = {
 
     () => {
       const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');
-      return `cd ${root} && npm install --unsafe-perm --production`;
+      return `cd ${root} && npm install --unsafe-perm --omit=dev`;
     },
 
     async () => {

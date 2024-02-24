@@ -1,11 +1,10 @@
-import { type BuildSchemaOptions, type ContainerType } from 'type-graphql';
-import { buildSchemaSync } from 'type-graphql';
-
 import {
   type _GraphqlConfigModel,
   type GraphqlConfigModel,
 } from '@lib/config/data/graphql/graphql.models';
 import { type ContextModel } from '@lib/platform/core/core.models';
+import { type BuildSchemaOptions, type ContainerType } from 'type-graphql';
+import { buildSchemaSync } from 'type-graphql';
 
 export const _graphql = ({
   authorize,

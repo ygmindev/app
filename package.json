@@ -10,6 +10,8 @@
     "@app/web-library",
     "@backend/graphql-sandbox",
     "@backend/lambda",
+    "@backend/lambda-crawl",
+    "@backend/lambda-graphql",
     "@backend/jobs",
     "@lib/backend",
     "@lib/config",

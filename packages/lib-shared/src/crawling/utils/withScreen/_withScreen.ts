@@ -19,47 +19,33 @@ import {
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
+import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
-import { type ElementHandle, launch } from 'puppeteer';
+import { type ElementHandle } from 'puppeteer-core';
+// import puppeteer from 'puppeteer';
 // import puppeteer from 'puppeteer-extra';
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-// puppeteer.use(StealthPlugin());
+import { launch } from 'puppeteer-core';
 
-const getSelector = (selector: SelectorModel): string => {
-  switch (selector.type) {
-    case SELECTOR_TYPE.DATA:
-      return `[${selector.key}="${selector.value}"]`;
-    case SELECTOR_TYPE.ID:
-      return `#${selector.value}`;
-    case SELECTOR_TYPE.TEXT:
-      return `::-p-text(${selector.value})`;
-    default:
-      return selector.value;
-  }
-};
+// puppeteer.use(StealthPlugin());
 
 export const _withScreen = async (
   ...[
     callback,
-    {
-      delay,
-      delayDefault,
-      dimension,
-      isHeadless,
-      isIgnoreImage,
-      isIgnoreStyle,
-      rootUri,
-      snapshotPath,
-      timeout,
-    },
+    { delay, delayDefault, dimension, isHeadless, snapshotPath, timeout },
   ]: _WithScreenParamsModel
 ): Promise<_WithScreenModel> => {
   const browser = await launch({
-    args: dimension ? [`--window-size-${dimension.width},${dimension.height}`] : undefined,
+    args: [
+      ...chromium.args,
+      dimension && `--window-size-${dimension.width},${dimension.height}`,
+    ].filter(Boolean),
     defaultViewport: dimension,
-    headless: isHeadless ? 'new' : false,
-    ignoreDefaultArgs: ['--hide-scrollbars'],
+    executablePath: await chromium.executablePath(),
+    // headless: isHeadless ? 'new' : false,
+    headless: true,
+    ignoreDefaultArgs: ['--hide-scrollbars', '--disable-web-security'],
     ignoreHTTPSErrors: true,
     protocolTimeout: 0,
   });
@@ -69,15 +55,25 @@ export const _withScreen = async (
 
   page.on('request', (req) => {
     const type = req.resourceType();
-    if (
-      (isIgnoreImage && type === 'image') ||
-      (isIgnoreStyle && (type === 'stylesheet' || type === 'font'))
-    ) {
+    if (type === 'image' || type === 'font') {
       void req.abort();
     } else {
       void req.continue();
     }
   });
+
+  const getSelector = (selector: SelectorModel): string => {
+    switch (selector.type) {
+      case SELECTOR_TYPE.DATA:
+        return `[${selector.key}="${selector.value}"]`;
+      case SELECTOR_TYPE.ID:
+        return `#${selector.value}`;
+      case SELECTOR_TYPE.TEXT:
+        return `::-p-text(${selector.value})`;
+      default:
+        return selector.value;
+    }
+  };
 
   const findF = async (
     selector: SelectorModel,
@@ -93,9 +89,10 @@ export const _withScreen = async (
     const selectorF = getSelector(selector);
     try {
       debug(`Finding ${stringify(selector)}...`);
-      await (handle ?? page).waitForSelector(selectorF, {
-        timeout: isNumber(timeoutF) ? timeoutF : timeout,
-      });
+      timeout &&
+        (await (handle ?? page).waitForSelector(selectorF, {
+          timeout: isNumber(timeoutF) ? timeoutF : timeout,
+        }));
     } catch (e) {}
     let selected;
     if (index >= 0) {
@@ -120,9 +117,10 @@ export const _withScreen = async (
     const selectorF = getSelector(selector);
     try {
       debug(`Finding all ${stringify(selector)}...`);
-      await (handle ?? page).waitForSelector(selectorF, {
-        timeout: isNumber(timeoutF) ? timeoutF : timeout,
-      });
+      timeout &&
+        (await (handle ?? page).waitForSelector(selectorF, {
+          timeout: isNumber(timeoutF) ? timeoutF : timeout,
+        }));
     } catch (e) {}
     const selected = await (handle ?? page).$$(selectorF);
     if (selected) {
@@ -233,18 +231,22 @@ export const _withScreen = async (
       await page.keyboard.press(input);
     },
 
-    open: async (uri) => {
-      await page.goto(`${rootUri ?? ''}${uri}`, {
-        timeout,
-        waitUntil: 'networkidle2',
-      });
+    open: async (route) => {
+      await page.goto(route, { timeout, waitUntil: 'networkidle2' });
     },
 
     snapshot: async ({ filename } = {}) => {
+      await page.$eval('[banneroffsetheight="0"]', (h) => h?.remove());
+      const element = await page.$('#bookingFunnelBody > div').then((h) => h?.boundingBox());
       const dirname = joinPaths([fromWorking(), snapshotPath]);
       !existsSync(dirname) && mkdirSync(dirname, { recursive: true });
       return page.screenshot({
-        clip: { height: dimension.height, width: dimension.width, x: 0, y: 0 },
+        clip: {
+          height: element?.height ?? dimension.height,
+          width: element?.width ?? dimension.width,
+          x: 0,
+          y: 0,
+        },
         path: filename ? joinPaths([dirname, `${filename}.png`]) : undefined,
       });
     },
@@ -258,6 +260,6 @@ export const _withScreen = async (
   try {
     await callback(screen);
   } finally {
-    await screen.close();
+    await browser.close();
   }
 };
