@@ -45,6 +45,7 @@ coverage
 !.vscode/extensions.json
 
 # misc
+**/*.zip
 .cache
 .sass-cache
 connect.lock
