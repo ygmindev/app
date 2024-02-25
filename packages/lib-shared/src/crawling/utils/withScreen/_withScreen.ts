@@ -56,7 +56,12 @@ export const _withScreen = async (
     : await puppeteer.launch({
         args: [
           '--no-sandbox',
-          '--incognito',
+          '--disable-gpu',
+          '--disable-dev-shm-usage',
+          '--no-zygote',
+          '--single-process',
+          '--disable-setuid-sandbox',
+          '--no-first-run',
           dimension && `--window-size-${dimension.width},${dimension.height}`,
         ].filter(Boolean),
         defaultViewport: dimension,
