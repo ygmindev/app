@@ -195,7 +195,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1708882796305-2024-02-25T17:39:56.305Z/custom.zip"
+                "S3Key": "serverless/serverless/production/1708884089032-2024-02-25T18:01:29.032Z/custom.zip"
               },
               "LayerName": "custom",
               "CompatibleRuntimes": [
@@ -211,7 +211,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1708882796305-2024-02-25T17:39:56.305Z/crawl.zip"
+                "S3Key": "serverless/serverless/production/1708884089032-2024-02-25T18:01:29.032Z/crawl.zip"
               },
               "Handler": "src/functions/crawl/crawl.main",
               "Runtime": "nodejs18.x",
@@ -246,7 +246,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1708882796305-2024-02-25T17:39:56.305Z/ping.zip"
+                "S3Key": "serverless/serverless/production/1708884089032-2024-02-25T18:01:29.032Z/ping.zip"
               },
               "Handler": "src/functions/ping/ping.main",
               "Runtime": "nodejs18.x",
@@ -478,7 +478,7 @@
           },
           "CustomLambdaLayerS3Key": {
             "Description": "Current Lambda layer S3Key",
-            "Value": "serverless/serverless/production/1708882796305-2024-02-25T17:39:56.305Z/custom.zip",
+            "Value": "serverless/serverless/production/1708884089032-2024-02-25T18:01:29.032Z/custom.zip",
             "Export": {
               "Name": "sls-serverless-production-CustomLambdaLayerS3Key"
             }
@@ -670,7 +670,6 @@
           "/Users/yoongeemin/Developer/Projects/app/packages/app-web-admin/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/app-web-library/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/backend-graphql-sandbox/node_modules",
-          "/Users/yoongeemin/Developer/Projects/app/packages/backend-lambda/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/backend-lambda-crawl/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/backend-lambda-graphql/node_modules",
           "/Users/yoongeemin/Developer/Projects/app/packages/backend-process/node_modules",
@@ -808,7 +807,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/serverless/production/1708882796305-2024-02-25T17:39:56.305Z",
+    "artifactDirectoryName": "serverless/serverless/production/1708884089032-2024-02-25T18:01:29.032Z",
     "artifact": ""
   }
 }

@@ -57,7 +57,7 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
     }
 
     if (databaseConfig && !contextF.database) {
-      const { database } = await initializeBackend({ config: databaseConfig() });
+      const { database } = await initializeBackend({ databaseConfig: databaseConfig() });
       database && (contextDefault.database = database);
     }
 

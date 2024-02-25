@@ -31,6 +31,8 @@ export type EnvironmentConfigModel = {
   SERVER_APP_OTP_LENGTH: string;
   SERVER_APP_PORT: string;
   SERVER_APP_SECRET: string;
+  SERVER_APP_STATIC_HOST: string;
+  SERVER_APP_STATIC_PORT: number;
   SERVER_APP_WEBSOCKET_HOST: string;
   SERVER_APP_WEBSOCKET_PORT: number;
   SERVER_DB_MONGO_NAME: string;
@@ -67,8 +69,6 @@ export type EnvironmentConfigModel = {
   SERVER_TWILIO_FROM: string;
   SERVER_TWILIO_SID: string;
   SERVER_TWILIO_TOKEN: string;
-  STATIC_HOST: string;
-  STATIC_PORT: number;
   TEST_IS_ETE?: BooleanStringModel;
   TEST_MATCH?: string;
   __DEV__: BooleanStringModel;

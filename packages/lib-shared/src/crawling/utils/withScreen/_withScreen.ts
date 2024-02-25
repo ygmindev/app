@@ -119,11 +119,11 @@ export const _withScreen = async (
           timeout: isNumber(timeoutF) ? timeoutF : timeout,
         }));
     } catch (e) {}
-    let selected;
+    let selected: ElementHandle;
     if (index >= 0) {
-      selected = (await (handle ?? page).$$(selectorF))?.[index];
+      selected = (await (handle ?? page).$$(selectorF))?.[index] as ElementHandle;
     } else {
-      selected = await (handle ?? page).$(selectorF);
+      selected = (await (handle ?? page).$(selectorF)) as ElementHandle;
     }
     if (selected) {
       info(`Found ${stringify(selector)}!`);
@@ -150,7 +150,7 @@ export const _withScreen = async (
     const selected = await (handle ?? page).$$(selectorF);
     if (selected) {
       info(`Found all ${stringify(selector)}!`);
-      return selected?.map((v) => new _Handle(v));
+      return selected?.map((v) => new _Handle(v as ElementHandle));
     }
     isThrow && new NotFoundError(stringify(selector));
     return [];

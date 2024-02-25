@@ -2,6 +2,7 @@ import { signIn } from '@app/web/ete/auth/utils/signIn/signIn';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { seed } from '@lib/backend/test/utils/seed/seed';
 import { withTestScreen } from '@lib/backend/test/utils/withTestScreen/withTestScreen';
+import { _config as databaseConfig } from '@lib/config/database/database.mongo';
 import { EMAIL, PERSONAL } from '@lib/frontend/user/user.constants';
 import {
   KEY_TYPE,
@@ -11,7 +12,7 @@ import { ACCOUNT } from '@lib/shared/user/user.constants';
 
 describe('usernameUpdate', () => {
   beforeAll(async () => {
-    await initialize();
+    await initialize({ databaseConfig: databaseConfig() });
   });
 
   beforeEach(async () => {
