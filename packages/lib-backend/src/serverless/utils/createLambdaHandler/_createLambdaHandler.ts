@@ -19,7 +19,6 @@ import {
   type LambdaTypeModel,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
 import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
-import { _config } from '@lib/config/data/graphql/graphql';
 import { type ContextModel } from '@lib/platform/core/core.models';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
@@ -29,6 +28,8 @@ import { type GraphQLError } from 'graphql';
 
 export const _createLambdaHandler = <TType extends LambdaTypeModel>({
   context: contextDefault = {},
+  databaseConfig,
+  graphQlConfig,
   handler,
   plugins,
   type,
@@ -55,8 +56,8 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
       eventF.headers?.group && (contextF.group = eventF.headers.group);
     }
 
-    if (plugins?.includes(LAMBDA_PLUGIN.DATABASE) && !contextF.database) {
-      const { database } = await initializeBackend();
+    if (databaseConfig && !contextF.database) {
+      const { database } = await initializeBackend({ config: databaseConfig() });
       database && (contextDefault.database = database);
     }
 
@@ -69,7 +70,7 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
 
   return async (event: _LambdaEventModel<TType>, context, callback) => {
     // GraphQL
-    if (type === LAMBDA_TYPE.GRAPHQL) {
+    if (type === LAMBDA_TYPE.GRAPHQL && graphQlConfig) {
       const server = new ApolloServer({
         allowBatchedHttpRequests: true,
         formatError: (e, originalError) => {
@@ -83,7 +84,7 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
           console.error(errorF);
           return errorF;
         },
-        schema: _config(),
+        schema: graphQlConfig(),
       });
       const handlerF = startServerAndCreateLambdaHandler(
         server,

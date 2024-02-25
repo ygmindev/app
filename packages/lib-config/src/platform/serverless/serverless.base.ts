@@ -47,11 +47,11 @@ const { _config, config } = defineConfig({
           allowedOrigins: ['*'],
         },
 
-        memory: 128,
+        memory: 512,
 
         region: process.env.SERVER_REGION,
 
-        timeout: 15,
+        timeout: 900,
       },
     }) satisfies ServerlessConfigModel,
 });

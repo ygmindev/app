@@ -760,6 +760,9 @@ importers:
       apollo-server-lambda:
         specifier: ^3.13.0
         version: 3.13.0(graphql@16.8.1)
+      app-root-path:
+        specifier: ^3.1.0
+        version: 3.1.0
       aws-lambda:
         specifier: ^1.0.7
         version: 1.0.7
@@ -881,6 +884,9 @@ importers:
       apollo-server-lambda:
         specifier: ^3.13.0
         version: 3.13.0(graphql@16.8.1)
+      app-root-path:
+        specifier: ^3.1.0
+        version: 3.1.0
       aws-lambda:
         specifier: ^1.0.7
         version: 1.0.7
@@ -896,6 +902,15 @@ importers:
       core-js:
         specifier: ^3.35.0
         version: 3.35.0
+      date-fns:
+        specifier: ^3.2.0
+        version: 3.2.0
+      ejs:
+        specifier: ^3.1.9
+        version: 3.1.9
+      email-templates:
+        specifier: ^11.1.1
+        version: 11.1.1(@babel/core@7.23.7)(ejs@3.1.9)(underscore@1.13.6)
       firebase-admin:
         specifier: ^12.0.0
         version: 12.0.0
@@ -905,6 +920,9 @@ importers:
       google-spreadsheet:
         specifier: ^4.1.1
         version: 4.1.1(google-auth-library@9.6.3)
+      graphql-relay:
+        specifier: ^0.10.0
+        version: 0.10.0(graphql@16.8.1)
       http-errors:
         specifier: ^2.0.0
         version: 2.0.0
@@ -920,6 +938,15 @@ importers:
       mongodb:
         specifier: 5.9.2
         version: 5.9.2
+      puppeteer:
+        specifier: ^21.7.0
+        version: 21.7.0(typescript@5.3.3)
+      puppeteer-extra:
+        specifier: ^3.3.6
+        version: 3.3.6(puppeteer@21.7.0)
+      puppeteer-extra-plugin-stealth:
+        specifier: ^2.11.2
+        version: 2.11.2(puppeteer-extra@3.3.6)
       reflect-metadata:
         specifier: ^0.2.1
         version: 0.2.1
@@ -1010,6 +1037,9 @@ importers:
       apollo-server-lambda:
         specifier: ^3.13.0
         version: 3.13.0(graphql@16.8.1)
+      app-root-path:
+        specifier: ^3.1.0
+        version: 3.1.0
       aws-lambda:
         specifier: ^1.0.7
         version: 1.0.7
@@ -11996,7 +12026,6 @@ packages:
   /app-root-path@3.1.0:
     resolution: {integrity: sha512-biN3PwB2gUtjaYy/isrU3aNWI5w+fAfvHkSvCKeQGxhmYpwKFUxudR3Yya+KqVRHBmEDYh+/lTozYCFbmzX4nA==}
     engines: {node: '>= 6.0.0'}
-    dev: true
 
   /appdirsjs@1.2.7:
     resolution: {integrity: sha512-Quji6+8kLBC3NnBeo14nPDq0+2jUs5s3/xEye+udFHumHhRk4M7aAMXp/PBJqkKYGuuyR9M/6Dq7d2AViiGmhw==}

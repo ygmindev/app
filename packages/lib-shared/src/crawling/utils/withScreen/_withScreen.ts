@@ -18,15 +18,16 @@ import {
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
-import { debug } from '@lib/shared/logging/utils/logger/logger';
+import { info } from '@lib/shared/logging/utils/logger/logger';
 import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
 import { type ElementHandle } from 'puppeteer-core';
 // import puppeteer from 'puppeteer';
-// import puppeteer from 'puppeteer-extra';
+import puppeteer from 'puppeteer-extra';
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-import { launch } from 'puppeteer-core';
+
+const isAws = false;
 
 // puppeteer.use(StealthPlugin());
 
@@ -36,22 +37,41 @@ export const _withScreen = async (
     { delay, delayDefault, dimension, isHeadless, snapshotPath, timeout },
   ]: _WithScreenParamsModel
 ): Promise<_WithScreenModel> => {
-  const browser = await launch({
-    args: [
-      ...chromium.args,
-      dimension && `--window-size-${dimension.width},${dimension.height}`,
-    ].filter(Boolean),
-    defaultViewport: dimension,
-    executablePath: await chromium.executablePath(),
-    // headless: isHeadless ? 'new' : false,
-    headless: true,
-    ignoreDefaultArgs: ['--hide-scrollbars', '--disable-web-security'],
-    ignoreHTTPSErrors: true,
-    protocolTimeout: 0,
-  });
+  const browser = isAws
+    ? await puppeteer.launch({
+        args: [
+          ...chromium.args,
+          '--no-sandbox',
+          '--incognito',
+          dimension && `--window-size-${dimension.width},${dimension.height}`,
+        ].filter(Boolean),
+        defaultViewport: dimension,
+        executablePath: await chromium.executablePath(),
+        // headless: isHeadless ? 'new' : false,
+        headless: 'new',
+        ignoreDefaultArgs: ['--hide-scrollbars', '--disable-web-security'],
+        ignoreHTTPSErrors: true,
+        protocolTimeout: 0,
+      })
+    : await puppeteer.launch({
+        args: [
+          '--no-sandbox',
+          '--incognito',
+          dimension && `--window-size-${dimension.width},${dimension.height}`,
+        ].filter(Boolean),
+        defaultViewport: dimension,
+        headless: 'new',
+        ignoreDefaultArgs: ['--hide-scrollbars', '--disable-web-security'],
+        ignoreHTTPSErrors: true,
+        protocolTimeout: 0,
+      });
 
   const page = await browser.newPage();
+  await page.setUserAgent(
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36',
+  );
   await page.setRequestInterception(true);
+  await page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
 
   page.on('request', (req) => {
     const type = req.resourceType();
@@ -80,7 +100,7 @@ export const _withScreen = async (
     {
       index = -1,
       isDelay,
-      isThrow = true,
+      isThrow = false,
       timeout: timeoutF = true,
     }: SelectorOptionModel & { index?: number } = {},
     handle?: ElementHandle,
@@ -88,7 +108,7 @@ export const _withScreen = async (
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
     try {
-      debug(`Finding ${stringify(selector)}...`);
+      info(`Finding ${stringify(selector)}...`);
       timeout &&
         (await (handle ?? page).waitForSelector(selectorF, {
           timeout: isNumber(timeoutF) ? timeoutF : timeout,
@@ -101,7 +121,7 @@ export const _withScreen = async (
       selected = await (handle ?? page).$(selectorF);
     }
     if (selected) {
-      debug(`Found ${stringify(selector)}!`);
+      info(`Found ${stringify(selector)}!`);
       return new _Handle(selected);
     }
     isThrow && new NotFoundError(stringify(selector));
@@ -116,7 +136,7 @@ export const _withScreen = async (
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
     try {
-      debug(`Finding all ${stringify(selector)}...`);
+      info(`Finding all ${stringify(selector)}...`);
       timeout &&
         (await (handle ?? page).waitForSelector(selectorF, {
           timeout: isNumber(timeoutF) ? timeoutF : timeout,
@@ -124,7 +144,7 @@ export const _withScreen = async (
     } catch (e) {}
     const selected = await (handle ?? page).$$(selectorF);
     if (selected) {
-      debug(`Found all ${stringify(selector)}!`);
+      info(`Found all ${stringify(selector)}!`);
       return selected?.map((v) => new _Handle(v));
     }
     isThrow && new NotFoundError(stringify(selector));
@@ -232,7 +252,8 @@ export const _withScreen = async (
     },
 
     open: async (route) => {
-      await page.goto(route, { timeout, waitUntil: 'networkidle2' });
+      console.warn(`@@@route: ${route}`);
+      await page.goto(route, { timeout, waitUntil: 'domcontentloaded' });
     },
 
     snapshot: async ({ filename } = {}) => {

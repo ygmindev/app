@@ -43,6 +43,6 @@ export const main = createLambdaHandler({
       }
     }
   },
-  plugins: [LAMBDA_PLUGIN.AUTHENTICATION, LAMBDA_PLUGIN.DATABASE],
+  plugins: [LAMBDA_PLUGIN.AUTHENTICATION],
   type: LAMBDA_TYPE.WEBSOCKET,
 });

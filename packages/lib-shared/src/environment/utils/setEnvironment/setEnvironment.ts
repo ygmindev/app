@@ -1,9 +1,3 @@
-import { config } from 'dotenv';
-import { existsSync } from 'fs';
-import map from 'lodash/map';
-import reduce from 'lodash/reduce';
-import toString from 'lodash/toString';
-
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
@@ -13,6 +7,11 @@ import {
   type SetEnvironmentModel,
   type SetEnvironmentParamsModel,
 } from '@lib/shared/environment/utils/setEnvironment/setEnvironment.models';
+import { config } from 'dotenv';
+import { existsSync } from 'fs';
+import map from 'lodash/map';
+import reduce from 'lodash/reduce';
+import toString from 'lodash/toString';
 
 export const setEnvironment = ({
   environment,

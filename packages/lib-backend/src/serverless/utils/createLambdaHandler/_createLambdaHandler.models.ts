@@ -4,6 +4,8 @@ import {
   type LambdaResponseModel,
   type LambdaTypeModel,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
+import { type _GraphqlConfigModel } from '@lib/config/data/graphql/graphql.models';
+import { type _DatabaseConfigModel } from '@lib/config/database/database.models';
 import { type ContextModel } from '@lib/platform/core/core.models';
 import {
   type APIGatewayProxyEventV2,
@@ -13,6 +15,8 @@ import {
 
 export type _CreateLambdaHandlerParamsModel<TType extends LambdaTypeModel> = {
   context?: ContextModel;
+  databaseConfig?(): _DatabaseConfigModel;
+  graphQlConfig?(): _GraphqlConfigModel;
   handler?({
     body,
     context,

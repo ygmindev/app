@@ -15,12 +15,13 @@ export const main = createLambdaHandler({
   handler: async ({ body, context }) => {
     console.warn(body);
 
-    const ELEMENT_TIMEOUT = 6000;
+    const ELEMENT_TIMEOUT = 5000;
 
     await withScreen(async (screen) => {
-      const result: Array<Record<string, string | number>> = [];
+      let result: Array<Record<string, string | number>> = [];
 
       const maxPages = 1;
+      const batchSize = 1;
 
       const categories: Array<{
         category: string;
@@ -397,10 +398,8 @@ export const main = createLambdaHandler({
       ];
 
       const auth = new JWT({
-        // email: process.env.SERVER_GOOGLE_EMAIL,
-        // key: process.env.SERVER_GOOGLE_API_KEY,
-        email: 'bot-447@sunny-influence-410420.iam.gserviceaccount.com',
-        key: '-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDXPHayY2AtM7yF\nKAUHdCVSaW0I+tVAD71ORjRi1tZVQbXYBycj/hfk6KYspYbVrNm1CTW6pi0ATdi6\nF+rX5ViMJCrt8ialPAuPu8K+0NnZAYDahLIGBLu6ZCl6vjNbtVCAZF4+7X+vhLDF\nmMQslfewm9wiuIx/u+gIwbOyRDo4w8UmSQ0pEl4TkhTG87nESEa4k6BbKDLz/dVe\nojIxoRsxjx0XVD62OD0jc0TXz6WDb+HIcOV1BnSVOi4x38v0xP9biG0x0r/unmHa\nxJQUEFbsjpaqz+mfBqSkWuAUwx/JpjcfdIkNj0AvCB4YgHTnSRLRqOrcNTOLniED\naQ4bUxSTAgMBAAECggEAPfCciAGpL9jvq7I0oEyAYRMN2cO1ktX0uI3jjX4d+DMM\nzbphPS5mWe3JxJduEhfIHx0jZS9lS+0bLZKsdqz9qnbOE+PX0z1QZnC2PouD5btV\nBY2iXbEHBUDF3xjVVtL687ful1VppW0eIf8wlVQjD6QK2cMaS7gbsklsGSUhTCwj\ncXkS0hAgB5DFUE9nCeyyzptZbEi/S6LmTFWYi6846ga9Dr6k69YHN7yMHSrudyuo\ncRFjO3BZT4H/gzQC92SNsJ81jTnuoCsPH0ll9EY6nG1kybqogABUQbtLpsiDjhNR\nHWD9++64rPY+ZzQDQcuodFPXaadS/NjlK8UvhdjLQQKBgQDv2pEKXdDBkHA9kHgi\nHH6U3vi7Po2sGtoigw0V7QR4/QzCF9UPEY/G5btQ86fgpCsQDqOlXzuDes7llFmR\n+4n68TBtp7Lym/O4PissCGUg3x1j4cEhZ/55XsYuRMy72ZwVaBnjDWmKCjSGHOja\niqusZAXYvbwHwyVxIdA+aozMSwKBgQDluaikOWFmVIlQjAqrBUl+qNGtkrg7UaTk\n36fwU33lBmrpnD/90jnEgp8yQK/IUYfTBN3cR7ICpHIjWlBWKSAEndt4gKEwRhoH\n49Ozw536dH5gIim8gWePvlarz8weBmyiKxT/McNgF0R7L9hlx6UGb2y5pwq6CHyR\noUemcIob2QKBgQDCAObKHMHqnrq6gS06YhPctFE5msoayAliWt/tuS2h8wQrxf0W\nWB0UQuN1Ae/q2r7eGQkyjMnleiL5PToJwwyDBi0mtLsgUxYaE2b2EcBCi1UJYiPF\nsoj5gLgJ2qpC0yvVgMNXjJSuC70aMS4C/qEHKkw0WJtLKAQT8sauhZ5m6wKBgEXn\n3Fi1GV2RZgO7yddHEZlYeA3wst1iN+Jp6OnqDkpuTIRwRszPd0LEWPtq0dMMdF+T\ngIvyyUmijxUQ+5dshlDBVLLzuZk+C9fQzXBLm7xGTNqmKrsxSbllO2ynHD8ax14F\n7CrIEuMf0XgHFDvMp/wwVg6ctVftEzMht/L/FhfpAoGBAKmC+qU2gfdU9kZD47bl\n+WmTFUtcxxXbkk4sFDygSWZs5/KyR0VpVHHB02AsPS1Rq+Dc6wPupq/gw2KLxI4l\nWKXGD3rCAefWu/9vTKOk7W5WS1lLl/S/Q6sXWkyMfvT/E0aRlXrHMm0gCZ8t8Cac\noHs1ZbjMCzJePqVyRVl0fYPv\n-----END PRIVATE KEY-----\n',
+        email: process.env.SERVER_GOOGLE_EMAIL,
+        key: process.env.SERVER_GOOGLE_API_KEY,
         scopes: [
           'https://www.googleapis.com/auth/spreadsheets',
           'https://www.googleapis.com/auth/drive.file',
@@ -414,7 +413,7 @@ export const main = createLambdaHandler({
         const pageIndices = range(0, maxPages);
         for (const pageIndex of pageIndices) {
           try {
-            let count = 0;
+            let count = 1;
             if (maxItems && count >= maxItems) {
               break;
             }
@@ -433,7 +432,9 @@ export const main = createLambdaHandler({
                 ),
             );
 
-            for (const url of urls) {
+            const urlsF = [urls[0], urls[1]];
+
+            for (const url of urlsF) {
               if (maxItems && count >= maxItems) {
                 break;
               }
@@ -539,7 +540,7 @@ export const main = createLambdaHandler({
                     crawls.push(async () => {
                       const v = await specificationsContainer
                         .find(
-                          { type: SELECTOR_TYPE.TEXT, value: 'ength (ft.)' },
+                          { type: SELECTOR_TYPE.TEXT, value: 'ength (ft' },
                           { timeout: ELEMENT_TIMEOUT },
                         )
                         .then((h) => h?.next())
@@ -555,7 +556,7 @@ export const main = createLambdaHandler({
                     crawls.push(async () => {
                       const v = await specificationsContainer
                         .find(
-                          { type: SELECTOR_TYPE.TEXT, value: 'ength (in.)' },
+                          { type: SELECTOR_TYPE.TEXT, value: 'ength (in' },
                           { timeout: ELEMENT_TIMEOUT },
                         )
                         .then((h) => h?.next())
@@ -571,7 +572,7 @@ export const main = createLambdaHandler({
                     crawls.push(async () => {
                       const v = await specificationsContainer
                         .find(
-                          { type: SELECTOR_TYPE.TEXT, value: 'idth (ft.)' },
+                          { type: SELECTOR_TYPE.TEXT, value: 'idth (ft' },
                           { timeout: ELEMENT_TIMEOUT },
                         )
                         .then((h) => h?.next())
@@ -587,7 +588,7 @@ export const main = createLambdaHandler({
                     crawls.push(async () => {
                       const v = await specificationsContainer
                         .find(
-                          { type: SELECTOR_TYPE.TEXT, value: 'idth (in.)' },
+                          { type: SELECTOR_TYPE.TEXT, value: 'idth (in' },
                           { timeout: ELEMENT_TIMEOUT },
                         )
                         .then((h) => h?.next())
@@ -603,7 +604,7 @@ export const main = createLambdaHandler({
                     crawls.push(async () => {
                       const v = await specificationsContainer
                         .find(
-                          { type: SELECTOR_TYPE.TEXT, value: 'hickness (ft.)' },
+                          { type: SELECTOR_TYPE.TEXT, value: 'hickness (ft' },
                           { timeout: ELEMENT_TIMEOUT },
                         )
                         .then((h) => h?.next())
@@ -619,7 +620,7 @@ export const main = createLambdaHandler({
                     crawls.push(async () => {
                       const v = await specificationsContainer
                         .find(
-                          { type: SELECTOR_TYPE.TEXT, value: 'hickness (in.)' },
+                          { type: SELECTOR_TYPE.TEXT, value: 'hickness (in' },
                           { timeout: ELEMENT_TIMEOUT },
                         )
                         .then((h) => h?.next())
@@ -635,7 +636,7 @@ export const main = createLambdaHandler({
                     crawls.push(async () => {
                       const v = await specificationsContainer
                         .find(
-                          { type: SELECTOR_TYPE.TEXT, value: 'eight (grams)' },
+                          { type: SELECTOR_TYPE.TEXT, value: 'eight (grams' },
                           { timeout: ELEMENT_TIMEOUT },
                         )
                         .then((h) => h?.next())
@@ -650,7 +651,7 @@ export const main = createLambdaHandler({
                     crawls.push(async () => {
                       const v = await specificationsContainer
                         .find(
-                          { type: SELECTOR_TYPE.TEXT, value: 'eight (lb.)' },
+                          { type: SELECTOR_TYPE.TEXT, value: 'eight (lb' },
                           { timeout: ELEMENT_TIMEOUT },
                         )
                         .then((h) => h?.next())
@@ -676,7 +677,7 @@ export const main = createLambdaHandler({
 
                       if (src) {
                         row.URL = url;
-                        row.Count = count + 1;
+                        row.Count = count;
                         const rowToAdd = i > 1 ? { Extra: row.Extra, Handle: row.Handle } : row;
                         rowToAdd['Image Src'] = src;
                         rowToAdd['Image Position'] = i;
@@ -700,6 +701,11 @@ export const main = createLambdaHandler({
                     //   filename: fromWorking(filename),
                     //   value: csv(resultF),
                     // });
+                    if (result.length > 0 && result.length % batchSize === 0) {
+                      await sheet.addRows(result);
+                      await sheet.saveUpdatedCells();
+                      result = [];
+                    }
                     count++;
                   }
                 }
@@ -708,8 +714,11 @@ export const main = createLambdaHandler({
                 continue;
               }
             }
-            await sheet.addRows(result);
-            await sheet.saveUpdatedCells();
+            if (result.length > 0) {
+              await sheet.addRows(result);
+              await sheet.saveUpdatedCells();
+              result = [];
+            }
           } catch (e) {
             console.warn(e);
             continue;

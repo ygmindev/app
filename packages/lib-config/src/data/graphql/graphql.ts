@@ -43,13 +43,10 @@ const { _config, config } = defineConfig({
         SignInResolver,
         SocketResolver,
         UserResolver,
-
         VendorResolver,
         UtilityResolver,
-
         DeliveryResolver,
         MapRouteResolver,
-
         // process.env.NODE_ENV === 'test' && SnapshotResolver,
       ]),
 
