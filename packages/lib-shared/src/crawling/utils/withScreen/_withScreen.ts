@@ -27,8 +27,6 @@ import { type ElementHandle } from 'puppeteer-core';
 import puppeteer from 'puppeteer-extra';
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
-const isAws = false;
-
 // puppeteer.use(StealthPlugin());
 
 export const _withScreen = async (
@@ -37,6 +35,8 @@ export const _withScreen = async (
     { delay, delayDefault, dimension, isHeadless, snapshotPath, timeout },
   ]: _WithScreenParamsModel
 ): Promise<_WithScreenModel> => {
+  const isAws = true;
+
   const browser = isAws
     ? await puppeteer.launch({
         args: [
