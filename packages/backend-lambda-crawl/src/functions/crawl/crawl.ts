@@ -399,7 +399,7 @@ export const main = createLambdaHandler({
 
       const auth = new JWT({
         email: process.env.SERVER_GOOGLE_EMAIL,
-        key: process.env.SERVER_GOOGLE_API_KEY,
+        key: process.env.SERVER_GOOGLE_PRIVATE_KEY,
         scopes: [
           'https://www.googleapis.com/auth/spreadsheets',
           'https://www.googleapis.com/auth/drive.file',
