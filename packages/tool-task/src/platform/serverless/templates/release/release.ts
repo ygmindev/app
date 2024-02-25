@@ -14,7 +14,7 @@ export const release: TaskParamsModel<unknown> = {
 
   task: [
     () =>
-      `npx serverless config credentials --provider aws --profile default --overwrite --key ${'AKIAXYKJSMPUABIBLP5F'} --secret ${'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'}`,
+      `serverless config credentials --provider aws --profile default --overwrite --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY}`,
 
     async () => {
       const root = fromWorking(fileConfig.buildPath, 'layers', 'nodejs');

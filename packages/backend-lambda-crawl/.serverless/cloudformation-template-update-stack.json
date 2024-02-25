@@ -74,13 +74,13 @@
     "CrawlLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/serverless-dev-crawl"
+        "LogGroupName": "/aws/lambda/serverless-production-crawl"
       }
     },
     "PingLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/serverless-dev-ping"
+        "LogGroupName": "/aws/lambda/serverless-production-ping"
       }
     },
     "IamRoleLambdaExecution": {
@@ -109,7 +109,7 @@
                 "-",
                 [
                   "serverless",
-                  "dev",
+                  "production",
                   "lambda"
                 ]
               ]
@@ -126,7 +126,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-dev*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-production*:*"
                     }
                   ]
                 },
@@ -137,7 +137,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-dev*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-production*:*:*"
                     }
                   ]
                 }
@@ -151,7 +151,7 @@
             "-",
             [
               "serverless",
-              "dev",
+              "production",
               {
                 "Ref": "AWS::Region"
               },
@@ -161,14 +161,14 @@
         }
       }
     },
-    "CustomLambdaLayer68964afa89a5690026b5c01a6996704327a97853": {
+    "CustomLambdaLayer897955515a8c1f6055d0e65f738f1a99d74d9aac": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "Content": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/dev/1708837047041-2024-02-25T04:57:27.041Z/custom.zip"
+          "S3Key": "serverless/serverless/production/1708882796305-2024-02-25T17:39:56.305Z/custom.zip"
         },
         "LayerName": "custom",
         "CompatibleRuntimes": [
@@ -184,12 +184,12 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/dev/1708837047041-2024-02-25T04:57:27.041Z/crawl.zip"
+          "S3Key": "serverless/serverless/production/1708882796305-2024-02-25T17:39:56.305Z/crawl.zip"
         },
         "Handler": "src/functions/crawl/crawl.main",
         "Runtime": "nodejs18.x",
-        "FunctionName": "serverless-dev-crawl",
-        "MemorySize": 512,
+        "FunctionName": "serverless-production-crawl",
+        "MemorySize": 1024,
         "Timeout": 900,
         "Environment": {
           "Variables": {
@@ -219,12 +219,12 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/dev/1708837047041-2024-02-25T04:57:27.041Z/ping.zip"
+          "S3Key": "serverless/serverless/production/1708882796305-2024-02-25T17:39:56.305Z/ping.zip"
         },
         "Handler": "src/functions/ping/ping.main",
         "Runtime": "nodejs18.x",
-        "FunctionName": "serverless-dev-ping",
-        "MemorySize": 512,
+        "FunctionName": "serverless-production-ping",
+        "MemorySize": 1024,
         "Timeout": 900,
         "Environment": {
           "Variables": {
@@ -250,7 +250,7 @@
     "HttpApi": {
       "Type": "AWS::ApiGatewayV2::Api",
       "Properties": {
-        "Name": "dev-serverless",
+        "Name": "production-serverless",
         "ProtocolType": "HTTP",
         "CorsConfiguration": {
           "AllowHeaders": [
@@ -436,30 +436,30 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-serverless-dev-ServerlessDeploymentBucketName"
+        "Name": "sls-serverless-production-ServerlessDeploymentBucketName"
       }
     },
     "CustomLambdaLayerQualifiedArn": {
       "Description": "Current Lambda layer version",
       "Value": {
-        "Ref": "CustomLambdaLayer68964afa89a5690026b5c01a6996704327a97853"
+        "Ref": "CustomLambdaLayer897955515a8c1f6055d0e65f738f1a99d74d9aac"
       },
       "Export": {
-        "Name": "sls-serverless-dev-CustomLambdaLayerQualifiedArn"
+        "Name": "sls-serverless-production-CustomLambdaLayerQualifiedArn"
       }
     },
     "CustomLambdaLayerHash": {
       "Description": "Current Lambda layer hash",
-      "Value": "68964afa89a5690026b5c01a6996704327a97853",
+      "Value": "897955515a8c1f6055d0e65f738f1a99d74d9aac",
       "Export": {
-        "Name": "sls-serverless-dev-CustomLambdaLayerHash"
+        "Name": "sls-serverless-production-CustomLambdaLayerHash"
       }
     },
     "CustomLambdaLayerS3Key": {
       "Description": "Current Lambda layer S3Key",
-      "Value": "serverless/serverless/dev/1708837047041-2024-02-25T04:57:27.041Z/custom.zip",
+      "Value": "serverless/serverless/production/1708882796305-2024-02-25T17:39:56.305Z/custom.zip",
       "Export": {
-        "Name": "sls-serverless-dev-CustomLambdaLayerS3Key"
+        "Name": "sls-serverless-production-CustomLambdaLayerS3Key"
       }
     },
     "HttpApiId": {
@@ -468,7 +468,7 @@
         "Ref": "HttpApi"
       },
       "Export": {
-        "Name": "sls-serverless-dev-HttpApiId"
+        "Name": "sls-serverless-production-HttpApiId"
       }
     },
     "HttpApiUrl": {
@@ -493,7 +493,7 @@
         ]
       },
       "Export": {
-        "Name": "sls-serverless-dev-HttpApiUrl"
+        "Name": "sls-serverless-production-HttpApiUrl"
       }
     }
   }

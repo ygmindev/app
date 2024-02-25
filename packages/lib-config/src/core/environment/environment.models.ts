@@ -22,19 +22,15 @@ export type EnvironmentConfigModel = {
   APP_USERNAME: string;
   AWS_ACCESS_KEY_ID: string;
   AWS_SECRET_ACCESS_KEY: string;
-  CAROOT: string;
   ENV_NAME: string;
   ENV_PLATFORM: PlatformModel;
   NODE_ENV: EnvironmentModel;
-  NODE_EXTRA_CA_CERTS: string;
   NODE_OPTIONS?: string;
   SERVER_APP_GOOGLE_API_KEY: string;
   SERVER_APP_HOST: string;
   SERVER_APP_OTP_LENGTH: string;
   SERVER_APP_PORT: string;
   SERVER_APP_SECRET: string;
-  SERVER_APP_STATIC_HOST: string;
-  SERVER_APP_STATIC_PORT: number;
   SERVER_APP_WEBSOCKET_HOST: string;
   SERVER_APP_WEBSOCKET_PORT: number;
   SERVER_DB_MONGO_NAME: string;
@@ -51,7 +47,6 @@ export type EnvironmentConfigModel = {
   SERVER_FIREBASE_ADMIN_SECRET: string;
   SERVER_GOOGLE_API_KEY: string;
   SERVER_GOOGLE_EMAIL: string;
-  SERVER_IS_DISABLE_HOT_RELOAD?: boolean;
   SERVER_IV_LENGTH: string;
   SERVER_KEY_LENGTH: string;
   SERVER_OTP_STATIC?: string;
@@ -72,6 +67,8 @@ export type EnvironmentConfigModel = {
   SERVER_TWILIO_FROM: string;
   SERVER_TWILIO_SID: string;
   SERVER_TWILIO_TOKEN: string;
+  STATIC_HOST: string;
+  STATIC_PORT: number;
   TEST_IS_ETE?: BooleanStringModel;
   TEST_MATCH?: string;
   __DEV__: BooleanStringModel;
