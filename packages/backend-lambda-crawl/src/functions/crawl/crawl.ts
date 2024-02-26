@@ -65,7 +65,8 @@ export const main = createLambdaHandler<{
         runWithRetry(
           async () => {
             if (value) {
-              await sheet.addRows(value);
+              const valueF = value.map((row) => ({ ...row, Updated: new Date().toLocaleString() }));
+              await sheet.addRows(valueF);
               await sheet.saveUpdatedCells();
             }
           },
@@ -319,30 +320,31 @@ export const main = createLambdaHandler<{
                 });
               }
 
-              // images
-              itemQueue.add(async () => {
-                const thumbnails = await screen.findAll({ value: '.mediagallery__imgblock' });
-                let i = 1;
-                for (const thumbnail of thumbnails) {
-                  await thumbnail.press();
-                  const src = await screen
-                    .find({ value: '.mediagallery__mainimage' })
-                    .then((h) => h?.find({ value: 'img' }))
-                    .then((h) => h?.src());
-
-                  if (src) {
-                    row.URL = url;
-                    row.Count = count;
-                    const rowToAdd = i > 1 ? { Extra: row.Extra, Handle: row.Handle } : row;
-                    rowToAdd['Image Src'] = src;
-                    rowToAdd['Image Position'] = i;
-                    result.push(rowToAdd as Record<string, string | number>);
-                    i++;
-                  }
-                }
-              });
-
               await itemQueue.run();
+
+              // images
+              const thumbnails = await screen.findAll({ value: '.mediagallery__imgblock' });
+              let i = 1;
+              for (const thumbnail of thumbnails) {
+                await thumbnail.press();
+                const src = await screen
+                  .find({ value: '.mediagallery__mainimage' })
+                  .then((h) => h?.find({ value: 'img' }))
+                  .then((h) => h?.src());
+
+                if (src) {
+                  row.URL = url;
+                  row.Count = count;
+                  const rowToAdd = i > 1 ? { Extra: row.Extra, Handle: row.Handle } : row;
+                  rowToAdd['Image Src'] = src;
+                  rowToAdd['Image Position'] = i;
+                  result.push(rowToAdd as Record<string, string | number>);
+                  i++;
+                }
+              }
+
+              itemQueue.clear();
+
               if (result) {
                 count++;
                 if (result.length > 0 && count % UPLOAD_SIZE === 0) {

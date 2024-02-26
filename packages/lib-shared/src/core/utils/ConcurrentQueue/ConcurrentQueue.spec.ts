@@ -18,6 +18,14 @@ describe(displayName, () => {
     const result = new ConcurrentQueue({ maxConcurrency: 2 });
     result.add(JOBS);
     await result.run();
+
+    console.warn('DONE1');
+
+    const result2 = new ConcurrentQueue({ maxConcurrency: 2 });
+    result2.add(JOBS);
+    await result2.run();
+    console.warn('DONE2');
+
     expect(1).toStrictEqual(1);
   });
 });

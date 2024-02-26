@@ -6,7 +6,7 @@ import range from 'lodash/range';
 const CATEGORIES: Array<{
   category: string;
   link: string;
-  maxPage?: number;
+  maxItems?: number;
 }> = [
   // [
   //   'https://www.homedepot.com/b/Lumber-Composites-Plywood-Sheathing-Plywood/N-5yc1vZc7q5',
@@ -291,6 +291,7 @@ const CATEGORIES: Array<{
   {
     category: 'Siding Accessories',
     link: 'https://www.homedepot.com/b/Building-Materials-Siding-Siding-Accessories/N-5yc1vZ2fkp9fi',
+    maxItems: 100,
   },
   // {
   //   category: 'Moulding',
@@ -363,16 +364,16 @@ const crawl: TaskParamsModel<unknown> = {
     async () => {
       const http = new HttpImplementation();
       for (const row of CATEGORIES) {
-        const { category, link, maxPage } = row;
-        try {
-          range(0, maxPage ?? 6).map((pageIndex) => {
+        const { category, link, maxItems } = row;
+        const maxPages = maxItems ? Math.ceil(maxItems / 24) + 1 : undefined;
+        range(0, maxPages ?? 6).map((pageIndex) => {
+          try {
             void http.get({
               params: { category, link: `${link}?sortby=topsellers&sororder=desc`, pageIndex },
-              // url: 'https://localhost:5001/api/crawl',
               url: 'https://zxe9mbv4ve.execute-api.us-east-1.amazonaws.com/api/crawl',
             });
-          });
-        } catch (e) {}
+          } catch (e) {}
+        });
       }
       //
     },
