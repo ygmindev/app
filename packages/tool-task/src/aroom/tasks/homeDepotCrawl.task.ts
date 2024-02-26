@@ -1,3 +1,4 @@
+import { HttpImplementation } from '@lib/backend/http/utils/HttpImplementation/HttpImplementation';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 
 const CATEGORIES: Array<{
@@ -356,7 +357,23 @@ const crawl: TaskParamsModel<unknown> = {
 
   task: [
     async () => {
-      // ?sortorder=desc&sortby=topsellers
+      const http = new HttpImplementation();
+      for (const row of CATEGORIES) {
+        const { category, link, maxItems } = row;
+        void http.get({
+          params: {
+            category,
+            link,
+            maxItems: maxItems ?? 100,
+            sortby: 'topsellers',
+            sortorder: 'desc',
+          },
+          url: 'https://localhost:5001/api/crawl',
+        });
+        // http.get();
+        // ?sortorder=desc&sortby=topsellers
+      }
+      //
     },
   ],
 };

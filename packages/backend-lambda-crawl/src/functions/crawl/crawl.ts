@@ -22,8 +22,14 @@ export const main = createLambdaHandler<{
   handler: async ({ body }) => {
     const { category, link, maxItems, maxPages } = body ?? {};
 
+    const PAGE_SIZE = 24;
     const UPLOAD_SIZE = 5;
     const ELEMENT_TIMEOUT = 5000;
+
+    console.warn(body);
+    if (1 === 1) {
+      throw new Error();
+    }
 
     await withScreen(async (screen) => {
       let result: Array<Record<string, string | number>> = [];
@@ -85,7 +91,7 @@ export const main = createLambdaHandler<{
               return;
             }
 
-            await screen.open(`${link}${pageIndex > 0 ? `&Nao=${pageIndex * 24}` : ''}`);
+            await screen.open(`${link}${pageIndex > 0 ? `&Nao=${pageIndex * PAGE_SIZE}` : ''}`);
 
             await screen
               .find({ value: '.results-layout__toggle-grid' }, { timeout: ELEMENT_TIMEOUT })
