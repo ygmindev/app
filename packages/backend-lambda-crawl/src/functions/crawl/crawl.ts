@@ -19,7 +19,9 @@ export const main = createLambdaHandler<{
   pageIndex?: number;
 }>({
   handler: async ({ body }) => {
-    const { category, link, maxItems = 100, pageIndex = 0 } = body ?? {};
+    const { category, link } = body ?? {};
+    const maxItems = body?.maxItems ? toNumber(body?.maxItems) : 100;
+    const pageIndex = body?.pageIndex ? toNumber(body?.pageIndex) : 0;
 
     const PAGE_SIZE = 24;
     const UPLOAD_SIZE = 5;
@@ -44,6 +46,7 @@ export const main = createLambdaHandler<{
       'Image Position',
       'Variant Price',
       'Count',
+      'Updated',
     ];
 
     await withScreen(async (screen) => {
@@ -76,10 +79,6 @@ export const main = createLambdaHandler<{
       let count = 1;
 
       try {
-        if (maxItems && count > maxItems) {
-          return;
-        }
-
         await screen.open(`${link}${pageIndex > 0 ? `&Nao=${pageIndex * PAGE_SIZE}` : ''}`);
 
         await screen
@@ -105,7 +104,7 @@ export const main = createLambdaHandler<{
               const row: Record<string, unknown> = {};
               COLUMNS.forEach((column) => (row[column] = ''));
 
-              await screen.open(url);
+              await runWithRetry(async () => screen.open(url), { delay: 1000, retries: 10 });
 
               const accordions = await screen.findAll({
                 value: '.accordion-title-container',

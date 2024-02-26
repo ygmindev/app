@@ -259,7 +259,6 @@ const CATEGORIES: Array<{
   //   'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Boards-PVC-Deck-Boards/N-5yc1vZc5mu',
   //   'PVC Deck Board',
   // ],
-
   // [
   //   'https://www.homedepot.com/b/Building-Materials-Siding-Wood-Siding/N-5yc1vZc8aj',
   //   'Wood Siding',
@@ -291,67 +290,83 @@ const CATEGORIES: Array<{
   {
     category: 'Siding Accessories',
     link: 'https://www.homedepot.com/b/Building-Materials-Siding-Siding-Accessories/N-5yc1vZ2fkp9fi',
-    maxItems: 100,
+    // maxItems: 100,
+    maxItems: 25,
   },
   // {
   //   category: 'Moulding',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Moulding/N-5yc1vZara1',
+  //   maxItems: 100,
   // },
   // {
   //   category: 'Baseboards',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Moulding-Baseboard/N-5yc1vZcbjp',
+  //   maxItems: 100,
   // },
   // {
   //   category: 'Stair Parts',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Stair-Parts/N-5yc1vZbcro',
+  //   maxItems: 100,
   // },
   // {
   //   category: 'Stair Railings',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Stair-Parts-Stair-Railings/N-5yc1vZbcrw',
+  //   maxItems: 100,
   // },
   // {
   //   category: 'Ceiling Tiles',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Tiles/N-5yc1vZc58l',
+  //   maxItems: 100,
   // },
   // {
   //   category: 'Ceiling Grids',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Grids/N-5yc1vZc596',
+  //   maxItems: 48,
   // },
   // {
   //   category: 'Ceiling Light Panels & Louvers ',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Light-Panels/N-5yc1vZc58p',
+  //   maxItems: 26,
   // },
   // {
   //   category: 'Ceiling Tile tolls',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Tile-Tools/N-5yc1vZc59f',
+  //   maxItems: 47,
   // },
   // {
   //   category: 'Plexiglass',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-Plexiglass/N-5yc1vZc9x2',
+  //   maxItems: 100,
   // },
   // {
   //   category: 'Corrugated Plastic Sheets',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-Corrugated-Plastic-Sheets/N-5yc1vZcbtu',
+  //   maxItems: 65,
   // },
   // {
   //   category: 'Polycarbonate',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-Polycarbonate-Sheets/N-5yc1vZc9ws',
+  //   maxItems: 100,
   // },
   // {
   //   category: 'Hdpe Sheets',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-HDPE-Sheets/N-5yc1vZ2fkpddj',
+  //   maxItems: 3,
   // },
   // {
   //   category: 'Glass plastic Rubber Sheets ',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-Rubber-Sheets/N-5yc1vZcj87',
+  //   maxItems: 100,
   // },
   // {
   //   category: 'Deck Railings ',
   //   link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Railings/N-5yc1vZc5i7',
+  //   maxItems: 100,
   // },
   // {
   //   category: 'Wall Paneling',
   //   link: 'https://www.homedepot.com/b/Lumber-Composites-Boards-Planks-Panels-Wall-Paneling/N-5yc1vZbqp3',
+  //   maxItems: 100,
   // },
 ];
 
@@ -365,12 +380,19 @@ const crawl: TaskParamsModel<unknown> = {
       const http = new HttpImplementation();
       for (const row of CATEGORIES) {
         const { category, link, maxItems } = row;
-        const maxPages = maxItems ? Math.ceil(maxItems / 24) + 1 : undefined;
+        const maxPages = maxItems ? Math.ceil(maxItems / 24) : undefined;
         range(0, maxPages ?? 6).map((pageIndex) => {
+          console.warn(pageIndex);
           try {
             void http.get({
-              params: { category, link: `${link}?sortby=topsellers&sororder=desc`, pageIndex },
-              url: 'https://zxe9mbv4ve.execute-api.us-east-1.amazonaws.com/api/crawl',
+              params: {
+                category,
+                link: `${link}?sortby=topsellers&sororder=desc`,
+                maxItems,
+                pageIndex,
+              },
+              // url: 'https://zxe9mbv4ve.execute-api.us-east-1.amazonaws.com/api/crawl',
+              url: 'https://localhost:5001/api/crawl',
             });
           } catch (e) {}
         });

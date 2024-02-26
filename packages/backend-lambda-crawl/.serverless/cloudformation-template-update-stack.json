@@ -184,7 +184,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/production/1708911327841-2024-02-26T01:35:27.841Z/crawl.zip"
+          "S3Key": "serverless/serverless/production/1708913732524-2024-02-26T02:15:32.524Z/crawl.zip"
         },
         "Handler": "src/functions/crawl/crawl.main",
         "Runtime": "nodejs18.x",
@@ -219,7 +219,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/production/1708911327841-2024-02-26T01:35:27.841Z/ping.zip"
+          "S3Key": "serverless/serverless/production/1708913732524-2024-02-26T02:15:32.524Z/ping.zip"
         },
         "Handler": "src/functions/ping/ping.main",
         "Runtime": "nodejs18.x",
