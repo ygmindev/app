@@ -291,7 +291,7 @@ const CATEGORIES: Array<{
     category: 'Siding Accessories',
     link: 'https://www.homedepot.com/b/Building-Materials-Siding-Siding-Accessories/N-5yc1vZ2fkp9fi',
     // maxItems: 100,
-    maxItems: 25,
+    maxItems: 10,
   },
   // {
   //   category: 'Moulding',
@@ -391,8 +391,7 @@ const crawl: TaskParamsModel<unknown> = {
                 maxItems,
                 pageIndex,
               },
-              // url: 'https://zxe9mbv4ve.execute-api.us-east-1.amazonaws.com/api/crawl',
-              url: 'https://localhost:5001/api/crawl',
+              url: 'https://zxe9mbv4ve.execute-api.us-east-1.amazonaws.com/api/crawl',
             });
           } catch (e) {}
         });

@@ -104,7 +104,7 @@ export const main = createLambdaHandler<{
               const row: Record<string, unknown> = {};
               COLUMNS.forEach((column) => (row[column] = ''));
 
-              await runWithRetry(async () => screen.open(url), { delay: 1000, retries: 10 });
+              await runWithRetry(async () => screen.open(url), { delay: 1000, retries: 5 });
 
               const accordions = await screen.findAll({
                 value: '.accordion-title-container',
