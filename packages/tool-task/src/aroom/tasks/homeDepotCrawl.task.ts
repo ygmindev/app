@@ -288,7 +288,6 @@ const CATEGORIES: Array<{
   {
     category: 'Siding Accessories ',
     link: 'https://www.homedepot.com/b/Building-Materials-Siding-Siding-Accessories/N-5yc1vZ2fkp9fi',
-    maxItems: 2,
   },
   // {
   //   category: 'Moulding',
