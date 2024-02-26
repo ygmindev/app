@@ -368,7 +368,8 @@ const crawl: TaskParamsModel<unknown> = {
             category,
             link: `${link}?sortby=topsellers&sororder=desc`,
           },
-          url: 'https://localhost:5001/api/crawl',
+          // url: 'https://localhost:5001/api/crawl',
+          url: 'https://zxe9mbv4ve.execute-api.us-east-1.amazonaws.com/api/crawl',
         });
       }
       //

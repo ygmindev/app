@@ -8,9 +8,9 @@ import PQueue from 'p-queue';
 export class _ConcurrentQueue implements _ConcurrentQueueModel {
   protected queue: PQueue;
 
-  constructor({ interval, maxConcurrency }: _ConcurrentQueueParamsModel = {}) {
+  constructor({ interval, maxConcurrency = Infinity }: _ConcurrentQueueParamsModel = {}) {
     this.queue = new PQueue({
-      autoStart: true,
+      autoStart: false,
       concurrency: maxConcurrency,
       interval: interval ?? 0,
     });

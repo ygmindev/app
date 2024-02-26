@@ -5,7 +5,7 @@ import {
 } from '@lib/shared/core/utils/ConcurrentQueue/ConcurrentQueue.models';
 
 export class ConcurrentQueue extends _ConcurrentQueue implements ConcurrentQueueModel {
-  constructor(params: ConcurrentQueueParamsModel = {}) {
-    super(params);
+  constructor({ interval, maxConcurrency = Infinity }: ConcurrentQueueParamsModel = {}) {
+    super({ interval, maxConcurrency });
   }
 }
