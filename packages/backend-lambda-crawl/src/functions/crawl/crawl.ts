@@ -9,7 +9,7 @@ import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { JWT } from 'google-auth-library';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import toNumber from 'lodash/toNumber';
-import trim from 'lodash/trim';
+import trimStart from 'lodash/trimStart';
 import uniq from 'lodash/uniq';
 
 export const main = createLambdaHandler<{
@@ -201,7 +201,7 @@ export const main = createLambdaHandler<{
                     .then((h) => h?.next())
                     .then((h) => h?.text())
                     .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                    .then((h) => h && toNumber(trim(eval(h) as string, '0')));
+                    .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
                   if (v) {
                     row.Length = v;
                     row['Length Unit'] = 'ft';
@@ -217,7 +217,7 @@ export const main = createLambdaHandler<{
                     .then((h) => h?.next())
                     .then((h) => h?.text())
                     .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                    .then((h) => h && toNumber(trim(eval(h) as string, '0')));
+                    .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
                   if (v) {
                     row.Length = v;
                     row['Length Unit'] = 'in';
@@ -233,7 +233,7 @@ export const main = createLambdaHandler<{
                     .then((h) => h?.next())
                     .then((h) => h?.text())
                     .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                    .then((h) => h && toNumber(trim(eval(h) as string, '0')));
+                    .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
                   if (v) {
                     row.Width = v;
                     row['Width Unit'] = 'ft';
@@ -249,7 +249,7 @@ export const main = createLambdaHandler<{
                     .then((h) => h?.next())
                     .then((h) => h?.text())
                     .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                    .then((h) => h && toNumber(trim(eval(h) as string, '0')));
+                    .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
                   if (v) {
                     row.Width = v;
                     row['Width Unit'] = 'in';
@@ -265,7 +265,7 @@ export const main = createLambdaHandler<{
                     .then((h) => h?.next())
                     .then((h) => h?.text())
                     .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                    .then((h) => h && toNumber(trim(eval(h) as string, '0')));
+                    .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
                   if (v) {
                     row.Thickness = v;
                     row['Thickness Unit'] = 'ft';
@@ -281,7 +281,7 @@ export const main = createLambdaHandler<{
                     .then((h) => h?.next())
                     .then((h) => h?.text())
                     .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                    .then((h) => h && toNumber(trim(eval(h) as string, '0')));
+                    .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
                   if (v) {
                     row.Thickness = v;
                     row['Thickness Unit'] = 'in';
@@ -297,7 +297,7 @@ export const main = createLambdaHandler<{
                     .then((h) => h?.next())
                     .then((h) => h?.text())
                     .then((h) => h?.replace(' grams', ''))
-                    .then((h) => h && toNumber(trim(eval(h) as string, '0')));
+                    .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
                   if (v) {
                     row['Variant Grams'] = v;
                   }
@@ -312,7 +312,7 @@ export const main = createLambdaHandler<{
                     .then((h) => h?.next())
                     .then((h) => h?.text())
                     .then((h) => h?.replace(' lb.', '').replace(' lb', ''))
-                    .then((h) => h && toNumber(trim(eval(h) as string, '0')));
+                    .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
                   if (v) {
                     row['Variant Grams'] = (v * 453.6).toFixed(3);
                   }

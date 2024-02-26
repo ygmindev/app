@@ -1,11 +1,12 @@
 import { HttpImplementation } from '@lib/backend/http/utils/HttpImplementation/HttpImplementation';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
+import range from 'lodash/range';
 
 const CATEGORIES: Array<{
   category: string;
   link: string;
-  maxItems?: number;
+  maxPage?: number;
 }> = [
   // [
   //   'https://www.homedepot.com/b/Lumber-Composites-Plywood-Sheathing-Plywood/N-5yc1vZc7q5',
@@ -362,12 +363,14 @@ const crawl: TaskParamsModel<unknown> = {
     async () => {
       const http = new HttpImplementation();
       for (const row of CATEGORIES) {
-        const { category, link } = row;
+        const { category, link, maxPage } = row;
         try {
-          void http.get({
-            params: { category, link: `${link}?sortby=topsellers&sororder=desc` },
-            // url: 'https://localhost:5001/api/crawl',
-            url: 'https://zxe9mbv4ve.execute-api.us-east-1.amazonaws.com/api/crawl',
+          range(0, maxPage ?? 6).map((pageIndex) => {
+            void http.get({
+              params: { category, link: `${link}?sortby=topsellers&sororder=desc`, pageIndex },
+              // url: 'https://localhost:5001/api/crawl',
+              url: 'https://zxe9mbv4ve.execute-api.us-east-1.amazonaws.com/api/crawl',
+            });
           });
         } catch (e) {}
       }
