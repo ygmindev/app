@@ -316,7 +316,7 @@ const crawl: TaskParamsModel<unknown> = {
                     link: `${link}?sortby=topsellers&sororder=desc`,
                     maxItems,
                     pageIndex,
-                    start: start * BATCH_SIZE - 1,
+                    start: start * BATCH_SIZE,
                   },
                   url: 'https://zxe9mbv4ve.execute-api.us-east-1.amazonaws.com/api/crawl',
                 })
