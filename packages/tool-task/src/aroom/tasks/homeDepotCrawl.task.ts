@@ -1,4 +1,5 @@
 import { HttpImplementation } from '@lib/backend/http/utils/HttpImplementation/HttpImplementation';
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 
 const CATEGORIES: Array<{
@@ -287,7 +288,7 @@ const CATEGORIES: Array<{
   //   'Siding Trim',
   // ],
   {
-    category: 'Siding Accessories ',
+    category: 'Siding Accessories',
     link: 'https://www.homedepot.com/b/Building-Materials-Siding-Siding-Accessories/N-5yc1vZ2fkp9fi',
   },
   // {
@@ -353,6 +354,8 @@ const CATEGORIES: Array<{
 ];
 
 const crawl: TaskParamsModel<unknown> = {
+  environment: ENVIRONMENT.DEVELOPMENT,
+
   name: 'home-depot-crawl',
 
   task: [
@@ -363,15 +366,11 @@ const crawl: TaskParamsModel<unknown> = {
         void http.get({
           params: {
             category,
-            link,
+            link: `${link}?sortby=topsellers&sororder=desc`,
             maxItems: maxItems ?? 100,
-            sortby: 'topsellers',
-            sortorder: 'desc',
           },
           url: 'https://localhost:5001/api/crawl',
         });
-        // http.get();
-        // ?sortorder=desc&sortby=topsellers
       }
       //
     },
