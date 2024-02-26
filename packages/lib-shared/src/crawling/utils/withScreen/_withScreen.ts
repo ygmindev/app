@@ -18,7 +18,7 @@ import {
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
-import { info } from '@lib/shared/logging/utils/logger/logger';
+import { debug } from '@lib/shared/logging/utils/logger/logger';
 import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
@@ -95,7 +95,7 @@ export const _withScreen = async (
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
     try {
-      info(`Finding ${stringify(selector)}...`);
+      debug(`Finding ${stringify(selector)}...`);
       timeout &&
         (await (handle ?? page).waitForSelector(selectorF, {
           timeout: isNumber(timeoutF) ? timeoutF : timeout,
@@ -108,7 +108,7 @@ export const _withScreen = async (
       selected = (await (handle ?? page).$(selectorF)) as ElementHandle;
     }
     if (selected) {
-      info(`Found ${stringify(selector)}!`);
+      debug(`Found ${stringify(selector)}!`);
       return new _Handle(selected);
     }
     isThrow && new NotFoundError(stringify(selector));
@@ -123,7 +123,7 @@ export const _withScreen = async (
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
     try {
-      info(`Finding all ${stringify(selector)}...`);
+      debug(`Finding all ${stringify(selector)}...`);
       timeout &&
         (await (handle ?? page).waitForSelector(selectorF, {
           timeout: isNumber(timeoutF) ? timeoutF : timeout,
@@ -131,7 +131,7 @@ export const _withScreen = async (
     } catch (e) {}
     const selected = await (handle ?? page).$$(selectorF);
     if (selected) {
-      info(`Found all ${stringify(selector)}!`);
+      debug(`Found all ${stringify(selector)}!`);
       return selected?.map((v) => new _Handle(v as ElementHandle));
     }
     isThrow && new NotFoundError(stringify(selector));

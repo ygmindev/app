@@ -184,12 +184,12 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/production/1708914516637-2024-02-26T02:28:36.637Z/crawl.zip"
+          "S3Key": "serverless/serverless/production/1708921525952-2024-02-26T04:25:25.952Z/crawl.zip"
         },
         "Handler": "src/functions/crawl/crawl.main",
         "Runtime": "nodejs18.x",
         "FunctionName": "serverless-production-crawl",
-        "MemorySize": 1024,
+        "MemorySize": 5120,
         "Timeout": 900,
         "Environment": {
           "Variables": {
@@ -219,12 +219,12 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless/production/1708914516637-2024-02-26T02:28:36.637Z/ping.zip"
+          "S3Key": "serverless/serverless/production/1708921525952-2024-02-26T04:25:25.952Z/ping.zip"
         },
         "Handler": "src/functions/ping/ping.main",
         "Runtime": "nodejs18.x",
         "FunctionName": "serverless-production-ping",
-        "MemorySize": 1024,
+        "MemorySize": 5120,
         "Timeout": 900,
         "Environment": {
           "Variables": {

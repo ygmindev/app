@@ -6,6 +6,7 @@ import { slug } from '@lib/shared/core/utils/slug/slug';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { info } from '@lib/shared/logging/utils/logger/logger';
 import { JWT } from 'google-auth-library';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import toNumber from 'lodash/toNumber';
@@ -17,11 +18,13 @@ export const main = createLambdaHandler<{
   link: string;
   maxItems?: number;
   pageIndex?: number;
+  start?: number;
 }>({
   handler: async ({ body }) => {
     const { category, link } = body ?? {};
     const maxItems = body?.maxItems ? toNumber(body?.maxItems) : 100;
     const pageIndex = body?.pageIndex ? toNumber(body?.pageIndex) : 0;
+    const start = body?.start ? toNumber(body?.start) : 0;
 
     const PAGE_SIZE = 24;
     const UPLOAD_SIZE = 5;
@@ -45,6 +48,7 @@ export const main = createLambdaHandler<{
       'Image Src',
       'Image Position',
       'Variant Price',
+      'Page',
       'Count',
       'Updated',
     ];
@@ -76,7 +80,7 @@ export const main = createLambdaHandler<{
           { delay: 1000, retries: 10 },
         );
 
-      let count = 1;
+      let count = start + 1;
 
       try {
         await screen.open(`${link}${pageIndex > 0 ? `&Nao=${pageIndex * PAGE_SIZE}` : ''}`);
@@ -93,7 +97,7 @@ export const main = createLambdaHandler<{
             ),
         );
 
-        for (const url of urls) {
+        for (const url of start ? urls.slice(start) : urls) {
           if (maxItems && count > maxItems) {
             break;
           }
@@ -333,23 +337,33 @@ export const main = createLambdaHandler<{
 
                 if (src) {
                   row.URL = url;
-                  row.Count = count;
-                  const rowToAdd = i > 1 ? { Extra: row.Extra, Handle: row.Handle } : row;
+                  row.Count = count + 1;
+                  row.Page = pageIndex + 1;
+                  const rowToAdd =
+                    i > 1
+                      ? {
+                          Count: row.Count,
+                          Extra: row.Extra,
+                          Handle: row.Handle,
+                          Page: row.Page,
+                        }
+                      : row;
                   rowToAdd['Image Src'] = src;
                   rowToAdd['Image Position'] = i;
                   result.push(rowToAdd as Record<string, string | number>);
                   i++;
                 }
               }
+              info(`Adding item: ${url}`);
 
               itemQueue.clear();
 
               if (result) {
-                count++;
                 if (result.length > 0 && count % UPLOAD_SIZE === 0) {
                   await upload(result);
                   result = [];
                 }
+                count++;
               }
             }
           } catch (e) {
