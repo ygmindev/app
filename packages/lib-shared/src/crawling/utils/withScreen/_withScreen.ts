@@ -35,41 +35,23 @@ export const _withScreen = async (
     { delay, delayDefault, dimension, isHeadless, snapshotPath, timeout },
   ]: _WithScreenParamsModel
 ): Promise<_WithScreenModel> => {
-  const isAws = true;
-
-  const browser = isAws
-    ? await puppeteer.launch({
-        args: [
-          ...chromium.args,
-          '--no-sandbox',
-          '--incognito',
-          dimension && `--window-size-${dimension.width},${dimension.height}`,
-        ].filter(Boolean),
-        defaultViewport: dimension,
-        executablePath: await chromium.executablePath(),
-        // headless: isHeadless ? 'new' : false,
-        headless: 'new',
-        ignoreDefaultArgs: ['--hide-scrollbars', '--disable-web-security'],
-        ignoreHTTPSErrors: true,
-        protocolTimeout: 0,
-      })
-    : await puppeteer.launch({
-        args: [
-          '--no-sandbox',
-          '--disable-gpu',
-          '--disable-dev-shm-usage',
-          '--no-zygote',
-          '--single-process',
-          '--disable-setuid-sandbox',
-          '--no-first-run',
-          dimension && `--window-size-${dimension.width},${dimension.height}`,
-        ].filter(Boolean),
-        defaultViewport: dimension,
-        headless: 'new',
-        ignoreDefaultArgs: ['--hide-scrollbars', '--disable-web-security'],
-        ignoreHTTPSErrors: true,
-        protocolTimeout: 0,
-      });
+  const isProduction = process.env.NODE_ENV === 'production';
+  const browser = await puppeteer.launch({
+    args: [
+      ...(isProduction ? chromium.args : []),
+      '--no-sandbox',
+      '--disable-gpu',
+      '--disable-dev-shm-usage',
+      '--no-zygote',
+      '--disable-setuid-sandbox',
+    ].filter(Boolean),
+    defaultViewport: dimension,
+    executablePath: isProduction ? await chromium.executablePath() : undefined,
+    headless: isHeadless ? 'new' : false,
+    ignoreDefaultArgs: ['--hide-scrollbars', '--disable-web-security'],
+    ignoreHTTPSErrors: true,
+    protocolTimeout: 0,
+  });
 
   const page = await browser.newPage();
   await page.setUserAgent(
@@ -257,7 +239,6 @@ export const _withScreen = async (
     },
 
     open: async (route) => {
-      console.warn(`@@@route: ${route}`);
       await page.goto(route, { timeout, waitUntil: 'domcontentloaded' });
     },
 

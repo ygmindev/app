@@ -30,6 +30,7 @@
     "json-stringify-safe": "^5.0.1",
     "lodash": "^4.17.21",
     "mongodb": "5.9.2",
+    "p-queue": "^6.6.2",
     "puppeteer": "^21.7.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",

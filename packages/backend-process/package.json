@@ -18,6 +18,7 @@
     "lodash": "^4.17.21",
     "mongodb": "5.9.2",
     "nodemailer": "^6.9.8",
+    "p-queue": "^8.0.1",
     "puppeteer": "^21.7.0",
     "puppeteer-cluster": "^0.23.0",
     "puppeteer-extra": "^3.3.6",

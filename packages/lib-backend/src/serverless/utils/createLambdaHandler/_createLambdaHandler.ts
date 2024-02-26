@@ -14,19 +14,21 @@ import {
   LAMBDA_PLUGIN,
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
-import {
-  type LambdaResponseModel,
-  type LambdaTypeModel,
-} from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
+import { type LambdaResponseModel } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
 import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
 import { type ContextModel } from '@lib/platform/core/core.models';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
-import { type APIGatewayProxyEventV2, type Context } from 'aws-lambda';
+import {
+  type APIGatewayProxyEventV2,
+  type APIGatewayProxyEventV2WithRequestContext,
+  type APIGatewayProxyWebsocketEventV2,
+  type Context,
+} from 'aws-lambda';
 import { type GraphQLError } from 'graphql';
 
-export const _createLambdaHandler = <TType extends LambdaTypeModel>({
+export const _createLambdaHandler = <TType = Record<string, unknown>>({
   context: contextDefault = {},
   databaseConfig,
   graphQlConfig,
@@ -40,7 +42,7 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
     event,
   }: {
     context: Context;
-    event: _LambdaEventModel<TType>;
+    event: _LambdaEventModel;
   }): Promise<Context & ContextModel> => {
     const contextF: Context & ContextModel = { ...contextDefault, ...context };
     contextF.callbackWaitsForEmptyEventLoop = false;
@@ -63,12 +65,14 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
 
     // request id
     contextF.requestId =
-      type === LAMBDA_TYPE.WEBSOCKET ? event.requestContext.connectionId : contextF.requestId;
+      type === LAMBDA_TYPE.WEBSOCKET
+        ? (event as APIGatewayProxyWebsocketEventV2).requestContext.connectionId
+        : contextF.requestId;
 
     return contextF;
   };
 
-  return async (event: _LambdaEventModel<TType>, context, callback) => {
+  return async (event: _LambdaEventModel, context, callback) => {
     // GraphQL
     if (type === LAMBDA_TYPE.GRAPHQL && graphQlConfig) {
       const server = new ApolloServer({
@@ -90,8 +94,7 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
         server,
         handlers.createAPIGatewayProxyEventV2RequestHandler(),
         {
-          context: async ({ context, event }) =>
-            getContext({ context, event: event as _LambdaEventModel<TType> }),
+          context: async ({ context, event }) => getContext({ context, event }),
         },
       );
       return handlerF(event as APIGatewayProxyEventV2, context, callback);
@@ -100,7 +103,14 @@ export const _createLambdaHandler = <TType extends LambdaTypeModel>({
     const contextF = await getContext({ context, event });
     const result: LambdaResponseModel = {
       statusCode: HTTP_STATUS_CODE.SUCCESS,
-      ...(handler && (await handler({ body: event.body, context: contextF }))),
+      ...(handler &&
+        (await handler({
+          body: {
+            ...(event.body ? JSON.parse(event.body) : {}),
+            ...(event as APIGatewayProxyEventV2WithRequestContext<unknown>).queryStringParameters,
+          } as TType,
+          context: contextF,
+        }))),
     };
 
     switch (type) {

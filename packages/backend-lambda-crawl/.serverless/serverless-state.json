@@ -211,7 +211,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1708884607000-2024-02-25T18:10:07.000Z/crawl.zip"
+                "S3Key": "serverless/serverless/production/1708885641156-2024-02-25T18:27:21.156Z/crawl.zip"
               },
               "Handler": "src/functions/crawl/crawl.main",
               "Runtime": "nodejs18.x",
@@ -246,7 +246,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1708884607000-2024-02-25T18:10:07.000Z/ping.zip"
+                "S3Key": "serverless/serverless/production/1708885641156-2024-02-25T18:27:21.156Z/ping.zip"
               },
               "Handler": "src/functions/ping/ping.main",
               "Runtime": "nodejs18.x",
@@ -646,16 +646,18 @@
           "process.env.SERVER_SSL_PUBLIC_KEY": "\"cert.pem\"",
           "process.env.SERVER_SSL_PRIVATE_KEY": "\"key.pem\"",
           "process.env.SERVER_PLAID_ENV": "\"sandbox\"",
-          "process.env.SERVER_APP_GOOGLE_API_KEY": "\"AIzaSyBq_IqxNvsOEWJ3agu-bN5E2DxfY1w_iZ4\"",
           "process.env.SERVER_PLAID_COUNTRY_CODES": "\"US,CA\"",
           "process.env.SERVER_FIREBASE_ADMIN_EMAIL": "\"firebase-adminsdk-ofw76@app-46c38.iam.gserviceaccount.com\"",
           "process.env.SERVER_PLAID_VERSION": "\"2020-09-14\"",
+          "process.env.SERVER_GOOGLE_API_KEY": "\"AIzaSyDfxF4yeIPa7TqfyIEPhEUPGk1p632TGzE\"",
           "process.env.NODE_ENV": "\"production\"",
           "process.env.SERVER_APP_OTP_LENGTH": "\"6\"",
           "process.env.SERVER_FIREBASE_ADMIN_SECRET": "\"-----BEGIN PRIVATE KEY-----\\\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDTb4hDO2RhqDrP\\\\nyaINPn8prgdZvDBEXioW0BeS9f4lnud8CebdiZ7qu7LOVUEJj3FKnPt/4RgSGK8m\\\\n+RHeLnzoljfDdx8SotidTSngImhoznNsb3GWjH83nxRsP0YKPijYK/MfzfcCMf6n\\\\nX9mwrhJkad8tOzgzAbadNcvEfFUQstkTjZ34dp/go2euFT4vGJfB+K2lChvZs6Tt\\\\n/jYmaUVehPAvyN4s5+CwbP+dzM6jm7/Ibd54zVw+d2kme1IYs7fl53KWOlRaEl7l\\\\neoiqvqWFTTaCypOkWHTZWaEvAJxxMo7OEUnoYQegYb2+TkfKcf82O4N2JKAWqpnz\\\\nWMFqqMHbAgMBAAECggEAH7as85im99bp61zNB7uGC1RlGdqWSsrs+TsBLjPjiPUK\\\\nt5osnLIVuhOpQDWdabewQIbHWmkC2UQGkYvuWCsU5TYS6yik6oCuiPmX/Fxs2LuO\\\\nqIcWvIQaWNdtksby1Hp6WeJNt0mHcTbagXRpDI0viQwwQ3KMfWoWYAI/rBsSD0ze\\\\nS6OTsAN0UNxYTOotg6WCQN5O30G97s4oBgtWvftMWicd6ckfInyoWt48kyiYmLaG\\\\nPhxxLSaYb+/Ve33YdEED5QHCuH8fYvyYlKM4ts/m97wMkWa6a6taoQvZ4dUKZKFF\\\\nzj1yxfmCfbVbiFiuXH8PsHp/jr0L50cIfgggp5bWgQKBgQD0/MLoQHK8g9mX7lXM\\\\nA75XZGDsUw6Yrl0Ozr2HVTy7PQXeSrS6QEH9OwJ6O2nbps596f3zb5EXbXl9KdVZ\\\\nrqGkXKLaV1OsMppqoLIc/UlNMLURNzluJdLQhEun608p/j/x0kPdBKc9lB92IFP/\\\\nqkuNJ8EMZDwvp8YvkMLuKC/UuwKBgQDc8Ksp4UoJ5cF/69oM63gZWAFJe6KE+mAm\\\\nB2oEq+6Ml9ktD1hZKnqVZRkS6o86aibsbqTbAR20k/DPuNm+piOSunISiSB5iOvA\\\\nXASl9ddS0aAAsYQ74XAsySP7TdNmolqrKd2Loo85KqDwVGAXInT8Tac0oPiRp77D\\\\nhxS9VsyFYQKBgQDiLFhkwtsqXy+LrGVZLDuVwv4YL7XSD2eqPAON5Ytj8TpxttaS\\\\n/K/vcYMgBan9N0p7xILHM8DnuBHpE638VdS1QTC4EtcUqsMUnbbSPKRntwfzFODY\\\\nZ+LwzrJqHDvBsRCn2E7+xUUA/Lbu/3mNF1MYxhLbtc460NGPKD5OUJuX8QKBgBB3\\\\n6/o6Lb+hHZRAa0dtQc15ztbAXXPWCdar1M42VpiqNOjz7NzwmqSKHZ1YWIa9JNuY\\\\nv7cHVUSBhoClQa3BSoOEXD5fdEk62H/FHB+WvI8Syv9iO/4OpsLf10vDGE/dKC77\\\\n9uSSoGRddhOT5nmy+s9Xpm/4065ft4txhS07zBDhAoGABQLhltA5+pP+wTt3CQoD\\\\npXQ8MQv0FvBYSxPPuGWKavRRlco1D68k1mf+BiyQ2l2oGyUlWGObA+2w7yFrPmRB\\\\n9eM3AUmqFKZRTQZy5QMyF0RiugH4lVg4CCIu4kvwWA4tzo296WWlseSJBIF9+kTt\\\\nsefeNjnDvvPVF0xMglCR6DI=\\\\n-----END PRIVATE KEY-----\\\\n\"",
           "process.env.SERVER_EMAIL_USERNAME": "\"ygmindev@gmail.com\"",
           "process.env.SERVER_APP_PORT": "\"5001\"",
-          "process.env.SERVER_HOST": "\"https://e5e7o9gew8.execute-api.us-east-1.amazonaws.com\""
+          "process.env.SERVER_HOST": "\"https://e5e7o9gew8.execute-api.us-east-1.amazonaws.com\"",
+          "process.env.SERVER_GOOGLE_EMAIL": "\"bot-447@sunny-influence-410420.iam.gserviceaccount.com\"",
+          "process.env.SERVER_GOOGLE_PRIVATE_KEY": "\"-----BEGIN PRIVATE KEY-----\\\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCmZcgkqfYeZ6SB\\\\ns4aEZkgJfM+cr5peHNVRn33BrUK2e7JqTYJ2SQzWyQQYgx96AiRlmWZnODzybz3W\\\\nQsvaybPhNuCuuhuNuEOMS40FwDymH9apV3yJT5PRMoHANVW/HZCxKZgH1vHrTcbA\\\\n0//kobOU5VKnYO7DbazxC7M16UVNlYDFHOzvq3XfYDwiMYtOpw921CVcr8Xqctyj\\\\n5aYziq/Im/hxdKoJVybrxoRMOsdNMS90G1ZrosnHTWy4VCnPywq4lMoBJrou+D+B\\\\nd0ppjb2PDy0fpDjj+dO7AVZxWu6Lp2Kb4UhjEt2VBNH6YlRbAsag7Q55+FCCy2eT\\\\nqrfsn1ahAgMBAAECggEAAbMUrx4uybr2hM4d+7x1NCaakr++6ILsIVorDUc9IRLE\\\\nnN4XjOh8WXXCZVMyhzseHs0JLRj3k2TUOXvja+PHQu+97f7v4NvO0dAkO7itzecR\\\\nmNdwSdE+oeJ9jYZl7q6pP4v8lejpveTkmKvZp17I8CaC+HtumN+mBmy/iveL2gne\\\\nhGHoxENVL2RbXJD62XsACFGq8UTuZScDGXgcS2OJQEZR0/8DsecoHGeuj4FsizAe\\\\njSt5O5tPBsp3d9Sfc4k9HbeiJk6XVGR8HfBN77IXhfnOcptlfn2yYpHtzI+AiyVo\\\\n2yJUueQqWzVUduHIMsYorFvvRgSTq8tkA0Z67vAMSQKBgQDg75HCu/rdf1aZXVoA\\\\nxyFkFHTec+1Fh+pP4RCyfgFSwFpKOYRJTiInZ7M/57Di0XTu4hEMS/bBEy/XLubh\\\\n0zz2FaSlsCE87iKjhhKlMNeyl/NYV5lMXTuO7iU+fOaZSwD4srY2cDZaJrOWKQW+\\\\n3IgHapY+Ls3uWMxGvYSlS/5UWQKBgQC9YKOJXXtcAY6tjflGwYUvu2fUcD3rxcQR\\\\nPPFwYwpu76hHvtv8wM8qnPc35DvayKPsUlpzA8kMiaqn1BCS1mGQIrke13RxKiZZ\\\\ng25BHbzkEsH8TVZGZX41Znur6vgkPiJfkWvByfsoaL+ZVyvjD7hjg41PMDZn8zAC\\\\n/XKgKftriQKBgGsoFgN0NAWTJTk4rKjUNIcN68MR7QYDws89BAxUVOMMObdEgU2+\\\\nyCyHjXAzOyRC7nbjAYYfJjVCo7baZClOzaraEq7QInV5aM0IERfbFdbB5q6+RIyJ\\\\nmdb0go+rRtveTF8uG/oBKRN3fnRZpKARRUhrMZn8CCS07tQAcxGgC1A5AoGAcPhQ\\\\nNiZ861LGgUPbO1lAEUxTUQgv+BD+uGXJhYifdbQjh8EUTD/clYgTddUB266rEtPB\\\\nvzC343HQStOXm3ClvKzqD7rpbIR/YhCkWdXak5eY/uBHojDzS/m5tsGxizVBng8K\\\\n4AyUdfOesGOu+4GqNjsItf+FxRbuQipdEaxZnjkCgYEAnm6EpDi8Zei2+rq78OX2\\\\nyv/0RMvCHu1lKOJhYFtZvkFBB3RK08HNj0noLTRuAXLarnQfzMrMJq/4+XtpyMqH\\\\namMrdH0yhYw75M73M0whDbqvOWy4e2tuERdnpEcZuO5/A6nqG2qh+ozjVkqx5fHw\\\\n2k34sVztHYk0Z4wUT+q4p9Y=\\\\n-----END PRIVATE KEY-----\\\\n\""
         },
         "keepNames": true,
         "mainFields": [
@@ -784,7 +786,8 @@
             "artifact": "/Users/yoongeemin/Developer/Projects/app/packages/backend-lambda-crawl/.serverless/custom.zip"
           },
           "path": "./.build/layers",
-          "retain": true
+          "retain": true,
+          "artifactAlreadyUploaded": true
         }
       },
       "package": {
@@ -807,7 +810,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/serverless/production/1708884607000-2024-02-25T18:10:07.000Z",
+    "artifactDirectoryName": "serverless/serverless/production/1708885641156-2024-02-25T18:27:21.156Z",
     "artifact": ""
   }
 }

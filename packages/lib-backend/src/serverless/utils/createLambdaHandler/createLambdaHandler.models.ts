@@ -7,7 +7,7 @@ import {
   type LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 
-export type CreateLambdaHandlerParamsModel<TType extends LambdaTypeModel> = Omit<
+export type CreateLambdaHandlerParamsModel<TType extends Record<string, unknown>> = Omit<
   _CreateLambdaHandlerParamsModel<TType>,
   'websocketUri'
 >;

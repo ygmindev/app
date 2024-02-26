@@ -49,6 +49,7 @@
     "moment-timezone": "^0.5.44",
     "mongodb": "5.9.2",
     "nodemailer": "^6.9.8",
+    "p-queue": "^6.6.2",
     "reflect-metadata": "^0.2.1",
     "serverless": "3.38.0",
     "stripe": "^14.11.0",

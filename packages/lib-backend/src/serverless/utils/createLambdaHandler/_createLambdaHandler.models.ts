@@ -1,4 +1,3 @@
-import { type LAMBDA_TYPE } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import {
   type LambdaPluginModel,
   type LambdaResponseModel,
@@ -13,7 +12,7 @@ import {
   type Handler,
 } from 'aws-lambda';
 
-export type _CreateLambdaHandlerParamsModel<TType extends LambdaTypeModel> = {
+export type _CreateLambdaHandlerParamsModel<TType = Record<string, unknown>> = {
   context?: ContextModel;
   databaseConfig?(): _DatabaseConfigModel;
   graphQlConfig?(): _GraphqlConfigModel;
@@ -21,16 +20,14 @@ export type _CreateLambdaHandlerParamsModel<TType extends LambdaTypeModel> = {
     body,
     context,
   }: {
-    body?: string;
+    body?: TType;
     context: ContextModel;
   }): Promise<LambdaResponseModel>;
   plugins?: Array<LambdaPluginModel>;
-  type?: TType;
+  type?: LambdaTypeModel;
   websocketUri: string;
 };
 
 export type _CreateLambdaHandlerModel = Handler;
 
-export type _LambdaEventModel<TType extends LambdaTypeModel> = TType extends LAMBDA_TYPE.WEBSOCKET
-  ? APIGatewayProxyEventV2
-  : APIGatewayProxyWebsocketEventV2;
+export type _LambdaEventModel = APIGatewayProxyEventV2 | APIGatewayProxyWebsocketEventV2;
