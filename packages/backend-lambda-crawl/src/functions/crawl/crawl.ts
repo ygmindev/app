@@ -20,16 +20,11 @@ export const main = createLambdaHandler<{
   maxPages?: number;
 }>({
   handler: async ({ body }) => {
-    const { category, link, maxItems, maxPages } = body ?? {};
+    const { category, link, maxItems = 100, maxPages = 6 } = body ?? {};
 
     const PAGE_SIZE = 24;
     const UPLOAD_SIZE = 5;
     const ELEMENT_TIMEOUT = 5000;
-
-    console.warn(body);
-    if (1 === 1) {
-      throw new Error();
-    }
 
     await withScreen(async (screen) => {
       let result: Array<Record<string, string | number>> = [];

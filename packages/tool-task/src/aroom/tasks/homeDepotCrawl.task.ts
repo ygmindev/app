@@ -362,12 +362,11 @@ const crawl: TaskParamsModel<unknown> = {
     async () => {
       const http = new HttpImplementation();
       for (const row of CATEGORIES) {
-        const { category, link, maxItems } = row;
+        const { category, link } = row;
         void http.get({
           params: {
             category,
             link: `${link}?sortby=topsellers&sororder=desc`,
-            maxItems: maxItems ?? 100,
           },
           url: 'https://localhost:5001/api/crawl',
         });
