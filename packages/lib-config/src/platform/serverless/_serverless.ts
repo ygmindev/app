@@ -74,6 +74,7 @@ export const _serverless = ({
       (result, v, k) => ({
         ...result,
         [k]: {
+          ephemeralStorageSize: 1024,
           events:
             v.method === HTTP_METHOD.WEBSOCKET
               ? [
