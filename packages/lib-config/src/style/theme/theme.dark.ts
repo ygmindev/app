@@ -7,7 +7,7 @@ import { type ThemeColorModel, type ThemeRoleModel } from '@lib/frontend/style/s
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import reduce from 'lodash/reduce';
 
-const COLOR_SURFACE_BASE = '#141414';
+const COLOR_SURFACE_BASE = '#000000';
 const COLOR_SURFACE_CONTRAST = '#FFFFFF';
 const COLOR_BORDER = '#8C8C8C';
 const LIGHTNESS_ACTIVE = 0.4;
