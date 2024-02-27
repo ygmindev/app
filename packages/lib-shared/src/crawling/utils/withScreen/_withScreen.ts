@@ -99,6 +99,10 @@ export const _withScreen = async (
     const selectorF = getSelector(selector);
     try {
       debug(`Finding ${stringify(selector)}...`);
+      console.warn('@@@handle: ');
+      console.warn(handle);
+      console.warn('@@@page: ');
+      console.warn(page);
       timeout &&
         (await (handle ?? page).waitForSelector(selectorF, {
           timeout: isNumber(timeoutF) ? timeoutF : timeout,
