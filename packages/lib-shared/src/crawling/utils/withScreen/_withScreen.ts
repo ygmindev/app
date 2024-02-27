@@ -61,15 +61,15 @@ export const _withScreen = async (
   );
   await page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
 
-  // await page.setRequestInterception(true);
-  // page.on('request', (req) => {
-  //   const type = req.resourceType();
-  //   if (type === 'image' || type === 'font' || type === 'media') {
-  //     void req.abort();
-  //   } else {
-  //     void req.continue();
-  //   }
-  // });
+  await page.setRequestInterception(true);
+  page.on('request', (req) => {
+    const type = req.resourceType();
+    if (type === 'image' || type === 'font' || type === 'media') {
+      void req.abort();
+    } else {
+      void req.continue();
+    }
+  });
 
   const getSelector = (selector: SelectorModel): string => {
     switch (selector.type) {
