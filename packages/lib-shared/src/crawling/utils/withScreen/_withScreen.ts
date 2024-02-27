@@ -51,7 +51,6 @@ export const _withScreen = async (
     defaultViewport: dimension,
     executablePath: isProduction ? await chromium.executablePath() : undefined,
     headless: isHeadless ? 'new' : false,
-    ignoreDefaultArgs: ['--hide-scrollbars', '--disable-web-security'],
     ignoreHTTPSErrors: true,
     // protocolTimeout: 0,
   });
