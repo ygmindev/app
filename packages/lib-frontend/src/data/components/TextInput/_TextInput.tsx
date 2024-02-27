@@ -122,7 +122,8 @@ export const _TextInput = composeComponent<_TextInputPropsModel, TextInputProps>
   }),
 
   stylers: [
-    ({ height, isCenter }) => ({
+    ({ foregroundColor, height, isCenter }) => ({
+      color: foregroundColor,
       height,
       minWidth: 0,
       textAlign: isCenter ? 'center' : undefined,
