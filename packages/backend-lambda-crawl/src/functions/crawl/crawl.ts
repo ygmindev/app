@@ -1,7 +1,6 @@
 import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
 import { ConcurrentQueue } from '@lib/shared/core/utils/ConcurrentQueue/ConcurrentQueue';
 import { runWithRetry } from '@lib/shared/core/utils/runWithRetry/runWithRetry';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { slug } from '@lib/shared/core/utils/slug/slug';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
@@ -84,7 +83,6 @@ export const main = createLambdaHandler<{
 
       try {
         await screen.open(`${link}${pageIndex > 0 ? `&Nao=${pageIndex * PAGE_SIZE}` : ''}`);
-        await sleep(3000);
 
         await screen
           .find({ value: '.results-layout__toggle-grid' }, { timeout: ELEMENT_TIMEOUT })

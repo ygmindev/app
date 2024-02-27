@@ -16,10 +16,6 @@ const LIGHTNESS_THEME_CONTRAST = 0.2;
 const LIGHTNESS_THEME_MUTED = 0.3;
 const LIGHTNESS_SURFACE_MUTED = 0.9;
 
-console.warn(
-  `${COLOR_SURFACE_BASE} -> ${palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_ACTIVE })}`,
-);
-
 const { _config, config } = defineConfig({
   _config: _theme,
 
