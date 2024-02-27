@@ -67,6 +67,7 @@ export const Button: RLFCModel<WrapperRefModel, ButtonPropsModel> = ({
   }>(() => {
     const colorF = theme.color.palette[color];
     const opacity = theme.opaque[THEME_SIZE.LARGE];
+    console.warn(theme.color.palette);
     const activeColor = colorF[THEME_ROLE.ACTIVE];
     const mainColor = colorF[THEME_ROLE.MAIN];
     switch (typeF) {

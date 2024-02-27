@@ -1,5 +1,3 @@
-import reduce from 'lodash/reduce';
-
 import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _theme } from '@lib/config/style/theme/_theme';
 import { config as configBase } from '@lib/config/style/theme/theme.base';
@@ -7,15 +5,20 @@ import { THEME_COLOR_TONES } from '@lib/config/style/theme/theme.constants';
 import { THEME_COLOR, THEME_COLOR_MORE, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { type ThemeColorModel, type ThemeRoleModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
+import reduce from 'lodash/reduce';
 
-const COLOR_SURFACE_BASE = '#000000';
+const COLOR_SURFACE_BASE = '#141414';
 const COLOR_SURFACE_CONTRAST = '#FFFFFF';
 const COLOR_BORDER = '#8C8C8C';
-const LIGHTNESS_ACTIVE = 40;
-const LIGHTNESS_THEME_BASE = 80;
-const LIGHTNESS_THEME_CONTRAST = 20;
-const LIGHTNESS_THEME_MUTED = 30;
-const LIGHTNESS_SURFACE_MUTED = 90;
+const LIGHTNESS_ACTIVE = 0.4;
+const LIGHTNESS_THEME_BASE = 0.8;
+const LIGHTNESS_THEME_CONTRAST = 0.2;
+const LIGHTNESS_THEME_MUTED = 0.3;
+const LIGHTNESS_SURFACE_MUTED = 0.9;
+
+console.warn(
+  `${COLOR_SURFACE_BASE} -> ${palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_ACTIVE })}`,
+);
 
 const { _config, config } = defineConfig({
   _config: _theme,
