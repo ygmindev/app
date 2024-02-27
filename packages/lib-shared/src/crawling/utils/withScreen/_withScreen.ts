@@ -22,7 +22,7 @@ import { debug } from '@lib/shared/logging/utils/logger/logger';
 import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
-import puppeteer, { type ElementHandle } from 'puppeteer-core';
+import { type ElementHandle, launch } from 'puppeteer-core';
 // import puppeteer from 'puppeteer';
 // import puppeteer from 'puppeteer-extra';
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
@@ -36,7 +36,7 @@ export const _withScreen = async (
   ]: _WithScreenParamsModel
 ): Promise<_WithScreenModel> => {
   const isProduction = process.env.NODE_ENV === 'production';
-  const browser = await puppeteer.launch({
+  const browser = await launch({
     args: [
       ...(isProduction ? chromium.args : []),
       '--disable-dev-shm-usage',
@@ -53,11 +53,10 @@ export const _withScreen = async (
     headless: isHeadless ? 'new' : false,
     ignoreDefaultArgs: ['--hide-scrollbars', '--disable-web-security'],
     ignoreHTTPSErrors: true,
-    protocolTimeout: 0,
+    // protocolTimeout: 0,
   });
 
   const page = await browser.newPage();
-  page.setDefaultTimeout(timeout);
   await page.setUserAgent(
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36',
   );
@@ -100,10 +99,6 @@ export const _withScreen = async (
     const selectorF = getSelector(selector);
     try {
       debug(`Finding ${stringify(selector)}...`);
-      console.warn('@@@handle: ');
-      console.warn(handle);
-      console.warn('@@@page: ');
-      console.warn(page);
       timeout &&
         (await (handle ?? page).waitForSelector(selectorF, {
           timeout: isNumber(timeoutF) ? timeoutF : timeout,
