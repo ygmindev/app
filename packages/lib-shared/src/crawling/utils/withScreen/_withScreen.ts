@@ -18,13 +18,13 @@ import {
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
-import { debug } from '@lib/shared/logging/utils/logger/logger';
+import { info } from '@lib/shared/logging/utils/logger/logger';
 import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
-import { type ElementHandle } from 'puppeteer-core';
+import puppeteer, { type ElementHandle } from 'puppeteer-core';
 // import puppeteer from 'puppeteer';
-import puppeteer from 'puppeteer-extra';
+// import puppeteer from 'puppeteer-extra';
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
 // puppeteer.use(StealthPlugin());
@@ -39,11 +39,13 @@ export const _withScreen = async (
   const browser = await puppeteer.launch({
     args: [
       ...(isProduction ? chromium.args : []),
-      '--no-sandbox',
-      '--disable-gpu',
       '--disable-dev-shm-usage',
-      '--no-zygote',
+      '--disable-features=site-per-process',
+      '--disable-gpu',
       '--disable-setuid-sandbox',
+      '--no-sandbox',
+      '--no-zygote',
+      '--use-gl=desktop',
     ].filter(Boolean),
     defaultViewport: dimension,
     executablePath: isProduction ? await chromium.executablePath() : undefined,
@@ -62,7 +64,7 @@ export const _withScreen = async (
 
   page.on('request', (req) => {
     const type = req.resourceType();
-    if (type === 'image' || type === 'font') {
+    if (type === 'image' || type === 'font' || type === 'media') {
       void req.abort();
     } else {
       void req.continue();
@@ -95,7 +97,7 @@ export const _withScreen = async (
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
     try {
-      debug(`Finding ${stringify(selector)}...`);
+      info(`Finding ${stringify(selector)}...`);
       timeout &&
         (await (handle ?? page).waitForSelector(selectorF, {
           timeout: isNumber(timeoutF) ? timeoutF : timeout,
@@ -103,12 +105,12 @@ export const _withScreen = async (
     } catch (e) {}
     let selected: ElementHandle;
     if (index >= 0) {
-      selected = (await (handle ?? page).$$(selectorF))?.[index] as ElementHandle;
+      selected = (await (handle ?? page).$$(selectorF))?.[index];
     } else {
       selected = (await (handle ?? page).$(selectorF)) as ElementHandle;
     }
     if (selected) {
-      debug(`Found ${stringify(selector)}!`);
+      info(`Found ${stringify(selector)}!`);
       return new _Handle(selected);
     }
     isThrow && new NotFoundError(stringify(selector));
@@ -123,7 +125,7 @@ export const _withScreen = async (
     await sleep(isDelay ? delay : delayDefault);
     const selectorF = getSelector(selector);
     try {
-      debug(`Finding all ${stringify(selector)}...`);
+      info(`Finding all ${stringify(selector)}...`);
       timeout &&
         (await (handle ?? page).waitForSelector(selectorF, {
           timeout: isNumber(timeoutF) ? timeoutF : timeout,
@@ -131,8 +133,8 @@ export const _withScreen = async (
     } catch (e) {}
     const selected = await (handle ?? page).$$(selectorF);
     if (selected) {
-      debug(`Found all ${stringify(selector)}!`);
-      return selected?.map((v) => new _Handle(v as ElementHandle));
+      info(`Found all ${stringify(selector)}!`);
+      return selected?.map((v) => new _Handle(v));
     }
     isThrow && new NotFoundError(stringify(selector));
     return [];
@@ -214,6 +216,7 @@ export const _withScreen = async (
 
   const screen: ScreenModel = {
     close: async () => {
+      await page.close();
       await browser.close();
     },
 

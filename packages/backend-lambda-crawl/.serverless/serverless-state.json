@@ -15,7 +15,7 @@
           ]
         }
       },
-      "memorySize": 5120,
+      "memorySize": 3008,
       "name": "aws",
       "region": "us-east-1",
       "runtime": "nodejs18.x",
@@ -211,12 +211,12 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1708921525952-2024-02-26T04:25:25.952Z/crawl.zip"
+                "S3Key": "serverless/serverless/production/1708995325631-2024-02-27T00:55:25.631Z/crawl.zip"
               },
               "Handler": "src/functions/crawl/crawl.main",
               "Runtime": "nodejs18.x",
               "FunctionName": "serverless-production-crawl",
-              "MemorySize": 5120,
+              "MemorySize": 3008,
               "Timeout": 900,
               "Environment": {
                 "Variables": {
@@ -246,12 +246,12 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1708921525952-2024-02-26T04:25:25.952Z/ping.zip"
+                "S3Key": "serverless/serverless/production/1708995325631-2024-02-27T00:55:25.631Z/ping.zip"
               },
               "Handler": "src/functions/ping/ping.main",
               "Runtime": "nodejs18.x",
               "FunctionName": "serverless-production-ping",
-              "MemorySize": 5120,
+              "MemorySize": 3008,
               "Timeout": 900,
               "Environment": {
                 "Variables": {
@@ -739,7 +739,7 @@
         "package": {
           "artifact": ".serverless/crawl.zip"
         },
-        "memory": 5120,
+        "memory": 3008,
         "runtime": "nodejs18.x",
         "vpc": {}
       },
@@ -763,7 +763,7 @@
         "package": {
           "artifact": ".serverless/ping.zip"
         },
-        "memory": 5120,
+        "memory": 3008,
         "runtime": "nodejs18.x",
         "vpc": {}
       }
@@ -810,7 +810,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/serverless/production/1708921525952-2024-02-26T04:25:25.952Z",
+    "artifactDirectoryName": "serverless/serverless/production/1708995325631-2024-02-27T00:55:25.631Z",
     "artifact": ""
   }
 }

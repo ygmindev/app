@@ -2,6 +2,7 @@ import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaH
 import { LAMBDA_PLUGIN } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import { ConcurrentQueue } from '@lib/shared/core/utils/ConcurrentQueue/ConcurrentQueue';
 import { runWithRetry } from '@lib/shared/core/utils/runWithRetry/runWithRetry';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { slug } from '@lib/shared/core/utils/slug/slug';
 import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
@@ -27,7 +28,7 @@ export const main = createLambdaHandler<{
     const start = body?.start ? toNumber(body?.start) : 0;
 
     const PAGE_SIZE = 24;
-    const UPLOAD_SIZE = 5;
+    const UPLOAD_SIZE = 3;
     const ELEMENT_TIMEOUT = 5000;
     const COLUMNS = [
       'Extra',
@@ -84,6 +85,7 @@ export const main = createLambdaHandler<{
 
       try {
         await screen.open(`${link}${pageIndex > 0 ? `&Nao=${pageIndex * PAGE_SIZE}` : ''}`);
+        await sleep(3000);
 
         await screen
           .find({ value: '.results-layout__toggle-grid' }, { timeout: ELEMENT_TIMEOUT })
@@ -380,6 +382,8 @@ export const main = createLambdaHandler<{
         await upload(result);
         result = [];
       }
+
+      await screen.close();
     });
 
     return {

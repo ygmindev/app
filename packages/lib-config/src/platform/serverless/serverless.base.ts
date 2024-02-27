@@ -47,7 +47,7 @@ const { _config, config } = defineConfig({
           allowedOrigins: ['*'],
         },
 
-        memory: 5120,
+        memory: 3008,
 
         region: process.env.SERVER_REGION,
 
