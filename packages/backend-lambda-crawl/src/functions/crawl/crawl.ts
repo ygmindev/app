@@ -1,5 +1,4 @@
 import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
-import { LAMBDA_PLUGIN } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import { ConcurrentQueue } from '@lib/shared/core/utils/ConcurrentQueue/ConcurrentQueue';
 import { runWithRetry } from '@lib/shared/core/utils/runWithRetry/runWithRetry';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
@@ -112,9 +111,7 @@ export const main = createLambdaHandler<{
 
               await runWithRetry(async () => screen.open(url), { delay: 1000, retries: 5 });
 
-              const accordions = await screen.findAll({
-                value: '.accordion-title-container',
-              });
+              const accordions = await screen.findAll({ value: '.accordion-title-container' });
               for (const accordion of accordions) {
                 try {
                   await accordion.press();
@@ -325,8 +322,6 @@ export const main = createLambdaHandler<{
                 });
               }
 
-              await itemQueue.run();
-
               // images
               const thumbnails = await screen.findAll({ value: '.mediagallery__imgblock' });
               let i = 1;
@@ -343,12 +338,7 @@ export const main = createLambdaHandler<{
                   row.Page = pageIndex + 1;
                   const rowToAdd =
                     i > 1
-                      ? {
-                          Count: row.Count,
-                          Extra: row.Extra,
-                          Handle: row.Handle,
-                          Page: row.Page,
-                        }
+                      ? { Count: row.Count, Extra: row.Extra, Handle: row.Handle, Page: row.Page }
                       : row;
                   rowToAdd['Image Src'] = src;
                   rowToAdd['Image Position'] = i;
@@ -357,8 +347,6 @@ export const main = createLambdaHandler<{
                 }
               }
               info(`Adding item: ${url}`);
-
-              itemQueue.clear();
 
               if (result) {
                 if (result.length > 0 && count % UPLOAD_SIZE === 0) {
@@ -392,5 +380,4 @@ export const main = createLambdaHandler<{
       statusCode: HTTP_STATUS_CODE.SUCCESS,
     };
   },
-  plugins: [LAMBDA_PLUGIN.AUTHENTICATION],
 });
