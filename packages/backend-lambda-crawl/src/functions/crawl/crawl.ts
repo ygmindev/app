@@ -320,6 +320,8 @@ export const main = createLambdaHandler<{
                 });
               }
 
+              await itemQueue.run();
+
               // images
               const thumbnails = await screen.findAll({ value: '.mediagallery__imgblock' });
               let i = 1;

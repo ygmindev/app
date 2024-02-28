@@ -195,7 +195,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1708908656787-2024-02-26T00:50:56.787Z/custom.zip"
+                "S3Key": "serverless/serverless/production/1709066222950-2024-02-27T20:37:02.950Z/custom.zip"
               },
               "LayerName": "custom",
               "CompatibleRuntimes": [
@@ -211,13 +211,16 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1708995325631-2024-02-27T00:55:25.631Z/crawl.zip"
+                "S3Key": "serverless/serverless/production/1709066222950-2024-02-27T20:37:02.950Z/crawl.zip"
               },
               "Handler": "src/functions/crawl/crawl.main",
               "Runtime": "nodejs18.x",
               "FunctionName": "serverless-production-crawl",
               "MemorySize": 3008,
               "Timeout": 900,
+              "EphemeralStorage": {
+                "Size": 1024
+              },
               "Environment": {
                 "Variables": {
                   "ENV_PLATFORM": "node"
@@ -246,13 +249,16 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/production/1708995325631-2024-02-27T00:55:25.631Z/ping.zip"
+                "S3Key": "serverless/serverless/production/1709066222950-2024-02-27T20:37:02.950Z/ping.zip"
               },
               "Handler": "src/functions/ping/ping.main",
               "Runtime": "nodejs18.x",
               "FunctionName": "serverless-production-ping",
               "MemorySize": 3008,
               "Timeout": 900,
+              "EphemeralStorage": {
+                "Size": 1024
+              },
               "Environment": {
                 "Variables": {
                   "ENV_PLATFORM": "node"
@@ -478,7 +484,7 @@
           },
           "CustomLambdaLayerS3Key": {
             "Description": "Current Lambda layer S3Key",
-            "Value": "serverless/serverless/production/1708908656787-2024-02-26T00:50:56.787Z/custom.zip",
+            "Value": "serverless/serverless/production/1709066222950-2024-02-27T20:37:02.950Z/custom.zip",
             "Export": {
               "Name": "sls-serverless-production-CustomLambdaLayerS3Key"
             }
@@ -720,6 +726,7 @@
     "pluginsData": {},
     "functions": {
       "crawl": {
+        "ephemeralStorageSize": 1024,
         "events": [
           {
             "httpApi": {
@@ -744,6 +751,7 @@
         "vpc": {}
       },
       "ping": {
+        "ephemeralStorageSize": 1024,
         "events": [
           {
             "httpApi": {
@@ -786,8 +794,7 @@
             "artifact": "/Users/yoongeemin/Developer/Projects/app/packages/backend-lambda-crawl/.serverless/custom.zip"
           },
           "path": "./.build/layers",
-          "retain": true,
-          "artifactAlreadyUploaded": true
+          "retain": true
         }
       },
       "package": {
@@ -810,7 +817,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/serverless/production/1708995325631-2024-02-27T00:55:25.631Z",
+    "artifactDirectoryName": "serverless/serverless/production/1709066222950-2024-02-27T20:37:02.950Z",
     "artifact": ""
   }
 }

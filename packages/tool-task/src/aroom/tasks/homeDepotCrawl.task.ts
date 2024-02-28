@@ -54,91 +54,91 @@ const CATEGORIES: Array<{
   //   link: 'https://www.homedepot.com/b/Hardware-Fasteners-Screws/N-5yc1vZc2b0',
   //   maxItems: 100,
   // },
-  {
-    category: 'Concrete Mix',
-    link: 'https://www.homedepot.com/b/Building-Materials-Concrete-Cement-Masonry-Concrete-Mix/N-5yc1vZcdpt',
-    maxItems: 17,
-  },
-  {
-    category: 'Mortar Mix',
-    link: 'https://www.homedepot.com/b/Building-Materials-Concrete-Cement-Masonry-Mortar-Mix/N-5yc1vZcdq4',
-    maxItems: 11,
-  },
+  // {
+  //   category: 'Concrete Mix',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Concrete-Cement-Masonry-Concrete-Mix/N-5yc1vZcdpt',
+  //   maxItems: 17,
+  // },
+  // {
+  //   category: 'Mortar Mix',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Concrete-Cement-Masonry-Mortar-Mix/N-5yc1vZcdq4',
+  //   maxItems: 11,
+  // },
   // {
   //   category: 'Stucco Mix',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Concrete-Cement-Masonry-Stucco-Stucco-Mix/N-5yc1vZ2fkp5ot',
   //   maxItems: 24,
   // },
-  {
-    category: 'Concrete Tools',
-    link: 'https://www.homedepot.com/b/Building-Materials-Concrete-Cement-Masonry-Concrete-Tools/N-5yc1vZarh8',
-    maxItems: 100,
-  },
-  {
-    category: 'Ventilations',
-    link: 'https://www.homedepot.com/b/Building-Materials-Ventilation/N-5yc1vZc4mr?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
-    maxItems: 100,
-  },
-  {
-    category: 'Gutters',
-    link: 'https://www.homedepot.com/b/Building-Materials-Gutter-Systems/N-5yc1vZardx',
-    maxItems: 100,
-  },
-  {
-    category: 'Vinyl Fencing ',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Fencing-Gates-Vinyl-Fencing/N-5yc1vZc3mq',
-    maxItems: 100,
-  },
-  {
-    category: 'Compopsite Fencing',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Fencing-Gates-Composite-Fencing/N-5yc1vZc5ug',
-    maxItems: 100,
-  },
-  {
-    category: 'Metal fencing',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Fencing-Gates-Metal-Fencing/N-5yc1vZc3le',
-    maxItems: 100,
-  },
-  {
-    category: 'Composite Decking Boards',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Boards-Composite-Decking-Boards/N-5yc1vZc5mb',
-    maxItems: 100,
-  },
-  {
-    category: 'Wood Decking Board',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Boards-Wood-Decking-Boards/N-5yc1vZc80m',
-    maxItems: 69,
-  },
-  {
-    category: 'PVC Deck Board',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Boards-PVC-Deck-Boards/N-5yc1vZc5mu',
-    maxItems: 24,
-  },
-  {
-    category: 'Wood Siding',
-    link: 'https://www.homedepot.com/b/Building-Materials-Siding-Wood-Siding/N-5yc1vZc8aj',
-    maxItems: 38,
-  },
+  // {
+  //   category: 'Concrete Tools',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Concrete-Cement-Masonry-Concrete-Tools/N-5yc1vZarh8',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Ventilations',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Ventilation/N-5yc1vZc4mr?catStyle=ShowProducts&sortorder=desc&sortby=topsellers',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Gutters',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Gutter-Systems/N-5yc1vZardx',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Vinyl Fencing ',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Fencing-Gates-Vinyl-Fencing/N-5yc1vZc3mq',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Compopsite Fencing',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Fencing-Gates-Composite-Fencing/N-5yc1vZc5ug',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Metal fencing',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Fencing-Gates-Metal-Fencing/N-5yc1vZc3le',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Composite Decking Boards',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Boards-Composite-Decking-Boards/N-5yc1vZc5mb',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Wood Decking Board',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Boards-Wood-Decking-Boards/N-5yc1vZc80m',
+  //   maxItems: 69,
+  // },
+  // {
+  //   category: 'PVC Deck Board',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Boards-PVC-Deck-Boards/N-5yc1vZc5mu',
+  //   maxItems: 24,
+  // },
+  // {
+  //   category: 'Wood Siding',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Siding-Wood-Siding/N-5yc1vZc8aj',
+  //   maxItems: 38,
+  // },
   // {
   //   category: 'Vinyl Siding ',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Siding-Vinyl-Siding/N-5yc1vZc8a6',
   //   maxItems: 81,
   // },
-  {
-    category: 'Composite Siding ',
-    link: 'https://www.homedepot.com/b/Building-Materials-Siding-Composite-Siding/N-5yc1vZc8ik',
-    maxItems: 97,
-  },
-  {
-    category: 'Stone Venner',
-    link: 'https://www.homedepot.com/b/Building-Materials-Siding-Stone-Veneer-Siding/N-5yc1vZc85v',
-    maxItems: 100,
-  },
-  {
-    category: 'Deck Railing System',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Railings-Deck-Railing-Systems/N-5yc1vZc5px',
-    maxItems: 100,
-  },
+  // {
+  //   category: 'Composite Siding ',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Siding-Composite-Siding/N-5yc1vZc8ik',
+  //   maxItems: 97,
+  // },
+  // {
+  //   category: 'Stone Venner',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Siding-Stone-Veneer-Siding/N-5yc1vZc85v',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Deck Railing System',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Railings-Deck-Railing-Systems/N-5yc1vZc5px',
+  //   maxItems: 100,
+  // },
   // {
   //   category: 'Fiber Siding',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Siding-Fiber-Cement-Siding/N-5yc1vZc8af',
@@ -149,46 +149,46 @@ const CATEGORIES: Array<{
   //   link: 'https://www.homedepot.com/b/Building-Materials-Siding-Siding-Trim/N-5yc1vZaq0n',
   //   maxItems: 189,
   // },
-  {
-    category: 'Siding Accessories',
-    link: 'https://www.homedepot.com/b/Building-Materials-Siding-Siding-Accessories/N-5yc1vZ2fkp9fi',
-    maxItems: 100,
-  },
-  {
-    category: 'Moulding',
-    link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Moulding/N-5yc1vZara1',
-    maxItems: 100,
-  },
+  // {
+  //   category: 'Siding Accessories',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Siding-Siding-Accessories/N-5yc1vZ2fkp9fi',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Moulding',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Moulding/N-5yc1vZara1',
+  //   maxItems: 100,
+  // },
   // {
   //   category: 'Baseboards',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Moulding-Baseboard/N-5yc1vZcbjp',
   //   maxItems: 100,
   // },
-  {
-    category: 'Stair Parts',
-    link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Stair-Parts/N-5yc1vZbcro',
-    maxItems: 100,
-  },
-  {
-    category: 'Stair Railings',
-    link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Stair-Parts-Stair-Railings/N-5yc1vZbcrw',
-    maxItems: 100,
-  },
-  {
-    category: 'Ceiling Tiles',
-    link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Tiles/N-5yc1vZc58l',
-    maxItems: 100,
-  },
-  {
-    category: 'Ceiling Grids',
-    link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Grids/N-5yc1vZc596',
-    maxItems: 48,
-  },
-  {
-    category: 'Ceiling Light Panels & Louvers ',
-    link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Light-Panels/N-5yc1vZc58p',
-    maxItems: 26,
-  },
+  // {
+  //   category: 'Stair Parts',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Stair-Parts/N-5yc1vZbcro',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Stair Railings',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Stair-Parts-Stair-Railings/N-5yc1vZbcrw',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Ceiling Tiles',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Tiles/N-5yc1vZc58l',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Ceiling Grids',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Grids/N-5yc1vZc596',
+  //   maxItems: 48,
+  // },
+  // {
+  //   category: 'Ceiling Light Panels & Louvers ',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Light-Panels/N-5yc1vZc58p',
+  //   maxItems: 26,
+  // },
   // {
   //   category: 'Ceiling Tile tolls',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Ceilings-Ceiling-Tile-Tools/N-5yc1vZc59f',
@@ -199,21 +199,21 @@ const CATEGORIES: Array<{
   //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-Plexiglass/N-5yc1vZc9x2',
   //   maxItems: 100,
   // },
-  {
-    category: 'Corrugated Plastic Sheets',
-    link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-Corrugated-Plastic-Sheets/N-5yc1vZcbtu',
-    maxItems: 65,
-  },
+  // {
+  //   category: 'Corrugated Plastic Sheets',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-Corrugated-Plastic-Sheets/N-5yc1vZcbtu',
+  //   maxItems: 65,
+  // },
   // {
   //   category: 'Polycarbonate',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-Polycarbonate-Sheets/N-5yc1vZc9ws',
   //   maxItems: 100,
   // },
-  {
-    category: 'Hdpe Sheets',
-    link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-HDPE-Sheets/N-5yc1vZ2fkpddj',
-    maxItems: 3,
-  },
+  // {
+  //   category: 'Hdpe Sheets',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-HDPE-Sheets/N-5yc1vZ2fkpddj',
+  //   maxItems: 3,
+  // },
   // {
   //   category: 'Glass plastic Rubber Sheets ',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-Rubber-Sheets/N-5yc1vZcj87',
