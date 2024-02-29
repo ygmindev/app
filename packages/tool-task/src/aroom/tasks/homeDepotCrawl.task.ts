@@ -9,6 +9,11 @@ const CATEGORIES: Array<{
   link: string;
   maxItems?: number;
 }> = [
+  {
+    category: 'Building Materials',
+    link: 'https://www.homedepot.com/b/Building-Materials/N-5yc1vZaqnsZbwo5l',
+    maxItems: 5000,
+  },
   // {
   //   category: 'Roofing & Attic',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Ventilation-Roofing-Attic-Ventilation/N-5yc1vZc663',
@@ -219,71 +224,71 @@ const CATEGORIES: Array<{
   //   link: 'https://www.homedepot.com/b/Building-Materials-Glass-Plastic-Sheets-Rubber-Sheets/N-5yc1vZcj87',
   //   maxItems: 100,
   // },
-  {
-    category: 'Deck Railings ',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Railings/N-5yc1vZc5i7',
-    maxItems: 100,
-  },
-  {
-    category: 'Wall Paneling',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Boards-Planks-Panels-Wall-Paneling/N-5yc1vZbqp3',
-    maxItems: 100,
-  },
+  // {
+  //   category: 'Deck Railings ',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Decking-Deck-Railings/N-5yc1vZc5i7',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Wall Paneling',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Boards-Planks-Panels-Wall-Paneling/N-5yc1vZbqp3',
+  //   maxItems: 100,
+  // },
   // {
   //   category: 'Hardwood Plywood',
   //   link: 'https://www.homedepot.com/b/Lumber-Composites-Plywood-Hardwood-Plywood/N-5yc1vZc7r1',
   //   maxItems: 12,
   // },
-  {
-    category: 'Sheathing Plywood',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Plywood-Sheathing-Plywood/N-5yc1vZc7q5',
-    maxItems: 17,
-  },
+  // {
+  //   category: 'Sheathing Plywood',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Plywood-Sheathing-Plywood/N-5yc1vZc7q5',
+  //   maxItems: 17,
+  // },
   // {
   //   category: 'MDF',
   //   link: 'https://www.homedepot.com/b/Lumber-Composites-Plywood-MDF/N-5yc1vZbtn1',
   //   maxItems: 5,
   // },
-  {
-    category: 'Sanded Plywood',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Plywood-Sanded-Plywood/N-5yc1vZc7qk',
-    maxItems: 10,
-  },
-  {
-    category: 'Roof Shingles',
-    link: 'https://www.homedepot.com/b/Building-Materials-Roofing-Roof-Shingles/N-5yc1vZc5rb',
-    maxItems: 19,
-  },
-  {
-    category: 'Roof Panels',
-    link: 'https://www.homedepot.com/b/Building-Materials-Roofing-Roof-Panels/N-5yc1vZaq4r',
-    maxItems: 70,
-  },
-  {
-    category: 'Roof Flashing',
-    link: 'https://www.homedepot.com/b/Building-Materials-Roofing-Roof-Flashing-Roll-Flashing/N-5yc1vZas6d',
-    maxItems: 37,
-  },
-  {
-    category: 'Cement Board',
-    link: 'https://www.homedepot.com/b/Building-Materials-Drywall-Cement-Boards/N-5yc1vZcb0f',
-    maxItems: 11,
-  },
-  {
-    category: 'Corner Bead',
-    link: 'https://www.homedepot.com/b/Building-Materials-Drywall-Drywall-Corner-Bead/N-5yc1vZc7qn',
-    maxItems: 67,
-  },
-  {
-    category: 'Drywall Tools',
-    link: 'https://www.homedepot.com/b/Building-Materials-Drywall-Drywall-Tools/N-5yc1vZaro4',
-    maxItems: 100,
-  },
-  {
-    category: 'Drywall Repair',
-    link: 'https://www.homedepot.com/b/Building-Materials-Drywall-Drywall-Repair-Tools/N-5yc1vZc7r0',
-    maxItems: 56,
-  },
+  // {
+  //   category: 'Sanded Plywood',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Plywood-Sanded-Plywood/N-5yc1vZc7qk',
+  //   maxItems: 10,
+  // },
+  // {
+  //   category: 'Roof Shingles',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Roofing-Roof-Shingles/N-5yc1vZc5rb',
+  //   maxItems: 19,
+  // },
+  // {
+  //   category: 'Roof Panels',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Roofing-Roof-Panels/N-5yc1vZaq4r',
+  //   maxItems: 70,
+  // },
+  // {
+  //   category: 'Roof Flashing',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Roofing-Roof-Flashing-Roll-Flashing/N-5yc1vZas6d',
+  //   maxItems: 37,
+  // },
+  // {
+  //   category: 'Cement Board',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Drywall-Cement-Boards/N-5yc1vZcb0f',
+  //   maxItems: 11,
+  // },
+  // {
+  //   category: 'Corner Bead',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Drywall-Drywall-Corner-Bead/N-5yc1vZc7qn',
+  //   maxItems: 67,
+  // },
+  // {
+  //   category: 'Drywall Tools',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Drywall-Drywall-Tools/N-5yc1vZaro4',
+  //   maxItems: 100,
+  // },
+  // {
+  //   category: 'Drywall Repair',
+  //   link: 'https://www.homedepot.com/b/Building-Materials-Drywall-Drywall-Repair-Tools/N-5yc1vZc7r0',
+  //   maxItems: 56,
+  // },
 ];
 
 const crawl: TaskParamsModel<unknown> = {
@@ -300,7 +305,7 @@ const crawl: TaskParamsModel<unknown> = {
       for (const row of CATEGORIES) {
         const { category, link, maxItems } = row;
         const maxPages = maxItems ? Math.ceil(maxItems / PAGE_SIZE) : undefined;
-        for (const pageIndex of range(0, maxPages ?? 6)) {
+        for (const pageIndex of range(32, (maxPages ?? 6) + 30)) {
           for (const start of range(0, Math.ceil(PAGE_SIZE / BATCH_SIZE))) {
             console.warn(`@@@ ${category} ${pageIndex} ${start}`);
             try {

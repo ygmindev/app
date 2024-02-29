@@ -22,7 +22,6 @@ import { debug } from '@lib/shared/logging/utils/logger/logger';
 import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
-import { launch as launchBase } from 'puppeteer';
 import { type ElementHandle, launch } from 'puppeteer-core';
 // import puppeteer from 'puppeteer';
 // import puppeteer from 'puppeteer-extra';
@@ -37,7 +36,8 @@ export const _withScreen = async (
   ]: _WithScreenParamsModel
 ): Promise<_WithScreenModel> => {
   const isProduction = process.env.NODE_ENV === 'production';
-  const browser = await (isProduction ? launch : launchBase)({
+  // const browser = await (isProduction ? launch : launchBase)({
+  const browser = await launch({
     args: [
       ...(isProduction ? chromium.args : []),
       '--disable-dev-shm-usage',

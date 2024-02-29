@@ -5,6 +5,7 @@ import { Otp } from '@lib/backend/auth/resources/Otp/Otp';
 import { Bank } from '@lib/backend/billing/resources/Bank/Bank';
 import { Card } from '@lib/backend/billing/resources/Card/Card';
 import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethod';
+import { Product } from '@lib/backend/billing/resources/Product/Product';
 import { Chat } from '@lib/backend/chat/resources/Chat/Chat';
 import { Group } from '@lib/backend/group/resources/Group/Group';
 import { Socket } from '@lib/backend/http/resources/Socket/Socket';
@@ -31,6 +32,7 @@ const { _config, config } = defineConfig({
       Group,
       Otp,
       PaymentMethod,
+      Product,
       Socket,
       User,
       Utility,

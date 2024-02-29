@@ -1059,6 +1059,10 @@ type Mutation {
   OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
   OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
   PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
+  ProductCreate(input: ProductCreateInput): ProductCreateOutput
+  ProductCreateMany(input: ProductCreateManyInput): ProductCreateManyOutput
+  ProductRemove(input: ProductRemoveInput): ProductRemoveOutput
+  ProductUpdate(input: ProductUpdateInput): ProductUpdateOutput
   SignInCreate(input: SignInCreateInput): SignInCreateOutput
   SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
   SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
@@ -1335,6 +1339,171 @@ type PriceTier {
   timing: String
 }
 
+type Product {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ProductCreateFormInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ProductCreateInput {
+  form: ProductCreateFormInput
+  root: String
+}
+
+input ProductCreateManyFormInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ProductCreateManyInput {
+  form: [ProductCreateManyFormInput]
+  root: String
+}
+
+type ProductCreateManyOutput {
+  result: Product
+}
+
+type ProductCreateOutput {
+  result: Product
+}
+
+type ProductGetConnectionConnection {
+  edges: [ProductGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type ProductGetConnectionEdge {
+  cursor: String
+  node: Product
+}
+
+input ProductGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ProductInput]
+  resourceValue: ProductInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ProductGetConnectionInput {
+  filter: [ProductGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type ProductGetConnectionOutput {
+  result: ProductGetConnectionConnection
+}
+
+input ProductGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ProductInput]
+  resourceValue: ProductInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ProductGetInput {
+  filter: [ProductGetFilterInput]
+  root: String
+}
+
+input ProductGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ProductInput]
+  resourceValue: ProductInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ProductGetManyInput {
+  filter: [ProductGetManyFilterInput]
+  root: String
+}
+
+type ProductGetManyOutput {
+  result: [Product]
+}
+
+type ProductGetOutput {
+  result: Product
+}
+
+input ProductInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input ProductRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ProductInput]
+  resourceValue: ProductInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ProductRemoveInput {
+  filter: [ProductRemoveFilterInput]
+  root: String
+}
+
+type ProductRemoveOutput {
+  result: Product
+}
+
+input ProductUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ProductInput]
+  resourceValue: ProductInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ProductUpdateInput {
+  filter: [ProductUpdateFilterInput]
+  root: String
+  update: ProductUpdateUpdateInput
+}
+
+type ProductUpdateOutput {
+  result: Product
+}
+
+input ProductUpdateUpdateInput {
+  _id: String
+  created: DateTime
+  name: String
+}
+
 type Query {
   AccessGet(input: AccessGetInput): AccessGetOutput
   AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
@@ -1358,6 +1527,11 @@ type Query {
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
   PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
+  ProductGet(input: ProductGetInput): ProductGetOutput
+  ProductGetConnection(input: ProductGetConnectionInput): ProductGetConnectionOutput
+  ProductGetMany(input: ProductGetManyInput): ProductGetManyOutput
+  SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
+  SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
   SocketGet(input: SocketGetInput): SocketGetOutput
   SocketGetConnection(input: SocketGetConnectionInput): SocketGetConnectionOutput
   SocketGetMany(input: SocketGetManyInput): SocketGetManyOutput
@@ -1451,6 +1625,58 @@ input SignInUsernameCreateInput {
 
 type SignInUsernameCreateOutput {
   result: SignIn
+}
+
+type Snapshot {
+  images: [String]
+  name: String
+}
+
+input SnapshotGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [SnapshotInput]
+  resourceValue: SnapshotInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input SnapshotGetInput {
+  filter: [SnapshotGetFilterInput]
+  root: String
+}
+
+input SnapshotGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [SnapshotInput]
+  resourceValue: SnapshotInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input SnapshotGetManyInput {
+  filter: [SnapshotGetManyFilterInput]
+  root: String
+}
+
+type SnapshotGetManyOutput {
+  result: [Snapshot]
+}
+
+type SnapshotGetOutput {
+  result: Snapshot
+}
+
+input SnapshotInput {
+  images: [String]
+  name: String
 }
 
 type Socket {
