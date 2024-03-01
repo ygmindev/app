@@ -4,6 +4,7 @@ import { type ThemeColorPropsModel } from '@lib/frontend/style/style.models';
 
 export type NotificationModel = Pick<TitlePropsModel, 'description' | 'icon'> &
   ThemeColorPropsModel & {
+    duration?: number;
     id?: string;
     isInfinite?: boolean;
     title?: TranslatableTextModel;

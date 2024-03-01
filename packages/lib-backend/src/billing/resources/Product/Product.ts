@@ -1,6 +1,10 @@
+import { Pricing } from '@lib/backend/billing/resources/Pricing/Pricing';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
+import { withEmbeddedResourceField } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { PRICING_RESOURCE_NAME } from '@lib/shared/billing/resources/Pricing/Pricing.constants';
+import { type PricingModel } from '@lib/shared/billing/resources/Pricing/Pricing.models';
 import { PRODUCT_RESOURCE_NAME } from '@lib/shared/billing/resources/Product/Product.constants';
 import {
   type ProductFormModel,
@@ -12,6 +16,13 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 export class Product extends EntityResource implements ProductModel {
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   name!: string;
+
+  @withEmbeddedResourceField({
+    Resource: () => Pricing,
+    isRepository: true,
+    root: PRODUCT_RESOURCE_NAME,
+  })
+  [PRICING_RESOURCE_NAME]?: Array<PricingModel>;
 }
 
 @withEntity({ name: `${PRODUCT_RESOURCE_NAME}Form` })

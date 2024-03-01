@@ -25,7 +25,7 @@ export const Tile: LFCModel<TilePropsModel> = ({
       round>
       {title && (
         <PressableTitle
-          border={DIRECTION.BOTTOM}
+          border={!!children && DIRECTION.BOTTOM}
           fontStyle={FONT_STYLE.TITLE}
           icon={icon}
           image={image}

@@ -16,6 +16,7 @@ import {
 import { Store } from '@lib/frontend/state/utils/Store/Store';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { type ReactElement, Suspense } from 'react';
 import { cloneElement, createContext, useMemo } from 'react';
 
@@ -36,27 +37,28 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
     [context?.state?.cookies, context?.state?.initialState],
   );
   const providers = useMemo<Array<ReactElement>>(
-    () => [
-      ...(additionalProviders ?? []),
-      <ContextProvider value={context} />,
-      <TrackingProvider />,
-      <QueryProvider value={context?.query} />,
-      <AuthProvider />,
-      <AsyncBoundary />,
-      <StyleProvider />,
-      <LocaleProvider value={context?.locale} />,
-      <AppProvider />,
-      <store.Provider
-        value={{
-          ...context?.state,
-          actionContext,
-          defaultStateContext,
-          persistedStateContext,
-          store,
-        }}
-      />,
-      <Suspense />,
-    ],
+    () =>
+      filterNil([
+        ...(additionalProviders ?? []),
+        <AsyncBoundary />,
+        <ContextProvider value={context} />,
+        <TrackingProvider />,
+        <QueryProvider value={context?.query} />,
+        <AuthProvider />,
+        <StyleProvider />,
+        <LocaleProvider value={context?.locale} />,
+        <AppProvider />,
+        <store.Provider
+          value={{
+            ...context?.state,
+            actionContext,
+            defaultStateContext,
+            persistedStateContext,
+            store,
+          }}
+        />,
+        <Suspense />,
+      ]),
     [additionalProviders, context],
   );
   return <>{providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;

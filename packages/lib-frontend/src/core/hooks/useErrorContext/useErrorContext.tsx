@@ -24,17 +24,11 @@ export const useErrorContext = (): UseErrorContextModel => {
           break;
         }
         case HTTP_STATUS_CODE.NETWORK_CONNECT_TIMEOUT: {
-          errorContext = {
-            description: ({ t }) => t('core:errorOffline'),
-            icon: 'offline',
-          };
+          errorContext = { description: ({ t }) => t('core:errorOffline'), icon: 'offline' };
           break;
         }
         case HTTP_STATUS_CODE.UNAUTHORIZED: {
-          errorContext = {
-            description: ({ t }) => t('core:errorUnauthorized'),
-            icon: 'lock',
-          };
+          errorContext = { description: ({ t }) => t('core:errorUnauthorized'), icon: 'lock' };
           break;
         }
         default: {

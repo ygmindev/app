@@ -52,9 +52,7 @@ export const Title: LFCModel<TitlePropsModel> = ({
         </Skeleton>
       )}
 
-      <Wrapper
-        flex
-        s={THEME_SIZE.SMALL}>
+      <Wrapper s={THEME_SIZE.SMALL}>
         {title && (
           <Skeleton
             elementState={elementState}

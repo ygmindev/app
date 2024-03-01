@@ -7,5 +7,7 @@ export const APP_REDUCER: AppReducerModel = {
     dimension: { height: undefined, width: undefined },
 
     isLoading: false,
+
+    isOffline: false,
   },
 };

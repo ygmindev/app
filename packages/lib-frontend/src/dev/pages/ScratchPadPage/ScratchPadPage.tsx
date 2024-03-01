@@ -1,40 +1,41 @@
-import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Tile } from '@lib/frontend/core/components/Tile/Tile';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { validateNotEmpty } from '@lib/frontend/data/utils/validateNotEmpty/validateNotEmpty';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
-import { useWebsocket } from '@lib/frontend/http/hooks/useWebsocket/useWebsocket';
-import { SpecificationInputForm } from '@lib/frontend/openapi/components/SpecificationInputForm/SpecificationInputForm';
 // import { SpecificationDetail } from '@lib/frontend/openapi/components/SpecificationDetail/SpecificationDetail';
 // import { SpecificationForm } from '@lib/frontend/openapi/containers/SpecificationForm/SpecificationForm';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { deliverySpecification } from '@lib/shared/openapi/specifications/deliverySpecification/deliverySpecification';
+import { type ProductModel } from '@lib/shared/billing/resources/Product/Product.models';
+
+const products: Array<ProductModel> = [
+  {
+    Pricing: [{ _id: '111', created: new Date(), price: 111 }],
+    _id: '111',
+    created: new Date(),
+    name: '111',
+  },
+
+  {
+    Pricing: [{ _id: '222', created: new Date(), price: 222 }],
+    _id: '222',
+    created: new Date(),
+    name: '222',
+  },
+];
 
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { send } = useWebsocket();
   return (
     <Wrapper
       {...wrapperProps}
       flex
-      p>
-      <Button onPress={() => send('test message')}>Send</Button>
-
-      {/* <CheckoutButton
-        price={{
-          currency: 'usd',
-          value: 123,
-        }}
-      /> */}
-
-      <SpecificationInputForm
-        flex
-        specification={deliverySpecification}
-        validators={{
-          from: validateNotEmpty,
-          to: validateNotEmpty,
-        }}
-      />
+      p
+      s>
+      {products.map((product) => (
+        <Tile
+          key={product._id}
+          title={product.name}></Tile>
+      ))}
     </Wrapper>
   );
 };

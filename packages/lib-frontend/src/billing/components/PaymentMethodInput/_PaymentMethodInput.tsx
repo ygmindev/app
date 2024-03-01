@@ -35,9 +35,10 @@ export const _PaymentMethodInput: RLFCModel<
         ...STRIPE_ELEMENTS_STYLE(theme),
         ...(items
           ? {
-              amount: price?.value,
+              // currency: price?.currency,
+              amount: price,
+              // amount: price?.value,
               confirm: true,
-              currency: price?.currency,
               mode: 'payment',
               setup_future_usage: 'off_session',
             }

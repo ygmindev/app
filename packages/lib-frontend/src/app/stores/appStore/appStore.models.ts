@@ -5,6 +5,7 @@ import { type EmptyObjectModel } from '@lib/shared/core/core.models';
 export type AppStateModel = {
   dimension: DimensionModel;
   isLoading?: boolean;
+  isOffline?: boolean;
 };
 
 export type AppActionsParamsModel = EmptyObjectModel;

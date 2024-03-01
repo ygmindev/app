@@ -20,6 +20,7 @@ export const Notifications: SFCModel<NotificationsPropsModel> = () => {
         pBottom
         position={SHAPE_POSITION.ABSOLUTE}
         right={0}
+        s
         width={theme.notification.width}
         zIndex>
         <Exitable>

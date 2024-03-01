@@ -1,6 +1,6 @@
 import {
   ANIMATION_STATES_APPEAR_SCALABLE,
-  ANIMATION_STATES_SCALABLE,
+  ANIMATION_STATES_APPEARABLE,
 } from '@lib/frontend/animation/animation.constants';
 import { type AppearablePropsModel } from '@lib/frontend/animation/components/Appearable/Appearable.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -18,7 +18,7 @@ export const Appearable: LFCModel<AppearablePropsModel> = ({
   <Wrapper
     {...props}
     animation={{
-      states: isScalable ? ANIMATION_STATES_APPEAR_SCALABLE : ANIMATION_STATES_SCALABLE,
+      states: isScalable ? ANIMATION_STATES_APPEAR_SCALABLE : ANIMATION_STATES_APPEARABLE,
       ...animation,
     }}
     elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
