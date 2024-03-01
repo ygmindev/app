@@ -82,7 +82,11 @@ export const Title: LFCModel<TitlePropsModel> = ({
         )}
       </Wrapper>
 
-      {rightElement && <Skeleton elementState={elementState}>{rightElement}</Skeleton>}
+      {rightElement && (
+        <Wrapper mLeft="auto">
+          <Skeleton elementState={elementState}>{rightElement}</Skeleton>
+        </Wrapper>
+      )}
     </Wrapper>
   );
 };
