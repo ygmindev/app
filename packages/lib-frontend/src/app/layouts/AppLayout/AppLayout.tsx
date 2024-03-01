@@ -27,6 +27,7 @@ export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props })
 
           <Wrapper
             flex
+            p
             position={SHAPE_POSITION.RELATIVE}>
             {children}
 

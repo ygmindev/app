@@ -1339,13 +1339,31 @@ type PriceTier {
   timing: String
 }
 
+type Pricing {
+  Product: Product
+  _id: String
+  created: DateTime
+  frequency: String
+  price: Float
+}
+
+input PricingInput {
+  Product: ProductInput
+  _id: String
+  created: DateTime
+  frequency: String
+  price: Float
+}
+
 type Product {
+  Pricing: [Pricing]
   _id: String
   created: DateTime
   name: String
 }
 
 input ProductCreateFormInput {
+  Pricing: [PricingInput]
   _id: String
   created: DateTime
   name: String
@@ -1357,6 +1375,7 @@ input ProductCreateInput {
 }
 
 input ProductCreateManyFormInput {
+  Pricing: [PricingInput]
   _id: String
   created: DateTime
   name: String
@@ -1450,6 +1469,7 @@ type ProductGetOutput {
 }
 
 input ProductInput {
+  Pricing: [PricingInput]
   _id: String
   created: DateTime
   name: String
@@ -1499,6 +1519,7 @@ type ProductUpdateOutput {
 }
 
 input ProductUpdateUpdateInput {
+  Pricing: [PricingInput]
   _id: String
   created: DateTime
   name: String
