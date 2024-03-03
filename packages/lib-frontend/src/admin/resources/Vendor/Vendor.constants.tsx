@@ -22,7 +22,9 @@ export const VENDOR_RESOURCE_PARAMS = {
       fields: [{ id: '_id' }, { id: 'name' }],
       id: UTILITY_RESOURCE_NAME,
       renderer: ({ row, value }) => (
-        <Wrapper isRowAlign>
+        <Wrapper
+          isAlign
+          isRow>
           <ModalButton
             element={() => <UtilityTable root={row._id} />}
             icon="open"

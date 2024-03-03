@@ -8,7 +8,6 @@ import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/T
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE, DATA_TYPE_MORE } from '@lib/shared/data/data.constants';
-import { NUMBER_UNIT_TYPE } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type ReactElement, useMemo } from 'react';
@@ -39,8 +38,8 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
               );
 
             case DATA_TYPE.NUMBER:
-            case NUMBER_UNIT_TYPE.AMOUNT:
-            case NUMBER_UNIT_TYPE.RELATIVE_DATE:
+              // case NUMBER_UNIT_TYPE.AMOUNT:
+              // case NUMBER_UNIT_TYPE.RELATIVE_DATE:
               return (
                 <NumberRangeInput
                   beforeSubmit={async (value, field) =>
@@ -58,7 +57,6 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
                     ])
                   }
                   rangeType={NUMBER_RANGE_TYPE.RANGE}
-                  type={type === DATA_TYPE.NUMBER ? undefined : type}
                 />
               );
             default:

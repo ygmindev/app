@@ -132,6 +132,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         bottom={0}
         isAlign
         isRow
+        pRight={THEME_SIZE.SMALL}
         position={SHAPE_POSITION.ABSOLUTE}
         right={0}
         top={0}

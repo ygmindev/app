@@ -1,8 +1,8 @@
-import { type NumberUnitModel } from '@lib/frontend/data/data.models';
 import {
   type UseValueControlledModel,
   type UseValueControlledParamsModel,
 } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled.models';
+import { type NumberUnitModel } from '@lib/shared/data/utils/numberFormat/numberFormat.models';
 
 export type UseValueScaledParamsModel<
   TType extends number | Record<string, number>,

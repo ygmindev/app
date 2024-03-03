@@ -1,5 +1,3 @@
-import { type ReactElement } from 'react';
-
 import { type TranslatableOptionModel } from '@lib/frontend/core/core.models';
 import {
   type DataFormatterModel,
@@ -19,6 +17,7 @@ import { type FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type FormattableTypeModel } from '@lib/shared/data/data.models';
+import { type ReactElement } from 'react';
 
 export type UseTableParamsModel<TType> = _UseTableParamsModel<TType>;
 

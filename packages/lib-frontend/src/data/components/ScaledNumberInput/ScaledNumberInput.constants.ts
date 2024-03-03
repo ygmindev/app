@@ -1,6 +1,12 @@
 import { type TranslatableOptionModel } from '@lib/frontend/core/core.models';
-import { AMOUNT_UNIT, RELATIVE_DATE_UNIT } from '@lib/frontend/data/data.constants';
-import { type AmountUnitModel, type NumberUnitModel } from '@lib/frontend/data/data.models';
+import {
+  AMOUNT_UNIT,
+  RELATIVE_DATE_UNIT,
+} from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
+import {
+  type AmountUnitModel,
+  type NumberUnitModel,
+} from '@lib/shared/data/utils/numberFormat/numberFormat.models';
 
 export const AMOUNT_UNIT_OPTIONS = [
   { id: AMOUNT_UNIT.EXACT, label: ({ t }) => t('data:exact') },

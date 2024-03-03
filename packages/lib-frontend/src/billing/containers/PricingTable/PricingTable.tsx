@@ -1,7 +1,7 @@
-import { type LFCModel } from '@lib/frontend/core/core.models';
-import { PRICING_TABLE_PROPS } from '@lib/frontend/billing/containers/PricingTable/PricingTable.constants';
 import { type PricingTablePropsModel } from '@lib/frontend/billing/containers/PricingTable/PricingTable.models';
 import { usePricingResource } from '@lib/frontend/billing/hooks/usePricingResource/usePricingResource';
+import { PRICING_RESOURCE_PARAMS } from '@lib/frontend/billing/resources/Pricing/Pricing.constants';
+import { type LFCModel } from '@lib/frontend/core/core.models';
 import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import {
@@ -16,7 +16,7 @@ export const PricingTable: LFCModel<PricingTablePropsModel> = ({ ...props }) => 
   return (
     <ResourceTable<PricingModel, PricingFormModel, ProductModel>
       {...wrapperProps}
-      {...PRICING_TABLE_PROPS}
+      {...PRICING_RESOURCE_PARAMS}
       implementation={implementation}
     />
   );

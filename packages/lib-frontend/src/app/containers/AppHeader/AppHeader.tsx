@@ -22,7 +22,8 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
     <Wrapper
       {...wrapperProps}
       isFullWidth
-      position={SHAPE_POSITION.RELATIVE}>
+      position={SHAPE_POSITION.RELATIVE}
+      zIndex>
       <Wrapper
         border={DIRECTION.BOTTOM}
         height={theme.layout.header.height}
@@ -40,13 +41,16 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
       </Wrapper>
 
       <Appearable
-        bottom={0}
+        backgroundColor={THEME_COLOR_MORE.SURFACE}
+        backgroundRole={THEME_ROLE.MUTED}
+        border={DIRECTION.BOTTOM}
         isActive={isOffline}
         isScalable={false}
-        position={SHAPE_POSITION.ABSOLUTE}>
+        left={0}
+        position={SHAPE_POSITION.ABSOLUTE}
+        right={0}
+        top={theme.layout.header.height}>
         <Title
-          backgroundColor={THEME_COLOR_MORE.SURFACE}
-          backgroundRole={THEME_ROLE.MUTED}
           description={t('core:errorOffline')}
           icon="offline"
           isCenter

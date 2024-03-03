@@ -1,11 +1,10 @@
 import { type NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput.constants';
+import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/data.models';
+import { type NumberRangeModel } from '@lib/shared/data/resources/NumberRange/NumberRange.models';
 import {
-  type InputPropsModel,
-  type InputRefModel,
   type NumberUnitModel,
   type NumberUnitTypeModel,
-} from '@lib/frontend/data/data.models';
-import { type NumberRangeModel } from '@lib/shared/data/resources/NumberRange/NumberRange.models';
+} from '@lib/shared/data/utils/numberFormat/numberFormat.models';
 
 export type NumberRangeInputPropsModel<TType extends NumberUnitModel> =
   InputPropsModel<NumberRangeModel> & {

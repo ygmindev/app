@@ -4,15 +4,17 @@ import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import {
   AMOUNT_UNIT_OPTIONS,
-  RATE_UNIT_OPTIONS,
   RELATIVE_DATE_UNIT_OPTIONS,
 } from '@lib/frontend/data/components/ScaledNumberInput/ScaledNumberInput.constants';
 import { type ScaledNumberInputPropsModel } from '@lib/frontend/data/components/ScaledNumberInput/ScaledNumberInput.models';
-import { NUMBER_UNIT_TYPE } from '@lib/frontend/data/data.constants';
-import { type NumberUnitModel, type NumberUnitTypeModel } from '@lib/frontend/data/data.models';
 import { useValueScaled } from '@lib/frontend/data/hooks/useValueScaled/useValueScaled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { NUMBER_UNIT_TYPE } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
+import {
+  type NumberUnitModel,
+  type NumberUnitTypeModel,
+} from '@lib/shared/data/utils/numberFormat/numberFormat.models';
 import { type ReactElement } from 'react';
 
 export const unitOptions = <TType extends NumberUnitModel>(
@@ -21,9 +23,9 @@ export const unitOptions = <TType extends NumberUnitModel>(
   switch (type) {
     case NUMBER_UNIT_TYPE.AMOUNT:
       return AMOUNT_UNIT_OPTIONS as Array<TranslatableOptionModel<TType>>;
-    case NUMBER_UNIT_TYPE.RATE:
-      return RATE_UNIT_OPTIONS as Array<TranslatableOptionModel<TType>>;
-    case NUMBER_UNIT_TYPE.RELATIVE_DATE:
+      // case NUMBER_UNIT_TYPE.RATE:
+      //   return RATE_UNIT_OPTIONS as Array<TranslatableOptionModel<TType>>;
+      // case NUMBER_UNIT_TYPE.RELATIVE_DATE:
       return RELATIVE_DATE_UNIT_OPTIONS as Array<TranslatableOptionModel<TType>>;
     default:
       return [];
@@ -69,7 +71,7 @@ export const ScaledNumberInput = <TType extends NumberUnitModel>({
         },
         {
           element: (
-            <MenuInput<TType>
+            <MenuInput
               label={t('core:unit')}
               onChange={(v: TType) => {
                 unitSet(v);

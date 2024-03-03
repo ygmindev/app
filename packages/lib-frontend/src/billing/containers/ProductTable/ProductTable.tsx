@@ -1,7 +1,7 @@
-import { type LFCModel } from '@lib/frontend/core/core.models';
-import { PRODUCT_TABLE_PROPS } from '@lib/frontend/billing/containers/ProductTable/ProductTable.constants';
 import { type ProductTablePropsModel } from '@lib/frontend/billing/containers/ProductTable/ProductTable.models';
 import { useProductResource } from '@lib/frontend/billing/hooks/useProductResource/useProductResource';
+import { PRODUCT_RESOURCE_PARAMS } from '@lib/frontend/billing/resources/Product/Product.constants';
+import { type LFCModel } from '@lib/frontend/core/core.models';
 import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import {
@@ -15,7 +15,7 @@ export const ProductTable: LFCModel<ProductTablePropsModel> = ({ ...props }) => 
   return (
     <ResourceTable<ProductModel, ProductFormModel>
       {...wrapperProps}
-      {...PRODUCT_TABLE_PROPS}
+      {...PRODUCT_RESOURCE_PARAMS}
       implementation={implementation}
     />
   );

@@ -36,14 +36,13 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
                   options={options ?? []}
                 />
               );
-            case PROPERTY_TYPE.RESOURCE: {
+            case PROPERTY_TYPE.RESOURCE:
               return (
                 <TextInput
                   beforeSubmit={async (v) => ({ _id: v })}
                   label={labelF}
                 />
               );
-            }
             default:
               return options ? (
                 <MenuInput
