@@ -8,11 +8,16 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import {
+  THEME_COLOR,
+  THEME_COLOR_MORE,
+  THEME_ROLE,
+  THEME_SIZE,
+} from '@lib/frontend/style/style.constants';
 
 export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
   messages,
-  messagesSet,
+  onChange,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -29,7 +34,7 @@ export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
       width={theme.layout.width[THEME_SIZE.SMALL]}>
       <_ChatContainer
         backgroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN]}
-        backgroundColorPrimary={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.ACTIVE]}
+        backgroundColorPrimary={theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN]}
         backgroundColorSecondary={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED]}
         borderColor={theme.color.border}
         borderRadius={theme.shape.borderRadius[THEME_SIZE.MEDIUM]}
@@ -38,7 +43,7 @@ export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
         currentUser={currentUser ?? { _id: 'test' }}
         inputHeight={theme.shape.size[THEME_SIZE.MEDIUM]}
         messages={messages}
-        messagesSet={messagesSet}
+        onChange={onChange}
         placeholder={t('chat:typeMessage')}
         sendElement={({ handleSend, value }) => (
           <Button

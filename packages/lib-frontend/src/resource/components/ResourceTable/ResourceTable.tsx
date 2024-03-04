@@ -43,7 +43,9 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
     id,
     isHidden,
     label,
-    renderer,
+    // renderer:
+    //   renderer ??
+    //   (embeddedFields ? embeddedResourceRenderer({ fields: embeddedFields }) : undefined),
     width,
   })) as Array<TableColumnModel<PartialModel<TType>>>;
 

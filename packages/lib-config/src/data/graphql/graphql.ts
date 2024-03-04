@@ -8,7 +8,7 @@ import { authorize } from '@lib/backend/auth/utils/authorize/authorize';
 import { BankResolver } from '@lib/backend/billing/resources/Bank/BankResolver/BankResolver';
 import { CardResolver } from '@lib/backend/billing/resources/Card/CardResolver/CardResolver';
 import { PaymentMethodResolver } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver';
-import { ProductResolver } from '@lib/backend/billing/resources/Product/ProductResolver/ProductResolver';
+import { ProductResolver } from '@lib/backend/commerce/resources/Product/ProductResolver/ProductResolver';
 import { ChatResolver } from '@lib/backend/chat/resources/Chat/ChatResolver/ChatResolver';
 import { Container } from '@lib/backend/core/utils/Container/Container';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';

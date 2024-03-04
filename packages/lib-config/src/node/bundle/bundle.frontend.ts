@@ -38,6 +38,7 @@ const { _config, config } = defineConfig({
       externals: ['raf/polyfill.js', 'setimmediate'],
 
       transpiles: [
+        '@expo/react-native-action-sheet',
         'countries-list',
         'css-in-js-utils',
         'expo-linear-gradient',

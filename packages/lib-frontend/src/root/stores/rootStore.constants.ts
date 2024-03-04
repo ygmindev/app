@@ -2,6 +2,7 @@ import { APP_REDUCER } from '@lib/frontend/app/stores/appStore/appStore.constant
 import { AUTH_REDUCER } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { BILLING_REDUCER } from '@lib/frontend/billing/stores/billingStore/billingStore.constants';
+import { COMMERCE_REDUCER } from '@lib/frontend/commerce/stores/commerceStore/commerceStore.constants';
 import { GROUP } from '@lib/frontend/group/group.constants';
 import { GROUP_REDUCER } from '@lib/frontend/group/stores/groupStore/groupStore.constants';
 import { LOCALE_REDUCER } from '@lib/frontend/locale/stores/localeStore/localeStore.constants';
@@ -16,6 +17,7 @@ import { STYLE_REDUCER } from '@lib/frontend/style/stores/styleStore/styleStore.
 import { USER_REDUCER } from '@lib/frontend/user/stores/userStore/userStore.constants';
 import { APP } from '@lib/shared/app/app.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
+import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { NOTIFICATION } from '@lib/shared/notification/notification.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
@@ -26,6 +28,7 @@ export const ROOT_REDUCERS = {
   [APP]: APP_REDUCER,
   [AUTH]: AUTH_REDUCER,
   [BILLING]: BILLING_REDUCER,
+  [COMMERCE]: COMMERCE_REDUCER,
   [GROUP]: GROUP_REDUCER,
   [LOCALE]: LOCALE_REDUCER,
   [NOTIFICATION]: NOTIFICATION_REDUCER,

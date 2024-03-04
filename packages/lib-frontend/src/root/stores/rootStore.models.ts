@@ -11,6 +11,10 @@ import {
   type BillingActionsParamsModel,
   type BillingStateModel,
 } from '@lib/frontend/billing/stores/billingStore/billingStore.models';
+import {
+  type CommerceActionsParamsModel,
+  type CommerceStateModel,
+} from '@lib/frontend/commerce/stores/commerceStore/commerceStore.models';
 import { type GROUP } from '@lib/frontend/group/group.constants';
 import {
   type GroupActionsParamsModel,
@@ -43,6 +47,7 @@ import {
 } from '@lib/frontend/user/stores/userStore/userStore.models';
 import { type APP } from '@lib/shared/app/app.constants';
 import { type AUTH } from '@lib/shared/auth/auth.constants';
+import { type COMMERCE } from '@lib/shared/commerce/commerce.constants';
 import { type LOCALE } from '@lib/shared/locale/locale.constants';
 import { type NOTIFICATION } from '@lib/shared/notification/notification.constants';
 import { type ROUTE } from '@lib/shared/route/route.constants';
@@ -53,6 +58,7 @@ export type RootStateModel = {
   [APP]: AppStateModel;
   [AUTH]: AuthStateModel;
   [BILLING]: BillingStateModel;
+  [COMMERCE]: CommerceStateModel;
   [GROUP]: GroupStateModel;
   [LOCALE]: LocaleStateModel;
   [NOTIFICATION]: NotificationStateModel;
@@ -65,6 +71,7 @@ export type RootActionsParamsModel = {
   [APP]: AppActionsParamsModel;
   [AUTH]: AuthActionsParamsModel;
   [BILLING]: BillingActionsParamsModel;
+  [COMMERCE]: CommerceActionsParamsModel;
   [GROUP]: GroupActionsParamsModel;
   [LOCALE]: LocaleActionsParamsModel;
   [NOTIFICATION]: NotificationActionsParamsModel;

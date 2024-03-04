@@ -1,3 +1,8 @@
+import { type _ChatContainerPropsModel } from '@lib/frontend/chat/components/ChatContainer/_ChatContainer.models';
+import { type LFCModel } from '@lib/frontend/core/core.models';
+import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
+import { type ChatMessageModel } from '@lib/shared/chat/chat.models';
+import { uid } from '@lib/shared/core/utils/uid/uid';
 import {
   Bubble,
   type ComposerProps,
@@ -6,12 +11,6 @@ import {
   type SendProps,
 } from 'react-native-gifted-chat';
 import { InputToolbar } from 'react-native-gifted-chat';
-
-import { type _ChatContainerPropsModel } from '@lib/frontend/chat/components/ChatContainer/_ChatContainer.models';
-import { type LFCModel } from '@lib/frontend/core/core.models';
-import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
-import { type ChatMessageModel } from '@lib/shared/chat/chat.models';
-import { uid } from '@lib/shared/core/utils/uid/uid';
 
 const serialize = ({ created, message, userId }: ChatMessageModel): IMessage => ({
   _id: uid(),
@@ -37,7 +36,7 @@ export const _ChatContainer: LFCModel<_ChatContainerPropsModel> = ({
   currentUser,
   inputHeight,
   messages,
-  messagesSet,
+  onChange,
   placeholder,
   sendElement,
   spacing,
@@ -50,10 +49,10 @@ export const _ChatContainer: LFCModel<_ChatContainerPropsModel> = ({
   return (
     <GiftedChat
       alwaysShowSend
+      messageIdGenerator={() => uid()}
       messages={messages?.map(serialize)}
       onSend={(values) =>
-        messagesSet &&
-        messagesSet(GiftedChat.append(messages?.map(serialize), values).map(deserialize))
+        onChange && onChange(GiftedChat.append(messages?.map(serialize), values).map(deserialize))
       }
       renderBubble={(props) => (
         <Bubble
@@ -94,6 +93,7 @@ export const _ChatContainer: LFCModel<_ChatContainerPropsModel> = ({
       renderSend={({ onSend, text }) =>
         sendElement({ handleSend: (text) => handleSend(text, onSend), value: text })
       }
+      showUserAvatar={false}
       user={{
         _id: currentUser._id ?? '',
       }}

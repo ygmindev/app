@@ -1,8 +1,7 @@
-import { type ReactElement } from 'react';
-
 import { type ChatMessageModel } from '@lib/shared/chat/chat.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { type ReactElement } from 'react';
 
 export type _ChatContainerPropsModel = {
   backgroundColor: string;
@@ -15,7 +14,7 @@ export type _ChatContainerPropsModel = {
   currentUser: PartialModel<UserModel>;
   inputHeight: number;
   messages?: Array<ChatMessageModel>;
-  messagesSet?(params: Array<ChatMessageModel>): void;
+  onChange?(params: Array<ChatMessageModel>): void;
   placeholder: string;
   sendElement(props: { handleSend: (value?: string) => void; value?: string }): ReactElement;
   spacing: number;
