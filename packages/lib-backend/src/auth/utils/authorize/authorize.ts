@@ -20,6 +20,7 @@ export const authorize = async ({
       //   filter: [{ field: '_user', value: context.user._id }],
       // });
       // return result ? roles.includes(result.role) : false;
+      // TODO: limit admin
       return true;
     }
     return false;

@@ -11,13 +11,14 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const { initialize } = useSession();
   const { get } = useUserResource();
-  const [, authStatusSet] = useStore('auth.status');
+  const [authStatus, authStatusSet] = useStore('auth.status');
   const [, authTokenSet] = useStore('auth.token');
   const [currentUser, currentUserSet] = useStore('user.currentUser');
 
   useAsync(async (isMounted) => {
     void initialize({
-      onAuthenticate: async (signInToken) => {
+      onAuthenticate: async (signInToken, token) => {
+        token && authTokenSet({ access: token });
         if (isMounted()) {
           if (signInToken && currentUser?._id !== signInToken._id) {
             let user: PartialModel<UserModel> = { ...signInToken.claims, _id: signInToken._id };
@@ -37,5 +38,5 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
     });
   });
 
-  return <>{children}</>;
+  return <>{authStatus !== AUTH_STATUS.UNKNOWN && children}</>;
 };

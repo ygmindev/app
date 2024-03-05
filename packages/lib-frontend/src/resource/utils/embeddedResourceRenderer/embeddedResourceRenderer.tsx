@@ -22,7 +22,7 @@ export const embeddedResourceRenderer =
         cloneElement(element, { root: row._id as TRoot extends undefined ? never : string })
       }
       icon="open"
-      iconText={({ t }) => t('core:open')}
+      iconText={({ t }) => t('core:edit')}
       title={({ t }) => t('core:edit')}
       type={BUTTON_TYPE.INVISIBLE}
     />

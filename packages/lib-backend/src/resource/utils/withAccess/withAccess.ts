@@ -1,5 +1,3 @@
-import { Authorized } from 'type-graphql';
-
 import {
   type WithAccessModel,
   type WithAccessParamsModel,
@@ -10,6 +8,7 @@ import {
   type AccessRoleModel,
 } from '@lib/shared/auth/resources/Access/Access.models';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
+import { Authorized } from 'type-graphql';
 
 // TODO: should come from database
 export const getAccessRole = (level: AccessLevelModel): Array<AccessRoleModel> => {

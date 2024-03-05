@@ -34,27 +34,26 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
           // TODO: from locale
           // useDeviceLanguage(_auth);
 
-          onAuthStateChanged(auth, (user: User | null) => {
-            if (user) {
-              user
-                .getIdTokenResult(true)
-                .then(({ claims }) => onAuthenticate({ _id: user.uid, claims } as SignInTokenModel))
-                .catch((e) => {
-                  const error =
-                    (e as AuthError).code === 'auth/network-request-failed'
-                      ? new OfflineError()
-                      : (e as Error);
-                  onError && onError(error);
-                });
-            } else {
-              void onAuthenticate(null);
-            }
-          });
+          onIdTokenChanged(
+            auth,
+            (user: User | null) => void user?.getIdToken(true).then(onTokenRefresh),
+          );
 
-          onIdTokenChanged(auth, (user: User | null) => {
-            if (user) {
-              void user.getIdToken(true).then(onTokenRefresh);
-            }
+          onAuthStateChanged(auth, (user: User | null) => {
+            user
+              ? user
+                  .getIdTokenResult(true)
+                  .then(({ claims, token }) =>
+                    onAuthenticate({ _id: user.uid, claims } as SignInTokenModel, token),
+                  )
+                  .catch((e) => {
+                    const error =
+                      (e as AuthError).code === 'auth/network-request-failed'
+                        ? new OfflineError()
+                        : (e as Error);
+                    onError && onError(error);
+                  })
+              : void onAuthenticate(null);
           });
         }
       } else {

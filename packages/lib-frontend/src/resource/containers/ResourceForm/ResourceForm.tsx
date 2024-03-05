@@ -5,6 +5,7 @@ import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInp
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ResourceFormPropsModel } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE_MORE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type ReactElement, useState } from 'react';
@@ -24,38 +25,43 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
   return (
     <FormContainer
       {...wrapperProps}
-      fields={fields?.map(({ id, label, options, type }) => {
-        const element = (() => {
-          const labelF = label ?? id;
-          switch (type) {
-            case DATA_TYPE_MORE.STRING_LIST:
-              return (
-                <SelectInput
-                  isMultiple
-                  label={labelF}
-                  options={options ?? []}
-                />
-              );
-            case PROPERTY_TYPE.RESOURCE:
-              return (
-                <TextInput
-                  beforeSubmit={async (v) => ({ _id: v })}
-                  label={labelF}
-                />
-              );
-            default:
-              return options ? (
-                <MenuInput
-                  label={labelF}
-                  options={options}
-                />
-              ) : (
-                <TextInput label={labelF} />
-              );
+      fields={filterNil(
+        fields?.map(({ fields: embeddedFields, id, label, options, type }) => {
+          if (id === '_id' || embeddedFields) {
+            return null;
           }
-        })();
-        return { element, id };
-      })}
+          const element = (() => {
+            const labelF = label ?? id;
+            switch (type) {
+              case DATA_TYPE_MORE.STRING_LIST:
+                return (
+                  <SelectInput
+                    isMultiple
+                    label={labelF}
+                    options={options ?? []}
+                  />
+                );
+              case PROPERTY_TYPE.RESOURCE:
+                return (
+                  <TextInput
+                    beforeSubmit={async (v) => ({ _id: v })}
+                    label={labelF}
+                  />
+                );
+              default:
+                return options ? (
+                  <MenuInput
+                    label={labelF}
+                    options={options}
+                  />
+                ) : (
+                  <TextInput label={labelF} />
+                );
+            }
+          })();
+          return { element, id };
+        }),
+      )}
       onSubmit={
         onSubmit
           ? async (form) => onSubmit({ form: form as unknown as TForm, root: rootValue })
