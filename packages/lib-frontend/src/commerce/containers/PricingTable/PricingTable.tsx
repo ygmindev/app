@@ -10,9 +10,9 @@ import {
 } from '@lib/shared/commerce/resources/Pricing/Pricing.models';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
 
-export const PricingTable: LFCModel<PricingTablePropsModel> = ({ ...props }) => {
+export const PricingTable: LFCModel<PricingTablePropsModel> = ({ root, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const implementation = usePricingResource();
+  const implementation = usePricingResource({ root });
   return (
     <ResourceTable<PricingModel, PricingFormModel, ProductModel>
       {...wrapperProps}

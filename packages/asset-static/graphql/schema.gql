@@ -1059,6 +1059,10 @@ type Mutation {
   OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
   OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
   PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
+  PricingCreate(input: PricingCreateInput): PricingCreateOutput
+  PricingCreateMany(input: PricingCreateManyInput): PricingCreateManyOutput
+  PricingRemove(input: PricingRemoveInput): PricingRemoveOutput
+  PricingUpdate(input: PricingUpdateInput): PricingUpdateOutput
   ProductCreate(input: ProductCreateInput): ProductCreateOutput
   ProductCreateMany(input: ProductCreateManyInput): ProductCreateManyOutput
   ProductRemove(input: ProductRemoveInput): ProductRemoveOutput
@@ -1347,7 +1351,173 @@ type Pricing {
   price: Float
 }
 
+input PricingCreateFormInput {
+  Product: ProductInput
+  _id: String
+  created: DateTime
+  frequency: String
+  price: Float
+}
+
+input PricingCreateInput {
+  form: PricingCreateFormInput
+  root: String
+}
+
+input PricingCreateManyFormInput {
+  Product: ProductInput
+  _id: String
+  created: DateTime
+  frequency: String
+  price: Float
+}
+
+input PricingCreateManyInput {
+  form: [PricingCreateManyFormInput]
+  root: String
+}
+
+type PricingCreateManyOutput {
+  result: Pricing
+  root: Product
+}
+
+type PricingCreateOutput {
+  result: Pricing
+  root: Product
+}
+
+type PricingGetConnectionConnection {
+  edges: [PricingGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type PricingGetConnectionEdge {
+  cursor: String
+  node: Pricing
+}
+
+input PricingGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [PricingInput]
+  resourceValue: PricingInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input PricingGetConnectionInput {
+  filter: [PricingGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type PricingGetConnectionOutput {
+  result: PricingGetConnectionConnection
+  root: Product
+}
+
+input PricingGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [PricingInput]
+  resourceValue: PricingInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input PricingGetInput {
+  filter: [PricingGetFilterInput]
+  root: String
+}
+
+input PricingGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [PricingInput]
+  resourceValue: PricingInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input PricingGetManyInput {
+  filter: [PricingGetManyFilterInput]
+  root: String
+}
+
+type PricingGetManyOutput {
+  result: [Pricing]
+  root: Product
+}
+
+type PricingGetOutput {
+  result: Pricing
+  root: Product
+}
+
 input PricingInput {
+  Product: ProductInput
+  _id: String
+  created: DateTime
+  frequency: String
+  price: Float
+}
+
+input PricingRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [PricingInput]
+  resourceValue: PricingInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input PricingRemoveInput {
+  filter: [PricingRemoveFilterInput]
+  root: String
+}
+
+type PricingRemoveOutput {
+  result: Pricing
+  root: Product
+}
+
+input PricingUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [PricingInput]
+  resourceValue: PricingInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input PricingUpdateInput {
+  filter: [PricingUpdateFilterInput]
+  root: String
+  update: PricingUpdateUpdateInput
+}
+
+type PricingUpdateOutput {
+  result: Pricing
+  root: Product
+}
+
+input PricingUpdateUpdateInput {
   Product: ProductInput
   _id: String
   created: DateTime
@@ -1548,6 +1718,9 @@ type Query {
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
   PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
+  PricingGet(input: PricingGetInput): PricingGetOutput
+  PricingGetConnection(input: PricingGetConnectionInput): PricingGetConnectionOutput
+  PricingGetMany(input: PricingGetManyInput): PricingGetManyOutput
   ProductGet(input: ProductGetInput): ProductGetOutput
   ProductGetConnection(input: ProductGetConnectionInput): ProductGetConnectionOutput
   ProductGetMany(input: ProductGetManyInput): ProductGetManyOutput

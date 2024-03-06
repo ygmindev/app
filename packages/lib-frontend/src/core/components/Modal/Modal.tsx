@@ -14,6 +14,7 @@ import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { CORNER, DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type MeasureModel, type RLFCModel } from '@lib/frontend/core/core.models';
+import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useValueDelayed';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { TranslatableText } from '@lib/frontend/locale/components/TranslatableText/TranslatableText';
 import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableText/isTranslatableText';
@@ -27,6 +28,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
   ({ children, height, isFullSize, isOpen, onToggle, title, width }, ref) => {
     const [deviceHeight] = useStore('app.dimension.height');
     const [measure, measureSet] = useState<MeasureModel>();
+    const isOpenF = useValueDelayed(isOpen ?? false);
 
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue: false,
@@ -40,8 +42,9 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
       : height ?? measure?.height;
 
     useImperativeHandle(ref, () => ({ toggle: valueControlledSet }));
+    console.warn(`${isOpenF}, ${isOpen}`);
     const elementStateF = valueControlled ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
-    return (
+    return isOpenF || isOpen ? (
       <Portal>
         <Exitable>
           {isOpen && (
@@ -107,6 +110,6 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
           )}
         </Exitable>
       </Portal>
-    );
+    ) : null;
   },
 );
