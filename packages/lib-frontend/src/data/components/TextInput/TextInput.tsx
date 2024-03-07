@@ -51,7 +51,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       isCenter,
       isNoClear,
       isTransparent,
-      keyboard,
+      keyboard, // TODO: keyboard type from data type
       label,
       language,
       leftElement,

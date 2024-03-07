@@ -1,4 +1,3 @@
-import { FloatingFooter } from '@lib/frontend/app/components/FloatingFooter/FloatingFooter';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
@@ -12,6 +11,8 @@ import { ResourceFilter } from '@lib/frontend/resource/components/ResourceFilter
 import { type ResourceTablePropsModel } from '@lib/frontend/resource/components/ResourceTable/ResourceTable.models';
 import { ResourceForm } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
@@ -53,16 +54,37 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
       flex
       p
       s>
-      <FilterButton
-        element={
-          <ResourceFilter
-            fields={fields}
-            name={name}
-            onSubmit={async (filter) => paramsSet({ filter })}
-            rootName={rootName}
-          />
-        }
-      />
+      <Wrapper
+        isAlign
+        isRow
+        justify={FLEX_JUSTIFY.END}>
+        <FilterButton
+          element={
+            <ResourceFilter
+              fields={fields}
+              name={name}
+              onSubmit={async (filter) => paramsSet({ filter })}
+              rootName={rootName}
+            />
+          }
+        />
+
+        <ModalButton
+          element={() => (
+            <ResourceForm<TType, TForm, TRoot>
+              fields={fields}
+              name={name}
+              onSubmit={async (input) => {
+                await handleSubmit(input);
+              }}
+              rootName={rootName}
+            />
+          )}
+          icon="add"
+          size={THEME_SIZE.SMALL}>
+          {t('core:new', { value: name })}
+        </ModalButton>
+      </Wrapper>
 
       <ConnectionBoundary
         fallbackData={
@@ -99,24 +121,6 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
           />
         )}
       </ConnectionBoundary>
-
-      <FloatingFooter>
-        <ModalButton
-          element={() => (
-            <ResourceForm<TType, TForm, TRoot>
-              fields={fields}
-              name={name}
-              onSubmit={async (input) => {
-                await handleSubmit(input);
-              }}
-              rootName={rootName}
-            />
-          )}
-          icon="add"
-          isShadow>
-          {t('core:new', { value: name })}
-        </ModalButton>
-      </FloatingFooter>
     </Wrapper>
   );
 };

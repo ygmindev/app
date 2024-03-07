@@ -1,12 +1,13 @@
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
+import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ResourceFormPropsModel } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { DATA_TYPE_MORE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
+import { DATA_TYPE, DATA_TYPE_MORE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type ReactElement, useState } from 'react';
 
@@ -48,6 +49,8 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
                     label={labelF}
                   />
                 );
+              case DATA_TYPE.NUMBER:
+                return <NumberInput label={labelF} />;
               default:
                 return options ? (
                   <MenuInput

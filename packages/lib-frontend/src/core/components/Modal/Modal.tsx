@@ -21,6 +21,7 @@ import { isTranslatableText } from '@lib/frontend/locale/utils/isTranslatableTex
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
@@ -42,7 +43,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
       : height ?? measure?.height;
 
     useImperativeHandle(ref, () => ({ toggle: valueControlledSet }));
-    console.warn(`${isOpenF}, ${isOpen}`);
+
     const elementStateF = valueControlled ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
     return isOpenF || isOpen ? (
       <Portal>
@@ -84,7 +85,9 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                       {title && (
                         <Wrapper flex>
                           {isTranslatableText(title) ? (
-                            <TranslatableText>{title}</TranslatableText>
+                            <TranslatableText fontStyle={FONT_STYLE.TITLE}>
+                              {title}
+                            </TranslatableText>
                           ) : (
                             title
                           )}
