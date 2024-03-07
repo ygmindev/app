@@ -1,4 +1,3 @@
-import { FloatingFooter } from '@lib/frontend/app/components/FloatingFooter/FloatingFooter';
 import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { PaymentMethodForm } from '@lib/frontend/billing/containers/PaymentMethodForm/PaymentMethodForm';
 import { useBankResource } from '@lib/frontend/billing/hooks/useBankResource/useBankResource';
@@ -8,13 +7,15 @@ import { type PaymentMethodPagePropsModel } from '@lib/frontend/billing/pages/Pa
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
 import { type DataBoundaryRefModel } from '@lib/frontend/data/components/DataBoundary/DataBoundary.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_COLOR } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import {
   PAYMENT_METHOD_RESOURCE_NAME,
@@ -45,6 +46,22 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
       {...wrapperProps}
       isFullHeight
       p>
+      <Wrapper
+        isRow
+        justify={FLEX_JUSTIFY.END}>
+        <ModalButton
+          element={({ onClose }) => (
+            <PaymentMethodForm
+              onCancel={onClose}
+              onSuccess={async () => onClose()}
+            />
+          )}
+          icon="add"
+          size={THEME_SIZE.SMALL}>
+          {t('core:new', { value: t('billing:paymentMethod') })}
+        </ModalButton>
+      </Wrapper>
+
       <DataBoundary
         fallbackData={{
           result: getEntityResourceFixture({
@@ -93,20 +110,6 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
           />
         )}
       </DataBoundary>
-
-      <FloatingFooter>
-        <ModalButton
-          element={({ onClose }) => (
-            <PaymentMethodForm
-              onCancel={onClose}
-              onSuccess={async () => onClose()}
-            />
-          )}
-          icon="add"
-          isShadow>
-          {t('core:new', { value: PAYMENT_METHOD_RESOURCE_NAME })}
-        </ModalButton>
-      </FloatingFooter>
     </MainLayout>
   );
 };
