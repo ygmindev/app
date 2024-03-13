@@ -14,12 +14,12 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { getTotalPrice } from '@lib/shared/commerce/utils/getTotalPrice/getTotalPrice';
+import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { useRef, useState } from 'react';
 
-export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ items, ...props }) => {
+export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ products, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
   const [tab, tabSet] = useState<string>('saved');
@@ -29,15 +29,15 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ items, ...p
   const { createToken } = usePaymentMethodResource();
   const [isComplete, isCompleteSet] = useState<boolean>();
 
-  const price = getTotalPrice(items);
+  const price = getPrice(products);
 
   const handleSubmit = async (): Promise<void> => {
-    if (items) {
+    if (products) {
       switch (tab) {
         case 'saved': {
           paymentMethod &&
             (await createToken({
-              form: { items, paymentMethodId: paymentMethod.externalId },
+              form: { paymentMethodId: paymentMethod.externalId, products },
               root: currentUser?._id,
             }));
         }

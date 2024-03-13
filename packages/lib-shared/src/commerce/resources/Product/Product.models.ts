@@ -12,3 +12,7 @@ export type ProductModel = EntityResourceModel & {
 };
 
 export type ProductFormModel = EntityResourceDataModel<ProductModel>;
+
+export type ProductSummaryModel = Pick<ProductModel, '_id' | 'name'> & {
+  [PRICING_RESOURCE_NAME]?: Array<Pick<PricingModel, '_id' | 'price'>>;
+};

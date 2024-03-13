@@ -10,7 +10,7 @@ import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMe
 import { type PaymentMethodImplementationModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
 import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
-import { getTotalPrice } from '@lib/shared/commerce/utils/getTotalPrice/getTotalPrice';
+import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
@@ -111,7 +111,7 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
               );
             return pricingF ? result + pricingF.price * (item.quantity ?? 1) : result;
           }, 0) ?? 0;
-        const price = getTotalPrice(input.form?.items);
+        const price = getPrice(input.form?.items);
 
         if (price !== amount) {
           throw new InvalidArgumentError('Prices do not match');

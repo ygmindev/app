@@ -8,12 +8,12 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 
 export const CartPage: LFCModel<CartPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const [items] = useStore('commerce.items');
+  const [products] = useStore('commerce.products');
   return (
     <MainLayout {...wrapperProps}>
       <Text>CartPage</Text>
 
-      <CheckoutButton items={items} />
+      <CheckoutButton products={products} />
     </MainLayout>
   );
 };

@@ -1,6 +1,6 @@
-import { type CartItemModel } from '@lib/shared/commerce/utils/CartItem/CartItem.models';
+import { type ProductSummaryModel } from '@lib/shared/commerce/resources/Product/Product.models';
 
 export type PaymentArgsModel = {
-  items?: Array<CartItemModel>;
   paymentMethodId?: string;
+  products?: Array<ProductSummaryModel>;
 };

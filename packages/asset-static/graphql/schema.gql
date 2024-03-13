@@ -628,14 +628,6 @@ input CardUpdateUpdateInput {
   type: String
 }
 
-input CartItemInput {
-  name: String
-  price: Float
-  pricingId: String
-  productId: String
-  quantity: Float
-}
-
 type Chat {
   _id: String
   created: DateTime
@@ -1333,8 +1325,8 @@ input PaymentMethodInput {
 }
 
 input PaymentMethodTokenCreateFormInput {
-  items: [CartItemInput]
   paymentMethodId: String
+  products: [ProductInput]
 }
 
 input PaymentMethodTokenCreateInput {
