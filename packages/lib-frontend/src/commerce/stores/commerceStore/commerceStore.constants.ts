@@ -4,6 +4,6 @@ export const COMMERCE_REDUCER: CommerceReducerModel = {
   actions: {},
 
   defaultState: {
-    cart: [],
+    items: [],
   },
 };

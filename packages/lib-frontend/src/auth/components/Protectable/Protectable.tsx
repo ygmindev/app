@@ -9,8 +9,9 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
 export const Protectable: FCModel<ProtectablePropsModel> = ({ children }) => {
   const [authStatus] = useStore('auth.status');
+  const [isOffline] = useStore('app.isOffline');
   const { location } = useRouter();
-  return authStatus === AUTH_STATUS.UNAUTHENTICATED ? (
+  return !isOffline && authStatus === AUTH_STATUS.UNAUTHENTICATED ? (
     <Redirect<SignInPageParamsModel>
       context={{ redirectTo: location.pathname }}
       pathname={SIGN_IN}

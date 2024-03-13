@@ -9,9 +9,9 @@ import { type PartialModel } from '@lib/shared/core/core.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
-  const { initialize } = useSession();
   const { get } = useUserResource();
   const [authStatus, authStatusSet] = useStore('auth.status');
+  const { initialize } = useSession({ onError: () => authStatusSet(AUTH_STATUS.UNAUTHENTICATED) });
   const [, authTokenSet] = useStore('auth.token');
   const [currentUser, currentUserSet] = useStore('user.currentUser');
 

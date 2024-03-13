@@ -14,10 +14,12 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { getTotalPrice } from '@lib/shared/commerce/utils/getTotalPrice/getTotalPrice';
 import { type PartialModel } from '@lib/shared/core/core.models';
+import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { useRef, useState } from 'react';
 
-export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ price, ...props }) => {
+export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ items, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
   const [tab, tabSet] = useState<string>('saved');
@@ -27,19 +29,24 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ price, ...p
   const { createToken } = usePaymentMethodResource();
   const [isComplete, isCompleteSet] = useState<boolean>();
 
+  const price = getTotalPrice(items);
+
   const handleSubmit = async (): Promise<void> => {
-    switch (tab) {
-      case 'saved': {
-        paymentMethod &&
-          (await createToken({
-            form: { items: ['1'], paymentMethodId: paymentMethod.externalId },
-            root: currentUser?._id,
-          }));
-      }
-      case 'new': {
-        await ref.current?.submit();
+    if (items) {
+      switch (tab) {
+        case 'saved': {
+          paymentMethod &&
+            (await createToken({
+              form: { items, paymentMethodId: paymentMethod.externalId },
+              root: currentUser?._id,
+            }));
+        }
+        case 'new': {
+          await ref.current?.submit();
+        }
       }
     }
+    throw new InvalidArgumentError('no products to submit');
   };
 
   const elementState =

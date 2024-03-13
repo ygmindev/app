@@ -1,3 +1,5 @@
+import { type CartItemModel } from '@lib/shared/commerce/utils/CartItem/CartItem.models';
+
 export type CheckoutButtonPropsModel = {
-  price: number;
+  items?: Array<CartItemModel>;
 };

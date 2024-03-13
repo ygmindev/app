@@ -1,4 +1,5 @@
 import { Container } from '@lib/backend/core/utils/Container/Container';
+import { aggregate } from '@lib/backend/database/utils/aggregate/aggregate';
 import { getFilter } from '@lib/backend/database/utils/Database/_Database';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import {
@@ -9,8 +10,6 @@ import { createResourceImplementation } from '@lib/backend/resource/utils/create
 import { getMetadata } from '@lib/backend/resource/utils/getMetadata/getMetadata';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
-import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { flattenObject } from '@lib/shared/core/utils/flattenObject/flattenObject';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
@@ -68,18 +67,6 @@ export const createEmbeddedResourceImplementation = <
     return formF;
   };
 
-  const getAggregation = (
-    input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot> = {},
-  ): Array<object> => {
-    const nameF = `$${name}`;
-    return filterNil([
-      { $unwind: nameF },
-      { $match: getFilter(input.filter, name) },
-      input.options?.project && { $project: flattenObject({ [name]: input.options.project }) },
-      { $group: { _id: '$_id', [name]: { $push: nameF } } },
-    ]);
-  };
-
   const getCount = async (input: RootInputModel<TRoot>): Promise<number> => {
     if (input.root) {
       const { result: rootResult } = await getRootImplementation().get({
@@ -99,7 +86,7 @@ export const createEmbeddedResourceImplementation = <
       const limit = input.options?.take;
       const { result: rootResult } = await getRootImplementation().get({
         filter: [{ field: '_id', value: input.root }],
-        options: input.filter ? { aggregate: getAggregation(input) } : undefined,
+        options: input.filter ? { aggregate: aggregate({ ...input, name }) } : undefined,
       });
       const result =
         ((rootResult && rootResult[name]) as unknown as Array<PartialModel<TType>>) ?? [];
@@ -170,7 +157,7 @@ export const createEmbeddedResourceImplementation = <
       if (input.root) {
         const { result: rootResult } = await getRootImplementation().get({
           filter: [{ field: '_id', value: input.root }],
-          options: { aggregate: getAggregation(input) },
+          options: { aggregate: aggregate({ ...input, name }) },
         });
         const result = rootResult && (rootResult[name] as unknown as Array<PartialModel<TType>>);
         return { result: result && result[0], root: rootResult };

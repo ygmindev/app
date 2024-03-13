@@ -1,8 +1,10 @@
-import { type StripeAdminImplementationModel } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.models';
+import {
+  type StripeAdminImplementationModel,
+  type StripeCreateTokenParamsModel,
+} from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodTypeModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
 import { ExternalError } from '@lib/shared/core/errors/ExternalError/ExternalError';
 import Stripe from 'stripe';
 
@@ -39,14 +41,15 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
     );
   };
 
-  createToken = async (
-    { items, paymentMethodId }: PaymentArgsModel,
-    userId: string,
-  ): Promise<string> => {
-    const token = items
+  createToken = async ({
+    paymentMethodId,
+    price,
+    userId,
+  }: StripeCreateTokenParamsModel): Promise<string> => {
+    const token = price
       ? (
           await this.stripe.paymentIntents.create({
-            amount: 50,
+            amount: price.amount,
             automatic_payment_methods: { allow_redirects: 'never', enabled: true },
             confirm: !!paymentMethodId,
             currency: 'usd',

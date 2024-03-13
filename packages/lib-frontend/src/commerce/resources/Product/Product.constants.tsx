@@ -11,7 +11,7 @@ export const PRODUCT_RESOURCE_PARAMS = {
     { id: 'name' },
     // TODO: use fields for embedded query
     {
-      fields: [{ id: 'price' }, { id: 'frequency' }],
+      fields: [{ id: 'price' }, { id: 'frequency' }, { id: '_id' }],
       id: PRICING_RESOURCE_NAME,
       renderer: embeddedResourceRenderer({ element: <PricingTable /> }),
     },

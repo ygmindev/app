@@ -1,5 +1,6 @@
 import { AppHomePage } from '@lib/frontend/app/pages/AppHomePage/AppHomePage';
 import { aroomRoutes } from '@lib/frontend/aroom/aroom.routes';
+import { commerceRoutes } from '@lib/frontend/commerce/commerce.routes';
 import { HOME } from '@lib/frontend/core/core.constants';
 import { FORM } from '@lib/frontend/data/data.constants';
 import { GROUP } from '@lib/frontend/group/group.constants';
@@ -19,6 +20,7 @@ export const routes: Array<RouteModel> = getRoutes({
       pathname: 'aroom',
       routes: aroomRoutes,
     },
+    ...commerceRoutes,
     {
       isProtectable: true,
       pathname: GROUP,

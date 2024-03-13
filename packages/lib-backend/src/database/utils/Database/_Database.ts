@@ -20,7 +20,7 @@ import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.model
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import { MikroORM } from '@mikro-orm/core';
 import { type EntityManager } from '@mikro-orm/mongodb';
-import isString from 'lodash/isString';
+import isArray from 'lodash/isArray';
 import last from 'lodash/last';
 import { type Document, type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
 
@@ -47,10 +47,11 @@ export const getFilter = <TType extends unknown>(
                     : `^((?!${v.value as string}).)*\$`,
               }
             : {
-                [conditionF]:
-                  last(v.field.split('.'))?.startsWith('_') && isString(v.value)
-                    ? new ObjectId(v.value)
-                    : v.value,
+                [conditionF]: last(v.field.split('.'))?.startsWith('_')
+                  ? isArray(v.value)
+                    ? v.value.map((vv) => new ObjectId(`${vv}`))
+                    : new ObjectId(v.value as string)
+                  : v.value,
               },
         };
       }, {} as Filter<TType>)
