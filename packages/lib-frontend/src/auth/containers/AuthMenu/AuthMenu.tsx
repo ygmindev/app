@@ -60,6 +60,7 @@ export const AuthMenu: LFCModel<AuthMenuPropsModel> = ({ ...props }) => {
         <Button
           elementState={isOpen ? ELEMENT_STATE.ACTIVE : undefined}
           icon="personCircle"
+          iconText={t('user:profile')}
         />
       )}
       options={optionsF}

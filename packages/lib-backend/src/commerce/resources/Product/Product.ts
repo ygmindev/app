@@ -14,15 +14,18 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isRepository: true, name: PRODUCT_RESOURCE_NAME })
 export class Product extends EntityResource implements ProductModel {
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  name!: string;
-
   @withEmbeddedResourceField({
     Resource: () => Pricing,
     isRepository: true,
     root: PRODUCT_RESOURCE_NAME,
   })
   [PRICING_RESOURCE_NAME]?: Array<PricingModel>;
+
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  description?: string;
+
+  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  name!: string;
 }
 
 @withEntity({ name: `${PRODUCT_RESOURCE_NAME}Form` })

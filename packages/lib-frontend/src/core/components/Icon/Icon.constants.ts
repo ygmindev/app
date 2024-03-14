@@ -25,6 +25,7 @@ export const IONIC_ICONS = {
   caretLeft: 'caret-back-outline',
   caretRight: 'caret-forward-outline',
   caretUp: 'caret-up-outline',
+  cart: 'cart-outline',
   cash: 'cash-outline',
   chat: 'chatbox-outline',
   chats: 'chatbubbles-outline',

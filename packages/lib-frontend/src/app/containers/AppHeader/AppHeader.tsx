@@ -2,6 +2,8 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { Logo } from '@lib/frontend/app/components/Logo/Logo';
 import { type AppHeaderPropsModel } from '@lib/frontend/app/containers/AppHeader/AppHeader.models';
 import { AuthMenu } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Title } from '@lib/frontend/core/components/Title/Title';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
@@ -11,13 +13,16 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
+import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const [isOffline] = useStore('app.isOffline');
+  const [products] = useStore('commerce.products');
   const theme = useTheme();
+  console.warn(products);
   return (
     <Wrapper
       {...wrapperProps}
@@ -25,9 +30,9 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
       position={SHAPE_POSITION.RELATIVE}
       zIndex>
       <Wrapper
+        align={FLEX_ALIGN.CENTER}
         border={DIRECTION.BOTTOM}
         height={theme.layout.header.height}
-        isAlign
         isRow
         pHorizontal>
         <Wrapper
@@ -35,6 +40,14 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
           isAlign
           isRow>
           <Logo />
+        </Wrapper>
+
+        <Wrapper position={SHAPE_POSITION.RELATIVE}>
+          <Button
+            icon="cart"
+            iconText={`${products?.length ?? 0}`}
+            type={BUTTON_TYPE.INVISIBLE}
+          />
         </Wrapper>
 
         <AuthMenu />

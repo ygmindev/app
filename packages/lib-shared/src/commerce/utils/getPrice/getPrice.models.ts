@@ -1,5 +1,5 @@
-import { type ProductSummaryModel } from '@lib/shared/commerce/resources/Product/Product.models';
+import { type ProductArgsModel } from '@lib/shared/commerce/utils/ProductArgs/ProductArgs.models';
 
-export type GetPriceParamsModel = Array<ProductSummaryModel>;
+export type GetPriceParamsModel = Array<ProductArgsModel>;
 
 export type GetPriceModel = number;

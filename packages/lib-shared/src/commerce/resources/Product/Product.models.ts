@@ -8,11 +8,9 @@ import {
 export type ProductModel = EntityResourceModel & {
   [PRICING_RESOURCE_NAME]?: Array<PricingModel>;
 
+  description?: string;
+
   name: string;
 };
 
 export type ProductFormModel = EntityResourceDataModel<ProductModel>;
-
-export type ProductSummaryModel = Pick<ProductModel, '_id' | 'name'> & {
-  [PRICING_RESOURCE_NAME]?: Array<Pick<PricingModel, '_id' | 'price'>>;
-};

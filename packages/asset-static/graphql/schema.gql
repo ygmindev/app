@@ -1326,7 +1326,7 @@ input PaymentMethodInput {
 
 input PaymentMethodTokenCreateFormInput {
   paymentMethodId: String
-  products: [ProductInput]
+  products: [ProductArgsInput]
 }
 
 input PaymentMethodTokenCreateInput {
@@ -1529,13 +1529,24 @@ type Product {
   Pricing: [Pricing]
   _id: String
   created: DateTime
+  description: String
   name: String
+}
+
+input ProductArgsInput {
+  Pricing: [PricingInput]
+  _id: String
+  created: DateTime
+  description: String
+  name: String
+  quantity: Float
 }
 
 input ProductCreateFormInput {
   Pricing: [PricingInput]
   _id: String
   created: DateTime
+  description: String
   name: String
 }
 
@@ -1548,6 +1559,7 @@ input ProductCreateManyFormInput {
   Pricing: [PricingInput]
   _id: String
   created: DateTime
+  description: String
   name: String
 }
 
@@ -1642,6 +1654,7 @@ input ProductInput {
   Pricing: [PricingInput]
   _id: String
   created: DateTime
+  description: String
   name: String
 }
 
@@ -1692,6 +1705,7 @@ input ProductUpdateUpdateInput {
   Pricing: [PricingInput]
   _id: String
   created: DateTime
+  description: String
   name: String
 }
 
