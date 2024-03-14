@@ -42,13 +42,11 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
           <Logo />
         </Wrapper>
 
-        <Wrapper position={SHAPE_POSITION.RELATIVE}>
-          <Button
-            icon="cart"
-            iconText={`${products?.length ?? 0}`}
-            type={BUTTON_TYPE.INVISIBLE}
-          />
-        </Wrapper>
+        <Button
+          icon="cart"
+          iconText={`${products?.length ?? 0}`}
+          type={BUTTON_TYPE.INVISIBLE}
+        />
 
         <AuthMenu />
       </Wrapper>

@@ -10,6 +10,8 @@ export type PricingModel = EmbeddedResourceModel & {
   frequency?: PricingFrequencyModel;
 
   price: number;
+
+  quantity?: number;
 };
 
 export type PricingFormModel = EntityResourceDataModel<PricingModel>;

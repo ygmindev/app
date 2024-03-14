@@ -56,7 +56,7 @@ export const THEME_CONFIG = {
     },
 
     header: {
-      height: 55,
+      height: 58,
     },
 
     height: {
@@ -119,7 +119,7 @@ export const THEME_CONFIG = {
     size: {
       [THEME_SIZE.LARGE]: 55,
 
-      [THEME_SIZE.MEDIUM]: 48,
+      [THEME_SIZE.MEDIUM]: 52,
 
       [THEME_SIZE.SMALL]: 32,
 

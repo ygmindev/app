@@ -1,5 +1,3 @@
-import { forwardRef } from 'react';
-
 import { type AnimatableRefModel } from '@lib/frontend/animation/animation.models';
 import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
 import { _Icon } from '@lib/frontend/core/components/Icon/_Icon';
@@ -12,6 +10,7 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
+import { forwardRef } from 'react';
 
 const AnimatableIcon = animatable({ Component: _Icon });
 

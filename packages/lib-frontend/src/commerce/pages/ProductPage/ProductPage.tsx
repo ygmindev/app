@@ -6,21 +6,34 @@ import {
 } from '@lib/frontend/commerce/pages/ProductPage/ProductPage.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
+import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
+import { type PartialModel } from '@lib/shared/core/core.models';
 
 export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const { location } = useRouter<ProductPageParamsModle>();
   const { get } = useProductResource();
-  const actions = useActions();
+  const [products, productsSet] = useStore('commerce.products');
+
+  const handleAdd = (product?: PartialModel<ProductModel>): void => {
+    if (product) {
+      const index = products?.findIndex((v) => v._id === product._id);
+      if (index !== undefined && index >= 0) {
+      }
+      // const pricingF = index !== undefined && index >= 0 && products?.[index];
+    }
+  };
+
   return (
     <DataBoundary
       {...wrapperProps}
@@ -31,13 +44,12 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
       {({ data }) => (
         <MainLayout
           bottomElement={
-            data?.result && (
-              <Button
-                icon="add"
-                onPress={() => actions?.commerce.productsAdd(data.result)}>
-                {t('commerce:addToCart')}
-              </Button>
-            )
+            <Button
+              elementState={data?.result ? undefined : ELEMENT_STATE.DISABLED}
+              icon="add"
+              onPress={() => handleAdd(data?.result)}>
+              {t('commerce:addToCart')}
+            </Button>
           }
           isFullHeight
           s>
