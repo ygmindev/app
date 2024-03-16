@@ -1534,11 +1534,10 @@ type Product {
 }
 
 input ProductArgsInput {
-  Pricing: [PricingInput]
-  _id: String
-  created: DateTime
-  description: String
   name: String
+  price: Float
+  pricingId: String
+  productId: String
   quantity: Float
 }
 

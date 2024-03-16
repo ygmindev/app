@@ -8,7 +8,6 @@ import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBou
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -33,11 +32,10 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
                         icon="add"
                         onPress={() =>
                           actions?.commerce.productsAdd({
-                            [PRICING_RESOURCE_NAME]: product[PRICING_RESOURCE_NAME]?.map(
-                              (pricing) => ({ _id: pricing._id, price: pricing.price }),
-                            ),
-                            _id: product._id ?? '',
                             name: product.name ?? '',
+                            price: pricing.price,
+                            pricingId: pricing._id,
+                            productId: product._id ?? '',
                           })
                         }
                       />

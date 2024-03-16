@@ -22,7 +22,6 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
   const [isOffline] = useStore('app.isOffline');
   const [products] = useStore('commerce.products');
   const theme = useTheme();
-  console.warn(products);
   return (
     <Wrapper
       {...wrapperProps}

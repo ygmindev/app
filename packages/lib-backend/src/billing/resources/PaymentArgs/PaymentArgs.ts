@@ -1,14 +1,14 @@
-import { Product } from '@lib/backend/commerce/resources/Product/Product';
+import { ProductArgs } from '@lib/backend/commerce/utils/ProductArgs/ProductArgs';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
-import { type ProductArgsModel } from '@lib/shared/commerce/resources/Product/Product.models';
+import { type ProductArgsModel } from '@lib/shared/commerce/utils/ProductArgs/ProductArgs.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: 'PaymentArgs' })
 export class PaymentArgs implements PaymentArgsModel {
   @withField({
-    Resource: () => Product,
+    Resource: () => ProductArgs,
     isArray: true,
     isOptional: true,
     type: PROPERTY_TYPE.RESOURCE,

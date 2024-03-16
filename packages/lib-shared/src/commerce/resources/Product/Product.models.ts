@@ -1,6 +1,5 @@
 import { type PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { type PricingModel } from '@lib/shared/commerce/resources/Pricing/Pricing.models';
-import { type PartialModel } from '@lib/shared/core/core.models';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
@@ -15,7 +14,3 @@ export type ProductModel = EntityResourceModel & {
 };
 
 export type ProductFormModel = EntityResourceDataModel<ProductModel>;
-
-export type ProductArgsModel = PartialModel<Pick<ProductModel, '_id' | 'name'>> & {
-  [PRICING_RESOURCE_NAME]?: Array<PartialModel<Pick<PricingModel, '_id' | 'price'>>>;
-};

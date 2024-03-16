@@ -27,7 +27,7 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
 
   const handleAdd = (product?: PartialModel<ProductModel>): void => {
     if (product) {
-      const index = products?.findIndex((v) => v._id === product._id);
+      const index = products?.findIndex((v) => v.productId === product._id);
       if (index !== undefined && index >= 0) {
       }
       // const pricingF = index !== undefined && index >= 0 && products?.[index];

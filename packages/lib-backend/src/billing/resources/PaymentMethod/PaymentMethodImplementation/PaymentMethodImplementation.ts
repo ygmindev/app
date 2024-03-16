@@ -85,14 +85,14 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
       });
       if (linkedUser) {
         const products =
-          input.form?.items &&
+          input.form?.products &&
           (
             await this.productImplementation.getMany({
               filter: [
                 {
                   condition: FILTER_CONDITION.IN,
                   field: '_id',
-                  value: input.form.items.map(({ productId }) => productId),
+                  value: input.form.products.map(({ productId }) => productId),
                 },
               ],
               options: { project: { [PRICING_RESOURCE_NAME]: true } },
@@ -101,7 +101,7 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
 
         const amount =
           products?.reduce((result, product) => {
-            const item = input.form?.items?.find(
+            const item = input.form?.products?.find(
               (v) => product._id && new ObjectId(v.productId).equals(product._id),
             );
             const pricingF =
@@ -111,7 +111,8 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
               );
             return pricingF ? result + pricingF.price * (item.quantity ?? 1) : result;
           }, 0) ?? 0;
-        const price = getPrice(input.form?.items);
+
+        const price = getPrice(input.form?.products);
 
         if (price !== amount) {
           throw new InvalidArgumentError('Prices do not match');

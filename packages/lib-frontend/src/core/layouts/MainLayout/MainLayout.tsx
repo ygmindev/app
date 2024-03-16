@@ -66,7 +66,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
           <Wrapper
             isFullWidth={isFullWidthF}
             mHorizontal="auto"
-            p={isFullHeight}
+            pTop={isFullHeight}
             width={widthF}>
             {bottomElement}
           </Wrapper>
