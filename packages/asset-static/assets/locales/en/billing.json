@@ -5,6 +5,5 @@
   "paymentMethod": "payment method",
   "paymentMethod_plural": "payment methods",
   "paymentMethodTitle": "{{name}} ending in {{last4}}",
-  "savedPaymentMethod_plural": "saved payment methods",
-  "billingTest": "this is a test"
+  "savedPaymentMethod_plural": "saved payment methods"
 }

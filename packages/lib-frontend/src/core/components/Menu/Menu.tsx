@@ -86,43 +86,42 @@ export const Menu = forwardRef(
     }
 
     const children = (
-      <Wrapper p={THEME_SIZE.SMALL}>
-        <VirtualizedList
-          items={options}
-          render={(option: TType, index) => {
-            const { color, confirmMessage, icon, id, label } = option;
-            return (
-              <Button
-                color={color}
-                confirmMessage={confirmMessage}
-                elementState={
-                  (focused ?? 0) >= 0 && index === focused
-                    ? ELEMENT_STATE.ACTIVE
-                    : option.elementState
-                }
-                icon={icon}
-                isFullWidth
-                key={id}
-                onPress={() => handlePressOption(option)}
-                rightElement={
-                  value && id === value ? (
-                    <Wrapper
-                      bottom={0}
-                      position={SHAPE_POSITION.ABSOLUTE}
-                      right={0}
-                      top={0}>
-                      <Icon icon="check" />
-                    </Wrapper>
-                  ) : undefined
-                }
-                type={BUTTON_TYPE.INVISIBLE}>
-                {(renderOption ? renderOption(option) : label) ?? id}
-              </Button>
-            );
-          }}
-          s={THEME_SIZE.SMALL}
-        />
-      </Wrapper>
+      <VirtualizedList
+        items={options}
+        pTop={THEME_SIZE.SMALL}
+        render={(option: TType, index) => {
+          const { color, confirmMessage, icon, id, label } = option;
+          return (
+            <Button
+              color={color}
+              confirmMessage={confirmMessage}
+              elementState={
+                (focused ?? 0) >= 0 && index === focused
+                  ? ELEMENT_STATE.ACTIVE
+                  : option.elementState
+              }
+              icon={icon}
+              isFullWidth
+              key={id}
+              onPress={() => handlePressOption(option)}
+              rightElement={
+                value && id === value ? (
+                  <Wrapper
+                    bottom={0}
+                    position={SHAPE_POSITION.ABSOLUTE}
+                    right={0}
+                    top={0}>
+                    <Icon icon="check" />
+                  </Wrapper>
+                ) : undefined
+              }
+              type={BUTTON_TYPE.INVISIBLE}>
+              {(renderOption ? renderOption(option) : label) ?? id}
+            </Button>
+          );
+        }}
+        s={THEME_SIZE.SMALL}
+      />
     );
     return isMobile ? (
       <>

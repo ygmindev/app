@@ -31,7 +31,6 @@ import isMatch from 'lodash/isMatch';
 import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'lodash/mapValues';
 import reduce from 'lodash/reduce';
-import uniq from 'lodash/uniq';
 import { cloneElement, type ComponentType, type ReactElement, useMemo } from 'react';
 import { Provider as _Provider, useDispatch } from 'react-redux';
 import { type PersistConfig, type Persistor } from 'redux-persist';
@@ -128,7 +127,7 @@ export class _Store<
             if (isArray(v)) {
               storeInitialState[kS] = [] as StateModel[keyof StateModel];
               storeActions[`${k}Add` as TKey] = (store, value) => {
-                store.set(kS, uniq([...((store.get(kS) as Array<never>) ?? []), value]) as never);
+                store.set(kS, [...((store.get(kS) as Array<never>) ?? []), value] as never);
               };
               storeActions[`${k}Remove` as TKey] = (store, value) => {
                 store.set(

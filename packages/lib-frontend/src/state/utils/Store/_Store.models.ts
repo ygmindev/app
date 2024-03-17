@@ -1,6 +1,3 @@
-import { type CaseReducerActions, type SliceCaseReducers } from '@reduxjs/toolkit';
-import { type ComponentType } from 'react';
-
 import {
   type CookiesModel,
   type NestedDefaultStateModel,
@@ -8,6 +5,8 @@ import {
   type NestedReducerModel,
 } from '@lib/frontend/state/state.models';
 import { type StateProviderPropsModel } from '@lib/frontend/state/utils/Store/Store.models';
+import { type CaseReducerActions, type SliceCaseReducers } from '@reduxjs/toolkit';
+import { type ComponentType } from 'react';
 
 export type _StoreParamsModel<
   TKeys extends Array<string>,

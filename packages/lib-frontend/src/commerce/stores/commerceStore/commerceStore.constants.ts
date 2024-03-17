@@ -6,4 +6,6 @@ export const COMMERCE_REDUCER: CommerceReducerModel = {
   defaultState: {
     products: [],
   },
+
+  persist: true,
 };

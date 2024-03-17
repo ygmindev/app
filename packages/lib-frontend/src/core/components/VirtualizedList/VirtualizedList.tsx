@@ -3,8 +3,9 @@ import {
   type VirtualizedListPropsModel,
   type VirtualizedListRefModel,
 } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { getSpacing } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
@@ -21,24 +22,25 @@ export const VirtualizedList = forwardRef(
     }: RLFCPropsModel<VirtualizedListRefModel, VirtualizedListPropsModel<TType>>,
     ref: ForwardedRef<VirtualizedListRefModel>,
   ): ReactElement<RLFCPropsModel<VirtualizedListRefModel, VirtualizedListPropsModel<TType>>> => {
-    const { styles } = useStyles({ props });
+    const { wrapperProps } = useLayoutStyles({ props });
     const theme = useTheme();
     return (
-      <_VirtualizedList
-        {...props}
-        divider={
-          s ? (
-            <View
-              style={
-                isHorizontal ? { width: getSpacing(s, theme) } : { height: getSpacing(s, theme) }
-              }
-            />
-          ) : undefined
-        }
-        isHorizontal={isHorizontal}
-        ref={ref}
-        style={styles}
-      />
+      <Wrapper {...wrapperProps}>
+        <_VirtualizedList
+          {...props}
+          divider={
+            s ? (
+              <View
+                style={
+                  isHorizontal ? { width: getSpacing(s, theme) } : { height: getSpacing(s, theme) }
+                }
+              />
+            ) : undefined
+          }
+          isHorizontal={isHorizontal}
+          ref={ref}
+        />
+      </Wrapper>
     );
   },
 );
