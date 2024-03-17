@@ -7,6 +7,8 @@ import { type EntityResourceDataModel } from '@lib/shared/resource/resources/Ent
 export type PricingModel = EmbeddedResourceModel & {
   [PRODUCT_RESOURCE_NAME]?: ProductModel;
 
+  currency?: string;
+
   frequency?: PricingFrequencyModel;
 
   price: number;

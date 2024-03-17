@@ -1,4 +1,6 @@
+import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
 import { PRODUCT } from '@lib/frontend/commerce/commerce.constants';
+import { Price } from '@lib/frontend/commerce/components/Price/Price';
 import { useProductResource } from '@lib/frontend/commerce/hooks/useProductResource/useProductResource';
 import {
   type ProductPageParamsModle,
@@ -12,26 +14,35 @@ import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
+import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
+import { type ProductArgsModel } from '@lib/shared/commerce/utils/ProductArgs/ProductArgs.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
+import { useState } from 'react';
 
 export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const { location } = useRouter<ProductPageParamsModle>();
   const { get } = useProductResource();
-  const [products, productsSet] = useStore('commerce.products');
+  const actions = useActions();
 
-  const handleAdd = (product?: PartialModel<ProductModel>): void => {
-    if (product) {
-      const index = products?.findIndex((v) => v.productId === product._id);
-      if (index !== undefined && index >= 0) {
-      }
-      // const pricingF = index !== undefined && index >= 0 && products?.[index];
-    }
+  const [product, productSet] = useState<ProductArgsModel>();
+
+  const getProduct = async (): Promise<PartialModel<ProductModel> | undefined> => {
+    const result = (await get({ filter: [{ field: '_id', value: location.params?.id }] }))?.result;
+    const pricing = result?.[PRICING_RESOURCE_NAME]?.[0];
+    pricing &&
+      productSet({
+        name: result.name ?? '',
+        price: pricing.price,
+        pricingId: pricing._id,
+        productId: result._id ?? '',
+      });
+    return result;
   };
 
   return (
@@ -39,24 +50,29 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
       {...wrapperProps}
       flex
       id={PRODUCT}
-      params={{ filter: [{ field: '_id', value: location.params?.id }] }}
-      query={get}>
+      query={getProduct}>
       {({ data }) => (
         <MainLayout
           bottomElement={
             <Button
-              elementState={data?.result ? undefined : ELEMENT_STATE.DISABLED}
+              elementState={product ? undefined : ELEMENT_STATE.DISABLED}
               icon="add"
-              onPress={() => handleAdd(data?.result)}>
+              onPress={() => actions?.commerce.productsAdd(product)}>
               {t('commerce:addToCart')}
             </Button>
           }
           isFullHeight
           s>
-          <Text>{data?.result?.name}</Text>
+          <Skeleton>
+            <Text fontStyle={FONT_STYLE.TITLE}>{data?.name}</Text>
+          </Skeleton>
 
-          {data?.result?.[PRICING_RESOURCE_NAME]?.map((pricing) => (
-            <Text key={pricing._id}>{`${pricing.price}`}</Text>
+          {data?.[PRICING_RESOURCE_NAME]?.map((pricing) => (
+            <Price
+              currency={pricing.currency}
+              key={pricing._id}
+              price={pricing.price}
+            />
           ))}
         </MainLayout>
       )}

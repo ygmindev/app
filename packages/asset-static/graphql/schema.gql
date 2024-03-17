@@ -1347,6 +1347,7 @@ type Pricing {
   Product: Product
   _id: String
   created: DateTime
+  currency: String
   frequency: String
   price: Float
 }
@@ -1355,6 +1356,7 @@ input PricingCreateFormInput {
   Product: ProductInput
   _id: String
   created: DateTime
+  currency: String
   frequency: String
   price: Float
 }
@@ -1368,6 +1370,7 @@ input PricingCreateManyFormInput {
   Product: ProductInput
   _id: String
   created: DateTime
+  currency: String
   frequency: String
   price: Float
 }
@@ -1468,6 +1471,7 @@ input PricingInput {
   Product: ProductInput
   _id: String
   created: DateTime
+  currency: String
   frequency: String
   price: Float
 }
@@ -1521,6 +1525,7 @@ input PricingUpdateUpdateInput {
   Product: ProductInput
   _id: String
   created: DateTime
+  currency: String
   frequency: String
   price: Float
 }

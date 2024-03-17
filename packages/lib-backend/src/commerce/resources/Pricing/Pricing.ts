@@ -17,6 +17,9 @@ export class Pricing extends EmbeddedResource implements PricingModel {
   @withEmbeddableRootField({ Resource: () => Product })
   [PRODUCT_RESOURCE_NAME]?: ProductModel;
 
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  currency?: string;
+
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   frequency!: PricingFrequencyModel;
 
