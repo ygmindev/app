@@ -9,7 +9,6 @@ import {
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { isNumeric } from '@lib/shared/core/utils/isNumeric/isNumeric';
 import toNumber from 'lodash/toNumber';
 import toString from 'lodash/toString';
 import { forwardRef } from 'react';
@@ -22,23 +21,30 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
       value,
     });
 
+    const handleChange = (v?: number | string): void => {
+      const valueF = v === undefined ? defaultValue : toNumber(v);
+      if (valueF !== undefined && valueF >= 0) {
+        valueControlledSet(valueF);
+      }
+    };
+
     return (
       <TextInput
         {...props}
-        onChange={(v) => valueControlledSet(isNumeric(v) ? toNumber(v) : defaultValue)}
+        onChange={handleChange}
         ref={ref}
         rightElement={
           <Wrapper isRow>
             <Button
               icon="remove"
-              onPress={() => valueControlledSet((valueControlled ?? 0) - 1)}
+              onPress={() => handleChange((valueControlled ?? 0) - 1)}
               size={THEME_SIZE.SMALL}
               type={BUTTON_TYPE.INVISIBLE}
             />
 
             <Button
               icon="add"
-              onPress={() => valueControlledSet((valueControlled ?? 0) + 1)}
+              onPress={() => handleChange((valueControlled ?? 0) + 1)}
               size={THEME_SIZE.SMALL}
               type={BUTTON_TYPE.INVISIBLE}
             />
