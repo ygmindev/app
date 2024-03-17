@@ -1,11 +1,11 @@
 import { CART, PRODUCT } from '@lib/frontend/commerce/commerce.constants';
-import { CartPage } from '@lib/frontend/commerce/pages/CartPage/CartPage';
+import { OrderPage } from '@lib/frontend/commerce/pages/OrderPage/OrderPage';
 import { ProductPage } from '@lib/frontend/commerce/pages/ProductPage/ProductPage';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 
 export const commerceRoutes: Array<RouteModel> = [
   {
-    element: <CartPage />,
+    element: <OrderPage />,
     pathname: CART,
   },
   {

@@ -28,9 +28,11 @@ import cloneDeep from 'lodash/cloneDeep';
 import findIndex from 'lodash/findIndex';
 import isArray from 'lodash/isArray';
 import isMatch from 'lodash/isMatch';
+import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'lodash/mapValues';
 import reduce from 'lodash/reduce';
+import uniq from 'lodash/uniq';
 import { cloneElement, type ComponentType, type ReactElement, useMemo } from 'react';
 import { Provider as _Provider, useDispatch } from 'react-redux';
 import { type PersistConfig, type Persistor } from 'redux-persist';
@@ -127,7 +129,7 @@ export class _Store<
             if (isArray(v)) {
               storeInitialState[kS] = [] as StateModel[keyof StateModel];
               storeActions[`${k}Add` as TKey] = (store, value) => {
-                store.set(kS, [...((store.get(kS) as Array<never>) ?? []), value] as never);
+                store.set(kS, uniq([...((store.get(kS) as Array<never>) ?? []), value]) as never);
               };
               storeActions[`${k}Remove` as TKey] = (store, value) => {
                 store.set(
@@ -139,7 +141,7 @@ export class _Store<
               storeActions[`${k}Update` as TKey] = (store, value) => {
                 const [filter, update] = value as [never, object];
                 const values = cloneDeep(store.get(kS) as Array<never>);
-                const i = findIndex(values, filter);
+                const i = isNumber(filter) ? filter : findIndex(values, filter);
                 if (i >= 0) {
                   values[i] = (
                     isPlainObject(values[i]) ? { ...(values[i] as object), ...update } : update

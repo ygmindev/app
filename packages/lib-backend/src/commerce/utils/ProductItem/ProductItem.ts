@@ -1,10 +1,10 @@
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { type ProductArgsModel } from '@lib/shared/commerce/utils/ProductArgs/ProductArgs.models';
+import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ name: 'ProductArgs' })
-export class ProductArgs implements ProductArgsModel {
+@withEntity({ name: 'ProductItem' })
+export class ProductItem implements ProductItemModel {
   @withField({ type: DATA_TYPE.STRING })
   name!: string;
 

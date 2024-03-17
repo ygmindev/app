@@ -15,11 +15,12 @@ import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBou
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
-import { type ProductArgsModel } from '@lib/shared/commerce/utils/ProductArgs/ProductArgs.models';
+import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { useState } from 'react';
 
@@ -28,9 +29,10 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { location } = useRouter<ProductPageParamsModle>();
   const { get } = useProductResource();
-  const actions = useActions();
 
-  const [product, productSet] = useState<ProductArgsModel>();
+  const actions = useActions();
+  const [product, productSet] = useState<ProductItemModel>();
+  const [products] = useStore('commerce.products');
 
   const getProduct = async (): Promise<PartialModel<ProductModel> | undefined> => {
     const result = (await get({ filter: [{ field: '_id', value: location.params?.id }] }))?.result;
@@ -45,6 +47,19 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
     return result;
   };
 
+  const handleAdd = (product?: ProductItemModel): void => {
+    const i = products?.findIndex(
+      (v) => v.productId === product?.productId && v.pricingId === product?.pricingId,
+    );
+    const productF = i !== undefined && products?.[i];
+    productF && i >= 0
+      ? actions?.commerce.productsUpdate([
+          i,
+          { ...productF, quantity: (products?.[i]?.quantity ?? 0) + 1 },
+        ])
+      : actions?.commerce.productsAdd(product);
+  };
+
   return (
     <DataBoundary
       {...wrapperProps}
@@ -57,7 +72,7 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
             <Button
               elementState={product ? undefined : ELEMENT_STATE.DISABLED}
               icon="add"
-              onPress={() => actions?.commerce.productsAdd(product)}>
+              onPress={() => handleAdd(product)}>
               {t('commerce:addToCart')}
             </Button>
           }

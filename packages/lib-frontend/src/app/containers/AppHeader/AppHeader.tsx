@@ -2,6 +2,7 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { Logo } from '@lib/frontend/app/components/Logo/Logo';
 import { type AppHeaderPropsModel } from '@lib/frontend/app/containers/AppHeader/AppHeader.models';
 import { AuthMenu } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu';
+import { CART } from '@lib/frontend/commerce/commerce.constants';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Title } from '@lib/frontend/core/components/Title/Title';
@@ -9,6 +10,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -18,6 +20,7 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 
 export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
+  const { push } = useRouter();
   const { wrapperProps } = useLayoutStyles({ props });
   const [isOffline] = useStore('app.isOffline');
   const [products] = useStore('commerce.products');
@@ -44,6 +47,7 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
         <Button
           icon="cart"
           iconText={`${products?.length ?? 0}`}
+          onPress={() => push({ pathname: CART })}
           type={BUTTON_TYPE.INVISIBLE}
         />
 

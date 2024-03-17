@@ -1,5 +1,3 @@
-import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
-
 import {
   type _UseTableModel,
   type _UseTableParamsModel,
@@ -7,6 +5,7 @@ import {
 import { type TableHeaderModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
 
 export const _useTable = <TType,>({
   columns,
@@ -49,6 +48,7 @@ export const _useTable = <TType,>({
             id: cell.id as StringKeyModel<TType>,
             value: (column && column.formatter
               ? column.formatter({
+                  index: i,
                   row: row.original,
                   value: value as TType[StringKeyModel<TType>],
                 })

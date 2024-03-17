@@ -1,5 +1,5 @@
-import { type ProductArgsModel } from '@lib/shared/commerce/utils/ProductArgs/ProductArgs.models';
+import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 
 export type CheckoutButtonPropsModel = {
-  products?: Array<ProductArgsModel>;
+  products?: Array<ProductItemModel>;
 };

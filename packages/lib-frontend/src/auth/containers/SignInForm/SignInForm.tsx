@@ -8,7 +8,6 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { StepForm } from '@lib/frontend/data/components/StepForm/StepForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
@@ -25,7 +24,6 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   const { t } = useTranslation([AUTH]);
   const { signIn, usernameUpdate } = useSignInResource();
   const { replace } = useRouter();
-  const theme = useTheme();
 
   const handleSubmit = async (form: SignInFormModel): Promise<void> =>
     mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form);

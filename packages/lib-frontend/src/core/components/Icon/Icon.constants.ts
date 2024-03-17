@@ -121,6 +121,7 @@ export const IONIC_ICONS = {
 export const FONTAWESOME_ICONS = {
   ban: 'ban',
   bank: 'bank',
+  broom: 'broom',
   contact: 'address-book-o',
   copyright: 'copyright',
   diamond: 'diamond',

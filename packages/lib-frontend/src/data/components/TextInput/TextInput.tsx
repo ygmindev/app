@@ -56,7 +56,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       language,
       leftElement,
       maxLength,
-      minWidth,
       numberOfLines,
       onBlur,
       onChange,
@@ -91,7 +90,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         value: elementState,
       });
 
-    const sizeF = size ?? (label ? THEME_SIZE.MEDIUM : THEME_SIZE.SMALL);
+    const sizeF = size ?? THEME_SIZE.MEDIUM;
     const isDisabled =
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
 
@@ -136,7 +135,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         position={SHAPE_POSITION.ABSOLUTE}
         right={0}
         top={0}
-        zIndex={elementStateF === ELEMENT_STATE.ACTIVE ? 0 : -1}>
+        zIndex>
         {!isNoClear && isActive && (
           <Appearable
             elementState={elementStateF}

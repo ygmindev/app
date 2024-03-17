@@ -1,11 +1,9 @@
-import { CartPage } from '@lib/frontend/commerce/pages/CartPage/CartPage';
-import { type CartPagePropsModel } from '@lib/frontend/commerce/pages/CartPage/CartPage.models';
+import { ProductForm } from '@lib/frontend/commerce/containers/ProductForm/ProductForm';
+import { type ProductFormPropsModel } from '@lib/frontend/commerce/containers/ProductForm/ProductForm.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<CartPagePropsModel>({
-  target: CartPage,
-});
+const { Component, displayName, testID } = withTestComponent<ProductFormPropsModel>({ target: ProductForm });
 
 describe(displayName, () => {
   test('works', async () => {

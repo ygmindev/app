@@ -110,7 +110,7 @@ export type ArrayActionsModel<TType> = {
           Record<`${TKey}Remove`, InferModel<TType[TKey]>> &
           Record<
             `${TKey}Update`,
-            [filter: PartialModel<InferModel<TType[TKey]>>, value: InferModel<TType[TKey]>]
+            [filter: PartialModel<InferModel<TType[TKey]>> | number, value: InferModel<TType[TKey]>]
           >
       >
     : unknown;

@@ -153,14 +153,13 @@ export const Table = forwardRef(
                       key={cell.id}
                       width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
                       {cell.renderer ? (
-                        cell.renderer({ row: row.value, value: cell.value })
+                        cell.renderer({ index: i, row: row.value, value: cell.value })
                       ) : cell.field ? (
-                        cloneElement(cell.field({ row: row.value, value: cell.value }), {
+                        cloneElement(cell.field({ index: i, row: row.value, value: cell.value }), {
                           error:
                             row.id &&
                             cell.columnId &&
                             getValue(errors, `${row.id}.${cell.columnId}`),
-                          label: cell.label,
                           onChange: onChange
                             ? <TKey extends StringKeyModel<TType>>(value: TType[TKey]) => {
                                 const newValue = cloneDeep(props.data);

@@ -21,12 +21,12 @@ export type QueryContextModel = {
 export type DataRendererModel<
   TType,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
-> = (params: { row: TType; value?: TType[TKey] }) => ReactElement | null;
+> = (params: { index: number; row: TType; value?: TType[TKey] }) => ReactElement | null;
 
 export type DataFormatterModel<
   TType,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
-> = (params: { row: TType; value: TType[TKey] }) => string;
+> = (params: { index: number; row: TType; value: TType[TKey] }) => string | undefined;
 
 export type ValuePropsModel<TType = string> = {
   defaultValue?: TType;

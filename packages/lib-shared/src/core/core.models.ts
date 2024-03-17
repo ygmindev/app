@@ -24,7 +24,7 @@ export type PartialDeepModel<TType> = PartialDeep<TType>;
 
 export type RequiredModel<TType> = Required<TType>;
 
-export type EmptyObjectModel = Record<string, never>;
+export type EmptyObjectModel = Record<string, unknown>;
 
 export type NilModel = false | undefined | null | '';
 
