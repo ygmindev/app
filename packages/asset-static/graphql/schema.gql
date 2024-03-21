@@ -1655,6 +1655,7 @@ input ProductInput {
 }
 
 input ProductItemInput {
+  isSelected: Boolean
   name: String
   price: Float
   pricingId: String

@@ -23,7 +23,7 @@ export const Price: LFCModel<PricePropsModel> = ({ currency, price, ...props }) 
 
       {a && <Text fontStyle={FONT_STYLE.TITLE}>{a}</Text>}
 
-      {d && <Text>{d}</Text>}
+      {d && <Text>{d ?? 0}</Text>}
     </Wrapper>
   );
 };

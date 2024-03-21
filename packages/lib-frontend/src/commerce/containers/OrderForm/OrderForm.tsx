@@ -9,9 +9,15 @@ import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 export const OrderForm: LFCModel<OrderFormPropsModel> = ({ ...props }) => {
   const { t } = useTranslation([COMMERCE]);
   const { wrapperProps } = useLayoutStyles({ props });
+
+  const handleSubmit = async (data: unknown): Promise<void> => {
+    console.warn(data);
+  };
+
   return (
     <StepForm
       {...wrapperProps}
+      onSubmit={handleSubmit}
       steps={[{ element: <ProductForm />, id: 'product', title: t('commerce:product_plural') }]}
     />
   );

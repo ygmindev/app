@@ -29,7 +29,6 @@ export const Icon: RTFCModel<AnimatableRefModel<TextStyleModel>, IconPropsModel>
         },
       ],
     });
-
     const Component = props.animation ? AnimatableIcon : _Icon;
     return iconText ? (
       <Wrapper style={styles}>

@@ -1,3 +1,3 @@
-export const CART = 'cart';
+export const ORDER = 'order';
 
 export const PRODUCT = 'product';

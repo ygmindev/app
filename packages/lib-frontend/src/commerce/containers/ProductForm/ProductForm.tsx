@@ -1,13 +1,14 @@
 import { Price } from '@lib/frontend/commerce/components/Price/Price';
 import { type ProductFormPropsModel } from '@lib/frontend/commerce/containers/ProductForm/ProductForm.models';
+import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
+import { CheckboxInput } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import { Table } from '@lib/frontend/data/components/Table/Table';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
@@ -16,12 +17,16 @@ import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
 
-export const ProductForm: LFCModel<ProductFormPropsModel> = ({ ...props }) => {
+export const ProductForm: LFCModel<ProductFormPropsModel> = ({ onSubmit, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([COMMERCE]);
   const [products, productsSet] = useStore('commerce.products');
-  const price = getPrice(products);
-  const actions = useActions();
+  const productsF = products?.filter((product) => product.isSelected !== false);
+  const price = getPrice(productsF);
+
+  const handleSubmit = async (): Promise<void> => {
+    onSubmit && (await onSubmit({ products: productsF }));
+  };
 
   return (
     <MainLayout
@@ -29,6 +34,12 @@ export const ProductForm: LFCModel<ProductFormPropsModel> = ({ ...props }) => {
       s>
       <Table
         columns={[
+          {
+            field: ({ value }) => <CheckboxInput value={value as boolean} />,
+            id: 'isSelected',
+            label: '',
+            width: 30,
+          },
           { id: 'name', label: t('core:name') },
           {
             formatter: ({ value }) => numberFormat(value as number, { currency: 'usd' }),
@@ -60,6 +71,8 @@ export const ProductForm: LFCModel<ProductFormPropsModel> = ({ ...props }) => {
 
         <Price price={price} />
       </Wrapper>
+
+      <Button onPress={handleSubmit}>{t('core:continue')}</Button>
     </MainLayout>
   );
 };

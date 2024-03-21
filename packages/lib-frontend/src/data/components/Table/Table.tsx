@@ -89,7 +89,6 @@ export const Table = forwardRef(
         round>
         {!isHeadless && (
           <Wrapper
-            border={DIRECTION.BOTTOM}
             isAlign
             isFullWidth={isFullWidth}
             isRow>
@@ -120,7 +119,7 @@ export const Table = forwardRef(
           isVerticalScrollable>
           {rows.map((row, i) => (
             <Wrapper
-              border={DIRECTION.BOTTOM}
+              border={DIRECTION.TOP}
               borderColor={theme.color.border}
               isAlign
               isRow

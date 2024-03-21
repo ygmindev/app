@@ -16,7 +16,7 @@ export const _useTable = <TType,>({
     columns:
       columns?.map(({ id, label, width }) => ({
         accessorKey: id,
-        header: label ? t(label) : id,
+        header: label === undefined ? id : t(label),
         minSize: 0,
         size: width ?? 0,
       })) ?? [],

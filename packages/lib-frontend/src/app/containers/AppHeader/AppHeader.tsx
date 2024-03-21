@@ -2,7 +2,7 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { Logo } from '@lib/frontend/app/components/Logo/Logo';
 import { type AppHeaderPropsModel } from '@lib/frontend/app/containers/AppHeader/AppHeader.models';
 import { AuthMenu } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu';
-import { CART } from '@lib/frontend/commerce/commerce.constants';
+import { ORDER } from '@lib/frontend/commerce/commerce.constants';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Title } from '@lib/frontend/core/components/Title/Title';
@@ -47,7 +47,7 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
         <Button
           icon="cart"
           iconText={`${products?.length ?? 0}`}
-          onPress={() => push({ pathname: CART })}
+          onPress={() => push({ pathname: ORDER })}
           type={BUTTON_TYPE.INVISIBLE}
         />
 

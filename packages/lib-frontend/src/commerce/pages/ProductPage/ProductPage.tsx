@@ -48,16 +48,18 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
   };
 
   const handleAdd = (product?: ProductItemModel): void => {
-    const i = products?.findIndex(
-      (v) => v.productId === product?.productId && v.pricingId === product?.pricingId,
-    );
-    const productF = i !== undefined && products?.[i];
-    productF && i >= 0
-      ? actions?.commerce.productsUpdate([
-          i,
-          { ...productF, quantity: (products?.[i]?.quantity ?? 0) + 1 },
-        ])
-      : actions?.commerce.productsAdd(product);
+    if (product) {
+      const i = products?.findIndex(
+        (v) => v.productId === product?.productId && v.pricingId === product?.pricingId,
+      );
+      const productF = i !== undefined && products?.[i];
+      productF && i >= 0
+        ? actions?.commerce.productsUpdate([
+            i,
+            { ...productF, quantity: (products?.[i]?.quantity ?? 0) + 1 },
+          ])
+        : actions?.commerce.productsAdd({ ...product, isSelected: true });
+    }
   };
 
   return (
