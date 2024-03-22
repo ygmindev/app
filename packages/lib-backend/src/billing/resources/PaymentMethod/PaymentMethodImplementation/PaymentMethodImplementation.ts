@@ -14,6 +14,7 @@ import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -83,39 +84,40 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
         options: { project: { _id: true, externalId: true } },
         root: input.root,
       });
-      if (linkedUser) {
-        const products =
-          input.form?.products &&
+      if (input.form?.products && linkedUser) {
+        const { products } = input.form;
+        const productsGrouped = groupBy(products, ({ productId }) => productId);
+        const productsF =
+          products &&
           (
             await this.productImplementation.getMany({
               filter: [
                 {
                   condition: FILTER_CONDITION.IN,
                   field: '_id',
-                  value: input.form.products.map(({ productId }) => productId),
+                  value: Object.keys(productsGrouped),
                 },
               ],
               options: { project: { [PRICING_RESOURCE_NAME]: true } },
             })
           )?.result;
-
         const amount =
-          products?.reduce((result, product) => {
-            const item = input.form?.products?.find(
-              (v) => product._id && new ObjectId(v.productId).equals(product._id),
-            );
-            const pricingF =
-              item &&
-              product[PRICING_RESOURCE_NAME]?.find((pricing) =>
-                new ObjectId(item.pricingId).equals(pricing._id),
-              );
-            return pricingF ? result + pricingF.price * (item.quantity ?? 1) : result;
+          productsF?.reduce((result, product) => {
+            const pricings = productsGrouped[(product._id as unknown as ObjectId).toString()];
+            const productPrice = pricings
+              ?.filter((pricing) =>
+                product[PRICING_RESOURCE_NAME]?.find((v) =>
+                  new ObjectId(pricing.pricingId).equals(v._id),
+                ),
+              )
+              .reduce((pricingResult, v) => pricingResult + v.price * (v.quantity ?? 1), 0);
+            return result + (productPrice ?? 0);
           }, 0) ?? 0;
 
         const price = getPrice(input.form?.products);
 
         if (price !== amount) {
-          throw new InvalidArgumentError('Prices do not match');
+          throw new InvalidArgumentError(`prices do not match: ${price} vs. ${amount}`);
         }
 
         const result =

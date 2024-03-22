@@ -58,7 +58,7 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
             i,
             { ...productF, quantity: (products?.[i]?.quantity ?? 0) + 1 },
           ])
-        : actions?.commerce.productsAdd({ ...product, isSelected: true });
+        : actions?.commerce.productsAdd(product);
     }
   };
 

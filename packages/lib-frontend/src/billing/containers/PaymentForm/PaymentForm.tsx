@@ -1,25 +1,26 @@
 import { BILLING } from '@lib/frontend/billing/billing.constants';
-import { type CheckoutButtonPropsModel } from '@lib/frontend/billing/components/CheckoutButton/CheckoutButton.models';
 import { PaymentMethodInput } from '@lib/frontend/billing/components/PaymentMethodInput/PaymentMethodInput';
 import { type PaymentMethodInputRefModel } from '@lib/frontend/billing/components/PaymentMethodInput/PaymentMethodInput.models';
 import { SavedPaymentMethodInput } from '@lib/frontend/billing/components/SavedPaymentMethodInput/SavedPaymentMethodInput';
+import { type PaymentFormPropsModel } from '@lib/frontend/billing/containers/PaymentForm/PaymentForm.models';
 import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Tabs } from '@lib/frontend/core/components/Tabs/Tabs';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
+import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { useRef, useState } from 'react';
 
-export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ products, ...props }) => {
+export const PaymentForm: LFCModel<PaymentFormPropsModel> = ({ data, onSuccess, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
   const [tab, tabSet] = useState<string>('saved');
@@ -29,7 +30,8 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ products, .
   const { createToken } = usePaymentMethodResource();
   const [isComplete, isCompleteSet] = useState<boolean>();
 
-  const price = getPrice(products);
+  const products = data?.products as Array<ProductItemModel>;
+  const price = products && getPrice(products);
 
   const handleSubmit = async (): Promise<void> => {
     if (products) {
@@ -45,6 +47,7 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ products, .
           await ref.current?.submit();
         }
       }
+      onSuccess && (await onSuccess());
     }
     throw new InvalidArgumentError('no products to submit');
   };
@@ -60,7 +63,7 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ products, .
   };
 
   return (
-    <Wrapper
+    <MainLayout
       {...wrapperProps}
       s>
       <Tabs
@@ -101,6 +104,6 @@ export const CheckoutButton: LFCModel<CheckoutButtonPropsModel> = ({ products, .
         {/* {t('billing:pay', { value: numberFormat(price.value, { currency: price.currency }) })} */}
         {t('billing:pay', { value: price })}
       </Button>
-    </Wrapper>
+    </MainLayout>
   );
 };

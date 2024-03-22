@@ -1,3 +1,5 @@
+import { BILLING } from '@lib/frontend/billing/billing.constants';
+import { PaymentForm } from '@lib/frontend/billing/containers/PaymentForm/PaymentForm';
 import { type OrderFormPropsModel } from '@lib/frontend/commerce/containers/OrderForm/OrderForm.models';
 import { ProductForm } from '@lib/frontend/commerce/containers/ProductForm/ProductForm';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -7,7 +9,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 
 export const OrderForm: LFCModel<OrderFormPropsModel> = ({ ...props }) => {
-  const { t } = useTranslation([COMMERCE]);
+  const { t } = useTranslation([BILLING, COMMERCE]);
   const { wrapperProps } = useLayoutStyles({ props });
 
   const handleSubmit = async (data: unknown): Promise<void> => {
@@ -18,7 +20,10 @@ export const OrderForm: LFCModel<OrderFormPropsModel> = ({ ...props }) => {
     <StepForm
       {...wrapperProps}
       onSubmit={handleSubmit}
-      steps={[{ element: <ProductForm />, id: 'product', title: t('commerce:product_plural') }]}
+      steps={[
+        { element: <ProductForm />, id: 'product', title: t('commerce:product_plural') },
+        { element: <PaymentForm />, id: 'payment', title: t('billing:payment') },
+      ]}
     />
   );
 };

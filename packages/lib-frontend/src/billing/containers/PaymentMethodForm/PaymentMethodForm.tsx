@@ -10,7 +10,7 @@ import { ACCOUNT } from '@lib/shared/user/user.constants';
 import { useRef } from 'react';
 
 export const PaymentMethodForm: LFCModel<PaymentMethodFormPropsModel> = ({ ...props }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation([BILLING]);
   const ref = useRef<PaymentMethodInputRefModel>(null);
   return (
     <FormContainer
@@ -25,7 +25,7 @@ export const PaymentMethodForm: LFCModel<PaymentMethodFormPropsModel> = ({ ...pr
       onSubmit={async () => ref.current?.submit()}
       p
       redirectTo={{ pathname: `${ACCOUNT}/${BILLING}/${PAYMENT_METHOD}` }}
-      successMessage={t()}
+      successMessage={t('billing:paymentMethodSuccess')}
     />
   );
 };

@@ -5,9 +5,6 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: 'ProductItem' })
 export class ProductItem implements ProductItemModel {
-  @withField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
-  isSelected?: boolean;
-
   @withField({ type: DATA_TYPE.STRING })
   name!: string;
 

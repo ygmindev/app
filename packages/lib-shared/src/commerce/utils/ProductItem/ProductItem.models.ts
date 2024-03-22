@@ -1,6 +1,4 @@
 export type ProductItemModel = {
-  isSelected?: boolean;
-
   name: string;
 
   price: number;
