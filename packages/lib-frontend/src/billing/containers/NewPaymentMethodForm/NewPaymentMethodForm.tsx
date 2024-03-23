@@ -1,4 +1,4 @@
-import { BILLING, PAYMENT_METHOD } from '@lib/frontend/billing/billing.constants';
+import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { NewPaymentMethodInput } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput';
 import { type NewPaymentMethodInputRefModel } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput.models';
 import { type NewPaymentMethodFormPropsModel } from '@lib/frontend/billing/containers/NewPaymentMethodForm/NewPaymentMethodForm.models';
@@ -6,7 +6,6 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { ACCOUNT } from '@lib/shared/user/user.constants';
 import { useRef } from 'react';
 
 export const NewPaymentMethodForm: LFCModel<NewPaymentMethodFormPropsModel> = ({ ...props }) => {
@@ -17,9 +16,8 @@ export const NewPaymentMethodForm: LFCModel<NewPaymentMethodFormPropsModel> = ({
       {...props}
       fields={[{ element: <NewPaymentMethodInput ref={ref} />, id: PAYMENT_METHOD_RESOURCE_NAME }]}
       isFullHeight
-      onSubmit={ref.current?.submit}
+      onSubmit={async () => (await ref.current?.submit()) || null}
       p
-      redirectTo={{ pathname: `${ACCOUNT}/${BILLING}/${PAYMENT_METHOD}` }}
       successMessage={t('billing:paymentMethodSuccess')}
     />
   );

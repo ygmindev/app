@@ -11,6 +11,8 @@ import {
   type CardFundingModel,
 } from '@lib/shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import {
@@ -64,7 +66,9 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
     const elements = useElements();
     const isReady = stripeClient && elements;
 
-    const handleSetup = async (intent: PaymentIntent | SetupIntent): Promise<void> => {
+    const handleSetup = async (
+      intent: PaymentIntent | SetupIntent,
+    ): Promise<PartialModel<PaymentMethodModel> | NilModel> => {
       const { payment_method, status } = intent;
       if (status === 'succeeded') {
         const { card, id, type, us_bank_account } = payment_method as PaymentMethod;
@@ -99,7 +103,7 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
               throw new InvalidTypeError(type, 'payment method type');
           }
         })();
-        onCreate && (await onCreate(form));
+        return form && onCreate && (await onCreate(form));
       }
     };
 
@@ -120,7 +124,7 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
             if (error) {
               throw new Error(error.message);
             }
-            paymentIntent && (await handleSetup(paymentIntent));
+            return paymentIntent && (await handleSetup(paymentIntent));
           } else {
             const { error, setupIntent } = await stripeClient.confirmSetup({
               clientSecret: token,
@@ -131,9 +135,10 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
             if (error) {
               throw new Error(error.message);
             }
-            setupIntent && (await handleSetup(setupIntent));
+            return setupIntent && (await handleSetup(setupIntent));
           }
         }
+        return null;
       },
     }));
 

@@ -49,6 +49,7 @@ const QueryComponent = forwardRef(
       data,
       query: queryF,
       reset,
+      setData,
     } = useQuery<TParams, TResult>(id, query, { isBlocking }, params);
 
     useImperativeHandle(ref, () => ({
@@ -57,6 +58,7 @@ const QueryComponent = forwardRef(
         await queryF();
       },
       reset,
+      setData,
     }));
 
     return (
@@ -99,11 +101,16 @@ const MutateComponent = forwardRef(
     RLFCPropsModel<MutateComponentRefModel<TResult>, MutateComponentPropsModel<TParams, TResult>>
   > => {
     const { wrapperProps } = useLayoutStyles({ props });
-    const { data, mutate: mutateF } = useMutation<TParams, TResult>(id, mutate, { isBlocking });
+    const {
+      data,
+      mutate: mutateF,
+      reset,
+      setData,
+    } = useMutation<TParams, TResult>(id, mutate, { isBlocking });
 
     useAsync(async () => mutateF(params));
 
-    useImperativeHandle(ref, () => ({ getData: () => data, mutate: mutateF }));
+    useImperativeHandle(ref, () => ({ getData: () => data, mutate: mutateF, reset, setData }));
 
     return (
       (children && children({ data })) || (

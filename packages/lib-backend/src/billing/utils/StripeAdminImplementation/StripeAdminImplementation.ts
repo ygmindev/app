@@ -52,7 +52,7 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
             amount: charge.amount,
             automatic_payment_methods: { allow_redirects: 'never', enabled: true },
             confirm: !!paymentMethodId,
-            currency: 'usd',
+            currency: charge.currency,
             customer: userId,
             off_session: !!paymentMethodId,
             payment_method: paymentMethodId,

@@ -12,4 +12,5 @@ export type _UseQueryModel<TResult = void> = WithIdModel & {
   data?: TResult | null;
   query(): Promise<TResult | null>;
   reset(): Promise<void>;
+  setData(values?: TResult): Promise<void>;
 };

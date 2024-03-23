@@ -39,6 +39,7 @@ export type QueryComponentRefModel<TResult = void> = {
   getData(): TResult | null | undefined;
   query?(): Promise<void>;
   reset?(): Promise<void>;
+  setData?(values?: TResult): void;
 };
 
 export type MutateComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
@@ -55,4 +56,5 @@ export type MutateComponentRefModel<TResult = void> = {
   getData(): TResult | null | undefined;
   mutate?(): Promise<void>;
   reset?(): Promise<void>;
+  setData?(values?: TResult): void;
 };

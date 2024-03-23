@@ -1,10 +1,9 @@
 import { type BillingReducerModel } from '@lib/frontend/billing/stores/billingStore/billingStore.models';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 
 export const BILLING_REDUCER: BillingReducerModel = {
   actions: {},
 
   defaultState: {
-    [PAYMENT_METHOD_RESOURCE_NAME]: [],
+    paymentMethods: [],
   },
 };
