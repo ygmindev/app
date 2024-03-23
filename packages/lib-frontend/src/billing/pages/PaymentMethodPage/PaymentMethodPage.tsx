@@ -1,5 +1,5 @@
 import { BILLING } from '@lib/frontend/billing/billing.constants';
-import { PaymentMethodForm } from '@lib/frontend/billing/containers/PaymentMethodForm/PaymentMethodForm';
+import { NewPaymentMethodForm } from '@lib/frontend/billing/containers/NewPaymentMethodForm/NewPaymentMethodForm';
 import { useBankResource } from '@lib/frontend/billing/hooks/useBankResource/useBankResource';
 import { useCardResource } from '@lib/frontend/billing/hooks/useCardResource/useCardResource';
 import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
@@ -51,7 +51,7 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
         justify={FLEX_JUSTIFY.END}>
         <ModalButton
           element={({ onClose }) => (
-            <PaymentMethodForm
+            <NewPaymentMethodForm
               onCancel={onClose}
               onSuccess={async () => onClose()}
             />

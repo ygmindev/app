@@ -1,8 +1,8 @@
-import { STRIPE_ELEMENTS_STYLE } from '@lib/frontend/billing/components/PaymentMethodInput/_PaymentMethodInput.constants';
+import { STRIPE_ELEMENTS_STYLE } from '@lib/frontend/billing/components/NewPaymentMethodInput/_NewPaymentMethodInput.constants';
 import {
-  type _PaymentMethodInputPropsModel,
-  type _PaymentMethodInputRefModel,
-} from '@lib/frontend/billing/components/PaymentMethodInput/_PaymentMethodInput.models';
+  type _NewPaymentMethodInputPropsModel,
+  type _NewPaymentMethodInputRefModel,
+} from '@lib/frontend/billing/components/NewPaymentMethodInput/_NewPaymentMethodInput.models';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { type BankFormModel } from '@lib/shared/billing/resources/Bank/Bank.models';
@@ -24,10 +24,10 @@ import { forwardRef, useImperativeHandle } from 'react';
 
 const stripe = loadStripe(process.env.APP_STRIPE_TOKEN);
 
-export const _PaymentMethodInput: RLFCModel<
-  _PaymentMethodInputRefModel,
-  _PaymentMethodInputPropsModel
-> = forwardRef(({ items, onChange, onCreate, price, redirectTo, token }, ref) => {
+export const _NewPaymentMethodInput: RLFCModel<
+  _NewPaymentMethodInputRefModel,
+  _NewPaymentMethodInputPropsModel
+> = forwardRef(({ items, onCreate, price, redirectTo, token }, ref) => {
   const theme = useTheme();
   return (
     <Elements
@@ -35,9 +35,9 @@ export const _PaymentMethodInput: RLFCModel<
         ...STRIPE_ELEMENTS_STYLE(theme),
         ...(items
           ? {
+              // TODO: to locale currency
               // currency: price?.currency,
               amount: price,
-              // amount: price?.value,
               confirm: true,
               mode: 'payment',
               setup_future_usage: 'off_session',
@@ -48,7 +48,6 @@ export const _PaymentMethodInput: RLFCModel<
       stripe={stripe}>
       <StripeInput
         items={items}
-        onChange={onChange}
         onCreate={onCreate}
         price={price}
         redirectTo={redirectTo}
@@ -59,8 +58,8 @@ export const _PaymentMethodInput: RLFCModel<
   );
 });
 
-const StripeInput: RLFCModel<_PaymentMethodInputRefModel, _PaymentMethodInputPropsModel> =
-  forwardRef(({ items, onChange, onCreate, redirectTo, token }, ref) => {
+const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodInputPropsModel> =
+  forwardRef(({ items, onCreate, redirectTo, token }, ref) => {
     const stripeClient = useStripe();
     const elements = useElements();
     const isReady = stripeClient && elements;
@@ -138,10 +137,5 @@ const StripeInput: RLFCModel<_PaymentMethodInputRefModel, _PaymentMethodInputPro
       },
     }));
 
-    return (
-      <PaymentElement
-        onChange={({ complete }) => onChange && onChange({ isComplete: complete })}
-        options={{ layout: { type: 'tabs' } } as StripePaymentElementOptions}
-      />
-    );
+    return <PaymentElement options={{ layout: { type: 'tabs' } } as StripePaymentElementOptions} />;
   });

@@ -5,6 +5,7 @@ import { ProductImplementation } from '@lib/backend/commerce/resources/Product/P
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { LinkedUserImplementation } from '@lib/backend/user/resources/LinkedUser/LinkedUserImplementation/LinkedUserImplementation';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
+import { type ChargeModel } from '@lib/shared/billing/billing.models';
 import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodImplementationModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
@@ -84,12 +85,21 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
         options: { project: { _id: true, externalId: true } },
         root: input.root,
       });
-      if (input.form?.products && linkedUser) {
-        const { products } = input.form;
-        const productsGrouped = groupBy(products, ({ productId }) => productId);
-        const productsF =
-          products &&
-          (
+      if (!linkedUser) {
+        const id = await this.stripeAdminImplementation.createCustomer();
+        const { result: linkedUserNew } = await this.linkedUserImplementation.create({
+          form: { externalId: id, type: LINKED_USER_TYPE.STRIPE },
+          root: input.root,
+        });
+        linkedUserNew && (linkedUser = linkedUserNew);
+      }
+
+      if (linkedUser?.externalId) {
+        let charge: ChargeModel | undefined;
+        const products = input.form?.products;
+        if (products) {
+          const productsGrouped = groupBy(products, ({ productId }) => productId);
+          const productsF = (
             await this.productImplementation.getMany({
               filter: [
                 {
@@ -101,43 +111,33 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
               options: { project: { [PRICING_RESOURCE_NAME]: true } },
             })
           )?.result;
-        const amount =
-          productsF?.reduce((result, product) => {
-            const pricings = productsGrouped[(product._id as unknown as ObjectId).toString()];
-            const productPrice = pricings
-              ?.filter((pricing) =>
-                product[PRICING_RESOURCE_NAME]?.find((v) =>
-                  new ObjectId(pricing.pricingId).equals(v._id),
-                ),
-              )
-              .reduce((pricingResult, v) => pricingResult + v.price * (v.quantity ?? 1), 0);
-            return result + (productPrice ?? 0);
-          }, 0) ?? 0;
+          const amount =
+            productsF?.reduce((result, product) => {
+              const pricings = productsGrouped?.[(product._id as unknown as ObjectId).toString()];
+              const productPrice = pricings
+                ?.filter((pricing) =>
+                  product[PRICING_RESOURCE_NAME]?.find((v) =>
+                    new ObjectId(pricing.pricingId).equals(v._id),
+                  ),
+                )
+                .reduce((pricingResult, v) => pricingResult + v.price * (v.quantity ?? 1), 0);
+              return result + (productPrice ?? 0);
+            }, 0) ?? 0;
 
-        const price = getPrice(input.form?.products);
-
-        if (price !== amount) {
-          throw new InvalidArgumentError(`prices do not match: ${price} vs. ${amount}`);
+          const price = getPrice(input.form?.products);
+          if (price !== amount) {
+            throw new InvalidArgumentError(`prices do not match: ${price} vs. ${amount}`);
+          }
+          charge = { amount: amount * 100, currency: 'usd' };
         }
-
-        const result =
-          linkedUser.externalId &&
-          (await this.stripeAdminImplementation.createToken({
+        return {
+          result: await this.stripeAdminImplementation.createToken({
+            charge,
             paymentMethodId: input.form?.paymentMethodId,
-            price: { amount: amount * 100, currency: 'usd' },
             userId: linkedUser.externalId,
-          }));
-
-        return { result };
-      } else {
-        const id = await this.stripeAdminImplementation.createCustomer();
-        const { result: linkedUserNew } = await this.linkedUserImplementation.create({
-          form: { externalId: id, type: LINKED_USER_TYPE.STRIPE },
-          root: input.root,
-        });
-        linkedUserNew && (linkedUser = linkedUserNew);
+          }),
+        };
       }
-
       throw new NotFoundError('linked user');
     }
     throw new UnauthenticatedError();

@@ -1,6 +1,6 @@
 import { SignIn, SignInForm } from '@lib/backend/auth/resources/SignIn/SignIn';
-import { type SignInResolverModel } from '@lib/backend/auth/resources/SignIn/SignInResolver/SignInResolver.models';
 import { SignInImplementation } from '@lib/backend/auth/resources/SignIn/SignInImplementation/SignInImplementation';
+import { type SignInResolverModel } from '@lib/backend/auth/resources/SignIn/SignInResolver/SignInResolver.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';

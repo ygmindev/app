@@ -5,6 +5,7 @@ import {
 } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type OrderModel = EntityResourceModel & {
+  paymentMethodId?: string;
   products?: Array<ProductItemModel>;
 };
 

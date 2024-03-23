@@ -103,7 +103,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
 
                     <Wrapper
                       flex
-                      p>
+                      pVertical>
                       {children}
                     </Wrapper>
                   </KeyboardContainer>

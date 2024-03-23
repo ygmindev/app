@@ -1,11 +1,9 @@
-import { PaymentMethodForm } from '@lib/frontend/billing/containers/PaymentMethodForm/PaymentMethodForm';
-import { type PaymentMethodFormPropsModel } from '@lib/frontend/billing/containers/PaymentMethodForm/PaymentMethodForm.models';
+import { TableInput } from '@lib/frontend/data/components/TableInput/TableInput';
+import { type TableInputPropsModel } from '@lib/frontend/data/components/TableInput/TableInput.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<PaymentMethodFormPropsModel>({
-  target: PaymentMethodForm,
-});
+const { Component, displayName, testID } = withTestComponent<TableInputPropsModel>({ target: TableInput });
 
 describe(displayName, () => {
   test('works', async () => {

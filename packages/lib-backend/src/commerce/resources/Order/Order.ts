@@ -6,12 +6,16 @@ import {
   type OrderFormModel,
   type OrderModel,
 } from '@lib/shared/commerce/resources/Order/Order.models';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isRepository: true, name: ORDER_RESOURCE_NAME })
 export class Order extends EntityResource implements OrderModel {
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
-  name!: string;
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  paymentMethodId?: string;
+
+  @withField({ isArray: true, isOptional: true, isRepository: true, type: PROPERTY_TYPE.RESOURCE })
+  products?: Array<ProductItemModel>;
 }
 
 @withEntity({ name: `${ORDER_RESOURCE_NAME}Form` })
