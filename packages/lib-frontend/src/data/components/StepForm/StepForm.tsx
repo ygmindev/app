@@ -30,8 +30,10 @@ import { type ReactElement, useEffect, useRef } from 'react';
 import { cloneElement, useState } from 'react';
 
 export const StepForm = <TType, TResult = void>({
+  elementState,
   initialValues,
   isProgress,
+  onElementStateChange,
   onSubmit,
   onSuccess,
   redirectTo,
@@ -109,9 +111,10 @@ export const StepForm = <TType, TResult = void>({
                     <Button
                       description={t('core:step', { value: i + 1 })}
                       elementState={
-                        isActive || isValidCurrent || isValidPrevious
+                        elementState ??
+                        (isActive || isValidCurrent || isValidPrevious
                           ? undefined
-                          : ELEMENT_STATE.DISABLED
+                          : ELEMENT_STATE.DISABLED)
                       }
                       icon={isValidCurrent ? 'check' : 'dotsCircle'}
                       key={step.id}
@@ -138,9 +141,11 @@ export const StepForm = <TType, TResult = void>({
                 | ReactElement<FormStepPropsModel<TType, PartialModel<TType>, TResult>>
                 | undefined = fields ? (
                 <FormContainer
+                  elementState={elementState}
                   fields={fields}
                   flex
                   isCenter
+                  onElementStateChange={onElementStateChange}
                   validators={validators as FormValidatorsModel<PartialModel<TType>>}
                 />
               ) : (
@@ -158,7 +163,8 @@ export const StepForm = <TType, TResult = void>({
 
                       {cloneElement(elementF, {
                         data: values as PartialModel<TType>,
-                        elementState: isLoadingFF ? ELEMENT_STATE.LOADING : undefined,
+                        elementState:
+                          elementState ?? (isLoadingFF ? ELEMENT_STATE.LOADING : undefined),
                         initialValues: { ...initialValues, ...values } as PartialModel<TType>,
                         key: id,
                         onBack: () => {

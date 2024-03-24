@@ -7,6 +7,7 @@ import { ProductForm } from '@lib/frontend/commerce/containers/ProductForm/Produ
 import { useOrderResource } from '@lib/frontend/commerce/hooks/useOrderResource/useOrderResource';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { StepForm } from '@lib/frontend/data/components/StepForm/StepForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -36,6 +37,7 @@ export const OrderForm: LFCModel<OrderFormPropsModel> = ({ ...props }) => {
   return (
     <StepForm
       {...wrapperProps}
+      elementState={products?.length ? undefined : ELEMENT_STATE.DISABLED}
       onSubmit={handleSubmit}
       onSuccess={handleSuccess}
       redirectTo={{ pathname: `/${ORDER}/${SUCCESS}` }}
