@@ -1,5 +1,6 @@
 import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { PaymentForm } from '@lib/frontend/billing/containers/PaymentForm/PaymentForm';
+import { ORDER } from '@lib/frontend/commerce/commerce.constants';
 import { Price } from '@lib/frontend/commerce/components/Price/Price';
 import { type OrderFormPropsModel } from '@lib/frontend/commerce/containers/OrderForm/OrderForm.models';
 import { ProductForm } from '@lib/frontend/commerce/containers/ProductForm/ProductForm';
@@ -15,6 +16,7 @@ import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 import { type OrderFormModel } from '@lib/shared/commerce/resources/Order/Order.models';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
+import { SUCCESS } from '@lib/shared/core/core.constants';
 
 export const OrderForm: LFCModel<OrderFormPropsModel> = ({ ...props }) => {
   const { t } = useTranslation([BILLING, COMMERCE]);
@@ -36,7 +38,7 @@ export const OrderForm: LFCModel<OrderFormPropsModel> = ({ ...props }) => {
       {...wrapperProps}
       onSubmit={handleSubmit}
       onSuccess={handleSuccess}
-      redirectTo={{ pathname: '/' }}
+      redirectTo={{ pathname: `/${ORDER}/${SUCCESS}` }}
       steps={[
         { element: <ProductForm />, id: 'product', title: t('commerce:product_plural') },
         { element: <PaymentForm />, id: 'payment', title: t('billing:payment') },
