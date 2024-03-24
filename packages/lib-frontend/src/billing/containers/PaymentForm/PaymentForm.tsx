@@ -1,9 +1,13 @@
-import { type PaymentFormPropsModel } from '@lib/frontend/billing/containers/PaymentForm/PaymentForm.models';
+import {
+  type PaymentFormPropsModel,
+  type PaymentFormStepModel,
+} from '@lib/frontend/billing/containers/PaymentForm/PaymentForm.models';
 import { PaymentMethodInput } from '@lib/frontend/billing/containers/PaymentMethodInput/PaymentMethodInput';
+import { type PaymentMethodInputRefModel } from '@lib/frontend/billing/containers/PaymentMethodInput/PaymentMethodInput.models';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { useRef } from 'react';
 
 export const PaymentForm: LFCModel<PaymentFormPropsModel> = ({
   data,
@@ -12,16 +16,28 @@ export const PaymentForm: LFCModel<PaymentFormPropsModel> = ({
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
+  const ref = useRef<PaymentMethodInputRefModel>(null);
+
+  const handleSubmit = async (data: PaymentFormStepModel): Promise<void> => {
+    ref.current?.submit && (await ref.current.submit());
+    onSubmit && (await onSubmit(data));
+  };
+
   return (
     <FormContainer
       {...wrapperProps}
       fields={[
         {
-          element: <PaymentMethodInput products={data?.products as Array<ProductItemModel>} />,
+          element: (
+            <PaymentMethodInput
+              products={data?.products}
+              ref={ref}
+            />
+          ),
           id: 'paymentMethodId',
         },
       ]}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       onSuccess={onSuccess}
     />
   );

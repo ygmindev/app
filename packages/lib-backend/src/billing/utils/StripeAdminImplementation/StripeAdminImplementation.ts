@@ -25,7 +25,7 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
   }: {
     id: string;
     type: PaymentMethodTypeModel;
-  }): Promise<string | null> => {
+  }): Promise<string | undefined> => {
     const paymentMethod = await this.stripe.paymentMethods.retrieve(id);
     return (
       (() => {
@@ -35,9 +35,9 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
           case PAYMENT_METHOD_TYPE.CARD:
             return paymentMethod.card?.fingerprint;
           default:
-            return null;
+            return undefined;
         }
-      })() ?? null
+      })() ?? undefined
     );
   };
 
@@ -45,7 +45,7 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
     charge,
     paymentMethodId,
     userId,
-  }: StripeCreateTokenParamsModel): Promise<string> => {
+  }: StripeCreateTokenParamsModel): Promise<string | undefined> => {
     const token = charge
       ? (
           await this.stripe.paymentIntents.create({
@@ -54,7 +54,7 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
             confirm: !!paymentMethodId,
             currency: charge.currency,
             customer: userId,
-            off_session: !!paymentMethodId,
+            // off_session: !!paymentMethodId,
             payment_method: paymentMethodId,
             setup_future_usage: 'off_session',
           })

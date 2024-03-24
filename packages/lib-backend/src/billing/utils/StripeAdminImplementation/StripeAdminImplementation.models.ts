@@ -4,9 +4,9 @@ import { type PaymentMethodTypeModel } from '@lib/shared/billing/resources/Payme
 export type StripeAdminImplementationModel = {
   createCustomer(): Promise<string>;
 
-  createToken(params: StripeCreateTokenParamsModel): Promise<string | null>;
+  createToken(params: StripeCreateTokenParamsModel): Promise<string | undefined>;
 
-  getFingerprint(params: { id: string; type: PaymentMethodTypeModel }): Promise<string | null>;
+  getFingerprint(params: { id: string; type: PaymentMethodTypeModel }): Promise<string | undefined>;
 };
 
 export type StripeCreateTokenParamsModel = {

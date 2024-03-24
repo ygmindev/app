@@ -1,5 +1,6 @@
 import { Order } from '@lib/backend/commerce/resources/Order/Order';
 import { OrderImplementation } from '@lib/backend/commerce/resources/Order/OrderImplementation/OrderImplementation';
+import { type OrderResolverModel } from '@lib/backend/commerce/resources/Order/OrderResolver/OrderResolver.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
@@ -8,7 +9,6 @@ import {
   type OrderFormModel,
   type OrderModel,
 } from '@lib/shared/commerce/resources/Order/Order.models';
-import { type OrderResolverModel } from '@lib/backend/commerce/resources/Order/OrderResolver/OrderResolver.models';
 
 @withContainer()
 @withResolver({ Resource: () => Order })

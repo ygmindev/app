@@ -1,4 +1,5 @@
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { type PartialModel } from '@lib/shared/core/core.models';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
@@ -6,7 +7,7 @@ import {
 
 export type OrderModel = EntityResourceModel & {
   paymentMethodId?: string;
-  products?: Array<ProductItemModel>;
+  products?: Array<PartialModel<ProductItemModel>>;
 };
 
 export type OrderFormModel = EntityResourceDataModel<OrderModel>;

@@ -6,5 +6,5 @@ import { type EntityResourceImplementationModel } from '@lib/shared/resource/res
 
 export type OrderImplementationModel = EntityResourceImplementationModel<
   OrderModel,
-  OrderFormModel,
+  OrderFormModel
 >;

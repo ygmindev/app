@@ -1054,6 +1054,10 @@ type Mutation {
   GroupCreateMany(input: GroupCreateManyInput): GroupCreateManyOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
   GroupUpdate(input: GroupUpdateInput): GroupUpdateOutput
+  OrderCreate(input: OrderCreateInput): OrderCreateOutput
+  OrderCreateMany(input: OrderCreateManyInput): OrderCreateManyOutput
+  OrderRemove(input: OrderRemoveInput): OrderRemoveOutput
+  OrderUpdate(input: OrderUpdateInput): OrderUpdateOutput
   OtpCreate(input: OtpCreateInput): OtpCreateOutput
   OtpCreateMany(input: OtpCreateManyInput): OtpCreateManyOutput
   OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
@@ -1090,6 +1094,176 @@ type Mutation {
   linkedUserCreateMany(input: linkedUserCreateManyInput): linkedUserCreateManyOutput
   linkedUserRemove(input: linkedUserRemoveInput): linkedUserRemoveOutput
   linkedUserUpdate(input: linkedUserUpdateInput): linkedUserUpdateOutput
+}
+
+type Order {
+  _id: String
+  created: DateTime
+  paymentMethodId: String
+  products: [ProductItem]
+}
+
+input OrderCreateFormInput {
+  _id: String
+  created: DateTime
+  paymentMethodId: String
+  products: [ProductItemInput]
+}
+
+input OrderCreateInput {
+  form: OrderCreateFormInput
+  root: String
+}
+
+input OrderCreateManyFormInput {
+  _id: String
+  created: DateTime
+  paymentMethodId: String
+  products: [ProductItemInput]
+}
+
+input OrderCreateManyInput {
+  form: [OrderCreateManyFormInput]
+  root: String
+}
+
+type OrderCreateManyOutput {
+  result: Order
+}
+
+type OrderCreateOutput {
+  result: Order
+}
+
+type OrderGetConnectionConnection {
+  edges: [OrderGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type OrderGetConnectionEdge {
+  cursor: String
+  node: Order
+}
+
+input OrderGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [OrderInput]
+  resourceValue: OrderInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input OrderGetConnectionInput {
+  filter: [OrderGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type OrderGetConnectionOutput {
+  result: OrderGetConnectionConnection
+}
+
+input OrderGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [OrderInput]
+  resourceValue: OrderInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input OrderGetInput {
+  filter: [OrderGetFilterInput]
+  root: String
+}
+
+input OrderGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [OrderInput]
+  resourceValue: OrderInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input OrderGetManyInput {
+  filter: [OrderGetManyFilterInput]
+  root: String
+}
+
+type OrderGetManyOutput {
+  result: [Order]
+}
+
+type OrderGetOutput {
+  result: Order
+}
+
+input OrderInput {
+  _id: String
+  created: DateTime
+  paymentMethodId: String
+  products: [ProductItemInput]
+}
+
+input OrderRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [OrderInput]
+  resourceValue: OrderInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input OrderRemoveInput {
+  filter: [OrderRemoveFilterInput]
+  root: String
+}
+
+type OrderRemoveOutput {
+  result: Order
+}
+
+input OrderUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [OrderInput]
+  resourceValue: OrderInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input OrderUpdateInput {
+  filter: [OrderUpdateFilterInput]
+  root: String
+  update: OrderUpdateUpdateInput
+}
+
+type OrderUpdateOutput {
+  result: Order
+}
+
+input OrderUpdateUpdateInput {
+  _id: String
+  created: DateTime
+  paymentMethodId: String
+  products: [ProductItemInput]
 }
 
 type Otp {
@@ -1654,6 +1828,14 @@ input ProductInput {
   name: String
 }
 
+type ProductItem {
+  name: String
+  price: Float
+  pricingId: String
+  productId: String
+  quantity: Float
+}
+
 input ProductItemInput {
   name: String
   price: Float
@@ -1732,6 +1914,9 @@ type Query {
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
   GroupGetManyProtectedGetMany(input: GroupGetManyProtectedGetManyInput): GroupGetManyProtectedGetManyOutput
+  OrderGet(input: OrderGetInput): OrderGetOutput
+  OrderGetConnection(input: OrderGetConnectionInput): OrderGetConnectionOutput
+  OrderGetMany(input: OrderGetManyInput): OrderGetManyOutput
   OtpGet(input: OtpGetInput): OtpGetOutput
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput

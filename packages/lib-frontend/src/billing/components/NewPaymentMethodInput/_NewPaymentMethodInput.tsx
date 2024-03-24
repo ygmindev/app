@@ -12,6 +12,7 @@ import {
 } from '@lib/shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
@@ -22,25 +23,27 @@ import {
   type StripePaymentElementOptions,
 } from '@stripe/stripe-js';
 import { loadStripe } from '@stripe/stripe-js/pure';
-import { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle, useMemo } from 'react';
 
 const stripe = loadStripe(process.env.APP_STRIPE_TOKEN);
 
 export const _NewPaymentMethodInput: RLFCModel<
   _NewPaymentMethodInputRefModel,
   _NewPaymentMethodInputPropsModel
-> = forwardRef(({ items, onCreate, price, redirectTo, token }, ref) => {
+> = forwardRef(({ onCreate, products, redirectTo, token }, ref) => {
   const theme = useTheme();
+  const price = useMemo(() => getPrice(products), [products]);
   return (
     <Elements
       options={{
         ...STRIPE_ELEMENTS_STYLE(theme),
-        ...(items
+        ...(products
           ? {
               // TODO: to locale currency
-              // currency: price?.currency,
               amount: price,
-              confirm: true,
+              // confirm: true,
+              // TODO: to locale currency
+              currency: 'usd',
               mode: 'payment',
               setup_future_usage: 'off_session',
             }
@@ -49,9 +52,8 @@ export const _NewPaymentMethodInput: RLFCModel<
       }}
       stripe={stripe}>
       <StripeInput
-        items={items}
         onCreate={onCreate}
-        price={price}
+        products={products}
         redirectTo={redirectTo}
         ref={ref}
         token={token}
@@ -61,7 +63,7 @@ export const _NewPaymentMethodInput: RLFCModel<
 });
 
 const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodInputPropsModel> =
-  forwardRef(({ items, onCreate, redirectTo, token }, ref) => {
+  forwardRef(({ onCreate, products, redirectTo, token }, ref) => {
     const stripeClient = useStripe();
     const elements = useElements();
     const isReady = stripeClient && elements;
@@ -114,7 +116,7 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
           if (submitError) {
             throw new Error(submitError.message);
           }
-          if (items) {
+          if (products) {
             const { error, paymentIntent } = await stripeClient.confirmPayment({
               clientSecret: token,
               confirmParams: { expand: ['payment_method'], return_url: redirectTo ?? '' },

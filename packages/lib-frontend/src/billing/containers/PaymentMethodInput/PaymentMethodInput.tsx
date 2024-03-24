@@ -1,6 +1,5 @@
 import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { NewPaymentMethodInput } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput';
-import { type NewPaymentMethodInputRefModel } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput.models';
 import { SavedPaymentMethodInput } from '@lib/frontend/billing/components/SavedPaymentMethodInput/SavedPaymentMethodInput';
 import {
   type PaymentMethodInputPropsModel,
@@ -13,41 +12,41 @@ import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type PartialModel } from '@lib/shared/core/core.models';
-import { forwardRef, useRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 export const PaymentMethodInput: RLFCModel<
   PaymentMethodInputRefModel,
   PaymentMethodInputPropsModel
-> = forwardRef(({ defaultValue, onChange, products, value, ...props }, _) => {
+> = forwardRef(({ defaultValue, onChange, products, value, ...props }, ref) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
   const [tab, tabSet] = useState<string>('saved');
   const [paymentMethod, paymentMethodSet] = useState<PartialModel<PaymentMethodModel>>();
-  const ref = useRef<NewPaymentMethodInputRefModel>(null);
   const { valueControlledSet } = useValueControlled({
     defaultValue,
     onChange,
     value,
   });
-  const handleChange = (paymentMethod: PartialModel<PaymentMethodModel>): void => {
+
+  const handleChange = (paymentMethod?: PartialModel<PaymentMethodModel>): void => {
     paymentMethodSet(paymentMethod);
-    valueControlledSet(paymentMethod.externalId);
+    valueControlledSet(paymentMethod?.externalId);
   };
-  const price = products && getPrice(products);
+
+  const handleTabChange = (v: string): void => {
+    tabSet(v);
+    handleChange(undefined);
+  };
+
   return (
     <Wrapper
       {...wrapperProps}
       s>
       <Tabs
-        onChange={tabSet}
+        onChange={handleTabChange}
         tabs={[
-          {
-            icon: 'bookmark',
-            id: 'saved',
-            label: t('billing:savedPaymentMethod_plural'),
-          },
+          { icon: 'bookmark', id: 'saved', label: t('billing:savedPaymentMethod_plural') },
           { icon: 'add', id: 'new', label: t('billing:newPaymentMethod') },
         ]}
         value={tab}
@@ -62,8 +61,7 @@ export const PaymentMethodInput: RLFCModel<
 
       {tab === 'new' && (
         <NewPaymentMethodInput
-          items={['test']}
-          price={price}
+          products={products}
           ref={ref}
         />
       )}

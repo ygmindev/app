@@ -185,7 +185,10 @@ const FormContainerF = forwardRef(
         elementState: elementStateF ?? element.props.elementState,
         error: errors ? errors[id] : undefined,
         key: id,
-        onChange: (v) => handleChange(id)(v),
+        onChange: (v) => {
+          element.props.onChange && void element.props.onChange(v);
+          return handleChange(id)(v);
+        },
         onSubmit: handleSubmitF,
         ref:
           element.ref ??

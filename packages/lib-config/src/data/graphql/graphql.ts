@@ -9,6 +9,7 @@ import { BankResolver } from '@lib/backend/billing/resources/Bank/BankResolver/B
 import { CardResolver } from '@lib/backend/billing/resources/Card/CardResolver/CardResolver';
 import { PaymentMethodResolver } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver';
 import { ChatResolver } from '@lib/backend/chat/resources/Chat/ChatResolver/ChatResolver';
+import { OrderResolver } from '@lib/backend/commerce/resources/Order/OrderResolver/OrderResolver';
 import { PricingResolver } from '@lib/backend/commerce/resources/Pricing/PricingResolver/PricingResolver';
 import { ProductResolver } from '@lib/backend/commerce/resources/Product/ProductResolver/ProductResolver';
 import { Container } from '@lib/backend/core/utils/Container/Container';
@@ -40,6 +41,7 @@ const { _config, config } = defineConfig({
         ChatResolver,
         GroupResolver,
         LinkedUserResolver,
+        OrderResolver,
         OtpResolver,
         PaymentMethodResolver,
         PricingResolver,

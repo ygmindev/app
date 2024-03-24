@@ -1,5 +1,3 @@
-import { type GraphQLError } from 'graphql';
-
 import {
   type DepthArray,
   type InferModel,
@@ -10,6 +8,7 @@ import {
 } from '@lib/shared/core/core.models';
 import { type GraphQlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
 import { type ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
+import { type GraphQLError } from 'graphql';
 
 export type GraphQlParamsModel<TParams> = {
   query: string;

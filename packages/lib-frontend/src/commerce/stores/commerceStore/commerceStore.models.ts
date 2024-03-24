@@ -1,9 +1,9 @@
 import { type ReducerModel } from '@lib/frontend/state/state.models';
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
-import { type EmptyObjectModel } from '@lib/shared/core/core.models';
+import { type EmptyObjectModel, type PartialModel } from '@lib/shared/core/core.models';
 
 export type CommerceStateModel = {
-  products?: Array<ProductItemModel>;
+  products?: Array<PartialModel<ProductItemModel>>;
 };
 
 export type CommerceActionsParamsModel = EmptyObjectModel;
