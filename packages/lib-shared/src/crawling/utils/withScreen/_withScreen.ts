@@ -51,12 +51,10 @@ export const _withScreen = async (
 ): Promise<_WithScreenModel> => {
   const isProduction = process.env.NODE_ENV === 'production';
   const proxy = !!proxies?.length && proxies[Math.floor(Math.random() * proxies.length)];
-
   const browser = await puppeteer.launch({
     args: filterNil([
       ...(isProduction ? chromium.args : []),
-      // proxy && `--proxy-server=${proxy.url}`,
-      proxy && '--proxy-server=http://nvtjqvdh:baqs1fbshyxq@38.154.227.167:5868',
+      proxy && `--proxy-server=${proxy.url}`,
       '--disable-dev-shm-usage',
       '--disable-features=NetworkServiceInProcess2',
       '--disable-features=site-per-process',
@@ -76,11 +74,8 @@ export const _withScreen = async (
     protocolTimeout: 0,
   });
 
-  // await sleep(delayDefault);
   const page = await browser.newPage();
   proxy && (await page.authenticate({ password: proxy.password, username: proxy.username }));
-
-  // await sleep(delayDefault);
 
   await page.setUserAgent(
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
@@ -274,7 +269,8 @@ export const _withScreen = async (
 
     open: async (route) => {
       console.warn('@@@goto??');
-      await page.goto(route, { timeout: navigationTimeout, waitUntil: 'domcontentloaded' });
+      // await page.goto(route, { timeout: navigationTimeout, waitUntil: 'domcontentloaded' });
+      await page.goto(route, { timeout: navigationTimeout, waitUntil: 'networkidle2' });
       console.warn('@@@goto!!');
       await sleep(delayDefault);
     },

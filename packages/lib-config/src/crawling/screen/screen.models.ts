@@ -5,8 +5,6 @@ import { type PuppeteerLaunchOptions } from 'puppeteer';
 export type ScreenConfigModel = {
   delay: number;
 
-  delayDefault: number;
-
   dimension: RequiredModel<DimensionModel>;
 
   elementTimeout: number;
