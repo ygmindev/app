@@ -1,0 +1,19 @@
+{
+  "name": "@app/web-admin",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "private": true,
+  "dependencies": {
+    "@react-google-maps/api": "^2.19.3",
+    "@rpldy/upload-button": "^1.8.0",
+    "@rpldy/upload-drop-zone": "^1.8.0",
+    "@rpldy/uploader": "^1.8.0",
+    "@rpldy/uploady": "^1.8.0",
+    "color": "^4.2.3",
+    "date-fns": "^3.6.0",
+    "react-day-picker": "^8.10.1",
+    "react-native-reanimated": "^3.8.1",
+    "react-native-vector-icons": "^9.2.0",
+    "react-native-web": "^0.18.12"
+  }
+}

@@ -1,0 +1,13 @@
+import { GroupNameForm } from '@lib/frontend/group/containers/GroupNameForm/GroupNameForm';
+import { type GroupNameFormPropsModel } from '@lib/frontend/group/containers/GroupNameForm/GroupNameForm.models';
+import { render } from '@lib/frontend/test/utils/render/render';
+import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
+
+const { Component, displayName, testID } = withTestComponent<GroupNameFormPropsModel>({ target: GroupNameForm });
+
+describe(displayName, () => {
+  test('works', async () => {
+    const { findByTestId } = await render({ element: <Component /> });
+    expect(await findByTestId(testID)).toBeTruthy();
+  });
+});

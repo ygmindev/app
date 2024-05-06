@@ -1,0 +1,9 @@
+{
+  "day": "day",
+  "language": "language",
+  "location": "location",
+  "month": "month",
+  "timezone": "timezone",
+  "week": "week",
+  "year": "year"
+}

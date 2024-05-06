@@ -1,0 +1,9 @@
+{
+  "billing": "billing",
+  "newPaymentMethod": "new payment method",
+  "pay": "pay {{value}}",
+  "paymentMethod": "payment method",
+  "paymentMethod_plural": "payment methods",
+  "paymentMethodTitle": "{{name}} ending in {{last4}}",
+  "savedPaymentMethod_plural": "saved payment methods"
+}

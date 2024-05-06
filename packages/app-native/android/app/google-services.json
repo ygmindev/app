@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "218422222090",
+    "project_id": "app-46c38",
+    "storage_bucket": "app-46c38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218422222090:android:656df082c66222359b6ef3",
+        "android_client_info": {
+          "package_name": "com.appnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218422222090-t40p045q7g6blv35sojsfgihggkp49uj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE2auNXOoMcJ2hEQSEnZNzN1nwXu05KgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218422222090-t40p045q7g6blv35sojsfgihggkp49uj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,13 @@
+{
+  "billion": "billion",
+  "contains": "TRANSLATION_MISSING",
+  "equal": "TRANSLATION_MISSING",
+  "exact": "exact",
+  "exactMessage": "enter exact value instead",
+  "max": "max {{value}}",
+  "million": "million",
+  "min": "min {{value}}",
+  "notEqual": "TRANSLATION_MISSING",
+  "rangeMessage": "enter range instead",
+  "thousand": "thousand"
+}

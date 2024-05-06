@@ -1,0 +1,33 @@
+import { type DimensionModel } from '@lib/frontend/core/core.models';
+import { type RequiredModel } from '@lib/shared/core/core.models';
+import { type PuppeteerLaunchOptions } from 'puppeteer';
+
+export type ScreenConfigModel = {
+  delay: number;
+
+  delayDefault: number;
+
+  dimension: RequiredModel<DimensionModel>;
+
+  elementTimeout: number;
+
+  isHeadless: boolean;
+
+  isIgnoreMedia: boolean;
+
+  navigationTimeout: number;
+
+  proxies?: Array<ProxyModel>;
+
+  rootUri?: string;
+
+  snapshotPath: string;
+};
+
+export type _ScreenConfigModel = PuppeteerLaunchOptions;
+
+export type ProxyModel = {
+  password: string;
+  url: string;
+  username: string;
+};

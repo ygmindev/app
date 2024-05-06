@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "blgd",
+            "type": "node",
+            "request": "launch",
+            "sourceMaps": true,
+            "program": "${workspaceRoot}/packages/tool-task/src/index.js",
+            "outFiles": ["${workspaceFolder}/**/.esbuild/.build/**/*.js"],
+            "args": ["blgd"],
+            "outputCapture": "std"
+        }
+    ]
+}

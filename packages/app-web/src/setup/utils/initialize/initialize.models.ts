@@ -1,0 +1,1 @@
+export type InitializeModel = void;
