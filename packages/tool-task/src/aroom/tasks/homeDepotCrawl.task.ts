@@ -732,13 +732,13 @@ const crawl: TaskParamsModel<unknown> = {
                 .get({
                   params: {
                     category,
-                    link: `${link}?catStyle=ShowProducts&sortby=topsellers&sororder=desc`,
+                    link: `${link}?sortby=topsellers&sororder=desc`,
                     maxItems,
                     pageIndex,
                     start: start * BATCH_SIZE,
                   },
-                  // url: 'https://xcrwnfkag5.execute-api.us-west-1.amazonaws.com/api/crawl',
-                  url: 'https://localhost:5001/api/crawl',
+                  url: 'https://xcrwnfkag5.execute-api.us-west-1.amazonaws.com/api/crawl',
+                  // url: 'https://localhost:5001/api/crawl',
                 })
                 .catch((e) => {});
               await sleep(60000);

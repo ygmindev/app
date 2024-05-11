@@ -83,7 +83,6 @@ export class _Screen implements _ScreenModel {
     //   });
     //   this.page = await this.browser.newPage();
     // }
-    console.warn('@@@ launch?');
     this.browser = await puppeteer.launch({
       args,
       executablePath:
@@ -92,7 +91,6 @@ export class _Screen implements _ScreenModel {
       ignoreHTTPSErrors: true,
       protocolTimeout: 0,
     });
-    console.warn('@@@ launch!');
     this.page = await this.browser.newPage();
 
     proxy && (await this.page.authenticate({ password: proxy.password, username: proxy.username }));
@@ -173,13 +171,15 @@ export class _Screen implements _ScreenModel {
   }
 
   async open(uri: string): Promise<void> {
-    console.warn(`@@@ open: ${uri}`);
     await this.page.goto(uri, {
       timeout: this.options.navigationTimeout,
       waitUntil: 'domcontentloaded',
     });
-    console.warn('@@@ open !!!');
-    await this.page.waitForNetworkIdle({ timeout: this.options.navigationTimeout });
+    await this.page
+      .createCDPSession()
+      .then((client) =>
+        client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: './' }),
+      );
   }
 
   async snapshot({ filename }: { filename: string }): Promise<Buffer | null> {

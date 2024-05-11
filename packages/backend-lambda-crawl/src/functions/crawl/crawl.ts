@@ -154,6 +154,11 @@ export const main = createLambdaHandler<{
 
       await screen.open(`${link}${pageIndex > 0 ? `&Nao=${pageIndex * PAGE_SIZE}` : ''}`);
       await screen.find({ value: '.results-layout__toggle-grid' }).then((h) => h?.press());
+      await screen
+        .find({ type: SELECTOR_TYPE.TEXT, value: 'Show Unavailable Products' })
+        .then((h) => h?.parent())
+        .then((h) => h?.parent())
+        .then((h) => h?.press());
 
       const resultContainer = await screen.find({ value: '.results-wrapped' });
       const urls = resultContainer
