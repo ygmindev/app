@@ -229,7 +229,7 @@ export const main = createLambdaHandler<{
             });
 
             const descriptionsContainer = await screen.find({
-              value: '.product-overview-desktop-content',
+              value: '#product-overview-desktop-content',
             });
 
             // description
@@ -237,7 +237,7 @@ export const main = createLambdaHandler<{
               itemQueue.add(async () => {
                 row['Product description'] = await descriptionsContainer
                   .find({ value: '.sui-flex-col' })
-                  .then((h) => h?.find({ value: '.sui-flex-col' }))
+                  .then((h) => h?.find({ value: '.sui-w-full' }))
                   .then((h) => h?.content());
 
                 if (row['Product description']) {
