@@ -17,7 +17,7 @@ export type _ScreenModel = Pick<HandleModel, 'find' | 'findAll'> & {
 
   open(uri: string): Promise<void>;
 
-  snapshot(params?: { filename?: string }): Promise<Buffer | null>;
+  snapshot(params?: { filename: string }): Promise<Buffer | null>;
 
   uri(): UriModel | null;
 };

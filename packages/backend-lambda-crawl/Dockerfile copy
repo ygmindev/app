@@ -1,0 +1,135 @@
+FROM public.ecr.aws/lambda/nodejs:18-x86_64
+
+WORKDIR ${LAMBDA_TASK_ROOT}
+
+ENV DBUS_SESSION_BUS_ADDRESS autolaunch:
+
+RUN yum -y install \
+    alsa-lib \
+    at-spi2-atk \
+    atk \
+    ca-certificates \
+    cups-libs \
+    dbus-glib \
+    dbus-glib-devel \
+    gnupg \
+    gtk3 \
+    libdrm \
+    libXcomposite \
+    libXcursor \
+    libXdamage \
+    libXext \
+    libXrandr \
+    libXScrnSaver \
+    libXt \
+    libXtst \
+    pango \
+    shadow-utils \
+    systemd-udev \
+    unzip \
+    wget \
+    xorg-x11-server-Xvfb \
+    xorg-x11-utils
+
+RUN wget -q https://dl-ssl.google.com/linux/linux_signing_key.pub \
+    && rpm --import linux_signing_key.pub \
+    && wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
+    && yum -y localinstall google-chrome-stable_current_x86_64.rpm \
+    && rm google-chrome-stable_current_x86_64.rpm
+
+RUN /usr/sbin/groupadd --system chrome
+RUN /usr/sbin/useradd --system --create-home --gid chrome --groups audio,video chrome
+
+# RUN wget -q https://storage.googleapis.com/chrome-for-testing-public/124.0.6367.201/linux64/chromedriver-linux64.zip && \
+#     wget -q https://storage.googleapis.com/chrome-for-testing-public/124.0.6367.201/linux64/chrome-linux64.zip && \
+#     unzip -j chromedriver-linux64.zip -d /opt && \
+#     unzip -j chrome-linux64.zip -d /opt/chrome
+
+RUN mkdir -p /src/functions
+
+ADD _build/.build/src/functions src/functions
+ADD _build/layers/nodejs .
+
+# FROM public.ecr.aws/lambda/nodejs:18-x86_64 as lambda
+
+# FROM --platform=linux/amd64 node:18-slim
+
+# ENV LAMBDA_TASK_ROOT=/var/task
+# ENV LAMBDA_RUNTIME=/var/runtime
+
+# RUN mkdir -p ${LAMBDA_TASK_ROOT}
+# RUN mkdir -p ${LAMBDA_RUNTIME}
+
+# WORKDIR ${LAMBDA_TASK_ROOT}
+
+# COPY --from=lambda ${LAMBDA_RUNTIME} ${LAMBDA_RUNTIME}
+# COPY --from=lambda /lambda-entrypoint.sh /lambda-entrypoint.sh
+
+# ADD _build/.build/src/functions ./src/functions
+# ADD _build/layers/nodejs .
+
+# RUN apt-get update && \
+#     apt-get install -y \
+#     apt-transport-https \
+#     ca-certificates \
+#     gnupg \
+#     wget \
+#     xvfb \
+#     && rm -rf /var/lib/apt/lists/*
+
+# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+#     && echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
+#     && apt-get update \
+#     && apt-get install -y google-chrome-stable \
+#     && rm -rf /var/lib/apt/lists/*
+
+# RUN mkdir -p ${LAMBDA_TASK_ROOT}/src/functions
+
+
+
+
+
+# FROM public.ecr.aws/lambda/nodejs:18-x86_64
+
+# WORKDIR ${LAMBDA_TASK_ROOT}
+
+# RUN yum -y install \
+#     alsa-lib \
+#     at-spi2-atk \
+#     atk \
+#     ca-certificates \
+#     cups-libs \
+#     gtk3 \
+#     libdrm \
+#     libXcomposite \
+#     libXcursor \
+#     libXdamage \
+#     libXext \
+#     libXrandr \
+#     libXScrnSaver \
+#     libXt \
+#     libXtst \
+#     pango \
+#     shadow-utils \
+#     unzip \
+#     wget \
+#     xorg-x11-server-Xvfb.x86_64 \
+#     xorg-x11-utils
+
+# RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+# RUN yum -y localinstall google-chrome-stable_current_x86_64.rpm
+
+# RUN export CHROMEVERSION=`wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE` \
+#     && wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROMEVERSION/chromedriver_linux64.zip \
+#     && unzip /tmp/chromedriver_linux64.zip -d /opt \
+#     && mv /opt/chromedriver /opt/chromedriver-$CHROMEVERSION \
+#     && chmod 755 /opt/chromedriver-$CHROMEVERSION \
+#     && ln -fs /opt/chromedriver-$CHROMEVERSION /usr/local/bin/chromedriver
+
+# RUN /usr/sbin/groupadd --system chrome
+# RUN /usr/sbin/useradd --system --create-home --gid chrome --groups audio,video chrome
+
+# RUN mkdir -p /src/functions
+
+# ADD _build/.build/src/functions src/functions
+# ADD _build/layers/nodejs .

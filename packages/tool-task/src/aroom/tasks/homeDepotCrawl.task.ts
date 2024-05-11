@@ -737,7 +737,7 @@ const crawl: TaskParamsModel<unknown> = {
                     pageIndex,
                     start: start * BATCH_SIZE,
                   },
-                  url: 'https://0xdsl9cms8.execute-api.us-west-1.amazonaws.com/api/crawl',
+                  url: 'https://r8k9smhvzh.execute-api.us-west-1.amazonaws.com/api/crawl',
                   // url: 'https://localhost:5001/api/crawl',
                 })
                 .catch((e) => {});

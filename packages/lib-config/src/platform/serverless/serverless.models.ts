@@ -1,4 +1,7 @@
-import { type ServerlessProviderModel } from '@lib/backend/serverless/serverless.models';
+import {
+  type ServerlessProviderModel,
+  type ServerlessRuntimeModel,
+} from '@lib/backend/serverless/serverless.models';
 import { type HttpConfigModel } from '@lib/config/http/http/http.models';
 import { type _BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { type PlatformModel } from '@lib/platform/core/core.models';
@@ -25,13 +28,13 @@ export type ServerlessConfigModel = Pick<UriParamsModel, 'host' | 'port'> & {
 
   httpConfig(): HttpConfigModel;
 
-  isContainer?: boolean;
-
   name: string;
 
   platform: PlatformModel;
 
   provider: ServerlessProviderModel;
+
+  runtime: ServerlessRuntimeModel;
 
   server: {
     cors: {

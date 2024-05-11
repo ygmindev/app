@@ -1,13 +1,13 @@
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import {
-  type _mapMapParallelModel,
-  type _mapMapParallelParamsModel,
+  type _MapParallelModel,
+  type _MapParallelParamsModel,
 } from '@tool/task/core/utils/mapParallel/_mapParallel.models';
 import _concurrently from 'concurrently';
 
 export const _mapParallel = async (
-  ...[tasks, options, environment]: _mapMapParallelParamsModel
-): Promise<_mapMapParallelModel> => {
+  ...[tasks, options, environment]: _MapParallelParamsModel
+): Promise<_MapParallelModel> => {
   setEnvironment(environment);
   const { result } = _concurrently(
     tasks.map((command, i) => ({

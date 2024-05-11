@@ -10,6 +10,7 @@ import { lintCommand } from '@lib/config/node/lint/lint';
 import { PLATFORM } from '@lib/platform/core/core.constants';
 import { type PlatformModel } from '@lib/platform/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
@@ -236,14 +237,7 @@ export const _bundle = ({
 
   const defineF = {
     ...config.define,
-    ...reduce(
-      process.env,
-      (result, v, k) =>
-        some(config.envPrefix, (prefix) => k.startsWith(prefix))
-          ? { ...result, [`process.env.${k}`]: JSON.stringify(v) }
-          : result,
-      {},
-    ),
+    ...getEnvironmentVariables({ envPrefix: config.envPrefix, isPrefix: true }),
   };
 
   config.define = defineF;

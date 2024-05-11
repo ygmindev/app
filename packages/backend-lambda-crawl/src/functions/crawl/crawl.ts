@@ -1,7 +1,8 @@
+// import { S3Client } from '@aws-sdk/client-s3';
+// import { Upload } from '@aws-sdk/lib-storage';
 import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
 import { ConcurrentQueue } from '@lib/shared/core/utils/ConcurrentQueue/ConcurrentQueue';
 import { runWithRetry } from '@lib/shared/core/utils/runWithRetry/runWithRetry';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { slug } from '@lib/shared/core/utils/slug/slug';
 import { Screen } from '@lib/shared/crawling/utils/Screen/Screen';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
@@ -127,14 +128,31 @@ export const main = createLambdaHandler<{
 
     try {
       await screen.open('https://www.homedepot.com/l/Falls-Church/VA/Falls-Church/22044/4608');
+
+      console.warn(`@@@ACCESS: ${process.env.AWS_ACCESS_KEY_ID}`);
+      // const file = await screen.snapshot({ filename: 'location' });
+      // await new Upload({
+      //   client: new S3Client({
+      //     credentials: {
+      //       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      //       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      //     },
+      //     region: process.env.SERVER_REGION,
+      //   }),
+      //   params: {
+      //     Body: file,
+      //     Bucket: 'aroom-static',
+      //     ContentEncoding: 'base64',
+      //     ContentType: 'image/png',
+      //     Key: 'location.png',
+      //   },
+      // }).done();
+
       await screen
         .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'store-pod-localize__button' })
         .then((h) => h?.press());
 
-      await sleep(3000);
-
       await screen.open(`${link}${pageIndex > 0 ? `&Nao=${pageIndex * PAGE_SIZE}` : ''}`);
-
       await screen.find({ value: '.results-layout__toggle-grid' }).then((h) => h?.press());
 
       const resultContainer = await screen.find({ value: '.results-wrapped' });

@@ -1,4 +1,7 @@
-import { SERVERLESS_PROVIDER } from '@lib/backend/serverless/serverless.constants';
+import {
+  SERVERLESS_PROVIDER,
+  SERVERLESS_RUNTIME,
+} from '@lib/backend/serverless/serverless.constants';
 import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { config as httpConfig } from '@lib/config/http/http/http';
 import { _config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
@@ -38,6 +41,8 @@ const { _config, config } = defineConfig({
       port: process.env.SERVER_APP_PORT,
 
       provider: SERVERLESS_PROVIDER.AWS,
+
+      runtime: SERVERLESS_RUNTIME.ZIP,
 
       server: {
         cors: {

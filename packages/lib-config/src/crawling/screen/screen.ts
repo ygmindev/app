@@ -20,12 +20,15 @@ const { config } = defineConfig({
     // proxies: [
     //   {
     //     password: 'baqs1fbshyxq',
-    //     url: 'http://38.154.227.167:5868',
+    //     url: 'http://185.199.229.156',
     //     username: 'nvtjqvdh',
     //   },
     // ],
 
-    snapshotPath: joinPaths([fileConfig.buildPath, 'snapshots']),
+    snapshotPath:
+      process.env.NODE_ENV === 'production'
+        ? undefined
+        : joinPaths([fileConfig.buildPath, 'snapshots']),
   } satisfies ScreenConfigModel,
 });
 

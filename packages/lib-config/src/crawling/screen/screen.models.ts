@@ -19,7 +19,7 @@ export type ScreenConfigModel = {
 
   rootUri?: string;
 
-  snapshotPath: string;
+  snapshotPath?: string;
 };
 
 export type _ScreenConfigModel = PuppeteerLaunchOptions;
