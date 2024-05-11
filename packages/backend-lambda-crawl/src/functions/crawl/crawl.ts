@@ -187,7 +187,6 @@ export const main = createLambdaHandler<{
 
             await runWithRetry(async () => screen.open(url), { delay: 1000, retries: 5 });
 
-            await sleep(3000);
             await screen.find({ value: '#product-section-overview' }).then((h) => h?.press());
             await screen.find({ value: '#product-section-key-feat' }).then((h) => h?.press());
 
