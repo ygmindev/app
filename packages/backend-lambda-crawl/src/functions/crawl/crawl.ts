@@ -37,7 +37,7 @@ export const main = createLambdaHandler<{
     const category = body?.category ?? '';
 
     const PAGE_SIZE = 24;
-    const UPLOAD_SIZE = 1;
+    const UPLOAD_SIZE = 3;
     const COLUMNS = [
       'Tags',
       'Product title',
