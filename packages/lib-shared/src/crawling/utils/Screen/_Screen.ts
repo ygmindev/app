@@ -44,7 +44,7 @@ export class _Screen implements _ScreenModel {
       this.options.proxies[Math.floor(Math.random() * this.options.proxies.length)];
 
     const args = filterNil([
-      // ...(process.env.NODE_ENV === 'production' ? chromium.args : []),
+      ...(process.env.NODE_ENV === 'production' ? chromium.args : []),
       proxy && `--proxy-server=${proxy.url}`,
       '--disable-dev-shm-usage',
       '--disable-features=site-per-process',
@@ -59,31 +59,41 @@ export class _Screen implements _ScreenModel {
       .filter((v) => !v.includes('--use-gl'))
       .filter(Boolean);
 
-    if (process.env.SERVERLESS_RUNTIME === 'container') {
-      // eslint-disable-next-line import/no-unresolved
-      const { connect } = (await import('puppeteer-real-browser')) as {
-        connect: (args: unknown) => Promise<{ browser: Browser; page: Page }>;
-      };
-      const { browser, page } = await connect({
-        args,
-        customConfig: { logLevel: 'verbose' },
-        headless: 'auto',
-      });
-      this.browser = browser;
-      this.page = page;
-    } else {
-      this.browser = await puppeteer.launch({
-        args,
-        executablePath:
-          process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
-        headless:
-          process.env.NODE_ENV === 'production' ? chromium.headless : this.options.isHeadless,
-        ignoreHTTPSErrors: true,
-        protocolTimeout: 0,
-      });
-
-      this.page = await this.browser.newPage();
-    }
+    // if (process.env.SERVERLESS_RUNTIME === 'container') {
+    //   // eslint-disable-next-line import/no-unresolved
+    //   const { connect } = (await import('puppeteer-real-browser')) as {
+    //     connect: (args: unknown) => Promise<{ browser: Browser; page: Page }>;
+    //   };
+    //   const { browser, page } = await connect({
+    //     args,
+    //     customConfig: { logLevel: 'verbose' },
+    //     headless: 'auto',
+    //   });
+    //   this.browser = browser;
+    //   this.page = page;
+    // } else {
+    //   this.browser = await puppeteer.launch({
+    //     args,
+    //     executablePath:
+    //       process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
+    //     headless:
+    //       process.env.NODE_ENV === 'production' ? chromium.headless : this.options.isHeadless,
+    //     ignoreHTTPSErrors: true,
+    //     protocolTimeout: 0,
+    //   });
+    //   this.page = await this.browser.newPage();
+    // }
+    console.warn('@@@ launch?');
+    this.browser = await puppeteer.launch({
+      args,
+      executablePath:
+        process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
+      headless: process.env.NODE_ENV === 'production' ? chromium.headless : this.options.isHeadless,
+      ignoreHTTPSErrors: true,
+      protocolTimeout: 0,
+    });
+    console.warn('@@@ launch!');
+    this.page = await this.browser.newPage();
 
     proxy && (await this.page.authenticate({ password: proxy.password, username: proxy.username }));
 
