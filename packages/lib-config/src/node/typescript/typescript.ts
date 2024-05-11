@@ -10,7 +10,7 @@ const { _config, config } = defineConfig({
   config: {
     configFile: fromDist('tsconfig.json'),
 
-    outDir: fromDist('out-tsc'),
+    outDir: './out-tsc',
 
     paths: {
       'css-in-js-utils/lib/*': 'node_modules/css-in-js-utils/es/*',

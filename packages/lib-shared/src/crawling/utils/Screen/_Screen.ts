@@ -18,6 +18,7 @@ import {
 } from '@lib/shared/crawling/utils/Screen/Screen.models';
 import { info } from '@lib/shared/logging/utils/logger/logger';
 import { type UriModel } from '@lib/shared/route/route.models';
+import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
 import { type Browser, type ElementHandle, type Page } from 'puppeteer';
@@ -46,7 +47,6 @@ export class _Screen implements _ScreenModel {
       // ...(process.env.NODE_ENV === 'production' ? chromium.args : []),
       proxy && `--proxy-server=${proxy.url}`,
       '--disable-dev-shm-usage',
-      // '--disable-features=NetworkServiceInProcess2',
       '--disable-features=site-per-process',
       '--disable-gpu',
       '--disable-setuid-sandbox',
@@ -74,7 +74,10 @@ export class _Screen implements _ScreenModel {
     } else {
       this.browser = await puppeteer.launch({
         args,
-        headless: this.options.isHeadless,
+        executablePath:
+          process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
+        headless:
+          process.env.NODE_ENV === 'production' ? chromium.headless : this.options.isHeadless,
         ignoreHTTPSErrors: true,
         protocolTimeout: 0,
       });

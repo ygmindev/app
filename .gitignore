@@ -3,7 +3,6 @@
 **/.serverless
 **/.build
 **/_build
-**/_dist
 
 # Node
 node_modules
