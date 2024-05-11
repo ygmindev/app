@@ -1,5 +1,6 @@
 import { HttpImplementation } from '@lib/backend/http/utils/HttpImplementation/HttpImplementation';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import range from 'lodash/range';
@@ -741,7 +742,7 @@ const crawl: TaskParamsModel<unknown> = {
                   // url: 'https://localhost:5001/api/crawl',
                 })
                 .catch((e) => {});
-              await sleep(60000);
+              await sleep(randomInt(1000, 10000));
             } catch (e) {}
           }
         }
