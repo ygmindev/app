@@ -145,7 +145,7 @@ export class _Screen implements _ScreenModel {
   }
 
   async open(uri: string): Promise<void> {
-    this.page && !this.page.isClosed && (await this.page.close());
+    this.page && !this.page.isClosed() && (await this.page.close());
     this.page = await this.browser.newPage();
     await this.page.setCacheEnabled(false);
     await this.page.setUserAgent(
