@@ -228,14 +228,16 @@ export const main = createLambdaHandler<{
               row['Product title'] && (row.Handle = slug(row['Product title'] as string));
             });
 
-            const descriptionsContainer = await screen.find({ value: '#product-section-overview' });
+            const descriptionsContainer = await screen.find({
+              value: '.product-overview-desktop-content',
+            });
 
             // description
             if (descriptionsContainer) {
               itemQueue.add(async () => {
                 row['Product description'] = await descriptionsContainer
                   .find({ value: '.sui-flex-col' })
-                  .then((h) => h?.find({ value: '.sui-w-full' }))
+                  .then((h) => h?.find({ value: '.sui-flex-col' }))
                   .then((h) => h?.content());
 
                 if (row['Product description']) {
@@ -395,58 +397,29 @@ export const main = createLambdaHandler<{
             // stock
             itemQueue.add(async () => {
               const stockContainer = await screen.find({ value: '.buybox-wrapper' });
-              const pickupContainer = await stockContainer?.find({ value: '.pickup-timeline' });
-              const deliveryContainer = await stockContainer?.find({ value: '.delivery-timeline' });
+              const pickup = await stockContainer
+                ?.find({ value: '.pickup-timeline' })
+                .then((h) => h?.content())
+                .then((h) => h?.toLowerCase());
+              const delivery = await stockContainer
+                ?.find({ value: '.delivery-timeline' })
+                .then((h) => h?.content())
+                .then((h) => h?.toLowerCase());
 
               let availability: string | undefined = undefined;
-              const today = !!(await pickupContainer?.find({
-                type: SELECTOR_TYPE.TEXT,
-                value: 'Today',
-              }));
-              console.warn(`@@@ today: ${today}`);
-              const deliveryUnavailable = !!(await deliveryContainer?.find({
-                type: SELECTOR_TYPE.TEXT,
-                value: 'Unavailable',
-              }));
-              availability =
-                !availability && today && !deliveryUnavailable ? 'Available' : availability;
-
-              const shipToStore =
-                !availability &&
-                !!(await pickupContainer?.find({
-                  type: SELECTOR_TYPE.TEXT,
-                  value: 'Ship to Store',
-                }));
-              availability = !availability && shipToStore ? 'Case 2' : availability;
-
-              const atYourStore = !!(await pickupContainer?.find({
-                type: SELECTOR_TYPE.TEXT,
-                value: 'At Your Store',
-              }));
-              availability = !availability && atYourStore ? 'Case 1' : availability;
-
-              const pickupUnavailable = !!(await pickupContainer?.find({
-                type: SELECTOR_TYPE.TEXT,
-                value: 'Unavailable',
-              }));
-              availability =
-                !availability && !pickupUnavailable && deliveryUnavailable
-                  ? 'Available 2'
-                  : availability;
-              availability =
-                !availability && pickupUnavailable && !deliveryUnavailable
-                  ? 'Case 3'
-                  : availability;
-              availability =
-                !availability && pickupUnavailable && deliveryUnavailable
-                  ? 'Out of Stock'
-                  : availability;
-
-              console.warn(
-                `@ ${today} ${shipToStore} ${atYourStore} ${pickupUnavailable} ${deliveryUnavailable}`,
-              );
-
-              row['Available For Sale'] = availability ?? '';
+              if (pickup) {
+                availability =
+                  availability ?? (pickup?.includes('today') ? 'In stock' : availability);
+                availability =
+                  availability ??
+                  (!pickup?.includes('unavailable') ? 'Available to ship' : availability);
+              }
+              if (delivery) {
+                availability =
+                  availability ??
+                  (!delivery?.includes('unavailable') ? 'Available for delivery' : availability);
+              }
+              row['Available For Sale'] = availability ?? 'Out of stock';
             });
 
             await itemQueue.run();

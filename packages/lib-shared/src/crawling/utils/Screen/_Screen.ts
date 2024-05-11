@@ -43,48 +43,22 @@ export class _Screen implements _ScreenModel {
       !!this.options.proxies?.length &&
       this.options.proxies[Math.floor(Math.random() * this.options.proxies.length)];
 
-    const args = filterNil([
-      ...(process.env.NODE_ENV === 'production' ? chromium.args : []),
-      proxy && `--proxy-server=${proxy.url}`,
-      '--disable-dev-shm-usage',
-      '--disable-features=site-per-process',
-      '--disable-gpu',
-      '--disable-setuid-sandbox',
-      '--disable-web-security',
-      '--ignore-certificate-errors',
-      '--no-first-run',
-      '--no-sandbox',
-      '--no-zygote',
-    ])
-      .filter((v) => !v.includes('--use-gl'))
-      .filter(Boolean);
-
-    // if (process.env.SERVERLESS_RUNTIME === 'container') {
-    //   // eslint-disable-next-line import/no-unresolved
-    //   const { connect } = (await import('puppeteer-real-browser')) as {
-    //     connect: (args: unknown) => Promise<{ browser: Browser; page: Page }>;
-    //   };
-    //   const { browser, page } = await connect({
-    //     args,
-    //     customConfig: { logLevel: 'verbose' },
-    //     headless: 'auto',
-    //   });
-    //   this.browser = browser;
-    //   this.page = page;
-    // } else {
-    //   this.browser = await puppeteer.launch({
-    //     args,
-    //     executablePath:
-    //       process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
-    //     headless:
-    //       process.env.NODE_ENV === 'production' ? chromium.headless : this.options.isHeadless,
-    //     ignoreHTTPSErrors: true,
-    //     protocolTimeout: 0,
-    //   });
-    //   this.page = await this.browser.newPage();
-    // }
     this.browser = await puppeteer.launch({
-      args,
+      args: filterNil([
+        ...(process.env.NODE_ENV === 'production' ? chromium.args : []),
+        proxy && `--proxy-server=${proxy.url}`,
+        '--disable-dev-shm-usage',
+        '--disable-features=site-per-process',
+        '--disable-gpu',
+        '--disable-setuid-sandbox',
+        '--disable-web-security',
+        '--ignore-certificate-errors',
+        '--no-first-run',
+        '--no-sandbox',
+        '--no-zygote',
+      ])
+        .filter((v) => !v.includes('--use-gl'))
+        .filter(Boolean),
       defaultViewport: this.options.dimension,
       executablePath:
         process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
@@ -93,23 +67,23 @@ export class _Screen implements _ScreenModel {
       protocolTimeout: 0,
     });
 
-    this.page = await this.browser.newPage();
-    proxy && (await this.page.authenticate({ password: proxy.password, username: proxy.username }));
-    await this.page.setCacheEnabled(false);
-    await this.page.setUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
-    );
-    await this.page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
-    await this.page.setRequestInterception(true);
-    this.page.on('request', (req) => {
-      const type = req.resourceType();
-      if (this.options.isIgnoreMedia && (type === 'image' || type === 'font' || type === 'media')) {
-        void req.abort();
-      } else {
-        const headers = req.headers();
-        void req.continue(headers);
-      }
-    });
+    // this.page = await this.browser.newPage();
+    // proxy && (await this.page.authenticate({ password: proxy.password, username: proxy.username }));
+    // await this.page.setCacheEnabled(false);
+    // await this.page.setUserAgent(
+    //   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+    // );
+    // await this.page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
+    // await this.page.setRequestInterception(true);
+    // this.page.on('request', (req) => {
+    //   const type = req.resourceType();
+    //   if (this.options.isIgnoreMedia && (type === 'image' || type === 'font' || type === 'media')) {
+    //     void req.abort();
+    //   } else {
+    //     const headers = req.headers();
+    //     void req.continue(headers);
+    //   }
+    // });
   }
 
   find(
@@ -171,7 +145,7 @@ export class _Screen implements _ScreenModel {
   }
 
   async open(uri: string): Promise<void> {
-    this.page && (await this.page.close());
+    this.page && !this.page.isClosed && (await this.page.close());
     this.page = await this.browser.newPage();
     await this.page.setCacheEnabled(false);
     await this.page.setUserAgent(
