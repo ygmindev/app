@@ -3,6 +3,7 @@
 import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
 import { ConcurrentQueue } from '@lib/shared/core/utils/ConcurrentQueue/ConcurrentQueue';
 import { runWithRetry } from '@lib/shared/core/utils/runWithRetry/runWithRetry';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { slug } from '@lib/shared/core/utils/slug/slug';
 import { Screen } from '@lib/shared/crawling/utils/Screen/Screen';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
@@ -36,7 +37,7 @@ export const main = createLambdaHandler<{
     const category = body?.category ?? '';
 
     const PAGE_SIZE = 24;
-    const UPLOAD_SIZE = 3;
+    const UPLOAD_SIZE = 1;
     const COLUMNS = [
       'Tags',
       'Product title',
@@ -129,7 +130,6 @@ export const main = createLambdaHandler<{
     try {
       await screen.open('https://www.homedepot.com/l/Falls-Church/VA/Falls-Church/22044/4608');
 
-      console.warn(`@@@ACCESS: ${process.env.AWS_ACCESS_KEY_ID}`);
       // const file = await screen.snapshot({ filename: 'location' });
       // await new Upload({
       //   client: new S3Client({
@@ -151,6 +151,7 @@ export const main = createLambdaHandler<{
       await screen
         .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'store-pod-localize__button' })
         .then((h) => h?.press());
+      await sleep(5000);
 
       await screen.open(`${link}${pageIndex > 0 ? `&Nao=${pageIndex * PAGE_SIZE}` : ''}`);
       await screen.find({ value: '.results-layout__toggle-grid' }).then((h) => h?.press());
@@ -186,8 +187,9 @@ export const main = createLambdaHandler<{
 
             await runWithRetry(async () => screen.open(url), { delay: 1000, retries: 5 });
 
-            await screen.find({ value: '.product-section-overview' }).then((h) => h?.press());
-            await screen.find({ value: '.product-section-key-feat' }).then((h) => h?.press());
+            await sleep(3000);
+            await screen.find({ value: '#product-section-overview' }).then((h) => h?.press());
+            await screen.find({ value: '#product-section-key-feat' }).then((h) => h?.press());
 
             // category
             itemQueue.add(async () => {
@@ -227,11 +229,7 @@ export const main = createLambdaHandler<{
               row['Product title'] && (row.Handle = slug(row['Product title'] as string));
             });
 
-            const descriptionsContainer = await screen.find({
-              key: 'data-testid',
-              type: SELECTOR_TYPE.DATA,
-              value: 'product-overview-desktop',
-            });
+            const descriptionsContainer = await screen.find({ value: '#product-section-overview' });
 
             // description
             if (descriptionsContainer) {
@@ -398,50 +396,58 @@ export const main = createLambdaHandler<{
             // stock
             itemQueue.add(async () => {
               const stockContainer = await screen.find({ value: '.buybox-wrapper' });
-              const pickupContainer = await stockContainer
-                ?.find({ type: SELECTOR_TYPE.TEXT, value: 'Pickup' })
-                .then((h) => h?.parent())
-                .then((h) => h?.parent());
-              const deliveryContainer = await stockContainer
-                ?.find({ type: SELECTOR_TYPE.TEXT, value: 'Delivery' })
-                .then((h) => h?.parent())
-                .then((h) => h?.parent());
+              const pickupContainer = await stockContainer?.find({ value: '.pickup-timeline' });
+              const deliveryContainer = await stockContainer?.find({ value: '.delivery-timeline' });
 
+              let availability: string | undefined = undefined;
               const today = !!(await pickupContainer?.find({
                 type: SELECTOR_TYPE.TEXT,
                 value: 'Today',
               }));
-              const shipToStore = !!(await pickupContainer?.find({
-                type: SELECTOR_TYPE.TEXT,
-                value: 'Ship to Store',
-              }));
-              const atYourStore = !!(await pickupContainer?.find({
-                type: SELECTOR_TYPE.TEXT,
-                value: 'At Your Store',
-              }));
-              const pickupUnavailable = !!(await pickupContainer?.find({
-                type: SELECTOR_TYPE.TEXT,
-                value: 'Unavailable',
-              }));
+              console.warn(`@@@ today: ${today}`);
               const deliveryUnavailable = !!(await deliveryContainer?.find({
                 type: SELECTOR_TYPE.TEXT,
                 value: 'Unavailable',
               }));
+              availability =
+                !availability && today && !deliveryUnavailable ? 'Available' : availability;
 
-              row['Available For Sale'] =
-                today && !deliveryUnavailable
-                  ? 'Available'
-                  : shipToStore
-                    ? 'Case 2'
-                    : atYourStore
-                      ? 'Case 1'
-                      : !pickupUnavailable && deliveryUnavailable
-                        ? 'Available 2'
-                        : pickupUnavailable && !deliveryUnavailable
-                          ? 'Case 3'
-                          : pickupUnavailable && deliveryUnavailable
-                            ? 'Out of Stock'
-                            : '';
+              const shipToStore =
+                !availability &&
+                !!(await pickupContainer?.find({
+                  type: SELECTOR_TYPE.TEXT,
+                  value: 'Ship to Store',
+                }));
+              availability = !availability && shipToStore ? 'Case 2' : availability;
+
+              const atYourStore = !!(await pickupContainer?.find({
+                type: SELECTOR_TYPE.TEXT,
+                value: 'At Your Store',
+              }));
+              availability = !availability && atYourStore ? 'Case 1' : availability;
+
+              const pickupUnavailable = !!(await pickupContainer?.find({
+                type: SELECTOR_TYPE.TEXT,
+                value: 'Unavailable',
+              }));
+              availability =
+                !availability && !pickupUnavailable && deliveryUnavailable
+                  ? 'Available 2'
+                  : availability;
+              availability =
+                !availability && pickupUnavailable && !deliveryUnavailable
+                  ? 'Case 3'
+                  : availability;
+              availability =
+                !availability && pickupUnavailable && deliveryUnavailable
+                  ? 'Out of Stock'
+                  : availability;
+
+              console.warn(
+                `@ ${today} ${shipToStore} ${atYourStore} ${pickupUnavailable} ${deliveryUnavailable}`,
+              );
+
+              row['Available For Sale'] = availability ?? '';
             });
 
             await itemQueue.run();
@@ -468,6 +474,7 @@ export const main = createLambdaHandler<{
 
             if (result) {
               if (result.length > 0 && count % UPLOAD_SIZE === 0) {
+                console.warn('@@@ upload?');
                 await upload(result);
                 result = [];
               }

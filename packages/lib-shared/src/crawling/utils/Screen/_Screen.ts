@@ -85,16 +85,16 @@ export class _Screen implements _ScreenModel {
     // }
     this.browser = await puppeteer.launch({
       args,
+      defaultViewport: this.options.dimension,
       executablePath:
         process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
       headless: process.env.NODE_ENV === 'production' ? chromium.headless : this.options.isHeadless,
       ignoreHTTPSErrors: true,
       protocolTimeout: 0,
     });
+
     this.page = await this.browser.newPage();
-
     proxy && (await this.page.authenticate({ password: proxy.password, username: proxy.username }));
-
     await this.page.setCacheEnabled(false);
     await this.page.setUserAgent(
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
@@ -171,6 +171,23 @@ export class _Screen implements _ScreenModel {
   }
 
   async open(uri: string): Promise<void> {
+    this.page && (await this.page.close());
+    this.page = await this.browser.newPage();
+    await this.page.setCacheEnabled(false);
+    await this.page.setUserAgent(
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+    );
+    await this.page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
+    await this.page.setRequestInterception(true);
+    this.page.on('request', (req) => {
+      const type = req.resourceType();
+      if (this.options.isIgnoreMedia && (type === 'image' || type === 'font' || type === 'media')) {
+        void req.abort();
+      } else {
+        const headers = req.headers();
+        void req.continue(headers);
+      }
+    });
     await this.page.goto(uri, {
       timeout: this.options.navigationTimeout,
       waitUntil: 'domcontentloaded',
@@ -238,7 +255,7 @@ const find = async (
     delay && (await sleep(delay));
     const selectorF = getSelector(selector);
     try {
-      info(`Finding ${stringify(selector)} ${timeout}...`);
+      info(`Finding ${stringify(selector)}...`);
       timeout && (await handle.waitForSelector(selectorF, { timeout }));
     } catch (e) {
       console.warn(e);

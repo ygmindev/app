@@ -5,7 +5,7 @@ import { type ScreenConfigModel } from '@lib/config/crawling/screen/screen.model
 
 const { config } = defineConfig({
   config: {
-    delay: 5000,
+    delay: 1000,
 
     dimension: { height: 5000, width: 1440 },
 
