@@ -26,7 +26,7 @@ export type RequiredModel<TType> = Required<TType>;
 
 export type EmptyObjectModel = Record<string, unknown>;
 
-export type NilModel = false | undefined | null;
+export type NilModel = false | undefined | null | '';
 
 export type NillableArrayModel<TType> = Array<TType | NilModel>;
 

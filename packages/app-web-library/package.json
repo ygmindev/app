@@ -4,6 +4,7 @@
   "type": "commonjs",
   "private": true,
   "dependencies": {
+    "@egjs/react-infinitegrid": "^4.11.1",
     "@react-google-maps/api": "^2.19.3",
     "@rpldy/upload-button": "^1.8.0",
     "@rpldy/upload-drop-zone": "^1.8.0",

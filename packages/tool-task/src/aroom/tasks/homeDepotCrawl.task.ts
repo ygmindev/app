@@ -1,6 +1,5 @@
 import { HttpImplementation } from '@lib/backend/http/utils/HttpImplementation/HttpImplementation';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import range from 'lodash/range';
@@ -10,11 +9,11 @@ const CATEGORIES: Array<{
   link: string;
   maxItems?: number;
 }> = [
-  {
-    category: 'Dimensional Lumber',
-    link: 'https://www.homedepot.com/b/Lumber-Composites-Dimensional-Lumber/N-5yc1vZc3tc',
-    maxItems: 120,
-  },
+  // {
+  //   category: 'Dimensional Lumber',
+  //   link: 'https://www.homedepot.com/b/Lumber-Composites-Dimensional-Lumber/N-5yc1vZc3tc',
+  //   maxItems: 120,
+  // },
   // {
   //   category: 'Pressure Treated Lumber',
   //   link: 'https://www.homedepot.com/b/Lumber-Composites-Pressure-Treated-Lumber/N-5yc1vZc3sr',
@@ -290,7 +289,6 @@ const CATEGORIES: Array<{
   //   link: 'https://www.homedepot.com/b/Building-Materials-Moulding-Millwork-Brackets-Braces/N-5yc1vZcbj9',
   //   maxItems: 600,
   // },
-
   // {
   //   category: 'Drywall Sheets',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Drywall-Drywall-Sheets/N-5yc1vZbb52',
@@ -336,7 +334,6 @@ const CATEGORIES: Array<{
   //   link: 'https://www.homedepot.com/b/Hardware-Fasteners-Screws-Drywall-Screws/N-5yc1vZc2at',
   //   maxItems: 110,
   // },
-
   // {
   //   category: 'Fiberglass Insulation',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Insulation-Fiberglass-Insulation/N-5yc1vZbay7',
@@ -397,7 +394,6 @@ const CATEGORIES: Array<{
   //   link: 'https://www.homedepot.com/b/Building-Materials-Roofing-Commercial-Roofing/N-5yc1vZapzz',
   //   maxItems: 190,
   // },
-
   // {
   //   category: 'Roof Flahsing',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Roofing-Roof-Flashing/N-5yc1vZaqp7',
@@ -488,7 +484,6 @@ const CATEGORIES: Array<{
   //   link: 'https://www.homedepot.com/b/Building-Materials-Siding-Brick-Veneer-Siding/N-5yc1vZ2fkpaoy',
   //   maxItems: 50,
   // },
-
   // {
   //   category: 'Step Ladders',
   //   link: 'https://www.homedepot.com/b/Building-Materials-Ladders-Step-Ladders/N-5yc1vZaq3d',
@@ -634,7 +629,6 @@ const CATEGORIES: Array<{
   //   link: 'https://www.homedepot.com/b/Hardware-Fasteners-Screws-Wood-Screws/N-5yc1vZc2bl',
   //   maxItems: 780,
   // },
-
   // {
   //   category: 'Composite Fasteners',
   //   link: 'https://www.homedepot.com/b/Hardware-Fasteners-Specialty-Fasteners-Composite-Fasteners/N-5yc1vZc2c2',
@@ -705,6 +699,11 @@ const CATEGORIES: Array<{
   //   link: 'https://www.homedepot.com/b/Building-Materials-Building-Hardware-Mending-Plates/N-5yc1vZasc4',
   //   maxItems: 45,
   // },
+  {
+    category: 'Meding Plates',
+    link: 'https://www.homedepot.com/b/Building-Materials-Building-Hardware-Mending-Plates/N-5yc1vZasc4',
+    maxItems: 10,
+  },
 ];
 
 const START_PAGE = 1;
@@ -727,7 +726,8 @@ const crawl: TaskParamsModel<unknown> = {
         const maxPages = maxItems ? Math.ceil(maxItems / PAGE_SIZE) : undefined;
         for (const pageIndex of range(START_PAGE - 1, maxPages ?? 10)) {
           for (const start of range(START_ITEM - 1, Math.ceil(PAGE_SIZE / BATCH_SIZE))) {
-            console.warn(`@ page: $${pageIndex + 1}, start: ${start * BATCH_SIZE + 1}`);
+            console.warn(`@ ${category} page: $${pageIndex + 1}, start: ${start * BATCH_SIZE + 1}`);
+            // await sleep(randomInt(1000, 10000));
             try {
               void http
                 .get({
@@ -741,9 +741,11 @@ const crawl: TaskParamsModel<unknown> = {
                   // url: 'https://xcrwnfkag5.execute-api.us-west-1.amazonaws.com/api/crawl',
                   url: 'https://localhost:5001/api/crawl',
                 })
-                .catch((e) => {});
-              await sleep(randomInt(1000, 10000));
+                .catch((e) => {
+                  console.warn(e);
+                });
             } catch (e) {}
+            await sleep(60000);
           }
         }
       }

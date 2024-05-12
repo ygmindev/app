@@ -34,6 +34,8 @@ export class _Screen implements _ScreenModel {
 
   protected page!: Page;
 
+  protected isInitialized?: boolean;
+
   constructor(options: _ScreenParamsModel) {
     this.options = options;
   }
@@ -66,6 +68,8 @@ export class _Screen implements _ScreenModel {
       ignoreHTTPSErrors: true,
       protocolTimeout: 0,
     });
+
+    this.isInitialized = true;
 
     // this.page = await this.browser.newPage();
     // proxy && (await this.page.authenticate({ password: proxy.password, username: proxy.username }));
@@ -145,6 +149,8 @@ export class _Screen implements _ScreenModel {
   }
 
   async open(uri: string): Promise<void> {
+    !this.isInitialized && (await this.initialize());
+
     this.page && !this.page.isClosed() && (await this.page.close());
     this.page = await this.browser.newPage();
     await this.page.setCacheEnabled(false);
@@ -173,7 +179,7 @@ export class _Screen implements _ScreenModel {
       );
   }
 
-  async snapshot({ filename }: { filename: string }): Promise<Buffer | null> {
+  async snapshot({ filename }: { filename?: string }): Promise<Buffer | null> {
     const dirname = this.options.snapshotPath
       ? joinPaths([fromWorking(), this.options.snapshotPath])
       : undefined;
@@ -185,7 +191,7 @@ export class _Screen implements _ScreenModel {
         x: 0,
         y: 0,
       },
-      path: dirname ? joinPaths([dirname, `${filename}.png`]) : undefined,
+      path: dirname && filename ? joinPaths([dirname, `${filename}.png`]) : undefined,
     });
   }
 

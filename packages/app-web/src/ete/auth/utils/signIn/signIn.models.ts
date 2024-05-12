@@ -1,4 +1,4 @@
-import { type ScreenModel } from '@lib/shared/crawling/utils/withScreen/withScreen.models';
+import { type ScreenModel } from '@lib/shared/crawling/utils/Screen/Screen.models';
 
 export type SignInParamsModel = {
   isSnapshot?: boolean;

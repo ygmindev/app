@@ -12,6 +12,7 @@
     "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-native-firebase/app": "^19.2.2",
     "@react-native-firebase/auth": "^19.2.2",
+    "@react-native-seoul/masonry-list": "^1.4.2",
     "@reduxjs/toolkit": "2.2.3",
     "@rpldy/uploader": "^1.8.0",
     "@rpldy/uploady": "^1.8.0",

@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.24.4",
+    "@egjs/react-infinitegrid": "^4.11.1",
     "@emotion/react": "^11.11.4",
     "@floating-ui/react": "^0.26.12",
     "@floating-ui/react-dom": "^2.0.8",

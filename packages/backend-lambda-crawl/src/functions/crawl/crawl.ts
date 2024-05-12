@@ -5,8 +5,9 @@ import { ConcurrentQueue } from '@lib/shared/core/utils/ConcurrentQueue/Concurre
 import { runWithRetry } from '@lib/shared/core/utils/runWithRetry/runWithRetry';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { slug } from '@lib/shared/core/utils/slug/slug';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { Screen } from '@lib/shared/crawling/utils/Screen/Screen';
-import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
+import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { info } from '@lib/shared/logging/utils/logger/logger';
 import { JWT } from 'google-auth-library';
@@ -27,7 +28,6 @@ export const main = createLambdaHandler<{
   handler: async ({ body }) => {
     if (!screen) {
       screen = new Screen();
-      await screen.initialize();
     }
 
     const { link } = body ?? {};
@@ -208,23 +208,13 @@ export const main = createLambdaHandler<{
 
             // brand
             itemQueue.add(async () => {
-              row.Vendor =
-                (await screen
-                  .find({ value: '.sticky-nav__brand--container' })
-                  .then((h) => h?.find({ value: '.brand' }))
-                  .then((h) => h?.text())) ?? '';
+              row.Vendor = (await screen.find({ value: '.brand' }).then((h) => h?.text())) ?? '';
             });
 
             // title
             itemQueue.add(async () => {
               row['Product title'] =
-                (await screen
-                  .find({
-                    key: 'data-component',
-                    type: SELECTOR_TYPE.DATA,
-                    value: 'ProductDetailsTitle',
-                  })
-                  .then((h) => h?.text())) ?? '';
+                (await screen.find({ value: '.title' }).then((h) => h?.text())) ?? '';
               row['Product title'] && (row.Handle = slug(row['Product title'] as string));
             });
 
@@ -434,7 +424,6 @@ export const main = createLambdaHandler<{
                   .find({ value: '.mediagallery__mainimage' })
                   .then((h) => h?.find({ value: 'img' }))
                   .then((h) => h?.src());
-
                 if (src) {
                   row[i > 1 ? `Image URL #${i}` : 'Image URL'] = src;
                   i++;
@@ -442,7 +431,7 @@ export const main = createLambdaHandler<{
               }
             }
             result.push(row as Record<string, string | number>);
-            info(`Adding item: ${url}`);
+            info(`Adding item: ${url}\n${stringify(row)}`);
 
             if (result) {
               if (result.length > 0 && count % UPLOAD_SIZE === 0) {
@@ -480,8 +469,8 @@ export const main = createLambdaHandler<{
 // import { runWithRetry } from '@lib/shared/core/utils/runWithRetry/runWithRetry';
 // import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 // import { slug } from '@lib/shared/core/utils/slug/slug';
-// import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
-// import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
+// import { withScreen } from '@lib/shared/crawling/utils/Screen/Screen';
+// import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 // import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 // import { info } from '@lib/shared/logging/utils/logger/logger';
 // import { JWT } from 'google-auth-library';
@@ -958,8 +947,8 @@ export const main = createLambdaHandler<{
 // // import { ConcurrentQueue } from '@lib/shared/core/utils/ConcurrentQueue/ConcurrentQueue';
 // // import { runWithRetry } from '@lib/shared/core/utils/runWithRetry/runWithRetry';
 // // import { slug } from '@lib/shared/core/utils/slug/slug';
-// // import { withScreen } from '@lib/shared/crawling/utils/withScreen/withScreen';
-// // import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/withScreen/withScreen.constants';
+// // import { withScreen } from '@lib/shared/crawling/utils/Screen/Screen';
+// // import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 // // import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 // // import { info } from '@lib/shared/logging/utils/logger/logger';
 // // import { JWT } from 'google-auth-library';

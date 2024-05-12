@@ -29,6 +29,7 @@ const { _config, config } = defineConfig({
       externals: ['raf/polyfill.js', 'setimmediate'],
 
       transpiles: [
+        '@egjs/react-infinitegrid',
         '@expo/react-native-action-sheet',
         'countries-list',
         'css-in-js-utils',
