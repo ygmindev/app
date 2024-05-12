@@ -1,10 +1,10 @@
 import { type EnvironmentOverrideParamsModel } from '@lib/shared/environment/environment.models';
-import { type ParallelOptionsModel } from '@tool/task/core/utils/mapParallel/mapParallel.models';
+import { type ParallelOptionsModel } from '@tool/task/core/utils/runParallel/runParallel.models';
 
-export type _MapParallelParamsModel = [
+export type _RunParallelParamsModel = [
   tasks: Array<string>,
   options?: ParallelOptionsModel,
   environment?: EnvironmentOverrideParamsModel,
 ];
 
-export type _MapParallelModel = void;
+export type _RunParallelModel = void;

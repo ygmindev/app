@@ -1,11 +1,11 @@
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { mapParallel } from '@tool/task/core/utils/mapParallel/mapParallel';
+import { runParallel } from '@tool/task/core/utils/runParallel/runParallel';
 
-const { displayName } = withTest({ mapParallel });
+const { displayName } = withTest({ runParallel });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await mapParallel({});
+    const result = await runParallel({});
     expect(result).toStrictEqual({});
   });
 });

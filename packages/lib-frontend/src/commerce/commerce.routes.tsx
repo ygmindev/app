@@ -10,6 +10,7 @@ import { SUCCESS } from '@lib/shared/core/core.constants';
 export const commerceRoutes: Array<RouteModel> = [
   {
     element: <OrderPage />,
+    header: { previous: true },
     navigation: ROUTE_NAVIGATION.TRANSITION,
     pathname: ORDER,
     routes: [

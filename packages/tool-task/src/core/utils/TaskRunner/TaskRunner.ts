@@ -11,7 +11,7 @@ import {
   type TaskModel,
   type TaskParamsModel,
 } from '@tool/task/core/core.models';
-import { mapParallel } from '@tool/task/core/utils/mapParallel/mapParallel';
+import { runParallel } from '@tool/task/core/utils/runParallel/runParallel';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { _TaskRunner } from '@tool/task/core/utils/TaskRunner/_TaskRunner';
@@ -56,7 +56,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   ): Promise<void> => {
     if (value) {
       if (isArray(value)) {
-        await mapParallel(
+        await runParallel(
           filterNil(value[0].map((v) => (isFunction(v) ? v(context) : v))),
           value[1],
           value[2],

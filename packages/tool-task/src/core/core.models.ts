@@ -1,7 +1,7 @@
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { type EnvironmentOverrideParamsModel } from '@lib/shared/environment/environment.models';
 import { type TASK_STATUS } from '@tool/task/core/core.constants';
-import { type ParallelOptionsModel } from '@tool/task/core/utils/mapParallel/mapParallel.models';
+import { type ParallelOptionsModel } from '@tool/task/core/utils/runParallel/runParallel.models';
 import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
 
 export type TaskStatusModel = `${TASK_STATUS}`;

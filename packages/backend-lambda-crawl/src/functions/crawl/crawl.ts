@@ -1,5 +1,5 @@
-// import { S3Client } from '@aws-sdk/client-s3';
-// import { Upload } from '@aws-sdk/lib-storage';
+import { S3Client } from '@aws-sdk/client-s3';
+import { Upload } from '@aws-sdk/lib-storage';
 import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
 import { ConcurrentQueue } from '@lib/shared/core/utils/ConcurrentQueue/ConcurrentQueue';
 import { runWithRetry } from '@lib/shared/core/utils/runWithRetry/runWithRetry';
@@ -129,25 +129,6 @@ export const main = createLambdaHandler<{
 
     try {
       await screen.open('https://www.homedepot.com/l/Falls-Church/VA/Falls-Church/22044/4608');
-
-      // const file = await screen.snapshot({ filename: 'location' });
-      // await new Upload({
-      //   client: new S3Client({
-      //     credentials: {
-      //       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      //       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      //     },
-      //     region: process.env.SERVER_REGION,
-      //   }),
-      //   params: {
-      //     Body: file,
-      //     Bucket: 'aroom-static',
-      //     ContentEncoding: 'base64',
-      //     ContentType: 'image/png',
-      //     Key: 'location.png',
-      //   },
-      // }).done();
-
       await screen
         .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'store-pod-localize__button' })
         .then((h) => h?.press());
@@ -186,6 +167,26 @@ export const main = createLambdaHandler<{
             row['Source Index'] = count;
 
             await runWithRetry(async () => screen.open(url), { delay: 1000, retries: 5 });
+
+            if (count === -1) {
+              const file = await screen.snapshot({ filename: 'location' });
+              await new Upload({
+                client: new S3Client({
+                  credentials: {
+                    accessKeyId: 'AKIAXYKJSMPULVFXUF4W',
+                    secretAccessKey: '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',
+                  },
+                  region: process.env.SERVER_REGION,
+                }),
+                params: {
+                  Body: file,
+                  Bucket: 'aroom-static',
+                  ContentEncoding: 'base64',
+                  ContentType: 'image/png',
+                  Key: 'location.png',
+                },
+              }).done();
+            }
 
             await screen.find({ value: '#product-section-overview' }).then((h) => h?.press());
             await screen.find({ value: '#product-section-key-feat' }).then((h) => h?.press());

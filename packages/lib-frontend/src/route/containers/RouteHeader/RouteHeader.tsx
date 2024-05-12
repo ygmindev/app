@@ -7,7 +7,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 
 export const RouteHeader: LFCModel<RouteHeaderPropsModel> = ({ route, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { getPath, location, push } = useRouter();
+  const { back, getPath, location, push } = useRouter();
   const previous = route.header?.previous;
   return (
     <NavigationHeader
@@ -16,14 +16,16 @@ export const RouteHeader: LFCModel<RouteHeaderPropsModel> = ({ route, ...props }
       elementState={ELEMENT_STATE.ACTIVE}
       onBack={
         previous
-          ? async () => {
-              const pathnames = location.pathname.split('/');
-              pathnames.splice(pathnames.length - previous, previous);
-              return push({
-                isBack: true,
-                pathname: getPath(pathnames.join('/'), location.params),
-              });
-            }
+          ? previous === true
+            ? async () => back()
+            : async () => {
+                const pathnames = location.pathname.split('/');
+                pathnames.splice(pathnames.length - previous, previous);
+                return push({
+                  isBack: true,
+                  pathname: getPath(pathnames.join('/'), location.params),
+                });
+              }
           : undefined
       }
       title={route.title}

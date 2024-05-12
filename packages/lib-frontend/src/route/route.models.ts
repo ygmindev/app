@@ -15,7 +15,7 @@ export type RouteModel<
   description?: AsyncTextModel;
   element?: ReactElement<TProps>;
   fullpath?: string;
-  header?: { previous?: number };
+  header?: { previous?: true | number };
   isIndex?: boolean;
   isNavigatable?: boolean;
   isProtectable?: boolean;

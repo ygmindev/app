@@ -10,7 +10,7 @@ import { merge } from '@lib/shared/core/utils/merge/merge';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import clean from '@tool/task/core/templates/clean/clean';
-import { PARALLEL_CONDITION } from '@tool/task/core/utils/mapParallel/mapParallel.constants';
+import { PARALLEL_CONDITION } from '@tool/task/core/utils/runParallel/runParallel.constants';
 import { copy } from '@tool/task/file/utils/copy/copy';
 import { lint } from '@tool/task/node/templates/lint/lint';
 import { test } from '@tool/task/node/templates/test/test';

@@ -15,7 +15,7 @@ export const _useQuery = <TParams = undefined, TResult = void>(
     gcTime: cache,
     queryFn: () => callback(params),
     queryKey: [id, params],
-    refetchOnMount: true,
+    refetchOnMount: false,
     staleTime: cache,
   });
   const refetchF = debounce(async () => refetch());

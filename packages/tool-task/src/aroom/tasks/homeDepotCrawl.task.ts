@@ -738,8 +738,8 @@ const crawl: TaskParamsModel<unknown> = {
                     pageIndex,
                     start: start * BATCH_SIZE,
                   },
-                  // url: 'https://xcrwnfkag5.execute-api.us-west-1.amazonaws.com/api/crawl',
-                  url: 'https://localhost:5001/api/crawl',
+                  url: 'https://60xsals2ze.execute-api.us-west-1.amazonaws.com/api/crawl',
+                  // url: 'https://localhost:5001/api/crawl',
                 })
                 .catch((e) => {
                   console.warn(e);
