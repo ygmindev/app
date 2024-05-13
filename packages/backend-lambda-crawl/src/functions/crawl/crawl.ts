@@ -419,8 +419,8 @@ export const main = createLambdaHandler<{
               await new Upload({
                 client: new S3Client({
                   credentials: {
-                    accessKeyId: 'AKIAXYKJSMPULVFXUF4W',
-                    secretAccessKey: '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',
+                    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+                    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
                   },
                   region: process.env.SERVER_REGION,
                 }),
