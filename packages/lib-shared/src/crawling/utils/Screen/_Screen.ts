@@ -159,6 +159,12 @@ export class _Screen implements _ScreenModel {
     );
     await this.page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
     await this.page.setRequestInterception(true);
+    await this.page.evaluateOnNewDocument(() => {
+      Object.defineProperty(navigator, 'webdriver', {
+        get: () => false,
+      });
+    });
+
     this.page.on('request', (req) => {
       const type = req.resourceType();
       if (this.options.isIgnoreMedia && (type === 'image' || type === 'font' || type === 'media')) {

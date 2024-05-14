@@ -9,6 +9,7 @@ import { slug } from '@lib/shared/core/utils/slug/slug';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { Screen } from '@lib/shared/crawling/utils/Screen/Screen';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
+import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { info } from '@lib/shared/logging/utils/logger/logger';
 import { JWT } from 'google-auth-library';
@@ -121,7 +122,7 @@ export const main = createLambdaHandler<{
             await sheet.saveUpdatedCells();
           }
         },
-        { delay: 1000, retries: 100 },
+        { delay: randomInt(1000, 5000), retries: 100 },
       );
 
     let result: Array<Record<string, string | number>> = [];
@@ -144,13 +145,102 @@ export const main = createLambdaHandler<{
         .then((h) => h?.press());
 
       const resultContainer = await screen.find({ value: '.results-wrapped' });
+      const productContainers = await resultContainer?.findAll({ value: '.browse-search__pod' });
+      const productCache: Record<string, Record<string, unknown>> = {};
+      for (const product of productContainers ?? []) {
+        const itemQueue = new ConcurrentQueue();
+        const row: Record<string, unknown> = {};
+
+        const linkContainer = await product.find({ value: 'a' });
+        if (linkContainer) {
+          row['Source URL'] = await linkContainer.url();
+          row['Image URL'] = await linkContainer.find({ value: 'img' }).then((h) => h?.src());
+        }
+        itemQueue.add(async () => {
+          const headerContainer = await product.find({
+            key: 'data-testid',
+            type: SELECTOR_TYPE.DATA,
+            value: 'product-header',
+          });
+          if (headerContainer) {
+            row['Product title'] =
+              (await headerContainer.find({ value: '.sui-font-regular' }).then((h) => h?.text())) ??
+              '';
+            if (row['Product title']) {
+              const titles = (row['Product title'] as string).split('\n\n');
+              if (titles.length > 1) {
+                // eslint-disable-next-line prefer-destructuring
+                row['Product title'] = titles[1].trim();
+              }
+            }
+            row['Product title'] && (row.Handle = slug(row['Product title'] as string));
+            row['Vendor'] = await headerContainer
+              .find({
+                key: 'data-testid',
+                type: SELECTOR_TYPE.DATA,
+                value: 'attribute-brandname-above',
+              })
+              .then((h) => h?.text());
+          }
+        });
+
+        itemQueue.add(async () => {
+          const pickup = await product
+            .find({ key: 'data-component', type: SELECTOR_TYPE.DATA, value: 'FulfillmentPodStore' })
+            .then((h) =>
+              h
+                ?.find({ value: '.store__text-box' })
+                .then((h) => h?.content())
+                .then((h) => h?.toLowerCase()),
+            );
+          const delivery = await product
+            .find({
+              key: 'data-component',
+              type: SELECTOR_TYPE.DATA,
+              value: 'FulfillmentPodShipping',
+            })
+            .then((h) =>
+              h
+                ?.find({ value: '.shipping__text-box' })
+                .then((h) => h?.content())
+                .then((h) => h?.toLowerCase()),
+            );
+
+          let availability: string | undefined = undefined;
+          if (pickup) {
+            availability =
+              availability ?? (pickup?.includes('in stock') ? 'In stock' : availability);
+            availability =
+              availability ??
+              (pickup?.includes('ship to store') ? 'Available to ship' : availability);
+            availability =
+              availability ??
+              (!pickup?.includes('unavailable') ? 'Available to ship' : availability);
+          }
+          if (delivery) {
+            availability =
+              availability ??
+              (!delivery?.includes('unavailable') ? 'Available for delivery' : availability);
+          }
+          row['Available For Sale'] = availability ?? 'Out of stock';
+        });
+
+        await itemQueue.run();
+
+        if (row['Handle']) {
+          productCache[row['Source URL'] as string] = row;
+        }
+      }
+
       const urls = resultContainer
         ? await Promise.all(
             await resultContainer
-              .findAll({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'product-pod' })
+              .findAll({ value: '.browse-search__pod' })
               .then((handles) => handles?.map((h) => h.find({ value: 'a' }).then((h) => h?.url()))),
           )
         : [];
+
+      console.warn(`### cache: ${stringify(productCache)}`);
 
       for (const url of start ? urls.slice(start) : urls) {
         if (maxItems && count > maxItems) {
@@ -160,8 +250,12 @@ export const main = createLambdaHandler<{
         try {
           if (url?.startsWith('https://www.homedepot.com')) {
             const itemQueue = new ConcurrentQueue();
-            const row: Record<string, unknown> = {};
-            COLUMNS.forEach((column) => (row[column] = ''));
+            const row: Record<string, unknown> = productCache[url] || {};
+
+            console.warn(`### cache?: ${url}`);
+            console.warn(`### cache!: ${stringify(row)}`);
+
+            COLUMNS.forEach((column) => (row[column] = row[column] || ''));
             row['Product Category Full Name'] = category;
             row['Source URL'] = url;
             row['Source Page'] = pageIndex + 1;
@@ -189,14 +283,18 @@ export const main = createLambdaHandler<{
 
             // brand
             itemQueue.add(async () => {
-              row.Vendor = (await screen.find({ value: '.brand' }).then((h) => h?.text())) ?? '';
+              if (!((row['Vendor'] ?? '') as string).length) {
+                row.Vendor = (await screen.find({ value: '.brand' }).then((h) => h?.text())) ?? '';
+              }
             });
 
             // title
             itemQueue.add(async () => {
-              row['Product title'] =
-                (await screen.find({ value: '.title' }).then((h) => h?.text())) ?? '';
-              row['Product title'] && (row.Handle = slug(row['Product title'] as string));
+              if (!((row['Product title'] ?? '') as string).length) {
+                row['Product title'] =
+                  (await screen.find({ value: '.title' }).then((h) => h?.text())) ?? '';
+                row['Product title'] && (row.Handle = slug(row['Product title'] as string));
+              }
             });
 
             const descriptionsContainer = await screen.find({
@@ -390,7 +488,8 @@ export const main = createLambdaHandler<{
                   availability ??
                   (!delivery?.includes('unavailable') ? 'Available for delivery' : availability);
               }
-              row['Available For Sale'] = availability ?? 'Out of stock';
+              row['Available For Sale'] =
+                availability ?? (row['Available For Sale'] || 'Out of stock');
             });
 
             await itemQueue.run();

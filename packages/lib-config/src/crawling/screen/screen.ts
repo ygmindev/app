@@ -9,7 +9,7 @@ const { config } = defineConfig({
 
     dimension: { height: 5000, width: 1440 },
 
-    elementTimeout: 10000,
+    elementTimeout: 5000,
 
     isHeadless: false,
 
