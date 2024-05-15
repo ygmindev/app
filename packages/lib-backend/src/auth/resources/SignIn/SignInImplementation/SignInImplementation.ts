@@ -53,9 +53,7 @@ export class SignInImplementation implements SignInImplementationModel {
       const formF = cleanObject(pick(form, ['callingCode', 'email', 'phone']));
       await this.otpImplementation.verify({ ...formF, otp: form.otp });
       delete (formF as Partial<SignInFormModel>).otp;
-      let { result: user } = await this.userImplementation.get({
-        filter: objectToEquality(formF),
-      });
+      let { result: user } = await this.userImplementation.get({ filter: objectToEquality(formF) });
       let isNew;
       if (!user) {
         const { result: created } = await this.userImplementation.create({ form: formF });

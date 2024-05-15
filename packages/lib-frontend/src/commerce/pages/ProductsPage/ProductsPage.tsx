@@ -1,13 +1,11 @@
+import { Product } from '@lib/frontend/commerce/components/Product/Product';
 import { type ProductsPagePropsModel } from '@lib/frontend/commerce/pages/ProductsPage/ProductsPage.models';
-import { Image } from '@lib/frontend/core/components/Image/Image';
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import { WrappedList } from '@lib/frontend/core/components/WrappedList/WrappedList';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useQuery } from '@lib/frontend/data/hooks/useQuery/useQuery';
 import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { mapParallel } from '@lib/shared/core/utils/mapParallel/mapParallel';
 import range from 'lodash/range';
 
@@ -34,19 +32,11 @@ export const ProductsPage: LFCModel<ProductsPagePropsModel> = ({ ...props }) => 
       <WrappedList
         data={data ?? []}
         element={(item) => (
-          <Wrapper
-            border
+          <Product
+            images={[item.image]}
             key={item.id}
-            p
-            round
-            s>
-            <Text fontStyle={FONT_STYLE.TITLE}>{item.title}</Text>
-
-            <Image
-              src={item.image}
-              width={180}
-            />
-          </Wrapper>
+            title={item.title}
+          />
         )}
         flex
         isVerticalScrollable

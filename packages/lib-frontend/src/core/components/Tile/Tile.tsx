@@ -21,6 +21,7 @@ export const Tile: LFCModel<TilePropsModel> = ({
       {...wrapperProps}
       border
       onPress={onPress}
+      pBottom
       pHorizontal
       round>
       {title && (

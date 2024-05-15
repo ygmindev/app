@@ -1,6 +1,6 @@
 import { Utility } from '@lib/backend/admin/resources/Utility/Utility';
-import { type UtilityResolverModel } from '@lib/backend/admin/resources/Utility/UtilityResolver/UtilityResolver.models';
 import { UtilityImplementation } from '@lib/backend/admin/resources/Utility/UtilityImplementation/UtilityImplementation';
+import { type UtilityResolverModel } from '@lib/backend/admin/resources/Utility/UtilityResolver/UtilityResolver.models';
 import { Vendor } from '@lib/backend/admin/resources/Vendor/Vendor';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
