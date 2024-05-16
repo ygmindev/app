@@ -1,15 +1,15 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import {
-  type RunServerModel,
-  type RunServerParamsModel,
-} from '@tool/task/platform/server/utils/runServer/runServer.models';
+  type StaticServerModel,
+  type StaticServerParamsModel,
+} from '@tool/task/platform/server/utils/staticServer/staticServer.models';
 
-export const runServer = ({
+export const staticServer = ({
   host = process.env.SERVER_APP_STATIC_HOST,
   isOpen = true,
   pathname,
   port = process.env.SERVER_APP_STATIC_PORT,
-}: RunServerParamsModel): RunServerModel =>
+}: StaticServerParamsModel): StaticServerModel =>
   fromExecutable(
     `http-server ${pathname} -a ${host.split('://')[1]} --cors --port ${port} ${
       isOpen ? '--o' : ''

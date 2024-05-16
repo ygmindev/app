@@ -49,8 +49,6 @@
     "json-stringify-safe": "^5.0.1",
     "libphonenumber-js": "^1.10.60",
     "lodash": "^4.17.21",
-    "moment": "^2.30.1",
-    "moment-timezone": "^0.5.45",
     "moti": "^0.28.1",
     "prop-types": "^15.8.1",
     "random-js": "^2.1.0",

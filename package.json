@@ -1,36 +1,37 @@
 {
-  "$schema": "https://json.schemastore.org/package.json",
-  "scripts": {
-    "link": "chmod +x ./packages/tool-task/src/index.js && npm link"
-  },
-  "bin": {
-    "run": "./packages/tool-task/src/index.js"
-  },
-  "bundledDependencies": [
-    "@app/native",
-    "@app/web",
-    "@app/web-admin",
-    "@app/web-library",
-    "@backend/graphql-sandbox",
-    "@backend/lambda",
-    "@backend/lambda-crawl",
-    "@backend/lambda-graphql",
-    "@backend/jobs",
-    "@lib/backend",
-    "@lib/config",
-    "@lib/frontend",
-    "@lib/library",
-    "@lib/platform",
-    "@lib/shared",
-    "@tool/task",
-    "@asset-static"
-  ],
-  "workspaces": [
-    "packages/*"
-  ],
-  "license": "MIT",
-  "name": "app",
-  "private": true,
-  "version": "0.0.0",
-  "packageManager": "pnpm@8.14.1"
+    "$schema": "https://json.schemastore.org/package.json",
+    "bin": {
+        "run": "./packages/tool-task/src/index.js"
+    },
+    "bundledDependencies": [
+        "@app/native",
+        "@app/web",
+        "@app/web-admin",
+        "@app/web-library",
+        "@asset/static",
+        "@backend/server",
+        "@backend/graphql-sandbox",
+        "@backend/jobs",
+        "@backend/lambda",
+        "@backend/lambda-crawl",
+        "@backend/lambda-graphql",
+        "@lib/backend",
+        "@lib/config",
+        "@lib/frontend",
+        "@lib/library",
+        "@lib/platform",
+        "@lib/shared",
+        "@tool/task"
+    ],
+    "license": "MIT",
+    "name": "app",
+    "packageManager": "pnpm@8.14.1",
+    "private": true,
+    "scripts": {
+        "link": "chmod +x ./packages/tool-task/src/index.js && npm link"
+    },
+    "version": "0.0.0",
+    "workspaces": [
+        "packages/*"
+    ]
 }

@@ -2,6 +2,7 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { config as fileConfig } from '@lib/config/core/file/file';
+import { _bundle as _bundleConfig } from '@lib/config/node/bundle/_bundle';
 import {
   type _ServerlessConfigModel,
   type ServerlessConfigModel,
@@ -28,7 +29,7 @@ export const _serverless = ({
   provider,
   server,
 }: ServerlessConfigModel): _ServerlessConfigModel => {
-  const bundleConfigF = bundleConfig();
+  const bundleConfigF = _bundleConfig(bundleConfig());
   const httpConfigF = httpConfig();
   const { certificateDir } = httpConfigF.certificate;
   const isContainer = process.env.SERVERLESS_RUNTIME === 'container';

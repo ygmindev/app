@@ -4,7 +4,7 @@ import { config as fileConfig } from '@lib/config/core/file/file';
 import { config } from '@lib/config/platform/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
-import { runServer } from '@tool/task/platform/server/utils/runServer/runServer';
+import { staticServer } from '@tool/task/platform/server/utils/staticServer/staticServer';
 
 export const build: TaskParamsModel<unknown> = {
   environment: ENVIRONMENT.PRODUCTION,
@@ -18,6 +18,6 @@ export const build: TaskParamsModel<unknown> = {
 
     ({ root }) =>
       process.env.APP_IS_STATIC_SERVER &&
-      runServer({ pathname: joinPaths([root, fileConfig.buildPath, 'client']) }),
+      staticServer({ pathname: joinPaths([root, fileConfig.buildPath, 'client']) }),
   ],
 };

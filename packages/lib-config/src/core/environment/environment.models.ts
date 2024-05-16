@@ -26,6 +26,7 @@ export type EnvironmentConfigModel = {
   ENV_NAME: string;
   ENV_PLATFORM: PlatformModel;
   NODE_ENV: EnvironmentModel;
+  NODE_EXTRA_CA_CERTS: string;
   NODE_OPTIONS?: string;
   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: BooleanStringModel;
   SERVERLESS_RUNTIME: ServerlessRuntimeModel;

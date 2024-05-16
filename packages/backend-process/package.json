@@ -25,7 +25,6 @@
     "reflect-metadata": "^0.2.2",
     "thenby": "^1.3.4",
     "twilio": "^5.0.4",
-    "typedi": "^0.10.0",
     "winston": "^3.13.0"
   }
 }
