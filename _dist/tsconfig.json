@@ -57,6 +57,9 @@
       "@backend/process/*": [
         "packages/backend-process/src/*"
       ],
+      "@backend/server/*": [
+        "packages/backend-server/src/*"
+      ],
       "@lib/backend/*": [
         "packages/lib-backend/src/*"
       ],

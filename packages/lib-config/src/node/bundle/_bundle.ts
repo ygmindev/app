@@ -139,7 +139,7 @@ export const _bundle = ({
     esbuild: {
       loader: 'tsx',
 
-      sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'linked',
+      // sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'linked',
     },
 
     mode: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? 'production' : 'development',

@@ -23,7 +23,7 @@ const { _config, config } = defineConfig({
     configFile: fromDist('.eslintrc.json'),
 
     // exclude: [`**/*${TEST_CONFIG.specExtension}.*`, `**/*${TEST_CONFIG.eteExtension}.*`],
-    exclude: [],
+    exclude: ['index.js'],
 
     include: permuteString(
       [toRelative({ from: fromDist(), to: fromPackages('*/src/**/*') })],

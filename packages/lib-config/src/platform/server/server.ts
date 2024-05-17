@@ -8,6 +8,8 @@ const { config } = defineConfig({
 
   config: {
     bundleConfig,
+
+    configFile: 'index.js',
   } satisfies ServerConfigModel,
 });
 

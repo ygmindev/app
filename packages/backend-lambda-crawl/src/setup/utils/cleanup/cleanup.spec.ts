@@ -1,4 +1,4 @@
-import { cleanup } from '@backend/lambda/setup/utils/cleanup/cleanup';
+import { cleanup } from '@backend/lambda-crawl/setup/utils/cleanup/cleanup';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ cleanup });
