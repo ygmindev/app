@@ -5,6 +5,7 @@ import { type DeepKeyModel } from '@lib/shared/core/core.models';
 import { type UserConfig } from 'vite';
 
 export type WebConfigModel = {
+  // TODO: separate into bundle.js?
   bundleConfig(): BundleConfigModel;
 
   configFile: string;

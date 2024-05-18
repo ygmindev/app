@@ -11,6 +11,7 @@ import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { type AWS } from '@serverless/typescript';
 
 export type ServerlessConfigModel = Pick<UriParamsModel, 'host' | 'port'> & {
+  // TODO: separate into bundle.js?
   bundleConfig(): BundleConfigModel;
 
   configFile: string;

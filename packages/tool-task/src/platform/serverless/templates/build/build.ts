@@ -2,7 +2,7 @@ import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecu
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { config as fileConfig } from '@lib/config/core/file/file';
-import { config as serverlessConfig } from '@lib/config/platform/serverless/serverless.base';
+import { SERVERLESS_CONFIG } from '@lib/config/platform/serverless/serverless.constants';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskModel, type TaskParamsModel } from '@tool/task/core/core.models';
 import { runClean } from '@tool/task/core/utils/runClean/runClean';
@@ -46,6 +46,6 @@ export const build: TaskParamsModel<unknown> = {
 
   task: [
     ...LAYER_TASKS,
-    fromExecutable(`sls package --config ${serverlessConfig().configFile} --verbose`),
+    fromExecutable(`sls package --config ${SERVERLESS_CONFIG.configFile} --verbose`),
   ],
 };

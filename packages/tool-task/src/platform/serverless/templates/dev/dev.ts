@@ -1,7 +1,7 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { config as httpConfig } from '@lib/config/http/http/http';
-import { config as serverlessConfig } from '@lib/config/platform/serverless/serverless.base';
+import { SERVERLESS_CONFIG } from '@lib/config/platform/serverless/serverless.constants';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 
@@ -13,7 +13,7 @@ export const dev: TaskParamsModel<unknown> = {
   task: [
     () =>
       fromExecutable(
-        `sls offline start --config ${serverlessConfig().configFile} ${process.env.SERVER_IS_DISABLE_HOT_RELOAD ? '' : '--reloadHandler'} --verbose`,
+        `sls offline start --config ${SERVERLESS_CONFIG.configFile} ${process.env.SERVER_IS_DISABLE_HOT_RELOAD ? '' : '--reloadHandler'} --verbose`,
       ),
   ],
 
