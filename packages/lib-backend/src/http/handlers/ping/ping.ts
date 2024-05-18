@@ -1,15 +1,13 @@
-import { type ApiHandleModel } from '@lib/config/platform/api/api.models';
+import { type PingModel, type PingParamsModel } from '@lib/backend/http/handlers/ping/ping.models';
+import { type ApiHandlerModel } from '@lib/config/platform/api/api.models';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 
-export const ping: ApiHandleModel = async ({ context }) => {
-  const { requestId, user } = context;
+export const ping: ApiHandlerModel<PingModel, PingParamsModel> = async (
+  _,
+  { requestId, user } = {},
+) => {
   return {
-    body: {
-      message: 'success',
-      requestId,
-      user: user?.claims.email,
-    },
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    statusCode: HTTP_STATUS_CODE.SUCCESS,
+    body: { message: 'success', userId: user?._id },
+    status: HTTP_STATUS_CODE.SUCCESS,
   };
 };

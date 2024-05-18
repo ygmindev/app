@@ -10,6 +10,8 @@ export type BundleConfigModel = Pick<
 
   babelConfig?: _BabelConfigModel;
 
+  configFile: string;
+
   define?: Record<string, string>;
 
   entry?: string;

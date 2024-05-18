@@ -1,16 +1,12 @@
 import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
-// import { _server } from '@lib/config/platform/server/_server';
+import { SERVER_CONFIG } from '@lib/config/platform/server/server.constants';
 import { type ServerConfigModel } from '@lib/config/platform/server/server.models';
 
 const { config } = defineConfig({
-  // _config: _server,
-
-  config: {
-    bundleConfig,
-
-    configFile: 'index.js',
-  } satisfies ServerConfigModel,
+  config: () =>
+    ({
+      ...SERVER_CONFIG,
+    }) satisfies ServerConfigModel,
 });
 
 export { config };

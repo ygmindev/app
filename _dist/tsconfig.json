@@ -54,9 +54,6 @@
       "@backend/lambda-graphql/*": [
         "packages/backend-lambda-graphql/src/*"
       ],
-      "@backend/process/*": [
-        "packages/backend-process/src/*"
-      ],
       "@backend/server/*": [
         "packages/backend-server/src/*"
       ],

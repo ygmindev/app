@@ -9,12 +9,12 @@ import {
 export type ApiConfigModel = {
   prefix: string;
 
-  routes: Array<ApiEndpointModel>;
+  routes: Array<ApiEndpointModel<unknown, unknown>>;
 };
 
-export type ApiEndpointModel = {
+export type ApiEndpointModel<TType = void, TParams = void> = {
   filename?: string;
-  handle?: ApiHandleModel;
+  handler?: ApiHandlerModel<TType, TParams>;
   method: HttpMethodModel;
   pathname: string;
 };
@@ -27,7 +27,7 @@ export type RequestContextModel = {
   user?: SignInTokenModel;
 };
 
-export type ApiHandleModel = (
-  request: HttpRequestModel,
+export type ApiHandlerModel<TType = void, TParams = void> = (
+  request: HttpRequestModel<TParams>,
   context?: RequestContextModel,
-) => Promise<HttpResponseModel>;
+) => Promise<HttpResponseModel<TType>>;

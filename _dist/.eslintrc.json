@@ -14,7 +14,9 @@
   ],
   "ignorePatterns": [
     "!(../packages/*/src/**/*.tsx|../packages/*/src/**/*.ts|../packages/*/src/**/*.jsx|../packages/*/src/**/*.js)",
-    "index.js"
+    "bundle.js",
+    "serverless.js",
+    "web.js"
   ],
   "overrides": [
     {

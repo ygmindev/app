@@ -14,8 +14,6 @@ const { _config, config } = defineConfig({
 
       bundleConfig,
 
-      configFile: 'index.js',
-
       httpConfig,
 
       isSsr: true,

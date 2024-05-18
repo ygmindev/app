@@ -6,6 +6,7 @@ import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { config as httpConfig } from '@lib/config/http/http/http';
 import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { _serverless } from '@lib/config/platform/serverless/_serverless';
+import { SERVERLESS_CONFIG } from '@lib/config/platform/serverless/serverless.constants';
 import { type ServerlessConfigModel } from '@lib/config/platform/serverless/serverless.models';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
@@ -16,9 +17,9 @@ const { _config, config } = defineConfig({
 
   config: () =>
     ({
-      bundleConfig,
+      ...SERVERLESS_CONFIG,
 
-      configFile: 'index.js',
+      bundleConfig,
 
       dotenv: () => setEnvironment(),
 

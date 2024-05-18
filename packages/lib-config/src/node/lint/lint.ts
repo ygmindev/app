@@ -4,8 +4,11 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { packages } from '@lib/backend/file/utils/packages/packages';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
+import { BUNDLE_CONFIG } from '@lib/config/node/bundle/bundle.constants';
 import { _lint } from '@lib/config/node/lint/_lint';
 import { type LintConfigModel } from '@lib/config/node/lint/lint.models';
+import { SERVERLESS_CONFIG } from '@lib/config/platform/serverless/serverless.constants';
+import { WEB_CONFIG } from '@lib/config/platform/web/web.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { EXTENSIONS_BASE } from '@lib/shared/platform/utils/extensions/extensions.constants';
 
@@ -23,7 +26,7 @@ const { _config, config } = defineConfig({
     configFile: fromDist('.eslintrc.json'),
 
     // exclude: [`**/*${TEST_CONFIG.specExtension}.*`, `**/*${TEST_CONFIG.eteExtension}.*`],
-    exclude: ['index.js'],
+    exclude: [BUNDLE_CONFIG.configFile, SERVERLESS_CONFIG.configFile, WEB_CONFIG.configFile],
 
     include: permuteString(
       [toRelative({ from: fromDist(), to: fromPackages('*/src/**/*') })],

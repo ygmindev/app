@@ -7,11 +7,11 @@ import {
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
 import { lintCommand } from '@lib/config/node/lint/lint';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel } from '@rollup/plugin-babel';

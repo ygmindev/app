@@ -7,6 +7,7 @@ import { config as fileConfig } from '@lib/config/core/file/file';
 import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _config as _babelConfig } from '@lib/config/node/babel/babel.base';
 import { _bundle } from '@lib/config/node/bundle/_bundle';
+import { BUNDLE_CONFIG } from '@lib/config/node/bundle/bundle.constants';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { extensions } from '@lib/shared/platform/utils/extensions/extensions';
 
@@ -15,6 +16,8 @@ const { _config, config } = defineConfig({
 
   config: () =>
     ({
+      ...BUNDLE_CONFIG,
+
       aliases: [
         {
           from: /^uuid$/,

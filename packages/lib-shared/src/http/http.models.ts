@@ -13,9 +13,12 @@ export type WebsocketMethodModel = `${WEBSOCKET_METHOD}`;
 
 export type WebsocketStatusModel = `${WEBSOCKET_STATUS}`;
 
-export type HttpRequestModel = {};
+export type HttpRequestModel<TParams = void> = {
+  body?: TParams;
+};
 
-export type HttpResponseModel = {
+export type HttpResponseModel<TType = void> = {
+  body?: TType;
   status?: number;
   type?: HttpResponseTypeModel;
 };

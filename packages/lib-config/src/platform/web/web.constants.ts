@@ -1,7 +1,12 @@
 import { type WebConfigModel } from '@lib/config/platform/web/web.models';
 import { ROOT } from '@lib/frontend/root/root.constants';
 
-export const WEB_CONFIG: Pick<WebConfigModel, 'publicPath' | 'rootId' | 'ssrContextKeys'> = {
+export const WEB_CONFIG: Pick<
+  WebConfigModel,
+  'configFile' | 'publicPath' | 'rootId' | 'ssrContextKeys'
+> = {
+  configFile: 'web.js',
+
   publicPath: 'assets',
 
   rootId: ROOT,
