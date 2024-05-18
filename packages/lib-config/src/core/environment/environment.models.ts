@@ -1,6 +1,6 @@
 // COMPLETE
 import { type ServerlessRuntimeModel } from '@lib/backend/serverless/serverless.models';
-import { type PlatformModel } from '@lib/platform/core/core.models';
+import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { type BooleanStringModel } from '@lib/shared/core/core.models';
 import { type EnvironmentModel } from '@lib/shared/environment/environment.models';
 

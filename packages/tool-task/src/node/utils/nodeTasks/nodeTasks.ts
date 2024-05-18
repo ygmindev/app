@@ -3,7 +3,7 @@ import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { config } from '@lib/config/core/file/file';
 import { config as testConfig } from '@lib/config/node/test/test.base';
 import { config as webConfig } from '@lib/config/platform/web/web';
-import { PLATFORM } from '@lib/platform/core/core.constants';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';

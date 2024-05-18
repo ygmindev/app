@@ -19,7 +19,7 @@ export const release: TaskParamsModel<unknown> = {
     ...(process.env.SERVERLESS_RUNTIME === 'container' ? [] : LAYER_TASKS),
 
     fromExecutable(
-      'sls deploy --config ${serverlessConfig().configFile} --aws-profile default --verbose',
+      `sls deploy --config ${serverlessConfig().configFile} --aws-profile default --verbose`,
     ),
   ],
 };

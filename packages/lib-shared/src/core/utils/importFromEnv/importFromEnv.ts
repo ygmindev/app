@@ -1,5 +1,4 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { extensions } from '@lib/platform/core/utils/extensions/extensions';
 import {
   type ImportFromEnvModel,
   type ImportFromEnvParamsModel,
@@ -7,6 +6,7 @@ import {
 import { requireInterop } from '@lib/shared/core/utils/requireInterop/requireInterop';
 import { resolveFirst } from '@lib/shared/core/utils/resolveFirst/resolveFirst';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
+import { extensions } from '@lib/shared/platform/utils/extensions/extensions';
 
 export const importFromEnv = async <TType>(
   params: ImportFromEnvParamsModel,

@@ -2,7 +2,7 @@ import {
   type WithAuthorizerModel,
   type WithAuthorizerParamsModel,
 } from '@lib/backend/resource/utils/withAuthorizer/withAuthorizer.models';
-import { type ContextModel } from '@lib/platform/core/core.models';
+import { type RequestContextModel } from '@lib/config/platform/api/api.models';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
@@ -22,7 +22,7 @@ export const withAuthorizer =
     if (authorizer) {
       type AuthorizerModel = (
         input?: InputModel<TMethod, TType, TForm>,
-        context?: ContextModel,
+        context?: RequestContextModel,
       ) => Promise<OutputModel<TMethod, TType, TRoot>>;
       const original = descriptor.value as AuthorizerModel;
       (descriptor as { value: AuthorizerModel }).value = async function (input, context) {

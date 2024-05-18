@@ -72,9 +72,6 @@
       "@lib/library/*": [
         "packages/lib-library/src/*"
       ],
-      "@lib/platform/*": [
-        "packages/lib-platform/src/*"
-      ],
       "@lib/shared/*": [
         "packages/lib-shared/src/*"
       ],

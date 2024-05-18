@@ -1,6 +1,3 @@
-import isArray from 'lodash/isArray';
-import isPlainObject from 'lodash/isPlainObject';
-
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import {
   debug as _debug,
@@ -9,6 +6,8 @@ import {
   warn as _warn,
 } from '@lib/shared/logging/utils/logger/_logger';
 import { type LoggerModel } from '@lib/shared/logging/utils/logger/logger.models';
+import isArray from 'lodash/isArray';
+import isPlainObject from 'lodash/isPlainObject';
 
 const stringifyF = (params: Array<unknown>): string =>
   params

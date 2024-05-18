@@ -2,7 +2,7 @@ import {
   type CreateResourceImplementationModel,
   type CreateResourceImplementationParamsModel,
 } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation.models';
-import { type ContextModel } from '@lib/platform/core/core.models';
+import { type RequestContextModel } from '@lib/config/platform/api/api.models';
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
@@ -101,7 +101,7 @@ export const createResourceImplementation = <
 
     async create(
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm> = {},
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
       const inputF = cleanObject(
         this.decorators.beforeCreate
@@ -121,7 +121,7 @@ export const createResourceImplementation = <
 
     async createMany(
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm> = {},
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
       let inputF = this.decorators.beforeCreateMany
         ? await this.decorators.beforeCreateMany({ input }, context)
@@ -151,7 +151,7 @@ export const createResourceImplementation = <
 
     async get(
       input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm> = {},
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
       const inputF = cleanObject(
         this.decorators.beforeGet ? await this.decorators.beforeGet({ input }, context) : input,
@@ -169,7 +169,7 @@ export const createResourceImplementation = <
 
     async getMany(
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm> = {},
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
       const inputF = cleanObject(
         this.decorators.beforeGetMany
@@ -189,7 +189,7 @@ export const createResourceImplementation = <
 
     async getConnection(
       input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm> = {},
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
       const inputF = cleanObject(
         this.decorators.beforeGetConnection
@@ -207,7 +207,7 @@ export const createResourceImplementation = <
 
     async update(
       input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm> = {},
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
       const inputF = cleanObject(
         this.decorators.beforeUpdate
@@ -227,7 +227,7 @@ export const createResourceImplementation = <
 
     async remove(
       input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm> = {},
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
       const inputF = cleanObject(
         this.decorators.beforeRemove

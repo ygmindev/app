@@ -1,4 +1,4 @@
-import { type ContextModel } from '@lib/platform/core/core.models';
+import { type RequestContextModel } from '@lib/config/platform/api/api.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
@@ -13,39 +13,39 @@ export type ResourceImplementationModel<
 > = {
   create(
     input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>>;
 
   createMany(
     input?: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm, TRoot>,
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>>;
 
   decorators?: ResourceImplementationDecoratorModel<TType, TForm, TRoot>;
 
   get(
     input?: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>>;
 
   getConnection(
     input?: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>,
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>;
 
   getMany(
     input?: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>>;
 
   remove(
     input?: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>,
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>>;
 
   update(
     input?: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>,
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>>;
 };
 
@@ -56,7 +56,7 @@ export type ResourceImplementationBeforeDecoratorModel<
   TRoot = undefined,
 > = (
   params: { input?: InputModel<TMethod, TType, TForm, TRoot> },
-  context?: ContextModel,
+  context?: RequestContextModel,
 ) => Promise<InputModel<TMethod, TType, TForm, TRoot> | undefined>;
 
 export type ResourceImplementationAfterDecoratorModel<
@@ -69,7 +69,7 @@ export type ResourceImplementationAfterDecoratorModel<
     input?: InputModel<TMethod, TType, TForm, TRoot>;
     output: OutputModel<TMethod, TType, TRoot>;
   },
-  context?: ContextModel,
+  context?: RequestContextModel,
 ) => Promise<OutputModel<TMethod, TType, TRoot>>;
 
 export type ResourceImplementationDecoratorModel<

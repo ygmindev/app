@@ -8,12 +8,12 @@ import {
   type ServerlessConfigModel,
 } from '@lib/config/platform/serverless/serverless.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
-import { PLATFORM } from '@lib/platform/core/core.constants';
 import { type PartialDeepModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { HTTP_METHOD } from '@lib/shared/http/http.constants';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import reduce from 'lodash/reduce';
 
 export const _serverless = ({
@@ -213,7 +213,7 @@ export const _serverless = ({
 //   type ServerlessConfigModel,
 // } from '@lib/config/platform/serverless/serverless.models';
 // import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
-// import { PLATFORM } from '@lib/platform/core/core.constants';
+// import { PLATFORM } from '@lib/shared/platform/platform.constants';
 // import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 // import { HTTP_METHOD } from '@lib/shared/http/http.constants';
 // import { type AWS } from '@serverless/typescript';

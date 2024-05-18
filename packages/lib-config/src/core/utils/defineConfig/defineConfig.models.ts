@@ -23,7 +23,7 @@ export type DefineConfigModel<
   _config: TResult extends undefined
     ? never
     : TParamsConfig extends () => TParams
-    ? (params?: PartialDeepModel<TParams>) => TResult
-    : TResult;
+      ? (params?: PartialDeepModel<TParams>) => TResult
+      : TResult;
   config: TParamsConfig;
 };

@@ -1,3 +1,3 @@
-import { renderClient } from '@lib/platform/web/exports/renderClient/renderClient';
+import { renderClient } from '@lib/shared/web/utils/renderClient/renderClient';
 
 export default renderClient({});

@@ -1,5 +1,5 @@
 import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
-import { CONTEXT_FIXTURE } from '@lib/platform/core/core.constants';
+import { CONTEXT_FIXTURE } from '@lib/shared/platform/platform.constants';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
 

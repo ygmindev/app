@@ -7,8 +7,8 @@ import {
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
 import { lintCommand } from '@lib/config/node/lint/lint';
-import { PLATFORM } from '@lib/platform/core/core.constants';
-import { type PlatformModel } from '@lib/platform/core/core.models';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';

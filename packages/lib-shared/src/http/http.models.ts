@@ -12,3 +12,10 @@ export type HttpResponseTypeModel = `${HTTP_RESPONSE_TYPE}`;
 export type WebsocketMethodModel = `${WEBSOCKET_METHOD}`;
 
 export type WebsocketStatusModel = `${WEBSOCKET_STATUS}`;
+
+export type HttpRequestModel = {};
+
+export type HttpResponseModel = {
+  status?: number;
+  type?: HttpResponseTypeModel;
+};

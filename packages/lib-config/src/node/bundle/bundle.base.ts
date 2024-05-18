@@ -8,7 +8,7 @@ import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _config as _babelConfig } from '@lib/config/node/babel/babel.base';
 import { _bundle } from '@lib/config/node/bundle/_bundle';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
-import { extensions } from '@lib/platform/core/utils/extensions/extensions';
+import { extensions } from '@lib/shared/platform/utils/extensions/extensions';
 
 const { _config, config } = defineConfig({
   _config: _bundle,

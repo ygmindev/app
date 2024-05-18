@@ -9,7 +9,7 @@ import {
 import { withAuthorizer } from '@lib/backend/resource/utils/withAuthorizer/withAuthorizer';
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
-import { type ContextModel } from '@lib/platform/core/core.models';
+import { RequestContextModel } from '@lib/config/platform/api/api.models';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';
@@ -79,7 +79,7 @@ export const createResourceResolver = <
       )
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot> = {},
       @withContext()
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
       if (this._implementation.create) {
         return this._implementation.create(cleanObject(input), context);
@@ -114,7 +114,7 @@ export const createResourceResolver = <
       )
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm, TRoot> = {},
       @withContext()
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
       if (this._implementation.createMany) {
         return this._implementation.createMany(cleanObject(input), context);
@@ -149,7 +149,7 @@ export const createResourceResolver = <
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot> = {},
       @withContext()
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
       if (this._implementation.get) {
         return this._implementation.get(cleanObject(input), context);
@@ -184,7 +184,7 @@ export const createResourceResolver = <
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot> = {},
       @withContext()
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
       if (this._implementation.getMany) {
         return this._implementation.getMany(cleanObject(input), context);
@@ -219,7 +219,7 @@ export const createResourceResolver = <
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot> = {},
       @withContext()
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
       if (this._implementation.getConnection) {
         return this._implementation.getConnection(cleanObject(input), context);
@@ -254,7 +254,7 @@ export const createResourceResolver = <
       )
       input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot> = {},
       @withContext()
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
       if (this._implementation.update) {
         return this._implementation.update(cleanObject(input), context);
@@ -289,7 +289,7 @@ export const createResourceResolver = <
       )
       input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot> = {},
       @withContext()
-      context?: ContextModel,
+      context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
       if (this._implementation.remove) {
         return this._implementation.remove(cleanObject(input), context);

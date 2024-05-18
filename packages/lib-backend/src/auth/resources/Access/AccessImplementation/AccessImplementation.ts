@@ -1,7 +1,7 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { createProtectedResoureImplementation } from '@lib/backend/auth/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { type ContextModel } from '@lib/platform/core/core.models';
+import { RequestContextModel } from '@lib/config/platform/api/api.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
 import {
@@ -24,7 +24,7 @@ export class AccessImplementation
 {
   async getManyUser(
     input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel, AccessFormModel> = {},
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel>> {
     const userId = context?.user?._id;
     if (userId) {

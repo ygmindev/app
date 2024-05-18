@@ -4,6 +4,7 @@ import {
   ApiGatewayManagementApiClient,
   PostToConnectionCommand,
 } from '@aws-sdk/client-apigatewaymanagementapi';
+import { type ServerlessRequestContextModel } from '@lib/backend/serverless/serverless.models';
 import {
   type _CreateLambdaHandlerModel,
   type _CreateLambdaHandlerParamsModel,
@@ -15,7 +16,6 @@ import {
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import { type LambdaResponseModel } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
 import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
-import { type ContextModel } from '@lib/platform/core/core.models';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
@@ -42,8 +42,8 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
   }: {
     context: Context;
     event: _LambdaEventModel;
-  }): Promise<Context & ContextModel> => {
-    const contextF: Context & ContextModel = { ...contextDefault, ...context };
+  }): Promise<Context & ServerlessRequestContextModel> => {
+    const contextF: Context & ServerlessRequestContextModel = { ...contextDefault, ...context };
     contextF.callbackWaitsForEmptyEventLoop = false;
     contextF.pathname = event.requestContext.routeKey;
 

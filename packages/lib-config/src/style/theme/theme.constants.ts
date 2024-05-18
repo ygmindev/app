@@ -2,8 +2,8 @@ import { type ThemeConfigModel } from '@lib/config/style/theme/theme.models';
 import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { type ThemeColorModel } from '@lib/frontend/style/style.models';
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { PLATFORM } from '@lib/platform/core/core.constants';
 import { type PartialDeepModel } from '@lib/shared/core/core.models';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
 export const THEME_COLOR_TONES: Record<ThemeColorModel, string> = {
   [THEME_COLOR.ERROR]: '#f44336',

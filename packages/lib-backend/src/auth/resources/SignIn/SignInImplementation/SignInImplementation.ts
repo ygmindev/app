@@ -3,7 +3,7 @@ import { JwtImplementation } from '@lib/backend/auth/utils/JwtImplementation/Jwt
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { objectToEquality } from '@lib/backend/resource/utils/objectToEquality/objectToEquality';
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
-import { type ContextModel } from '@lib/platform/core/core.models';
+import { RequestContextModel } from '@lib/config/platform/api/api.models';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,
@@ -68,7 +68,7 @@ export class SignInImplementation implements SignInImplementationModel {
 
   async userUpdate(
     input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel> = {},
-    _context?: ContextModel,
+    _context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
     const result = await this.userImplementation.update(input);
     if (result?.result) {
@@ -80,7 +80,7 @@ export class SignInImplementation implements SignInImplementationModel {
 
   async usernameUpdate(
     { form }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel> = {},
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
     if (form?.otp) {
       const formF = cleanObject(form);

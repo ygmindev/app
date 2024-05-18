@@ -6,8 +6,8 @@ import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _lint } from '@lib/config/node/lint/_lint';
 import { type LintConfigModel } from '@lib/config/node/lint/lint.models';
-import { EXTENSIONS_BASE } from '@lib/platform/core/utils/extensions/extensions.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
+import { EXTENSIONS_BASE } from '@lib/shared/platform/utils/extensions/extensions.constants';
 
 export const lintCommand = (fix?: boolean): string =>
   `npx eslint --config ${config.configFile} ${

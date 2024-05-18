@@ -8,7 +8,7 @@ import { createEntityResourceResolver } from '@lib/backend/resource/utils/create
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
 import { User } from '@lib/backend/user/resources/User/User';
-import { type ContextModel } from '@lib/platform/core/core.models';
+import { RequestContextModel } from '@lib/config/platform/api/api.models';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import {
   SIGN_IN_RESOURCE_NAME,
@@ -55,7 +55,7 @@ export class SignInResolver
     })
     input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel> = {},
     @withContext()
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
     return this.signInImplementation.userUpdate(input, context);
   }
@@ -74,7 +74,7 @@ export class SignInResolver
     })
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel> = {},
     @withContext()
-    context?: ContextModel,
+    context?: RequestContextModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
     return this.signInImplementation.usernameUpdate(input, context);
   }

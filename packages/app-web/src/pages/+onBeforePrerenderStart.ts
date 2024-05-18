@@ -1,4 +1,4 @@
 import { routes } from '@app/web/routes';
-import { preparePrerender } from '@lib/platform/web/exports/preparePrerender/preparePrerender';
+import { preparePrerender } from '@lib/shared/web/utils/preparePrerender/preparePrerender';
 
 export default preparePrerender({ routes });

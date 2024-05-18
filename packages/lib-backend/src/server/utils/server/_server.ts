@@ -3,6 +3,7 @@ import {
   type _ServerParamsModel,
 } from '@lib/backend/server/utils/server/_server.models';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
+import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { debug, error, info, warn } from '@lib/shared/logging/utils/logger/logger';
 import { fastify } from 'fastify';
 import { createYoga } from 'graphql-yoga';
@@ -20,18 +21,19 @@ class _Logger {
 }
 
 export const _server = async ({}: _ServerParamsModel): Promise<_ServerModel> => {
-  const app = fastify({ logger: new _Logger() });
-  await handleCleanup({
-    onCleanup: async () => {
-      debug('close server');
-      await app.close();
-    },
-  });
+  const app = fastify({ disableRequestLogging: true, logger: new _Logger() });
+
+  const handleClose = async (): Promise<void> => {
+    app.server.listening && (await app.close());
+  };
+
+  handleHmr({ onChange: handleClose });
+  await handleCleanup({ onCleanup: handleClose });
 
   const yoga = createYoga({ logging: { debug, error, info, warn } });
 
   app.get('/ping', async (req, rep) => {
-    console.warn('ping');
+    console.warn('@@@ ping2 ?');
     await rep.status(200).send('ping');
   });
 

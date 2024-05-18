@@ -105,13 +105,13 @@ export const main = createLambdaHandler<{
         'https://www.googleapis.com/auth/drive.file',
       ],
     });
-    const doc = new GoogleSpreadsheet('1Y50rGvzXzPNcnDjm4xkJ1AnxKIYsKBaooeraCpankiw', auth);
-    await doc.loadInfo();
-    const [sheet] = doc.sheetsByIndex;
 
     const upload = async (value: Array<Record<string, string | number>>): Promise<void> =>
       runWithRetry(
         async () => {
+          const doc = new GoogleSpreadsheet('1Y50rGvzXzPNcnDjm4xkJ1AnxKIYsKBaooeraCpankiw', auth);
+          await doc.loadInfo();
+          const [sheet] = doc.sheetsByIndex;
           if (value) {
             const valueF = value.map((row) => ({
               ...row,

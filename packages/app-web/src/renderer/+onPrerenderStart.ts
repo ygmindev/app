@@ -1,3 +1,3 @@
-import { prerender } from '@lib/platform/web/exports/prerender/prerender';
+import { prerender } from '@lib/shared/web/utils/prerender/prerender';
 
 export default prerender();

@@ -1,7 +1,7 @@
 import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _serverless } from '@lib/config/platform/serverless/_serverless';
 import { config as configBase } from '@lib/config/platform/serverless/serverless.base';
-import { PLATFORM } from '@lib/platform/core/core.constants';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
 const { _config, config } = defineConfig({
   _config: _serverless,
