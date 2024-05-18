@@ -13,7 +13,7 @@ import { type StateProviderPropsModel } from '@lib/frontend/state/utils/Store/St
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { mapValuesAsync } from '@lib/shared/core/utils/mapValuesAsync/mapValuesAsync';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { isServer } from '@lib/shared/platform/utils/isServer/isServer';
+import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import {
   type CaseReducer,
   type CaseReducerActions,

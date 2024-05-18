@@ -4,7 +4,7 @@ import { Database } from '@lib/backend/database/utils/Database/Database';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
-import { WEB_CONFIG } from '@lib/config/platform/web/web.constants';
+import { WEB_CONFIG } from '@lib/config/web/web.constants';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { CACHE_RESOURCES } from '@tool/task/asset/tasks/cacheDatabase/cacheDatabase.constants';

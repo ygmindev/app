@@ -4,7 +4,7 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { type TrackingProviderPropsModel } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider.models';
 import { warn } from '@lib/shared/logging/utils/logger/logger';
-import { isServer } from '@lib/shared/platform/utils/isServer/isServer';
+import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import { useEffect } from 'react';
 
 export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ children }) => {

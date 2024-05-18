@@ -1,5 +1,5 @@
 import { type _IsHoverableModel } from '@lib/frontend/core/components/Activatable/_isHoverable.models';
-import { isServer } from '@lib/shared/platform/utils/isServer/isServer';
+import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 
 let isEnabled: boolean;
 

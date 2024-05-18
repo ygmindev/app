@@ -8,7 +8,7 @@ import { createEntityResourceResolver } from '@lib/backend/resource/utils/create
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
 import { User } from '@lib/backend/user/resources/User/User';
-import { RequestContextModel } from '@lib/config/platform/api/api.models';
+import { RequestContextModel } from '@lib/config/api/api.models';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import {
   SIGN_IN_RESOURCE_NAME,

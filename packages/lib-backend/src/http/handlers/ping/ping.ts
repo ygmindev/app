@@ -1,5 +1,5 @@
 import { type PingModel, type PingParamsModel } from '@lib/backend/http/handlers/ping/ping.models';
-import { type ApiHandlerModel } from '@lib/config/platform/api/api.models';
+import { type ApiHandlerModel } from '@lib/config/api/api.models';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 
 export const ping: ApiHandlerModel<PingModel, PingParamsModel> = async (

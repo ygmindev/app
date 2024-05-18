@@ -2,7 +2,7 @@ import {
   type CreateResourceImplementationModel,
   type CreateResourceImplementationParamsModel,
 } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation.models';
-import { type RequestContextModel } from '@lib/config/platform/api/api.models';
+import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';

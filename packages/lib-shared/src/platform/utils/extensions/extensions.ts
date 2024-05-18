@@ -1,8 +1,8 @@
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import { EXTENSIONS_BASE } from '@lib/shared/platform/utils/extensions/extensions.constants';
-import { type ExtensionsModel } from '@lib/shared/platform/utils/extensions/extensions.models';
+import { EXTENSIONS_BASE } from '@lib/backend/file/utils/extensions/extensions.constants';
+import { type ExtensionsModel } from '@lib/backend/file/utils/extensions/extensions.models';
 
 export const extensions = (): ExtensionsModel => {
   const isWeb = process.env.ENV_PLATFORM === 'web';

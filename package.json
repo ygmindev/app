@@ -19,7 +19,6 @@
         "@lib/config",
         "@lib/frontend",
         "@lib/library",
-        "@lib/platform",
         "@lib/shared",
         "@tool/task"
     ],

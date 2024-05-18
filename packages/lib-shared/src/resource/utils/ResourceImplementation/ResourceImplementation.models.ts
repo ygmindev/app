@@ -1,4 +1,4 @@
-import { type RequestContextModel } from '@lib/config/platform/api/api.models';
+import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';

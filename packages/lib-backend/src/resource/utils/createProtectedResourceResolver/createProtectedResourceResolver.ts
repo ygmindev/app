@@ -11,7 +11,7 @@ import {
 import { createResourceResolver } from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver';
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
-import { RequestContextModel } from '@lib/config/platform/api/api.models';
+import { RequestContextModel } from '@lib/config/api/api.models';
 import { type ProtectedResourceModel } from '@lib/shared/auth/resources/ProtectedResource/ProtectedResource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';

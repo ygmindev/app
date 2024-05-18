@@ -1,3 +1,4 @@
+import { EXTENSIONS_BASE } from '@lib/backend/file/utils/extensions/extensions.constants';
 import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
@@ -7,10 +8,9 @@ import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { BUNDLE_CONFIG } from '@lib/config/node/bundle/bundle.constants';
 import { _lint } from '@lib/config/node/lint/_lint';
 import { type LintConfigModel } from '@lib/config/node/lint/lint.models';
-import { SERVERLESS_CONFIG } from '@lib/config/platform/serverless/serverless.constants';
-import { WEB_CONFIG } from '@lib/config/platform/web/web.constants';
+import { SERVERLESS_CONFIG } from '@lib/config/serverless/serverless.constants';
+import { WEB_CONFIG } from '@lib/config/web/web.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
-import { EXTENSIONS_BASE } from '@lib/shared/platform/utils/extensions/extensions.constants';
 
 export const lintCommand = (fix?: boolean): string =>
   `npx eslint --config ${config.configFile} ${

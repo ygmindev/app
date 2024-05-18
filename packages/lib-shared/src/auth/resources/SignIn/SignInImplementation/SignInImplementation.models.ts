@@ -1,4 +1,4 @@
-import { type RequestContextModel } from '@lib/config/platform/api/api.models';
+import { type RequestContextModel } from '@lib/config/api/api.models';
 import {
   type SignInFormModel,
   type SignInModel,

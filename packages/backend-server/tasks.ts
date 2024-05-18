@@ -1,6 +1,6 @@
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
-import { dev } from '@tool/task/platform/server/templates/dev/dev';
+import { dev } from '@tool/task/server/templates/dev/dev';
 
 const tasks = nodeTasks({
   additionalTasks: [dev],

@@ -1,4 +1,4 @@
-import { type _WebConfigModel } from '@lib/config/platform/web/web.models';
+import { type _WebConfigModel } from '@lib/config/web/web.models';
 import { type UriModel } from '@lib/shared/route/route.models';
 
 export type _ServerParamsModel = UriModel & {

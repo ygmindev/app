@@ -1,5 +1,5 @@
 import { type _DisplayModel } from '@lib/frontend/core/utils/display/_display.models';
-import { isServer } from '@lib/shared/platform/utils/isServer/isServer';
+import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 
 const subscribeEvent = <TType extends Event>(
   eventName: string,

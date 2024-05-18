@@ -1,6 +1,6 @@
-import { WEB_CONFIG } from '@lib/config/platform/web/web.constants';
+import { WEB_CONFIG } from '@lib/config/web/web.constants';
 import { Root } from '@lib/frontend/root/containers/Root/Root.server';
-import { renderApp } from '@lib/shared/platform/utils/renderApp/renderApp';
+import { renderApp } from '@lib/shared/web/utils/renderApp/renderApp';
 import { _renderServer } from '@lib/shared/web/utils/renderServer/_renderServer';
 import {
   type RenderServerModel,
