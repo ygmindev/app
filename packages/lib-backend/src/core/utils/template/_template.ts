@@ -5,7 +5,7 @@ import {
 import { type Data } from 'ejs';
 import { renderFile } from 'ejs';
 
-export const _template = async <TParams>({
+export const _template = async <TType extends unknown>({
   params,
   pathname,
-}: _TemplateParamsModel<TParams>): Promise<_TemplateModel> => renderFile(pathname, params as Data);
+}: _TemplateParamsModel<TType>): Promise<_TemplateModel> => renderFile(pathname, params as Data);

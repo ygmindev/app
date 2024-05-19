@@ -1,5 +1,7 @@
-import { type EmptyObjectModel } from '@lib/shared/core/core.models';
+import { type ServerConfigModel } from '@lib/config/server/server.models';
 
-export type _ServerParamsModel = EmptyObjectModel;
+export type _ServerParamsModel = ServerConfigModel & {
+  onClose(): Promise<void>;
+};
 
 export type _ServerModel = void;

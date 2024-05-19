@@ -13,13 +13,12 @@ import { type WatchOptions } from 'vite';
 
 export const _web = ({
   bundleConfig,
-  httpConfig,
+  certificate,
   isSsr,
   publicPath,
 }: WebConfigModel): _WebConfigModel => {
   const bundleConfigF = _bundleConfig(bundleConfig());
-  const httpConfigF = httpConfig();
-  const { certificateDir, privateKeyFile, publicKeyFile } = httpConfigF.certificate;
+  const { certificateDir, privateKeyFile, publicKeyFile } = certificate;
   return merge(
     [
       {

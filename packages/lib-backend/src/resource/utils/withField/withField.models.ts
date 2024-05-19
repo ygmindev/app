@@ -3,7 +3,7 @@ import { type FIELD_RELATION } from '@lib/backend/resource/utils/withField/withF
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type DataTypeModel, type FieldTypeModel } from '@lib/shared/data/data.models';
 
-export type WithFieldParamsModel<TType> = {
+export type WithFieldParamsModel<TType extends unknown> = {
   Resource?(): ResourceClassModel<TType>;
   defaultValue?(): TType;
   expire?: number;

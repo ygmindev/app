@@ -3,7 +3,7 @@ import {
   type ResolveFirstParamsModel,
 } from '@lib/shared/core/utils/resolveFirst/resolveFirst.models';
 
-export const resolveFirst = async <TType>(
+export const resolveFirst = async <TType extends unknown>(
   params: ResolveFirstParamsModel<TType>,
 ): Promise<ResolveFirstModel<TType>> => {
   const errors = [];

@@ -17,12 +17,13 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import reduce from 'lodash/reduce';
 
 export const _serverless = ({
+  api,
   bundleConfig,
+  certificate,
   dotenv,
   environment,
   functions,
   host,
-  httpConfig,
   name,
   platform,
   port,
@@ -30,8 +31,7 @@ export const _serverless = ({
   server,
 }: ServerlessConfigModel): _ServerlessConfigModel => {
   const bundleConfigF = _bundleConfig(bundleConfig());
-  const httpConfigF = httpConfig();
-  const { certificateDir } = httpConfigF.certificate;
+  const { certificateDir } = certificate;
   const isContainer = process.env.SERVERLESS_RUNTIME === 'container';
   const platformParams: PartialDeepModel<_ServerlessConfigModel> = (() => {
     switch (platform) {

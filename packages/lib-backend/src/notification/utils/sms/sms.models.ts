@@ -4,6 +4,7 @@ import {
   type _SmsParamsModel,
 } from '@lib/backend/notification/utils/sms/_sms.models';
 
-export type SmsParamsModel<TParams> = Omit<_SmsParamsModel, 'body'> & TemplateParamsModel<TParams>;
+export type SmsParamsModel<TType extends unknown> = Omit<_SmsParamsModel, 'body'> &
+  TemplateParamsModel<TType>;
 
 export type SmsModel = _SmsModel;

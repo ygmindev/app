@@ -18,9 +18,9 @@ import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type FormattableTypeModel } from '@lib/shared/data/data.models';
 import { type ReactElement } from 'react';
 
-export type UseTableParamsModel<TType> = _UseTableParamsModel<TType>;
+export type UseTableParamsModel<TType extends unknown> = _UseTableParamsModel<TType>;
 
-export type UseTableModel<TType> = _UseTableModel<TType>;
+export type UseTableModel<TType extends unknown> = _UseTableModel<TType>;
 
 export type TableSelectTypeModel = `${TABLE_SELECT_TYPE}`;
 

@@ -9,7 +9,7 @@ import { Mutation, Query } from 'type-graphql';
 import { type ReturnTypeFunc } from 'type-graphql/dist/decorators/types';
 
 export const withResult =
-  <TType>({
+  <TType extends unknown>({
     Resource,
     level = ACCESS_LEVEL.PUBLIC,
     name,

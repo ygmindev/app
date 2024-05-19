@@ -1,8 +1,8 @@
+import { type RequestContextModel } from '@lib/config/api/api.models';
 import {
   type _GraphqlConfigModel,
   type GraphqlConfigModel,
 } from '@lib/config/data/graphql/graphql.models';
-import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type BuildSchemaOptions, type ContainerType } from 'type-graphql';
 import { buildSchemaSync } from 'type-graphql';
 

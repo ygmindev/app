@@ -4,5 +4,6 @@ import {
   type UseTableParamsModel,
 } from '@lib/frontend/data/hooks/useTable/useTable.models';
 
-export const useTable = <TType,>({ ...props }: UseTableParamsModel<TType>): UseTableModel<TType> =>
-  _useTable<TType>({ ...props });
+export const useTable = <TType extends unknown>({
+  ...props
+}: UseTableParamsModel<TType>): UseTableModel<TType> => _useTable<TType>({ ...props });

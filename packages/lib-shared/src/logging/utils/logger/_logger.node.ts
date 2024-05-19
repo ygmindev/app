@@ -4,7 +4,7 @@ import { pino } from 'pino';
 const logger = pino({
   level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
   transport: {
-    pipeline: [{ options: { destination: 2 }, target: 'pino-pretty' }],
+    pipeline: [{ options: { colorize: true, destination: 2 }, target: 'pino-pretty' }],
   },
 });
 

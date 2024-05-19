@@ -3,7 +3,7 @@ import { rootContext } from '@lib/frontend/root/providers/ContextProvider/Contex
 import { type RedirectPropsModel } from '@lib/frontend/route/components/Redirect/Redirect.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
-import { isServer } from '@lib/shared/platform/utils/isServer/isServer';
+import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import { type ReactElement, useContext, useEffect } from 'react';
 
 export const Redirect = <TType,>({

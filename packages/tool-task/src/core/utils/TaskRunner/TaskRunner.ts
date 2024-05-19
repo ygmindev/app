@@ -11,9 +11,9 @@ import {
   type TaskModel,
   type TaskParamsModel,
 } from '@tool/task/core/core.models';
-import { runParallel } from '@tool/task/core/utils/runParallel/runParallel';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
+import { runParallel } from '@tool/task/core/utils/runParallel/runParallel';
 import { _TaskRunner } from '@tool/task/core/utils/TaskRunner/_TaskRunner';
 import { type TaskRunnerModel } from '@tool/task/core/utils/TaskRunner/TaskRunner.models';
 import { type ChildProcess, spawn } from 'child_process';
@@ -50,7 +50,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       p.once('unhandledRejection', handleError);
     });
 
-  resolveTask = async <TType>(
+  resolveTask = async <TType extends unknown>(
     value: TaskModel<TType>,
     context: TaskContextModel<TType>,
   ): Promise<void> => {
@@ -77,7 +77,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     }
   };
 
-  runTasks = async <TType>(
+  runTasks = async <TType extends unknown>(
     value: Array<TaskModel<TType>>,
     context: TaskContextModel<TType>,
   ): Promise<void> => {
@@ -89,7 +89,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     process.exit(0);
   };
 
-  runTask = async <TType>({
+  runTask = async <TType extends unknown>({
     environment,
     name,
     onBefore,

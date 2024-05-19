@@ -5,12 +5,13 @@ export const PING = 'ping';
 export const WEBSOCKET = 'websocket';
 
 export enum HTTP_METHOD {
-  DELETE = 'delete',
-  GET = 'get',
-  POST = 'post',
-  PUT = 'put',
-  UPDATE = 'update',
-  WEBSOCKET = 'websocket',
+  DELETE = 'DELETE',
+  GET = 'GET',
+  OPTIONS = 'OPTIONS',
+  POST = 'POST',
+  PUT = 'PUT',
+  UPDATE = 'UPDATE',
+  WEBSOCKET = 'WEBSOCKET',
 }
 
 export enum HTTP_RESPONSE_TYPE {

@@ -5,9 +5,9 @@ import {
 } from '@lib/backend/notification/utils/mail/mail.models';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
 
-export const mail = async <TParams>({
+export const mail = async <TType extends unknown>({
   ...params
-}: MailParamsModel<TParams>): Promise<MailModel> => {
+}: MailParamsModel<TType>): Promise<MailModel> => {
   if (process.env.NODE_ENV === 'production') {
     return _mail({ ...params });
   }

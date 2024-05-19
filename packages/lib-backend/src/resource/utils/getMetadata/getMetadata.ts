@@ -4,6 +4,6 @@ import {
   type GetMetadataParamsModel,
 } from '@lib/backend/resource/utils/getMetadata/getMetadata.models';
 
-export const getMetadata = <TType>({
+export const getMetadata = <TType extends unknown>({
   ...params
 }: GetMetadataParamsModel<TType>): GetMetadataModel<TType> => _getMetadata({ ...params });

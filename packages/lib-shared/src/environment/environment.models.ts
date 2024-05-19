@@ -6,5 +6,6 @@ export type EnvironmentModel = `${ENVIRONMENT}`;
 
 export type EnvironmentOverrideParamsModel = {
   environment?: EnvironmentModel;
+
   variables?(): PartialModel<EnvironmentConfigModel>;
 };

@@ -8,7 +8,7 @@ import { requireInterop } from '@lib/shared/core/utils/requireInterop/requireInt
 import { resolveFirst } from '@lib/shared/core/utils/resolveFirst/resolveFirst';
 import { debug } from '@lib/shared/logging/utils/logger/logger';
 
-export const importFromEnv = async <TType>(
+export const importFromEnv = async <TType extends unknown>(
   params: ImportFromEnvParamsModel,
 ): Promise<ImportFromEnvModel<TType>> =>
   resolveFirst<TType>(

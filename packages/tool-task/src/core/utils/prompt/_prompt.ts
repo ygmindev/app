@@ -11,7 +11,7 @@ import toString from 'lodash/toString';
 
 registerPrompt(PROMPT_TYPE.DIRECTORY, directory as prompts.PromptConstructor);
 
-export const _prompt = async <TType>(
+export const _prompt = async <TType extends unknown>(
   prompts: _PromptParamsModel<TType>,
 ): Promise<_PromptModel<TType>> =>
   prompt(

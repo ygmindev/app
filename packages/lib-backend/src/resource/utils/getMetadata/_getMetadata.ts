@@ -5,7 +5,7 @@ import {
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { type EntityMetadata } from '@mikro-orm/core';
 
-export const _getMetadata = <TType>({
+export const _getMetadata = <TType extends unknown>({
   Resource,
 }: _GetMetadataParamsModel<TType>): _GetMetadataModel<TType> => {
   const ResourceF = Resource();

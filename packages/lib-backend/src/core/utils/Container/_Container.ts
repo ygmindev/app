@@ -12,10 +12,10 @@ const container = new Container({
 });
 
 export const _Container: _ContainerModel = {
-  get: <TType>(type: ClassModel<TType> | string, name?: string): TType =>
+  get: <TType extends unknown>(type: ClassModel<TType> | string, name?: string): TType =>
     name ? container.getNamed<TType>(type, name) : container.get<TType>(type),
 
-  set: <TType>(
+  set: <TType extends unknown>(
     type: ClassModel<TType> | string,
     value: TType | ClassModel<TType>,
     name?: string,

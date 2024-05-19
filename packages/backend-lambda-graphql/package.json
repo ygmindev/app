@@ -51,6 +51,7 @@
     "nodemailer": "^6.9.13",
     "p-queue": "^6.6.2",
     "pino": "^9.1.0",
+    "pino-pretty": "^11.0.0",
     "reflect-metadata": "^0.2.2",
     "serverless": "3.38.0",
     "stripe": "^15.3.0",

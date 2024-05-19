@@ -1,6 +1,6 @@
-export type _MailParamsModel<TParams> = {
+export type _MailParamsModel<TType extends unknown> = {
   from: string;
-  params?: TParams;
+  params?: TType;
   template: string;
   to: Array<string>;
 };

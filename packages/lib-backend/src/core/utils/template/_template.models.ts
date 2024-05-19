@@ -1,5 +1,5 @@
-export type _TemplateParamsModel<TParams> = {
-  params: TParams;
+export type _TemplateParamsModel<TType extends unknown> = {
+  params: TType;
   pathname: string;
 };
 

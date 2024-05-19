@@ -7,7 +7,7 @@ import { FIELD_RELATION } from '@lib/backend/resource/utils/withField/withField.
 import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
 export const withEmbeddableRootField =
-  <TType>({
+  <TType extends unknown>({
     Resource,
     name,
   }: WithEmbeddableRootFieldParamsModel<TType>): WithEmbeddableRootFieldModel =>

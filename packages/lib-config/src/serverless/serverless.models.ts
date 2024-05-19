@@ -2,15 +2,14 @@ import {
   type ServerlessProviderModel,
   type ServerlessRuntimeModel,
 } from '@lib/backend/serverless/serverless.models';
-import { type HttpConfigModel } from '@lib/config/http/http/http.models';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import { type ServerConfigModel } from '@lib/config/server/server.models';
 import { type EnvironmentModel } from '@lib/shared/environment/environment.models';
 import { type HttpMethodModel } from '@lib/shared/http/http.models';
-import { type UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { type AWS } from '@serverless/typescript';
 
-export type ServerlessConfigModel = Pick<UriParamsModel, 'host' | 'port'> & {
+export type ServerlessConfigModel = ServerConfigModel & {
   // TODO: separate into bundle.js?
   bundleConfig(): BundleConfigModel;
 
@@ -28,8 +27,6 @@ export type ServerlessConfigModel = Pick<UriParamsModel, 'host' | 'port'> & {
       pathname: string;
     }
   >;
-
-  httpConfig(): HttpConfigModel;
 
   name: string;
 

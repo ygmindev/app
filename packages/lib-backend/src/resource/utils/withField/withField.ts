@@ -21,7 +21,7 @@ import {
 import { Field, Float } from 'type-graphql';
 import { type ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
-const getField = <TType>({
+const getField = <TType extends unknown>({
   Resource,
   isArray,
   type,
@@ -45,7 +45,7 @@ const getField = <TType>({
   }
 };
 
-const getColumn = <TType>({
+const getColumn = <TType extends unknown>({
   Resource,
   defaultValue,
   isArray,
@@ -114,7 +114,7 @@ const getColumn = <TType>({
 };
 
 export const withField =
-  <TType>({
+  <TType extends unknown>({
     Resource,
     defaultValue,
     expire,

@@ -11,6 +11,7 @@ import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/Una
 import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { type OtpFormModel, type OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
 import { type OtpImplementationModel } from '@lib/shared/auth/resources/Otp/OtpImplementation/OtpImplementation.models';
+import { PartialModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { pick } from '@lib/shared/core/utils/pick/pick';
@@ -23,7 +24,7 @@ export class OtpImplementation
   extends createEntityResourceImplementation<OtpModel, OtpFormModel>({
     Resource: Otp,
     afterCreate: async ({ output }) => {
-      if (output.result) {
+      if (output.result?.otp) {
         // phone verification
         if (output.result.phone && output.result.callingCode) {
           await sms<{ otp: string }>({
@@ -47,7 +48,7 @@ export class OtpImplementation
     },
 
     beforeCreate: async ({ input }) => {
-      const { checkExists, ...formF } = input.form;
+      const { checkExists, ...formF } = input?.form ?? {};
       if (checkExists) {
         const userImplementation = Container.get(UserImplementation);
         const { result } = await userImplementation.get({
@@ -60,9 +61,10 @@ export class OtpImplementation
       }
       const otpImplementation = Container.get(OtpImplementation);
       await otpImplementation.remove({ filter: objectToEquality(formF) });
-      input.form.otp =
-        process.env.SERVER_OTP_STATIC ??
-        randomInt(toNumber(process.env.SERVER_APP_OTP_LENGTH)).toString();
+      input?.form &&
+        (input.form.otp =
+          process.env.SERVER_OTP_STATIC ??
+          randomInt(toNumber(process.env.SERVER_APP_OTP_LENGTH)).toString());
       return input;
     },
 
@@ -70,7 +72,7 @@ export class OtpImplementation
   })
   implements OtpImplementationModel
 {
-  async verify(data: EntityResourceDataModel<OtpModel>): Promise<OtpModel> {
+  async verify(data: EntityResourceDataModel<OtpModel>): Promise<PartialModel<OtpModel>> {
     const filter = objectToEquality(data);
     const { result } = await this.get({ filter, options: { project: { otp: true } } });
     if (!result || result.otp !== data.otp) {

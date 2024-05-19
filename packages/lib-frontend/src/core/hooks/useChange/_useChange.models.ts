@@ -1,3 +1,3 @@
-export type _UseChangeParamsModel<TType> = TType;
+export type _UseChangeParamsModel<TType extends unknown> = TType;
 
-export type _UseChangeModel<TType> = TType | undefined;
+export type _UseChangeModel<TType extends unknown> = TType | undefined;

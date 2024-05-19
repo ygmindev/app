@@ -4,7 +4,7 @@ import {
 } from '@lib/shared/core/utils/updateArray/updateArray.models';
 import clone from 'lodash/clone';
 
-export const updateArray = <TType>(
+export const updateArray = <TType extends unknown>(
   ...[value, selector, update, { isClone = true } = {}]: UpdateArrayParamsModel<TType>
 ): UpdateArrayModel<TType> => {
   const valueF = value ? (isClone ? clone(value) : value) : [];
