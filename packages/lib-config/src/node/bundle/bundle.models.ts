@@ -1,4 +1,4 @@
-import { type FileConfigModel } from '@lib/config/core/file/file.models';
+import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type _BabelConfigModel } from '@lib/config/node/babel/babel.models';
 import { type UserConfig } from 'vite';
 

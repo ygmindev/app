@@ -2,12 +2,12 @@ import {
   SERVERLESS_PROVIDER,
   SERVERLESS_RUNTIME,
 } from '@lib/backend/serverless/serverless.constants';
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { config as serverConfig } from '@lib/config/server/server';
 import { _serverless } from '@lib/config/serverless/_serverless';
 import { SERVERLESS_CONFIG } from '@lib/config/serverless/serverless.constants';
 import { type ServerlessConfigModel } from '@lib/config/serverless/serverless.models';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';

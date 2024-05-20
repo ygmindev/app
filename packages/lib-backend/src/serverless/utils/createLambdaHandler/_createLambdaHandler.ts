@@ -15,7 +15,6 @@ import {
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import { type LambdaResponseModel } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
-import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
@@ -29,7 +28,6 @@ import { type GraphQLError } from 'graphql';
 
 export const _createLambdaHandler = <TType = Record<string, unknown>>({
   context: contextDefault = {},
-  databaseConfig,
   graphQlConfig,
   handler,
   plugins,
@@ -59,11 +57,6 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
       const user = await getUserFromHeader(authorization);
       user && (contextF.user = user);
       eventF.headers?.group && (contextF.group = eventF.headers.group);
-    }
-
-    if (databaseConfig && !contextF.database) {
-      const { database } = await initializeBackend({ databaseConfig: databaseConfig() });
-      database && (contextDefault.database = database);
     }
 
     // request id

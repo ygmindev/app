@@ -1,6 +1,6 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { type LibraryConfigModel } from '@lib/config/library/library.models';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 const { _config, config } = defineConfig({
   config: {

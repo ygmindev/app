@@ -1,7 +1,7 @@
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
 import { INTERNATIONALIZE_CONFIG } from '@lib/config/locale/internationalize/internationalize.constants';
 import { type InternationalizeConfigModel } from '@lib/config/locale/internationalize/internationalize.models';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { initReactI18next } from 'react-i18next';
 
 const { _config, config } = defineConfig({

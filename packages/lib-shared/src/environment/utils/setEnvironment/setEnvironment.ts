@@ -20,8 +20,8 @@ export const setEnvironment = ({
 }: SetEnvironmentParamsModel = {}): SetEnvironmentModel => {
   const environmentF = process.env.NODE_ENV ?? environment;
   const paths = filterNil([
-    fromConfig('core/environment/.env.base'),
-    environmentF && fromConfig(`core/environment/.env.${environmentF}`),
+    fromConfig('environment/.env.base'),
+    environmentF && fromConfig(`environment/.env.${environmentF}`),
     fromWorking('.env'),
   ]);
   const envs = paths.reduce((result, path) => {

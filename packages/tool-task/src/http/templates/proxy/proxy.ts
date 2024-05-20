@@ -1,4 +1,4 @@
-import { _config } from '@lib/config/http/proxy/proxy';
+import { _config } from '@lib/config/proxy/proxy';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 

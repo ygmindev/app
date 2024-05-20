@@ -14,7 +14,7 @@
         "@backend/jobs",
         "@backend/lambda",
         "@backend/lambda-crawl",
-        "@backend/lambda-graphql",
+        "@backend/lambda",
         "@lib/backend",
         "@lib/config",
         "@lib/frontend",

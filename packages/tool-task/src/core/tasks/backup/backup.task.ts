@@ -1,5 +1,5 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { config } from '@lib/config/core/file/file';
+import { config } from '@lib/config/file/file';
 import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
 import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';

@@ -1,7 +1,7 @@
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _database } from '@lib/config/database/_database';
 import { config as configBase } from '@lib/config/database/database.base';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 const { _config, config } = defineConfig({
   _config: _database,

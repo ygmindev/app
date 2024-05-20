@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
-import { config as configBase } from '@lib/config/style/theme/theme.base';
-import { config as configDark } from '@lib/config/style/theme/theme.dark';
+import { config as configBase } from '@lib/config/theme/theme.base';
+import { config as configDark } from '@lib/config/theme/theme.dark';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { type UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';

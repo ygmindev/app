@@ -1,7 +1,7 @@
 import { type Config } from '@jest/types';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
 import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
+import { importConfig } from '@lib/config/utils/importConfig/importConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';

@@ -51,8 +51,8 @@
       "@backend/lambda-crawl/*": [
         "packages/backend-lambda-crawl/src/*"
       ],
-      "@backend/lambda-graphql/*": [
-        "packages/backend-lambda-graphql/src/*"
+      "@backend/lambda/*": [
+        "packages/backend-lambda/src/*"
       ],
       "@backend/server/*": [
         "packages/backend-server/src/*"

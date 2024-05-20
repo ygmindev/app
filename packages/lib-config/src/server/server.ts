@@ -1,9 +1,9 @@
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { config as apiConfig } from '@lib/config/api/api.server';
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _config as databaseConfig } from '@lib/config/database/database.mongo';
 import { SERVER_CONFIG } from '@lib/config/server/server.constants';
 import { type ServerConfigModel } from '@lib/config/server/server.models';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import toNumber from 'lodash/toNumber';
 
 const { config } = defineConfig({

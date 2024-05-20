@@ -1,7 +1,7 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import { config as fileConfig } from '@lib/config/core/file/file';
+import { config as fileConfig } from '@lib/config/file/file';
 import { _bundle as _bundleConfig } from '@lib/config/node/bundle/_bundle';
 import {
   type _ServerlessConfigModel,
@@ -49,7 +49,7 @@ export const _serverless = ({
               keepOutputDirectory: true,
               outputWorkFolder: fileConfig.buildPath,
               packager: 'pnpm',
-              plugins: toRelative({ to: fromConfig('platform/serverless/_plugins.js') }),
+              plugins: toRelative({ to: fromConfig('serverless/_plugins.js') }),
               watch: { pattern: bundleConfigF.build?.watch?.include },
             },
 
@@ -207,7 +207,7 @@ export const _serverless = ({
 
 // import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 // import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-// import { config as fileConfig } from '@lib/config/core/file/file';
+// import { config as fileConfig } from '@lib/config/file/file';
 // import {
 //   type _ServerlessConfigModel,
 //   type ServerlessConfigModel,

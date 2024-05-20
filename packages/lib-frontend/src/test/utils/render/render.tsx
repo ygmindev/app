@@ -1,8 +1,8 @@
-import { importConfig } from '@lib/config/core/utils/importConfig/importConfig';
 import {
   type _InternationalizeConfigModel,
   type InternationalizeConfigModel,
 } from '@lib/config/locale/internationalize/internationalize.models';
+import { importConfig } from '@lib/config/utils/importConfig/importConfig';
 import { Root } from '@lib/frontend/root/containers/Root/Root';
 import { Router } from '@lib/frontend/route/containers/Router/Router';
 import { _render } from '@lib/frontend/test/utils/render/_render';

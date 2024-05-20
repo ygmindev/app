@@ -11,5 +11,5 @@ declare module '*.ttf';
 declare namespace NodeJS {
   type ProcessEnv =
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-    import('@lib/config/core/environment/environment.models').EnvironmentConfigModel;
+    import('@lib/config/environment/environment.models').EnvironmentConfigModel;
 }

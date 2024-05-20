@@ -4,8 +4,10 @@ import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { _config } from '@lib/config/locale/internationalize/internationalize.server';
-import { config as webConfig } from '@lib/config/web/web';
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { _config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.server';
+import { _config as webConfig } from '@lib/config/web/web';
+import { WEB_CONFIG } from '@lib/config/web/web.constants';
 import { type CookieOptionModel } from '@lib/frontend/state/state.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
@@ -17,23 +19,32 @@ import {
   type _ServerModel,
   type _ServerParamsModel,
 } from '@lib/shared/web/utils/server/_server.models';
-import { type FastifyPluginCallback, type FastifyRegisterOptions } from 'fastify';
-import { fastify } from 'fastify';
+import { fastify, type FastifyPluginCallback, type FastifyRegisterOptions } from 'fastify';
+import { readFileSync } from 'fs';
 import { type SecureServerOptions } from 'http2';
 import { plugin as i18nextMiddleware } from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
 import { createServer } from 'vite';
 
 export const _server = async ({
-  config,
+  certificate,
   host,
   onError,
   onStart,
   port,
   root,
 }: _ServerParamsModel): Promise<_ServerModel> => {
-  const { publicPath } = webConfig();
-  const app = fastify({ https: config.server?.https as SecureServerOptions });
+  const { publicPath } = WEB_CONFIG;
+  const webConfigF = webConfig();
+  const internationalizeConfigF = internationalizeConfig();
+
+  const { certificateDir, privateKeyFile, publicKeyFile } = certificate;
+  const app = fastify({
+    https: {
+      cert: readFileSync(joinPaths([certificateDir, publicKeyFile])),
+      key: readFileSync(joinPaths([certificateDir, privateKeyFile])),
+    } as SecureServerOptions,
+  });
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);
   await app.register(fastifyStatic, { prefix: `/${publicPath}/`, root: fromStatic(publicPath) });
@@ -41,12 +52,12 @@ export const _server = async ({
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);
 
-  const { middlewares } = await createServer({ ...config, root });
+  const { middlewares } = await createServer({ ...webConfigF, root });
   await app.use(middlewares);
 
   await app.register(
     i18nextMiddleware as unknown as FastifyPluginCallback,
-    { i18next: _config() } as FastifyRegisterOptions<Record<never, never>>,
+    { i18next: internationalizeConfigF } as FastifyRegisterOptions<Record<never, never>>,
   );
 
   app.get('*', async (req, res) => {

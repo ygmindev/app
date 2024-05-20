@@ -1,5 +1,5 @@
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { type CountryConfigModel } from '@lib/config/locale/country/country.models';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 const { _config, config } = defineConfig({
   config: {

@@ -1,7 +1,7 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { config as fileConfig } from '@lib/config/core/file/file';
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { type ScreenConfigModel } from '@lib/config/crawling/screen/screen.models';
+import { config as fileConfig } from '@lib/config/file/file';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 const { config } = defineConfig({
   config: {

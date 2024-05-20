@@ -5,7 +5,7 @@ import { type ParserConfigModel } from '@lib/config/locale/parser/parser.models'
 
 const { languages } = INTERNATIONALIZE_CONFIG;
 
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 const { _config, config } = defineConfig({
   _config: _parser,

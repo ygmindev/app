@@ -4,6 +4,8 @@ import { createEntityResourceResolver } from '@lib/backend/resource/utils/create
 import { User } from '@lib/backend/user/resources/User/User';
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
 import { type UserResolverModel } from '@lib/backend/user/resources/User/UserResolver/UserResolver.models';
+import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
 // import isEqual from 'lodash/isEqual';
@@ -14,6 +16,9 @@ export class UserResolver
   extends createEntityResourceResolver<UserModel, UserFormModel>({
     Resource: () => User,
     ResourceImplementation: UserImplementation,
+    access: {
+      [RESOURCE_METHOD_TYPE.GET]: ACCESS_LEVEL.PUBLIC,
+    },
     authorizer: {
       // Update: ({ context, input }) => isEqual(context?.user?._id, input?.filter?._id),
     },

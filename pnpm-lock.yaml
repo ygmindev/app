@@ -901,7 +901,7 @@ importers:
         specifier: 2.0.0-beta.2
         version: 2.0.0-beta.2(class-validator@0.14.1)(graphql@16.8.1)
 
-  packages/backend-lambda-graphql:
+  packages/backend-lambda:
     dependencies:
       '@apollo/server':
         specifier: ^4.10.4

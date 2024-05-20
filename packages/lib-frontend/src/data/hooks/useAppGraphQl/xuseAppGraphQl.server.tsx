@@ -1,4 +1,4 @@
-import { _config } from '@lib/config/data/graphql/graphql';
+import { _config } from '@lib/config/graphql/graphql';
 import {
   type UseAppGraphQlModel,
   type UseAppGraphQlParamsModel,

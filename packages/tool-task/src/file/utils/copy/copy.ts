@@ -1,5 +1,5 @@
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
-import { config } from '@lib/config/core/file/file';
+import { config } from '@lib/config/file/file';
 import { type CopyParamsModel } from '@tool/task/file/utils/copy/copy.models';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync } from 'fs';
 import every from 'lodash/every';

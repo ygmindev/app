@@ -1,5 +1,5 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { config } from '@lib/config/core/file/file';
+import { config } from '@lib/config/file/file';
 import {
   type _RunCleanModel,
   type _RunCleanParamsModel,

@@ -4,11 +4,11 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { packages } from '@lib/backend/file/utils/packages/packages';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { BUNDLE_CONFIG } from '@lib/config/node/bundle/bundle.constants';
 import { _lint } from '@lib/config/node/lint/_lint';
 import { type LintConfigModel } from '@lib/config/node/lint/lint.models';
 import { SERVERLESS_CONFIG } from '@lib/config/serverless/serverless.constants';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { WEB_CONFIG } from '@lib/config/web/web.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 

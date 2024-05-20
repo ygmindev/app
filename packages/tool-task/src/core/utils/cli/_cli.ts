@@ -1,4 +1,4 @@
-import '@lib/config/core/task/task';
+import '@lib/config/task/task';
 
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { type _CliModel, type _CliParamsModel } from '@tool/task/core/utils/cli/_cli.models';

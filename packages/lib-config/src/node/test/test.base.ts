@@ -1,11 +1,11 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { config as fileConfig } from '@lib/config/core/file/file';
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
+import { config as fileConfig } from '@lib/config/file/file';
 import { config as bundleConfig } from '@lib/config/node/bundle/bundle.base';
 import { _test } from '@lib/config/node/test/_test';
 import { TEST_CONFIG } from '@lib/config/node/test/test.constants';
 import { type TestConfigModel } from '@lib/config/node/test/test.models';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 const { _config, config } = defineConfig({
   _config: _test,

@@ -1,4 +1,4 @@
-import { _config } from '@lib/config/data/query/query';
+import { _config } from '@lib/config/query/query';
 import { type _QueryClientModel } from '@lib/frontend/data/utils/QueryClient/_QueryClient.models';
 import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import AsyncStorage from '@react-native-async-storage/async-storage';

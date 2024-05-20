@@ -1,4 +1,4 @@
-import { config } from '@lib/config/data/query/query';
+import { config } from '@lib/config/query/query';
 import { _useQueryConnection } from '@lib/frontend/data/hooks/useQueryConnection/_useQueryConnection';
 import {
   type UseQueryConnectionModel,

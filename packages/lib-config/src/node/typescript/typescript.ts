@@ -1,8 +1,8 @@
 import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _typescript } from '@lib/config/node/typescript/_typescript';
 import { type TypescriptConfigModel } from '@lib/config/node/typescript/typescript.models';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 const { _config, config } = defineConfig({
   _config: _typescript,

@@ -233,8 +233,8 @@ export class _Database implements _DatabaseModel {
   };
 
   close = async (): Promise<void> => {
-    debug('closing connections', this._config.clientUrl);
     if (await this.isConnected()) {
+      debug('closing connections', this._config.clientUrl);
       await this._getEntityManager().getConnection()?.close();
     }
   };

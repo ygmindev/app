@@ -13,9 +13,9 @@ import { Socket } from '@lib/backend/http/resources/Socket/Socket';
 import { TestableEntityResource } from '@lib/backend/test/resources/TestableEntityResource/TestableEntityResource';
 import { LinkedUser } from '@lib/backend/user/resources/LinkedUser/LinkedUser';
 import { User } from '@lib/backend/user/resources/User/User';
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _database } from '@lib/config/database/_database';
 import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
 const { _config, config } = defineConfig({

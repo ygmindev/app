@@ -1,4 +1,4 @@
-import { config } from '@lib/config/style/css/css.global';
+import { config } from '@lib/config/css/css.global';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { GlobalStyle } from '@lib/frontend/style/components/GlobalStyle/GlobalStyle';

@@ -2,7 +2,6 @@ import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import { _bundle as _bundleConfig } from '@lib/config/node/bundle/_bundle';
 import { type _WebConfigModel, type WebConfigModel } from '@lib/config/web/web.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -17,7 +16,7 @@ export const _web = ({
   isSsr,
   publicPath,
 }: WebConfigModel): _WebConfigModel => {
-  const bundleConfigF = _bundleConfig(bundleConfig());
+  const bundleConfigF = bundleConfig();
   const { certificateDir, privateKeyFile, publicKeyFile } = certificate;
   return merge(
     [

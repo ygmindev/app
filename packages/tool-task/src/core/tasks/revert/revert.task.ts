@@ -1,6 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { config } from '@lib/config/core/file/file';
+import { config } from '@lib/config/file/file';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type RevertParamsModel } from '@tool/task/core/tasks/revert/revert.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';

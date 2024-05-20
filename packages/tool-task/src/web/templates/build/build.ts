@@ -1,6 +1,6 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { config as fileConfig } from '@lib/config/core/file/file';
+import { config as fileConfig } from '@lib/config/file/file';
 import { WEB_CONFIG } from '@lib/config/web/web.constants';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';

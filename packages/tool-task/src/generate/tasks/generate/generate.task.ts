@@ -1,7 +1,7 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { config } from '@lib/config/core/generate/generate';
-import { type GenerateConfigModel } from '@lib/config/core/generate/generate.models';
+import { config } from '@lib/config/generate/generate';
+import { type GenerateConfigModel } from '@lib/config/generate/generate.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';

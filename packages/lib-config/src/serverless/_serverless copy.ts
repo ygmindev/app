@@ -1,7 +1,7 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import { config as fileConfig } from '@lib/config/core/file/file';
+import { config as fileConfig } from '@lib/config/file/file';
 import {
   type _ServerlessConfigModel,
   type ServerlessConfigModel,
@@ -48,7 +48,7 @@ export const _serverless = ({
               installExtraArgs: ['--shamefully-hoist'],
               keepOutputDirectory: true,
               packager: 'pnpm',
-              plugins: toRelative({ to: fromConfig('platform/serverless/_plugins.js') }),
+              plugins: toRelative({ to: fromConfig('serverless/_plugins.js') }),
               watch: { pattern: bundleConfigF.build?.watch?.include },
             },
 

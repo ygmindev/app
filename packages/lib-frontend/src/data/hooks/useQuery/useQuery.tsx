@@ -1,4 +1,4 @@
-import { config } from '@lib/config/data/query/query';
+import { config } from '@lib/config/query/query';
 import { useErrorContext } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext';
 import { ERROR_TYPE } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext.constants';
 import { _useQuery } from '@lib/frontend/data/hooks/useQuery/_useQuery';

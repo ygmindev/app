@@ -1,6 +1,6 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { type PackagesModel } from '@lib/backend/file/utils/packages/packages.models';
-import { config } from '@lib/config/core/file/file';
+import { config } from '@lib/config/file/file';
 import { readdirSync } from 'fs';
 import some from 'lodash/some';
 

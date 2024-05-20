@@ -1,7 +1,7 @@
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { defineConfig } from '@lib/config/core/utils/defineConfig/defineConfig';
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
 import { config as configBase } from '@lib/config/locale/internationalize/internationalize.frontend';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import I18NexFsBackend from 'i18next-fs-backend';
 
 const { _config, config } = defineConfig({
