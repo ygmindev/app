@@ -2,67 +2,64 @@ import {
   SERVERLESS_PROVIDER,
   SERVERLESS_RUNTIME,
 } from '@lib/backend/serverless/serverless.constants';
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
-import { config as serverConfig } from '@lib/config/server/server';
+import { BUILD_DIR, PRUNE_PATTERNS } from '@lib/config/file/file.constants';
+import bundleConfig from '@lib/config/node/bundle/bundle.node';
+import serverConfig from '@lib/config/node/server/server';
 import { _serverless } from '@lib/config/serverless/_serverless';
-import { SERVERLESS_CONFIG } from '@lib/config/serverless/serverless.constants';
-import { type ServerlessConfigModel } from '@lib/config/serverless/serverless.models';
+import {
+  type _ServerlessConfigModel,
+  type ServerlessConfigModel,
+} from '@lib/config/serverless/serverless.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import toNumber from 'lodash/toNumber';
 
-const { _config, config } = defineConfig({
-  _config: _serverless,
+const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
+  config: _serverless,
 
-  config: () =>
-    ({
-      ...serverConfig(),
+  params: () => ({
+    buildDir: BUILD_DIR,
 
-      ...SERVERLESS_CONFIG,
+    bundle: bundleConfig.params(),
 
-      bundleConfig,
+    configFilename: 'serverless.js',
 
-      dotenv: () => setEnvironment(),
+    dotenv: () => setEnvironment(),
 
-      environment: process.env.NODE_ENV,
+    environment: process.env.NODE_ENV,
 
-      functions: {
-        [PING]: {
-          handler: 'src/functions/ping/ping.main',
-          method: HTTP_METHOD.GET,
-          pathname: `/api/${PING}`,
-        },
+    functions: {
+      [PING]: {
+        handler: 'src/functions/ping/ping.main',
+        method: HTTP_METHOD.GET,
+        pathname: `/api/${PING}`,
       },
+    },
 
-      host: process.env.SERVER_APP_HOST,
+    host: process.env.SERVER_APP_HOST,
 
-      name: 'serverless',
+    memory: 3008,
 
-      platform: PLATFORM.BASE,
+    name: 'serverless',
 
-      port: toNumber(process.env.SERVER_APP_PORT),
+    platform: PLATFORM.BASE,
 
-      provider: SERVERLESS_PROVIDER.AWS,
+    port: toNumber(process.env.SERVER_APP_PORT),
 
-      runtime: SERVERLESS_RUNTIME.ZIP,
+    provider: SERVERLESS_PROVIDER.AWS,
 
-      server: {
-        cors: {
-          allowedHeaders: ['*'],
+    prunePatterns: PRUNE_PATTERNS,
 
-          // allowedOrigins: process.env.NODE_ENV === 'production' ? [APP_URI] : ['*'],
-          allowedOrigins: ['*'],
-        },
+    region: process.env.SERVER_REGION,
 
-        memory: 3008,
+    runtime: SERVERLESS_RUNTIME.ZIP,
 
-        region: process.env.SERVER_REGION,
+    server: serverConfig.params(),
 
-        timeout: 900,
-      },
-    }) satisfies ServerlessConfigModel,
+    timeout: 900,
+  }),
 });
 
-export { _config, config };
+export default config;

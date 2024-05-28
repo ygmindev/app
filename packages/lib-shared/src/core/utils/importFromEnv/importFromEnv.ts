@@ -1,5 +1,5 @@
-import { extensions } from '@lib/backend/file/utils/extensions/extensions';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import fileConfig from '@lib/config/file/file';
 import {
   type ImportFromEnvModel,
   type ImportFromEnvParamsModel,
@@ -12,7 +12,7 @@ export const importFromEnv = async <TType extends unknown>(
   params: ImportFromEnvParamsModel,
 ): Promise<ImportFromEnvModel<TType>> =>
   resolveFirst<TType>(
-    extensions().map((extension) => async () => {
+    fileConfig.params().extensions.map((extension) => async () => {
       const name = extension ? joinPaths([params], { extension }) : params;
       const result = requireInterop<TType>(name);
       result && debug('imported', name);

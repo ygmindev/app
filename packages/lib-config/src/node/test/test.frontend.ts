@@ -1,16 +1,14 @@
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.frontend';
-import { _test } from '@lib/config/node/test/_test';
-import { config as configBase } from '@lib/config/node/test/test.base';
+import bundleConfig from '@lib/config/node/bundle/bundle.frontend';
+import configBase from '@lib/config/node/test/test.base';
+import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  _config: _test,
-
-  config: configBase,
+const config = defineConfig<TestConfigModel, _TestConfigModel>({
+  ...configBase,
 
   overrides: () => [
     {
-      bundleConfig,
+      bundle: bundleConfig.params(),
 
       mocks: [
         // TODO: fix typing?
@@ -23,4 +21,4 @@ const { _config, config } = defineConfig({
   ],
 });
 
-export { _config, config };
+export default config;

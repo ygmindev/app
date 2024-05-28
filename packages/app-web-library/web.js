@@ -1,2 +1,3 @@
 require('../lib-shared/src/core/utils/nodeRegister/nodeRegister').nodeRegister();
-module.exports = require('../lib-config/src/platform/web/web')._config();
+const { requireInterop } = require('@lib/shared/core/utils/requireInterop/requireInterop');
+module.exports = requireInterop('@lib/config/node/web/web').config();

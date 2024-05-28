@@ -1,42 +1,41 @@
+import {
+  type GraphqlFragmentFieldModel,
+  type GraphqlQueryModel,
+  type GraphqlQueryParamsFieldsModel,
+  type GraphqlQueryParamsModel,
+} from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
+import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
 import { print } from 'graphql/language/printer';
 import { gql } from 'graphql-tag';
 import isPlainObject from 'lodash/isPlainObject';
 import map from 'lodash/map';
 import reduce from 'lodash/reduce';
 
-import {
-  type GraphQlFragmentFieldModel,
-  type GraphQlQueryModel,
-  type GraphQlQueryParamsFieldsModel,
-  type GraphQlQueryParamsModel,
-} from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery.models';
-import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
-
-const getGraphQlFields = <TType extends unknown>(
-  fields: GraphQlQueryParamsFieldsModel<TType> | GraphQlFragmentFieldModel<TType>,
+const getGraphqlFields = <TType extends unknown>(
+  fields: GraphqlQueryParamsFieldsModel<TType> | GraphqlFragmentFieldModel<TType>,
 ): string => `{
   ${
     isPlainObject(fields)
       ? map(
-          fields as GraphQlFragmentFieldModel<TType>,
-          (v, k) => `... on ${k} ${getGraphQlFields(v)}`,
+          fields as GraphqlFragmentFieldModel<TType>,
+          (v, k) => `... on ${k} ${getGraphqlFields(v)}`,
         ).join(' ')
-      : (fields as GraphQlQueryParamsFieldsModel<TType>)
+      : (fields as GraphqlQueryParamsFieldsModel<TType>)
           .map((field) =>
             isPlainObject(field)
-              ? map(field as object, (v, k) => ` ${k} ${getGraphQlFields(v)} `).join(' ')
+              ? map(field as object, (v, k) => ` ${k} ${getGraphqlFields(v)} `).join(' ')
               : ` ${String(field)} `,
           )
           .join(' ')
   }
 }`;
 
-export const graphQlQuery = <TParams, TResult, TName extends string>({
+export const graphqlQuery = <TParams, TResult, TName extends string>({
   fields,
   name,
   params,
   type,
-}: GraphQlQueryParamsModel<TParams, TResult, TName>): GraphQlQueryModel => {
+}: GraphqlQueryParamsModel<TParams, TResult, TName>): GraphqlQueryModel => {
   let [paramsString, paramsKeys] = ['', ''];
   if (params) {
     paramsString = `(${reduce(
@@ -50,7 +49,7 @@ export const graphQlQuery = <TParams, TResult, TName extends string>({
   }
   return print(gql`
     ${trimDeep(`${type} ${name}${paramsString} {
-      ${name}${paramsKeys} ${getGraphQlFields<TResult>(fields)}
+      ${name}${paramsKeys} ${getGraphqlFields<TResult>(fields)}
     }`)}
   `);
 };

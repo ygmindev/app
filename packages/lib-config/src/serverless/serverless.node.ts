@@ -1,12 +1,13 @@
-import { _serverless } from '@lib/config/serverless/_serverless';
-import { config as configBase } from '@lib/config/serverless/serverless.base';
+import configBase from '@lib/config/serverless/serverless.base';
+import {
+  type _ServerlessConfigModel,
+  type ServerlessConfigModel,
+} from '@lib/config/serverless/serverless.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-const { _config, config } = defineConfig({
-  _config: _serverless,
-
-  config: configBase,
+const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
+  ...configBase,
 
   overrides: () => [
     {
@@ -15,4 +16,4 @@ const { _config, config } = defineConfig({
   ],
 });
 
-export { _config, config };
+export default config;

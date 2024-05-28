@@ -1,9 +1,8 @@
-import { type AmplitudeClient } from 'amplitude-js';
-// import { getInstance } from 'amplitude-js';
-import { default as amplitude } from 'amplitude-js';
-
 import { type _UseTrackingModel } from '@lib/frontend/tracking/hooks/useTracking/_useTracking.models';
 import { type TrackingEventModel } from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.models';
+import { type AmplitudeClient } from 'amplitude-js';
+// import { getInstance } from 'amplitude-js';
+import amplitude from 'amplitude-js';
 
 let client: AmplitudeClient | null;
 

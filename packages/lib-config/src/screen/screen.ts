@@ -1,10 +1,13 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { type ScreenConfigModel } from '@lib/config/crawling/screen/screen.models';
-import { config as fileConfig } from '@lib/config/file/file';
+import { FILE_CONFIG } from '@lib/config/file/file.constants';
+import { _screen } from '@lib/config/screen/_screen';
+import { type _ScreenConfigModel, type ScreenConfigModel } from '@lib/config/screen/screen.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { config } = defineConfig({
-  config: {
+const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
+  config: _screen,
+
+  params: () => ({
     delay: 2000,
 
     dimension: { height: 5000, width: 1440 },
@@ -28,8 +31,8 @@ const { config } = defineConfig({
     snapshotPath:
       process.env.NODE_ENV === 'production'
         ? undefined
-        : joinPaths([fileConfig.buildPath, 'snapshots']),
-  } satisfies ScreenConfigModel,
+        : joinPaths([FILE_CONFIG.buildDir, 'snapshots']),
+  }),
 });
 
-export { config };
+export default config;

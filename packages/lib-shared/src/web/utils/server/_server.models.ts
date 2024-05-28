@@ -1,11 +1,17 @@
-import { type ServerConfigModel } from '@lib/config/server/server.models';
+import { type FileConfigModel } from '@lib/config/file/file.models';
+import { type InternationalizeConfigModel } from '@lib/config/locale/internationalize/internationalize.models';
+import { type ServerConfigModel } from '@lib/config/node/server/server.models';
+import { type WebConfigModel } from '@lib/config/node/web/web.models';
 import { type UriModel } from '@lib/shared/route/route.models';
 
 export type _ServerParamsModel = UriModel &
-  Pick<ServerConfigModel, 'certificate'> & {
+  Pick<ServerConfigModel, 'certificate'> &
+  Pick<FileConfigModel, 'publicDir'> & {
+    internationalize: InternationalizeConfigModel;
     onError(error: Error): void;
     onStart(): void;
     root?: string;
+    web: WebConfigModel;
   };
 
 export type _ServerModel = void;

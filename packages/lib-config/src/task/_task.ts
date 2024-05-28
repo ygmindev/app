@@ -1,9 +1,7 @@
-// COMPLETE
 import { Container } from '@lib/backend/core/utils/Container/Container';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { packages } from '@lib/backend/file/utils/packages/packages';
 import { type _TaskConfigModel, type TaskConfigModel } from '@lib/config/task/task.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { requireInterop } from '@lib/shared/core/utils/requireInterop/requireInterop';
@@ -13,24 +11,34 @@ import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { TaskRunner } from '@tool/task/core/utils/TaskRunner/TaskRunner';
 import { existsSync } from 'fs';
 
-export const _task = ({ packageFilename, taskExtension }: TaskConfigModel): _TaskConfigModel => {
+export const _task = ({
+  configFilename,
+  packageDirs,
+  taskExtension,
+}: TaskConfigModel): _TaskConfigModel => {
   const taskRunner = Container.get(TaskRunner);
 
   const tasks = filterNil([
-    // Task files
-    ...fromGlobs([joinPaths(['*/src/**/*'], { extension: taskExtension })], {
-      isAbsolute: true,
-      root: fromPackages(),
-    }).map((path) => requireInterop<TaskParamsModel<unknown>>(path)),
+    ...packageDirs.reduce<Array<TaskParamsModel<unknown>>>((result, target) => {
+      let resultF = result;
 
-    // Package tasks
-    ...packages.reduce<Array<TaskParamsModel<unknown>>>((result, target) => {
-      const path = fromPackages(target, packageFilename);
+      // Package tasks
+      const path = fromPackages(target, configFilename);
       if (existsSync(path)) {
         const tasks = requireInterop<Array<TaskParamsModel<unknown>>>(path);
-        return [...result, ...tasks.map((task) => ({ ...task, target }))];
+        resultF = [...resultF, ...tasks.map((task) => ({ ...task, target }))];
       }
-      return result;
+
+      // Task files
+      resultF = [
+        ...resultF,
+        ...fromGlobs([joinPaths(['*/src/**/*'], { extension: taskExtension })], {
+          isAbsolute: true,
+          root: fromPackages(target),
+        }).map((path) => requireInterop<TaskParamsModel<unknown>>(path)),
+      ];
+
+      return resultF;
     }, []),
 
     // All tasks

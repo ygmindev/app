@@ -1,13 +1,13 @@
-import { _config as _babelConfig } from '@lib/config/node/babel/babel.web';
-import { _bundle } from '@lib/config/node/bundle/_bundle';
-import { config as configBase } from '@lib/config/node/bundle/bundle.frontend';
+import configBase from '@lib/config/node/bundle/bundle.frontend';
+import {
+  type _BundleConfigModel,
+  type BundleConfigModel,
+} from '@lib/config/node/bundle/bundle.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-const { _config, config } = defineConfig({
-  _config: _bundle,
-
-  config: configBase,
+const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
+  ...configBase,
 
   overrides: () => [
     {
@@ -23,11 +23,18 @@ const { _config, config } = defineConfig({
         },
       ]),
 
-      babelConfig: _babelConfig,
+      babel: {
+        plugins: [
+          'react-native-web',
+          // For react-native-reanimated
+          // https://docs.swmansion.com/react-native-reanimated/docs/guides/web-support
+          '@babel/plugin-proposal-export-namespace-from',
+        ],
+      },
 
       serverExtension: '.server',
     },
   ],
 });
 
-export { _config, config };
+export default config;

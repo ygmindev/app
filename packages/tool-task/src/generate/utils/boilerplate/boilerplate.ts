@@ -1,6 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { packages } from '@lib/backend/file/utils/packages/packages';
+import fileConfig from '@lib/config/file/file';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
@@ -64,7 +64,7 @@ export const boilerplate = async ({
       case '{{ROOT}}': {
         value = (
           await prompt<{ root: string }>([
-            { key: 'root', options: packages, type: PROMPT_TYPE.LIST },
+            { key: 'root', options: fileConfig.params().packageDirs, type: PROMPT_TYPE.LIST },
           ])
         ).root;
         break;

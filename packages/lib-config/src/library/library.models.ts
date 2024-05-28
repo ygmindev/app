@@ -1,5 +1,5 @@
 export type LibraryConfigModel = {
+  configDir: string;
   extension: string;
-  path: string;
   patterns: Array<string>;
 };

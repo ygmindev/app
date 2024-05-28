@@ -6,34 +6,34 @@ import {
   type StringKeyModel,
   type UnionToIntersectionModel,
 } from '@lib/shared/core/core.models';
-import { type GraphQlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
+import { type GraphqlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
 import { type ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import { type GraphQLError } from 'graphql';
 
-export type GraphQlParamsModel<TParams> = {
+export type GraphqlParamsModel<TParams> = {
   query: string;
   variables?: TParams;
 };
 
-export type GraphQlQueryHttpParamsModel<
+export type GraphqlQueryHttpParamsModel<
   TParams,
   TResult,
   TName extends string = string,
-> = GraphQlQueryParamsModel<TParams, TResult, TName> & {
+> = GraphqlQueryParamsModel<TParams, TResult, TName> & {
   variables?: TParams;
 };
 
-export type GraphQlHttpResponseModel<TResult, TName extends string = string> = {
+export type GraphqlHttpResponseModel<TResult, TName extends string = string> = {
   data?: Record<TName, TResult>;
   errors?: Array<GraphQLError>;
 };
 
-export type GraphQlFragmentFieldModel<TType> = Record<
+export type GraphqlFragmentFieldModel<TType> = Record<
   string,
-  Array<GraphQlFieldModel<UnionToIntersectionModel<InferModel<TType>>>>
+  Array<GraphqlFieldModel<UnionToIntersectionModel<InferModel<TType>>>>
 >;
 
-export type GraphQlFieldModel<TType, TDepth extends number = 10> = [TDepth] extends [0]
+export type GraphqlFieldModel<TType, TDepth extends number = 10> = [TDepth] extends [0]
   ? never
   : {
       [TKey in StringKeyModel<InferModel<TType>>]?: RequiredModel<InferModel<TType>>[TKey] extends
@@ -41,22 +41,22 @@ export type GraphQlFieldModel<TType, TDepth extends number = 10> = [TDepth] exte
         | Array<PrimitiveModel>
         ? TKey
         : RequiredModel<InferModel<TType>>[TKey] extends Array<infer TElement>
-          ? Record<TKey, Array<GraphQlFieldModel<TElement, DepthArray[TDepth]>>>
+          ? Record<TKey, Array<GraphqlFieldModel<TElement, DepthArray[TDepth]>>>
           : RequiredModel<InferModel<TType>>[TKey] extends ConnectionModel<infer TResource>
-            ? Record<TKey, Array<GraphQlFieldModel<TResource, DepthArray[TDepth]>>>
+            ? Record<TKey, Array<GraphqlFieldModel<TResource, DepthArray[TDepth]>>>
             : Record<
                 TKey,
-                Array<GraphQlFieldModel<RequiredModel<InferModel<TType>>[TKey], DepthArray[TDepth]>>
+                Array<GraphqlFieldModel<RequiredModel<InferModel<TType>>[TKey], DepthArray[TDepth]>>
               >;
     }[StringKeyModel<InferModel<TType>>];
 
-export type GraphQlQueryParamsFieldsModel<TType> = Array<GraphQlFieldModel<TType>>;
+export type GraphqlQueryParamsFieldsModel<TType> = Array<GraphqlFieldModel<TType>>;
 
-export type GraphQlQueryParamsModel<TParams, TResult, TName extends string = string> = {
-  fields: GraphQlQueryParamsFieldsModel<TResult>;
+export type GraphqlQueryParamsModel<TParams, TResult, TName extends string = string> = {
+  fields: GraphqlQueryParamsFieldsModel<TResult>;
   name: TName;
   params?: { [TKey in keyof TParams]?: string };
-  type: GraphQlOperationTypeModel;
+  type: GraphqlOperationTypeModel;
 };
 
-export type GraphQlQueryModel = string;
+export type GraphqlQueryModel = string;

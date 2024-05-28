@@ -1,12 +1,13 @@
-import { _serverless } from '@lib/config/serverless/_serverless';
-import { config as configBase } from '@lib/config/serverless/serverless.node';
+import {
+  type _ServerlessConfigModel,
+  type ServerlessConfigModel,
+} from '@lib/config/serverless/serverless.models';
+import configBase from '@lib/config/serverless/serverless.node';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { HTTP_METHOD } from '@lib/shared/http/http.constants';
 
-const { _config, config } = defineConfig({
-  _config: _serverless,
-
-  config: configBase,
+const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
+  ...configBase,
 
   overrides: () => [
     {
@@ -16,9 +17,9 @@ const { _config, config } = defineConfig({
           method: HTTP_METHOD.GET,
           pathname: '/api/crawl',
         },
-      },
+      } as unknown as ServerlessConfigModel['functions'],
     },
   ],
 });
 
-export { _config, config };
+export default config;

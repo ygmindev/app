@@ -1,27 +1,37 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
-import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { config as fileConfig } from '@lib/config/file/file';
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.base';
+import { BUILD_DIR, CACHE_DIR } from '@lib/config/file/file.constants';
+import bundleConfig from '@lib/config/node/bundle/bundle.base';
 import { _test } from '@lib/config/node/test/_test';
-import { TEST_CONFIG } from '@lib/config/node/test/test.constants';
-import { type TestConfigModel } from '@lib/config/node/test/test.models';
+import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
+import typescriptConfig from '@lib/config/node/typescript/typescript';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  _config: _test,
+const config = defineConfig<TestConfigModel, _TestConfigModel>({
+  config: _test,
 
-  config: () =>
-    ({
-      ...TEST_CONFIG,
+  params: () => ({
+    buildDir: BUILD_DIR,
 
-      bundleConfig,
+    bundle: bundleConfig.params(),
 
-      cachePath: joinPaths([fileConfig.cachePath, 'test']),
+    cacheDir: CACHE_DIR,
 
-      mockDir: fromConfig('node/test/__mocks__'),
+    delay: 500,
 
-      outputPath: joinPaths([fileConfig.buildPath, 'test']),
-    }) satisfies TestConfigModel,
+    eteExtension: '.ete',
+
+    fileExtensions: ['.gif', '.jpeg', '.jpg', '.otf', '.png', '.svg', '.ttf', '.woff', '.woff2'],
+
+    mockPath: fromConfig('node/test/__mocks__'),
+
+    outputDir: 'test',
+
+    specExtension: '.spec',
+
+    timeout: 120e3,
+
+    typescript: typescriptConfig.params(),
+  }),
 });
 
-export { _config, config };
+export default config;

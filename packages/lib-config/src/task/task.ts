@@ -1,12 +1,15 @@
+import fileConfig from '@lib/config/file/file';
 import { _task } from '@lib/config/task/_task';
-import { type TaskConfigModel } from '@lib/config/task/task.models';
+import { type _TaskConfigModel, type TaskConfigModel } from '@lib/config/task/task.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  _config: _task,
+const config = defineConfig<TaskConfigModel, _TaskConfigModel>({
+  config: _task,
 
-  config: {
-    packageFilename: 'tasks.ts',
+  params: () => ({
+    configFilename: 'tasks.ts',
+
+    packageDirs: fileConfig.params().packageDirs,
 
     taskExtension: '.task.ts',
 
@@ -17,7 +20,7 @@ const { _config, config } = defineConfig({
 
       timeout: 60e3,
     },
-  } satisfies TaskConfigModel,
+  }),
 });
 
-export { _config, config };
+export default config;

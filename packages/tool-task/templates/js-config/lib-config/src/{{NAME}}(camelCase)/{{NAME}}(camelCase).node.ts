@@ -1,14 +1,7 @@
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import { _{{NAME}}(camelCase) } from '@lib/config/{{NAME}}(camelCase)/_{{NAME}}(camelCase)';
-import { config as configBase } from '@lib/config/{{NAME}}(camelCase)/{{NAME}}(camelCase).base';
+import { {{NAME}}(camelCase)Config as configBase } from '@lib/config/{{NAME}}(camelCase)/{{NAME}}(camelCase).base';
+import { type {{NAME}}(pascalCase)ConfigModel } from '@lib/config/{{NAME}}(camelCase)/{{NAME}}(camelCase).models';
 
-const { _config, config } = defineConfig({
-  _config: _{{NAME}}(camelCase),
-
-  config: configBase,
-
-  overrides: [],
+export const {{NAME}}(camelCase)Config: {{NAME}}(camelCase)ConfigModel = defineConfig({
+  ...{{NAME}}(camelCase)Config,
 });
-
-export { _config, config };
-ÇÇ

@@ -1,5 +1,8 @@
-import { _config } from '@lib/config/query/query';
-import { type _QueryClientModel } from '@lib/frontend/data/utils/QueryClient/_QueryClient.models';
+import { _query } from '@lib/config/query/_query';
+import {
+  type _QueryClientModel,
+  type _QueryClientParamsModel,
+} from '@lib/frontend/data/utils/QueryClient/_QueryClient.models';
 import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
@@ -9,8 +12,8 @@ import { persistQueryClient } from '@tanstack/react-query-persist-client';
 export class _QueryClient implements _QueryClientModel {
   protected _client: QueryClient;
 
-  constructor() {
-    this._client = new QueryClient({ defaultOptions: _config });
+  constructor(params: _QueryClientParamsModel) {
+    this._client = new QueryClient({ defaultOptions: _query(params) });
 
     if (!isServer) {
       const persister = createAsyncStoragePersister({ storage: AsyncStorage });

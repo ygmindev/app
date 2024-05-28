@@ -1,15 +1,15 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { _config as _babelConfig } from '@lib/config/node/babel/babel.frontend';
-import { _bundle } from '@lib/config/node/bundle/_bundle';
-import { config as configBase } from '@lib/config/node/bundle/bundle.base';
+import configBase from '@lib/config/node/bundle/bundle.base';
+import {
+  type _BundleConfigModel,
+  type BundleConfigModel,
+} from '@lib/config/node/bundle/bundle.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  _config: _bundle,
-
-  config: configBase,
+const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
+  ...configBase,
 
   overrides: () => [
     {
@@ -18,7 +18,17 @@ const { _config, config } = defineConfig({
       //   { from: 'react-dom', to: fromModules('react-dom/cjs/react-dom.production.min.js') },
       // ],
 
-      babelConfig: _babelConfig,
+      babel: {
+        plugins: [
+          ['transform-react-remove-prop-types', { removeImport: true }] as [
+            string,
+            Record<string, unknown>,
+          ],
+          // 'react-native-reanimated/plugin',
+        ],
+
+        presets: ['@babel/preset-react', '@babel/preset-flow', '@babel/preset-typescript'],
+      },
 
       define: {
         __DEV__: `${process.env.NODE_ENV === 'development'}`,
@@ -51,4 +61,4 @@ const { _config, config } = defineConfig({
   ],
 });
 
-export { _config, config };
+export default config;

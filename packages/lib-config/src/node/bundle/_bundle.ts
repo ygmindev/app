@@ -14,7 +14,7 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
-import { babel } from '@rollup/plugin-babel';
+import { babel as babelPlugin } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
 import react from '@vitejs/plugin-react-swc';
@@ -59,22 +59,21 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
 
 export const _bundle = ({
   aliases,
-  babelConfig,
-  buildPath,
-  cachePath,
+  babel,
+  buildDir,
   define,
-  entry,
+  entryFilename,
   envPrefix,
   extensions,
   externals,
   logSuppressPatterns,
   mainFields,
   provide,
-  publicPath,
+  publicDir,
   rootDirs,
   serverExtension,
   transpiles,
-  tsconfigPath,
+  typescript,
   watch,
 }: BundleConfigModel): _BundleConfigModel => {
   const customLogger = createLogger();
@@ -90,14 +89,11 @@ export const _bundle = ({
       };
     });
   }
-  const isReact = ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
-    process.env.ENV_PLATFORM,
-  );
-  const tsconfigDir = fromWorking(tsconfigPath);
 
+  const tsconfigDir = fromWorking(typescript?.configFilename);
   const config: _BundleConfigModel = {
     build: {
-      assetsDir: joinPaths([fromWorking(), publicPath]),
+      assetsDir: joinPaths([fromWorking(), publicDir]),
 
       commonjsOptions: {
         defaultIsModuleExports: true,
@@ -110,12 +106,12 @@ export const _bundle = ({
 
       minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
 
-      outDir: joinPaths([fromWorking(), buildPath]),
+      outDir: joinPaths([fromWorking(), buildDir]),
 
       rollupOptions: {
         external: externals,
 
-        ...(entry ? { input: entry } : {}),
+        ...(entryFilename ? { input: entryFilename } : {}),
 
         output: {
           chunkFileNames: '[name].js',
@@ -182,16 +178,21 @@ export const _bundle = ({
         typescript: { tsconfigPath: tsconfigDir },
       }),
 
-      isReact && react({ tsDecorators: true }),
+      ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
+        process.env.ENV_PLATFORM,
+      ) && react({ tsDecorators: true }),
 
       provide && inject(provide),
 
       viteCommonjs(),
 
-      babelConfig &&
-        babel({
-          ...babelConfig,
+      babel &&
+        babelPlugin({
           babelHelpers: 'runtime',
+          compact: process.env.NODE_ENV === 'production',
+          minified: process.env.NODE_ENV === 'production',
+          plugins: babel.plugins,
+          presets: babel.presets,
           skipPreflightCheck: true,
         } as RollupBabelInputPluginOptions),
 

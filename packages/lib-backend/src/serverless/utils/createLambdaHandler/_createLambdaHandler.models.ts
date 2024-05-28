@@ -4,7 +4,7 @@ import {
   type LambdaResponseModel,
   type LambdaTypeModel,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
-import { type _GraphqlConfigModel } from '@lib/config/graphql/graphql.models';
+import { type GraphqlConfigModel } from '@lib/config/graphql/graphql.models';
 import {
   type APIGatewayProxyEventV2,
   type APIGatewayProxyWebsocketEventV2,
@@ -13,7 +13,7 @@ import {
 
 export type _CreateLambdaHandlerParamsModel<TType = Record<string, unknown>> = {
   context?: ServerlessRequestContextModel;
-  graphQlConfig?(): _GraphqlConfigModel;
+  graphql?: GraphqlConfigModel;
   handler?({
     body,
     context,

@@ -1,13 +1,14 @@
-import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
-import { config as configBase } from '@lib/config/locale/internationalize/internationalize.frontend';
+import configBase from '@lib/config/locale/internationalize/internationalize.frontend';
+import {
+  type _InternationalizeConfigModel,
+  type InternationalizeConfigModel,
+} from '@lib/config/locale/internationalize/internationalize.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { locale } from 'expo-localization';
 import { type Module } from 'i18next';
 
-const { _config, config } = defineConfig({
-  _config: _internationalize,
-
-  config: configBase,
+const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
+  ...configBase,
 
   overrides: () => [
     {
@@ -16,4 +17,4 @@ const { _config, config } = defineConfig({
   ],
 });
 
-export { _config, config };
+export default config;

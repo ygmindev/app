@@ -14,7 +14,7 @@ import {
   type TestableEntityResourceFormModel,
   type TestableEntityResourceModel,
 } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
-import { default as _filter } from 'lodash/filter';
+import _filter from 'lodash/filter';
 import find from 'lodash/find';
 import reduce from 'lodash/reduce';
 

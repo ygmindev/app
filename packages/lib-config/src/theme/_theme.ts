@@ -1,7 +1,4 @@
-import {
-  type _ThemeConfigModel,
-  type ThemeConfigModel,
-} from '@lib/config/theme/theme.models';
+import { type _ThemeConfigModel, type ThemeConfigModel } from '@lib/config/theme/theme.models';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { DefaultTheme } from 'react-native-paper';

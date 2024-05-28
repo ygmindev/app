@@ -5,17 +5,15 @@ import {
   type InitializeParamsModel,
 } from '@lib/backend/setup/utils/initialize/initialize.models';
 
-export const initialize = async ({
-  databaseConfig,
-}: InitializeParamsModel): Promise<InitializeModel> => {
+export const initialize = async ({ database }: InitializeParamsModel): Promise<InitializeModel> => {
   const result: InitializeModel = {};
-  if (databaseConfig) {
+  if (database) {
     const { Database } = await import('@lib/backend/database/utils/Database/Database');
 
-    const database = new Database(databaseConfig);
-    await database.connect();
-    Container.set(Database, database, DATABASE_TYPE.MONGO);
-    result.database = database;
+    const databaseF = new Database(database);
+    await databaseF.connect();
+    Container.set(Database, databaseF, DATABASE_TYPE.MONGO);
+    result.database = databaseF;
   }
   return result;
 };

@@ -1,6 +1,7 @@
-// COMPLETE
-export type TaskConfigModel = {
-  packageFilename: string;
+import { type FileConfigModel } from '@lib/config/file/file.models';
+
+export type TaskConfigModel = Pick<FileConfigModel, 'packageDirs'> & {
+  configFilename: string;
 
   taskExtension: string;
 

@@ -1,20 +1,21 @@
 import { type FileConfigModel } from '@lib/config/file/file.models';
-import { type _BabelConfigModel } from '@lib/config/node/babel/babel.models';
+import { type TypescriptConfigModel } from '@lib/config/node/typescript/typescript.models';
 import { type UserConfig } from 'vite';
 
-export type BundleConfigModel = Pick<
-  FileConfigModel,
-  'buildPath' | 'cachePath' | 'distPath' | 'publicPath'
-> & {
+export type BundleConfigModel = Pick<FileConfigModel, 'buildDir' | 'publicDir'> & {
   aliases?: Array<{ from: RegExp | string; to: string }>;
 
-  babelConfig?: _BabelConfigModel;
+  babel?: {
+    plugins?: Array<string | [string, Record<string, unknown>]>;
 
-  configFile: string;
+    presets?: Array<string | [string, Record<string, unknown>]>;
+  };
+
+  configFilename: string;
 
   define?: Record<string, string>;
 
-  entry?: string;
+  entryFilename?: string;
 
   envPrefix: Array<string>;
 
@@ -36,7 +37,7 @@ export type BundleConfigModel = Pick<
 
   transpiles?: Array<string>;
 
-  tsconfigPath?: string;
+  typescript: TypescriptConfigModel;
 
   watch?: Array<string>;
 };

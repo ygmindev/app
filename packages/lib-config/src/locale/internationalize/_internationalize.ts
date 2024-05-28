@@ -9,17 +9,18 @@ import { createInstance } from 'i18next';
 let instanceGlobal: i18n;
 
 export const _internationalize = ({
+  isDebug,
   isPreload,
   language,
   languageDefault,
   languages,
+  localePath,
   modules,
-  path,
 }: InternationalizeConfigModel): _InternationalizeConfigModel => {
   const languageF = language ?? languageDefault;
 
   const config: InitOptions = {
-    debug: false,
+    debug: isDebug,
 
     defaultNS: false,
 
@@ -48,8 +49,8 @@ export const _internationalize = ({
     supportedLngs: languages.map(({ id }) => id),
   };
 
-  if (path) {
-    const pathF = `${path}/locales/{{lng}}/{{ns}}.json`;
+  if (localePath) {
+    const pathF = `${localePath}/locales/{{lng}}/{{ns}}.json`;
     config.backend = { addPath: pathF, loadPath: pathF };
   }
 

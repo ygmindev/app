@@ -1,6 +1,3 @@
-import { type TextStyle } from 'react-native';
-import { type MD3Theme } from 'react-native-paper';
-
 import {
   type ThemeColorModel,
   type ThemeColorMoreModel,
@@ -9,6 +6,8 @@ import {
   type ThemeSizeMoreModel,
 } from '@lib/frontend/style/style.models';
 import { type FontFamilyModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
+import { type TextStyle } from 'react-native';
+import { type MD3Theme } from 'react-native-paper';
 
 export type ThemeConfigModel = {
   animation: {

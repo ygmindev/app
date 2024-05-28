@@ -1,4 +1,4 @@
-import { type GraphQlQueryParamsFieldsModel } from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery.models';
+import { type GraphqlQueryParamsFieldsModel } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import {
   type UseResourceModel,
   type UseResourceParamsModel,
@@ -10,12 +10,12 @@ import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { expandFilter } from '@lib/shared/resource/utils/expandFilter/expandFilter';
 
-export const toGraphQlParamsFields = <TType,>(
+export const toGraphqlParamsFields = <TType,>(
   fields?: ResourceFieldsModel<TType>,
-): GraphQlQueryParamsFieldsModel<TType> =>
+): GraphqlQueryParamsFieldsModel<TType> =>
   (fields?.map((field) =>
-    field.fields ? { [field.id]: toGraphQlParamsFields(field.fields) } : field.id,
-  ) as GraphQlQueryParamsFieldsModel<TType>) ?? [];
+    field.fields ? { [field.id]: toGraphqlParamsFields(field.fields) } : field.id,
+  ) as GraphqlQueryParamsFieldsModel<TType>) ?? [];
 
 export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
   afterCreate,
@@ -36,11 +36,11 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   name,
   root,
 }: UseResourceParamsModel<TType, TForm, TRoot>): UseResourceModel<TType, TForm, TRoot> => {
-  const fieldsF = toGraphQlParamsFields<TType>(fields);
+  const fieldsF = toGraphqlParamsFields<TType>(fields);
 
   const { query: get } = useResourceMethod<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>({
     after: afterGet,
-    // TODO: solution until GraphQl oneOf / union input
+    // TODO: solution until Graphql oneOf / union input
     before: async ({ input } = {}) => {
       const inputF = { ...input, filter: expandFilter(input?.filter) };
       return beforeGet ? beforeGet({ input: inputF }) : inputF;

@@ -1,5 +1,5 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { config } from '@lib/config/file/file';
+import { FILE_CONFIG } from '@lib/config/file/file.constants';
 import {
   type _RunCleanModel,
   type _RunCleanParamsModel,
@@ -17,7 +17,7 @@ export const _runClean = async ({
   root && process.chdir(root);
   await rimraf(
     patterns ??
-      config.cleanPatterns
+      FILE_CONFIG.cleanPatterns
         .map((pattern) => [resolve(root, pattern), join(root, '**/*', pattern)])
         .flat(),
     {

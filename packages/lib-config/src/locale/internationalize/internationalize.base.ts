@@ -1,20 +1,24 @@
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
 import { INTERNATIONALIZE_CONFIG } from '@lib/config/locale/internationalize/internationalize.constants';
-import { type InternationalizeConfigModel } from '@lib/config/locale/internationalize/internationalize.models';
+import {
+  type _InternationalizeConfigModel,
+  type InternationalizeConfigModel,
+} from '@lib/config/locale/internationalize/internationalize.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { initReactI18next } from 'react-i18next';
 
-const { _config, config } = defineConfig({
-  _config: _internationalize,
+const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
+  config: _internationalize,
 
-  config: () =>
-    ({
-      ...INTERNATIONALIZE_CONFIG,
+  params: () => ({
+    ...INTERNATIONALIZE_CONFIG,
 
-      isPreload: false,
+    isDebug: process.env.NODE_ENV === 'development',
 
-      modules: [initReactI18next],
-    }) satisfies InternationalizeConfigModel,
+    isPreload: false,
+
+    modules: [initReactI18next],
+  }),
 });
 
-export { _config, config };
+export default config;

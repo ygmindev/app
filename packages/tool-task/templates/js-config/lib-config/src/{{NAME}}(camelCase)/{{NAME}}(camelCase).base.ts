@@ -2,11 +2,8 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { _{{NAME}}(camelCase) } from '@lib/config/{{NAME}}(camelCase)/_{{NAME}}(camelCase)';
 import { type {{NAME}}(pascalCase)ConfigModel } from '@lib/config/{{NAME}}(camelCase)/{{NAME}}(camelCase).models';
 
-const { _config, config } = defineConfig({
+export const {{NAME}}(camelCase)Config: {{NAME}}(camelCase)ConfigModel = defineConfig({
   _config: _{{NAME}}(camelCase),
 
-  config: {
-  } satisfies {{NAME}}(pascalCase)ConfigModel,
+  config: {},
 });
-
-export { _config, config };

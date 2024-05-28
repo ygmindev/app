@@ -1,15 +1,12 @@
 import { type CssConfigModel } from '@lib/config/css/css.models';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { ROOT } from '@lib/frontend/root/root.constants';
 import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
 import MaterialIcons from 'react-native-vector-icons/Fonts/MaterialIcons.ttf';
 
-export const AG_GRID_THEME = 'ag-theme-material';
-
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import { ROOT } from '@lib/frontend/root/root.constants';
-
-const { _config, config } = defineConfig({
-  config: {
+const config = defineConfig<CssConfigModel>({
+  params: () => ({
     stylesheet: (theme) => `
     @font-face {
       font-family: 'Ionicons';
@@ -73,7 +70,7 @@ const { _config, config } = defineConfig({
       background-repeat: no-repeat;
     }
   `,
-  } satisfies CssConfigModel,
+  }),
 });
 
-export { _config, config };
+export default config;

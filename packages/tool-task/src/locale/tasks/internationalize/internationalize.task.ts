@@ -1,9 +1,8 @@
-import { dest, src } from 'gulp';
-
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { _config } from '@lib/config/locale/parser/parser';
+import parserConfig from '@lib/config/locale/parser/parser';
 import { type ClassModel } from '@lib/shared/core/core.models';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
+import { dest, src } from 'gulp';
 
 const internationalize: TaskParamsModel<unknown> = {
   name: 'internationalize',
@@ -15,7 +14,7 @@ const internationalize: TaskParamsModel<unknown> = {
       };
       await new Promise((resolve, reject) =>
         src(fromPackages('*/src/**/*'))
-          .pipe(new Parser(_config).on('error', reject).on('finish', resolve))
+          .pipe(new Parser(parserConfig.config()).on('error', reject).on('finish', resolve))
           .pipe(dest('.')),
       );
     },

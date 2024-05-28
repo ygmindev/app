@@ -1,23 +1,23 @@
+import { cleanup } from '@backend/lambda/setup/utils/cleanup/cleanup';
+import { initialize } from '@backend/lambda/setup/utils/initialize/initialize';
 import { type ServerlessRequestContextModel } from '@lib/backend/serverless/serverless.models';
 import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
 import {
   LAMBDA_PLUGIN,
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
-import { _config as databaseConfig } from '@lib/config/database/database.mongo';
-import { _config as graphQlConfig } from '@lib/config/graphql/graphql';
-import { cleanup } from 'packages/backend-lambda/src/setup/utils/cleanup/cleanup';
-import { initialize } from 'packages/backend-lambda/src/setup/utils/initialize/initialize';
+import databaseConfig from '@lib/config/database/database.mongo';
+import graphqlConfig from '@lib/config/graphql/graphql';
 
 const context: ServerlessRequestContextModel = {};
 
 export const main = createLambdaHandler({
   context,
-  graphQlConfig,
+  graphql: graphqlConfig.params(),
   onClose: cleanup,
   onInitialize: async () => {
     !context.database &&
-      (context.database = (await initialize({ databaseConfig: databaseConfig() })).database);
+      (context.database = (await initialize({ database: databaseConfig.params() })).database);
   },
   plugins: [LAMBDA_PLUGIN.AUTHENTICATION],
   type: LAMBDA_TYPE.GRAPHQL,

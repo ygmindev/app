@@ -1,11 +1,10 @@
-// COMPLETE
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ defineConfig });
 
 describe(displayName, () => {
-  const _CONFIG = ({
+  const CONFIG = ({
     k1,
     k2,
   }: {
@@ -19,37 +18,20 @@ describe(displayName, () => {
     v2: k2?.toString(),
   });
 
-  test('works with static', async () => {
-    const { _config } = defineConfig({
-      _config: _CONFIG,
-      config: { k1: 1, k2: 2 },
+  test('works', async () => {
+    const { config } = defineConfig({
+      config: CONFIG,
+      params: () => ({ k1: 1, k2: 2 }),
     });
-    expect(_config).toStrictEqual({ v1: '1', v2: '2' });
+    expect(config).toStrictEqual({ v1: '1', v2: '2' });
   });
 
-  test('works with static overrides', async () => {
-    const { _config } = defineConfig({
-      _config: _CONFIG,
-      config: { k1: 1, k2: 2 },
-      overrides: [{ k1: 1, k2: 3 }],
-    });
-    expect(_config).toStrictEqual({ v1: '1', v2: '3' });
-  });
-
-  test('works with dynamic', async () => {
-    const { _config } = defineConfig({
-      _config: _CONFIG,
-      config: () => ({ k1: 1, k2: 2 }),
-    });
-    expect(_config()).toStrictEqual({ v1: '1', v2: '2' });
-  });
-
-  test('works with dynamic overrides', async () => {
-    const { _config } = defineConfig({
-      _config: _CONFIG,
-      config: () => ({ k1: 1, k2: 2 }),
+  test('works with overrides', async () => {
+    const { config } = defineConfig({
+      config: CONFIG,
       overrides: () => [{ k1: 1, k2: 3 }],
+      params: () => ({ k1: 1, k2: 2 }),
     });
-    expect(_config()).toStrictEqual({ v1: '1', v2: '3' });
+    expect(config).toStrictEqual({ v1: '1', v2: '3' });
   });
 });

@@ -1,4 +1,3 @@
-import { _config } from '@lib/config/locale/internationalize/internationalize.server';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -10,13 +9,12 @@ import {
 } from '@lib/shared/web/utils/prerender/_prerender.models';
 
 export const _prerender =
-  ({ languageDefault, languages }: _PrerenderParamsModel): _PrerenderModel =>
+  ({ i18n, languageDefault, languages }: _PrerenderParamsModel): _PrerenderModel =>
   async ({ pageContexts }) => {
     const pageContextPromises: Array<() => Promise<(typeof pageContexts)[number]>> = [];
     languages.forEach(({ id }) =>
       pageContexts.forEach(({ context, urlOriginal, ...pageContext }) =>
         pageContextPromises.push(async () => {
-          const i18n = _config();
           await i18n.changeLanguage(id);
           const isLanguageDefault = id === languageDefault;
           const pathname = trimPathname(isLanguageDefault ? urlOriginal : `/${id}/${urlOriginal}`);

@@ -1,28 +1,33 @@
 import { type CssConfigModel } from '@lib/config/css/css.models';
-
-export const AG_GRID_THEME = 'ag-theme-material';
-
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import {
+  THEME_COLOR,
+  THEME_COLOR_MORE,
+  THEME_ROLE,
+  THEME_SIZE,
+} from '@lib/frontend/style/style.constants';
 
-const { _config, config } = defineConfig({
-  config: {
+const AG_GRID_THEME = 'ag-theme-material';
+
+const config = defineConfig<CssConfigModel>({
+  params: () => ({
     stylesheet: (theme) => `
     .${AG_GRID_THEME} {
       --ag-background-color: transparent;
       --ag-border-color: ${theme.color.border};
-      --ag-checkbox-border-radius: ${theme.shape.borderRadius}px;
-      --ag-checkbox-checked-color: ${theme.color.palette.primary.main};
-      --ag-checkbox-indeterminate-color: ${theme.color.palette.secondary.main};
-      --ag-foreground-color: ${theme.color.palette.surface.contrast};
+      --ag-checkbox-border-radius: ${theme.shape.borderRadius[THEME_SIZE.MEDIUM]}px;
+      --ag-checkbox-checked-color: ${theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN]};
+      --ag-checkbox-indeterminate-color: ${theme.color.palette[THEME_COLOR.SECONDARY][THEME_ROLE.MAIN]};
+      --ag-foreground-color: ${theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]};
       --ag-header-background-color: transparent;
-      --ag-header-foreground-color: ${theme.color.palette.surface.contrast};
+      --ag-header-foreground-color: ${theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]};
       --ag-selected-row-background-color: transparent;
   
       .ag-cell, .ag-header-cell {
         align-items: center;
         display: flex;
-        font-size: ${theme?.font.size.m}px;
-        padding: 0 ${theme?.shape.spacing.m}px;
+        font-size: ${theme?.font.size[THEME_SIZE.MEDIUM]}px;
+        padding: 0 ${theme?.shape.spacing[THEME_SIZE.MEDIUM]}px;
       }
   
       .ag-pinned-right-header, .ag-cell-first-right-pinned {
@@ -30,7 +35,7 @@ const { _config, config } = defineConfig({
       }
     }
   `,
-  } satisfies CssConfigModel,
+  }),
 });
 
-export { _config, config };
+export default config;

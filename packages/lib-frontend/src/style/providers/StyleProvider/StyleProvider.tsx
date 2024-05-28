@@ -1,4 +1,4 @@
-import { config } from '@lib/config/css/css.global';
+import cssConfig from '@lib/config/css/css.global';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { GlobalStyle } from '@lib/frontend/style/components/GlobalStyle/GlobalStyle';
@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 export const StyleProvider: FCModel<StyleProviderPropsModel> = ({ children }) => {
   const theme = useTheme();
   const [brightness] = useStore('style.brightness');
-  const sheet = useMemo(() => config.stylesheet(theme), [config, theme]);
+  const sheet = useMemo(() => cssConfig.params().stylesheet(theme), [cssConfig.params(), theme]);
   return (
     <_StyleProvider value={{ brightness }}>
       <GlobalStyle sheet={sheet} />

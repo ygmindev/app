@@ -1,12 +1,13 @@
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
-import { _database } from '@lib/config/database/_database';
-import { config as configBase } from '@lib/config/database/database.base';
+import configBase from '@lib/config/database/database.base';
+import {
+  type _DatabaseConfigModel,
+  type DatabaseConfigModel,
+} from '@lib/config/database/database.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  _config: _database,
-
-  config: configBase,
+const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
+  ...configBase,
 
   overrides: () => [
     {
@@ -23,4 +24,4 @@ const { _config, config } = defineConfig({
   ],
 });
 
-export { _config, config };
+export default config;

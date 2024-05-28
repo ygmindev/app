@@ -1,13 +1,11 @@
 import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { packages } from '@lib/backend/file/utils/packages/packages';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import {
   type _TypescriptConfigModel,
   type TypescriptConfigModel,
 } from '@lib/config/node/typescript/typescript.models';
-import { readFileSync } from 'fs';
 import reduce from 'lodash/reduce';
+import { join } from 'path';
 import {
   type JsxEmit,
   type ModuleKind,
@@ -16,7 +14,7 @@ import {
 } from 'typescript';
 
 export const _typescript = ({
-  outDir,
+  distDir,
   paths,
   rootDir,
   types,
@@ -41,20 +39,8 @@ export const _typescript = ({
       module: 'esnext' as unknown as ModuleKind,
       moduleResolution: 'Bundler' as unknown as ModuleResolutionKind,
       noEmit: true,
-      outDir,
-      paths: {
-        ...reduce(paths, (result, v, k) => ({ ...result, [k]: [v] }), {}),
-        ...reduce(
-          packages,
-          (result, v) => {
-            const packageJson = JSON.parse(
-              readFileSync(fromPackages(v, 'package.json')).toString(),
-            ) as { name: string };
-            return { ...result, [`${packageJson.name}/*`]: [`packages/${v}/src/*`] };
-          },
-          {},
-        ),
-      },
+      outDir: join(distDir, 'out-tsc'),
+      paths: reduce(paths, (result, v, k) => ({ ...result, [k]: [v] }), {}),
       resolveJsonModule: true,
       rootDir: root,
       skipDefaultLibCheck: true,

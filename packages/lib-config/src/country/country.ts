@@ -1,8 +1,8 @@
-import { type CountryConfigModel } from '@lib/config/locale/country/country.models';
+import { type CountryConfigModel } from '@lib/config/country/country.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  config: {
+const config = defineConfig<CountryConfigModel>({
+  params: () => ({
     supportedCountries: [
       'US',
       'AR',
@@ -35,7 +35,7 @@ const { _config, config } = defineConfig({
       'TR',
       'TW',
     ],
-  } satisfies CountryConfigModel,
+  }),
 });
 
-export { _config, config };
+export default config;

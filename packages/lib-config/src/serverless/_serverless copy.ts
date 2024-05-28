@@ -1,7 +1,7 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import { config as fileConfig } from '@lib/config/file/file';
+import fileConfig from '@lib/config/file/file';
 import {
   type _ServerlessConfigModel,
   type ServerlessConfigModel,
@@ -16,7 +16,7 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import reduce from 'lodash/reduce';
 
 export const _serverless = ({
-  bundleConfig,
+  bundle: bundleConfig,
   dotenv,
   environment,
   functions,
@@ -29,8 +29,8 @@ export const _serverless = ({
   provider,
   server,
 }: ServerlessConfigModel): _ServerlessConfigModel => {
-  const bundleConfigF = bundleConfig();
-  const httpConfigF = httpConfig();
+  const bundleConfigF = bundleConfig.config();
+  const httpConfigF = httpConfig.params();
   const { certificateDir } = httpConfigF.certificate;
 
   const platformParams: PartialDeepModel<_ServerlessConfigModel> = (() => {
@@ -64,7 +64,7 @@ export const _serverless = ({
                 patterns: fileConfig.prunePatterns.map((pattern) => `!nodejs/${pattern}`),
               },
               // TODO: move all layers to config
-              path: `./${fileConfig.buildPath}/layers`,
+              path: `./${fileConfig.buildDir}/layers`,
               retain: true,
             },
           },

@@ -1,8 +1,7 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import { config as fileConfig } from '@lib/config/file/file';
-import { _bundle as _bundleConfig } from '@lib/config/node/bundle/_bundle';
+import { _bundle } from '@lib/config/node/bundle/_bundle';
 import {
   type _ServerlessConfigModel,
   type ServerlessConfigModel,
@@ -17,21 +16,22 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import reduce from 'lodash/reduce';
 
 export const _serverless = ({
-  api,
-  bundleConfig,
-  certificate,
+  buildDir,
+  bundle,
   dotenv,
   environment,
   functions,
-  host,
+  memory,
   name,
   platform,
-  port,
   provider,
+  prunePatterns,
+  region,
   server,
+  timeout,
 }: ServerlessConfigModel): _ServerlessConfigModel => {
-  const bundleConfigF = _bundleConfig(bundleConfig());
-  const { certificateDir } = certificate;
+  const { build, esbuild, optimizeDeps } = _bundle(bundle);
+  const { certificate, cors, host, port } = server;
   const isContainer = process.env.SERVERLESS_RUNTIME === 'container';
   const platformParams: PartialDeepModel<_ServerlessConfigModel> = (() => {
     switch (platform) {
@@ -40,17 +40,17 @@ export const _serverless = ({
           custom: {
             // TODO: vscode debug point not working
             esbuild: {
-              ...bundleConfigF.esbuild,
-              ...bundleConfigF.optimizeDeps?.esbuildOptions,
+              ...esbuild,
+              ...optimizeDeps?.esbuildOptions,
               bundle: true,
               exclude: ['*'],
               format: 'cjs',
               installExtraArgs: ['--shamefully-hoist'],
               keepOutputDirectory: true,
-              outputWorkFolder: fileConfig.buildPath,
+              outputWorkFolder: buildDir,
               packager: 'pnpm',
               plugins: toRelative({ to: fromConfig('serverless/_plugins.js') }),
-              watch: { pattern: bundleConfigF.build?.watch?.include },
+              watch: { pattern: build?.watch?.include },
             },
 
             ...(isContainer ? {} : { layerConfig: { installLayers: false } }),
@@ -63,10 +63,10 @@ export const _serverless = ({
                   custom: {
                     compatibleRuntimes: ['nodejs18.x'],
                     package: {
-                      patterns: fileConfig.prunePatterns.map((pattern) => `!nodejs/${pattern}`),
+                      patterns: prunePatterns.map((pattern) => `!nodejs/${pattern}`),
                     },
                     // TODO: move all layers to config
-                    path: `./${fileConfig.buildPath}/layers`,
+                    path: `./${buildDir}/layers`,
                     retain: true,
                   },
                 },
@@ -131,7 +131,7 @@ export const _serverless = ({
             allowCache: process.env.SERVER_IS_DISABLE_HOT_RELOAD,
             host: host?.split('://')[1],
             httpPort: port,
-            httpsProtocol: certificateDir,
+            httpsProtocol: certificate.certificateDir,
             ignoreJWTSignature: true,
             lambdaPort: null,
             noPrependStageInUrl: true,
@@ -164,7 +164,7 @@ export const _serverless = ({
                   }
                 : { handler: v.handler, layers: [{ Ref: 'CustomLambdaLayer' }] }),
 
-              timeout: server.timeout,
+              timeout,
             },
           }),
           {},
@@ -185,15 +185,15 @@ export const _serverless = ({
           // }),
           httpApi: {
             cors: {
-              allowedHeaders: server.cors.allowedHeaders,
-              allowedOrigins: server.cors.allowedOrigins,
+              allowedHeaders: cors.allowedHeaders,
+              allowedOrigins: cors.allowedOrigins,
             },
           },
-          memorySize: server.memory,
+          memorySize: memory,
           name: provider,
-          region: server.region as _ServerlessConfigModel['provider']['region'],
+          region: region as _ServerlessConfigModel['provider']['region'],
           stage: environment,
-          timeout: server.timeout,
+          timeout,
           versionFunctions: false,
         },
 
@@ -207,7 +207,7 @@ export const _serverless = ({
 
 // import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 // import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-// import { config as fileConfig } from '@lib/config/file/file';
+// import config as fileConfig from '@lib/config/file/file';
 // import {
 //   type _ServerlessConfigModel,
 //   type ServerlessConfigModel,

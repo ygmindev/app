@@ -1,20 +1,20 @@
-import { graphQlQuery } from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery';
-import { type GraphQlQueryParamsModel } from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery.models';
+import { graphqlQuery } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery';
+import { type GraphqlQueryParamsModel } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { type TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ graphQlQuery });
+const { displayName } = withTest({ graphqlQuery });
 
 describe(displayName, () => {
   test('works without params', async () => {
-    const PARAMS: GraphQlQueryParamsModel<void, TestableEntityResourceModel> = {
+    const PARAMS: GraphqlQueryParamsModel<void, TestableEntityResourceModel> = {
       fields: ['_id', 'created'],
       name: 'NAME',
       type: GRAPHQL_OPERATION_TYPE.QUERY,
     };
-    const result = graphQlQuery(PARAMS);
+    const result = graphqlQuery(PARAMS);
     const expected = trimDeep(`query NAME {
       NAME {
         _id
@@ -25,13 +25,13 @@ describe(displayName, () => {
   });
 
   test('works with params', async () => {
-    const PARAMS: GraphQlQueryParamsModel<{ a: string; b: string }, TestableEntityResourceModel> = {
+    const PARAMS: GraphqlQueryParamsModel<{ a: string; b: string }, TestableEntityResourceModel> = {
       fields: ['_id', 'created'],
       name: 'NAME',
       params: { a: 'A', b: 'B' },
       type: GRAPHQL_OPERATION_TYPE.QUERY,
     };
-    const result = graphQlQuery(PARAMS);
+    const result = graphqlQuery(PARAMS);
     const expected = trimDeep(`query NAME($a: A!, $b: B!) {
       NAME(a: $a, b: $b) {
         _id

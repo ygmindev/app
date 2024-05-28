@@ -2,24 +2,26 @@ import {
   type ServerlessProviderModel,
   type ServerlessRuntimeModel,
 } from '@lib/backend/serverless/serverless.models';
+import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
-import { type ServerConfigModel } from '@lib/config/server/server.models';
+import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { type EnvironmentModel } from '@lib/shared/environment/environment.models';
 import { type HttpMethodModel } from '@lib/shared/http/http.models';
 import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { type AWS } from '@serverless/typescript';
 
-export type ServerlessConfigModel = ServerConfigModel & {
+export type ServerlessConfigModel = Pick<FileConfigModel, 'buildDir' | 'prunePatterns'> & {
   // TODO: separate into bundle.js?
-  bundleConfig(): BundleConfigModel;
+  bundle: BundleConfigModel;
 
-  configFile: string;
+  configFilename: string;
 
   dotenv(): void;
 
   environment: EnvironmentModel;
 
-  functions?: Record<
+  // TODO: to api
+  functions: Record<
     string,
     {
       handler: string;
@@ -28,26 +30,21 @@ export type ServerlessConfigModel = ServerConfigModel & {
     }
   >;
 
+  memory: number;
+
   name: string;
 
   platform: PlatformModel;
 
   provider: ServerlessProviderModel;
 
+  region: string;
+
   runtime: ServerlessRuntimeModel;
 
-  server: {
-    cors: {
-      allowedHeaders: Array<string>;
-      allowedOrigins: Array<string>;
-    };
+  server: ServerConfigModel;
 
-    memory: number;
-
-    region: string;
-
-    timeout: number;
-  };
+  timeout: number;
 };
 
 export type _ServerlessConfigModel = AWS;

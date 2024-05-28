@@ -6,6 +6,6 @@ export type ImportConfigParamsModel<TParams> = [
 ];
 
 export type ImportConfigModel<TParams, TResult = undefined> = {
-  _config: TResult extends undefined ? undefined : TResult;
-  config: TParams;
+  config: TResult extends undefined ? undefined : TResult;
+  params: TParams;
 };

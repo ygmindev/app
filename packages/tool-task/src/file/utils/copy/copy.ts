@@ -1,5 +1,5 @@
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
-import { config } from '@lib/config/file/file';
+import { FILE_CONFIG } from '@lib/config/file/file.constants';
 import { type CopyParamsModel } from '@tool/task/file/utils/copy/copy.models';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync } from 'fs';
 import every from 'lodash/every';
@@ -8,7 +8,7 @@ import { minimatch } from 'minimatch';
 import { join } from 'path';
 
 export const copy = async ({
-  excludes = config.excludePatterns,
+  excludes = FILE_CONFIG.excludePatterns,
   from,
   includes,
   isOverwrite,

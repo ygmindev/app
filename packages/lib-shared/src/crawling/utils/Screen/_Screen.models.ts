@@ -1,4 +1,4 @@
-import { type ScreenConfigModel } from '@lib/config/crawling/screen/screen.models';
+import { type ScreenConfigModel } from '@lib/config/screen/screen.models';
 import {
   type HandleModel,
   type KeyTypeModel,

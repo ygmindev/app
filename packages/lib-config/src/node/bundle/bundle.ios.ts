@@ -1,18 +1,12 @@
-import { _config as _babelConfig } from '@lib/config/node/babel/babel.native';
-import { _bundle } from '@lib/config/node/bundle/_bundle';
-import { config as configBase } from '@lib/config/node/bundle/bundle.native';
+import {
+  type _BundleConfigModel,
+  type BundleConfigModel,
+} from '@lib/config/node/bundle/bundle.models';
+import configBase from '@lib/config/node/bundle/bundle.native';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  _config: _bundle,
-
-  config: configBase,
-
-  overrides: () => [
-    {
-      babelConfig: _babelConfig,
-    },
-  ],
+const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
+  ...configBase,
 });
 
-export { _config, config };
+export default config;

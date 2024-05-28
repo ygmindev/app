@@ -15,6 +15,7 @@ import {
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import { type LambdaResponseModel } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
+import { _graphql } from '@lib/config/graphql/_graphql';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
@@ -28,7 +29,7 @@ import { type GraphQLError } from 'graphql';
 
 export const _createLambdaHandler = <TType = Record<string, unknown>>({
   context: contextDefault = {},
-  graphQlConfig,
+  graphql,
   handler,
   plugins,
   type,
@@ -70,7 +71,7 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
 
   return async (event: _LambdaEventModel, context, callback) => {
     // GraphQL
-    if (type === LAMBDA_TYPE.GRAPHQL && graphQlConfig) {
+    if (type === LAMBDA_TYPE.GRAPHQL && graphql) {
       const server = new ApolloServer({
         allowBatchedHttpRequests: true,
         formatError: (e, originalError) => {
@@ -84,7 +85,7 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
           console.error(errorF);
           return errorF;
         },
-        schema: graphQlConfig(),
+        schema: _graphql(graphql),
       });
       const handlerF = startServerAndCreateLambdaHandler(
         server,

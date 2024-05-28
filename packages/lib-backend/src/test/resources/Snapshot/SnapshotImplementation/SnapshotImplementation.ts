@@ -1,7 +1,7 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { config as testConfig } from '@lib/config/node/test/test.base';
+import testConfig from '@lib/config/node/test/test.base';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
@@ -16,7 +16,7 @@ export class SnapshotImplementation implements SnapshotImplementationModel {
   }: InputModel<RESOURCE_METHOD_TYPE.GET, SnapshotModel>): Promise<
     OutputModel<RESOURCE_METHOD_TYPE.GET, SnapshotModel>
   > {
-    const { snapshotPath } = testConfig();
+    const { snapshotPath } = testConfig.params();
     const nameF = filter.name as string;
     const path = fromPackages('app-web', snapshotPath, nameF);
     const snapshots = {
@@ -29,7 +29,7 @@ export class SnapshotImplementation implements SnapshotImplementationModel {
   async getMany(
     _input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, SnapshotModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, SnapshotModel>> {
-    const { snapshotPath } = testConfig();
+    const { snapshotPath } = testConfig.params();
     const path = fromPackages('app-web', snapshotPath);
     const snapshots = children(path).map(({ name }) => ({ name }));
     return { result: snapshots };

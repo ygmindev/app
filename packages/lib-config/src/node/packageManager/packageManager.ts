@@ -2,8 +2,8 @@ import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { type PackageManagerConfigModel } from '@lib/config/node/packageManager/packageManager.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  config: {
+const config = defineConfig<PackageManagerConfigModel>({
+  params: () => ({
     fixedVersions: {
       // typescript: '4.7.4',
       '@types/inquirer': '^8.2.2',
@@ -53,7 +53,7 @@ const { _config, config } = defineConfig({
       fromModules('moti/build/core/use-motify.js'),
       fromModules('moti/src/core/use-motify.ts'),
     ],
-  } satisfies PackageManagerConfigModel,
+  }),
 });
 
-export { _config, config };
+export default config;

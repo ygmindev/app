@@ -55,11 +55,11 @@ import { withResult } from '@lib/backend/resource/utils/withResult/withResult';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
-import { type GraphQlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
+import { type GraphqlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 
-const getOperation = (method: ResourceMethodTypeModel): GraphQlOperationTypeModel => {
+const getOperation = (method: ResourceMethodTypeModel): GraphqlOperationTypeModel => {
   switch (method) {
     case RESOURCE_METHOD_TYPE.GET:
     case RESOURCE_METHOD_TYPE.GET_MANY:

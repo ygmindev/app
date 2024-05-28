@@ -1,4 +1,4 @@
-import { type GraphQlQueryParamsFieldsModel } from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery.models';
+import { type GraphqlQueryParamsFieldsModel } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import {
   type ResourceMethodTypeModel,
   type ResourceNameParamsModel,
@@ -16,7 +16,7 @@ export type UseResourceMethodParamsFieldsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
   TRoot = undefined,
-> = GraphQlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>>;
+> = GraphqlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>>;
 
 export type UseResourceMethodParamsModel<
   TMethod extends ResourceMethodTypeModel,

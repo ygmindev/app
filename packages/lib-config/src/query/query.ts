@@ -1,11 +1,9 @@
-import { _query } from '@lib/config/query/_query';
-import { config as configBase } from '@lib/config/query/query.base';
+import configBase from '@lib/config/query/query.base';
+import { type _QueryConfigModel, type QueryConfigModel } from '@lib/config/query/query.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  _config: _query,
-
-  config: configBase,
+const config = defineConfig<QueryConfigModel, _QueryConfigModel>({
+  ...configBase,
 });
 
-export { _config, config };
+export default config;

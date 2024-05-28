@@ -15,13 +15,17 @@ import { LinkedUser } from '@lib/backend/user/resources/LinkedUser/LinkedUser';
 import { User } from '@lib/backend/user/resources/User/User';
 import { _database } from '@lib/config/database/_database';
 import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
+import {
+  type _DatabaseConfigModel,
+  type DatabaseConfigModel,
+} from '@lib/config/database/database.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-const { _config, config } = defineConfig({
-  _config: _database,
+const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
+  config: _database,
 
-  config: () => ({
+  params: () => ({
     ...DATABASE_CONFIG,
 
     entities: filterNil([
@@ -44,4 +48,4 @@ const { _config, config } = defineConfig({
   }),
 });
 
-export { _config, config };
+export default config;

@@ -1,4 +1,4 @@
-import { useAppGraphQl } from '@lib/frontend/data/hooks/useAppGraphQl/useAppGraphQl';
+import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
 import { type UseMapRoutesModel } from '@lib/frontend/map/hooks/useMapRoutes/useMapRoutes.models';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { MAP_ROUTE_RESOURCE } from '@lib/shared/map/resources/MapRoute/MapRoute.constants';
@@ -7,7 +7,7 @@ import { type GetRouteInputModel } from '@lib/shared/map/resources/MapRoute/MapR
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 
 export const useMapRoutes = (): UseMapRoutesModel => {
-  const { query } = useAppGraphQl();
+  const { query } = useAppGraphql();
   return {
     getRoute: async (input) => {
       const output = await query<{ input: GetRouteInputModel }, MapRouteModel>({

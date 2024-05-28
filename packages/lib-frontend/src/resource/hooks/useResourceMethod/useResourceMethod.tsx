@@ -1,8 +1,8 @@
-import { useAppGraphQl } from '@lib/frontend/data/hooks/useAppGraphQl/useAppGraphQl';
+import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
 import {
-  type GraphQlFieldModel,
-  type GraphQlQueryParamsFieldsModel,
-} from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery.models';
+  type GraphqlFieldModel,
+  type GraphqlQueryParamsFieldsModel,
+} from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import {
   type UseResourceMethodModel,
   type UseResourceMethodParamsModel,
@@ -16,10 +16,10 @@ import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 
 const getConnectionFields = <TType, TRoot = undefined>(
-  fields: GraphQlQueryParamsFieldsModel<TType>,
-): Array<GraphQlFieldModel<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>> =>
+  fields: GraphqlQueryParamsFieldsModel<TType>,
+): Array<GraphqlFieldModel<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>> =>
   fields.map((field) => {
-    const fieldF = field as GraphQlFieldModel<
+    const fieldF = field as GraphqlFieldModel<
       Pick<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>, 'result'>
     >;
     return fieldF?.result
@@ -31,7 +31,7 @@ const getConnectionFields = <TType, TRoot = undefined>(
           ],
         }
       : field;
-  }) as Array<GraphQlFieldModel<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>>;
+  }) as Array<GraphqlFieldModel<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>>;
 
 export const useResourceMethod = <
   TMethod extends ResourceMethodTypeModel,
@@ -51,7 +51,7 @@ export const useResourceMethod = <
   TForm,
   TRoot
 > => {
-  const { query } = useAppGraphQl();
+  const { query } = useAppGraphql();
 
   const nameF = `${name}${method}`;
   const type = (() => {
@@ -72,7 +72,7 @@ export const useResourceMethod = <
 
   const fieldsF =
     method === RESOURCE_METHOD_TYPE.GET_CONNECTION
-      ? getConnectionFields(fields as GraphQlQueryParamsFieldsModel<TType>)
+      ? getConnectionFields(fields as GraphqlQueryParamsFieldsModel<TType>)
       : fields;
 
   return {
@@ -83,7 +83,7 @@ export const useResourceMethod = <
         { input: InputModel<TMethod, TType, TForm> },
         OutputModel<TMethod, TType, TRoot>
       >({
-        fields: fieldsF as GraphQlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>>,
+        fields: fieldsF as GraphqlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>>,
         name: nameF,
         params: { input: `${nameF}Input` },
         type,

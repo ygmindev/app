@@ -3,7 +3,7 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
-import { _config } from '@lib/config/node/typescript/typescript';
+import { _typescript } from '@lib/config/node/typescript/_typescript';
 import { BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
@@ -14,42 +14,46 @@ import { join } from 'path';
 import { pathsToModuleNameMapper } from 'ts-jest';
 
 export const _test = ({
-  bundleConfig,
-  cachePath,
+  buildDir,
+  bundle,
+  cacheDir,
   eteExtension,
   fileExtensions,
   isWatch,
   match,
-  mockDir,
-  outputPath,
+  mockPath,
+  outputDir,
   root,
   specExtension,
   timeout,
+  typescript,
 }: TestConfigModel): _TestConfigModel => {
-  const bundleConfigF = bundleConfig();
+  const { aliases, define, extensions, transpiles } = bundle;
+  const { compilerOptions } = _typescript(typescript);
   const testExtension =
     process.env.TEST_IS_ETE === BOOLEAN_STRING.TRUE ? eteExtension : specExtension;
+
   return {
-    cacheDirectory: fromWorking(cachePath),
+    cacheDirectory: fromWorking(cacheDir, outputDir),
 
     collectCoverage: true,
 
-    coverageDirectory: fromWorking(outputPath, 'coverage'),
+    coverageDirectory: fromWorking(buildDir, outputDir, 'coverage'),
 
     coverageReporters: ['lcov'],
 
-    globals: bundleConfigF.define,
+    globals: define,
 
     maxWorkers: -1,
 
-    moduleFileExtensions: bundleConfigF.extensions.map((ext) => trimStart(ext, '.')),
+    moduleFileExtensions: extensions.map((ext) => trimStart(ext, '.')),
 
     moduleNameMapper: {
-      ...reduce(bundleConfigF.aliases, (result, v, k) => ({ ...result, [`^${k}$`]: v }), {}),
-      ...(_config.compilerOptions?.paths
-        ? pathsToModuleNameMapper(_config.compilerOptions.paths, { prefix: fromRoot() })
+      ...reduce(aliases, (result, v, k) => ({ ...result, [`^${k}$`]: v }), {}),
+      ...(compilerOptions?.paths
+        ? pathsToModuleNameMapper(compilerOptions.paths, { prefix: fromRoot() })
         : {}),
-      [`(${fileExtensions.join('|')})$`]: join(mockDir, 'file'),
+      [`(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
     },
 
     passWithNoTests: true,
@@ -63,7 +67,7 @@ export const _test = ({
         {
           darkTheme: true,
           openReport: false,
-          publicPath: fromWorking(outputPath, 'reports'),
+          publicPath: fromWorking(outputDir, 'reports'),
         },
       ],
     ],
@@ -80,7 +84,7 @@ export const _test = ({
 
     testMatch: testExtension
       ? reduce(
-          permuteString([testExtension], bundleConfigF.extensions),
+          permuteString([testExtension], extensions),
           (result, ext) => {
             const extF = trim(ext, '.');
             return [
@@ -102,9 +106,7 @@ export const _test = ({
       ],
     },
 
-    transformIgnorePatterns: bundleConfigF.transpiles
-      ? [`node_modules/(?!(${bundleConfigF.transpiles.join('|')})/)`]
-      : [],
+    transformIgnorePatterns: transpiles ? [`node_modules/(?!(${transpiles.join('|')})/)`] : [],
 
     watch: isWatch,
   };

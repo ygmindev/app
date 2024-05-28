@@ -1,4 +1,4 @@
-import { config } from '@lib/config/node/packageManager/packageManager';
+import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 
 const upgrade: TaskParamsModel<unknown> = {
@@ -6,7 +6,12 @@ const upgrade: TaskParamsModel<unknown> = {
 
   onFinish: [() => 'node-post-install'],
 
-  task: [`npx ncu -i --deep --version -p ${config.name} -x ${Object.keys(config.fixedVersions).join(',')}`],
+  task: [
+    () => {
+      const { fixedVersions, name } = pacakgeManagerConfig.params();
+      return `npx ncu -i --deep --version -p ${name} -x ${Object.keys(fixedVersions).join(',')}`;
+    },
+  ],
 };
 
 export default upgrade;

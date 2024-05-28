@@ -1,5 +1,5 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
-import { SERVERLESS_CONFIG } from '@lib/config/serverless/serverless.constants';
+import serverlessConfig from '@lib/config/serverless/serverless.base';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { LAYER_TASKS } from '@tool/task/serverless/templates/build/build';
@@ -13,13 +13,13 @@ export const release: TaskParamsModel<unknown> = {
     // TODO: aws agnostic
     () =>
       fromExecutable(
-        `sls config credentials --config ${SERVERLESS_CONFIG.configFile} --provider aws --profile default --overwrite --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY}`,
+        `sls config credentials --config ${serverlessConfig.params().configFilename} --provider aws --profile default --overwrite --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY}`,
       ),
 
     ...(process.env.SERVERLESS_RUNTIME === 'container' ? [] : LAYER_TASKS),
 
     fromExecutable(
-      `sls deploy --config ${SERVERLESS_CONFIG.configFile} --aws-profile default --verbose`,
+      `sls deploy --config ${serverlessConfig.params().configFilename} --aws-profile default --verbose`,
     ),
   ],
 };

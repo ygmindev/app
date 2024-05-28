@@ -4,7 +4,6 @@ import {
   type _RunServerParamsModel,
 } from '@lib/backend/server/utils/runServer/_runServer.models';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
-import { _config as graphQlConfig } from '@lib/config/graphql/graphql';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { uri } from '@lib/shared/http/utils/uri/uri';
@@ -64,7 +63,7 @@ export const _runServer = async ({
     );
     switch (type) {
       case API_ENDPOINT_TYPE.GRAPHQL: {
-        const schema = graphQlConfig();
+        const schema = graphqlConfig();
         const yoga = createYoga({ logging: { debug, error, info, warn }, schema });
         app.route({
           handler: async (req, reply) => {

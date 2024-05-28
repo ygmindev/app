@@ -1,10 +1,9 @@
-import waitOn from 'wait-on';
-
 import { info } from '@lib/shared/logging/utils/logger/logger';
 import {
   type _WaitOnModel,
   type _WaitOnParamsModel,
 } from '@tool/task/core/utils/waitOn/_waitOn.models';
+import waitOn from 'wait-on';
 
 export const _waitOn = async (...[params, options]: _WaitOnParamsModel): Promise<_WaitOnModel> =>
   waitOn({

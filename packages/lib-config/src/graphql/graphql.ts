@@ -21,14 +21,17 @@ import { SnapshotResolver } from '@lib/backend/test/resources/Snapshot/SnapshotR
 import { LinkedUserResolver } from '@lib/backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '@lib/backend/user/resources/User/UserResolver/UserResolver';
 import { _graphql } from '@lib/config/graphql/_graphql';
-import { type GraphqlConfigModel } from '@lib/config/graphql/graphql.models';
+import {
+  type _GraphqlConfigModel,
+  type GraphqlConfigModel,
+} from '@lib/config/graphql/graphql.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-const { _config, config } = defineConfig({
-  _config: _graphql,
+const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
+  config: _graphql,
 
-  config: () =>
+  params: () =>
     ({
       authorize,
 
@@ -57,7 +60,7 @@ const { _config, config } = defineConfig({
       ]),
 
       schemaDir: fromStatic('graphql/schema.gql'),
-    }) satisfies GraphqlConfigModel,
+    }) as GraphqlConfigModel,
 });
 
-export { _config, config };
+export default config;

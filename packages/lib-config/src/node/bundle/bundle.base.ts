@@ -1,23 +1,23 @@
-import { extensions } from '@lib/backend/file/utils/extensions/extensions';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { packages } from '@lib/backend/file/utils/packages/packages';
-import { config as fileConfig } from '@lib/config/file/file';
-import { _config as _babelConfig } from '@lib/config/node/babel/babel.base';
+import fileConfig from '@lib/config/file/file';
+import { BUILD_DIR, PUBLIC_DIR } from '@lib/config/file/file.constants';
 import { _bundle } from '@lib/config/node/bundle/_bundle';
-import { BUNDLE_CONFIG } from '@lib/config/node/bundle/bundle.constants';
-import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import {
+  type _BundleConfigModel,
+  type BundleConfigModel,
+} from '@lib/config/node/bundle/bundle.models';
+import typescriptConfig from '@lib/config/node/typescript/typescript';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  _config: _bundle,
+const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
+  config: _bundle,
 
-  config: () =>
-    ({
-      ...BUNDLE_CONFIG,
-
+  params: () => {
+    const { extensions, packageDirs } = fileConfig.params();
+    return {
       aliases: [
         {
           from: /^uuid$/,
@@ -25,17 +25,24 @@ const { _config, config } = defineConfig({
         },
       ],
 
-      babelConfig: _babelConfig,
+      babel: {
+        plugins: [
+          '@babel/plugin-transform-runtime',
+          ['@babel/plugin-transform-private-methods', { loose: true }],
+          '@babel/plugin-transform-class-static-block',
+          ['@babel/plugin-proposal-class-properties', { loose: true }],
+          ['@babel/plugin-proposal-object-rest-spread', { loose: true }],
+        ],
+        presets: [['@babel/preset-env', { loose: true, targets: { node: 'current' } }]],
+      },
 
-      buildPath: fileConfig.buildPath,
+      buildDir: BUILD_DIR,
 
-      cachePath: fileConfig.cachePath,
-
-      distPath: fileConfig.distPath,
+      configFilename: 'bundle.js',
 
       envPrefix: ['ENV_', 'NODE_ENV'],
 
-      extensions: extensions(),
+      extensions,
 
       logSuppressPatterns: [/.*sourcemap.*/i, /.*source map.*/i],
 
@@ -43,11 +50,11 @@ const { _config, config } = defineConfig({
 
       packager: 'pnpm',
 
-      publicPath: fileConfig.publicPath,
+      publicDir: PUBLIC_DIR,
 
-      rootDirs: [fromRoot(), ...packages.map((path) => fromPackages(path))],
+      rootDirs: [fromRoot(), ...packageDirs.map((path) => fromPackages(path))],
 
-      tsconfigPath: 'tsconfig.json',
+      typescript: typescriptConfig.params(),
 
       watch: [
         fromPackages('asset-static/src/**/*'),
@@ -55,7 +62,8 @@ const { _config, config } = defineConfig({
         fromPackages('lib-shared/src/**/*'),
         fromWorking('src/**/*'),
       ],
-    }) satisfies BundleConfigModel,
+    };
+  },
 });
 
-export { _config, config };
+export default config;

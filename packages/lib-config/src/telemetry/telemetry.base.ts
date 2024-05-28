@@ -1,19 +1,21 @@
 import { _telemetry } from '@lib/config/telemetry/_telemetry';
-import { type TelemetryConfigModel } from '@lib/config/telemetry/telemetry.models';
+import {
+  type _TelemetryConfigModel,
+  type TelemetryConfigModel,
+} from '@lib/config/telemetry/telemetry.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  _config: _telemetry,
+const config = defineConfig<TelemetryConfigModel, _TelemetryConfigModel>({
+  config: _telemetry,
 
-  config: () =>
-    ({
-      // batchSize: 512,
-      // queueSize: 2048,
-      batchSize: 5,
-      name: process.env.APP_TRACKING_NAME,
-      queueSize: 5,
-      source: process.env.APP_UPTRACE_SOURCE,
-    }) satisfies TelemetryConfigModel,
+  params: () => ({
+    // batchSize: 512,
+    // queueSize: 2048,
+    batchSize: 5,
+    name: process.env.APP_TRACKING_NAME,
+    queueSize: 5,
+    source: process.env.APP_UPTRACE_SOURCE,
+  }),
 });
 
-export { _config, config };
+export default config;

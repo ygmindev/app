@@ -1,6 +1,6 @@
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import { type UseSignInResourceModel } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource.models';
-import { useAppGraphQl } from '@lib/frontend/data/hooks/useAppGraphQl/useAppGraphQl';
+import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
@@ -62,7 +62,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
     name: SIGN_IN_USERNAME,
   });
 
-  const { query } = useAppGraphQl();
+  const { query } = useAppGraphql();
 
   return {
     signIn: async (form) => {

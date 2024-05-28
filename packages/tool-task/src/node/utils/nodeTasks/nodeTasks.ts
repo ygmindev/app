@@ -1,8 +1,7 @@
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { config } from '@lib/config/file/file';
-import { config as testConfig } from '@lib/config/node/test/test.base';
-import { config as webConfig } from '@lib/config/web/web';
+import { DIST_DIR, PUBLIC_DIR } from '@lib/config/file/file.constants';
+import testConfig from '@lib/config/node/test/test.base';
 import { BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -26,8 +25,7 @@ export const nodeTasks = ({
   eteTasks,
   testParams,
 }: NodeTasksParamsModel = {}): NodeTasksMdoel => {
-  const { outputPath } = testConfig();
-  const { publicPath } = webConfig();
+  const { outputDir } = testConfig.params();
 
   const getTestTasks = (
     params?: PartialModel<TaskParamsModel<TestParamsModel>>,
@@ -46,9 +44,9 @@ export const nodeTasks = ({
         onFinish: [
           async ({ root }) =>
             copy({
-              from: joinPaths([root, outputPath]),
+              from: joinPaths([root, outputDir]),
               isOverwrite: true,
-              to: fromStatic(publicPath, config.distPath, 'test'),
+              to: fromStatic(PUBLIC_DIR, DIST_DIR, 'test'),
             }),
         ],
         task: [

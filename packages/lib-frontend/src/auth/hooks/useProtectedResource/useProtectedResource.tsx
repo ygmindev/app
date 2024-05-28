@@ -3,7 +3,7 @@ import {
   type UseProtectedResourceParamsModel,
 } from '@lib/frontend/auth/hooks/useProtectedResource/useProtectedResource.models';
 import {
-  toGraphQlParamsFields,
+  toGraphqlParamsFields,
   useResource,
 } from '@lib/frontend/resource/hooks/useResource/useResource';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
@@ -21,7 +21,7 @@ export const useProtectedResource = <
   root,
   ...params
 }: UseProtectedResourceParamsModel<TType, TForm>): UseProtectedResourceModel<TType, TForm> => {
-  const fieldsF = toGraphQlParamsFields<TType>(fields);
+  const fieldsF = toGraphqlParamsFields<TType>(fields);
   const { query: getManyProtected } = useResourceMethod<
     RESOURCE_METHOD_TYPE.GET_MANY,
     TType,

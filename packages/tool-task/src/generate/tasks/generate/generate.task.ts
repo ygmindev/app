@@ -1,7 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { config } from '@lib/config/generate/generate';
-import { type GenerateConfigModel } from '@lib/config/generate/generate.models';
+import generateConfig from '@lib/config/generate/generate';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
@@ -24,8 +23,7 @@ const generate: TaskParamsModel<GenerateParamsModel> = {
   task: [
     async ({ options }) => {
       if (options?.template) {
-        const { onSuccess, output, prepare } =
-          (config as GenerateConfigModel)[options.template] || {};
+        const { onSuccess, output, prepare } = generateConfig.params()[options.template] || {};
         const params = merge([{ onSuccess, output }, prepare ? await prepare() : {}]);
         await boilerplate({ ...params, template: options.template });
       }

@@ -1,10 +1,10 @@
 import { type Config } from '@jest/types';
+import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import { type TypescriptConfigModel } from '@lib/config/node/typescript/typescript.models';
 
-export type TestConfigModel = {
-  bundleConfig(): BundleConfigModel;
-
-  cachePath: string;
+export type TestConfigModel = Pick<FileConfigModel, 'buildDir' | 'cacheDir'> & {
+  bundle: BundleConfigModel;
 
   delay: number;
 
@@ -16,7 +16,7 @@ export type TestConfigModel = {
 
   match?: string;
 
-  mockDir: string;
+  mockPath: string;
 
   mocks?: Array<string | [string, () => unknown]>;
 
@@ -28,13 +28,15 @@ export type TestConfigModel = {
 
   onFinishEach?(): Promise<void>;
 
-  outputPath: string;
+  outputDir: string;
 
   root?: string;
 
   specExtension: string;
 
   timeout: number;
+
+  typescript: TypescriptConfigModel;
 };
 
 export type _TestConfigModel = Config.InitialOptions;

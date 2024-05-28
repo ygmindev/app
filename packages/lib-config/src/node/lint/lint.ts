@@ -1,32 +1,30 @@
-import { EXTENSIONS_BASE } from '@lib/backend/file/utils/extensions/extensions.constants';
 import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { packages } from '@lib/backend/file/utils/packages/packages';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import { BUNDLE_CONFIG } from '@lib/config/node/bundle/bundle.constants';
+import fileConfig from '@lib/config/file/file';
+import { EXTENSIONS_BASE } from '@lib/config/file/file.constants';
 import { _lint } from '@lib/config/node/lint/_lint';
-import { type LintConfigModel } from '@lib/config/node/lint/lint.models';
-import { SERVERLESS_CONFIG } from '@lib/config/serverless/serverless.constants';
+import { type _LintConfigModel, type LintConfigModel } from '@lib/config/node/lint/lint.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import { WEB_CONFIG } from '@lib/config/web/web.constants';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 
-export const lintCommand = (fix?: boolean): string =>
-  `npx eslint --config ${config.configFile} ${
+export const lintCommand = (fix?: boolean): string => {
+  const { configDir, exclude, include } = config.params();
+  return `npx eslint --config ${configDir} ${
     fix ? '--fix' : ''
-  } --no-error-on-unmatched-pattern ${config.exclude
+  } --no-error-on-unmatched-pattern ${exclude
     .map((pattern) => `--ignore-pattern "${pattern}"`)
-    .join(' ')} ${config.include.join(' ')}`;
+    .join(' ')} ${include.join(' ')}`;
+};
 
-const { _config, config } = defineConfig({
-  _config: _lint,
+const config = defineConfig<LintConfigModel, _LintConfigModel>({
+  config: _lint,
 
-  config: {
-    configFile: fromDist('.eslintrc.json'),
+  params: () => ({
+    configDir: fromDist('.eslintrc.json'),
 
-    // exclude: [`**/*${TEST_CONFIG.specExtension}.*`, `**/*${TEST_CONFIG.eteExtension}.*`],
-    exclude: [BUNDLE_CONFIG.configFile, SERVERLESS_CONFIG.configFile, WEB_CONFIG.configFile],
+    exclude: [],
 
     include: permuteString(
       [toRelative({ from: fromDist(), to: fromPackages('*/src/**/*') })],
@@ -47,12 +45,12 @@ const { _config, config } = defineConfig({
 
     printWidth: 100,
 
-    roots: [fromRoot(), ...packages.map((pkg) => fromPackages(pkg))].map((to) =>
-      toRelative({ from: fromDist(), to }),
+    roots: [fromRoot(), ...fileConfig.params().packageDirs.map((pkg) => fromPackages(pkg))].map(
+      (to) => toRelative({ from: fromDist(), to }),
     ),
 
     unusedIgnore: '^_',
-  } satisfies LintConfigModel,
+  }),
 });
 
-export { _config, config };
+export default config;

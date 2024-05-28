@@ -3,7 +3,7 @@ import { JwtImplementation } from '@lib/backend/auth/utils/JwtImplementation/Jwt
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { objectToEquality } from '@lib/backend/resource/utils/objectToEquality/objectToEquality';
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
-import { RequestContextModel } from '@lib/config/api/api.models';
+import { type RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,

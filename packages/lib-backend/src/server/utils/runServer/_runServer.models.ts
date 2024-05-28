@@ -1,4 +1,4 @@
-import { type ServerConfigModel } from '@lib/config/server/server.models';
+import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 
 export type _RunServerParamsModel = ServerConfigModel & {
   onClose(): Promise<void>;

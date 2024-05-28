@@ -1,12 +1,12 @@
 import {
-  type UseGraphQlModel,
-  type UseGraphQlParamsModel,
-} from '@lib/frontend/data/hooks/useGraphQl/useGraphQl.models';
-import { graphQlQuery } from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery';
+  type UseGraphqlModel,
+  type UseGraphqlParamsModel,
+} from '@lib/frontend/data/hooks/useGraphql/useGraphql.models';
+import { graphqlQuery } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery';
 import {
-  type GraphQlHttpResponseModel,
-  type GraphQlQueryHttpParamsModel,
-} from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery.models';
+  type GraphqlHttpResponseModel,
+  type GraphqlQueryHttpParamsModel,
+} from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import { useApi } from '@lib/frontend/http/hooks/useApi/useApi';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
@@ -14,16 +14,16 @@ import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { error } from '@lib/shared/logging/utils/logger/logger';
 
-export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel => {
+export const useGraphql = (params: UseGraphqlParamsModel = {}): UseGraphqlModel => {
   const { post } = useApi({ ...params, pathname: `api/${GRAPHQL}` });
 
   const postF = async <TParams, TResult, TName extends string = string>(
     params: TParams,
   ): Promise<Record<TName, TResult> | undefined> => {
-    const result = (await post({ params, url: '' })) as GraphQlHttpResponseModel<TResult, TName>;
-    const graphQlError = result?.errors?.at(0);
-    if (graphQlError) {
-      error(new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, graphQlError.message));
+    const result = (await post({ params, url: '' })) as GraphqlHttpResponseModel<TResult, TName>;
+    const graphqlError = result?.errors?.at(0);
+    if (graphqlError) {
+      error(new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, graphqlError.message));
     }
     return result && result.data;
   };
@@ -35,8 +35,8 @@ export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel 
       params: queryParams,
       type,
       variables,
-    }: GraphQlQueryHttpParamsModel<TParams, TResult, TName>): Promise<TResult | null> => {
-      const queryF = graphQlQuery<TParams, TResult, TName>({
+    }: GraphqlQueryHttpParamsModel<TParams, TResult, TName>): Promise<TResult | null> => {
+      const queryF = graphqlQuery<TParams, TResult, TName>({
         fields,
         name,
         params: queryParams,
@@ -55,10 +55,10 @@ export const useGraphQl = (params: UseGraphQlParamsModel = {}): UseGraphQlModel 
       TResult extends Array<unknown>,
       TName extends Array<string> = Array<string>,
     >(
-      params: Array<GraphQlQueryHttpParamsModel<TParams[number], TResult[number], TName[number]>>,
+      params: Array<GraphqlQueryHttpParamsModel<TParams[number], TResult[number], TName[number]>>,
     ): Promise<Array<TResult[number]>> => {
       const paramsF = params.map(({ fields, name, params: queryParams, type, variables }) => ({
-        query: graphQlQuery<TParams[number], TResult[number], TName[number]>({
+        query: graphqlQuery<TParams[number], TResult[number], TName[number]>({
           fields,
           name,
           params: queryParams,

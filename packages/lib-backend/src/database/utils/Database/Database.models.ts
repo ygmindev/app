@@ -4,10 +4,10 @@ import { type ResourceImplementationModel } from '@lib/shared/resource/utils/Res
 
 export type DatabaseModel = _DatabaseModel;
 
-export type RepositoryModel<TType, TForm = EntityResourceDataModel<TType>> = ResourceImplementationModel<
+export type RepositoryModel<
   TType,
-  TForm
-> & {
+  TForm = EntityResourceDataModel<TType>,
+> = ResourceImplementationModel<TType, TForm> & {
   clear(): Promise<void>;
   count(): Promise<number>;
 };

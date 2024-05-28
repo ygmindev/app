@@ -2,7 +2,7 @@ import { type PROXY_HANDLER } from '@lib/config/proxy/proxy.constants';
 import { type UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 
 export type ProxyConfigModel = {
-  configFile: string;
+  configDir: string;
   listen: Array<number>;
   routes?: Array<{
     match: Array<UriParamsModel>;

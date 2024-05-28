@@ -3,6 +3,8 @@ import { type I18nModel } from '@lib/shared/locale/locale.models';
 import { type Module } from 'i18next';
 
 export type InternationalizeConfigModel = {
+  isDebug?: boolean;
+
   isPreload: boolean;
 
   language?: string;
@@ -11,9 +13,9 @@ export type InternationalizeConfigModel = {
 
   languages: Array<WithIdModel & { label: string }>;
 
-  modules?: Array<Module>;
+  localePath?: string;
 
-  path?: string;
+  modules?: Array<Module>;
 };
 
 export type _InternationalizeConfigModel = I18nModel;

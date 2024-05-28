@@ -21,13 +21,7 @@ import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vike/server';
 
 export const _renderServer =
-  ({
-    initialize,
-    // publicPath,
-    render,
-    rootId,
-    ssrContextKeys,
-  }: _RenderServerParamsModel): _RenderServerModel =>
+  ({ initialize, render, rootId, ssrContextKeys }: _RenderServerParamsModel): _RenderServerModel =>
   async ({ Page, context, pageProps }) => {
     initialize && (await initialize());
     const queryClient = new QueryClient();
@@ -37,12 +31,8 @@ export const _renderServer =
     });
     const contextF: RootContextModel = merge([
       {
-        [QUERY]: {
-          client: queryClient.client,
-        },
-        [STATE]: {
-          initialState: await store.getStatePersisted(),
-        } as RootStateContextModel,
+        [QUERY]: { client: queryClient.client },
+        [STATE]: { initialState: await store.getStatePersisted() } as RootStateContextModel,
       },
       context,
     ]);

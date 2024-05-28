@@ -1,20 +1,23 @@
-// COMPLETE
 export type FileConfigModel = {
-  backupDir: string;
+  backupPath: string;
 
-  buildPath: string;
+  buildDir: string;
 
-  cachePath: string;
+  cacheDir: string;
 
   cleanPatterns: Array<string>;
 
-  distPath: string;
+  distDir: string;
 
   excludePatterns: Array<string>;
+
+  extensions: Array<string>;
+
+  packageDirs: Array<string>;
 
   packagePrefixes: Array<string>;
 
   prunePatterns: Array<string>;
 
-  publicPath: string;
+  publicDir: string;
 };

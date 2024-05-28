@@ -9,7 +9,7 @@ import {
 import { withAuthorizer } from '@lib/backend/resource/utils/withAuthorizer/withAuthorizer';
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
-import { RequestContextModel } from '@lib/config/api/api.models';
+import { type RequestContextModel } from '@lib/config/api/api.models';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';

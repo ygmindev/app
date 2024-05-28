@@ -11,7 +11,7 @@ import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constan
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
-import { default as _filter } from 'lodash/filter';
+import _filter from 'lodash/filter';
 import find from 'lodash/find';
 import reduce from 'lodash/reduce';
 

@@ -1,11 +1,11 @@
-import { type GraphQlQueryHttpParamsModel } from '@lib/frontend/data/utils/graphQlQuery/graphQlQuery.models';
+import { type GraphqlQueryHttpParamsModel } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import { type UseApiParamsModel } from '@lib/frontend/http/hooks/useApi/useApi.models';
 
-export type UseGraphQlParamsModel = UseApiParamsModel;
+export type UseGraphqlParamsModel = UseApiParamsModel;
 
-export type UseGraphQlModel = {
+export type UseGraphqlModel = {
   query<TParams, TResult, TName extends string = string>(
-    params: GraphQlQueryHttpParamsModel<TParams, TResult, TName>,
+    params: GraphqlQueryHttpParamsModel<TParams, TResult, TName>,
   ): Promise<TResult | null>;
 
   queryBatches<
@@ -13,6 +13,6 @@ export type UseGraphQlModel = {
     TResult extends Array<unknown>,
     TName extends Array<string> = Array<string>,
   >(
-    params: Array<GraphQlQueryHttpParamsModel<TParams[number], TResult[number], TName[number]>>,
+    params: Array<GraphqlQueryHttpParamsModel<TParams[number], TResult[number], TName[number]>>,
   ): Promise<Array<TResult[number]>>;
 };

@@ -1,65 +1,35 @@
-// COMPLETE
 import {
   type DefineConfigModel,
   type DefineConfigParamsModel,
 } from '@lib/config/utils/defineConfig/defineConfig.models';
 import { type PartialDeepModel } from '@lib/shared/core/core.models';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import isFunction from 'lodash/isFunction';
 
-const getConfigs = <TParams, TParamsConfig extends TParams | (() => TParams), TResult = undefined>({
-  config,
+const getConfigs = <TParams, TType = undefined>({
   overrides,
+  params,
   strategy,
-}: Pick<
-  DefineConfigParamsModel<TParams, TParamsConfig, TResult>,
-  'config' | 'overrides' | 'strategy'
->): TParams =>
-  merge(
-    [
-      ...(overrides
-        ? ((isFunction(overrides) ? overrides() : overrides) as Array<PartialDeepModel<TParams>>)
-        : []),
-      isFunction(config) ? config() : config,
-    ],
-    strategy,
-  );
+}: Pick<DefineConfigParamsModel<TParams, TType>, 'overrides' | 'params' | 'strategy'>): TParams =>
+  merge([...(overrides ? overrides() : []), params()], strategy);
 
-export const defineConfig = <
-  TParams,
-  TParamsConfig extends TParams | (() => TParams),
-  TResult = undefined,
->({
-  _config,
+export const defineConfig = <TParams, TType = undefined>({
   config,
   overrides,
+  params,
   strategy = MERGE_STRATEGY.DEEP_PREPEND,
-}: DefineConfigParamsModel<TParams, TParamsConfig, TResult>): DefineConfigModel<
-  TParams,
-  TParamsConfig,
-  TResult
-> =>
+}: DefineConfigParamsModel<TParams, TType>): DefineConfigModel<TParams, TType> =>
   ({
-    _config: _config
-      ? isFunction(config)
-        ? (params: PartialDeepModel<TParams>) =>
-            _config(
-              getConfigs({
-                config,
-                overrides: [
-                  params,
-                  ...(overrides ? (overrides as () => Array<PartialDeepModel<TParams>>)() : []),
-                ],
-                strategy,
-              } as Pick<
-                DefineConfigParamsModel<TParams, TParamsConfig, TResult>,
-                'config' | 'overrides' | 'strategy'
-              >),
-            )
-        : _config(getConfigs({ config, overrides, strategy }))
+    config: config
+      ? (paramsF?: PartialDeepModel<TParams>) =>
+          config(
+            getConfigs<TParams, TType>({
+              overrides: () => filterNil([paramsF, ...(overrides ? overrides() : [])]),
+              params,
+              strategy,
+            }),
+          )
       : undefined,
-    config: isFunction(config)
-      ? () => getConfigs({ config, overrides, strategy })
-      : getConfigs({ config, overrides, strategy }),
-  }) as DefineConfigModel<TParams, TParamsConfig, TResult>;
+    params: () => getConfigs({ overrides, params, strategy }),
+  }) as DefineConfigModel<TParams, TType>;

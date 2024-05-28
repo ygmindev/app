@@ -18,12 +18,12 @@ export const test: TaskParamsModel<TestParamsModel> = {
 
   task: [
     async ({ options, root }) => {
-      const { _config } = await importConfig<TestConfigModel, _TestConfigModel>('node/test/test', [
+      const { config } = await importConfig<TestConfigModel, _TestConfigModel>('node/test/test', [
         { match: options?.testMatch, root },
       ]);
       await runCLI(
         {
-          config: JSON.stringify(_config),
+          config: JSON.stringify(config),
           runInBand: true,
           watch: options?.isWatch,
         } as Config.Argv,

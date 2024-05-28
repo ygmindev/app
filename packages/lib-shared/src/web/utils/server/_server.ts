@@ -5,9 +5,8 @@ import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { _config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.server';
-import { _config as webConfig } from '@lib/config/web/web';
-import { WEB_CONFIG } from '@lib/config/web/web.constants';
+import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
+import { _web } from '@lib/config/node/web/_web';
 import { type CookieOptionModel } from '@lib/frontend/state/state.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
@@ -29,35 +28,36 @@ import { createServer } from 'vite';
 export const _server = async ({
   certificate,
   host,
+  internationalize,
   onError,
   onStart,
   port,
+  publicDir,
   root,
+  web,
 }: _ServerParamsModel): Promise<_ServerModel> => {
-  const { publicPath } = WEB_CONFIG;
-  const webConfigF = webConfig();
-  const internationalizeConfigF = internationalizeConfig();
+  const i18n = _internationalize(internationalize);
 
-  const { certificateDir, privateKeyFile, publicKeyFile } = certificate;
+  const { certificateDir, privateKeyFilename, publicKeyFilename } = certificate;
   const app = fastify({
     https: {
-      cert: readFileSync(joinPaths([certificateDir, publicKeyFile])),
-      key: readFileSync(joinPaths([certificateDir, privateKeyFile])),
+      cert: readFileSync(joinPaths([certificateDir, publicKeyFilename])),
+      key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
     } as SecureServerOptions,
   });
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);
-  await app.register(fastifyStatic, { prefix: `/${publicPath}/`, root: fromStatic(publicPath) });
+  await app.register(fastifyStatic, { prefix: `/${publicDir}/`, root: fromStatic(publicDir) });
   await app.register(fastifyCookie, {
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);
 
-  const { middlewares } = await createServer({ ...webConfigF, root });
+  const { middlewares } = await createServer({ ..._web(web), root });
   await app.use(middlewares);
 
   await app.register(
     i18nextMiddleware as unknown as FastifyPluginCallback,
-    { i18next: internationalizeConfigF } as FastifyRegisterOptions<Record<never, never>>,
+    { i18next: i18n } as FastifyRegisterOptions<Record<never, never>>,
   );
 
   app.get('*', async (req, res) => {

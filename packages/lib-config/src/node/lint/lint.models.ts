@@ -1,7 +1,7 @@
 import { type Linter } from 'eslint';
 
 export type LintConfigModel = {
-  configFile: string;
+  configDir: string;
 
   exclude: Array<string>;
 

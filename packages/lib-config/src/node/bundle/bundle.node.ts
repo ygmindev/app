@@ -1,18 +1,16 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { _config as _babelConfig } from '@lib/config/node/babel/babel.node';
-import { _bundle } from '@lib/config/node/bundle/_bundle';
-import { config as configBase } from '@lib/config/node/bundle/bundle.base';
+import configBase from '@lib/config/node/bundle/bundle.base';
+import {
+  type _BundleConfigModel,
+  type BundleConfigModel,
+} from '@lib/config/node/bundle/bundle.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const { _config, config } = defineConfig({
-  _config: _bundle,
-
-  config: configBase,
+const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
+  ...configBase,
 
   overrides: () => [
     {
-      babelConfig: _babelConfig,
-
       envPrefix: ['SERVER_'],
 
       watch: [fromPackages('lib-backend/src/**/*')],
@@ -20,4 +18,4 @@ const { _config, config } = defineConfig({
   ],
 });
 
-export { _config, config };
+export default config;

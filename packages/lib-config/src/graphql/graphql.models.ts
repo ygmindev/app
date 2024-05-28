@@ -8,8 +8,11 @@ import { type GraphQLSchema } from 'graphql';
 
 export type GraphqlConfigModel = {
   authorize(params: AuthorizeParamsModel): Promise<AuthorizeModel>;
+
   container: ContainerModel;
+
   resolvers: Array<ClassModel>;
+
   schemaDir: string;
 };
 
