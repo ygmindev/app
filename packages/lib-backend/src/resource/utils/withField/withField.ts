@@ -17,7 +17,7 @@ import {
   PrimaryKey,
   Property,
   type PropertyOptions,
-} from '@mikro-orm/core';
+} from '@mikro-orm/mongodb';
 import { Field, Float } from 'type-graphql';
 import { type ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 

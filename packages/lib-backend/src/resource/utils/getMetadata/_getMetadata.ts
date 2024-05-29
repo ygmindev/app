@@ -3,7 +3,7 @@ import {
   type _GetMetadataParamsModel,
 } from '@lib/backend/resource/utils/getMetadata/_getMetadata.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { type EntityMetadata } from '@mikro-orm/core';
+import { type EntityMetadata } from '@mikro-orm/mongodb';
 
 export const _getMetadata = <TType extends unknown>({
   Resource,

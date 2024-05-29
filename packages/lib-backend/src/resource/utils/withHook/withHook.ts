@@ -1,11 +1,10 @@
-import { BeforeCreate } from '@mikro-orm/core';
-
 import { HOOK_TYPE } from '@lib/backend/resource/utils/withHook/withHook.constants';
 import {
   type WithHookModel,
   type WithHookParamsModel,
 } from '@lib/backend/resource/utils/withHook/withHook.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
+import { BeforeCreate } from '@mikro-orm/mongodb';
 
 const getHook = ({ type }: WithHookParamsModel): PropertyDecorator => {
   switch (type) {

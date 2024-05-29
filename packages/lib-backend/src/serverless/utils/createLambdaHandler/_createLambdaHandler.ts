@@ -31,6 +31,7 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
   context: contextDefault = {},
   graphql,
   handler,
+  onInitialize,
   plugins,
   type,
   websocketUri,
@@ -45,6 +46,8 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
     const contextF: Context & ServerlessRequestContextModel = { ...contextDefault, ...context };
     contextF.callbackWaitsForEmptyEventLoop = false;
     contextF.pathname = event.requestContext.routeKey;
+
+    onInitialize && (await onInitialize());
 
     // authentication from header / query parameters
     if (plugins?.includes(LAMBDA_PLUGIN.AUTHENTICATION)) {

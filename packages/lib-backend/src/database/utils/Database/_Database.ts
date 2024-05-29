@@ -2,7 +2,11 @@ import { cleanDocument } from '@lib/backend/database/utils/cleanDocument/cleanDo
 import { type _DatabaseModel } from '@lib/backend/database/utils/Database/_Database.models';
 import { type RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
-import { type _DatabaseConfigModel } from '@lib/config/database/database.models';
+import { _database } from '@lib/config/database/_database';
+import {
+  type _DatabaseConfigModel,
+  type DatabaseConfigModel,
+} from '@lib/config/database/database.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
@@ -61,8 +65,8 @@ export class _Database implements _DatabaseModel {
   protected _config: _DatabaseConfigModel;
   protected _entityManager?: EntityManager;
 
-  constructor(config: _DatabaseConfigModel) {
-    this._config = config;
+  constructor(config: DatabaseConfigModel) {
+    this._config = _database(config);
   }
 
   async flush(): Promise<void> {

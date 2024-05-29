@@ -1,7 +1,7 @@
 import { type WithEntityParamsModel } from '@lib/backend/resource/utils/withEntity/withEntity.models';
 import { type ClassModel } from '@lib/shared/core/core.models';
 import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';
-import { Embeddable, Entity, Index } from '@mikro-orm/core';
+import { Embeddable, Entity, Index } from '@mikro-orm/mongodb';
 import { InputType, ObjectType } from 'type-graphql';
 
 export const withEntity = <TType extends unknown>({

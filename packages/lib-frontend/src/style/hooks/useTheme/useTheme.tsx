@@ -10,9 +10,9 @@ export const useTheme = (): UseThemeModel => {
   return useMemo<UseThemeModel>(() => {
     switch (brightness) {
       case STYLE_BRIGHTNESS.DARK:
-        return themeConfigBase.params();
-      default:
         return themeConfigDark.params();
+      default:
+        return themeConfigBase.params();
     }
   }, [brightness]);
 };

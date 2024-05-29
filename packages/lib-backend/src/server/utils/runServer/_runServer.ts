@@ -4,6 +4,7 @@ import {
   type _RunServerParamsModel,
 } from '@lib/backend/server/utils/runServer/_runServer.models';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
+import graphqlConfig from '@lib/config/graphql/graphql';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { uri } from '@lib/shared/http/utils/uri/uri';
@@ -34,12 +35,12 @@ export const _runServer = async ({
 }: _RunServerParamsModel): Promise<_RunServerModel> => {
   await onInitialize();
 
-  const { certificateDir, privateKeyFile, publicKeyFile } = certificate;
+  const { certificateDir, privateKeyFilename, publicKeyFilename } = certificate;
   const app = fastify({
     disableRequestLogging: true,
     https: {
-      cert: readFileSync(joinPaths([certificateDir, publicKeyFile])),
-      key: readFileSync(joinPaths([certificateDir, privateKeyFile])),
+      cert: readFileSync(joinPaths([certificateDir, publicKeyFilename])),
+      key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
     },
     logger: new _Logger(),
   });
@@ -63,7 +64,7 @@ export const _runServer = async ({
     );
     switch (type) {
       case API_ENDPOINT_TYPE.GRAPHQL: {
-        const schema = graphqlConfig();
+        const schema = graphqlConfig.config();
         const yoga = createYoga({ logging: { debug, error, info, warn }, schema });
         app.route({
           handler: async (req, reply) => {

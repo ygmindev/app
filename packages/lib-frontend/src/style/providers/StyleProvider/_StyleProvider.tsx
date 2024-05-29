@@ -10,9 +10,9 @@ export const _StyleProvider: FCModel<_StyleProviderPropsModel> = ({ children, va
   const theme = useMemo(() => {
     switch (value?.brightness) {
       case STYLE_BRIGHTNESS.DARK:
-        return themeConfigBase.config();
-      default:
         return themeConfigDark.config();
+      default:
+        return themeConfigBase.config();
     }
   }, [value?.brightness]);
   return <Provider theme={theme}>{children}</Provider>;

@@ -12,7 +12,7 @@ import {
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
-import { Ref } from '@mikro-orm/core';
+import { Ref } from '@mikro-orm/mongodb';
 
 @withEntity({ isRepository: true, name: ACCESS_RESOURCE_NAME })
 export class Access extends EntityResource implements AccessModel {
