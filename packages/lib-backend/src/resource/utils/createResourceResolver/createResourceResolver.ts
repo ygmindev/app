@@ -37,14 +37,15 @@ export const createResourceResolver = <
   TForm,
   TRoot
 > => {
-  const { prototype } = ResourceImplementation;
-  const createExists = prototype.create !== undefined;
-  const createManyExists = prototype.createMany !== undefined;
-  const getExists = prototype.get !== undefined;
-  const getManyExists = prototype.getMany !== undefined;
-  const getConnectionExists = prototype.getConnection !== undefined;
-  const updateExists = prototype.update !== undefined;
-  const removeExists = prototype.remove !== undefined;
+  const { create, createMany, get, getConnection, getMany, remove, update } =
+    ResourceImplementation.prototype;
+  const createExists = create !== undefined;
+  const createManyExists = createMany !== undefined;
+  const getExists = get !== undefined;
+  const getManyExists = getMany !== undefined;
+  const getConnectionExists = getConnection !== undefined;
+  const updateExists = update !== undefined;
+  const removeExists = remove !== undefined;
 
   @withResolver()
   class ResourceResolver

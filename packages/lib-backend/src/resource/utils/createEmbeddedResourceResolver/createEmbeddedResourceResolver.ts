@@ -4,6 +4,7 @@ import {
   type CreateEmbeddedResourceResolverParamsModel,
 } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver.models';
 import { createResourceResolver } from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver';
+import { ClassModel } from '@lib/shared/core/core.models';
 import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
@@ -14,8 +15,9 @@ export const createEmbeddedResourceResolver = <
 >(
   params: CreateEmbeddedResourceResolverParamsModel<TType, TForm, TRoot>,
 ): CreateEmbeddedResourceResolverModel<TType, TForm, TRoot> => {
-  const ResourceResolver = createResourceResolver<TType, TForm, TRoot>(params);
   @withResolver()
-  class EmbeddedResourceResolver extends ResourceResolver {}
+  class EmbeddedResourceResolver extends (createResourceResolver<TType, TForm, TRoot>(
+    params,
+  ) as ClassModel) {}
   return EmbeddedResourceResolver as CreateEmbeddedResourceResolverModel<TType, TForm, TRoot>;
 };

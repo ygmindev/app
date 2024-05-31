@@ -11,7 +11,7 @@ export const staticServer = ({
   port = process.env.SERVER_APP_STATIC_PORT,
 }: StaticServerParamsModel): StaticServerModel =>
   fromExecutable(
-    `http-server ${pathname} -a ${host.split('://')[1]} --cors --port ${port} ${
+    `http-server ${pathname} ${host ? `-a ${host.split('://')[1]}` : ''} --cors --port ${port} ${
       isOpen ? '--o' : ''
     }`,
   );

@@ -1,3 +1,4 @@
+declare module '@bunchtogether/vite-plugin-flow';
 declare module 'geolocator';
 declare module 'i18next-parser';
 declare module 'inquirer-directory';

@@ -52,7 +52,7 @@ export type ResourceImplementationModel<
 export type ResourceImplementationBeforeDecoratorModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = (
   params: { input?: InputModel<TMethod, TType, TForm, TRoot> },
@@ -62,7 +62,7 @@ export type ResourceImplementationBeforeDecoratorModel<
 export type ResourceImplementationAfterDecoratorModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = (
   params: {
@@ -74,7 +74,7 @@ export type ResourceImplementationAfterDecoratorModel<
 
 export type ResourceImplementationDecoratorModel<
   TType,
-  TForm,
+  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = RootInputModel<TRoot> & {
   afterCreate?: ResourceImplementationAfterDecoratorModel<

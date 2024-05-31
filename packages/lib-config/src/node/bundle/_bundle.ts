@@ -109,9 +109,9 @@ export const _bundle = ({
       outDir: joinPaths([fromWorking(), buildDir]),
 
       rollupOptions: {
-        external: externals,
-
         ...(entryFilename ? { input: entryFilename } : {}),
+
+        external: externals,
 
         output: {
           chunkFileNames: '[name].js',
@@ -120,7 +120,19 @@ export const _bundle = ({
           preserveModules: true,
         },
 
-        plugins: [resolve({ modulesOnly: true })],
+        // plugins: [resolve({ modulesOnly: true }), flowPlugin()],
+        plugins: [
+          resolve({ modulesOnly: true }),
+          babel &&
+            babelPlugin({
+              babelHelpers: 'runtime',
+              compact: process.env.NODE_ENV === 'production',
+              minified: process.env.NODE_ENV === 'production',
+              plugins: babel.plugins,
+              presets: babel.presets,
+              skipPreflightCheck: true,
+            } as RollupBabelInputPluginOptions),
+        ],
       },
       watch:
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
@@ -133,8 +145,9 @@ export const _bundle = ({
     envPrefix,
 
     esbuild: {
+      // exclude: [],
+      // include: /.*\.[tj]sx?$/,
       loader: 'tsx',
-
       // sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'linked',
     },
 
@@ -146,9 +159,7 @@ export const _bundle = ({
 
         keepNames: true,
 
-        loader: {
-          '.js': 'tsx',
-        },
+        loader: { '.js': 'tsx' },
 
         mainFields,
 
@@ -178,23 +189,25 @@ export const _bundle = ({
         typescript: { tsconfigPath: tsconfigDir },
       }),
 
-      ([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
+      ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
         process.env.ENV_PLATFORM,
-      ) && react({ tsDecorators: true }),
+      )
+        ? [react({ tsDecorators: true })]
+        : []),
 
       provide && inject(provide),
 
       viteCommonjs(),
 
-      babel &&
-        babelPlugin({
-          babelHelpers: 'runtime',
-          compact: process.env.NODE_ENV === 'production',
-          minified: process.env.NODE_ENV === 'production',
-          plugins: babel.plugins,
-          presets: babel.presets,
-          skipPreflightCheck: true,
-        } as RollupBabelInputPluginOptions),
+      // babel &&
+      //   babelPlugin({
+      //     babelHelpers: 'runtime',
+      //     compact: process.env.NODE_ENV === 'production',
+      //     minified: process.env.NODE_ENV === 'production',
+      //     plugins: babel.plugins,
+      //     presets: babel.presets,
+      //     skipPreflightCheck: true,
+      //   } as RollupBabelInputPluginOptions),
 
       process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
 

@@ -1,4 +1,5 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
+import { esbuildFlowPlugin } from '@bunchtogether/vite-plugin-flow';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
@@ -37,11 +38,23 @@ export const _plugins = ({
   transpiles,
 }: Pick<BundleConfigModel, 'transpiles' | 'rootDirs'>): Array<Plugin> =>
   filterNil([
+    {
+      name: 'js-to-jsx',
+      setup(build) {
+        build.onLoad({ filter: /node_modules\/.*\.[j|t]s?$/ }, (args) => ({
+          contents: readFileSync(args.path, 'utf8'),
+          loader: 'tsx',
+        }));
+      },
+    } as Plugin,
+
     esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
 
     transpiles && esbuildCommonjs(transpiles),
 
     excludeVendorFromSourceMap(),
+
+    esbuildFlowPlugin(),
 
     process.env.ENV_PLATFORM === PLATFORM.NODE &&
       nodeExternalsPlugin({

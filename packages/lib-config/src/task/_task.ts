@@ -18,28 +18,26 @@ export const _task = ({
 }: TaskConfigModel): _TaskConfigModel => {
   const taskRunner = Container.get(TaskRunner);
 
-  const tasks = filterNil([
-    ...packageDirs.reduce<Array<TaskParamsModel<unknown>>>((result, target) => {
-      let resultF = result;
+  let tasks = packageDirs.reduce<Array<TaskParamsModel<unknown>>>((result, target) => {
+    let resultF = result;
 
-      // Package tasks
-      const path = fromPackages(target, configFilename);
-      if (existsSync(path)) {
-        const tasks = requireInterop<Array<TaskParamsModel<unknown>>>(path);
-        resultF = [...resultF, ...tasks.map((task) => ({ ...task, target }))];
-      }
+    // Package tasks
+    const path = fromPackages(target, configFilename);
+    if (existsSync(path)) {
+      const tasks = requireInterop<Array<TaskParamsModel<unknown>>>(path);
+      resultF = [...resultF, ...tasks.map((task) => ({ ...task, target }))];
+    }
 
-      // Task files
-      resultF = [
-        ...resultF,
-        ...fromGlobs([joinPaths(['*/src/**/*'], { extension: taskExtension })], {
-          isAbsolute: true,
-          root: fromPackages(target),
-        }).map((path) => requireInterop<TaskParamsModel<unknown>>(path)),
-      ];
+    return resultF;
+  }, []);
 
-      return resultF;
-    }, []),
+  // Task files
+  tasks = filterNil([
+    ...tasks,
+    ...fromGlobs([joinPaths(['*/src/**/*'], { extension: taskExtension })], {
+      isAbsolute: true,
+      root: fromPackages(),
+    }).map((path) => requireInterop<TaskParamsModel<unknown>>(path)),
 
     // All tasks
     {

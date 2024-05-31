@@ -51,9 +51,7 @@ const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
         'react/jsx-runtime',
         'redux-persist',
         'thenby',
-        ...fromGlobs(['react-native-!(codegen|gradle-plugin)'], {
-          root: fromModules(),
-        }),
+        ...fromGlobs(['react-native-!(codegen|gradle-plugin)'], { root: fromModules() }),
       ],
 
       watch: [fromPackages('lib-frontend/src/**/*')],
