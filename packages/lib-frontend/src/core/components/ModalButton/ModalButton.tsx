@@ -1,12 +1,13 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { type ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { type ModalRefModel } from '@lib/frontend/core/components/Modal/Modal.models';
 import { type ModalButtonPropsModel } from '@lib/frontend/core/components/ModalButton/ModalButton.models';
-import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { type RLFCModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { forwardRef, useState } from 'react';
 
 export const ModalButton: RLFCModel<ModalRefModel, ModalButtonPropsModel> = forwardRef(
-  ({ element, onClose, onPress, ref: _, title, ...props }, ref) => {
+  ({ element, onClose, onPress, title, ...props }, ref) => {
     const [isOpen, isOpenSet] = useState<boolean>();
 
     const handleToggle = (isOpen?: boolean): void => {
@@ -17,7 +18,7 @@ export const ModalButton: RLFCModel<ModalRefModel, ModalButtonPropsModel> = forw
     return (
       <>
         <Button
-          {...props}
+          {...(props as Omit<RLFCPropsModel<ButtonPropsModel>, 'ref'>)}
           onPress={async () => {
             onPress && (await onPress());
             handleToggle(!isOpen);

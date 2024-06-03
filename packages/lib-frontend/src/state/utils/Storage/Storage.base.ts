@@ -2,7 +2,7 @@ import {
   type StorageBaseParamsModel,
   type StorageModel,
 } from '@lib/frontend/state/utils/Storage/Storage.models';
-import { debug } from '@lib/shared/logging/utils/Logger/_Logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export class Storage implements StorageModel {
   protected storages?: Array<StorageModel>;
@@ -13,7 +13,7 @@ export class Storage implements StorageModel {
 
   async getItem<TType extends string = string>(key: string): Promise<TType | null> {
     if (this.storages) {
-      process.env.NODE_ENV === 'development' && debug('storage get', key);
+      process.env.NODE_ENV === 'development' && logger.debug('storage get', key);
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {

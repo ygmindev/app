@@ -6,7 +6,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
-import { error } from '@lib/shared/logging/utils/Logger/Logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { useContext } from 'react';
 
 export const useErrorContext = (): UseErrorContextModel => {
@@ -17,7 +17,7 @@ export const useErrorContext = (): UseErrorContextModel => {
   const errorContextGetF = (e: Error): ErrorContextModel => {
     let errorContext = errorContextGet && errorContextGet(e);
     if (!errorContext) {
-      error(e);
+      logger.error(e);
       switch ((e as HttpError).statusCode) {
         case HTTP_STATUS_CODE.FORBIDDEN: {
           errorContext = { description: ({ t }) => t('core:errorForbidden'), icon: 'ban' };

@@ -17,9 +17,9 @@ export class _Logger implements _LoggerModel {
     });
   }
 
-  debug: _LogModel = (...args) =>  this._logger.debug(args);
-  error: _LogModel = (...args) =>  this._logger.error(args);
-  info: _LogModel = (...args) =>  this._logger.info(args);
-  trace: _LogModel = (...args) =>  this._logger.trace(args);
-  warn: _LogModel = (...args) =>  this._logger.warn(args);
+  debug: _LogModel = (args) => this._logger.debug(args);
+  error: _LogModel = (args) => this._logger.error(args);
+  info: _LogModel = (args) => this._logger.info(args);
+  trace: _LogModel = (args) => this._logger.trace(args);
+  warn: _LogModel = (args) => this._logger.warn(args);
 }

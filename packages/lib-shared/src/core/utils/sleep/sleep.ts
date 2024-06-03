@@ -1,5 +1,5 @@
 import { type SleepParamsModel } from '@lib/shared/core/utils/sleep/sleep.models';
-import { info } from '@lib/shared/logging/utils/Logger/Logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const sleep = (...[duration = 0, options]: SleepParamsModel): Promise<void> => {
   const isVerboseF =
@@ -10,7 +10,7 @@ export const sleep = (...[duration = 0, options]: SleepParamsModel): Promise<voi
   const timer =
     isVerboseF &&
     setInterval(() => {
-      info(`${countdown}s`);
+      logger.debug(`${countdown}s`);
       countdown--;
       if (countdown <= 0) {
         clearInterval(timer as unknown as number);

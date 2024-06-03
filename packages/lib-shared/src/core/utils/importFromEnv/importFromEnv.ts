@@ -6,7 +6,7 @@ import {
 } from '@lib/shared/core/utils/importFromEnv/importFromEnv.models';
 import { requireInterop } from '@lib/shared/core/utils/requireInterop/requireInterop';
 import { resolveFirst } from '@lib/shared/core/utils/resolveFirst/resolveFirst';
-import { debug } from '@lib/shared/logging/utils/Logger/Logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const importFromEnv = async <TType extends unknown>(
   params: ImportFromEnvParamsModel,
@@ -15,7 +15,7 @@ export const importFromEnv = async <TType extends unknown>(
     fileConfig.params().extensions.map((extension) => async () => {
       const name = extension ? joinPaths([params], { extension }) : params;
       const result = requireInterop<TType>(name);
-      result && debug('imported', name);
+      result && logger.debug('imported', name);
       return result;
     }),
   );

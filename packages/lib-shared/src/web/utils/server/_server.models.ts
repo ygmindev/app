@@ -8,7 +8,6 @@ export type _ServerParamsModel = UriModel &
   Pick<ServerConfigModel, 'certificate'> &
   Pick<FileConfigModel, 'publicDir'> & {
     internationalize: InternationalizeConfigModel;
-    onError(error: Error): void;
     onStart(): void;
     root?: string;
     web: WebConfigModel;

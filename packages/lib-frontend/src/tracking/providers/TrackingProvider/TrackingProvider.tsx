@@ -3,7 +3,7 @@ import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { type TrackingProviderPropsModel } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider.models';
-import { warn } from '@lib/shared/logging/utils/Logger/Logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import { useEffect } from 'react';
 
@@ -15,7 +15,7 @@ export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ childre
     if (!isServer) {
       process.env.APP_AMPLITUDE_API_KEY
         ? void initialize(process.env.APP_AMPLITUDE_API_KEY)
-        : warn('Tracking API key is missing');
+        : logger.warn('Tracking API key is missing');
     }
   }, [initialize]);
 

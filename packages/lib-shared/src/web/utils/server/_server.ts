@@ -10,7 +10,7 @@ import { _web } from '@lib/config/node/web/_web';
 import { type CookieOptionModel } from '@lib/frontend/state/state.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
-import { info } from '@lib/shared/logging/utils/Logger/Logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { STATE } from '@lib/shared/state/state.constants';
 import { render } from '@lib/shared/web/utils/render/render';
@@ -29,7 +29,6 @@ export const _server = async ({
   certificate,
   host,
   internationalize,
-  onError,
   onStart,
   port,
   publicDir,
@@ -61,7 +60,7 @@ export const _server = async ({
   );
 
   app.get('*', async (req, res) => {
-    info(req.method, req.url);
+    logger.info(req.method, req.url);
 
     const { cookies, i18n, language, url } = req;
     const { error, redirectTo, response } = await render({
@@ -99,6 +98,6 @@ export const _server = async ({
     await app.listen({ port: toNumber(port) });
     onStart();
   } catch (e) {
-    e && onError(e as Error);
+    e && logger.error(e as Error);
   }
 };

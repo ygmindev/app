@@ -12,7 +12,7 @@ import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
-import { error } from '@lib/shared/logging/utils/Logger/Logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const useGraphql = (params: UseGraphqlParamsModel = {}): UseGraphqlModel => {
   const { post } = useApi({ ...params, pathname: `api/${GRAPHQL}` });
@@ -23,7 +23,7 @@ export const useGraphql = (params: UseGraphqlParamsModel = {}): UseGraphqlModel 
     const result = (await post({ params, url: '' })) as GraphqlHttpResponseModel<TResult, TName>;
     const graphqlError = result?.errors?.at(0);
     if (graphqlError) {
-      error(new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, graphqlError.message));
+      logger.error(new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, graphqlError.message));
     }
     return result && result.data;
   };

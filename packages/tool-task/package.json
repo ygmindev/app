@@ -60,6 +60,7 @@
     "dotenv": "^16.4.5",
     "esbuild": "^0.21.4",
     "esbuild-node-externals": "^1.13.0",
+    "esbuild-plugin-pino": "^2.1.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",

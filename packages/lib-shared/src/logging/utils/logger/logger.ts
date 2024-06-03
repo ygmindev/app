@@ -1,9 +1,9 @@
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger';
 import {
   type _LoggerModel,
   type _LoggerParamsModel,
 } from '@lib/shared/logging/utils/Logger/_Logger.models';
-import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger';
 import { type LoggerModel, type LogModel } from '@lib/shared/logging/utils/Logger/Logger.models';
 import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';

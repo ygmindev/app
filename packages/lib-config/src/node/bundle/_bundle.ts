@@ -135,6 +135,7 @@ export const _bundle = ({
           //   } as RollupBabelInputPluginOptions),
         ],
       },
+
       watch:
         process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
     },

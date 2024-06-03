@@ -8,6 +8,7 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
+// import pinoPlugin from 'esbuild-plugin-pino';
 import { readFileSync } from 'fs';
 import { sep } from 'path';
 import posix from 'path/posix';
@@ -47,6 +48,8 @@ export const _plugins = ({
         }));
       },
     } as Plugin,
+
+    // pinoPlugin({ transports: ['pino-pretty'] }),
 
     esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
 
