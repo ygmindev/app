@@ -1,3 +1,5 @@
+import { GetConnectionModel } from '@lib/backend/database/utils/getConnection/getConnection.models';
+import { ResourceClassModel } from '@lib/backend/resource/resource.models';
 import { createConnection } from '@lib/backend/resource/utils/createConnection/createConnection';
 import {
   type CreateOutputModel,
@@ -27,13 +29,18 @@ export const createOutput = <TMethod extends ResourceMethodTypeModel, TType, TRo
 
   @withEntity({ name: nameF })
   class Output extends (Root ?? class {}) implements OutputModel<TMethod, TType, TRoot> {
-    @withField({
-      Resource: () => Result,
+    @withField<
+      TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION ? GetConnectionModel<TType> : TType
+    >({
+      Resource: () =>
+        Result as ResourceClassModel<
+          TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION ? GetConnectionModel<TType> : TType
+        >,
       isArray: method === RESOURCE_METHOD_TYPE.GET_MANY,
       type: PROPERTY_TYPE.RESOURCE,
     })
     result?: ResultModel<TMethod, TType>;
   }
 
-  return Output;
+  return Output as CreateOutputModel<TMethod, TType, TRoot>;
 };

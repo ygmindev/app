@@ -18,6 +18,11 @@ const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       //   { from: 'react-dom', to: fromModules('react-dom/cjs/react-dom.production.min.js') },
       // ],
 
+      // aliases: [
+      //   { from: 'react', to: fromModules('react/cjs/react.production.min.js') },
+      //   { from: 'react-dom', to: fromModules('react-dom/cjs/react-dom.production.min.js') },
+      // ],
+
       babel: {
         plugins: [
           ['transform-react-remove-prop-types', { removeImport: true }] as [

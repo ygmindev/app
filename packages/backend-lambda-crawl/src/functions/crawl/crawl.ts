@@ -1,8 +1,5 @@
-import { S3Client } from '@aws-sdk/client-s3';
-import { Upload } from '@aws-sdk/lib-storage';
 import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
 import { ConcurrentQueue } from '@lib/shared/core/utils/ConcurrentQueue/ConcurrentQueue';
-import { guid } from '@lib/shared/core/utils/guid/guid';
 import { runWithRetry } from '@lib/shared/core/utils/runWithRetry/runWithRetry';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { slug } from '@lib/shared/core/utils/slug/slug';
@@ -249,296 +246,280 @@ export const main = createLambdaHandler<{
         }
 
         try {
-          const itemQueue = new ConcurrentQueue();
-          const row: Record<string, unknown> = productCache[url] || {};
+          if (url) {
+            const itemQueue = new ConcurrentQueue();
+            const row: Record<string, unknown> = productCache[url] || {};
 
-          console.warn(`### cache?: ${url}`);
-          console.warn(`### cache!: ${stringify(row)}`);
+            console.warn(`### cache?: ${url}`);
+            console.warn(`### cache!: ${stringify(row)}`);
 
-          COLUMNS.forEach((column) => (row[column] = row[column] || ''));
-          row['Product Category Full Name'] = category;
-          row['Source URL'] = url;
-          row['Source Page'] = pageIndex + 1;
-          row['Source Index'] = count;
+            COLUMNS.forEach((column) => (row[column] = row[column] || ''));
+            row['Product Category Full Name'] = category;
+            row['Source URL'] = url;
+            row['Source Page'] = pageIndex + 1;
+            row['Source Index'] = count;
 
-          await runWithRetry(async () => screen.open(url), { delay: 1000, retries: 5 });
-          await screen.find({ value: '#product-section-overview' }).then((h) => h?.press());
-          await screen.find({ value: '#product-section-key-feat' }).then((h) => h?.press());
+            await runWithRetry(async () => screen.open(url), { delay: 1000, retries: 5 });
+            await screen.find({ value: '#product-section-overview' }).then((h) => h?.press());
+            await screen.find({ value: '#product-section-key-feat' }).then((h) => h?.press());
 
-          // // category
-          // itemQueue.add(async () => {
-          //   let tags = [];
-          //   const categories = await screen
-          //     .findAll({ value: '.breadcrumb__item' })
-          //     .then((handles) =>
-          //       handles.map((h) => h?.find({ value: 'a' }).then((h) => h?.text())),
-          //     );
-          //   for (const c of categories) {
-          //     const categoryF = await c;
-          //     categoryF && categoryF !== 'Home' && tags.push(categoryF);
-          //   }
-          //   tags = uniq(tags);
-          //   row.Tags = tags ? tags.join(',') : '';
-          // });
+            // // category
+            // itemQueue.add(async () => {
+            //   let tags = [];
+            //   const categories = await screen
+            //     .findAll({ value: '.breadcrumb__item' })
+            //     .then((handles) =>
+            //       handles.map((h) => h?.find({ value: 'a' }).then((h) => h?.text())),
+            //     );
+            //   for (const c of categories) {
+            //     const categoryF = await c;
+            //     categoryF && categoryF !== 'Home' && tags.push(categoryF);
+            //   }
+            //   tags = uniq(tags);
+            //   row.Tags = tags ? tags.join(',') : '';
+            // });
 
-          // brand
-          itemQueue.add(async () => {
-            if (!((row['Vendor'] ?? '') as string).length) {
-              row.Vendor =
-                (await screen.find({ value: '.brand' }).then((h) => h?.text())) ?? 'Unbranded';
-            }
-          });
-
-          // title
-          itemQueue.add(async () => {
-            if (!((row['Product title'] ?? '') as string).length) {
-              row['Product title'] =
-                (await screen.find({ value: '.title' }).then((h) => h?.text())) ?? '';
-              row['Product title'] && (row.Handle = slug(row['Product title'] as string));
-            }
-          });
-
-          const descriptionsContainer = await screen.find({
-            value: '#product-overview-desktop-content',
-          });
-
-          // description
-          if (descriptionsContainer) {
+            // brand
             itemQueue.add(async () => {
-              row['Product description'] = await descriptionsContainer
-                .find({ value: '.sui-flex-col' })
-                .then((h) => h?.find({ value: '.sui-w-full' }))
-                .then((h) => h?.content());
+              if (!((row['Vendor'] ?? '') as string).length) {
+                row.Vendor =
+                  (await screen.find({ value: '.brand' }).then((h) => h?.text())) ?? 'Unbranded';
+              }
+            });
 
-              if (row['Product description']) {
-                row['Product description'] = (row['Product description'] as string)
-                  .replace(/<a\b[^>]*>(.*?)<\/a>/i, '')
-                  .replace(
-                    '<li data-testid="bullet-list-item"><a href="https://www.homedepot.com/c/Return_Policy" class="sui-font-regular sui-text-base sui-tracking-normal sui-normal-case sui-line-clamp-unset sui-text-primary focus-visible:sui-bg-focus focus-visible:sui-outline-none sui-underline" target="_blank">Return Policy</a></li>',
-                    '',
+            // title
+            itemQueue.add(async () => {
+              if (!((row['Product title'] ?? '') as string).length) {
+                row['Product title'] =
+                  (await screen.find({ value: '.title' }).then((h) => h?.text())) ?? '';
+                row['Product title'] && (row.Handle = slug(row['Product title'] as string));
+              }
+            });
+
+            const descriptionsContainer = await screen.find({
+              value: '#product-overview-desktop-content',
+            });
+
+            // description
+            if (descriptionsContainer) {
+              itemQueue.add(async () => {
+                row['Product description'] = await descriptionsContainer
+                  .find({ value: '.sui-flex-col' })
+                  .then((h) => h?.find({ value: '.sui-w-full' }))
+                  .then((h) => h?.content());
+
+                if (row['Product description']) {
+                  row['Product description'] = (row['Product description'] as string)
+                    .replace(/<a\b[^>]*>(.*?)<\/a>/i, '')
+                    .replace(
+                      '<li data-testid="bullet-list-item"><a href="https://www.homedepot.com/c/Return_Policy" class="sui-font-regular sui-text-base sui-tracking-normal sui-normal-case sui-line-clamp-unset sui-text-primary focus-visible:sui-bg-focus focus-visible:sui-outline-none sui-underline" target="_blank">Return Policy</a></li>',
+                      '',
+                    );
+
+                  const split = (row['Product description'] as string).split(
+                    '<div class="sui-flex sui-flex-col sui-gap-2"><h3 class="sui-h3-bold sui-line-clamp-unset sui-text-primary">Product Information',
                   );
-
-                const split = (row['Product description'] as string).split(
-                  '<div class="sui-flex sui-flex-col sui-gap-2"><h3 class="sui-h3-bold sui-line-clamp-unset sui-text-primary">Product Information',
-                );
-                row['Product description'] =
-                  split.length > 1 ? split[0] : row['Product description'];
-              }
-            });
-          }
-
-          // price
-          itemQueue.add(async () => {
-            const priceContainer = await screen.find({ value: '.price-format__main-price' });
-            if (priceContainer) {
-              const spans = await priceContainer.findAll({ value: 'span' });
-              const dollar = await spans[1]?.text();
-              const cent = await spans[3]?.text();
-              row['Cost per item'] = toNumber(`${dollar ?? 0}.${cent ?? 0}`);
+                  row['Product description'] =
+                    split.length > 1 ? split[0] : row['Product description'];
+                }
+              });
             }
-          });
 
-          // ids
-          itemQueue.add(async () => {
-            row['SKU (Stock Keeping Unit)'] = await screen
-              .find({ type: SELECTOR_TYPE.TEXT, value: 'Store SKU #' })
-              .then((h) => h?.find({ value: 'span' }).then((h) => h?.content()));
-          });
-          itemQueue.add(async () => {
-            row['Barcode (ISBN, UPC, GTIN, etc.)'] = await screen
-              .find({ type: SELECTOR_TYPE.TEXT, value: 'Model #' })
-              .then((h) => h?.find({ value: 'span' }).then((h) => h?.content()));
-          });
-
-          const specificationsContainer = await screen.find({
-            value: '#product-section-specifications',
-          });
-          if (specificationsContainer) {
-            // dimensions
+            // price
             itemQueue.add(async () => {
-              const v = await specificationsContainer
-                .find({ type: SELECTOR_TYPE.TEXT, value: 'ength (ft' })
-                .then((h) => h?.parent())
-                .then((h) => h?.next())
-                .then((h) => h?.text())
-                .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
-              if (v) {
-                row['Meta Field DimensionLength'] = JSON.stringify({ unit: 'ft', value: v });
+              const priceContainer = await screen.find({
+                value: '.price-detailed__wrapper .price-format__main-price',
+              });
+              if (priceContainer) {
+                const spans = await priceContainer.findAll({ value: 'span' });
+                const dollar = await spans[1]?.text();
+                const cent = await spans[3]?.text();
+                row['Cost per item'] = toNumber(`${dollar ?? 0}.${cent ?? 0}`);
               }
             });
 
+            // ids
             itemQueue.add(async () => {
-              const v = await specificationsContainer
-                .find({ type: SELECTOR_TYPE.TEXT, value: 'ength (in' })
-                .then((h) => h?.parent())
-                .then((h) => h?.next())
-                .then((h) => h?.text())
-                .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
-              if (v) {
-                row['Meta Field DimensionLength'] = JSON.stringify({ unit: 'in', value: v });
-              }
+              row['SKU (Stock Keeping Unit)'] = await screen
+                .find({ type: SELECTOR_TYPE.TEXT, value: 'Store SKU #' })
+                .then((h) => h?.find({ value: 'span' }).then((h) => h?.content()));
+            });
+            itemQueue.add(async () => {
+              row['Barcode (ISBN, UPC, GTIN, etc.)'] = await screen
+                .find({ type: SELECTOR_TYPE.TEXT, value: 'Model #' })
+                .then((h) => h?.find({ value: 'span' }).then((h) => h?.content()));
             });
 
-            itemQueue.add(async () => {
-              const v = await specificationsContainer
-                .find({ type: SELECTOR_TYPE.TEXT, value: 'idth (ft' })
-                .then((h) => h?.parent())
-                .then((h) => h?.next())
-                .then((h) => h?.text())
-                .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
-              if (v) {
-                row['Meta Field DimensionWidth'] = JSON.stringify({ unit: 'ft', value: v });
-              }
+            const specificationsContainer = await screen.find({
+              value: '#product-section-specifications',
             });
+            if (specificationsContainer) {
+              // dimensions
+              itemQueue.add(async () => {
+                const v = await specificationsContainer
+                  .find({ type: SELECTOR_TYPE.TEXT, value: 'ength (ft' })
+                  .then((h) => h?.parent())
+                  .then((h) => h?.next())
+                  .then((h) => h?.text())
+                  .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
+                  .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
+                if (v) {
+                  row['Meta Field DimensionLength'] = JSON.stringify({ unit: 'ft', value: v });
+                }
+              });
 
-            itemQueue.add(async () => {
-              const v = await specificationsContainer
-                .find({ type: SELECTOR_TYPE.TEXT, value: 'idth (in' })
-                .then((h) => h?.parent())
-                .then((h) => h?.next())
-                .then((h) => h?.text())
-                .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
-              if (v) {
-                row['Meta Field DimensionWidth'] = JSON.stringify({ unit: 'in', value: v });
-              }
-            });
+              itemQueue.add(async () => {
+                const v = await specificationsContainer
+                  .find({ type: SELECTOR_TYPE.TEXT, value: 'ength (in' })
+                  .then((h) => h?.parent())
+                  .then((h) => h?.next())
+                  .then((h) => h?.text())
+                  .then((h) => h?.replace(' in.', '').replace(' in', ''))
+                  .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
+                if (v) {
+                  row['Meta Field DimensionLength'] = JSON.stringify({ unit: 'in', value: v });
+                }
+              });
 
-            itemQueue.add(async () => {
-              const v = await specificationsContainer
-                .find({ type: SELECTOR_TYPE.TEXT, value: 'hickness (ft' })
-                .then((h) => h?.parent())
-                .then((h) => h?.next())
-                .then((h) => h?.text())
-                .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
-                .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
-              if (v) {
-                row['Meta Field DimensionDepth'] = JSON.stringify({ unit: 'ft', value: v });
-              }
-            });
+              itemQueue.add(async () => {
+                const v = await specificationsContainer
+                  .find({ type: SELECTOR_TYPE.TEXT, value: 'idth (ft' })
+                  .then((h) => h?.parent())
+                  .then((h) => h?.next())
+                  .then((h) => h?.text())
+                  .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
+                  .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
+                if (v) {
+                  row['Meta Field DimensionWidth'] = JSON.stringify({ unit: 'ft', value: v });
+                }
+              });
 
-            itemQueue.add(async () => {
-              const v = await specificationsContainer
-                .find({ type: SELECTOR_TYPE.TEXT, value: 'hickness (in' })
-                .then((h) => h?.parent())
-                .then((h) => h?.next())
-                .then((h) => h?.text())
-                .then((h) => h?.replace(' in.', '').replace(' in', ''))
-                .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
-              if (v) {
-                row['Meta Field DimensionDepth'] = JSON.stringify({ unit: 'in', value: v });
-              }
-            });
+              itemQueue.add(async () => {
+                const v = await specificationsContainer
+                  .find({ type: SELECTOR_TYPE.TEXT, value: 'idth (in' })
+                  .then((h) => h?.parent())
+                  .then((h) => h?.next())
+                  .then((h) => h?.text())
+                  .then((h) => h?.replace(' in.', '').replace(' in', ''))
+                  .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
+                if (v) {
+                  row['Meta Field DimensionWidth'] = JSON.stringify({ unit: 'in', value: v });
+                }
+              });
 
-            itemQueue.add(async () => {
-              const v = await specificationsContainer
-                .find({ type: SELECTOR_TYPE.TEXT, value: 'eight (grams' })
-                .then((h) => h?.parent())
-                .then((h) => h?.next())
-                .then((h) => h?.text())
-                .then((h) => h?.replace(' grams', ''))
-                .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
-              if (v) {
-                row['Weight'] = v;
-                row['Weight unit'] = 'grams';
-              }
-            });
+              itemQueue.add(async () => {
+                const v = await specificationsContainer
+                  .find({ type: SELECTOR_TYPE.TEXT, value: 'hickness (ft' })
+                  .then((h) => h?.parent())
+                  .then((h) => h?.next())
+                  .then((h) => h?.text())
+                  .then((h) => h?.replace(' ft.', '').replace(' ft', ''))
+                  .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
+                if (v) {
+                  row['Meta Field DimensionDepth'] = JSON.stringify({ unit: 'ft', value: v });
+                }
+              });
 
-            itemQueue.add(async () => {
-              const v = await specificationsContainer
-                .find({ type: SELECTOR_TYPE.TEXT, value: 'eight (lb' })
-                .then((h) => h?.parent())
-                .then((h) => h?.next())
-                .then((h) => h?.text())
-                .then((h) => h?.replace(' lb.', '').replace(' lb', ''))
-                .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
-              if (v) {
-                row['Weight'] = v;
-                row['Weight unit'] = 'pounds';
-              }
-            });
-          }
+              itemQueue.add(async () => {
+                const v = await specificationsContainer
+                  .find({ type: SELECTOR_TYPE.TEXT, value: 'hickness (in' })
+                  .then((h) => h?.parent())
+                  .then((h) => h?.next())
+                  .then((h) => h?.text())
+                  .then((h) => h?.replace(' in.', '').replace(' in', ''))
+                  .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
+                if (v) {
+                  row['Meta Field DimensionDepth'] = JSON.stringify({ unit: 'in', value: v });
+                }
+              });
 
-          // stock
-          itemQueue.add(async () => {
-            const stockContainer = await screen.find({ value: '.buybox-wrapper' });
-            const pickup = await stockContainer
-              ?.find({ value: '.pickup-timeline' })
-              .then((h) => h?.content())
-              .then((h) => h?.toLowerCase());
-            const delivery = await stockContainer
-              ?.find({ value: '.delivery-timeline' })
-              .then((h) => h?.content())
-              .then((h) => h?.toLowerCase());
+              itemQueue.add(async () => {
+                const v = await specificationsContainer
+                  .find({ type: SELECTOR_TYPE.TEXT, value: 'eight (grams' })
+                  .then((h) => h?.parent())
+                  .then((h) => h?.next())
+                  .then((h) => h?.text())
+                  .then((h) => h?.replace(' grams', ''))
+                  .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
+                if (v) {
+                  row['Weight'] = v;
+                  row['Weight unit'] = 'grams';
+                }
+              });
 
-            let availability: string | undefined = undefined;
-            if (pickup) {
-              availability =
-                availability ?? (pickup?.includes('today') ? 'In stock' : availability);
-              availability =
-                availability ??
-                (!pickup?.includes('unavailable') ? 'Available to ship' : availability);
+              itemQueue.add(async () => {
+                const v = await specificationsContainer
+                  .find({ type: SELECTOR_TYPE.TEXT, value: 'eight (lb' })
+                  .then((h) => h?.parent())
+                  .then((h) => h?.next())
+                  .then((h) => h?.text())
+                  .then((h) => h?.replace(' lb.', '').replace(' lb', ''))
+                  .then((h) => h && toNumber(trimStart(eval(h) as string, '0')));
+                if (v) {
+                  row['Weight'] = v;
+                  row['Weight unit'] = 'pounds';
+                }
+              });
             }
-            if (delivery) {
-              availability =
-                availability ??
-                (!delivery?.includes('unavailable') ? 'Available for delivery' : availability);
-            }
-            row['Available For Sale'] =
-              availability ?? (row['Available For Sale'] || 'Out of stock');
-          });
 
-          await itemQueue.run();
+            // stock
+            itemQueue.add(async () => {
+              const stockContainer = await screen.find({ value: '.buybox-wrapper' });
+              const pickup = await stockContainer
+                ?.find({ value: '.pickup-timeline' })
+                .then((h) => h?.content())
+                .then((h) => h?.toLowerCase());
+              const delivery = await stockContainer
+                ?.find({ value: '.delivery-timeline' })
+                .then((h) => h?.content())
+                .then((h) => h?.toLowerCase());
 
-          // images
-          const thumbnails = await screen.findAll({ value: '.mediagallery__imgblock' });
-          let i = 1;
-          for (const thumbnail of thumbnails) {
-            if (i <= 5) {
-              await thumbnail.press();
-              const src = await screen
-                .find({ value: '.mediagallery__mainimage' })
-                .then((h) => h?.find({ value: 'img' }))
-                .then((h) => h?.src());
-              if (src) {
-                row[i > 1 ? `Image URL #${i}` : 'Image URL'] = src;
-                i++;
+              let availability: string | undefined = undefined;
+              if (pickup) {
+                availability =
+                  availability ?? (pickup?.includes('today') ? 'In stock' : availability);
+                availability =
+                  availability ??
+                  (!pickup?.includes('unavailable') ? 'Available to ship' : availability);
+              }
+              if (delivery) {
+                availability =
+                  availability ??
+                  (!delivery?.includes('unavailable') ? 'Available for delivery' : availability);
+              }
+              row['Available For Sale'] =
+                availability ?? (row['Available For Sale'] || 'Out of stock');
+            });
+
+            await itemQueue.run();
+
+            // images
+            const thumbnails = await screen.findAll({ value: '.mediagallery__imgblock' });
+            let i = 1;
+            for (const thumbnail of thumbnails) {
+              if (i <= 5) {
+                await thumbnail.press();
+                const src = await screen
+                  .find({ value: '.mediagallery__mainimage' })
+                  .then((h) => h?.find({ value: 'img' }))
+                  .then((h) => h?.src());
+                if (src) {
+                  row[i > 1 ? `Image URL #${i}` : 'Image URL'] = src;
+                  i++;
+                }
               }
             }
-          }
-          result.push(row as Record<string, string | number>);
-          info(`Adding item: ${url}\n${stringify(row)}`);
+            result.push(row as Record<string, string | number>);
+            info(`Adding item: ${url}\n${stringify(row)}`);
 
-          if (count === 1 && !row['Product title']) {
-            const file = await screen.snapshot({ filename: 'location' });
-            await new Upload({
-              client: new S3Client({
-                credentials: {
-                  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-                  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-                },
-                region: process.env.SERVER_REGION,
-              }),
-              params: {
-                Body: file,
-                Bucket: 'aroom-static',
-                ContentEncoding: 'base64',
-                ContentType: 'image/png',
-                Key: `no_title_${guid()}.png`,
-              },
-            }).done();
-          }
-
-          if (result) {
-            if (result.length > 0 && count % UPLOAD_SIZE === 0) {
-              console.warn('@@@ upload?');
-              await upload(result);
-              result = [];
+            if (result) {
+              if (result.length > 0 && count % UPLOAD_SIZE === 0) {
+                console.warn('@@@ upload?');
+                await upload(result);
+                result = [];
+              }
+              count++;
             }
-            count++;
           }
         } catch (e) {
           console.warn(e);

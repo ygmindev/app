@@ -4,7 +4,7 @@ import { type TaskParamsModel } from '@tool/task/core/core.models';
 const upgrade: TaskParamsModel<unknown> = {
   name: 'node-upgrade',
 
-  onFinish: [() => 'node-post-install'],
+  // onFinish: [() => 'node-post-install'],
 
   task: [
     () => {

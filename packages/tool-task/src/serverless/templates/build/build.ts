@@ -37,6 +37,16 @@ export const LAYER_TASKS: Array<TaskModel<unknown>> = [
     const root = fromWorking(BUILD_DIR, 'layers', 'nodejs');
     return `npx modclean -p ${root} -r`;
   },
+
+  () => {
+    const root = fromWorking(BUILD_DIR, 'layers', 'nodejs');
+    return `npx clean-modules --yes --directory ${root}`;
+  },
+
+  () => {
+    const root = fromWorking(BUILD_DIR, 'layers', 'nodejs');
+    return `rm -rf ${root}/node_modules/.ignored`;
+  },
 ];
 
 export const build: TaskParamsModel<unknown> = {

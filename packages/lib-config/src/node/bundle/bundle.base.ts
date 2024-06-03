@@ -28,12 +28,12 @@ const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       babel: {
         plugins: [
           '@babel/plugin-transform-runtime',
-          ['@babel/plugin-transform-private-methods', { loose: true }],
+          // ['@babel/plugin-transform-private-methods', { loose: true }],
           '@babel/plugin-transform-class-static-block',
-          ['@babel/plugin-proposal-class-properties', { loose: true }],
-          ['@babel/plugin-proposal-object-rest-spread', { loose: true }],
+          // ['@babel/plugin-proposal-class-properties', { loose: true }],
+          // ['@babel/plugin-proposal-object-rest-spread', { loose: true }],
         ],
-        presets: [['@babel/preset-env', { loose: true, targets: { node: 'current' } }]],
+        // presets: [['@babel/preset-env', { loose: true, targets: { node: 'current' } }]],
       },
 
       buildDir: BUILD_DIR,

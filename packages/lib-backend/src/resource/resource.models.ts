@@ -4,5 +4,5 @@ export type ResourceClassModel<TType> =
   TType extends Array<infer TElement>
     ? Array<ClassModel<TElement>>
     : TType extends NilModel
-      ? undefined
+      ? never
       : ClassModel<TType>;

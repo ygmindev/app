@@ -1,7 +1,7 @@
-import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
+import { type ClassModel } from '@lib/shared/core/core.models';
 
 export type _WithResolverParamsModel<TType extends unknown> = {
-  Resource?(): ResourceClassModel<TType>;
+  Resource?(): ClassModel<TType>;
 };
 
 export type _WithResolverModel = ClassDecorator;

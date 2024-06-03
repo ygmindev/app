@@ -7,6 +7,6 @@ import { FieldResolver } from 'type-graphql';
 export const _withFieldResolver =
   <TType extends unknown>({
     Resource,
-  }: _WithFieldResolverParamsModel<TType> = {}): _WithFieldResolverModel =>
+  }: _WithFieldResolverParamsModel<TType>): _WithFieldResolverModel =>
   (target, propertyKey, descriptor) =>
     FieldResolver(Resource)(target, propertyKey, descriptor);

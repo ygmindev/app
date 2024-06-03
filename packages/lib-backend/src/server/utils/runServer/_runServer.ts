@@ -13,6 +13,7 @@ import { fastify, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
 import { createYoga } from 'graphql-yoga';
 import isArray from 'lodash/isArray';
+import toNumber from 'lodash/toNumber';
 
 class _Logger {
   child = (..._: Array<unknown>): unknown => new _Logger();
@@ -95,7 +96,7 @@ export const _runServer = async ({
   });
 
   try {
-    await app.listen({ port });
+    await app.listen({ port: toNumber(port) });
   } catch (e) {
     error(e);
   }

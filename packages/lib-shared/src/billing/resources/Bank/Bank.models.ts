@@ -1,4 +1,3 @@
-import { type PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
@@ -15,7 +14,7 @@ export type BankModel = EmbeddedResourceModel & {
 
   name: string;
 
-  type: PAYMENT_METHOD_TYPE.BANK;
+  // type: PAYMENT_METHOD_TYPE.BANK;
 };
 
 export type BankFormModel = EntityResourceDataModel<BankModel>;

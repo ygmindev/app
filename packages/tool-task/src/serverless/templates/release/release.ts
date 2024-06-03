@@ -13,7 +13,7 @@ export const release: TaskParamsModel<unknown> = {
     // TODO: aws agnostic
     () =>
       fromExecutable(
-        `sls config credentials --config ${serverlessConfig.params().configFilename} --provider aws --profile default --overwrite --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY}`,
+        `sls config credentials --provider aws --profile default --overwrite --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY}`,
       ),
 
     ...(process.env.SERVERLESS_RUNTIME === 'container' ? [] : LAYER_TASKS),

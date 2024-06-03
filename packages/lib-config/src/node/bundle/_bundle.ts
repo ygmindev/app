@@ -25,7 +25,7 @@ import some from 'lodash/some';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
 import { checker } from 'vite-plugin-checker';
-import circleDependency from 'vite-plugin-circular-dependency';
+import circularDependencyPlugin from 'vite-plugin-circular-dependency';
 
 function vitePluginIsomorphicImport(serverExtension: string): Plugin {
   return {
@@ -116,6 +116,7 @@ export const _bundle = ({
         output: {
           chunkFileNames: '[name].js',
           entryFileNames: '[name].js',
+          format: 'cjs',
           interop: 'auto',
           preserveModules: true,
         },
@@ -123,15 +124,15 @@ export const _bundle = ({
         // plugins: [resolve({ modulesOnly: true }), flowPlugin()],
         plugins: [
           resolve({ modulesOnly: true }),
-          babel &&
-            babelPlugin({
-              babelHelpers: 'runtime',
-              compact: process.env.NODE_ENV === 'production',
-              minified: process.env.NODE_ENV === 'production',
-              plugins: babel.plugins,
-              presets: babel.presets,
-              skipPreflightCheck: true,
-            } as RollupBabelInputPluginOptions),
+          // babel &&
+          //   babelPlugin({
+          //     babelHelpers: 'runtime',
+          //     compact: process.env.NODE_ENV === 'production',
+          //     minified: process.env.NODE_ENV === 'production',
+          //     plugins: babel.plugins,
+          //     presets: babel.presets,
+          //     skipPreflightCheck: true,
+          //   } as RollupBabelInputPluginOptions),
         ],
       },
       watch:
@@ -189,29 +190,29 @@ export const _bundle = ({
         typescript: { tsconfigPath: tsconfigDir },
       }),
 
+      provide && inject(provide),
+
       ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
         process.env.ENV_PLATFORM,
       )
         ? [react({ tsDecorators: true })]
         : []),
 
-      provide && inject(provide),
+      babel &&
+        babelPlugin({
+          babelHelpers: 'runtime',
+          compact: process.env.NODE_ENV === 'production',
+          minified: process.env.NODE_ENV === 'production',
+          plugins: babel.plugins,
+          presets: babel.presets,
+          skipPreflightCheck: true,
+        } as RollupBabelInputPluginOptions),
 
       viteCommonjs(),
 
-      // babel &&
-      //   babelPlugin({
-      //     babelHelpers: 'runtime',
-      //     compact: process.env.NODE_ENV === 'production',
-      //     minified: process.env.NODE_ENV === 'production',
-      //     plugins: babel.plugins,
-      //     presets: babel.presets,
-      //     skipPreflightCheck: true,
-      //   } as RollupBabelInputPluginOptions),
-
       process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
 
-      circleDependency({}),
+      circularDependencyPlugin({}),
     ]),
 
     resolve: {

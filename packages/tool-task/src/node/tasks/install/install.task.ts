@@ -8,7 +8,7 @@ import { type InstallParamsModel } from '@tool/task/node/tasks/install/install.m
 const install: TaskParamsModel<InstallParamsModel> = {
   name: 'node-install',
 
-  onFinish: ['node-post-install'],
+  // onFinish: ['node-post-install'],
 
   options: [
     {

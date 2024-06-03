@@ -227,7 +227,6 @@ type Bank {
   fingerprint: String
   last4: String
   name: String
-  type: String
 }
 
 input BankCreateFormInput {
@@ -238,7 +237,6 @@ input BankCreateFormInput {
   fingerprint: String
   last4: String
   name: String
-  type: String
 }
 
 input BankCreateInput {
@@ -254,7 +252,6 @@ input BankCreateManyFormInput {
   fingerprint: String
   last4: String
   name: String
-  type: String
 }
 
 input BankCreateManyInput {
@@ -357,7 +354,6 @@ input BankInput {
   fingerprint: String
   last4: String
   name: String
-  type: String
 }
 
 input BankRemoveFilterInput {
@@ -413,7 +409,6 @@ input BankUpdateUpdateInput {
   fingerprint: String
   last4: String
   name: String
-  type: String
 }
 
 type Card {
@@ -427,7 +422,6 @@ type Card {
   funding: String
   last4: String
   name: String
-  type: String
 }
 
 input CardCreateFormInput {
@@ -441,7 +435,6 @@ input CardCreateFormInput {
   funding: String
   last4: String
   name: String
-  type: String
 }
 
 input CardCreateInput {
@@ -460,7 +453,6 @@ input CardCreateManyFormInput {
   funding: String
   last4: String
   name: String
-  type: String
 }
 
 input CardCreateManyInput {
@@ -566,7 +558,6 @@ input CardInput {
   funding: String
   last4: String
   name: String
-  type: String
 }
 
 input CardRemoveFilterInput {
@@ -625,7 +616,6 @@ input CardUpdateUpdateInput {
   funding: String
   last4: String
   name: String
-  type: String
 }
 
 type Chat {
@@ -829,7 +819,6 @@ input GetRouteInput {
 }
 
 type Group {
-  Group: Group
   _id: String
   created: DateTime
   logo: String
@@ -938,27 +927,6 @@ input GroupGetManyInput {
 }
 
 type GroupGetManyOutput {
-  result: [Group]
-}
-
-input GroupGetManyProtectedGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [GroupInput]
-  resourceValue: GroupInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input GroupGetManyProtectedGetManyInput {
-  filter: [GroupGetManyProtectedGetManyFilterInput]
-  root: String
-}
-
-type GroupGetManyProtectedGetManyOutput {
   result: [Group]
 }
 
@@ -1461,6 +1429,7 @@ type PaymentMethod {
   _id: String
   created: DateTime
   externalId: String
+  fingerprint: String
   last4: String
   name: String
   type: String
@@ -1493,6 +1462,7 @@ input PaymentMethodInput {
   _id: String
   created: DateTime
   externalId: String
+  fingerprint: String
   last4: String
   name: String
   type: String
@@ -1913,7 +1883,6 @@ type Query {
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
-  GroupGetManyProtectedGetMany(input: GroupGetManyProtectedGetManyInput): GroupGetManyProtectedGetManyOutput
   OrderGet(input: OrderGetInput): OrderGetOutput
   OrderGetConnection(input: OrderGetConnectionInput): OrderGetConnectionOutput
   OrderGetMany(input: OrderGetManyInput): OrderGetManyOutput

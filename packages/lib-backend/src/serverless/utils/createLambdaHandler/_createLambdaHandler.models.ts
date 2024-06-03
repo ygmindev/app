@@ -21,8 +21,8 @@ export type _CreateLambdaHandlerParamsModel<TType = Record<string, unknown>> = {
     body?: TType;
     context: ServerlessRequestContextModel;
   }): Promise<LambdaResponseModel>;
-  onClose(): Promise<void>;
-  onInitialize(): Promise<void>;
+  onClose?(): Promise<void>;
+  onInitialize?(): Promise<void>;
   plugins?: Array<LambdaPluginModel>;
   type?: LambdaTypeModel;
   websocketUri: string;

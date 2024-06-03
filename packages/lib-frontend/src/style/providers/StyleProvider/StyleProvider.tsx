@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 export const StyleProvider: FCModel<StyleProviderPropsModel> = ({ children }) => {
   const theme = useTheme();
   const [brightness] = useStore('style.brightness');
-  const sheet = useMemo(() => cssConfig.params().stylesheet(theme), [cssConfig.params(), theme]);
+  const sheet = useMemo(() => cssConfig.params().stylesheet(theme), [theme]);
   return (
     <_StyleProvider value={{ brightness }}>
       <GlobalStyle sheet={sheet} />

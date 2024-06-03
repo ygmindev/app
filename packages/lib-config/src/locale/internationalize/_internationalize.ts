@@ -20,7 +20,8 @@ export const _internationalize = ({
   const languageF = language ?? languageDefault;
 
   const config: InitOptions = {
-    debug: isDebug,
+    // debug: isDebug,
+    debug: false,
 
     defaultNS: false,
 
