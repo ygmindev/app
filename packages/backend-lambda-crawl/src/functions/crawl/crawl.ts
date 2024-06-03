@@ -8,7 +8,7 @@ import { Screen } from '@lib/shared/crawling/utils/Screen/Screen';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
-import { info } from '@lib/shared/logging/utils/logger/logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { JWT } from 'google-auth-library';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import toNumber from 'lodash/toNumber';
@@ -510,7 +510,7 @@ export const main = createLambdaHandler<{
               }
             }
             result.push(row as Record<string, string | number>);
-            info(`Adding item: ${url}\n${stringify(row)}`);
+            logger.info(`Adding item: ${url}\n${stringify(row)}`);
 
             if (result) {
               if (result.length > 0 && count % UPLOAD_SIZE === 0) {
@@ -986,7 +986,7 @@ export const main = createLambdaHandler<{
 //                 }
 //               }
 //               result.push(row as Record<string, string | number>);
-//               info(`Adding item: ${url}`);
+//               logger.info(`Adding item: ${url}`);
 
 //               if (result) {
 //                 if (result.length > 0 && count % UPLOAD_SIZE === 0) {
@@ -1367,7 +1367,7 @@ export const main = createLambdaHandler<{
 // //                   i++;
 // //                 }
 // //               }
-// //               info(`Adding item: ${url}`);
+// //               logger.info(`Adding item: ${url}`);
 
 // //               if (result.length > 0) {
 // //                 if (result.length > 0 && count % UPLOAD_SIZE === 0) {

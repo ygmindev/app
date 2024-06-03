@@ -3,7 +3,7 @@ import {
   type MailModel,
   type MailParamsModel,
 } from '@lib/backend/notification/utils/mail/mail.models';
-import { debug } from '@lib/shared/logging/utils/logger/logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const mail = async <TType extends unknown>({
   ...params
@@ -11,6 +11,6 @@ export const mail = async <TType extends unknown>({
   if (process.env.NODE_ENV === 'production') {
     return _mail({ ...params });
   }
-  debug(params);
+  logger.debug(params);
   return true;
 };

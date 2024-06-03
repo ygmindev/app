@@ -11,7 +11,7 @@ import { type PartialModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { debug, info } from '@lib/shared/logging/utils/logger/logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
@@ -80,9 +80,9 @@ export class _Database implements _DatabaseModel {
 
   async connect(): Promise<void> {
     if (await this.isConnected()) {
-      info('reusing connection', this._config.clientUrl);
+      logger.info('reusing connection', this._config.clientUrl);
     } else {
-      info('connecting', this._config.clientUrl);
+      logger.info('connecting', this._config.clientUrl);
       this._entityManager = (await MikroORM.init(this._config)).em;
     }
   }
@@ -238,7 +238,7 @@ export class _Database implements _DatabaseModel {
 
   close = async (): Promise<void> => {
     if (await this.isConnected()) {
-      debug('closing connections', this._config.clientUrl);
+      logger.debug('closing connections', this._config.clientUrl);
       await this._getEntityManager().getConnection()?.close();
     }
   };

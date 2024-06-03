@@ -11,7 +11,7 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
-import { error } from '@lib/shared/logging/utils/logger/logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const useForm = <TType, TResult = void>({
   initialValues,
@@ -47,7 +47,7 @@ export const useForm = <TType, TResult = void>({
       redirectTo && replace(redirectTo);
       return data ?? null;
     } catch (e) {
-      error(e);
+      logger.error(e);
       onError ? onError(e as Error) : handleError(e as Error);
     } finally {
       isBlocking && isLoadingSet(false);

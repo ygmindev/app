@@ -2,7 +2,7 @@ import toNumber from 'lodash/toNumber';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 
 import { type _DatabaseInMemoryModel } from '@lib/backend/database/utils/DatabaseInMemory/_DatabaseInMemory.models';
-import { debug } from '@lib/shared/logging/utils/logger/logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export class _DatabaseInMemory implements _DatabaseInMemoryModel {
   _server?: MongoMemoryServer;
@@ -12,7 +12,7 @@ export class _DatabaseInMemory implements _DatabaseInMemoryModel {
 
   start = async (): Promise<void> => {
     if (!this._isActive()) {
-      debug('starting database');
+      logger.debug('starting database');
       const url = process.env.SERVER_DB_MONGO_URL.replace('mongodb://', '').split(':');
       const port = toNumber(url.pop());
       const ip = url.join(':');
@@ -22,11 +22,11 @@ export class _DatabaseInMemory implements _DatabaseInMemoryModel {
 
   stop = async (): Promise<void> => {
     if (this._isActive()) {
-      debug('stopping database');
+      logger.debug('stopping database');
       try {
         this._server && (await this._server.stop());
       } catch (e) {
-        debug('not stopping database');
+        logger.debug('not stopping database');
       }
     }
   };

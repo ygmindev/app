@@ -1,5 +1,5 @@
 import { uri } from '@lib/shared/http/utils/uri/uri';
-import { error, info } from '@lib/shared/logging/utils/logger/logger';
+import { error, info } from '@lib/shared/logging/utils/Logger/Logger';
 import { _server } from '@lib/shared/web/utils/server/_server';
 import {
   type ServerModel,

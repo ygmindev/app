@@ -8,7 +8,7 @@ import graphqlConfig from '@lib/config/graphql/graphql';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { uri } from '@lib/shared/http/utils/uri/uri';
-import { debug, error, info, warn } from '@lib/shared/logging/utils/logger/logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { fastify, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
 import { createYoga } from 'graphql-yoga';
@@ -19,10 +19,10 @@ class _Logger {
   child = (..._: Array<unknown>): unknown => new _Logger();
   fatal = (..._: Array<unknown>): unknown => null;
   level = 'info';
-  error = error;
-  warn = warn;
-  info = info;
-  debug = debug;
+  error = logger.error;
+  warn = logger.warn;
+  info = logger.info;
+  debug = logger.debug;
   trace = (..._: Array<unknown>): unknown => null;
   silent = (..._: Array<unknown>): unknown => null;
 }
@@ -60,13 +60,13 @@ export const _runServer = async ({
 
   api.routes.forEach(({ handler, method, pathname, type }) => {
     const url = `/${joinPaths([api.prefix, pathname])}`;
-    info(
+    logger.info(
       `${isArray(method) ? method.join(',') : method} ${uri({ host: process.env.SERVER_APP_HOST, port: process.env.SERVER_APP_PORT })}${url}`,
     );
     switch (type) {
       case API_ENDPOINT_TYPE.GRAPHQL: {
         const schema = graphqlConfig.config();
-        const yoga = createYoga({ logging: { debug, error, info, warn }, schema });
+        const yoga = createYoga({ logging: logger, schema });
         app.route({
           handler: async (req, reply) => {
             const response = await yoga.handleNodeRequestAndResponse(req, reply, { reply, req });
@@ -98,6 +98,6 @@ export const _runServer = async ({
   try {
     await app.listen({ port: toNumber(port) });
   } catch (e) {
-    error(e);
+    logger.error(e);
   }
 };

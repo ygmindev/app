@@ -10,7 +10,7 @@ import { _web } from '@lib/config/node/web/_web';
 import { type CookieOptionModel } from '@lib/frontend/state/state.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
-import { info } from '@lib/shared/logging/utils/logger/logger';
+import { info } from '@lib/shared/logging/utils/Logger/Logger';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { STATE } from '@lib/shared/state/state.constants';
 import { render } from '@lib/shared/web/utils/render/render';

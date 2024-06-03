@@ -1,7 +1,7 @@
 import { template } from '@lib/backend/core/utils/template/template';
 import { _sms } from '@lib/backend/notification/utils/sms/_sms';
 import { type SmsModel, type SmsParamsModel } from '@lib/backend/notification/utils/sms/sms.models';
-import { debug } from '@lib/shared/logging/utils/logger/logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const sms = async <TType extends unknown>({
   from,
@@ -12,6 +12,6 @@ export const sms = async <TType extends unknown>({
   if (process.env.NODE_ENV === 'production') {
     return _sms({ body: await template({ params, pathname }), from, to });
   }
-  debug(params);
+  logger.debug(params);
   return true;
 };

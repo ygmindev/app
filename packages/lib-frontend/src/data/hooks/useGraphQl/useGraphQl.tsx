@@ -12,7 +12,7 @@ import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
-import { error } from '@lib/shared/logging/utils/logger/logger';
+import { error } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const useGraphql = (params: UseGraphqlParamsModel = {}): UseGraphqlModel => {
   const { post } = useApi({ ...params, pathname: `api/${GRAPHQL}` });

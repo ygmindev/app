@@ -4,7 +4,7 @@ import {
 } from '@lib/frontend/auth/hooks/useSession/_useSession.models';
 import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
-import { warn } from '@lib/shared/logging/utils/logger/logger';
+import { warn } from '@lib/shared/logging/utils/Logger/Logger';
 import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import { getApps, initializeApp } from 'firebase/app';
 import { type Auth, type AuthError, onIdTokenChanged, type User } from 'firebase/auth';

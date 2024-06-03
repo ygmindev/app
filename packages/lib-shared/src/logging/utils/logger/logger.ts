@@ -1,11 +1,10 @@
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import {
-  debug as _debug,
-  error as _error,
-  info as _info,
-  warn as _warn,
-} from '@lib/shared/logging/utils/logger/_logger';
-import { type LoggerModel } from '@lib/shared/logging/utils/logger/logger.models';
+  type _LoggerModel,
+  type _LoggerParamsModel,
+} from '@lib/shared/logging/utils/Logger/_Logger.models';
+import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger.node';
+import { type LoggerModel, type LogModel } from '@lib/shared/logging/utils/Logger/Logger.models';
 import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 
@@ -20,11 +19,20 @@ const stringifyF = (params: Array<unknown>): string =>
     )
     .join(' ');
 
-const { debug, error, info, warn }: LoggerModel = {
-  debug: (...params) => _debug(stringifyF(params)),
-  error: (...params) => _error(stringifyF(params)),
-  info: (...params) => _info(stringifyF(params)),
-  warn: (...params) => _warn(stringifyF(params)),
-};
+class Logger implements LoggerModel {
+  protected _logger!: _LoggerModel;
 
-export { debug, error, info, warn };
+  constructor(params: _LoggerParamsModel) {
+    this._logger = new _Logger(params);
+  }
+
+  debug: LogModel = (...params) => this._logger.debug(stringifyF(params));
+  error: LogModel = (...params) => this._logger.error(stringifyF(params));
+  info: LogModel = (...params) => this._logger.info(stringifyF(params));
+  trace: LogModel = (...params) => this._logger.trace(stringifyF(params));
+  warn: LogModel = (...params) => this._logger.warn(stringifyF(params));
+}
+
+export const logger = new Logger({
+  level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
+});

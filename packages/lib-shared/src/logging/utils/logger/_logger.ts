@@ -1,12 +1,9 @@
-import { type _LoggerModel } from '@lib/shared/logging/utils/logger/_logger.models';
+import { type _LoggerModel, type _LogModel } from '@lib/shared/logging/utils/Logger/_Logger.models';
 
-const { debug, error, info, warn }: _LoggerModel = {
-  /* eslint-disable no-console */
-  debug: console.debug,
-  error: console.error,
-  info: console.info,
-  warn: console.warn,
-  /* eslint-enable no-console */
-};
-
-export { debug, error, info, warn };
+export class _Logger implements _LoggerModel {
+  debug: _LogModel = console.warn;
+  error: _LogModel = console.error;
+  info: _LogModel = console.info;
+  trace: _LogModel = console.trace;
+  warn: _LogModel = console.warn;
+}

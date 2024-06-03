@@ -1,5 +1,5 @@
 import { type SleepParamsModel } from '@lib/shared/core/utils/sleep/sleep.models';
-import { info } from '@lib/shared/logging/utils/logger/logger';
+import { info } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const sleep = (...[duration = 0, options]: SleepParamsModel): Promise<void> => {
   const isVerboseF =

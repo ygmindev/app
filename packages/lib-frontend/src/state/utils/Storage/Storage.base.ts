@@ -2,7 +2,7 @@ import {
   type StorageBaseParamsModel,
   type StorageModel,
 } from '@lib/frontend/state/utils/Storage/Storage.models';
-import { debug } from '@lib/shared/logging/utils/logger/_logger';
+import { debug } from '@lib/shared/logging/utils/Logger/_Logger';
 
 export class Storage implements StorageModel {
   protected storages?: Array<StorageModel>;

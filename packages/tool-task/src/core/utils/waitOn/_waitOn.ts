@@ -1,4 +1,4 @@
-import { info } from '@lib/shared/logging/utils/logger/logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
   type _WaitOnModel,
   type _WaitOnParamsModel,
@@ -11,7 +11,7 @@ export const _waitOn = async (...[params, options]: _WaitOnParamsModel): Promise
     interval: options.interval,
     resources: params.map(([resource, type]) => {
       const resourceF = `${type}${resource.replace(/^https?:\/\//, '')}`;
-      info('waiting on', resourceF);
+      logger.info('waiting on', resourceF);
       return resourceF;
     }),
     timeout: options.timeout,

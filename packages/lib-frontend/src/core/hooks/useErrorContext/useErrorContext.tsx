@@ -6,7 +6,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useNotification } from '@lib/frontend/notification/hooks/useNotification/useNotification';
 import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
-import { error } from '@lib/shared/logging/utils/logger/logger';
+import { error } from '@lib/shared/logging/utils/Logger/Logger';
 import { useContext } from 'react';
 
 export const useErrorContext = (): UseErrorContextModel => {

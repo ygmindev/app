@@ -16,7 +16,7 @@ import {
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/Screen/Screen.models';
-import { info } from '@lib/shared/logging/utils/logger/logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type UriModel } from '@lib/shared/route/route.models';
 import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
@@ -241,7 +241,7 @@ const find = async (
     delay && (await sleep(delay));
     const selectorF = getSelector(selector);
     try {
-      info(`Finding ${stringify(selector)}...`);
+      logger.info(`Finding ${stringify(selector)}...`);
       timeout && (await handle.waitForSelector(selectorF, { timeout }));
     } catch (e) {
       console.warn(e);
@@ -253,7 +253,7 @@ const find = async (
       selected = (await handle.$(selectorF)) as ElementHandle;
     }
     if (selected) {
-      info(`Found ${stringify(selector)}!`);
+      logger.info(`Found ${stringify(selector)}!`);
       return new _Handle(selected, { delay, timeout });
     }
   }
@@ -278,7 +278,7 @@ const findAll = async (
     delay && (await sleep(delay));
     const selectorF = getSelector(selector);
     try {
-      info(`Finding all ${stringify(selector)}...`);
+      logger.info(`Finding all ${stringify(selector)}...`);
       timeout &&
         (await handle.waitForSelector(selectorF, {
           timeout,
@@ -286,7 +286,7 @@ const findAll = async (
     } catch (e) {}
     const selected = await handle.$$(selectorF);
     if (selected) {
-      info(`Found all ${stringify(selector)}!`);
+      logger.info(`Found all ${stringify(selector)}!`);
       return selected?.map((v) => v && new _Handle(v, { delay, timeout }));
     }
   }
@@ -615,7 +615,7 @@ class _Handle implements HandleModel {
 //     delay && (await sleep(delay));
 //     const selectorF = getSelector(selector);
 //     try {
-//       info(`Finding ${stringify(selector)} ${timeout}...`);
+//       logger.info(`Finding ${stringify(selector)} ${timeout}...`);
 //       timeout && (await handle.waitForSelector(selectorF, { timeout }));
 //     } catch (e) {
 //       console.warn(e);
@@ -627,7 +627,7 @@ class _Handle implements HandleModel {
 //       selected = (await handle.$(selectorF)) as ElementHandle;
 //     }
 //     if (selected) {
-//       info(`Found ${stringify(selector)}!`);
+//       logger.info(`Found ${stringify(selector)}!`);
 //       return new _Handle(selected, { delay, timeout });
 //     }
 //   }
@@ -652,7 +652,7 @@ class _Handle implements HandleModel {
 //     delay && (await sleep(delay));
 //     const selectorF = getSelector(selector);
 //     try {
-//       info(`Finding all ${stringify(selector)}...`);
+//       logger.info(`Finding all ${stringify(selector)}...`);
 //       timeout &&
 //         (await handle.waitForSelector(selectorF, {
 //           timeout,
@@ -660,7 +660,7 @@ class _Handle implements HandleModel {
 //     } catch (e) {}
 //     const selected = await handle.$$(selectorF);
 //     if (selected) {
-//       info(`Found all ${stringify(selector)}!`);
+//       logger.info(`Found all ${stringify(selector)}!`);
 //       return selected?.map((v) => v && new _Handle(v, { delay, timeout }));
 //     }
 //   }

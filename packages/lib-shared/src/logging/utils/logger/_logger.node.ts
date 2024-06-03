@@ -1,18 +1,25 @@
-import { type _LoggerModel } from '@lib/shared/logging/utils/logger/_logger.models';
-import { pino } from 'pino';
+import {
+  type _LoggerModel,
+  type _LoggerParamsModel,
+  type _LogModel,
+} from '@lib/shared/logging/utils/Logger/_Logger.models';
+import { type Logger, pino } from 'pino';
 
-const logger = pino({
-  level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
-  transport: {
-    pipeline: [{ options: { colorize: true, destination: 2 }, target: 'pino-pretty' }],
-  },
-});
+export class _Logger implements _LoggerModel {
+  protected _logger!: Logger;
 
-const { debug, error, info, warn }: _LoggerModel = {
-  debug: (message) => logger.debug.bind(logger)(message),
-  error: (message) => logger.error.bind(logger)(message),
-  info: (message) => logger.info.bind(logger)(message),
-  warn: (message) => logger.warn.bind(logger)(message),
-};
+  constructor({ level }: _LoggerParamsModel) {
+    this._logger = pino({
+      level,
+      transport: {
+        pipeline: [{ options: { colorize: true, destination: 2 }, target: 'pino-pretty' }],
+      },
+    });
+  }
 
-export { debug, error, info, warn };
+  debug: _LogModel = this._logger.debug;
+  error: _LogModel = this._logger.error;
+  info: _LogModel = this._logger.info;
+  trace: _LogModel = this._logger.trace;
+  warn: _LogModel = this._logger.warn;
+}

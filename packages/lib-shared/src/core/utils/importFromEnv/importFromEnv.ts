@@ -6,7 +6,7 @@ import {
 } from '@lib/shared/core/utils/importFromEnv/importFromEnv.models';
 import { requireInterop } from '@lib/shared/core/utils/requireInterop/requireInterop';
 import { resolveFirst } from '@lib/shared/core/utils/resolveFirst/resolveFirst';
-import { debug } from '@lib/shared/logging/utils/logger/logger';
+import { debug } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const importFromEnv = async <TType extends unknown>(
   params: ImportFromEnvParamsModel,

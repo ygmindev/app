@@ -5,7 +5,7 @@ import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/Duplicate
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
-import { error, info } from '@lib/shared/logging/utils/logger/logger';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
   type TaskContextModel,
   type TaskModel,
@@ -115,7 +115,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
 
     const context: TaskContextModel<TType> = { name, options: optionsF, root, target };
     try {
-      info('running', name);
+      logger.info('running', name);
       onBefore && (await this.runTasks(onBefore, context));
 
       process.chdir(root ?? fromRoot());
@@ -123,11 +123,11 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
 
       await this.runTasks(task, context);
     } catch (e) {
-      error(name, (e as Error).stack);
+      logger.error(name, (e as Error).stack);
     } finally {
       this._pids.forEach(process.kill);
       onFinish && (await this.runTasks(onFinish, context));
-      info('completed:', name);
+      logger.info('completed:', name);
     }
   };
 
