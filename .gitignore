@@ -3,6 +3,7 @@
 **/.serverless
 **/.build
 **/_build
+**/_cache
 
 # Node
 node_modules

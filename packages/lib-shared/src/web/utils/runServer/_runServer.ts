@@ -15,9 +15,9 @@ import { ROUTE } from '@lib/shared/route/route.constants';
 import { STATE } from '@lib/shared/state/state.constants';
 import { render } from '@lib/shared/web/utils/render/render';
 import {
-  type _ServerModel,
-  type _ServerParamsModel,
-} from '@lib/shared/web/utils/server/_server.models';
+  type _RunServerModel,
+  type _RunServerParamsModel,
+} from '@lib/shared/web/utils/runServer/_runServer.models';
 import { fastify, type FastifyPluginCallback, type FastifyRegisterOptions } from 'fastify';
 import { readFileSync } from 'fs';
 import { type SecureServerOptions } from 'http2';
@@ -25,7 +25,7 @@ import { plugin as i18nextMiddleware } from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
 import { createServer } from 'vite';
 
-export const _server = async ({
+export const _runServer = async ({
   certificate,
   host,
   internationalize,
@@ -34,7 +34,7 @@ export const _server = async ({
   publicDir,
   root,
   web,
-}: _ServerParamsModel): Promise<_ServerModel> => {
+}: _RunServerParamsModel): Promise<_RunServerModel> => {
   const i18n = _internationalize(internationalize);
 
   const { certificateDir, privateKeyFilename, publicKeyFilename } = certificate;

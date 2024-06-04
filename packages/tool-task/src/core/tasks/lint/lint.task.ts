@@ -9,9 +9,9 @@ const lint: TaskParamsModel<RunAllParamsModel> = merge(
     {
       name: 'lint',
 
-      overrides: {
+      overrides: () => ({
         patterns: [/lint/],
-      },
+      }),
 
       task: ['build-json-typescript', 'build-json-lint'],
     },

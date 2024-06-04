@@ -18,7 +18,6 @@ import {
   type NodeTasksMdoel,
   type NodeTasksParamsModel,
 } from '@tool/task/node/utils/nodeTasks/nodeTasks.models';
-import range from 'lodash/range';
 
 export const nodeTasks = ({
   additionalTasks,
@@ -54,7 +53,7 @@ export const nodeTasks = ({
             [({ target }) => `run ${target}-${testBase.name}`, ...(eteTasks ?? [])],
             {
               condition: PARALLEL_CONDITION.FIRST,
-              silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
+              // silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
             },
             { environment: ENVIRONMENT.TEST },
           ],
@@ -71,11 +70,11 @@ export const nodeTasks = ({
     lint,
     clean,
     ...getTestTasks(),
-    ...getTestTasks({ name: `${test.name}-watch`, overrides: { isWatch: true } }),
-    ...getTestTasks({ name: `${test.name}-match`, overrides: { isPrompt: true } }),
+    ...getTestTasks({ name: `${test.name}-watch`, overrides: () => ({ isWatch: true }) }),
+    ...getTestTasks({ name: `${test.name}-match`, overrides: () => ({ isPrompt: true }) }),
     ...getTestTasks({
       name: `${test.name}-match-watch`,
-      overrides: { isPrompt: true, isWatch: true },
+      overrides: () => ({ isPrompt: true, isWatch: true }),
     }),
     ...(additionalTasks ?? []),
   ] as NodeTasksMdoel;

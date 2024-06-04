@@ -14,7 +14,6 @@ export const importConfig = async <TParams, TResult = undefined>(
   const config = await importFromEnv<DefineConfigModel<TParams, TResult>>(fromConfig(name));
   let paramsF = config.params();
   overrides && (paramsF = merge([...overrides, paramsF]));
-  console.warn(paramsF);
   return {
     config: config.config(paramsF as PartialDeepModel<TParams>),
     params: paramsF,

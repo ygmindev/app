@@ -7,7 +7,7 @@ export const dev: TaskParamsModel<DevParamsModel> = {
 
   name: 'dev',
 
-  overrides: {
+  overrides: () => ({
     patterns: ['lib-backend/src/**', 'lib-config/src/**', 'lib-shared/src/**'],
-  },
+  }),
 };

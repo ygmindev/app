@@ -4,7 +4,7 @@ import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { type WebConfigModel } from '@lib/config/node/web/web.models';
 import { type UriModel } from '@lib/shared/route/route.models';
 
-export type _ServerParamsModel = UriModel &
+export type _RunServerParamsModel = UriModel &
   Pick<ServerConfigModel, 'certificate'> &
   Pick<FileConfigModel, 'publicDir'> & {
     internationalize: InternationalizeConfigModel;
@@ -13,4 +13,4 @@ export type _ServerParamsModel = UriModel &
     web: WebConfigModel;
   };
 
-export type _ServerModel = void;
+export type _RunServerModel = void;

@@ -19,8 +19,8 @@
       "dom",
       "dom.iterable"
     ],
-    "module": "esnext",
-    "moduleResolution": "Bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
     "outDir": "_dist/out-tsc",
     "paths": {

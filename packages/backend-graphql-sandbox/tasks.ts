@@ -4,7 +4,10 @@ import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
 import { build } from '@tool/task/serverless/templates/build/build';
 
 const tasks = nodeTasks({
-  additionalTasks: [build, { ...dev, overrides: { script: 'src/index.ts' } }],
+  additionalTasks: [
+    build,
+    { ...dev, overrides: () => ({ ...dev.overrides(), script: 'src/index.ts' }) },
+  ],
 }) satisfies Array<TaskParamsModel<unknown>>;
 
 export default tasks;

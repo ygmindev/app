@@ -1,7 +1,7 @@
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { server } from '@lib/shared/web/utils/server/server';
+import { runServer } from '@lib/shared/web/utils/runServer/runServer';
 
-const { displayName } = withTest({ server });
+const { displayName } = withTest({ server: runServer });
 
 describe(displayName, () => {
   test('works', async () => {

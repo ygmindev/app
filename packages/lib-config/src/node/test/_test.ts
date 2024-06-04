@@ -32,7 +32,6 @@ export const _test = ({
   const { compilerOptions } = _typescript(typescript);
   const testExtension =
     process.env.TEST_IS_ETE === BOOLEAN_STRING.TRUE ? eteExtension : specExtension;
-  console.warn(compilerOptions?.paths);
   return {
     cacheDirectory: fromWorking(cacheDir, outputDir),
 
@@ -100,10 +99,7 @@ export const _test = ({
     testTimeout: timeout,
 
     transform: {
-      '^.+\\.(t|j)sx?$': [
-        'ts-jest',
-        { isolatedModules: true, tsconfig: fromWorking('tsconfig.json') },
-      ],
+      '^.+\\.(t|j)sx?$': ['ts-jest', { tsconfig: fromWorking('tsconfig.json') }],
     },
 
     transformIgnorePatterns: transpiles ? [`node_modules/(?!(${transpiles.join('|')})/)`] : [],

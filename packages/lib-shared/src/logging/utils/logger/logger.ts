@@ -34,5 +34,6 @@ class Logger implements LoggerModel {
 }
 
 export const logger = new Logger({
-  level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
+  level:
+    process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test' ? 'debug' : 'info',
 });

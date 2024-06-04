@@ -3,7 +3,7 @@ import internationalizeConfig from '@lib/config/locale/internationalize/internat
 import serverConfig from '@lib/config/node/server/server';
 import webConfig from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-import { server } from '@lib/shared/web/utils/server/server';
+import { runServer } from '@lib/shared/web/utils/runServer/runServer';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 
 export const dev: TaskParamsModel<unknown> = {
@@ -14,7 +14,7 @@ export const dev: TaskParamsModel<unknown> = {
   task: [
     async ({ root }) =>
       // TODO: _ServerConfigModel
-      server({
+      runServer({
         certificate: serverConfig.params().certificate,
         host: process.env.APP_HOST ?? '',
         internationalize: internationalizeConfig.params(),

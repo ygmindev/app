@@ -21,7 +21,6 @@ export const test: TaskParamsModel<TestParamsModel> = {
       const config = await importConfig<TestConfigModel, _TestConfigModel>('node/test/test', [
         { match: options?.testMatch, root },
       ]);
-      console.warn(config.config);
       await runCLI(
         {
           config: JSON.stringify(config.config),
