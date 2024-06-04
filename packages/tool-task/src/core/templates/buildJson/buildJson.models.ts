@@ -1,4 +1,4 @@
 export type BuildJsonParamsModel = {
-  filename: string;
+  path: string;
   value: object;
 };

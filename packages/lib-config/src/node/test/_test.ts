@@ -32,7 +32,7 @@ export const _test = ({
   const { compilerOptions } = _typescript(typescript);
   const testExtension =
     process.env.TEST_IS_ETE === BOOLEAN_STRING.TRUE ? eteExtension : specExtension;
-
+  console.warn(compilerOptions?.paths);
   return {
     cacheDirectory: fromWorking(cacheDir, outputDir),
 

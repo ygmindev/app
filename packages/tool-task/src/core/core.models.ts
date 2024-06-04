@@ -33,12 +33,10 @@ export type TaskParamsModel<TType extends unknown> = Omit<
   EnvironmentOverrideParamsModel & {
     onBefore?: Array<TaskModel<TType>>;
     onFinish?: Array<TaskModel<TType>>;
-    options?:
-      | PromptParamsModel<TType>
-      | ((
-          context: Pick<TaskContextModel<TType>, 'name' | 'root' | 'overrides'>,
-        ) => PromptParamsModel<TType>);
-    overrides?: PartialModel<TType> | (() => PartialModel<TType>);
+    options?: (
+      context: Pick<TaskContextModel<TType>, 'name' | 'root' | 'overrides'>,
+    ) => PromptParamsModel<TType>;
+    overrides?(): PartialModel<TType>;
     task: Array<TaskModel<TType>>;
   };
 

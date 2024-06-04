@@ -31,7 +31,7 @@ const config = defineConfig<TypescriptConfigModel, _TypescriptConfigModel>({
           const packageJson = JSON.parse(
             readFileSync(fromPackages(v, 'package.json')).toString(),
           ) as { name: string };
-          return { ...result, [`${packageJson.name}/*`]: [`packages/${v}/src/*`] };
+          return { ...result, [`${packageJson.name}/*`]: `packages/${v}/src/*` };
         },
         {},
       ),

@@ -7,10 +7,10 @@ const buildJson: TaskParamsModel<BuildJsonParamsModel> = {
 
   task: [
     async ({ options }) => {
-      if (options?.filename && options?.value) {
-        const { filename, value } = options;
+      if (options?.path && options?.value) {
+        const { path, value } = options;
         // TODO: as util instead of task?
-        writeFile({ filename, value: JSON.stringify(value, null, '  ') });
+        writeFile({ filename: path, value: JSON.stringify(value, null, '  ') });
       }
     },
   ],

@@ -7,7 +7,7 @@ import { dev } from '@tool/task/web/templates/dev/dev';
 const tasks = nodeTasks({
   additionalTasks: [dev, build, proxy],
 
-  eteTasks: ['run blgd', 'run awd'],
+  eteTasks: ['run bsd', 'run awd'],
 }) satisfies Array<TaskParamsModel<unknown>>;
 
 export default tasks;

@@ -10,8 +10,8 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
 
 export const lintCommand = (fix?: boolean): string => {
-  const { configDir, exclude, include } = config.params();
-  return `npx eslint --config ${configDir} ${
+  const { configPath, exclude, include } = config.params();
+  return `npx eslint --config ${configPath} ${
     fix ? '--fix' : ''
   } --no-error-on-unmatched-pattern ${exclude
     .map((pattern) => `--ignore-pattern "${pattern}"`)
@@ -22,7 +22,7 @@ const config = defineConfig<LintConfigModel, _LintConfigModel>({
   config: _lint,
 
   params: () => ({
-    configDir: fromDist('.eslintrc.json'),
+    configPath: fromDist('.eslintrc.json'),
 
     exclude: [],
 

@@ -22,7 +22,7 @@
     "module": "esnext",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "outDir": "./out-tsc",
+    "outDir": "_dist/out-tsc",
     "paths": {
       "css-in-js-utils/lib/*": [
         "node_modules/css-in-js-utils/es/*"
@@ -48,11 +48,11 @@
       "@backend/graphql-sandbox/*": [
         "packages/backend-graphql-sandbox/src/*"
       ],
-      "@backend/lambda-crawl/*": [
-        "packages/backend-lambda-crawl/src/*"
-      ],
       "@backend/lambda/*": [
         "packages/backend-lambda/src/*"
+      ],
+      "@backend/lambda-crawl/*": [
+        "packages/backend-lambda-crawl/src/*"
       ],
       "@backend/server/*": [
         "packages/backend-server/src/*"
