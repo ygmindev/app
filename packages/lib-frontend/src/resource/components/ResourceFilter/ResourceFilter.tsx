@@ -10,6 +10,7 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE, DATA_TYPE_MORE } from '@lib/shared/data/data.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
+import isNil from 'lodash/isNil';
 import { type ReactElement, useMemo } from 'react';
 
 export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
@@ -68,13 +69,11 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
     [fields],
   );
 
-  // TODO: better typing for TType -> filters?
   const handleSubmit = onSubmit
     ? async (filters: TType): Promise<TResult | null> =>
         onSubmit(
           Object.values(filters as Record<string, Array<FilterModel<TType>>>).reduce(
-            (result, v) => [...result, ...v],
-            [] as Array<FilterModel<TType>>,
+            (result, v) => [...result, ...v.filter((vv) => !isNil(vv.value))],
           ),
         )
     : undefined;

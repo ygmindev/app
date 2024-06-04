@@ -10,7 +10,7 @@ import {
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 import { Authorized } from 'type-graphql';
 
-// TODO: should come from database
+// TODO: should come from database?
 export const getAccessRole = (level: AccessLevelModel): Array<AccessRoleModel> => {
   switch (level) {
     case ACCESS_LEVEL.PROHIBITED:

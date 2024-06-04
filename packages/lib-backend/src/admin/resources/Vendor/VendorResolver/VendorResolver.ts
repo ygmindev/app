@@ -1,6 +1,6 @@
 import { Vendor } from '@lib/backend/admin/resources/Vendor/Vendor';
-import { type VendorResolverModel } from '@lib/backend/admin/resources/Vendor/VendorResolver/VendorResolver.models';
 import { VendorImplementation } from '@lib/backend/admin/resources/Vendor/VendorImplementation/VendorImplementation';
+import { type VendorResolverModel } from '@lib/backend/admin/resources/Vendor/VendorResolver/VendorResolver.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';

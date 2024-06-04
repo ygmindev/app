@@ -1,9 +1,11 @@
+import { getUserFromHeader } from '@lib/backend/auth/utils/getUserFromHeader/getUserFromHeader';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import {
   type _RunServerModel,
   type _RunServerParamsModel,
 } from '@lib/backend/server/utils/runServer/_runServer.models';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
+import { type RequestContextModel } from '@lib/config/api/api.models';
 import graphqlConfig from '@lib/config/graphql/graphql';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
@@ -66,7 +68,17 @@ export const _runServer = async ({
     switch (type) {
       case API_ENDPOINT_TYPE.GRAPHQL: {
         const schema = graphqlConfig.config();
-        const yoga = createYoga({ logging: logger, schema });
+        const yoga = createYoga({
+          context: async ({ request }) => {
+            const context: RequestContextModel = {};
+            const user = await getUserFromHeader(request.headers.get('authorization') ?? undefined);
+            user && (context.user = user);
+            return context;
+          },
+          logging: logger,
+          schema,
+        });
+
         app.route({
           handler: async (req, reply) => {
             const response = await yoga.handleNodeRequestAndResponse(req, reply, { reply, req });
