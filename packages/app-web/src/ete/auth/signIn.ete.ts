@@ -4,7 +4,6 @@ import { APP_URI } from '@lib/shared/http/http.constants';
 
 describe('sign in', () => {
   test('works', async () => {
-    // TODO: is rootUri used?
     const screen = new TestScreen({ rootUri: APP_URI });
     await signIn({ isSnapshot: true, screen });
     // await screen.open(`${ACCOUNT}/${PERSONAL}`);

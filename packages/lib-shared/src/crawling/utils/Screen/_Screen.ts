@@ -16,6 +16,7 @@ import {
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/Screen/Screen.models';
+import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type UriModel } from '@lib/shared/route/route.models';
 import { existsSync, mkdirSync } from 'fs';
@@ -44,23 +45,28 @@ export class _Screen implements _ScreenModel {
 
     this.isInitialized = true;
 
-    // this.page = await this.browser.newPage();
-    // proxy && (await this.page.authenticate({ password: proxy.password, username: proxy.username }));
-    // await this.page.setCacheEnabled(false);
-    // await this.page.setUserAgent(
-    //   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
-    // );
-    // await this.page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
-    // await this.page.setRequestInterception(true);
-    // this.page.on('request', (req) => {
-    //   const type = req.resourceType();
-    //   if (this.options.isIgnoreMedia && (type === 'image' || type === 'font' || type === 'media')) {
-    //     void req.abort();
-    //   } else {
-    //     const headers = req.headers();
-    //     void req.continue(headers);
-    //   }
-    // });
+    this.page = await this.browser.newPage();
+    await this.page.setCacheEnabled(false);
+    await this.page.setUserAgent(
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+    );
+    await this.page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
+    await this.page.setRequestInterception(true);
+    await this.page.evaluateOnNewDocument(() => {
+      Object.defineProperty(navigator, 'webdriver', {
+        get: () => false,
+      });
+    });
+
+    this.page.on('request', (req) => {
+      const type = req.resourceType();
+      if (this.options.isIgnoreMedia && (type === 'image' || type === 'font' || type === 'media')) {
+        void req.abort();
+      } else {
+        const headers = req.headers();
+        void req.continue(headers);
+      }
+    });
   }
 
   find(
@@ -121,35 +127,12 @@ export class _Screen implements _ScreenModel {
     await this.page.keyboard.press(input);
   }
 
-  async open(uri: string): Promise<void> {
+  async open(url: string): Promise<void> {
     !this.isInitialized && (await this.initialize());
-
-    this.page && !this.page.isClosed() && (await this.page.close());
-    this.page = await this.browser.newPage();
-    await this.page.setCacheEnabled(false);
-    await this.page.setUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
-    );
-    await this.page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
-    await this.page.setRequestInterception(true);
-    await this.page.evaluateOnNewDocument(() => {
-      Object.defineProperty(navigator, 'webdriver', {
-        get: () => false,
-      });
-    });
-
-    this.page.on('request', (req) => {
-      const type = req.resourceType();
-      if (this.options.isIgnoreMedia && (type === 'image' || type === 'font' || type === 'media')) {
-        void req.abort();
-      } else {
-        const headers = req.headers();
-        void req.continue(headers);
-      }
-    });
-    await this.page.goto(uri, {
+    const uriF = uri({ host: this.options.rootUri, pathname: url });
+    await this.page.goto(uriF, {
       timeout: this.options.navigationTimeout,
-      waitUntil: 'domcontentloaded',
+      waitUntil: 'networkidle2',
     });
     await this.page
       .createCDPSession()
@@ -201,7 +184,7 @@ const find = async (
   {
     delay = 0,
     index = -1,
-    isThrow = false,
+    isThrow = true,
     timeout = 0,
   }: Omit<SelectorOptionModel, 'isDelay' | 'timeout'> & {
     delay?: number;
@@ -217,7 +200,10 @@ const find = async (
       logger.info(`Finding ${stringify(selector)}...`);
       timeout && (await handle.waitForSelector(selectorF, { timeout }));
     } catch (e) {
-      console.warn(e);
+      if (isThrow) {
+        throw e;
+      }
+      logger.warn(e);
     }
     let selected: ElementHandle;
     if (index >= 0) {
@@ -256,7 +242,12 @@ const findAll = async (
         (await handle.waitForSelector(selectorF, {
           timeout,
         }));
-    } catch (e) {}
+    } catch (e) {
+      if (isThrow) {
+        throw e;
+      }
+      logger.warn(e);
+    }
     const selected = await handle.$$(selectorF);
     if (selected) {
       logger.info(`Found all ${stringify(selector)}!`);

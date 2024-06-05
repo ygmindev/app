@@ -15,7 +15,7 @@ export type _ScreenModel = Pick<HandleModel, 'find' | 'findAll'> & {
 
   key(value: KeyTypeModel, options?: SelectorOptionModel): Promise<void>;
 
-  open(uri: string): Promise<void>;
+  open(url: string): Promise<void>;
 
   snapshot(params?: { filename?: string }): Promise<Buffer | null>;
 
