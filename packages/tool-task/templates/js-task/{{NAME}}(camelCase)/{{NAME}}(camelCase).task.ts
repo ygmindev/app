@@ -4,7 +4,7 @@ import { type {{NAME}}(pascalCase)ParamsModel } from '@{{PATH}}(pathCase)/{{NAME
 const {{NAME}}(camelCase): TaskParamsModel<{{NAME}}(pascalCase)ParamsModel> = {
   name: '',
 
-  options: [{ isOptional: true, key: 'key' }],
+  options: () => [{ isOptional: true, key: 'key' }],
 
   task: [({ options }) => options?.key && ''],
 };

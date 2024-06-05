@@ -26,7 +26,7 @@ const cacheDatabase: TaskParamsModel<CacheDatabaseParamsModel> = {
 
   onFinish: ['database-kill'],
 
-  options: [
+  options: () => [
     {
       defaultValue: resources,
       key: 'resources',

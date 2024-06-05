@@ -1,4 +1,6 @@
 export type ProductItemModel = {
+  imageSrc?: string;
+
   name: string;
 
   price: number;

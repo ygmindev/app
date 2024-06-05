@@ -14,7 +14,7 @@ export const releaseImage: TaskParamsModel<ReleaseImageParamsModel> = {
     ({ options, target }) => options?.isBuild === BOOLEAN_STRING.TRUE && `run ${target}-build`,
   ],
 
-  options: [
+  options: () => [
     {
       defaultValue: BOOLEAN_STRING.TRUE,
       key: 'isBuild',

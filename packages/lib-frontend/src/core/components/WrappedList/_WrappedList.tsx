@@ -9,7 +9,9 @@ export const _WrappedList = <TType extends unknown>({
 }: _WrappedListPropsModel<TType>): ReactElement<_WrappedListPropsModel<TType>> => (
   <MasonryInfiniteGrid
     align="center"
-    gap={margin}>
+    gap={margin}
+    observeChildren
+    useResizeObserver>
     {data?.map(element)}
   </MasonryInfiniteGrid>
 );

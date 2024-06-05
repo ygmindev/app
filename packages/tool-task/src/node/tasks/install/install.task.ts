@@ -10,7 +10,7 @@ const install: TaskParamsModel<InstallParamsModel> = {
 
   // onFinish: ['node-post-install'],
 
-  options: [
+  options: () => [
     {
       key: 'packages',
       options: children(fromPackages(), { isDirectory: true }).reduce(

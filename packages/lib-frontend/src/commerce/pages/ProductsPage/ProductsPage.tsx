@@ -6,25 +6,32 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useQuery } from '@lib/frontend/data/hooks/useQuery/useQuery';
 import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { mapParallel } from '@lib/shared/core/utils/mapParallel/mapParallel';
+import { uid } from '@lib/shared/core/utils/uid/uid';
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import range from 'lodash/range';
 
 export const ProductsPage: LFCModel<ProductsPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
 
   const { get } = useHttp();
-  const { data } = useQuery('products', async () =>
+  const { data } = useQuery<void, Array<ProductItemModel & WithIdModel>>('products', async () =>
     mapParallel(
-      range(0, 18).map((i) => async () => ({
+      range(0, 12).map((i) => async () => ({
         id: `${i}`,
-        image: await get<unknown, { message: string }>({
+        imageSrc: await get<unknown, { message: string }>({
           url: 'https://dog.ceo/api/breeds/image/random',
         }).then((item) => item?.message ?? ''),
-        title: `Item ${i}`,
+        name: `Item ${i}`,
+        price: 10,
+        pricingId: uid(),
+        productId: uid(),
       })),
     ),
   );
-
+  console.warn(data);
   return (
     <Wrapper
       {...wrapperProps}
@@ -33,35 +40,14 @@ export const ProductsPage: LFCModel<ProductsPagePropsModel> = ({ ...props }) => 
         data={data ?? []}
         element={(item) => (
           <Product
-            images={[item.image]}
+            images={filterNil([item.imageSrc])}
             key={item.id}
-            title={item.title}
+            title={item.name}
           />
         )}
         flex
         isVerticalScrollable
       />
-
-      {/* <Wrapper
-        isRow
-        isVerticalScrollable
-        isWrap
-        justify={FLEX_JUSTIFY.CENTER}>
-        {products.map((product) => (
-          <Wrapper
-            border
-            height={randomInt(200, 300)}
-            isWrap
-            key={product.id}
-            mBottom
-            mRight
-            p
-            round
-            width={180}>
-            <Text fontStyle={FONT_STYLE.TITLE}>{product.title}</Text>
-          </Wrapper>
-        ))}
-      </Wrapper> */}
     </Wrapper>
   );
 };

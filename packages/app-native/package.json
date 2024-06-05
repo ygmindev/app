@@ -6,7 +6,7 @@
   "dependencies": {
     "@amplitude/react-native": "^2.17.3",
     "@babel/core": "^7.24.4",
-    "@floating-ui/react-native": "^0.10.4",
+    "@floating-ui/react-native": "^0.10.6",
     "@loadable/component": "^5.16.4",
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-async-storage/async-storage": "^1.23.1",
