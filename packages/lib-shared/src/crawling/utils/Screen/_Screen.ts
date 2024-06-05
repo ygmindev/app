@@ -1,8 +1,8 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { _screen } from '@lib/config/screen/_screen';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
-import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import {
@@ -18,7 +18,6 @@ import {
 } from '@lib/shared/crawling/utils/Screen/Screen.models';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type UriModel } from '@lib/shared/route/route.models';
-import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
 import { type Browser, type ElementHandle, type Page } from 'puppeteer';
@@ -41,33 +40,7 @@ export class _Screen implements _ScreenModel {
   }
 
   async initialize(): Promise<void> {
-    const proxy =
-      !!this.options.proxies?.length &&
-      this.options.proxies[Math.floor(Math.random() * this.options.proxies.length)];
-
-    this.browser = await puppeteer.launch({
-      args: filterNil([
-        ...(process.env.NODE_ENV === 'production' ? chromium.args : []),
-        proxy && `--proxy-server=${proxy.url}`,
-        '--disable-dev-shm-usage',
-        '--disable-features=site-per-process',
-        '--disable-gpu',
-        '--disable-setuid-sandbox',
-        '--disable-web-security',
-        '--ignore-certificate-errors',
-        '--no-first-run',
-        '--no-sandbox',
-        '--no-zygote',
-      ])
-        .filter((v) => !v.includes('--use-gl'))
-        .filter(Boolean),
-      defaultViewport: this.options.dimension,
-      executablePath:
-        process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
-      headless: process.env.NODE_ENV === 'production' ? chromium.headless : this.options.isHeadless,
-      ignoreHTTPSErrors: true,
-      protocolTimeout: 0,
-    });
+    this.browser = await puppeteer.launch(_screen(this.options));
 
     this.isInitialized = true;
 

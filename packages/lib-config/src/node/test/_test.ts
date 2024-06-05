@@ -41,6 +41,10 @@ export const _test = ({
 
     coverageReporters: ['lcov'],
 
+    detectOpenHandles: true,
+
+    forceExit: true,
+
     globals: define,
 
     maxWorkers: -1,
@@ -99,7 +103,10 @@ export const _test = ({
     testTimeout: timeout,
 
     transform: {
-      '^.+\\.(t|j)sx?$': ['ts-jest', { tsconfig: fromWorking('tsconfig.json') }],
+      '^.+\\.(t|j)sx?$': [
+        'ts-jest',
+        { isolatedModules: true, tsconfig: fromWorking('tsconfig.json') },
+      ],
     },
 
     transformIgnorePatterns: transpiles ? [`node_modules/(?!(${transpiles.join('|')})/)`] : [],

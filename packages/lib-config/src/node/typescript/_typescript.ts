@@ -5,7 +5,6 @@ import {
   type TypescriptConfigModel,
 } from '@lib/config/node/typescript/typescript.models';
 import reduce from 'lodash/reduce';
-import { join } from 'path';
 import {
   type JsxEmit,
   type ModuleKind,
@@ -37,9 +36,10 @@ export const _typescript = ({
       jsx: 'react-jsx' as unknown as JsxEmit,
       lib: ['esnext', 'esnext.asynciterable', 'dom', 'dom.iterable'],
       module: 'esnext' as unknown as ModuleKind,
-      moduleResolution: 'Bundler' as unknown as ModuleResolutionKind,
+      moduleResolution: 'Node' as unknown as ModuleResolutionKind,
       noEmit: true,
-      outDir: join(distDir, 'out-tsc'),
+      noEmitOnError: false,
+      outDir: './out-tsc',
       paths: reduce(paths, (result, v, k) => ({ ...result, [k]: [v] }), {}),
       resolveJsonModule: true,
       rootDir: root,

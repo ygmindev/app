@@ -19,10 +19,11 @@
       "dom",
       "dom.iterable"
     ],
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "esnext",
+    "moduleResolution": "Node",
     "noEmit": true,
-    "outDir": "_dist/out-tsc",
+    "noEmitOnError": false,
+    "outDir": "./out-tsc",
     "paths": {
       "css-in-js-utils/lib/*": [
         "node_modules/css-in-js-utils/es/*"

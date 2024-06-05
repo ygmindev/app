@@ -20,17 +20,12 @@ describe(displayName, () => {
   });
 
   test('with port', async () => {
-    const result = uri({ host: HOST, path: PATH, port: PORT });
+    const result = uri({ host: HOST, pathname: PATH, port: PORT });
     expect(result).toStrictEqual(`${HOST}:${PORT}/${PATH}`);
   });
 
   test('with params', async () => {
-    const result = uri({
-      host: HOST,
-      params: PARAMS,
-      path: PATH,
-      port: PORT,
-    });
+    const result = uri({ host: HOST, params: PARAMS, pathname: PATH, port: PORT });
     expect(result).toStrictEqual(`${HOST}:${PORT}/${PATH}?key1=value1&key2=value2`);
   });
 });
