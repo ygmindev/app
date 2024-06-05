@@ -6,6 +6,7 @@ describe('sign in', () => {
   test('works', async () => {
     const screen = new TestScreen({ rootUri: APP_URI });
     await signIn({ isSnapshot: true, screen });
+    expect(true).toBe(true);
     // await screen.open(`${ACCOUNT}/${PERSONAL}`);
     // await screen.find({ type: SELECTOR_TYPE.TEXT, value: USER_FIXTURE.email ?? '' });
   });

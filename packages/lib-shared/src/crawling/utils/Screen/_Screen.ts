@@ -132,7 +132,7 @@ export class _Screen implements _ScreenModel {
     const uriF = uri({ host: this.options.rootUri, pathname: url });
     await this.page.goto(uriF, {
       timeout: this.options.navigationTimeout,
-      waitUntil: 'networkidle2',
+      waitUntil: 'networkidle0',
     });
     await this.page
       .createCDPSession()
