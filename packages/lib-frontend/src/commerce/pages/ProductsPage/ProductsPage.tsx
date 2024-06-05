@@ -15,7 +15,7 @@ export const ProductsPage: LFCModel<ProductsPagePropsModel> = ({ ...props }) => 
   const { get } = useHttp();
   const { data } = useQuery('products', async () =>
     mapParallel(
-      range(0, 10).map((i) => async () => ({
+      range(0, 18).map((i) => async () => ({
         id: `${i}`,
         image: await get<unknown, { message: string }>({
           url: 'https://dog.ceo/api/breeds/image/random',

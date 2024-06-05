@@ -10,7 +10,7 @@ import { boilerplate } from '@tool/task/generate/utils/boilerplate/boilerplate';
 const generate: TaskParamsModel<GenerateParamsModel> = {
   name: 'generate',
 
-  options: [
+  options: () => [
     {
       key: 'template',
       options: children(fromPackages('tool-task/templates'), { isDirectory: true }).map(

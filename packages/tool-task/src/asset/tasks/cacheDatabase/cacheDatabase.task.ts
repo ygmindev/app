@@ -42,7 +42,7 @@ const cacheDatabase: TaskParamsModel<CacheDatabaseParamsModel> = {
       const tasks = options?.resources?.map(async (name) => {
         const { result } = await database.getRepository({ name }).getMany({
           filter: [],
-          options: { take: CACHE_RESOURCES[name as keyof typeof CACHE_RESOURCES].count },
+          options: () => ({ take: CACHE_RESOURCES[name as keyof typeof CACHE_RESOURCES].count }),
         });
         if (result) {
           const value = { created: new Date(), data: result } satisfies CacheAssetModel;

@@ -18,6 +18,7 @@ import {
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type UriModel } from '@lib/shared/route/route.models';
+import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
 import { type Browser, type ElementHandle, type Page } from 'puppeteer';
@@ -40,7 +41,11 @@ export class _Screen implements _ScreenModel {
   }
 
   async initialize(): Promise<void> {
-    this.browser = await puppeteer.launch(_screen(this.options));
+    this.browser = await puppeteer.launch({
+      ..._screen(this.options),
+      executablePath:
+        process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
+    });
 
     this.isInitialized = true;
 
@@ -128,7 +133,7 @@ export class _Screen implements _ScreenModel {
 
   async open(url: string): Promise<void> {
     !this.isInitialized && (await this.initialize());
-    const uriF = uri({ host: this.options.rootUri, pathname: url });
+    const uriF = this.options.rootUri ? uri({ host: this.options.rootUri, pathname: url }) : url;
     await this.page.goto(uriF, {
       timeout: this.options.navigationTimeout,
       waitUntil: 'networkidle0',
@@ -156,8 +161,8 @@ export class _Screen implements _ScreenModel {
 
   uri(): UriModel | null {
     if (this.page) {
-      const { host, pathname, port } = new URL(this.page.url());
-      return { host, pathname, port };
+      const { host, pathname, port, protocol } = new URL(this.page.url());
+      return { host: `${protocol}//${host}`, pathname, port };
     }
     return null;
   }
@@ -181,7 +186,7 @@ const find = async (
   {
     delay = 0,
     index = -1,
-    isThrow = true,
+    isThrow = false,
     timeout = 0,
   }: Omit<SelectorOptionModel, 'isDelay' | 'timeout'> & {
     delay?: number;
@@ -221,7 +226,7 @@ const findAll = async (
   selector: SelectorModel,
   {
     delay,
-    isThrow = true,
+    isThrow = false,
     timeout,
   }: Omit<SelectorOptionModel, 'isDelay' | 'timeout'> & {
     delay?: number;
@@ -600,7 +605,7 @@ class _Handle implements HandleModel {
 //   selector: SelectorModel,
 //   {
 //     delay,
-//     isThrow = true,
+//     isThrow = false,
 //     timeout,
 //   }: Omit<SelectorOptionModel, 'isDelay' | 'timeout'> & {
 //     delay?: number;

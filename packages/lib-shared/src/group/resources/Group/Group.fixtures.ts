@@ -1,4 +1,4 @@
-import { getEntityResourceFixture } from '@lib/backend/test/utils/getEntityResourceFixture/getEntityResourceFixture';
+import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 
 export const GROUP_FIXTURES: Array<GroupModel> = getEntityResourceFixture({

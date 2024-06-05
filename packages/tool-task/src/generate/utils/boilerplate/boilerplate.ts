@@ -50,6 +50,7 @@ export const boilerplate = async ({
       return variablesF[variable];
     }
     let value: string;
+
     switch (variable) {
       case '{{PATH}}': {
         const root = await resolveVariable('{{ROOT}}');

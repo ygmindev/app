@@ -29,8 +29,8 @@ export const _screen = ({
     .filter((v) => !v.includes('--use-gl'))
     .filter(Boolean),
   defaultViewport: dimension,
-  //   executablePath:
-  //     process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
+  // executablePath:
+  //   process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
   headless: process.env.NODE_ENV === 'production' ? chromium.headless : isHeadless,
   ignoreHTTPSErrors: true,
   protocolTimeout: 0,

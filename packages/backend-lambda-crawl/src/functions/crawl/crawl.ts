@@ -8,6 +8,7 @@ import { Screen } from '@lib/shared/crawling/utils/Screen/Screen';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { JWT } from 'google-auth-library';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
@@ -132,13 +133,17 @@ export const main = createLambdaHandler<{
         .then((h) => h?.press());
       await sleep(5000);
 
-      await screen.open(`${link}${pageIndex > 0 ? `&Nao=${pageIndex * PAGE_SIZE}` : ''}`);
-      await screen.find({ value: '.results-layout__toggle-grid' }).then((h) => h?.press());
+      await screen.open(link ?? '');
       await screen
         .find({ type: SELECTOR_TYPE.TEXT, value: 'Show Unavailable Products' })
         .then((h) => h?.parent())
         .then((h) => h?.parent())
         .then((h) => h?.press());
+
+      const uriF = screen.uri();
+      const linkF = uriF && uri({ ...uriF, isTrim: false });
+      await screen.open(`${linkF}${pageIndex > 0 ? `?Nao=${pageIndex * PAGE_SIZE}` : ''}`);
+      await screen.find({ value: '.results-layout__toggle-grid' }).then((h) => h?.press());
 
       const resultContainer = await screen.find({ value: '.results-wrapped' });
       const productContainers = await resultContainer?.findAll({ value: '.browse-search__pod' });
@@ -249,9 +254,6 @@ export const main = createLambdaHandler<{
           if (url) {
             const itemQueue = new ConcurrentQueue();
             const row: Record<string, unknown> = productCache[url] || {};
-
-            console.warn(`### cache?: ${url}`);
-            console.warn(`### cache!: ${stringify(row)}`);
 
             COLUMNS.forEach((column) => (row[column] = row[column] || ''));
             row['Product Category Full Name'] = category;
@@ -514,7 +516,6 @@ export const main = createLambdaHandler<{
 
             if (result) {
               if (result.length > 0 && count % UPLOAD_SIZE === 0) {
-                console.warn('@@@ upload?');
                 await upload(result);
                 result = [];
               }
