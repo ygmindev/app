@@ -14,7 +14,7 @@ const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
 
     elementTimeout: 5000,
 
-    isHeadless: false,
+    isHeadless: true,
 
     isIgnoreMedia: true,
 
