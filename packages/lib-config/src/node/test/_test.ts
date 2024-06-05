@@ -2,6 +2,7 @@ import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
 import { _typescript } from '@lib/config/node/typescript/_typescript';
 import { BOOLEAN_STRING } from '@lib/shared/core/core.constants';
@@ -33,11 +34,11 @@ export const _test = ({
   const testExtension =
     process.env.TEST_IS_ETE === BOOLEAN_STRING.TRUE ? eteExtension : specExtension;
   return {
-    cacheDirectory: fromWorking(cacheDir, outputDir),
+    cacheDirectory: fromWorking(BUILD_DIR, cacheDir, outputDir),
 
     collectCoverage: true,
 
-    coverageDirectory: fromWorking(buildDir, outputDir, 'coverage'),
+    coverageDirectory: fromWorking(BUILD_DIR, outputDir, 'coverage'),
 
     coverageReporters: ['lcov'],
 
@@ -70,7 +71,7 @@ export const _test = ({
         {
           darkTheme: true,
           openReport: false,
-          publicPath: fromWorking(outputDir, 'reports'),
+          publicPath: fromWorking(BUILD_DIR, outputDir, 'reports'),
         },
       ],
     ],

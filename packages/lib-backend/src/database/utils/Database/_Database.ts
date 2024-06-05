@@ -175,7 +175,6 @@ export class _Database implements _DatabaseModel {
         const em = this._getEntityManager();
         const collection = em.getCollection(name);
         const filterF = cleanDocument(getFilter<TType>(filter));
-        console.warn(filterF);
         const result = await (options && options.aggregate
           ? collection
               .aggregate([

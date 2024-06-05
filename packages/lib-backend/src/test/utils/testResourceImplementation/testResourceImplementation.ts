@@ -6,6 +6,7 @@ import {
   type TestableResourceImplementationModel,
   type TestResourceImplementationParamsModel,
 } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation.models';
+import databaseConfig from '@lib/config/database/database.mongo';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
@@ -52,7 +53,7 @@ export const testResourceImplementation = ({
   >;
 
   beforeAll(async () => {
-    await initialize();
+    await initialize({ database: databaseConfig.params() });
     implementation = getImplementation();
   });
 

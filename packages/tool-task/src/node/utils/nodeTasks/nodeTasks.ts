@@ -1,6 +1,3 @@
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { DIST_DIR, PUBLIC_DIR } from '@lib/config/file/file.constants';
 import testConfig from '@lib/config/node/test/test.base';
 import { BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
@@ -10,7 +7,6 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import clean from '@tool/task/core/templates/clean/clean';
 import { PARALLEL_CONDITION } from '@tool/task/core/utils/runParallel/runParallel.constants';
-import { copy } from '@tool/task/file/utils/copy/copy';
 import { lint } from '@tool/task/node/templates/lint/lint';
 import { test } from '@tool/task/node/templates/test/test';
 import { type TestParamsModel } from '@tool/task/node/templates/test/test.models';
@@ -40,14 +36,14 @@ export const nodeTasks = ({
     const testEte: TaskParamsModel<TestParamsModel> = merge([
       {
         name: `${testUnit.name}-ete`,
-        onFinish: [
-          async ({ root }) =>
-            copy({
-              from: joinPaths([root, outputDir]),
-              isOverwrite: true,
-              to: fromStatic(PUBLIC_DIR, DIST_DIR, 'test'),
-            }),
-        ],
+        // onFinish: [
+        //   async ({ root }) =>
+        //     copy({
+        //       from: joinPaths([root, outputDir]),
+        //       isOverwrite: true,
+        //       to: fromStatic(PUBLIC_DIR, DIST_DIR, 'test'),
+        //     }),
+        // ],
         task: [
           [
             [({ target }) => `run ${target}-${testBase.name}`, ...(eteTasks ?? [])],

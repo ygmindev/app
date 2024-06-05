@@ -1,4 +1,3 @@
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { _screen } from '@lib/config/screen/_screen';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
@@ -142,10 +141,8 @@ export class _Screen implements _ScreenModel {
   }
 
   async snapshot({ filename }: { filename?: string }): Promise<Buffer | null> {
-    const dirname = this.options.snapshotPath
-      ? joinPaths([fromWorking(), this.options.snapshotPath])
-      : undefined;
-    dirname && !existsSync(dirname) && mkdirSync(dirname, { recursive: true });
+    const { snapshotPath } = this.options;
+    snapshotPath && !existsSync(snapshotPath) && mkdirSync(snapshotPath, { recursive: true });
     return this.page.screenshot({
       clip: {
         height: this.options.dimension.height ?? 1000,
@@ -153,7 +150,7 @@ export class _Screen implements _ScreenModel {
         x: 0,
         y: 0,
       },
-      path: dirname && filename ? joinPaths([dirname, `${filename}.png`]) : undefined,
+      path: snapshotPath && filename ? joinPaths([snapshotPath, `${filename}.png`]) : undefined,
     });
   }
 

@@ -17,7 +17,7 @@ describe(displayName, () => {
       RootResource: () => RootEntity,
       name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
     });
-    const result = new Root();
+    const result = Root && new Root();
     expect(result).toHaveProperty('root');
   });
 });

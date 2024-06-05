@@ -1,4 +1,4 @@
-import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { FILE_CONFIG } from '@lib/config/file/file.constants';
 import { _screen } from '@lib/config/screen/_screen';
 import { type _ScreenConfigModel, type ScreenConfigModel } from '@lib/config/screen/screen.models';
@@ -31,7 +31,7 @@ const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
     snapshotPath:
       process.env.NODE_ENV === 'production'
         ? undefined
-        : joinPaths([FILE_CONFIG.buildDir, 'snapshots']),
+        : fromWorking(FILE_CONFIG.buildDir, 'snapshots'),
   }),
 });
 
