@@ -31,7 +31,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
                       <Button
                         icon="add"
                         onPress={() =>
-                          actions?.commerce.productsAdd({
+                          actions?.commerce.itemsAdd({
                             name: product.name ?? '',
                             price: pricing.price,
                             pricingId: pricing._id,

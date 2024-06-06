@@ -1,9 +1,9 @@
-import { Product } from '@lib/frontend/commerce/components/Product/Product';
-import { type ProductPropsModel } from '@lib/frontend/commerce/components/Product/Product.models';
+import { ProductItemTile } from '@lib/frontend/commerce/components/ProductItemTile/ProductItemTile';
+import { type ProductItemTilePropsModel } from '@lib/frontend/commerce/components/ProductItemTile/ProductItemTile.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ProductPropsModel>({ target: Product });
+const { Component, displayName, testID } = withTestComponent<ProductItemTilePropsModel>({ target: ProductItemTile });
 
 describe(displayName, () => {
   test('works', async () => {

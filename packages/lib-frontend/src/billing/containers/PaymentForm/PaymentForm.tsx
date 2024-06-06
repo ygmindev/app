@@ -30,7 +30,7 @@ export const PaymentForm: LFCModel<PaymentFormPropsModel> = ({
         {
           element: (
             <PaymentMethodInput
-              products={data?.products}
+              products={data?.items}
               ref={ref}
             />
           ),

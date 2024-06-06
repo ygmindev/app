@@ -12,7 +12,6 @@ import {
 import { type StateProviderPropsModel } from '@lib/frontend/state/utils/Store/Store.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { mapValuesAsync } from '@lib/shared/core/utils/mapValuesAsync/mapValuesAsync';
-import { merge } from '@lib/shared/core/utils/merge/merge';
 import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import {
   type CaseReducer,
@@ -118,40 +117,72 @@ export class _Store<
           reducer.defaultState,
           ({ storeActions, storeInitialState }, v, k) => {
             type TKey = keyof typeof storeActions;
+            type TKeyAction = keyof typeof actionsF;
             const kS = k as keyof StateModel;
             storeActions[`${k}Set` as TKey] = (store, value) => {
-              store.set(kS, value as never);
+              actionsF[`${k}Set` as TKeyAction]
+                ? (
+                    actionsF[`${k}Set` as TKeyAction] as unknown as ActionModel<
+                      TType[TKeys[number]],
+                      TParams[TKeys[number]][TKey]
+                    >
+                  )(store, value)
+                : store.set(kS, value as never);
             };
             storeActions[`${k}Unset` as TKey] = (store) => {
-              store.unset(kS);
+              actionsF[`${k}Unset` as TKeyAction]
+                ? (
+                    actionsF[`${k}Unset` as TKeyAction] as unknown as ActionModel<
+                      TType[TKeys[number]],
+                      TParams[TKeys[number]][TKey]
+                    >
+                  )(store)
+                : store.unset(kS);
               void storage.removeItem(k);
             };
             if (isArray(v)) {
               storeInitialState[kS] = [] as StateModel[keyof StateModel];
               storeActions[`${k}Add` as TKey] = (store, value) => {
-                store.set(kS, uniq([...((store.get(kS) as Array<never>) ?? []), value]) as never);
+                actionsF[`${k}Add` as TKeyAction]
+                  ? (
+                      actionsF[`${k}Add` as TKeyAction] as unknown as ActionModel<
+                        TType[TKeys[number]],
+                        TParams[TKeys[number]][TKey]
+                      >
+                    )(store, value)
+                  : store.set(
+                      kS,
+                      uniq([...((store.get(kS) as Array<never>) ?? []), value]) as never,
+                    );
               };
               storeActions[`${k}Remove` as TKey] = (store, value) => {
-                store.set(
-                  kS,
-                  ((store.get(kS) as Array<never>).filter((v) => !isMatch(v, value as object)) ??
-                    []) as never,
-                );
+                actionsF[`${k}Remove` as TKeyAction]
+                  ? (
+                      actionsF[`${k}Remove` as TKeyAction] as unknown as ActionModel<
+                        TType[TKeys[number]],
+                        TParams[TKeys[number]][TKey]
+                      >
+                    )(store, value)
+                  : store.set(
+                      kS,
+                      ((store.get(kS) as Array<never>).filter(
+                        (v) => !isMatch(v, value as object),
+                      ) ?? []) as never,
+                    );
               };
               storeActions[`${k}Update` as TKey] = (store, value) => {
                 const [filter, update] = value as [never, object];
                 const values = cloneDeep(store.get(kS) as Array<never>);
                 const i = isNumber(filter) ? filter : findIndex(values, filter);
                 if (i >= 0) {
-                  values[i] = (
-                    isPlainObject(values[i]) ? { ...(values[i] as object), ...update } : update
-                  ) as never;
+                  values[i] = update as never;
+                  store.set(kS, values as never);
                 }
               };
             } else if (isPlainObject(v)) {
               storeInitialState[kS] = {} as StateModel[keyof StateModel];
               storeActions[`${k}Update` as TKey] = (store, value) => {
-                store.set(kS, merge([store.get(kS), value as never]));
+                store.set(kS, value as never);
               };
             } else {
               storeInitialState[kS] = undefined as StateModel[keyof StateModel];

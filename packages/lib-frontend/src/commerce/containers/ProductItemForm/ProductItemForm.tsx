@@ -1,4 +1,4 @@
-import { type ProductFormPropsModel } from '@lib/frontend/commerce/containers/ProductForm/ProductForm.models';
+import { type ProductItemFormPropsModel } from '@lib/frontend/commerce/containers/ProductItemForm/ProductItemForm.models';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
@@ -10,10 +10,14 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
 
-export const ProductForm: LFCModel<ProductFormPropsModel> = ({ onSubmit, onSuccess, ...props }) => {
+export const ProductItemForm: LFCModel<ProductItemFormPropsModel> = ({
+  onSubmit,
+  onSuccess,
+  ...props
+}) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([COMMERCE]);
-  const [products, productsSet] = useStore('commerce.products');
+  const [items, itemsSet] = useStore('commerce.items');
   return (
     <FormContainer
       {...wrapperProps}
@@ -44,13 +48,13 @@ export const ProductForm: LFCModel<ProductFormPropsModel> = ({ onSubmit, onSucce
                   ]}
                 />
               }
-              onChange={productsSet}
+              onChange={itemsSet}
             />
           ),
-          id: 'products',
+          id: 'items',
         },
       ]}
-      initialValues={{ products }}
+      initialValues={{ items }}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
     />

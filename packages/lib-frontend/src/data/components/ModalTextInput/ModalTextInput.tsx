@@ -1,8 +1,8 @@
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import {
-  type ModalTextInputRefModel,
   type ModalTextInputPropsModel,
+  type ModalTextInputRefModel,
 } from '@lib/frontend/data/components/ModalTextInput/ModalTextInput.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { forwardRef, useState } from 'react';

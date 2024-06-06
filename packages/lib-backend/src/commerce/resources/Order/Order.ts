@@ -10,9 +10,6 @@ import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isRepository: true, name: ORDER_RESOURCE_NAME })
 export class Order extends EntityResource implements OrderModel {
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
-  paymentMethodId?: string;
-
   @withField({
     Resource: () => ProductItem,
     isArray: true,
@@ -20,5 +17,8 @@ export class Order extends EntityResource implements OrderModel {
     isRepository: true,
     type: PROPERTY_TYPE.RESOURCE,
   })
-  products?: Array<PartialModel<ProductItemModel>>;
+  items?: Array<PartialModel<ProductItemModel>>;
+
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  paymentMethodId?: string;
 }

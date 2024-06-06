@@ -33,7 +33,10 @@ export const SavedPaymentMethodInput: LFCModel<SavedPaymentMethodInputPropsModel
     <DataBoundary
       {...wrapperProps}
       fallbackData={{
-        result: getEntityResourceFixture({ count: 3, data: (i) => ({ _id: i, title: 'test' }) }),
+        result: getEntityResourceFixture({
+          count: 3,
+          data: (i) => ({ _id: i, title: 'test' }),
+        }),
       }}
       id={PAYMENT_METHOD_RESOURCE_NAME}
       params={{ root: currentUser?._id }}

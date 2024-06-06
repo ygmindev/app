@@ -1,9 +1,11 @@
-import { ProductForm } from '@lib/frontend/commerce/containers/ProductForm/ProductForm';
-import { type ProductFormPropsModel } from '@lib/frontend/commerce/containers/ProductForm/ProductForm.models';
+import { PriceTile } from '@lib/frontend/commerce/components/PriceTile/PriceTile';
+import { type PriceTilePropsModel } from '@lib/frontend/commerce/components/PriceTile/PriceTile.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ProductFormPropsModel>({ target: ProductForm });
+const { Component, displayName, testID } = withTestComponent<PriceTilePropsModel>({
+  target: PriceTile,
+});
 
 describe(displayName, () => {
   test('works', async () => {

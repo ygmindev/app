@@ -24,6 +24,9 @@ export class Product extends EntityResource implements ProductModel {
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   description?: string;
 
+  @withField({ isArray: true, isOptional: true, type: DATA_TYPE.STRING })
+  imageSrc?: Array<string>;
+
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   name!: string;
 }

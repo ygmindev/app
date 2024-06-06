@@ -47,7 +47,7 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
       }
       p
       redirectTo={{ pathname: `/${ACCOUNT}/${PERSONAL}` }}
-      successMessage={t('core:updateSuccess', { value: t('user:name') })}
+      successMessage={t('core:updatedSuccess', { value: t('user:name') })}
     />
   ) : null;
 };

@@ -23,6 +23,6 @@ export class Pricing extends EmbeddedResource implements PricingModel {
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   frequency!: PricingFrequencyModel;
 
-  @withField({ isRepository: true, type: DATA_TYPE.NUMBER })
-  price!: number;
+  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.NUMBER })
+  price?: number;
 }

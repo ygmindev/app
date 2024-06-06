@@ -4,8 +4,8 @@ export const COMMERCE_REDUCER: CommerceReducerModel = {
   actions: {},
 
   defaultState: {
-    products: [],
+    items: [],
   },
 
-  persist: true,
+  // persist: true,
 };

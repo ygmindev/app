@@ -1,5 +1,6 @@
 {
   "add": "add {{value}}",
+  "addedSuccess": "Successfully added {{value}}",
   "any": "any",
   "browse": "TRANSLATION_MISSING",
   "cancel": "cancel",

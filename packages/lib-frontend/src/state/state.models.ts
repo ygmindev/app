@@ -85,7 +85,7 @@ export type ActionModel<TType extends object, TValue> = (
     set<TKey extends keyof TType>(key: TKey, value: TType[TKey]): void;
     unset<TKey extends keyof TType>(key: TKey): void;
   },
-  value: TValue,
+  value?: TValue,
 ) => void;
 
 export type CookieOptionModel = {

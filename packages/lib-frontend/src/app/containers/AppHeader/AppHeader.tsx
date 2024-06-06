@@ -23,7 +23,7 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
   const { push } = useRouter();
   const { wrapperProps } = useLayoutStyles({ props });
   const [isOffline] = useStore('app.isOffline');
-  const [products] = useStore('commerce.products');
+  const [items] = useStore('commerce.items');
   const theme = useTheme();
   return (
     <Wrapper
@@ -46,7 +46,7 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
 
         <Button
           icon="cart"
-          iconText={`${products?.length ?? 0}`}
+          iconText={`${items?.length ?? 0}`}
           onPress={() => push({ pathname: ORDER })}
           type={BUTTON_TYPE.INVISIBLE}
         />

@@ -7,7 +7,7 @@ import { type RLFCModel, type RLFCPropsModel } from '@lib/frontend/core/core.mod
 import { forwardRef, useState } from 'react';
 
 export const ModalButton: RLFCModel<ModalRefModel, ModalButtonPropsModel> = forwardRef(
-  ({ element, onClose, onPress, title, ...props }, ref) => {
+  ({ element, isFullSize = true, onClose, onPress, title, ...props }, ref) => {
     const [isOpen, isOpenSet] = useState<boolean>();
 
     const handleToggle = (isOpen?: boolean): void => {
@@ -26,7 +26,7 @@ export const ModalButton: RLFCModel<ModalRefModel, ModalButtonPropsModel> = forw
         />
 
         <Modal
-          isFullSize
+          isFullSize={isFullSize}
           isOpen={isOpen}
           onToggle={handleToggle}
           ref={ref}

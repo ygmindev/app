@@ -1799,7 +1799,7 @@ input ProductInput {
 }
 
 type ProductItem {
-  imageSrc: String
+  imageSrc: [String]
   name: String
   price: Float
   pricingId: String
@@ -1808,7 +1808,7 @@ type ProductItem {
 }
 
 input ProductItemInput {
-  imageSrc: String
+  imageSrc: [String]
   name: String
   price: Float
   pricingId: String

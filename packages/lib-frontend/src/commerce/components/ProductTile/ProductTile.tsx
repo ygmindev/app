@@ -1,18 +1,21 @@
-import { type ProductPropsModel } from '@lib/frontend/commerce/components/Product/Product.models';
-import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
-import { Button } from '@lib/frontend/core/components/Button/Button';
+import { AddToCartButton } from '@lib/frontend/commerce/components/AddToCartButton/AddToCartButton';
+import { type ProductTilePropsModel } from '@lib/frontend/commerce/components/ProductTile/ProductTile.models';
+import { Text } from '@lib/frontend/core/components/Text/Text';
 // import { Image } from '@lib/frontend/core/components/Image/Image';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
+import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 
-export const Product: LFCModel<ProductPropsModel> = ({ images, subTitle, title, ...props }) => {
+export const ProductTile: LFCModel<ProductTilePropsModel> = ({ product, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { t } = useTranslation([COMMERCE]);
+  const item: ProductItemModel = {
+    name: product.name,
+    pricingId: '',
+    productId: product._id,
+  };
   return (
     <Wrapper
       {...wrapperProps}
@@ -33,9 +36,12 @@ export const Product: LFCModel<ProductPropsModel> = ({ images, subTitle, title, 
         /> */}
       </Wrapper>
 
-      <AsyncText isBold>{title}</AsyncText>
+      <Text isBold>{product.name}</Text>
 
-      <Button size={THEME_SIZE.SMALL}>{t('commerce:addToCart')}</Button>
+      <AddToCartButton
+        item={item}
+        size={THEME_SIZE.SMALL}
+      />
     </Wrapper>
   );
 };

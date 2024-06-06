@@ -10,6 +10,8 @@ export type ProductModel = EntityResourceModel & {
 
   description?: string;
 
+  imageSrc?: Array<string>;
+
   name: string;
 };
 

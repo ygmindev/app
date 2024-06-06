@@ -6,8 +6,8 @@ import {
 } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type OrderModel = EntityResourceModel & {
+  items?: Array<PartialModel<ProductItemModel>>;
   paymentMethodId?: string;
-  products?: Array<PartialModel<ProductItemModel>>;
 };
 
 export type OrderFormModel = EntityResourceDataModel<OrderModel>;

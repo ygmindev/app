@@ -3,7 +3,7 @@ import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/Pr
 import { type EmptyObjectModel, type PartialModel } from '@lib/shared/core/core.models';
 
 export type CommerceStateModel = {
-  products?: Array<PartialModel<ProductItemModel>>;
+  items?: Array<PartialModel<ProductItemModel>>;
 };
 
 export type CommerceActionsParamsModel = EmptyObjectModel;

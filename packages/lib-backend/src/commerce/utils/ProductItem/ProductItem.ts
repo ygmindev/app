@@ -5,14 +5,11 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: 'ProductItem' })
 export class ProductItem implements ProductItemModel {
-  @withField({ isOptional: true, type: DATA_TYPE.STRING })
-  imageSrc?: string;
-
   @withField({ type: DATA_TYPE.STRING })
   name!: string;
 
-  @withField({ type: DATA_TYPE.NUMBER })
-  price!: number;
+  @withField({ isOptional: true, type: DATA_TYPE.NUMBER })
+  price?: number;
 
   @withField({ type: DATA_TYPE.STRING })
   pricingId!: string;

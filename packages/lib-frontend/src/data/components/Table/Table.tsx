@@ -129,7 +129,8 @@ export const Table = forwardRef(
               {isDeletable && (
                 <Button
                   color={THEME_COLOR.ERROR}
-                  icon="remove"
+                  confirmMessage={t('core:confirmRemove')}
+                  icon="trash"
                   onPress={
                     onChange
                       ? () => {

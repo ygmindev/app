@@ -43,7 +43,7 @@ export const useForm = <TType, TResult = void>({
       isBlocking && isLoadingSet(true);
       const data = onSubmit && (await onSubmit(valuesF));
       onSuccess && (await onSuccess(valuesF, data));
-      successMessage && success({ description: t('core:updateSuccess') });
+      successMessage && success({ description: t('core:updatedSuccess') });
       redirectTo && replace(redirectTo);
       return data ?? null;
     } catch (e) {

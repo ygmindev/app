@@ -16,9 +16,9 @@ export class OrderImplementation
     Resource: Order,
     beforeCreate: async ({ input }, context) => {
       input?.form?.paymentMethodId &&
-        input?.form?.products &&
+        input?.form?.items &&
         (await Container.get(PaymentMethodImplementation).createToken({
-          form: { paymentMethodId: input.form.paymentMethodId, products: input.form.products },
+          form: { paymentMethodId: input.form.paymentMethodId, products: input.form.items },
           root: context?.user?._id,
         }));
       return input;

@@ -3,8 +3,5 @@ import {
   type GetPriceParamsModel,
 } from '@lib/shared/commerce/utils/getPrice/getPrice.models';
 
-export const getPrice = (products?: GetPriceParamsModel): GetPriceModel =>
-  products?.reduce(
-    (result, product) => result + (product.price ?? 0) * (product.quantity ?? 1),
-    0,
-  ) ?? 0;
+export const getPrice = (items?: GetPriceParamsModel): GetPriceModel =>
+  items?.reduce((result, item) => result + (item.price ?? 0) * (item.quantity ?? 1), 0) ?? 0;

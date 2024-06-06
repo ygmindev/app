@@ -1,5 +1,3 @@
-import { type ComponentType, type ForwardedRef } from 'react';
-
 import { type RSFCModel } from '@lib/frontend/core/core.models';
 import { type UseStylesParamsModel } from '@lib/frontend/style/hooks/useStyles/useStyles.models';
 import { type UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
@@ -9,6 +7,7 @@ import {
   type ViewStyleModel,
 } from '@lib/frontend/style/style.models';
 import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
+import { type ComponentType, type ForwardedRef } from 'react';
 
 export type ComposeComponentParamsModel<
   TProps,
