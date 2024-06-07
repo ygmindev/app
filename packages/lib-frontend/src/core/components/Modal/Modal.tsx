@@ -7,14 +7,20 @@ import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { KeyboardContainer } from '@lib/frontend/core/components/KeyboardContainer/KeyboardContainer';
+import { MODAL_SWIPE_THRESHOLD } from '@lib/frontend/core/components/Modal/Modal.constants';
 import {
   type ModalPropsModel,
   type ModalRefModel,
 } from '@lib/frontend/core/components/Modal/Modal.models';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
+import { Swipeable } from '@lib/frontend/core/components/Swipeable/Swipeable';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { CORNER, DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type MeasureModel, type RLFCModel } from '@lib/frontend/core/core.models';
+import {
+  type MeasureModel,
+  type PositionModel,
+  type RLFCModel,
+} from '@lib/frontend/core/core.models';
 import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useValueDelayed';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
@@ -26,10 +32,23 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
 export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
-  ({ children, height, isFullSize, isOpen, onToggle, title, width }, ref) => {
+  (
+    {
+      children,
+      height,
+      isFullSize,
+      isOpen,
+      onToggle,
+      swipeThreshold = MODAL_SWIPE_THRESHOLD,
+      title,
+      width,
+    },
+    ref,
+  ) => {
     const [deviceHeight] = useStore('app.dimension.height');
     const [measure, measureSet] = useState<MeasureModel>();
     const isOpenF = useValueDelayed(isOpen ?? false);
+    const [swipe, swipeSet] = useState<PositionModel>();
 
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue: false,
@@ -38,11 +57,17 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
     });
 
     const theme = useTheme();
-    const heightF = isFullSize
-      ? (deviceHeight ?? 0) - theme.shape.spacing[THEME_SIZE.MEDIUM]
-      : height ?? measure?.height;
+    const heightF =
+      (isFullSize
+        ? (deviceHeight ?? 0) - theme.shape.spacing[THEME_SIZE.MEDIUM]
+        : height ?? measure?.height) ?? 0;
 
     useImperativeHandle(ref, () => ({ toggle: valueControlledSet }));
+
+    const handleSwipeEnd = ({ y }: PositionModel): void => {
+      swipeThreshold && (y ?? 0) >= swipeThreshold && onToggle && onToggle(false);
+      swipeSet({ x: 0, y: 0 });
+    };
 
     const elementStateF = valueControlled ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
     return isOpenF || isOpen ? (
@@ -63,7 +88,11 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                 <Wrapper
                   animation={{
                     isInitial: true,
-                    states: ANIMATION_STATES_SLIDABLE_VERTICAL({ deviceHeight, height: heightF }),
+                    states: ANIMATION_STATES_SLIDABLE_VERTICAL({
+                      deviceHeight,
+                      height: heightF,
+                      offset: swipe?.y,
+                    }),
                   }}
                   backgroundColor={THEME_COLOR_MORE.SURFACE}
                   elementState={elementStateF}
@@ -76,28 +105,32 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                   round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
                   width={width}>
                   <KeyboardContainer>
-                    <Wrapper
-                      border={DIRECTION.BOTTOM}
-                      isAlign
-                      isRow
-                      pHorizontal
-                      pVertical={THEME_SIZE.SMALL}>
-                      {title && (
-                        <Wrapper flex>
-                          {isAsyncText(title) ? (
-                            <AsyncText fontStyle={FONT_STYLE.TITLE}>{title}</AsyncText>
-                          ) : (
-                            title
-                          )}
-                        </Wrapper>
-                      )}
+                    <Swipeable
+                      onChange={swipeSet}
+                      onEnd={handleSwipeEnd}>
+                      <Wrapper
+                        border={DIRECTION.BOTTOM}
+                        isAlign
+                        isRow
+                        pHorizontal
+                        pVertical={THEME_SIZE.SMALL}>
+                        {title && (
+                          <Wrapper flex>
+                            {isAsyncText(title) ? (
+                              <AsyncText fontStyle={FONT_STYLE.TITLE}>{title}</AsyncText>
+                            ) : (
+                              title
+                            )}
+                          </Wrapper>
+                        )}
 
-                      <Button
-                        icon="times"
-                        onPress={() => valueControlledSet(false)}
-                        type={BUTTON_TYPE.INVISIBLE}
-                      />
-                    </Wrapper>
+                        <Button
+                          icon="times"
+                          onPress={() => valueControlledSet(false)}
+                          type={BUTTON_TYPE.INVISIBLE}
+                        />
+                      </Wrapper>
+                    </Swipeable>
 
                     <Wrapper
                       flex

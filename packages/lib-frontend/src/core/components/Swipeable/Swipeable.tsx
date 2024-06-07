@@ -6,10 +6,6 @@ import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const Swipeable = composeComponent<SwipeablePropsModel, _SwipeablePropsModel>({
   Component: _Swipeable,
-
-  getProps: ({ children }) => ({
-    children,
-  }),
 });
 
 process.env.APP_IS_DEBUG && (Swipeable.displayName = variableName({ Swipeable }));

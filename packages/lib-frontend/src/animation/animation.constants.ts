@@ -45,13 +45,15 @@ export const ANIMATION_STATES_SLIDABLE_HORIZONTAL = ({
 export const ANIMATION_STATES_SLIDABLE_VERTICAL = ({
   deviceHeight,
   height,
+  offset,
 }: {
   deviceHeight: number;
   height?: number;
+  offset?: number;
 }): AnimationStatesModel<StyleModel> => ({
-  [ELEMENT_STATE.ACTIVE]: { top: deviceHeight - (height ?? 0) },
-  [ELEMENT_STATE.INACTIVE]: { top: deviceHeight },
-  [ELEMENT_STATE.EXIT]: { top: deviceHeight },
+  [ELEMENT_STATE.ACTIVE]: { top: deviceHeight - (height ?? 0) + (offset ?? 0) },
+  [ELEMENT_STATE.INACTIVE]: { top: deviceHeight + (offset ?? 0) },
+  [ELEMENT_STATE.EXIT]: { top: deviceHeight + (offset ?? 0) },
 });
 
 export const ANIMATION_STATES_FOCUSABLE = ({

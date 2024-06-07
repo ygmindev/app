@@ -16,6 +16,7 @@ export type ModalPropsModel = ChildrenPropsModel &
     isFullSize?: boolean;
     isOpen?: boolean;
     onToggle?(value?: boolean): void;
+    swipeThreshold?: number;
     title?: ReactNode | AsyncTextModel;
   };
 

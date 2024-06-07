@@ -1,6 +1,7 @@
-import { type ChildrenPropsModel } from '@lib/frontend/core/core.models';
+import { type ChildrenPropsModel, type PositionModel } from '@lib/frontend/core/core.models';
 
 export type _SwipeablePropsModel = ChildrenPropsModel & {
-  friction?: number;
+  onChange?(position: PositionModel): void;
+  onEnd?(position: PositionModel): void;
   threshold?: number;
 };
