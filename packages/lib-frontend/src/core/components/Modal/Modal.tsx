@@ -26,7 +26,12 @@ import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import {
+  THEME_COLOR_MORE,
+  THEME_ROLE,
+  THEME_SIZE,
+  THEME_SIZE_MORE,
+} from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { forwardRef, useImperativeHandle, useState } from 'react';
@@ -104,6 +109,16 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                   position={SHAPE_POSITION.ABSOLUTE}
                   round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
                   width={width}>
+                  <Wrapper
+                    backgroundColor={THEME_COLOR_MORE.SURFACE}
+                    backgroundRole={THEME_ROLE.MUTED}
+                    height={5}
+                    m="auto"
+                    round
+                    top={theme.shape.spacing[THEME_SIZE.MEDIUM]}
+                    width={theme.shape.size[THEME_SIZE_MORE.XLARGE]}
+                  />
+
                   <KeyboardContainer>
                     <Swipeable
                       onChange={swipeSet}
