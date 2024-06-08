@@ -20,7 +20,9 @@ export const routes: Array<RouteModel> = getRoutes({
       pathname: 'aroom',
       routes: aroomRoutes,
     },
+
     ...commerceRoutes,
+
     {
       isProtectable: true,
       pathname: GROUP,

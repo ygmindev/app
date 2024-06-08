@@ -1,4 +1,5 @@
 import { type PriceTilePropsModel } from '@lib/frontend/commerce/components/PriceTile/PriceTile.models';
+import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -7,7 +8,13 @@ import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
 import { useMemo } from 'react';
 
-export const PriceTile: LFCModel<PriceTilePropsModel> = ({ currency, price, ...props }) => {
+export const PriceTile: LFCModel<PriceTilePropsModel> = ({
+  currency,
+  fontStyle = FONT_STYLE.SUBTITLE,
+  label,
+  price,
+  ...props
+}) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const [c, a, d] = useMemo(() => {
     const value = numberFormat(price, { currency: currency ?? 'usd' });
@@ -18,12 +25,17 @@ export const PriceTile: LFCModel<PriceTilePropsModel> = ({ currency, price, ...p
   return (
     <Wrapper
       {...wrapperProps}
+      isAlign
       isRow>
-      {c && <Text>{c}</Text>}
+      {label && <AsyncText>{label}</AsyncText>}
 
-      {a && <Text fontStyle={FONT_STYLE.TITLE}>{a}</Text>}
+      <Wrapper isRow>
+        {c && <Text>{c}</Text>}
 
-      {d && <Text>{d ?? 0}</Text>}
+        {a && <Text fontStyle={fontStyle}>{a}</Text>}
+
+        {d && <Text>{d ?? 0}</Text>}
+      </Wrapper>
     </Wrapper>
   );
 };

@@ -1,4 +1,5 @@
 import { AddToCartButton } from '@lib/frontend/commerce/components/AddToCartButton/AddToCartButton';
+import { PriceTile } from '@lib/frontend/commerce/components/PriceTile/PriceTile';
 import { type ProductTilePropsModel } from '@lib/frontend/commerce/components/ProductTile/ProductTile.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 // import { Image } from '@lib/frontend/core/components/Image/Image';
@@ -6,13 +7,16 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 
 export const ProductTile: LFCModel<ProductTilePropsModel> = ({ product, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
+  const pricing = product[PRICING_RESOURCE_NAME]?.[0];
   const item: ProductItemModel = {
     name: product.name,
+    price: pricing?.price,
     pricingId: '',
     productId: product._id,
   };
@@ -37,6 +41,8 @@ export const ProductTile: LFCModel<ProductTilePropsModel> = ({ product, ...props
       </Wrapper>
 
       <Text isBold>{product.name}</Text>
+
+      {pricing && <PriceTile price={pricing.price} />}
 
       <AddToCartButton
         item={item}

@@ -5,7 +5,9 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useQuery } from '@lib/frontend/data/hooks/useQuery/useQuery';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
+import { uid } from '@lib/shared/core/utils/uid/uid';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 
 export const ProductsPage: LFCModel<ProductsPagePropsModel> = ({ ...props }) => {
@@ -21,6 +23,7 @@ export const ProductsPage: LFCModel<ProductsPagePropsModel> = ({ ...props }) => 
     getEntityResourceFixture({
       count: 10,
       data: (i) => ({
+        [PRICING_RESOURCE_NAME]: [{ _id: uid(), created: new Date(), price: 10.99 }],
         name: `Item ${i}`,
       }),
     }),
