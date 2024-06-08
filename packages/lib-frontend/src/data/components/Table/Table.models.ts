@@ -7,12 +7,13 @@ export type TablePropsModel<TType> = UseTableParamsModel<TType> & {
   emptyCell?: AsyncTextModel;
   emptyElement?: ReactElement | null;
   isAddable?: boolean;
-  isDeletable?: boolean;
   isHeadless?: boolean;
+  isRemovable?: boolean;
   onChange?(data?: Array<TType>): void;
   validators?: FormValidatorsModel<TType>;
 };
 
 export type TableRefModel = {
+  remove?(i: number): void;
   validate(): boolean;
 };

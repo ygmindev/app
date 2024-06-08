@@ -105,7 +105,8 @@ export const Pressable: RLFCModel<WrapperRefModel, PressablePropsModel> = ({
       {confirmMessage && (
         <Modal
           isOpen={confirmModalIsOpen}
-          onToggle={confirmModalIsOpenSet}>
+          onToggle={confirmModalIsOpenSet}
+          testID="XXX">
           <Wrapper
             grow
             isCenter

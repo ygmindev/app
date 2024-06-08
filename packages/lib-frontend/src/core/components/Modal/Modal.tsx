@@ -7,7 +7,6 @@ import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { KeyboardContainer } from '@lib/frontend/core/components/KeyboardContainer/KeyboardContainer';
-import { MODAL_SWIPE_THRESHOLD } from '@lib/frontend/core/components/Modal/Modal.constants';
 import {
   type ModalPropsModel,
   type ModalRefModel,
@@ -37,19 +36,7 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
 export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
-  (
-    {
-      children,
-      height,
-      isFullSize,
-      isOpen,
-      onToggle,
-      swipeThreshold = MODAL_SWIPE_THRESHOLD,
-      title,
-      width,
-    },
-    ref,
-  ) => {
+  ({ children, height, isFullSize, isOpen, onToggle, title, width }, ref) => {
     const [deviceHeight] = useStore('app.dimension.height');
     const [measure, measureSet] = useState<MeasureModel>();
     const isOpenF = useValueDelayed(isOpen ?? false);
@@ -68,11 +55,6 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
         : height ?? measure?.height) ?? 0;
 
     useImperativeHandle(ref, () => ({ toggle: valueControlledSet }));
-
-    const handleSwipeEnd = ({ y }: PositionModel): void => {
-      swipeThreshold && (y ?? 0) >= swipeThreshold && onToggle && onToggle(false);
-      swipeSet({ x: 0, y: 0 });
-    };
 
     const elementStateF = valueControlled ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
     return isOpenF || isOpen ? (
@@ -102,7 +84,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                   backgroundColor={THEME_COLOR_MORE.SURFACE}
                   elementState={elementStateF}
                   flex={isFullSize}
-                  height={heightF}
+                  height={isFullSize ? heightF : undefined}
                   isFullWidth
                   isShadow
                   onMeasure={measureSet}
@@ -112,7 +94,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                   <Wrapper
                     backgroundColor={THEME_COLOR_MORE.SURFACE}
                     backgroundRole={THEME_ROLE.MUTED}
-                    height={5}
+                    height={theme.shape.spacing[THEME_SIZE.SMALL]}
                     m="auto"
                     round
                     top={theme.shape.spacing[THEME_SIZE.MEDIUM]}
@@ -122,7 +104,10 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                   <KeyboardContainer>
                     <Swipeable
                       onChange={swipeSet}
-                      onEnd={handleSwipeEnd}>
+                      onEnd={() => swipeSet({ x: 0, y: 0 })}
+                      onSwipe={(direction) =>
+                        direction === DIRECTION.BOTTOM && onToggle && onToggle(false)
+                      }>
                       <Wrapper
                         border={DIRECTION.BOTTOM}
                         isAlign

@@ -47,9 +47,9 @@ export const Table = forwardRef(
       emptyCell = '-',
       emptyElement,
       isAddable,
-      isDeletable,
       isFullWidth = true,
       isHeadless,
+      isRemovable,
       onChange,
       validators,
       ...props
@@ -64,6 +64,7 @@ export const Table = forwardRef(
     const [errors, errorsSet] = useState<Record<string, FormErrorModel<TType>>>();
 
     useImperativeHandle(ref, () => ({
+      remove: handleRemove,
       validate: () => {
         if (rows && validators) {
           const errorsF = rows.reduce((result, row) => {
@@ -76,6 +77,14 @@ export const Table = forwardRef(
         return true;
       },
     }));
+
+    const handleRemove = onChange
+      ? (i: number) => {
+          const newValue = cloneDeep(props.data);
+          newValue?.splice(i, 1);
+          onChange(newValue);
+        }
+      : undefined;
 
     return rows?.length ? (
       <Wrapper
@@ -92,7 +101,7 @@ export const Table = forwardRef(
             isAlign
             isFullWidth={isFullWidth}
             isRow>
-            {isDeletable && <Wrapper width={theme.shape.size[THEME_SIZE.MEDIUM]} />}
+            {isRemovable && <Wrapper width={theme.shape.size[THEME_SIZE.MEDIUM]} />}
 
             {headers.map(
               ({ align, id, isHidden, label, width }) =>
@@ -126,59 +135,59 @@ export const Table = forwardRef(
               key={row.id}
               minHeight={theme.shape.size[THEME_SIZE_MORE.XSMALL]}
               pVertical={THEME_SIZE.SMALL}>
-              {isDeletable && (
+              {isRemovable && (
                 <Button
                   color={THEME_COLOR.ERROR}
                   confirmMessage={t('core:confirmRemove')}
                   icon="trash"
-                  onPress={
-                    onChange
-                      ? () => {
-                          const newValue = cloneDeep(props.data);
-                          newValue?.splice(i, 1);
-                          onChange(newValue);
-                        }
-                      : undefined
-                  }
+                  onPress={() => handleRemove && handleRemove(i)}
                   type={BUTTON_TYPE.INVISIBLE}
                   width={theme.shape.size[THEME_SIZE.MEDIUM]}
                 />
               )}
 
-              {row.cells.map(
-                (cell) =>
-                  !cell.isHidden && (
-                    <Skeleton
-                      elementState={elementState}
-                      key={cell.id}
-                      width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
-                      {cell.renderer ? (
-                        cell.renderer({ index: i, row: row.value, value: cell.value })
-                      ) : cell.field ? (
-                        cloneElement(cell.field({ index: i, row: row.value, value: cell.value }), {
-                          error:
-                            row.id &&
-                            cell.columnId &&
-                            getValue(errors, `${row.id}.${cell.columnId}`),
-                          onChange: onChange
-                            ? <TKey extends StringKeyModel<TType>>(value: TType[TKey]) => {
-                                const newValue = cloneDeep(props.data);
-                                cell.columnId && newValue && (newValue[i][cell.columnId] = value);
-                                onChange(newValue);
-                              }
-                            : undefined,
-                          value: cell.value,
-                        })
-                      ) : (
-                        <AsyncText
-                          align={cell.align}
-                          isEllipsis>
-                          {isNil(cell.value) ? emptyCell : stringify(cell.value)}
-                        </AsyncText>
-                      )}
-                    </Skeleton>
-                  ),
-              )}
+              {row.cells.map((cell) => {
+                if (cell.isHidden) {
+                  return null;
+                }
+                let element: ReactElement | null = null;
+                if (cell.renderer) {
+                  element = cell.renderer({ index: i, row: row.value, value: cell.value });
+                } else if (cell.field) {
+                  const field = cell.field({ index: i, row: row.value, value: cell.value });
+                  const onChangeF = field?.props.onChange;
+                  element = cloneElement(field, {
+                    error:
+                      row.id && cell.columnId && getValue(errors, `${row.id}.${cell.columnId}`),
+                    onChange: onChange
+                      ? <TKey extends StringKeyModel<TType>>(value: TType[TKey]) => {
+                          const newValue = cloneDeep(props.data);
+                          cell.columnId && newValue && (newValue[i][cell.columnId] = value);
+                          onChangeF && onChangeF(value);
+                          onChange(newValue);
+                        }
+                      : onChangeF,
+                    value: cell.value,
+                  });
+                } else {
+                  element = (
+                    <AsyncText
+                      align={cell.align}
+                      isEllipsis>
+                      {isNil(cell.value) ? emptyCell : stringify(cell.value)}
+                    </AsyncText>
+                  );
+                }
+
+                return (
+                  <Skeleton
+                    elementState={elementState}
+                    key={cell.id}
+                    width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
+                    {element}
+                  </Skeleton>
+                );
+              })}
             </Wrapper>
           ))}
 

@@ -1,0 +1,1 @@
+export const SWIPEABLE_THRESHOLD = 100;

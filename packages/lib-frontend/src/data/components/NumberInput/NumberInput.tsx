@@ -23,9 +23,7 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
 
     const handleChange = (v?: number | string): void => {
       const valueF = v === undefined ? defaultValue : toNumber(v);
-      if (valueF !== undefined && valueF >= 0) {
-        valueControlledSet(valueF);
-      }
+      valueF !== undefined && valueControlledSet(valueF);
     };
 
     return (

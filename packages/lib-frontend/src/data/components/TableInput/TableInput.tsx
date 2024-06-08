@@ -25,11 +25,12 @@ export const TableInput = forwardRef(
       onChange,
       value,
     });
+
     return (
       <Wrapper {...wrapperProps}>
         {cloneElement(element, {
           data: valueControlled,
-          isDeletable: true,
+          isRemovable: true,
           onChange: valueControlledSet,
         })}
       </Wrapper>

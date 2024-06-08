@@ -1,1 +1,0 @@
-export const MODAL_SWIPE_THRESHOLD = 100;
