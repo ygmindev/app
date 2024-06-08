@@ -23,6 +23,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     {
       animation,
       children,
+      confirmColor,
       confirmMessage,
       elementState,
       onActive,
@@ -131,6 +132,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
                 </Button>
 
                 <Button
+                  color={confirmColor}
                   elementState={valueControlled}
                   icon="chevronRight"
                   onPress={async () => {

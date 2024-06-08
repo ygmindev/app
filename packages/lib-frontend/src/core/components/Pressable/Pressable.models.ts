@@ -5,12 +5,14 @@ import {
   type WrapperRefModel,
 } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type AsyncTextModel, type ChildrenPropsModel } from '@lib/frontend/core/core.models';
+import { type ThemeColorModel } from '@lib/frontend/style/style.models';
 import { type ReactElement } from 'react';
 
 export type PressablePropsModel = ChildrenPropsModel<ReactElement> &
   Omit<WrapperPropsModel, 'children'> &
   AnimatablePropsModel &
   Pick<ActivatablePropsModel, 'onActive' | 'onInactive' | 'trigger'> & {
+    confirmColor?: ThemeColorModel;
     confirmMessage?: AsyncTextModel;
   };
 

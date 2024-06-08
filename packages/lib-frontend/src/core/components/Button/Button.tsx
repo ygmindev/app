@@ -202,6 +202,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         animation={animation}
         border={typeF !== BUTTON_TYPE.INVISIBLE}
         borderRole={THEME_ROLE.MAIN}
+        confirmColor={color}
         elementState={valueControlled}
         height={heightF}
         isOverflowHidden
