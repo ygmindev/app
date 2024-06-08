@@ -51,7 +51,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
     const theme = useTheme();
     const heightF =
       (isFullSize
-        ? (deviceHeight ?? 0) - theme.shape.spacing[THEME_SIZE.MEDIUM]
+        ? (deviceHeight ?? 0) - theme.shape.spacing[THEME_SIZE.LARGE]
         : height ?? measure?.height) ?? 0;
 
     useImperativeHandle(ref, () => ({ toggle: valueControlledSet }));

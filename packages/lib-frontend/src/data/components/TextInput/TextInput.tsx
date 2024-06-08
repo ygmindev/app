@@ -156,32 +156,26 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       </Wrapper>
     );
 
-    const handleChange = (v: string): void => {
+    const isValid = (v: string): boolean => {
       switch (keyboard) {
         case TEXT_INPUT_KEYBOARD.NUMBER:
         case TEXT_INPUT_KEYBOARD.TEL: {
-          if (/^\d*$/.test(v)) {
-            valueControlledSet(v);
-          }
-          break;
+          return /^\d*$/.test(v);
         }
         case TEXT_INPUT_KEYBOARD.NUMBER_POSITIVE: {
-          if (/^([0-9]+\d*)?$/.test(v)) {
-            valueControlledSet(v);
-          }
-          break;
+          return /^([0-9]+\d*)?$/.test(v);
         }
         case TEXT_INPUT_KEYBOARD.DECIMAL: {
-          if (/^\d*\.?\d*$/.test(v)) {
-            valueControlledSet(v);
-          }
-          break;
+          return /^\d*\.?\d*$/.test(v);
         }
         default: {
-          valueControlledSet(v);
-          break;
+          return true;
         }
       }
+    };
+
+    const handleChange = (v: string): void => {
+      isValid(v) && valueControlledSet(v);
     };
 
     const isError = !!props.error;

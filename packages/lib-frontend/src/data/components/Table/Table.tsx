@@ -163,8 +163,8 @@ export const Table = forwardRef(
                       ? <TKey extends StringKeyModel<TType>>(value: TType[TKey]) => {
                           const newValue = cloneDeep(props.data);
                           cell.columnId && newValue && (newValue[i][cell.columnId] = value);
-                          onChangeF && onChangeF(value);
                           onChange(newValue);
+                          onChangeF && onChangeF(value);
                         }
                       : onChangeF,
                     value: cell.value,

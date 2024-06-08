@@ -12,7 +12,7 @@ export const THEME_COLOR_TONES: Record<ThemeColorModel, string> = {
 };
 
 export const THEME_ANIMATION: ThemeConfigModel['animation'] = {
-  effect: 150,
+  effect: 200,
 
-  transition: 250,
+  transition: 300,
 };

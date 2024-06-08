@@ -3,15 +3,14 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import { Table } from '@lib/frontend/data/components/Table/Table';
-import { type TableRefModel } from '@lib/frontend/data/components/Table/Table.models';
 import { TableInput } from '@lib/frontend/data/components/TableInput/TableInput';
+import { TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
-import { useRef } from 'react';
 
 export const ProductItemForm: LFCModel<ProductItemFormPropsModel> = ({
   onSubmit,
@@ -21,7 +20,6 @@ export const ProductItemForm: LFCModel<ProductItemFormPropsModel> = ({
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([COMMERCE]);
   const [items, itemsSet] = useStore('commerce.items');
-  const tableRef = useRef<TableRefModel>(null);
   return (
     <FormContainer
       {...wrapperProps}
@@ -39,11 +37,11 @@ export const ProductItemForm: LFCModel<ProductItemFormPropsModel> = ({
                       label: t('commerce:price'),
                     },
                     {
-                      field: ({ index, value }) => (
+                      field: ({ value }) => (
                         <NumberInput
                           defaultValue={1}
                           isNoClear
-                          onChange={(v) => !v && tableRef.current?.remove?.(index)}
+                          keyboard={TEXT_INPUT_KEYBOARD.NUMBER_POSITIVE}
                           value={value as number}
                         />
                       ),
@@ -51,7 +49,6 @@ export const ProductItemForm: LFCModel<ProductItemFormPropsModel> = ({
                       label: t('commerce:quantity'),
                     },
                   ]}
-                  ref={tableRef}
                 />
               }
               onChange={itemsSet}
