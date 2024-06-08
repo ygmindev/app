@@ -1,9 +1,10 @@
 {
   "billing": "billing",
   "newPaymentMethod": "new payment method",
-  "pay": "pay {{value}}",
+  "payment": "TRANSLATION_MISSING",
   "paymentMethod": "payment method",
   "paymentMethod_plural": "payment methods",
+  "paymentMethodSuccess": "TRANSLATION_MISSING",
   "paymentMethodTitle": "{{name}} ending in {{last4}}",
   "savedPaymentMethod_plural": "saved payment methods"
 }

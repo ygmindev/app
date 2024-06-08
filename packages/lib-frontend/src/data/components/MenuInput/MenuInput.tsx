@@ -181,6 +181,7 @@ export const MenuInput = forwardRef(
         isFullWidth
         isPressable={false}
         onChange={valueControlledSet}
+        onElementStateChange={onElementStateChangeF}
         options={optionsF}
         ref={menuRef}
         renderOption={renderOption}

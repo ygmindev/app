@@ -1,5 +1,6 @@
 {
   "add": "TRANSLATION_MISSING",
+  "addedSuccess": "TRANSLATION_MISSING",
   "any": "TRANSLATION_MISSING",
   "browse": "TRANSLATION_MISSING",
   "cancel": "TRANSLATION_MISSING",
@@ -30,9 +31,10 @@
   "somethingWentWrong": "TRANSLATION_MISSING",
   "step": "TRANSLATION_MISSING",
   "success": "TRANSLATION_MISSING",
+  "total": "TRANSLATION_MISSING",
   "tryAgain": "TRANSLATION_MISSING",
   "unit": "TRANSLATION_MISSING",
-  "updateSuccess": "TRANSLATION_MISSING",
+  "updatedSuccess": "TRANSLATION_MISSING",
   "validateAlphaNumeric": "TRANSLATION_MISSING",
   "validateChanged": "TRANSLATION_MISSING",
   "validateEmail": "TRANSLATION_MISSING",

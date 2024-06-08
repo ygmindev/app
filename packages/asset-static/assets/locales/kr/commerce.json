@@ -1,3 +1,8 @@
 {
-  "addToCart": "TRANSLATION_MISSING"
+  "addToCart": "TRANSLATION_MISSING",
+  "item_plural": "TRANSLATION_MISSING",
+  "order": "TRANSLATION_MISSING",
+  "price": "TRANSLATION_MISSING",
+  "quantity": "TRANSLATION_MISSING",
+  "totalPrice": "TRANSLATION_MISSING"
 }

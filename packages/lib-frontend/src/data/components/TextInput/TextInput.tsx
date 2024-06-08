@@ -35,7 +35,6 @@ import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import isNumber from 'lodash/isNumber';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
@@ -108,12 +107,11 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         if (v) {
           onFocus && onFocus();
           inputRef.current?.focus && inputRef.current?.focus();
-          focusableRef.current?.focus && focusableRef.current?.focus();
+          // focusableRef.current?.focus && focusableRef.current?.focus();
         } else {
-          await sleep(100);
           onBlur && onBlur();
           inputRef.current?.blur && inputRef.current?.blur();
-          focusableRef.current?.blur && focusableRef.current?.blur();
+          // focusableRef.current?.blur && focusableRef.current?.blur();
         }
       }
     };
@@ -121,7 +119,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
     const leftElementF = leftElement && (
       <Wrapper
         isAlign
-        isRow>
+        isRow
+        pBottom={label ? THEME_SIZE.SMALL : undefined}>
         {leftElement}
       </Wrapper>
     );

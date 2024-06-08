@@ -1,3 +1,8 @@
 {
-  "addToCart": "add to cart"
+  "addToCart": "add to cart",
+  "item_plural": "items",
+  "order": "order",
+  "price": "price",
+  "quantity": "quantity",
+  "totalPrice": "total price"
 }

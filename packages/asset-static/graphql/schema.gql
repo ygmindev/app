@@ -1067,15 +1067,15 @@ type Mutation {
 type Order {
   _id: String
   created: DateTime
+  items: [ProductItem]
   paymentMethodId: String
-  products: [ProductItem]
 }
 
 input OrderCreateFormInput {
   _id: String
   created: DateTime
+  items: [ProductItemInput]
   paymentMethodId: String
-  products: [ProductItemInput]
 }
 
 input OrderCreateInput {
@@ -1086,8 +1086,8 @@ input OrderCreateInput {
 input OrderCreateManyFormInput {
   _id: String
   created: DateTime
+  items: [ProductItemInput]
   paymentMethodId: String
-  products: [ProductItemInput]
 }
 
 input OrderCreateManyInput {
@@ -1180,8 +1180,8 @@ type OrderGetOutput {
 input OrderInput {
   _id: String
   created: DateTime
+  items: [ProductItemInput]
   paymentMethodId: String
-  products: [ProductItemInput]
 }
 
 input OrderRemoveFilterInput {
@@ -1230,8 +1230,8 @@ type OrderUpdateOutput {
 input OrderUpdateUpdateInput {
   _id: String
   created: DateTime
+  items: [ProductItemInput]
   paymentMethodId: String
-  products: [ProductItemInput]
 }
 
 type Otp {
@@ -1679,6 +1679,7 @@ type Product {
   _id: String
   created: DateTime
   description: String
+  imageSrc: [String]
   name: String
 }
 
@@ -1687,6 +1688,7 @@ input ProductCreateFormInput {
   _id: String
   created: DateTime
   description: String
+  imageSrc: [String]
   name: String
 }
 
@@ -1700,6 +1702,7 @@ input ProductCreateManyFormInput {
   _id: String
   created: DateTime
   description: String
+  imageSrc: [String]
   name: String
 }
 
@@ -1795,11 +1798,11 @@ input ProductInput {
   _id: String
   created: DateTime
   description: String
+  imageSrc: [String]
   name: String
 }
 
 type ProductItem {
-  imageSrc: [String]
   name: String
   price: Float
   pricingId: String
@@ -1808,7 +1811,6 @@ type ProductItem {
 }
 
 input ProductItemInput {
-  imageSrc: [String]
   name: String
   price: Float
   pricingId: String
@@ -1864,6 +1866,7 @@ input ProductUpdateUpdateInput {
   _id: String
   created: DateTime
   description: String
+  imageSrc: [String]
   name: String
 }
 
