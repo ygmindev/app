@@ -15,7 +15,7 @@ import toString from 'lodash/toString';
 import { forwardRef } from 'react';
 
 export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> = forwardRef(
-  ({ defaultValue, keyboard, onChange, value, ...props }, ref) => {
+  ({ defaultValue, keyboard, max, min, onChange, value, ...props }, ref) => {
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue,
       onChange,
@@ -23,22 +23,22 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
     });
 
     const handleChange = (v?: number | string): void => {
-      const valueF = v === undefined ? defaultValue : toNumber(v);
-      switch (keyboard) {
-        case TEXT_INPUT_KEYBOARD.NUMBER_POSITIVE: {
-          !!valueF && valueF > 0 && valueControlledSet(valueF);
-          break;
+      let valueF = v === undefined ? defaultValue : toNumber(v);
+      if (valueF !== undefined) {
+        if (max !== undefined && valueF > max) {
+          valueF = max;
         }
-        default: {
-          valueControlledSet(valueF);
-          break;
+        if (min !== undefined && valueF < min) {
+          valueF = min;
         }
       }
+      valueControlledSet(valueF);
     };
 
     return (
       <TextInput
         {...props}
+        keyboard={keyboard ?? TEXT_INPUT_KEYBOARD.NUMBER}
         onChange={handleChange}
         ref={ref}
         rightElement={

@@ -1,7 +1,10 @@
 import { type AnimatablePropsModel } from '@lib/frontend/animation/animation.models';
 import { type BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
-import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
+import {
+  type PressablePropsModel,
+  type PressableRefModel,
+} from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import {
   type AsyncTextModel,
@@ -38,3 +41,5 @@ export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel> &
     rightElement?: ReactElement | null;
     type?: ButtonTypeModel;
   };
+
+export type ButtonRefModel = PressableRefModel;

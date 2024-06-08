@@ -159,11 +159,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
     const isValid = (v: string): boolean => {
       switch (keyboard) {
         case TEXT_INPUT_KEYBOARD.NUMBER:
-        case TEXT_INPUT_KEYBOARD.TEL: {
+        case TEXT_INPUT_KEYBOARD.TELEPHONE: {
           return /^\d*$/.test(v);
-        }
-        case TEXT_INPUT_KEYBOARD.NUMBER_POSITIVE: {
-          return /^([0-9]+\d*)?$/.test(v);
         }
         case TEXT_INPUT_KEYBOARD.DECIMAL: {
           return /^\d*\.?\d*$/.test(v);

@@ -11,12 +11,11 @@ import { TextInput } from 'react-native';
 const getKeyboardType = (type?: TextInputKeyboardModel): InputModeOptions => {
   switch (type) {
     case TEXT_INPUT_KEYBOARD.NUMBER:
-    case TEXT_INPUT_KEYBOARD.NUMBER_POSITIVE:
     case TEXT_INPUT_KEYBOARD.DECIMAL:
       return 'numeric';
     case TEXT_INPUT_KEYBOARD.EMAIL:
       return 'email';
-    case TEXT_INPUT_KEYBOARD.TEL:
+    case TEXT_INPUT_KEYBOARD.TELEPHONE:
       return 'tel';
     default:
       return 'none';

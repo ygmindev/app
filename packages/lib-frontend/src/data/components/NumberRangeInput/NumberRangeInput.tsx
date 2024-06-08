@@ -132,7 +132,7 @@ export const NumberRangeInput = forwardRef(
           <NumberInput
             error={error}
             flex
-            keyboard={TEXT_INPUT_KEYBOARD.NUMBER_POSITIVE}
+            keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
             label={isRange ? t('data:min', { value: label }) : label}
             onBlur={handleBlur}
             onChange={(v) => handleChange({ min: v ?? null })}
@@ -146,7 +146,7 @@ export const NumberRangeInput = forwardRef(
             <NumberInput
               error={error}
               flex
-              keyboard={TEXT_INPUT_KEYBOARD.NUMBER_POSITIVE}
+              keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
               label={t('data:max', { value: label })}
               onBlur={handleBlur}
               onChange={(v) => handleChange({ max: v ?? null })}

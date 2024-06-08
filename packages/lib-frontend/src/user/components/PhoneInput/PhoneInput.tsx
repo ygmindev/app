@@ -22,7 +22,7 @@ export const PhoneInput: RLFCModel<PhoneInputRefModel, PhoneInputPropsModel> = f
         {...props}
         autoComplete="cell"
         icon="phone"
-        keyboard={TEXT_INPUT_KEYBOARD.NUMBER_POSITIVE}
+        keyboard={TEXT_INPUT_KEYBOARD.TELEPHONE}
         label={t('user:phone')}
         onChange={valueControlledSet}
         ref={ref}

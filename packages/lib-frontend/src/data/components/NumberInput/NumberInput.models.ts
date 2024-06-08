@@ -4,10 +4,9 @@ import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/dat
 
 export type NumberInputPropsModel = InputPropsModel<number> &
   Omit<TextInputPropsModel, 'defaultValue' | 'keyboard' | 'onChange' | 'value'> & {
-    keyboard?:
-      | TEXT_INPUT_KEYBOARD.NUMBER
-      | TEXT_INPUT_KEYBOARD.NUMBER_POSITIVE
-      | TEXT_INPUT_KEYBOARD.DECIMAL;
+    keyboard?: TEXT_INPUT_KEYBOARD.NUMBER | TEXT_INPUT_KEYBOARD.DECIMAL;
+    max?: number;
+    min?: number;
   };
 
 export type NumberInputRefModel = InputRefModel<number>;

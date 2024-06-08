@@ -4,7 +4,6 @@ import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormC
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import { Table } from '@lib/frontend/data/components/Table/Table';
 import { TableInput } from '@lib/frontend/data/components/TableInput/TableInput';
-import { TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -41,7 +40,7 @@ export const ProductItemForm: LFCModel<ProductItemFormPropsModel> = ({
                         <NumberInput
                           defaultValue={1}
                           isNoClear
-                          keyboard={TEXT_INPUT_KEYBOARD.NUMBER_POSITIVE}
+                          min={1}
                           value={value as number}
                         />
                       ),
