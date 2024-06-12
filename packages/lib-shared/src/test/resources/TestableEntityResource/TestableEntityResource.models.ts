@@ -1,3 +1,4 @@
+import { type EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
@@ -6,7 +7,9 @@ import { type TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/
 import { type TestableEmbeddedResourceModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
 
 export type TestableEntityResourceModel = EntityResourceModel & {
-  [TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME]?: Array<TestableEmbeddedResourceModel>;
+  [TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME]?: Array<
+    EmbeddableRootFieldModel<TestableEmbeddedResourceModel>
+  >;
 
   dateTtlField?: Date;
 

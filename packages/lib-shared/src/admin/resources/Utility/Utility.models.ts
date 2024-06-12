@@ -4,11 +4,12 @@ import {
 } from '@lib/shared/admin/resources/Utility/Utility.constants';
 import { type VENDOR_RESOURCE_NAME } from '@lib/shared/admin/resources/Vendor/Vendor.constants';
 import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
+import { type EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
 import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type UtilityModel = EmbeddedResourceModel & {
-  [VENDOR_RESOURCE_NAME]?: VendorModel;
+  [VENDOR_RESOURCE_NAME]?: EmbeddableRootFieldModel<VendorModel>;
 
   description?: string;
 

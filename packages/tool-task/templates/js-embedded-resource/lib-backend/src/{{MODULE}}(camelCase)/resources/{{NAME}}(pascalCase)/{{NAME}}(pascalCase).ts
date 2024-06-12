@@ -6,6 +6,7 @@ import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { {{NAME}}(constantCase)_RESOURCE_NAME } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
 import { {{NAME_ROOT}}(constantCase)_RESOURCE_NAME } from '@lib/shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).constants';
 import { type {{NAME}}(pascalCase)Model } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
+import { EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
 import { {{NAME_ROOT}}(pascalCase) } from '@lib/backend/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase)';
 import { type {{NAME_ROOT}}(pascalCase)Model } from '@lib/shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
 
@@ -18,7 +19,7 @@ export class {{NAME}}(pascalCase) extends EmbeddedResource implements {{NAME}}(p
     relation: FIELD_RELATION.MANY_TO_ONE,
     type: PROPERTY_TYPE.RESOURCE,
   })
-  [{{NAME_ROOT}}(constantCase)_RESOURCE_NAME]?: {{NAME_ROOT}}(pascalCase)Model;
+  [{{NAME_ROOT}}(constantCase)_RESOURCE_NAME]?: EmbeddableRootFieldModel<{{NAME_ROOT}}(pascalCase)Model>;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   name?: string;

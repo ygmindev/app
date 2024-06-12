@@ -2,6 +2,7 @@ import {
   type PartialModel,
   type PrimitiveModel,
   type RequiredModel,
+  type StringKeyModel,
 } from '@lib/shared/core/core.models';
 
 export type EntityResourceModel = {
@@ -48,8 +49,10 @@ export type EntityResourcePartialModel<TType> = TType extends PrimitiveModel
   ? TType
   : TType extends Array<infer TElement>
     ? Array<EntityResourcePartialModel<TElement>>
-    : (TType extends EntityResourceModel ? { _id: string } : PartialModel<Omit<TType, '_id'>>) & {
-        [TKey in keyof Omit<RequiredModel<TType>, '_id'>]?: EntityResourcePartialModel<
-          RequiredModel<TType>[TKey]
-        >;
-      };
+    : TType extends EntityResourceModel
+      ? Pick<TType, '_id'> & {
+          [TKey in StringKeyModel<Omit<RequiredModel<TType>, '_id'>>]?: EntityResourcePartialModel<
+            RequiredModel<TType>[TKey]
+          >;
+        }
+      : PartialModel<TType>;

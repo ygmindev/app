@@ -12,11 +12,12 @@ import {
 import { VENDOR_RESOURCE_NAME } from '@lib/shared/admin/resources/Vendor/Vendor.constants';
 import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
 
 @withEntity({ isEmbeddable: true, isRepository: true, name: UTILITY_RESOURCE_NAME })
 export class Utility extends EmbeddedResource implements UtilityModel {
   @withEmbeddableRootField({ Resource: () => Vendor })
-  [VENDOR_RESOURCE_NAME]?: VendorModel;
+  [VENDOR_RESOURCE_NAME]?: EmbeddableRootFieldModel<VendorModel>;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   description?: string;
