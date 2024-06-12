@@ -4,7 +4,7 @@ import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { User } from '@lib/backend/user/resources/User/User';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
-import { EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
+import { type EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
 import { LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import {
   type LinkedUserModel,

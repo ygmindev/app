@@ -9,7 +9,7 @@ import {
   type CardModel,
 } from '@lib/shared/billing/resources/Card/Card.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
-import { EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
+import { type EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 

@@ -11,7 +11,7 @@ import {
 import { PRODUCT_RESOURCE_NAME } from '@lib/shared/commerce/resources/Product/Product.constants';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
-import { EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
+import { type EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
 
 @withEntity({ isEmbeddable: true, isRepository: true, name: PRICING_RESOURCE_NAME })
 export class Pricing extends EmbeddedResource implements PricingModel {
