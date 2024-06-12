@@ -5,15 +5,15 @@ import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResour
 
 export const PRODUCT_FIXTURES: Array<ProductModel> = getEntityResourceFixture({
   count: 10,
-  data: ({ _id }) => ({
+  data: ({ _id, index }) => ({
     [PRICING_RESOURCE_NAME]: getEntityResourceFixture({
       count: 2,
       data: () => ({
         [PRODUCT_RESOURCE_NAME]: { _id },
-        price: 10,
+        price: 10.99,
       }),
     }),
     description: 'this is a test product',
-    name: 'test product',
+    name: `test product ${index}`,
   }),
 });

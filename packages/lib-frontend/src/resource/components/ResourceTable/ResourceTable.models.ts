@@ -1,12 +1,15 @@
 import { type InputPropsModel } from '@lib/frontend/data/data.models';
 import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type EntityResourceDataModel,
+  type EntityResourceModel,
+} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
 import { type ReactElement } from 'react';
 
 export type ResourceTablePropsModel<
-  TType,
+  TType extends EntityResourceModel,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = ResourceParamsModel<TType, TRoot> &

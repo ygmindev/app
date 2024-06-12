@@ -42,7 +42,6 @@ export const useForm = <TType, TResult = void>({
       }
       isBlocking && isLoadingSet(true);
       const data = onSubmit && (await onSubmit(valuesF));
-      console.warn(data);
       onSuccess && (await onSuccess(valuesF, data));
       successMessage && void success({ description: t('core:updatedSuccess') });
       redirectTo && replace(redirectTo);

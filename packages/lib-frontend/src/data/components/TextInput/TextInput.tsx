@@ -107,11 +107,11 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         if (v) {
           onFocus && onFocus();
           inputRef.current?.focus && inputRef.current?.focus();
-          // focusableRef.current?.focus && focusableRef.current?.focus();
+          focusableRef.current?.focus && focusableRef.current?.focus();
         } else {
           onBlur && onBlur();
           inputRef.current?.blur && inputRef.current?.blur();
-          // focusableRef.current?.blur && focusableRef.current?.blur();
+          focusableRef.current?.blur && focusableRef.current?.blur();
         }
       }
     };

@@ -28,7 +28,5 @@ export type ResourceNameParamsModel<TRoot = undefined> = {
   name: TRoot extends undefined ? string : keyof TRoot & string;
 };
 
-// export type EmbeddableRootFieldModel<TRoot extends EntityResourceModel> = PartialDeepModel<TRoot> &
-//   Pick<TRoot, '_id'>;
 export type EmbeddableRootFieldModel<TRoot extends EntityResourceModel> =
   EntityResourcePartialModel<TRoot>;

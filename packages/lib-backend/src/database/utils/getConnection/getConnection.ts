@@ -20,7 +20,6 @@ export const getConnection = async <TType, TForm, TRoot = undefined>({
   const skip = Math.max(startOffset, 0);
   const take = Math.max(endOffset - startOffset, 1);
   const { result, root } = await getMany({ ...input, options: { skip, take } });
-
   if (result && result.length) {
     const edges = result.map((node, index) => ({
       cursor: offsetToCursor(startOffset + index),

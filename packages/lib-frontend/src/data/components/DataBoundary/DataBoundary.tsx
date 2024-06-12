@@ -62,7 +62,14 @@ const QueryComponent = forwardRef(
     }));
 
     return (
-      (children && children({ data })) || (
+      (children &&
+        children({
+          data,
+          onChange: (values) => {
+            void setData(values);
+          },
+          reset,
+        })) || (
         <Wrapper
           {...wrapperProps}
           flex
@@ -113,7 +120,14 @@ const MutateComponent = forwardRef(
     useImperativeHandle(ref, () => ({ getData: () => data, mutate: mutateF, reset, setData }));
 
     return (
-      (children && children({ data })) || (
+      (children &&
+        children({
+          data,
+          onChange: (values) => {
+            void setData(values);
+          },
+          reset,
+        })) || (
         <Wrapper
           {...wrapperProps}
           flex
@@ -163,7 +177,13 @@ export const DataBoundary = forwardRef(
     };
 
     const childrenF = props.fallback ??
-      (fallbackData && children && children({ data: fallbackData })) ?? (
+      (fallbackData &&
+        children &&
+        children({
+          data: fallbackData,
+          onChange: () => undefined,
+          reset: async () => undefined,
+        })) ?? (
         <Wrapper
           flex
           isCenter>

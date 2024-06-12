@@ -46,11 +46,11 @@ export const Table = forwardRef(
       elementState,
       emptyCell = '-',
       emptyElement,
-      isAddable,
       isFullWidth = true,
       isHeadless,
       isRemovable,
       onChange,
+      onRemove,
       validators,
       ...props
     }: RLFCPropsModel<TableRefModel, TablePropsModel<TType>>,
@@ -80,9 +80,14 @@ export const Table = forwardRef(
 
     const handleRemove = onChange
       ? (i: number) => {
-          const newValue = cloneDeep(props.data);
-          newValue?.splice(i, 1);
-          onChange(newValue);
+          if (onRemove) {
+            const row = props.data?.[i];
+            row && void onRemove(row);
+          } else {
+            const newValue = cloneDeep(props.data);
+            newValue?.splice(i, 1);
+            onChange(newValue);
+          }
         }
       : undefined;
 
@@ -190,23 +195,6 @@ export const Table = forwardRef(
               })}
             </Wrapper>
           ))}
-
-          {isAddable && (
-            <Button
-              color={THEME_COLOR.PRIMARY}
-              icon="add"
-              onPress={
-                onChange
-                  ? () => {
-                      const newValue = cloneDeep(props.data);
-                      onChange(newValue);
-                    }
-                  : undefined
-              }
-              type={BUTTON_TYPE.INVISIBLE}
-              width={theme.shape.size[THEME_SIZE.MEDIUM]}
-            />
-          )}
         </Wrapper>
       </Wrapper>
     ) : (

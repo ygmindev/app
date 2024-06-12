@@ -23,15 +23,14 @@ export const ConnectionBoundary = forwardRef(
       params?: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> | null> =>
       query ? query(params) : null;
-
     return (
       <DataBoundary
         {...props}
         query={handleQuery}
         ref={ref}>
-        {({ data, elementState }) =>
+        {({ data, elementState, onChange, reset }) =>
           (data?.result?.edges?.length ?? 0) > 0
-            ? children && children({ data, elementState })
+            ? children && children({ data, elementState, onChange, reset })
             : null
         }
       </DataBoundary>

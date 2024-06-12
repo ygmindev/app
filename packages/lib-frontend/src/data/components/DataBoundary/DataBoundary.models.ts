@@ -28,7 +28,13 @@ export type DataBoundaryRefModel<TResult = void> = QueryComponentRefModel<TResul
 export type QueryComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &
   ChildrenPropsModel<
-    (props: ElementStatePropsModel & { data?: TResult | null }) => ReactElement | NilModel
+    (
+      props: ElementStatePropsModel & {
+        data?: TResult | null;
+        onChange(values?: TResult): void;
+        reset(): Promise<void>;
+      },
+    ) => ReactElement | NilModel
   > & {
     emptyMessage?: AsyncTextModel;
     params?: TParams;
@@ -45,7 +51,13 @@ export type QueryComponentRefModel<TResult = void> = {
 export type MutateComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &
   ChildrenPropsModel<
-    (props: ElementStatePropsModel & { data?: TResult | null }) => ReactElement | NilModel
+    (
+      props: ElementStatePropsModel & {
+        data?: TResult | null;
+        onChange(values?: TResult): void;
+        reset(): Promise<void>;
+      },
+    ) => ReactElement | NilModel
   > & {
     emptyMessage?: AsyncTextModel;
     mutate: UseMutationParamsModel<TParams, TResult>[1];

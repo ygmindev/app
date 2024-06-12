@@ -74,6 +74,7 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
         onSubmit(
           Object.values(filters as Record<string, Array<FilterModel<TType>>>).reduce(
             (result, v) => [...result, ...v.filter((vv) => !isNil(vv.value))],
+            [],
           ),
         )
     : undefined;

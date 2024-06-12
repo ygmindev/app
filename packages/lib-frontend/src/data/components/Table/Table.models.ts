@@ -6,10 +6,10 @@ import { type ReactElement } from 'react';
 export type TablePropsModel<TType> = UseTableParamsModel<TType> & {
   emptyCell?: AsyncTextModel;
   emptyElement?: ReactElement | null;
-  isAddable?: boolean;
   isHeadless?: boolean;
   isRemovable?: boolean;
   onChange?(data?: Array<TType>): void;
+  onRemove?(row: TType): Promise<void>;
   validators?: FormValidatorsModel<TType>;
 };
 

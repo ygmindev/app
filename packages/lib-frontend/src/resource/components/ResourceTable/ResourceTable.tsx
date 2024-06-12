@@ -15,12 +15,19 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type EntityResourceDataModel,
+  type EntityResourceModel,
+} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import range from 'lodash/range';
 import { type ReactElement, useState } from 'react';
 
-export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
+export const ResourceTable = <
+  TType extends EntityResourceModel,
+  TForm = EntityResourceDataModel<TType>,
+  TRoot = undefined,
+>({
   fields,
   implementation,
   name,
@@ -31,7 +38,7 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
 > => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { create, getConnection } = implementation;
+  const { create, getConnection, remove } = implementation;
   const [params, paramsSet] = useState<InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>>();
 
   const handleSubmit = async (
@@ -113,11 +120,18 @@ export const ResourceTable = <TType, TForm = EntityResourceDataModel<TType>, TRo
         id={name}
         params={params}
         query={getConnection}>
-        {({ data, elementState }) => (
+        {({ data, elementState, reset }) => (
           <Table<PartialModel<TType>>
             columns={columns}
             data={data?.result?.edges.map((edge) => edge.node)}
             elementState={elementState}
+            isRemovable
+            onChange={() => {
+              void reset();
+            }}
+            onRemove={async ({ _id }) => {
+              void remove({ filter: [{ field: '_id', value: _id }] });
+            }}
           />
         )}
       </ConnectionBoundary>
