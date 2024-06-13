@@ -21,6 +21,7 @@ export const authorize = async ({
       const { result } = await Container.get(AccessImplementation).get({
         filter: [{ field: '_user', value: context.user._id }],
       });
+      console.warn(result);
       return result?.role ? roles.every(result.role?.includes) : false;
       // TODO: limit admin
       // return true;
