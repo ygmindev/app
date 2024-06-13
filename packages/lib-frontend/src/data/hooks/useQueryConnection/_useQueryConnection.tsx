@@ -14,6 +14,7 @@ export const _useQueryConnection = <TParams = undefined, TResult = void>(
 ): _UseQueryConnectionModel<TResult> => {
   const limit = options?.limit || USE_QUERY_CONNECTION_LIMIT_DEFAULT;
   const cache = isNumber(options?.cache) ? options?.cache : 0;
+
   const queryClient = useQueryClient();
   const { data, fetchNextPage } = useInfiniteQuery<ConnectionModel<TResult> | null, Error>({
     gcTime: cache,

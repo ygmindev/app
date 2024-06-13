@@ -56,71 +56,74 @@ export const ResourceTable = <
   })) as Array<TableColumnModel<PartialModel<TType>>>;
 
   return (
-    <Wrapper
+    <ConnectionBoundary
       {...wrapperProps}
-      flex
-      p
-      s>
-      <Wrapper
-        isAlign
-        isRow
-        justify={FLEX_JUSTIFY.END}>
-        <FilterButton
-          element={
-            <ResourceFilter
-              fields={fields}
-              name={name}
-              onSubmit={async (filter) => paramsSet({ filter })}
-              rootName={rootName}
-            />
-          }
-        />
-
-        <ModalButton
-          element={() => (
-            <ResourceForm<TType, TForm, TRoot>
-              fields={fields}
-              name={name}
-              onSubmit={async (input) => {
-                await handleSubmit(input);
-              }}
-              rootName={rootName}
-            />
-          )}
-          icon="add"
-          size={THEME_SIZE.SMALL}>
-          {t('core:new', { value: name })}
-        </ModalButton>
-      </Wrapper>
-
-      <ConnectionBoundary
-        fallbackData={
-          columns && {
-            result: {
-              edges: range(5).map((i) => ({
-                cursor: `${i}`,
-                node: columns.reduce(
-                  (result, column) => ({
-                    ...result,
-                    [column.id]: column.renderer ? undefined : TEST_TEXT_SHORT,
-                  }),
-                  {} as PartialModel<TType>,
-                ),
-              })),
-              pageInfo: {
-                endCursor: '',
-                hasNextPage: false,
-                hasPreviousPage: false,
-                startCursor: '',
-              },
+      fallbackData={
+        columns && {
+          result: {
+            edges: range(5).map((i) => ({
+              cursor: `${i}`,
+              node: columns.reduce(
+                (result, column) => ({
+                  ...result,
+                  [column.id]: column.renderer ? undefined : TEST_TEXT_SHORT,
+                }),
+                {} as PartialModel<TType>,
+              ),
+            })),
+            pageInfo: {
+              endCursor: '',
+              hasNextPage: false,
+              hasPreviousPage: false,
+              startCursor: '',
             },
-          }
+          },
         }
-        flex
-        id={name}
-        params={params}
-        query={getConnection}>
-        {({ data, elementState, reset }) => (
+      }
+      flex
+      id={name}
+      p
+      params={params}
+      query={getConnection}
+      s>
+      {({ data, elementState, reset }) => (
+        <Wrapper
+          flex
+          s>
+          <Wrapper
+            isAlign
+            isRow
+            justify={FLEX_JUSTIFY.END}>
+            <FilterButton
+              element={
+                <ResourceFilter
+                  fields={fields}
+                  name={name}
+                  onSubmit={async (filter) => paramsSet({ filter })}
+                  rootName={rootName}
+                />
+              }
+            />
+
+            <ModalButton
+              element={({ onClose }) => (
+                <ResourceForm<TType, TForm, TRoot>
+                  fields={fields}
+                  name={name}
+                  onSubmit={async (input) => {
+                    await handleSubmit(input);
+                    await reset();
+                    onClose();
+                  }}
+                  rootName={rootName}
+                />
+              )}
+              icon="add"
+              size={THEME_SIZE.SMALL}>
+              {t('core:new', { value: name })}
+            </ModalButton>
+          </Wrapper>
+
           <Table<PartialModel<TType>>
             columns={columns}
             data={data?.result?.edges.map((edge) => edge.node)}
@@ -133,8 +136,8 @@ export const ResourceTable = <
               void remove({ filter: [{ field: '_id', value: _id }] });
             }}
           />
-        )}
-      </ConnectionBoundary>
-    </Wrapper>
+        </Wrapper>
+      )}
+    </ConnectionBoundary>
   );
 };
