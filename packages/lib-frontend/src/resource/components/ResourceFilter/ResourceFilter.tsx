@@ -64,7 +64,7 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
               return <TextFilterInput label={labelF} />;
           }
         })();
-        return { fields: [{ element, id }], id, title: id };
+        return { fields: [{ element, id }], id };
       }) ?? [],
     [fields],
   );

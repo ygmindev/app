@@ -57,7 +57,7 @@ export const Menu = forwardRef(
 
     useImperativeHandle(ref, () => ({
       scrollTo: (params) => dropdownRef.current?.scrollTo(params),
-      toggle: (params) => dropdownRef.current?.toggle(params),
+      toggle: handleToggle,
     }));
 
     const handleToggle = (v?: boolean): void =>

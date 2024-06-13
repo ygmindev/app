@@ -135,6 +135,11 @@ export const MenuInput = forwardRef(
       return focusedSet(index);
     };
 
+    const handleChange = (v?: string): void => {
+      valueControlledSet(v);
+      onElementStateChangeF(ELEMENT_STATE.INACTIVE);
+    };
+
     return (
       <Menu
         anchor={() => (
@@ -151,7 +156,6 @@ export const MenuInput = forwardRef(
             }
             onBlur={handleBlur}
             onChange={handleTextChange}
-            onElementStateChange={onElementStateChangeF}
             onFocus={onFocus}
             onKey={optionsF?.length ? handleKey : undefined}
             onSubmit={handleSubmit}
@@ -180,7 +184,7 @@ export const MenuInput = forwardRef(
         isDismiss={false}
         isFullWidth
         isPressable={false}
-        onChange={valueControlledSet}
+        onChange={handleChange}
         onElementStateChange={onElementStateChangeF}
         options={optionsF}
         ref={menuRef}
