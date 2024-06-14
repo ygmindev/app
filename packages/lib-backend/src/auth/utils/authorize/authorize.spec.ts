@@ -7,12 +7,12 @@ const { displayName } = withTest({ authorize });
 
 describe(displayName, () => {
   test('works with any role', async () => {
-    let result = await authorize({ context: {}, roles: [ACCESS_ROLE.ANY] });
+    let result = await authorize({ context: {}, roles: [] });
     expect(result).toStrictEqual(true);
 
     result = await authorize({
       context: { user: { _id: USER_FIXTURE._id, claims: USER_FIXTURE } },
-      roles: [ACCESS_ROLE.ANY],
+      roles: [ACCESS_ROLE.USER],
     });
     expect(result).toStrictEqual(true);
   });

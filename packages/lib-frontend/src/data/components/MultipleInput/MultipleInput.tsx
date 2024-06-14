@@ -14,36 +14,25 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { merge } from '@lib/shared/core/utils/merge/merge';
-import { updateArray } from '@lib/shared/core/utils/updateArray/updateArray';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import filter from 'lodash/filter';
-import {
-  cloneElement,
-  type ForwardedRef,
-  forwardRef,
-  type ReactElement,
-  useRef,
-  useState,
-} from 'react';
+import { type ForwardedRef, forwardRef, type ReactElement, useRef, useState } from 'react';
 
 export const MultipleInput = forwardRef(
   <TType extends WithIdModel>(
     {
       defaultValue,
-      displayElement,
-      element,
       label,
       onChange,
+      options,
       value,
       ...props
-    }: RLFCPropsModel<MultipleInputRefModle<TType>, MultipleInputPropsModel<TType>>,
-    _: ForwardedRef<MultipleInputRefModle<TType>>,
-  ): ReactElement<RLFCPropsModel<MultipleInputRefModle<TType>, MultipleInputPropsModel<TType>>> => {
+    }: RLFCPropsModel<MultipleInputRefModle, MultipleInputPropsModel<TType>>,
+    _: ForwardedRef<MultipleInputRefModle>,
+  ): ReactElement<RLFCPropsModel<MultipleInputRefModle, MultipleInputPropsModel<TType>>> => {
     const { t } = useTranslation();
     const { wrapperProps } = useLayoutStyles({ props });
-    const { valueControlled, valueControlledSet } = useValueControlled<Array<TType>>({
+    const { valueControlled, valueControlledSet } = useValueControlled<Array<string>>({
       defaultValue,
       onChange,
       value,
@@ -70,30 +59,31 @@ export const MultipleInput = forwardRef(
           </Wrapper>
 
           <ModalButton
-            element={({ onClose }) =>
-              cloneElement(element, {
-                initialValues,
-                onCancel: () => {
-                  initialValuesSet(undefined);
-                  onClose();
-                },
-                onComplete: () => {
-                  initialValuesSet(undefined);
-                  onClose();
-                },
-                onSuccess: async (data?: TType) => {
-                  valueControlledSet(
-                    initialValues
-                      ? updateArray(
-                          valueControlled,
-                          (v) => v.id === initialValues.id,
-                          (v) => merge([v, data]),
-                        )
-                      : filterNil([...(valueControlled ?? []), data]),
-                  );
-                  onClose();
-                },
-              })
+            element={
+              ({ onClose }) => <></>
+              // cloneElement(element, {
+              //   initialValues,
+              //   onCancel: () => {
+              //     initialValuesSet(undefined);
+              //     onClose();
+              //   },
+              //   onComplete: () => {
+              //     initialValuesSet(undefined);
+              //     onClose();
+              //   },
+              //   onSuccess: async (data?: TType) => {
+              //     valueControlledSet(
+              //       initialValues
+              //         ? updateArray(
+              //             valueControlled,
+              //             (v) => v === initialValues.id,
+              //             (v) => v,
+              //           )
+              //         : filterNil([...(valueControlled ?? []), data]),
+              //     );
+              //     onClose();
+              //   },
+              // })
             }
             icon="add"
             onClose={() => initialValuesSet(undefined)}
@@ -104,34 +94,35 @@ export const MultipleInput = forwardRef(
           </ModalButton>
         </Wrapper>
 
-        {valueControlled?.map((v) => (
-          <Wrapper
-            isAlign
-            isRow
-            key={v.id}>
-            <Wrapper flex>{displayElement(v)}</Wrapper>
+        {valueControlled?.map((v) => {
+          const option = options.find(({ id }) => id === v);
+          return (
+            option && (
+              <Wrapper
+                isAlign
+                isRow
+                key={v}>
+                <Button
+                  icon="edit"
+                  iconText={t('core:edit')}
+                  onPress={() => handleEdit(option)}
+                  type={BUTTON_TYPE.INVISIBLE}
+                />
 
-            <Button
-              icon="edit"
-              iconText={t('core:edit')}
-              onPress={() => handleEdit(v)}
-              type={BUTTON_TYPE.INVISIBLE}
-            />
-
-            {valueControlled.length > 0 && (
-              <Button
-                color={THEME_COLOR.ERROR}
-                icon="trash"
-                iconText={t('core:remove')}
-                onPress={() => valueControlledSet(filter(valueControlled, (vv) => v.id !== vv.id))}
-                type={BUTTON_TYPE.INVISIBLE}
-              />
-            )}
-          </Wrapper>
-        ))}
+                <Button
+                  color={THEME_COLOR.ERROR}
+                  icon="trash"
+                  iconText={t('core:remove')}
+                  onPress={() => valueControlledSet(filter(valueControlled, (vv) => v !== vv))}
+                  type={BUTTON_TYPE.INVISIBLE}
+                />
+              </Wrapper>
+            )
+          );
+        })}
       </Wrapper>
     );
   },
 ) as <TType extends WithIdModel>(
-  props: RLFCPropsModel<MultipleInputRefModle<TType>, MultipleInputPropsModel<TType>>,
-) => ReactElement<RLFCPropsModel<MultipleInputRefModle<TType>, MultipleInputPropsModel<TType>>>;
+  props: RLFCPropsModel<MultipleInputRefModle, MultipleInputPropsModel<TType>>,
+) => ReactElement<RLFCPropsModel<MultipleInputRefModle, MultipleInputPropsModel<TType>>>;

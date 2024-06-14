@@ -13,14 +13,12 @@ import { Authorized } from 'type-graphql';
 // TODO: should come from database?
 export const getAccessRole = (level: AccessLevelModel): Array<AccessRoleModel> => {
   switch (level) {
-    case ACCESS_LEVEL.PROHIBITED:
-      return [];
     case ACCESS_LEVEL.RESTRICTED:
       return [ACCESS_ROLE.ADMIN];
     case ACCESS_LEVEL.PROTECTED:
       return [ACCESS_ROLE.USER];
     default:
-      return [ACCESS_ROLE.ANY];
+      return [];
   }
 };
 

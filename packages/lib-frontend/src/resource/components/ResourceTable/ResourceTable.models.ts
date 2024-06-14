@@ -13,8 +13,8 @@ export type ResourceTablePropsModel<
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = ResourceParamsModel<TType, TRoot> &
-  RootInputModel<TRoot> & {
-    implementation: ResourceImplementationModel<TType, TForm, TRoot>;
-  };
+  RootInputModel<TRoot> & { implementation: ResourceImplementationModel<TType, TForm, TRoot> };
 
-export type ResourceTableFieldModel<TType> = { element: ReactElement<InputPropsModel<TType>> };
+export type ResourceTableFieldModel<TType> = {
+  element: ReactElement<InputPropsModel<TType>>;
+};

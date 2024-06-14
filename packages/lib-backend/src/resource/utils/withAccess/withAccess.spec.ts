@@ -7,7 +7,7 @@ const { displayName } = withTest({ withAccess });
 describe(displayName, () => {
   test('works with public', async () => {
     const result = getAccessRole(ACCESS_LEVEL.PUBLIC);
-    expect(result).toStrictEqual([ACCESS_ROLE.ANY]);
+    expect(result).toStrictEqual([]);
   });
 
   test('works with protected', async () => {
@@ -15,13 +15,8 @@ describe(displayName, () => {
     expect(result).toStrictEqual([ACCESS_ROLE.USER]);
   });
 
-  test('works with prohibited', async () => {
+  test('works with restricted', async () => {
     const result = getAccessRole(ACCESS_LEVEL.RESTRICTED);
     expect(result).toStrictEqual([ACCESS_ROLE.ADMIN]);
-  });
-
-  test('works with restricted', async () => {
-    const result = getAccessRole(ACCESS_LEVEL.PROHIBITED);
-    expect(result).toStrictEqual([]);
   });
 });

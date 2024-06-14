@@ -39,7 +39,7 @@ export class Otp extends EntityResource implements OtpModel {
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   email?: string;
 
-  @withAccess({ level: ACCESS_LEVEL.PROHIBITED })
+  @withAccess({ level: ACCESS_LEVEL.RESTRICTED })
   @withField({ isRepository: true, type: DATA_TYPE.STRING })
   otp!: string;
 

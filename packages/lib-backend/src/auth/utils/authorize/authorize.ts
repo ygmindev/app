@@ -10,10 +10,7 @@ export const authorize = async ({
   context,
   roles,
 }: AuthorizeParamsModel): Promise<AuthorizeModel> => {
-  if (roles) {
-    if (roles.includes(ACCESS_ROLE.ANY)) {
-      return true;
-    }
+  if (roles?.length) {
     if (context.user) {
       if (roles.includes(ACCESS_ROLE.USER)) {
         return true;
@@ -21,12 +18,11 @@ export const authorize = async ({
       const { result } = await Container.get(AccessImplementation).get({
         filter: [{ field: '_user', value: context.user._id }],
       });
-      console.warn(result);
       return result?.role ? roles.every(result.role?.includes) : false;
       // TODO: limit admin
       // return true;
     }
     return false;
   }
-  return false;
+  return true;
 };
