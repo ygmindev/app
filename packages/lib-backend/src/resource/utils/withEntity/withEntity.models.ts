@@ -1,5 +1,5 @@
 export type WithEntityParamsModel<TType extends unknown> = {
-  indices?: Array<Array<keyof TType>>;
+  indices?: Array<{ keys: Array<keyof TType>; type?: 'text' }>;
   isAbstract?: boolean;
   isEmbeddable?: boolean;
   isRepository?: boolean;

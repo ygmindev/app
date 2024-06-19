@@ -23,7 +23,11 @@ export class OtpForm implements OtpFormModel {
   phone?: string;
 }
 
-@withEntity({ indices: [['email'], ['phone']], isRepository: true, name: OTP_RESOURCE_NAME })
+@withEntity({
+  indices: [{ keys: ['email'] }, { keys: ['phone'] }],
+  isRepository: true,
+  name: OTP_RESOURCE_NAME,
+})
 export class Otp extends EntityResource implements OtpModel {
   @withField({
     defaultValue: () => new Date(),

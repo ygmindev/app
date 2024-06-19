@@ -27,8 +27,8 @@ export const withEntity = <TType extends unknown>({
           tableName: nameF,
         })(Base as unknown as ClassModel)
       : Base;
-    for (const index of indices) {
-      BaseF = Index({ properties: index })(BaseF as unknown as ClassModel) as TType;
+    for (const { keys, type } of indices) {
+      BaseF = Index({ properties: keys, type })(BaseF as unknown as ClassModel) as TType;
     }
     return BaseF;
   }) as ClassDecorator;
