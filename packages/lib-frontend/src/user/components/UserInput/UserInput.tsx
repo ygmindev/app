@@ -46,13 +46,16 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
         {({ data, reset }) => (
           <SearchInput
             label={t('user:user')}
-            onChange={valueControlledSet}
+            onChange={(v) => {
+              const user = v && data?.find((vv) => vv.id === v);
+              valueControlledSet(user ? { _id: user.id } : undefined);
+            }}
             onSearch={(v) => {
               querySet(v);
               void reset();
             }}
             options={data ?? []}
-            value={valueControlled}
+            value={valueControlled?._id}
           />
         )}
       </DataBoundary>
