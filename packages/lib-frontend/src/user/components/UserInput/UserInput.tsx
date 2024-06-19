@@ -11,7 +11,6 @@ import {
 } from '@lib/frontend/user/components/UserInput/UserInput.models';
 import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
 import { uid } from '@lib/shared/core/utils/uid/uid';
-// import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { USER_FIXTURES } from '@lib/shared/user/resources/User/User.fixtures';
 import { USER } from '@lib/shared/user/user.constants';
 import { forwardRef, useState } from 'react';
@@ -29,7 +28,6 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
     });
 
     const { search } = useUserResource();
-
     const handleQuery = async (v?: string): Promise<Array<MenuOptionModel>> => {
       if (v) {
         const { result } = await search({ query: v });
