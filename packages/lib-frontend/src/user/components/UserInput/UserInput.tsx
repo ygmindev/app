@@ -10,6 +10,7 @@ import {
   type UserInputRefModel,
 } from '@lib/frontend/user/components/UserInput/UserInput.models';
 import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
+import { uid } from '@lib/shared/core/utils/uid/uid';
 // import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { USER_FIXTURES } from '@lib/shared/user/resources/User/User.fixtures';
 import { USER } from '@lib/shared/user/user.constants';
@@ -20,6 +21,7 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
     const { wrapperProps } = useLayoutStyles({ props });
     const { t } = useTranslation([USER]);
     const [query, querySet] = useState<string>();
+
     const { valueControlled, valueControlledSet } = useValueControlled({
       defaultValue,
       onChange,
@@ -31,8 +33,7 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
     const handleQuery = async (v?: string): Promise<Array<MenuOptionModel>> => {
       if (v) {
         const { result } = await search({ query: v });
-        console.warn(result);
-        return [];
+        return result?.map(({ _id, email }) => ({ id: _id ?? uid(), label: email })) ?? [];
       }
       return [];
     };
@@ -44,11 +45,16 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
         id="users"
         params={query}
         query={handleQuery}>
-        {({ data }) => (
+        {({ data, reset }) => (
           <SearchInput
             label={t('user:user')}
-            onSearch={querySet}
+            onChange={valueControlledSet}
+            onSearch={(v) => {
+              querySet(v);
+              void reset();
+            }}
             options={data ?? []}
+            value={valueControlled}
           />
         )}
       </DataBoundary>

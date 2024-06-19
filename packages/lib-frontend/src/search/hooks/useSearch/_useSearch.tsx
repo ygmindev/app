@@ -13,6 +13,7 @@ export const _useSearch = <TType extends WithIdModel>({
   items,
   keys,
   limit,
+  minLength,
   threshold,
 }: _UseSearchParamsModel<TType>): _UseSearchModel<TType> => {
   const [query, querySet] = useState<string>();
@@ -20,7 +21,8 @@ export const _useSearch = <TType extends WithIdModel>({
 
   const searchF = debounce(
     (value: string) => {
-      let resultF = value ? fuse.search(value, { limit }).map(({ item }) => item) : items;
+      let resultF =
+        value?.length >= minLength ? fuse.search(value, { limit }).map(({ item }) => item) : items;
       resultF = uniqBy(resultF, 'id');
       resultSet(resultF);
     },

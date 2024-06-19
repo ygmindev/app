@@ -27,6 +27,10 @@ export const createOutput = <TMethod extends ResourceMethodTypeModel, TType, TRo
       ? createConnection({ Resource, name })
       : Resource()) ?? Boolean;
 
+  const isArray = (
+    [RESOURCE_METHOD_TYPE.GET_MANY, RESOURCE_METHOD_TYPE.SEARCH] as Array<ResourceMethodTypeModel>
+  ).includes(method);
+
   @withEntity({ name: nameF })
   class Output extends (Root ?? class {}) implements OutputModel<TMethod, TType, TRoot> {
     @withField<
@@ -36,7 +40,7 @@ export const createOutput = <TMethod extends ResourceMethodTypeModel, TType, TRo
         Result as ResourceClassModel<
           TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION ? GetConnectionModel<TType> : TType
         >,
-      isArray: method === RESOURCE_METHOD_TYPE.GET_MANY,
+      isArray,
       type: PROPERTY_TYPE.RESOURCE,
     })
     result?: ResultModel<TMethod, TType>;

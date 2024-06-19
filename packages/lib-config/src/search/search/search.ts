@@ -7,6 +7,8 @@ const config = defineConfig<SearchConfigModel>({
 
     limit: 15,
 
+    minLength: 2,
+
     threshold: 0.99,
   }),
 });

@@ -176,7 +176,7 @@ input AccessSearchInput {
 }
 
 type AccessSearchOutput {
-  result: Access
+  result: [Access]
 }
 
 input AccessUpdateFilterInput {
@@ -395,7 +395,7 @@ input BankSearchInput {
 }
 
 type BankSearchOutput {
-  result: Bank
+  result: [Bank]
   root: User
 }
 
@@ -610,7 +610,7 @@ input CardSearchInput {
 }
 
 type CardSearchOutput {
-  result: Card
+  result: [Card]
   root: User
 }
 
@@ -794,7 +794,7 @@ input ChatSearchInput {
 }
 
 type ChatSearchOutput {
-  result: Chat
+  result: [Chat]
 }
 
 input ChatUpdateFilterInput {
@@ -1016,7 +1016,7 @@ input GroupSearchInput {
 }
 
 type GroupSearchOutput {
-  result: Group
+  result: [Group]
 }
 
 input GroupUpdateFilterInput {
@@ -1273,7 +1273,7 @@ input OrderSearchInput {
 }
 
 type OrderSearchOutput {
-  result: Order
+  result: [Order]
 }
 
 input OrderUpdateFilterInput {
@@ -1457,7 +1457,7 @@ input OtpSearchInput {
 }
 
 type OtpSearchOutput {
-  result: Otp
+  result: [Otp]
 }
 
 input OtpUpdateFilterInput {
@@ -1730,7 +1730,7 @@ input PricingSearchInput {
 }
 
 type PricingSearchOutput {
-  result: Pricing
+  result: [Pricing]
   root: Product
 }
 
@@ -1938,7 +1938,7 @@ input ProductSearchInput {
 }
 
 type ProductSearchOutput {
-  result: Product
+  result: [Product]
 }
 
 input ProductUpdateFilterInput {
@@ -2194,7 +2194,7 @@ input RoleSearchInput {
 }
 
 type RoleSearchOutput {
-  result: Role
+  result: [Role]
   root: Group
 }
 
@@ -2505,7 +2505,7 @@ input SocketSearchInput {
 }
 
 type SocketSearchOutput {
-  result: Socket
+  result: [Socket]
 }
 
 input SocketUpdateFilterInput {
@@ -2717,7 +2717,7 @@ input UserSearchInput {
 }
 
 type UserSearchOutput {
-  result: User
+  result: [User]
 }
 
 input UserUpdateFilterInput {
@@ -2923,7 +2923,7 @@ input UtilitySearchInput {
 }
 
 type UtilitySearchOutput {
-  result: Utility
+  result: [Utility]
   root: Vendor
 }
 
@@ -3112,7 +3112,7 @@ input VendorSearchInput {
 }
 
 type VendorSearchOutput {
-  result: Vendor
+  result: [Vendor]
 }
 
 input VendorUpdateFilterInput {
@@ -3303,7 +3303,7 @@ input linkedUserSearchInput {
 }
 
 type linkedUserSearchOutput {
-  result: linkedUser
+  result: [linkedUser]
   root: User
 }
 

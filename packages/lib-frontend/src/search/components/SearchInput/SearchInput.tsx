@@ -10,7 +10,7 @@ import { type ForwardedRef, forwardRef, type ReactElement } from 'react';
 
 export const SearchInput = forwardRef(
   <TType extends MenuOptionModel>(
-    { ...props }: RLFCPropsModel<SearchInputRefModel, SearchInputPropsModel<TType>>,
+    { placeholder, ...props }: RLFCPropsModel<SearchInputRefModel, SearchInputPropsModel<TType>>,
     _: ForwardedRef<SearchInputRefModel>,
   ) => {
     const { t } = useTranslation();
@@ -18,7 +18,7 @@ export const SearchInput = forwardRef(
       <MenuInput
         {...props}
         icon="search"
-        placeholder={props.placeholder ?? t('core:search')}
+        placeholder={placeholder ?? t('core:search')}
       />
     );
   },

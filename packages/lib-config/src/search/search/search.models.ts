@@ -3,5 +3,7 @@ export type SearchConfigModel = {
 
   limit: number;
 
+  minLength: number;
+
   threshold: number;
 };

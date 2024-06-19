@@ -95,10 +95,12 @@ export const MenuInput = forwardRef(
       focusedSet(undefined);
     };
 
-    const { delay } = searchConfig.params();
+    const { delay, minLength } = searchConfig.params();
     const handleSearch = useCallback(
-      debounce(onSearch ?? ((_: string) => null), { duration: delay }),
-      [delay, onSearch],
+      debounce((v?: string) => (v?.length ?? 0) >= minLength && (onSearch ? onSearch(v) : null), {
+        duration: delay,
+      }),
+      [delay, minLength, onSearch],
     );
 
     const handleTextChange = (v: string): void => {

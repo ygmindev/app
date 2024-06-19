@@ -215,7 +215,6 @@ export class _Database implements _DatabaseModel {
           const result = await collection.find({ $text: { $search: query } }).toArray();
           return { result } as unknown as OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
         }
-        // TODO: don't return for remove?
         return { result: [] } as unknown as OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
       },
 
