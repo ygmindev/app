@@ -15,8 +15,8 @@ import { VirtualizedList } from '@lib/frontend/core/components/VirtualizedList/V
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
-import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
@@ -47,11 +47,10 @@ export const Menu = forwardRef(
     const isMobile = useIsMobile();
     const dropdownRef = useRef<DropdownRefModel>(null);
 
-    const { valueControlled: elementStateF, valueControlledSet: onElementStateChangeF } =
-      useValueControlled({
-        onChange: onElementStateChange,
-        value: elementState,
-      });
+    const { elementStateControlledSet, isActive, isBlocked } = useElementStateControlled({
+      elementState,
+      onElementStateChange,
+    });
 
     useImperativeHandle(ref, () => ({
       scrollTo: (params) => dropdownRef.current?.scrollTo(params),
@@ -59,7 +58,7 @@ export const Menu = forwardRef(
     }));
 
     const handleToggle = (v?: boolean): void =>
-      onElementStateChangeF(v ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE);
+      elementStateControlledSet(v ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE);
 
     const handlePressOption = async ({ id, onPress }: MenuOptionModel): Promise<void> => {
       onPress && (await onPress());
@@ -67,16 +66,14 @@ export const Menu = forwardRef(
       handleToggle(false);
     };
 
-    const isDisabled = elementStateF === ELEMENT_STATE.DISABLED;
-    const isActive = elementStateF === ELEMENT_STATE.ACTIVE;
     let anchorF: ReactElement<PressablePropsModel> = anchor(isActive);
 
     const { onPress } = anchorF.props;
     anchorF = cloneElement(anchorF, {
       onPress: async () => {
-        if (!isDisabled) {
+        if (!isBlocked) {
           onPress && (await onPress());
-          handleToggle(elementStateF !== ELEMENT_STATE.ACTIVE);
+          handleToggle(!isActive);
         }
       },
     });

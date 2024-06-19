@@ -1,3 +1,4 @@
+import { SkeletonGroup } from '@lib/frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
@@ -27,7 +28,13 @@ export const asyncBoundaryContext = createContext<AsyncBoundaryContextModel>({
 export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
   children,
   errorContextGet,
-  fallback,
+  fallback = (
+    <Wrapper
+      flex
+      isCenter>
+      <Loading />
+    </Wrapper>
+  ),
   onRefresh,
   ...props
 }) => {
@@ -73,18 +80,7 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
           </Portal>
         )}
 
-        <Suspense
-          fallback={
-            fallback ?? (
-              <Wrapper
-                flex
-                isCenter>
-                <Loading />
-              </Wrapper>
-            )
-          }>
-          {children}
-        </Suspense>
+        <Suspense fallback={<SkeletonGroup>{fallback}</SkeletonGroup>}>{children}</Suspense>
       </Wrapper>
     </asyncBoundaryContext.Provider>
   );

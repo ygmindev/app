@@ -29,26 +29,7 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
       //   filter: [{ condition: FILTER_CONDITION.CONTAINS, field: 'first', value: 'yg' }],
       // });
       // console.warn(result);
-      return [
-        {
-          id: 'user1',
-          label: 'yg min',
-        },
-
-        {
-          id: 'user2',
-          label: 'yg min',
-        },
-
-        {
-          id: 'user3',
-          label: 'yg min',
-        },
-        {
-          id: 'user4',
-          label: 'yg min',
-        },
-      ];
+      return [];
     };
 
     return (
@@ -57,6 +38,7 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
         id="users"
         query={handleQuery}>
         {({ data }) => {
+          console.warn(data);
           return (
             <SearchInput
               {...wrapperProps}

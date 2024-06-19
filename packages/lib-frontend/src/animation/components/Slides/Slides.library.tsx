@@ -48,7 +48,7 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
       {
         element: (
           <Wrapper
-            grow
+            flex
             isCenter>
             <WrapperFixture>1</WrapperFixture>
           </Wrapper>
@@ -57,7 +57,7 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
       {
         element: (
           <Wrapper
-            grow
+            flex
             isCenter>
             <WrapperFixture>2</WrapperFixture>
           </Wrapper>
@@ -66,7 +66,7 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
       {
         element: (
           <Wrapper
-            grow
+            flex
             isCenter>
             <WrapperFixture>3</WrapperFixture>
           </Wrapper>

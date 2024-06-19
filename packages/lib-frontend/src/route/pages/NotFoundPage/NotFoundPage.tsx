@@ -11,7 +11,7 @@ export const NotFoundPage: SFCModel<NotFoundPagePropsModel> = ({ testID, ...prop
   const { t } = useTranslation();
   return (
     <Wrapper
-      grow
+      flex
       isCenter
       style={styles}
       testID={testID}>

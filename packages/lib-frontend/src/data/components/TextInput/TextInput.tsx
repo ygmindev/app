@@ -10,6 +10,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
+import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
 import { type FocusableRefModel } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
@@ -84,21 +85,17 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       submit: inputRef.current?.submit,
     }));
 
-    const { valueControlled: elementStateF, valueControlledSet: onElementStateChangeF } =
-      useValueControlled({
-        onChange: onElementStateChange,
-        value: elementState,
+    const { elementStateControlled, elementStateControlledSet, isActive, isBlocked } =
+      useElementStateControlled({
+        elementState,
+        onElementStateChange,
       });
 
-    useChange(elementStateF, () => {
-      void handleFocus(elementStateF === ELEMENT_STATE.ACTIVE);
+    useChange(isActive, () => {
+      void handleFocus(isActive);
     });
 
     const sizeF = size ?? THEME_SIZE.MEDIUM;
-    const isDisabled =
-      elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
-
-    const isActive = elementStateF === ELEMENT_STATE.ACTIVE;
 
     const theme = useTheme();
     const { valueControlled, valueControlledSet } = useValueControlled({
@@ -108,7 +105,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
     });
 
     const handleFocus = async (v?: boolean): Promise<void> => {
-      if (!isDisabled) {
+      if (!isBlocked) {
         if (v) {
           onFocus && onFocus();
           focusableRef.current?.focus && focusableRef.current?.focus();
@@ -142,7 +139,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         zIndex>
         {!isNoClear && isActive && (
           <Appearable
-            elementState={elementStateF}
+            elementState={elementStateControlled}
             isActive={(valueControlled?.length ?? 0) > 0}
             isCenter>
             <Button
@@ -208,9 +205,9 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       <FocusableWrapper
         {...wrapperProps}
         border={!isTransparent}
-        elementState={elementStateF}
+        elementState={elementStateControlled}
         height={height ?? (isNumber(sizeF) ? sizeF : theme.shape.size[sizeF])}
-        onElementStateChange={onElementStateChangeF}
+        onElementStateChange={elementStateControlledSet}
         pLeft={!isCenter}
         pRight={isCenter ? THEME_SIZE.SMALL : undefined}
         position={SHAPE_POSITION.RELATIVE}
@@ -229,7 +226,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
             foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
             height={theme.shape.size[THEME_SIZE.SMALL]}
             isCenter={isCenter}
-            isDisabled={isDisabled}
+            isDisabled={isBlocked}
             keyboard={keyboard}
             language={language}
             maxLength={maxLength}
@@ -259,7 +256,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         {/* TODO: to item? */}
         <Wrapper
           animation={containerAnimation}
-          elementState={elementStateF}
+          elementState={elementStateControlled}
           isAlign
           isCenter
           isRow
@@ -270,7 +267,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
           {icon && (
             <Icon
               animation={textAnimation}
-              elementState={elementStateF}
+              elementState={elementStateControlled}
               icon={icon}
             />
           )}
@@ -278,7 +275,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
           {label && (
             <AsyncText
               animation={textAnimation}
-              elementState={elementStateF}>
+              elementState={elementStateControlled}>
               {label}
             </AsyncText>
           )}

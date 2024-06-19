@@ -251,7 +251,14 @@ const FormContainerF = forwardRef(
       });
 
     return (
-      <Form onSubmit={isDisabled ? undefined : async () => handleSubmitF()}>
+      <Form
+        onSubmit={
+          isDisabled
+            ? undefined
+            : () => {
+                void handleSubmitF();
+              }
+        }>
         <MainLayout
           {...wrapperProps}
           bottomElement={

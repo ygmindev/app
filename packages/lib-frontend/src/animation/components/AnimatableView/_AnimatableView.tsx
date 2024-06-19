@@ -1,9 +1,3 @@
-import { type MotiProps } from 'moti';
-import { MotiScrollView, MotiView } from 'moti';
-import { type ComponentType, type RefObject } from 'react';
-import { forwardRef, useImperativeHandle } from 'react';
-import { Pressable } from 'react-native';
-
 import { type _AnimatableViewPropsModel } from '@lib/frontend/animation/components/AnimatableView/_AnimatableView.models';
 import { type AnimatableViewRefModel } from '@lib/frontend/animation/components/AnimatableView/AnimatableView.models';
 import { useAnimationState } from '@lib/frontend/animation/hooks/useAnimationState/useAnimationState';
@@ -13,6 +7,11 @@ import { _viewParams as _viewParamsPressable } from '@lib/frontend/core/componen
 import { type RSFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { type MotiProps } from 'moti';
+import { MotiScrollView, MotiView } from 'moti';
+import { type ComponentType, type RefObject } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
+import { Pressable } from 'react-native';
 
 const PressableAnimatable = animatable({ Component: Pressable as ComponentType });
 

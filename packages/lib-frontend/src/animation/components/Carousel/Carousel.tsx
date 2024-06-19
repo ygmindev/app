@@ -13,7 +13,7 @@ export const Carousel: SFCModel<CarouselPropsModel> = ({ current, slides, testID
   return (
     <Wrapper
       {...props}
-      grow
+      flex
       isAlign
       isFullWidth
       isRow>
@@ -24,7 +24,7 @@ export const Carousel: SFCModel<CarouselPropsModel> = ({ current, slides, testID
       />
 
       <Wrapper
-        grow
+        flex
         isFullHeight>
         <Slides
           current={currentF}

@@ -9,8 +9,8 @@ import {
 } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type ElementStateModel, type RLFCModel } from '@lib/frontend/core/core.models';
-import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -43,17 +43,11 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean | undefined>();
     const { wrapperProps } = useLayoutStyles({ props });
 
-    const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
-      defaultValue: ELEMENT_STATE.INACTIVE,
-      onChange: onElementStateChange,
-      value: elementState,
-    });
-
-    const isDisabled =
-      valueControlled === ELEMENT_STATE.DISABLED || valueControlled === ELEMENT_STATE.LOADING;
+    const { elementStateControlled, elementStateControlledSet, isBlocked, isLoading } =
+      useElementStateControlled({ elementState, onElementStateChange });
 
     const handleButtonPress = async (): Promise<void> => {
-      if (!isDisabled) {
+      if (!isBlocked) {
         if (confirmMessage) {
           confirmModalIsOpenSet(true);
         } else {
@@ -63,12 +57,12 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     };
 
     const handlePress = async (): Promise<void> => {
-      if (!isDisabled) {
+      if (!isBlocked) {
         const result = onPress && onPress();
         if (isPromise(result)) {
-          valueControlledSet(ELEMENT_STATE.LOADING);
+          elementStateControlledSet(ELEMENT_STATE.LOADING);
           await result;
-          valueControlledSet(ELEMENT_STATE.INACTIVE);
+          elementStateControlledSet(ELEMENT_STATE.INACTIVE);
         }
       }
     };
@@ -78,11 +72,11 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
         <Activatable
           onActive={() => {
             onActive && onActive();
-            valueControlledSet(ELEMENT_STATE.ACTIVE);
+            elementStateControlledSet(ELEMENT_STATE.ACTIVE);
           }}
           onInactive={() => {
             onInactive && onInactive();
-            valueControlledSet(ELEMENT_STATE.INACTIVE);
+            elementStateControlledSet(ELEMENT_STATE.INACTIVE);
           }}
           trigger={trigger}>
           <Wrapper
@@ -98,7 +92,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
                 },
               },
             }}
-            elementState={valueControlled}
+            elementState={elementStateControlled}
             onPress={handleButtonPress}
             onPressIn={onPressIn}
             onPressOut={onPressOut}
@@ -115,7 +109,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
             isOpen={confirmModalIsOpen}
             onToggle={confirmModalIsOpenSet}>
             <Wrapper
-              grow
+              flex
               isCenter
               s>
               {confirmMessage && <AsyncText>{confirmMessage}</AsyncText>}
@@ -124,7 +118,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
                 isAlign
                 isRow>
                 <Button
-                  elementState={valueControlled}
+                  elementState={elementStateControlled}
                   icon="chevronLeft"
                   onPress={async () => confirmModalIsOpenSet(false)}
                   type={BUTTON_TYPE.TRANSPARENT}>
@@ -133,7 +127,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
 
                 <Button
                   color={confirmColor}
-                  elementState={valueControlled}
+                  elementState={elementStateControlled}
                   icon="chevronRight"
                   onPress={async () => {
                     await handlePress();

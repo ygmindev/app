@@ -72,7 +72,7 @@ export const Library = <TProps,>({
   return (
     <Wrapper
       {...wrapperProps}
-      grow
+      flex
       s>
       {name && <Text fontStyle={FONT_STYLE.HEADLINE}>{name}</Text>}
 

@@ -1,5 +1,5 @@
 import { type TitlePropsModel } from '@lib/frontend/core/components/Title/Title.models';
-import { type AsyncTextModel, type ChildrenPropsModel } from '@lib/frontend/core/core.models';
+import { type AsyncTextModel, type ChildPropsModel } from '@lib/frontend/core/core.models';
 import { type ReactElement } from 'react';
 
 export type ErrorContextModel = Omit<TitlePropsModel, 'color' | 'title'> & {
@@ -12,7 +12,7 @@ export type AsyncBoundaryContextModel = {
   handleRefresh(): void;
 };
 
-export type AsyncBoundaryPropsModel = ChildrenPropsModel &
+export type AsyncBoundaryPropsModel = ChildPropsModel<ReactElement> &
   Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
     fallback?: ReactElement;
     onRefresh?(): Promise<void>;

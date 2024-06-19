@@ -8,7 +8,7 @@ export const PingPage: SFCModel<PingPagePropsModel> = ({ testID, ...props }) => 
   const { styles } = useStyles({ props });
   return (
     <Wrapper
-      grow
+      flex
       style={styles}
       testID={testID}>
       <Text>ping</Text>

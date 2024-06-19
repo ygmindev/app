@@ -26,7 +26,7 @@ export const SnapshotPage: SFCModel<SnapshotPagePropsModel> = ({ testID, ...prop
         element: (
           <Image
             border
-            grow
+            flex
             round
             src={`/_dist/test/snapshots/${snapshotid}/${image}`}
           />

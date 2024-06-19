@@ -24,7 +24,7 @@ export const NavigationLayout = <TOption extends TranslatableOptionModel>({
   return (
     <Wrapper
       backgroundColor={THEME_COLOR_MORE.SURFACE}
-      grow
+      flex
       isRow={!isHorizontalF}
       style={styles}>
       <NavigationBar
@@ -37,7 +37,7 @@ export const NavigationLayout = <TOption extends TranslatableOptionModel>({
 
       <Wrapper
         basis={0}
-        grow
+        flex
         isVerticalScrollable
         p>
         {children}

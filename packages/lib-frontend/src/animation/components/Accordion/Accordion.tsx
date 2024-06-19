@@ -6,12 +6,8 @@ import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { PressableTitle } from '@lib/frontend/core/components/PressableTitle/PressableTitle';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import {
-  type ElementStateModel,
-  type LFCModel,
-  type MeasureModel,
-} from '@lib/frontend/core/core.models';
-import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { type LFCModel, type MeasureModel } from '@lib/frontend/core/core.models';
+import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useState } from 'react';
 
@@ -31,16 +27,16 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const [measure, measureSet] = useState<MeasureModel>();
-  const { valueControlled, valueControlledSet } = useValueControlled<ElementStateModel>({
-    defaultValue,
-    onChange,
-    value,
-  });
+  const { elementStateControlled, elementStateControlledSet, isActive } = useElementStateControlled(
+    {
+      defaultElementState: defaultValue,
+      elementState: value,
+      onElementStateChange: onChange,
+    },
+  );
 
   const handleToggle = (): void =>
-    valueControlledSet(
-      valueControlled === ELEMENT_STATE.ACTIVE ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE,
-    );
+    elementStateControlledSet(isActive ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE);
 
   return (
     <Wrapper
@@ -49,14 +45,14 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
       round>
       <PressableTitle
         color={color}
-        elementState={valueControlled}
+        elementState={elementStateControlled}
         fontStyle={fontStyle}
         icon={icon}
         image={image}
         leftElement={(isActive) => (
           <Rotatable
             directionInactive={DIRECTION.RIGHT}
-            elementState={valueControlled}>
+            elementState={elementStateControlled}>
             <Button
               elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
               icon="chevronUp"
@@ -79,7 +75,7 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
             [ELEMENT_STATE.INACTIVE]: { height: 0 },
           },
         }}
-        elementState={valueControlled}
+        elementState={elementStateControlled}
         isOverflowHidden>
         <Wrapper onMeasure={measureSet}>
           {!isTransparent && <Divider mHorizontal />}

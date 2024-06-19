@@ -1,6 +1,4 @@
-import { SkeletonGroup } from '@lib/frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
-import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
@@ -156,6 +154,7 @@ export const DataBoundary = forwardRef(
       children,
       elementState,
       emptyMessage = ({ t }) => t('core:nothingToShow'),
+      fallback,
       fallbackData,
       id,
       isBlocking,
@@ -176,29 +175,26 @@ export const DataBoundary = forwardRef(
       onRefresh && (await onRefresh());
     };
 
-    const childrenF = props.fallback ??
-      (fallbackData &&
-        children &&
-        children({
-          data: fallbackData,
-          onChange: () => undefined,
-          reset: async () => undefined,
-        })) ?? (
-        <Wrapper
-          flex
-          isCenter>
-          <Loading />
-        </Wrapper>
-      );
+    let fallbackElement = fallback;
+    if (!fallbackElement) {
+      fallbackElement =
+        (fallbackData &&
+          children &&
+          children({
+            data: fallbackData,
+            onChange: () => undefined,
+            reset: async () => undefined,
+          })) ||
+        undefined;
+      fallbackElement = fallbackElement
+        ? cloneElement(fallbackElement, { elementState: ELEMENT_STATE.LOADING })
+        : undefined;
+    }
 
     return (
       <AsyncBoundary
         {...props}
-        fallback={
-          <SkeletonGroup>
-            {childrenF && cloneElement(childrenF, { elementState: ELEMENT_STATE.LOADING })}
-          </SkeletonGroup>
-        }
+        fallback={fallbackElement}
         flex
         onRefresh={handleRefresh}>
         {query ? (
