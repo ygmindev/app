@@ -13,9 +13,11 @@ export const _useQuery = <TParams = undefined, TResult = void>(
   const queryClient = useQueryClient();
   const { data, isStale, refetch } = useSuspenseQuery<TResult | null, Error>({
     gcTime: cache,
+    initialData: undefined,
     queryFn: () => callback(params),
     queryKey: [id, params],
     refetchOnMount: false,
+    retry: false,
     staleTime: cache,
   });
   const refetchF = debounce(async () => refetch());

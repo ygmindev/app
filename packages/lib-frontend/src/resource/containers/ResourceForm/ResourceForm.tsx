@@ -7,9 +7,9 @@ import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ResourceFormPropsModel } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { DATA_TYPE, DATA_TYPE_MORE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
+import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import { type ReactElement, useState } from 'react';
+import { cloneElement, type ReactElement, useState } from 'react';
 
 export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
   fields,
@@ -27,21 +27,17 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
     <FormContainer
       {...wrapperProps}
       fields={filterNil(
-        fields?.map(({ fields: embeddedFields, id, label, options, type }) => {
-          if (id === '_id' || embeddedFields) {
+        // TODO: render embeddedFields
+        fields?.map(({ field, fields: embeddedFields, id, isArray, label, options, type }) => {
+          if (id === '_id') {
             return null;
           }
           const element = (() => {
             const labelF = label ?? id;
+            if (field) {
+              return cloneElement(field(), { label: labelF });
+            }
             switch (type) {
-              case DATA_TYPE_MORE.STRING_LIST:
-                return (
-                  <SelectInput
-                    isMultiple
-                    label={labelF}
-                    options={options ?? []}
-                  />
-                );
               case PROPERTY_TYPE.RESOURCE:
                 return (
                   <TextInput
@@ -53,10 +49,18 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
                 return <NumberInput label={labelF} />;
               default:
                 return options ? (
-                  <MenuInput
-                    label={labelF}
-                    options={options}
-                  />
+                  isArray ? (
+                    <SelectInput
+                      isMultiple
+                      label={labelF}
+                      options={options}
+                    />
+                  ) : (
+                    <MenuInput
+                      label={labelF}
+                      options={options}
+                    />
+                  )
                 ) : (
                   <TextInput label={labelF} />
                 );

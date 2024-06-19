@@ -1,8 +1,4 @@
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import {
-  type EntityResourceModel,
-  type EntityResourcePartialModel,
-} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type ResourceMethodTypeModel = `${RESOURCE_METHOD_TYPE}`;
 
@@ -27,6 +23,3 @@ export type ResourceMethodTypeCrudModel =
 export type ResourceNameParamsModel<TRoot = undefined> = {
   name: TRoot extends undefined ? string : keyof TRoot & string;
 };
-
-export type EmbeddableRootFieldModel<TRoot extends EntityResourceModel> =
-  EntityResourcePartialModel<TRoot>;

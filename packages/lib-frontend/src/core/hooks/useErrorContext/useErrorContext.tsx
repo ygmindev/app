@@ -23,10 +23,10 @@ export const useErrorContext = (): UseErrorContextModel => {
           errorContext = { description: ({ t }) => t('core:errorForbidden'), icon: 'ban' };
           break;
         }
-        case HTTP_STATUS_CODE.NETWORK_CONNECT_TIMEOUT: {
-          errorContext = { description: ({ t }) => t('core:errorOffline'), icon: 'offline' };
-          break;
-        }
+        // case HTTP_STATUS_CODE.NETWORK_CONNECT_TIMEOUT: {
+        //   errorContext = { description: ({ t }) => t('core:errorOffline'), icon: 'offline' };
+        //   break;
+        // }
         case HTTP_STATUS_CODE.UNAUTHORIZED: {
           errorContext = { description: ({ t }) => t('core:errorUnauthorized'), icon: 'lock' };
           break;

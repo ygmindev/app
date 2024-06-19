@@ -9,6 +9,7 @@ import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
 import { type FocusableRefModel } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
@@ -89,6 +90,10 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         value: elementState,
       });
 
+    useChange(elementStateF, () => {
+      void handleFocus(elementStateF === ELEMENT_STATE.ACTIVE);
+    });
+
     const sizeF = size ?? THEME_SIZE.MEDIUM;
     const isDisabled =
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
@@ -107,11 +112,11 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         if (v) {
           onFocus && onFocus();
           focusableRef.current?.focus && focusableRef.current?.focus();
-          inputRef.current?.focus && inputRef.current?.focus();
+          inputRef.current?.focus?.();
         } else {
           onBlur && onBlur();
           focusableRef.current?.blur && focusableRef.current?.blur();
-          inputRef.current?.blur && inputRef.current?.blur();
+          inputRef.current?.blur?.();
         }
       }
     };
@@ -242,7 +247,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
               onKey && onKey(key);
             }}
             onSubmit={onSubmit}
-            placeholder={placeholder}
+            placeholder={isActive ? placeholder : undefined}
             ref={inputRef}
             testID={testID}
             value={valueControlled}
@@ -254,7 +259,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         {/* TODO: to item? */}
         <Wrapper
           animation={containerAnimation}
-          elementState={placeholder ? ELEMENT_STATE.ACTIVE : elementStateF}
+          elementState={elementStateF}
           isAlign
           isCenter
           isRow

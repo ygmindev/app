@@ -3,6 +3,7 @@ import { VendorResolver } from '@lib/backend/admin/resources/Vendor/VendorResolv
 import { DeliveryResolver } from '@lib/backend/aroom/resources/Delivery/DeliveryResolver/DeliveryResolver';
 import { AccessResolver } from '@lib/backend/auth/resources/Access/AccessResolver/AccessResolver';
 import { OtpResolver } from '@lib/backend/auth/resources/Otp/OtpResolver/OtpResolver';
+import { RoleResolver } from '@lib/backend/auth/resources/Role/RoleResolver/RoleResolver';
 import { SignInResolver } from '@lib/backend/auth/resources/SignIn/SignInResolver/SignInResolver';
 import { authorize } from '@lib/backend/auth/utils/authorize/authorize';
 import { BankResolver } from '@lib/backend/billing/resources/Bank/BankResolver/BankResolver';
@@ -49,6 +50,7 @@ const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
         PaymentMethodResolver,
         PricingResolver,
         ProductResolver,
+        RoleResolver,
         SignInResolver,
         SocketResolver,
         UserResolver,

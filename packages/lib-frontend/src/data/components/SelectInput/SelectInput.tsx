@@ -27,7 +27,6 @@ import {
   THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
@@ -39,6 +38,7 @@ export const SelectInput = forwardRef(
       defaultValue,
       elementState,
       isMultiple,
+      isSelectAll = true,
       isVertical,
       label,
       onChange,
@@ -60,11 +60,7 @@ export const SelectInput = forwardRef(
     });
 
     const [values, valuesSet] = useState<Array<string> | undefined>(
-      isMultiple
-        ? isEmpty(valueControlled) || isEqual(valueControlled, [])
-          ? ids
-          : (valueControlled as Array<string>) ?? []
-        : undefined,
+      isMultiple ? (valueControlled as Array<string>) ?? [] : undefined,
     );
 
     const handleChange = (id: string) => () =>
@@ -95,7 +91,7 @@ export const SelectInput = forwardRef(
           isRow={!isVertical}
           isWrap
           s={THEME_SIZE.SMALL}>
-          {isMultiple && (
+          {isMultiple && isSelectAll && options.length > 1 && (
             <SwitchInput
               elementState={elementState}
               label={t('core:selectAll')}

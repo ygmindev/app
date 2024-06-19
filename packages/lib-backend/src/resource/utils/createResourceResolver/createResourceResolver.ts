@@ -29,7 +29,7 @@ export const createResourceResolver = <
   ResourceData,
   ResourceImplementation,
   RootResource,
-  access = { default: ACCESS_LEVEL.RESTRICTED },
+  access = { default: ACCESS_LEVEL.PUBLIC },
   authorizer,
   name,
 }: CreateResourceResolverParamsModel<TType, TForm, TRoot>): CreateResourceResolverModel<
@@ -57,12 +57,13 @@ export const createResourceResolver = <
       () => createExists,
       () => [
         withAuthorizer({
-          authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.Create,
+          authorizer:
+            authorizer?.default ?? authorizer?.write ?? authorizer?.[RESOURCE_METHOD_TYPE.CREATE],
         }),
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.write ?? access?.Create,
+          level: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.CREATE],
           method: RESOURCE_METHOD_TYPE.CREATE,
           name,
         }),
@@ -92,12 +93,15 @@ export const createResourceResolver = <
       () => createManyExists,
       () => [
         withAuthorizer({
-          authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.CreateMany,
+          authorizer:
+            authorizer?.default ??
+            authorizer?.write ??
+            authorizer?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
         }),
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.write ?? access?.CreateMany,
+          level: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
           method: RESOURCE_METHOD_TYPE.CREATE_MANY,
           name,
         }),
@@ -127,12 +131,13 @@ export const createResourceResolver = <
       () => getExists,
       () => [
         withAuthorizer({
-          authorizer: authorizer?.default ?? authorizer?.read ?? authorizer?.Get,
+          authorizer:
+            authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.GET],
         }),
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.read ?? access?.Get,
+          level: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET],
           method: RESOURCE_METHOD_TYPE.GET,
           name,
         }),
@@ -162,12 +167,15 @@ export const createResourceResolver = <
       () => getManyExists,
       () => [
         withAuthorizer({
-          authorizer: authorizer?.default ?? authorizer?.read ?? authorizer?.GetMany,
+          authorizer:
+            authorizer?.default ??
+            authorizer?.read ??
+            authorizer?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
         }),
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.read ?? access?.GetMany,
+          level: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
           method: RESOURCE_METHOD_TYPE.GET_MANY,
           name,
         }),
@@ -197,12 +205,15 @@ export const createResourceResolver = <
       () => getConnectionExists,
       () => [
         withAuthorizer({
-          authorizer: authorizer?.default ?? authorizer?.read ?? authorizer?.GetConnection,
+          authorizer:
+            authorizer?.default ??
+            authorizer?.read ??
+            authorizer?.[RESOURCE_METHOD_TYPE.GET_CONNECTION],
         }),
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.read ?? access?.GetConnection,
+          level: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET_CONNECTION],
           method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
           name,
         }),
@@ -232,12 +243,13 @@ export const createResourceResolver = <
       () => updateExists,
       () => [
         withAuthorizer({
-          authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.Update,
+          authorizer:
+            authorizer?.default ?? authorizer?.write ?? authorizer?.[RESOURCE_METHOD_TYPE.UPDATE],
         }),
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.write ?? access?.Update,
+          level: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.UPDATE],
           method: RESOURCE_METHOD_TYPE.UPDATE,
           name,
         }),
@@ -267,12 +279,13 @@ export const createResourceResolver = <
       () => removeExists,
       () => [
         withAuthorizer({
-          authorizer: authorizer?.default ?? authorizer?.write ?? authorizer?.Remove,
+          authorizer:
+            authorizer?.default ?? authorizer?.write ?? authorizer?.[RESOURCE_METHOD_TYPE.REMOVE],
         }),
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.write ?? access?.Remove,
+          level: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.REMOVE],
           method: RESOURCE_METHOD_TYPE.REMOVE,
           name,
         }),

@@ -3,6 +3,7 @@ import { VendorTable } from '@lib/frontend/admin/containers/VendorTable/VendorTa
 import { AccessTable } from '@lib/frontend/auth/containers/AccessTable/AccessTable';
 import { OtpTable } from '@lib/frontend/auth/containers/OtpTable/OtpTable';
 import { ProductTable } from '@lib/frontend/commerce/containers/ProductTable/ProductTable';
+import { GroupTable } from '@lib/frontend/group/containers/GroupTable/GroupTable';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 import { UserTable } from '@lib/frontend/user/containers/UserTable/UserTable';
 import { UTILITY_RESOURCE_NAME } from '@lib/shared/admin/resources/Utility/Utility.constants';
@@ -10,12 +11,17 @@ import { VENDOR_RESOURCE_NAME } from '@lib/shared/admin/resources/Vendor/Vendor.
 import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
 import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { PRODUCT_RESOURCE_NAME } from '@lib/shared/commerce/resources/Product/Product.constants';
+import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 
 export const RESOURCE_PAGE_ROUTES: Array<RouteModel> = [
   {
     element: <AccessTable />,
     pathname: ACCESS_RESOURCE_NAME,
+  },
+  {
+    element: <GroupTable />,
+    pathname: GROUP_RESOURCE_NAME,
   },
   {
     element: <OtpTable />,

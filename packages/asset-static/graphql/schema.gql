@@ -819,6 +819,7 @@ input GetRouteInput {
 }
 
 type Group {
+  Role: [Role]
   _id: String
   created: DateTime
   logo: String
@@ -827,6 +828,7 @@ type Group {
 }
 
 input GroupCreateFormInput {
+  Role: [RoleInput]
   _id: String
   created: DateTime
   logo: String
@@ -840,6 +842,7 @@ input GroupCreateInput {
 }
 
 input GroupCreateManyFormInput {
+  Role: [RoleInput]
   _id: String
   created: DateTime
   logo: String
@@ -935,6 +938,7 @@ type GroupGetOutput {
 }
 
 input GroupInput {
+  Role: [RoleInput]
   _id: String
   created: DateTime
   logo: String
@@ -986,6 +990,7 @@ type GroupUpdateOutput {
 }
 
 input GroupUpdateUpdateInput {
+  Role: [RoleInput]
   _id: String
   created: DateTime
   logo: String
@@ -1039,6 +1044,10 @@ type Mutation {
   ProductCreateMany(input: ProductCreateManyInput): ProductCreateManyOutput
   ProductRemove(input: ProductRemoveInput): ProductRemoveOutput
   ProductUpdate(input: ProductUpdateInput): ProductUpdateOutput
+  RoleCreate(input: RoleCreateInput): RoleCreateOutput
+  RoleCreateMany(input: RoleCreateManyInput): RoleCreateManyOutput
+  RoleRemove(input: RoleRemoveInput): RoleRemoveOutput
+  RoleUpdate(input: RoleUpdateInput): RoleUpdateOutput
   SignInCreate(input: SignInCreateInput): SignInCreateOutput
   SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
   SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
@@ -1901,6 +1910,9 @@ type Query {
   ProductGet(input: ProductGetInput): ProductGetOutput
   ProductGetConnection(input: ProductGetConnectionInput): ProductGetConnectionOutput
   ProductGetMany(input: ProductGetManyInput): ProductGetManyOutput
+  RoleGet(input: RoleGetInput): RoleGetOutput
+  RoleGetConnection(input: RoleGetConnectionInput): RoleGetConnectionOutput
+  RoleGetMany(input: RoleGetManyInput): RoleGetManyOutput
   SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
   SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
   SocketGet(input: SocketGetInput): SocketGetOutput
@@ -1918,6 +1930,183 @@ type Query {
   linkedUserGet(input: linkedUserGetInput): linkedUserGetOutput
   linkedUserGetConnection(input: linkedUserGetConnectionInput): linkedUserGetConnectionOutput
   linkedUserGetMany(input: linkedUserGetManyInput): linkedUserGetManyOutput
+}
+
+type Role {
+  Group: Group
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input RoleCreateFormInput {
+  Group: GroupInput
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input RoleCreateInput {
+  form: RoleCreateFormInput
+  root: String
+}
+
+input RoleCreateManyFormInput {
+  Group: GroupInput
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input RoleCreateManyInput {
+  form: [RoleCreateManyFormInput]
+  root: String
+}
+
+type RoleCreateManyOutput {
+  result: Role
+  root: Group
+}
+
+type RoleCreateOutput {
+  result: Role
+  root: Group
+}
+
+type RoleGetConnectionConnection {
+  edges: [RoleGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type RoleGetConnectionEdge {
+  cursor: String
+  node: Role
+}
+
+input RoleGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [RoleInput]
+  resourceValue: RoleInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input RoleGetConnectionInput {
+  filter: [RoleGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type RoleGetConnectionOutput {
+  result: RoleGetConnectionConnection
+  root: Group
+}
+
+input RoleGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [RoleInput]
+  resourceValue: RoleInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input RoleGetInput {
+  filter: [RoleGetFilterInput]
+  root: String
+}
+
+input RoleGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [RoleInput]
+  resourceValue: RoleInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input RoleGetManyInput {
+  filter: [RoleGetManyFilterInput]
+  root: String
+}
+
+type RoleGetManyOutput {
+  result: [Role]
+  root: Group
+}
+
+type RoleGetOutput {
+  result: Role
+  root: Group
+}
+
+input RoleInput {
+  Group: GroupInput
+  _id: String
+  created: DateTime
+  name: String
+}
+
+input RoleRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [RoleInput]
+  resourceValue: RoleInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input RoleRemoveInput {
+  filter: [RoleRemoveFilterInput]
+  root: String
+}
+
+type RoleRemoveOutput {
+  result: Role
+  root: Group
+}
+
+input RoleUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTime
+  field: String
+  numberValue: Float
+  resourceArrayValue: [RoleInput]
+  resourceValue: RoleInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input RoleUpdateInput {
+  filter: [RoleUpdateFilterInput]
+  root: String
+  update: RoleUpdateUpdateInput
+}
+
+type RoleUpdateOutput {
+  result: Role
+  root: Group
+}
+
+input RoleUpdateUpdateInput {
+  Group: GroupInput
+  _id: String
+  created: DateTime
+  name: String
 }
 
 type SignIn {
@@ -1967,7 +2156,6 @@ type SignInUserUpdateOutput {
 }
 
 input SignInUserUpdateUpdateInput {
-  Access: [AccessInput] = []
   Bank: [BankInput]
   Card: [CardInput]
   PaymentMethod: [PaymentMethodInput]
@@ -2221,7 +2409,6 @@ input SocketUpdateUpdateInput {
 }
 
 type User {
-  Access: [Access]
   Bank: [Bank]
   Card: [Card]
   PaymentMethod: [PaymentMethod]
@@ -2237,7 +2424,6 @@ type User {
 }
 
 input UserCreateFormInput {
-  Access: [AccessInput] = []
   Bank: [BankInput]
   Card: [CardInput]
   PaymentMethod: [PaymentMethodInput]
@@ -2258,7 +2444,6 @@ input UserCreateInput {
 }
 
 input UserCreateManyFormInput {
-  Access: [AccessInput] = []
   Bank: [BankInput]
   Card: [CardInput]
   PaymentMethod: [PaymentMethodInput]
@@ -2361,7 +2546,6 @@ type UserGetOutput {
 }
 
 input UserInput {
-  Access: [AccessInput] = []
   Bank: [BankInput]
   Card: [CardInput]
   PaymentMethod: [PaymentMethodInput]
@@ -2420,7 +2604,6 @@ type UserUpdateOutput {
 }
 
 input UserUpdateUpdateInput {
-  Access: [AccessInput] = []
   Bank: [BankInput]
   Card: [CardInput]
   PaymentMethod: [PaymentMethodInput]

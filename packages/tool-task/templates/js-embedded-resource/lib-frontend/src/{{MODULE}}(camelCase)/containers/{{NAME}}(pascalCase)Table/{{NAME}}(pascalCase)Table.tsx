@@ -1,5 +1,4 @@
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { {{NAME}}(constantCase)_TABLE_PROPS } from '@lib/frontend/{{MODULE}}(camelCase)/containers/{{NAME}}(pascalCase)Table/{{NAME}}(pascalCase)Table.constants';
 import { type {{NAME}}(pascalCase)TablePropsModel } from '@lib/frontend/{{MODULE}}(camelCase)/containers/{{NAME}}(pascalCase)Table/{{NAME}}(pascalCase)Table.models';
 import { use{{NAME}}(pascalCase)Resource } from '@lib/frontend/{{MODULE}}(camelCase)/hooks/use{{NAME}}(pascalCase)Resource/use{{NAME}}(pascalCase)Resource';
 import { {{NAME}}(constantCase)_RESOURCE_PARAMS } from '@lib/frontend/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';

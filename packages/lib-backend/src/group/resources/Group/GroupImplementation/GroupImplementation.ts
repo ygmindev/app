@@ -3,7 +3,7 @@ import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { Group } from '@lib/backend/group/resources/Group/Group';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
-import { ACCESS_ROLE } from '@lib/shared/auth/resources/Access/Access.constants';
+import { ACCESS_ROLE_MORE } from '@lib/shared/auth/resources/Access/Access.constants';
 import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
 import {
   type GroupFormModel,
@@ -25,7 +25,7 @@ export class GroupImplementation
             form: {
               [GROUP_RESOURCE_NAME]: { _id: output.result._id },
               [USER_RESOURCE_NAME]: { _id: userId },
-              role: [ACCESS_ROLE.ADMIN],
+              role: [ACCESS_ROLE_MORE.ADMIN],
             },
           }));
       }

@@ -31,12 +31,13 @@ export type TableColumnModel<
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = WithIdModel<TKey> & {
   align?: FontAlignModel;
-  field?(params: {
-    index: number;
-    row: TType;
+  field?(params?: {
+    index?: number;
+    row?: TType;
     value?: TType[TKey];
   }): ReactElement<InputPropsModel<TType[TKey]>>;
   formatter?: DataFormatterModel<TType, TKey>;
+  isArray?: boolean;
   isHidden?: boolean;
   label?: AsyncTextModel;
   options?: Array<TranslatableOptionModel>;

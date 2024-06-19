@@ -2,6 +2,7 @@ import { Utility } from '@lib/backend/admin/resources/Utility/Utility';
 import { Vendor } from '@lib/backend/admin/resources/Vendor/Vendor';
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { Otp } from '@lib/backend/auth/resources/Otp/Otp';
+import { Role } from '@lib/backend/auth/resources/Role/Role';
 import { Bank } from '@lib/backend/billing/resources/Bank/Bank';
 import { Card } from '@lib/backend/billing/resources/Card/Card';
 import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethod';
@@ -39,6 +40,7 @@ const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
       Otp,
       PaymentMethod,
       Product,
+      Role,
       Socket,
       User,
       Utility,

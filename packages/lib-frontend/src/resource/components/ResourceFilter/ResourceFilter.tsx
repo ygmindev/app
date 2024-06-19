@@ -7,7 +7,7 @@ import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInp
 import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/TextFilterInput';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { DATA_TYPE, DATA_TYPE_MORE } from '@lib/shared/data/data.constants';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import isNil from 'lodash/isNil';
@@ -23,21 +23,10 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
 > => {
   const fieldsF = useMemo<Array<FormTileModel<TType>>>(
     () =>
-      fields?.map(({ id, label, options, type }) => {
+      fields?.map(({ id, isArray, label, options, type }) => {
         const labelF = label ?? id;
         const element = (() => {
           switch (type) {
-            case DATA_TYPE_MORE.STRING_LIST:
-              return (
-                <SelectInput
-                  beforeSubmit={async (v, k) => [
-                    { condition: FILTER_CONDITION.IN, field: k, value: v },
-                  ]}
-                  isMultiple
-                  options={options ?? []}
-                />
-              );
-
             case DATA_TYPE.NUMBER:
               // case NUMBER_UNIT_TYPE.AMOUNT:
               // case NUMBER_UNIT_TYPE.RELATIVE_DATE:
@@ -61,7 +50,17 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
                 />
               );
             default:
-              return <TextFilterInput label={labelF} />;
+              return options ? (
+                <SelectInput
+                  beforeSubmit={async (v, k) => [
+                    { condition: FILTER_CONDITION.IN, field: k, value: v },
+                  ]}
+                  isMultiple={isArray}
+                  options={options ?? []}
+                />
+              ) : (
+                <TextFilterInput label={labelF} />
+              );
           }
         })();
         return { fields: [{ element, id }], id };

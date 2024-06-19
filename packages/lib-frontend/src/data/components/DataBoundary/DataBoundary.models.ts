@@ -25,7 +25,7 @@ export type DataBoundaryPropsModel<TParams = undefined, TResult = void> = Omit<
 export type DataBoundaryRefModel<TResult = void> = QueryComponentRefModel<TResult> &
   MutateComponentRefModel<TResult>;
 
-export type QueryComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
+export type DataComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
   AsyncPropsModel &
   ChildrenPropsModel<
     (
@@ -38,35 +38,30 @@ export type QueryComponentPropsModel<TParams = undefined, TResult = void> = With
   > & {
     emptyMessage?: AsyncTextModel;
     params?: TParams;
-    query: UseQueryParamsModel<TParams, TResult>[1];
   };
 
-export type QueryComponentRefModel<TResult = void> = {
+export type DataComponentRefModel<TResult = void> = {
   getData(): TResult | null | undefined;
-  query?(): Promise<void>;
   reset?(): Promise<void>;
   setData?(values?: TResult): void;
 };
 
-export type MutateComponentPropsModel<TParams = undefined, TResult = void> = WithIdModel &
-  AsyncPropsModel &
-  ChildrenPropsModel<
-    (
-      props: ElementStatePropsModel & {
-        data?: TResult | null;
-        onChange(values?: TResult): void;
-        reset(): Promise<void>;
-      },
-    ) => ReactElement | NilModel
-  > & {
-    emptyMessage?: AsyncTextModel;
-    mutate: UseMutationParamsModel<TParams, TResult>[1];
-    params?: TParams;
-  };
+export type QueryComponentPropsModel<TParams = undefined, TResult = void> = DataComponentPropsModel<
+  TParams,
+  TResult
+> & { query: UseQueryParamsModel<TParams, TResult>[1] };
 
-export type MutateComponentRefModel<TResult = void> = {
-  getData(): TResult | null | undefined;
+export type QueryComponentRefModel<TResult = void> = DataComponentRefModel<TResult> & {
+  query?(): Promise<void>;
+};
+
+export type MutateComponentPropsModel<
+  TParams = undefined,
+  TResult = void,
+> = DataComponentPropsModel<TParams, TResult> & {
+  mutate: UseMutationParamsModel<TParams, TResult>[1];
+};
+
+export type MutateComponentRefModel<TResult = void> = DataComponentRefModel<TResult> & {
   mutate?(): Promise<void>;
-  reset?(): Promise<void>;
-  setData?(values?: TResult): void;
 };

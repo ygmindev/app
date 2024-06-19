@@ -8,11 +8,9 @@ export type QueryConnectionModel<TResult> = {
   pages?: Array<ConnectionModel<TResult> | null>;
 };
 
-export type UseQueryConnectionParamsModel<TParams = undefined, TResult = void> = Omit<
-  _UseQueryConnectionParamsModel<TParams, TResult>,
-  'cache'
-> & {
-  cache?: number | boolean;
-};
+export type UseQueryConnectionParamsModel<
+  TParams = undefined,
+  TResult = void,
+> = _UseQueryConnectionParamsModel<TParams, TResult>;
 
 export type UseQueryConnectionModel<TResult> = _UseQueryConnectionModel<TResult>;

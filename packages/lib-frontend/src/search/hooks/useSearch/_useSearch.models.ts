@@ -1,10 +1,9 @@
+import { type SearchConfigModel } from '@lib/config/search/search/search.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 
-export type _UseSearchParamsModel<TType extends WithIdModel> = {
-  delay?: number;
+export type _UseSearchParamsModel<TType extends WithIdModel> = SearchConfigModel & {
   items: Array<TType>;
   keys: Array<string>;
-  limit?: number;
   onChange?(value: string): void;
 };
 

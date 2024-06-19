@@ -1,3 +1,4 @@
+import searchConfig from '@lib/config/search/search/search';
 import { Rotatable } from '@lib/frontend/animation/components/Rotatable/Rotatable';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
@@ -14,17 +15,21 @@ import {
 } from '@lib/frontend/data/components/MenuInput/MenuInput.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { TEXT_INPUT_KEY } from '@lib/frontend/data/components/TextInput/TextInput.constants';
-import { type TextInputKeyModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
+import {
+  type TextInputKeyModel,
+  type TextInputRefModel,
+} from '@lib/frontend/data/components/TextInput/TextInput.models';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import find from 'lodash/find';
 import lowerCase from 'lodash/lowerCase';
 import { type ForwardedRef, forwardRef, type ReactElement, useState } from 'react';
-import { useRef } from 'react';
+import { useCallback, useImperativeHandle, useRef } from 'react';
 
 export const MenuInput = forwardRef(
   <TType extends MenuOptionModel = MenuOptionModel>(
@@ -90,9 +95,15 @@ export const MenuInput = forwardRef(
       focusedSet(undefined);
     };
 
+    const { delay } = searchConfig.params();
+    const handleSearch = useCallback(
+      debounce(onSearch ?? ((_: string) => null), { duration: delay }),
+      [delay, onSearch],
+    );
+
     const handleTextChange = (v: string): void => {
       textValueSet(v);
-      (onSearch ?? search)(v);
+      (handleSearch ?? search)(v);
       focusedSet(undefined);
     };
 
@@ -135,13 +146,14 @@ export const MenuInput = forwardRef(
       return focusedSet(index);
     };
 
-    const handleChange = (v?: string): void => {
-      valueControlledSet(v);
-      onElementStateChangeF(ELEMENT_STATE.INACTIVE);
-    };
+    const inputRef = useRef<TextInputRefModel>(null);
+    useImperativeHandle(ref, () => ({
+      ...inputRef.current,
+    }));
 
     return (
       <Menu
+        active={focused}
         anchor={() => (
           <TextInput
             {...wrapperProps}
@@ -159,7 +171,7 @@ export const MenuInput = forwardRef(
             onFocus={onFocus}
             onKey={optionsF?.length ? handleKey : undefined}
             onSubmit={handleSubmit}
-            ref={ref}
+            ref={inputRef}
             rightElement={
               <Wrapper
                 isAlign
@@ -180,11 +192,8 @@ export const MenuInput = forwardRef(
           />
         )}
         elementState={elementStateF}
-        focused={focused}
-        isDismiss={false}
         isFullWidth
-        isPressable={false}
-        onChange={handleChange}
+        onChange={valueControlledSet}
         onElementStateChange={onElementStateChangeF}
         options={optionsF}
         ref={menuRef}

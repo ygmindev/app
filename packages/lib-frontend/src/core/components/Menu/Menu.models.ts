@@ -16,12 +16,11 @@ export type MenuOptionModel = TranslatableOptionModel & {
 
 export type MenuPropsModel<TType extends MenuOptionModel = MenuOptionModel> = Pick<
   DropdownPropsModel,
-  'direction' | 'isDismiss' | 'isFullWidth' | 'width'
+  'direction' | 'isFullWidth' | 'width'
 > &
   Omit<InputPropsModel, 'id'> & {
+    active?: number;
     anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
-    focused?: number;
-    isPressable?: boolean;
     onToggle?(isOpen?: boolean): void;
     options: Array<TType>;
     renderOption?(option: TType): AsyncTextModel;

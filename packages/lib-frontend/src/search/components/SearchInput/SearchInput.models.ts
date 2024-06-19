@@ -1,3 +1,9 @@
-import { type TextInputPropsModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
+import { type MenuOptionModel } from '@lib/frontend/core/components/Menu/Menu.models';
+import {
+  type MenuInputPropsModel,
+  type MenuInputRefModel,
+} from '@lib/frontend/data/components/MenuInput/MenuInput.models';
 
-export type SearchInputPropsModel = TextInputPropsModel;
+export type SearchInputPropsModel<TType extends MenuOptionModel> = MenuInputPropsModel<TType>;
+
+export type SearchInputRefModel = MenuInputRefModel;

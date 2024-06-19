@@ -2,11 +2,11 @@ import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButt
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
+import { ConnectionBoundary } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary';
 import { FilterButton } from '@lib/frontend/data/components/FilterButton/FilterButton';
 import { Table } from '@lib/frontend/data/components/Table/Table';
 import { type TableColumnModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { ConnectionBoundary } from '@lib/frontend/resource/components/ConnectionBoundary/ConnectionBoundary';
 import { ResourceFilter } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter';
 import { type ResourceTablePropsModel } from '@lib/frontend/resource/components/ResourceTable/ResourceTable.models';
 import { ResourceForm } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm';

@@ -17,7 +17,6 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forward
       anchor,
       children,
       direction,
-      isDismiss,
       isFullWidth,
       isHidden,
       isOpen,
@@ -42,7 +41,6 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forward
         anchor={anchor}
         delay={theme.animation.effect}
         direction={direction}
-        isDismiss={isDismiss}
         isFullWidth={isFullWidth}
         isOpen={isOpen}
         maxHeight={maxHeight ?? theme.shape.size[THEME_SIZE.MEDIUM]}

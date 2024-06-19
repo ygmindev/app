@@ -1,8 +1,9 @@
 import { Vendor } from '@lib/backend/admin/resources/Vendor/Vendor';
 import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
-import { withEmbeddableRootField } from '@lib/backend/resource/utils/withEmbeddableRootField/withEmbeddableRootField';
+import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefField';
 import { UTILITY_RESOURCE_NAME } from '@lib/shared/admin/resources/Utility/Utility.constants';
 import {
   type UtilityModel,
@@ -12,12 +13,11 @@ import {
 import { VENDOR_RESOURCE_NAME } from '@lib/shared/admin/resources/Vendor/Vendor.constants';
 import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
-import { type EmbeddableRootFieldModel } from '@lib/shared/resource/resource.models';
 
 @withEntity({ isEmbeddable: true, isRepository: true, name: UTILITY_RESOURCE_NAME })
 export class Utility extends EmbeddedResource implements UtilityModel {
-  @withEmbeddableRootField({ Resource: () => Vendor })
-  [VENDOR_RESOURCE_NAME]?: EmbeddableRootFieldModel<VendorModel>;
+  @withRefField({ Resource: () => Vendor })
+  [VENDOR_RESOURCE_NAME]?: RefFieldModel<VendorModel>;
 
   @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
   description?: string;

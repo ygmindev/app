@@ -1,18 +1,27 @@
-import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { type LFCModel } from '@lib/frontend/core/core.models';
-import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
+import { type MenuOptionModel } from '@lib/frontend/core/components/Menu/Menu.models';
+import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { type SearchInputPropsModel } from '@lib/frontend/search/components/SearchInput/SearchInput.models';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import {
+  type SearchInputPropsModel,
+  type SearchInputRefModel,
+} from '@lib/frontend/search/components/SearchInput/SearchInput.models';
+import { type ForwardedRef, forwardRef, type ReactElement } from 'react';
 
-export const SearchInput: LFCModel<SearchInputPropsModel> = ({ ...props }) => {
-  const { t } = useTranslation();
-  return (
-    <TextInput
-      {...props}
-      leftElement={<Icon icon="search" />}
-      placeholder={props.placeholder ?? t('core:search')}
-      size={THEME_SIZE.MEDIUM}
-    />
-  );
-};
+export const SearchInput = forwardRef(
+  <TType extends MenuOptionModel>(
+    { ...props }: RLFCPropsModel<SearchInputRefModel, SearchInputPropsModel<TType>>,
+    _: ForwardedRef<SearchInputRefModel>,
+  ) => {
+    const { t } = useTranslation();
+    return (
+      <MenuInput
+        {...props}
+        icon="search"
+        placeholder={props.placeholder ?? t('core:search')}
+      />
+    );
+  },
+) as <TType extends MenuOptionModel = MenuOptionModel>(
+  props: RLFCPropsModel<SearchInputRefModel, SearchInputPropsModel<TType>>,
+) => ReactElement<RLFCPropsModel<SearchInputRefModel, SearchInputPropsModel<TType>>>;

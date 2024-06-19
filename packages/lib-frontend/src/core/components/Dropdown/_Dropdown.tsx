@@ -19,7 +19,6 @@ import { type SFCModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useValueDelayed';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { type CSSProperties, useState } from 'react';
 
 export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
@@ -27,7 +26,6 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   children,
   delay,
   direction,
-  isDismiss = true,
   isFullWidth,
   isOpen,
   maxHeight,
@@ -60,9 +58,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   const click = useClick(context);
   const dismiss = useDismiss(context);
   const role = useRole(context);
-  const { getFloatingProps, getReferenceProps } = useInteractions(
-    filterNil([click, isDismiss && dismiss, role]),
-  );
+  const { getFloatingProps, getReferenceProps } = useInteractions([click, dismiss, role]);
 
   // TODO: to fix infinite loop in floating-ui
   const [isMountedF, isMountedSet] = useState<boolean>();
@@ -83,7 +79,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
       {(isOpen || isOpenF) && (
         <FloatingPortal>
           <FloatingFocusManager
-            closeOnFocusOut={isDismiss}
+            closeOnFocusOut
             context={context}
             modal={false}>
             <div

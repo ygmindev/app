@@ -26,6 +26,7 @@ export const _useQueryConnection = <TParams = undefined, TResult = void>(
       params && params.pageInfo.hasPreviousPage
         ? { after: params.pageInfo.endCursor, first: limit }
         : undefined,
+    initialData: undefined,
     initialPageParam: {},
     queryFn: async ({ pageParam }) => callback(pageParam as PaginationModel),
     queryKey: [id, params],

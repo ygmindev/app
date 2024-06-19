@@ -14,4 +14,4 @@ export type _UseQueryConnectionParamsModel<TParams = undefined, TResult = void> 
 export type _UseQueryConnectionModel<TResult> = {
   data?: QueryConnectionModel<TResult>;
   queryNext(): Promise<void>;
-} & Omit<_UseQueryModel<TResult>, 'data' | 'query'>;
+} & Omit<_UseQueryModel<QueryConnectionModel<TResult>>, 'data' | 'query'>;

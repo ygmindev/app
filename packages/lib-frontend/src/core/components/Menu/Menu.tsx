@@ -27,13 +27,11 @@ import { cloneElement, forwardRef, useImperativeHandle, useRef } from 'react';
 export const Menu = forwardRef(
   <TType extends MenuOptionModel = MenuOptionModel>(
     {
+      active,
       anchor,
       direction,
       elementState,
-      focused,
-      isDismiss = true,
       isFullWidth,
-      isPressable = true,
       onChange,
       onElementStateChange,
       options,
@@ -73,17 +71,15 @@ export const Menu = forwardRef(
     const isActive = elementStateF === ELEMENT_STATE.ACTIVE;
     let anchorF: ReactElement<PressablePropsModel> = anchor(isActive);
 
-    if (isPressable) {
-      const { onPress } = anchorF.props;
-      anchorF = cloneElement(anchorF, {
-        onPress: async () => {
-          if (!isDisabled) {
-            onPress && (await onPress());
-            handleToggle(elementStateF !== ELEMENT_STATE.ACTIVE);
-          }
-        },
-      });
-    }
+    const { onPress } = anchorF.props;
+    anchorF = cloneElement(anchorF, {
+      onPress: async () => {
+        if (!isDisabled) {
+          onPress && (await onPress());
+          handleToggle(elementStateF !== ELEMENT_STATE.ACTIVE);
+        }
+      },
+    });
 
     const children = (
       <VirtualizedList
@@ -96,9 +92,7 @@ export const Menu = forwardRef(
               color={color}
               confirmMessage={confirmMessage}
               elementState={
-                (focused ?? 0) >= 0 && index === focused
-                  ? ELEMENT_STATE.ACTIVE
-                  : option.elementState
+                (active ?? 0) >= 0 && index === active ? ELEMENT_STATE.ACTIVE : option.elementState
               }
               icon={icon}
               isFullWidth
@@ -141,7 +135,6 @@ export const Menu = forwardRef(
         {...wrapperProps}
         anchor={anchorF}
         direction={direction}
-        isDismiss={isDismiss}
         isFullWidth={isFullWidth}
         isHidden={!options?.length}
         isOpen={isActive}
