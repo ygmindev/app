@@ -1,6 +1,7 @@
 import { type BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import {
   type Class,
+  type ConditionalKeys,
   type Get,
   type Merge,
   type OptionalKeysOf,
@@ -72,6 +73,8 @@ export type ValuesModel<TType> = ValueOf<TType>;
 export type GetModel<TType extends object, TKey extends DeepKeyModel<TType>> = Get<TType, TKey>;
 
 export type StringKeyModel<TType> = Extract<keyof RequiredModel<TType>, string>;
+
+export type ExtractPropertiesModel<TType, TParams> = ConditionalKeys<TType, TParams>;
 
 // TODO: cleanup if possible?
 export type DepthArray = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

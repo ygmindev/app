@@ -37,7 +37,7 @@ export const createResourceResolver = <
   TForm,
   TRoot
 > => {
-  const { create, createMany, get, getConnection, getMany, remove, update } =
+  const { create, createMany, get, getConnection, getMany, remove, search, update } =
     ResourceImplementation.prototype;
   const createExists = create !== undefined;
   const createManyExists = createMany !== undefined;
@@ -46,6 +46,7 @@ export const createResourceResolver = <
   const getConnectionExists = getConnection !== undefined;
   const updateExists = update !== undefined;
   const removeExists = remove !== undefined;
+  const searchExists = search !== undefined;
 
   @withResolver()
   class ResourceResolver
@@ -146,12 +147,7 @@ export const createResourceResolver = <
     async get(
       @withCondition(
         () => getExists,
-        () =>
-          withInput({
-            Resource,
-            method: RESOURCE_METHOD_TYPE.GET,
-            name,
-          }),
+        () => withInput({ Resource, method: RESOURCE_METHOD_TYPE.GET, name }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot> = {},
       @withContext()
@@ -184,12 +180,7 @@ export const createResourceResolver = <
     async getMany(
       @withCondition(
         () => getManyExists,
-        () =>
-          withInput({
-            Resource,
-            method: RESOURCE_METHOD_TYPE.GET_MANY,
-            name,
-          }),
+        () => withInput({ Resource, method: RESOURCE_METHOD_TYPE.GET_MANY, name }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot> = {},
       @withContext()
@@ -222,12 +213,7 @@ export const createResourceResolver = <
     async getConnection(
       @withCondition(
         () => getConnectionExists,
-        () =>
-          withInput({
-            Resource,
-            method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
-            name,
-          }),
+        () => withInput({ Resource, method: RESOURCE_METHOD_TYPE.GET_CONNECTION, name }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot> = {},
       @withContext()
@@ -258,12 +244,7 @@ export const createResourceResolver = <
     async update(
       @withCondition(
         () => updateExists,
-        () =>
-          withInput({
-            Resource,
-            method: RESOURCE_METHOD_TYPE.UPDATE,
-            name,
-          }),
+        () => withInput({ Resource, method: RESOURCE_METHOD_TYPE.UPDATE, name }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot> = {},
       @withContext()
@@ -294,12 +275,7 @@ export const createResourceResolver = <
     async remove(
       @withCondition(
         () => removeExists,
-        () =>
-          withInput({
-            Resource,
-            method: RESOURCE_METHOD_TYPE.REMOVE,
-            name,
-          }),
+        () => withInput({ Resource, method: RESOURCE_METHOD_TYPE.REMOVE, name }),
       )
       input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot> = {},
       @withContext()
@@ -309,6 +285,37 @@ export const createResourceResolver = <
         return this._implementation.remove(cleanObject(input), context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.REMOVE);
+    }
+
+    @withCondition(
+      () => searchExists,
+      () => [
+        withAuthorizer({
+          authorizer:
+            authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.SEARCH],
+        }),
+        withOutput({
+          Resource,
+          RootResource,
+          level: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.SEARCH],
+          method: RESOURCE_METHOD_TYPE.SEARCH,
+          name,
+        }),
+      ],
+    )
+    async search(
+      @withCondition(
+        () => searchExists,
+        () => withInput({ Resource, method: RESOURCE_METHOD_TYPE.SEARCH, name }),
+      )
+      input: InputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TForm, TRoot> = {},
+      @withContext()
+      context?: RequestContextModel,
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
+      if (this._implementation.search) {
+        return this._implementation.search(cleanObject(input), context);
+      }
+      throw new NotImplementedError(RESOURCE_METHOD_TYPE.SEARCH);
     }
   }
 

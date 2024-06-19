@@ -9,6 +9,7 @@ import { createUpdate } from '@lib/backend/resource/utils/createUpdate/createUpd
 import { Pagination } from '@lib/backend/resource/utils/Pagination/Pagination';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { StringKeyModel } from '@lib/shared/core/core.models';
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
@@ -59,6 +60,7 @@ export const createArgs = <TMethod extends ResourceMethodTypeModel, TType, TForm
       }
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
+
     case RESOURCE_METHOD_TYPE.CREATE: {
       @withEntity({ isAbstract: true })
       class Args
@@ -96,6 +98,22 @@ export const createArgs = <TMethod extends ResourceMethodTypeModel, TType, TForm
       }
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
+
+    case RESOURCE_METHOD_TYPE.SEARCH: {
+      @withEntity({ isAbstract: true })
+      class Args
+        extends Root<TRoot>
+        implements ArgsModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TForm, TRoot>
+      {
+        @withField({ isArray: true, isOptional: true, type: DATA_TYPE.STRING })
+        keys?: Array<StringKeyModel<TType>>;
+
+        @withField({ isOptional: true, type: DATA_TYPE.STRING })
+        query?: string;
+      }
+      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+    }
+
     case RESOURCE_METHOD_TYPE.UPDATE: {
       const Update = Resource && createUpdate({ Resource, name });
       @withEntity({ isAbstract: true })
@@ -126,6 +144,7 @@ export const createArgs = <TMethod extends ResourceMethodTypeModel, TType, TForm
       }
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
+
     case RESOURCE_METHOD_TYPE.GET_CONNECTION: {
       @withEntity({ isAbstract: true })
       class Args

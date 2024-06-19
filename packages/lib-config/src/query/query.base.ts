@@ -10,9 +10,9 @@ const config = defineConfig<QueryConfigModel, _QueryConfigModel>({
 
     // cacheTimeDefault: 0,
 
-    cacheTime: 0, // 1h
+    cacheTime: 100,
 
-    cacheTimeDefault: 0,
+    cacheTimeDefault: 100,
   }),
 });
 

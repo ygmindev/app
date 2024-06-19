@@ -24,6 +24,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   afterGetConnection,
   afterGetMany,
   afterRemove,
+  afterSearch,
   afterUpdate,
   beforeCreate,
   beforeCreateMany,
@@ -31,6 +32,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   beforeGetConnection,
   beforeGetMany,
   beforeRemove,
+  beforeSearch,
   beforeUpdate,
   fields,
   name,
@@ -140,6 +142,20 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     root,
   });
 
+  const { query: search } = useResourceMethod<RESOURCE_METHOD_TYPE.SEARCH, TType, TForm, TRoot>({
+    after: afterSearch,
+    before: beforeSearch,
+    fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
+      RESOURCE_METHOD_TYPE.SEARCH,
+      TType,
+      TForm,
+      TRoot
+    >['fields'],
+    method: RESOURCE_METHOD_TYPE.SEARCH,
+    name,
+    root,
+  });
+
   const { query: getConnection } = useResourceMethod<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
     TType,
@@ -174,6 +190,8 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     getMany,
 
     remove,
+
+    search,
 
     update,
   };

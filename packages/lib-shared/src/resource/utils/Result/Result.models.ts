@@ -11,6 +11,8 @@ export type ResultModel<TMethod extends ResourceMethodTypeModel, TType> = TMetho
   ? PartialModel<TType>
   : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY | RESOURCE_METHOD_TYPE.CREATE_MANY
     ? Array<PartialModel<TType>>
-    : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
-      ? ConnectionModel<TType>
-      : never;
+    : TMethod extends RESOURCE_METHOD_TYPE.SEARCH
+      ? Array<PartialModel<TType>>
+      : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
+        ? ConnectionModel<TType>
+        : never;

@@ -39,6 +39,7 @@ export const createEmbeddedResourceImplementation = <
   afterGetConnection,
   afterGetMany,
   afterRemove,
+  afterSearch,
   afterUpdate,
   beforeCreate,
   beforeCreateMany,
@@ -46,6 +47,7 @@ export const createEmbeddedResourceImplementation = <
   beforeGetConnection,
   beforeGetMany,
   beforeRemove,
+  beforeSearch,
   beforeUpdate,
   name,
 }: CreateEmbeddedResourceImplementationParamsModel<
@@ -108,6 +110,7 @@ export const createEmbeddedResourceImplementation = <
     afterGetConnection,
     afterGetMany,
     afterRemove,
+    afterSearch,
     afterUpdate,
     beforeCreate,
     beforeCreateMany,
@@ -115,6 +118,7 @@ export const createEmbeddedResourceImplementation = <
     beforeGetConnection,
     beforeGetMany,
     beforeRemove,
+    beforeSearch,
     beforeUpdate,
     count: getCount,
     create: async (input = {}) => {
@@ -183,6 +187,19 @@ export const createEmbeddedResourceImplementation = <
         update: { $pull: { [name]: getFilter(input.filter) } } as UpdateModel<TRoot>,
       });
       return { root: rootResult };
+    },
+    search: async (input = {}) => {
+      if (input.root) {
+        const { result: rootResult } = await getRootImplementation().get({
+          filter: [{ field: '_id', value: input.root }],
+          // options: input.filter ? { aggregate: aggregate({ ...input, name }) } : undefined,
+        });
+        return {
+          result: undefined,
+          root: rootResult,
+        };
+      }
+      throw new InvalidArgumentError('root');
     },
     update: async (input = {}) => {
       const { result: rootResult } = await getRootImplementation().update({

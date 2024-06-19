@@ -1,4 +1,4 @@
-import { type PrimitiveModel } from '@lib/shared/core/core.models';
+import { type PrimitiveModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
@@ -74,6 +74,14 @@ type RemoveArgsModel<TType> = {
   options?: RemoveOptionsModel;
 };
 
+type SearchOptionsModel = CommonOptionsModel;
+
+type SearchArgsModel<TType> = {
+  keys?: Array<StringKeyModel<TType>>;
+  options?: SearchOptionsModel;
+  query?: string;
+};
+
 type UpdateOptionsModel<TType> = ProjectOptionsModel<TType>;
 
 type UpdateArgsModel<TType> = {
@@ -100,6 +108,8 @@ export type ArgsModel<
             ? GetConnectionArgsModel<TType>
             : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
               ? RemoveArgsModel<TType>
-              : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
-                ? UpdateArgsModel<TType>
-                : never);
+              : TMethod extends RESOURCE_METHOD_TYPE.SEARCH
+                ? SearchArgsModel<TType>
+                : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
+                  ? UpdateArgsModel<TType>
+                  : never);

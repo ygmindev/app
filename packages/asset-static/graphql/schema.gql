@@ -169,6 +169,16 @@ type AccessRemoveOutput {
   result: Access
 }
 
+input AccessSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type AccessSearchOutput {
+  result: Access
+}
+
 input AccessUpdateFilterInput {
   booleanValue: Boolean
   condition: String
@@ -378,6 +388,17 @@ type BankRemoveOutput {
   root: User
 }
 
+input BankSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type BankSearchOutput {
+  result: Bank
+  root: User
+}
+
 input BankUpdateFilterInput {
   booleanValue: Boolean
   condition: String
@@ -582,6 +603,17 @@ type CardRemoveOutput {
   root: User
 }
 
+input CardSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type CardSearchOutput {
+  result: Card
+  root: User
+}
+
 input CardUpdateFilterInput {
   booleanValue: Boolean
   condition: String
@@ -752,6 +784,16 @@ input ChatRemoveInput {
 }
 
 type ChatRemoveOutput {
+  result: Chat
+}
+
+input ChatSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type ChatSearchOutput {
   result: Chat
 }
 
@@ -964,6 +1006,16 @@ input GroupRemoveInput {
 }
 
 type GroupRemoveOutput {
+  result: Group
+}
+
+input GroupSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type GroupSearchOutput {
   result: Group
 }
 
@@ -1214,6 +1266,16 @@ type OrderRemoveOutput {
   result: Order
 }
 
+input OrderSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type OrderSearchOutput {
+  result: Order
+}
+
 input OrderUpdateFilterInput {
   booleanValue: Boolean
   condition: String
@@ -1385,6 +1447,16 @@ input OtpRemoveInput {
 }
 
 type OtpRemoveOutput {
+  result: Otp
+}
+
+input OtpSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type OtpSearchOutput {
   result: Otp
 }
 
@@ -1651,6 +1723,17 @@ type PricingRemoveOutput {
   root: Product
 }
 
+input PricingSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type PricingSearchOutput {
+  result: Pricing
+  root: Product
+}
+
 input PricingUpdateFilterInput {
   booleanValue: Boolean
   condition: String
@@ -1848,6 +1931,16 @@ type ProductRemoveOutput {
   result: Product
 }
 
+input ProductSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type ProductSearchOutput {
+  result: Product
+}
+
 input ProductUpdateFilterInput {
   booleanValue: Boolean
   condition: String
@@ -1884,52 +1977,67 @@ type Query {
   AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
   AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
   AccessGetManyProtectedGetMany(input: AccessGetManyProtectedGetManyInput): AccessGetManyProtectedGetManyOutput
+  AccessSearch(input: AccessSearchInput): AccessSearchOutput
   BankGet(input: BankGetInput): BankGetOutput
   BankGetConnection(input: BankGetConnectionInput): BankGetConnectionOutput
   BankGetMany(input: BankGetManyInput): BankGetManyOutput
+  BankSearch(input: BankSearchInput): BankSearchOutput
   CardGet(input: CardGetInput): CardGetOutput
   CardGetConnection(input: CardGetConnectionInput): CardGetConnectionOutput
   CardGetMany(input: CardGetManyInput): CardGetManyOutput
+  CardSearch(input: CardSearchInput): CardSearchOutput
   ChatGet(input: ChatGetInput): ChatGetOutput
   ChatGetConnection(input: ChatGetConnectionInput): ChatGetConnectionOutput
   ChatGetMany(input: ChatGetManyInput): ChatGetManyOutput
+  ChatSearch(input: ChatSearchInput): ChatSearchOutput
   GetMapRoute(input: GetRouteInput): MapRoute
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
+  GroupSearch(input: GroupSearchInput): GroupSearchOutput
   OrderGet(input: OrderGetInput): OrderGetOutput
   OrderGetConnection(input: OrderGetConnectionInput): OrderGetConnectionOutput
   OrderGetMany(input: OrderGetManyInput): OrderGetManyOutput
+  OrderSearch(input: OrderSearchInput): OrderSearchOutput
   OtpGet(input: OtpGetInput): OtpGetOutput
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
+  OtpSearch(input: OtpSearchInput): OtpSearchOutput
   PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
   PricingGet(input: PricingGetInput): PricingGetOutput
   PricingGetConnection(input: PricingGetConnectionInput): PricingGetConnectionOutput
   PricingGetMany(input: PricingGetManyInput): PricingGetManyOutput
+  PricingSearch(input: PricingSearchInput): PricingSearchOutput
   ProductGet(input: ProductGetInput): ProductGetOutput
   ProductGetConnection(input: ProductGetConnectionInput): ProductGetConnectionOutput
   ProductGetMany(input: ProductGetManyInput): ProductGetManyOutput
+  ProductSearch(input: ProductSearchInput): ProductSearchOutput
   RoleGet(input: RoleGetInput): RoleGetOutput
   RoleGetConnection(input: RoleGetConnectionInput): RoleGetConnectionOutput
   RoleGetMany(input: RoleGetManyInput): RoleGetManyOutput
+  RoleSearch(input: RoleSearchInput): RoleSearchOutput
   SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
   SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
   SocketGet(input: SocketGetInput): SocketGetOutput
   SocketGetConnection(input: SocketGetConnectionInput): SocketGetConnectionOutput
   SocketGetMany(input: SocketGetManyInput): SocketGetManyOutput
+  SocketSearch(input: SocketSearchInput): SocketSearchOutput
   UserGet(input: UserGetInput): UserGetOutput
   UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
   UserGetMany(input: UserGetManyInput): UserGetManyOutput
+  UserSearch(input: UserSearchInput): UserSearchOutput
   UtilityGet(input: UtilityGetInput): UtilityGetOutput
   UtilityGetConnection(input: UtilityGetConnectionInput): UtilityGetConnectionOutput
   UtilityGetMany(input: UtilityGetManyInput): UtilityGetManyOutput
+  UtilitySearch(input: UtilitySearchInput): UtilitySearchOutput
   VendorGet(input: VendorGetInput): VendorGetOutput
   VendorGetConnection(input: VendorGetConnectionInput): VendorGetConnectionOutput
   VendorGetMany(input: VendorGetManyInput): VendorGetManyOutput
+  VendorSearch(input: VendorSearchInput): VendorSearchOutput
   linkedUserGet(input: linkedUserGetInput): linkedUserGetOutput
   linkedUserGetConnection(input: linkedUserGetConnectionInput): linkedUserGetConnectionOutput
   linkedUserGetMany(input: linkedUserGetManyInput): linkedUserGetManyOutput
+  linkedUserSearch(input: linkedUserSearchInput): linkedUserSearchOutput
 }
 
 type Role {
@@ -2075,6 +2183,17 @@ input RoleRemoveInput {
 }
 
 type RoleRemoveOutput {
+  result: Role
+  root: Group
+}
+
+input RoleSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type RoleSearchOutput {
   result: Role
   root: Group
 }
@@ -2379,6 +2498,16 @@ type SocketRemoveOutput {
   result: Socket
 }
 
+input SocketSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type SocketSearchOutput {
+  result: Socket
+}
+
 input SocketUpdateFilterInput {
   booleanValue: Boolean
   condition: String
@@ -2581,6 +2710,16 @@ type UserRemoveOutput {
   result: User
 }
 
+input UserSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type UserSearchOutput {
+  result: User
+}
+
 input UserUpdateFilterInput {
   booleanValue: Boolean
   condition: String
@@ -2777,6 +2916,17 @@ type UtilityRemoveOutput {
   root: Vendor
 }
 
+input UtilitySearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type UtilitySearchOutput {
+  result: Utility
+  root: Vendor
+}
+
 input UtilityUpdateFilterInput {
   booleanValue: Boolean
   condition: String
@@ -2952,6 +3102,16 @@ input VendorRemoveInput {
 }
 
 type VendorRemoveOutput {
+  result: Vendor
+}
+
+input VendorSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type VendorSearchOutput {
   result: Vendor
 }
 
@@ -3132,6 +3292,17 @@ input linkedUserRemoveInput {
 }
 
 type linkedUserRemoveOutput {
+  result: linkedUser
+  root: User
+}
+
+input linkedUserSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type linkedUserSearchOutput {
   result: linkedUser
   root: User
 }

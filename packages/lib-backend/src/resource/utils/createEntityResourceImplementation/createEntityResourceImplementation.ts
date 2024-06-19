@@ -17,6 +17,7 @@ export const createEntityResourceImplementation = <TType, TForm = EntityResource
   afterGetConnection,
   afterGetMany,
   afterRemove,
+  afterSearch,
   afterUpdate,
   beforeCreate,
   beforeCreateMany,
@@ -24,6 +25,7 @@ export const createEntityResourceImplementation = <TType, TForm = EntityResource
   beforeGetConnection,
   beforeGetMany,
   beforeRemove,
+  beforeSearch,
   beforeUpdate,
   name,
 }: CreateEntityResourceImplementationParamsModel<
@@ -45,6 +47,7 @@ export const createEntityResourceImplementation = <TType, TForm = EntityResource
     afterGetConnection,
     afterGetMany,
     afterRemove,
+    afterSearch,
     afterUpdate,
     beforeCreate,
     beforeCreateMany,
@@ -52,6 +55,7 @@ export const createEntityResourceImplementation = <TType, TForm = EntityResource
     beforeGetConnection,
     beforeGetMany,
     beforeRemove,
+    beforeSearch,
     beforeUpdate,
     count: async () => getRepository().count(),
     create: async (input) => getRepository().create(input),
@@ -61,6 +65,7 @@ export const createEntityResourceImplementation = <TType, TForm = EntityResource
     getMany: async (input) => getRepository().getMany(input),
     name,
     remove: async (input) => getRepository().remove(input),
+    search: async (input) => getRepository().search(input),
     update: async (input) => getRepository().update(input),
   });
 };

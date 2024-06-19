@@ -7,5 +7,6 @@ export enum RESOURCE_METHOD_TYPE {
   GET_CONNECTION = 'GetConnection',
   GET_MANY = 'GetMany',
   REMOVE = 'Remove',
+  SEARCH = 'Search',
   UPDATE = 'Update',
 }

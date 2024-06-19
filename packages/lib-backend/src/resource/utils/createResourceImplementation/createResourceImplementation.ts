@@ -24,6 +24,7 @@ export const createResourceImplementation = <
   afterGetConnection,
   afterGetMany,
   afterRemove,
+  afterSearch,
   afterUpdate,
   beforeCreate,
   beforeCreateMany,
@@ -31,6 +32,7 @@ export const createResourceImplementation = <
   beforeGetConnection,
   beforeGetMany,
   beforeRemove,
+  beforeSearch,
   beforeUpdate,
   create,
   createMany,
@@ -39,6 +41,7 @@ export const createResourceImplementation = <
   getMany,
   remove,
   root,
+  search,
   update,
 }: CreateResourceImplementationParamsModel<TType, TForm, TRoot>): CreateResourceImplementationModel<
   TType,
@@ -55,6 +58,7 @@ export const createResourceImplementation = <
       afterGetConnection,
       afterGetMany,
       afterRemove,
+      afterSearch,
       afterUpdate,
       beforeCreate,
       beforeCreateMany,
@@ -74,6 +78,7 @@ export const createResourceImplementation = <
         const inputF = { ...input, filter: collapseFilter(input?.filter) };
         return beforeRemove ? beforeRemove({ input: inputF }, context) : inputF;
       },
+      beforeSearch,
       beforeUpdate: async ({ input }, context) => {
         const inputF = { ...input, filter: collapseFilter(input?.filter) };
         return beforeUpdate ? beforeUpdate({ input: inputF }, context) : inputF;
@@ -88,6 +93,7 @@ export const createResourceImplementation = <
       this.getMany = this.getMany.bind(this);
       this.getConnection = this.getConnection.bind(this);
       this.update = this.update.bind(this);
+      this.search = this.search.bind(this);
       this.remove = this.remove.bind(this);
     }
 
@@ -222,6 +228,24 @@ export const createResourceImplementation = <
       );
       return this.decorators.afterUpdate
         ? this.decorators.afterUpdate({ input: inputF, output }, context)
+        : output;
+    }
+
+    async search(
+      input: InputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TForm> = {},
+      context?: RequestContextModel,
+    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
+      const inputF = this.decorators.beforeSearch
+        ? await this.decorators.beforeSearch({ input }, context)
+        : input;
+      const root = inputF?.root ?? this._decorators.root;
+      inputF && root && (inputF.root = root);
+      const output: OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> = await search(
+        inputF,
+        context,
+      );
+      return this.decorators.afterSearch
+        ? this.decorators.afterSearch({ input: inputF, output }, context)
         : output;
     }
 

@@ -7,11 +7,10 @@ import {
   type UseResourceMethodModel,
   type UseResourceMethodParamsModel,
 } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
-import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { getOperationType } from '@lib/shared/resource/utils/getOperationType/getOperationType';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 
@@ -52,29 +51,11 @@ export const useResourceMethod = <
   TRoot
 > => {
   const { query } = useAppGraphql();
-
   const nameF = `${name}${method}`;
-  const type = (() => {
-    switch (method) {
-      case RESOURCE_METHOD_TYPE.GET:
-      case RESOURCE_METHOD_TYPE.GET_MANY:
-      case RESOURCE_METHOD_TYPE.GET_CONNECTION:
-        return GRAPHQL_OPERATION_TYPE.QUERY;
-      case RESOURCE_METHOD_TYPE.CREATE:
-      case RESOURCE_METHOD_TYPE.CREATE_MANY:
-      case RESOURCE_METHOD_TYPE.UPDATE:
-      case RESOURCE_METHOD_TYPE.REMOVE:
-        return GRAPHQL_OPERATION_TYPE.MUTATION;
-      default:
-        throw new InvalidTypeError(method, RESOURCE_METHOD_TYPE);
-    }
-  })();
-
   const fieldsF =
     method === RESOURCE_METHOD_TYPE.GET_CONNECTION
       ? getConnectionFields(fields as GraphqlQueryParamsFieldsModel<TType>)
       : fields;
-
   return {
     query: async (input) => {
       const inputF = before ? await before({ input }) : input;
@@ -86,7 +67,7 @@ export const useResourceMethod = <
         fields: fieldsF as GraphqlQueryParamsFieldsModel<OutputModel<TMethod, TType, TRoot>>,
         name: nameF,
         params: { input: `${nameF}Input` },
-        type,
+        type: getOperationType(method),
         variables: {
           input: { ...(inputF ?? {}), root: rootF } as InputModel<TMethod, TType, TForm>,
         },

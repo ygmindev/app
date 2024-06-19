@@ -72,5 +72,6 @@ export const createProtectedResoureImplementation = <
       throw new NotFoundError('group');
     }
   }
+
   return ProtectedResourceImplementation;
 };

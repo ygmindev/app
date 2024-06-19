@@ -207,7 +207,7 @@ export const DataBoundary = forwardRef(
             params={params}
             query={async (v) => {
               // TODO: sleep for race condition suspense
-              await sleep();
+              // await sleep();
               return query(v);
             }}
             ref={refFF as ForwardedRef<QueryComponentRefModel<TResult>>}>
