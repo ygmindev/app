@@ -24,7 +24,7 @@ export class OtpForm implements OtpFormModel {
 }
 
 @withEntity({
-  indices: [{ keys: ['email'] }, { keys: ['phone'] }],
+  indices: [{ keys: ['email', 'phone'], type: 'text' }],
   isRepository: true,
   name: OTP_RESOURCE_NAME,
 })

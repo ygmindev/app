@@ -17,6 +17,7 @@ import { useQuery } from '@lib/frontend/data/hooks/useQuery/useQuery';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import {
   cloneElement,
   type ForwardedRef,
@@ -204,7 +205,11 @@ export const DataBoundary = forwardRef(
             id={id}
             isBlocking={isBlocking}
             params={params}
-            query={query}
+            query={async (v) => {
+              // TODO: sleep for race condition suspense
+              await sleep();
+              return query(v);
+            }}
             ref={refFF as ForwardedRef<QueryComponentRefModel<TResult>>}>
             {children}
           </QueryComponent>
@@ -214,7 +219,11 @@ export const DataBoundary = forwardRef(
             emptyMessage={emptyMessage}
             id={id}
             isBlocking={isBlocking}
-            mutate={mutate}
+            mutate={async (v) => {
+              // TODO: sleep for race condition suspense
+              await sleep();
+              return mutate(v);
+            }}
             params={params}
             ref={refFF as ForwardedRef<MutateComponentRefModel<TResult>>}>
             {children}

@@ -19,7 +19,7 @@ import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constan
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({
-  indices: [{ keys: ['email'] }, { keys: ['phone'] }],
+  indices: [{ keys: ['first', 'last', 'email', 'phone'], type: 'text' }],
   isRepository: true,
   name: USER_RESOURCE_NAME,
 })
