@@ -1,4 +1,3 @@
-import { type MenuOptionModel } from '@lib/frontend/core/components/Menu/Menu.models';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
@@ -10,8 +9,10 @@ import {
   type UserInputRefModel,
 } from '@lib/frontend/user/components/UserInput/UserInput.models';
 import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
+import { type PartialModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { USER_FIXTURES } from '@lib/shared/user/resources/User/User.fixtures';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 import { USER } from '@lib/shared/user/user.constants';
 import { forwardRef, useState } from 'react';
 
@@ -28,18 +29,13 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
     });
 
     const { search } = useUserResource();
-    const handleQuery = async (v?: string): Promise<Array<MenuOptionModel>> => {
-      if (v) {
-        const { result } = await search({ query: v });
-        return result?.map(({ _id, email }) => ({ id: _id ?? uid(), label: email })) ?? [];
-      }
-      return [];
-    };
+    const handleQuery = async (v?: string): Promise<Array<PartialModel<UserModel>>> =>
+      v ? (await search({ query: v })).result ?? [] : [];
 
     return (
       <DataBoundary
         {...wrapperProps}
-        fallbackData={USER_FIXTURES.map(({ _id }) => ({ id: _id }))}
+        fallbackData={USER_FIXTURES}
         id="users"
         params={query}
         query={handleQuery}>
@@ -47,14 +43,14 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
           <SearchInput
             label={t('user:user')}
             onChange={(v) => {
-              const user = v && data?.find((vv) => vv.id === v);
-              valueControlledSet(user ? { _id: user.id } : undefined);
+              const user = v && data?.find((vv) => vv._id === v);
+              valueControlledSet(user || undefined);
             }}
             onSearch={(v) => {
               querySet(v);
               void reset();
             }}
-            options={data ?? []}
+            options={data?.map(({ _id, email }) => ({ id: _id ?? uid(), label: email })) ?? []}
             value={valueControlled?._id}
           />
         )}
