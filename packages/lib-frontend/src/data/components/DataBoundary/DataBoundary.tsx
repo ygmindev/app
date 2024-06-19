@@ -17,7 +17,6 @@ import { useQuery } from '@lib/frontend/data/hooks/useQuery/useQuery';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import {
   cloneElement,
   type ForwardedRef,
@@ -221,7 +220,7 @@ export const DataBoundary = forwardRef(
             isBlocking={isBlocking}
             mutate={async (v) => {
               // TODO: sleep for race condition suspense
-              await sleep();
+              // await sleep();
               return mutate(v);
             }}
             params={params}

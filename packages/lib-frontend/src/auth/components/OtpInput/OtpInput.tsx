@@ -10,6 +10,7 @@ import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type MeasureModel, type RLFCModel } from '@lib/frontend/core/core.models';
+import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
@@ -32,7 +33,20 @@ const otpLength = toNumber(process.env.SERVER_APP_OTP_LENGTH);
 const IDS = withId(range(otpLength));
 
 export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forwardRef(
-  ({ elementState, error, onBack, onChange, onSubmit, testID, value, ...props }, ref) => {
+  (
+    {
+      elementState,
+      error,
+      onBack,
+      onChange,
+      onElementStateChange,
+      onSubmit,
+      testID,
+      value,
+      ...props
+    },
+    ref,
+  ) => {
     const { t } = useTranslation([AUTH]);
     const { wrapperProps } = useLayoutStyles({ props });
     const theme = useTheme();
@@ -41,10 +55,10 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
       onChange,
       value,
     });
+    const { elementStateControlledSet, isActive, isBlocked, isLoading } = useElementStateControlled(
+      { elementState, onElementStateChange },
+    );
     const [measure, measureSet] = useState<MeasureModel>();
-    const [isFocused, isFocusedSet] = useState<boolean>(false);
-    const isDisabled =
-      elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING;
 
     return (
       <Wrapper
@@ -63,18 +77,16 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
             zIndex={1}>
             <TextInput
               defaultValue=""
-              elementState={elementState}
               isNoClear
               keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
               maxLength={otpLength}
-              onBlur={() => isFocusedSet(false)}
               onChange={(value) => {
                 valueControlledSet(value);
                 if (value?.length === otpLength) {
                   void sleep().then(onSubmit);
                 }
               }}
-              onFocus={() => isFocusedSet(true)}
+              onElementStateChange={elementStateControlledSet}
               ref={ref}
               size={THEME_SIZE.MEDIUM}
               testID={testID}
@@ -85,11 +97,9 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
           {IDS.map(({ id }, i) => (
             <TextInput
               elementState={
-                !isDisabled &&
-                isFocused &&
-                i === Math.min((valueControlled ?? '').length, otpLength - 1)
+                isActive && i === Math.min((valueControlled ?? '').length, otpLength - 1)
                   ? ELEMENT_STATE.ACTIVE
-                  : elementState
+                  : undefined
               }
               error={!!error}
               isCenter
@@ -112,9 +122,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
             <Wrapper position={SHAPE_POSITION.RELATIVE}>
               <Appearable
                 bottom={0}
-                isActive={
-                  elementState !== ELEMENT_STATE.LOADING && (valueControlled?.length ?? 0) > 0
-                }
+                isActive={!isBlocked && (valueControlled?.length ?? 0) > 0}
                 isCenter
                 left={0}
                 position={SHAPE_POSITION.ABSOLUTE}
@@ -127,7 +135,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
 
               <Appearable
                 bottom={0}
-                isActive={elementState === ELEMENT_STATE.LOADING}
+                isActive={isLoading}
                 isCenter
                 left={0}
                 position={SHAPE_POSITION.ABSOLUTE}

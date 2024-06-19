@@ -208,11 +208,13 @@ export class _Database implements _DatabaseModel {
       },
 
       search: async ({ keys, query } = {}) => {
-        console.warn('SEARCH!!!');
-        console.warn(keys);
-        console.warn(query);
-        const em = this._getEntityManager();
-        // await em.getRepository(name).nativeDelete(filterF);
+        if (query) {
+          // TODO: handle keys as regex
+          const em = this._getEntityManager();
+          const collection = em.getCollection(name);
+          const result = await collection.find({ $text: { $search: query } }).toArray();
+          return { result } as unknown as OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
+        }
         // TODO: don't return for remove?
         return { result: [] } as unknown as OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
       },

@@ -29,11 +29,11 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
     const { search } = useUserResource();
 
     const handleQuery = async (v?: string): Promise<Array<MenuOptionModel>> => {
-      console.warn(v);
-      // const { result } = await getMany({
-      //   filter: [{ condition: FILTER_CONDITION.CONTAINS, field: 'first', value: 'yg' }],
-      // });
-      // console.warn(result);
+      if (v) {
+        const { result } = await search({ query: v });
+        console.warn(result);
+        return [];
+      }
       return [];
     };
 

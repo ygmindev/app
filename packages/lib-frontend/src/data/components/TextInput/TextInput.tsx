@@ -91,8 +91,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         onElementStateChange,
       });
 
-    useChange(isActive, () => {
-      void handleFocus(isActive);
+    useChange(elementState, () => {
+      void handleFocus(elementState === ELEMENT_STATE.ACTIVE);
     });
 
     const sizeF = size ?? THEME_SIZE.MEDIUM;
