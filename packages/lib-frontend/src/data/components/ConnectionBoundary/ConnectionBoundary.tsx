@@ -25,8 +25,8 @@ export const ConnectionBoundary = forwardRef(
       params={params}
       query={query}
       ref={ref}>
-      {({ data, elementState, onChange, reset }) =>
-        children && children({ data, elementState, onChange, reset })
+      {({ data, elementState, onChange, reset, setData }) =>
+        children && children({ data, elementState, onChange, reset, setData })
       }
     </DataBoundary>
   ),

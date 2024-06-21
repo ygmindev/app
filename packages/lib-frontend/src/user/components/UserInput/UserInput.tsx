@@ -43,7 +43,7 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
           <SearchInput
             label={t('user:user')}
             onBlur={() => {
-              void setData(undefined);
+              void setData([]);
             }}
             onChange={(v) => {
               const user = v && data?.find((vv) => vv._id === v);
