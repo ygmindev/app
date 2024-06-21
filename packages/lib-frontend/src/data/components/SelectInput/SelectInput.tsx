@@ -10,6 +10,7 @@ import {
   type NamableComponentModel,
   type RLFCPropsModel,
 } from '@lib/frontend/core/core.models';
+import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import {
   type SelectInputPropsModel,
   type SelectInputRefModel,
@@ -37,11 +38,13 @@ export const SelectInput = forwardRef(
     {
       defaultValue,
       elementState,
+      isIgnoreAll = false,
       isMultiple,
       isSelectAll = true,
       isVertical,
       label,
       onChange,
+      onElementStateChange,
       options,
       value,
       ...props
@@ -73,15 +76,18 @@ export const SelectInput = forwardRef(
     const handleChangeMultiple = (v: Array<string>): void => {
       const idsF = sort(v);
       valuesSet(idsF);
-      valueControlledSet((isEqual(idsF, ids) ? [] : idsF) as TType);
+      valueControlledSet((isIgnoreAll && isEqual(idsF, ids) ? [] : idsF) as TType);
     };
 
-    const isDisabled = elementState === ELEMENT_STATE.DISABLED;
+    const { isBlocked } = useElementStateControlled({
+      elementState,
+      onElementStateChange,
+    });
 
     return (
       <Wrapper
         {...wrapperProps}
-        opacity={isDisabled ? theme.opaque[THEME_SIZE.LARGE] : undefined}
+        opacity={isBlocked ? theme.opaque[THEME_SIZE.LARGE] : undefined}
         position={SHAPE_POSITION.RELATIVE}
         s={THEME_SIZE.SMALL}>
         <AsyncText isBold>{label}</AsyncText>
@@ -153,7 +159,7 @@ export const SelectInput = forwardRef(
           })}
         </Wrapper>
 
-        {isDisabled && (
+        {isBlocked && (
           <Wrapper
             isAbsoluteFill
             zIndex

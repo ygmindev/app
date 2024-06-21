@@ -17,7 +17,7 @@ export const ACCESS_RESOURCE_PARAMS = {
     },
     {
       field: () => <UserInput />,
-      fields: [{ id: '_id' }, { id: 'first' }, { id: 'last' }],
+      fields: [{ id: '_id' }, { id: 'first' }, { id: 'last' }, { id: 'email' }, { id: 'phone' }],
       id: USER_RESOURCE_NAME,
     },
   ],

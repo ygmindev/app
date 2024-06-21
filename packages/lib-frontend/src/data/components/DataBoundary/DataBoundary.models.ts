@@ -7,7 +7,7 @@ import {
 import { type AsyncPropsModel } from '@lib/frontend/data/data.models';
 import { type UseMutationParamsModel } from '@lib/frontend/data/hooks/useMutation/useMutation.models';
 import { type UseQueryParamsModel } from '@lib/frontend/data/hooks/useQuery/useQuery.models';
-import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
+import { type NilModel, type PartialModel, type RequiredModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement } from 'react';
 
@@ -29,11 +29,11 @@ export type DataComponentPropsModel<TParams = undefined, TResult = void> = WithI
   AsyncPropsModel &
   ChildrenPropsModel<
     (
-      props: ElementStatePropsModel & {
-        data?: TResult | null;
-        onChange(values?: TResult): void;
-        reset(): Promise<void>;
-      },
+      props: ElementStatePropsModel &
+        RequiredModel<Pick<DataComponentRefModel<TResult>, 'reset' | 'setData'>> & {
+          data?: TResult | null;
+          onChange(values?: TResult): void;
+        },
     ) => ReactElement | NilModel
   > & {
     emptyMessage?: AsyncTextModel;
@@ -43,7 +43,7 @@ export type DataComponentPropsModel<TParams = undefined, TResult = void> = WithI
 export type DataComponentRefModel<TResult = void> = {
   getData(): TResult | null | undefined;
   reset?(): Promise<void>;
-  setData?(values?: TResult): void;
+  setData?(values?: TResult): Promise<void>;
 };
 
 export type QueryComponentPropsModel<TParams = undefined, TResult = void> = DataComponentPropsModel<

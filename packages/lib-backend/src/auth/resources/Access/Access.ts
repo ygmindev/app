@@ -16,10 +16,8 @@ import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constan
 
 @withEntity({ isRepository: true, name: ACCESS_RESOURCE_NAME })
 export class Access extends EntityResource implements AccessModel {
-  // [PrimaryKeyProp]?: ['_id', 'User', 'Group'];
-
-  @withRefField({ Resource: () => Group })
-  [GROUP_RESOURCE_NAME]!: RefFieldModel<Group>;
+  @withRefField({ Resource: () => Group, isOptional: true })
+  [GROUP_RESOURCE_NAME]?: RefFieldModel<Group>;
 
   @withRefField({ Resource: () => User })
   [USER_RESOURCE_NAME]!: RefFieldModel<User>;

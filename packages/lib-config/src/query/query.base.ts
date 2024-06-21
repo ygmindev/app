@@ -8,7 +8,7 @@ const config = defineConfig<QueryConfigModel, _QueryConfigModel>({
   params: () => ({
     cacheTime: 1000 * 60 * 60, // 1h
 
-    cacheTimeDefault: 100,
+    cacheTimeDefault: 0,
   }),
 });
 

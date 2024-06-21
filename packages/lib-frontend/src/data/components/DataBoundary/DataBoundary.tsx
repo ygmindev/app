@@ -67,6 +67,7 @@ const QueryComponent = forwardRef(
             void setData(values);
           },
           reset,
+          setData,
         })) || (
         <Wrapper
           {...wrapperProps}
@@ -125,6 +126,7 @@ const MutateComponent = forwardRef(
             void setData(values);
           },
           reset,
+          setData,
         })) || (
         <Wrapper
           {...wrapperProps}
