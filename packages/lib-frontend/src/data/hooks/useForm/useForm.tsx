@@ -22,7 +22,7 @@ export const useForm = <TType, TResult = void>({
   onSubmit,
   onSuccess,
   onValidate,
-  redirectTo,
+  redirect,
   successMessage,
   validators,
 }: UseFormParamsModel<TType, TResult>): UseFormModel<TType, TResult> => {
@@ -44,7 +44,7 @@ export const useForm = <TType, TResult = void>({
       const data = onSubmit && (await onSubmit(valuesF));
       onSuccess && (await onSuccess(valuesF, data));
       successMessage && void success({ description: t('core:updatedSuccess') });
-      redirectTo && replace(redirectTo);
+      redirect && replace(redirect);
       return data ?? null;
     } catch (e) {
       logger.error(e);

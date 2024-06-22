@@ -8,6 +8,7 @@ import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { StepForm } from '@lib/frontend/data/components/StepForm/StepForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
@@ -19,6 +20,7 @@ export const OrderForm: LFCModel<OrderFormPropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { create } = useOrderResource();
   const [items, itemsSet] = useStore('commerce.items');
+  const { replace } = useRouter();
 
   const handleSubmit = async (form: OrderFormModel): Promise<void> => {
     await create({ form });
@@ -26,6 +28,7 @@ export const OrderForm: LFCModel<OrderFormPropsModel> = ({ ...props }) => {
 
   const handleSuccess = async (): Promise<void> => {
     itemsSet([]);
+    void replace({ pathname: `/${ORDER}/${SUCCESS}` });
   };
 
   return (
@@ -34,7 +37,6 @@ export const OrderForm: LFCModel<OrderFormPropsModel> = ({ ...props }) => {
       elementState={items?.length ? undefined : ELEMENT_STATE.DISABLED}
       onSubmit={handleSubmit}
       onSuccess={handleSuccess}
-      redirectTo={{ pathname: `/${ORDER}/${SUCCESS}` }}
       steps={[
         { element: <ProductItemForm />, id: 'item', title: t('commerce:item_plural') },
         { element: <PaymentForm />, id: 'payment', title: t('billing:payment') },

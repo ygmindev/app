@@ -11,7 +11,9 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const { get } = useUserResource();
   const [authStatus, authStatusSet] = useStore('auth.status');
-  const { initialize } = useSession({ onError: () => authStatusSet(AUTH_STATUS.UNAUTHENTICATED) });
+  const { initialize, signOut } = useSession({
+    onError: () => authStatusSet(AUTH_STATUS.UNAUTHENTICATED),
+  });
   const [, authTokenSet] = useStore('auth.token');
   const [currentUser, currentUserSet] = useStore('user.currentUser');
 
@@ -21,14 +23,19 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
         token && authTokenSet({ access: token });
         if (isMounted()) {
           if (signInToken && currentUser?._id !== signInToken._id) {
-            let user: PartialModel<UserModel> = { ...signInToken.claims, _id: signInToken._id };
-            try {
-              const { result } = await get({ filter: [{ field: '_id', value: signInToken._id }] });
-              result && (user = result);
-            } finally {
-              currentUserSet(user);
+            let user: PartialModel<UserModel> | undefined = {
+              ...signInToken.claims,
+              _id: signInToken._id,
+            };
+            const { result } = await get({ filter: [{ field: '_id', value: signInToken._id }] });
+            user = result || undefined;
+            if (user) {
               authStatusSet(AUTH_STATUS.AUTHENTICATED);
+            } else {
+              await signOut();
+              authStatusSet(AUTH_STATUS.UNAUTHENTICATED);
             }
+            currentUserSet(user);
           } else {
             authStatusSet(AUTH_STATUS.UNAUTHENTICATED);
           }

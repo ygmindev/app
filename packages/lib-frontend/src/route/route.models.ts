@@ -32,14 +32,13 @@ export type RouteModel<
 };
 
 export type LocationModel<TType = object> = {
-  context?: LocationContextModel;
-  params?: TType;
+  params?: TType & LocationParamsModel;
   pathname: string;
 };
 
-export type LocationContextModel = {
-  previous?: string;
-  redirectTo?: string;
+export type LocationParamsModel = {
+  previous?: LocationModel<unknown>;
+  redirect?: LocationModel<unknown>;
 };
 
 export type RouteContextModel<TType = object> = {

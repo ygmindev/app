@@ -10,8 +10,6 @@ import {
   type NameFormModel,
   type NameFormPagePropsModel,
 } from '@lib/frontend/user/pages/NameFormPage/NameFormPage.models';
-import { PERSONAL } from '@lib/frontend/user/user.constants';
-import { ACCOUNT } from '@lib/shared/user/user.constants';
 
 export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
@@ -46,7 +44,6 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
         })
       }
       p
-      redirectTo={{ pathname: `/${ACCOUNT}/${PERSONAL}` }}
       successMessage={t('core:updatedSuccess', { value: t('user:name') })}
     />
   ) : null;

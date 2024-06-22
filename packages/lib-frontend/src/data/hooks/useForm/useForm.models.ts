@@ -17,7 +17,7 @@ export type UseFormParamsModel<TType, TResult = void> = AsyncPropsModel &
   > & {
     isValidateChanged?: boolean;
     onValidate?(errors?: FormErrorModel<TType>): void;
-    redirectTo?: LocationModel;
+    redirect?: LocationModel<unknown>;
     successMessage?: AsyncTextModel;
     validators?: FormValidatorsModel<TType>;
   };

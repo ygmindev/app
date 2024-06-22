@@ -2,13 +2,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "blgd",
+            "name": "app web dev dev",
             "type": "node",
             "request": "launch",
             "sourceMaps": true,
             "program": "${workspaceRoot}/packages/tool-task/src/index.js",
-            "outFiles": ["${workspaceFolder}/**/.esbuild/.build/**/*.js"],
-            "args": ["blgd"],
+            "args": ["awd"],
+            "outputCapture": "std"
+        },
+        {
+            "name": "backend server dev",
+            "type": "node",
+            "request": "launch",
+            "sourceMaps": true,
+            "program": "${workspaceRoot}/packages/tool-task/src/index.js",
+            "args": ["bsd"],
             "outputCapture": "std"
         }
     ]

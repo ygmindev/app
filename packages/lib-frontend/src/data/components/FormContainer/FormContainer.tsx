@@ -88,7 +88,6 @@ const FormContainerF = forwardRef(
       onSubmit,
       onSuccess,
       onValidate,
-      redirectTo,
       submitLabel,
       successMessage,
       topElement,
@@ -166,7 +165,6 @@ const FormContainerF = forwardRef(
         onSubmit: onSubmitF,
         onSuccess,
         onValidate,
-        redirectTo,
         successMessage,
         validators:
           validators && (pick(validators, fieldIds) as unknown as FormValidatorsModel<TType>),

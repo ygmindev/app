@@ -2,5 +2,5 @@ import { type UsernameFormPropsModel } from '@lib/frontend/auth/containers/Usern
 
 export type SignInFormPropsModel = Pick<
   UsernameFormPropsModel,
-  'method' | 'mode' | 'successMessage' | 'redirectTo'
+  'method' | 'mode' | 'successMessage'
 >;

@@ -5,6 +5,5 @@ export const ROUTE_REDUCER: RouteReducerModel = {
 
   defaultState: {
     isBack: false,
-    previous: {},
   },
 };

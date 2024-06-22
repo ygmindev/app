@@ -36,7 +36,7 @@ export const StepForm = <TType, TResult = void>({
   onElementStateChange,
   onSubmit,
   onSuccess,
-  redirectTo,
+  redirect,
   steps,
   topElement,
   validators,
@@ -58,7 +58,7 @@ export const StepForm = <TType, TResult = void>({
     isLoading: isLoadingF,
     values,
     valuesSet,
-  } = useForm<TType, TResult>({ initialValues, onSubmit, onSuccess, redirectTo });
+  } = useForm<TType, TResult>({ initialValues, onSubmit, onSuccess, redirect });
 
   const handleCurrentSet = async (value: number): Promise<void> => {
     currentSet(value);

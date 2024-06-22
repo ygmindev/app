@@ -17,13 +17,12 @@ import { FORM_MODE } from '@lib/shared/data/data.constants';
 export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   method,
   mode = FORM_MODE.NEW,
-  redirectTo,
   successMessage,
   ...props
 }) => {
   const { t } = useTranslation([AUTH]);
   const { signIn, usernameUpdate } = useSignInResource();
-  const { replace } = useRouter();
+  const { location } = useRouter();
 
   const handleSubmit = async (form: SignInFormModel): Promise<void> =>
     mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form);
@@ -32,16 +31,13 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
     <StepForm
       {...props}
       onSubmit={handleSubmit}
-      redirectTo={redirectTo}
+      redirect={location.params?.redirect ?? { pathname: '/' }}
       steps={[
         {
           element: (
             <UsernameForm
               method={method}
               mode={mode}
-              onCancel={
-                redirectTo && redirectTo?.pathname !== '/' ? () => replace(redirectTo) : undefined
-              }
             />
           ),
           id: 'username',

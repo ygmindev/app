@@ -3,7 +3,7 @@ import { rootContext } from '@lib/frontend/root/providers/ContextProvider/Contex
 import { type RedirectPropsModel } from '@lib/frontend/route/components/Redirect/Redirect.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
-import { isServer } from '@lib/shared/web/utils/isServer/isServer';
+import { ROUTE } from '@lib/shared/route/route.constants';
 import { type ReactElement, useContext, useEffect } from 'react';
 
 export const Redirect = <TType,>({
@@ -14,15 +14,12 @@ export const Redirect = <TType,>({
   FCPropsModel<RedirectPropsModel<TType>>
 > => {
   const { replace } = useRouter();
-  const context = useContext(rootContext);
+  const rootContextF = useContext(rootContext);
 
   useEffect(() => {
+    rootContextF[ROUTE] && (rootContextF[ROUTE].redirectTo = trimPathname(pathname));
     void replace<TType>({ isBack, params, pathname });
   }, []);
-
-  if (isServer && context.route) {
-    context.route.redirectTo = trimPathname(pathname);
-  }
 
   return <></>;
 };

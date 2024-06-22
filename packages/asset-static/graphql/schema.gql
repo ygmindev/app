@@ -5,16 +5,17 @@
 
 type Access {
   Group: Group
-  User: User
+  _group: Group
   _id: String
+  _user: User
   created: DateTime
   role: [String]
 }
 
 input AccessCreateFormInput {
-  Group: GroupInput
-  User: UserInput
+  _group: GroupInput
   _id: String
+  _user: UserInput
   created: DateTime
   role: [String]
 }
@@ -25,9 +26,9 @@ input AccessCreateInput {
 }
 
 input AccessCreateManyFormInput {
-  Group: GroupInput
-  User: UserInput
+  _group: GroupInput
   _id: String
+  _user: UserInput
   created: DateTime
   role: [String]
 }
@@ -141,9 +142,9 @@ type AccessGetOutput {
 }
 
 input AccessInput {
-  Group: GroupInput
-  User: UserInput
+  _group: GroupInput
   _id: String
+  _user: UserInput
   created: DateTime
   role: [String]
 }
@@ -202,9 +203,9 @@ type AccessUpdateOutput {
 }
 
 input AccessUpdateUpdateInput {
-  Group: GroupInput
-  User: UserInput
+  _group: GroupInput
   _id: String
+  _user: UserInput
   created: DateTime
   role: [String]
 }
@@ -230,8 +231,8 @@ input AroomUserInput {
 }
 
 type Bank {
-  User: User
   _id: String
+  _user: User
   created: DateTime
   externalId: String
   fingerprint: String
@@ -240,8 +241,8 @@ type Bank {
 }
 
 input BankCreateFormInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   externalId: String
   fingerprint: String
@@ -255,8 +256,8 @@ input BankCreateInput {
 }
 
 input BankCreateManyFormInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   externalId: String
   fingerprint: String
@@ -357,8 +358,8 @@ type BankGetOutput {
 }
 
 input BankInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   externalId: String
   fingerprint: String
@@ -423,8 +424,8 @@ type BankUpdateOutput {
 }
 
 input BankUpdateUpdateInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   externalId: String
   fingerprint: String
@@ -433,8 +434,8 @@ input BankUpdateUpdateInput {
 }
 
 type Card {
-  User: User
   _id: String
+  _user: User
   created: DateTime
   expMonth: Float
   expYear: Float
@@ -446,8 +447,8 @@ type Card {
 }
 
 input CardCreateFormInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   expMonth: Float
   expYear: Float
@@ -464,8 +465,8 @@ input CardCreateInput {
 }
 
 input CardCreateManyFormInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   expMonth: Float
   expYear: Float
@@ -569,8 +570,8 @@ type CardGetOutput {
 }
 
 input CardInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   expMonth: Float
   expYear: Float
@@ -638,8 +639,8 @@ type CardUpdateOutput {
 }
 
 input CardUpdateUpdateInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   expMonth: Float
   expYear: Float
@@ -1506,8 +1507,8 @@ input PaginationInput {
 }
 
 type PaymentMethod {
-  User: User
   _id: String
+  _user: User
   created: DateTime
   externalId: String
   fingerprint: String
@@ -1539,8 +1540,8 @@ type PaymentMethodGetManyOutput {
 }
 
 input PaymentMethodInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   externalId: String
   fingerprint: String
@@ -1569,8 +1570,8 @@ type PriceTier {
 }
 
 type Pricing {
-  Product: Product
   _id: String
+  _product: Product
   created: DateTime
   currency: String
   frequency: String
@@ -1578,8 +1579,8 @@ type Pricing {
 }
 
 input PricingCreateFormInput {
-  Product: ProductInput
   _id: String
+  _product: ProductInput
   created: DateTime
   currency: String
   frequency: String
@@ -1592,8 +1593,8 @@ input PricingCreateInput {
 }
 
 input PricingCreateManyFormInput {
-  Product: ProductInput
   _id: String
+  _product: ProductInput
   created: DateTime
   currency: String
   frequency: String
@@ -1693,8 +1694,8 @@ type PricingGetOutput {
 }
 
 input PricingInput {
-  Product: ProductInput
   _id: String
+  _product: ProductInput
   created: DateTime
   currency: String
   frequency: String
@@ -1758,8 +1759,8 @@ type PricingUpdateOutput {
 }
 
 input PricingUpdateUpdateInput {
-  Product: ProductInput
   _id: String
+  _product: ProductInput
   created: DateTime
   currency: String
   frequency: String
@@ -2041,14 +2042,14 @@ type Query {
 }
 
 type Role {
-  Group: Group
+  _group: Group
   _id: String
   created: DateTime
   name: String
 }
 
 input RoleCreateFormInput {
-  Group: GroupInput
+  _group: GroupInput
   _id: String
   created: DateTime
   name: String
@@ -2060,7 +2061,7 @@ input RoleCreateInput {
 }
 
 input RoleCreateManyFormInput {
-  Group: GroupInput
+  _group: GroupInput
   _id: String
   created: DateTime
   name: String
@@ -2159,7 +2160,7 @@ type RoleGetOutput {
 }
 
 input RoleInput {
-  Group: GroupInput
+  _group: GroupInput
   _id: String
   created: DateTime
   name: String
@@ -2222,7 +2223,7 @@ type RoleUpdateOutput {
 }
 
 input RoleUpdateUpdateInput {
-  Group: GroupInput
+  _group: GroupInput
   _id: String
   created: DateTime
   name: String
@@ -2758,8 +2759,8 @@ input UserUpdateUpdateInput {
 }
 
 type Utility {
-  Vendor: Vendor
   _id: String
+  _vender: Vendor
   created: DateTime
   description: String
   name: String
@@ -2768,8 +2769,8 @@ type Utility {
 }
 
 input UtilityCreateFormInput {
-  Vendor: VendorInput
   _id: String
+  _vender: VendorInput
   created: DateTime
   description: String
   name: String
@@ -2783,8 +2784,8 @@ input UtilityCreateInput {
 }
 
 input UtilityCreateManyFormInput {
-  Vendor: VendorInput
   _id: String
+  _vender: VendorInput
   created: DateTime
   description: String
   name: String
@@ -2885,8 +2886,8 @@ type UtilityGetOutput {
 }
 
 input UtilityInput {
-  Vendor: VendorInput
   _id: String
+  _vender: VendorInput
   created: DateTime
   description: String
   name: String
@@ -2951,8 +2952,8 @@ type UtilityUpdateOutput {
 }
 
 input UtilityUpdateUpdateInput {
-  Vendor: VendorInput
   _id: String
+  _vender: VendorInput
   created: DateTime
   description: String
   name: String
@@ -3146,16 +3147,16 @@ input VendorUpdateUpdateInput {
 }
 
 type linkedUser {
-  User: User
   _id: String
+  _user: User
   created: DateTime
   externalId: String
   type: String
 }
 
 input linkedUserCreateFormInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   externalId: String
   type: String
@@ -3167,8 +3168,8 @@ input linkedUserCreateInput {
 }
 
 input linkedUserCreateManyFormInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   externalId: String
   type: String
@@ -3267,8 +3268,8 @@ type linkedUserGetOutput {
 }
 
 input linkedUserInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   externalId: String
   type: String
@@ -3331,8 +3332,8 @@ type linkedUserUpdateOutput {
 }
 
 input linkedUserUpdateUpdateInput {
-  User: UserInput
   _id: String
+  _user: UserInput
   created: DateTime
   externalId: String
   type: String

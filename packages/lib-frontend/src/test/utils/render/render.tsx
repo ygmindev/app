@@ -12,7 +12,7 @@ export const render = async (params: RenderParamsModel): Promise<RenderModel> =>
   const config = internationalizeConfig.config();
   return _render({
     ...params,
-    Wrapper: ({children}) => (
+    Wrapper: ({ children }) => (
       <Root context={{ [LOCALE]: { i18n: config, lang: config.language } }}>
         <Router routes={[{ element: children, pathname: '/' }]} />
       </Root>

@@ -10,7 +10,6 @@ import {
   type GroupModel,
 } from '@lib/shared/group/resources/Group/Group.models';
 import { type GroupImplementationModel } from '@lib/shared/group/resources/Group/GroupImplementation/GroupImplementation.models';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 
 @withContainer({ name: `${GROUP_RESOURCE_NAME}Implementation` })
 export class GroupImplementation
@@ -23,8 +22,8 @@ export class GroupImplementation
         output.result?._id &&
           (await accessCreate({
             form: {
-              [GROUP_RESOURCE_NAME]: { _id: output.result._id },
-              [USER_RESOURCE_NAME]: { _id: userId },
+              _group: { _id: output.result._id },
+              _user: { _id: userId },
               role: [ACCESS_ROLE_MORE.ADMIN],
             },
           }));

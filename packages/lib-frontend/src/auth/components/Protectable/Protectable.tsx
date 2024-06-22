@@ -1,6 +1,5 @@
 import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
 import { type ProtectablePropsModel } from '@lib/frontend/auth/components/Protectable/Protectable.models';
-import { type SignInPageParamsModel } from '@lib/frontend/auth/pages/SignInPage/SignInPage.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { Redirect } from '@lib/frontend/route/components/Redirect/Redirect';
@@ -12,8 +11,8 @@ export const Protectable: FCModel<ProtectablePropsModel> = ({ children }) => {
   const [isOffline] = useStore('app.isOffline');
   const { location } = useRouter();
   return !isOffline && authStatus === AUTH_STATUS.UNAUTHENTICATED ? (
-    <Redirect<SignInPageParamsModel>
-      context={{ redirectTo: location.pathname }}
+    <Redirect
+      params={{ redirect: location }}
       pathname={SIGN_IN}
     />
   ) : (

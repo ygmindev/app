@@ -11,7 +11,6 @@ import isString from 'lodash/isString';
 export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
   const { back, getPath, isActive, location, push, replace } = _useRouter<TType>();
   const [, isBackSet] = useStore('route.isBack');
-  const [, previousSet] = useStore('route.previous');
   const [isLoading] = useStore('app.isLoading');
   const theme = useTheme();
 
@@ -20,8 +19,6 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
     { isBack }: Pick<RouteUpdateModel<TTypeNext>, 'isBack'>,
   ): Promise<void> => {
     if (!isLoading) {
-      await sleep(100);
-      previousSet({ pathname: location.pathname });
       if (isBack) {
         isBackSet(true);
         await sleep();
@@ -72,8 +69,7 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
       void update(
         () =>
           push({
-            context: { previous: location.pathname },
-            params,
+            params: { ...params, previous: location },
             pathname: trimPathname(`${getRoot(root)}${pathname}`),
           }),
         { isBack },
@@ -89,8 +85,7 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
       void update(
         () =>
           replace({
-            context: { previous: location.pathname },
-            params,
+            params: { ...params, previous: location },
             pathname: trimPathname(`${getRoot(root)}${pathname}`),
           }),
         { isBack },

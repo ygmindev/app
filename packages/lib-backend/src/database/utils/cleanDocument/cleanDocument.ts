@@ -25,9 +25,7 @@ export const cleanDocument = <TType extends unknown>(
   cleanObject(value, {
     keyValueTransformer: <TValue extends unknown>(v: TValue, k: string, depth?: number) => {
       let vF = v;
-      if ((vF as { entity: TValue }).entity) {
-        vF = (vF as { entity: TValue }).entity;
-      }
+      (vF as { entity: TValue })?.entity && (vF = (vF as { entity: TValue }).entity);
       return (
         depth === 0 && isPlainObject(vF) && isEqual(Object.keys(vF as object), ['_id'])
           ? resolveObjectId((vF as EntityResourceModel)._id)
