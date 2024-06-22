@@ -55,7 +55,7 @@ export const useErrorContext = (): UseErrorContextModel => {
           : ERROR_TYPE.NOTIFICATION);
       typeF === ERROR_TYPE.FALLBACK
         ? errorContextSet(errorContext)
-        : notify({
+        : void notify({
             description: errorContext.description ? t(errorContext.description) : undefined,
             icon: errorContext.icon,
             title: errorContext.title ? t(errorContext.title) : undefined,

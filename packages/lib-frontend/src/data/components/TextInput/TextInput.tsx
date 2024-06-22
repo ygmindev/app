@@ -9,7 +9,6 @@ import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
-import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
@@ -90,10 +89,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         elementState,
         onElementStateChange,
       });
-
-    useChange(elementState, () => {
-      void handleFocus(elementState === ELEMENT_STATE.ACTIVE);
-    });
 
     const sizeF = size ?? THEME_SIZE.MEDIUM;
 

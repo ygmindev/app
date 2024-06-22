@@ -3,20 +3,22 @@ import {
   type OtpInputPropsModel,
   type OtpInputRefModel,
 } from '@lib/frontend/auth/components/OtpInput/OtpInput.models';
+import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Link } from '@lib/frontend/core/components/Link/Link';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
+import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { type MeasureModel, type RLFCModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
-import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
+import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
@@ -24,7 +26,7 @@ import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { withId } from '@lib/shared/core/utils/withId/withId';
 import range from 'lodash/range';
 import toNumber from 'lodash/toNumber';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 const otpLength = toNumber(process.env.SERVER_APP_OTP_LENGTH);
 
@@ -53,8 +55,10 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
       onChange,
       value,
     });
-    const { elementStateControlled, elementStateControlledSet, isActive, isLoading } =
-      useElementStateControlled({ elementState, onElementStateChange });
+    const { elementStateControlledSet, isActive, isBlocked, isLoading } = useElementStateControlled(
+      { elementState, onElementStateChange },
+    );
+    const [measure, measureSet] = useState<MeasureModel>();
 
     return (
       <Wrapper
@@ -62,21 +66,11 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
         isCenter
         isFullWidth
         s>
-        <FocusableWrapper
-          elementState={elementStateControlled}
-          isOverflowHidden
+        <Wrapper
+          isAlign
           isRow
-          pHorizontal
+          onMeasure={measureSet}
           position={SHAPE_POSITION.RELATIVE}>
-          <Appearable
-            isAbsoluteFill
-            isActive={isLoading}
-            isCenter
-            position={SHAPE_POSITION.ABSOLUTE}
-            zIndex={2}>
-            <Loading size={THEME_SIZE.SMALL} />
-          </Appearable>
-
           <Wrapper
             isAbsoluteFill
             opacity={0}
@@ -101,43 +95,63 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
           </Wrapper>
 
           {IDS.map(({ id }, i) => (
-            <Wrapper
+            <TextInput
+              elementState={
+                isActive && i === Math.min((valueControlled ?? '').length, otpLength - 1)
+                  ? ELEMENT_STATE.ACTIVE
+                  : undefined
+              }
+              error={!!error}
+              isCenter
+              isNoClear
               key={id}
-              position={SHAPE_POSITION.RELATIVE}>
-              <TextInput
-                error={!!error}
-                isCenter
-                isNoClear
-                isTransparent
-                size={THEME_SIZE.MEDIUM}
-                value={(valueControlled && valueControlled[i]) ?? ''}
-                width={theme.shape.size[THEME_SIZE.MEDIUM]}
-              />
-
-              <Wrapper
-                animation={{
-                  states: {
-                    [ELEMENT_STATE.ACTIVE]: {
-                      backgroundColor: theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN],
-                    },
-                    [ELEMENT_STATE.INACTIVE]: { backgroundColor: theme.color.border },
-                  },
-                }}
-                bottom={0}
-                elementState={
-                  isActive && i === Math.min((valueControlled ?? '').length, otpLength - 1)
-                    ? ELEMENT_STATE.ACTIVE
-                    : ELEMENT_STATE.INACTIVE
-                }
-                height={2}
-                left={0}
-                m={THEME_SIZE.SMALL}
-                position={SHAPE_POSITION.ABSOLUTE}
-                right={0}
-              />
-            </Wrapper>
+              size={THEME_SIZE.MEDIUM}
+              value={(valueControlled && valueControlled[i]) ?? ''}
+              width={theme.shape.size[THEME_SIZE.MEDIUM]}
+            />
           ))}
-        </FocusableWrapper>
+
+          <Wrapper
+            isAlign
+            isRow
+            left={(measure?.width ?? 0) + theme.shape.spacing[THEME_SIZE.SMALL]}
+            position={SHAPE_POSITION.ABSOLUTE}
+            zIndex>
+            <Wrapper position={SHAPE_POSITION.RELATIVE}>
+              <Appearable
+                bottom={0}
+                isActive={!!error && isAsyncText(error)}
+                isCenter
+                left={0}
+                top={0}>
+                <Tooltip color={THEME_COLOR.ERROR}>{error}</Tooltip>
+              </Appearable>
+
+              <Appearable
+                bottom={0}
+                isActive={!isBlocked && (valueControlled?.length ?? 0) > 0}
+                isCenter
+                left={0}
+                position={SHAPE_POSITION.ABSOLUTE}
+                top={0}>
+                <Button
+                  icon="times"
+                  onPress={() => valueControlledSet('')}
+                />
+              </Appearable>
+
+              <Appearable
+                bottom={0}
+                isActive={isLoading}
+                isCenter
+                left={0}
+                position={SHAPE_POSITION.ABSOLUTE}
+                top={0}>
+                <Loading size={THEME_SIZE.SMALL} />
+              </Appearable>
+            </Wrapper>
+          </Wrapper>
+        </Wrapper>
 
         <Link
           align={FONT_ALIGN.CENTER}

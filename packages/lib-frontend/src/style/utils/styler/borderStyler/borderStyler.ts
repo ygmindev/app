@@ -1,6 +1,3 @@
-import isNumber from 'lodash/isNumber';
-import isPlainObject from 'lodash/isPlainObject';
-
 import { CORNER, DIRECTION } from '@lib/frontend/core/core.constants';
 import { type CornerModel } from '@lib/frontend/core/core.models';
 import { THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
@@ -8,6 +5,8 @@ import { type ThemeColorModel, type ThemeSizeModel } from '@lib/frontend/style/s
 import { type BorderStylerParamsModel } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.models';
 import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import isNumber from 'lodash/isNumber';
+import isPlainObject from 'lodash/isPlainObject';
 
 export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   { border, borderColor, borderRole = THEME_ROLE.MAIN, borderWidth = 1, isShadow, round },
@@ -18,10 +17,10 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
     (value === true
       ? theme.shape.borderRadius[THEME_SIZE.MEDIUM]
       : isNumber(value)
-      ? value
-      : value && isPlainObject(value) && key
-      ? getBorderRadius(value[key as keyof typeof value])
-      : undefined);
+        ? value
+        : value && isPlainObject(value) && key
+          ? getBorderRadius(value[key as keyof typeof value])
+          : undefined);
 
   const colorF = theme.color.palette[borderColor as ThemeColorModel];
   const borderColorF = colorF ? colorF[borderRole] : theme.color.border;

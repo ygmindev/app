@@ -7,8 +7,6 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 
 export const OtpForm: LFCModel<OtpFormPropsModel> = ({
   data,
@@ -23,15 +21,6 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
   return (
     <FormContainer
       {...wrapperProps}
-      errorContextGet={(e) =>
-        (e as HttpError).statusCode === HTTP_STATUS_CODE.UNAUTHORIZED
-          ? {
-              description: ({ t }) => t('auth:wrongOtp'),
-              icon: 'ban',
-              title: ({ t }) => t('auth:wrongOtp'),
-            }
-          : undefined
-      }
       fields={[{ element: <OtpInput onBack={onBack} />, id: 'otp' }]}
       flex
       isButton={false}

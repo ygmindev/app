@@ -34,6 +34,7 @@ export const StepForm = <TType, TResult = void>({
   initialValues,
   isProgress,
   onElementStateChange,
+  onError,
   onSubmit,
   onSuccess,
   redirect,
@@ -58,7 +59,7 @@ export const StepForm = <TType, TResult = void>({
     isLoading: isLoadingF,
     values,
     valuesSet,
-  } = useForm<TType, TResult>({ initialValues, onSubmit, onSuccess, redirect });
+  } = useForm<TType, TResult>({ initialValues, onError, onSubmit, onSuccess, redirect });
 
   const handleCurrentSet = async (value: number): Promise<void> => {
     currentSet(value);
@@ -146,7 +147,6 @@ export const StepForm = <TType, TResult = void>({
                   flex
                   isCenter
                   onElementStateChange={onElementStateChange}
-                  validators={validators as FormValidatorsModel<PartialModel<TType>>}
                 />
               ) : (
                 element
@@ -171,6 +171,9 @@ export const StepForm = <TType, TResult = void>({
                           isLoadingSet(false);
                           elementF.props.onComplete && elementF.props.onComplete();
                         },
+                        onError: (error: Error) => {
+                          elementF.props.onError && elementF.props.onError(error);
+                        },
                         onSubmit: async (stepValues: PartialModel<TType>) => {
                           isLoadingSet(true);
                           elementF.props.onSubmit && (await elementF.props.onSubmit(stepValues));
@@ -186,6 +189,10 @@ export const StepForm = <TType, TResult = void>({
                         },
                         onValidate: (e?: FormErrorModel<PartialModel<TType>>) =>
                           !isEmpty(e) && isValidSet({ ...isValid, [id]: false }),
+                        validators: {
+                          ...elementF.props.validators,
+                          ...validators,
+                        } as FormValidatorsModel<PartialModel<TType>>,
                       })}
                     </Wrapper>
                   ),

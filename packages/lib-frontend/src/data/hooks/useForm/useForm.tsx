@@ -35,6 +35,8 @@ export const useForm = <TType, TResult = void>({
 
   const handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
+      form.errorsSet(undefined);
+
       const valuesF = cleanObject(values);
       if (isValidateChanged && isEqual(valuesF, initialValues)) {
         const error = Error(t('core:validateChanged'));
@@ -56,7 +58,7 @@ export const useForm = <TType, TResult = void>({
     return null;
   };
 
-  return _useForm<TType, TResult>({
+  const form = _useForm<TType, TResult>({
     initialValues,
     onSubmit: handleSubmit,
     onValidate: async (data) => {
@@ -65,4 +67,6 @@ export const useForm = <TType, TResult = void>({
       return error;
     },
   });
+
+  return form;
 };

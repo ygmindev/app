@@ -181,7 +181,7 @@ const FormContainerF = forwardRef(
       element: cloneElement(element, {
         defaultValue: initialValues ? initialValues[id] : undefined,
         elementState: elementStateF ?? element.props.elementState,
-        error: errors ? errors[id] : undefined,
+        error: errors?.[id],
         key: id,
         onChange: (v) => {
           element.props.onChange && void element.props.onChange(v);

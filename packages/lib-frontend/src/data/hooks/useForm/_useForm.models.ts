@@ -12,7 +12,7 @@ export type _UseFormParamsModel<TType, TResult = void> = Pick<
 export type _UseFormModel<TType, TResult = void> = {
   data?: TResult | null;
   errors: FormErrorModel<TType>;
-  errorsSet(errors?: Error): void;
+  errorsSet(errors?: FormErrorModel<TType>): void;
   handleChange: <TKey extends StringKeyModel<TType>>(key: TKey) => (value: TType[TKey]) => void;
   handleReset(): void;
   handleSubmit(): void;

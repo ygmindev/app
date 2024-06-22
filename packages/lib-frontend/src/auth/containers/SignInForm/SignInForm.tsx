@@ -30,6 +30,16 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   return (
     <StepForm
       {...props}
+      // errorContextGet={(e) => {
+      //   console.warn(e);
+      //   return (e as HttpError).statusCode === HTTP_STATUS_CODE.UNAUTHORIZED
+      //     ? {
+      //         description: ({ t }) => t('auth:wrongOtp'),
+      //         icon: 'ban',
+      //         title: ({ t }) => t('auth:wrongOtp'),
+      //       }
+      //     : undefined;
+      // }}
       onSubmit={handleSubmit}
       redirect={location.params?.redirect ?? { pathname: '/' }}
       steps={[
