@@ -8,17 +8,17 @@ import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/Pr
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ isRepository: true, name: ORDER_RESOURCE_NAME })
+@withEntity({ isDatabase: true, name: ORDER_RESOURCE_NAME })
 export class Order extends EntityResource implements OrderModel {
   @withField({
     Resource: () => ProductItem,
     isArray: true,
     isOptional: true,
-    isRepository: true,
+    isDatabase: true,
     type: PROPERTY_TYPE.RESOURCE,
   })
   items?: Array<PartialModel<ProductItemModel>>;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
   paymentMethodId?: string;
 }

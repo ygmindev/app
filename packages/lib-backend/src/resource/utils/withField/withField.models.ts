@@ -9,7 +9,7 @@ export type WithFieldParamsModel<TType extends unknown> = {
   expire?: number;
   isArray?: boolean;
   isOptional?: boolean;
-  isRepository?: boolean;
+  isDatabase?: boolean;
   isSchema?: boolean;
   isUnique?: boolean;
   name?: string;

@@ -12,21 +12,17 @@ import {
   type GroupTypeModel,
 } from '@lib/shared/group/resources/Group/Group.models';
 
-@withEntity({ isRepository: true, name: GROUP_RESOURCE_NAME })
+@withEntity({ isDatabase: true, name: GROUP_RESOURCE_NAME })
 export class Group extends EntityResource implements GroupModel {
-  @withEmbeddedResourceField({
-    Resource: () => Role,
-    isRepository: true,
-    root: GROUP_RESOURCE_NAME,
-  })
+  @withEmbeddedResourceField({ Resource: () => Role, isDatabase: true, root: '_group' })
   [ROLE_RESOURCE_NAME]?: Array<RoleModel>;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 
-  @withField({ isArray: true, isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isArray: true, isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   types?: Array<GroupTypeModel>;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   logo?: string;
 }

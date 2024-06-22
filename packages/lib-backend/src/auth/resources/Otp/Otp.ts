@@ -10,43 +10,43 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: `${OTP_RESOURCE_NAME}Form` })
 export class OtpForm implements OtpFormModel {
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   callingCode?: string;
 
   @withField({ type: DATA_TYPE.BOOLEAN })
   checkExists?: boolean;
 
-  @withField({ isRepository: true, isUnique: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isUnique: true, type: DATA_TYPE.STRING })
   email?: string;
 
-  @withField({ isRepository: true, isUnique: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isUnique: true, type: DATA_TYPE.STRING })
   phone?: string;
 }
 
 @withEntity({
   indices: [{ keys: ['email', 'phone'], type: 'text' }],
-  isRepository: true,
+  isDatabase: true,
   name: OTP_RESOURCE_NAME,
 })
 export class Otp extends EntityResource implements OtpModel {
   @withField({
     defaultValue: () => new Date(),
     expire: DATABASE_CONFIG.expireSeconds,
-    isRepository: true,
+    isDatabase: true,
     type: DATA_TYPE.DATE,
   })
   declare created: Date;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
   callingCode?: string;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
   email?: string;
 
   @withAccess({ level: ACCESS_LEVEL.RESTRICTED })
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   otp!: string;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
   phone?: string;
 }

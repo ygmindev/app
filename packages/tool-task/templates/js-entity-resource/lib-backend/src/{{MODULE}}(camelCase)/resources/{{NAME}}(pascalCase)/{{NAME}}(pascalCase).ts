@@ -8,9 +8,9 @@ import {
 } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ isRepository: true, name: {{NAME}}(constantCase)_RESOURCE_NAME })
+@withEntity({ isDatabase: true, name: {{NAME}}(constantCase)_RESOURCE_NAME })
 export class {{NAME}}(pascalCase) extends EntityResource implements {{NAME}}(pascalCase)Model {
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 }
 

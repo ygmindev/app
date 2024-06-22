@@ -5,7 +5,6 @@ import {
   ACCESS_ROLE_MORE,
 } from '@lib/shared/auth/resources/Access/Access.constants';
 import { type AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 
 export const ACCESS_RESOURCE_PARAMS = {
   fields: [
@@ -18,7 +17,7 @@ export const ACCESS_RESOURCE_PARAMS = {
     {
       field: () => <UserInput />,
       fields: [{ id: '_id' }, { id: 'first' }, { id: 'last' }, { id: 'email' }, { id: 'phone' }],
-      id: USER_RESOURCE_NAME,
+      id: '_user',
     },
   ],
   name: ACCESS_RESOURCE_NAME,

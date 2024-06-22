@@ -17,6 +17,7 @@ export const _useQuery = <TParams = undefined, TResult = void>(
     queryFn: () => callback(params),
     queryKey: [id, params],
     refetchOnMount: false,
+    refetchOnReconnect: false,
     retry: false,
     staleTime: cache,
   });

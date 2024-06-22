@@ -20,41 +20,37 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({
   indices: [{ keys: ['first', 'last', 'email', 'phone'], type: 'text' }],
-  isRepository: true,
+  isDatabase: true,
   name: USER_RESOURCE_NAME,
 })
 export class User extends EntityResource implements UserModel {
-  @withEmbeddedResourceField({ Resource: () => Bank, isRepository: true, root: USER_RESOURCE_NAME })
+  @withEmbeddedResourceField({ Resource: () => Bank, isDatabase: true, root: '_user' })
   [BANK_RESOURCE_NAME]?: Array<BankModel>;
 
-  @withEmbeddedResourceField({ Resource: () => Card, isRepository: true, root: USER_RESOURCE_NAME })
+  @withEmbeddedResourceField({ Resource: () => Card, isDatabase: true, root: '_user' })
   [CARD_RESOURCE_NAME]?: Array<CardModel>;
 
-  @withEmbeddedResourceField({
-    Resource: () => LinkedUser,
-    isRepository: true,
-    root: USER_RESOURCE_NAME,
-  })
+  @withEmbeddedResourceField({ Resource: () => LinkedUser, isDatabase: true, root: '_user' })
   [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
 
-  @withEmbeddedResourceField({ Resource: () => PaymentMethod, root: USER_RESOURCE_NAME })
+  @withEmbeddedResourceField({ Resource: () => PaymentMethod, root: '_user' })
   [PAYMENT_METHOD_RESOURCE_NAME]?: Array<PaymentMethodModel>;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   callingCode?: string;
 
-  @withField({ isOptional: true, isRepository: true, isUnique: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, isUnique: true, type: DATA_TYPE.STRING })
   email?: string;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   paymentMethodPrimary?: string;
 
-  @withField({ isOptional: true, isRepository: true, isUnique: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, isUnique: true, type: DATA_TYPE.STRING })
   phone?: string;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   first?: string;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   last?: string;
 }

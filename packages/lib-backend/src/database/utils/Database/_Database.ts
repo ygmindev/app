@@ -141,6 +141,8 @@ export class _Database implements _DatabaseModel {
       get: async ({ filter, options } = {}) => {
         const em = this._getEntityManager();
         const filterF = cleanDocument(getFilter<TType>(filter));
+        console.warn(filter);
+        console.warn(filterF);
         const collection = em.getCollection(name);
         const result = (await (options?.aggregate
           ? collection

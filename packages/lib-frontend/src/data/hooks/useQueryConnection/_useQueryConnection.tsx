@@ -14,7 +14,6 @@ export const _useQueryConnection = <TParams = undefined, TResult = void>(
 ): _UseQueryConnectionModel<TResult> => {
   const limit = options?.limit || USE_QUERY_CONNECTION_LIMIT_DEFAULT;
   const cache = isNumber(options?.cache) ? options?.cache : 0;
-
   const queryClient = useQueryClient();
   const { data, fetchNextPage } = useInfiniteQuery<ConnectionModel<TResult> | null, Error>({
     gcTime: cache,
@@ -31,6 +30,8 @@ export const _useQueryConnection = <TParams = undefined, TResult = void>(
     queryFn: async ({ pageParam }) => callback(pageParam as PaginationModel),
     queryKey: [id, params],
     refetchOnMount: false,
+    refetchOnReconnect: false,
+    retry: false,
     staleTime: cache,
   });
 

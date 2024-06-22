@@ -38,7 +38,7 @@ export const ResourceTable = <
 > => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { create, getConnection, remove, search } = implementation;
+  const { create, getConnection, remove } = implementation;
   const [params, paramsSet] = useState<InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>>();
 
   const handleSubmit = async (

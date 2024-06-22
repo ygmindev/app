@@ -1,16 +1,16 @@
 import { type _QueryConfigModel, type QueryConfigModel } from '@lib/config/query/query.models';
 
-export const _query = ({ cacheTime }: QueryConfigModel): _QueryConfigModel => ({
+export const _query = ({ cacheTime, cacheTimeDefault }: QueryConfigModel): _QueryConfigModel => ({
   mutations: {
-    gcTime: cacheTime,
+    gcTime: cacheTimeDefault,
     retry: false,
   },
   queries: {
-    gcTime: cacheTime,
+    gcTime: cacheTimeDefault,
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
     retry: false,
-    staleTime: cacheTime,
+    staleTime: cacheTimeDefault,
   },
 });

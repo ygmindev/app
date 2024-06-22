@@ -9,7 +9,7 @@ import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 export const withEmbeddedResourceField =
   <TType extends unknown>({
     Resource,
-    isRepository,
+    isDatabase,
     root,
   }: WithEmbeddedResourceFieldParamsModel<TType>): WithEmbeddedResourceFieldModel =>
   (target, propertyKey) =>
@@ -17,7 +17,7 @@ export const withEmbeddedResourceField =
       Resource,
       isArray: true,
       isOptional: true,
-      isRepository,
+      isDatabase,
       relation: FIELD_RELATION.ONE_TO_MANY,
       root,
       type: PROPERTY_TYPE.RESOURCE,

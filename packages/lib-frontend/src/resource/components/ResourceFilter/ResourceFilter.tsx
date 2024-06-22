@@ -72,7 +72,7 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
     ? async (filters: TType): Promise<TResult | null> =>
         onSubmit(
           Object.values(filters as Record<string, Array<FilterModel<TType>>>).reduce(
-            (result, v) => [...result, ...v.filter((vv) => !isNil(vv.value))],
+            (result, v) => [...result, ...(v ? v.filter((vv) => !isNil(vv.value)) : [])],
             [],
           ),
         )

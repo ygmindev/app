@@ -43,6 +43,8 @@ import {
 export const Table = forwardRef(
   <TType,>(
     {
+      columns,
+      data,
       elementState,
       emptyCell = '-',
       emptyElement,
@@ -51,6 +53,8 @@ export const Table = forwardRef(
       isRemovable,
       onChange,
       onRemove,
+      onSelect,
+      select,
       validators,
       ...props
     }: RLFCPropsModel<TableRefModel, TablePropsModel<TType>>,
@@ -59,7 +63,13 @@ export const Table = forwardRef(
     const { t } = useTranslation();
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props });
-    const { headers, rows } = useTable(props);
+    const { headers, rows } = useTable({
+      columns,
+      data,
+      isFullWidth,
+      onSelect,
+      select,
+    });
     const validate = useValidator();
     const [errors, errorsSet] = useState<Record<string, FormErrorModel<TType>>>();
 
@@ -81,15 +91,17 @@ export const Table = forwardRef(
     const handleRemove = onChange
       ? (i: number) => {
           if (onRemove) {
-            const row = props.data?.[i];
+            const row = data?.[i];
             row && void onRemove(row);
           } else {
-            const newValue = cloneDeep(props.data);
+            const newValue = cloneDeep(data);
             newValue?.splice(i, 1);
             onChange(newValue);
           }
         }
       : undefined;
+
+    console.warn(rows);
 
     return rows?.length ? (
       <Wrapper
@@ -166,7 +178,7 @@ export const Table = forwardRef(
                       row.id && cell.columnId && getValue(errors, `${row.id}.${cell.columnId}`),
                     onChange: onChange
                       ? <TKey extends StringKeyModel<TType>>(value: TType[TKey]) => {
-                          const newValue = cloneDeep(props.data);
+                          const newValue = cloneDeep(data);
                           cell.columnId && newValue && (newValue[i][cell.columnId] = value);
                           onChange(newValue);
                           onChangeF && onChangeF(value);

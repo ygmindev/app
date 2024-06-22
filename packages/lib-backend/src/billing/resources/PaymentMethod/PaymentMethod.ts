@@ -10,26 +10,25 @@ import {
   type PaymentMethodTypeModel,
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ name: PAYMENT_METHOD_RESOURCE_NAME })
 export class PaymentMethod extends EmbeddedResource implements PaymentMethodModel {
   @withRefField({ Resource: () => User })
-  [USER_RESOURCE_NAME]!: RefFieldModel<UserModel>;
+  _user!: RefFieldModel<UserModel>;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   externalId!: string;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   fingerprint?: string;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   last4!: string;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   type!: PaymentMethodTypeModel;
 }

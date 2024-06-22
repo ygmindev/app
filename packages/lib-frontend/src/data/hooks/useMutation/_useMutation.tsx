@@ -15,6 +15,7 @@ export const _useMutation = <TParams = undefined, TResult = void>(
     mutationFn: callback,
     mutationKey: [id],
     onMutate: async () => queryClient.cancelQueries({ queryKey: [id] }),
+    retry: false,
   });
   return {
     data,

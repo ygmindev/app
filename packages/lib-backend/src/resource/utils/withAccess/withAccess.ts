@@ -30,7 +30,7 @@ export const getAccessRole = (
 };
 
 export const withAccess = ({
-  level = ACCESS_LEVEL.PUBLIC,
+  level = ACCESS_LEVEL.RESTRICTED,
 }: WithAccessParamsModel): WithAccessModel =>
   withCondition(
     () => level !== ACCESS_LEVEL.PUBLIC,

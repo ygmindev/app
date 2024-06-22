@@ -8,7 +8,7 @@ export const withEntity = <TType extends unknown>({
   indices = [],
   isAbstract = false,
   isEmbeddable = false,
-  isRepository = false,
+  isDatabase = false,
   isSchema = true,
   isSchemaInput = true,
   name,
@@ -20,7 +20,7 @@ export const withEntity = <TType extends unknown>({
     const nameF = name ?? (Base as ClassModel).name;
     isSchema && ObjectType(nameF)(Base as unknown as ClassModel);
     isSchemaInput && InputType(`${nameF}Input`)(Base as unknown as ClassModel);
-    let BaseF = isRepository
+    let BaseF = isDatabase
       ? (isEmbeddable ? Embeddable : Entity)({
           abstract: isAbstract,
           collection: nameF,

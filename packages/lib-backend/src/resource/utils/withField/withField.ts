@@ -120,7 +120,7 @@ export const withField =
     expire,
     isArray,
     isOptional,
-    isRepository = false,
+    isDatabase = false,
     isSchema = true,
     isUnique,
     name,
@@ -138,7 +138,7 @@ export const withField =
     isSchema &&
       getField({ Resource, isArray, isOptional, name, relation, root, type })(target, propertyKey);
 
-    isRepository &&
+    isDatabase &&
       getColumn({ Resource, defaultValue, isArray, isOptional, name, relation, root, type })(
         target,
         propertyKey,

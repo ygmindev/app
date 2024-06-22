@@ -8,30 +8,30 @@ import { type TestableEmbeddedResourceModel } from '@lib/shared/test/resources/T
 
 @withEntity({
   isEmbeddable: true,
-  isRepository: true,
+  isDatabase: true,
   name: TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME,
 })
 export class TestableEmbeddedResource
   extends EmbeddedResource
   implements TestableEmbeddedResourceModel
 {
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.NUMBER })
+  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.NUMBER })
   numberProperty?: number;
 
-  @withField({ isArray: true, isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isArray: true, isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
   stringArrayField?: Array<string>;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   stringField!: string;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
   stringFieldOptional?: string;
 
   @withField({
     defaultValue: () => new Date(),
     expire: DATABASE_CONFIG.expireSeconds,
     isOptional: true,
-    isRepository: true,
+    isDatabase: true,
     type: DATA_TYPE.DATE,
   })
   dateTtlProperty?: Date;

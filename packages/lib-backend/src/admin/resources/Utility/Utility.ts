@@ -10,24 +10,23 @@ import {
   type UtilityTypeModel,
   type UtilityUsageModel,
 } from '@lib/shared/admin/resources/Utility/Utility.models';
-import { VENDOR_RESOURCE_NAME } from '@lib/shared/admin/resources/Vendor/Vendor.constants';
 import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ isEmbeddable: true, isRepository: true, name: UTILITY_RESOURCE_NAME })
+@withEntity({ isEmbeddable: true, isDatabase: true, name: UTILITY_RESOURCE_NAME })
 export class Utility extends EmbeddedResource implements UtilityModel {
   @withRefField({ Resource: () => Vendor })
-  [VENDOR_RESOURCE_NAME]?: RefFieldModel<VendorModel>;
+  _vender?: RefFieldModel<VendorModel>;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
   description?: string;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   type!: UtilityTypeModel;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   usage!: UtilityUsageModel;
 }

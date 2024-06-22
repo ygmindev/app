@@ -11,6 +11,6 @@ export const mail = async <TType extends unknown>({
   if (process.env.NODE_ENV === 'production') {
     return _mail({ ...params });
   }
-  logger.debug(params);
+  logger.info(params);
   return true;
 };

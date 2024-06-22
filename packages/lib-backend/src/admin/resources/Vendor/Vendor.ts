@@ -12,19 +12,15 @@ import {
 } from '@lib/shared/admin/resources/Vendor/Vendor.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ isRepository: true, name: VENDOR_RESOURCE_NAME })
+@withEntity({ isDatabase: true, name: VENDOR_RESOURCE_NAME })
 export class Vendor extends EntityResource implements VendorModel {
-  @withEmbeddedResourceField({
-    Resource: () => Utility,
-    isRepository: true,
-    root: VENDOR_RESOURCE_NAME,
-  })
+  @withEmbeddedResourceField({ Resource: () => Utility, isDatabase: true, root: '_vender' })
   [UTILITY_RESOURCE_NAME]?: Array<UtilityModel>;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   imageSrc?: string;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 }
 

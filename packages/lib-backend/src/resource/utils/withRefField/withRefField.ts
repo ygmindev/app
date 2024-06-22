@@ -16,7 +16,7 @@ export const withRefField =
     withField({
       Resource,
       isOptional,
-      isRepository: true,
+      isDatabase: true,
       name,
       relation: FIELD_RELATION.MANY_TO_ONE,
       type: PROPERTY_TYPE.RESOURCE,

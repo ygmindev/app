@@ -12,22 +12,18 @@ import {
 } from '@lib/shared/commerce/resources/Product/Product.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ isRepository: true, name: PRODUCT_RESOURCE_NAME })
+@withEntity({ isDatabase: true, name: PRODUCT_RESOURCE_NAME })
 export class Product extends EntityResource implements ProductModel {
-  @withEmbeddedResourceField({
-    Resource: () => Pricing,
-    isRepository: true,
-    root: PRODUCT_RESOURCE_NAME,
-  })
+  @withEmbeddedResourceField({ Resource: () => Pricing, isDatabase: true, root: '_product' })
   [PRICING_RESOURCE_NAME]?: Array<PricingModel>;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   description?: string;
 
   @withField({ isArray: true, isOptional: true, type: DATA_TYPE.STRING })
   imageSrc?: Array<string>;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 }
 

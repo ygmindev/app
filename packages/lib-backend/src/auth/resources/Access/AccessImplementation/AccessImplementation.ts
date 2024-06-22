@@ -12,7 +12,6 @@ import { type AccessImplementationModel } from '@lib/shared/auth/resources/Acces
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 
 @withContainer({ name: `${ACCESS_RESOURCE_NAME}Implementation` })
 export class AccessImplementation
@@ -28,10 +27,7 @@ export class AccessImplementation
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel>> {
     const userId = context?.user?._id;
     if (userId) {
-      input.filter = [
-        ...(input.filter ?? []),
-        { field: USER_RESOURCE_NAME, value: { _id: userId } },
-      ];
+      input.filter = [...(input.filter ?? []), { field: '_user', value: { _id: userId } }];
       return this.getMany(input, context);
     }
     throw new UnauthenticatedError();

@@ -7,26 +7,25 @@ import { User } from '@lib/backend/user/resources/User/User';
 import { BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.constants';
 import { type BankModel } from '@lib/shared/billing/resources/Bank/Bank.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
-@withEntity({ indices: [{ keys: ['fingerprint'] }], isRepository: true, name: BANK_RESOURCE_NAME })
+@withEntity({ indices: [{ keys: ['fingerprint'] }], isDatabase: true, name: BANK_RESOURCE_NAME })
 export class Bank extends EmbeddedResource implements BankModel {
   @withRefField({ Resource: () => User })
-  [USER_RESOURCE_NAME]!: RefFieldModel<UserModel>;
+  _user!: RefFieldModel<UserModel>;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   externalId!: string;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
   fingerprint?: string;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   last4!: string;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 
-  // @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  // @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   // type!: PAYMENT_METHOD_TYPE.BANK;
 }

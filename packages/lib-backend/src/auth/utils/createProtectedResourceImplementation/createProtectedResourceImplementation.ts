@@ -20,7 +20,6 @@ import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constan
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { ObjectId } from 'mongodb';
 
 export const createProtectedResoureImplementation = <
@@ -45,7 +44,7 @@ export const createProtectedResoureImplementation = <
       if (userId) {
         const accessAll = (
           await Container.get(AccessImplementation).getMany({
-            filter: [{ field: USER_RESOURCE_NAME, value: { _id: userId } }],
+            filter: [{ field: '_user', value: { _id: userId } }],
           })
         ).result;
         if (accessAll) {
@@ -61,9 +60,9 @@ export const createProtectedResoureImplementation = <
     }
 
     async Group(self: TType): Promise<PartialModel<GroupModel> | null> {
-      if (self.Group) {
+      if (self._group) {
         const { result } = await this._groupImplementation.get({
-          filter: [{ field: '_id', value: self.Group }],
+          filter: [{ field: '_id', value: self._group }],
         });
         if (result) {
           return result;

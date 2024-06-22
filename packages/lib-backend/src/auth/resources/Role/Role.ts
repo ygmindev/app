@@ -7,14 +7,13 @@ import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefFi
 import { ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constants';
 import { type RoleModel } from '@lib/shared/auth/resources/Role/Role.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
-import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
 import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 
-@withEntity({ isEmbeddable: true, isRepository: true, name: ROLE_RESOURCE_NAME })
+@withEntity({ isEmbeddable: true, isDatabase: true, name: ROLE_RESOURCE_NAME })
 export class Role extends EmbeddedResource implements RoleModel {
   @withRefField({ Resource: () => Group })
-  [GROUP_RESOURCE_NAME]?: RefFieldModel<GroupModel>;
+  _group?: RefFieldModel<GroupModel>;
 
-  @withField({ isOptional: true, isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
   name?: string;
 }

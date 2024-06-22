@@ -10,17 +10,16 @@ import {
   type LinkedUserModel,
   type LinkedUserTypeModel,
 } from '@lib/shared/user/resources/LinkedUser/LinkedUser.models';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
-@withEntity({ isRepository: true, name: LINKED_USER_RESOURCE_NAME })
+@withEntity({ isDatabase: true, name: LINKED_USER_RESOURCE_NAME })
 export class LinkedUser extends EmbeddedResource implements LinkedUserModel {
   @withRefField({ Resource: () => User })
-  [USER_RESOURCE_NAME]!: RefFieldModel<UserModel>;
+  _user!: RefFieldModel<UserModel>;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   externalId!: string;
 
-  @withField({ isRepository: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   type!: LinkedUserTypeModel;
 }
