@@ -32,17 +32,7 @@ const IDS = withId(range(otpLength));
 
 export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forwardRef(
   (
-    {
-      elementState,
-      error,
-      onBack,
-      onChange,
-      onElementStateChange,
-      onSubmit,
-      testID,
-      value,
-      ...props
-    },
+    { elementState, onBack, onChange, onElementStateChange, onSubmit, testID, value, ...props },
     ref,
   ) => {
     const { t } = useTranslation([AUTH]);
@@ -105,7 +95,6 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
               key={id}
               position={SHAPE_POSITION.RELATIVE}>
               <TextInput
-                error={!!error}
                 isCenter
                 isNoClear
                 isTransparent
