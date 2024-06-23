@@ -1,6 +1,6 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
-import { type AccessResolverModel } from '@lib/backend/auth/resources/Access/AccessResolver/AccessResolver.models';
 import { AccessImplementation } from '@lib/backend/auth/resources/Access/AccessImplementation/AccessImplementation';
+import { type AccessResolverModel } from '@lib/backend/auth/resources/Access/AccessResolver/AccessResolver.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createProtectedResourceResolver } from '@lib/backend/resource/utils/createProtectedResourceResolver/createProtectedResourceResolver';

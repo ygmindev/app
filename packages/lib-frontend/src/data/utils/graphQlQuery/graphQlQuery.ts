@@ -48,8 +48,8 @@ export const graphqlQuery = <TParams, TResult, TName extends string>({
       .join(', ')})`;
   }
   return print(gql`
-    ${trimDeep(`${type} ${name}${paramsString} {
-      ${name}${paramsKeys} ${getGraphqlFields<TResult>(fields)}
-    }`)}
+    ${trimDeep(
+      `${type} ${name}${paramsString} { ${name}${paramsKeys} ${getGraphqlFields<TResult>(fields)} }`,
+    )}
   `);
 };
