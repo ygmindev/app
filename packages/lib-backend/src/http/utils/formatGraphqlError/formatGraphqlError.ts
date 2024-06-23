@@ -20,6 +20,6 @@ export const formatGraphqlError = (
       statusCode: originalError?.statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
     },
   });
-  logger.error(error);
+  logger.error(error.extensions.stack);
   return error;
 };

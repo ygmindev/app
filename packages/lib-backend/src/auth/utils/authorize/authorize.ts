@@ -12,7 +12,6 @@ export const authorize = async ({
   context,
   roles,
 }: AuthorizeParamsModel): Promise<AuthorizeModel> => {
-  console.warn(roles);
   if (roles?.length) {
     const userRole = pull(roles, ACCESS_ROLE.USER);
     if (userRole?.length) {
@@ -20,9 +19,8 @@ export const authorize = async ({
         const { result } = await Container.get(AccessImplementation).get({
           filter: [{ field: '_user', value: context.user._id }],
         });
-        console.warn(result);
         return result?.role
-          ? (roles as Array<AccessRoleMoreModel>).every(result.role?.includes)
+          ? (roles as Array<AccessRoleMoreModel>).every((v) => result.role?.includes(v))
           : false;
       }
       return false;

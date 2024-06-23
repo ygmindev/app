@@ -4,6 +4,7 @@ import { type FCModel } from '@lib/frontend/core/core.models';
 import { display } from '@lib/frontend/core/utils/display/display';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
+import { pubsub } from '@lib/shared/core/utils/PubSub/PubSub';
 import { useEffect } from 'react';
 
 export const AppProvider: FCModel<AppProviderPropsModel> = ({ children }) => {
@@ -18,6 +19,7 @@ export const AppProvider: FCModel<AppProviderPropsModel> = ({ children }) => {
     display.subscribeResize(update);
     return () => {
       display.unsubscribeResize(update);
+      pubsub.clear();
     };
   }, []);
 
