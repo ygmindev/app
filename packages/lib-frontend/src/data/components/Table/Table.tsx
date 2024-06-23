@@ -101,8 +101,6 @@ export const Table = forwardRef(
         }
       : undefined;
 
-    console.warn(rows);
-
     return rows?.length ? (
       <Wrapper
         {...wrapperProps}

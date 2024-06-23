@@ -32,6 +32,8 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
     const handleQuery = async (v?: string): Promise<Array<PartialModel<UserModel>>> =>
       v ? (await search({ query: v })).result ?? [] : [];
 
+    const formatUser = (v?: PartialModel<UserModel>): string => (v ? `${v.email}` : '');
+
     return (
       <DataBoundary
         {...wrapperProps}
@@ -39,12 +41,9 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
         id="users"
         params={query}
         query={handleQuery}>
-        {({ data, reset, setData }) => (
+        {({ data, reset }) => (
           <SearchInput
             label={t('user:user')}
-            onBlur={() => {
-              void setData([]);
-            }}
             onChange={(v) => {
               const user = v && data?.find((vv) => vv._id === v);
               valueControlledSet(user ? { _id: user._id } : undefined);
@@ -53,7 +52,13 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
               querySet(v);
               void reset();
             }}
-            options={data?.map(({ _id, email }) => ({ id: _id ?? uid(), label: email })) ?? []}
+            options={
+              data?.map((option) => ({ id: option._id ?? uid(), label: formatUser(option) })) ?? []
+            }
+            renderValue={(v) => {
+              const user = v && data?.find((vv) => vv._id === v);
+              return user ? formatUser(user) : '';
+            }}
             value={valueControlled?._id}
           />
         )}

@@ -57,7 +57,7 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
           });
         }
       } else {
-        logger.warn('Auth API key is missing');
+        logger.error('Auth API key is missing');
       }
     }
   },
