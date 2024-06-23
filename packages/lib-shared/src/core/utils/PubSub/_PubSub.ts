@@ -14,11 +14,11 @@ export class _PubSub implements _PubSubModel {
     this.emitter.all.clear();
   }
 
-  publish<TType extends unknown>(name: string, params: TType): void {
+  publish<TType extends unknown>(name: string, params?: TType): void {
     this.emitter.emit(name, params);
   }
 
-  subscribe<TType extends unknown>(name: string, handler: (params: TType) => void): void {
+  subscribe<TType extends unknown>(name: string, handler: (params?: TType) => void): void {
     this.emitter.on(name, handler as (params: unknown) => void);
   }
 
@@ -26,7 +26,7 @@ export class _PubSub implements _PubSubModel {
     this.emitter.off(name);
   }
 
-  waitFor<TType extends unknown>(name: string, timeout?: number): Promise<TType | null> {
+  waitFor<TType extends unknown>(name: string, timeout?: number): Promise<TType | undefined> {
     return new Promise((resolve, reject) => {
       timeout &&
         void sleep(timeout).then(() => {
@@ -35,7 +35,7 @@ export class _PubSub implements _PubSubModel {
         });
       this.subscribe(name, (params) => {
         this.unsubscribe(name);
-        resolve((params as TType) ?? null);
+        resolve((params as TType) ?? undefined);
       });
     });
   }

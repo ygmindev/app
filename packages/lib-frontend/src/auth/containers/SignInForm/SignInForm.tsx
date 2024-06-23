@@ -1,3 +1,4 @@
+import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
 import { OtpForm } from '@lib/frontend/auth/containers/OtpForm/OtpForm';
 import { type SignInFormPropsModel } from '@lib/frontend/auth/containers/SignInForm/SignInForm.models';
 import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm';
@@ -12,6 +13,7 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { type SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
+import { pubsub } from '@lib/shared/core/utils/PubSub/PubSub';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
 import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
@@ -26,8 +28,12 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   const { signIn, usernameUpdate } = useSignInResource();
   const { location } = useRouter();
 
-  const handleSubmit = async (form: SignInFormModel): Promise<void> =>
-    mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form);
+  const handleSubmit = async (form: SignInFormModel): Promise<void> => {
+    await Promise.all([
+      pubsub.waitFor(SIGN_IN),
+      mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form),
+    ]);
+  };
 
   return (
     <StepForm

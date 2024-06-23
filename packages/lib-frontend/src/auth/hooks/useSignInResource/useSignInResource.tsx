@@ -32,6 +32,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
   const { signInWithToken, signOut } = useSession();
 
   const signIn = async (signIn?: PartialModel<SignInModel>): Promise<void> => {
+    await handleSignOut();
     if (signIn) {
       const { token, user } = signIn;
       user && currentUserSet(user);
@@ -64,16 +65,18 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
   const { query } = useAppGraphql();
 
+  const handleSignOut = async (): Promise<void> => {
+    await signOut();
+    return reset();
+  };
+
   return {
     signIn: async (form) => {
       const { result } = await create({ form });
       await signIn(result);
     },
 
-    signOut: async () => {
-      await signOut();
-      return reset();
-    },
+    signOut: handleSignOut,
 
     userUpdate: async (input = {}) => {
       const name = `${SIGN_IN_USER}${RESOURCE_METHOD_TYPE.UPDATE}`;
