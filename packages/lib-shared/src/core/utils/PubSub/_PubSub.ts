@@ -1,4 +1,6 @@
+import { TimeoutError } from '@lib/shared/core/errors/TimeoutError/TimeoutError';
 import { type _PubSubModel } from '@lib/shared/core/utils/PubSub/_PubSub.models';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import mitt, { type Emitter } from 'mitt';
 
 export class _PubSub implements _PubSubModel {
@@ -20,7 +22,21 @@ export class _PubSub implements _PubSubModel {
     this.emitter.on(name, handler as (params: unknown) => void);
   }
 
-  unsubscribe<TType extends unknown>(name: string, handler: (params: TType) => void): void {
-    this.emitter.off(name, handler as (params: unknown) => void);
+  unsubscribe(name: string): void {
+    this.emitter.off(name);
+  }
+
+  waitFor<TType extends unknown>(name: string, timeout?: number): Promise<TType | null> {
+    return new Promise((resolve, reject) => {
+      timeout &&
+        void sleep(timeout).then(() => {
+          this.unsubscribe(name);
+          reject(new TimeoutError(name, timeout));
+        });
+      this.subscribe(name, (params) => {
+        this.unsubscribe(name);
+        resolve((params as TType) ?? null);
+      });
+    });
   }
 }
