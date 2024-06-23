@@ -17,7 +17,6 @@ export const RouteList: LFCModel<RouteListPropsModel> = ({ root, routes, title, 
         onPress: () => push({ pathname, root }),
         title: title ?? pathname,
       }))}
-      pTop
       title={title}
     />
   );

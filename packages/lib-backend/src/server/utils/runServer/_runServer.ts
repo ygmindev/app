@@ -1,5 +1,6 @@
-import { getUserFromHeader } from '@lib/backend/auth/utils/getUserFromHeader/getUserFromHeader';
+import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { formatGraphqlError } from '@lib/backend/http/utils/formatGraphqlError/formatGraphqlError';
 import {
   type _RunServerModel,
   type _RunServerParamsModel,
@@ -13,6 +14,7 @@ import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { fastify, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
+import { type GraphQLError } from 'graphql';
 import { createYoga } from 'graphql-yoga';
 import isArray from 'lodash/isArray';
 import toNumber from 'lodash/toNumber';
@@ -71,11 +73,19 @@ export const _runServer = async ({
         const yoga = createYoga({
           context: async ({ request }) => {
             const context: RequestContextModel = {};
-            const user = await getUserFromHeader(request.headers.get('authorization') ?? undefined);
+            const user = await getTokenFromHeader(
+              request.headers.get('authorization') ?? undefined,
+            );
             user && (context.user = user);
             return context;
           },
+          landingPage: false,
           logging: logger,
+          maskedErrors: {
+            maskError(error, message, isDev) {
+              return formatGraphqlError(error as GraphQLError);
+            },
+          },
           schema,
         });
 

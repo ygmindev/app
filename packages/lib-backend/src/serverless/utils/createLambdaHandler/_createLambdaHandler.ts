@@ -4,6 +4,7 @@ import {
   ApiGatewayManagementApiClient,
   PostToConnectionCommand,
 } from '@aws-sdk/client-apigatewaymanagementapi';
+import { formatGraphqlError } from '@lib/backend/http/utils/formatGraphqlError/formatGraphqlError';
 import { type ServerlessRequestContextModel } from '@lib/backend/serverless/serverless.models';
 import {
   type _CreateLambdaHandlerModel,
@@ -17,7 +18,6 @@ import {
 import { type LambdaResponseModel } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
 import { _graphql } from '@lib/config/graphql/_graphql';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
-import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import {
   type APIGatewayProxyEventV2,
@@ -51,14 +51,14 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
 
     // authentication from header / query parameters
     if (plugins?.includes(LAMBDA_PLUGIN.AUTHENTICATION)) {
-      const { getUserFromHeader } = await import(
-        '@lib/backend/auth/utils/getUserFromHeader/getUserFromHeader'
+      const { getTokenFromHeader } = await import(
+        '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader'
       );
 
       const eventF = event as APIGatewayProxyEventV2;
       const authorization =
         eventF.headers?.authorization ?? eventF.queryStringParameters?.Authorization;
-      const user = await getUserFromHeader(authorization);
+      const user = await getTokenFromHeader(authorization);
       user && (contextF.user = user);
       eventF.headers?.group && (contextF.group = eventF.headers.group);
     }
@@ -77,17 +77,8 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
     if (type === LAMBDA_TYPE.GRAPHQL && graphql) {
       const server = new ApolloServer({
         allowBatchedHttpRequests: true,
-        formatError: (e, originalError) => {
-          const originalErrorF = (originalError as GraphQLError)?.originalError as HttpError;
-          const errorF = new HttpError(
-            originalErrorF?.statusCode,
-            e.message ?? originalErrorF?.message,
-            (e.extensions?.stacktrace as string) ?? (e as Error)?.stack ?? originalErrorF.stack,
-          );
-          console.error(e);
-          console.error(errorF);
-          return errorF;
-        },
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        formatError: (e, originalError) => formatGraphqlError(e as GraphQLError),
         schema: _graphql(graphql),
       });
       const handlerF = startServerAndCreateLambdaHandler(

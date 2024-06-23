@@ -13,6 +13,8 @@ import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { type SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
+import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 
 export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   method,
@@ -30,16 +32,15 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   return (
     <StepForm
       {...props}
-      // errorContextGet={(e) => {
-      //   console.warn(e);
-      //   return (e as HttpError).statusCode === HTTP_STATUS_CODE.UNAUTHORIZED
-      //     ? {
-      //         description: ({ t }) => t('auth:wrongOtp'),
-      //         icon: 'ban',
-      //         title: ({ t }) => t('auth:wrongOtp'),
-      //       }
-      //     : undefined;
-      // }}
+      errorContextGet={(e) =>
+        (e as HttpError).statusCode === HTTP_STATUS_CODE.UNAUTHORIZED
+          ? {
+              description: ({ t }) => t('auth:wrongOtp'),
+              icon: 'ban',
+              title: ({ t }) => t('auth:wrongOtp'),
+            }
+          : undefined
+      }
       onSubmit={handleSubmit}
       redirect={location.params?.redirect ?? { pathname: '/' }}
       steps={[

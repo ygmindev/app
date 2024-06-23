@@ -22,20 +22,22 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
       onAuthenticate: async (signInToken, token) => {
         token && authTokenSet({ access: token });
         if (isMounted()) {
-          if (signInToken && currentUser?._id !== signInToken._id) {
-            let user: PartialModel<UserModel> | undefined = {
-              ...signInToken.claims,
-              _id: signInToken._id,
-            };
-            const { result } = await get({ filter: [{ field: '_id', value: signInToken._id }] });
-            user = result || undefined;
-            if (user) {
-              authStatusSet(AUTH_STATUS.AUTHENTICATED);
-            } else {
-              await signOut();
-              authStatusSet(AUTH_STATUS.UNAUTHENTICATED);
+          if (signInToken) {
+            if (currentUser?._id !== signInToken._id) {
+              let user: PartialModel<UserModel> | undefined = {
+                ...signInToken.claims,
+                _id: signInToken._id,
+              };
+              const { result } = await get({ filter: [{ field: '_id', value: signInToken._id }] });
+              user = result ?? undefined;
+              if (user) {
+                authStatusSet(AUTH_STATUS.AUTHENTICATED);
+              } else {
+                await signOut();
+                authStatusSet(AUTH_STATUS.UNAUTHENTICATED);
+              }
+              currentUserSet(user);
             }
-            currentUserSet(user);
           } else {
             authStatusSet(AUTH_STATUS.UNAUTHENTICATED);
           }

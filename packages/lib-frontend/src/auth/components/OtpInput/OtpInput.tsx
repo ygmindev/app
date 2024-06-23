@@ -118,7 +118,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
                     ? ELEMENT_STATE.ACTIVE
                     : ELEMENT_STATE.INACTIVE
                 }
-                height={2}
+                height={1}
                 left={0}
                 m={THEME_SIZE.SMALL}
                 position={SHAPE_POSITION.ABSOLUTE}

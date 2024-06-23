@@ -1,13 +1,13 @@
 import {
-  type GetUserFromHeaderModel,
-  type GetUserFromHeaderParamsModel,
-} from '@lib/backend/auth/utils/getUserFromHeader/getUserFromHeader.models';
+  type GetTokenFromHeaderModel,
+  type GetTokenFromHeaderParamsModel,
+} from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader.models';
 import { JwtImplementation } from '@lib/backend/auth/utils/JwtImplementation/JwtImplementation';
 import { Container } from '@lib/backend/core/utils/Container/Container';
 
-export const getUserFromHeader = async (
-  params: GetUserFromHeaderParamsModel,
-): Promise<GetUserFromHeaderModel> => {
+export const getTokenFromHeader = async (
+  params: GetTokenFromHeaderParamsModel,
+): Promise<GetTokenFromHeaderModel> => {
   if (params) {
     const [, token] = params.split(' ');
     return token && token !== 'null' ? Container.get(JwtImplementation).verifyToken(token) : null;

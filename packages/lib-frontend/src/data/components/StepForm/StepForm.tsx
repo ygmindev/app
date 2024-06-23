@@ -6,6 +6,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
+import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
@@ -30,6 +31,19 @@ import { type ReactElement, useEffect, useRef } from 'react';
 import { cloneElement, useState } from 'react';
 
 export const StepForm = <TType, TResult = void>({
+  errorContextGet,
+  ...props
+}: LFCPropsModel<StepFormPropsModel<TType, TResult>>): ReactElement<
+  LFCPropsModel<StepFormPropsModel<TType, TResult>>
+> => (
+  <AsyncBoundary
+    errorContextGet={errorContextGet}
+    flex>
+    <StepFormF {...props} />
+  </AsyncBoundary>
+);
+
+export const StepFormF = <TType, TResult = void>({
   elementState,
   initialValues,
   isProgress,

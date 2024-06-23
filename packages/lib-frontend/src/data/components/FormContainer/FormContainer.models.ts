@@ -22,6 +22,10 @@ export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<
     topElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
   };
 
+export type FormContainerRefModel<TType> = FormRefModel<TType> & {
+  inputRefs: RefObject<FormFieldsRefModel<TType>>;
+};
+
 export type FormTileModel<TType> = WithIdModel & {
   fields?: Array<
     | FormRowModel<TType>
@@ -52,8 +56,4 @@ export type FormFieldsModel<TType> =
 
 export type FormFieldsRefModel<TType> = {
   [TKey in StringKeyModel<TType>]?: InputRefModel<TType, TKey>;
-};
-
-export type FormContainerRefModel<TType> = FormRefModel<TType> & {
-  inputRefs: RefObject<FormFieldsRefModel<TType>>;
 };

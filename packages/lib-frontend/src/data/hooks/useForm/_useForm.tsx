@@ -16,7 +16,6 @@ export const _useForm = <TType, TResult = void>({
 
   const {
     errors,
-    handleReset,
     handleSubmit,
     isSubmitting,
     isValid,
@@ -38,7 +37,7 @@ export const _useForm = <TType, TResult = void>({
     errors: errors as FormErrorModel<TType>,
     errorsSet: (error) => setErrors(error as unknown as FormikErrors<TType & FormikValues>),
     handleChange: (id) => (value) => setFieldValue(id, value),
-    handleReset: () => handleReset(null),
+    handleReset: () => void setValues({} as TType & FormikValues),
     handleSubmit: () => handleSubmit(),
     isLoading: isSubmitting,
     isValid,

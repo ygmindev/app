@@ -20,9 +20,12 @@ export const useGraphql = (params: UseGraphqlParamsModel = {}): UseGraphqlModel 
     params: TParams,
   ): Promise<Record<TName, TResult> | undefined> => {
     const result = (await post({ params, url: '' })) as GraphqlHttpResponseModel<TResult, TName>;
-    const graphqlError = result?.errors?.at(0);
+    const graphqlError = result?.errors?.at(0)?.extensions as unknown as HttpError;
     if (graphqlError) {
-      throw new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR, graphqlError.message);
+      throw new HttpError(
+        graphqlError.statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
+        graphqlError.message,
+      );
     }
     return result && result.data;
   };

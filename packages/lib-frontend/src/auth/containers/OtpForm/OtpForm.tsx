@@ -5,8 +5,11 @@ import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
+import { type FormContainerRefModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type OtpFormModel } from '@lib/shared/auth/resources/Otp/Otp.models';
+import { useRef } from 'react';
 
 export const OtpForm: LFCModel<OtpFormPropsModel> = ({
   data,
@@ -18,6 +21,7 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
+  const ref = useRef<FormContainerRefModel<OtpFormModel>>(null);
   return (
     <FormContainer
       {...wrapperProps}
@@ -25,10 +29,14 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
       flex
       isButton={false}
       isCenter
-      onComplete={onComplete}
+      onComplete={() => {
+        onComplete && onComplete();
+        ref.current?.reset();
+      }}
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
+      ref={ref}
       topElement={() =>
         data?.email && (
           <Wrapper isCenter>
