@@ -33,7 +33,6 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
       v ? (await search({ query: v })).result ?? [] : [];
 
     const formatUser = (v?: PartialModel<UserModel>): string => (v ? `${v.email}` : '');
-
     return (
       <DataBoundary
         {...wrapperProps}

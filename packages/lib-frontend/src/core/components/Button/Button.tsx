@@ -148,22 +148,6 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         {children}
       </AsyncText>
     );
-    description &&
-      (childrenF = (
-        <Wrapper>
-          <AsyncText
-            align={FONT_ALIGN.CENTER}
-            color={color}
-            colorRole={childColorRole}
-            fontSize={THEME_SIZE_MORE.XSMALL}
-            isEllipsis
-            isFullWidth>
-            {description}
-          </AsyncText>
-
-          {childrenF}
-        </Wrapper>
-      ));
 
     const iconF = icon ? (
       <Icon
@@ -191,6 +175,23 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
     ) : (
       iconF
     );
+
+    description &&
+      (childrenF = (
+        <Wrapper>
+          {childrenF}
+
+          <AsyncText
+            align={FONT_ALIGN.CENTER}
+            color={color}
+            colorRole={childColorRole}
+            fontSize={THEME_SIZE_MORE.XSMALL}
+            isEllipsis
+            isFullWidth>
+            {description}
+          </AsyncText>
+        </Wrapper>
+      ));
     return (
       <Pressable
         {...wrapperProps}

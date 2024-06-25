@@ -1,3 +1,4 @@
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
@@ -11,6 +12,7 @@ import { ResourceFilter } from '@lib/frontend/resource/components/ResourceFilter
 import { type ResourceTablePropsModel } from '@lib/frontend/resource/components/ResourceTable/ResourceTable.models';
 import { ResourceForm } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
@@ -20,8 +22,9 @@ import {
   type EntityResourceModel,
 } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import range from 'lodash/range';
-import { type ReactElement, useState } from 'react';
+import { type ReactElement, useMemo, useState } from 'react';
 
 export const ResourceTable = <
   TType extends EntityResourceModel,
@@ -37,23 +40,64 @@ export const ResourceTable = <
   LFCPropsModel<ResourceTablePropsModel<TType, TForm, TRoot>>
 > => {
   const { t } = useTranslation();
+  const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { create, getConnection, remove } = implementation;
+  const { create, getConnection, remove, update } = implementation;
   const [params, paramsSet] = useState<InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>>();
 
-  const handleSubmit = async (
-    data: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
+  const handleUpsert = async (
+    { _id, ...data }: PartialModel<TType>,
+    root?: TRoot extends undefined ? never : string,
+    id?: string,
   ): Promise<void> => {
-    await create(data);
+    id
+      ? await update({
+          filter: [{ field: '_id', value: id }],
+          root,
+          update: data as UpdateModel<TType>,
+        })
+      : await create({ form: data as TForm, root });
   };
 
-  const columns = fields?.map(({ id, isHidden, label, renderer, width }) => ({
-    id,
-    isHidden,
-    label,
-    renderer,
-    width,
-  })) as Array<TableColumnModel<PartialModel<TType>>>;
+  const columns = useMemo(
+    () =>
+      [
+        {
+          id: 'update',
+          isFrozen: true,
+          label: '',
+          renderer: ({ row }) => (
+            <ModalButton
+              element={({ onClose }) => (
+                <ResourceForm<TType, TForm, TRoot>
+                  data={row}
+                  fields={fields}
+                  name={name}
+                  onCancel={onClose}
+                  onSubmit={async (values, root) => {
+                    await handleUpsert(values, root, row._id);
+                    onClose();
+                  }}
+                  rootName={rootName}
+                />
+              )}
+              icon="edit"
+              size={THEME_SIZE.SMALL}
+              type={BUTTON_TYPE.INVISIBLE}
+            />
+          ),
+          width: theme.shape.size[THEME_SIZE.SMALL],
+        },
+        ...(fields?.map(({ id, isHidden, label, renderer, width }) => ({
+          id,
+          isHidden,
+          label,
+          renderer,
+          width,
+        })) ?? []),
+      ] as Array<TableColumnModel<PartialModel<TType>>>,
+    [fields],
+  );
 
   return (
     <ConnectionBoundary
@@ -110,8 +154,9 @@ export const ResourceTable = <
                 <ResourceForm<TType, TForm, TRoot>
                   fields={fields}
                   name={name}
-                  onSubmit={async (input) => {
-                    await handleSubmit(input);
+                  onCancel={onClose}
+                  onSubmit={async (input, root) => {
+                    await handleUpsert(input, root);
                     await reset();
                     onClose();
                   }}

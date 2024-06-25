@@ -43,7 +43,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean | undefined>();
     const { wrapperProps } = useLayoutStyles({ props });
 
-    const { elementStateControlled, elementStateControlledSet, isBlocked, isLoading } =
+    const { elementStateControlled, elementStateControlledSet, isBlocked } =
       useElementStateControlled({ elementState, onElementStateChange });
 
     const handleButtonPress = async (): Promise<void> => {

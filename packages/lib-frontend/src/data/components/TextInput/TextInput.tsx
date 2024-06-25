@@ -203,6 +203,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         border={!isTransparent}
         elementState={elementStateControlled}
         height={height ?? (isNumber(sizeF) ? sizeF : theme.shape.size[sizeF])}
+        isTransparent={isTransparent}
         onElementStateChange={elementStateControlledSet}
         pLeft={!isCenter}
         pRight={isCenter ? THEME_SIZE.SMALL : undefined}

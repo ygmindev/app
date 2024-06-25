@@ -5,7 +5,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
-import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { type MeasureModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { TABLE_CELL_WIDTH_DEFAULT } from '@lib/frontend/data/components/Table/Table.constants';
 import {
   type TablePropsModel,
@@ -13,30 +13,30 @@ import {
 } from '@lib/frontend/data/components/Table/Table.models';
 import { type FormErrorModel } from '@lib/frontend/data/data.models';
 import { useTable } from '@lib/frontend/data/hooks/useTable/useTable';
+import { type TableHeaderModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
 import { useValidator } from '@lib/frontend/data/hooks/useValidator/useValidator';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import {
-  THEME_COLOR,
-  THEME_ROLE,
-  THEME_SIZE,
-  THEME_SIZE_MORE,
-} from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getValue } from '@lib/shared/core/utils/getValue/getValue';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import cloneDeep from 'lodash/cloneDeep';
 import isNil from 'lodash/isNil';
+import partition from 'lodash/partition';
 import {
   cloneElement,
   type ForwardedRef,
   forwardRef,
   type ReactElement,
+  type ReactNode,
   useImperativeHandle,
+  useMemo,
   useState,
 } from 'react';
 
@@ -63,8 +63,32 @@ export const Table = forwardRef(
     const { t } = useTranslation();
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props });
+    const columnsF = useMemo<TablePropsModel<TType>['columns']>(
+      () =>
+        filterNil([
+          isRemovable && {
+            id: 'remove' as StringKeyModel<TType>,
+            isFrozen: true,
+            label: '',
+            renderer: ({ index }) => (
+              <Button
+                color={THEME_COLOR.ERROR}
+                confirmMessage={t('core:confirmRemove')}
+                icon="trash"
+                onPress={() => handleRemove && handleRemove(index)}
+                size={THEME_SIZE.SMALL}
+                type={BUTTON_TYPE.INVISIBLE}
+              />
+            ),
+            width: theme.shape.size[THEME_SIZE.SMALL],
+          },
+          ...(columns ?? []),
+        ]),
+      [columns, isRemovable],
+    );
+
     const { headers, rows } = useTable({
-      columns,
+      columns: columnsF,
       data,
       isFullWidth,
       onSelect,
@@ -101,26 +125,30 @@ export const Table = forwardRef(
         }
       : undefined;
 
-    return rows?.length ? (
+    const [headersFrozen, headersAll] = useMemo<
+      [Array<TableHeaderModel<TType>>, Array<TableHeaderModel<TType>>]
+    >(() => partition(headers, (v) => v.isFrozen), [headers]);
+
+    const renderTable = (
+      v: Array<TableHeaderModel<TType>>,
+      isRenderFrozen?: boolean,
+    ): ReactNode => (
       <Wrapper
-        {...wrapperProps}
-        border
         flex
-        isFullWidth
         isHorizontalScrollable
-        p
-        position={SHAPE_POSITION.RELATIVE}
-        round>
+        pLeft={THEME_SIZE.SMALL}
+        pRight={THEME_SIZE.SMALL}
+        pTop={THEME_SIZE.SMALL}>
         {!isHeadless && (
           <Wrapper
+            height={theme.shape.size[THEME_SIZE.SMALL]}
             isAlign
             isFullWidth={isFullWidth}
             isRow>
-            {isRemovable && <Wrapper width={theme.shape.size[THEME_SIZE.MEDIUM]} />}
-
-            {headers.map(
-              ({ align, id, isHidden, label, width }) =>
-                !isHidden && (
+            {v.map(
+              ({ align, id, isFrozen, isHidden, label, width }) =>
+                !isHidden &&
+                (isFrozen ?? false === isRenderFrozen ?? false) && (
                   <Wrapper
                     key={id}
                     pVertical={THEME_SIZE.SMALL}
@@ -145,24 +173,14 @@ export const Table = forwardRef(
             <Wrapper
               border={DIRECTION.TOP}
               borderColor={theme.color.border}
+              height={theme.shape.size[THEME_SIZE.MEDIUM]}
               isAlign
+              isOverflowHidden
               isRow
               key={row.id}
-              minHeight={theme.shape.size[THEME_SIZE_MORE.XSMALL]}
               pVertical={THEME_SIZE.SMALL}>
-              {isRemovable && (
-                <Button
-                  color={THEME_COLOR.ERROR}
-                  confirmMessage={t('core:confirmRemove')}
-                  icon="trash"
-                  onPress={() => handleRemove && handleRemove(i)}
-                  type={BUTTON_TYPE.INVISIBLE}
-                  width={theme.shape.size[THEME_SIZE.MEDIUM]}
-                />
-              )}
-
               {row.cells.map((cell) => {
-                if (cell.isHidden) {
+                if (cell.isHidden || (cell.isFrozen ?? false) !== (isRenderFrozen ?? false)) {
                   return null;
                 }
                 let element: ReactElement | null = null;
@@ -205,6 +223,37 @@ export const Table = forwardRef(
               })}
             </Wrapper>
           ))}
+        </Wrapper>
+      </Wrapper>
+    );
+
+    const [frozenMeasure, frozenMeasureSet] = useState<MeasureModel>();
+
+    return rows?.length ? (
+      <Wrapper
+        {...wrapperProps}
+        border
+        flex
+        isFullWidth
+        position={SHAPE_POSITION.RELATIVE}
+        round>
+        {headersFrozen?.length > 0 && (
+          <Wrapper
+            border={DIRECTION.RIGHT}
+            bottom={0}
+            left={0}
+            onMeasure={frozenMeasureSet}
+            position={SHAPE_POSITION.ABSOLUTE}
+            top={0}
+            zIndex>
+            {renderTable(headersFrozen, true)}
+          </Wrapper>
+        )}
+
+        <Wrapper
+          flex
+          mLeft={frozenMeasure?.width ?? 0}>
+          {renderTable(headersAll, false)}
         </Wrapper>
       </Wrapper>
     ) : (

@@ -1,3 +1,4 @@
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
@@ -12,6 +13,7 @@ import { type EntityResourceDataModel } from '@lib/shared/resource/resources/Ent
 import { cloneElement, type ReactElement, useState } from 'react';
 
 export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
+  data,
   fields,
   onSubmit,
   rootName,
@@ -29,51 +31,57 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
       fields={filterNil(
         // TODO: render embeddedFields
         fields?.map(({ field, fields: embeddedFields, id, isArray, label, options, type }) => {
-          if (id === '_id') {
-            return null;
-          }
           const element = (() => {
             const labelF = label ?? id;
+            const elementState = id === '_id' ? ELEMENT_STATE.DISABLED : undefined;
             if (field) {
-              return cloneElement(field(), { label: labelF });
+              return cloneElement(field(), { elementState, label: labelF });
             }
             switch (type) {
               case PROPERTY_TYPE.RESOURCE:
                 return (
                   <TextInput
                     beforeSubmit={async (v) => ({ _id: v })}
+                    elementState={elementState}
                     label={labelF}
                   />
                 );
               case DATA_TYPE.NUMBER:
-                return <NumberInput label={labelF} />;
+                return (
+                  <NumberInput
+                    elementState={elementState}
+                    label={labelF}
+                  />
+                );
               default:
                 return options ? (
                   isArray ? (
                     <SelectInput
+                      elementState={elementState}
                       isMultiple
                       label={labelF}
                       options={options}
                     />
                   ) : (
                     <MenuInput
+                      elementState={elementState}
                       label={labelF}
                       options={options}
                     />
                   )
                 ) : (
-                  <TextInput label={labelF} />
+                  <TextInput
+                    elementState={elementState}
+                    label={labelF}
+                  />
                 );
             }
           })();
           return { element, id };
         }),
       )}
-      onSubmit={
-        onSubmit
-          ? async (form) => onSubmit({ form: form as unknown as TForm, root: rootValue })
-          : undefined
-      }
+      initialValues={data}
+      onSubmit={onSubmit ? async (v) => onSubmit(v, rootValue) : undefined}
       p
       topElement={
         rootName

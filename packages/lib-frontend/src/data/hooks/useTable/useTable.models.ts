@@ -38,6 +38,7 @@ export type TableColumnModel<
   }): ReactElement<InputPropsModel<TType[TKey]>>;
   formatter?: DataFormatterModel<TType, TKey>;
   isArray?: boolean;
+  isFrozen?: boolean;
   isHidden?: boolean;
   label?: AsyncTextModel;
   options?: Array<TranslatableOptionModel>;
@@ -46,7 +47,10 @@ export type TableColumnModel<
   width?: number;
 };
 
-export type TableRenderModel<TType> = Pick<TableColumnModel<TType>, 'align' | 'width' | 'isHidden'>;
+export type TableRenderModel<TType> = Pick<
+  TableColumnModel<TType>,
+  'align' | 'width' | 'isFrozen' | 'isHidden'
+>;
 
 export type TableHeaderModel<TType> = WithIdModel<StringKeyModel<TType>> &
   TableRenderModel<TType> & {
