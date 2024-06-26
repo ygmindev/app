@@ -165,6 +165,9 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     after: afterGetConnection,
     before: async ({ input } = {}) => {
       const inputF = { ...input, filter: expandFilter(input?.filter) };
+      if (1 + 1 === 2) {
+        throw new Error();
+      }
       return beforeGetConnection ? beforeGetConnection({ input: inputF }) : inputF;
     },
     fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<

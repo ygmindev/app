@@ -13,12 +13,12 @@ import {
 import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ isEmbeddable: true, isDatabase: true, name: UTILITY_RESOURCE_NAME })
+@withEntity({ isDatabase: true, isEmbeddable: true, name: UTILITY_RESOURCE_NAME })
 export class Utility extends EmbeddedResource implements UtilityModel {
   @withRefField({ Resource: () => Vendor })
   _vender?: RefFieldModel<VendorModel>;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   description?: string;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
