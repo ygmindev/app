@@ -17,6 +17,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_COLOR_MORE, THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import noop from 'lodash/noop';
 import { createContext, Suspense, useState } from 'react';
 
@@ -42,7 +43,6 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
   const { wrapperProps } = useLayoutStyles({ props });
   const [errorContext, errorContextSet] = useState<ErrorContextModel | undefined>();
   const { handleRefresh } = useQueryContext();
-  console.warn(errorContext);
   return (
     <asyncBoundaryContext.Provider value={{ errorContextGet, errorContextSet, handleRefresh }}>
       <Wrapper
@@ -70,10 +70,11 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
 
               <Button
                 icon="refresh"
-                onPress={() => {
-                  errorContextSet(undefined);
+                onPress={async () => {
+                  void (await onRefresh?.());
                   handleRefresh();
-                  onRefresh && void onRefresh();
+                  await sleep();
+                  errorContextSet(undefined);
                 }}>
                 {t('core:tryAgain')}
               </Button>
