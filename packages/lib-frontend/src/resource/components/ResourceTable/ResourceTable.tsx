@@ -24,7 +24,7 @@ import {
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import range from 'lodash/range';
-import { type ReactElement, useMemo, useState } from 'react';
+import { type ReactElement, useCallback, useState } from 'react';
 
 export const ResourceTable = <
   TType extends EntityResourceModel,
@@ -59,8 +59,8 @@ export const ResourceTable = <
       : await create({ form: data as TForm, root });
   };
 
-  const columns = useMemo(
-    () =>
+  const getColumns = useCallback(
+    (reset?: () => Promise<void>) =>
       [
         {
           id: 'update',
@@ -76,6 +76,7 @@ export const ResourceTable = <
                   onCancel={onClose}
                   onSubmit={async (values, root) => {
                     await handleUpsert(values, root, row._id);
+                    reset && void reset();
                     onClose();
                   }}
                   rootName={rootName}
@@ -102,28 +103,26 @@ export const ResourceTable = <
   return (
     <ConnectionBoundary
       {...wrapperProps}
-      fallbackData={
-        columns && {
-          result: {
-            edges: range(5).map((i) => ({
-              cursor: `${i}`,
-              node: columns.reduce(
-                (result, column) => ({
-                  ...result,
-                  [column.id]: column.renderer ? undefined : TEST_TEXT_SHORT,
-                }),
-                {} as PartialModel<TType>,
-              ),
-            })),
-            pageInfo: {
-              endCursor: '',
-              hasNextPage: false,
-              hasPreviousPage: false,
-              startCursor: '',
-            },
+      fallbackData={{
+        result: {
+          edges: range(5).map((i) => ({
+            cursor: `${i}`,
+            node: getColumns().reduce(
+              (result, column) => ({
+                ...result,
+                [column.id]: column.renderer ? undefined : TEST_TEXT_SHORT,
+              }),
+              {} as PartialModel<TType>,
+            ),
+          })),
+          pageInfo: {
+            endCursor: '',
+            hasNextPage: false,
+            hasPreviousPage: false,
+            startCursor: '',
           },
-        }
-      }
+        },
+      }}
       flex
       id={name}
       p
@@ -170,7 +169,7 @@ export const ResourceTable = <
           </Wrapper>
 
           <Table<PartialModel<TType>>
-            columns={columns}
+            columns={getColumns(reset)}
             data={data?.result?.edges.map((edge) => edge.node)}
             elementState={elementState}
             isRemovable
