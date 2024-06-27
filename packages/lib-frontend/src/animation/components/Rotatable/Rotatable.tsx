@@ -23,7 +23,7 @@ export const Rotatable: LFCModel<RotatablePropsModel> = ({
   children,
   directionActive = DIRECTION.BOTTOM,
   directionInactive = DIRECTION.TOP,
-  elementState,
+  isActive,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -36,7 +36,7 @@ export const Rotatable: LFCModel<RotatablePropsModel> = ({
           [ELEMENT_STATE.ACTIVE]: { transform: [{ rotateZ: getRotation(directionActive) }] },
         },
       }}
-      elementState={elementState}>
+      elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}>
       {children}
     </Wrapper>
   );

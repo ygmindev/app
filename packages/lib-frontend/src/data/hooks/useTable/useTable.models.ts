@@ -8,10 +8,7 @@ import {
   type _UseTableModel,
   type _UseTableParamsModel,
 } from '@lib/frontend/data/hooks/useTable/_useTable.models';
-import {
-  type TABLE_SELECT_TYPE,
-  type TABLE_SORT_TYPE,
-} from '@lib/frontend/data/hooks/useTable/useTable.constants';
+import { type TABLE_SELECT_TYPE } from '@lib/frontend/data/hooks/useTable/useTable.constants';
 import { type FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
@@ -24,7 +21,9 @@ export type UseTableModel<TType extends unknown> = _UseTableModel<TType>;
 
 export type TableSelectTypeModel = `${TABLE_SELECT_TYPE}`;
 
-export type TableSortTypeModel = `${TABLE_SORT_TYPE}`;
+export type TableSortModel<TType extends unknown> = WithIdModel<StringKeyModel<TType>> & {
+  isDescending?: boolean;
+};
 
 export type TableColumnModel<
   TType,
@@ -40,6 +39,7 @@ export type TableColumnModel<
   isArray?: boolean;
   isFrozen?: boolean;
   isHidden?: boolean;
+  isSortable?: boolean;
   label?: AsyncTextModel;
   options?: Array<TranslatableOptionModel>;
   renderer?: DataRendererModel<TType, TKey>;

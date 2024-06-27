@@ -83,11 +83,7 @@ export const NavigationBar = ({
               <Droppable
                 anchor={(isOpen) => (
                   <Button
-                    leftElement={
-                      <Rotatable
-                        elementState={isOpen ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}
-                      />
-                    }
+                    leftElement={<Rotatable isActive={isOpen} />}
                     type={BUTTON_TYPE.INVISIBLE}>
                     {k}
                   </Button>

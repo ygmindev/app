@@ -88,8 +88,7 @@ export const MultipleInput = forwardRef(
             icon="add"
             onClose={() => initialValuesSet(undefined)}
             ref={modalRef}
-            size={THEME_SIZE.SMALL}
-            type={BUTTON_TYPE.TRANSPARENT}>
+            size={THEME_SIZE.SMALL}>
             {t('core:add', { value: t(label) })}
           </ModalButton>
         </Wrapper>

@@ -1,5 +1,4 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import {
   type CategoryInputPropsModel,
   type CategoryInputRefModel,
@@ -70,8 +69,7 @@ const CategoryInputResult: LFCModel<
           onPress={() => {
             id && valueControlledSet(id);
             onSubmit && onSubmit();
-          }}
-          type={BUTTON_TYPE.TRANSPARENT}>
+          }}>
           {id ?? label}
         </Button>
       ))}

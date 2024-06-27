@@ -7,8 +7,8 @@ import {
   type MenuRefModel,
 } from '@lib/frontend/core/components/Menu/Menu.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import {
   type MenuInputPropsModel,
   type MenuInputRefModel,
@@ -65,10 +65,10 @@ export const MenuInput = forwardRef(
       onChange,
       value,
     });
-    const { valueControlled: elementStateF, valueControlledSet: onElementStateChangeF } =
-      useValueControlled({
-        onChange: onElementStateChange,
-        value: elementState,
+    const { elementStateControlled, elementStateControlledSet, isActive } =
+      useElementStateControlled({
+        elementState,
+        onElementStateChange,
       });
 
     const [focused, focusedSet] = useState<number | undefined>();
@@ -110,9 +110,9 @@ export const MenuInput = forwardRef(
     };
 
     const rightElementF = rightElement ? (
-      rightElement(elementStateF)
+      rightElement(elementStateControlled)
     ) : (
-      <Rotatable elementState={elementStateF}>
+      <Rotatable isActive={isActive}>
         <Icon icon="chevronDown" />
       </Rotatable>
     );
@@ -130,8 +130,6 @@ export const MenuInput = forwardRef(
       onBlur && onBlur();
       handleTextChange('');
     };
-
-    const isActive = elementStateF === ELEMENT_STATE.ACTIVE;
 
     const optionHeight = theme.shape.size[THEME_SIZE.MEDIUM];
 
@@ -160,7 +158,7 @@ export const MenuInput = forwardRef(
           <TextInput
             {...wrapperProps}
             defaultValue={defaultValue}
-            elementState={elementStateF}
+            elementState={elementStateControlled}
             error={error}
             icon={icon}
             isTransparent={isTransparent}
@@ -193,10 +191,10 @@ export const MenuInput = forwardRef(
             width={width}
           />
         )}
-        elementState={elementStateF}
+        elementState={elementStateControlled}
         isFullWidth
         onChange={valueControlledSet}
-        onElementStateChange={onElementStateChangeF}
+        onElementStateChange={elementStateControlledSet}
         options={optionsF}
         ref={menuRef}
         renderOption={renderOption}

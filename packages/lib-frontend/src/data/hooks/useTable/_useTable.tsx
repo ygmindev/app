@@ -5,13 +5,19 @@ import {
 import { type TableHeaderModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
-import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
+import { useMemo } from 'react';
 
 export const _useTable = <TType,>({
   columns,
   data,
+  sorting,
 }: _UseTableParamsModel<TType>): _UseTableModel<TType> => {
   const { t } = useTranslation();
+  const sortingF = useMemo(
+    () => sorting?.map(({ id, isDescending = false }) => ({ desc: isDescending, id })),
+    [sorting],
+  );
   const table = useReactTable({
     columns:
       columns?.map(({ id, label, width }) => ({
@@ -22,6 +28,8 @@ export const _useTable = <TType,>({
       })) ?? [],
     data: data ?? [],
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    state: sorting ? { sorting: sortingF } : undefined,
   });
   return {
     headers: table.getHeaderGroups().reduce(

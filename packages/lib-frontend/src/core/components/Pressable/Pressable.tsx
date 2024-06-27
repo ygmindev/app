@@ -1,7 +1,6 @@
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import {
   type PressablePropsModel,
@@ -120,8 +119,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
                 <Button
                   elementState={elementStateControlled}
                   icon="chevronLeft"
-                  onPress={async () => confirmModalIsOpenSet(false)}
-                  type={BUTTON_TYPE.TRANSPARENT}>
+                  onPress={async () => confirmModalIsOpenSet(false)}>
                   {t('core:cancel')}
                 </Button>
 

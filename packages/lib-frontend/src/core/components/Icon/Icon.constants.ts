@@ -3,6 +3,7 @@ export const IONIC_ICONS = {
   alarm: 'alarm-outline',
   analytics: 'analytics-outline',
   apps: 'apps-outline',
+  arrowDown: 'arrow-down-outline',
   arrowIn: 'return-down-back-outline',
   arrowLeft: 'arrow-back-outline',
   arrowOut: 'return-up-forward-outline',

@@ -1,7 +1,10 @@
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
+import { Rotatable } from '@lib/frontend/animation/components/Rotatable/Rotatable';
 import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
@@ -13,7 +16,10 @@ import {
 } from '@lib/frontend/data/components/Table/Table.models';
 import { type FormErrorModel } from '@lib/frontend/data/data.models';
 import { useTable } from '@lib/frontend/data/hooks/useTable/useTable';
-import { type TableHeaderModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
+import {
+  type TableHeaderModel,
+  type TableSortModel,
+} from '@lib/frontend/data/hooks/useTable/useTable.models';
 import { useValidator } from '@lib/frontend/data/hooks/useValidator/useValidator';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -26,9 +32,11 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getValue } from '@lib/shared/core/utils/getValue/getValue';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { updateArray } from '@lib/shared/core/utils/updateArray/updateArray';
 import cloneDeep from 'lodash/cloneDeep';
 import isNil from 'lodash/isNil';
 import partition from 'lodash/partition';
+import remove from 'lodash/remove';
 import {
   cloneElement,
   type ForwardedRef,
@@ -55,6 +63,7 @@ export const Table = forwardRef(
       onRemove,
       onSelect,
       select,
+      sorting,
       validators,
       ...props
     }: RLFCPropsModel<TableRefModel, TablePropsModel<TType>>,
@@ -63,6 +72,7 @@ export const Table = forwardRef(
     const { t } = useTranslation();
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props });
+
     const columnsF = useMemo<TablePropsModel<TType>['columns']>(
       () =>
         filterNil([
@@ -87,12 +97,14 @@ export const Table = forwardRef(
       [columns, isRemovable],
     );
 
+    const [sortingF, sortingSet] = useState<Array<TableSortModel<TType>>>(sorting ?? []);
     const { headers, rows } = useTable({
       columns: columnsF,
       data,
       isFullWidth,
       onSelect,
       select,
+      sorting: sortingF,
     });
     const validate = useValidator();
     const [errors, errorsSet] = useState<Record<string, FormErrorModel<TType>>>();
@@ -130,7 +142,7 @@ export const Table = forwardRef(
     >(() => partition(headers, (v) => v.isFrozen), [headers]);
 
     const renderTable = (
-      v: Array<TableHeaderModel<TType>>,
+      h: Array<TableHeaderModel<TType>>,
       isRenderFrozen?: boolean,
     ): ReactNode => (
       <Wrapper
@@ -145,23 +157,53 @@ export const Table = forwardRef(
             isAlign
             isFullWidth={isFullWidth}
             isRow>
-            {v.map(
-              ({ align, id, isFrozen, isHidden, label, width }) =>
-                !isHidden &&
-                (isFrozen ?? false === isRenderFrozen ?? false) && (
-                  <Wrapper
-                    key={id}
-                    pVertical={THEME_SIZE.SMALL}
-                    width={width || TABLE_CELL_WIDTH_DEFAULT}>
-                    <Text
-                      align={align}
-                      isBold
-                      isEllipsis>
-                      {label}
-                    </Text>
-                  </Wrapper>
-                ),
-            )}
+            {h.map(({ align, id, isFrozen, isHidden, label, width }) => {
+              if (isHidden || (isFrozen ?? false !== isRenderFrozen ?? false)) {
+                return null;
+              }
+              const sortIndex = sortingF.findIndex((v) => v.id === id);
+              const isSorted = sortIndex >= 0 && !!sortingF[sortIndex];
+              return (
+                <Wrapper
+                  key={id}
+                  onPress={() =>
+                    sortingSet(
+                      isSorted
+                        ? sortingF[sortIndex]?.isDescending
+                          ? remove(sortingF, sortIndex)
+                          : updateArray(sortingF, sortIndex, (v) => ({
+                              ...v,
+                              isDescending: !v?.isDescending,
+                            }))
+                        : [{ id }],
+                    )
+                  }
+                  pVertical={THEME_SIZE.SMALL}
+                  position={SHAPE_POSITION.RELATIVE}
+                  width={width || TABLE_CELL_WIDTH_DEFAULT}>
+                  <Text
+                    align={align}
+                    isBold
+                    isEllipsis>
+                    {label}
+                  </Text>
+
+                  <Appearable
+                    bottom={0}
+                    isActive={isSorted}
+                    left={-theme.shape.size[THEME_SIZE.SMALL]}
+                    position={SHAPE_POSITION.ABSOLUTE}
+                    top={0}
+                    zIndex>
+                    {isSorted && (
+                      <Rotatable isActive={sortingF[sortIndex]?.isDescending}>
+                        <Icon icon="arrowUp" />
+                      </Rotatable>
+                    )}
+                  </Appearable>
+                </Wrapper>
+              );
+            })}
           </Wrapper>
         )}
 

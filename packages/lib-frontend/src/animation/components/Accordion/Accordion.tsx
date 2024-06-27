@@ -52,7 +52,7 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
         leftElement={(isActive) => (
           <Rotatable
             directionInactive={DIRECTION.RIGHT}
-            elementState={elementStateControlled}>
+            isActive={isActive}>
             <Button
               elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
               icon="chevronUp"
