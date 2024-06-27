@@ -1,9 +1,9 @@
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { SkeletonGroup } from '@lib/frontend/animation/components/SkeletonGroup/SkeletonGroup';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
-import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import {
   type AsyncBoundaryContextModel,
@@ -49,38 +49,35 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
         {...wrapperProps}
         flex
         position={SHAPE_POSITION.RELATIVE}>
-        {errorContext && (
-          <Portal>
-            <Wrapper
-              backgroundColor={THEME_COLOR_MORE.SURFACE}
-              isAbsoluteFill
-              isCenter
-              s={THEME_SIZE.SMALL}
-              zIndex>
-              <Icon
-                fontSize={THEME_SIZE_MORE.XLARGE}
-                icon={errorContext.icon ?? 'sad'}
-              />
+        <Appearable
+          backgroundColor={THEME_COLOR_MORE.SURFACE}
+          isAbsoluteFill
+          isActive={!!errorContext}
+          isCenter
+          s={THEME_SIZE.SMALL}
+          zIndex>
+          <Icon
+            fontSize={THEME_SIZE_MORE.XLARGE}
+            icon={errorContext?.icon ?? 'sad'}
+          />
 
-              {errorContext.title && (
-                <AsyncText fontStyle={FONT_STYLE.HEADLINE}>{errorContext.title}</AsyncText>
-              )}
+          {errorContext?.title && (
+            <AsyncText fontStyle={FONT_STYLE.HEADLINE}>{errorContext.title}</AsyncText>
+          )}
 
-              {errorContext.description && <AsyncText>{errorContext.description}</AsyncText>}
+          {errorContext?.description && <AsyncText>{errorContext.description}</AsyncText>}
 
-              <Button
-                icon="refresh"
-                onPress={async () => {
-                  void (await onRefresh?.());
-                  handleRefresh();
-                  await sleep();
-                  errorContextSet(undefined);
-                }}>
-                {t('core:tryAgain')}
-              </Button>
-            </Wrapper>
-          </Portal>
-        )}
+          <Button
+            icon="refresh"
+            onPress={async () => {
+              void (await onRefresh?.());
+              handleRefresh();
+              await sleep();
+              errorContextSet(undefined);
+            }}>
+            {t('core:tryAgain')}
+          </Button>
+        </Appearable>
 
         <Suspense fallback={<SkeletonGroup>{fallback}</SkeletonGroup>}>{children}</Suspense>
       </Wrapper>
