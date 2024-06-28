@@ -193,11 +193,9 @@ export const Table = forwardRef(
                     isActive={isSorted}
                     isCenter
                     zIndex>
-                    {isSorted && (
-                      <Rotatable isActive={sortingF[sortIndex]?.isDescending}>
-                        <Icon icon="arrowUp" />
-                      </Rotatable>
-                    )}
+                    <Rotatable isActive={!isSorted || sortingF[sortIndex]?.isDescending}>
+                      <Icon icon="arrowUp" />
+                    </Rotatable>
                   </Appearable>
                 </Wrapper>
               );
