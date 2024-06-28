@@ -165,6 +165,8 @@ export const Table = forwardRef(
               const isSorted = sortIndex >= 0 && !!sortingF[sortIndex];
               return (
                 <Wrapper
+                  isAlign
+                  isRow
                   key={id}
                   onPress={() =>
                     sortingSet(
@@ -178,7 +180,6 @@ export const Table = forwardRef(
                         : [{ id }],
                     )
                   }
-                  pVertical={THEME_SIZE.SMALL}
                   position={SHAPE_POSITION.RELATIVE}
                   width={width || TABLE_CELL_WIDTH_DEFAULT}>
                   <Text
@@ -189,11 +190,8 @@ export const Table = forwardRef(
                   </Text>
 
                   <Appearable
-                    bottom={0}
                     isActive={isSorted}
-                    left={-theme.shape.size[THEME_SIZE.SMALL]}
-                    position={SHAPE_POSITION.ABSOLUTE}
-                    top={0}
+                    isCenter
                     zIndex>
                     {isSorted && (
                       <Rotatable isActive={sortingF[sortIndex]?.isDescending}>
