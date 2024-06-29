@@ -34,7 +34,7 @@ export const embeddedResourceRenderer =
       />
 
       {description && (
-        <Text>{(value as Array<PartialModel<TType>>).map(description).join(', ')}</Text>
+        <Text>{(value as Array<PartialModel<TType>>)?.map(description).join(', ')}</Text>
       )}
     </Wrapper>
   );

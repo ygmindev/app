@@ -3,6 +3,6 @@ import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants'
 import { type OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
 
 export const OTP_RESOURCE_PARAMS = {
-  fields: [],
+  fields: [{ id: 'email' }, { id: 'otp' }],
   name: OTP_RESOURCE_NAME,
 } satisfies ResourceParamsModel<OtpModel>;
