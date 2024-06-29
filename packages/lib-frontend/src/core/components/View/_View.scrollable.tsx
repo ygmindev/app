@@ -76,7 +76,7 @@ export const _viewParams: ComposeComponentParamsModel<
             {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, theme, ref))}
             alwaysBounceHorizontal={false}
             alwaysBounceVertical={false}
-            contentContainerStyle={{ ...stylesContainer, flexGrow: 1 }}
+            contentContainerStyle={{ ...stylesContainer, flex: 1 }}
             horizontal={isHorizontalScrollable ?? false}
             onContentSizeChange={(width, height) => measureContentSet({ height, width })}
             onLayout={({

@@ -1,4 +1,5 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
@@ -33,7 +34,8 @@ export const SubmittableButtons = <TType,>({
         <Button
           elementState={isDisabled ? ELEMENT_STATE.DISABLED : undefined}
           icon="chevronLeft"
-          onPress={onCancel}>
+          onPress={onCancel}
+          type={BUTTON_TYPE.TRANSPARENT}>
           {cancelLabel ?? t('core:cancel')}
         </Button>
       )}

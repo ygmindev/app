@@ -81,6 +81,7 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
         }),
       )}
       initialValues={data}
+      isFullHeight
       onSubmit={onSubmit ? async (v) => onSubmit(v, rootValue) : undefined}
       p
       topElement={
