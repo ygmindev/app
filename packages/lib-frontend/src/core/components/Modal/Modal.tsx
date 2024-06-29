@@ -134,6 +134,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
 
                     <Wrapper
                       flex
+                      isVerticalScrollable
                       pVertical>
                       {children}
                     </Wrapper>

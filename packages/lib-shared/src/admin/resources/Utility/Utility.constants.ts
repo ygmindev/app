@@ -8,5 +8,5 @@ export enum UTILITY_TYPE {
   PAYMENT = 'payment',
   SMS = 'sms',
   SMTP = 'smtp',
-  USAGE_TRACKING = 'usageTracking',
+  USAGE = 'usage',
 }

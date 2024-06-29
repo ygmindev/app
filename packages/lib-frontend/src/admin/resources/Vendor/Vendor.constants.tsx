@@ -17,7 +17,10 @@ export const VENDOR_RESOURCE_PARAMS = {
     {
       fields: [{ id: 'name' }],
       id: UTILITY_RESOURCE_NAME,
-      renderer: embeddedResourceRenderer({ element: <UtilityTable /> }),
+      renderer: embeddedResourceRenderer({
+        description: (v) => v?.name,
+        element: <UtilityTable />,
+      }),
     },
   ],
   name: VENDOR_RESOURCE_NAME,

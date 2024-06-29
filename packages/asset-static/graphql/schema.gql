@@ -2767,6 +2767,7 @@ type Utility {
   name: String
   pricing: String
   type: [String]
+  url: String
 }
 
 input UtilityCreateFormInput {
@@ -2778,6 +2779,7 @@ input UtilityCreateFormInput {
   name: String
   pricing: String
   type: [String]
+  url: String
 }
 
 input UtilityCreateInput {
@@ -2794,6 +2796,7 @@ input UtilityCreateManyFormInput {
   name: String
   pricing: String
   type: [String]
+  url: String
 }
 
 input UtilityCreateManyInput {
@@ -2897,6 +2900,7 @@ input UtilityInput {
   name: String
   pricing: String
   type: [String]
+  url: String
 }
 
 input UtilityRemoveFilterInput {
@@ -2964,6 +2968,7 @@ input UtilityUpdateUpdateInput {
   name: String
   pricing: String
   type: [String]
+  url: String
 }
 
 type Vendor {

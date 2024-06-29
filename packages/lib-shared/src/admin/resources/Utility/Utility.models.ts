@@ -16,6 +16,8 @@ export type UtilityModel = EmbeddedResourceModel & {
   pricing?: string;
 
   type: Array<UtilityTypeModel>;
+
+  url?: string;
 };
 
 export type UtilityFormModel = EntityResourceDataModel<UtilityModel>;

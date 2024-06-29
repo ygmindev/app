@@ -31,4 +31,7 @@ export class Utility extends EmbeddedResource implements UtilityModel {
 
   @withField({ isArray: true, isDatabase: true, type: DATA_TYPE.STRING })
   type!: Array<UtilityTypeModel>;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  url?: string;
 }

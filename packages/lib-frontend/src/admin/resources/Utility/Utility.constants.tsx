@@ -1,3 +1,4 @@
+import { Logo } from '@lib/frontend/app/components/Logo/Logo';
 import { Chip } from '@lib/frontend/core/components/Chip/Chip';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models';
@@ -12,10 +13,15 @@ import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.mode
 
 export const UTILITY_RESOURCE_PARAMS = {
   fields: [
-    { id: 'imageSrc' },
+    {
+      id: 'imageSrc',
+      label: ({ t }) => t('core:image'),
+      renderer: ({ value }) => (value ? <Logo src={value} /> : null),
+    },
     { id: 'name' },
     { id: 'description' },
     { id: 'pricing' },
+    { id: 'url' },
     {
       id: 'type',
       options: Object.values(UTILITY_TYPE).map((id) => ({ id })),
