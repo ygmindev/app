@@ -11,11 +11,12 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { ResourceFilter } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter';
 import { type ResourceTablePropsModel } from '@lib/frontend/resource/components/ResourceTable/ResourceTable.models';
 import { ResourceForm } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm';
+import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { type PartialModel } from '@lib/shared/core/core.models';
+import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import {
   type EntityResourceDataModel,
@@ -44,6 +45,10 @@ export const ResourceTable = <
   const { wrapperProps } = useLayoutStyles({ props });
   const { create, getConnection, remove, update } = implementation;
   const [params, paramsSet] = useState<InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>>();
+  const fieldsF: ResourceFieldsModel<TType> = [
+    { id: '_id' as StringKeyModel<TType>, isHidden: true },
+    ...(fields ?? []),
+  ];
 
   const handleUpsert = async (
     { _id, ...data }: PartialModel<TType>,
@@ -71,7 +76,7 @@ export const ResourceTable = <
               element={({ onClose }) => (
                 <ResourceForm<TType, TForm, TRoot>
                   data={row}
-                  fields={fields}
+                  fields={fieldsF}
                   name={name}
                   onCancel={onClose}
                   onSubmit={async (values, root) => {
@@ -89,7 +94,7 @@ export const ResourceTable = <
           ),
           width: theme.shape.size[THEME_SIZE.SMALL],
         },
-        ...(fields?.map(({ id, isHidden, label, renderer, width }) => ({
+        ...(fieldsF?.map(({ id, isHidden, label, renderer, width }) => ({
           id,
           isHidden,
           label,
@@ -97,7 +102,7 @@ export const ResourceTable = <
           width,
         })) ?? []),
       ] as Array<TableColumnModel<PartialModel<TType>>>,
-    [fields],
+    [fieldsF],
   );
 
   return (
@@ -140,7 +145,7 @@ export const ResourceTable = <
             <FilterButton
               element={
                 <ResourceFilter
-                  fields={fields}
+                  fields={fieldsF}
                   name={name}
                   onSubmit={async (filter) => paramsSet({ filter })}
                   rootName={rootName}
@@ -151,7 +156,7 @@ export const ResourceTable = <
             <ModalButton
               element={({ onClose }) => (
                 <ResourceForm<TType, TForm, TRoot>
-                  fields={fields}
+                  fields={fieldsF}
                   name={name}
                   onCancel={onClose}
                   onSubmit={async (input, root) => {

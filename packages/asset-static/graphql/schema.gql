@@ -2763,9 +2763,10 @@ type Utility {
   _vender: Vendor
   created: DateTime
   description: String
+  imageSrc: String
   name: String
-  type: String
-  usage: String
+  pricing: String
+  type: [String]
 }
 
 input UtilityCreateFormInput {
@@ -2773,9 +2774,10 @@ input UtilityCreateFormInput {
   _vender: VendorInput
   created: DateTime
   description: String
+  imageSrc: String
   name: String
-  type: String
-  usage: String
+  pricing: String
+  type: [String]
 }
 
 input UtilityCreateInput {
@@ -2788,9 +2790,10 @@ input UtilityCreateManyFormInput {
   _vender: VendorInput
   created: DateTime
   description: String
+  imageSrc: String
   name: String
-  type: String
-  usage: String
+  pricing: String
+  type: [String]
 }
 
 input UtilityCreateManyInput {
@@ -2890,9 +2893,10 @@ input UtilityInput {
   _vender: VendorInput
   created: DateTime
   description: String
+  imageSrc: String
   name: String
-  type: String
-  usage: String
+  pricing: String
+  type: [String]
 }
 
 input UtilityRemoveFilterInput {
@@ -2956,9 +2960,10 @@ input UtilityUpdateUpdateInput {
   _vender: VendorInput
   created: DateTime
   description: String
+  imageSrc: String
   name: String
-  type: String
-  usage: String
+  pricing: String
+  type: [String]
 }
 
 type Vendor {

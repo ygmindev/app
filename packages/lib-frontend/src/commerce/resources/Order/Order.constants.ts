@@ -3,6 +3,6 @@ import { ORDER_RESOURCE_NAME } from '@lib/shared/commerce/resources/Order/Order.
 import { type OrderModel } from '@lib/shared/commerce/resources/Order/Order.models';
 
 export const ORDER_RESOURCE_PARAMS = {
-  fields: [{ id: '_id' }],
+  fields: [],
   name: ORDER_RESOURCE_NAME,
 } satisfies ResourceParamsModel<OrderModel>;

@@ -5,6 +5,7 @@ import {
 } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
 import { useOtpResource } from '@lib/frontend/auth/hooks/useOtpResource/useOtpResource';
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
@@ -102,7 +103,8 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
                     <Button
                       elementState={elementStateF}
                       icon="phone"
-                      onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}>
+                      onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
+                      type={BUTTON_TYPE.TRANSPARENT}>
                       {t('core:continueWith', { value: t('user:phone') })}
                     </Button>
                   )}
@@ -111,7 +113,8 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
                     <Button
                       elementState={elementStateF}
                       icon="email"
-                      onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}>
+                      onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}
+                      type={BUTTON_TYPE.TRANSPARENT}>
                       {t('core:continueWith', { value: t('user:email') })}
                     </Button>
                   )}

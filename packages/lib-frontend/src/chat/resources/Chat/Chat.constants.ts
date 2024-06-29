@@ -3,6 +3,6 @@ import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constan
 import { type ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
 
 export const CHAT_RESOURCE_PARAMS = {
-  fields: [{ id: '_id' }],
+  fields: [],
   name: CHAT_RESOURCE_NAME,
 } satisfies ResourceParamsModel<ChatModel>;

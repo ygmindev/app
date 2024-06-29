@@ -6,6 +6,7 @@ import {
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { type UseResourceMethodParamsModel } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
 import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { expandFilter } from '@lib/shared/resource/utils/expandFilter/expandFilter';
@@ -38,7 +39,10 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   name,
   root,
 }: UseResourceParamsModel<TType, TForm, TRoot>): UseResourceModel<TType, TForm, TRoot> => {
-  const fieldsF = toGraphqlParamsFields<TType>(fields);
+  const fieldsF = toGraphqlParamsFields<TType>([
+    { id: '_id' as StringKeyModel<TType> },
+    ...(fields ?? []),
+  ]);
 
   const { query: get } = useResourceMethod<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>({
     after: afterGet,

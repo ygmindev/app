@@ -8,7 +8,6 @@ import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.mode
 
 export const VENDOR_RESOURCE_PARAMS = {
   fields: [
-    { id: '_id', isHidden: true },
     {
       id: 'imageSrc',
       label: ({ t }) => t('core:image'),
@@ -16,7 +15,7 @@ export const VENDOR_RESOURCE_PARAMS = {
     },
     { id: 'name' },
     {
-      fields: [{ id: '_id' }, { id: 'name' }],
+      fields: [{ id: 'name' }],
       id: UTILITY_RESOURCE_NAME,
       renderer: embeddedResourceRenderer({ element: <UtilityTable /> }),
     },

@@ -8,7 +8,6 @@ import { type AccessModel } from '@lib/shared/auth/resources/Access/Access.model
 
 export const ACCESS_RESOURCE_PARAMS = {
   fields: [
-    { id: '_id' },
     {
       id: 'role',
       isArray: true,
@@ -16,7 +15,7 @@ export const ACCESS_RESOURCE_PARAMS = {
     },
     {
       field: () => <UserInput />,
-      fields: [{ id: '_id' }, { id: 'first' }, { id: 'last' }, { id: 'email' }, { id: 'phone' }],
+      fields: [{ id: 'first' }, { id: 'last' }, { id: 'email' }, { id: 'phone' }],
       id: '_user',
     },
   ],

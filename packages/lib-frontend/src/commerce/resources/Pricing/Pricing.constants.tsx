@@ -12,7 +12,6 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 export const PRICING_RESOURCE_PARAMS = {
   fields: [
-    { id: '_id' },
     { id: 'frequency', options: Object.values(PRICING_FREQUENCY).map((id) => ({ id })) },
     { id: 'price', type: DATA_TYPE.NUMBER },
   ],

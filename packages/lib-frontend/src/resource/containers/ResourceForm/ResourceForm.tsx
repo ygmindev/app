@@ -33,7 +33,7 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
         fields?.map(({ field, fields: embeddedFields, id, isArray, label, options, type }) => {
           const element = (() => {
             const labelF = label ?? id;
-            const elementState = id === '_id' ? ELEMENT_STATE.DISABLED : undefined;
+            const elementState = id.startsWith('_') ? ELEMENT_STATE.DISABLED : undefined;
             if (field) {
               return cloneElement(field(), { elementState, label: labelF });
             }

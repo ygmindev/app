@@ -78,7 +78,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                     states: ANIMATION_STATES_SLIDABLE_VERTICAL({
                       deviceHeight,
                       height: heightF,
-                      offset: swipe?.y,
+                      offset: (swipe?.y ?? 0) - theme.shape.spacing[THEME_SIZE.MEDIUM],
                     }),
                   }}
                   backgroundColor={THEME_COLOR_MORE.SURFACE}

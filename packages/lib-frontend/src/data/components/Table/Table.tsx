@@ -126,14 +126,13 @@ export const Table = forwardRef(
 
     const handleRemove = onChange
       ? (i: number) => {
+          const newValue = cloneDeep(data);
           if (onRemove) {
-            const row = data?.[i];
+            const row = newValue?.[i];
             row && void onRemove(row);
-          } else {
-            const newValue = cloneDeep(data);
-            newValue?.splice(i, 1);
-            onChange(newValue);
           }
+          newValue?.splice(i, 1);
+          onChange(newValue);
         }
       : undefined;
 

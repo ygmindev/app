@@ -3,6 +3,6 @@ import { SOCKET_RESOURCE_NAME } from '@lib/shared/http/resources/Socket/Socket.c
 import { type SocketModel } from '@lib/shared/http/resources/Socket/Socket.models';
 
 export const SOCKET_RESOURCE_PARAMS = {
-  fields: [{ id: '_id' }],
+  fields: [],
   name: SOCKET_RESOURCE_NAME,
 } satisfies ResourceParamsModel<SocketModel>;

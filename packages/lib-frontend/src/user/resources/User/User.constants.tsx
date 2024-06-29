@@ -4,7 +4,6 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const USER_RESOURCE_PARAMS = {
   fields: [
-    { id: '_id' },
     { id: 'callingCode' },
     { id: 'email' },
     { id: 'first' },

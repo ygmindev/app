@@ -8,7 +8,6 @@ import { UTILITY_RESOURCE_NAME } from '@lib/shared/admin/resources/Utility/Utili
 import {
   type UtilityModel,
   type UtilityTypeModel,
-  type UtilityUsageModel,
 } from '@lib/shared/admin/resources/Utility/Utility.models';
 import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
@@ -21,12 +20,15 @@ export class Utility extends EmbeddedResource implements UtilityModel {
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   description?: string;
 
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  imageSrc?: string;
+
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
-  type!: UtilityTypeModel;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  pricing?: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
-  usage!: UtilityUsageModel;
+  @withField({ isArray: true, isDatabase: true, type: DATA_TYPE.STRING })
+  type!: Array<UtilityTypeModel>;
 }

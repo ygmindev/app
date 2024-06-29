@@ -1,11 +1,7 @@
 export const UTILITY_RESOURCE_NAME = 'Utility';
 
 export enum UTILITY_TYPE {
-  API = 'api',
-  SERVICE = 'service',
-}
-
-export enum UTILITY_USAGE {
+  AUTHENTICATION = 'authentication',
   DATABASE = 'database',
   FUNCTION = 'function',
   HOSTING = 'hosting',

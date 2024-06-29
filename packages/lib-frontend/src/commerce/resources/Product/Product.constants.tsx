@@ -7,12 +7,11 @@ import { type ProductModel } from '@lib/shared/commerce/resources/Product/Produc
 
 export const PRODUCT_RESOURCE_PARAMS = {
   fields: [
-    { id: '_id' },
     { id: 'name' },
     { id: 'description' },
     // TODO: use fields for embedded query
     {
-      fields: [{ id: 'price' }, { id: 'frequency' }, { id: '_id' }],
+      fields: [{ id: 'price' }, { id: 'frequency' }],
       id: PRICING_RESOURCE_NAME,
       renderer: embeddedResourceRenderer({ element: <PricingTable /> }),
     },

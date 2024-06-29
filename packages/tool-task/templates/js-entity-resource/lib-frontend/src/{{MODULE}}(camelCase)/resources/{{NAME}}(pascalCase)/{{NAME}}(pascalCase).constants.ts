@@ -4,6 +4,6 @@ import { {{NAME}}(constantCase)_RESOURCE_NAME } from '@lib/shared/{{MODULE}}(cam
 import { type {{NAME}}(pascalCase)Model } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 
 export const {{NAME}}(constantCase)_RESOURCE_PARAMS = {
-  fields: [{ id: '_id' }],
+  fields: [],
   name: {{NAME}}(constantCase)_RESOURCE_NAME,
 } satisfies ResourceParamsModel<{{NAME}}(pascalCase)Model>;
