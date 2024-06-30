@@ -15,37 +15,38 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const { get } = useUserResource();
   const [authStatus, authStatusSet] = useStore('auth.status');
   const { initialize, signOut } = useSession({
-    onAuthenticate: async (signInToken, token) => {
-      token && authTokenSet({ access: token });
-      let authStatus: AuthStatusModel = AUTH_STATUS.UNAUTHENTICATED;
-      if (signInToken) {
-        if (currentUser?._id !== signInToken._id) {
-          let user: PartialModel<UserModel> | undefined = {
-            ...signInToken.claims,
-            _id: signInToken._id,
-          };
-          const { result } = await get({ filter: [{ field: '_id', value: signInToken._id }] });
-          user = result ?? undefined;
-          if (user) {
-            authStatus = AUTH_STATUS.AUTHENTICATED;
-          } else {
-            await signOut();
-            authStatus = AUTH_STATUS.UNAUTHENTICATED;
-          }
-          currentUserSet(user);
-        }
-      }
-      authStatusSet(authStatus);
-      pubsub.publish(SIGN_IN, authStatus);
-    },
     onError: () => authStatusSet(AUTH_STATUS.UNAUTHENTICATED),
-    onTokenRefresh: async (token) => authTokenSet({ access: token }),
   });
   const [, authTokenSet] = useStore('auth.token');
   const [currentUser, currentUserSet] = useStore('user.currentUser');
 
   useEffect(() => {
-    void initialize();
+    void initialize({
+      onAuthenticate: async (signInToken, token) => {
+        token && authTokenSet({ access: token });
+        let authStatus: AuthStatusModel = AUTH_STATUS.UNAUTHENTICATED;
+        if (signInToken) {
+          if (currentUser?._id !== signInToken._id) {
+            let user: PartialModel<UserModel> | undefined = {
+              ...signInToken.claims,
+              _id: signInToken._id,
+            };
+            const { result } = await get({ filter: [{ field: '_id', value: signInToken._id }] });
+            user = result ?? undefined;
+            if (user) {
+              authStatus = AUTH_STATUS.AUTHENTICATED;
+            } else {
+              await signOut();
+              authStatus = AUTH_STATUS.UNAUTHENTICATED;
+            }
+            currentUserSet(user);
+          }
+        }
+        authStatusSet(authStatus);
+        pubsub.publish(SIGN_IN, authStatus);
+      },
+      onTokenRefresh: async (token) => authTokenSet({ access: token }),
+    });
   }, []);
 
   return <>{authStatus !== AUTH_STATUS.UNKNOWN && children}</>;
