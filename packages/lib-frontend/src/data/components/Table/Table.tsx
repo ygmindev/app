@@ -254,7 +254,7 @@ export const Table = forwardRef(
                     elementState={elementState}
                     key={cell.id}
                     width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
-                    {element}
+                    {element ?? <AsyncText>{emptyCell}</AsyncText>}
                   </Skeleton>
                 );
               })}
