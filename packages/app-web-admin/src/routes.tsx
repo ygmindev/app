@@ -1,6 +1,6 @@
-import { DEPENDENCY } from '@lib/frontend/admin/admin.constants';
-import { AdminHomePage } from '@lib/frontend/admin/pages/AdminHomePage/AdminHomePage';
-import { DependenciesPage } from '@lib/frontend/admin/pages/DependenciesPage/DependenciesPage';
+import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { HOME } from '@lib/frontend/core/core.constants';
 import { ResourcePage } from '@lib/frontend/resource/pages/ResourcePage/ResourcePage';
 import { RESOURCE_PAGE_ROUTES } from '@lib/frontend/resource/pages/ResourcePage/ResourcePage.constants';
 import { RESOURCE } from '@lib/frontend/resource/resource.constants';
@@ -11,21 +11,31 @@ import { getRoutes } from '@lib/frontend/route/utils/getRoutes/getRoutes';
 export const routes: Array<RouteModel> = getRoutes({
   appRoutes: [
     {
-      element: <AdminHomePage />,
-      pathname: '/',
-    },
-
-    {
-      element: <ResourcePage />,
       isProtectable: true,
-      navigation: ROUTE_NAVIGATION.TRANSITION,
-      pathname: RESOURCE,
-      routes: RESOURCE_PAGE_ROUTES,
-    },
+      namespaces: [RESOURCE],
+      navigation: ROUTE_NAVIGATION.NAVIGATION,
+      pathname: '/',
 
-    {
-      element: <DependenciesPage />,
-      pathname: DEPENDENCY,
+      routes: [
+        {
+          element: (
+            <Wrapper>
+              <Text>home</Text>
+            </Wrapper>
+          ),
+          icon: 'home',
+          pathname: HOME,
+          title: ({ t }) => t('core:home'),
+        },
+        {
+          element: <ResourcePage />,
+          icon: 'database',
+          navigation: ROUTE_NAVIGATION.TAB,
+          pathname: RESOURCE,
+          routes: RESOURCE_PAGE_ROUTES,
+          title: ({ t }) => t('resource:resource_plural'),
+        },
+      ],
     },
   ],
 });

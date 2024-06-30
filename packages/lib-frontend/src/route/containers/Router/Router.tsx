@@ -32,13 +32,16 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
             return element;
         }
       })();
+      const isHeader =
+        route.navigation === ROUTE_NAVIGATION.LIST ||
+        route.navigation === ROUTE_NAVIGATION.TRANSITION;
       const routeFF = {
         ...routeF,
         namespaces,
         routes: [
           {
             element: elementF,
-            header: merge([header, { previous: 1 }]),
+            header: isHeader ? merge([header, { previous: 1 }]) : header,
             isNavigatable: false,
             namespaces,
             pathname: '/',
@@ -48,10 +51,9 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
             merge([
               child,
               {
-                header: merge([
-                  { previous: route.navigation === ROUTE_NAVIGATION.TAB ? 2 : 1 },
-                  header,
-                ]),
+                header: isHeader
+                  ? merge([{ previous: route.navigation === ROUTE_NAVIGATION.TAB ? 2 : 1 }, header])
+                  : header,
                 namespaces,
                 title: child.title ?? child.pathname,
               },

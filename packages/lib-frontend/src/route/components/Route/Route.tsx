@@ -5,6 +5,7 @@ import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
+import { NavigationLayout } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { TabLayout } from '@lib/frontend/route/components/TabLayout/TabLayout';
@@ -78,8 +79,18 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
     },
   );
 
-  route.navigation === ROUTE_NAVIGATION.TAB &&
-    (element = <TabLayout route={route}>{element}</TabLayout>);
+  switch (route.navigation) {
+    case ROUTE_NAVIGATION.NAVIGATION: {
+      element = <NavigationLayout route={route}>{element}</NavigationLayout>;
+      break;
+    }
+    case ROUTE_NAVIGATION.TAB: {
+      element = <TabLayout route={route}>{element}</TabLayout>;
+      break;
+    }
+    default:
+      break;
+  }
 
   route.isProtectable && (element = <Protectable>{element}</Protectable>);
 

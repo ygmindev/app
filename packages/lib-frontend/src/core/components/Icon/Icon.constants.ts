@@ -125,7 +125,7 @@ export const FONTAWESOME_ICONS = {
   broom: 'broom',
   contact: 'address-book-o',
   copyright: 'copyright',
-  database: 'database-o',
+  database: 'database',
   diamond: 'diamond',
   dollar: 'dollar',
   fist: 'hand-grab-o',

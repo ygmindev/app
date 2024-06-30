@@ -40,7 +40,7 @@ export const _viewParams: ComposeComponentParamsModel<
       StyleSheet.flatten(style) as Record<string, unknown>,
       (_, k) =>
         // ['height', 'width', 'alignSelf', 'justifySelf', 'flex'].includes(k) ||
-        ['alignSelf', 'justifySelf', 'flex'].includes(k) ||
+        ['alignSelf', 'justifySelf', 'flex', 'width'].includes(k) ||
         k.startsWith('margin') ||
         k.startsWith('border'),
     );
@@ -57,7 +57,6 @@ export const _viewParams: ComposeComponentParamsModel<
       isVerticalScrollable &&
       isVerticalScrollableVisible &&
       (measure?.height ?? 0) < (measureContent?.height ?? 0);
-    console.warn(isVerticalScrollableVisibleF);
     return {
       children: (
         <View

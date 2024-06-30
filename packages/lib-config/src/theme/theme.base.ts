@@ -107,7 +107,7 @@ const config = defineConfig<ThemeConfigModel, _ThemeConfigModel>({
       },
 
       navigation: {
-        width: 300,
+        width: 220,
       },
 
       scrollBar: {

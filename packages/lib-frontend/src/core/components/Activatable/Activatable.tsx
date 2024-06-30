@@ -1,6 +1,3 @@
-import isFunction from 'lodash/isFunction';
-import { cloneElement, forwardRef, type ReactElement, useImperativeHandle, useState } from 'react';
-
 import { _isHoverable } from '@lib/frontend/core/components/Activatable/_isHoverable';
 import { ACTIVATABLE_TRIGGER } from '@lib/frontend/core/components/Activatable/Activatable.constants';
 import {
@@ -12,6 +9,8 @@ import { type RSFCModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import isFunction from 'lodash/isFunction';
+import { cloneElement, forwardRef, type ReactElement, useImperativeHandle, useState } from 'react';
 
 export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> = forwardRef(
   ({ children, onActive, onInactive, trigger, ...props }, ref) => {
