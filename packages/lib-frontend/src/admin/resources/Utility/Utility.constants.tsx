@@ -19,9 +19,6 @@ export const UTILITY_RESOURCE_PARAMS = {
       renderer: ({ value }) => (value ? <Logo src={value} /> : null),
     },
     { id: 'name' },
-    { id: 'description' },
-    { id: 'pricing' },
-    { id: 'url' },
     {
       id: 'type',
       options: Object.values(UTILITY_TYPE).map((id) => ({ id })),
@@ -40,6 +37,9 @@ export const UTILITY_RESOURCE_PARAMS = {
           </Wrapper>
         ) : null,
     },
+    { id: 'description' },
+    { id: 'pricing' },
+    { id: 'url' },
   ],
   name: UTILITY_RESOURCE_NAME,
   rootName: VENDOR_RESOURCE_NAME,

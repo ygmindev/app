@@ -57,6 +57,7 @@ export const _viewParams: ComposeComponentParamsModel<
       isVerticalScrollable &&
       isVerticalScrollableVisible &&
       (measure?.height ?? 0) < (measureContent?.height ?? 0);
+    console.warn(isVerticalScrollableVisibleF);
     return {
       children: (
         <View
@@ -76,7 +77,7 @@ export const _viewParams: ComposeComponentParamsModel<
             {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, theme, ref))}
             alwaysBounceHorizontal={false}
             alwaysBounceVertical={false}
-            contentContainerStyle={{ ...stylesContainer, flex: 1 }}
+            contentContainerStyle={{ ...stylesContainer, flexGrow: 1 }}
             horizontal={isHorizontalScrollable ?? false}
             onContentSizeChange={(width, height) => measureContentSet({ height, width })}
             onLayout={({
