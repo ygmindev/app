@@ -7,6 +7,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type MeasureModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { TABLE_CELL_WIDTH_DEFAULT } from '@lib/frontend/data/components/Table/Table.constants';
@@ -45,6 +46,7 @@ import {
   type ReactNode,
   useImperativeHandle,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
@@ -72,6 +74,7 @@ export const Table = forwardRef(
     const { t } = useTranslation();
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props });
+    const frozenWrapperRef = useRef<WrapperRefModel>(null);
 
     const columnsF = useMemo<TablePropsModel<TType>['columns']>(
       () =>
@@ -205,7 +208,9 @@ export const Table = forwardRef(
         <Wrapper
           flex
           isFullWidth={isFullWidth}
-          isVerticalScrollable>
+          isVerticalScrollable
+          isVerticalScrollableVisible={!isRenderFrozen}
+          ref={isRenderFrozen ? frozenWrapperRef : undefined}>
           {rows.map((row, i) => (
             <Wrapper
               border={DIRECTION.TOP}
@@ -289,7 +294,9 @@ export const Table = forwardRef(
 
         <Wrapper
           flex
-          mLeft={frozenMeasure?.width ?? 0}>
+          isVerticalScrollable
+          mLeft={frozenMeasure?.width ?? 0}
+          onScroll={(position) => frozenWrapperRef.current?.scrollTo(position)}>
           {renderTable(headersAll, false)}
         </Wrapper>
       </Wrapper>
