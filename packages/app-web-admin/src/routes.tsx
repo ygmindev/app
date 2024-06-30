@@ -1,5 +1,4 @@
 import { Text } from '@lib/frontend/core/components/Text/Text';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { HOME } from '@lib/frontend/core/core.constants';
 import { ResourcePage } from '@lib/frontend/resource/pages/ResourcePage/ResourcePage';
 import { RESOURCE_PAGE_ROUTES } from '@lib/frontend/resource/pages/ResourcePage/ResourcePage.constants';
@@ -15,14 +14,9 @@ export const routes: Array<RouteModel> = getRoutes({
       namespaces: [RESOURCE],
       navigation: ROUTE_NAVIGATION.NAVIGATION,
       pathname: '/',
-
       routes: [
         {
-          element: (
-            <Wrapper>
-              <Text>home</Text>
-            </Wrapper>
-          ),
+          element: <Text>home</Text>,
           icon: 'home',
           pathname: HOME,
           title: ({ t }) => t('core:home'),
