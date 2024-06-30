@@ -1,10 +1,11 @@
 import { type WebsocketStatusModel } from '@lib/shared/http/http.models';
 import { type UriModel } from '@lib/shared/route/route.models';
 
-export type _UseWebsocketParamsModel<TType = unknown> = UriModel & {
+export type _UseWebsocketParamsModel<TType = unknown> = {
   onClose?(): void;
   onMessage?(message: TType): void;
   onOpen?(): void;
+  uri(): Promise<UriModel>;
 };
 
 export type _UseWebsocketModel<TType = unknown> = {

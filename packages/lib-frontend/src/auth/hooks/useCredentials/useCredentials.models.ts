@@ -3,4 +3,6 @@ import { type EmptyObjectModel } from '@lib/shared/core/core.models';
 
 export type UseCredentialsParamsModel = EmptyObjectModel;
 
-export type UseCredentialsModel = CredentialsModel;
+export type UseCredentialsModel = {
+  getCredentials(): Promise<CredentialsModel>;
+};

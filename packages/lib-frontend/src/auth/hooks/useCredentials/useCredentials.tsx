@@ -12,5 +12,5 @@ export const useCredentials = ({}: UseCredentialsParamsModel = {}): UseCredentia
   const credentials: CredentialsModel = {};
   token && (credentials.Authorization = `Bearer ${token}`);
   currentGroup?._id && (credentials[GROUP_RESOURCE_NAME] = currentGroup._id);
-  return credentials;
+  return { getCredentials: async () => credentials };
 };

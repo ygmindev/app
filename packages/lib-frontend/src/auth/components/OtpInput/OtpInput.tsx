@@ -95,6 +95,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
               key={id}
               position={SHAPE_POSITION.RELATIVE}>
               <TextInput
+                elementState={elementStateControlled}
                 isCenter
                 isNoClear
                 isTransparent

@@ -3,10 +3,7 @@ import {
   type _UseWebsocketParamsModel,
 } from '@lib/frontend/http/hooks/useWebsocket/_useWebsocket.models';
 
-export type UseWebsocketParamsModel<TType = unknown> = Omit<
-  _UseWebsocketParamsModel<TType>,
-  'url'
-> & {
+export type UseWebsocketParamsModel<TType = unknown> = _UseWebsocketParamsModel<TType> & {
   isCredentials?: boolean;
 };
 

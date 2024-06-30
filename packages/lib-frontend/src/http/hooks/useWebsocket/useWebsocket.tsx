@@ -8,23 +8,26 @@ import {
 import { WEBSOCKET_STATUS } from '@lib/shared/http/http.constants';
 
 export const useWebsocket = <TType = unknown,>({
-  host = process.env.SERVER_APP_WEBSOCKET_HOST,
   isCredentials = true,
-  pathname = '/ws',
-  port = process.env.SERVER_APP_WEBSOCKET_PORT,
+  uri: uriProps,
   ...params
-}: UseWebsocketParamsModel<TType> = {}): UseWebsocketModel<TType> => {
-  const credentials = useCredentials();
+}: UseWebsocketParamsModel<TType>): UseWebsocketModel<TType> => {
+  const { getCredentials } = useCredentials();
 
   const result = _useWebsocket<TType>({
     ...params,
-    host,
-    params:
-      isCredentials && credentials.Authorization
-        ? { Authorization: credentials.Authorization }
-        : undefined,
-    pathname,
-    port,
+    uri: async () => {
+      const { host, params, pathname, port } = await uriProps();
+      const paramsF = isCredentials
+        ? { Authorization: (await getCredentials()).Authorization }
+        : {};
+      return {
+        host: host ?? process.env.SERVER_APP_WEBSOCKET_HOST,
+        params: { ...paramsF, ...params },
+        pathname: pathname ?? '/ws',
+        port: port ?? process.env.SERVER_APP_WEBSOCKET_PORT,
+      };
+    },
   });
 
   useUnmount(() => {

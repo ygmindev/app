@@ -37,16 +37,16 @@ export class Otp extends EntityResource implements OtpModel {
   })
   declare created: Date;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   callingCode?: string;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   email?: string;
 
   @withAccess({ level: ACCESS_LEVEL.RESTRICTED })
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   otp!: string;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   phone?: string;
 }

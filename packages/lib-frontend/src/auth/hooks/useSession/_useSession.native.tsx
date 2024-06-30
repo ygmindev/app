@@ -10,8 +10,12 @@ import { type AuthError } from 'firebase/auth';
 
 let auth: FirebaseAuthTypes.Module;
 
-export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionModel => ({
-  initialize: async ({ onAuthenticate, onTokenRefresh }): Promise<void> => {
+export const _useSession = ({
+  onAuthenticate,
+  onError,
+  onTokenRefresh,
+}: _UseSessionParamsModel): _UseSessionModel => ({
+  initialize: async (): Promise<void> => {
     auth = firebaseAuth();
     // process.env.APP_FIREBASE_USE_EMULATOR && auth.useEmulator('http://localhost:9099');
     if (auth) {
@@ -34,6 +38,11 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
           : void onAuthenticate(null);
       });
     }
+  },
+
+  refresh: async (): Promise<void> => {
+    const token = await auth.currentUser?.getIdToken();
+    token && void onTokenRefresh(token);
   },
 
   signInWithToken: async (token: string): Promise<void> => {

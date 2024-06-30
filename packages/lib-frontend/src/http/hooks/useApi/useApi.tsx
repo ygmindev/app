@@ -4,9 +4,7 @@ import {
   type UseApiParamsModel,
 } from '@lib/frontend/http/hooks/useApi/useApi.models';
 import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
-import { type CredentialsModel } from '@lib/shared/auth/auth.models';
 import toNumber from 'lodash/toNumber';
-import { useRef } from 'react';
 
 export const useApi = ({
   host,
@@ -16,13 +14,11 @@ export const useApi = ({
   pathname,
   port,
 }: UseApiParamsModel): UseApiModel => {
-  const credentials = useCredentials();
-  const credentialsRef = useRef<CredentialsModel>();
-  credentialsRef.current = credentials;
+  const { getCredentials } = useCredentials();
   return useHttp({
     baseUri: { host: host ?? '', pathname, port: port ? toNumber(port) : undefined },
     onRequest: async (config) => {
-      isCredentials && (config.headers = { ...config.headers, ...credentialsRef.current });
+      isCredentials && (config.headers = { ...config.headers, ...(await getCredentials()) });
       return onRequest ? onRequest(config) : config;
     },
     onResponse,

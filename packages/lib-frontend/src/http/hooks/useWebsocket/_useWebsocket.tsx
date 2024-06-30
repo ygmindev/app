@@ -5,24 +5,19 @@ import {
 import { WEBSOCKET_STATUS } from '@lib/shared/http/http.constants';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { useSocketIO } from 'react-use-websocket';
-import { type QueryParams } from 'react-use-websocket/dist/lib/types';
 
 export const _useWebsocket = <TType,>({
-  host,
   onClose,
   onMessage,
   onOpen,
-  params,
-  pathname,
-  port,
+  uri: uriProps,
 }: _UseWebsocketParamsModel<TType>): _UseWebsocketModel<TType> => {
-  const { getWebSocket, readyState, sendMessage } = useSocketIO(uri({ host, pathname, port }), {
+  const { getWebSocket, readyState, sendMessage } = useSocketIO(async () => uri(await uriProps()), {
     onClose: console.warn,
     onMessage: (event) => {
       console.warn(event);
     },
     onOpen: console.warn,
-    queryParams: params as QueryParams,
     reconnectAttempts: 0,
     retryOnError: false,
   });

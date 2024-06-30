@@ -12,8 +12,12 @@ import { getAuth, onAuthStateChanged, signInWithCustomToken, signOut } from 'fir
 
 let auth: Auth;
 
-export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionModel => ({
-  initialize: async ({ onAuthenticate, onTokenRefresh }): Promise<void> => {
+export const _useSession = ({
+  onAuthenticate,
+  onError,
+  onTokenRefresh,
+}: _UseSessionParamsModel): _UseSessionModel => ({
+  initialize: async (): Promise<void> => {
     if (!isServer && !getApps().length) {
       if (process.env.APP_FIREBASE_API_KEY) {
         initializeApp({
@@ -60,6 +64,11 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
         logger.error('Auth API key is missing');
       }
     }
+  },
+
+  refresh: async (): Promise<void> => {
+    const token = await auth.currentUser?.getIdToken();
+    token && void onTokenRefresh(token);
   },
 
   signInWithToken: async (token: string): Promise<void> => {
