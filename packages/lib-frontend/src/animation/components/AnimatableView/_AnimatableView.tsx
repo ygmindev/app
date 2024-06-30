@@ -2,8 +2,8 @@ import { type _AnimatableViewPropsModel } from '@lib/frontend/animation/componen
 import { type AnimatableViewRefModel } from '@lib/frontend/animation/components/AnimatableView/AnimatableView.models';
 import { useAnimationState } from '@lib/frontend/animation/hooks/useAnimationState/useAnimationState';
 import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
-import { _viewParams } from '@lib/frontend/core/components/View/_View';
-import { _viewParams as _viewParamsPressable } from '@lib/frontend/core/components/View/_View.pressable';
+import { getViewParams as getViewParamsBase } from '@lib/frontend/core/components/View/_View';
+import { getViewParams as getViewParamsPressable } from '@lib/frontend/core/components/View/_View.pressable';
 import { type RSFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -14,6 +14,9 @@ import { forwardRef, useImperativeHandle } from 'react';
 import { Pressable } from 'react-native';
 
 const PressableAnimatable = animatable({ Component: Pressable as ComponentType });
+
+const viewParamsBase = getViewParamsBase();
+const viewParamsPressable = getViewParamsPressable();
 
 export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewPropsModel> =
   forwardRef(({ animation, children, elementState, testID, ...props }, ref) => {
@@ -43,9 +46,8 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
 
     return (
       <Component
-        {...(_viewParams.getProps && _viewParams.getProps({ ...props, style: styles }, theme))}
-        {...(_viewParamsPressable.getProps &&
-          _viewParamsPressable.getProps({ ...props, style: styles }, theme))}
+        {...viewParamsBase.getProps?.({ ...props, style: styles }, theme)}
+        {...viewParamsPressable.getProps?.({ ...props, style: styles }, theme)}
         {...(animationProps as Omit<MotiProps['animate'], 'pointerEvents'>)}
         hitSlop={undefined}
         ref={ref}

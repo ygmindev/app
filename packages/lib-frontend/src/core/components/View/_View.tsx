@@ -1,6 +1,3 @@
-import { type ViewProps } from 'react-native';
-import { View } from 'react-native';
-
 import {
   type _ViewPropsModel,
   type _ViewRefModel,
@@ -8,13 +5,15 @@ import {
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import { type ViewStyleModel } from '@lib/frontend/style/style.models';
+import { type ViewProps } from 'react-native';
+import { View } from 'react-native';
 
-export const _viewParams: ComposeComponentParamsModel<
+export const getViewParams = (): ComposeComponentParamsModel<
   _ViewPropsModel,
   ViewProps,
   ViewStyleModel,
   _ViewRefModel
-> = {
+> => ({
   Component: View,
 
   getProps: ({
@@ -48,8 +47,8 @@ export const _viewParams: ComposeComponentParamsModel<
 
     pointerEvents: isHidden ? 'none' : undefined,
   }),
-};
+});
 
 export const _View = composeComponent<_ViewPropsModel, ViewProps, ViewStyleModel, _ViewRefModel>(
-  _viewParams,
+  getViewParams(),
 );

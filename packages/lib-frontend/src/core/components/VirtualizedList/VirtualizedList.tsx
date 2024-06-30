@@ -17,6 +17,12 @@ export const VirtualizedList = forwardRef(
   <TType extends WithIdModel>(
     {
       isHorizontal,
+      isHorizontalScrollable,
+      isHorizontalScrollableVisible,
+      isVerticalScrollable,
+      isVerticalScrollableVisible,
+      items,
+      render,
       s,
       ...props
     }: RLFCPropsModel<VirtualizedListRefModel, VirtualizedListPropsModel<TType>>,
@@ -25,9 +31,13 @@ export const VirtualizedList = forwardRef(
     const { wrapperProps } = useLayoutStyles({ props });
     const theme = useTheme();
     return (
-      <Wrapper {...wrapperProps}>
+      <Wrapper
+        {...wrapperProps}
+        isHorizontalScrollable={isHorizontalScrollable}
+        isHorizontalScrollableVisible={isHorizontalScrollableVisible}
+        isVerticalScrollable={isVerticalScrollable}
+        isVerticalScrollableVisible={isVerticalScrollableVisible}>
         <_VirtualizedList
-          {...props}
           divider={
             s ? (
               <View
@@ -38,9 +48,14 @@ export const VirtualizedList = forwardRef(
             ) : undefined
           }
           isHorizontal={isHorizontal}
+          items={items}
           ref={ref}
+          render={render}
         />
       </Wrapper>
     );
   },
-);
+) as <TType extends WithIdModel>(
+  props: RLFCPropsModel<VirtualizedListRefModel, VirtualizedListPropsModel<TType>>,
+  ref: ForwardedRef<VirtualizedListRefModel>,
+) => ReactElement<RLFCPropsModel<VirtualizedListRefModel, VirtualizedListPropsModel<TType>>>;

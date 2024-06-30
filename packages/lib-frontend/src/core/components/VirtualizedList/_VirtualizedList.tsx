@@ -1,3 +1,4 @@
+import { getViewParams as getViewParamsScrollable } from '@lib/frontend/core/components/View/_View.scrollable';
 import {
   type _VirtualizedListPropsModel,
   type _VirtualizedListRefModel,
@@ -8,6 +9,8 @@ import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ForwardedRef, type ReactElement } from 'react';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { FlatList, type ScrollView } from 'react-native';
+
+const viewParams = getViewParamsScrollable();
 
 export const _VirtualizedList = forwardRef(
   <TType extends WithIdModel>(
@@ -25,13 +28,19 @@ export const _VirtualizedList = forwardRef(
     const flatListRef = useRef<FlatList>(null);
 
     useImperativeHandle(ref, () => ({
-      scrollTo: (flatListRef.current?.getScrollableNode() as ScrollView).scrollTo,
+      scrollTo: ({ x, y }) =>
+        (flatListRef.current?.getScrollableNode() as ScrollView).scrollTo({
+          animated: false,
+          x,
+          y,
+        }),
     }));
 
     return (
       <FlatList<TType>
+        {...viewParams}
         ItemSeparatorComponent={divider ? () => divider : undefined}
-        contentContainerStyle={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
         data={items}
         horizontal={isHorizontal}
         keyExtractor={({ id }) => id}

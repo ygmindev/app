@@ -57,13 +57,7 @@ export type RTFCModel<TType = undefined, TProps = object> = TFCModel<TProps & Re
 
 export type PropsModel<TType> = TType extends ComponentType<infer TProps> ? TProps : never;
 
-// export type RefPropsModel<TType = unknown> = {
-//   ref?: Ref<TType>;
-// };
-
 export type RefPropsModel<TType = unknown> = RefAttributes<TType>;
-
-// ForwardRefExoticComponent<PropsWithoutRef<P> & RefAttributes<T>>
 
 export type ChildrenPropsModel<TType = ReactNode | Array<ReactNode>> = ChildPropsModel<TType>;
 

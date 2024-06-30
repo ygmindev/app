@@ -6,8 +6,9 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import { VirtualizedList } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList';
+import { type VirtualizedListRefModel } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type MeasureModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { TABLE_CELL_WIDTH_DEFAULT } from '@lib/frontend/data/components/Table/Table.constants';
@@ -74,7 +75,9 @@ export const Table = forwardRef(
     const { t } = useTranslation();
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props });
-    const frozenWrapperRef = useRef<WrapperRefModel>(null);
+
+    const listRef = useRef<VirtualizedListRefModel>(null);
+    const frozenListRef = useRef<VirtualizedListRefModel>(null);
 
     const columnsF = useMemo<TablePropsModel<TType>['columns']>(
       () =>
@@ -153,6 +156,7 @@ export const Table = forwardRef(
         pLeft={THEME_SIZE.SMALL}
         pRight={THEME_SIZE.SMALL}
         pTop={THEME_SIZE.SMALL}>
+        {/* headers */}
         {!isHeadless && (
           <Wrapper
             height={theme.shape.size[THEME_SIZE.SMALL]}
@@ -205,13 +209,20 @@ export const Table = forwardRef(
           </Wrapper>
         )}
 
-        <Wrapper
+        {/* rows */}
+        <VirtualizedList
           flex
           isFullWidth={isFullWidth}
           isVerticalScrollable
           isVerticalScrollableVisible={!isRenderFrozen}
-          ref={isRenderFrozen ? frozenWrapperRef : undefined}>
-          {rows.map((row, i) => (
+          items={rows}
+          onScroll={(position) =>
+            isRenderFrozen
+              ? listRef.current?.scrollTo(position)
+              : frozenListRef.current?.scrollTo(position)
+          }
+          ref={isRenderFrozen ? frozenListRef : listRef}
+          render={(row, i) => (
             <Wrapper
               border={DIRECTION.TOP}
               borderColor={theme.color.border}
@@ -264,8 +275,8 @@ export const Table = forwardRef(
                 );
               })}
             </Wrapper>
-          ))}
-        </Wrapper>
+          )}
+        />
       </Wrapper>
     );
 
@@ -294,9 +305,7 @@ export const Table = forwardRef(
 
         <Wrapper
           flex
-          isVerticalScrollable
-          mLeft={frozenMeasure?.width ?? 0}
-          onScroll={(position) => frozenWrapperRef.current?.scrollTo(position)}>
+          mLeft={frozenMeasure?.width ?? 0}>
           {renderTable(headersAll, false)}
         </Wrapper>
       </Wrapper>

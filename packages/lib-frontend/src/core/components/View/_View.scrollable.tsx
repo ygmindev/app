@@ -1,25 +1,29 @@
 import { ScrollBar } from '@lib/frontend/core/components/ScrollBar/ScrollBar';
-import { _viewParams as _viewParamsBase } from '@lib/frontend/core/components/View/_View';
+import { getViewParams as getViewParamsBase } from '@lib/frontend/core/components/View/_View';
 import {
   type _ViewPropsModel,
   type _ViewRefModel,
 } from '@lib/frontend/core/components/View/_View.models';
 import { View } from '@lib/frontend/core/components/View/View';
-import { type MeasureModel, type PositionModel } from '@lib/frontend/core/core.models';
+import {
+  type MeasureModel,
+  type PositionModel,
+  type RefPropsModel,
+} from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import { type ViewStyleModel } from '@lib/frontend/style/style.models';
 import { partionObject } from '@lib/shared/core/utils/partionObject/partionObject';
-import { Fragment, useState } from 'react';
-import { type ViewProps } from 'react-native';
-import { ScrollView, StyleSheet } from 'react-native';
+import { type ComponentType, Fragment, useState } from 'react';
+import { ScrollView, type ScrollViewProps, StyleSheet, type ViewProps } from 'react-native';
 
-export const _viewParams: ComposeComponentParamsModel<
-  _ViewPropsModel,
-  ViewProps,
-  ViewStyleModel,
-  _ViewRefModel
-> = {
+const viewParamsBase = getViewParamsBase();
+
+export const getViewParams = (
+  { Component }: { Component: ComponentType<ScrollViewProps & RefPropsModel<ScrollView>> } = {
+    Component: ScrollView,
+  },
+): ComposeComponentParamsModel<_ViewPropsModel, ViewProps, ViewStyleModel, _ViewRefModel> => ({
   Component: Fragment,
 
   getProps: (
@@ -53,10 +57,12 @@ export const _viewParams: ComposeComponentParamsModel<
       isHorizontalScrollable &&
       isHorizontalScrollableVisible &&
       (measure?.width ?? 0) < (measureContent?.width ?? 0);
+
     const isVerticalScrollableVisibleF =
       isVerticalScrollable &&
       isVerticalScrollableVisible &&
       (measure?.height ?? 0) < (measureContent?.height ?? 0);
+
     return {
       children: (
         <View
@@ -72,8 +78,8 @@ export const _viewParams: ComposeComponentParamsModel<
             ...stylesView,
           }}
           testID={testID}>
-          <ScrollView
-            {...(_viewParamsBase.getProps && _viewParamsBase.getProps(props, theme, ref))}
+          <Component
+            {...viewParamsBase.getProps?.(props, theme, ref)}
             alwaysBounceHorizontal={false}
             alwaysBounceVertical={false}
             contentContainerStyle={{ ...stylesContainer, flexGrow: 1 }}
@@ -120,8 +126,8 @@ export const _viewParams: ComposeComponentParamsModel<
       ),
     };
   },
-};
+});
 
 export const _View = composeComponent<_ViewPropsModel, ViewProps, ViewStyleModel, _ViewRefModel>(
-  _viewParams,
+  getViewParams(),
 );

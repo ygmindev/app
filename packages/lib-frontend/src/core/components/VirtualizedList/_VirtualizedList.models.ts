@@ -6,7 +6,7 @@ export type _VirtualizedListPropsModel<TType extends WithIdModel> = {
   divider?: ReactElement;
   isHorizontal?: boolean;
   items: Array<TType>;
-  render(item: TType, index?: number): ReactElement;
+  render(item: TType, index: number): ReactElement;
 };
 
 export type _VirtualizedListRefModel = {
