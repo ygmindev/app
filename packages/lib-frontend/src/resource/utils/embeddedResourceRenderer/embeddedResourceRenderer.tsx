@@ -28,7 +28,7 @@ export const embeddedResourceRenderer =
         element={() =>
           cloneElement(element, { root: row._id as TRoot extends undefined ? never : string })
         }
-        icon="open"
+        icon="database"
         size={THEME_SIZE.SMALL}
         title={({ t }) => t('core:edit')}
       />
