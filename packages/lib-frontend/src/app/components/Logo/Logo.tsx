@@ -24,8 +24,6 @@ export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
       pathname: '/',
     };
   },
-
-  stylers: [{ margin: 'auto' }],
 });
 
 process.env.APP_IS_DEBUG && (Logo.displayName = variableName({ Logo }));

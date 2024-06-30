@@ -15,7 +15,6 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
-import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
@@ -32,9 +31,9 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
       position={SHAPE_POSITION.RELATIVE}
       zIndex>
       <Wrapper
-        align={FLEX_ALIGN.CENTER}
         border={DIRECTION.BOTTOM}
         height={theme.layout.header.height}
+        isAlign
         isRow
         pHorizontal>
         <Wrapper
