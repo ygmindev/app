@@ -17,10 +17,6 @@ export const VirtualizedList = forwardRef(
   <TType extends WithIdModel>(
     {
       isHorizontal,
-      isHorizontalScrollable,
-      isHorizontalScrollableVisible,
-      isVerticalScrollable,
-      isVerticalScrollableVisible,
       items,
       render,
       s,
@@ -31,12 +27,7 @@ export const VirtualizedList = forwardRef(
     const { wrapperProps } = useLayoutStyles({ props });
     const theme = useTheme();
     return (
-      <Wrapper
-        {...wrapperProps}
-        isHorizontalScrollable={isHorizontalScrollable}
-        isHorizontalScrollableVisible={isHorizontalScrollableVisible}
-        isVerticalScrollable={isVerticalScrollable}
-        isVerticalScrollableVisible={isVerticalScrollableVisible}>
+      <Wrapper {...wrapperProps}>
         <_VirtualizedList
           divider={
             s ? (

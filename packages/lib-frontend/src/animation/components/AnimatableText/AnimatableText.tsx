@@ -8,6 +8,7 @@ import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 export const AnimatableText = composeComponent<AnimatableTextPropsModel, _AnimatableTextPropsModel>(
   {
     Component: _AnimatableText,
+
     stylers: textParams.stylers,
   },
 );
