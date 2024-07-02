@@ -16,25 +16,26 @@ const viewParamsScrollable = getViewParamsScrollable<
   _VirtualizedListRefModel
 >({
   Component: forwardRef<_VirtualizedListRefModel, FlatListProps<WithIdModel>>((props, ref) => {
-    const flatListRef = useRef<FlatList>(null);
+    const refF = useRef<FlatList>(null);
+
     useImperativeHandle(ref, () => ({
       scrollTo: (position) =>
-        (flatListRef.current?.getScrollableNode() as ScrollView).scrollTo({
+        (refF.current?.getScrollableNode() as ScrollView).scrollTo({
           ...position,
           animated: false,
         }),
     }));
+
     return (
       <FlatList
         {...props}
-        ref={flatListRef}
+        ref={refF}
       />
     );
   }),
 
   getProps: ({ divider, isHorizontal, items, render }) => ({
     ItemSeparatorComponent: divider ? () => divider : undefined,
-    contentContainerStyle: { flexGrow: 1 },
     data: items,
     horizontal: isHorizontal,
     keyExtractor: ({ id }) => id,
