@@ -52,14 +52,12 @@ export const getViewParams = <
     const [value, valueSet] = useState<PositionModel>();
 
     const isHorizontalScrollableVisibleF =
-      props.isHorizontalScrollable &&
-      props.isHorizontalScrollableVisible &&
-      (measure?.width ?? 0) < (measureContent?.width ?? 0);
+      props.isHorizontalScrollableVisible ??
+      (props.isHorizontalScrollable && (measure?.width ?? 0) < (measureContent?.width ?? 0));
 
     const isVerticalScrollableVisibleF =
-      props.isVerticalScrollable &&
-      props.isVerticalScrollableVisible &&
-      (measure?.height ?? 0) < (measureContent?.height ?? 0);
+      props.isVerticalScrollableVisible ??
+      (props.isVerticalScrollable && (measure?.height ?? 0) < (measureContent?.height ?? 0));
 
     const propsF = {
       ...viewParamsBase.getProps?.(props, theme, ref as ForwardedRef<_ViewRefModel>),

@@ -34,7 +34,6 @@ export class _HttpImplementation implements _HttpImplementationModel {
     });
 
     this._onError = onError;
-
     onRequest &&
       this._instance.interceptors.request.use(
         ({ headers, responseType, timeout, withCredentials, ...params }) =>

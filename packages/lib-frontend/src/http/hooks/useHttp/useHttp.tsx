@@ -12,7 +12,6 @@ import { HttpImplementation } from '@lib/shared/http/utils/HttpImplementation/Ht
 export const useHttp = (params: UseHttpParamsModel = {}): UseHttpModel => {
   const { handleError } = useErrorContext();
   const [isOffline, isOfflineSet] = useStore('app.isOffline');
-
   return new HttpImplementation({
     ...params,
     onError: async (e) => {

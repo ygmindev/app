@@ -274,6 +274,7 @@ const FormContainerF = forwardRef(
               {bottomElement && bottomElement({ elementState: elementStateF })}
             </Wrapper>
           }
+          flex
           isFullHeight={isFullHeight}
           isFullWidth={isFullWidth}
           s>

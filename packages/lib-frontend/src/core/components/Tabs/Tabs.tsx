@@ -20,7 +20,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
   defaultValue,
   onChange,
   tabs,
-  type = TABS_TYPE.BUTTON,
+  type = TABS_TYPE.CONTAINED,
   value,
   ...props
 }) => {

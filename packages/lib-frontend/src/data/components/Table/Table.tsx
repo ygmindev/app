@@ -214,7 +214,7 @@ export const Table = forwardRef(
           flex
           isFullWidth={isFullWidth}
           isVerticalScrollable
-          isVerticalScrollableVisible={!isRenderFrozen}
+          isVerticalScrollableVisible={isRenderFrozen ? false : undefined}
           items={rows}
           onScroll={(position) =>
             isRenderFrozen

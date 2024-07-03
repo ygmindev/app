@@ -47,8 +47,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
         {...wrapperProps}
         isFullHeight={isFullHeight}
         isFullWidth
-        isVerticalScrollable={isFullHeight}
-        isVerticalScrollableVisible>
+        isVerticalScrollable={isFullHeight}>
         <Wrapper
           flex={isFullHeight}
           isFullWidth={isFullWidthF}

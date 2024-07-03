@@ -4,7 +4,6 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { ConnectionBoundary } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary';
-import { FilterButton } from '@lib/frontend/data/components/FilterButton/FilterButton';
 import { Table } from '@lib/frontend/data/components/Table/Table';
 import { type TableColumnModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -15,7 +14,6 @@ import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import {
@@ -140,19 +138,7 @@ export const ResourceTable = <
           s>
           <Wrapper
             isAlign
-            isRow
-            justify={FLEX_JUSTIFY.END}>
-            <FilterButton
-              element={
-                <ResourceFilter
-                  fields={fieldsF}
-                  name={name}
-                  onSubmit={async (filter) => paramsSet({ filter })}
-                  rootName={rootName}
-                />
-              }
-            />
-
+            isRow>
             <ModalButton
               element={({ onClose }) => (
                 <ResourceForm<TType, TForm, TRoot>
@@ -170,6 +156,26 @@ export const ResourceTable = <
               icon="add"
               size={THEME_SIZE.SMALL}>
               {t('core:new', { value: name })}
+            </ModalButton>
+
+            <ModalButton
+              {...wrapperProps}
+              element={({ onClose }) => (
+                <ResourceFilter
+                  fields={fieldsF}
+                  name={name}
+                  onCancel={onClose}
+                  onSubmit={async (filter) => {
+                    onClose();
+                    paramsSet({ filter });
+                  }}
+                  rootName={rootName}
+                />
+              )}
+              icon="filter"
+              size={THEME_SIZE.SMALL}
+              title={t('core:filter')}>
+              {t('core:filter_plural')}
             </ModalButton>
           </Wrapper>
 
