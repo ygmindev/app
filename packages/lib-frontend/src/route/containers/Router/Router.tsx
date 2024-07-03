@@ -24,6 +24,7 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
           case ROUTE_NAVIGATION.LIST:
             return (
               <RouteList
+                mTop
                 root
                 routes={route.routes}
               />

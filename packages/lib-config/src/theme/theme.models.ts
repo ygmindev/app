@@ -69,7 +69,7 @@ export type ThemeConfigModel = {
   opaque: Record<ThemeSizeModel, number>;
 
   shape: {
-    borderRadius: Record<ThemeSizeModel, number>;
+    borderRadius: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
 
     shadow: {
       elevation: number;

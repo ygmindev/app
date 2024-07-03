@@ -10,7 +10,12 @@ import {
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_COLOR_MORE, THEME_ROLE } from '@lib/frontend/style/style.constants';
+import {
+  THEME_COLOR,
+  THEME_COLOR_MORE,
+  THEME_ROLE,
+  THEME_SIZE_MORE,
+} from '@lib/frontend/style/style.constants';
 import { forwardRef } from 'react';
 
 export const CheckboxInput: RLFCModel<CheckboxInputRefModel, CheckboxInputPropsModel> = forwardRef(
@@ -34,7 +39,9 @@ export const CheckboxInput: RLFCModel<CheckboxInputRefModel, CheckboxInputPropsM
           border
           borderColor={THEME_COLOR.PRIMARY}
           borderRole={THEME_ROLE.MAIN}
-          round={5}>
+          height={theme.shape.size[THEME_SIZE_MORE.XSMALL]}
+          round={theme.shape.borderRadius[THEME_SIZE_MORE.XSMALL]}
+          width={theme.shape.size[THEME_SIZE_MORE.XSMALL]}>
           <Appearable isActive={valueControlled}>
             <Icon
               color={THEME_COLOR_MORE.SURFACE}

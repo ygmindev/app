@@ -11,6 +11,7 @@ import { type VirtualizedListRefModel } from '@lib/frontend/core/components/Virt
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type MeasureModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { CheckboxInput } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput';
 import { TABLE_CELL_WIDTH_DEFAULT } from '@lib/frontend/data/components/Table/Table.constants';
 import {
   type TablePropsModel,
@@ -82,6 +83,8 @@ export const Table = forwardRef(
     const columnsF = useMemo<TablePropsModel<TType>['columns']>(
       () =>
         filterNil([
+          ...(columns ?? []),
+
           isRemovable && {
             id: 'remove' as StringKeyModel<TType>,
             isFrozen: true,
@@ -98,7 +101,14 @@ export const Table = forwardRef(
             ),
             width: theme.shape.size[THEME_SIZE.SMALL],
           },
-          ...(columns ?? []),
+
+          select && {
+            id: 'select' as StringKeyModel<TType>,
+            isFrozen: true,
+            label: '',
+            renderer: ({ index }) => <CheckboxInput />,
+            width: theme.shape.size[THEME_SIZE.SMALL],
+          },
         ]),
       [columns, isRemovable],
     );
@@ -107,9 +117,6 @@ export const Table = forwardRef(
     const { headers, rows } = useTable({
       columns: columnsF,
       data,
-      isFullWidth,
-      onSelect,
-      select,
       sorting: sortingF,
     });
     const validate = useValidator();
@@ -268,6 +275,7 @@ export const Table = forwardRef(
                 return (
                   <Skeleton
                     elementState={elementState}
+                    isCenter
                     key={cell.id}
                     width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
                     {element ?? <AsyncText>{emptyCell}</AsyncText>}

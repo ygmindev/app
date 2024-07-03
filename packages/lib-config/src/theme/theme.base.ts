@@ -139,12 +139,15 @@ const config = defineConfig<ThemeConfigModel, _ThemeConfigModel>({
 
     shape: {
       borderRadius: {
-        [THEME_SIZE.LARGE]: 30,
+        [THEME_SIZE_MORE.XLARGE]: 30,
+
+        [THEME_SIZE.LARGE]: 25,
 
         [THEME_SIZE.MEDIUM]: 20,
-        // [THEME_SIZE.MEDIUM]: 8,
 
         [THEME_SIZE.SMALL]: 8,
+
+        [THEME_SIZE_MORE.XSMALL]: 5,
       },
 
       shadow: {

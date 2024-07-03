@@ -5,6 +5,7 @@ import { TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { ConnectionBoundary } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary';
 import { Table } from '@lib/frontend/data/components/Table/Table';
+import { TABLE_SELECT_TYPE } from '@lib/frontend/data/hooks/useTable/useTable.constants';
 import { type TableColumnModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { ResourceFilter } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter';
@@ -190,6 +191,7 @@ export const ResourceTable = <
             onRemove={async ({ _id }) => {
               void remove({ filter: [{ field: '_id', value: _id }] });
             }}
+            select={TABLE_SELECT_TYPE.MULTIPLE}
           />
         </Wrapper>
       )}
