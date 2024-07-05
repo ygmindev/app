@@ -275,7 +275,6 @@ export const Table = forwardRef(
                 return (
                   <Skeleton
                     elementState={elementState}
-                    isCenter
                     key={cell.id}
                     width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
                     {element ?? <AsyncText>{emptyCell}</AsyncText>}

@@ -6,16 +6,18 @@ import { GroupNameForm } from '@lib/frontend/group/containers/GroupNameForm/Grou
 import { GroupTypesForm } from '@lib/frontend/group/containers/GroupTypesForm/GroupTypesForm';
 import { useGroupResource } from '@lib/frontend/group/hooks/useGroupResource/useGroupResource';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { type GroupFormModel } from '@lib/shared/group/resources/Group/Group.models';
 
 export const GroupForm: LFCModel<GroupFormPropsModel> = ({ ...props }) => {
   const { t } = useTranslation([]);
   const { create } = useGroupResource();
   return (
-    <StepForm
+    <StepForm<GroupFormModel>
       {...props}
       initialValues={GROUP_FORM_INITIAL_VALUES}
-      // onSuccess={async () => replace({ pathname: `${GROUP}/${IN_PROGRESS}` })}
-      onSubmit={async (form) => create({ form })}
+      onSubmit={async (form) => {
+        void create({ form });
+      }}
       steps={[
         {
           element: <GroupNameForm />,

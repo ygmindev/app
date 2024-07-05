@@ -141,6 +141,7 @@ export const Menu = forwardRef(
         {title && (
           <Wrapper
             border={DIRECTION.BOTTOM}
+            mBottom={THEME_SIZE.SMALL}
             p>
             <AsyncText align={FONT_ALIGN.CENTER}>{title}</AsyncText>
           </Wrapper>

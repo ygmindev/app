@@ -35,7 +35,7 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
             const labelF = label ?? id;
             const elementState = id.startsWith('_') ? ELEMENT_STATE.DISABLED : undefined;
             if (field) {
-              return cloneElement(field(), { elementState, label: labelF });
+              return cloneElement(field({}), { elementState, label: labelF });
             }
             switch (type) {
               case PROPERTY_TYPE.RESOURCE:
