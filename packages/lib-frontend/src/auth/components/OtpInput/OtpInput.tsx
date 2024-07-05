@@ -42,23 +42,16 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
       onChange,
       value,
     });
-    const { elementStateControlled, elementStateControlledSet, isActive, isLoading } =
-      useElementStateControlled({ elementState, onElementStateChange });
+    const { elementStateControlledSet, isActive, isLoading } = useElementStateControlled({
+      elementState,
+      onElementStateChange,
+    });
 
     return (
       <Wrapper
         {...wrapperProps}
         position={SHAPE_POSITION.RELATIVE}
         s>
-        <Appearable
-          isAbsoluteFill
-          isActive={isLoading}
-          isCenter
-          position={SHAPE_POSITION.ABSOLUTE}
-          zIndex={2}>
-          <Loading size={THEME_SIZE.SMALL} />
-        </Appearable>
-
         <Wrapper
           isAbsoluteFill
           opacity={0}
@@ -87,6 +80,15 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
           isCenter
           isRow
           position={SHAPE_POSITION.RELATIVE}>
+          <Appearable
+            isAbsoluteFill
+            isActive={isLoading}
+            isCenter
+            position={SHAPE_POSITION.ABSOLUTE}
+            zIndex={2}>
+            <Loading size={THEME_SIZE.SMALL} />
+          </Appearable>
+
           {IDS.map(({ id }, i) => (
             <TextInput
               elementState={

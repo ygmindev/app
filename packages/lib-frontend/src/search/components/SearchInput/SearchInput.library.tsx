@@ -5,6 +5,8 @@ import { type LibraryPropsModel } from '@lib/library/core/components/Library/Lib
 export const props: LibraryPropsModel<SearchInputPropsModel> = {
   Component: SearchInput,
   category: 'search',
-  defaultProps: {},
+  defaultProps: {
+    options: [],
+  },
   variants: [],
 };
