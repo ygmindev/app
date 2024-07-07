@@ -24,7 +24,6 @@ import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.model
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import { MikroORM } from '@mikro-orm/mongodb';
 import { type EntityManager } from '@mikro-orm/mongodb';
-import isArray from 'lodash/isArray';
 import last from 'lodash/last';
 import { type Document, type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
 

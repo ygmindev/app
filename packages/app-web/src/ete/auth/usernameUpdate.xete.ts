@@ -1,6 +1,6 @@
 import { signIn } from '@app/web/ete/auth/utils/signIn/signIn';
-import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { seed } from '@lib/backend/database/utils/seed/seed';
+import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { TestScreen } from '@lib/backend/test/utils/TestScreen/TestScreen';
 import databaseConfig from '@lib/config/database/database.mongo';
 import { EMAIL, PERSONAL } from '@lib/frontend/user/user.constants';

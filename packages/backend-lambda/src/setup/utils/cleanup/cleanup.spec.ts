@@ -1,5 +1,5 @@
-import { cleanup } from 'packages/backend-lambda/src/setup/utils/cleanup/cleanup';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import { cleanup } from 'packages/backend-lambda/src/setup/utils/cleanup/cleanup';
 
 const { displayName } = withTest({ cleanup });
 

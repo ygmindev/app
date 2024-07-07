@@ -51,6 +51,8 @@ export const _typescript = ({
     },
     'ts-node': {
       compilerOptions: { module: 'commonjs' },
+      esm: true,
+      experimentalSpecifierResolution: 'node',
       require: ['tsconfig-paths/register'],
       swc: true,
       transpileOnly: true,

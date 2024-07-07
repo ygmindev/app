@@ -17,7 +17,6 @@ import { runParallel } from '@tool/task/core/utils/runParallel/runParallel';
 import { _TaskRunner } from '@tool/task/core/utils/TaskRunner/_TaskRunner';
 import { type TaskRunnerModel } from '@tool/task/core/utils/TaskRunner/TaskRunner.models';
 import { type ChildProcess, spawn } from 'child_process';
-import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';

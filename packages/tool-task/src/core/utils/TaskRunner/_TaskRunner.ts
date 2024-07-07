@@ -1,8 +1,7 @@
-import { registry, series, task as gulpTask } from 'gulp';
-import reduce from 'lodash/reduce';
-
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { type _TaskRunnerModel } from '@tool/task/core/utils/TaskRunner/_TaskRunner.models';
+import { registry, series, task as gulpTask } from 'gulp';
+import reduce from 'lodash/reduce';
 
 export class _TaskRunner implements _TaskRunnerModel {
   registerTask = (name: string, task: () => Promise<void>): void => {
