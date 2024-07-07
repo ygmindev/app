@@ -159,7 +159,7 @@ const config = defineConfig<ThemeConfigModel, _ThemeConfigModel>({
       },
 
       size: {
-        [THEME_SIZE.LARGE]: 55,
+        [THEME_SIZE.LARGE]: 60,
 
         [THEME_SIZE.MEDIUM]: 52,
 
