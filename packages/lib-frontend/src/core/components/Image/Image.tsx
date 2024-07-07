@@ -22,7 +22,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
     stylers: [viewStyler],
   });
   const [current, currentSet] = useState<number>(0);
-  const srcF = isArray(src) ? src[current] : src;
+  const srcF = Array.isArray(src) ? src[current] : src;
 
   const handleSuccess = (): void => {
     ImageBase.getSize(srcF, (srcWidth, srcHeight) => {
@@ -43,7 +43,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
 
   return (
     <_Image
-      onError={isArray(src) && current < src.length - 1 ? () => currentSet(current + 1) : undefined}
+      onError={Array.isArray(src) && current < src.length - 1 ? () => currentSet(current + 1) : undefined}
       onSuccess={isAutoSize ? handleSuccess : undefined}
       src={srcF}
       style={styles}

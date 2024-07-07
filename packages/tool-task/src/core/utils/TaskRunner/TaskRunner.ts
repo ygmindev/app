@@ -55,7 +55,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     context: TaskContextModel<TType>,
   ): Promise<void> => {
     if (value) {
-      if (isArray(value)) {
+      if (Array.isArray(value)) {
         await runParallel(
           filterNil(value[0].map((v) => (isFunction(v) ? v(context) : v))),
           value[1],

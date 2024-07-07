@@ -29,6 +29,7 @@ import {
 } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import isNumber from 'lodash/isNumber';
 import { forwardRef, useMemo } from 'react';
 
@@ -230,3 +231,5 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (Button.displayName = variableName({ Button }));

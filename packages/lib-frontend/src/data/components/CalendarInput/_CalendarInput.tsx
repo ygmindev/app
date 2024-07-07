@@ -1,11 +1,11 @@
 import 'react-day-picker/dist/style.css';
 
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import { type _CalendarPickerPropsModel } from '@lib/frontend/data/components/CalendarPicker/_CalendarPicker.models';
+import { type _CalendarInputPropsModel } from '@lib/frontend/data/components/CalendarInput/_CalendarInput.models';
 import { DayPicker, type DayPickerRangeProps, type DayPickerSingleProps } from 'react-day-picker';
 
-export const _CalendarPicker = composeComponent<
-  _CalendarPickerPropsModel,
+export const _CalendarInput = composeComponent<
+  _CalendarInputPropsModel,
   DayPickerSingleProps | DayPickerRangeProps
 >({
   Component: DayPicker,

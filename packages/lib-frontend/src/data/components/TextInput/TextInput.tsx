@@ -36,6 +36,7 @@ import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import isNumber from 'lodash/isNumber';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
@@ -281,3 +282,5 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (TextInput.displayName = variableName({ TextInput }));

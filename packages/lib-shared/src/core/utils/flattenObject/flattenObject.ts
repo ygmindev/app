@@ -11,7 +11,7 @@ export const flattenObject = (
     ? reduce(
         value as unknown as object,
         (result, v, k) =>
-          isArray(v)
+          Array.isArray(v)
             ? {
                 ...result,
                 [k]: (v as Array<object>).map((vv) =>

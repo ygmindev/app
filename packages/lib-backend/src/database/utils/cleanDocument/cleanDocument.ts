@@ -30,7 +30,7 @@ export const cleanDocument = <TType extends unknown>(
         depth === 0 && isPlainObject(vF) && isEqual(Object.keys(vF as object), ['_id'])
           ? resolveObjectId((vF as EntityResourceModel)._id)
           : isString(vF) && last(k.split('.'))?.startsWith('_')
-            ? isArray(vF)
+            ? Array.isArray(vF)
               ? vF.map(resolveObjectId)
               : new ObjectId(vF)
             : vF

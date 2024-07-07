@@ -33,6 +33,7 @@ import {
 } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
 export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
@@ -148,3 +149,5 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
     ) : null;
   },
 );
+
+process.env.APP_IS_DEBUG && (Modal.displayName = variableName({ Modal }));

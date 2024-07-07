@@ -21,7 +21,7 @@ export class _ConcurrentQueue implements _ConcurrentQueueModel {
   }
 
   add(fn: (() => Promise<void>) | Array<() => Promise<void>>): void {
-    isArray(fn) ? void this.queue.addAll(fn) : void this.queue.add(fn);
+    Array.isArray(fn) ? void this.queue.addAll(fn) : void this.queue.add(fn);
   }
 
   run(): Promise<void> {

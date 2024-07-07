@@ -4,7 +4,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { useState } from 'react';
 
 export const props: LibraryPropsModel<AppearablePropsModel> = {

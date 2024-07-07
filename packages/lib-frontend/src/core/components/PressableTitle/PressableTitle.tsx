@@ -17,7 +17,6 @@ export const PressableTitle: LFCModel<PressableTitlePropsModel> = ({
   image,
   leftElement,
   onPress,
-  pVertical = THEME_SIZE.SMALL,
   rightElement,
   title,
   ...props
@@ -48,7 +47,8 @@ export const PressableTitle: LFCModel<PressableTitlePropsModel> = ({
           image={image}
           leftElement={leftElement && leftElement(isActive)}
           onPress={onPress}
-          pVertical={pVertical}
+          pHorizontal
+          pVertical={THEME_SIZE.SMALL}
           rightElement={rightElementF && rightElementF(isActive)}
           title={title}
         />

@@ -4,7 +4,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { withId } from '@lib/shared/core/utils/withId/withId';
 import { useState } from 'react';
 

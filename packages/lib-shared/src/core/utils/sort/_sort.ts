@@ -11,7 +11,7 @@ export const _sort = <TType extends unknown>(
       ? reduce(
           by,
           (result, v, k) => {
-            const [key, _params] = isArray(v) ? [v[0], v[1] ? 1 : -1] : [v, undefined];
+            const [key, _params] = Array.isArray(v) ? [v[0], v[1] ? 1 : -1] : [v, undefined];
             return k
               ? result.thenBy(key as keyof TType, _params as SortOrder)
               : firstBy(key as keyof TType, _params as SortOrder);

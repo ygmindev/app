@@ -9,7 +9,7 @@ export const withCondition =
   (...params: Array<unknown>) => {
     if (condition()) {
       const decorators = ifTrue();
-      return isArray(decorators)
+      return Array.isArray(decorators)
         ? decorators.forEach((decorator) =>
             (decorator as (...args: Array<unknown>) => void)(...params),
           )

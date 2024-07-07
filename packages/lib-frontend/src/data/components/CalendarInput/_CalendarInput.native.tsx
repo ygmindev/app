@@ -1,9 +1,9 @@
 import { type ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import { type _CalendarPickerPropsModel } from '@lib/frontend/data/components/CalendarPicker/_CalendarPicker.models';
+import { type _CalendarInputPropsModel } from '@lib/frontend/data/components/CalendarInput/_CalendarInput.models';
 import { Fragment } from 'react';
 
-export const _CalendarPicker = composeComponent<_CalendarPickerPropsModel, ChildrenPropsModel>({
+export const _CalendarInput = composeComponent<_CalendarInputPropsModel, ChildrenPropsModel>({
   Component: Fragment,
 
   getProps: ({}) => ({

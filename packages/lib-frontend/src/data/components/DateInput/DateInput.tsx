@@ -2,7 +2,7 @@ import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
-import { CalendarPicker } from '@lib/frontend/data/components/CalendarPicker/CalendarPicker';
+import { CalendarInput } from '@lib/frontend/data/components/CalendarInput/CalendarInput';
 import {
   type DateInputPropsModel,
   type DateInputRefModel,
@@ -44,7 +44,7 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = forw
         }
         isOpen={isActive}
         onToggle={isActiveSet}>
-        <CalendarPicker
+        <CalendarInput
           isRange={false}
           onChange={(v) => {
             isActiveSet(false);

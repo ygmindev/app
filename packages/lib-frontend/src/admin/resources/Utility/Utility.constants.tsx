@@ -10,6 +10,7 @@ import {
 import { type UtilityModel } from '@lib/shared/admin/resources/Utility/Utility.models';
 import { VENDOR_RESOURCE_NAME } from '@lib/shared/admin/resources/Vendor/Vendor.constants';
 import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
+import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesianObject';
 
 export const UTILITY_RESOURCE_PARAMS = {
   fields: [
@@ -21,7 +22,7 @@ export const UTILITY_RESOURCE_PARAMS = {
     { id: 'name' },
     {
       id: 'type',
-      options: Object.values(UTILITY_TYPE).map((id) => ({ id })),
+      options: cartesianObject({ id: Object.values(UTILITY_TYPE) }),
       renderer: ({ value }) =>
         value ? (
           <Wrapper

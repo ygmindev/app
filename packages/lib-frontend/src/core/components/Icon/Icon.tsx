@@ -10,6 +10,7 @@ import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef } from 'react';
 
 const AnimatableIcon = animatable({ Component: _Icon });
@@ -53,3 +54,5 @@ export const Icon: RTFCModel<AnimatableRefModel<TextStyleModel>, IconPropsModel>
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (Icon.displayName = variableName({ Icon }));

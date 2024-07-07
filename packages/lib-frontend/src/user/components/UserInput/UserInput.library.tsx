@@ -1,4 +1,4 @@
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { UserInput } from '@lib/frontend/user/components/UserInput/UserInput';
 import { type UserInputPropsModel } from '@lib/frontend/user/components/UserInput/UserInput.models';
 

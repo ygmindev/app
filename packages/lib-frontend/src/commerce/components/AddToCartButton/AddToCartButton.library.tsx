@@ -1,4 +1,4 @@
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { AddToCartButton } from '@lib/frontend/commerce/components/AddToCartButton/AddToCartButton';
 import { type AddToCartButtonPropsModel } from '@lib/frontend/commerce/components/AddToCartButton/AddToCartButton.models';
 

@@ -1,4 +1,4 @@
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { NavigationHeader } from '@lib/frontend/app/components/NavigationHeader/NavigationHeader';
 import { type NavigationHeaderPropsModel } from '@lib/frontend/app/components/NavigationHeader/NavigationHeader.models';
 

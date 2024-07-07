@@ -2,7 +2,8 @@ import { MENU_FIXTURE_OPTIONS } from '@lib/frontend/core/components/Menu/Menu.fi
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { type MenuInputPropsModel } from '@lib/frontend/data/components/MenuInput/MenuInput.models';
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
+import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesianObject';
 
 export const props: LibraryPropsModel<MenuInputPropsModel> = {
   Component: MenuInput,
@@ -12,6 +13,6 @@ export const props: LibraryPropsModel<MenuInputPropsModel> = {
   variants: [
     { props: { icon: 'personCircle' } },
     { props: { label: 'label' } },
-    ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),
+    ...cartesianObject({ elementState: Object.values(ELEMENT_STATE) }).map((props) => ({ props })),
   ],
 };

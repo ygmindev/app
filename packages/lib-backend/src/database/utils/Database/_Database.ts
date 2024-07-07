@@ -52,7 +52,7 @@ export const getFilter = <TType extends unknown>(
               }
             : {
                 [conditionF]: last(v.field.split('.'))?.startsWith('_')
-                  ? isArray(v.value)
+                  ? Array.isArray(v.value)
                     ? v.value.map((vv) => new ObjectId(`${vv}`))
                     : new ObjectId(v.value as string)
                   : v.value,

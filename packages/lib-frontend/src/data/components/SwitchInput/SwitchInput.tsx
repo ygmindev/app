@@ -22,6 +22,7 @@ import {
   THEME_SIZE,
 } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef, useMemo } from 'react';
 
 export const SwitchInput: RLFCModel<SwitchInputRefModel, SwitchInputPropsModel> = forwardRef(
@@ -137,3 +138,5 @@ export const SwitchInput: RLFCModel<SwitchInputRefModel, SwitchInputPropsModel> 
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (SwitchInput.displayName = variableName({ SwitchInput }));

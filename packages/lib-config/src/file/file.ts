@@ -4,7 +4,7 @@ import { EXTENSIONS_BASE, FILE_CONFIG, PACKAGE_PREFIXES } from '@lib/config/file
 import { type FileConfigModel } from '@lib/config/file/file.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
+import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { readdirSync } from 'fs';
 import some from 'lodash/some';
@@ -21,7 +21,7 @@ export const config = defineConfig<FileConfigModel>({
       backupPath: fromRoot('../backups'),
 
       extensions: [
-        ...permuteString(
+        ...cartesianString(
           filterNil([
             process.env.ENV_PLATFORM && `.${process.env.ENV_PLATFORM}`,
             isNative && '.native',

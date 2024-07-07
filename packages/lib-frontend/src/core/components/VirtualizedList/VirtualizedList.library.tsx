@@ -3,7 +3,7 @@ import { type MenuOptionModel } from '@lib/frontend/core/components/Menu/Menu.mo
 import { VirtualizedList } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList';
 import { type VirtualizedListPropsModel } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList.models';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 
 export const props: LibraryPropsModel<VirtualizedListPropsModel<MenuOptionModel>> = {
   Component: VirtualizedList,

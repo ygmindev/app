@@ -16,13 +16,15 @@ import { props as textProps } from '@lib/frontend/core/components/Text/Text.libr
 import { props as tileProps } from '@lib/frontend/core/components/Tile/Tile.library';
 import { props as tooltipProps } from '@lib/frontend/core/components/Tooltip/Tooltip.library';
 import { props as wrapperProps } from '@lib/frontend/core/components/Wrapper/Wrapper.library';
-import { props as calendarPickerProps } from '@lib/frontend/data/components/CalendarPicker/CalendarPicker.library';
+import { props as calendarPickerProps } from '@lib/frontend/data/components/CalendarInput/CalendarInput.library';
 import { props as selectInputProps } from '@lib/frontend/data/components/SelectInput/SelectInput.library';
 import { props as switchInputProps } from '@lib/frontend/data/components/SwitchInput/SwitchInput.library';
 import { props as textInputProps } from '@lib/frontend/data/components/TextInput/TextInput.library';
 import { props as notificationProps } from '@lib/frontend/notification/components/Notification/Notification.library';
 import { props as notificationsProps } from '@lib/frontend/notification/containers/Notifications/Notifications.library';
 import { props as searchInputProps } from '@lib/frontend/search/components/SearchInput/SearchInput.library';
+
+export const LIBRARY = 'library';
 
 export const LIBRARY_PROPS = [
   accordionProps,

@@ -12,32 +12,6 @@ type Access {
   role: [String]
 }
 
-input AccessCreateFormInput {
-  _group: GroupInput
-  _id: String
-  _user: UserInput
-  created: DateTime
-  role: [String]
-}
-
-input AccessCreateInput {
-  form: AccessCreateFormInput
-  root: String
-}
-
-input AccessCreateManyFormInput {
-  _group: GroupInput
-  _id: String
-  _user: UserInput
-  created: DateTime
-  role: [String]
-}
-
-input AccessCreateManyInput {
-  form: [AccessCreateManyFormInput]
-  root: String
-}
-
 type AccessCreateManyOutput {
   result: Access
 }
@@ -56,81 +30,12 @@ type AccessGetConnectionEdge {
   node: Access
 }
 
-input AccessGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [AccessInput]
-  resourceValue: AccessInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input AccessGetConnectionInput {
-  filter: [AccessGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type AccessGetConnectionOutput {
   result: AccessGetConnectionConnection
 }
 
-input AccessGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [AccessInput]
-  resourceValue: AccessInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input AccessGetInput {
-  filter: [AccessGetFilterInput]
-  root: String
-}
-
-input AccessGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [AccessInput]
-  resourceValue: AccessInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input AccessGetManyInput {
-  filter: [AccessGetManyFilterInput]
-  root: String
-}
-
 type AccessGetManyOutput {
   result: [Access]
-}
-
-input AccessGetManyProtectedGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [AccessInput]
-  resourceValue: AccessInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input AccessGetManyProtectedGetManyInput {
-  filter: [AccessGetManyProtectedGetManyFilterInput]
-  root: String
 }
 
 type AccessGetManyProtectedGetManyOutput {
@@ -141,73 +46,16 @@ type AccessGetOutput {
   result: Access
 }
 
-input AccessInput {
-  _group: GroupInput
-  _id: String
-  _user: UserInput
-  created: DateTime
-  role: [String]
-}
-
-input AccessRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [AccessInput]
-  resourceValue: AccessInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input AccessRemoveInput {
-  filter: [AccessRemoveFilterInput]
-  root: String
-}
-
 type AccessRemoveOutput {
   result: Access
-}
-
-input AccessSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type AccessSearchOutput {
   result: [Access]
 }
 
-input AccessUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [AccessInput]
-  resourceValue: AccessInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input AccessUpdateInput {
-  filter: [AccessUpdateFilterInput]
-  root: String
-  update: AccessUpdateUpdateInput
-}
-
 type AccessUpdateOutput {
   result: Access
-}
-
-input AccessUpdateUpdateInput {
-  _group: GroupInput
-  _id: String
-  _user: UserInput
-  created: DateTime
-  role: [String]
 }
 
 input AroomOrderContactInput {
@@ -240,36 +88,6 @@ type Bank {
   name: String
 }
 
-input BankCreateFormInput {
-  _id: String
-  _user: UserInput
-  created: DateTime
-  externalId: String
-  fingerprint: String
-  last4: String
-  name: String
-}
-
-input BankCreateInput {
-  form: BankCreateFormInput
-  root: String
-}
-
-input BankCreateManyFormInput {
-  _id: String
-  _user: UserInput
-  created: DateTime
-  externalId: String
-  fingerprint: String
-  last4: String
-  name: String
-}
-
-input BankCreateManyInput {
-  form: [BankCreateManyFormInput]
-  root: String
-}
-
 type BankCreateManyOutput {
   result: Bank
   root: User
@@ -290,61 +108,9 @@ type BankGetConnectionEdge {
   node: Bank
 }
 
-input BankGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [BankInput]
-  resourceValue: BankInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input BankGetConnectionInput {
-  filter: [BankGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type BankGetConnectionOutput {
   result: BankGetConnectionConnection
   root: User
-}
-
-input BankGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [BankInput]
-  resourceValue: BankInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input BankGetInput {
-  filter: [BankGetFilterInput]
-  root: String
-}
-
-input BankGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [BankInput]
-  resourceValue: BankInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input BankGetManyInput {
-  filter: [BankGetManyFilterInput]
-  root: String
 }
 
 type BankGetManyOutput {
@@ -367,32 +133,9 @@ input BankInput {
   name: String
 }
 
-input BankRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [BankInput]
-  resourceValue: BankInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input BankRemoveInput {
-  filter: [BankRemoveFilterInput]
-  root: String
-}
-
 type BankRemoveOutput {
   result: Bank
   root: User
-}
-
-input BankSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type BankSearchOutput {
@@ -400,37 +143,9 @@ type BankSearchOutput {
   root: User
 }
 
-input BankUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [BankInput]
-  resourceValue: BankInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input BankUpdateInput {
-  filter: [BankUpdateFilterInput]
-  root: String
-  update: BankUpdateUpdateInput
-}
-
 type BankUpdateOutput {
   result: Bank
   root: User
-}
-
-input BankUpdateUpdateInput {
-  _id: String
-  _user: UserInput
-  created: DateTime
-  externalId: String
-  fingerprint: String
-  last4: String
-  name: String
 }
 
 type Card {
@@ -444,42 +159,6 @@ type Card {
   funding: String
   last4: String
   name: String
-}
-
-input CardCreateFormInput {
-  _id: String
-  _user: UserInput
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  externalId: String
-  fingerprint: String
-  funding: String
-  last4: String
-  name: String
-}
-
-input CardCreateInput {
-  form: CardCreateFormInput
-  root: String
-}
-
-input CardCreateManyFormInput {
-  _id: String
-  _user: UserInput
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  externalId: String
-  fingerprint: String
-  funding: String
-  last4: String
-  name: String
-}
-
-input CardCreateManyInput {
-  form: [CardCreateManyFormInput]
-  root: String
 }
 
 type CardCreateManyOutput {
@@ -502,61 +181,9 @@ type CardGetConnectionEdge {
   node: Card
 }
 
-input CardGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [CardInput]
-  resourceValue: CardInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input CardGetConnectionInput {
-  filter: [CardGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type CardGetConnectionOutput {
   result: CardGetConnectionConnection
   root: User
-}
-
-input CardGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [CardInput]
-  resourceValue: CardInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input CardGetInput {
-  filter: [CardGetFilterInput]
-  root: String
-}
-
-input CardGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [CardInput]
-  resourceValue: CardInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input CardGetManyInput {
-  filter: [CardGetManyFilterInput]
-  root: String
 }
 
 type CardGetManyOutput {
@@ -582,32 +209,9 @@ input CardInput {
   name: String
 }
 
-input CardRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [CardInput]
-  resourceValue: CardInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input CardRemoveInput {
-  filter: [CardRemoveFilterInput]
-  root: String
-}
-
 type CardRemoveOutput {
   result: Card
   root: User
-}
-
-input CardSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type CardSearchOutput {
@@ -615,68 +219,15 @@ type CardSearchOutput {
   root: User
 }
 
-input CardUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [CardInput]
-  resourceValue: CardInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input CardUpdateInput {
-  filter: [CardUpdateFilterInput]
-  root: String
-  update: CardUpdateUpdateInput
-}
-
 type CardUpdateOutput {
   result: Card
   root: User
-}
-
-input CardUpdateUpdateInput {
-  _id: String
-  _user: UserInput
-  created: DateTime
-  expMonth: Float
-  expYear: Float
-  externalId: String
-  fingerprint: String
-  funding: String
-  last4: String
-  name: String
 }
 
 type Chat {
   _id: String
   created: DateTime
   name: String
-}
-
-input ChatCreateFormInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input ChatCreateInput {
-  form: ChatCreateFormInput
-  root: String
-}
-
-input ChatCreateManyFormInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input ChatCreateManyInput {
-  form: [ChatCreateManyFormInput]
-  root: String
 }
 
 type ChatCreateManyOutput {
@@ -697,60 +248,8 @@ type ChatGetConnectionEdge {
   node: Chat
 }
 
-input ChatGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ChatInput]
-  resourceValue: ChatInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input ChatGetConnectionInput {
-  filter: [ChatGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type ChatGetConnectionOutput {
   result: ChatGetConnectionConnection
-}
-
-input ChatGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ChatInput]
-  resourceValue: ChatInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input ChatGetInput {
-  filter: [ChatGetFilterInput]
-  root: String
-}
-
-input ChatGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ChatInput]
-  resourceValue: ChatInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input ChatGetManyInput {
-  filter: [ChatGetManyFilterInput]
-  root: String
 }
 
 type ChatGetManyOutput {
@@ -761,69 +260,16 @@ type ChatGetOutput {
   result: Chat
 }
 
-input ChatInput {
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input ChatRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ChatInput]
-  resourceValue: ChatInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input ChatRemoveInput {
-  filter: [ChatRemoveFilterInput]
-  root: String
-}
-
 type ChatRemoveOutput {
   result: Chat
-}
-
-input ChatSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type ChatSearchOutput {
   result: [Chat]
 }
 
-input ChatUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ChatInput]
-  resourceValue: ChatInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input ChatUpdateInput {
-  filter: [ChatUpdateFilterInput]
-  root: String
-  update: ChatUpdateUpdateInput
-}
-
 type ChatUpdateOutput {
   result: Chat
-}
-
-input ChatUpdateUpdateInput {
-  _id: String
-  created: DateTime
-  name: String
 }
 
 input CoordinateInput {
@@ -870,34 +316,6 @@ type Group {
   types: [String]
 }
 
-input GroupCreateFormInput {
-  Role: [RoleInput]
-  _id: String
-  created: DateTime
-  logo: String
-  name: String
-  types: [String]
-}
-
-input GroupCreateInput {
-  form: GroupCreateFormInput
-  root: String
-}
-
-input GroupCreateManyFormInput {
-  Role: [RoleInput]
-  _id: String
-  created: DateTime
-  logo: String
-  name: String
-  types: [String]
-}
-
-input GroupCreateManyInput {
-  form: [GroupCreateManyFormInput]
-  root: String
-}
-
 type GroupCreateManyOutput {
   result: Group
 }
@@ -916,60 +334,8 @@ type GroupGetConnectionEdge {
   node: Group
 }
 
-input GroupGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [GroupInput]
-  resourceValue: GroupInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input GroupGetConnectionInput {
-  filter: [GroupGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type GroupGetConnectionOutput {
   result: GroupGetConnectionConnection
-}
-
-input GroupGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [GroupInput]
-  resourceValue: GroupInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input GroupGetInput {
-  filter: [GroupGetFilterInput]
-  root: String
-}
-
-input GroupGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [GroupInput]
-  resourceValue: GroupInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input GroupGetManyInput {
-  filter: [GroupGetManyFilterInput]
-  root: String
 }
 
 type GroupGetManyOutput {
@@ -980,75 +346,16 @@ type GroupGetOutput {
   result: Group
 }
 
-input GroupInput {
-  Role: [RoleInput]
-  _id: String
-  created: DateTime
-  logo: String
-  name: String
-  types: [String]
-}
-
-input GroupRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [GroupInput]
-  resourceValue: GroupInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input GroupRemoveInput {
-  filter: [GroupRemoveFilterInput]
-  root: String
-}
-
 type GroupRemoveOutput {
   result: Group
-}
-
-input GroupSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type GroupSearchOutput {
   result: [Group]
 }
 
-input GroupUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [GroupInput]
-  resourceValue: GroupInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input GroupUpdateInput {
-  filter: [GroupUpdateFilterInput]
-  root: String
-  update: GroupUpdateUpdateInput
-}
-
 type GroupUpdateOutput {
   result: Group
-}
-
-input GroupUpdateUpdateInput {
-  Role: [RoleInput]
-  _id: String
-  created: DateTime
-  logo: String
-  name: String
-  types: [String]
 }
 
 type MapRoute {
@@ -1059,71 +366,71 @@ type MapRoute {
 }
 
 type Mutation {
-  AccessCreate(input: AccessCreateInput): AccessCreateOutput
-  AccessCreateMany(input: AccessCreateManyInput): AccessCreateManyOutput
-  AccessRemove(input: AccessRemoveInput): AccessRemoveOutput
-  AccessUpdate(input: AccessUpdateInput): AccessUpdateOutput
-  BankCreate(input: BankCreateInput): BankCreateOutput
-  BankCreateMany(input: BankCreateManyInput): BankCreateManyOutput
-  BankRemove(input: BankRemoveInput): BankRemoveOutput
-  BankUpdate(input: BankUpdateInput): BankUpdateOutput
-  CardCreate(input: CardCreateInput): CardCreateOutput
-  CardCreateMany(input: CardCreateManyInput): CardCreateManyOutput
-  CardRemove(input: CardRemoveInput): CardRemoveOutput
-  CardUpdate(input: CardUpdateInput): CardUpdateOutput
-  ChatCreate(input: ChatCreateInput): ChatCreateOutput
-  ChatCreateMany(input: ChatCreateManyInput): ChatCreateManyOutput
-  ChatRemove(input: ChatRemoveInput): ChatRemoveOutput
-  ChatUpdate(input: ChatUpdateInput): ChatUpdateOutput
+  AccessCreate: AccessCreateOutput
+  AccessCreateMany: AccessCreateManyOutput
+  AccessRemove: AccessRemoveOutput
+  AccessUpdate: AccessUpdateOutput
+  BankCreate: BankCreateOutput
+  BankCreateMany: BankCreateManyOutput
+  BankRemove: BankRemoveOutput
+  BankUpdate: BankUpdateOutput
+  CardCreate: CardCreateOutput
+  CardCreateMany: CardCreateManyOutput
+  CardRemove: CardRemoveOutput
+  CardUpdate: CardUpdateOutput
+  ChatCreate: ChatCreateOutput
+  ChatCreateMany: ChatCreateManyOutput
+  ChatRemove: ChatRemoveOutput
+  ChatUpdate: ChatUpdateOutput
   CreateDelivery(input: CreateDeliveryInput): DeliveryResult
-  GroupCreate(input: GroupCreateInput): GroupCreateOutput
-  GroupCreateMany(input: GroupCreateManyInput): GroupCreateManyOutput
-  GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
-  GroupUpdate(input: GroupUpdateInput): GroupUpdateOutput
-  OrderCreate(input: OrderCreateInput): OrderCreateOutput
-  OrderCreateMany(input: OrderCreateManyInput): OrderCreateManyOutput
-  OrderRemove(input: OrderRemoveInput): OrderRemoveOutput
-  OrderUpdate(input: OrderUpdateInput): OrderUpdateOutput
-  OtpCreate(input: OtpCreateInput): OtpCreateOutput
-  OtpCreateMany(input: OtpCreateManyInput): OtpCreateManyOutput
-  OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
-  OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  GroupCreate: GroupCreateOutput
+  GroupCreateMany: GroupCreateManyOutput
+  GroupRemove: GroupRemoveOutput
+  GroupUpdate: GroupUpdateOutput
+  OrderCreate: OrderCreateOutput
+  OrderCreateMany: OrderCreateManyOutput
+  OrderRemove: OrderRemoveOutput
+  OrderUpdate: OrderUpdateOutput
+  OtpCreate: OtpCreateOutput
+  OtpCreateMany: OtpCreateManyOutput
+  OtpRemove: OtpRemoveOutput
+  OtpUpdate: OtpUpdateOutput
   PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
-  PricingCreate(input: PricingCreateInput): PricingCreateOutput
-  PricingCreateMany(input: PricingCreateManyInput): PricingCreateManyOutput
-  PricingRemove(input: PricingRemoveInput): PricingRemoveOutput
-  PricingUpdate(input: PricingUpdateInput): PricingUpdateOutput
-  ProductCreate(input: ProductCreateInput): ProductCreateOutput
-  ProductCreateMany(input: ProductCreateManyInput): ProductCreateManyOutput
-  ProductRemove(input: ProductRemoveInput): ProductRemoveOutput
-  ProductUpdate(input: ProductUpdateInput): ProductUpdateOutput
-  RoleCreate(input: RoleCreateInput): RoleCreateOutput
-  RoleCreateMany(input: RoleCreateManyInput): RoleCreateManyOutput
-  RoleRemove(input: RoleRemoveInput): RoleRemoveOutput
-  RoleUpdate(input: RoleUpdateInput): RoleUpdateOutput
-  SignInCreate(input: SignInCreateInput): SignInCreateOutput
+  PricingCreate: PricingCreateOutput
+  PricingCreateMany: PricingCreateManyOutput
+  PricingRemove: PricingRemoveOutput
+  PricingUpdate: PricingUpdateOutput
+  ProductCreate: ProductCreateOutput
+  ProductCreateMany: ProductCreateManyOutput
+  ProductRemove: ProductRemoveOutput
+  ProductUpdate: ProductUpdateOutput
+  RoleCreate: RoleCreateOutput
+  RoleCreateMany: RoleCreateManyOutput
+  RoleRemove: RoleRemoveOutput
+  RoleUpdate: RoleUpdateOutput
+  SignInCreate: SignInCreateOutput
   SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
   SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
-  SocketCreate(input: SocketCreateInput): SocketCreateOutput
-  SocketCreateMany(input: SocketCreateManyInput): SocketCreateManyOutput
-  SocketRemove(input: SocketRemoveInput): SocketRemoveOutput
-  SocketUpdate(input: SocketUpdateInput): SocketUpdateOutput
-  UserCreate(input: UserCreateInput): UserCreateOutput
-  UserCreateMany(input: UserCreateManyInput): UserCreateManyOutput
-  UserRemove(input: UserRemoveInput): UserRemoveOutput
-  UserUpdate(input: UserUpdateInput): UserUpdateOutput
-  UtilityCreate(input: UtilityCreateInput): UtilityCreateOutput
-  UtilityCreateMany(input: UtilityCreateManyInput): UtilityCreateManyOutput
-  UtilityRemove(input: UtilityRemoveInput): UtilityRemoveOutput
-  UtilityUpdate(input: UtilityUpdateInput): UtilityUpdateOutput
-  VendorCreate(input: VendorCreateInput): VendorCreateOutput
-  VendorCreateMany(input: VendorCreateManyInput): VendorCreateManyOutput
-  VendorRemove(input: VendorRemoveInput): VendorRemoveOutput
-  VendorUpdate(input: VendorUpdateInput): VendorUpdateOutput
-  linkedUserCreate(input: linkedUserCreateInput): linkedUserCreateOutput
-  linkedUserCreateMany(input: linkedUserCreateManyInput): linkedUserCreateManyOutput
-  linkedUserRemove(input: linkedUserRemoveInput): linkedUserRemoveOutput
-  linkedUserUpdate(input: linkedUserUpdateInput): linkedUserUpdateOutput
+  SocketCreate: SocketCreateOutput
+  SocketCreateMany: SocketCreateManyOutput
+  SocketRemove: SocketRemoveOutput
+  SocketUpdate: SocketUpdateOutput
+  UserCreate: UserCreateOutput
+  UserCreateMany: UserCreateManyOutput
+  UserRemove: UserRemoveOutput
+  UserUpdate: UserUpdateOutput
+  UtilityCreate: UtilityCreateOutput
+  UtilityCreateMany: UtilityCreateManyOutput
+  UtilityRemove: UtilityRemoveOutput
+  UtilityUpdate: UtilityUpdateOutput
+  VendorCreate: VendorCreateOutput
+  VendorCreateMany: VendorCreateManyOutput
+  VendorRemove: VendorRemoveOutput
+  VendorUpdate: VendorUpdateOutput
+  linkedUserCreate: linkedUserCreateOutput
+  linkedUserCreateMany: linkedUserCreateManyOutput
+  linkedUserRemove: linkedUserRemoveOutput
+  linkedUserUpdate: linkedUserUpdateOutput
 }
 
 type Order {
@@ -1131,30 +438,6 @@ type Order {
   created: DateTime
   items: [ProductItem]
   paymentMethodId: String
-}
-
-input OrderCreateFormInput {
-  _id: String
-  created: DateTime
-  items: [ProductItemInput]
-  paymentMethodId: String
-}
-
-input OrderCreateInput {
-  form: OrderCreateFormInput
-  root: String
-}
-
-input OrderCreateManyFormInput {
-  _id: String
-  created: DateTime
-  items: [ProductItemInput]
-  paymentMethodId: String
-}
-
-input OrderCreateManyInput {
-  form: [OrderCreateManyFormInput]
-  root: String
 }
 
 type OrderCreateManyOutput {
@@ -1175,60 +458,8 @@ type OrderGetConnectionEdge {
   node: Order
 }
 
-input OrderGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [OrderInput]
-  resourceValue: OrderInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input OrderGetConnectionInput {
-  filter: [OrderGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type OrderGetConnectionOutput {
   result: OrderGetConnectionConnection
-}
-
-input OrderGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [OrderInput]
-  resourceValue: OrderInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input OrderGetInput {
-  filter: [OrderGetFilterInput]
-  root: String
-}
-
-input OrderGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [OrderInput]
-  resourceValue: OrderInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input OrderGetManyInput {
-  filter: [OrderGetManyFilterInput]
-  root: String
 }
 
 type OrderGetManyOutput {
@@ -1239,71 +470,16 @@ type OrderGetOutput {
   result: Order
 }
 
-input OrderInput {
-  _id: String
-  created: DateTime
-  items: [ProductItemInput]
-  paymentMethodId: String
-}
-
-input OrderRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [OrderInput]
-  resourceValue: OrderInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input OrderRemoveInput {
-  filter: [OrderRemoveFilterInput]
-  root: String
-}
-
 type OrderRemoveOutput {
   result: Order
-}
-
-input OrderSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type OrderSearchOutput {
   result: [Order]
 }
 
-input OrderUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [OrderInput]
-  resourceValue: OrderInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input OrderUpdateInput {
-  filter: [OrderUpdateFilterInput]
-  root: String
-  update: OrderUpdateUpdateInput
-}
-
 type OrderUpdateOutput {
   result: Order
-}
-
-input OrderUpdateUpdateInput {
-  _id: String
-  created: DateTime
-  items: [ProductItemInput]
-  paymentMethodId: String
 }
 
 type Otp {
@@ -1313,30 +489,6 @@ type Otp {
   email: String
   otp: String
   phone: String
-}
-
-input OtpCreateFormInput {
-  callingCode: String
-  checkExists: Boolean
-  email: String
-  phone: String
-}
-
-input OtpCreateInput {
-  form: OtpCreateFormInput
-  root: String
-}
-
-input OtpCreateManyFormInput {
-  callingCode: String
-  checkExists: Boolean
-  email: String
-  phone: String
-}
-
-input OtpCreateManyInput {
-  form: [OtpCreateManyFormInput]
-  root: String
 }
 
 type OtpCreateManyOutput {
@@ -1357,60 +509,8 @@ type OtpGetConnectionEdge {
   node: Otp
 }
 
-input OtpGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [OtpInput]
-  resourceValue: OtpInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input OtpGetConnectionInput {
-  filter: [OtpGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type OtpGetConnectionOutput {
   result: OtpGetConnectionConnection
-}
-
-input OtpGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [OtpInput]
-  resourceValue: OtpInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input OtpGetInput {
-  filter: [OtpGetFilterInput]
-  root: String
-}
-
-input OtpGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [OtpInput]
-  resourceValue: OtpInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input OtpGetManyInput {
-  filter: [OtpGetManyFilterInput]
-  root: String
 }
 
 type OtpGetManyOutput {
@@ -1421,75 +521,16 @@ type OtpGetOutput {
   result: Otp
 }
 
-input OtpInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
-}
-
-input OtpRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [OtpInput]
-  resourceValue: OtpInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input OtpRemoveInput {
-  filter: [OtpRemoveFilterInput]
-  root: String
-}
-
 type OtpRemoveOutput {
   result: Otp
-}
-
-input OtpSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type OtpSearchOutput {
   result: [Otp]
 }
 
-input OtpUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [OtpInput]
-  resourceValue: OtpInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input OtpUpdateInput {
-  filter: [OtpUpdateFilterInput]
-  root: String
-  update: OtpUpdateUpdateInput
-}
-
 type OtpUpdateOutput {
   result: Otp
-}
-
-input OtpUpdateUpdateInput {
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  otp: String
-  phone: String
 }
 
 type PageInfo {
@@ -1497,13 +538,6 @@ type PageInfo {
   hasNextPage: Boolean
   hasPreviousPage: Boolean
   startCursor: String
-}
-
-input PaginationInput {
-  after: String
-  before: String
-  first: Float
-  last: Float
 }
 
 type PaymentMethod {
@@ -1515,23 +549,6 @@ type PaymentMethod {
   last4: String
   name: String
   type: String
-}
-
-input PaymentMethodGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PaymentMethodInput]
-  resourceValue: PaymentMethodInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PaymentMethodGetManyInput {
-  filter: [PaymentMethodGetManyFilterInput]
-  root: String
 }
 
 type PaymentMethodGetManyOutput {
@@ -1578,34 +595,6 @@ type Pricing {
   price: Float
 }
 
-input PricingCreateFormInput {
-  _id: String
-  _product: ProductInput
-  created: DateTime
-  currency: String
-  frequency: String
-  price: Float
-}
-
-input PricingCreateInput {
-  form: PricingCreateFormInput
-  root: String
-}
-
-input PricingCreateManyFormInput {
-  _id: String
-  _product: ProductInput
-  created: DateTime
-  currency: String
-  frequency: String
-  price: Float
-}
-
-input PricingCreateManyInput {
-  form: [PricingCreateManyFormInput]
-  root: String
-}
-
 type PricingCreateManyOutput {
   result: Pricing
   root: Product
@@ -1626,61 +615,9 @@ type PricingGetConnectionEdge {
   node: Pricing
 }
 
-input PricingGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PricingInput]
-  resourceValue: PricingInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PricingGetConnectionInput {
-  filter: [PricingGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type PricingGetConnectionOutput {
   result: PricingGetConnectionConnection
   root: Product
-}
-
-input PricingGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PricingInput]
-  resourceValue: PricingInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PricingGetInput {
-  filter: [PricingGetFilterInput]
-  root: String
-}
-
-input PricingGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PricingInput]
-  resourceValue: PricingInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PricingGetManyInput {
-  filter: [PricingGetManyFilterInput]
-  root: String
 }
 
 type PricingGetManyOutput {
@@ -1693,41 +630,9 @@ type PricingGetOutput {
   root: Product
 }
 
-input PricingInput {
-  _id: String
-  _product: ProductInput
-  created: DateTime
-  currency: String
-  frequency: String
-  price: Float
-}
-
-input PricingRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PricingInput]
-  resourceValue: PricingInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PricingRemoveInput {
-  filter: [PricingRemoveFilterInput]
-  root: String
-}
-
 type PricingRemoveOutput {
   result: Pricing
   root: Product
-}
-
-input PricingSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type PricingSearchOutput {
@@ -1735,36 +640,9 @@ type PricingSearchOutput {
   root: Product
 }
 
-input PricingUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PricingInput]
-  resourceValue: PricingInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PricingUpdateInput {
-  filter: [PricingUpdateFilterInput]
-  root: String
-  update: PricingUpdateUpdateInput
-}
-
 type PricingUpdateOutput {
   result: Pricing
   root: Product
-}
-
-input PricingUpdateUpdateInput {
-  _id: String
-  _product: ProductInput
-  created: DateTime
-  currency: String
-  frequency: String
-  price: Float
 }
 
 type Product {
@@ -1774,34 +652,6 @@ type Product {
   description: String
   imageSrc: [String]
   name: String
-}
-
-input ProductCreateFormInput {
-  Pricing: [PricingInput]
-  _id: String
-  created: DateTime
-  description: String
-  imageSrc: [String]
-  name: String
-}
-
-input ProductCreateInput {
-  form: ProductCreateFormInput
-  root: String
-}
-
-input ProductCreateManyFormInput {
-  Pricing: [PricingInput]
-  _id: String
-  created: DateTime
-  description: String
-  imageSrc: [String]
-  name: String
-}
-
-input ProductCreateManyInput {
-  form: [ProductCreateManyFormInput]
-  root: String
 }
 
 type ProductCreateManyOutput {
@@ -1822,60 +672,8 @@ type ProductGetConnectionEdge {
   node: Product
 }
 
-input ProductGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ProductInput]
-  resourceValue: ProductInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input ProductGetConnectionInput {
-  filter: [ProductGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type ProductGetConnectionOutput {
   result: ProductGetConnectionConnection
-}
-
-input ProductGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ProductInput]
-  resourceValue: ProductInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input ProductGetInput {
-  filter: [ProductGetFilterInput]
-  root: String
-}
-
-input ProductGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ProductInput]
-  resourceValue: ProductInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input ProductGetManyInput {
-  filter: [ProductGetManyFilterInput]
-  root: String
 }
 
 type ProductGetManyOutput {
@@ -1884,15 +682,6 @@ type ProductGetManyOutput {
 
 type ProductGetOutput {
   result: Product
-}
-
-input ProductInput {
-  Pricing: [PricingInput]
-  _id: String
-  created: DateTime
-  description: String
-  imageSrc: [String]
-  name: String
 }
 
 type ProductItem {
@@ -1911,134 +700,84 @@ input ProductItemInput {
   quantity: Float
 }
 
-input ProductRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ProductInput]
-  resourceValue: ProductInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input ProductRemoveInput {
-  filter: [ProductRemoveFilterInput]
-  root: String
-}
-
 type ProductRemoveOutput {
   result: Product
-}
-
-input ProductSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type ProductSearchOutput {
   result: [Product]
 }
 
-input ProductUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ProductInput]
-  resourceValue: ProductInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input ProductUpdateInput {
-  filter: [ProductUpdateFilterInput]
-  root: String
-  update: ProductUpdateUpdateInput
-}
-
 type ProductUpdateOutput {
   result: Product
 }
 
-input ProductUpdateUpdateInput {
-  Pricing: [PricingInput]
-  _id: String
-  created: DateTime
-  description: String
-  imageSrc: [String]
-  name: String
-}
-
 type Query {
-  AccessGet(input: AccessGetInput): AccessGetOutput
-  AccessGetConnection(input: AccessGetConnectionInput): AccessGetConnectionOutput
-  AccessGetMany(input: AccessGetManyInput): AccessGetManyOutput
-  AccessGetManyProtectedGetMany(input: AccessGetManyProtectedGetManyInput): AccessGetManyProtectedGetManyOutput
-  AccessSearch(input: AccessSearchInput): AccessSearchOutput
-  BankGet(input: BankGetInput): BankGetOutput
-  BankGetConnection(input: BankGetConnectionInput): BankGetConnectionOutput
-  BankGetMany(input: BankGetManyInput): BankGetManyOutput
-  BankSearch(input: BankSearchInput): BankSearchOutput
-  CardGet(input: CardGetInput): CardGetOutput
-  CardGetConnection(input: CardGetConnectionInput): CardGetConnectionOutput
-  CardGetMany(input: CardGetManyInput): CardGetManyOutput
-  CardSearch(input: CardSearchInput): CardSearchOutput
-  ChatGet(input: ChatGetInput): ChatGetOutput
-  ChatGetConnection(input: ChatGetConnectionInput): ChatGetConnectionOutput
-  ChatGetMany(input: ChatGetManyInput): ChatGetManyOutput
-  ChatSearch(input: ChatSearchInput): ChatSearchOutput
+  AccessGet: AccessGetOutput
+  AccessGetConnection: AccessGetConnectionOutput
+  AccessGetMany: AccessGetManyOutput
+  AccessGetManyProtectedGetMany: AccessGetManyProtectedGetManyOutput
+  AccessSearch: AccessSearchOutput
+  BankGet: BankGetOutput
+  BankGetConnection: BankGetConnectionOutput
+  BankGetMany: BankGetManyOutput
+  BankSearch: BankSearchOutput
+  CardGet: CardGetOutput
+  CardGetConnection: CardGetConnectionOutput
+  CardGetMany: CardGetManyOutput
+  CardSearch: CardSearchOutput
+  ChatGet: ChatGetOutput
+  ChatGetConnection: ChatGetConnectionOutput
+  ChatGetMany: ChatGetManyOutput
+  ChatSearch: ChatSearchOutput
   GetMapRoute(input: GetRouteInput): MapRoute
-  GroupGet(input: GroupGetInput): GroupGetOutput
-  GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
-  GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
-  GroupSearch(input: GroupSearchInput): GroupSearchOutput
-  OrderGet(input: OrderGetInput): OrderGetOutput
-  OrderGetConnection(input: OrderGetConnectionInput): OrderGetConnectionOutput
-  OrderGetMany(input: OrderGetManyInput): OrderGetManyOutput
-  OrderSearch(input: OrderSearchInput): OrderSearchOutput
-  OtpGet(input: OtpGetInput): OtpGetOutput
-  OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
-  OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
-  OtpSearch(input: OtpSearchInput): OtpSearchOutput
-  PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
-  PricingGet(input: PricingGetInput): PricingGetOutput
-  PricingGetConnection(input: PricingGetConnectionInput): PricingGetConnectionOutput
-  PricingGetMany(input: PricingGetManyInput): PricingGetManyOutput
-  PricingSearch(input: PricingSearchInput): PricingSearchOutput
-  ProductGet(input: ProductGetInput): ProductGetOutput
-  ProductGetConnection(input: ProductGetConnectionInput): ProductGetConnectionOutput
-  ProductGetMany(input: ProductGetManyInput): ProductGetManyOutput
-  ProductSearch(input: ProductSearchInput): ProductSearchOutput
-  RoleGet(input: RoleGetInput): RoleGetOutput
-  RoleGetConnection(input: RoleGetConnectionInput): RoleGetConnectionOutput
-  RoleGetMany(input: RoleGetManyInput): RoleGetManyOutput
-  RoleSearch(input: RoleSearchInput): RoleSearchOutput
-  SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
-  SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
-  SocketGet(input: SocketGetInput): SocketGetOutput
-  SocketGetConnection(input: SocketGetConnectionInput): SocketGetConnectionOutput
-  SocketGetMany(input: SocketGetManyInput): SocketGetManyOutput
-  SocketSearch(input: SocketSearchInput): SocketSearchOutput
-  UserGet(input: UserGetInput): UserGetOutput
-  UserGetConnection(input: UserGetConnectionInput): UserGetConnectionOutput
-  UserGetMany(input: UserGetManyInput): UserGetManyOutput
-  UserSearch(input: UserSearchInput): UserSearchOutput
-  UtilityGet(input: UtilityGetInput): UtilityGetOutput
-  UtilityGetConnection(input: UtilityGetConnectionInput): UtilityGetConnectionOutput
-  UtilityGetMany(input: UtilityGetManyInput): UtilityGetManyOutput
-  UtilitySearch(input: UtilitySearchInput): UtilitySearchOutput
-  VendorGet(input: VendorGetInput): VendorGetOutput
-  VendorGetConnection(input: VendorGetConnectionInput): VendorGetConnectionOutput
-  VendorGetMany(input: VendorGetManyInput): VendorGetManyOutput
-  VendorSearch(input: VendorSearchInput): VendorSearchOutput
-  linkedUserGet(input: linkedUserGetInput): linkedUserGetOutput
-  linkedUserGetConnection(input: linkedUserGetConnectionInput): linkedUserGetConnectionOutput
-  linkedUserGetMany(input: linkedUserGetManyInput): linkedUserGetManyOutput
-  linkedUserSearch(input: linkedUserSearchInput): linkedUserSearchOutput
+  GroupGet: GroupGetOutput
+  GroupGetConnection: GroupGetConnectionOutput
+  GroupGetMany: GroupGetManyOutput
+  GroupSearch: GroupSearchOutput
+  OrderGet: OrderGetOutput
+  OrderGetConnection: OrderGetConnectionOutput
+  OrderGetMany: OrderGetManyOutput
+  OrderSearch: OrderSearchOutput
+  OtpGet: OtpGetOutput
+  OtpGetConnection: OtpGetConnectionOutput
+  OtpGetMany: OtpGetManyOutput
+  OtpSearch: OtpSearchOutput
+  PaymentMethodGetMany: PaymentMethodGetManyOutput
+  PricingGet: PricingGetOutput
+  PricingGetConnection: PricingGetConnectionOutput
+  PricingGetMany: PricingGetManyOutput
+  PricingSearch: PricingSearchOutput
+  ProductGet: ProductGetOutput
+  ProductGetConnection: ProductGetConnectionOutput
+  ProductGetMany: ProductGetManyOutput
+  ProductSearch: ProductSearchOutput
+  RoleGet: RoleGetOutput
+  RoleGetConnection: RoleGetConnectionOutput
+  RoleGetMany: RoleGetManyOutput
+  RoleSearch: RoleSearchOutput
+  SnapshotGet: SnapshotGetOutput
+  SnapshotGetMany: SnapshotGetManyOutput
+  SocketGet: SocketGetOutput
+  SocketGetConnection: SocketGetConnectionOutput
+  SocketGetMany: SocketGetManyOutput
+  SocketSearch: SocketSearchOutput
+  UserGet: UserGetOutput
+  UserGetConnection: UserGetConnectionOutput
+  UserGetMany: UserGetManyOutput
+  UserSearch: UserSearchOutput
+  UtilityGet: UtilityGetOutput
+  UtilityGetConnection: UtilityGetConnectionOutput
+  UtilityGetMany: UtilityGetManyOutput
+  UtilitySearch: UtilitySearchOutput
+  VendorGet: VendorGetOutput
+  VendorGetConnection: VendorGetConnectionOutput
+  VendorGetMany: VendorGetManyOutput
+  VendorSearch: VendorSearchOutput
+  linkedUserGet: linkedUserGetOutput
+  linkedUserGetConnection: linkedUserGetConnectionOutput
+  linkedUserGetMany: linkedUserGetManyOutput
+  linkedUserSearch: linkedUserSearchOutput
 }
 
 type Role {
@@ -2046,30 +785,6 @@ type Role {
   _id: String
   created: DateTime
   name: String
-}
-
-input RoleCreateFormInput {
-  _group: GroupInput
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input RoleCreateInput {
-  form: RoleCreateFormInput
-  root: String
-}
-
-input RoleCreateManyFormInput {
-  _group: GroupInput
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input RoleCreateManyInput {
-  form: [RoleCreateManyFormInput]
-  root: String
 }
 
 type RoleCreateManyOutput {
@@ -2092,61 +807,9 @@ type RoleGetConnectionEdge {
   node: Role
 }
 
-input RoleGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [RoleInput]
-  resourceValue: RoleInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input RoleGetConnectionInput {
-  filter: [RoleGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type RoleGetConnectionOutput {
   result: RoleGetConnectionConnection
   root: Group
-}
-
-input RoleGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [RoleInput]
-  resourceValue: RoleInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input RoleGetInput {
-  filter: [RoleGetFilterInput]
-  root: String
-}
-
-input RoleGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [RoleInput]
-  resourceValue: RoleInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input RoleGetManyInput {
-  filter: [RoleGetManyFilterInput]
-  root: String
 }
 
 type RoleGetManyOutput {
@@ -2159,39 +822,9 @@ type RoleGetOutput {
   root: Group
 }
 
-input RoleInput {
-  _group: GroupInput
-  _id: String
-  created: DateTime
-  name: String
-}
-
-input RoleRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [RoleInput]
-  resourceValue: RoleInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input RoleRemoveInput {
-  filter: [RoleRemoveFilterInput]
-  root: String
-}
-
 type RoleRemoveOutput {
   result: Role
   root: Group
-}
-
-input RoleSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type RoleSearchOutput {
@@ -2199,34 +832,9 @@ type RoleSearchOutput {
   root: Group
 }
 
-input RoleUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [RoleInput]
-  resourceValue: RoleInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input RoleUpdateInput {
-  filter: [RoleUpdateFilterInput]
-  root: String
-  update: RoleUpdateUpdateInput
-}
-
 type RoleUpdateOutput {
   result: Role
   root: Group
-}
-
-input RoleUpdateUpdateInput {
-  _group: GroupInput
-  _id: String
-  created: DateTime
-  name: String
 }
 
 type SignIn {
@@ -2235,18 +843,6 @@ type SignIn {
   isNew: Boolean
   token: String
   user: User
-}
-
-input SignInCreateFormInput {
-  callingCode: String
-  email: String
-  otp: String
-  phone: String
-}
-
-input SignInCreateInput {
-  form: SignInCreateFormInput
-  root: String
 }
 
 type SignInCreateOutput {
@@ -2311,40 +907,6 @@ type Snapshot {
   name: String
 }
 
-input SnapshotGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [SnapshotInput]
-  resourceValue: SnapshotInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input SnapshotGetInput {
-  filter: [SnapshotGetFilterInput]
-  root: String
-}
-
-input SnapshotGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [SnapshotInput]
-  resourceValue: SnapshotInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input SnapshotGetManyInput {
-  filter: [SnapshotGetManyFilterInput]
-  root: String
-}
-
 type SnapshotGetManyOutput {
   result: [Snapshot]
 }
@@ -2353,40 +915,11 @@ type SnapshotGetOutput {
   result: Snapshot
 }
 
-input SnapshotInput {
-  images: [String]
-  name: String
-}
-
 type Socket {
   _id: String
   connections: String
   created: DateTime
   name: String
-}
-
-input SocketCreateFormInput {
-  _id: String
-  connections: String
-  created: DateTime
-  name: String
-}
-
-input SocketCreateInput {
-  form: SocketCreateFormInput
-  root: String
-}
-
-input SocketCreateManyFormInput {
-  _id: String
-  connections: String
-  created: DateTime
-  name: String
-}
-
-input SocketCreateManyInput {
-  form: [SocketCreateManyFormInput]
-  root: String
 }
 
 type SocketCreateManyOutput {
@@ -2407,60 +940,8 @@ type SocketGetConnectionEdge {
   node: Socket
 }
 
-input SocketGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [SocketInput]
-  resourceValue: SocketInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input SocketGetConnectionInput {
-  filter: [SocketGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type SocketGetConnectionOutput {
   result: SocketGetConnectionConnection
-}
-
-input SocketGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [SocketInput]
-  resourceValue: SocketInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input SocketGetInput {
-  filter: [SocketGetFilterInput]
-  root: String
-}
-
-input SocketGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [SocketInput]
-  resourceValue: SocketInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input SocketGetManyInput {
-  filter: [SocketGetManyFilterInput]
-  root: String
 }
 
 type SocketGetManyOutput {
@@ -2471,71 +952,16 @@ type SocketGetOutput {
   result: Socket
 }
 
-input SocketInput {
-  _id: String
-  connections: String
-  created: DateTime
-  name: String
-}
-
-input SocketRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [SocketInput]
-  resourceValue: SocketInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input SocketRemoveInput {
-  filter: [SocketRemoveFilterInput]
-  root: String
-}
-
 type SocketRemoveOutput {
   result: Socket
-}
-
-input SocketSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type SocketSearchOutput {
   result: [Socket]
 }
 
-input SocketUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [SocketInput]
-  resourceValue: SocketInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input SocketUpdateInput {
-  filter: [SocketUpdateFilterInput]
-  root: String
-  update: SocketUpdateUpdateInput
-}
-
 type SocketUpdateOutput {
   result: Socket
-}
-
-input SocketUpdateUpdateInput {
-  _id: String
-  connections: String
-  created: DateTime
-  name: String
 }
 
 type User {
@@ -2551,46 +977,6 @@ type User {
   linkedUser: [linkedUser]
   paymentMethodPrimary: String
   phone: String
-}
-
-input UserCreateFormInput {
-  Bank: [BankInput]
-  Card: [CardInput]
-  PaymentMethod: [PaymentMethodInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  linkedUser: [linkedUserInput]
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserCreateInput {
-  form: UserCreateFormInput
-  root: String
-}
-
-input UserCreateManyFormInput {
-  Bank: [BankInput]
-  Card: [CardInput]
-  PaymentMethod: [PaymentMethodInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  linkedUser: [linkedUserInput]
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input UserCreateManyInput {
-  form: [UserCreateManyFormInput]
-  root: String
 }
 
 type UserCreateManyOutput {
@@ -2611,60 +997,8 @@ type UserGetConnectionEdge {
   node: User
 }
 
-input UserGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UserInput]
-  resourceValue: UserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input UserGetConnectionInput {
-  filter: [UserGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type UserGetConnectionOutput {
   result: UserGetConnectionConnection
-}
-
-input UserGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UserInput]
-  resourceValue: UserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input UserGetInput {
-  filter: [UserGetFilterInput]
-  root: String
-}
-
-input UserGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UserInput]
-  resourceValue: UserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input UserGetManyInput {
-  filter: [UserGetManyFilterInput]
-  root: String
 }
 
 type UserGetManyOutput {
@@ -2690,72 +1024,16 @@ input UserInput {
   phone: String
 }
 
-input UserRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UserInput]
-  resourceValue: UserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input UserRemoveInput {
-  filter: [UserRemoveFilterInput]
-  root: String
-}
-
 type UserRemoveOutput {
   result: User
-}
-
-input UserSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type UserSearchOutput {
   result: [User]
 }
 
-input UserUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UserInput]
-  resourceValue: UserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input UserUpdateInput {
-  filter: [UserUpdateFilterInput]
-  root: String
-  update: UserUpdateUpdateInput
-}
-
 type UserUpdateOutput {
   result: User
-}
-
-input UserUpdateUpdateInput {
-  Bank: [BankInput]
-  Card: [CardInput]
-  PaymentMethod: [PaymentMethodInput]
-  _id: String
-  callingCode: String
-  created: DateTime
-  email: String
-  first: String
-  last: String
-  linkedUser: [linkedUserInput]
-  paymentMethodPrimary: String
-  phone: String
 }
 
 type Utility {
@@ -2768,40 +1046,6 @@ type Utility {
   pricing: String
   type: [String]
   url: String
-}
-
-input UtilityCreateFormInput {
-  _id: String
-  _vender: VendorInput
-  created: DateTime
-  description: String
-  imageSrc: String
-  name: String
-  pricing: String
-  type: [String]
-  url: String
-}
-
-input UtilityCreateInput {
-  form: UtilityCreateFormInput
-  root: String
-}
-
-input UtilityCreateManyFormInput {
-  _id: String
-  _vender: VendorInput
-  created: DateTime
-  description: String
-  imageSrc: String
-  name: String
-  pricing: String
-  type: [String]
-  url: String
-}
-
-input UtilityCreateManyInput {
-  form: [UtilityCreateManyFormInput]
-  root: String
 }
 
 type UtilityCreateManyOutput {
@@ -2824,61 +1068,9 @@ type UtilityGetConnectionEdge {
   node: Utility
 }
 
-input UtilityGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UtilityInput]
-  resourceValue: UtilityInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input UtilityGetConnectionInput {
-  filter: [UtilityGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type UtilityGetConnectionOutput {
   result: UtilityGetConnectionConnection
   root: Vendor
-}
-
-input UtilityGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UtilityInput]
-  resourceValue: UtilityInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input UtilityGetInput {
-  filter: [UtilityGetFilterInput]
-  root: String
-}
-
-input UtilityGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UtilityInput]
-  resourceValue: UtilityInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input UtilityGetManyInput {
-  filter: [UtilityGetManyFilterInput]
-  root: String
 }
 
 type UtilityGetManyOutput {
@@ -2891,44 +1083,9 @@ type UtilityGetOutput {
   root: Vendor
 }
 
-input UtilityInput {
-  _id: String
-  _vender: VendorInput
-  created: DateTime
-  description: String
-  imageSrc: String
-  name: String
-  pricing: String
-  type: [String]
-  url: String
-}
-
-input UtilityRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UtilityInput]
-  resourceValue: UtilityInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input UtilityRemoveInput {
-  filter: [UtilityRemoveFilterInput]
-  root: String
-}
-
 type UtilityRemoveOutput {
   result: Utility
   root: Vendor
-}
-
-input UtilitySearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type UtilitySearchOutput {
@@ -2936,39 +1093,9 @@ type UtilitySearchOutput {
   root: Vendor
 }
 
-input UtilityUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UtilityInput]
-  resourceValue: UtilityInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input UtilityUpdateInput {
-  filter: [UtilityUpdateFilterInput]
-  root: String
-  update: UtilityUpdateUpdateInput
-}
-
 type UtilityUpdateOutput {
   result: Utility
   root: Vendor
-}
-
-input UtilityUpdateUpdateInput {
-  _id: String
-  _vender: VendorInput
-  created: DateTime
-  description: String
-  imageSrc: String
-  name: String
-  pricing: String
-  type: [String]
-  url: String
 }
 
 type Vendor {
@@ -2977,32 +1104,6 @@ type Vendor {
   created: DateTime
   imageSrc: String
   name: String
-}
-
-input VendorCreateFormInput {
-  Utility: [UtilityInput]
-  _id: String
-  created: DateTime
-  imageSrc: String
-  name: String
-}
-
-input VendorCreateInput {
-  form: VendorCreateFormInput
-  root: String
-}
-
-input VendorCreateManyFormInput {
-  Utility: [UtilityInput]
-  _id: String
-  created: DateTime
-  imageSrc: String
-  name: String
-}
-
-input VendorCreateManyInput {
-  form: [VendorCreateManyFormInput]
-  root: String
 }
 
 type VendorCreateManyOutput {
@@ -3023,60 +1124,8 @@ type VendorGetConnectionEdge {
   node: Vendor
 }
 
-input VendorGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [VendorInput]
-  resourceValue: VendorInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input VendorGetConnectionInput {
-  filter: [VendorGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type VendorGetConnectionOutput {
   result: VendorGetConnectionConnection
-}
-
-input VendorGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [VendorInput]
-  resourceValue: VendorInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input VendorGetInput {
-  filter: [VendorGetFilterInput]
-  root: String
-}
-
-input VendorGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [VendorInput]
-  resourceValue: VendorInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input VendorGetManyInput {
-  filter: [VendorGetManyFilterInput]
-  root: String
 }
 
 type VendorGetManyOutput {
@@ -3087,73 +1136,16 @@ type VendorGetOutput {
   result: Vendor
 }
 
-input VendorInput {
-  Utility: [UtilityInput]
-  _id: String
-  created: DateTime
-  imageSrc: String
-  name: String
-}
-
-input VendorRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [VendorInput]
-  resourceValue: VendorInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input VendorRemoveInput {
-  filter: [VendorRemoveFilterInput]
-  root: String
-}
-
 type VendorRemoveOutput {
   result: Vendor
-}
-
-input VendorSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type VendorSearchOutput {
   result: [Vendor]
 }
 
-input VendorUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [VendorInput]
-  resourceValue: VendorInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input VendorUpdateInput {
-  filter: [VendorUpdateFilterInput]
-  root: String
-  update: VendorUpdateUpdateInput
-}
-
 type VendorUpdateOutput {
   result: Vendor
-}
-
-input VendorUpdateUpdateInput {
-  Utility: [UtilityInput]
-  _id: String
-  created: DateTime
-  imageSrc: String
-  name: String
 }
 
 type linkedUser {
@@ -3162,32 +1154,6 @@ type linkedUser {
   created: DateTime
   externalId: String
   type: String
-}
-
-input linkedUserCreateFormInput {
-  _id: String
-  _user: UserInput
-  created: DateTime
-  externalId: String
-  type: String
-}
-
-input linkedUserCreateInput {
-  form: linkedUserCreateFormInput
-  root: String
-}
-
-input linkedUserCreateManyFormInput {
-  _id: String
-  _user: UserInput
-  created: DateTime
-  externalId: String
-  type: String
-}
-
-input linkedUserCreateManyInput {
-  form: [linkedUserCreateManyFormInput]
-  root: String
 }
 
 type linkedUserCreateManyOutput {
@@ -3210,61 +1176,9 @@ type linkedUserGetConnectionEdge {
   node: linkedUser
 }
 
-input linkedUserGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [linkedUserInput]
-  resourceValue: linkedUserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input linkedUserGetConnectionInput {
-  filter: [linkedUserGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
 type linkedUserGetConnectionOutput {
   result: linkedUserGetConnectionConnection
   root: User
-}
-
-input linkedUserGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [linkedUserInput]
-  resourceValue: linkedUserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input linkedUserGetInput {
-  filter: [linkedUserGetFilterInput]
-  root: String
-}
-
-input linkedUserGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [linkedUserInput]
-  resourceValue: linkedUserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input linkedUserGetManyInput {
-  filter: [linkedUserGetManyFilterInput]
-  root: String
 }
 
 type linkedUserGetManyOutput {
@@ -3285,32 +1199,9 @@ input linkedUserInput {
   type: String
 }
 
-input linkedUserRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [linkedUserInput]
-  resourceValue: linkedUserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input linkedUserRemoveInput {
-  filter: [linkedUserRemoveFilterInput]
-  root: String
-}
-
 type linkedUserRemoveOutput {
   result: linkedUser
   root: User
-}
-
-input linkedUserSearchInput {
-  keys: [String]
-  query: String
-  root: String
 }
 
 type linkedUserSearchOutput {
@@ -3318,33 +1209,7 @@ type linkedUserSearchOutput {
   root: User
 }
 
-input linkedUserUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTime
-  field: String
-  numberValue: Float
-  resourceArrayValue: [linkedUserInput]
-  resourceValue: linkedUserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input linkedUserUpdateInput {
-  filter: [linkedUserUpdateFilterInput]
-  root: String
-  update: linkedUserUpdateUpdateInput
-}
-
 type linkedUserUpdateOutput {
   result: linkedUser
   root: User
-}
-
-input linkedUserUpdateUpdateInput {
-  _id: String
-  _user: UserInput
-  created: DateTime
-  externalId: String
-  type: String
 }

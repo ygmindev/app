@@ -1,4 +1,4 @@
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { {{NAME}}(pascalCase) } from '@{{PATH}}(pathCase)/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
 import { type {{NAME}}(pascalCase)PropsModel } from '@{{PATH}}(pathCase)/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 

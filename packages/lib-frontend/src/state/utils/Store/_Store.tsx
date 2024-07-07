@@ -140,7 +140,7 @@ export class _Store<
                 : store.unset(kS);
               void storage.removeItem(k);
             };
-            if (isArray(v)) {
+            if (Array.isArray(v)) {
               storeInitialState[kS] = [] as StateModel[keyof StateModel];
               storeActions[`${k}Add` as TKey] = (store, value) => {
                 actionsF[`${k}Add` as TKeyAction]
@@ -227,7 +227,7 @@ export class _Store<
               key: name,
               stateReconciler: isServer ? (_, original) => original : undefined,
               storage,
-              whitelist: isArray(reducer.persist) ? reducer.persist : undefined,
+              whitelist: Array.isArray(reducer.persist) ? reducer.persist : undefined,
             }
           : undefined;
 

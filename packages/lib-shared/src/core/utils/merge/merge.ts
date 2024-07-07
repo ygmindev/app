@@ -19,7 +19,7 @@ export const merge = <TType, TResult = TType>(
             : x;
       case MERGE_STRATEGY.DEEP_APPEND:
       case MERGE_STRATEGY.DEEP_PREPEND:
-        return isArray(x) && isArray(y)
+        return Array.isArray(x) && Array.isArray(y)
           ? uniq(
               strategy === MERGE_STRATEGY.DEEP_APPEND
                 ? [...(y as Array<unknown>), ...(x as Array<unknown>)]

@@ -19,7 +19,7 @@ const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'
       if (pathnameF.includes(':')) {
         return [
           ...result,
-          ...(isArray(route.prerender)
+          ...(Array.isArray(route.prerender)
             ? route.prerender.map((value) => ({
                 getContext: undefined,
                 pathname: pathnameF.replace(/\/:[^\/]+/, value),

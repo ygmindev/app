@@ -13,7 +13,7 @@ const stringifyF = (params: Array<unknown>): string =>
     .map((value) =>
       isPlainObject(value)
         ? stringify(value as object)
-        : isArray(value)
+        : Array.isArray(value)
           ? value.map((v) => stringifyF([v]))
           : value,
     )

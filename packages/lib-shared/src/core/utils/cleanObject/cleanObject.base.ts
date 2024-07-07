@@ -17,7 +17,7 @@ export const cleanObject = <TType extends unknown>(
   if (isPrimitive(value)) {
     return value;
   }
-  if (isArray(value)) {
+  if (Array.isArray(value)) {
     return filterNil(value.map((vv) => cleanObject(vv as object, options, depth))) as TType;
   }
   if (

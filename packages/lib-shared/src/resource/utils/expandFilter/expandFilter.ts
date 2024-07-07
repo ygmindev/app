@@ -13,7 +13,7 @@ export const expandFilter = <TType extends unknown>(
 ): ExpandFilterModel<TType> =>
   params?.map(({ condition, field, value }) => {
     const valueF = ((): Omit<FilterModel<TType>, 'condition' | 'field'> => {
-      if (isArray(value)) {
+      if (Array.isArray(value)) {
         switch (trueTypeOf(value[0])) {
           case 'String':
             return { stringArrayValue: value as Array<string> };

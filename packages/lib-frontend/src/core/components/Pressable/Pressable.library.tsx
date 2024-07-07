@@ -2,7 +2,8 @@ import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
+import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesianObject';
 
 export const props: LibraryPropsModel<PressablePropsModel> = {
   Component: Pressable,
@@ -10,7 +11,7 @@ export const props: LibraryPropsModel<PressablePropsModel> = {
     children: <Text>children</Text>,
   },
   variants: [
-    ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),
+    ...cartesianObject({ elementState: Object.values(ELEMENT_STATE) }).map((props) => ({ props })),
     { props: { confirmMessage: 'confirmMessage' } },
   ],
 };

@@ -6,7 +6,7 @@ import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
 import { _typescript } from '@lib/config/node/typescript/_typescript';
 import { BOOLEAN_STRING } from '@lib/shared/core/core.constants';
-import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
+import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import reduce from 'lodash/reduce';
 import trim from 'lodash/trim';
@@ -88,7 +88,7 @@ export const _test = ({
 
     testMatch: testExtension
       ? reduce(
-          permuteString([testExtension], extensions),
+          cartesianString([testExtension], extensions),
           (result, ext) => {
             const extF = trim(ext, '.');
             return [

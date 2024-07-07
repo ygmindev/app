@@ -20,6 +20,7 @@ import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { withId } from '@lib/shared/core/utils/withId/withId';
 import range from 'lodash/range';
 import toNumber from 'lodash/toNumber';
@@ -115,3 +116,5 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forward
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (OtpInput.displayName = variableName({ OtpInput }));

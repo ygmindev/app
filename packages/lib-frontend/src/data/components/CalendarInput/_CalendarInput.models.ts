@@ -2,7 +2,7 @@ import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/dat
 import { type ThemePresetsModel } from '@lib/frontend/style/style.models';
 import { type RangeModel } from '@lib/shared/data/data.models';
 
-export type _CalendarPickerPropsModel = ThemePresetsModel &
+export type _CalendarInputPropsModel = ThemePresetsModel &
   (
     | ({ isRange?: true } & InputPropsModel<RangeModel<Date>>)
     | ({ isRange?: false } & InputPropsModel<Date>)
@@ -10,4 +10,4 @@ export type _CalendarPickerPropsModel = ThemePresetsModel &
     disable?(date: Date): boolean;
   };
 
-export type _CalendarPickerRefModel = InputRefModel;
+export type _CalendarInputRefModel = InputRefModel;

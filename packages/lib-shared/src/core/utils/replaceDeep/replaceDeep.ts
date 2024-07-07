@@ -12,6 +12,6 @@ export const replaceDeep = <TType extends unknown>(value: TType, from: string, t
         (result, v, k) => ({ ...result, [k]: replaceDeep(v, from, to) }),
         {},
       )
-    : isArray(value)
+    : Array.isArray(value)
     ? value.map((v) => replaceDeep(v, from, to) as TType)
     : value) as TType;

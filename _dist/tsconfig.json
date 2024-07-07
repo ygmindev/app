@@ -67,9 +67,6 @@
       "@lib/frontend/*": [
         "packages/lib-frontend/src/*"
       ],
-      "@lib/library/*": [
-        "packages/lib-library/src/*"
-      ],
       "@lib/shared/*": [
         "packages/lib-shared/src/*"
       ],

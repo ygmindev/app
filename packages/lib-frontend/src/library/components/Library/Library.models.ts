@@ -1,6 +1,5 @@
 import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
-import { type DocgenMetaDataPropsModel } from '@lib/library/docgen/utils/docgen/docgen.models';
-import { type PartialModel } from '@lib/shared/core/core.models';
+import { type LibraryVariantModel } from '@lib/frontend/library/library.models';
 import { type ComponentType } from 'react';
 
 export type LibraryPropsModel<TProps> = Pick<WrapperPropsModel, 'minWidth'> & {
@@ -8,13 +7,6 @@ export type LibraryPropsModel<TProps> = Pick<WrapperPropsModel, 'minWidth'> & {
   Renderer?: ComponentType<TProps>;
   category?: string;
   defaultProps: TProps;
-  name?: string;
-  propTypes?: Array<DocgenMetaDataPropsModel>;
+  title?: string;
   variants?: Array<LibraryVariantModel<TProps>>;
-};
-
-export type LibraryVariantModel<TProps> = {
-  category?: string;
-  name?: string;
-  props?: PartialModel<TProps>;
 };

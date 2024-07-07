@@ -2,8 +2,9 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { type ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesianObject';
 
 export const props: LibraryPropsModel<ButtonPropsModel> = {
   Component: Button,
@@ -12,14 +13,15 @@ export const props: LibraryPropsModel<ButtonPropsModel> = {
   },
   variants: [
     { props: { icon: 'personCircle' } },
-    ...Object.values(ELEMENT_STATE).map((elementState) => ({ props: { elementState } })),
-    ...Object.values(THEME_SIZE).map((size) => ({ props: { size } })),
-    ...Object.values(THEME_COLOR).map((color) => ({ props: { color } })),
-    ...Object.values(THEME_COLOR).map((color) => ({
-      props: { color, type: BUTTON_TYPE.TRANSPARENT },
+    ...cartesianObject({ size: Object.values(THEME_SIZE) }).map((props) => ({
+      props,
     })),
-    ...Object.values(THEME_COLOR).map((color) => ({
-      props: { color, type: BUTTON_TYPE.INVISIBLE },
+    ...cartesianObject({
+      color: Object.values(THEME_COLOR),
+      elementState: Object.values(ELEMENT_STATE),
+      type: Object.values(BUTTON_TYPE),
+    }).map((props) => ({
+      props,
     })),
     { props: { children: undefined, icon: 'personCircle' } },
   ],

@@ -1,10 +1,10 @@
+import { type CalendarInputPropsModel } from '@lib/frontend/data/components/CalendarInput/CalendarInput.models';
+import { CalendarInput } from '@lib/frontend/data/components/CalendarInput/CalendarInput';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
-import { Library } from '@lib/library/core/components/Library/Library';
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
 
-const { Component, displayName, testID } = withTestComponent<LibraryPropsModel<unknown>>({
-  target: Library,
+const { Component, displayName, testID } = withTestComponent<CalendarInputPropsModel>({
+  target: CalendarInput,
 });
 
 describe(displayName, () => {

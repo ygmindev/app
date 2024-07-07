@@ -7,7 +7,7 @@ import { EXTENSIONS_BASE } from '@lib/config/file/file.constants';
 import { _lint } from '@lib/config/node/lint/_lint';
 import { type _LintConfigModel, type LintConfigModel } from '@lib/config/node/lint/lint.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import { permuteString } from '@lib/shared/core/utils/permuteString/permuteString';
+import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
 
 export const lintCommand = (fix?: boolean): string => {
   const { configPath, exclude, include } = config.params();
@@ -26,7 +26,7 @@ const config = defineConfig<LintConfigModel, _LintConfigModel>({
 
     exclude: [],
 
-    include: permuteString(
+    include: cartesianString(
       [toRelative({ from: fromDist(), to: fromPackages('*/src/**/*') })],
       EXTENSIONS_BASE,
     ),

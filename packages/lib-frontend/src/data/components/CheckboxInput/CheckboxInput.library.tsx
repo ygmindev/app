@@ -1,4 +1,4 @@
-import { type LibraryPropsModel } from '@lib/library/core/components/Library/Library.models';
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { CheckboxInput } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput';
 import { type CheckboxInputPropsModel } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput.models';
 

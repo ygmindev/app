@@ -49,12 +49,12 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
         fontStyle={fontStyle}
         icon={icon}
         image={image}
-        leftElement={(isActive) => (
+        leftElement={(isActiveF) => (
           <Rotatable
             directionInactive={DIRECTION.RIGHT}
-            isActive={isActive}>
+            isActive={isActiveF}>
             <Button
-              elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+              elementState={isActiveF ? ELEMENT_STATE.ACTIVE : undefined}
               icon="chevronUp"
               isHidden
               size={size}
@@ -62,7 +62,6 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
             />
           </Rotatable>
         )}
-        mHorizontal
         onPress={handleToggle}
         rightElement={() => <></>}
         title={title}
@@ -80,7 +79,7 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
         <Wrapper onMeasure={measureSet}>
           {!isTransparent && <Divider mHorizontal />}
 
-          <Wrapper>{children}</Wrapper>
+          <Wrapper p>{children}</Wrapper>
         </Wrapper>
       </Wrapper>
     </Wrapper>
