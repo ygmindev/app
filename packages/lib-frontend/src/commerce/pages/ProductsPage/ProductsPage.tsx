@@ -11,7 +11,8 @@ export const ProductsPage: LFCModel<ProductsPagePropsModel> = ({ ...props }) => 
   return (
     <Wrapper
       {...wrapperProps}
-      flex>
+      flex
+      p>
       <WrappedList
         data={PRODUCT_FIXTURES}
         element={(product) => (

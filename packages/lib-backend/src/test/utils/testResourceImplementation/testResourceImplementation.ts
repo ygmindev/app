@@ -1,7 +1,7 @@
 import { cleanup } from '@lib/backend/setup/utils/cleanup/cleanup';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
-import { clearSeed } from '@lib/backend/test/utils/clearSeed/clearSeed';
-import { seed } from '@lib/backend/test/utils/seed/seed';
+import { clearSeed } from '@lib/backend/database/utils/clearSeed/clearSeed';
+import { seed } from '@lib/backend/database/utils/seed/seed';
 import {
   type TestableResourceImplementationModel,
   type TestResourceImplementationParamsModel,

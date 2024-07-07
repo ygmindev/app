@@ -1,11 +1,11 @@
-import { seed } from '@lib/backend/test/utils/seed/seed';
+import { clearSeed } from '@lib/backend/database/utils/clearSeed/clearSeed';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ seed });
+const { displayName } = withTest({ clearSeed });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await seed();
+    const result = await clearSeed();
     expect(result).toStrictEqual({});
   });
 });

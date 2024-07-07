@@ -11,6 +11,7 @@ import { TableInput } from '@lib/frontend/data/components/TableInput/TableInput'
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
@@ -52,6 +53,7 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
                       defaultValue={1}
                       isNoClear
                       min={1}
+                      size={THEME_SIZE.SMALL}
                       value={value as number}
                     />
                   ),

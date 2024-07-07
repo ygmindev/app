@@ -4,6 +4,7 @@ import { type ProductTilePropsModel } from '@lib/frontend/commerce/components/Pr
 import { Text } from '@lib/frontend/core/components/Text/Text';
 // import { Image } from '@lib/frontend/core/components/Image/Image';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
@@ -23,22 +24,19 @@ export const ProductTile: LFCModel<ProductTilePropsModel> = ({ product, ...props
   return (
     <Wrapper
       {...wrapperProps}
+      border
+      p
+      round
       s={THEME_SIZE.SMALL}>
-      <Wrapper
-        isOverflowHidden
-        round>
-        <Wrapper
-          border
-          height={randomInt(200, 400)}
-          round
-          width={200}
-        />
+      <WrapperFixture
+        height={randomInt(200, 400)}
+        width={200}
+      />
 
-        {/* <Image
+      {/* <Image
           src={images[0]}
           width={200}
         /> */}
-      </Wrapper>
 
       <Text isBold>{product.name}</Text>
 

@@ -1,6 +1,6 @@
 import { cleanup } from '@lib/backend/setup/utils/cleanup/cleanup';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
-import { seed } from '@lib/backend/test/utils/seed/seed';
+import { seed } from '@lib/backend/database/utils/seed/seed';
 import {
   type TestableResourceImplementationModel,
   type TestResourceImplementationParamsModel,

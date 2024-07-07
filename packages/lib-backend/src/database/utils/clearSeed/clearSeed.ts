@@ -1,8 +1,8 @@
 import { Container } from '@lib/backend/core/utils/Container/Container';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
+import { type ClearSeedModel } from '@lib/backend/database/utils/clearSeed/clearSeed.models';
 import { Database } from '@lib/backend/database/utils/Database/Database';
-import { type ClearSeedModel } from '@lib/backend/test/utils/clearSeed/clearSeed.models';
-import { SEED_DATA } from '@lib/backend/test/utils/seed/seed.constants';
+import { SEED_DATA } from '@lib/backend/database/utils/seed/seed.constants';
 
 export const clearSeed = async (): Promise<ClearSeedModel> => {
   const database = Container.get(Database, DATABASE_TYPE.MONGO);
