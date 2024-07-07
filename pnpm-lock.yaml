@@ -997,102 +997,6 @@ importers:
         specifier: 2.0.0-beta.2
         version: 2.0.0-beta.2(class-validator@0.14.1)(graphql@16.8.1)
 
-  packages/backend-lambda-crawl/_build/layers/nodejs:
-    dependencies:
-      '@apollo/server':
-        specifier: ^4.10.4
-        version: 4.10.4(encoding@0.1.13)(graphql@16.8.1)
-      '@as-integrations/aws-lambda':
-        specifier: ^3.1.0
-        version: 3.1.0(@apollo/server@4.10.4(encoding@0.1.13)(graphql@16.8.1))
-      '@aws-sdk/client-apigatewaymanagementapi':
-        specifier: ^3.556.0
-        version: 3.588.0
-      '@babel/core':
-        specifier: ^7.24.4
-        version: 7.24.6
-      '@sparticuz/chromium':
-        specifier: ^123.0.1
-        version: 123.0.1
-      apollo-server-lambda:
-        specifier: ^3.13.0
-        version: 3.13.0(encoding@0.1.13)(graphql@16.8.1)
-      app-root-path:
-        specifier: ^3.1.0
-        version: 3.1.0
-      aws-lambda:
-        specifier: ^1.0.7
-        version: 1.0.7
-      axios:
-        specifier: ^1.6.8
-        version: 1.7.2
-      class-validator:
-        specifier: ^0.14.1
-        version: 0.14.1
-      close-with-grace:
-        specifier: ^1.3.0
-        version: 1.3.0
-      core-js:
-        specifier: ^3.37.0
-        version: 3.37.1
-      date-fns:
-        specifier: ^3.6.0
-        version: 3.6.0
-      ejs:
-        specifier: ^3.1.10
-        version: 3.1.10
-      email-templates:
-        specifier: ^11.1.1
-        version: 11.1.1(@babel/core@7.24.6)(ejs@3.1.10)(encoding@0.1.13)(mustache@4.2.0)(pug@3.0.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(underscore@1.13.6)(velocityjs@2.0.6)
-      google-auth-library:
-        specifier: ^9.8.0
-        version: 9.10.0(encoding@0.1.13)
-      google-spreadsheet:
-        specifier: ^4.1.1
-        version: 4.1.2(google-auth-library@9.10.0(encoding@0.1.13))
-      graphql-relay:
-        specifier: ^0.10.1
-        version: 0.10.1(graphql@16.8.1)
-      http-errors:
-        specifier: ^2.0.0
-        version: 2.0.0
-      inversify:
-        specifier: ^6.0.2
-        version: 6.0.2
-      json-stringify-safe:
-        specifier: ^5.0.1
-        version: 5.0.1
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
-      p-queue:
-        specifier: ^6.6.2
-        version: 6.6.2
-      pino:
-        specifier: ^9.1.0
-        version: 9.1.0
-      pino-pretty:
-        specifier: ^11.0.0
-        version: 11.1.0
-      puppeteer:
-        specifier: ^22.6.5
-        version: 22.10.0(typescript@5.4.5)
-      puppeteer-extra:
-        specifier: ^3.3.6
-        version: 3.3.6(puppeteer-core@22.10.0)(puppeteer@22.10.0(typescript@5.4.5))
-      puppeteer-extra-plugin-stealth:
-        specifier: ^2.11.2
-        version: 2.11.2(puppeteer-extra@3.3.6(puppeteer-core@22.10.0)(puppeteer@22.10.0(typescript@5.4.5)))
-      reflect-metadata:
-        specifier: ^0.2.2
-        version: 0.2.2
-      thenby:
-        specifier: ^1.3.4
-        version: 1.3.4
-      type-graphql:
-        specifier: 2.0.0-beta.2
-        version: 2.0.0-beta.2(class-validator@0.14.1)(graphql@16.8.1)
-
   packages/backend-server:
     dependencies:
       '@babel/core':
@@ -1197,8 +1101,6 @@ importers:
   packages/lib-config: {}
 
   packages/lib-frontend: {}
-
-  packages/lib-library: {}
 
   packages/lib-shared: {}
 
@@ -16073,7 +15975,7 @@ snapshots:
       '@aws-sdk/client-sso-oidc': 3.588.0(@aws-sdk/client-sts@3.588.0)
       '@aws-sdk/client-sts': 3.588.0
       '@aws-sdk/core': 3.588.0
-      '@aws-sdk/credential-provider-node': 3.588.0(@aws-sdk/client-sso-oidc@3.588.0(@aws-sdk/client-sts@3.588.0))(@aws-sdk/client-sts@3.588.0)
+      '@aws-sdk/credential-provider-node': 3.588.0(@aws-sdk/client-sso-oidc@3.588.0)(@aws-sdk/client-sts@3.588.0(@aws-sdk/client-sso-oidc@3.588.0))
       '@aws-sdk/middleware-bucket-endpoint': 3.587.0
       '@aws-sdk/middleware-expect-continue': 3.577.0
       '@aws-sdk/middleware-flexible-checksums': 3.587.0
