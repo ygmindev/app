@@ -14,7 +14,7 @@ export class OtpForm implements OtpFormModel {
   callingCode?: string;
 
   @withField({ type: DATA_TYPE.BOOLEAN })
-  checkExists?: boolean;
+  isCheckExists?: boolean;
 
   @withField({ isDatabase: true, isUnique: true, type: DATA_TYPE.STRING })
   email?: string;

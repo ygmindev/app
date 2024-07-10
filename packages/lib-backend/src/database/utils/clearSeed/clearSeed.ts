@@ -9,6 +9,6 @@ export const clearSeed = async (): Promise<ClearSeedModel> => {
   for (const resource of SEED_DATA) {
     const { name } = resource;
     const repository = database.getRepository({ name });
-    await repository.clear();
+    await repository.remove({ filter: [{ field: 'isFixture', value: true }] });
   }
 };

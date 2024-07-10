@@ -46,13 +46,13 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
     value: method,
   });
   const [currentUser] = useStore('user.currentUser');
-  const checkExists = mode === FORM_MODE.UPDATE;
+  const isCheckExists = mode === FORM_MODE.UPDATE;
 
   const handleSubmit = async (data: UsernameFormModel): Promise<void> => {
     onSubmit && (await onSubmit(data));
     const form: OtpFormModel = pick(data, ['callingCode', 'phone', 'email']);
-    if (checkExists) {
-      form.checkExists = true;
+    if (isCheckExists) {
+      form.isCheckExists = true;
     }
     const { result } = await create({ form });
     result && onSuccess && (await onSuccess());
@@ -123,7 +123,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
             }
       }
       errorContextGet={(e) =>
-        checkExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
+        isCheckExists && (e as HttpError).statusCode === HTTP_STATUS_CODE.CONFLICT
           ? { icon: 'people', message: t('auth:userExistsError') }
           : undefined
       }

@@ -19,7 +19,7 @@ export const getEntityResourceFixture = <
   const fixtures = range(count ?? 1).map((i) => {
     const _id = generateResourceId();
     const dataF = data({ _id, index: i });
-    return { ...dataF, _id, created: new Date(2000, 1, 1) } as TType;
+    return { ...dataF, _id, created: new Date(), isFixture: true } as TType;
   });
   return (count && count > 1 ? fixtures : fixtures[0]) as GetEntityResourceFixtureModel<
     TType,

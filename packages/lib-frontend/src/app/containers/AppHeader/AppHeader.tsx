@@ -16,9 +16,10 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 
 export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation([COMMERCE]);
   const { push } = useRouter();
   const { wrapperProps } = useLayoutStyles({ props });
   const [isOffline] = useStore('app.isOffline');
@@ -45,7 +46,8 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
 
         <Button
           icon="cart"
-          iconText={`${items?.length ?? 0}`}
+          // TODO: plural based on count
+          iconText={`${items?.length ?? t('core:empty')}`}
           onPress={() => push({ pathname: ORDER })}
           type={BUTTON_TYPE.INVISIBLE}
         />

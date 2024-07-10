@@ -48,8 +48,8 @@ export class OtpImplementation
     },
 
     beforeCreate: async ({ input }) => {
-      const { checkExists, ...formF } = input?.form ?? {};
-      if (checkExists) {
+      const { isCheckExists, ...formF } = input?.form ?? {};
+      if (isCheckExists) {
         const userImplementation = Container.get(UserImplementation);
         const { result } = await userImplementation.get({
           filter: objectToEquality(cleanObject(pick(formF, ['callingCode', 'email', 'phone']))),

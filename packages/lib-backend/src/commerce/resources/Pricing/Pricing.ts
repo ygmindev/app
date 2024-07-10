@@ -12,17 +12,17 @@ import {
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ isEmbeddable: true, isDatabase: true, name: PRICING_RESOURCE_NAME })
+@withEntity({ isDatabase: true, isEmbeddable: true, name: PRICING_RESOURCE_NAME })
 export class Pricing extends EmbeddedResource implements PricingModel {
   @withRefField({ Resource: () => Product })
   _product?: RefFieldModel<ProductModel>;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   currency?: string;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   frequency!: PricingFrequencyModel;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.NUMBER })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   price?: number;
 }

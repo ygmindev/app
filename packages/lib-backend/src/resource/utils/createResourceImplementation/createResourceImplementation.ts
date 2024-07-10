@@ -133,15 +133,15 @@ export const createResourceImplementation = <
         ? await this.decorators.beforeCreateMany({ input }, context)
         : input;
 
-      inputF = inputF?.form
-        ? ((await mapSequence(
-            inputF?.form?.map(
-              (form) => async () =>
-                this.decorators.beforeCreate &&
-                this.decorators.beforeCreate({ input: { form } }, context),
-            ),
-          )) as InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm>)
-        : inputF;
+      inputF?.form &&
+        (inputF.form = (await mapSequence(
+          inputF.form?.map(
+            (form) => async () =>
+              this.decorators.beforeCreate
+                ? this.decorators.beforeCreate({ input: { form } }, context)
+                : form,
+          ),
+        )) as Array<TForm>);
 
       inputF = cleanObject(inputF);
       const root = inputF?.root ?? this._decorators.root;

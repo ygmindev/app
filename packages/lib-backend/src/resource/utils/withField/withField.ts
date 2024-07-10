@@ -102,6 +102,8 @@ const getColumn = <TType extends unknown>({
       return PrimaryKey({ ...defaultOptions, type: 'ObjectId' }) as PropertyDecorator;
     case PROPERTY_TYPE.ID:
       return Property({ ...defaultOptions, type: 'ObjectId' }) as PropertyDecorator;
+    case DATA_TYPE.BOOLEAN:
+      return Property({ ...defaultOptions, type: 'bool' }) as PropertyDecorator;
     case DATA_TYPE.STRING:
       return Property({ ...defaultOptions, type: 'string' }) as PropertyDecorator;
     case DATA_TYPE.NUMBER:
@@ -119,8 +121,8 @@ export const withField =
     defaultValue,
     expire,
     isArray,
-    isOptional,
     isDatabase = false,
+    isOptional,
     isSchema = true,
     isUnique,
     name,

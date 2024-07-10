@@ -9,6 +9,7 @@ export type EntityResourceModel = {
   _id: string;
   beforeCreate?(): void;
   created: Date;
+  isFixture?: boolean;
 };
 
 export type EntityResourceDataModel<TType> = TType extends PrimitiveModel

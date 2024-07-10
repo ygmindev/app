@@ -21,17 +21,23 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
       onChange,
       value,
     });
+    const { valueControlled: valueString, valueControlledSet: valueStringSet } = useValueControlled(
+      { defaultValue: defaultValue ? `${defaultValue}` : undefined },
+    );
 
     const handleChange = (v?: number | string): void => {
+      let valueString = v ? toString(v) : undefined;
       let valueF = v === undefined ? defaultValue : toNumber(v);
       if (valueF !== undefined) {
         if (max !== undefined && valueF > max) {
           valueF = max;
-        }
-        if (min !== undefined && valueF < min) {
+          valueString = toString(valueF);
+        } else if (min !== undefined && valueF < min) {
           valueF = min;
+          valueString = toString(valueF);
         }
       }
+      valueStringSet(valueString);
       valueControlledSet(valueF);
     };
 
@@ -58,7 +64,7 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
             />
           </Wrapper>
         }
-        value={toString(valueControlled)}
+        value={valueString}
       />
     );
   },

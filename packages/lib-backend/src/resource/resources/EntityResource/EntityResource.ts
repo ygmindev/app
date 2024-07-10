@@ -8,11 +8,14 @@ import forEach from 'lodash/forEach';
 
 @withEntity({ isAbstract: true })
 export class EntityResource implements EntityResourceModel {
+  @withField({ isDatabase: true, type: PROPERTY_TYPE.PRIMARY_KEY })
+  _id!: string;
+
   @withField({ defaultValue: () => new Date(), isDatabase: true, type: DATA_TYPE.DATE })
   created!: Date;
 
-  @withField({ isDatabase: true, type: PROPERTY_TYPE.PRIMARY_KEY })
-  _id!: string;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.BOOLEAN })
+  isFixture?: boolean;
 
   @withHook({ type: HOOK_TYPE.BEFORE_CREATE })
   async beforeCreate(): Promise<void> {

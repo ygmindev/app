@@ -9,6 +9,7 @@ type Access {
   _id: String
   _user: User
   created: DateTime
+  isFixture: Boolean
   role: [String]
 }
 
@@ -17,6 +18,7 @@ input AccessCreateFormInput {
   _id: String
   _user: UserInput
   created: DateTime
+  isFixture: Boolean
   role: [String]
 }
 
@@ -30,6 +32,7 @@ input AccessCreateManyFormInput {
   _id: String
   _user: UserInput
   created: DateTime
+  isFixture: Boolean
   role: [String]
 }
 
@@ -146,6 +149,7 @@ input AccessInput {
   _id: String
   _user: UserInput
   created: DateTime
+  isFixture: Boolean
   role: [String]
 }
 
@@ -207,6 +211,7 @@ input AccessUpdateUpdateInput {
   _id: String
   _user: UserInput
   created: DateTime
+  isFixture: Boolean
   role: [String]
 }
 
@@ -236,6 +241,7 @@ type Bank {
   created: DateTime
   externalId: String
   fingerprint: String
+  isFixture: Boolean
   last4: String
   name: String
 }
@@ -246,6 +252,7 @@ input BankCreateFormInput {
   created: DateTime
   externalId: String
   fingerprint: String
+  isFixture: Boolean
   last4: String
   name: String
 }
@@ -261,6 +268,7 @@ input BankCreateManyFormInput {
   created: DateTime
   externalId: String
   fingerprint: String
+  isFixture: Boolean
   last4: String
   name: String
 }
@@ -363,6 +371,7 @@ input BankInput {
   created: DateTime
   externalId: String
   fingerprint: String
+  isFixture: Boolean
   last4: String
   name: String
 }
@@ -429,6 +438,7 @@ input BankUpdateUpdateInput {
   created: DateTime
   externalId: String
   fingerprint: String
+  isFixture: Boolean
   last4: String
   name: String
 }
@@ -442,6 +452,7 @@ type Card {
   externalId: String
   fingerprint: String
   funding: String
+  isFixture: Boolean
   last4: String
   name: String
 }
@@ -455,6 +466,7 @@ input CardCreateFormInput {
   externalId: String
   fingerprint: String
   funding: String
+  isFixture: Boolean
   last4: String
   name: String
 }
@@ -473,6 +485,7 @@ input CardCreateManyFormInput {
   externalId: String
   fingerprint: String
   funding: String
+  isFixture: Boolean
   last4: String
   name: String
 }
@@ -578,6 +591,7 @@ input CardInput {
   externalId: String
   fingerprint: String
   funding: String
+  isFixture: Boolean
   last4: String
   name: String
 }
@@ -647,6 +661,7 @@ input CardUpdateUpdateInput {
   externalId: String
   fingerprint: String
   funding: String
+  isFixture: Boolean
   last4: String
   name: String
 }
@@ -654,12 +669,14 @@ input CardUpdateUpdateInput {
 type Chat {
   _id: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
 input ChatCreateFormInput {
   _id: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -671,6 +688,7 @@ input ChatCreateInput {
 input ChatCreateManyFormInput {
   _id: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -764,6 +782,7 @@ type ChatGetOutput {
 input ChatInput {
   _id: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -823,6 +842,7 @@ type ChatUpdateOutput {
 input ChatUpdateUpdateInput {
   _id: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -865,6 +885,7 @@ type Group {
   Role: [Role]
   _id: String
   created: DateTime
+  isFixture: Boolean
   logo: String
   name: String
   types: [String]
@@ -874,6 +895,7 @@ input GroupCreateFormInput {
   Role: [RoleInput]
   _id: String
   created: DateTime
+  isFixture: Boolean
   logo: String
   name: String
   types: [String]
@@ -888,6 +910,7 @@ input GroupCreateManyFormInput {
   Role: [RoleInput]
   _id: String
   created: DateTime
+  isFixture: Boolean
   logo: String
   name: String
   types: [String]
@@ -984,6 +1007,7 @@ input GroupInput {
   Role: [RoleInput]
   _id: String
   created: DateTime
+  isFixture: Boolean
   logo: String
   name: String
   types: [String]
@@ -1046,6 +1070,7 @@ input GroupUpdateUpdateInput {
   Role: [RoleInput]
   _id: String
   created: DateTime
+  isFixture: Boolean
   logo: String
   name: String
   types: [String]
@@ -1129,6 +1154,7 @@ type Mutation {
 type Order {
   _id: String
   created: DateTime
+  isFixture: Boolean
   items: [ProductItem]
   paymentMethodId: String
 }
@@ -1136,6 +1162,7 @@ type Order {
 input OrderCreateFormInput {
   _id: String
   created: DateTime
+  isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
 }
@@ -1148,6 +1175,7 @@ input OrderCreateInput {
 input OrderCreateManyFormInput {
   _id: String
   created: DateTime
+  isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
 }
@@ -1242,6 +1270,7 @@ type OrderGetOutput {
 input OrderInput {
   _id: String
   created: DateTime
+  isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
 }
@@ -1302,6 +1331,7 @@ type OrderUpdateOutput {
 input OrderUpdateUpdateInput {
   _id: String
   created: DateTime
+  isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
 }
@@ -1311,14 +1341,15 @@ type Otp {
   callingCode: String
   created: DateTime
   email: String
+  isFixture: Boolean
   otp: String
   phone: String
 }
 
 input OtpCreateFormInput {
   callingCode: String
-  checkExists: Boolean
   email: String
+  isCheckExists: Boolean
   phone: String
 }
 
@@ -1329,8 +1360,8 @@ input OtpCreateInput {
 
 input OtpCreateManyFormInput {
   callingCode: String
-  checkExists: Boolean
   email: String
+  isCheckExists: Boolean
   phone: String
 }
 
@@ -1426,6 +1457,7 @@ input OtpInput {
   callingCode: String
   created: DateTime
   email: String
+  isFixture: Boolean
   otp: String
   phone: String
 }
@@ -1488,6 +1520,7 @@ input OtpUpdateUpdateInput {
   callingCode: String
   created: DateTime
   email: String
+  isFixture: Boolean
   otp: String
   phone: String
 }
@@ -1512,6 +1545,7 @@ type PaymentMethod {
   created: DateTime
   externalId: String
   fingerprint: String
+  isFixture: Boolean
   last4: String
   name: String
   type: String
@@ -1545,6 +1579,7 @@ input PaymentMethodInput {
   created: DateTime
   externalId: String
   fingerprint: String
+  isFixture: Boolean
   last4: String
   name: String
   type: String
@@ -1575,6 +1610,7 @@ type Pricing {
   created: DateTime
   currency: String
   frequency: String
+  isFixture: Boolean
   price: Float
 }
 
@@ -1584,6 +1620,7 @@ input PricingCreateFormInput {
   created: DateTime
   currency: String
   frequency: String
+  isFixture: Boolean
   price: Float
 }
 
@@ -1598,6 +1635,7 @@ input PricingCreateManyFormInput {
   created: DateTime
   currency: String
   frequency: String
+  isFixture: Boolean
   price: Float
 }
 
@@ -1699,6 +1737,7 @@ input PricingInput {
   created: DateTime
   currency: String
   frequency: String
+  isFixture: Boolean
   price: Float
 }
 
@@ -1764,6 +1803,7 @@ input PricingUpdateUpdateInput {
   created: DateTime
   currency: String
   frequency: String
+  isFixture: Boolean
   price: Float
 }
 
@@ -1773,6 +1813,7 @@ type Product {
   created: DateTime
   description: String
   imageSrc: [String]
+  isFixture: Boolean
   name: String
 }
 
@@ -1782,6 +1823,7 @@ input ProductCreateFormInput {
   created: DateTime
   description: String
   imageSrc: [String]
+  isFixture: Boolean
   name: String
 }
 
@@ -1796,6 +1838,7 @@ input ProductCreateManyFormInput {
   created: DateTime
   description: String
   imageSrc: [String]
+  isFixture: Boolean
   name: String
 }
 
@@ -1892,6 +1935,7 @@ input ProductInput {
   created: DateTime
   description: String
   imageSrc: [String]
+  isFixture: Boolean
   name: String
 }
 
@@ -1970,6 +2014,7 @@ input ProductUpdateUpdateInput {
   created: DateTime
   description: String
   imageSrc: [String]
+  isFixture: Boolean
   name: String
 }
 
@@ -2045,6 +2090,7 @@ type Role {
   _group: Group
   _id: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -2052,6 +2098,7 @@ input RoleCreateFormInput {
   _group: GroupInput
   _id: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -2064,6 +2111,7 @@ input RoleCreateManyFormInput {
   _group: GroupInput
   _id: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -2163,6 +2211,7 @@ input RoleInput {
   _group: GroupInput
   _id: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -2226,12 +2275,14 @@ input RoleUpdateUpdateInput {
   _group: GroupInput
   _id: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
 type SignIn {
   _id: String
   created: DateTime
+  isFixture: Boolean
   isNew: Boolean
   token: String
   user: User
@@ -2284,6 +2335,7 @@ input SignInUserUpdateUpdateInput {
   created: DateTime
   email: String
   first: String
+  isFixture: Boolean
   last: String
   linkedUser: [linkedUserInput]
   paymentMethodPrimary: String
@@ -2362,6 +2414,7 @@ type Socket {
   _id: String
   connections: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -2369,6 +2422,7 @@ input SocketCreateFormInput {
   _id: String
   connections: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -2381,6 +2435,7 @@ input SocketCreateManyFormInput {
   _id: String
   connections: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -2475,6 +2530,7 @@ input SocketInput {
   _id: String
   connections: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -2535,6 +2591,7 @@ input SocketUpdateUpdateInput {
   _id: String
   connections: String
   created: DateTime
+  isFixture: Boolean
   name: String
 }
 
@@ -2547,6 +2604,7 @@ type User {
   created: DateTime
   email: String
   first: String
+  isFixture: Boolean
   last: String
   linkedUser: [linkedUser]
   paymentMethodPrimary: String
@@ -2562,6 +2620,7 @@ input UserCreateFormInput {
   created: DateTime
   email: String
   first: String
+  isFixture: Boolean
   last: String
   linkedUser: [linkedUserInput]
   paymentMethodPrimary: String
@@ -2582,6 +2641,7 @@ input UserCreateManyFormInput {
   created: DateTime
   email: String
   first: String
+  isFixture: Boolean
   last: String
   linkedUser: [linkedUserInput]
   paymentMethodPrimary: String
@@ -2684,6 +2744,7 @@ input UserInput {
   created: DateTime
   email: String
   first: String
+  isFixture: Boolean
   last: String
   linkedUser: [linkedUserInput]
   paymentMethodPrimary: String
@@ -2752,6 +2813,7 @@ input UserUpdateUpdateInput {
   created: DateTime
   email: String
   first: String
+  isFixture: Boolean
   last: String
   linkedUser: [linkedUserInput]
   paymentMethodPrimary: String
@@ -2764,6 +2826,7 @@ type Utility {
   created: DateTime
   description: String
   imageSrc: String
+  isFixture: Boolean
   name: String
   pricing: String
   type: [String]
@@ -2776,6 +2839,7 @@ input UtilityCreateFormInput {
   created: DateTime
   description: String
   imageSrc: String
+  isFixture: Boolean
   name: String
   pricing: String
   type: [String]
@@ -2793,6 +2857,7 @@ input UtilityCreateManyFormInput {
   created: DateTime
   description: String
   imageSrc: String
+  isFixture: Boolean
   name: String
   pricing: String
   type: [String]
@@ -2897,6 +2962,7 @@ input UtilityInput {
   created: DateTime
   description: String
   imageSrc: String
+  isFixture: Boolean
   name: String
   pricing: String
   type: [String]
@@ -2965,6 +3031,7 @@ input UtilityUpdateUpdateInput {
   created: DateTime
   description: String
   imageSrc: String
+  isFixture: Boolean
   name: String
   pricing: String
   type: [String]
@@ -2976,6 +3043,7 @@ type Vendor {
   _id: String
   created: DateTime
   imageSrc: String
+  isFixture: Boolean
   name: String
 }
 
@@ -2984,6 +3052,7 @@ input VendorCreateFormInput {
   _id: String
   created: DateTime
   imageSrc: String
+  isFixture: Boolean
   name: String
 }
 
@@ -2997,6 +3066,7 @@ input VendorCreateManyFormInput {
   _id: String
   created: DateTime
   imageSrc: String
+  isFixture: Boolean
   name: String
 }
 
@@ -3092,6 +3162,7 @@ input VendorInput {
   _id: String
   created: DateTime
   imageSrc: String
+  isFixture: Boolean
   name: String
 }
 
@@ -3153,6 +3224,7 @@ input VendorUpdateUpdateInput {
   _id: String
   created: DateTime
   imageSrc: String
+  isFixture: Boolean
   name: String
 }
 
@@ -3161,6 +3233,7 @@ type linkedUser {
   _user: User
   created: DateTime
   externalId: String
+  isFixture: Boolean
   type: String
 }
 
@@ -3169,6 +3242,7 @@ input linkedUserCreateFormInput {
   _user: UserInput
   created: DateTime
   externalId: String
+  isFixture: Boolean
   type: String
 }
 
@@ -3182,6 +3256,7 @@ input linkedUserCreateManyFormInput {
   _user: UserInput
   created: DateTime
   externalId: String
+  isFixture: Boolean
   type: String
 }
 
@@ -3282,6 +3357,7 @@ input linkedUserInput {
   _user: UserInput
   created: DateTime
   externalId: String
+  isFixture: Boolean
   type: String
 }
 
@@ -3346,5 +3422,6 @@ input linkedUserUpdateUpdateInput {
   _user: UserInput
   created: DateTime
   externalId: String
+  isFixture: Boolean
   type: String
 }

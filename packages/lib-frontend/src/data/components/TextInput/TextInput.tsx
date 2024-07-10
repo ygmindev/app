@@ -157,7 +157,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
       switch (keyboard) {
         case TEXT_INPUT_KEYBOARD.NUMBER:
         case TEXT_INPUT_KEYBOARD.TELEPHONE: {
-          return /^\d*$/.test(v);
+          return /^\d*\.?\d*$/.test(v);
         }
         case TEXT_INPUT_KEYBOARD.DECIMAL: {
           return /^\d*\.?\d*$/.test(v);

@@ -7,5 +7,5 @@ export const COMMERCE_REDUCER: CommerceReducerModel = {
     items: [],
   },
 
-  // persist: true,
+  persist: true,
 };
