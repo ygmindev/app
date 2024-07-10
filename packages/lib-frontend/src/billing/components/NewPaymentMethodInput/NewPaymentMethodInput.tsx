@@ -33,11 +33,12 @@ export const NewPaymentMethodInput: RLFCModel<
   const { create: cardCreate } = useCardResource({ root: currentUser?._id });
   const actions = useActions();
 
-  const handleCreate = async (
-    form: PaymentMethodFormModel,
-  ): Promise<PartialModel<PaymentMethodModel> | NilModel> => {
+  const handleCreate = async ({
+    type,
+    ...form
+  }: PaymentMethodFormModel): Promise<PartialModel<PaymentMethodModel> | NilModel> => {
     const paymentMethod = await (async () => {
-      switch (form.type) {
+      switch (type) {
         case PAYMENT_METHOD_TYPE.BANK:
           return (await bankCreate({ form })).result;
         case PAYMENT_METHOD_TYPE.CARD:

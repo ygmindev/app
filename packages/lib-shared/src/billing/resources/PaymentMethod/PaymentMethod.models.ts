@@ -4,10 +4,6 @@ import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/Embed
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
-// export type PaymentMethodModel = BankModel | CardModel;
-
-// export type PaymentMethodFormModel = BankFormModel | CardFormModel;
-
 export type PaymentMethodModel = EmbeddedResourceModel & {
   _user: RefFieldModel<UserModel>;
 

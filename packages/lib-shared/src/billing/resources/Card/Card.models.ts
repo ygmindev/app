@@ -22,8 +22,6 @@ export type CardModel = EmbeddedResourceModel & {
   last4: string;
 
   name: string;
-
-  // type: PAYMENT_METHOD_TYPE.CARD;
 };
 
 export type CardFormModel = EntityResourceDataModel<CardModel>;

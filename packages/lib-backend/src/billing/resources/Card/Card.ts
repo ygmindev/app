@@ -26,7 +26,7 @@ export class Card extends EmbeddedResource implements CardModel {
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   externalId!: string;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   fingerprint?: string;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
@@ -37,7 +37,4 @@ export class Card extends EmbeddedResource implements CardModel {
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
-
-  // @withField({ isDatabase: true, type: DATA_TYPE.STRING })
-  // type!: PAYMENT_METHOD_TYPE.CARD;
 }

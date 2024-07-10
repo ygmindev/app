@@ -13,8 +13,6 @@ export type BankModel = EmbeddedResourceModel & {
   last4: string;
 
   name: string;
-
-  // type: PAYMENT_METHOD_TYPE.BANK;
 };
 
 export type BankFormModel = EntityResourceDataModel<BankModel>;

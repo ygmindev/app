@@ -10,15 +10,16 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { type PartialModel } from '@lib/shared/core/core.models';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 
 export const ProductTile: LFCModel<ProductTilePropsModel> = ({ product, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const pricing = product[PRICING_RESOURCE_NAME]?.[0];
-  const item: ProductItemModel = {
+  const item: PartialModel<ProductItemModel> = {
     name: product.name,
     price: pricing?.price,
-    pricingId: '',
+    pricingId: pricing?._id,
     productId: product._id,
   };
   return (

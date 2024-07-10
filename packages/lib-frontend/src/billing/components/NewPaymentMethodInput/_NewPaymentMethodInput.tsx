@@ -5,11 +5,7 @@ import {
 } from '@lib/frontend/billing/components/NewPaymentMethodInput/_NewPaymentMethodInput.models';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { type BankFormModel } from '@lib/shared/billing/resources/Bank/Bank.models';
-import {
-  type CardFormModel,
-  type CardFundingModel,
-} from '@lib/shared/billing/resources/Card/Card.models';
+import { type CardFundingModel } from '@lib/shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
@@ -40,7 +36,7 @@ export const _NewPaymentMethodInput: RLFCModel<
         ...(products
           ? {
               // TODO: to locale currency
-              amount: price,
+              amount: price * 100,
               // confirm: true,
               // TODO: to locale currency
               currency: 'usd',
@@ -78,19 +74,17 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
           switch (type) {
             case 'us_bank_account': {
               return (
-                us_bank_account &&
-                ({
+                us_bank_account && {
                   externalId: id,
                   last4: us_bank_account.last4,
                   name: us_bank_account.bank_name,
                   type: PAYMENT_METHOD_TYPE.BANK,
-                } as BankFormModel)
+                }
               );
             }
             case 'card': {
               return (
-                card &&
-                ({
+                card && {
                   expMonth: card.exp_month,
                   expYear: card.exp_year,
                   externalId: id,
@@ -98,7 +92,7 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
                   last4: card.last4,
                   name: card.brand,
                   type: PAYMENT_METHOD_TYPE.CARD,
-                } as CardFormModel)
+                }
               );
             }
             default:
