@@ -15,4 +15,6 @@ export const AUTH_REDUCER: AuthReducerModel = {
       access: undefined,
     },
   },
+
+  persist: true,
 };

@@ -1,5 +1,3 @@
-import { type Context } from 'react';
-
 import { type ProviderPropsModel } from '@lib/frontend/core/core.models';
 import {
   type NestedActionsModel,
@@ -9,6 +7,7 @@ import {
   type _StoreModel,
   type _StoreParamsModel,
 } from '@lib/frontend/state/utils/Store/_Store.models';
+import { type Context } from 'react';
 
 export type StoreParamsModel<
   TKeys extends Array<string>,

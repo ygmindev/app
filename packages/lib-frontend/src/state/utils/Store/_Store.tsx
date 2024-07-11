@@ -25,7 +25,6 @@ import {
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import cloneDeep from 'lodash/cloneDeep';
 import findIndex from 'lodash/findIndex';
-import isArray from 'lodash/isArray';
 import isMatch from 'lodash/isMatch';
 import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
