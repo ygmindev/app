@@ -14,10 +14,11 @@ export const Redirect = <TType,>({
   FCPropsModel<RedirectPropsModel<TType>>
 > => {
   const { replace } = useRouter();
-  const rootContextF = useContext(rootContext);
+  const context = useContext(rootContext);
+
+  context[ROUTE] && (context[ROUTE].redirectTo = trimPathname(pathname));
 
   useEffect(() => {
-    rootContextF[ROUTE] && (rootContextF[ROUTE].redirectTo = trimPathname(pathname));
     void replace<TType>({ isBack, params, pathname });
   }, []);
 

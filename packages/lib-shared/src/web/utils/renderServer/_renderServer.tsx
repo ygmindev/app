@@ -12,6 +12,7 @@ import { merge } from '@lib/shared/core/utils/merge/merge';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { QUERY } from '@lib/shared/query/query.constants';
+import { ROUTE } from '@lib/shared/route/route.constants';
 import { STATE } from '@lib/shared/state/state.constants';
 import {
   type _RenderServerModel,
@@ -24,6 +25,7 @@ export const _renderServer =
   ({ initialize, render, rootId, ssrContextKeys }: _RenderServerParamsModel): _RenderServerModel =>
   async ({ Page, context, pageProps }) => {
     initialize && (await initialize());
+
     const queryClient = new QueryClient();
     const store = new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
       cookies: context?.state?.cookies,
@@ -66,7 +68,7 @@ export const _renderServer =
       documentHtml,
 
       pageContext: async () => {
-        const i18n = contextF?.locale?.i18n;
+        const i18n = contextF?.[LOCALE]?.i18n;
         const pageContext: RootContextModel = merge([
           {
             [LOCALE]: i18n ? { store: getLocaleStoreFromI18n({ i18n }) } : undefined,
@@ -74,10 +76,11 @@ export const _renderServer =
           },
           contextF,
         ]);
+        await queryClient.clear();
         return {
           context: pick(pageContext, ssrContextKeys),
           enableEagerStreaming: true,
-          redirectTo: pageContext.route?.redirectTo,
+          redirectTo: pageContext[ROUTE]?.redirectTo,
         };
       },
     };

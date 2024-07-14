@@ -4,5 +4,5 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export type _JwtImplementationModel = {
   createToken(id: string, claims: EntityResourceDataModel<UserModel>): Promise<string>;
-  verifyToken(token: string): Promise<SignInTokenModel>;
+  verifyToken(token: string): Promise<SignInTokenModel | null>;
 };

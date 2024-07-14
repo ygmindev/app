@@ -18,7 +18,7 @@ import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/Style
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { type ReactElement, Suspense } from 'react';
-import { cloneElement, createContext, useMemo } from 'react';
+import { cloneElement, createContext, StrictMode, useMemo } from 'react';
 
 export const actionContext = createContext<RootActionsModel | undefined>(undefined);
 
@@ -58,6 +58,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
           }}
         />,
         <Suspense />,
+        <StrictMode />,
       ]),
     [additionalProviders, context],
   );

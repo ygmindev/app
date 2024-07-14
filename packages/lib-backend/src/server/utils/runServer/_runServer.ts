@@ -16,7 +16,6 @@ import { fastify, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
 import { type GraphQLError } from 'graphql';
 import { createYoga } from 'graphql-yoga';
-import isArray from 'lodash/isArray';
 import toNumber from 'lodash/toNumber';
 
 class _Logger {

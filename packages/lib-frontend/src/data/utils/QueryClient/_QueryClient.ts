@@ -29,6 +29,10 @@ export class _QueryClient implements _QueryClientModel {
     }
   }
 
+  clear = async (): Promise<void> => {
+    void this._client.clear();
+  };
+
   public get client(): QueryClient {
     return this._client;
   }

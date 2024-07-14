@@ -3,6 +3,7 @@ import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/shared/auth/resources/SignIn/Sign
 import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { pick } from '@lib/shared/core/utils/pick/pick';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 import admin from 'firebase-admin';
@@ -23,14 +24,19 @@ export class _JwtImplementation implements _JwtImplementationModel {
   createToken = async (_id: string, claims: EntityResourceDataModel<UserModel>): Promise<string> =>
     admin.auth().createCustomToken(toString(_id), claims);
 
-  verifyToken = async (token: string): Promise<SignInTokenModel> => {
-    const decoded = await admin.auth().verifyIdToken(token);
-    return {
-      _id: decoded.uid,
-      claims: {
-        ...((decoded.additionalClaims as PartialModel<UserModel>) ?? {}),
-        ...pick(decoded, SIGN_IN_TOKEN_CLAIM_KEYS),
-      },
-    };
+  verifyToken = async (token: string): Promise<SignInTokenModel | null> => {
+    try {
+      const decoded = await admin.auth().verifyIdToken(token);
+      return {
+        _id: decoded.uid,
+        claims: {
+          ...((decoded.additionalClaims as PartialModel<UserModel>) ?? {}),
+          ...pick(decoded, SIGN_IN_TOKEN_CLAIM_KEYS),
+        },
+      };
+    } catch (e) {
+      logger.error(e);
+      return null;
+    }
   };
 }

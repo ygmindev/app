@@ -62,7 +62,7 @@ export const _useSession = ({ onError }: _UseSessionParamsModel): _UseSessionMod
     }
   },
 
-  refreshToken: async (): Promise<string | null> => auth.currentUser?.getIdToken() ?? null,
+  refreshToken: async (): Promise<string | null> => auth?.currentUser?.getIdToken() ?? null,
 
   signInWithToken: async (token: string): Promise<void> => {
     auth && (await signInWithCustomToken(auth, token));
