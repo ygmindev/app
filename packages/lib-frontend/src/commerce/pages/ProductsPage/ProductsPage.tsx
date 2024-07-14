@@ -16,16 +16,8 @@ export const ProductsPage: LFCModel<ProductsPagePropsModel> = ({ ...props }) => 
       {...wrapperProps}
       fallbackData={{
         result: {
-          edges: range(5).map((i) => ({
-            cursor: `${i}`,
-            node: { _id: uid() },
-          })),
-          pageInfo: {
-            endCursor: '',
-            hasNextPage: false,
-            hasPreviousPage: false,
-            startCursor: '',
-          },
+          edges: range(5).map((i) => ({ cursor: `${i}`, node: { _id: uid() } })),
+          pageInfo: { endCursor: '', hasNextPage: false, hasPreviousPage: false, startCursor: '' },
         },
       }}
       flex
