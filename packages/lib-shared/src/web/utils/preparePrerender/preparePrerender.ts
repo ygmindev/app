@@ -6,7 +6,6 @@ import {
   type PreparePrerenderModel,
   type PreparePrerenderParamsModel,
 } from '@lib/shared/web/utils/preparePrerender/preparePrerender.models';
-import isArray from 'lodash/isArray';
 import trimEnd from 'lodash/trimEnd';
 
 const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'] =>

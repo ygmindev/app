@@ -60,9 +60,10 @@ export const _runServer = async ({
   );
 
   app.get('*', async (req, res) => {
-    logger.info(req.method, req.url);
+    const { cookies, i18n, language } = req;
+    const url = req.originalUrl ?? req.url;
+    logger.info(req.method, url);
 
-    const { cookies, i18n, language, url } = req;
     const { error, redirectTo, response } = await render({
       context: {
         [LOCALE]: { i18n: i18n as I18nModel, lang: language },

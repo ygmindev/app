@@ -1,7 +1,7 @@
 import {
   defaultStateContext,
   persistedStateContext,
-} from '@lib/frontend/root/containers/Root/Root.base';
+} from '@lib/frontend/root/containers/Root/context';
 import { type RootStateModel } from '@lib/frontend/root/stores/rootStore.models';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { _useStore } from '@lib/frontend/state/hooks/useStore/_useStore';

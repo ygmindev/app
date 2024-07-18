@@ -186,6 +186,8 @@ export const _bundle = ({
     plugins: filterNil([
       serverExtension && vitePluginIsomorphicImport(serverExtension),
 
+      circularDependencyPlugin({}) as Plugin,
+
       checker({
         eslint: { lintCommand: lintCommand() },
         typescript: { tsconfigPath: tsconfigDir },
@@ -209,11 +211,9 @@ export const _bundle = ({
           skipPreflightCheck: true,
         } as RollupBabelInputPluginOptions),
 
-      viteCommonjs(),
+      viteCommonjs() as Plugin,
 
       process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
-
-      circularDependencyPlugin({}),
     ]),
 
     resolve: {

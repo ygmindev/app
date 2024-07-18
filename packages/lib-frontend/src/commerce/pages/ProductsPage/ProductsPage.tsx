@@ -8,7 +8,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import range from 'lodash/range';
 
-export const ProductsPage: LFCModel<ProductsPagePropsModel> = ({ ...props }) => {
+export const ProductsPage: LFCModel<ProductsPagePropsModel> = ({ pageProps, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { getConnection } = useProductResource();
   return (

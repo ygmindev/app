@@ -4,13 +4,16 @@ import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/Async
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { QueryProvider } from '@lib/frontend/data/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider';
+import {
+  actionContext,
+  defaultStateContext,
+  persistedStateContext,
+} from '@lib/frontend/root/containers/Root/context';
 import { type RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
 import { ContextProvider } from '@lib/frontend/root/providers/ContextProvider/ContextProvider';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
 import {
-  type RootActionsModel,
   type RootActionsParamsModel,
-  type RootDefaultStateModel,
   type RootStateModel,
 } from '@lib/frontend/root/stores/rootStore.models';
 import { Store } from '@lib/frontend/state/utils/Store/Store';
@@ -18,13 +21,7 @@ import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/Style
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { type ReactElement, Suspense } from 'react';
-import { cloneElement, createContext, StrictMode, useMemo } from 'react';
-
-export const actionContext = createContext<RootActionsModel | undefined>(undefined);
-
-export const defaultStateContext = createContext<RootDefaultStateModel | undefined>(undefined);
-
-export const persistedStateContext = createContext<RootDefaultStateModel | undefined>(undefined);
+import { cloneElement, useMemo } from 'react';
 
 export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, context }) => {
   const store = useMemo(
@@ -58,7 +55,6 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
           }}
         />,
         <Suspense />,
-        <StrictMode />,
       ]),
     [additionalProviders, context],
   );

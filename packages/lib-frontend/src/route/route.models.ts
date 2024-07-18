@@ -3,23 +3,26 @@ import { type AsyncTextModel, type ChildrenPropsModel } from '@lib/frontend/core
 import { type ROUTE_NAVIGATION, type ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { type RouteStateModel } from '@lib/frontend/route/stores/routeStore/routeStore.models';
 import { type LayoutStylePropsModel } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement } from 'react';
 
 export type RouteIdParamsModel = WithIdModel;
 
 export type RouteModel<
-  TProps extends ChildrenPropsModel = ChildrenPropsModel,
   TParams = undefined,
+  TType extends Record<string, unknown> = Record<string, unknown>,
 > = WithIconPropsModel & {
   description?: AsyncTextModel;
-  element?: ReactElement<TProps>;
+  element?: ReactElement<ChildrenPropsModel>;
   fullpath?: string;
   header?: { previous?: true | number };
-  isIndex?: boolean;
   isNavigatable?: boolean;
   isProtectable?: boolean;
   layoutProps?: LayoutStylePropsModel;
+  loaders?: {
+    [TKey in StringKeyModel<TType>]?: () => Promise<TType[TKey]>;
+  };
   namespaces?: Array<string>;
   navigation?: RouteNavigationModel;
   params?: TParams;

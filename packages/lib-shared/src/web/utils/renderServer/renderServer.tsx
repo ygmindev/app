@@ -7,10 +7,11 @@ import {
   type RenderServerParamsModel,
 } from '@lib/shared/web/utils/renderServer/renderServer.models';
 
-export const renderServer = ({ initialize }: RenderServerParamsModel): RenderServerModel =>
+export const renderServer = ({ initialize, routes }: RenderServerParamsModel): RenderServerModel =>
   _renderServer({
     initialize,
     render: ({ context, element }) => renderApp({ Root, children: element, context }),
     rootId: WEB_CONFIG.rootId,
+    routes,
     ssrContextKeys: WEB_CONFIG.ssrContextKeys,
   });

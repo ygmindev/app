@@ -1,6 +1,7 @@
 import { type WebConfigModel } from '@lib/config/node/web/web.models';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { type RootContextModel } from '@lib/frontend/root/root.models';
+import { type RouteModel } from '@lib/frontend/route/route.models';
 import { type RenderAppModel } from '@lib/shared/web/utils/renderApp/renderApp.models';
 import { type ComponentType, type ReactElement } from 'react';
 import { type PageContextClientWithServerRouting as PageContextClient } from 'vike/types';
@@ -9,6 +10,8 @@ export type _RenderServerParamsModel = Pick<WebConfigModel, 'rootId' | 'ssrConte
   initialize?(): Promise<void>;
 
   render(params: { context: RootContextModel; element: ReactElement }): RenderAppModel;
+
+  routes?: Array<RouteModel>;
 };
 
 export type _RenderServerModel = (

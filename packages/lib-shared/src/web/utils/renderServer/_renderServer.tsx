@@ -22,8 +22,17 @@ import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vike/server';
 
 export const _renderServer =
-  ({ initialize, render, rootId, ssrContextKeys }: _RenderServerParamsModel): _RenderServerModel =>
+  ({
+    initialize,
+    render,
+    rootId,
+    routes,
+    ssrContextKeys,
+  }: _RenderServerParamsModel): _RenderServerModel =>
   async ({ Page, context, pageProps }) => {
+    console.warn('@@@ routes:');
+    console.warn(routes);
+
     initialize && (await initialize());
 
     const queryClient = new QueryClient();
@@ -43,7 +52,6 @@ export const _renderServer =
       element: <Page {...pageProps} />,
     });
     const styleSheet = renderToStaticMarkup(getStyleSheet());
-    // const stream = await renderToStream(element);
     const { pipe } = renderToPipeableStream(element);
     stampPipe(pipe, 'node-stream');
 

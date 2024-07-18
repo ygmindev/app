@@ -80,9 +80,10 @@ const getRoute = (route: RouteModel, depth = 0): RouteModel => {
     ...routeF,
     fullpath: trimPathname(`${routeF.parent ?? ''}/${pathnameF}`),
     pathname: trimPathname(routeF.routes ? `${pathnameF}/*` : pathnameF),
-    routes: routeF.routes?.reduce((result, child) => {
-      return [...result, getRoute({ ...child, parent: parentF }, depthF)];
-    }, [] as Array<RouteModel>),
+    routes: routeF.routes?.reduce(
+      (result, child) => [...result, getRoute({ ...child, parent: parentF }, depthF)],
+      [] as Array<RouteModel>,
+    ),
   };
   return {
     ...routeF,
