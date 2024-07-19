@@ -4,7 +4,6 @@ import { type DimensionModel, type SFCModel } from '@lib/frontend/core/core.mode
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
-import isArray from 'lodash/isArray';
 import { useState } from 'react';
 import { Image as ImageBase } from 'react-native';
 
@@ -43,7 +42,9 @@ export const Image: SFCModel<ImagePropsModel> = ({
 
   return (
     <_Image
-      onError={Array.isArray(src) && current < src.length - 1 ? () => currentSet(current + 1) : undefined}
+      onError={
+        Array.isArray(src) && current < src.length - 1 ? () => currentSet(current + 1) : undefined
+      }
       onSuccess={isAutoSize ? handleSuccess : undefined}
       src={srcF}
       style={styles}
