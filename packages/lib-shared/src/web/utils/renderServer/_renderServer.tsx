@@ -38,19 +38,24 @@ export const _renderServer =
     // Routing
     const pathname = context?.[ROUTE]?.location?.pathname;
     const matchedRoutes = routes && pathname ? matchRoutes({ pathname, routes }) : [];
-    const loaders = matchedRoutes?.reduce(
-      (result, { loaders }) =>
-        loaders
+    const { isProtectable, loaders } = matchedRoutes?.reduce(
+      (result, { isProtectable, loaders }) => ({
+        isProtectable: result.isProtectable || isProtectable || false,
+        loaders: loaders
           ? [
-              ...result,
+              ...result.loaders,
               ...reduce(
                 loaders,
                 (r, v, k) => (v ? [...r, queryClient.prefetch(k, v)] : r),
                 [] as Array<Promise<unknown>>,
               ),
             ]
-          : result,
-      [] as Array<Promise<unknown>>,
+          : result.loaders,
+      }),
+      {
+        isProtectable: false,
+        loaders: [] as Array<Promise<unknown>>,
+      },
     );
     loaders && (await Promise.all(loaders));
 
