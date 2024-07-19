@@ -35,6 +35,7 @@ export const _renderServer =
     initialize && (await initialize());
     const queryClient = new QueryClient();
 
+    // Routing
     const pathname = context?.[ROUTE]?.location?.pathname;
     const matchedRoutes = routes && pathname ? matchRoutes({ pathname, routes }) : [];
     const loaders = matchedRoutes?.reduce(

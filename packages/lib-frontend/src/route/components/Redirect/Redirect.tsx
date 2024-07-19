@@ -6,7 +6,7 @@ import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathnam
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { type ReactElement, useContext, useEffect } from 'react';
 
-export const Redirect = <TType,>({
+export const Redirect = <TType extends unknown>({
   isBack,
   params,
   pathname,
