@@ -13,6 +13,7 @@ export type RouteModel<
   TParams = undefined,
   TType extends Record<string, unknown> = Record<string, unknown>,
 > = WithIconPropsModel & {
+  depth?: number;
   description?: AsyncTextModel;
   element?: ReactElement<ChildrenPropsModel>;
   fullpath?: string;

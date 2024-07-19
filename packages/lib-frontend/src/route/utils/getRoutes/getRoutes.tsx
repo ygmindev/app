@@ -9,9 +9,10 @@ import {
 } from '@lib/frontend/route/utils/getRoutes/getRoutes.models';
 import { userRoutes } from '@lib/frontend/user/user.routes';
 import { PING } from '@lib/shared/http/http.constants';
+import { trimRoutes } from '@lib/shared/route/utils/trimRoutes/trimRoutes';
 
 export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel =>
-  [
+  trimRoutes([
     {
       element: <PingPage />,
       pathname: PING,
@@ -36,4 +37,4 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel =>
         // },
       ],
     },
-  ] as Array<RouteModel>;
+  ]) as Array<RouteModel>;

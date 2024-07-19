@@ -24,7 +24,7 @@ import {
 } from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
 import { cloneElement } from 'react';
 
-export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => {
+export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   useTranslation(route?.namespaces);
 
   const { wrapperProps } = useLayoutStyles({ props });
@@ -55,7 +55,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ depth, route, ...props }) => 
           isOverflowHidden
           position={SHAPE_POSITION.RELATIVE}>
           <Routes
-            depth={depth}
+            depth={route.depth}
             routes={route.routes.map(({ element, ...child }) => ({
               ...child,
               element: (() => {

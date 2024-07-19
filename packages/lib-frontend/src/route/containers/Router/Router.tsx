@@ -6,11 +6,9 @@ import { type RouterPropsModel } from '@lib/frontend/route/containers/Router/Rou
 import { Routes } from '@lib/frontend/route/containers/Routes/Routes';
 import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { type RouteModel } from '@lib/frontend/route/route.models';
-import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import trimEnd from 'lodash/trimEnd';
 import { useMemo } from 'react';
 
 const getNavigatableRoute = (route: RouteModel): RouteModel => {
@@ -71,28 +69,12 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
   }
 };
 
-const getRoute = (route: RouteModel, depth = 0): RouteModel => {
+const getRoute = (route: RouteModel): RouteModel => {
   let routeF = getNavigatableRoute(route);
-  const pathnameF = trimPathname(trimEnd(routeF.pathname, '/*'));
-  const depthF = pathnameF === '/' ? depth : depth + 1;
-  const parentF = trimPathname(`${routeF.parent ?? ''}${pathnameF}`);
-  routeF = {
-    ...routeF,
-    fullpath: trimPathname(`${routeF.parent ?? ''}/${pathnameF}`),
-    pathname: trimPathname(routeF.routes ? `${pathnameF}/*` : pathnameF),
-    routes: routeF.routes?.reduce(
-      (result, child) => [...result, getRoute({ ...child, parent: parentF }, depthF)],
-      [] as Array<RouteModel>,
-    ),
-  };
+  routeF = { ...routeF, routes: routeF.routes?.map(getRoute) };
   return {
     ...routeF,
-    element: (
-      <Route
-        depth={depthF}
-        route={routeF}
-      />
-    ),
+    element: <Route route={routeF} />,
   };
 };
 
