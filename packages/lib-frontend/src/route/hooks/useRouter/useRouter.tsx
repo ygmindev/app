@@ -1,6 +1,6 @@
 import { _useRouter } from '@lib/frontend/route/hooks/useRouter/_useRouter';
 import { type UseRouterModel } from '@lib/frontend/route/hooks/useRouter/useRouter.models';
-import { type RouteUpdateModel } from '@lib/frontend/route/route.models';
+import { type LocationUpdateModel } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -16,7 +16,7 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
 
   const update = async <TTypeNext = undefined,>(
     callback: () => void,
-    { isBack }: Pick<RouteUpdateModel<TTypeNext>, 'isBack'>,
+    { isBack }: Pick<LocationUpdateModel<TTypeNext>, 'isBack'>,
   ): Promise<void> => {
     if (!isLoading) {
       if (isBack) {
@@ -65,7 +65,7 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
       params,
       pathname,
       root,
-    }: RouteUpdateModel<TTypeNext>) => {
+    }: LocationUpdateModel<TTypeNext>) => {
       void update(
         () =>
           push({
@@ -81,7 +81,7 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
       params,
       pathname,
       root,
-    }: RouteUpdateModel<TTypeNext>) => {
+    }: LocationUpdateModel<TTypeNext>) => {
       void update(
         () =>
           replace({

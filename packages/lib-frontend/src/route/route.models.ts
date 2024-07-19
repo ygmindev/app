@@ -50,7 +50,7 @@ export type RouteContextModel<TType = object> = {
   redirectTo?: string;
 };
 
-export type RouteUpdateModel<TTypeNext = object> = LocationModel<TTypeNext> &
+export type LocationUpdateModel<TTypeNext = object> = LocationModel<TTypeNext> &
   Pick<RouteStateModel, 'isBack'> & {
     root?: string | boolean | number;
   };

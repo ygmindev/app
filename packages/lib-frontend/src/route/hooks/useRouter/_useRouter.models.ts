@@ -1,4 +1,4 @@
-import { type LocationModel, type RouteUpdateModel } from '@lib/frontend/route/route.models';
+import { type LocationModel, type LocationUpdateModel } from '@lib/frontend/route/route.models';
 
 export type _UseRouterModel<TType = object> = {
   back(): void;
@@ -9,7 +9,7 @@ export type _UseRouterModel<TType = object> = {
 
   location: LocationModel<TType>;
 
-  push<TTypeNext>(params: RouteUpdateModel<TTypeNext>): void;
+  push<TTypeNext>(params: LocationUpdateModel<TTypeNext>): void;
 
-  replace<TTypeNext>(params: RouteUpdateModel<TTypeNext>): void;
+  replace<TTypeNext>(params: LocationUpdateModel<TTypeNext>): void;
 };
