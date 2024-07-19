@@ -49,7 +49,7 @@ const QueryComponent = forwardRef(
       query: queryF,
       reset,
       setData,
-    } = useQuery<TParams, TResult>(id, query, { isBlocking }, params);
+    } = useQuery<TParams, TResult>(id, query, params, { isBlocking });
 
     useImperativeHandle(ref, () => ({
       getData: () => data,

@@ -6,7 +6,7 @@ import {
 } from '@lib/frontend/data/hooks/useQueryConnection/useQueryConnection.models';
 
 export const useQueryConnection = <TParams = undefined, TResult = void>(
-  ...[id, callback, options, params]: UseQueryConnectionParamsModel<TParams, TResult>
+  ...[id, callback, params, options]: UseQueryConnectionParamsModel<TParams, TResult>
 ): UseQueryConnectionModel<TResult> => {
   const { cacheTime, cacheTimeDefault } = queryConfig.params();
   const cache = options?.cache;

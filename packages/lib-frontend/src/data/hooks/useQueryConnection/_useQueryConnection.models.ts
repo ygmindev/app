@@ -7,8 +7,8 @@ import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagi
 export type _UseQueryConnectionParamsModel<TParams = undefined, TResult = void> = [
   id: string,
   query: (params: PaginationModel) => Promise<ConnectionModel<TResult> | null>,
-  options?: UseQueryOptionsModel & { limit?: number },
   params?: TParams,
+  options?: UseQueryOptionsModel & { limit?: number },
 ];
 
 export type _UseQueryConnectionModel<TResult> = {

@@ -9,7 +9,7 @@ import {
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
 export const useQuery = <TParams = undefined, TResult = void>(
-  ...[id, callback, options, params]: UseQueryParamsModel<TParams, TResult>
+  ...[id, callback, params, options]: UseQueryParamsModel<TParams, TResult>
 ): UseQueryModel<TResult> => {
   const { cacheTime, cacheTimeDefault } = queryConfig.params();
   const { handleError } = useErrorContext();
@@ -29,7 +29,7 @@ export const useQuery = <TParams = undefined, TResult = void>(
         options?.isBlocking && isLoadingSet(false);
       }
     },
-    { ...options, cache: cacheF },
     params,
+    { ...options, cache: cacheF },
   );
 };

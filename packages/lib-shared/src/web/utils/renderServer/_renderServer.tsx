@@ -19,6 +19,7 @@ import {
   type _RenderServerModel,
   type _RenderServerParamsModel,
 } from '@lib/shared/web/utils/renderServer/_renderServer.models';
+import reduce from 'lodash/reduce';
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vike/server';
 
@@ -31,14 +32,27 @@ export const _renderServer =
     ssrContextKeys,
   }: _RenderServerParamsModel): _RenderServerModel =>
   async ({ Page, context, pageProps }) => {
-    const pathname = context?.[ROUTE]?.location?.pathname;
-
-    const matchedRoutes = routes && pathname && matchRoutes({ pathname, routes });
-    console.warn(matchedRoutes);
-
     initialize && (await initialize());
-
     const queryClient = new QueryClient();
+
+    const pathname = context?.[ROUTE]?.location?.pathname;
+    const matchedRoutes = routes && pathname ? matchRoutes({ pathname, routes }) : [];
+    const loaders = matchedRoutes?.reduce(
+      (result, { loaders }) =>
+        loaders
+          ? [
+              ...result,
+              ...reduce(
+                loaders,
+                (r, v, k) => (v ? [...r, queryClient.prefetch(k, v)] : r),
+                [] as Array<Promise<unknown>>,
+              ),
+            ]
+          : result,
+      [] as Array<Promise<unknown>>,
+    );
+    loaders && (await Promise.all(loaders));
+
     const store = new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
       cookies: context?.state?.cookies,
       reducers: ROOT_REDUCERS,

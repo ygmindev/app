@@ -4,8 +4,8 @@ import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 export type _UseQueryParamsModel<TParams = undefined, TResult = void> = [
   id: string,
   query: (params?: TParams) => Promise<TResult | null>,
-  options?: UseQueryOptionsModel,
   params?: TParams,
+  options?: UseQueryOptionsModel,
 ];
 
 export type _UseQueryModel<TResult = void> = WithIdModel & {

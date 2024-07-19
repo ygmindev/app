@@ -7,6 +7,7 @@ import {
   type GetRoutesModel,
   type GetRoutesParamsModel,
 } from '@lib/frontend/route/utils/getRoutes/getRoutes.models';
+import { testRoutes } from '@lib/frontend/test/test.routes';
 import { userRoutes } from '@lib/frontend/user/user.routes';
 import { PING } from '@lib/shared/http/http.constants';
 import { trimRoutes } from '@lib/shared/route/utils/trimRoutes/trimRoutes';
@@ -29,6 +30,9 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel =>
         ...authRoutes,
 
         ...devRoutes,
+
+        // TODO: test environment only
+        ...testRoutes,
 
         // TODO: fix after build
         // {

@@ -10,7 +10,7 @@ import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import isNumber from 'lodash/isNumber';
 
 export const _useQueryConnection = <TParams = undefined, TResult = void>(
-  ...[id, callback, options, params]: _UseQueryConnectionParamsModel<TParams, TResult>
+  ...[id, callback, params, options]: _UseQueryConnectionParamsModel<TParams, TResult>
 ): _UseQueryConnectionModel<TResult> => {
   const limit = options?.limit || USE_QUERY_CONNECTION_LIMIT_DEFAULT;
   const cache = isNumber(options?.cache) ? options?.cache : 0;
