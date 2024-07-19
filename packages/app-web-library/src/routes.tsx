@@ -8,20 +8,18 @@ import { getRoutes } from '@lib/frontend/route/utils/getRoutes/getRoutes';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { type ComponentType } from 'react';
 
-export const routes: Array<RouteModel> = getRoutes({
-  appRoutes: [
-    {
-      navigation: ROUTE_NAVIGATION.NAVIGATION,
-      pathname: '/',
-      routes: LIBRARY_PROPS.map((props) => {
-        const id = (props.title =
-          props.title ?? getComponentDisplayName(props.Component as ComponentType));
-        return {
-          element: <Library<unknown> {...(props as LibraryPropsModel<unknown>)} />,
-          pathname: trimPathname(id),
-          title: id,
-        };
-      }),
-    },
-  ],
-});
+export const routes: Array<RouteModel> = getRoutes([
+  {
+    navigation: ROUTE_NAVIGATION.NAVIGATION,
+    pathname: '/',
+    routes: LIBRARY_PROPS.map((props) => {
+      const id = (props.title =
+        props.title ?? getComponentDisplayName(props.Component as ComponentType));
+      return {
+        element: <Library<unknown> {...(props as LibraryPropsModel<unknown>)} />,
+        pathname: trimPathname(id),
+        title: id,
+      };
+    }),
+  },
+]);

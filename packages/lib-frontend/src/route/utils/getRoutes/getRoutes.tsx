@@ -10,7 +10,7 @@ import {
 import { userRoutes } from '@lib/frontend/user/user.routes';
 import { PING } from '@lib/shared/http/http.constants';
 
-export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesModel =>
+export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel =>
   [
     {
       element: <PingPage />,
@@ -21,7 +21,7 @@ export const getRoutes = ({ appRoutes = [] }: GetRoutesParamsModel): GetRoutesMo
       element: <AppLayout />,
       pathname: '/',
       routes: [
-        ...appRoutes,
+        ...params,
 
         ...userRoutes,
 

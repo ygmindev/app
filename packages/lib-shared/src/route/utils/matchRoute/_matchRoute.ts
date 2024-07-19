@@ -2,16 +2,21 @@ import {
   type _MatchRouteModel,
   type _MatchRouteParamsModel,
 } from '@lib/shared/route/utils/matchRoute/_matchRoute.models';
+import { matchPath } from 'react-router';
 
-export const _matchRoute = (...[route, routes]: _MatchRouteParamsModel): _MatchRouteModel =>
-  matchRoute(routes, '');
-
-// caseSensitive?: boolean;
-// path?: string;
-// id?: string;
-// loader?: LoaderFunction | boolean;
-// action?: ActionFunction | boolean;
-// hasErrorBoundary?: boolean;
-// shouldRevalidate?: ShouldRevalidateFunction;
-// handle?: any;
-// lazy?: LazyRouteFunction<AgnosticBaseRouteObject>;
+export const _matchRoute = ({
+  isDeep = false,
+  route,
+  routes,
+}: _MatchRouteParamsModel): _MatchRouteModel =>
+  routes.reduce((result, v) => {
+    const isMatch = matchPath({ path: (v.fullpath ?? v.pathname).replaceAll('*', '') }, route);
+    const resultF = isMatch
+      ? [
+          ...result,
+          v,
+          ...(isDeep && v.routes ? _matchRoute({ isDeep, route, routes: v.routes }) : []),
+        ]
+      : result;
+    return resultF;
+  }, [] as _MatchRouteModel);

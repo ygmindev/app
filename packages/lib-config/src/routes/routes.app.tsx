@@ -11,32 +11,30 @@ import { getRoutes } from '@lib/frontend/route/utils/getRoutes/getRoutes';
 
 const config = defineConfig<RoutesConfigModel>({
   params: () => ({
-    routes: getRoutes({
-      appRoutes: [
-        {
-          element: <AppHomePage />,
-          isProtectable: true,
-          pathname: HOME,
-        },
+    routes: getRoutes([
+      {
+        element: <AppHomePage />,
+        isProtectable: true,
+        pathname: HOME,
+      },
 
-        ...commerceRoutes,
+      ...commerceRoutes,
 
-        {
-          isProtectable: true,
-          pathname: GROUP,
-          routes: [
-            {
-              element: <GroupFormPage />,
-              pathname: FORM,
-            },
-            {
-              element: <GroupPage />,
-              pathname: ':groupid',
-            },
-          ],
-        },
-      ],
-    }),
+      {
+        isProtectable: true,
+        pathname: GROUP,
+        routes: [
+          {
+            element: <GroupFormPage />,
+            pathname: FORM,
+          },
+          {
+            element: <GroupPage />,
+            pathname: ':groupid',
+          },
+        ],
+      },
+    ]),
   }),
 });
 
