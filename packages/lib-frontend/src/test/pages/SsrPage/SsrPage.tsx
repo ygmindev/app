@@ -9,15 +9,10 @@ import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const SsrPage: LFCModel<SsrPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { data } = useQuery(
-    SSR,
-    async () => {
-      await sleep(1000);
-      return 'SSR failed';
-    },
-    undefined,
-    { cache: true },
-  );
+  const { data } = useQuery(SSR, async () => {
+    await sleep(1000);
+    return 'SSR failed';
+  });
   return (
     <Wrapper
       {...wrapperProps}
