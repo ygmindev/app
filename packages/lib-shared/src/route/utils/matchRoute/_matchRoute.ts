@@ -1,11 +1,10 @@
 import {
-  type _MatchRoutesModel,
-  type _MatchRoutesParamsModel,
-} from '@lib/shared/route/utils/matchRoutes/_matchRoutes.models';
-import { matchRoutes } from 'react-router-dom';
+  type _MatchRouteModel,
+  type _MatchRouteParamsModel,
+} from '@lib/shared/route/utils/matchRoute/_matchRoute.models';
 
-export const _matchRoutes = (...[route, routes]: _MatchRoutesParamsModel): _MatchRoutesModel =>
-  matchRoutes(routes, '');
+export const _matchRoute = (...[route, routes]: _MatchRouteParamsModel): _MatchRouteModel =>
+  matchRoute(routes, '');
 
 // caseSensitive?: boolean;
 // path?: string;
