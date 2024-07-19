@@ -30,9 +30,6 @@ export const _renderServer =
     ssrContextKeys,
   }: _RenderServerParamsModel): _RenderServerModel =>
   async ({ Page, context, pageProps }) => {
-    console.warn('@@@ routes:');
-    console.warn(routes);
-
     initialize && (await initialize());
 
     const queryClient = new QueryClient();

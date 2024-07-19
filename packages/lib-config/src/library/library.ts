@@ -2,6 +2,7 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { type LibraryConfigModel } from '@lib/config/library/library.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
+// TODO: delete?
 export const libraryConfig = defineConfig<LibraryConfigModel>({
   params: () => ({
     configDir: 'assets/library/components.json',

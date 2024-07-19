@@ -1,4 +1,4 @@
-import config from '@lib/config/routes/routes.web';
+import config from '@lib/config/routes/routes.app';
 import { Router } from '@lib/frontend/route/containers/Router/Router';
 import { page } from '@lib/shared/web/utils/page/page';
 
