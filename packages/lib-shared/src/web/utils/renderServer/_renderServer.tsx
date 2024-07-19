@@ -13,6 +13,7 @@ import { pick } from '@lib/shared/core/utils/pick/pick';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { QUERY } from '@lib/shared/query/query.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
+import { matchRoutes } from '@lib/shared/route/utils/matchRoutes/matchRoutes';
 import { STATE } from '@lib/shared/state/state.constants';
 import {
   type _RenderServerModel,
@@ -30,6 +31,11 @@ export const _renderServer =
     ssrContextKeys,
   }: _RenderServerParamsModel): _RenderServerModel =>
   async ({ Page, context, pageProps }) => {
+    const pathname = context?.[ROUTE]?.location?.pathname;
+
+    const matchedRoutes = routes && pathname && matchRoutes({ pathname, routes });
+    console.warn(matchedRoutes);
+
     initialize && (await initialize());
 
     const queryClient = new QueryClient();

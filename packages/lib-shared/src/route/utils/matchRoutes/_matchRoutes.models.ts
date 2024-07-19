@@ -1,9 +1,9 @@
 import { type RouteModel } from '@lib/frontend/route/route.models';
 
-export type _MatchRouteParamsModel = {
+export type _MatchRoutesParamsModel = {
   isDeep?: boolean;
-  route: string;
+  pathname: string;
   routes: Array<RouteModel>;
 };
 
-export type _MatchRouteModel = Array<RouteModel>;
+export type _MatchRoutesModel = Array<RouteModel>;
