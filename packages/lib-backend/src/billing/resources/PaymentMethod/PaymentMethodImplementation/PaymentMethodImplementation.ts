@@ -136,7 +136,7 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
           if (price !== amount) {
             throw new InvalidArgumentError(`prices do not match: ${price} vs. ${amount}`);
           }
-          charge = { amount: amount * 100, currency: 'usd' };
+          charge = { amount, currency: 'usd' };
         }
         return {
           result: await this.stripeAdminImplementation.createToken({

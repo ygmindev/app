@@ -36,9 +36,7 @@ export const _NewPaymentMethodInput: RLFCModel<
         ...(products
           ? {
               // TODO: to locale currency
-              amount: price * 100,
-              // confirm: true,
-              // TODO: to locale currency
+              amount: Math.round(price * 1e2),
               currency: 'usd',
               mode: 'payment',
               setup_future_usage: 'off_session',

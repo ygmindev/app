@@ -49,7 +49,7 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
     const token = charge
       ? (
           await this.stripe.paymentIntents.create({
-            amount: charge.amount,
+            amount: Math.round(charge.amount * 1e2),
             automatic_payment_methods: { allow_redirects: 'never', enabled: true },
             confirm: !!paymentMethodId,
             currency: charge.currency,

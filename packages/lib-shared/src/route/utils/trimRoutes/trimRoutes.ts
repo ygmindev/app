@@ -15,7 +15,7 @@ const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
     ...routeF,
     depth: depthF,
     fullpath: trimPathname(`${routeF.parent ?? ''}/${pathnameF}`),
-    pathname: trimPathname(routeF.routes ? `${pathnameF}/*` : pathnameF),
+    pathname: trimPathname(pathnameF),
     routes: routeF.routes?.map((child) => trimRoute({ ...child, parent: parentF }, depthF)),
   };
 };
