@@ -17,18 +17,18 @@ export class PaymentMethod extends EmbeddedResource implements PaymentMethodMode
   @withRefField({ Resource: () => User })
   _user!: RefFieldModel<UserModel>;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ type: DATA_TYPE.STRING })
   externalId!: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ type: DATA_TYPE.STRING })
   fingerprint?: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ type: DATA_TYPE.STRING })
   last4!: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ type: DATA_TYPE.STRING })
   name!: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ type: DATA_TYPE.STRING })
   type!: PaymentMethodTypeModel;
 }

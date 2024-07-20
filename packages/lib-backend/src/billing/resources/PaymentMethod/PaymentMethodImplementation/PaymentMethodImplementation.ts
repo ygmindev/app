@@ -9,7 +9,10 @@ import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedErr
 import { type ChargeModel } from '@lib/shared/billing/billing.models';
 import { type BankImplementationModel } from '@lib/shared/billing/resources/Bank/BankImplementation/BankImplementation.models';
 import { type CardImplementationModel } from '@lib/shared/billing/resources/Card/CardImplementation/CardImplementation.models';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import {
+  PAYMENT_METHOD_RESOURCE_NAME,
+  PAYMENT_METHOD_TYPE,
+} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodImplementationModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
 import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
@@ -58,7 +61,6 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
         'externalId',
         'last4',
         'name',
-        'type',
       ];
       const project = reduce(fields, (result, v) => ({ ...result, [v]: true }), {});
       const { result: banks } = await this.bankImplementation.getMany({
@@ -73,8 +75,8 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
       });
       return {
         result: [
-          ...(banks?.map((value) => pick(value, fields)) ?? []),
-          ...(cards?.map((value) => pick(value, fields)) ?? []),
+          ...(banks?.map((v) => ({ ...pick(v, fields), type: PAYMENT_METHOD_TYPE.BANK })) ?? []),
+          ...(cards?.map((v) => ({ ...pick(v, fields), type: PAYMENT_METHOD_TYPE.CARD })) ?? []),
         ],
       };
     }
