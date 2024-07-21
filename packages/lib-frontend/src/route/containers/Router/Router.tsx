@@ -65,7 +65,12 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
         transition: ROUTE_TRANSITION.SLIDE,
       } satisfies RouteModel;
 
-      console.warn(routeFF);
+      if (routeFF.fullpath?.endsWith('account')) {
+        console.warn(routeFF);
+      }
+      if (routeFF.fullpath?.endsWith('billing')) {
+        console.warn(routeFF);
+      }
 
       return routeFF;
     }
