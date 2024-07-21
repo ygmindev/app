@@ -31,9 +31,11 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
             return element;
         }
       })();
+
       const isHeader =
-        route.navigation === ROUTE_NAVIGATION.LIST ||
-        route.navigation === ROUTE_NAVIGATION.TRANSITION;
+        routeF.navigation === ROUTE_NAVIGATION.LIST ||
+        routeF.navigation === ROUTE_NAVIGATION.TRANSITION;
+
       const routeFF = {
         ...routeF,
         namespaces,
@@ -62,6 +64,9 @@ const getNavigatableRoute = (route: RouteModel): RouteModel => {
         title,
         transition: ROUTE_TRANSITION.SLIDE,
       } satisfies RouteModel;
+
+      console.warn(routeFF);
+
       return routeFF;
     }
     default:

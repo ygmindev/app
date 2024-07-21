@@ -11,9 +11,7 @@ export const ResourcePage: LFCModel<ResourcePagePropsModel> = ({ ...props }) => 
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([RESOURCE]);
   return (
-    <MainLayout
-      {...wrapperProps}
-      p>
+    <MainLayout {...wrapperProps}>
       <RouteList
         root
         routes={RESOURCE_PAGE_ROUTES}

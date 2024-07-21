@@ -41,8 +41,7 @@ export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
 
       <Wrapper
         flex
-        isVerticalScrollable
-        p>
+        isVerticalScrollable>
         {children}
       </Wrapper>
     </Wrapper>
