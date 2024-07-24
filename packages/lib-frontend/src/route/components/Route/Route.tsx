@@ -1,6 +1,6 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
+// import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
-import { Protectable } from '@lib/frontend/auth/components/Protectable/Protectable';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -8,6 +8,7 @@ import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { NavigationLayout } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
+// import { RouteList } from '@lib/frontend/route/components/RouteList/RouteList';
 import { TabLayout } from '@lib/frontend/route/components/TabLayout/TabLayout';
 import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
 import { Routes } from '@lib/frontend/route/containers/Routes/Routes';
@@ -31,10 +32,10 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   const { isActive } = useRouter();
   const { track } = useTracking();
 
+  const [isBack] = useStore('route.isBack');
   const isLeaf = !route.routes;
   const isActiveF = isActive({ pathname: route.fullpath });
   const isActiveLeaf = isLeaf && isActive({ isExact: true, pathname: route.fullpath });
-  const [isBack] = useStore('route.isBack');
 
   useAsync(async () => {
     isActiveLeaf &&
@@ -79,31 +80,16 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
     },
   );
 
-  switch (route.navigation) {
-    case ROUTE_NAVIGATION.NAVIGATION: {
-      element = <NavigationLayout route={route}>{element}</NavigationLayout>;
-      break;
+  element = (() => {
+    switch (route.navigation) {
+      case ROUTE_NAVIGATION.NAVIGATION:
+        return <NavigationLayout route={route}>{element}</NavigationLayout>;
+      case ROUTE_NAVIGATION.TAB:
+        return <TabLayout route={route}>{element}</TabLayout>;
+      default:
+        return element;
     }
-    case ROUTE_NAVIGATION.TAB: {
-      element = <TabLayout route={route}>{element}</TabLayout>;
-      break;
-    }
-    default:
-      break;
-  }
-
-  route.isProtectable && (element = <Protectable>{element}</Protectable>);
-
-  element = (
-    <Wrapper
-      {...wrapperProps}
-      {...route.layoutProps}
-      backgroundColor={THEME_COLOR_MORE.SURFACE}
-      isAbsoluteFill
-      zIndex>
-      {element}
-    </Wrapper>
-  );
+  })();
 
   return (
     <>
@@ -113,7 +99,14 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
         </Portal>
       )}
 
-      {element}
+      <Wrapper
+        {...wrapperProps}
+        {...route.layoutProps}
+        backgroundColor={THEME_COLOR_MORE.SURFACE}
+        isAbsoluteFill
+        zIndex>
+        {element}
+      </Wrapper>
     </>
   );
 };
