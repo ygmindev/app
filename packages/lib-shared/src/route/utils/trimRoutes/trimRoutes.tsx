@@ -10,12 +10,10 @@ import {
 
 const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
   route.pathname = trimPathname(route.pathname);
-  route.parent = trimPathname(`${route.parent ?? ''}${route.pathname}`);
   route.depth = route.pathname === '/' ? depth : depth + 1;
-  route.fullpath = trimPathname(`${route.parent ?? ''}/${route.pathname}`);
+  route.parent = route.fullpath = trimPathname(`${route.parent ?? ''}/${route.pathname}`);
 
   const isList = route.navigation === ROUTE_NAVIGATION.LIST;
-
   isList &&
     (route.element = (
       <RouteList
@@ -52,8 +50,6 @@ const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
     (route.routes = route.routes.map((child) =>
       trimRoute({ ...child, parent: route.parent }, route.depth),
     ));
-
-  // route.element && (route.element = <Route route={route} />);
 
   return route;
 };

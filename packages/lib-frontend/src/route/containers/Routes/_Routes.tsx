@@ -14,11 +14,11 @@ export const _Routes: FCModel<_RoutesPropsModel> = ({ depth = 1, routes }) => {
     <_RoutesBase
       key={key}
       location={location}>
-      {routes.map(({ element, pathname, ...route }) => {
-        const pathnameF = trimPathname(route.routes ? `${pathname}/*` : pathname);
+      {routes.map((route) => {
+        const pathnameF = trimPathname(route.routes ? `${route.pathname}/*` : route.pathname);
         return (
           <_Route
-            element={element}
+            element={route.element}
             index={pathnameF === '/'}
             key={pathnameF}
             path={pathnameF}

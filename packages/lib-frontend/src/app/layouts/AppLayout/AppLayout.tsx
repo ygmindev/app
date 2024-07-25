@@ -16,6 +16,7 @@ export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props })
   const { wrapperProps } = useLayoutStyles({ props });
   const [notifications] = useStore('notification.notifications');
   useTranslation([AUTH]);
+  console.warn(children);
   return (
     <KeyboardContainer>
       <Wrapper

@@ -23,7 +23,7 @@ import {
   TRACKING_EVENT_ACTION,
   TRACKING_EVENT_OBJECT,
 } from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
-import { cloneElement } from 'react';
+import { cloneElement, useEffect } from 'react';
 
 export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   useTranslation(route?.namespaces);
@@ -50,31 +50,35 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
       />
     ),
     {
-      children: route.routes && (
+      children: (
         <Wrapper
           flex
           isOverflowHidden
           position={SHAPE_POSITION.RELATIVE}>
-          <Routes
-            depth={route.depth}
-            routes={route.routes.map(({ element, ...child }) => ({
-              ...child,
-              element: (() => {
-                switch (route.transition) {
-                  case ROUTE_TRANSITION.SLIDE:
-                    return <Slide isBack={isBack}>{element}</Slide>;
-                  default:
-                    return (
-                      <Appearable
-                        isAbsoluteFill
-                        isActive={isActiveF}>
-                        {element}
-                      </Appearable>
-                    );
-                }
-              })(),
-            }))}
-          />
+          {route.element?.props.children}
+
+          {route.routes && (
+            <Routes
+              depth={route.depth}
+              routes={route.routes.map((child) => ({
+                ...child,
+                element: (() => {
+                  switch (route.transition) {
+                    case ROUTE_TRANSITION.SLIDE:
+                      return <Slide isBack={isBack}>{child.element}</Slide>;
+                    default:
+                      return (
+                        <Appearable
+                          isAbsoluteFill
+                          isActive={isActiveF}>
+                          {child.element}
+                        </Appearable>
+                      );
+                  }
+                })(),
+              }))}
+            />
+          )}
         </Wrapper>
       ),
     },
@@ -90,6 +94,17 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
         return element;
     }
   })();
+
+  useEffect(() => {
+    if (route.fullpath?.includes('sign-in')) {
+      console.warn(
+        `@@@ ${route.fullpath} isLeaf: ${isLeaf}, isActiveLeaf: ${isActiveLeaf}, isActiveF: ${isActiveF}`,
+      );
+      console.warn(route.element);
+      console.warn(element);
+      console.warn('\n\n');
+    }
+  }, []);
 
   return (
     <>
