@@ -23,7 +23,7 @@ import {
   TRACKING_EVENT_ACTION,
   TRACKING_EVENT_OBJECT,
 } from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
-import { cloneElement, useEffect } from 'react';
+import { cloneElement } from 'react';
 
 export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   useTranslation(route?.namespaces);
@@ -94,17 +94,6 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
         return element;
     }
   })();
-
-  useEffect(() => {
-    if (route.fullpath?.includes('sign-in')) {
-      console.warn(
-        `@@@ ${route.fullpath} isLeaf: ${isLeaf}, isActiveLeaf: ${isActiveLeaf}, isActiveF: ${isActiveF}`,
-      );
-      console.warn(route.element);
-      console.warn(element);
-      console.warn('\n\n');
-    }
-  }, []);
 
   return (
     <>
