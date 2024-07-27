@@ -1,4 +1,3 @@
-import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { Route } from '@lib/frontend/route/components/Route/Route';
 import { _Routes } from '@lib/frontend/route/containers/Routes/_Routes';
@@ -14,12 +13,10 @@ export const Routes = composeComponent<RoutesPropsModel, _RoutesPropsModel>({
     routes: routes.map((route) => ({
       ...route,
       element: (
-        <Exitable>
-          <Route
-            key={route.fullpath}
-            route={route}
-          />
-        </Exitable>
+        <Route
+          key={route.fullpath}
+          route={route}
+        />
       ),
     })),
   }),

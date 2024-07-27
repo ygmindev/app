@@ -1,5 +1,5 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-// import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
+import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -8,7 +8,6 @@ import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { NavigationLayout } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
-// import { RouteList } from '@lib/frontend/route/components/RouteList/RouteList';
 import { TabLayout } from '@lib/frontend/route/components/TabLayout/TabLayout';
 import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
 import { Routes } from '@lib/frontend/route/containers/Routes/Routes';
@@ -23,7 +22,7 @@ import {
   TRACKING_EVENT_ACTION,
   TRACKING_EVENT_OBJECT,
 } from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
-import { cloneElement } from 'react';
+import { cloneElement, useEffect } from 'react';
 
 export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   useTranslation(route?.namespaces);
@@ -41,6 +40,10 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
     isActiveLeaf &&
       (await track({ action: TRACKING_EVENT_ACTION.OPEN, object: TRACKING_EVENT_OBJECT.PAGE }));
   }, [isActiveLeaf]);
+
+  useEffect(() => {
+    console.warn(`@@@ ${route.fullpath}: ${isActiveF} ${isActiveLeaf}`);
+  }, []);
 
   let element = cloneElement(
     route.element ?? (
@@ -96,9 +99,9 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   })();
 
   return (
-    <>
+    <Exitable>
       {isActiveF && route.header && (
-        <Portal>
+        <Portal key="header">
           <RouteHeader route={route} />
         </Portal>
       )}
@@ -111,6 +114,6 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
         zIndex>
         {element}
       </Wrapper>
-    </>
+    </Exitable>
   );
 };
