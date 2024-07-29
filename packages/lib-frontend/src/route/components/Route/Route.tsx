@@ -1,5 +1,4 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -22,7 +21,7 @@ import {
   TRACKING_EVENT_ACTION,
   TRACKING_EVENT_OBJECT,
 } from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
-import { cloneElement, useEffect } from 'react';
+import { cloneElement } from 'react';
 
 export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   useTranslation(route?.namespaces);
@@ -41,10 +40,6 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
       (await track({ action: TRACKING_EVENT_ACTION.OPEN, object: TRACKING_EVENT_OBJECT.PAGE }));
   }, [isActiveLeaf]);
 
-  useEffect(() => {
-    console.warn(`@@@ ${route.fullpath}: ${isActiveF} ${isActiveLeaf}`);
-  }, []);
-
   let element = cloneElement(
     route.element ?? (
       <Wrapper
@@ -53,36 +48,27 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
       />
     ),
     {
-      children: (
-        <Wrapper
-          flex
-          isOverflowHidden
-          position={SHAPE_POSITION.RELATIVE}>
-          {route.element?.props.children}
-
-          {route.routes && (
-            <Routes
-              depth={route.depth}
-              routes={route.routes.map((child) => ({
-                ...child,
-                element: (() => {
-                  switch (route.transition) {
-                    case ROUTE_TRANSITION.SLIDE:
-                      return <Slide isBack={isBack}>{child.element}</Slide>;
-                    default:
-                      return (
-                        <Appearable
-                          isAbsoluteFill
-                          isActive={isActiveF}>
-                          {child.element}
-                        </Appearable>
-                      );
-                  }
-                })(),
-              }))}
-            />
-          )}
-        </Wrapper>
+      children: route.routes && (
+        <Routes
+          depth={route.depth}
+          routes={route.routes.map((child) => ({
+            ...child,
+            element: (() => {
+              switch (route.transition) {
+                case ROUTE_TRANSITION.SLIDE:
+                  return <Slide isBack={isBack}>{child.element}</Slide>;
+                default:
+                  return (
+                    <Appearable
+                      isAbsoluteFill
+                      isActive={isActiveF}>
+                      {child.element}
+                    </Appearable>
+                  );
+              }
+            })(),
+          }))}
+        />
       ),
     },
   );
@@ -99,7 +85,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   })();
 
   return (
-    <Exitable>
+    <>
       {isActiveF && route.header && (
         <Portal key="header">
           <RouteHeader route={route} />
@@ -114,6 +100,6 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
         zIndex>
         {element}
       </Wrapper>
-    </Exitable>
+    </>
   );
 };

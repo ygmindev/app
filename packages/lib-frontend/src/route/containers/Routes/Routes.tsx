@@ -1,25 +1,10 @@
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import { Route } from '@lib/frontend/route/components/Route/Route';
+import { type FCModel } from '@lib/frontend/core/core.models';
 import { _Routes } from '@lib/frontend/route/containers/Routes/_Routes';
-import { type _RoutesPropsModel } from '@lib/frontend/route/containers/Routes/_Routes.models';
 import { type RoutesPropsModel } from '@lib/frontend/route/containers/Routes/Routes.models';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
-export const Routes = composeComponent<RoutesPropsModel, _RoutesPropsModel>({
-  Component: _Routes,
-
-  getProps: ({ routes, ...props }) => ({
-    ...props,
-    routes: routes.map((route) => ({
-      ...route,
-      element: (
-        <Route
-          key={route.fullpath}
-          route={route}
-        />
-      ),
-    })),
-  }),
-});
-
-process.env.APP_IS_DEBUG && (Routes.displayName = variableName({ Routes }));
+export const Routes: FCModel<RoutesPropsModel> = ({ depth = 0, routes }) => (
+  <_Routes
+    depth={depth}
+    routes={routes}
+  />
+);
