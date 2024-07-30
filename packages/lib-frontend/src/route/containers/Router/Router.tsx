@@ -7,7 +7,6 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 
 export const Router: LFCModel<RouterPropsModel> = ({ routes, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  console.warn(routes);
   return (
     <Wrapper
       {...wrapperProps}
