@@ -1,4 +1,5 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
+import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -54,18 +55,29 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
           routes={route.routes.map((child) => ({
             ...child,
             element: (() => {
-              switch (route.transition) {
-                case ROUTE_TRANSITION.SLIDE:
-                  return <Slide isBack={isBack}>{child.element}</Slide>;
-                default:
-                  return (
-                    <Appearable
-                      isAbsoluteFill
-                      isActive={isActiveF}>
-                      {child.element}
-                    </Appearable>
-                  );
-              }
+              let elementF = (() => {
+                switch (route.transition) {
+                  case ROUTE_TRANSITION.SLIDE:
+                    return (
+                      <Slide
+                        isBack={isBack}
+                        key={child.fullpath}>
+                        {child.element}
+                      </Slide>
+                    );
+                  default:
+                    return (
+                      <Appearable
+                        isAbsoluteFill
+                        isActive={isActiveF}
+                        key={child.fullpath}>
+                        {child.element}
+                      </Appearable>
+                    );
+                }
+              })();
+              elementF = <Exitable>{elementF}</Exitable>;
+              return elementF;
             })(),
           }))}
         />

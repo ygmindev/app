@@ -18,7 +18,6 @@ export const Slide: LFCModel<SlidePropsModel> = ({
   children,
   elementState = ELEMENT_STATE.ACTIVE,
   isBack = false,
-  onElementStateChange,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -41,7 +40,6 @@ export const Slide: LFCModel<SlidePropsModel> = ({
       bottom={0}
       elementState={elementState}
       isFullWidth
-      onElementStateChange={onElementStateChange}
       position={SHAPE_POSITION.ABSOLUTE}
       top={0}>
       {children}

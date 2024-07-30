@@ -13,7 +13,6 @@ export const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
   route.pathname = trimPathname(route.pathname);
   route.depth = route.pathname === '/' ? depth : depth + 1;
   route.fullpath = trimPathname(`${route.parent ?? ''}/${route.pathname}`);
-
   route.navigation === ROUTE_NAVIGATION.LIST &&
     (route.element = (
       <RouteList
@@ -25,6 +24,7 @@ export const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
 
   const isHeader =
     route.navigation === ROUTE_NAVIGATION.LIST || route.navigation === ROUTE_NAVIGATION.TRANSITION;
+
   if (isHeader || route.navigation === ROUTE_NAVIGATION.TAB) {
     route.transition = ROUTE_TRANSITION.SLIDE;
     route.routes = [
@@ -46,11 +46,14 @@ export const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
     ];
     route.element = undefined;
   }
+
   route.routes &&
     (route.routes = route.routes.map((child) =>
       trimRoute({ ...child, parent: route.fullpath }, route.depth),
     ));
+
   route.element = <Route route={{ ...route, element: route.element }} />;
+
   return route;
 };
 
