@@ -16,10 +16,7 @@ export const FocusableWrapper: RLFCModel<FocusableRefModel, FocusableWrapperProp
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props });
     const { elementStateControlled, elementStateControlledSet, isBlocked } =
-      useElementStateControlled({
-        elementState,
-        onElementStateChange,
-      });
+      useElementStateControlled({ elementState, onElementStateChange });
     const isError = !!error;
     useImperativeHandle(ref, () => ({
       blur: () => elementStateControlledSet(ELEMENT_STATE.INACTIVE),
