@@ -198,7 +198,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         {...wrapperProps}
         align={align}
         animation={animation}
-        border={typeF !== BUTTON_TYPE.INVISIBLE}
+        border={typeF === BUTTON_TYPE.TRANSPARENT}
         borderRole={THEME_ROLE.MAIN}
         confirmColor={color}
         elementState={elementStateControlled}
