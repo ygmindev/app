@@ -1,5 +1,5 @@
 import { NavigationHeader } from '@lib/frontend/app/components/NavigationHeader/NavigationHeader';
-import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { type RouteHeaderPropsModel } from '@lib/frontend/route/containers/RouteHeader/RouteHeader.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
@@ -12,7 +12,6 @@ export const RouteHeader: LFCModel<RouteHeaderPropsModel> = ({ route, ...props }
   return (
     <NavigationHeader
       {...wrapperProps}
-      border={DIRECTION.BOTTOM}
       elementState={ELEMENT_STATE.ACTIVE}
       onBack={
         previous

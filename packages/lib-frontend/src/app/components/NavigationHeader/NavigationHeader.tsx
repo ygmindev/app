@@ -12,7 +12,7 @@ import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR_MORE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useRef } from 'react';
@@ -38,8 +38,10 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
       isFullWidth
       isRow
       pHorizontal
+      pVertical={THEME_SIZE.SMALL}
       position={SHAPE_POSITION.RELATIVE}
-      ref={ref}>
+      ref={ref}
+      zIndex={2}>
       <Appearable isActive={!!onBack}>
         <Button
           elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}

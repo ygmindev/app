@@ -28,15 +28,15 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
   return (
     <Wrapper
       {...wrapperProps}
+      border={DIRECTION.BOTTOM}
       isFullWidth
+      pHorizontal
       position={SHAPE_POSITION.RELATIVE}
       zIndex>
       <Wrapper
-        border={DIRECTION.BOTTOM}
         height={theme.layout.header.height}
         isAlign
-        isRow
-        pHorizontal>
+        isRow>
         <Wrapper
           flex
           isAlign
@@ -58,7 +58,6 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
       <Appearable
         backgroundColor={THEME_COLOR.WARNING}
         backgroundRole={THEME_ROLE.MUTED}
-        border={DIRECTION.BOTTOM}
         isActive={isOffline}
         isScalable={false}
         left={0}
