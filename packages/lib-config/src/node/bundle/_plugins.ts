@@ -57,7 +57,7 @@ export const _plugins = ({
 
     excludeVendorFromSourceMap(),
 
-    esbuildFlowPlugin(),
+    (esbuildFlowPlugin as () => unknown)() as Plugin,
 
     process.env.ENV_PLATFORM === PLATFORM.NODE &&
       nodeExternalsPlugin({

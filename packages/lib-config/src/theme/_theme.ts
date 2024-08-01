@@ -1,7 +1,7 @@
 import { type _ThemeConfigModel, type ThemeConfigModel } from '@lib/config/theme/theme.models';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { DefaultTheme } from 'react-native-paper';
+import { DefaultTheme, type MD3Theme } from 'react-native-paper';
 
 export const _theme = ({ color, font, shape }: ThemeConfigModel): _ThemeConfigModel => {
   const fontStyle = {
@@ -47,7 +47,7 @@ export const _theme = ({ color, font, shape }: ThemeConfigModel): _ThemeConfigMo
         labelLarge: { ...fontStyle, fontSize: font.size[THEME_SIZE.LARGE] },
         labelMedium: fontStyle,
         labelSmall: { ...fontStyle, fontSize: font.size[THEME_SIZE.SMALL] },
-      },
+      } as MD3Theme['fonts'],
 
       roundness: shape.borderRadius[THEME_SIZE.MEDIUM],
     },

@@ -23,7 +23,7 @@
     ],
     "license": "MIT",
     "name": "app",
-    "packageManager": "pnpm@9.1.4",
+    "packageManager": "pnpm@9.6.0",
     "private": true,
     "version": "0.0.0",
     "workspaces": [

@@ -19,7 +19,6 @@ import {
   type PropertyOptions,
 } from '@mikro-orm/mongodb';
 import { Field, Float } from 'type-graphql';
-import { type ReturnTypeFuncValue } from 'type-graphql/dist/decorators/types';
 
 const getField = <TType extends unknown>({
   Resource,
@@ -27,7 +26,7 @@ const getField = <TType extends unknown>({
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
   if (Resource) {
-    return Field(() => (isArray ? [Resource()] : Resource()) as ReturnTypeFuncValue, {
+    return Field(() => (isArray ? [Resource()] : Resource()), {
       simple: true,
     });
   }

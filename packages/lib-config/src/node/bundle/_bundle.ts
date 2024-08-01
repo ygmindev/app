@@ -169,7 +169,7 @@ export const _bundle = ({
 
         nodePaths: rootDirs.map((root) => joinPaths([root, 'node_modules'])),
 
-        plugins: _plugins({ rootDirs, transpiles }),
+        plugins: _plugins({ rootDirs, transpiles }) as Array<never>,
 
         resolveExtensions: extensions,
 
@@ -186,7 +186,7 @@ export const _bundle = ({
     plugins: filterNil([
       serverExtension && vitePluginIsomorphicImport(serverExtension),
 
-      circularDependencyPlugin({}) as Plugin,
+      circularDependencyPlugin({}),
 
       checker({
         eslint: { lintCommand: lintCommand() },
@@ -211,7 +211,7 @@ export const _bundle = ({
           skipPreflightCheck: true,
         } as RollupBabelInputPluginOptions),
 
-      viteCommonjs() as Plugin,
+      viteCommonjs(),
 
       process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
     ]),
