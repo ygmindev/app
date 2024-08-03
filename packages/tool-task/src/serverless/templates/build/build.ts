@@ -2,6 +2,7 @@ import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecu
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { BUILD_DIR, FILE_CONFIG } from '@lib/config/file/file.constants';
+import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
 import serverlessConfig from '@lib/config/serverless/serverless.base';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskModel, type TaskParamsModel } from '@tool/task/core/core.models';
@@ -45,7 +46,7 @@ export const LAYER_TASKS: Array<TaskModel<unknown>> = [
 
   () => {
     const root = fromWorking(BUILD_DIR, 'layers', 'nodejs');
-    return `rm -rf ${root}/node_modules/.ignored`;
+    return `rm -rf ${root}/${pacakgeManagerConfig.params().modulesDir}/.ignored`;
   },
 ];
 

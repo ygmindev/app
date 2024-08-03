@@ -2,6 +2,7 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import fileConfig from '@lib/config/file/file';
 import { DIST_DIR } from '@lib/config/file/file.constants';
+import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
 import { _typescript } from '@lib/config/node/typescript/_typescript';
 import {
   type _TypescriptConfigModel,
@@ -22,9 +23,9 @@ const config = defineConfig<TypescriptConfigModel, _TypescriptConfigModel>({
     outDir: './out-tsc',
 
     paths: {
-      'css-in-js-utils/lib/*': 'node_modules/css-in-js-utils/es/*',
-      'inline-style-prefixer/lib/*': 'node_modules/inline-style-prefixer/es/*',
-      'redux-persist/integration/*': 'node_modules/redux-persist/types/integration/*',
+      'css-in-js-utils/lib/*': `${pacakgeManagerConfig.params().modulesDir}/css-in-js-utils/es/*`,
+      'inline-style-prefixer/lib/*': `${pacakgeManagerConfig.params().modulesDir}/inline-style-prefixer/es/*`,
+      'redux-persist/integration/*': `${pacakgeManagerConfig.params().modulesDir}/redux-persist/types/integration/*`,
       ...reduce(
         fileConfig.params().packageDirs,
         (result, v) => {

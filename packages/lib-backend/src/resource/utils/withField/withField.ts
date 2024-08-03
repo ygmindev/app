@@ -26,9 +26,7 @@ const getField = <TType extends unknown>({
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
   if (Resource) {
-    return Field(() => (isArray ? [Resource()] : Resource()), {
-      simple: true,
-    });
+    return Field(() => (isArray ? [Resource()] : Resource()), { simple: true });
   }
   switch (type) {
     case DATA_TYPE.STRING:

@@ -7,11 +7,11 @@ export type PackageManagerConfigModel = {
     options?: PackageManagerInstallOptionsModel,
   ): string;
 
+  modulesDir: string;
+
   name: string;
 
   removeCommand(names?: string, packages?: Array<string>): string;
-
-  toJsx: Array<string>;
 };
 
 export type PackageManagerInstallOptionsModel = {

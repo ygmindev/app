@@ -7,6 +7,7 @@ import {
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
 import { lintCommand } from '@lib/config/node/lint/lint';
+import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
@@ -167,7 +168,9 @@ export const _bundle = ({
 
         minify: process.env.NODE_ENV === 'production',
 
-        nodePaths: rootDirs.map((root) => joinPaths([root, 'node_modules'])),
+        nodePaths: rootDirs.map((root) =>
+          joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
+        ),
 
         plugins: _plugins({ rootDirs, transpiles }) as Array<never>,
 
