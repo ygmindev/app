@@ -90,7 +90,7 @@ export const _runServer = async ({
 
         app.route({
           handler: async (req, reply) => {
-            const response = await yoga.handleNodeRequestAndResponse(req, reply, { reply, req });
+            const response = await yoga.handleNodeRequestAndResponse(req, reply);
             response.headers.forEach((value: unknown, key: string) => {
               void reply.header(key, value);
             });

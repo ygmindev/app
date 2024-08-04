@@ -29,7 +29,7 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "GitHub Light",
+  "workbench.colorTheme": "GitHub Dark",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right",
   "typescript.tsdk": "node_modules/typescript/lib"

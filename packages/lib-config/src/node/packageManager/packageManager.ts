@@ -10,8 +10,11 @@ const config = defineConfig<PackageManagerConfigModel>({
       inquirer: '^8.2.2',
       'p-queue': '^6.6.2', // no commonjs
       // typescript: '4.7.4',
-      // 'react-native-vector-icons': '^9.2.0', // 10.0.0 incompatible with createAnimatedComponent
-      // 'react-native-web': '^0.18.12', // 0.19 results in no icon color animation
+      // TODO: wait for react-native-reanimated to release with RNRenderer, and upgrade rn, rnvi, rnw
+      //
+      'react-native': '^0.73.7',
+      'react-native-vector-icons': '^9.2.0', // 10.0.0 incompatible with createAnimatedComponent
+      'react-native-web': '^0.18.12', // 0.19 results in no icon color animation
     },
 
     installCommand: (names, packages, options = {}) =>
