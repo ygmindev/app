@@ -74,7 +74,7 @@ export const _serverless = ({
 
           plugins: filterNil([
             !isContainer && 'serverless-plugin-layer-manager',
-            'serverless-esbuild',
+            // 'serverless-esbuild',
           ]),
 
           provider: {

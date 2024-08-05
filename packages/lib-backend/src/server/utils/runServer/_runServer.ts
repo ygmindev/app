@@ -12,7 +12,7 @@ import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanu
 import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
-import { fastify, type HTTPMethods } from 'fastify';
+import { fastify, type FastifyReply, type FastifyRequest, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
 import { type GraphQLError } from 'graphql';
 import { createYoga } from 'graphql-yoga';
@@ -69,7 +69,7 @@ export const _runServer = async ({
     switch (type) {
       case API_ENDPOINT_TYPE.GRAPHQL: {
         const schema = graphqlConfig.config();
-        const yoga = createYoga({
+        const yoga = createYoga<{ reply: FastifyReply; req: FastifyRequest }>({
           context: async ({ request }) => {
             const context: RequestContextModel = {};
             const user = await getTokenFromHeader(
@@ -90,7 +90,7 @@ export const _runServer = async ({
 
         app.route({
           handler: async (req, reply) => {
-            const response = await yoga.handleNodeRequestAndResponse(req, reply);
+            const response = await yoga.handleNodeRequestAndResponse(req, reply, { reply, req });
             response.headers.forEach((value: unknown, key: string) => {
               void reply.header(key, value);
             });

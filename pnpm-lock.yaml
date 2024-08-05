@@ -690,6 +690,9 @@ importers:
       graphql-relay:
         specifier: ^0.10.2
         version: 0.10.2(graphql@16.9.0)
+      graphql-yoga:
+        specifier: ^5.6.2
+        version: 5.6.3(graphql@16.9.0)
       http-errors:
         specifier: ^2.0.0
         version: 2.0.0
@@ -855,6 +858,9 @@ importers:
       graphql-relay:
         specifier: ^0.10.2
         version: 0.10.2(graphql@16.9.0)
+      graphql-yoga:
+        specifier: ^5.6.2
+        version: 5.6.3(graphql@16.9.0)
       http-errors:
         specifier: ^2.0.0
         version: 2.0.0
@@ -960,6 +966,9 @@ importers:
       graphql-relay:
         specifier: ^0.10.2
         version: 0.10.2(graphql@16.9.0)
+      graphql-yoga:
+        specifier: ^5.6.2
+        version: 5.6.3(graphql@16.9.0)
       http-errors:
         specifier: ^2.0.0
         version: 2.0.0
@@ -1054,7 +1063,7 @@ importers:
         specifier: ^0.10.2
         version: 0.10.2(graphql@16.9.0)
       graphql-yoga:
-        specifier: ^5.6.2
+        specifier: ^5.6.3
         version: 5.6.3(graphql@16.9.0)
       http-errors:
         specifier: ^2.0.0
