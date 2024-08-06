@@ -72,10 +72,14 @@ export const _runServer = async ({
         const yoga = createYoga<{ reply: FastifyReply; req: FastifyRequest }>({
           context: async ({ request }) => {
             const context: RequestContextModel = {};
-            const user = await getTokenFromHeader(
-              request.headers.get('authorization') ?? undefined,
-            );
-            user && (context.user = user);
+            try {
+              const user = await getTokenFromHeader(
+                request.headers.get('authorization') ?? undefined,
+              );
+              user && (context.user = user);
+            } catch {
+              request.headers.delete('authorization');
+            }
             return context;
           },
           landingPage: false,
