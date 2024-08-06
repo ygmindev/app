@@ -1,10 +1,12 @@
 import { type _JwtImplementationModel } from '@lib/backend/auth/utils/JwtImplementation/_JwtImplementation.models';
+import { AuthTokenError } from '@lib/shared/auth/errors/AuthTokenError/AuthTokenError';
 import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/shared/auth/resources/SignIn/SignIn.constants';
 import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { type AuthError } from 'firebase/auth';
 import admin from 'firebase-admin';
 import toString from 'lodash/toString';
 
@@ -24,13 +26,20 @@ export class _JwtImplementation implements _JwtImplementationModel {
     admin.auth().createCustomToken(toString(_id), claims);
 
   verifyToken = async (token: string): Promise<SignInTokenModel | null> => {
-    const decoded = await admin.auth().verifyIdToken(token);
-    return {
-      _id: decoded.uid,
-      claims: {
-        ...((decoded.additionalClaims as PartialModel<UserModel>) ?? {}),
-        ...pick(decoded, SIGN_IN_TOKEN_CLAIM_KEYS),
-      },
-    };
+    try {
+      const decoded = await admin.auth().verifyIdToken(token);
+      return {
+        _id: decoded.uid,
+        claims: {
+          ...((decoded.additionalClaims as PartialModel<UserModel>) ?? {}),
+          ...pick(decoded, SIGN_IN_TOKEN_CLAIM_KEYS),
+        },
+      };
+    } catch (e) {
+      if ((e as AuthError).code === 'auth/id-token-expired') {
+        throw new AuthTokenError();
+      }
+      throw e;
+    }
   };
 }
