@@ -10,7 +10,7 @@ import {
 } from '@lib/shared/route/utils/trimRoutes/trimRoutes.models';
 
 export const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
-  route.pathname = trimPathname(route.pathname);
+  route.pathname = route.pathname && trimPathname(route.pathname);
   route.depth = route.pathname === '/' ? depth : depth + 1;
   route.fullpath = trimPathname(`${route.parent ?? ''}/${route.pathname}`);
   route.navigation === ROUTE_NAVIGATION.LIST &&

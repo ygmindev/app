@@ -2,8 +2,10 @@ import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { _screen } from '@lib/config/screen/_screen';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { uid } from '@lib/shared/core/utils/uid/uid';
 import {
   type _ScreenModel,
   type _ScreenParamsModel,
@@ -145,9 +147,16 @@ export class _Screen implements _ScreenModel {
       );
   }
 
-  async snapshot({ filename }: { filename?: string }): Promise<Buffer | null> {
+  async snapshot({
+    dirname,
+    filename,
+  }: {
+    dirname?: string;
+    filename?: string | number;
+  }): Promise<Buffer | null> {
     const { snapshotPath } = this.options;
-    snapshotPath && !existsSync(snapshotPath) && mkdirSync(snapshotPath, { recursive: true });
+    const pathname = snapshotPath && joinPaths(filterNil([snapshotPath, dirname]));
+    pathname && !existsSync(pathname) && mkdirSync(pathname, { recursive: true });
     return this.page.screenshot({
       clip: {
         height: this.options.dimension.height ?? 1000,
@@ -155,7 +164,7 @@ export class _Screen implements _ScreenModel {
         x: 0,
         y: 0,
       },
-      path: snapshotPath && filename ? joinPaths([snapshotPath, `${filename}.png`]) : undefined,
+      path: snapshotPath ? joinPaths([pathname, `${filename ?? uid()}.png`]) : undefined,
     });
   }
 

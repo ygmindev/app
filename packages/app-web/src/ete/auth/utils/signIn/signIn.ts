@@ -12,10 +12,10 @@ export const signIn = async ({ isSnapshot, screen }: SignInParamsModel): Promise
   await screen
     .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'email' })
     .then((h) => h?.type(USER_FIXTURE.email ?? ''));
-  isSnapshot && (await screen.snapshot());
+  isSnapshot && (await screen.snapshot({ dirname: SIGN_IN, filename: '1' }));
   await screen.key(KEY_TYPE.ENTER);
   await screen
     .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'otp' })
     .then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
-  isSnapshot && (await screen.snapshot());
+  isSnapshot && (await screen.snapshot({ dirname: SIGN_IN, filename: '2' }));
 };

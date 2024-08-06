@@ -1,8 +1,11 @@
 import { Screen } from '@lib/shared/crawling/utils/Screen/Screen';
 
 export class TestScreen extends Screen {
-  async snapshot({ filename }: { filename?: string } = {}): Promise<Buffer | null> {
-    const img = await super.snapshot({ filename: undefined });
+  async snapshot({
+    dirname,
+    filename,
+  }: { dirname?: string; filename?: string | number } = {}): Promise<Buffer | null> {
+    const img = await super.snapshot({ dirname, filename });
     // expect(img).toMatchImageSnapshot({
     //   customDiffDir: fromWorking(outputPath, 'diffs'),
     //   customReceivedDir: fromWorking(outputPath, 'received'),
