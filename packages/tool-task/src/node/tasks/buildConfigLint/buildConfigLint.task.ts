@@ -2,13 +2,13 @@ import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { DIST_DIR } from '@lib/config/file/file.constants';
 import lintConfig from '@lib/config/node/lint/lint';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
-import buildJson from '@tool/task/core/templates/buildJson/buildJson';
-import { type BuildJsonParamsModel } from '@tool/task/core/templates/buildJson/buildJson.models';
+import buildConfig from '@tool/task/core/templates/buildConfig/buildConfig';
+import { type BuildConfigParamsModel } from '@tool/task/core/templates/buildConfig/buildConfig.models';
 
-const buildConfigLint: TaskParamsModel<BuildJsonParamsModel> = {
-  ...buildJson,
+const buildConfigLint: TaskParamsModel<BuildConfigParamsModel> = {
+  ...buildConfig,
 
-  name: 'build-json-lint',
+  name: 'build-config-lint',
 
   overrides: () => ({
     path: joinPaths([DIST_DIR, lintConfig.params().configPath]),

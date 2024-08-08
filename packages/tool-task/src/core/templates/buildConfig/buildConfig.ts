@@ -1,9 +1,9 @@
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
-import { type BuildJsonParamsModel } from '@tool/task/core/templates/buildJson/buildJson.models';
+import { type BuildConfigParamsModel } from '@tool/task/core/templates/buildConfig/buildConfig.models';
 
-const buildJson: TaskParamsModel<BuildJsonParamsModel> = {
-  name: 'build-json',
+const buildConfig: TaskParamsModel<BuildConfigParamsModel> = {
+  name: 'build-config',
 
   task: [
     async ({ options }) => {
@@ -16,4 +16,4 @@ const buildJson: TaskParamsModel<BuildJsonParamsModel> = {
   ],
 };
 
-export default buildJson;
+export default buildConfig;

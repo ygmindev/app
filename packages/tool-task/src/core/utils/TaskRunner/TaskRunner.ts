@@ -101,12 +101,12 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     variables,
   }: TaskParamsModel<TType>): Promise<void> => {
     const overridesF = overrides && overrides();
-    let optionsF = { ...parseArgs(), ...overridesF } as TType & object;
+    let optionsF = { ...(overridesF ?? {}), ...parseArgs() } as TType & object;
     if (options) {
-      const optionsPromps = options({ name, overrides: overridesF, root });
+      const optionsPrompts = options({ name, overrides: overridesF, root });
       optionsF = {
         ...optionsF,
-        ...((await prompt(optionsPromps.filter(({ key }) => !(key in optionsF)))) as object),
+        ...((await prompt(optionsPrompts.filter(({ key }) => !(key in optionsF)))) as object),
       };
     }
 

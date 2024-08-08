@@ -11,8 +11,8 @@ export const build: TaskParamsModel<unknown> = {
 
   name: 'build',
 
-  // onBefore: ['node-post-install', 'build-json-typescript', 'build-json-lint'],
-  onBefore: ['build-json-typescript', 'build-json-lint'],
+  // onBefore: ['node-post-install', 'build-config-typescript', 'build-config-lint'],
+  onBefore: ['build-config-typescript', 'build-config-lint'],
 
   task: [
     ({ root }) =>

@@ -13,7 +13,7 @@ const lint: TaskParamsModel<RunAllParamsModel> = merge(
         patterns: [/lint/],
       }),
 
-      task: ['build-json-typescript', 'build-json-lint'],
+      task: ['build-config-typescript', 'build-config-lint'],
     },
 
     runAll,
