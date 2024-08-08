@@ -1,4 +1,4 @@
-import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { DIST_DIR } from '@lib/config/file/file.constants';
 import lintConfig from '@lib/config/node/lint/lint';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
@@ -11,7 +11,7 @@ const buildConfigLint: TaskParamsModel<BuildConfigParamsModel> = {
   name: 'build-config-lint',
 
   overrides: () => ({
-    path: joinPaths([DIST_DIR, lintConfig.params().configPath]),
+    path: fromWorking(DIST_DIR, lintConfig.params().configFilename),
     value: lintConfig.config(),
   }),
 };

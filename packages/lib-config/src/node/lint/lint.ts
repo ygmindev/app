@@ -10,8 +10,8 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
 
 export const lintCommand = (fix?: boolean): string => {
-  const { configPath, exclude, include } = config.params();
-  return `npx eslint --config ${configPath} ${
+  const { configFilename, exclude, include } = config.params();
+  return `npx eslint --config ${fromDist(configFilename)} ${
     fix ? '--fix' : ''
   } --no-error-on-unmatched-pattern ${exclude
     .map((pattern) => `--ignore-pattern "${pattern}"`)
@@ -22,7 +22,7 @@ const config = defineConfig<LintConfigModel, _LintConfigModel>({
   config: _lint,
 
   params: () => ({
-    configPath: fromDist('.eslintrc.json'),
+    configFilename: '.eslintrc.json',
 
     exclude: [],
 

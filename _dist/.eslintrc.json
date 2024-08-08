@@ -13,10 +13,7 @@
     "plugin:typescript-sort-keys/recommended"
   ],
   "ignorePatterns": [
-    "!(../packages/*/src/**/*.tsx|../packages/*/src/**/*.ts|../packages/*/src/**/*.jsx|../packages/*/src/**/*.js)",
-    "bundle.js",
-    "serverless.js",
-    "web.js"
+    "!(../packages/*/src/**/*.tsx|../packages/*/src/**/*.ts|../packages/*/src/**/*.jsx|../packages/*/src/**/*.js)"
   ],
   "overrides": [
     {
