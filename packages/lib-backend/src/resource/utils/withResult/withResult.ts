@@ -10,12 +10,12 @@ import { Mutation, Query } from 'type-graphql';
 export const withResult =
   <TType extends unknown>({
     Resource,
-    level = ACCESS_LEVEL.PUBLIC,
+    access = ACCESS_LEVEL.PUBLIC,
     name,
     operation = GRAPHQL_OPERATION_TYPE.QUERY,
   }: WithResultParamsModel<TType>): WithResultModel =>
   (target, propertyKey, descriptor) => {
-    withAccess({ level })(target, propertyKey, descriptor);
+    withAccess({ access })(target, propertyKey, descriptor);
     (operation === GRAPHQL_OPERATION_TYPE.QUERY ? Query : Mutation)(Resource, {
       name,
     })(target, propertyKey, descriptor);

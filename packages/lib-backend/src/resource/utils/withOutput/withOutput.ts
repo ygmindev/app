@@ -12,7 +12,7 @@ export const withOutput =
   <TMethod extends ResourceMethodTypeModel, TType, TRoot = undefined>({
     Resource,
     RootResource,
-    level = ACCESS_LEVEL.PUBLIC,
+    access = ACCESS_LEVEL.PUBLIC,
     method,
     name,
   }: WithOutputParamsModel<TMethod, TType, TRoot>): WithOutputModel =>
@@ -21,7 +21,7 @@ export const withOutput =
     const OutputF = createOutput({ Resource, RootResource, method, name: nameF });
     withResult({
       Resource: () => OutputF ?? Boolean,
-      level,
+      access,
       name: nameF,
       operation: getOperationType(method),
     })(target, propertyKey, descriptor);

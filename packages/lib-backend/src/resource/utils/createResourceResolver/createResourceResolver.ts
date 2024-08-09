@@ -64,7 +64,7 @@ export const createResourceResolver = <
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.CREATE],
+          access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.CREATE],
           method: RESOURCE_METHOD_TYPE.CREATE,
           name,
         }),
@@ -102,7 +102,7 @@ export const createResourceResolver = <
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
+          access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
           method: RESOURCE_METHOD_TYPE.CREATE_MANY,
           name,
         }),
@@ -138,7 +138,7 @@ export const createResourceResolver = <
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET],
+          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET],
           method: RESOURCE_METHOD_TYPE.GET,
           name,
         }),
@@ -171,7 +171,7 @@ export const createResourceResolver = <
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
+          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
           method: RESOURCE_METHOD_TYPE.GET_MANY,
           name,
         }),
@@ -204,7 +204,7 @@ export const createResourceResolver = <
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET_CONNECTION],
+          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET_CONNECTION],
           method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
           name,
         }),
@@ -235,7 +235,7 @@ export const createResourceResolver = <
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.UPDATE],
+          access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.UPDATE],
           method: RESOURCE_METHOD_TYPE.UPDATE,
           name,
         }),
@@ -266,7 +266,7 @@ export const createResourceResolver = <
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.REMOVE],
+          access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.REMOVE],
           method: RESOURCE_METHOD_TYPE.REMOVE,
           name,
         }),
@@ -297,7 +297,7 @@ export const createResourceResolver = <
         withOutput({
           Resource,
           RootResource,
-          level: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.SEARCH],
+          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.SEARCH],
           method: RESOURCE_METHOD_TYPE.SEARCH,
           name,
         }),

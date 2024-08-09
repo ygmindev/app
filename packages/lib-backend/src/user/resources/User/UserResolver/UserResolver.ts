@@ -18,6 +18,7 @@ export class UserResolver
     ResourceImplementation: UserImplementation,
     access: {
       [RESOURCE_METHOD_TYPE.GET]: ACCESS_LEVEL.PUBLIC,
+      [RESOURCE_METHOD_TYPE.UPDATE]: ACCESS_LEVEL.PROTECTED,
     },
     authorizer: {
       // Update: ({ context, input }) => isEqual(context?.user?._id, input?.filter?._id),
