@@ -20,9 +20,8 @@ export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type
       isNavigatable && isActive({ isExact: true, pathname: fullpath ?? pathname }),
   );
 
-  const isMountedF = isActive({ isExact: true, pathname: route?.fullpath });
-
   useEffect(() => {
+    const isMountedF = isActive({ isExact: true, pathname: route?.fullpath });
     if (isMountedF && !isActiveF && route?.routes) {
       const child = find<RouteModel>(route.routes, ({ isNavigatable = true }) => isNavigatable);
       if (child) {
@@ -30,7 +29,7 @@ export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type
         push({ pathname });
       }
     }
-  }, [isActiveF, isMountedF]);
+  }, [isActiveF]);
 
   return (
     <Wrapper

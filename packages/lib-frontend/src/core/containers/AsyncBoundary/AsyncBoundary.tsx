@@ -70,7 +70,7 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
           <Button
             icon="refresh"
             onPress={async () => {
-              void (await onRefresh?.());
+              await onRefresh?.();
               handleRefresh();
               await sleep();
               errorContextSet(undefined);

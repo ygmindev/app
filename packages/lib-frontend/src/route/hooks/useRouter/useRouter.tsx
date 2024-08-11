@@ -18,10 +18,10 @@ export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
     callback: () => void,
     { isBack }: Pick<LocationUpdateModel<TTypeNext>, 'isBack'>,
   ): Promise<void> => {
+    await sleep();
     if (!isLoading) {
       if (isBack) {
         isBackSet(true);
-        await sleep();
       }
       callback();
       if (isBack) {
