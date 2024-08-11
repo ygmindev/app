@@ -1,4 +1,5 @@
-require('tsconfig-paths').register({ addMatchAll: false });
+// require('tsconfig-paths').register({ addMatchAll: false });
+require('tsconfig-paths').register();
 
 module.exports.nodeRegister = ({ module = 'nodenext' } = {}) => {
   require('ts-node').register({
