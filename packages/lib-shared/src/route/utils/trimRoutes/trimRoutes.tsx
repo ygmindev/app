@@ -46,7 +46,6 @@ export const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
     ];
     route.element = undefined;
   }
-
   route.routes &&
     (route.routes = route.routes.map((child) =>
       trimRoute({ ...child, parent: route.fullpath }, route.depth),

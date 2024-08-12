@@ -31,6 +31,6 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "GitHub Dark",
   "workbench.iconTheme": "vs-minimal",
-  "workbench.sideBar.location": "right",
+  "workbench.sideBar.location": "left",
   "typescript.tsdk": "node_modules/typescript/lib"
 }
