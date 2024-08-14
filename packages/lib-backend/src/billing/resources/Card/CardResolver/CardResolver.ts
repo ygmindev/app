@@ -1,4 +1,4 @@
-import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
+// import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { Card } from '@lib/backend/billing/resources/Card/Card';
 import { CardImplementation } from '@lib/backend/billing/resources/Card/CardImplementation/CardImplementation';
 import { type CardResolverModel } from '@lib/backend/billing/resources/Card/CardResolver/CardResolver.models';
@@ -17,7 +17,7 @@ export class CardResolver
     Resource: () => Card,
     ResourceImplementation: CardImplementation,
     RootResource: () => User,
-    authorizer: { default: selfAuthorizer() },
+    // authorizer: { default: selfAuthorizer() },
     name: CARD_RESOURCE_NAME,
   })
   implements CardResolverModel {}

@@ -29,7 +29,7 @@ export const createResourceResolver = <
   ResourceData,
   ResourceImplementation,
   RootResource,
-  access = { default: ACCESS_LEVEL.RESTRICTED },
+  access = { default: ACCESS_LEVEL.PROTECTED },
   authorizer,
   name,
 }: CreateResourceResolverParamsModel<TType, TForm, TRoot>): CreateResourceResolverModel<

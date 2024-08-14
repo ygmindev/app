@@ -43,7 +43,6 @@ export class SignInResolver
 
   @withOutput({
     Resource: () => SignIn,
-    access: ACCESS_LEVEL.PROTECTED,
     method: RESOURCE_METHOD_TYPE.UPDATE,
     name: SIGN_IN_USER,
   })
@@ -62,7 +61,6 @@ export class SignInResolver
 
   @withOutput({
     Resource: () => SignIn,
-    access: ACCESS_LEVEL.PROTECTED,
     method: RESOURCE_METHOD_TYPE.CREATE,
     name: SIGN_IN_USERNAME,
   })

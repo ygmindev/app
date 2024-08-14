@@ -1,4 +1,3 @@
-import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { PaymentArgs } from '@lib/backend/billing/resources/PaymentArgs/PaymentArgs';
 import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethod';
 import { PaymentMethodImplementation } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation';
@@ -25,7 +24,7 @@ export class PaymentMethodResolver
     Resource: () => PaymentMethod,
     ResourceImplementation: PaymentMethodImplementation,
     RootResource: () => User,
-    authorizer: { default: selfAuthorizer() },
+    // authorizer: { default: selfAuthorizer() },
     name: PAYMENT_METHOD_RESOURCE_NAME,
   })
   implements PaymentMethodResolverModel

@@ -52,17 +52,16 @@ export const _renderServer =
             ]
           : result.loaders,
       }),
-      {
-        isProtectable: false,
-        loaders: [] as Array<Promise<unknown>>,
-      },
+      { isProtectable: false, loaders: [] as Array<Promise<unknown>> },
     );
+
     loaders && (await Promise.all(loaders));
 
     const store = new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
       cookies: context?.state?.cookies,
       reducers: ROOT_REDUCERS,
     });
+
     const contextF: RootContextModel = merge([
       {
         [QUERY]: { client: queryClient.client },
@@ -70,6 +69,7 @@ export const _renderServer =
       },
       context,
     ]);
+
     const { element, getStyleSheet } = render({
       context: contextF,
       element: <Page {...pageProps} />,
