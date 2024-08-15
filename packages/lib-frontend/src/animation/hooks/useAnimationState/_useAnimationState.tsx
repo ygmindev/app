@@ -14,7 +14,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   onElementStateChange,
   ref = null,
 }: _UseAnimationStateParamsModel<TStyle>): _UseAnimationStateModel<TStyle> => {
-  const { delay, duration, isInfinite, isInitial = true, states } = animation ?? {};
+  const { delay, duration, isInfinite, isInitial, states } = animation ?? {};
   const animationState = useDynamicAnimation();
   const elementStateF = states && elementState ? (states[elementState] as never) : undefined;
   return {

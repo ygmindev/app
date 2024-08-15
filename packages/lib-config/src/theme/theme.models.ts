@@ -13,6 +13,8 @@ export type ThemeConfigModel = {
   animation: {
     effect: number;
 
+    isInitial: boolean;
+
     transition: number;
   };
 

@@ -54,6 +54,7 @@ export const _runServer = async ({
   };
 
   handleHmr({ onChange: handleClose });
+
   await handleCleanup({
     onCleanup: async () => {
       await onClose();

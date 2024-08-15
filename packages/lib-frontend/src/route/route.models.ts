@@ -1,3 +1,4 @@
+import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import { type AsyncTextModel, type ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import { type ROUTE_NAVIGATION, type ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
@@ -22,7 +23,7 @@ export type RouteModel<
   isProtectable?: boolean;
   layoutProps?: LayoutStylePropsModel;
   loaders?: {
-    [TKey in StringKeyModel<TType>]?: () => Promise<TType[TKey]>;
+    [TKey in StringKeyModel<TType>]?: (params?: RequestContextModel) => Promise<TType[TKey]>;
   };
   namespaces?: Array<string>;
   navigation?: RouteNavigationModel;
