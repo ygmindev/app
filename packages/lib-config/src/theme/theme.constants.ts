@@ -1,7 +1,6 @@
 import { type ThemeConfigModel } from '@lib/config/theme/theme.models';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { type ThemeColorModel } from '@lib/frontend/style/style.models';
-import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 
 export const THEME_COLOR_TONES: Record<ThemeColorModel, string> = {
   [THEME_COLOR.ERROR]: '#f44336',
@@ -14,7 +13,7 @@ export const THEME_COLOR_TONES: Record<ThemeColorModel, string> = {
 export const THEME_ANIMATION: ThemeConfigModel['animation'] = {
   effect: 200,
 
-  isInitial: !isServer,
+  isInitial: true,
 
   transition: 350,
 };

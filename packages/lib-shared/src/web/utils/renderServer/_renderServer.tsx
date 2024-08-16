@@ -57,7 +57,9 @@ export const _renderServer =
     if (user) {
       requestContext.user = user;
       initialState[USER] = { currentUser: user };
-      initialState[AUTH].status = AUTH_STATUS.AUTHENTICATED;
+      initialState[AUTH] = { status: AUTH_STATUS.AUTHENTICATED };
+    } else {
+      initialState[AUTH] = { status: AUTH_STATUS.UNAUTHENTICATED };
     }
 
     // Routing
