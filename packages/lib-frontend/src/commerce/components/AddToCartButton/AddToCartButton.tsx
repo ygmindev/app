@@ -1,4 +1,5 @@
 import { ORDER } from '@lib/frontend/commerce/commerce.constants';
+import { ADD_TO_CART_BUTTON_TEST_ID } from '@lib/frontend/commerce/components/AddToCartButton/AddToCartButton.constants';
 import { type AddToCartButtonPropsModel } from '@lib/frontend/commerce/components/AddToCartButton/AddToCartButton.models';
 import { ProductItemInput } from '@lib/frontend/commerce/containers/ProductItemInput/ProductItemInput';
 import { Button } from '@lib/frontend/core/components/Button/Button';
@@ -40,7 +41,8 @@ export const AddToCartButton: LFCModel<AddToCartButtonPropsModel> = ({ item, ...
           <Button onPress={() => push({ pathname: ORDER })}>{t('commerce:order')}</Button>
         </MainLayout>
       )}
-      onPress={handleAdd}>
+      onPress={handleAdd}
+      testID={ADD_TO_CART_BUTTON_TEST_ID}>
       {t('commerce:addToCart')}
     </ModalButton>
   );

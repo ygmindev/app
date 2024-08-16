@@ -1,3 +1,4 @@
 {
-  "extends": "./_dist/tsconfig.json"
+  "extends": "./_dist/tsconfig.json",
+  "include": ["./packages"]
 }

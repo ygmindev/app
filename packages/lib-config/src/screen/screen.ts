@@ -8,13 +8,13 @@ const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
   config: _screen,
 
   params: () => ({
-    delay: 2000,
+    delay: 1000,
 
     dimension: { height: 5000, width: 1440 },
 
-    elementTimeout: 5000,
+    elementTimeout: 10e3,
 
-    isHeadless: true,
+    isHeadless: false,
 
     isIgnoreMedia: true,
 
