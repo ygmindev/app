@@ -18,8 +18,6 @@ import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 const resources = Object.keys(CACHE_RESOURCES);
 
 const cacheDatabase: TaskParamsModel<CacheDatabaseParamsModel> = {
-  // onBefore: ['database-start'],
-
   environment: ENVIRONMENT.DEVELOPMENT,
 
   name: 'cache-database',

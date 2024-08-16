@@ -181,6 +181,8 @@ const getSelector = (selector: SelectorModel): string => {
   switch (selector.type) {
     case SELECTOR_TYPE.DATA:
       return `[${selector.key}="${selector.value}"]`;
+    case SELECTOR_TYPE.TEST_ID:
+      return `[data-testid="${selector.value}"]`;
     case SELECTOR_TYPE.ID:
       return `#${selector.value}`;
     case SELECTOR_TYPE.TEXT:

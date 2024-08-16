@@ -9,11 +9,9 @@ describe('billing', () => {
     const screen = new TestScreen({ rootUri: APP_URI });
     await screen.open(PRODUCTS);
     const addToCartButtons = await screen.findAll({
-      key: 'data-testid',
-      type: SELECTOR_TYPE.DATA,
+      type: SELECTOR_TYPE.TEST_ID,
       value: ADD_TO_CART_BUTTON_TEST_ID,
     });
-    console.warn(`@@@ ${addToCartButtons.length}`);
     expect(true).toBe(true);
   });
 });

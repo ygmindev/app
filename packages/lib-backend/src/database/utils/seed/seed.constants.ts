@@ -26,7 +26,7 @@ export const SEED_DATA = [
         root: output.result?._id,
       });
     },
-    data: () => PRODUCT_FIXTURES,
+    data: () => PRODUCT_FIXTURES.map(({ Pricing: _, ...params }) => params),
     name: PRODUCT_RESOURCE_NAME,
   },
 
