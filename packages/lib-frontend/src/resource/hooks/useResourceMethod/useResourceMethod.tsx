@@ -10,9 +10,11 @@ import {
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { expandFilter } from '@lib/shared/resource/utils/expandFilter/expandFilter';
 import { getOperationType } from '@lib/shared/resource/utils/getOperationType/getOperationType';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceImplementationBeforeDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 
 const getConnectionFields = <TType, TRoot = undefined>(
   fields: GraphqlQueryParamsFieldsModel<TType>,
@@ -56,9 +58,44 @@ export const useResourceMethod = <
     method === RESOURCE_METHOD_TYPE.GET_CONNECTION
       ? getConnectionFields(fields as GraphqlQueryParamsFieldsModel<TType>)
       : fields;
+
+  const beforeF: ResourceImplementationBeforeDecoratorModel<TMethod, TType, TForm, TRoot> = async ({
+    input,
+  }) => {
+    let inputF = before ? await before({ input }) : input;
+    if (
+      method in
+      [
+        RESOURCE_METHOD_TYPE.GET,
+        RESOURCE_METHOD_TYPE.GET_MANY,
+        RESOURCE_METHOD_TYPE.GET_CONNECTION,
+        RESOURCE_METHOD_TYPE.UPDATE,
+        RESOURCE_METHOD_TYPE.REMOVE,
+      ]
+    ) {
+      const inputFF = inputF as unknown as InputModel<
+        | RESOURCE_METHOD_TYPE.GET
+        | RESOURCE_METHOD_TYPE.GET_MANY
+        | RESOURCE_METHOD_TYPE.GET_CONNECTION
+        | RESOURCE_METHOD_TYPE.UPDATE
+        | RESOURCE_METHOD_TYPE.REMOVE,
+        TType,
+        TForm,
+        TRoot
+      >;
+      inputF = { ...inputFF, filter: expandFilter(inputFF?.filter) } as InputModel<
+        ResourceMethodTypeModel,
+        TType,
+        TForm,
+        TRoot
+      >;
+    }
+    return inputF;
+  };
+
   return {
     query: async (input) => {
-      const inputF = before ? await before({ input }) : input;
+      const inputF = await beforeF({ input });
       const rootF = inputF?.root ?? root;
       const output = (await query<
         { input: InputModel<TMethod, TType, TForm> },

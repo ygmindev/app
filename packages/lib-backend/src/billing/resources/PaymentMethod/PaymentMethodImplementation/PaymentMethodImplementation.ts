@@ -155,17 +155,22 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
   }
 
   async removeToken(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, boolean, IdArgsModel, UserModel>,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, boolean, UserModel>> {
+    input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, boolean, IdArgsModel, UserModel>,
+  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, boolean, UserModel>> {
     if (input?.root) {
-      const { result: linkedUser } = await this.linkedUserImplementation.get({
-        filter: [{ field: 'type', value: LINKED_USER_TYPE.STRIPE }],
-        options: { project: { _id: true, externalId: true } },
-        root: input.root,
-      });
-      return {
-        result: true,
-      };
+      // const { result: linkedUser } = await this.linkedUserImplementation.get({
+      //   filter: [{ field: 'type', value: LINKED_USER_TYPE.STRIPE }],
+      //   options: { project: { _id: true, externalId: true } },
+      //   root: input.root,
+      // });
+      const id = input.filter?.[0]?.value as string;
+      if (id) {
+        console.warn(id);
+        void this.stripeAdminImplementation.removeToken(id);
+      } else {
+        throw new NotFoundError('id');
+      }
+      return { result: true };
     }
     throw new UnauthenticatedError();
   }
