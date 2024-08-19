@@ -6,6 +6,7 @@ import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEmbeddedResourceResolver } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
+import { IdArgs } from '@lib/backend/resource/utils/IdArgs/IdArgs';
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
 import { User } from '@lib/backend/user/resources/User/User';
@@ -13,6 +14,7 @@ import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/Paym
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { IdArgsModel } from '@lib/shared/resource/utils/IdArgs/IdArgs.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
@@ -24,7 +26,6 @@ export class PaymentMethodResolver
     Resource: () => PaymentMethod,
     ResourceImplementation: PaymentMethodImplementation,
     RootResource: () => User,
-    // authorizer: { default: selfAuthorizer() },
     name: PAYMENT_METHOD_RESOURCE_NAME,
   })
   implements PaymentMethodResolverModel
@@ -43,5 +44,21 @@ export class PaymentMethodResolver
     input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, PaymentArgsModel, UserModel>,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
     return Container.get(PaymentMethodImplementation).createToken(input);
+  }
+
+  @withOutput({
+    Resource: () => Boolean,
+    method: RESOURCE_METHOD_TYPE.REMOVE,
+    name: `${PAYMENT_METHOD_RESOURCE_NAME}Token`,
+  })
+  async removeToken(
+    @withInput({
+      Resource: () => IdArgs,
+      method: RESOURCE_METHOD_TYPE.REMOVE,
+      name: `${PAYMENT_METHOD_RESOURCE_NAME}Token`,
+    })
+    input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, boolean, IdArgsModel, UserModel>,
+  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, boolean, UserModel>> {
+    return Container.get(PaymentMethodImplementation).removeToken(input);
   }
 }

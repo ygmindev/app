@@ -6,6 +6,7 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodTypeModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { ExternalError } from '@lib/shared/core/errors/ExternalError/ExternalError';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import Stripe from 'stripe';
 
 @withContainer()
@@ -39,6 +40,14 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
         }
       })() ?? undefined
     );
+  };
+
+  removeToken = async (params: string): Promise<void> => {
+    try {
+      await this.stripe.paymentIntents.cancel(params);
+    } catch (e) {
+      logger.error(e);
+    }
   };
 
   createToken = async ({

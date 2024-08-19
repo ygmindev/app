@@ -8,6 +8,7 @@ import { useCardResource } from '@lib/frontend/billing/hooks/useCardResource/use
 import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { REDIRECT } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { useUnmount } from '@lib/frontend/core/hooks/useUnmount/useUnmount';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -19,19 +20,24 @@ import {
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { APP_URI } from '@lib/shared/http/http.constants';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 export const NewPaymentMethodInput: RLFCModel<
   NewPaymentMethodInputRefModel,
   NewPaymentMethodInputPropsModel
 > = forwardRef(({ products, redirectTo = `${APP_URI}/${REDIRECT}`, ...props }, ref) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { createToken } = usePaymentMethodResource();
+  const [currentToken, currentTokenSet] = useState<string>();
+  const { createToken, removeToken } = usePaymentMethodResource();
 
   const currentUser = useCurrentUser();
   const { create: bankCreate } = useBankResource({ root: currentUser?._id });
   const { create: cardCreate } = useCardResource({ root: currentUser?._id });
   const actions = useActions();
+
+  useUnmount(() => {
+    currentToken && void removeToken({ filter: [{ field: 'id', value: currentToken }] });
+  });
 
   const handleCreate = async ({
     type,
@@ -54,9 +60,11 @@ export const NewPaymentMethodInput: RLFCModel<
       {...wrapperProps}
       flex
       id="paymentMethodToken"
-      query={async () =>
-        (await createToken({ form: { products }, root: currentUser?._id })).result
-      }>
+      query={async () => {
+        const token = (await createToken({ form: { products }, root: currentUser?._id })).result;
+        token && currentTokenSet(token);
+        return token;
+      }}>
       {({ data }) =>
         data && (
           <_NewPaymentMethodInput

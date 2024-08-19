@@ -27,6 +27,7 @@ import { pick } from '@lib/shared/core/utils/pick/pick';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
+import { IdArgsModel } from '@lib/shared/resource/utils/IdArgs/IdArgs.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { LINKED_USER_TYPE } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
@@ -149,6 +150,22 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
         };
       }
       throw new NotFoundError('linked user');
+    }
+    throw new UnauthenticatedError();
+  }
+
+  async removeToken(
+    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, boolean, IdArgsModel, UserModel>,
+  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, boolean, UserModel>> {
+    if (input?.root) {
+      const { result: linkedUser } = await this.linkedUserImplementation.get({
+        filter: [{ field: 'type', value: LINKED_USER_TYPE.STRIPE }],
+        options: { project: { _id: true, externalId: true } },
+        root: input.root,
+      });
+      return {
+        result: true,
+      };
     }
     throw new UnauthenticatedError();
   }

@@ -7,6 +7,8 @@ export type StripeAdminImplementationModel = {
   createToken(params: StripeCreateTokenParamsModel): Promise<string | undefined>;
 
   getFingerprint(params: { id: string; type: PaymentMethodTypeModel }): Promise<string | undefined>;
+
+  removeToken(params: string): Promise<void>;
 };
 
 export type StripeCreateTokenParamsModel = {
