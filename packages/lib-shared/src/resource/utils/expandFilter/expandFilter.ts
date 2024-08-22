@@ -1,5 +1,3 @@
-import isArray from 'lodash/isArray';
-
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { trueTypeOf } from '@lib/shared/core/utils/trueTypeOf/trueTypeOf';
 import {

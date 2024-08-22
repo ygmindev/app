@@ -64,14 +64,15 @@ export const useResourceMethod = <
   }) => {
     let inputF = before ? await before({ input }) : input;
     if (
-      method in
-      [
-        RESOURCE_METHOD_TYPE.GET,
-        RESOURCE_METHOD_TYPE.GET_MANY,
-        RESOURCE_METHOD_TYPE.GET_CONNECTION,
-        RESOURCE_METHOD_TYPE.UPDATE,
-        RESOURCE_METHOD_TYPE.REMOVE,
-      ]
+      (
+        [
+          RESOURCE_METHOD_TYPE.GET,
+          RESOURCE_METHOD_TYPE.GET_MANY,
+          RESOURCE_METHOD_TYPE.GET_CONNECTION,
+          RESOURCE_METHOD_TYPE.UPDATE,
+          RESOURCE_METHOD_TYPE.REMOVE,
+        ] as Array<ResourceMethodTypeModel>
+      ).includes(method)
     ) {
       const inputFF = inputF as unknown as InputModel<
         | RESOURCE_METHOD_TYPE.GET
