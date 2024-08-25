@@ -6,7 +6,7 @@ build-backend = "poetry.core.masonry.api"
 line-length=100
 
 [tool.poetry]
-name = "lib-python"
+name = "lib-ai"
 description = ""
 version = "0.0.1"
 license = "MIT"

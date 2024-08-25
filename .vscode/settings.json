@@ -5,15 +5,18 @@
     },
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    },
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  },
   "[typescript]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"
     },
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[python]": {
-    "editor.formatOnType": true,
-    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "editor.minimap.enabled": false,
   "eslint.debug": true,
@@ -34,6 +37,11 @@
   "files.associations": {
     "**/packages/tool-task/templates/**/*": "plaintext"
   },
+  "files.autoSave": "afterDelay",
+  "isort.args": [
+    "--profile",
+    "black"
+  ],
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.importModuleSpecifier": "non-relative",

@@ -3,7 +3,13 @@ requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-line-length=100
+line-length = 100
+
+[tool.isort]
+force_grid_wrap = 0
+line_length = 100
+include_trailing_comma = true
+profile = "black" 
 
 [tool.poetry]
 name = "service-ai"
@@ -15,6 +21,11 @@ authors = ["YG Min <ygmindev@gmail.com>"]
 [tool.poetry.dependencies]
 lib_python = {path="../lib-python", develop=true}
 python = "~3.12"
+transformers = "^4.44.2"
+torch = "^2.4.0"
+torchvision = "^0.19.0"
+torchaudio = "^2.4.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
+isort = "^5.13.2"
