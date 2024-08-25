@@ -15,7 +15,6 @@ export const commerceRoutes: Array<RouteModel> = [
         element: <OrderPage />,
         pathname: '/',
       },
-
       {
         element: <OrderSuccessPage />,
         pathname: SUCCESS,
