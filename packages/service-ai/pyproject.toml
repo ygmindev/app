@@ -6,15 +6,15 @@ build-backend = "poetry.core.masonry.api"
 line-length=100
 
 [tool.poetry]
-name = "lib-python"
+name = "service-ai"
 description = ""
 version = "0.0.1"
 license = "MIT"
 authors = ["YG Min <ygmindev@gmail.com>"]
 
 [tool.poetry.dependencies]
+lib_python = {path="../lib-python", develop=true}
 python = "~3.12"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
-

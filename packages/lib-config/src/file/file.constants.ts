@@ -22,7 +22,7 @@ export const CLEAN_PATTERNS = [
 
 export const DIST_DIR = '_dist';
 
-export const PACKAGE_PREFIXES = ['app', 'backend', 'lib', 'tool'];
+export const PACKAGE_PREFIXES = ['app', 'service', 'lib', 'tool'];
 
 export const PRUNE_PATTERNS: Array<string> = [
   'node_modules/rxjs/src/**',

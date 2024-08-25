@@ -46,18 +46,6 @@
       "@app/web-library/*": [
         "packages/app-web-library/src/*"
       ],
-      "@backend/graphql-sandbox/*": [
-        "packages/backend-graphql-sandbox/src/*"
-      ],
-      "@backend/lambda/*": [
-        "packages/backend-lambda/src/*"
-      ],
-      "@backend/lambda-crawl/*": [
-        "packages/backend-lambda-crawl/src/*"
-      ],
-      "@backend/server/*": [
-        "packages/backend-server/src/*"
-      ],
       "@lib/backend/*": [
         "packages/lib-backend/src/*"
       ],
@@ -69,6 +57,18 @@
       ],
       "@lib/shared/*": [
         "packages/lib-shared/src/*"
+      ],
+      "@service/graphql-sandbox/*": [
+        "packages/service-graphql-sandbox/src/*"
+      ],
+      "@service/lambda/*": [
+        "packages/service-lambda/src/*"
+      ],
+      "@service/lambda-crawl/*": [
+        "packages/service-lambda-crawl/src/*"
+      ],
+      "@service/server/*": [
+        "packages/service-server/src/*"
       ],
       "@tool/task/*": [
         "packages/tool-task/src/*"

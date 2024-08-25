@@ -1,12 +1,11 @@
-import { initialize } from '@service/lambda/setup/utils/initialize/initialize';
-import databaseConfig from '@lib/config/database/database.mongo';
+import { initialize } from 'packages/service-lambda/src/setup/utils/initialize/initialize';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ initialize });
 
 describe(displayName, () => {
   test('works', async () => {
-    await initialize({ database: databaseConfig.params() });
+    const result = await initialize({});
     expect(result).toStrictEqual({});
   });
 });

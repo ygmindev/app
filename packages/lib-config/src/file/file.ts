@@ -1,12 +1,13 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { EXTENSIONS_BASE, FILE_CONFIG, PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
 import { type FileConfigModel } from '@lib/config/file/file.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import { readdirSync } from 'fs';
+import { existsSync, readdirSync } from 'fs';
 import some from 'lodash/some';
 
 export const config = defineConfig<FileConfigModel>({
@@ -33,7 +34,12 @@ export const config = defineConfig<FileConfigModel>({
       ],
 
       packageDirs: readdirSync(fromPackages()).filter((pkg) =>
-        some(PACKAGE_PREFIXES.map((prefix) => pkg.startsWith(prefix))),
+        some(
+          PACKAGE_PREFIXES.map(
+            (prefix) =>
+              pkg.startsWith(prefix) && existsSync(joinPaths([fromPackages(pkg), 'package.json'])),
+          ),
+        ),
       ),
     };
   },

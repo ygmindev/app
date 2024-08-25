@@ -3,10 +3,10 @@ import serverConfig from '@lib/config/node/server/server';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 
-const selfSignCertificate: TaskParamsModel<unknown> = {
+const selfsignCertificate: TaskParamsModel<unknown> = {
   environment: ENVIRONMENT.DEVELOPMENT,
 
-  name: 'self-sign-certificate',
+  name: 'selfsign-certificate',
 
   task: [
     () => {
@@ -17,4 +17,4 @@ const selfSignCertificate: TaskParamsModel<unknown> = {
   ],
 };
 
-export default selfSignCertificate;
+export default selfsignCertificate;

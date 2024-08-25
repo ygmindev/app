@@ -583,7 +583,7 @@ importers:
 
   packages/asset-static: {}
 
-  packages/backend-graphql-sandbox:
+  packages/service-graphql-sandbox:
     dependencies:
       '@apollo/server':
         specifier: ^4.10.5
@@ -742,7 +742,7 @@ importers:
         specifier: 2.0.0-rc.2
         version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.23.0(graphql@16.9.0))(graphql@16.9.0)
 
-  packages/backend-lambda:
+  packages/service-lambda:
     dependencies:
       '@apollo/server':
         specifier: ^4.10.5
@@ -910,7 +910,7 @@ importers:
         specifier: 2.0.0-rc.2
         version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.23.0(graphql@16.9.0))(graphql@16.9.0)
 
-  packages/backend-lambda-crawl:
+  packages/service-lambda-crawl:
     dependencies:
       '@apollo/server':
         specifier: ^4.10.5
@@ -1009,7 +1009,7 @@ importers:
         specifier: 2.0.0-rc.2
         version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.23.0(graphql@16.9.0))(graphql@16.9.0)
 
-  packages/backend-server:
+  packages/service-server:
     dependencies:
       '@babel/core':
         specifier: ^7.25.2
