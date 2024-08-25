@@ -103,3 +103,6 @@ buck-out/
 
 # Certificates
 **/*.pem
+
+# Python
+**/venv
