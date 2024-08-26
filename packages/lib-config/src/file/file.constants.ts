@@ -99,7 +99,7 @@ export const FILE_CONFIG: Pick<
   cacheDir: CACHE_DIR,
   cleanPatterns: CLEAN_PATTERNS,
   distDir: DIST_DIR,
-  excludePatterns: [...CLEAN_PATTERNS, '.git', 'ios/Pods', 'node_modules'],
+  excludePatterns: [...CLEAN_PATTERNS, '.git', '.venv', 'ios/Pods', 'node_modules'],
   packagePrefixes: PACKAGE_PREFIXES,
   prunePatterns: PRUNE_PATTERNS,
   publicDir: PUBLIC_DIR,
