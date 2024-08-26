@@ -2,8 +2,6 @@ from lib_python.core.utils.test import test
 from torch import bfloat16
 from transformers import pipeline
 
-test()
-
 # model_id = "meta-llama/Meta-Llama-3.1-8B-Instruct"
 
 # pipe = pipeline(

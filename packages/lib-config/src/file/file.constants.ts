@@ -18,6 +18,7 @@ export const CLEAN_PATTERNS = [
   '*.log*',
   '.DS_Store',
   'coverage',
+  '__pycache__',
 ];
 
 export const DIST_DIR = '_dist';
