@@ -6,7 +6,7 @@
             "type": "node",
             "request": "launch",
             "sourceMaps": true,
-            "program": "${workspaceRoot}/packages/tool-task/src/index.js",
+            "program": "${workspaceRoot}/packages/tool-task-js/src/index.js",
             "args": ["awd"],
             "outputCapture": "std"
         },
@@ -15,7 +15,7 @@
             "type": "node",
             "request": "launch",
             "sourceMaps": true,
-            "program": "${workspaceRoot}/packages/tool-task/src/index.js",
+            "program": "${workspaceRoot}/packages/tool-task-js/src/index.js",
             "args": ["bsd"],
             "outputCapture": "std"
         }

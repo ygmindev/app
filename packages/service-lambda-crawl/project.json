@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/service-lambda-crawl/src",
+  "sourceRoot": "packages/service-lambda-js-crawl/src",
   "projectType": "library",
   "tags": []
 }

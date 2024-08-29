@@ -13,7 +13,7 @@
     "plugin:typescript-sort-keys/recommended"
   ],
   "ignorePatterns": [
-    "!(../packages/*/src/**/*.tsx|../packages/*/src/**/*.ts|../packages/*/src/**/*.jsx|../packages/*/src/**/*.js)"
+    "!(../packages/*/src/**/*.tsx|../packages/*/src/**/*.ts|../packages/*/src/**/*.jsx|../packages/*/src/**/*.js|../packages/*/tests/**/*.tsx|../packages/*/tests/**/*.ts|../packages/*/tests/**/*.jsx|../packages/*/tests/**/*.js)"
   ],
   "overrides": [
     {

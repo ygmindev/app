@@ -8,7 +8,7 @@ importers:
 
   .: {}
 
-  packages/app-native:
+  packages/app-native-js:
     dependencies:
       '@amplitude/react-native':
         specifier: ^2.17.3
@@ -206,7 +206,70 @@ importers:
         specifier: ^1.3.4
         version: 1.3.4
 
-  packages/app-web:
+  packages/app-web-admin-js:
+    dependencies:
+      '@egjs/react-infinitegrid':
+        specifier: ^4.11.1
+        version: 4.12.0
+      '@floating-ui/react':
+        specifier: ^0.26.12
+        version: 0.26.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@floating-ui/react-dom':
+        specifier: ^2.0.8
+        version: 2.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-google-maps/api':
+        specifier: ^2.19.3
+        version: 2.19.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@reduxjs/toolkit':
+        specifier: 2.2.3
+        version: 2.2.3(react-redux@9.1.2(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
+      '@rpldy/upload-button':
+        specifier: ^1.8.0
+        version: 1.8.2(react@18.3.1)
+      '@rpldy/upload-drop-zone':
+        specifier: ^1.8.0
+        version: 1.8.2(react@18.3.1)
+      '@rpldy/uploader':
+        specifier: ^1.8.0
+        version: 1.8.2
+      '@rpldy/uploady':
+        specifier: ^1.8.0
+        version: 1.8.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      color:
+        specifier: ^4.2.3
+        version: 4.2.3
+      date-fns:
+        specifier: ^3.6.0
+        version: 3.6.0
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-day-picker:
+        specifier: ^8.10.1
+        version: 8.10.1(date-fns@3.6.0)(react@18.3.1)
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+      react-native-reanimated:
+        specifier: 3.8.1
+        version: 3.8.1(@babel/core@7.25.2)(react-native@0.73.9(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(react@18.3.1))(react@18.3.1)
+      react-native-vector-icons:
+        specifier: ^9.2.0
+        version: 9.2.0
+      react-native-web:
+        specifier: ^0.18.12
+        version: 0.18.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-redux:
+        specifier: ^9.1.1
+        version: 9.1.2(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1)
+      redux-persist:
+        specifier: ^6.0.0
+        version: 6.0.0(react@18.3.1)(redux@5.0.1)
+      redux-persist-cookie-storage:
+        specifier: ^1.0.0
+        version: 1.0.0
+
+  packages/app-web-js:
     dependencies:
       '@babel/core':
         specifier: ^7.24.4
@@ -455,70 +518,7 @@ importers:
         specifier: ^9.0.1
         version: 9.0.1
 
-  packages/app-web-admin:
-    dependencies:
-      '@egjs/react-infinitegrid':
-        specifier: ^4.11.1
-        version: 4.12.0
-      '@floating-ui/react':
-        specifier: ^0.26.12
-        version: 0.26.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@floating-ui/react-dom':
-        specifier: ^2.0.8
-        version: 2.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@react-google-maps/api':
-        specifier: ^2.19.3
-        version: 2.19.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@reduxjs/toolkit':
-        specifier: 2.2.3
-        version: 2.2.3(react-redux@9.1.2(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
-      '@rpldy/upload-button':
-        specifier: ^1.8.0
-        version: 1.8.2(react@18.3.1)
-      '@rpldy/upload-drop-zone':
-        specifier: ^1.8.0
-        version: 1.8.2(react@18.3.1)
-      '@rpldy/uploader':
-        specifier: ^1.8.0
-        version: 1.8.2
-      '@rpldy/uploady':
-        specifier: ^1.8.0
-        version: 1.8.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      color:
-        specifier: ^4.2.3
-        version: 4.2.3
-      date-fns:
-        specifier: ^3.6.0
-        version: 3.6.0
-      react:
-        specifier: ^18.3.1
-        version: 18.3.1
-      react-day-picker:
-        specifier: ^8.10.1
-        version: 8.10.1(date-fns@3.6.0)(react@18.3.1)
-      react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
-      react-native-reanimated:
-        specifier: 3.8.1
-        version: 3.8.1(@babel/core@7.25.2)(react-native@0.73.9(@babel/core@7.25.2)(@babel/preset-env@7.25.3(@babel/core@7.25.2))(react@18.3.1))(react@18.3.1)
-      react-native-vector-icons:
-        specifier: ^9.2.0
-        version: 9.2.0
-      react-native-web:
-        specifier: ^0.18.12
-        version: 0.18.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-redux:
-        specifier: ^9.1.1
-        version: 9.1.2(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1)
-      redux-persist:
-        specifier: ^6.0.0
-        version: 6.0.0(react@18.3.1)(redux@5.0.1)
-      redux-persist-cookie-storage:
-        specifier: ^1.0.0
-        version: 1.0.0
-
-  packages/app-web-library:
+  packages/app-web-library-js:
     dependencies:
       '@egjs/react-infinitegrid':
         specifier: ^4.11.1
@@ -583,166 +583,15 @@ importers:
 
   packages/asset-static: {}
 
-  packages/service-graphql-sandbox:
-    dependencies:
-      '@apollo/server':
-        specifier: ^4.10.5
-        version: 4.10.5(graphql@16.9.0)
-      '@as-integrations/aws-lambda':
-        specifier: ^3.1.0
-        version: 3.1.0(@apollo/server@4.10.5(graphql@16.9.0))
-      '@aws-sdk/client-apigatewaymanagementapi':
-        specifier: ^3.621.0
-        version: 3.623.0
-      '@babel/core':
-        specifier: ^7.25.2
-        version: 7.25.2
-      '@fastify/compress':
-        specifier: ^7.0.3
-        version: 7.0.3
-      '@fastify/cookie':
-        specifier: ^9.3.1
-        version: 9.3.1
-      '@fastify/middie':
-        specifier: ^8.3.1
-        version: 8.3.1
-      '@fastify/static':
-        specifier: ^7.0.4
-        version: 7.0.4
-      '@mikro-orm/core':
-        specifier: ^6.3.1
-        version: 6.3.3
-      '@mikro-orm/mongodb':
-        specifier: ^6.3.1
-        version: 6.3.3(@mikro-orm/core@6.3.3)(socks@2.8.3)
-      '@opentelemetry/api':
-        specifier: ^1.9.0
-        version: 1.9.0
-      '@opentelemetry/auto-instrumentations-node':
-        specifier: ^0.49.0
-        version: 0.49.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/exporter-trace-otlp-http':
-        specifier: ^0.52.1
-        version: 0.52.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/instrumentation':
-        specifier: ^0.52.1
-        version: 0.52.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/instrumentation-aws-lambda':
-        specifier: ^0.43.0
-        version: 0.43.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/otlp-exporter-base':
-        specifier: ^0.52.1
-        version: 0.52.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/resources':
-        specifier: ^1.25.1
-        version: 1.25.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-node':
-        specifier: ^0.52.1
-        version: 0.52.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-trace-base':
-        specifier: ^1.25.1
-        version: 1.25.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-trace-node':
-        specifier: ^1.25.1
-        version: 1.25.1(@opentelemetry/api@1.9.0)
-      '@uptrace/core':
-        specifier: ^1.21.0
-        version: 1.21.0
-      '@uptrace/node':
-        specifier: ^1.21.0
-        version: 1.21.0
-      apollo-server-lambda:
-        specifier: ^3.13.0
-        version: 3.13.0(graphql@16.9.0)
-      aws-lambda:
-        specifier: ^1.0.7
-        version: 1.0.7
-      axios:
-        specifier: ^1.7.2
-        version: 1.7.3
-      class-validator:
-        specifier: ^0.14.1
-        version: 0.14.1
-      close-with-grace:
-        specifier: ^1.3.0
-        version: 1.3.0
-      core-js:
-        specifier: ^3.37.1
-        version: 3.38.0
-      date-fns:
-        specifier: ^3.6.0
-        version: 3.6.0
-      ejs:
-        specifier: ^3.1.10
-        version: 3.1.10
-      email-templates:
-        specifier: ^12.0.1
-        version: 12.0.1(@babel/core@7.25.2)(ejs@3.1.10)(mustache@4.2.0)(pug@3.0.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(underscore@1.13.7)(velocityjs@2.0.6)
-      fastify:
-        specifier: ^4.28.1
-        version: 4.28.1
-      firebase-admin:
-        specifier: ^12.3.0
-        version: 12.3.0
-      graphql:
-        specifier: ^16.9.0
-        version: 16.9.0
-      graphql-relay:
-        specifier: ^0.10.2
-        version: 0.10.2(graphql@16.9.0)
-      graphql-yoga:
-        specifier: ^5.6.2
-        version: 5.6.3(graphql@16.9.0)
-      http-errors:
-        specifier: ^2.0.0
-        version: 2.0.0
-      i18next-http-middleware:
-        specifier: ^3.6.0
-        version: 3.6.0
-      inversify:
-        specifier: ^6.0.2
-        version: 6.0.2
-      json-stringify-safe:
-        specifier: ^5.0.1
-        version: 5.0.1
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
-      mongodb:
-        specifier: 6.8.0
-        version: 6.8.0(socks@2.8.3)
-      nodemailer:
-        specifier: ^6.9.14
-        version: 6.9.14
-      p-queue:
-        specifier: ^6.6.2
-        version: 6.6.2
-      pino:
-        specifier: ^9.3.2
-        version: 9.3.2
-      pino-pretty:
-        specifier: ^11.2.2
-        version: 11.2.2
-      reflect-metadata:
-        specifier: ^0.2.2
-        version: 0.2.2
-      serverless:
-        specifier: 4.1.18
-        version: 4.1.18
-      stripe:
-        specifier: ^16.5.0
-        version: 16.6.0
-      thenby:
-        specifier: ^1.3.4
-        version: 1.3.4
-      twilio:
-        specifier: ^5.2.2
-        version: 5.2.2
-      type-graphql:
-        specifier: 2.0.0-rc.2
-        version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.23.0(graphql@16.9.0))(graphql@16.9.0)
+  packages/lib-backend-js: {}
 
-  packages/service-lambda:
+  packages/lib-config-js: {}
+
+  packages/lib-frontend-js: {}
+
+  packages/lib-shared-js: {}
+
+  packages/service-graphql-sandbox-js:
     dependencies:
       '@apollo/server':
         specifier: ^4.10.5
@@ -753,12 +602,6 @@ importers:
       '@aws-sdk/client-apigatewaymanagementapi':
         specifier: ^3.621.0
         version: 3.623.0
-      '@aws-sdk/client-s3':
-        specifier: ^3.621.0
-        version: 3.623.0
-      '@aws-sdk/lib-storage':
-        specifier: ^3.621.0
-        version: 3.623.0(@aws-sdk/client-s3@3.623.0)
       '@babel/core':
         specifier: ^7.25.2
         version: 7.25.2
@@ -819,9 +662,6 @@ importers:
       apollo-server-lambda:
         specifier: ^3.13.0
         version: 3.13.0(graphql@16.9.0)
-      app-root-path:
-        specifier: ^3.1.0
-        version: 3.1.0
       aws-lambda:
         specifier: ^1.0.7
         version: 1.0.7
@@ -1009,7 +849,175 @@ importers:
         specifier: 2.0.0-rc.2
         version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.23.0(graphql@16.9.0))(graphql@16.9.0)
 
-  packages/service-server:
+  packages/service-lambda-js:
+    dependencies:
+      '@apollo/server':
+        specifier: ^4.10.5
+        version: 4.10.5(graphql@16.9.0)
+      '@as-integrations/aws-lambda':
+        specifier: ^3.1.0
+        version: 3.1.0(@apollo/server@4.10.5(graphql@16.9.0))
+      '@aws-sdk/client-apigatewaymanagementapi':
+        specifier: ^3.621.0
+        version: 3.623.0
+      '@aws-sdk/client-s3':
+        specifier: ^3.621.0
+        version: 3.623.0
+      '@aws-sdk/lib-storage':
+        specifier: ^3.621.0
+        version: 3.623.0(@aws-sdk/client-s3@3.623.0)
+      '@babel/core':
+        specifier: ^7.25.2
+        version: 7.25.2
+      '@fastify/compress':
+        specifier: ^7.0.3
+        version: 7.0.3
+      '@fastify/cookie':
+        specifier: ^9.3.1
+        version: 9.3.1
+      '@fastify/middie':
+        specifier: ^8.3.1
+        version: 8.3.1
+      '@fastify/static':
+        specifier: ^7.0.4
+        version: 7.0.4
+      '@mikro-orm/core':
+        specifier: ^6.3.1
+        version: 6.3.3
+      '@mikro-orm/mongodb':
+        specifier: ^6.3.1
+        version: 6.3.3(@mikro-orm/core@6.3.3)(socks@2.8.3)
+      '@opentelemetry/api':
+        specifier: ^1.9.0
+        version: 1.9.0
+      '@opentelemetry/auto-instrumentations-node':
+        specifier: ^0.49.0
+        version: 0.49.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/exporter-trace-otlp-http':
+        specifier: ^0.52.1
+        version: 0.52.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation':
+        specifier: ^0.52.1
+        version: 0.52.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-aws-lambda':
+        specifier: ^0.43.0
+        version: 0.43.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/otlp-exporter-base':
+        specifier: ^0.52.1
+        version: 0.52.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/resources':
+        specifier: ^1.25.1
+        version: 1.25.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-node':
+        specifier: ^0.52.1
+        version: 0.52.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-trace-base':
+        specifier: ^1.25.1
+        version: 1.25.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-trace-node':
+        specifier: ^1.25.1
+        version: 1.25.1(@opentelemetry/api@1.9.0)
+      '@uptrace/core':
+        specifier: ^1.21.0
+        version: 1.21.0
+      '@uptrace/node':
+        specifier: ^1.21.0
+        version: 1.21.0
+      apollo-server-lambda:
+        specifier: ^3.13.0
+        version: 3.13.0(graphql@16.9.0)
+      app-root-path:
+        specifier: ^3.1.0
+        version: 3.1.0
+      aws-lambda:
+        specifier: ^1.0.7
+        version: 1.0.7
+      axios:
+        specifier: ^1.7.2
+        version: 1.7.3
+      class-validator:
+        specifier: ^0.14.1
+        version: 0.14.1
+      close-with-grace:
+        specifier: ^1.3.0
+        version: 1.3.0
+      core-js:
+        specifier: ^3.37.1
+        version: 3.38.0
+      date-fns:
+        specifier: ^3.6.0
+        version: 3.6.0
+      ejs:
+        specifier: ^3.1.10
+        version: 3.1.10
+      email-templates:
+        specifier: ^12.0.1
+        version: 12.0.1(@babel/core@7.25.2)(ejs@3.1.10)(mustache@4.2.0)(pug@3.0.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(underscore@1.13.7)(velocityjs@2.0.6)
+      fastify:
+        specifier: ^4.28.1
+        version: 4.28.1
+      firebase-admin:
+        specifier: ^12.3.0
+        version: 12.3.0
+      graphql:
+        specifier: ^16.9.0
+        version: 16.9.0
+      graphql-relay:
+        specifier: ^0.10.2
+        version: 0.10.2(graphql@16.9.0)
+      graphql-yoga:
+        specifier: ^5.6.2
+        version: 5.6.3(graphql@16.9.0)
+      http-errors:
+        specifier: ^2.0.0
+        version: 2.0.0
+      i18next-http-middleware:
+        specifier: ^3.6.0
+        version: 3.6.0
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      json-stringify-safe:
+        specifier: ^5.0.1
+        version: 5.0.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      mongodb:
+        specifier: 6.8.0
+        version: 6.8.0(socks@2.8.3)
+      nodemailer:
+        specifier: ^6.9.14
+        version: 6.9.14
+      p-queue:
+        specifier: ^6.6.2
+        version: 6.6.2
+      pino:
+        specifier: ^9.3.2
+        version: 9.3.2
+      pino-pretty:
+        specifier: ^11.2.2
+        version: 11.2.2
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      serverless:
+        specifier: 4.1.18
+        version: 4.1.18
+      stripe:
+        specifier: ^16.5.0
+        version: 16.6.0
+      thenby:
+        specifier: ^1.3.4
+        version: 1.3.4
+      twilio:
+        specifier: ^5.2.2
+        version: 5.2.2
+      type-graphql:
+        specifier: 2.0.0-rc.2
+        version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.23.0(graphql@16.9.0))(graphql@16.9.0)
+
+  packages/service-server-js:
     dependencies:
       '@babel/core':
         specifier: ^7.25.2
@@ -1108,15 +1116,7 @@ importers:
         specifier: 2.0.0-rc.2
         version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.23.0(graphql@16.9.0))(graphql@16.9.0)
 
-  packages/lib-backend: {}
-
-  packages/lib-config: {}
-
-  packages/lib-frontend: {}
-
-  packages/lib-shared: {}
-
-  packages/tool-task:
+  packages/tool-task-js:
     dependencies:
       '@anatine/esbuild-decorators':
         specifier: ^0.2.19
@@ -1524,7 +1524,7 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
 
-  packages/tool-task/templates/js-package/{{NAME}}: {}
+  packages/tool-task-js/templates/js-package/{{NAME}}: {}
 
 packages:
 

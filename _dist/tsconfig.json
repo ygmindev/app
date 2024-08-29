@@ -35,43 +35,43 @@
         "node_modules/redux-persist/types/integration/*"
       ],
       "@app/native/*": [
-        "packages/app-native/src/*"
-      ],
-      "@app/web/*": [
-        "packages/app-web/src/*"
+        "packages/app-native-js/src/*"
       ],
       "@app/web-admin/*": [
-        "packages/app-web-admin/src/*"
+        "packages/app-web-admin-js/src/*"
+      ],
+      "@app/web/*": [
+        "packages/app-web-js/src/*"
       ],
       "@app/web-library/*": [
-        "packages/app-web-library/src/*"
+        "packages/app-web-library-js/src/*"
       ],
       "@lib/backend/*": [
-        "packages/lib-backend/src/*"
+        "packages/lib-backend-js/src/*"
       ],
       "@lib/config/*": [
-        "packages/lib-config/src/*"
+        "packages/lib-config-js/src/*"
       ],
       "@lib/frontend/*": [
-        "packages/lib-frontend/src/*"
+        "packages/lib-frontend-js/src/*"
       ],
       "@lib/shared/*": [
-        "packages/lib-shared/src/*"
+        "packages/lib-shared-js/src/*"
       ],
       "@service/graphql-sandbox/*": [
-        "packages/service-graphql-sandbox/src/*"
-      ],
-      "@service/lambda/*": [
-        "packages/service-lambda/src/*"
+        "packages/service-graphql-sandbox-js/src/*"
       ],
       "@service/lambda-crawl/*": [
         "packages/service-lambda-crawl/src/*"
       ],
+      "@service/lambda/*": [
+        "packages/service-lambda-js/src/*"
+      ],
       "@service/server/*": [
-        "packages/service-server/src/*"
+        "packages/service-server-js/src/*"
       ],
       "@tool/task/*": [
-        "packages/tool-task/src/*"
+        "packages/tool-task-js/src/*"
       ]
     },
     "resolveJsonModule": true,

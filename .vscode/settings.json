@@ -5,6 +5,12 @@
     },
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
+  "[javascriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": "always"
@@ -13,6 +19,12 @@
     "editor.formatOnSave": true
   },
   "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"
     },
@@ -35,7 +47,7 @@
   "explorer.compactFolders": false,
   "explorer.expandSingleFolderWorkspaces": false,
   "files.associations": {
-    "**/packages/tool-task/templates/**/*": "plaintext"
+    "**/packages/tool-task-js/templates/**/*": "plaintext"
   },
   "files.autoSave": "afterDelay",
   "isort.args": [
