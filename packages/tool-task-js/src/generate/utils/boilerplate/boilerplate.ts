@@ -89,6 +89,12 @@ export const boilerplate = async ({
   }
 
   outputF = outputF || fromPackages();
-  await _boilerplate({ input: templateDir, output: outputF, template, variables: variablesF });
+  const result = await _boilerplate({
+    input: templateDir,
+    output: outputF,
+    template,
+    variables: variablesF,
+  });
   onSuccess && (await onSuccess({ output: outputF, template, variables: variablesF }));
+  return result;
 };

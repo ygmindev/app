@@ -1,9 +1,11 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import generateConfig from '@lib/config/generate/generate';
+import testConfig from '@lib/config/node/test/test.base';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
+import { move } from '@tool/task/file/utils/move/move';
 import { type GenerateParamsModel } from '@tool/task/generate/tasks/generate/generate.models';
 import { boilerplate } from '@tool/task/generate/utils/boilerplate/boilerplate';
 
@@ -25,7 +27,15 @@ const generate: TaskParamsModel<GenerateParamsModel> = {
       if (options?.template) {
         const { onSuccess, output, prepare } = generateConfig.params()[options.template] || {};
         const params = merge([{ onSuccess, output }, prepare ? await prepare() : {}]);
-        await boilerplate({ ...params, template: options.template });
+        const files = await boilerplate({ ...params, template: options.template });
+
+        const { eteExtension, specExtension } = testConfig.params();
+        const testFiles = files.filter(
+          (v) => v.includes(eteExtension) || v.includes(specExtension),
+        );
+        for (const file of testFiles) {
+          void move({ from: file, to: file.replace('/src/', '/tests/') });
+        }
       }
     },
   ],

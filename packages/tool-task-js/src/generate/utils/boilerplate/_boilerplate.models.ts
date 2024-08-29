@@ -5,4 +5,4 @@ export type _BoilerplateParamsModel = {
   variables?: Record<string, string>;
 };
 
-export type _BoilerplateModel = void;
+export type _BoilerplateModel = Array<string>;

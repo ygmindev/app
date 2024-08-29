@@ -18,7 +18,7 @@ export const _boilerplate = async ({
         defaultCase: CaseConverterEnum.None,
         dynamicReplacers: map(variables, (v, k) => ({ slot: k, slotValue: v })),
         entry: { folderPath: input },
-        onComplete: () => resolve(),
+        onComplete: (result) => resolve(result.output.files),
         option: template,
         output: { overwrite: true, path: output },
       } as IConfigItem,
