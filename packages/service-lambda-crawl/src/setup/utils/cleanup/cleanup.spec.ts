@@ -1,5 +1,5 @@
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { cleanup } from '@service-lambda-crawl/src/setup/utils/cleanup/cleanup';
+import { cleanup } from '@service/lambda-crawl/setup/utils/cleanup/cleanup';
 
 const { displayName } = withTest({ cleanup });
 
