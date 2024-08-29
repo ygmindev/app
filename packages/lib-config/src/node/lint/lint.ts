@@ -27,7 +27,10 @@ const config = defineConfig<LintConfigModel, _LintConfigModel>({
     exclude: [],
 
     include: cartesianString(
-      [toRelative({ from: fromDist(), to: fromPackages('*/src/**/*') })],
+      [
+        toRelative({ from: fromDist(), to: fromPackages('*/src/**/*') }),
+        toRelative({ from: fromDist(), to: fromPackages('*/tests/**/*') }),
+      ],
       EXTENSIONS_BASE,
     ),
 
