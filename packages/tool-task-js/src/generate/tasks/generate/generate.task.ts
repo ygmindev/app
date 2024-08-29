@@ -31,7 +31,7 @@ const generate: TaskParamsModel<GenerateParamsModel> = {
 
         const { eteExtension, specExtension } = testConfig.params();
         const testFiles = files.filter(
-          (v) => v.includes(eteExtension) || v.includes(specExtension),
+          (v) => v.includes(eteExtension) || v.includes(specExtension) || v.includes('_test'),
         );
         for (const file of testFiles) {
           void move({ from: file, to: file.replace('/src/', '/tests/') });
