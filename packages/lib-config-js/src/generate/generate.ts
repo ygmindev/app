@@ -4,7 +4,9 @@ import { jsPackage } from '@tool/task/generate/generators/jsPackage/jsPackage';
 
 const config = defineConfig<GenerateConfigModel>({
   params: () => ({
-    'js-package': jsPackage,
+    generator: {
+      'js-package': jsPackage,
+    },
   }),
 });
 

@@ -32,7 +32,7 @@ const runPython: TaskParamsModel<RunPythonParamsModel> = {
       const name = options?.name;
       const pkg = options?.package;
       if (name && pkg) {
-        return `cd ${fromPackages(pkg)} && poetry run python ${name}`;
+        return `cd ${fromPackages(pkg)} && poetry run python src/${name}`;
       } else {
         throw new InvalidArgumentError();
       }

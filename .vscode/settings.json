@@ -56,10 +56,19 @@
   ],
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "python.linting.mypyArgs": [
+    "--disable-error-code=import-untyped",
+    "--disallow-untyped-calls",
+    "--follow-imports=silent",
+    "--ignore-missing-imports",
+    "--show-column-numbers",
+  ],
+  "python.linting.mypyCategorySeverity.error": "Warning",
+  "python.linting.mypyEnabled": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "GitHub Dark",
+  "workbench.colorTheme": "GitHub Light",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right"
 }
