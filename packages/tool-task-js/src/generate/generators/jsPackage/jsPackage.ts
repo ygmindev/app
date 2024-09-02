@@ -11,8 +11,8 @@ import { type PackageJson } from 'type-fest';
 
 export const jsPackage: GeneratorParamsModel = {
   onSuccess: async ({ variables }) => {
-    const root = variables && variables['{{ROOT}}'];
-    const target = variables && variables['{{TARGET}}'];
+    const root = variables?.['{{ROOT}}'];
+    const target = variables?.['{{TARGET}}'];
 
     if (root && target) {
       // bundled dependencies

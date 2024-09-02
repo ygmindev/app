@@ -5,5 +5,5 @@ export type GenerateParamsModel = {
 };
 
 export type GeneratorParamsModel = Pick<BoilerplateParamsModel, 'onSuccess' | 'output'> & {
-  prepare?(): Promise<Omit<BoilerplateParamsModel, 'template'>>;
+  prepare?(): Promise<Omit<BoilerplateParamsModel, 'template' | 'templateDir'>>;
 };

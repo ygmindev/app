@@ -25,10 +25,10 @@ const generate: TaskParamsModel<GenerateParamsModel> = {
   task: [
     async ({ options }) => {
       if (options?.template) {
-        const { onSuccess, output, prepare } =
-          generateConfig.params().generator?.[options.template] || {};
+        const { generator, templateDir } = generateConfig.params();
+        const { onSuccess, output, prepare } = generator?.[options.template] || {};
         const params = merge([{ onSuccess, output }, prepare ? await prepare() : {}]);
-        const files = await boilerplate({ ...params, template: options.template });
+        const files = await boilerplate({ ...params, template: options.template, templateDir });
         const { eteExtension, specExtension } = testConfig.params();
         const testFiles = files.filter(
           (v) => v.includes(eteExtension) || v.includes(specExtension) || v.includes('test_'),

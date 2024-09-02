@@ -19,6 +19,9 @@ export const CLEAN_PATTERNS = [
   '.DS_Store',
   'coverage',
   '__pycache__',
+  '.pytest_cache',
+  '.mypy_cache',
+  '.test',
 ];
 
 export const DIST_DIR = '_dist';

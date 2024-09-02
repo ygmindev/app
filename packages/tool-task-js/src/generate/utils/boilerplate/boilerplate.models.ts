@@ -4,8 +4,9 @@ import {
 } from '@tool/task/generate/utils/boilerplate/_boilerplate.models';
 
 export type BoilerplateParamsModel = {
-  onSuccess?(params: BoilerplateParamsModel): Promise<void>;
+  onSuccess?(params: Omit<BoilerplateParamsModel, 'templateDir'>): Promise<void>;
   output?: string;
+  templateDir: string;
 } & Omit<_BoilerplateParamsModel, 'input' | 'output'>;
 
 export type BoilerplateModel = _BoilerplateModel;
