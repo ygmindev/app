@@ -1,0 +1,2 @@
+def device(params):
+    pass

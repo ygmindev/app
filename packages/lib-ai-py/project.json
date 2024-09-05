@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/lib-backend-js/src",
+  "sourceRoot": "packages/lib-ai-py/src",
   "projectType": "library",
   "tags": []
 }
