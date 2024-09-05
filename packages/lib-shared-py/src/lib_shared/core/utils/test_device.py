@@ -1,4 +1,4 @@
-from lib_ai_py/lib_ai/core/utils import device
+from lib_shared_py/lib_shared/core/utils import device
 
 
 def test_works():
