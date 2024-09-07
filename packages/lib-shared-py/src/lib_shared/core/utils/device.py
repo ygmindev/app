@@ -1,2 +1,2 @@
-def device(params):
+def device():
     pass

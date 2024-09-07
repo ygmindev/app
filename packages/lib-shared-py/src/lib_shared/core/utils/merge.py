@@ -1,4 +1,4 @@
-from typing import Mapping, TypeVar
+from typing import TypeVar
 
 T = TypeVar("T", bound=dict)
 

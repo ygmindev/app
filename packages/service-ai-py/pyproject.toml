@@ -17,12 +17,10 @@ description = ""
 version = "0.0.1"
 license = "MIT"
 authors = ["YG Min <ygmindev@gmail.com>"]
-packages = [
-    { include = "../lib-shared", from = "src" }
-]
+packages = [{ include = "*", from = "src" }]
 
 [tool.poetry.dependencies]
-lib_shared = {path="../lib-shared-py", develop=true}
+lib_shared = {path="../lib-shared-py/src", develop=true}
 python = "~3.12"
 transformers = "^4.44.2"
 torch = "^2.4.0"

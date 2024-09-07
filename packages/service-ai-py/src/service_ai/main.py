@@ -1,4 +1,3 @@
-import torch
 from lib_shared.core.utils.merge import merge
 
 print("here")
