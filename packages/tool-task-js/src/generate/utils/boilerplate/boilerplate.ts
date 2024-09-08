@@ -55,7 +55,7 @@ export const boilerplate = async ({
     const isPy = template.endsWith('-py');
     let value: string;
     switch (variable) {
-      case '{{PATH}}': {
+      case '{{DIRECTORY}}': {
         const root = await resolveVariable('{{ROOT}}');
         const target = await resolveVariable('{{TARGET}}');
         const { path } = await prompt<{ path: string }>([
@@ -76,6 +76,11 @@ export const boilerplate = async ({
       case '{{TARGET}}': {
         const root = await resolveVariable('{{ROOT}}');
         value = isPy ? snakeCase(root) : `@${root}`;
+        break;
+      }
+      case '{{PATH}}': {
+        const directory = await resolveVariable('{{DIRECTORY}}');
+        value = isPy ? directory.replaceAll('/', '.').replace('root', '') : directory;
         break;
       }
       default: {

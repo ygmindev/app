@@ -1,10 +1,8 @@
-import isArray from 'lodash/isArray';
+import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
+import { type MergeParamsModel } from '@lib/shared/core/utils/merge/merge.models';
 import isPlainObject from 'lodash/isPlainObject';
 import mergeWith from 'lodash/mergeWith';
 import uniq from 'lodash/uniq';
-
-import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { type MergeParamsModel } from '@lib/shared/core/utils/merge/merge.models';
 
 export const merge = <TType, TResult = TType>(
   ...[values, strategy = MERGE_STRATEGY.DEEP]: MergeParamsModel<TType>

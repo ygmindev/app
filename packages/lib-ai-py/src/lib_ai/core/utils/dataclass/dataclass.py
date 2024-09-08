@@ -1,0 +1,2 @@
+def dataclass(params):
+    pass

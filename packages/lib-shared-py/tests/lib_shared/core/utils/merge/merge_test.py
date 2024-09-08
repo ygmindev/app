@@ -1,7 +1,7 @@
 from lib_shared.core.utils.merge import merge
 
 
-def test_works():
+def test_works() -> None:
     a = {"key1": "a", "key2": "b"}
     b = {"key2": "c", "key3": "d"}
     result = merge(b, a)
