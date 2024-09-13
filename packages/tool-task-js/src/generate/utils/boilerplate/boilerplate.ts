@@ -80,7 +80,8 @@ export const boilerplate = async ({
       }
       case '{{PATH}}': {
         const directory = await resolveVariable('{{DIRECTORY}}');
-        value = isPy ? directory.replaceAll('/', '.').replace('root', '') : directory;
+        const target = await resolveVariable('{{TARGET}}');
+        value = isPy ? directory.replaceAll('/', '.').replace(`${target}.`, '') : directory;
         break;
       }
       default: {
