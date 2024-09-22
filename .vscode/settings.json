@@ -69,7 +69,7 @@
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorTheme": "GitHub Dark",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right"
 }

@@ -2,6 +2,7 @@ import os
 
 import torch
 from lib_ai.core.utils.device import device
+from lib_ai.data.tabular_data import TabularData
 from lib_shared.core.utils import merge
 from torch import nn, set_default_device
 from torch.utils.data import DataLoader
@@ -26,10 +27,12 @@ class NeuralNetwork(nn.Module):
         return logits
 
 
-model = NeuralNetwork().to(device)
-set_default_device(device)
-X = torch.rand(1, 28, 28, device=device)
-logits = model(X)
-pred_probab = nn.Softmax(dim=1)(logits)
-y_pred = pred_probab.argmax(1)
-print(f"Predicted class: {y_pred}")
+# model = NeuralNetwork().to(device)
+# set_default_device(device)
+# X = torch.rand(1, 28, 28, device=device)
+# logits = model(X)
+# pred_probab = nn.Softmax(dim=1)(logits)
+# y_pred = pred_probab.argmax(1)
+# print(f"Predicted class: {y_pred}")
+
+data = TabularData()

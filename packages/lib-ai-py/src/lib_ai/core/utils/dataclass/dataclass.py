@@ -1,2 +1,0 @@
-def dataclass(params):
-    pass
