@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Self, Sequence, Union
+from typing import Self
 
 
 class DataModel(ABC):

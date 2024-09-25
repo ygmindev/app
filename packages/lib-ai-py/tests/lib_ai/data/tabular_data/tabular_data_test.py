@@ -7,6 +7,7 @@ TABLE_1 = TabularData.from_dict(
         "str": ["0", "1", "2"],
     }
 )
+
 TABLE_2 = TabularData.from_dict(
     {
         "int": [3, 4, 5],

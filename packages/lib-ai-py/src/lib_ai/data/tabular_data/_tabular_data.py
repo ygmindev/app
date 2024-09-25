@@ -1,9 +1,11 @@
-from typing import Any, Mapping, Optional, Self, Sequence, Tuple, Union
+from typing import Any, Mapping, Self, Sequence, Tuple
 
 import numpy as np
 import polars as pl
-from lib_ai.data.tabular_data._tabular_data_models import _TabularDataModel
-from lib_ai.data.tabular_data.tabular_data_models import TabularDataKeyModel
+from lib_ai.data.tabular_data._tabular_data_models import (
+    _TabularDataKeyModel,
+    _TabularDataModel,
+)
 
 
 class _TabularData(_TabularDataModel):
@@ -12,7 +14,7 @@ class _TabularData(_TabularDataModel):
         result.data = pl.concat([self.data, other.data])
         return result
 
-    def __getitem__(self, key: TabularDataKeyModel) -> Self:
+    def __getitem__(self, key: _TabularDataKeyModel) -> Self:
         result = type(self)()
         result.data = self.data[key]
         return result
