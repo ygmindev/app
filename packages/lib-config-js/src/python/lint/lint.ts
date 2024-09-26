@@ -11,8 +11,8 @@ const config = defineConfig<LintConfigModel>({
         [
           'poetry run black ',
           'poetry run autoflake --remove-all-unused-imports --quiet --in-place --recursive ',
-          'poetry run pylint --output-formatted=colorized',
-          'poetry run flake8',
+          'poetry run pylint --output-format=colorized ',
+          'poetry run flake8 ',
         ],
         includeDirs,
       ).join(' && '),
