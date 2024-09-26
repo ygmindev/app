@@ -28,8 +28,7 @@ class _ArrayData(_ArrayDataModel):
             result = type(self)()
             result.data = value
             return result
-        else:
-            return value
+        return value
 
     def __len__(self) -> int:
         return len(self.data)
