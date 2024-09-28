@@ -12,4 +12,4 @@ def test_negative() -> None:
     assert is_listlike(1) == False
     assert is_listlike("1") == False
     assert is_listlike(True) == False
-    assert is_listlike(dict()) == False
+    assert is_listlike({}) == False

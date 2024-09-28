@@ -7,7 +7,7 @@ def merge[T: dict](*params: Unpack[MergeParamsModel[T]]) -> MergeModel[T]:
     (dest, source) = params
     for k, v in source.items():
         if isinstance(v, dict):
-            merge(v, dest.setdefault(k, dict()))
+            merge(v, dest.setdefault(k, {}))
         else:
             dest[k] = v
     return dest
