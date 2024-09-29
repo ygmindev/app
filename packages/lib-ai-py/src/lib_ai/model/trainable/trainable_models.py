@@ -1,8 +1,0 @@
-from abc import ABC, abstractmethod
-
-from lib_ai.dataset import Dataset
-
-
-class TrainableModel(ABC):
-    @abstractmethod
-    def train(self, dataset: Dataset) -> None: ...

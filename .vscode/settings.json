@@ -77,5 +77,6 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "GitHub Dark",
   "workbench.iconTheme": "vs-minimal",
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
+  "black-formatter.importStrategy": "fromEnvironment"
 }
