@@ -1,12 +1,14 @@
-from typing import Any, Self, Sequence, overload
+from typing import Any, Self, Sequence, Tuple, Unpack, overload
 
 import numpy as np
 import polars as pl
+from lib_ai.core.utils.split_indices import split_indices
 from lib_ai.data.array_data._array_data_models import (
     _ArrayDataModel,
     _ArrayDataMultiKeyModel,
     _ArrayDataSingleKeyModel,
 )
+from lib_ai.data.data_models import SplitParamsModel
 from lib_shared.core.utils.is_listlike import is_listlike
 
 

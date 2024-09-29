@@ -1,11 +1,12 @@
 from typing import Self
 
 from lib_ai.data.data_models import DataModel
+from lib_ai.dataset import Dataset
 from lib_ai.dataset.dataset_models import DatasetKeyModel
 from lib_ai.dataset.labeled_dataset.labeled_dataset_models import LabeledDatasetModel
 
 
-class LabeledDataset(LabeledDatasetModel):
+class LabeledDataset(LabeledDatasetModel, Dataset):
     _data: DataModel
     _labels: DataModel
 

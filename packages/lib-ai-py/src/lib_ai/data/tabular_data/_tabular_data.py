@@ -1,7 +1,9 @@
-from typing import Any, Mapping, Self, Sequence, Tuple
+from typing import Any, Mapping, Self, Sequence, Tuple, Unpack
 
 import numpy as np
 import polars as pl
+from lib_ai.core.utils.split_indices import split_indices
+from lib_ai.data.data_models import SplitParamsModel
 from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataKeyModel,
     _TabularDataModel,
@@ -18,6 +20,9 @@ class _TabularData(_TabularDataModel):
         result = type(self)()
         result.data = self.data[key]
         return result
+
+    def __len__(self) -> int:
+        return len(self.data)
 
     @property
     def data(self) -> pl.DataFrame:

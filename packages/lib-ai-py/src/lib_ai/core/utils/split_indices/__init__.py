@@ -11,7 +11,7 @@ def split_indices(**params: Unpack[SplitIndicesParamsModel]) -> SplitIndicesMode
     return _split_indices(
         **{
             **params,
-            "ratio": params.get("ratio", 0.8),
+            "train_size": params.get("train_size", 0.8),
             "shuffle": True if params.get("stratify") else params.get("shuffle", False),
         }
     )

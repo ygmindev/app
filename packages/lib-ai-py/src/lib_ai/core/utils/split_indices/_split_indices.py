@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 def _split_indices(**params: Unpack[_SplitIndicesParamsModel]) -> _SplitIndicesModel:
     train, test = train_test_split(
         np.arange(params.get("nrows")),
-        train_size=params.get("ratio"),
+        train_size=params.get("train_size"),
         shuffle=params.get("shuffle"),
         random_state=42,
         stratify=params.get("stratify"),

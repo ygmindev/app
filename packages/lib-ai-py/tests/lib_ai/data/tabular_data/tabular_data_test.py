@@ -3,15 +3,15 @@ from lib_ai.data.tabular_data import TabularData
 
 TABLE_1 = TabularData.from_dict(
     {
-        "int": [0, 1, 2],
-        "str": ["0", "1", "2"],
+        "int": [0, 1, 2, 3, 4],
+        "str": ["0", "1", "2", "3", "4"],
     }
 )
 
 TABLE_2 = TabularData.from_dict(
     {
-        "int": [3, 4, 5],
-        "str": ["3", "4", "5"],
+        "int": [5, 6, 7, 8, 9],
+        "str": ["5", "6", "7", "8", "9"],
     }
 )
 
@@ -28,18 +28,23 @@ def test_add() -> None:
                 [3, "3"],
                 [4, "4"],
                 [5, "5"],
+                [6, "6"],
+                [7, "7"],
+                [8, "8"],
+                [9, "9"],
             ],
             dtype=object,
         ),
     )
 
-    result = result.head(2)
+    result = result.head(3)
     assert np.array_equal(
         result.to_numpy(),
         np.array(
             [
                 [0, "0"],
                 [1, "1"],
+                [2, "2"],
             ],
             dtype=object,
         ),
@@ -58,30 +63,38 @@ def test_index() -> None:
         ),
     )
 
-    result = TABLE_1[[1, 2]]
+    result = TABLE_1[[1, 2, 3]]
     assert np.array_equal(
         result.to_numpy(),
         np.array(
             [
                 [1, "1"],
                 [2, "2"],
+                [3, "3"],
             ],
             dtype=object,
         ),
     )
 
-    result = TABLE_1[1:3]
+    result = TABLE_1[1:4]
     assert np.array_equal(
         result.to_numpy(),
         np.array(
             [
                 [1, "1"],
                 [2, "2"],
+                [3, "3"],
             ],
             dtype=object,
         ),
     )
+
+
+def test_split() -> None:
+    result = TABLE_1.split()
+    print(result[0].data)
+    pass
 
 
 def test_shape() -> None:
-    assert TABLE_1.shape == (3, 2)
+    assert TABLE_1.shape == (5, 2)
