@@ -12,10 +12,7 @@ const install: TaskParamsModel<InstallParamsModel> = {
     {
       key: 'packages',
       options: children(fromPackages(), { isDirectory: true }).reduce(
-        (result, { name }) =>
-          name.startsWith('app') || name.startsWith('service') || name.startsWith('tool')
-            ? [...result, name]
-            : result,
+        (result, { name }) => (name.endsWith('-py') ? [...result, name] : result),
         [] as Array<string>,
       ),
       type: PROMPT_TYPE.MULTIPLE,
