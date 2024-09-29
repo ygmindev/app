@@ -1,3 +1,4 @@
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { type PackageManagerConfigModel } from '@lib/config/python/packageManager/packageManager.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
@@ -5,8 +6,9 @@ const config = defineConfig<PackageManagerConfigModel>({
   params: () => ({
     fixedVersions: {},
 
-    installCommand: (names, packages, options = {}) =>
-      packages
+    installCommand: (names, packages, options = {}) => {
+      const pwd = fromWorking();
+      const command = packages
         ? packages
             .map(
               (v) =>
@@ -17,12 +19,19 @@ const config = defineConfig<PackageManagerConfigModel>({
                 }`,
             )
             .join(' && ')
-        : '',
+        : '';
+      return `${command} && cd ${pwd}`;
+    },
 
     name: 'poetry',
 
-    removeCommand: (names, packages) =>
-      `pnpm remove ${packages ? packages.map((v) => `--filter @${v.replace('-', '/')}`).join(' ') : ''} ${names}`,
+    removeCommand: (names, packages) => {
+      const pwd = fromWorking();
+      const command = packages
+        ? packages.map((v) => `cd ${v} && poetry remove ${names}`).join(' && ')
+        : '';
+      return `${command} && cd ${pwd}`;
+    },
   }),
 });
 
