@@ -91,9 +91,29 @@ def test_index() -> None:
 
 
 def test_split() -> None:
-    result = TABLE_1.split()
-    print(result[0].data)
-    pass
+    [train, test] = TABLE_1.split(train_size=0.8)
+    assert np.array_equal(
+        train.to_numpy(),
+        np.array(
+            [
+                [0, "0"],
+                [1, "1"],
+                [2, "2"],
+                [3, "3"],
+            ],
+            dtype=object,
+        ),
+    )
+
+    assert np.array_equal(
+        test.to_numpy(),
+        np.array(
+            [
+                [4, "4"],
+            ],
+            dtype=object,
+        ),
+    )
 
 
 def test_shape() -> None:

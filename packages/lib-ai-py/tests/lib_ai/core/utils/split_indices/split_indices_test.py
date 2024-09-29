@@ -6,15 +6,15 @@ def test_works() -> None:
     NROWS = 10
 
     train, test = split_indices(nrows=NROWS)
-    assert train == [0, 1, 2, 3, 4, 5, 6, 7]
-    assert test == [8, 9]
+    assert (train == [0, 1, 2, 3, 4, 5, 6, 7]).all()
+    assert (test == [8, 9]).all()
 
     train, test = split_indices(
         nrows=NROWS,
         train_size=0.7,
     )
-    assert train == [0, 1, 2, 3, 4, 5, 6]
-    assert test == [7, 8, 9]
+    assert (train == [0, 1, 2, 3, 4, 5, 6]).all()
+    assert (test == [7, 8, 9]).all()
 
     train, test = split_indices(
         nrows=NROWS,

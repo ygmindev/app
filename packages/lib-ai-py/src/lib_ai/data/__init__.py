@@ -8,8 +8,8 @@ class Data(DataModel):
     def split(self, **params: Unpack[SplitParamsModel]) -> Tuple[Self, Self]:
         train_indices, test_indices = split_indices(
             nrows=len(self),
-            train_size=params.get("train_size"),
-            shuffle=params.get("shuffle"),
+            train_size=params.get("train_size", 0.8),
+            shuffle=params.get("shuffle", False),
             stratify=params.get("stratify"),
         )
         return self[train_indices], self[test_indices]

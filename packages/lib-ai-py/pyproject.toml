@@ -29,6 +29,11 @@ packages = [{ include = "*", from = "src" }]
 lib_shared = {path="../lib-shared-py", develop=true}
 python = "~3.12"
 numpy = "^2.1.1"
+scikit-learn = "^1.5.2"
+polars = "^1.8.2"
+torch = "^2.4.1"
+torchvision = "^0.19.1"
+torchaudio = "^2.4.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"

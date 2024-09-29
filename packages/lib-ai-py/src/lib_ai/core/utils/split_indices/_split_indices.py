@@ -12,8 +12,8 @@ def _split_indices(**params: Unpack[_SplitIndicesParamsModel]) -> _SplitIndicesM
     train, test = train_test_split(
         np.arange(params.get("nrows")),
         train_size=params.get("train_size"),
-        shuffle=params.get("shuffle"),
+        shuffle=params.get("shuffle", False),
         random_state=42,
-        stratify=params.get("stratify"),
+        stratify=params.get("stratify", None),
     )
     return train, test
