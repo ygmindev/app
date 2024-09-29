@@ -1,10 +1,9 @@
-import { type TaskParamsModel } from '@tool/task/core/core.models';
-import { type InstallParamsModel } from '@tool/task/python/tasks/install/install.models';
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
+import pacakgeManagerConfig from '@lib/config/python/packageManager/packageManager';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
+import { type InstallParamsModel } from '@tool/task/python/tasks/install/install.models';
 
 const install: TaskParamsModel<InstallParamsModel> = {
   name: 'python-install',
@@ -26,7 +25,21 @@ const install: TaskParamsModel<InstallParamsModel> = {
     { isOptional: true, key: 'remove' },
   ],
 
-  task: [({ options }) => options?.key && ''],
+  task: [
+    ({ options }) =>
+      options?.install &&
+      pacakgeManagerConfig.params().installCommand(options?.install, options?.packages),
+
+    ({ options }) =>
+      options?.installDev &&
+      pacakgeManagerConfig
+        .params()
+        .installCommand(options?.installDev, options?.packages, { isDev: true }),
+
+    ({ options }) =>
+      options?.remove &&
+      pacakgeManagerConfig.params().removeCommand(options?.remove, options?.packages),
+  ],
 };
 
 export default install;
