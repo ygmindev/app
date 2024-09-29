@@ -1,14 +1,14 @@
 from abc import abstractmethod
 from typing import Any, Self, Sequence, overload
 
-from lib_ai.data.data_models import DataModel
+from lib_ai.data.base_data.base_data_models import BaseDataModel
 
 type _ArrayDataSingleKeyModel = int
 
 type _ArrayDataMultiKeyModel = Sequence[int] | slice
 
 
-class _ArrayDataModel(DataModel):
+class _ArrayDataModel(BaseDataModel):
     @overload
     @abstractmethod
     def __getitem__(self, _key: _ArrayDataSingleKeyModel) -> Self: ...

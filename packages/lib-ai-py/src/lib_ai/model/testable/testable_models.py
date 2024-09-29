@@ -3,6 +3,6 @@ from abc import ABC, abstractmethod
 from lib_ai.dataset import Dataset
 
 
-class TrainableModel(ABC):
+class TestableModel(ABC):
     @abstractmethod
-    def train(self, dataset: Dataset) -> None: ...
+    def test(self, dataset: Dataset) -> None: ...

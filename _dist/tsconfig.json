@@ -46,6 +46,9 @@
       "@app/web-library/*": [
         "packages/app-web-library-js/src/*"
       ],
+      "lib_ai/*": [
+        "packages/lib-ai-py/src/*"
+      ],
       "@lib/backend/*": [
         "packages/lib-backend-js/src/*"
       ],
@@ -57,6 +60,9 @@
       ],
       "@lib/shared/*": [
         "packages/lib-shared-js/src/*"
+      ],
+      "lib_shared/*": [
+        "packages/service-ai-py/src/*"
       ],
       "@service/graphql-sandbox/*": [
         "packages/service-graphql-sandbox-js/src/*"

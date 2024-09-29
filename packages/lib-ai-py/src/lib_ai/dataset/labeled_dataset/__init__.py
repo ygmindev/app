@@ -1,19 +1,19 @@
 from typing import Self
 
-from lib_ai.data.data_models import DataModel
-from lib_ai.dataset import Dataset
-from lib_ai.dataset.dataset_models import DatasetKeyModel
+from lib_ai.data.base_data.base_data_models import BaseDataModel
+from lib_ai.dataset.base_dataset import BaseDataset
+from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetKeyModel
 from lib_ai.dataset.labeled_dataset.labeled_dataset_models import LabeledDatasetModel
 
 
-class LabeledDataset(LabeledDatasetModel, Dataset):
-    _data: DataModel
-    _labels: DataModel
+class LabeledDataset(LabeledDatasetModel, BaseDataset):
+    _data: BaseDataModel
+    _labels: BaseDataModel
 
     def __init__(
         self,
-        data: DataModel,
-        labels: DataModel,
+        data: BaseDataModel,
+        labels: BaseDataModel,
     ) -> None:
         self._data = data
         self._labels = labels
@@ -24,7 +24,7 @@ class LabeledDataset(LabeledDatasetModel, Dataset):
             labels=self.labels + other.labels,
         )
 
-    def __getitem__(self, key: DatasetKeyModel) -> Self:
+    def __getitem__(self, key: BaseDatasetKeyModel) -> Self:
         return type(self)(
             data=self.data[key],
             labels=self.labels[key],
@@ -37,17 +37,17 @@ class LabeledDataset(LabeledDatasetModel, Dataset):
         )
 
     @property
-    def data(self) -> DataModel:
+    def data(self) -> BaseDataModel:
         return self._data
 
     @data.setter
-    def data(self, value: DataModel) -> None:
+    def data(self, value: BaseDataModel) -> None:
         self._data = value
 
     @property
-    def labels(self) -> DataModel:
+    def labels(self) -> BaseDataModel:
         return self._labels
 
     @labels.setter
-    def labels(self, value: DataModel) -> None:
+    def labels(self, value: BaseDataModel) -> None:
         self._labels = value

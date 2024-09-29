@@ -1,4 +1,7 @@
-from lib_ai.core.utils.split_indices._split_indices_models import _SplitIndicesModel, _SplitIndicesParamsModel
+from lib_ai.core.utils.split_indices._split_indices_models import (
+    _SplitIndicesModel,
+    _SplitIndicesParamsModel,
+)
 
 
 type SplitIndicesParamsModel = _SplitIndicesParamsModel

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, NotRequired, Self, Sequence, Tuple, TypedDict, Unpack
 
-type DataKeyModel = int | slice | Sequence[int]
+type BaseDataKeyModel = int | slice | Sequence[int]
 
 
 class SplitParamsModel(TypedDict):
@@ -10,12 +10,12 @@ class SplitParamsModel(TypedDict):
     stratify: NotRequired[Sequence[Any]]
 
 
-class DataModel(ABC):
+class BaseDataModel(ABC):
     @abstractmethod
     def __add__(self, other: Self) -> Self: ...
 
     @abstractmethod
-    def __getitem__(self, key: DataKeyModel) -> Self: ...
+    def __getitem__(self, key: BaseDataKeyModel) -> Self: ...
 
     @abstractmethod
     def __len__(self) -> int: ...

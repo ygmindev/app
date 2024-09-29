@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import Any, Mapping, Self, Sequence, Tuple
 
 import numpy as np
-from lib_ai.data.data_models import DataModel
+from lib_ai.data.base_data.base_data_models import BaseDataModel
 
 type _TabularDataSingleKeyModel = int
 
@@ -13,7 +13,7 @@ type _TabularDataKeyModel = _TabularDataSingleKeyModel | _TabularDataMultiKeyMod
 ] | Tuple[_TabularDataMultiKeyModel, Sequence[str]]
 
 
-class _TabularDataModel(DataModel):
+class _TabularDataModel(BaseDataModel):
     @abstractmethod
     def __getitem__(self, _key: _TabularDataKeyModel) -> Self: ...
 

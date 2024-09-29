@@ -1,10 +1,14 @@
 from abc import abstractmethod
 
-from lib_ai.data.data_models import DataModel
-from lib_ai.dataset.dataset_models import DatasetModel
+from lib_ai.data.base_data.base_data_models import BaseDataModel
+from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetModel
 
 
-class LabeledDatasetModel(DatasetModel):
+class LabeledDatasetModel(BaseDatasetModel):
     @abstractmethod
-    def __init__(self, data: DataModel, labels: DataModel) -> None:
+    def __init__(
+        self,
+        data: BaseDataModel,
+        labels: BaseDataModel,
+    ) -> None:
         pass
