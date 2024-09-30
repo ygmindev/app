@@ -1,7 +1,6 @@
 from abc import abstractmethod
 from typing import Any, Mapping, Self, Sequence, Tuple
 
-import numpy as np
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 
 type _TabularDataSingleKeyModel = int
@@ -23,5 +22,3 @@ class _TabularDataModel(BaseDataModel):
     @property
     @abstractmethod
     def shape(self) -> Tuple[int, int]: ...
-
-    def to_numpy(self) -> np.ndarray: ...

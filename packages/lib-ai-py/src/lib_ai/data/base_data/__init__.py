@@ -7,9 +7,9 @@ from lib_ai.data.base_data.base_data_models import BaseDataModel, SplitParamsMod
 class BaseData(BaseDataModel):
     def split(self, **params: Unpack[SplitParamsModel]) -> Tuple[Self, Self]:
         train_indices, test_indices = split_indices(
-            nrows=len(self),
+            n_rows=len(self),
             train_size=params.get("train_size", 0.8),
             shuffle=params.get("shuffle", False),
-            stratify=params.get("stratify"),
+            stratify=params.get("stratify", None),
         )
         return self[train_indices], self[test_indices]

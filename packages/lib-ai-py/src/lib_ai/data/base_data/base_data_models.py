@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import Any, NotRequired, Self, Sequence, Tuple, TypedDict, Unpack
 
+import numpy as np
+import torch
+
 type BaseDataKeyModel = int | slice | Sequence[int]
 
 
@@ -21,7 +24,13 @@ class BaseDataModel(ABC):
     def __len__(self) -> int: ...
 
     @abstractmethod
-    def head(self, nrows: int = 1) -> Self: ...
+    def head(self, n_rows: int = 1) -> Self: ...
 
     @abstractmethod
     def split(self, **params: Unpack[SplitParamsModel]) -> Tuple[Self, Self]: ...
+
+    @abstractmethod
+    def to_numpy(self) -> np.ndarray: ...
+
+    @abstractmethod
+    def to_tensor(self) -> torch.Tensor: ...

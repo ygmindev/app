@@ -2,6 +2,7 @@ from typing import Any, Self, Sequence, overload
 
 import numpy as np
 import polars as pl
+import torch
 from lib_ai.data.array_data._array_data_models import (
     _ArrayDataModel,
     _ArrayDataMultiKeyModel,
@@ -47,10 +48,13 @@ class _ArrayData(_ArrayDataModel):
         result.data = pl.Series(data)
         return result
 
-    def head(self, nrows: int = 1) -> Self:
+    def head(self, n_rows: int = 1) -> Self:
         result = type(self)()
-        result.data = self.data.head(nrows)
+        result.data = self.data.head(n_rows)
         return result
 
     def to_numpy(self) -> np.ndarray:
         return self.data.to_numpy()
+
+    def to_tensor(self) -> torch.Tensor:
+        return self.data.to_torch()

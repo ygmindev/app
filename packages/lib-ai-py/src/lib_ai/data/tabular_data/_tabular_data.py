@@ -2,6 +2,7 @@ from typing import Any, Mapping, Self, Sequence, Tuple
 
 import numpy as np
 import polars as pl
+import torch
 from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataKeyModel,
     _TabularDataModel,
@@ -36,9 +37,9 @@ class _TabularData(_TabularDataModel):
         result.data = pl.DataFrame(data)
         return result
 
-    def head(self, nrows: int = 1) -> Self:
+    def head(self, n_rows: int = 1) -> Self:
         result = type(self)()
-        result.data = self.data.head(nrows)
+        result.data = self.data.head(n_rows)
         return result
 
     @property
@@ -47,3 +48,6 @@ class _TabularData(_TabularDataModel):
 
     def to_numpy(self) -> np.ndarray:
         return self.data.to_numpy()
+
+    def to_tensor(self) -> torch.Tensor:
+        return self.data.to_torch(dtype=pl.Float32)

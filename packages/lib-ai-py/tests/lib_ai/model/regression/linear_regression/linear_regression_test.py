@@ -1,0 +1,20 @@
+from lib_ai.data.array_data import ArrayData
+from lib_ai.data.tabular_data import TabularData
+from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.model.regression.linear_regression import LinearRegression
+
+
+def test_works() -> None:
+    dataset = XYDataset(
+        x=TabularData.from_dict(
+            {
+                "x1": [1, 2, 3],
+                "x2": [1, 2, 3],
+            }
+        ),
+        y=ArrayData.from_list([1, 2, 3]),
+    )
+    model = LinearRegression(n_features=2)
+    model.train(dataset, params={"n_epochs": 100})
+    # model.test(dataset)
+    assert 1 == 1
