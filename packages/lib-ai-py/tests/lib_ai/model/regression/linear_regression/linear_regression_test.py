@@ -12,9 +12,13 @@ def test_works() -> None:
                 "x2": [1, 2, 3],
             }
         ),
-        y=ArrayData.from_list([1, 2, 3]),
+        y=TabularData.from_dict(
+            {
+                "y": [1, 2, 3],
+            }
+        ),
     )
     model = LinearRegression(n_features=2)
-    model.train(dataset, params={"n_epochs": 100})
+    model.train(dataset, params={"n_epochs": 1000})
     # model.test(dataset)
     assert 1 == 1

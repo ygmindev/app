@@ -57,4 +57,4 @@ class _ArrayData(_ArrayDataModel):
         return self.data.to_numpy()
 
     def to_tensor(self) -> torch.Tensor:
-        return self.data.to_torch()
+        return self.data.to_torch().to(torch.float32)

@@ -50,4 +50,4 @@ class _TabularData(_TabularDataModel):
         return self.data.to_numpy()
 
     def to_tensor(self) -> torch.Tensor:
-        return self.data.to_torch(dtype=pl.Float32)
+        return self.data.to_torch().to(torch.float32)

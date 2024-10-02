@@ -32,11 +32,16 @@ class _LinearRegression(_LinearRegressionModel):
         # optimizer = torch.optim.SGD(weights, lr=0.01)
         optimizer = torch.optim.Adam(weights, lr=0.1)
         loss_function = torch.nn.MSELoss(reduction="mean")
-        x, y = dataset.x.to_tensor().type(torch.float), dataset.y.to_tensor().type(torch.float)
-        for epoch in range(params.get("n_epochs", 10)):
+        x, y = dataset.x.to_tensor(), dataset.y.to_tensor()
+        y = torch.tensor([[1], [2], [3]]).to(torch.float32)
+        print(x)
+        print(y)
+        for epoch in range(params.get("n_epochs", 100)):
             y_pred = self._instance(x)
             loss = loss_function(y_pred, y)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
             print(loss.item())
+
+        print(list(self._instance.parameters()))
