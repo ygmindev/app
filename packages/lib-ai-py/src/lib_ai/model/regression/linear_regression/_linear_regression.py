@@ -1,9 +1,12 @@
 import torch
 from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.model.base_model.base_model_constants import OPTIMIZER
 from lib_ai.model.regression.linear_regression._linear_regression_models import (
     _LinearRegressionModel,
     _LinearRegressionTrainParamsModel,
 )
+from lib_ai.model.utils.early_stopping import EarlyStopping
+from lib_shared.core.utils.logger import logger
 from torch.nn import Linear, Module
 
 
@@ -29,19 +32,29 @@ class _LinearRegression(_LinearRegressionModel):
         params: _LinearRegressionTrainParamsModel,
     ) -> None:
         weights = self._instance.parameters()
-        # optimizer = torch.optim.SGD(weights, lr=0.01)
-        optimizer = torch.optim.Adam(weights, lr=0.1)
+        n_epochs = params.get("n_epochs", 1000)
+        optimizer = params.get("optimizer", OPTIMIZER.ADAM)
+
+        match optimizer:
+            case OPTIMIZER.ADAM:
+                optimizer = torch.optim.Adam(weights, lr=0.1)
+            case OPTIMIZER.SGD:
+                optimizer = torch.optim.SGD(weights, lr=0.01)
+            case _:
+                optimizer = torch.optim.Adam(weights, lr=0.1)
+
         loss_function = torch.nn.MSELoss(reduction="mean")
         x, y = dataset.x.to_tensor(), dataset.y.to_tensor()
-        y = torch.tensor([[1], [2], [3]]).to(torch.float32)
-        print(x)
-        print(y)
-        for epoch in range(params.get("n_epochs", 100)):
+
+        early_stopping = EarlyStopping()
+        for epoch in range(n_epochs):
             y_pred = self._instance(x)
             loss = loss_function(y_pred, y)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-            print(loss.item())
+            if early_stopping.stop(score=loss.item()):
+                logger.info(f"yearly stopping after {epoch} epochs")
+                break
 
         print(list(self._instance.parameters()))

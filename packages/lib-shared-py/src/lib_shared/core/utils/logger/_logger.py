@@ -2,7 +2,7 @@ from logging import DEBUG, ERROR, INFO, NOTSET, WARN, Logger
 from typing import Self
 
 from lib_shared.core.utils.logger._logger_models import _LoggerModel
-from lib_shared.core.utils.logger.logger_models import LOGGER_LEVEL
+from lib_shared.core.utils.logger.logger_constants import LOGGER_LEVEL
 
 
 class _Logger(_LoggerModel):
