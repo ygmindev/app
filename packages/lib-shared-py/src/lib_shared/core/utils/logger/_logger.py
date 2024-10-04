@@ -1,4 +1,4 @@
-from logging import DEBUG, ERROR, INFO, NOTSET, WARN, Logger
+from logging import DEBUG, ERROR, INFO, NOTSET, WARN, Logger, getLogger
 from typing import Self
 
 from lib_shared.core.utils.logger._logger_models import _LoggerModel
@@ -20,7 +20,8 @@ class _Logger(_LoggerModel):
             case LOGGER_LEVEL.WARN:
                 logger_level = WARN
 
-        self.logger = Logger("logger", level=logger_level)
+        self.logger = getLogger()
+        self.logger.setLevel(logger_level)
 
     def debug(self: Self, message: str) -> None:
         self.logger.debug(message)

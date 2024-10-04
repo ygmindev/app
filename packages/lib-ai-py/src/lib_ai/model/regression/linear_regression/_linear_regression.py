@@ -1,3 +1,5 @@
+from logging import getLogger
+
 import torch
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model.base_model_constants import OPTIMIZER
@@ -54,7 +56,5 @@ class _LinearRegression(_LinearRegressionModel):
             loss.backward()
             optimizer.step()
             if early_stopping.stop(score=loss.item()):
-                logger.info(f"yearly stopping after {epoch} epochs")
+                logger.debug(f"@@@ Early stopping after {epoch} epochs")
                 break
-
-        print(list(self._instance.parameters()))
