@@ -10,6 +10,8 @@ from lib_ai.model.regression.linear_regression._linear_regression_models import 
 from lib_ai.model.utils.early_stopping import EarlyStopping
 from lib_shared.core.utils.logger import logger
 from torch.nn import Linear, Module
+from torch.optim.adam import Adam
+from torch.optim.sgd import SGD
 
 
 class _Instance(Module):
@@ -39,11 +41,11 @@ class _LinearRegression(_LinearRegressionModel):
 
         match optimizer:
             case OPTIMIZER.ADAM:
-                optimizer = torch.optim.Adam(weights, lr=0.1)
+                optimizer = Adam(weights, lr=0.1)
             case OPTIMIZER.SGD:
-                optimizer = torch.optim.SGD(weights, lr=0.01)
+                optimizer = SGD(weights, lr=0.01)
             case _:
-                optimizer = torch.optim.Adam(weights, lr=0.1)
+                optimizer = Adam(weights, lr=0.1)
 
         loss_function = torch.nn.MSELoss(reduction="mean")
         x, y = dataset.x.to_tensor(), dataset.y.to_tensor()
@@ -56,5 +58,5 @@ class _LinearRegression(_LinearRegressionModel):
             loss.backward()
             optimizer.step()
             if early_stopping.stop(score=loss.item()):
-                logger.debug(f"@@@ Early stopping after {epoch} epochs")
+                logger.debug(f"Early stopping after {epoch} epochs")
                 break
