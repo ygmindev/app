@@ -49,7 +49,6 @@ class _LinearRegression(_LinearRegressionModel):
 
         loss_function = torch.nn.MSELoss(reduction="mean")
         x, y = dataset.x.to_tensor(), dataset.y.to_tensor()
-
         early_stopping = EarlyStopping()
         for epoch in range(n_epochs):
             y_pred = self._instance(x)
