@@ -13,25 +13,28 @@ from lib_ai.data.tabular_data._tabular_data_models import (
 
 
 class _TabularData(_TabularDataModel):
+    def __init__(self, data: pl.DataFrame | None = None) -> None:
+        if data is not None:
+            self._data = data
+
     def __add__(self, other: Self) -> Self:
-        result = type(self)()
-        result.data = pl.concat([self.data, other.data])
-        return result
+        return type(self)(data=pl.concat([self.data, other.data]))
 
     def __getitem__(
         self,
         key: _TabularDataStringKeyModel | _TabularDataKeyModel,
     ) -> ArrayDataModel | Self:
         if isinstance(key, str):
-            result = ArrayData()
-            result.data = self.data[key]
+            result = ArrayData(data=self.data[key])
         else:
-            result = type(self)()
-            result.data = self.data[key]
+            result = type(self)(data=self.data[key])
         return result
 
     def __len__(self) -> int:
         return len(self.data)
+
+    def concat(self, other: Self) -> Self:
+        return type(self)(data=pl.concat([self.data, other.data]))
 
     @property
     def data(self) -> pl.DataFrame:
@@ -43,13 +46,11 @@ class _TabularData(_TabularDataModel):
 
     @classmethod
     def from_dict(cls, data: Mapping[str, Sequence[Any]]) -> Self:
-        result = cls()
-        result.data = pl.DataFrame(data)
+        result = cls(data=pl.DataFrame(data))
         return result
 
     def head(self, n_rows: int = 1) -> Self:
-        result = type(self)()
-        result.data = self.data.head(n_rows)
+        result = type(self)(data=self.data.head(n_rows))
         return result
 
     @property

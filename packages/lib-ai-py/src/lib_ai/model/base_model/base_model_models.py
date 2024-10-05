@@ -11,5 +11,5 @@ class BaseModelModel[TTrain](ABC):
     def train(
         self,
         dataset: BaseDataset,
-        params: TTrain,
+        params: TTrain | None = None,
     ) -> None: ...

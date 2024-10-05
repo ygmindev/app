@@ -24,6 +24,9 @@ class BaseDataModel(ABC):
     def __len__(self) -> int: ...
 
     @abstractmethod
+    def concat(self, other: Self) -> Self: ...
+
+    @abstractmethod
     def head(self, n_rows: int = 1) -> Self: ...
 
     @abstractmethod

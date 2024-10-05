@@ -6,7 +6,7 @@ from lib_ai.model.regression.regression_models import RegressionModel
 
 
 class _LinearRegressionTrainParamsModel(TypedDict):
-    n_epochs: int
+    n_epochs: NotRequired[int]
     optimizer: NotRequired[OPTIMIZER]
 
 

@@ -33,10 +33,13 @@ class _LinearRegression(_LinearRegressionModel):
     def train(
         self,
         dataset: XYDataset,
-        params: _LinearRegressionTrainParamsModel,
+        params: _LinearRegressionTrainParamsModel | None = None,
     ) -> None:
+        if params is None:
+            params = {}
+
         weights = self._instance.parameters()
-        n_epochs = params.get("n_epochs", 1000)
+        n_epochs = params.get("n_epochs", 100)
         optimizer = params.get("optimizer", OPTIMIZER.ADAM)
 
         match optimizer:
