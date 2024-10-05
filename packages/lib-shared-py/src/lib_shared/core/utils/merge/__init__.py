@@ -9,5 +9,5 @@ def merge[T: dict](*params: Unpack[MergeParamsModel[T]]) -> MergeModel[T]:
         if isinstance(v, dict):
             merge(v, dest.setdefault(k, {}))
         else:
-            dest[k] = v
+            dest[k] = dest.get(k, v)
     return dest
