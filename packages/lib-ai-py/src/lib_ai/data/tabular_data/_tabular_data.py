@@ -3,9 +3,12 @@ from typing import Any, Mapping, Self, Sequence, Tuple
 import numpy as np
 import polars as pl
 import torch
+from lib_ai.data.array_data import ArrayData
+from lib_ai.data.array_data.array_data_models import ArrayDataModel
 from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataKeyModel,
     _TabularDataModel,
+    _TabularDataStringKeyModel,
 )
 
 
@@ -15,9 +18,16 @@ class _TabularData(_TabularDataModel):
         result.data = pl.concat([self.data, other.data])
         return result
 
-    def __getitem__(self, key: _TabularDataKeyModel) -> Self:
-        result = type(self)()
-        result.data = self.data[key]
+    def __getitem__(
+        self,
+        key: _TabularDataStringKeyModel | _TabularDataKeyModel,
+    ) -> ArrayDataModel | Self:
+        if isinstance(key, str):
+            result = ArrayData()
+            result.data = self.data[key]
+        else:
+            result = type(self)()
+            result.data = self.data[key]
         return result
 
     def __len__(self) -> int:
