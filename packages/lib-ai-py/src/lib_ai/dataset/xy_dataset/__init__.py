@@ -1,5 +1,6 @@
 from typing import Self
 
+from lib_ai.data.array_data.array_data_models import ArrayDataModel
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.dataset.base_dataset import BaseDataset
 from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetKeyModel
@@ -8,12 +9,12 @@ from lib_ai.dataset.xy_dataset.xy_dataset_models import XYDatasetModel
 
 class XYDataset(XYDatasetModel, BaseDataset):
     _x: BaseDataModel
-    _y: BaseDataModel
+    _y: ArrayDataModel
 
     def __init__(
         self,
         x: BaseDataModel,
-        y: BaseDataModel,
+        y: ArrayDataModel,
     ) -> None:
         self._x = x
         self._y = y
@@ -45,9 +46,9 @@ class XYDataset(XYDatasetModel, BaseDataset):
         self._x = value
 
     @property
-    def y(self) -> BaseDataModel:
+    def y(self) -> ArrayDataModel:
         return self._y
 
     @y.setter
-    def y(self, value: BaseDataModel) -> None:
+    def y(self, value: ArrayDataModel) -> None:
         self._y = value

@@ -1,3 +1,5 @@
+from typing import Unpack
+
 import torch
 from lib_ai.scoring.scorer.mse_scorer._mse_scorer_models import (
     _MseScorerModel,
@@ -5,6 +7,9 @@ from lib_ai.scoring.scorer.mse_scorer._mse_scorer_models import (
 )
 
 
-def _mse_scorer(params: _MseScorerParamsModel) -> _MseScorerModel:
+def _mse_scorer(*params: Unpack[_MseScorerParamsModel]) -> _MseScorerModel:
     [y_pred, y] = params
-    return torch.nn.MSELoss(reduction="mean")(y_pred.data, y.data)
+    loss_function = torch.nn.MSELoss(reduction="mean")
+    loss = loss_function(y_pred.to_tensor(), y.to_tensor())
+    loss.backward()
+    return loss.item()
