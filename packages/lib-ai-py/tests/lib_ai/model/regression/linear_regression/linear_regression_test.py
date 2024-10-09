@@ -1,3 +1,4 @@
+from lib_ai.data.array_data import ArrayData
 from lib_ai.data.tabular_data import TabularData
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.regression.linear_regression import LinearRegression
@@ -11,11 +12,12 @@ def test_works() -> None:
                 "x2": [1, 2, 3],
             }
         ),
-        y=TabularData.from_dict(
-            {
-                "y": [1, 2, 3],
-            }
-        ),
+        y=ArrayData.from_list([1, 2, 3]),
+        # y=TabularData.from_dict(
+        #     {
+        #         "y": [1, 2, 3],
+        #     }
+        # ),
     )
     model = LinearRegression(n_features=2)
     model.train(dataset)

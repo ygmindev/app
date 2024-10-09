@@ -121,10 +121,10 @@ class _LinearRegression(_LinearRegressionModel):
         early_stopping = EarlyStopping()
         [x, y] = dataset.x.to_tensor(), dataset.y
         for epoch in range(n_epochs):
-            y_pred = pl.Series(self._instance(x).detach().cpu().numpy())
-            # optimizer.zero_grad()
+            y_pred = pl.Series(self._instance(x).detach().cpu().numpy().squeeze())
+            optimizer.zero_grad()
             loss = scorer(ArrayData(data=y_pred), y)
-            # optimizer.step()
+            optimizer.step()
             if early_stopping.stop(score=loss):
                 logger.debug(f"Early stopping after {epoch} epochs")
                 break

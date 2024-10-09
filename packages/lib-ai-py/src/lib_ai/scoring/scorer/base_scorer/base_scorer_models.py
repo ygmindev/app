@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Any, Callable, Tuple
 
 from lib_ai.data.array_data.array_data_models import ArrayDataModel
 
