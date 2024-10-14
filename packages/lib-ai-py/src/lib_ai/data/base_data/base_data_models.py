@@ -3,8 +3,7 @@ from typing import Any, NotRequired, Self, Sequence, Tuple, TypedDict, Unpack
 
 import numpy as np
 import torch
-
-type BaseDataKeyModel = int | slice | Sequence[int]
+from lib_shared.core.utils.indexable.indexable_models import IndexableModel
 
 
 class SplitParamsModel(TypedDict):
@@ -13,15 +12,9 @@ class SplitParamsModel(TypedDict):
     stratify: NotRequired[Sequence[Any]]
 
 
-class BaseDataModel(ABC):
+class BaseDataModel(IndexableModel, ABC):
     @abstractmethod
     def __add__(self, other: Self) -> Self: ...
-
-    @abstractmethod
-    def __getitem__(self, key: BaseDataKeyModel) -> Self: ...
-
-    @abstractmethod
-    def __len__(self) -> int: ...
 
     @abstractmethod
     def concat(self, other: Self) -> Self: ...
