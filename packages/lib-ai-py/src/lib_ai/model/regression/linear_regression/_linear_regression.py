@@ -95,18 +95,22 @@ class _LinearRegression(_LinearRegressionModel):
         self._instance = _Instance(n_features=n_features)
 
     def test(self, dataset: XYDataset) -> None:
-        print(self._instance(dataset.x.to_tensor()))
+        self._instance.train(mode=False)
+        y = self._instance(dataset.x.to_tensor())
+        print(y)
 
     def train(
         self,
         dataset: XYDataset,
         params: _LinearRegressionTrainParamsModel | None = None,
     ) -> None:
+        self._instance.train()
+
         if params is None:
             params = {}
 
         weights = self._instance.parameters()
-        n_epochs = params.get("n_epochs", 100)
+        n_epochs = params.get("n_epochs", 1000)
         optimizer = params.get("optimizer", OPTIMIZER.ADAM)
         scorer = params.get("scorer", mse_scorer)
 
@@ -128,3 +132,5 @@ class _LinearRegression(_LinearRegressionModel):
             if early_stopping.stop(score=loss):
                 logger.debug(f"Early stopping after {epoch} epochs")
                 break
+
+        # print(self._instance().params())
