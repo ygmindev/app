@@ -13,11 +13,6 @@ def test_works() -> None:
             }
         ),
         y=ArrayData.from_list([1, 2, 3]),
-        # y=TabularData.from_dict(
-        #     {
-        #         "y": [1, 2, 3],
-        #     }
-        # ),
     )
     model = LinearRegression(n_features=2)
     model.train(dataset)
