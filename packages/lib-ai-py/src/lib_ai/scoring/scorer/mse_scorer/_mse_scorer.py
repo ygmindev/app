@@ -13,4 +13,5 @@ def _mse_scorer(*params: Unpack[_MseScorerParamsModel]) -> _MseScorerModel:
     loss = loss_function(y_pred.to_tensor(), y.to_tensor())
     loss.requires_grad = True
     loss.backward()
+    print(loss.item())
     return loss.item()

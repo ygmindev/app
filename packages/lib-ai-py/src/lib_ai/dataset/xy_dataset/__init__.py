@@ -19,12 +19,6 @@ class XYDataset(XYDatasetModel, BaseDataset):
         self._x = x
         self._y = y
 
-    def __add__(self, other: Self) -> Self:
-        return type(self)(
-            x=self.x + other.x,
-            y=self.y + other.y,
-        )
-
     def __getitem__(self, key: BaseDatasetKeyModel) -> Self:
         return type(self)(
             x=self.x[key],

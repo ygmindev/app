@@ -1,38 +1,61 @@
 import os
 
+import numpy as np
 import torch
-from lib_ai.core.utils.device import device
-from lib_ai.data.tabular_data import TabularData
-from lib_shared.core.utils import merge
-from torch import nn, set_default_device
-from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
+from lib_shared.core.utils.random import random
 
 
-class NeuralNetwork(nn.Module):
+class Model(torch.nn.Module):
     def __init__(self) -> None:
         super().__init__()
-        self.flatten = nn.Flatten()
-        self.linear_relu_stack = nn.Sequential(
-            nn.Linear(28 * 28, 512),
-            nn.ReLU(),
-            nn.Linear(512, 512),
-            nn.ReLU(),
-            nn.Linear(512, 10),
-        )
+        self.linear_relu_stack = torch.nn.Linear(3, 1)
 
     def forward(self, x):  # -> Any:
-        x = self.flatten(x)
         logits = self.linear_relu_stack(x)
         return logits
 
 
-# model = NeuralNetwork().to(device)
-# set_default_device(device)
-# X = torch.rand(1, 28, 28, device=device)
-# logits = model(X)
-# pred_probab = nn.Softmax(dim=1)(logits)
-# y_pred = pred_probab.argmax(1)
-# print(f"Predicted class: {y_pred}")
+a1 = random(min=1, max=1e1)
+a2 = random(min=1e1 + 1, max=1e2)
+a3 = random(min=1e2 + 1, max=1e3)
+e = random(min=1e3 + 1, max=1e4)
 
-data = TabularData()
+x1 = np.array(
+    [
+        random(min=1, max=9, n_decimals=2),
+        random(min=1, max=9, n_decimals=2),
+        random(min=1, max=9, n_decimals=2),
+    ]
+)
+x2 = np.array(
+    [
+        random(min=1, max=9, n_decimals=2),
+        random(min=1, max=9, n_decimals=2),
+        random(min=1, max=9, n_decimals=2),
+    ]
+)
+x3 = np.array(
+    [
+        random(min=1, max=9, n_decimals=2),
+        random(min=1, max=9, n_decimals=2),
+        random(min=1, max=9, n_decimals=2),
+    ]
+)
+y = (x1 * a1 + x2 * a2 + x2 * a3) + e
+
+
+model = Model()
+weights = model.parameters()
+optimizer = torch.optim.SGD(weights, lr=0.01, weight_decay=0.1)
+criterion = torch.nn.MSELoss(reduction="mean")
+
+epochs = 100
+for epoch in range(epochs):
+    optimizer.zero_grad()
+    y_pred = model(torch.tensor([x1, x2, x3]).type(torch.float))
+    loss = criterion(y_pred, torch.tensor(y).type(torch.float))
+    loss.backward()
+    optimizer.step()
+    print(loss.item())
+
+print(model.parameters())

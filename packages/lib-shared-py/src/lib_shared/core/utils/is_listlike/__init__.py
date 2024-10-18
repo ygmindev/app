@@ -6,4 +6,4 @@ from lib_shared.core.utils.is_listlike.is_listlike_models import (
 
 
 def is_listlike(params: IsListlikeParamsModel) -> IsListlikeModel:
-    return isinstance(params, (list, tuple, np.ndarray))
+    return isinstance(params, (list, tuple))

@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
 from typing import Any, NotRequired, Self, Sequence, Tuple, TypedDict, Unpack
 
-import numpy as np
 import torch
 from lib_shared.core.utils.indexable.indexable_models import IndexableModel
+from numpy.typing import NDArray
 
 
 class SplitParamsModel(TypedDict):
@@ -12,12 +14,20 @@ class SplitParamsModel(TypedDict):
     stratify: NotRequired[Sequence[Any]]
 
 
-class BaseDataModel(IndexableModel, ABC):
+class BaseDataModel[T](IndexableModel, ABC):
     @abstractmethod
-    def __add__(self, other: Self) -> Self: ...
+    def __init__(self, data: T) -> None: ...
 
     @abstractmethod
     def concat(self, other: Self) -> Self: ...
+
+    @property
+    @abstractmethod
+    def data(self) -> T: ...
+
+    @data.setter
+    @abstractmethod
+    def data(self, _value: T) -> None: ...
 
     @abstractmethod
     def head(self, n_rows: int = 1) -> Self: ...
@@ -26,7 +36,7 @@ class BaseDataModel(IndexableModel, ABC):
     def split(self, **params: Unpack[SplitParamsModel]) -> Tuple[Self, Self]: ...
 
     @abstractmethod
-    def to_numpy(self) -> np.ndarray: ...
+    def to_numpy(self) -> NDArray: ...
 
     @abstractmethod
     def to_tensor(self) -> torch.Tensor: ...

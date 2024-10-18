@@ -2,8 +2,13 @@ from abc import abstractmethod
 from typing import Any, Mapping, Self, Sequence, Tuple, overload
 
 import polars as pl
+import torch
 from lib_ai.data.array_data.array_data_models import ArrayDataModel
 from lib_ai.data.base_data.base_data_models import BaseDataModel
+from lib_ai.data.tabular_data.tabular_data_constants import TABULAR_DATA_TYPE
+from numpy.typing import NDArray
+
+type _TabularDataTypeModel = torch.Tensor | NDArray | pl.DataFrame
 
 type _TabularDataStringKeyModel = str
 
@@ -16,10 +21,7 @@ type _TabularDataKeyModel = _TabularDataIndexKeyModel | _TabularDataMultiKeyMode
 ] | Tuple[_TabularDataMultiKeyModel, Sequence[str]]
 
 
-class _TabularDataModel(BaseDataModel):
-    @abstractmethod
-    def __init__(self, data: pl.DataFrame | None = None) -> None: ...
-
+class _TabularDataModel(BaseDataModel[_TabularDataTypeModel]):
     @overload
     @abstractmethod
     def __getitem__(self, key: _TabularDataStringKeyModel) -> ArrayDataModel: ...
@@ -30,8 +32,18 @@ class _TabularDataModel(BaseDataModel):
 
     @classmethod
     @abstractmethod
-    def from_dict(cls, _data: Mapping[str, Sequence[Any]]) -> Self: ...
+    def from_dict(
+        cls,
+        _data: Mapping[str, Sequence[Any]],
+        _to: TABULAR_DATA_TYPE | None = TABULAR_DATA_TYPE.DATAFRAME,
+    ) -> Self: ...
+
+    @abstractmethod
+    def get_type(self) -> TABULAR_DATA_TYPE: ...
+
+    @abstractmethod
+    def to_dataframe(self) -> pl.DataFrame: ...
 
     @property
     @abstractmethod
-    def shape(self) -> Tuple[int, int]: ...
+    def shape(self) -> Tuple[int, ...]: ...
