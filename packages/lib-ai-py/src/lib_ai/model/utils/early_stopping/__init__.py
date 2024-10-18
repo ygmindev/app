@@ -13,7 +13,7 @@ class EarlyStopping(EarlyStoppingModel):
     def __init__(
         self,
         mode: EARLY_STOPPING_MODE = EARLY_STOPPING_MODE.MIN,
-        patience: int = 10,
+        patience: int = 100,
         tolerance: float = 0.0,
     ) -> None:
         self._mode = mode

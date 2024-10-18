@@ -51,11 +51,11 @@ class _LinearRegression(_LinearRegressionModel):
         scorer = params.get("scorer", mse_scorer)
         match optimizer:
             case OPTIMIZER.ADAM:
-                optimizer = Adam(weights, lr=0.1, weight_decay=0.1)
+                optimizer = Adam(weights, lr=1e-2)
             case OPTIMIZER.SGD:
-                optimizer = SGD(weights, lr=0.1, weight_decay=0.1)
+                optimizer = SGD(weights, lr=1e-2)
             case _:
-                optimizer = Adam(weights, lr=0.1, weight_decay=0.1)
+                optimizer = Adam(weights, lr=1e-2)
 
         early_stopping = EarlyStopping()
         [x, y] = dataset.x.to_tensor(), dataset.y
