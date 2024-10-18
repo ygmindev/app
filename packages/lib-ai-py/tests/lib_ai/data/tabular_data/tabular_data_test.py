@@ -17,7 +17,7 @@ TABLE_2 = TabularData.from_dict(
 
 
 def test_add() -> None:
-    result = TABLE_1 + TABLE_2
+    result = TABLE_1.concat(TABLE_2)
     assert np.array_equal(
         result.to_numpy(),
         np.array(
