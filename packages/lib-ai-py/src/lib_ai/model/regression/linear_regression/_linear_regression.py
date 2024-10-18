@@ -33,8 +33,7 @@ class _LinearRegression(_LinearRegressionModel):
 
     def test(self, dataset: XYDataset) -> None:
         self._instance.train(mode=False)
-        y = self._instance(dataset.x.to_tensor())
-        print(y)
+        dataset.y.data = self._instance(dataset.x.to_tensor().squeeze())
 
     def train(
         self,
@@ -63,6 +62,7 @@ class _LinearRegression(_LinearRegressionModel):
             optimizer.zero_grad()
             y_pred = self._instance(x)
             loss = scorer(ArrayData(data=y_pred), y)
+            print(loss)
             optimizer.step()
             if early_stopping.stop(score=loss):
                 logger.debug(f"Early stopping after {epoch} epochs")

@@ -37,23 +37,27 @@ def test_works() -> None:
 
     x = TabularData.from_dict(
         {
-            "x1": x1,
-            "x2": x2,
-            "x3": x3,
+            "x1": list(x1),
+            "x2": list(x2),
+            "x3": list(x3),
         }
     )
-    y = ArrayData.from_list(y)
+    y = ArrayData.from_list(list(y))
     trainset = XYDataset(
         x=x,
         y=y,
     )
     model = LinearRegression(n_features=3)
-    print("@@@ coeff:")
     model.train(trainset)
 
-    # testset = XYDataset(
-    #     x=x,
-    #     y=ArrayData.from_list([1, 2, 3]),
-    # )
-    # model.test(testset)
+    testset = XYDataset(
+        x=x,
+        y=ArrayData.from_list([1, 2, 3]),
+    )
+    model.test(testset)
+
+    print("@@@")
+    print(y.data)
+    print("vs.")
+    print(testset.y.data)
     assert 1 == 1

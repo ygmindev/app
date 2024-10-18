@@ -12,5 +12,4 @@ def _mse_scorer(*params: Unpack[_MseScorerParamsModel]) -> _MseScorerModel:
     loss_function = torch.nn.MSELoss(reduction="mean")
     loss = loss_function(y_pred.to_tensor(), y.to_tensor().unsqueeze(1))
     loss.backward()
-    print(loss.item())
     return loss.item()
