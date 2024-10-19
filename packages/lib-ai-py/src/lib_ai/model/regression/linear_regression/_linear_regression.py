@@ -114,6 +114,7 @@ class _LinearRegression(_LinearRegressionModel):
                 y_pred = self._instance(x.to_tensor())
                 loss = self._scorer(ArrayData(data=y_pred), y)
                 optimizer.step()
-                if early_stopping.stop(score=loss):
-                    logger.debug(f"Early stopping after {epoch} epochs")
-                    break
+
+            if early_stopping.stop(score=loss):
+                logger.debug(f"Early stopping after {epoch} epochs")
+                break
