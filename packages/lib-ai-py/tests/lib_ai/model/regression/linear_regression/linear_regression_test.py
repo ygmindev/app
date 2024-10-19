@@ -11,48 +11,13 @@ def test_works() -> None:
     a1 = random(min=1, max=1e1)
     a2 = random(min=1e1 + 1, max=1e2)
     e = random(min=1e2 + 1, max=1e3)
-    x1 = np.array(
-        [
-            random(min=1, max=9),
-            random(min=1, max=9),
-            random(min=1, max=9),
-            random(min=1, max=9),
-            random(min=1, max=9),
-        ]
-    )
-    x2 = np.array(
-        [
-            random(min=1, max=9),
-            random(min=1, max=9),
-            random(min=1, max=9),
-            random(min=1, max=9),
-            random(min=1, max=9),
-        ]
-    )
+    x1 = np.array(list([random(min=1, max=9) for _ in range(10)]))
+    x2 = np.array(list([random(min=1, max=9) for _ in range(10)]))
     y = (x1 * a1 + x2 * a2) + e
-
-    x = TabularData.from_dict(
-        {
-            "x1": list(x1),
-            "x2": list(x2),
-        }
-    )
+    x = TabularData.from_dict({"x1": list(x1), "x2": list(x2)})
     y = ArrayData.from_list(list(y))
-    trainset = XYDataset(
-        x=x,
-        y=y,
-    )
+    trainset, testset = XYDataset(x=x, y=y).split()
     model = LinearRegression(n_features=2)
     model.train(trainset)
-
-    testset = XYDataset(
-        x=x,
-        y=ArrayData.from_list([1, 2, 3]),
-    )
-    model.test(testset)
-
-    print("@@@")
-    print(y.data)
-    print("vs.")
-    print(testset.y.data)
+    model.evaluate(testset)
     assert 1 == 1

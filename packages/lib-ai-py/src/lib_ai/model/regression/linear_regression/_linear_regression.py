@@ -1,3 +1,6 @@
+from collections.abc import Callable
+from typing import Unpack
+
 import polars as pl
 import torch
 from lib_ai.data.array_data import ArrayData
@@ -8,6 +11,10 @@ from lib_ai.model.regression.linear_regression._linear_regression_models import 
     _LinearRegressionTrainParamsModel,
 )
 from lib_ai.model.utils.early_stopping import EarlyStopping
+from lib_ai.scoring.scorer.base_scorer.base_scorer_models import (
+    BaseScorerModel,
+    BaseScorerParamsModel,
+)
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_shared.core.utils.logger import logger
 from torch.nn import Linear, Module
@@ -28,10 +35,21 @@ class _Instance(Module):
 
 
 class _LinearRegression(_LinearRegressionModel):
-    def __init__(self, n_features: int) -> None:
+    def __init__(
+        self,
+        n_features: int,
+        scorer: Callable[[Unpack[BaseScorerParamsModel]], BaseScorerModel] = mse_scorer,
+    ) -> None:
         self._instance = _Instance(n_features=n_features)
+        self._scorer = scorer
 
-    def test(self, dataset: XYDataset) -> None:
+    def evaluate(self, dataset: XYDataset) -> None:
+        y = dataset.y
+        self.predict(dataset)
+        y_pred = dataset.y
+        print(self._scorer(y_pred, y))
+
+    def predict(self, dataset: XYDataset) -> None:
         self._instance.train(mode=False)
         dataset.y.data = self._instance(dataset.x.to_tensor().squeeze())
 
@@ -47,7 +65,6 @@ class _LinearRegression(_LinearRegressionModel):
         weights = self._instance.parameters()
         n_epochs = params.get("n_epochs", 10000)
         optimizer = params.get("optimizer", OPTIMIZER.SGD)
-        scorer = params.get("scorer", mse_scorer)
         match optimizer:
             case OPTIMIZER.ADAM:
                 optimizer = Adam(weights, lr=1e-2)
@@ -61,7 +78,7 @@ class _LinearRegression(_LinearRegressionModel):
         for epoch in range(n_epochs):
             optimizer.zero_grad()
             y_pred = self._instance(x)
-            loss = scorer(ArrayData(data=y_pred), y)
+            loss = self._scorer(ArrayData(data=y_pred), y)
             optimizer.step()
             if early_stopping.stop(score=loss):
                 logger.debug(f"Early stopping after {epoch} epochs")

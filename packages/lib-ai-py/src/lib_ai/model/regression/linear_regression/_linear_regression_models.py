@@ -7,14 +7,18 @@ from lib_ai.scoring.scorer.base_scorer.base_scorer_models import (
     BaseScorerModel,
     BaseScorerParamsModel,
 )
+from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 
 
 class _LinearRegressionTrainParamsModel(TypedDict):
     n_epochs: NotRequired[int]
     optimizer: NotRequired[OPTIMIZER]
-    scorer: NotRequired[Callable[[Unpack[BaseScorerParamsModel]], BaseScorerModel]]
 
 
 class _LinearRegressionModel(RegressionModel[_LinearRegressionTrainParamsModel], ABC):
     @abstractmethod
-    def __init__(self, n_features: int) -> None: ...
+    def __init__(
+        self,
+        n_features: int,
+        scorer: Callable[[Unpack[BaseScorerParamsModel]], BaseScorerModel] = mse_scorer,
+    ) -> None: ...

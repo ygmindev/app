@@ -1,7 +1,8 @@
-from typing import Self
+from typing import Self, Tuple, Unpack
 
+from lib_ai.core.utils.split_indices import split_indices
 from lib_ai.data.array_data.array_data_models import ArrayDataModel
-from lib_ai.data.base_data.base_data_models import BaseDataModel
+from lib_ai.data.base_data.base_data_models import BaseDataModel, SplitParamsModel
 from lib_ai.dataset.base_dataset import BaseDataset
 from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetKeyModel
 from lib_ai.dataset.xy_dataset.xy_dataset_models import XYDatasetModel
@@ -16,6 +17,7 @@ class XYDataset(XYDatasetModel, BaseDataset):
         x: BaseDataModel,
         y: ArrayDataModel,
     ) -> None:
+        assert len(x) == len(y)
         self._x = x
         self._y = y
 
@@ -30,6 +32,18 @@ class XYDataset(XYDatasetModel, BaseDataset):
             x=self.x.head(n_rows),
             y=self.y.head(n_rows),
         )
+
+    def __len__(self) -> int:
+        return len(self.x)
+
+    def split(self, **params: Unpack[SplitParamsModel]) -> Tuple[Self, Self]:
+        train_indices, test_indices = split_indices(
+            n_rows=len(self),
+            train_size=params.get("train_size", 0.8),
+            shuffle=params.get("shuffle", False),
+            stratify=params.get("stratify", None),
+        )
+        return self[train_indices], self[test_indices]
 
     @property
     def x(self) -> BaseDataModel:
