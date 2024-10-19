@@ -19,5 +19,5 @@ def test_works() -> None:
     trainset, testset = XYDataset(x=x, y=y).split()
     model = LinearRegression(n_features=2)
     model.train(trainset)
-    model.evaluate(testset)
-    assert 1 == 1
+    loss = model.evaluate(testset)
+    assert abs(loss) <= 1
