@@ -1,8 +1,8 @@
 from collections.abc import Callable
 from typing import Unpack
 
-import polars as pl
 import torch
+from lib_ai.core.utils.chunks import chunks
 from lib_ai.data.array_data import ArrayData
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model.base_model_constants import OPTIMIZER
@@ -53,6 +53,36 @@ class _LinearRegression(_LinearRegressionModel):
         self._instance.train(mode=False)
         dataset.y.data = self._instance(dataset.x.to_tensor().squeeze())
 
+    # def train(
+    #     self,
+    #     dataset: XYDataset,
+    #     params: _LinearRegressionTrainParamsModel | None = None,
+    # ) -> None:
+    #     if params is None:
+    #         params = {}
+
+    #     self._instance.train(mode=True)
+    #     weights = self._instance.parameters()
+    #     n_epochs = params.get("n_epochs", 10000)
+    #     optimizer = params.get("optimizer", OPTIMIZER.SGD)
+    #     match optimizer:
+    #         case OPTIMIZER.ADAM:
+    #             optimizer = Adam(weights, lr=1e-2)
+    #         case OPTIMIZER.SGD:
+    #             optimizer = SGD(weights, lr=1e-2)
+    #         case _:
+    #             optimizer = Adam(weights, lr=1e-2)
+
+    #     early_stopping = EarlyStopping()
+    #     [x, y] = dataset.x.to_tensor(), dataset.y
+    #     for epoch in range(n_epochs):
+    #         optimizer.zero_grad()
+    #         y_pred = self._instance(x)
+    #         loss = self._scorer(ArrayData(data=y_pred), y)
+    #         optimizer.step()
+    #         if early_stopping.stop(score=loss):
+    #             logger.debug(f"Early stopping after {epoch} epochs")
+    #             break
     def train(
         self,
         dataset: XYDataset,
@@ -63,7 +93,7 @@ class _LinearRegression(_LinearRegressionModel):
 
         self._instance.train(mode=True)
         weights = self._instance.parameters()
-        n_epochs = params.get("n_epochs", 10000)
+        n_epochs = params.get("n_epochs", 1000)
         optimizer = params.get("optimizer", OPTIMIZER.SGD)
         match optimizer:
             case OPTIMIZER.ADAM:
@@ -74,12 +104,16 @@ class _LinearRegression(_LinearRegressionModel):
                 optimizer = Adam(weights, lr=1e-2)
 
         early_stopping = EarlyStopping()
-        [x, y] = dataset.x.to_tensor(), dataset.y
         for epoch in range(n_epochs):
-            optimizer.zero_grad()
-            y_pred = self._instance(x)
-            loss = self._scorer(ArrayData(data=y_pred), y)
-            optimizer.step()
-            if early_stopping.stop(score=loss):
-                logger.debug(f"Early stopping after {epoch} epochs")
-                break
+            for batchset in chunks(
+                data=dataset,
+                chunk_size=2,
+            ):
+                x, y = batchset.x, batchset.y
+                optimizer.zero_grad()
+                y_pred = self._instance(x.to_tensor())
+                loss = self._scorer(ArrayData(data=y_pred), y)
+                optimizer.step()
+                if early_stopping.stop(score=loss):
+                    logger.debug(f"Early stopping after {epoch} epochs")
+                    break

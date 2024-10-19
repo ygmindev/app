@@ -26,6 +26,9 @@ def _chunks[T](**params: Unpack[_ChunksParamsModel[T]]) -> _ChunksModel[T]:
         def __getitem__(self, key: IndexableSingleKeyModel | IndexableMultiKeyModel) -> Any | T:
             return self._data[key]
 
+        def __getitems__(self, key: IndexableMultiKeyModel) -> T:
+            return self._data[key]
+
         def __len__(self) -> int:
             return len(self._data)
 
