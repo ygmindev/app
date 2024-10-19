@@ -45,7 +45,7 @@ class _LinearRegression(_LinearRegressionModel):
 
         self._instance.train(mode=True)
         weights = self._instance.parameters()
-        n_epochs = params.get("n_epochs", 1000)
+        n_epochs = params.get("n_epochs", 10000)
         optimizer = params.get("optimizer", OPTIMIZER.SGD)
         scorer = params.get("scorer", mse_scorer)
         match optimizer:
@@ -62,10 +62,7 @@ class _LinearRegression(_LinearRegressionModel):
             optimizer.zero_grad()
             y_pred = self._instance(x)
             loss = scorer(ArrayData(data=y_pred), y)
-            print(loss)
             optimizer.step()
             if early_stopping.stop(score=loss):
                 logger.debug(f"Early stopping after {epoch} epochs")
                 break
-
-        print(list(self._instance.parameters()))

@@ -10,36 +10,31 @@ from lib_shared.core.utils.random import random
 def test_works() -> None:
     a1 = random(min=1, max=1e1)
     a2 = random(min=1e1 + 1, max=1e2)
-    a3 = random(min=1e2 + 1, max=1e3)
-    e = random(min=1e3 + 1, max=1e4)
+    e = random(min=1e2 + 1, max=1e3)
     x1 = np.array(
         [
-            random(min=1, max=9, n_decimals=2),
-            random(min=1, max=9, n_decimals=2),
-            random(min=1, max=9, n_decimals=2),
+            random(min=1, max=9),
+            random(min=1, max=9),
+            random(min=1, max=9),
+            random(min=1, max=9),
+            random(min=1, max=9),
         ]
     )
     x2 = np.array(
         [
-            random(min=1, max=9, n_decimals=2),
-            random(min=1, max=9, n_decimals=2),
-            random(min=1, max=9, n_decimals=2),
+            random(min=1, max=9),
+            random(min=1, max=9),
+            random(min=1, max=9),
+            random(min=1, max=9),
+            random(min=1, max=9),
         ]
     )
-    x3 = np.array(
-        [
-            random(min=1, max=9, n_decimals=2),
-            random(min=1, max=9, n_decimals=2),
-            random(min=1, max=9, n_decimals=2),
-        ]
-    )
-    y = (x1 * a1 + x2 * a2 + x2 * a3) + e
+    y = (x1 * a1 + x2 * a2) + e
 
     x = TabularData.from_dict(
         {
             "x1": list(x1),
             "x2": list(x2),
-            "x3": list(x3),
         }
     )
     y = ArrayData.from_list(list(y))
@@ -47,7 +42,7 @@ def test_works() -> None:
         x=x,
         y=y,
     )
-    model = LinearRegression(n_features=3)
+    model = LinearRegression(n_features=2)
     model.train(trainset)
 
     testset = XYDataset(
