@@ -11,7 +11,7 @@ from torch.utils.data import DataLoader, Dataset
 
 def _chunks[T](**params: Unpack[_ChunksParamsModel[T]]) -> _ChunksModel[T]:
     data = params.get("data")
-    chunk_size = params.get("chunk_size", 1e3)
+    chunk_size = params.get("chunk_size", len(data) / 5)
 
     class _Dataset(Dataset):
         def __init__(self, value) -> None:

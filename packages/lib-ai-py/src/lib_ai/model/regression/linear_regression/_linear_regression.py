@@ -53,36 +53,6 @@ class _LinearRegression(_LinearRegressionModel):
         self._instance.train(mode=False)
         dataset.y.data = self._instance(dataset.x.to_tensor().squeeze())
 
-    # def train(
-    #     self,
-    #     dataset: XYDataset,
-    #     params: _LinearRegressionTrainParamsModel | None = None,
-    # ) -> None:
-    #     if params is None:
-    #         params = {}
-
-    #     self._instance.train(mode=True)
-    #     weights = self._instance.parameters()
-    #     n_epochs = params.get("n_epochs", 10000)
-    #     optimizer = params.get("optimizer", OPTIMIZER.SGD)
-    #     match optimizer:
-    #         case OPTIMIZER.ADAM:
-    #             optimizer = Adam(weights, lr=1e-2)
-    #         case OPTIMIZER.SGD:
-    #             optimizer = SGD(weights, lr=1e-2)
-    #         case _:
-    #             optimizer = Adam(weights, lr=1e-2)
-
-    #     early_stopping = EarlyStopping()
-    #     [x, y] = dataset.x.to_tensor(), dataset.y
-    #     for epoch in range(n_epochs):
-    #         optimizer.zero_grad()
-    #         y_pred = self._instance(x)
-    #         loss = self._scorer(ArrayData(data=y_pred), y)
-    #         optimizer.step()
-    #         if early_stopping.stop(score=loss):
-    #             logger.debug(f"Early stopping after {epoch} epochs")
-    #             break
     def train(
         self,
         dataset: XYDataset,
