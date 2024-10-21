@@ -1,4 +1,4 @@
-from typing import Any, Unpack, overload
+from typing import Any, Unpack, cast, overload
 
 import torch
 from lib_ai.core.utils.chunks._chunks_models import _ChunksModel, _ChunksParamsModel
@@ -32,8 +32,11 @@ def _chunks[T](**params: Unpack[_ChunksParamsModel[T]]) -> _ChunksModel[T]:
         def __len__(self) -> int:
             return len(self._data)
 
-    return DataLoader(
-        _Dataset(data),
-        batch_size=chunk_size,
-        collate_fn=None if torch.is_tensor(data) else lambda x: x,
+    return cast(
+        _ChunksModel[T],
+        DataLoader(
+            _Dataset(data),
+            batch_size=chunk_size,
+            collate_fn=None if torch.is_tensor(data) else lambda x: x,
+        ),
     )

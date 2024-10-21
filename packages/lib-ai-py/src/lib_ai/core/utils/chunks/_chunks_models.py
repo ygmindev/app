@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import TypedDict
 
 from lib_shared.core.utils.indexable.indexable_models import IndexableModel

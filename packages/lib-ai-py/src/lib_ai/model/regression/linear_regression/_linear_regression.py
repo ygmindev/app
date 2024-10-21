@@ -43,7 +43,7 @@ class _LinearRegression(_LinearRegressionModel):
         self._instance = _Instance(n_features=n_features)
         self._scorer = scorer
 
-    def evaluate(self, dataset: XYDataset) -> float:
+    def test(self, dataset: XYDataset) -> float:
         y = dataset.y
         self.predict(dataset)
         y_pred = dataset.y
