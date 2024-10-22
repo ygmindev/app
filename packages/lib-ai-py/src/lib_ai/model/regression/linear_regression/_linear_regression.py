@@ -1,5 +1,5 @@
 from collections.abc import Callable
-from typing import Unpack, cast
+from typing import Unpack
 
 import torch
 from lib_ai.core.utils.chunks import chunks
@@ -16,7 +16,6 @@ from lib_ai.scoring.scorer.base_scorer.base_scorer_models import (
     BaseScorerParamsModel,
 )
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
-from lib_shared.core.utils.iterable.iterable_models import IterableModel
 from lib_shared.core.utils.logger import logger
 from torch.nn import Linear, Module
 from torch.optim.adam import Adam
