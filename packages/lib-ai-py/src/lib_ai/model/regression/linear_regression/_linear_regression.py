@@ -47,7 +47,9 @@ class _LinearRegression(_LinearRegressionModel):
         y = dataset.y
         self.predict(dataset)
         y_pred = dataset.y
-        return self._scorer(y_pred, y)
+        score = self._scorer(y_pred, y)
+        logger.debug(f"Loss: {score:.2f}")
+        return score
 
     def predict(self, dataset: XYDataset) -> None:
         self._instance.train(mode=False)
