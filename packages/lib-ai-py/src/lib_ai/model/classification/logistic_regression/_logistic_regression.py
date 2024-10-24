@@ -1,12 +1,15 @@
+from collections.abc import Callable
+from typing import Unpack, cast
+
 import torch
 from lib_ai.core.utils.chunks import chunks
 from lib_ai.data.array_data import ArrayData
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model.base_model_constants import OPTIMIZER
-from lib_ai.model.regression.linear_regression._linear_regression_models import (
-    _LinearRegressionModel,
-    _LinearRegressionTestParamsModel,
-    _LinearRegressionTrainParamsModel,
+from lib_ai.model.classification.logistic_regression._logistic_regression_models import (
+    _LogisticRegressionModel,
+    _LogisticRegressionTestParamsModel,
+    _LogisticRegressionTrainParamsModel,
 )
 from lib_ai.model.utils.early_stopping import EarlyStopping
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
@@ -25,33 +28,30 @@ class _Instance(Module):
         )
 
     def forward(self, x) -> torch.Tensor:
-        return self.linear(x)
+        return torch.sigmoid(self.linear(x))
 
 
-class _LinearRegression(_LinearRegressionModel):
+class _LogisticRegression(_LogisticRegressionModel):
     def __init__(
         self,
         n_features: int,
     ) -> None:
         self._instance = _Instance(n_features=n_features)
 
-    def predict(
-        self,
-        dataset: XYDataset,
-    ) -> None:
+    def predict(self, dataset: XYDataset) -> None:
         self._instance.train(mode=False)
-        dataset.y.data = self._instance(dataset.x.to_tensor().squeeze())
+        logit = self._instance(dataset.x.to_tensor().squeeze())
+        dataset.y.data = cast(torch.Tensor, torch.max(logit, 1))
 
     def test(
         self,
         dataset: XYDataset,
-        params: _LinearRegressionTestParamsModel | None = None,
+        params: _LogisticRegressionTestParamsModel | None = None,
     ) -> float:
         if params is None:
             params = {}
 
         scorer = params.get("scorer", mse_scorer)
-
         y = dataset.y
         self.predict(dataset)
         score = scorer(dataset.y, y)
@@ -61,7 +61,7 @@ class _LinearRegression(_LinearRegressionModel):
     def train(
         self,
         dataset: XYDataset,
-        params: _LinearRegressionTrainParamsModel | None = None,
+        params: _LogisticRegressionTrainParamsModel | None = None,
     ) -> None:
         if params is None:
             params = {}

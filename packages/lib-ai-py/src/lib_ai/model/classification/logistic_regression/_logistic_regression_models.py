@@ -1,25 +1,25 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from typing import NotRequired, TypedDict
 
 from lib_ai.model.base_model.base_model_constants import OPTIMIZER
-from lib_ai.model.regression.base_regression.base_regression_models import (
-    BaseRegressionModel,
+from lib_ai.model.classification.base_classification.base_classification_models import (
+    BaseClassificationModel,
 )
 from lib_ai.scoring.scorer.base_scorer.base_scorer_models import BaseScorerCallableModel
 
 
-class _LinearRegressionTrainParamsModel(TypedDict):
+class _LogisticRegressionTrainParamsModel(TypedDict):
     n_epochs: NotRequired[int]
     optimizer: NotRequired[OPTIMIZER]
     scorer: NotRequired[BaseScorerCallableModel]
 
 
-class _LinearRegressionTestParamsModel(TypedDict):
+class _LogisticRegressionTestParamsModel(TypedDict):
     scorer: NotRequired[BaseScorerCallableModel]
 
 
-class _LinearRegressionModel(
-    BaseRegressionModel[_LinearRegressionTrainParamsModel, _LinearRegressionTestParamsModel], ABC
+class _LogisticRegressionModel(
+    BaseClassificationModel[_LogisticRegressionTrainParamsModel, _LogisticRegressionTestParamsModel]
 ):
     @abstractmethod
     def __init__(
