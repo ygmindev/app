@@ -1,5 +1,4 @@
-from collections.abc import Callable
-from typing import Unpack, cast
+from typing import cast
 
 import torch
 from lib_ai.core.utils.chunks import chunks
@@ -12,7 +11,8 @@ from lib_ai.model.classification.logistic_regression._logistic_regression_models
     _LogisticRegressionTrainParamsModel,
 )
 from lib_ai.model.utils.early_stopping import EarlyStopping
-from lib_ai.scoring.scorer.mse_scorer import mse_scorer
+from lib_ai.scoring.scorer.cross_entropy_scorer import cross_entropy_scorer
+from lib_ai.scoring.scorer.f1_scorer import f1_scorer
 from lib_shared.core.utils.logger import logger
 from torch.nn import Linear, Module
 from torch.optim.adam import Adam
@@ -51,7 +51,7 @@ class _LogisticRegression(_LogisticRegressionModel):
         if params is None:
             params = {}
 
-        scorer = params.get("scorer", mse_scorer)
+        scorer = params.get("scorer", f1_scorer)
         y = dataset.y
         self.predict(dataset)
         score = scorer(dataset.y, y)
@@ -68,7 +68,7 @@ class _LogisticRegression(_LogisticRegressionModel):
 
         n_epochs = params.get("n_epochs", 1000)
         optimizer = params.get("optimizer", OPTIMIZER.SGD)
-        scorer = params.get("scorer", mse_scorer)
+        scorer = params.get("scorer", cross_entropy_scorer)
 
         self._instance.train(mode=True)
         weights = self._instance.parameters()

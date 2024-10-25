@@ -36,6 +36,7 @@ torchaudio = "^2.4.0"
 numpy = "^2.1.1"
 polars = "^1.7.1"
 scikit-learn = "^1.5.2"
+torcheval = "^0.0.7"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"

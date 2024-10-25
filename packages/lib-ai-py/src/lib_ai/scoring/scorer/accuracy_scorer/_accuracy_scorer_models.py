@@ -3,5 +3,5 @@ from lib_ai.scoring.scorer.base_scorer.base_scorer_models import (
     BaseScorerParamsModel,
 )
 
-type _CrossEntropyScorerParamsModel = BaseScorerParamsModel
-type _CrossEntropyScorerModel = BaseScorerModel
+type _AccuracyScorerParamsModel = BaseScorerParamsModel
+type _AccuracyScorerModel = BaseScorerModel
