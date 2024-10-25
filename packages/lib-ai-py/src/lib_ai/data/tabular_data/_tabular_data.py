@@ -44,7 +44,7 @@ class _TabularData(_TabularDataModel):
             case TABULAR_DATA_TYPE.TENSOR:
                 result = torch.concatenate([cast(torch.Tensor, result), other.to_tensor()])
             case TABULAR_DATA_TYPE.NUMPY:
-                result = np.concatenate([result, other.to_numpy()], axis=0)
+                result = np.concatenate([cast(NDArray, result), other.to_numpy()], axis=0)
             case TABULAR_DATA_TYPE.DATAFRAME:
                 result = pl.concat([cast(pl.DataFrame, result), other.to_dataframe()])
         return type(self)(data=result)

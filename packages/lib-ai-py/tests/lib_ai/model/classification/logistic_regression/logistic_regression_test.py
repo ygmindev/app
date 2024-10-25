@@ -1,5 +1,23 @@
+import numpy as np
+import torch
+from lib_ai.data.array_data import ArrayData
+from lib_ai.data.tabular_data import TabularData
+from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.classification.logistic_regression import LogisticRegression
+from lib_shared.core.utils.random import random
 
 
 def test_works() -> None:
-    assert 1 == 1
+    a1 = random(min=1, max=1e1)
+    a2 = random(min=1e1 + 1, max=1e2)
+    e = random(min=1e2 + 1, max=1e3)
+    x1 = np.array(list([random(min=1, max=9) for _ in range(10)]))
+    x2 = np.array(list([random(min=1, max=9) for _ in range(10)]))
+    y = (x1 * a1 + x2 * a2) + e
+    x = TabularData.from_dict({"x1": list(x1), "x2": list(x2)})
+    y = ArrayData.from_list(list(y))
+    trainset, testset = XYDataset(x=x, y=y).split()
+    model = XYDataset(n_features=2)
+    model.train(trainset)
+    loss = model.test(testset)
+    assert abs(loss) <= 1
