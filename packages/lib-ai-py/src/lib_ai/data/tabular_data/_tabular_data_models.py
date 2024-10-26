@@ -4,10 +4,10 @@ from typing import Any, Mapping, Self, Sequence, Tuple, overload
 import polars as pl
 from lib_ai.data.array_data.array_data_models import ArrayDataModel
 from lib_ai.data.base_data.base_data_models import BaseDataModel
+from lib_ai.data.matrix_data.matrix_data_models import MatrixDataModel
 from lib_ai.data.tabular_data.tabular_data_constants import TABULAR_DATA_TYPE
-from numpy.typing import NDArray
 
-type _TabularDataTypeModel = NDArray | pl.DataFrame
+type _TabularDataTypeModel = pl.DataFrame
 
 type _TabularDataStringKeyModel = str
 
@@ -42,6 +42,9 @@ class _TabularDataModel(BaseDataModel[_TabularDataTypeModel]):
 
     @abstractmethod
     def to_dataframe(self) -> pl.DataFrame: ...
+
+    @abstractmethod
+    def to_matrix(self) -> MatrixDataModel: ...
 
     @property
     @abstractmethod
