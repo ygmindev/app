@@ -3,35 +3,35 @@ from lib_ai.data.tabular_data import TabularData
 
 TABLE_1 = TabularData.from_dict(
     {
-        "int": [0, 1, 2, 3, 4],
-        "str": ["0", "1", "2", "3", "4"],
+        "a": [0, 1, 2, 3, 4],
+        "b": [5, 6, 7, 8, 9],
     }
 )
 
 TABLE_2 = TabularData.from_dict(
     {
-        "int": [5, 6, 7, 8, 9],
-        "str": ["5", "6", "7", "8", "9"],
+        "a": [10, 11, 12, 13, 14],
+        "b": [15, 16, 17, 18, 19],
     }
 )
 
 
-def test_add() -> None:
+def test_concat() -> None:
     result = TABLE_1.concat(TABLE_2)
     assert np.array_equal(
         result.to_numpy(),
         np.array(
             [
-                [0, "0"],
-                [1, "1"],
-                [2, "2"],
-                [3, "3"],
-                [4, "4"],
-                [5, "5"],
-                [6, "6"],
-                [7, "7"],
-                [8, "8"],
-                [9, "9"],
+                [0, 5],
+                [1, 6],
+                [2, 7],
+                [3, 8],
+                [4, 9],
+                [10, 15],
+                [11, 16],
+                [12, 17],
+                [13, 18],
+                [14, 19],
             ],
             dtype=object,
         ),
@@ -42,9 +42,9 @@ def test_add() -> None:
         result.to_numpy(),
         np.array(
             [
-                [0, "0"],
-                [1, "1"],
-                [2, "2"],
+                [0, 5],
+                [1, 6],
+                [2, 7],
             ],
             dtype=object,
         ),
@@ -57,7 +57,7 @@ def test_index() -> None:
         result.to_numpy(),
         np.array(
             [
-                [1, "1"],
+                [1, 1],
             ],
             dtype=object,
         ),

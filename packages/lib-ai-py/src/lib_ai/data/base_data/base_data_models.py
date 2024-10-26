@@ -32,6 +32,10 @@ class BaseDataModel[T](IndexableModel, ABC):
     @abstractmethod
     def head(self, n_rows: int = 1) -> Self: ...
 
+    @property
+    @abstractmethod
+    def shape(self) -> Tuple[int, ...]: ...
+
     @abstractmethod
     def split(self, **params: Unpack[SplitParamsModel]) -> Tuple[Self, Self]: ...
 

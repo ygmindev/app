@@ -41,8 +41,6 @@ class _TabularData(_TabularDataModel):
     def concat(self, other: Self) -> Self:
         result = self.data
         match self.get_type():
-            case TABULAR_DATA_TYPE.TENSOR:
-                result = torch.concatenate([cast(torch.Tensor, result), other.to_tensor()])
             case TABULAR_DATA_TYPE.NUMPY:
                 result = np.concatenate([cast(NDArray, result), other.to_numpy()], axis=0)
             case TABULAR_DATA_TYPE.DATAFRAME:
@@ -65,8 +63,6 @@ class _TabularData(_TabularDataModel):
     ) -> Self:
         result = None
         match to:
-            case TABULAR_DATA_TYPE.TENSOR:
-                result = torch.tensor(data)
             case TABULAR_DATA_TYPE.NUMPY:
                 result = np.array(data)
             case TABULAR_DATA_TYPE.DATAFRAME:
@@ -76,8 +72,6 @@ class _TabularData(_TabularDataModel):
         return cls(data=result)
 
     def get_type(self) -> TABULAR_DATA_TYPE:
-        if torch.is_tensor(self.data):
-            return TABULAR_DATA_TYPE.TENSOR
         if isinstance(self.data, np.ndarray):
             return TABULAR_DATA_TYPE.NUMPY
         if isinstance(self.data, pl.DataFrame):
@@ -87,8 +81,6 @@ class _TabularData(_TabularDataModel):
     def head(self, n_rows: int = 1) -> Self:
         result = self.data
         match self.get_type():
-            case TABULAR_DATA_TYPE.TENSOR:
-                result = cast(torch.Tensor, result)[:n_rows]
             case TABULAR_DATA_TYPE.NUMPY:
                 result = cast(NDArray, result)[:n_rows]
             case TABULAR_DATA_TYPE.DATAFRAME:
@@ -98,8 +90,6 @@ class _TabularData(_TabularDataModel):
     @property
     def shape(self) -> Tuple[int, ...]:
         match self.get_type():
-            case TABULAR_DATA_TYPE.TENSOR:
-                return tuple(cast(torch.Tensor, self.data).shape)
             case TABULAR_DATA_TYPE.NUMPY:
                 return cast(NDArray, self.data).shape
             case TABULAR_DATA_TYPE.DATAFRAME:
@@ -109,8 +99,6 @@ class _TabularData(_TabularDataModel):
 
     def to_numpy(self) -> NDArray:
         match self.get_type():
-            case TABULAR_DATA_TYPE.TENSOR:
-                return cast(torch.Tensor, self.data).numpy()
             case TABULAR_DATA_TYPE.NUMPY:
                 return cast(NDArray, self.data)
             case TABULAR_DATA_TYPE.DATAFRAME:
@@ -120,8 +108,6 @@ class _TabularData(_TabularDataModel):
 
     def to_tensor(self) -> torch.Tensor:
         match self.get_type():
-            case TABULAR_DATA_TYPE.TENSOR:
-                return cast(torch.Tensor, self.data)
             case TABULAR_DATA_TYPE.NUMPY:
                 return torch.tensor(self.data)
             case TABULAR_DATA_TYPE.DATAFRAME:
@@ -131,8 +117,6 @@ class _TabularData(_TabularDataModel):
 
     def to_dataframe(self) -> pl.DataFrame:
         match self.get_type():
-            case TABULAR_DATA_TYPE.TENSOR:
-                return pl.DataFrame(cast(torch.Tensor, self.data).detach().cpu().numpy())
             case TABULAR_DATA_TYPE.NUMPY:
                 return pl.DataFrame(self.data)
             case TABULAR_DATA_TYPE.DATAFRAME:

@@ -6,7 +6,7 @@ TABLE_1 = ArrayData.from_list([0, 1, 2, 3, 4])
 TABLE_2 = ArrayData.from_list([5, 6, 7, 8, 9])
 
 
-def test_add() -> None:
+def test_concat() -> None:
     result = TABLE_1.concat(TABLE_2)
     assert np.array_equal(
         result.to_numpy(),

@@ -2,13 +2,12 @@ from abc import abstractmethod
 from typing import Any, Mapping, Self, Sequence, Tuple, overload
 
 import polars as pl
-import torch
 from lib_ai.data.array_data.array_data_models import ArrayDataModel
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.data.tabular_data.tabular_data_constants import TABULAR_DATA_TYPE
 from numpy.typing import NDArray
 
-type _TabularDataTypeModel = torch.Tensor | NDArray | pl.DataFrame
+type _TabularDataTypeModel = NDArray | pl.DataFrame
 
 type _TabularDataStringKeyModel = str
 
