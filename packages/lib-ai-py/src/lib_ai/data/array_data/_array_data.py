@@ -1,4 +1,4 @@
-from typing import Any, Self, Sequence, cast, overload
+from typing import Any, Self, Sequence, Tuple, cast, overload
 
 import numpy as np
 import polars as pl
@@ -91,6 +91,10 @@ class _ArrayData(_ArrayDataModel):
             case ARRAY_DATA_TYPE.SERIES:
                 result = cast(pl.Series, result).head(n_rows)
         return type(self)(data=result)
+
+    @property
+    def shape(self) -> Tuple[int, ...]:
+        return self.data.shape
 
     def to_numpy(self) -> NDArray:
         match self.get_type():

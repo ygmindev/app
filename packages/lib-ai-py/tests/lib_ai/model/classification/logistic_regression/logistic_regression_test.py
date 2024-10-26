@@ -1,9 +1,7 @@
 import numpy as np
-import torch
 from lib_ai.data.array_data import ArrayData
 from lib_ai.data.tabular_data import TabularData
 from lib_ai.dataset.xy_dataset import XYDataset
-from lib_ai.model.classification.logistic_regression import LogisticRegression
 from lib_shared.core.utils.random import random
 
 
