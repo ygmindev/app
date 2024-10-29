@@ -1,21 +1,22 @@
+from __future__ import annotations
+
 from typing import Self, Tuple, Unpack
 
 from lib_ai.core.utils.split_indices import split_indices
-from lib_ai.data.array_data.array_data_models import ArrayDataModel
 from lib_ai.data.base_data.base_data_models import BaseDataModel, SplitParamsModel
 from lib_ai.dataset.base_dataset import BaseDataset
 from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetKeyModel
 from lib_ai.dataset.xy_dataset.xy_dataset_models import XYDatasetModel
 
 
-class XYDataset(XYDatasetModel, BaseDataset):
-    _x: BaseDataModel
-    _y: ArrayDataModel
+class XYDataset[TX: BaseDataModel, TY: BaseDataModel](XYDatasetModel[TX, TY], BaseDataset):
+    _x: TX
+    _y: TY
 
     def __init__(
         self,
-        x: BaseDataModel,
-        y: ArrayDataModel,
+        x: TX,
+        y: TY,
     ) -> None:
         assert len(x) == len(y)
         self._x = x
@@ -46,17 +47,23 @@ class XYDataset(XYDatasetModel, BaseDataset):
         return self[train_indices], self[test_indices]
 
     @property
-    def x(self) -> BaseDataModel:
+    def x(self) -> TX:
         return self._x
 
     @x.setter
-    def x(self, value: BaseDataModel) -> None:
+    def x(
+        self,
+        value: TX,
+    ) -> None:
         self._x = value
 
     @property
-    def y(self) -> ArrayDataModel:
+    def y(self) -> TY:
         return self._y
 
     @y.setter
-    def y(self, value: ArrayDataModel) -> None:
+    def y(
+        self,
+        value: TY,
+    ) -> None:
         self._y = value

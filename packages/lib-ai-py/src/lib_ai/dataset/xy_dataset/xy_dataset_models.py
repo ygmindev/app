@@ -1,15 +1,38 @@
+from __future__ import annotations
+
 from abc import abstractmethod
 
-from lib_ai.data.array_data.array_data_models import ArrayDataModel
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetModel
 
 
-class XYDatasetModel(BaseDatasetModel):
+class XYDatasetModel[TX: BaseDataModel, TY: BaseDataModel](BaseDatasetModel):
     @abstractmethod
     def __init__(
         self,
-        x: BaseDataModel,
-        y: ArrayDataModel,
+        x: TX,
+        y: TY,
     ) -> None:
         pass
+
+    @property
+    @abstractmethod
+    def x(self) -> TX: ...
+
+    @x.setter
+    @abstractmethod
+    def x(
+        self,
+        value: TX,
+    ) -> None: ...
+
+    @property
+    @abstractmethod
+    def y(self) -> TY: ...
+
+    @y.setter
+    @abstractmethod
+    def y(
+        self,
+        value: TY,
+    ) -> None: ...

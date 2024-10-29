@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 from lib_ai.dataset.base_dataset import BaseDataset
 
 
-class BaseModelModel[TTrain, TTest](ABC):
+class BaseModelModel[TFit, TEval](ABC):
     @abstractmethod
     def predict(
         self,
@@ -13,15 +13,15 @@ class BaseModelModel[TTrain, TTest](ABC):
     ) -> None: ...
 
     @abstractmethod
-    def test(
+    def evaluate(
         self,
         dataset: BaseDataset,
-        params: TTest | None = None,
+        params: TEval | None = None,
     ) -> float: ...
 
     @abstractmethod
-    def train(
+    def fit(
         self,
         dataset: BaseDataset,
-        params: TTrain | None = None,
+        params: TFit | None = None,
     ) -> None: ...
