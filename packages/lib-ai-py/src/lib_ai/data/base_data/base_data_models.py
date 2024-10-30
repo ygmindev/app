@@ -30,6 +30,9 @@ class BaseDataModel[T](IndexableModel, ABC):
     def data(self, _value: T) -> None: ...
 
     @abstractmethod
+    def equals(self, other: Self) -> bool: ...
+
+    @abstractmethod
     def head(self, n_rows: int = 1) -> Self: ...
 
     @property

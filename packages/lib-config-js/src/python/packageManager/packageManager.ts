@@ -27,6 +27,16 @@ const config = defineConfig<PackageManagerConfigModel>({
 
     name: 'poetry',
 
+    pythonVersionCommand: (version, packages) => {
+      const pwd = fromWorking();
+      const command = packages
+        ? packages
+            .map((v) => `cd ${fromPackages(v)} && poetry env use ${version} && poetry update`)
+            .join(' && ')
+        : '';
+      return `${command} && cd ${pwd}`;
+    },
+
     removeCommand: (names, packages) => {
       const pwd = fromWorking();
       const command = packages

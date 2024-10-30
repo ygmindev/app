@@ -9,6 +9,8 @@ export type PackageManagerConfigModel = {
 
   name: string;
 
+  pythonVersionCommand(version: string, packages: Array<string>): string;
+
   removeCommand(names?: string, packages?: Array<string>): string;
 };
 

@@ -54,6 +54,12 @@ class _TabularData(_TabularDataModel):
     def data(self, value: _TabularDataTypeModel) -> None:
         self._data = value
 
+    def equals(self, other: Self) -> bool:
+        match self.get_type():
+            case TABULAR_DATA_TYPE.DATAFRAME:
+                return self.to_dataframe().equals(other.to_dataframe())
+        raise InvalidTypeException()
+
     @classmethod
     def from_dict(
         cls,

@@ -36,14 +36,13 @@ class _ArrayData(_ArrayDataModel):
         return len(self.data)
 
     def concat(self, other: Self) -> Self:
-        result = self.data
         match self.get_type():
             case ARRAY_DATA_TYPE.TENSOR:
-                result = torch.concatenate([cast(torch.Tensor, result), other.to_tensor()])
+                result = torch.concatenate([self.to_tensor(), other.to_tensor()])
             case ARRAY_DATA_TYPE.NUMPY:
-                result = np.concatenate([result, other.to_numpy()], axis=0)
+                result = np.concatenate([self.to_numpy(), other.to_numpy()], axis=0)
             case ARRAY_DATA_TYPE.SERIES:
-                result = pl.concat([cast(pl.Series, result), other.to_series()])
+                result = pl.concat([self.to_series(), other.to_series()])
         return type(self)(data=result)
 
     @property
@@ -53,6 +52,16 @@ class _ArrayData(_ArrayDataModel):
     @data.setter
     def data(self, value: _ArrayDataTypeModel) -> None:
         self._data = value
+
+    def equals(self, other: Self) -> bool:
+        match self.get_type():
+            case ARRAY_DATA_TYPE.TENSOR:
+                return self.to_tensor().equal(other.to_tensor())
+            case ARRAY_DATA_TYPE.NUMPY:
+                return np.array_equal(self.to_numpy(), other.to_numpy())
+            case ARRAY_DATA_TYPE.SERIES:
+                return self.to_series().equals(other.to_series())
+        raise InvalidTypeException()
 
     @classmethod
     def from_list(
@@ -85,11 +94,11 @@ class _ArrayData(_ArrayDataModel):
         result = self.data
         match self.get_type():
             case ARRAY_DATA_TYPE.TENSOR:
-                result = cast(torch.Tensor, result)[:n_rows]
+                result = self.to_tensor()[:n_rows]
             case ARRAY_DATA_TYPE.NUMPY:
-                result = cast(NDArray, result)[:n_rows]
+                result = self.to_numpy()[:n_rows]
             case ARRAY_DATA_TYPE.SERIES:
-                result = cast(pl.Series, result).head(n_rows)
+                result = self.to_series().head(n_rows)
         return type(self)(data=result)
 
     @property
@@ -99,11 +108,11 @@ class _ArrayData(_ArrayDataModel):
     def to_numpy(self) -> NDArray:
         match self.get_type():
             case ARRAY_DATA_TYPE.TENSOR:
-                return cast(torch.Tensor, self.data).numpy()
+                return self.to_tensor().numpy()
             case ARRAY_DATA_TYPE.NUMPY:
                 return cast(NDArray, self.data)
             case ARRAY_DATA_TYPE.SERIES:
-                return cast(pl.Series, self.data).to_numpy()
+                return self.to_series().to_numpy()
             case _:
                 raise InvalidTypeException()
 
@@ -112,18 +121,18 @@ class _ArrayData(_ArrayDataModel):
             case ARRAY_DATA_TYPE.TENSOR:
                 return cast(torch.Tensor, self.data)
             case ARRAY_DATA_TYPE.NUMPY:
-                return torch.tensor(self.data)
+                return torch.tensor(self.to_numpy())
             case ARRAY_DATA_TYPE.SERIES:
-                return cast(pl.Series, self.data).to_torch().to(torch.float32)
+                return self.to_series().to_torch().to(torch.float32)
             case _:
                 raise InvalidTypeException()
 
     def to_series(self) -> pl.Series:
         match self.get_type():
             case ARRAY_DATA_TYPE.TENSOR:
-                return pl.Series(cast(torch.Tensor, self.data).detach().cpu().numpy())
+                return pl.Series(self.to_tensor().detach().cpu().numpy())
             case ARRAY_DATA_TYPE.NUMPY:
-                return pl.Series(self.data)
+                return pl.Series(self.to_numpy())
             case ARRAY_DATA_TYPE.SERIES:
                 return cast(pl.Series, self.data)
             case _:
