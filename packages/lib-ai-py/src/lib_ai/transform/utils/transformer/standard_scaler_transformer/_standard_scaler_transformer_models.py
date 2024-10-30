@@ -5,9 +5,9 @@ from lib_ai.transform.utils.transformer.base_transformer.base_transformer_models
     BaseTransformerModel,
 )
 
-type _OneHotEncoderTransformerDatasetModel = XYDatasetModel[TabularData, ArrayData]
+type _StandardScalerTransformerDatasetModel = XYDatasetModel[TabularData, ArrayData]
 
 
-class _OneHotEncoderTransformerModel(
-    BaseTransformerModel[_OneHotEncoderTransformerDatasetModel, None]
+class _StandardScalerTransformerModel(
+    BaseTransformerModel[_StandardScalerTransformerDatasetModel, None]
 ): ...

@@ -1,5 +1,4 @@
 import numpy as np
-import torch
 from lib_ai.data.array_data import ArrayData
 from lib_ai.data.tabular_data import TabularData
 from lib_ai.dataset.xy_dataset import XYDataset
@@ -14,7 +13,6 @@ def test_works() -> None:
     y = ArrayData(data=np.array([1, 2, 3]))
     dataset = XYDataset(x=x, y=y)
     dataset = transformer.fit_transform(dataset=dataset)
-
     assert dataset.x.equals(
         TabularData.from_dict(
             {

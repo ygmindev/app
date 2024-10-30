@@ -1,0 +1,6 @@
+from lib_ai.transform.utils.transformer.standard_scaler_transformer._standard_scaler_transformer import _StandardScalerTransformer
+from lib_ai.transform.utils.transformer.standard_scaler_transformer.standard_scaler_transformer_models import StandardScalerTransformerModel
+
+
+class StandardScalerTransformer(_StandardScalerTransformer, StandardScalerTransformerModel):
+    pass

@@ -67,6 +67,14 @@ class _MatrixData(_MatrixDataModel):
             raise InvalidTypeException()
         return cls(data=result)
 
+    def equals(self, other: Self) -> bool:
+        match self.get_type():
+            case MATRIX_DATA_TYPE.TENSOR:
+                return self.to_tensor().equal(other.to_tensor())
+            case MATRIX_DATA_TYPE.NUMPY:
+                return np.array_equal(self.to_numpy(), other.to_numpy())
+        raise InvalidTypeException()
+
     def get_type(self) -> MATRIX_DATA_TYPE:
         if torch.is_tensor(self.data):
             return MATRIX_DATA_TYPE.TENSOR
