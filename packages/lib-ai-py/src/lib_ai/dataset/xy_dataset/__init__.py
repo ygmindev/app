@@ -9,29 +9,30 @@ from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetKeyModel
 from lib_ai.dataset.xy_dataset.xy_dataset_models import XYDatasetModel
 
 
-class XYDataset[TX: BaseDataModel, TY: BaseDataModel](XYDatasetModel[TX, TY], BaseDataset):
+class XYDataset[TX: BaseDataModel, TY: BaseDataModel | None](XYDatasetModel[TX, TY], BaseDataset):
     _x: TX
-    _y: TY
+    _y: TY | None = None
 
     def __init__(
         self,
         x: TX,
-        y: TY,
+        y: TY | None = None,
     ) -> None:
-        assert len(x) == len(y)
+        if y is not None:
+            assert len(x) == len(y)
         self._x = x
         self._y = y
 
     def __getitem__(self, key: BaseDatasetKeyModel) -> Self:
         return type(self)(
             x=self.x[key],
-            y=self.y[key],
+            y=None if self.y is None else self.y[key],
         )
 
     def head(self, n_rows: int = 1) -> Self:
         return type(self)(
             x=self.x.head(n_rows),
-            y=self.y.head(n_rows),
+            y=None if self.y is None else self.y.head(n_rows),
         )
 
     def __len__(self) -> int:
@@ -58,12 +59,12 @@ class XYDataset[TX: BaseDataModel, TY: BaseDataModel](XYDatasetModel[TX, TY], Ba
         self._x = value
 
     @property
-    def y(self) -> TY:
+    def y(self) -> TY | None:
         return self._y
 
     @y.setter
     def y(
         self,
-        value: TY,
+        value: TY | None = None,
     ) -> None:
         self._y = value

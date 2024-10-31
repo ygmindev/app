@@ -6,12 +6,12 @@ from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetModel
 
 
-class XYDatasetModel[TX: BaseDataModel, TY: BaseDataModel](BaseDatasetModel):
+class XYDatasetModel[TX: BaseDataModel, TY: BaseDataModel | None](BaseDatasetModel):
     @abstractmethod
     def __init__(
         self,
         x: TX,
-        y: TY,
+        y: TY | None = None,
     ) -> None:
         pass
 
@@ -28,11 +28,11 @@ class XYDatasetModel[TX: BaseDataModel, TY: BaseDataModel](BaseDatasetModel):
 
     @property
     @abstractmethod
-    def y(self) -> TY: ...
+    def y(self) -> TY | None: ...
 
     @y.setter
     @abstractmethod
     def y(
         self,
-        value: TY,
+        value: TY | None = None,
     ) -> None: ...
