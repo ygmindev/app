@@ -1,0 +1,5 @@
+from lib_ai.transform.utils.transformer.label_encoder_transformer._label_encoder_transformer_models import _LabelEncoderTransformerModel
+
+
+class LabelEncoderTransformerModel(_LabelEncoderTransformerModel):
+    pass

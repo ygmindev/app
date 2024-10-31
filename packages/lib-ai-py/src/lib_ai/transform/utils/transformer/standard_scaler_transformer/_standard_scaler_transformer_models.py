@@ -7,7 +7,9 @@ from lib_ai.transform.utils.transformer.base_transformer.base_transformer_models
 
 type _StandardScalerTransformerDatasetModel = XYDatasetModel[TabularData, ArrayData]
 
+type _StandardScalerTransformerFitModel = None
+
 
 class _StandardScalerTransformerModel(
-    BaseTransformerModel[_StandardScalerTransformerDatasetModel, None]
+    BaseTransformerModel[_StandardScalerTransformerDatasetModel, _StandardScalerTransformerFitModel]
 ): ...

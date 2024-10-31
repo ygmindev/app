@@ -29,6 +29,10 @@ class _TabularDataModel(BaseDataModel[_TabularDataTypeModel]):
     @abstractmethod
     def __getitem__(self, key: _TabularDataKeyModel) -> Self: ...
 
+    @property
+    @abstractmethod
+    def columns(self) -> Sequence[str]: ...
+
     @classmethod
     @abstractmethod
     def from_dict(

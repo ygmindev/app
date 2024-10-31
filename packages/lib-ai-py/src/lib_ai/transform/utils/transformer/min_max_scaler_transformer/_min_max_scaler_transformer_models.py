@@ -7,7 +7,9 @@ from lib_ai.transform.utils.transformer.base_transformer.base_transformer_models
 
 type _MinMaxScalerTransformerDatasetModel = XYDatasetModel[TabularData, ArrayData]
 
+type _MinMaxScalerTransformerFitModel = None
+
 
 class _MinMaxScalerTransformerModel(
-    BaseTransformerModel[_MinMaxScalerTransformerDatasetModel, None]
+    BaseTransformerModel[_MinMaxScalerTransformerDatasetModel, _MinMaxScalerTransformerFitModel]
 ): ...

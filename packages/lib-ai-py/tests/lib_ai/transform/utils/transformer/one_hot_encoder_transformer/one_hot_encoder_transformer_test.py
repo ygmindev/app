@@ -25,3 +25,21 @@ def test_works() -> None:
             }
         )
     )
+
+
+def test_works_is_sparse() -> None:
+    transformer = OneHotEncoderTransformer(is_sparse=True)
+    x = TabularData.from_dict({"int": [1, 2, 3], "str": ["a", "b", "c"]})
+    y = ArrayData(data=np.array([1, 2, 3]))
+    dataset = XYDataset(x=x, y=y)
+    dataset = transformer.fit_transform(dataset=dataset)
+    assert dataset.x.equals(
+        TabularData.from_dict(
+            {
+                "int_2": [0, 1, 0],
+                "int_3": [0, 0, 1],
+                "str_b": [0, 1, 0],
+                "str_c": [0, 0, 1],
+            }
+        )
+    )

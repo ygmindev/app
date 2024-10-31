@@ -39,6 +39,10 @@ class _TabularData(_TabularDataModel):
     def __len__(self) -> int:
         return len(self.data)
 
+    @property
+    def columns(self) -> Sequence[str]:
+        return self.data.columns
+
     def concat(self, other: Self) -> Self:
         result = self.data
         match self.get_type():
