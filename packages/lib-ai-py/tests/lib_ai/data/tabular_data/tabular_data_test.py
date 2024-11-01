@@ -1,37 +1,26 @@
 import numpy as np
-from lib_ai.data.tabular_data import TabularData
-
-TABLE_1 = TabularData.from_dict(
-    {
-        "a": [0, 1, 2, 3, 4],
-        "b": [5, 6, 7, 8, 9],
-    }
-)
-
-TABLE_2 = TabularData.from_dict(
-    {
-        "a": [10, 11, 12, 13, 14],
-        "b": [15, 16, 17, 18, 19],
-    }
+from lib_ai.data.tabular_data.tabular_data_fixtures import (
+    TABULAR_DATA_FIXTURE_1,
+    TABULAR_DATA_FIXTURE_2,
 )
 
 
 def test_concat() -> None:
-    result = TABLE_1.concat(TABLE_2)
+    result = TABULAR_DATA_FIXTURE_1.concat(TABULAR_DATA_FIXTURE_2)
     assert np.array_equal(
         result.to_numpy(),
         np.array(
             [
-                [0, 5],
-                [1, 6],
-                [2, 7],
-                [3, 8],
-                [4, 9],
-                [10, 15],
-                [11, 16],
-                [12, 17],
-                [13, 18],
-                [14, 19],
+                [0, "a"],
+                [1, "b"],
+                [2, "c"],
+                [3, "d"],
+                [4, "e"],
+                [5, "f"],
+                [6, "g"],
+                [7, "h"],
+                [8, "i"],
+                [9, "j"],
             ],
             dtype=object,
         ),
@@ -42,9 +31,9 @@ def test_concat() -> None:
         result.to_numpy(),
         np.array(
             [
-                [0, 5],
-                [1, 6],
-                [2, 7],
+                [0, "a"],
+                [1, "b"],
+                [2, "c"],
             ],
             dtype=object,
         ),
@@ -52,38 +41,38 @@ def test_concat() -> None:
 
 
 def test_index() -> None:
-    result = TABLE_1[1]
+    result = TABULAR_DATA_FIXTURE_1[1]
     assert np.array_equal(
         result.to_numpy(),
         np.array(
             [
-                [1, 1],
+                [1, "b"],
             ],
             dtype=object,
         ),
     )
 
-    result = TABLE_1[[1, 2, 3]]
+    result = TABULAR_DATA_FIXTURE_1[[1, 2, 3]]
     assert np.array_equal(
         result.to_numpy(),
         np.array(
             [
-                [1, "1"],
-                [2, "2"],
-                [3, "3"],
+                [1, "b"],
+                [2, "c"],
+                [3, "d"],
             ],
             dtype=object,
         ),
     )
 
-    result = TABLE_1[1:4]
+    result = TABULAR_DATA_FIXTURE_1[1:4]
     assert np.array_equal(
         result.to_numpy(),
         np.array(
             [
-                [1, "1"],
-                [2, "2"],
-                [3, "3"],
+                [1, "b"],
+                [2, "c"],
+                [3, "d"],
             ],
             dtype=object,
         ),
@@ -91,15 +80,15 @@ def test_index() -> None:
 
 
 def test_split() -> None:
-    [train, test] = TABLE_1.split(train_size=0.8)
+    [train, test] = TABULAR_DATA_FIXTURE_1.split(train_size=0.8)
     assert np.array_equal(
         train.to_numpy(),
         np.array(
             [
-                [0, "0"],
-                [1, "1"],
-                [2, "2"],
-                [3, "3"],
+                [0, "a"],
+                [1, "b"],
+                [2, "c"],
+                [3, "d"],
             ],
             dtype=object,
         ),
@@ -109,7 +98,7 @@ def test_split() -> None:
         test.to_numpy(),
         np.array(
             [
-                [4, "4"],
+                [4, "e"],
             ],
             dtype=object,
         ),
@@ -117,4 +106,4 @@ def test_split() -> None:
 
 
 def test_shape() -> None:
-    assert TABLE_1.shape == (5, 2)
+    assert TABULAR_DATA_FIXTURE_1.shape == (5, 2)

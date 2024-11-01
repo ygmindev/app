@@ -1,11 +1,16 @@
+from typing import Mapping
+
 import torch
 from lib_ai.core.utils.chunks import chunks
 from lib_ai.data.array_data import ArrayData
+from lib_ai.data.matrix_data import MatrixData
+from lib_ai.data.matrix_data.matrix_data_models import MatrixDataModel
 from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.base_model.base_model_constants import OPTIMIZER
 from lib_ai.model.regression.linear_regression._linear_regression_models import (
+    _LinearRegressionEvalParamsModel,
     _LinearRegressionModel,
-    _LinearRegressionTestParamsModel,
     _LinearRegressionTrainParamsModel,
 )
 from lib_ai.model.utils.early_stopping import EarlyStopping
@@ -29,24 +34,20 @@ class _Instance(Module):
 
 
 class _LinearRegression(_LinearRegressionModel):
-    def __init__(
-        self,
-        n_features: int,
-    ) -> None:
-        self._instance = _Instance(n_features=n_features)
+    _instance: _Instance
 
     def predict(
         self,
-        dataset: XYDataset,
+        dataset: XYMatrixDataset,
     ) -> None:
         self._instance.train(mode=False)
-        dataset.y.data = self._instance(dataset.x.to_tensor().squeeze())
+        dataset.y = MatrixData(self._instance(dataset.x.to_tensor().squeeze()))
 
-    def test(
+    def evaluate(
         self,
-        dataset: XYDataset,
-        params: _LinearRegressionTestParamsModel | None = None,
-    ) -> float:
+        dataset: XYMatrixDataset,
+        params: _LinearRegressionEvalParamsModel | None = None,
+    ) -> Mapping[str, float]:
         if params is None:
             params = {}
 
@@ -54,13 +55,16 @@ class _LinearRegression(_LinearRegressionModel):
 
         y = dataset.y
         self.predict(dataset)
+        if dataset.y is None or y is None:
+            raise Exception()
+
         score = scorer(dataset.y, y)
         logger.debug(f"Loss: {score:.2f}")
-        return score
+        return {"score": score}
 
-    def train(
+    def fit(
         self,
-        dataset: XYDataset,
+        dataset: XYMatrixDataset,
         params: _LinearRegressionTrainParamsModel | None = None,
     ) -> None:
         if params is None:
@@ -70,6 +74,7 @@ class _LinearRegression(_LinearRegressionModel):
         optimizer = params.get("optimizer", OPTIMIZER.SGD)
         scorer = params.get("scorer", mse_scorer)
 
+        self._instance = _Instance(n_features=dataset.x.shape[-1])
         self._instance.train(mode=True)
         weights = self._instance.parameters()
 
@@ -90,7 +95,7 @@ class _LinearRegression(_LinearRegressionModel):
                 x, y = batchset.x, batchset.y
                 optimizer.zero_grad()
                 y_pred = self._instance(x.to_tensor())
-                loss = scorer(ArrayData(data=y_pred), y)
+                loss = scorer(MatrixData(data=y_pred), y)
                 optimizer.step()
 
             if early_stopping.stop(score=loss):

@@ -107,8 +107,8 @@ class _MatrixData(_MatrixDataModel):
     def to_tensor(self) -> torch.Tensor:
         match self.get_type():
             case MATRIX_DATA_TYPE.TENSOR:
-                return cast(torch.Tensor, self.data)
+                return cast(torch.Tensor, self.data).to(torch.float)
             case MATRIX_DATA_TYPE.NUMPY:
-                return torch.tensor(self.data)
+                return torch.tensor(self.data).to(torch.float)
             case _:
                 raise InvalidTypeException()

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import NotRequired, TypedDict
 
+from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.base_model.base_model_constants import OPTIMIZER
 from lib_ai.model.regression.base_regression.base_regression_models import (
     BaseRegressionModel,
@@ -14,15 +15,12 @@ class _LinearRegressionTrainParamsModel(TypedDict):
     scorer: NotRequired[BaseScorerCallableModel]
 
 
-class _LinearRegressionTestParamsModel(TypedDict):
+class _LinearRegressionEvalParamsModel(TypedDict):
     scorer: NotRequired[BaseScorerCallableModel]
 
 
 class _LinearRegressionModel(
-    BaseRegressionModel[_LinearRegressionTrainParamsModel, _LinearRegressionTestParamsModel], ABC
-):
-    @abstractmethod
-    def __init__(
-        self,
-        n_features: int,
-    ) -> None: ...
+    BaseRegressionModel[
+        XYMatrixDataset, _LinearRegressionTrainParamsModel, _LinearRegressionEvalParamsModel
+    ],
+): ...

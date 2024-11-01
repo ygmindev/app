@@ -10,8 +10,7 @@ from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
 def test_works() -> None:
     transformer = OneHotEncoderTransformer()
     x = TabularData.from_dict({"int": [1, 2, 3], "str": ["a", "b", "c"]})
-    y = ArrayData(data=np.array([1, 2, 3]))
-    dataset = XYDataset(x=x, y=y)
+    dataset = XYDataset(x=x)
     dataset = transformer.fit_transform(dataset=dataset)
     assert dataset.x.equals(
         TabularData.from_dict(
@@ -31,7 +30,7 @@ def test_works_is_sparse() -> None:
     transformer = OneHotEncoderTransformer(is_sparse=True)
     x = TabularData.from_dict({"int": [1, 2, 3], "str": ["a", "b", "c"]})
     y = ArrayData(data=np.array([1, 2, 3]))
-    dataset = XYDataset(x=x, y=y)
+    dataset = XYDataset(x=x)
     dataset = transformer.fit_transform(dataset=dataset)
     assert dataset.x.equals(
         TabularData.from_dict(

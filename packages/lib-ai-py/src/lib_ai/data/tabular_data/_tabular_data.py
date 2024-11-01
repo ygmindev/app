@@ -5,7 +5,6 @@ import torch
 from lib_ai.data.array_data import ArrayData
 from lib_ai.data.array_data.array_data_models import ArrayDataModel
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.data.matrix_data.matrix_data_models import MatrixDataModel
 from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataKeyModel,
     _TabularDataModel,
@@ -119,12 +118,12 @@ class _TabularData(_TabularDataModel):
             case _:
                 raise InvalidTypeException()
 
-    def to_matrix(self) -> MatrixDataModel:
+    def to_matrix(self) -> MatrixData:
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
                 data = cast(pl.DataFrame, self.data)
                 return MatrixData(
-                    pl.select(v.cast(pl.Float64, strict=False) for v in data).to_torch()
+                    pl.select(v.cast(pl.Float32, strict=False) for v in data).to_torch()
                 )
             case _:
                 raise InvalidTypeException()

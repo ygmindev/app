@@ -1,29 +1,12 @@
 import torch
-from lib_ai.data.matrix_data import MatrixData
-
-MATRIX_1 = MatrixData.from_array(
-    [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [9, 10, 11],
-        [12, 13, 14],
-    ]
-)
-
-MATRIX_2 = MatrixData.from_array(
-    [
-        [15, 16, 17],
-        [18, 19, 20],
-        [21, 22, 23],
-        [24, 25, 26],
-        [27, 28, 29],
-    ]
+from lib_ai.data.matrix_data.matrix_data_fixtures import (
+    MATRIX_DATA_FIXTURE_1,
+    MATRIX_DATA_FIXTURE_2,
 )
 
 
 def test_works() -> None:
-    result = MATRIX_1.concat(MATRIX_2)
+    result = MATRIX_DATA_FIXTURE_1.concat(MATRIX_DATA_FIXTURE_2)
     assert torch.eq(
         result.to_tensor(),
         torch.tensor(
@@ -44,13 +27,13 @@ def test_works() -> None:
 
 
 def test_index() -> None:
-    result = MATRIX_1[1]
+    result = MATRIX_DATA_FIXTURE_1[1]
     assert torch.eq(
         result.to_tensor(),
         torch.tensor([[3, 4, 5]]),
     ).all()
 
-    result = MATRIX_1[[1, 3]]
+    result = MATRIX_DATA_FIXTURE_1[[1, 3]]
     assert torch.eq(
         result.to_tensor(),
         torch.tensor(
@@ -61,7 +44,7 @@ def test_index() -> None:
         ),
     ).all()
 
-    result = MATRIX_1[1:3]
+    result = MATRIX_DATA_FIXTURE_1[1:3]
     assert torch.eq(
         result.to_tensor(),
         torch.tensor(
@@ -74,7 +57,7 @@ def test_index() -> None:
 
 
 def test_split() -> None:
-    [train, test] = MATRIX_1.split(train_size=0.8)
+    [train, test] = MATRIX_DATA_FIXTURE_1.split(train_size=0.8)
     assert torch.eq(
         train.to_tensor(),
         torch.tensor(
@@ -98,4 +81,4 @@ def test_split() -> None:
 
 
 def test_shape() -> None:
-    assert MATRIX_1.shape == (5, 3)
+    assert MATRIX_DATA_FIXTURE_1.shape == (5, 3)

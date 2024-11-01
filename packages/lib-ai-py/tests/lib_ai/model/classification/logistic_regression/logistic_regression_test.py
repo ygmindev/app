@@ -13,9 +13,8 @@ def test_works() -> None:
     x2 = np.array(list([random(min=1, max=9) for _ in range(10)]))
     y = (x1 * a1 + x2 * a2) + e
     x = TabularData.from_dict({"x1": list(x1), "x2": list(x2)})
-    y = ArrayData.from_list(list(y))
-    trainset, testset = XYDataset(x=x, y=y).split()
+    trainset, testset = XYDataset(x=x).split()
     model = XYDataset(n_features=2)
-    model.train(trainset)
-    loss = model.test(testset)
+    model.fit(trainset)
+    loss = model.evaluate(testset)
     assert abs(loss) <= 1

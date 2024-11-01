@@ -11,8 +11,7 @@ from lib_ai.transform.utils.transformer.min_max_scaler_transformer import (
 def test_works() -> None:
     transformer = MinMaxScalerTransformer()
     x = TabularData.from_dict({"a": [0, 0, 1, 1], "b": [1, 1, 0, 0]})
-    y = ArrayData(data=np.array([0, 0, 0, 0]))
-    dataset = XYDataset(x=x, y=y)
+    dataset = XYDataset(x=x)
     dataset = transformer.fit_transform(dataset=dataset)
     answer = x.to_numpy()
     answer = (answer - answer.min(axis=0)) / (answer.max(axis=0) - answer.min(axis=0))

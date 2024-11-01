@@ -1,7 +1,9 @@
 from typing import Callable, Tuple, Unpack
 
-from lib_ai.data.array_data.array_data_models import ArrayDataModel
+from lib_ai.data.matrix_data import MatrixData
 
-type BaseScorerParamsModel = Tuple[ArrayDataModel, ArrayDataModel]
+type BaseScorerParamsModel = Tuple[MatrixData, MatrixData]
+
 type BaseScorerModel = float
+
 type BaseScorerCallableModel = Callable[[Unpack[BaseScorerParamsModel]], BaseScorerModel]
