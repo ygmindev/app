@@ -1,13 +1,8 @@
 from __future__ import annotations
 
-from typing import Mapping, cast
-
 import torch
 from lib_ai.core.utils.chunks import chunks
-from lib_ai.data.array_data import ArrayData
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.data.matrix_data.matrix_data_models import MatrixDataModel
-from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.base_model.base_model_constants import OPTIMIZER
 from lib_ai.model.regression.base_regression.base_regression_models import (
@@ -15,8 +10,6 @@ from lib_ai.model.regression.base_regression.base_regression_models import (
 )
 from lib_ai.model.regression.linear_regression._linear_regression_models import (
     _LinearRegressionEvalParamsModel,
-    _LinearRegressionFitParamsModel,
-    _LinearRegressionModel,
 )
 from lib_ai.model.utils.early_stopping import EarlyStopping
 from lib_ai.model.utils.neural_network._neural_network_models import (
@@ -61,7 +54,7 @@ class _NeuralNetwork[TFit: _NeutralNetworkFitParamsModel, TEval, TScore](
         if params is None:
             params = {}
 
-        scorer = params.get("scorer")
+        scorer = params.get("scorer", mse_scorer)
         if scorer is None:
             raise NotFoundException()
 
@@ -83,7 +76,7 @@ class _NeuralNetwork[TFit: _NeutralNetworkFitParamsModel, TEval, TScore](
 
         n_epochs = params.get("n_epochs", 1000)
         optimizer = params.get("optimizer", OPTIMIZER.SGD)
-        scorer = params.get("scorer")
+        scorer = params.get("scorer", mse_scorer)
 
         if scorer is None:
             raise NotFoundException()

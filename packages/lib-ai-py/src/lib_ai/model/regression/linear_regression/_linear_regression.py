@@ -17,6 +17,7 @@ from lib_ai.model.regression.linear_regression._linear_regression_models import 
     _LinearRegressionModel,
 )
 from lib_ai.model.utils.early_stopping import EarlyStopping
+from lib_ai.model.utils.neural_network import NeuralNetwork
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_shared.core.utils.logger import logger
 from lib_shared.core.utils.not_found_exception import NotFoundException
@@ -25,86 +26,6 @@ from torch.optim.adam import Adam
 from torch.optim.sgd import SGD
 
 
-class _Instance(Module):
-    def __init__(self, n_features: int) -> None:
-        super(_Instance, self).__init__()
-        self.linear = Linear(
-            in_features=n_features,
-            out_features=1,
-        )
-
-    def forward(self, x) -> torch.Tensor:
-        return self.linear(x)
-
-
-class _LinearRegression(_LinearRegressionModel):
-    _instance: _Instance
-
-    def predict(
-        self,
-        dataset: XYMatrixDataset,
-    ) -> None:
-        self._instance.train(mode=False)
-        dataset.y = MatrixData(self._instance(dataset.x.to_tensor().squeeze()))
-
-    def evaluate(
-        self,
-        dataset: XYMatrixDataset,
-        params: _LinearRegressionEvalParamsModel | None = None,
-    ) -> BaseRegressionScoreModel:
-        if params is None:
-            params = {}
-
-        scorer = params.get("scorer", mse_scorer)
-
-        y = dataset.y
-        self.predict(dataset)
-        if dataset.y is None or y is None:
-            raise NotFoundException()
-
-        score = scorer(dataset.y, y)
-        return {"mean_squared_error": score}
-
-    def fit(
-        self,
-        dataset: XYMatrixDataset,
-        params: _LinearRegressionFitParamsModel | None = None,
-    ) -> None:
-        if params is None:
-            params = {}
-
-        n_epochs = params.get("n_epochs", 1000)
-        optimizer = params.get("optimizer", OPTIMIZER.SGD)
-        scorer = params.get("scorer", mse_scorer)
-
-        self._instance = _Instance(n_features=dataset.x.shape[-1])
-        self._instance.train(mode=True)
-        weights = self._instance.parameters()
-
-        match optimizer:
-            case OPTIMIZER.ADAM:
-                optimizer = Adam(weights, lr=1e-2)
-            case OPTIMIZER.SGD:
-                optimizer = SGD(weights, lr=1e-2)
-            case _:
-                optimizer = Adam(weights, lr=1e-2)
-
-        early_stopping = EarlyStopping()
-        for epoch in range(n_epochs):
-            for batchset in chunks(
-                data=dataset,
-                chunk_size=2,
-            ):
-                x, y = batchset.x, batchset.y
-                y_pred = self._instance(x.to_tensor())
-                optimizer.zero_grad()
-                loss = scorer(MatrixData(data=y_pred), y)
-                optimizer.step()
-
-            if early_stopping.stop(score=loss):
-                logger.debug(f"Early stopping after {epoch} epochs")
-                break
-
-        print("@@@after:")
-        for x in weights:
-            print(x)
+class _LinearRegression(NeuralNetwork, _LinearRegressionModel):
+    def __init__(self) -> None:
+        super().__init__()

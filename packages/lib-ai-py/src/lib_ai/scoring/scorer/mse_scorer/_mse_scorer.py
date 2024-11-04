@@ -15,4 +15,4 @@ def _mse_scorer(*params: Unpack[_MseScorerParamsModel]) -> _MseScorerModel:
         y.to_tensor().reshape((-1, 1)),
     )
     loss.backward()
-    return {"mse": loss.item()}
+    return loss.item()
