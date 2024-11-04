@@ -3,17 +3,19 @@ from typing import cast
 import torch
 from lib_ai.core.utils.chunks import chunks
 from lib_ai.data.array_data import ArrayData
+from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model.base_model_constants import OPTIMIZER
 from lib_ai.model.classification.logistic_regression._logistic_regression_models import (
+    _LogisticRegressionFitParamsModel,
     _LogisticRegressionModel,
     _LogisticRegressionTestParamsModel,
-    _LogisticRegressionTrainParamsModel,
 )
 from lib_ai.model.utils.early_stopping import EarlyStopping
 from lib_ai.scoring.scorer.cross_entropy_scorer import cross_entropy_scorer
 from lib_ai.scoring.scorer.f1_scorer import f1_scorer
 from lib_shared.core.utils.logger import logger
+from lib_shared.core.utils.not_found_exception import NotFoundException
 from torch.nn import Linear, Module
 from torch.optim.adam import Adam
 from torch.optim.sgd import SGD
@@ -41,9 +43,9 @@ class _LogisticRegression(_LogisticRegressionModel):
     def predict(self, dataset: XYDataset) -> None:
         self._instance.train(mode=False)
         logit = self._instance(dataset.x.to_tensor().squeeze())
-        dataset.y.data = cast(torch.Tensor, torch.max(logit, 1))
+        dataset.y = MatrixData(torch.Tensor(torch.max(logit, 1)))
 
-    def test(
+    def evaluate(
         self,
         dataset: XYDataset,
         params: _LogisticRegressionTestParamsModel | None = None,
@@ -54,6 +56,9 @@ class _LogisticRegression(_LogisticRegressionModel):
         scorer = params.get("scorer", f1_scorer)
         y = dataset.y
         self.predict(dataset)
+        if dataset.y is None or y is None:
+            raise NotFoundException()
+
         score = scorer(dataset.y, y)
         logger.debug(f"Loss: {score:.2f}")
         return score
@@ -61,7 +66,7 @@ class _LogisticRegression(_LogisticRegressionModel):
     def train(
         self,
         dataset: XYDataset,
-        params: _LogisticRegressionTrainParamsModel | None = None,
+        params: _LogisticRegressionFitParamsModel | None = None,
     ) -> None:
         if params is None:
             params = {}
@@ -90,7 +95,7 @@ class _LogisticRegression(_LogisticRegressionModel):
                 x, y = batchset.x, batchset.y
                 optimizer.zero_grad()
                 y_pred = self._instance(x.to_tensor())
-                loss = scorer(ArrayData(data=y_pred), y)
+                loss = scorer(MatrixData(data=y_pred), y)
                 optimizer.step()
 
             if early_stopping.stop(score=loss):

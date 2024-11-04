@@ -1,4 +1,6 @@
-from typing import Mapping
+from __future__ import annotations
+
+from typing import Mapping, cast
 
 import torch
 from lib_ai.core.utils.chunks import chunks
@@ -17,6 +19,10 @@ from lib_ai.model.regression.linear_regression._linear_regression_models import 
     _LinearRegressionModel,
 )
 from lib_ai.model.utils.early_stopping import EarlyStopping
+from lib_ai.model.utils.neural_network._neural_network_models import (
+    _NeuralNetworkModel,
+    _NeutralNetworkFitParamsModel,
+)
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_shared.core.utils.logger import logger
 from lib_shared.core.utils.not_found_exception import NotFoundException
@@ -37,9 +43,9 @@ class _Instance(Module):
         return self.linear(x)
 
 
-class _LinearRegression(_LinearRegressionModel):
-    _instance: _Instance
-
+class _NeuralNetwork[TFit: _NeutralNetworkFitParamsModel, TEval, TScore](
+    _NeuralNetworkModel[TFit, TEval, TScore]
+):
     def predict(
         self,
         dataset: XYMatrixDataset,
@@ -55,7 +61,9 @@ class _LinearRegression(_LinearRegressionModel):
         if params is None:
             params = {}
 
-        scorer = params.get("scorer", mse_scorer)
+        scorer = params.get("scorer")
+        if scorer is None:
+            raise NotFoundException()
 
         y = dataset.y
         self.predict(dataset)
@@ -68,14 +76,17 @@ class _LinearRegression(_LinearRegressionModel):
     def fit(
         self,
         dataset: XYMatrixDataset,
-        params: _LinearRegressionFitParamsModel | None = None,
+        params: TFit | None = None,
     ) -> None:
         if params is None:
             params = {}
 
         n_epochs = params.get("n_epochs", 1000)
         optimizer = params.get("optimizer", OPTIMIZER.SGD)
-        scorer = params.get("scorer", mse_scorer)
+        scorer = params.get("scorer")
+
+        if scorer is None:
+            raise NotFoundException()
 
         self._instance = _Instance(n_features=dataset.x.shape[-1])
         self._instance.train(mode=True)
@@ -104,7 +115,3 @@ class _LinearRegression(_LinearRegressionModel):
             if early_stopping.stop(score=loss):
                 logger.debug(f"Early stopping after {epoch} epochs")
                 break
-
-        print("@@@after:")
-        for x in weights:
-            print(x)

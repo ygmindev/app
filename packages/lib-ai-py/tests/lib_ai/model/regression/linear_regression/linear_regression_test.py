@@ -21,6 +21,4 @@ def test_works() -> None:
     model = LinearRegression()
     model.fit(trainset)
     loss = model.evaluate(testset)
-    print(loss)
-    assert 1 == 1
-    # assert abs(loss) <= 1
+    assert loss.get("mean_squared_error") <= 1

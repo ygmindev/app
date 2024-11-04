@@ -8,7 +8,7 @@ from lib_ai.model.classification.base_classification.base_classification_models 
 from lib_ai.scoring.scorer.base_scorer.base_scorer_models import BaseScorerCallableModel
 
 
-class _LogisticRegressionTrainParamsModel(TypedDict):
+class _LogisticRegressionFitParamsModel(TypedDict):
     n_epochs: NotRequired[int]
     optimizer: NotRequired[OPTIMIZER]
     scorer: NotRequired[BaseScorerCallableModel]
@@ -19,7 +19,7 @@ class _LogisticRegressionTestParamsModel(TypedDict):
 
 
 class _LogisticRegressionModel(
-    BaseClassificationModel[_LogisticRegressionTrainParamsModel, _LogisticRegressionTestParamsModel]
+    BaseClassificationModel[_LogisticRegressionFitParamsModel, _LogisticRegressionTestParamsModel]
 ):
     @abstractmethod
     def __init__(

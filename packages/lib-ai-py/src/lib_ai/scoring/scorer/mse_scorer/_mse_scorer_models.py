@@ -1,8 +1,15 @@
+from typing import TypedDict
+
 from lib_ai.scoring.scorer.base_scorer.base_scorer_models import (
-    BaseScorerModel,
+    BaseScorerCallableModel,
     BaseScorerParamsModel,
 )
 
 type _MseScorerParamsModel = BaseScorerParamsModel
 
-type _MseScorerModel = BaseScorerModel
+
+class _MseScorerModel(TypedDict):
+    mse: float
+
+
+type _MseScorerCallableModel = BaseScorerCallableModel[_MseScorerModel]

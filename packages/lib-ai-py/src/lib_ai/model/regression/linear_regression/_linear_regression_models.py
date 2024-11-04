@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from typing import NotRequired, TypedDict
 
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
@@ -9,7 +8,7 @@ from lib_ai.model.regression.base_regression.base_regression_models import (
 from lib_ai.scoring.scorer.base_scorer.base_scorer_models import BaseScorerCallableModel
 
 
-class _LinearRegressionTrainParamsModel(TypedDict):
+class _LinearRegressionFitParamsModel(TypedDict):
     n_epochs: NotRequired[int]
     optimizer: NotRequired[OPTIMIZER]
     scorer: NotRequired[BaseScorerCallableModel]
@@ -21,6 +20,6 @@ class _LinearRegressionEvalParamsModel(TypedDict):
 
 class _LinearRegressionModel(
     BaseRegressionModel[
-        XYMatrixDataset, _LinearRegressionTrainParamsModel, _LinearRegressionEvalParamsModel
+        XYMatrixDataset, _LinearRegressionFitParamsModel, _LinearRegressionEvalParamsModel
     ],
 ): ...
