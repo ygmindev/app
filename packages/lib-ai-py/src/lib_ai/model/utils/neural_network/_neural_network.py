@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Unpack
+
 import torch
 from lib_ai.core.utils.chunks import chunks
 from lib_ai.data.matrix_data import MatrixData
@@ -13,9 +15,11 @@ from lib_ai.model.regression.linear_regression._linear_regression_models import 
 )
 from lib_ai.model.utils.early_stopping import EarlyStopping
 from lib_ai.model.utils.neural_network._neural_network_models import (
+    _NeuralNetworkFitParamsModel,
     _NeuralNetworkModel,
-    _NeutralNetworkFitParamsModel,
+    _NeuralNetworkParamsModel,
 )
+from lib_ai.model.utils.neural_network.layer.layer_models import LayerModel
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_shared.core.utils.logger import logger
 from lib_shared.core.utils.not_found_exception import NotFoundException
@@ -25,20 +29,22 @@ from torch.optim.sgd import SGD
 
 
 class _Instance(Module):
-    def __init__(self, n_features: int) -> None:
-        super(_Instance, self).__init__()
-        self.linear = Linear(
-            in_features=n_features,
-            out_features=1,
-        )
+    def __init__(self, **params: Unpack[_NeuralNetworkParamsModel]) -> None:
+        self.layer = torch.nn.Sequential(*list(map(self.get_layer, params.get("layers", []))))
+
+    def get_layer(self, layer: LayerModel) -> Module:
+        return Linear(in_features=1, out_features=1)
 
     def forward(self, x) -> torch.Tensor:
         return self.linear(x)
 
 
-class _NeuralNetwork[TFit: _NeutralNetworkFitParamsModel, TEval, TScore](
+class _NeuralNetwork[TFit: _NeuralNetworkFitParamsModel, TEval, TScore](
     _NeuralNetworkModel[TFit, TEval, TScore]
 ):
+    def __init__(self, **params: Unpack[_NeuralNetworkParamsModel]) -> None:
+        self.layers = params.get("layers", [])
+
     def predict(
         self,
         dataset: XYMatrixDataset,
