@@ -20,6 +20,6 @@ class LinearRegression(
                 LinearLayer(
                     n_in=params.get("n_in"),
                     n_out=1,
-                )
+                ),
             ]
         )

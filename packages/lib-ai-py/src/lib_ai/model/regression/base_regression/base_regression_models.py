@@ -8,16 +8,10 @@ from lib_ai.model.base_model.base_model_models import (
 )
 
 
-class BaseRegressionModelEvalParamsModel(BaseModelEvalParamsModel): ...
-
-
-class BaseRegressionModelFitParamsModel(BaseModelFitParamsModel): ...
-
-
 class BaseRegressionModel[
     TDataset: XYDataset,
-    TFit: BaseRegressionModelFitParamsModel,
-    TEval: BaseRegressionModelEvalParamsModel,
+    TFit: BaseModelFitParamsModel,
+    TEval: BaseModelEvalParamsModel,
 ](
     BaseModelModel[
         TDataset,
