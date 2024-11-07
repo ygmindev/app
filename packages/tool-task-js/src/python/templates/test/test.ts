@@ -15,11 +15,11 @@ export const test: TaskParamsModel<TestParamsModel> = {
     ({ options }) => {
       const testMatch = options?.testMatch;
       const { command, ...config } = testConfig.params();
-      const testDir = [
+      const testDir = (
         testMatch
           ? fromGlobs([`**/${testMatch}*.py`], { isAbsolute: true, root: config.testDir })
-          : config.testDir,
-      ].join(' ');
+          : []
+      ).join(' ');
       return command({ ...config, testDir });
     },
   ],

@@ -1,12 +1,25 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Mapping
+from typing import Mapping, TypedDict
 
-from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetModel
+from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.scoring.scorer.base_scorer.base_scorer_models import BaseScorerCallableModel
 
 
-class BaseModelModel[TDataset: BaseDatasetModel, TFit, TEval, TScore](ABC):
+class BaseModelEvalParamsModel(TypedDict):
+    scorers: Mapping[str, BaseScorerCallableModel]
+
+
+class BaseModelFitParamsModel(TypedDict):
+    scorer: BaseScorerCallableModel
+
+
+class BaseModelModel[
+    TDataset: XYDataset,
+    TFit: BaseModelFitParamsModel,
+    TEval: BaseModelEvalParamsModel,
+](ABC):
     @abstractmethod
     def predict(
         self,
@@ -18,7 +31,7 @@ class BaseModelModel[TDataset: BaseDatasetModel, TFit, TEval, TScore](ABC):
         self,
         dataset: TDataset,
         params: TEval | None = None,
-    ) -> TScore: ...
+    ) -> Mapping[str, float]: ...
 
     @abstractmethod
     def fit(

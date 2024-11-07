@@ -1,8 +1,6 @@
 import numpy as np
-from lib_ai.data.array_data import ArrayData
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.data.tabular_data import TabularData
-from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.regression.linear_regression import LinearRegression
 from lib_shared.core.utils.random import random
@@ -18,7 +16,7 @@ def test_works() -> None:
     x = TabularData.from_dict({"x1": list(x1), "x2": list(x2)}).to_matrix()
     y = MatrixData.from_array(list(y))
     trainset, testset = XYMatrixDataset(x=x, y=y).split()
-    model = LinearRegression()
+    model = LinearRegression(n_in=x.shape[1])
     model.fit(trainset)
     loss = model.evaluate(testset)
     assert loss.get("mean_squared_error") <= 1

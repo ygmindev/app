@@ -1,15 +1,20 @@
 from __future__ import annotations
 
-from typing import TypedDict
-
-from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetModel
-from lib_ai.model.base_model.base_model_models import BaseModelModel
-
-
-class BaseClassificationScoreModel(TypedDict):
-    accuracy: float
+from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.model.base_model.base_model_models import (
+    BaseModelEvalParamsModel,
+    BaseModelModel,
+)
 
 
-class BaseClassificationModel[TDataset: BaseDatasetModel, TFit, TEval](
-    BaseModelModel[TDataset, TFit, TEval, BaseClassificationScoreModel]
+class BaseClassificationModel[
+    TDataset: XYDataset,
+    TFit,
+    TEval: BaseModelEvalParamsModel,
+](
+    BaseModelModel[
+        TDataset,
+        TFit,
+        TEval,
+    ]
 ): ...

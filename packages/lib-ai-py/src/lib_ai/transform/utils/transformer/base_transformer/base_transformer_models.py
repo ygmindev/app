@@ -2,10 +2,13 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetModel
+from lib_ai.dataset.xy_dataset import XYDataset
 
 
-class BaseTransformerModel[TDataset: BaseDatasetModel, TFit](ABC):
+class BaseTransformerModel[
+    TDataset: XYDataset,
+    TFit,
+](ABC):
     def fit(
         self,
         _dataset: TDataset,
