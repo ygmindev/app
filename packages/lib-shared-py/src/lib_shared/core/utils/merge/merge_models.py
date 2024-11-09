@@ -1,5 +1,17 @@
-from typing import Tuple
+from typing import Mapping, Tuple, Union
 
-type MergeParamsModel[T: dict] = Tuple[T | None, T | None]
+type MergeParamsModel[
+    TDest: Mapping,
+    TSource: Mapping,
+] = Tuple[
+    TDest | None,
+    TSource | None,
+]
 
-type MergeModel[T: dict] = T
+type MergeModel[
+    TDest: Mapping,
+    TSource: Mapping,
+] = Union[
+    TDest | None,
+    TSource | None,
+]

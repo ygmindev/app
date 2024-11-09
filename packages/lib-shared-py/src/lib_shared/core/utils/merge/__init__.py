@@ -1,9 +1,15 @@
-from typing import Unpack
+from typing import Mapping, Unpack
 
 from lib_shared.core.utils.merge.merge_models import MergeModel, MergeParamsModel
 
 
-def merge[T: dict](*params: Unpack[MergeParamsModel[T]]) -> MergeModel[T]:
+def merge[
+    TDest: Mapping | None,
+    TSource: Mapping | None,
+](*params: Unpack[MergeParamsModel[TDest, TSource]]) -> MergeModel[
+    TDest,
+    TSource,
+]:
     (dest, source) = params
     if source is None:
         return dest or {}
