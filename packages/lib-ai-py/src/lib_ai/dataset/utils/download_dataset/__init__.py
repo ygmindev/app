@@ -14,6 +14,7 @@ def download_dataset(**params: Unpack[DownloadDatasetParamsModel]) -> DownloadDa
     paths = ["_cache", "datasets", get_item(params, "path", None)]
     paths = [x for x in paths if x is not None]
     return _download_dataset(
+        filename=params["filename"],
         name=params["name"],
         path=from_working(*paths),
     )

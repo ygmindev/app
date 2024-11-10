@@ -36,6 +36,14 @@ class _TabularDataModel(BaseDataModel[_TabularDataTypeModel]):
 
     @classmethod
     @abstractmethod
+    def from_csv(
+        cls,
+        pathname: str,
+        _to: TABULAR_DATA_TYPE | None = TABULAR_DATA_TYPE.DATAFRAME,
+    ) -> Self: ...
+
+    @classmethod
+    @abstractmethod
     def from_dict(
         cls,
         _data: Mapping[str, Sequence[Any]],

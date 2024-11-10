@@ -10,7 +10,10 @@ from lib_ai.dataset.xy_dataset.xy_dataset_models import XYDatasetModel
 from lib_shared.core.utils.get_item import get_item
 
 
-class XYDataset[TX: BaseDataModel, TY: BaseDataModel | None](XYDatasetModel[TX, TY], BaseDataset):
+class XYDataset[
+    TX: BaseDataModel,
+    TY: BaseDataModel | None,
+](XYDatasetModel[TX, TY], BaseDataset):
     _x: TX
     _y: TY | None = None
 

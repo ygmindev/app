@@ -17,5 +17,8 @@ class _LabelEncoderTransformerParamsModel(TypedDict):
 
 
 class _LabelEncoderTransformerModel(
-    BaseTransformerModel[_LabelEncoderTransformerDatasetModel, _LabelEncoderTransformerFitModel]
+    BaseTransformerModel[
+        _LabelEncoderTransformerDatasetModel,
+        _LabelEncoderTransformerFitModel,
+    ]
 ): ...

@@ -17,6 +17,7 @@ export const CLEAN_PATTERNS = [
   '.swc',
   '*.log*',
   '.DS_Store',
+  '.coverage*',
   'coverage',
   '__pycache__',
   '.pytest_cache',

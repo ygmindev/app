@@ -65,6 +65,20 @@ class _TabularData(_TabularDataModel):
         raise InvalidTypeException()
 
     @classmethod
+    def from_csv(
+        cls,
+        pathname: str,
+        to: TABULAR_DATA_TYPE = TABULAR_DATA_TYPE.DATAFRAME,
+    ) -> Self:
+        result = None
+        match to:
+            case TABULAR_DATA_TYPE.DATAFRAME:
+                result = pl.read_csv(pathname)
+        if result is None:
+            raise InvalidTypeException()
+        return cls(data=result)
+
+    @classmethod
     def from_dict(
         cls,
         data: Mapping[str, Sequence[Any]],
