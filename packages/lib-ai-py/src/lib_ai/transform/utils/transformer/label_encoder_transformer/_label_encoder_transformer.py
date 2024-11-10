@@ -2,8 +2,9 @@ from typing import Unpack
 
 import polars as pl
 from lib_ai.data.tabular_data import TabularData
+from lib_ai.transform.utils.transformer.base_transformer import BaseTransformer
 from lib_ai.transform.utils.transformer.label_encoder_transformer._label_encoder_transformer_models import (
-    _LabelEncoderTransformerDatasetModel,
+    _LabelEncoderTransformerDataModel,
     _LabelEncoderTransformerFitModel,
     _LabelEncoderTransformerModel,
     _LabelEncoderTransformerParamsModel,
@@ -22,19 +23,19 @@ class _LabelEncoderTransformer(_LabelEncoderTransformerModel):
 
     def fit(
         self,
-        dataset: _LabelEncoderTransformerDatasetModel,
+        data: _LabelEncoderTransformerDataModel,
         _params: _LabelEncoderTransformerFitModel | None = None,
     ) -> None:
-        self._encoder.fit(dataset.x.to_numpy())
+        self._encoder.fit(data.to_numpy())
 
     def transform(
         self,
-        dataset: _LabelEncoderTransformerDatasetModel,
-    ) -> _LabelEncoderTransformerDatasetModel:
-        dataset.x = TabularData(
+        data: _LabelEncoderTransformerDataModel,
+    ) -> _LabelEncoderTransformerDataModel:
+        data = TabularData(
             data=pl.DataFrame(
-                data=self._encoder.transform(dataset.x.to_numpy()),
-                schema=dataset.x.columns,
+                data=self._encoder.transform(data.to_numpy()),
+                schema=data.columns,
             )
         )
-        return dataset
+        return data

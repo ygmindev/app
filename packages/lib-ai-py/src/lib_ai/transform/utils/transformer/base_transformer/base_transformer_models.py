@@ -2,29 +2,29 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.data.base_data import BaseData
 
 
 class BaseTransformerModel[
-    TDataset: XYDataset,
+    TData: BaseData,
     TFit,
 ](ABC):
+    @abstractmethod
     def fit(
         self,
-        _dataset: TDataset,
+        _data: TData,
         _params: TFit | None = None,
     ) -> None: ...
 
+    @abstractmethod
     def fit_transform(
         self,
-        dataset: TDataset,
+        data: TData,
         params: TFit | None = None,
-    ) -> TDataset:
-        self.fit(dataset, params)
-        return self.transform(dataset)
+    ) -> TData: ...
 
     @abstractmethod
     def transform(
         self,
-        dataset: TDataset,
-    ) -> TDataset: ...
+        data: TData,
+    ) -> TData: ...

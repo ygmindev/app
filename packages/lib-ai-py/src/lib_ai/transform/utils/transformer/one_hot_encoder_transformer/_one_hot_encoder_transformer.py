@@ -1,7 +1,7 @@
 from typing import Unpack
 
 from lib_ai.transform.utils.transformer.one_hot_encoder_transformer._one_hot_encoder_transformer_models import (
-    _OneHotEncoderTransformerDatasetModel,
+    _OneHotEncoderTransformerDataModel,
     _OneHotEncoderTransformerModel,
     _OneHotEncoderTransformerParamsModel,
 )
@@ -14,7 +14,7 @@ class _OneHotEncoderTransformer(_OneHotEncoderTransformerModel):
 
     def transform(
         self,
-        dataset: _OneHotEncoderTransformerDatasetModel,
-    ) -> _OneHotEncoderTransformerDatasetModel:
-        dataset.x.data = dataset.x.to_dataframe().to_dummies(drop_first=self._is_sparse)
-        return dataset
+        data: _OneHotEncoderTransformerDataModel,
+    ) -> _OneHotEncoderTransformerDataModel:
+        data.data = data.to_dataframe().to_dummies(drop_first=self._is_sparse)
+        return data

@@ -1,3 +1,4 @@
+from lib_ai.transform.utils.transformer.base_transformer import BaseTransformer
 from lib_ai.transform.utils.transformer.one_hot_encoder_transformer._one_hot_encoder_transformer import (
     _OneHotEncoderTransformer,
 )
@@ -6,5 +7,9 @@ from lib_ai.transform.utils.transformer.one_hot_encoder_transformer.one_hot_enco
 )
 
 
-class OneHotEncoderTransformer(_OneHotEncoderTransformer, OneHotEncoderTransformerModel):
+class OneHotEncoderTransformer(
+    _OneHotEncoderTransformer,
+    BaseTransformer,
+    OneHotEncoderTransformerModel,
+):
     pass

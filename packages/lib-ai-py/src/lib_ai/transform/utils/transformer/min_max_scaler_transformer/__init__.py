@@ -1,6 +1,15 @@
-from lib_ai.transform.utils.transformer.min_max_scaler_transformer._min_max_scaler_transformer import _MinMaxScalerTransformer
-from lib_ai.transform.utils.transformer.min_max_scaler_transformer.min_max_scaler_transformer_models import MinMaxScalerTransformerModel
+from lib_ai.transform.utils.transformer.base_transformer import BaseTransformer
+from lib_ai.transform.utils.transformer.min_max_scaler_transformer._min_max_scaler_transformer import (
+    _MinMaxScalerTransformer,
+)
+from lib_ai.transform.utils.transformer.min_max_scaler_transformer.min_max_scaler_transformer_models import (
+    MinMaxScalerTransformerModel,
+)
 
 
-class MinMaxScalerTransformer(_MinMaxScalerTransformer, MinMaxScalerTransformerModel):
+class MinMaxScalerTransformer(
+    _MinMaxScalerTransformer,
+    BaseTransformer,
+    MinMaxScalerTransformerModel,
+):
     pass

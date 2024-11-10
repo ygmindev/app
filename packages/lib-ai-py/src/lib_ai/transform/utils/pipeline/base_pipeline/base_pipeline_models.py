@@ -2,15 +2,15 @@ from __future__ import annotations
 
 from typing import Any
 
-from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetModel
+from lib_ai.data.base_data import BaseData
 from lib_ai.transform.utils.transformer.base_transformer.base_transformer_models import (
     BaseTransformerModel,
 )
 
 
-class BasePipelineModel[TDataset: BaseDatasetModel](
+class BasePipelineModel[TData: BaseData](
     BaseTransformerModel[
-        TDataset,
+        TData,
         Any,
     ]
 ): ...
