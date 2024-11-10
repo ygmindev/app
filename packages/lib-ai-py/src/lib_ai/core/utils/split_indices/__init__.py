@@ -10,7 +10,7 @@ from lib_shared.core.utils.merge import merge
 
 
 def split_indices(**params: Unpack[SplitIndicesParamsModel]) -> SplitIndicesModel:
-    stratify = get_item(params, "stratify")
+    stratify = get_item(params, "stratify", None)
     shuffle = get_item(params, "shuffle", False)
     return _split_indices(
         **merge(

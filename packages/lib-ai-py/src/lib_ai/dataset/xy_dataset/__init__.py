@@ -40,7 +40,7 @@ class XYDataset[TX: BaseDataModel, TY: BaseDataModel | None](XYDatasetModel[TX, 
         return len(self.x)
 
     def split(self, **params: Unpack[SplitParamsModel]) -> Tuple[Self, Self]:
-        train_size = get_item(params, "train_size")
+        train_size = get_item(params, "train_size", 0.8)
         shuffle = get_item(params, "shuffle", False)
         stratify = get_item(params, "stratify", None)
         train_indices, test_indices = split_indices(
