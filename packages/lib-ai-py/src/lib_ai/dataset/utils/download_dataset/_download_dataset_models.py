@@ -6,4 +6,4 @@ class _DownloadDatasetParamsModel(TypedDict):
     path: str
 
 
-type _DownloadDatasetModel = str
+type _DownloadDatasetModel = None
