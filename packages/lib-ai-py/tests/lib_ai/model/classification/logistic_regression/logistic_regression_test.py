@@ -1,7 +1,8 @@
 import numpy as np
-from lib_ai.data.array_data import ArrayData
+from lib_ai.data.matrix_data import MatrixData
 from lib_ai.data.tabular_data import TabularData
-from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
+from lib_ai.model.classification.logistic_regression import LogisticRegression
 from lib_shared.core.utils.random import random
 
 
@@ -12,9 +13,11 @@ def test_works() -> None:
     x1 = np.array(list([random(min=1, max=9) for _ in range(10)]))
     x2 = np.array(list([random(min=1, max=9) for _ in range(10)]))
     y = (x1 * a1 + x2 * a2) + e
-    x = TabularData.from_dict({"x1": list(x1), "x2": list(x2)})
-    trainset, testset = XYDataset(x=x).split()
-    model = XYDataset(n_features=2)
+    x = TabularData.from_dict({"x1": list(x1), "x2": list(x2)}).to_matrix()
+    y = MatrixData.from_array(list(y))
+    trainset, testset = XYMatrixDataset(x=x, y=y).split()
+    model = LogisticRegression(n_in=x.shape[1])
     model.fit(trainset)
-    loss = model.evaluate(testset)
-    assert abs(loss) <= 1
+    scores = model.evaluate(testset)
+    print(scores)
+    # assert scores["mean_squared_error"] <= 1

@@ -16,6 +16,8 @@ class LogisticRegressionParamsModel(TypedDict):
 
 class LogisticRegressionModel(
     BaseClassificationModel[
-        XYMatrixDataset, _NeuralNetworkFitParamsModel, BaseModelEvalParamsModel
+        XYMatrixDataset,
+        _NeuralNetworkFitParamsModel,
+        BaseModelEvalParamsModel,
     ],
 ): ...

@@ -27,7 +27,8 @@ class _TabularData(_TabularDataModel):
     def __getitem__(self, key: _TabularDataKeyModel) -> Self: ...
 
     def __getitem__(
-        self, key: _TabularDataStringKeyModel | _TabularDataKeyModel
+        self,
+        key: _TabularDataStringKeyModel | _TabularDataKeyModel,
     ) -> ArrayDataModel | Self:
         if isinstance(key, str):
             if isinstance(self.data, pl.DataFrame):

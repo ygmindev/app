@@ -1,20 +1,32 @@
 from typing import Unpack
 
+from lib_ai.model.classification.base_classification import BaseClassification
 from lib_ai.model.classification.logistic_regression.logistic_regression_models import (
     LogisticRegressionModel,
     LogisticRegressionParamsModel,
 )
 from lib_ai.model.utils.neural_network import NeuralNetwork
 from lib_ai.model.utils.neural_network.layer.linear_layer import LinearLayer
+from lib_ai.model.utils.neural_network.layer.softmax_layer import SoftmaxLayer
+from lib_shared.core.utils.get_item import get_item
 
 
-class LogisticRegression(NeuralNetwork, LogisticRegressionModel):
-    def __init__(self, **params: Unpack[LogisticRegressionParamsModel]) -> None:
+class LogisticRegression(
+    BaseClassification,
+    NeuralNetwork,
+    LogisticRegressionModel,
+):
+    def __init__(
+        self,
+        **params: Unpack[LogisticRegressionParamsModel],
+    ) -> None:
+        n_in = get_item(params, "n_in")
         super().__init__(
             layers=[
                 LinearLayer(
-                    n_in=params.get("n_in"),
+                    n_in=n_in,
                     n_out=1,
-                )
+                ),
+                SoftmaxLayer(),
             ]
         )

@@ -8,6 +8,8 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelFitParamsModel,
     BaseModelModel,
 )
+from lib_shared.core.utils.get_item import get_item
+from lib_shared.core.utils.logger import logger
 from lib_shared.core.utils.not_found_exception import NotFoundException
 
 
@@ -30,13 +32,13 @@ class BaseModel[
         if params is None:
             params = {}
 
-        scorers = params.get("scorers")
-        if scorers is None:
-            raise NotFoundException()
-
+        scorers = get_item(params, "scorers")
         y = dataset.y
         self.predict(dataset)
         if dataset.y is None or y is None:
             raise NotFoundException()
 
-        return {k: v(dataset.y, y) for k, v in scorers.items()}
+        scores = {k: v(dataset.y, y) for k, v in scorers.items()}
+        logger.debug(scores)
+
+        return scores

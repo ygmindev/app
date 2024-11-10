@@ -15,8 +15,8 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
     _NeuralNetworkModel,
     _NeuralNetworkParamsModel,
 )
+from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger import logger
-from lib_shared.core.utils.not_found_exception import NotFoundException
 from torch.nn import Module
 from torch.optim.adam import Adam
 from torch.optim.sgd import SGD
@@ -25,7 +25,8 @@ from torch.optim.sgd import SGD
 class _Instance(Module):
     def __init__(self, **params: Unpack[_NeuralNetworkParamsModel]) -> None:
         super().__init__()
-        self._layers = torch.nn.Sequential(*list(map(lambda x: x.layer, params.get("layers", []))))
+        layers = get_item(params, "layers")
+        self._layers = torch.nn.Sequential(*list(map(lambda x: x.layer, layers)))
 
     def forward(self, x) -> torch.Tensor:
         return self._layers(x)
@@ -63,12 +64,9 @@ class _NeuralNetwork[
         if params is None:
             params = {}
 
-        n_epochs = params.get("n_epochs", 1000)
-        optimizer = params.get("optimizer", OPTIMIZER.SGD)
-        scorer = params.get("scorer")
-
-        if scorer is None:
-            raise NotFoundException()
+        n_epochs = get_item(params, "n_epochs", 1000)
+        optimizer = get_item(params, "optimizer", OPTIMIZER.SGD)
+        scorer = get_item(params, "scorer")
 
         self._instance.train(mode=True)
         weights = self._instance.parameters()

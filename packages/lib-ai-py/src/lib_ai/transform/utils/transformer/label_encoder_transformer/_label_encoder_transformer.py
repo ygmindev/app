@@ -8,14 +8,15 @@ from lib_ai.transform.utils.transformer.label_encoder_transformer._label_encoder
     _LabelEncoderTransformerModel,
     _LabelEncoderTransformerParamsModel,
 )
+from lib_shared.core.utils.get_item import get_item
 from sklearn.preprocessing import OrdinalEncoder
 
 
 class _LabelEncoderTransformer(_LabelEncoderTransformerModel):
     def __init__(self, **params: Unpack[_LabelEncoderTransformerParamsModel]) -> None:
-        print(params.get("labels", "auto"))
+        labels = get_item(params, "labels", "auto")
         self._encoder = OrdinalEncoder(
-            categories=params.get("labels", "auto"),
+            categories=labels,
             handle_unknown="error",
         )
 

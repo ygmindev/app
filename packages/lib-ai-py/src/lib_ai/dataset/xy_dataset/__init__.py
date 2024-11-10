@@ -7,6 +7,7 @@ from lib_ai.data.base_data.base_data_models import BaseDataModel, SplitParamsMod
 from lib_ai.dataset.base_dataset import BaseDataset
 from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetKeyModel
 from lib_ai.dataset.xy_dataset.xy_dataset_models import XYDatasetModel
+from lib_shared.core.utils.get_item import get_item
 
 
 class XYDataset[TX: BaseDataModel, TY: BaseDataModel | None](XYDatasetModel[TX, TY], BaseDataset):
@@ -39,11 +40,14 @@ class XYDataset[TX: BaseDataModel, TY: BaseDataModel | None](XYDatasetModel[TX, 
         return len(self.x)
 
     def split(self, **params: Unpack[SplitParamsModel]) -> Tuple[Self, Self]:
+        train_size = get_item(params, "train_size")
+        shuffle = get_item(params, "shuffle", False)
+        stratify = get_item(params, "stratify", None)
         train_indices, test_indices = split_indices(
             n_rows=len(self),
-            train_size=params.get("train_size", 0.8),
-            shuffle=params.get("shuffle", False),
-            stratify=params.get("stratify", None),
+            train_size=train_size,
+            shuffle=shuffle,
+            stratify=stratify,
         )
         return self[train_indices], self[test_indices]
 

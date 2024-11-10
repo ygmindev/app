@@ -12,7 +12,7 @@ export const selfAuthorizer =
     TType = unknown,
     TForm = EntityResourceDataModel<TType>,
   >(
-    self: SelfAuthorizerParamsModel<TMethod, TType, TForm> = (input) => input?.root,
+    selfAuthorizerParamsModel<TMethod, TType, TForm> = (input) => input?.root,
   ): SelfAuthorizerModel<TMethod, TType, TForm> =>
   ({ context, input }) =>
     isEqual(context?.user?._id, self(input));

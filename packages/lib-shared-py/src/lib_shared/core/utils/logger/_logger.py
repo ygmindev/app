@@ -1,5 +1,5 @@
 from logging import DEBUG, ERROR, INFO, NOTSET, WARN, Logger, getLogger
-from typing import Self
+from typing import Any
 
 from lib_shared.core.utils.logger._logger_models import _LoggerModel
 from lib_shared.core.utils.logger.logger_constants import LOGGER_LEVEL
@@ -23,11 +23,11 @@ class _Logger(_LoggerModel):
         self.logger = getLogger()
         self.logger.setLevel(logger_level)
 
-    def debug(self: Self, message: str) -> None:
+    def debug(self, message: Any) -> None:
         self.logger.debug(message)
 
-    def error(self: Self, message: str) -> None:
+    def error(self, message: Any) -> None:
         self.logger.error(message)
 
-    def info(self: Self, message: str) -> None:
+    def info(self, message: Any) -> None:
         self.logger.info(message)

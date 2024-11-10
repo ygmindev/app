@@ -18,5 +18,5 @@ def test_works() -> None:
     trainset, testset = XYMatrixDataset(x=x, y=y).split()
     model = LinearRegression(n_in=x.shape[1])
     model.fit(trainset)
-    loss = model.evaluate(testset)
-    assert loss.get("mean_squared_error") <= 1
+    scores = model.evaluate(testset)
+    assert scores["mean_squared_error"] <= 1
