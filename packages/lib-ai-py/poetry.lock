@@ -484,6 +484,19 @@ tqdm = "*"
 urllib3 = "*"
 
 [[package]]
+name = "lib-config"
+version = "0.0.1"
+description = ""
+optional = false
+python-versions = "^3.12"
+files = []
+develop = true
+
+[package.source]
+type = "directory"
+url = "../lib-config-py"
+
+[[package]]
 name = "lib-shared"
 version = "0.0.1"
 description = ""
@@ -1628,4 +1641,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "7951441ad0335df285e62a8af0ee61b07e1ad784d44d2eb0dd0bc34f00ecae1c"
+content-hash = "97b1af3e40093b463655c2fbdc41393a3b9c7808500af54a24ca7bf1899d2d4f"

@@ -8,8 +8,8 @@ from lib_ai.model.base_model.base_model_models import (
 
 class BaseClassificationModel[
     TDataset: XYDataset,
-    TFit: BaseModelEvalParamsModel,
-    TEval: BaseModelFitParamsModel,
+    TFit: BaseModelFitParamsModel,
+    TEval: BaseModelEvalParamsModel,
 ](
     BaseModelModel[
         TDataset,

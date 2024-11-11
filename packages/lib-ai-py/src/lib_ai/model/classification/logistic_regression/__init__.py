@@ -21,11 +21,12 @@ class LogisticRegression(
         **params: Unpack[LogisticRegressionParamsModel],
     ) -> None:
         n_in = get_item(params, "n_in")
+        n_classes = get_item(params, "n_classes")
         super().__init__(
             layers=[
                 LinearLayer(
                     n_in=n_in,
-                    n_out=1,
+                    n_out=n_classes,
                 ),
                 SoftmaxLayer(),
             ]

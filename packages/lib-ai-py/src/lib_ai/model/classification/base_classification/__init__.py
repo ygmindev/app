@@ -13,13 +13,16 @@ from lib_ai.model.classification.base_classification.base_classification_models 
 )
 from lib_ai.scoring.scorer.accuracy_scorer import accuracy_scorer
 from lib_ai.scoring.scorer.cross_entropy_scorer import cross_entropy_scorer
+from lib_ai.scoring.scorer.f1_scorer import f1_scorer
+from lib_ai.scoring.scorer.mse_scorer import mse_scorer
+from lib_ai.scoring.scorer.precision_scorer import precision_scorer
 from lib_shared.core.utils.merge import merge
 
 
 class BaseClassification[
     TDataset: XYDataset,
-    TFit: BaseModelEvalParamsModel,
-    TEval: BaseModelFitParamsModel,
+    TFit: BaseModelFitParamsModel,
+    TEval: BaseModelEvalParamsModel,
 ](
     BaseModel[
         TDataset,
@@ -37,7 +40,13 @@ class BaseClassification[
         dataset: TDataset,
         params: TEval | None = None,
     ) -> Mapping[str, float]:
-        base_params: BaseModelEvalParamsModel = {"scorers": {"accuracy": accuracy_scorer}}
+        base_params: BaseModelEvalParamsModel = {
+            "scorers": {
+                "accuracy": accuracy_scorer,
+                "f1": f1_scorer,
+                "precision": precision_scorer,
+            }
+        }
         return super().evaluate(
             dataset,
             merge(params, base_params),

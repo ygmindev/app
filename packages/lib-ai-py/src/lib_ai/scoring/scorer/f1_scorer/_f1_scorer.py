@@ -9,4 +9,12 @@ from torcheval.metrics.classification.f1_score import MulticlassF1Score
 
 def _f1_scorer(*params: Unpack[_F1ScorerParamsModel]) -> _F1ScorerModel:
     [y_pred, y] = params
-    return MulticlassF1Score().update(y_pred.to_tensor(), y.to_tensor()).compute().item()
+    return (
+        MulticlassF1Score()
+        .update(
+            y_pred.to_tensor(),
+            y.to_tensor(),
+        )
+        .compute()
+        .item()
+    )

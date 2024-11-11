@@ -12,6 +12,9 @@ def _cross_entropy_scorer(
 ) -> _CrossEntropyScorerModel:
     [y_pred, y] = params
     loss_function = torch.nn.CrossEntropyLoss()
-    loss = loss_function(y_pred.to_tensor().reshape((-1, 1)), y.to_tensor().reshape((-1, 1)))
+    loss = loss_function(
+        y_pred.to_tensor(),
+        y.to_tensor(),
+    )
     loss.backward()
     return loss.item()

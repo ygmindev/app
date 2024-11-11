@@ -17,9 +17,7 @@ def test_works() -> None:
         path="regression",
         filename="Student_Performance.csv",
     )
-    # pathname = from_working("_cache/datasets/regression/Student_Performance.csv")
     data = TabularData.from_csv(pathname)
-
     pipeline = TablePipeline(
         transformers=(
             (["Extracurricular Activities"], OneHotEncoderTransformer(is_sparse=True)),
