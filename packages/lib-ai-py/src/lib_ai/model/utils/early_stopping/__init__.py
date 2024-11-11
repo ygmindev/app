@@ -1,7 +1,5 @@
-from lib_ai.model.utils.early_stopping.early_stopping_constants import (
-    EARLY_STOPPING_MODE,
-)
 from lib_ai.model.utils.early_stopping.early_stopping_models import EarlyStoppingModel
+from lib_ai.scoring.scoring_constants import SCORING_MODE
 
 
 class EarlyStopping(EarlyStoppingModel):
@@ -12,7 +10,7 @@ class EarlyStopping(EarlyStoppingModel):
 
     def __init__(
         self,
-        mode: EARLY_STOPPING_MODE = EARLY_STOPPING_MODE.MIN,
+        mode: SCORING_MODE = SCORING_MODE.MIN,
         patience: int = 100,
         tolerance: float = 1e-1,
     ) -> None:
@@ -30,7 +28,7 @@ class EarlyStopping(EarlyStoppingModel):
 
         improved = (
             score < (self._best - self._tolerance)
-            if self._mode == EARLY_STOPPING_MODE.MIN
+            if self._mode == SCORING_MODE.MIN
             else score > (self._best + self._tolerance)
         )
         if improved:

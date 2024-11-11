@@ -78,7 +78,10 @@ class _TabularData(_TabularDataModel):
         result = None
         match to:
             case TABULAR_DATA_TYPE.DATAFRAME:
-                result = pl.read_csv(pathname)
+                result = pl.read_csv(
+                    pathname,
+                    null_values=["NA"],
+                )
         if result is None:
             raise InvalidTypeException()
         return cls(data=result)

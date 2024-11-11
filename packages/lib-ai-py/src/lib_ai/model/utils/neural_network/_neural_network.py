@@ -15,10 +15,12 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
     _NeuralNetworkModel,
     _NeuralNetworkParamsModel,
 )
+from lib_ai.scoring.scoring_constants import SCORING_MODE
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger import logger
 from torch.nn import Module
 from torch.optim.adam import Adam
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.optim.sgd import SGD
 
 
@@ -67,19 +69,28 @@ class _NeuralNetwork[
         n_epochs = get_item(params, "n_epochs", 1000)
         optimizer = get_item(params, "optimizer", OPTIMIZER.SGD)
         scorer = get_item(params, "scorer")
+        scoring_mode = get_item(params, "scoring_mode", SCORING_MODE.MIN)
 
         self._instance.train(mode=True)
         weights = self._instance.parameters()
 
         match optimizer:
             case OPTIMIZER.ADAM:
-                optimizer = Adam(weights, lr=1e-3)
+                optimizer = Adam(weights, lr=1e-1)
             case OPTIMIZER.SGD:
-                optimizer = SGD(weights, lr=1e-2)
+                optimizer = SGD(weights, lr=1e-1)
             case _:
-                optimizer = Adam(weights, lr=1e-3)
+                optimizer = Adam(weights, lr=1e-1)
 
-        early_stopping = EarlyStopping()
+        scheduler = ReduceLROnPlateau(
+            optimizer,
+            mode="min" if scoring_mode == SCORING_MODE.MIN else "max",
+            patience=100,
+            threshold=5,
+            factor=1e-1,
+        )
+        early_stopping = EarlyStopping(mode=scoring_mode)
+
         for epoch in range(n_epochs):
             for batchset in chunks(
                 data=dataset,
@@ -90,6 +101,8 @@ class _NeuralNetwork[
                 optimizer.zero_grad()
                 loss = scorer(MatrixData(data=y_pred), y)
                 optimizer.step()
+
+            scheduler.step(loss)
 
             if early_stopping.stop(score=loss):
                 logger.debug(f"Early stopping after {epoch} epochs")

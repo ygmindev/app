@@ -10,6 +10,7 @@ from lib_ai.model.base_model.base_model_models import (
 from lib_ai.model.utils.neural_network.layer.base_layer.base_layer_models import (
     BaseLayerModel,
 )
+from lib_ai.scoring.scoring_constants import SCORING_MODE
 
 
 class _NeuralNetworkParamsModel(TypedDict):
@@ -19,6 +20,7 @@ class _NeuralNetworkParamsModel(TypedDict):
 class _NeuralNetworkFitParamsModel(BaseModelFitParamsModel):
     n_epochs: NotRequired[int]
     optimizer: NotRequired[OPTIMIZER]
+    scoring_mode: SCORING_MODE
 
 
 class _NeuralNetworkModel[

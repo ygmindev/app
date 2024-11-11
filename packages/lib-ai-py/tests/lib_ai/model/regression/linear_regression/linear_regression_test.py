@@ -9,27 +9,31 @@ from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
 from lib_ai.transform.utils.transformer.standard_scaler_transformer import (
     StandardScalerTransformer,
 )
-from lib_shared.path.utils.from_working import from_working
 
 
 def test_works() -> None:
-    # pathname = download_dataset(
-    #     name="nikhil7280/student-performance-multiple-linear-regression",
-    #     path="regression",
-    #     filename="Student_Performance.csv",
-    # )
-    pathname = from_working("_cache/datasets/regression/Student_Performance.csv")
+    pathname = download_dataset(
+        name="nikhil7280/student-performance-multiple-linear-regression",
+        path="regression",
+        filename="Student_Performance.csv",
+    )
+    # pathname = from_working("_cache/datasets/regression/Student_Performance.csv")
+    data = TabularData.from_csv(pathname)
+
     pipeline = TablePipeline(
         transformers=(
             (["Extracurricular Activities"], OneHotEncoderTransformer(is_sparse=True)),
-            (["Hours Studied"], StandardScalerTransformer()),
-            (["Previous Scores"], StandardScalerTransformer()),
-            (["Sleep Hours"], StandardScalerTransformer()),
-            (["Sample Question Papers Practiced"], StandardScalerTransformer()),
+            (
+                [
+                    "Hours Studied",
+                    "Previous Scores",
+                    "Sleep Hours",
+                    "Sample Question Papers Practiced",
+                ],
+                StandardScalerTransformer(),
+            ),
         )
     )
-
-    data = TabularData.from_csv(pathname)
     y_column = "Performance Index"
     x, y = data.drop([y_column]), data[y_column]
     x = pipeline.fit_transform(x)

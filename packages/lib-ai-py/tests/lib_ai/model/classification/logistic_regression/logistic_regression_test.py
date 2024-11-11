@@ -1,23 +1,49 @@
-import numpy as np
-from lib_ai.data.matrix_data import MatrixData
 from lib_ai.data.tabular_data import TabularData
+from lib_ai.dataset.utils.download_dataset import download_dataset
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.classification.logistic_regression import LogisticRegression
-from lib_shared.core.utils.random import random
+from lib_ai.model.regression.linear_regression import LinearRegression
+from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
+from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
+    OneHotEncoderTransformer,
+)
+from lib_ai.transform.utils.transformer.standard_scaler_transformer import (
+    StandardScalerTransformer,
+)
 
 
 def test_works() -> None:
-    a1 = random(min=1, max=1e1)
-    a2 = random(min=1e1 + 1, max=1e2)
-    e = random(min=1e2 + 1, max=1e3)
-    x1 = np.array(list([random(min=1, max=9) for _ in range(10)]))
-    x2 = np.array(list([random(min=1, max=9) for _ in range(10)]))
-    y = (x1 * a1 + x2 * a2) + e
-    x = TabularData.from_dict({"x1": list(x1), "x2": list(x2)}).to_matrix()
-    y = MatrixData.from_array(list(y))
-    trainset, testset = XYMatrixDataset(x=x, y=y).split()
+    pathname = download_dataset(
+        name="dileep070/heart-disease-prediction-using-logistic-regression",
+        path="classification",
+        filename="framingham.csv",
+    )
+
+    data = TabularData.from_csv(pathname)
+    pipeline = TablePipeline(
+        transformers=(
+            (
+                [
+                    "age",
+                    "BMI",
+                    "cigsPerDay",
+                    "diaBP",
+                    "education",
+                    "glucose",
+                    "heartRate",
+                    "sysBP",
+                    "totChol",
+                ],
+                StandardScalerTransformer(),
+            ),
+        )
+    )
+
+    y_column = "TenYearCHD"
+    x, y = data.drop([y_column]), data[y_column]
+    x = pipeline.fit_transform(x)
+    trainset, testset = XYMatrixDataset(x=x.to_matrix(), y=y).split()
     model = LogisticRegression(n_in=x.shape[1])
     model.fit(trainset)
     scores = model.evaluate(testset)
-    print(scores)
-    # assert scores["mean_squared_error"] <= 1
+    assert scores["mean_squared_error"] <= 5
