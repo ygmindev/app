@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Any
-
 from lib_ai.data.base_data import BaseData
 from lib_ai.transform.utils.transformer.base_transformer.base_transformer_models import (
     BaseTransformerModel,
@@ -11,6 +9,6 @@ from lib_ai.transform.utils.transformer.base_transformer.base_transformer_models
 class BasePipelineModel[TData: BaseData](
     BaseTransformerModel[
         TData,
-        Any,
+        None,
     ]
 ): ...

@@ -58,6 +58,13 @@ class _TabularData(_TabularDataModel):
     def data(self, value: _TabularDataTypeModel) -> None:
         self._data = value
 
+    def drop(self, columns: Sequence[str]) -> Self:
+        result = self.data
+        match self.get_type():
+            case TABULAR_DATA_TYPE.DATAFRAME:
+                result = result.drop(columns)
+        return type(self)(data=result)
+
     def equals(self, other: Self) -> bool:
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
@@ -101,14 +108,14 @@ class _TabularData(_TabularDataModel):
         result = self.data
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
-                result = cast(pl.DataFrame, result).head(n_rows)
+                result = self.to_dataframe().head(n_rows)
         return type(self)(data=result)
 
     @property
     def shape(self) -> Tuple[int, ...]:
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
-                return cast(pl.DataFrame, self.data).shape
+                return self.to_dataframe().shape
             case _:
                 raise InvalidTypeException()
 

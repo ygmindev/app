@@ -34,6 +34,9 @@ class _TabularDataModel(BaseDataModel[_TabularDataTypeModel]):
     @abstractmethod
     def columns(self) -> Sequence[str]: ...
 
+    @abstractmethod
+    def drop(self, columns: Sequence[str]) -> Self: ...
+
     @classmethod
     @abstractmethod
     def from_csv(
