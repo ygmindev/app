@@ -2,8 +2,6 @@ from typing import Any, Mapping, Self, Sequence, Tuple, cast, overload
 
 import polars as pl
 import torch
-from lib_ai.data.array_data import ArrayData
-from lib_ai.data.array_data.array_data_models import ArrayDataModel
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataKeyModel,
@@ -21,7 +19,7 @@ class _TabularData(_TabularDataModel):
         self._data = data
 
     @overload
-    def __getitem__(self, key: _TabularDataStringKeyModel) -> ArrayDataModel: ...
+    def __getitem__(self, key: _TabularDataStringKeyModel) -> MatrixData: ...
 
     @overload
     def __getitem__(self, key: _TabularDataKeyModel) -> Self: ...
@@ -29,10 +27,10 @@ class _TabularData(_TabularDataModel):
     def __getitem__(
         self,
         key: _TabularDataStringKeyModel | _TabularDataKeyModel,
-    ) -> ArrayDataModel | Self:
+    ) -> MatrixData | Self:
         if isinstance(key, str):
             if isinstance(self.data, pl.DataFrame):
-                return ArrayData(self.data[key])
+                return MatrixData(self.data[key].to_torch())
             raise InvalidTypeException()
         return type(self)(data=self.data[cast(int | Sequence[int] | slice, key)])
 

@@ -56,6 +56,7 @@ class _TablePipeline(_TablePipelineModel):
                 (" ".join(columns), _Transformer(transformer), columns)
                 for (columns, transformer) in transformers
             ),
+            remainder="passthrough",
             verbose_feature_names_out=False,
         )
         self._transformer.set_output(transform="polars")

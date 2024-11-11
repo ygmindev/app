@@ -10,5 +10,5 @@ class _StandardScalerTransformer(_StandardScalerTransformerModel):
         self,
         data: _StandardScalerTransformerDataModel,
     ) -> _StandardScalerTransformerDataModel:
-        data.x.data = data.x.to_dataframe().select((pl.all() - pl.all().mean()) / pl.all().std())
+        data.data = data.to_dataframe().select((pl.all() - pl.all().mean()) / pl.all().std())
         return data

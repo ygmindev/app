@@ -1,33 +1,40 @@
 from lib_ai.data.tabular_data import TabularData
 from lib_ai.dataset.utils.download_dataset import download_dataset
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
+from lib_ai.model.regression.linear_regression import LinearRegression
 from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
 from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
     OneHotEncoderTransformer,
 )
+from lib_ai.transform.utils.transformer.standard_scaler_transformer import (
+    StandardScalerTransformer,
+)
+from lib_shared.path.utils.from_working import from_working
 
 
 def test_works() -> None:
-    pathname = download_dataset(
-        name="nikhil7280/student-performance-multiple-linear-regression",
-        path="regression",
-        filename="Student_Performance.csv",
-    )
-
+    # pathname = download_dataset(
+    #     name="nikhil7280/student-performance-multiple-linear-regression",
+    #     path="regression",
+    #     filename="Student_Performance.csv",
+    # )
+    pathname = from_working("_cache/datasets/regression/Student_Performance.csv")
     pipeline = TablePipeline(
-        transformers=((["Extracurricular Activities"], OneHotEncoderTransformer()),)
+        transformers=(
+            (["Extracurricular Activities"], OneHotEncoderTransformer(is_sparse=True)),
+            (["Hours Studied"], StandardScalerTransformer()),
+            (["Previous Scores"], StandardScalerTransformer()),
+            (["Sleep Hours"], StandardScalerTransformer()),
+            (["Sample Question Papers Practiced"], StandardScalerTransformer()),
+        )
     )
 
     data = TabularData.from_csv(pathname)
     y_column = "Performance Index"
-    x, y = data.drop(["y_column"]), data["y_column"]
+    x, y = data.drop([y_column]), data[y_column]
     x = pipeline.fit_transform(x)
-    # trainset, testset = XYMatrixDataset(x=x.to_matrix(), y=y).split()
-    # model = LinearRegression(n_in=x.shape[1])
-    # model.fit(trainset)
-    # scores = model.evaluate(testset)
-
-    # y = MatrixData.from_array(list(y))
-
-    # assert scores["mean_squared_error"] <= 1
-    assert 1 == 1
+    trainset, testset = XYMatrixDataset(x=x.to_matrix(), y=y).split()
+    model = LinearRegression(n_in=x.shape[1])
+    model.fit(trainset)
+    scores = model.evaluate(testset)
+    assert scores["mean_squared_error"] <= 5

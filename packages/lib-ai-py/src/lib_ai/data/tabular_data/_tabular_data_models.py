@@ -2,10 +2,8 @@ from abc import abstractmethod
 from typing import Any, Mapping, Self, Sequence, Tuple, overload
 
 import polars as pl
-from lib_ai.data.array_data.array_data_models import ArrayDataModel
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.data.matrix_data.matrix_data_models import MatrixDataModel
 from lib_ai.data.tabular_data.tabular_data_constants import TABULAR_DATA_TYPE
 
 type _TabularDataTypeModel = pl.DataFrame
@@ -24,7 +22,7 @@ type _TabularDataKeyModel = _TabularDataIndexKeyModel | _TabularDataMultiKeyMode
 class _TabularDataModel(BaseDataModel[_TabularDataTypeModel]):
     @overload
     @abstractmethod
-    def __getitem__(self, key: _TabularDataStringKeyModel) -> ArrayDataModel: ...
+    def __getitem__(self, key: _TabularDataStringKeyModel) -> MatrixData: ...
 
     @overload
     @abstractmethod

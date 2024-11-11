@@ -73,17 +73,17 @@ class _NeuralNetwork[
 
         match optimizer:
             case OPTIMIZER.ADAM:
-                optimizer = Adam(weights, lr=1e-2)
+                optimizer = Adam(weights, lr=1e-3)
             case OPTIMIZER.SGD:
                 optimizer = SGD(weights, lr=1e-2)
             case _:
-                optimizer = Adam(weights, lr=1e-2)
+                optimizer = Adam(weights, lr=1e-3)
 
         early_stopping = EarlyStopping()
         for epoch in range(n_epochs):
             for batchset in chunks(
                 data=dataset,
-                chunk_size=2,
+                chunk_size=int(len(dataset) / 5),
             ):
                 x, y = batchset.x, batchset.y
                 y_pred = self._instance(x.to_tensor())
