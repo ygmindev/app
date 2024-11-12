@@ -17,6 +17,7 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
 )
 from lib_ai.scoring.scoring_constants import SCORING_MODE
 from lib_shared.core.utils.get_item import get_item
+from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 from lib_shared.core.utils.logger import logger
 from torch.nn import Module
 from torch.optim.adam import Adam
@@ -50,13 +51,25 @@ class _NeuralNetwork[
 ):
     def __init__(self, **params: Unpack[_NeuralNetworkParamsModel]) -> None:
         self._instance = _Instance(**params)
+        self._is_classification = get_item(params, "is_classification", False)
 
     def predict(
         self,
         dataset: XYMatrixDataset,
-    ) -> None:
-        self._instance.train(mode=False)
-        dataset.y = MatrixData(self._instance(dataset.x.to_tensor().squeeze()))
+    ) -> MatrixData:
+        y_pred = self.predict_probability(dataset)
+        if self._is_classification:
+            return MatrixData(torch.argmax(y_pred.to_tensor(), dim=1))
+        return y_pred
+
+    def predict_probability(
+        self,
+        dataset: XYMatrixDataset,
+    ) -> MatrixData:
+        if self._is_classification:
+            self._instance.train(mode=False)
+            return MatrixData(self._instance(dataset.x.to_tensor().squeeze()))
+        raise InvalidTypeException()
 
     def fit(
         self,

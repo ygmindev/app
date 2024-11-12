@@ -1,7 +1,10 @@
 from typing import Any, Mapping, Self, Sequence, Tuple, cast, overload
 
+import numpy as np
 import polars as pl
 import torch
+from lib_ai.core.utils.get_numpy_type import get_numpy_type
+from lib_ai.core.utils.get_tensor_type import get_tensor_type
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataKeyModel,
@@ -10,8 +13,8 @@ from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataTypeModel,
 )
 from lib_ai.data.tabular_data.tabular_data_constants import TABULAR_DATA_TYPE
+from lib_shared.core.core import DATA_TYPE
 from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
-from numpy.typing import NDArray
 
 
 class _TabularData(_TabularDataModel):
@@ -120,17 +123,25 @@ class _TabularData(_TabularDataModel):
             case _:
                 raise InvalidTypeException()
 
-    def to_numpy(self) -> NDArray:
+    def to_numpy(
+        self,
+        to_type: DATA_TYPE | None = DATA_TYPE.FLOAT,
+    ) -> np.ndarray:
+        dtype = get_numpy_type(to_type)
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
-                return cast(pl.DataFrame, self.data).to_numpy()
+                return cast(pl.DataFrame, self.data).to_numpy().dtype(dtype)
             case _:
                 raise InvalidTypeException()
 
-    def to_tensor(self) -> torch.Tensor:
+    def to_tensor(
+        self,
+        to_type: DATA_TYPE | None = DATA_TYPE.FLOAT,
+    ) -> torch.Tensor:
+        dtype = get_tensor_type(to_type)
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
-                return cast(pl.DataFrame, self.data).to_torch().to(torch.float32)
+                return cast(pl.DataFrame, self.data).to_torch().to(dtype)
             case _:
                 raise InvalidTypeException()
 

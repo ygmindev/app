@@ -3,9 +3,10 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, NotRequired, Self, Sequence, Tuple, TypedDict, Unpack
 
+import numpy as np
 import torch
+from lib_shared.core.core import DATA_TYPE
 from lib_shared.core.utils.indexable.indexable_models import IndexableModel
-from numpy.typing import NDArray
 
 
 class SplitParamsModel(TypedDict):
@@ -33,17 +34,29 @@ class BaseDataModel[T](IndexableModel, ABC):
     def equals(self, other: Self) -> bool: ...
 
     @abstractmethod
-    def head(self, n_rows: int = 1) -> Self: ...
+    def head(
+        self,
+        n_rows: int = 1,
+    ) -> Self: ...
 
     @property
     @abstractmethod
     def shape(self) -> Tuple[int, ...]: ...
 
     @abstractmethod
-    def split(self, **params: Unpack[SplitParamsModel]) -> Tuple[Self, Self]: ...
+    def split(
+        self,
+        **params: Unpack[SplitParamsModel],
+    ) -> Tuple[Self, Self]: ...
 
     @abstractmethod
-    def to_numpy(self) -> NDArray: ...
+    def to_numpy(
+        self,
+        to_type: DATA_TYPE | None,
+    ) -> np.ndarray: ...
 
     @abstractmethod
-    def to_tensor(self) -> torch.Tensor: ...
+    def to_tensor(
+        self,
+        to_type: DATA_TYPE | None,
+    ) -> torch.Tensor: ...

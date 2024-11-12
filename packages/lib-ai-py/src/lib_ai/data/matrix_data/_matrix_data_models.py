@@ -1,12 +1,12 @@
 from abc import abstractmethod
 from typing import Any, Self, Sequence
 
+import numpy as np
 import torch
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.data.matrix_data.matrix_data_constants import MATRIX_DATA_TYPE
-from numpy.typing import NDArray
 
-type _MatrixDataTypeModel = torch.Tensor | NDArray
+type _MatrixDataTypeModel = torch.Tensor | np.ndarray
 
 
 class _MatrixDataModel(BaseDataModel[_MatrixDataTypeModel]):

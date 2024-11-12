@@ -15,6 +15,7 @@ from lib_ai.scoring.scoring_constants import SCORING_MODE
 
 class _NeuralNetworkParamsModel(TypedDict):
     layers: Sequence[BaseLayerModel]
+    is_classification: NotRequired[bool]
 
 
 class _NeuralNetworkFitParamsModel(BaseModelFitParamsModel):

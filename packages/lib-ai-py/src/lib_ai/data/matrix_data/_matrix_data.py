@@ -2,17 +2,19 @@ from typing import Any, Self, Sequence, Tuple, cast, overload
 
 import numpy as np
 import torch
+from lib_ai.core.utils.get_numpy_type import get_numpy_type
+from lib_ai.core.utils.get_tensor_type import get_tensor_type
 from lib_ai.data.matrix_data._matrix_data_models import (
     _MatrixDataModel,
     _MatrixDataTypeModel,
 )
 from lib_ai.data.matrix_data.matrix_data_constants import MATRIX_DATA_TYPE
+from lib_shared.core.core import DATA_TYPE
 from lib_shared.core.utils.indexable.indexable_models import (
     IndexableMultiKeyModel,
     IndexableSingleKeyModel,
 )
 from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
-from numpy.typing import NDArray
 
 
 class _MatrixData(_MatrixDataModel):
@@ -83,32 +85,41 @@ class _MatrixData(_MatrixDataModel):
         raise InvalidTypeException()
 
     def head(self, n_rows: int = 1) -> Self:
-        result = self.data
         match self.get_type():
             case MATRIX_DATA_TYPE.TENSOR:
-                result = cast(torch.Tensor, result)[:n_rows]
+                result = self.to_tensor()[:n_rows]
             case MATRIX_DATA_TYPE.NUMPY:
-                result = cast(NDArray, result)[:n_rows]
+                result = self.to_numpy()[:n_rows]
+            case _:
+                raise InvalidTypeException()
         return type(self)(data=result)
 
     @property
     def shape(self) -> Tuple[int, ...]:
         return self.data.shape
 
-    def to_numpy(self) -> NDArray:
+    def to_numpy(
+        self,
+        to_type: DATA_TYPE | None = DATA_TYPE.FLOAT,
+    ) -> np.ndarray:
+        dtype = get_numpy_type(to_type)
         match self.get_type():
             case MATRIX_DATA_TYPE.TENSOR:
-                return cast(torch.Tensor, self.data).numpy()
+                return cast(torch.Tensor, self.data).numpy().dtype(dtype)
             case MATRIX_DATA_TYPE.NUMPY:
-                return cast(NDArray, self.data)
+                return cast(np.ndarray, self.data).dtype(dtype)
             case _:
                 raise InvalidTypeException()
 
-    def to_tensor(self) -> torch.Tensor:
+    def to_tensor(
+        self,
+        to_type: DATA_TYPE | None = DATA_TYPE.FLOAT,
+    ) -> torch.Tensor:
+        dtype = get_tensor_type(to_type)
         match self.get_type():
             case MATRIX_DATA_TYPE.TENSOR:
-                return cast(torch.Tensor, self.data).to(torch.float)
+                return cast(torch.Tensor, self.data).to(dtype)
             case MATRIX_DATA_TYPE.NUMPY:
-                return torch.tensor(self.data).to(torch.float)
+                return torch.tensor(self.data).to(dtype)
             case _:
                 raise InvalidTypeException()
