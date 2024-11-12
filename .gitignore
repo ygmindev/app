@@ -106,7 +106,7 @@ buck-out/
 **/*.pem
 
 # Python
-**/venv
+**/.venv
 __pycache__
 .pytest_cache
 .mypy_cache
