@@ -80,7 +80,7 @@ def test_index() -> None:
 
 
 def test_split() -> None:
-    [train, test] = TABULAR_DATA_FIXTURE_1.split(train_size=0.8)
+    [train, test] = TABULAR_DATA_FIXTURE_1.split(size=0.8)
     assert np.array_equal(
         train.to_numpy(),
         np.array(

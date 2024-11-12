@@ -132,10 +132,10 @@ class _TabularData(_TabularDataModel):
         self,
         dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> np.ndarray:
-        dtype = get_numpy_type(dtype)
+        to_type = get_numpy_type(dtype)
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
-                return cast(pl.DataFrame, self.data).to_numpy().dtype(dtype)
+                return cast(pl.DataFrame, self.data).to_numpy().astype(to_type)
             case _:
                 raise InvalidTypeException()
 
@@ -143,10 +143,10 @@ class _TabularData(_TabularDataModel):
         self,
         dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> torch.Tensor:
-        dtype = get_tensor_type(dtype)
+        to_type = get_tensor_type(dtype)
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
-                return cast(pl.DataFrame, self.data).to_torch().to(dtype)
+                return cast(pl.DataFrame, self.data).to_torch().to(to_type)
             case _:
                 raise InvalidTypeException()
 

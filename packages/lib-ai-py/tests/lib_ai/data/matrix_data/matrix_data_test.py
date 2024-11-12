@@ -57,7 +57,7 @@ def test_index() -> None:
 
 
 def test_split() -> None:
-    [train, test] = MATRIX_DATA_FIXTURE_1.split(train_size=0.8)
+    [train, test] = MATRIX_DATA_FIXTURE_1.split(size=0.8)
     assert torch.eq(
         train.to_tensor(),
         torch.tensor(

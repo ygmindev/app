@@ -10,7 +10,7 @@ from lib_shared.core.utils.indexable.indexable_models import IndexableModel
 
 
 class SplitParamsModel(TypedDict):
-    train_size: NotRequired[float]
+    size: NotRequired[float]
     shuffle: NotRequired[bool]
     stratify: NotRequired[Sequence[Any]]
 

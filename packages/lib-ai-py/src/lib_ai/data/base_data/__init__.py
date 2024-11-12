@@ -7,12 +7,12 @@ from lib_shared.core.utils.get_item import get_item
 
 class BaseData(BaseDataModel):
     def split(self, **params: Unpack[SplitParamsModel]) -> Tuple[Self, Self]:
-        train_size = get_item(params, "train_size", 0.8)
+        size = get_item(params, "size", 0.8)
         shuffle = get_item(params, "shuffle", False)
         stratify = get_item(params, "stratify", None)
         train_indices, test_indices = split_indices(
             n_rows=len(self),
-            train_size=train_size,
+            size=size,
             shuffle=shuffle,
             stratify=stratify,
         )

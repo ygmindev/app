@@ -11,7 +11,7 @@ def test_works() -> None:
 
     train, test = split_indices(
         n_rows=N_ROWS,
-        train_size=0.7,
+        size=0.7,
     )
     assert (train == [0, 1, 2, 3, 4, 5, 6]).all()
     assert (test == [7, 8, 9]).all()

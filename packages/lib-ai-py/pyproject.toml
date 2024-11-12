@@ -38,6 +38,7 @@ torchaudio = "^2.5.1"
 torcheval = "^0.0.7"
 kaggle = "^1.6.17"
 pydash = "^8.0.4"
+xgboost = "^2.1.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"

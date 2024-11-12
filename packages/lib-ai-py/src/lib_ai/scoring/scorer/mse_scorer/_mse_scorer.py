@@ -14,5 +14,8 @@ def _mse_scorer(*params: Unpack[_MseScorerParamsModel]) -> _MseScorerModel:
         y_pred.to_tensor().reshape((-1, 1)),
         y.to_tensor().reshape((-1, 1)),
     )
-    loss.backward()
+    try:
+        loss.backward()
+    except Exception:
+        ...
     return loss.item()

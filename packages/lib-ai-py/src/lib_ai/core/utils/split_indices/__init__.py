@@ -16,7 +16,7 @@ def split_indices(**params: Unpack[SplitIndicesParamsModel]) -> SplitIndicesMode
         **merge(
             params,
             {
-                "train_size": 0.8,
+                "size": 0.8,
                 "shuffle": True if stratify else shuffle,
             },
         )

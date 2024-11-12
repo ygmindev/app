@@ -17,5 +17,8 @@ def _cross_entropy_scorer(
         y_pred.to_tensor(),
         y.to_tensor(dtype=DATA_TYPE.LONG),
     )
-    loss.backward()
+    try:
+        loss.backward()
+    except Exception:
+        ...
     return loss.item()

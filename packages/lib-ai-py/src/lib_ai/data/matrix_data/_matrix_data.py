@@ -102,12 +102,12 @@ class _MatrixData(_MatrixDataModel):
         self,
         dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> np.ndarray:
-        dtype = get_numpy_type(dtype)
+        to_type = get_numpy_type(dtype)
         match self.get_type():
             case MATRIX_DATA_TYPE.TENSOR:
-                return cast(torch.Tensor, self.data).numpy().dtype(dtype)
+                return cast(torch.Tensor, self.data).numpy().astype(to_type)
             case MATRIX_DATA_TYPE.NUMPY:
-                return cast(np.ndarray, self.data).dtype(dtype)
+                return cast(np.ndarray, self.data).astype(to_type)
             case _:
                 raise InvalidTypeException()
 
@@ -115,11 +115,11 @@ class _MatrixData(_MatrixDataModel):
         self,
         dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> torch.Tensor:
-        dtype = get_tensor_type(dtype)
+        to_type = get_tensor_type(dtype)
         match self.get_type():
             case MATRIX_DATA_TYPE.TENSOR:
-                return cast(torch.Tensor, self.data).to(dtype)
+                return cast(torch.Tensor, self.data).to(to_type)
             case MATRIX_DATA_TYPE.NUMPY:
-                return torch.tensor(self.data).to(dtype)
+                return torch.tensor(self.data).to(to_type)
             case _:
                 raise InvalidTypeException()

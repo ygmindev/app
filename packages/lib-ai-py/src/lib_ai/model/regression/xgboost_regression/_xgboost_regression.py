@@ -1,0 +1,54 @@
+from __future__ import annotations
+
+from typing import Unpack
+
+from lib_ai.data.matrix_data import MatrixData
+from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
+from lib_ai.model.base_model import BaseModel
+from lib_ai.model.regression.xgboost_regression._xgboost_regression_models import (
+    _XgboostRegressionEvalParamsModel,
+    _XgboostRegressionFitParamsModel,
+    _XgboostRegressionModel,
+    _XgboostRegressionParamsModel,
+)
+from lib_shared.core.utils.not_found_exception import NotFoundException
+from xgboost import XGBRegressor
+
+
+class _XgboostRegression(
+    BaseModel[
+        XYMatrixDataset,
+        _XgboostRegressionFitParamsModel,
+        _XgboostRegressionEvalParamsModel,
+    ],
+    _XgboostRegressionModel,
+):
+    def __init__(self, **params: Unpack[_XgboostRegressionParamsModel]) -> None:
+        self._instance = XGBRegressor(
+            # objective="reg:linear",
+            n_estimators=100,
+        )
+
+    def predict(
+        self,
+        dataset: XYMatrixDataset,
+    ) -> MatrixData:
+        y_pred = self._instance.predict(dataset.x.to_numpy())
+        return MatrixData(y_pred)
+
+    def fit(
+        self,
+        dataset: XYMatrixDataset,
+        params: _XgboostRegressionFitParamsModel | None = None,
+    ) -> None:
+        if params is None:
+            params = {}
+
+        if dataset.y is None:
+            raise NotFoundException("y")
+
+        self._instance.fit(
+            dataset.x.to_numpy(),
+            dataset.y.to_numpy(),
+            verbose=True,
+        )
