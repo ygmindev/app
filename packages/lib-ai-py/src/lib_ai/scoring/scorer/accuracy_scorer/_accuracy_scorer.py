@@ -10,7 +10,7 @@ from torcheval.metrics.classification.accuracy import MulticlassAccuracy
 def _accuracy_scorer(*params: Unpack[_AccuracyScorerParamsModel]) -> _AccuracyScorerModel:
     [y_pred, y] = params
     return (
-        MulticlassAccuracy(average="macro", num_classes=2)
+        MulticlassAccuracy()
         .update(
             y_pred.to_tensor(),
             y.to_tensor(),

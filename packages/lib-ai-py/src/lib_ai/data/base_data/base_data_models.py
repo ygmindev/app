@@ -52,11 +52,11 @@ class BaseDataModel[T](IndexableModel, ABC):
     @abstractmethod
     def to_numpy(
         self,
-        to_type: DATA_TYPE | None,
+        dtype: DATA_TYPE | None,
     ) -> np.ndarray: ...
 
     @abstractmethod
     def to_tensor(
         self,
-        to_type: DATA_TYPE | None,
+        dtype: DATA_TYPE | None,
     ) -> torch.Tensor: ...

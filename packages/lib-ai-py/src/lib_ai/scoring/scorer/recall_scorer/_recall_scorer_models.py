@@ -3,6 +3,6 @@ from lib_ai.scoring.scorer.base_scorer.base_scorer_models import (
     BaseScorerParamsModel,
 )
 
-type _PrecisionScorerParamsModel = BaseScorerParamsModel
+type _RecallScorerParamsModel = BaseScorerParamsModel
 
-type _PrecisionScorerModel = BaseScorerModel
+type _RecallScorerModel = BaseScorerModel

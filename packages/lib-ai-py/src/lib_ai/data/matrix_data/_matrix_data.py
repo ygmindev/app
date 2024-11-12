@@ -100,9 +100,9 @@ class _MatrixData(_MatrixDataModel):
 
     def to_numpy(
         self,
-        to_type: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> np.ndarray:
-        dtype = get_numpy_type(to_type)
+        dtype = get_numpy_type(dtype)
         match self.get_type():
             case MATRIX_DATA_TYPE.TENSOR:
                 return cast(torch.Tensor, self.data).numpy().dtype(dtype)
@@ -113,9 +113,9 @@ class _MatrixData(_MatrixDataModel):
 
     def to_tensor(
         self,
-        to_type: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> torch.Tensor:
-        dtype = get_tensor_type(to_type)
+        dtype = get_tensor_type(dtype)
         match self.get_type():
             case MATRIX_DATA_TYPE.TENSOR:
                 return cast(torch.Tensor, self.data).to(dtype)

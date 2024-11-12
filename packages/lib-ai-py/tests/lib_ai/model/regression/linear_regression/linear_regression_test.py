@@ -33,7 +33,7 @@ def test_works() -> None:
         )
     )
     y_column = "Performance Index"
-    x, y = data.drop([y_column]), data[y_column]
+    x, y = data.drop_columns([y_column]), data[y_column]
     x = pipeline.fit_transform(x)
     trainset, testset = XYMatrixDataset(x=x.to_matrix(), y=y).split()
     model = LinearRegression(n_in=x.shape[1])

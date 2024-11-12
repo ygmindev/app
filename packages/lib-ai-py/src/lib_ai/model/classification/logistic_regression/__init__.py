@@ -34,8 +34,3 @@ class LogisticRegression(
                 SoftmaxLayer(),
             ],
         )
-
-    def predict_probability(
-        self,
-        dataset: XYDataset,
-    ) -> MatrixData: ...

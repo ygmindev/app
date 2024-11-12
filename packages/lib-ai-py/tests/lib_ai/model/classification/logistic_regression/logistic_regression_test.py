@@ -14,7 +14,7 @@ def test_works() -> None:
         path="classification",
         filename="framingham.csv",
     )
-    data = TabularData.from_csv(pathname)
+    data = TabularData.from_csv(pathname).drop_na()
     pipeline = TablePipeline(
         transformers=(
             (
@@ -34,7 +34,7 @@ def test_works() -> None:
         )
     )
     y_column = "TenYearCHD"
-    x, y = data.drop([y_column]), data[y_column]
+    x, y = data.drop_columns([y_column]), data[y_column]
     x = pipeline.fit_transform(x)
     trainset, testset = XYMatrixDataset(x=x.to_matrix(), y=y).split()
     model = LogisticRegression(

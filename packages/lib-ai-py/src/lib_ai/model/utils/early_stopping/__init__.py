@@ -18,20 +18,24 @@ class EarlyStopping(EarlyStoppingModel):
         self._patience = patience
         self._tolerance = tolerance
 
-    def stop(
+    def is_improved(
         self,
         score: float,
     ) -> bool:
         if self._best is None:
             self._best = score
             return False
-
-        improved = (
+        return (
             score < (self._best - self._tolerance)
             if self._mode == SCORING_MODE.MIN
             else score > (self._best + self._tolerance)
         )
-        if improved:
+
+    def stop(
+        self,
+        score: float,
+    ) -> bool:
+        if self.is_improved(score):
             self._best = score
             self._count = 0
             return False

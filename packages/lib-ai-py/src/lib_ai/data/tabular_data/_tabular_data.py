@@ -59,11 +59,16 @@ class _TabularData(_TabularDataModel):
     def data(self, value: _TabularDataTypeModel) -> None:
         self._data = value
 
-    def drop(self, columns: Sequence[str]) -> Self:
-        result = self.data
+    def drop_columns(self, columns: Sequence[str]) -> Self:
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
-                result = result.drop(columns)
+                result = self.to_dataframe().drop(columns)
+        return type(self)(data=result)
+
+    def drop_na(self) -> Self:
+        match self.get_type():
+            case TABULAR_DATA_TYPE.DATAFRAME:
+                result = self.to_dataframe().drop_nulls()
         return type(self)(data=result)
 
     def equals(self, other: Self) -> bool:
@@ -125,9 +130,9 @@ class _TabularData(_TabularDataModel):
 
     def to_numpy(
         self,
-        to_type: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> np.ndarray:
-        dtype = get_numpy_type(to_type)
+        dtype = get_numpy_type(dtype)
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
                 return cast(pl.DataFrame, self.data).to_numpy().dtype(dtype)
@@ -136,9 +141,9 @@ class _TabularData(_TabularDataModel):
 
     def to_tensor(
         self,
-        to_type: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> torch.Tensor:
-        dtype = get_tensor_type(to_type)
+        dtype = get_tensor_type(dtype)
         match self.get_type():
             case TABULAR_DATA_TYPE.DATAFRAME:
                 return cast(pl.DataFrame, self.data).to_torch().to(dtype)

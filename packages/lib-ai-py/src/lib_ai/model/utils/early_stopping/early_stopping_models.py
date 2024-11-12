@@ -13,6 +13,12 @@ class EarlyStoppingModel(ABC):
     ) -> None: ...
 
     @abstractmethod
+    def is_improved(
+        self,
+        score: float,
+    ) -> bool: ...
+
+    @abstractmethod
     def stop(
         self,
         score: float,

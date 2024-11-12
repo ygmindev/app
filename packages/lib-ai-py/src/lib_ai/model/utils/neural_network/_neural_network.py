@@ -59,7 +59,7 @@ class _NeuralNetwork[
     ) -> MatrixData:
         y_pred = self.predict_probability(dataset)
         if self._is_classification:
-            return MatrixData(torch.argmax(y_pred.to_tensor(), dim=1))
+            return MatrixData(y_pred.to_tensor().argmax(dim=1))
         return y_pred
 
     def predict_probability(
@@ -68,7 +68,7 @@ class _NeuralNetwork[
     ) -> MatrixData:
         if self._is_classification:
             self._instance.train(mode=False)
-            return MatrixData(self._instance(dataset.x.to_tensor().squeeze()))
+            return MatrixData(self._instance(dataset.x.to_tensor()))
         raise InvalidTypeException()
 
     def fit(
@@ -114,6 +114,9 @@ class _NeuralNetwork[
                 optimizer.zero_grad()
                 loss = scorer(MatrixData(data=y_pred), y)
                 optimizer.step()
+
+                if early_stopping.is_improved(score=loss):
+                    self.evaluate(batchset)
 
             scheduler.step(loss)
 

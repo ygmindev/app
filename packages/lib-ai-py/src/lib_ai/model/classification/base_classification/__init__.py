@@ -15,7 +15,7 @@ from lib_ai.scoring.scorer.accuracy_scorer import accuracy_scorer
 from lib_ai.scoring.scorer.cross_entropy_scorer import cross_entropy_scorer
 from lib_ai.scoring.scorer.f1_scorer import f1_scorer
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
-from lib_ai.scoring.scorer.precision_scorer import precision_scorer
+from lib_ai.scoring.scorer.recall_scorer import recall_scorer
 from lib_shared.core.utils.merge import merge
 
 
@@ -44,7 +44,7 @@ class BaseClassification[
             "scorers": {
                 "accuracy": accuracy_scorer,
                 "f1": f1_scorer,
-                "precision": precision_scorer,
+                "recall": recall_scorer,
             }
         }
         return super().evaluate(

@@ -34,9 +34,12 @@ class BaseModel[
 
         scorers = get_item(params, "scorers")
         y = dataset.y
+        if y is None:
+            raise NotFoundException("y")
+
         y_pred = self.predict(dataset)
-        if y_pred is None or y is None:
-            raise NotFoundException()
+        if y_pred is None:
+            raise NotFoundException("y_pred")
 
         scores = {k: v(y_pred, y) for k, v in scorers.items()}
         logger.debug(scores)
