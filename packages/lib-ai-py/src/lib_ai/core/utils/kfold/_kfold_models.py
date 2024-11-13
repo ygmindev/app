@@ -1,9 +1,14 @@
-from typing import NotRequired, TypedDict
+from typing import Any, Iterator, NotRequired, Sequence, Tuple, TypedDict
+
+import numpy as np
 
 
 class _KfoldParamsModel(TypedDict):
-    n_splits: int
     is_shuffle: NotRequired[bool]
+    n_rows: int
+    n_splits: int
+    random_state: int
+    stratify: NotRequired[Sequence[Any]]
 
 
-type _KfoldModel = None
+type _KfoldModel = Iterator[Tuple[np.ndarray, np.ndarray]]
