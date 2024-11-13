@@ -1,0 +1,9 @@
+from enum import Enum
+
+
+class OPTIMIZE_SPACE_DISTRIBUTION(Enum):
+    LOG_NORMAL = "LOG_NORMAL"
+    OPTIONS = "OPTIONS"
+    Q_LOG_NORMAL = "Q_LOG_NORMAL"
+    Q_UNIFORM = "Q_UNIFORM"
+    UNIFORM = "UNIFORM"
