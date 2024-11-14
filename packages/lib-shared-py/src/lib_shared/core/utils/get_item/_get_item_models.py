@@ -1,7 +1,7 @@
-from typing import Any, Mapping, NotRequired, Sequence, Tuple
+from typing import Any, Mapping, Sequence, Tuple
 
 type _GetItemParamsModel = Tuple[
-    Mapping,
+    Mapping | None,
     Sequence[str] | str,
     Any,
 ]

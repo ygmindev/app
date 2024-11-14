@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Mapping
+from typing import Any, Mapping
 
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model import BaseModel
@@ -20,16 +20,19 @@ from lib_shared.core.utils.merge import merge
 
 
 class BaseClassification[
+    TParams: Mapping[str, Any],
     TDataset: XYDataset,
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,
 ](
     BaseModel[
+        TParams,
         TDataset,
         TFit,
         TEval,
     ],
     BaseClassificationModel[
+        TParams,
         TDataset,
         TFit,
         TEval,

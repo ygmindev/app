@@ -33,10 +33,21 @@ def test_works() -> None:
         )
     )
     y_column = "Performance Index"
+    scorer = "mean_squared_error"
+
     x, y = data.drop_columns([y_column]), data[y_column]
     x = pipeline.fit_transform(x)
     trainset, testset = XYMatrixDataset(x=x.to_matrix(), y=y).split()
-    model = LinearRegression(n_in=x.shape[1])
+    trainset, validationset = trainset.split()
+    model = LinearRegression(params={"n_in": x.shape[1]})
+
+    cv_result = model.cv(
+        params={"scorer": scorer},
+        instance_params={},
+        dataset=validationset,
+        kfold_params={"n_splits": 5},
+    )
+
     model.fit(trainset)
     scores = model.evaluate(testset)
-    assert scores["mean_squared_error"] <= 5
+    assert scores[scorer] <= 5

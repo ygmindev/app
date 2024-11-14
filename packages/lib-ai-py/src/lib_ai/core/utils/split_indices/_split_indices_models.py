@@ -1,7 +1,7 @@
 from typing import Any, List, NotRequired, Sequence, Tuple, TypedDict
 
 
-class _SplitIndicesParamsModel(TypedDict):
+class _SplitIndicesParamsModel(TypedDict, total=False):
     n_rows: int
     size: NotRequired[float]
     shuffle: NotRequired[bool]

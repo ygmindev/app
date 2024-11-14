@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Unpack
-
 import torch
 from lib_ai.core.utils.chunks import chunks
 from lib_ai.data.matrix_data import MatrixData
@@ -17,7 +15,6 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
 )
 from lib_ai.scoring.scoring_constants import SCORING_MODE
 from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 from lib_shared.core.utils.logger import logger
 from torch.nn import Module
 from torch.optim.adam import Adam
@@ -25,8 +22,8 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.optim.sgd import SGD
 
 
-class _Instance(Module):
-    def __init__(self, **params: Unpack[_NeuralNetworkParamsModel]) -> None:
+class _Module(Module):
+    def __init__(self, params: _NeuralNetworkParamsModel) -> None:
         super().__init__()
         layers = get_item(params, "layers")
         self._layers = torch.nn.Sequential(*list(map(lambda x: x.layer, layers)))
@@ -40,6 +37,7 @@ class _NeuralNetwork[
     TEval: BaseModelEvalParamsModel,
 ](
     BaseModel[
+        _NeuralNetworkParamsModel,
         XYMatrixDataset,
         TFit,
         TEval,
@@ -49,8 +47,9 @@ class _NeuralNetwork[
         TEval,
     ],
 ):
-    def __init__(self, **params: Unpack[_NeuralNetworkParamsModel]) -> None:
-        self._instance = _Instance(**params)
+    def __init__(self, params: _NeuralNetworkParamsModel) -> None:
+        super().__init__(params=params)
+        self._module = _Module(params=params)
         self._is_classification = get_item(params, "is_classification", False)
 
     def predict(
@@ -66,26 +65,21 @@ class _NeuralNetwork[
         self,
         dataset: XYMatrixDataset,
     ) -> MatrixData:
-        if self._is_classification:
-            self._instance.train(mode=False)
-            return MatrixData(self._instance(dataset.x.to_tensor()))
-        raise InvalidTypeException()
+        self._module.train(mode=False)
+        return MatrixData(self._module(dataset.x.to_tensor()))
 
     def fit(
         self,
         dataset: XYMatrixDataset,
         params: TFit | None = None,
     ) -> None:
-        if params is None:
-            params = {}
-
         n_epochs = get_item(params, "n_epochs", 1000)
         optimizer = get_item(params, "optimizer", OPTIMIZER.SGD)
         scorer = get_item(params, "scorer")
         scoring_mode = get_item(params, "scoring_mode", SCORING_MODE.MIN)
 
-        self._instance.train(mode=True)
-        weights = self._instance.parameters()
+        self._module.train(mode=True)
+        weights = self._module.parameters()
 
         match optimizer:
             case OPTIMIZER.ADAM:
@@ -102,7 +96,7 @@ class _NeuralNetwork[
             threshold=5,
             factor=1e-1,
         )
-        early_stopping = EarlyStopping(mode=scoring_mode)
+        early_stopping = EarlyStopping(scoring_mode=scoring_mode)
 
         for epoch in range(n_epochs):
             for batchset in chunks(
@@ -110,7 +104,7 @@ class _NeuralNetwork[
                 chunk_size=int(len(dataset) / 5),
             ):
                 x, y = batchset.x, batchset.y
-                y_pred = self._instance(x.to_tensor())
+                y_pred = self._module(x.to_tensor())
                 optimizer.zero_grad()
                 loss = scorer(MatrixData(data=y_pred), y)
                 optimizer.step()

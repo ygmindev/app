@@ -7,5 +7,4 @@ def test_works() -> None:
         path="regression",
         filename="Student_Performance.csv",
     )
-    print(pathname)
     assert 1 == 1

@@ -14,7 +14,7 @@ from sklearn.preprocessing import OrdinalEncoder
 
 
 class _LabelEncoderTransformer(_LabelEncoderTransformerModel):
-    def __init__(self, **params: Unpack[_LabelEncoderTransformerParamsModel]) -> None:
+    def __init__(self, params: _LabelEncoderTransformerParamsModel) -> None:
         labels = get_item(params, "labels", "auto")
         self._encoder = OrdinalEncoder(
             categories=labels,

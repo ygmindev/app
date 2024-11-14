@@ -10,7 +10,7 @@ from lib_ai.model.regression.base_regression.base_regression_models import (
 )
 
 
-class _XgboostRegressionParamsModel(TypedDict): ...
+class _XgboostRegressionParamsModel(TypedDict, total=False): ...
 
 
 class _XgboostRegressionFitParamsModel(BaseModelFitParamsModel): ...
@@ -21,6 +21,7 @@ class _XgboostRegressionEvalParamsModel(BaseModelEvalParamsModel): ...
 
 class _XgboostRegressionModel(
     BaseRegressionModel[
+        _XgboostRegressionParamsModel,
         XYMatrixDataset,
         _XgboostRegressionFitParamsModel,
         _XgboostRegressionEvalParamsModel,

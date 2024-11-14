@@ -1,4 +1,4 @@
-from typing import Any, Unpack
+from typing import Any
 
 from lib_ai.optimize.utils.optimize import optimize
 from lib_ai.optimize.utils.optimize.optimize_constants import (
@@ -13,6 +13,7 @@ def a(xx: Any):
 
 def test_works() -> None:
     x = optimize(
+        n_trials=2,
         objective=a,
         spaces=(
             {
@@ -23,5 +24,4 @@ def test_works() -> None:
             },
         ),
     )
-    print(x)
     assert 1 == 1

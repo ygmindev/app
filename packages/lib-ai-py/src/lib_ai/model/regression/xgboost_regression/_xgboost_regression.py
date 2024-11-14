@@ -17,13 +17,15 @@ from xgboost import XGBRegressor
 
 class _XgboostRegression(
     BaseModel[
+        _XgboostRegressionParamsModel,
         XYMatrixDataset,
         _XgboostRegressionFitParamsModel,
         _XgboostRegressionEvalParamsModel,
     ],
     _XgboostRegressionModel,
 ):
-    def __init__(self, **params: Unpack[_XgboostRegressionParamsModel]) -> None:
+    def __init__(self, params: _XgboostRegressionParamsModel) -> None:
+        super().__init__(params=params)
         self._instance = XGBRegressor(
             # objective="reg:linear",
             n_estimators=100,
@@ -41,9 +43,6 @@ class _XgboostRegression(
         dataset: XYMatrixDataset,
         params: _XgboostRegressionFitParamsModel | None = None,
     ) -> None:
-        if params is None:
-            params = {}
-
         if dataset.y is None:
             raise NotFoundException("y")
 

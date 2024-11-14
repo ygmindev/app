@@ -38,8 +38,10 @@ def test_works() -> None:
     x = pipeline.fit_transform(x)
     trainset, testset = XYMatrixDataset(x=x.to_matrix(), y=y).split()
     model = LogisticRegression(
-        n_in=x.shape[1],
-        n_classes=2,
+        params={
+            "n_in": x.shape[1],
+            "n_classes": 2,
+        },
     )
     model.fit(trainset)
     scores = model.evaluate(testset)

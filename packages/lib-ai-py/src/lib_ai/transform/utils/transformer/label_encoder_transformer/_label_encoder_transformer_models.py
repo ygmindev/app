@@ -11,7 +11,7 @@ type _LabelEncoderTransformerDataModel = TabularData
 type _LabelEncoderTransformerFitModel = None
 
 
-class _LabelEncoderTransformerParamsModel(TypedDict):
+class _LabelEncoderTransformerParamsModel(TypedDict, total=False):
     labels: NotRequired[Sequence[Sequence[str]]]
 
 

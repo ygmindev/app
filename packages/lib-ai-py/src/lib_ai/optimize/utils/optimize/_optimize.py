@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from typing import Any, Mapping, Unpack
+from typing import Any, Mapping, Tuple, Unpack, cast
 
-from hyperopt import STATUS_OK, fmin, hp, tpe
+from hyperopt import STATUS_OK, Trials, fmin, hp, tpe
+from lib_ai.model.utils.early_stopping import EarlyStopping
 from lib_ai.optimize.utils.optimize._optimize_models import (
     _OptimizeModel,
     _OptimizeParamsModel,
@@ -61,10 +62,22 @@ def _optimize[T: Mapping[str, Any]](**params: Unpack[_OptimizeParamsModel[T]]) -
     space = hp.choice(
         "optimize", [{k: _get_space(k, *v) for k, v in space.items()} for space in spaces]
     )
+
+    early_stopping = EarlyStopping()
+
+    def _early_stopping(trials, *args) -> Tuple[bool, Tuple[Any, ...]]:
+        return early_stopping.stop(score=trials.losses()[-1]), args
+
+    trials = Trials()
     best = fmin(
-        fn=_objective,
-        space=space,
         algo=tpe.suggest,
+        early_stop_fn=_early_stopping,
+        fn=_objective,
         max_evals=n_trials,
+        space=space,
+        trials=trials,
+        verbose=False,
     )
-    print(best)
+    if best:
+        best.pop("optimize")
+    return cast(T, best)

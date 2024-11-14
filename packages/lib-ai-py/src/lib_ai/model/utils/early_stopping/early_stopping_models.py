@@ -7,7 +7,7 @@ class EarlyStoppingModel(ABC):
     @abstractmethod
     def __init__(
         self,
-        mode: SCORING_MODE,
+        scoring_mode: SCORING_MODE,
         patience: int = 10,
         tolerance: float = 0.0,
     ) -> None: ...

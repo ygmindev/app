@@ -10,15 +10,22 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
 )
 
 
-class LogisticRegressionParamsModel(TypedDict):
+class LogisticRegressionParamsModel(TypedDict, total=False):
     n_in: int
     n_classes: int
 
 
+class LogisticrRegressionFitParamsModel(_NeuralNetworkFitParamsModel): ...
+
+
+class LogisticRegressionEvalParamsModel(BaseModelEvalParamsModel): ...
+
+
 class LogisticRegressionModel(
     BaseClassificationModel[
+        LogisticRegressionParamsModel,
         XYMatrixDataset,
-        _NeuralNetworkFitParamsModel,
-        BaseModelEvalParamsModel,
+        LogisticrRegressionFitParamsModel,
+        LogisticRegressionEvalParamsModel,
     ],
 ): ...

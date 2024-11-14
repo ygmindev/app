@@ -8,7 +8,7 @@ from lib_ai.optimize.utils.optimize.optimize_constants import (
 from lib_ai.scoring.scoring_constants import SCORING_MODE
 
 
-class _OptimizeSpaceMinMaxParamsModel(TypedDict):
+class _OptimizeSpaceMinMaxParamsModel(TypedDict, total=False):
     lower: float
     upper: float
 
@@ -17,7 +17,7 @@ class _OptimizeSpaceQMinMaxParamsModel(_OptimizeSpaceMinMaxParamsModel):
     q: NotRequired[int]
 
 
-class _OptimizeSpaceNormalParamsModel(TypedDict):
+class _OptimizeSpaceNormalParamsModel(TypedDict, total=False):
     lower: float
     upper: float
 
@@ -26,14 +26,14 @@ class _OptimizeSpaceQNormalParamsModel(_OptimizeSpaceNormalParamsModel):
     q: NotRequired[int]
 
 
-class _OptimizeSpaceOptionsParamsModel(TypedDict):
+class _OptimizeSpaceOptionsParamsModel(TypedDict, total=False):
     options: Tuple[Any]
 
 
 type _OptimizeSpaceParamsModel = _OptimizeSpaceMinMaxParamsModel | _OptimizeSpaceQMinMaxParamsModel | _OptimizeSpaceNormalParamsModel | _OptimizeSpaceQNormalParamsModel | _OptimizeSpaceOptionsParamsModel
 
 
-class _OptimizeParamsModel[T: Mapping[str, Any]](TypedDict):
+class _OptimizeParamsModel[T: Mapping[str, Any]](TypedDict, total=False):
     n_trials: NotRequired[int]
     objective: Callable[[T], float]
     scoring_mode: NotRequired[SCORING_MODE]

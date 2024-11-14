@@ -9,7 +9,7 @@ from lib_shared.core.core import DATA_TYPE
 from lib_shared.core.utils.indexable.indexable_models import IndexableModel
 
 
-class SplitParamsModel(TypedDict):
+class SplitParamsModel(TypedDict, total=False):
     size: NotRequired[float]
     shuffle: NotRequired[bool]
     stratify: NotRequired[Sequence[Any]]

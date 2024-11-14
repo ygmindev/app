@@ -13,7 +13,7 @@ from lib_ai.model.utils.neural_network.layer.base_layer.base_layer_models import
 from lib_ai.scoring.scoring_constants import SCORING_MODE
 
 
-class _NeuralNetworkParamsModel(TypedDict):
+class _NeuralNetworkParamsModel(TypedDict, total=False):
     layers: Sequence[BaseLayerModel]
     is_classification: NotRequired[bool]
 
@@ -29,6 +29,7 @@ class _NeuralNetworkModel[
     TEval: BaseModelEvalParamsModel,
 ](
     BaseModelModel[
+        _NeuralNetworkParamsModel,
         XYMatrixDataset,
         TFit,
         TEval,

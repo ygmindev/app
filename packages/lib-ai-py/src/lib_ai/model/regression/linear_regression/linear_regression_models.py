@@ -10,14 +10,21 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
 )
 
 
-class LinearRegressionParamsModel(TypedDict):
+class LinearRegressionParamsModel(TypedDict, total=False):
     n_in: int
+
+
+class LinearRegressionFitParamsModel(_NeuralNetworkFitParamsModel): ...
+
+
+class LinearRegressionEvalParamsModel(BaseModelEvalParamsModel): ...
 
 
 class LinearRegressionModel(
     BaseRegressionModel[
+        LinearRegressionParamsModel,
         XYMatrixDataset,
-        _NeuralNetworkFitParamsModel,
-        BaseModelEvalParamsModel,
+        LinearRegressionFitParamsModel,
+        LinearRegressionEvalParamsModel,
     ],
 ): ...
