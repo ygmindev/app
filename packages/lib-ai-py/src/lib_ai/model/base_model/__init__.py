@@ -73,12 +73,13 @@ class BaseModel[
         eval_params: TEval | None = None,
         fit_params: TFit | None = None,
     ):
-        x = optimize(
-            merge(
-                {"objective": a, "scoring_mode": },
-                params,
-            ),
-        )
+        ...
+        # x = optimize(
+        #     merge(
+        #         {"objective": a, "scoring_mode": },
+        #         params,
+        #     ),
+        # )
 
     def evaluate(
         self,

@@ -5,7 +5,9 @@ from lib_ai.scoring.scorer.mse_scorer.mse_scorer_models import (
     MseScorerModel,
     MseScorerParamsModel,
 )
+from lib_ai.scoring.utils.scorer import scorer
 
 
+@scorer(is_loss=True)
 def mse_scorer(*params: Unpack[MseScorerParamsModel]) -> MseScorerModel:
     return _mse_scorer(*params)
