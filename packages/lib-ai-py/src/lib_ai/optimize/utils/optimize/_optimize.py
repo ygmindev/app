@@ -39,7 +39,7 @@ def _get_space(
             lower = get_item(dist_params, "lower")
             upper = get_item(dist_params, "upper")
             q = get_item(dist_params, "q", 1)
-            return hp.quniform(name, lower, upper, q)
+            return hp.uniformint(name, lower, upper, q=q)
         case OPTIMIZE_SPACE_DISTRIBUTION.UNIFORM:
             lower = get_item(dist_params, "lower")
             upper = get_item(dist_params, "upper")

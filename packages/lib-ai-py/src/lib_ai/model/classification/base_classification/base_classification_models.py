@@ -9,14 +9,24 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelEvalParamsModel,
     BaseModelFitParamsModel,
     BaseModelModel,
+    BaseModelParamsModel,
 )
 
 
+class BaseClassificationParamsModel(BaseModelParamsModel): ...
+
+
+class BaseClassificationEvalParamsModel(BaseModelEvalParamsModel): ...
+
+
+class BaseClassificationFitParamsModel(BaseModelFitParamsModel): ...
+
+
 class BaseClassificationModel[
-    TParams: Mapping[str, Any],
+    TParams: BaseClassificationParamsModel,
     TDataset: XYDataset,
-    TFit: BaseModelFitParamsModel,
-    TEval: BaseModelEvalParamsModel,
+    TFit: BaseClassificationFitParamsModel,
+    TEval: BaseClassificationEvalParamsModel,
 ](
     BaseModelModel[
         TParams,

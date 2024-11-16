@@ -9,9 +9,14 @@ from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
 from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableProtocolModel
 
+type Scorers = Mapping[str, ScorerCallableProtocolModel]
 
-class BaseModelEvalParamsModel(TypedDict, total=False):
-    scorers: Mapping[str, ScorerCallableProtocolModel]
+
+class BaseModelParamsModel(TypedDict, total=False):
+    scorers: Scorers
+
+
+class BaseModelEvalParamsModel(TypedDict, total=False): ...
 
 
 class BaseModelFitParamsModel(TypedDict, total=False):
@@ -28,7 +33,7 @@ class BaseModelCvModel(TypedDict, total=False):
 
 
 class BaseModelModel[
-    TParams: Mapping[str, Any],
+    TParams: BaseModelParamsModel,
     TDataset: XYDataset,
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,
@@ -77,3 +82,7 @@ class BaseModelModel[
         dataset: TDataset,
         params: TFit | None = None,
     ) -> None: ...
+
+    @property
+    @abstractmethod
+    def scorers(self) -> Scorers: ...

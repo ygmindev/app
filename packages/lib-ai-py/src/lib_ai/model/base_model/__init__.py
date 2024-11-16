@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Mapping, Self, Unpack, cast
+from typing import Mapping
 
 import numpy as np
 from lib_ai.core.utils.kfold import kfold
@@ -12,6 +12,8 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelEvalParamsModel,
     BaseModelFitParamsModel,
     BaseModelModel,
+    BaseModelParamsModel,
+    Scorers,
 )
 from lib_ai.optimize.utils.optimize import optimize
 from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
@@ -19,11 +21,10 @@ from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger import logger
 from lib_shared.core.utils.merge import merge
 from lib_shared.core.utils.not_found_exception import NotFoundException
-from lib_shared.core.utils.pick import pick
 
 
 class BaseModel[
-    TParams: Mapping[str, Any],
+    TParams: BaseModelParamsModel,
     TDataset: XYDataset,
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,
@@ -35,9 +36,9 @@ class BaseModel[
         TEval,
     ]
 ):
-    _params: TParams
+    _params: TParams | None
 
-    def __init__(self, params: TParams) -> None:
+    def __init__(self, params: TParams | None = None) -> None:
         self._params = params
 
     def cv(
@@ -66,20 +67,41 @@ class BaseModel[
 
     def optimize(
         self,
+        cv_params: BaseModelCvParamsModel,
         dataset: TDataset,
-        params: OptimizeParamsModel,
         instance_params: TParams,
         kfold_params: KfoldParamsModel,
+        params: OptimizeParamsModel,
         eval_params: TEval | None = None,
         fit_params: TFit | None = None,
-    ):
-        ...
-        # x = optimize(
-        #     merge(
-        #         {"objective": a, "scoring_mode": },
-        #         params,
-        #     ),
-        # )
+    ) -> None:
+        # scorers = get_item(eval_params, "scorers")
+        # scorer = get_item(cv_params, "scorer")
+        # scorer = get_item(scorers, scorer)
+        # scoring_mode = SCORING_MODE.MIN if scorer.is_loss else SCORING_MODE.MAX
+
+        def _objective(opt_params: TParams) -> float:
+            opt_params = merge(opt_params, instance_params)
+            result = self.cv(
+                dataset=dataset,
+                eval_params=eval_params,
+                fit_params=fit_params,
+                instance_params=opt_params,
+                kfold_params=kfold_params,
+                params=cv_params,
+            )
+            return result["average"]
+
+        optimize_params = merge(
+            {
+                "objective": _objective,
+                # "scoring_mode": scoring_mode,
+            },
+            params,
+        )
+        best = optimize(**optimize_params)
+        logger.debug(best)
+        self._params = best
 
     def evaluate(
         self,
@@ -99,3 +121,7 @@ class BaseModel[
         logger.debug(scores)
 
         return scores
+
+    @property
+    def scorers(self) -> Scorers:
+        return get_item(self._params, "scorers")

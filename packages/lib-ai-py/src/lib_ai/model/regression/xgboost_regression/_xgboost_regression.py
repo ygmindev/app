@@ -11,6 +11,7 @@ from lib_ai.model.regression.xgboost_regression._xgboost_regression_models impor
     _XgboostRegressionModel,
     _XgboostRegressionParamsModel,
 )
+from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.not_found_exception import NotFoundException
 from xgboost import XGBRegressor
 
@@ -24,11 +25,14 @@ class _XgboostRegression(
     ],
     _XgboostRegressionModel,
 ):
-    def __init__(self, params: _XgboostRegressionParamsModel) -> None:
+    def __init__(self, params: _XgboostRegressionParamsModel | None = None) -> None:
         super().__init__(params=params)
+        n_estimators = get_item(params, "n_estimators", 100)
+        max_depth = get_item(params, "max_depth", 5)
         self._instance = XGBRegressor(
             # objective="reg:linear",
-            n_estimators=100,
+            n_estimators=n_estimators,
+            max_depth=max_depth,
         )
 
     def predict(

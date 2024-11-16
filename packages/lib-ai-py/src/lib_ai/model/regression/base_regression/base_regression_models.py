@@ -5,11 +5,21 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelEvalParamsModel,
     BaseModelFitParamsModel,
     BaseModelModel,
+    BaseModelParamsModel,
 )
 
 
+class BaseRegressionParamsModel(BaseModelParamsModel): ...
+
+
+class BaseRegressionEvalParamsModel(BaseModelEvalParamsModel): ...
+
+
+class BaseRegressionFitParamsModel(BaseModelFitParamsModel): ...
+
+
 class BaseRegressionModel[
-    TParams: Mapping[str, Any],
+    TParams: BaseRegressionParamsModel,
     TDataset: XYDataset,
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,

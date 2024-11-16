@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, Mapping, NotRequired, Tuple, TypedDict
+from typing import Any, Callable, Dict, Mapping, NotRequired, Sequence, Tuple, TypedDict
 
 from lib_ai.optimize.utils.optimize.optimize_constants import (
     OPTIMIZE_SPACE_DISTRIBUTION,
@@ -27,7 +27,7 @@ class _OptimizeSpaceQNormalParamsModel(_OptimizeSpaceNormalParamsModel):
 
 
 class _OptimizeSpaceOptionsParamsModel(TypedDict, total=False):
-    options: Tuple[Any]
+    options: Sequence[Any]
 
 
 type _OptimizeSpaceParamsModel = _OptimizeSpaceMinMaxParamsModel | _OptimizeSpaceQMinMaxParamsModel | _OptimizeSpaceNormalParamsModel | _OptimizeSpaceQNormalParamsModel | _OptimizeSpaceOptionsParamsModel
@@ -37,7 +37,7 @@ class _OptimizeParamsModel[T: Mapping[str, Any]](TypedDict, total=False):
     n_trials: NotRequired[int]
     objective: Callable[[T], float]
     scoring_mode: NotRequired[SCORING_MODE]
-    spaces: Tuple[
+    spaces: Sequence[
         Dict[
             str,
             Tuple[OPTIMIZE_SPACE_DISTRIBUTION, _OptimizeSpaceParamsModel],

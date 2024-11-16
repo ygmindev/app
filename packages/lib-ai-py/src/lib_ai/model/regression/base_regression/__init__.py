@@ -9,17 +9,20 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelFitParamsModel,
 )
 from lib_ai.model.regression.base_regression.base_regression_models import (
+    BaseRegressionEvalParamsModel,
+    BaseRegressionFitParamsModel,
     BaseRegressionModel,
+    BaseRegressionParamsModel,
 )
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_shared.core.utils.merge import merge
 
 
 class BaseRegression[
-    TParams: Mapping[str, Any],
+    TParams: BaseRegressionParamsModel,
     TDataset: XYDataset,
-    TFit: BaseModelFitParamsModel,
-    TEval: BaseModelEvalParamsModel,
+    TFit: BaseRegressionFitParamsModel,
+    TEval: BaseRegressionEvalParamsModel,
 ](
     BaseModel[
         TParams,
@@ -34,6 +37,9 @@ class BaseRegression[
         TEval,
     ],
 ):
+    def __init__(self, params: TParams | None = None) -> None:
+        super().__init__(params=params)
+
     def evaluate(
         self,
         dataset: TDataset,

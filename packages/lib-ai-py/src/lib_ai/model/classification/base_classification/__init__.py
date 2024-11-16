@@ -9,7 +9,10 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelFitParamsModel,
 )
 from lib_ai.model.classification.base_classification.base_classification_models import (
+    BaseClassificationEvalParamsModel,
+    BaseClassificationFitParamsModel,
     BaseClassificationModel,
+    BaseClassificationParamsModel,
 )
 from lib_ai.scoring.scorer.accuracy_scorer import accuracy_scorer
 from lib_ai.scoring.scorer.cross_entropy_scorer import cross_entropy_scorer
@@ -20,10 +23,10 @@ from lib_shared.core.utils.merge import merge
 
 
 class BaseClassification[
-    TParams: Mapping[str, Any],
+    TParams: BaseClassificationParamsModel,
     TDataset: XYDataset,
-    TFit: BaseModelFitParamsModel,
-    TEval: BaseModelEvalParamsModel,
+    TFit: BaseClassificationFitParamsModel,
+    TEval: BaseClassificationEvalParamsModel,
 ](
     BaseModel[
         TParams,

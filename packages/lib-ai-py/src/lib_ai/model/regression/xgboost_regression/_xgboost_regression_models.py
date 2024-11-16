@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.base_model.base_model_models import (
@@ -10,7 +10,9 @@ from lib_ai.model.regression.base_regression.base_regression_models import (
 )
 
 
-class _XgboostRegressionParamsModel(TypedDict, total=False): ...
+class _XgboostRegressionParamsModel(TypedDict, total=False):
+    n_estimators: NotRequired[int]
+    max_depth: NotRequired[int]
 
 
 class _XgboostRegressionFitParamsModel(BaseModelFitParamsModel): ...

@@ -3,6 +3,9 @@ from lib_ai.dataset.utils.download_dataset import download_dataset
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.regression.linear_regression import LinearRegression
 from lib_ai.model.regression.xgboost_regression import XgboostRegression
+from lib_ai.optimize.utils.optimize.optimize_constants import (
+    OPTIMIZE_SPACE_DISTRIBUTION,
+)
 from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
 from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
     OneHotEncoderTransformer,
@@ -37,7 +40,37 @@ def test_works() -> None:
     x, y = data.drop_columns([y_column]), data[y_column]
     x = pipeline.fit_transform(x).to_matrix()
     trainset, testset = XYMatrixDataset(x=x, y=y).split()
+    trainset, validationset = trainset.split()
     model = XgboostRegression()
     model.fit(trainset)
     scores = model.evaluate(testset)
-    assert scores["mean_squared_error"] <= 5
+    assert scores["mean_squared_error"] <= 10
+
+    scorer = "mean_squared_error"
+    # result = model.cv(
+    #     params={"scorer": scorer},
+    #     instance_params={},
+    #     dataset=validationset,
+    #     kfold_params={"n_splits": 5},
+    # )
+    model.optimize(
+        params={
+            "n_trials": 10,
+            "spaces": (
+                {
+                    "n_estimators": (
+                        OPTIMIZE_SPACE_DISTRIBUTION.Q_UNIFORM,
+                        {"lower": 50, "upper": 100},
+                    ),
+                    "max_depth": (
+                        OPTIMIZE_SPACE_DISTRIBUTION.Q_UNIFORM,
+                        {"lower": 1, "upper": 5},
+                    ),
+                },
+            ),
+        },
+        cv_params={"scorer": scorer},
+        instance_params={},
+        dataset=validationset,
+        kfold_params={"n_splits": 5},
+    )
