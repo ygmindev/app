@@ -6,7 +6,7 @@ from lib_ai.core.utils.split_indices.split_indices_models import (
     SplitIndicesParamsModel,
 )
 from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.merge2 import merge
+from lib_shared.core.utils.merge import merge
 
 
 def split_indices(**params: Unpack[SplitIndicesParamsModel]) -> SplitIndicesModel:

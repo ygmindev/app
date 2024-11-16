@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Mapping
+from typing import Mapping, cast
 
 import numpy as np
 from lib_ai.core.utils.kfold import kfold
@@ -21,7 +21,7 @@ from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
 from lib_ai.scoring.scoring_constants import SCORING_MODE
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger import logger
-from lib_shared.core.utils.merge2 import merge
+from lib_shared.core.utils.merge import merge
 from lib_shared.core.utils.not_found_exception import NotFoundException
 
 
@@ -85,7 +85,14 @@ class BaseModel[
         scoring_mode = SCORING_MODE.MIN if scorer.is_loss else SCORING_MODE.MAX
 
         def _objective(opt_params: TParams) -> float:
-            opt_params = merge(opt_params, instance_params, self._params)
+            opt_params = cast(
+                TParams,
+                merge(
+                    self._params,
+                    instance_params,
+                    opt_params,
+                ),
+            )
             result = self.cv(
                 dataset=dataset,
                 eval_params=eval_params,

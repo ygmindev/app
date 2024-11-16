@@ -19,7 +19,7 @@ from lib_ai.scoring.scorer.cross_entropy_scorer import cross_entropy_scorer
 from lib_ai.scoring.scorer.f1_scorer import f1_scorer
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_ai.scoring.scorer.recall_scorer import recall_scorer
-from lib_shared.core.utils.merge2 import merge
+from lib_shared.core.utils.merge import merge
 
 
 class BaseClassification[

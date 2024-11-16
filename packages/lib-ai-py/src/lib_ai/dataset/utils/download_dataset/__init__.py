@@ -6,7 +6,7 @@ from lib_ai.dataset.utils.download_dataset.download_dataset_models import (
     DownloadDatasetParamsModel,
 )
 from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.merge2 import merge
+from lib_shared.core.utils.merge import merge
 from lib_shared.path.utils.from_working import from_working
 
 

@@ -15,7 +15,7 @@ from lib_ai.model.regression.base_regression.base_regression_models import (
     BaseRegressionParamsModel,
 )
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
-from lib_shared.core.utils.merge2 import merge
+from lib_shared.core.utils.merge import merge
 from lib_shared.core.utils.set_item import set_item
 
 
