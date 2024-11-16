@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import List, Mapping, Never, NotRequired, Optional, TypedDict
+from typing import List, Mapping, Never, NotRequired, TypedDict
 
 from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
 from lib_ai.data.matrix_data import MatrixData

@@ -32,6 +32,7 @@ class _XgboostRegression(
         set_item(params, "n_estimators", n_estimators)
         set_item(params, "max_depth", max_depth)
         super().__init__(params=params)
+        print(f"@@@ params: {n_estimators} vs {max_depth}")
         self._instance = XGBRegressor(
             # objective="reg:linear",
             n_estimators=n_estimators,

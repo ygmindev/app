@@ -17,7 +17,6 @@ from lib_ai.model.base_model.base_model_models import (
     Scorers,
 )
 from lib_ai.optimize.utils.optimize import optimize
-from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
 from lib_ai.scoring.scoring_constants import SCORING_MODE
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger import logger
@@ -112,7 +111,7 @@ class BaseModel[
         )
         best = optimize(**optimize_params)
         logger.debug(best)
-        self._params = cast(TParams, merge(self._params, best))
+        self.__init__(params=cast(TParams, merge(self._params, best)))
 
     def evaluate(
         self,
