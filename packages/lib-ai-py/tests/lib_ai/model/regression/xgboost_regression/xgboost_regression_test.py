@@ -51,9 +51,10 @@ def test_works() -> None:
     #     kfold_params={"n_splits": 5},
     # )
 
-    logger.debug("@@@@@ BEFORE OPTIMIZATION:")
+    # Before optimization
     model.fit(trainset)
     model.evaluate(testset)
+
     model.optimize(
         params={
             "n_trials": 100,
@@ -76,7 +77,7 @@ def test_works() -> None:
         kfold_params={"n_splits": 5},
     )
 
-    logger.debug("@@@@@ AFTER OPTIMIZATION:")
+    # After optimization
     model.fit(trainset)
     scores = model.evaluate(testset)
     assert scores["mean_squared_error"] <= 5
