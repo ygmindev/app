@@ -112,7 +112,7 @@ class BaseModel[
         )
         best = optimize(**optimize_params)
         logger.debug(best)
-        self._params = best
+        self._params = cast(TParams, merge(self._params, best))
 
     def evaluate(
         self,
@@ -126,10 +126,6 @@ class BaseModel[
         y_pred = self.predict(dataset)
         if y_pred is None:
             raise NotFoundException("y_pred")
-
-        print("@@@ eval")
-        print(self._params)
-        print(self.scorers)
 
         scores = {k: v(y_pred, y) for k, v in self.scorers.items()}
         logger.debug(scores)
