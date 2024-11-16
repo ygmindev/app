@@ -41,6 +41,9 @@ def test_works() -> None:
     trainset, validationset = trainset.split()
     model = LinearRegression(params={"n_in": x.shape[1]})
 
+    model.fit(trainset)
+    scores = model.evaluate(testset)
+
     cv_result = model.cv(
         params={"scorer": scorer},
         instance_params={},
@@ -48,6 +51,4 @@ def test_works() -> None:
         kfold_params={"n_splits": 5},
     )
 
-    model.fit(trainset)
-    scores = model.evaluate(testset)
     assert scores[scorer] <= 5

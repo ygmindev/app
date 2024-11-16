@@ -13,7 +13,7 @@ def a(xx: Any):
 
 def test_works() -> None:
     x = optimize(
-        n_trials=2,
+        n_trials=10,
         objective=a,
         spaces=(
             {

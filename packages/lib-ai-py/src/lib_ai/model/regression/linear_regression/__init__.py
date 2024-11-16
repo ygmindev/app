@@ -6,7 +6,7 @@ from lib_ai.model.regression.linear_regression.linear_regression_models import (
 from lib_ai.model.utils.neural_network import NeuralNetwork
 from lib_ai.model.utils.neural_network.layer.linear_layer import LinearLayer
 from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.merge import merge
+from lib_shared.core.utils.merge2 import merge
 
 
 class LinearRegression(

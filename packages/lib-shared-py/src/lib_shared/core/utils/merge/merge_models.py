@@ -1,17 +1,5 @@
-from typing import Mapping, Tuple, Union
+from lib_shared.core.utils.merge._merge_models import _MergeModel, _MergeParamsModel
 
-type MergeParamsModel[
-    TDest: Mapping,
-    TSource: Mapping,
-] = Tuple[
-    TDest | None,
-    TSource | None,
-]
 
-type MergeModel[
-    TDest: Mapping,
-    TSource: Mapping,
-] = Union[
-    TDest | None,
-    TSource | None,
-]
+type MergeParamsModel = _MergeParamsModel
+type MergeModel = _MergeModel

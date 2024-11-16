@@ -42,9 +42,6 @@ def test_works() -> None:
     trainset, testset = XYMatrixDataset(x=x, y=y).split()
     trainset, validationset = trainset.split()
     model = XgboostRegression()
-    model.fit(trainset)
-    scores = model.evaluate(testset)
-    assert scores["mean_squared_error"] <= 10
 
     scorer = "mean_squared_error"
     # result = model.cv(
@@ -74,3 +71,7 @@ def test_works() -> None:
         dataset=validationset,
         kfold_params={"n_splits": 5},
     )
+
+    model.fit(trainset)
+    scores = model.evaluate(testset)
+    assert scores["mean_squared_error"] <= 10

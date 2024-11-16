@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import List, Mapping, NotRequired, TypedDict
+from typing import List, Mapping, Never, NotRequired, Optional, TypedDict
 
 from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
 from lib_ai.data.matrix_data import MatrixData
@@ -10,6 +10,10 @@ from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
 from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
 
 type Scorers = Mapping[str, ScorerCallableModel]
+
+
+class OptimizeParamsOptionalModel(OptimizeParamsModel):
+    objective: NotRequired[Never]
 
 
 class BaseModelParamsModel(TypedDict):
@@ -56,7 +60,7 @@ class BaseModelModel[
     def optimize(
         self,
         dataset: TDataset,
-        params: OptimizeParamsModel,
+        params: OptimizeParamsOptionalModel,
         instance_params: TParams,
         kfold_params: KfoldParamsModel,
         eval_params: TEval | None = None,

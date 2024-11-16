@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-from typing import Any, Mapping, NotRequired, Tuple, TypedDict
+from typing import Any, Mapping
 
 from lib_ai.optimize.utils.optimize._optimize_models import (
     _OptimizeModel,
     _OptimizeParamsModel,
 )
 
-type OptimizeParamsModel[T: Mapping[str, Any]] = _OptimizeParamsModel[T]
+
+class OptimizeParamsModel[T: Mapping[str, Any]](_OptimizeParamsModel[T]): ...
+
 
 type OptimizeModel[T: Mapping[str, Any]] = _OptimizeModel[T]

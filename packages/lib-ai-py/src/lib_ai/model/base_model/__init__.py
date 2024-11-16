@@ -13,6 +13,7 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelFitParamsModel,
     BaseModelModel,
     BaseModelParamsModel,
+    OptimizeParamsOptionalModel,
     Scorers,
 )
 from lib_ai.optimize.utils.optimize import optimize
@@ -20,7 +21,7 @@ from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
 from lib_ai.scoring.scoring_constants import SCORING_MODE
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger import logger
-from lib_shared.core.utils.merge import merge
+from lib_shared.core.utils.merge2 import merge
 from lib_shared.core.utils.not_found_exception import NotFoundException
 
 
@@ -39,7 +40,10 @@ class BaseModel[
 ):
     _params: TParams | None
 
-    def __init__(self, params: TParams | None = None) -> None:
+    def __init__(
+        self,
+        params: TParams | None = None,
+    ) -> None:
         self._params = params
 
     def cv(
@@ -72,7 +76,7 @@ class BaseModel[
         dataset: TDataset,
         instance_params: TParams,
         kfold_params: KfoldParamsModel,
-        params: OptimizeParamsModel,
+        params: OptimizeParamsOptionalModel,
         eval_params: TEval | None = None,
         fit_params: TFit | None = None,
     ) -> None:
@@ -81,7 +85,7 @@ class BaseModel[
         scoring_mode = SCORING_MODE.MIN if scorer.is_loss else SCORING_MODE.MAX
 
         def _objective(opt_params: TParams) -> float:
-            opt_params = merge(opt_params, instance_params)
+            opt_params = merge(opt_params, instance_params, self._params)
             result = self.cv(
                 dataset=dataset,
                 eval_params=eval_params,
@@ -115,6 +119,10 @@ class BaseModel[
         y_pred = self.predict(dataset)
         if y_pred is None:
             raise NotFoundException("y_pred")
+
+        print("@@@ eval")
+        print(self._params)
+        print(self.scorers)
 
         scores = {k: v(y_pred, y) for k, v in self.scorers.items()}
         logger.debug(scores)
