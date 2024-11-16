@@ -16,8 +16,10 @@ from lib_ai.model.regression.base_regression.base_regression_models import (
 )
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_shared.core.utils.merge import merge
+from lib_shared.core.utils.set_item import set_item
 
 
+# TODO: generic class https://github.com/pylint-dev/pylint/issues/9335
 class BaseRegression[
     TParams: BaseRegressionParamsModel,
     TDataset: XYDataset,
@@ -38,18 +40,8 @@ class BaseRegression[
     ],
 ):
     def __init__(self, params: TParams | None = None) -> None:
+        params = merge({"scorers": {"mean_squared_error": mse_scorer}}, params)
         super().__init__(params=params)
-
-    def evaluate(
-        self,
-        dataset: TDataset,
-        params: TEval | None = None,
-    ) -> Mapping[str, float]:
-        base_params: BaseModelEvalParamsModel = {"scorers": {"mean_squared_error": mse_scorer}}
-        return super().evaluate(
-            dataset,
-            merge(params, base_params),
-        )
 
     def fit(
         self,

@@ -1,26 +1,26 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, List, Mapping, TypedDict
+from typing import List, Mapping, NotRequired, TypedDict
 
 from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
-from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableProtocolModel
+from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
 
-type Scorers = Mapping[str, ScorerCallableProtocolModel]
+type Scorers = Mapping[str, ScorerCallableModel]
 
 
 class BaseModelParamsModel(TypedDict):
-    scorers: Scorers
+    scorers: NotRequired[Scorers]
 
 
 class BaseModelEvalParamsModel(TypedDict): ...
 
 
 class BaseModelFitParamsModel(TypedDict):
-    scorer: ScorerCallableProtocolModel
+    scorer: ScorerCallableModel
 
 
 class BaseModelCvParamsModel(TypedDict):

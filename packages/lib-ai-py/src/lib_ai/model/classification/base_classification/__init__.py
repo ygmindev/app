@@ -41,22 +41,18 @@ class BaseClassification[
         TEval,
     ],
 ):
-    def evaluate(
-        self,
-        dataset: TDataset,
-        params: TEval | None = None,
-    ) -> Mapping[str, float]:
-        base_params: BaseModelEvalParamsModel = {
-            "scorers": {
-                "accuracy": accuracy_scorer,
-                "f1": f1_scorer,
-                "recall": recall_scorer,
-            }
-        }
-        return super().evaluate(
-            dataset,
-            merge(params, base_params),
+    def __init__(self, params: TParams | None = None) -> None:
+        params = merge(
+            {
+                "scorers": {
+                    "accuracy": accuracy_scorer,
+                    "f1": f1_scorer,
+                    "recall": recall_scorer,
+                }
+            },
+            params,
         )
+        super().__init__(params=params)
 
     def fit(
         self,

@@ -1,4 +1,4 @@
-from typing import Unpack
+from typing import Mapping, Unpack
 
 import pydash as _
 from lib_shared.core.utils.get_item._get_item_models import (
@@ -8,8 +8,8 @@ from lib_shared.core.utils.get_item._get_item_models import (
 from lib_shared.core.utils.not_found_exception import NotFoundException
 
 
-def _get_item(*params: Unpack[_GetItemParamsModel]) -> _GetItemModel:
-    d, v, *default = params
+def _get_item[T: Mapping](*params: Unpack[_GetItemParamsModel[T]]) -> _GetItemModel:
+    d, k, *default = params
     default_safe = default[0] if len(default) else None
 
     if d is None:
@@ -17,9 +17,9 @@ def _get_item(*params: Unpack[_GetItemParamsModel]) -> _GetItemModel:
 
     result = _.get(
         d,
-        v,
+        k,
         default=default_safe,
     )
     if result is None and default is []:
-        raise NotFoundException(str(v))
+        raise NotFoundException(str(k))
     return result

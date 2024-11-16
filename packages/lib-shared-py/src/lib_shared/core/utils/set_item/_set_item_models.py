@@ -1,9 +1,10 @@
 from typing import Any, Mapping, Sequence, Tuple
 
-type _GetItemParamsModel[T: Mapping] = Tuple[
+type _SetItemParamsModel[T: Mapping] = Tuple[
     T | None,
     Sequence[str] | str,
     Any,
 ]
 
-type _GetItemModel = Any
+
+type _SetItemModel[T: Mapping] = T

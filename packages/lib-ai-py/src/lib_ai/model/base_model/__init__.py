@@ -17,6 +17,7 @@ from lib_ai.model.base_model.base_model_models import (
 )
 from lib_ai.optimize.utils.optimize import optimize
 from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
+from lib_ai.scoring.scoring_constants import SCORING_MODE
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger import logger
 from lib_shared.core.utils.merge import merge
@@ -75,10 +76,9 @@ class BaseModel[
         eval_params: TEval | None = None,
         fit_params: TFit | None = None,
     ) -> None:
-        # scorers = get_item(eval_params, "scorers")
-        # scorer = get_item(cv_params, "scorer")
-        # scorer = get_item(scorers, scorer)
-        # scoring_mode = SCORING_MODE.MIN if scorer.is_loss else SCORING_MODE.MAX
+        scorer = get_item(cv_params, "scorer")
+        scorer = get_item(self.scorers, scorer)
+        scoring_mode = SCORING_MODE.MIN if scorer.is_loss else SCORING_MODE.MAX
 
         def _objective(opt_params: TParams) -> float:
             opt_params = merge(opt_params, instance_params)
@@ -95,7 +95,7 @@ class BaseModel[
         optimize_params = merge(
             {
                 "objective": _objective,
-                # "scoring_mode": scoring_mode,
+                "scoring_mode": scoring_mode,
             },
             params,
         )
@@ -108,7 +108,6 @@ class BaseModel[
         dataset: TDataset,
         params: TEval | None = None,
     ) -> Mapping[str, float]:
-        scorers = get_item(params, "scorers")
         y = dataset.y
         if y is None:
             raise NotFoundException("y")
@@ -117,7 +116,7 @@ class BaseModel[
         if y_pred is None:
             raise NotFoundException("y_pred")
 
-        scores = {k: v(y_pred, y) for k, v in scorers.items()}
+        scores = {k: v(y_pred, y) for k, v in self.scorers.items()}
         logger.debug(scores)
 
         return scores
