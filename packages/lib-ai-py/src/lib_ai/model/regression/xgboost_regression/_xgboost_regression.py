@@ -27,12 +27,10 @@ class _XgboostRegression(
     _XgboostRegressionModel,
 ):
     def __init__(self, params: _XgboostRegressionParamsModel | None = None) -> None:
-        n_estimators = int(get_item(params, "n_estimators", 100))
+        n_estimators = int(get_item(params, "n_estimators", 50))
         max_depth = int(get_item(params, "max_depth", 5))
-
         set_item(params, "n_estimators", n_estimators)
         set_item(params, "max_depth", max_depth)
-
         super().__init__(params=params)
         self._instance = XGBRegressor(
             # objective="reg:linear",

@@ -1,7 +1,6 @@
 from lib_ai.data.tabular_data import TabularData
 from lib_ai.dataset.utils.download_dataset import download_dataset
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
-from lib_ai.model.regression.linear_regression import LinearRegression
 from lib_ai.model.regression.xgboost_regression import XgboostRegression
 from lib_ai.optimize.utils.optimize.optimize_constants import (
     OPTIMIZE_SPACE_DISTRIBUTION,
@@ -13,6 +12,7 @@ from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
 from lib_ai.transform.utils.transformer.standard_scaler_transformer import (
     StandardScalerTransformer,
 )
+from lib_shared.core.utils.logger import logger
 
 
 def test_works() -> None:
@@ -50,6 +50,10 @@ def test_works() -> None:
     #     dataset=validationset,
     #     kfold_params={"n_splits": 5},
     # )
+
+    logger.debug("BEFORE OPTIMIZATION:")
+    model.fit(trainset)
+    model.evaluate(testset)
     model.optimize(
         params={
             "n_trials": 10,
@@ -74,4 +78,4 @@ def test_works() -> None:
 
     model.fit(trainset)
     scores = model.evaluate(testset)
-    assert scores["mean_squared_error"] <= 10
+    assert scores["mean_squared_error"] <= 5
