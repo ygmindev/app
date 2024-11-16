@@ -10,7 +10,7 @@ from lib_ai.model.regression.base_regression.base_regression_models import (
 )
 
 
-class _XgboostRegressionParamsModel(TypedDict, total=False):
+class _XgboostRegressionParamsModel(TypedDict):
     n_estimators: NotRequired[int]
     max_depth: NotRequired[int]
 

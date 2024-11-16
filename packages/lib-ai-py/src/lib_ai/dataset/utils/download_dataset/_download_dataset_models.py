@@ -1,7 +1,7 @@
 from typing import TypedDict
 
 
-class _DownloadDatasetParamsModel(TypedDict, total=False):
+class _DownloadDatasetParamsModel(TypedDict):
     name: str
     path: str
     filename: str

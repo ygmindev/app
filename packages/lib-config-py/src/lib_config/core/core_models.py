@@ -1,5 +1,5 @@
 from typing import TypedDict
 
 
-class CoreConfigModel(TypedDict, total=False):
+class CoreConfigModel(TypedDict):
     random_state: int

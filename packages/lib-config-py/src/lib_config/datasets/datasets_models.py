@@ -1,5 +1,5 @@
 from typing import TypedDict
 
 
-class DatasetsConfigModel(TypedDict, total=False):
+class DatasetsConfigModel(TypedDict):
     path: str

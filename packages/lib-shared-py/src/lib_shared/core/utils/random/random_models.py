@@ -1,7 +1,7 @@
 from typing import NotRequired, TypedDict
 
 
-class RandomParamsModel(TypedDict, total=False):
+class RandomParamsModel(TypedDict):
     min: float
     max: float
     n_decimals: NotRequired[int]

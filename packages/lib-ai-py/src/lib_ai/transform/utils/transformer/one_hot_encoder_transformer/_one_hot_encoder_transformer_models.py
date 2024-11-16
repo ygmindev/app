@@ -10,7 +10,7 @@ type _OneHotEncoderTransformerDataModel = TabularData
 type _OneHotEncoderTransformerFitModel = None
 
 
-class _OneHotEncoderTransformerParamsModel(TypedDict, total=False):
+class _OneHotEncoderTransformerParamsModel(TypedDict):
     is_sparse: NotRequired[bool]
 
 

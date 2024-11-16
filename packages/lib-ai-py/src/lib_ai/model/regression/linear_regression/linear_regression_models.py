@@ -10,7 +10,7 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
 )
 
 
-class LinearRegressionParamsModel(TypedDict, total=False):
+class LinearRegressionParamsModel(TypedDict):
     n_in: int
 
 

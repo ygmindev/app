@@ -10,7 +10,7 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
 )
 
 
-class LogisticRegressionParamsModel(TypedDict, total=False):
+class LogisticRegressionParamsModel(TypedDict):
     n_in: int
     n_classes: int
 

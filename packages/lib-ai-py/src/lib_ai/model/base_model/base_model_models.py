@@ -12,22 +12,22 @@ from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableProtocolMode
 type Scorers = Mapping[str, ScorerCallableProtocolModel]
 
 
-class BaseModelParamsModel(TypedDict, total=False):
+class BaseModelParamsModel(TypedDict):
     scorers: Scorers
 
 
-class BaseModelEvalParamsModel(TypedDict, total=False): ...
+class BaseModelEvalParamsModel(TypedDict): ...
 
 
-class BaseModelFitParamsModel(TypedDict, total=False):
+class BaseModelFitParamsModel(TypedDict):
     scorer: ScorerCallableProtocolModel
 
 
-class BaseModelCvParamsModel(TypedDict, total=False):
+class BaseModelCvParamsModel(TypedDict):
     scorer: str
 
 
-class BaseModelCvModel(TypedDict, total=False):
+class BaseModelCvModel(TypedDict):
     average: float
     scores: List[float]
 

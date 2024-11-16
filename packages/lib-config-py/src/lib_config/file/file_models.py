@@ -1,5 +1,5 @@
 from typing import TypedDict
 
 
-class FileConfigModel(TypedDict, total=False):
+class FileConfigModel(TypedDict):
     cacheDir: str

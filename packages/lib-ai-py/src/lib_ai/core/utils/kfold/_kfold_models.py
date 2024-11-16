@@ -3,7 +3,7 @@ from typing import Any, Iterator, NotRequired, Sequence, Tuple, TypedDict
 import numpy as np
 
 
-class _KfoldParamsModel(TypedDict, total=False):
+class _KfoldParamsModel(TypedDict):
     is_shuffle: NotRequired[bool]
     n_rows: int
     n_splits: int

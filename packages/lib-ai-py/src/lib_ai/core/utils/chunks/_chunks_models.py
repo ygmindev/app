@@ -6,7 +6,7 @@ from lib_shared.core.utils.indexable.indexable_models import IndexableModel
 from lib_shared.core.utils.iterable.iterable_models import IterableModel
 
 
-class _ChunksParamsModel[T](TypedDict, total=False):
+class _ChunksParamsModel[T](TypedDict):
     data: IndexableModel[T]
     chunk_size: int
 

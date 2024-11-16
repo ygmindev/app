@@ -12,7 +12,7 @@ type ScorerCallableModel = Callable[[MatrixData, MatrixData], float]
 type ScorerCallableProtocolModel = Union[ScorerProtocol, ScorerCallableModel]
 
 
-class ScorerParamsModel(TypedDict, total=False):
+class ScorerParamsModel(TypedDict):
     is_loss: bool
 
 
