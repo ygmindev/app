@@ -12,7 +12,6 @@ from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
 from lib_ai.transform.utils.transformer.standard_scaler_transformer import (
     StandardScalerTransformer,
 )
-from lib_shared.core.utils.logger import logger
 
 
 def test_works() -> None:
@@ -51,7 +50,7 @@ def test_works() -> None:
     #     kfold_params={"n_splits": 5},
     # )
 
-    # Before optimization
+    # Before hyperparameter optimization
     model.fit(trainset)
     model.evaluate(testset)
 
@@ -77,7 +76,7 @@ def test_works() -> None:
         kfold_params={"n_splits": 5},
     )
 
-    # After optimization
+    # After hyperparameter optimization
     model.fit(trainset)
     scores = model.evaluate(testset)
     assert scores["mean_squared_error"] <= 5
