@@ -12,8 +12,10 @@ from lib_ai.model.regression.base_regression.base_regression_models import (
 
 
 class _XgboostRegressionParamsModel(BaseRegressionParamsModel):
-    n_estimators: NotRequired[int]
+    learning_rate: NotRequired[float]
     max_depth: NotRequired[int]
+    n_estimators: NotRequired[int]
+    subsample: NotRequired[float]
 
 
 class _XgboostRegressionFitParamsModel(BaseModelFitParamsModel): ...

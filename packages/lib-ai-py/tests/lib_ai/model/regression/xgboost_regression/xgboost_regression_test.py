@@ -65,7 +65,11 @@ def test_works() -> None:
                     ),
                     "max_depth": (
                         OPTIMIZE_SPACE_DISTRIBUTION.Q_UNIFORM,
-                        {"lower": 1, "upper": 5},
+                        {"lower": 3, "upper": 10},
+                    ),
+                    "subsample": (
+                        OPTIMIZE_SPACE_DISTRIBUTION.UNIFORM,
+                        {"lower": 0.5, "upper": 1.0},
                     ),
                 },
             ),

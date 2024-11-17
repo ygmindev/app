@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Unpack
-
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.base_model import BaseModel
@@ -27,16 +25,20 @@ class _XgboostRegression(
     _XgboostRegressionModel,
 ):
     def __init__(self, params: _XgboostRegressionParamsModel | None = None) -> None:
-        n_estimators = int(get_item(params, "n_estimators", 50))
+        learning_rate = get_item(params, "learning_rate", 0.1)
         max_depth = int(get_item(params, "max_depth", 5))
+        n_estimators = int(get_item(params, "n_estimators", 50))
+        subsample = get_item(params, "subsample", 1)
+
         set_item(params, "n_estimators", n_estimators)
         set_item(params, "max_depth", max_depth)
         super().__init__(params=params)
-        print(f"@@@ params: {n_estimators} vs {max_depth}")
         self._instance = XGBRegressor(
             # objective="reg:linear",
-            n_estimators=n_estimators,
+            learning_rate=learning_rate,
             max_depth=max_depth,
+            n_estimators=n_estimators,
+            subsample=subsample,
         )
 
     def predict(
