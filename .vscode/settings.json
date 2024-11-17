@@ -56,9 +56,6 @@
   ],
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "mypy-type-checker.args": [
-    "--config-file=${workspaceFolder}/pyproject.toml"
-  ],
   "pylint.importStrategy": "fromEnvironment",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.diagnosticSeverityOverrides": {
@@ -75,5 +72,10 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "GitHub Dark",
   "workbench.iconTheme": "vs-minimal",
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
+  "mypy.dmypyExecutable": "${workspaceFolder}/packages/lib-shared-py/.venv/bin/dmypy",
+  "mypy.configFile": "packages/lib-shared-py/pyproject.toml",
+  "mypy-type-checker.args": [
+    "--config-file=packages/lib-shared-py/pyproject.toml"
+  ]
 }
