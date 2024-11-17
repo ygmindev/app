@@ -3,16 +3,16 @@ from lib_ai.core.utils.get_numpy_type.get_numpy_type_models import (
     GetNumpyTypeModel,
     GetNumpyTypeParamsModel,
 )
-from lib_shared.core.core import DATA_TYPE
+from lib_shared.core.core import DataType
 
 
 def get_numpy_type(params: GetNumpyTypeParamsModel) -> GetNumpyTypeModel:
     match params:
-        case DATA_TYPE.FLOAT:
+        case DataType.FLOAT:
             return np.float64
-        case DATA_TYPE.INT:
+        case DataType.INT:
             return np.int64
-        case DATA_TYPE.LONG:
+        case DataType.LONG:
             return np.long
         case _:
             return np.float64

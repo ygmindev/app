@@ -1,13 +1,13 @@
 from abc import ABC, abstractmethod
 
-from lib_ai.scoring.scoring_constants import SCORING_MODE
+from lib_ai.scoring.scoring_constants import ScoringMode
 
 
 class EarlyStoppingModel(ABC):
     @abstractmethod
     def __init__(
         self,
-        scoring_mode: SCORING_MODE,
+        scoring_mode: ScoringMode,
         patience: int = 10,
         tolerance: float = 0.0,
     ) -> None: ...

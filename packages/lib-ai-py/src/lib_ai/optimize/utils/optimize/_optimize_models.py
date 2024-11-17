@@ -2,10 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Callable, Dict, Mapping, NotRequired, Sequence, Tuple, TypedDict
 
-from lib_ai.optimize.utils.optimize.optimize_constants import (
-    OPTIMIZE_SPACE_DISTRIBUTION,
-)
-from lib_ai.scoring.scoring_constants import SCORING_MODE
+from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
+from lib_ai.scoring.scoring_constants import ScoringMode
 
 
 class _OptimizeSpaceMinMaxParamsModel(TypedDict):
@@ -36,11 +34,11 @@ type _OptimizeSpaceParamsModel = _OptimizeSpaceMinMaxParamsModel | _OptimizeSpac
 class _OptimizeParamsModel[T: Mapping[str, Any]](TypedDict):
     n_trials: NotRequired[int]
     objective: Callable[[T], float]
-    scoring_mode: NotRequired[SCORING_MODE]
+    scoring_mode: NotRequired[ScoringMode]
     spaces: Sequence[
         Dict[
             str,
-            Tuple[OPTIMIZE_SPACE_DISTRIBUTION, _OptimizeSpaceParamsModel],
+            Tuple[OptimizeSpaceDistribution, _OptimizeSpaceParamsModel],
         ]
     ]
 

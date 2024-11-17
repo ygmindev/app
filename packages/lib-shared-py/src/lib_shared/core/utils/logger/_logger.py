@@ -2,22 +2,22 @@ from logging import DEBUG, ERROR, INFO, NOTSET, WARN, Logger, getLogger
 from typing import Any
 
 from lib_shared.core.utils.logger._logger_models import _LoggerModel
-from lib_shared.core.utils.logger.logger_constants import LOGGER_LEVEL
+from lib_shared.core.utils.logger.logger_constants import LoggerLevel
 
 
 class _Logger(_LoggerModel):
     logger: Logger
 
-    def __init__(self, level: LOGGER_LEVEL) -> None:
+    def __init__(self, level: LoggerLevel) -> None:
         logger_level = NOTSET
         match level:
-            case LOGGER_LEVEL.DEBUG:
+            case LoggerLevel.DEBUG:
                 logger_level = DEBUG
-            case LOGGER_LEVEL.ERROR:
+            case LoggerLevel.ERROR:
                 logger_level = ERROR
-            case LOGGER_LEVEL.INFO:
+            case LoggerLevel.INFO:
                 logger_level = INFO
-            case LOGGER_LEVEL.WARN:
+            case LoggerLevel.WARN:
                 logger_level = WARN
 
         self.logger = getLogger()

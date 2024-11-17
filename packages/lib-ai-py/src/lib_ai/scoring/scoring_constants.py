@@ -1,6 +1,6 @@
 from enum import Enum
 
 
-class SCORING_MODE(Enum):
+class ScoringMode(Enum):
     MAX = "MAX"
     MIN = "MIN"

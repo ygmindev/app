@@ -5,7 +5,7 @@ from lib_ai.core.utils.chunks import chunks
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.base_model import BaseModel
-from lib_ai.model.base_model.base_model_constants import OPTIMIZER
+from lib_ai.model.base_model.base_model_constants import Optimizer
 from lib_ai.model.base_model.base_model_models import BaseModelEvalParamsModel
 from lib_ai.model.utils.early_stopping import EarlyStopping
 from lib_ai.model.utils.neural_network._neural_network_models import (
@@ -13,7 +13,7 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
     _NeuralNetworkModel,
     _NeuralNetworkParamsModel,
 )
-from lib_ai.scoring.scoring_constants import SCORING_MODE
+from lib_ai.scoring.scoring_constants import ScoringMode
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger import logger
 from torch.nn import Module
@@ -74,24 +74,24 @@ class _NeuralNetwork[
         params: TFit | None = None,
     ) -> None:
         n_epochs = get_item(params, "n_epochs", 1000)
-        optimizer = get_item(params, "optimizer", OPTIMIZER.SGD)
+        optimizer = get_item(params, "optimizer", Optimizer.SGD)
         scorer = get_item(params, "scorer")
-        scoring_mode = get_item(params, "scoring_mode", SCORING_MODE.MIN)
+        scoring_mode = get_item(params, "scoring_mode", ScoringMode.MIN)
 
         self._module.train(mode=True)
         weights = self._module.parameters()
 
         match optimizer:
-            case OPTIMIZER.ADAM:
+            case Optimizer.ADAM:
                 optimizer = Adam(weights, lr=1e-1)
-            case OPTIMIZER.SGD:
+            case Optimizer.SGD:
                 optimizer = SGD(weights, lr=1e-1)
             case _:
                 optimizer = Adam(weights, lr=1e-1)
 
         scheduler = ReduceLROnPlateau(
             optimizer,
-            mode="min" if scoring_mode == SCORING_MODE.MIN else "max",
+            mode="min" if scoring_mode == ScoringMode.MIN else "max",
             patience=100,
             threshold=5,
             factor=1e-1,

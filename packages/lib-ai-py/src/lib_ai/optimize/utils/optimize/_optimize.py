@@ -9,38 +9,36 @@ from lib_ai.optimize.utils.optimize._optimize_models import (
     _OptimizeParamsModel,
     _OptimizeSpaceParamsModel,
 )
-from lib_ai.optimize.utils.optimize.optimize_constants import (
-    OPTIMIZE_SPACE_DISTRIBUTION,
-)
-from lib_ai.scoring.scoring_constants import SCORING_MODE
+from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
+from lib_ai.scoring.scoring_constants import ScoringMode
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 
 
 def _get_space(
     name: str,
-    dist: OPTIMIZE_SPACE_DISTRIBUTION,
+    dist: OptimizeSpaceDistribution,
     dist_params: _OptimizeSpaceParamsModel,
 ) -> Any:
     match dist:
-        case OPTIMIZE_SPACE_DISTRIBUTION.LOG_NORMAL:
+        case OptimizeSpaceDistribution.LOG_NORMAL:
             mu = get_item(dist_params, "mu")
             sigma = get_item(dist_params, "sigma")
             return hp.lognormal(name, mu, sigma)
-        case OPTIMIZE_SPACE_DISTRIBUTION.OPTIONS:
+        case OptimizeSpaceDistribution.OPTIONS:
             options = get_item(dist_params, "options")
             return hp.choice(name, options)
-        case OPTIMIZE_SPACE_DISTRIBUTION.Q_LOG_NORMAL:
+        case OptimizeSpaceDistribution.Q_LOG_NORMAL:
             mu = get_item(dist_params, "mu")
             sigma = get_item(dist_params, "sigma")
             q = get_item(dist_params, "q", 1)
             return hp.qlognormal(name, mu, sigma, q)
-        case OPTIMIZE_SPACE_DISTRIBUTION.Q_UNIFORM:
+        case OptimizeSpaceDistribution.Q_UNIFORM:
             lower = get_item(dist_params, "lower")
             upper = get_item(dist_params, "upper")
             q = get_item(dist_params, "q", 1)
             return hp.uniformint(name, lower, upper, q=q)
-        case OPTIMIZE_SPACE_DISTRIBUTION.UNIFORM:
+        case OptimizeSpaceDistribution.UNIFORM:
             lower = get_item(dist_params, "lower")
             upper = get_item(dist_params, "upper")
             return hp.uniform(name, lower, upper)
@@ -51,11 +49,11 @@ def _get_space(
 def _optimize[T: Mapping[str, Any]](**params: Unpack[_OptimizeParamsModel[T]]) -> _OptimizeModel[T]:
     n_trials = get_item(params, "n_trials", 100)
     objective = get_item(params, "objective")
-    scoring_mode = get_item(params, "scoring_mode", SCORING_MODE.MIN)
+    scoring_mode = get_item(params, "scoring_mode", ScoringMode.MIN)
 
     def _objective(space: T) -> dict[str, Any]:
         score = objective(space)
-        loss = score if scoring_mode is SCORING_MODE.MIN else -score
+        loss = score if scoring_mode is ScoringMode.MIN else -score
         return {"loss": loss, "status": STATUS_OK}
 
     spaces = get_item(params, "spaces")

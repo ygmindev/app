@@ -3,16 +3,16 @@ from lib_ai.core.utils.get_tensor_type.get_tensor_type_models import (
     GetTensorTypeModel,
     GetTensorTypeParamsModel,
 )
-from lib_shared.core.core import DATA_TYPE
+from lib_shared.core.core import DataType
 
 
 def get_tensor_type(params: GetTensorTypeParamsModel) -> GetTensorTypeModel:
     match params:
-        case DATA_TYPE.FLOAT:
+        case DataType.FLOAT:
             return torch.float
-        case DATA_TYPE.INT:
+        case DataType.INT:
             return torch.int
-        case DATA_TYPE.LONG:
+        case DataType.LONG:
             return torch.long
         case _:
             return torch.float

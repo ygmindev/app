@@ -5,7 +5,7 @@ from lib_ai.scoring.scorer.cross_entropy_scorer._cross_entropy_scorer_models imp
     _CrossEntropyScorerModel,
     _CrossEntropyScorerParamsModel,
 )
-from lib_shared.core.core import DATA_TYPE
+from lib_shared.core.core import DataType
 
 
 def _cross_entropy_scorer(
@@ -15,7 +15,7 @@ def _cross_entropy_scorer(
     loss_function = torch.nn.CrossEntropyLoss()
     loss = loss_function(
         y_pred.to_tensor(),
-        y.to_tensor(dtype=DATA_TYPE.LONG),
+        y.to_tensor(dtype=DataType.LONG),
     )
     try:
         loss.backward()

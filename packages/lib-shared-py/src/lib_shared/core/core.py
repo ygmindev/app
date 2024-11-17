@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class DATA_TYPE(Enum):
+class DataType(Enum):
     FLOAT = "FLOAT"
     INT = "INT"
     LONG = "LONG"

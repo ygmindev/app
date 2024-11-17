@@ -1,6 +1,6 @@
 from enum import Enum
 
 
-class OPTIMIZER(Enum):
+class Optimizer(Enum):
     ADAM = "ADAM"
     SGD = "SGD"

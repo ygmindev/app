@@ -2,9 +2,7 @@ from lib_ai.data.tabular_data import TabularData
 from lib_ai.dataset.utils.download_dataset import download_dataset
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.regression.xgboost_regression import XgboostRegression
-from lib_ai.optimize.utils.optimize.optimize_constants import (
-    OPTIMIZE_SPACE_DISTRIBUTION,
-)
+from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
 from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
 from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
     OneHotEncoderTransformer,
@@ -60,15 +58,15 @@ def test_works() -> None:
             "spaces": (
                 {
                     "n_estimators": (
-                        OPTIMIZE_SPACE_DISTRIBUTION.Q_UNIFORM,
+                        OptimizeSpaceDistribution.Q_UNIFORM,
                         {"lower": 50, "upper": 100},
                     ),
                     "max_depth": (
-                        OPTIMIZE_SPACE_DISTRIBUTION.Q_UNIFORM,
+                        OptimizeSpaceDistribution.Q_UNIFORM,
                         {"lower": 3, "upper": 10},
                     ),
                     "subsample": (
-                        OPTIMIZE_SPACE_DISTRIBUTION.UNIFORM,
+                        OptimizeSpaceDistribution.UNIFORM,
                         {"lower": 0.5, "upper": 1.0},
                     ),
                 },

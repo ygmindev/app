@@ -1,9 +1,7 @@
 from typing import Any
 
 from lib_ai.optimize.utils.optimize import optimize
-from lib_ai.optimize.utils.optimize.optimize_constants import (
-    OPTIMIZE_SPACE_DISTRIBUTION,
-)
+from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
 
 
 def a(xx: Any):
@@ -18,7 +16,7 @@ def test_works() -> None:
         spaces=(
             {
                 "a": (
-                    OPTIMIZE_SPACE_DISTRIBUTION.Q_UNIFORM,
+                    OptimizeSpaceDistribution.Q_UNIFORM,
                     {"lower": 0, "upper": 5, "q": 1},
                 )
             },

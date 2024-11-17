@@ -17,7 +17,7 @@ from lib_ai.model.base_model.base_model_models import (
     Scorers,
 )
 from lib_ai.optimize.utils.optimize import optimize
-from lib_ai.scoring.scoring_constants import SCORING_MODE
+from lib_ai.scoring.scoring_constants import ScoringMode
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger import logger
 from lib_shared.core.utils.merge import merge
@@ -81,7 +81,7 @@ class BaseModel[
     ) -> None:
         scorer = get_item(cv_params, "scorer")
         scorer = get_item(self.scorers, scorer)
-        scoring_mode = SCORING_MODE.MIN if scorer.is_loss else SCORING_MODE.MAX
+        scoring_mode = ScoringMode.MIN if scorer.is_loss else ScoringMode.MAX
 
         def _objective(opt_params: TParams) -> float:
             opt_params = cast(

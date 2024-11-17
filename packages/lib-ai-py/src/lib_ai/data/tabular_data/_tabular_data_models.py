@@ -4,7 +4,7 @@ from typing import Any, Mapping, Self, Sequence, Tuple, overload
 import polars as pl
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.data.tabular_data.tabular_data_constants import TABULAR_DATA_TYPE
+from lib_ai.data.tabular_data.tabular_data_constants import TabularDataType
 
 type _TabularDataTypeModel = pl.DataFrame
 
@@ -43,7 +43,7 @@ class _TabularDataModel(BaseDataModel[_TabularDataTypeModel]):
     def from_csv(
         cls,
         pathname: str,
-        _to: TABULAR_DATA_TYPE | None = TABULAR_DATA_TYPE.DATAFRAME,
+        _to: TabularDataType | None = TabularDataType.DATAFRAME,
     ) -> Self: ...
 
     @classmethod
@@ -51,11 +51,11 @@ class _TabularDataModel(BaseDataModel[_TabularDataTypeModel]):
     def from_dict(
         cls,
         _data: Mapping[str, Sequence[Any]],
-        _to: TABULAR_DATA_TYPE | None = TABULAR_DATA_TYPE.DATAFRAME,
+        _to: TabularDataType | None = TabularDataType.DATAFRAME,
     ) -> Self: ...
 
     @abstractmethod
-    def get_type(self) -> TABULAR_DATA_TYPE: ...
+    def get_type(self) -> TabularDataType: ...
 
     @abstractmethod
     def to_dataframe(self) -> pl.DataFrame: ...

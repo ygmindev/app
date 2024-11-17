@@ -12,8 +12,8 @@ from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataStringKeyModel,
     _TabularDataTypeModel,
 )
-from lib_ai.data.tabular_data.tabular_data_constants import TABULAR_DATA_TYPE
-from lib_shared.core.core import DATA_TYPE
+from lib_ai.data.tabular_data.tabular_data_constants import TabularDataType
+from lib_shared.core.core import DataType
 from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 
 
@@ -47,7 +47,7 @@ class _TabularData(_TabularDataModel):
     def concat(self, other: Self) -> Self:
         result = self.data
         match self.get_type():
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 result = pl.concat([cast(pl.DataFrame, result), other.to_dataframe()])
         return type(self)(data=result)
 
@@ -61,19 +61,19 @@ class _TabularData(_TabularDataModel):
 
     def drop_columns(self, columns: Sequence[str]) -> Self:
         match self.get_type():
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 result = self.to_dataframe().drop(columns)
         return type(self)(data=result)
 
     def drop_na(self) -> Self:
         match self.get_type():
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 result = self.to_dataframe().drop_nulls()
         return type(self)(data=result)
 
     def equals(self, other: Self) -> bool:
         match self.get_type():
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 return self.to_dataframe().equals(other.to_dataframe())
         raise InvalidTypeException()
 
@@ -81,11 +81,11 @@ class _TabularData(_TabularDataModel):
     def from_csv(
         cls,
         pathname: str,
-        to: TABULAR_DATA_TYPE = TABULAR_DATA_TYPE.DATAFRAME,
+        to: TabularDataType = TabularDataType.DATAFRAME,
     ) -> Self:
         result = None
         match to:
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 result = pl.read_csv(
                     pathname,
                     null_values=["NA"],
@@ -98,68 +98,68 @@ class _TabularData(_TabularDataModel):
     def from_dict(
         cls,
         data: Mapping[str, Sequence[Any]],
-        to: TABULAR_DATA_TYPE = TABULAR_DATA_TYPE.DATAFRAME,
+        to: TabularDataType = TabularDataType.DATAFRAME,
     ) -> Self:
         result = None
         match to:
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 result = pl.DataFrame(data)
         if result is None:
             raise InvalidTypeException()
         return cls(data=result)
 
-    def get_type(self) -> TABULAR_DATA_TYPE:
+    def get_type(self) -> TabularDataType:
         if isinstance(self.data, pl.DataFrame):
-            return TABULAR_DATA_TYPE.DATAFRAME
+            return TabularDataType.DATAFRAME
         raise InvalidTypeException()
 
     def head(self, n_rows: int = 1) -> Self:
         result = self.data
         match self.get_type():
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 result = self.to_dataframe().head(n_rows)
         return type(self)(data=result)
 
     @property
     def shape(self) -> Tuple[int, ...]:
         match self.get_type():
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 return self.to_dataframe().shape
             case _:
                 raise InvalidTypeException()
 
     def to_numpy(
         self,
-        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DataType | None = DataType.FLOAT,
     ) -> np.ndarray:
         to_type = get_numpy_type(dtype)
         match self.get_type():
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 return cast(pl.DataFrame, self.data).to_numpy().astype(to_type)
             case _:
                 raise InvalidTypeException()
 
     def to_tensor(
         self,
-        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DataType | None = DataType.FLOAT,
     ) -> torch.Tensor:
         to_type = get_tensor_type(dtype)
         match self.get_type():
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 return cast(pl.DataFrame, self.data).to_torch().to(to_type)
             case _:
                 raise InvalidTypeException()
 
     def to_dataframe(self) -> pl.DataFrame:
         match self.get_type():
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 return cast(pl.DataFrame, self.data)
             case _:
                 raise InvalidTypeException()
 
     def to_matrix(self) -> MatrixData:
         match self.get_type():
-            case TABULAR_DATA_TYPE.DATAFRAME:
+            case TabularDataType.DATAFRAME:
                 data = cast(pl.DataFrame, self.data)
                 return MatrixData(
                     pl.select(v.cast(pl.Float32, strict=False) for v in data).to_torch()
