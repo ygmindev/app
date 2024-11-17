@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import List, Mapping, Never, NotRequired, TypedDict
+from typing import List, Mapping, Never, NotRequired, Sequence, TypedDict
 
 from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
 from lib_ai.data.matrix_data import MatrixData
@@ -17,18 +17,17 @@ class OptimizeParamsOptionalModel(OptimizeParamsModel):
 
 
 class BaseModelParamsModel(TypedDict):
-    scorers: NotRequired[Scorers]
+    scorers: Sequence[ScorerCallableModel]
+    objective: ScorerCallableModel
 
 
 class BaseModelEvalParamsModel(TypedDict): ...
 
 
-class BaseModelFitParamsModel(TypedDict):
-    scorer: ScorerCallableModel
+class BaseModelFitParamsModel(TypedDict): ...
 
 
-class BaseModelCvParamsModel(TypedDict):
-    scorer: str
+class BaseModelCvParamsModel(TypedDict): ...
 
 
 class BaseModelCvModel(TypedDict):
@@ -90,3 +89,7 @@ class BaseModelModel[
     @property
     @abstractmethod
     def scorers(self) -> Scorers: ...
+
+    @property
+    @abstractmethod
+    def scorer(self, name: str | None = None) -> ScorerCallableModel: ...

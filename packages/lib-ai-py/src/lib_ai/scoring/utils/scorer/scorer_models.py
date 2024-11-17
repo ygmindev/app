@@ -1,11 +1,13 @@
 from abc import abstractmethod
-from typing import Callable, Protocol, TypedDict, Union
+from typing import Callable, NotRequired, Protocol, TypedDict
 
 from lib_ai.data.matrix_data import MatrixData
+from lib_ai.scoring.scorer.base_scorer.base_scorer_models import BaseScorerCallableModel
 
 
 class ScorerCallableModel(Protocol):
     is_loss: bool
+    name: str
 
     @abstractmethod
     def __call__(
@@ -16,7 +18,8 @@ class ScorerCallableModel(Protocol):
 
 
 class ScorerParamsModel(TypedDict):
-    is_loss: bool
+    is_loss: NotRequired[bool]
+    name: str
 
 
-type ScorerModel[T: ScorerCallableModel] = Callable[[T], Union[T, ScorerCallableModel]]
+type ScorerModel = Callable[[BaseScorerCallableModel], ScorerCallableModel]

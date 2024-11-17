@@ -8,6 +8,6 @@ from lib_ai.scoring.scorer.recall_scorer.recall_scorer_models import (
 from lib_ai.scoring.utils.scorer import scorer
 
 
-@scorer()
+@scorer(name="recall")
 def recall_scorer(*params: Unpack[RecallScorerParamsModel]) -> RecallScorerModel:
     return _recall_scorer(*params)

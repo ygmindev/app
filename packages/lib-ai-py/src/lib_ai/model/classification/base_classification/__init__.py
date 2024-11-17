@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Mapping
+from typing import Any, Mapping, cast
 
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model import BaseModel
@@ -42,15 +42,18 @@ class BaseClassification[
     ],
 ):
     def __init__(self, params: TParams | None = None) -> None:
-        params = merge(
-            {
-                "scorers": {
-                    "accuracy": accuracy_scorer,
-                    "f1": f1_scorer,
-                    "recall": recall_scorer,
-                }
-            },
-            params,
+        params = cast(
+            TParams,
+            merge(
+                params,
+                {
+                    "scorers": {
+                        "accuracy": accuracy_scorer,
+                        "f1": f1_scorer,
+                        "recall": recall_scorer,
+                    }
+                },
+            ),
         )
         super().__init__(params=params)
 

@@ -10,6 +10,6 @@ from lib_ai.scoring.scorer.cross_entropy_scorer.cross_entropy_scorer_models impo
 from lib_ai.scoring.utils.scorer import scorer
 
 
-@scorer(is_loss=True)
+@scorer(is_loss=True, name="cross entropy")
 def cross_entropy_scorer(*params: Unpack[CrossEntropyScorerParamsModel]) -> CrossEntropyScorerModel:
     return _cross_entropy_scorer(*params)

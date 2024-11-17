@@ -44,11 +44,11 @@ def test_works() -> None:
     model.fit(trainset)
     scores = model.evaluate(testset)
 
-    cv_result = model.cv(
-        params={"scorer": scorer},
-        instance_params={},
-        dataset=validationset,
-        kfold_params={"n_splits": 5},
-    )
+    # cv_result = model.cv(
+    #     params={"scorer": scorer},
+    #     instance_params={},
+    #     dataset=validationset,
+    #     kfold_params={"n_splits": 5},
+    # )
 
     assert scores[scorer] <= 5

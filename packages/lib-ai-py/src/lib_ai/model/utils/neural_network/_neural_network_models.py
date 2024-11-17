@@ -6,6 +6,7 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelEvalParamsModel,
     BaseModelFitParamsModel,
     BaseModelModel,
+    BaseModelParamsModel,
 )
 from lib_ai.model.utils.neural_network.layer.base_layer.base_layer_models import (
     BaseLayerModel,
@@ -13,7 +14,7 @@ from lib_ai.model.utils.neural_network.layer.base_layer.base_layer_models import
 from lib_ai.scoring.scoring_constants import ScoringMode
 
 
-class _NeuralNetworkParamsModel(TypedDict):
+class _NeuralNetworkParamsModel(BaseModelParamsModel):
     layers: Sequence[BaseLayerModel]
     is_classification: NotRequired[bool]
 

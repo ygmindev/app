@@ -8,6 +8,6 @@ from lib_ai.scoring.scorer.accuracy_scorer.accuracy_scorer_models import (
 from lib_ai.scoring.utils.scorer import scorer
 
 
-@scorer()
+@scorer(name="accuracy")
 def accuracy_scorer(*params: Unpack[AccuracyScorerParamsModel]) -> AccuracyScorerModel:
     return _accuracy_scorer(*params)

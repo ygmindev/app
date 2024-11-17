@@ -8,6 +8,6 @@ from lib_ai.scoring.scorer.mse_scorer.mse_scorer_models import (
 from lib_ai.scoring.utils.scorer import scorer
 
 
-@scorer(is_loss=True)
+@scorer(is_loss=True, name="mean squared error")
 def mse_scorer(*params: Unpack[MseScorerParamsModel]) -> MseScorerModel:
     return _mse_scorer(*params)

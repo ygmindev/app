@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Mapping, cast
 
+from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
 import numpy as np
 from lib_ai.core.utils.kfold import kfold
 from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
@@ -134,3 +135,8 @@ class BaseModel[
     @property
     def scorers(self) -> Scorers:
         return get_item(self._params, "scorers")
+
+    @property
+    def scorer(self, name: str | None = None) -> ScorerCallableModel:
+        if str
+

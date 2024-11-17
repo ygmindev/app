@@ -40,6 +40,8 @@ kaggle = "^1.6.17"
 pydash = "^8.0.4"
 xgboost = "^2.1.2"
 hyperopt = "^0.2.7"
+transformers = "^4.46.2"
+datasets = "^3.1.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
