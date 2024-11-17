@@ -1,6 +1,6 @@
 from enum import Enum
 
 
-class DataType(Enum):
+class MatrixDataType(Enum):
     NUMPY = "NUMPY"
     TENSOR = "TENSOR"

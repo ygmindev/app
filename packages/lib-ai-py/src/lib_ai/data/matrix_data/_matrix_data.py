@@ -8,7 +8,7 @@ from lib_ai.data.matrix_data._matrix_data_models import (
     _MatrixDataModel,
     _MatrixDataTypeModel,
 )
-from lib_ai.data.matrix_data.matrix_data_constants import DataType
+from lib_ai.data.matrix_data.matrix_data_constants import MatrixDataType
 from lib_shared.core.core import DataType
 from lib_shared.core.utils.indexable.indexable_models import (
     IndexableMultiKeyModel,
@@ -39,9 +39,9 @@ class _MatrixData(_MatrixDataModel):
     def concat(self, other: Self) -> Self:
         result = self.data
         match self.get_type():
-            case DataType.TENSOR:
+            case MatrixDataType.TENSOR:
                 result = torch.concatenate([cast(torch.Tensor, result), other.to_tensor()])
-            case DataType.NUMPY:
+            case MatrixDataType.NUMPY:
                 result = np.concatenate([result, other.to_numpy()], axis=0)
         return type(self)(data=result)
 
@@ -57,13 +57,13 @@ class _MatrixData(_MatrixDataModel):
     def from_array(
         cls,
         data: Sequence[Any],
-        to: DataType = DataType.TENSOR,
+        to: MatrixDataType = MatrixDataType.TENSOR,
     ) -> Self:
         result = None
         match to:
-            case DataType.TENSOR:
+            case MatrixDataType.TENSOR:
                 result = torch.tensor(data)
-            case DataType.NUMPY:
+            case MatrixDataType.NUMPY:
                 result = np.matrix(data)
         if result is None:
             raise InvalidTypeException()
@@ -71,24 +71,24 @@ class _MatrixData(_MatrixDataModel):
 
     def equals(self, other: Self) -> bool:
         match self.get_type():
-            case DataType.TENSOR:
+            case MatrixDataType.TENSOR:
                 return self.to_tensor().equal(other.to_tensor())
-            case DataType.NUMPY:
+            case MatrixDataType.NUMPY:
                 return np.array_equal(self.to_numpy(), other.to_numpy())
         raise InvalidTypeException()
 
-    def get_type(self) -> DataType:
+    def get_type(self) -> MatrixDataType:
         if torch.is_tensor(self.data):
-            return DataType.TENSOR
+            return MatrixDataType.TENSOR
         if isinstance(self.data, np.ndarray):
-            return DataType.NUMPY
+            return MatrixDataType.NUMPY
         raise InvalidTypeException()
 
     def head(self, n_rows: int = 1) -> Self:
         match self.get_type():
-            case DataType.TENSOR:
+            case MatrixDataType.TENSOR:
                 result = self.to_tensor()[:n_rows]
-            case DataType.NUMPY:
+            case MatrixDataType.NUMPY:
                 result = self.to_numpy()[:n_rows]
             case _:
                 raise InvalidTypeException()
@@ -100,26 +100,26 @@ class _MatrixData(_MatrixDataModel):
 
     def to_numpy(
         self,
-        dtype: DataType | None = DataType.FLOAT,
+        dtype: MatrixDataType | None = MatrixDataType.FLOAT,
     ) -> np.ndarray:
         to_type = get_numpy_type(dtype)
         match self.get_type():
-            case DataType.TENSOR:
+            case MatrixDataType.TENSOR:
                 return cast(torch.Tensor, self.data).numpy().astype(to_type)
-            case DataType.NUMPY:
+            case MatrixDataType.NUMPY:
                 return cast(np.ndarray, self.data).astype(to_type)
             case _:
                 raise InvalidTypeException()
 
     def to_tensor(
         self,
-        dtype: DataType | None = DataType.FLOAT,
+        dtype: MatrixDataType | None = MatrixDataType.FLOAT,
     ) -> torch.Tensor:
         to_type = get_tensor_type(dtype)
         match self.get_type():
-            case DataType.TENSOR:
+            case MatrixDataType.TENSOR:
                 return cast(torch.Tensor, self.data).to(to_type)
-            case DataType.NUMPY:
+            case MatrixDataType.NUMPY:
                 return torch.tensor(self.data).to(to_type)
             case _:
                 raise InvalidTypeException()
