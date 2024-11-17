@@ -1,4 +1,3 @@
-import numpy as np
 from lib_shared.core.utils.is_listlike.is_listlike_models import (
     IsListlikeModel,
     IsListlikeParamsModel,

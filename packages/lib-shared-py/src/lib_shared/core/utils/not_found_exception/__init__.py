@@ -1,5 +1,3 @@
-from typing import Unpack
-
 from lib_shared.core.utils.not_found_exception.not_found_exception_models import (
     NotFoundExceptionParams,
 )

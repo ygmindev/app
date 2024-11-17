@@ -31,7 +31,10 @@ const config = defineConfig<PackageManagerConfigModel>({
       const pwd = fromWorking();
       const command = packages
         ? packages
-            .map((v) => `cd ${fromPackages(v)} && poetry env use ${version} && poetry update`)
+            .map(
+              (v) =>
+                `pyenv install -s ${version} && cd ${fromPackages(v)} && pyenv local ${version} && poetry env use $(pyenv which python) && poetry update`,
+            )
             .join(' && ')
         : '';
       return `${command} && cd ${pwd}`;
