@@ -42,6 +42,8 @@ xgboost = "^2.1.2"
 hyperopt = "^0.2.7"
 transformers = "^4.46.2"
 datasets = "^3.1.0"
+sentence-transformers = "^3.3.0"
+accelerate = "^1.1.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"

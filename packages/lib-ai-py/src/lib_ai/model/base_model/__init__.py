@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from typing import Mapping, cast
+from typing import Mapping, Sequence, cast
 
-from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
 import numpy as np
 from lib_ai.core.utils.kfold import kfold
 from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
@@ -15,10 +14,10 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelModel,
     BaseModelParamsModel,
     OptimizeParamsOptionalModel,
-    Scorers,
 )
 from lib_ai.optimize.utils.optimize import optimize
 from lib_ai.scoring.scoring_constants import ScoringMode
+from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger import logger
 from lib_shared.core.utils.merge import merge
@@ -38,8 +37,6 @@ class BaseModel[
         TEval,
     ]
 ):
-    _params: TParams | None
-
     def __init__(
         self,
         params: TParams | None = None,
@@ -80,8 +77,7 @@ class BaseModel[
         eval_params: TEval | None = None,
         fit_params: TFit | None = None,
     ) -> None:
-        scorer = get_item(cv_params, "scorer")
-        scorer = get_item(self.scorers, scorer)
+        scorer = get_item(self._params, "scorer")
         scoring_mode = ScoringMode.MIN if scorer.is_loss else ScoringMode.MAX
 
         def _objective(opt_params: TParams) -> float:
@@ -119,6 +115,8 @@ class BaseModel[
         dataset: TDataset,
         params: TEval | None = None,
     ) -> Mapping[str, float]:
+        scorers = get_item(self._params, "scorers")
+
         y = dataset.y
         if y is None:
             raise NotFoundException("y")
@@ -127,16 +125,6 @@ class BaseModel[
         if y_pred is None:
             raise NotFoundException("y_pred")
 
-        scores = {k: v(y_pred, y) for k, v in self.scorers.items()}
-        logger.debug(scores)
-
-        return scores
-
-    @property
-    def scorers(self) -> Scorers:
-        return get_item(self._params, "scorers")
-
-    @property
-    def scorer(self, name: str | None = None) -> ScorerCallableModel:
-        if str
-
+        result = {scorer.name: scorer(y_pred, y) for scorer in scorers}
+        logger.debug(result)
+        return result

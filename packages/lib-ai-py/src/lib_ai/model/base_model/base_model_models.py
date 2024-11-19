@@ -9,14 +9,13 @@ from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
 from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
 
-type Scorers = Mapping[str, ScorerCallableModel]
-
 
 class OptimizeParamsOptionalModel(OptimizeParamsModel):
     objective: NotRequired[Never]
 
 
 class BaseModelParamsModel(TypedDict):
+    scorer: ScorerCallableModel
     scorers: Sequence[ScorerCallableModel]
     objective: ScorerCallableModel
 
@@ -41,6 +40,8 @@ class BaseModelModel[
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,
 ](ABC):
+    _params: TParams | None
+
     @abstractmethod
     def __init__(self, params: TParams) -> None: ...
 
@@ -85,11 +86,3 @@ class BaseModelModel[
         dataset: TDataset,
         params: TFit | None = None,
     ) -> None: ...
-
-    @property
-    @abstractmethod
-    def scorers(self) -> Scorers: ...
-
-    @property
-    @abstractmethod
-    def scorer(self, name: str | None = None) -> ScorerCallableModel: ...

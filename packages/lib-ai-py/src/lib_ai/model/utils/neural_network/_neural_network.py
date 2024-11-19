@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import torch
+from accelerate import Accelerator
 from lib_ai.core.utils.chunks import chunks
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
@@ -20,6 +21,8 @@ from torch.nn import Module
 from torch.optim.adam import Adam
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.optim.sgd import SGD
+
+accelerator = Accelerator()
 
 
 class _Module(Module):
@@ -49,6 +52,7 @@ class _NeuralNetwork[
 ):
     def __init__(self, params: _NeuralNetworkParamsModel) -> None:
         super().__init__(params=params)
+        # self._module = accelerator.prepare(_Module(params=params))
         self._module = _Module(params=params)
         self._is_classification = get_item(params, "is_classification", False)
 
@@ -73,9 +77,10 @@ class _NeuralNetwork[
         dataset: XYMatrixDataset,
         params: TFit | None = None,
     ) -> None:
+        objective = get_item(self._params, "objective")
+
         n_epochs = get_item(params, "n_epochs", 1000)
         optimizer = get_item(params, "optimizer", Optimizer.SGD)
-        scorer = get_item(params, "scorer")
         scoring_mode = get_item(params, "scoring_mode", ScoringMode.MIN)
 
         self._module.train(mode=True)
@@ -96,6 +101,8 @@ class _NeuralNetwork[
             threshold=5,
             factor=1e-1,
         )
+
+        optimizer, scheduler = accelerator.prepare(optimizer, scheduler)
         early_stopping = EarlyStopping(scoring_mode=scoring_mode)
 
         for epoch in range(n_epochs):
@@ -106,7 +113,7 @@ class _NeuralNetwork[
                 x, y = batchset.x, batchset.y
                 y_pred = self._module(x.to_tensor())
                 optimizer.zero_grad()
-                loss = scorer(MatrixData(data=y_pred), y)
+                loss = objective(MatrixData(data=y_pred), y)
                 optimizer.step()
 
                 if early_stopping.is_improved(score=loss):

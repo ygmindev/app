@@ -1,4 +1,4 @@
-from typing import NotRequired
+from typing import NotRequired, Sequence
 
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model.base_model_models import (
@@ -6,14 +6,14 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelFitParamsModel,
     BaseModelModel,
     BaseModelParamsModel,
-    Scorers,
 )
 from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
 
 
 class BaseRegressionParamsModel(BaseModelParamsModel):
-    scorers: NotRequired[Scorers]
-    scorer: NotRequired[ScorerCallableModel]
+    scorer: NotRequired[str]
+    scorers: NotRequired[Sequence[ScorerCallableModel]]
+    objective: NotRequired[ScorerCallableModel]
 
 
 class BaseRegressionEvalParamsModel(BaseModelEvalParamsModel): ...

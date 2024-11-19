@@ -1,13 +1,9 @@
 from __future__ import annotations
 
-from typing import Any, Mapping, cast
+from typing import cast
 
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model import BaseModel
-from lib_ai.model.base_model.base_model_models import (
-    BaseModelEvalParamsModel,
-    BaseModelFitParamsModel,
-)
 from lib_ai.model.classification.base_classification.base_classification_models import (
     BaseClassificationEvalParamsModel,
     BaseClassificationFitParamsModel,
@@ -17,7 +13,6 @@ from lib_ai.model.classification.base_classification.base_classification_models 
 from lib_ai.scoring.scorer.accuracy_scorer import accuracy_scorer
 from lib_ai.scoring.scorer.cross_entropy_scorer import cross_entropy_scorer
 from lib_ai.scoring.scorer.f1_scorer import f1_scorer
-from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_ai.scoring.scorer.recall_scorer import recall_scorer
 from lib_shared.core.utils.merge import merge
 
@@ -47,23 +42,14 @@ class BaseClassification[
             merge(
                 params,
                 {
-                    "scorers": {
-                        "accuracy": accuracy_scorer,
-                        "f1": f1_scorer,
-                        "recall": recall_scorer,
-                    }
+                    "objective": cross_entropy_scorer,
+                    "scorers": [
+                        accuracy_scorer,
+                        f1_scorer,
+                        recall_scorer,
+                    ],
+                    "scorer": f1_scorer,
                 },
             ),
         )
         super().__init__(params=params)
-
-    def fit(
-        self,
-        dataset: TDataset,
-        params: TFit | None = None,
-    ) -> None:
-        base_params: BaseModelFitParamsModel = {"scorer": cross_entropy_scorer}
-        return super().fit(
-            dataset,
-            merge(params, base_params),
-        )
