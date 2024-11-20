@@ -3,6 +3,7 @@ from lib_ai.dataset.utils.download_dataset import download_dataset
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.regression.xgboost_regression import XgboostRegression
 from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
+from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
 from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
     OneHotEncoderTransformer,
@@ -71,7 +72,6 @@ def test_works() -> None:
                 },
             ),
         },
-        cv_params={},
         instance_params={},
         dataset=validationset,
         kfold_params={"n_splits": 5},
@@ -80,5 +80,4 @@ def test_works() -> None:
     # After hyperparameter optimization
     model.fit(trainset)
     scores = model.evaluate(testset)
-    # assert scores["mean_squared_error"] <= 5
-    assert 1 == 1
+    assert scores[mse_scorer.name] <= 5

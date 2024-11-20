@@ -2,6 +2,7 @@ from lib_ai.data.tabular_data import TabularData
 from lib_ai.dataset.utils.download_dataset import download_dataset
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.regression.linear_regression import LinearRegression
+from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
 from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
     OneHotEncoderTransformer,
@@ -33,7 +34,6 @@ def test_works() -> None:
         )
     )
     y_column = "Performance Index"
-
     x, y = data.drop_columns([y_column]), data[y_column]
     x = pipeline.fit_transform(x)
     trainset, testset = XYMatrixDataset(x=x.to_matrix(), y=y).split()
@@ -50,5 +50,4 @@ def test_works() -> None:
     #     kfold_params={"n_splits": 5},
     # )
 
-    # assert scores[scorer] <= 5
-    assert 1 == 1
+    assert scores[mse_scorer.name] <= 5

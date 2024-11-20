@@ -26,9 +26,6 @@ class BaseModelEvalParamsModel(TypedDict): ...
 class BaseModelFitParamsModel(TypedDict): ...
 
 
-class BaseModelCvParamsModel(TypedDict): ...
-
-
 class BaseModelCvModel(TypedDict):
     average: float
     scores: List[float]
@@ -49,7 +46,6 @@ class BaseModelModel[
     def cv(
         self,
         dataset: TDataset,
-        params: BaseModelCvParamsModel,
         instance_params: TParams,
         kfold_params: KfoldParamsModel,
         eval_params: TEval | None = None,

@@ -3,6 +3,7 @@ from __future__ import annotations
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.base_model import BaseModel
+from lib_ai.model.regression.base_regression import BaseRegression
 from lib_ai.model.regression.xgboost_regression._xgboost_regression_models import (
     _XgboostRegressionEvalParamsModel,
     _XgboostRegressionFitParamsModel,
@@ -16,7 +17,7 @@ from xgboost import XGBRegressor
 
 
 class _XgboostRegression(
-    BaseModel[
+    BaseRegression[
         _XgboostRegressionParamsModel,
         XYMatrixDataset,
         _XgboostRegressionFitParamsModel,

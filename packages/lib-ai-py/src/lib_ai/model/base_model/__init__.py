@@ -8,7 +8,6 @@ from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model.base_model_models import (
     BaseModelCvModel,
-    BaseModelCvParamsModel,
     BaseModelEvalParamsModel,
     BaseModelFitParamsModel,
     BaseModelModel,
@@ -45,7 +44,6 @@ class BaseModel[
 
     def cv(
         self,
-        params: BaseModelCvParamsModel,
         dataset: TDataset,
         instance_params: TParams,
         kfold_params: KfoldParamsModel,
@@ -53,14 +51,14 @@ class BaseModel[
         fit_params: TFit | None = None,
     ) -> BaseModelCvModel:
         Instance = type(self)
-        scorer = get_item(params, "scorer")
+        scorer = get_item(self._params, "scorer")
 
         scores = []
         for train, test in kfold(**merge(kfold_params, {"n_rows": len(dataset)})):
             instance = Instance(params=merge(instance_params, self._params))
             trainset, testset = dataset[train], dataset[test]
             instance.fit(dataset=trainset, params=fit_params)
-            score = instance.evaluate(testset, params=eval_params)[scorer]
+            score = instance.evaluate(testset, params=eval_params)[scorer.name]
             scores.append(score)
 
         result: BaseModelCvModel = {"average": float(np.average(scores)), "scores": scores}
@@ -69,7 +67,6 @@ class BaseModel[
 
     def optimize(
         self,
-        cv_params: BaseModelCvParamsModel,
         dataset: TDataset,
         instance_params: TParams,
         kfold_params: KfoldParamsModel,
@@ -95,7 +92,6 @@ class BaseModel[
                 fit_params=fit_params,
                 instance_params=opt_params,
                 kfold_params=kfold_params,
-                params=cv_params,
             )
             return result["average"]
 
