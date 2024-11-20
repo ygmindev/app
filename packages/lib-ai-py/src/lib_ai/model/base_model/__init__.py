@@ -124,3 +124,7 @@ class BaseModel[
         result = {scorer.name: scorer(y_pred, y) for scorer in scorers}
         logger.debug(result)
         return result
+
+    @property
+    def scorer(self) -> ScorerCallableModel:
+        return get_item(self._params, "scorer")

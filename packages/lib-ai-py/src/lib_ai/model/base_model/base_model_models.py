@@ -82,3 +82,7 @@ class BaseModelModel[
         dataset: TDataset,
         params: TFit | None = None,
     ) -> None: ...
+
+    @property
+    @abstractmethod
+    def scorer(self) -> ScorerCallableModel: ...
