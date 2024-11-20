@@ -50,4 +50,4 @@ def test_works() -> None:
     #     kfold_params={"n_splits": 5},
     # )
 
-    assert scores[mse_scorer.name] <= 5
+    assert scores[model.scorer.name] <= 5

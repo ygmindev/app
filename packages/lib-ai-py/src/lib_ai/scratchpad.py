@@ -61,7 +61,6 @@ def preprocess_function(examples) -> BatchEncoding:
 
     inputs["start_positions"] = start_positions
     inputs["end_positions"] = end_positions
-    print(inputs)
     return inputs
 
 
@@ -70,3 +69,5 @@ tokenized_squad = dataset.map(
     batched=True,
     remove_columns=dataset["train"].column_names,
 )
+
+print(tokenized_squad["train"][0])

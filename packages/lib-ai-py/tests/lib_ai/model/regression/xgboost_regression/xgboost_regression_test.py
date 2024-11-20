@@ -80,4 +80,4 @@ def test_works() -> None:
     # After hyperparameter optimization
     model.fit(trainset)
     scores = model.evaluate(testset)
-    assert scores[mse_scorer.name] <= 5
+    assert scores[model.scorer.name] <= 5
