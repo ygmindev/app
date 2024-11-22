@@ -44,6 +44,7 @@ transformers = "^4.46.2"
 datasets = "^3.1.0"
 sentence-transformers = "^3.3.0"
 accelerate = "^1.1.1"
+evaluate = "^0.4.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
@@ -54,3 +55,4 @@ isort = "^5.13.2"
 flake8 = "^7.1.1"
 pylint = "^3.3.1"
 autoflake = "^2.3.1"
+tqdm = "^4.67.0"
