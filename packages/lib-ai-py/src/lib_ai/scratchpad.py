@@ -5,12 +5,15 @@ import numpy as np
 import torch
 from datasets import load_dataset
 from torch.optim import AdamW
+from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 from transformers import (
     AutoModelForQuestionAnswering,
     AutoTokenizer,
     DefaultDataCollator,
+    Trainer,
     TrainingArguments,
+    default_data_collator,
     get_scheduler,
 )
 from transformers.tokenization_utils_base import BatchEncoding
@@ -224,88 +227,95 @@ def compute_metrics(
     return metric.compute(predictions=predicted_answers, references=theoretical_answers)
 
 
-# compute_metrics(start_logits, end_logits, evalset, small_evalset)
-
-
-args = TrainingArguments(
-    MODEL_NAME,
-    evaluation_strategy="no",
-    save_strategy="no",
-    learning_rate=2e-5,
-    num_train_epochs=1,
-    weight_decay=0.01,
-    # fp16=False,
-    # push_to_hub=False,
-)
-from transformers import Trainer
-
-trainer = Trainer(
-    model=model,
-    args=args,
-    train_dataset=trainset,
-    eval_dataset=testset,
-    tokenizer=tokenizer,
-)
-trainer.train()
-predictions, _, _ = trainer.predict(evalset)
-start_logits, end_logits = predictions
-result = compute_metrics(start_logits, end_logits, evalset, dataset["test"])
-
-print(result)
-
-
-# optimizer = AdamW(model.parameters(), lr=2e-5)
-
-# num_train_epochs = 2
-# num_update_steps_per_epoch = 1
-# num_training_steps = num_train_epochs * num_update_steps_per_epoch
-
-# lr_scheduler = get_scheduler(
-#     "linear",
-#     optimizer=optimizer,
-#     num_warmup_steps=0,
-#     num_training_steps=1,
+# args = TrainingArguments(
+#     MODEL_NAME,
+#     evaluation_strategy="no",
+#     save_strategy="no",
+#     learning_rate=2e-5,
+#     num_train_epochs=1,
+#     weight_decay=0.01,
+#     # fp16=False,
+#     # push_to_hub=False,
 # )
 
+# trainer = Trainer(
+#     model=model,
+#     args=args,
+#     train_dataset=trainset,
+#     eval_dataset=testset,
+#     tokenizer=tokenizer,
+# )
+# trainer.train()
+# predictions, _, _ = trainer.predict(evalset)
+# start_logits, end_logits = predictions
+# result = compute_metrics(start_logits, end_logits, evalset, dataset["test"])
+# print(result)
 
-# for epoch in range(num_train_epochs):
-#     # Training
-#     model.train()
-#     for step, batch in enumerate(train_dataloader):
-#         outputs = model(**batch)
-#         loss = outputs.loss
-#         accelerator.backward(loss)
+trainset.set_format("torch")
+evalset = evalset.remove_columns(["example_id", "offset_mapping"])
+evalset.set_format("torch")
 
-#         optimizer.step()
-#         lr_scheduler.step()
-#         optimizer.zero_grad()
+train_dataloader = DataLoader(
+    trainset,
+    shuffle=True,
+    collate_fn=default_data_collator,
+    batch_size=8,
+)
+eval_dataloader = DataLoader(evalset, collate_fn=default_data_collator, batch_size=8)
 
-#     # Evaluation
-#     model.eval()
-#     start_logits = []
-#     end_logits = []
-#     accelerator.print("Evaluation!")
-#     for batch in tqdm(eval_dataloader):
-#         with torch.no_grad():
-#             outputs = model(**batch)
 
-#         start_logits.append(accelerator.gather(outputs.start_logits).cpu().numpy())
-#         end_logits.append(accelerator.gather(outputs.end_logits).cpu().numpy())
+optimizer = AdamW(model.parameters(), lr=2e-5)
 
-#     start_logits = np.concatenate(start_logits)
-#     end_logits = np.concatenate(end_logits)
-#     start_logits = start_logits[: len(validation_dataset)]
-#     end_logits = end_logits[: len(validation_dataset)]
+num_train_epochs = 2
+num_update_steps_per_epoch = 1
+num_training_steps = num_train_epochs * num_update_steps_per_epoch
 
-#     metrics = compute_metrics(
-#         start_logits, end_logits, validation_dataset, raw_datasets["validation"]
-#     )
-#     print(f"epoch {epoch}:", metrics)
+lr_scheduler = get_scheduler(
+    "linear",
+    optimizer=optimizer,
+    num_warmup_steps=0,
+    num_training_steps=1,
+)
 
-#     # Save and upload
-#     accelerator.wait_for_everyone()
-#     unwrapped_model = accelerator.unwrap_model(model)
-#     unwrapped_model.save_pretrained(output_dir, save_function=accelerator.save)
-#     if accelerator.is_main_process:
-#         tokenizer.save_pretrained(output_dir)
-#         repo.push_to_hub(commit_message=f"Training in progress epoch {epoch}", blocking=False)
+
+for epoch in range(num_train_epochs):
+    # Training
+    model.train()
+    for step, batch in enumerate(train_dataloader):
+        outputs = model(**batch)
+        loss = outputs.loss
+        accelerator.backward(loss)
+
+        optimizer.step()
+        lr_scheduler.step()
+        optimizer.zero_grad()
+
+    # Evaluation
+    model.eval()
+    start_logits = []
+    end_logits = []
+    accelerator.print("Evaluation!")
+    for batch in tqdm(eval_dataloader):
+        with torch.no_grad():
+            outputs = model(**batch)
+
+        start_logits.append(accelerator.gather(outputs.start_logits).cpu().numpy())
+        end_logits.append(accelerator.gather(outputs.end_logits).cpu().numpy())
+
+    start_logits = np.concatenate(start_logits)
+    end_logits = np.concatenate(end_logits)
+    start_logits = start_logits[: len(validation_dataset)]
+    end_logits = end_logits[: len(validation_dataset)]
+
+    metrics = compute_metrics(
+        start_logits, end_logits, validation_dataset, raw_datasets["validation"]
+    )
+    print(f"epoch {epoch}:", metrics)
+
+    # Save and upload
+    accelerator.wait_for_everyone()
+    unwrapped_model = accelerator.unwrap_model(model)
+    unwrapped_model.save_pretrained(output_dir, save_function=accelerator.save)
+    if accelerator.is_main_process:
+        tokenizer.save_pretrained(output_dir)
+        repo.push_to_hub(commit_message=f"Training in progress epoch {epoch}", blocking=False)
