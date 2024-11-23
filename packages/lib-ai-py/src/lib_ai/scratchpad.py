@@ -12,12 +12,9 @@ from transformers import (
     AutoModelForQuestionAnswering,
     AutoTokenizer,
     DefaultDataCollator,
-    Trainer,
-    TrainingArguments,
     default_data_collator,
     get_scheduler,
 )
-from transformers.tokenization_utils_base import BatchEncoding
 
 metric = evaluate.load("squad")
 
