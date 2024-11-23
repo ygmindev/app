@@ -2,6 +2,7 @@ from typing import Any, Self, Sequence, Tuple, cast, overload
 
 import numpy as np
 import torch
+from lib_ai.core.utils.get_device import get_device
 from lib_ai.core.utils.get_numpy_type import get_numpy_type
 from lib_ai.core.utils.get_tensor_type import get_tensor_type
 from lib_ai.data.matrix_data._matrix_data_models import (
@@ -118,7 +119,8 @@ class _MatrixData(_MatrixDataModel):
         to_type = get_tensor_type(dtype)
         match self.get_type():
             case MatrixDataType.TENSOR:
-                return cast(torch.Tensor, self.data).to(to_type)
+                device = get_device()
+                return cast(torch.Tensor, self.data).to(to_type).to(device)
             case MatrixDataType.NUMPY:
                 return torch.tensor(self.data).to(to_type)
             case _:

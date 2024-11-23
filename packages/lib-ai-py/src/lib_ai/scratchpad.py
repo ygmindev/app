@@ -3,6 +3,7 @@ import collections
 import evaluate
 import numpy as np
 import torch
+from accelerate import Accelerator
 from datasets import load_dataset
 from torch.optim import AdamW
 from torch.utils.data import DataLoader
@@ -24,6 +25,8 @@ data_collator = DefaultDataCollator()
 
 dataset = load_dataset("squad", split="train[:20]")
 dataset = dataset.train_test_split(test_size=0.5)
+
+accelerator = Accelerator()
 
 MODEL_NAME = "bert-base-uncased"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)

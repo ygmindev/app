@@ -1,3 +1,3 @@
-from lib_ai.core.utils.get_device.get_device_constants import Device
+from lib_ai.core.utils.get_device._get_device_models import _GetDeviceModel
 
-type GetDeviceModel = Device
+type GetDeviceModel = _GetDeviceModel

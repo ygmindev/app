@@ -52,8 +52,8 @@ class _NeuralNetwork[
 ):
     def __init__(self, params: _NeuralNetworkParamsModel) -> None:
         super().__init__(params=params)
-        # self._module = accelerator.prepare(_Module(params=params))
-        self._module = _Module(params=params)
+        self._module = accelerator.prepare(_Module(params=params))
+        # self._module = _Module(params=params)
         self._is_classification = get_item(params, "is_classification", False)
 
     def predict(

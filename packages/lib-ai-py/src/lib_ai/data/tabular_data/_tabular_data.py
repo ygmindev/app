@@ -3,6 +3,7 @@ from typing import Any, Mapping, Self, Sequence, Tuple, cast, overload
 import numpy as np
 import polars as pl
 import torch
+from lib_ai.core.utils.get_device import get_device
 from lib_ai.core.utils.get_numpy_type import get_numpy_type
 from lib_ai.core.utils.get_tensor_type import get_tensor_type
 from lib_ai.data.matrix_data import MatrixData
@@ -146,7 +147,8 @@ class _TabularData(_TabularDataModel):
         to_type = get_tensor_type(dtype)
         match self.get_type():
             case TabularDataType.DATAFRAME:
-                return cast(pl.DataFrame, self.data).to_torch().to(to_type)
+                device = get_device()
+                return cast(pl.DataFrame, self.data).to_torch().to(to_type).to(device)
             case _:
                 raise InvalidTypeException()
 

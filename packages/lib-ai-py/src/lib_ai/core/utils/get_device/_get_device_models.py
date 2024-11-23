@@ -1,3 +1,3 @@
-from lib_ai.core.utils.get_device.get_device_constants import Device
+import torch
 
-type _GetDeviceModel = Device
+type _GetDeviceModel = torch.device
