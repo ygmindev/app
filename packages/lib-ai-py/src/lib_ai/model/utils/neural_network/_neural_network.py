@@ -3,6 +3,7 @@ from __future__ import annotations
 import torch
 from accelerate import Accelerator
 from lib_ai.core.utils.chunks import chunks
+from lib_ai.core.utils.get_device import get_device
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.base_model import BaseModel
@@ -29,7 +30,8 @@ class _Module(Module):
     def __init__(self, params: _NeuralNetworkParamsModel) -> None:
         super().__init__()
         layers = get_item(params, "layers")
-        self._layers = torch.nn.Sequential(*list(map(lambda x: x.layer, layers)))
+        device = get_device()
+        self._layers = torch.nn.Sequential(*list(map(lambda x: x.layer, layers))).to(device)
 
     def forward(self, x) -> torch.Tensor:
         return self._layers(x)
@@ -53,7 +55,6 @@ class _NeuralNetwork[
     def __init__(self, params: _NeuralNetworkParamsModel) -> None:
         super().__init__(params=params)
         self._module = accelerator.prepare(_Module(params=params))
-        # self._module = _Module(params=params)
         self._is_classification = get_item(params, "is_classification", False)
 
     def predict(
