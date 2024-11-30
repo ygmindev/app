@@ -30,12 +30,12 @@ lib_ai = {path="../lib-ai-py", develop=true}
 lib_config = {path="../lib-config-py", develop=true}
 lib_shared = {path="../lib-shared-py", develop=true}
 python = "3.12.7"
-transformers = "^4.44.2"
+transformers = "^4.46.3"
 torch = "^2.5.1"
 torchvision = "^0.20.1"
 torchaudio = "^2.5.1"
 torcheval = "^0.0.7"
-numpy = "^2.1.1"
+numpy = "1.26.4"
 polars = "^1.7.1"
 scikit-learn = "^1.5.2"
 kaggle = "^1.6.17"
@@ -46,6 +46,7 @@ datasets = "^3.1.0"
 sentence-transformers = "^3.3.0"
 accelerate = "^1.1.1"
 evaluate = "^0.4.3"
+tqdm = "^4.67.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
@@ -57,3 +58,5 @@ flake8 = "^7.1.1"
 pylint = "^3.3.1"
 autoflake = "^2.3.1"
 tqdm = "^4.67.0"
+ollama = "^0.4.1"
+mlx-lm = "^0.20.1"

@@ -27,7 +27,7 @@ packages = [{ include = "*", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "3.12.7"
-numpy = "^2.1.1"
+numpy = "1.26.4"
 pydash = "^8.0.4"
 
 [tool.poetry.group.dev.dependencies]

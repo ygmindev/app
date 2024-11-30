@@ -15,9 +15,9 @@ class OptimizeParamsOptionalModel(OptimizeParamsModel):
 
 
 class BaseModelParamsModel(TypedDict):
-    scorer: ScorerCallableModel
-    scorers: Sequence[ScorerCallableModel]
-    objective: ScorerCallableModel
+    scorer: NotRequired[str]
+    scorers: NotRequired[Sequence[ScorerCallableModel]]
+    objective: NotRequired[ScorerCallableModel]
 
 
 class BaseModelEvalParamsModel(TypedDict): ...

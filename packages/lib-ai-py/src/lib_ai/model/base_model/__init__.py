@@ -57,7 +57,10 @@ class BaseModel[
         for train, test in kfold(**merge(kfold_params, {"n_rows": len(dataset)})):
             instance = Instance(params=merge(instance_params, self._params))
             trainset, testset = dataset[train], dataset[test]
-            instance.fit(dataset=trainset, params=fit_params)
+            instance.fit(
+                dataset=trainset,
+                params=fit_params,
+            )
             score = instance.evaluate(testset, params=eval_params)[scorer.name]
             scores.append(score)
 

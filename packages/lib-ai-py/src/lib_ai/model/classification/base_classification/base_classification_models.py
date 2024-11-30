@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import NotRequired, Sequence
 
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_dataset import XYDataset
@@ -11,13 +10,9 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelModel,
     BaseModelParamsModel,
 )
-from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
 
 
-class BaseClassificationParamsModel(BaseModelParamsModel):
-    scorer: NotRequired[str]
-    scorers: NotRequired[Sequence[ScorerCallableModel]]
-    objective: NotRequired[ScorerCallableModel]
+class BaseClassificationParamsModel(BaseModelParamsModel): ...
 
 
 class BaseClassificationEvalParamsModel(BaseModelEvalParamsModel): ...

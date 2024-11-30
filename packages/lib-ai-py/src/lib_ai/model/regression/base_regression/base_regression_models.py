@@ -10,10 +10,7 @@ from lib_ai.model.base_model.base_model_models import (
 from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
 
 
-class BaseRegressionParamsModel(BaseModelParamsModel):
-    scorer: NotRequired[str]
-    scorers: NotRequired[Sequence[ScorerCallableModel]]
-    objective: NotRequired[ScorerCallableModel]
+class BaseRegressionParamsModel(BaseModelParamsModel): ...
 
 
 class BaseRegressionEvalParamsModel(BaseModelEvalParamsModel): ...
