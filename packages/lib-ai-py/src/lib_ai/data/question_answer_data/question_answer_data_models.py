@@ -3,17 +3,17 @@ from typing import List, NotRequired, TypedDict
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 
 
-class QuestionAnswerModel(TypedDict):
+class QAModel(TypedDict):
     answer: NotRequired[str]
-    question: str
+    question: NotRequired[str]
 
 
-class QuestionAnswerRowModel(TypedDict):
+class QARowModel(TypedDict):
     context: NotRequired[str]
-    questions: List[QuestionAnswerModel]
+    rows: List[QAModel]
 
 
-type QuestionAnswerDataTypeModel = List[QuestionAnswerRowModel]
+type QuestionAnswerDataTypeModel = List[QARowModel]
 
 
 class QuestionAnswerDataModel(BaseDataModel[QuestionAnswerDataTypeModel]): ...
