@@ -2,11 +2,11 @@ from typing import Any, Self, Tuple, overload
 
 import numpy as np
 import torch
-from lib_ai.data.base_data import BaseData
-from lib_ai.data.question_answer_data.question_answer_data_models import (
-    QuestionAnswerDataModel,
-    QuestionAnswerDataTypeModel,
+from lib_ai.data.answer_data.answer_data_models import (
+    AnswerDataModel,
+    AnswerDataTypeModel,
 )
+from lib_ai.data.base_data import BaseData
 from lib_shared.core.core import DataType
 from lib_shared.core.utils.indexable.indexable_models import (
     IndexableMultiKeyModel,
@@ -16,11 +16,11 @@ from lib_shared.core.utils.is_listlike import is_listlike
 from lib_shared.core.utils.not_implemented_exception import NotImplementedException
 
 
-class QuestionAnswerData(
+class AnswerData(
     BaseData,
-    QuestionAnswerDataModel,
+    AnswerDataModel,
 ):
-    def __init__(self, data: QuestionAnswerDataTypeModel) -> None:
+    def __init__(self, data: AnswerDataTypeModel) -> None:
         self._data = data
 
     @overload
@@ -41,11 +41,11 @@ class QuestionAnswerData(
         return type(self)(data=self.data + other.data)
 
     @property
-    def data(self) -> QuestionAnswerDataTypeModel:
+    def data(self) -> AnswerDataTypeModel:
         return self._data
 
     @data.setter
-    def data(self, value: QuestionAnswerDataTypeModel) -> None:
+    def data(self, value: AnswerDataTypeModel) -> None:
         self._data = value
 
     def equals(self, other: Self) -> bool:

@@ -1,8 +1,14 @@
 import torch
-from lib_ai.data.question_answer_data import QuestionAnswerData
-from lib_ai.data.question_answer_data.question_answer_data_models import (
-    QAModel,
-    QARowModel,
+from lib_ai.data.answer_data import AnswerData
+from lib_ai.data.answer_data.answer_data_models import (
+    AnswerDataModel,
+    AnswerInstanceModel,
+    AnswerModel,
+)
+from lib_ai.data.question_data import QuestionData
+from lib_ai.data.question_data.question_data_models import (
+    QuestionDataModel,
+    QuestionModel,
 )
 from lib_ai.dataset.xy_question_answer_dataset import XYQuestionAnswerDataset
 from lib_ai.model.language.question_answer._question_answer_models import (
@@ -11,7 +17,6 @@ from lib_ai.model.language.question_answer._question_answer_models import (
     _QuestionAnswerParamsModel,
 )
 from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.not_found_exception import NotFoundException
 from transformers import AutoModelForQuestionAnswering, AutoTokenizer
 
 
@@ -24,12 +29,11 @@ class _QuestionAnswer(_QuestionAnswerModel):
     def predict(
         self,
         dataset: XYQuestionAnswerDataset,
-    ) -> QuestionAnswerData:
-        def _predict_row(row: QARowModel) -> QARowModel:
-            def _predict(x: QAModel) -> QAModel:
-                question = get_item(x, "question")
+    ) -> AnswerData:
+        def _predict_row(question: QuestionModel) -> AnswerModel:
+            def _predict(x: str) -> AnswerInstanceModel:
                 inputs = self._tokenizer(
-                    question,
+                    x,
                     context,
                     return_tensors="pt",
                 )
@@ -40,13 +44,13 @@ class _QuestionAnswer(_QuestionAnswerModel):
                 predict_answer_tokens = inputs.input_ids[
                     0, answer_start_index : answer_end_index + 1
                 ]
-                return {"answer": self._tokenizer.decode(predict_answer_tokens)}
+                return {"text": self._tokenizer.decode(predict_answer_tokens)}
 
-            context = get_item(row, "context")
-            rows = get_item(row, "rows", [])
-            return {"rows": list(map(_predict, rows))}
+            context = get_item(question, "context")
+            rows = get_item(question, "questions", [])
+            return {"answers": list(map(_predict, rows))}
 
-        return QuestionAnswerData(list(map(_predict_row, dataset.x.data)))
+        return AnswerData(list(map(_predict_row, dataset.x.data)))
 
     def fit(
         self,
