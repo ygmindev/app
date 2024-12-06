@@ -1,4 +1,4 @@
-from lib_ai.data.question_data import QuestionAnswerData
+from lib_ai.data.question_data import QuestionData
 from lib_ai.dataset.xy_question_answer_dataset import XYQuestionAnswerDataset
 from lib_ai.model.language.question_answer import QuestionAnswer
 
@@ -9,14 +9,11 @@ def test_works() -> None:
     )
 
     dataset = XYQuestionAnswerDataset(
-        x=QuestionAnswerData(
+        x=QuestionData(
             [
                 {
                     "context": "my name is YG and I am 25 years old",
-                    "rows": [
-                        {"question": "how old is YG?"},
-                        {"question": "what is my name?"},
-                    ],
+                    "questions": ["how old is YG?", "who am I?"],
                 },
             ]
         )
