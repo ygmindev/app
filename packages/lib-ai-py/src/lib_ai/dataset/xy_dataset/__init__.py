@@ -22,8 +22,6 @@ class XYDataset[
         x: TX,
         y: TY | None = None,
     ) -> None:
-        if y is not None:
-            assert len(x) == len(y)
         self._x = x
         self._y = y
 

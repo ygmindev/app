@@ -1,12 +1,13 @@
+from lib_ai.data.answer_data import AnswerData
 from lib_ai.data.question_data import QuestionData
 from lib_ai.dataset.xy_question_answer_dataset import XYQuestionAnswerDataset
 from lib_ai.model.language.question_answer import QuestionAnswer
 
 
 def test_works() -> None:
-    model = QuestionAnswer(
-        params={"pathname": "distilbert/distilbert-base-uncased-distilled-squad"}
-    )
+    pathname = "distilbert/distilbert-base-uncased-distilled-squad"
+    model = QuestionAnswer(params={"pathname": pathname})
+
     dataset = XYQuestionAnswerDataset(
         x=QuestionData(
             [
@@ -16,7 +17,14 @@ def test_works() -> None:
                 },
             ],
         ),
+        y=AnswerData(
+            [
+                {"answers": [{"text": "25", "start_index": 22}]},
+                {"answers": [{"text": "YG", "start_index": 10}]},
+            ]
+        ),
     )
+    model.fit(dataset)
     result = model.predict(dataset)
     print(result.data)
     assert 1 == 1
