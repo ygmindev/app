@@ -9,8 +9,7 @@ from lib_ai.model.base_model.base_model_models import (
 )
 
 
-class BaseLanguageParamsModel(BaseModelParamsModel):
-    pathname: str
+class BaseLanguageParamsModel(BaseModelParamsModel): ...
 
 
 class BaseLanguageEvalParamsModel(BaseModelEvalParamsModel): ...

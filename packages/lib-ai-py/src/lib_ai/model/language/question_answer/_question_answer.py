@@ -3,16 +3,8 @@ import torch
 from datasets import Dataset
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.data.answer_data import AnswerData
-from lib_ai.data.answer_data.answer_data_models import (
-    AnswerDataModel,
-    AnswerInstanceModel,
-    AnswerModel,
-)
-from lib_ai.data.question_data import QuestionData
-from lib_ai.data.question_data.question_data_models import (
-    QuestionDataModel,
-    QuestionModel,
-)
+from lib_ai.data.answer_data.answer_data_models import AnswerInstanceModel, AnswerModel
+from lib_ai.data.question_data.question_data_models import QuestionModel
 from lib_ai.dataset.xy_question_answer_dataset import XYQuestionAnswerDataset
 from lib_ai.model.language.question_answer._question_answer_models import (
     _QuestionAnswerFitParamsModel,
@@ -33,7 +25,9 @@ device = get_device()
 
 class _QuestionAnswer(_QuestionAnswerModel):
     def __init__(self, params: _QuestionAnswerParamsModel) -> None:
-        pathname = get_item(params, "pathname")
+        key = get_item(params, "key")
+        pathname = "distilbert/distilbert-base-uncased-distilled-squad"
+
         self._tokenizer = AutoTokenizer.from_pretrained(pathname)
         self._model = AutoModelForQuestionAnswering.from_pretrained(pathname).to(device)
 

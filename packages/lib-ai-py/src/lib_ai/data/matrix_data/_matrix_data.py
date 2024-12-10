@@ -1,42 +1,17 @@
-from typing import Any, Self, Sequence, Tuple, cast, overload
+from typing import Any, Self, Sequence, Tuple, cast
 
 import numpy as np
 import torch
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.core.utils.get_numpy_type import get_numpy_type
 from lib_ai.core.utils.get_tensor_type import get_tensor_type
-from lib_ai.data.matrix_data._matrix_data_models import (
-    _MatrixDataModel,
-    _MatrixDataTypeModel,
-)
+from lib_ai.data.matrix_data._matrix_data_models import _MatrixDataModel
 from lib_ai.data.matrix_data.matrix_data_constants import MatrixDataType
 from lib_shared.core.core import DataType
-from lib_shared.core.utils.indexable.indexable_models import (
-    IndexableMultiKeyModel,
-    IndexableSingleKeyModel,
-)
 from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 
 
 class _MatrixData(_MatrixDataModel):
-    def __init__(self, data: _MatrixDataTypeModel) -> None:
-        self._data = data
-
-    @overload
-    def __getitem__(self, key: IndexableSingleKeyModel) -> Self: ...
-
-    @overload
-    def __getitem__(self, key: IndexableMultiKeyModel) -> Any: ...
-
-    def __getitem__(self, key: IndexableSingleKeyModel | IndexableMultiKeyModel) -> Self | Any:
-        result = self.data[key]
-        if torch.is_tensor(result) or isinstance(result, np.ndarray):
-            return type(self)(data=result)
-        return result
-
-    def __len__(self) -> int:
-        return len(self.data)
-
     def concat(self, other: Self) -> Self:
         result = self.data
         match self.get_type():
@@ -45,14 +20,6 @@ class _MatrixData(_MatrixDataModel):
             case MatrixDataType.NUMPY:
                 result = np.concatenate([result, other.to_numpy()], axis=0)
         return type(self)(data=result)
-
-    @property
-    def data(self) -> _MatrixDataTypeModel:
-        return self._data
-
-    @data.setter
-    def data(self, value: _MatrixDataTypeModel) -> None:
-        self._data = value
 
     @classmethod
     def from_array(

@@ -62,7 +62,3 @@ class _TabularDataModel(BaseDataModel[_TabularDataTypeModel]):
 
     @abstractmethod
     def to_matrix(self) -> MatrixData: ...
-
-    @property
-    @abstractmethod
-    def shape(self) -> Tuple[int, ...]: ...

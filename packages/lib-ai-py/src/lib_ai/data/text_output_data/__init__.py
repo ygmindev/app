@@ -1,15 +1,15 @@
 from typing import Self, Tuple
 
 from lib_ai.data.base_data import BaseData
-from lib_ai.data.question_data.question_data_models import (
-    QuestionDataModel,
-    QuestionDataTypeModel,
+from lib_ai.data.text_output_data.text_output_data_models import (
+    TextOutputDataModel,
+    TextOutputDataTypeModel,
 )
 
 
-class QuestionData(
-    BaseData[QuestionDataTypeModel],
-    QuestionDataModel,
+class TextOutputData(
+    BaseData[TextOutputDataTypeModel],
+    TextOutputDataModel,
 ):
     def concat(self, other: Self) -> Self:
         return type(self)(data=self.data + other.data)

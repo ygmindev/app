@@ -13,7 +13,10 @@ from lib_shared.core.utils.get_item import get_item
 class XYDataset[
     TX: BaseDataModel,
     TY: BaseDataModel | None,
-](XYDatasetModel[TX, TY], BaseDataset):
+](
+    XYDatasetModel[TX, TY],
+    BaseDataset,
+):
     _x: TX
     _y: TY | None = None
 

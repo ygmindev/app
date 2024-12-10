@@ -7,9 +7,13 @@ from lib_ai.model.language.base_language.base_language_models import (
     BaseLanguageModel,
     BaseLanguageParamsModel,
 )
+from lib_ai.model.language.question_answer.question_answer_constants import (
+    QuestionAnswerKey,
+)
 
 
-class _QuestionAnswerParamsModel(BaseLanguageParamsModel): ...
+class _QuestionAnswerParamsModel(BaseLanguageParamsModel):
+    key: QuestionAnswerKey
 
 
 class _QuestionAnswerFitParamsModel(BaseLanguageFitParamsModel):

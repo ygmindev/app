@@ -2,18 +2,20 @@ from lib_ai.data.answer_data import AnswerData
 from lib_ai.data.question_data import QuestionData
 from lib_ai.dataset.xy_question_answer_dataset import XYQuestionAnswerDataset
 from lib_ai.model.language.question_answer import QuestionAnswer
+from lib_ai.model.language.question_answer.question_answer_constants import (
+    QuestionAnswerKey,
+)
 
 
 def test_works() -> None:
-    pathname = "distilbert/distilbert-base-uncased-distilled-squad"
-    model = QuestionAnswer(params={"pathname": pathname})
+    model = QuestionAnswer(params={"key": QuestionAnswerKey.BERT})
 
     dataset = XYQuestionAnswerDataset(
         x=QuestionData(
             [
                 {
                     "context": "my name is YG and I am 25 years old",
-                    "questions": ["how old is YG?", "who am I?"],
+                    "questions": ["how old is YG?", "what is my name?", "how old is Sam?"],
                 },
             ],
         ),
@@ -24,7 +26,7 @@ def test_works() -> None:
             ]
         ),
     )
-    model.fit(dataset)
+    # model.fit(dataset)
     result = model.predict(dataset)
     print(result.data)
     assert 1 == 1

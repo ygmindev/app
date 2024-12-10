@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, NotRequired, Self, Sequence, Tuple, TypedDict, Unpack
+from typing import Any, NotRequired, Self, Sequence, Tuple, TypedDict, Unpack, overload
 
 import numpy as np
 import torch
 from lib_shared.core.core import DataType
-from lib_shared.core.utils.indexable.indexable_models import IndexableModel
+from lib_shared.core.utils.indexable.indexable_models import (
+    IndexableModel,
+    IndexableMultiKeyModel,
+    IndexableSingleKeyModel,
+)
 
 
 class SplitParamsModel(TypedDict):
@@ -18,6 +22,18 @@ class SplitParamsModel(TypedDict):
 class BaseDataModel[T](IndexableModel, ABC):
     @abstractmethod
     def __init__(self, data: T) -> None: ...
+
+    @overload
+    def __getitem__(self, key: IndexableSingleKeyModel) -> Self: ...
+
+    @overload
+    def __getitem__(self, key: IndexableMultiKeyModel) -> Any: ...
+
+    @abstractmethod
+    def __getitem__(self, key: IndexableSingleKeyModel | IndexableMultiKeyModel) -> Self | Any: ...
+
+    @abstractmethod
+    def __len__(self) -> int: ...
 
     @abstractmethod
     def concat(self, other: Self) -> Self: ...

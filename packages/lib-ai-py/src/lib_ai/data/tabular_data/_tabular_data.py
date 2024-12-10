@@ -11,7 +11,6 @@ from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataKeyModel,
     _TabularDataModel,
     _TabularDataStringKeyModel,
-    _TabularDataTypeModel,
 )
 from lib_ai.data.tabular_data.tabular_data_constants import TabularDataType
 from lib_shared.core.core import DataType
@@ -19,9 +18,6 @@ from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 
 
 class _TabularData(_TabularDataModel):
-    def __init__(self, data: _TabularDataTypeModel) -> None:
-        self._data = data
-
     @overload
     def __getitem__(self, key: _TabularDataStringKeyModel) -> MatrixData: ...
 
@@ -38,9 +34,6 @@ class _TabularData(_TabularDataModel):
             raise InvalidTypeException()
         return type(self)(data=self.data[cast(int | Sequence[int] | slice, key)])
 
-    def __len__(self) -> int:
-        return len(self.data)
-
     @property
     def columns(self) -> Sequence[str]:
         return self.data.columns
@@ -51,14 +44,6 @@ class _TabularData(_TabularDataModel):
             case TabularDataType.DATAFRAME:
                 result = pl.concat([cast(pl.DataFrame, result), other.to_dataframe()])
         return type(self)(data=result)
-
-    @property
-    def data(self) -> _TabularDataTypeModel:
-        return self._data
-
-    @data.setter
-    def data(self, value: _TabularDataTypeModel) -> None:
-        self._data = value
 
     def drop_columns(self, columns: Sequence[str]) -> Self:
         match self.get_type():
