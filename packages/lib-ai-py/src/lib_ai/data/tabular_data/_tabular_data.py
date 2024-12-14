@@ -1,4 +1,4 @@
-from typing import Any, Mapping, Self, Sequence, Tuple, cast, overload
+from typing import Any, Callable, Mapping, Self, Sequence, Tuple, cast, overload
 
 import numpy as np
 import polars as pl
@@ -30,7 +30,7 @@ class _TabularData(_TabularDataModel):
     ) -> MatrixData | Self:
         if isinstance(key, str):
             if isinstance(self.data, pl.DataFrame):
-                return MatrixData(self.data[key].to_torch())
+                return MatrixData(self.data[key].to_numpy())
             raise InvalidTypeException()
         return type(self)(data=self.data[cast(int | Sequence[int] | slice, key)])
 
@@ -106,6 +106,19 @@ class _TabularData(_TabularDataModel):
                 result = self.to_dataframe().head(n_rows)
         return type(self)(data=result)
 
+    def map(
+        self,
+        column: str,
+        func: Callable[[Any], Any],
+    ) -> Self:
+        result = self.data
+        match self.get_type():
+            case TabularDataType.DATAFRAME:
+                result = self.to_dataframe().with_columns(
+                    pl.struct(pl.all()).map_elements(func).alias(column)
+                )
+        return type(self)(data=result)
+
     @property
     def shape(self) -> Tuple[int, ...]:
         match self.get_type():
@@ -121,7 +134,8 @@ class _TabularData(_TabularDataModel):
         to_type = get_numpy_type(dtype)
         match self.get_type():
             case TabularDataType.DATAFRAME:
-                return cast(pl.DataFrame, self.data).to_numpy().astype(to_type)
+                # return cast(pl.DataFrame, self.data).to_numpy().astype(to_type)
+                return cast(pl.DataFrame, self.data).to_numpy()
             case _:
                 raise InvalidTypeException()
 

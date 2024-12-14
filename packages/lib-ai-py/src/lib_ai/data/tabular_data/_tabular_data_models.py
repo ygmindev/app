@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Any, Mapping, Self, Sequence, Tuple, overload
+from typing import Any, Callable, Mapping, Self, Sequence, Tuple, overload
 
 import polars as pl
 from lib_ai.data.base_data.base_data_models import BaseDataModel
@@ -56,6 +56,13 @@ class _TabularDataModel(BaseDataModel[_TabularDataTypeModel]):
 
     @abstractmethod
     def get_type(self) -> TabularDataType: ...
+
+    @abstractmethod
+    def map(
+        self,
+        column: str,
+        func: Callable[[Any], Any],
+    ) -> Self: ...
 
     @abstractmethod
     def to_dataframe(self) -> pl.DataFrame: ...

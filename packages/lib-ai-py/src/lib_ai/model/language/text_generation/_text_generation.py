@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 
 from lib_ai.data.message_data.message_data_models import MessageModel
@@ -14,6 +15,11 @@ from lib_ai.model.language.text_generation.text_generation_constants import (
 )
 from lib_shared.core.utils.get_item import get_item
 from mlx_lm.utils import generate, load
+
+
+def current_time() -> str:
+    """Get the current local time as a string."""
+    return str(datetime.now())
 
 
 class _TextGeneration(_TextGenerationModel):
@@ -37,6 +43,7 @@ class _TextGeneration(_TextGenerationModel):
                 add_generation_prompt=True,
                 add_special_tokens=False,
                 verbose=True,
+                tools=[current_time],
             )
             return {
                 "content": generate(

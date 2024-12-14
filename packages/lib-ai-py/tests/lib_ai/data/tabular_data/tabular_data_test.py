@@ -105,5 +105,22 @@ def test_split() -> None:
     )
 
 
+def test_map() -> None:
+    result = TABULAR_DATA_FIXTURE_1.map(column="float", func=lambda x: float(x["int"]))
+    assert np.array_equal(
+        result.to_numpy(),
+        np.array(
+            [
+                [0, "a", 0.0],
+                [1, "b", 1.0],
+                [2, "c", 2.0],
+                [3, "d", 3.0],
+                [4, "e", 4.0],
+            ],
+            dtype=object,
+        ),
+    )
+
+
 def test_shape() -> None:
     assert TABULAR_DATA_FIXTURE_1.shape == (5, 2)
