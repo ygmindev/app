@@ -18,6 +18,7 @@ class BaseRegression[
     TDataset: XYDataset,
     TFit: BaseRegressionFitParamsModel,
     TEval: BaseRegressionEvalParamsModel,
+    TPred: 
 ](
     BaseModel[
         TParams,

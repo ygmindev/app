@@ -17,15 +17,22 @@ from sklearn.metrics.pairwise import cosine_similarity
 def test_works() -> None:
     model = SentenceTransformer("mixedbread-ai/mxbai-embed-large-v1")
 
-    doc = """
-        On 3 December 2024, at 22:27 Korea Standard Time (KST), Yoon Suk Yeol, the president of South Korea, declared martial law during a televised address.
-        In his declaration, Yoon accused the Democratic Party (DPK), which has a majority in the National Assembly, of conducting "anti-state activities" and collaborating with "North Korean communists" to destroy the country, thereby creating a "legislative dictatorship".
-        The order prohibited political activities, including gatherings of the National Assembly and local legislatures, and suspended the free press.
-        Separately, Yoon reportedly ordered the arrest of various political opponents, including the leaders of the DPK and his own People Power Party (PPP).
-        This event was widely characterized by Korean politicians and news organizations, both international and domestic, as an attempted self-coup.
-    """
-    docs = [sent.strip() for sent in doc.split(".")]
-    print(docs)
+    docs = [
+        """
+            Lionel Andrés "Leo" Messi[note 1] (Spanish pronunciation: [ljoˈnel anˈdɾes ˈmesi] ⓘ; born 24 June 1987), is an Argentine professional footballer who plays as a forward for and captains both Major League Soccer club Inter Miami and the Argentina national team. Widely regarded as one of the greatest players of all time, Messi set numerous records for individual accolades won throughout his professional footballing career such as eight Ballon d'Or awards and eight times being named the world's best player by FIFA.[note 2] He is the most decorated player in the history of professional football having won 45 team trophies,[note 3] including twelve Big Five league titles, four UEFA Champions Leagues, two Copa Américas, and one FIFA World Cup. Messi holds the records for most European Golden Shoes (6), most goals for a single club (672, with Barcelona), most goals (474), hat-tricks (36) and assists (192) in La Liga, most matches played (39), assists (18) and goal contributions (34) in the Copa América, most matches played (26) and goal contributions (21) in the World Cup, most international appearances (191) and international goals (112) by a South American male, and the second-most in the latter category outright. A prolific goalscorer and creative playmaker, Messi has scored over 850 senior career goals for club and country.
+        """,
+        """
+            Donald John Trump (born June 14, 1946) is an American politician, media personality, and businessman who served as the 45th president of the United States from 2017 to 2021. Having won the 2024 presidential election as the nominee of the Republican Party, he is the president-elect and is scheduled to be inaugurated as the 47th president on January 20, 2025.
+        """,
+        """
+            On 3 December 2024, at 22:27 Korea Standard Time (KST), Yoon Suk Yeol, the president of South Korea, declared martial law during a televised address.
+            In his declaration, Yoon accused the Democratic Party (DPK), which has a majority in the National Assembly, of conducting "anti-state activities" and collaborating with "North Korean communists" to destroy the country, thereby creating a "legislative dictatorship".
+            The order prohibited political activities, including gatherings of the National Assembly and local legislatures, and suspended the free press.
+            Separately, Yoon reportedly ordered the arrest of various political opponents, including the leaders of the DPK and his own People Power Party (PPP).
+            This event was widely characterized by Korean politicians and news organizations, both international and domestic, as an attempted self-coup.
+        """,
+    ]
+    docs = [doc.strip() for doc in docs]
     docs_embedded = model.encode(docs, convert_to_tensor=True)
 
     def search(
@@ -35,9 +42,10 @@ def test_works() -> None:
         embedded = model.encode(query, convert_to_tensor=True)
         similarities = util.pytorch_cos_sim(embedded, docs_embedded)[0]
         index = similarities.argmax().item()
+        print(f"@@@ {index}")
         return ""
 
-    result = search("What did the president order?", k=5)
+    result = search("who is trump?", k=5)
     print(result)
 
 

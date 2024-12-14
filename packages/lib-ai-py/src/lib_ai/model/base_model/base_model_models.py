@@ -26,6 +26,9 @@ class BaseModelEvalParamsModel(TypedDict): ...
 class BaseModelFitParamsModel(TypedDict): ...
 
 
+class BaseModelPredictParamsModel(TypedDict): ...
+
+
 class BaseModelCvModel(TypedDict):
     average: float
     scores: List[float]
@@ -36,6 +39,7 @@ class BaseModelModel[
     TDataset: XYDataset,
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,
+    TPred: BaseModelPredictParamsModel,
 ](ABC):
     _params: TParams | None
 
@@ -67,6 +71,7 @@ class BaseModelModel[
     def predict(
         self,
         dataset: TDataset,
+        params: TPred | None = None,
     ) -> MatrixData: ...
 
     @abstractmethod

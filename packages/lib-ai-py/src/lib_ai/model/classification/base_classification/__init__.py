@@ -9,6 +9,7 @@ from lib_ai.model.classification.base_classification.base_classification_models 
     BaseClassificationFitParamsModel,
     BaseClassificationModel,
     BaseClassificationParamsModel,
+    BaseClassificationPredParamsModel,
 )
 from lib_ai.scoring.scorer.accuracy_scorer import accuracy_scorer
 from lib_ai.scoring.scorer.cross_entropy_scorer import cross_entropy_scorer
@@ -22,18 +23,21 @@ class BaseClassification[
     TDataset: XYDataset,
     TFit: BaseClassificationFitParamsModel,
     TEval: BaseClassificationEvalParamsModel,
+    TPred: BaseClassificationPredParamsModel,
 ](
     BaseModel[
         TParams,
         TDataset,
         TFit,
         TEval,
+        TPred,
     ],
     BaseClassificationModel[
         TParams,
         TDataset,
         TFit,
         TEval,
+        TPred,
     ],
 ):
     def __init__(self, params: TParams | None = None) -> None:

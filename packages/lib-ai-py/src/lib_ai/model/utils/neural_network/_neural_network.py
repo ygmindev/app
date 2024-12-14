@@ -8,7 +8,10 @@ from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
 from lib_ai.model.base_model import BaseModel
 from lib_ai.model.base_model.base_model_constants import Optimizer
-from lib_ai.model.base_model.base_model_models import BaseModelEvalParamsModel
+from lib_ai.model.base_model.base_model_models import (
+    BaseModelEvalParamsModel,
+    BaseModelPredictParamsModel,
+)
 from lib_ai.model.utils.early_stopping import EarlyStopping
 from lib_ai.model.utils.neural_network._neural_network_models import (
     _NeuralNetworkFitParamsModel,
@@ -39,16 +42,19 @@ class _Module(torch.nn.Module):
 class _NeuralNetwork[
     TFit: _NeuralNetworkFitParamsModel,
     TEval: BaseModelEvalParamsModel,
+    TPred: BaseModelPredictParamsModel,
 ](
     BaseModel[
         _NeuralNetworkParamsModel,
         XYMatrixDataset,
         TFit,
         TEval,
+        TPred,
     ],
     _NeuralNetworkModel[
         TFit,
         TEval,
+        TPred,
     ],
 ):
     def __init__(self, params: _NeuralNetworkParamsModel) -> None:
@@ -59,6 +65,7 @@ class _NeuralNetwork[
     def predict(
         self,
         dataset: XYMatrixDataset,
+        _params: TPred | None = None,
     ) -> MatrixData:
         y_pred = self.predict_probability(dataset)
         if self._is_classification:
@@ -68,6 +75,7 @@ class _NeuralNetwork[
     def predict_probability(
         self,
         dataset: XYMatrixDataset,
+        _params: TPred | None = None,
     ) -> MatrixData:
         self._module.train(mode=False)
         return MatrixData(self._module(dataset.x.to_tensor()))

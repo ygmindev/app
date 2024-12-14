@@ -9,6 +9,7 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelFitParamsModel,
     BaseModelModel,
     BaseModelParamsModel,
+    BaseModelPredictParamsModel,
 )
 
 
@@ -21,21 +22,27 @@ class BaseClassificationEvalParamsModel(BaseModelEvalParamsModel): ...
 class BaseClassificationFitParamsModel(BaseModelFitParamsModel): ...
 
 
+class BaseClassificationPredParamsModel(BaseModelPredictParamsModel): ...
+
+
 class BaseClassificationModel[
     TParams: BaseClassificationParamsModel,
     TDataset: XYDataset,
     TFit: BaseClassificationFitParamsModel,
     TEval: BaseClassificationEvalParamsModel,
+    TPred: BaseClassificationPredParamsModel,
 ](
     BaseModelModel[
         TParams,
         TDataset,
         TFit,
         TEval,
+        TPred,
     ]
 ):
     @abstractmethod
     def predict_probability(
         self,
         dataset: TDataset,
+        params: TPred | None = None,
     ) -> MatrixData: ...

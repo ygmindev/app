@@ -17,11 +17,6 @@ from lib_shared.core.utils.get_item import get_item
 from mlx_lm.utils import generate, load
 
 
-def current_time() -> str:
-    """Get the current local time as a string."""
-    return str(datetime.now())
-
-
 class _TextGeneration(_TextGenerationModel):
     def __init__(self, params: _TextGenerationParamsModel) -> None:
         key = get_item(params, "key")
@@ -43,7 +38,6 @@ class _TextGeneration(_TextGenerationModel):
                 add_generation_prompt=True,
                 add_special_tokens=False,
                 verbose=True,
-                tools=[current_time],
             )
             return {
                 "content": generate(
