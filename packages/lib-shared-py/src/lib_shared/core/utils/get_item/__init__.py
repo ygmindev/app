@@ -1,4 +1,4 @@
-from typing import Unpack
+from typing import Mapping, Unpack
 
 from lib_shared.core.utils.get_item._get_item import _get_item
 from lib_shared.core.utils.get_item.get_item_models import (
@@ -7,5 +7,5 @@ from lib_shared.core.utils.get_item.get_item_models import (
 )
 
 
-def get_item(*params: Unpack[GetItemParamsModel]) -> GetItemModel:
+def get_item[T: Mapping](*params: Unpack[GetItemParamsModel[T]]) -> GetItemModel:
     return _get_item(*params)
