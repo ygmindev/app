@@ -10,7 +10,7 @@ from lib_ai.model.base_model import BaseModel
 from lib_ai.model.base_model.base_model_constants import Optimizer
 from lib_ai.model.base_model.base_model_models import (
     BaseModelEvalParamsModel,
-    BaseModelPredictParamsModel,
+    BaseModelPredParamsModel,
 )
 from lib_ai.model.utils.early_stopping import EarlyStopping
 from lib_ai.model.utils.neural_network._neural_network_models import (
@@ -42,7 +42,7 @@ class _Module(torch.nn.Module):
 class _NeuralNetwork[
     TFit: _NeuralNetworkFitParamsModel,
     TEval: BaseModelEvalParamsModel,
-    TPred: BaseModelPredictParamsModel,
+    TPred: BaseModelPredParamsModel,
 ](
     BaseModel[
         _NeuralNetworkParamsModel,

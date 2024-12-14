@@ -26,7 +26,7 @@ class BaseModelEvalParamsModel(TypedDict): ...
 class BaseModelFitParamsModel(TypedDict): ...
 
 
-class BaseModelPredictParamsModel(TypedDict): ...
+class BaseModelPredParamsModel(TypedDict): ...
 
 
 class BaseModelCvModel(TypedDict):
@@ -39,7 +39,7 @@ class BaseModelModel[
     TDataset: XYDataset,
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,
-    TPred: BaseModelPredictParamsModel,
+    TPred: BaseModelPredParamsModel,
 ](ABC):
     _params: TParams | None
 

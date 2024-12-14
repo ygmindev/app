@@ -2,13 +2,13 @@ from __future__ import annotations
 
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
-from lib_ai.model.base_model import BaseModel
 from lib_ai.model.regression.base_regression import BaseRegression
 from lib_ai.model.regression.xgboost_regression._xgboost_regression_models import (
     _XgboostRegressionEvalParamsModel,
     _XgboostRegressionFitParamsModel,
     _XgboostRegressionModel,
     _XgboostRegressionParamsModel,
+    _XgboostRegressionPredParamsModel,
 )
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.not_found_exception import NotFoundException
@@ -22,6 +22,7 @@ class _XgboostRegression(
         XYMatrixDataset,
         _XgboostRegressionFitParamsModel,
         _XgboostRegressionEvalParamsModel,
+        _XgboostRegressionPredParamsModel,
     ],
     _XgboostRegressionModel,
 ):

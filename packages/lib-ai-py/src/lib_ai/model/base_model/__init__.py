@@ -12,7 +12,7 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelFitParamsModel,
     BaseModelModel,
     BaseModelParamsModel,
-    BaseModelPredictParamsModel,
+    BaseModelPredParamsModel,
     OptimizeParamsOptionalModel,
 )
 from lib_ai.optimize.utils.optimize import optimize
@@ -29,7 +29,7 @@ class BaseModel[
     TDataset: XYDataset,
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,
-    TPred: BaseModelPredictParamsModel,
+    TPred: BaseModelPredParamsModel,
 ](
     BaseModelModel[
         TParams,

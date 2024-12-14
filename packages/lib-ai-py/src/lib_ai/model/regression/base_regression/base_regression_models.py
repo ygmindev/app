@@ -4,7 +4,7 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelFitParamsModel,
     BaseModelModel,
     BaseModelParamsModel,
-    BaseModelPredictParamsModel,
+    BaseModelPredParamsModel,
 )
 
 
@@ -17,7 +17,7 @@ class BaseRegressionEvalParamsModel(BaseModelEvalParamsModel): ...
 class BaseRegressionFitParamsModel(BaseModelFitParamsModel): ...
 
 
-class BaseRegressionPredictParamsModel(BaseModelEvalParamsModel): ...
+class BaseRegressionPredParamsModel(BaseModelEvalParamsModel): ...
 
 
 class BaseRegressionModel[
@@ -25,7 +25,7 @@ class BaseRegressionModel[
     TDataset: XYDataset,
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,
-    TPred: BaseModelPredictParamsModel,
+    TPred: BaseModelPredParamsModel,
 ](
     BaseModelModel[
         TParams,

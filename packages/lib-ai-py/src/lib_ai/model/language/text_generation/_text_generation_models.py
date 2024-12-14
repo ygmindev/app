@@ -6,6 +6,7 @@ from lib_ai.model.language.base_language.base_language_models import (
     BaseLanguageFitParamsModel,
     BaseLanguageModel,
     BaseLanguageParamsModel,
+    BaseLanguagePredParamsModel,
 )
 from lib_ai.model.language.text_generation.text_generation_constants import (
     TextGenerationKey,
@@ -19,12 +20,12 @@ class _TextGenerationParamsModel(BaseLanguageParamsModel):
 class _TextGenerationFitParamsModel(BaseLanguageFitParamsModel): ...
 
 
-class _TextGenerationEvalParamsModel(BaseLanguageEvalParamsModel):
-    ...
+class _TextGenerationEvalParamsModel(BaseLanguageEvalParamsModel): ...
 
 
-class _TextGenerationPredictParamsModel(BaseLanguagePredictParamsModel):
+class _TextGenerationPredParamsModel(BaseLanguagePredParamsModel):
     max_tokens: NotRequired[int]
+
 
 class _TextGenerationModel(
     BaseLanguageModel[
@@ -32,5 +33,6 @@ class _TextGenerationModel(
         XYChatDataset,
         _TextGenerationFitParamsModel,
         _TextGenerationEvalParamsModel,
+        _TextGenerationPredParamsModel,
     ],
 ): ...

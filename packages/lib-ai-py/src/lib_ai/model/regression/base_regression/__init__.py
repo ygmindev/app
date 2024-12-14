@@ -7,6 +7,7 @@ from lib_ai.model.regression.base_regression.base_regression_models import (
     BaseRegressionFitParamsModel,
     BaseRegressionModel,
     BaseRegressionParamsModel,
+    BaseRegressionPredParamsModel,
 )
 from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_shared.core.utils.merge import merge
@@ -18,19 +19,21 @@ class BaseRegression[
     TDataset: XYDataset,
     TFit: BaseRegressionFitParamsModel,
     TEval: BaseRegressionEvalParamsModel,
-    TPred: 
+    TPred: BaseRegressionPredParamsModel,
 ](
     BaseModel[
         TParams,
         TDataset,
         TFit,
         TEval,
+        TPred,
     ],
     BaseRegressionModel[
         TParams,
         TDataset,
         TFit,
         TEval,
+        TPred,
     ],
 ):
     def __init__(self, params: TParams | None = None) -> None:

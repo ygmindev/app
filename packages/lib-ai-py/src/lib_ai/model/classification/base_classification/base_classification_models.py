@@ -9,7 +9,7 @@ from lib_ai.model.base_model.base_model_models import (
     BaseModelFitParamsModel,
     BaseModelModel,
     BaseModelParamsModel,
-    BaseModelPredictParamsModel,
+    BaseModelPredParamsModel,
 )
 
 
@@ -22,7 +22,7 @@ class BaseClassificationEvalParamsModel(BaseModelEvalParamsModel): ...
 class BaseClassificationFitParamsModel(BaseModelFitParamsModel): ...
 
 
-class BaseClassificationPredParamsModel(BaseModelPredictParamsModel): ...
+class BaseClassificationPredParamsModel(BaseModelPredParamsModel): ...
 
 
 class BaseClassificationModel[

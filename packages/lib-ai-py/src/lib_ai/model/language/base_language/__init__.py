@@ -7,7 +7,7 @@ from lib_ai.model.language.base_language.base_language_models import (
     BaseLanguageFitParamsModel,
     BaseLanguageModel,
     BaseLanguageParamsModel,
-    BaseLanguagePredictParamsModel,
+    BaseLanguagePredParamsModel,
 )
 
 
@@ -16,7 +16,7 @@ class BaseLanguage[
     TDataset: XYDataset,
     TFit: BaseLanguageFitParamsModel,
     TEval: BaseLanguageEvalParamsModel,
-    TPred: BaseLanguagePredictParamsModel,
+    TPred: BaseLanguagePredParamsModel,
 ](
     BaseModel[
         TParams,

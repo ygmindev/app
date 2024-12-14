@@ -6,6 +6,7 @@ from lib_ai.model.regression.base_regression.base_regression_models import (
     BaseRegressionFitParamsModel,
     BaseRegressionModel,
     BaseRegressionParamsModel,
+    BaseRegressionPredParamsModel,
 )
 
 
@@ -22,11 +23,15 @@ class _XgboostRegressionFitParamsModel(BaseRegressionFitParamsModel): ...
 class _XgboostRegressionEvalParamsModel(BaseRegressionEvalParamsModel): ...
 
 
+class _XgboostRegressionPredParamsModel(BaseRegressionPredParamsModel): ...
+
+
 class _XgboostRegressionModel(
     BaseRegressionModel[
         _XgboostRegressionParamsModel,
         XYMatrixDataset,
         _XgboostRegressionFitParamsModel,
         _XgboostRegressionEvalParamsModel,
+        _XgboostRegressionPredParamsModel,
     ],
 ): ...

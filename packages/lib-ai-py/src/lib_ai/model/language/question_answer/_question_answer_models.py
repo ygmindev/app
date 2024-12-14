@@ -6,6 +6,7 @@ from lib_ai.model.language.base_language.base_language_models import (
     BaseLanguageFitParamsModel,
     BaseLanguageModel,
     BaseLanguageParamsModel,
+    BaseLanguagePredParamsModel,
 )
 from lib_ai.model.language.question_answer.question_answer_constants import (
     QuestionAnswerKey,
@@ -24,11 +25,15 @@ class _QuestionAnswerFitParamsModel(BaseLanguageFitParamsModel):
 class _QuestionAnswerEvalParamsModel(BaseLanguageEvalParamsModel): ...
 
 
+class _QuestionAnswerPredParamsModel(BaseLanguagePredParamsModel): ...
+
+
 class _QuestionAnswerModel(
     BaseLanguageModel[
         _QuestionAnswerParamsModel,
         XYQuestionAnswerDataset,
         _QuestionAnswerFitParamsModel,
         _QuestionAnswerEvalParamsModel,
+        _QuestionAnswerPredParamsModel,
     ],
 ): ...
