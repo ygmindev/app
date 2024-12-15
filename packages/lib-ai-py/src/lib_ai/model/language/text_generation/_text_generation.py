@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import List, cast
 
 from lib_ai.data.message_data.message_data_models import MessageModel
@@ -20,9 +19,11 @@ from transformers import PreTrainedTokenizerBase
 
 
 class _TextGeneration(_TextGenerationModel):
+    _messages: List[MessageModel] | None
+
     def __init__(self, params: _TextGenerationParamsModel) -> None:
         key = get_item(params, "key")
-        messages = get_item(params, "messages", [])
+        self._messages = get_item(params, "messages", [])
         match key:
             case TextGenerationKey.LLAMA:
                 key = "mlx-community/Meta-Llama-3.1-8B-Instruct-4bit"
@@ -35,11 +36,11 @@ class _TextGeneration(_TextGenerationModel):
         dataset: XYChatDataset,
         params: _TextGenerationPredParamsModel | None = None,
     ) -> TextOutputData:
-        max_tokens = get_item(params, "max_tokens", 100)
+        max_tokens = get_item(params, "max_tokens", 500)
 
         def _predict(row: List[MessageModel]) -> TextOutputModel:
             prompt = cast(PreTrainedTokenizerBase, self._tokenizer).apply_chat_template(
-                 ,
+                self._messages + row,
                 tokenize=False,
                 add_generation_prompt=True,
                 add_special_tokens=False,

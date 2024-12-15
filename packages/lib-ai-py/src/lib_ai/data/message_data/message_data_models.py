@@ -7,7 +7,6 @@ from lib_ai.data.base_data.base_data_models import BaseDataModel
 class MessageRole(str, Enum):
     USER = "user"
     SYSTEM = "system"
-    ASSISTANT = "assistant"
 
 
 class MessageModel(TypedDict):
