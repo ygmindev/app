@@ -5,7 +5,7 @@ from accelerate import Accelerator
 from lib_ai.core.utils.chunks import chunks
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
+from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model import BaseModel
 from lib_ai.model.base_model.base_model_constants import Optimizer
 from lib_ai.model.base_model.base_model_models import (
@@ -46,10 +46,11 @@ class _NeuralNetwork[
 ](
     BaseModel[
         _NeuralNetworkParamsModel,
-        XYMatrixDataset,
         TFit,
         TEval,
         TPred,
+        MatrixData,
+        MatrixData,
     ],
     _NeuralNetworkModel[
         TFit,
@@ -64,25 +65,25 @@ class _NeuralNetwork[
 
     def predict(
         self,
-        dataset: XYMatrixDataset,
+        data: MatrixData,
         _params: TPred | None = None,
     ) -> MatrixData:
-        y_pred = self.predict_probability(dataset)
+        y_pred = self.predict_probability(data)
         if self._is_classification:
             return MatrixData(y_pred.to_tensor().argmax(dim=1))
         return y_pred
 
     def predict_probability(
         self,
-        dataset: XYMatrixDataset,
+        data: MatrixData,
         _params: TPred | None = None,
     ) -> MatrixData:
         self._module.train(mode=False)
-        return MatrixData(self._module(dataset.x.to_tensor()))
+        return MatrixData(self._module(data.to_tensor()))
 
     def fit(
         self,
-        dataset: XYMatrixDataset,
+        dataset: XYDataset[MatrixData, MatrixData],
         params: TFit | None = None,
     ) -> None:
         objective = get_item(self._params, "objective")

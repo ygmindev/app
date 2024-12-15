@@ -1,5 +1,6 @@
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.dataset.xy_text_encoding_dataset import XYTextEncodingDataset
+from lib_ai.data.text_data import TextData
+from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.language.text_encoder._text_encoder_models import (
     _TextEncoderFitParamsModel,
     _TextEncoderModel,
@@ -16,16 +17,16 @@ class _TextEncoder(_TextEncoderModel):
 
     def predict(
         self,
-        dataset: XYTextEncodingDataset,
+        data: TextData,
         params: _TextEncoderPredParamsModel | None = None,
     ) -> MatrixData:
         def _predict(row: str) -> Tensor:
             return self._model.encode(row)
 
-        return MatrixData(list(map(_predict, dataset.x.data)))
+        return MatrixData(list(map(_predict, data.data)))
 
     def fit(
         self,
-        dataset: XYTextEncodingDataset,
+        dataset: XYDataset[TextData, MatrixData],
         params: _TextEncoderFitParamsModel | None = None,
     ) -> None: ...

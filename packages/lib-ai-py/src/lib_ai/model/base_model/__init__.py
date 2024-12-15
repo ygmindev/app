@@ -5,6 +5,7 @@ from typing import Mapping, Sequence, cast
 import numpy as np
 from lib_ai.core.utils.kfold import kfold
 from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
+from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model.base_model_models import (
     BaseModelCvModel,
@@ -26,17 +27,19 @@ from lib_shared.core.utils.not_found_exception import NotFoundException
 
 class BaseModel[
     TParams: BaseModelParamsModel,
-    TDataset: XYDataset,
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,
     TPred: BaseModelPredParamsModel,
+    TX: BaseDataModel,
+    TY: BaseDataModel | None,
 ](
     BaseModelModel[
         TParams,
-        TDataset,
         TFit,
         TEval,
         TPred,
+        TX,
+        TY,
     ]
 ):
     def __init__(
@@ -47,7 +50,7 @@ class BaseModel[
 
     def cv(
         self,
-        dataset: TDataset,
+        dataset: XYDataset[TX, TY],
         instance_params: TParams,
         kfold_params: KfoldParamsModel,
         eval_params: TEval | None = None,
@@ -73,7 +76,7 @@ class BaseModel[
 
     def optimize(
         self,
-        dataset: TDataset,
+        dataset: XYDataset[TX, TY],
         instance_params: TParams,
         kfold_params: KfoldParamsModel,
         params: OptimizeParamsOptionalModel,
@@ -114,7 +117,7 @@ class BaseModel[
 
     def evaluate(
         self,
-        dataset: TDataset,
+        dataset: XYDataset[TX, TY],
         params: TEval | None = None,
     ) -> Mapping[str, float]:
         scorers = get_item(self._params, "scorers")
@@ -123,7 +126,7 @@ class BaseModel[
         if y is None:
             raise NotFoundException("y")
 
-        y_pred = self.predict(dataset)
+        y_pred = self.predict(dataset.x)
         if y_pred is None:
             raise NotFoundException("y_pred")
 

@@ -1,6 +1,4 @@
-from typing import TypedDict
-
-from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
+from lib_ai.data.matrix_data import MatrixData
 from lib_ai.model.base_model.base_model_models import (
     BaseModelEvalParamsModel,
     BaseModelPredParamsModel,
@@ -30,9 +28,10 @@ class LinearRegressionPredParamsModel(BaseModelPredParamsModel): ...
 class LinearRegressionModel(
     BaseRegressionModel[
         LinearRegressionParamsModel,
-        XYMatrixDataset,
         LinearRegressionFitParamsModel,
         LinearRegressionEvalParamsModel,
         LinearRegressionPredParamsModel,
+        MatrixData,
+        MatrixData,
     ],
 ): ...

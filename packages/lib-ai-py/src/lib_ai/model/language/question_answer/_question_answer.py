@@ -4,8 +4,9 @@ from datasets import Dataset
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.data.answer_data import AnswerData
 from lib_ai.data.answer_data.answer_data_models import AnswerInstanceModel, AnswerModel
+from lib_ai.data.question_data import QuestionData
 from lib_ai.data.question_data.question_data_models import QuestionModel
-from lib_ai.dataset.xy_question_answer_dataset import XYQuestionAnswerDataset
+from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.language.question_answer._question_answer_models import (
     _QuestionAnswerFitParamsModel,
     _QuestionAnswerModel,
@@ -33,7 +34,7 @@ class _QuestionAnswer(_QuestionAnswerModel):
 
     def predict(
         self,
-        dataset: XYQuestionAnswerDataset,
+        data: QuestionData,
     ) -> AnswerData:
         def _predict_row(question: QuestionModel) -> AnswerModel:
             def _predict(x: str) -> AnswerInstanceModel:
@@ -55,11 +56,11 @@ class _QuestionAnswer(_QuestionAnswerModel):
             rows = get_item(question, "questions", [])
             return {"answers": list(map(_predict, rows))}
 
-        return AnswerData(list(map(_predict_row, dataset.x.data)))
+        return AnswerData(list(map(_predict_row, data.data)))
 
     def fit(
         self,
-        dataset: XYQuestionAnswerDataset,
+        dataset: XYDataset[QuestionData, AnswerData],
         params: _QuestionAnswerFitParamsModel | None = None,
     ) -> None:
         max_length = get_item(params, "max_length", 384)

@@ -1,7 +1,7 @@
 from typing import List, NotRequired
 
+from lib_ai.data.message_data import MessageData
 from lib_ai.data.message_data.message_data_models import MessageModel
-from lib_ai.dataset.xy_chat_dataset import XYChatDataset
 from lib_ai.model.language.base_language.base_language_models import (
     BaseLanguageEvalParamsModel,
     BaseLanguageFitParamsModel,
@@ -32,9 +32,10 @@ class _TextGenerationPredParamsModel(BaseLanguagePredParamsModel):
 class _TextGenerationModel(
     BaseLanguageModel[
         _TextGenerationParamsModel,
-        XYChatDataset,
         _TextGenerationFitParamsModel,
         _TextGenerationEvalParamsModel,
         _TextGenerationPredParamsModel,
+        MessageData,
+        MessageData,
     ],
 ): ...

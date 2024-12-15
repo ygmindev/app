@@ -1,5 +1,4 @@
 from lib_ai.data.message_data.message_data_models import MessageRole
-from lib_ai.model.language.base_language import BaseLanguage
 from lib_ai.model.language.knowledge.knowledge_models import (
     KnowledgeModel,
     KnowledgeParamsModel,

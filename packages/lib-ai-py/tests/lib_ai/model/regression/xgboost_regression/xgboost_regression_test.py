@@ -1,9 +1,8 @@
 from lib_ai.data.tabular_data import TabularData
 from lib_ai.dataset.utils.download_dataset import download_dataset
-from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
+from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.regression.xgboost_regression import XgboostRegression
 from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
-from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
 from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
     OneHotEncoderTransformer,
@@ -37,7 +36,7 @@ def test_works() -> None:
     y_column = "Performance Index"
     x, y = data.drop_columns([y_column]), data[y_column]
     x = pipeline.fit_transform(x).to_matrix()
-    trainset, testset = XYMatrixDataset(x=x, y=y).split()
+    trainset, testset = XYDataset(x=x, y=y).split()
     trainset, validationset = trainset.split()
     model = XgboostRegression()
 

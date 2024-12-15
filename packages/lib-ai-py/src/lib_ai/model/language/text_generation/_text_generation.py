@@ -1,9 +1,10 @@
 from typing import List, cast
 
+from lib_ai.data.message_data import MessageData
 from lib_ai.data.message_data.message_data_models import MessageModel
 from lib_ai.data.text_output_data import TextOutputData
 from lib_ai.data.text_output_data.text_output_data_models import TextOutputModel
-from lib_ai.dataset.xy_chat_dataset import XYChatDataset
+from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.language.text_generation._text_generation_models import (
     _TextGenerationFitParamsModel,
     _TextGenerationModel,
@@ -33,7 +34,7 @@ class _TextGeneration(_TextGenerationModel):
 
     def predict(
         self,
-        dataset: XYChatDataset,
+        data: MessageData,
         params: _TextGenerationPredParamsModel | None = None,
     ) -> TextOutputData:
         max_tokens = get_item(params, "max_tokens", 500)
@@ -55,10 +56,10 @@ class _TextGeneration(_TextGenerationModel):
                 )
             }
 
-        return TextOutputData(list(map(_predict, dataset.x.data)))
+        return TextOutputData(list(map(_predict, x.data)))
 
     def fit(
         self,
-        dataset: XYChatDataset,
+        dataset: XYDataset[MessageData, MessageData],
         params: _TextGenerationFitParamsModel | None = None,
     ) -> None: ...

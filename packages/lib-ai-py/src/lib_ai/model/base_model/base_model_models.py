@@ -4,6 +4,7 @@ from abc import ABC, abstractmethod
 from typing import List, Mapping, Never, NotRequired, Sequence, TypedDict
 
 from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
+from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
@@ -36,10 +37,11 @@ class BaseModelCvModel(TypedDict):
 
 class BaseModelModel[
     TParams: BaseModelParamsModel,
-    TDataset: XYDataset,
     TFit: BaseModelFitParamsModel,
     TEval: BaseModelEvalParamsModel,
     TPred: BaseModelPredParamsModel,
+    TX: BaseDataModel,
+    TY: BaseDataModel | None,
 ](ABC):
     _params: TParams | None
 
@@ -49,7 +51,7 @@ class BaseModelModel[
     @abstractmethod
     def cv(
         self,
-        dataset: TDataset,
+        dataset: XYDataset[TX, TY],
         instance_params: TParams,
         kfold_params: KfoldParamsModel,
         eval_params: TEval | None = None,
@@ -59,7 +61,7 @@ class BaseModelModel[
     @abstractmethod
     def optimize(
         self,
-        dataset: TDataset,
+        dataset: XYDataset[TX, TY],
         params: OptimizeParamsOptionalModel,
         instance_params: TParams,
         kfold_params: KfoldParamsModel,
@@ -70,21 +72,21 @@ class BaseModelModel[
     @abstractmethod
     def predict(
         self,
-        dataset: TDataset,
+        data: TX,
         params: TPred | None = None,
     ) -> MatrixData: ...
 
     @abstractmethod
     def evaluate(
         self,
-        dataset: TDataset,
+        dataset: XYDataset[TX, TY],
         params: TEval | None = None,
     ) -> Mapping[str, float]: ...
 
     @abstractmethod
     def fit(
         self,
-        dataset: TDataset,
+        dataset: XYDataset[TX, TY],
         params: TFit | None = None,
     ) -> None: ...
 

@@ -1,6 +1,7 @@
 from typing import NotRequired
 
-from lib_ai.dataset.xy_question_answer_dataset import XYQuestionAnswerDataset
+from lib_ai.data.answer_data import AnswerData
+from lib_ai.data.question_data import QuestionData
 from lib_ai.model.language.base_language.base_language_models import (
     BaseLanguageEvalParamsModel,
     BaseLanguageFitParamsModel,
@@ -31,9 +32,10 @@ class _QuestionAnswerPredParamsModel(BaseLanguagePredParamsModel): ...
 class _QuestionAnswerModel(
     BaseLanguageModel[
         _QuestionAnswerParamsModel,
-        XYQuestionAnswerDataset,
         _QuestionAnswerFitParamsModel,
         _QuestionAnswerEvalParamsModel,
         _QuestionAnswerPredParamsModel,
+        QuestionData,
+        AnswerData,
     ],
 ): ...

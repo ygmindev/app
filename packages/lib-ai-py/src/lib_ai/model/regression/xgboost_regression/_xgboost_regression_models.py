@@ -1,6 +1,6 @@
 from typing import NotRequired
 
-from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
+from lib_ai.data.matrix_data import MatrixData
 from lib_ai.model.regression.base_regression.base_regression_models import (
     BaseRegressionEvalParamsModel,
     BaseRegressionFitParamsModel,
@@ -29,9 +29,10 @@ class _XgboostRegressionPredParamsModel(BaseRegressionPredParamsModel): ...
 class _XgboostRegressionModel(
     BaseRegressionModel[
         _XgboostRegressionParamsModel,
-        XYMatrixDataset,
         _XgboostRegressionFitParamsModel,
         _XgboostRegressionEvalParamsModel,
         _XgboostRegressionPredParamsModel,
+        MatrixData,
+        MatrixData,
     ],
 ): ...

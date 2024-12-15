@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.model.base_model import BaseModel
 from lib_ai.model.language.base_language.base_language_models import (
     BaseLanguageEvalParamsModel,
@@ -13,23 +13,26 @@ from lib_ai.model.language.base_language.base_language_models import (
 
 class BaseLanguage[
     TParams: BaseLanguageParamsModel,
-    TDataset: XYDataset,
     TFit: BaseLanguageFitParamsModel,
     TEval: BaseLanguageEvalParamsModel,
     TPred: BaseLanguagePredParamsModel,
+    TX: BaseDataModel,
+    TY: BaseDataModel | None,
 ](
     BaseModel[
         TParams,
-        TDataset,
         TFit,
         TEval,
         TPred,
+        TX,
+        TY,
     ],
     BaseLanguageModel[
         TParams,
-        TDataset,
         TFit,
         TEval,
         TPred,
+        TX,
+        TY,
     ],
 ): ...

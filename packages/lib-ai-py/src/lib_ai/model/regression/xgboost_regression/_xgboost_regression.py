@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.dataset.xy_matrix_dataset import XYMatrixDataset
+from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.regression.base_regression import BaseRegression
 from lib_ai.model.regression.xgboost_regression._xgboost_regression_models import (
     _XgboostRegressionEvalParamsModel,
@@ -19,10 +19,11 @@ from xgboost import XGBRegressor
 class _XgboostRegression(
     BaseRegression[
         _XgboostRegressionParamsModel,
-        XYMatrixDataset,
         _XgboostRegressionFitParamsModel,
         _XgboostRegressionEvalParamsModel,
         _XgboostRegressionPredParamsModel,
+        MatrixData,
+        MatrixData,
     ],
     _XgboostRegressionModel,
 ):
@@ -45,14 +46,14 @@ class _XgboostRegression(
 
     def predict(
         self,
-        dataset: XYMatrixDataset,
+        data: MatrixData,
     ) -> MatrixData:
-        y_pred = self._instance.predict(dataset.x.to_numpy())
+        y_pred = self._instance.predict(data.to_numpy())
         return MatrixData(y_pred)
 
     def fit(
         self,
-        dataset: XYMatrixDataset,
+        dataset: XYDataset[MatrixData, MatrixData],
         params: _XgboostRegressionFitParamsModel | None = None,
     ) -> None:
         if dataset.y is None:
