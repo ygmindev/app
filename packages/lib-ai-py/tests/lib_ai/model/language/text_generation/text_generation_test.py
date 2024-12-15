@@ -11,7 +11,7 @@ def test_works() -> None:
     model = Knowledge(
         params={
             "key": TextGenerationKey.LLAMA,
-        }
+        },
     )
     test_dataset = XYChatDataset(
         x=MessageData(
