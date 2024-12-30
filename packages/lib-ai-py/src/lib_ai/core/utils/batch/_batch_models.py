@@ -6,9 +6,9 @@ from lib_shared.core.utils.indexable.indexable_models import IndexableModel
 from lib_shared.core.utils.iterable.iterable_models import IterableModel
 
 
-class _ChunksParamsModel[T](TypedDict):
+class _BatchParamsModel[T](TypedDict):
     data: IndexableModel[T]
-    chunk_size: int
+    batch_size: int
 
 
-class _ChunksModel[T](IterableModel[T]): ...
+class _BatchModel[T](IterableModel[T]): ...

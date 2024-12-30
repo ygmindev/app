@@ -10,7 +10,7 @@ from lib_ai.model.language.question_answer.question_answer_constants import (
 def test_works() -> None:
     model = QuestionAnswer(params={"key": QuestionAnswerKey.BERT})
 
-     x=QuestionData(
+    x = QuestionData(
         [
             {
                 "context": "my name is YG and I am 25 years old",

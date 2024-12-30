@@ -17,7 +17,6 @@ class Knowledge(
             {
                 "content": """
                     You are a helpful assistant.
-
                     - Only use information available on Wikipedia
                     - You must answer the question directly, without speculation
                     - If you are not confident in your answer, begin your response with "Unsure".

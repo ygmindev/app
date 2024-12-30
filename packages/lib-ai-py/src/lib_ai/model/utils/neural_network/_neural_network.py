@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import torch
 from accelerate import Accelerator
-from lib_ai.core.utils.chunks import chunks
+from lib_ai.core.utils.batch import batch
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_dataset import XYDataset
@@ -115,11 +115,15 @@ class _NeuralNetwork[
         early_stopping = EarlyStopping(scoring_mode=scoring_mode)
 
         for epoch in range(n_epochs):
-            for batchset in chunks(
+            for batchset in batch(
                 data=dataset,
-                chunk_size=int(len(dataset) / 5),
+                batch_size=int(len(dataset) / 5),
             ):
+                print(f"@@@ {batchset}")
                 x, y = batchset.x, batchset.y
+                print(f"@@@ {type(dataset.x.data)}")
+                print(f"@@@ {type(x.data)}")
+
                 y_pred = self._module(x.to_tensor())
                 optimizer.zero_grad()
                 loss = objective(MatrixData(data=y_pred), y)

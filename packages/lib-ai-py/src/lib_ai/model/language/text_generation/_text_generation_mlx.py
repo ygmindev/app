@@ -1,7 +1,6 @@
 import os
 from typing import List, cast
 
-from langchain_community.llms.mlx_pipeline import MLXPipeline
 from lib_ai.data.message_data import MessageData
 from lib_ai.data.message_data.message_data_models import MessageModel
 from lib_ai.data.text_output_data import TextOutputData
@@ -18,15 +17,7 @@ from lib_ai.model.language.text_generation.text_generation_constants import (
 )
 from lib_shared.core.utils.get_item import get_item
 from mlx_lm.utils import generate, load
-from transformers import (
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    PreTrainedTokenizerBase,
-    logging,
-    pipeline,
-)
-
-os.environ["HF_TOKEN"] = "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"
+from transformers import PreTrainedTokenizerBase
 
 
 class _TextGeneration(_TextGenerationModel):
@@ -40,6 +31,7 @@ class _TextGeneration(_TextGenerationModel):
                 key = "mlx-community/Meta-Llama-3.1-8B-Instruct-4bit"
             case _:
                 key = "mlx-community/Meta-Llama-3.1-8B-Instruct-4bit"
+
         self._model, self._tokenizer = load(key)
 
     def predict(

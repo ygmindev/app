@@ -1,7 +1,7 @@
 from typing import Any, Unpack, cast, overload
 
 import torch
-from lib_ai.core.utils.chunks._chunks_models import _ChunksModel, _ChunksParamsModel
+from lib_ai.core.utils.batch._batch_models import _BatchModel, _BatchParamsModel
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.indexable.indexable_models import (
     IndexableMultiKeyModel,
@@ -10,9 +10,9 @@ from lib_shared.core.utils.indexable.indexable_models import (
 from torch.utils.data import DataLoader, Dataset
 
 
-def _chunks[T](**params: Unpack[_ChunksParamsModel[T]]) -> _ChunksModel[T]:
+def _batch[T](**params: Unpack[_BatchParamsModel[T]]) -> _BatchModel[T]:
     data = get_item(params, "data")
-    chunk_size = get_item(params, "chunk_size", len(data) / 5)
+    batch_size = get_item(params, "batch_size", len(data) / 5)
 
     class _Dataset(Dataset):
         def __init__(self, value) -> None:
@@ -27,17 +27,14 @@ def _chunks[T](**params: Unpack[_ChunksParamsModel[T]]) -> _ChunksModel[T]:
         def __getitem__(self, key: IndexableSingleKeyModel | IndexableMultiKeyModel) -> Any | T:
             return self._data[key]
 
-        def __getitems__(self, key: IndexableMultiKeyModel) -> T:
-            return self._data[key]
-
         def __len__(self) -> int:
             return len(self._data)
 
     return cast(
-        _ChunksModel[T],
+        _BatchModel[T],
         DataLoader(
             _Dataset(data),
-            batch_size=chunk_size,
+            batch_size=batch_size,
             collate_fn=None if torch.is_tensor(data) else lambda x: x,
         ),
     )
