@@ -84,11 +84,11 @@ class _MatrixData(_MatrixDataModel):
         dtype: DataType | None = DataType.FLOAT,
     ) -> torch.Tensor:
         to_type = get_tensor_type(dtype)
+        device = get_device()
         match self.get_type():
             case MatrixDataType.TENSOR:
-                device = get_device()
                 return cast(torch.Tensor, self.data).to(to_type).to(device)
             case MatrixDataType.NUMPY:
-                return torch.tensor(self.data).to(to_type)
+                return torch.tensor(self.data).to(to_type).to(device)
             case _:
                 raise InvalidTypeException()

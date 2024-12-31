@@ -119,8 +119,8 @@ class _NeuralNetwork[
                 data=dataset,
                 batch_size=int(len(dataset) / 5),
             ):
-                x, y = batchset.x, batchset.y
-                y_pred = self._module(x.to_tensor())
+                x, y = batchset.x.to_tensor(), batchset.y
+                y_pred = self._module(x)
                 optimizer.zero_grad()
                 loss = objective(MatrixData(data=y_pred), y)
                 optimizer.step()

@@ -162,8 +162,9 @@ class _TabularData(_TabularDataModel):
         match self.get_type():
             case TabularDataType.DATAFRAME:
                 data = cast(pl.DataFrame, self.data)
+                device = get_device()
                 return MatrixData(
-                    pl.select(v.cast(pl.Float32, strict=False) for v in data).to_torch()
+                    pl.select(v.cast(pl.Float32, strict=False) for v in data).to_torch().to(device)
                 )
             case _:
                 raise InvalidTypeException()

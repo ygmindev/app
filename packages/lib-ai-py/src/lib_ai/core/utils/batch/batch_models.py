@@ -1,5 +1,12 @@
-from lib_ai.core.utils.batch._batch_models import _BatchModel, _BatchParamsModel
+from typing import Generator, NotRequired, TypedDict
 
-type BatchParamsModel[T] = _BatchParamsModel[T]
+from lib_shared.core.utils.indexable.indexable_models import IndexableModel
 
-type BatchModel[T] = _BatchModel[T]
+
+class BatchParamsModel[T](TypedDict):
+    data: IndexableModel[T]
+    batch_size: int
+    is_shuffle: NotRequired[bool]
+
+
+type BatchModel[T] = Generator[T, T, T]
