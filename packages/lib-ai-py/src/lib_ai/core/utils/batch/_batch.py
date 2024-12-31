@@ -1,12 +1,8 @@
-from typing import Any, Unpack, cast, overload
+from typing import Any, Unpack, cast
 
 import torch
 from lib_ai.core.utils.batch._batch_models import _BatchModel, _BatchParamsModel
 from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.indexable.indexable_models import (
-    IndexableMultiKeyModel,
-    IndexableSingleKeyModel,
-)
 from torch.utils.data import DataLoader, Dataset
 
 
@@ -18,13 +14,7 @@ def _batch[T](**params: Unpack[_BatchParamsModel[T]]) -> _BatchModel[T]:
         def __init__(self, value) -> None:
             self._data = value
 
-        @overload
-        def __getitem__(self, key: IndexableSingleKeyModel) -> Any: ...
-
-        @overload
-        def __getitem__(self, key: IndexableMultiKeyModel) -> T: ...
-
-        def __getitem__(self, key: IndexableSingleKeyModel | IndexableMultiKeyModel) -> Any | T:
+        def __getitem__(self, key: Any) -> T:
             return self._data[key]
 
         def __len__(self) -> int:

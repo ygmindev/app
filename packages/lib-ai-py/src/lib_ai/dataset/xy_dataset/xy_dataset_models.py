@@ -15,8 +15,7 @@ class XYDatasetModel[
         self,
         x: TX,
         y: TY | None = None,
-    ) -> None:
-        pass
+    ) -> None: ...
 
     @property
     @abstractmethod

@@ -119,11 +119,7 @@ class _NeuralNetwork[
                 data=dataset,
                 batch_size=int(len(dataset) / 5),
             ):
-                print(f"@@@ {batchset}")
                 x, y = batchset.x, batchset.y
-                print(f"@@@ {type(dataset.x.data)}")
-                print(f"@@@ {type(x.data)}")
-
                 y_pred = self._module(x.to_tensor())
                 optimizer.zero_grad()
                 loss = objective(MatrixData(data=y_pred), y)

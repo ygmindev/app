@@ -20,6 +20,7 @@ def test_works() -> None:
     # )
     pathname = from_working("_cache/datasets/regression/Student_Performance.csv")
     data = TabularData.from_csv(pathname)
+    y_column = "Performance Index"
     pipeline = TablePipeline(
         transformers=(
             (["Extracurricular Activities"], OneHotEncoderTransformer(is_sparse=True)),
@@ -34,13 +35,11 @@ def test_works() -> None:
             ),
         )
     )
-    y_column = "Performance Index"
     x, y = data.drop_columns([y_column]), data[y_column]
     x = pipeline.fit_transform(x)
     trainset, testset = XYDataset(x=x.to_matrix(), y=y).split()
     trainset, validationset = trainset.split()
     model = LinearRegression(params={"n_in": x.shape[1]})
-
     model.fit(trainset)
     scores = model.evaluate(testset)
 
