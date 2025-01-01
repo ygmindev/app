@@ -1,5 +1,8 @@
 import { type _UseRouterModel } from '@lib/frontend/route/hooks/useRouter/_useRouter.models';
-import { type LocationParamsModel, type LocationUpdateModel } from '@lib/frontend/route/route.models';
+import {
+  type LocationParamsModel,
+  type LocationUpdateModel,
+} from '@lib/frontend/route/route.models';
 import { useMemo } from 'react';
 import { generatePath } from 'react-router';
 import { matchPath, useLocation, useNavigate, useParams } from 'react-router-native';

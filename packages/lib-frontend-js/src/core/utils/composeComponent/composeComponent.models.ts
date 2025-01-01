@@ -18,7 +18,7 @@ export type ComposeComponentParamsModel<
   Component: ComponentType<TResult & StylePropsModel<TStyle>> | string;
 
   getProps?(
-    props: TProps & TestIdPropsModel & { style?: TStyle },
+    props: TProps & TestIdPropsModel & StylePropsModel<TStyle>,
     theme: UseThemeModel,
     ref?: ForwardedRef<TRef>,
   ): TResult | null;

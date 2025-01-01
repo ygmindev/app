@@ -32,7 +32,7 @@ export type DataComponentPropsModel<TParams = undefined, TResult = void> = WithI
           data?: TResult | null;
           onChange(values?: TResult): void;
         },
-    ) => ReactElement | NilModel
+    ) => ReactElement<ElementStatePropsModel> | NilModel
   > & {
     emptyMessage?: AsyncTextModel;
     params?: TParams;

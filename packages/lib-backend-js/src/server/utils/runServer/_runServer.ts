@@ -19,7 +19,7 @@ import { createYoga } from 'graphql-yoga';
 import toNumber from 'lodash/toNumber';
 
 class _Logger {
-  child = (..._: Array<unknown>): unknown => new _Logger();
+  // child = (..._: Array<unknown>): unknown => new _Logger();
   fatal = (..._: Array<unknown>): unknown => null;
   level = 'info';
   error = logger.error;
@@ -46,7 +46,6 @@ export const _runServer = async ({
       cert: readFileSync(joinPaths([certificateDir, publicKeyFilename])),
       key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
     },
-    logger: new _Logger(),
   });
 
   const handleClose = async (): Promise<void> => {

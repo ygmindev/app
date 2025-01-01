@@ -4,7 +4,12 @@ import {
 } from '@lib/frontend/animation/hooks/useAnimationState/_useAnimationState.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type StyleModel, type ViewStyleModel } from '@lib/frontend/style/style.models';
-import { type DynamicStyleProp, type MotiTranformProps, type UseDynamicAnimationState } from 'moti';
+import {
+  type DynamicStyleProp,
+  type MotiTranformProps,
+  type MotiTransition,
+  type UseDynamicAnimationState,
+} from 'moti';
 import { useDynamicAnimation } from 'moti';
 import { ReduceMotion } from 'react-native-reanimated';
 
@@ -29,7 +34,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
         loop: isInfinite,
         reduceMotion: ReduceMotion.Always,
         type: 'timing',
-      },
+      } as MotiTransition,
     },
     animationState: animationState as UseDynamicAnimationState,
     to: (params) => {

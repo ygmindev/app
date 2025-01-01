@@ -6,7 +6,7 @@ import {
 import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
-import { type ForwardedRef, type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { FlatList, type FlatListProps, type ScrollView } from 'react-native';
 
@@ -48,5 +48,4 @@ export const _VirtualizedList = composeComponent(viewParamsScrollable) as <
   TType extends WithIdModel,
 >(
   props: RLFCPropsModel<_VirtualizedListRefModel, _VirtualizedListPropsModel<TType>>,
-  ref: ForwardedRef<_VirtualizedListRefModel>,
 ) => ReactElement<RLFCPropsModel<_VirtualizedListRefModel, _VirtualizedListPropsModel<TType>>>;

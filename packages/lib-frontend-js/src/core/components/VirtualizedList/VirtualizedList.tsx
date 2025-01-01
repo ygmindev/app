@@ -44,5 +44,4 @@ export const VirtualizedList = forwardRef(
   },
 ) as <TType extends WithIdModel>(
   props: RLFCPropsModel<VirtualizedListRefModel, VirtualizedListPropsModel<TType>>,
-  ref: ForwardedRef<VirtualizedListRefModel>,
 ) => ReactElement<RLFCPropsModel<VirtualizedListRefModel, VirtualizedListPropsModel<TType>>>;

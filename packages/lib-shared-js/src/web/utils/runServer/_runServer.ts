@@ -83,7 +83,7 @@ export const _runServer = async ({
     });
 
     if (redirectTo) {
-      await res.redirect(302, redirectTo);
+      await res.redirect(redirectTo, 302);
     } else if (response) {
       const { headers, pipeStream, statusCode } = response;
       void res.status(statusCode);

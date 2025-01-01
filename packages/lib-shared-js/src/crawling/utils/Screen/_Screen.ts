@@ -153,7 +153,7 @@ export class _Screen implements _ScreenModel {
   }: {
     dirname?: string;
     filename?: string | number;
-  }): Promise<Buffer | null> {
+  }): Promise<Uint8Array | null> {
     const { snapshotPath } = this.options;
     const pathname = snapshotPath && joinPaths(filterNil([snapshotPath, dirname]));
     pathname && !existsSync(pathname) && mkdirSync(pathname, { recursive: true });

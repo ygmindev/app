@@ -4,7 +4,7 @@ export class TestScreen extends Screen {
   async snapshot({
     dirname,
     filename,
-  }: { dirname?: string; filename?: string | number } = {}): Promise<Buffer | null> {
+  }: { dirname?: string; filename?: string | number } = {}): Promise<Uint8Array | null> {
     const img = await super.snapshot({ dirname, filename });
     // expect(img).toMatchImageSnapshot({
     //   customDiffDir: fromWorking(outputPath, 'diffs'),

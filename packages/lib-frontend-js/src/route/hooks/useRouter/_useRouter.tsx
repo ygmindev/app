@@ -4,8 +4,7 @@ import {
   type LocationUpdateModel,
 } from '@lib/frontend/route/route.models';
 import { useMemo } from 'react';
-import { generatePath } from 'react-router';
-import { matchPath, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { generatePath, matchPath, useLocation, useNavigate, useParams } from 'react-router';
 
 export const _useRouter = <TType = object,>(): _UseRouterModel<TType> => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ export const _useRouter = <TType = object,>(): _UseRouterModel<TType> => {
   }, [location.state, routeParams]);
 
   return {
-    back: () => navigate(-1),
+    back: () => void navigate(-1),
 
     getPath: <TTypeNext,>(pathname: string, params?: TTypeNext) =>
       generatePath(pathname, params as object),
@@ -37,11 +36,11 @@ export const _useRouter = <TType = object,>(): _UseRouterModel<TType> => {
     location: { params, pathname: location.pathname },
 
     push: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
-      navigate(pathname, { state: params });
+      void navigate(pathname, { state: params });
     },
 
     replace: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
-      navigate(pathname, { replace: true, state: params });
+      void navigate(pathname, { replace: true, state: params });
     },
   };
 };

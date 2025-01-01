@@ -10,6 +10,7 @@ import {
   type StylePropsModel,
   type ViewStyleModel,
 } from '@lib/frontend/style/style.models';
+import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
 import { type ReactElement } from 'react';
 import { createElement, forwardRef } from 'react';
 import { unstable_createElement } from 'react-native-web';
@@ -31,8 +32,15 @@ export const composeComponent = <
 > =>
   forwardRef((props, ref): ReactElement<TResult> | null => {
     const theme = useTheme();
-    const { styles } = useStyles({ props, stylers });
-    const propsF = getProps ? getProps({ ...props, style: styles }, theme, ref) : props;
+    // TODO: typing from forwardRef props -> PropsWithoutRef
+    const { styles } = useStyles({ props: props as TProps & StylePropsModel<TStyle>, stylers });
+    const propsF = getProps
+      ? getProps(
+          { ...(props as TProps & TestIdPropsModel & StylePropsModel<TStyle>), style: styles },
+          theme,
+          ref,
+        )
+      : props;
     return (
       propsF &&
       (isWeb ? (unstable_createElement as typeof createElement) : createElement)(Component, {

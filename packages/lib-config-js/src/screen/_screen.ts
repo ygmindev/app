@@ -32,6 +32,6 @@ export const _screen = ({
   // executablePath:
   //   process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
   headless: process.env.NODE_ENV === 'production' ? chromium.headless : isHeadless,
-  ignoreHTTPSErrors: true,
+  // ignoreHTTPSErrors: true,
   protocolTimeout: 0,
 });
