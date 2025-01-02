@@ -54,6 +54,7 @@ export const _runServer = async ({
     logger.info(
       `${Array.isArray(method) ? method.join(',') : method} ${uri({ host: process.env.SERVER_APP_HOST, port: process.env.SERVER_APP_PORT })}${url}`,
     );
+
     switch (type) {
       case API_ENDPOINT_TYPE.GRAPHQL: {
         const schema = graphqlConfig.config();
