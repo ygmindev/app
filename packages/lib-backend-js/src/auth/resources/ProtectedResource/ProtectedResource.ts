@@ -13,8 +13,8 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 export class ProtectedResource extends EntityResource implements ProtectedResourceModel {
   @withField({
     Resource: () => User,
-    isOptional: true,
     isDatabase: true,
+    isOptional: true,
     name: '_user',
     relation: FIELD_RELATION.MANY_TO_ONE,
     type: PROPERTY_TYPE.RESOURCE,
@@ -23,8 +23,8 @@ export class ProtectedResource extends EntityResource implements ProtectedResour
 
   @withField({
     Resource: () => Group,
-    isOptional: true,
     isDatabase: true,
+    isOptional: true,
     name: '_group',
     relation: FIELD_RELATION.MANY_TO_ONE,
     type: PROPERTY_TYPE.RESOURCE,

@@ -11,21 +11,21 @@ export class TestableEntityResource extends EntityResource implements TestableEn
   @withField({
     defaultValue: () => new Date(),
     expire: DATABASE_CONFIG.expireSeconds,
-    isOptional: true,
     isDatabase: true,
+    isOptional: true,
     type: DATA_TYPE.DATE,
   })
   dateTtlProperty?: Date;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.NUMBER })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   numberProperty?: number;
 
-  @withField({ isArray: true, isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isArray: true, isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   stringArrayField?: Array<string>;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   stringField!: string;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   stringFieldOptional?: string;
 }

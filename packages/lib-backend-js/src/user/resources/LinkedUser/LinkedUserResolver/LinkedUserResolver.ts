@@ -1,4 +1,4 @@
-import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
+// import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEmbeddedResourceResolver } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
@@ -20,7 +20,7 @@ export class LinkedUserResolver
     Resource: () => LinkedUser,
     ResourceImplementation: LinkedUserImplementation,
     RootResource: () => User,
-    authorizer: { default: selfAuthorizer },
+    // authorizer: { default: selfAuthorizer },
     name: LINKED_USER_RESOURCE_NAME,
   })
   implements LinkedUserImplementationModel {}

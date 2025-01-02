@@ -1,5 +1,3 @@
-import { cleanup } from 'packages/service-lambda/src/setup/utils/cleanup/cleanup';
-import { initialize } from 'packages/service-lambda/src/setup/utils/initialize/initialize';
 import { type ServerlessRequestContextModel } from '@lib/backend/serverless/serverless.models';
 import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
 import {
@@ -8,6 +6,8 @@ import {
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import databaseConfig from '@lib/config/database/database.mongo';
 import graphqlConfig from '@lib/config/graphql/graphql';
+import { initialize } from '@service/lambda/setup/utils/initialize/initialize';
+import { cleanup } from '@service/lambda/src/setup/utils/cleanup/cleanup';
 
 const context: ServerlessRequestContextModel = {};
 

@@ -1,3 +1,3 @@
-import { sandbox } from 'packages/service-graphql-sandbox-js/src/functions/graphql/sandbox';
+import { sandbox } from '@service/graphql-sandbox/functions/graphql/sandbox';
 
 void sandbox();

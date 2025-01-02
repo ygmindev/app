@@ -7,7 +7,7 @@ import {
 
 export type EntityResourceModel = {
   _id: string;
-  beforeCreate?(): void;
+  beforeCreate?(): Promise<void>;
   created: Date;
   isFixture?: boolean;
 };

@@ -2,7 +2,7 @@ import { initialize as initializeBackend } from '@lib/backend/setup/utils/initia
 import {
   type InitializeModel,
   type InitializeParamsModel,
-} from 'packages/service-lambda/src/setup/utils/initialize/initialize.models';
+} from '@service/lambda/setup/utils/initialize/initialize.models';
 
 export const initialize = async ({
   ...params

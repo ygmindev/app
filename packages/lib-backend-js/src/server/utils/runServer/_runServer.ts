@@ -18,18 +18,6 @@ import { type GraphQLError } from 'graphql';
 import { createYoga } from 'graphql-yoga';
 import toNumber from 'lodash/toNumber';
 
-class _Logger {
-  // child = (..._: Array<unknown>): unknown => new _Logger();
-  fatal = (..._: Array<unknown>): unknown => null;
-  level = 'info';
-  error = logger.error;
-  warn = logger.warn;
-  info = logger.info;
-  debug = logger.debug;
-  trace = (..._: Array<unknown>): unknown => null;
-  silent = (..._: Array<unknown>): unknown => null;
-}
-
 export const _runServer = async ({
   api,
   certificate,

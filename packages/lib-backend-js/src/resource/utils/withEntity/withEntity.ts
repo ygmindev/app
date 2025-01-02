@@ -7,8 +7,8 @@ import { InputType, ObjectType } from 'type-graphql';
 export const withEntity = <TType extends unknown>({
   indices = [],
   isAbstract = false,
-  isEmbeddable = false,
   isDatabase = false,
+  isEmbeddable = false,
   isSchema = true,
   isSchemaInput = true,
   name,

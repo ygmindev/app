@@ -10,22 +10,23 @@ import { type TestableEntityResourceImplementationModel } from '@lib/shared/test
 
 @withContainer({ name: `${TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME}Implementation` })
 export class TestableEntityResourceImplementation
-  extends createEntityResourceImplementation<TestableEntityResourceModel, TestableEntityResourceFormModel>(
-    {
-      Resource: TestableEntityResource,
-      afterCreate: async ({ output }) => output,
-      afterGet: async ({ output }) => output,
-      afterGetConnection: async ({ output }) => output,
-      afterGetMany: async ({ output }) => output,
-      afterRemove: async ({ output }) => output,
-      afterUpdate: async ({ output }) => output,
-      beforeCreate: async ({ input }) => input,
-      beforeGet: async ({ input }) => input,
-      beforeGetConnection: async ({ input }) => input,
-      beforeGetMany: async ({ input }) => input,
-      beforeRemove: async ({ input }) => input,
-      beforeUpdate: async ({ input }) => input,
-      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
-    },
-  )
+  extends createEntityResourceImplementation<
+    TestableEntityResourceModel,
+    TestableEntityResourceFormModel
+  >({
+    Resource: TestableEntityResource,
+    afterCreate: async ({ output }) => output,
+    afterGet: async ({ output }) => output,
+    afterGetConnection: async ({ output }) => output,
+    afterGetMany: async ({ output }) => output,
+    afterRemove: async ({ output }) => output,
+    afterUpdate: async ({ output }) => output,
+    beforeCreate: async ({ input }) => input,
+    beforeGet: async ({ input }) => input,
+    beforeGetConnection: async ({ input }) => input,
+    beforeGetMany: async ({ input }) => input,
+    beforeRemove: async ({ input }) => input,
+    beforeUpdate: async ({ input }) => input,
+    name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
+  })
   implements TestableEntityResourceImplementationModel {}
