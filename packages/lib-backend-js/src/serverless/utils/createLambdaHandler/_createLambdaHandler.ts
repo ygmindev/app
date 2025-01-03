@@ -17,7 +17,7 @@ import {
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import { type LambdaResponseModel } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
-import { _graphql } from '@lib/config/graphql/_graphql';
+import graphqlConfig from '@lib/config/graphql/graphql';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import {
@@ -30,7 +30,7 @@ import { type GraphQLError } from 'graphql';
 
 export const _createLambdaHandler = <TType = Record<string, unknown>>({
   context: contextDefault = {},
-  graphql,
+  // graphql,
   handler,
   onInitialize,
   plugins,
@@ -47,8 +47,6 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
     const contextF: Context & ServerlessRequestContextModel = { ...contextDefault, ...context };
     contextF.callbackWaitsForEmptyEventLoop = false;
     contextF.pathname = event.requestContext.routeKey;
-
-    onInitialize && (await onInitialize());
 
     // authentication from header / query parameters
     if (plugins?.includes(LAMBDA_PLUGIN.AUTHENTICATION)) {
@@ -70,13 +68,17 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
   };
 
   return async (event: _LambdaEventModel, context, callback) => {
+    onInitialize && (await onInitialize());
+    // const schema = graphql && _graphql(graphql);
+
     // GraphQL
-    if (type === LAMBDA_TYPE.GRAPHQL && graphql) {
+    if (type === LAMBDA_TYPE.GRAPHQL) {
+      const schema = graphqlConfig.config();
       const server = new ApolloServer({
         allowBatchedHttpRequests: true,
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         formatError: (e, originalError) => formatGraphqlError(e as GraphQLError),
-        schema: _graphql(graphql),
+        schema,
       });
       const handlerF = startServerAndCreateLambdaHandler(
         server,

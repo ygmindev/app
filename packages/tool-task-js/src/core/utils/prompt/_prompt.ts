@@ -6,6 +6,7 @@ import {
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { prompt, type prompts, registerPrompt } from 'inquirer';
 import directory from 'inquirer-directory';
+import { isString } from 'lodash';
 import startCase from 'lodash/startCase';
 import toString from 'lodash/toString';
 
@@ -28,14 +29,20 @@ export const _prompt = async <TType extends unknown>(
         basePath,
 
         choices: options
-          ? options.map((option) => ({
-              checked:
-                type === PROMPT_TYPE.MULTIPLE &&
-                options &&
-                defaultValue &&
-                defaultValue.includes(option),
-              name: option,
-            }))
+          ? options.map((option) => {
+              const { label, value } = isString(option)
+                ? { label: option, value: option }
+                : (option as { label?: string; value: string });
+              return {
+                checked:
+                  type === PROMPT_TYPE.MULTIPLE &&
+                  options &&
+                  defaultValue &&
+                  defaultValue.includes(option),
+                name: label,
+                value,
+              };
+            })
           : [],
 
         message: `${message}${isOptional ? ' (Optional)' : ''}`,

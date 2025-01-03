@@ -55,6 +55,9 @@
       "@lib/config/*": [
         "packages/lib-config-js/src/*"
       ],
+      "lib_config/*": [
+        "packages/lib-config-py/src/*"
+      ],
       "@lib/frontend/*": [
         "packages/lib-frontend-js/src/*"
       ],
@@ -92,7 +95,8 @@
       "jest",
       "vite/client",
       "@types/jest-image-snapshot"
-    ]
+    ],
+    "useDefineForClassFields": false
   },
   "ts-node": {
     "compilerOptions": {

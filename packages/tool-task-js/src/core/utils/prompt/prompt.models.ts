@@ -14,7 +14,7 @@ export type PromptArgsModel<TKey> = {
   isOptional?: boolean;
   key: TKey;
   message?: string;
-  options?: Array<string>;
+  options?: Array<string | { label?: string; value: string }>;
 };
 
 export type StringPromptArgsModel<TKey> = PromptArgsModel<TKey> &

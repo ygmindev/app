@@ -37,8 +37,10 @@ export const _serverless = ({
     switch (platform) {
       case PLATFORM.NODE:
         return {
+          build: {
+            esbuild: false,
+          },
           custom: {
-            // TODO: vscode debug point not working
             esbuild: {
               ...esbuild,
               ...optimizeDeps?.esbuildOptions,
@@ -74,11 +76,11 @@ export const _serverless = ({
 
           plugins: filterNil([
             !isContainer && 'serverless-plugin-layer-manager',
-            // 'serverless-esbuild',
+            'serverless-esbuild',
           ]),
 
           provider: {
-            runtime: 'nodejs18.x',
+            runtime: 'nodejs20.x',
 
             ...(isContainer
               ? {

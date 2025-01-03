@@ -48,6 +48,7 @@ export const _typescript = ({
       strict: true,
       target: 'esnext' as unknown as ScriptTarget,
       types,
+      useDefineForClassFields: false,
     },
     'ts-node': {
       compilerOptions: { module: 'commonjs' },

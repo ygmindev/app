@@ -1,5 +1,5 @@
 import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
-import { RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
+import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefField';

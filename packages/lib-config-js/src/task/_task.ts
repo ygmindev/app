@@ -10,6 +10,7 @@ import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { TaskRunner } from '@tool/task/core/utils/TaskRunner/TaskRunner';
 import { existsSync } from 'fs';
+import reduce from 'lodash/reduce';
 
 export const _task = ({
   configFilename,
@@ -48,7 +49,14 @@ export const _task = ({
           const { name } = await prompt<{ name: string }>([
             {
               key: 'name',
-              options: [...Object.keys(taskRunner.aliases), ...Object.keys(taskRunner.registry)],
+              options: [
+                ...reduce(
+                  taskRunner.aliases,
+                  (result, v, k) => [...result, { label: `${k} (${v})`, value: k }],
+                  [] as Array<{ label?: string; value: string }>,
+                ),
+                ...Object.keys(taskRunner.registry),
+              ],
               type: PROMPT_TYPE.LIST,
             },
           ]);
