@@ -6,8 +6,10 @@ import {
 import { Container } from '@lib/backend/core/utils/Container/Container';
 import { GroupImplementation } from '@lib/backend/group/resources/Group/GroupImplementation/GroupImplementation';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
+import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
+import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { type ProtectedResourceModel } from '@lib/shared/auth/resources/ProtectedResource/ProtectedResource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
@@ -36,6 +38,7 @@ export const createProtectedResoureImplementation = <
   }) {
     @withInject(GroupImplementation) protected _groupImplementation!: GroupImplementationModel;
 
+    @withAccess({ access: ACCESS_LEVEL.PROTECTED })
     async getManyProtected(
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm> = {},
       context?: RequestContextModel,

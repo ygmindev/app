@@ -1,9 +1,13 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { createProtectedResoureImplementation } from '@lib/backend/auth/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
-import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
+import {
+  ACCESS_LEVEL,
+  ACCESS_RESOURCE_NAME,
+} from '@lib/shared/auth/resources/Access/Access.constants';
 import {
   type AccessFormModel,
   type AccessModel,
@@ -21,6 +25,7 @@ export class AccessImplementation
   })
   implements AccessImplementationModel
 {
+  @withAccess({ access: ACCESS_LEVEL.PROTECTED })
   async getManyUser(
     input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel, AccessFormModel> = {},
     context?: RequestContextModel,

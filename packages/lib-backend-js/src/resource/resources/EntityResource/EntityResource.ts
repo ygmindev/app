@@ -5,6 +5,7 @@ import { HOOK_TYPE } from '@lib/backend/resource/utils/withHook/withHook.constan
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import forEach from 'lodash/forEach';
+import isNil from 'lodash/isNil';
 
 @withEntity({ isAbstract: true })
 export class EntityResource implements EntityResourceModel {
@@ -20,7 +21,7 @@ export class EntityResource implements EntityResourceModel {
   @withHook({ type: HOOK_TYPE.BEFORE_CREATE })
   async beforeCreate(): Promise<void> {
     forEach(this, (v, k) => {
-      if (v === undefined) {
+      if (isNil(v)) {
         delete (this as Record<string, unknown>)[k];
       }
     });

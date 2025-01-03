@@ -3,6 +3,7 @@ import { type FCModel } from '@lib/frontend/core/core.models';
 import { type EmptyObjectModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { merge } from '@lib/shared/core/utils/merge/merge';
+import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import {
   type RenderAppModel,
@@ -16,8 +17,8 @@ const { languageDefault } = INTERNATIONALIZE_CONFIG;
 export const renderApp = ({ Root, children, context }: RenderAppParamsModel): RenderAppModel => {
   const contextF = merge(
     filterNil([
-      context?.locale?.lang &&
-        languageDefault !== context.locale.lang && { [ROUTE]: { basename: context.locale.lang } },
+      context?.[LOCALE]?.lang &&
+        languageDefault !== context[LOCALE].lang && { [ROUTE]: { basename: context[LOCALE].lang } },
       context,
     ]),
   );

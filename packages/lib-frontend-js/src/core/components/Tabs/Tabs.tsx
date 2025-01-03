@@ -9,6 +9,7 @@ import { type TabsPropsModel } from '@lib/frontend/core/components/Tabs/Tabs.mod
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -33,12 +34,14 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
   });
   const isContained = type === TABS_TYPE.CONTAINED;
   const isUnderline = type === TABS_TYPE.UNDERLINE;
+  const isMobile = useIsMobile();
   return (
     <Wrapper
       {...wrapperProps}
       align={FLEX_ALIGN.END}
       alignSelf={isContained ? FLEX_ALIGN.CENTER : undefined}
       border={isContained ? true : isUnderline ? DIRECTION.BOTTOM : undefined}
+      isFullWidth={isMobile}
       isHorizontalScrollable
       isRow
       p={isContained ? THEME_SIZE.SMALL : undefined}

@@ -257,7 +257,7 @@ export class _Store<
 
     this.defaultState = defaultStateF;
     this.actions = actionsF;
-    this.persistors = process.env.NODE_ENV !== 'test' ? {} : persistorsF;
+    this.persistors = process.env.NODE_ENV === 'test' ? {} : persistorsF;
     this.store = configureStore({
       middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

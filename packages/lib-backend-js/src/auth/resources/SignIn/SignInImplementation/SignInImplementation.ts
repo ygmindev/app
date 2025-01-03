@@ -2,9 +2,11 @@ import { OtpImplementation } from '@lib/backend/auth/resources/Otp/OtpImplementa
 import { JwtImplementation } from '@lib/backend/auth/utils/JwtImplementation/JwtImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { objectToEquality } from '@lib/backend/resource/utils/objectToEquality/objectToEquality';
+import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
+import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import {
   SIGN_IN_RESOURCE_NAME,
   SIGN_IN_TOKEN_CLAIM_KEYS,
@@ -78,6 +80,7 @@ export class SignInImplementation implements SignInImplementationModel {
     throw new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR);
   }
 
+  @withAccess({ access: ACCESS_LEVEL.PROTECTED })
   async usernameUpdate(
     { form }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel> = {},
     context?: RequestContextModel,

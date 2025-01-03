@@ -6,7 +6,7 @@ import { JwtImplementation } from '@lib/backend/auth/utils/JwtImplementation/Jwt
 import { Container } from '@lib/backend/core/utils/Container/Container';
 
 export const getTokenFromHeader = async (
-  params: GetTokenFromHeaderParamsModel,
+  params?: GetTokenFromHeaderParamsModel,
 ): Promise<GetTokenFromHeaderModel> => {
   if (params) {
     const [, token] = params.split(' ');

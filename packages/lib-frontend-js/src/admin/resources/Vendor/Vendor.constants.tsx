@@ -12,6 +12,7 @@ export const VENDOR_RESOURCE_PARAMS = {
       id: 'imageSrc',
       label: ({ t }) => t('core:image'),
       renderer: ({ value }) => (value ? <Logo src={value} /> : null),
+      width: 250,
     },
     { id: 'name' },
     {

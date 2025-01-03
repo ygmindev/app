@@ -1,4 +1,3 @@
-import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { formatGraphqlError } from '@lib/backend/http/utils/formatGraphqlError/formatGraphqlError';
 import {
@@ -61,14 +60,10 @@ export const _runServer = async ({
         const yoga = createYoga<{ reply: FastifyReply; req: FastifyRequest }>({
           context: async ({ request }) => {
             const context: RequestContextModel = {};
-            try {
-              const user = await getTokenFromHeader(
-                request.headers.get('authorization') ?? undefined,
-              );
-              user && (context.user = user);
-            } catch {
-              request.headers.delete('authorization');
-            }
+            const access = request.headers.get('authorization');
+            access && (context.token = { access });
+            // TODO: delete token if expired token
+            // request.headers.delete('authorization');
             return context;
           },
           landingPage: false,

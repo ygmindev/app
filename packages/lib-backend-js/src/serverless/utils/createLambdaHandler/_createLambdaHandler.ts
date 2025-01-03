@@ -4,7 +4,6 @@ import {
   ApiGatewayManagementApiClient,
   PostToConnectionCommand,
 } from '@aws-sdk/client-apigatewaymanagementapi';
-import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
 import { formatGraphqlError } from '@lib/backend/http/utils/formatGraphqlError/formatGraphqlError';
 import { type ServerlessRequestContextModel } from '@lib/backend/serverless/serverless.models';
 import {
@@ -51,11 +50,9 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
     // authentication from header / query parameters
     if (plugins?.includes(LAMBDA_PLUGIN.AUTHENTICATION)) {
       const eventF = event as APIGatewayProxyEventV2;
-      const authorization =
-        eventF.headers?.authorization ?? eventF.queryStringParameters?.Authorization;
-      const user = await getTokenFromHeader(authorization);
-      user && (contextF.user = user);
       eventF.headers?.group && (contextF.group = eventF.headers.group);
+      const access = eventF.headers?.authorization ?? eventF.queryStringParameters?.Authorization;
+      access && (contextF.token = { access });
     }
 
     // request id

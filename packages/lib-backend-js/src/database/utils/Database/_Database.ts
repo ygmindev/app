@@ -232,6 +232,7 @@ export class _Database implements _DatabaseModel {
               delete updateF[keyF];
             }
           });
+
         const result = await em
           .getConnection()
           .getCollection(name)

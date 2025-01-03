@@ -1,5 +1,6 @@
 import { type DatabaseModel } from '@lib/backend/database/utils/Database/Database.models';
 import { type API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
+import { type AuthStateModel } from '@lib/frontend/auth/stores/authStore/authStore.models';
 import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import {
   type HttpMethodModel,
@@ -18,6 +19,7 @@ export type RequestContextModel = {
   group?: string;
   pathname?: string;
   requestId?: string;
+  token?: AuthStateModel['token'];
   user?: SignInTokenModel;
 };
 

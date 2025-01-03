@@ -20,6 +20,9 @@ import { Store } from '@lib/frontend/state/utils/Store/Store';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { LOCALE } from '@lib/shared/locale/locale.constants';
+import { QUERY } from '@lib/shared/query/query.constants';
+import { STATE } from '@lib/shared/state/state.constants';
 import { type ReactElement, Suspense } from 'react';
 import { cloneElement, useMemo } from 'react';
 
@@ -27,12 +30,13 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
   const store = useMemo(
     () =>
       new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
-        cookies: context?.state?.cookies,
-        initialState: context?.state?.initialState,
+        cookies: context?.[STATE]?.cookies,
+        initialState: context?.[STATE]?.initialState,
         reducers: ROOT_REDUCERS,
       }),
-    [context?.state?.cookies, context?.state?.initialState],
+    [context?.[STATE]?.cookies, context?.[STATE]?.initialState],
   );
+
   const providers = useMemo<Array<ReactElement>>(
     () =>
       filterNil([
@@ -40,14 +44,14 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
         <AsyncBoundary />,
         <ContextProvider value={context} />,
         <TrackingProvider />,
-        <QueryProvider value={context?.query} />,
+        <QueryProvider value={context?.[QUERY]} />,
         <AuthProvider />,
         <StyleProvider />,
-        <LocaleProvider value={context?.locale} />,
+        <LocaleProvider value={context?.[LOCALE]} />,
         <AppProvider />,
         <store.Provider
           value={{
-            ...context?.state,
+            ...context?.[STATE],
             actionContext,
             defaultStateContext,
             persistedStateContext,

@@ -29,9 +29,9 @@ export const getAccessRole = (
   }
 };
 
-export const withAccess = ({
-  access = ACCESS_LEVEL.RESTRICTED,
-}: WithAccessParamsModel): WithAccessModel =>
+export const withAccess = (
+  { access = ACCESS_LEVEL.RESTRICTED }: WithAccessParamsModel = { access: ACCESS_LEVEL.RESTRICTED },
+): WithAccessModel =>
   withCondition(
     () => access !== ACCESS_LEVEL.PUBLIC,
     () => Authorized(getAccessRole(access)),

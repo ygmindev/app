@@ -42,22 +42,22 @@ export const _renderServer =
     const queryClient = new QueryClient();
 
     const store = new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
-      cookies: context?.state?.cookies,
+      cookies: context?.[STATE]?.cookies,
       reducers: ROOT_REDUCERS,
     });
     const initialState = await store.getStatePersisted();
-    const token = initialState?.[AUTH]?.token?.access;
+    const token = initialState?.[AUTH]?.token;
     const requestContext: RequestContextModel | undefined = {};
 
     let user: SignInTokenModel | null = null;
     try {
-      user = await getTokenFromHeader(`Bearer ${token}`);
+      token?.access && (user = await getTokenFromHeader(`Bearer ${token.access}`));
     } catch {}
 
     if (user) {
       requestContext.user = user;
       initialState[USER] = { currentUser: user };
-      initialState[AUTH] = { status: AUTH_STATUS.AUTHENTICATED };
+      initialState[AUTH] = { status: AUTH_STATUS.AUTHENTICATED, token };
     } else {
       initialState[AUTH] = { status: AUTH_STATUS.UNAUTHENTICATED };
     }
