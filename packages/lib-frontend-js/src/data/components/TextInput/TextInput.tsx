@@ -5,7 +5,7 @@ import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
-import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
+import { TooltipIcon } from '@lib/frontend/core/components/TooltipIcon/TooltipIcon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
@@ -147,7 +147,9 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
           </Appearable>
         )}
 
-        {isAsyncText(props.error) && <Tooltip color={THEME_COLOR.ERROR}>{props.error}</Tooltip>}
+        {isAsyncText(props.error) && (
+          <TooltipIcon color={THEME_COLOR.ERROR}>{props.error}</TooltipIcon>
+        )}
 
         {rightElement}
       </Wrapper>

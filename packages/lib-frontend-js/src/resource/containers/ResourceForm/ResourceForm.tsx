@@ -29,11 +29,11 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
     <FormContainer
       {...wrapperProps}
       fields={filterNil(
-        // TODO: render embeddedFields
         fields?.map(({ field, fields: embeddedFields, id, isArray, label, options, type }) => {
           const element = (() => {
             const labelF = label ?? id;
-            const elementState = id.startsWith('_') ? ELEMENT_STATE.DISABLED : undefined;
+            const elementState =
+              id.startsWith('_') || (embeddedFields && !field) ? ELEMENT_STATE.DISABLED : undefined;
             if (field) {
               return cloneElement(field({}), { elementState, label: labelF });
             }
@@ -88,6 +88,7 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
         rootName
           ? () => (
               <TextInput
+                elementState={ELEMENT_STATE.DISABLED}
                 label={rootName}
                 onChange={(v: TRoot extends undefined ? never : string) => rootValueSet(v)}
                 value={rootValue}

@@ -28,6 +28,7 @@ export const AuthMenu: LFCModel<AuthMenuPropsModel> = ({ ...props }) => {
   const [currentUser] = useStore('user.currentUser');
   const menuRef = useRef<MenuRefModel>(null);
   const isAuthenticated = authStatus === AUTH_STATUS.AUTHENTICATED;
+
   const optionsF: Array<MenuOptionModel> = isAuthenticated
     ? [
         {
@@ -60,7 +61,7 @@ export const AuthMenu: LFCModel<AuthMenuPropsModel> = ({ ...props }) => {
         <Button
           elementState={isOpen ? ELEMENT_STATE.ACTIVE : undefined}
           icon="personCircle"
-          iconText={t('user:account')}
+          tooltip={t('user:account')}
         />
       )}
       options={optionsF}

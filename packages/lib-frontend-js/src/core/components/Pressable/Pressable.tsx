@@ -1,6 +1,7 @@
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Droppable } from '@lib/frontend/core/components/Droppable/Droppable';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import {
   type PressablePropsModel,
@@ -32,6 +33,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
       onPressIn,
       onPressOut,
       round,
+      tooltip,
       trigger,
       ...props
     },
@@ -66,7 +68,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
       }
     };
 
-    return (
+    const element = (
       <>
         <Activatable
           onActive={() => {
@@ -138,6 +140,14 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
           </Modal>
         )}
       </>
+    );
+
+    return tooltip ? (
+      <Droppable anchor={() => element}>
+        <AsyncText>{tooltip}</AsyncText>
+      </Droppable>
+    ) : (
+      element
     );
   },
 );

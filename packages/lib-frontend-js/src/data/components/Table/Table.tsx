@@ -317,7 +317,7 @@ export const Table = forwardRef(
         </Wrapper>
       </Wrapper>
     ) : (
-      emptyElement ?? (
+      (emptyElement ?? (
         <Wrapper
           flex
           isCenter>
@@ -327,7 +327,7 @@ export const Table = forwardRef(
             {t('core:nothingToShow')}
           </Text>
         </Wrapper>
-      )
+      ))
     );
   },
 ) as <TType>(

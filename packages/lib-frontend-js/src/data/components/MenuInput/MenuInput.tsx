@@ -123,7 +123,7 @@ export const MenuInput = forwardRef(
       : selectedOption
         ? renderOption
           ? renderOption(selectedOption)
-          : selectedOption.label ?? selectedOption.id
+          : (selectedOption.label ?? selectedOption.id)
         : valueControlled;
 
     const handleBlur = (): void => {
@@ -150,14 +150,13 @@ export const MenuInput = forwardRef(
     useImperativeHandle(ref, () => ({
       ...inputRef.current,
     }));
-
     return (
       <Menu
         active={focused}
         anchor={() => (
           <TextInput
             {...wrapperProps}
-            defaultValue={defaultValue}
+            // defaultValue={defaultValue}
             elementState={elementStateControlled}
             error={error}
             icon={icon}

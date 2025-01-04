@@ -1,12 +1,12 @@
-import { Tooltip } from '@lib/frontend/core/components/Tooltip/Tooltip';
-import { type TooltipPropsModel } from '@lib/frontend/core/components/Tooltip/Tooltip.models';
+import { TooltipIcon } from '@lib/frontend/core/components/TooltipIcon/TooltipIcon';
+import { type TooltipIconPropsModel } from '@lib/frontend/core/components/TooltipIcon/TooltipIcon.models';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesianObject';
 
-export const props: LibraryPropsModel<TooltipPropsModel> = {
-  Component: Tooltip,
+export const props: LibraryPropsModel<TooltipIconPropsModel> = {
+  Component: TooltipIcon,
   defaultProps: {
     children: 'tooltip',
   },

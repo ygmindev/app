@@ -3,6 +3,6 @@ import { type AsyncTextModel, type ChildrenPropsModel } from '@lib/frontend/core
 import { type ThemeColorPropsModel } from '@lib/frontend/style/style.models';
 import { type ReactNode } from 'react';
 
-export type TooltipPropsModel = ThemeColorPropsModel &
+export type TooltipIconPropsModel = ThemeColorPropsModel &
   ChildrenPropsModel<AsyncTextModel | ReactNode | Array<ReactNode>> &
   WithIconPropsModel;

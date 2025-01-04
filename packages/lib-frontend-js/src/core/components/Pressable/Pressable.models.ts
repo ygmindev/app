@@ -14,6 +14,7 @@ export type PressablePropsModel = ChildrenPropsModel<ReactElement> &
   Pick<ActivatablePropsModel, 'onActive' | 'onInactive' | 'trigger'> & {
     confirmColor?: ThemeColorModel;
     confirmMessage?: AsyncTextModel;
+    tooltip?: AsyncTextModel;
   };
 
 export type PressableRefModel = WrapperRefModel;

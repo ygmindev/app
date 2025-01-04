@@ -34,6 +34,7 @@ export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel> &
     | 'onPress'
     | 'onPressIn'
     | 'onPressOut'
+    | 'tooltip'
     | 'trigger'
   > & {
     description?: AsyncTextModel;

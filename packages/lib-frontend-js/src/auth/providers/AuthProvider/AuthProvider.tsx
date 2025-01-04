@@ -24,7 +24,10 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
     void initialize({
       onAuthenticate: async (signInToken, token) => {
         token && authTokenSet({ access: token });
-        let authStatus: AuthStatusModel = AUTH_STATUS.UNAUTHENTICATED;
+        let authStatusF: AuthStatusModel = currentUser
+          ? AUTH_STATUS.AUTHENTICATED
+          : AUTH_STATUS.UNAUTHENTICATED;
+
         if (signInToken) {
           if (currentUser?._id !== signInToken._id) {
             let user: PartialModel<UserModel> | undefined = {
@@ -34,16 +37,16 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
             const { result } = await get({ filter: [{ field: '_id', value: signInToken._id }] });
             user = result ?? undefined;
             if (user) {
-              authStatus = AUTH_STATUS.AUTHENTICATED;
+              authStatusF = AUTH_STATUS.AUTHENTICATED;
             } else {
               await signOut();
-              authStatus = AUTH_STATUS.UNAUTHENTICATED;
+              authStatusF = AUTH_STATUS.UNAUTHENTICATED;
             }
             currentUserSet(user);
           }
         }
-        authStatusSet(authStatus);
-        pubsub.publish(SIGN_IN, authStatus);
+        authStatusSet(authStatusF);
+        pubsub.publish(SIGN_IN, authStatusF);
       },
       onTokenRefresh: async (token) => authTokenSet({ access: token }),
     });

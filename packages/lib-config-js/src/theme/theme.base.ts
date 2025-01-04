@@ -173,7 +173,7 @@ const config = defineConfig<ThemeConfigModel, _ThemeConfigModel>({
       spacing: {
         [THEME_SIZE.LARGE]: 40,
 
-        [THEME_SIZE.MEDIUM]: 16,
+        [THEME_SIZE.MEDIUM]: 12,
 
         [THEME_SIZE.SMALL]: 6,
       },

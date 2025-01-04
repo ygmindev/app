@@ -47,7 +47,7 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
         <Button
           icon="cart"
           // TODO: plural based on count
-          iconText={`${items?.length ?? t('core:empty')}`}
+          // iconText={`${items?.length ?? t('core:empty')}`}
           onPress={() => push({ pathname: ORDER })}
           type={BUTTON_TYPE.INVISIBLE}
         />

@@ -14,7 +14,7 @@ import { props as loadingProps } from '@lib/frontend/core/components/Loading/Loa
 import { props as modalProps } from '@lib/frontend/core/components/Modal/Modal.library';
 import { props as textProps } from '@lib/frontend/core/components/Text/Text.library';
 import { props as tileProps } from '@lib/frontend/core/components/Tile/Tile.library';
-import { props as tooltipProps } from '@lib/frontend/core/components/Tooltip/Tooltip.library';
+import { props as tooltipIconProps } from '@lib/frontend/core/components/TooltipIcon/TooltipIcon.library';
 import { props as wrapperProps } from '@lib/frontend/core/components/Wrapper/Wrapper.library';
 import { props as calendarPickerProps } from '@lib/frontend/data/components/CalendarInput/CalendarInput.library';
 import { props as selectInputProps } from '@lib/frontend/data/components/SelectInput/SelectInput.library';
@@ -50,6 +50,6 @@ export const LIBRARY_PROPS = [
   textInputProps,
   textProps,
   tileProps,
-  tooltipProps,
+  tooltipIconProps,
   wrapperProps,
 ];

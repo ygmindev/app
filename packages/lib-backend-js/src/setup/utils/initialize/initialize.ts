@@ -5,14 +5,19 @@ import {
   type InitializeModel,
   type InitializeParamsModel,
 } from '@lib/backend/setup/utils/initialize/initialize.models';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const initialize = async ({ database }: InitializeParamsModel): Promise<InitializeModel> => {
   const result: InitializeModel = {};
   if (database) {
-    const databaseF = new Database(database);
-    await databaseF.connect();
-    Container.set(Database, databaseF, DATABASE_TYPE.MONGO);
-    result.database = databaseF;
+    try {
+      const databaseF = new Database(database);
+      await databaseF.connect();
+      Container.set(Database, databaseF, DATABASE_TYPE.MONGO);
+      result.database = databaseF;
+    } catch (e) {
+      logger.warn(`failed to connect to ${database.host} with error: ${e as Error}`);
+    }
   }
   return result;
 };

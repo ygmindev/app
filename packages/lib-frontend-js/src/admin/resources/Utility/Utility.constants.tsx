@@ -1,5 +1,6 @@
 import { Logo } from '@lib/frontend/app/components/Logo/Logo';
 import { Chip } from '@lib/frontend/core/components/Chip/Chip';
+import { Link } from '@lib/frontend/core/components/Link/Link';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
@@ -40,7 +41,7 @@ export const UTILITY_RESOURCE_PARAMS = {
     },
     { id: 'description' },
     { id: 'pricing' },
-    { id: 'url' },
+    { id: 'url', renderer: ({ value }) => (value ? <Link isNewTab>{value}</Link> : null) },
   ],
   name: UTILITY_RESOURCE_NAME,
   rootName: VENDOR_RESOURCE_NAME,

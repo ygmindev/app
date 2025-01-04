@@ -49,6 +49,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
       onElementStateChange,
       rightElement,
       size = THEME_SIZE.MEDIUM,
+      tooltip,
       type,
       ...props
     },
@@ -60,7 +61,9 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
     const { elementStateControlled, elementStateControlledSet, isLoading } =
       useElementStateControlled({ elementState, onElementStateChange });
 
-    const heightF = isNumber(height) ? height : height ?? theme.shape.size[size as ThemeSizeModel];
+    const heightF = isNumber(height)
+      ? height
+      : (height ?? theme.shape.size[size as ThemeSizeModel]);
     const isIconOnly = icon && !children;
     const typeF = type ?? (isIconOnly && !isShadow ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED);
 
@@ -209,6 +212,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         position={SHAPE_POSITION.RELATIVE}
         ref={ref}
         round={isIconOnly ? heightF / 2 : true}
+        tooltip={tooltip}
         width={props.width ?? (children ? undefined : heightF)}>
         <>
           <Appearable
