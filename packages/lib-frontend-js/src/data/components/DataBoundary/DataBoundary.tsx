@@ -185,6 +185,7 @@ export const DataBoundary = forwardRef(
           children &&
           children({
             data: fallbackData,
+            elementState: ELEMENT_STATE.LOADING,
             onChange: () => undefined,
             reset: async () => undefined,
             setData: async () => undefined,

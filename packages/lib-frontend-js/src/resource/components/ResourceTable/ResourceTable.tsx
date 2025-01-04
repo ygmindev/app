@@ -1,9 +1,11 @@
+import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { ConnectionBoundary } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary';
+import { type ConnectionBoundaryRefModel } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary.models';
 import { Table } from '@lib/frontend/data/components/Table/Table';
 import { TABLE_SELECT_TYPE } from '@lib/frontend/data/hooks/useTable/useTable.constants';
 import { type TableColumnModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
@@ -24,7 +26,7 @@ import {
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import range from 'lodash/range';
-import { type ReactElement, useCallback, useState } from 'react';
+import { type ReactElement, useCallback, useRef, useState } from 'react';
 
 export const ResourceTable = <
   TType extends EntityResourceModel,
@@ -48,6 +50,7 @@ export const ResourceTable = <
     { id: '_id' as StringKeyModel<TType>, isHidden: true },
     ...(fields ?? []),
   ];
+  const connectionBoundaryRef = useRef<ConnectionBoundaryRefModel<TType, TRoot>>(null);
 
   const handleUpsert = async (
     { _id, ...data }: PartialModel<TType>,
@@ -132,6 +135,7 @@ export const ResourceTable = <
       p
       params={params}
       query={getConnection}
+      ref={connectionBoundaryRef}
       s>
       {({ data, elementState, reset }) => (
         <Wrapper
@@ -178,6 +182,13 @@ export const ResourceTable = <
               title={t('core:filter')}>
               {t('core:filter_plural')}
             </ModalButton>
+
+            <Button
+              icon="refresh"
+              onPress={async () => connectionBoundaryRef.current?.reset?.()}
+              size={THEME_SIZE.SMALL}>
+              {t('core:refresh')}
+            </Button>
           </Wrapper>
 
           <Table<PartialModel<TType>>

@@ -24,13 +24,15 @@ export const _useQuery = <TParams = undefined, TResult = void>(
     staleTime: cache,
   });
   const refetchF = debounce(async () => refetch());
+  const setData = async (values: TResult): Promise<void> =>
+    queryClient.setQueryData(idF, values as never);
   return {
     data,
     id,
     query: async () => (isStale ? (await refetchF())?.data : data) ?? null,
     reset: async () => {
-      void queryClient.invalidateQueries({ queryKey: idF });
+      await queryClient.resetQueries({ queryKey: idF });
     },
-    setData: async (values) => queryClient.setQueryData(idF, values as never),
+    setData,
   };
 };

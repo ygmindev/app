@@ -28,6 +28,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
@@ -271,13 +272,16 @@ export const Table = forwardRef(
                     </AsyncText>
                   );
                 }
-
                 return (
                   <Skeleton
                     elementState={elementState}
                     key={cell.id}
                     width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
-                    {element ?? <AsyncText>{emptyCell}</AsyncText>}
+                    <Wrapper
+                      height={theme.shape.size[THEME_SIZE.SMALL]}
+                      justify={FLEX_JUSTIFY.CENTER}>
+                      {element ?? <AsyncText>{emptyCell}</AsyncText>}
+                    </Wrapper>
                   </Skeleton>
                 );
               })}
