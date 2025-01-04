@@ -107,7 +107,7 @@ export const Table = forwardRef(
             id: 'select' as StringKeyModel<TType>,
             isFrozen: true,
             label: '',
-            renderer: ({ index }) => <CheckboxInput />,
+            renderer: ({ index }) => <CheckboxInput isCenter />,
             width: theme.shape.size[THEME_SIZE.SMALL],
           },
         ]),

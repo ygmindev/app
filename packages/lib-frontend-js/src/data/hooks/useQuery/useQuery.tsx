@@ -7,7 +7,6 @@ import {
   type UseQueryParamsModel,
 } from '@lib/frontend/data/hooks/useQuery/useQuery.models';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const useQuery = <TParams = undefined, TResult = void>(
   ...[id, callback, params, options]: UseQueryParamsModel<TParams, TResult>
@@ -22,7 +21,6 @@ export const useQuery = <TParams = undefined, TResult = void>(
     async () => {
       options?.isBlocking && isLoadingSet(true);
       try {
-        await sleep(3000);
         return await callback(params);
       } catch (e) {
         handleError(e as Error, ERROR_TYPE.FALLBACK);
