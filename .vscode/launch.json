@@ -7,7 +7,7 @@
             "request": "launch",
             "sourceMaps": true,
             "program": "${workspaceRoot}/packages/tool-task-js/src/index.js",
-            "args": ["awd"],
+            "args": ["awjjd"],
             "outputCapture": "std"
         },
         {

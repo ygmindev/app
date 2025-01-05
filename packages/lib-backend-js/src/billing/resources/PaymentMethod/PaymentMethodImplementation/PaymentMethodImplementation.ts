@@ -1,10 +1,13 @@
 import { BankImplementation } from '@lib/backend/billing/resources/Bank/BankImplementation/BankImplementation';
 import { CardImplementation } from '@lib/backend/billing/resources/Card/CardImplementation/CardImplementation';
+import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethod';
 import { StripeAdminImplementation } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation';
 import { type StripeAdminImplementationModel } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.models';
 import { ProductImplementation } from '@lib/backend/commerce/resources/Product/ProductImplementation/ProductImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { createEmbeddedResourceImplementation } from '@lib/backend/resource/utils/createEmbeddedResourceImplementation/createEmbeddedResourceImplementation';
 import { LinkedUserImplementation } from '@lib/backend/user/resources/LinkedUser/LinkedUserImplementation/LinkedUserImplementation';
+import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { type ChargeModel } from '@lib/shared/billing/billing.models';
 import { type BankImplementationModel } from '@lib/shared/billing/resources/Bank/BankImplementation/BankImplementation.models';
@@ -13,7 +16,10 @@ import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import {
+  PaymentMethodFormModel,
+  type PaymentMethodModel,
+} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodImplementationModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
 import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
@@ -32,12 +38,24 @@ import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { LINKED_USER_TYPE } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import { type LinkedUserImplementationModel } from '@lib/shared/user/resources/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';
-import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
 import reduce from 'lodash/reduce';
 import { ObjectId } from 'mongodb';
 
 @withContainer({ name: `${PAYMENT_METHOD_RESOURCE_NAME}Implementation` })
-export class PaymentMethodImplementation implements PaymentMethodImplementationModel {
+export class PaymentMethodImplementation
+  extends createEmbeddedResourceImplementation<
+    PaymentMethodModel,
+    PaymentMethodFormModel,
+    UserModel,
+    UserFormModel
+  >({
+    Resource: PaymentMethod,
+    RootImplementation: UserImplementation,
+    name: PAYMENT_METHOD_RESOURCE_NAME,
+  })
+  implements PaymentMethodImplementationModel
+{
   @withInject(LinkedUserImplementation)
   protected linkedUserImplementation!: LinkedUserImplementationModel;
 

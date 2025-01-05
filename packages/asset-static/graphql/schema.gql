@@ -1117,8 +1117,12 @@ type Mutation {
   OtpCreateMany(input: OtpCreateManyInput): OtpCreateManyOutput
   OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
   OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  PaymentMethodCreate(input: PaymentMethodCreateInput): PaymentMethodCreateOutput
+  PaymentMethodCreateMany(input: PaymentMethodCreateManyInput): PaymentMethodCreateManyOutput
+  PaymentMethodRemove(input: PaymentMethodRemoveInput): PaymentMethodRemoveOutput
   PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
   PaymentMethodTokenRemove(input: PaymentMethodTokenRemoveInput): PaymentMethodTokenRemoveOutput
+  PaymentMethodUpdate(input: PaymentMethodUpdateInput): PaymentMethodUpdateOutput
   PricingCreate(input: PricingCreateInput): PricingCreateOutput
   PricingCreateMany(input: PricingCreateManyInput): PricingCreateManyOutput
   PricingRemove(input: PricingRemoveInput): PricingRemoveOutput
@@ -1556,6 +1560,100 @@ type PaymentMethod {
   type: String
 }
 
+input PaymentMethodCreateFormInput {
+  _id: String
+  _user: UserInput
+  created: DateTimeISO
+  externalId: String
+  fingerprint: String
+  isFixture: Boolean
+  last4: String
+  name: String
+  type: String
+}
+
+input PaymentMethodCreateInput {
+  form: PaymentMethodCreateFormInput
+  root: String
+}
+
+input PaymentMethodCreateManyFormInput {
+  _id: String
+  _user: UserInput
+  created: DateTimeISO
+  externalId: String
+  fingerprint: String
+  isFixture: Boolean
+  last4: String
+  name: String
+  type: String
+}
+
+input PaymentMethodCreateManyInput {
+  form: [PaymentMethodCreateManyFormInput]
+  root: String
+}
+
+type PaymentMethodCreateManyOutput {
+  result: PaymentMethod
+  root: User
+}
+
+type PaymentMethodCreateOutput {
+  result: PaymentMethod
+  root: User
+}
+
+type PaymentMethodGetConnectionConnection {
+  edges: [PaymentMethodGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type PaymentMethodGetConnectionEdge {
+  cursor: String
+  node: PaymentMethod
+}
+
+input PaymentMethodGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [PaymentMethodInput]
+  resourceValue: PaymentMethodInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input PaymentMethodGetConnectionInput {
+  filter: [PaymentMethodGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type PaymentMethodGetConnectionOutput {
+  result: PaymentMethodGetConnectionConnection
+  root: User
+}
+
+input PaymentMethodGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [PaymentMethodInput]
+  resourceValue: PaymentMethodInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input PaymentMethodGetInput {
+  filter: [PaymentMethodGetFilterInput]
+  root: String
+}
+
 input PaymentMethodGetManyFilterInput {
   booleanValue: Boolean
   condition: String
@@ -1578,6 +1676,11 @@ type PaymentMethodGetManyOutput {
   root: User
 }
 
+type PaymentMethodGetOutput {
+  result: PaymentMethod
+  root: User
+}
+
 input PaymentMethodInput {
   _id: String
   _user: UserInput
@@ -1588,6 +1691,39 @@ input PaymentMethodInput {
   last4: String
   name: String
   type: String
+}
+
+input PaymentMethodRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [PaymentMethodInput]
+  resourceValue: PaymentMethodInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input PaymentMethodRemoveInput {
+  filter: [PaymentMethodRemoveFilterInput]
+  root: String
+}
+
+type PaymentMethodRemoveOutput {
+  result: PaymentMethod
+  root: User
+}
+
+input PaymentMethodSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type PaymentMethodSearchOutput {
+  result: [PaymentMethod]
+  root: User
 }
 
 input PaymentMethodTokenCreateFormInput {
@@ -1623,6 +1759,41 @@ input PaymentMethodTokenRemoveInput {
 
 type PaymentMethodTokenRemoveOutput {
   result: Boolean
+}
+
+input PaymentMethodUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [PaymentMethodInput]
+  resourceValue: PaymentMethodInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input PaymentMethodUpdateInput {
+  filter: [PaymentMethodUpdateFilterInput]
+  root: String
+  update: PaymentMethodUpdateUpdateInput
+}
+
+type PaymentMethodUpdateOutput {
+  result: PaymentMethod
+  root: User
+}
+
+input PaymentMethodUpdateUpdateInput {
+  _id: String
+  _user: UserInput
+  created: DateTimeISO
+  externalId: String
+  fingerprint: String
+  isFixture: Boolean
+  last4: String
+  name: String
+  type: String
 }
 
 type PriceTier {
@@ -2075,7 +2246,10 @@ type Query {
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
   OtpSearch(input: OtpSearchInput): OtpSearchOutput
+  PaymentMethodGet(input: PaymentMethodGetInput): PaymentMethodGetOutput
+  PaymentMethodGetConnection(input: PaymentMethodGetConnectionInput): PaymentMethodGetConnectionOutput
   PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
+  PaymentMethodSearch(input: PaymentMethodSearchInput): PaymentMethodSearchOutput
   PricingGet(input: PricingGetInput): PricingGetOutput
   PricingGetConnection(input: PricingGetConnectionInput): PricingGetConnectionOutput
   PricingGetMany(input: PricingGetManyInput): PricingGetManyOutput
