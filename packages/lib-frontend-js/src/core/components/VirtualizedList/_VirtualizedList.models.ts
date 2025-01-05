@@ -6,6 +6,7 @@ import { type ReactElement } from 'react';
 export type _VirtualizedListPropsModel<TType extends WithIdModel> = _ViewPropsModel & {
   divider?: ReactElement;
   isHorizontal?: boolean;
+  itemSize?: number;
   items: Array<TType>;
   render(item: TType, index: number): ReactElement;
 };

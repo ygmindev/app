@@ -8,7 +8,7 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement } from 'react';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
-import { FlatList, type FlatListProps, type ScrollView } from 'react-native';
+import { FlatList, type FlatListProps } from 'react-native';
 
 const viewParamsScrollable = getViewParamsScrollable<
   _VirtualizedListPropsModel<WithIdModel>,
@@ -20,9 +20,9 @@ const viewParamsScrollable = getViewParamsScrollable<
 
     useImperativeHandle(ref, () => ({
       scrollTo: (position) =>
-        (refF.current?.getScrollableNode() as ScrollView).scrollTo({
-          ...position,
+        refF.current?.scrollToOffset({
           animated: false,
+          offset: props.horizontal ? (position.x ?? 0) : (position.y ?? 0),
         }),
     }));
 
@@ -34,9 +34,12 @@ const viewParamsScrollable = getViewParamsScrollable<
     );
   }),
 
-  getProps: ({ divider, isHorizontal, items, render }) => ({
+  getProps: ({ divider, isHorizontal, itemSize, items, render }) => ({
     ItemSeparatorComponent: divider ? () => divider : undefined,
     data: items,
+    getItemLayout: itemSize
+      ? (_, index) => ({ index, length: itemSize, offset: itemSize * index })
+      : undefined,
     horizontal: isHorizontal,
     keyExtractor: ({ id }) => id,
     renderItem: ({ index, item }) => render(item, index),
