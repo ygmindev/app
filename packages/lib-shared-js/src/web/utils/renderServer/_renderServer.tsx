@@ -20,7 +20,6 @@ import { QUERY } from '@lib/shared/query/query.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { matchRoutes } from '@lib/shared/route/utils/matchRoutes/matchRoutes';
 import { STATE } from '@lib/shared/state/state.constants';
-import { USER } from '@lib/shared/user/user.constants';
 import {
   type _RenderServerModel,
   type _RenderServerParamsModel,
@@ -55,8 +54,8 @@ export const _renderServer =
     } catch {}
 
     if (user) {
-      requestContext.user = user;
-      initialState[USER] = { currentUser: user };
+      // requestContext.user = user;
+      // initialState[USER] = { currentUser: user };
       initialState[AUTH] = { status: AUTH_STATUS.AUTHENTICATED, token };
     } else {
       initialState[AUTH] = { status: AUTH_STATUS.UNAUTHENTICATED };
