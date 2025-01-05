@@ -11,7 +11,10 @@ import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
 import { User } from '@lib/backend/user/resources/User/User';
 import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import {
+  PaymentMethodFormModel,
+  type PaymentMethodModel,
+} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { IdArgsModel } from '@lib/shared/resource/utils/IdArgs/IdArgs.models';
@@ -22,7 +25,7 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 @withContainer()
 @withResolver<PaymentMethodModel>()
 export class PaymentMethodResolver
-  extends createEmbeddedResourceResolver<PaymentMethodModel, undefined, UserModel>({
+  extends createEmbeddedResourceResolver<PaymentMethodModel, PaymentMethodFormModel, UserModel>({
     Resource: () => PaymentMethod,
     ResourceImplementation: PaymentMethodImplementation,
     RootResource: () => User,

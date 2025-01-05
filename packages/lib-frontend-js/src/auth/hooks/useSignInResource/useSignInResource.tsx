@@ -23,7 +23,9 @@ import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { type UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
 
-const userFields = USER_RESOURCE_PARAMS.fields.map(({ id }) => id);
+const userFields = USER_RESOURCE_PARAMS.fields.map(({ fields, id }) =>
+  fields ? { [id]: fields.map((field) => field.id) } : id,
+);
 
 export const useSignInResource = (): UseSignInResourceModel => {
   const actions = useActions();
