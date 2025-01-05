@@ -96,7 +96,8 @@ export const ResourceTable = <
           ),
           width: theme.shape.size[THEME_SIZE.SMALL],
         },
-        ...(fieldsF?.map(({ id, isHidden, label, renderer, width }) => ({
+        ...(fieldsF?.map(({ formatter, id, isHidden, label, renderer, width }) => ({
+          formatter,
           id,
           isHidden,
           label,

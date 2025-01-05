@@ -4,12 +4,15 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const USER_RESOURCE_PARAMS = {
   fields: [
-    { id: 'callingCode' },
     { id: 'email' },
     { id: 'first' },
     { id: 'last' },
     { id: 'paymentMethodPrimary' },
-    { id: 'phone' },
+    { id: 'callingCode', isHidden: true },
+    {
+      formatter: ({ row, value }) => row.callingCode && value && `+${row.callingCode} ${value}`,
+      id: 'phone',
+    },
   ],
   name: USER_RESOURCE_NAME,
 } satisfies ResourceParamsModel<UserModel>;

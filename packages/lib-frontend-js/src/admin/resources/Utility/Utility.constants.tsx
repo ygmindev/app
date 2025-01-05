@@ -40,8 +40,16 @@ export const UTILITY_RESOURCE_PARAMS = {
         ) : null,
     },
     { id: 'description' },
-    { id: 'pricing' },
-    { id: 'url', renderer: ({ value }) => (value ? <Link isNewTab>{value}</Link> : null) },
+    {
+      id: 'pricing',
+      renderer: ({ value }) => (value ? <Link isNewTab>{value}</Link> : null),
+      width: 300,
+    },
+    {
+      id: 'url',
+      renderer: ({ value }) => (value ? <Link isNewTab>{value}</Link> : null),
+      width: 300,
+    },
   ],
   name: UTILITY_RESOURCE_NAME,
   rootName: VENDOR_RESOURCE_NAME,

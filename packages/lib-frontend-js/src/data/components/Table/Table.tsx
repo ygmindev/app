@@ -154,10 +154,7 @@ export const Table = forwardRef(
       [Array<TableHeaderModel<TType>>, Array<TableHeaderModel<TType>>]
     >(() => partition(headers, (v) => v.isFrozen), [headers]);
 
-    const renderTable = (
-      h: Array<TableHeaderModel<TType>>,
-      isRenderFrozen?: boolean,
-    ): ReactNode => (
+    const renderTable = (h: Array<TableHeaderModel<TType>>, isFrozenTable?: boolean): ReactNode => (
       <Wrapper
         flex
         isHorizontalScrollable
@@ -172,7 +169,7 @@ export const Table = forwardRef(
             isFullWidth={isFullWidth}
             isRow>
             {h.map(({ align, id, isFrozen, isHidden, label, width }) => {
-              if (isHidden || (isFrozen ?? false !== isRenderFrozen ?? false)) {
+              if (isHidden || (isFrozen ?? false !== isFrozenTable ?? false)) {
                 return null;
               }
               const sortIndex = sortingF.findIndex((v) => v.id === id);
@@ -222,14 +219,14 @@ export const Table = forwardRef(
           flex
           isFullWidth={isFullWidth}
           isVerticalScrollable
-          isVerticalScrollableVisible={isRenderFrozen ? false : undefined}
+          isVerticalScrollableVisible={isFrozenTable ? false : undefined}
           items={rows}
           onScroll={(position) =>
-            isRenderFrozen
+            isFrozenTable
               ? listRef.current?.scrollTo(position)
               : frozenListRef.current?.scrollTo(position)
           }
-          ref={isRenderFrozen ? frozenListRef : listRef}
+          ref={isFrozenTable ? frozenListRef : listRef}
           render={(row, i) => (
             <Wrapper
               border={DIRECTION.TOP}
@@ -241,7 +238,7 @@ export const Table = forwardRef(
               key={row.id}
               pVertical={THEME_SIZE.SMALL}>
               {row.cells.map((cell) => {
-                if (cell.isHidden || (cell.isFrozen ?? false) !== (isRenderFrozen ?? false)) {
+                if (cell.isHidden || (cell.isFrozen ?? false) !== (isFrozenTable ?? false)) {
                   return null;
                 }
                 let element: ReactElement | null = null;
