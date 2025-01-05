@@ -90,7 +90,6 @@ export const _bundle = ({
       };
     });
   }
-
   const tsconfigDir = fromWorking(typescript?.configFilename);
   const config: _BundleConfigModel = {
     build: {

@@ -32,7 +32,11 @@ const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
           // 'react-native-reanimated/plugin',
         ],
 
-        presets: ['@babel/preset-react', '@babel/preset-flow', '@babel/preset-typescript'],
+        presets: [
+          ['@babel/preset-react', { runtime: 'automatic' }],
+          '@babel/preset-flow',
+          '@babel/preset-typescript',
+        ],
       },
 
       define: {

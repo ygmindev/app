@@ -11,7 +11,7 @@ export const USER_RESOURCE_PARAMS = {
     { id: 'last' },
     {
       fields: CARD_RESOURCE_PARAMS.fields,
-      formatter: ({ value }) => value?.map(({ last4 }) => last4).join(', '),
+      formatter: ({ value }) => value?.map?.(({ last4 }) => last4)?.join(', '),
       id: CARD_RESOURCE_NAME,
     },
     { id: 'callingCode', isHidden: true },

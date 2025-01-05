@@ -1,3 +1,6 @@
+import { type _DraggableListPropsModel } from '@lib/frontend/core/components/DraggableList/_DraggableList.models';
+import { type SFCPropsModel } from '@lib/frontend/core/core.models';
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement, useEffect, useState } from 'react';
 import {
   DragDropContext,
@@ -5,10 +8,6 @@ import {
   Droppable,
   type OnDragEndResponder,
 } from 'react-beautiful-dnd';
-
-import { type _DraggableListPropsModel } from '@lib/frontend/core/components/DraggableList/_DraggableList.models';
-import { type SFCPropsModel } from '@lib/frontend/core/core.models';
-import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 
 export const _DraggableList = <TType extends WithIdModel>({
   anchor,
