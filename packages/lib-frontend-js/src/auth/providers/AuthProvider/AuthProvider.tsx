@@ -28,22 +28,20 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
           ? AUTH_STATUS.AUTHENTICATED
           : AUTH_STATUS.UNAUTHENTICATED;
 
-        if (signInToken) {
-          if (currentUser?._id !== signInToken._id) {
-            let user: PartialModel<UserModel> | undefined = {
-              ...signInToken.claims,
-              _id: signInToken._id,
-            };
-            const { result } = await get({ filter: [{ field: '_id', value: signInToken._id }] });
-            user = result ?? undefined;
-            if (user) {
-              authStatusF = AUTH_STATUS.AUTHENTICATED;
-            } else {
-              await signOut();
-              authStatusF = AUTH_STATUS.UNAUTHENTICATED;
-            }
-            currentUserSet(user);
+        if (!signInToken || currentUser?._id !== signInToken._id) {
+          let user: PartialModel<UserModel> | undefined = signInToken
+            ? { ...signInToken.claims, _id: signInToken._id }
+            : undefined;
+          if (signInToken) {
+            user = (await get({ filter: [{ field: '_id', value: signInToken._id }] }))?.result;
           }
+          if (user) {
+            authStatusF = AUTH_STATUS.AUTHENTICATED;
+          } else {
+            await signOut();
+            authStatusF = AUTH_STATUS.UNAUTHENTICATED;
+          }
+          currentUserSet(user);
         }
         authStatusSet(authStatusF);
         pubsub.publish(SIGN_IN, authStatusF);

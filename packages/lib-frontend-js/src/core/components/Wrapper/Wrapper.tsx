@@ -35,12 +35,11 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
       return reduce(
         childrenF as Array<ReactElement<WrapperPropsModel>>,
         (result, child) => {
-          const childProps = child.props;
           return [
             ...result,
             cloneElement(child, {
               style: StyleSheet.flatten(
-                filterNil([isDistribute && { flexGrow: 1, flexShrink: 1 }, , childProps.style]),
+                filterNil([isDistribute && { flexGrow: 1, flexShrink: 1 }, , child.props.style]),
               ),
             }),
           ];

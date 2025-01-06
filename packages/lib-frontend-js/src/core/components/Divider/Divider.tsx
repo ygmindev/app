@@ -12,15 +12,23 @@ export const Divider: LFCModel<DividerPropsModel> = ({ children, isVertical, ...
   return (
     <Wrapper
       {...wrapperProps}
-      border={isVertical ? DIRECTION.LEFT : DIRECTION.TOP}
-      isCenter
+      isAlign
+      isRow
       position={SHAPE_POSITION.RELATIVE}>
+      <Wrapper
+        border={isVertical ? DIRECTION.LEFT : DIRECTION.TOP}
+        bottom={isVertical ? 0 : undefined}
+        left={isVertical ? undefined : 0}
+        position={SHAPE_POSITION.ABSOLUTE}
+        right={isVertical ? undefined : 0}
+        top={isVertical ? 0 : undefined}
+      />
+
       {children && (
         <Wrapper
           backgroundColor={THEME_COLOR_MORE.SURFACE}
           m="auto"
-          p={THEME_SIZE.SMALL}
-          position={SHAPE_POSITION.ABSOLUTE}>
+          pHorizontal={THEME_SIZE.SMALL}>
           <AsyncText>{children}</AsyncText>
         </Wrapper>
       )}

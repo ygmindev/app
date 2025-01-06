@@ -12,6 +12,7 @@ import isNumber from 'lodash/isNumber';
 export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   bottomElement,
   children,
+  isCenter,
   isFullHeight,
   isFullWidth,
   size = THEME_SIZE.MEDIUM,
@@ -27,6 +28,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   return (
     <Wrapper
       flex
+      isCenter={isCenter}
       isFullWidth
       s>
       {topElement && (

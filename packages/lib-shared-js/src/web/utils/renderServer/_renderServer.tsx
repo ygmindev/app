@@ -1,5 +1,7 @@
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import { getLocaleStoreFromI18n } from '@lib/backend/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
+import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { QueryClient } from '@lib/frontend/data/utils/QueryClient/QueryClient';
@@ -12,7 +14,7 @@ import {
 } from '@lib/frontend/root/stores/rootStore.models';
 import { Store } from '@lib/frontend/state/utils/Store/Store';
 import { AUTH } from '@lib/shared/auth/auth.constants';
-import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
+import { type PartialModel } from '@lib/shared/core/core.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
@@ -20,6 +22,8 @@ import { QUERY } from '@lib/shared/query/query.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { matchRoutes } from '@lib/shared/route/utils/matchRoutes/matchRoutes';
 import { STATE } from '@lib/shared/state/state.constants';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { USER } from '@lib/shared/user/user.constants';
 import {
   type _RenderServerModel,
   type _RenderServerParamsModel,
@@ -48,15 +52,19 @@ export const _renderServer =
     const token = initialState?.[AUTH]?.token;
     const requestContext: RequestContextModel | undefined = {};
 
-    let user: SignInTokenModel | null = null;
+    let user: PartialModel<UserModel> | undefined;
     try {
-      token?.access && (user = await getTokenFromHeader(`Bearer ${token.access}`));
+      const signIn = token?.access && (await getTokenFromHeader(`Bearer ${token.access}`));
+      signIn &&
+        (user = (
+          await Container.get(UserImplementation).get({
+            filter: [{ field: '_id', value: signIn._id }],
+          })
+        )?.result);
     } catch {}
-
     if (user) {
-      // requestContext.user = user;
-      // initialState[USER] = { currentUser: user };
       initialState[AUTH] = { status: AUTH_STATUS.AUTHENTICATED, token };
+      initialState[USER] = { currentUser: user };
     } else {
       initialState[AUTH] = { status: AUTH_STATUS.UNAUTHENTICATED };
     }
