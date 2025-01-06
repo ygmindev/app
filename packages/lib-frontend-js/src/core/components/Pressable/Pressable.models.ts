@@ -6,6 +6,7 @@ import {
 } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type AsyncTextModel, type ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import { type ThemeColorModel } from '@lib/frontend/style/style.models';
+import { type FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import { type ReactElement } from 'react';
 
 export type PressablePropsModel = ChildrenPropsModel<ReactElement> &
@@ -14,6 +15,7 @@ export type PressablePropsModel = ChildrenPropsModel<ReactElement> &
   Pick<ActivatablePropsModel, 'onActive' | 'onInactive' | 'trigger'> & {
     confirmColor?: ThemeColorModel;
     confirmMessage?: AsyncTextModel;
+    fontAlign?: FontAlignModel;
     tooltip?: AsyncTextModel;
   };
 

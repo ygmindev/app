@@ -8,6 +8,7 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
   children,
@@ -31,6 +32,7 @@ export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
         {route?.routes?.map(({ fullpath, icon, pathname, title }) => (
           <Button
             elementState={isActive({ pathname }) ? ELEMENT_STATE.ACTIVE : undefined}
+            fontAlign={FONT_ALIGN.LEFT}
             icon={icon}
             key={pathname}
             onPress={async () => push({ pathname: fullpath ?? pathname })}

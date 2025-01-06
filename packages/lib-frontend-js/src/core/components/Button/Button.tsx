@@ -41,6 +41,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
       color = THEME_COLOR.PRIMARY,
       description,
       elementState,
+      fontAlign = FONT_ALIGN.CENTER,
       height,
       icon,
       iconText,
@@ -143,7 +144,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
 
     let childrenF = children && (
       <AsyncText
-        align={FONT_ALIGN.CENTER}
+        align={fontAlign}
         color={color}
         colorRole={childColorRole}
         fontSize={THEME_SIZE.SMALL}
@@ -166,8 +167,9 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
 
     childrenF = childrenF ? (
       <Wrapper
-        isAlign
-        isRow>
+        align={FLEX_ALIGN.CENTER}
+        isRow
+        s>
         {leftElement}
 
         {iconF}
@@ -196,6 +198,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
           </AsyncText>
         </Wrapper>
       ));
+
     return (
       <Pressable
         {...wrapperProps}

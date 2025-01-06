@@ -26,6 +26,7 @@ export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel> &
     PressablePropsModel,
     | 'align'
     | 'confirmMessage'
+    | 'fontAlign'
     | 'height'
     | 'isFocusable'
     | 'isFullWidth'
