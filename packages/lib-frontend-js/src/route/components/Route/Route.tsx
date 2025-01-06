@@ -1,6 +1,8 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
+import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
+import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -22,19 +24,26 @@ import {
   TRACKING_EVENT_ACTION,
   TRACKING_EVENT_OBJECT,
 } from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
-import { cloneElement } from 'react';
+import { cloneElement, useEffect } from 'react';
 
 export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   useTranslation(route?.namespaces);
 
   const { wrapperProps } = useLayoutStyles({ props });
-  const { isActive } = useRouter();
+  const { isActive, push } = useRouter();
   const { track } = useTracking();
+
+  const [authStatus] = useStore('auth.status');
+  const isAuthenticated = authStatus === AUTH_STATUS.AUTHENTICATED;
 
   const [isBack] = useStore('route.isBack');
   const isLeaf = !route.routes;
   const isActiveF = isActive({ pathname: route.fullpath });
   const isActiveLeaf = isLeaf && isActive({ isExact: true, pathname: route.fullpath });
+
+  useEffect(() => {
+    route.isProtectable && !isAuthenticated && void push({ pathname: SIGN_IN });
+  }, [route.isProtectable]);
 
   useAsync(async () => {
     isActiveLeaf &&

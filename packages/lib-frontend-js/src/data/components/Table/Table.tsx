@@ -220,6 +220,7 @@ export const Table = forwardRef(
           isFullWidth={isFullWidth}
           isVerticalScrollable
           isVerticalScrollableVisible={isFrozenTable ? false : undefined}
+          itemSize={theme.shape.size[THEME_SIZE.SMALL]}
           items={rows}
           onScroll={(position) =>
             isFrozenTable
@@ -231,7 +232,6 @@ export const Table = forwardRef(
             <Wrapper
               border={DIRECTION.TOP}
               borderColor={theme.color.border}
-              height={theme.shape.size[THEME_SIZE.MEDIUM]}
               isAlign
               isOverflowHidden
               isRow
@@ -293,11 +293,9 @@ export const Table = forwardRef(
     return rows?.length ? (
       <Wrapper
         {...wrapperProps}
-        border
         flex
         isFullWidth
-        position={SHAPE_POSITION.RELATIVE}
-        round>
+        position={SHAPE_POSITION.RELATIVE}>
         {headersFrozen?.length > 0 && (
           <Wrapper
             border={DIRECTION.RIGHT}

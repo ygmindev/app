@@ -1,7 +1,7 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { type NavigationLayoutPropsModel } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
@@ -23,6 +23,7 @@ export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
       flex
       isRow>
       <Wrapper
+        border={DIRECTION.RIGHT}
         isVerticalScrollable
         p
         s={THEME_SIZE.SMALL}
