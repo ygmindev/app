@@ -148,6 +148,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         color={color}
         colorRole={childColorRole}
         fontSize={THEME_SIZE.SMALL}
+        isBold={type === BUTTON_TYPE.INVISIBLE}
         isEllipsis
         isFullWidth>
         {children}
@@ -161,6 +162,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         colorRole={childColorRole}
         icon={icon}
         iconText={iconText}
+        isBold={type === BUTTON_TYPE.INVISIBLE}
         width={isIconOnly ? undefined : theme.shape.size[THEME_SIZE_MORE.XSMALL]}
       />
     ) : undefined;
