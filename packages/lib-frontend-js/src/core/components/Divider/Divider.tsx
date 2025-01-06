@@ -14,7 +14,8 @@ export const Divider: LFCModel<DividerPropsModel> = ({ children, isVertical, ...
       {...wrapperProps}
       isAlign
       isRow
-      position={SHAPE_POSITION.RELATIVE}>
+      position={SHAPE_POSITION.RELATIVE}
+      zIndex>
       <Wrapper
         border={isVertical ? DIRECTION.LEFT : DIRECTION.TOP}
         bottom={isVertical ? 0 : undefined}
