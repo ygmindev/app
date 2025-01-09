@@ -36,6 +36,6 @@ export const TableInput = forwardRef(
       </Wrapper>
     );
   },
-) as <TType>(
+) as unknown as <TType>(
   props: RLFCPropsModel<TableInputRefModel<TType>, TableInputPropsModel<TType>>,
 ) => ReactElement<RLFCPropsModel<TableInputRefModel<TType>, TableInputPropsModel<TType>>>;

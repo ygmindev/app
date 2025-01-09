@@ -36,6 +36,7 @@ export type TableColumnModel<
     value?: TType[TKey];
   }): ReactElement<InputPropsModel<TType[TKey]>>;
   formatter?: DataFormatterModel<TType, TKey>;
+  headerRenderer?(): ReactElement;
   isArray?: boolean;
   isFrozen?: boolean;
   isHidden?: boolean;
@@ -49,7 +50,7 @@ export type TableColumnModel<
 
 export type TableRenderModel<TType> = Pick<
   TableColumnModel<TType>,
-  'align' | 'width' | 'isFrozen' | 'isHidden'
+  'align' | 'width' | 'headerRenderer' | 'isFrozen' | 'isHidden'
 >;
 
 export type TableHeaderModel<TType> = WithIdModel<StringKeyModel<TType>> &

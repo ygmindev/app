@@ -38,7 +38,7 @@ export const OrderForm: LFCModel<OrderFormPropsModel> = ({ ...props }) => {
       onSubmit={handleSubmit}
       onSuccess={handleSuccess}
       steps={[
-        { element: <ProductItemForm />, id: 'item', title: t('commerce:item_plural') },
+        { element: <ProductItemForm />, id: 'item', title: t('commerce:item_other') },
         { element: <PaymentForm />, id: 'payment', title: t('billing:payment') },
       ]}
     />

@@ -7,5 +7,7 @@ export type ResourceFilterPropsModel<TType, TResult = void, TRoot = undefined> =
   'fields' | 'onSubmit'
 > &
   ResourceParamsModel<TType, TRoot> & {
+    onChange?(v?: FilterModel<TType>[]): void;
     onSubmit?(data: Array<FilterModel<TType>>): Promise<TResult | null>;
+    value?: FilterModel<TType>[];
   };

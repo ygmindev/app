@@ -119,6 +119,7 @@ const FormContainerF = forwardRef(
             }),
           )
         : [];
+
     const fieldIds = useMemo(() => getFieldId(fields), [fields]);
 
     const getValues = async (
@@ -179,7 +180,7 @@ const FormContainerF = forwardRef(
       id,
     }: FormFieldModel<TType, TKey>): FormFieldModel<TType, TKey> => ({
       element: cloneElement(element, {
-        defaultValue: initialValues ? initialValues[id] : undefined,
+        defaultValue: initialValues?.[id] ?? element.props.defaultValue,
         elementState: elementStateF ?? element.props.elementState,
         error: errors?.[id],
         key: id,

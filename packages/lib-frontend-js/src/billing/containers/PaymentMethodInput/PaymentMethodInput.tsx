@@ -46,7 +46,7 @@ export const PaymentMethodInput: RLFCModel<
       <Tabs
         onChange={handleTabChange}
         tabs={[
-          { icon: 'bookmark', id: 'saved', label: t('billing:savedPaymentMethod_plural') },
+          { icon: 'bookmark', id: 'saved', label: t('billing:savedPaymentMethod_other') },
           { icon: 'add', id: 'new', label: t('billing:newPaymentMethod') },
         ]}
         value={tab}

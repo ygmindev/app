@@ -1,3 +1,5 @@
 {
-  "resource_plural": "resources"
+  "resource_other": "resources",
+  "rowsSelected_one": "{{count}} row selected",
+  "rowsSelected_other": "{{count}} rows selected"
 }

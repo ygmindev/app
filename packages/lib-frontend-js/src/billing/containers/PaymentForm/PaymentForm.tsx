@@ -118,7 +118,7 @@ export const PaymentForm: LFCModel<PaymentFormPropsModel> = ({
 //           {
 //             icon: 'bookmark',
 //             id: 'saved',
-//             label: t('billing:savedPaymentMethod_plural'),
+//             label: t('billing:savedPaymentMethod_other'),
 //           },
 //           { icon: 'add', id: 'new', label: t('billing:newPaymentMethod') },
 //         ]}

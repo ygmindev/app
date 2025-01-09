@@ -1,3 +1,4 @@
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
@@ -51,6 +52,7 @@ export const ResourceTable = <
     ...(fields ?? []),
   ];
   const connectionBoundaryRef = useRef<ConnectionBoundaryRefModel<TType, TRoot>>(null);
+  const [selectedRows, selectedRowsSet] = useState<Array<PartialModel<TType>>>([]);
 
   const handleUpsert = async (
     { _id, ...data }: PartialModel<TType>,
@@ -146,6 +148,35 @@ export const ResourceTable = <
             isAlign
             isRow>
             <ModalButton
+              {...wrapperProps}
+              element={({ onClose }) => (
+                <ResourceFilter
+                  fields={fieldsF}
+                  name={name}
+                  onCancel={onClose}
+                  onSubmit={async (filter) => {
+                    onClose();
+                    paramsSet({ filter });
+                  }}
+                  rootName={rootName}
+                  value={params?.filter}
+                />
+              )}
+              icon="filter"
+              size={THEME_SIZE.SMALL}
+              title={t('core:filter')}
+              type={BUTTON_TYPE.TRANSPARENT}>
+              {t('core:filter_other')}
+            </ModalButton>
+
+            <Button
+              icon="refresh"
+              onPress={async () => connectionBoundaryRef.current?.reset?.()}
+              size={THEME_SIZE.SMALL}>
+              {t('core:refresh')}
+            </Button>
+
+            <ModalButton
               element={({ onClose }) => (
                 <ResourceForm<TType, TForm, TRoot>
                   fields={fieldsF}
@@ -164,38 +195,21 @@ export const ResourceTable = <
               {t('core:new', { value: name })}
             </ModalButton>
 
-            <ModalButton
-              {...wrapperProps}
-              element={({ onClose }) => (
-                <ResourceFilter
-                  fields={fieldsF}
-                  name={name}
-                  onCancel={onClose}
-                  onSubmit={async (filter) => {
-                    onClose();
-                    paramsSet({ filter });
-                  }}
-                  rootName={rootName}
-                />
-              )}
-              icon="filter"
-              size={THEME_SIZE.SMALL}
-              title={t('core:filter')}>
-              {t('core:filter_plural')}
-            </ModalButton>
-
-            <Button
-              icon="refresh"
-              onPress={async () => connectionBoundaryRef.current?.reset?.()}
-              size={THEME_SIZE.SMALL}>
-              {t('core:refresh')}
-            </Button>
+            <Appearable isActive={selectedRows.length > 0}>
+              <Button
+                icon="dotsVertical"
+                size={THEME_SIZE.SMALL}
+                type={BUTTON_TYPE.TRANSPARENT}>
+                {t('resource:rowsSelected', { count: selectedRows.length })}
+              </Button>
+            </Appearable>
           </Wrapper>
 
           <Table<PartialModel<TType>>
             columns={getColumns(reset)}
             data={data?.result?.edges.map((edge) => edge.node)}
             elementState={elementState}
+            idField={'_id' as StringKeyModel<TType>}
             isRemovable
             onChange={() => {
               void reset();
@@ -203,6 +217,7 @@ export const ResourceTable = <
             onRemove={async ({ _id }) => {
               void remove({ filter: [{ field: '_id', value: _id }] });
             }}
+            onSelect={(v) => selectedRowsSet(v ?? [])}
             select={TABLE_SELECT_TYPE.MULTIPLE}
           />
         </Wrapper>

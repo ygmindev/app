@@ -61,6 +61,7 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
                   label: t('commerce:quantity'),
                 },
               ]}
+              idField="name"
             />
           }
           onChange={onChange ?? itemsSet}

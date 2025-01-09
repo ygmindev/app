@@ -9,6 +9,7 @@ import { type StringKeyModel } from '@lib/shared/core/core.models';
 export type _UseTableParamsModel<TType> = {
   columns?: Array<TableColumnModel<TType, StringKeyModel<TType>>>;
   data?: Array<TType>;
+  idField: StringKeyModel<TType>;
   sorting?: Array<TableSortModel<TType>>;
 };
 

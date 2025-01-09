@@ -13,7 +13,7 @@ export const AdminHomePage: LFCModel<AdminHomePagePropsModel> = ({ ...props }) =
     {
       icon: 'database',
       id: 'resources',
-      label: t('resource:resource_plural'),
+      label: t('resource:resource_other'),
     },
   ];
 

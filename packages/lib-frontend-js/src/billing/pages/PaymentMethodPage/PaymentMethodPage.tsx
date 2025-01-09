@@ -109,7 +109,7 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
                 }}
               />
             )}
-            title={t('billing:paymentMethod_plural')}
+            title={t('billing:paymentMethod_other')}
           />
         )}
       </DataBoundary>

@@ -1,52 +1,33 @@
-import { useProductResource } from '@lib/frontend/commerce/hooks/useProductResource/useProductResource';
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { Tile } from '@lib/frontend/core/components/Tile/Tile';
+import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
-import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
+import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
-import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useState } from 'react';
 
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const actions = useActions();
-  const { getMany } = useProductResource();
+  const [isActive, isActiveSet] = useState<boolean>(false);
+
   return (
-    <MainLayout {...wrapperProps}>
-      <DataBoundary
-        id="products"
-        query={getMany}>
-        {({ data }) => (
-          <Wrapper s>
-            {data?.result?.map((product) => (
-              <Wrapper
-                key={product._id}
-                s>
-                {product.Pricing?.map((pricing) => (
-                  <Tile
-                    key={pricing._id}
-                    rightElement={() => (
-                      <Button
-                        icon="add"
-                        onPress={() =>
-                          actions?.commerce.itemsAdd({
-                            name: product.name ?? '',
-                            price: pricing.price,
-                            pricingId: pricing._id,
-                            productId: product._id ?? '',
-                          })
-                        }
-                      />
-                    )}
-                    title={`${pricing.price}`}></Tile>
-                ))}
-              </Wrapper>
-            ))}
-          </Wrapper>
-        )}
-      </DataBoundary>
+    <MainLayout
+      {...wrapperProps}
+      p>
+      <>
+        <Dropdown
+          anchor={
+            <TextInput
+              onBlur={() => isActiveSet(false)}
+              onFocus={() => isActiveSet(true)}
+            />
+          }
+          isOpen={isActive}
+          onToggle={(v) => isActiveSet(v || false)}>
+          <Wrapper></Wrapper>
+        </Dropdown>
+      </>
     </MainLayout>
   );
 };

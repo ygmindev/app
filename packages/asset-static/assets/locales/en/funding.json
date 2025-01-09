@@ -7,7 +7,7 @@
   "curencyFormMessage": "which currency do you need funding in?",
   "currency": "currency",
   "funding": "funding",
-  "funding_plural": "fundings",
+  "funding_other": "fundings",
   "fundingDetail": "funding detail",
   "issuer": "issuer",
   "longTermRating": "long-term rating",

@@ -61,7 +61,7 @@ export const routes: Array<RouteModel> = getRoutes([
             pathname: PRODUCT_RESOURCE_NAME,
           },
         ],
-        title: ({ t }) => t('resource:resource_plural'),
+        title: ({ t }) => t('resource:resource_other'),
       },
     ],
   },

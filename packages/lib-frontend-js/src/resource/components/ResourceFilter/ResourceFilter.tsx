@@ -1,3 +1,5 @@
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { type FormTileModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
@@ -5,6 +7,8 @@ import { NumberRangeInput } from '@lib/frontend/data/components/NumberRangeInput
 import { NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput.constants';
 import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/TextFilterInput';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
@@ -15,12 +19,20 @@ import { type ReactElement, useMemo } from 'react';
 
 export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
   fields,
+  onChange,
   onSubmit,
   rootName,
+  value,
   ...props
 }: LFCPropsModel<ResourceFilterPropsModel<TType, TResult, TRoot>>): ReactElement<
   LFCPropsModel<ResourceFilterPropsModel<TType, TResult, TRoot>>
 > => {
+  const { t } = useTranslation();
+
+  const { valueControlled, valueControlledSet } = useValueControlled({ defaultValue: value });
+  console.warn(valueControlled);
+  console.warn(value);
+
   const fieldsF = useMemo<Array<FormTileModel<TType>>>(
     () =>
       fields?.reduce(
@@ -28,6 +40,10 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
           if (embeddedFields && !field) {
             return result;
           }
+
+          const defaultValue = valueControlled?.find((v) => v.field === id);
+          console.warn(defaultValue);
+
           const labelF = label ?? id;
           const element = (() => {
             switch (type) {
@@ -36,17 +52,17 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
                 // case NUMBER_UNIT_TYPE.RELATIVE_DATE:
                 return (
                   <NumberRangeInput
-                    beforeSubmit={async (value, field) =>
+                    beforeSubmit={async (v, field) =>
                       filterNil([
-                        !!value?.min && {
+                        !!v?.min && {
                           condition: FILTER_CONDITION.GRATER_THAN_EQUAL,
                           field,
-                          value: value.min,
+                          value: v.min,
                         },
-                        !!value?.max && {
+                        !!v?.max && {
                           condition: FILTER_CONDITION.LESS_THAN_EQUAL,
                           field,
-                          value: value.max,
+                          value: v.max,
                         },
                       ])
                     }
@@ -63,7 +79,12 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
                     options={options ?? []}
                   />
                 ) : (
-                  <TextFilterInput label={labelF} />
+                  <TextFilterInput
+                    defaultCondition={defaultValue?.condition}
+                    defaultValue={defaultValue?.value as string}
+                    isContainsOnly
+                    label={labelF}
+                  />
                 );
             }
           })();
@@ -71,7 +92,7 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
         },
         [] as Array<FormTileModel<TType>>,
       ) ?? [],
-    [fields],
+    [fields, valueControlled],
   );
 
   const handleSubmit = onSubmit
@@ -91,6 +112,13 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
       isFullHeight
       onSubmit={handleSubmit}
       p
+      topElement={() => (
+        <Button
+          onPress={() => valueControlledSet([])}
+          type={BUTTON_TYPE.TRANSPARENT}>
+          {t('core:clearAll')}
+        </Button>
+      )}
     />
   );
 };

@@ -1,7 +1,7 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Logo } from '@lib/frontend/app/components/Logo/Logo';
 import { type AppHeaderPropsModel } from '@lib/frontend/app/containers/AppHeader/AppHeader.models';
-import { AuthMenu } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu';
+import { AppMenu } from '@lib/frontend/app/containers/AppMenu/AppMenu';
 import { ORDER } from '@lib/frontend/commerce/commerce.constants';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
@@ -52,7 +52,7 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
           type={BUTTON_TYPE.INVISIBLE}
         />
 
-        <AuthMenu />
+        <AppMenu />
       </Wrapper>
 
       <Appearable

@@ -11,6 +11,7 @@ import { useMemo } from 'react';
 export const _useTable = <TType,>({
   columns,
   data,
+  idField,
   sorting,
 }: _UseTableParamsModel<TType>): _UseTableModel<TType> => {
   const { t } = useTranslation();
@@ -42,7 +43,12 @@ export const _useTable = <TType,>({
             label: header.column.columnDef.header as string,
             width: header.getSize() ?? undefined,
             ...(column
-              ? { align: column.align, isFrozen: column.isFrozen, isHidden: column.isHidden }
+              ? {
+                  align: column.align,
+                  headerRenderer: column.headerRenderer,
+                  isFrozen: column.isFrozen,
+                  isHidden: column.isHidden,
+                }
               : {}),
           };
         }),
@@ -50,35 +56,40 @@ export const _useTable = <TType,>({
       [] as Array<TableHeaderModel<TType>>,
     ),
     rows:
-      table.getRowModel().rows.map((row) => ({
-        cells: row.getVisibleCells().map((cell, i) => {
-          const column = columns && columns[i];
-          const value = cell.getValue();
-          return {
-            id: cell.id as StringKeyModel<TType>,
-            value: (column && column.formatter
-              ? column.formatter({
-                  index: i,
-                  row: row.original,
-                  value: value as TType[StringKeyModel<TType>],
-                })
-              : value) as TType[StringKeyModel<TType>],
-            width: cell.column.getSize() ?? undefined,
-            ...(column
-              ? {
-                  align: column.align,
-                  columnId: column.id,
-                  field: column.field,
-                  isFrozen: column.isFrozen,
-                  isHidden: column.isHidden,
-                  label: column.label,
-                  renderer: column.renderer,
-                }
-              : {}),
-          };
-        }),
-        id: row.id,
-        value: row.original,
-      })) ?? [],
+      table.getRowModel().rows.map((row) => {
+        const rowId = `${row.original[idField] as string}`;
+        return {
+          cells: row.getVisibleCells().map((cell, i) => {
+            const column = columns && columns[i];
+            const value = cell.getValue();
+            return {
+              id: cell.id as StringKeyModel<TType>,
+              value: (column && column.formatter
+                ? column.formatter({
+                    id: rowId,
+                    index: i,
+                    row: row.original,
+                    value: value as TType[StringKeyModel<TType>],
+                  })
+                : value) as TType[StringKeyModel<TType>],
+              width: cell.column.getSize() ?? undefined,
+              ...(column
+                ? {
+                    align: column.align,
+                    columnId: column.id,
+                    field: column.field,
+                    headerRenderer: column.headerRenderer,
+                    isFrozen: column.isFrozen,
+                    isHidden: column.isHidden,
+                    label: column.label,
+                    renderer: column.renderer,
+                  }
+                : {}),
+            };
+          }),
+          id: rowId,
+          value: row.original,
+        };
+      }) ?? [],
   };
 };

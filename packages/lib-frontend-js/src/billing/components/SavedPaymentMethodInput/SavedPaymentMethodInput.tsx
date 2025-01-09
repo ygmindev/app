@@ -43,7 +43,7 @@ export const SavedPaymentMethodInput: LFCModel<SavedPaymentMethodInputPropsModel
       query={getMany}>
       {({ data }) => (
         <MenuInput
-          label={t('billing:savedPaymentMethod_plural')}
+          label={t('billing:savedPaymentMethod_other')}
           onChange={(v) => {
             const selectedValue = data?.result?.find(({ _id }) => _id === v);
             selectedValue && valueControlledSet(selectedValue);

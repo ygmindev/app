@@ -19,6 +19,7 @@ import {
 } from '@lib/frontend/data/components/Table/Table.models';
 import { type FormErrorModel } from '@lib/frontend/data/data.models';
 import { useTable } from '@lib/frontend/data/hooks/useTable/useTable';
+import { TABLE_SELECT_TYPE } from '@lib/frontend/data/hooks/useTable/useTable.constants';
 import {
   type TableHeaderModel,
   type TableSortModel,
@@ -61,6 +62,7 @@ export const Table = forwardRef(
       elementState,
       emptyCell = '-',
       emptyElement,
+      idField,
       isFullWidth = true,
       isHeadless,
       isRemovable,
@@ -77,6 +79,7 @@ export const Table = forwardRef(
     const { t } = useTranslation();
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props });
+    const [selected, selectedSet] = useState<Record<string, true>>({});
 
     const listRef = useRef<VirtualizedListRefModel>(null);
     const frozenListRef = useRef<VirtualizedListRefModel>(null);
@@ -104,20 +107,42 @@ export const Table = forwardRef(
           },
 
           select && {
+            headerRenderer: () => <Button>hi</Button>,
             id: 'select' as StringKeyModel<TType>,
             isFrozen: true,
             label: '',
-            renderer: ({ index }) => <CheckboxInput isCenter />,
+            renderer: ({ id }) => (
+              <CheckboxInput
+                isCenter
+                onChange={(v) => {
+                  if (select === TABLE_SELECT_TYPE.SINGLE) {
+                    selectedSet({ [id]: true });
+                  } else {
+                    const selectedNew = cloneDeep(selected);
+                    if (v) {
+                      selectedNew[id] = true;
+                    } else {
+                      delete selectedNew[id];
+                    }
+                    selectedSet(selectedNew);
+                    onSelect &&
+                      onSelect(data?.filter((row) => selectedNew[row[idField] as string]));
+                  }
+                }}
+                value={selected[id] ?? false}
+              />
+            ),
             width: theme.shape.size[THEME_SIZE.SMALL],
           },
         ]),
-      [columns, isRemovable],
+      [columns, isRemovable, select, selected],
     );
 
     const [sortingF, sortingSet] = useState<Array<TableSortModel<TType>>>(sorting ?? []);
     const { headers, rows } = useTable({
       columns: columnsF,
       data,
+      idField,
       sorting: sortingF,
     });
     const validate = useValidator();
@@ -168,7 +193,7 @@ export const Table = forwardRef(
             isAlign
             isFullWidth={isFullWidth}
             isRow>
-            {h.map(({ align, id, isFrozen, isHidden, label, width }) => {
+            {h.map(({ align, headerRenderer, id, isFrozen, isHidden, label, width }) => {
               if (isHidden || (isFrozen ?? false !== isFrozenTable ?? false)) {
                 return null;
               }
@@ -193,12 +218,16 @@ export const Table = forwardRef(
                   }
                   position={SHAPE_POSITION.RELATIVE}
                   width={width || TABLE_CELL_WIDTH_DEFAULT}>
-                  <Text
-                    align={align}
-                    isBold
-                    isEllipsis>
-                    {label}
-                  </Text>
+                  {headerRenderer ? (
+                    headerRenderer()
+                  ) : (
+                    <Text
+                      align={align}
+                      isBold
+                      isEllipsis>
+                      {label}
+                    </Text>
+                  )}
 
                   <Appearable
                     isActive={isSorted}
@@ -243,7 +272,12 @@ export const Table = forwardRef(
                 }
                 let element: ReactElement | null = null;
                 if (cell.renderer) {
-                  element = cell.renderer({ index: i, row: row.value, value: cell.value });
+                  element = cell.renderer({
+                    id: row.id,
+                    index: i,
+                    row: row.value,
+                    value: cell.value,
+                  });
                 } else if (cell.field) {
                   const field = cell.field({ index: i, row: row.value, value: cell.value });
                   const onChangeF = field?.props.onChange;
@@ -329,6 +363,6 @@ export const Table = forwardRef(
       ))
     );
   },
-) as <TType>(
+) as unknown as <TType>(
   props: RLFCPropsModel<TableRefModel, TablePropsModel<TType>>,
 ) => ReactElement<RLFCPropsModel<TableRefModel, TablePropsModel<TType>>>;

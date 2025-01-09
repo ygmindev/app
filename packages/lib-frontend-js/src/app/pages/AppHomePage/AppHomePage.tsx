@@ -30,7 +30,7 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
             items={data?.result?.map(({ _id, name, types }) => ({
               id: _id ?? '',
             }))}
-            title={t('group:group_plural', { value: currentUser?.email })}>
+            title={t('group:group_other', { value: currentUser?.email })}>
             {data?.result?.map(({ _id, name, types }) => (
               <RouteItem
                 key={_id}

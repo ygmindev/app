@@ -1,5 +1,5 @@
+import { type AppMenuPropsModel } from '@lib/frontend/app/containers/AppMenu/AppMenu.models';
 import { SIGN_IN, SIGN_OUT } from '@lib/frontend/auth/auth.constants';
-import { type AuthMenuPropsModel } from '@lib/frontend/auth/containers/AuthMenu/AuthMenu.models';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { Button } from '@lib/frontend/core/components/Button/Button';
@@ -19,7 +19,7 @@ import { AUTH } from '@lib/shared/auth/auth.constants';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
 import { useRef } from 'react';
 
-export const AuthMenu: LFCModel<AuthMenuPropsModel> = ({ ...props }) => {
+export const AppMenu: LFCModel<AppMenuPropsModel> = ({ ...props }) => {
   const { t } = useTranslation([AUTH]);
   const { wrapperProps } = useLayoutStyles({ props });
   const { signOut } = useSignInResource();
@@ -60,8 +60,8 @@ export const AuthMenu: LFCModel<AuthMenuPropsModel> = ({ ...props }) => {
       anchor={(isOpen) => (
         <Button
           elementState={isOpen ? ELEMENT_STATE.ACTIVE : undefined}
-          icon="personCircle"
-          tooltip={t('user:account')}
+          icon="menu"
+          tooltip={t('core:menu')}
         />
       )}
       options={optionsF}
