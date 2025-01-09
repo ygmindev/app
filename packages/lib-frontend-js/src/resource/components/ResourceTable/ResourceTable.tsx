@@ -19,6 +19,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
+import { uid } from '@lib/shared/core/utils/uid/uid';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import {
   type EntityResourceDataModel,
@@ -120,7 +121,8 @@ export const ResourceTable = <
             node: getColumns().reduce(
               (result, column) => ({
                 ...result,
-                [column.id]: column.renderer ? undefined : TEST_TEXT_SHORT,
+                [column.id]:
+                  column.id === '_id' ? uid() : column.renderer ? undefined : TEST_TEXT_SHORT,
               }),
               {} as PartialModel<TType>,
             ),

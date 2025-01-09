@@ -1,4 +1,5 @@
 {
+  "clearAllFilters": "clear all filters",
   "resource_other": "resources",
   "rowsSelected_one": "{{count}} row selected",
   "rowsSelected_other": "{{count}} rows selected"

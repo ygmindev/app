@@ -30,7 +30,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
       flex
       isCenter={isCenter}
       isFullWidth
-      s>
+      s={!isFullHeight}>
       {topElement && (
         <Wrapper isFullWidth>
           <Wrapper

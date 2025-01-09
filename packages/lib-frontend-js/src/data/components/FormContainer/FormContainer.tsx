@@ -194,7 +194,7 @@ const FormContainerF = forwardRef(
           ((elementF: InputRefModel<TType, TKey>) =>
             inputRefs.current && (inputRefs.current[id] = elementF)),
         testID: id,
-        value: values[id],
+        value: values?.[id] ?? element.props.value,
       } as InputPropsModel<TType[TKey]>),
       id,
     });

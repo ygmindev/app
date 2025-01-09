@@ -1,5 +1,6 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { type FormTileModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
@@ -10,6 +11,8 @@ import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/T
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
@@ -30,8 +33,6 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
   const { t } = useTranslation();
 
   const { valueControlled, valueControlledSet } = useValueControlled({ defaultValue: value });
-  console.warn(valueControlled);
-  console.warn(value);
 
   const fieldsF = useMemo<Array<FormTileModel<TType>>>(
     () =>
@@ -40,10 +41,7 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
           if (embeddedFields && !field) {
             return result;
           }
-
-          const defaultValue = valueControlled?.find((v) => v.field === id);
-          console.warn(defaultValue);
-
+          const v = valueControlled?.find((v) => v.field === id);
           const labelF = label ?? id;
           const element = (() => {
             switch (type) {
@@ -80,10 +78,10 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
                   />
                 ) : (
                   <TextFilterInput
-                    defaultCondition={defaultValue?.condition}
-                    defaultValue={defaultValue?.value as string}
+                    condition={v?.condition}
                     isContainsOnly
                     label={labelF}
+                    value={v?.value as string}
                   />
                 );
             }
@@ -113,11 +111,17 @@ export const ResourceFilter = <TType, TResult = void, TRoot = undefined>({
       onSubmit={handleSubmit}
       p
       topElement={() => (
-        <Button
-          onPress={() => valueControlledSet([])}
-          type={BUTTON_TYPE.TRANSPARENT}>
-          {t('core:clearAll')}
-        </Button>
+        <Wrapper
+          isRow
+          justify={FLEX_JUSTIFY.END}>
+          <Button
+            icon="switch"
+            onPress={() => valueControlledSet([])}
+            size={THEME_SIZE.SMALL}
+            type={BUTTON_TYPE.TRANSPARENT}>
+            {t('resource:clearAllFilters')}
+          </Button>
+        </Wrapper>
       )}
     />
   );
