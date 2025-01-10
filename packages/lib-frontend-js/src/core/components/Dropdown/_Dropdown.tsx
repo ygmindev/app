@@ -1,6 +1,6 @@
 import {
   autoUpdate,
-  flip,
+  // flip,
   FloatingFocusManager,
   FloatingPortal,
   offset,
@@ -39,7 +39,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   const { context, floatingStyles, refs } = useFloating({
     middleware: [
       offset(offsetF),
-      flip({ fallbackAxisSideDirection: 'end' }),
+      // flip({ fallbackAxisSideDirection: 'end' }),
       shift({ padding: offsetF }),
       size({
         apply({ availableHeight, availableWidth, elements, rects }) {

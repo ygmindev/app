@@ -62,7 +62,6 @@ export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInput
                   {...propsF}
                   icon="search"
                   onChange={valueControlledSet}
-                  placeholder={t('core:any')}
                   ref={ref}
                   value={valueControlled}
                 />

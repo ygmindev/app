@@ -1,8 +1,10 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Droppable } from '@lib/frontend/core/components/Droppable/Droppable';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
+import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
@@ -18,7 +20,7 @@ import { ResourceForm } from '@lib/frontend/resource/containers/ResourceForm/Res
 import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
@@ -27,8 +29,10 @@ import {
   type EntityResourceDataModel,
   type EntityResourceModel,
 } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
+import cloneDeep from 'lodash/cloneDeep';
 import range from 'lodash/range';
 import { type ReactElement, useCallback, useRef, useState } from 'react';
 
@@ -50,6 +54,9 @@ export const ResourceTable = <
   const { wrapperProps } = useLayoutStyles({ props });
   const { create, getConnection, remove, update } = implementation;
   const [params, paramsSet] = useState<InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>>();
+  const [filters, filtersSet] =
+    useState<Record<StringKeyModel<TType>, Array<FilterModel<TType>>>>();
+
   const fieldsF: ResourceFieldsModel<TType> = [
     { id: '_id' as StringKeyModel<TType>, isHidden: true },
     ...(fields ?? []),
@@ -113,6 +120,19 @@ export const ResourceTable = <
       ] as Array<TableColumnModel<PartialModel<TType>>>,
     [fieldsF],
   );
+
+  const handleFilter = async (
+    k: StringKeyModel<TType>,
+    v?: Record<StringKeyModel<TType>, Array<FilterModel<TType>>>,
+  ): Promise<void> => {
+    let filtersNew = cloneDeep(filters);
+    if (v) {
+      filtersNew = { ...filtersNew, ...v };
+    } else {
+      delete filtersNew?.[k];
+    }
+    filtersSet(filtersNew);
+  };
 
   return (
     <ConnectionBoundary
@@ -207,6 +227,25 @@ export const ResourceTable = <
                         anchor={() => (
                           <Button
                             icon="filter"
+                            rightElement={
+                              <Wrapper
+                                isRow
+                                s={THEME_SIZE.SMALL}>
+                                <Divider isVertical />
+
+                                <Wrapper
+                                  isAlign
+                                  isRow>
+                                  {filters?.[field.id] && (
+                                    <Text
+                                      color={THEME_COLOR.SECONDARY}
+                                      isBold>
+                                      {filters?.[field.id]?.map((v) => v.value).join(', ')}
+                                    </Text>
+                                  )}
+                                </Wrapper>
+                              </Wrapper>
+                            }
                             size={THEME_SIZE.SMALL}
                             type={BUTTON_TYPE.TRANSPARENT}>
                             {field.label ?? field.id}
@@ -214,7 +253,11 @@ export const ResourceTable = <
                         )}
                         direction={DIRECTION.BOTTOM}
                         key={field.id}>
-                        <ResourceFilter field={field} />
+                        <ResourceFilter
+                          field={field}
+                          onSubmit={async (v) => handleFilter(field.id, v)}
+                          values={filters?.[field.id]}
+                        />
                       </Droppable>
                     ),
                 )}
@@ -224,6 +267,7 @@ export const ResourceTable = <
                 isAlign
                 isRow>
                 <Button
+                  onPress={() => filtersSet(undefined)}
                   size={THEME_SIZE.SMALL}
                   type={BUTTON_TYPE.INVISIBLE}>
                   {t('resource:clearAllFilters')}

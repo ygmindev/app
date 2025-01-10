@@ -5,19 +5,26 @@ import { NumberRangeInput } from '@lib/frontend/data/components/NumberRangeInput
 import { NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput.constants';
 import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/TextFilterInput';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
+import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
+import isNil from 'lodash/isNil';
+import reduce from 'lodash/reduce';
 import { type ReactElement } from 'react';
 
 export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
   field,
+  onSubmit,
+  values,
   ...props
 }: LFCPropsModel<ResourceFilterPropsModel<TType, TKey>>): ReactElement<
   LFCPropsModel<ResourceFilterPropsModel<TType, TKey>>
 > => {
+  const { t } = useTranslation();
   const getFields = (): Array<FormFieldsModel<TType>> => {
     const labelF = field.label ?? field.id;
     const element = (() => {
@@ -55,6 +62,7 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
             />
           ) : (
             <TextFilterInput
+              defaultValue={values?.[0]?.value as string}
               isValueOnly
               label={labelF}
             />
@@ -64,21 +72,24 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
     return [{ fields: [{ element, id: field.id }], id: field.id }];
   };
 
-  // const handleSubmit = onSubmit
-  //   ? async (filters: TType): Promise<TResult | null> =>
-  //       onSubmit(
-  //         Object.values(filters as Record<string, Array<FilterModel<TType>>>).reduce(
-  //           (result, v) => [...result, ...(v ? v.filter((vv) => !isNil(vv.value)) : [])],
-  //           [],
-  //         ),
-  //       )
-  //   : undefined;
+  const handleSubmit = async (filters: TType): Promise<void> =>
+    onSubmit(
+      reduce(
+        filters as Record<StringKeyModel<TType>, Array<FilterModel<TType>>>,
+        (result, v, k) => (isNil(v) ? result : { ...result, [k]: v }),
+        {} as Record<StringKeyModel<TType>, Array<FilterModel<TType>>>,
+      ),
+    );
 
   return (
     <FormContainer
       {...props}
+      cancelLabel={t('resource:clearAllFilters')}
       fields={getFields()}
-      // onSubmit={handleSubmit}
+      onCancel={() => {
+        void handleSubmit({ [field.id]: [] } as TType);
+      }}
+      onSubmit={handleSubmit}
     />
   );
 };

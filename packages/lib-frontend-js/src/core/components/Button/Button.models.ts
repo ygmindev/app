@@ -9,7 +9,7 @@ import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wr
 import {
   type AsyncTextModel,
   type ChildrenPropsModel,
-  type SizablePropsModel,
+  type SizableMorePropsModel,
 } from '@lib/frontend/core/core.models';
 import { type ThemeColorPropsModel } from '@lib/frontend/style/style.models';
 import { type ReactElement } from 'react';
@@ -20,7 +20,7 @@ export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel> &
   AnimatablePropsModel &
   WithIconPropsModel &
   Pick<WrapperPropsModel, 'isShadow'> &
-  SizablePropsModel &
+  SizableMorePropsModel &
   ThemeColorPropsModel &
   Pick<
     PressablePropsModel,
