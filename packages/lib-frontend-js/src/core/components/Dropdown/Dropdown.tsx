@@ -45,7 +45,7 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forward
         isOpen={isOpen}
         maxHeight={maxHeight ?? theme.shape.size[THEME_SIZE.MEDIUM]}
         maxWidth={maxWidth ?? theme.shape.size[THEME_SIZE.MEDIUM]}
-        offset={theme.shape.spacing[THEME_SIZE.MEDIUM]}
+        offset={theme.shape.spacing[THEME_SIZE.SMALL]}
         onToggle={onToggle}
         style={styles}>
         <Wrapper

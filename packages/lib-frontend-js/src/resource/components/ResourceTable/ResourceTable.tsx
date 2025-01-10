@@ -1,9 +1,10 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Droppable } from '@lib/frontend/core/components/Droppable/Droppable';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
+import { DIRECTION, TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { ConnectionBoundary } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary';
 import { type ConnectionBoundaryRefModel } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary.models';
@@ -18,6 +19,7 @@ import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -74,6 +76,7 @@ export const ResourceTable = <
       [
         {
           id: 'update',
+          isFilterDisabled: true,
           isFrozen: true,
           label: '',
           renderer: ({ row }) => (
@@ -142,88 +145,110 @@ export const ResourceTable = <
       query={getConnection}
       ref={connectionBoundaryRef}
       s>
-      {({ data, elementState, reset }) => (
-        <Wrapper
-          flex
-          s>
+      {({ data, elementState, reset }) => {
+        const columns = getColumns(reset);
+        return (
           <Wrapper
-            isAlign
-            isRow>
-            <ModalButton
-              {...wrapperProps}
-              element={({ onClose }) => (
-                <ResourceFilter
-                  fields={fieldsF}
-                  name={name}
-                  onCancel={onClose}
-                  onSubmit={async (filter) => {
-                    onClose();
-                    paramsSet({ filter });
-                  }}
-                  rootName={rootName}
-                  value={params?.filter}
-                />
-              )}
-              icon="filter"
-              size={THEME_SIZE.SMALL}
-              title={t('core:filter')}
-              type={BUTTON_TYPE.TRANSPARENT}>
-              {t('core:filter_other')}
-            </ModalButton>
-
-            <Button
-              icon="refresh"
-              onPress={async () => connectionBoundaryRef.current?.reset?.()}
-              size={THEME_SIZE.SMALL}>
-              {t('core:refresh')}
-            </Button>
-
-            <ModalButton
-              element={({ onClose }) => (
-                <ResourceForm<TType, TForm, TRoot>
-                  fields={fieldsF}
-                  name={name}
-                  onCancel={onClose}
-                  onSubmit={async (input, root) => {
-                    await handleUpsert(input, root);
-                    await reset();
-                    onClose();
-                  }}
-                  rootName={rootName}
-                />
-              )}
-              icon="add"
-              size={THEME_SIZE.SMALL}>
-              {t('core:new', { value: name })}
-            </ModalButton>
-
-            <Appearable isActive={selectedRows.length > 0}>
+            flex
+            s>
+            <Wrapper
+              isAlign
+              isRow>
               <Button
-                icon="dotsVertical"
-                size={THEME_SIZE.SMALL}
-                type={BUTTON_TYPE.TRANSPARENT}>
-                {t('resource:rowsSelected', { count: selectedRows.length })}
+                icon="refresh"
+                onPress={async () => connectionBoundaryRef.current?.reset?.()}
+                size={THEME_SIZE.SMALL}>
+                {t('core:refresh')}
               </Button>
-            </Appearable>
-          </Wrapper>
 
-          <Table<PartialModel<TType>>
-            columns={getColumns(reset)}
-            data={data?.result?.edges.map((edge) => edge.node)}
-            elementState={elementState}
-            idField={'_id' as StringKeyModel<TType>}
-            isRemovable
-            onChange={() => {
-              void reset();
-            }}
-            onRemove={async ({ _id }) => {
-              void remove({ filter: [{ field: '_id', value: _id }] });
-            }}
-            onSelect={(v) => selectedRowsSet(v ?? [])}
-            select={TABLE_SELECT_TYPE.MULTIPLE}
-          />
-        </Wrapper>
-      )}
+              <ModalButton
+                element={({ onClose }) => (
+                  <ResourceForm<TType, TForm, TRoot>
+                    fields={fieldsF}
+                    name={name}
+                    onCancel={onClose}
+                    onSubmit={async (input, root) => {
+                      await handleUpsert(input, root);
+                      await reset();
+                      onClose();
+                    }}
+                    rootName={rootName}
+                  />
+                )}
+                icon="add"
+                size={THEME_SIZE.SMALL}>
+                {t('core:new', { value: name })}
+              </ModalButton>
+
+              <Appearable isActive={selectedRows.length > 0}>
+                <Button
+                  icon="dotsVertical"
+                  size={THEME_SIZE.SMALL}
+                  type={BUTTON_TYPE.TRANSPARENT}>
+                  {t('resource:rowsSelected', { count: selectedRows.length })}
+                </Button>
+              </Appearable>
+            </Wrapper>
+
+            <Wrapper
+              isFullWidth
+              isRow
+              justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
+              <Wrapper
+                flex
+                isAlign
+                isHorizontalScrollable
+                isRow>
+                {fieldsF.map(
+                  (field) =>
+                    !field.isFilterDisabled &&
+                    (!field.fields || field.field) && (
+                      <Droppable
+                        anchor={() => (
+                          <Button
+                            icon="filter"
+                            size={THEME_SIZE.SMALL}
+                            type={BUTTON_TYPE.TRANSPARENT}>
+                            {field.label ?? field.id}
+                          </Button>
+                        )}
+                        direction={DIRECTION.BOTTOM}
+                        key={field.id}>
+                        <ResourceFilter field={field} />
+                      </Droppable>
+                    ),
+                )}
+              </Wrapper>
+
+              <Wrapper
+                isAlign
+                isRow>
+                <Button
+                  size={THEME_SIZE.SMALL}
+                  type={BUTTON_TYPE.INVISIBLE}>
+                  {t('resource:clearAllFilters')}
+                </Button>
+              </Wrapper>
+            </Wrapper>
+
+            <Table<PartialModel<TType>>
+              columns={columns}
+              data={data?.result?.edges.map((edge) => edge.node)}
+              elementState={elementState}
+              idField={'_id' as StringKeyModel<TType>}
+              isRemovable
+              onChange={() => {
+                void reset();
+              }}
+              onRemove={async ({ _id }) => {
+                void remove({ filter: [{ field: '_id', value: _id }] });
+              }}
+              onSelect={(v) => selectedRowsSet(v ?? [])}
+              select={TABLE_SELECT_TYPE.MULTIPLE}
+            />
+          </Wrapper>
+        );
+      }}
     </ConnectionBoundary>
   );
 };

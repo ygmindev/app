@@ -38,6 +38,7 @@ export type TableColumnModel<
   formatter?: DataFormatterModel<TType, TKey>;
   headerRenderer?(): ReactElement;
   isArray?: boolean;
+  isFilterDisabled?: boolean;
   isFrozen?: boolean;
   isHidden?: boolean;
   isSortable?: boolean;

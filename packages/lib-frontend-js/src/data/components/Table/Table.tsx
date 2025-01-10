@@ -91,6 +91,7 @@ export const Table = forwardRef(
 
           isRemovable && {
             id: 'remove' as StringKeyModel<TType>,
+            isFilterDisabled: false,
             isFrozen: true,
             label: '',
             renderer: ({ index }) => (
@@ -109,6 +110,7 @@ export const Table = forwardRef(
           select && {
             headerRenderer: () => <Button>hi</Button>,
             id: 'select' as StringKeyModel<TType>,
+            isFilterDisabled: false,
             isFrozen: true,
             label: '',
             renderer: ({ id }) => (

@@ -171,7 +171,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
       <Wrapper
         align={FLEX_ALIGN.CENTER}
         isRow
-        s>
+        s={THEME_SIZE.SMALL}>
         {leftElement}
 
         {iconF}

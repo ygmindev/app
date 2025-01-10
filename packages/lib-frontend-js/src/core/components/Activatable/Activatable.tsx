@@ -20,7 +20,7 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
     const childrenF: ReactElement<PressablePropsModel> | undefined | null = isFunction(children)
       ? children(isActive)
       : children;
-    const triggerF = trigger ?? (isMobile ? ACTIVATABLE_TRIGGER.FOCUS : ACTIVATABLE_TRIGGER.HOVER);
+    const triggerF = trigger ?? (isMobile ? ACTIVATABLE_TRIGGER.PRESS : ACTIVATABLE_TRIGGER.HOVER);
 
     const handleToggle = (value?: boolean): void => {
       isActiveSet(value || false);

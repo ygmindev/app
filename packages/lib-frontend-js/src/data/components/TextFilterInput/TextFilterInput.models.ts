@@ -5,7 +5,7 @@ import { type FilterConditionModel } from '@lib/shared/resource/utils/Filter/Fil
 export type TextFilterInputPropsModel = TextInputPropsModel & {
   condition?: FilterConditionModel;
   defaultCondition?: FilterConditionModel;
-  isContainsOnly?: boolean;
+  isValueOnly?: boolean;
   onConditionChange?(value: FilterConditionModel): void;
 };
 

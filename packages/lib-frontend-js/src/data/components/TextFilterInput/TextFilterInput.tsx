@@ -20,9 +20,9 @@ export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInput
     (
       {
         condition,
-        defaultCondition = FILTER_CONDITION.CONTAINS,
+        defaultCondition = FILTER_CONDITION.EQUAL,
         defaultValue,
-        isContainsOnly,
+        isValueOnly,
         onChange,
         onConditionChange,
         value,
@@ -69,7 +69,7 @@ export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInput
               ),
               id: 'value',
             },
-            !isContainsOnly && {
+            !isValueOnly && {
               element: (
                 <MenuInput
                   defaultValue={FILTER_CONDITION.CONTAINS}

@@ -46,6 +46,7 @@ export const _useTable = <TType,>({
               ? {
                   align: column.align,
                   headerRenderer: column.headerRenderer,
+                  isFilterDisabled: column.isFilterDisabled,
                   isFrozen: column.isFrozen,
                   isHidden: column.isHidden,
                 }
@@ -79,6 +80,7 @@ export const _useTable = <TType,>({
                     columnId: column.id,
                     field: column.field,
                     headerRenderer: column.headerRenderer,
+                    isFilterDisabled: column.isFilterDisabled,
                     isFrozen: column.isFrozen,
                     isHidden: column.isHidden,
                     label: column.label,
