@@ -3,7 +3,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
+import { ELEMENT_STATE, TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { ConnectionBoundary } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary';
 import { type ConnectionBoundaryRefModel } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary.models';
@@ -211,6 +211,7 @@ export const ResourceTable = <
                 isAlign
                 isRow>
                 <Button
+                  elementState={filters ? undefined : ELEMENT_STATE.DISABLED}
                   onPress={() => filtersSet(undefined)}
                   size={THEME_SIZE.SMALL}
                   type={BUTTON_TYPE.INVISIBLE}>

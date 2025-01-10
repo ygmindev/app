@@ -4,6 +4,7 @@ import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Droppable } from '@lib/frontend/core/components/Droppable/Droppable';
 import { type DroppableRefModel } from '@lib/frontend/core/components/Droppable/Droppable.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
@@ -18,6 +19,7 @@ import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
@@ -84,6 +86,8 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
   };
 
   const handleSubmit = async (filters: TType): Promise<void> => {
+    ref.current?.toggle(false);
+    await sleep();
     void onSubmit(
       reduce(
         filters as Record<StringKeyModel<TType>, Array<FilterModel<TType>>>,
@@ -91,7 +95,6 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
         {} as Record<StringKeyModel<TType>, Array<FilterModel<TType>>>,
       ),
     );
-    ref.current?.toggle(false);
   };
 
   return (
@@ -110,6 +113,7 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
                 isRow>
                 {values && (
                   <Text
+                    casing={TEXT_CASING.NONE}
                     color={THEME_COLOR.SECONDARY}
                     isBold>
                     {values.map((v) => v.value).join(', ')}
@@ -127,7 +131,7 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
       ref={ref}>
       <FormContainer
         {...props}
-        cancelLabel={t('resource:clearAllFilters')}
+        cancelLabel={t('resource:clearFilters')}
         fields={getFields()}
         onCancel={
           values
