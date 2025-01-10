@@ -18,16 +18,13 @@ import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
 } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import cloneDeep from 'lodash/cloneDeep';
 import range from 'lodash/range';
@@ -50,7 +47,6 @@ export const ResourceTable = <
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
   const { create, getConnection, remove, update } = implementation;
-  const [params, paramsSet] = useState<InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>>();
   const [filters, filtersSet] =
     useState<Record<StringKeyModel<TType>, Array<FilterModel<TType>>>>();
 
@@ -158,7 +154,7 @@ export const ResourceTable = <
       flex
       id={name}
       p
-      params={params}
+      params={filters ? { filter: Object.values(filters).flat() } : undefined}
       query={getConnection}
       ref={connectionBoundaryRef}
       s>
@@ -208,9 +204,20 @@ export const ResourceTable = <
             </Wrapper>
 
             <Wrapper
+              isAlign
               isFullWidth
-              isRow
-              justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
+              isRow>
+              <Wrapper
+                isAlign
+                isRow>
+                <Button
+                  onPress={() => filtersSet(undefined)}
+                  size={THEME_SIZE.SMALL}
+                  type={BUTTON_TYPE.INVISIBLE}>
+                  {t('resource:clearAllFilters')}
+                </Button>
+              </Wrapper>
+
               <Wrapper
                 flex
                 isAlign
@@ -228,17 +235,6 @@ export const ResourceTable = <
                       />
                     ),
                 )}
-              </Wrapper>
-
-              <Wrapper
-                isAlign
-                isRow>
-                <Button
-                  onPress={() => filtersSet(undefined)}
-                  size={THEME_SIZE.SMALL}
-                  type={BUTTON_TYPE.INVISIBLE}>
-                  {t('resource:clearAllFilters')}
-                </Button>
               </Wrapper>
             </Wrapper>
 
