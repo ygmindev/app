@@ -214,6 +214,7 @@ export const ResourceTable = <
                   elementState={filters ? undefined : ELEMENT_STATE.DISABLED}
                   onPress={() => filtersSet(undefined)}
                   size={THEME_SIZE.SMALL}
+                  tooltip={filters ? undefined : t('resource:noFilterApplied')}
                   type={BUTTON_TYPE.INVISIBLE}>
                   {t('resource:clearAllFilters')}
                 </Button>
