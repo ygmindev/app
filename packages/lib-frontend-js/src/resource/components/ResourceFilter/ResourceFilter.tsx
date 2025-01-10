@@ -1,3 +1,11 @@
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Divider } from '@lib/frontend/core/components/Divider/Divider';
+import { Droppable } from '@lib/frontend/core/components/Droppable/Droppable';
+import { type DroppableRefModel } from '@lib/frontend/core/components/Droppable/Droppable.models';
+import { Text } from '@lib/frontend/core/components/Text/Text';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { type FormFieldsModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
@@ -7,6 +15,7 @@ import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInp
 import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/TextFilterInput';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
@@ -14,7 +23,7 @@ import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.const
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import isNil from 'lodash/isNil';
 import reduce from 'lodash/reduce';
-import { type ReactElement } from 'react';
+import { type ReactElement, useRef } from 'react';
 
 export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
   field,
@@ -25,6 +34,8 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
   LFCPropsModel<ResourceFilterPropsModel<TType, TKey>>
 > => {
   const { t } = useTranslation();
+  const ref = useRef<DroppableRefModel>(null);
+
   const getFields = (): Array<FormFieldsModel<TType>> => {
     const labelF = field.label ?? field.id;
     const element = (() => {
@@ -72,24 +83,61 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
     return [{ fields: [{ element, id: field.id }], id: field.id }];
   };
 
-  const handleSubmit = async (filters: TType): Promise<void> =>
-    onSubmit(
+  const handleSubmit = async (filters: TType): Promise<void> => {
+    void onSubmit(
       reduce(
         filters as Record<StringKeyModel<TType>, Array<FilterModel<TType>>>,
         (result, v, k) => (isNil(v) ? result : { ...result, [k]: v }),
         {} as Record<StringKeyModel<TType>, Array<FilterModel<TType>>>,
       ),
     );
+    ref.current?.toggle(false);
+  };
 
   return (
-    <FormContainer
-      {...props}
-      cancelLabel={t('resource:clearAllFilters')}
-      fields={getFields()}
-      onCancel={() => {
-        void handleSubmit({ [field.id]: [] } as TType);
-      }}
-      onSubmit={handleSubmit}
-    />
+    <Droppable
+      anchor={() => (
+        <Button
+          icon="filter"
+          rightElement={
+            <Wrapper
+              isRow
+              s={THEME_SIZE.SMALL}>
+              <Divider isVertical />
+
+              <Wrapper
+                isAlign
+                isRow>
+                {values && (
+                  <Text
+                    color={THEME_COLOR.SECONDARY}
+                    isBold>
+                    {values.map((v) => v.value).join(', ')}
+                  </Text>
+                )}
+              </Wrapper>
+            </Wrapper>
+          }
+          size={THEME_SIZE.SMALL}
+          type={BUTTON_TYPE.TRANSPARENT}>
+          {field.label ?? field.id}
+        </Button>
+      )}
+      direction={DIRECTION.BOTTOM}
+      ref={ref}>
+      <FormContainer
+        {...props}
+        cancelLabel={t('resource:clearAllFilters')}
+        fields={getFields()}
+        onCancel={
+          values
+            ? () => {
+                void handleSubmit({ [field.id]: [] } as TType);
+              }
+            : undefined
+        }
+        onSubmit={handleSubmit}
+      />
+    </Droppable>
   );
 };

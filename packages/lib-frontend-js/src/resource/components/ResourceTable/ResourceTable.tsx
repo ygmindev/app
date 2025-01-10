@@ -1,12 +1,9 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import { Divider } from '@lib/frontend/core/components/Divider/Divider';
-import { Droppable } from '@lib/frontend/core/components/Droppable/Droppable';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION, TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
+import { TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { ConnectionBoundary } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary';
 import { type ConnectionBoundaryRefModel } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary.models';
@@ -20,7 +17,7 @@ import { ResourceForm } from '@lib/frontend/resource/containers/ResourceForm/Res
 import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
@@ -223,42 +220,12 @@ export const ResourceTable = <
                   (field) =>
                     !field.isFilterDisabled &&
                     (!field.fields || field.field) && (
-                      <Droppable
-                        anchor={() => (
-                          <Button
-                            icon="filter"
-                            rightElement={
-                              <Wrapper
-                                isRow
-                                s={THEME_SIZE.SMALL}>
-                                <Divider isVertical />
-
-                                <Wrapper
-                                  isAlign
-                                  isRow>
-                                  {filters?.[field.id] && (
-                                    <Text
-                                      color={THEME_COLOR.SECONDARY}
-                                      isBold>
-                                      {filters?.[field.id]?.map((v) => v.value).join(', ')}
-                                    </Text>
-                                  )}
-                                </Wrapper>
-                              </Wrapper>
-                            }
-                            size={THEME_SIZE.SMALL}
-                            type={BUTTON_TYPE.TRANSPARENT}>
-                            {field.label ?? field.id}
-                          </Button>
-                        )}
-                        direction={DIRECTION.BOTTOM}
-                        key={field.id}>
-                        <ResourceFilter
-                          field={field}
-                          onSubmit={async (v) => handleFilter(field.id, v)}
-                          values={filters?.[field.id]}
-                        />
-                      </Droppable>
+                      <ResourceFilter
+                        field={field}
+                        key={field.id}
+                        onSubmit={async (v) => handleFilter(field.id, v)}
+                        values={filters?.[field.id]}
+                      />
                     ),
                 )}
               </Wrapper>

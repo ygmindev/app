@@ -3,71 +3,84 @@ import { ACTIVATABLE_TRIGGER } from '@lib/frontend/core/components/Activatable/A
 import { type ActivatableRefModel } from '@lib/frontend/core/components/Activatable/Activatable.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Dropdown } from '@lib/frontend/core/components/Dropdown/Dropdown';
-import { type DroppablePropsModel } from '@lib/frontend/core/components/Droppable/Droppable.models';
+import { type DropdownRefModel } from '@lib/frontend/core/components/Dropdown/Dropdown.models';
+import {
+  type DroppablePropsModel,
+  type DroppableRefModel,
+} from '@lib/frontend/core/components/Droppable/Droppable.models';
 import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { View } from '@lib/frontend/core/components/View/View';
-import { type SFCModel } from '@lib/frontend/core/core.models';
+import { type RSFCModel } from '@lib/frontend/core/core.models';
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
-import { cloneElement, useRef, useState } from 'react';
+import { cloneElement, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
-export const Droppable: SFCModel<DroppablePropsModel> = ({
-  anchor,
-  children,
-  testID,
-  trigger,
-  ...props
-}) => {
-  const [isActive, isActiveSet] = useState<boolean>(false);
-  const ref = useRef<ActivatableRefModel>(null);
-  let anchorF = anchor(isActive);
+export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = forwardRef(
+  ({ anchor, children, testID, trigger, ...props }, ref) => {
+    const [isActive, isActiveSet] = useState<boolean>(false);
+    const activatableRef = useRef<ActivatableRefModel>(null);
+    const dropdownRef = useRef<DropdownRefModel>(null);
 
-  const { onPress, onPressIn, onPressOut } = anchorF.props as PressablePropsModel;
-  const isPressable =
-    onPress || onPressIn || onPressOut || isTypeOf(anchorF, Button) || isTypeOf(anchorF, Pressable);
+    useImperativeHandle(ref, () => ({
+      scrollTo: (position) => dropdownRef.current?.scrollTo(position),
+      toggle: (isOpen) => dropdownRef.current?.toggle(isOpen),
+    }));
 
-  if (isPressable) {
-    anchorF = cloneElement(anchorF, {
-      onPress:
-        trigger === ACTIVATABLE_TRIGGER.PRESS
-          ? async () => {
-              onPress && (await onPress());
-              ref?.current?.press && (await ref.current.press());
-            }
-          : undefined,
-      onPressIn:
-        trigger === ACTIVATABLE_TRIGGER.FOCUS
-          ? () => {
-              onPressIn && onPressIn();
-              ref?.current?.pressIn && ref.current.pressIn();
-            }
-          : undefined,
-      onPressOut:
-        trigger === ACTIVATABLE_TRIGGER.FOCUS
-          ? () => {
-              onPressOut && onPressOut();
-              ref?.current?.pressOut && ref.current.pressOut();
-            }
-          : undefined,
-    });
-  }
+    let anchorF = anchor(isActive);
 
-  const childrenF = (
-    <Dropdown
-      {...props}
-      anchor={anchorF}
-      isOpen={isActive}
-      onToggle={(value) => isActiveSet(value || false)}>
-      {children}
-    </Dropdown>
-  );
-  return (
-    <Activatable
-      onActive={() => isActiveSet(true)}
-      onInactive={() => isActiveSet(false)}
-      ref={isPressable ? ref : undefined}
-      trigger={trigger}>
-      <View testID={testID}>{childrenF}</View>
-    </Activatable>
-  );
-};
+    const { onPress, onPressIn, onPressOut } = anchorF.props as PressablePropsModel;
+    const isPressable =
+      onPress ||
+      onPressIn ||
+      onPressOut ||
+      isTypeOf(anchorF, Button) ||
+      isTypeOf(anchorF, Pressable);
+
+    if (isPressable) {
+      anchorF = cloneElement(anchorF, {
+        onPress:
+          trigger === ACTIVATABLE_TRIGGER.PRESS
+            ? async () => {
+                onPress && (await onPress());
+                activatableRef?.current?.press && (await activatableRef.current.press());
+              }
+            : undefined,
+        onPressIn:
+          trigger === ACTIVATABLE_TRIGGER.FOCUS
+            ? () => {
+                onPressIn && onPressIn();
+                activatableRef?.current?.pressIn && activatableRef.current.pressIn();
+              }
+            : undefined,
+        onPressOut:
+          trigger === ACTIVATABLE_TRIGGER.FOCUS
+            ? () => {
+                onPressOut && onPressOut();
+                activatableRef?.current?.pressOut && activatableRef.current.pressOut();
+              }
+            : undefined,
+      });
+    }
+
+    const childrenF = (
+      <Dropdown
+        {...props}
+        anchor={anchorF}
+        isOpen={isActive}
+        onToggle={(value) => isActiveSet(value || false)}
+        ref={dropdownRef}>
+        {children}
+      </Dropdown>
+    );
+
+    return (
+      <Activatable
+        onActive={() => isActiveSet(true)}
+        onInactive={() => isActiveSet(false)}
+        ref={isPressable ? activatableRef : undefined}
+        trigger={trigger}>
+        <View testID={testID}>{childrenF}</View>
+      </Activatable>
+    );
+  },
+);
