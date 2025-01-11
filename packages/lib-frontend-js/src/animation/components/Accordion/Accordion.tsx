@@ -5,7 +5,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { PressableTitle } from '@lib/frontend/core/components/PressableTitle/PressableTitle';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel, type MeasureModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -51,11 +51,11 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
         image={image}
         leftElement={(isActiveF) => (
           <Rotatable
-            directionInactive={DIRECTION.RIGHT}
-            isActive={isActiveF}>
+            backgroundColor="red"
+            isActive={elementStateControlled === ELEMENT_STATE.ACTIVE}>
             <Button
               elementState={isActiveF ? ELEMENT_STATE.ACTIVE : undefined}
-              icon="chevronUp"
+              icon="chevronDown"
               isHidden
               size={size}
               type={BUTTON_TYPE.INVISIBLE}

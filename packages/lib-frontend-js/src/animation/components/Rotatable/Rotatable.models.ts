@@ -7,6 +7,5 @@ import {
 export type RotatablePropsModel = ElementStatePropsModel &
   ChildrenPropsModel & {
     directionActive?: DirectionModel;
-    directionInactive?: DirectionModel;
     isActive?: boolean;
   };

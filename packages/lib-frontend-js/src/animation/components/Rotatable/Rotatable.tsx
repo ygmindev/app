@@ -22,7 +22,6 @@ const getRotation = (direction: DirectionModel): string => {
 export const Rotatable: LFCModel<RotatablePropsModel> = ({
   children,
   directionActive = DIRECTION.BOTTOM,
-  directionInactive = DIRECTION.TOP,
   isActive,
   ...props
 }) => {
@@ -32,7 +31,7 @@ export const Rotatable: LFCModel<RotatablePropsModel> = ({
       {...wrapperProps}
       animation={{
         states: {
-          [ELEMENT_STATE.INACTIVE]: { transform: [{ rotateZ: getRotation(directionInactive) }] },
+          [ELEMENT_STATE.INACTIVE]: { transform: [{ rotateZ: '0deg' }] },
           [ELEMENT_STATE.ACTIVE]: { transform: [{ rotateZ: getRotation(directionActive) }] },
         },
       }}
