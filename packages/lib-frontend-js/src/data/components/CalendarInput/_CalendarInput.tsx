@@ -2,13 +2,11 @@ import 'react-day-picker/dist/style.css';
 
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type _CalendarInputPropsModel } from '@lib/frontend/data/components/CalendarInput/_CalendarInput.models';
-import { DayPicker, type DayPickerRangeProps, type DayPickerSingleProps } from 'react-day-picker';
+import { type ComponentType } from 'react';
+import { DayPicker, type PropsRange, type PropsSingle } from 'react-day-picker';
 
-export const _CalendarInput = composeComponent<
-  _CalendarInputPropsModel,
-  DayPickerSingleProps | DayPickerRangeProps
->({
-  Component: DayPicker,
+export const _CalendarInput = composeComponent<_CalendarInputPropsModel, PropsSingle | PropsRange>({
+  Component: DayPicker as ComponentType<PropsSingle | PropsRange>,
 
   getProps: ({
     disable = (date) => date < new Date(),
@@ -26,5 +24,5 @@ export const _CalendarInput = composeComponent<
       onSelect: onChange,
       selected: value,
       styles: { caption: { ...textMainStyle }, root: { ...textMainStyle } },
-    }) as DayPickerSingleProps | DayPickerRangeProps,
+    }) as PropsSingle | PropsRange,
 });

@@ -1,4 +1,9 @@
 {
+  "clearAllFilters": "TRANSLATION_MISSING",
+  "clearFilters": "TRANSLATION_MISSING",
+  "noFilterApplied": "TRANSLATION_MISSING",
   "resource_other": "TRANSLATION_MISSING",
-  "rowsSelected": "TRANSLATION_MISSING"
+  "rowsSelected_one": "TRANSLATION_MISSING",
+  "rowsSelected_other": "TRANSLATION_MISSING",
+  "unselect": "TRANSLATION_MISSING"
 }

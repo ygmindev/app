@@ -68,6 +68,7 @@ export const Library = <TType extends unknown>({
       {...wrapperProps}
       flex
       isVerticalScrollable
+      p
       s>
       {title && <Text fontStyle={FONT_STYLE.HEADLINE}>{title}</Text>}
 

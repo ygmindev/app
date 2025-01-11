@@ -73,9 +73,9 @@ export const Table = forwardRef(
       sorting,
       validators,
       ...props
-    }: RLFCPropsModel<TableRefModel, TablePropsModel<TType>>,
-    ref: ForwardedRef<TableRefModel>,
-  ): ReactElement<RLFCPropsModel<TableRefModel, TablePropsModel<TType>>> => {
+    }: RLFCPropsModel<TableRefModel<TType>, TablePropsModel<TType>>,
+    ref: ForwardedRef<TableRefModel<TType>>,
+  ): ReactElement<RLFCPropsModel<TableRefModel<TType>, TablePropsModel<TType>>> => {
     const { t } = useTranslation();
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props });
@@ -152,6 +152,7 @@ export const Table = forwardRef(
 
     useImperativeHandle(ref, () => ({
       remove: handleRemove,
+      select: () => selectedSet({}),
       validate: () => {
         if (rows && validators) {
           const errorsF = rows.reduce((result, row) => {
@@ -366,5 +367,5 @@ export const Table = forwardRef(
     );
   },
 ) as unknown as <TType>(
-  props: RLFCPropsModel<TableRefModel, TablePropsModel<TType>>,
-) => ReactElement<RLFCPropsModel<TableRefModel, TablePropsModel<TType>>>;
+  props: RLFCPropsModel<TableRefModel<TType>, TablePropsModel<TType>>,
+) => ReactElement<RLFCPropsModel<TableRefModel<TType>, TablePropsModel<TType>>>;

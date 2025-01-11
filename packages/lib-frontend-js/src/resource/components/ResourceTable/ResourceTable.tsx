@@ -1,6 +1,6 @@
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE, TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
@@ -8,6 +8,7 @@ import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { ConnectionBoundary } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary';
 import { type ConnectionBoundaryRefModel } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary.models';
 import { Table } from '@lib/frontend/data/components/Table/Table';
+import { type TableRefModel } from '@lib/frontend/data/components/Table/Table.models';
 import { TABLE_SELECT_TYPE } from '@lib/frontend/data/hooks/useTable/useTable.constants';
 import { type TableColumnModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -54,6 +55,7 @@ export const ResourceTable = <
     { id: '_id' as StringKeyModel<TType>, isHidden: true },
     ...(fields ?? []),
   ];
+  const tableRef = useRef<TableRefModel<TType>>(null);
   const connectionBoundaryRef = useRef<ConnectionBoundaryRefModel<TType, TRoot>>(null);
   const [selectedRows, selectedRowsSet] = useState<Array<PartialModel<TType>>>([]);
 
@@ -193,14 +195,26 @@ export const ResourceTable = <
                 {t('core:new', { value: name })}
               </ModalButton>
 
-              <Appearable isActive={selectedRows.length > 0}>
-                <Button
-                  icon="dotsVertical"
-                  size={THEME_SIZE.SMALL}
-                  type={BUTTON_TYPE.TRANSPARENT}>
-                  {t('resource:rowsSelected', { count: selectedRows.length })}
-                </Button>
-              </Appearable>
+              {selectedRows.length > 0 && (
+                <Menu
+                  anchor={(isActive) => (
+                    <Button
+                      elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+                      icon="dotsVertical"
+                      size={THEME_SIZE.SMALL}
+                      type={BUTTON_TYPE.TRANSPARENT}>
+                      {t('resource:rowsSelected', { count: selectedRows.length })}
+                    </Button>
+                  )}
+                  options={[
+                    {
+                      id: 'unselect',
+                      label: t('core:all', { value: t('resource:unselect') }),
+                      onPress: () => tableRef.current?.select?.([]),
+                    },
+                  ]}
+                />
+              )}
             </Wrapper>
 
             <Wrapper
@@ -253,6 +267,7 @@ export const ResourceTable = <
                 void remove({ filter: [{ field: '_id', value: _id }] });
               }}
               onSelect={(v) => selectedRowsSet(v ?? [])}
+              ref={tableRef}
               select={TABLE_SELECT_TYPE.MULTIPLE}
             />
           </Wrapper>

@@ -19,7 +19,8 @@ export type TablePropsModel<TType> = UseTableParamsModel<TType> & {
   validators?: FormValidatorsModel<TType>;
 };
 
-export type TableRefModel = {
+export type TableRefModel<TType> = {
   remove?(i: number): void;
+  select?(row?: Array<TType>): void;
   validate(): boolean;
 };

@@ -13,6 +13,7 @@ import { type PressablePropsModel } from '@lib/frontend/core/components/Pressabl
 import { View } from '@lib/frontend/core/components/View/View';
 import { type RSFCModel } from '@lib/frontend/core/core.models';
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { cloneElement, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
 export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = forwardRef(
@@ -84,3 +85,5 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = forw
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (Droppable.displayName = variableName({ Droppable }));

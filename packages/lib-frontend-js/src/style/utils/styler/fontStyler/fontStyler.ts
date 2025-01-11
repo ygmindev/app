@@ -1,7 +1,6 @@
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import {
-  FONT_ALIGN,
   FONT_FAMILY,
   FONT_STYLE,
 } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
@@ -44,5 +43,5 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
 
     lineHeight: isLineHeight && fontStyle === FONT_STYLE.BODY ? theme.font.lineHeight : undefined,
 
-    textAlign: align ?? (fontStyle === FONT_STYLE.HEADLINE ? FONT_ALIGN.CENTER : undefined),
+    textAlign: align,
   });

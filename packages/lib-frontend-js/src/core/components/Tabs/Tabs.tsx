@@ -5,7 +5,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
-import { type TabsPropsModel } from '@lib/frontend/core/components/Tabs/Tabs.models';
+import { type TabModel, type TabsPropsModel } from '@lib/frontend/core/components/Tabs/Tabs.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -35,13 +35,19 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
   const isContained = type === TABS_TYPE.CONTAINED;
   const isUnderline = type === TABS_TYPE.UNDERLINE;
   const isMobile = useIsMobile();
+
+  const handlePress = (tab: TabModel): void => {
+    valueControlledSet(tab.id);
+    void tab.onPress?.();
+  };
+
   return (
     <Wrapper
       {...wrapperProps}
       align={FLEX_ALIGN.END}
       alignSelf={isContained ? FLEX_ALIGN.CENTER : undefined}
       border={isContained ? true : isUnderline ? DIRECTION.BOTTOM : undefined}
-      isFullWidth={isMobile}
+      isFullWidth={isContained || isMobile}
       isHorizontalScrollable
       isRow
       p={isContained ? THEME_SIZE.SMALL : undefined}
@@ -55,7 +61,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
               const isActiveFF = isActiveF || isActive;
               return (
                 <Wrapper
-                  onPress={() => valueControlledSet(tab.id)}
+                  onPress={() => handlePress(tab)}
                   position={SHAPE_POSITION.RELATIVE}>
                   <Wrapper
                     isAlign
@@ -92,7 +98,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
           <Button
             icon={tab.icon}
             key={tab.id}
-            onPress={() => valueControlledSet(tab.id)}
+            onPress={() => handlePress(tab)}
             size={THEME_SIZE.SMALL}
             type={
               isActiveF ? undefined : isContained ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.TRANSPARENT
