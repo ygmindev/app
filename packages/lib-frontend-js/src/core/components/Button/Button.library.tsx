@@ -3,7 +3,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { type ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesianObject';
 
 export const props: LibraryPropsModel<ButtonPropsModel> = {
@@ -13,7 +13,9 @@ export const props: LibraryPropsModel<ButtonPropsModel> = {
   },
   variants: [
     { props: { icon: 'personCircle' } },
-    ...cartesianObject({ size: Object.values(THEME_SIZE) }).map((props) => ({
+    ...cartesianObject({
+      size: [...Object.values(THEME_SIZE), Object.values(THEME_SIZE_MORE)],
+    }).map((props) => ({
       props,
     })),
     ...cartesianObject({

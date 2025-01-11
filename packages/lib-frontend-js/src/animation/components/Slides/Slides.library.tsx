@@ -6,11 +6,11 @@ import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fi
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { withId } from '@lib/shared/core/utils/withId/withId';
-import { useState } from 'react';
+import { cloneElement, useState } from 'react';
 
 export const props: LibraryPropsModel<SlidesPropsModel> = {
   Component: Slides,
-  Renderer: ({ ...props }) => {
+  Renderer: ({ element, props }) => {
     const [current, currentSet] = useState<number>(0);
     const length = props.slides?.length || 1;
     return (
@@ -34,10 +34,7 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
         </Wrapper>
 
         <WrapperFixture backgroundColor="transparent">
-          <Slides
-            {...props}
-            current={current}
-          />
+          {cloneElement(element, { current })}
         </WrapperFixture>
       </Wrapper>
     );

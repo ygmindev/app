@@ -5,11 +5,11 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
-import { useState } from 'react';
+import { cloneElement, useState } from 'react';
 
 export const props: LibraryPropsModel<AppearablePropsModel> = {
   Component: Appearable,
-  Renderer: ({ ...props }) => {
+  Renderer: ({ element }) => {
     const [isActive, isActiveSet] = useState<boolean>(false);
     return (
       <Wrapper s>
@@ -19,10 +19,7 @@ export const props: LibraryPropsModel<AppearablePropsModel> = {
           {isActive ? 'Close' : 'Open'}
         </Button>
 
-        <Appearable
-          {...props}
-          isActive={isActive}
-        />
+        {cloneElement(element, { isActive })}
       </Wrapper>
     );
   },

@@ -9,11 +9,7 @@ import { type LibraryPropsModel } from '@lib/frontend/library/components/Library
 
 export const props: LibraryPropsModel<TablePropsModel<unknown>> = {
   Component: Table,
-  Renderer: (props) => (
-    <WrapperFixture>
-      <Table {...props} />
-    </WrapperFixture>
-  ),
+  Renderer: ({ element }) => <WrapperFixture>{element}</WrapperFixture>,
   defaultProps: {
     columns: TABLE_FIXTURE_COLUMNS,
     data: TABLE_FIXTURE_DATA,

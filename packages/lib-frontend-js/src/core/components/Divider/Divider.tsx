@@ -13,6 +13,7 @@ export const Divider: LFCModel<DividerPropsModel> = ({ children, isVertical, ...
     <Wrapper
       {...wrapperProps}
       isAlign
+      isFullWidth={!isVertical}
       isRow
       position={SHAPE_POSITION.RELATIVE}
       zIndex>

@@ -4,22 +4,21 @@ import { type ModalPropsModel } from '@lib/frontend/core/components/Modal/Modal.
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
-import { useState } from 'react';
+import { cloneElement, useState } from 'react';
 
 export const props: LibraryPropsModel<ModalPropsModel> = {
   Component: Modal,
-  Renderer: ({ ...props }) => {
+  Renderer: ({ element }) => {
     const [isOpen, isOpenSet] = useState<boolean | undefined>(false);
     return (
       <Wrapper s>
         <Button onPress={() => isOpenSet(true)}>Open</Button>
 
-        <Modal
-          {...props}
-          isOpen={isOpen}
-          onToggle={isOpenSet}>
-          <WrapperFixture>Modal</WrapperFixture>
-        </Modal>
+        {cloneElement(element, {
+          children: <WrapperFixture>Modal</WrapperFixture>,
+          isOpen,
+          onToggle: isOpenSet,
+        })}
       </Wrapper>
     );
   },

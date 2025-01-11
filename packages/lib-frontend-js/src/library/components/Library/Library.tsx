@@ -86,44 +86,45 @@ export const Library = <TType extends unknown>({
               id,
               name: variantName,
               props: variantProps,
-            }: LibraryVariantModel<TType> & WithIdModel<string>) => (
-              <Wrapper
-                key={id}
-                pBottom
-                s={THEME_SIZE.SMALL}>
+            }: LibraryVariantModel<TType> & WithIdModel<string>) => {
+              const propsF = { ...(defaultProps as object), ...variantProps } as TType;
+              const element = createElement(Component as ComponentType, propsF as Attributes);
+              return (
                 <Wrapper
-                  border
-                  isHorizontalScrollable
-                  isVerticalScrollable
-                  minWidth={minWidth}
-                  p
-                  round
+                  key={id}
+                  pBottom
                   s={THEME_SIZE.SMALL}>
-                  {variantName && <Text>{variantName}</Text>}
+                  <Wrapper
+                    border
+                    isHorizontalScrollable
+                    isVerticalScrollable
+                    minWidth={minWidth}
+                    p
+                    round
+                    s={THEME_SIZE.SMALL}>
+                    {variantName && <Text>{variantName}</Text>}
 
-                  {createElement(
-                    (Renderer ?? Component) as ComponentType,
-                    { ...(defaultProps as object), ...variantProps } as Attributes,
-                  )}
+                    {Renderer ? Renderer({ element, props: propsF }) : element}
+                  </Wrapper>
+
+                  <Wrapper
+                    isAlign
+                    isRow>
+                    {map(variantProps as object, (v, k) => (
+                      <Wrapper key={k}>
+                        <Text
+                          fontSize={THEME_SIZE.SMALL}
+                          isBold>
+                          {k}
+                        </Text>
+
+                        <Text fontSize={THEME_SIZE.SMALL}>{typeToString(v)}</Text>
+                      </Wrapper>
+                    ))}
+                  </Wrapper>
                 </Wrapper>
-
-                <Wrapper
-                  isAlign
-                  isRow>
-                  {map(variantProps as object, (v, k) => (
-                    <Wrapper key={k}>
-                      <Text
-                        fontSize={THEME_SIZE.SMALL}
-                        isBold>
-                        {k}
-                      </Text>
-
-                      <Text fontSize={THEME_SIZE.SMALL}>{typeToString(v)}</Text>
-                    </Wrapper>
-                  ))}
-                </Wrapper>
-              </Wrapper>
-            )}
+              );
+            }}
             s
           />
         </Wrapper>
