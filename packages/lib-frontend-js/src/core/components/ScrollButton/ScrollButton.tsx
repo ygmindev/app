@@ -37,18 +37,18 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
           size={THEME_SIZE.SMALL}
           type={BUTTON_TYPE.INVISIBLE}>
           <Button
-            icon={isHorizontal ? 'chevronLeft' : 'chevronUp'}
+            icon={isHorizontal ? 'chevronLeftDouble' : 'chevronUpDouble'}
             key="scrollStart"
             onPress={
               isScrollDownVisible
-                ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) - scrollOffset })
+                ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: 0 })
                 : undefined
             }
           />
 
           <Button
             icon={isHorizontal ? 'chevronLeft' : 'chevronUp'}
-            key="scrollUp"
+            key="scrollDown"
             onPress={
               isScrollDownVisible
                 ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) - scrollOffset })
@@ -73,16 +73,18 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
           size={THEME_SIZE.SMALL}
           type={BUTTON_TYPE.INVISIBLE}>
           <Button
-            icon={isHorizontal ? 'chevronRightDouble' : 'chevronDownDouble'}
-            key="scrollDown"
+            icon={isHorizontal ? 'chevronRight' : 'chevronDown'}
+            key="scrollUp"
             onPress={
-              isScrollUpVisible ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: 0 }) : undefined
+              isScrollUpVisible
+                ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) + scrollOffset })
+                : undefined
             }
           />
 
           <Button
-            icon={isHorizontal ? 'chevronRight' : 'chevronDown'}
-            key="scrollStart"
+            icon={isHorizontal ? 'chevronRightDouble' : 'chevronDownDouble'}
+            key="scrollEnd"
             onPress={
               isScrollUpVisible
                 ? () =>
