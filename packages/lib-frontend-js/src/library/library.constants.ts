@@ -7,17 +7,28 @@ import { props as activatableProps } from '@lib/frontend/core/components/Activat
 import { props as buttonProps } from '@lib/frontend/core/components/Button/Button.library';
 import { props as categoryInputProps } from '@lib/frontend/core/components/CategoryInput/CategoryInput.library';
 import { props as chipProps } from '@lib/frontend/core/components/Chip/Chip.library';
+import { props as circleProps } from '@lib/frontend/core/components/Circle/Circle.library';
 import { props as dividerProps } from '@lib/frontend/core/components/Divider/Divider.library';
 import { props as droppableProps } from '@lib/frontend/core/components/Droppable/Droppable.library';
 import { props as iconProps } from '@lib/frontend/core/components/Icon/Icon.library';
+import { props as imageProps } from '@lib/frontend/core/components/Image/Image.library';
 import { props as linkProps } from '@lib/frontend/core/components/Link/Link.library';
 import { props as loadingProps } from '@lib/frontend/core/components/Loading/Loading.library';
+import { props as menuProps } from '@lib/frontend/core/components/Menu/Menu.library';
 import { props as modalProps } from '@lib/frontend/core/components/Modal/Modal.library';
+import { props as modalButtonProps } from '@lib/frontend/core/components/ModalButton/ModalButton.library';
+import { props as pressableProps } from '@lib/frontend/core/components/Pressable/Pressable.library';
+import { props as pressableTitleProps } from '@lib/frontend/core/components/PressableTitle/PressableTitle.library';
 import { props as textProps } from '@lib/frontend/core/components/Text/Text.library';
 import { props as tileProps } from '@lib/frontend/core/components/Tile/Tile.library';
+import { props as titleProps } from '@lib/frontend/core/components/Title/Title.library';
 import { props as tooltipIconProps } from '@lib/frontend/core/components/TooltipIcon/TooltipIcon.library';
 import { props as wrapperProps } from '@lib/frontend/core/components/Wrapper/Wrapper.library';
-import { props as calendarPickerProps } from '@lib/frontend/data/components/CalendarInput/CalendarInput.library';
+import { props as calendarInputProps } from '@lib/frontend/data/components/CalendarInput/CalendarInput.library';
+import { props as checkboxInput } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput.library';
+import { props as dateInputProps } from '@lib/frontend/data/components/DateInput/DateInput.library';
+import { props as fileInputProps } from '@lib/frontend/data/components/FileInput/FileInput.library';
+import { props as numberInputProps } from '@lib/frontend/data/components/NumberInput/NumberInput.library';
 import { props as selectInputProps } from '@lib/frontend/data/components/SelectInput/SelectInput.library';
 import { props as switchInputProps } from '@lib/frontend/data/components/SwitchInput/SwitchInput.library';
 import { props as textInputProps } from '@lib/frontend/data/components/TextInput/TextInput.library';
@@ -32,19 +43,29 @@ export const LIBRARY_PROPS = [
   activatableProps,
   appearableProps,
   buttonProps,
-  calendarPickerProps,
+  calendarInputProps,
   categoryInputProps,
+  checkboxInput,
   chipProps,
+  circleProps,
+  dateInputProps,
   dividerProps,
   droppableProps,
+  fileInputProps,
   iconProps,
+  imageProps,
   linkProps,
   loadingProps,
   logoProps,
+  menuProps,
+  modalButtonProps,
   modalProps,
   notificationProps,
   notificationsProps,
+  numberInputProps,
   otpInputProps,
+  pressableProps,
+  pressableTitleProps,
   searchInputProps,
   selectInputProps,
   slidesProps,
@@ -52,6 +73,7 @@ export const LIBRARY_PROPS = [
   textInputProps,
   textProps,
   tileProps,
+  titleProps,
   tooltipIconProps,
   wrapperProps,
 ];

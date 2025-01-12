@@ -4,6 +4,8 @@ import { type LibraryPropsModel } from '@lib/frontend/library/components/Library
 
 export const props: LibraryPropsModel<DateInputPropsModel> = {
   Component: DateInput,
-  defaultProps: {},
+  defaultProps: {
+    label: 'date',
+  },
   variants: [],
 };

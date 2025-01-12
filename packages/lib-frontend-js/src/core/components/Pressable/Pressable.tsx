@@ -14,12 +14,13 @@ import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementSt
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
 } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef, useState } from 'react';
 
 export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forwardRef(
@@ -92,11 +93,11 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
             animation={{
               states: {
                 ...animation?.states,
-                [ELEMENT_STATE.ACTIVE]: animation?.states?.active ?? {
+                [ELEMENT_STATE.ACTIVE]: animation?.states?.[ELEMENT_STATE.ACTIVE] ?? {
                   backgroundColor: theme.color.border,
                 },
-                [ELEMENT_STATE.INACTIVE]: animation?.states?.inactive ?? {
-                  backgroundColor: theme.color.palette.surface.muted,
+                [ELEMENT_STATE.INACTIVE]: animation?.states?.[ELEMENT_STATE.INACTIVE] ?? {
+                  backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED],
                 },
               },
             }}
@@ -159,3 +160,5 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (Pressable.displayName = variableName({ Pressable }));

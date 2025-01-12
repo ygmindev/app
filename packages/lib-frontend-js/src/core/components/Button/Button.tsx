@@ -65,7 +65,9 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
     const heightF = isNumber(height)
       ? height
       : (height ?? theme.shape.size[size as ThemeSizeModel]);
+
     const isIconOnly = icon && !children;
+
     const typeF = type ?? (isIconOnly && !isShadow ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED);
 
     const { animation, childColorRole } = useMemo<{
@@ -113,7 +115,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
             animation: {
               states: {
                 [ELEMENT_STATE.ACTIVE]: {
-                  backgroundColor: colorF.muted,
+                  backgroundColor: colorF[THEME_ROLE.MUTED],
                   borderColor: mainColor,
                   opacity: 1,
                 },
@@ -148,7 +150,6 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         color={color}
         colorRole={childColorRole}
         fontSize={THEME_SIZE.SMALL}
-        isBold={type === BUTTON_TYPE.INVISIBLE}
         isEllipsis
         isFullWidth>
         {children}
@@ -162,7 +163,6 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         colorRole={childColorRole}
         icon={icon}
         iconText={iconText}
-        isBold={type === BUTTON_TYPE.INVISIBLE}
         width={isIconOnly ? undefined : theme.shape.size[THEME_SIZE_MORE.XSMALL]}
       />
     ) : undefined;

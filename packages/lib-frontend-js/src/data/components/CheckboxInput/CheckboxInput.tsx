@@ -16,6 +16,7 @@ import {
   THEME_ROLE,
   THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef } from 'react';
 
 export const CheckboxInput: RLFCModel<CheckboxInputRefModel, CheckboxInputPropsModel> = forwardRef(
@@ -56,3 +57,5 @@ export const CheckboxInput: RLFCModel<CheckboxInputRefModel, CheckboxInputPropsM
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (CheckboxInput.displayName = variableName({ CheckboxInput }));

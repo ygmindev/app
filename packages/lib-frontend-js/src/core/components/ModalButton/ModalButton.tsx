@@ -4,6 +4,7 @@ import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { type ModalRefModel } from '@lib/frontend/core/components/Modal/Modal.models';
 import { type ModalButtonPropsModel } from '@lib/frontend/core/components/ModalButton/ModalButton.models';
 import { type RLFCModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef, useState } from 'react';
 
 export const ModalButton: RLFCModel<ModalRefModel, ModalButtonPropsModel> = forwardRef(
@@ -37,3 +38,5 @@ export const ModalButton: RLFCModel<ModalRefModel, ModalButtonPropsModel> = forw
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (ModalButton.displayName = variableName({ ModalButton }));

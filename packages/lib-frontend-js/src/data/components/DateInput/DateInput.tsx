@@ -11,6 +11,7 @@ import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
 import { forwardRef, useState } from 'react';
 
@@ -56,3 +57,5 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = forw
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (DateInput.displayName = variableName({ DateInput }));

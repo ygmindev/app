@@ -10,6 +10,7 @@ import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import toNumber from 'lodash/toNumber';
 import toString from 'lodash/toString';
 import { forwardRef } from 'react';
@@ -69,3 +70,5 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (NumberInput.displayName = variableName({ NumberInput }));

@@ -6,6 +6,7 @@ import { type LibraryPropsModel } from '@lib/frontend/library/components/Library
 export const props: LibraryPropsModel<CategoryInputPropsModel> = {
   Component: CategoryInput,
   defaultProps: {
+    defaultValue: '1',
     options: MENU_FIXTURE_OPTIONS,
   },
   variants: [],

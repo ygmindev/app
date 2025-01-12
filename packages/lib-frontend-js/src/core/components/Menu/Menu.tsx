@@ -21,7 +21,8 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { type ForwardedRef, type ReactElement } from 'react';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import { type ComponentType, type ForwardedRef, type ReactElement } from 'react';
 import { cloneElement, forwardRef, useImperativeHandle, useRef } from 'react';
 
 export const Menu = forwardRef(
@@ -154,3 +155,5 @@ export const Menu = forwardRef(
 ) as <TType extends MenuOptionModel = MenuOptionModel>(
   props: RLFCPropsModel<MenuRefModel, MenuPropsModel<TType>>,
 ) => ReactElement<RLFCPropsModel<MenuRefModel, MenuPropsModel<TType>>>;
+
+process.env.APP_IS_DEBUG && ((Menu as ComponentType).displayName = variableName({ Menu }));

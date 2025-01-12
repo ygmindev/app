@@ -3,7 +3,7 @@ import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Title } from '@lib/frontend/core/components/Title/Title';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { _FileInput } from '@lib/frontend/data/components/FileInput/_FileInput';
 import {
   type FileInputPropsModel,
@@ -18,21 +18,12 @@ import {
   THEME_SIZE,
   THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
-import { type ForwardedRef, forwardRef, type ReactElement } from 'react';
+import { forwardRef } from 'react';
 
-export const FileInput = forwardRef(
-  (
-    {
-      defaultValue,
-      isMultiple,
-      label,
-      onChange,
-      value,
-      ...props
-    }: RLFCPropsModel<FileInputRefModel, FileInputPropsModel>,
-    _: ForwardedRef<FileInputRefModel>,
-  ): ReactElement<RLFCPropsModel<FileInputRefModel, FileInputPropsModel>> => {
+export const FileInput: RLFCModel<FileInputRefModel, FileInputPropsModel> = forwardRef(
+  ({ defaultValue, isMultiple, label, onChange, value, ...props }, _) => {
     const { wrapperProps } = useLayoutStyles({ props });
     const { t } = useTranslation();
     const { valueControlled, valueControlledSet } = useValueControlled({
@@ -126,3 +117,5 @@ export const FileInput = forwardRef(
     );
   },
 );
+
+process.env.APP_IS_DEBUG && (FileInput.displayName = variableName({ FileInput }));

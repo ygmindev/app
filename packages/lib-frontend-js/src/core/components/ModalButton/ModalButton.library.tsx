@@ -6,7 +6,8 @@ import { type LibraryPropsModel } from '@lib/frontend/library/components/Library
 export const props: LibraryPropsModel<ModalButtonPropsModel> = {
   Component: ModalButton,
   defaultProps: {
-    modal: <WrapperFixture />,
+    children: 'open',
+    element: () => <WrapperFixture />,
   },
   variants: [],
 };

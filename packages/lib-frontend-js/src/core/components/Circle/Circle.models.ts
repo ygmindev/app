@@ -1,6 +1,4 @@
-import {
-  type ChildrenPropsModel,
-  type SizableMorePropsModel,
-} from '@lib/frontend/core/core.models';
+import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
+import { type SizableMorePropsModel } from '@lib/frontend/core/core.models';
 
-export type CirclePropsModel = ChildrenPropsModel & SizableMorePropsModel;
+export type CirclePropsModel = WrapperPropsModel & SizableMorePropsModel;
