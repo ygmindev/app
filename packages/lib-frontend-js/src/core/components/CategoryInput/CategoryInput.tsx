@@ -1,4 +1,5 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import {
   type CategoryInputPropsModel,
   type CategoryInputRefModel,
@@ -14,6 +15,7 @@ import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBou
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import isFunction from 'lodash/isFunction';
 import range from 'lodash/range';
 import { forwardRef } from 'react';
@@ -69,10 +71,13 @@ const CategoryInputResult: LFCModel<
           onPress={() => {
             id && valueControlledSet(id);
             onSubmit && onSubmit();
-          }}>
+          }}
+          type={BUTTON_TYPE.INVISIBLE}>
           {id ?? label}
         </Button>
       ))}
     </Wrapper>
   );
 };
+
+process.env.APP_IS_DEBUG && (CategoryInput.displayName = variableName({ CategoryInput }));
