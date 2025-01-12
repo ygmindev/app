@@ -1,10 +1,12 @@
 import { ScrollBar } from '@lib/frontend/core/components/ScrollBar/ScrollBar';
+import { ScrollButton } from '@lib/frontend/core/components/ScrollButton/ScrollButton';
 import { getViewParams as getViewParamsBase } from '@lib/frontend/core/components/View/_View';
 import {
   type _ViewPropsModel,
   type _ViewRefModel,
 } from '@lib/frontend/core/components/View/_View.models';
 import { View } from '@lib/frontend/core/components/View/View';
+import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import {
   type ChildrenPropsModel,
   type MeasureModel,
@@ -16,7 +18,14 @@ import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/compo
 import { type ViewStyleModel } from '@lib/frontend/style/style.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { partionObject } from '@lib/shared/core/utils/partionObject/partionObject';
-import { type ComponentType, type ForwardedRef, Fragment, useMemo, useState } from 'react';
+import {
+  type ComponentType,
+  type ForwardedRef,
+  Fragment,
+  type RefObject,
+  useMemo,
+  useState,
+} from 'react';
 import { ScrollView, type ScrollViewProps, StyleSheet } from 'react-native';
 
 const viewParamsBase = getViewParamsBase();
@@ -88,6 +97,24 @@ export const getViewParams = <
       showsVerticalScrollIndicator: false,
     } as TResult & RefPropsModel<TRef>;
 
+    const isBar = (props.scrollType ?? SCROLL_TYPE.BAR) === SCROLL_TYPE.BAR;
+    const ScrollComponent = isBar ? ScrollBar : ScrollButton;
+    const scrollOffset = 150;
+
+    const handleScrollUp = (): void => {
+      (ref as RefObject<ScrollView>).current?.scrollTo({
+        ...(props.isHorizontalScrollable ? { x: (value?.x ?? 0) + scrollOffset } : {}),
+        ...(props.isVerticalScrollable ? { y: (value?.y ?? 0) + scrollOffset } : {}),
+      });
+    };
+
+    const handleScrollDown = (): void => {
+      (ref as RefObject<ScrollView>).current?.scrollTo({
+        ...(props.isHorizontalScrollable ? { x: (value?.x ?? 0) - scrollOffset } : {}),
+        ...(props.isVerticalScrollable ? { y: (value?.y ?? 0) - scrollOffset } : {}),
+      });
+    };
+
     return {
       children: (
         <View
@@ -107,17 +134,21 @@ export const getViewParams = <
           <Component {...propsF} />
 
           {isHorizontalScrollableVisibleF && (
-            <ScrollBar
+            <ScrollComponent
               contentSize={measureContent?.width}
               isHorizontal
+              onScrollDown={handleScrollDown}
+              onScrollUp={handleScrollUp}
               size={measure?.width}
               value={value?.x}
             />
           )}
 
           {isVerticalScrollableVisibleF && (
-            <ScrollBar
+            <ScrollComponent
               contentSize={measureContent?.height}
+              onScrollDown={handleScrollDown}
+              onScrollUp={handleScrollUp}
               size={measure?.height}
               value={value?.y}
             />

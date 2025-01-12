@@ -6,6 +6,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
 import { type TabModel, type TabsPropsModel } from '@lib/frontend/core/components/Tabs/Tabs.models';
+import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -52,7 +53,8 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
       isRow
       p={isContained ? THEME_SIZE.SMALL : undefined}
       round={isContained}
-      s={THEME_SIZE.SMALL}>
+      s={THEME_SIZE.SMALL}
+      scrollType={SCROLL_TYPE.BUTTON}>
       {tabs?.map((tab) => {
         const isActiveF = valueControlled === tab.id;
         return isUnderline ? (
