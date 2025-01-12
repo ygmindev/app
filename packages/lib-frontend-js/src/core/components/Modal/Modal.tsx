@@ -86,10 +86,13 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = forwardRef(
                   elementState={elementStateF}
                   flex={isFullSize}
                   height={isFullSize ? heightF : undefined}
-                  isFullWidth
+                  isFullWidth={!width}
                   isShadow
+                  left={0}
+                  mHorizontal="auto"
                   onMeasure={measureSet}
                   position={SHAPE_POSITION.ABSOLUTE}
+                  right={0}
                   round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
                   width={width}>
                   <Wrapper

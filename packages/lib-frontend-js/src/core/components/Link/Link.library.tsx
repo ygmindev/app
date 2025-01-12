@@ -8,5 +8,8 @@ export const props: LibraryPropsModel<LinkPropsModel> = {
   defaultProps: {
     children: 'children',
   },
-  variants: [{ props: { children: <WrapperFixture /> } }],
+  variants: [
+    { props: { children: <WrapperFixture /> } },
+    { props: { isNewTab: true, pathname: 'https://www.google.com' } },
+  ],
 };

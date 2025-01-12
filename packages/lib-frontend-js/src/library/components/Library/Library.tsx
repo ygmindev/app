@@ -104,7 +104,14 @@ export const Library = <TType extends unknown>({
                     s={THEME_SIZE.SMALL}>
                     {variantName && <Text>{variantName}</Text>}
 
-                    {Renderer ? Renderer({ element, props: propsF }) : element}
+                    {Renderer ? (
+                      <Renderer
+                        element={element}
+                        props={propsF}
+                      />
+                    ) : (
+                      element
+                    )}
                   </Wrapper>
 
                   <Wrapper

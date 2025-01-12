@@ -12,7 +12,7 @@ import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import isString from 'lodash/isString';
 import { useRef } from 'react';
 
-export const Link: TFCModel<LinkPropsModel> = ({ children, isNewTab, ...props }) => {
+export const Link: TFCModel<LinkPropsModel> = ({ children, isNewTab, pathname, ...props }) => {
   const { textProps } = useTextStyles({ props });
   const theme = useTheme();
   const ref = useRef<AnimatableRefModel>(null);
@@ -20,7 +20,7 @@ export const Link: TFCModel<LinkPropsModel> = ({ children, isNewTab, ...props })
     <_Link
       {...textProps}
       isNewTab={isNewTab}
-      pathname={children}>
+      pathname={pathname}>
       <Activatable
         onActive={() => ref?.current?.toState(ELEMENT_STATE.ACTIVE)}
         onInactive={() => ref?.current?.toState(ELEMENT_STATE.INACTIVE)}>
@@ -45,7 +45,8 @@ export const Link: TFCModel<LinkPropsModel> = ({ children, isNewTab, ...props })
   ) : (
     <_Link
       {...textProps}
-      isNewTab={isNewTab}>
+      isNewTab={isNewTab}
+      pathname={pathname}>
       {children}
     </_Link>
   );
