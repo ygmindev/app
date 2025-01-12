@@ -70,8 +70,6 @@ export const Library = <TType extends unknown>({
       isVerticalScrollable
       p
       s>
-      {title && <Text fontStyle={FONT_STYLE.HEADLINE}>{title}</Text>}
-
       {map(categories, (v, k) => (
         <Wrapper
           key={toString(k)}

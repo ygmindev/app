@@ -12,7 +12,7 @@ import { forwardRef } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { type IconProps } from 'react-native-vector-icons/Icon';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export const _Icon: SFCModel<_IconPropsModel, TextStyleModel> = forwardRef(
   ({ icon, ...props }, ref) => {
@@ -23,7 +23,7 @@ export const _Icon: SFCModel<_IconPropsModel, TextStyleModel> = forwardRef(
         : (FONTAWESOME_ICONS as Record<string, string>)[icon]
           ? FontAwesome
           : (MATERIAL_ICONS as Record<string, string>)[icon]
-            ? MaterialIcons
+            ? MaterialCommunityIcons
             : null;
 
       return (

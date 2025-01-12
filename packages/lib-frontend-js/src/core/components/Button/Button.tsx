@@ -13,6 +13,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
+import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import {
@@ -49,9 +50,10 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
       leftElement,
       onElementStateChange,
       rightElement,
+      s,
       size = THEME_SIZE.MEDIUM,
       tooltip,
-      type,
+      type = BUTTON_TYPE.FILLED,
       ...props
     },
     ref,
@@ -68,7 +70,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
 
     const isIconOnly = icon && !children;
 
-    const typeF = type ?? (isIconOnly && !isShadow ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED);
+    // const type = type ?? (isIconOnly && !isShadow ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED);
 
     const { animation, childColorRole } = useMemo<{
       animation?: AnimationModel;
@@ -78,7 +80,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
       const opacity = theme.opaque[THEME_SIZE.LARGE];
       const activeColor = colorF[THEME_ROLE.ACTIVE];
       const mainColor = colorF[THEME_ROLE.MAIN];
-      switch (typeF) {
+      switch (type) {
         case BUTTON_TYPE.FILLED: {
           return {
             animation: {
@@ -142,9 +144,9 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         default:
           return {};
       }
-    }, [color, theme, typeF]);
+    }, [color, theme, type]);
 
-    let childrenF = children && (
+    let childrenF = isAsyncText(children) ? (
       <AsyncText
         align={fontAlign}
         color={color}
@@ -154,6 +156,8 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         isFullWidth>
         {children}
       </AsyncText>
+    ) : (
+      children
     );
 
     const iconF = icon ? (
@@ -171,7 +175,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
       <Wrapper
         align={FLEX_ALIGN.CENTER}
         isRow
-        s={THEME_SIZE.SMALL}>
+        s={s ?? THEME_SIZE.SMALL}>
         {leftElement}
 
         {iconF}
@@ -206,7 +210,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         {...wrapperProps}
         align={align}
         animation={animation}
-        border={typeF === BUTTON_TYPE.TRANSPARENT}
+        border={type === BUTTON_TYPE.TRANSPARENT}
         borderRole={THEME_ROLE.MAIN}
         confirmColor={color}
         elementState={elementStateControlled}

@@ -5,6 +5,7 @@ import { props as logoProps } from '@lib/frontend/app/components/Logo/Logo.libra
 import { props as otpInputProps } from '@lib/frontend/auth/components/OtpInput/OtpInput.library';
 import { props as activatableProps } from '@lib/frontend/core/components/Activatable/Activatable.library';
 import { props as buttonProps } from '@lib/frontend/core/components/Button/Button.library';
+import { props as buttonGroupProps } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup.library';
 import { props as categoryInputProps } from '@lib/frontend/core/components/CategoryInput/CategoryInput.library';
 import { props as chipProps } from '@lib/frontend/core/components/Chip/Chip.library';
 import { props as circleProps } from '@lib/frontend/core/components/Circle/Circle.library';
@@ -42,6 +43,7 @@ export const LIBRARY_PROPS = [
   accordionProps,
   activatableProps,
   appearableProps,
+  buttonGroupProps,
   buttonProps,
   calendarInputProps,
   categoryInputProps,

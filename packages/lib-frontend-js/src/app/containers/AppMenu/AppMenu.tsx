@@ -3,6 +3,7 @@ import { SIGN_IN, SIGN_OUT } from '@lib/frontend/auth/auth.constants';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import {
   type MenuOptionModel,
@@ -62,6 +63,7 @@ export const AppMenu: LFCModel<AppMenuPropsModel> = ({ ...props }) => {
           elementState={isOpen ? ELEMENT_STATE.ACTIVE : undefined}
           icon="menu"
           tooltip={t('core:menu')}
+          type={BUTTON_TYPE.INVISIBLE}
         />
       )}
       options={optionsF}

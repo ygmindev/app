@@ -103,6 +103,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
                     <Button
                       elementState={elementStateF}
                       icon="phone"
+                      isFullWidth
                       onPress={() => valueControlledSet(SIGN_IN_METHOD.PHONE)}
                       type={BUTTON_TYPE.TRANSPARENT}>
                       {t('core:continueWith', { value: t('user:phone') })}
@@ -113,6 +114,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
                     <Button
                       elementState={elementStateF}
                       icon="email"
+                      isFullWidth
                       onPress={() => valueControlledSet(SIGN_IN_METHOD.EMAIL)}
                       type={BUTTON_TYPE.TRANSPARENT}>
                       {t('core:continueWith', { value: t('user:email') })}

@@ -12,11 +12,11 @@ import {
   type SizableMorePropsModel,
 } from '@lib/frontend/core/core.models';
 import { type ThemeColorPropsModel } from '@lib/frontend/style/style.models';
-import { type ReactElement } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 
 export type ButtonTypeModel = `${BUTTON_TYPE}`;
 
-export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel> &
+export type ButtonPropsModel = ChildrenPropsModel<ReactNode | AsyncTextModel> &
   AnimatablePropsModel &
   WithIconPropsModel &
   Pick<WrapperPropsModel, 'isShadow'> &

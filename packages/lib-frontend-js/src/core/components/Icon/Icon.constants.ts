@@ -32,11 +32,7 @@ export const IONIC_ICONS = {
   chats: 'chatbubbles-outline',
   check: 'checkmark-outline',
   checkCircle: 'checkmark-circle-outline',
-  chevronDown: 'chevron-down-outline',
   chevronHorizontal: 'code-outline',
-  chevronLeft: 'chevron-back-outline',
-  chevronRight: 'chevron-forward-outline',
-  chevronUp: 'chevron-up-outline',
   chip: 'hardware-chip-outline',
   cloud: 'cloud-outline',
   code: 'code-slash-outline',
@@ -136,6 +132,14 @@ export const FONTAWESOME_ICONS = {
 
 export const MATERIAL_ICONS = {
   brightness: 'brightness-4',
+  chevronDown: 'chevron-down',
+  chevronDownDouble: 'chevron-double-down',
+  chevronLeft: 'chevron-left',
+  chevronLeftDouble: 'chevron-double-left',
+  chevronRight: 'chevron-right',
+  chevronRightDouble: 'chevron-double-right',
+  chevronUp: 'chevron-up',
+  chevronUpDouble: 'chevron-double-up',
   device: 'devices-other',
 };
 

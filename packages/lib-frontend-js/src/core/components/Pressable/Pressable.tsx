@@ -54,38 +54,50 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     const { elementStateControlled, elementStateControlledSet, isBlocked } =
       useElementStateControlled({ elementState, onElementStateChange });
 
-    const handleButtonPress = async (): Promise<void> => {
-      if (!isBlocked) {
-        if (confirmMessage) {
-          confirmModalIsOpenSet(true);
-        } else {
-          await handlePress();
+    const handleButtonPress = onPress
+      ? async (): Promise<void> => {
+          if (!isBlocked) {
+            if (confirmMessage) {
+              confirmModalIsOpenSet(true);
+            } else {
+              await handlePress?.();
+            }
+          }
         }
-      }
-    };
+      : undefined;
 
-    const handlePress = async (): Promise<void> => {
-      if (!isBlocked) {
-        const result = onPress && onPress();
-        if (isPromise(result)) {
-          elementStateControlledSet(ELEMENT_STATE.LOADING);
-          await result;
-          elementStateControlledSet(ELEMENT_STATE.INACTIVE);
+    const handlePress = onPress
+      ? async (): Promise<void> => {
+          if (!isBlocked) {
+            const result = onPress && onPress();
+            if (isPromise(result)) {
+              elementStateControlledSet(ELEMENT_STATE.LOADING);
+              await result;
+              elementStateControlledSet(ELEMENT_STATE.INACTIVE);
+            }
+          }
         }
-      }
-    };
+      : undefined;
 
     const element = (
       <>
         <Activatable
-          onActive={() => {
-            onActive && onActive();
-            elementStateControlledSet(ELEMENT_STATE.ACTIVE);
-          }}
-          onInactive={() => {
-            onInactive && onInactive();
-            elementStateControlledSet(ELEMENT_STATE.INACTIVE);
-          }}
+          onActive={
+            onPress
+              ? () => {
+                  onActive && onActive();
+                  elementStateControlledSet(ELEMENT_STATE.ACTIVE);
+                }
+              : undefined
+          }
+          onInactive={
+            onPress
+              ? () => {
+                  onInactive && onInactive();
+                  elementStateControlledSet(ELEMENT_STATE.INACTIVE);
+                }
+              : undefined
+          }
           trigger={trigger}>
           <Wrapper
             {...wrapperProps}
@@ -139,7 +151,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
                   elementState={elementStateControlled}
                   icon="chevronRight"
                   onPress={async () => {
-                    await handlePress();
+                    await handlePress?.();
                     confirmModalIsOpenSet(false);
                   }}>
                   {t('core:continue')}
