@@ -7,8 +7,16 @@ export const props: LibraryPropsModel<ButtonGroupPropsModel> = {
   Component: ButtonGroup,
   defaultProps: {
     children: [
-      <Button onPress={() => console.warn('button 1')}>button 1</Button>,
-      <Button onPress={() => console.warn('button 2')}>button 2</Button>,
+      <Button
+        key="1"
+        onPress={() => console.warn('button 1')}>
+        button 1
+      </Button>,
+      <Button
+        key="2"
+        onPress={() => console.warn('button 2')}>
+        button 2
+      </Button>,
     ],
   },
   variants: [
@@ -17,10 +25,12 @@ export const props: LibraryPropsModel<ButtonGroupPropsModel> = {
         children: [
           <Button
             icon="personCircle"
+            key="1"
             onPress={() => console.warn('button 1')}
           />,
           <Button
             icon="personCircle"
+            key="2"
             onPress={() => console.warn('button 2')}
           />,
         ],
