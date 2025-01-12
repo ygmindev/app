@@ -99,20 +99,9 @@ export const getViewParams = <
 
     const isBar = (props.scrollType ?? SCROLL_TYPE.BAR) === SCROLL_TYPE.BAR;
     const ScrollComponent = isBar ? ScrollBar : ScrollButton;
-    const scrollOffset = 150;
 
-    const handleScrollUp = (): void => {
-      (ref as RefObject<ScrollView>).current?.scrollTo({
-        ...(props.isHorizontalScrollable ? { x: (value?.x ?? 0) + scrollOffset } : {}),
-        ...(props.isVerticalScrollable ? { y: (value?.y ?? 0) + scrollOffset } : {}),
-      });
-    };
-
-    const handleScrollDown = (): void => {
-      (ref as RefObject<ScrollView>).current?.scrollTo({
-        ...(props.isHorizontalScrollable ? { x: (value?.x ?? 0) - scrollOffset } : {}),
-        ...(props.isVerticalScrollable ? { y: (value?.y ?? 0) - scrollOffset } : {}),
-      });
+    const handleScrollTo = (position: PositionModel): void => {
+      (ref as RefObject<ScrollView>).current?.scrollTo(position);
     };
 
     return {
@@ -137,8 +126,7 @@ export const getViewParams = <
             <ScrollComponent
               contentSize={measureContent?.width}
               isHorizontal
-              onScrollDown={handleScrollDown}
-              onScrollUp={handleScrollUp}
+              onScrollTo={handleScrollTo}
               size={measure?.width}
               value={value?.x}
             />
@@ -147,8 +135,7 @@ export const getViewParams = <
           {isVerticalScrollableVisibleF && (
             <ScrollComponent
               contentSize={measureContent?.height}
-              onScrollDown={handleScrollDown}
-              onScrollUp={handleScrollUp}
+              onScrollTo={handleScrollTo}
               size={measure?.height}
               value={value?.y}
             />

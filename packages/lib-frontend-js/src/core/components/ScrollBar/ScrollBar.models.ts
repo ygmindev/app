@@ -1,8 +1,9 @@
+import { type PositionModel } from '@lib/frontend/core/core.models';
+
 export type ScrollBarPropsModel = {
   contentSize?: number;
   isHorizontal?: boolean;
-  onScrollDown?(): void;
-  onScrollUp?(): void;
+  onScrollTo?(params: PositionModel): void;
   size?: number;
   value?: number;
 };

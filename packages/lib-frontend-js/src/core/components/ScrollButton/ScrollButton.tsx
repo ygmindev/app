@@ -10,8 +10,7 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
   contentSize,
   isHorizontal,
-  onScrollDown,
-  onScrollUp,
+  onScrollTo,
   size,
   value,
 }) => {
@@ -19,6 +18,7 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
   const isScrollUpVisible =
     (value ?? 0) < (contentSize ?? 0) - (size ?? 0) - theme.shape.spacing[THEME_SIZE.MEDIUM];
   const isScrollDownVisible = (value ?? 0) > theme.shape.spacing[THEME_SIZE.MEDIUM];
+  const scrollOffset = 150;
 
   return (
     <>
@@ -35,7 +35,11 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
         <Button
           icon={isHorizontal ? 'chevronLeft' : 'chevronUp'}
           isShadow
-          onPress={isScrollDownVisible ? onScrollDown : undefined}
+          onPress={
+            isScrollDownVisible
+              ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) - scrollOffset })
+              : undefined
+          }
           size={THEME_SIZE.SMALL}
           type={BUTTON_TYPE.INVISIBLE}
         />
@@ -54,7 +58,11 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
         <Button
           icon={isHorizontal ? 'chevronRight' : 'chevronDown'}
           isShadow
-          onPress={isScrollUpVisible ? onScrollUp : undefined}
+          onPress={
+            isScrollUpVisible
+              ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) + scrollOffset })
+              : undefined
+          }
           size={THEME_SIZE.SMALL}
           type={BUTTON_TYPE.INVISIBLE}
         />
