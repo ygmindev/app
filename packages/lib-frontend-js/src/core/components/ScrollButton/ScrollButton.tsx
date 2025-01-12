@@ -1,6 +1,7 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { ButtonGroup } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup';
 import { type ScrollButtonPropsModel } from '@lib/frontend/core/components/ScrollButton/ScrollButton.models';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -19,7 +20,6 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
     (value ?? 0) < (contentSize ?? 0) - (size ?? 0) - theme.shape.spacing[THEME_SIZE.MEDIUM];
   const isScrollDownVisible = (value ?? 0) > theme.shape.spacing[THEME_SIZE.MEDIUM];
   const scrollOffset = 150;
-
   return (
     <>
       <Appearable
@@ -32,17 +32,30 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
         right={isHorizontal ? undefined : 0}
         top={0}
         zIndex>
-        <Button
-          icon={isHorizontal ? 'chevronLeft' : 'chevronUp'}
+        <ButtonGroup
           isShadow
-          onPress={
-            isScrollDownVisible
-              ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) - scrollOffset })
-              : undefined
-          }
           size={THEME_SIZE.SMALL}
-          type={BUTTON_TYPE.INVISIBLE}
-        />
+          type={BUTTON_TYPE.INVISIBLE}>
+          <Button
+            icon={isHorizontal ? 'chevronLeft' : 'chevronUp'}
+            key="scrollStart"
+            onPress={
+              isScrollDownVisible
+                ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) - scrollOffset })
+                : undefined
+            }
+          />
+
+          <Button
+            icon={isHorizontal ? 'chevronLeft' : 'chevronUp'}
+            key="scrollUp"
+            onPress={
+              isScrollDownVisible
+                ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) - scrollOffset })
+                : undefined
+            }
+          />
+        </ButtonGroup>
       </Appearable>
 
       <Appearable
@@ -55,17 +68,29 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
         right={0}
         top={isHorizontal ? 0 : undefined}
         zIndex>
-        <Button
-          icon={isHorizontal ? 'chevronRight' : 'chevronDown'}
+        <ButtonGroup
           isShadow
-          onPress={
-            isScrollUpVisible
-              ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) + scrollOffset })
-              : undefined
-          }
           size={THEME_SIZE.SMALL}
-          type={BUTTON_TYPE.INVISIBLE}
-        />
+          type={BUTTON_TYPE.INVISIBLE}>
+          <Button
+            icon={isHorizontal ? 'chevronRightDouble' : 'chevronDownDouble'}
+            key="scrollDown"
+            onPress={
+              isScrollUpVisible ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: 0 }) : undefined
+            }
+          />
+
+          <Button
+            icon={isHorizontal ? 'chevronRight' : 'chevronDown'}
+            key="scrollStart"
+            onPress={
+              isScrollUpVisible
+                ? () =>
+                    onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (contentSize ?? 0) - (size ?? 0) })
+                : undefined
+            }
+          />
+        </ButtonGroup>
       </Appearable>
     </>
   );

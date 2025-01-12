@@ -3,7 +3,7 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { ROOT } from '@lib/frontend/root/root.constants';
 import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
-import MaterialIcons from 'react-native-vector-icons/Fonts/MaterialIcons.ttf';
+import MaterialCommunityIcons from 'react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf';
 
 const config = defineConfig<CssConfigModel>({
   params: () => ({
@@ -19,8 +19,8 @@ const config = defineConfig<CssConfigModel>({
     }
   
     @font-face {
-      font-family: 'MaterialIcons';
-      src: url("${MaterialIcons as string}") format("truetype");
+      font-family: 'MaterialCommunityIcons';
+      src: url("${MaterialCommunityIcons as string}") format("truetype");
     }
   
     html {

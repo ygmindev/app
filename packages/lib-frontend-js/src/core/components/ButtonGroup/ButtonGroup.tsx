@@ -32,7 +32,7 @@ export const ButtonGroup: LFCModel<ButtonGroupPropsModel> = ({
       p={THEME_SIZE.SMALL}
       s={0}
       size={size}>
-      {children.map((child) => cloneElement(child, { ...props, height: heightF }))}
+      {children.map((child) => cloneElement(child, { ...props, height: heightF, isShadow: false }))}
     </Button>
   );
 };
