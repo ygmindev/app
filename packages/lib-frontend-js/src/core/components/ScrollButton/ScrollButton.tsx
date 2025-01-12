@@ -23,6 +23,7 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
   return (
     <>
       <Appearable
+        animation={{ delay: 50 }}
         bottom={isHorizontal ? 0 : undefined}
         isActive={isScrollDownVisible}
         isCenter
@@ -59,6 +60,7 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
       </Appearable>
 
       <Appearable
+        animation={{ delay: 50 }}
         bottom={0}
         isActive={isScrollUpVisible}
         isCenter
