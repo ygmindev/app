@@ -3,8 +3,7 @@ import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/dat
 
 export type CategoryInputPropsModel = InputPropsModel & {
   emptyLabel?: AsyncTextModel;
-  id?: string;
-  options: Array<TranslatableOptionModel> | (() => Promise<Array<TranslatableOptionModel>>);
+  options: Array<TranslatableOptionModel>;
 };
 
 export type CategoryInputRefModel = InputRefModel;
