@@ -13,7 +13,7 @@ export const Circle: LFCModel<CirclePropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
-  const sizeF = isNumber(size) ? size : theme.shape.size[size];
+  const sizeF = isNumber(size) ? size : theme.shape.size[size] / 2;
   return (
     <Wrapper
       backgroundColor={backgroundColor}

@@ -20,7 +20,7 @@ export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInput
     (
       {
         condition,
-        defaultCondition = FILTER_CONDITION.EQUAL,
+        defaultCondition = FILTER_CONDITION.CONTAINS,
         defaultValue,
         isValueOnly,
         onChange,
