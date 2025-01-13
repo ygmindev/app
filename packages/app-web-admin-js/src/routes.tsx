@@ -33,7 +33,7 @@ export const routes: Array<RouteModel> = getRoutes([
       },
       {
         icon: 'database',
-        navigation: ROUTE_NAVIGATION.TAB,
+        navigation: ROUTE_NAVIGATION.NAVIGATION,
         pathname: RESOURCE,
         routes: [
           {

@@ -155,7 +155,6 @@ export const ResourceTable = <
       }}
       flex
       id={name}
-      p
       params={filters ? { filter: Object.values(filters).flat() } : undefined}
       query={getConnection}
       ref={connectionBoundaryRef}

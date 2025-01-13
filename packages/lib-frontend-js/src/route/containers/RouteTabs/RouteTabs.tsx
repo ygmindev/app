@@ -24,7 +24,7 @@ export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({ routes, ...props }) =
         return {
           icon,
           id: pathname,
-          label: t(title),
+          label: title ? t(title) : pathname.replace('/', ''),
           onPress: () => push({ pathname: pathnameF }),
         };
       })}
