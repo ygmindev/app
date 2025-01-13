@@ -93,7 +93,6 @@ export const Menu = forwardRef(
                 (active ?? 0) >= 0 && index === active ? ELEMENT_STATE.ACTIVE : option.elementState
               }
               icon={icon}
-              isFullWidth
               key={id}
               onPress={() => handlePressOption(option)}
               rightElement={

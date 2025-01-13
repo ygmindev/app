@@ -1,8 +1,8 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
-import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 
 export const props: LibraryPropsModel<WrapperPropsModel> = {
   Component: Wrapper,

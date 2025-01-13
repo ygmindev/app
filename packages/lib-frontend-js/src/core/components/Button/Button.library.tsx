@@ -1,6 +1,7 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { type ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
@@ -8,6 +9,7 @@ import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesia
 
 export const props: LibraryPropsModel<ButtonPropsModel> = {
   Component: Button,
+  Renderer: ({ element }) => <Wrapper isRow>{element}</Wrapper>,
   defaultProps: {
     children: 'children',
   },

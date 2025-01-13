@@ -15,10 +15,6 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
-import {
-  FLEX_ALIGN,
-  FLEX_JUSTIFY,
-} from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef, useState } from 'react';
@@ -26,13 +22,11 @@ import { forwardRef, useState } from 'react';
 export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forwardRef(
   (
     {
-      alignSelf = FLEX_ALIGN.START,
       animation,
       children,
       confirmColor,
       confirmMessage,
       elementState,
-      justifySelf = FLEX_JUSTIFY.START,
       onActive,
       onElementStateChange,
       onInactive,
@@ -101,7 +95,6 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
           trigger={trigger}>
           <Wrapper
             {...wrapperProps}
-            alignSelf={alignSelf}
             animation={{
               states: {
                 ...animation?.states,
@@ -114,7 +107,6 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
               },
             }}
             elementState={elementStateControlled}
-            justifySelf={justifySelf}
             onPress={handleButtonPress}
             onPressIn={onPressIn}
             onPressOut={onPressOut}

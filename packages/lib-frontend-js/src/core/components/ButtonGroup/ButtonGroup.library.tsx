@@ -2,12 +2,14 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { ButtonGroup } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup';
 import { type ButtonGroupPropsModel } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesianObject';
 
 export const props: LibraryPropsModel<ButtonGroupPropsModel> = {
   Component: ButtonGroup,
+  Renderer: ({ element }) => <Wrapper isRow>{element}</Wrapper>,
   defaultProps: {
     children: [
       <Button
