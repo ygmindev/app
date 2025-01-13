@@ -6,6 +6,7 @@ import { type AppearablePropsModel } from '@lib/frontend/animation/components/Ap
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useValueDelayed';
 
 export const Appearable: LFCModel<AppearablePropsModel> = ({
   animation,
@@ -15,6 +16,7 @@ export const Appearable: LFCModel<AppearablePropsModel> = ({
   isScalable = true,
   ...props
 }) => {
+  const isActiveF = useValueDelayed(isActive);
   return (
     <Wrapper
       {...props}
@@ -24,7 +26,7 @@ export const Appearable: LFCModel<AppearablePropsModel> = ({
       }}
       elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
       isHidden={isHidden ?? !isActive}>
-      {children}
+      {isActiveF && children}
     </Wrapper>
   );
 };
