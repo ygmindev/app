@@ -14,15 +14,17 @@ export const Appearable: LFCModel<AppearablePropsModel> = ({
   isHidden,
   isScalable = true,
   ...props
-}) => (
-  <Wrapper
-    {...props}
-    animation={{
-      states: isScalable ? ANIMATION_STATES_APPEAR_SCALABLE : ANIMATION_STATES_APPEARABLE,
-      ...animation,
-    }}
-    elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
-    isHidden={isHidden ?? !isActive}>
-    {children}
-  </Wrapper>
-);
+}) => {
+  return (
+    <Wrapper
+      {...props}
+      animation={{
+        states: isScalable ? ANIMATION_STATES_APPEAR_SCALABLE : ANIMATION_STATES_APPEARABLE,
+        ...animation,
+      }}
+      elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
+      isHidden={isHidden ?? !isActive}>
+      {children}
+    </Wrapper>
+  );
+};

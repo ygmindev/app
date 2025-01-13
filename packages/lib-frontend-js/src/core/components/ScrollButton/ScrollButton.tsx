@@ -3,6 +3,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { ButtonGroup } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup';
 import { type ScrollButtonPropsModel } from '@lib/frontend/core/components/ScrollButton/ScrollButton.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
@@ -23,7 +24,6 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
   return (
     <>
       <Appearable
-        animation={{ delay: 50 }}
         bottom={isHorizontal ? 0 : undefined}
         isActive={isScrollDownVisible}
         isCenter
@@ -34,6 +34,7 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
         top={0}
         zIndex>
         <ButtonGroup
+          elementState={isScrollDownVisible ? undefined : ELEMENT_STATE.INACTIVE}
           isShadow
           size={THEME_SIZE.SMALL}
           type={BUTTON_TYPE.INVISIBLE}>
@@ -60,7 +61,6 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
       </Appearable>
 
       <Appearable
-        animation={{ delay: 50 }}
         bottom={0}
         isActive={isScrollUpVisible}
         isCenter
@@ -71,6 +71,7 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
         top={isHorizontal ? 0 : undefined}
         zIndex>
         <ButtonGroup
+          elementState={isScrollUpVisible ? undefined : ELEMENT_STATE.INACTIVE}
           isShadow
           size={THEME_SIZE.SMALL}
           type={BUTTON_TYPE.INVISIBLE}>

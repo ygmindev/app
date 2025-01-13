@@ -1,7 +1,10 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { ButtonGroup } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup';
 import { type ButtonGroupPropsModel } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup.models';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
+import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
+import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesianObject';
 
 export const props: LibraryPropsModel<ButtonGroupPropsModel> = {
   Component: ButtonGroup,
@@ -36,5 +39,17 @@ export const props: LibraryPropsModel<ButtonGroupPropsModel> = {
         ],
       },
     },
+
+    ...cartesianObject({
+      size: [...Object.values(THEME_SIZE), Object.values(THEME_SIZE_MORE)],
+    }).map((props) => ({
+      props,
+    })),
+    ...cartesianObject({
+      color: Object.values(THEME_COLOR),
+      type: Object.values(BUTTON_TYPE),
+    }).map((props) => ({
+      props,
+    })),
   ],
 };
