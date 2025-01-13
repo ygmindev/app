@@ -3,8 +3,6 @@ import {
   // flip,
   FloatingFocusManager,
   FloatingPortal,
-  offset,
-  shift,
   size,
   useClick,
   useDismiss,
@@ -30,7 +28,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   isOpen,
   maxHeight,
   maxWidth,
-  offset: offsetF,
+  // offset: offsetF,
   onToggle,
   ...props
 }) => {
@@ -38,9 +36,9 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   const isOpenF = useValueDelayed(isOpen, delay);
   const { context, floatingStyles, refs } = useFloating({
     middleware: [
-      offset(offsetF),
+      // offset(offsetF),
+      // shift({ padding: offsetF }),
       // flip({ fallbackAxisSideDirection: 'end' }),
-      shift({ padding: offsetF }),
       size({
         apply({ availableHeight, availableWidth, elements, rects }) {
           Object.assign(elements.floating.style, {

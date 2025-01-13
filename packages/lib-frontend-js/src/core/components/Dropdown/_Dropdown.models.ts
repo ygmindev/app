@@ -9,6 +9,6 @@ export type _DropdownPropsModel = ChildrenPropsModel & {
   isOpen?: boolean;
   maxHeight: number;
   maxWidth: number;
-  offset: number;
+  // offset: number;
   onToggle(params?: boolean): void;
 };

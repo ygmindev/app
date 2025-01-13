@@ -45,27 +45,30 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = forward
         isOpen={isOpen}
         maxHeight={maxHeight ?? theme.shape.size[THEME_SIZE.MEDIUM]}
         maxWidth={maxWidth ?? theme.shape.size[THEME_SIZE.MEDIUM]}
-        offset={theme.shape.spacing[THEME_SIZE.SMALL]}
         onToggle={onToggle}
         style={styles}>
         <Wrapper
-          backgroundColor={THEME_COLOR_MORE.SURFACE}
-          border
           isFullWidth={width ? undefined : true}
           isHidden={isHidden}
-          isOverflowHidden
-          isShadow
-          maxWidth={maxWidth}
-          round
-          width={width}>
+          p={THEME_SIZE.SMALL}>
           <Wrapper
+            backgroundColor={THEME_COLOR_MORE.SURFACE}
+            border
             flex
-            isFullWidth
-            isVerticalScrollable
-            maxHeight={maxHeight ?? theme.layout.dropdown.maxHeight}
-            p={THEME_SIZE.SMALL}
-            ref={wrapperRef}>
-            {children}
+            isOverflowHidden
+            isShadow
+            maxWidth={maxWidth}
+            round
+            width={width}>
+            <Wrapper
+              flex
+              isFullWidth
+              isVerticalScrollable
+              maxHeight={maxHeight ?? theme.layout.dropdown.maxHeight}
+              p={THEME_SIZE.SMALL}
+              ref={wrapperRef}>
+              {children}
+            </Wrapper>
           </Wrapper>
         </Wrapper>
       </_Dropdown>
