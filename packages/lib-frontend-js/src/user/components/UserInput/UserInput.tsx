@@ -10,6 +10,7 @@ import {
 } from '@lib/frontend/user/components/UserInput/UserInput.models';
 import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
 import { type PartialModel } from '@lib/shared/core/core.models';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { USER_FIXTURES } from '@lib/shared/user/resources/User/User.fixtures';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
@@ -29,10 +30,17 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
     });
 
     const { search } = useUserResource();
-    const handleQuery = async (v?: string): Promise<Array<PartialModel<UserModel>>> =>
-      v ? (await search({ query: v })).result ?? [] : [];
+
+    // const handleQuery = async (v?: string): Promise<Array<PartialModel<UserModel>>> =>
+    //   v ? ((await search({ query: v })).result ?? []) : [];
+
+    const handleQuery = async (v?: string): Promise<Array<PartialModel<UserModel>>> => {
+      await sleep(3000);
+      return v ? ((await search({ query: v })).result ?? []) : [];
+    };
 
     const formatUser = (v?: PartialModel<UserModel>): string => (v ? `${v.email}` : '');
+
     return (
       <DataBoundary
         {...wrapperProps}
@@ -58,7 +66,8 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
               const user = v && data?.find((vv) => vv._id === v);
               return user ? formatUser(user) : '';
             }}
-            value={valueControlled?._id}
+            // value={valueControlled?._id}
+            value={query}
           />
         )}
       </DataBoundary>

@@ -3,6 +3,7 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { type NavigationLayoutPropsModel } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout.models';
 import { RouteTabs } from '@lib/frontend/route/containers/RouteTabs/RouteTabs';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
   children,
@@ -15,7 +16,7 @@ export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
       {...wrapperProps}
       flex
       p={!route?.depth}
-      s>
+      s={THEME_SIZE.SMALL}>
       <RouteTabs
         depth={route?.depth}
         routes={route?.routes ?? []}

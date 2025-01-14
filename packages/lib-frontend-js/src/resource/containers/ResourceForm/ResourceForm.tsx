@@ -31,7 +31,7 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
         ?.map(({ field, fields: embeddedFields, id, isArray, label, options, type }) => {
           const element = (() => {
             const labelF = label ?? id;
-            if (id.startsWith('_') || (embeddedFields && !field)) {
+            if (id === '_id' || (embeddedFields && !field)) {
               return null;
             }
             if (field) {

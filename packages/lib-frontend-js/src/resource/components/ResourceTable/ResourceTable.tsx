@@ -161,14 +161,13 @@ export const ResourceTable = <
       id={name}
       params={filters ? { filter: Object.values(filters).flat() } : undefined}
       query={getConnection}
-      ref={connectionBoundaryRef}
-      s={THEME_SIZE.SMALL}>
+      ref={connectionBoundaryRef}>
       {({ data, elementState, reset }) => {
         const columns = getColumns(reset);
         return (
           <Wrapper
             flex
-            s>
+            s={THEME_SIZE.SMALL}>
             <Wrapper
               isAlign
               isRow
