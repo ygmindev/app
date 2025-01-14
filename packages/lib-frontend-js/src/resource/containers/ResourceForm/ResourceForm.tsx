@@ -32,48 +32,38 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
         fields?.map(({ field, fields: embeddedFields, id, isArray, label, options, type }) => {
           const element = (() => {
             const labelF = label ?? id;
-            const elementState =
-              id.startsWith('_') || (embeddedFields && !field) ? ELEMENT_STATE.DISABLED : undefined;
+            if (id.startsWith('_') || (embeddedFields && !field)) {
+              return null;
+            }
             if (field) {
-              return cloneElement(field({}), { elementState, label: labelF });
+              return cloneElement(field({}), { label: labelF });
             }
             switch (type) {
               case PROPERTY_TYPE.RESOURCE:
                 return (
                   <TextInput
                     beforeSubmit={async (v) => ({ _id: v })}
-                    elementState={elementState}
                     label={labelF}
                   />
                 );
               case DATA_TYPE.NUMBER:
-                return (
-                  <NumberInput
-                    elementState={elementState}
-                    label={labelF}
-                  />
-                );
+                return <NumberInput label={labelF} />;
               default:
                 return options ? (
                   isArray ? (
                     <SelectInput
-                      elementState={elementState}
                       isMultiple
                       label={labelF}
                       options={options}
                     />
                   ) : (
                     <MenuInput
-                      elementState={elementState}
                       label={labelF}
                       options={options}
                     />
                   )
                 ) : (
-                  <TextInput
-                    elementState={elementState}
-                    label={labelF}
-                  />
+                  <TextInput label={labelF} />
                 );
             }
           })();

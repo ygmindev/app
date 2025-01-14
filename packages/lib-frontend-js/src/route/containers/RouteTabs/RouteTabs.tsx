@@ -16,7 +16,6 @@ export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({ depth, routes, ...pro
     const route = routes.find(({ fullpath, pathname }) =>
       isActive({ pathname: fullpath ?? pathname }),
     );
-    console.warn(route);
     return route?.fullpath ?? route?.pathname;
   }, [routes, isActive]);
 

@@ -2,6 +2,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
+import { Text } from '@lib/frontend/core/components/Text/Text';
 import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE, TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
@@ -20,6 +21,8 @@ import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import {
@@ -168,32 +171,40 @@ export const ResourceTable = <
             s>
             <Wrapper
               isAlign
-              isRow>
-              <Button
-                icon="refresh"
-                onPress={async () => connectionBoundaryRef.current?.reset?.()}
-                size={THEME_SIZE.SMALL}>
-                {t('core:refresh')}
-              </Button>
+              isRow
+              justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
+              <Text fontStyle={FONT_STYLE.HEADLINE}>{name}</Text>
 
-              <ModalButton
-                element={({ onClose }) => (
-                  <ResourceForm<TType, TForm, TRoot>
-                    fields={fieldsF}
-                    name={name}
-                    onCancel={onClose}
-                    onSubmit={async (input, root) => {
-                      await handleUpsert(input, root);
-                      await reset();
-                      onClose();
-                    }}
-                    rootName={rootName}
-                  />
-                )}
-                icon="add"
-                size={THEME_SIZE.SMALL}>
-                {t('core:new', { value: name })}
-              </ModalButton>
+              <Wrapper
+                isAlign
+                isRow>
+                <Button
+                  icon="refresh"
+                  onPress={async () => connectionBoundaryRef.current?.reset?.()}
+                  size={THEME_SIZE.SMALL}
+                  type={BUTTON_TYPE.TRANSPARENT}>
+                  {t('core:refresh')}
+                </Button>
+
+                <ModalButton
+                  element={({ onClose }) => (
+                    <ResourceForm<TType, TForm, TRoot>
+                      fields={fieldsF}
+                      name={name}
+                      onCancel={onClose}
+                      onSubmit={async (input, root) => {
+                        await handleUpsert(input, root);
+                        await reset();
+                        onClose();
+                      }}
+                      rootName={rootName}
+                    />
+                  )}
+                  icon="add"
+                  size={THEME_SIZE.SMALL}>
+                  {t('core:new', { value: name })}
+                </ModalButton>
+              </Wrapper>
 
               {selectedRows.length > 0 && (
                 <Menu
