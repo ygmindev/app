@@ -16,7 +16,10 @@ export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
       flex
       p={!route?.depth}
       s>
-      <RouteTabs routes={route?.routes ?? []} />
+      <RouteTabs
+        depth={route?.depth}
+        routes={route?.routes ?? []}
+      />
 
       <Wrapper
         flex

@@ -2,6 +2,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Menu } from '@lib/frontend/core/components/Menu/Menu';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
+import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE, TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
@@ -227,9 +228,8 @@ export const ResourceTable = <
                   elementState={filters ? undefined : ELEMENT_STATE.DISABLED}
                   onPress={() => filtersSet(undefined)}
                   size={THEME_SIZE.SMALL}
-                  tooltip={filters ? undefined : t('resource:noFilterApplied')}
                   type={BUTTON_TYPE.INVISIBLE}>
-                  {t('resource:clearAllFilters')}
+                  {filters ? t('resource:clearAllFilters') : t('resource:noFilterApplied')}
                 </Button>
               </Wrapper>
 
@@ -237,7 +237,8 @@ export const ResourceTable = <
                 flex
                 isAlign
                 isHorizontalScrollable
-                isRow>
+                isRow
+                scrollType={SCROLL_TYPE.BUTTON}>
                 {fieldsF.map(
                   (field) =>
                     !field.isFilterDisabled &&

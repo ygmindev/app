@@ -1,4 +1,5 @@
 import { Tabs } from '@lib/frontend/core/components/Tabs/Tabs';
+import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type RouteTabsPropsModel } from '@lib/frontend/route/containers/RouteTabs/RouteTabs.models';
@@ -6,13 +7,16 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useMemo } from 'react';
 
-export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({ routes, ...props }) => {
+export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({ depth, routes, ...props }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const { isActive, push } = useRouter();
 
   const value = useMemo(() => {
-    const route = routes.find(({ pathname }) => isActive({ pathname }));
+    const route = routes.find(({ fullpath, pathname }) =>
+      isActive({ pathname: fullpath ?? pathname }),
+    );
+    console.warn(route);
     return route?.fullpath ?? route?.pathname;
   }, [routes, isActive]);
 
@@ -23,11 +27,12 @@ export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({ routes, ...props }) =
         const pathnameF = fullpath ?? pathname;
         return {
           icon,
-          id: pathname,
+          id: pathnameF,
           label: title ? t(title) : pathname.replace('/', ''),
           onPress: () => push({ pathname: pathnameF }),
         };
       })}
+      type={depth ? TABS_TYPE.CONTAINED : TABS_TYPE.UNDERLINE}
       value={value}
     />
   );
