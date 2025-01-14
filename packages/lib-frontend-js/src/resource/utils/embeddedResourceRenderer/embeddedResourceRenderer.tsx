@@ -26,7 +26,10 @@ export const embeddedResourceRenderer =
       isRow>
       <ModalButton
         element={() =>
-          cloneElement(element, { root: row._id as TRoot extends undefined ? never : string })
+          cloneElement(element, {
+            p: true,
+            root: row._id as TRoot extends undefined ? never : string,
+          })
         }
         icon="open"
         size={THEME_SIZE.SMALL}

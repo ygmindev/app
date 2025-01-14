@@ -180,21 +180,21 @@ const FormContainerF = forwardRef(
       id,
     }: FormFieldModel<TType, TKey>): FormFieldModel<TType, TKey> => ({
       element: cloneElement(element, {
-        defaultValue: initialValues?.[id] ?? element.props.defaultValue,
-        elementState: elementStateF ?? element.props.elementState,
+        defaultValue: initialValues?.[id] ?? element?.props?.defaultValue,
+        elementState: elementStateF ?? element?.props?.elementState,
         error: errors?.[id],
         key: id,
         onChange: (v) => {
-          element.props.onChange && void element.props.onChange(v);
+          element?.props?.onChange?.(v);
           return handleChange(id)(v);
         },
         onSubmit: handleSubmitF,
         ref:
-          element.ref ??
+          element?.ref ??
           ((elementF: InputRefModel<TType, TKey>) =>
             inputRefs.current && (inputRefs.current[id] = elementF)),
         testID: id,
-        value: values?.[id] ?? element.props.value,
+        value: values?.[id] ?? element?.props?.value,
       } as InputPropsModel<TType[TKey]>),
       id,
     });

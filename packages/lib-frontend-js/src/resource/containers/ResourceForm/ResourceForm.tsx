@@ -7,7 +7,6 @@ import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInp
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ResourceFormPropsModel } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { cloneElement, type ReactElement, useState } from 'react';
@@ -28,8 +27,8 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
   return (
     <FormContainer
       {...wrapperProps}
-      fields={filterNil(
-        fields?.map(({ field, fields: embeddedFields, id, isArray, label, options, type }) => {
+      fields={fields
+        ?.map(({ field, fields: embeddedFields, id, isArray, label, options, type }) => {
           const element = (() => {
             const labelF = label ?? id;
             if (id.startsWith('_') || (embeddedFields && !field)) {
@@ -68,8 +67,8 @@ export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoo
             }
           })();
           return { element, id };
-        }),
-      )}
+        })
+        .filter(({ element }) => !!element)}
       initialValues={data}
       isFullHeight
       onSubmit={onSubmit ? async (v) => onSubmit(v, rootValue) : undefined}

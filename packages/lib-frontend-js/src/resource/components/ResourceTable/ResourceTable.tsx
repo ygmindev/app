@@ -162,7 +162,7 @@ export const ResourceTable = <
       params={filters ? { filter: Object.values(filters).flat() } : undefined}
       query={getConnection}
       ref={connectionBoundaryRef}
-      s>
+      s={THEME_SIZE.SMALL}>
       {({ data, elementState, reset }) => {
         const columns = getColumns(reset);
         return (

@@ -1,3 +1,4 @@
+import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type InputPropsModel } from '@lib/frontend/data/data.models';
 import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models';
 import {
@@ -12,7 +13,8 @@ export type ResourceTablePropsModel<
   TType extends EntityResourceModel,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = ResourceParamsModel<TType, TRoot> &
+> = WrapperPropsModel &
+  ResourceParamsModel<TType, TRoot> &
   RootInputModel<TRoot> & { implementation: ResourceImplementationModel<TType, TForm, TRoot> };
 
 export type ResourceTableFieldModel<TType> = {
