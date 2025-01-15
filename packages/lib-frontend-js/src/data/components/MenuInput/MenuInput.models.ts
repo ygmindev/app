@@ -14,7 +14,7 @@ export type MenuInputPropsModel<TType extends MenuOptionModel = MenuOptionModel>
   Pick<MenuPropsModel<TType>, 'options' | 'renderOption'> &
   Omit<InputPropsModel, 'label' | 'error'> & {
     onSearch?(value?: string): void;
-    renderValue?(value?: string): AsyncTextModel | undefined;
+    renderValue?(value?: TType): AsyncTextModel | undefined;
     rightElement?: (elementState?: ElementStateModel) => ReactElement | null;
     textDefaultValue?: string;
   };

@@ -61,6 +61,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
 
   // TODO: to fix infinite loop in floating-ui
   const [isMountedF, isMountedSet] = useState<boolean>();
+
   useAsync(async (isMounted) => {
     await sleepForTransition();
     isMounted() && isMountedSet(true);

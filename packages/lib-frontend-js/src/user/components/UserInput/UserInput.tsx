@@ -33,20 +33,19 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
         : [];
 
     return (
-      <SearchInput
+      <SearchInput<UserOptionModel>
         {...wrapperProps}
         label={t('user:user')}
-        // onChange={(v) => {
-        //   const user = v && data?.find((vv) => vv._id === v);
-        //   valueControlledSet(user ? { _id: user._id } : undefined);
-        // }}
+        onChange={(v) => valueControlledSet(v.user)}
         onSearch={handleSearch}
-        renderOption={({ user }) => (
+        renderOption={(option) => (
           <Wrapper>
-            <Text isBold>{user.email ?? ''}</Text>
+            <Text isBold>{option?.user?.email ?? ''}</Text>
           </Wrapper>
         )}
-        value={valueControlled?._id}
+        value={
+          valueControlled ? { id: valueControlled._id ?? '', user: valueControlled } : undefined
+        }
       />
     );
   },

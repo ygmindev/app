@@ -1,6 +1,7 @@
 import { type MenuOptionModel } from '@lib/frontend/core/components/Menu/Menu.models';
 import { type NamableComponentModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
+import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import {
   type SearchInputPropsModel,
   type SearchInputRefModel,
@@ -10,7 +11,13 @@ import { type ForwardedRef, forwardRef, type ReactElement, useState } from 'reac
 
 export const SearchInput = forwardRef(
   <TType extends MenuOptionModel>(
-    { onSearch, ...props }: RLFCPropsModel<SearchInputRefModel, SearchInputPropsModel<TType>>,
+    {
+      defaultValue,
+      onChange,
+      onSearch,
+      value,
+      ...props
+    }: RLFCPropsModel<SearchInputRefModel, SearchInputPropsModel<TType>>,
     _: ForwardedRef<SearchInputRefModel>,
   ) => {
     const [options, optionsSet] = useState<Array<TType>>([]);
@@ -19,14 +26,23 @@ export const SearchInput = forwardRef(
       optionsSet((await onSearch(query)) ?? []);
     };
 
+    const { valueControlled, valueControlledSet } = useValueControlled({
+      defaultValue,
+      onChange,
+      value,
+    });
+
     return (
       <MenuInput
         {...props}
+        defaultValue={defaultValue?.id}
         onBlur={() => optionsSet([])}
+        onChange={(v) => valueControlledSet(options.find((option) => option.id === v))}
         onSearch={(query) => {
           void handleSearch(query);
         }}
         options={options}
+        value={valueControlled?.id}
       />
     );
   },
