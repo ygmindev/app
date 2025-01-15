@@ -23,6 +23,6 @@ export type MenuPropsModel<TType extends MenuOptionModel = MenuOptionModel> = Pi
     anchor(isOpen?: boolean): ReactElement<PressablePropsModel>;
     onToggle?(isOpen?: boolean): void;
     options: Array<TType>;
-    renderOption?(option: TType): AsyncTextModel;
+    renderOption?(option: TType): AsyncTextModel | ReactElement;
     title?: AsyncTextModel;
   };

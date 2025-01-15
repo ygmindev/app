@@ -106,10 +106,12 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
           onFocus && onFocus();
           focusableRef.current?.focus && focusableRef.current?.focus();
           inputRef.current?.focus?.();
+          elementStateControlledSet(ELEMENT_STATE.ACTIVE);
         } else {
           onBlur && onBlur();
           focusableRef.current?.blur && focusableRef.current?.blur();
           inputRef.current?.blur?.();
+          elementStateControlledSet(ELEMENT_STATE.INACTIVE);
         }
       }
     };
@@ -185,6 +187,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
         [ELEMENT_STATE.ACTIVE]: { height: theme.shape.size[THEME_SIZE.SMALL] },
       },
     };
+
     const textAnimation: AnimationModel<TextStyleModel> = {
       states: merge([
         {
@@ -230,7 +233,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forw
             language={language}
             maxLength={maxLength}
             numberOfLines={numberOfLines}
-            // onBlur={() => void sleepForEffect().then(() => handleFocus(false))}
             onBlur={() => void handleFocus(false)}
             onChange={handleChange}
             onFocus={() => void handleFocus(true)}

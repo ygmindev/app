@@ -37,7 +37,7 @@ export const MenuInput = forwardRef(
       defaultValue,
       elementState,
       error,
-      icon,
+      icon = 'search',
       isTransparent,
       label,
       onBlur,
@@ -46,6 +46,7 @@ export const MenuInput = forwardRef(
       onFocus,
       onSearch,
       options,
+      placeholder,
       renderOption,
       renderValue,
       rightElement,
@@ -121,9 +122,7 @@ export const MenuInput = forwardRef(
     const displayLabel = renderValue
       ? renderValue(valueControlled)
       : selectedOption
-        ? renderOption
-          ? renderOption(selectedOption)
-          : (selectedOption.label ?? selectedOption.id)
+        ? (selectedOption.label ?? selectedOption.id)
         : valueControlled;
 
     const handleBlur = (): void => {
@@ -170,6 +169,7 @@ export const MenuInput = forwardRef(
             onFocus={onFocus}
             onKey={optionsF?.length ? handleKey : undefined}
             onSubmit={handleSubmit}
+            placeholder={placeholder ?? t('core:search')}
             ref={inputRef}
             rightElement={
               <Wrapper
@@ -193,7 +193,10 @@ export const MenuInput = forwardRef(
         elementState={elementStateControlled}
         isFullWidth
         onChange={valueControlledSet}
-        onElementStateChange={elementStateControlledSet}
+        onElementStateChange={(v) => {
+          v && inputRef.current?.focus?.();
+          elementStateControlledSet(v);
+        }}
         options={optionsF}
         ref={menuRef}
         renderOption={renderOption}

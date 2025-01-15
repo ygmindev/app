@@ -17,11 +17,14 @@ export const FocusableWrapper: RLFCModel<FocusableRefModel, FocusableWrapperProp
     const { wrapperProps } = useLayoutStyles({ props });
     const { elementStateControlled, elementStateControlledSet, isBlocked } =
       useElementStateControlled({ elementState, onElementStateChange });
+
     const isError = !!error;
+
     useImperativeHandle(ref, () => ({
       blur: () => elementStateControlledSet(ELEMENT_STATE.INACTIVE),
       focus: () => elementStateControlledSet(ELEMENT_STATE.ACTIVE),
     }));
+
     return (
       <Wrapper
         {...wrapperProps}
