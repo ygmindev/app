@@ -4,7 +4,6 @@ import {
 } from '@lib/backend/database/utils/cleanDocument/cleanDocument.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import isArray from 'lodash/isArray';
 import isEqual from 'lodash/isEqual';
 import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
@@ -13,11 +12,13 @@ import reduce from 'lodash/reduce';
 import { ObjectId } from 'mongodb';
 
 const resolveObjectId = <TType extends unknown>(value: TType): TType =>
-  (isString(value)
-    ? new ObjectId(value)
-    : isPlainObject(value)
-      ? reduce(value as object, (result, v, k) => ({ ...result, [k]: resolveObjectId(v) }), {})
-      : value) as TType;
+  value instanceof ObjectId
+    ? value
+    : ((isString(value)
+        ? new ObjectId(value)
+        : isPlainObject(value)
+          ? reduce(value as object, (result, v, k) => ({ ...result, [k]: resolveObjectId(v) }), {})
+          : value) as TType);
 
 export const cleanDocument = <TType extends unknown>(
   value: CleanDocumentParamsModel<TType>,

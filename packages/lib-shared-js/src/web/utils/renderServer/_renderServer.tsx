@@ -23,7 +23,6 @@ import { ROUTE } from '@lib/shared/route/route.constants';
 import { matchRoutes } from '@lib/shared/route/utils/matchRoutes/matchRoutes';
 import { STATE } from '@lib/shared/state/state.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
-import { USER } from '@lib/shared/user/user.constants';
 import {
   type _RenderServerModel,
   type _RenderServerParamsModel,
@@ -61,10 +60,13 @@ export const _renderServer =
             filter: [{ field: '_id', value: signIn._id }],
           })
         )?.result);
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
+
     if (user) {
       initialState[AUTH] = { status: AUTH_STATUS.AUTHENTICATED, token };
-      initialState[USER] = { currentUser: user };
+      // initialState[USER] = { currentUser: user };
     } else {
       initialState[AUTH] = { status: AUTH_STATUS.UNAUTHENTICATED };
     }
