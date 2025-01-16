@@ -22,7 +22,7 @@ export type RouteModel<
   isNavigatable?: boolean;
   isProtectable?: boolean;
   layoutProps?: LayoutStylePropsModel;
-  loaders?: {
+  loaders?(params: { pathname?: string }): {
     [TKey in StringKeyModel<TType>]?: (params?: RequestContextModel) => Promise<TType[TKey]>;
   };
   namespaces?: Array<string>;

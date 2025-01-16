@@ -6,7 +6,7 @@ import { type RouteModel } from '@lib/frontend/route/route.models';
 
 export const productsRoute: RouteModel<undefined, ProductsPageParamsModel> = {
   ...productsRouteBase,
-  loaders: {
+  loaders: () => ({
     products: async (context) => Container.get(ProductImplementation).getConnection({}, context),
-  },
+  }),
 };

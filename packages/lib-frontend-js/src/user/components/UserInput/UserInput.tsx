@@ -11,6 +11,7 @@ import {
   type UserOptionModel,
 } from '@lib/frontend/user/components/UserInput/UserInput.models';
 import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { USER } from '@lib/shared/user/user.constants';
 import { forwardRef } from 'react';
 
@@ -39,10 +40,17 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = forw
         onChange={(v) => valueControlledSet(v.user)}
         onSearch={handleSearch}
         renderOption={(option) => (
-          <Wrapper>
-            <Text isBold>{option?.user?.email ?? ''}</Text>
+          <Wrapper
+            isAlign
+            isRow>
+            <Text isBold>{option?.user?.email}</Text>
+
+            <Text>-</Text>
+
+            <Text>{filterNil([option?.user.first, option?.user.last]).join(' ')}</Text>
           </Wrapper>
         )}
+        renderValue={(v) => v?.user?.email}
         value={
           valueControlled ? { id: valueControlled._id ?? '', user: valueControlled } : undefined
         }

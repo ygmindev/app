@@ -6,10 +6,10 @@ import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const ssrRoute: RouteModel<undefined, SsrPageParamsModel> = {
   ...ssrRouteBase,
-  loaders: {
+  loaders: () => ({
     [SSR]: async () => {
       await sleep(1000);
       return 'SSR succeeded';
     },
-  },
+  }),
 };

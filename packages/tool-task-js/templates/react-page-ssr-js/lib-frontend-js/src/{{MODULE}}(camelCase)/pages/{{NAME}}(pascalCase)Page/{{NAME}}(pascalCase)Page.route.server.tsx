@@ -4,7 +4,7 @@ import { type RouteModel } from '@lib/frontend/route/route.models';
 
 export const {{NAME}}(camelCase)Route: RouteModel<undefined, {{NAME}}(pascalCase)PageParamsModel> = {
   ...{{NAME}}(camelCase)RouteBase,
-  loaders: {
+  loaders: () => ({
     data: async () => 'data',
-  },
+  }),
 };

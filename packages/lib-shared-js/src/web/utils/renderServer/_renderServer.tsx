@@ -72,14 +72,14 @@ export const _renderServer =
     // Routing
     const pathname = context?.[ROUTE]?.location?.pathname;
     const matchedRoutes = routes && pathname ? matchRoutes({ pathname, routes }) : [];
-    const { isProtectable, loaders } = matchedRoutes?.reduce(
+    const { isProtectable, loaders: loadersF } = matchedRoutes?.reduce(
       (result, { isProtectable, loaders }) => ({
         isProtectable: result.isProtectable || isProtectable || false,
         loaders: loaders
           ? [
               ...result.loaders,
               ...reduce(
-                loaders,
+                loaders({ pathname }),
                 (r, v, k) =>
                   v ? [...r, queryClient.prefetch(k, async () => v(requestContext))] : r,
                 [] as Array<Promise<unknown>>,
@@ -90,7 +90,7 @@ export const _renderServer =
       { isProtectable: false, loaders: [] as Array<Promise<unknown>> },
     );
 
-    loaders && (await Promise.all(loaders));
+    loadersF && (await Promise.all(loadersF));
 
     const contextF: RootContextModel = merge([
       {

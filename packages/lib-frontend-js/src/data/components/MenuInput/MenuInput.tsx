@@ -47,7 +47,6 @@ export const MenuInput = forwardRef(
       onFocus,
       onSearch,
       options,
-      placeholder,
       renderOption,
       renderValue,
       rightElement,
@@ -72,6 +71,7 @@ export const MenuInput = forwardRef(
         elementState,
         onElementStateChange,
       });
+    const [selectedOption, selectedOptionSet] = useState<TType>();
 
     const [focused, focusedSet] = useState<number | undefined>();
     const menuRef = useRef<MenuRefModel>(null);
@@ -118,7 +118,6 @@ export const MenuInput = forwardRef(
       </Rotatable>
     );
 
-    const selectedOption = options.find(({ id }) => id === valueControlled);
     const displayLabel =
       renderValue?.(selectedOption) ??
       selectedOption?.label ??
@@ -146,6 +145,7 @@ export const MenuInput = forwardRef(
     };
 
     const handleChange = (v: string): void => {
+      selectedOptionSet(options.find(({ id }) => id === v));
       valueControlledSet(v);
       handleBlur();
       void sleepForEffect().then(() => focusedSet(undefined));
@@ -176,7 +176,7 @@ export const MenuInput = forwardRef(
             onFocus={onFocus}
             onKey={optionsF?.length ? handleKey : undefined}
             onSubmit={handleSubmit}
-            placeholder={placeholder ?? t('core:search')}
+            placeholder={displayLabel ? t(displayLabel) : t('core:search')}
             ref={inputRef}
             rightElement={
               <Wrapper
