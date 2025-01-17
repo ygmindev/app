@@ -6,7 +6,7 @@ import { type DroppableRefModel } from '@lib/frontend/core/components/Droppable/
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION } from '@lib/frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { type FormFieldsModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
@@ -99,8 +99,9 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
 
   return (
     <Droppable
-      anchor={() => (
+      anchor={(isActive) => (
         <Button
+          elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
           icon="filter"
           rightElement={
             <Wrapper
