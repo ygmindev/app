@@ -12,7 +12,7 @@ export const dev: TaskParamsModel<unknown> = {
   task: [
     () =>
       fromExecutable(
-        `vite-node --config ${bundleConfig.params().configFilename} --watch ${serverConfig.params().entryDir}`,
+        `vite-node --config ${bundleConfig.params().configFilename} --watch ${serverConfig.params().entryPathname}`,
       ),
   ],
 };

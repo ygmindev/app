@@ -30,7 +30,7 @@ const config = defineConfig<ServerConfigModel>({
 
     database: databaseConfig.params(),
 
-    entryDir: fromWorking('src/index.ts'),
+    entryPathname: fromWorking('src/index.ts'),
 
     host: process.env.SERVER_APP_HOST,
 

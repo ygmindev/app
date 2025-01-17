@@ -1,4 +1,5 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import configBase from '@lib/config/node/bundle/bundle.base';
 import {
   type _BundleConfigModel,
@@ -11,6 +12,8 @@ const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
   overrides: () => [
     {
+      entryPathname: fromWorking('src/index.ts'),
+
       envPrefix: ['SERVER_'],
 
       watch: [fromPackages('lib-backend-js/src/**/*')],

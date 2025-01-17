@@ -25,5 +25,5 @@ export type ServerConfigModel = Pick<UriParamsModel, 'host' | 'port'> &
 
     database: DatabaseConfigModel;
 
-    entryDir: string;
+    entryPathname: string;
   };

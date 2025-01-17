@@ -21,8 +21,8 @@ const config = defineConfig<PackageManagerConfigModel>({
 
     installCommand: (names, packages, options = {}) =>
       names && packages
-        ? `pnpm add ${packages ? packages.map((v) => `--filter @${v.replace('-js', '').replace('-', '/')}`).join(' ') : ''} ${options.isDev ? '-D' : ''} ${names}`
-        : 'pnpm install --shamefully-hoist',
+        ? `pnpm self-update && pnpm add ${packages ? packages.map((v) => `--filter @${v.replace('-js', '').replace('-', '/')}`).join(' ') : ''} ${options.isDev ? '-D' : ''} ${names}`
+        : 'pnpm self-update && pnpm install --shamefully-hoist',
 
     modulesDir: 'node_modules',
 

@@ -63,7 +63,7 @@ export const _bundle = ({
   babel,
   buildDir,
   define,
-  entryFilename,
+  entryPathname,
   envPrefix,
   extensions,
   externals,
@@ -109,7 +109,7 @@ export const _bundle = ({
       outDir: joinPaths([fromWorking(), buildDir]),
 
       rollupOptions: {
-        ...(entryFilename ? { input: entryFilename } : {}),
+        ...(entryPathname ? { input: entryPathname } : {}),
 
         external: externals,
 
