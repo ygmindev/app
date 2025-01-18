@@ -5,7 +5,7 @@ import { initialize } from '@service/server/setup/utils/initialize/initialize';
 
 const configF = serverConfig.params();
 
-await runServer({
+export const app = runServer({
   ...configF,
   onClose: cleanup,
   onInitialize: async () => {

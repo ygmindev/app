@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "0x": "^5.8.0",
     "@anatine/esbuild-decorators": "^0.2.19",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.25.9",
@@ -132,6 +133,7 @@
     "vite-node": "^2.1.8",
     "vite-plugin-checker": "^0.8.0",
     "vite-plugin-circular-dependency": "^0.5.0",
+    "vite-plugin-node": "^4.0.0",
     "vite-plugin-static-copy": "^2.2.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest-react-native": "^0.1.5",

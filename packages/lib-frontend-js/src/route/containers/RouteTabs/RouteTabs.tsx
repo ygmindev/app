@@ -31,7 +31,7 @@ export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({ depth, routes, ...pro
           onPress: () => push({ pathname: pathnameF }),
         };
       })}
-      type={depth ? TABS_TYPE.CONTAINED : TABS_TYPE.UNDERLINE}
+      type={depth ? TABS_TYPE.UNDERLINE : TABS_TYPE.CONTAINED}
       value={value}
     />
   );

@@ -23,6 +23,7 @@ export const CLEAN_PATTERNS = [
   '.pytest_cache',
   '.mypy_cache',
   '.test',
+  '*.0x',
 ];
 
 export const DIST_DIR = '_dist';

@@ -26,7 +26,8 @@ import some from 'lodash/some';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
 import { checker } from 'vite-plugin-checker';
-import circularDependencyPlugin from 'vite-plugin-circular-dependency';
+// import circularDependencyPlugin from 'vite-plugin-circular-dependency';
+import { VitePluginNode } from 'vite-plugin-node';
 
 function vitePluginIsomorphicImport(serverExtension: string): Plugin {
   return {
@@ -115,10 +116,12 @@ export const _bundle = ({
 
         output: {
           chunkFileNames: '[name].js',
+          compact: true,
           entryFileNames: '[name].js',
+          exports: 'named',
           format: 'cjs',
           interop: 'auto',
-          preserveModules: true,
+          preserveModules: false, // TODO: true if serverless
         },
 
         // plugins: [resolve({ modulesOnly: true }), flowPlugin()],
@@ -188,7 +191,31 @@ export const _bundle = ({
     plugins: filterNil([
       serverExtension && vitePluginIsomorphicImport(serverExtension),
 
-      circularDependencyPlugin({}),
+      ...(process.env.ENV_PLATFORM === PLATFORM.NODE && entryPathname
+        ? VitePluginNode({
+            adapter: 'fastify',
+            appPath: entryPathname,
+            exportName: 'app',
+            initAppOnBoot: false,
+            swcOptions: {},
+            tsCompiler: 'swc',
+            // Optional, default: {
+            // jsc: {
+            //   target: 'es2019',
+            //   parser: {
+            //     syntax: 'typescript',
+            //     decorators: true
+            //   },
+            //  transform: {
+            //     legacyDecorator: true,
+            //     decoratorMetadata: true
+            //   }
+            // }
+            //
+          })
+        : []),
+
+      // circularDependencyPlugin({}),
 
       checker({
         eslint: { lintCommand: lintCommand() },

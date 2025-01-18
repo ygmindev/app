@@ -7,11 +7,12 @@
 
 # Node
 node_modules
-npm-debug.log*
+*.log*
 .pnpm-debug.log*
 *.jsbundle
 .swc/
 *.tsbuildinfo
+*.0x
 
 # Environments
 **/.env.*

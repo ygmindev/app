@@ -14,6 +14,7 @@ import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -33,6 +34,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
     onChange,
     value,
   });
+  const theme = useTheme();
   const isContained = type === TABS_TYPE.CONTAINED;
   const isUnderline = type === TABS_TYPE.UNDERLINE;
   const isMobile = useIsMobile();
@@ -45,9 +47,10 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
-      align={FLEX_ALIGN.END}
       alignSelf={isContained ? FLEX_ALIGN.CENTER : undefined}
       border={isContained ? true : isUnderline ? DIRECTION.BOTTOM : undefined}
+      height={theme.shape.size[THEME_SIZE.MEDIUM]}
+      isAlign
       isFullWidth={isContained || isMobile}
       isHorizontalScrollable
       isRow
@@ -98,10 +101,10 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
           </Activatable>
         ) : (
           <Button
+            height={theme.shape.size[THEME_SIZE.MEDIUM] - theme.shape.spacing[THEME_SIZE.MEDIUM]}
             icon={tab.icon}
             key={tab.id}
             onPress={() => handlePress(tab)}
-            size={THEME_SIZE.SMALL}
             type={
               isActiveF ? undefined : isContained ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.TRANSPARENT
             }>

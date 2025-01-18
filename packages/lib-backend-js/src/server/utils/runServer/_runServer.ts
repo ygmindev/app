@@ -109,4 +109,6 @@ export const _runServer = async ({
   } catch (e) {
     logger.error(e);
   }
+
+  return app;
 };
