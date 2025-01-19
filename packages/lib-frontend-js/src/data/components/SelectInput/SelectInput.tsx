@@ -63,7 +63,7 @@ export const SelectInput = forwardRef(
     });
 
     const [values, valuesSet] = useState<Array<string> | undefined>(
-      isMultiple ? (valueControlled as Array<string>) ?? [] : undefined,
+      isMultiple ? ((valueControlled as Array<string>) ?? []) : undefined,
     );
 
     const handleChange = (id: string) => () =>
@@ -124,7 +124,7 @@ export const SelectInput = forwardRef(
                       border
                       borderColor={THEME_COLOR.PRIMARY}
                       position={SHAPE_POSITION.RELATIVE}
-                      size={THEME_SIZE_MORE.XSMALL}>
+                      size={THEME_SIZE.SMALL}>
                       {isValue ? (
                         <Icon
                           color={THEME_COLOR_MORE.SURFACE}
