@@ -57,17 +57,14 @@ export const ANIMATION_STATES_SLIDABLE_VERTICAL = ({
 });
 
 export const ANIMATION_STATES_FOCUSABLE = ({
-  isBlocked,
   isError,
   isText,
   theme,
 }: {
-  isBlocked?: boolean;
   isError?: boolean;
   isText?: boolean;
   theme: ThemeModel;
 }): AnimationStatesModel<StyleModel> => {
-  const role = isBlocked ? THEME_ROLE.MUTED : THEME_ROLE.MAIN;
   const activeColor = isError
     ? theme.color.palette[THEME_COLOR.ERROR][THEME_ROLE.MAIN]
     : theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN];
@@ -75,7 +72,9 @@ export const ANIMATION_STATES_FOCUSABLE = ({
     ? theme.color.palette[THEME_COLOR.ERROR][THEME_ROLE.MAIN]
     : theme.color.border;
   const colorField = isText ? 'color' : 'borderColor';
-  const backgroundColor = isText ? undefined : theme.color.palette[THEME_COLOR_MORE.SURFACE][role];
+  const backgroundColor = isText
+    ? undefined
+    : theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN];
   return {
     [ELEMENT_STATE.INACTIVE]: { backgroundColor, [colorField]: inactiveColor, opacity: 1.0 },
     [ELEMENT_STATE.ACTIVE]: { backgroundColor, [colorField]: activeColor, opacity: 1.0 },
