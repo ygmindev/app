@@ -82,7 +82,7 @@ export const getViewParams = <
         },
       }) => {
         measureSet({ height, width });
-        props.onMeasure && props.onMeasure({ height, width });
+        props.onMeasure?.({ height, width });
       },
       onScroll: ({ nativeEvent }) => {
         const { x, y } = nativeEvent.contentOffset;
