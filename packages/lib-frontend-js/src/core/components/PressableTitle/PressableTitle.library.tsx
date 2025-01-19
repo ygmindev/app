@@ -7,6 +7,7 @@ import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesia
 export const props: LibraryPropsModel<PressableTitlePropsModel> = {
   Component: PressableTitle,
   defaultProps: {
+    onPress: () => null,
     title: 'title',
   },
   variants: [

@@ -10,6 +10,7 @@ export const props: LibraryPropsModel<PressablePropsModel> = {
   Component: Pressable,
   defaultProps: {
     children: <Text>children</Text>,
+    onPress: () => null,
   },
   variants: [
     ...cartesianObject({

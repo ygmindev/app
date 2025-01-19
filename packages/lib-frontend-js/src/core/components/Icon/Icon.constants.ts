@@ -140,7 +140,6 @@ export const MATERIAL_ICONS = {
   chevronRightDouble: 'chevron-double-right',
   chevronUp: 'chevron-up',
   chevronUpDouble: 'chevron-double-up',
-  device: 'devices-other',
 };
 
 export const ICONS = {

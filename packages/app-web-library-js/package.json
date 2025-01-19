@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@egjs/react-infinitegrid": "^4.12.0",
-    "@floating-ui/react": "^0.27.2",
+    "@floating-ui/react": "^0.27.3",
     "@floating-ui/react-dom": "^2.1.2",
     "@react-google-maps/api": "^2.20.5",
     "@reduxjs/toolkit": "2.5.0",
@@ -18,7 +18,7 @@
     "react": "^18.3.1",
     "react-day-picker": "^9.5.0",
     "react-dom": "^18.3.1",
-    "react-native-reanimated": "3.16.6",
+    "react-native-reanimated": "3.16.7",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "^0.18.12",
     "react-redux": "^9.2.0",

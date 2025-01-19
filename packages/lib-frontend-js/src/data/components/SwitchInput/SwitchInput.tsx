@@ -82,7 +82,9 @@ export const SwitchInput: RLFCModel<SwitchInputRefModel, SwitchInputPropsModel> 
         <Wrapper
           animation={{
             states: {
-              [ELEMENT_STATE.ACTIVE]: { backgroundColor: theme.color.palette.primary.main },
+              [ELEMENT_STATE.ACTIVE]: {
+                backgroundColor: theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN],
+              },
               [ELEMENT_STATE.INACTIVE]: { backgroundColor: theme.color.border },
             },
           }}

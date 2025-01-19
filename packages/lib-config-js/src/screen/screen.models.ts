@@ -1,6 +1,6 @@
 import { type DimensionModel } from '@lib/frontend/core/core.models';
 import { type RequiredModel } from '@lib/shared/core/core.models';
-import { type PuppeteerLaunchOptions } from 'puppeteer';
+import { type LaunchOptions } from 'puppeteer';
 
 export type ScreenConfigModel = {
   delay: number;
@@ -22,7 +22,7 @@ export type ScreenConfigModel = {
   snapshotPath?: string;
 };
 
-export type _ScreenConfigModel = PuppeteerLaunchOptions;
+export type _ScreenConfigModel = LaunchOptions;
 
 export type ProxyModel = {
   password: string;

@@ -13,5 +13,9 @@ export const props: LibraryPropsModel<CirclePropsModel> = {
     ...cartesianObject({
       size: [...Object.values(THEME_SIZE), Object.values(THEME_SIZE_MORE)],
     }).map((props) => ({ props })),
+
+    ...cartesianObject({
+      backgroundColor: [...Object.values(THEME_COLOR)],
+    }).map((props) => ({ props })),
   ],
 };
