@@ -15,10 +15,8 @@ export const FocusableWrapper: RLFCModel<FocusableRefModel, FocusableWrapperProp
   forwardRef(({ children, elementState, error, onElementStateChange, ...props }, ref) => {
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props });
-    const { elementStateControlled, elementStateControlledSet } = useElementStateControlled({
-      elementState,
-      onElementStateChange,
-    });
+    const { elementStateControlled, elementStateControlledSet, isBlocked } =
+      useElementStateControlled({ elementState, onElementStateChange });
 
     const isError = !!error;
 
@@ -30,7 +28,7 @@ export const FocusableWrapper: RLFCModel<FocusableRefModel, FocusableWrapperProp
     return (
       <Wrapper
         {...wrapperProps}
-        animation={{ states: ANIMATION_STATES_FOCUSABLE({ isError, theme }) }}
+        animation={{ states: ANIMATION_STATES_FOCUSABLE({ isBlocked, isError, theme }) }}
         border={wrapperProps.border ?? true}
         elementState={elementStateControlled}
         isOverflowHidden
