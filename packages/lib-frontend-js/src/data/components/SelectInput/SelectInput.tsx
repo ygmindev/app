@@ -114,6 +114,7 @@ export const SelectInput = forwardRef(
                   <Wrapper
                     border
                     borderColor={THEME_COLOR.PRIMARY}
+                    height={theme.shape.size[THEME_SIZE.SMALL]}
                     isAlign
                     isRow
                     onPress={handleChange(id)}
@@ -124,7 +125,9 @@ export const SelectInput = forwardRef(
                       border
                       borderColor={THEME_COLOR.PRIMARY}
                       position={SHAPE_POSITION.RELATIVE}
-                      size={THEME_SIZE.SMALL}>
+                      size={
+                        theme.shape.size[THEME_SIZE.SMALL] - theme.shape.spacing[THEME_SIZE.MEDIUM]
+                      }>
                       {isValue ? (
                         <Icon
                           color={THEME_COLOR_MORE.SURFACE}
