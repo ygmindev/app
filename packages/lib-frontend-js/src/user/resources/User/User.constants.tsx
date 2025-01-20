@@ -19,6 +19,7 @@ export const USER_RESOURCE_PARAMS = {
       formatter: ({ row, value }) => row.callingCode && value && `+${row.callingCode} ${value}`,
       id: 'phone',
     },
+    { id: 'paymentMethodPrimary' },
   ],
   name: USER_RESOURCE_NAME,
 } satisfies ResourceParamsModel<UserModel>;

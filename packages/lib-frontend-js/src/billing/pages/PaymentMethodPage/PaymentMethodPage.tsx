@@ -9,6 +9,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
@@ -32,7 +33,7 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
   const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
   const { t } = useTranslation([BILLING]);
-  const { getMany } = usePaymentMethodResource();
+  const { getMany } = usePaymentMethodResource({ root: currentUser?._id });
   const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
   const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
   const [paymentMethods, paymentMethodsSet] = useStore('billing.paymentMethods');
@@ -71,7 +72,7 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
           if (paymentMethods?.length) {
             return paymentMethods;
           }
-          const paymentMethodsF = (await getMany({ root: currentUser?._id })).result;
+          const paymentMethodsF = (await getMany()).result;
           paymentMethodsSet(paymentMethodsF);
           return paymentMethodsF;
         }}
@@ -92,24 +93,42 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
               type,
             }))}
             rightElement={({ item }) => (
-              <Button
-                color={THEME_COLOR.ERROR}
-                confirmMessage={t('core:confirmRemove', {
-                  value: t('billing:paymentMethodTitle', { last4: item.last4, name: item.name }),
-                })}
-                icon="trash"
-                onPress={async () => {
-                  switch (item.type) {
-                    case PAYMENT_METHOD_TYPE.BANK:
-                      await bankRemove({ filter: [{ field: '_id', value: item.id }] });
-                    case PAYMENT_METHOD_TYPE.CARD:
-                      await cardRemove({ filter: [{ field: '_id', value: item.id }] });
-                  }
-                  ref.current?.reset && (await ref.current.reset());
-                }}
-                tooltip={t('core:remove')}
-                type={BUTTON_TYPE.INVISIBLE}
-              />
+              <Wrapper
+                isAlign
+                isRow>
+                {currentUser?.paymentMethodPrimary === item.id ? (
+                  <Button
+                    elementState={ELEMENT_STATE.DISABLED}
+                    type={BUTTON_TYPE.INVISIBLE}>
+                    {t('billing:defaultPayment')}
+                  </Button>
+                ) : (
+                  <Button
+                    onPress={async () => {}}
+                    type={BUTTON_TYPE.INVISIBLE}>
+                    {t('billing:setAsDefault')}
+                  </Button>
+                )}
+
+                <Button
+                  color={THEME_COLOR.ERROR}
+                  confirmMessage={t('core:confirmRemove', {
+                    value: t('billing:paymentMethodTitle', { last4: item.last4, name: item.name }),
+                  })}
+                  icon="trash"
+                  onPress={async () => {
+                    switch (item.type) {
+                      case PAYMENT_METHOD_TYPE.BANK:
+                        await bankRemove({ filter: [{ field: '_id', value: item.id }] });
+                      case PAYMENT_METHOD_TYPE.CARD:
+                        await cardRemove({ filter: [{ field: '_id', value: item.id }] });
+                    }
+                    ref.current?.reset && (await ref.current.reset());
+                  }}
+                  tooltip={t('core:remove')}
+                  type={BUTTON_TYPE.INVISIBLE}
+                />
+              </Wrapper>
             )}
             title={t('billing:paymentMethod_other')}
           />

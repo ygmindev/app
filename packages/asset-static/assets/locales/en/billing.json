@@ -1,10 +1,12 @@
 {
   "billing": "billing",
+  "defaultPayment": "default payment",
   "newPaymentMethod": "new payment method",
-  "payment": "TRANSLATION_MISSING",
+  "payment": "payment",
   "paymentMethod": "payment method",
   "paymentMethod_other": "payment methods",
   "paymentMethodSuccess": "TRANSLATION_MISSING",
   "paymentMethodTitle": "{{name}} ending in {{last4}}",
-  "savedPaymentMethod_other": "saved payment methods"
+  "savedPaymentMethod_other": "saved payment methods",
+  "setAsDefault": "set as default"
 }
