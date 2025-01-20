@@ -25,15 +25,17 @@ export const PressableTitle: LFCModel<PressableTitlePropsModel> = ({
 
   const rightElementF =
     rightElement ??
-    (onPress &&
-      ((isActive) => (
-        <Button
-          elementState={elementState ?? (isActive ? ELEMENT_STATE.ACTIVE : undefined)}
-          icon="chevronRight"
-          justifySelf={FLEX_JUSTIFY.END}
-          type={BUTTON_TYPE.INVISIBLE}
-        />
-      )));
+    ((isActive) => (
+      <Button
+        elementState={
+          onPress ? (elementState ?? (isActive ? ELEMENT_STATE.ACTIVE : undefined)) : undefined
+        }
+        icon={onPress ? 'chevronRight' : undefined}
+        isHidden={!onPress}
+        justifySelf={FLEX_JUSTIFY.END}
+        type={BUTTON_TYPE.INVISIBLE}
+      />
+    ));
 
   return (
     <Activatable>
@@ -45,11 +47,11 @@ export const PressableTitle: LFCModel<PressableTitlePropsModel> = ({
           fontStyle={fontStyle}
           icon={icon}
           image={image}
-          leftElement={leftElement && leftElement(isActive)}
+          leftElement={leftElement?.(isActive)}
           onPress={onPress}
           pHorizontal
           pVertical={THEME_SIZE.SMALL}
-          rightElement={rightElementF && rightElementF(isActive)}
+          rightElement={rightElementF?.(isActive)}
           title={title}
         />
       )}

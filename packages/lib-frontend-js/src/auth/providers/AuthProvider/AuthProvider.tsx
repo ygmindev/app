@@ -28,7 +28,8 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
           ? AUTH_STATUS.AUTHENTICATED
           : AUTH_STATUS.UNAUTHENTICATED;
 
-        if (!signInToken || currentUser?._id !== signInToken._id) {
+        // TODO: load full user from fields
+        if (!signInToken || currentUser?._id !== signInToken._id || !currentUser.email) {
           let user: PartialModel<UserModel> | undefined = signInToken
             ? { ...signInToken.claims, _id: signInToken._id }
             : undefined;

@@ -7,6 +7,7 @@ import isString from 'lodash/isString';
 
 export const AsyncText: TFCModel<AsyncTextPropsModel> = ({ children, ns, ...props }) => {
   const translation = useTranslation(ns);
+  // const store = useStore();
   return children ? (
     <AnimatableText {...props}>
       {isString(children)

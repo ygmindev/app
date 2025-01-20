@@ -1,8 +1,8 @@
-import { type AsyncTextModel } from '@lib/frontend/core/core.models';
 import { type FormErrorModel, type FormValidatorsModel } from '@lib/frontend/data/data.models';
 import { type UseValidatorModel } from '@lib/frontend/data/hooks/useValidator/useValidator.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type UseTranslationModel } from '@lib/frontend/locale/hooks/useTranslation/useTranslation.models';
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import isFunction from 'lodash/isFunction';

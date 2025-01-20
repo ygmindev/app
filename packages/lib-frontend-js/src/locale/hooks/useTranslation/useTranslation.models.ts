@@ -1,8 +1,8 @@
-import { type AsyncTextModel } from '@lib/frontend/core/core.models';
 import {
   type _UseTranslationModel,
   type _UseTranslationParamsModel,
 } from '@lib/frontend/locale/hooks/useTranslation/_useTranslation.models';
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 
 export type UseTranslationParamsModel = _UseTranslationParamsModel;
 

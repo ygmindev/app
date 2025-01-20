@@ -1,9 +1,10 @@
 import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
-import { type AsyncTextModel, type ElementStatePropsModel } from '@lib/frontend/core/core.models';
+import { type ElementStatePropsModel } from '@lib/frontend/core/core.models';
 import {
   type FocusableRefModel,
   type FocusableWrapperPropsModel,
 } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import {
   type InferModel,
   type PrimitiveModel,

@@ -1,3 +1,4 @@
+import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { NewPaymentMethodForm } from '@lib/frontend/billing/containers/NewPaymentMethodForm/NewPaymentMethodForm';
 import { useBankResource } from '@lib/frontend/billing/hooks/useBankResource/useBankResource';
@@ -33,6 +34,7 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
   const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
   const { t } = useTranslation([BILLING]);
+  const { userUpdate } = useSignInResource();
   const { getMany } = usePaymentMethodResource({ root: currentUser?._id });
   const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
   const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
@@ -104,7 +106,12 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
                   </Button>
                 ) : (
                   <Button
-                    onPress={async () => {}}
+                    onPress={async () =>
+                      userUpdate({
+                        filter: [{ field: '_id', stringValue: currentUser?._id }],
+                        update: { paymentMethodPrimary: item.id },
+                      })
+                    }
                     type={BUTTON_TYPE.INVISIBLE}>
                     {t('billing:setAsDefault')}
                   </Button>

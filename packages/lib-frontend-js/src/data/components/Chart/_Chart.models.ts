@@ -1,4 +1,4 @@
-import { type AsyncTextModel } from '@lib/frontend/core/core.models';
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 

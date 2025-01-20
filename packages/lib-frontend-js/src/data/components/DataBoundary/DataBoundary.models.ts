@@ -1,12 +1,12 @@
 import { type AsyncBoundaryPropsModel } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import {
-  type AsyncTextModel,
   type ChildrenPropsModel,
   type ElementStatePropsModel,
 } from '@lib/frontend/core/core.models';
 import { type AsyncPropsModel } from '@lib/frontend/data/data.models';
 import { type UseMutationParamsModel } from '@lib/frontend/data/hooks/useMutation/useMutation.models';
 import { type UseQueryParamsModel } from '@lib/frontend/data/hooks/useQuery/useQuery.models';
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type NilModel, type PartialModel, type RequiredModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement } from 'react';
