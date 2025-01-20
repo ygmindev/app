@@ -1,5 +1,8 @@
 import { type ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
-import { type ModalPropsModel } from '@lib/frontend/core/components/Modal/Modal.models';
+import {
+  type ModalPropsModel,
+  type ModalRefModel,
+} from '@lib/frontend/core/components/Modal/Modal.models';
 import { type ReactElement } from 'react';
 
 export type ModalButtonPropsModel = ButtonPropsModel &
@@ -7,3 +10,5 @@ export type ModalButtonPropsModel = ButtonPropsModel &
     element({ onClose }: { onClose(): void }): ReactElement;
     onClose?(): void;
   };
+
+export type ModalButtonRefModel = ModalRefModel;

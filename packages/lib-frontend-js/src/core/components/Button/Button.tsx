@@ -226,7 +226,8 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         <>
           <Appearable
             isActive={!isLoading}
-            isFullWidth={!isIconOnly}>
+            isFullWidth={!isIconOnly}
+            isLazy={false}>
             {childrenF}
           </Appearable>
 

@@ -40,6 +40,7 @@ import { LINKED_USER_TYPE } from '@lib/shared/user/resources/LinkedUser/LinkedUs
 import { type LinkedUserImplementationModel } from '@lib/shared/user/resources/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';
 import { UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
 import reduce from 'lodash/reduce';
+import round from 'lodash/round';
 import { ObjectId } from 'mongodb';
 
 @withContainer({ name: `${PAYMENT_METHOD_RESOURCE_NAME}Implementation` })
@@ -137,7 +138,8 @@ export class PaymentMethodImplementation
               options: { project: { [PRICING_RESOURCE_NAME]: true } },
             })
           )?.result;
-          const amount =
+
+          const amount = round(
             productsF?.reduce((result, product) => {
               const pricings = productsGrouped?.[(product._id as unknown as ObjectId).toString()];
               const productPrice = pricings
@@ -151,7 +153,9 @@ export class PaymentMethodImplementation
                   0,
                 );
               return result + (productPrice ?? 0);
-            }, 0) ?? 0;
+            }, 0) ?? 0,
+            2,
+          );
 
           const price = getPrice(input.form?.products);
           if (price !== amount) {

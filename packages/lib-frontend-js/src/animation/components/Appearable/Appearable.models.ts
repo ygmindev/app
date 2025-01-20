@@ -4,5 +4,6 @@ import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wr
 export type AppearablePropsModel = WrapperPropsModel &
   AnimatablePropsModel & {
     isActive?: boolean;
+    isLazy?: boolean;
     isScalable?: boolean;
   };

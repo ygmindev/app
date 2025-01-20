@@ -74,7 +74,7 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
           if (paymentMethods?.length) {
             return paymentMethods;
           }
-          const paymentMethodsF = (await getMany()).result;
+          const paymentMethodsF = (await getMany())?.result;
           paymentMethodsSet(paymentMethodsF);
           return paymentMethodsF;
         }}

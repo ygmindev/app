@@ -45,12 +45,12 @@ export const userRoutes: Array<RouteModel> = [
             title: ({ t }) => t('user:email'),
           },
           {
-            description: ({ currentUser }) =>
+            description: ({ currentUser, t }) =>
               currentUser?.phone
                 ? phoneFormat(
                     `${currentUser?.callingCode ? `+${currentUser.callingCode}` : ''} ${currentUser.phone}`,
                   )
-                : '',
+                : t('core:notSet'),
             element: (
               <SignInPage
                 method={SIGN_IN_METHOD.PHONE}

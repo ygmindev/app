@@ -61,7 +61,7 @@ export const Title: LFCModel<TitlePropsModel> = ({
               <AsyncText
                 color={color}
                 fontStyle={fontStyle}
-                isBold>
+                isBold={!!description}>
                 {title}
               </AsyncText>
             ) : (

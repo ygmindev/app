@@ -1,7 +1,7 @@
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type LayoutStylePropsModel } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
 import { type TextStylePropsModel } from '@lib/frontend/style/hooks/useTextStyles/useTextStyles.models';
 import {
