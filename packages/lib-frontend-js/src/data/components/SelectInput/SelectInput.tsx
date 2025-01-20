@@ -93,7 +93,7 @@ export const SelectInput = forwardRef(
         <AsyncText isBold>{label}</AsyncText>
 
         <Wrapper
-          isAlign
+          isAlign={!isVertical}
           isRow={!isVertical}
           isWrap
           s={THEME_SIZE.SMALL}>
@@ -114,11 +114,11 @@ export const SelectInput = forwardRef(
                   <Wrapper
                     border
                     borderColor={THEME_COLOR.PRIMARY}
-                    height={theme.shape.size[THEME_SIZE.SMALL]}
+                    height={theme.shape.size[THEME_SIZE.MEDIUM]}
                     isAlign
                     isRow
                     onPress={handleChange(id)}
-                    p={THEME_SIZE.SMALL}
+                    p
                     round>
                     <Circle
                       backgroundColor={isValue ? THEME_COLOR.PRIMARY : THEME_COLOR_MORE.SURFACE}

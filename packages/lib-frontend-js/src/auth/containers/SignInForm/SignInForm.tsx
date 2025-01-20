@@ -35,8 +35,6 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
     ]);
   };
 
-  console.warn(location.params);
-
   return (
     <StepForm
       {...props}
