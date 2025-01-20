@@ -13,7 +13,7 @@ export const testRoutes: Array<RouteModel> = [
       ssrRoute,
 
       {
-        navigation: ROUTE_NAVIGATION.TRANSITION,
+        navigation: ROUTE_NAVIGATION.NAVIGATION,
         pathname: REPORT,
         routes: [
           // {

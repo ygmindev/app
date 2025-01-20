@@ -31,7 +31,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   useTranslation(route?.namespaces);
 
   const { wrapperProps } = useLayoutStyles({ props });
-  const { isActive, push } = useRouter();
+  const { isActive, location, push } = useRouter();
   const { track } = useTracking();
 
   const [authStatus] = useStore('auth.status');
@@ -43,7 +43,9 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   const isActiveLeaf = isLeaf && isActive({ isExact: true, pathname: route.fullpath });
 
   useEffect(() => {
-    route.isProtectable && !isAuthenticated && void push({ pathname: SIGN_IN });
+    route.isProtectable &&
+      !isAuthenticated &&
+      void push({ params: { redirect: location }, pathname: SIGN_IN });
   }, [route.isProtectable]);
 
   const findChildLeaf = (routes?: Array<RouteModel>): RouteModel | null => {

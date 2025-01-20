@@ -17,6 +17,7 @@ export const ProductTile: LFCModel<ProductTilePropsModel> = ({ product, ...props
   const { wrapperProps } = useLayoutStyles({ props });
   const pricing = product[PRICING_RESOURCE_NAME]?.[0];
   const item: PartialModel<ProductItemModel> = {
+    imageSrc: product.imageSrc?.[0],
     name: product.name,
     price: pricing?.price,
     pricingId: pricing?._id,

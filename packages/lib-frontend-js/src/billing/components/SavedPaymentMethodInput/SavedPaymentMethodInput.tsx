@@ -23,7 +23,7 @@ export const SavedPaymentMethodInput: LFCModel<SavedPaymentMethodInputPropsModel
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
   const currentUser = useCurrentUser();
-  const { getMany } = usePaymentMethodResource();
+  const { getMany } = usePaymentMethodResource({ root: currentUser?._id });
   const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
     onChange,

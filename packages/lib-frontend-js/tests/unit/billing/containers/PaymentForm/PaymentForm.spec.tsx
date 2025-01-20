@@ -1,9 +1,9 @@
-import { PaymentForm } from '@lib/frontend/billing/containers/PaymentForm/PaymentForm';
-import { type PaymentFormPropsModel } from '@lib/frontend/billing/containers/PaymentForm/PaymentForm.models';
+import { OrderPaymentPage } from '@lib/frontend/billing/containers/OrderPaymentPage/OrderPaymentPage';
+import { type OrderPaymentPagePropsModel } from '@lib/frontend/billing/containers/OrderPaymentPage/OrderPaymentPage.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<PaymentFormPropsModel>({ target: PaymentForm });
+const { Component, displayName, testID } = withTestComponent<OrderPaymentPagePropsModel>({ target: OrderPaymentPage });
 
 describe(displayName, () => {
   test('works', async () => {

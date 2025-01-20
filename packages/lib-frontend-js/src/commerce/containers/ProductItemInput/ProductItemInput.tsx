@@ -30,12 +30,6 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
       <Wrapper
         {...wrapperProps}
         s>
-        <PriceTile
-          fontStyle={FONT_STYLE.TITLE}
-          label={t('commerce:totalPrice')}
-          price={price}
-        />
-
         <TableInput<PartialModel<ProductItemModel>>
           defaultValue={defaultValue}
           element={
@@ -67,6 +61,12 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
           onChange={onChange ?? itemsSet}
           ref={ref}
           value={value ?? items}
+        />
+
+        <PriceTile
+          fontStyle={FONT_STYLE.TITLE}
+          label={t('commerce:totalPrice')}
+          price={price}
         />
       </Wrapper>
     );

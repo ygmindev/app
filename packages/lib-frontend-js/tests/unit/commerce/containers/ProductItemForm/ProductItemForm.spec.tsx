@@ -1,10 +1,10 @@
-import { ProductItemForm } from '@lib/frontend/commerce/containers/ProductItemForm/ProductItemForm';
-import { type ProductItemFormPropsModel } from '@lib/frontend/commerce/containers/ProductItemForm/ProductItemForm.models';
+import { OrderProductsPage } from '@lib/frontend/commerce/pages/OrderProductsPage/OrderProductsPage';
+import { type OrderProductsPagePropsModel } from '@lib/frontend/commerce/pages/OrderProductsPage/OrderProductsPage.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ProductItemFormPropsModel>({
-  target: ProductItemForm,
+const { Component, displayName, testID } = withTestComponent<OrderProductsPagePropsModel>({
+  target: OrderProductsPage,
 });
 
 describe(displayName, () => {
