@@ -13,12 +13,12 @@ export class Order extends EntityResource implements OrderModel {
   @withField({
     Resource: () => ProductItem,
     isArray: true,
-    isOptional: true,
     isDatabase: true,
+    isOptional: true,
     type: PROPERTY_TYPE.RESOURCE,
   })
   items?: Array<PartialModel<ProductItemModel>>;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   paymentMethodId?: string;
 }

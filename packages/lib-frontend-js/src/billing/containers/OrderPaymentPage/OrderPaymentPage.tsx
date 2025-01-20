@@ -2,36 +2,34 @@ import { type OrderPaymentPagePropsModel } from '@lib/frontend/billing/container
 import { PaymentMethodInput } from '@lib/frontend/billing/containers/PaymentMethodInput/PaymentMethodInput';
 import { type PaymentMethodInputRefModel } from '@lib/frontend/billing/containers/PaymentMethodInput/PaymentMethodInput.models';
 import { ORDER } from '@lib/frontend/commerce/commerce.constants';
+import { useOrderResource } from '@lib/frontend/commerce/hooks/useOrderResource/useOrderResource';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { type OrderFormModel } from '@lib/shared/commerce/resources/Order/Order.models';
 import { SUCCESS } from '@lib/shared/core/core.constants';
+import { type PickModel } from '@lib/shared/core/utils/pick/pick.models';
 import { useRef } from 'react';
 
 export const OrderPaymentPage: LFCModel<OrderPaymentPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const ref = useRef<PaymentMethodInputRefModel>(null);
-  const [items] = useStore('commerce.items');
-  const { push } = useRouter();
+  const [items, itemsSet] = useStore('commerce.items');
+  const { create } = useOrderResource();
+  const { replace } = useRouter();
 
-  // const { create } = useOrderResource();
-  // const [items, itemsSet] = useStore('commerce.items');
-  // const { replace } = useRouter();
+  const handleSuccess = async (): Promise<void> => {
+    itemsSet([]);
+    void replace({ pathname: `/${ORDER}/${SUCCESS}` });
+  };
 
-  // const handleSubmit = async (form: OrderFormModel): Promise<void> => {
-  //   await create({ form });
-  // };
-
-  // const handleSuccess = async (): Promise<void> => {
-  //   itemsSet([]);
-  //   void replace({ pathname: `/${ORDER}/${SUCCESS}` });
-  // };
-
-  const handleSubmit = async (data: unknown): Promise<void> => {
-    ref.current?.submit && (await ref.current.submit());
-    console.warn(data);
+  const handleSubmit = async (
+    data: PickModel<OrderFormModel, 'paymentMethodId'>,
+  ): Promise<void> => {
+    await ref.current?.submit?.();
+    await create({ form: { ...data, items } });
   };
 
   return (
@@ -49,7 +47,7 @@ export const OrderPaymentPage: LFCModel<OrderPaymentPagePropsModel> = ({ ...prop
         },
       ]}
       onSubmit={handleSubmit}
-      onSuccess={async () => push({ pathname: `${ORDER}/${SUCCESS}` })}
+      onSuccess={handleSuccess}
       p
     />
   );

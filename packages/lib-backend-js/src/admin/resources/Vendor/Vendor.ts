@@ -6,10 +6,7 @@ import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { UTILITY_RESOURCE_NAME } from '@lib/shared/admin/resources/Utility/Utility.constants';
 import { type UtilityModel } from '@lib/shared/admin/resources/Utility/Utility.models';
 import { VENDOR_RESOURCE_NAME } from '@lib/shared/admin/resources/Vendor/Vendor.constants';
-import {
-  type VendorFormModel,
-  type VendorModel,
-} from '@lib/shared/admin/resources/Vendor/Vendor.models';
+import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: VENDOR_RESOURCE_NAME })
@@ -23,6 +20,3 @@ export class Vendor extends EntityResource implements VendorModel {
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 }
-
-@withEntity({ name: `${VENDOR_RESOURCE_NAME}Form` })
-export class VendorForm implements VendorFormModel {}

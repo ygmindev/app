@@ -29,6 +29,7 @@ import {
   type _RenderServerParamsModel,
 } from '@lib/shared/web/utils/renderServer/_renderServer.models';
 import reduce from 'lodash/reduce';
+import { type ObjectId } from 'mongodb';
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vike/server';
 
@@ -67,7 +68,7 @@ export const _renderServer =
 
     if (user) {
       initialState[AUTH] = { status: AUTH_STATUS.AUTHENTICATED, token };
-      initialState[USER] = { currentUser: { _id: user._id } };
+      initialState[USER] = { currentUser: { _id: (user._id as unknown as ObjectId).toString() } };
     } else {
       initialState[AUTH] = { status: AUTH_STATUS.UNAUTHENTICATED };
     }
