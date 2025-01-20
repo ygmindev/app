@@ -32,7 +32,9 @@ describe(displayName, () => {
   });
 
   test('verify by email', async () => {
-    const { result: created } = await otpImplementation.create({ form: { email: USER_FIXTURE.email } });
+    const { result: created } = await otpImplementation.create({
+      form: { email: USER_FIXTURE.email },
+    });
     const verified =
       created && (await otpImplementation.verify({ email: created.email, otp: created.otp }));
     const { result } = await otpImplementation.getMany({

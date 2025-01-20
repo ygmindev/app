@@ -103,16 +103,16 @@ export const MultipleInput = forwardRef(
                 key={v}>
                 <Button
                   icon="edit"
-                  iconText={t('core:edit')}
                   onPress={() => handleEdit(option)}
+                  tooltip={t('core:edit')}
                   type={BUTTON_TYPE.INVISIBLE}
                 />
 
                 <Button
                   color={THEME_COLOR.ERROR}
                   icon="trash"
-                  iconText={t('core:remove')}
                   onPress={() => valueControlledSet(filter(valueControlled, (vv) => v !== vv))}
+                  tooltip={t('core:remove')}
                   type={BUTTON_TYPE.INVISIBLE}
                 />
               </Wrapper>

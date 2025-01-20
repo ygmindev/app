@@ -23,6 +23,7 @@ import { ROUTE } from '@lib/shared/route/route.constants';
 import { matchRoutes } from '@lib/shared/route/utils/matchRoutes/matchRoutes';
 import { STATE } from '@lib/shared/state/state.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { USER } from '@lib/shared/user/user.constants';
 import {
   type _RenderServerModel,
   type _RenderServerParamsModel,
@@ -40,7 +41,7 @@ export const _renderServer =
     ssrContextKeys,
   }: _RenderServerParamsModel): _RenderServerModel =>
   async ({ Page, context, pageProps }) => {
-    initialize && (await initialize());
+    await initialize?.();
     const queryClient = new QueryClient();
 
     const store = new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
@@ -66,7 +67,7 @@ export const _renderServer =
 
     if (user) {
       initialState[AUTH] = { status: AUTH_STATUS.AUTHENTICATED, token };
-      // initialState[USER] = { currentUser: user };
+      initialState[USER] = { currentUser: { _id: user._id } };
     } else {
       initialState[AUTH] = { status: AUTH_STATUS.UNAUTHENTICATED };
     }

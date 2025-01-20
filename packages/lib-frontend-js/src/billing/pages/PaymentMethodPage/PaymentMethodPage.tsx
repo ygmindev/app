@@ -5,6 +5,7 @@ import { useCardResource } from '@lib/frontend/billing/hooks/useCardResource/use
 import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
 import { type PaymentMethodPagePropsModel } from '@lib/frontend/billing/pages/PaymentMethodPage/PaymentMethodPage.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -97,7 +98,6 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
                   value: t('billing:paymentMethodTitle', { last4: item.last4, name: item.name }),
                 })}
                 icon="trash"
-                iconText={t('core:remove')}
                 onPress={async () => {
                   switch (item.type) {
                     case PAYMENT_METHOD_TYPE.BANK:
@@ -107,6 +107,8 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
                   }
                   ref.current?.reset && (await ref.current.reset());
                 }}
+                tooltip={t('core:remove')}
+                type={BUTTON_TYPE.INVISIBLE}
               />
             )}
             title={t('billing:paymentMethod_other')}

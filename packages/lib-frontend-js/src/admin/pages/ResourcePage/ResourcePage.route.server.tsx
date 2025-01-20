@@ -4,11 +4,11 @@ import { type RouteModel } from '@lib/frontend/route/route.models';
 
 export const resourceRoute: RouteModel<undefined, ResourcePageParamsModel> = {
   ...resourceRouteBase,
-  loaders: ({ pathname }) => ({
-    data: async () => {
-      return 'data';
-    },
-  }),
+  // loaders: ({ pathname }) => ({
+  //   data: async () => {
+  //     return 'data';
+  //   },
+  // }),
 };
 
 // import { Container } from '@lib/backend/core/utils/Container/Container';

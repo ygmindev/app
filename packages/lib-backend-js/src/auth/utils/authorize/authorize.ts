@@ -31,7 +31,8 @@ export const authorize = async ({
               ? (rolesF as Array<AccessRoleMoreModel>).every((v) => result.role?.includes(v))
               : false;
           }
-        } catch {
+        } catch (e) {
+          console.warn(e);
           return false;
         }
         return false;
