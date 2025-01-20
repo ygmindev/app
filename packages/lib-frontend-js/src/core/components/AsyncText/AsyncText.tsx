@@ -2,19 +2,20 @@ import { AnimatableText } from '@lib/frontend/animation/components/AnimatableTex
 import { type AsyncTextPropsModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type TFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 
 export const AsyncText: TFCModel<AsyncTextPropsModel> = ({ children, ns, ...props }) => {
   const translation = useTranslation(ns);
-  // const store = useStore();
+  const currentUser = useCurrentUser({ isProtected: false });
   return children ? (
     <AnimatableText {...props}>
       {isString(children)
         ? translation.t(children)
         : isFunction(children)
-          ? children(translation)
-          : (children as unknown as string)}
+          ? children({ currentUser: currentUser ?? undefined, t: translation.t })
+          : ((children as unknown as string) ?? '')}
     </AnimatableText>
   ) : null;
 };

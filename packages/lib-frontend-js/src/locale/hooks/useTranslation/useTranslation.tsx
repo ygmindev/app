@@ -1,9 +1,9 @@
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { _useTranslation } from '@lib/frontend/locale/hooks/useTranslation/_useTranslation';
 import {
   type UseTranslationModel,
   type UseTranslationParamsModel,
 } from '@lib/frontend/locale/hooks/useTranslation/useTranslation.models';
-import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { CORE } from '@lib/shared/core/core.constants';
 import isFunction from 'lodash/isFunction';
 

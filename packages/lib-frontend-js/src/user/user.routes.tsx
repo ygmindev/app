@@ -8,7 +8,9 @@ import { settingsRoutes } from '@lib/frontend/settings/settings.routes';
 import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage';
 import { EMAIL, NAME, PERSONAL, PHONE } from '@lib/frontend/user/user.constants';
 import { SIGN_IN_METHOD } from '@lib/shared/auth/auth.constants';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
+import { phoneFormat } from '@lib/shared/locale/utils/phoneFormat/phoneFormat';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
 
 export const userRoutes: Array<RouteModel> = [
@@ -23,12 +25,15 @@ export const userRoutes: Array<RouteModel> = [
         pathname: PERSONAL,
         routes: [
           {
+            description: ({ currentUser }) =>
+              filterNil([currentUser?.first, currentUser?.last]).join(' '),
             element: <NameFormPage />,
             icon: 'id',
             pathname: NAME,
             title: ({ t }) => t('user:name'),
           },
           {
+            description: ({ currentUser }) => currentUser?.email ?? '',
             element: (
               <SignInPage
                 method={SIGN_IN_METHOD.EMAIL}
@@ -40,6 +45,12 @@ export const userRoutes: Array<RouteModel> = [
             title: ({ t }) => t('user:email'),
           },
           {
+            description: ({ currentUser }) =>
+              currentUser?.phone
+                ? phoneFormat(
+                    `${currentUser?.callingCode ? `+${currentUser.callingCode}` : ''} ${currentUser.phone}`,
+                  )
+                : '',
             element: (
               <SignInPage
                 method={SIGN_IN_METHOD.PHONE}
