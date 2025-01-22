@@ -17,6 +17,7 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import isFunction from 'lodash/isFunction';
 import { forwardRef, useState } from 'react';
 
 export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forwardRef(
@@ -114,7 +115,9 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
             pVertical={THEME_SIZE.SMALL}
             ref={ref}
             round={round}>
-            {children}
+            {isFunction(children)
+              ? children(elementStateControlled === ELEMENT_STATE.ACTIVE)
+              : children}
           </Wrapper>
         </Activatable>
 

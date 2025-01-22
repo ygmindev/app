@@ -15,6 +15,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   isCenter,
   isFullHeight,
   isFullWidth,
+  p,
   size = THEME_SIZE.MEDIUM,
   topElement,
   ...props
@@ -49,7 +50,8 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
         {...wrapperProps}
         isFullHeight={isFullHeight}
         isFullWidth
-        isVerticalScrollable={isFullHeight}>
+        isVerticalScrollable={isFullHeight}
+        p={p}>
         <Wrapper
           flex={isFullHeight}
           isFullWidth={isFullWidthF}
@@ -67,6 +69,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
           <Wrapper
             isFullWidth={isFullWidthF}
             mHorizontal="auto"
+            pBottom={p}
             pTop={isFullHeight}
             width={widthF}>
             {bottomElement}

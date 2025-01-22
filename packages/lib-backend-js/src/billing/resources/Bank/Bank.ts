@@ -20,6 +20,9 @@ export class Bank extends EmbeddedResource implements BankModel {
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   fingerprint?: string;
 
+  @withField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
+  isPrimary?: boolean;
+
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   last4!: string;
 

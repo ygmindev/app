@@ -46,6 +46,7 @@ export const OrderPaymentPage: LFCModel<OrderPaymentPagePropsModel> = ({ ...prop
           id: 'paymentMethodId',
         },
       ]}
+      isFullHeight
       onSubmit={handleSubmit}
       onSuccess={handleSuccess}
       p

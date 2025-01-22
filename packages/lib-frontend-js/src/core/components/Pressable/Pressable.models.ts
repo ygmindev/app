@@ -5,12 +5,10 @@ import {
   type WrapperPropsModel,
   type WrapperRefModel,
 } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
-import { type ChildrenPropsModel } from '@lib/frontend/core/core.models';
 import { type ThemeColorModel } from '@lib/frontend/style/style.models';
 import { type FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
-import { type ReactElement } from 'react';
 
-export type PressablePropsModel = ChildrenPropsModel<ReactElement> &
+export type PressablePropsModel = Pick<ActivatablePropsModel, 'children'> &
   Omit<WrapperPropsModel, 'children'> &
   AnimatablePropsModel &
   Pick<ActivatablePropsModel, 'onActive' | 'onInactive' | 'trigger'> & {

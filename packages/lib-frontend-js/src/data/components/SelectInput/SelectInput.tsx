@@ -1,6 +1,7 @@
 import { ANIMATION_STATES_APPEAR_SCALABLE } from '@lib/frontend/animation/animation.constants';
-import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Circle } from '@lib/frontend/core/components/Circle/Circle';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -27,6 +28,7 @@ import {
   THEME_SIZE,
   THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { sort } from '@lib/shared/core/utils/sort/sort';
@@ -109,55 +111,43 @@ export const SelectInput = forwardRef(
           {options.map(({ icon, id, label }) => {
             const isValue = isMultiple ? values?.includes(id) : valueControlled === id;
             return (
-              <Activatable key={id}>
-                {(isActive) => (
-                  <Wrapper
+              <Button
+                elementState={isValue ? ELEMENT_STATE.ACTIVE : undefined}
+                fontAlign={FONT_ALIGN.LEFT}
+                icon={icon}
+                key={id}
+                leftElement={(isActive) => (
+                  <Circle
+                    backgroundColor={isValue ? THEME_COLOR.PRIMARY : THEME_COLOR_MORE.SURFACE}
                     border
                     borderColor={THEME_COLOR.PRIMARY}
-                    height={theme.shape.size[THEME_SIZE.MEDIUM]}
-                    isAlign
-                    isRow
-                    onPress={handleChange(id)}
-                    p
-                    round>
-                    <Circle
-                      backgroundColor={isValue ? THEME_COLOR.PRIMARY : THEME_COLOR_MORE.SURFACE}
-                      border
-                      borderColor={THEME_COLOR.PRIMARY}
-                      position={SHAPE_POSITION.RELATIVE}
-                      size={
-                        theme.shape.size[THEME_SIZE.SMALL] - theme.shape.spacing[THEME_SIZE.MEDIUM]
-                      }>
-                      {isValue ? (
-                        <Icon
-                          color={THEME_COLOR_MORE.SURFACE}
-                          colorRole={THEME_ROLE.MAIN}
-                          icon="check"
-                        />
-                      ) : (
-                        <Circle
-                          animation={{ states: ANIMATION_STATES_APPEAR_SCALABLE }}
-                          elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}
-                          position={SHAPE_POSITION.ABSOLUTE}
-                          size={
-                            theme.shape.size[THEME_SIZE_MORE.XSMALL] -
-                            theme.shape.spacing[THEME_SIZE.SMALL]
-                          }
-                        />
-                      )}
-                    </Circle>
-
-                    {icon && (
+                    position={SHAPE_POSITION.RELATIVE}
+                    size={
+                      theme.shape.size[THEME_SIZE.SMALL] - theme.shape.spacing[THEME_SIZE.MEDIUM]
+                    }>
+                    {isValue ? (
                       <Icon
-                        color={THEME_COLOR.PRIMARY}
-                        icon={icon}
+                        color={THEME_COLOR_MORE.SURFACE}
+                        colorRole={THEME_ROLE.MAIN}
+                        icon="check"
+                      />
+                    ) : (
+                      <Circle
+                        animation={{ states: ANIMATION_STATES_APPEAR_SCALABLE }}
+                        elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}
+                        position={SHAPE_POSITION.ABSOLUTE}
+                        size={
+                          theme.shape.size[THEME_SIZE_MORE.XSMALL] -
+                          theme.shape.spacing[THEME_SIZE.SMALL]
+                        }
                       />
                     )}
-
-                    <AsyncText>{label ?? id}</AsyncText>
-                  </Wrapper>
+                  </Circle>
                 )}
-              </Activatable>
+                onPress={handleChange(id)}
+                type={BUTTON_TYPE.INVISIBLE}>
+                {label ?? id}
+              </Button>
             );
           })}
         </Wrapper>

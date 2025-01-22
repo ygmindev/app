@@ -7,10 +7,10 @@ import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePayment
 import { type PaymentMethodPagePropsModel } from '@lib/frontend/billing/pages/PaymentMethodPage/PaymentMethodPage.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Chip } from '@lib/frontend/core/components/Chip/Chip';
 import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
@@ -99,11 +99,7 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
                 isAlign
                 isRow>
                 {currentUser?.paymentMethodPrimary === item.id ? (
-                  <Button
-                    elementState={ELEMENT_STATE.DISABLED}
-                    type={BUTTON_TYPE.INVISIBLE}>
-                    {t('billing:defaultPayment')}
-                  </Button>
+                  <Chip>{t('billing:defaultPayment')}</Chip>
                 ) : (
                   <Button
                     onPress={async () =>

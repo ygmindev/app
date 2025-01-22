@@ -31,6 +31,7 @@ import {
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import isFunction from 'lodash/isFunction';
 import isNumber from 'lodash/isNumber';
 import { forwardRef, useMemo } from 'react';
 
@@ -63,6 +64,8 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
 
     const { elementStateControlled, elementStateControlledSet, isLoading } =
       useElementStateControlled({ elementState, onElementStateChange });
+
+    const isActive = elementStateControlled === ELEMENT_STATE.ACTIVE;
 
     const heightF = isNumber(height)
       ? height
@@ -176,13 +179,13 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
         align={FLEX_ALIGN.CENTER}
         isRow
         s={s ?? THEME_SIZE.SMALL}>
-        {leftElement}
+        {isFunction(leftElement) ? leftElement(isActive) : leftElement}
 
         {iconF}
 
         {childrenF}
 
-        {rightElement}
+        {isFunction(rightElement) ? rightElement(isActive) : rightElement}
       </Wrapper>
     ) : (
       iconF

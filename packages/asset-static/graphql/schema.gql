@@ -242,6 +242,7 @@ type Bank {
   externalId: String
   fingerprint: String
   isFixture: Boolean
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -253,6 +254,7 @@ input BankCreateFormInput {
   externalId: String
   fingerprint: String
   isFixture: Boolean
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -269,6 +271,7 @@ input BankCreateManyFormInput {
   externalId: String
   fingerprint: String
   isFixture: Boolean
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -372,6 +375,7 @@ input BankInput {
   externalId: String
   fingerprint: String
   isFixture: Boolean
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -439,6 +443,7 @@ input BankUpdateUpdateInput {
   externalId: String
   fingerprint: String
   isFixture: Boolean
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -453,6 +458,7 @@ type Card {
   fingerprint: String
   funding: String
   isFixture: Boolean
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -467,6 +473,7 @@ input CardCreateFormInput {
   fingerprint: String
   funding: String
   isFixture: Boolean
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -486,6 +493,7 @@ input CardCreateManyFormInput {
   fingerprint: String
   funding: String
   isFixture: Boolean
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -592,6 +600,7 @@ input CardInput {
   fingerprint: String
   funding: String
   isFixture: Boolean
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -662,6 +671,7 @@ input CardUpdateUpdateInput {
   fingerprint: String
   funding: String
   isFixture: Boolean
+  isPrimary: Boolean
   last4: String
   name: String
 }

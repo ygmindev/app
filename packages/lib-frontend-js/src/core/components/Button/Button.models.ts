@@ -1,4 +1,5 @@
 import { type AnimatablePropsModel } from '@lib/frontend/animation/animation.models';
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import {
@@ -10,13 +11,12 @@ import {
   type ChildrenPropsModel,
   type SizableMorePropsModel,
 } from '@lib/frontend/core/core.models';
-import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type ThemeColorPropsModel } from '@lib/frontend/style/style.models';
-import { type ReactElement, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 export type ButtonTypeModel = `${BUTTON_TYPE}`;
 
-export type ButtonPropsModel = ChildrenPropsModel<ReactNode | AsyncTextModel> &
+export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel | ReactNode> &
   AnimatablePropsModel &
   WithIconPropsModel &
   Pick<WrapperPropsModel, 'isShadow'> &
@@ -39,8 +39,8 @@ export type ButtonPropsModel = ChildrenPropsModel<ReactNode | AsyncTextModel> &
     | 'trigger'
   > & {
     description?: AsyncTextModel;
-    leftElement?: ReactElement | null;
-    rightElement?: ReactElement | null;
+    leftElement?: PressablePropsModel['children'];
+    rightElement?: PressablePropsModel['children'];
     type?: ButtonTypeModel;
   };
 

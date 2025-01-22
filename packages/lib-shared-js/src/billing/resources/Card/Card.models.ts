@@ -19,6 +19,8 @@ export type CardModel = EmbeddedResourceModel & {
 
   funding: CardFundingModel;
 
+  isPrimary?: boolean;
+
   last4: string;
 
   name: string;

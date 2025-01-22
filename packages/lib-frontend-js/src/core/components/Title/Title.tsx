@@ -9,6 +9,7 @@ import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const Title: LFCModel<TitlePropsModel> = ({
   color,
@@ -28,66 +29,67 @@ export const Title: LFCModel<TitlePropsModel> = ({
     <Wrapper
       {...wrapperProps}
       isAlign
-      isRow>
-      {leftElement && <Skeleton elementState={elementState}>{leftElement}</Skeleton>}
+      isRow
+      justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
+      <Wrapper
+        isAlign
+        isRow>
+        {leftElement && <Skeleton elementState={elementState}>{leftElement}</Skeleton>}
 
-      {image && (
-        <Skeleton elementState={elementState}>
-          <Image
-            isAutoSize
-            src={image}
-            width={theme.shape.size[THEME_SIZE.MEDIUM]}
-          />
-        </Skeleton>
-      )}
+        {image && (
+          <Skeleton elementState={elementState}>
+            <Image
+              isAutoSize
+              src={image}
+              width={theme.shape.size[THEME_SIZE.MEDIUM]}
+            />
+          </Skeleton>
+        )}
 
-      {icon && (
-        <Skeleton elementState={elementState}>
-          <Icon
-            color={color}
-            fontStyle={fontStyle}
-            icon={icon}
-            width={theme.shape.size[THEME_SIZE.SMALL]}
-          />
-        </Skeleton>
-      )}
+        {icon && (
+          <Skeleton elementState={elementState}>
+            <Icon
+              color={color}
+              fontStyle={fontStyle}
+              icon={icon}
+              width={theme.shape.size[THEME_SIZE.SMALL]}
+            />
+          </Skeleton>
+        )}
 
-      <Wrapper s={THEME_SIZE.SMALL}>
-        {title && (
-          <Skeleton
-            elementState={elementState}
-            flex>
-            {isAsyncText(title) ? (
+        <Wrapper s={THEME_SIZE.SMALL}>
+          {title && (
+            <Skeleton
+              elementState={elementState}
+              flex>
+              {isAsyncText(title) ? (
+                <AsyncText
+                  color={color}
+                  fontStyle={fontStyle}
+                  isBold={!!description}>
+                  {title}
+                </AsyncText>
+              ) : (
+                title
+              )}
+            </Skeleton>
+          )}
+
+          {description && (
+            <Skeleton
+              elementState={elementState}
+              flex>
               <AsyncText
                 color={color}
-                fontStyle={fontStyle}
-                isBold={!!description}>
-                {title}
+                fontStyle={fontStyle}>
+                {description}
               </AsyncText>
-            ) : (
-              title
-            )}
-          </Skeleton>
-        )}
-
-        {description && (
-          <Skeleton
-            elementState={elementState}
-            flex>
-            <AsyncText
-              color={color}
-              fontStyle={fontStyle}>
-              {description}
-            </AsyncText>
-          </Skeleton>
-        )}
+            </Skeleton>
+          )}
+        </Wrapper>
       </Wrapper>
 
-      {rightElement && (
-        <Wrapper mLeft="auto">
-          <Skeleton elementState={elementState}>{rightElement}</Skeleton>
-        </Wrapper>
-      )}
+      {rightElement && <Skeleton elementState={elementState}>{rightElement}</Skeleton>}
     </Wrapper>
   );
 };

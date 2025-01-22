@@ -32,6 +32,9 @@ export class Card extends EmbeddedResource implements CardModel {
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   funding!: CardFundingModel;
 
+  @withField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
+  isPrimary?: boolean;
+
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   last4!: string;
 

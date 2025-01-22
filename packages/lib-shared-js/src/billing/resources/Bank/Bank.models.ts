@@ -10,6 +10,8 @@ export type BankModel = EmbeddedResourceModel & {
 
   fingerprint?: string;
 
+  isPrimary?: boolean;
+
   last4: string;
 
   name: string;

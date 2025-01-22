@@ -6,11 +6,14 @@ import {
   type ModalButtonRefModel,
 } from '@lib/frontend/core/components/ModalButton/ModalButton.models';
 import { type RLFCModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef, useState } from 'react';
 
 export const ModalButton: RLFCModel<ModalButtonRefModel, ModalButtonPropsModel> = forwardRef(
   ({ element, isFullSize = true, onClose, onPress, title, ...props }, ref) => {
+    const { t } = useTranslation();
     const [isOpen, isOpenSet] = useState<boolean>();
 
     const handleToggle = (isOpen?: boolean): void => {
@@ -33,7 +36,7 @@ export const ModalButton: RLFCModel<ModalButtonRefModel, ModalButtonPropsModel> 
           isOpen={isOpen}
           onToggle={handleToggle}
           ref={ref}
-          title={title}>
+          title={title ?? (isAsyncText(props.children) ? t(props.children) : undefined)}>
           {element({ onClose: () => handleToggle(false) })}
         </Modal>
       </>

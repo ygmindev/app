@@ -8,13 +8,26 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { useRef } from 'react';
 
-export const NewPaymentMethodForm: LFCModel<NewPaymentMethodFormPropsModel> = ({ ...props }) => {
+export const NewPaymentMethodForm: LFCModel<NewPaymentMethodFormPropsModel> = ({
+  products,
+  ...props
+}) => {
   const { t } = useTranslation([BILLING]);
   const ref = useRef<NewPaymentMethodInputRefModel>(null);
   return (
     <FormContainer
       {...props}
-      fields={[{ element: <NewPaymentMethodInput ref={ref} />, id: PAYMENT_METHOD_RESOURCE_NAME }]}
+      fields={[
+        {
+          element: (
+            <NewPaymentMethodInput
+              products={products}
+              ref={ref}
+            />
+          ),
+          id: PAYMENT_METHOD_RESOURCE_NAME,
+        },
+      ]}
       isFullHeight
       onSubmit={async () => (await ref.current?.submit()) || null}
       p
