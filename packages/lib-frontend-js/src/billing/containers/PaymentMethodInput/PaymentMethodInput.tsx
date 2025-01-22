@@ -1,11 +1,18 @@
+import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { NewPaymentMethodForm } from '@lib/frontend/billing/containers/NewPaymentMethodForm/NewPaymentMethodForm';
 import {
   type PaymentMethodInputPropsModel,
   type PaymentMethodInputRefModel,
 } from '@lib/frontend/billing/containers/PaymentMethodInput/PaymentMethodInput.models';
+import { useBankResource } from '@lib/frontend/billing/hooks/useBankResource/useBankResource';
+import { useCardResource } from '@lib/frontend/billing/hooks/useCardResource/useCardResource';
 import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource';
+import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Chip } from '@lib/frontend/core/components/Chip/Chip';
+import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
+import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Title } from '@lib/frontend/core/components/Title/Title';
@@ -17,6 +24,7 @@ import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInp
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
@@ -24,7 +32,10 @@ import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import {
+  type PaymentMethodModel,
+  type PaymentMethodTypeModel,
+} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
@@ -35,10 +46,14 @@ import { forwardRef, useRef } from 'react';
 export const PaymentMethodInput: RLFCModel<
   PaymentMethodInputRefModel,
   PaymentMethodInputPropsModel
-> = forwardRef(({ defaultValue, onChange, value, ...props }, ref) => {
+> = forwardRef(({ defaultValue, isEditable, onChange, value, ...props }, ref) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
   const currentUser = useCurrentUser();
+  const { userUpdate } = useSignInResource();
+  const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
+  const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
+
   const { getMany } = usePaymentMethodResource({ root: currentUser?._id });
   const refF =
     useRef<
@@ -69,6 +84,17 @@ export const PaymentMethodInput: RLFCModel<
     return output;
   };
 
+  const getIcon = (type?: PaymentMethodTypeModel): WithIconPropsModel['icon'] => {
+    switch (type) {
+      case PAYMENT_METHOD_TYPE.BANK:
+        return 'bank';
+      case PAYMENT_METHOD_TYPE.CARD:
+        return 'card';
+      default:
+        return 'dollar';
+    }
+  };
+
   return (
     <Wrapper
       {...wrapperProps}
@@ -83,7 +109,10 @@ export const PaymentMethodInput: RLFCModel<
           element={({ onClose }) => (
             <NewPaymentMethodForm
               onCancel={onClose}
-              onSuccess={refF.current?.reset}
+              onSuccess={async () => {
+                void refF.current?.reset?.();
+                onClose();
+              }}
             />
           )}
           icon="add"
@@ -103,32 +132,82 @@ export const PaymentMethodInput: RLFCModel<
         id={PAYMENT_METHOD_RESOURCE_NAME}
         query={handleQuery}
         ref={refF}>
-        {({ data }) => (
-          <SelectInput
-            isVertical
-            onChange={(v) => valueControlledSet(v)}
-            options={
-              data?.result?.map(({ _id, externalId, last4, name, type }) => ({
-                id: externalId ?? _id ?? '',
-                label: (
-                  <Title
-                    flex
-                    icon={
-                      type === PAYMENT_METHOD_TYPE.BANK
-                        ? 'bank'
-                        : type === PAYMENT_METHOD_TYPE.CARD
-                          ? 'card'
-                          : undefined
-                    }
-                    key={_id}
-                    title={t('billing:paymentMethodTitle', { last4, name })}
+        {({ data }) =>
+          isEditable ? (
+            <ItemList
+              items={data?.result?.map(({ _id, last4, name, type }) => ({
+                icon: getIcon(type),
+                id: _id ?? '',
+                last4,
+                name,
+                title: t('billing:paymentMethodTitle', { last4, name }),
+                type,
+              }))}
+              rightElement={({ item }) => (
+                <Wrapper
+                  isAlign
+                  isRow>
+                  {currentUser?.paymentMethodPrimary === item.id ? (
+                    <Chip>{t('billing:defaultPayment')}</Chip>
+                  ) : (
+                    <Button
+                      onPress={async () =>
+                        userUpdate({
+                          filter: [{ field: '_id', stringValue: currentUser?._id }],
+                          update: { paymentMethodPrimary: item.id },
+                        })
+                      }
+                      type={BUTTON_TYPE.INVISIBLE}>
+                      {t('billing:setAsDefault')}
+                    </Button>
+                  )}
+
+                  <Button
+                    color={THEME_COLOR.ERROR}
+                    confirmMessage={t('core:confirmRemove', {
+                      value: t('billing:paymentMethodTitle', {
+                        last4: item.last4,
+                        name: item.name,
+                      }),
+                    })}
+                    icon="trash"
+                    onPress={async () => {
+                      switch (item.type) {
+                        case PAYMENT_METHOD_TYPE.BANK:
+                          await bankRemove({ filter: [{ field: '_id', value: item.id }] });
+                        case PAYMENT_METHOD_TYPE.CARD:
+                          await cardRemove({ filter: [{ field: '_id', value: item.id }] });
+                      }
+                      void refF.current?.reset?.();
+                    }}
+                    tooltip={t('core:remove')}
+                    type={BUTTON_TYPE.INVISIBLE}
                   />
-                ),
-              })) ?? []
-            }
-            value={valueControlled}
-          />
-        )}
+                </Wrapper>
+              )}
+              title={t('billing:paymentMethod_other')}
+            />
+          ) : (
+            <SelectInput
+              isVertical
+              onChange={(v) => valueControlledSet(v)}
+              options={
+                data?.result?.map(({ _id, externalId, last4, name, type }) => ({
+                  id: externalId ?? _id ?? '',
+                  label: (
+                    <Title
+                      flex
+                      icon={getIcon(type)}
+                      key={_id}
+                      title={t('billing:paymentMethodTitle', { last4, name })}
+                    />
+                  ),
+                })) ?? []
+              }
+              value={valueControlled}
+            />
+          )
+        }
       </DataBoundary>
     </Wrapper>
   );
