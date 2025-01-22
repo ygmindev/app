@@ -1,9 +1,10 @@
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type TitlePropsModel } from '@lib/frontend/core/components/Title/Title.models';
 import { type ChildPropsModel, type ElementStatePropsModel } from '@lib/frontend/core/core.models';
-import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type ReactElement } from 'react';
 
-export type ErrorContextModel = Omit<TitlePropsModel, 'color' | 'title'> & {
+export type ErrorContextModel = Omit<TitlePropsModel, 'color' | 'title' | 'description'> & {
+  description?: AsyncTextModel;
   title?: AsyncTextModel;
 };
 

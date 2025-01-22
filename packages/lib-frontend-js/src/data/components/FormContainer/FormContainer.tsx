@@ -152,10 +152,6 @@ const FormContainerF = forwardRef(
       return (onSubmit && (await onSubmit(dataF))) ?? null;
     };
 
-    const handleSubmitF = (): void => {
-      !isAppLoading && handleSubmit();
-    };
-
     const { errors, handleChange, handleReset, handleSubmit, isLoading, values, valuesSet } =
       useForm<TType, TResult>({
         initialValues,
@@ -174,6 +170,10 @@ const FormContainerF = forwardRef(
     const elementStateF = isAppLoading || isLoading ? ELEMENT_STATE.LOADING : elementState;
     const isDisabled =
       elementStateF === ELEMENT_STATE.DISABLED || elementStateF === ELEMENT_STATE.LOADING;
+
+    const handleSubmitF = (): void => {
+      !isDisabled && handleSubmit();
+    };
 
     const getField = <TKey extends StringKeyModel<TType>>({
       element,

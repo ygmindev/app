@@ -8,6 +8,7 @@ import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 
 export const Tile: LFCModel<TilePropsModel> = ({
   children,
+  description,
   icon,
   image,
   onPress,
@@ -26,6 +27,7 @@ export const Tile: LFCModel<TilePropsModel> = ({
       {title && (
         <PressableTitle
           border={!!children && DIRECTION.BOTTOM}
+          description={description}
           fontStyle={FONT_STYLE.TITLE}
           icon={icon}
           image={image}

@@ -6,11 +6,11 @@ import { Title } from '@lib/frontend/core/components/Title/Title';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const PressableTitle: LFCModel<PressableTitlePropsModel> = ({
   color,
+  description,
   elementState,
   fontStyle,
   icon,
@@ -43,14 +43,13 @@ export const PressableTitle: LFCModel<PressableTitlePropsModel> = ({
         <Title
           {...wrapperProps}
           color={color}
+          description={description}
           elementState={elementState}
           fontStyle={fontStyle}
           icon={icon}
           image={image}
           leftElement={leftElement?.(isActive)}
           onPress={onPress}
-          pHorizontal
-          pVertical={THEME_SIZE.SMALL}
           rightElement={rightElementF?.(isActive)}
           title={title}
         />

@@ -1,12 +1,12 @@
 {
   "billing": "billing",
+  "cardEmpty": "your cart is empty",
+  "cardEmptyMessage": "Continue shopping on the <0>homepage</0>",
   "defaultPayment": "default payment",
-  "newPaymentMethod": "new payment method",
   "payment": "payment",
   "paymentMethod": "payment method",
   "paymentMethod_other": "payment methods",
   "paymentMethodSuccess": "TRANSLATION_MISSING",
   "paymentMethodTitle": "{{name}} ending in {{last4}}",
-  "savedPaymentMethod_other": "saved payment methods",
   "setAsDefault": "set as default"
 }

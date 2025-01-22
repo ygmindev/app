@@ -1,8 +1,8 @@
 import { ANIMATION_STATES_APPEARABLE } from '@lib/frontend/animation/animation.constants';
-import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { Title } from '@lib/frontend/core/components/Title/Title';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -69,28 +69,13 @@ export const Notification: LFCModel<NotificationPropsModel> = ({
           icon={icon}
         />
 
-        <Wrapper
-          basis={0}
+        <Title
+          color={color}
+          colorRole={THEME_ROLE.CONTRAST}
+          description={description}
           flex
-          isWrap
-          s={THEME_SIZE.SMALL}>
-          {title && (
-            <AsyncText
-              color={color}
-              colorRole={THEME_ROLE.CONTRAST}
-              isBold>
-              {title}
-            </AsyncText>
-          )}
-
-          {description && (
-            <AsyncText
-              color={color}
-              colorRole={THEME_ROLE.CONTRAST}>
-              {description}
-            </AsyncText>
-          )}
-        </Wrapper>
+          title={title}
+        />
 
         <Button
           color={color}

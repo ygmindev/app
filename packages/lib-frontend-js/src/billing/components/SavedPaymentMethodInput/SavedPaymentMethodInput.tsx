@@ -17,6 +17,7 @@ import {
   PAYMENT_METHOD_TYPE,
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { sort } from '@lib/shared/core/utils/sort/sort';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
@@ -52,7 +53,11 @@ export const SavedPaymentMethodInput: RLFCModel<
       const primary =
         output.result?.find((v) => v._id && v._id === currentUser?.paymentMethodPrimary) ??
         output.result?.[0];
-      primary && valueControlledSet(primary);
+
+      if (primary) {
+        output.result = sort(output.result ?? [], [(v) => (v._id === primary._id ? 0 : 1)]);
+        valueControlledSet(primary);
+      }
     }
     return output;
   };

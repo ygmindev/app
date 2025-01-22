@@ -9,6 +9,7 @@ import { type TFCModel } from '@lib/frontend/core/core.models';
 import { useTextStyles } from '@lib/frontend/style/hooks/useTextStyles/useTextStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
+import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 import { useRef } from 'react';
 
@@ -16,7 +17,8 @@ export const Link: TFCModel<LinkPropsModel> = ({ children, isNewTab, pathname, .
   const { textProps } = useTextStyles({ props });
   const theme = useTheme();
   const ref = useRef<AnimatableRefModel>(null);
-  return isString(children) ? (
+  const childrenF = isArray(children) ? children[0] : children;
+  return isString(childrenF) ? (
     <_Link
       {...textProps}
       isNewTab={isNewTab}
@@ -37,7 +39,7 @@ export const Link: TFCModel<LinkPropsModel> = ({ children, isNewTab, pathname, .
               },
             }}
             ref={ref}>
-            {children}
+            {childrenF}
           </AnimatableText>
         </Wrapper>
       </Activatable>
@@ -47,7 +49,7 @@ export const Link: TFCModel<LinkPropsModel> = ({ children, isNewTab, pathname, .
       {...textProps}
       isNewTab={isNewTab}
       pathname={pathname}>
-      {children}
+      {childrenF}
     </_Link>
   );
 };

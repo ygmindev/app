@@ -1,12 +1,12 @@
 {
   "billing": "TRANSLATION_MISSING",
+  "cardEmpty": "TRANSLATION_MISSING",
+  "cardEmptyMessage": "TRANSLATION_MISSING",
   "defaultPayment": "TRANSLATION_MISSING",
-  "newPaymentMethod": "TRANSLATION_MISSING",
   "payment": "TRANSLATION_MISSING",
   "paymentMethod": "TRANSLATION_MISSING",
   "paymentMethod_other": "TRANSLATION_MISSING",
   "paymentMethodSuccess": "TRANSLATION_MISSING",
   "paymentMethodTitle": "TRANSLATION_MISSING",
-  "savedPaymentMethod_other": "TRANSLATION_MISSING",
   "setAsDefault": "TRANSLATION_MISSING"
 }

@@ -9,7 +9,8 @@ export const OrderSuccessPage: LFCModel<OrderSuccessPagePropsModel> = ({ ...prop
   return (
     <Wrapper
       {...wrapperProps}
-      flex>
+      flex
+      p>
       <Text>OrderSuccessPage</Text>
     </Wrapper>
   );

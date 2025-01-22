@@ -11,9 +11,7 @@ export const Skeleton: LFCModel<SkeletonPropsModel> = ({ children, elementState,
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <Wrapper
-      {...wrapperProps}
-      isOverflowHidden>
+    <Wrapper {...wrapperProps}>
       {elementState === ELEMENT_STATE.LOADING ? (
         <_Skeleton
           backgroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED]}

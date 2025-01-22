@@ -14,7 +14,7 @@ export const Trans = <TParams,>({
 }: SFCPropsModel<_TransPropsModel<TParams>>): ReactElement<
   SFCPropsModel<_TransPropsModel<TParams>>
 > => {
-  const { styles } = useStyles({ props, stylers: [textStyler] });
+  const { styles } = useStyles({ props, stylers: [textStyler, { display: 'flex' }] });
   return (
     <_Trans
       components={components}

@@ -13,6 +13,7 @@ import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexSt
 
 export const Title: LFCModel<TitlePropsModel> = ({
   color,
+  colorRole,
   description,
   elementState,
   fontStyle,
@@ -30,10 +31,9 @@ export const Title: LFCModel<TitlePropsModel> = ({
       {...wrapperProps}
       isAlign
       isRow
-      justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
-      <Wrapper
-        isAlign
-        isRow>
+      justify={FLEX_JUSTIFY.SPACE_BETWEEN}
+      p>
+      <Wrapper isRow>
         {leftElement && <Skeleton elementState={elementState}>{leftElement}</Skeleton>}
 
         {image && (
@@ -57,7 +57,7 @@ export const Title: LFCModel<TitlePropsModel> = ({
           </Skeleton>
         )}
 
-        <Wrapper s={THEME_SIZE.SMALL}>
+        <Wrapper s>
           {title && (
             <Skeleton
               elementState={elementState}
@@ -65,6 +65,7 @@ export const Title: LFCModel<TitlePropsModel> = ({
               {isAsyncText(title) ? (
                 <AsyncText
                   color={color}
+                  colorRole={colorRole}
                   fontStyle={fontStyle}
                   isBold={!!description}>
                   {title}
@@ -79,11 +80,15 @@ export const Title: LFCModel<TitlePropsModel> = ({
             <Skeleton
               elementState={elementState}
               flex>
-              <AsyncText
-                color={color}
-                fontStyle={fontStyle}>
-                {description}
-              </AsyncText>
+              {isAsyncText(description) ? (
+                <AsyncText
+                  color={color}
+                  colorRole={colorRole}>
+                  {description}
+                </AsyncText>
+              ) : (
+                description
+              )}
             </Skeleton>
           )}
         </Wrapper>
