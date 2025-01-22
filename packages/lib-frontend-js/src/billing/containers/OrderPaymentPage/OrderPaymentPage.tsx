@@ -37,12 +37,7 @@ export const OrderPaymentPage: LFCModel<OrderPaymentPagePropsModel> = ({ ...prop
       {...wrapperProps}
       fields={[
         {
-          element: (
-            <PaymentMethodInput
-              products={items}
-              ref={ref}
-            />
-          ),
+          element: <PaymentMethodInput ref={ref} />,
           id: 'paymentMethodId',
         },
       ]}

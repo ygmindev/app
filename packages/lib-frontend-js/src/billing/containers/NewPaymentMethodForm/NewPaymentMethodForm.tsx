@@ -8,10 +8,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { useRef } from 'react';
 
-export const NewPaymentMethodForm: LFCModel<NewPaymentMethodFormPropsModel> = ({
-  products,
-  ...props
-}) => {
+export const NewPaymentMethodForm: LFCModel<NewPaymentMethodFormPropsModel> = ({ ...props }) => {
   const { t } = useTranslation([BILLING]);
   const ref = useRef<NewPaymentMethodInputRefModel>(null);
   return (
@@ -19,12 +16,7 @@ export const NewPaymentMethodForm: LFCModel<NewPaymentMethodFormPropsModel> = ({
       {...props}
       fields={[
         {
-          element: (
-            <NewPaymentMethodInput
-              products={products}
-              ref={ref}
-            />
-          ),
+          element: <NewPaymentMethodInput ref={ref} />,
           id: PAYMENT_METHOD_RESOURCE_NAME,
         },
       ]}
