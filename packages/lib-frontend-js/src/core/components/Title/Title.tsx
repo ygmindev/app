@@ -33,29 +33,33 @@ export const Title: LFCModel<TitlePropsModel> = ({
       isRow
       justify={FLEX_JUSTIFY.SPACE_BETWEEN}
       p>
-      <Wrapper isRow>
-        {leftElement && <Skeleton elementState={elementState}>{leftElement}</Skeleton>}
+      <Wrapper
+        isAlign={!description}
+        isRow>
+        <Wrapper isRow>
+          {leftElement && <Skeleton elementState={elementState}>{leftElement}</Skeleton>}
 
-        {image && (
-          <Skeleton elementState={elementState}>
-            <Image
-              isAutoSize
-              src={image}
-              width={theme.shape.size[THEME_SIZE.MEDIUM]}
-            />
-          </Skeleton>
-        )}
+          {image && (
+            <Skeleton elementState={elementState}>
+              <Image
+                isAutoSize
+                src={image}
+                width={theme.shape.size[THEME_SIZE.MEDIUM]}
+              />
+            </Skeleton>
+          )}
 
-        {icon && (
-          <Skeleton elementState={elementState}>
-            <Icon
-              color={color}
-              fontStyle={fontStyle}
-              icon={icon}
-              width={theme.shape.size[THEME_SIZE.SMALL]}
-            />
-          </Skeleton>
-        )}
+          {icon && (
+            <Skeleton elementState={elementState}>
+              <Icon
+                color={color}
+                fontStyle={fontStyle}
+                icon={icon}
+                width={theme.shape.size[THEME_SIZE.SMALL]}
+              />
+            </Skeleton>
+          )}
+        </Wrapper>
 
         <Wrapper s>
           {title && (

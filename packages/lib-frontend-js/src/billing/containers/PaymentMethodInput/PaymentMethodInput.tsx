@@ -185,7 +185,6 @@ export const PaymentMethodInput: RLFCModel<
                   />
                 </Wrapper>
               )}
-              title={t('billing:paymentMethod_other')}
             />
           ) : (
             <SelectInput
