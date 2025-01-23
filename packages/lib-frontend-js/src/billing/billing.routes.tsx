@@ -8,6 +8,6 @@ export const billingRoutes = [
     icon: 'wallet',
     namespaces: [BILLING],
     pathname: PAYMENT_METHOD,
-    title: ({ t }) => t('billing:paymentMethod'),
+    title: ({ t }) => t('billing:paymentMethod_other'),
   },
 ] satisfies Array<RouteModel>;
