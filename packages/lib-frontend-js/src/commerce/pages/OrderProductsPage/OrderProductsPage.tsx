@@ -12,6 +12,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const OrderProductsPage: LFCModel<OrderProductsPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -43,6 +44,7 @@ export const OrderProductsPage: LFCModel<OrderProductsPagePropsModel> = ({ ...pr
             ns={BILLING}
           />
         }
+        fontSize={THEME_SIZE.LARGE}
         icon="empty"
         title={t('billing:cardEmpty')}
       />
