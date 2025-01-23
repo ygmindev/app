@@ -67,7 +67,7 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = forw
       <Dropdown
         {...props}
         anchor={anchorF}
-        isOpen={isOpen && isActive}
+        isOpen={isOpen ?? isActive}
         onToggle={(value) => isActiveSet(value || false)}
         ref={dropdownRef}>
         {children}
