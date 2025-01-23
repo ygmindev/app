@@ -34,7 +34,7 @@ export const createEntityResourceImplementation = <TType, TForm = EntityResource
 >): CreateEntityResourceImplementationModel<TType, TForm> => {
   let repository: RepositoryModel<TType, TForm>;
   const getRepository = (): RepositoryModel<TType, TForm> => {
-    repository = repository ?? Container.get(Database, DATABASE_TYPE.MONGO).getRepository({ name });
+    !repository && (repository = Container.get(Database, DATABASE_TYPE.MONGO).getRepository({ name }));
     return repository;
   };
   return createResourceImplementation<TType, TForm>({
