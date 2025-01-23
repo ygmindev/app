@@ -6,7 +6,7 @@ import { type RouteModel } from '@lib/frontend/route/route.models';
 import { SETTINGS } from '@lib/frontend/settings/settings.constants';
 import { settingsRoutes } from '@lib/frontend/settings/settings.routes';
 import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage';
-import { EMAIL, NAME, PERSONAL, PHONE } from '@lib/frontend/user/user.constants';
+import { EMAIL, NAME, PHONE, PROFILE } from '@lib/frontend/user/user.constants';
 import { SIGN_IN_METHOD } from '@lib/shared/auth/auth.constants';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
@@ -22,7 +22,7 @@ export const userRoutes: Array<RouteModel> = [
       {
         icon: 'person',
         navigation: ROUTE_NAVIGATION.LIST,
-        pathname: PERSONAL,
+        pathname: PROFILE,
         routes: [
           {
             description: ({ currentUser }) =>
@@ -62,7 +62,7 @@ export const userRoutes: Array<RouteModel> = [
             title: ({ t }) => t('user:phone'),
           },
         ],
-        title: ({ t }) => t('user:personal'),
+        title: ({ t }) => t('user:profile'),
       },
 
       {

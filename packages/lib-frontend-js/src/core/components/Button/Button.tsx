@@ -62,10 +62,8 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
     const theme = useTheme();
     const { wrapperProps } = useLayoutStyles({ props: { ...props, isShadow } });
 
-    const { elementStateControlled, elementStateControlledSet, isLoading } =
+    const { elementStateControlled, elementStateControlledSet, isActive, isLoading } =
       useElementStateControlled({ elementState, onElementStateChange });
-
-    const isActive = elementStateControlled === ELEMENT_STATE.ACTIVE;
 
     const heightF = isNumber(height)
       ? height
@@ -73,14 +71,12 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
 
     const isIconOnly = icon && !children;
 
-    // const type = type ?? (isIconOnly && !isShadow ? BUTTON_TYPE.INVISIBLE : BUTTON_TYPE.FILLED);
-
     const { animation, childColorRole } = useMemo<{
       animation?: AnimationModel;
       childColorRole?: ThemeRoleModel;
     }>(() => {
       const colorF = theme.color.palette[color];
-      const opacity = theme.opaque[THEME_SIZE.LARGE];
+      const opacity = theme.opaque[THEME_SIZE.MEDIUM];
       const activeColor = colorF[THEME_ROLE.ACTIVE];
       const mainColor = colorF[THEME_ROLE.MAIN];
       switch (type) {

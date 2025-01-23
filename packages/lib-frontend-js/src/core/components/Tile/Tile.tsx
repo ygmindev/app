@@ -1,5 +1,5 @@
-import { PressableTitle } from '@lib/frontend/core/components/PressableTitle/PressableTitle';
 import { type TilePropsModel } from '@lib/frontend/core/components/Tile/Tile.models';
+import { Title } from '@lib/frontend/core/components/Title/Title';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -25,13 +25,12 @@ export const Tile: LFCModel<TilePropsModel> = ({
       pHorizontal
       round>
       {title && (
-        <PressableTitle
+        <Title
           border={!!children && DIRECTION.BOTTOM}
           description={description}
           fontStyle={FONT_STYLE.TITLE}
           icon={icon}
           image={image}
-          pVertical
           rightElement={rightElement}
           title={title}
         />

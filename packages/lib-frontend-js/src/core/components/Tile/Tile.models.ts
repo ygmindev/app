@@ -1,4 +1,4 @@
-import { type PressableTitlePropsModel } from '@lib/frontend/core/components/PressableTitle/PressableTitle.models';
+import { type TitlePropsModel } from '@lib/frontend/core/components/Title/Title.models';
 import { type ChildrenPropsModel } from '@lib/frontend/core/core.models';
 
-export type TilePropsModel = PressableTitlePropsModel & ChildrenPropsModel;
+export type TilePropsModel = TitlePropsModel & ChildrenPropsModel;

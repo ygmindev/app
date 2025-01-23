@@ -3,7 +3,7 @@ import { seed } from '@lib/backend/database/utils/seed/seed';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { TestScreen } from '@lib/backend/test/utils/TestScreen/TestScreen';
 import databaseConfig from '@lib/config/database/database.mongo';
-import { EMAIL, PERSONAL } from '@lib/frontend/user/user.constants';
+import { EMAIL, PROFILE } from '@lib/frontend/user/user.constants';
 import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
 
@@ -20,7 +20,7 @@ describe('usernameUpdate', () => {
 
   test('works', async () => {
     const screen = new TestScreen();
-    await screen.open(`/${ACCOUNT}/${PERSONAL}/${EMAIL}`);
+    await screen.open(`/${ACCOUNT}/${PROFILE}/${EMAIL}`);
     await screen.snapshot();
     await signIn({ screen });
     await screen.snapshot();
@@ -34,7 +34,7 @@ describe('usernameUpdate', () => {
       .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'otp' })
       .then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
 
-    await screen.open(`${ACCOUNT}/${PERSONAL}`);
+    await screen.open(`${ACCOUNT}/${PROFILE}`);
     await screen.find({ type: SELECTOR_TYPE.TEXT, value: USERNAME_NEW });
     await screen.snapshot();
   });

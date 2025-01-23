@@ -4,7 +4,7 @@
   "first": "first name",
   "last": "last name",
   "name": "name",
-  "personal": "personal",
   "phone": "phone",
+  "profile": "profile",
   "user": "user"
 }

@@ -1,4 +1,4 @@
-import { Accordion } from '@lib/frontend/animation/components/Accordion/Accordion';
+import { Tile } from '@lib/frontend/core/components/Tile/Tile';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
@@ -32,13 +32,12 @@ export const SettingsInput = <TType = string,>({
   const isAutomaticSetF = (isAutomatic: boolean): void => {
     isAutomaticSet(isAutomatic);
     const unset = getValue(actions, `${id}Unset`) as CallableModel;
-    isAutomatic ? unset && void unset() : valueSet(value);
+    isAutomatic ? void unset?.() : valueSet(value);
   };
 
   return (
-    <Accordion
+    <Tile
       {...wrapperProps}
-      defaultValue={ELEMENT_STATE.ACTIVE}
       title={title}>
       <Wrapper
         flex
@@ -52,6 +51,6 @@ export const SettingsInput = <TType = string,>({
 
         {isAutomatic ? cloneElement(element, { elementState: ELEMENT_STATE.DISABLED }) : element}
       </Wrapper>
-    </Accordion>
+    </Tile>
   );
 };

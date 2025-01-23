@@ -1,4 +1,4 @@
-export const PERSONAL = 'personal';
+export const PROFILE = 'profile';
 
 export const NAME = 'name';
 

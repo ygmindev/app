@@ -112,7 +112,7 @@ export const SelectInput = forwardRef(
             const isValue = isMultiple ? values?.includes(id) : valueControlled === id;
             return (
               <Button
-                elementState={isValue ? ELEMENT_STATE.ACTIVE : undefined}
+                elementState={elementState ?? (isValue ? ELEMENT_STATE.ACTIVE : undefined)}
                 fontAlign={FONT_ALIGN.LEFT}
                 icon={icon}
                 key={id}

@@ -130,9 +130,9 @@ const config = defineConfig<ThemeConfigModel, _ThemeConfigModel>({
     },
 
     opaque: {
-      [THEME_SIZE.LARGE]: 0.65,
+      [THEME_SIZE.LARGE]: 0.9,
 
-      [THEME_SIZE.MEDIUM]: 0.4,
+      [THEME_SIZE.MEDIUM]: 0.5,
 
       [THEME_SIZE.SMALL]: 0.2,
     },
