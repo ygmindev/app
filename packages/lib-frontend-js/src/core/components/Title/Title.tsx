@@ -10,6 +10,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 
 export const Title: LFCModel<TitlePropsModel> = ({
   color,
@@ -70,7 +71,7 @@ export const Title: LFCModel<TitlePropsModel> = ({
                 <AsyncText
                   color={color}
                   colorRole={colorRole}
-                  fontStyle={fontStyle}
+                  fontStyle={FONT_STYLE.TITLE}
                   isBold={!!description}>
                   {title}
                 </AsyncText>

@@ -3,7 +3,7 @@ import { ORDER, PRODUCTS } from '@lib/frontend/commerce/commerce.constants';
 import { ProductItemInput } from '@lib/frontend/commerce/containers/ProductItemInput/ProductItemInput';
 import { type OrderProductsPagePropsModel } from '@lib/frontend/commerce/pages/OrderProductsPage/OrderProductsPage.models';
 import { Link } from '@lib/frontend/core/components/Link/Link';
-import { Tile } from '@lib/frontend/core/components/Tile/Tile';
+import { Title } from '@lib/frontend/core/components/Title/Title';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
@@ -35,7 +35,7 @@ export const OrderProductsPage: LFCModel<OrderProductsPagePropsModel> = ({ ...pr
     <MainLayout
       {...wrapperProps}
       p>
-      <Tile
+      <Title
         description={
           <Trans
             components={[<Link pathname={PRODUCTS} />]}
