@@ -17,6 +17,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
     fontStyle = FONT_STYLE.BODY,
     isBold,
     isLineHeight,
+    isUnderline,
   },
   theme,
 ) =>
@@ -44,4 +45,6 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
     lineHeight: isLineHeight && fontStyle === FONT_STYLE.BODY ? theme.font.lineHeight : undefined,
 
     textAlign: align,
+
+    textDecorationLine: isUnderline ? 'underline' : undefined,
   });

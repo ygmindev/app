@@ -13,8 +13,14 @@ import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 import { useRef } from 'react';
 
-export const Link: TFCModel<LinkPropsModel> = ({ children, isNewTab, pathname, ...props }) => {
-  const { textProps } = useTextStyles({ props });
+export const Link: TFCModel<LinkPropsModel> = ({
+  children,
+  isNewTab,
+  isUnderline = true,
+  pathname,
+  ...props
+}) => {
+  const { textProps } = useTextStyles({ props: { ...props, isUnderline } });
   const theme = useTheme();
   const ref = useRef<AnimatableRefModel>(null);
   const childrenF = isArray(children) ? children[0] : children;

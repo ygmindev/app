@@ -18,4 +18,5 @@ export type FontStylerParamsModel = {
   fontStyle?: FontStyleModel;
   isBold?: boolean;
   isLineHeight?: boolean;
+  isUnderline?: boolean;
 };
