@@ -46,7 +46,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean | undefined>();
     const { wrapperProps } = useLayoutStyles({ props });
 
-    const { elementStateControlled, elementStateControlledSet, isBlocked } =
+    const { elementStateControlled, elementStateControlledSet, isActive, isBlocked } =
       useElementStateControlled({ elementState, onElementStateChange });
 
     const handleButtonPress = onPress
@@ -159,7 +159,9 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     );
 
     return tooltip ? (
-      <Droppable anchor={() => element}>
+      <Droppable
+        anchor={() => element}
+        isOpen={isActive}>
         <AsyncText>{tooltip}</AsyncText>
       </Droppable>
     ) : (

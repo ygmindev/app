@@ -17,14 +17,14 @@ import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { cloneElement, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
 export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = forwardRef(
-  ({ anchor, children, testID, trigger, ...props }, ref) => {
+  ({ anchor, children, isOpen, testID, trigger, ...props }, ref) => {
     const [isActive, isActiveSet] = useState<boolean>(false);
     const activatableRef = useRef<ActivatableRefModel>(null);
     const dropdownRef = useRef<DropdownRefModel>(null);
 
     useImperativeHandle(ref, () => ({
       scrollTo: (position) => dropdownRef.current?.scrollTo(position),
-      toggle: (isOpen) => dropdownRef.current?.toggle(isOpen),
+      toggle: (v) => dropdownRef.current?.toggle(v),
     }));
 
     let anchorF = anchor(isActive);
@@ -67,7 +67,7 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = forw
       <Dropdown
         {...props}
         anchor={anchorF}
-        isOpen={isActive}
+        isOpen={isOpen && isActive}
         onToggle={(value) => isActiveSet(value || false)}
         ref={dropdownRef}>
         {children}
