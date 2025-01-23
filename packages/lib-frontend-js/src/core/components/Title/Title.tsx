@@ -54,6 +54,7 @@ export const Title: LFCModel<TitlePropsModel> = ({
             <Skeleton elementState={elementState}>
               <Icon
                 color={color}
+                fontSize={fontSize}
                 fontStyle={fontStyle}
                 icon={icon}
                 width={theme.shape.size[THEME_SIZE.SMALL]}
