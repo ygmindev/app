@@ -18,6 +18,15 @@ export const _web = ({ bundle, isSsr, publicDir, server }: WebConfigModel): _Web
     privateKeyFilename: privateKeyFile,
     publicKeyFilename: publicKeyFile,
   } = server.certificate;
+
+  let https;
+  try {
+    https = {
+      cert: readFileSync(joinPaths([certificateDir, publicKeyFile])),
+      key: readFileSync(joinPaths([certificateDir, privateKeyFile])),
+    };
+  } catch (_) {}
+
   return merge(
     [
       {
@@ -30,10 +39,7 @@ export const _web = ({ bundle, isSsr, publicDir, server }: WebConfigModel): _Web
         server: {
           host: true,
 
-          https: {
-            cert: readFileSync(joinPaths([certificateDir, publicKeyFile])),
-            key: readFileSync(joinPaths([certificateDir, privateKeyFile])),
-          },
+          https,
 
           middlewareMode: true,
 
