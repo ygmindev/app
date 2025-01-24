@@ -1,4 +1,4 @@
-import { _getRoot } from '@lib/backend/file/utils/getRoot/_getRoot';
 import { type GetRootModel } from '@lib/backend/file/utils/getRoot/getRoot.models';
+import { resolve } from 'path';
 
-export const getRoot = (): GetRootModel => _getRoot();
+export const getRoot = (): GetRootModel => resolve(__dirname, '../../../../../../');
