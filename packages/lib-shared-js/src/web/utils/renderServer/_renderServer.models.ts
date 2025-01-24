@@ -1,3 +1,4 @@
+import { type InitializeModel } from '@app/web/setup/utils/initialize/initialize.models';
 import { type WebConfigModel } from '@lib/config/node/web/web.models';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { type RootContextModel } from '@lib/frontend/root/root.models';
@@ -7,7 +8,7 @@ import { type ComponentType, type ReactElement } from 'react';
 import { type PageContextClientWithServerRouting as PageContextClient } from 'vike/types';
 
 export type _RenderServerParamsModel = Pick<WebConfigModel, 'rootId' | 'ssrContextKeys'> & {
-  initialize?(): Promise<void>;
+  initialize?(): Promise<InitializeModel>;
 
   render(params: { context: RootContextModel; element: ReactElement }): RenderAppModel;
 
