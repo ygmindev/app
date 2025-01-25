@@ -45,7 +45,15 @@ const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       envPrefix: ['APP_', 'SERVER_APP_'],
 
-      externals: ['raf/polyfill.js', 'setimmediate'],
+      externals: [
+        'json-stringify-safe',
+        'raf/polyfill.js',
+        'react-fast-compare',
+        'react-redux',
+        'setimmediate',
+        'void-elements',
+        /lodash/,
+      ],
 
       transpiles: [
         '@egjs/react-infinitegrid',

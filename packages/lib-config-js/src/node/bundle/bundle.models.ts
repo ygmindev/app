@@ -21,7 +21,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir' | 'publicDir'> 
 
   extensions: Array<string>;
 
-  externals?: Array<string>;
+  externals?: Array<string | RegExp>;
 
   logSuppressPatterns?: Array<RegExp>;
 

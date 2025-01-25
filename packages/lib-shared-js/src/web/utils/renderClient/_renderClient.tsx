@@ -19,7 +19,7 @@ export const _renderClient =
     rootId,
   }: _RenderClientParamsModel): _RenderClientModel =>
   async ({ Page, context, pageProps }) => {
-    initialize && (await initialize());
+    await initialize?.();
     const contextF: RootContextModel = merge([
       {
         [LOCALE]: { i18n: context?.locale?.i18n ?? _internationalize(internationalizeConfig) },

@@ -1,3 +1,5 @@
+import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
+import databaseConfig from '@lib/config/database/database.mongo';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -11,6 +13,7 @@ import {
 export const _prerender =
   ({ i18n, languageDefault, languages }: _PrerenderParamsModel): _PrerenderModel =>
   async ({ pageContexts }) => {
+    await initializeBackend({ database: databaseConfig.params() });
     const pageContextPromises: Array<() => Promise<(typeof pageContexts)[number]>> = [];
     languages.forEach(({ id }) =>
       pageContexts.forEach(({ context, urlOriginal, ...pageContext }) =>

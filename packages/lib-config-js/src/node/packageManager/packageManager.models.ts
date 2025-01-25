@@ -1,3 +1,5 @@
+import { type PACAKGE_INSTALL_MODE } from '@lib/config/node/packageManager/packageManager.constants';
+
 export type PackageManagerConfigModel = {
   fixedVersions: Record<string, string>;
 
@@ -15,5 +17,7 @@ export type PackageManagerConfigModel = {
 };
 
 export type PackageManagerInstallOptionsModel = {
-  isDev?: boolean;
+  mode?: PackageInstallMode;
 };
+
+export type PackageInstallMode = `${PACAKGE_INSTALL_MODE}`;

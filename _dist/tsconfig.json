@@ -20,7 +20,7 @@
       "dom.iterable"
     ],
     "module": "esnext",
-    "moduleResolution": "Node",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
     "noEmitOnError": false,
     "outDir": "./out-tsc",

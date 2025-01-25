@@ -6,7 +6,7 @@ import {
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { prompt, type prompts, registerPrompt } from 'inquirer';
 import directory from 'inquirer-directory';
-import { isString } from 'lodash';
+import isString from 'lodash/isString';
 import startCase from 'lodash/startCase';
 import toString from 'lodash/toString';
 

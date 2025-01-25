@@ -1,6 +1,8 @@
+import { flowPlugin } from '@bunchtogether/vite-plugin-flow';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { _plugins } from '@lib/config/node/bundle/_plugins';
 import {
   type _BundleConfigModel,
@@ -16,13 +18,16 @@ import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
 import react from '@vitejs/plugin-react-swc';
 import { existsSync } from 'fs';
 import { getTsconfig } from 'get-tsconfig';
+import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
+import { nodeExternals } from 'rollup-plugin-node-externals';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
 import { checker } from 'vite-plugin-checker';
@@ -92,9 +97,11 @@ export const _bundle = ({
     });
   }
   const tsconfigDir = fromWorking(typescript?.configFilename);
+
   const config: _BundleConfigModel = {
     build: {
-      assetsDir: joinPaths([fromWorking(), publicDir]),
+      // assetsDir: joinPaths([fromWorking(), publicDir]),
+      assetsDir: toRelative({ to: publicDir }),
 
       commonjsOptions: {
         defaultIsModuleExports: true,
@@ -112,7 +119,9 @@ export const _bundle = ({
       rollupOptions: {
         ...(entryPathname ? { input: entryPathname } : {}),
 
-        external: externals,
+        external: externals
+          ? (name: string) => some(externals.map((v) => (isString(v) ? name === v : v.test(name))))
+          : undefined,
 
         output: {
           chunkFileNames: '[name].js',
@@ -124,18 +133,30 @@ export const _bundle = ({
           preserveModules: false, // TODO: true if serverless
         },
 
-        // plugins: [resolve({ modulesOnly: true }), flowPlugin()],
         plugins: [
-          resolve({ modulesOnly: true }),
-          // babel &&
-          //   babelPlugin({
-          //     babelHelpers: 'runtime',
-          //     compact: process.env.NODE_ENV === 'production',
-          //     minified: process.env.NODE_ENV === 'production',
-          //     plugins: babel.plugins,
-          //     presets: babel.presets,
-          //     skipPreflightCheck: true,
-          //   } as RollupBabelInputPluginOptions),
+          nodeExternals(),
+
+          resolve({
+            browser: true,
+            modulePaths: rootDirs.map((root) =>
+              joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
+            ),
+            modulesOnly: true,
+          }),
+
+          babel &&
+            babelPlugin({
+              babelHelpers: 'runtime',
+              compact: process.env.NODE_ENV === 'production',
+              minified: process.env.NODE_ENV === 'production',
+              plugins: babel.plugins,
+              presets: babel.presets,
+              skipPreflightCheck: true,
+            }),
+
+          commonjs({
+            requireReturnsDefault: 'auto',
+          }),
         ],
       },
 
@@ -216,6 +237,8 @@ export const _bundle = ({
         : []),
 
       // circularDependencyPlugin({}),
+
+      flowPlugin(),
 
       checker({
         eslint: { lintCommand: lintCommand() },

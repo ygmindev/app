@@ -1,4 +1,5 @@
 import 'setimmediate';
+import 'source-map-support';
 import 'raf/polyfill.js';
 
 import { type InitializeModel } from '@app/web/setup/utils/initialize/initialize.models.server';
