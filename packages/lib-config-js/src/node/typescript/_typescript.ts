@@ -36,7 +36,7 @@ export const _typescript = ({
       jsx: 'react-jsx' as unknown as JsxEmit,
       lib: ['esnext', 'esnext.asynciterable', 'dom', 'dom.iterable'],
       module: 'esnext' as unknown as ModuleKind,
-      moduleResolution: 'Node' as unknown as ModuleResolutionKind,
+      moduleResolution: 'bundler' as unknown as ModuleResolutionKind,
       noEmit: true,
       noEmitOnError: false,
       outDir: './out-tsc',
@@ -49,14 +49,6 @@ export const _typescript = ({
       target: 'esnext' as unknown as ScriptTarget,
       types,
       useDefineForClassFields: false,
-    },
-    'ts-node': {
-      compilerOptions: { module: 'commonjs' },
-      esm: true,
-      experimentalSpecifierResolution: 'node',
-      require: ['tsconfig-paths/register'],
-      swc: true,
-      transpileOnly: true,
     },
   };
 };

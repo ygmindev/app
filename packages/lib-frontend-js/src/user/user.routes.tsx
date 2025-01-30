@@ -9,8 +9,8 @@ import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage
 import { EMAIL, NAME, PHONE, PROFILE } from '@lib/frontend/user/user.constants';
 import { SIGN_IN_METHOD } from '@lib/shared/auth/auth.constants';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { phoneNumber } from '@lib/shared/locale/utils/phoneNumber/phoneNumber';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
-import { phoneFormat } from '@lib/shared/locale/utils/phoneFormat/phoneFormat';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
 
 export const userRoutes: Array<RouteModel> = [
@@ -47,9 +47,10 @@ export const userRoutes: Array<RouteModel> = [
           {
             description: ({ currentUser, t }) =>
               currentUser?.phone
-                ? phoneFormat(
-                    `${currentUser?.callingCode ? `+${currentUser.callingCode}` : ''} ${currentUser.phone}`,
-                  )
+                ? phoneNumber.format({
+                    callingCode: currentUser.callingCode,
+                    phone: currentUser.phone,
+                  })
                 : t('core:notSet'),
             element: (
               <SignInPage

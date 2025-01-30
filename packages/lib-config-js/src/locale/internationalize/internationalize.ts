@@ -5,7 +5,7 @@ import {
 } from '@lib/config/locale/internationalize/internationalize.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
+export const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
   ...configBase,
 });
 

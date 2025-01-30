@@ -12,8 +12,8 @@ import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { JWT } from 'google-auth-library';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import toNumber from 'lodash/toNumber';
-import trimStart from 'lodash/trimStart';
+import { toNumber } from 'lodash';
+import { trimStart } from 'lodash';
 
 let screen: Screen;
 
@@ -555,9 +555,9 @@ export const main = createLambdaHandler<{
 // import { info } from '@lib/shared/logging/utils/logger/logger';
 // import { JWT } from 'google-auth-library';
 // import { GoogleSpreadsheet } from 'google-spreadsheet';
-// import toNumber from 'lodash/toNumber';
-// import trimStart from 'lodash/trimStart';
-// import uniq from 'lodash/uniq';
+// import { toNumber } from 'lodash';
+// import { trimStart } from 'lodash';
+// import { uniq } from 'lodash';
 
 // export const main = createLambdaHandler<{
 //   category: string;
@@ -1033,8 +1033,8 @@ export const main = createLambdaHandler<{
 // // import { info } from '@lib/shared/logging/utils/logger/logger';
 // // import { JWT } from 'google-auth-library';
 // // import { GoogleSpreadsheet } from 'google-spreadsheet';
-// // import toNumber from 'lodash/toNumber';
-// // import uniq from 'lodash/uniq';
+// // import { toNumber } from 'lodash';
+// // import { uniq } from 'lodash';
 
 // // export const main = createLambdaHandler<{
 // //   category: string;

@@ -1,23 +1,25 @@
+import { checkbox, input, select } from '@inquirer/prompts';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
+import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequence';
 import {
   type _PromptModel,
   type _PromptParamsModel,
 } from '@tool/task/core/utils/prompt/_prompt.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
-import { prompt, type prompts, registerPrompt } from 'inquirer';
-import directory from 'inquirer-directory';
+import fileSelector from 'inquirer-file-selector';
 import isString from 'lodash/isString';
 import startCase from 'lodash/startCase';
 import toString from 'lodash/toString';
 
-registerPrompt(PROMPT_TYPE.DIRECTORY, directory as prompts.PromptConstructor);
-
 export const _prompt = async <TType extends unknown>(
   prompts: _PromptParamsModel<TType>,
 ): Promise<_PromptModel<TType>> =>
-  prompt(
-    prompts.map(
-      ({
+  reduceSequence(
+    prompts,
+    async (
+      result,
+      {
         key,
         type = PROMPT_TYPE.INPUT,
         message = `${startCase(toString(key))}?`,
@@ -25,37 +27,41 @@ export const _prompt = async <TType extends unknown>(
         isOptional,
         defaultValue,
         basePath = fromPackages(),
-      }) => ({
-        basePath,
-
-        choices: options
-          ? options.map((option) => {
-              const { label, value } = isString(option)
-                ? { label: option, value: option }
-                : (option as { label?: string; value: string });
-              return {
-                checked:
-                  type === PROMPT_TYPE.MULTIPLE &&
-                  options &&
-                  defaultValue &&
-                  defaultValue.includes(option),
-                name: label,
-                value,
-              };
-            })
-          : [],
-
-        message: `${message}${isOptional ? ' (Optional)' : ''}`,
-
-        name: key,
-
-        pageSize: options ? Math.min(options.length, 10) : undefined,
-
-        type,
-
-        validate: isOptional
-          ? undefined
-          : (value: string): boolean => (value ? value.length > 0 : false),
-      }),
-    ),
+      },
+    ) => {
+      const messageF = `${message}${isOptional ? ' (Optional)' : ''}`;
+      const choices = options
+        ? options.map((option) => {
+            const { name, value } = isString(option)
+              ? { name: option, value: option }
+              : { name: option.label, value: option.value };
+            return {
+              checked: type === PROMPT_TYPE.MULTIPLE && options && defaultValue?.includes(value),
+              name,
+              value,
+            };
+          })
+        : [];
+      const v = await (() => {
+        switch (type) {
+          case PROMPT_TYPE.INPUT:
+            return input({ message: messageF });
+          case PROMPT_TYPE.LIST:
+            return select({ choices, message: messageF });
+          case PROMPT_TYPE.MULTIPLE:
+            return checkbox({ choices, message: messageF });
+          case PROMPT_TYPE.DIRECTORY:
+            return fileSelector({
+              allowCancel: true,
+              basePath,
+              message: messageF,
+              type: 'file+directory',
+            });
+          default:
+            throw new InvalidArgumentError('prompt type');
+        }
+      })();
+      return { ...(result as object), [key]: v } as TType;
+    },
+    {} as TType,
   );

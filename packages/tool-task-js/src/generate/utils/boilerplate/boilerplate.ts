@@ -58,11 +58,13 @@ export const boilerplate = async ({
       case '{{DIRECTORY}}': {
         const root = await resolveVariable('{{ROOT}}');
         const target = await resolveVariable('{{TARGET}}');
+        const basePath = fromPackages(root, 'src');
         const { path } = await prompt<{ path: string }>([
-          { basePath: fromPackages(root, 'src'), key: 'path', type: PROMPT_TYPE.DIRECTORY },
+          { basePath, key: 'path', type: PROMPT_TYPE.DIRECTORY },
         ]);
-        outputF = fromPackages(root, `src/${path}`);
-        value = trim(join(target, path), '/');
+        const pathF = path.replace(basePath, '');
+        outputF = fromPackages(root, `src/${pathF}`);
+        value = trim(join(target, pathF), '/');
         break;
       }
       case '{{ROOT}}': {
@@ -75,7 +77,7 @@ export const boilerplate = async ({
       }
       case '{{TARGET}}': {
         const root = await resolveVariable('{{ROOT}}');
-        value = isPy ? snakeCase(root) : `@${root}`;
+        value = isPy ? snakeCase(root) : `@${root.replaceAll('-js', '')}`;
         break;
       }
       case '{{PATH}}': {
@@ -97,7 +99,7 @@ export const boilerplate = async ({
     variablesF[k] = await resolveVariable(k);
   }
 
-  outputF = outputF || fromPackages();
+  outputF = outputF ?? fromPackages();
   const result = await _boilerplate({
     input: templateDirF,
     output: outputF,

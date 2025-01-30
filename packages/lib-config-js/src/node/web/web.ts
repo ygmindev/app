@@ -5,7 +5,7 @@ import { WEB_CONFIG } from '@lib/config/node/web/web.constants';
 import { type _WebConfigModel, type WebConfigModel } from '@lib/config/node/web/web.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<WebConfigModel, _WebConfigModel>({
+export const config = defineConfig<WebConfigModel, _WebConfigModel>({
   config: _web,
 
   params: () => ({

@@ -16,7 +16,7 @@ const LIGHTNESS_THEME_CONTRAST = 0.2;
 const LIGHTNESS_THEME_MUTED = 0.3;
 const LIGHTNESS_SURFACE_MUTED = 0.9;
 
-const config = defineConfig<ThemeConfigModel, _ThemeConfigModel>({
+export const config = defineConfig<ThemeConfigModel, _ThemeConfigModel>({
   ...themeConfigBase,
 
   overrides: () => [

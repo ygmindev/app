@@ -6,7 +6,7 @@ import {
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
+export const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
   ...configBase,
 
   overrides: () => [

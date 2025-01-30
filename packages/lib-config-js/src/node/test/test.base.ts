@@ -6,7 +6,7 @@ import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/te
 import typescriptConfig from '@lib/config/node/typescript/typescript';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<TestConfigModel, _TestConfigModel>({
+export const config = defineConfig<TestConfigModel, _TestConfigModel>({
   config: _test,
 
   params: () => ({

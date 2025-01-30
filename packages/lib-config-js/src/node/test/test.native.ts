@@ -4,7 +4,7 @@ import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/te
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
 
-const config = defineConfig<TestConfigModel, _TestConfigModel>({
+export const config = defineConfig<TestConfigModel, _TestConfigModel>({
   ...configBase,
 
   overrides: () => [

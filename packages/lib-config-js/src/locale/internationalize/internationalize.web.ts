@@ -6,7 +6,7 @@ import {
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import I18NextHttpBackend from 'i18next-http-backend';
 
-const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
+export const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
   ...configBase,
 
   overrides: () => [{ modules: [I18NextHttpBackend] }],

@@ -1,4 +1,5 @@
+import '../lib-shared-js/src/core/utils/nodeRegister/nodeRegister';
 
-require('../lib-shared-js/src/core/utils/nodeRegister/nodeRegister').nodeRegister();
-const { requireInterop } = require('@lib/shared/core/utils/requireInterop/requireInterop');
-module.exports = requireInterop('@lib/config/serverless/serverless.graphql').config();
+const { config } = await import('@lib/config/serverless/serverless.graphql');
+
+export default config.config();

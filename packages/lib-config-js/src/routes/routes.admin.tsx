@@ -8,7 +8,7 @@ import { ROUTE_NAVIGATION } from '@lib/frontend/route/route.constants';
 import { getRoutes } from '@lib/frontend/route/utils/getRoutes/getRoutes';
 import { ROUTE } from '@lib/shared/route/route.constants';
 
-const config = defineConfig<RoutesConfigModel>({
+export const config = defineConfig<RoutesConfigModel>({
   params: () => ({
     routes: getRoutes([
       {

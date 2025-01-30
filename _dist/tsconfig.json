@@ -20,7 +20,7 @@
       "dom.iterable"
     ],
     "module": "esnext",
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "noEmitOnError": false,
     "outDir": "./out-tsc",
@@ -46,17 +46,11 @@
       "@app/web-library/*": [
         "packages/app-web-library-js/src/*"
       ],
-      "lib_ai/*": [
-        "packages/lib-ai-py/src/*"
-      ],
       "@lib/backend/*": [
         "packages/lib-backend-js/src/*"
       ],
       "@lib/config/*": [
         "packages/lib-config-js/src/*"
-      ],
-      "lib_config/*": [
-        "packages/lib-config-py/src/*"
       ],
       "@lib/frontend/*": [
         "packages/lib-frontend-js/src/*"
@@ -64,14 +58,8 @@
       "@lib/shared/*": [
         "packages/lib-shared-js/src/*"
       ],
-      "lib_shared/*": [
-        "packages/service-ai-py/src/*"
-      ],
       "@service/graphql-sandbox/*": [
         "packages/service-graphql-sandbox-js/src/*"
-      ],
-      "@service/lambda-crawl/*": [
-        "packages/service-lambda-crawl/src/*"
       ],
       "@service/lambda/*": [
         "packages/service-lambda-js/src/*"
@@ -97,17 +85,5 @@
       "@types/jest-image-snapshot"
     ],
     "useDefineForClassFields": false
-  },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    },
-    "esm": true,
-    "experimentalSpecifierResolution": "node",
-    "require": [
-      "tsconfig-paths/register"
-    ],
-    "swc": true,
-    "transpileOnly": true
   }
 }

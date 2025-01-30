@@ -5,7 +5,7 @@ import {
 } from '@lib/config/telemetry/telemetry.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<TelemetryConfigModel, _TelemetryConfigModel>({
+export const config = defineConfig<TelemetryConfigModel, _TelemetryConfigModel>({
   config: _telemetry,
 
   params: () => ({

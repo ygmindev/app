@@ -9,7 +9,7 @@ import {
 
 const AG_GRID_THEME = 'ag-theme-material';
 
-const config = defineConfig<CssConfigModel>({
+export const config = defineConfig<CssConfigModel>({
   params: () => ({
     stylesheet: (theme) => `
     .${AG_GRID_THEME} {

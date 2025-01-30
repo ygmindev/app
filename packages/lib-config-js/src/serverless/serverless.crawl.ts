@@ -6,7 +6,7 @@ import configBase from '@lib/config/serverless/serverless.node';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { HTTP_METHOD } from '@lib/shared/http/http.constants';
 
-const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
+export const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
   ...configBase,
 
   overrides: () => [

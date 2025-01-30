@@ -1,8 +1,8 @@
-import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { BUILD_DIR } from '@lib/config/file/file.constants';
-import { WEB_CONFIG } from '@lib/config/node/web/web.constants';
+import webConfig from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { buildApp } from '@lib/shared/web/utils/buildApp/buildApp';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { staticServer } from '@tool/task/server/utils/staticServer/staticServer';
 
@@ -11,12 +11,10 @@ export const build: TaskParamsModel<unknown> = {
 
   name: 'build',
 
-  // onBefore: ['node-post-install', 'build-config-typescript', 'build-config-lint'],
-  onBefore: ['build-config-typescript', 'build-config-lint'],
+  // onBefore: ['build-config-typescript', 'build-config-lint'],
 
   task: [
-    ({ root }) =>
-      fromExecutable(`vite build --config ${joinPaths([root, WEB_CONFIG.configFilename])}`),
+    () => buildApp({ web: webConfig.params() }),
 
     ({ root }) =>
       process.env.APP_IS_STATIC_SERVER &&

@@ -1,6 +1,12 @@
 {
   "name": "@lib/backend",
   "version": "0.0.1",
-  "type": "commonjs",
-  "private": true
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./*":{
+      "development": "./src/*",
+      "default": "./src/*"
+    }
+  }
 }

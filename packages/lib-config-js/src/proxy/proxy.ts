@@ -5,7 +5,7 @@ import { type _ProxyConfigModel, type ProxyConfigModel } from '@lib/config/proxy
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 
-const config = defineConfig<ProxyConfigModel, _ProxyConfigModel>({
+export const config = defineConfig<ProxyConfigModel, _ProxyConfigModel>({
   config: _proxy,
 
   params: () => ({

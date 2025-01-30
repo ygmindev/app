@@ -29,7 +29,7 @@ import {
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
+export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
   config: _graphql,
 
   params: () =>

@@ -9,7 +9,7 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 const { languages } = INTERNATIONALIZE_CONFIG;
 
-const config = defineConfig<ParserConfigModel, _ParserConfigModel>({
+export const config = defineConfig<ParserConfigModel, _ParserConfigModel>({
   config: _parser,
 
   params: () => ({

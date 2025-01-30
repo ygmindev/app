@@ -7,7 +7,7 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { locale } from 'expo-localization';
 import { type Module } from 'i18next';
 
-const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
+export const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
   ...configBase,
 
   overrides: () => [

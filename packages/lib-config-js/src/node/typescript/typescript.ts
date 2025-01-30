@@ -12,7 +12,7 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { readFileSync } from 'fs';
 import reduce from 'lodash/reduce';
 
-const config = defineConfig<TypescriptConfigModel, _TypescriptConfigModel>({
+export const config = defineConfig<TypescriptConfigModel, _TypescriptConfigModel>({
   config: _typescript,
 
   params: () => ({

@@ -23,7 +23,7 @@ import { readFileSync } from 'fs';
 import { type SecureServerOptions } from 'http2';
 import { plugin as i18nextMiddleware } from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
-import { createServer } from 'vite';
+import { createDevMiddleware } from 'vike/server';
 
 export const _runServer = async ({
   certificate,
@@ -51,8 +51,11 @@ export const _runServer = async ({
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);
 
-  const { middlewares } = await createServer({ ..._web(web), root });
-  await app.use(middlewares);
+  const { devMiddleware } = await createDevMiddleware({
+    root,
+    viteConfig: { configFile: false, ..._web(web) },
+  });
+  await app.use(devMiddleware);
 
   await app.register(
     i18nextMiddleware as unknown as FastifyPluginCallback,

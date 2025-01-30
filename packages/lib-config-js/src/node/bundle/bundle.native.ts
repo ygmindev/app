@@ -5,7 +5,7 @@ import {
 } from '@lib/config/node/bundle/bundle.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
+export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
   ...configBase,
 });
 

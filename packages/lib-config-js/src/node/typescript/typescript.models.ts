@@ -1,5 +1,4 @@
 import { type FileConfigModel } from '@lib/config/file/file.models';
-import { type CreateOptions } from 'ts-node';
 import { type TranspileOptions } from 'typescript';
 
 export type TypescriptConfigModel = Pick<FileConfigModel, 'distDir'> & {
@@ -12,6 +11,4 @@ export type TypescriptConfigModel = Pick<FileConfigModel, 'distDir'> & {
   types?: Array<string>;
 };
 
-export type _TypescriptConfigModel = TranspileOptions & {
-  'ts-node': CreateOptions;
-};
+export type _TypescriptConfigModel = TranspileOptions;

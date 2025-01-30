@@ -3,7 +3,7 @@ import {
   SERVERLESS_RUNTIME,
 } from '@lib/backend/serverless/serverless.constants';
 import { BUILD_DIR, PRUNE_PATTERNS } from '@lib/config/file/file.constants';
-import bundleConfig from '@lib/config/node/bundle/bundle.node';
+import bundleConfig from '@lib/config/node/bundle/bundle.node.js';
 import serverConfig from '@lib/config/node/server/server';
 import { _serverless } from '@lib/config/serverless/_serverless';
 import {
@@ -16,7 +16,7 @@ import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import toNumber from 'lodash/toNumber';
 
-const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
+export const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
   config: _serverless,
 
   params: () => ({

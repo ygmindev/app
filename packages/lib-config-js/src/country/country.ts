@@ -1,7 +1,7 @@
 import { type CountryConfigModel } from '@lib/config/country/country.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<CountryConfigModel>({
+export const config = defineConfig<CountryConfigModel>({
   params: () => ({
     supportedCountries: [
       'US',

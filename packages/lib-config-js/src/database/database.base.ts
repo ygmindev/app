@@ -23,7 +23,7 @@ import {
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
+export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
   config: _database,
 
   params: () => ({

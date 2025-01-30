@@ -3,7 +3,7 @@ import { _task } from '@lib/config/task/_task';
 import { type _TaskConfigModel, type TaskConfigModel } from '@lib/config/task/task.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<TaskConfigModel, _TaskConfigModel>({
+export const config = defineConfig<TaskConfigModel, _TaskConfigModel>({
   config: _task,
 
   params: () => ({

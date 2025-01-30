@@ -6,7 +6,7 @@ import {
 } from '@lib/config/database/database.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
+export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
   ...configBase,
 
   overrides: () => [

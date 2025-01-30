@@ -2,7 +2,7 @@ import { PACAKGE_INSTALL_MODE } from '@lib/config/node/packageManager/packageMan
 import { type PackageManagerConfigModel } from '@lib/config/node/packageManager/packageManager.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<PackageManagerConfigModel>({
+export const config = defineConfig<PackageManagerConfigModel>({
   params: () => ({
     fixedVersions: {
       '@types/eslint': '^8.56.11',
@@ -10,7 +10,7 @@ const config = defineConfig<PackageManagerConfigModel>({
       '@types/react': '^18.3.1',
       '@types/react-dom': '^18.3.1',
       eslint: '^8.56.0', // eslint9 flat config incompatible
-      inquirer: '^8.2.2',
+      // inquirer: '^8.2.2',
       'p-queue': '^6.6.2', // no commonjs
       react: '^18.3.1', // TODO: react 19 incompatible with RNW until merge: https://github.com/necolas/react-native-web/pull/2731
       'react-dom': '^18.3.1',

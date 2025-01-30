@@ -18,7 +18,7 @@ export const lintCommand = (fix?: boolean): string => {
     .join(' ')} ${include.join(' ')}`;
 };
 
-const config = defineConfig<LintConfigModel, _LintConfigModel>({
+export const config = defineConfig<LintConfigModel, _LintConfigModel>({
   config: _lint,
 
   params: () => ({

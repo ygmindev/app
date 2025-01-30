@@ -1,6 +1,6 @@
 {
   "name": "@app/web",
-  "type": "commonjs",
+  "type": "module",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -10,6 +10,9 @@
     "@floating-ui/react": "^0.27.3",
     "@floating-ui/react-dom": "^2.1.2",
     "@loadable/component": "^5.16.4",
+    "@lib/config": "workspace:^",
+    "@lib/frontend": "workspace:^",
+    "@lib/shared": "workspace:^",
     "@react-google-maps/api": "^2.20.5",
     "@reduxjs/toolkit": "2.5.0",
     "@rpldy/upload-button": "^1.9.0",
@@ -86,5 +89,11 @@
   "peerDependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
+  },
+  "exports": {
+    "./*":{
+      "development": "./src/*",
+      "default": "./src/*"
+    }
   }
 }

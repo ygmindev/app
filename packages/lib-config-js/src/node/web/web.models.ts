@@ -9,8 +9,6 @@ export type WebConfigModel = Pick<FileConfigModel, 'publicDir'> & {
   // TODO: separate into bundle.js?
   bundle: BundleConfigModel;
 
-  configFilename: string;
-
   isSsr?: boolean;
 
   rootId: string;

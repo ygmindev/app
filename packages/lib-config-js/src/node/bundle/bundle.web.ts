@@ -6,7 +6,7 @@ import {
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
+export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
   ...configBase,
 
   overrides: () => [

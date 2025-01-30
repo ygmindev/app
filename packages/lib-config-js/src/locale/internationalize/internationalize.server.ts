@@ -7,7 +7,7 @@ import {
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import I18NexFsBackend from 'i18next-fs-backend';
 
-const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
+export const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
   ...configBase,
 
   overrides: () => [

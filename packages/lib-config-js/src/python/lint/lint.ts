@@ -4,7 +4,7 @@ import testConfig from '@lib/config/python/test/test';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
 
-const config = defineConfig<LintConfigModel>({
+export const config = defineConfig<LintConfigModel>({
   params: () => ({
     command: ({ includeDirs }) =>
       cartesianString(

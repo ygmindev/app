@@ -1,7 +1,7 @@
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import databaseConfig from '@lib/config/database/database.mongo';
 import { _sandbox } from '@service/graphql-sandbox/functions/graphql/_sandbox';
-import toNumber from 'lodash/toNumber';
+import { toNumber } from 'lodash';
 
 export const sandbox = async (): Promise<void> => {
   await initialize({ database: databaseConfig.params() });

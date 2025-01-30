@@ -6,7 +6,7 @@ import {
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { APP_URI } from '@lib/shared/http/http.constants';
 
-const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
+export const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
   ...configBase,
 
   overrides: () => [

@@ -3,7 +3,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { type PackageManagerConfigModel } from '@lib/config/python/packageManager/packageManager.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<PackageManagerConfigModel>({
+export const config = defineConfig<PackageManagerConfigModel>({
   params: () => ({
     // TODO: ignore fixed versions
     fixedVersions: {},

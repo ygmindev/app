@@ -66,6 +66,7 @@ export const _lint = ({
     '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-floating-promises': ['error', { ignoreVoid: true }],
+    '@typescript-eslint/no-require-imports': ['error', { allow: ['/*\.js$'] }],
     '@typescript-eslint/no-unnecessary-type-constraint': 'off',
     '@typescript-eslint/no-unused-expressions': [
       'warn',

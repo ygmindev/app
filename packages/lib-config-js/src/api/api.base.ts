@@ -3,7 +3,7 @@ import { type ApiConfigModel } from '@lib/config/api/api.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 
-const config = defineConfig<ApiConfigModel>({
+export const config = defineConfig<ApiConfigModel>({
   params: () =>
     ({
       prefix: 'api',

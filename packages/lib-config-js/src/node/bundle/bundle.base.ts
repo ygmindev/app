@@ -12,7 +12,7 @@ import {
 import typescriptConfig from '@lib/config/node/typescript/typescript';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
+export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
   config: _bundle,
 
   params: () => {

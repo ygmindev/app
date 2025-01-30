@@ -7,7 +7,7 @@ import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import toNumber from 'lodash/toNumber';
 
-const config = defineConfig<ServerConfigModel>({
+export const config = defineConfig<ServerConfigModel>({
   params: () => ({
     api: apiConfig.params(),
 

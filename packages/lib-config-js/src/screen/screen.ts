@@ -4,7 +4,7 @@ import { _screen } from '@lib/config/screen/_screen';
 import { type _ScreenConfigModel, type ScreenConfigModel } from '@lib/config/screen/screen.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
+export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
   config: _screen,
 
   params: () => ({

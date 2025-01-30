@@ -6,7 +6,7 @@ import {
   type {{NAME}}(pascalCase)ConfigModel,
 } from '@lib/config/{{NAME}}(camelCase)/{{NAME}}(camelCase).models';
 
-const config = defineConfig<{{NAME}}(pascalCase)ConfigModel, _{{NAME}}(pascalCase)ConfigModel>({
+export const config = defineConfig<{{NAME}}(pascalCase)ConfigModel, _{{NAME}}(pascalCase)ConfigModel>({
   ...configBase,
 
   overrides: () => [],

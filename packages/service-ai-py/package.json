@@ -1,6 +1,6 @@
 {
-  "name": "lib_shared",
+  "name": "service_ai",
   "version": "0.0.1",
-  "type": "commonjs",
+  "type": "module",
   "private": true
 }

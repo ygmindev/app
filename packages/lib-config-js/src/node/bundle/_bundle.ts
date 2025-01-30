@@ -1,4 +1,6 @@
 import { flowPlugin } from '@bunchtogether/vite-plugin-flow';
+import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
+// import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
@@ -18,7 +20,7 @@ import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
-import commonjs from '@rollup/plugin-commonjs';
+// import commonjs from '@rollup/plugin-commonjs';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
 import react from '@vitejs/plugin-react-swc';
@@ -28,11 +30,11 @@ import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 import { nodeExternals } from 'rollup-plugin-node-externals';
-import { visualizer } from 'rollup-plugin-visualizer';
-import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
+// import { visualizer } from 'rollup-plugin-visualizer';
+import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 // import circularDependencyPlugin from 'vite-plugin-circular-dependency';
-import { VitePluginNode } from 'vite-plugin-node';
+// import { VitePluginNode } from 'vite-plugin-node';
 
 function vitePluginIsomorphicImport(serverExtension: string): Plugin {
   return {
@@ -96,17 +98,19 @@ export const _bundle = ({
       };
     });
   }
+
   const tsconfigDir = fromWorking(typescript?.configFilename);
 
   const config: _BundleConfigModel = {
     build: {
-      // assetsDir: joinPaths([fromWorking(), publicDir]),
       assetsDir: toRelative({ to: publicDir }),
 
       commonjsOptions: {
         defaultIsModuleExports: true,
         esmExternals: true,
+        exclude: externals,
         requireReturnsDefault: 'auto',
+        strictRequires: true,
         transformMixedEsModules: true,
       },
 
@@ -125,7 +129,7 @@ export const _bundle = ({
 
         output: {
           chunkFileNames: '[name].js',
-          compact: true,
+          compact: process.env.NODE_ENV === 'production',
           entryFileNames: '[name].js',
           exports: 'named',
           format: 'cjs',
@@ -134,29 +138,27 @@ export const _bundle = ({
         },
 
         plugins: [
-          nodeExternals(),
+          nodeExternals({ exclude: transpiles, include: externals }),
 
           resolve({
-            browser: true,
-            modulePaths: rootDirs.map((root) =>
-              joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
-            ),
-            modulesOnly: true,
+            // browser: true,
+            // modulePaths: rootDirs.map((root) =>
+            //   joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
+            // ),
+            // modulesOnly: true,
           }),
 
-          babel &&
-            babelPlugin({
-              babelHelpers: 'runtime',
-              compact: process.env.NODE_ENV === 'production',
-              minified: process.env.NODE_ENV === 'production',
-              plugins: babel.plugins,
-              presets: babel.presets,
-              skipPreflightCheck: true,
-            }),
+          // babel &&
+          //   babelPlugin({
+          //     babelHelpers: 'runtime',
+          //     compact: process.env.NODE_ENV === 'production',
+          //     minified: process.env.NODE_ENV === 'production',
+          //     plugins: babel.plugins,
+          //     presets: babel.presets,
+          //     skipPreflightCheck: true,
+          //   }),
 
-          commonjs({
-            requireReturnsDefault: 'auto',
-          }),
+          // commonjs({ requireReturnsDefault: 'auto' }),
         ],
       },
 
@@ -177,11 +179,13 @@ export const _bundle = ({
       // sourcemap: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? undefined : 'linked',
     },
 
-    mode: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION ? 'production' : 'development',
+    mode: process.env.NODE_ENV,
 
     optimizeDeps: {
       esbuildOptions: {
         define,
+
+        format: 'esm',
 
         keepNames: true,
 
@@ -195,11 +199,13 @@ export const _bundle = ({
           joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
         ),
 
+        platform: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
+
         plugins: _plugins({ rootDirs, transpiles }) as Array<never>,
 
         resolveExtensions: extensions,
 
-        target: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node18' : undefined,
+        target: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
 
         tsconfig: tsconfigDir,
       },
@@ -212,29 +218,28 @@ export const _bundle = ({
     plugins: filterNil([
       serverExtension && vitePluginIsomorphicImport(serverExtension),
 
-      ...(process.env.ENV_PLATFORM === PLATFORM.NODE && entryPathname
-        ? VitePluginNode({
-            adapter: 'fastify',
-            appPath: entryPathname,
-            exportName: 'app',
-            initAppOnBoot: false,
-            swcOptions: {},
-            tsCompiler: 'swc',
-            // Optional, default: {
-            // jsc: {
-            //   target: 'es2019',
-            //   parser: {
-            //     syntax: 'typescript',
-            //     decorators: true
-            //   },
-            //  transform: {
-            //     legacyDecorator: true,
-            //     decoratorMetadata: true
-            //   }
-            // }
-            //
-          })
-        : []),
+      // ...(process.env.ENV_PLATFORM === PLATFORM.NODE && entryPathname
+      //   ? VitePluginNode({
+      //       adapter: 'fastify',
+      //       appPath: entryPathname,
+      //       exportName: 'app',
+      //       initAppOnBoot: false,
+      //       swcOptions: {
+      //         // jsc: {
+      //         //   parser: {
+      //         //     decorators: true,
+      //         //     syntax: 'typescript',
+      //         //   },
+      //         //   target: 'esnext',
+      //         //   transform: {
+      //         //     decoratorMetadata: true,
+      //         //     legacyDecorator: true,
+      //         //   },
+      //         // },
+      //       },
+      //       tsCompiler: 'swc',
+      //     })
+      //   : []),
 
       // circularDependencyPlugin({}),
 
@@ -265,7 +270,7 @@ export const _bundle = ({
 
       viteCommonjs(),
 
-      process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
+      // process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
     ]),
 
     resolve: {
@@ -294,11 +299,11 @@ export const _bundle = ({
 
     root: fromWorking(),
 
-    // server: {
-    //   fs: {
-    //     allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
-    //   },
-    // },
+    server: {
+      fs: {
+        allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
+      },
+    },
 
     ssr: { noExternal: transpiles },
   };

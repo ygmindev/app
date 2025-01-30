@@ -2,12 +2,7 @@ import { PUBLIC_DIR } from '@lib/config/file/file.constants';
 import { type WebConfigModel } from '@lib/config/node/web/web.models';
 import { ROOT } from '@lib/frontend/root/root.constants';
 
-export const WEB_CONFIG: Pick<
-  WebConfigModel,
-  'configFilename' | 'publicDir' | 'rootId' | 'ssrContextKeys'
-> = {
-  configFilename: 'web.js',
-
+export const WEB_CONFIG: Pick<WebConfigModel, 'publicDir' | 'rootId' | 'ssrContextKeys'> = {
   publicDir: PUBLIC_DIR,
 
   rootId: ROOT,

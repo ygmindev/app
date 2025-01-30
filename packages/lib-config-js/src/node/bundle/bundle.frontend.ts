@@ -8,16 +8,11 @@ import {
 } from '@lib/config/node/bundle/bundle.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
+export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
   ...configBase,
 
   overrides: () => [
     {
-      // aliases: [
-      //   { from: 'react', to: fromModules('react/cjs/react.production.min.js') },
-      //   { from: 'react-dom', to: fromModules('react-dom/cjs/react-dom.production.min.js') },
-      // ],
-
       // aliases: [
       //   { from: 'react', to: fromModules('react/cjs/react.production.min.js') },
       //   { from: 'react-dom', to: fromModules('react-dom/cjs/react-dom.production.min.js') },
@@ -46,12 +41,19 @@ const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       envPrefix: ['APP_', 'SERVER_APP_'],
 
       externals: [
-        'json-stringify-safe',
-        'raf/polyfill.js',
-        'react-fast-compare',
-        'react-redux',
-        'setimmediate',
-        'void-elements',
+        // 'json-stringify-safe',
+        // 'normalize-css-color',
+        // 'pino',
+        // 'postcss-value-parser',
+        // 'raf/polyfill.js',
+        // 'react-dom',
+        // 'react',
+        // 'react-fast-compare',
+        // 'react-redux',
+        // 'react/jsx-runtime',
+        // 'setimmediate',
+        // 'styleq',
+        // 'void-elements',
         /lodash/,
       ],
 
@@ -63,9 +65,7 @@ const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
         'expo-linear-gradient',
         'inline-style-prefixer',
         'moti',
-        'react-native',
         'react-use',
-        'react/jsx-runtime',
         'redux-persist',
         'thenby',
         ...fromGlobs(['react-native-!(codegen|gradle-plugin)'], { root: fromModules() }),

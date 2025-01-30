@@ -1,7 +1,7 @@
 import { type SearchConfigModel } from '@lib/config/search/search/search.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
-const config = defineConfig<SearchConfigModel>({
+export const config = defineConfig<SearchConfigModel>({
   params: () => ({
     delay: 500,
 

@@ -9,7 +9,7 @@ import { GroupFormPage } from '@lib/frontend/group/pages/GroupFormPage/GroupForm
 import { GroupPage } from '@lib/frontend/group/pages/GroupPage/GroupPage';
 import { getRoutes } from '@lib/frontend/route/utils/getRoutes/getRoutes';
 
-const config = defineConfig<RoutesConfigModel>({
+export const config = defineConfig<RoutesConfigModel>({
   params: () => ({
     routes: getRoutes([
       {

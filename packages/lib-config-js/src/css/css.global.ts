@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
 import MaterialCommunityIcons from 'react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf';
 
-const config = defineConfig<CssConfigModel>({
+export const config = defineConfig<CssConfigModel>({
   params: () => ({
     stylesheet: (theme) => `
     @font-face {
