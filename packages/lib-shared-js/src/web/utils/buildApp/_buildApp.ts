@@ -3,10 +3,8 @@ import {
   type _BuildAppModel,
   type _BuildAppParamsModel,
 } from '@lib/shared/web/utils/buildApp/_buildApp.models';
-import { build } from 'vite';
-// import { build } from 'vike/api';
+import { build } from 'vike/api';
 
 export const _buildApp = async ({ web }: _BuildAppParamsModel): _BuildAppModel => {
-  // await build({ viteConfig: { ..._web(web), configFile: false } });
-  await build(_web(web));
+  await build({ viteConfig: { ..._web(web), configFile: false } });
 };

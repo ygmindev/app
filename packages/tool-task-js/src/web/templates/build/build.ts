@@ -11,7 +11,7 @@ export const build: TaskParamsModel<unknown> = {
 
   name: 'build',
 
-  // onBefore: ['build-config-typescript', 'build-config-lint'],
+  onBefore: ['build-config-typescript', 'build-config-lint'],
 
   task: [
     () => buildApp({ web: webConfig.params() }),

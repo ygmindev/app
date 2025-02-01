@@ -36,15 +36,18 @@ export const _web = ({ bundle, isSsr, publicDir, server }: WebConfigModel): _Web
 
         publicDir: toRelative({ from: fromWorking(), to: fromStatic(publicDir) }),
 
-        server: {
-          host: true,
+        server:
+          process.env.NODE_ENV === 'development'
+            ? {
+                host: true,
 
-          https,
+                https,
 
-          middlewareMode: true,
+                middlewareMode: true,
 
-          watch: (bundleConfigF.build?.watch as WatchOptions) ?? undefined,
-        },
+                watch: (bundleConfigF.build?.watch as WatchOptions) ?? undefined,
+              }
+            : undefined,
       },
 
       bundleConfigF,

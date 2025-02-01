@@ -1,5 +1,3 @@
-import { flowPlugin } from '@bunchtogether/vite-plugin-flow';
-import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 // import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
@@ -31,7 +29,7 @@ import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 // import { visualizer } from 'rollup-plugin-visualizer';
-import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
+import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
 import { checker } from 'vite-plugin-checker';
 // import circularDependencyPlugin from 'vite-plugin-circular-dependency';
 // import { VitePluginNode } from 'vite-plugin-node';
@@ -127,15 +125,18 @@ export const _bundle = ({
           ? (name: string) => some(externals.map((v) => (isString(v) ? name === v : v.test(name))))
           : undefined,
 
-        output: {
-          chunkFileNames: '[name].js',
-          compact: process.env.NODE_ENV === 'production',
-          entryFileNames: '[name].js',
-          exports: 'named',
-          format: 'cjs',
-          interop: 'auto',
-          preserveModules: false, // TODO: true if serverless
-        },
+        output:
+          process.env.ENV_PLATFORM === PLATFORM.NODE
+            ? {
+                chunkFileNames: '[name].js',
+                compact: process.env.NODE_ENV === 'production',
+                entryFileNames: '[name].js',
+                exports: 'named',
+                format: 'cjs',
+                interop: 'auto',
+                preserveModules: false, // TODO: true if serverless
+              }
+            : undefined,
 
         plugins: [
           nodeExternals({ exclude: transpiles, include: externals }),
@@ -147,16 +148,6 @@ export const _bundle = ({
             // ),
             // modulesOnly: true,
           }),
-
-          // babel &&
-          //   babelPlugin({
-          //     babelHelpers: 'runtime',
-          //     compact: process.env.NODE_ENV === 'production',
-          //     minified: process.env.NODE_ENV === 'production',
-          //     plugins: babel.plugins,
-          //     presets: babel.presets,
-          //     skipPreflightCheck: true,
-          //   }),
 
           // commonjs({ requireReturnsDefault: 'auto' }),
         ],
@@ -243,8 +234,6 @@ export const _bundle = ({
 
       // circularDependencyPlugin({}),
 
-      flowPlugin(),
-
       checker({
         eslint: { lintCommand: lintCommand() },
         typescript: { tsconfigPath: tsconfigDir },
@@ -299,11 +288,11 @@ export const _bundle = ({
 
     root: fromWorking(),
 
-    server: {
-      fs: {
-        allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
-      },
-    },
+    // server: {
+    //   fs: {
+    //     allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
+    //   },
+    // },
 
     ssr: { noExternal: transpiles },
   };
