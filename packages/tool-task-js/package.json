@@ -154,7 +154,7 @@
   "type": "module",
   "version": "0.0.1",
   "exports": {
-    "./*":{
+    "./*": {
       "development": "./src/*",
       "default": "./src/*"
     }
