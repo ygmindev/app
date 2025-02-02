@@ -2,8 +2,10 @@ import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type TypescriptConfigModel } from '@lib/config/node/typescript/typescript.models';
 import { type UserConfig } from 'vite';
 
-export type BundleConfigModel = Pick<FileConfigModel, 'buildDir' | 'publicDir'> & {
+export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
   aliases?: Array<{ from: RegExp | string; to: string }>;
+
+  assetsPathname?: string;
 
   babel?: {
     plugins?: Array<string | [string, Record<string, unknown>]>;
@@ -30,6 +32,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir' | 'publicDir'> 
   packager: string;
 
   provide?: Record<string, string>;
+
+  publicDir?: string;
 
   rootDirs: Array<string>;
 

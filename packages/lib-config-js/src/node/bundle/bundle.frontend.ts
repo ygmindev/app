@@ -1,6 +1,8 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
+import { PUBLIC_DIR } from '@lib/config/file/file.constants';
 import configBase from '@lib/config/node/bundle/bundle.base';
 import {
   type _BundleConfigModel,
@@ -13,11 +15,12 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
   overrides: () => [
     {
+      assetsPathname: fromStatic(PUBLIC_DIR),
+
       // aliases: [
       //   { from: 'react', to: fromModules('react/cjs/react.production.min.js') },
       //   { from: 'react-dom', to: fromModules('react-dom/cjs/react-dom.production.min.js') },
       // ],
-
       babel: {
         plugins: [
           ['transform-react-remove-prop-types', { removeImport: true }] as [
@@ -54,8 +57,10 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
         // 'setimmediate',
         // 'styleq',
         // 'void-elements',
-        /lodash/,
+        // /lodash/,
       ],
+
+      publicDir: PUBLIC_DIR,
 
       transpiles: [
         '@egjs/react-infinitegrid',

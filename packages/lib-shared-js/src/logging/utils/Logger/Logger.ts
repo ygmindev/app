@@ -5,7 +5,6 @@ import {
   type _LoggerParamsModel,
 } from '@lib/shared/logging/utils/Logger/_Logger.models';
 import { type LoggerModel, type LogModel } from '@lib/shared/logging/utils/Logger/Logger.models';
-import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 
 const stringifyF = (params: Array<unknown>): string =>

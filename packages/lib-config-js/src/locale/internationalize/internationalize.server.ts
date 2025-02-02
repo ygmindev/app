@@ -1,4 +1,5 @@
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
+import { PUBLIC_DIR } from '@lib/config/file/file.constants';
 import configBase from '@lib/config/locale/internationalize/internationalize.frontend';
 import {
   type _InternationalizeConfigModel,
@@ -14,7 +15,7 @@ export const config = defineConfig<InternationalizeConfigModel, _Internationaliz
     {
       isPreload: true,
 
-      localePath: fromStatic('assets'),
+      localePath: fromStatic(PUBLIC_DIR),
 
       modules: [I18NexFsBackend],
     },

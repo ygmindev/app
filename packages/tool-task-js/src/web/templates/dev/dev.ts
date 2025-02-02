@@ -1,3 +1,4 @@
+import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { PUBLIC_DIR } from '@lib/config/file/file.constants';
 import internationalizeConfig from '@lib/config/locale/internationalize/internationalize.server';
 import serverConfig from '@lib/config/node/server/server';
@@ -15,6 +16,7 @@ export const dev: TaskParamsModel<unknown> = {
     async ({ root }) =>
       // TODO: _ServerConfigModel
       runServer({
+        assetsPathname: fromStatic(PUBLIC_DIR),
         certificate: serverConfig.params().certificate,
         host: process.env.APP_HOST ?? '',
         internationalize: internationalizeConfig.params(),

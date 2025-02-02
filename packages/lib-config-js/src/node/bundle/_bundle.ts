@@ -2,7 +2,6 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { _plugins } from '@lib/config/node/bundle/_plugins';
 import {
   type _BundleConfigModel,
@@ -66,6 +65,7 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
 
 export const _bundle = ({
   aliases,
+  assetsPathname,
   babel,
   buildDir,
   define,
@@ -101,7 +101,7 @@ export const _bundle = ({
 
   const config: _BundleConfigModel = {
     build: {
-      assetsDir: toRelative({ to: publicDir }),
+      assetsDir: publicDir,
 
       commonjsOptions: {
         defaultIsModuleExports: true,
@@ -112,11 +112,13 @@ export const _bundle = ({
         transformMixedEsModules: true,
       },
 
+      copyPublicDir: false,
+
       emptyOutDir: true,
 
       minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
 
-      outDir: joinPaths([fromWorking(), buildDir]),
+      outDir: fromWorking(buildDir),
 
       rollupOptions: {
         ...(entryPathname ? { input: entryPathname } : {}),
@@ -261,6 +263,8 @@ export const _bundle = ({
 
       // process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
     ]),
+
+    publicDir: process.env.NODE_ENV === 'production' ? publicDir : assetsPathname,
 
     resolve: {
       alias: [

@@ -83,11 +83,6 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     await mapSequence(value.map((v) => async () => this.resolveTask(v, context)));
   };
 
-  handleClose = async (): Promise<void> => {
-    this._pids.forEach(process.kill);
-    process.exit(0);
-  };
-
   runTask = async <TType extends unknown>({
     environment,
     name,
@@ -100,7 +95,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     task,
     variables,
   }: TaskParamsModel<TType>): Promise<void> => {
-    const overridesF = overrides && overrides();
+    const overridesF = overrides?.();
     let optionsF = { ...(overridesF ?? {}), ...parseArgs() } as TType & object;
     if (options) {
       const optionsPrompts = options({ name, overrides: overridesF, root });
@@ -114,10 +109,8 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     try {
       logger.info('running', name);
       onBefore && (await this.runTasks(onBefore, context));
-
       process.chdir(root ?? fromRoot());
       setEnvironment({ environment, variables });
-
       await this.runTasks(task, context);
     } catch (e) {
       logger.error(name, (e as Error).stack);

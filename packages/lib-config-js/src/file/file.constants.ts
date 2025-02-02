@@ -83,7 +83,9 @@ export const PRUNE_PATTERNS: Array<string> = [
   'node_modules/**/aws-xray-sdk-core/doc-src/**',
 ];
 
-export const PUBLIC_DIR = 'assets';
+export const PUBLIC_DIR = 'public';
+
+export const ASSETS_DIR = 'assets';
 
 export const EXCLUDE_PATTERNS = [...CLEAN_PATTERNS, '.git', 'ios/Pods', 'node_modules'];
 
@@ -91,6 +93,7 @@ export const EXTENSIONS_BASE = ['.tsx', '.ts', '.jsx', '.js'];
 
 export const FILE_CONFIG: Pick<
   FileConfigModel,
+  | 'assetsDir'
   | 'buildDir'
   | 'cacheDir'
   | 'cleanPatterns'
@@ -100,6 +103,7 @@ export const FILE_CONFIG: Pick<
   | 'prunePatterns'
   | 'publicDir'
 > = {
+  assetsDir: ASSETS_DIR,
   buildDir: BUILD_DIR,
   cacheDir: CACHE_DIR,
   cleanPatterns: CLEAN_PATTERNS,

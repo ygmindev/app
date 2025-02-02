@@ -3,7 +3,7 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import fileConfig from '@lib/config/file/file';
-import { BUILD_DIR, PUBLIC_DIR } from '@lib/config/file/file.constants';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { _bundle } from '@lib/config/node/bundle/_bundle';
 import {
   type _BundleConfigModel,
@@ -49,8 +49,6 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       mainFields: ['module', 'main'],
 
       packager: 'pnpm',
-
-      publicDir: PUBLIC_DIR,
 
       rootDirs: [fromRoot(), ...packageDirs.map((path) => fromPackages(path))],
 

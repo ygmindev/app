@@ -3,7 +3,6 @@ import { type FastifyCookieOptions } from '@fastify/cookie';
 import { fastifyCookie } from '@fastify/cookie';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
 import { _web } from '@lib/config/node/web/_web';
@@ -26,6 +25,7 @@ import toNumber from 'lodash/toNumber';
 import { createDevMiddleware } from 'vike/server';
 
 export const _runServer = async ({
+  assetsPathname,
   certificate,
   host,
   internationalize,
@@ -46,7 +46,11 @@ export const _runServer = async ({
   });
   await app.register(fastifyMiddie);
   await app.register(fastifyCompress);
-  await app.register(fastifyStatic, { prefix: `/${publicDir}/`, root: fromStatic(publicDir) });
+
+  publicDir &&
+    assetsPathname &&
+    (await app.register(fastifyStatic, { prefix: `/${publicDir}/`, root: assetsPathname }));
+
   await app.register(fastifyCookie, {
     secret: process.env.SERVER_APP_SECRET,
   } as FastifyCookieOptions);

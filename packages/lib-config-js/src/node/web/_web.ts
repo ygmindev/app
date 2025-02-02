@@ -1,7 +1,4 @@
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { _bundle } from '@lib/config/node/bundle/_bundle';
 import { type _WebConfigModel, type WebConfigModel } from '@lib/config/node/web/web.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -11,7 +8,7 @@ import { readFileSync } from 'fs';
 import vike from 'vike/plugin';
 import { type WatchOptions } from 'vite';
 
-export const _web = ({ bundle, isSsr, publicDir, server }: WebConfigModel): _WebConfigModel => {
+export const _web = ({ bundle, isSsr, server }: WebConfigModel): _WebConfigModel => {
   const bundleConfigF = _bundle(bundle);
   const {
     certificateDir,
@@ -30,11 +27,7 @@ export const _web = ({ bundle, isSsr, publicDir, server }: WebConfigModel): _Web
   return merge(
     [
       {
-        plugins: filterNil([
-          isSsr && vike({ includeAssetsImportedByServer: true, prerender: { partial: true } }),
-        ]),
-
-        publicDir: toRelative({ from: fromWorking(), to: fromStatic(publicDir) }),
+        plugins: filterNil([isSsr && vike({ prerender: { partial: true } })]),
 
         server:
           process.env.NODE_ENV === 'development'

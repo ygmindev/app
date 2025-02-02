@@ -1,4 +1,6 @@
 export type FileConfigModel = {
+  assetsDir: string;
+
   backupPath: string;
 
   buildDir: string;

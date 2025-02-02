@@ -1,9 +1,11 @@
+import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { BUILD_DIR } from '@lib/config/file/file.constants';
+import { ASSETS_DIR, BUILD_DIR, PUBLIC_DIR } from '@lib/config/file/file.constants';
 import webConfig from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildApp } from '@lib/shared/web/utils/buildApp/buildApp';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
+import { copy } from '@tool/task/file/utils/copy/copy';
 import { staticServer } from '@tool/task/server/utils/staticServer/staticServer';
 
 export const build: TaskParamsModel<unknown> = {
@@ -15,6 +17,12 @@ export const build: TaskParamsModel<unknown> = {
 
   task: [
     () => buildApp({ web: webConfig.params() }),
+
+    ({ root }) =>
+      copy({
+        from: fromStatic(PUBLIC_DIR),
+        to: joinPaths([root, BUILD_DIR, 'client', PUBLIC_DIR, ASSETS_DIR]),
+      }),
 
     ({ root }) =>
       process.env.APP_IS_STATIC_SERVER &&
