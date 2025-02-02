@@ -21,7 +21,7 @@ export const build: TaskParamsModel<unknown> = {
     ({ root }) =>
       copy({
         from: fromStatic(PUBLIC_DIR),
-        to: joinPaths([root, BUILD_DIR, 'client', PUBLIC_DIR, ASSETS_DIR]),
+        to: joinPaths([root, BUILD_DIR, 'client', ASSETS_DIR]),
       }),
 
     ({ root }) =>
