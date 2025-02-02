@@ -1,5 +1,4 @@
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { PUBLIC_DIR } from '@lib/config/file/file.constants';
+import { fromAssets } from '@lib/backend/file/utils/fromAssets/fromAssets';
 import configBase from '@lib/config/locale/internationalize/internationalize.frontend';
 import {
   type _InternationalizeConfigModel,
@@ -15,7 +14,7 @@ export const config = defineConfig<InternationalizeConfigModel, _Internationaliz
     {
       isPreload: true,
 
-      localePath: fromStatic(PUBLIC_DIR),
+      localePath: fromAssets(),
 
       modules: [Backend],
     },
