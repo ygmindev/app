@@ -2,22 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "app web dev dev",
-            "type": "node",
+            "name": "awjb",
+            "args": ["awjb"],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "outputCapture": "std",
+            "program": "${workspaceRoot}/packages/tool-task-js/cli.js",
             "request": "launch",
+            "runtimeExecutable": "tsx",
             "sourceMaps": true,
-            "program": "${workspaceRoot}/packages/tool-task-js/src/index.js",
-            "args": ["awjjd"],
-            "outputCapture": "std"
-        },
-        {
-            "name": "backend server dev",
-            "type": "node",
-            "request": "launch",
-            "sourceMaps": true,
-            "program": "${workspaceRoot}/packages/tool-task-js/src/index.js",
-            "args": ["bsd"],
-            "outputCapture": "std"
+            "type": "node"
         }
     ]
 }

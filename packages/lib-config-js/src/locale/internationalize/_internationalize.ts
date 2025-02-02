@@ -27,7 +27,7 @@ export const _internationalize = ({
 
     fallbackLng: languageDefault,
 
-    initImmediate: !isPreload,
+    initAsync: !isPreload,
 
     interpolation: { escapeValue: false },
 
@@ -37,7 +37,7 @@ export const _internationalize = ({
 
     ns: [],
 
-    partialBundledLanguages: !isPreload,
+    partialBundledLanguages: !!isPreload,
 
     preload: isPreload ? [languageF] : false,
 

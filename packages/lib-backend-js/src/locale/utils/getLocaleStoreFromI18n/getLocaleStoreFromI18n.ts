@@ -12,7 +12,10 @@ export const getLocaleStoreFromI18n = ({
     return i18n.languages.reduce(
       (result, lang) => ({
         ...result,
-        [lang]: namespaces.reduce((nsResult, ns) => ({ ...nsResult, [ns]: data?.[lang]?.[ns] }), {}),
+        [lang]: namespaces.reduce(
+          (nsResult, ns) => ({ ...nsResult, [ns]: data?.[lang]?.[ns] }),
+          {},
+        ),
       }),
       {},
     );
