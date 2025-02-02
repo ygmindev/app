@@ -9,7 +9,6 @@ const { languageDefault } = INTERNATIONALIZE_CONFIG;
 
 export const _useTranslation = (ns: _UseTranslationParamsModel = []): _UseTranslationModel => {
   const { i18n, ready, t } = useTranslation(ns);
-
   return {
     currentLanguage: i18n.resolvedLanguage ?? languageDefault,
     currentLanguageSet: async (value) => {

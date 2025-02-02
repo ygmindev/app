@@ -4,12 +4,12 @@ import {
   type InternationalizeConfigModel,
 } from '@lib/config/locale/internationalize/internationalize.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import I18NextHttpBackend from 'i18next-http-backend';
+import HttpBackend from 'i18next-http-backend';
 
 export const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
   ...configBase,
 
-  overrides: () => [{ modules: [I18NextHttpBackend] }],
+  overrides: () => [{ modules: [HttpBackend] }],
 });
 
 export default config;

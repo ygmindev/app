@@ -5,7 +5,7 @@ import {
   type InternationalizeConfigModel,
 } from '@lib/config/locale/internationalize/internationalize.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import Backend from 'i18next-fs-backend';
+import FsBackend from 'i18next-fs-backend';
 
 export const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
   ...configBase,
@@ -16,7 +16,7 @@ export const config = defineConfig<InternationalizeConfigModel, _Internationaliz
 
       localePath: fromAssets(),
 
-      modules: [Backend],
+      modules: [FsBackend],
     },
   ],
 });

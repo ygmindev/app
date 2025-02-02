@@ -37,7 +37,7 @@ export const _internationalize = ({
 
     ns: [],
 
-    partialBundledLanguages: !!isPreload,
+    partialBundledLanguages: !isPreload,
 
     preload: isPreload ? [languageF] : false,
 
@@ -57,7 +57,11 @@ export const _internationalize = ({
 
   let instance: i18n;
   if (instanceGlobal) {
-    instance = instanceGlobal.cloneInstance({ ...config, initImmediate: false });
+    instance = instanceGlobal.cloneInstance({
+      ...config,
+      forkResourceStore: true,
+      initImmediate: false,
+    });
   } else {
     instance = instanceGlobal = createInstance(config);
   }

@@ -1,6 +1,6 @@
 import { fromAssets } from '@lib/backend/file/utils/fromAssets/fromAssets';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { ASSETS_DIR, BUILD_DIR } from '@lib/config/file/file.constants';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import webConfig from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildApp } from '@lib/shared/web/utils/buildApp/buildApp';
@@ -21,7 +21,7 @@ export const build: TaskParamsModel<unknown> = {
     ({ root }) =>
       copy({
         from: fromAssets(),
-        to: joinPaths([root, BUILD_DIR, 'client', ASSETS_DIR]),
+        to: joinPaths([root, BUILD_DIR, 'client']),
       }),
 
     ({ root }) =>

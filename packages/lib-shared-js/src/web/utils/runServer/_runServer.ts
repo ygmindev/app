@@ -69,6 +69,7 @@ export const _runServer = async ({
   app.get('*', async (req, res) => {
     const { cookies, i18n, language } = req;
     const url = req.originalUrl ?? req.url;
+
     logger.info(req.method, url);
 
     const { error, redirectTo, response } = await render({

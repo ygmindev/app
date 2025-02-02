@@ -1,7 +1,7 @@
+import { fromAssets } from '@lib/backend/file/utils/fromAssets/fromAssets';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { PUBLIC_DIR } from '@lib/config/file/file.constants';
 import configBase from '@lib/config/node/bundle/bundle.base';
 import {
@@ -15,7 +15,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
   overrides: () => [
     {
-      assetsPathname: fromStatic(PUBLIC_DIR),
+      assetsPathname: fromAssets(),
 
       // aliases: [
       //   { from: 'react', to: fromModules('react/cjs/react.production.min.js') },
