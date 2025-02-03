@@ -1,10 +1,8 @@
-import { type UseAppGraphqlModel } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql.models';
-import { useGraphql } from '@lib/frontend/data/hooks/useGraphql/useGraphQl';
-import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
+import { useAppGraphql as useAppGraphqlBase } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql.base';
+import {
+  type UseAppGraphqlModel,
+  type UseAppGraphqlParamsModel,
+} from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql.models';
 
-export const useAppGraphql = (): UseAppGraphqlModel =>
-  useGraphql({
-    host: process.env.SERVER_APP_HOST,
-    pathname: `api/${GRAPHQL}`,
-    port: process.env.SERVER_APP_PORT,
-  });
+export const useAppGraphql = ({ ...params }: UseAppGraphqlParamsModel = {}): UseAppGraphqlModel =>
+  useAppGraphqlBase({ ...params });
