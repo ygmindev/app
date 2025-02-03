@@ -6,5 +6,7 @@ import {
 import { build } from 'vike/api';
 
 export const _buildApp = async ({ web }: _BuildAppParamsModel): _BuildAppModel => {
+  console.warn(111);
   await build({ viteConfig: { ..._web(web), configFile: false } });
+  console.warn(222);
 };

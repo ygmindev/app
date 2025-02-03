@@ -21,6 +21,8 @@ export const build: TaskParamsModel<unknown> = {
 
     () => buildApp({ web: webConfig.params() }),
 
+    () => console.warn('@@@ COMPLETE'),
+
     ({ root }) =>
       copy({
         from: fromAssets(),
