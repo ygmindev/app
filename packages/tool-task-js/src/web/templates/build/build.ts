@@ -5,6 +5,7 @@ import webConfig from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildApp } from '@lib/shared/web/utils/buildApp/buildApp';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
+import { runClean } from '@tool/task/core/utils/runClean/runClean';
 import { copy } from '@tool/task/file/utils/copy/copy';
 import { staticServer } from '@tool/task/server/utils/staticServer/staticServer';
 
@@ -16,6 +17,8 @@ export const build: TaskParamsModel<unknown> = {
   onBefore: ['build-config-typescript', 'build-config-lint'],
 
   task: [
+    async () => runClean({ patterns: [BUILD_DIR] }),
+
     () => buildApp({ web: webConfig.params() }),
 
     ({ root }) =>

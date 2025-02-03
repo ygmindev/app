@@ -2272,6 +2272,8 @@ type Query {
   RoleGetConnection(input: RoleGetConnectionInput): RoleGetConnectionOutput
   RoleGetMany(input: RoleGetManyInput): RoleGetManyOutput
   RoleSearch(input: RoleSearchInput): RoleSearchOutput
+  SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
+  SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
   SocketGet(input: SocketGetInput): SocketGetOutput
   SocketGetConnection(input: SocketGetConnectionInput): SocketGetConnectionOutput
   SocketGetMany(input: SocketGetManyInput): SocketGetManyOutput
@@ -2564,6 +2566,58 @@ input SignInUsernameCreateInput {
 
 type SignInUsernameCreateOutput {
   result: SignIn
+}
+
+type Snapshot {
+  images: [String]
+  name: String
+}
+
+input SnapshotGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [SnapshotInput]
+  resourceValue: SnapshotInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input SnapshotGetInput {
+  filter: [SnapshotGetFilterInput]
+  root: String
+}
+
+input SnapshotGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [SnapshotInput]
+  resourceValue: SnapshotInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input SnapshotGetManyInput {
+  filter: [SnapshotGetManyFilterInput]
+  root: String
+}
+
+type SnapshotGetManyOutput {
+  result: [Snapshot]
+}
+
+type SnapshotGetOutput {
+  result: Snapshot
+}
+
+input SnapshotInput {
+  images: [String]
+  name: String
 }
 
 type Socket {

@@ -17,6 +17,7 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel =>
     {
       element: <PingPage />,
       pathname: PING,
+      prerender: true,
     },
 
     {

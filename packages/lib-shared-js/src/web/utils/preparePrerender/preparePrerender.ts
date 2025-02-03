@@ -11,7 +11,7 @@ import trimEnd from 'lodash/trimEnd';
 const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'] =>
   routes?.reduce(
     (result, route) => {
-      if (route.isProtectable || route.prerender === false) {
+      if (route.isProtectable || !route.prerender) {
         return result;
       }
       const pathnameF = trimPathname(`${route.parent ?? ''}/${trimEnd(route.pathname, '/*')}`);

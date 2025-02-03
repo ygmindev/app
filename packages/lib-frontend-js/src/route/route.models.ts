@@ -31,7 +31,7 @@ export type RouteModel<
   params?: TParams;
   parent?: string;
   pathname: string;
-  prerender?: false | Array<string>;
+  prerender?: boolean | Array<string>;
   routes?: Array<RouteModel>;
   title?: AsyncTextModel;
   transition?: RouteTransitionModel;
