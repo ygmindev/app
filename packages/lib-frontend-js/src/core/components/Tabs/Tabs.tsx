@@ -49,6 +49,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
       border={isContained ? true : isUnderline ? DIRECTION.BOTTOM : undefined}
       height={theme.shape.size[THEME_SIZE.MEDIUM]}
       isAlign
+      isFullWidth
       isHorizontalScrollable
       isRow
       justifySelf={FLEX_ALIGN.CENTER}
