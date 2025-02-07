@@ -9,4 +9,5 @@ export enum FLEX_ALIGN {
   CENTER = 'center',
   END = 'flex-end',
   START = 'flex-start',
+  STRETCH = 'stretch',
 }

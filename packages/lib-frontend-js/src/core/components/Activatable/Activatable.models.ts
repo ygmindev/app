@@ -5,6 +5,8 @@ import { type ReactElement } from 'react';
 
 export type ActivatablePropsModel = {
   onActive?(): void;
+  onHoverIn?(): void;
+  onHoverOut?(): void;
   onInactive?(): void;
   trigger?: ActivatableTriggerModel;
 } & ChildPropsModel<

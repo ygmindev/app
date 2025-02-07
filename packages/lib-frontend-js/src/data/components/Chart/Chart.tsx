@@ -18,7 +18,6 @@ export const Chart = <TType,>({
     <Wrapper
       {...wrapperProps}
       border
-      flex
       height={height}
       p
       round

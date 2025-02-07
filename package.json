@@ -23,7 +23,7 @@
     ],
     "license": "MIT",
     "name": "app",
-    "packageManager": "pnpm@9.15.4",
+    "packageManager": "pnpm@9.15.5+sha256.8472168c3e1fd0bff287e694b053fccbbf20579a3ff9526b6333beab8df65a8d",
     "private": true,
     "scripts": {
         "node-install": "pnpm install --shamefully-hoist && npm link && run bct && run bcl"

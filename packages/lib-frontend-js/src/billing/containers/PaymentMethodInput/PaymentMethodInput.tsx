@@ -1,6 +1,7 @@
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { BILLING } from '@lib/frontend/billing/billing.constants';
-import { NewPaymentMethodForm } from '@lib/frontend/billing/containers/NewPaymentMethodForm/NewPaymentMethodForm';
+import { NewPaymentMethodInput } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput';
+import { type NewPaymentMethodInputRefModel } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput.models';
 import {
   type PaymentMethodInputPropsModel,
   type PaymentMethodInputRefModel,
@@ -13,10 +14,10 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Chip } from '@lib/frontend/core/components/Chip/Chip';
 import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
-import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Title } from '@lib/frontend/core/components/Title/Title';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ModalFormButton } from '@lib/frontend/core/containers/ModalFormButton/ModalFormButton';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
 import { type DataBoundaryRefModel } from '@lib/frontend/data/components/DataBoundary/DataBoundary.models';
@@ -53,7 +54,6 @@ export const PaymentMethodInput: RLFCModel<
   const { userUpdate } = useSignInResource();
   const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
   const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
-
   const { getMany } = usePaymentMethodResource({ root: currentUser?._id });
   const refF =
     useRef<
@@ -61,6 +61,8 @@ export const PaymentMethodInput: RLFCModel<
         OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>
       >
     >(null);
+
+  const inputRef = useRef<NewPaymentMethodInputRefModel>(null);
 
   const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
@@ -105,20 +107,24 @@ export const PaymentMethodInput: RLFCModel<
         justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
         <Text fontStyle={FONT_STYLE.HEADLINE}>{t('billing:paymentMethod')}</Text>
 
-        <ModalButton
-          element={({ onClose }) => (
-            <NewPaymentMethodForm
-              onCancel={onClose}
-              onSuccess={async () => {
-                void refF.current?.reset?.();
-                onClose();
-              }}
-            />
-          )}
+        <ModalFormButton
+          fields={[
+            {
+              element: <NewPaymentMethodInput ref={ref} />,
+              id: PAYMENT_METHOD_RESOURCE_NAME,
+            },
+          ]}
           icon="add"
+          isFullHeight
+          onComplete={() => {
+            void refF.current?.reset?.();
+          }}
+          onSubmit={async () => (await inputRef.current?.submit()) || null}
+          p
+          successMessage={t('billing:paymentMethodSuccess')}
           type={BUTTON_TYPE.TRANSPARENT}>
           {t('core:new', { value: t('billing:paymentMethod') })}
-        </ModalButton>
+        </ModalFormButton>
       </Wrapper>
 
       <DataBoundary

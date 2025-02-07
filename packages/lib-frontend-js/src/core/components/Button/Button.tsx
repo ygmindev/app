@@ -172,7 +172,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = forwardRef(
 
     childrenF = childrenF ? (
       <Wrapper
-        align={FLEX_ALIGN.CENTER}
+        align={align}
         isRow
         s={s ?? THEME_SIZE.SMALL}>
         {isFunction(leftElement) ? leftElement(isActive) : leftElement}

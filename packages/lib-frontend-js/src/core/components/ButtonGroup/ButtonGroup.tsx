@@ -1,6 +1,8 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { type ButtonGroupPropsModel } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup.models';
+import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
+import { ModalFormButton } from '@lib/frontend/core/containers/ModalFormButton/ModalFormButton';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
@@ -35,15 +37,27 @@ export const ButtonGroup: LFCModel<ButtonGroupPropsModel> = ({
       height={height}
       isRow
       p={THEME_SIZE.SMALL}
-      s={0}
+      s={THEME_SIZE.SMALL}
       size={size}>
-      {children.map((child) =>
-        cloneElement(child, {
-          ...props,
-          height: heightF,
-          isShadow: false,
-          type: props.type === BUTTON_TYPE.TRANSPARENT ? BUTTON_TYPE.INVISIBLE : props.type,
-        }),
+      {children.map((child, i) =>
+        cloneElement(
+          child,
+          child.type === Button || child.type === ModalButton || child.type === ModalFormButton
+            ? {
+                ...props,
+                height: heightF,
+                isShadow: false,
+                key: child.key ?? i,
+                type: props.type === BUTTON_TYPE.TRANSPARENT ? BUTTON_TYPE.INVISIBLE : props.type,
+              }
+            : {
+                alignSelf: FLEX_ALIGN.STRETCH,
+                isVertical: true,
+                key: child.key ?? i,
+                mVertical: THEME_SIZE.SMALL,
+                p: THEME_SIZE.SMALL,
+              },
+        ),
       )}
     </Button>
   );

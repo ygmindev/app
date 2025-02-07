@@ -13,7 +13,7 @@ import isFunction from 'lodash/isFunction';
 import { cloneElement, forwardRef, type ReactElement, useImperativeHandle, useState } from 'react';
 
 export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> = forwardRef(
-  ({ children, onActive, onInactive, trigger, ...props }, ref) => {
+  ({ children, onActive, onHoverIn, onHoverOut, onInactive, trigger, ...props }, ref) => {
     const { styles } = useStyles({ props });
     const isMobile = useIsMobile();
     const [isActive, isActiveSet] = useState<boolean>(false);
@@ -23,25 +23,30 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
     const triggerF = trigger ?? (isMobile ? ACTIVATABLE_TRIGGER.PRESS : ACTIVATABLE_TRIGGER.HOVER);
 
     const handleToggle = (value?: boolean): void => {
-      isActiveSet(value || false);
-      value ? onActive && onActive() : onInactive && onInactive();
+      isActiveSet(value ?? false);
+      value ? onActive?.() : onInactive?.();
+    };
+
+    const handleHover = (value?: boolean): void => {
+      value ? onHoverIn?.() : onHoverOut?.();
+      handleToggle(value);
     };
 
     const handlePress = (): void => {
       const { onPress } = childrenF?.props as PressablePropsModel;
-      onPress && void onPress();
+      void onPress?.();
       handleToggle(!isActive);
     };
 
     const handlePressIn = (): void => {
       const { onPressIn } = childrenF?.props as PressablePropsModel;
-      onPressIn && void onPressIn();
+      void onPressIn?.();
       handleToggle(true);
     };
 
     const handlePressOut = (): void => {
       const { onPressOut } = childrenF?.props as PressablePropsModel;
-      onPressOut && void onPressOut();
+      void onPressOut?.();
       handleToggle(false);
     };
 
@@ -55,13 +60,13 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
       switch (triggerF) {
         case ACTIVATABLE_TRIGGER.HOVER:
           return _isHoverable()
-            ? { onMouseEnter: () => handleToggle(true), onMouseLeave: () => handleToggle(false) }
+            ? { onMouseEnter: () => handleHover(true), onMouseLeave: () => handleHover(false) }
             : {};
         case ACTIVATABLE_TRIGGER.FOCUS:
           return {
             onPressIn: handlePressIn,
             onPressOut: handlePressOut,
-            onResponderGrant: handlePressOut,
+            onResponderGrant: handlePressIn,
             onResponderRelease: handlePressOut,
           };
         case ACTIVATABLE_TRIGGER.PRESS:

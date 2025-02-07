@@ -84,6 +84,7 @@ export const IONIC_ICONS = {
   pie: 'pie-chart-outline',
   preferences: 'options-outline',
   question: 'help-outline',
+  redo: 'arrow-redo-outline',
   refresh: 'refresh-outline',
   remove: 'remove-circle-outline',
   repeat: 'repeat-outline',
@@ -116,8 +117,13 @@ export const IONIC_ICONS = {
 };
 
 export const FONTAWESOME_ICONS = {
+  alignCenter: 'align-center',
+  alignJustify: 'align-justify',
+  alignLeft: 'align-left',
+  alignRight: 'align-right',
   ban: 'ban',
   bank: 'bank',
+  bold: 'bold',
   contact: 'address-book-o',
   copyright: 'copyright',
   database: 'database',
@@ -126,12 +132,19 @@ export const FONTAWESOME_ICONS = {
   fist: 'hand-grab-o',
   hand: 'hand-stop-o',
   id: 'id-card-o',
+  indent: 'indent',
+  italic: 'italic',
+  link: 'link',
+  outdent: 'outdent',
   range: 'arrows-h',
   target: 'crosshairs',
+  underline: 'underline',
+  unlink: 'unlink',
 };
 
 export const MATERIAL_ICONS = {
   brightness: 'brightness-4',
+  bulletList: 'format-list-bulleted',
   chevronDown: 'chevron-down',
   chevronDownDouble: 'chevron-double-down',
   chevronLeft: 'chevron-left',
@@ -140,6 +153,8 @@ export const MATERIAL_ICONS = {
   chevronRightDouble: 'chevron-double-right',
   chevronUp: 'chevron-up',
   chevronUpDouble: 'chevron-double-up',
+  numberList: 'format-list-numbered',
+  text: 'format-text',
 };
 
 export const ICONS = {

@@ -30,6 +30,8 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
       elementState,
       onActive,
       onElementStateChange,
+      onHoverIn,
+      onHoverOut,
       onInactive,
       onPress,
       onPressIn,
@@ -46,8 +48,14 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean | undefined>();
     const { wrapperProps } = useLayoutStyles({ props });
 
-    const { elementStateControlled, elementStateControlledSet, isActive, isBlocked } =
+    const { elementStateControlled, elementStateControlledSet, isBlocked } =
       useElementStateControlled({ elementState, onElementStateChange });
+
+    const [isTooltipOpen, isTooltipOpenSet] = useState<boolean>();
+    const handleHover = (value?: boolean): void => {
+      value ? onHoverIn?.() : onHoverOut?.();
+      isTooltipOpenSet(value);
+    };
 
     const handleButtonPress = onPress
       ? async (): Promise<void> => {
@@ -64,7 +72,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     const handlePress = onPress
       ? async (): Promise<void> => {
           if (!isBlocked) {
-            const result = onPress && onPress();
+            const result = onPress?.();
             if (isPromise(result)) {
               elementStateControlledSet(ELEMENT_STATE.LOADING);
               await result;
@@ -80,15 +88,17 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
           onActive={
             onPress
               ? () => {
-                  onActive && onActive();
+                  onActive?.();
                   elementStateControlledSet(ELEMENT_STATE.ACTIVE);
                 }
               : undefined
           }
+          onHoverIn={() => handleHover(true)}
+          onHoverOut={() => handleHover(false)}
           onInactive={
             onPress
               ? () => {
-                  onInactive && onInactive();
+                  onInactive?.();
                   elementStateControlledSet(ELEMENT_STATE.INACTIVE);
                 }
               : undefined
@@ -161,7 +171,7 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forw
     return tooltip ? (
       <Droppable
         anchor={() => element}
-        isOpen={isActive}>
+        isOpen={isTooltipOpen}>
         <AsyncText>{tooltip}</AsyncText>
       </Droppable>
     ) : (

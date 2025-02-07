@@ -21,11 +21,14 @@ import { props as modalButtonProps } from '@lib/frontend/core/components/ModalBu
 import { props as pressableProps } from '@lib/frontend/core/components/Pressable/Pressable.library';
 import { props as pressableTitleProps } from '@lib/frontend/core/components/PressableTitle/PressableTitle.library';
 import { props as textProps } from '@lib/frontend/core/components/Text/Text.library';
+import { props as textEditorProps } from '@lib/frontend/core/components/TextEditor/TextEditor.library';
 import { props as tileProps } from '@lib/frontend/core/components/Tile/Tile.library';
 import { props as titleProps } from '@lib/frontend/core/components/Title/Title.library';
 import { props as tooltipIconProps } from '@lib/frontend/core/components/TooltipIcon/TooltipIcon.library';
 import { props as wrapperProps } from '@lib/frontend/core/components/Wrapper/Wrapper.library';
+import { props as modalFormButtonProps } from '@lib/frontend/core/containers/ModalFormButton/ModalFormButton.library';
 import { props as calendarInputProps } from '@lib/frontend/data/components/CalendarInput/CalendarInput.library';
+import { props as chartProps } from '@lib/frontend/data/components/Chart/Chart.library';
 import { props as checkboxInput } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput.library';
 import { props as dateInputProps } from '@lib/frontend/data/components/DateInput/DateInput.library';
 import { props as fileInputProps } from '@lib/frontend/data/components/FileInput/FileInput.library';
@@ -47,6 +50,7 @@ export const LIBRARY_PROPS = [
   buttonProps,
   calendarInputProps,
   categoryInputProps,
+  chartProps,
   checkboxInput,
   chipProps,
   circleProps,
@@ -61,6 +65,7 @@ export const LIBRARY_PROPS = [
   logoProps,
   menuProps,
   modalButtonProps,
+  modalFormButtonProps,
   modalProps,
   notificationProps,
   notificationsProps,
@@ -72,6 +77,7 @@ export const LIBRARY_PROPS = [
   selectInputProps,
   slidesProps,
   switchInputProps,
+  textEditorProps,
   textInputProps,
   textProps,
   tileProps,

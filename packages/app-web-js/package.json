@@ -9,10 +9,11 @@
     "@emotion/react": "^11.14.0",
     "@floating-ui/react": "^0.27.3",
     "@floating-ui/react-dom": "^2.1.2",
-    "@loadable/component": "^5.16.4",
+    "@lexical/react": "^0.23.1",
     "@lib/config": "workspace:^",
     "@lib/frontend": "workspace:^",
     "@lib/shared": "workspace:^",
+    "@loadable/component": "^5.16.4",
     "@react-google-maps/api": "^2.20.5",
     "@reduxjs/toolkit": "2.5.0",
     "@rpldy/upload-button": "^1.9.0",
@@ -50,6 +51,7 @@
     "i18next-fs-backend": "^2.6.0",
     "i18next-http-backend": "^3.0.1",
     "json-stringify-safe": "^5.0.1",
+    "lexical": "^0.23.1",
     "libphonenumber-js": "^1.11.18",
     "lodash": "^4.17.21",
     "moti": "^0.29.0",
@@ -91,7 +93,7 @@
     "react-dom": "^18.3.1"
   },
   "exports": {
-    "./*":{
+    "./*": {
       "development": "./src/*",
       "default": "./src/*"
     }

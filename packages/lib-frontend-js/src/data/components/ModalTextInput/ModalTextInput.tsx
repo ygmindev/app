@@ -8,9 +8,8 @@ import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { forwardRef, useState } from 'react';
 
 export const ModalTextInput: RLFCModel<ModalTextInputRefModel, ModalTextInputPropsModel> =
-  forwardRef(({ ...props }, ref) => {
+  forwardRef(({ element, ...props }, ref) => {
     const [isOpen, isOpenSet] = useState<boolean>();
-
     return (
       <>
         <TextInput

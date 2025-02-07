@@ -12,7 +12,7 @@ import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { forwardRef, useState } from 'react';
 
 export const ModalButton: RLFCModel<ModalButtonRefModel, ModalButtonPropsModel> = forwardRef(
-  ({ element, isFullSize = true, onClose, onPress, title, ...props }, ref) => {
+  ({ element, isFullSize, onClose, onPress, title, ...props }, ref) => {
     const { t } = useTranslation();
     const [isOpen, isOpenSet] = useState<boolean>();
 

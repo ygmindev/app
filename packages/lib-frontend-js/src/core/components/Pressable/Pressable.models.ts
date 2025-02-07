@@ -11,7 +11,10 @@ import { type FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler
 export type PressablePropsModel = Pick<ActivatablePropsModel, 'children'> &
   Omit<WrapperPropsModel, 'children'> &
   AnimatablePropsModel &
-  Pick<ActivatablePropsModel, 'onActive' | 'onInactive' | 'trigger'> & {
+  Pick<
+    ActivatablePropsModel,
+    'onActive' | 'onInactive' | 'onHoverIn' | 'onHoverOut' | 'trigger'
+  > & {
     confirmColor?: ThemeColorModel;
     confirmMessage?: AsyncTextModel;
     fontAlign?: FontAlignModel;

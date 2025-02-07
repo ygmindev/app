@@ -1,3 +1,5 @@
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
+import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type AsyncBoundaryContextModel } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type ElementStatePropsModel } from '@lib/frontend/core/core.models';
 import {
@@ -7,12 +9,12 @@ import {
   type SubmittablePropsModel,
 } from '@lib/frontend/data/data.models';
 import { type UseFormParamsModel } from '@lib/frontend/data/hooks/useForm/useForm.models';
-import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type FunctionComponentElement, type ReactNode, type RefObject } from 'react';
 
-export type FormContainerPropsModel<TType, TResult = void> = UseFormParamsModel<TType, TResult> &
+export type FormContainerPropsModel<TType, TResult = void> = WrapperPropsModel &
+  UseFormParamsModel<TType, TResult> &
   SubmittablePropsModel<TType, TResult> &
   Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
     bottomElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;

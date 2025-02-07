@@ -7,7 +7,14 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_COLOR_MORE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const Divider: LFCModel<DividerPropsModel> = ({ children, isVertical, ...props }) => {
+export const Divider: LFCModel<DividerPropsModel> = ({
+  children,
+  isVertical,
+  m,
+  mHorizontal,
+  mVertical,
+  ...props
+}) => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
     <Wrapper
@@ -21,6 +28,9 @@ export const Divider: LFCModel<DividerPropsModel> = ({ children, isVertical, ...
         border={isVertical ? DIRECTION.LEFT : DIRECTION.TOP}
         bottom={isVertical ? 0 : undefined}
         left={isVertical ? undefined : 0}
+        m={m}
+        mHorizontal={mHorizontal}
+        mVertical={mVertical}
         position={SHAPE_POSITION.ABSOLUTE}
         right={isVertical ? undefined : 0}
         top={isVertical ? 0 : undefined}
