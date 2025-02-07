@@ -12,7 +12,7 @@ const L = 30;
 export const chartPropsFixture: ChartPropsModel<ChartFixtureModel> = {
   data: range(1, 50).map((x) => ({
     x,
-    y: (K / L) * (x / L) ** (K - 1) * Math.E ** (((-1 * x) / L) ** K),
+    y: 1 - Math.E ** (((-1 * x) / L) ** K), // weibull distribution
   })),
   series: [
     { id: 'x', title: 'x' },
