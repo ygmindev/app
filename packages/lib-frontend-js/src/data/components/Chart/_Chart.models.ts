@@ -7,6 +7,6 @@ export type _ChartPropsModel<TType> = {
   gradientStep: number;
   series?: Array<WithIdModel<StringKeyModel<TType>> & { title?: AsyncTextModel }>;
   xKey: string;
-  yKey: string;
-  zKey?: string;
+  // yKey: string;
+  // zKey?: string;
 };

@@ -18,7 +18,6 @@ export const _Chart = <TType,>({
   gradientStep,
   series,
   xKey,
-  yKey,
   ...props
 }: SFCPropsModel<_ChartPropsModel<TType>>): ReactElement<
   SFCPropsModel<_ChartPropsModel<TType>>
@@ -48,7 +47,13 @@ export const _Chart = <TType,>({
     <ResponsiveContainer>
       <LineChart
         data={data}
-        margin={{ bottom: 0, left: 0, right: 0, top: 0 }}>
+        margin={{
+          bottom: theme.shape.spacing[THEME_SIZE.SMALL],
+          left: theme.shape.spacing[THEME_SIZE.SMALL],
+          right: theme.shape.spacing[THEME_SIZE.SMALL],
+          top: theme.shape.spacing[THEME_SIZE.SMALL],
+        }}
+        style={style}>
         <XAxis
           dataKey={xKey}
           stroke={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
@@ -56,14 +61,16 @@ export const _Chart = <TType,>({
         />
 
         <YAxis
-          dataKey={yKey}
           stroke={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
           style={style}
         />
 
         <Tooltip />
 
-        <Legend payload={seriesF} />
+        <Legend
+          payload={seriesF}
+          style={style}
+        />
 
         {seriesF.map(({ color, id }) => (
           <Line
@@ -71,6 +78,7 @@ export const _Chart = <TType,>({
             key={id}
             stroke={color}
             strokeWidth={2}
+            style={style}
             type="monotone"
           />
         ))}

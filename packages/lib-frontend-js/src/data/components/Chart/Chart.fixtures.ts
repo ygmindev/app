@@ -15,11 +15,7 @@ export const chartPropsFixture: ChartPropsModel<ChartFixtureModel> = {
     y: 1 - Math.E ** (((-1 * x) / L) ** K), // weibull distribution CDF
   })),
 
-  series: [
-    { id: 'x', title: 'x' },
-    { id: 'y', title: 'y' },
-  ],
+  series: [{ id: 'y', title: 'y' }],
 
   xKey: 'x',
-  yKey: 'y',
 };

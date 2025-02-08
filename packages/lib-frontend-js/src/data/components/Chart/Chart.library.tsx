@@ -10,8 +10,8 @@ export const props: LibraryPropsModel<ChartPropsModel<ChartFixtureModel>> = {
   Component: Chart,
   defaultProps: {
     ...chartPropsFixture,
-    height: 300,
-    width: 300,
+    height: 400,
+    width: 400,
   },
   variants: [],
 };
