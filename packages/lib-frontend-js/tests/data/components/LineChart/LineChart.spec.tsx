@@ -1,5 +1,5 @@
-import { type LineChartPropsModel } from '@lib/frontend/data/components/LineChart/LineChart.models';
-import { LineChart } from '@lib/frontend/data/components/LineChart/LineChart';
+import { type LineChartPropsModel } from '@lib/frontend/chart/components/LineChart/LineChart.models';
+import { LineChart } from '@lib/frontend/chart/components/LineChart/LineChart';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 

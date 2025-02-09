@@ -76,12 +76,6 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
       }
     })();
 
-    if (triggerF === 'focus') {
-      console.warn(triggerProps);
-      console.warn(childrenF);
-      console.warn('\n\n');
-    }
-
     return childrenF
       ? cloneElement(childrenF, { ...triggerProps, style: { ...childrenF.props.style, ...styles } })
       : childrenF || null;

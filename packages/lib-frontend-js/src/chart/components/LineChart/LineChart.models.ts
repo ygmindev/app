@@ -1,3 +1,3 @@
-import { type _LineChartPropsModel } from '@lib/frontend/data/components/LineChart/_LineChart.models';
+import { type _LineChartPropsModel } from '@lib/frontend/chart/components/LineChart/_LineChart.models';
 
-export type LineChartPropsModel = _LineChartPropsModel;
+export type LineChartPropsModel<TType> = _LineChartPropsModel<TType>;

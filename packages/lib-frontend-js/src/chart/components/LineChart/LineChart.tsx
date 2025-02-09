@@ -1,15 +1,15 @@
-import { _LineChart } from '@lib/frontend/data/components/LineChart/_LineChart';
-import { type _LineChartPropsModel } from '@lib/frontend/data/components/LineChart/_LineChart.models';
-import { type LineChartPropsModel } from '@lib/frontend/data/components/LineChart/LineChart.models';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import { ChartContainer } from '@lib/frontend/chart/ChartContainer/ChartContainer';
+import { _LineChart } from '@lib/frontend/chart/components/LineChart/_LineChart';
+import { type LineChartPropsModel } from '@lib/frontend/chart/components/LineChart/LineChart.models';
+import { type SFCPropsModel } from '@lib/frontend/core/core.models';
+import { type ReactElement } from 'react';
 
-export const LineChart = composeComponent<LineChartPropsModel, _LineChartPropsModel>({
-  Component: _LineChart,
-
-  getProps: ({ children }) => ({
-    children,
-  }),
-});
-
-process.env.APP_IS_DEBUG && (LineChart.displayName = variableName({ LineChart }));
+export const LineChart = <TType,>({
+  ...props
+}: SFCPropsModel<LineChartPropsModel<TType>>): ReactElement<
+  SFCPropsModel<LineChartPropsModel<TType>>
+> => (
+  <ChartContainer {...props}>
+    <_LineChart />
+  </ChartContainer>
+);
