@@ -32,6 +32,7 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = forwardRef
             : result,
         [] as Array<ReactNode>,
       );
+
       return reduce(
         childrenF as Array<ReactElement<WrapperPropsModel>>,
         (result, child) => {

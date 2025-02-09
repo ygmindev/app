@@ -23,6 +23,8 @@ export const getViewParams = (): ComposeComponentParamsModel<
     onMeasure,
     onMouseEnter,
     onMouseLeave,
+    onPressIn,
+    onPressOut,
     onResponderGrant,
     onResponderRelease,
   }) => ({
@@ -37,13 +39,17 @@ export const getViewParams = (): ComposeComponentParamsModel<
         }
       : undefined,
 
-    onMouseEnter: () => onMouseEnter && onMouseEnter(),
+    onMouseEnter: () => onMouseEnter?.(),
 
-    onMouseLeave: () => onMouseLeave && onMouseLeave(),
+    onMouseLeave: () => onMouseLeave?.(),
 
-    onResponderGrant: () => onResponderGrant && onResponderGrant(),
+    onPressIn: () => onPressIn?.(),
 
-    onResponderRelease: () => onResponderRelease && onResponderRelease(),
+    onPressOut: () => onPressOut?.(),
+
+    onResponderGrant: () => onResponderGrant?.(),
+
+    onResponderRelease: () => onResponderRelease?.(),
 
     pointerEvents: isHidden ? 'none' : undefined,
   }),

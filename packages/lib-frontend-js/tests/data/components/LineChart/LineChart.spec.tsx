@@ -1,10 +1,10 @@
-import { type ChartPropsModel } from '@lib/frontend/chart/components/Chart/Chart.models';
-import { Chart } from '@lib/frontend/chart/components/Chart/Chart';
+import { type LineChartPropsModel } from '@lib/frontend/data/components/LineChart/LineChart.models';
+import { LineChart } from '@lib/frontend/data/components/LineChart/LineChart';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<ChartPropsModel>({
-  target: Chart,
+const { Component, displayName, testID } = withTestComponent<LineChartPropsModel>({
+  target: LineChart,
 });
 
 describe(displayName, () => {

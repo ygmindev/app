@@ -19,16 +19,23 @@ export const getViewParams = (): ComposeComponentParamsModel<
 > => ({
   Component: Pressable,
 
-  getProps: ({ onPress, onPressIn, onPressOut, ...props }, ...params) => ({
+  getProps: (
+    { onPress, onPressIn, onPressOut, onResponderGrant, onResponderRelease, ...props },
+    ...params
+  ) => ({
     ...(viewParamsBase.getProps && viewParamsBase.getProps(props, ...params)),
 
     activeOpacity: 1,
 
     onPress: () => onPress && void onPress(),
 
-    onPressIn: () => onPressIn && onPressIn(),
+    onPressIn: () => onPressIn?.(),
 
-    onPressOut: () => onPressOut && onPressOut(),
+    onPressOut: () => onPressOut?.(),
+
+    onResponderGrant: () => onResponderGrant?.(),
+
+    onResponderRelease: () => onResponderRelease?.(),
   }),
 });
 

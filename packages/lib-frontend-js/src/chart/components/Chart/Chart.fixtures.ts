@@ -1,4 +1,4 @@
-import { type ChartPropsModel } from '@lib/frontend/data/components/Chart/Chart.models';
+import { type ChartPropsModel } from '@lib/frontend/chart/components/Chart/Chart.models';
 import range from 'lodash/range';
 
 export type ChartFixtureModel = {

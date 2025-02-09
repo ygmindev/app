@@ -28,7 +28,7 @@ import { props as tooltipIconProps } from '@lib/frontend/core/components/Tooltip
 import { props as wrapperProps } from '@lib/frontend/core/components/Wrapper/Wrapper.library';
 import { props as modalFormButtonProps } from '@lib/frontend/core/containers/ModalFormButton/ModalFormButton.library';
 import { props as calendarInputProps } from '@lib/frontend/data/components/CalendarInput/CalendarInput.library';
-import { props as chartProps } from '@lib/frontend/data/components/Chart/Chart.library';
+import { props as chartProps } from '@lib/frontend/chart/components/Chart/Chart.library';
 import { props as checkboxInput } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput.library';
 import { props as dateInputProps } from '@lib/frontend/data/components/DateInput/DateInput.library';
 import { props as fileInputProps } from '@lib/frontend/data/components/FileInput/FileInput.library';

@@ -1,8 +1,8 @@
+import { _Chart } from '@lib/frontend/chart/components/Chart/_Chart';
+import { type ChartPropsModel } from '@lib/frontend/chart/components/Chart/Chart.models';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
-import { _Chart } from '@lib/frontend/data/components/Chart/_Chart';
-import { type ChartPropsModel } from '@lib/frontend/data/components/Chart/Chart.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type ReactElement } from 'react';
