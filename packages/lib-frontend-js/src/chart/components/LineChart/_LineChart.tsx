@@ -23,6 +23,7 @@ export const _LineChart = <TType,>({
     {series?.map(({ color, id }) => (
       <Line
         dataKey={id}
+        dot={false}
         key={id}
         stroke={color}
         strokeWidth={2}
