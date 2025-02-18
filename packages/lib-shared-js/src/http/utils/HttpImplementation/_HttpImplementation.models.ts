@@ -1,6 +1,7 @@
 import { type HttpRequestParamsModel } from '@lib/shared/http/utils/HttpImplementation/HttpImplementation.models';
 
 export type _HttpRequestParamsModel<TParams> = {
+  onMessage?<TType>(data: TType): void;
   params?: TParams;
   request?: HttpRequestParamsModel;
   url: string;

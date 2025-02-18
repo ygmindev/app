@@ -8,6 +8,8 @@
     "@fastify/compress": "^8.0.1",
     "@fastify/cookie": "^11.0.2",
     "@fastify/static": "^8.0.4",
+    "@graphql-yoga/plugin-graphql-sse": "^3.11.0",
+    "@graphql-yoga/redis-event-target": "^3.0.3",
     "@lib/backend": "workspace:^",
     "@lib/config": "workspace:^",
     "@lib/shared": "workspace:^",
@@ -23,9 +25,11 @@
     "firebase-admin": "^13.0.2",
     "graphql": "^16.10.0",
     "graphql-relay": "^0.10.2",
+    "graphql-ws": "^6.0.3",
     "graphql-yoga": "^5.10.10",
     "http-errors": "^2.0.0",
     "inversify": "^6.2.1",
+    "ioredis": "^5.5.0",
     "json-stringify-safe": "^5.0.1",
     "lodash": "^4.17.21",
     "mongodb": "6.12.0",
@@ -37,12 +41,16 @@
     "stripe": "^17.5.0",
     "thenby": "^1.3.4",
     "twilio": "^5.4.2",
-    "type-graphql": "2.0.0-rc.2"
+    "type-graphql": "2.0.0-rc.2",
+    "ws": "^8.18.0"
   },
   "exports": {
-    "./*":{
+    "./*": {
       "development": "./src/*",
       "default": "./src/*"
     }
+  },
+  "devDependencies": {
+    "pubsub-js": "^1.9.5"
   }
 }

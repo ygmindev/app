@@ -1,5 +1,5 @@
 import { runServer } from '@lib/backend/server/utils/runServer/runServer';
-import serverConfig from '@lib/config/node/server/server';
+import { config as serverConfig } from '@lib/config/node/server/server';
 import { cleanup } from '@service/server/setup/utils/cleanup/cleanup';
 import { initialize } from '@service/server/setup/utils/initialize/initialize';
 

@@ -4,6 +4,8 @@ export const PING = 'ping';
 
 export const WEBSOCKET = 'websocket';
 
+export const SSE = 'sse';
+
 export enum HTTP_METHOD {
   DELETE = 'DELETE',
   GET = 'GET',
@@ -18,6 +20,7 @@ export enum HTTP_RESPONSE_TYPE {
   ARRAYBUFFER = 'arraybuffer',
   BLOB = 'blob',
   JSON = 'json',
+  STREAM = 'stream',
 }
 
 export const HTTP_STATUS_CODE = {

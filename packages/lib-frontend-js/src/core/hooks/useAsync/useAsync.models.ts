@@ -1,5 +1,5 @@
 export type UseAsyncParamsModel = [
-  params: (isMounted: () => boolean) => Promise<void>,
+  params: (isMounted: () => boolean) => Promise<(() => void) | void>,
   deps?: Array<unknown>,
 ];
 

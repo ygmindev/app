@@ -52,6 +52,8 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       rootDirs: [fromRoot(), ...packageDirs.map((path) => fromPackages(path))],
 
+      serverExtension: '.server',
+
       typescript: typescriptConfig.params(),
 
       watch: [

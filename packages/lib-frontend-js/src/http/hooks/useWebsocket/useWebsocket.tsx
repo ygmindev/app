@@ -9,7 +9,7 @@ import { WEBSOCKET_STATUS } from '@lib/shared/http/http.constants';
 
 export const useWebsocket = <TType = unknown,>({
   isCredentials = true,
-  uri: uriProps,
+  uri: uriParams,
   ...params
 }: UseWebsocketParamsModel<TType>): UseWebsocketModel<TType> => {
   const { getCredentials } = useCredentials();
@@ -17,7 +17,7 @@ export const useWebsocket = <TType = unknown,>({
   const result = _useWebsocket<TType>({
     ...params,
     uri: async () => {
-      const { host, params, pathname, port } = await uriProps();
+      const { host, params, pathname, port } = await uriParams();
       const paramsF = isCredentials
         ? { Authorization: (await getCredentials()).Authorization }
         : {};

@@ -31,8 +31,6 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
           '@babel/plugin-proposal-export-namespace-from',
         ],
       },
-
-      serverExtension: '.server',
     },
   ],
 });

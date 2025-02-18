@@ -1097,6 +1097,12 @@ type MapRoute {
   priceTiers: [PriceTier]
 }
 
+type MessagePayload {
+  id: String
+  message: String
+  sent: DateTimeISO
+}
+
 type Mutation {
   AccessCreate(input: AccessCreateInput): AccessCreateOutput
   AccessCreateMany(input: AccessCreateManyInput): AccessCreateManyOutput
@@ -1168,6 +1174,7 @@ type Mutation {
   linkedUserCreateMany(input: linkedUserCreateManyInput): linkedUserCreateManyOutput
   linkedUserRemove(input: linkedUserRemoveInput): linkedUserRemoveOutput
   linkedUserUpdate(input: linkedUserUpdateInput): linkedUserUpdateOutput
+  messageQuery: MessagePayload
 }
 
 type Order {
@@ -2803,6 +2810,10 @@ input SocketUpdateUpdateInput {
   created: DateTimeISO
   isFixture: Boolean
   name: String
+}
+
+type Subscription {
+  messageSubscription: MessagePayload
 }
 
 type User {

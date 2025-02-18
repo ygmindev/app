@@ -1,7 +1,12 @@
-export type _PubSubModel = {
-  clear(): void;
-  publish<TType extends unknown>(name: string, params?: TType): void;
-  subscribe<TType extends unknown>(name: string, handler: (params?: TType) => void): void;
-  unsubscribe(name: string): void;
-  waitFor<TType extends unknown>(name: string, timeout?: number): Promise<TType | undefined>;
+import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
+
+export type _PubSubModel<TType extends PubSubSchemaModel> = {
+  close(): void;
+  publish<TKey extends StringKeyModel<TType>>(topic: TKey, ...params: TType[TKey]): void;
+  subscribeSync<TKey extends StringKeyModel<TType>>(
+    topic: TKey,
+    handler: (...params: TType[TKey]) => void,
+  ): void;
+  unsubscribe<TKey extends StringKeyModel<TType>>(topic: TKey): void;
 };

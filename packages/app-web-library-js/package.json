@@ -16,6 +16,8 @@
     "@rpldy/uploady": "^1.9.0",
     "color": "^4.2.3",
     "date-fns": "^4.1.0",
+    "inversify": "^6.2.1",
+    "inversify-react": "^1.2.0",
     "lexical": "^0.23.1",
     "libphonenumber-js": "^1.11.18",
     "react-day-picker": "^9.5.0",
@@ -24,7 +26,8 @@
     "react-native-web": "^0.18.12",
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
-    "redux-persist-cookie-storage": "^1.0.0"
+    "redux-persist-cookie-storage": "^1.0.0",
+    "reflect-metadata": "^0.2.2"
   },
   "peerDependencies": {
     "react": "^18.3.1",

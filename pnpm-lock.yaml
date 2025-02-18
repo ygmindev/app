@@ -106,6 +106,12 @@ importers:
       i18next:
         specifier: ^24.2.1
         version: 24.2.2(typescript@5.7.3)
+      inversify:
+        specifier: ^6.2.1
+        version: 6.2.1(reflect-metadata@0.2.2)
+      inversify-react:
+        specifier: ^1.2.0
+        version: 1.2.0(inversify@6.2.1(reflect-metadata@0.2.2))(react@18.3.1)
       json-stringify-safe:
         specifier: ^5.0.1
         version: 5.0.1
@@ -199,6 +205,9 @@ importers:
       redux-persist-cookie-storage:
         specifier: ^1.0.0
         version: 1.0.0
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
       socket.io:
         specifier: ^4.8.1
         version: 4.8.1
@@ -247,6 +256,12 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      inversify:
+        specifier: ^6.2.1
+        version: 6.2.1(reflect-metadata@0.2.2)
+      inversify-react:
+        specifier: ^1.2.0
+        version: 1.2.0(inversify@6.2.1(reflect-metadata@0.2.2))(react@18.3.1)
       lexical:
         specifier: ^0.23.1
         version: 0.23.1
@@ -280,6 +295,9 @@ importers:
       redux-persist-cookie-storage:
         specifier: ^1.0.0
         version: 1.0.0
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
 
   packages/app-web-js:
     dependencies:
@@ -421,6 +439,12 @@ importers:
       i18next-http-backend:
         specifier: ^3.0.1
         version: 3.0.2
+      inversify:
+        specifier: ^6.2.1
+        version: 6.2.1(reflect-metadata@0.2.2)
+      inversify-react:
+        specifier: ^1.2.0
+        version: 1.2.0(inversify@6.2.1(reflect-metadata@0.2.2))(react@18.3.1)
       json-stringify-safe:
         specifier: ^5.0.1
         version: 5.0.1
@@ -523,6 +547,9 @@ importers:
       redux-persist-cookie-storage:
         specifier: ^1.0.0
         version: 1.0.0
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
       setimmediate:
         specifier: ^1.0.5
         version: 1.0.5
@@ -577,6 +604,12 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      inversify:
+        specifier: ^6.2.1
+        version: 6.2.1(reflect-metadata@0.2.2)
+      inversify-react:
+        specifier: ^1.2.0
+        version: 1.2.0(inversify@6.2.1(reflect-metadata@0.2.2))(react@18.3.1)
       lexical:
         specifier: ^0.23.1
         version: 0.23.1
@@ -610,6 +643,9 @@ importers:
       redux-persist-cookie-storage:
         specifier: ^1.0.0
         version: 1.0.0
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
 
   packages/asset-static: {}
 
@@ -655,6 +691,12 @@ importers:
       '@fastify/static':
         specifier: ^8.0.4
         version: 8.0.4
+      '@graphql-yoga/plugin-graphql-sse':
+        specifier: ^3.11.0
+        version: 3.11.0(graphql-yoga@5.10.11(graphql@16.10.0))(graphql@16.10.0)
+      '@graphql-yoga/redis-event-target':
+        specifier: ^3.0.3
+        version: 3.0.3(ioredis@5.5.0)
       '@mikro-orm/core':
         specifier: ^6.4.3
         version: 6.4.5
@@ -739,6 +781,9 @@ importers:
       graphql-scalars:
         specifier: ^1.24.0
         version: 1.24.1(graphql@16.10.0)
+      graphql-ws:
+        specifier: ^6.0.3
+        version: 6.0.3(graphql@16.10.0)(ws@8.18.0)
       graphql-yoga:
         specifier: ^5.10.10
         version: 5.10.11(graphql@16.10.0)
@@ -751,6 +796,9 @@ importers:
       inversify:
         specifier: ^6.2.1
         version: 6.2.1(reflect-metadata@0.2.2)
+      ioredis:
+        specifier: ^5.5.0
+        version: 5.5.0
       json-stringify-safe:
         specifier: ^5.0.1
         version: 5.0.1
@@ -790,6 +838,13 @@ importers:
       type-graphql:
         specifier: 2.0.0-rc.2
         version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.24.1(graphql@16.10.0))(graphql@16.10.0)
+      ws:
+        specifier: ^8.18.0
+        version: 8.18.0
+    devDependencies:
+      pubsub-js:
+        specifier: ^1.9.5
+        version: 1.9.5
 
   packages/service-lambda-crawl:
     dependencies:
@@ -805,6 +860,9 @@ importers:
       '@babel/core':
         specifier: ^7.26.0
         version: 7.26.7
+      '@graphql-yoga/redis-event-target':
+        specifier: ^3.0.3
+        version: 3.0.3(ioredis@5.5.0)
       '@sparticuz/chromium':
         specifier: ^131.0.1
         version: 131.0.1
@@ -859,6 +917,9 @@ importers:
       inversify:
         specifier: ^6.2.1
         version: 6.2.1(reflect-metadata@0.2.2)
+      ioredis:
+        specifier: ^5.5.0
+        version: 5.5.0
       json-stringify-safe:
         specifier: ^5.0.1
         version: 5.0.1
@@ -925,6 +986,12 @@ importers:
       '@fastify/static':
         specifier: ^8.0.4
         version: 8.0.4
+      '@graphql-yoga/plugin-graphql-sse':
+        specifier: ^3.11.0
+        version: 3.11.0(graphql-yoga@5.10.11(graphql@16.10.0))(graphql@16.10.0)
+      '@graphql-yoga/redis-event-target':
+        specifier: ^3.0.3
+        version: 3.0.3(ioredis@5.5.0)
       '@lib/backend':
         specifier: workspace:^
         version: link:../lib-backend-js
@@ -1012,6 +1079,9 @@ importers:
       graphql-relay:
         specifier: ^0.10.2
         version: 0.10.2(graphql@16.10.0)
+      graphql-ws:
+        specifier: ^6.0.3
+        version: 6.0.3(graphql@16.10.0)(ws@8.18.0)
       graphql-yoga:
         specifier: ^5.10.10
         version: 5.10.11(graphql@16.10.0)
@@ -1024,6 +1094,9 @@ importers:
       inversify:
         specifier: ^6.2.1
         version: 6.2.1(reflect-metadata@0.2.2)
+      ioredis:
+        specifier: ^5.5.0
+        version: 5.5.0
       json-stringify-safe:
         specifier: ^5.0.1
         version: 5.0.1
@@ -1063,6 +1136,13 @@ importers:
       type-graphql:
         specifier: 2.0.0-rc.2
         version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.24.1(graphql@16.10.0))(graphql@16.10.0)
+      ws:
+        specifier: ^8.18.0
+        version: 8.18.0
+    devDependencies:
+      pubsub-js:
+        specifier: ^1.9.5
+        version: 1.9.5
 
   packages/service-server-js:
     dependencies:
@@ -1078,6 +1158,12 @@ importers:
       '@fastify/static':
         specifier: ^8.0.4
         version: 8.0.4
+      '@graphql-yoga/plugin-graphql-sse':
+        specifier: ^3.11.0
+        version: 3.11.0(graphql-yoga@5.10.11(graphql@16.10.0))(graphql@16.10.0)
+      '@graphql-yoga/redis-event-target':
+        specifier: ^3.0.3
+        version: 3.0.3(ioredis@5.5.0)
       '@lib/backend':
         specifier: workspace:^
         version: link:../lib-backend-js
@@ -1123,6 +1209,9 @@ importers:
       graphql-relay:
         specifier: ^0.10.2
         version: 0.10.2(graphql@16.10.0)
+      graphql-ws:
+        specifier: ^6.0.3
+        version: 6.0.3(graphql@16.10.0)(ws@8.18.0)
       graphql-yoga:
         specifier: ^5.10.10
         version: 5.10.11(graphql@16.10.0)
@@ -1132,6 +1221,9 @@ importers:
       inversify:
         specifier: ^6.2.1
         version: 6.2.1(reflect-metadata@0.2.2)
+      ioredis:
+        specifier: ^5.5.0
+        version: 5.5.0
       json-stringify-safe:
         specifier: ^5.0.1
         version: 5.0.1
@@ -1168,6 +1260,13 @@ importers:
       type-graphql:
         specifier: 2.0.0-rc.2
         version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.24.1(graphql@16.10.0))(graphql@16.10.0)
+      ws:
+        specifier: ^8.18.0
+        version: 8.18.0
+    devDependencies:
+      pubsub-js:
+        specifier: ^1.9.5
+        version: 1.9.5
 
   packages/tool-task-js:
     dependencies:
@@ -1618,6 +1717,10 @@ importers:
       wait-on:
         specifier: ^8.0.2
         version: 8.0.2
+    devDependencies:
+      '@types/pubsub-js':
+        specifier: ^1.8.6
+        version: 1.8.6
 
 packages:
 
@@ -3972,6 +4075,19 @@ packages:
     resolution: {integrity: sha512-Nv0BoDGLMg9QBKy9cIswQ3/6aKaKjlTh87x3GiBg2Z4RrjyrM48DvOOK0pJh1C1At+b0mUIM67cwZcFTDLN4sA==}
     engines: {node: '>=18.0.0'}
 
+  '@graphql-yoga/plugin-graphql-sse@3.11.0':
+    resolution: {integrity: sha512-Y9RiW7nc57qpSFBdxxKADXFqeq7kX6qE6ZhzNc7JW32AL/D5m9u0eXXcxehNx5RK7AP/8mE/m3D7GlQzrEnSMg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      graphql: ^15.2.0 || ^16.0.0
+      graphql-yoga: ^5.11.0
+
+  '@graphql-yoga/redis-event-target@3.0.3':
+    resolution: {integrity: sha512-OQcTdmRRfYiMr+RNbfmdqEFhHWB5jz5jgcJGXaOI0zR2+PLS1nm50MQGSZG+TQVo7s9eOP7aUVp/+g9qAi1eDA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      ioredis: ^5.0.6
+
   '@graphql-yoga/subscription@5.0.3':
     resolution: {integrity: sha512-xLGEataxCULjL9rlTCVFL1IW2E90TnDIL+mE4lZBi9X92jc6s+Q+jk6Ax3I98kryCJh0UMiwjit7CaIIczTiJg==}
     engines: {node: '>=18.0.0'}
@@ -4205,6 +4321,9 @@ packages:
     resolution: {integrity: sha512-u95rV3lKfG+NT2Uy/5vNzoDujos8vN8O18SSA5UyhxsGYd4GLQn/eUsGXfOsfa7m34eKrDelTKRUX1m/BcNX5w==}
     peerDependencies:
       reflect-metadata: 0.2.2
+
+  '@ioredis/commands@1.2.0':
+    resolution: {integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -7070,6 +7189,9 @@ packages:
   '@types/prop-types@15.7.14':
     resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
 
+  '@types/pubsub-js@1.8.6':
+    resolution: {integrity: sha512-Kwug5cwV0paUDm/NfwDx1sp9xI0bGIvmWJjJWCU8NngkCCMt3EIC7oPDvb6fV7BR8kPpFyyBu4D11bda/2MdPA==}
+
   '@types/qs@6.9.18':
     resolution: {integrity: sha512-kK7dgTYDyGqS+e2Q4aK9X3D7q234CIZ1Bv0q/7Z5IwRDoADNU81xXJK/YVyLbLTZCoIwUoDoffFeF+p/eIklAA==}
 
@@ -8451,6 +8573,10 @@ packages:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
 
+  cluster-key-slot@1.1.2:
+    resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}
+    engines: {node: '>=0.10.0'}
+
   co@4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
@@ -9053,6 +9179,10 @@ packages:
 
   denodeify@1.2.1:
     resolution: {integrity: sha512-KNTihKNmQENUZeKu5fzfpzRqR5S2VMp4gl9RFHiWzj9DfvYQPMJ6XHKNaQxaGCXwPk6y9yme3aUoaiAe+KX+vg==}
+
+  denque@2.1.0:
+    resolution: {integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==}
+    engines: {node: '>=0.10'}
 
   depd@1.1.2:
     resolution: {integrity: sha512-7emPTl6Dpo6JRXOXjLRxck+FlLRX5847cLKEn00PLAgc3g2hTZZgr+e4c2v6QpSmLeFP3n5yUo7ft6avBK/5jQ==}
@@ -10612,11 +10742,33 @@ packages:
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
 
+  graphql-sse@2.5.4:
+    resolution: {integrity: sha512-8PIGHQPv1vokYboL8KsoBomvyJCUMJCAwSp5f+bR2qVoYtPo7CYowrYV7LFiXuiirX0cxVzgUBFNa5BaI4rZ2A==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      graphql: '>=0.11 <=16'
+
   graphql-tag@2.12.6:
     resolution: {integrity: sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==}
     engines: {node: '>=10'}
     peerDependencies:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+
+  graphql-ws@6.0.3:
+    resolution: {integrity: sha512-mvLRHihMg0llF74vo16063HufZHMGaiMxAjzyj0ARYueIikGzj1khlbPNl7vUc2h9rxbq9pGpQYbqypgq1fAXA==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@fastify/websocket': ^10 || ^11
+      graphql: ^15.10.1 || ^16
+      uWebSockets.js: ^20
+      ws: ^8
+    peerDependenciesMeta:
+      '@fastify/websocket':
+        optional: true
+      uWebSockets.js:
+        optional: true
+      ws:
+        optional: true
 
   graphql-yoga@5.10.11:
     resolution: {integrity: sha512-r4Mg6nXIqvAh6IO82JlJNJOAL1MADKZsesytsBw/qvuYdE7vyo3PNCHMleBoWj3dzx83aRajBQQNh3WzBmsy8g==}
@@ -11025,10 +11177,20 @@ packages:
   invariant@2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
 
+  inversify-react@1.2.0:
+    resolution: {integrity: sha512-4p0WRWaMpQAU7PBzz+6/OMFW9JPEtN6MzamQkEZ7CJUZEziBnG5afBrtP+QyS1gj/Su3igORkCeru0vUZkUGqw==}
+    peerDependencies:
+      inversify: ^5.0.5 || ^6.0.1
+      react: ^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   inversify@6.2.1:
     resolution: {integrity: sha512-W6Xi0icXIiC48RWdT681+GlZVgAKmCrNTiP7hj4IVPFbcxHz+Jj8Gxz5qr/Az2cgcZMYdB8tKIr2e68LUi1LYQ==}
     peerDependencies:
       reflect-metadata: ~0.2.2
+
+  ioredis@5.5.0:
+    resolution: {integrity: sha512-7CutT89g23FfSa8MDoIFs2GYYa0PaNiW/OrT+nRyjRXHDZd17HmIgy+reOQ/yhh72NznNjGuS8kbCAcA4Ro4mw==}
+    engines: {node: '>=12.22.0'}
 
   ip-address@9.0.5:
     resolution: {integrity: sha512-zHtQzGojZXTwZTHQqra+ETKd4Sn3vgi7uBmlPoXVWZqYvuKmtI0l/VZTjqGmJY9x88GGOaZ9+G9ES8hC4T4X8g==}
@@ -11975,6 +12137,9 @@ packages:
 
   lodash.includes@4.3.0:
     resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
+
+  lodash.isarguments@3.1.0:
+    resolution: {integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg==}
 
   lodash.isboolean@3.0.3:
     resolution: {integrity: sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==}
@@ -13352,6 +13517,9 @@ packages:
   public-encrypt@4.0.3:
     resolution: {integrity: sha512-zVpa8oKZSz5bTMTFClc1fQOnyyEzpl5ozpi1B5YcvBrdohMjH2rfsBtyXcuNuwjsDIXmBYlF2N5FlJYhR29t8Q==}
 
+  pubsub-js@1.9.5:
+    resolution: {integrity: sha512-5MZ0I9i5JWVO7SizvOviKvZU2qaBbl2KQX150FAA+fJBwYpwOUId7aNygURWSdPzlsA/xZ/InUKXqBbzM0czTA==}
+
   pug-attrs@3.0.0:
     resolution: {integrity: sha512-azINV9dUtzPMFQktvTXciNAfAuVh/L/JCl0vtPCwvOA21uZrC08K/UnmrL+SXGEVc1FwzjW62+xw5S/uaLj6cA==}
 
@@ -13911,6 +14079,14 @@ packages:
   redent@3.0.0:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
     engines: {node: '>=8'}
+
+  redis-errors@1.2.0:
+    resolution: {integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==}
+    engines: {node: '>=4'}
+
+  redis-parser@3.0.0:
+    resolution: {integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A==}
+    engines: {node: '>=4'}
 
   redux-persist-cookie-storage@1.0.0:
     resolution: {integrity: sha512-Ho26ChtTNn0RDbLjuy+1GMLXgYl0+2v83IlOIFJKAfrMUeeTao5mU85IUEJeUQ/ExQykmNY/y+ZHCTM8ABl7KA==}
@@ -14648,6 +14824,9 @@ packages:
   stacktrace-parser@0.1.10:
     resolution: {integrity: sha512-KJP1OCML99+8fhOHxwwzyWrlUuVX5GQ0ZpJTd1DFXhdkrvg1szxfHhawXUZ3g9TkXORQd4/WG68jMlQZ2p8wlg==}
     engines: {node: '>=6'}
+
+  standard-as-callback@2.1.0:
+    resolution: {integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==}
 
   statuses@1.4.0:
     resolution: {integrity: sha512-zhSCtt8v2NDrRlPQpCNtw/heZLtfUDqxBM1udqikb/Hbk52LK4nQSwr10u77iopCW5LsyHpuXS0GnEc48mLeew==}
@@ -19421,6 +19600,18 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
+  '@graphql-yoga/plugin-graphql-sse@3.11.0(graphql-yoga@5.10.11(graphql@16.10.0))(graphql@16.10.0)':
+    dependencies:
+      graphql: 16.10.0
+      graphql-sse: 2.5.4(graphql@16.10.0)
+      graphql-yoga: 5.10.11(graphql@16.10.0)
+
+  '@graphql-yoga/redis-event-target@3.0.3(ioredis@5.5.0)':
+    dependencies:
+      '@graphql-yoga/typed-event-target': 3.0.2
+      '@whatwg-node/events': 0.1.2
+      ioredis: 5.5.0
+
   '@graphql-yoga/subscription@5.0.3':
     dependencies:
       '@graphql-yoga/typed-event-target': 3.0.2
@@ -19761,6 +19952,8 @@ snapshots:
   '@inversifyjs/reflect-metadata-utils@0.2.4(reflect-metadata@0.2.2)':
     dependencies:
       reflect-metadata: 0.2.2
+
+  '@ioredis/commands@1.2.0': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -23511,6 +23704,8 @@ snapshots:
 
   '@types/prop-types@15.7.14': {}
 
+  '@types/pubsub-js@1.8.6': {}
+
   '@types/qs@6.9.18': {}
 
   '@types/range-parser@1.2.7': {}
@@ -25362,6 +25557,8 @@ snapshots:
 
   clsx@2.1.1: {}
 
+  cluster-key-slot@1.1.2: {}
+
   co@4.6.0: {}
 
   code-point-at@1.1.0: {}
@@ -25993,6 +26190,8 @@ snapshots:
   delayed-stream@1.0.0: {}
 
   denodeify@1.2.1: {}
+
+  denque@2.1.0: {}
 
   depd@1.1.2: {}
 
@@ -28056,10 +28255,20 @@ snapshots:
       graphql: 16.10.0
       tslib: 2.8.1
 
+  graphql-sse@2.5.4(graphql@16.10.0):
+    dependencies:
+      graphql: 16.10.0
+
   graphql-tag@2.12.6(graphql@16.10.0):
     dependencies:
       graphql: 16.10.0
       tslib: 2.8.1
+
+  graphql-ws@6.0.3(graphql@16.10.0)(ws@8.18.0):
+    dependencies:
+      graphql: 16.10.0
+    optionalDependencies:
+      ws: 8.18.0
 
   graphql-yoga@5.10.11(graphql@16.10.0):
     dependencies:
@@ -28594,11 +28803,30 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
+  inversify-react@1.2.0(inversify@6.2.1(reflect-metadata@0.2.2))(react@18.3.1):
+    dependencies:
+      inversify: 6.2.1(reflect-metadata@0.2.2)
+      react: 18.3.1
+
   inversify@6.2.1(reflect-metadata@0.2.2):
     dependencies:
       '@inversifyjs/common': 1.4.0
       '@inversifyjs/core': 1.3.5(reflect-metadata@0.2.2)
       reflect-metadata: 0.2.2
+
+  ioredis@5.5.0:
+    dependencies:
+      '@ioredis/commands': 1.2.0
+      cluster-key-slot: 1.1.2
+      debug: 4.4.0(supports-color@5.5.0)
+      denque: 2.1.0
+      lodash.defaults: 4.2.0
+      lodash.isarguments: 3.1.0
+      redis-errors: 1.2.0
+      redis-parser: 3.0.0
+      standard-as-callback: 2.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   ip-address@9.0.5:
     dependencies:
@@ -29780,6 +30008,8 @@ snapshots:
   lodash.get@4.4.2: {}
 
   lodash.includes@4.3.0: {}
+
+  lodash.isarguments@3.1.0: {}
 
   lodash.isboolean@3.0.3: {}
 
@@ -31417,6 +31647,8 @@ snapshots:
       randombytes: 2.1.0
       safe-buffer: 5.2.1
 
+  pubsub-js@1.9.5: {}
+
   pug-attrs@3.0.0:
     dependencies:
       constantinople: 4.0.1
@@ -32143,6 +32375,12 @@ snapshots:
     dependencies:
       indent-string: 4.0.0
       strip-indent: 3.0.0
+
+  redis-errors@1.2.0: {}
+
+  redis-parser@3.0.0:
+    dependencies:
+      redis-errors: 1.2.0
 
   redux-persist-cookie-storage@1.0.0:
     dependencies:
@@ -33001,6 +33239,8 @@ snapshots:
   stacktrace-parser@0.1.10:
     dependencies:
       type-fest: 0.7.1
+
+  standard-as-callback@2.1.0: {}
 
   statuses@1.4.0: {}
 

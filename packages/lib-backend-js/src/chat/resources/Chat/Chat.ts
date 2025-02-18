@@ -7,6 +7,6 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: CHAT_RESOURCE_NAME })
 export class Chat extends EntityResource implements ChatModel {
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   name?: string;
 }

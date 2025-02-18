@@ -1,6 +1,6 @@
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import apiConfig from '@lib/config/api/api.server';
+import { config as apiConfig } from '@lib/config/api/api.server';
 import databaseConfig from '@lib/config/database/database.mongo';
 import { PUBLIC_DIR } from '@lib/config/file/file.constants';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';

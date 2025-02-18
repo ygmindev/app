@@ -1,42 +1,31 @@
-import { TimeoutError } from '@lib/shared/core/errors/TimeoutError/TimeoutError';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type _PubSubModel } from '@lib/shared/core/utils/PubSub/_PubSub.models';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
 import mitt, { type Emitter } from 'mitt';
 
-export class _PubSub implements _PubSubModel {
+export class _PubSub<TType extends PubSubSchemaModel> implements _PubSubModel<TType> {
   protected emitter: Emitter<Record<string, unknown>>;
 
   constructor() {
     this.emitter = mitt();
   }
 
-  clear(): void {
+  close(): void {
     this.emitter.all.clear();
   }
 
-  publish<TType extends unknown>(name: string, params?: TType): void {
-    this.emitter.emit(name, params);
+  publish<TKey extends StringKeyModel<TType>>(topic: TKey, ...params: TType[TKey]): void {
+    this.emitter.emit(topic, params);
   }
 
-  subscribe<TType extends unknown>(name: string, handler: (params?: TType) => void): void {
-    this.emitter.on(name, handler as (params: unknown) => void);
+  subscribeSync<TKey extends StringKeyModel<TType>>(
+    topic: TKey,
+    handler: (...params: TType[TKey]) => void,
+  ): void {
+    this.emitter.on(topic, (data) => handler(...(data as TType[TKey])));
   }
 
-  unsubscribe(name: string): void {
-    this.emitter.off(name);
-  }
-
-  waitFor<TType extends unknown>(name: string, timeout?: number): Promise<TType | undefined> {
-    return new Promise((resolve, reject) => {
-      timeout &&
-        void sleep(timeout).then(() => {
-          this.unsubscribe(name);
-          reject(new TimeoutError(name, timeout));
-        });
-      this.subscribe(name, (params) => {
-        this.unsubscribe(name);
-        resolve((params as TType) ?? undefined);
-      });
-    });
+  unsubscribe<TKey extends StringKeyModel<TType>>(topic: TKey): void {
+    this.emitter.off(topic);
   }
 }

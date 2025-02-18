@@ -159,5 +159,8 @@
       "development": "./src/*",
       "default": "./src/*"
     }
+  },
+  "devDependencies": {
+    "@types/pubsub-js": "^1.8.6"
   }
 }

@@ -6,6 +6,7 @@ import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/us
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { useContainer } from '@lib/frontend/core/hooks/useContainer/useContainer';
 import { StepForm } from '@lib/frontend/data/components/StepForm/StepForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
@@ -13,7 +14,7 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { type SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
-import { pubsub } from '@lib/shared/core/utils/PubSub/PubSub';
+import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
 import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
@@ -27,6 +28,7 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   const { t } = useTranslation([AUTH]);
   const { signIn, usernameUpdate } = useSignInResource();
   const { location } = useRouter();
+  const pubsub = useContainer(PubSub);
 
   const handleSubmit = async (form: SignInFormModel): Promise<void> => {
     await Promise.all([

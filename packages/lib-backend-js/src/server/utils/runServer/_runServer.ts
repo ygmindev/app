@@ -1,3 +1,4 @@
+import { useGraphQLSSE } from '@graphql-yoga/plugin-graphql-sse';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { formatGraphqlError } from '@lib/backend/http/utils/formatGraphqlError/formatGraphqlError';
 import {
@@ -6,7 +7,7 @@ import {
 } from '@lib/backend/server/utils/runServer/_runServer.models';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import graphqlConfig from '@lib/config/graphql/graphql';
+import { config as graphqlConfig } from '@lib/config/graphql/graphql';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { uri } from '@lib/shared/http/utils/uri/uri';
@@ -73,6 +74,7 @@ export const _runServer = async ({
               return formatGraphqlError(error as GraphQLError);
             },
           },
+          plugins: [useGraphQLSSE],
           schema,
         });
 
@@ -87,6 +89,7 @@ export const _runServer = async ({
           method: method as HTTPMethods,
           url,
         });
+
         break;
       }
       default: {

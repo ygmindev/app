@@ -7,6 +7,7 @@ import {
   type InitializeModel,
   type InitializeParamsModel,
 } from '@lib/backend/setup/utils/initialize/initialize.models';
+import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 let result: InitializeModel;
@@ -24,6 +25,8 @@ export const initialize = async ({ database }: InitializeParamsModel): Promise<I
         logger.warn(`failed to connect to ${database.host} with error: ${e as Error}`);
       }
     }
+
+    Container.set(PubSub, new PubSub());
   }
 
   return result;

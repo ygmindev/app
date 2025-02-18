@@ -532,7 +532,6 @@ class _Handle implements HandleModel {
 //       timeout: this.options.navigationTimeout,
 //       waitUntil: 'domcontentloaded',
 //     });
-//     console.warn('@@@ open !!!');
 //     await this.page.waitForNetworkIdle({ timeout: this.options.navigationTimeout });
 //   }
 

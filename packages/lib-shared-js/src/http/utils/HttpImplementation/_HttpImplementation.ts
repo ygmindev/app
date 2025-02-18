@@ -1,6 +1,8 @@
+import { type IncomingMessage } from 'node:http';
+
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
-import { HTTP_METHOD, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { HTTP_METHOD, HTTP_RESPONSE_TYPE, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { type HttpMethodModel, type HttpResponseTypeModel } from '@lib/shared/http/http.models';
 import {
   type _HttpImplementationModel,
@@ -61,16 +63,27 @@ export class _HttpImplementation implements _HttpImplementationModel {
 
   request = async <TParams, TResult>(
     method: HttpMethodModel,
-    { params, request, url }: _HttpRequestParamsModel<TParams>,
+    { onMessage, params, request, url }: _HttpRequestParamsModel<TParams>,
   ): Promise<TResult | null> => {
     try {
       const response = await this._instance.request({
         ...request,
+        adapter: 'fetch',
         data: params,
         method,
         url: url ?? '',
       } as AxiosRequestConfig);
-      return (response && (response.data as TResult)) ?? null;
+      if (request?.responseType === HTTP_RESPONSE_TYPE.STREAM && onMessage) {
+        (response.data as IncomingMessage).on('data', (data) => {
+          let dataF = data as unknown;
+          try {
+            dataF = JSON.parse(dataF as string);
+          } catch (_) {}
+          onMessage(dataF);
+        });
+        return null;
+      }
+      return (response?.data as TResult) ?? null;
     } catch (e) {
       console.error(e);
       const eF = new HttpError(
@@ -87,11 +100,13 @@ export class _HttpImplementation implements _HttpImplementationModel {
   };
 
   get = async <TParams, TResult>({
+    onMessage,
     params,
     request,
     url,
   }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
     this.request<TParams, TResult>(HTTP_METHOD.GET, {
+      onMessage,
       request,
       url: uri<TParams>({ host: url, params }),
     });

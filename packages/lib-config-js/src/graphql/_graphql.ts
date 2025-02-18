@@ -1,9 +1,12 @@
+import { Container } from '@lib/backend/core/utils/Container/Container';
 import { type RequestContextModel } from '@lib/config/api/api.models';
+import { SubscriptionResolver } from '@lib/config/graphql/_subs';
 import {
   type _GraphqlConfigModel,
   type GraphqlConfigModel,
 } from '@lib/config/graphql/graphql.models';
-import { type BuildSchemaOptions, type ContainerType } from 'type-graphql';
+import { PubSub as _PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
+import { type BuildSchemaOptions, type ContainerType, type PubSub } from 'type-graphql';
 import { buildSchemaSync } from 'type-graphql';
 
 export const _graphql = ({
@@ -18,6 +21,7 @@ export const _graphql = ({
     container: container as unknown as ContainerType,
     emitSchemaFile: schemaDir,
     nullableByDefault: true,
-    resolvers: resolvers as unknown as BuildSchemaOptions['resolvers'],
+    pubSub: Container.get(_PubSub) as unknown as PubSub,
+    resolvers: [...resolvers, SubscriptionResolver] as unknown as BuildSchemaOptions['resolvers'],
     validate: { forbidUnknownValues: false },
   });

@@ -7,9 +7,10 @@ import { useEffect } from 'react';
 export const useAsync = (...[params, deps = []]: UseAsyncParamsModel): UseAsyncModel => {
   useEffect(() => {
     let isMounted = true;
-    params && void params(() => isMounted);
+    const result = params?.(() => isMounted);
     return () => {
       isMounted = false;
+      void result?.then((onUnmount) => onUnmount?.());
     };
   }, [...deps]);
 };
