@@ -1,4 +1,4 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { DatabaseInMemory } from '@lib/backend/database/utils/DatabaseInMemory/DatabaseInMemory';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';

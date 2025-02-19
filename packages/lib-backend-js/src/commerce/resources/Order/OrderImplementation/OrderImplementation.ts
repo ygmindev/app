@@ -1,6 +1,6 @@
 import { PaymentMethodImplementation } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation';
 import { Order } from '@lib/backend/commerce/resources/Order/Order';
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { ORDER_RESOURCE_NAME } from '@lib/shared/commerce/resources/Order/Order.constants';

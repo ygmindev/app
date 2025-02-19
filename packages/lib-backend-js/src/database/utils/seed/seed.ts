@@ -1,4 +1,4 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { SEED_DATA } from '@lib/backend/database/utils/seed/seed.constants';
 import { type SeedModel } from '@lib/backend/database/utils/seed/seed.models';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';

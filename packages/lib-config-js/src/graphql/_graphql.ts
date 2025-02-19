@@ -1,4 +1,4 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { SubscriptionResolver } from '@lib/config/graphql/_subs';
 import {

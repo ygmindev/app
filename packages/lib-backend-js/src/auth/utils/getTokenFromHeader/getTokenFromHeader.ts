@@ -3,7 +3,7 @@ import {
   type GetTokenFromHeaderParamsModel,
 } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader.models';
 import { JwtImplementation } from '@lib/backend/auth/utils/JwtImplementation/JwtImplementation';
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 
 export const getTokenFromHeader = async (
   params?: GetTokenFromHeaderParamsModel,

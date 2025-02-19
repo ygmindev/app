@@ -1,5 +1,5 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 import { Mutation, ObjectType, Resolver, Root, Subscription } from 'type-graphql';
 
@@ -24,9 +24,10 @@ export class MessagePayload implements MessagePayloadModel {
 @Resolver()
 export class SubscriptionResolver {
   @Subscription(() => MessagePayload, { topics: 'MESSAGE' })
-  messageSubscription(@Root() { id, message }: MessagePayload): MessagePayloadModel {
+  messageSubscription(@Root() x: MessagePayload): MessagePayloadModel {
     console.warn('@@@ subscribe!!!');
-    return { id, message, sent: new Date() };
+    console.warn(x);
+    return { id: '123', message: '345', sent: new Date() };
   }
 
   @Mutation(() => MessagePayload)

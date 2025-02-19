@@ -4,7 +4,7 @@ import {
   type AuthorizeParamsModel,
 } from '@lib/backend/auth/utils/authorize/authorize.models';
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { ACCESS_ROLE } from '@lib/shared/auth/resources/Access/Access.constants';
 import { type AccessRoleMoreModel } from '@lib/shared/auth/resources/Access/Access.models';
 import pullAt from 'lodash/pullAt';

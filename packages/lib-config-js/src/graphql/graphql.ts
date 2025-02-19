@@ -13,7 +13,7 @@ import { ChatResolver } from '@lib/backend/chat/resources/Chat/ChatResolver/Chat
 import { OrderResolver } from '@lib/backend/commerce/resources/Order/OrderResolver/OrderResolver';
 import { PricingResolver } from '@lib/backend/commerce/resources/Pricing/PricingResolver/PricingResolver';
 import { ProductResolver } from '@lib/backend/commerce/resources/Product/ProductResolver/ProductResolver';
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { GroupResolver } from '@lib/backend/group/resources/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '@lib/backend/http/resources/Socket/SocketResolver/SocketResolver';

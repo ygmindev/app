@@ -3,7 +3,7 @@ import {
   type GetFingerprintInputParamsModel,
 } from '@lib/backend/billing/utils/getFingerprintInput/getFingerprintInput.models';
 import { StripeAdminImplementation } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation';
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import {
   type PaymentMethodFormModel,
   type PaymentMethodModel,

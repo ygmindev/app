@@ -16,7 +16,7 @@ export class PubSub<TType extends PubSubSchemaModel> extends _PubSub<TType> {
           reject(new TimeoutError(topic, timeout));
         });
 
-      this.subscribeSync(topic, (...params) => {
+      this.subscribeSync(topic, (params) => {
         this.unsubscribe(topic);
         resolve(params ?? undefined);
       });
@@ -30,10 +30,8 @@ export class PubSub<TType extends PubSubSchemaModel> extends _PubSub<TType> {
       let resolve: (value?: unknown) => void;
       let promise = new Promise((r) => (resolve = r));
       const done = false;
-      subscribeSync(topic, (...params) => {
-        console.error('@@@params!!');
-        console.error(params);
-        results.push(params);
+      subscribeSync(topic, (params) => {
+        results = results.concat(params);
         resolve();
         promise = new Promise((r) => (resolve = r));
       });

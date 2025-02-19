@@ -1,5 +1,3 @@
-import { type IncomingMessage } from 'node:http';
-
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_METHOD, HTTP_RESPONSE_TYPE, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
@@ -66,6 +64,7 @@ export class _HttpImplementation implements _HttpImplementationModel {
     { onMessage, params, request, url }: _HttpRequestParamsModel<TParams>,
   ): Promise<TResult | null> => {
     try {
+      console.warn(request);
       const response = await this._instance.request({
         ...request,
         adapter: 'fetch',
@@ -74,16 +73,29 @@ export class _HttpImplementation implements _HttpImplementationModel {
         url: url ?? '',
       } as AxiosRequestConfig);
       if (request?.responseType === HTTP_RESPONSE_TYPE.STREAM && onMessage) {
-        (response.data as IncomingMessage).on('data', (data) => {
-          let dataF = data as unknown;
-          try {
-            dataF = JSON.parse(dataF as string);
-          } catch (_) {}
-          onMessage(dataF);
-        });
-        return null;
+        const reader = (response?.data as ReadableStream<AllowSharedBufferSource>)?.getReader();
+        const decoder = new TextDecoder();
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          const chunk = decoder.decode(value, { stream: true });
+          const lines = chunk
+            .split('\n')
+            .reduce(
+              (result, line) =>
+                line.startsWith('data:') ? [...result, line.replace('data:', '')] : result,
+              [] as Array<string>,
+            );
+          for (const line of lines) {
+            let data = line as TResult;
+            try {
+              ({ data } = JSON.parse(line) as { data: TResult });
+            } catch (_) {}
+            onMessage(data);
+          }
+        }
       }
-      return (response?.data as TResult) ?? null;
+      return null;
     } catch (e) {
       console.error(e);
       const eF = new HttpError(
@@ -122,11 +134,12 @@ export class _HttpImplementation implements _HttpImplementationModel {
     });
 
   post = async <TParams, TResult>({
+    onMessage,
     params,
     request,
     url,
   }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this.request<TParams, TResult>(HTTP_METHOD.POST, { params, request, url });
+    this.request<TParams, TResult>(HTTP_METHOD.POST, { onMessage, params, request, url });
 
   put = async <TParams, TResult>({
     params,

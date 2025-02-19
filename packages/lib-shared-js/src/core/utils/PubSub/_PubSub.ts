@@ -20,9 +20,9 @@ export class _PubSub<TType extends PubSubSchemaModel> implements _PubSubModel<TT
 
   subscribeSync<TKey extends StringKeyModel<TType>>(
     topic: TKey,
-    handler: (...params: TType[TKey]) => void,
+    handler: (params: TType[TKey]) => void,
   ): void {
-    this.emitter.on(topic, (data) => handler(...(data as TType[TKey])));
+    this.emitter.on(topic, (data) => handler(data as TType[TKey]));
   }
 
   unsubscribe<TKey extends StringKeyModel<TType>>(topic: TKey): void {

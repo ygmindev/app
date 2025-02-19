@@ -7,6 +7,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { HTTP_RESPONSE_TYPE } from '@lib/shared/http/http.constants';
+import { useEffect } from 'react';
 
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -17,15 +18,18 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
     port: process.env.SERVER_APP_PORT,
   });
 
-  const onPress = async (): Promise<void> => {
-    await sleep(1000);
-    await http.post({
+  useEffect(() => {
+    void http.post({
+      onMessage: console.warn,
       params: {
         query: 'subscription messageSubscription { messageSubscription { id message sent } }',
       },
       request: { responseType: HTTP_RESPONSE_TYPE.STREAM },
       url: '',
     });
+  }, []);
+
+  const onPress = async (): Promise<void> => {
     await sleep(1000);
     await http.post({
       params: {

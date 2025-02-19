@@ -1,4 +1,4 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { aggregate } from '@lib/backend/database/utils/aggregate/aggregate';
 import { getFilter } from '@lib/backend/database/utils/Database/_Database';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';

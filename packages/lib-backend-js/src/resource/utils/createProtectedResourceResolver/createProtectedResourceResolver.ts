@@ -1,4 +1,4 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { Group } from '@lib/backend/group/resources/Group/Group';
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withFieldResolver } from '@lib/backend/http/utils/withFieldResolver/withFieldResolver';

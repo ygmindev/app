@@ -1,4 +1,4 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type RunAllParamsModel } from '@tool/task/core/templates/runAll/runAll.models';

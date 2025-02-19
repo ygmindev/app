@@ -3,7 +3,7 @@ import {
   type CreateProtectedResoureImplementationModel,
   type CreateProtectedResoureImplementationParamsModel,
 } from '@lib/backend/auth/utils/createProtectedResourceImplementation/createProtectedResourceImplementation.models';
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { GroupImplementation } from '@lib/backend/group/resources/Group/GroupImplementation/GroupImplementation';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';

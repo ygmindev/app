@@ -6,7 +6,7 @@ export type _PubSubModel<TType extends PubSubSchemaModel> = {
   publish<TKey extends StringKeyModel<TType>>(topic: TKey, ...params: TType[TKey]): void;
   subscribeSync<TKey extends StringKeyModel<TType>>(
     topic: TKey,
-    handler: (...params: TType[TKey]) => void,
+    handler: (params: TType[TKey]) => void,
   ): void;
   unsubscribe<TKey extends StringKeyModel<TType>>(topic: TKey): void;
 };

@@ -1,5 +1,5 @@
 import { Otp } from '@lib/backend/auth/resources/Otp/Otp';
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { mail } from '@lib/backend/notification/utils/mail/mail';

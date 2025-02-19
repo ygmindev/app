@@ -1,6 +1,6 @@
 import { Bank } from '@lib/backend/billing/resources/Bank/Bank';
 import { getFingerprintInput } from '@lib/backend/billing/utils/getFingerprintInput/getFingerprintInput';
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createEmbeddedResourceImplementation } from '@lib/backend/resource/utils/createEmbeddedResourceImplementation/createEmbeddedResourceImplementation';
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
