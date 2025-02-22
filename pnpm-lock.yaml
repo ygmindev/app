@@ -691,6 +691,9 @@ importers:
       '@fastify/static':
         specifier: ^8.0.4
         version: 8.0.4
+      '@fastify/websocket':
+        specifier: ^11.0.2
+        version: 11.0.2
       '@graphql-yoga/plugin-graphql-sse':
         specifier: ^3.11.0
         version: 3.11.0(graphql-yoga@5.10.11(graphql@16.10.0))(graphql@16.10.0)
@@ -783,7 +786,7 @@ importers:
         version: 1.24.1(graphql@16.10.0)
       graphql-ws:
         specifier: ^6.0.3
-        version: 6.0.3(graphql@16.10.0)(ws@8.18.0)
+        version: 6.0.3(@fastify/websocket@11.0.2)(graphql@16.10.0)(ws@8.18.0)
       graphql-yoga:
         specifier: ^5.10.10
         version: 5.10.11(graphql@16.10.0)
@@ -953,6 +956,9 @@ importers:
       type-graphql:
         specifier: 2.0.0-rc.2
         version: 2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.24.1(graphql@16.10.0))(graphql@16.10.0)
+      ws:
+        specifier: ^8.18.0
+        version: 8.18.0
 
   packages/service-lambda-js:
     dependencies:
@@ -986,6 +992,9 @@ importers:
       '@fastify/static':
         specifier: ^8.0.4
         version: 8.0.4
+      '@fastify/websocket':
+        specifier: ^11.0.2
+        version: 11.0.2
       '@graphql-yoga/plugin-graphql-sse':
         specifier: ^3.11.0
         version: 3.11.0(graphql-yoga@5.10.11(graphql@16.10.0))(graphql@16.10.0)
@@ -1081,7 +1090,7 @@ importers:
         version: 0.10.2(graphql@16.10.0)
       graphql-ws:
         specifier: ^6.0.3
-        version: 6.0.3(graphql@16.10.0)(ws@8.18.0)
+        version: 6.0.3(@fastify/websocket@11.0.2)(graphql@16.10.0)(ws@8.18.0)
       graphql-yoga:
         specifier: ^5.10.10
         version: 5.10.11(graphql@16.10.0)
@@ -1158,6 +1167,9 @@ importers:
       '@fastify/static':
         specifier: ^8.0.4
         version: 8.0.4
+      '@fastify/websocket':
+        specifier: ^11.0.2
+        version: 11.0.2
       '@graphql-yoga/plugin-graphql-sse':
         specifier: ^3.11.0
         version: 3.11.0(graphql-yoga@5.10.11(graphql@16.10.0))(graphql@16.10.0)
@@ -1211,7 +1223,7 @@ importers:
         version: 0.10.2(graphql@16.10.0)
       graphql-ws:
         specifier: ^6.0.3
-        version: 6.0.3(graphql@16.10.0)(ws@8.18.0)
+        version: 6.0.3(@fastify/websocket@11.0.2)(graphql@16.10.0)(ws@8.18.0)
       graphql-yoga:
         specifier: ^5.10.10
         version: 5.10.11(graphql@16.10.0)
@@ -1721,6 +1733,9 @@ importers:
       '@types/pubsub-js':
         specifier: ^1.8.6
         version: 1.8.6
+      '@types/ws':
+        specifier: ^8.5.14
+        version: 8.5.14
 
 packages:
 
@@ -3554,6 +3569,9 @@ packages:
 
   '@fastify/static@8.0.4':
     resolution: {integrity: sha512-JdJIlXDYXZxbTFQazWOEfHxyD5uRXqRsLnp4rV9MwJnxadA0rrWBI8ZelPF2TPk/xDi5wunY/6ZmfwHXld13bA==}
+
+  '@fastify/websocket@11.0.2':
+    resolution: {integrity: sha512-1oyJkNSZNJGjo/A5fXvlpEcm1kTBD91nRAN9lA7RNVsVNsyC5DuhOXdNL9/4UawVe7SKvzPT/QVI4RdtE9ylnA==}
 
   '@firebase/analytics-compat@0.2.14':
     resolution: {integrity: sha512-unRVY6SvRqfNFIAA/kwl4vK+lvQAL2HVcgu9zTrUtTyYDmtIt/lOuHJynBMYEgLnKm39YKBDhtqdapP2e++ASw==}
@@ -7286,6 +7304,9 @@ packages:
 
   '@types/whatwg-url@11.0.5':
     resolution: {integrity: sha512-coYR071JRaHa+xoEvvYqvnIHaVqaYrLPbsufM9BF63HkwI5Lgmy2QR8Q5K/lYDYo5AK82wOvSOS0UsLTpTG7uQ==}
+
+  '@types/ws@8.5.14':
+    resolution: {integrity: sha512-bd/YFLW+URhBzMXurx7lWByOu+xzU9+kb3RboOteXYDfW+tr+JZa99OyNmPINEGB/ahzKrEuc8rcv4gnpJmxTw==}
 
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
@@ -18795,6 +18816,15 @@ snapshots:
       fastq: 1.19.0
       glob: 11.0.1
 
+  '@fastify/websocket@11.0.2':
+    dependencies:
+      duplexify: 4.1.3
+      fastify-plugin: 5.0.1
+      ws: 8.18.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   '@firebase/analytics-compat@0.2.14(@firebase/app-compat@0.2.41)(@firebase/app@0.10.11)':
     dependencies:
       '@firebase/analytics': 0.10.8(@firebase/app@0.10.11)
@@ -19632,7 +19662,7 @@ snapshots:
   '@grpc/grpc-js@1.9.15':
     dependencies:
       '@grpc/proto-loader': 0.7.13
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@grpc/proto-loader@0.7.13':
     dependencies:
@@ -19979,7 +20009,7 @@ snapshots:
   '@jest/console@29.7.0':
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       chalk: 4.1.2
       jest-message-util: 29.7.0
       jest-util: 29.7.0
@@ -20068,7 +20098,7 @@ snapshots:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       '@jridgewell/trace-mapping': 0.3.25
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       chalk: 4.1.2
       collect-v8-coverage: 1.0.2
       exit: 0.1.2
@@ -20137,7 +20167,7 @@ snapshots:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       '@types/yargs': 15.0.19
       chalk: 4.1.2
 
@@ -23392,7 +23422,7 @@ snapshots:
 
   '@types/accepts@1.3.7':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/amplitude-js@8.16.5': {}
 
@@ -23426,16 +23456,16 @@ snapshots:
   '@types/body-parser@1.19.2':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/bunyan@1.8.9':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/caseless@0.12.5':
     optional: true
@@ -23456,11 +23486,11 @@ snapshots:
 
   '@types/connect@3.4.36':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/cookie@0.6.0': {}
 
@@ -23468,7 +23498,7 @@ snapshots:
 
   '@types/cors@2.8.17':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/d3-array@3.2.1': {}
 
@@ -23526,13 +23556,13 @@ snapshots:
 
   '@types/express-serve-static-core@4.17.31':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       '@types/qs': 6.9.18
       '@types/range-parser': 1.2.7
 
   '@types/express-serve-static-core@4.19.6':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       '@types/qs': 6.9.18
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -23558,7 +23588,7 @@ snapshots:
 
   '@types/glob-stream@8.0.2':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       '@types/picomatch': 3.0.2
       '@types/streamx': 2.9.5
 
@@ -23568,7 +23598,7 @@ snapshots:
 
   '@types/graceful-fs@4.1.9':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/gulp@4.0.17':
     dependencies:
@@ -23637,7 +23667,7 @@ snapshots:
   '@types/jsonwebtoken@9.0.8':
     dependencies:
       '@types/ms': 2.1.0
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/lodash.isequal@4.5.8':
     dependencies:
@@ -23649,7 +23679,7 @@ snapshots:
 
   '@types/memcached@2.2.10':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/mime@1.3.5': {}
 
@@ -23659,11 +23689,11 @@ snapshots:
 
   '@types/mysql@2.15.26':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/node-fetch@2.6.12':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       form-data: 4.0.1
 
   '@types/node-forge@1.3.11':
@@ -23692,7 +23722,7 @@ snapshots:
 
   '@types/pg@8.6.1':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       pg-protocol: 1.7.0
       pg-types: 2.2.0
 
@@ -23755,7 +23785,7 @@ snapshots:
   '@types/request@2.48.12':
     dependencies:
       '@types/caseless': 0.12.5
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       '@types/tough-cookie': 4.0.5
       form-data: 2.5.2
     optional: true
@@ -23771,12 +23801,12 @@ snapshots:
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       '@types/send': 0.17.4
 
   '@types/shimmer@1.2.0': {}
@@ -23785,13 +23815,13 @@ snapshots:
 
   '@types/streamx@2.9.5':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/symlink-or-copy@1.2.2': {}
 
   '@types/tedious@4.0.14':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/through@0.0.33':
     dependencies:
@@ -23820,17 +23850,21 @@ snapshots:
   '@types/vinyl@2.0.12':
     dependencies:
       '@types/expect': 1.20.4
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/wait-on@5.3.4':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
 
   '@types/webidl-conversions@7.0.3': {}
 
   '@types/whatwg-url@11.0.5':
     dependencies:
       '@types/webidl-conversions': 7.0.3
+
+  '@types/ws@8.5.14':
+    dependencies:
+      '@types/node': 22.13.1
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -23844,7 +23878,7 @@ snapshots:
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
     optional: true
 
   '@typescript-eslint/eslint-plugin@8.22.0(@typescript-eslint/parser@8.22.0(eslint@8.57.1)(typescript@5.7.3))(eslint@8.57.1)(typescript@5.7.3)':
@@ -25431,7 +25465,7 @@ snapshots:
 
   chrome-launcher@0.15.2:
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       escape-string-regexp: 4.0.0
       is-wsl: 2.2.0
       lighthouse-logger: 1.4.2
@@ -25459,7 +25493,7 @@ snapshots:
 
   chromium-edge-launcher@1.0.0:
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       escape-string-regexp: 4.0.0
       is-wsl: 2.2.0
       lighthouse-logger: 1.4.2
@@ -26489,7 +26523,7 @@ snapshots:
   engine.io@6.6.4:
     dependencies:
       '@types/cors': 2.8.17
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       accepts: 1.3.8
       base64id: 2.0.0
       cookie: 0.7.2
@@ -28264,10 +28298,11 @@ snapshots:
       graphql: 16.10.0
       tslib: 2.8.1
 
-  graphql-ws@6.0.3(graphql@16.10.0)(ws@8.18.0):
+  graphql-ws@6.0.3(@fastify/websocket@11.0.2)(graphql@16.10.0)(ws@8.18.0):
     dependencies:
       graphql: 16.10.0
     optionalDependencies:
+      '@fastify/websocket': 11.0.2
       ws: 8.18.0
 
   graphql-yoga@5.10.11(graphql@16.10.0):
@@ -29180,7 +29215,7 @@ snapshots:
       '@jest/expect': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       chalk: 4.1.2
       co: 4.6.0
       dedent: 1.5.3(babel-plugin-macros@3.1.0)
@@ -29299,7 +29334,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.9
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -29423,7 +29458,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       chalk: 4.1.2
       emittery: 0.13.1
       graceful-fs: 4.2.11
@@ -29451,7 +29486,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       chalk: 4.1.2
       cjs-module-lexer: 1.4.3
       collect-v8-coverage: 1.0.2
@@ -29516,7 +29551,7 @@ snapshots:
     dependencies:
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -29531,7 +29566,7 @@ snapshots:
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -31607,7 +31642,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.13.0
+      '@types/node': 22.13.1
       long: 5.2.4
 
   proxy-addr@2.0.7:

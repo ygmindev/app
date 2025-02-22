@@ -13,7 +13,6 @@ import { ChatResolver } from '@lib/backend/chat/resources/Chat/ChatResolver/Chat
 import { OrderResolver } from '@lib/backend/commerce/resources/Order/OrderResolver/OrderResolver';
 import { PricingResolver } from '@lib/backend/commerce/resources/Pricing/PricingResolver/PricingResolver';
 import { ProductResolver } from '@lib/backend/commerce/resources/Product/ProductResolver/ProductResolver';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { GroupResolver } from '@lib/backend/group/resources/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '@lib/backend/http/resources/Socket/SocketResolver/SocketResolver';
@@ -27,6 +26,7 @@ import {
   type GraphqlConfigModel,
 } from '@lib/config/graphql/graphql.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
 export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({

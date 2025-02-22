@@ -1,3 +1,4 @@
+import websocket from '@fastify/websocket';
 import { useGraphQLSSE } from '@graphql-yoga/plugin-graphql-sse';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { formatGraphqlError } from '@lib/backend/http/utils/formatGraphqlError/formatGraphqlError';
@@ -7,14 +8,23 @@ import {
 } from '@lib/backend/server/utils/runServer/_runServer.models';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import { config as graphqlConfig } from '@lib/config/graphql/graphql';
+import { _graphql } from '@lib/config/graphql/_graphql';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
+import { HTTP_PROTOCOL } from '@lib/shared/http/http.constants';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
-import { fastify, type FastifyReply, type FastifyRequest, type HTTPMethods } from 'fastify';
+import {
+  fastify,
+  type FastifyReply,
+  type FastifyRequest,
+  type HTTPMethods,
+  type RouteOptions,
+} from 'fastify';
 import { readFileSync } from 'fs';
 import { type GraphQLError } from 'graphql';
+import { makeHandler } from 'graphql-ws/use/@fastify/websocket';
 import { createYoga } from 'graphql-yoga';
 import toNumber from 'lodash/toNumber';
 
@@ -36,6 +46,8 @@ export const _runServer = async ({
     },
   });
 
+  await app.register(websocket);
+
   const handleClose = async (): Promise<void> => {
     app.server.listening && (await app.close());
   };
@@ -49,62 +61,64 @@ export const _runServer = async ({
     },
   });
 
-  api.routes.forEach(({ handler, method, pathname, type }) => {
+  api.routes.forEach(({ handler, method, pathname, protocol, schema, type }) => {
     const url = `/${joinPaths([api.prefix, pathname])}`;
     logger.info(
       `${Array.isArray(method) ? method.join(',') : method} ${uri({ host: process.env.SERVER_APP_HOST, port: process.env.SERVER_APP_PORT })}${url}`,
     );
 
-    switch (type) {
-      case API_ENDPOINT_TYPE.GRAPHQL: {
-        const schema = graphqlConfig.config();
-        const yoga = createYoga<{ reply: FastifyReply; req: FastifyRequest }>({
-          context: async ({ request }) => {
-            const context: RequestContextModel = {};
-            const access = request.headers.get('authorization');
-            access && (context.token = { access });
-            // TODO: delete token if expired token
-            // request.headers.delete('authorization');
-            return context;
-          },
-          landingPage: false,
-          logging: logger,
-          maskedErrors: {
-            maskError(error, message, isDev) {
-              return formatGraphqlError(error as GraphQLError);
-            },
-          },
-          plugins: [useGraphQLSSE],
-          schema,
-        });
+    const route: RouteOptions = {
+      handler: async (req, reply) => {
+        const { body, status } = handler
+          ? await handler({ body: req.body })
+          : { body: '', status: 200 };
+        await reply.status(status ?? 200).send(body);
+      },
+      method: method as HTTPMethods,
+      url,
+    };
 
-        app.route({
-          handler: async (req, reply) => {
+    if (type === API_ENDPOINT_TYPE.GRAPHQL) {
+      const schemaF = schema && _graphql(schema);
+      const yoga = createYoga<{ reply: FastifyReply; req: FastifyRequest }>({
+        context: async ({ request }) => {
+          const context: RequestContextModel = {};
+          const access = request.headers.get('authorization');
+          access && (context.token = { access });
+          // TODO: delete token if expired token
+          // request.headers.delete('authorization');
+          return context;
+        },
+        landingPage: false,
+        logging: logger,
+        maskedErrors: {
+          maskError(error, message, isDev) {
+            return formatGraphqlError(error as GraphQLError);
+          },
+        },
+        plugins: filterNil([protocol !== HTTP_PROTOCOL.WEBSOCKET && useGraphQLSSE]),
+        schema: schemaF,
+      });
+
+      switch (protocol) {
+        case HTTP_PROTOCOL.WEBSOCKET: {
+          route.wsHandler = makeHandler({ schema: schemaF });
+          break;
+        }
+        default: {
+          route.handler = async (req, reply) => {
             const response = await yoga.handleNodeRequestAndResponse(req, reply, { reply, req });
             response.headers.forEach((value: unknown, key: string) => {
               void reply.header(key, value);
             });
             await reply.status(response.status ?? 200).send(response.body);
-          },
-          method: method as HTTPMethods,
-          url,
-        });
-
-        break;
-      }
-      default: {
-        app.route({
-          handler: async (req, reply) => {
-            const { body, status } = await handler({ body: req.body });
-            await reply.status(status ?? 200).send(body);
-          },
-          // TODO: handle websocket
-          method: method as HTTPMethods,
-          url,
-        });
-        break;
+          };
+          break;
+        }
       }
     }
+
+    app.route(route);
   });
 
   try {

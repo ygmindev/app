@@ -1,11 +1,14 @@
 import {
   type HTTP_METHOD,
+  type HTTP_PROTOCOL,
   type HTTP_RESPONSE_TYPE,
   type WEBSOCKET_METHOD,
   type WEBSOCKET_STATUS,
 } from '@lib/shared/http/http.constants';
 
 export type HttpMethodModel = `${HTTP_METHOD}`;
+
+export type HttpProtocolModel = `${HTTP_PROTOCOL}`;
 
 export type HttpResponseTypeModel = `${HTTP_RESPONSE_TYPE}`;
 

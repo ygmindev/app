@@ -11,7 +11,7 @@ import { type PartialDeepModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { HTTP_METHOD } from '@lib/shared/http/http.constants';
+import { HTTP_PROTOCOL } from '@lib/shared/http/http.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import reduce from 'lodash/reduce';
 
@@ -148,7 +148,7 @@ export const _serverless = ({
             [k]: {
               ephemeralStorageSize: 1024,
               events:
-                v.method === HTTP_METHOD.WEBSOCKET
+                v.protocol === HTTP_PROTOCOL.WEBSOCKET
                   ? [
                       { websocket: { route: '$connect' } },
                       { websocket: { route: '$disconnect' } },

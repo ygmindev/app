@@ -14,6 +14,7 @@
     "@fastify/cookie": "^11.0.2",
     "@fastify/middie": "^9.0.3",
     "@fastify/static": "^8.0.4",
+    "@fastify/websocket": "^11.0.2",
     "@graphql-yoga/plugin-graphql-sse": "^3.11.0",
     "@graphql-yoga/redis-event-target": "^3.0.3",
     "@lib/backend": "workspace:^",

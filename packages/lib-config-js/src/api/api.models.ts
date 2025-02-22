@@ -1,9 +1,11 @@
 import { type DatabaseModel } from '@lib/backend/database/utils/Database/Database.models';
 import { type API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
+import { type GraphqlConfigModel } from '@lib/config/graphql/graphql.models';
 import { type AuthStateModel } from '@lib/frontend/auth/stores/authStore/authStore.models';
 import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import {
   type HttpMethodModel,
+  type HttpProtocolModel,
   type HttpRequestModel,
   type HttpResponseModel,
 } from '@lib/shared/http/http.models';
@@ -32,8 +34,21 @@ export type ApiEndpointTypeModel = `${API_ENDPOINT_TYPE}`;
 
 export type ApiEndpointModel<TType = void, TParams = void> = {
   filename?: string;
-  handler: ApiHandlerModel<TType, TParams>;
+
   method: HttpMethodModel | Array<HttpMethodModel>;
+
   pathname: string;
-  type?: ApiEndpointTypeModel;
-};
+
+  protocol?: HttpProtocolModel;
+} & (
+  | {
+      handler?: never;
+      schema: GraphqlConfigModel;
+      type: API_ENDPOINT_TYPE.GRAPHQL;
+    }
+  | {
+      handler: ApiHandlerModel<TType, TParams>;
+      schema?: never;
+      type: API_ENDPOINT_TYPE.REST;
+    }
+);

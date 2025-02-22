@@ -1,6 +1,7 @@
 import configBase from '@lib/config/api/api.base';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type ApiConfigModel } from '@lib/config/api/api.models';
+import { config as graphqlConfig } from '@lib/config/graphql/graphql';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { HTTP_METHOD } from '@lib/shared/http/http.constants';
@@ -14,10 +15,11 @@ export const config = defineConfig<ApiConfigModel>({
         {
           method: [HTTP_METHOD.GET, HTTP_METHOD.POST, HTTP_METHOD.OPTIONS],
           pathname: GRAPHQL,
+          schema: graphqlConfig.params(),
           type: API_ENDPOINT_TYPE.GRAPHQL,
         },
       ],
-    } as ApiConfigModel,
+    },
   ],
 });
 

@@ -13,6 +13,10 @@ export enum HTTP_METHOD {
   POST = 'POST',
   PUT = 'PUT',
   UPDATE = 'UPDATE',
+}
+
+export enum HTTP_PROTOCOL {
+  HTTP = 'HTTP',
   WEBSOCKET = 'WEBSOCKET',
 }
 
