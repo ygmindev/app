@@ -5,6 +5,7 @@ export type _UseWebsocketParamsModel<TType = unknown> = {
   onClose?(): void;
   onMessage?(message: TType): void;
   onOpen?(): void;
+  protocols?: Array<string>;
   uri(): Promise<UriModel>;
 };
 

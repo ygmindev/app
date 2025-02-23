@@ -118,7 +118,7 @@ export const _runServer = async ({
       }
     }
 
-    app.route(route);
+    app.register(async (fastify) => fastify.route(route));
   });
 
   try {

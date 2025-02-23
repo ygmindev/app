@@ -45,6 +45,7 @@
     "fuse.js": "^7.0.0",
     "geolocator": "^2.1.5",
     "graphql-tag": "^2.12.6",
+    "graphql-ws": "^6.0.3",
     "http-errors": "^2.0.0",
     "i18next": "^24.2.1",
     "i18next-browser-languagedetector": "^8.0.2",

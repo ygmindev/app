@@ -1,4 +1,4 @@
-import { config } from '@lib/config/graphql/graphql';
+import { config } from '@lib/config/graphql/graphql.main';
 import { useAppGraphql as useAppGraphqlBase } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql.base';
 import {
   type UseAppGraphqlModel,

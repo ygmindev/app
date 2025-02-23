@@ -19,6 +19,6 @@ export class Socket extends EntityResource implements SocketModel {
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   connections!: Array<string>;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   name?: string;
 }

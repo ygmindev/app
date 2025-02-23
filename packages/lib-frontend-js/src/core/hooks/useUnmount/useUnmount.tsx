@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 export const useUnmount = (params: UseUnmountParamsModel): UseUnmountModel => {
   useEffect(() => {
     return () => {
-      params && params();
+      params?.();
     };
   }, []);
 };

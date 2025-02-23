@@ -100,6 +100,9 @@ importers:
       graphql-tag:
         specifier: ^2.12.6
         version: 2.12.6(graphql@16.10.0)
+      graphql-ws:
+        specifier: ^6.0.3
+        version: 6.0.3(@fastify/websocket@11.0.2)(graphql@16.10.0)(ws@8.18.0)
       http-errors:
         specifier: ^2.0.0
         version: 2.0.0
@@ -256,6 +259,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      graphql-ws:
+        specifier: ^6.0.3
+        version: 6.0.3(@fastify/websocket@11.0.2)(graphql@16.10.0)(ws@8.18.0)
       inversify:
         specifier: ^6.2.1
         version: 6.2.1(reflect-metadata@0.2.2)
@@ -424,6 +430,9 @@ importers:
       graphql-tag:
         specifier: ^2.12.6
         version: 2.12.6(graphql@16.10.0)
+      graphql-ws:
+        specifier: ^6.0.3
+        version: 6.0.3(@fastify/websocket@11.0.2)(graphql@16.10.0)(ws@8.18.0)
       http-errors:
         specifier: ^2.0.0
         version: 2.0.0
@@ -604,6 +613,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      graphql-ws:
+        specifier: ^6.0.3
+        version: 6.0.3(@fastify/websocket@11.0.2)(graphql@16.10.0)(ws@8.18.0)
       inversify:
         specifier: ^6.2.1
         version: 6.2.1(reflect-metadata@0.2.2)

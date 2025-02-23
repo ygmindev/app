@@ -5,7 +5,6 @@ import { AccessResolver } from '@lib/backend/auth/resources/Access/AccessResolve
 import { OtpResolver } from '@lib/backend/auth/resources/Otp/OtpResolver/OtpResolver';
 import { RoleResolver } from '@lib/backend/auth/resources/Role/RoleResolver/RoleResolver';
 import { SignInResolver } from '@lib/backend/auth/resources/SignIn/SignInResolver/SignInResolver';
-import { authorize } from '@lib/backend/auth/utils/authorize/authorize';
 import { BankResolver } from '@lib/backend/billing/resources/Bank/BankResolver/BankResolver';
 import { CardResolver } from '@lib/backend/billing/resources/Card/CardResolver/CardResolver';
 import { PaymentMethodResolver } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver';
@@ -20,24 +19,19 @@ import { MapRouteResolver } from '@lib/backend/map/resources/MapRoute/MapRouteRe
 import { SnapshotResolver } from '@lib/backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '@lib/backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '@lib/backend/user/resources/User/UserResolver/UserResolver';
-import { _graphql } from '@lib/config/graphql/_graphql';
+import { config as configBase } from '@lib/config/graphql/graphql.base';
 import {
   type _GraphqlConfigModel,
   type GraphqlConfigModel,
 } from '@lib/config/graphql/graphql.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
 export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
-  config: _graphql,
+  ...configBase,
 
-  params: () =>
-    ({
-      authorize,
-
-      container: Container,
-
+  overrides: () => [
+    {
       resolvers: filterNil([
         AccessResolver,
         BankResolver,
@@ -61,8 +55,9 @@ export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
         process.env.NODE_ENV !== 'production' && SnapshotResolver,
       ]),
 
-      schemaDir: fromStatic('graphql/schema.gql'),
-    }) as GraphqlConfigModel,
+      schemaDir: fromStatic('graphql/main.gql'),
+    },
+  ],
 });
 
 export default config;

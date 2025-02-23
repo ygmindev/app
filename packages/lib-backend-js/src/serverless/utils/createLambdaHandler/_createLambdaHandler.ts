@@ -16,7 +16,7 @@ import {
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import { type LambdaResponseModel } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
-import { config as graphqlConfig } from '@lib/config/graphql/graphql';
+import { config as graphqlConfig } from '@lib/config/graphql/graphql.main';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import {

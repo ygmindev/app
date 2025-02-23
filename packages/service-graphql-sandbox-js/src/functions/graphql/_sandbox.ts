@@ -1,6 +1,6 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { config } from '@lib/config/graphql/graphql';
+import { config } from '@lib/config/graphql/graphql.main';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type _SandboxParamsModel } from '@service/graphql-sandbox/functions/graphql/_sandbox.models';
 

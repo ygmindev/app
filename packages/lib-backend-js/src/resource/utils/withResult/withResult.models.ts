@@ -12,7 +12,7 @@ export type WithResultParamsModel<TType extends unknown> = WithAccessParamsModel
       }
     | {
         operation?: GRAPHQL_OPERATION_TYPE.SUBSCRIPTION;
-        topics: Array<string>;
+        topics?: Array<string>;
       }
   );
 
