@@ -2,7 +2,7 @@ import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResour
 import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefField';
+import { withRootField } from '@lib/backend/resource/utils/withRootField/withRootField';
 import { User } from '@lib/backend/user/resources/User/User';
 import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
 import {
@@ -10,12 +10,13 @@ import {
   type CardModel,
 } from '@lib/shared/billing/resources/Card/Card.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ indices: [{ keys: ['fingerprint'] }], isDatabase: true, name: CARD_RESOURCE_NAME })
 export class Card extends EmbeddedResource implements CardModel {
-  @withRefField({ Resource: () => User })
-  _user!: RefFieldModel<UserModel>;
+  @withRootField({ Resource: () => User, mappedBy: CARD_RESOURCE_NAME })
+  [USER_RESOURCE_NAME]!: RefFieldModel<UserModel>;
 
   @withField({ isDatabase: true, type: DATA_TYPE.NUMBER })
   expMonth!: number;

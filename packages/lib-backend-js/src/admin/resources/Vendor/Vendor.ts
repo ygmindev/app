@@ -1,5 +1,6 @@
 import { Utility } from '@lib/backend/admin/resources/Utility/Utility';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
+import { RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEmbeddedResourceField } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
@@ -11,8 +12,8 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: VENDOR_RESOURCE_NAME })
 export class Vendor extends EntityResource implements VendorModel {
-  @withEmbeddedResourceField({ Resource: () => Utility, isDatabase: true, root: '_vender' })
-  [UTILITY_RESOURCE_NAME]?: Array<UtilityModel>;
+  @withEmbeddedResourceField({ Resource: () => Utility, mappedBy: VENDOR_RESOURCE_NAME })
+  [UTILITY_RESOURCE_NAME]?: Array<RefFieldModel<UtilityModel>>;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   imageSrc?: string;

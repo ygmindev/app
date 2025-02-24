@@ -1,4 +1,4 @@
-import { createProtectedResoureImplementation } from '@lib/backend/auth/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
+import { createProtectedResoureImplementation } from '@lib/backend/resource/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
 import { Container } from '@lib/backend/core/utils/Container/Container';
 import { TestableProtectedResoureImplementation } from '@lib/backend/test/resources/TestableProtectedResoure/TestableProtectedResoureImplementation/TestableProtectedResoureImplementation';
 import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';

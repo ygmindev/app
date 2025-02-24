@@ -1,11 +1,10 @@
 import { AccessImplementation } from '@lib/backend/auth/resources/Access/AccessImplementation/AccessImplementation';
+import { GroupImplementation } from '@lib/backend/group/resources/Group/GroupImplementation/GroupImplementation';
+import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import {
   type CreateProtectedResoureImplementationModel,
   type CreateProtectedResoureImplementationParamsModel,
-} from '@lib/backend/auth/utils/createProtectedResourceImplementation/createProtectedResourceImplementation.models';
-import { Container } from '@lib/shared/core/utils/Container/Container';
-import { GroupImplementation } from '@lib/backend/group/resources/Group/GroupImplementation/GroupImplementation';
-import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
+} from '@lib/backend/resource/utils/createProtectedResourceImplementation/createProtectedResourceImplementation.models';
 import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
@@ -13,6 +12,7 @@ import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants
 import { type ProtectedResourceModel } from '@lib/shared/auth/resources/ProtectedResource/ProtectedResource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
@@ -22,12 +22,15 @@ import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constan
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { ObjectId } from 'mongodb';
 
 export const createProtectedResoureImplementation = <
   TType extends ProtectedResourceModel,
   TForm extends EntityResourceDataModel<TType> = EntityResourceDataModel<TType>,
 >({
+  beforeCreate,
+  isAuthored = true,
   ...params
 }: CreateProtectedResoureImplementationParamsModel<
   TType,
@@ -35,6 +38,17 @@ export const createProtectedResoureImplementation = <
 >): CreateProtectedResoureImplementationModel<TType, TForm> => {
   class ProtectedResourceImplementation extends createEntityResourceImplementation<TType, TForm>({
     ...params,
+    beforeCreate: async ({ input }, context) => {
+      const inputF = input;
+      if (isAuthored) {
+        const uid = context?.user?._id;
+        if (!uid) {
+          throw new UnauthenticatedError();
+        }
+        inputF?.form && (inputF.form[USER_RESOURCE_NAME] = { _id: uid });
+      }
+      return beforeCreate ? beforeCreate({ input: inputF }, context) : inputF;
+    },
   }) {
     @withInject(GroupImplementation) protected _groupImplementation!: GroupImplementationModel;
 
@@ -63,9 +77,9 @@ export const createProtectedResoureImplementation = <
     }
 
     async Group(self: TType): Promise<PartialModel<GroupModel> | null> {
-      if (self._group) {
+      if (self[GROUP_RESOURCE_NAME]) {
         const { result } = await this._groupImplementation.get({
-          filter: [{ field: '_id', value: self._group }],
+          filter: [{ field: '_id', value: self[GROUP_RESOURCE_NAME] }],
         });
         if (result) {
           return result;

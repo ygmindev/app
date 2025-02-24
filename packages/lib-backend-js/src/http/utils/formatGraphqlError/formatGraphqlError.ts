@@ -11,6 +11,7 @@ export const formatGraphqlError = (
   params: FormatGraphqlErrorParamsModel,
 ): FormatGraphqlErrorModel => {
   const originalError = params.originalError as HttpError;
+  console.trace(originalError);
   const error = new GraphQLError(originalError?.message ?? params.message, {
     extensions: {
       stack:

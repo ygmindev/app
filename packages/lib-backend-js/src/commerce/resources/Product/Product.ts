@@ -1,5 +1,6 @@
 import { Pricing } from '@lib/backend/commerce/resources/Pricing/Pricing';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
+import { RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEmbeddedResourceField } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
@@ -14,8 +15,8 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: PRODUCT_RESOURCE_NAME })
 export class Product extends EntityResource implements ProductModel {
-  @withEmbeddedResourceField({ Resource: () => Pricing, isDatabase: true, root: '_product' })
-  [PRICING_RESOURCE_NAME]?: Array<PricingModel>;
+  @withEmbeddedResourceField({ Resource: () => Pricing, mappedBy: PRODUCT_RESOURCE_NAME })
+  [PRICING_RESOURCE_NAME]?: Array<RefFieldModel<PricingModel>>;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   description?: string;

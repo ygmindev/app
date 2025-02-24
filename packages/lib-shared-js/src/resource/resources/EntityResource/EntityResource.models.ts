@@ -21,7 +21,7 @@ export type EntityResourceDataModel<TType> = TType extends PrimitiveModel
       >]?: RequiredModel<TType>[TKey] extends EntityResourceModel
         ? Pick<EntityResourceModel, '_id'>
         : RequiredModel<TType>[TKey] extends Array<infer TElement>
-          ? Array<EntityResourceDataModel<TElement>>
+          ? Array<PartialModel<TElement>>
           : RequiredModel<TType>[TKey];
     };
 

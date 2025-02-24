@@ -2,23 +2,17 @@ import {
   type WithEmbeddedResourceFieldModel,
   type WithEmbeddedResourceFieldParamsModel,
 } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField.models';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { FIELD_RELATION } from '@lib/backend/resource/utils/withField/withField.constants';
-import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
+import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
 
 export const withEmbeddedResourceField =
   <TType extends unknown>({
     Resource,
-    isDatabase,
-    root,
+    isDatabase = true,
+    mappedBy,
   }: WithEmbeddedResourceFieldParamsModel<TType>): WithEmbeddedResourceFieldModel =>
   (target, propertyKey) =>
-    withField({
+    withOneToManyField({
       Resource,
-      isArray: true,
-      isOptional: true,
       isDatabase,
-      relation: FIELD_RELATION.ONE_TO_MANY,
-      root,
-      type: PROPERTY_TYPE.RESOURCE,
+      mappedBy,
     })(target, propertyKey);

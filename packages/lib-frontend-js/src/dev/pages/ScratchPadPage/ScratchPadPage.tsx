@@ -1,24 +1,39 @@
+import { useChatResource } from '@lib/frontend/chat/hooks/useChatResource/useChatResource';
+import { useMessageResource } from '@lib/frontend/chat/hooks/useMessageResource/useMessageResource';
 import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
-import { useGraphQlWebsocket } from '@lib/frontend/data/hooks/useGraphQlWebsocket/useGraphQlWebsocket';
+import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
-import { WEBSOCKET } from '@lib/shared/http/http.constants';
+import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
+import { type PartialModel } from '@lib/shared/core/core.models';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
+  const { getMany } = useUserResource();
+  const currentUser = useCurrentUser();
+  const { create: createChat } = useChatResource();
+  const { create: createMessage } = useMessageResource();
 
-  useGraphQlWebsocket({
-    uri: async () => ({
-      pathname: `api/${GRAPHQL}/${WEBSOCKET}`,
-    }),
-  });
+  const handlePress = async (user: PartialModel<UserModel>): Promise<void> => {
+    const uid = user._id;
+    if (uid) {
+      const { result } = await createChat({
+        form: {
+          _participants: [{ _id: uid }],
 
-  const onPress = async (): Promise<void> => {
-    await sleep(1000);
+          name: `chat with ${user.email}`,
+        },
+      });
+      const chatId = result?._id;
+      chatId && (await createMessage({ form: { _chat: { _id: chatId }, text: 'test message' } }));
+    }
+
     // await http.post({
     //   params: {
     //     query: 'mutation messageQuery { messageQuery { id message sent } }',
@@ -32,7 +47,23 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
     <MainLayout
       {...wrapperProps}
       p>
-      <Button onPress={onPress}>test</Button>
+      <DataBoundary
+        id="users"
+        query={getMany}
+        s>
+        {({ data }) => (
+          <Wrapper s>
+            {data?.result?.map((v) => (
+              <Button
+                elementState={v._id === currentUser?._id ? ELEMENT_STATE.DISABLED : undefined}
+                key={v._id}
+                onPress={async () => handlePress(v)}>
+                {v.email}
+              </Button>
+            ))}
+          </Wrapper>
+        )}
+      </DataBoundary>
     </MainLayout>
   );
 };

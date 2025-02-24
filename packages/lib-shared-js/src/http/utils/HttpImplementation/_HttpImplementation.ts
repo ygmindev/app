@@ -64,7 +64,6 @@ export class _HttpImplementation implements _HttpImplementationModel {
     { onMessage, params, request, url }: _HttpRequestParamsModel<TParams>,
   ): Promise<TResult | null> => {
     try {
-      console.warn(request);
       const response = await this._instance.request({
         ...request,
         adapter: 'fetch',
@@ -95,7 +94,7 @@ export class _HttpImplementation implements _HttpImplementationModel {
           }
         }
       }
-      return null;
+      return (response?.data as TResult) ?? null;
     } catch (e) {
       console.error(e);
       const eF = new HttpError(

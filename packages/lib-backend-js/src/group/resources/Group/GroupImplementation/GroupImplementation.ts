@@ -1,15 +1,17 @@
 import { AccessImplementation } from '@lib/backend/auth/resources/Access/AccessImplementation/AccessImplementation';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { Group } from '@lib/backend/group/resources/Group/Group';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { ACCESS_ROLE_MORE } from '@lib/shared/auth/resources/Access/Access.constants';
+import { ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constants';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
 import {
   type GroupFormModel,
   type GroupModel,
 } from '@lib/shared/group/resources/Group/Group.models';
 import { type GroupImplementationModel } from '@lib/shared/group/resources/Group/GroupImplementation/GroupImplementation.models';
+import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 
 @withContainer({ name: `${GROUP_RESOURCE_NAME}Implementation` })
 export class GroupImplementation
@@ -22,9 +24,9 @@ export class GroupImplementation
         output.result?._id &&
           (await accessCreate({
             form: {
-              _group: { _id: output.result._id },
-              _user: { _id: userId },
-              role: [ACCESS_ROLE_MORE.ADMIN],
+              [GROUP_RESOURCE_NAME]: { _id: output.result._id },
+              [ROLE_RESOURCE_NAME]: [ACCESS_ROLE_MORE.ADMIN],
+              [USER_RESOURCE_NAME]: { _id: userId },
             },
           }));
       }

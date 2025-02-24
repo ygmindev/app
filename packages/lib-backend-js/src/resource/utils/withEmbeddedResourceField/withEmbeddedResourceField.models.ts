@@ -1,8 +1,13 @@
-import { type WithFieldParamsModel } from '@lib/backend/resource/utils/withField/withField.models';
+import {
+  type WithOneToManyFieldModel,
+  type WithOneToManyFieldParamsModel,
+} from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField.models';
+import { type RequiredModel } from '@lib/shared/core/core.models';
 
 export type WithEmbeddedResourceFieldParamsModel<TType extends unknown> = Pick<
-  WithFieldParamsModel<TType>,
-  'isDatabase' | 'Resource' | 'root'
->;
+  WithOneToManyFieldParamsModel<TType>,
+  'Resource' | 'isDatabase'
+> &
+  RequiredModel<Pick<WithOneToManyFieldParamsModel<TType>, 'mappedBy'>>;
 
-export type WithEmbeddedResourceFieldModel = PropertyDecorator;
+export type WithEmbeddedResourceFieldModel = WithOneToManyFieldModel;

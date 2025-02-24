@@ -4,9 +4,10 @@ import {
   type AuthorizeParamsModel,
 } from '@lib/backend/auth/utils/authorize/authorize.models';
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { ACCESS_ROLE } from '@lib/shared/auth/resources/Access/Access.constants';
 import { type AccessRoleMoreModel } from '@lib/shared/auth/resources/Access/Access.models';
+import { ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constants';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import pullAt from 'lodash/pullAt';
 
 export const authorize = async ({
@@ -27,8 +28,10 @@ export const authorize = async ({
             const { result } = await Container.get(AccessImplementation).get({
               filter: [{ field: '_user', value: user._id }],
             });
-            return result?.role
-              ? (rolesF as Array<AccessRoleMoreModel>).every((v) => result.role?.includes(v))
+            return result?.[ROLE_RESOURCE_NAME]
+              ? (rolesF as Array<AccessRoleMoreModel>).every((v) =>
+                  result[ROLE_RESOURCE_NAME]?.includes(v),
+                )
               : false;
           }
         } catch (e) {

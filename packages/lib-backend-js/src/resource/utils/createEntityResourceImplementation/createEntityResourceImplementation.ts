@@ -1,4 +1,3 @@
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import { type RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
@@ -7,6 +6,7 @@ import {
   type CreateEntityResourceImplementationParamsModel,
 } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation.models';
 import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export const createEntityResourceImplementation = <TType, TForm = EntityResourceDataModel<TType>>({

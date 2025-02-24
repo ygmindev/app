@@ -5,21 +5,20 @@
 
 type Access {
   Group: Group
-  _group: Group
+  Role: [String]
+  User: User
   _id: String
-  _user: User
   created: DateTimeISO
   isFixture: Boolean
-  role: [String]
 }
 
 input AccessCreateFormInput {
-  _group: GroupInput
+  Group: GroupInput
+  Role: [String]
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   isFixture: Boolean
-  role: [String]
 }
 
 input AccessCreateInput {
@@ -28,12 +27,12 @@ input AccessCreateInput {
 }
 
 input AccessCreateManyFormInput {
-  _group: GroupInput
+  Group: GroupInput
+  Role: [String]
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   isFixture: Boolean
-  role: [String]
 }
 
 input AccessCreateManyInput {
@@ -145,12 +144,12 @@ type AccessGetOutput {
 }
 
 input AccessInput {
-  _group: GroupInput
+  Group: GroupInput
+  Role: [String]
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   isFixture: Boolean
-  role: [String]
 }
 
 input AccessRemoveFilterInput {
@@ -207,12 +206,12 @@ type AccessUpdateOutput {
 }
 
 input AccessUpdateUpdateInput {
-  _group: GroupInput
+  Group: GroupInput
+  Role: [String]
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   isFixture: Boolean
-  role: [String]
 }
 
 input AroomOrderContactInput {
@@ -236,8 +235,8 @@ input AroomUserInput {
 }
 
 type Bank {
+  User: User
   _id: String
-  _user: User
   created: DateTimeISO
   externalId: String
   fingerprint: String
@@ -248,8 +247,8 @@ type Bank {
 }
 
 input BankCreateFormInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   fingerprint: String
@@ -265,8 +264,8 @@ input BankCreateInput {
 }
 
 input BankCreateManyFormInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   fingerprint: String
@@ -369,8 +368,8 @@ type BankGetOutput {
 }
 
 input BankInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   fingerprint: String
@@ -437,8 +436,8 @@ type BankUpdateOutput {
 }
 
 input BankUpdateUpdateInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   fingerprint: String
@@ -449,8 +448,8 @@ input BankUpdateUpdateInput {
 }
 
 type Card {
+  User: User
   _id: String
-  _user: User
   created: DateTimeISO
   expMonth: Float
   expYear: Float
@@ -464,8 +463,8 @@ type Card {
 }
 
 input CardCreateFormInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   expMonth: Float
   expYear: Float
@@ -484,8 +483,8 @@ input CardCreateInput {
 }
 
 input CardCreateManyFormInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   expMonth: Float
   expYear: Float
@@ -591,8 +590,8 @@ type CardGetOutput {
 }
 
 input CardInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   expMonth: Float
   expYear: Float
@@ -662,8 +661,8 @@ type CardUpdateOutput {
 }
 
 input CardUpdateUpdateInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   expMonth: Float
   expYear: Float
@@ -677,17 +676,25 @@ input CardUpdateUpdateInput {
 }
 
 type Chat {
+  Group: Group
+  Message: [Message]
+  User: User
   _id: String
   created: DateTimeISO
   isFixture: Boolean
   name: String
+  participants: [User]
 }
 
 input ChatCreateFormInput {
+  Group: GroupInput
+  Message: [MessageInput]
+  User: UserInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
   name: String
+  participants: [UserInput]
 }
 
 input ChatCreateInput {
@@ -696,10 +703,14 @@ input ChatCreateInput {
 }
 
 input ChatCreateManyFormInput {
+  Group: GroupInput
+  Message: [MessageInput]
+  User: UserInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
   name: String
+  participants: [UserInput]
 }
 
 input ChatCreateManyInput {
@@ -785,15 +796,40 @@ type ChatGetManyOutput {
   result: [Chat]
 }
 
+input ChatGetManyProtectedGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatGetManyProtectedGetManyInput {
+  filter: [ChatGetManyProtectedGetManyFilterInput]
+  root: String
+}
+
+type ChatGetManyProtectedGetManyOutput {
+  result: [Chat]
+}
+
 type ChatGetOutput {
   result: Chat
 }
 
 input ChatInput {
+  Group: GroupInput
+  Message: [MessageInput]
+  User: UserInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
   name: String
+  participants: [UserInput]
 }
 
 input ChatRemoveFilterInput {
@@ -850,10 +886,14 @@ type ChatUpdateOutput {
 }
 
 input ChatUpdateUpdateInput {
+  Group: GroupInput
+  Message: [MessageInput]
+  User: UserInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
   name: String
+  participants: [UserInput]
 }
 
 input CoordinateInput {
@@ -892,6 +932,7 @@ input GetRouteInput {
 }
 
 type Group {
+  Access: [Access]
   Role: [Role]
   _id: String
   created: DateTimeISO
@@ -902,6 +943,7 @@ type Group {
 }
 
 input GroupCreateFormInput {
+  Access: [AccessInput]
   Role: [RoleInput]
   _id: String
   created: DateTimeISO
@@ -917,6 +959,7 @@ input GroupCreateInput {
 }
 
 input GroupCreateManyFormInput {
+  Access: [AccessInput]
   Role: [RoleInput]
   _id: String
   created: DateTimeISO
@@ -1014,6 +1057,7 @@ type GroupGetOutput {
 }
 
 input GroupInput {
+  Access: [AccessInput]
   Role: [RoleInput]
   _id: String
   created: DateTimeISO
@@ -1077,6 +1121,7 @@ type GroupUpdateOutput {
 }
 
 input GroupUpdateUpdateInput {
+  Access: [AccessInput]
   Role: [RoleInput]
   _id: String
   created: DateTimeISO
@@ -1095,6 +1140,26 @@ type MapRoute {
   duration: Float
   polyline: String
   priceTiers: [PriceTier]
+}
+
+type Message {
+  Chat: Chat
+  Group: Group
+  User: User
+  _id: String
+  created: DateTimeISO
+  isFixture: Boolean
+  text: String
+}
+
+input MessageInput {
+  Chat: ChatInput
+  Group: GroupInput
+  User: UserInput
+  _id: String
+  created: DateTimeISO
+  isFixture: Boolean
+  text: String
 }
 
 type Mutation {
@@ -1559,8 +1624,9 @@ input PaginationInput {
 }
 
 type PaymentMethod {
+  Group: Group
+  User: User
   _id: String
-  _user: User
   created: DateTimeISO
   externalId: String
   fingerprint: String
@@ -1571,8 +1637,9 @@ type PaymentMethod {
 }
 
 input PaymentMethodCreateFormInput {
+  Group: GroupInput
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   fingerprint: String
@@ -1588,8 +1655,9 @@ input PaymentMethodCreateInput {
 }
 
 input PaymentMethodCreateManyFormInput {
+  Group: GroupInput
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   fingerprint: String
@@ -1692,8 +1760,9 @@ type PaymentMethodGetOutput {
 }
 
 input PaymentMethodInput {
+  Group: GroupInput
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   fingerprint: String
@@ -1795,8 +1864,9 @@ type PaymentMethodUpdateOutput {
 }
 
 input PaymentMethodUpdateUpdateInput {
+  Group: GroupInput
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   fingerprint: String
@@ -1812,8 +1882,8 @@ type PriceTier {
 }
 
 type Pricing {
+  Product: Product
   _id: String
-  _product: Product
   created: DateTimeISO
   currency: String
   frequency: String
@@ -1822,8 +1892,8 @@ type Pricing {
 }
 
 input PricingCreateFormInput {
+  Product: ProductInput
   _id: String
-  _product: ProductInput
   created: DateTimeISO
   currency: String
   frequency: String
@@ -1837,8 +1907,8 @@ input PricingCreateInput {
 }
 
 input PricingCreateManyFormInput {
+  Product: ProductInput
   _id: String
-  _product: ProductInput
   created: DateTimeISO
   currency: String
   frequency: String
@@ -1939,8 +2009,8 @@ type PricingGetOutput {
 }
 
 input PricingInput {
+  Product: ProductInput
   _id: String
-  _product: ProductInput
   created: DateTimeISO
   currency: String
   frequency: String
@@ -2005,8 +2075,8 @@ type PricingUpdateOutput {
 }
 
 input PricingUpdateUpdateInput {
+  Product: ProductInput
   _id: String
-  _product: ProductInput
   created: DateTimeISO
   currency: String
   frequency: String
@@ -2242,6 +2312,7 @@ type Query {
   ChatGet(input: ChatGetInput): ChatGetOutput
   ChatGetConnection(input: ChatGetConnectionInput): ChatGetConnectionOutput
   ChatGetMany(input: ChatGetManyInput): ChatGetManyOutput
+  ChatGetManyProtectedGetMany(input: ChatGetManyProtectedGetManyInput): ChatGetManyProtectedGetManyOutput
   ChatSearch(input: ChatSearchInput): ChatSearchOutput
   GetMapRoute(input: GetRouteInput): MapRoute
   GroupGet(input: GroupGetInput): GroupGetOutput
@@ -2297,7 +2368,7 @@ type Query {
 }
 
 type Role {
-  _group: Group
+  Group: Group
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -2305,7 +2376,7 @@ type Role {
 }
 
 input RoleCreateFormInput {
-  _group: GroupInput
+  Group: GroupInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -2318,7 +2389,7 @@ input RoleCreateInput {
 }
 
 input RoleCreateManyFormInput {
-  _group: GroupInput
+  Group: GroupInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -2418,7 +2489,7 @@ type RoleGetOutput {
 }
 
 input RoleInput {
-  _group: GroupInput
+  Group: GroupInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -2482,7 +2553,7 @@ type RoleUpdateOutput {
 }
 
 input RoleUpdateUpdateInput {
-  _group: GroupInput
+  Group: GroupInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -2537,8 +2608,11 @@ type SignInUserUpdateOutput {
 }
 
 input SignInUserUpdateUpdateInput {
+  Access: [AccessInput]
   Bank: [BankInput]
   Card: [CardInput]
+  Chat: [ChatInput]
+  Message: [MessageInput]
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
@@ -2806,8 +2880,11 @@ input SocketUpdateUpdateInput {
 }
 
 type User {
+  Access: [Access]
   Bank: [Bank]
   Card: [Card]
+  Chat: [Chat]
+  Message: [Message]
   PaymentMethod: [PaymentMethod]
   _id: String
   callingCode: String
@@ -2822,8 +2899,11 @@ type User {
 }
 
 input UserCreateFormInput {
+  Access: [AccessInput]
   Bank: [BankInput]
   Card: [CardInput]
+  Chat: [ChatInput]
+  Message: [MessageInput]
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
@@ -2843,8 +2923,11 @@ input UserCreateInput {
 }
 
 input UserCreateManyFormInput {
+  Access: [AccessInput]
   Bank: [BankInput]
   Card: [CardInput]
+  Chat: [ChatInput]
+  Message: [MessageInput]
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
@@ -2946,8 +3029,11 @@ type UserGetOutput {
 }
 
 input UserInput {
+  Access: [AccessInput]
   Bank: [BankInput]
   Card: [CardInput]
+  Chat: [ChatInput]
+  Message: [MessageInput]
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
@@ -3015,8 +3101,11 @@ type UserUpdateOutput {
 }
 
 input UserUpdateUpdateInput {
+  Access: [AccessInput]
   Bank: [BankInput]
   Card: [CardInput]
+  Chat: [ChatInput]
+  Message: [MessageInput]
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
@@ -3031,8 +3120,8 @@ input UserUpdateUpdateInput {
 }
 
 type Utility {
+  Vendor: Vendor
   _id: String
-  _vender: Vendor
   created: DateTimeISO
   description: String
   imageSrc: String
@@ -3044,8 +3133,8 @@ type Utility {
 }
 
 input UtilityCreateFormInput {
+  Vendor: VendorInput
   _id: String
-  _vender: VendorInput
   created: DateTimeISO
   description: String
   imageSrc: String
@@ -3062,8 +3151,8 @@ input UtilityCreateInput {
 }
 
 input UtilityCreateManyFormInput {
+  Vendor: VendorInput
   _id: String
-  _vender: VendorInput
   created: DateTimeISO
   description: String
   imageSrc: String
@@ -3167,8 +3256,8 @@ type UtilityGetOutput {
 }
 
 input UtilityInput {
+  Vendor: VendorInput
   _id: String
-  _vender: VendorInput
   created: DateTimeISO
   description: String
   imageSrc: String
@@ -3236,8 +3325,8 @@ type UtilityUpdateOutput {
 }
 
 input UtilityUpdateUpdateInput {
+  Vendor: VendorInput
   _id: String
-  _vender: VendorInput
   created: DateTimeISO
   description: String
   imageSrc: String
@@ -3439,8 +3528,8 @@ input VendorUpdateUpdateInput {
 }
 
 type linkedUser {
+  User: User
   _id: String
-  _user: User
   created: DateTimeISO
   externalId: String
   isFixture: Boolean
@@ -3448,8 +3537,8 @@ type linkedUser {
 }
 
 input linkedUserCreateFormInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   isFixture: Boolean
@@ -3462,8 +3551,8 @@ input linkedUserCreateInput {
 }
 
 input linkedUserCreateManyFormInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   isFixture: Boolean
@@ -3563,8 +3652,8 @@ type linkedUserGetOutput {
 }
 
 input linkedUserInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   isFixture: Boolean
@@ -3628,8 +3717,8 @@ type linkedUserUpdateOutput {
 }
 
 input linkedUserUpdateUpdateInput {
+  User: UserInput
   _id: String
-  _user: UserInput
   created: DateTimeISO
   externalId: String
   isFixture: Boolean

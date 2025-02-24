@@ -1,6 +1,6 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
-import { createProtectedResoureImplementation } from '@lib/backend/auth/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { createProtectedResoureImplementation } from '@lib/backend/resource/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
 import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
@@ -21,6 +21,7 @@ import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.model
 export class AccessImplementation
   extends createProtectedResoureImplementation<AccessModel, AccessFormModel>({
     Resource: Access,
+    isAuthored: false,
     name: ACCESS_RESOURCE_NAME,
   })
   implements AccessImplementationModel

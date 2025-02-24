@@ -7,7 +7,9 @@ import { type EntityResourceDataModel } from '@lib/shared/resource/resources/Ent
 export type CreateProtectedResoureImplementationParamsModel<
   TType extends ProtectedResourceModel,
   TForm = EntityResourceDataModel<TType>,
-> = CreateEntityResourceImplementationParamsModel<TType, TForm>;
+> = CreateEntityResourceImplementationParamsModel<TType, TForm> & {
+  isAuthored?: boolean;
+};
 
 export type CreateProtectedResoureImplementationModel<
   TType extends ProtectedResourceModel,

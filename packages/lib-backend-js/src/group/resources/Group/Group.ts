@@ -1,8 +1,12 @@
+import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { Role } from '@lib/backend/auth/resources/Role/Role';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import { withEmbeddedResourceField } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField';
+import { RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
+import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
+import { AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constants';
 import { RoleModel } from '@lib/shared/auth/resources/Role/Role.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
@@ -14,15 +18,18 @@ import {
 
 @withEntity({ isDatabase: true, name: GROUP_RESOURCE_NAME })
 export class Group extends EntityResource implements GroupModel {
-  @withEmbeddedResourceField({ Resource: () => Role, isDatabase: true, root: '_group' })
-  [ROLE_RESOURCE_NAME]?: Array<RoleModel>;
+  @withOneToManyField({ Resource: () => Access, mappedBy: GROUP_RESOURCE_NAME })
+  [ACCESS_RESOURCE_NAME]?: Array<RefFieldModel<AccessModel>>;
+
+  @withOneToManyField({ Resource: () => Role, mappedBy: GROUP_RESOURCE_NAME })
+  [ROLE_RESOURCE_NAME]?: Array<RefFieldModel<RoleModel>>;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  logo?: string;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 
   @withField({ isArray: true, isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   types?: Array<GroupTypeModel>;
-
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
-  logo?: string;
 }

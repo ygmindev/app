@@ -47,9 +47,9 @@ const getColumn = <TType extends unknown>({
   defaultValue,
   isArray,
   isOptional,
+  mappedBy,
   name,
   relation,
-  root,
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
   const defaultOptions: PropertyOptions<object> = { nullable: isOptional, onCreate: defaultValue };
@@ -66,12 +66,15 @@ const getColumn = <TType extends unknown>({
         return ManyToMany({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
+          mappedBy: mappedBy ? (owner) => owner[mappedBy] : undefined,
+          nullable: true,
+          owner: !mappedBy,
         }) as PropertyDecorator;
       case FIELD_RELATION.ONE_TO_MANY:
         return OneToMany({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          mappedBy: root as StringKeyModel<TType>,
+          mappedBy: mappedBy as StringKeyModel<TType>,
           nullable: true,
           orphanRemoval: true,
         }) as PropertyDecorator;
@@ -122,9 +125,9 @@ export const withField =
     isOptional,
     isSchema = true,
     isUnique,
+    mappedBy,
     name,
     relation,
-    root,
     type,
   }: WithFieldParamsModel<TType>): WithFieldModel =>
   (target, propertyKey) => {
@@ -135,11 +138,20 @@ export const withField =
       );
 
     isSchema &&
-      getField({ Resource, isArray, isOptional, name, relation, root, type })(target, propertyKey);
-
-    isDatabase &&
-      getColumn({ Resource, defaultValue, isArray, isOptional, name, relation, root, type })(
+      getField({ Resource, isArray, isOptional, mappedBy, name, relation, type })(
         target,
         propertyKey,
       );
+
+    isDatabase &&
+      getColumn({
+        Resource,
+        defaultValue,
+        isArray,
+        isOptional,
+        mappedBy,
+        name,
+        relation,
+        type,
+      })(target, propertyKey);
   };

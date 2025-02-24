@@ -1,4 +1,3 @@
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { Group } from '@lib/backend/group/resources/Group/Group';
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withFieldResolver } from '@lib/backend/http/utils/withFieldResolver/withFieldResolver';
@@ -14,6 +13,7 @@ import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type ProtectedResourceModel } from '@lib/shared/auth/resources/ProtectedResource/ProtectedResource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';

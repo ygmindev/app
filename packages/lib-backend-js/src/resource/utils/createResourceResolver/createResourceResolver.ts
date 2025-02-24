@@ -1,4 +1,3 @@
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
@@ -14,6 +13,7 @@ import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';

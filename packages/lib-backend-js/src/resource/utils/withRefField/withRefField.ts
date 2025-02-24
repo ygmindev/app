@@ -1,5 +1,4 @@
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { FIELD_RELATION } from '@lib/backend/resource/utils/withField/withField.constants';
 import {
   type WithRefFieldModel,
   type WithRefFieldParamsModel,
@@ -9,15 +8,21 @@ import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 export const withRefField =
   <TType extends unknown>({
     Resource,
-    isOptional = false,
+    isArray = false,
+    isDatabase = false,
+    isOptional = true,
+    mappedBy,
     name,
+    relation,
   }: WithRefFieldParamsModel<TType>): WithRefFieldModel =>
   (target, propertyKey) =>
     withField({
       Resource,
+      isArray,
+      isDatabase,
       isOptional,
-      isDatabase: true,
+      mappedBy,
       name,
-      relation: FIELD_RELATION.MANY_TO_ONE,
+      relation,
       type: PROPERTY_TYPE.RESOURCE,
     })(target, propertyKey);

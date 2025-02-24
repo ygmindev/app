@@ -1,3 +1,4 @@
+import { type RequiredModel } from '@lib/shared/core/core.models';
 import {
   type ArrayPromptArgsModel,
   type StringPromptArgsModel,
@@ -5,12 +6,12 @@ import {
 
 export type _PromptParamsModel<TType> = Array<
   {
-    [TKey in keyof Required<TType>]: Required<TType>[TKey] extends Array<string | boolean>
+    [TKey in keyof RequiredModel<TType>]: RequiredModel<TType>[TKey] extends Array<string | boolean>
       ? ArrayPromptArgsModel<TKey>
-      : Required<TType>[TKey] extends string | boolean
+      : RequiredModel<TType>[TKey] extends string | boolean
         ? StringPromptArgsModel<TKey>
         : never;
-  }[keyof Required<TType>]
+  }[keyof RequiredModel<TType>]
 >;
 
 export type _PromptModel<TType> = TType;

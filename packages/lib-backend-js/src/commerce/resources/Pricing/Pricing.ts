@@ -3,19 +3,20 @@ import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResour
 import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefField';
+import { withRootField } from '@lib/backend/resource/utils/withRootField/withRootField';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import {
   type PricingFrequencyModel,
   type PricingModel,
 } from '@lib/shared/commerce/resources/Pricing/Pricing.models';
+import { PRODUCT_RESOURCE_NAME } from '@lib/shared/commerce/resources/Product/Product.constants';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, isEmbeddable: true, name: PRICING_RESOURCE_NAME })
 export class Pricing extends EmbeddedResource implements PricingModel {
-  @withRefField({ Resource: () => Product })
-  _product?: RefFieldModel<ProductModel>;
+  @withRootField({ Resource: () => Product, mappedBy: PRICING_RESOURCE_NAME })
+  [PRODUCT_RESOURCE_NAME]?: RefFieldModel<ProductModel>;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   currency?: string;

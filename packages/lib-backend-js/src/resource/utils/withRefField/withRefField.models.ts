@@ -2,7 +2,7 @@ import { type WithFieldParamsModel } from '@lib/backend/resource/utils/withField
 
 export type WithRefFieldParamsModel<TType extends unknown> = Pick<
   WithFieldParamsModel<TType>,
-  'Resource' | 'name' | 'isOptional'
+  'Resource' | 'name' | 'isArray' | 'isDatabase' | 'isOptional' | 'relation' | 'mappedBy'
 >;
 
 export type WithRefFieldModel = PropertyDecorator;

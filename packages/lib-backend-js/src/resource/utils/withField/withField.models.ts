@@ -8,13 +8,13 @@ export type WithFieldParamsModel<TType extends unknown> = {
   defaultValue?(): TType;
   expire?: number;
   isArray?: boolean;
-  isOptional?: boolean;
   isDatabase?: boolean;
+  isOptional?: boolean;
   isSchema?: boolean;
   isUnique?: boolean;
+  mappedBy?: StringKeyModel<TType>;
   name?: string;
   relation?: FieldRelation;
-  root?: StringKeyModel<TType>;
   type: DataTypeModel | FieldTypeModel;
 };
 
