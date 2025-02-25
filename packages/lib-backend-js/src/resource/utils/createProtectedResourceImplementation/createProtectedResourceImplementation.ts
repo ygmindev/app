@@ -57,11 +57,11 @@ export const createProtectedResoureImplementation = <
       input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm> = {},
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
-      const userId = context?.user?._id;
-      if (userId) {
+      const uid = context?.user?._id;
+      if (uid) {
         const accessAll = (
           await Container.get(AccessImplementation).getMany({
-            filter: [{ field: '_user', value: { _id: userId } }],
+            filter: [{ field: '_user', value: { _id: uid } }],
           })
         ).result;
         if (accessAll) {

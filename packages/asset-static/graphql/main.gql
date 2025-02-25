@@ -3347,7 +3347,7 @@ type Vendor {
 }
 
 input VendorCreateFormInput {
-  Utility: [UtilityInput]
+  Utility: [UtilityInput] = []
   _id: String
   created: DateTimeISO
   imageSrc: String
@@ -3361,7 +3361,7 @@ input VendorCreateInput {
 }
 
 input VendorCreateManyFormInput {
-  Utility: [UtilityInput]
+  Utility: [UtilityInput] = []
   _id: String
   created: DateTimeISO
   imageSrc: String
@@ -3457,7 +3457,7 @@ type VendorGetOutput {
 }
 
 input VendorInput {
-  Utility: [UtilityInput]
+  Utility: [UtilityInput] = []
   _id: String
   created: DateTimeISO
   imageSrc: String
@@ -3519,7 +3519,7 @@ type VendorUpdateOutput {
 }
 
 input VendorUpdateUpdateInput {
-  Utility: [UtilityInput]
+  Utility: [UtilityInput] = []
   _id: String
   created: DateTimeISO
   imageSrc: String
