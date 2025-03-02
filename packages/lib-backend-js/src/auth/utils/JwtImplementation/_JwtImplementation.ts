@@ -4,6 +4,7 @@ import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/shared/auth/resources/SignIn/Sign
 import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { pick } from '@lib/shared/core/utils/pick/pick';
+import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 import { type AuthError } from 'firebase/auth';
@@ -36,10 +37,14 @@ export class _JwtImplementation implements _JwtImplementationModel {
         },
       };
     } catch (e) {
-      if ((e as AuthError).code === 'auth/id-token-expired') {
-        throw new AuthTokenError();
+      switch ((e as AuthError).code) {
+        case 'auth/id-token-expired':
+          throw new AuthTokenError();
+        case 'auth/argument-error':
+          throw new OfflineError();
+        default:
+          throw e;
       }
-      throw e;
     }
   };
 }

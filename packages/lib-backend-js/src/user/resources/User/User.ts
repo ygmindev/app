@@ -5,7 +5,8 @@ import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/Paym
 import { Chat } from '@lib/backend/chat/resources/Chat/Chat';
 import { Message } from '@lib/backend/chat/resources/Message/Message';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import { RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
+import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
+import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
 import { withEmbeddedResourceField } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
@@ -36,29 +37,29 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 })
 export class User extends EntityResource implements UserModel {
   @withOneToManyField({ Resource: () => Access, mappedBy: USER_RESOURCE_NAME })
-  [ACCESS_RESOURCE_NAME]?: Array<RefFieldModel<AccessModel>>;
+  [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel> = new Collection(this);
 
   @withEmbeddedResourceField({ Resource: () => Bank, mappedBy: USER_RESOURCE_NAME })
-  [BANK_RESOURCE_NAME]?: Array<RefFieldModel<BankModel>>;
+  [BANK_RESOURCE_NAME]?: CollectionModel<BankModel> = new Collection(this);
 
   @withEmbeddedResourceField({ Resource: () => Card, mappedBy: USER_RESOURCE_NAME })
-  [CARD_RESOURCE_NAME]?: Array<RefFieldModel<CardModel>>;
+  [CARD_RESOURCE_NAME]?: CollectionModel<CardModel> = new Collection(this);
 
   @withOneToManyField({ Resource: () => Chat, mappedBy: USER_RESOURCE_NAME })
-  [CHAT_RESOURCE_NAME]?: Array<RefFieldModel<ChatModel>>;
+  [CHAT_RESOURCE_NAME]?: CollectionModel<ChatModel> = new Collection(this);
 
   @withEmbeddedResourceField({ Resource: () => LinkedUser, mappedBy: USER_RESOURCE_NAME })
-  [LINKED_USER_RESOURCE_NAME]?: Array<RefFieldModel<LinkedUserModel>>;
+  [LINKED_USER_RESOURCE_NAME]?: CollectionModel<LinkedUserModel> = new Collection(this);
 
   @withOneToManyField({ Resource: () => Message, mappedBy: USER_RESOURCE_NAME })
-  [MESSAGE_RESOURCE_NAME]?: Array<RefFieldModel<MessageModel>>;
+  [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel> = new Collection(this);
 
   @withOneToManyField({
     Resource: () => PaymentMethod,
     isDatabase: false,
     mappedBy: USER_RESOURCE_NAME,
   })
-  [PAYMENT_METHOD_RESOURCE_NAME]?: Array<RefFieldModel<PaymentMethodModel>>;
+  [PAYMENT_METHOD_RESOURCE_NAME]?: CollectionModel<PaymentMethodModel>;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   callingCode?: string;

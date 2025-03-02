@@ -688,13 +688,13 @@ type Chat {
 
 input ChatCreateFormInput {
   Group: GroupInput
-  Message: [MessageInput]
+  Message: [MessageInput] = []
   User: UserInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
   name: String
-  participants: [UserInput]
+  participants: [UserInput] = []
 }
 
 input ChatCreateInput {
@@ -704,13 +704,13 @@ input ChatCreateInput {
 
 input ChatCreateManyFormInput {
   Group: GroupInput
-  Message: [MessageInput]
+  Message: [MessageInput] = []
   User: UserInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
   name: String
-  participants: [UserInput]
+  participants: [UserInput] = []
 }
 
 input ChatCreateManyInput {
@@ -823,13 +823,13 @@ type ChatGetOutput {
 
 input ChatInput {
   Group: GroupInput
-  Message: [MessageInput]
+  Message: [MessageInput] = []
   User: UserInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
   name: String
-  participants: [UserInput]
+  participants: [UserInput] = []
 }
 
 input ChatRemoveFilterInput {
@@ -887,13 +887,13 @@ type ChatUpdateOutput {
 
 input ChatUpdateUpdateInput {
   Group: GroupInput
-  Message: [MessageInput]
+  Message: [MessageInput] = []
   User: UserInput
   _id: String
   created: DateTimeISO
   isFixture: Boolean
   name: String
-  participants: [UserInput]
+  participants: [UserInput] = []
 }
 
 input CoordinateInput {
@@ -943,8 +943,8 @@ type Group {
 }
 
 input GroupCreateFormInput {
-  Access: [AccessInput]
-  Role: [RoleInput]
+  Access: [AccessInput] = []
+  Role: [RoleInput] = []
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -959,8 +959,8 @@ input GroupCreateInput {
 }
 
 input GroupCreateManyFormInput {
-  Access: [AccessInput]
-  Role: [RoleInput]
+  Access: [AccessInput] = []
+  Role: [RoleInput] = []
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -1057,8 +1057,8 @@ type GroupGetOutput {
 }
 
 input GroupInput {
-  Access: [AccessInput]
-  Role: [RoleInput]
+  Access: [AccessInput] = []
+  Role: [RoleInput] = []
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -1121,8 +1121,8 @@ type GroupUpdateOutput {
 }
 
 input GroupUpdateUpdateInput {
-  Access: [AccessInput]
-  Role: [RoleInput]
+  Access: [AccessInput] = []
+  Role: [RoleInput] = []
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -2095,7 +2095,7 @@ type Product {
 }
 
 input ProductCreateFormInput {
-  Pricing: [PricingInput]
+  Pricing: [PricingInput] = []
   _id: String
   created: DateTimeISO
   description: String
@@ -2110,7 +2110,7 @@ input ProductCreateInput {
 }
 
 input ProductCreateManyFormInput {
-  Pricing: [PricingInput]
+  Pricing: [PricingInput] = []
   _id: String
   created: DateTimeISO
   description: String
@@ -2207,7 +2207,7 @@ type ProductGetOutput {
 }
 
 input ProductInput {
-  Pricing: [PricingInput]
+  Pricing: [PricingInput] = []
   _id: String
   created: DateTimeISO
   description: String
@@ -2286,7 +2286,7 @@ type ProductUpdateOutput {
 }
 
 input ProductUpdateUpdateInput {
-  Pricing: [PricingInput]
+  Pricing: [PricingInput] = []
   _id: String
   created: DateTimeISO
   description: String
@@ -2608,11 +2608,11 @@ type SignInUserUpdateOutput {
 }
 
 input SignInUserUpdateUpdateInput {
-  Access: [AccessInput]
-  Bank: [BankInput]
-  Card: [CardInput]
-  Chat: [ChatInput]
-  Message: [MessageInput]
+  Access: [AccessInput] = []
+  Bank: [BankInput] = []
+  Card: [CardInput] = []
+  Chat: [ChatInput] = []
+  Message: [MessageInput] = []
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
@@ -2621,7 +2621,7 @@ input SignInUserUpdateUpdateInput {
   first: String
   isFixture: Boolean
   last: String
-  linkedUser: [linkedUserInput]
+  linkedUser: [linkedUserInput] = []
   paymentMethodPrimary: String
   phone: String
 }
@@ -2899,11 +2899,11 @@ type User {
 }
 
 input UserCreateFormInput {
-  Access: [AccessInput]
-  Bank: [BankInput]
-  Card: [CardInput]
-  Chat: [ChatInput]
-  Message: [MessageInput]
+  Access: [AccessInput] = []
+  Bank: [BankInput] = []
+  Card: [CardInput] = []
+  Chat: [ChatInput] = []
+  Message: [MessageInput] = []
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
@@ -2912,7 +2912,7 @@ input UserCreateFormInput {
   first: String
   isFixture: Boolean
   last: String
-  linkedUser: [linkedUserInput]
+  linkedUser: [linkedUserInput] = []
   paymentMethodPrimary: String
   phone: String
 }
@@ -2923,11 +2923,11 @@ input UserCreateInput {
 }
 
 input UserCreateManyFormInput {
-  Access: [AccessInput]
-  Bank: [BankInput]
-  Card: [CardInput]
-  Chat: [ChatInput]
-  Message: [MessageInput]
+  Access: [AccessInput] = []
+  Bank: [BankInput] = []
+  Card: [CardInput] = []
+  Chat: [ChatInput] = []
+  Message: [MessageInput] = []
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
@@ -2936,7 +2936,7 @@ input UserCreateManyFormInput {
   first: String
   isFixture: Boolean
   last: String
-  linkedUser: [linkedUserInput]
+  linkedUser: [linkedUserInput] = []
   paymentMethodPrimary: String
   phone: String
 }
@@ -3029,11 +3029,11 @@ type UserGetOutput {
 }
 
 input UserInput {
-  Access: [AccessInput]
-  Bank: [BankInput]
-  Card: [CardInput]
-  Chat: [ChatInput]
-  Message: [MessageInput]
+  Access: [AccessInput] = []
+  Bank: [BankInput] = []
+  Card: [CardInput] = []
+  Chat: [ChatInput] = []
+  Message: [MessageInput] = []
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
@@ -3042,7 +3042,7 @@ input UserInput {
   first: String
   isFixture: Boolean
   last: String
-  linkedUser: [linkedUserInput]
+  linkedUser: [linkedUserInput] = []
   paymentMethodPrimary: String
   phone: String
 }
@@ -3101,11 +3101,11 @@ type UserUpdateOutput {
 }
 
 input UserUpdateUpdateInput {
-  Access: [AccessInput]
-  Bank: [BankInput]
-  Card: [CardInput]
-  Chat: [ChatInput]
-  Message: [MessageInput]
+  Access: [AccessInput] = []
+  Bank: [BankInput] = []
+  Card: [CardInput] = []
+  Chat: [ChatInput] = []
+  Message: [MessageInput] = []
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
@@ -3114,7 +3114,7 @@ input UserUpdateUpdateInput {
   first: String
   isFixture: Boolean
   last: String
-  linkedUser: [linkedUserInput]
+  linkedUser: [linkedUserInput] = []
   paymentMethodPrimary: String
   phone: String
 }

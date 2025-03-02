@@ -13,31 +13,27 @@ export class _Collection<TType extends EntityResourceModel, TRoot extends Entity
     super(root);
   }
 
-  // @ts-expect-error override
   filter(
-    cb: (item: TType, index: number, array?: Array<TType>) => boolean,
+    cb: (item: TType, index: number, values: Array<TType>) => boolean,
     _?: unknown,
   ): Array<TType> {
-    return super.filter(cb);
+    return super.filter((x, y) => cb(x, y, []));
   }
 
-  // @ts-expect-error override
   find(
-    cb: (item: TType, index: number, array?: Array<TType>) => boolean,
+    cb: (item: TType, index: number, values: Array<TType>) => boolean,
     _?: unknown,
   ): TType | undefined {
-    return super.find(cb);
+    return super.find((x, y) => cb(x, y, []));
   }
 
-  // @ts-expect-error override
   map<TResult>(
-    cb: (value: TType, index: number, array?: Array<TType>) => TResult,
+    cb: (value: TType, index: number, array: Array<TType>) => TResult,
     _?: unknown,
   ): Array<TResult> {
-    return super.map(cb);
+    return super.map((x, y) => cb(x, y, []));
   }
 
-  // @ts-expect-error override
   slice(start?: number, end?: number): Array<TType> {
     return super.slice(start, end);
   }

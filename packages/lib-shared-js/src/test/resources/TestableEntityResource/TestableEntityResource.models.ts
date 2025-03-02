@@ -1,4 +1,4 @@
-import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
+import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
@@ -7,7 +7,7 @@ import { type TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/
 import { type TestableEmbeddedResourceModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
 
 export type TestableEntityResourceModel = EntityResourceModel & {
-  [TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME]?: Array<RefFieldModel<TestableEmbeddedResourceModel>>;
+  [TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME]?: CollectionModel<TestableEmbeddedResourceModel>;
 
   dateTtlField?: Date;
 

@@ -1,7 +1,8 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { Role } from '@lib/backend/auth/resources/Role/Role';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import { RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
+import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
+import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
@@ -19,10 +20,10 @@ import {
 @withEntity({ isDatabase: true, name: GROUP_RESOURCE_NAME })
 export class Group extends EntityResource implements GroupModel {
   @withOneToManyField({ Resource: () => Access, mappedBy: GROUP_RESOURCE_NAME })
-  [ACCESS_RESOURCE_NAME]?: Array<RefFieldModel<AccessModel>>;
+  [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel> = new Collection(this);
 
   @withOneToManyField({ Resource: () => Role, mappedBy: GROUP_RESOURCE_NAME })
-  [ROLE_RESOURCE_NAME]?: Array<RefFieldModel<RoleModel>>;
+  [ROLE_RESOURCE_NAME]?: CollectionModel<RoleModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   logo?: string;

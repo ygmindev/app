@@ -1,4 +1,4 @@
-import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
+import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
 import { type ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
 import { type AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { type BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.constants';
@@ -19,19 +19,19 @@ import { type LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/Linke
 import { type LinkedUserModel } from '@lib/shared/user/resources/LinkedUser/LinkedUser.models';
 
 export type UserModel = EntityResourceModel & {
-  [ACCESS_RESOURCE_NAME]?: Array<RefFieldModel<AccessModel>>;
+  [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel>;
 
-  [BANK_RESOURCE_NAME]?: Array<RefFieldModel<BankModel>>;
+  [BANK_RESOURCE_NAME]?: CollectionModel<BankModel>;
 
-  [CARD_RESOURCE_NAME]?: Array<RefFieldModel<CardModel>>;
+  [CARD_RESOURCE_NAME]?: CollectionModel<CardModel>;
 
-  [CHAT_RESOURCE_NAME]?: Array<RefFieldModel<ChatModel>>;
+  [CHAT_RESOURCE_NAME]?: CollectionModel<ChatModel>;
 
-  [LINKED_USER_RESOURCE_NAME]?: Array<RefFieldModel<LinkedUserModel>>;
+  [LINKED_USER_RESOURCE_NAME]?: CollectionModel<LinkedUserModel>;
 
-  [MESSAGE_RESOURCE_NAME]?: Array<RefFieldModel<MessageModel>>;
+  [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel>;
 
-  [PAYMENT_METHOD_RESOURCE_NAME]?: Array<RefFieldModel<PaymentMethodModel>>;
+  [PAYMENT_METHOD_RESOURCE_NAME]?: CollectionModel<PaymentMethodModel>;
 
   callingCode?: string;
 

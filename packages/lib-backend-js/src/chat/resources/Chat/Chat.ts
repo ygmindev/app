@@ -1,6 +1,7 @@
 import { Message } from '@lib/backend/chat/resources/Message/Message';
+import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
+import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
 import { createProtectedResource } from '@lib/backend/resource/utils/createProtectedResource/createProtectedResource';
-import { RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
@@ -18,11 +19,11 @@ export class Chat
   implements ChatModel
 {
   @withManyToManyField({ Resource: () => Message })
-  [MESSAGE_RESOURCE_NAME]?: Array<RefFieldModel<MessageModel>>;
+  [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   name?: string;
 
   @withManyToManyField({ Resource: () => User })
-  participants?: Array<RefFieldModel<UserModel>>;
+  participants?: CollectionModel<UserModel> = new Collection(this);
 }
