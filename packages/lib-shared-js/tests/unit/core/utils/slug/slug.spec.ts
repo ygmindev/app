@@ -4,8 +4,9 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ slug });
 
 describe(displayName, () => {
+  const VALUE = 'testSlugValue';
   test('works', async () => {
-    const result = await slug('');
-    expect(result).toStrictEqual({});
+    const result = slug(VALUE);
+    expect(result).toStrictEqual('test-slug-value');
   });
 });

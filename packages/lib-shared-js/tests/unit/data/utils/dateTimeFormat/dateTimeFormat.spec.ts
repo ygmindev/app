@@ -8,15 +8,12 @@ describe(displayName, () => {
   const VALUE = new Date(2000, 0, 15, 5, 10, 30);
 
   test('works with date', async () => {
-    const result = dateTimeFormat({ format: DATE_TIME_FORMAT_TYPE.DATE, value: VALUE });
+    const result = dateTimeFormat(VALUE, DATE_TIME_FORMAT_TYPE.DATE);
     expect(result).toStrictEqual('01/15/2000');
   });
 
   test('works with datetime', async () => {
-    const result = dateTimeFormat({
-      format: DATE_TIME_FORMAT_TYPE.DATE_TIME_SECONDS,
-      value: VALUE,
-    });
+    const result = dateTimeFormat(VALUE, DATE_TIME_FORMAT_TYPE.DATE_TIME_SECONDS);
     expect(result).toStrictEqual('01/15/2000 05:10:30');
   });
 });

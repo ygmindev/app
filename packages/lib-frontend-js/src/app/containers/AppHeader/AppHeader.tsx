@@ -58,7 +58,7 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
       <Appearable
         backgroundColor={THEME_COLOR.WARNING}
         backgroundRole={THEME_ROLE.MUTED}
-        // isActive={isOffline}
+        isActive={isOffline}
         isScalable={false}
         left={0}
         position={SHAPE_POSITION.ABSOLUTE}

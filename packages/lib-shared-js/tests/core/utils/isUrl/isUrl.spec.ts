@@ -1,4 +1,4 @@
-import { isUrl } from '@lib/shared/js/core/utils/isUrl/isUrl';
+import { isUrl } from '@lib/shared/core/utils/isUrl/isUrl';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ isUrl });
