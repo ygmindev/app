@@ -69,7 +69,6 @@ const getColumn = <TType extends unknown>({
           mappedBy,
           nullable: true,
           owner: !mappedBy,
-          ref: true,
         }) as PropertyDecorator;
       case FIELD_RELATION.ONE_TO_MANY:
         return OneToMany({
