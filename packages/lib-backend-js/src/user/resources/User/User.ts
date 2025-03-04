@@ -10,6 +10,7 @@ import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collecti
 import { withEmbeddedResourceField } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
 import { LinkedUser } from '@lib/backend/user/resources/LinkedUser/LinkedUser';
 import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
@@ -63,6 +64,9 @@ export class User extends EntityResource implements UserModel {
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   callingCode?: string;
+
+  @withManyToManyField({ Resource: () => Chat, mappedBy: 'participants' })
+  chats?: CollectionModel<ChatModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, isUnique: true, type: DATA_TYPE.STRING })
   email?: string;

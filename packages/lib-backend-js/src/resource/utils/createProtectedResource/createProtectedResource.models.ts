@@ -6,7 +6,7 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export type CreateProtectedResourceParamsModel = Pick<
   WithManyToOneFieldParamsModel<UserModel & GroupModel>,
-  'isDatabase' | 'mappedBy'
+  'isDatabase'
 >;
 
 export type CreateProtectedResourceModel = ResourceClassModel<ProtectedResourceModel>;

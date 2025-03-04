@@ -10,7 +10,7 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: PAYMENT_METHOD_RESOURCE_NAME })
 export class PaymentMethod
-  extends createProtectedResource({ isDatabase: false, mappedBy: PAYMENT_METHOD_RESOURCE_NAME })
+  extends createProtectedResource({ isDatabase: false })
   implements PaymentMethodModel
 {
   @withField({ type: DATA_TYPE.STRING })

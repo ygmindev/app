@@ -1,5 +1,4 @@
 import { Otp } from '@lib/backend/auth/resources/Otp/Otp';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { mail } from '@lib/backend/notification/utils/mail/mail';
@@ -14,6 +13,7 @@ import { type OtpImplementationModel } from '@lib/shared/auth/resources/Otp/OtpI
 import { PartialModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';

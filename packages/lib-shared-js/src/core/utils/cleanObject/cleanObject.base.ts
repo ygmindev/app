@@ -1,5 +1,8 @@
 import { type StringKeyModel } from '@lib/shared/core/core.models';
-import { CLEAN_OBJECT_KEYS } from '@lib/shared/core/utils/cleanObject/cleanObject.constants';
+import {
+  CLEAN_OBJECT_KEYS,
+  IGNORE_OBJECT_KEYS,
+} from '@lib/shared/core/utils/cleanObject/cleanObject.constants';
 import {
   type CleanObjectModel,
   type CleanObjectParamsModel,
@@ -31,7 +34,7 @@ export const cleanObject = <TType extends unknown>(
       v = options?.keyValueTransformer ? (options.keyValueTransformer(v, k, depth) as typeof v) : v;
       if (CLEAN_OBJECT_KEYS.includes(k) || v === undefined) {
         delete valueF[k];
-      } else {
+      } else if (!IGNORE_OBJECT_KEYS.includes(k)) {
         valueF[k] = cleanObject(v, options, depth + 1);
       }
     });

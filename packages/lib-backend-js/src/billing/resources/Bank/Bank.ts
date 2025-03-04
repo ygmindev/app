@@ -12,7 +12,7 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ indices: [{ keys: ['fingerprint'] }], isDatabase: true, name: BANK_RESOURCE_NAME })
 export class Bank extends EmbeddedResource implements BankModel {
-  @withRootField({ Resource: () => User, mappedBy: BANK_RESOURCE_NAME })
+  @withRootField({ Resource: () => User })
   [USER_RESOURCE_NAME]!: RefFieldModel<UserModel>;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })

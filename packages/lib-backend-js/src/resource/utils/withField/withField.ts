@@ -66,9 +66,10 @@ const getColumn = <TType extends unknown>({
         return ManyToMany({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          mappedBy: mappedBy ? (owner) => owner[mappedBy] : undefined,
+          mappedBy,
           nullable: true,
           owner: !mappedBy,
+          ref: true,
         }) as PropertyDecorator;
       case FIELD_RELATION.ONE_TO_MANY:
         return OneToMany({
@@ -77,18 +78,19 @@ const getColumn = <TType extends unknown>({
           mappedBy: mappedBy as StringKeyModel<TType>,
           nullable: true,
           orphanRemoval: true,
+          ref: true,
         }) as PropertyDecorator;
       case FIELD_RELATION.MANY_TO_ONE:
         return ManyToOne({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          // primary: true,
           ref: true,
         }) as PropertyDecorator;
       case FIELD_RELATION.ONE_TO_ONE:
         return OneToOne({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
+          ref: true,
         }) as PropertyDecorator;
       default:
         return Property({ ...defaultOptions, type: () => Resource }) as PropertyDecorator;

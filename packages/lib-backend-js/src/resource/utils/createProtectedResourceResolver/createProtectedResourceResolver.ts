@@ -28,7 +28,7 @@ export const createProtectedResourceResolver = <
 ): CreateProtectedResourceResolverModel<TType, TForm> => {
   @withResolver({ Resource: params.Resource })
   class ProtectedResourceResolver extends createResourceResolver<TType, TForm>(params) {
-    protected _implementation = Container.get(params.ResourceImplementation);
+    protected implementation = Container.get(params.ResourceImplementation);
 
     @withOutput({
       Resource: params.Resource,
@@ -45,12 +45,12 @@ export const createProtectedResourceResolver = <
       @withContext()
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
-      return this._implementation.getManyProtected(input, context);
+      return this.implementation.getManyProtected(input, context);
     }
 
     @withFieldResolver({ Resource: () => Group })
     async Group(@withSelf() self: TType): Promise<PartialModel<GroupModel> | null> {
-      return this._implementation.Group ? this._implementation.Group(self) : null;
+      return this.implementation.Group ? this.implementation.Group(self) : null;
     }
   }
   return ProtectedResourceResolver;

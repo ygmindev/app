@@ -15,7 +15,7 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ isDatabase: true, name: LINKED_USER_RESOURCE_NAME })
 export class LinkedUser extends EmbeddedResource implements LinkedUserModel {
-  @withRootField({ Resource: () => User, mappedBy: LINKED_USER_RESOURCE_NAME })
+  @withRootField({ Resource: () => User })
   [USER_RESOURCE_NAME]!: RefFieldModel<UserModel>;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })

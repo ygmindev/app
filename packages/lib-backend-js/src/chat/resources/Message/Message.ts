@@ -14,11 +14,8 @@ import {
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: MESSAGE_RESOURCE_NAME })
-export class Message
-  extends createProtectedResource({ mappedBy: MESSAGE_RESOURCE_NAME })
-  implements MessageModel
-{
-  @withManyToOneField({ Resource: () => Chat, mappedBy: MESSAGE_RESOURCE_NAME })
+export class Message extends createProtectedResource() implements MessageModel {
+  @withManyToOneField({ Resource: () => Chat })
   [CHAT_RESOURCE_NAME]!: RefFieldModel<ChatModel>;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })

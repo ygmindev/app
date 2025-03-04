@@ -15,7 +15,7 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ indices: [{ keys: ['fingerprint'] }], isDatabase: true, name: CARD_RESOURCE_NAME })
 export class Card extends EmbeddedResource implements CardModel {
-  @withRootField({ Resource: () => User, mappedBy: CARD_RESOURCE_NAME })
+  @withRootField({ Resource: () => User })
   [USER_RESOURCE_NAME]!: RefFieldModel<UserModel>;
 
   @withField({ isDatabase: true, type: DATA_TYPE.NUMBER })

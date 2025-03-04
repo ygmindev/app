@@ -14,20 +14,15 @@ import { GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { UserModel } from '@lib/shared/user/resources/User/User.models';
 
-export const createProtectedResource = ({
-  isDatabase = true,
-  mappedBy,
-}: CreateProtectedResourceParamsModel): CreateProtectedResourceModel => {
+export const createProtectedResource = (
+  { isDatabase = true }: CreateProtectedResourceParamsModel = { isDatabase: true },
+): CreateProtectedResourceModel => {
   @withEntity({ isAbstract: true })
   class ProtectedResource extends EntityResource implements ProtectedResourceModel {
-    @withManyToOneField({
-      Resource: () => Group,
-      isDatabase,
-      mappedBy: mappedBy as keyof GroupModel,
-    })
+    @withManyToOneField({ Resource: () => Group, isDatabase })
     [GROUP_RESOURCE_NAME]?: RefFieldModel<GroupModel>;
 
-    @withManyToOneField({ Resource: () => User, isDatabase, mappedBy: mappedBy as keyof UserModel })
+    @withManyToOneField({ Resource: () => User, isDatabase })
     [USER_RESOURCE_NAME]?: RefFieldModel<UserModel>;
   }
   return ProtectedResource;

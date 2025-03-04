@@ -2,11 +2,14 @@ import {
   type _CollectionModel,
   type _CollectionParamsModel,
 } from '@lib/backend/resource/utils/Collection/_Collection.models';
-import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type EntityResourceModel,
+  type EntityResourcePartialModel,
+} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { Collection } from '@mikro-orm/core';
 
 export class _Collection<TType extends EntityResourceModel, TRoot extends EntityResourceModel>
-  extends Collection<TType, TRoot>
+  extends Collection<EntityResourcePartialModel<TType>, TRoot>
   implements _CollectionModel<TType>
 {
   constructor(root: _CollectionParamsModel<TRoot>) {
@@ -14,27 +17,39 @@ export class _Collection<TType extends EntityResourceModel, TRoot extends Entity
   }
 
   filter(
-    cb: (item: TType, index: number, values: Array<TType>) => boolean,
+    cb: (
+      item: EntityResourcePartialModel<TType>,
+      index: number,
+      values: Array<EntityResourcePartialModel<TType>>,
+    ) => boolean,
     _?: unknown,
-  ): Array<TType> {
+  ): Array<EntityResourcePartialModel<TType>> {
     return super.filter((x, y) => cb(x, y, []));
   }
 
   find(
-    cb: (item: TType, index: number, values: Array<TType>) => boolean,
+    cb: (
+      item: EntityResourcePartialModel<TType>,
+      index: number,
+      values: Array<EntityResourcePartialModel<TType>>,
+    ) => boolean,
     _?: unknown,
-  ): TType | undefined {
+  ): EntityResourcePartialModel<TType> | undefined {
     return super.find((x, y) => cb(x, y, []));
   }
 
   map<TResult>(
-    cb: (value: TType, index: number, array: Array<TType>) => TResult,
+    cb: (
+      value: EntityResourcePartialModel<TType>,
+      index: number,
+      array: Array<EntityResourcePartialModel<TType>>,
+    ) => TResult,
     _?: unknown,
   ): Array<TResult> {
     return super.map((x, y) => cb(x, y, []));
   }
 
-  slice(start?: number, end?: number): Array<TType> {
+  slice(start?: number, end?: number): Array<EntityResourcePartialModel<TType>> {
     return super.slice(start, end);
   }
 }

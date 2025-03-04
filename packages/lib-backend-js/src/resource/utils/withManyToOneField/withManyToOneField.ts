@@ -10,13 +10,11 @@ export const withManyToOneField =
     Resource,
     isDatabase = true,
     isOptional = true,
-    mappedBy,
   }: WithManyToOneFieldParamsModel<TType>): WithManyToOneFieldModel =>
   (target, propertyKey) =>
     withRefField({
       Resource,
       isDatabase,
       isOptional,
-      mappedBy,
       relation: FIELD_RELATION.MANY_TO_ONE,
     })(target, propertyKey);

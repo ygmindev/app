@@ -12,7 +12,7 @@ import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models'
 
 @withEntity({ isDatabase: true, name: ROLE_RESOURCE_NAME })
 export class Role extends EntityResource implements RoleModel {
-  @withManyToOneField({ Resource: () => Group, mappedBy: ROLE_RESOURCE_NAME })
+  @withManyToOneField({ Resource: () => Group })
   [GROUP_RESOURCE_NAME]?: RefFieldModel<GroupModel>;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })

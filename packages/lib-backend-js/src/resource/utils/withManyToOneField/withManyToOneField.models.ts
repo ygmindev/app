@@ -8,6 +8,6 @@ export type WithManyToOneFieldParamsModel<TType extends unknown> = Pick<
   WithRefFieldParamsModel<TType>,
   'isDatabase' | 'isOptional'
 > &
-  RequiredModel<Pick<WithRefFieldParamsModel<TType>, 'mappedBy' | 'Resource'>>;
+  RequiredModel<Pick<WithRefFieldParamsModel<TType>, 'Resource'>>;
 
 export type WithManyToOneFieldModel = WithRefFieldModel;

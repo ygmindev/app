@@ -5,7 +5,7 @@ import {
 import { type RequiredModel } from '@lib/shared/core/core.models';
 
 export type WithRootFieldParamsModel<TType extends unknown> = RequiredModel<
-  Pick<WithManyToOneFieldParamsModel<TType>, 'Resource' | 'mappedBy'>
+  Pick<WithManyToOneFieldParamsModel<TType>, 'Resource'>
 >;
 
 export type WithRootFieldModel = WithManyToOneFieldModel;

@@ -21,13 +21,13 @@ export const authorize = async ({
       pullAt(rolesF, userIndex);
       const access = context.token?.access;
       if (access) {
-        if (!rolesF.length) {
-          return true;
-        }
         try {
           const user = await getTokenFromHeader(access);
           if (user) {
             context.user = user;
+            if (!rolesF.length) {
+              return true;
+            }
             const { result } = await Container.get(AccessImplementation).get({
               filter: [{ field: '_user', value: user._id }],
             });

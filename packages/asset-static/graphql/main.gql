@@ -2616,6 +2616,7 @@ input SignInUserUpdateUpdateInput {
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
+  chats: [ChatInput] = []
   created: DateTimeISO
   email: String
   first: String
@@ -2888,6 +2889,7 @@ type User {
   PaymentMethod: [PaymentMethod]
   _id: String
   callingCode: String
+  chats: [Chat]
   created: DateTimeISO
   email: String
   first: String
@@ -2907,6 +2909,7 @@ input UserCreateFormInput {
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
+  chats: [ChatInput] = []
   created: DateTimeISO
   email: String
   first: String
@@ -2931,6 +2934,7 @@ input UserCreateManyFormInput {
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
+  chats: [ChatInput] = []
   created: DateTimeISO
   email: String
   first: String
@@ -3037,6 +3041,7 @@ input UserInput {
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
+  chats: [ChatInput] = []
   created: DateTimeISO
   email: String
   first: String
@@ -3109,6 +3114,7 @@ input UserUpdateUpdateInput {
   PaymentMethod: [PaymentMethodInput]
   _id: String
   callingCode: String
+  chats: [ChatInput] = []
   created: DateTimeISO
   email: String
   first: String
