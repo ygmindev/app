@@ -52,7 +52,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       {...wrapperProps}
       p>
       <DataBoundary
-        id="users2"
+        id="users4"
         query={getMany}
         s>
         {({ data }) => {

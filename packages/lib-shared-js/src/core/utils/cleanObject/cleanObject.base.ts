@@ -11,7 +11,7 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isPrimitive } from '@lib/shared/core/utils/isPrimitive/isPrimitive';
 import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
 import every from 'lodash/every';
-import isObject from 'lodash/isObject';
+import isPlainObject from 'lodash/isPlainObject';
 
 export const cleanObject = <TType extends unknown>(
   ...[value, options, depth = 0]: CleanObjectParamsModel<TType>
@@ -23,7 +23,7 @@ export const cleanObject = <TType extends unknown>(
     return filterNil(value.map((vv) => cleanObject(vv as object, options, depth))) as TType;
   }
   if (
-    isObject(value) &&
+    isPlainObject(value) &&
     (!options?.primitiveTypes || every(options?.primitiveTypes, (type) => !(value instanceof type)))
   ) {
     const valueF = (
