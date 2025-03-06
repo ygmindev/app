@@ -1,4 +1,4 @@
-import isArray from 'lodash/isArray';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
@@ -7,11 +7,11 @@ export const replaceDeep = <TType extends unknown>(value: TType, from: string, t
   (isString(value)
     ? value.replaceAll(from, to)
     : isPlainObject(value)
-    ? reduce(
-        value as unknown as object,
-        (result, v, k) => ({ ...result, [k]: replaceDeep(v, from, to) }),
-        {},
-      )
-    : Array.isArray(value)
-    ? value.map((v) => replaceDeep(v, from, to) as TType)
-    : value) as TType;
+      ? reduce(
+          value as unknown as object,
+          (result, v, k) => ({ ...result, [k]: replaceDeep(v, from, to) }),
+          {},
+        )
+      : isArray(value)
+        ? value.map((v) => replaceDeep(v, from, to) as TType)
+        : value) as TType;

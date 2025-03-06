@@ -8,6 +8,8 @@ import {
   type CleanObjectParamsModel,
 } from '@lib/shared/core/utils/cleanObject/cleanObject.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
+import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isPrimitive } from '@lib/shared/core/utils/isPrimitive/isPrimitive';
 import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
 import every from 'lodash/every';
@@ -19,7 +21,7 @@ export const cleanObject = <TType extends unknown>(
   if (isPrimitive(value)) {
     return value;
   }
-  if (Array.isArray(value)) {
+  if (isArray(value)) {
     return filterNil(value.map((vv) => cleanObject(vv as object, options, depth))) as TType;
   }
   if (
@@ -30,13 +32,9 @@ export const cleanObject = <TType extends unknown>(
       options?.objectTransformer ? options.objectTransformer(value, depth) : toPlainObject(value)
     ) as typeof value;
     (Object.keys(valueF as object) as Array<StringKeyModel<TType>>).forEach((k) => {
-      // if (k === 'participants') {
-      //   console.warn('@@@');
-      //   console.warn(valueF[k]);
-      // }
       let v = valueF[k];
       v = options?.keyValueTransformer ? (options.keyValueTransformer(v, k, depth) as typeof v) : v;
-      if (CLEAN_OBJECT_KEYS.includes(k) || v === undefined) {
+      if (CLEAN_OBJECT_KEYS.includes(k) || isEmpty(v)) {
         delete valueF[k];
       } else if (!IGNORE_OBJECT_KEYS.includes(k)) {
         valueF[k] = cleanObject(v, options, depth + 1);

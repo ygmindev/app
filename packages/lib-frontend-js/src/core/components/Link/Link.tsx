@@ -9,7 +9,7 @@ import { type TFCModel } from '@lib/frontend/core/core.models';
 import { useTextStyles } from '@lib/frontend/style/hooks/useTextStyles/useTextStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
-import isArray from 'lodash/isArray';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import isString from 'lodash/isString';
 import { useRef } from 'react';
 

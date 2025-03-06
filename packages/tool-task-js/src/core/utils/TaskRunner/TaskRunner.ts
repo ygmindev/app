@@ -3,6 +3,7 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -54,7 +55,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     context: TaskContextModel<TType>,
   ): Promise<void> => {
     if (value) {
-      if (Array.isArray(value)) {
+      if (isArray(value)) {
         await runParallel(
           filterNil(value[0].map((v) => (isFunction(v) ? v(context) : v))),
           value[1],

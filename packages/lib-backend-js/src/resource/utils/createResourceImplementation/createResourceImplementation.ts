@@ -5,6 +5,7 @@ import {
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { getValue } from '@lib/shared/core/utils/getValue/getValue';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
@@ -109,11 +110,16 @@ export const createResourceImplementation = <
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm> = {},
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
+      console.warn('### input?');
+      console.warn(getValue(input, 'form.participants'));
       const inputF = cleanObject(
         this.decorators.beforeCreate
           ? await this.decorators.beforeCreate({ input }, context)
           : input,
       );
+      console.warn(getValue(input, 'form.participants'));
+      console.warn('\n');
+
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot> = await create(

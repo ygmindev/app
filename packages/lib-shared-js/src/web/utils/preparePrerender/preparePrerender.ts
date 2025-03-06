@@ -1,5 +1,6 @@
 import { type RouteModel } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { _preparePrerender } from '@lib/shared/web/utils/preparePrerender/_preparePrerender';
 import { type _PreparePrerenderParamsModel } from '@lib/shared/web/utils/preparePrerender/_preparePrerender.models';
 import {
@@ -18,7 +19,7 @@ const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'
       if (pathnameF.includes(':')) {
         return [
           ...result,
-          ...(Array.isArray(route.prerender)
+          ...(isArray(route.prerender)
             ? route.prerender.map((value) => ({
                 getContext: undefined,
                 pathname: pathnameF.replace(/\/:[^\/]+/, value),

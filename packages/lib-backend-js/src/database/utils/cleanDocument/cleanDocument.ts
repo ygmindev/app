@@ -3,6 +3,7 @@ import {
   type CleanDocumentParamsModel,
 } from '@lib/backend/database/utils/cleanDocument/cleanDocument.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import isEqual from 'lodash/isEqual';
 import isPlainObject from 'lodash/isPlainObject';
@@ -31,7 +32,7 @@ export const cleanDocument = <TType extends unknown>(
         depth === 0 && isPlainObject(vF) && isEqual(Object.keys(vF as object), ['_id'])
           ? resolveObjectId((vF as EntityResourceModel)._id)
           : isString(vF) && last(k.split('.'))?.startsWith('_')
-            ? Array.isArray(vF)
+            ? isArray(vF)
               ? vF.map(resolveObjectId)
               : new ObjectId(vF)
             : vF

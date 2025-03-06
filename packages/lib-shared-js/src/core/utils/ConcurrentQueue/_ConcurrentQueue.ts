@@ -2,7 +2,7 @@ import {
   type _ConcurrentQueueModel,
   type _ConcurrentQueueParamsModel,
 } from '@lib/shared/core/utils/ConcurrentQueue/_ConcurrentQueue.models';
-import isArray from 'lodash/isArray';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import PQueue from 'p-queue';
 
 export class _ConcurrentQueue implements _ConcurrentQueueModel {
@@ -21,7 +21,7 @@ export class _ConcurrentQueue implements _ConcurrentQueueModel {
   }
 
   add(fn: (() => Promise<void>) | Array<() => Promise<void>>): void {
-    Array.isArray(fn) ? void this.queue.addAll(fn) : void this.queue.add(fn);
+    isArray(fn) ? void this.queue.addAll(fn) : void this.queue.add(fn);
   }
 
   run(): Promise<void> {

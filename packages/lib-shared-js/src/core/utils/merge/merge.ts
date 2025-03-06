@@ -1,3 +1,4 @@
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { type MergeParamsModel } from '@lib/shared/core/utils/merge/merge.models';
 import isPlainObject from 'lodash/isPlainObject';
@@ -17,12 +18,8 @@ export const merge = <TType, TResult = TType>(
             : x;
       case MERGE_STRATEGY.DEEP_APPEND:
       case MERGE_STRATEGY.DEEP_PREPEND:
-        return Array.isArray(x) && Array.isArray(y)
-          ? uniq(
-              strategy === MERGE_STRATEGY.DEEP_APPEND
-                ? [...(y as Array<unknown>), ...(x as Array<unknown>)]
-                : [...(x as Array<unknown>), ...(y as Array<unknown>)],
-            )
+        return isArray(x) && isArray(y)
+          ? uniq(strategy === MERGE_STRATEGY.DEEP_APPEND ? [...y, ...x] : [...x, ...y])
           : isPlainObject(x) && isPlainObject(y)
             ? merge([x, y], strategy)
             : x === undefined

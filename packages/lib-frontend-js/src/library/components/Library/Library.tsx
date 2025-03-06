@@ -8,6 +8,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { withId } from '@lib/shared/core/utils/withId/withId';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
@@ -50,7 +51,7 @@ export const Library = <TType extends unknown>({
   );
 
   const typeToString = (value: unknown): string =>
-    Array.isArray(value)
+    isArray(value)
       ? `[${value.map(typeToString).join(', ')}]`
       : isValidElement(value)
         ? 'Element'

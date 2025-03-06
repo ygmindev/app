@@ -12,6 +12,7 @@ import { _graphql } from '@lib/config/graphql/_graphql';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { HTTP_PROTOCOL } from '@lib/shared/http/http.constants';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -64,7 +65,7 @@ export const _runServer = async ({
   api.routes.forEach(({ handler, method, pathname, protocol, schema, type }) => {
     const url = `/${joinPaths([api.prefix, pathname])}`;
     logger.info(
-      `${Array.isArray(method) ? method.join(',') : method} ${uri({ host: process.env.SERVER_APP_HOST, port: process.env.SERVER_APP_PORT })}${url}`,
+      `${isArray(method) ? method.join(',') : method} ${uri({ host: process.env.SERVER_APP_HOST, port: process.env.SERVER_APP_PORT })}${url}`,
     );
 
     const route: RouteOptions = {

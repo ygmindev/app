@@ -2,6 +2,7 @@ import {
   type CartesianObjectModel,
   type CartesianObjectParamsModel,
 } from '@lib/shared/core/utils/cartesianObject/cartesianObject.models';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 
 export const cartesianObject = <TType extends Record<string, unknown>>(
   params: CartesianObjectParamsModel<TType>,
@@ -10,9 +11,9 @@ export const cartesianObject = <TType extends Record<string, unknown>>(
     (result, [k, v]) => {
       const resultF = [] as CartesianObjectModel<TType>;
       result.forEach((r) =>
-        (Array.isArray(v) ? v : [v]).forEach((vv) =>
-          (vv && Array.isArray(vv) ? vv : [vv]).forEach((vvv) =>
-            resultF.push(Object.assign({}, r, { [k]: vvv as unknown })),
+        (isArray(v) ? v : [v]).forEach((vv) =>
+          (vv && isArray(vv) ? vv : [vv]).forEach((vvv) =>
+            resultF.push(Object.assign({}, r, { [k]: vvv })),
           ),
         ),
       );

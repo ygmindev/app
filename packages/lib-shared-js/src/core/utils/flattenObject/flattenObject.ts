@@ -1,5 +1,5 @@
 import { type FlattenObjectParams } from '@lib/shared/core/utils/flattenObject/flattenObject.models';
-import isArray from 'lodash/isArray';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
@@ -11,7 +11,7 @@ export const flattenObject = (
     ? reduce(
         value as unknown as object,
         (result, v, k) =>
-          Array.isArray(v)
+          isArray(v)
             ? {
                 ...result,
                 [k]: (v as Array<object>).map((vv) =>

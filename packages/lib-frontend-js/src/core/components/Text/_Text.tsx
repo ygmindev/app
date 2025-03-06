@@ -4,6 +4,7 @@ import { type TextCasingModel } from '@lib/frontend/core/components/Text/Text.mo
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import { type TextStyleModel } from '@lib/frontend/style/style.models';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import lowerCase from 'lodash/lowerCase';
 import upperCase from 'lodash/upperCase';
 import { type TextProps } from 'react-native';
@@ -35,11 +36,7 @@ export const _textParams: ComposeComponentParamsModel<_TextPropsModel, TextProps
       isEllipsis,
       onPress,
     }: _TextPropsModel): TextProps => ({
-      children: Array.isArray(children)
-        ? children
-        : children
-          ? capitalize(children, casing)
-          : undefined,
+      children: isArray(children) ? children : children ? capitalize(children, casing) : undefined,
       ellipsizeMode: isEllipsis ? 'tail' : undefined,
       numberOfLines: isEllipsis ? 1 : undefined,
       onPress,

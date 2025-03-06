@@ -2,6 +2,7 @@ import 'rc-slider/assets/index.css';
 
 import { type _SliderPropsModel } from '@lib/frontend/core/components/Slider/_Slider.models';
 import { type SFCModel } from '@lib/frontend/core/core.models';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import Slider from 'rc-slider';
 
 export const _Slider: SFCModel<_SliderPropsModel> = ({
@@ -31,7 +32,7 @@ export const _Slider: SFCModel<_SliderPropsModel> = ({
     }}
     max={upper}
     min={lower}
-    onChange={(v) => onChange && onChange(Array.isArray(v) ? { max: v[1], min: v[0] } : { min: v })}
+    onChange={(v) => onChange && onChange(isArray(v) ? { max: v[1], min: v[0] } : { min: v })}
     railStyle={{ backgroundColor, bottom: 0, margin: 'auto', top: 0 }}
     range={isRange}
     step={step}

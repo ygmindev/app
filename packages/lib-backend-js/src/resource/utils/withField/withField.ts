@@ -22,23 +22,28 @@ import { Field, Float } from 'type-graphql';
 
 const getField = <TType extends unknown>({
   Resource,
+  defaultValue,
   isArray,
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
+  const defaultValueF = defaultValue?.();
   if (Resource) {
-    return Field(() => (isArray ? [Resource()] : Resource()), { simple: true });
+    return Field(() => (isArray ? [Resource()] : Resource()), {
+      defaultValue: defaultValueF,
+      simple: true,
+    });
   }
   switch (type) {
     case DATA_TYPE.STRING:
-      return Field(() => (isArray ? [String] : String));
+      return Field(() => (isArray ? [String] : String), { defaultValue: defaultValueF });
     case DATA_TYPE.BOOLEAN:
-      return Field(() => (isArray ? [Boolean] : Boolean));
+      return Field(() => (isArray ? [Boolean] : Boolean), { defaultValue: defaultValueF });
     case DATA_TYPE.DATE:
-      return Field(() => (isArray ? [Date] : Date));
+      return Field(() => (isArray ? [Date] : Date), { defaultValue: defaultValueF });
     case DATA_TYPE.NUMBER:
-      return Field(() => (isArray ? [Float] : Float));
+      return Field(() => (isArray ? [Float] : Float), { defaultValue: defaultValueF });
     default:
-      return Field(() => (isArray ? [String] : String));
+      return Field(() => (isArray ? [String] : String), { defaultValue: defaultValueF });
   }
 };
 
@@ -139,7 +144,7 @@ export const withField =
       );
 
     isSchema &&
-      getField({ Resource, isArray, isOptional, mappedBy, name, relation, type })(
+      getField({ Resource, defaultValue, isArray, isOptional, mappedBy, name, relation, type })(
         target,
         propertyKey,
       );

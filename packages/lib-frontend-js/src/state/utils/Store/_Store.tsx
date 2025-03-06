@@ -11,6 +11,7 @@ import {
 } from '@lib/frontend/state/utils/Store/_Store.models';
 import { type StateProviderPropsModel } from '@lib/frontend/state/utils/Store/Store.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { mapValuesAsync } from '@lib/shared/core/utils/mapValuesAsync/mapValuesAsync';
 import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import {
@@ -139,7 +140,7 @@ export class _Store<
                 : store.unset(kS);
               void storage.removeItem(k);
             };
-            if (Array.isArray(v)) {
+            if (isArray(v)) {
               storeInitialState[kS] = [] as StateModel[keyof StateModel];
               storeActions[`${k}Add` as TKey] = (store, value) => {
                 actionsF[`${k}Add` as TKeyAction]
@@ -226,7 +227,7 @@ export class _Store<
               key: name,
               stateReconciler: isServer ? (_, original) => original : undefined,
               storage,
-              whitelist: Array.isArray(reducer.persist) ? reducer.persist : undefined,
+              whitelist: isArray(reducer.persist) ? reducer.persist : undefined,
             }
           : undefined;
 

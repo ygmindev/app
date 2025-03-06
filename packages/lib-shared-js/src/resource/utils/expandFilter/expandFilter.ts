@@ -1,4 +1,5 @@
 import { type PartialModel } from '@lib/shared/core/core.models';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { trueTypeOf } from '@lib/shared/core/utils/trueTypeOf/trueTypeOf';
 import {
   type ExpandFilterModel,
@@ -11,7 +12,7 @@ export const expandFilter = <TType extends unknown>(
 ): ExpandFilterModel<TType> =>
   params?.map(({ condition, field, value }) => {
     const valueF = ((): Omit<FilterModel<TType>, 'condition' | 'field'> => {
-      if (Array.isArray(value)) {
+      if (isArray(value)) {
         switch (trueTypeOf(value[0])) {
           case 'String':
             return { stringArrayValue: value as Array<string> };

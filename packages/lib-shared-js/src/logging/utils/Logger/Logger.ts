@@ -1,3 +1,4 @@
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger';
 import {
@@ -12,7 +13,7 @@ const stringifyF = (params: Array<unknown>): string =>
     .map((value) =>
       isPlainObject(value)
         ? stringify(value as object)
-        : Array.isArray(value)
+        : isArray(value)
           ? value.map((v) => stringifyF([v]))
           : value,
     )

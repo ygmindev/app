@@ -11,6 +11,8 @@ import { type PartialModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
@@ -51,8 +53,8 @@ export const getFilter = <TType extends unknown>(
               }
             : {
                 [conditionF]: last(v.field.split('.'))?.startsWith('_')
-                  ? Array.isArray(v.value)
-                    ? v.value.map((vv) => new ObjectId(`${vv}`))
+                  ? isArray(v.value)
+                    ? v.value.map((vv) => new ObjectId(`${vv as string}`))
                     : new ObjectId(v.value as string)
                   : v.value,
               },
@@ -108,6 +110,10 @@ export class _Database implements _DatabaseModel {
         try {
           const em = this._getEntityManager();
           const formF = cleanDocument(form);
+          console.warn('@@@');
+          console.warn(formF);
+          console.warn(stringify(formF));
+          console.warn('\n');
           const result = em.create(name, formF as object);
           !options?.isCommitted && (await em.persistAndFlush(result));
           return { result: result as PartialModel<TType> };

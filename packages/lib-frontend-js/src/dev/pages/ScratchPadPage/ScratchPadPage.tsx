@@ -28,7 +28,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
         form: {
           name: `chat with ${user.email}`,
 
-          // participants: [{ _id: uid }],
+          participants: [{ _id: uid }],
         },
       });
       // const chatId = result?._id;
@@ -52,7 +52,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       {...wrapperProps}
       p>
       <DataBoundary
-        id="users4"
+        id="users"
         query={getMany}
         s>
         {({ data }) => {
