@@ -175,7 +175,7 @@ export const DataBoundary = forwardRef(
 
     const handleRefresh = async (): Promise<void> => {
       const onRefresh = refFF.current?.query ?? refFF.current?.mutate;
-      onRefresh && (await onRefresh());
+      await onRefresh?.();
     };
 
     let fallbackElement = fallback;

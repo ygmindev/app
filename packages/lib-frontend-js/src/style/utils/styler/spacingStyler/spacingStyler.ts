@@ -6,7 +6,6 @@ import {
   type SpacingStylerParamsModel,
 } from '@lib/frontend/style/utils/styler/spacingStyler/spacingStyler.models';
 import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
-import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import isNumber from 'lodash/isNumber';
 
 export const getSpacing = <TType extends SpacingModel | 'auto' | number | undefined>(
@@ -45,7 +44,7 @@ export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
   const pF = getSpacing(p, theme);
   const pHorizontalF = pF ?? getSpacing(pHorizontal, theme);
   const pVerticalF = pF ?? getSpacing(pVertical, theme);
-  return cleanObject({
+  return {
     gap: getSpacing(s, theme),
     margin: mF,
     marginBottom: getSpacing(mBottom, theme) ?? mVerticalF,
@@ -56,5 +55,5 @@ export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (
     paddingLeft: getSpacing(pLeft, theme) ?? pHorizontalF,
     paddingRight: getSpacing(pRight, theme) ?? pHorizontalF,
     paddingTop: getSpacing(pTop, theme) ?? pVerticalF,
-  });
+  };
 };

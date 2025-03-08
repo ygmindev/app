@@ -6,7 +6,6 @@ import {
 } from '@lib/frontend/style/style.models';
 import { type ColorStylerParamsModel } from '@lib/frontend/style/utils/styler/colorStyler/colorStyler.models';
 import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
-import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 
 export const colorStyler: StylerModel<ColorStylerParamsModel, TextStyleModel> = (
   { color, colorRole },
@@ -18,5 +17,5 @@ export const colorStyler: StylerModel<ColorStylerParamsModel, TextStyleModel> = 
   colorF = palette
     ? palette[colorRole ?? (isSurface ? THEME_ROLE.CONTRAST : THEME_ROLE.MAIN)]
     : colorF;
-  return cleanObject({ color: colorF });
+  return { color: colorF };
 };

@@ -40,7 +40,7 @@ export const graphqlQuery = <TParams, TResult, TName extends string>({
   if (params) {
     paramsString = `(${reduce(
       params,
-      (result, v, k) => (v ? [...result, `$${k}: ${v}!`] : result),
+      (result, v, k) => (v ? [...result, `$${k}: ${v}`] : result),
       [] as Array<string>,
     ).join(', ')})`;
     paramsKeys = `(${Object.keys(params)

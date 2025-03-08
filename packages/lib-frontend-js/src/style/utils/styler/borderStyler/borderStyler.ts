@@ -4,7 +4,6 @@ import { THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type ThemeColorModel, type ThemeSizeModel } from '@lib/frontend/style/style.models';
 import { type BorderStylerParamsModel } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.models';
 import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
-import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
 
@@ -24,7 +23,7 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
 
   const colorF = theme.color.palette[borderColor as ThemeColorModel];
   const borderColorF = colorF ? colorF[borderRole] : theme.color.border;
-  return cleanObject({
+  return {
     borderBottomLeftRadius: getBorderRadius(round, CORNER.BOTTOM_LEFT),
     borderBottomRightRadius: getBorderRadius(round, CORNER.BOTTOM_RIGHT),
     borderBottomWidth: border === DIRECTION.BOTTOM ? borderWidth : undefined,
@@ -46,5 +45,5 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
           shadowRadius: theme.shape.shadow.size,
         }
       : {}),
-  });
+  };
 };

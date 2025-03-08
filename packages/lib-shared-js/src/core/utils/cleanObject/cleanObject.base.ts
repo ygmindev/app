@@ -11,33 +11,37 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isPrimitive } from '@lib/shared/core/utils/isPrimitive/isPrimitive';
+import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
 import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
-import every from 'lodash/every';
 import isObject from 'lodash/isObject';
+import some from 'lodash/some';
 
 export const cleanObject = <TType extends unknown>(
   ...[value, options, depth = 0]: CleanObjectParamsModel<TType>
 ): CleanObjectModel<TType> => {
-  if (isPrimitive(value)) {
+  if (isPrimitive(value) || some(options?.primitiveTypes ?? [], (type) => isTypeOf(value, type))) {
     return value;
   }
   if (isArray(value)) {
     return filterNil(value.map((vv) => cleanObject(vv as object, options, depth))) as TType;
   }
-  if (
-    isObject(value) &&
-    (!options?.primitiveTypes || every(options?.primitiveTypes, (type) => !(value instanceof type)))
-  ) {
-    const valueF = (
-      options?.objectTransformer ? options.objectTransformer(value, depth) : toPlainObject(value)
-    ) as typeof value;
+  if (isObject(value)) {
+    const valueF = toPlainObject(
+      options?.objectTransformer ? options.objectTransformer(value, depth) : value,
+    );
     (Object.keys(valueF as object) as Array<StringKeyModel<TType>>).forEach((k) => {
       let v = valueF[k];
-      v = options?.keyValueTransformer ? (options.keyValueTransformer(v, k, depth) as typeof v) : v;
-      if (CLEAN_OBJECT_KEYS.includes(k) || isEmpty(v)) {
+      if (CLEAN_OBJECT_KEYS.includes(k)) {
         delete valueF[k];
-      } else if (!IGNORE_OBJECT_KEYS.includes(k)) {
-        valueF[k] = cleanObject(v, options, depth + 1);
+      } else {
+        !IGNORE_OBJECT_KEYS.includes(k) && (v = cleanObject(v, options, depth + 1));
+        !!options?.keyValueTransformer &&
+          (v = options.keyValueTransformer(v, k, depth) as typeof v);
+        if (isEmpty(v)) {
+          delete valueF[k];
+        } else {
+          valueF[k] = v;
+        }
       }
     });
     return valueF;

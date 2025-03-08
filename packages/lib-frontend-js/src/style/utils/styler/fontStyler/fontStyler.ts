@@ -6,7 +6,6 @@ import {
 } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type FontStylerParamsModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
-import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import isNumber from 'lodash/isNumber';
 
 export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
@@ -20,31 +19,30 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
     isUnderline,
   },
   theme,
-) =>
-  cleanObject({
-    fontFamily:
-      fontStyle === FONT_STYLE.HEADLINE
-        ? theme.font.fontFamily.stylish
-        : theme.font.fontFamily[family],
+) => ({
+  fontFamily:
+    fontStyle === FONT_STYLE.HEADLINE
+      ? theme.font.fontFamily.stylish
+      : theme.font.fontFamily[family],
 
-    fontSize: isNumber(fontSize)
-      ? fontSize
-      : theme.font.size[
-          fontStyle === FONT_STYLE.HEADLINE ||
-          fontStyle === FONT_STYLE.TITLE ||
-          fontStyle === FONT_STYLE.SUBTITLE
-            ? THEME_SIZE.LARGE
-            : fontSize
-        ],
+  fontSize: isNumber(fontSize)
+    ? fontSize
+    : theme.font.size[
+        fontStyle === FONT_STYLE.HEADLINE ||
+        fontStyle === FONT_STYLE.TITLE ||
+        fontStyle === FONT_STYLE.SUBTITLE
+          ? THEME_SIZE.LARGE
+          : fontSize
+      ],
 
-    fontWeight:
-      isBold || fontStyle === FONT_STYLE.HEADLINE || fontStyle === FONT_STYLE.TITLE
-        ? theme.font.weight.bold
-        : undefined,
+  fontWeight:
+    isBold || fontStyle === FONT_STYLE.HEADLINE || fontStyle === FONT_STYLE.TITLE
+      ? theme.font.weight.bold
+      : undefined,
 
-    lineHeight: isLineHeight && fontStyle === FONT_STYLE.BODY ? theme.font.lineHeight : undefined,
+  lineHeight: isLineHeight && fontStyle === FONT_STYLE.BODY ? theme.font.lineHeight : undefined,
 
-    textAlign: align,
+  textAlign: align,
 
-    textDecorationLine: isUnderline ? 'underline' : undefined,
-  });
+  textDecorationLine: isUnderline ? 'underline' : undefined,
+});

@@ -73,7 +73,12 @@ export class PaymentMethodImplementation
   protected stripeAdminImplementation!: StripeAdminImplementationModel;
 
   async getMany(
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel> = {},
+    input: InputModel<
+      RESOURCE_METHOD_TYPE.GET_MANY,
+      PaymentMethodModel,
+      PaymentMethodFormModel,
+      UserModel
+    > = {},
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
     if (input.root) {
       const fields: Array<StringKeyModel<PaymentMethodModel>> = [

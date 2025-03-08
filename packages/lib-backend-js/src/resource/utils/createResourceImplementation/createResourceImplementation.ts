@@ -106,14 +106,13 @@ export const createResourceImplementation = <
     }
 
     async create(
-      input: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm> = {},
+      input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
-      const inputF = cleanObject(
-        this.decorators.beforeCreate
-          ? await this.decorators.beforeCreate({ input }, context)
-          : input,
-      );
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeCreate
+        ? await this.decorators.beforeCreate({ input: inputF }, context)
+        : inputF;
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot> = await create(
@@ -126,14 +125,13 @@ export const createResourceImplementation = <
     }
 
     async createMany(
-      input: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm> = {},
+      input?: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm, TRoot>,
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
-      const inputF = cleanObject(
-        this.decorators.beforeCreateMany
-          ? await this.decorators.beforeCreateMany({ input }, context)
-          : input,
-      );
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeCreateMany
+        ? await this.decorators.beforeCreateMany({ input: inputF }, context)
+        : inputF;
 
       inputF?.form &&
         (inputF.form = (await mapSequence(
@@ -157,12 +155,14 @@ export const createResourceImplementation = <
     }
 
     async get(
-      input: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm> = {},
+      input?: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
-      const inputF = cleanObject(
-        this.decorators.beforeGet ? await this.decorators.beforeGet({ input }, context) : input,
-      );
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeGet
+        ? await this.decorators.beforeGet({ input: inputF }, context)
+        : inputF;
+
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot> = await get(
@@ -175,14 +175,14 @@ export const createResourceImplementation = <
     }
 
     async getMany(
-      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm> = {},
+      input?: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
-      const inputF = cleanObject(
-        this.decorators.beforeGetMany
-          ? await this.decorators.beforeGetMany({ input }, context)
-          : input,
-      );
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeGetMany
+        ? await this.decorators.beforeGetMany({ input: inputF }, context)
+        : inputF;
+
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = await getMany(
@@ -195,14 +195,14 @@ export const createResourceImplementation = <
     }
 
     async getConnection(
-      input: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm> = {},
+      input?: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>,
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
-      const inputF = cleanObject(
-        this.decorators.beforeGetConnection
-          ? await this.decorators.beforeGetConnection({ input }, context)
-          : input,
-      );
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeGetConnection
+        ? await this.decorators.beforeGetConnection({ input: inputF }, context)
+        : inputF;
+
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> =
@@ -213,14 +213,14 @@ export const createResourceImplementation = <
     }
 
     async update(
-      input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm> = {},
+      input?: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>,
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
-      const inputF = cleanObject(
-        this.decorators.beforeUpdate
-          ? await this.decorators.beforeUpdate({ input }, context)
-          : input,
-      );
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeUpdate
+        ? await this.decorators.beforeUpdate({ input: inputF }, context)
+        : inputF;
+
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = await update(
@@ -233,14 +233,14 @@ export const createResourceImplementation = <
     }
 
     async search(
-      input: InputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TForm> = {},
+      input?: InputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TForm, TRoot>,
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
-      const inputF = cleanObject(
-        this.decorators.beforeSearch
-          ? await this.decorators.beforeSearch({ input }, context)
-          : input,
-      );
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeSearch
+        ? await this.decorators.beforeSearch({ input: inputF }, context)
+        : inputF;
+
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> = await search(
@@ -253,14 +253,14 @@ export const createResourceImplementation = <
     }
 
     async remove(
-      input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm> = {},
+      input?: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>,
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
-      const inputF = cleanObject(
-        this.decorators.beforeRemove
-          ? await this.decorators.beforeRemove({ input }, context)
-          : input,
-      );
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeRemove
+        ? await this.decorators.beforeRemove({ input: inputF }, context)
+        : inputF;
+
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot> = await remove(
