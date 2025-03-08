@@ -8,6 +8,7 @@ import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 export const withRefField =
   <TType extends unknown>({
     Resource,
+    inversedBy,
     isArray = false,
     isDatabase = false,
     isOptional = true,
@@ -18,6 +19,7 @@ export const withRefField =
   (target, propertyKey) =>
     withField({
       Resource,
+      inversedBy,
       isArray,
       isDatabase,
       isOptional,

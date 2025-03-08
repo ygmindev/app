@@ -22,6 +22,6 @@ export class Chat extends createProtectedResource() implements ChatModel {
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   name?: string;
 
-  @withManyToManyField({ Resource: () => User })
+  @withManyToManyField({ Resource: () => User, inversedBy: 'chats' })
   participants?: CollectionModel<UserModel> = new Collection(this);
 }

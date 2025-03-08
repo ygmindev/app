@@ -15,8 +15,8 @@ export const cleanObject = <TType extends unknown>(
     {
       ...options,
       objectTransformer: (v) => {
-        const { beforeCreate } = v as EntityResourceModel;
-        void beforeCreate?.bind(v)();
+        const { _id, beforeCreate } = v as EntityResourceModel;
+        !_id && void beforeCreate?.bind(v)();
         return toPlainObject(v) as typeof v;
       },
       primitiveTypes: [...(options?.primitiveTypes ?? []), ObjectId],

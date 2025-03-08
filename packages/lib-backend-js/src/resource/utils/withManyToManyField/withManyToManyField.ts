@@ -8,6 +8,7 @@ import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefFi
 export const withManyToManyField =
   <TType extends unknown>({
     Resource,
+    inversedBy,
     isDatabase = true,
     isOptional = true,
     mappedBy,
@@ -15,6 +16,7 @@ export const withManyToManyField =
   (target, propertyKey) =>
     withRefField({
       Resource,
+      inversedBy,
       isArray: true,
       isDatabase,
       isOptional,

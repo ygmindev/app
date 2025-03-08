@@ -26,30 +26,27 @@ const getField = <TType extends unknown>({
   isArray,
   type,
 }: WithFieldParamsModel<TType>): PropertyDecorator => {
-  const defaultValueF = defaultValue?.();
   if (Resource) {
-    return Field(() => (isArray ? [Resource()] : Resource()), {
-      defaultValue: defaultValueF,
-      simple: true,
-    });
+    return Field(() => (isArray ? [Resource()] : Resource()), { simple: true });
   }
   switch (type) {
     case DATA_TYPE.STRING:
-      return Field(() => (isArray ? [String] : String), { defaultValue: defaultValueF });
+      return Field(() => (isArray ? [String] : String));
     case DATA_TYPE.BOOLEAN:
-      return Field(() => (isArray ? [Boolean] : Boolean), { defaultValue: defaultValueF });
+      return Field(() => (isArray ? [Boolean] : Boolean));
     case DATA_TYPE.DATE:
-      return Field(() => (isArray ? [Date] : Date), { defaultValue: defaultValueF });
+      return Field(() => (isArray ? [Date] : Date));
     case DATA_TYPE.NUMBER:
-      return Field(() => (isArray ? [Float] : Float), { defaultValue: defaultValueF });
+      return Field(() => (isArray ? [Float] : Float));
     default:
-      return Field(() => (isArray ? [String] : String), { defaultValue: defaultValueF });
+      return Field(() => (isArray ? [String] : String));
   }
 };
 
 const getColumn = <TType extends unknown>({
   Resource,
   defaultValue,
+  inversedBy,
   isArray,
   isOptional,
   mappedBy,
@@ -71,6 +68,7 @@ const getColumn = <TType extends unknown>({
         return ManyToMany({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
+          inversedBy,
           mappedBy,
           nullable: true,
           owner: !mappedBy,
@@ -126,6 +124,7 @@ export const withField =
     Resource,
     defaultValue,
     expire,
+    inversedBy,
     isArray,
     isDatabase = false,
     isOptional,
@@ -144,15 +143,23 @@ export const withField =
       );
 
     isSchema &&
-      getField({ Resource, defaultValue, isArray, isOptional, mappedBy, name, relation, type })(
-        target,
-        propertyKey,
-      );
+      getField({
+        Resource,
+        defaultValue,
+        inversedBy,
+        isArray,
+        isOptional,
+        mappedBy,
+        name,
+        relation,
+        type,
+      })(target, propertyKey);
 
     isDatabase &&
       getColumn({
         Resource,
         defaultValue,
+        inversedBy,
         isArray,
         isOptional,
         mappedBy,

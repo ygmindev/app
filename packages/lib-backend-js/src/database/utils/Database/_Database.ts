@@ -7,12 +7,12 @@ import {
   type _DatabaseConfigModel,
   type DatabaseConfigModel,
 } from '@lib/config/database/database.models';
+import { type ChatFormModel } from '@lib/shared/chat/resources/Chat/Chat.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
-import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
@@ -110,11 +110,8 @@ export class _Database implements _DatabaseModel {
         try {
           const em = this._getEntityManager();
           const formF = cleanDocument(form);
-          console.warn('@@@');
-          console.warn(formF);
-          console.warn(stringify(formF));
-          console.warn('\n');
-          const result = em.create(name, formF as object);
+          const formFF = formF as ChatFormModel;
+          const result = em.create(name, formFF as object);
           !options?.isCommitted && (await em.persistAndFlush(result));
           return { result: result as PartialModel<TType> };
         } catch (e) {

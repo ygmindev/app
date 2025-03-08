@@ -35,6 +35,8 @@ export type UserModel = EntityResourceModel & {
 
   callingCode?: string;
 
+  chats?: CollectionModel<ChatModel>;
+
   email?: string;
 
   first?: string;
