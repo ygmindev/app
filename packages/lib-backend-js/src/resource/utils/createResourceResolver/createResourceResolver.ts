@@ -12,7 +12,6 @@ import { type RequestContextModel } from '@lib/config/api/api.models';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';
-import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
@@ -85,7 +84,7 @@ export const createResourceResolver = <
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
       if (this._implementation.create) {
-        return this._implementation.create(cleanObject(input), context);
+        return this._implementation.create(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.CREATE);
     }
@@ -123,7 +122,7 @@ export const createResourceResolver = <
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
       if (this._implementation.createMany) {
-        return this._implementation.createMany(cleanObject(input), context);
+        return this._implementation.createMany(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.CREATE_MANY);
     }
@@ -154,7 +153,7 @@ export const createResourceResolver = <
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
       if (this._implementation.get) {
-        return this._implementation.get(cleanObject(input), context);
+        return this._implementation.get(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET);
     }
@@ -187,7 +186,7 @@ export const createResourceResolver = <
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
       if (this._implementation.getMany) {
-        return this._implementation.getMany(cleanObject(input), context);
+        return this._implementation.getMany(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_MANY);
     }
@@ -220,7 +219,7 @@ export const createResourceResolver = <
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
       if (this._implementation.getConnection) {
-        return this._implementation.getConnection(cleanObject(input), context);
+        return this._implementation.getConnection(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_CONNECTION);
     }
@@ -251,7 +250,7 @@ export const createResourceResolver = <
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
       if (this._implementation.update) {
-        return this._implementation.update(cleanObject(input), context);
+        return this._implementation.update(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.UPDATE);
     }
@@ -282,7 +281,7 @@ export const createResourceResolver = <
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
       if (this._implementation.remove) {
-        return this._implementation.remove(cleanObject(input), context);
+        return this._implementation.remove(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.REMOVE);
     }
@@ -313,7 +312,7 @@ export const createResourceResolver = <
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
       if (this._implementation.search) {
-        return this._implementation.search(cleanObject(input), context);
+        return this._implementation.search(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.SEARCH);
     }

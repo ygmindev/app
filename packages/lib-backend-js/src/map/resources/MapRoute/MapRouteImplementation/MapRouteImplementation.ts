@@ -58,27 +58,6 @@ export class MapRouteImplementation implements MapRouteImplementationModel {
     };
     intermediates?.length &&
       (params.intermediates = intermediates.map((value) => ({ latLng: value })));
-
-    // const result = await this.httpImplementation.post<
-    //   unknown,
-    //   {
-    //     routes: Array<{
-    //       distanceMeters: number;
-    //       duration: string;
-    //       polyline: { encodedPolyline: string };
-    //     }>;
-    //   }
-    // >({
-    //   params: cleanObject(params),
-    //   request: {
-    //     headers: {
-    //       'X-Goog-Api-Key': process.env.SERVER_APP_GOOGLE_API_KEY,
-    //       'X-Goog-FieldMask':
-    //         'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline',
-    //     },
-    //   },
-    //   url: 'https://routes.googleapis.com/directions/v2:computeRoutes',
-    // });
     const result = {
       routes: [
         {

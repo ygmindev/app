@@ -129,9 +129,11 @@ export const createResourceImplementation = <
       input: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm> = {},
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
-      let inputF = this.decorators.beforeCreateMany
-        ? await this.decorators.beforeCreateMany({ input }, context)
-        : input;
+      const inputF = cleanObject(
+        this.decorators.beforeCreateMany
+          ? await this.decorators.beforeCreateMany({ input }, context)
+          : input,
+      );
 
       inputF?.form &&
         (inputF.form = (await mapSequence(
@@ -143,7 +145,6 @@ export const createResourceImplementation = <
           ),
         )) as Array<TForm>);
 
-      inputF = cleanObject(inputF);
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot> = await createMany(
@@ -235,9 +236,11 @@ export const createResourceImplementation = <
       input: InputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TForm> = {},
       context?: RequestContextModel,
     ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
-      const inputF = this.decorators.beforeSearch
-        ? await this.decorators.beforeSearch({ input }, context)
-        : input;
+      const inputF = cleanObject(
+        this.decorators.beforeSearch
+          ? await this.decorators.beforeSearch({ input }, context)
+          : input,
+      );
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> = await search(
