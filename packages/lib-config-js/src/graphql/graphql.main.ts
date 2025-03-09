@@ -9,6 +9,7 @@ import { BankResolver } from '@lib/backend/billing/resources/Bank/BankResolver/B
 import { CardResolver } from '@lib/backend/billing/resources/Card/CardResolver/CardResolver';
 import { PaymentMethodResolver } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver';
 import { ChatResolver } from '@lib/backend/chat/resources/Chat/ChatResolver/ChatResolver';
+import { MessageResolver } from '@lib/backend/chat/resources/Message/MessageResolver/MessageResolver';
 import { OrderResolver } from '@lib/backend/commerce/resources/Order/OrderResolver/OrderResolver';
 import { PricingResolver } from '@lib/backend/commerce/resources/Pricing/PricingResolver/PricingResolver';
 import { ProductResolver } from '@lib/backend/commerce/resources/Product/ProductResolver/ProductResolver';
@@ -37,6 +38,7 @@ export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
         BankResolver,
         CardResolver,
         ChatResolver,
+        MessageResolver,
         GroupResolver,
         LinkedUserResolver,
         OrderResolver,

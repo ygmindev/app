@@ -7,6 +7,7 @@ import { Bank } from '@lib/backend/billing/resources/Bank/Bank';
 import { Card } from '@lib/backend/billing/resources/Card/Card';
 import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethod';
 import { Chat } from '@lib/backend/chat/resources/Chat/Chat';
+import { Message } from '@lib/backend/chat/resources/Message/Message';
 import { Order } from '@lib/backend/commerce/resources/Order/Order';
 import { Product } from '@lib/backend/commerce/resources/Product/Product';
 import { Group } from '@lib/backend/group/resources/Group/Group';
@@ -34,8 +35,9 @@ export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
       Bank,
       Card,
       Chat,
-      LinkedUser,
       Group,
+      LinkedUser,
+      Message,
       Order,
       Otp,
       PaymentMethod,

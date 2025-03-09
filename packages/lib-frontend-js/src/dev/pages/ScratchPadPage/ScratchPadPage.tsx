@@ -10,6 +10,7 @@ import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPa
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
+import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
 // import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
@@ -31,11 +32,11 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
           participants: [{ _id: uid }],
         },
       });
-      // const chatId = result?._id;
-      // chatId &&
-      //   (await createMessage({
-      //     form: { [CHAT_RESOURCE_NAME]: { _id: chatId }, text: 'test message' },
-      //   }));
+      const chatId = result?._id;
+      chatId &&
+        (await createMessage({
+          form: { [CHAT_RESOURCE_NAME]: { _id: chatId }, text: 'test message' },
+        }));
     }
 
     // await http.post({

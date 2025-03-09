@@ -1,7 +1,6 @@
-import { MESSAGE_FIELDS } from '@lib/frontend/chat/hooks/useMessageResource/useMessageResource.constants';
 import { type UseMessageResourceModel } from '@lib/frontend/chat/hooks/useMessageResource/useMessageResource.models';
+import { MESSAGE_RESOURCE_PARAMS } from '@lib/frontend/chat/resources/Message/Message.constants';
 import { useResource } from '@lib/frontend/resource/hooks/useResource/useResource';
-import { MESSAGE_RESOURCE_NAME } from '@lib/shared/chat/resources/Message/Message.constants';
 import {
   type MessageFormModel,
   type MessageModel,
@@ -9,6 +8,5 @@ import {
 
 export const useMessageResource = (): UseMessageResourceModel =>
   useResource<MessageModel, MessageFormModel>({
-    fields: [{ result: MESSAGE_FIELDS }],
-    name: MESSAGE_RESOURCE_NAME,
+    ...MESSAGE_RESOURCE_PARAMS,
   });

@@ -4,6 +4,7 @@ import {
   type GraphqlQueryParamsFieldsModel,
   type GraphqlQueryParamsModel,
 } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
 import { print } from 'graphql/language/printer';
 import { gql } from 'graphql-tag';
@@ -16,9 +17,11 @@ const getGraphqlFields = <TType extends unknown>(
 ): string => `{
   ${
     isPlainObject(fields)
-      ? map(
-          fields as GraphqlFragmentFieldModel<TType>,
-          (v, k) => `... on ${k} ${getGraphqlFields(v)}`,
+      ? filterNil(
+          map(
+            fields as GraphqlFragmentFieldModel<TType>,
+            (v, k) => `... on ${k} ${getGraphqlFields(v)}`,
+          ),
         ).join(' ')
       : (fields as GraphqlQueryParamsFieldsModel<TType>)
           .map((field) =>

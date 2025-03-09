@@ -6,5 +6,5 @@ import { type EntityResourceImplementationModel } from '@lib/shared/resource/res
 
 export type MessageImplementationModel = EntityResourceImplementationModel<
   MessageModel,
-  MessageFormModel,
+  MessageFormModel
 >;
