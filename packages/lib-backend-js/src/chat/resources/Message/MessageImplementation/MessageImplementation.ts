@@ -7,11 +7,17 @@ import {
   type MessageModel,
 } from '@lib/shared/chat/resources/Message/Message.models';
 import { type MessageImplementationModel } from '@lib/shared/chat/resources/Message/MessageImplementation/MessageImplementation.models';
+import { Container } from '@lib/shared/core/utils/Container/Container';
+import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 
 @withContainer({ name: `${MESSAGE_RESOURCE_NAME}Implementation` })
 export class MessageImplementation
   extends createProtectedResoureImplementation<MessageModel, MessageFormModel>({
     Resource: Message,
+    afterCreate: async ({ output }) => {
+      Container.get(PubSub).publish('MESSAGE', output.result);
+      return output;
+    },
     name: MESSAGE_RESOURCE_NAME,
   })
   implements MessageImplementationModel {}

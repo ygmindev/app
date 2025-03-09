@@ -1,3 +1,4 @@
+import { _withAccess } from '@lib/backend/resource/utils/withAccess/_withAccess';
 import {
   type WithAccessModel,
   type WithAccessParamsModel,
@@ -13,7 +14,6 @@ import {
   type AccessRoleMoreModel,
 } from '@lib/shared/auth/resources/Access/Access.models';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
-import { Authorized } from 'type-graphql';
 
 // TODO: should come from database?
 export const getAccessRole = (
@@ -34,5 +34,5 @@ export const withAccess = (
 ): WithAccessModel =>
   withCondition(
     () => access !== ACCESS_LEVEL.PUBLIC,
-    () => Authorized(getAccessRole(access)),
+    () => _withAccess(getAccessRole(access)),
   );

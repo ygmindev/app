@@ -80,42 +80,46 @@ export const _runServer = async ({
     };
 
     if (type === API_ENDPOINT_TYPE.GRAPHQL) {
-      const schemaF = schema && _graphql(schema);
-      const yoga = createYoga<{ reply: FastifyReply; req: FastifyRequest }>({
-        context: async ({ request }) => {
-          const context: RequestContextModel = {};
-          const access = request.headers.get('authorization');
-          access && (context.token = { access });
-          // TODO: delete token if expired token
-          // request.headers.delete('authorization');
-          return context;
-        },
-        landingPage: false,
-        logging: logger,
-        maskedErrors: {
-          maskError(error, message, isDev) {
-            return formatGraphqlError(error as GraphQLError);
+      try {
+        const schemaF = schema && _graphql(schema);
+        const yoga = createYoga<{ reply: FastifyReply; req: FastifyRequest }>({
+          context: async ({ request }) => {
+            const context: RequestContextModel = {};
+            const access = request.headers.get('authorization');
+            access && (context.token = { access });
+            // TODO: delete token if expired token
+            // request.headers.delete('authorization');
+            return context;
           },
-        },
-        plugins: filterNil([protocol !== HTTP_PROTOCOL.WEBSOCKET && useGraphQLSSE]),
-        schema: schemaF,
-      });
+          landingPage: false,
+          logging: logger,
+          maskedErrors: {
+            maskError(error, message, isDev) {
+              return formatGraphqlError(error as GraphQLError);
+            },
+          },
+          plugins: filterNil([protocol !== HTTP_PROTOCOL.WEBSOCKET && useGraphQLSSE]),
+          schema: schemaF,
+        });
 
-      switch (protocol) {
-        case HTTP_PROTOCOL.WEBSOCKET: {
-          route.wsHandler = makeHandler({ schema: schemaF });
-          break;
+        switch (protocol) {
+          case HTTP_PROTOCOL.WEBSOCKET: {
+            route.wsHandler = makeHandler({ schema: schemaF });
+            break;
+          }
+          default: {
+            route.handler = async (req, reply) => {
+              const response = await yoga.handleNodeRequestAndResponse(req, reply, { reply, req });
+              response.headers.forEach((value: unknown, key: string) => {
+                void reply.header(key, value);
+              });
+              await reply.status(response.status ?? 200).send(response.body);
+            };
+            break;
+          }
         }
-        default: {
-          route.handler = async (req, reply) => {
-            const response = await yoga.handleNodeRequestAndResponse(req, reply, { reply, req });
-            response.headers.forEach((value: unknown, key: string) => {
-              void reply.header(key, value);
-            });
-            await reply.status(response.status ?? 200).send(response.body);
-          };
-          break;
-        }
+      } catch (e) {
+        console.warn(e);
       }
     }
 

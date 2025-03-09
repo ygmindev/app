@@ -3085,6 +3085,10 @@ input SocketUpdateUpdateInput {
   name: String
 }
 
+type Subscription {
+  messageSubscription: Message
+}
+
 type User {
   Access: [Access]
   Bank: [Bank]

@@ -1,5 +1,4 @@
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { SubscriptionResolver } from '@lib/config/graphql/_subs';
 import { config as configBase } from '@lib/config/graphql/graphql.base';
 import {
   type _GraphqlConfigModel,
@@ -12,7 +11,8 @@ export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
 
   overrides: () => [
     {
-      resolvers: [SubscriptionResolver],
+      // resolvers: [SubscriptionResolver],
+      resolvers: [],
 
       schemaDir: fromStatic('graphql/websocket.gql'),
     },

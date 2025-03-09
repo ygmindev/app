@@ -1,9 +1,8 @@
-export type WithEntityParamsModel<TType extends unknown> = {
-  indices?: Array<{ keys: Array<keyof TType>; type?: 'text' }>;
-  isAbstract?: boolean;
-  isEmbeddable?: boolean;
-  isDatabase?: boolean;
-  isSchema?: boolean;
-  isSchemaInput?: boolean;
-  name?: string;
-};
+import {
+  type _WithEntityModel,
+  type _WithEntityParamsModel,
+} from '@lib/backend/resource/utils/withEntity/_withEntity.models';
+
+export type WithEntityParamsModel<TType extends unknown> = _WithEntityParamsModel<TType>;
+
+export type WithEntityModel = _WithEntityModel;

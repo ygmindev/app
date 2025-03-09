@@ -11,6 +11,7 @@ import { type ConnectionModel } from '@lib/shared/resource/utils/Connection/Conn
 import { type GraphQLError } from 'graphql';
 
 export type GraphqlParamsModel<TParams> = {
+  isStreaming?: boolean;
   query: string;
   variables?: TParams;
 };

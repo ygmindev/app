@@ -1,7 +1,8 @@
-import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
+import {
+  type _WithParamsModel,
+  type _WithParamsParamsModel,
+} from '@lib/backend/resource/utils/withParams/_withParams.models';
 
-export type WithParamsParamsModel<TType extends unknown> = {
-  Resource(): ResourceClassModel<TType>;
-};
+export type WithParamsParamsModel<TType extends unknown> = _WithParamsParamsModel<TType>;
 
-export type WithParamsModel = ParameterDecorator;
+export type WithParamsModel = _WithParamsModel;

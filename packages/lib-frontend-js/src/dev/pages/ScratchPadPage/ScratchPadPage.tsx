@@ -6,6 +6,7 @@ import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
+import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql.base';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
@@ -13,7 +14,9 @@ import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUse
 import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
 // import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
+import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { useEffect } from 'react';
 
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -21,6 +24,16 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
   const currentUser = useCurrentUser();
   const { create: createChat } = useChatResource();
   const { create: createMessage } = useMessageResource();
+
+  const graphql = useAppGraphql();
+
+  useEffect(() => {
+    void graphql.query({
+      fields: ['text'],
+      name: 'messageSubscription',
+      type: GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,
+    });
+  }, []);
 
   const handlePress = async (user: PartialModel<UserModel>): Promise<void> => {
     const uid = user._id;
