@@ -30,7 +30,6 @@ export class MessageResolver
   @withOutput({
     Resource: () => Message,
     access: ACCESS_LEVEL.PROTECTED,
-    filter: async ({ context }) => {},
     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
     name: MESSAGE_RESOURCE_NAME,
     topics: ['message'],
