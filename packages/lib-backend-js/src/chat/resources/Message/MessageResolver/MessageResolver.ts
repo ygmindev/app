@@ -2,15 +2,21 @@ import { Message } from '@lib/backend/chat/resources/Message/Message';
 import { MessageImplementation } from '@lib/backend/chat/resources/Message/MessageImplementation/MessageImplementation';
 import { type MessageResolverModel } from '@lib/backend/chat/resources/Message/MessageResolver/MessageResolver.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createProtectedResourceResolver } from '@lib/backend/resource/utils/createProtectedResourceResolver/createProtectedResourceResolver';
+import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
+import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
+import { withRoot } from '@lib/backend/resource/utils/withRoot/withRoot';
+import { RequestContextModel } from '@lib/config/api/api.models';
 import { MESSAGE_RESOURCE_NAME } from '@lib/shared/chat/resources/Message/Message.constants';
 import {
   type MessageFormModel,
   type MessageModel,
 } from '@lib/shared/chat/resources/Message/Message.models';
-import { PartialModel } from '@lib/shared/core/core.models';
-import { Root, Subscription } from 'type-graphql';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 
 @withContainer()
 @withResolver({ Resource: () => Message })
@@ -22,28 +28,25 @@ export class MessageResolver
   })
   implements MessageResolverModel
 {
-  // @withOutput({
-  //     Resource: () => Message,
-  //     method: RESOURCE_METHOD_TYPE.UPDATE,
-  //     name: SIGN_IN_USER,
-  //   })
-  //   async userUpdate(
-  //     @withInput({
-  //       Resource: () => User,
-  //       method: RESOURCE_METHOD_TYPE.UPDATE,
-  //       name: SIGN_IN_USER,
-  //     })
-  //     input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel> = {},
-  //     @withContext()
-  //     context?: RequestContextModel,
-  //   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-  //     return this.signInImplementation.userUpdate(input, context);
-  //   }
-
-  @Subscription(() => Message, { name: 'messageSubscription', topics: 'MESSAGE' })
-  messageSubscription(@Root() x: MessageModel): PartialModel<MessageModel> {
-    console.warn('@SUB!');
-    console.warn(x);
-    return { text: 'test' };
+  @withOutput({
+    Resource: () => Message,
+    method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
+    name: MESSAGE_RESOURCE_NAME,
+    topics: ['message'],
+  })
+  async messageSubscribe(
+    @withInput({
+      Resource: () => Message,
+      method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
+      name: MESSAGE_RESOURCE_NAME,
+    })
+    input: InputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, MessageModel, MessageFormModel> = {},
+    @withContext()
+    context?: RequestContextModel,
+    @withRoot()
+    root?: MessageModel,
+  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, MessageModel>> {
+    console.warn(root);
+    throw new Error();
   }
 }

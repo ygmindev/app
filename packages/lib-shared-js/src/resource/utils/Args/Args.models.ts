@@ -82,6 +82,13 @@ type SearchArgsModel<TType> = {
   query?: string;
 };
 
+type SubscribeOptionsModel<TType> = ProjectOptionsModel<TType>;
+
+type SubscribeArgsModel<TType> = {
+  filter?: Array<FilterModel<TType>>;
+  options?: SubscribeOptionsModel<TType>;
+};
+
 type UpdateOptionsModel<TType> = ProjectOptionsModel<TType>;
 
 type UpdateArgsModel<TType> = {
@@ -110,6 +117,8 @@ export type ArgsModel<
               ? RemoveArgsModel<TType>
               : TMethod extends RESOURCE_METHOD_TYPE.SEARCH
                 ? SearchArgsModel<TType>
-                : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
-                  ? UpdateArgsModel<TType>
-                  : never);
+                : TMethod extends RESOURCE_METHOD_TYPE.SUBSCRIBE
+                  ? SubscribeArgsModel<TType>
+                  : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
+                    ? UpdateArgsModel<TType>
+                    : never);

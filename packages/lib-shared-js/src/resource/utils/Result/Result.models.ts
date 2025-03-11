@@ -8,11 +8,13 @@ export type ResultModel<TMethod extends ResourceMethodTypeModel, TType> = TMetho
   | RESOURCE_METHOD_TYPE.GET
   | RESOURCE_METHOD_TYPE.UPDATE
   | RESOURCE_METHOD_TYPE.REMOVE
+  | RESOURCE_METHOD_TYPE.SUBSCRIBE
   ? PartialModel<TType>
-  : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY | RESOURCE_METHOD_TYPE.CREATE_MANY
+  : TMethod extends
+        | RESOURCE_METHOD_TYPE.GET_MANY
+        | RESOURCE_METHOD_TYPE.CREATE_MANY
+        | RESOURCE_METHOD_TYPE.SEARCH
     ? Array<PartialModel<TType>>
-    : TMethod extends RESOURCE_METHOD_TYPE.SEARCH
-      ? Array<PartialModel<TType>>
-      : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
-        ? ConnectionModel<TType>
-        : never;
+    : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
+      ? ConnectionModel<TType>
+      : never;

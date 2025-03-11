@@ -71,6 +71,7 @@ export const useResourceMethod = <
           RESOURCE_METHOD_TYPE.GET_CONNECTION,
           RESOURCE_METHOD_TYPE.UPDATE,
           RESOURCE_METHOD_TYPE.REMOVE,
+          RESOURCE_METHOD_TYPE.SUBSCRIBE,
         ] as Array<ResourceMethodTypeModel>
       ).includes(method)
     ) {
@@ -79,7 +80,8 @@ export const useResourceMethod = <
         | RESOURCE_METHOD_TYPE.GET_MANY
         | RESOURCE_METHOD_TYPE.GET_CONNECTION
         | RESOURCE_METHOD_TYPE.UPDATE
-        | RESOURCE_METHOD_TYPE.REMOVE,
+        | RESOURCE_METHOD_TYPE.REMOVE
+        | RESOURCE_METHOD_TYPE.SUBSCRIBE,
         TType,
         TForm,
         TRoot

@@ -13,9 +13,10 @@ export const withOutput =
   <TMethod extends ResourceMethodTypeModel, TType, TRoot = undefined>({
     Resource,
     RootResource,
-    access = ACCESS_LEVEL.PUBLIC,
+    access = ACCESS_LEVEL.RESTRICTED,
     method,
     name,
+    topics,
   }: WithOutputParamsModel<TMethod, TType, TRoot>): WithOutputModel =>
   (target, propertyKey, descriptor) => {
     const nameF = `${name}${method}`;
@@ -25,5 +26,6 @@ export const withOutput =
       access,
       name: nameF,
       operation: getOperationType(method) as WithResultParamsModel<TType>['operation'],
+      topics,
     })(target, propertyKey, descriptor);
   };

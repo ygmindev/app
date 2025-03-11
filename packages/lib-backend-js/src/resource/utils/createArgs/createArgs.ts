@@ -114,6 +114,26 @@ export const createArgs = <TMethod extends ResourceMethodTypeModel, TType, TForm
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
 
+    case RESOURCE_METHOD_TYPE.SUBSCRIBE: {
+      @withEntity({ isAbstract: true })
+      class Args
+        extends Root<TRoot>
+        implements ArgsModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TForm, TRoot>
+      {
+        @withCondition(
+          () => !!Filter,
+          () =>
+            withField({
+              Resource: Filter ? () => Filter : undefined,
+              isArray: true,
+              type: PROPERTY_TYPE.RESOURCE,
+            }),
+        )
+        filter!: Array<FilterModel<TType>>;
+      }
+      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+    }
+
     case RESOURCE_METHOD_TYPE.UPDATE: {
       const Update = Resource && createUpdate({ Resource, name });
       @withEntity({ isAbstract: true })

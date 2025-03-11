@@ -8,5 +8,6 @@ export enum RESOURCE_METHOD_TYPE {
   GET_MANY = 'GetMany',
   REMOVE = 'Remove',
   SEARCH = 'Search',
+  SUBSCRIBE = 'Subscribe',
   UPDATE = 'Update',
 }

@@ -10,7 +10,7 @@ import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 export const withResult =
   <TType extends unknown>({
     Resource,
-    access = ACCESS_LEVEL.PUBLIC,
+    access = ACCESS_LEVEL.RESTRICTED,
     name,
     operation = GRAPHQL_OPERATION_TYPE.QUERY,
     topics,

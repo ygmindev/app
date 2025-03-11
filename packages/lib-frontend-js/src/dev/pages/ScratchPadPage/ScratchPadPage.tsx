@@ -29,7 +29,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
 
   useEffect(() => {
     void graphql.query({
-      fields: ['text'],
+      fields: ['message'],
       name: 'messageSubscription',
       type: GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,
     });
