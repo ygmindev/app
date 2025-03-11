@@ -28,9 +28,9 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
   const graphql = useAppGraphql();
 
   useEffect(() => {
-    void graphql.query({
-      fields: ['message'],
-      name: 'messageSubscription',
+    void graphql.query<any>({
+      fields: [{ result: ['text'] }],
+      name: 'MessageSubscribe',
       type: GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,
     });
   }, []);
@@ -66,7 +66,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       {...wrapperProps}
       p>
       <DataBoundary
-        id="users33"
+        id="users2"
         query={getMany}
         s>
         {({ data }) => {

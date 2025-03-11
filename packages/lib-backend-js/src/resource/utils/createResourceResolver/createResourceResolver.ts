@@ -163,14 +163,12 @@ export const createResourceResolver = <
       () => [
         withAuthorizer({
           authorizer:
-            authorizer?.default ??
-            authorizer?.read ??
-            authorizer?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
+            authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.GET_MANY],
         }),
         withOutput({
           Resource,
           RootResource,
-          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
+          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET_MANY],
           method: RESOURCE_METHOD_TYPE.GET_MANY,
           name,
         }),

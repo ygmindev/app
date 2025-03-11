@@ -17,6 +17,7 @@ export class UserResolver
     ResourceImplementation: UserImplementation,
     access: {
       [RESOURCE_METHOD_TYPE.GET]: ACCESS_LEVEL.PUBLIC,
+      [RESOURCE_METHOD_TYPE.GET_MANY]: ACCESS_LEVEL.PUBLIC,
     },
     name: USER_RESOURCE_NAME,
   })

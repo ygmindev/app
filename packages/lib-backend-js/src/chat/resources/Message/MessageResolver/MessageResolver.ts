@@ -9,6 +9,7 @@ import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
 import { withRoot } from '@lib/backend/resource/utils/withRoot/withRoot';
 import { RequestContextModel } from '@lib/config/api/api.models';
+import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { MESSAGE_RESOURCE_NAME } from '@lib/shared/chat/resources/Message/Message.constants';
 import {
   type MessageFormModel,
@@ -30,6 +31,7 @@ export class MessageResolver
 {
   @withOutput({
     Resource: () => Message,
+    access: ACCESS_LEVEL.PUBLIC,
     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
     name: MESSAGE_RESOURCE_NAME,
     topics: ['message'],
@@ -47,6 +49,6 @@ export class MessageResolver
     root?: MessageModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, MessageModel>> {
     console.warn(root);
-    throw new Error();
+    return { result: root };
   }
 }
