@@ -11,11 +11,12 @@ export const withResult =
   <TType extends unknown>({
     Resource,
     access = ACCESS_LEVEL.RESTRICTED,
+    filter,
     name,
     operation = GRAPHQL_OPERATION_TYPE.QUERY,
     topics,
   }: WithResultParamsModel<TType>): WithResultModel =>
   (target, propertyKey, descriptor) => {
     withAccess({ access })(target, propertyKey, descriptor);
-    _withResult({ Resource, name, operation, topics })(target, propertyKey, descriptor);
+    _withResult({ Resource, filter, name, operation, topics })(target, propertyKey, descriptor);
   };

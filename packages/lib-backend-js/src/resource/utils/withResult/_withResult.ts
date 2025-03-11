@@ -15,7 +15,13 @@ export const _withResult = <TType extends unknown>({
 }: _WithResultParamsModel<TType>): _WithResultModel => {
   if (operation === GRAPHQL_OPERATION_TYPE.SUBSCRIPTION) {
     return Subscription(Resource, {
-      filter: filter ? ({ context }) => filter(context as RequestContextModel) : undefined,
+      filter: filter
+        ? async ({ context, payload }) =>
+            filter({
+              context: context as RequestContextModel,
+              payload: payload as never, // TODO: type resource payload
+            })
+        : undefined,
       name,
       topics: topics ?? [],
     });

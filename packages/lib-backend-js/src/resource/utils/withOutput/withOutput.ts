@@ -14,6 +14,7 @@ export const withOutput =
     Resource,
     RootResource,
     access = ACCESS_LEVEL.RESTRICTED,
+    filter,
     method,
     name,
     topics,
@@ -24,6 +25,7 @@ export const withOutput =
     withResult({
       Resource: () => OutputF ?? Boolean,
       access,
+      filter: filter as WithResultParamsModel<typeof OutputF>['filter'],
       name: nameF,
       operation: getOperationType(method) as WithResultParamsModel<TType>['operation'],
       topics,

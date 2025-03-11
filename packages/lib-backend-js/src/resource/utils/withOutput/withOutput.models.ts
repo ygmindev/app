@@ -9,6 +9,6 @@ export type WithOutputParamsModel<
   TRoot = undefined,
 > = WithAccessParamsModel &
   CreateOutputParamsModel<TMethod, TType, TRoot> &
-  Pick<WithResultParamsModel<TType>, 'topics'>;
+  Pick<WithResultParamsModel<TType>, 'filter' | 'topics'>;
 
 export type WithOutputModel = MethodDecorator;
