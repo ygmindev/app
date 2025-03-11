@@ -31,7 +31,7 @@ export class MessageResolver
 {
   @withOutput({
     Resource: () => Message,
-    access: ACCESS_LEVEL.PUBLIC,
+    access: ACCESS_LEVEL.PROTECTED,
     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
     name: MESSAGE_RESOURCE_NAME,
     topics: ['message'],
@@ -48,7 +48,8 @@ export class MessageResolver
     @withRoot()
     root?: MessageModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, MessageModel>> {
-    console.warn(root);
+    console.warn('@@@ context?');
+    console.warn(context?.user);
     return { result: root };
   }
 }
