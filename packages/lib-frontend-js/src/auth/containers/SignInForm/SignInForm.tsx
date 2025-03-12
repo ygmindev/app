@@ -32,7 +32,7 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
 
   const handleSubmit = async (form: SignInFormModel): Promise<void> => {
     await Promise.all([
-      pubsub.waitFor(SIGN_IN),
+      pubsub.waitFor({ topic: SIGN_IN }),
       mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form),
     ]);
   };
