@@ -1,10 +1,10 @@
 import { PricingImplementation } from '@lib/backend/commerce/resources/Pricing/PricingImplementation/PricingImplementation';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type SeedDataModel } from '@lib/backend/database/utils/seed/seed.models';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { PRODUCT_RESOURCE_NAME } from '@lib/shared/commerce/resources/Product/Product.constants';
 import { PRODUCT_FIXTURES } from '@lib/shared/commerce/resources/Product/Product.fixtures';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.constants';

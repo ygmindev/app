@@ -1,9 +1,6 @@
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type _PubSubModel } from '@lib/shared/core/utils/PubSub/_PubSub.models';
-import {
-  type PubSubSchemaModel,
-  type SubscribeParamsModel,
-} from '@lib/shared/core/utils/PubSub/PubSub.models';
+import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
 import PubSub from 'pubsub-js';
 
 export class _PubSub<TType extends PubSubSchemaModel> implements _PubSubModel<TType> {
@@ -11,28 +8,19 @@ export class _PubSub<TType extends PubSubSchemaModel> implements _PubSubModel<TT
     PubSub.clearAllSubscriptions();
   }
 
-  publish<TKey extends StringKeyModel<TType>>({
-    data,
-    topic,
-    topicId,
-  }: SubscribeParamsModel<TType, TKey> & { data: TType[TKey] }): void {
-    PubSub.publishSync(topicId ? `${topic}.${topicId}` : topic, data);
+  publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void {
+    PubSub.publishSync(topic, data);
   }
 
   subscribeSync<TKey extends StringKeyModel<TType>>(
-    { topic, topicId }: SubscribeParamsModel<TType, TKey>,
-    handler: (params: TType[TKey]) => void,
+    topic: TKey,
+    handler: (data?: TType[TKey]) => void,
   ): void {
-    PubSub.subscribe(topicId ? `${topic}.${topicId}` : topic, (_, data) =>
-      handler(data as TType[TKey]),
-    );
+    PubSub.subscribe(topic, (_, data) => handler(data as TType[TKey]));
   }
 
-  unsubscribe<TKey extends StringKeyModel<TType>>({
-    topic,
-    topicId,
-  }: SubscribeParamsModel<TType, TKey>): void {
-    PubSub.unsubscribe(topicId ? `${topic}.${topicId}` : topic);
+  unsubscribe<TKey extends StringKeyModel<TType>>(topic: TKey): void {
+    PubSub.unsubscribe(topic);
   }
 }
 

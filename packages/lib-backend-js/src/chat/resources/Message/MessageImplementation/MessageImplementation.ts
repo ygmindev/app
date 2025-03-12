@@ -15,7 +15,8 @@ export class MessageImplementation
   extends createProtectedResoureImplementation<MessageModel, MessageFormModel>({
     Resource: Message,
     afterCreate: async ({ output }) => {
-      Container.get(PubSub).publish({ data: output.result, topic: 'message' });
+      console.warn('@@@publish');
+      Container.get(PubSub).publish('message', output.result);
       return output;
     },
     name: MESSAGE_RESOURCE_NAME,

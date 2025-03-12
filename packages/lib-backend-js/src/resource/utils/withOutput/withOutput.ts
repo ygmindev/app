@@ -25,7 +25,9 @@ export const withOutput =
     withResult({
       Resource: () => OutputF ?? Boolean,
       access,
-      filter: filter as WithResultParamsModel<typeof OutputF>['filter'],
+      filter: filter
+        ? async ({ context, payload }) => filter({ context, payload: payload?.result as TType })
+        : undefined,
       name: nameF,
       operation: getOperationType(method) as WithResultParamsModel<TType>['operation'],
       topics,

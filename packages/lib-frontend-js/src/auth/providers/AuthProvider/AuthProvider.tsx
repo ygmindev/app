@@ -47,7 +47,7 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
           currentUserSet(user);
         }
         authStatusSet(authStatusF);
-        pubsub.publish({ data: authStatusF, topic: SIGN_IN });
+        pubsub.publish(SIGN_IN, authStatusF);
       },
       onTokenRefresh: async (token) => authTokenSet({ access: token }),
     });
