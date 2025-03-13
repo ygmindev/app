@@ -6,13 +6,13 @@ import { type RequestContextModel } from '@lib/config/api/api.models';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { Mutation, Query, Subscription } from 'type-graphql';
 
-export const _withResult = <TType extends unknown>({
+export const _withResult = <TType extends unknown, TData extends unknown>({
   Resource,
   filter,
   name,
   operation = GRAPHQL_OPERATION_TYPE.QUERY,
   topics,
-}: _WithResultParamsModel<TType>): _WithResultModel => {
+}: _WithResultParamsModel<TType, TData>): _WithResultModel => {
   if (operation === GRAPHQL_OPERATION_TYPE.SUBSCRIPTION) {
     return Subscription(Resource, {
       filter: filter

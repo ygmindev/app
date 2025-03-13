@@ -30,8 +30,8 @@ export class MessageResolver
   @withOutput({
     Resource: () => Message,
     access: ACCESS_LEVEL.PROTECTED,
-    filter: async ({ context, payload }) => {
-      console.warn('@@@ payload');
+    filter: async ({ payload }) => {
+      console.warn('@@@ filter');
       console.warn(payload);
       return true;
     },
@@ -49,7 +49,6 @@ export class MessageResolver
     @withRoot()
     root?: MessageModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, MessageModel>> {
-    console.warn('@@@ subscribe');
     return { result: root };
   }
 }
