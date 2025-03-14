@@ -57,6 +57,7 @@ export const createEmbeddedResourceImplementation = <
   TRootForm
 >): CreateEmbeddedResourceImplementationModel<TType, TForm, TRoot> => {
   let rootImplementation: EntityResourceImplementationModel<TRoot, TRootForm>;
+
   const getRootImplementation = (): EntityResourceImplementationModel<TRoot, TRootForm> => {
     rootImplementation = rootImplementation ?? Container.get(RootImplementation);
     return rootImplementation;
@@ -74,7 +75,7 @@ export const createEmbeddedResourceImplementation = <
       const { result: rootResult } = await getRootImplementation().get({
         filter: [{ field: '_id', value: input.root }],
       });
-      const result = rootResult && (rootResult[name] as unknown as Array<TType>);
+      const result = rootResult?.[name] as unknown as Array<TType>;
       return result?.length || 0;
     }
     throw new InvalidArgumentError('root');

@@ -54,6 +54,10 @@ export class _Collection<TType extends EntityResourceModel, TRoot extends Entity
     return super.map((x, y) => cb(x, y, []));
   }
 
+  delete(params: EntityResourcePartialModel<TType>): void {
+    super.remove(params);
+  }
+
   slice(start?: number, end?: number): Array<EntityResourcePartialModel<TType>> {
     return super.slice(start, end);
   }
