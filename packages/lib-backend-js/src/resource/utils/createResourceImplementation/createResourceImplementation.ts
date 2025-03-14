@@ -162,7 +162,6 @@ export const createResourceImplementation = <
       inputF = this.decorators.beforeGet
         ? await this.decorators.beforeGet({ input: inputF }, context)
         : inputF;
-
       const root = inputF?.root ?? this._decorators.root;
       inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot> = await get(

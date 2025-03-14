@@ -50,7 +50,7 @@ export const createProtectedResourceResolver = <
 
     @withFieldResolver({ Resource: () => Group })
     async Group(@withSelf() self: TType): Promise<PartialModel<GroupModel> | null> {
-      return this.implementation.Group ? this.implementation.Group(self) : null;
+      return this.implementation.Group?.(self) ?? null;
     }
   }
   return ProtectedResourceResolver;

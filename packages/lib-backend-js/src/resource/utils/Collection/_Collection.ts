@@ -16,6 +16,11 @@ export class _Collection<TType extends EntityResourceModel, TRoot extends Entity
     super(root);
   }
 
+  push(items: EntityResourcePartialModel<TType>): number {
+    super.add(items);
+    return super.length + 1;
+  }
+
   filter(
     cb: (
       item: EntityResourcePartialModel<TType>,

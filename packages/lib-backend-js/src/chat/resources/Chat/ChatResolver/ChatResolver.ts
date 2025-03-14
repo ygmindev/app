@@ -8,6 +8,7 @@ import { createProtectedResourceResolver } from '@lib/backend/resource/utils/cre
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
 import { withRoot } from '@lib/backend/resource/utils/withRoot/withRoot';
+import { getUser } from '@lib/backend/user/utils/getUser/getUser';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
 import { type ChatFormModel, type ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
@@ -30,10 +31,12 @@ export class ChatResolver
     Resource: () => Message,
     access: ACCESS_LEVEL.PROTECTED,
     filter: async ({ context, payload }) => {
-      console.warn('@@@ message');
-      console.warn(payload);
-      console.warn('@@@ context');
-      console.warn(context?.user);
+      console.warn('@@@ uid:');
+      console.warn(context?.user?._id);
+      const user = await getUser(context?.user?._id);
+      console.warn(user);
+      console.warn('@@@ chats:');
+      console.warn(user?.chats);
       return true;
     },
     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
