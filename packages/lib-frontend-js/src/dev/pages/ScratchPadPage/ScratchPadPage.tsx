@@ -30,7 +30,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
   useEffect(() => {
     void graphql.query<any>({
       fields: [{ result: ['text'] }],
-      name: 'MessageSubscribe',
+      name: 'ChatSubscribe',
       type: GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,
     });
   }, []);
@@ -41,7 +41,6 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       const { result } = await createChat({
         form: {
           name: `chat with ${user.email}`,
-
           participants: [{ _id: uid }],
         },
       });

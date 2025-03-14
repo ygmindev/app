@@ -863,6 +863,27 @@ type ChatSearchOutput {
   result: [Chat]
 }
 
+input ChatSubscribeFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [MessageInput]
+  resourceValue: MessageInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatSubscribeInput {
+  filter: [ChatSubscribeFilterInput]
+  root: String
+}
+
+type ChatSubscribeOutput {
+  result: Message
+}
+
 input ChatUpdateFilterInput {
   booleanValue: Boolean
   condition: String
@@ -1324,27 +1345,6 @@ input MessageSearchInput {
 
 type MessageSearchOutput {
   result: [Message]
-}
-
-input MessageSubscribeFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [MessageInput]
-  resourceValue: MessageInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input MessageSubscribeInput {
-  filter: [MessageSubscribeFilterInput]
-  root: String
-}
-
-type MessageSubscribeOutput {
-  result: Message
 }
 
 input MessageUpdateFilterInput {
@@ -3107,7 +3107,7 @@ input SocketUpdateUpdateInput {
 }
 
 type Subscription {
-  MessageSubscribe(input: MessageSubscribeInput): MessageSubscribeOutput
+  ChatSubscribe(input: ChatSubscribeInput): ChatSubscribeOutput
 }
 
 type User {
