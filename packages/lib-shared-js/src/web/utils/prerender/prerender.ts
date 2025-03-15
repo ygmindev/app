@@ -1,5 +1,5 @@
 import { INTERNATIONALIZE_CONFIG } from '@lib/config/locale/internationalize/internationalize.constants';
-import { config } from '@lib/config/locale/internationalize/internationalize.server';
+import { config } from '@lib/config/locale/internationalize/internationalize.node';
 import { _prerender } from '@lib/shared/web/utils/prerender/_prerender';
 import { type PrerenderModel } from '@lib/shared/web/utils/prerender/prerender.models';
 

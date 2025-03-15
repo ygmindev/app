@@ -1,5 +1,5 @@
 import { WEB_CONFIG } from '@lib/config/node/web/web.constants';
-import { Root } from '@lib/frontend/root/containers/Root/Root.server';
+import { Root } from '@lib/frontend/root/containers/Root/Root.node';
 import { renderApp } from '@lib/shared/web/utils/renderApp/renderApp';
 import { _renderServer } from '@lib/shared/web/utils/renderServer/_renderServer';
 import {

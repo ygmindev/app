@@ -1,6 +1,6 @@
 import { fromAssets } from '@lib/backend/file/utils/fromAssets/fromAssets';
 import { PUBLIC_DIR } from '@lib/config/file/file.constants';
-import internationalizeConfig from '@lib/config/locale/internationalize/internationalize.server';
+import internationalizeConfig from '@lib/config/locale/internationalize/internationalize.node';
 import serverConfig from '@lib/config/node/server/server';
 import webConfig from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';

@@ -53,8 +53,6 @@ export class ChatResolver
     @withRoot()
     root?: MessageModel,
   ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, MessageModel>> {
-    console.warn('@@@ chat');
-    console.warn(root);
     return { result: root };
   }
 }

@@ -1,7 +1,7 @@
-import { cleanup } from '@lib/backend/setup/utils/cleanup/cleanup';
-import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { clearSeed } from '@lib/backend/database/utils/clearSeed/clearSeed';
 import { seed } from '@lib/backend/database/utils/seed/seed';
+import { cleanup } from '@lib/backend/setup/utils/cleanup/cleanup';
+import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import {
   type TestableResourceImplementationModel,
   type TestResourceImplementationParamsModel,
@@ -110,7 +110,7 @@ export const testResourceImplementation = ({
     const { result } = await implementation.get(input);
     const expected = findF(data, input.filter);
     expect(result?._id).toStrictEqual(expected?._id);
-    expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
+    expect(result && Object.keys(result).sort()).toStrictEqual(PROJECT_FIELDS);
   });
 
   test('works with getMany by partial', async () => {
@@ -150,7 +150,7 @@ export const testResourceImplementation = ({
     const resultF = result && result[0];
     const expected = findF(data, input.filter);
     expect(resultF?._id).toStrictEqual(expected?._id);
-    expect(resultF && Object.keys(resultF)).toStrictEqual(PROJECT_FIELDS);
+    expect(resultF && Object.keys(resultF).sort()).toStrictEqual(PROJECT_FIELDS);
   });
 
   test('works with getConnection all result', async () => {
@@ -293,7 +293,6 @@ export const testResourceImplementation = ({
       update: { $push: { stringArrayField: 'stringArrayFieldElement1' } },
     } as InputModel<RESOURCE_METHOD_TYPE.UPDATE, TestableEntityResourceModel>;
     const { result } = await implementation.update(input);
-
     expect(result?.stringArrayField).toStrictEqual([
       ...(data[0].stringArrayField ?? []),
       'stringArrayFieldElement1',

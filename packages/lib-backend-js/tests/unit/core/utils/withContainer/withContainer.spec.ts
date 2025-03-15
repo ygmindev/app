@@ -1,4 +1,4 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 

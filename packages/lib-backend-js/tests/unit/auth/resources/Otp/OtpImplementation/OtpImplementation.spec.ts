@@ -1,9 +1,9 @@
 import { OtpImplementation } from '@lib/backend/auth/resources/Otp/OtpImplementation/OtpImplementation';
-import { Container } from '@lib/backend/core/utils/Container/Container';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import { mail } from '@lib/backend/notification/utils/mail/mail';
 import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
 

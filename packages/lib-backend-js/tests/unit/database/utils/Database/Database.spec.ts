@@ -1,4 +1,4 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';

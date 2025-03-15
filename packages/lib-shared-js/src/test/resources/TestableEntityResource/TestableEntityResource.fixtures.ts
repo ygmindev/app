@@ -1,3 +1,4 @@
+import { type TestableEmbeddedResourceFormModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
 import {
   type TestableEntityResourceFormModel,
   type TestableEntityResourceModel,
@@ -9,7 +10,9 @@ export const TESTABLE_ENTITY_RESOURCE_FIXTURE: TestableEntityResourceModel = {
   stringField: 'stringField',
 };
 
-export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: Array<TestableEntityResourceFormModel> = [
+export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: Array<
+  TestableEntityResourceFormModel | TestableEmbeddedResourceFormModel
+> = [
   {
     stringField: 'stringField1',
     stringFieldOptional: 'stringFieldOptional1',

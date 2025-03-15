@@ -2,7 +2,7 @@ import 'setimmediate';
 import 'source-map-support';
 import 'raf/polyfill.js';
 
-import { type InitializeModel } from '@app/web/setup/utils/initialize/initialize.models.server';
+import { type InitializeModel } from '@app/web/setup/utils/initialize/initialize.models';
 import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
 import databaseConfig from '@lib/config/database/database.mongo';
 

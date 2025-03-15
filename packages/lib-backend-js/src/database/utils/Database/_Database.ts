@@ -158,7 +158,7 @@ export class _Database implements _DatabaseModel {
               .next()
           : collection.findOne(
               filterF as Filter<Document>,
-              options && { projection: options.project },
+              options?.project && { projection: options.project },
             ))) as PartialModel<TType>;
         return { result: result ?? undefined };
       },

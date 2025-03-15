@@ -103,6 +103,7 @@ export const createEmbeddedResourceImplementation = <
     }
     throw new InvalidArgumentError('root');
   };
+
   return createResourceImplementation<TType, TForm, TRoot>({
     Resource,
     afterCreate,
@@ -164,8 +165,8 @@ export const createEmbeddedResourceImplementation = <
           filter: [{ field: '_id', value: input.root }],
           options: { aggregate: aggregate({ ...input, name }) },
         });
-        const result = rootResult && (rootResult[name] as unknown as Array<PartialModel<TType>>);
-        return { result: result && result[0], root: rootResult };
+        const result = rootResult?.[name] as unknown as Array<PartialModel<TType>>;
+        return { result: result?.[0], root: rootResult };
       }
       throw new InvalidArgumentError('root');
     },

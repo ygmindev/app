@@ -1,4 +1,4 @@
-import { Container } from '@lib/backend/core/utils/Container/Container';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { TestableEntityResourceImplementation } from '@lib/backend/test/resources/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
 import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';

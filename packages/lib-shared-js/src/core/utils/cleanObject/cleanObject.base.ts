@@ -1,8 +1,5 @@
 import { type StringKeyModel } from '@lib/shared/core/core.models';
-import {
-  CLEAN_OBJECT_KEYS,
-  IGNORE_OBJECT_KEYS,
-} from '@lib/shared/core/utils/cleanObject/cleanObject.constants';
+import { IGNORE_OBJECT_KEYS } from '@lib/shared/core/utils/cleanObject/cleanObject.constants';
 import {
   type CleanObjectModel,
   type CleanObjectParamsModel,
@@ -13,12 +10,16 @@ import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { isPrimitive } from '@lib/shared/core/utils/isPrimitive/isPrimitive';
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
 import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
+import isFunction from 'lodash/isFunction';
 import isObject from 'lodash/isObject';
 import some from 'lodash/some';
 
 export const cleanObject = <TType extends unknown>(
   ...[value, options, depth = 0]: CleanObjectParamsModel<TType>
 ): CleanObjectModel<TType> => {
+  if (isFunction(value)) {
+    return null as TType;
+  }
   if (isPrimitive(value) || some(options?.primitiveTypes ?? [], (type) => isTypeOf(value, type))) {
     return value;
   }
@@ -31,17 +32,13 @@ export const cleanObject = <TType extends unknown>(
     );
     (Object.keys(valueF as object) as Array<StringKeyModel<TType>>).forEach((k) => {
       let v = valueF[k];
-      if (CLEAN_OBJECT_KEYS.includes(k)) {
+
+      !IGNORE_OBJECT_KEYS.includes(k) && (v = cleanObject(v, options, depth + 1));
+      !!options?.keyValueTransformer && (v = options.keyValueTransformer(v, k, depth) as typeof v);
+      if (isEmpty(v)) {
         delete valueF[k];
       } else {
-        !IGNORE_OBJECT_KEYS.includes(k) && (v = cleanObject(v, options, depth + 1));
-        !!options?.keyValueTransformer &&
-          (v = options.keyValueTransformer(v, k, depth) as typeof v);
-        if (isEmpty(v)) {
-          delete valueF[k];
-        } else {
-          valueF[k] = v;
-        }
+        valueF[k] = v;
       }
     });
     return valueF;

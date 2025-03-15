@@ -1,3 +1,4 @@
+import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
@@ -5,9 +6,9 @@ import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResour
 export const PRODUCT_FIXTURES: Array<ProductModel> = getEntityResourceFixture({
   count: 10,
   data: ({ index }) => ({
-    [PRICING_RESOURCE_NAME]: [
+    [PRICING_RESOURCE_NAME]: new Collection(
       getEntityResourceFixture({ data: () => ({ price: (index + 1) * 10 }) }),
-    ],
+    ),
     description: 'this is a test product',
     name: `test product ${index + 1}`,
   }),
