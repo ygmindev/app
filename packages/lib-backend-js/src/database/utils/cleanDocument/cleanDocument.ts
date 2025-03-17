@@ -10,7 +10,7 @@ import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import last from 'lodash/last';
 import reduce from 'lodash/reduce';
-import { ObjectId } from 'mongodb';
+import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 
 const resolveObjectId = <TType extends unknown>(value: TType): TType =>
   value instanceof ObjectId

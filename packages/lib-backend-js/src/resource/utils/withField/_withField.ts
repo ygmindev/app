@@ -22,7 +22,6 @@ import { Field, Float } from 'type-graphql';
 
 const getField = <TType extends unknown>({
   Resource,
-  defaultValue,
   isArray,
   type,
 }: _WithFieldParamsModel<TType>): _WithFieldModel => {
@@ -46,12 +45,12 @@ const getField = <TType extends unknown>({
 const getColumn = <TType extends unknown>({
   Resource,
   defaultValue,
-  inversedBy,
   isArray,
   isOptional,
-  mappedBy,
+  leaf,
   name,
   relation,
+  root,
   type,
 }: _WithFieldParamsModel<TType>): _WithFieldModel => {
   const defaultOptions: PropertyOptions<object> = { nullable: isOptional, onCreate: defaultValue };
@@ -68,16 +67,16 @@ const getColumn = <TType extends unknown>({
         return ManyToMany({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          inversedBy,
-          mappedBy,
+          inversedBy: leaf,
+          mappedBy: root,
           nullable: true,
-          owner: !mappedBy,
+          owner: !root,
         }) as PropertyDecorator;
       case FIELD_RELATION.ONE_TO_MANY:
         return OneToMany({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          mappedBy: mappedBy as StringKeyModel<TType>,
+          mappedBy: root as StringKeyModel<TType>,
           nullable: true,
           orphanRemoval: true,
           ref: true,
@@ -124,15 +123,15 @@ export const _withField =
     Resource,
     defaultValue,
     expire,
-    inversedBy,
     isArray,
     isDatabase = false,
     isOptional,
     isSchema = true,
     isUnique,
-    mappedBy,
+    leaf,
     name,
     relation,
+    root,
     type,
   }: _WithFieldParamsModel<TType>): _WithFieldModel =>
   (target, propertyKey) => {
@@ -146,12 +145,12 @@ export const _withField =
       getField({
         Resource,
         defaultValue,
-        inversedBy,
         isArray,
         isOptional,
-        mappedBy,
+        leaf,
         name,
         relation,
+        root,
         type,
       })(target, propertyKey);
 
@@ -159,12 +158,12 @@ export const _withField =
       getColumn({
         Resource,
         defaultValue,
-        inversedBy,
         isArray,
         isOptional,
-        mappedBy,
+        leaf,
         name,
         relation,
+        root,
         type,
       })(target, propertyKey);
   };

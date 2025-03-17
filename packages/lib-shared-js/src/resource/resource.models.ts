@@ -1,3 +1,4 @@
+import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 
 export type ResourceMethodTypeModel = `${RESOURCE_METHOD_TYPE}`;
@@ -23,5 +24,5 @@ export type ResourceMethodTypeCrudModel =
   | RESOURCE_METHOD_TYPE.UPDATE;
 
 export type ResourceNameParamsModel<TRoot = undefined> = {
-  name: TRoot extends undefined ? string : keyof TRoot & string;
+  name: TRoot extends undefined ? string : StringKeyModel<TRoot>;
 };

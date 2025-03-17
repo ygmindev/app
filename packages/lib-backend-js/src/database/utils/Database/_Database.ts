@@ -1,5 +1,7 @@
-import { cleanDocument } from '@lib/backend/database/utils/cleanDocument/cleanDocument';
-import { type _DatabaseModel } from '@lib/backend/database/utils/Database/_Database.models';
+import {
+  type _DatabaseModel,
+  type GetRepositoryParamsModel,
+} from '@lib/backend/database/utils/Database/_Database.models';
 import { type RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import { _database } from '@lib/config/database/_database';
@@ -7,89 +9,77 @@ import {
   type _DatabaseConfigModel,
   type DatabaseConfigModel,
 } from '@lib/config/database/database.models';
-import { type ChatFormModel } from '@lib/shared/chat/resources/Chat/Chat.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
-import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
-import {
-  type FilterConditionModel,
-  type FilterModel,
-} from '@lib/shared/resource/utils/Filter/Filter.models';
+import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
-import { MikroORM } from '@mikro-orm/mongodb';
-import { type EntityManager } from '@mikro-orm/mongodb';
+import {
+  type EntityManager,
+  type FilterQuery,
+  type FindOneOptions,
+  MikroORM,
+  type Primary,
+  type RequiredEntityData,
+  wrap,
+} from '@mikro-orm/mongodb';
 import last from 'lodash/last';
-import { type Document, type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
+import toString from 'lodash/toString';
+import { type MongoError, ObjectId } from 'mongodb';
 
 export const getFilter = <TType extends unknown>(
   filters?: Array<FilterModel<TType>>,
   prefix?: string,
-): Filter<TType> =>
-  filters
-    ? filters.reduce((result, v) => {
-        const conditionF = v.condition ?? FILTER_CONDITION.EQUAL;
-        return {
-          ...result,
-          [prefix ? `${prefix}.${v.field}` : v.field]: (
-            [
-              FILTER_CONDITION.CONTAINS,
-              FILTER_CONDITION.NOT_CONTAINS,
-            ] as Array<FilterConditionModel>
-          ).includes(conditionF)
-            ? {
-                $options: 'i',
-                $regex:
-                  conditionF === FILTER_CONDITION.CONTAINS
-                    ? `${v.value as string}`
-                    : `^((?!${v.value as string}).)*\$`,
-              }
-            : {
-                [conditionF]: last(v.field.split('.'))?.startsWith('_')
-                  ? isArray(v.value)
-                    ? v.value.map((vv) => new ObjectId(`${vv as string}`))
-                    : new ObjectId(v.value as string)
-                  : v.value,
-              },
-        };
-      }, {} as Filter<TType>)
-    : {};
+): FilterQuery<NoInfer<NonNullable<TType>>> =>
+  cleanObject(
+    filters?.reduce(
+      (result, v) => ({
+        ...result,
+        [prefix ? `${prefix}.${v.field}` : v.field]: {
+          [v.condition ?? FILTER_CONDITION.EQUAL]: last(v.field.split('.'))?.startsWith('_')
+            ? isArray(v.value)
+              ? v.value.map((vv) => new ObjectId(`${vv as string}`))
+              : new ObjectId(v.value as string)
+            : v.value,
+        },
+      }),
+      {} as FilterQuery<NoInfer<NonNullable<TType>>>,
+    ) ?? {},
+  );
 
 export class _Database implements _DatabaseModel {
-  protected _config: _DatabaseConfigModel;
-  protected _entityManager?: EntityManager;
+  protected config: _DatabaseConfigModel;
+  protected em?: EntityManager;
 
   constructor(config: DatabaseConfigModel) {
-    this._config = _database(config);
+    this.config = _database(config);
   }
 
   async flush(): Promise<void> {
-    const em = this._getEntityManager();
-    await em.flush();
+    await this.getEntityManager().flush();
   }
 
   async isConnected(): Promise<boolean> {
-    return this._entityManager?.getConnection().isConnected() ?? false;
+    return this.em?.getConnection().isConnected() ?? false;
   }
 
   async connect(): Promise<void> {
     if (await this.isConnected()) {
-      logger.info('reusing connection', this._config.clientUrl);
+      logger.info('reusing connection', this.config.clientUrl);
     } else {
-      logger.info('connecting', this._config.clientUrl);
-      this._entityManager = (await MikroORM.init(this._config)).em;
+      logger.info('connecting', this.config.clientUrl);
+      this.em = (await MikroORM.init(this.config)).em;
     }
   }
 
-  _getEntityManager = (): EntityManager => {
-    const em = this._entityManager;
+  getEntityManager = (): EntityManager => {
+    const { em } = this;
     if (em) {
       return em.fork();
     }
@@ -98,74 +88,71 @@ export class _Database implements _DatabaseModel {
 
   getRepository = <TType, TForm = EntityResourceDataModel<TType>>({
     name,
-  }: ResourceNameParamsModel): RepositoryModel<TType, TForm> => {
+  }: GetRepositoryParamsModel<TType>): RepositoryModel<TType, TForm> => {
     const implementation: RepositoryModel<TType, TForm> = {
       clear: async () => {
-        await this._getEntityManager().getRepository(name).nativeDelete({});
+        await this.getEntityManager().getRepository(name).nativeDelete({});
       },
 
-      count: async () => this._getEntityManager().getRepository(name).count(),
+      count: async (filter?) =>
+        this.getEntityManager().getRepository(name).count(getFilter<TType>(filter)),
 
       create: async ({ form, options } = {}) => {
         try {
-          const em = this._getEntityManager();
-          const formF = cleanDocument(form);
-          const formFF = formF as ChatFormModel;
-          const result = em.create(name, formFF as object);
-          !options?.isCommitted && (await em.persistAndFlush(result));
+          const em = this.getEntityManager();
+          const result = em.create(
+            name,
+            form as RequiredEntityData<Pick<TType, keyof TType>, never, false>,
+          );
+          options?.isFlush !== false && (await em.persistAndFlush(result));
           return { result: result as PartialModel<TType> };
         } catch (e) {
           switch ((e as MongoError).code as unknown as number) {
             case 11000:
-              throw new DuplicateError(name);
+              throw new DuplicateError(toString(name));
             default:
               throw e;
           }
         }
       },
 
-      createMany: async ({ form } = {}) => {
-        try {
-          const em = this._getEntityManager();
-          const formF = form?.map(cleanDocument);
-          const result = await em.insertMany(name, formF as Array<object>);
-          return { result: result as Array<PartialModel<TType>> };
-        } catch (e) {
-          switch ((e as MongoError).code as unknown as number) {
-            case 11000:
-              throw new DuplicateError(name);
-            default:
-              throw e;
-          }
-        }
+      createMany: async ({ form, options } = {}) => {
+        const em = this.getEntityManager();
+        const result = await Promise.all(
+          form?.map(
+            async (v) =>
+              (await implementation.create({ form: v, options: { isFlush: false } })).result,
+          ) ?? [],
+        );
+        options?.isFlush !== false && (await em.persistAndFlush(result));
+        return { result: result as Array<PartialModel<TType>> };
       },
 
-      get: async ({ filter, options } = {}) => {
-        const em = this._getEntityManager();
-        const filterF = cleanDocument(getFilter<TType>(filter));
-        const collection = em.getCollection(name);
-        const result = (await (options?.aggregate
-          ? collection
-              .aggregate([
-                { $match: filterF },
-                ...(options
-                  ? filterNil([
-                      options.project && { $project: options.project },
-                      ...(options.aggregate ?? []),
-                    ])
-                  : []),
-              ] as unknown as Array<Document>)
-              .next()
-          : collection.findOne(
-              filterF as Filter<Document>,
-              options?.project && { projection: options.project },
-            ))) as PartialModel<TType>;
+      flush: async () => {
+        await this.getEntityManager().flush();
+      },
+
+      get: async ({ filter, id, options } = {}) => {
+        const em = this.getEntityManager();
+        const filterF =
+          (id as FilterQuery<NoInfer<NonNullable<TType>>>) ?? getFilter<TType>(filter);
+        const result = await em.findOne(
+          name,
+          filterF,
+          options &&
+            ({ populate: options.populate ?? undefined } as FindOneOptions<
+              NonNullable<TType>,
+              string,
+              '*',
+              never
+            >),
+        );
         return { result: result ?? undefined };
       },
 
       getConnection: async ({ filter, pagination } = {}) => {
         const { result } = await getConnection({
-          count: await implementation.count(),
+          count: await implementation.count(filter),
           getMany: implementation.getMany,
           input: { filter },
           pagination,
@@ -174,45 +161,34 @@ export class _Database implements _DatabaseModel {
       },
 
       getMany: async ({ filter, options } = {}) => {
-        const em = this._getEntityManager();
-        const collection = em.getCollection(name);
-        const filterF = cleanDocument(getFilter<TType>(filter));
-        const result = await (options && options.aggregate
-          ? collection
-              .aggregate([
-                { $match: filterF },
-                ...(options
-                  ? [
-                      options.project && { $project: options.project },
-                      options.take && { $limit: options.take + (options.skip ?? 0) },
-                      options.skip && { $skip: options.skip },
-                      ...(options.aggregate ?? []),
-                    ]
-                  : []),
-              ] as unknown as Document[])
-              .toArray()
-          : collection
-              .find(
-                filterF as Filter<Document>,
-                options && { limit: options.take, projection: options.project, skip: options.skip },
-              )
-              .toArray());
+        const em = this.getEntityManager();
+        const filterF = getFilter<TType>(filter);
+        const result = await em.find(
+          name,
+          filterF,
+          options && { limit: options.take, offset: options.skip },
+        );
         return { result: (result as Array<PartialModel<TType>>) ?? undefined };
       },
 
-      remove: async ({ filter } = {}) => {
-        const em = this._getEntityManager();
-        const filterF = getFilter<TType>(filter);
-        const entity = await implementation.get({ filter });
-        await em.getRepository(name).nativeDelete(filterF);
-        // TODO: don't return for remove?
-        return entity as unknown as OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>;
+      remove: async ({ filter, id, options } = {}) => {
+        const em = this.getEntityManager();
+        if (id) {
+          const ref = em.getReference(name, id as Primary<TType>);
+          const result = em.remove(ref);
+          options?.isFlush !== false && (await result.flush());
+        } else {
+          const filterF = getFilter<TType>(filter);
+          await em.getRepository(name).nativeDelete(filterF);
+          options?.isFlush !== false && (await implementation.flush());
+        }
+        return { result: true };
       },
 
       search: async ({ keys, query } = {}) => {
         if (query) {
           // TODO: handle keys as regex
-          const em = this._getEntityManager();
+          const em = this.getEntityManager();
           const collection = em.getCollection(name);
           const result = await collection.find({ $text: { $search: query } }).toArray();
           return { result } as unknown as OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
@@ -220,30 +196,17 @@ export class _Database implements _DatabaseModel {
         return { result: [] } as unknown as OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
       },
 
-      update: async ({ filter, options, update } = {}) => {
-        const em = this._getEntityManager();
-        const filterF = cleanDocument(getFilter<TType>(filter));
-        const updateF = cleanDocument(update);
-        updateF &&
-          Object.keys(updateF).forEach((key) => {
-            const keyF = key as keyof UpdateModel<TType>;
-            if (!key.startsWith('$')) {
-              updateF['$set'] = {
-                ...((updateF['$set'] as object) ?? {}),
-                [key]: updateF[keyF],
-              } as EntityResourceDataModel<TType>;
-              delete updateF[keyF];
-            }
+      update: async ({ filter, id, options, update } = {}) => {
+        const em = this.getEntityManager();
+        const updateF = cleanObject(update);
+        const { result } = await implementation.get({ filter, id, options });
+        if (result) {
+          wrap(result).assign(updateF as object, {
+            mergeObjectProperties: true,
+            updateByPrimaryKey: true,
           });
-
-        const result = await em
-          .getConnection()
-          .getCollection(name)
-          .findOneAndUpdate(filterF as Filter<Document>, updateF as UpdateFilter<object>, {
-            projection: options?.project,
-            returnDocument: 'after',
-            upsert: true,
-          });
+          options?.isFlush !== false && (await em.persistAndFlush(result));
+        }
         return { result } as OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
       },
     };
@@ -252,8 +215,277 @@ export class _Database implements _DatabaseModel {
 
   close = async (): Promise<void> => {
     if (await this.isConnected()) {
-      logger.debug('closing connections', this._config.clientUrl);
-      await this._getEntityManager().getConnection()?.close();
+      logger.debug('closing connections', this.config.clientUrl);
+      await this.getEntityManager().getConnection()?.close();
     }
   };
 }
+
+// import { cleanObject } from '@lib/backend/database/utils/cleanObject/cleanObject';
+// import { type _DatabaseModel } from '@lib/backend/database/utils/Database/_Database.models';
+// import { type RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
+// import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
+// import { _database } from '@lib/config/database/_database';
+// import {
+//   type _DatabaseConfigModel,
+//   type DatabaseConfigModel,
+// } from '@lib/config/database/database.models';
+// import { type ChatFormModel } from '@lib/shared/chat/resources/Chat/Chat.models';
+// import { type PartialModel } from '@lib/shared/core/core.models';
+// import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
+// import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
+// import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+// import { isArray } from '@lib/shared/core/utils/isArray/isArray';
+// import { logger } from '@lib/shared/logging/utils/Logger/Logger';
+// import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+// import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
+// import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+// import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
+// import {
+//   type FilterConditionModel,
+//   type FilterModel,
+// } from '@lib/shared/resource/utils/Filter/Filter.models';
+// import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+// import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
+// import {
+//   type EntityManager,
+//   type FilterQuery,
+//   type FindOneOptions,
+//   MikroORM,
+// } from '@mikro-orm/mongodb';
+// import last from 'lodash/last';
+// import { type Document, type Filter, type MongoError, ObjectId, type UpdateFilter } from 'mongodb';
+
+// export const getFilter = <TType extends unknown>(
+//   filters?: Array<FilterModel<TType>>,
+//   prefix?: string,
+// ): Filter<TType> =>
+//   filters
+//     ? filters.reduce((result, v) => {
+//         const conditionF = v.condition ?? FILTER_CONDITION.EQUAL;
+//         return {
+//           ...result,
+//           [prefix ? `${prefix}.${v.field}` : v.field]: (
+//             [FILTER_CONDITION.LIKE] as Array<FilterConditionModel>
+//           ).includes(conditionF)
+//             ? {
+//                 $options: 'i',
+//                 $regex:
+//                   conditionF === FILTER_CONDITION.LIKE
+//                     ? `${v.value as string}`
+//                     : `^((?!${v.value as string}).)*\$`,
+//               }
+//             : {
+//                 [conditionF]: last(v.field.split('.'))?.startsWith('_')
+//                   ? isArray(v.value)
+//                     ? v.value.map((vv) => new ObjectId(`${vv as string}`))
+//                     : new ObjectId(v.value as string)
+//                   : v.value,
+//               },
+//         };
+//       }, {} as Filter<TType>)
+//     : {};
+
+// export class _Database implements _DatabaseModel {
+//   protected _config: _DatabaseConfigModel;
+//   protected _entityManager?: EntityManager;
+
+//   constructor(config: DatabaseConfigModel) {
+//     this._config = _database(config);
+//   }
+
+//   async flush(): Promise<void> {
+//     const em = this._getEntityManager();
+//     await em.flush();
+//   }
+
+//   async isConnected(): Promise<boolean> {
+//     return this._entityManager?.getConnection().isConnected() ?? false;
+//   }
+
+//   async connect(): Promise<void> {
+//     if (await this.isConnected()) {
+//       logger.info('reusing connection', this._config.clientUrl);
+//     } else {
+//       logger.info('connecting', this._config.clientUrl);
+//       this._entityManager = (await MikroORM.init(this._config)).em;
+//     }
+//   }
+
+//   _getEntityManager = (): EntityManager => {
+//     const em = this._entityManager;
+//     if (em) {
+//       return em.fork();
+//     }
+//     throw new UninitializedError('database');
+//   };
+
+//   getRepository = <TType, TForm = EntityResourceDataModel<TType>>({
+//     name,
+//   }: ResourceNameParamsModel): RepositoryModel<TType, TForm> => {
+//     const implementation: RepositoryModel<TType, TForm> = {
+//       clear: async () => {
+//         await this._getEntityManager().getRepository(name).nativeDelete({});
+//       },
+
+//       count: async () => this._getEntityManager().getRepository(name).count(),
+
+//       create: async ({ form, options } = {}) => {
+//         try {
+//           const em = this._getEntityManager();
+//           const formF = cleanObject(form);
+//           const formFF = formF as ChatFormModel;
+//           const result = em.create(name, formFF as object);
+//           !options?.isFlush && (await em.persistAndFlush(result));
+//           return { result: result as PartialModel<TType> };
+//         } catch (e) {
+//           switch ((e as MongoError).code as unknown as number) {
+//             case 11000:
+//               throw new DuplicateError(name);
+//             default:
+//               throw e;
+//           }
+//         }
+//       },
+
+//       createMany: async ({ form } = {}) => {
+//         try {
+//           const em = this._getEntityManager();
+//           const formF = form?.map(cleanObject);
+//           const result = await em.insertMany(name, formF as Array<object>);
+//           return { result: result as Array<PartialModel<TType>> };
+//         } catch (e) {
+//           switch ((e as MongoError).code as unknown as number) {
+//             case 11000:
+//               throw new DuplicateError(name);
+//             default:
+//               throw e;
+//           }
+//         }
+//       },
+
+//       flush: async () => {
+//         await this._getEntityManager().flush();
+//       },
+
+//       get: async ({ filter, options } = {}) => {
+//         const em = this._getEntityManager();
+//         const filterF = cleanObject(getFilter<TType>(filter));
+//         const collection = em.getCollection(name);
+//         const result = (await (options?.aggregate
+//           ? collection
+//               .aggregate([
+//                 { $match: filterF },
+//                 ...(options
+//                   ? filterNil([
+//                       options.project && { $project: options.project },
+//                       ...(options.aggregate ?? []),
+//                     ])
+//                   : []),
+//               ] as unknown as Array<Document>)
+//               .next()
+//           : em.findOne(
+//               name,
+//               filterF as FilterQuery<NoInfer<NonNullable<TType>>>,
+//               options &&
+//                 ({
+//                   populate: options.populate || undefined,
+//                 } as FindOneOptions<NonNullable<TType>, string, '*', never>),
+//             ))) as PartialModel<TType>;
+//         return { result: result ?? undefined };
+//       },
+
+//       getConnection: async ({ filter, pagination } = {}) => {
+//         const { result } = await getConnection({
+//           count: await implementation.count(),
+//           getMany: implementation.getMany,
+//           input: { filter },
+//           pagination,
+//         });
+//         return { result: result ?? undefined };
+//       },
+
+//       getMany: async ({ filter, options } = {}) => {
+//         const em = this._getEntityManager();
+//         const collection = em.getCollection(name);
+//         const filterF = cleanObject(getFilter<TType>(filter));
+//         const result = await (options && options.aggregate
+//           ? collection
+//               .aggregate([
+//                 { $match: filterF },
+//                 ...(options
+//                   ? [
+//                       options.project && { $project: options.project },
+//                       options.take && { $limit: options.take + (options.skip ?? 0) },
+//                       options.skip && { $skip: options.skip },
+//                       ...(options.aggregate ?? []),
+//                     ]
+//                   : []),
+//               ] as unknown as Document[])
+//               .toArray()
+//           : collection
+//               .find(
+//                 filterF as Filter<Document>,
+//                 options && { limit: options.take, projection: options.project, skip: options.skip },
+//               )
+//               .toArray());
+//         return { result: (result as Array<PartialModel<TType>>) ?? undefined };
+//       },
+
+//       remove: async ({ filter } = {}) => {
+//         const em = this._getEntityManager();
+//         const filterF = getFilter<TType>(filter);
+//         const entity = await implementation.get({ filter });
+//         await em.getRepository(name).nativeDelete(filterF);
+//         // TODO: don't return for remove?
+//         return entity as unknown as OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType>;
+//       },
+
+//       search: async ({ keys, query } = {}) => {
+//         if (query) {
+//           // TODO: handle keys as regex
+//           const em = this._getEntityManager();
+//           const collection = em.getCollection(name);
+//           const result = await collection.find({ $text: { $search: query } }).toArray();
+//           return { result } as unknown as OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
+//         }
+//         return { result: [] } as unknown as OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
+//       },
+
+//       update: async ({ filter, options, update } = {}) => {
+//         const em = this._getEntityManager();
+//         const filterF = cleanObject(getFilter<TType>(filter));
+//         const updateF = cleanObject(update);
+//         updateF &&
+//           Object.keys(updateF).forEach((key) => {
+//             const keyF = key as keyof UpdateModel<TType>;
+//             if (!key.startsWith('$')) {
+//               updateF['$set'] = {
+//                 ...((updateF['$set'] as object) ?? {}),
+//                 [key]: updateF[keyF],
+//               } as EntityResourceDataModel<TType>;
+//               delete updateF[keyF];
+//             }
+//           });
+
+//         const result = await em
+//           .getConnection()
+//           .getCollection(name)
+//           .findOneAndUpdate(filterF as Filter<Document>, updateF as UpdateFilter<object>, {
+//             projection: options?.project,
+//             returnDocument: 'after',
+//             upsert: true,
+//           });
+//         return { result } as OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
+//       },
+//     };
+//     return implementation;
+//   };
+
+//   close = async (): Promise<void> => {
+//     if (await this.isConnected()) {
+//       logger.debug('closing connections', this._config.clientUrl);
+//       await this._getEntityManager().getConnection()?.close();
+//     }
+//   };
+// }

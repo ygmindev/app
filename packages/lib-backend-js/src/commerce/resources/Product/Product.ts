@@ -16,7 +16,7 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: PRODUCT_RESOURCE_NAME })
 export class Product extends EntityResource implements ProductModel {
-  @withEmbeddedResourceField({ Resource: () => Pricing, mappedBy: PRODUCT_RESOURCE_NAME })
+  @withEmbeddedResourceField({ Resource: () => Pricing, root: PRODUCT_RESOURCE_NAME })
   [PRICING_RESOURCE_NAME]?: CollectionModel<PricingModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })

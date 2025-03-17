@@ -5,5 +5,5 @@ export type _GetMetadataParamsModel<TType extends unknown> = {
 };
 
 export type _GetMetadataModel<TType extends unknown> = {
-  indices?: Array<Array<StringKeyModel<TType>>>;
+  indices?: Array<StringKeyModel<TType>>;
 };

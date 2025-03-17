@@ -8,11 +8,11 @@ export const withEmbeddedResourceField =
   <TType extends unknown>({
     Resource,
     isDatabase = true,
-    mappedBy,
+    root,
   }: WithEmbeddedResourceFieldParamsModel<TType>): WithEmbeddedResourceFieldModel =>
   (target, propertyKey) =>
     withOneToManyField({
       Resource,
       isDatabase,
-      mappedBy,
+      root,
     })(target, propertyKey);

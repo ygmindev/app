@@ -13,7 +13,7 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: VENDOR_RESOURCE_NAME })
 export class Vendor extends EntityResource implements VendorModel {
-  @withEmbeddedResourceField({ Resource: () => Utility, mappedBy: VENDOR_RESOURCE_NAME })
+  @withEmbeddedResourceField({ Resource: () => Utility, root: VENDOR_RESOURCE_NAME })
   [UTILITY_RESOURCE_NAME]?: CollectionModel<UtilityModel> = new Collection<
     UtilityModel,
     VendorModel

@@ -131,15 +131,11 @@ export const createEmbeddedResourceImplementation = <
           filter: [
             { field: '_id', value: input.root },
             ...(meta.indices
-              ? meta.indices
-                  .map((indices) =>
-                    indices.map((index) => ({
-                      condition: FILTER_CONDITION.NOT_EQUAL,
-                      field: `${name}.${index}`,
-                      value: formF[index],
-                    })),
-                  )
-                  .flat()
+              ? meta.indices.map((index) => ({
+                  condition: FILTER_CONDITION.NOT_EQUAL,
+                  field: `${name}.${index}`,
+                  value: formF[index],
+                }))
               : []),
           ],
           update: { $push: { [name]: formF } } as UpdateModel<TRoot>,

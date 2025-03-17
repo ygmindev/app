@@ -2,11 +2,11 @@ import { type WithFieldParamsModel } from '@lib/backend/resource/utils/withField
 
 export type WithRefFieldParamsModel<TType extends unknown> = Pick<
   WithFieldParamsModel<TType>,
-  | 'inversedBy'
+  | 'leaf'
   | 'isArray'
   | 'isDatabase'
   | 'isOptional'
-  | 'mappedBy'
+  | 'root'
   | 'name'
   | 'relation'
   | 'Resource'

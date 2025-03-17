@@ -1,14 +1,16 @@
-import { type TestableEmbeddedResourceFormModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
-import { type TestableEmbeddedResourceImplementationModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResourceImplementation/TestableEmbeddedResourceImplementation.models';
-import { type TestableEntityResourceFormModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
-import { type TestableEntityResourceImplementationModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation.models';
+import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
+import {
+  type TestableResourceFormModel,
+  type TestableResourceModel,
+} from '@lib/shared/test/resources/TestableResource/TestableResource.models';
 
-export type TestResourceImplementationParamsModel = {
-  before?(params: TestableResourceImplementationModel): Promise<void>;
-  form: TestableEntityResourceFormModel | TestableEmbeddedResourceFormModel;
-  getImplementation(): TestableResourceImplementationModel;
+export type TestResourceImplementationParamsModel<
+  TType extends TestableResourceModel,
+  TForm extends TestableResourceFormModel,
+  TRoot extends unknown = undefined,
+> = {
+  before?(params: ResourceImplementationModel<TType, TForm, TRoot>): Promise<void>;
+  form: TForm;
+  getImplementation(): ResourceImplementationModel<TType, TForm, TRoot>;
+  root?(): Promise<TRoot extends undefined ? never : string | undefined>;
 };
-
-export type TestableResourceImplementationModel =
-  | TestableEntityResourceImplementationModel
-  | TestableEmbeddedResourceImplementationModel;

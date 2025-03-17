@@ -7,15 +7,15 @@ export type _WithFieldParamsModel<TType extends unknown> = {
   Resource?(): ResourceClassModel<TType>;
   defaultValue?(): TType;
   expire?: number;
-  inversedBy?: StringKeyModel<TType>;
   isArray?: boolean;
   isDatabase?: boolean;
   isOptional?: boolean;
   isSchema?: boolean;
   isUnique?: boolean;
-  mappedBy?: StringKeyModel<TType>;
+  leaf?: StringKeyModel<TType>;
   name?: string;
   relation?: FieldRelation;
+  root?: StringKeyModel<TType>;
   type: DataTypeModel | FieldTypeModel;
 };
 

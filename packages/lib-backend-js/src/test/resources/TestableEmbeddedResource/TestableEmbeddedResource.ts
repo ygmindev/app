@@ -1,10 +1,11 @@
-import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
+import { RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { withRootField } from '@lib/backend/resource/utils/withRootField/withRootField';
+import { TestableEntityResource } from '@lib/backend/test/resources/TestableEntityResource/TestableEntityResource';
+import { TestableResource } from '@lib/backend/test/resources/TestableResource/TestableResource';
 import { TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.constants';
 import { type TestableEmbeddedResourceModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
+import { TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 
 @withEntity({
   isDatabase: true,
@@ -12,27 +13,9 @@ import { type TestableEmbeddedResourceModel } from '@lib/shared/test/resources/T
   name: TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME,
 })
 export class TestableEmbeddedResource
-  extends EmbeddedResource
+  extends TestableResource
   implements TestableEmbeddedResourceModel
 {
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
-  numberProperty?: number;
-
-  @withField({ isArray: true, isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
-  stringArrayField?: Array<string>;
-
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
-  stringField!: string;
-
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
-  stringFieldOptional?: string;
-
-  @withField({
-    defaultValue: () => new Date(),
-    expire: DATABASE_CONFIG.expireSeconds,
-    isDatabase: true,
-    isOptional: true,
-    type: DATA_TYPE.DATE,
-  })
-  dateTtlProperty?: Date;
+  @withRootField({ Resource: () => TestableEntityResource })
+  rootEmbedded!: RefFieldModel<TestableEntityResourceModel>;
 }

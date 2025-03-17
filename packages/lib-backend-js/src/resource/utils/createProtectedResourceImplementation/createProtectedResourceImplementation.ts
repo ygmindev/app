@@ -23,7 +23,7 @@ import { type EntityResourceDataModel } from '@lib/shared/resource/resources/Ent
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
-import { ObjectId } from 'mongodb';
+import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 
 export const createProtectedResoureImplementation = <
   TType extends ProtectedResourceModel,

@@ -78,6 +78,13 @@ export type ValuesModel<TType> = ValueOf<TType>;
 
 export type GetModel<TType extends object, TKey extends DeepKeyModel<TType>> = Get<TType, TKey>;
 
+export type KeysOfTypeModel<TType, TField> = Exclude<
+  {
+    [TKey in keyof RequiredModel<TType>]: RequiredModel<TType>[TKey] extends TField ? TKey : never;
+  }[keyof RequiredModel<TType>],
+  undefined
+>;
+
 export type StringKeyModel<TType> = Extract<keyof RequiredModel<TType>, string>;
 
 export type ExtractPropertiesModel<TType, TParams> = ConditionalKeys<TType, TParams>;

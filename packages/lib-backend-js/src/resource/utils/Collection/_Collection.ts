@@ -16,7 +16,7 @@ export class _Collection<TType extends EntityResourceModel, TRoot extends Entity
     super(root);
   }
 
-  push(items: EntityResourcePartialModel<TType>): number {
+  push(...items: Array<EntityResourcePartialModel<TType>>): number {
     super.add(items);
     return super.length + 1;
   }

@@ -27,12 +27,9 @@ export const cleanObject = <TType extends unknown>(
     return filterNil(value.map((vv) => cleanObject(vv as object, options, depth))) as TType;
   }
   if (isObject(value)) {
-    const valueF = toPlainObject(
-      options?.objectTransformer ? options.objectTransformer(value, depth) : value,
-    );
+    const valueF = toPlainObject(options?.objectTransformer?.(value, depth) ?? value);
     (Object.keys(valueF as object) as Array<StringKeyModel<TType>>).forEach((k) => {
       let v = valueF[k];
-
       !IGNORE_OBJECT_KEYS.includes(k) && (v = cleanObject(v, options, depth + 1));
       !!options?.keyValueTransformer && (v = options.keyValueTransformer(v, k, depth) as typeof v);
       if (isEmpty(v)) {

@@ -1,3 +1,4 @@
+import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withHook } from '@lib/backend/resource/utils/withHook/withHook';
@@ -7,13 +8,13 @@ import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityR
 import forEach from 'lodash/forEach';
 import isNil from 'lodash/isNil';
 
-@withEntity({ isAbstract: true })
+@withEntity({ isAbstract: true, isDatabase: true })
 export class EntityResource implements EntityResourceModel {
   @withField({ isDatabase: true, type: PROPERTY_TYPE.PRIMARY_KEY })
-  _id!: string;
+  _id: string = new ObjectId() as unknown as string;
 
-  @withField({ defaultValue: () => new Date(), isDatabase: true, type: DATA_TYPE.DATE })
-  created!: Date;
+  @withField({ isDatabase: true, type: DATA_TYPE.DATE })
+  created: Date = new Date();
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.BOOLEAN })
   isFixture?: boolean;

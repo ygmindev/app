@@ -18,7 +18,7 @@ export const testEmbeddedResourceImplementation = async ({
           .getRepository<TestableEntityResourceModel>({
             name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
           })
-          .create({ form: { stringField: 'stringField' } });
+          .create({ form: { string: 'string' } });
         if (result) {
           for (const form of TESTABLE_ENTITY_RESOURCE_SEED_DATA) {
             // @ts-expect-error TODO: fix

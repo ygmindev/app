@@ -37,14 +37,12 @@ export const createArgs = <TMethod extends ResourceMethodTypeModel, TType, TForm
 
   switch (method) {
     case RESOURCE_METHOD_TYPE.GET:
-    case RESOURCE_METHOD_TYPE.GET_MANY:
     case RESOURCE_METHOD_TYPE.REMOVE: {
       @withEntity({ isAbstract: true })
       class Args
         extends Root<TRoot>
         implements
           ArgsModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
-          ArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
           ArgsModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>
       {
         @withCondition(
@@ -53,10 +51,35 @@ export const createArgs = <TMethod extends ResourceMethodTypeModel, TType, TForm
             withField({
               Resource: Filter ? () => Filter : undefined,
               isArray: true,
+              isOptional: true,
               type: PROPERTY_TYPE.RESOURCE,
             }),
         )
-        filter!: Array<FilterModel<TType>>;
+        filter?: Array<FilterModel<TType>>;
+
+        @withField({ isArray: true, isOptional: true, type: DATA_TYPE.STRING })
+        id?: Array<string>;
+      }
+      return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
+    }
+
+    case RESOURCE_METHOD_TYPE.GET_MANY: {
+      @withEntity({ isAbstract: true })
+      class Args
+        extends Root<TRoot>
+        implements ArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>
+      {
+        @withCondition(
+          () => !!Filter,
+          () =>
+            withField({
+              Resource: Filter ? () => Filter : undefined,
+              isArray: true,
+              isOptional: true,
+              type: PROPERTY_TYPE.RESOURCE,
+            }),
+        )
+        filter?: Array<FilterModel<TType>>;
       }
       return Args as ResourceClassModel<ArgsModel<TMethod, TType, TForm, TRoot>>;
     }
@@ -147,10 +170,14 @@ export const createArgs = <TMethod extends ResourceMethodTypeModel, TType, TForm
             withField({
               Resource: Filter ? () => Filter : undefined,
               isArray: true,
+              isOptional: true,
               type: PROPERTY_TYPE.RESOURCE,
             }),
         )
-        filter!: Array<FilterModel<TType>>;
+        filter?: Array<FilterModel<TType>>;
+
+        @withField({ isArray: true, isOptional: true, type: DATA_TYPE.STRING })
+        id?: Array<string>;
 
         @withCondition(
           () => !!Update,

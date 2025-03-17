@@ -9,6 +9,7 @@ import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
+import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { type ResourceImplementationDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
@@ -34,13 +35,13 @@ export const createResourceImplementation = <
   beforeRemove,
   beforeSearch,
   beforeUpdate,
+  count,
   create,
   createMany,
   get,
   getConnection,
   getMany,
   remove,
-  root,
   search,
   update,
 }: CreateResourceImplementationParamsModel<TType, TForm, TRoot>): CreateResourceImplementationModel<
@@ -83,7 +84,6 @@ export const createResourceImplementation = <
         const inputF = { ...input, filter: collapseFilter(input?.filter) };
         return beforeUpdate ? beforeUpdate({ input: inputF }, context) : inputF;
       },
-      root,
     };
 
     constructor() {
@@ -113,8 +113,6 @@ export const createResourceImplementation = <
       inputF = this.decorators.beforeCreate
         ? await this.decorators.beforeCreate({ input: inputF }, context)
         : inputF;
-      const root = inputF?.root ?? this._decorators.root;
-      inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot> = await create(
         inputF,
         context,
@@ -143,8 +141,6 @@ export const createResourceImplementation = <
           ),
         )) as Array<TForm>);
 
-      const root = inputF?.root ?? this._decorators.root;
-      inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot> = await createMany(
         inputF,
         context,
@@ -162,8 +158,7 @@ export const createResourceImplementation = <
       inputF = this.decorators.beforeGet
         ? await this.decorators.beforeGet({ input: inputF }, context)
         : inputF;
-      const root = inputF?.root ?? this._decorators.root;
-      inputF && root && (inputF.root = root);
+
       const output: OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot> = await get(
         inputF,
         context,
@@ -182,8 +177,6 @@ export const createResourceImplementation = <
         ? await this.decorators.beforeGetMany({ input: inputF }, context)
         : inputF;
 
-      const root = inputF?.root ?? this._decorators.root;
-      inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = await getMany(
         inputF,
         context,
@@ -202,8 +195,6 @@ export const createResourceImplementation = <
         ? await this.decorators.beforeGetConnection({ input: inputF }, context)
         : inputF;
 
-      const root = inputF?.root ?? this._decorators.root;
-      inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> =
         await getConnection(inputF, context);
       return this.decorators.afterGetConnection
@@ -220,8 +211,6 @@ export const createResourceImplementation = <
         ? await this.decorators.beforeUpdate({ input: inputF }, context)
         : inputF;
 
-      const root = inputF?.root ?? this._decorators.root;
-      inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = await update(
         inputF,
         context,
@@ -240,8 +229,6 @@ export const createResourceImplementation = <
         ? await this.decorators.beforeSearch({ input: inputF }, context)
         : inputF;
 
-      const root = inputF?.root ?? this._decorators.root;
-      inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> = await search(
         inputF,
         context,
@@ -260,8 +247,6 @@ export const createResourceImplementation = <
         ? await this.decorators.beforeRemove({ input: inputF }, context)
         : inputF;
 
-      const root = inputF?.root ?? this._decorators.root;
-      inputF && root && (inputF.root = root);
       const output: OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot> = await remove(
         inputF,
         context,
@@ -271,8 +256,8 @@ export const createResourceImplementation = <
         : output;
     }
 
-    async count(): Promise<number> {
-      return this.count();
+    async count(filter?: Array<FilterModel<TType>>): Promise<number> {
+      return count(filter);
     }
   }
 

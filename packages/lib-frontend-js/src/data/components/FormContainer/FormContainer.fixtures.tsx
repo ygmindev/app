@@ -4,14 +4,14 @@ import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 
 // TODO: move to shared
 export type FormContainerFixtureModel = {
-  numberField: number;
-  stringField: string;
-  stringFieldOptional?: string;
+  number: number;
+  string: string;
+  stringOptional?: string;
 };
 
 export const FORM_CONTAINER_PROPS_FIXTURE: FormContainerPropsModel<FormContainerFixtureModel> = {
   fields: [
-    { element: <TextInput />, id: 'stringField' },
-    { element: <NumberInput />, id: 'numberField' },
+    { element: <TextInput />, id: 'string' },
+    { element: <NumberInput />, id: 'number' },
   ],
 };

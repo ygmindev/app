@@ -19,10 +19,10 @@ import {
 
 @withEntity({ isDatabase: true, name: GROUP_RESOURCE_NAME })
 export class Group extends EntityResource implements GroupModel {
-  @withOneToManyField({ Resource: () => Access, mappedBy: GROUP_RESOURCE_NAME })
+  @withOneToManyField({ Resource: () => Access, root: GROUP_RESOURCE_NAME })
   [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel> = new Collection(this);
 
-  @withOneToManyField({ Resource: () => Role, mappedBy: GROUP_RESOURCE_NAME })
+  @withOneToManyField({ Resource: () => Role, root: GROUP_RESOURCE_NAME })
   [ROLE_RESOURCE_NAME]?: CollectionModel<RoleModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })

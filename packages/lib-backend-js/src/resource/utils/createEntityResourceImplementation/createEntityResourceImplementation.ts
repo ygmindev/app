@@ -53,7 +53,7 @@ export const createEntityResourceImplementation = <TType, TForm = EntityResource
     beforeRemove,
     beforeSearch,
     beforeUpdate,
-    count: async () => getRepository().count(),
+    count: async (filter) => getRepository().count(filter),
     create: async (input) => getRepository().create(input),
     createMany: async (input) => getRepository().createMany(input),
     get: async (input) => getRepository().get(input),

@@ -23,7 +23,7 @@ export type ProjectModel<TType> = {
 type CommonOptionsModel = object;
 
 type CreateOptionsModel = CommonOptionsModel & {
-  isCommitted?: boolean;
+  isFlush?: boolean;
 };
 
 type CreateArgsModel<TType> = {
@@ -42,10 +42,12 @@ type ProjectOptionsModel<TType> = CommonOptionsModel & {
 
 type GetOptionsModel<TType> = ProjectOptionsModel<TType> & {
   aggregate?: Array<object>;
+  populate?: Array<StringKeyModel<TType>>;
 };
 
 type GetArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
+  id?: Array<string>;
   options?: GetOptionsModel<TType>;
 };
 
@@ -67,10 +69,13 @@ type GetConnectionArgsModel<TType> = {
   pagination?: PaginationModel;
 };
 
-type RemoveOptionsModel = CommonOptionsModel;
+type RemoveOptionsModel = CommonOptionsModel & {
+  isFlush?: boolean;
+};
 
 type RemoveArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
+  id?: Array<string>;
   options?: RemoveOptionsModel;
 };
 
@@ -89,10 +94,13 @@ type SubscribeArgsModel<TType> = {
   options?: SubscribeOptionsModel<TType>;
 };
 
-type UpdateOptionsModel<TType> = ProjectOptionsModel<TType>;
+type UpdateOptionsModel<TType> = ProjectOptionsModel<TType> & {
+  isFlush?: boolean;
+};
 
 type UpdateArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
+  id?: Array<string>;
   options?: UpdateOptionsModel<TType>;
   update?: UpdateModel<TType>;
 };

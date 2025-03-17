@@ -25,11 +25,9 @@ export const getConnection = async <TType, TForm, TRoot = undefined>({
       cursor: offsetToCursor(startOffset + index),
       node,
     }));
-
     const { 0: firstEdge, length, [length - 1]: lastEdge } = edges;
     const lowerBound = after ? afterOffset + 1 : 0;
     const upperBound = before ? Math.min(beforeOffset, count) : count;
-
     const pageInfo = {
       endCursor: lastEdge.cursor,
       hasNextPage: first ? endOffset < upperBound : false,

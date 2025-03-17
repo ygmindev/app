@@ -37,35 +37,35 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
   name: USER_RESOURCE_NAME,
 })
 export class User extends EntityResource implements UserModel {
-  @withOneToManyField({ Resource: () => Access, mappedBy: USER_RESOURCE_NAME })
+  @withOneToManyField({ Resource: () => Access, root: USER_RESOURCE_NAME })
   [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel> = new Collection(this);
 
-  @withEmbeddedResourceField({ Resource: () => Bank, mappedBy: USER_RESOURCE_NAME })
+  @withEmbeddedResourceField({ Resource: () => Bank, root: USER_RESOURCE_NAME })
   [BANK_RESOURCE_NAME]?: CollectionModel<BankModel> = new Collection(this);
 
-  @withEmbeddedResourceField({ Resource: () => Card, mappedBy: USER_RESOURCE_NAME })
+  @withEmbeddedResourceField({ Resource: () => Card, root: USER_RESOURCE_NAME })
   [CARD_RESOURCE_NAME]?: CollectionModel<CardModel> = new Collection(this);
 
-  @withOneToManyField({ Resource: () => Chat, mappedBy: USER_RESOURCE_NAME })
+  @withOneToManyField({ Resource: () => Chat, root: USER_RESOURCE_NAME })
   [CHAT_RESOURCE_NAME]?: CollectionModel<ChatModel> = new Collection(this);
 
-  @withEmbeddedResourceField({ Resource: () => LinkedUser, mappedBy: USER_RESOURCE_NAME })
+  @withEmbeddedResourceField({ Resource: () => LinkedUser, root: USER_RESOURCE_NAME })
   [LINKED_USER_RESOURCE_NAME]?: CollectionModel<LinkedUserModel> = new Collection(this);
 
-  @withOneToManyField({ Resource: () => Message, mappedBy: USER_RESOURCE_NAME })
+  @withOneToManyField({ Resource: () => Message, root: USER_RESOURCE_NAME })
   [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel> = new Collection(this);
 
   @withOneToManyField({
     Resource: () => PaymentMethod,
     isDatabase: false,
-    mappedBy: USER_RESOURCE_NAME,
+    root: USER_RESOURCE_NAME,
   })
   [PAYMENT_METHOD_RESOURCE_NAME]?: CollectionModel<PaymentMethodModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   callingCode?: string;
 
-  @withManyToManyField({ Resource: () => Chat, mappedBy: 'participants' })
+  @withManyToManyField({ Resource: () => Chat, root: 'participants' })
   chats?: CollectionModel<ChatModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, isUnique: true, type: DATA_TYPE.STRING })

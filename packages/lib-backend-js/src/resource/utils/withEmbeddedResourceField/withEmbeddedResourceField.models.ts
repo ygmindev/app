@@ -8,6 +8,6 @@ export type WithEmbeddedResourceFieldParamsModel<TType extends unknown> = Pick<
   WithOneToManyFieldParamsModel<TType>,
   'Resource' | 'isDatabase'
 > &
-  RequiredModel<Pick<WithOneToManyFieldParamsModel<TType>, 'mappedBy'>>;
+  RequiredModel<Pick<WithOneToManyFieldParamsModel<TType>, 'root'>>;
 
 export type WithEmbeddedResourceFieldModel = WithOneToManyFieldModel;

@@ -1,11 +1,7 @@
-import _filter from 'lodash/filter';
-
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
-import {
-  type TestableEntityResourceFormModel,
-  type TestableEntityResourceModel,
-} from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
+import { type TestableEntityResourceFormModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
+import _filter from 'lodash/filter';
 
 const { displayName } = withTest({ getConnection });
 
@@ -13,12 +9,12 @@ describe(displayName, () => {
   const LIMIT = 3;
 
   const entities: Array<TestableEntityResourceFormModel> = [
-    { stringField: 'stringField' },
-    { stringField: 'stringField' },
-    { stringField: 'stringField' },
-    { stringField: 'stringField' },
-    { stringField: 'stringField' },
-    { stringField: 'stringField' },
+    { string: 'string' },
+    { string: 'string' },
+    { string: 'string' },
+    { string: 'string' },
+    { string: 'string' },
+    { string: 'string' },
   ];
 
   test('works', async () => {
@@ -32,11 +28,11 @@ describe(displayName, () => {
   });
 
   test('works with filter', async () => {
-    const filter = { stringField: 'stringField' };
+    const filter = { string: 'string' };
     const result = await getConnection({
       count: entities.length,
       getMany: async ({ filter }) => ({
-        result: _filter(entities, filter) as Array<TestableEntityResourceModel>,
+        result: _filter(entities, filter),
       }),
       input: { filter: [] },
       pagination: { first: LIMIT },

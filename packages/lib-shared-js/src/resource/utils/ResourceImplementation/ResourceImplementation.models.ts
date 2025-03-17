@@ -4,7 +4,6 @@ import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.mode
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
 
 export type ResourceImplementationModel<
   TType,
@@ -81,7 +80,7 @@ export type ResourceImplementationDecoratorModel<
   TType,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
-> = RootInputModel<TRoot> & {
+> = {
   afterCreate?: ResourceImplementationAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE,
     TType,

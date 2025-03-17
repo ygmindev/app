@@ -12,10 +12,8 @@ export const _getMetadata = <TType extends unknown>({
   const ResourceF = Resource();
   const indices = filterNil(
     (ResourceF.prototype as unknown as { __meta?: EntityMetadata }).__meta?.indexes?.map(
-      (index) => index.properties as Array<StringKeyModel<TType>>,
+      (index) => index.properties as StringKeyModel<TType>,
     ),
   );
-  return {
-    indices,
-  };
+  return { indices };
 };

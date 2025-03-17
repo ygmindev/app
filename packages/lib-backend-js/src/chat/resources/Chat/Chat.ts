@@ -16,12 +16,12 @@ import { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ isDatabase: true, name: CHAT_RESOURCE_NAME })
 export class Chat extends createProtectedResource() implements ChatModel {
-  @withOneToManyField({ Resource: () => Message, mappedBy: CHAT_RESOURCE_NAME })
+  @withOneToManyField({ Resource: () => Message, root: CHAT_RESOURCE_NAME })
   [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   name?: string;
 
-  @withManyToManyField({ Resource: () => User, inversedBy: 'chats' })
+  @withManyToManyField({ Resource: () => User, leaf: 'chats' })
   participants?: CollectionModel<UserModel> = new Collection(this);
 }

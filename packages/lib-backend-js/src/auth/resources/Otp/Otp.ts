@@ -30,12 +30,11 @@ export class OtpForm implements OtpFormModel {
 })
 export class Otp extends EntityResource implements OtpModel {
   @withField({
-    defaultValue: () => new Date(),
     expire: DATABASE_CONFIG.expireSeconds,
     isDatabase: true,
     type: DATA_TYPE.DATE,
   })
-  declare created: Date;
+  created: Date = new Date();
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   callingCode?: string;

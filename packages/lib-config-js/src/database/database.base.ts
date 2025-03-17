@@ -13,6 +13,7 @@ import { Product } from '@lib/backend/commerce/resources/Product/Product';
 import { Group } from '@lib/backend/group/resources/Group/Group';
 import { Socket } from '@lib/backend/http/resources/Socket/Socket';
 import { TestableEntityResource } from '@lib/backend/test/resources/TestableEntityResource/TestableEntityResource';
+import { TestableRelatedResource } from '@lib/backend/test/resources/TestableRelatedResource/TestableRelatedResource';
 import { LinkedUser } from '@lib/backend/user/resources/LinkedUser/LinkedUser';
 import { User } from '@lib/backend/user/resources/User/User';
 import { _database } from '@lib/config/database/_database';
@@ -47,7 +48,9 @@ export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
       User,
       Utility,
       Vendor,
-      process.env.NODE_ENV !== 'production' && TestableEntityResource,
+      ...(process.env.NODE_ENV !== 'production'
+        ? [TestableEntityResource, TestableRelatedResource]
+        : []),
     ]),
   }),
 });

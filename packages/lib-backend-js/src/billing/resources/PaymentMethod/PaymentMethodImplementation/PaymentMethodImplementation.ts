@@ -41,7 +41,7 @@ import { type LinkedUserImplementationModel } from '@lib/shared/user/resources/L
 import { UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
 import reduce from 'lodash/reduce';
 import round from 'lodash/round';
-import { ObjectId } from 'mongodb';
+import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 
 @withContainer({ name: `${PAYMENT_METHOD_RESOURCE_NAME}Implementation` })
 export class PaymentMethodImplementation
