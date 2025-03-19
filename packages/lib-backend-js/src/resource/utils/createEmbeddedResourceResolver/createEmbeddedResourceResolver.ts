@@ -5,11 +5,10 @@ import {
 } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver.models';
 import { createResourceResolver } from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver';
 import { ClassModel } from '@lib/shared/core/core.models';
-import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export const createEmbeddedResourceResolver = <
-  TType extends EmbeddedResourceModel,
+  TType extends EntityResourceModel,
   TForm,
   TRoot extends EntityResourceModel,
 >(

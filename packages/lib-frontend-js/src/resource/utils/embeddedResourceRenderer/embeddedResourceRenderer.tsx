@@ -7,12 +7,11 @@ import {
 } from '@lib/frontend/resource/utils/embeddedResourceRenderer/embeddedResourceRenderer.models';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
-import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { cloneElement } from 'react';
 
 export const embeddedResourceRenderer =
-  <TType extends EmbeddedResourceModel, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
+  <TType extends EntityResourceModel, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
     description,
     element,
   }: EmbeddedResourceRendererParamsModel<TType, TForm, TRoot>): EmbeddedResourceRendererModel<
