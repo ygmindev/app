@@ -8,23 +8,23 @@ import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 export const withRefField =
   <TType extends unknown>({
     Resource,
-    leaf,
     isArray = false,
     isDatabase = false,
     isOptional = true,
-    root,
+    leaf,
     name,
     relation,
+    root,
   }: WithRefFieldParamsModel<TType>): WithRefFieldModel =>
   (target, propertyKey) =>
     withField({
       Resource,
-      leaf,
       isArray,
       isDatabase,
       isOptional,
-      root,
+      leaf,
       name,
       relation,
+      root,
       type: PROPERTY_TYPE.RESOURCE,
     })(target, propertyKey);

@@ -69,7 +69,6 @@ const getColumn = <TType extends unknown>({
           entity: Resource as () => EntityClass<TType>,
           inversedBy: leaf,
           mappedBy: root,
-          nullable: true,
           owner: !root,
         }) as PropertyDecorator;
       case FIELD_RELATION.ONE_TO_MANY:

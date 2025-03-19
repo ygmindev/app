@@ -9,7 +9,6 @@ export type TestResourceImplementationParamsModel<
   TForm extends TestableResourceFormModel,
   TRoot extends unknown = undefined,
 > = {
-  before?(params: ResourceImplementationModel<TType, TForm, TRoot>): Promise<void>;
   form: TForm;
   getImplementation(): ResourceImplementationModel<TType, TForm, TRoot>;
   root?(): Promise<TRoot extends undefined ? never : string | undefined>;

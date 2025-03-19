@@ -1,4 +1,8 @@
-import { type PrimitiveModel, type StringKeyModel } from '@lib/shared/core/core.models';
+import {
+  type EmptyObjectModel,
+  type PrimitiveModel,
+  type StringKeyModel,
+} from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
@@ -36,12 +40,7 @@ type CreateManyArgsModel<TType> = {
   options?: CreateOptionsModel;
 };
 
-type ProjectOptionsModel<TType> = CommonOptionsModel & {
-  project?: ProjectModel<TType>;
-};
-
-type GetOptionsModel<TType> = ProjectOptionsModel<TType> & {
-  aggregate?: Array<object>;
+type GetOptionsModel<TType> = {
   populate?: Array<StringKeyModel<TType>>;
 };
 
@@ -58,6 +57,7 @@ type GetManyOptionsModel<TType> = GetOptionsModel<TType> & {
 
 type GetManyArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
+  id?: Array<never>;
   options?: GetManyOptionsModel<TType>;
 };
 
@@ -65,6 +65,7 @@ type GetConnectionOptionsModel = CommonOptionsModel;
 
 type GetConnectionArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
+  id?: Array<never>;
   options?: GetConnectionOptionsModel;
   pagination?: PaginationModel;
 };
@@ -87,21 +88,21 @@ type SearchArgsModel<TType> = {
   query?: string;
 };
 
-type SubscribeOptionsModel<TType> = ProjectOptionsModel<TType>;
+type SubscribeOptionsModel = EmptyObjectModel;
 
 type SubscribeArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
-  options?: SubscribeOptionsModel<TType>;
+  options?: SubscribeOptionsModel;
 };
 
-type UpdateOptionsModel<TType> = ProjectOptionsModel<TType> & {
+type UpdateOptionsModel = {
   isFlush?: boolean;
 };
 
 type UpdateArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
   id?: Array<string>;
-  options?: UpdateOptionsModel<TType>;
+  options?: UpdateOptionsModel;
   update?: UpdateModel<TType>;
 };
 

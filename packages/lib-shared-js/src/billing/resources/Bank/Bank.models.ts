@@ -1,11 +1,13 @@
-import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
-import { type EmbeddedResourceModel } from '@lib/shared/resource/resources/EmbeddedResource/EmbeddedResource.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
+import {
+  type EntityResourceDataModel,
+  type EntityResourceModel,
+} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
-export type BankModel = EmbeddedResourceModel & {
-  [USER_RESOURCE_NAME]: RefFieldModel<UserModel>;
+export type BankModel = EntityResourceModel & {
+  [USER_RESOURCE_NAME]?: CollectionModel<UserModel>;
 
   externalId: string;
 

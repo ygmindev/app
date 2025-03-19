@@ -5,7 +5,7 @@ import { type TestableRelatedResourceModel } from '@lib/shared/test/resources/Te
 import { type TestableResourceModel } from '@lib/shared/test/resources/TestableResource/TestableResource.models';
 
 export type TestableEntityResourceModel = TestableResourceModel & {
-  embedded?: CollectionModel<TestableEmbeddedResourceModel>;
+  embedded?: Array<TestableEmbeddedResourceModel>;
 
   relatedManyToMany?: CollectionModel<TestableRelatedResourceModel>;
 

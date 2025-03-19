@@ -5,7 +5,8 @@ import { StripeAdminImplementation } from '@lib/backend/billing/utils/StripeAdmi
 import { type StripeAdminImplementationModel } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.models';
 import { ProductImplementation } from '@lib/backend/commerce/resources/Product/ProductImplementation/ProductImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { createEmbeddedResourceImplementation } from '@lib/backend/resource/utils/createEmbeddedResourceImplementation/createEmbeddedResourceImplementation';
+import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
+import { createRelatedResourceImplementation } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation';
 import { LinkedUserImplementation } from '@lib/backend/user/resources/LinkedUser/LinkedUserImplementation/LinkedUserImplementation';
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
@@ -38,14 +39,14 @@ import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { LINKED_USER_TYPE } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import { type LinkedUserImplementationModel } from '@lib/shared/user/resources/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';
+import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
 import reduce from 'lodash/reduce';
 import round from 'lodash/round';
-import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 
 @withContainer({ name: `${PAYMENT_METHOD_RESOURCE_NAME}Implementation` })
 export class PaymentMethodImplementation
-  extends createEmbeddedResourceImplementation<
+  extends createRelatedResourceImplementation<
     PaymentMethodModel,
     PaymentMethodFormModel,
     UserModel,
@@ -54,6 +55,7 @@ export class PaymentMethodImplementation
     Resource: PaymentMethod,
     RootImplementation: UserImplementation,
     name: PAYMENT_METHOD_RESOURCE_NAME,
+    root: USER_RESOURCE_NAME,
   })
   implements PaymentMethodImplementationModel
 {
@@ -90,12 +92,12 @@ export class PaymentMethodImplementation
       const project = reduce(fields, (result, v) => ({ ...result, [v]: true }), {});
       const { result: banks } = await this.bankImplementation.getMany({
         filter: [],
-        options: { project },
+        // options: { project },
         root: input.root,
       });
       const { result: cards } = await this.cardImplementation.getMany({
         filter: [],
-        options: { project },
+        // options: { project },
         root: input.root,
       });
       return {
@@ -114,7 +116,7 @@ export class PaymentMethodImplementation
     if (input?.root) {
       let { result: linkedUser } = await this.linkedUserImplementation.get({
         filter: [{ field: 'type', value: LINKED_USER_TYPE.STRIPE }],
-        options: { project: { _id: true, externalId: true } },
+        // options: { project: { _id: true, externalId: true } },
         root: input.root,
       });
       if (!linkedUser) {
@@ -140,7 +142,7 @@ export class PaymentMethodImplementation
                   value: Object.keys(productsGrouped),
                 },
               ],
-              options: { project: { [PRICING_RESOURCE_NAME]: true } },
+              // options: { project: { [PRICING_RESOURCE_NAME]: true } },
             })
           )?.result;
 

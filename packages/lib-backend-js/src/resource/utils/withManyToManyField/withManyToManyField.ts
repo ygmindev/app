@@ -8,18 +8,18 @@ import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefFi
 export const withManyToManyField =
   <TType extends unknown>({
     Resource,
-    leaf,
     isDatabase = true,
     isOptional = true,
+    leaf,
     root,
   }: WithManyToManyFieldParamsModel<TType>): WithManyToManyFieldModel =>
   (target, propertyKey) =>
     withRefField({
       Resource,
-      leaf,
       isArray: true,
       isDatabase,
       isOptional,
-      root,
+      leaf,
       relation: FIELD_RELATION.MANY_TO_MANY,
+      root,
     })(target, propertyKey);

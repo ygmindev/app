@@ -7,9 +7,9 @@ import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
-import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { type ResourceImplementationDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
@@ -228,7 +228,6 @@ export const createResourceImplementation = <
       inputF = this.decorators.beforeSearch
         ? await this.decorators.beforeSearch({ input: inputF }, context)
         : inputF;
-
       const output: OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> = await search(
         inputF,
         context,
@@ -256,8 +255,8 @@ export const createResourceImplementation = <
         : output;
     }
 
-    async count(filter?: Array<FilterModel<TType>>): Promise<number> {
-      return count(filter);
+    async count(input?: InputModel<ResourceMethodTypeModel, TType, TForm, TRoot>): Promise<number> {
+      return count(input);
     }
   }
 

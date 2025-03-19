@@ -1,8 +1,6 @@
 import { Utility } from '@lib/backend/admin/resources/Utility/Utility';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
-import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
-import { withEmbeddedResourceField } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField';
+import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { UTILITY_RESOURCE_NAME } from '@lib/shared/admin/resources/Utility/Utility.constants';
@@ -13,11 +11,8 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: VENDOR_RESOURCE_NAME })
 export class Vendor extends EntityResource implements VendorModel {
-  @withEmbeddedResourceField({ Resource: () => Utility, root: VENDOR_RESOURCE_NAME })
-  [UTILITY_RESOURCE_NAME]?: CollectionModel<UtilityModel> = new Collection<
-    UtilityModel,
-    VendorModel
-  >(this);
+  @withEmbeddedField({ Resource: () => Utility })
+  [UTILITY_RESOURCE_NAME]?: Array<UtilityModel>;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   imageSrc?: string;

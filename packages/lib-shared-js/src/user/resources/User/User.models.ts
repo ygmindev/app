@@ -27,7 +27,7 @@ export type UserModel = EntityResourceModel & {
 
   [CHAT_RESOURCE_NAME]?: CollectionModel<ChatModel>;
 
-  [LINKED_USER_RESOURCE_NAME]?: CollectionModel<LinkedUserModel>;
+  [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
 
   [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel>;
 

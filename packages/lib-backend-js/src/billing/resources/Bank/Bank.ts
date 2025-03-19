@@ -1,8 +1,9 @@
-import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
-import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
+import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
+import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
+import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { withRootField } from '@lib/backend/resource/utils/withRootField/withRootField';
+import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { User } from '@lib/backend/user/resources/User/User';
 import { BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.constants';
 import { type BankModel } from '@lib/shared/billing/resources/Bank/Bank.models';
@@ -11,9 +12,9 @@ import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constan
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withEntity({ indices: [{ keys: ['fingerprint'] }], isDatabase: true, name: BANK_RESOURCE_NAME })
-export class Bank extends EmbeddedResource implements BankModel {
-  @withRootField({ Resource: () => User })
-  [USER_RESOURCE_NAME]!: RefFieldModel<UserModel>;
+export class Bank extends EntityResource implements BankModel {
+  @withManyToManyField({ Resource: () => User, leaf: BANK_RESOURCE_NAME })
+  [USER_RESOURCE_NAME]?: CollectionModel<UserModel> = new Collection(this);
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   externalId!: string;

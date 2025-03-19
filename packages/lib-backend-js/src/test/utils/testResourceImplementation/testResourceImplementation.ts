@@ -5,9 +5,8 @@ import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type TestResourceImplementationParamsModel } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation.models';
 import databaseConfig from '@lib/config/database/database.mongo';
 import { type PartialModel } from '@lib/shared/core/core.models';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
+import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import {
   type TestableResourceFormModel,
   type TestableResourceModel,
@@ -20,7 +19,6 @@ export const testResourceImplementation = <
   TForm extends TestableResourceFormModel,
   TRoot extends unknown = undefined,
 >({
-  before,
   form,
   getImplementation,
   root: getRoot,
@@ -33,11 +31,10 @@ export const testResourceImplementation = <
   beforeAll(async () => {
     await initialize({ database: databaseConfig.params() });
     await seed();
-
     implementation = getImplementation();
-    first = (await implementation.getMany({ filter: [], root }))?.result?.[0];
     root = (await getRoot?.()) as TRoot extends undefined ? never : string;
     root && (root = toString(root) as TRoot extends undefined ? never : string);
+    first = (await implementation.getMany({ filter: [], root }))?.result?.[0];
   });
 
   afterAll(async () => {
@@ -53,7 +50,7 @@ export const testResourceImplementation = <
   });
 
   test('works with get by id', async () => {
-    const input = { filter: [{ field: '_id', value: first?._id }] };
+    const input = { id: [first?._id ?? ''], root };
     const { result } = await implementation.get(input);
     expect(result?._id).toStrictEqual(first?._id);
   });
@@ -97,6 +94,7 @@ export const testResourceImplementation = <
     const input = {
       filter: [{ field: 'group', value: GROUP }],
       options: { skip: SKIP, take: TAKE },
+      root,
     };
     const { result } = await implementation.getMany(input);
     expect(result?.length).toStrictEqual(TAKE);
@@ -124,6 +122,7 @@ export const testResourceImplementation = <
     const { result } = await implementation.getConnection({
       filter: [{ field: 'group', value: GROUP }],
       pagination: { first: FIRST },
+      root,
     });
     expect(result?.edges.length).toStrictEqual(FIRST);
     expect(
@@ -249,13 +248,16 @@ export const testResourceImplementation = <
 
   test('works with update by id', async () => {
     const NEW_VALUE = 'new';
-    const input = {
+    const { result: updateResult } = await implementation.update({
       id: [first?._id ?? ''],
-      update: { string: NEW_VALUE },
-    } as InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>;
-    const { result: updateResult } = await implementation.update(input);
+      root,
+      update: { string: NEW_VALUE } as UpdateModel<TType>,
+    });
     expect(updateResult?.string).toStrictEqual(NEW_VALUE);
-    const { result: getResult } = await implementation.get(input);
+    const { result: getResult } = await implementation.get({
+      id: [first?._id ?? ''],
+      root,
+    });
     expect(getResult?.string).toStrictEqual(NEW_VALUE);
   });
 
@@ -297,7 +299,7 @@ export const testResourceImplementation = <
   //   });
 
   test('works with remove by id', async () => {
-    const input = { id: [first?._id ?? ''] };
+    const input = { id: [first?._id ?? ''], root };
     const { result: removeResult } = await implementation.remove(input);
     expect(removeResult).toBeTruthy();
     const { result: getResult } = await implementation.get(input);

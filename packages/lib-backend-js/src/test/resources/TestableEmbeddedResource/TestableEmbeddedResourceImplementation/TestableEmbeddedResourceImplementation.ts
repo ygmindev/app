@@ -23,6 +23,6 @@ export class TestableEmbeddedResourceImplementation
   >({
     Resource: TestableEmbeddedResource,
     RootImplementation: TestableEntityResourceImplementation,
-    name: TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME,
+    name: 'embedded',
   })
   implements TestableEmbeddedResourceImplementationModel {}

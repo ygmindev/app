@@ -7,7 +7,7 @@ import { Message } from '@lib/backend/chat/resources/Message/Message';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
 import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
 import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
-import { withEmbeddedResourceField } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField';
+import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
@@ -40,22 +40,22 @@ export class User extends EntityResource implements UserModel {
   @withOneToManyField({ Resource: () => Access, root: USER_RESOURCE_NAME })
   [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel> = new Collection(this);
 
-  @withEmbeddedResourceField({ Resource: () => Bank, root: USER_RESOURCE_NAME })
+  @withManyToManyField({ Resource: () => Bank, root: USER_RESOURCE_NAME })
   [BANK_RESOURCE_NAME]?: CollectionModel<BankModel> = new Collection(this);
 
-  @withEmbeddedResourceField({ Resource: () => Card, root: USER_RESOURCE_NAME })
+  @withManyToManyField({ Resource: () => Card, root: USER_RESOURCE_NAME })
   [CARD_RESOURCE_NAME]?: CollectionModel<CardModel> = new Collection(this);
 
   @withOneToManyField({ Resource: () => Chat, root: USER_RESOURCE_NAME })
   [CHAT_RESOURCE_NAME]?: CollectionModel<ChatModel> = new Collection(this);
 
-  @withEmbeddedResourceField({ Resource: () => LinkedUser, root: USER_RESOURCE_NAME })
-  [LINKED_USER_RESOURCE_NAME]?: CollectionModel<LinkedUserModel> = new Collection(this);
+  @withEmbeddedField({ Resource: () => LinkedUser })
+  [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
 
   @withOneToManyField({ Resource: () => Message, root: USER_RESOURCE_NAME })
   [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel> = new Collection(this);
 
-  @withOneToManyField({
+  @withManyToManyField({
     Resource: () => PaymentMethod,
     isDatabase: false,
     root: USER_RESOURCE_NAME,

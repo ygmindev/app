@@ -18,6 +18,6 @@ export const withOneToManyField =
       isArray: true,
       isDatabase,
       isOptional,
-      root,
       relation: FIELD_RELATION.ONE_TO_MANY,
+      root,
     })(target, propertyKey);

@@ -1,8 +1,6 @@
 import { Pricing } from '@lib/backend/commerce/resources/Pricing/Pricing';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
-import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
-import { withEmbeddedResourceField } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField';
+import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
@@ -16,8 +14,8 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: PRODUCT_RESOURCE_NAME })
 export class Product extends EntityResource implements ProductModel {
-  @withEmbeddedResourceField({ Resource: () => Pricing, root: PRODUCT_RESOURCE_NAME })
-  [PRICING_RESOURCE_NAME]?: CollectionModel<PricingModel> = new Collection(this);
+  @withEmbeddedField({ Resource: () => Pricing })
+  [PRICING_RESOURCE_NAME]?: Array<PricingModel>;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   description?: string;

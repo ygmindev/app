@@ -23,6 +23,13 @@ export type ResourceMethodTypeCrudModel =
   | RESOURCE_METHOD_TYPE.REMOVE
   | RESOURCE_METHOD_TYPE.UPDATE;
 
+export type FilterableResourceMethodTypeModel =
+  | RESOURCE_METHOD_TYPE.GET
+  | RESOURCE_METHOD_TYPE.GET_MANY
+  | RESOURCE_METHOD_TYPE.GET_CONNECTION
+  | RESOURCE_METHOD_TYPE.REMOVE
+  | RESOURCE_METHOD_TYPE.UPDATE;
+
 export type ResourceNameParamsModel<TRoot = undefined> = {
   name: TRoot extends undefined ? string : StringKeyModel<TRoot>;
 };

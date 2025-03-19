@@ -4,7 +4,6 @@ import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefFiel
 import { type ClassModel, type KeysOfTypeModel } from '@lib/shared/core/core.models';
 import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type EntityResourceImplementationModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
-import { type RelatedResourceImplementationModel } from '@lib/shared/resource/resources/RelatedResource/RelatedResourceImplementation/RelatedResourceImplementation.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 
 export type CreateRelatedResourceImplementationParamsModel<
@@ -25,4 +24,4 @@ export type CreateRelatedResourceImplementationModel<
   TType extends EntityResourceModel,
   TForm,
   TRoot extends EntityResourceModel,
-> = ClassModel<RelatedResourceImplementationModel<TType, TForm, TRoot>>;
+> = ClassModel<ResourceImplementationModel<TType, TForm, TRoot>>;

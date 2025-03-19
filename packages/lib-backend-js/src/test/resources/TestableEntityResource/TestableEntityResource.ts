@@ -1,6 +1,6 @@
 import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
 import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
-import { withEmbeddedResourceField } from '@lib/backend/resource/utils/withEmbeddedResourceField/withEmbeddedResourceField';
+import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
@@ -17,8 +17,8 @@ export class TestableEntityResource
   extends TestableResource
   implements TestableEntityResourceModel
 {
-  @withEmbeddedResourceField({ Resource: () => TestableEmbeddedResource, root: 'rootEmbedded' })
-  embedded?: CollectionModel<TestableEmbeddedResourceModel> = new Collection(this);
+  @withEmbeddedField({ Resource: () => TestableEmbeddedResource })
+  embedded?: Array<TestableEmbeddedResourceModel>;
 
   @withManyToManyField({ Resource: () => TestableRelatedResource, root: 'rootManyToMany' })
   relatedManyToMany?: CollectionModel<TestableRelatedResourceModel> = new Collection(this);

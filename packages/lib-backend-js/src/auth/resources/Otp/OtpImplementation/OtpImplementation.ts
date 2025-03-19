@@ -53,7 +53,6 @@ export class OtpImplementation
         const userImplementation = Container.get(UserImplementation);
         const { result } = await userImplementation.get({
           filter: objectToEquality(cleanObject(pick(formF, ['callingCode', 'email', 'phone']))),
-          options: { project: { _id: true } },
         });
         if (result) {
           throw new DuplicateError(result._id);
@@ -74,7 +73,7 @@ export class OtpImplementation
 {
   async verify(data: EntityResourceDataModel<OtpModel>): Promise<PartialModel<OtpModel>> {
     const filter = objectToEquality(data);
-    const { result } = await this.get({ filter, options: { project: { otp: true } } });
+    const { result } = await this.get({ filter });
     if (!result || result.otp !== data.otp) {
       throw new UnauthorizedError();
     }

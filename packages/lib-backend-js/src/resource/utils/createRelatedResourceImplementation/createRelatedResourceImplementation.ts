@@ -124,7 +124,7 @@ export const createRelatedResourceImplementation = <
     beforeRemove,
     beforeSearch,
     beforeUpdate,
-    count: (filter) => getRepository().count(filter),
+    count: (input) => getRepository().count(input?.filter),
     create,
     createMany: async (input) => {
       if (input?.root) {
@@ -164,7 +164,6 @@ export const createRelatedResourceImplementation = <
       if (input.root) {
         const { result: rootResult } = await getRootImplementation().get({
           filter: [{ field: '_id', value: input.root }],
-          // options: input.filter ? { aggregate: aggregate({ ...input, name }) } : undefined,
         });
         return {
           result: undefined,
