@@ -1,4 +1,4 @@
-import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
+import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
@@ -9,7 +9,7 @@ import {
 } from '@lib/shared/user/resources/LinkedUser/LinkedUser.models';
 
 @withEntity({ isDatabase: true, name: LINKED_USER_RESOURCE_NAME })
-export class LinkedUser extends EmbeddedResource implements LinkedUserModel {
+export class LinkedUser extends EntityResource implements LinkedUserModel {
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   externalId!: string;
 

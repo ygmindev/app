@@ -1,4 +1,4 @@
-import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
+import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
@@ -9,7 +9,7 @@ import {
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, isEmbeddable: true, name: PRICING_RESOURCE_NAME })
-export class Pricing extends EmbeddedResource implements PricingModel {
+export class Pricing extends EntityResource implements PricingModel {
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   currency?: string;
 

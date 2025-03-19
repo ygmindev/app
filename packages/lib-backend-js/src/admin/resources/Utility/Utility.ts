@@ -1,4 +1,4 @@
-import { EmbeddedResource } from '@lib/backend/resource/resources/EmbeddedResource/EmbeddedResource';
+import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { UTILITY_RESOURCE_NAME } from '@lib/shared/admin/resources/Utility/Utility.constants';
@@ -9,7 +9,7 @@ import {
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, isEmbeddable: true, name: UTILITY_RESOURCE_NAME })
-export class Utility extends EmbeddedResource implements UtilityModel {
+export class Utility extends EntityResource implements UtilityModel {
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   description?: string;
 
