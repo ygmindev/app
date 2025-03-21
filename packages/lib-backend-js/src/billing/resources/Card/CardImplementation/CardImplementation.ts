@@ -31,7 +31,6 @@ export class CardImplementation
     beforeCreate: async ({ input }) =>
       input && getFingerprintInput({ input, type: PAYMENT_METHOD_TYPE.CARD }),
     name: CARD_RESOURCE_NAME,
-
     root: USER_RESOURCE_NAME,
   })
   implements CardImplementationModel {}

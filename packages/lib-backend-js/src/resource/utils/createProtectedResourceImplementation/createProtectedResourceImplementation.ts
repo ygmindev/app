@@ -1,4 +1,5 @@
 import { AccessImplementation } from '@lib/backend/auth/resources/Access/AccessImplementation/AccessImplementation';
+import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 import { GroupImplementation } from '@lib/backend/group/resources/Group/GroupImplementation/GroupImplementation';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import {
@@ -23,7 +24,6 @@ import { type EntityResourceDataModel } from '@lib/shared/resource/resources/Ent
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
-import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 
 export const createProtectedResoureImplementation = <
   TType extends ProtectedResourceModel,
@@ -39,15 +39,15 @@ export const createProtectedResoureImplementation = <
   class ProtectedResourceImplementation extends createEntityResourceImplementation<TType, TForm>({
     ...params,
     beforeCreate: async ({ input }, context) => {
-      const inputF = input;
       if (isAuthored) {
         const uid = context?.user?._id;
         if (!uid) {
           throw new UnauthenticatedError();
         }
-        inputF?.form && (inputF.form[USER_RESOURCE_NAME] = { _id: uid });
+        // TODO: fix typing
+        input?.form && (input.form[USER_RESOURCE_NAME] = uid);
       }
-      return beforeCreate ? beforeCreate({ input: inputF }, context) : inputF;
+      return beforeCreate ? beforeCreate({ input }, context) : input;
     },
   }) {
     @withInject(GroupImplementation) protected _groupImplementation!: GroupImplementationModel;

@@ -68,6 +68,8 @@ export const createEmbeddedResourceImplementation = <
   const getForm = async (form?: TForm): Promise<TType> => {
     const formF = new Resource();
     forEach(form as unknown as object, (v, k) => (formF[k as keyof typeof formF] = v));
+    formF._id = formF._id ?? new ObjectId();
+    formF.created = formF.created ?? new Date();
     await formF.beforeCreate?.();
     return formF;
   };

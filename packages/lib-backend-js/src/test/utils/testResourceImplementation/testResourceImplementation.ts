@@ -61,20 +61,6 @@ export const testResourceImplementation = <
     expect(result?._id).toStrictEqual(first?._id);
   });
 
-  //   test('works with get with project', async () => {
-  //     const { result: data = [] } = await implementation.getMany({ filter: [] });
-  //     const input = {
-  //       filter: [{ field: '_id', value: data[0]._id }],
-  //       options: {
-  //         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
-  //       },
-  //     } as InputModel<RESOURCE_METHOD_TYPE.GET, TestableEntityResourceModel>;
-  //     const { result } = await implementation.get(input);
-  //     const expected = findF(data, input.filter);
-  //     expect(result?._id).toStrictEqual(expected?._id);
-  //     expect(result && Object.keys(result).sort()).toStrictEqual(PROJECT_FIELDS);
-  //   });
-
   test('works with getMany by partial', async () => {
     const GROUP = '3';
     const input = { filter: [{ field: 'group', value: GROUP }], root };
@@ -100,21 +86,6 @@ export const testResourceImplementation = <
     expect(result?.length).toStrictEqual(TAKE);
     expect(result?.map((v) => v.index)).toStrictEqual([SKIP + 1, SKIP + 2]);
   });
-
-  //   test('works with getMany with project', async () => {
-  //     const { result: data = [] } = await implementation.getMany({ filter: [] });
-  //     const input = {
-  //       filter: [{ field: 'string', value: 'string1' }],
-  //       options: {
-  //         project: PROJECT_FIELDS.reduce((result, field) => ({ ...result, [field]: true }), {}),
-  //       },
-  //     } as InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TestableEntityResourceModel>;
-  //     const { result } = await implementation.getMany(input);
-  //     const resultF = result && result[0];
-  //     const expected = findF(data, input.filter);
-  //     expect(resultF?._id).toStrictEqual(expected?._id);
-  //     expect(resultF && Object.keys(resultF).sort()).toStrictEqual(PROJECT_FIELDS);
-  //   });
 
   test('works with getConnection all result', async () => {
     const FIRST = 2;

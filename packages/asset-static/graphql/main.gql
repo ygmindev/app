@@ -16,8 +16,8 @@ input AccessCreateFormInput {
   Group: GroupInput
   Role: [String]
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
 }
 
@@ -30,8 +30,8 @@ input AccessCreateManyFormInput {
   Group: GroupInput
   Role: [String]
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
 }
 
@@ -148,8 +148,8 @@ input AccessInput {
   Group: GroupInput
   Role: [String]
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
 }
 
@@ -212,8 +212,8 @@ input AccessUpdateUpdateInput {
   Group: GroupInput
   Role: [String]
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
 }
 
@@ -251,8 +251,8 @@ type Bank {
 
 input BankCreateFormInput {
   User: [UserInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: Boolean
@@ -268,8 +268,8 @@ input BankCreateInput {
 
 input BankCreateManyFormInput {
   User: [UserInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: Boolean
@@ -373,8 +373,8 @@ type BankGetOutput {
 
 input BankInput {
   User: [UserInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: Boolean
@@ -443,8 +443,8 @@ type BankUpdateOutput {
 
 input BankUpdateUpdateInput {
   User: [UserInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: Boolean
@@ -470,8 +470,8 @@ type Card {
 
 input CardCreateFormInput {
   User: [UserInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   expMonth: Float
   expYear: Float
   externalId: String
@@ -490,8 +490,8 @@ input CardCreateInput {
 
 input CardCreateManyFormInput {
   User: [UserInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   expMonth: Float
   expYear: Float
   externalId: String
@@ -598,8 +598,8 @@ type CardGetOutput {
 
 input CardInput {
   User: [UserInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   expMonth: Float
   expYear: Float
   externalId: String
@@ -671,8 +671,8 @@ type CardUpdateOutput {
 
 input CardUpdateUpdateInput {
   User: [UserInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   expMonth: Float
   expYear: Float
   externalId: String
@@ -699,8 +699,8 @@ input ChatCreateFormInput {
   Group: GroupInput
   Message: [MessageInput] = []
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   name: String
   participants: [UserInput] = []
@@ -715,8 +715,8 @@ input ChatCreateManyFormInput {
   Group: GroupInput
   Message: [MessageInput] = []
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   name: String
   participants: [UserInput] = []
@@ -835,8 +835,8 @@ input ChatInput {
   Group: GroupInput
   Message: [MessageInput] = []
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   name: String
   participants: [UserInput] = []
@@ -922,8 +922,8 @@ input ChatUpdateUpdateInput {
   Group: GroupInput
   Message: [MessageInput] = []
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   name: String
   participants: [UserInput] = []
@@ -978,8 +978,8 @@ type Group {
 input GroupCreateFormInput {
   Access: [AccessInput] = []
   Role: [RoleInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   logo: String
   name: String
@@ -994,8 +994,8 @@ input GroupCreateInput {
 input GroupCreateManyFormInput {
   Access: [AccessInput] = []
   Role: [RoleInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   logo: String
   name: String
@@ -1093,8 +1093,8 @@ type GroupGetOutput {
 input GroupInput {
   Access: [AccessInput] = []
   Role: [RoleInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   logo: String
   name: String
@@ -1159,8 +1159,8 @@ type GroupUpdateOutput {
 input GroupUpdateUpdateInput {
   Access: [AccessInput] = []
   Role: [RoleInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   logo: String
   name: String
@@ -1192,8 +1192,8 @@ input MessageCreateFormInput {
   Chat: ChatInput
   Group: GroupInput
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   text: String
 }
@@ -1207,8 +1207,8 @@ input MessageCreateManyFormInput {
   Chat: ChatInput
   Group: GroupInput
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   text: String
 }
@@ -1326,8 +1326,8 @@ input MessageInput {
   Chat: ChatInput
   Group: GroupInput
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   text: String
 }
@@ -1391,8 +1391,8 @@ input MessageUpdateUpdateInput {
   Chat: ChatInput
   Group: GroupInput
   User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   text: String
 }
@@ -1483,8 +1483,8 @@ type Order {
 }
 
 input OrderCreateFormInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
@@ -1496,8 +1496,8 @@ input OrderCreateInput {
 }
 
 input OrderCreateManyFormInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
@@ -1592,8 +1592,8 @@ type OrderGetOutput {
 }
 
 input OrderInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
@@ -1655,8 +1655,8 @@ type OrderUpdateOutput {
 }
 
 input OrderUpdateUpdateInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
@@ -1780,9 +1780,9 @@ type OtpGetOutput {
 }
 
 input OtpInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   callingCode: String
-  created: DateTimeISO = "2025-03-18T03:41:56.632Z"
+  created: DateTimeISO = "2025-03-21T03:47:07.341Z"
   email: String
   isFixture: Boolean
   otp: String
@@ -1845,9 +1845,9 @@ type OtpUpdateOutput {
 }
 
 input OtpUpdateUpdateInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   callingCode: String
-  created: DateTimeISO = "2025-03-18T03:41:56.632Z"
+  created: DateTimeISO = "2025-03-21T03:47:07.341Z"
   email: String
   isFixture: Boolean
   otp: String
@@ -1869,8 +1869,7 @@ input PaginationInput {
 }
 
 type PaymentMethod {
-  Group: Group
-  User: User
+  User: [User]
   _id: String
   created: DateTimeISO
   externalId: String
@@ -1882,10 +1881,9 @@ type PaymentMethod {
 }
 
 input PaymentMethodCreateFormInput {
-  Group: GroupInput
-  User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  User: [UserInput] = []
+  _id: String
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: Boolean
@@ -1900,10 +1898,9 @@ input PaymentMethodCreateInput {
 }
 
 input PaymentMethodCreateManyFormInput {
-  Group: GroupInput
-  User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  User: [UserInput] = []
+  _id: String
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: Boolean
@@ -2006,10 +2003,9 @@ type PaymentMethodGetOutput {
 }
 
 input PaymentMethodInput {
-  Group: GroupInput
-  User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  User: [UserInput] = []
+  _id: String
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: Boolean
@@ -2113,10 +2109,9 @@ type PaymentMethodUpdateOutput {
 }
 
 input PaymentMethodUpdateUpdateInput {
-  Group: GroupInput
-  User: UserInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  User: [UserInput] = []
+  _id: String
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: Boolean
@@ -2140,8 +2135,8 @@ type Pricing {
 }
 
 input PricingCreateFormInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   currency: String
   frequency: String
   isFixture: Boolean
@@ -2154,8 +2149,8 @@ input PricingCreateInput {
 }
 
 input PricingCreateManyFormInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   currency: String
   frequency: String
   isFixture: Boolean
@@ -2256,8 +2251,8 @@ type PricingGetOutput {
 }
 
 input PricingInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   currency: String
   frequency: String
   isFixture: Boolean
@@ -2323,8 +2318,8 @@ type PricingUpdateOutput {
 }
 
 input PricingUpdateUpdateInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   currency: String
   frequency: String
   isFixture: Boolean
@@ -2343,8 +2338,8 @@ type Product {
 
 input ProductCreateFormInput {
   Pricing: [PricingInput]
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   description: String
   imageSrc: [String]
   isFixture: Boolean
@@ -2358,8 +2353,8 @@ input ProductCreateInput {
 
 input ProductCreateManyFormInput {
   Pricing: [PricingInput]
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   description: String
   imageSrc: [String]
   isFixture: Boolean
@@ -2456,8 +2451,8 @@ type ProductGetOutput {
 
 input ProductInput {
   Pricing: [PricingInput]
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   description: String
   imageSrc: [String]
   isFixture: Boolean
@@ -2537,8 +2532,8 @@ type ProductUpdateOutput {
 
 input ProductUpdateUpdateInput {
   Pricing: [PricingInput]
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   description: String
   imageSrc: [String]
   isFixture: Boolean
@@ -2632,8 +2627,8 @@ type Role {
 
 input RoleCreateFormInput {
   Group: GroupInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   name: String
 }
@@ -2645,8 +2640,8 @@ input RoleCreateInput {
 
 input RoleCreateManyFormInput {
   Group: GroupInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   name: String
 }
@@ -2746,8 +2741,8 @@ type RoleGetOutput {
 
 input RoleInput {
   Group: GroupInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   name: String
 }
@@ -2812,8 +2807,8 @@ type RoleUpdateOutput {
 
 input RoleUpdateUpdateInput {
   Group: GroupInput
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   isFixture: Boolean
   name: String
 }
@@ -2873,10 +2868,10 @@ input SignInUserUpdateUpdateInput {
   Chat: [ChatInput] = []
   Message: [MessageInput] = []
   PaymentMethod: [PaymentMethodInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   callingCode: String
   chats: [ChatInput] = []
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  created: DateTimeISO
   email: String
   first: String
   isFixture: Boolean
@@ -2964,9 +2959,9 @@ type Socket {
 }
 
 input SocketCreateFormInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   connections: String
-  created: DateTimeISO = "2025-03-18T03:41:56.635Z"
+  created: DateTimeISO = "2025-03-21T03:47:07.343Z"
   isFixture: Boolean
   name: String
 }
@@ -2977,9 +2972,9 @@ input SocketCreateInput {
 }
 
 input SocketCreateManyFormInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   connections: String
-  created: DateTimeISO = "2025-03-18T03:41:56.635Z"
+  created: DateTimeISO = "2025-03-21T03:47:07.343Z"
   isFixture: Boolean
   name: String
 }
@@ -3073,9 +3068,9 @@ type SocketGetOutput {
 }
 
 input SocketInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   connections: String
-  created: DateTimeISO = "2025-03-18T03:41:56.635Z"
+  created: DateTimeISO = "2025-03-21T03:47:07.343Z"
   isFixture: Boolean
   name: String
 }
@@ -3136,9 +3131,9 @@ type SocketUpdateOutput {
 }
 
 input SocketUpdateUpdateInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   connections: String
-  created: DateTimeISO = "2025-03-18T03:41:56.635Z"
+  created: DateTimeISO = "2025-03-21T03:47:07.343Z"
   isFixture: Boolean
   name: String
 }
@@ -3174,10 +3169,10 @@ input UserCreateFormInput {
   Chat: [ChatInput] = []
   Message: [MessageInput] = []
   PaymentMethod: [PaymentMethodInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   callingCode: String
   chats: [ChatInput] = []
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  created: DateTimeISO
   email: String
   first: String
   isFixture: Boolean
@@ -3199,10 +3194,10 @@ input UserCreateManyFormInput {
   Chat: [ChatInput] = []
   Message: [MessageInput] = []
   PaymentMethod: [PaymentMethodInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   callingCode: String
   chats: [ChatInput] = []
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  created: DateTimeISO
   email: String
   first: String
   isFixture: Boolean
@@ -3307,10 +3302,10 @@ input UserInput {
   Chat: [ChatInput] = []
   Message: [MessageInput] = []
   PaymentMethod: [PaymentMethodInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   callingCode: String
   chats: [ChatInput] = []
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  created: DateTimeISO
   email: String
   first: String
   isFixture: Boolean
@@ -3382,10 +3377,10 @@ input UserUpdateUpdateInput {
   Chat: [ChatInput] = []
   Message: [MessageInput] = []
   PaymentMethod: [PaymentMethodInput] = []
-  _id: String = "67d8eb84b4a065fa874b4032"
+  _id: String
   callingCode: String
   chats: [ChatInput] = []
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  created: DateTimeISO
   email: String
   first: String
   isFixture: Boolean
@@ -3408,8 +3403,8 @@ type Utility {
 }
 
 input UtilityCreateFormInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: Boolean
@@ -3425,8 +3420,8 @@ input UtilityCreateInput {
 }
 
 input UtilityCreateManyFormInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: Boolean
@@ -3530,8 +3525,8 @@ type UtilityGetOutput {
 }
 
 input UtilityInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: Boolean
@@ -3600,8 +3595,8 @@ type UtilityUpdateOutput {
 }
 
 input UtilityUpdateUpdateInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: Boolean
@@ -3622,8 +3617,8 @@ type Vendor {
 
 input VendorCreateFormInput {
   Utility: [UtilityInput]
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   imageSrc: String
   isFixture: Boolean
   name: String
@@ -3636,8 +3631,8 @@ input VendorCreateInput {
 
 input VendorCreateManyFormInput {
   Utility: [UtilityInput]
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   imageSrc: String
   isFixture: Boolean
   name: String
@@ -3733,8 +3728,8 @@ type VendorGetOutput {
 
 input VendorInput {
   Utility: [UtilityInput]
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   imageSrc: String
   isFixture: Boolean
   name: String
@@ -3797,8 +3792,8 @@ type VendorUpdateOutput {
 
 input VendorUpdateUpdateInput {
   Utility: [UtilityInput]
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   imageSrc: String
   isFixture: Boolean
   name: String
@@ -3813,8 +3808,8 @@ type linkedUser {
 }
 
 input linkedUserCreateFormInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   externalId: String
   isFixture: Boolean
   type: String
@@ -3826,8 +3821,8 @@ input linkedUserCreateInput {
 }
 
 input linkedUserCreateManyFormInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   externalId: String
   isFixture: Boolean
   type: String
@@ -3927,8 +3922,8 @@ type linkedUserGetOutput {
 }
 
 input linkedUserInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   externalId: String
   isFixture: Boolean
   type: String
@@ -3993,8 +3988,8 @@ type linkedUserUpdateOutput {
 }
 
 input linkedUserUpdateUpdateInput {
-  _id: String = "67d8eb84b4a065fa874b4032"
-  created: DateTimeISO = "2025-03-18T03:41:56.631Z"
+  _id: String
+  created: DateTimeISO
   externalId: String
   isFixture: Boolean
   type: String

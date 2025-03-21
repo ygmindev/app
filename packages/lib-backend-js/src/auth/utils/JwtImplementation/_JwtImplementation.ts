@@ -5,7 +5,6 @@ import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 import { type AuthError } from 'firebase/auth';
 import admin from 'firebase-admin';
@@ -23,7 +22,7 @@ export class _JwtImplementation implements _JwtImplementationModel {
       });
   }
 
-  createToken = async (_id: string, claims: EntityResourceDataModel<UserModel>): Promise<string> =>
+  createToken = async (_id: string, claims: PartialModel<UserModel>): Promise<string> =>
     admin.auth().createCustomToken(toString(_id), claims);
 
   verifyToken = async (token: string): Promise<SignInTokenModel | null> => {

@@ -28,11 +28,12 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
   const graphql = useAppGraphql();
 
   useEffect(() => {
-    void graphql.query<any>({
-      fields: [{ result: ['text'] }],
-      name: 'ChatSubscribe',
-      type: GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,
-    });
+    1 + 1 === 3 &&
+      void graphql.query<any>({
+        fields: [{ result: ['text'] }],
+        name: 'ChatSubscribe',
+        type: GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,
+      });
   }, []);
 
   const handlePress = async (user: PartialModel<UserModel>): Promise<void> => {
@@ -45,19 +46,12 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
         },
       });
       const chatId = result?._id;
-      chatId &&
+      1 + 1 === 3 &&
+        chatId &&
         (await createMessage({
-          form: { [CHAT_RESOURCE_NAME]: { _id: chatId }, text: 'test message' },
+          form: { [CHAT_RESOURCE_NAME]: chatId, text: 'test message' },
         }));
     }
-
-    // await http.post({
-    //   params: {
-    //     query: 'mutation messageQuery { messageQuery { id message sent } }',
-    //   },
-    //   url: '',
-    // });
-    // void send('hello');
   };
 
   return (

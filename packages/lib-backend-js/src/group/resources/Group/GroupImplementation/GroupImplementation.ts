@@ -24,9 +24,9 @@ export class GroupImplementation
         output.result?._id &&
           (await accessCreate({
             form: {
-              [GROUP_RESOURCE_NAME]: { _id: output.result._id },
+              [GROUP_RESOURCE_NAME]: output.result._id,
               [ROLE_RESOURCE_NAME]: [ACCESS_ROLE_MORE.ADMIN],
-              [USER_RESOURCE_NAME]: { _id: userId },
+              [USER_RESOURCE_NAME]: userId,
             },
           }));
       }

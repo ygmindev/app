@@ -122,7 +122,7 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   const { query: remove } = useResourceMethod<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>({
     after: afterRemove,
     before: beforeRemove,
-    fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
+    fields: [{ result: fieldsF }] as unknown as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.REMOVE,
       TType,
       TForm,

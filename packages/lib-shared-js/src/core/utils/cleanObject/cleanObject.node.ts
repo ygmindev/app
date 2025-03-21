@@ -10,16 +10,18 @@ import isEqual from 'lodash/isEqual';
 import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import last from 'lodash/last';
-import reduce from 'lodash/reduce';
+
+// const resolveObjectId = <TType extends unknown>(value: TType): TType =>
+//   value instanceof ObjectId
+//     ? value
+//     : ((isString(value)
+//         ? new ObjectId(value)
+//         : isPlainObject(value)
+//           ? reduce(value as object, (result, v, k) => ({ ...result, [k]: resolveObjectId(v) }), {})
+//           : value) as TType);
 
 const resolveObjectId = <TType extends unknown>(value: TType): TType =>
-  value instanceof ObjectId
-    ? value
-    : ((isString(value)
-        ? new ObjectId(value)
-        : isPlainObject(value)
-          ? reduce(value as object, (result, v, k) => ({ ...result, [k]: resolveObjectId(v) }), {})
-          : value) as TType);
+  (isString(value) ? new ObjectId(value) : value) as TType;
 
 const keyValueTransformer = <TValue extends unknown>(v: TValue, k?: string): TValue => {
   let vF = v;
@@ -30,7 +32,7 @@ const keyValueTransformer = <TValue extends unknown>(v: TValue, k?: string): TVa
       : isPlainObject(vF) && isEqual(Object.keys(vF as object), ['_id'])
         ? resolveObjectId((vF as unknown as EntityResourceModel)._id)
         : isString(vF) && last(k?.split('.'))?.startsWith('_')
-          ? new ObjectId(vF)
+          ? resolveObjectId(vF)
           : vF
   ) as TValue;
 };
@@ -43,11 +45,6 @@ export const cleanObject = <TType extends unknown>(
     {
       ...options,
       keyValueTransformer,
-      // objectTransformer: (v) => {
-      //   const { _id, beforeCreate } = v as EntityResourceModel;
-      //   // !_id && void beforeCreate?.bind(v)();
-      //   return toPlainObject(v) as typeof v;
-      // },
       primitiveTypes: [...(options?.primitiveTypes ?? []), ObjectId],
     },
     depth,

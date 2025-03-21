@@ -29,6 +29,7 @@ import {
   type RequiredEntityData,
   wrap,
 } from '@mikro-orm/mongodb';
+import isString from 'lodash/isString';
 import last from 'lodash/last';
 import toString from 'lodash/toString';
 import { type MongoError, ObjectId } from 'mongodb';
@@ -44,8 +45,10 @@ export const getFilter = <TType extends unknown>(
         [prefix ? `${prefix}.${v.field}` : v.field]: {
           [v.condition ?? FILTER_CONDITION.EQUAL]: last(v.field.split('.'))?.startsWith('_')
             ? isArray(v.value)
-              ? v.value.map((vv) => new ObjectId(`${vv as string}`))
-              : new ObjectId(v.value as string)
+              ? v.value.map((vv) => (isString(vv) ? new ObjectId(vv) : vv))
+              : isString(v.value)
+                ? new ObjectId(v.value)
+                : v.value
             : v.value,
         },
       }),
