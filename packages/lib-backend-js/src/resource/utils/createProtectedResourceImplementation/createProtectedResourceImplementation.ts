@@ -11,19 +11,15 @@ import { type RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { type ProtectedResourceModel } from '@lib/shared/auth/resources/ProtectedResource/ProtectedResource.models';
-import { type PartialModel } from '@lib/shared/core/core.models';
-import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
-import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 import { type GroupImplementationModel } from '@lib/shared/group/resources/Group/GroupImplementation/GroupImplementation.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 
 export const createProtectedResoureImplementation = <
   TType extends ProtectedResourceModel,
@@ -45,7 +41,7 @@ export const createProtectedResoureImplementation = <
           throw new UnauthenticatedError();
         }
         // TODO: fix typing
-        input?.form && (input.form[USER_RESOURCE_NAME] = uid);
+        input?.form && (input.form.createdBy = uid);
       }
       return beforeCreate ? beforeCreate({ input }, context) : input;
     },
@@ -76,17 +72,17 @@ export const createProtectedResoureImplementation = <
       throw new UnauthenticatedError();
     }
 
-    async Group(self: TType): Promise<PartialModel<GroupModel> | null> {
-      if (self[GROUP_RESOURCE_NAME]) {
-        const { result } = await this._groupImplementation.get({
-          filter: [{ field: '_id', value: self[GROUP_RESOURCE_NAME] }],
-        });
-        if (result) {
-          return result;
-        }
-      }
-      throw new NotFoundError('group');
-    }
+    // async Group(self: TType): Promise<PartialModel<GroupModel> | null> {
+    //   if (self[GROUP_RESOURCE_NAME]) {
+    //     const { result } = await this._groupImplementation.get({
+    //       filter: [{ field: '_id', value: self[GROUP_RESOURCE_NAME] }],
+    //     });
+    //     if (result) {
+    //       return result;
+    //     }
+    //   }
+    //   throw new NotFoundError('group');
+    // }
   }
 
   return ProtectedResourceImplementation;

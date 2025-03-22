@@ -4,7 +4,7 @@ import { type ChatResolverModel } from '@lib/backend/chat/resources/Chat/ChatRes
 import { Message } from '@lib/backend/chat/resources/Message/Message';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
-import { createProtectedResourceResolver } from '@lib/backend/resource/utils/createProtectedResourceResolver/createProtectedResourceResolver';
+import { createRelatedResourceResolver } from '@lib/backend/resource/utils/createRelatedResourceResolver/createRelatedResourceResolver';
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
 import { withRoot } from '@lib/backend/resource/utils/withRoot/withRoot';
@@ -16,14 +16,15 @@ import { MessageModel } from '@lib/shared/chat/resources/Message/Message.models'
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withContainer()
 @withResolver({ Resource: () => Chat })
 export class ChatResolver
-  extends createProtectedResourceResolver<ChatModel, ChatFormModel>({
+  extends createRelatedResourceResolver<ChatModel, ChatFormModel, UserModel>({
     Resource: () => Chat,
     ResourceImplementation: ChatImplementation,
-    name: CHAT_RESOURCE_NAME,
+    name: 'chats',
   })
   implements ChatResolverModel
 {

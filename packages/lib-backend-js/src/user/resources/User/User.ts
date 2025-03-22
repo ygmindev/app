@@ -21,9 +21,7 @@ import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.cons
 import { type CardModel } from '@lib/shared/billing/resources/Card/Card.models';
 import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
 import { ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
-import { MESSAGE_RESOURCE_NAME } from '@lib/shared/chat/resources/Message/Message.constants';
 import { MessageModel } from '@lib/shared/chat/resources/Message/Message.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
@@ -46,14 +44,8 @@ export class User extends EntityResource implements UserModel {
   @withManyToManyField({ Resource: () => Card, root: USER_RESOURCE_NAME })
   [CARD_RESOURCE_NAME]?: CollectionModel<CardModel> = new Collection(this);
 
-  @withOneToManyField({ Resource: () => Chat, root: USER_RESOURCE_NAME })
-  [CHAT_RESOURCE_NAME]?: CollectionModel<ChatModel> = new Collection(this);
-
   @withEmbeddedField({ Resource: () => LinkedUser })
   [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
-
-  @withOneToManyField({ Resource: () => Message, root: USER_RESOURCE_NAME })
-  [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel> = new Collection(this);
 
   @withManyToManyField({
     Resource: () => PaymentMethod,
@@ -70,6 +62,9 @@ export class User extends EntityResource implements UserModel {
 
   @withField({ isDatabase: true, isOptional: true, isUnique: true, type: DATA_TYPE.STRING })
   email?: string;
+
+  @withOneToManyField({ Resource: () => Message, root: 'createdBy' })
+  messages?: CollectionModel<MessageModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   paymentMethodPrimary?: string;

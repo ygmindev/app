@@ -7,9 +7,7 @@ import { type CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card
 import { type CardModel } from '@lib/shared/billing/resources/Card/Card.models';
 import { type PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
-import { type CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
 import { type ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
-import { type MESSAGE_RESOURCE_NAME } from '@lib/shared/chat/resources/Message/Message.constants';
 import { type MessageModel } from '@lib/shared/chat/resources/Message/Message.models';
 import {
   type EntityResourceDataModel,
@@ -25,11 +23,7 @@ export type UserModel = EntityResourceModel & {
 
   [CARD_RESOURCE_NAME]?: CollectionModel<CardModel>;
 
-  [CHAT_RESOURCE_NAME]?: CollectionModel<ChatModel>;
-
   [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
-
-  [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel>;
 
   [PAYMENT_METHOD_RESOURCE_NAME]?: CollectionModel<PaymentMethodModel>;
 
@@ -42,6 +36,8 @@ export type UserModel = EntityResourceModel & {
   first?: string;
 
   last?: string;
+
+  messages?: CollectionModel<MessageModel>;
 
   paymentMethodPrimary?: string;
 

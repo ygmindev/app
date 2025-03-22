@@ -1,3 +1,4 @@
+import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 import {
   type CreateResourceImplementationModel,
   type CreateResourceImplementationParamsModel,
@@ -8,17 +9,22 @@ import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type EntityResourceDataModel,
+  type EntityResourceModel,
+} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
 import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
 import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { type ResourceImplementationDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
+import forEach from 'lodash/forEach';
 
 export const createResourceImplementation = <
-  TType,
+  TType extends EntityResourceModel,
   TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 >({
+  Resource,
   afterCreate,
   afterCreateMany,
   afterGet,
@@ -52,7 +58,7 @@ export const createResourceImplementation = <
   class ResourceImplementation
     implements PrototypeModel<CreateResourceImplementationModel<TType, TForm, TRoot>>
   {
-    protected _decorators: ResourceImplementationDecoratorModel<TType, TForm, TRoot> = {
+    decorators: ResourceImplementationDecoratorModel<TType, TForm, TRoot> = {
       afterCreate,
       afterCreateMany,
       afterGet,
@@ -61,7 +67,15 @@ export const createResourceImplementation = <
       afterRemove,
       afterSearch,
       afterUpdate,
-      beforeCreate,
+      beforeCreate: async ({ input }, context) => {
+        const formF = new Resource();
+        forEach(input?.form as unknown as object, (v, k) => (formF[k as keyof typeof formF] = v));
+        formF._id = formF._id ?? new ObjectId();
+        formF.created = formF.created ?? new Date();
+        await formF.beforeCreate?.();
+        const inputF = { ...input, form: formF };
+        return beforeCreate ? beforeCreate({ input: inputF }, context) : inputF;
+      },
       beforeCreateMany,
       beforeGet: async ({ input }, context) => {
         const inputF = { ...input, filter: collapseFilter(input?.filter) };
@@ -95,14 +109,6 @@ export const createResourceImplementation = <
       this.update = this.update.bind(this);
       this.search = this.search.bind(this);
       this.remove = this.remove.bind(this);
-    }
-
-    public get decorators(): ResourceImplementationDecoratorModel<TType, TForm, TRoot> {
-      return this._decorators;
-    }
-
-    public set decorators(value: ResourceImplementationDecoratorModel<TType, TForm, TRoot>) {
-      this._decorators = value;
     }
 
     async create(
