@@ -4,18 +4,18 @@ import {
   type UseOwnResourceModel,
   type UseOwnResourceParamsModel,
 } from '@lib/frontend/user/hooks/useOwnResource/useOwnResource.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import filter from 'lodash/filter';
 
-export const useOwnResource = <TType, TForm = EntityResourceDataModel<TType>>({
+export const useOwnResource = <TType extends EntityResourceModel>({
   afterCreate,
   afterRemove,
   afterUpdate,
   name,
   ...params
-}: UseOwnResourceParamsModel<TType, TForm>): UseOwnResourceModel<TType, TForm> => {
+}: UseOwnResourceParamsModel<TType>): UseOwnResourceModel<TType> => {
   const [currentUser, currentUserSet] = useStore('user.currentUser');
   return useResource({
     ...params,

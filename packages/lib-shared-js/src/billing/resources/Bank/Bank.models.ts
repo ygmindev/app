@@ -1,8 +1,5 @@
 import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
-import {
-  type EntityResourceDataModel,
-  type EntityResourceModel,
-} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
@@ -19,5 +16,3 @@ export type BankModel = EntityResourceModel & {
 
   name: string;
 };
-
-export type BankFormModel = EntityResourceDataModel<BankModel>;

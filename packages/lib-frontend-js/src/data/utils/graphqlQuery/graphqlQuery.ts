@@ -6,11 +6,13 @@ import {
 } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
+import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { print } from 'graphql/language/printer';
 import { gql } from 'graphql-tag';
 import isPlainObject from 'lodash/isPlainObject';
 import map from 'lodash/map';
 import reduce from 'lodash/reduce';
+import toString from 'lodash/toString';
 
 const getGraphqlFields = <TType extends unknown>(
   fields: GraphqlQueryParamsFieldsModel<TType> | GraphqlFragmentFieldModel<TType>,
@@ -27,18 +29,18 @@ const getGraphqlFields = <TType extends unknown>(
           .map((field) =>
             isPlainObject(field)
               ? map(field as object, (v, k) => ` ${k} ${getGraphqlFields(v)} `).join(' ')
-              : ` ${String(field)} `,
+              : ` ${toString(field)} `,
           )
           .join(' ')
   }
 }`;
 
-export const graphqlQuery = <TParams, TResult, TName extends string>({
+export const graphqlQuery = <TResult, TParams, TName extends string = string>({
   fields,
   name,
   params,
-  type,
-}: GraphqlQueryParamsModel<TParams, TResult, TName>): GraphqlQueryModel => {
+  type = GRAPHQL_OPERATION_TYPE.QUERY,
+}: GraphqlQueryParamsModel<TResult, TParams, TName>): GraphqlQueryModel => {
   let [paramsString, paramsKeys] = ['', ''];
   if (params) {
     paramsString = `(${reduce(

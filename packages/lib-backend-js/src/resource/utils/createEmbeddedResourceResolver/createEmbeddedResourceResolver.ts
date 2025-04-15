@@ -9,14 +9,13 @@ import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityR
 
 export const createEmbeddedResourceResolver = <
   TType extends EntityResourceModel,
-  TForm,
   TRoot extends EntityResourceModel,
 >(
-  params: CreateEmbeddedResourceResolverParamsModel<TType, TForm, TRoot>,
-): CreateEmbeddedResourceResolverModel<TType, TForm, TRoot> => {
+  params: CreateEmbeddedResourceResolverParamsModel<TType, TRoot>,
+): CreateEmbeddedResourceResolverModel<TType, TRoot> => {
   @withResolver()
-  class EmbeddedResourceResolver extends (createResourceResolver<TType, TForm, TRoot>(
+  class EmbeddedResourceResolver extends (createResourceResolver<TType, TRoot>(
     params,
   ) as ClassModel) {}
-  return EmbeddedResourceResolver as CreateEmbeddedResourceResolverModel<TType, TForm, TRoot>;
+  return EmbeddedResourceResolver as CreateEmbeddedResourceResolverModel<TType, TRoot>;
 };

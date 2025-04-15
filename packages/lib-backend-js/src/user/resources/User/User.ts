@@ -1,7 +1,6 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { Bank } from '@lib/backend/billing/resources/Bank/Bank';
 import { Card } from '@lib/backend/billing/resources/Card/Card';
-import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethod';
 import { Chat } from '@lib/backend/chat/resources/Chat/Chat';
 import { Message } from '@lib/backend/chat/resources/Message/Message';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
@@ -19,8 +18,6 @@ import { BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.cons
 import { type BankModel } from '@lib/shared/billing/resources/Bank/Bank.models';
 import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
 import { type CardModel } from '@lib/shared/billing/resources/Card/Card.models';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
 import { MessageModel } from '@lib/shared/chat/resources/Message/Message.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
@@ -46,13 +43,6 @@ export class User extends EntityResource implements UserModel {
 
   @withEmbeddedField({ Resource: () => LinkedUser })
   [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
-
-  @withManyToManyField({
-    Resource: () => PaymentMethod,
-    isDatabase: false,
-    root: USER_RESOURCE_NAME,
-  })
-  [PAYMENT_METHOD_RESOURCE_NAME]?: CollectionModel<PaymentMethodModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   callingCode?: string;

@@ -7,12 +7,12 @@ import { type UserResolverModel } from '@lib/backend/user/resources/User/UserRes
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
-import { type UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withContainer()
 @withResolver({ Resource: () => User })
 export class UserResolver
-  extends createEntityResourceResolver<UserModel, UserFormModel>({
+  extends createEntityResourceResolver<UserModel>({
     Resource: () => User,
     ResourceImplementation: UserImplementation,
     access: {

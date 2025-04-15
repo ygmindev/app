@@ -5,15 +5,12 @@ import { type GroupResolverModel } from '@lib/backend/group/resources/Group/Grou
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
 import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
-import {
-  type GroupFormModel,
-  type GroupModel,
-} from '@lib/shared/group/resources/Group/Group.models';
+import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 
 @withContainer()
 @withResolver({ Resource: () => Group })
 export class GroupResolver
-  extends createEntityResourceResolver<GroupModel, GroupFormModel>({
+  extends createEntityResourceResolver<GroupModel>({
     Resource: () => Group,
     ResourceImplementation: GroupImplementation,
     name: GROUP_RESOURCE_NAME,

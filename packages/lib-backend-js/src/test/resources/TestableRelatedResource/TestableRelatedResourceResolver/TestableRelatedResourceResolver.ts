@@ -1,24 +1,18 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
-import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
+import { createRelatedResourceResolver } from '@lib/backend/resource/utils/createRelatedResourceResolver/createRelatedResourceResolver';
 import { TestableRelatedResource } from '@lib/backend/test/resources/TestableRelatedResource/TestableRelatedResource';
 import { TestableRelatedResourceImplementation } from '@lib/backend/test/resources/TestableRelatedResource/TestableRelatedResourceImplementation/TestableRelatedResourceImplementation';
 import { type TestableRelatedResourceResolverModel } from '@lib/backend/test/resources/TestableRelatedResource/TestableRelatedResourceResolver/TestableRelatedResourceResolver.models';
-import { TESTABLE_RELATED_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableRelatedResource/TestableRelatedResource.constants';
-import {
-  type TestableRelatedResourceFormModel,
-  type TestableRelatedResourceModel,
-} from '@lib/shared/test/resources/TestableRelatedResource/TestableRelatedResource.models';
+import { TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
+import { type TestableRelatedResourceModel } from '@lib/shared/test/resources/TestableRelatedResource/TestableRelatedResource.models';
 
 @withContainer()
 @withResolver({ Resource: () => TestableRelatedResource })
 export class TestableRelatedResourceResolver
-  extends createEntityResourceResolver<
-    TestableRelatedResourceModel,
-    TestableRelatedResourceFormModel
-  >({
+  extends createRelatedResourceResolver<TestableRelatedResourceModel, TestableEntityResourceModel>({
     Resource: () => TestableRelatedResource,
     ResourceImplementation: TestableRelatedResourceImplementation,
-    name: TESTABLE_RELATED_RESOURCE_RESOURCE_NAME,
+    name: 'relatedOneToMany',
   })
   implements TestableRelatedResourceResolverModel {}

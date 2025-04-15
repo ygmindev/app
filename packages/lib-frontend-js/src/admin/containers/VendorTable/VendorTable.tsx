@@ -4,16 +4,13 @@ import { VENDOR_RESOURCE_PARAMS } from '@lib/frontend/admin/resources/Vendor/Ven
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import {
-  type VendorFormModel,
-  type VendorModel,
-} from '@lib/shared/admin/resources/Vendor/Vendor.models';
+import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
 
 export const VendorTable: LFCModel<VendorTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const implementation = useVendorResource();
   return (
-    <ResourceTable<VendorModel, VendorFormModel>
+    <ResourceTable<VendorModel>
       {...wrapperProps}
       {...VENDOR_RESOURCE_PARAMS}
       implementation={implementation}

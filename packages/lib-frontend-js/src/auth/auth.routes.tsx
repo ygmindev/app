@@ -1,4 +1,4 @@
-import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
+import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { OAuthRedirectPage } from '@lib/frontend/auth/pages/OAuthRedirectPage/OAuthRedirectPage';
 import { SignInPage } from '@lib/frontend/auth/pages/SignInPage/SignInPage';
 import { REDIRECT } from '@lib/frontend/core/core.constants';

@@ -16,10 +16,9 @@ import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import {
   type EntityManager,
   type FilterQuery,
@@ -89,10 +88,10 @@ export class _Database implements _DatabaseModel {
     throw new UninitializedError('database');
   };
 
-  getRepository = <TType, TForm = EntityResourceDataModel<TType>>({
+  getRepository = <TType extends unknown>({
     name,
-  }: GetRepositoryParamsModel<TType>): RepositoryModel<TType, TForm> => {
-    const implementation: RepositoryModel<TType, TForm> = {
+  }: GetRepositoryParamsModel<TType>): RepositoryModel<TType> => {
+    const implementation: RepositoryModel<TType> = {
       clear: async () => {
         await this.getEntityManager().getRepository(name).nativeDelete({});
       },
@@ -194,9 +193,9 @@ export class _Database implements _DatabaseModel {
           const em = this.getEntityManager();
           const collection = em.getCollection(name);
           const result = await collection.find({ $text: { $search: query } }).toArray();
-          return { result } as unknown as OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
+          return { result } as unknown as ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
         }
-        return { result: [] } as unknown as OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
+        return { result: [] } as unknown as ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
       },
 
       update: async ({ filter, id, options, update } = {}) => {
@@ -210,7 +209,7 @@ export class _Database implements _DatabaseModel {
           });
           options?.isFlush !== false && (await em.persistAndFlush(result));
         }
-        return { result } as OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
+        return { result } as ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
       },
     };
     return implementation;

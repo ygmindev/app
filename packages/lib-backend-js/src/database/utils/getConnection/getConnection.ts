@@ -4,12 +4,12 @@ import {
 } from '@lib/backend/database/utils/getConnection/getConnection.models';
 import { getOffsetWithDefault, offsetToCursor } from 'graphql-relay';
 
-export const getConnection = async <TType, TForm, TRoot = undefined>({
+export const getConnection = async <TType, TRoot = undefined>({
   count,
   getMany,
   input = {},
   pagination = {},
-}: GetConnectionParamsModel<TType, TForm, TRoot>): Promise<GetConnectionModel<TType, TRoot>> => {
+}: GetConnectionParamsModel<TType, TRoot>): Promise<GetConnectionModel<TType, TRoot>> => {
   const { after, before, first, last } = pagination;
   const beforeOffset = getOffsetWithDefault(before, count);
   const afterOffset = getOffsetWithDefault(after, -1);

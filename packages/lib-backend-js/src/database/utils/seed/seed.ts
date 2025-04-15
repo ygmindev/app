@@ -17,9 +17,9 @@ export const seed = async (): Promise<SeedModel> => {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       require(implementation);
     }
-    const implementation = Container.get<
-      ResourceImplementationModel<unknown, unknown, EntityResourceModel>
-    >(`${name}Implementation`);
+    const implementation = Container.get<ResourceImplementationModel<unknown, EntityResourceModel>>(
+      `${name}Implementation`,
+    );
     for (const form of data?.() ?? []) {
       let rootF = await root?.();
       rootF && (rootF = toString(rootF));

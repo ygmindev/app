@@ -27,7 +27,7 @@ export const createFilter = <TType extends unknown>({
     @withField({ type: DATA_TYPE.STRING })
     condition!: FilterConditionModel;
 
-    @withField({ type: DATA_TYPE.DATE })
+    @withField({ Resource: () => Date })
     dateValue?: Date;
 
     @withField({ type: DATA_TYPE.STRING })

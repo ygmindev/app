@@ -6,7 +6,10 @@ import { build } from '@tool/task/serverless/templates/build/build';
 const tasks = nodeTasks({
   additionalTasks: [
     build,
-    { ...dev, overrides: () => ({ ...dev.overrides(), script: 'src/index.ts' }) },
+    {
+      ...dev,
+      overrides: () => ({ ...dev.overrides?.(), script: 'src/index.ts' }),
+    } as TaskParamsModel<unknown>,
   ],
 }) satisfies Array<TaskParamsModel<unknown>>;
 

@@ -3,9 +3,9 @@ import {
   type FLEX_JUSTIFY,
 } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
-type FlexAlignModel = `${FLEX_ALIGN}`;
+export type FlexAlignModel = `${FLEX_ALIGN}`;
 
-type FlexJustifyModel = `${FLEX_JUSTIFY}`;
+export type FlexJustifyModel = `${FLEX_JUSTIFY}`;
 
 export type FlexStylerParamsModel = {
   align?: FlexAlignModel;

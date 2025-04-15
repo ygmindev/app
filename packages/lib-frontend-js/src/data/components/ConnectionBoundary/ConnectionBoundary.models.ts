@@ -3,14 +3,14 @@ import {
   type DataBoundaryRefModel,
 } from '@lib/frontend/data/components/DataBoundary/DataBoundary.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
 export type ConnectionBoundaryPropsModel<TType, TRoot = undefined> = DataBoundaryPropsModel<
-  InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType>,
-  OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>
+  ResourceInputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
+  ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>
 >;
 
 export type ConnectionBoundaryRefModel<TType, TRoot = undefined> = DataBoundaryRefModel<
-  OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>
+  ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>
 >;

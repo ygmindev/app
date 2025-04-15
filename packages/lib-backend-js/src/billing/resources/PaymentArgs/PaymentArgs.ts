@@ -1,13 +1,17 @@
 import { ProductItem } from '@lib/backend/commerce/utils/ProductItem/ProductItem';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { PAYMENT_ARGS } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.constants';
 import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ name: 'PaymentArgs' })
+@withEntity({ name: PAYMENT_ARGS })
 export class PaymentArgs implements PaymentArgsModel {
+  @withField({ isOptional: true, type: DATA_TYPE.STRING })
+  paymentMethodId?: string;
+
   @withField({
     Resource: () => ProductItem,
     isArray: true,
@@ -15,7 +19,4 @@ export class PaymentArgs implements PaymentArgsModel {
     type: PROPERTY_TYPE.RESOURCE,
   })
   products?: Array<PartialModel<ProductItemModel>>;
-
-  @withField({ isOptional: true, type: DATA_TYPE.STRING })
-  paymentMethodId?: string;
 }

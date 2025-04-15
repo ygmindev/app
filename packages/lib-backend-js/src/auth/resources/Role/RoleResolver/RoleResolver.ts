@@ -6,13 +6,13 @@ import { Group } from '@lib/backend/group/resources/Group/Group';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEmbeddedResourceResolver } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
 import { ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constants';
-import { type RoleFormModel, type RoleModel } from '@lib/shared/auth/resources/Role/Role.models';
+import { type RoleModel } from '@lib/shared/auth/resources/Role/Role.models';
 import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 
 @withContainer()
 @withResolver({ Resource: () => Role })
 export class RoleResolver
-  extends createEmbeddedResourceResolver<RoleModel, RoleFormModel, GroupModel>({
+  extends createEmbeddedResourceResolver<RoleModel, GroupModel>({
     Resource: () => Role,
     ResourceImplementation: RoleImplementation,
     RootResource: () => Group,

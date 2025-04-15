@@ -1,7 +1,7 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
-import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
+import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';

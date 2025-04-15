@@ -13,7 +13,7 @@ import { graphql } from 'graphql';
 export const useAppGraphql = ({ ...params }: UseAppGraphqlParamsModel = {}): UseAppGraphqlModel =>
   useAppGraphqlBase({
     ...params,
-    query: async <TParams, TResult, TName extends string = string>({
+    query: async <TResult, TParams, TName extends string = string>({
       query,
       variables,
     }: GraphqlParamsModel<TParams>) =>

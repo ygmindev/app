@@ -21,7 +21,7 @@ describe(displayName, () => {
   });
 
   test('throws with not injected', async () => {
-    expect(() => Container.get(WithoutContainerFixture)).toThrowError();
+    expect(() => Container.get(WithoutContainerFixture)).toThrow();
   });
 
   test('works with set', async () => {

@@ -5,25 +5,20 @@ import {
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
 export const withAuthorizer =
-  <
-    TMethod extends ResourceMethodTypeModel,
-    TType,
-    TForm = EntityResourceDataModel<TType>,
-    TRoot = undefined,
-  >({
+  <TMethod extends ResourceMethodTypeModel, TType extends EntityResourceModel, TRoot = undefined>({
     authorizer,
-  }: WithAuthorizerParamsModel<TMethod, TType, TForm, TRoot>): WithAuthorizerModel =>
+  }: WithAuthorizerParamsModel<TMethod, TType, TRoot>): WithAuthorizerModel =>
   (_target, _propertyKey, descriptor) => {
     if (authorizer) {
       type AuthorizerModel = (
-        input?: InputModel<TMethod, TType, TForm>,
+        input?: ResourceInputModel<TMethod, TType>,
         context?: RequestContextModel,
-      ) => Promise<OutputModel<TMethod, TType, TRoot>>;
+      ) => Promise<ResourceOutputModel<TMethod, TType, TRoot>>;
       const original = descriptor.value as AuthorizerModel;
       (descriptor as { value: AuthorizerModel }).value = async function (input, context) {
         if (authorizer({ context, input })) {

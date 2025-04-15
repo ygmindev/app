@@ -17,22 +17,15 @@ import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
 import { type GroupImplementationModel } from '@lib/shared/group/resources/Group/GroupImplementation/GroupImplementation.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
-export const createProtectedResoureImplementation = <
-  TType extends ProtectedResourceModel,
-  TForm extends EntityResourceDataModel<TType> = EntityResourceDataModel<TType>,
->({
+export const createProtectedResoureImplementation = <TType extends ProtectedResourceModel>({
   beforeCreate,
   isAuthored = true,
   ...params
-}: CreateProtectedResoureImplementationParamsModel<
-  TType,
-  TForm
->): CreateProtectedResoureImplementationModel<TType, TForm> => {
-  class ProtectedResourceImplementation extends createEntityResourceImplementation<TType, TForm>({
+}: CreateProtectedResoureImplementationParamsModel<TType>): CreateProtectedResoureImplementationModel<TType> => {
+  class ProtectedResourceImplementation extends createEntityResourceImplementation<TType>({
     ...params,
     beforeCreate: async ({ input }, context) => {
       if (isAuthored) {
@@ -50,9 +43,9 @@ export const createProtectedResoureImplementation = <
 
     @withAccess({ access: ACCESS_LEVEL.PROTECTED })
     async getManyProtected(
-      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm> = {},
+      input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType> = {},
       context?: RequestContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
       const uid = context?.user?._id;
       if (uid) {
         const accessAll = (

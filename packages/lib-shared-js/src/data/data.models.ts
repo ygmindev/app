@@ -11,6 +11,8 @@ export type DataTypeModel = `${DATA_TYPE}`;
 
 export type DataTypeMoreModel = `${DATA_TYPE_MORE}`;
 
+export type PropertyTypeModel = `${PROPERTY_TYPE}`;
+
 export type FieldTypeModel = `${PROPERTY_TYPE}` | DataTypeModel;
 
 export type FormattableTypeModel = FieldTypeModel | DataTypeMoreModel;

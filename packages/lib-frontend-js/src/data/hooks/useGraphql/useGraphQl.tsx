@@ -19,7 +19,7 @@ export const useGraphql = ({ query, ...params }: UseGraphqlParamsModel = {}): Us
 
   const queryF =
     query ??
-    (async <TParams, TResult, TName extends string = string>({
+    (async <TResult, TParams, TName extends string = string>({
       isStreaming,
       ...queryParams
     }: GraphqlParamsModel<TParams>): Promise<GraphqlHttpResponseModel<TResult, TName> | null> =>
@@ -30,21 +30,21 @@ export const useGraphql = ({ query, ...params }: UseGraphqlParamsModel = {}): Us
       }) as GraphqlHttpResponseModel<TResult, TName>);
 
   return {
-    query: async <TParams, TResult, TName extends string = string>({
+    query: async <TResult, TParams, TName extends string = string>({
       fields,
       name,
-      params: queryParams,
+      params,
       type,
       variables,
-    }: GraphqlQueryHttpParamsModel<TParams, TResult, TName>): Promise<TResult | null> => {
-      const queryString = graphqlQuery<TParams, TResult, TName>({
+    }: GraphqlQueryHttpParamsModel<TResult, TParams, TName>): Promise<TResult | null> => {
+      const queryString = graphqlQuery<TResult, TParams, TName>({
         fields,
         name,
-        params: queryParams,
+        params,
         type,
       });
       const variablesF = variables && cleanObject(variables);
-      const result = await queryF<TParams, TResult, TName>({
+      const result = await queryF<TResult, TParams, TName>({
         isStreaming: type === GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,
         query: queryString,
         variables: variablesF,

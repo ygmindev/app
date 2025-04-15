@@ -39,7 +39,7 @@ import {
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 import { forwardRef, useRef } from 'react';
@@ -58,7 +58,7 @@ export const PaymentMethodInput: RLFCModel<
   const refF =
     useRef<
       DataBoundaryRefModel<
-        OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>
+        ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>
       >
     >(null);
 
@@ -71,7 +71,7 @@ export const PaymentMethodInput: RLFCModel<
   });
 
   const handleQuery = async (): Promise<
-    OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>
+    ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>
   > => {
     const output = await getMany();
     if (!valueControlled) {

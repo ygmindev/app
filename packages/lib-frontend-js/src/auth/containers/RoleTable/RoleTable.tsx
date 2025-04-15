@@ -4,14 +4,14 @@ import { ROLE_RESOURCE_PARAMS } from '@lib/frontend/auth/resources/Role/Role.con
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type RoleFormModel, type RoleModel } from '@lib/shared/auth/resources/Role/Role.models';
+import { type RoleModel } from '@lib/shared/auth/resources/Role/Role.models';
 import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 
 export const RoleTable: LFCModel<RoleTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const implementation = useRoleResource();
   return (
-    <ResourceTable<RoleModel, RoleFormModel, GroupModel>
+    <ResourceTable<RoleModel, GroupModel>
       {...wrapperProps}
       {...ROLE_RESOURCE_PARAMS}
       implementation={implementation}

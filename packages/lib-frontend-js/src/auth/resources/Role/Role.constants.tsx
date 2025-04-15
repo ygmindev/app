@@ -4,6 +4,6 @@ import { type RoleModel } from '@lib/shared/auth/resources/Role/Role.models';
 import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 
 export const ROLE_RESOURCE_PARAMS = {
-  fields: [{ id: '_group' }, { id: 'name' }],
+  fields: [{ id: 'Group' }, { id: 'name' }],
   name: ROLE_RESOURCE_NAME,
 } satisfies ResourceParamsModel<RoleModel, GroupModel>;

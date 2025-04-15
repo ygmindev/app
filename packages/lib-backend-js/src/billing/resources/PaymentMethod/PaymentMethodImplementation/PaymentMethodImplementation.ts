@@ -1,14 +1,12 @@
 import { BankImplementation } from '@lib/backend/billing/resources/Bank/BankImplementation/BankImplementation';
 import { CardImplementation } from '@lib/backend/billing/resources/Card/CardImplementation/CardImplementation';
-import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethod';
 import { StripeAdminImplementation } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation';
 import { type StripeAdminImplementationModel } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.models';
 import { ProductImplementation } from '@lib/backend/commerce/resources/Product/ProductImplementation/ProductImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
-import { createRelatedResourceImplementation } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation';
 import { LinkedUserImplementation } from '@lib/backend/user/resources/LinkedUser/LinkedUserImplementation/LinkedUserImplementation';
-import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
+import { RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { type ChargeModel } from '@lib/shared/billing/billing.models';
 import { type BankImplementationModel } from '@lib/shared/billing/resources/Bank/BankImplementation/BankImplementation.models';
@@ -17,10 +15,7 @@ import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import {
-  PaymentMethodFormModel,
-  type PaymentMethodModel,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodImplementationModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
 import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
@@ -32,33 +27,14 @@ import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundErr
 import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { IdArgsModel } from '@lib/shared/resource/utils/IdArgs/IdArgs.models';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { LINKED_USER_TYPE } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import { type LinkedUserImplementationModel } from '@lib/shared/user/resources/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
-import { UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
-import reduce from 'lodash/reduce';
 import round from 'lodash/round';
 
 @withContainer({ name: `${PAYMENT_METHOD_RESOURCE_NAME}Implementation` })
-export class PaymentMethodImplementation
-  extends createRelatedResourceImplementation<
-    PaymentMethodModel,
-    PaymentMethodFormModel,
-    UserModel,
-    UserFormModel
-  >({
-    Resource: PaymentMethod,
-    RootImplementation: UserImplementation,
-    name: PAYMENT_METHOD_RESOURCE_NAME,
-    root: USER_RESOURCE_NAME,
-  })
-  implements PaymentMethodImplementationModel
-{
+export class PaymentMethodImplementation implements PaymentMethodImplementationModel {
   @withInject(LinkedUserImplementation)
   protected linkedUserImplementation!: LinkedUserImplementationModel;
 
@@ -74,63 +50,44 @@ export class PaymentMethodImplementation
   @withInject(StripeAdminImplementation)
   protected stripeAdminImplementation!: StripeAdminImplementationModel;
 
-  async getMany(
-    input: InputModel<
-      RESOURCE_METHOD_TYPE.GET_MANY,
-      PaymentMethodModel,
-      PaymentMethodFormModel,
-      UserModel
-    > = {},
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>> {
-    if (input.root) {
+  async getAll(context?: RequestContextModel): Promise<Array<Partial<PaymentMethodModel>>> {
+    const userId = context?.user?._id;
+    if (userId) {
       const fields: Array<StringKeyModel<PaymentMethodModel>> = [
         '_id',
         'externalId',
         'last4',
         'name',
       ];
-      const project = reduce(fields, (result, v) => ({ ...result, [v]: true }), {});
-      const { result: banks } = await this.bankImplementation.getMany({
-        filter: [],
-        // options: { project },
-        root: input.root,
-      });
-      const { result: cards } = await this.cardImplementation.getMany({
-        filter: [],
-        // options: { project },
-        root: input.root,
-      });
-      return {
-        result: [
-          ...(banks?.map((v) => ({ ...pick(v, fields), type: PAYMENT_METHOD_TYPE.BANK })) ?? []),
-          ...(cards?.map((v) => ({ ...pick(v, fields), type: PAYMENT_METHOD_TYPE.CARD })) ?? []),
-        ],
-      };
+      const { result: banks } = await this.bankImplementation.getMany({ root: userId });
+      const { result: cards } = await this.cardImplementation.getMany({ root: userId });
+      return [
+        ...(banks?.map((v) => ({ ...pick(v, fields), type: PAYMENT_METHOD_TYPE.BANK })) ?? []),
+        ...(cards?.map((v) => ({ ...pick(v, fields), type: PAYMENT_METHOD_TYPE.CARD })) ?? []),
+      ];
     }
     throw new UnauthenticatedError();
   }
 
-  async createToken(
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, PaymentArgsModel, UserModel>,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
-    if (input?.root) {
+  async createToken(input: PaymentArgsModel, context?: RequestContextModel): Promise<string> {
+    const userId = context?.user?._id;
+    if (userId) {
       let { result: linkedUser } = await this.linkedUserImplementation.get({
         filter: [{ field: 'type', value: LINKED_USER_TYPE.STRIPE }],
-        // options: { project: { _id: true, externalId: true } },
-        root: input.root,
+        root: userId,
       });
       if (!linkedUser) {
         const id = await this.stripeAdminImplementation.createCustomer();
         const { result: linkedUserNew } = await this.linkedUserImplementation.create({
           form: { externalId: id, type: LINKED_USER_TYPE.STRIPE },
-          root: input.root,
+          root: userId,
         });
         linkedUserNew && (linkedUser = linkedUserNew);
       }
 
       if (linkedUser?.externalId) {
         let charge: ChargeModel | undefined;
-        const products = input.form?.products;
+        const products = input?.products;
         if (products) {
           const productsGrouped = groupBy(products, ({ productId }) => productId ?? '');
           const productsF = (
@@ -142,7 +99,6 @@ export class PaymentMethodImplementation
                   value: Object.keys(productsGrouped),
                 },
               ],
-              // options: { project: { [PRICING_RESOURCE_NAME]: true } },
             })
           )?.result;
 
@@ -164,37 +120,37 @@ export class PaymentMethodImplementation
             2,
           );
 
-          const price = getPrice(input.form?.products);
+          const price = getPrice(input?.products);
           if (price !== amount) {
             throw new InvalidArgumentError(`prices do not match: ${price} vs. ${amount}`);
           }
           charge = { amount, currency: 'usd' };
         }
-        return {
-          result: await this.stripeAdminImplementation.createToken({
-            charge,
-            paymentMethodId: input.form?.paymentMethodId,
-            userId: linkedUser.externalId,
-          }),
-        };
+        const token = await this.stripeAdminImplementation.createToken({
+          charge,
+          paymentMethodId: input?.paymentMethodId,
+          userId: linkedUser.externalId,
+        });
+        if (token) {
+          return token;
+        }
+        throw new Error('failed to create token');
       }
       throw new NotFoundError('linked user');
     }
     throw new UnauthenticatedError();
   }
 
-  async removeToken(
-    input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, boolean, IdArgsModel, UserModel>,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, boolean, UserModel>> {
-    if (input?.root) {
-      const id = input.filter?.[0]?.value as string;
+  async removeToken(input: IdArgsModel, context?: RequestContextModel): Promise<boolean> {
+    const userId = context?.user?._id;
+    if (userId) {
+      const { id } = input;
       if (id) {
-        console.warn(id);
         void this.stripeAdminImplementation.removeToken(id);
       } else {
         throw new NotFoundError('id');
       }
-      return { result: true };
+      return true;
     }
     throw new UnauthenticatedError();
   }

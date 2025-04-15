@@ -3,21 +3,13 @@ import {
   type GetFingerprintInputParamsModel,
 } from '@lib/backend/billing/utils/getFingerprintInput/getFingerprintInput.models';
 import { StripeAdminImplementation } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation';
-import {
-  type PaymentMethodFormModel,
-  type PaymentMethodModel,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 
-export const getFingerprintInput = async <
-  TType extends PaymentMethodModel,
-  TForm extends PaymentMethodFormModel,
->({
+export const getFingerprintInput = async <TType extends PaymentMethodModel>({
   input,
   type,
-}: GetFingerprintInputParamsModel<TType, TForm>): Promise<
-  GetFingerprintInputModel<TType, TForm>
-> => {
+}: GetFingerprintInputParamsModel<TType>): Promise<GetFingerprintInputModel<TType>> => {
   const id = input?.form?.externalId;
   const fingerprint =
     id && (await Container.get(StripeAdminImplementation).getFingerprint({ id, type }));

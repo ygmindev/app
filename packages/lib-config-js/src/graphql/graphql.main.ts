@@ -1,6 +1,5 @@
 import { UtilityResolver } from '@lib/backend/admin/resources/Utility/UtilityResolver/UtilityResolver';
 import { VendorResolver } from '@lib/backend/admin/resources/Vendor/VendorResolver/VendorResolver';
-import { DeliveryResolver } from '@lib/backend/aroom/resources/Delivery/DeliveryResolver/DeliveryResolver';
 import { AccessResolver } from '@lib/backend/auth/resources/Access/AccessResolver/AccessResolver';
 import { OtpResolver } from '@lib/backend/auth/resources/Otp/OtpResolver/OtpResolver';
 import { RoleResolver } from '@lib/backend/auth/resources/Role/RoleResolver/RoleResolver';
@@ -16,7 +15,6 @@ import { ProductResolver } from '@lib/backend/commerce/resources/Product/Product
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { GroupResolver } from '@lib/backend/group/resources/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '@lib/backend/http/resources/Socket/SocketResolver/SocketResolver';
-import { MapRouteResolver } from '@lib/backend/map/resources/MapRoute/MapRouteResolver/MapRouteResolver';
 import { SnapshotResolver } from '@lib/backend/test/resources/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '@lib/backend/user/resources/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '@lib/backend/user/resources/User/UserResolver/UserResolver';
@@ -52,9 +50,7 @@ export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
         UserResolver,
         VendorResolver,
         UtilityResolver,
-        DeliveryResolver,
-        MapRouteResolver,
-        process.env.NODE_ENV !== 'production' && SnapshotResolver,
+        ...(process.env.NODE_ENV !== 'production' ? [SnapshotResolver] : []),
       ]),
 
       schemaDir: fromStatic('graphql/main.gql'),

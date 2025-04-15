@@ -2,18 +2,12 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { TestableEntityResource } from '@lib/backend/test/resources/TestableEntityResource/TestableEntityResource';
 import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
-import {
-  type TestableEntityResourceFormModel,
-  type TestableEntityResourceModel,
-} from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
+import { type TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 import { type TestableEntityResourceImplementationModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation.models';
 
 @withContainer({ name: `${TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME}Implementation` })
 export class TestableEntityResourceImplementation
-  extends createEntityResourceImplementation<
-    TestableEntityResourceModel,
-    TestableEntityResourceFormModel
-  >({
+  extends createEntityResourceImplementation<TestableEntityResourceModel>({
     Resource: TestableEntityResource,
     afterCreate: async ({ output }) => output,
     afterGet: async ({ output }) => output,

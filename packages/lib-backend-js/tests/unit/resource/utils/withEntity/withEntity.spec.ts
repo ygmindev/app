@@ -6,7 +6,7 @@ const { displayName } = withTest({ withEntity });
 
 describe(displayName, () => {
   test('throws with missing name', async () => {
-    expect(() => withEntity({})).toThrowError(NotFoundError);
-    expect(() => withEntity({ isAbstract: true })).not.toThrowError(NotFoundError);
+    expect(() => withEntity({})).toThrow(NotFoundError);
+    expect(() => withEntity({ isAbstract: true })).not.toThrow(NotFoundError);
   });
 });

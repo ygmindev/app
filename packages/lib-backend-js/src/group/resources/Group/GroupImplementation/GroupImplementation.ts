@@ -6,16 +6,13 @@ import { ACCESS_ROLE_MORE } from '@lib/shared/auth/resources/Access/Access.const
 import { ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
-import {
-  type GroupFormModel,
-  type GroupModel,
-} from '@lib/shared/group/resources/Group/Group.models';
+import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 import { type GroupImplementationModel } from '@lib/shared/group/resources/Group/GroupImplementation/GroupImplementation.models';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 
 @withContainer({ name: `${GROUP_RESOURCE_NAME}Implementation` })
 export class GroupImplementation
-  extends createEntityResourceImplementation<GroupModel, GroupFormModel>({
+  extends createEntityResourceImplementation<GroupModel>({
     Resource: Group,
     afterCreate: async ({ output }, context) => {
       const userId = context?.user?._id;

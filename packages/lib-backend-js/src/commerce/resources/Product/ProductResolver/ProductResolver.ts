@@ -6,15 +6,12 @@ import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver'
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { PRODUCT_RESOURCE_NAME } from '@lib/shared/commerce/resources/Product/Product.constants';
-import {
-  type ProductFormModel,
-  type ProductModel,
-} from '@lib/shared/commerce/resources/Product/Product.models';
+import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
 
 @withContainer()
 @withResolver({ Resource: () => Product })
 export class ProductResolver
-  extends createEntityResourceResolver<ProductModel, ProductFormModel>({
+  extends createEntityResourceResolver<ProductModel>({
     Resource: () => Product,
     ResourceImplementation: ProductImplementation,
     access: { default: ACCESS_LEVEL.PUBLIC },

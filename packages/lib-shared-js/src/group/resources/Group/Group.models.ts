@@ -4,10 +4,7 @@ import { type AccessModel } from '@lib/shared/auth/resources/Access/Access.model
 import { type ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constants';
 import { type RoleModel } from '@lib/shared/auth/resources/Role/Role.models';
 import { type GROUP_TYPE } from '@lib/shared/group/resources/Group/Group.constants';
-import {
-  type EntityResourceDataModel,
-  type EntityResourceModel,
-} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type GroupModel = EntityResourceModel & {
   [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel>;
@@ -20,7 +17,5 @@ export type GroupModel = EntityResourceModel & {
 
   types?: Array<GroupTypeModel>;
 };
-
-export type GroupFormModel = EntityResourceDataModel<GroupModel>;
 
 export type GroupTypeModel = `${GROUP_TYPE}`;

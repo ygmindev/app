@@ -8,7 +8,7 @@ import { type UseResourceMethodParamsModel } from '@lib/frontend/resource/hooks/
 import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export const toGraphqlParamsFields = <TType,>(
   fields?: ResourceFieldsModel<TType>,
@@ -17,7 +17,7 @@ export const toGraphqlParamsFields = <TType,>(
     field.fields ? { [field.id]: toGraphqlParamsFields(field.fields) } : field.id,
   ) as GraphqlQueryParamsFieldsModel<TType>) ?? [];
 
-export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
+export const useResource = <TType extends EntityResourceModel, TRoot = undefined>({
   afterCreate,
   afterCreateMany,
   afterGet,
@@ -37,20 +37,19 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   fields,
   name,
   root,
-}: UseResourceParamsModel<TType, TForm, TRoot>): UseResourceModel<TType, TForm, TRoot> => {
+}: UseResourceParamsModel<TType, TRoot>): UseResourceModel<TType, TRoot> => {
   const fieldsF = toGraphqlParamsFields<TType>([
     { id: '_id' as StringKeyModel<TType> },
     ...(fields ?? []),
   ]);
 
-  const { query: get } = useResourceMethod<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>({
+  const { query: get } = useResourceMethod<RESOURCE_METHOD_TYPE.GET, TType, TRoot>({
     after: afterGet,
     // TODO: solution until Graphql oneOf / union input
     before: beforeGet,
     fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.GET,
       TType,
-      TForm,
       TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.GET,
@@ -58,13 +57,12 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     root,
   });
 
-  const { query: create } = useResourceMethod<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>({
+  const { query: create } = useResourceMethod<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>({
     after: afterCreate,
     before: beforeCreate,
     fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.CREATE,
       TType,
-      TForm,
       TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.CREATE,
@@ -72,18 +70,12 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     root,
   });
 
-  const { query: createMany } = useResourceMethod<
-    RESOURCE_METHOD_TYPE.CREATE_MANY,
-    TType,
-    TForm,
-    TRoot
-  >({
+  const { query: createMany } = useResourceMethod<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>({
     after: afterCreateMany,
     before: beforeCreateMany,
     fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.CREATE_MANY,
       TType,
-      TForm,
       TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.CREATE_MANY,
@@ -91,13 +83,12 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     root,
   });
 
-  const { query: getMany } = useResourceMethod<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>({
+  const { query: getMany } = useResourceMethod<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>({
     after: afterGetMany,
     before: beforeGetMany,
     fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.GET_MANY,
       TType,
-      TForm,
       TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.GET_MANY,
@@ -105,13 +96,12 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     root,
   });
 
-  const { query: update } = useResourceMethod<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>({
+  const { query: update } = useResourceMethod<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>({
     after: afterUpdate,
     before: beforeUpdate,
     fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.UPDATE,
       TType,
-      TForm,
       TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.UPDATE,
@@ -119,13 +109,12 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     root,
   });
 
-  const { query: remove } = useResourceMethod<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>({
+  const { query: remove } = useResourceMethod<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>({
     after: afterRemove,
     before: beforeRemove,
     fields: [{ result: fieldsF }] as unknown as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.REMOVE,
       TType,
-      TForm,
       TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.REMOVE,
@@ -133,13 +122,12 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     root,
   });
 
-  const { query: search } = useResourceMethod<RESOURCE_METHOD_TYPE.SEARCH, TType, TForm, TRoot>({
+  const { query: search } = useResourceMethod<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>({
     after: afterSearch,
     before: beforeSearch,
     fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.SEARCH,
       TType,
-      TForm,
       TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.SEARCH,
@@ -150,7 +138,6 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
   const { query: getConnection } = useResourceMethod<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
     TType,
-    TForm,
     TRoot
   >({
     after: afterGetConnection,
@@ -158,7 +145,6 @@ export const useResource = <TType, TForm = EntityResourceDataModel<TType>, TRoot
     fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
       TType,
-      TForm,
       TRoot
     >['fields'],
     method: RESOURCE_METHOD_TYPE.GET_CONNECTION,

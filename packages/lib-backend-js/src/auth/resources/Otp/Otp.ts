@@ -5,23 +5,8 @@ import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
 import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
 import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';
-import { type OtpFormModel, type OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
+import { type OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
-
-@withEntity({ name: `${OTP_RESOURCE_NAME}Form` })
-export class OtpForm implements OtpFormModel {
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
-  callingCode?: string;
-
-  @withField({ type: DATA_TYPE.BOOLEAN })
-  isCheckExists?: boolean;
-
-  @withField({ isDatabase: true, isUnique: true, type: DATA_TYPE.STRING })
-  email?: string;
-
-  @withField({ isDatabase: true, isUnique: true, type: DATA_TYPE.STRING })
-  phone?: string;
-}
 
 @withEntity({
   indices: [{ keys: ['email', 'phone'], type: 'text' }],
@@ -30,9 +15,9 @@ export class OtpForm implements OtpFormModel {
 })
 export class Otp extends EntityResource implements OtpModel {
   @withField({
+    Resource: () => Date,
     expire: DATABASE_CONFIG.expireSeconds,
     isDatabase: true,
-    type: DATA_TYPE.DATE,
   })
   created: Date = new Date();
 
@@ -42,9 +27,12 @@ export class Otp extends EntityResource implements OtpModel {
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   email?: string;
 
+  @withField({ type: DATA_TYPE.BOOLEAN })
+  isCheckExists?: boolean;
+
   @withAccess({ access: ACCESS_LEVEL.RESTRICTED })
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
-  otp!: string;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  otp?: string;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   phone?: string;

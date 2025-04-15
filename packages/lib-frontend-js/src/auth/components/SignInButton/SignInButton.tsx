@@ -1,4 +1,4 @@
-import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
+import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { type SignInButtonPropsModel } from '@lib/frontend/auth/components/SignInButton/SignInButton.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { type LFCModel } from '@lib/frontend/core/core.models';

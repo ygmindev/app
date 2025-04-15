@@ -1,4 +1,4 @@
-import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
+import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import { type AuthProviderPropsModel } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';

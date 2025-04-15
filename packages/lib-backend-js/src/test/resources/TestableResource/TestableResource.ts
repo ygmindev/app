@@ -11,7 +11,7 @@ export class TestableResource extends EntityResource implements TestableResource
     expire: DATABASE_CONFIG.expireSeconds,
     isDatabase: true,
     isOptional: true,
-    type: DATA_TYPE.DATE,
+    Resource: () => Date,
   })
   date?: Date = new Date();
 

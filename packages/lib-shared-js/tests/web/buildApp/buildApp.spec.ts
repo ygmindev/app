@@ -1,5 +1,5 @@
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { buildApp } from '@lib/shared/web/buildApp/buildApp';
+import { buildApp } from '@lib/shared/web/utils/buildApp/buildApp';
 
 const { displayName } = withTest({ buildApp });
 

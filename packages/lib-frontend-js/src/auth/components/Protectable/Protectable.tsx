@@ -1,4 +1,4 @@
-import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
+import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { type ProtectablePropsModel } from '@lib/frontend/auth/components/Protectable/Protectable.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { type FCModel } from '@lib/frontend/core/core.models';

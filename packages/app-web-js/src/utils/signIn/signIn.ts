@@ -1,6 +1,6 @@
 import { type SignInModel, type SignInParamsModel } from '@app/web/utils/signIn/signIn.models';
-import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
+import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
 

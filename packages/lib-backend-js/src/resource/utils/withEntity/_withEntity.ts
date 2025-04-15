@@ -16,9 +16,11 @@ export const _withEntity = <TType extends unknown>({
   name,
 }: _WithEntityParamsModel<TType> = {}): _WithEntityModel =>
   ((Base: TType) => {
+    const isInputOnly = name?.includes('Input');
     const nameF = name ?? (Base as ClassModel).name;
-    isSchema && ObjectType(nameF)(Base as unknown as ClassModel);
-    isSchemaInput && InputType(`${nameF}Input`)(Base as unknown as ClassModel);
+    !isInputOnly && isSchema && ObjectType(nameF)(Base as unknown as ClassModel);
+    isSchemaInput &&
+      InputType(isInputOnly ? nameF : `${nameF}Input`)(Base as unknown as ClassModel);
     let BaseF = isDatabase
       ? (isEmbeddable ? Embeddable : Entity)({
           abstract: isAbstract,

@@ -21,4 +21,4 @@ export type ResultModel<
       ? Array<PartialModel<TType>>
       : TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION
         ? ConnectionModel<TType>
-        : never;
+        : TType;

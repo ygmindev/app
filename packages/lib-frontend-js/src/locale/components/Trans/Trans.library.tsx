@@ -14,7 +14,7 @@ export const props: LibraryPropsModel<TransPropsModel<unknown>> = {
   variants: [
     {
       props: {
-        i18nKey: 'testWithParams',
+        i18nKey: 'testWithInput',
         params: { value1: 'value1', value2: 'value2' },
       },
     },

@@ -1,180 +1,145 @@
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
-export type ResourceImplementationModel<
-  TType,
-  TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
-> = {
+export type ResourceImplementationModel<TType, TRoot = undefined> = {
   create(
-    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
     context?: RequestContextModel,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>>;
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>>;
 
   createMany(
-    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm, TRoot>,
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>,
     context?: RequestContextModel,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>>;
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>>;
 
-  decorators?: ResourceImplementationDecoratorModel<TType, TForm, TRoot>;
+  decorators?: ResourceImplementationDecoratorModel<TType, TRoot>;
 
   get(
-    input?: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>,
     context?: RequestContextModel,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>>;
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>>;
 
   getConnection(
-    input?: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>,
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
     context?: RequestContextModel,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>;
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>;
 
   getMany(
-    input?: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
     context?: RequestContextModel,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>>;
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>>;
 
   remove(
-    input?: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>,
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>,
     context?: RequestContextModel,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>>;
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>>;
 
   search(
-    input?: InputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TForm, TRoot>,
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>,
     context?: RequestContextModel,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>>;
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>>;
 
   update(
-    input?: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>,
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
     context?: RequestContextModel,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>>;
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>>;
 };
 
 export type ResourceImplementationBeforeDecoratorModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = (
-  params: { input?: InputModel<TMethod, TType, TForm, TRoot> },
+  params: { input?: ResourceInputModel<TMethod, TType, TRoot> },
   context?: RequestContextModel,
-) => Promise<InputModel<TMethod, TType, TForm, TRoot> | undefined>;
+) => Promise<ResourceInputModel<TMethod, TType, TRoot> | undefined>;
 
 export type ResourceImplementationAfterDecoratorModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm = EntityResourceDataModel<TType>,
   TRoot = undefined,
 > = (
   params: {
-    input?: InputModel<TMethod, TType, TForm, TRoot>;
-    output: OutputModel<TMethod, TType, TRoot>;
+    input?: ResourceInputModel<TMethod, TType, TRoot>;
+    output: ResourceOutputModel<TMethod, TType, TRoot>;
   },
   context?: RequestContextModel,
-) => Promise<OutputModel<TMethod, TType, TRoot>>;
+) => Promise<ResourceOutputModel<TMethod, TType, TRoot>>;
 
-export type ResourceImplementationDecoratorModel<
-  TType,
-  TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
-> = {
+export type ResourceImplementationDecoratorModel<TType, TRoot = undefined> = {
   afterCreate?: ResourceImplementationAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE,
     TType,
-    TForm,
     TRoot
   >;
   afterCreateMany?: ResourceImplementationAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE_MANY,
     TType,
-    TForm,
     TRoot
   >;
-  afterGet?: ResourceImplementationAfterDecoratorModel<
-    RESOURCE_METHOD_TYPE.GET,
-    TType,
-    TForm,
-    TRoot
-  >;
+  afterGet?: ResourceImplementationAfterDecoratorModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>;
   afterGetConnection?: ResourceImplementationAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
     TType,
-    TForm,
     TRoot
   >;
   afterGetMany?: ResourceImplementationAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.GET_MANY,
     TType,
-    TForm,
     TRoot
   >;
   afterRemove?: ResourceImplementationAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.REMOVE,
     TType,
-    TForm,
     TRoot
   >;
   afterSearch?: ResourceImplementationAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.SEARCH,
     TType,
-    TForm,
     TRoot
   >;
   afterUpdate?: ResourceImplementationAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.UPDATE,
     TType,
-    TForm,
     TRoot
   >;
   beforeCreate?: ResourceImplementationBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE,
     TType,
-    TForm,
     TRoot
   >;
   beforeCreateMany?: ResourceImplementationBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE_MANY,
     TType,
-    TForm,
     TRoot
   >;
-  beforeGet?: ResourceImplementationBeforeDecoratorModel<
-    RESOURCE_METHOD_TYPE.GET,
-    TType,
-    TForm,
-    TRoot
-  >;
+  beforeGet?: ResourceImplementationBeforeDecoratorModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>;
   beforeGetConnection?: ResourceImplementationBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
     TType,
-    TForm,
     TRoot
   >;
   beforeGetMany?: ResourceImplementationBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.GET_MANY,
     TType,
-    TForm,
     TRoot
   >;
   beforeRemove?: ResourceImplementationBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.REMOVE,
     TType,
-    TForm,
     TRoot
   >;
   beforeSearch?: ResourceImplementationBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.SEARCH,
     TType,
-    TForm,
     TRoot
   >;
   beforeUpdate?: ResourceImplementationBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.UPDATE,
     TType,
-    TForm,
     TRoot
   >;
 };

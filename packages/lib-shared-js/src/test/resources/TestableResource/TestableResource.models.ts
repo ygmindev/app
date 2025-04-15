@@ -1,7 +1,4 @@
-import {
-  type EntityResourceDataModel,
-  type EntityResourceModel,
-} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type TestableResourceModel = EntityResourceModel & {
   date?: Date;
@@ -18,5 +15,3 @@ export type TestableResourceModel = EntityResourceModel & {
 
   stringOptional?: string;
 };
-
-export type TestableResourceFormModel = EntityResourceDataModel<TestableResourceModel>;

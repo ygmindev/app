@@ -17,10 +17,10 @@ export type GraphqlParamsModel<TParams> = {
 };
 
 export type GraphqlQueryHttpParamsModel<
-  TParams,
   TResult,
+  TParams,
   TName extends string = string,
-> = GraphqlQueryParamsModel<TParams, TResult, TName> & {
+> = GraphqlQueryParamsModel<TResult, TParams, TName> & {
   variables?: TParams;
 };
 
@@ -53,11 +53,11 @@ export type GraphqlFieldModel<TType, TDepth extends number = 10> = [TDepth] exte
 
 export type GraphqlQueryParamsFieldsModel<TType> = Array<GraphqlFieldModel<TType>>;
 
-export type GraphqlQueryParamsModel<TParams, TResult, TName extends string = string> = {
+export type GraphqlQueryParamsModel<TResult, TParams, TName extends string = string> = {
   fields: GraphqlQueryParamsFieldsModel<TResult>;
   name: TName;
   params?: { [TKey in keyof TParams]?: string };
-  type: GraphqlOperationTypeModel;
+  type?: GraphqlOperationTypeModel;
 };
 
 export type GraphqlQueryModel = string;

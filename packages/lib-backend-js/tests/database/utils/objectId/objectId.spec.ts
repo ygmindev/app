@@ -1,11 +1,11 @@
+import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { objectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 
-const { displayName } = withTest({ objectId });
+const { displayName } = withTest({ ObjectId });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await objectId({});
+    const result = new ObjectId();
     expect(result).toStrictEqual({});
   });
 });

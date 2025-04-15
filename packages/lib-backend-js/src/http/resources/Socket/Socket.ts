@@ -11,7 +11,7 @@ export class Socket extends EntityResource implements SocketModel {
   @withField({
     expire: DATABASE_CONFIG.expireSeconds,
     isDatabase: true,
-    type: DATA_TYPE.DATE,
+    Resource: () => Date,
   })
   created: Date = new Date();
 

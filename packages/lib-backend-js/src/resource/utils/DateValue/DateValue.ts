@@ -5,6 +5,6 @@ import { type DateValueModel } from '@lib/shared/resource/utils/DateValue/DateVa
 
 @withEntity({ isAbstract: true })
 export class DateValue implements DateValueModel {
-  @withField({ type: DATA_TYPE.DATE })
+  @withField({ Resource: () => Date })
   value!: Date;
 }

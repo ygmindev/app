@@ -6,10 +6,7 @@ import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { type PricingModel } from '@lib/shared/commerce/resources/Pricing/Pricing.models';
 import { PRODUCT_RESOURCE_NAME } from '@lib/shared/commerce/resources/Product/Product.constants';
-import {
-  type ProductFormModel,
-  type ProductModel,
-} from '@lib/shared/commerce/resources/Product/Product.models';
+import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: PRODUCT_RESOURCE_NAME })
@@ -26,6 +23,3 @@ export class Product extends EntityResource implements ProductModel {
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 }
-
-@withEntity({ name: `${PRODUCT_RESOURCE_NAME}Form` })
-export class ProductForm implements ProductFormModel {}

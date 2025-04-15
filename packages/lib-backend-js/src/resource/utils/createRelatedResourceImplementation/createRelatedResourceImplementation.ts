@@ -18,15 +18,13 @@ import {
 } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type EntityResourceImplementationModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import forEach from 'lodash/forEach';
 
 export const createRelatedResourceImplementation = <
   TType extends EntityResourceModel,
-  TForm,
   TRoot extends EntityResourceModel,
-  TRootForm,
 >({
   Resource,
   RootImplementation,
@@ -50,21 +48,19 @@ export const createRelatedResourceImplementation = <
   root,
 }: CreateRelatedResourceImplementationParamsModel<
   TType,
-  TForm,
-  TRoot,
-  TRootForm
->): CreateRelatedResourceImplementationModel<TType, TForm, TRoot> => {
-  let rootImplementation: EntityResourceImplementationModel<TRoot, TRootForm>;
+  TRoot
+>): CreateRelatedResourceImplementationModel<TType, TRoot> => {
+  let rootImplementation: EntityResourceImplementationModel<TRoot>;
 
-  const getRootImplementation = (): EntityResourceImplementationModel<TRoot, TRootForm> => {
+  const getRootImplementation = (): EntityResourceImplementationModel<TRoot> => {
     rootImplementation = rootImplementation ?? Container.get(RootImplementation);
     return rootImplementation;
   };
 
-  const getRepository = (): RepositoryModel<TType, TForm> =>
+  const getRepository = (): RepositoryModel<TType> =>
     Container.get(Database, DATABASE_TYPE.MONGO).getRepository({ name: Resource });
 
-  const getForm = async (form?: TForm): Promise<TType> => {
+  const getForm = async (form?: EntityResourceDataModel<TType>): Promise<TType> => {
     const formF = new Resource();
     forEach(form as unknown as object, (v, k) => (formF[k as keyof typeof formF] = v));
     formF._id = formF._id ?? new ObjectId();
@@ -81,7 +77,7 @@ export const createRelatedResourceImplementation = <
       | RESOURCE_METHOD_TYPE.REMOVE
       | RESOURCE_METHOD_TYPE.UPDATE,
   >(
-    input?: InputModel<TMethod, TType, TForm, TRoot>,
+    input?: ResourceInputModel<TMethod, TType, TRoot>,
   ): Array<FilterModel<TType>> =>
     filterNil([
       ...(input?.filter ?? []),
@@ -89,14 +85,14 @@ export const createRelatedResourceImplementation = <
     ]) as Array<FilterModel<TType>>;
 
   const getMany = async (
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot> = {},
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> => {
+    input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = {},
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> => {
     return getRepository().getMany({ filter: getFilter(input), options: input.options });
   };
 
   const create = async (
-    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> => {
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> => {
     if (input?.root) {
       const form = await getForm(input.form);
       const { result: rootResult } = await getRootImplementation().update({
@@ -108,7 +104,7 @@ export const createRelatedResourceImplementation = <
     throw new InvalidArgumentError('root');
   };
 
-  return createResourceImplementation<TType, TForm, TRoot>({
+  return createResourceImplementation<TType, TRoot>({
     Resource,
     afterCreate,
     afterCreateMany,

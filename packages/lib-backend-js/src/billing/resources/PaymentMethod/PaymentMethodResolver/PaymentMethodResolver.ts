@@ -3,65 +3,56 @@ import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/Paym
 import { PaymentMethodImplementation } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation';
 import { type PaymentMethodResolverModel } from '@lib/backend/billing/resources/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
-import { createEmbeddedResourceResolver } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
 import { IdArgs } from '@lib/backend/resource/utils/IdArgs/IdArgs';
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
-import { User } from '@lib/backend/user/resources/User/User';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { RequestContextModel } from '@lib/config/api/api.models';
 import {
-  PaymentMethodFormModel,
-  type PaymentMethodModel,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+  CREATE_TOKEN,
+  PAYMENT_METHOD_GET_ALL,
+  REMOVE_TOKEN,
+} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { PaymentMethodImplementationModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
 import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
-import { Container } from '@lib/shared/core/utils/Container/Container';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { withInject } from '@lib/shared/core/utils/withInject/withInject';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { IdArgsModel } from '@lib/shared/resource/utils/IdArgs/IdArgs.models';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
-import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withContainer()
-@withResolver<PaymentMethodModel>()
-export class PaymentMethodResolver
-  extends createEmbeddedResourceResolver<PaymentMethodModel, PaymentMethodFormModel, UserModel>({
-    Resource: () => PaymentMethod,
-    ResourceImplementation: PaymentMethodImplementation,
-    RootResource: () => User,
-    name: PAYMENT_METHOD_RESOURCE_NAME,
-  })
-  implements PaymentMethodResolverModel
-{
-  @withOutput({
-    Resource: () => String,
-    method: RESOURCE_METHOD_TYPE.CREATE,
-    name: `${PAYMENT_METHOD_RESOURCE_NAME}Token`,
-  })
+@withResolver()
+export class PaymentMethodResolver implements PaymentMethodResolverModel {
+  @withInject(PaymentMethodImplementation)
+  protected paymentMethodImplementation!: PaymentMethodImplementationModel;
+
+  @withOutput({ name: CREATE_TOKEN, type: DATA_TYPE.STRING })
   async createToken(
-    @withInput({
-      Resource: () => PaymentArgs,
-      method: RESOURCE_METHOD_TYPE.CREATE,
-      name: `${PAYMENT_METHOD_RESOURCE_NAME}Token`,
-    })
-    input: InputModel<RESOURCE_METHOD_TYPE.CREATE, string, PaymentArgsModel, UserModel>,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, string, UserModel>> {
-    return Container.get(PaymentMethodImplementation).createToken(input);
+    @withInput({ Resource: () => PaymentArgs })
+    input: PaymentArgsModel,
+    @withContext() context?: RequestContextModel,
+  ): Promise<string> {
+    return this.paymentMethodImplementation.createToken(input, context);
   }
 
   @withOutput({
-    Resource: () => Boolean,
-    method: RESOURCE_METHOD_TYPE.REMOVE,
-    name: `${PAYMENT_METHOD_RESOURCE_NAME}Token`,
+    Resource: () => PaymentMethod,
+    isArray: true,
+    name: PAYMENT_METHOD_GET_ALL,
   })
+  async getAll(
+    @withContext() context?: RequestContextModel,
+  ): Promise<Array<Partial<PaymentMethodModel>>> {
+    return this.paymentMethodImplementation.getAll(context);
+  }
+
+  @withOutput({ name: REMOVE_TOKEN, type: DATA_TYPE.STRING })
   async removeToken(
-    @withInput({
-      Resource: () => IdArgs,
-      method: RESOURCE_METHOD_TYPE.REMOVE,
-      name: `${PAYMENT_METHOD_RESOURCE_NAME}Token`,
-    })
-    input: InputModel<RESOURCE_METHOD_TYPE.REMOVE, boolean, IdArgsModel, UserModel>,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, boolean, UserModel>> {
-    return Container.get(PaymentMethodImplementation).removeToken(input);
+    @withInput({ Resource: () => IdArgs })
+    input: IdArgsModel,
+    @withContext() context?: RequestContextModel,
+  ): Promise<boolean> {
+    return this.paymentMethodImplementation.removeToken(input, context);
   }
 }

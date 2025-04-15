@@ -9,21 +9,18 @@ import {
   type ResourceReadMethodTypeModel,
   type ResourceWriteMethodTypeModel,
 } from '@lib/shared/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 
 export type CreateResourceResolverParamsModel<
-  TType,
-  TForm = EntityResourceDataModel<TType>,
+  TType extends EntityResourceModel,
   TRoot = undefined,
 > = ResourceNameParamsModel<TRoot> & {
   Resource(): ResourceClassModel<TType>;
 
-  ResourceData?(): ResourceClassModel<TForm>;
-
   ResourceImplementation: ResourceClassModel<
-    PartialModel<ResourceImplementationModel<TType, TForm, TRoot>>
+    PartialModel<ResourceImplementationModel<TType, TRoot>>
   >;
 
   RootResource?(): TRoot extends undefined ? never : ResourceClassModel<TRoot>;
@@ -31,21 +28,20 @@ export type CreateResourceResolverParamsModel<
   access?: PartialModel<Record<ResourceResolverAccessTypeModel, AccessLevelModel>>;
 
   authorizer?: {
-    default?: ResourceResolverAuthorizerModel<ResourceMethodTypeModel, TType, TForm>;
+    default?: ResourceResolverAuthorizerModel<ResourceMethodTypeModel, TType>;
 
-    read?: ResourceResolverAuthorizerModel<ResourceReadMethodTypeModel, TType, TForm>;
+    read?: ResourceResolverAuthorizerModel<ResourceReadMethodTypeModel, TType>;
 
-    write?: ResourceResolverAuthorizerModel<ResourceWriteMethodTypeModel, TType, TForm>;
+    write?: ResourceResolverAuthorizerModel<ResourceWriteMethodTypeModel, TType>;
   } & {
-    [TKey in RESOURCE_METHOD_TYPE]?: ResourceResolverAuthorizerModel<TKey, TType, TForm>;
+    [TKey in RESOURCE_METHOD_TYPE]?: ResourceResolverAuthorizerModel<TKey, TType>;
   };
 };
 
 export type CreateResourceResolverModel<
-  TType,
-  TForm = EntityResourceDataModel<TType>,
+  TType extends EntityResourceModel,
   TRoot = undefined,
-> = ResourceClassModel<ResourceImplementationModel<TType, TForm, TRoot>>;
+> = ResourceClassModel<ResourceImplementationModel<TType, TRoot>>;
 
 export type ResourceResolverAccessTypeModel =
   | 'default'
@@ -56,14 +52,11 @@ export type ResourceResolverAccessTypeModel =
 export type ResourceResolverAuthorizerParamsModel<
   TMethod extends ResourceMethodTypeModel,
   TType,
-  TForm = EntityResourceDataModel<TType>,
 > = {
   context?: RequestContextModel;
-  input?: InputModel<TMethod, TType, TForm>;
+  input?: ResourceInputModel<TMethod, TType>;
 };
 
-export type ResourceResolverAuthorizerModel<
-  TMethod extends ResourceMethodTypeModel,
-  TType,
-  TForm = EntityResourceDataModel<TType>,
-> = (params: ResourceResolverAuthorizerParamsModel<TMethod, TType, TForm>) => boolean;
+export type ResourceResolverAuthorizerModel<TMethod extends ResourceMethodTypeModel, TType> = (
+  params: ResourceResolverAuthorizerParamsModel<TMethod, TType>,
+) => boolean;

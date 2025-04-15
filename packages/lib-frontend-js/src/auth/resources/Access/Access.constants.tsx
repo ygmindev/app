@@ -12,7 +12,7 @@ import { type AccessModel } from '@lib/shared/auth/resources/Access/Access.model
 export const ACCESS_RESOURCE_PARAMS = {
   fields: [
     {
-      id: 'role',
+      id: 'Role',
       isArray: true,
       options: Object.values(ACCESS_ROLE_MORE).map((v) => ({ id: v })),
       renderer: ({ value }) => (
@@ -32,7 +32,7 @@ export const ACCESS_RESOURCE_PARAMS = {
     {
       field: () => <UserInput />,
       fields: [{ id: 'first' }, { id: 'last' }, { id: 'email' }, { id: 'phone' }],
-      id: '_user',
+      id: 'User',
     },
   ],
   name: ACCESS_RESOURCE_NAME,

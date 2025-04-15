@@ -4,16 +4,13 @@ import { useGroupResource } from '@lib/frontend/group/hooks/useGroupResource/use
 import { GROUP_RESOURCE_PARAMS } from '@lib/frontend/group/resources/Group/Group.constants';
 import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import {
-  type GroupFormModel,
-  type GroupModel,
-} from '@lib/shared/group/resources/Group/Group.models';
+import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 
 export const GroupTable: LFCModel<GroupTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const implementation = useGroupResource();
   return (
-    <ResourceTable<GroupModel, GroupFormModel>
+    <ResourceTable<GroupModel>
       {...wrapperProps}
       {...GROUP_RESOURCE_PARAMS}
       implementation={implementation}

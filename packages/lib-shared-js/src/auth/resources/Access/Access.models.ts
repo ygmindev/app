@@ -7,10 +7,7 @@ import {
 import { type ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constants';
 import { type GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
 import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
-import {
-  type EntityResourceDataModel,
-  type EntityResourceModel,
-} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
@@ -27,5 +24,3 @@ export type AccessModel = EntityResourceModel & {
 
   [USER_RESOURCE_NAME]: RefFieldModel<UserModel>;
 };
-
-export type AccessFormModel = EntityResourceDataModel<AccessModel>;

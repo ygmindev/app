@@ -7,23 +7,19 @@ import databaseConfig from '@lib/config/database/database.mongo';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
-import {
-  type TestableResourceFormModel,
-  type TestableResourceModel,
-} from '@lib/shared/test/resources/TestableResource/TestableResource.models';
+import { type TestableResourceModel } from '@lib/shared/test/resources/TestableResource/TestableResource.models';
 import every from 'lodash/every';
 import toString from 'lodash/toString';
 
 export const testResourceImplementation = <
   TType extends TestableResourceModel,
-  TForm extends TestableResourceFormModel,
   TRoot extends unknown = undefined,
 >({
   form,
   getImplementation,
   root: getRoot,
-}: TestResourceImplementationParamsModel<TType, TForm, TRoot>): void => {
-  let implementation: ResourceImplementationModel<TType, TForm, TRoot>;
+}: TestResourceImplementationParamsModel<TType, TRoot>): void => {
+  let implementation: ResourceImplementationModel<TType, TRoot>;
 
   let root: (TRoot extends undefined ? never : string) | undefined;
   let first: PartialModel<TType> | undefined;

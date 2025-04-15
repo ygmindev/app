@@ -16,11 +16,14 @@ import { merge } from '@lib/shared/core/utils/merge/merge';
 import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type FilterableResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
-import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type EntityResourceDataModel,
+  type EntityResourceModel,
+} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type EntityResourceImplementationModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import every from 'lodash/every';
 import forEach from 'lodash/forEach';
@@ -29,9 +32,7 @@ import toString from 'lodash/toString';
 
 export const createEmbeddedResourceImplementation = <
   TType extends EntityResourceModel,
-  TForm,
   TRoot extends EntityResourceModel,
-  TRootForm,
 >({
   Resource,
   RootImplementation,
@@ -54,18 +55,16 @@ export const createEmbeddedResourceImplementation = <
   name,
 }: CreateEmbeddedResourceImplementationParamsModel<
   TType,
-  TForm,
-  TRoot,
-  TRootForm
->): CreateEmbeddedResourceImplementationModel<TType, TForm, TRoot> => {
-  let rootImplementation: EntityResourceImplementationModel<TRoot, TRootForm>;
+  TRoot
+>): CreateEmbeddedResourceImplementationModel<TType, TRoot> => {
+  let rootImplementation: EntityResourceImplementationModel<TRoot>;
 
-  const getRootImplementation = (): EntityResourceImplementationModel<TRoot, TRootForm> => {
+  const getRootImplementation = (): EntityResourceImplementationModel<TRoot> => {
     rootImplementation = rootImplementation ?? Container.get(RootImplementation);
     return rootImplementation;
   };
 
-  const getForm = async (form?: TForm): Promise<TType> => {
+  const getForm = async (form?: EntityResourceDataModel<TType>): Promise<TType> => {
     const formF = new Resource();
     forEach(form as unknown as object, (v, k) => (formF[k as keyof typeof formF] = v));
     formF._id = formF._id ?? new ObjectId();
@@ -95,7 +94,7 @@ export const createEmbeddedResourceImplementation = <
     take,
     values,
   }: {
-    input?: InputModel<TMethod, TType, TForm, TRoot>;
+    input?: ResourceInputModel<TMethod, TType, TRoot>;
     isArray?: boolean;
     isInverse?: boolean;
     skip?: number;
@@ -151,8 +150,8 @@ export const createEmbeddedResourceImplementation = <
   };
 
   const getMany = async (
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot> = {},
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> => {
+    input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> => {
     const root = await getRoot(input.root);
     const result = getFilter({
       input,
@@ -165,8 +164,8 @@ export const createEmbeddedResourceImplementation = <
   };
 
   const create = async (
-    input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> => {
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> => {
     // TODO: LOCK
     const root = await getRoot(input?.root);
     const form = await getForm(input?.form);
@@ -180,7 +179,7 @@ export const createEmbeddedResourceImplementation = <
   };
 
   const count = async (
-    input?: InputModel<FilterableResourceMethodTypeModel, TType, TForm, TRoot>,
+    input?: ResourceInputModel<FilterableResourceMethodTypeModel, TType, TRoot>,
   ): Promise<number> => {
     const root = await getRoot(input?.root);
     let result = (root?.[name] as unknown as Array<TType>) ?? [];
@@ -188,7 +187,7 @@ export const createEmbeddedResourceImplementation = <
     return result?.length ?? 0;
   };
 
-  return createResourceImplementation<TType, TForm, TRoot>({
+  return createResourceImplementation<TType, TRoot>({
     Resource,
     afterCreate,
     afterCreateMany,

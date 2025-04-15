@@ -4,13 +4,13 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { type UserTablePropsModel } from '@lib/frontend/user/containers/UserTable/UserTable.models';
 import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
 import { USER_RESOURCE_PARAMS } from '@lib/frontend/user/resources/User/User.constants';
-import { type UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const UserTable: LFCModel<UserTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const implementation = useUserResource();
   return (
-    <ResourceTable<UserModel, UserFormModel>
+    <ResourceTable<UserModel>
       {...wrapperProps}
       {...USER_RESOURCE_PARAMS}
       implementation={implementation}

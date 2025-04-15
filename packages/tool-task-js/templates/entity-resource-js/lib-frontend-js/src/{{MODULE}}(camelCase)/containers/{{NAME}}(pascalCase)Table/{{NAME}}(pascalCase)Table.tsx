@@ -5,7 +5,6 @@ import { {{NAME}}(constantCase)_RESOURCE_PARAMS } from '@lib/frontend/{{MODULE}}
 import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import {
-  type {{NAME}}(pascalCase)FormModel,
   type {{NAME}}(pascalCase)Model,
 } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 
@@ -13,7 +12,7 @@ export const {{NAME}}(pascalCase)Table: LFCModel<{{NAME}}(pascalCase)TablePropsM
   const { wrapperProps } = useLayoutStyles({ props });
   const implementation = use{{NAME}}(pascalCase)Resource();
   return (
-    <ResourceTable<{{NAME}}(pascalCase)Model, {{NAME}}(pascalCase)FormModel>
+    <ResourceTable<{{NAME}}(pascalCase)Model>
       {...wrapperProps}
       {...{{NAME}}(constantCase)_RESOURCE_PARAMS}
       implementation={implementation}

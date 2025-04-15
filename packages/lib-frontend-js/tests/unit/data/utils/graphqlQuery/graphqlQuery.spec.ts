@@ -9,7 +9,7 @@ const { displayName } = withTest({ graphqlQuery });
 
 describe(displayName, () => {
   test('works without params', async () => {
-    const PARAMS: GraphqlQueryParamsModel<void, TestableEntityResourceModel> = {
+    const PARAMS: GraphqlQueryParamsModel<TestableEntityResourceModel, void> = {
       fields: ['_id', 'created'],
       name: 'NAME',
       type: GRAPHQL_OPERATION_TYPE.QUERY,
@@ -25,7 +25,7 @@ describe(displayName, () => {
   });
 
   test('works with params', async () => {
-    const PARAMS: GraphqlQueryParamsModel<{ a: string; b: string }, TestableEntityResourceModel> = {
+    const PARAMS: GraphqlQueryParamsModel<TestableEntityResourceModel, { a: string; b: string }> = {
       fields: ['_id', 'created'],
       name: 'NAME',
       params: { a: 'A', b: 'B' },

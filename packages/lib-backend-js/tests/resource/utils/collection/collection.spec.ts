@@ -1,11 +1,11 @@
+import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { collection } from '@lib/backend/resource/utils/Collection/Collection';
 
-const { displayName } = withTest({ collection });
+const { displayName } = withTest({ Collection });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await collection({});
+    const result = new Collection();
     expect(result).toStrictEqual({});
   });
 });

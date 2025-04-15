@@ -1,17 +1,9 @@
-import { type CreateOutputParamsModel } from '@lib/backend/resource/utils/createOutput/createOutput.models';
 import { type WithAccessParamsModel } from '@lib/backend/resource/utils/withAccess/withAccess.models';
-import { type WithResultParamsModel } from '@lib/backend/resource/utils/withResult/withResult.models';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { type _WithOutputParamsModel } from '@lib/backend/resource/utils/withOutput/_withOutput.models';
 
 export type WithOutputParamsModel<
-  TMethod extends ResourceMethodTypeModel,
-  TType,
-  TRoot = undefined,
-> = WithAccessParamsModel &
-  CreateOutputParamsModel<TMethod, TType, TRoot> &
-  Pick<
-    WithResultParamsModel<CreateOutputParamsModel<TMethod, TType, TRoot>, TType>,
-    'filter' | 'topics'
-  >;
+  TType extends unknown,
+  TData extends unknown,
+> = WithAccessParamsModel & _WithOutputParamsModel<TType, TData>;
 
 export type WithOutputModel = MethodDecorator;

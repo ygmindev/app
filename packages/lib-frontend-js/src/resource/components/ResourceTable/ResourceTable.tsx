@@ -35,18 +35,14 @@ import cloneDeep from 'lodash/cloneDeep';
 import range from 'lodash/range';
 import { type ReactElement, useCallback, useRef, useState } from 'react';
 
-export const ResourceTable = <
-  TType extends EntityResourceModel,
-  TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
->({
+export const ResourceTable = <TType extends EntityResourceModel, TRoot = undefined>({
   fields,
   implementation,
   name,
   rootName,
   ...props
-}: LFCPropsModel<ResourceTablePropsModel<TType, TForm, TRoot>>): ReactElement<
-  LFCPropsModel<ResourceTablePropsModel<TType, TForm, TRoot>>
+}: LFCPropsModel<ResourceTablePropsModel<TType, TRoot>>): ReactElement<
+  LFCPropsModel<ResourceTablePropsModel<TType, TRoot>>
 > => {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -74,7 +70,7 @@ export const ResourceTable = <
           root,
           update: data as UpdateModel<TType>,
         })
-      : await create({ form: data as TForm, root });
+      : await create({ form: data as EntityResourceDataModel<TType>, root });
   };
 
   const getColumns = useCallback(
@@ -88,7 +84,7 @@ export const ResourceTable = <
           renderer: ({ row }) => (
             <ModalButton
               element={({ onClose }) => (
-                <ResourceForm<TType, TForm, TRoot>
+                <ResourceForm<TType, TRoot>
                   data={row}
                   fields={fieldsF}
                   name={name}
@@ -187,7 +183,7 @@ export const ResourceTable = <
 
                 <ModalButton
                   element={({ onClose }) => (
-                    <ResourceForm<TType, TForm, TRoot>
+                    <ResourceForm<TType, TRoot>
                       fields={fieldsF}
                       name={name}
                       onCancel={onClose}

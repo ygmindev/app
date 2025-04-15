@@ -3,8 +3,8 @@ import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import screenConfig from '@lib/config/screen/screen';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import { SNAPSHOT_RESOURCE_NAME } from '@lib/shared/test/resources/Snapshot/Snapshot.constants';
 import { type SnapshotModel } from '@lib/shared/test/resources/Snapshot/Snapshot.models';
 import { type SnapshotImplementationModel } from '@lib/shared/test/resources/Snapshot/SnapshotImplementation/SnapshotImplementation.models';
@@ -13,8 +13,8 @@ import { type SnapshotImplementationModel } from '@lib/shared/test/resources/Sna
 export class SnapshotImplementation implements SnapshotImplementationModel {
   async get({
     filter,
-  }: InputModel<RESOURCE_METHOD_TYPE.GET, SnapshotModel>): Promise<
-    OutputModel<RESOURCE_METHOD_TYPE.GET, SnapshotModel>
+  }: ResourceInputModel<RESOURCE_METHOD_TYPE.GET, SnapshotModel>): Promise<
+    ResourceOutputModel<RESOURCE_METHOD_TYPE.GET, SnapshotModel>
   > {
     const { snapshotPath } = screenConfig.params();
     const snapshots = {
@@ -25,8 +25,8 @@ export class SnapshotImplementation implements SnapshotImplementationModel {
   }
 
   async getMany(
-    _input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, SnapshotModel>,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, SnapshotModel>> {
+    _input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, SnapshotModel>,
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, SnapshotModel>> {
     const { snapshotPath } = screenConfig.params();
     const path = fromPackages('app-web-js', snapshotPath);
     const snapshots = children(path).map(({ name }) => ({ name }));

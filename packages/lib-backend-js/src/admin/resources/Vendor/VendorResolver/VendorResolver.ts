@@ -5,15 +5,12 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
 import { VENDOR_RESOURCE_NAME } from '@lib/shared/admin/resources/Vendor/Vendor.constants';
-import {
-  type VendorFormModel,
-  type VendorModel,
-} from '@lib/shared/admin/resources/Vendor/Vendor.models';
+import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
 
 @withContainer()
 @withResolver({ Resource: () => Vendor })
 export class VendorResolver
-  extends createEntityResourceResolver<VendorModel, VendorFormModel>({
+  extends createEntityResourceResolver<VendorModel>({
     Resource: () => Vendor,
     ResourceImplementation: VendorImplementation,
     name: VENDOR_RESOURCE_NAME,

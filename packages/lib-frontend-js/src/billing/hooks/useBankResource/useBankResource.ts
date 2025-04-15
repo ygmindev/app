@@ -5,13 +5,13 @@ import {
 import { BANK_RESOURCE_PARAMS } from '@lib/frontend/billing/resources/Bank/Bank.constants';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useOwnResource } from '@lib/frontend/user/hooks/useOwnResource/useOwnResource';
-import { type BankFormModel, type BankModel } from '@lib/shared/billing/resources/Bank/Bank.models';
+import { type BankModel } from '@lib/shared/billing/resources/Bank/Bank.models';
 
 export const useBankResource = ({
   root,
 }: UseBankResourceParamsModel = {}): UseBankResourceModel => {
   const actions = useActions();
-  return useOwnResource<BankModel, BankFormModel>({
+  return useOwnResource<BankModel>({
     ...BANK_RESOURCE_PARAMS,
     afterRemove: async ({ output }) => {
       actions?.billing.paymentMethodsRemove({ _id: output.result?._id });

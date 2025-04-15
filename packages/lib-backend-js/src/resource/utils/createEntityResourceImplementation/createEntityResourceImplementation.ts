@@ -7,9 +7,9 @@ import {
 } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation.models';
 import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
-export const createEntityResourceImplementation = <TType, TForm = EntityResourceDataModel<TType>>({
+export const createEntityResourceImplementation = <TType extends EntityResourceModel>({
   Resource,
   afterCreate,
   afterCreateMany,
@@ -28,14 +28,11 @@ export const createEntityResourceImplementation = <TType, TForm = EntityResource
   beforeSearch,
   beforeUpdate,
   name,
-}: CreateEntityResourceImplementationParamsModel<
-  TType,
-  TForm
->): CreateEntityResourceImplementationModel<TType, TForm> => {
-  const getRepository = (): RepositoryModel<TType, TForm> =>
+}: CreateEntityResourceImplementationParamsModel<TType>): CreateEntityResourceImplementationModel<TType> => {
+  const getRepository = (): RepositoryModel<TType> =>
     Container.get(Database, DATABASE_TYPE.MONGO).getRepository({ name });
 
-  return createResourceImplementation<TType, TForm>({
+  return createResourceImplementation<TType>({
     Resource,
     afterCreate,
     afterCreateMany,

@@ -6,12 +6,10 @@ import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityR
 
 export type CreateEmbeddedResourceResolverParamsModel<
   TType extends EntityResourceModel,
-  TForm,
   TRoot extends EntityResourceModel,
-> = CreateResourceResolverParamsModel<TType, TForm, TRoot>;
+> = CreateResourceResolverParamsModel<TType, TRoot>;
 
 export type CreateEmbeddedResourceResolverModel<
   TType extends EntityResourceModel,
-  TForm,
   TRoot extends EntityResourceModel,
-> = CreateResourceResolverModel<TType, TForm, TRoot>;
+> = CreateResourceResolverModel<TType, TRoot>;

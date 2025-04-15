@@ -3,7 +3,7 @@ import { type FieldRelation } from '@lib/backend/resource/utils/withField/withFi
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type DataTypeModel, type FieldTypeModel } from '@lib/shared/data/data.models';
 
-export type _WithFieldParamsModel<TType extends unknown> = {
+export type _WithFieldParamsModel<TType> = {
   Resource?(): ResourceClassModel<TType>;
   defaultValue?(): TType;
   expire?: number;
@@ -16,7 +16,7 @@ export type _WithFieldParamsModel<TType extends unknown> = {
   name?: string;
   relation?: FieldRelation;
   root?: StringKeyModel<TType>;
-  type: DataTypeModel | FieldTypeModel;
+  type?: DataTypeModel | FieldTypeModel;
 };
 
 export type _WithFieldModel = PropertyDecorator;

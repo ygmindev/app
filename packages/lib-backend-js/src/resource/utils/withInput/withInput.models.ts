@@ -1,11 +1,8 @@
-import { type CreateInputParamsModel } from '@lib/backend/resource/utils/createInput/createInput.models';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type _WithInputModel,
+  type _WithInputParamsModel,
+} from '@lib/backend/resource/utils/withInput/_withInput.models';
 
-export type WithInputParamsModel<
-  TMethod extends ResourceMethodTypeModel,
-  TType,
-  TForm = EntityResourceDataModel<TType>,
-> = CreateInputParamsModel<TMethod, TType, TForm>;
+export type WithInputParamsModel<TType extends unknown> = _WithInputParamsModel<TType>;
 
-export type WithInputModel = ParameterDecorator;
+export type WithInputModel = _WithInputModel;

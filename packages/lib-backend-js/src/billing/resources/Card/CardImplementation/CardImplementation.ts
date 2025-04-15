@@ -4,16 +4,16 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { createRelatedResourceImplementation } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation';
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
 import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
-import { type CardFormModel, type CardModel } from '@lib/shared/billing/resources/Card/Card.models';
+import { type CardModel } from '@lib/shared/billing/resources/Card/Card.models';
 import { type CardImplementationModel } from '@lib/shared/billing/resources/Card/CardImplementation/CardImplementation.models';
 import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
-import { type UserFormModel, type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withContainer()
 export class CardImplementation
-  extends createRelatedResourceImplementation<CardModel, CardFormModel, UserModel, UserFormModel>({
+  extends createRelatedResourceImplementation<CardModel, UserModel>({
     Resource: Card,
     RootImplementation: UserImplementation,
     afterCreate: async ({ input, output }, context) => {

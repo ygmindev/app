@@ -14,16 +14,12 @@ import {
   type EntityResourceModel,
 } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
 import { type ResourceImplementationDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import forEach from 'lodash/forEach';
 
-export const createResourceImplementation = <
-  TType extends EntityResourceModel,
-  TForm = EntityResourceDataModel<TType>,
-  TRoot = undefined,
->({
+export const createResourceImplementation = <TType extends EntityResourceModel, TRoot = undefined>({
   Resource,
   afterCreate,
   afterCreateMany,
@@ -50,15 +46,14 @@ export const createResourceImplementation = <
   remove,
   search,
   update,
-}: CreateResourceImplementationParamsModel<TType, TForm, TRoot>): CreateResourceImplementationModel<
+}: CreateResourceImplementationParamsModel<TType, TRoot>): CreateResourceImplementationModel<
   TType,
-  TForm,
   TRoot
 > => {
   class ResourceImplementation
-    implements PrototypeModel<CreateResourceImplementationModel<TType, TForm, TRoot>>
+    implements PrototypeModel<CreateResourceImplementationModel<TType, TRoot>>
   {
-    decorators: ResourceImplementationDecoratorModel<TType, TForm, TRoot> = {
+    decorators: ResourceImplementationDecoratorModel<TType, TRoot> = {
       afterCreate,
       afterCreateMany,
       afterGet,
@@ -73,7 +68,7 @@ export const createResourceImplementation = <
         formF._id = formF._id ?? new ObjectId();
         formF.created = formF.created ?? new Date();
         await formF.beforeCreate?.();
-        const inputF = { ...input, form: formF };
+        const inputF = { ...input, form: formF } as EntityResourceDataModel<TType>;
         return beforeCreate ? beforeCreate({ input: inputF }, context) : inputF;
       },
       beforeCreateMany,
@@ -112,14 +107,14 @@ export const createResourceImplementation = <
     }
 
     async create(
-      input?: InputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TForm, TRoot>,
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
       context?: RequestContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeCreate
         ? await this.decorators.beforeCreate({ input: inputF }, context)
         : inputF;
-      const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot> = await create(
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot> = await create(
         inputF,
         context,
       );
@@ -129,9 +124,9 @@ export const createResourceImplementation = <
     }
 
     async createMany(
-      input?: InputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TForm, TRoot>,
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>,
       context?: RequestContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeCreateMany
         ? await this.decorators.beforeCreateMany({ input: inputF }, context)
@@ -145,27 +140,25 @@ export const createResourceImplementation = <
                 ? this.decorators.beforeCreate({ input: { form } }, context)
                 : form,
           ),
-        )) as Array<TForm>);
+        )) as Array<EntityResourceDataModel<TType>>);
 
-      const output: OutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot> = await createMany(
-        inputF,
-        context,
-      );
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot> =
+        await createMany(inputF, context);
       return this.decorators.afterCreateMany
         ? this.decorators.afterCreateMany({ input: inputF, output }, context)
         : output;
     }
 
     async get(
-      input?: InputModel<RESOURCE_METHOD_TYPE.GET, TType, TForm, TRoot>,
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>,
       context?: RequestContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeGet
         ? await this.decorators.beforeGet({ input: inputF }, context)
         : inputF;
 
-      const output: OutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot> = await get(
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot> = await get(
         inputF,
         context,
       );
@@ -175,33 +168,31 @@ export const createResourceImplementation = <
     }
 
     async getMany(
-      input?: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm, TRoot>,
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
       context?: RequestContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeGetMany
         ? await this.decorators.beforeGetMany({ input: inputF }, context)
         : inputF;
 
-      const output: OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = await getMany(
-        inputF,
-        context,
-      );
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> =
+        await getMany(inputF, context);
       return this.decorators.afterGetMany
         ? this.decorators.afterGetMany({ input: inputF, output }, context)
         : output;
     }
 
     async getConnection(
-      input?: InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TForm, TRoot>,
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
       context?: RequestContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeGetConnection
         ? await this.decorators.beforeGetConnection({ input: inputF }, context)
         : inputF;
 
-      const output: OutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> =
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> =
         await getConnection(inputF, context);
       return this.decorators.afterGetConnection
         ? this.decorators.afterGetConnection({ input: inputF, output }, context)
@@ -209,15 +200,15 @@ export const createResourceImplementation = <
     }
 
     async update(
-      input?: InputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TForm, TRoot>,
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
       context?: RequestContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeUpdate
         ? await this.decorators.beforeUpdate({ input: inputF }, context)
         : inputF;
 
-      const output: OutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = await update(
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = await update(
         inputF,
         context,
       );
@@ -227,14 +218,14 @@ export const createResourceImplementation = <
     }
 
     async search(
-      input?: InputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TForm, TRoot>,
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>,
       context?: RequestContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeSearch
         ? await this.decorators.beforeSearch({ input: inputF }, context)
         : inputF;
-      const output: OutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> = await search(
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> = await search(
         inputF,
         context,
       );
@@ -244,15 +235,15 @@ export const createResourceImplementation = <
     }
 
     async remove(
-      input?: InputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TForm, TRoot>,
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>,
       context?: RequestContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeRemove
         ? await this.decorators.beforeRemove({ input: inputF }, context)
         : inputF;
 
-      const output: OutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot> = await remove(
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot> = await remove(
         inputF,
         context,
       );
@@ -261,10 +252,12 @@ export const createResourceImplementation = <
         : output;
     }
 
-    async count(input?: InputModel<ResourceMethodTypeModel, TType, TForm, TRoot>): Promise<number> {
+    async count(
+      input?: ResourceInputModel<ResourceMethodTypeModel, TType, TRoot>,
+    ): Promise<number> {
       return count(input);
     }
   }
 
-  return ResourceImplementation as CreateResourceImplementationModel<TType, TForm, TRoot>;
+  return ResourceImplementation as CreateResourceImplementationModel<TType, TRoot>;
 };

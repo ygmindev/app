@@ -1,6 +1,6 @@
 import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models';
 import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import {
   type ResourceImplementationDecoratorModel,
   type ResourceImplementationModel,
@@ -8,16 +8,14 @@ import {
 import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
 
 export type UseResourceParamsModel<
-  TType,
-  TForm = EntityResourceDataModel<TType>,
+  TType extends EntityResourceModel,
   TRoot = undefined,
 > = RootInputModel<TRoot> &
   ResourceNameParamsModel<TRoot> &
-  ResourceImplementationDecoratorModel<TType, TForm, TRoot> &
+  ResourceImplementationDecoratorModel<TType, TRoot> &
   ResourceParamsModel<TType, TRoot>;
 
 export type UseResourceModel<
-  TType,
-  TForm = EntityResourceDataModel<TType>,
+  TType extends EntityResourceModel,
   TRoot = undefined,
-> = ResourceImplementationModel<TType, TForm, TRoot>;
+> = ResourceImplementationModel<TType, TRoot>;

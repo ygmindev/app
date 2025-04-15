@@ -217,26 +217,6 @@ input AccessUpdateUpdateInput {
   isFixture: Boolean
 }
 
-input AroomOrderContactInput {
-  stopAddress: String
-  stopName: String
-  stopPhoneNumber: String
-}
-
-input AroomOrderInput {
-  dropoff: String
-  orderNumber: Float
-  orderReceiptAttach: String
-  pickup: String
-}
-
-input AroomUserInput {
-  companyName: String
-  email: String
-  name: String
-  phoneNumber: Float
-}
-
 type Bank {
   User: [User]
   _id: String
@@ -725,40 +705,10 @@ type ChatSubscribeOutput {
   result: Message
 }
 
-input CoordinateInput {
-  latitude: Float
-  longitude: Float
-}
-
-input CreateDeliveryInput {
-  Creator: AroomUserInput
-  finalDropoff: String
-  firstPickup: String
-  orderContact: [AroomOrderContactInput]
-  orderInformation: [AroomOrderInput]
-  pickupDate: DateTimeISO
-  submitDate: DateTimeISO
-  totalVolume: String
-  totalWeight: Float
-  tripPricing: Float
-  vehicleType: String
-  waypoint: [String]
-}
-
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
 """
 scalar DateTimeISO
-
-type DeliveryResult {
-  success: Boolean
-}
-
-input GetRouteInput {
-  coordinates: [CoordinateInput]
-  timing: String
-  vehicle: String
-}
 
 type Group {
   Access: [Access]
@@ -965,13 +915,6 @@ input GroupUpdateUpdateInput {
 
 input IdArgsInput {
   id: String
-}
-
-type MapRoute {
-  distance: Float
-  duration: Float
-  polyline: String
-  priceTiers: [PriceTier]
 }
 
 type Message {
@@ -1202,7 +1145,6 @@ type Mutation {
   CardCreateMany(input: CardCreateManyInput): CardCreateManyOutput
   CardRemove(input: CardRemoveInput): CardRemoveOutput
   CardUpdate(input: CardUpdateInput): CardUpdateOutput
-  CreateDelivery(input: CreateDeliveryInput): DeliveryResult
   GroupCreate(input: GroupCreateInput): GroupCreateOutput
   GroupCreateMany(input: GroupCreateManyInput): GroupCreateManyOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
@@ -1219,12 +1161,6 @@ type Mutation {
   OtpCreateMany(input: OtpCreateManyInput): OtpCreateManyOutput
   OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
   OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
-  PaymentMethodCreate(input: PaymentMethodCreateInput): PaymentMethodCreateOutput
-  PaymentMethodCreateMany(input: PaymentMethodCreateManyInput): PaymentMethodCreateManyOutput
-  PaymentMethodRemove(input: PaymentMethodRemoveInput): PaymentMethodRemoveOutput
-  PaymentMethodTokenCreate(input: PaymentMethodTokenCreateInput): PaymentMethodTokenCreateOutput
-  PaymentMethodTokenRemove(input: PaymentMethodTokenRemoveInput): PaymentMethodTokenRemoveOutput
-  PaymentMethodUpdate(input: PaymentMethodUpdateInput): PaymentMethodUpdateOutput
   PricingCreate(input: PricingCreateInput): PricingCreateOutput
   PricingCreateMany(input: PricingCreateManyInput): PricingCreateManyOutput
   PricingRemove(input: PricingRemoveInput): PricingRemoveOutput
@@ -1237,9 +1173,6 @@ type Mutation {
   RoleCreateMany(input: RoleCreateManyInput): RoleCreateManyOutput
   RoleRemove(input: RoleRemoveInput): RoleRemoveOutput
   RoleUpdate(input: RoleUpdateInput): RoleUpdateOutput
-  SignInCreate(input: SignInCreateInput): SignInCreateOutput
-  SignInUserUpdate(input: SignInUserUpdateInput): SignInUserUpdateOutput
-  SignInUsernameCreate(input: SignInUsernameCreateInput): SignInUsernameCreateOutput
   SocketCreate(input: SocketCreateInput): SocketCreateOutput
   SocketCreateMany(input: SocketCreateManyInput): SocketCreateManyOutput
   SocketRemove(input: SocketRemoveInput): SocketRemoveOutput
@@ -1265,6 +1198,9 @@ type Mutation {
   linkedUserRemove(input: linkedUserRemoveInput): linkedUserRemoveOutput
   linkedUserUpdate(input: linkedUserUpdateInput): linkedUserUpdateOutput
 }
+
+"""A string that cannot be passed as an empty value"""
+scalar NonEmptyString
 
 type Order {
   _id: String
@@ -1459,15 +1395,20 @@ type Otp {
   callingCode: String
   created: DateTimeISO
   email: String
+  isCheckExists: Boolean
   isFixture: Boolean
   otp: String
   phone: String
 }
 
 input OtpCreateFormInput {
+  _id: String
   callingCode: String
+  created: DateTimeISO = "2025-04-15T06:54:40.215Z"
   email: String
   isCheckExists: Boolean
+  isFixture: Boolean
+  otp: String
   phone: String
 }
 
@@ -1477,9 +1418,13 @@ input OtpCreateInput {
 }
 
 input OtpCreateManyFormInput {
+  _id: String
   callingCode: String
+  created: DateTimeISO = "2025-04-15T06:54:40.215Z"
   email: String
   isCheckExists: Boolean
+  isFixture: Boolean
+  otp: String
   phone: String
 }
 
@@ -1574,8 +1519,9 @@ type OtpGetOutput {
 input OtpInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-03-22T12:36:14.091Z"
+  created: DateTimeISO = "2025-04-15T06:54:40.215Z"
   email: String
+  isCheckExists: Boolean
   isFixture: Boolean
   otp: String
   phone: String
@@ -1639,8 +1585,9 @@ type OtpUpdateOutput {
 input OtpUpdateUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-03-22T12:36:14.091Z"
+  created: DateTimeISO = "2025-04-15T06:54:40.215Z"
   email: String
+  isCheckExists: Boolean
   isFixture: Boolean
   otp: String
   phone: String
@@ -1660,248 +1607,12 @@ input PaginationInput {
   last: Float
 }
 
-type PaymentMethod {
-  User: [User]
-  _id: String
-  created: DateTimeISO
-  externalId: String
-  fingerprint: String
-  isFixture: Boolean
-  last4: String
-  name: String
-  type: String
-}
-
-input PaymentMethodCreateFormInput {
-  User: [UserInput] = []
-  _id: String
-  created: DateTimeISO
-  externalId: String
-  fingerprint: String
-  isFixture: Boolean
-  last4: String
-  name: String
-  type: String
-}
-
-input PaymentMethodCreateInput {
-  form: PaymentMethodCreateFormInput
-  root: String
-}
-
-input PaymentMethodCreateManyFormInput {
-  User: [UserInput] = []
-  _id: String
-  created: DateTimeISO
-  externalId: String
-  fingerprint: String
-  isFixture: Boolean
-  last4: String
-  name: String
-  type: String
-}
-
-input PaymentMethodCreateManyInput {
-  form: [PaymentMethodCreateManyFormInput]
-  root: String
-}
-
-type PaymentMethodCreateManyOutput {
-  result: PaymentMethod
-  root: User
-}
-
-type PaymentMethodCreateOutput {
-  result: PaymentMethod
-  root: User
-}
-
-type PaymentMethodGetConnectionConnection {
-  edges: [PaymentMethodGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type PaymentMethodGetConnectionEdge {
-  cursor: String
-  node: PaymentMethod
-}
-
-input PaymentMethodGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PaymentMethodInput]
-  resourceValue: PaymentMethodInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PaymentMethodGetConnectionInput {
-  filter: [PaymentMethodGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
-type PaymentMethodGetConnectionOutput {
-  result: PaymentMethodGetConnectionConnection
-  root: User
-}
-
-input PaymentMethodGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PaymentMethodInput]
-  resourceValue: PaymentMethodInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PaymentMethodGetInput {
-  filter: [PaymentMethodGetFilterInput]
-  id: [String]
-  root: String
-}
-
-input PaymentMethodGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PaymentMethodInput]
-  resourceValue: PaymentMethodInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PaymentMethodGetManyInput {
-  filter: [PaymentMethodGetManyFilterInput]
-  root: String
-}
-
-type PaymentMethodGetManyOutput {
-  result: [PaymentMethod]
-  root: User
-}
-
-type PaymentMethodGetOutput {
-  result: PaymentMethod
-  root: User
-}
-
-input PaymentMethodInput {
-  User: [UserInput] = []
-  _id: String
-  created: DateTimeISO
-  externalId: String
-  fingerprint: String
-  isFixture: Boolean
-  last4: String
-  name: String
-  type: String
-}
-
-input PaymentMethodRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PaymentMethodInput]
-  resourceValue: PaymentMethodInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PaymentMethodRemoveInput {
-  filter: [PaymentMethodRemoveFilterInput]
-  id: [String]
-  root: String
-}
-
-type PaymentMethodRemoveOutput {
-  result: PaymentMethod
-  root: User
-}
-
-input PaymentMethodSearchInput {
-  keys: [String]
-  query: String
-  root: String
-}
-
-type PaymentMethodSearchOutput {
-  result: [PaymentMethod]
-  root: User
-}
-
-input PaymentMethodTokenCreateFormInput {
+input PaymentArgsInput {
   paymentMethodId: String
   products: [ProductItemInput]
 }
 
-input PaymentMethodTokenCreateInput {
-  form: PaymentMethodTokenCreateFormInput
-  root: String
-}
-
-type PaymentMethodTokenCreateOutput {
-  result: String
-}
-
-input PaymentMethodTokenRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [IdArgsInput]
-  resourceValue: IdArgsInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PaymentMethodTokenRemoveInput {
-  filter: [PaymentMethodTokenRemoveFilterInput]
-  id: [String]
-  root: String
-}
-
-type PaymentMethodTokenRemoveOutput {
-  result: Boolean
-}
-
-input PaymentMethodUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [PaymentMethodInput]
-  resourceValue: PaymentMethodInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input PaymentMethodUpdateInput {
-  filter: [PaymentMethodUpdateFilterInput]
-  id: [String]
-  root: String
-  update: PaymentMethodUpdateUpdateInput
-}
-
-type PaymentMethodUpdateOutput {
-  result: PaymentMethod
-  root: User
-}
-
-input PaymentMethodUpdateUpdateInput {
-  User: [UserInput] = []
+type PaymentMethod {
   _id: String
   created: DateTimeISO
   externalId: String
@@ -1910,11 +1621,6 @@ input PaymentMethodUpdateUpdateInput {
   last4: String
   name: String
   type: String
-}
-
-type PriceTier {
-  price: Float
-  timing: String
 }
 
 type Pricing {
@@ -2346,7 +2052,6 @@ type Query {
   CardGetConnection(input: CardGetConnectionInput): CardGetConnectionOutput
   CardGetMany(input: CardGetManyInput): CardGetManyOutput
   CardSearch(input: CardSearchInput): CardSearchOutput
-  GetMapRoute(input: GetRouteInput): MapRoute
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
@@ -2364,10 +2069,7 @@ type Query {
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
   OtpSearch(input: OtpSearchInput): OtpSearchOutput
-  PaymentMethodGet(input: PaymentMethodGetInput): PaymentMethodGetOutput
-  PaymentMethodGetConnection(input: PaymentMethodGetConnectionInput): PaymentMethodGetConnectionOutput
-  PaymentMethodGetMany(input: PaymentMethodGetManyInput): PaymentMethodGetManyOutput
-  PaymentMethodSearch(input: PaymentMethodSearchInput): PaymentMethodSearchOutput
+  PaymentMethodGetAll: [PaymentMethod]
   PricingGet(input: PricingGetInput): PricingGetOutput
   PricingGetConnection(input: PricingGetConnectionInput): PricingGetConnectionOutput
   PricingGetMany(input: PricingGetManyInput): PricingGetManyOutput
@@ -2402,10 +2104,13 @@ type Query {
   chatsGetConnection(input: chatsGetConnectionInput): chatsGetConnectionOutput
   chatsGetMany(input: chatsGetManyInput): chatsGetManyOutput
   chatsSearch(input: chatsSearchInput): chatsSearchOutput
+  createToken(input: PaymentArgsInput): NonEmptyString
   linkedUserGet(input: linkedUserGetInput): linkedUserGetOutput
   linkedUserGetConnection(input: linkedUserGetConnectionInput): linkedUserGetConnectionOutput
   linkedUserGetMany(input: linkedUserGetManyInput): linkedUserGetManyOutput
   linkedUserSearch(input: linkedUserSearchInput): linkedUserSearchOutput
+  removeToken(input: IdArgsInput): NonEmptyString
+  signIn(input: SignInInput): SignIn
 }
 
 type Role {
@@ -2613,82 +2318,18 @@ type SignIn {
   user: User
 }
 
-input SignInCreateFormInput {
+input SignInInput {
   callingCode: String
   email: String
   otp: String
   phone: String
-}
-
-input SignInCreateInput {
-  form: SignInCreateFormInput
-  root: String
-}
-
-type SignInCreateOutput {
-  result: SignIn
-}
-
-input SignInUserUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [UserInput]
-  resourceValue: UserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input SignInUserUpdateInput {
-  filter: [SignInUserUpdateFilterInput]
-  id: [String]
-  root: String
-  update: SignInUserUpdateUpdateInput
-}
-
-type SignInUserUpdateOutput {
-  result: SignIn
-}
-
-input SignInUserUpdateUpdateInput {
-  Access: [AccessInput] = []
-  Bank: [BankInput] = []
-  Card: [CardInput] = []
-  PaymentMethod: [PaymentMethodInput] = []
-  _id: String
-  callingCode: String
-  chats: [ChatInput] = []
-  created: DateTimeISO
-  email: String
-  first: String
-  isFixture: Boolean
-  last: String
-  linkedUser: [linkedUserInput]
-  messages: [MessageInput] = []
-  paymentMethodPrimary: String
-  phone: String
-}
-
-input SignInUsernameCreateFormInput {
-  callingCode: String
-  email: String
-  otp: String
-  phone: String
-}
-
-input SignInUsernameCreateInput {
-  form: SignInUsernameCreateFormInput
-  root: String
-}
-
-type SignInUsernameCreateOutput {
-  result: SignIn
 }
 
 type Snapshot {
+  _id: String
+  created: DateTimeISO
   images: [String]
+  isFixture: Boolean
   name: String
 }
 
@@ -2736,7 +2377,10 @@ type SnapshotGetOutput {
 }
 
 input SnapshotInput {
+  _id: String
+  created: DateTimeISO
   images: [String]
+  isFixture: Boolean
   name: String
 }
 
@@ -2751,7 +2395,7 @@ type Socket {
 input SocketCreateFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-03-22T12:36:14.091Z"
+  created: DateTimeISO = "2025-04-15T06:54:40.216Z"
   isFixture: Boolean
   name: String
 }
@@ -2764,7 +2408,7 @@ input SocketCreateInput {
 input SocketCreateManyFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-03-22T12:36:14.091Z"
+  created: DateTimeISO = "2025-04-15T06:54:40.216Z"
   isFixture: Boolean
   name: String
 }
@@ -2860,7 +2504,7 @@ type SocketGetOutput {
 input SocketInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-03-22T12:36:14.091Z"
+  created: DateTimeISO = "2025-04-15T06:54:40.216Z"
   isFixture: Boolean
   name: String
 }
@@ -2923,7 +2567,7 @@ type SocketUpdateOutput {
 input SocketUpdateUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-03-22T12:36:14.091Z"
+  created: DateTimeISO = "2025-04-15T06:54:40.216Z"
   isFixture: Boolean
   name: String
 }
@@ -2936,7 +2580,6 @@ type User {
   Access: [Access]
   Bank: [Bank]
   Card: [Card]
-  PaymentMethod: [PaymentMethod]
   _id: String
   callingCode: String
   chats: [Chat]
@@ -2955,7 +2598,6 @@ input UserCreateFormInput {
   Access: [AccessInput] = []
   Bank: [BankInput] = []
   Card: [CardInput] = []
-  PaymentMethod: [PaymentMethodInput] = []
   _id: String
   callingCode: String
   chats: [ChatInput] = []
@@ -2979,7 +2621,6 @@ input UserCreateManyFormInput {
   Access: [AccessInput] = []
   Bank: [BankInput] = []
   Card: [CardInput] = []
-  PaymentMethod: [PaymentMethodInput] = []
   _id: String
   callingCode: String
   chats: [ChatInput] = []
@@ -3086,7 +2727,6 @@ input UserInput {
   Access: [AccessInput] = []
   Bank: [BankInput] = []
   Card: [CardInput] = []
-  PaymentMethod: [PaymentMethodInput] = []
   _id: String
   callingCode: String
   chats: [ChatInput] = []
@@ -3160,7 +2800,6 @@ input UserUpdateUpdateInput {
   Access: [AccessInput] = []
   Bank: [BankInput] = []
   Card: [CardInput] = []
-  PaymentMethod: [PaymentMethodInput] = []
   _id: String
   callingCode: String
   chats: [ChatInput] = []

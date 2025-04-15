@@ -8,43 +8,39 @@ import {
   type CreateProtectedResourceResolverParamsModel,
 } from '@lib/backend/resource/utils/createProtectedResourceResolver/createProtectedResourceResolver.models';
 import { createResourceResolver } from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver';
-import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
-import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
+import { withResourceInput } from '@lib/backend/resource/utils/withResourceInput/withResourceInput';
+import { withResourceOutput } from '@lib/backend/resource/utils/withResourceOutput/withResourceOutput';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type ProtectedResourceModel } from '@lib/shared/auth/resources/ProtectedResource/ProtectedResource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
-export const createProtectedResourceResolver = <
-  TType extends ProtectedResourceModel,
-  TForm = EntityResourceDataModel<TType>,
->(
-  params: CreateProtectedResourceResolverParamsModel<TType, TForm>,
-): CreateProtectedResourceResolverModel<TType, TForm> => {
+export const createProtectedResourceResolver = <TType extends ProtectedResourceModel>(
+  params: CreateProtectedResourceResolverParamsModel<TType>,
+): CreateProtectedResourceResolverModel<TType> => {
   @withResolver({ Resource: params.Resource })
-  class ProtectedResourceResolver extends createResourceResolver<TType, TForm>(params) {
+  class ProtectedResourceResolver extends createResourceResolver<TType>(params) {
     protected implementation = Container.get(params.ResourceImplementation);
 
-    @withOutput({
+    @withResourceOutput({
       Resource: params.Resource,
       method: RESOURCE_METHOD_TYPE.GET_MANY,
       name: `${params.name}${RESOURCE_METHOD_TYPE.GET_MANY}Protected`,
     })
     async getManyProtected(
-      @withInput({
+      @withResourceInput({
         Resource: params.Resource,
         method: RESOURCE_METHOD_TYPE.GET_MANY,
         name: `${params.name}${RESOURCE_METHOD_TYPE.GET_MANY}Protected`,
       })
-      input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TForm> = {},
+      input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType> = {},
       @withContext()
       context?: RequestContextModel,
-    ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>> {
       return this.implementation.getManyProtected(input, context);
     }
 

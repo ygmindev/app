@@ -8,18 +8,15 @@ import {
   ACCESS_LEVEL,
   ACCESS_RESOURCE_NAME,
 } from '@lib/shared/auth/resources/Access/Access.constants';
-import {
-  type AccessFormModel,
-  type AccessModel,
-} from '@lib/shared/auth/resources/Access/Access.models';
+import { type AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { type AccessImplementationModel } from '@lib/shared/auth/resources/Access/AccessImplementation/AccessImplementation.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type InputModel } from '@lib/shared/resource/utils/Input/Input.models';
-import { type OutputModel } from '@lib/shared/resource/utils/Output/Output.models';
+import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
 @withContainer({ name: `${ACCESS_RESOURCE_NAME}Implementation` })
 export class AccessImplementation
-  extends createProtectedResoureImplementation<AccessModel, AccessFormModel>({
+  extends createProtectedResoureImplementation<AccessModel>({
     Resource: Access,
     isAuthored: false,
     name: ACCESS_RESOURCE_NAME,
@@ -28,9 +25,9 @@ export class AccessImplementation
 {
   @withAccess({ access: ACCESS_LEVEL.PROTECTED })
   async getManyUser(
-    input: InputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel, AccessFormModel> = {},
+    input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel, undefined> = {},
     context?: RequestContextModel,
-  ): Promise<OutputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel>> {
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, AccessModel, undefined>> {
     const userId = context?.user?._id;
     if (userId) {
       input.filter = [...(input.filter ?? []), { field: '_user', value: { _id: userId } }];

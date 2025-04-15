@@ -1,12 +1,12 @@
-import {
-  type PaymentMethodFormModel,
-  type PaymentMethodModel,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export type _NewPaymentMethodInputPropsModel = {
-  onCreate?(form: PaymentMethodFormModel): Promise<PartialModel<PaymentMethodModel> | NilModel>;
+  onCreate?(
+    form: EntityResourceDataModel<PaymentMethodModel>,
+  ): Promise<PartialModel<PaymentMethodModel> | NilModel>;
   products?: Array<PartialModel<ProductItemModel>>;
   redirectTo?: string;
   token: string;

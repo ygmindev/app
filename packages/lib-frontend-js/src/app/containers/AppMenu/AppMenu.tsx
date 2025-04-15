@@ -1,5 +1,4 @@
 import { type AppMenuPropsModel } from '@lib/frontend/app/containers/AppMenu/AppMenu.models';
-import { SIGN_IN, SIGN_OUT } from '@lib/frontend/auth/auth.constants';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { Button } from '@lib/frontend/core/components/Button/Button';
@@ -16,7 +15,7 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
-import { AUTH } from '@lib/shared/auth/auth.constants';
+import { AUTH, SIGN_IN, SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
 import { useRef } from 'react';
 

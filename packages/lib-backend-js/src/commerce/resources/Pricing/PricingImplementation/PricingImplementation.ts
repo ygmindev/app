@@ -3,24 +3,13 @@ import { ProductImplementation } from '@lib/backend/commerce/resources/Product/P
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createEmbeddedResourceImplementation } from '@lib/backend/resource/utils/createEmbeddedResourceImplementation/createEmbeddedResourceImplementation';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
-import {
-  type PricingFormModel,
-  type PricingModel,
-} from '@lib/shared/commerce/resources/Pricing/Pricing.models';
+import { type PricingModel } from '@lib/shared/commerce/resources/Pricing/Pricing.models';
 import { type PricingImplementationModel } from '@lib/shared/commerce/resources/Pricing/PricingImplementation/PricingImplementation.models';
-import {
-  type ProductFormModel,
-  type ProductModel,
-} from '@lib/shared/commerce/resources/Product/Product.models';
+import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
 
 @withContainer()
 export class PricingImplementation
-  extends createEmbeddedResourceImplementation<
-    PricingModel,
-    PricingFormModel,
-    ProductModel,
-    ProductFormModel
-  >({
+  extends createEmbeddedResourceImplementation<PricingModel, ProductModel>({
     Resource: Pricing,
     RootImplementation: ProductImplementation,
     name: PRICING_RESOURCE_NAME,

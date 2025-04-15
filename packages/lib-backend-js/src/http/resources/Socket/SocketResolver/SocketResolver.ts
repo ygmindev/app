@@ -5,15 +5,12 @@ import { type SocketResolverModel } from '@lib/backend/http/resources/Socket/Soc
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
 import { SOCKET_RESOURCE_NAME } from '@lib/shared/http/resources/Socket/Socket.constants';
-import {
-  type SocketFormModel,
-  type SocketModel,
-} from '@lib/shared/http/resources/Socket/Socket.models';
+import { type SocketModel } from '@lib/shared/http/resources/Socket/Socket.models';
 
 @withContainer()
 @withResolver({ Resource: () => Socket })
 export class SocketResolver
-  extends createEntityResourceResolver<SocketModel, SocketFormModel>({
+  extends createEntityResourceResolver<SocketModel>({
     Resource: () => Socket,
     ResourceImplementation: SocketImplementation,
     name: SOCKET_RESOURCE_NAME,

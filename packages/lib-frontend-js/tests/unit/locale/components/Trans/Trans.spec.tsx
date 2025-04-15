@@ -27,7 +27,7 @@ describe(displayName, () => {
     const { findByText } = await render({
       element: (
         <Trans
-          i18nKey="testWithParams"
+          i18nKey="testWithInput"
           ns="test"
           params={{ value1: 'value1', value2: 'value2' }}
         />

@@ -10,7 +10,7 @@ describe(displayName, () => {
 
   test('works', async () => {
     const pubsub = new PubSub();
-    pubsub.subscribe(TOPIC, (data) => {
+    pubsub.subscribeSync(TOPIC, (data) => {
       expect(data).toStrictEqual(DATA);
     });
     pubsub.publish(TOPIC, DATA);

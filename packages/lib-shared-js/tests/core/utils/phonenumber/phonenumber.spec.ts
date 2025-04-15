@@ -1,11 +1,11 @@
-import { phonenumber } from '@lib/shared/locale/utils/phonenumber/phonenumber';
+import { phoneNumber } from '@lib/shared/locale/utils/phoneNumber/phoneNumber';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ phonenumber });
+const { displayName } = withTest({ phoneNumber });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await phonenumber({});
+    const result = await phoneNumber({});
     expect(result).toStrictEqual({});
   });
 });

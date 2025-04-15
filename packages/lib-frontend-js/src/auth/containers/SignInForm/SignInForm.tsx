@@ -1,4 +1,4 @@
-import { SIGN_IN } from '@lib/frontend/auth/auth.constants';
+import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { OtpForm } from '@lib/frontend/auth/containers/OtpForm/OtpForm';
 import { type SignInFormPropsModel } from '@lib/frontend/auth/containers/SignInForm/SignInForm.models';
 import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm';

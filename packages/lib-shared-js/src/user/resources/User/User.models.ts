@@ -9,10 +9,7 @@ import { type PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
 import { type MessageModel } from '@lib/shared/chat/resources/Message/Message.models';
-import {
-  type EntityResourceDataModel,
-  type EntityResourceModel,
-} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import { type LinkedUserModel } from '@lib/shared/user/resources/LinkedUser/LinkedUser.models';
 
@@ -43,5 +40,3 @@ export type UserModel = EntityResourceModel & {
 
   phone?: string;
 };
-
-export type UserFormModel = EntityResourceDataModel<UserModel>;

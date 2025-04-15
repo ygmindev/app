@@ -6,16 +6,13 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEmbeddedResourceResolver } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
-import {
-  type PricingFormModel,
-  type PricingModel,
-} from '@lib/shared/commerce/resources/Pricing/Pricing.models';
+import { type PricingModel } from '@lib/shared/commerce/resources/Pricing/Pricing.models';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
 
 @withContainer()
 @withResolver({ Resource: () => Pricing })
 export class PricingResolver
-  extends createEmbeddedResourceResolver<PricingModel, PricingFormModel, ProductModel>({
+  extends createEmbeddedResourceResolver<PricingModel, ProductModel>({
     Resource: () => Pricing,
     ResourceImplementation: PricingImplementation,
     RootResource: () => Product,

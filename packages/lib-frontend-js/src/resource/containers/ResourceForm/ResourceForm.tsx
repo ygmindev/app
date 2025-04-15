@@ -8,17 +8,17 @@ import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ResourceFormPropsModel } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { cloneElement, type ReactElement, useState } from 'react';
 
-export const ResourceForm = <TType, TForm = EntityResourceDataModel<TType>, TRoot = undefined>({
+export const ResourceForm = <TType extends EntityResourceModel, TRoot = undefined>({
   data,
   fields,
   onSubmit,
   rootName,
   ...props
-}: LFCPropsModel<ResourceFormPropsModel<TType, TForm, TRoot>>): ReactElement<
-  LFCPropsModel<ResourceFormPropsModel<TType, TForm, TRoot>>
+}: LFCPropsModel<ResourceFormPropsModel<TType, TRoot>>): ReactElement<
+  LFCPropsModel<ResourceFormPropsModel<TType, TRoot>>
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
   const [rootValue, rootValueSet] = useState<

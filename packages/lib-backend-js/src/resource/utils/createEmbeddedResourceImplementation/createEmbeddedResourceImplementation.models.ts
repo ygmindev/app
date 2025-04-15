@@ -6,19 +6,16 @@ import { type ResourceImplementationModel } from '@lib/shared/resource/utils/Res
 
 export type CreateEmbeddedResourceImplementationParamsModel<
   TType extends EntityResourceModel,
-  TForm,
   TRoot extends EntityResourceModel,
-  TRootForm,
 > = Omit<
-  CreateResourceImplementationParamsModel<TType, TForm, TRoot>,
-  'count' | keyof ResourceImplementationModel<TType, TForm, TRoot>
+  CreateResourceImplementationParamsModel<TType, TRoot>,
+  'count' | keyof ResourceImplementationModel<TType, TRoot>
 > & {
-  RootImplementation: ClassModel<EntityResourceImplementationModel<TRoot, TRootForm>>;
+  RootImplementation: ClassModel<EntityResourceImplementationModel<TRoot>>;
   name: KeysOfTypeModel<TRoot, Array<TType>>;
 };
 
 export type CreateEmbeddedResourceImplementationModel<
   TType extends EntityResourceModel,
-  TForm,
   TRoot extends EntityResourceModel,
-> = ClassModel<ResourceImplementationModel<TType, TForm, TRoot>>;
+> = ClassModel<ResourceImplementationModel<TType, TRoot>>;
