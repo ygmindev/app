@@ -1,4 +1,3 @@
-import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { NewPaymentMethodInput } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput';
 import { type NewPaymentMethodInputRefModel } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput.models';
@@ -38,10 +37,7 @@ import {
   type PaymentMethodTypeModel,
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { sort } from '@lib/shared/core/utils/sort/sort';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
-import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 import { forwardRef, useRef } from 'react';
 
 export const PaymentMethodInput: RLFCModel<
@@ -51,16 +47,11 @@ export const PaymentMethodInput: RLFCModel<
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
   const currentUser = useCurrentUser();
-  const { userUpdate } = useSignInResource();
+  // const { userUpdate } = useSignInResource();
   const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
   const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
-  const { getMany } = usePaymentMethodResource({ root: currentUser?._id });
-  const refF =
-    useRef<
-      DataBoundaryRefModel<
-        ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>
-      >
-    >(null);
+  const { getAll } = usePaymentMethodResource();
+  const refF = useRef<DataBoundaryRefModel<Array<Partial<PaymentMethodModel>>>>(null);
 
   const inputRef = useRef<NewPaymentMethodInputRefModel>(null);
 
@@ -70,16 +61,13 @@ export const PaymentMethodInput: RLFCModel<
     value,
   });
 
-  const handleQuery = async (): Promise<
-    ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, PaymentMethodModel, UserModel>
-  > => {
-    const output = await getMany();
+  const handleQuery = async (): Promise<Array<Partial<PaymentMethodModel>>> => {
+    let output = await getAll();
     if (!valueControlled) {
       const primary =
-        output.result?.find((v) => v._id && v._id === currentUser?.paymentMethodPrimary) ??
-        output.result?.[0];
+        output?.find((v) => v._id && v._id === currentUser?.paymentMethodPrimary) ?? output?.[0];
       if (primary) {
-        output.result = sort(output.result ?? [], [(v) => (v._id === primary._id ? 0 : 1)]);
+        output = sort(output ?? [], [(v) => (v._id === primary._id ? 0 : 1)]);
         valueControlledSet(primary.externalId);
       }
     }
@@ -129,19 +117,17 @@ export const PaymentMethodInput: RLFCModel<
 
       <DataBoundary
         {...wrapperProps}
-        fallbackData={{
-          result: getEntityResourceFixture({
-            count: 3,
-            data: () => ({ title: 'test' }),
-          }),
-        }}
+        fallbackData={getEntityResourceFixture({
+          count: 3,
+          data: () => ({ title: 'test' }),
+        })}
         id={PAYMENT_METHOD_RESOURCE_NAME}
         query={handleQuery}
         ref={refF}>
         {({ data }) =>
           isEditable ? (
             <ItemList
-              items={data?.result?.map(({ _id, last4, name, type }) => ({
+              items={data?.map(({ _id, last4, name, type }) => ({
                 icon: getIcon(type),
                 id: _id ?? '',
                 last4,
@@ -157,12 +143,12 @@ export const PaymentMethodInput: RLFCModel<
                     <Chip>{t('billing:defaultPayment')}</Chip>
                   ) : (
                     <Button
-                      onPress={async () =>
-                        userUpdate({
-                          filter: [{ field: '_id', stringValue: currentUser?._id }],
-                          update: { paymentMethodPrimary: item.id },
-                        })
-                      }
+                      onPress={async () => {
+                        // userUpdate({
+                        //   filter: [{ field: '_id', stringValue: currentUser?._id }],
+                        //   update: { paymentMethodPrimary: item.id },
+                        // })
+                      }}
                       type={BUTTON_TYPE.INVISIBLE}>
                       {t('billing:setAsDefault')}
                     </Button>
@@ -197,7 +183,7 @@ export const PaymentMethodInput: RLFCModel<
               isVertical
               onChange={(v) => valueControlledSet(v)}
               options={
-                data?.result?.map(({ _id, externalId, last4, name, type }) => ({
+                data?.map(({ _id, externalId, last4, name, type }) => ({
                   id: externalId ?? _id ?? '',
                   label: (
                     <Title

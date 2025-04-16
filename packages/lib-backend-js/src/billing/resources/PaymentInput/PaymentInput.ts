@@ -1,14 +1,14 @@
 import { ProductItem } from '@lib/backend/commerce/utils/ProductItem/ProductItem';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { PAYMENT_ARGS } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.constants';
-import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
+import { PAYMENT_INPUT } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.constants';
+import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ name: PAYMENT_ARGS })
-export class PaymentArgs implements PaymentArgsModel {
+@withEntity({ name: PAYMENT_INPUT })
+export class PaymentInput implements PaymentInputModel {
   @withField({ isOptional: true, type: DATA_TYPE.STRING })
   paymentMethodId?: string;
 

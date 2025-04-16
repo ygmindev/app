@@ -5,7 +5,7 @@ import {
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
-import { GraphQLDateTime, GraphQLNonEmptyString, GraphQLUnsignedFloat } from 'graphql-scalars';
+import { GraphQLDateTime, GraphQLUnsignedFloat } from 'graphql-scalars';
 import { Mutation, Query, Subscription } from 'type-graphql';
 
 export const _withOutput = <TType extends unknown, TData extends unknown>({
@@ -21,8 +21,10 @@ export const _withOutput = <TType extends unknown, TData extends unknown>({
     ? () => (isArray ? [Resource()] : Resource())
     : (() => {
         switch (type) {
+          case DATA_TYPE.BOOLEAN:
+            return () => (isArray ? [Boolean] : Boolean);
           case DATA_TYPE.STRING:
-            return () => (isArray ? [GraphQLNonEmptyString] : GraphQLNonEmptyString);
+            return () => (isArray ? [String] : String);
           case DATA_TYPE.DATE:
             return () => (isArray ? [GraphQLDateTime] : GraphQLDateTime);
           default:

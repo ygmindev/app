@@ -97,7 +97,7 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
               throw new InvalidTypeError(type, 'payment method type');
           }
         })();
-        return form && onCreate && (await onCreate(form));
+        return form && (await onCreate?.(form));
       }
     };
 

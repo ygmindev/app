@@ -17,7 +17,7 @@ import {
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodImplementationModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
-import { type PaymentArgsModel } from '@lib/shared/billing/utils/PaymentArgs/PaymentArgs.models';
+import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { type ProductImplementationModel } from '@lib/shared/commerce/resources/Product/ProductImplementation/ProductImplementation.models';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
@@ -28,7 +28,7 @@ import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
-import { IdArgsModel } from '@lib/shared/resource/utils/IdArgs/IdArgs.models';
+import { IdInputModel } from '@lib/shared/resource/utils/IdInput/IdInput.models';
 import { LINKED_USER_TYPE } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import { type LinkedUserImplementationModel } from '@lib/shared/user/resources/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';
 import round from 'lodash/round';
@@ -69,7 +69,7 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
     throw new UnauthenticatedError();
   }
 
-  async createToken(input: PaymentArgsModel, context?: RequestContextModel): Promise<string> {
+  async createToken(input: PaymentInputModel, context?: RequestContextModel): Promise<string> {
     const userId = context?.user?._id;
     if (userId) {
       let { result: linkedUser } = await this.linkedUserImplementation.get({
@@ -141,7 +141,7 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
     throw new UnauthenticatedError();
   }
 
-  async removeToken(input: IdArgsModel, context?: RequestContextModel): Promise<boolean> {
+  async removeToken(input: IdInputModel, context?: RequestContextModel): Promise<boolean> {
     const userId = context?.user?._id;
     if (userId) {
       const { id } = input;

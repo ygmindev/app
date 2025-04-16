@@ -21,6 +21,7 @@ import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { APP_URI } from '@lib/shared/http/http.constants';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { forwardRef, useState } from 'react';
 
 export const NewPaymentMethodInput: RLFCModel<
@@ -40,13 +41,15 @@ export const NewPaymentMethodInput: RLFCModel<
   const [isPrimary, isPrimarySet] = useState<boolean>(true);
 
   useUnmount(() => {
-    currentToken && void removeToken({ filter: [{ field: 'id', value: currentToken }] });
+    currentToken && void removeToken({ id: currentToken });
   });
 
   const handleCreate = async ({
     type,
     ...form
-  }: PaymentMethodFormModel): Promise<PartialModel<PaymentMethodModel> | NilModel> => {
+  }: EntityResourceDataModel<PaymentMethodModel>): Promise<
+    PartialModel<PaymentMethodModel> | NilModel
+  > => {
     const formF = isPrimary ? { ...form, isPrimary: true } : form;
     const paymentMethod = await (async () => {
       switch (type) {
@@ -66,7 +69,7 @@ export const NewPaymentMethodInput: RLFCModel<
       flex
       id="paymentMethodToken"
       query={async () => {
-        const token = (await createToken({ root: currentUser?._id })).result;
+        const token = await createToken({});
         token && currentTokenSet(token);
         return token;
       }}>

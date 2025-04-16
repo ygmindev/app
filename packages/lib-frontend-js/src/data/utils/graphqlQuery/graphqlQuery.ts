@@ -16,7 +16,9 @@ import toString from 'lodash/toString';
 
 const getGraphqlFields = <TType extends unknown>(
   fields: GraphqlQueryParamsFieldsModel<TType> | GraphqlFragmentFieldModel<TType>,
-): string => `{
+): string =>
+  (fields?.length ?? 0 > 0)
+    ? `{
   ${
     isPlainObject(fields)
       ? filterNil(
@@ -33,7 +35,8 @@ const getGraphqlFields = <TType extends unknown>(
           )
           .join(' ')
   }
-}`;
+}`
+    : '';
 
 export const graphqlQuery = <TResult, TParams, TName extends string = string>({
   fields,
