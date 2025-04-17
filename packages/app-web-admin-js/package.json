@@ -17,7 +17,7 @@
     "color": "^5.0.0",
     "date-fns": "^4.1.0",
     "graphql-ws": "^6.0.4",
-    "inversify": "^7.0.1",
+    "inversify": "^7.5.1",
     "inversify-react": "^1.2.0",
     "lexical": "^0.26.0",
     "libphonenumber-js": "^1.12.4",

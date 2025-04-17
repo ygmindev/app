@@ -4,16 +4,15 @@ import { Container } from 'inversify';
 import isFunction from 'lodash/isFunction';
 
 export const _container = new Container({
-  autoBindInjectable: true,
+  autobind: true,
   defaultScope: 'Singleton',
-  skipBaseClassChecks: true,
 });
 
 export const _Container: _ContainerModel = {
   container: () => _container,
 
   get: <TType extends unknown>(type: ClassModel<TType> | string, name?: string): TType =>
-    name ? _container.getNamed<TType>(type, name) : _container.get<TType>(type),
+    _container.get<TType>(name ?? type),
 
   set: <TType extends unknown>(
     type: ClassModel<TType> | string,
@@ -23,6 +22,6 @@ export const _Container: _ContainerModel = {
     const valueF = isFunction(value)
       ? _container.bind<TType>(type).to(value as ClassModel<TType>)
       : _container.bind<TType>(type).toDynamicValue(() => value as TType);
-    name && valueF.whenTargetNamed(name);
+    name && valueF.whenNamed(name);
   },
 };

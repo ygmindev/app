@@ -1,5 +1,5 @@
-import themeConfigBase from '@lib/config/theme/theme.base';
-import themeConfigDark from '@lib/config/theme/theme.dark';
+import { config as themeConfigBase } from '@lib/config/theme/theme.base';
+import { config as themeConfigDark } from '@lib/config/theme/theme.dark';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { type _StyleProviderPropsModel } from '@lib/frontend/style/providers/StyleProvider/_StyleProvider.models';
 import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
