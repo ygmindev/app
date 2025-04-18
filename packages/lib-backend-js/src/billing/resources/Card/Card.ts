@@ -28,8 +28,8 @@ export class Card extends EntityResource implements CardModel {
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   externalId!: string;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
-  fingerprint?: string;
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  fingerprint!: string;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   funding!: CardFundingModel;

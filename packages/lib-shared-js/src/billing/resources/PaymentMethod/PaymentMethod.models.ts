@@ -4,7 +4,7 @@ import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityR
 export type PaymentMethodModel = EntityResourceModel & {
   externalId: string;
 
-  fingerprint?: string;
+  fingerprint: string;
 
   isPrimary?: boolean;
 

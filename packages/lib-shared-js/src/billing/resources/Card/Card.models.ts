@@ -15,7 +15,7 @@ export type CardModel = EntityResourceModel & {
 
   externalId: string;
 
-  fingerprint?: string;
+  fingerprint: string;
 
   funding: CardFundingModel;
 

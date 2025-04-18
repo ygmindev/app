@@ -11,5 +11,3 @@ export type TaskConfigModel = Pick<FileConfigModel, 'packageDirs'> & {
     timeout: number;
   };
 };
-
-export type _TaskConfigModel = void;

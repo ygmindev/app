@@ -15,21 +15,27 @@ export const _withEntity = <TType extends unknown>({
   isSchemaInput = true,
   name,
 }: _WithEntityParamsModel<TType> = {}): _WithEntityModel =>
-  ((Base: TType) => {
+  ((target: TType) => {
     const isInputOnly = name?.includes('Input');
-    const nameF = name ?? (Base as ClassModel).name;
-    !isInputOnly && isSchema && ObjectType(nameF)(Base as unknown as ClassModel);
+    const nameF = name ?? (target as ClassModel).name;
+    !isInputOnly && isSchema && ObjectType(nameF)(target as unknown as ClassModel);
     isSchemaInput &&
-      InputType(isInputOnly ? nameF : `${nameF}Input`)(Base as unknown as ClassModel);
-    let BaseF = isDatabase
-      ? (isEmbeddable ? Embeddable : Entity)({
-          abstract: isAbstract,
-          collection: nameF,
-          tableName: nameF,
-        })(Base as unknown as ClassModel)
-      : Base;
+      InputType(isInputOnly ? nameF : `${nameF}Input`)(target as unknown as ClassModel);
+
+    let BaseF = target;
+    if (isDatabase) {
+      const Base = (isEmbeddable ? Embeddable : Entity)({
+        abstract: isAbstract,
+        collection: nameF,
+        tableName: nameF,
+      })(target as unknown as ClassModel);
+      isEmbeddable && (BaseF = Base as TType);
+    }
+
     for (const { keys, type } of indices) {
-      BaseF = Index({ properties: keys, type })(BaseF as unknown as ClassModel) as TType;
+      BaseF = Index({ properties: keys as Array<never>, type })(
+        BaseF as unknown as ClassModel,
+      ) as TType;
     }
     return BaseF;
   }) as _WithEntityModel;

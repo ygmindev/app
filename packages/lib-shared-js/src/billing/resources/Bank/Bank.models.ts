@@ -8,7 +8,7 @@ export type BankModel = EntityResourceModel & {
 
   externalId: string;
 
-  fingerprint?: string;
+  fingerprint: string;
 
   isPrimary?: boolean;
 

@@ -14,7 +14,7 @@ export class PaymentMethod extends EntityResource implements PaymentMethodModel 
   externalId!: string;
 
   @withField({ type: DATA_TYPE.STRING })
-  fingerprint?: string;
+  fingerprint!: string;
 
   @withField({ type: DATA_TYPE.STRING })
   last4!: string;

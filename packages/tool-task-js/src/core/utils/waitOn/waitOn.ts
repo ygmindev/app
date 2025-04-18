@@ -1,4 +1,4 @@
-import taskConfig from '@lib/config/task/task';
+import { config as taskConfig } from '@lib/config/task/task';
 import { _waitOn } from '@tool/task/core/utils/waitOn/_waitOn';
 import {
   type WaitOnModel,

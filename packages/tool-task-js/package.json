@@ -94,7 +94,7 @@
     "inquirer": "^12.4.2",
     "inquirer-directory": "^2.2.0",
     "inquirer-file-selector": "^0.6.2",
-    "jest": "^29.7.0",
+    "jest": "30.0.0-alpha.7",
     "jest-environment-jsdom": "^29.7.0",
     "jest-environment-node": "^29.7.0",
     "jest-html-reporters": "^3.1.7",

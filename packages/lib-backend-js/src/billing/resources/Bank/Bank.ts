@@ -19,8 +19,8 @@ export class Bank extends EntityResource implements BankModel {
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   externalId!: string;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
-  fingerprint?: string;
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  fingerprint!: string;
 
   @withField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
   isPrimary?: boolean;
