@@ -6,19 +6,7 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { motify, MotiView } from 'moti';
-import { type MotiTransition } from 'moti';
 import { useState } from 'react';
-import { Pressable } from 'react-native';
-import { ReduceMotion } from 'react-native-reanimated';
-
-// const PressableAnimatable = animatable({
-//   Component: Pressable as ComponentType<ChildrenPropsModel>,
-// });
-// let PressableAnimatable = animatable({
-//   Component: View as ComponentType<ChildrenPropsModel>,
-// });
-const PressableAnimatable = motify(Pressable)();
 
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -28,12 +16,6 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       {...wrapperProps}
       p>
       <Button onPress={() => setToggle(!toggle)}>toggle</Button>
-
-      <MotiView
-        animate={{ opacity: toggle ? 1 : 0 }}
-        transition={{ reduceMotion: ReduceMotion.Never } as MotiTransition}>
-        <WrapperFixture />
-      </MotiView>
 
       <Appearable isActive={toggle}>
         <WrapperFixture />
