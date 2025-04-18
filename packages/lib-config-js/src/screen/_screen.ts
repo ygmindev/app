@@ -31,7 +31,7 @@ export const _screen = ({
   defaultViewport: dimension,
   // executablePath:
   //   process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
-  headless: process.env.NODE_ENV === 'production' ? chromium.headless : isHeadless,
+  headless: process.env.NODE_ENV === 'production' ? (chromium.headless as 'shell') : isHeadless,
   // ignoreHTTPSErrors: true,
   protocolTimeout: 0,
 });

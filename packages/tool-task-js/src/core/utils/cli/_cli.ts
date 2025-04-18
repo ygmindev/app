@@ -84,6 +84,7 @@ export const _cli = async ({
   const taskF = gulp.task(task ?? 'default');
   if (taskF) {
     await taskF(noop);
+  } else {
+    throw new NotFoundError(task);
   }
-  throw new NotFoundError(task);
 };

@@ -20,7 +20,7 @@ const excludeVendorFromSourceMap = (includes = []): Plugin => ({
       '\n//# sourceMappingURL=data:application/json;base64,' +
       Buffer.from(JSON.stringify({ mappings: 'A', sources: [''], version: 3 })).toString('base64');
 
-    build.onLoad({ filter: /node_modules/u }, async (args) => {
+    build.onLoad({ filter: /node_modules/ }, async (args) => {
       if (
         /\.[mc]?js$/.test(args.path) &&
         !new RegExp(includes.join('|'), 'u').test(args.path.split(sep).join(posix.sep))
