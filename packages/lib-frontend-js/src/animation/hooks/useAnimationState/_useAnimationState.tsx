@@ -33,7 +33,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
         duration,
         easing: (n) => n,
         loop: isInfinite,
-        reduceMotion: ReduceMotion.Always,
+        reduceMotion: ReduceMotion.Never,
         type: 'timing',
       } as MotiTransition,
     },

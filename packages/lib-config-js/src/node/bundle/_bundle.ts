@@ -17,7 +17,6 @@ import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
-// import commonjs from '@rollup/plugin-commonjs';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
 import react from '@vitejs/plugin-react-swc';
@@ -150,8 +149,6 @@ export const _bundle = ({
             // ),
             // modulesOnly: true,
           }),
-
-          // commonjs({ requireReturnsDefault: 'auto' }),
         ],
       },
 

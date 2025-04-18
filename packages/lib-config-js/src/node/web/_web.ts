@@ -27,7 +27,7 @@ export const _web = ({ bundle, isSsr, server }: WebConfigModel): _WebConfigModel
   return merge(
     [
       {
-        plugins: filterNil([isSsr && vike({ prerender: { partial: true } })]),
+        plugins: filterNil([isSsr && vike()]),
 
         server:
           process.env.NODE_ENV === 'development'

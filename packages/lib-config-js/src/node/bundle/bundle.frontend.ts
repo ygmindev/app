@@ -15,12 +15,17 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
   overrides: () => [
     {
+      aliases: [
+        // { from: 'react', to: fromModules('react/cjs/react.production.min.js') },
+        // { from: 'react-dom', to: fromModules('react-dom/cjs/react-dom.production.min.js') },
+        {
+          from: 'react-native-is-edge-to-edge',
+          to: fromModules('react-native-is-edge-to-edge/dist/index.mjs'),
+        },
+      ],
+
       assetsPathname: fromAssets(),
 
-      // aliases: [
-      //   { from: 'react', to: fromModules('react/cjs/react.production.min.js') },
-      //   { from: 'react-dom', to: fromModules('react-dom/cjs/react-dom.production.min.js') },
-      // ],
       babel: {
         plugins: [
           ['transform-react-remove-prop-types', { removeImport: true }] as [
@@ -72,7 +77,6 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
         'moti',
         'react-use',
         'redux-persist',
-        'thenby',
         ...fromGlobs(['react-native-!(codegen|gradle-plugin)'], { root: fromModules() }),
       ],
 
