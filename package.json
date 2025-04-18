@@ -8,6 +8,7 @@
         "@app/web",
         "@app/web-admin",
         "@app/web-library",
+        "@app/web-template",
         "@asset/static",
         "@service/server",
         "@service/graphql-sandbox",

@@ -46,6 +46,9 @@
       "@app/web-library/*": [
         "packages/app-web-library-js/src/*"
       ],
+      "@app/web-template/*": [
+        "packages/app-web-template-js/src/*"
+      ],
       "@lib/backend/*": [
         "packages/lib-backend-js/src/*"
       ],
