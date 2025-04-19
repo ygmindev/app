@@ -5,4 +5,5 @@ import { SSR } from '@lib/frontend/test/test.constants';
 export const ssrRoute: RouteModel = {
   element: <SsrPage />,
   pathname: SSR,
+  prerender: true,
 };
