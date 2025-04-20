@@ -17,7 +17,7 @@ node_modules
 # Environments
 **/.env.*
 
-# Ndoe (yarn)
+# Node (yarn)
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -57,6 +57,9 @@ connect.lock
 libpeerconnection.log
 testem.log
 typings
+
+# Cloudfare
+.wrangler
 
 # System Files
 .DS_Store
