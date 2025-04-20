@@ -14,7 +14,6 @@ export type EnvironmentConfigModel = {
   APP_FIREBASE_STORAGE_BUCKET: string;
   APP_HOST: string;
   APP_IS_DEBUG: BooleanStringModel;
-  APP_IS_STATIC_SERVER: BooleanStringModel;
   APP_NAME?: string;
   APP_PORT?: string;
   APP_STRIPE_TOKEN: string;

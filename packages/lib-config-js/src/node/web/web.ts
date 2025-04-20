@@ -1,9 +1,10 @@
-import bundleConfig from '@lib/config/node/bundle/bundle.web';
-import serverConfig from '@lib/config/node/server/server';
+import { config as bundleConfig } from '@lib/config/node/bundle/bundle.web';
+import { config as serverConfig } from '@lib/config/node/server/server';
 import { _web } from '@lib/config/node/web/_web';
 import { WEB_CONFIG } from '@lib/config/node/web/web.constants';
 import { type _WebConfigModel, type WebConfigModel } from '@lib/config/node/web/web.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 
 export const config = defineConfig<WebConfigModel, _WebConfigModel>({
   config: _web,
@@ -14,6 +15,9 @@ export const config = defineConfig<WebConfigModel, _WebConfigModel>({
     bundle: bundleConfig.params(),
 
     isSsr: true,
+
+    publishCommand: ({ pathname, target }) =>
+      `npx wrangler pages deploy ${pathname} --no-bundle --name ${target} --env ${ENVIRONMENT.PRODUCTION}`,
 
     server: serverConfig.params(),
   }),

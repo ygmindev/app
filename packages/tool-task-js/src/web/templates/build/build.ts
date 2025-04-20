@@ -1,13 +1,12 @@
 import { fromAssets } from '@lib/backend/file/utils/fromAssets/fromAssets';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { BUILD_DIR } from '@lib/config/file/file.constants';
-import webConfig from '@lib/config/node/web/web';
+import { FILE_CONFIG } from '@lib/config/file/file.constants';
+import { config as webConfig } from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildApp } from '@lib/shared/web/utils/buildApp/buildApp';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { runClean } from '@tool/task/core/utils/runClean/runClean';
 import { copy } from '@tool/task/file/utils/copy/copy';
-import { staticServer } from '@tool/task/server/utils/staticServer/staticServer';
 
 export const build: TaskParamsModel<unknown> = {
   environment: ENVIRONMENT.PRODUCTION,
@@ -17,18 +16,14 @@ export const build: TaskParamsModel<unknown> = {
   onBefore: ['build-config-typescript', 'build-config-lint'],
 
   task: [
-    async () => runClean({ patterns: [BUILD_DIR] }),
+    async () => runClean({ patterns: [FILE_CONFIG.buildDir] }),
 
     () => buildApp({ web: webConfig.params() }),
 
     ({ root }) =>
       copy({
         from: fromAssets(),
-        to: joinPaths([root, BUILD_DIR, 'client']),
+        to: joinPaths([root, FILE_CONFIG.buildDir, 'client']),
       }),
-
-    ({ root }) =>
-      process.env.APP_IS_STATIC_SERVER &&
-      staticServer({ pathname: joinPaths([root, BUILD_DIR, 'client']) }),
   ],
 };
