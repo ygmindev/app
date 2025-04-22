@@ -141,6 +141,7 @@
     "type-fest": "4.36.0",
     "typescript": "^5.8.2",
     "vike": "0.4.224",
+    "vike-react": "^0.6.1",
     "vite": "6.2.0",
     "vite-node": "^3.0.7",
     "vite-plugin-checker": "^0.9.0",
