@@ -8,9 +8,7 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 export const config = defineConfig<FrameworkConfigModel, _FrameworkConfigModel>({
   config: _framework,
 
-  params: () => ({
-    routes: [],
-  }),
+  params: () => ({}),
 });
 
 export default config;

@@ -9,6 +9,7 @@ import {
   type _RenderClientParamsModel,
 } from '@lib/shared/web/utils/renderClient/_renderClient.models';
 import Cookies from 'cookies-js';
+import { type ComponentType } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
 export const _renderClient =
@@ -27,7 +28,8 @@ export const _renderClient =
       },
       context,
     ]);
-    const { element } = render({ context: contextF, element: <Page {...pageProps} /> });
+    const PageF = Page as ComponentType;
+    const { element } = render({ context: contextF, element: <PageF {...pageProps} /> });
     const root = document.getElementById(rootId);
     root && hydrateRoot(root, element);
   };

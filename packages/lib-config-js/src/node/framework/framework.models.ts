@@ -1,8 +1,9 @@
-import { type RouteModel } from '@lib/frontend/route/route.models';
+import { type EmptyObjectModel } from '@lib/shared/core/core.models';
 import { type Config } from 'vike/types';
 
-export type FrameworkConfigModel = {
-  routes: Array<RouteModel>;
-};
+export type FrameworkConfigModel = EmptyObjectModel;
 
-export type _FrameworkConfigModel = Config;
+export type _FrameworkConfigModel = Omit<
+  Config,
+  'Page' | 'onBeforePrerenderStart' | 'onPrerenderStart' | 'onRenderClient' | 'onRenderHtml'
+>;

@@ -3,7 +3,7 @@ import {
   type InternationalizeConfigModel,
 } from '@lib/config/locale/internationalize/internationalize.models';
 import { type RootContextModel } from '@lib/frontend/root/root.models';
-import { type PageContextBuiltIn } from 'vike/types';
+import { type PageContextServer } from 'vike/types';
 
 export type _PrerenderParamsModel = Pick<
   InternationalizeConfigModel,
@@ -16,6 +16,6 @@ export type _PrerenderModel = (params: { pageContexts: Array<PrerenderContextMod
   prerenderContext: { pageContexts: Array<PrerenderContextModel> };
 }>;
 
-type PrerenderContextModel = Pick<PageContextBuiltIn, 'urlOriginal'> & {
-  context: RootContextModel;
+type PrerenderContextModel = PageContextServer & {
+  context?: RootContextModel;
 };

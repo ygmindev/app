@@ -8,7 +8,7 @@ import {
   type RenderClientParamsModel,
 } from '@lib/shared/web/utils/renderClient/renderClient.models';
 
-export const renderClient = ({ initialize }: RenderClientParamsModel): RenderClientModel =>
+export const renderClient = ({ initialize }: RenderClientParamsModel = {}): RenderClientModel =>
   _renderClient({
     initialize,
     internationalizeConfig: internationalizeConfig.params(),

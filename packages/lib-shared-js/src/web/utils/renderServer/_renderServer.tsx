@@ -26,6 +26,7 @@ import {
 } from '@lib/shared/web/utils/renderServer/_renderServer.models';
 import reduce from 'lodash/reduce';
 import { type ObjectId } from 'mongodb';
+import { type ComponentType } from 'react';
 import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
 import { dangerouslySkipEscape, escapeInject, stampPipe } from 'vike/server';
 
@@ -67,7 +68,7 @@ export const _renderServer =
     // Routing
     const pathname = context?.[ROUTE]?.location?.pathname;
     const matchedRoutes = routes && pathname ? matchRoutes({ pathname, routes }) : [];
-    const { isProtectable, loaders: loadersF } = matchedRoutes?.reduce(
+    const { loaders: loadersF } = matchedRoutes?.reduce(
       (result, { isProtectable, loaders }) => ({
         isProtectable: result.isProtectable || isProtectable || false,
         loaders: loaders
@@ -95,9 +96,10 @@ export const _renderServer =
       context,
     ]);
 
+    const PageF = Page as ComponentType;
     const { element, getStyleSheet } = render({
       context: contextF,
-      element: <Page {...pageProps} />,
+      element: <PageF {...pageProps} />,
     });
     const styleSheet = renderToStaticMarkup(getStyleSheet());
     const { pipe } = renderToPipeableStream(element);
