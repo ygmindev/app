@@ -82,6 +82,7 @@ export const _lint = ({
     '@typescript-eslint/return-await': ['error', 'in-try-catch'],
     '@typescript-eslint/unbound-method': 'off',
     // 'import/no-extraneous-dependencies': ['error', { packageDir: roots }],
+    // 'import/group-exports': 'error', TODO: autofix version?
     'no-param-reassign': 'error',
     'no-return-await': 'off',
     'no-unused-expressions': 'off',

@@ -5,12 +5,12 @@ import {
   type FocusableRefModel,
   type FocusableWrapperPropsModel,
 } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
+import { type QueryClient } from '@lib/frontend/data/utils/QueryClient/QueryClient';
 import {
   type InferModel,
   type PrimitiveModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
-import { type QueryClient } from '@tanstack/react-query';
 import { type ReactElement } from 'react';
 
 export type QueryContextModel = {

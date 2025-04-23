@@ -2,7 +2,7 @@ import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { Role } from '@lib/backend/auth/resources/Role/Role';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
 import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
-import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
+import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';

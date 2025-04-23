@@ -23,7 +23,7 @@ export const _renderClient =
     await initialize?.();
     const contextF: RootContextModel = merge([
       {
-        [LOCALE]: { i18n: context?.locale?.i18n ?? _internationalize(internationalizeConfig) },
+        [LOCALE]: { i18n: context?.[LOCALE]?.i18n ?? _internationalize(internationalizeConfig) },
         [STATE]: { cookies: Cookies as unknown as CookiesModel },
       },
       context,

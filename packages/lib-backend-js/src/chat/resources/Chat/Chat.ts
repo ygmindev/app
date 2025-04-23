@@ -1,6 +1,6 @@
 import { Message } from '@lib/backend/chat/resources/Message/Message';
 import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
-import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
+import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
 import { createProtectedResource } from '@lib/backend/resource/utils/createProtectedResource/createProtectedResource';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';

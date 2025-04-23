@@ -1,5 +1,5 @@
-import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
-import { RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
+import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
+import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';

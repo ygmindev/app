@@ -1,5 +1,5 @@
 import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
-import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
+import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';

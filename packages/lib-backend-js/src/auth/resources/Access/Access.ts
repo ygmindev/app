@@ -1,6 +1,6 @@
 import { Group } from '@lib/backend/group/resources/Group/Group';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import { RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
+import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';

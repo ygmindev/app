@@ -1,12 +1,10 @@
-import { type ReactElement } from 'react';
-
 import { type ChildrenPropsModel, type FCModel } from '@lib/frontend/core/core.models';
 import { type RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
-import { type RootContextModel } from '@lib/frontend/root/root.models';
+import { type RootContextPropsModel } from '@lib/frontend/root/root.models';
+import { type ReactElement } from 'react';
 
-export type RenderAppParamsModel = {
+export type RenderAppParamsModel = RootContextPropsModel & {
   Root: FCModel<RootPropsModel>;
-  context?: RootContextModel;
 } & ChildrenPropsModel;
 
 export type RenderAppModel = {

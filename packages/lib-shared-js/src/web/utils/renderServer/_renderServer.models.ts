@@ -1,6 +1,6 @@
 import { type InitializeModel } from '@app/web/setup/utils/initialize/initialize.models';
 import { type WebConfigModel } from '@lib/config/node/web/web.models';
-import { type RootContextModel } from '@lib/frontend/root/root.models';
+import { type RootContextModel, type RootContextPropsModel } from '@lib/frontend/root/root.models';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 import { type RenderAppModel } from '@lib/shared/web/utils/renderApp/renderApp.models';
 import { type TemplateWrapped } from 'node_modules/vike/dist/esm/node/runtime/html/renderHtml';
@@ -16,16 +16,14 @@ export type _RenderServerParamsModel = Pick<WebConfigModel, 'rootId' | 'ssrConte
 };
 
 export type _RenderServerModel = (
-  params: PageContextServer & {
-    context?: RootContextModel;
-    pageProps?: object;
-  },
+  params: PageContextServer & RootContextPropsModel & { pageProps?: object },
 ) => Promise<{
   documentHtml: TemplateWrapped;
-  pageContext(): Promise<{
-    context?: RootContextModel;
-    enableEagerStreaming: boolean;
-    pageProps?: object;
-    redirectTo?: string;
-  }>;
+  pageContext(): Promise<
+    RootContextPropsModel & {
+      enableEagerStreaming: boolean;
+      pageProps?: object;
+      redirectTo?: string;
+    }
+  >;
 }>;

@@ -13,3 +13,7 @@ export type RootContextModel = {
   [ROUTE]?: RouteContextModel;
   [STATE]?: RootStateContextModel;
 };
+
+export type RootContextPropsModel = {
+  context?: RootContextModel;
+};

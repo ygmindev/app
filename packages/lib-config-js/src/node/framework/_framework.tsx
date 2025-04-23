@@ -4,13 +4,17 @@ import {
 } from '@lib/config/node/framework/framework.models';
 
 export const _framework = (params: FrameworkConfigModel): _FrameworkConfigModel => ({
+  extends: ['import:vike-react/config:default'],
+
   hydrationCanBeAborted: true,
 
-  passToClient: ['context', 'pageProps'],
+  passToClient: ['context'],
 
   prerender: {
     partial: true,
   },
 
   route: '/*',
+
+  stream: true,
 });

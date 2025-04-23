@@ -90,7 +90,7 @@ export const _renderServer =
 
     const contextF: RootContextModel = merge([
       {
-        [QUERY]: { client: queryClient.client },
+        [QUERY]: { client: queryClient },
         [STATE]: { initialState } as RootStateContextModel,
       },
       context,

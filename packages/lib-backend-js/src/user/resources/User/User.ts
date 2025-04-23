@@ -5,7 +5,7 @@ import { Chat } from '@lib/backend/chat/resources/Chat/Chat';
 import { Message } from '@lib/backend/chat/resources/Message/Message';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
 import { Collection } from '@lib/backend/resource/utils/Collection/Collection';
-import { CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
+import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
