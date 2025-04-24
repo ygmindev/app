@@ -2,15 +2,18 @@ import {
   type UseAsyncModel,
   type UseAsyncParamsModel,
 } from '@lib/frontend/core/hooks/useAsync/useAsync.models';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export const useAsync = (...[params, deps = []]: UseAsyncParamsModel): UseAsyncModel => {
+  const ref = useRef(true);
+  const isMounted = useCallback(() => ref.current, []);
+
   useEffect(() => {
-    let isMounted = true;
-    const result = params?.(() => isMounted);
+    void params?.(isMounted);
+    console.info('mounted');
     return () => {
-      isMounted = false;
-      void result?.then((onUnmount) => onUnmount?.());
+      console.info('unmount');
+      ref.current = false;
     };
   }, [...deps]);
 };
