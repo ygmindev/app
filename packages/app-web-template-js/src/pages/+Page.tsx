@@ -3,6 +3,4 @@ import { Router } from '@lib/frontend/route/containers/Router/Router';
 
 import { routes } from '../routes';
 
-export const Page: FCModel = () => {
-  return <Router routes={routes} />;
-};
+export const Page: FCModel = () => <Router routes={routes} />;

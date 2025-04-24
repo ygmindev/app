@@ -1,4 +1,3 @@
-import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { OtpForm } from '@lib/frontend/auth/containers/OtpForm/OtpForm';
 import { type SignInFormPropsModel } from '@lib/frontend/auth/containers/SignInForm/SignInForm.models';
 import { UsernameForm } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm';
@@ -12,8 +11,8 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { AUTH } from '@lib/shared/auth/auth.constants';
-import { type SignInFormModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
+import { AUTH, SIGN_IN } from '@lib/shared/auth/auth.constants';
+import { type SignInInputModel } from '@lib/shared/auth/resources/SignIn/SignInInput/SignInInput.models';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
 import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
@@ -26,14 +25,16 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   ...props
 }) => {
   const { t } = useTranslation([AUTH]);
-  const { signIn, usernameUpdate } = useSignInResource();
+  // const { signIn, usernameUpdate } = useSignInResource();
+  const { signIn } = useSignInResource();
   const { location } = useRouter();
   const pubsub = useContainer(PubSub);
 
-  const handleSubmit = async (form: SignInFormModel): Promise<void> => {
+  const handleSubmit = async (form: SignInInputModel): Promise<void> => {
     await Promise.all([
       pubsub.waitFor(SIGN_IN),
-      mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form),
+      // mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form),
+      signIn(form),
     ]);
   };
 

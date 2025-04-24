@@ -1401,7 +1401,7 @@ type Otp {
 input OtpCreateFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-04-19T10:19:16.370Z"
+  created: DateTimeISO = "2025-04-24T03:32:16.198Z"
   email: String
   isCheckExists: Boolean
   isFixture: Boolean
@@ -1417,7 +1417,7 @@ input OtpCreateInput {
 input OtpCreateManyFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-04-19T10:19:16.370Z"
+  created: DateTimeISO = "2025-04-24T03:32:16.198Z"
   email: String
   isCheckExists: Boolean
   isFixture: Boolean
@@ -1516,7 +1516,7 @@ type OtpGetOutput {
 input OtpInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-04-19T10:19:16.370Z"
+  created: DateTimeISO = "2025-04-24T03:32:16.198Z"
   email: String
   isCheckExists: Boolean
   isFixture: Boolean
@@ -1582,7 +1582,7 @@ type OtpUpdateOutput {
 input OtpUpdateUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-04-19T10:19:16.370Z"
+  created: DateTimeISO = "2025-04-24T03:32:16.198Z"
   email: String
   isCheckExists: Boolean
   isFixture: Boolean
@@ -2392,7 +2392,7 @@ type Socket {
 input SocketCreateFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-04-19T10:19:16.371Z"
+  created: DateTimeISO = "2025-04-24T03:32:16.200Z"
   isFixture: Boolean
   name: String
 }
@@ -2405,7 +2405,7 @@ input SocketCreateInput {
 input SocketCreateManyFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-04-19T10:19:16.371Z"
+  created: DateTimeISO = "2025-04-24T03:32:16.200Z"
   isFixture: Boolean
   name: String
 }
@@ -2501,7 +2501,7 @@ type SocketGetOutput {
 input SocketInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-04-19T10:19:16.371Z"
+  created: DateTimeISO = "2025-04-24T03:32:16.200Z"
   isFixture: Boolean
   name: String
 }
@@ -2564,7 +2564,7 @@ type SocketUpdateOutput {
 input SocketUpdateUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-04-19T10:19:16.371Z"
+  created: DateTimeISO = "2025-04-24T03:32:16.200Z"
   isFixture: Boolean
   name: String
 }

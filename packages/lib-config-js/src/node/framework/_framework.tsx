@@ -16,5 +16,7 @@ export const _framework = (params: FrameworkConfigModel): _FrameworkConfigModel 
 
   route: '/*',
 
+  ssr: true,
+
   stream: true,
 });

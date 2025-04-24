@@ -6,9 +6,10 @@ import {
 } from '@lib/shared/web/utils/render/_render.models';
 import { renderPage } from 'vike/server';
 
-export const _render = async ({ context }: _RenderParamsModel): Promise<_RenderModel> => {
+export const _render = async ({ context, headers }: _RenderParamsModel): Promise<_RenderModel> => {
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
     context,
+    headersOriginal: headers,
     redirectTo: undefined,
     urlOriginal: context?.route?.location?.pathname ?? '',
   });

@@ -3,6 +3,7 @@ import { type PartialDeepModel } from '@lib/shared/core/core.models';
 
 export type _RenderParamsModel = {
   context?: PartialDeepModel<RootContextModel>;
+  headers?: unknown;
 };
 
 export type _RenderModel = {

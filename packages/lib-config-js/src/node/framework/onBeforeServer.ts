@@ -8,6 +8,7 @@ import { type RequestContextModel } from '@lib/config/api/api.models';
 import { config as databaseConfig } from '@lib/config/database/database.mongo';
 import { type FrameworkRenderParamsModel } from '@lib/config/node/framework/framework.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
+import { type FCModel } from '@lib/frontend/core/core.models';
 import { QueryClient } from '@lib/frontend/data/utils/QueryClient/QueryClient';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
 import {
@@ -25,6 +26,16 @@ import { STATE } from '@lib/shared/state/state.constants';
 import { USER } from '@lib/shared/user/user.constants';
 import reduce from 'lodash/reduce';
 import { type ObjectId } from 'mongodb';
+import { type ReactElement } from 'react';
+import { AppRegistry } from 'react-native-web';
+
+export type AppRegistryModel = {
+  getApplication: (
+    name: string,
+    props: unknown,
+  ) => { element: ReactElement; getStyleElement: () => ReactElement };
+  registerComponent(name: string, component: () => FCModel | undefined): void;
+};
 
 export const onBeforeServer = async (
   params: FrameworkRenderParamsModel,
@@ -85,5 +96,9 @@ export const onBeforeServer = async (
     context,
   ]);
 
+  (AppRegistry as AppRegistryModel).registerComponent('App', () => params.Page);
+  const { element, getStyleElement } = (AppRegistry as AppRegistryModel).getApplication('App', {});
+  params.Page = () => element;
+  params.getStyleSheet = getStyleElement;
   return params;
 };

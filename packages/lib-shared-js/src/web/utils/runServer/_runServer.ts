@@ -88,6 +88,7 @@ export const _runServer = async ({
           },
         },
       },
+      headers: req.headers,
     });
 
     if (redirectTo) {

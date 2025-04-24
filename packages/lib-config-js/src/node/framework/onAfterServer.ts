@@ -21,13 +21,8 @@ export const onAfterServer = async (
     },
     context,
   ]);
-
   params.context = pick(contextF, WEB_CONFIG.ssrContextKeys);
-
   await client?.clear();
 
   return params;
 };
-
-//   enableEagerStreaming: true,
-//   redirectTo: pageContext[ROUTE]?.redirectTo,

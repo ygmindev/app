@@ -45,3 +45,5 @@ export class PubSub<TType extends PubSubSchemaModel> extends _PubSub<TType> {
     return stream();
   }
 }
+
+export const pubsub = new PubSub();
