@@ -73,6 +73,8 @@ export type ThemeConfigModel = {
   shape: {
     borderRadius: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
 
+    scaling: Record<ThemeSizeModel, number>;
+
     shadow: {
       elevation: number;
 

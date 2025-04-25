@@ -150,6 +150,14 @@ export const config = defineConfig<ThemeConfigModel, _ThemeConfigModel>({
         [THEME_SIZE_MORE.XSMALL]: 5,
       },
 
+      scaling: {
+        [THEME_SIZE.LARGE]: 0.9,
+
+        [THEME_SIZE.MEDIUM]: 0.7,
+
+        [THEME_SIZE.SMALL]: 0.5,
+      },
+
       shadow: {
         elevation: 1.5,
 

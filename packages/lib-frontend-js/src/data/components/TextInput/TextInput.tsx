@@ -178,12 +178,11 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
         height: valueControlled
           ? theme.shape.size[THEME_SIZE.SMALL]
           : theme.shape.size[THEME_SIZE.MEDIUM],
-        transform: [{ scale: 1.0 }],
+        transform: [{ scale: value ? theme.shape.scaling[THEME_SIZE.MEDIUM] : 1.0 }],
       },
       [ELEMENT_STATE.ACTIVE]: {
         height: theme.shape.size[THEME_SIZE.SMALL],
-        // TODO: to config?
-        transform: [{ scale: 0.7 }],
+        transform: [{ scale: theme.shape.scaling[THEME_SIZE.MEDIUM] }],
       },
     },
   };
