@@ -1,26 +1,26 @@
 // import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useState } from 'react';
+import { motify } from 'moti';
+import { TextInput } from 'react-native';
+import { useAnimatedProps } from 'react-native-reanimated';
+
+const Animatable = motify(TextInput)();
 
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const [toggle, setToggle] = useState<boolean>(false);
+  const animatedProps = useAnimatedProps(() => {
+    return {
+      text: 'person-outline',
+    };
+  });
+
   return (
     <MainLayout
       {...wrapperProps}
-      p>
-      <Button onPress={() => setToggle(!toggle)}>toggle</Button>
-
-      <Appearable isActive={toggle}>
-        <WrapperFixture />
-      </Appearable>
-    </MainLayout>
+      p></MainLayout>
   );
 };
 

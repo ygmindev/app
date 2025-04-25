@@ -25,7 +25,7 @@ export const flexStyler: StylerModel<FlexStylerParamsModel> = ({
       : 'row'
     : isReverse
       ? 'column-reverse'
-      : 'column',
+      : undefined,
   flexGrow: grow === true ? 1 : grow === false ? undefined : grow,
   flexShrink: shrink === true ? 1 : shrink === false ? undefined : shrink,
   flexWrap: isWrap ? 'wrap' : undefined,

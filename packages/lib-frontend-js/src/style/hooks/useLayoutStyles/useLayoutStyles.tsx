@@ -17,19 +17,19 @@ import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyl
 export const useLayoutStyles = <TType,>({
   props,
 }: UseLayoutStylesParamsModel<TType>): UseLayoutStylesModel => {
-  const { isRow } = props;
   const wrapperProps = {
     ...props,
     align:
       props.isCenter ||
       props.isAlign ||
-      (props.isVerticalCenter && isRow) ||
-      (props.isHorizontalCenter && !isRow)
+      (props.isVerticalCenter && props.isRow) ||
+      (props.isHorizontalCenter && !props.isRow)
         ? (FLEX_ALIGN.CENTER as FlexAlignModel)
         : props.align,
-    isRow,
     justify:
-      props.isCenter || (props.isVerticalCenter && !isRow) || (props.isHorizontalCenter && isRow)
+      props.isCenter ||
+      (props.isVerticalCenter && !props.isRow) ||
+      (props.isHorizontalCenter && props.isRow)
         ? (FLEX_JUSTIFY.CENTER as FlexJustifyModel)
         : props.justify,
     s: props.isAlign ? THEME_SIZE.SMALL : props.s,

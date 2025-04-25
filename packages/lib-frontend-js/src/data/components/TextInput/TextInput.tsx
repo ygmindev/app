@@ -30,12 +30,10 @@ import {
   THEME_COLOR_MORE,
   THEME_ROLE,
   THEME_SIZE,
-  THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
 import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { merge } from '@lib/shared/core/utils/merge/merge';
 import isNumber from 'lodash/isNumber';
 import { useImperativeHandle, useRef } from 'react';
 
@@ -180,23 +178,18 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
         height: valueControlled
           ? theme.shape.size[THEME_SIZE.SMALL]
           : theme.shape.size[THEME_SIZE.MEDIUM],
+        transform: [{ scale: 1.0 }],
       },
-      [ELEMENT_STATE.ACTIVE]: { height: theme.shape.size[THEME_SIZE.SMALL] },
+      [ELEMENT_STATE.ACTIVE]: {
+        height: theme.shape.size[THEME_SIZE.SMALL],
+        // TODO: to config?
+        transform: [{ scale: 0.7 }],
+      },
     },
   };
 
   const textAnimation: AnimationModel<TextStyleModel> = {
-    states: merge([
-      {
-        [ELEMENT_STATE.INACTIVE]: {
-          fontSize: valueControlled
-            ? theme.font.size[THEME_SIZE_MORE.XSMALL]
-            : theme.font.size[THEME_SIZE.MEDIUM],
-        },
-        [ELEMENT_STATE.ACTIVE]: { fontSize: theme.font.size[THEME_SIZE_MORE.XSMALL] },
-      },
-      ANIMATION_STATES_FOCUSABLE({ isError, isText: true, theme }),
-    ]),
+    states: ANIMATION_STATES_FOCUSABLE({ isError, isText: true, theme }),
   };
 
   return (
@@ -262,12 +255,14 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
         left={0}
         pHorizontal
         position={SHAPE_POSITION.ABSOLUTE}
+        style={{
+          transformOrigin: `${theme.shape.spacing[THEME_SIZE.MEDIUM]}px ${theme.shape.spacing[THEME_SIZE.SMALL]}px`,
+        }}
         zIndex={-1}>
         {icon && (
           <Icon
-            animation={textAnimation}
-            elementState={elementStateControlled}
             icon={icon}
+            style={elementStateControlled && textAnimation.states?.[elementStateControlled]}
           />
         )}
 
