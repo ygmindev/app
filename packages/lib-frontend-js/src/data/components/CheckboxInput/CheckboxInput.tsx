@@ -17,45 +17,49 @@ import {
   THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
-import { forwardRef } from 'react';
 
-export const CheckboxInput: RLFCModel<CheckboxInputRefModel, CheckboxInputPropsModel> = forwardRef(
-  ({ defaultValue, elementState, label, onChange, value, ...props }, _) => {
-    const theme = useTheme();
-    const { wrapperProps } = useLayoutStyles({ props });
-    const { valueControlled, valueControlledSet } = useValueControlled<boolean>({
-      defaultValue: defaultValue ?? false,
-      onChange,
-      value,
-    });
+export const CheckboxInput: RLFCModel<CheckboxInputRefModel, CheckboxInputPropsModel> = ({
+  defaultValue,
+  elementState,
+  label,
+  onChange,
+  value,
+  ...props
+}) => {
+  const theme = useTheme();
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { valueControlled, valueControlledSet } = useValueControlled<boolean>({
+    defaultValue: defaultValue ?? false,
+    onChange,
+    value,
+  });
 
-    return (
+  return (
+    <Wrapper
+      {...wrapperProps}
+      isAlign
+      isRow
+      onPress={() => valueControlledSet(!valueControlled)}>
       <Wrapper
-        {...wrapperProps}
-        isAlign
-        isRow
-        onPress={() => valueControlledSet(!valueControlled)}>
-        <Wrapper
-          backgroundColor={valueControlled ? THEME_COLOR.PRIMARY : undefined}
-          border
-          borderColor={THEME_COLOR.PRIMARY}
-          borderRole={THEME_ROLE.MAIN}
-          height={theme.shape.size[THEME_SIZE_MORE.XSMALL]}
-          round={theme.shape.borderRadius[THEME_SIZE_MORE.XSMALL]}
-          width={theme.shape.size[THEME_SIZE_MORE.XSMALL]}>
-          <Appearable isActive={valueControlled}>
-            <Icon
-              color={THEME_COLOR_MORE.SURFACE}
-              colorRole={THEME_ROLE.MAIN}
-              icon="check"
-            />
-          </Appearable>
-        </Wrapper>
-
-        {label && <AsyncText>{label}</AsyncText>}
+        backgroundColor={valueControlled ? THEME_COLOR.PRIMARY : undefined}
+        border
+        borderColor={THEME_COLOR.PRIMARY}
+        borderRole={THEME_ROLE.MAIN}
+        height={theme.shape.size[THEME_SIZE_MORE.XSMALL]}
+        round={theme.shape.borderRadius[THEME_SIZE_MORE.XSMALL]}
+        width={theme.shape.size[THEME_SIZE_MORE.XSMALL]}>
+        <Appearable isActive={valueControlled}>
+          <Icon
+            color={THEME_COLOR_MORE.SURFACE}
+            colorRole={THEME_ROLE.MAIN}
+            icon="check"
+          />
+        </Appearable>
       </Wrapper>
-    );
-  },
-);
+
+      {label && <AsyncText>{label}</AsyncText>}
+    </Wrapper>
+  );
+};
 
 process.env.APP_IS_DEBUG && (CheckboxInput.displayName = variableName({ CheckboxInput }));

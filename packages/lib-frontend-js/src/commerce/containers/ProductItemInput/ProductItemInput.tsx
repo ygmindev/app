@@ -18,56 +18,61 @@ import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
-import { forwardRef, useMemo } from 'react';
+import { useMemo } from 'react';
 
-export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemInputPropsModel> =
-  forwardRef(({ defaultValue, onChange, value, ...props }, ref) => {
-    const { wrapperProps } = useLayoutStyles({ props });
-    const { t } = useTranslation([COMMERCE]);
-    const [items, itemsSet] = useStore('commerce.items');
-    const price = useMemo(() => getPrice(items), [items]);
-    return (
-      <Wrapper
-        {...wrapperProps}
-        s>
-        <TableInput<PartialModel<ProductItemModel>>
-          defaultValue={defaultValue}
-          element={
-            <Table
-              columns={[
-                { id: 'name', label: t('core:name') },
-                {
-                  formatter: ({ value }) => numberFormat(value as number, { currency: 'usd' }),
-                  id: 'price',
-                  label: t('commerce:price'),
-                },
-                {
-                  field: ({ value }) => (
-                    <NumberInput
-                      defaultValue={1}
-                      isNoClear
-                      min={1}
-                      size={THEME_SIZE.SMALL}
-                      value={value as number}
-                    />
-                  ),
-                  id: 'quantity',
-                  label: t('commerce:quantity'),
-                },
-              ]}
-              idField="name"
-            />
-          }
-          onChange={onChange ?? itemsSet}
-          ref={ref}
-          value={value ?? items}
-        />
+export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemInputPropsModel> = ({
+  defaultValue,
+  onChange,
+  ref,
+  value,
+  ...props
+}) => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { t } = useTranslation([COMMERCE]);
+  const [items, itemsSet] = useStore('commerce.items');
+  const price = useMemo(() => getPrice(items), [items]);
+  return (
+    <Wrapper
+      {...wrapperProps}
+      s>
+      <TableInput<PartialModel<ProductItemModel>>
+        defaultValue={defaultValue}
+        element={
+          <Table
+            columns={[
+              { id: 'name', label: t('core:name') },
+              {
+                formatter: ({ value }) => numberFormat(value as number, { currency: 'usd' }),
+                id: 'price',
+                label: t('commerce:price'),
+              },
+              {
+                field: ({ value }) => (
+                  <NumberInput
+                    defaultValue={1}
+                    isNoClear
+                    min={1}
+                    size={THEME_SIZE.SMALL}
+                    value={value as number}
+                  />
+                ),
+                id: 'quantity',
+                label: t('commerce:quantity'),
+              },
+            ]}
+            idField="name"
+          />
+        }
+        onChange={onChange ?? itemsSet}
+        ref={ref}
+        value={value ?? items}
+      />
 
-        <PriceTile
-          fontStyle={FONT_STYLE.TITLE}
-          label={t('commerce:totalPrice')}
-          price={price}
-        />
-      </Wrapper>
-    );
-  });
+      <PriceTile
+        fontStyle={FONT_STYLE.TITLE}
+        label={t('commerce:totalPrice')}
+        price={price}
+      />
+    </Wrapper>
+  );
+};

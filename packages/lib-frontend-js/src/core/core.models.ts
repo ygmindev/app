@@ -13,7 +13,7 @@ import {
 } from '@lib/frontend/style/style.models';
 import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
-import { type ComponentType, type FC as _FC, type ReactNode, type RefAttributes } from 'react';
+import { type ComponentType, type FC as _FC, type ReactNode, type RefObject } from 'react';
 
 export type NamableComponentModel<TType> = TType & { displayName?: string };
 
@@ -57,7 +57,7 @@ export type RTFCModel<TType = undefined, TProps = object> = TFCModel<TProps & Re
 
 export type PropsModel<TType> = TType extends ComponentType<infer TProps> ? TProps : never;
 
-export type RefPropsModel<TType = unknown> = RefAttributes<TType>;
+export type RefPropsModel<TType = unknown> = { ref?: RefObject<TType | null> };
 
 export type ChildrenPropsModel<TType = ReactNode | Array<ReactNode>> = ChildPropsModel<TType>;
 

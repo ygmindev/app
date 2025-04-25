@@ -36,255 +36,249 @@ import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import isNumber from 'lodash/isNumber';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 
-export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = forwardRef(
-  (
-    {
-      autoComplete,
-      beforeSubmit,
-      defaultValue,
+export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
+  autoComplete,
+  beforeSubmit,
+  defaultValue,
+  elementState,
+  height,
+  icon,
+  isCenter,
+  isNoClear,
+  isTransparent,
+  keyboard, // TODO: keyboard type from data type
+  label,
+  language,
+  leftElement,
+  maxLength,
+  numberOfLines,
+  onBlur,
+  onChange,
+  onElementStateChange,
+  onFocus,
+  onKey,
+  onSubmit,
+  placeholder,
+  ref,
+  rightElement,
+  size,
+  testID,
+  value,
+  width,
+
+  ...props
+}) => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const focusableRef = useRef<FocusableRefModel>(null);
+  const inputRef = useRef<TextInputRefModel>(null);
+
+  useImperativeHandle(ref, () => ({
+    beforeSubmit,
+    blur: () => handleFocus(false),
+    focus: () => handleFocus(true),
+    submit: inputRef.current?.submit,
+  }));
+
+  const { elementStateControlled, elementStateControlledSet, isActive, isBlocked } =
+    useElementStateControlled({
       elementState,
-      height,
-      icon,
-      isCenter,
-      isNoClear,
-      isTransparent,
-      keyboard, // TODO: keyboard type from data type
-      label,
-      language,
-      leftElement,
-      maxLength,
-      numberOfLines,
-      onBlur,
-      onChange,
       onElementStateChange,
-      onFocus,
-      onKey,
-      onSubmit,
-      placeholder,
-      rightElement,
-      size,
-      testID,
-      value,
-      width,
-      ...props
-    },
-    ref,
-  ) => {
-    const { wrapperProps } = useLayoutStyles({ props });
-    const focusableRef = useRef<FocusableRefModel>(null);
-    const inputRef = useRef<TextInputRefModel>(null);
-
-    useImperativeHandle(ref, () => ({
-      beforeSubmit,
-      blur: () => handleFocus(false),
-      focus: () => handleFocus(true),
-      submit: inputRef.current?.submit,
-    }));
-
-    const { elementStateControlled, elementStateControlledSet, isActive, isBlocked } =
-      useElementStateControlled({
-        elementState,
-        onElementStateChange,
-      });
-
-    const sizeF = size ?? THEME_SIZE.MEDIUM;
-
-    const theme = useTheme();
-    const { valueControlled, valueControlledSet } = useValueControlled({
-      defaultValue,
-      onChange,
-      value,
     });
 
-    const handleFocus = async (v?: boolean): Promise<void> => {
-      if (!isBlocked) {
-        if (v) {
-          onFocus && onFocus();
-          focusableRef.current?.focus && focusableRef.current?.focus();
-          inputRef.current?.focus?.();
-          elementStateControlledSet(ELEMENT_STATE.ACTIVE);
-        } else {
-          onBlur && onBlur();
-          focusableRef.current?.blur && focusableRef.current?.blur();
-          inputRef.current?.blur?.();
-          elementStateControlledSet(ELEMENT_STATE.INACTIVE);
-        }
+  const sizeF = size ?? THEME_SIZE.MEDIUM;
+
+  const theme = useTheme();
+  const { valueControlled, valueControlledSet } = useValueControlled({
+    defaultValue,
+    onChange,
+    value,
+  });
+
+  const handleFocus = async (v?: boolean): Promise<void> => {
+    if (!isBlocked) {
+      if (v) {
+        onFocus && onFocus();
+        focusableRef.current?.focus && focusableRef.current?.focus();
+        inputRef.current?.focus?.();
+        elementStateControlledSet(ELEMENT_STATE.ACTIVE);
+      } else {
+        onBlur && onBlur();
+        focusableRef.current?.blur && focusableRef.current?.blur();
+        inputRef.current?.blur?.();
+        elementStateControlledSet(ELEMENT_STATE.INACTIVE);
       }
-    };
+    }
+  };
 
-    const leftElementF = leftElement && (
-      <Wrapper
-        isAlign
-        isRow
-        pBottom={label ? THEME_SIZE.SMALL : undefined}>
-        {leftElement}
-      </Wrapper>
-    );
+  const leftElementF = leftElement && (
+    <Wrapper
+      isAlign
+      isRow
+      pBottom={label ? THEME_SIZE.SMALL : undefined}>
+      {leftElement}
+    </Wrapper>
+  );
 
-    const rightElementF = (
-      <Wrapper
-        bottom={0}
-        isAlign
-        isRow
-        pRight={THEME_SIZE.SMALL}
-        position={SHAPE_POSITION.ABSOLUTE}
-        right={0}
-        top={0}
-        zIndex>
-        {!isNoClear && isActive && (
-          <Appearable
-            elementState={elementStateControlled}
-            isActive={(valueControlled?.length ?? 0) > 0}
-            isCenter>
-            <Button
-              icon="times"
-              onPress={() => handleChange('')}
-              size={THEME_SIZE.SMALL}
-              type={BUTTON_TYPE.INVISIBLE}
-            />
-          </Appearable>
-        )}
-
-        {isAsyncText(props.error) && (
-          <TooltipIcon color={THEME_COLOR.ERROR}>{props.error}</TooltipIcon>
-        )}
-
-        {rightElement}
-      </Wrapper>
-    );
-
-    const isValid = (v: string): boolean => {
-      switch (keyboard) {
-        case TEXT_INPUT_KEYBOARD.NUMBER:
-        case TEXT_INPUT_KEYBOARD.TELEPHONE: {
-          return /^\d*\.?\d*$/.test(v);
-        }
-        case TEXT_INPUT_KEYBOARD.DECIMAL: {
-          return /^\d*\.?\d*$/.test(v);
-        }
-        default: {
-          return true;
-        }
-      }
-    };
-
-    const handleChange = (v: string): void => {
-      isValid(v) && valueControlledSet(v);
-    };
-
-    const isError = !!props.error;
-    const containerAnimation: AnimationModel = {
-      states: {
-        [ELEMENT_STATE.INACTIVE]: {
-          height: valueControlled
-            ? theme.shape.size[THEME_SIZE.SMALL]
-            : theme.shape.size[THEME_SIZE.MEDIUM],
-        },
-        [ELEMENT_STATE.ACTIVE]: { height: theme.shape.size[THEME_SIZE.SMALL] },
-      },
-    };
-
-    const textAnimation: AnimationModel<TextStyleModel> = {
-      states: merge([
-        {
-          [ELEMENT_STATE.INACTIVE]: {
-            fontSize: valueControlled
-              ? theme.font.size[THEME_SIZE_MORE.XSMALL]
-              : theme.font.size[THEME_SIZE.MEDIUM],
-          },
-          [ELEMENT_STATE.ACTIVE]: { fontSize: theme.font.size[THEME_SIZE_MORE.XSMALL] },
-        },
-        ANIMATION_STATES_FOCUSABLE({ isError, isText: true, theme }),
-      ]),
-    };
-
-    return (
-      <FocusableWrapper
-        {...wrapperProps}
-        border={!isTransparent}
-        elementState={elementStateControlled}
-        height={height ?? (isNumber(sizeF) ? sizeF : theme.shape.size[sizeF])}
-        isTransparent={isTransparent}
-        onElementStateChange={elementStateControlledSet}
-        pLeft={!isCenter}
-        pRight={isCenter ? THEME_SIZE.SMALL : undefined}
-        position={SHAPE_POSITION.RELATIVE}
-        ref={focusableRef}
-        width={width}>
-        <Wrapper
-          align={label ? FLEX_ALIGN.END : FLEX_ALIGN.CENTER}
-          flex
-          isRow
-          position={SHAPE_POSITION.RELATIVE}
-          s={THEME_SIZE.SMALL}>
-          {leftElementF}
-
-          <_TextInput
-            autoComplete={autoComplete}
-            foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
-            height={theme.shape.size[THEME_SIZE.SMALL]}
-            isCenter={isCenter}
-            isDisabled={isBlocked}
-            keyboard={keyboard}
-            language={language}
-            maxLength={maxLength}
-            numberOfLines={numberOfLines}
-            onBlur={() => void handleFocus(false)}
-            onChange={handleChange}
-            onFocus={() => void handleFocus(true)}
-            onKey={(key) => {
-              switch (key) {
-                case TEXT_INPUT_KEY.ESCAPE: {
-                  !isNoClear && handleChange('');
-                  break;
-                }
-              }
-              onKey && onKey(key);
-            }}
-            onSubmit={onSubmit}
-            placeholder={isActive ? placeholder : undefined}
-            ref={inputRef}
-            testID={testID}
-            value={valueControlled}
-          />
-
-          {rightElementF}
-        </Wrapper>
-
-        {/* TODO: to item? */}
-        <Wrapper
-          animation={containerAnimation}
+  const rightElementF = (
+    <Wrapper
+      bottom={0}
+      isAlign
+      isRow
+      pRight={THEME_SIZE.SMALL}
+      position={SHAPE_POSITION.ABSOLUTE}
+      right={0}
+      top={0}
+      zIndex>
+      {!isNoClear && isActive && (
+        <Appearable
           elementState={elementStateControlled}
-          isAlign
-          isCenter
-          isRow
-          left={0}
-          pHorizontal
-          position={SHAPE_POSITION.ABSOLUTE}
-          zIndex={-1}>
-          {icon && (
-            <Icon
-              animation={textAnimation}
-              elementState={elementStateControlled}
-              icon={icon}
-            />
-          )}
+          isActive={(valueControlled?.length ?? 0) > 0}
+          isCenter>
+          <Button
+            icon="times"
+            onPress={() => handleChange('')}
+            size={THEME_SIZE.SMALL}
+            type={BUTTON_TYPE.INVISIBLE}
+          />
+        </Appearable>
+      )}
 
-          {label && (
-            <AsyncText
-              animation={textAnimation}
-              elementState={elementStateControlled}>
-              {label}
-            </AsyncText>
-          )}
-        </Wrapper>
-      </FocusableWrapper>
-    );
-  },
-);
+      {isAsyncText(props.error) && (
+        <TooltipIcon color={THEME_COLOR.ERROR}>{props.error}</TooltipIcon>
+      )}
 
-process.env.APP_IS_DEBUG && (TextInput.displayName = variableName({ TextInput }));
+      {rightElement}
+    </Wrapper>
+  );
+
+  const isValid = (v: string): boolean => {
+    switch (keyboard) {
+      case TEXT_INPUT_KEYBOARD.NUMBER:
+      case TEXT_INPUT_KEYBOARD.TELEPHONE: {
+        return /^\d*\.?\d*$/.test(v);
+      }
+      case TEXT_INPUT_KEYBOARD.DECIMAL: {
+        return /^\d*\.?\d*$/.test(v);
+      }
+      default: {
+        return true;
+      }
+    }
+  };
+
+  const handleChange = (v: string): void => {
+    isValid(v) && valueControlledSet(v);
+  };
+
+  const isError = !!props.error;
+  const containerAnimation: AnimationModel = {
+    states: {
+      [ELEMENT_STATE.INACTIVE]: {
+        height: valueControlled
+          ? theme.shape.size[THEME_SIZE.SMALL]
+          : theme.shape.size[THEME_SIZE.MEDIUM],
+      },
+      [ELEMENT_STATE.ACTIVE]: { height: theme.shape.size[THEME_SIZE.SMALL] },
+    },
+  };
+
+  const textAnimation: AnimationModel<TextStyleModel> = {
+    states: merge([
+      {
+        [ELEMENT_STATE.INACTIVE]: {
+          fontSize: valueControlled
+            ? theme.font.size[THEME_SIZE_MORE.XSMALL]
+            : theme.font.size[THEME_SIZE.MEDIUM],
+        },
+        [ELEMENT_STATE.ACTIVE]: { fontSize: theme.font.size[THEME_SIZE_MORE.XSMALL] },
+      },
+      ANIMATION_STATES_FOCUSABLE({ isError, isText: true, theme }),
+    ]),
+  };
+
+  return (
+    <FocusableWrapper
+      {...wrapperProps}
+      border={!isTransparent}
+      elementState={elementStateControlled}
+      height={height ?? (isNumber(sizeF) ? sizeF : theme.shape.size[sizeF])}
+      isTransparent={isTransparent}
+      onElementStateChange={elementStateControlledSet}
+      pLeft={!isCenter}
+      pRight={isCenter ? THEME_SIZE.SMALL : undefined}
+      position={SHAPE_POSITION.RELATIVE}
+      ref={focusableRef}
+      width={width}>
+      <Wrapper
+        align={label ? FLEX_ALIGN.END : FLEX_ALIGN.CENTER}
+        flex
+        isRow
+        position={SHAPE_POSITION.RELATIVE}
+        s={THEME_SIZE.SMALL}>
+        {leftElementF}
+
+        <_TextInput
+          autoComplete={autoComplete}
+          foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
+          height={theme.shape.size[THEME_SIZE.SMALL]}
+          isCenter={isCenter}
+          isDisabled={isBlocked}
+          keyboard={keyboard}
+          language={language}
+          maxLength={maxLength}
+          numberOfLines={numberOfLines}
+          onBlur={() => void handleFocus(false)}
+          onChange={handleChange}
+          onFocus={() => void handleFocus(true)}
+          onKey={(key) => {
+            switch (key) {
+              case TEXT_INPUT_KEY.ESCAPE: {
+                !isNoClear && handleChange('');
+                break;
+              }
+            }
+            onKey && onKey(key);
+          }}
+          onSubmit={onSubmit}
+          placeholder={isActive ? placeholder : undefined}
+          ref={inputRef}
+          testID={testID}
+          value={valueControlled}
+        />
+
+        {rightElementF}
+      </Wrapper>
+
+      {/* TODO: to item? */}
+      <Wrapper
+        animation={containerAnimation}
+        elementState={elementStateControlled}
+        isAlign
+        isCenter
+        isRow
+        left={0}
+        pHorizontal
+        position={SHAPE_POSITION.ABSOLUTE}
+        zIndex={-1}>
+        {icon && (
+          <Icon
+            animation={textAnimation}
+            elementState={elementStateControlled}
+            icon={icon}
+          />
+        )}
+
+        {label && (
+          <AsyncText
+            animation={textAnimation}
+            elementState={elementStateControlled}>
+            {label}
+          </AsyncText>
+        )}
+      </Wrapper>
+    </FocusableWrapper>
+  );
+};

@@ -22,12 +22,12 @@ import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMe
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { APP_URI } from '@lib/shared/http/http.constants';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 
 export const NewPaymentMethodInput: RLFCModel<
   NewPaymentMethodInputRefModel,
   NewPaymentMethodInputPropsModel
-> = forwardRef(({ redirectTo = `${APP_URI}/${REDIRECT}`, ...props }, ref) => {
+> = ({ redirectTo = `${APP_URI}/${REDIRECT}`, ref, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const [currentToken, currentTokenSet] = useState<string>();
   const { createToken, removeToken } = usePaymentMethodResource();
@@ -93,4 +93,4 @@ export const NewPaymentMethodInput: RLFCModel<
       }
     </DataBoundary>
   );
-});
+};

@@ -13,80 +13,75 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterConditionModel } from '@lib/shared/resource/utils/Filter/Filter.models';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 
-export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInputPropsModel> =
-  forwardRef(
-    (
-      {
-        condition,
-        defaultCondition = FILTER_CONDITION.CONTAINS,
-        defaultValue,
-        isValueOnly,
-        onChange,
-        onConditionChange,
-        value,
-        ...props
-      },
-      ref,
-    ) => {
-      const { t } = useTranslation();
-      const { wrapperProps } = useLayoutStyles({ props });
-      const { style: _, ...propsF } = props;
-      const { valueControlled, valueControlledSet } = useValueControlled({
-        defaultValue,
-        onChange,
-        value,
-      });
-      const { valueControlled: conditionControlled, valueControlledSet: conditionControlledSet } =
-        useValueControlled<FilterConditionModel>({
-          defaultValue: defaultCondition,
-          onChange: onConditionChange,
-          value: condition,
-        });
+export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInputPropsModel> = ({
+  condition,
+  defaultCondition = FILTER_CONDITION.LIKE,
+  defaultValue,
+  isValueOnly,
+  onChange,
+  onConditionChange,
+  ref,
+  value,
+  ...props
+}) => {
+  const { t } = useTranslation();
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { style: _, ...propsF } = props;
+  const { valueControlled, valueControlledSet } = useValueControlled({
+    defaultValue,
+    onChange,
+    value,
+  });
+  const { valueControlled: conditionControlled, valueControlledSet: conditionControlledSet } =
+    useValueControlled<FilterConditionModel>({
+      defaultValue: defaultCondition,
+      onChange: onConditionChange,
+      value: condition,
+    });
 
-      const inputRef = useRef<InputRefModel>(null);
+  const inputRef = useRef<InputRefModel>(null);
 
-      useImperativeHandle(ref, () => ({
-        ...inputRef.current,
-        beforeSubmit: async (v, k) => [{ condition: conditionControlled, field: k, value: v }],
-      }));
+  useImperativeHandle(ref, () => ({
+    ...inputRef.current,
+    beforeSubmit: async (v, k) => [{ condition: conditionControlled, field: k, value: v }],
+  }));
 
-      return (
-        <InputGroup
-          {...wrapperProps}
-          fields={filterNil([
-            {
-              element: (
-                <TextInput
-                  {...propsF}
-                  icon="search"
-                  onChange={valueControlledSet}
-                  ref={ref}
-                  value={valueControlled}
-                />
-              ),
-              id: 'value',
-            },
-            !isValueOnly && {
-              element: (
-                <MenuInput
-                  defaultValue={FILTER_CONDITION.CONTAINS}
-                  label={t('core:condition')}
-                  onChange={(v) => conditionControlledSet(v as FilterConditionModel)}
-                  options={[
-                    { id: FILTER_CONDITION.EQUAL, label: t('data:equal') },
-                    { id: FILTER_CONDITION.NOT_EQUAL, label: t('data:notEqual') },
-                    { id: FILTER_CONDITION.CONTAINS, label: t('data:contains') },
-                  ]}
-                  value={conditionControlled}
-                />
-              ),
-              id: 'condition',
-            },
-          ])}
-          ref={inputRef}
-        />
-      );
-    },
+  return (
+    <InputGroup
+      {...wrapperProps}
+      fields={filterNil([
+        {
+          element: (
+            <TextInput
+              {...propsF}
+              icon="search"
+              onChange={valueControlledSet}
+              ref={ref}
+              value={valueControlled}
+            />
+          ),
+          id: 'value',
+        },
+        !isValueOnly && {
+          element: (
+            <MenuInput
+              defaultValue={FILTER_CONDITION.LIKE}
+              label={t('core:condition')}
+              onChange={(v) => conditionControlledSet(v as FilterConditionModel)}
+              options={[
+                { id: FILTER_CONDITION.EQUAL, label: t('data:equal') },
+                { id: FILTER_CONDITION.NOT_EQUAL, label: t('data:notEqual') },
+                { id: FILTER_CONDITION.LIKE, label: t('data:contains') },
+              ]}
+              value={conditionControlled}
+            />
+          ),
+          id: 'condition',
+        },
+      ])}
+      ref={inputRef}
+    />
   );
+};

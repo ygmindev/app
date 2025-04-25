@@ -9,39 +9,45 @@ import { type RLFCModel, type RLFCPropsModel } from '@lib/frontend/core/core.mod
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 
-export const ModalButton: RLFCModel<ModalButtonRefModel, ModalButtonPropsModel> = forwardRef(
-  ({ element, isFullSize, onClose, onPress, title, ...props }, ref) => {
-    const { t } = useTranslation();
-    const [isOpen, isOpenSet] = useState<boolean>();
+export const ModalButton: RLFCModel<ModalButtonRefModel, ModalButtonPropsModel> = ({
+  element,
+  isFullSize,
+  onClose,
+  onPress,
+  ref,
+  title,
+  ...props
+}) => {
+  const { t } = useTranslation();
+  const [isOpen, isOpenSet] = useState<boolean>();
 
-    const handleToggle = (isOpen?: boolean): void => {
-      !isOpen && onClose?.();
-      isOpenSet(isOpen);
-    };
+  const handleToggle = (isOpen?: boolean): void => {
+    !isOpen && onClose?.();
+    isOpenSet(isOpen);
+  };
 
-    return (
-      <>
-        <Button
-          {...(props as Omit<RLFCPropsModel<ButtonPropsModel>, 'ref'>)}
-          onPress={async () => {
-            onPress && (await onPress());
-            handleToggle(!isOpen);
-          }}
-        />
+  return (
+    <>
+      <Button
+        {...(props as Omit<RLFCPropsModel<ButtonPropsModel>, 'ref'>)}
+        onPress={async () => {
+          onPress && (await onPress());
+          handleToggle(!isOpen);
+        }}
+      />
 
-        <Modal
-          isFullSize={isFullSize}
-          isOpen={isOpen}
-          onToggle={handleToggle}
-          ref={ref}
-          title={title ?? (isAsyncText(props.children) ? t(props.children) : undefined)}>
-          {element({ onClose: () => handleToggle(false) })}
-        </Modal>
-      </>
-    );
-  },
-);
+      <Modal
+        isFullSize={isFullSize}
+        isOpen={isOpen}
+        onToggle={handleToggle}
+        ref={ref}
+        title={title ?? (isAsyncText(props.children) ? t(props.children) : undefined)}>
+        {element({ onClose: () => handleToggle(false) })}
+      </Modal>
+    </>
+  );
+};
 
 process.env.APP_IS_DEBUG && (ModalButton.displayName = variableName({ ModalButton }));

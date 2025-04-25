@@ -1,13 +1,8 @@
-import { type RSFCModel } from '@lib/frontend/core/core.models';
+import { type RSFCModel, type RSFCPropsModel } from '@lib/frontend/core/core.models';
 import { type UseStylesParamsModel } from '@lib/frontend/style/hooks/useStyles/useStyles.models';
 import { type UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
-import {
-  type StyleModel,
-  type StylePropsModel,
-  type ViewStyleModel,
-} from '@lib/frontend/style/style.models';
+import { type StyleModel, type ViewStyleModel } from '@lib/frontend/style/style.models';
 import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
-import { type ComponentType, type ForwardedRef } from 'react';
 
 export type ComposeComponentParamsModel<
   TProps,
@@ -15,12 +10,11 @@ export type ComposeComponentParamsModel<
   TStyle extends StyleModel = ViewStyleModel,
   TRef = unknown,
 > = {
-  Component: ComponentType<TResult & StylePropsModel<TStyle>> | string;
+  Component: RSFCModel<TRef, TResult, TStyle> | string;
 
   getProps?(
-    props: TProps & TestIdPropsModel & StylePropsModel<TStyle>,
+    props: RSFCPropsModel<TRef, TProps & TestIdPropsModel, TStyle>,
     theme: UseThemeModel,
-    ref?: ForwardedRef<TRef>,
   ): TResult | null;
 
   isWeb?: boolean;

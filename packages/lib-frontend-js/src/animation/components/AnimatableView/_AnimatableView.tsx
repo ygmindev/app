@@ -10,7 +10,7 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { type MotiProps } from 'moti';
 import { MotiScrollView, MotiView } from 'moti';
 import { type ComponentType, type RefObject } from 'react';
-import { forwardRef, useImperativeHandle } from 'react';
+import { useImperativeHandle } from 'react';
 import { Pressable } from 'react-native';
 
 const PressableAnimatable = animatable({ Component: Pressable as ComponentType });
@@ -18,43 +18,48 @@ const PressableAnimatable = animatable({ Component: Pressable as ComponentType }
 const viewParamsBase = getViewParamsBase();
 const viewParamsPressable = getViewParamsPressable();
 
-export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewPropsModel> =
-  forwardRef(({ animation, children, elementState, testID, ...props }, ref) => {
-    const theme = useTheme();
-    const { styles } = useStyles({ props });
-    const { animationProps, animationState, to, toState } = useAnimationState({
-      animation,
-      elementState,
-      onElementStateChange: props.onElementStateChange,
-      ref,
-      testID,
-    });
-
-    useImperativeHandle(ref, () => ({
-      scrollTo: (position) =>
-        (ref as RefObject<AnimatableViewRefModel>).current?.scrollTo(position),
-      to,
-      toState,
-    }));
-
-    const Component =
-      props.onPress || props.onPressIn || props.onPressOut
-        ? (PressableAnimatable as ComponentType)
-        : props.isHorizontalScrollable || props.isVerticalScrollable || props.onScroll
-          ? MotiScrollView
-          : MotiView;
-
-    return (
-      <Component
-        {...viewParamsBase.getProps?.({ ...props, style: styles }, theme)}
-        {...viewParamsPressable.getProps?.({ ...props, style: styles }, theme)}
-        {...(animationProps as Omit<MotiProps['animate'], 'pointerEvents'>)}
-        hitSlop={undefined}
-        ref={ref}
-        state={animationState}
-        style={styles}
-        testID={testID}>
-        {children}
-      </Component>
-    );
+export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewPropsModel> = ({
+  animation,
+  children,
+  elementState,
+  ref,
+  testID,
+  ...props
+}) => {
+  const theme = useTheme();
+  const { styles } = useStyles({ props });
+  const { animationProps, animationState, to, toState } = useAnimationState({
+    animation,
+    elementState,
+    onElementStateChange: props.onElementStateChange,
+    ref,
+    testID,
   });
+
+  useImperativeHandle(ref, () => ({
+    scrollTo: (position) => (ref as RefObject<AnimatableViewRefModel>).current?.scrollTo(position),
+    to,
+    toState,
+  }));
+
+  const Component =
+    props.onPress || props.onPressIn || props.onPressOut
+      ? (PressableAnimatable as ComponentType)
+      : props.isHorizontalScrollable || props.isVerticalScrollable || props.onScroll
+        ? MotiScrollView
+        : MotiView;
+
+  return (
+    <Component
+      {...viewParamsBase.getProps?.({ ...props, style: styles }, theme)}
+      {...viewParamsPressable.getProps?.({ ...props, style: styles }, theme)}
+      {...(animationProps as Omit<MotiProps['animate'], 'pointerEvents'>)}
+      hitSlop={undefined}
+      ref={ref}
+      state={animationState}
+      style={styles}
+      testID={testID}>
+      {children}
+    </Component>
+  );
+};

@@ -1,5 +1,3 @@
-import { forwardRef } from 'react';
-
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
@@ -8,7 +6,7 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const ProgressBar: RLFCModel<WrapperRefModel> = forwardRef(({ ...props }, ref) => {
+export const ProgressBar: RLFCModel<WrapperRefModel> = ({ ...props }) => {
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
   return (
@@ -19,10 +17,9 @@ export const ProgressBar: RLFCModel<WrapperRefModel> = forwardRef(({ ...props },
       height={5}
       left={0}
       position={SHAPE_POSITION.ABSOLUTE}
-      ref={ref}
       top={0}
       width={0}
       zIndex
     />
   );
-});
+};

@@ -12,20 +12,14 @@ import {
   type MeasureModel,
   type PositionModel,
   type RefPropsModel,
+  type RSFCPropsModel,
 } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import { type ViewStyleModel } from '@lib/frontend/style/style.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { partionObject } from '@lib/shared/core/utils/partionObject/partionObject';
-import {
-  type ComponentType,
-  type ForwardedRef,
-  Fragment,
-  type RefObject,
-  useMemo,
-  useState,
-} from 'react';
+import { type ComponentType, Fragment, useMemo, useState } from 'react';
 import { ScrollView, type ScrollViewProps, StyleSheet } from 'react-native';
 
 const viewParamsBase = getViewParamsBase();
@@ -35,7 +29,7 @@ export const getViewParams = <
   TResult extends ScrollViewProps,
   TRef extends _ViewRefModel,
 >({
-  Component = ScrollView as unknown as ComponentType<TResult>,
+  Component = ScrollView as unknown as ComponentType<RSFCPropsModel<TRef, TResult>>,
   getProps,
   stylers,
 }: PartialModel<
@@ -43,7 +37,7 @@ export const getViewParams = <
 > = {}): ComposeComponentParamsModel<TProps, ChildrenPropsModel, ViewStyleModel, TRef> => ({
   Component: Fragment,
 
-  getProps: (props, theme, ref) => {
+  getProps: (props, theme) => {
     const [stylesView, stylesContainer] = useMemo(
       () =>
         partionObject(
@@ -69,8 +63,8 @@ export const getViewParams = <
       (props.isVerticalScrollable && (measure?.height ?? 0) < (measureContent?.height ?? 0));
 
     const propsF = {
-      ...viewParamsBase.getProps?.(props, theme, ref as ForwardedRef<_ViewRefModel>),
-      ...getProps?.(props, theme, ref),
+      ...viewParamsBase.getProps?.(props, theme),
+      ...getProps?.(props, theme),
       alwaysBounceHorizontal: false,
       alwaysBounceVertical: false,
       contentContainerStyle: { ...stylesContainer, flexGrow: 1 },
@@ -89,7 +83,7 @@ export const getViewParams = <
         valueSet({ x, y });
         props.onScroll?.({ x, y });
       },
-      ref,
+      ref: props.ref,
       scrollEnabled: true,
       scrollEventThrottle: 16,
       scrollToOverflowEnabled: true,
@@ -101,7 +95,7 @@ export const getViewParams = <
     const ScrollComponent = isBar ? ScrollBar : ScrollButton;
 
     const handleScrollTo = (position: PositionModel): void => {
-      (ref as RefObject<ScrollView>).current?.scrollTo(position);
+      props.ref?.current?.scrollTo(position);
     };
 
     return {

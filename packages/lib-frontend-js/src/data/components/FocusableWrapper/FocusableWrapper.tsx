@@ -9,32 +9,38 @@ import {
 } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { forwardRef, useImperativeHandle } from 'react';
+import { useImperativeHandle } from 'react';
 
-export const FocusableWrapper: RLFCModel<FocusableRefModel, FocusableWrapperPropsModel> =
-  forwardRef(({ children, elementState, error, onElementStateChange, ...props }, ref) => {
-    const theme = useTheme();
-    const { wrapperProps } = useLayoutStyles({ props });
-    const { elementStateControlled, elementStateControlledSet, isBlocked } =
-      useElementStateControlled({ elementState, onElementStateChange });
+export const FocusableWrapper: RLFCModel<FocusableRefModel, FocusableWrapperPropsModel> = ({
+  children,
+  elementState,
+  error,
+  onElementStateChange,
+  ref,
+  ...props
+}) => {
+  const theme = useTheme();
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { elementStateControlled, elementStateControlledSet, isBlocked } =
+    useElementStateControlled({ elementState, onElementStateChange });
 
-    const isError = !!error;
+  const isError = !!error;
 
-    useImperativeHandle(ref, () => ({
-      blur: () => elementStateControlledSet(ELEMENT_STATE.INACTIVE),
-      focus: () => elementStateControlledSet(ELEMENT_STATE.ACTIVE),
-    }));
+  useImperativeHandle(ref, () => ({
+    blur: () => elementStateControlledSet(ELEMENT_STATE.INACTIVE),
+    focus: () => elementStateControlledSet(ELEMENT_STATE.ACTIVE),
+  }));
 
-    return (
-      <Wrapper
-        {...wrapperProps}
-        animation={{ states: ANIMATION_STATES_FOCUSABLE({ isBlocked, isError, theme }) }}
-        border={wrapperProps.border ?? true}
-        elementState={elementStateControlled}
-        isOverflowHidden
-        onElementStateChange={elementStateControlledSet}
-        round>
-        {children}
-      </Wrapper>
-    );
-  });
+  return (
+    <Wrapper
+      {...wrapperProps}
+      animation={{ states: ANIMATION_STATES_FOCUSABLE({ isBlocked, isError, theme }) }}
+      border={wrapperProps.border ?? true}
+      elementState={elementStateControlled}
+      isOverflowHidden
+      onElementStateChange={elementStateControlledSet}
+      round>
+      {children}
+    </Wrapper>
+  );
+};

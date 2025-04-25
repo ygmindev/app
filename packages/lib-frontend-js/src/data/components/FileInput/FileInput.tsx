@@ -20,102 +20,106 @@ import {
 } from '@lib/frontend/style/style.constants';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
-import { forwardRef } from 'react';
 
-export const FileInput: RLFCModel<FileInputRefModel, FileInputPropsModel> = forwardRef(
-  ({ defaultValue, isMultiple, label, onChange, value, ...props }, _) => {
-    const { wrapperProps } = useLayoutStyles({ props });
-    const { t } = useTranslation();
-    const { valueControlled, valueControlledSet } = useValueControlled({
-      defaultValue,
-      onChange,
-      value,
-    });
-    return (
-      <_FileInput
-        isMultiple={isMultiple}
-        onChange={valueControlledSet}
-        value={valueControlled}>
+export const FileInput: RLFCModel<FileInputRefModel, FileInputPropsModel> = ({
+  defaultValue,
+  isMultiple,
+  label,
+  onChange,
+  value,
+  ...props
+}) => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { t } = useTranslation();
+  const { valueControlled, valueControlledSet } = useValueControlled({
+    defaultValue,
+    onChange,
+    value,
+  });
+  return (
+    <_FileInput
+      isMultiple={isMultiple}
+      onChange={valueControlledSet}
+      value={valueControlled}>
+      <Wrapper
+        {...wrapperProps}
+        border
+        isRow
+        p
+        round
+        s>
         <Wrapper
-          {...wrapperProps}
+          flex
+          isCenter
+          s>
+          <Icon
+            color={THEME_COLOR.PRIMARY}
+            fontSize={THEME_SIZE_MORE.XLARGE}
+            icon="upload"
+          />
+
+          <Text>{`${t('core:dragAndDrop')} ${t('core:or')}`}</Text>
+
+          <Button
+            icon="folder"
+            isHidden>
+            {label ?? t('core:browse')}
+          </Button>
+        </Wrapper>
+
+        <Wrapper
           border
-          isRow
+          isVerticalScrollable
           p
           round
-          s>
-          <Wrapper
-            flex
-            isCenter
-            s>
-            <Icon
-              color={THEME_COLOR.PRIMARY}
-              fontSize={THEME_SIZE_MORE.XLARGE}
-              icon="upload"
-            />
+          s={THEME_SIZE.SMALL}>
+          {valueControlled?.length ? (
+            valueControlled.map(({ name, size }) => (
+              <Title
+                icon="image"
+                key={name}
+                leftElement={
+                  <Button
+                    color={THEME_COLOR.ERROR}
+                    icon="trash"
+                    onPress={() =>
+                      valueControlledSet(valueControlled.filter((file) => file.name !== name))
+                    }
+                    size={THEME_SIZE.SMALL}
+                  />
+                }
+                title={
+                  <Wrapper>
+                    <Text>{name}</Text>
 
-            <Text>{`${t('core:dragAndDrop')} ${t('core:or')}`}</Text>
+                    {size && (
+                      <Text
+                        colorRole={
+                          THEME_ROLE.MUTED
+                        }>{`${numberFormat(size, { multiplier: 1 / 1e3, precision: 0 })}KB`}</Text>
+                    )}
+                  </Wrapper>
+                }
+              />
+            ))
+          ) : (
+            <Wrapper
+              flex
+              isCenter
+              s>
+              <Icon
+                colorRole={THEME_ROLE.MUTED}
+                fontSize={THEME_SIZE_MORE.XLARGE}
+                icon="empty"
+              />
 
-            <Button
-              icon="folder"
-              isHidden>
-              {label ?? t('core:browse')}
-            </Button>
-          </Wrapper>
-
-          <Wrapper
-            border
-            isVerticalScrollable
-            p
-            round
-            s={THEME_SIZE.SMALL}>
-            {valueControlled?.length ? (
-              valueControlled.map(({ name, size }) => (
-                <Title
-                  icon="image"
-                  key={name}
-                  leftElement={
-                    <Button
-                      color={THEME_COLOR.ERROR}
-                      icon="trash"
-                      onPress={() =>
-                        valueControlledSet(valueControlled.filter((file) => file.name !== name))
-                      }
-                      size={THEME_SIZE.SMALL}
-                    />
-                  }
-                  title={
-                    <Wrapper>
-                      <Text>{name}</Text>
-
-                      {size && (
-                        <Text
-                          colorRole={
-                            THEME_ROLE.MUTED
-                          }>{`${numberFormat(size, { multiplier: 1 / 1e3, precision: 0 })}KB`}</Text>
-                      )}
-                    </Wrapper>
-                  }
-                />
-              ))
-            ) : (
-              <Wrapper
-                flex
-                isCenter
-                s>
-                <Icon
-                  colorRole={THEME_ROLE.MUTED}
-                  fontSize={THEME_SIZE_MORE.XLARGE}
-                  icon="empty"
-                />
-
-                <Text colorRole={THEME_ROLE.MUTED}>{t('core:nothingToShow')}</Text>
-              </Wrapper>
-            )}
-          </Wrapper>
+              <Text colorRole={THEME_ROLE.MUTED}>{t('core:nothingToShow')}</Text>
+            </Wrapper>
+          )}
         </Wrapper>
-      </_FileInput>
-    );
-  },
-);
+      </Wrapper>
+    </_FileInput>
+  );
+};
 
 process.env.APP_IS_DEBUG && (FileInput.displayName = variableName({ FileInput }));

@@ -16,112 +16,107 @@ import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import filter from 'lodash/filter';
-import { type ForwardedRef, forwardRef, type ReactElement, useRef, useState } from 'react';
+import { type ReactElement, useRef, useState } from 'react';
 
-export const MultipleInput = forwardRef(
-  <TType extends WithIdModel>(
-    {
-      defaultValue,
-      label,
-      onChange,
-      options,
-      value,
-      ...props
-    }: RLFCPropsModel<MultipleInputRefModle, MultipleInputPropsModel<TType>>,
-    _: ForwardedRef<MultipleInputRefModle>,
-  ): ReactElement<RLFCPropsModel<MultipleInputRefModle, MultipleInputPropsModel<TType>>> => {
-    const { t } = useTranslation();
-    const { wrapperProps } = useLayoutStyles({ props });
-    const { valueControlled, valueControlledSet } = useValueControlled<Array<string>>({
-      defaultValue,
-      onChange,
-      value,
-    });
-    const modalRef = useRef<ModalRefModel>(null);
+export const MultipleInput = <TType extends WithIdModel>({
+  defaultValue,
+  label,
+  onChange,
+  options,
+  value,
+  ...props
+}: RLFCPropsModel<MultipleInputRefModle, MultipleInputPropsModel<TType>>): ReactElement<
+  RLFCPropsModel<MultipleInputRefModle, MultipleInputPropsModel<TType>>
+> => {
+  const { t } = useTranslation();
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { valueControlled, valueControlledSet } = useValueControlled<Array<string>>({
+    defaultValue,
+    onChange,
+    value,
+  });
+  const modalRef = useRef<ModalRefModel>(null);
 
-    const [initialValues, initialValuesSet] = useState<TType>();
+  const [initialValues, initialValuesSet] = useState<TType>();
 
-    const handleEdit = (v: TType): void => {
-      initialValuesSet(v);
-      modalRef.current?.toggle(true);
-    };
+  const handleEdit = (v: TType): void => {
+    initialValuesSet(v);
+    modalRef.current?.toggle(true);
+  };
 
-    return (
+  return (
+    <Wrapper
+      {...wrapperProps}
+      s={THEME_SIZE.SMALL}>
       <Wrapper
-        {...wrapperProps}
-        s={THEME_SIZE.SMALL}>
-        <Wrapper
-          isAlign
-          isRow
-          justify={FLEX_JUSTIFY.END}>
-          <Wrapper flex>
-            <AsyncText>{label}</AsyncText>
-          </Wrapper>
-
-          <ModalButton
-            element={
-              ({ onClose }) => <></>
-              // cloneElement(element, {
-              //   initialValues,
-              //   onCancel: () => {
-              //     initialValuesSet(undefined);
-              //     onClose();
-              //   },
-              //   onComplete: () => {
-              //     initialValuesSet(undefined);
-              //     onClose();
-              //   },
-              //   onSuccess: async (data?: TType) => {
-              //     valueControlledSet(
-              //       initialValues
-              //         ? updateArray(
-              //             valueControlled,
-              //             (v) => v === initialValues.id,
-              //             (v) => v,
-              //           )
-              //         : filterNil([...(valueControlled ?? []), data]),
-              //     );
-              //     onClose();
-              //   },
-              // })
-            }
-            icon="add"
-            onClose={() => initialValuesSet(undefined)}
-            ref={modalRef}
-            size={THEME_SIZE.SMALL}>
-            {t('core:add', { value: t(label) })}
-          </ModalButton>
+        isAlign
+        isRow
+        justify={FLEX_JUSTIFY.END}>
+        <Wrapper flex>
+          <AsyncText>{label}</AsyncText>
         </Wrapper>
 
-        {valueControlled?.map((v) => {
-          const option = options.find(({ id }) => id === v);
-          return (
-            option && (
-              <Wrapper
-                isAlign
-                isRow
-                key={v}>
-                <Button
-                  icon="edit"
-                  onPress={() => handleEdit(option)}
-                  tooltip={t('core:edit')}
-                  type={BUTTON_TYPE.INVISIBLE}
-                />
-
-                <Button
-                  color={THEME_COLOR.ERROR}
-                  icon="trash"
-                  onPress={() => valueControlledSet(filter(valueControlled, (vv) => v !== vv))}
-                  tooltip={t('core:remove')}
-                  type={BUTTON_TYPE.INVISIBLE}
-                />
-              </Wrapper>
-            )
-          );
-        })}
+        <ModalButton
+          element={
+            ({ onClose }) => <></>
+            // cloneElement(element, {
+            //   initialValues,
+            //   onCancel: () => {
+            //     initialValuesSet(undefined);
+            //     onClose();
+            //   },
+            //   onComplete: () => {
+            //     initialValuesSet(undefined);
+            //     onClose();
+            //   },
+            //   onSuccess: async (data?: TType) => {
+            //     valueControlledSet(
+            //       initialValues
+            //         ? updateArray(
+            //             valueControlled,
+            //             (v) => v === initialValues.id,
+            //             (v) => v,
+            //           )
+            //         : filterNil([...(valueControlled ?? []), data]),
+            //     );
+            //     onClose();
+            //   },
+            // })
+          }
+          icon="add"
+          onClose={() => initialValuesSet(undefined)}
+          ref={modalRef}
+          size={THEME_SIZE.SMALL}>
+          {t('core:add', { value: t(label) })}
+        </ModalButton>
       </Wrapper>
-    );
-  },
-) as <TType extends WithIdModel>(
-  props: RLFCPropsModel<MultipleInputRefModle, MultipleInputPropsModel<TType>>,
-) => ReactElement<RLFCPropsModel<MultipleInputRefModle, MultipleInputPropsModel<TType>>>;
+
+      {valueControlled?.map((v) => {
+        const option = options.find(({ id }) => id === v);
+        return (
+          option && (
+            <Wrapper
+              isAlign
+              isRow
+              key={v}>
+              <Button
+                icon="edit"
+                onPress={() => handleEdit(option)}
+                tooltip={t('core:edit')}
+                type={BUTTON_TYPE.INVISIBLE}
+              />
+
+              <Button
+                color={THEME_COLOR.ERROR}
+                icon="trash"
+                onPress={() => valueControlledSet(filter(valueControlled, (vv) => v !== vv))}
+                tooltip={t('core:remove')}
+                type={BUTTON_TYPE.INVISIBLE}
+              />
+            </Wrapper>
+          )
+        );
+      })}
+    </Wrapper>
+  );
+};

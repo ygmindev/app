@@ -7,3 +7,8 @@ export type OtpModel = Omit<EntityResourceModel, 'created'> & {
   otp?: string;
   phone?: string;
 };
+
+export type OtpFormModel = Pick<OtpModel, 'email' | 'phone' | 'callingCode'> & {
+  isCheckExists?: boolean;
+  otp?: string;
+};

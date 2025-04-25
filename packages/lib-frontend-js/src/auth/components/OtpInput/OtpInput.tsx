@@ -20,105 +20,105 @@ import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { withId } from '@lib/shared/core/utils/withId/withId';
 import range from 'lodash/range';
 import toNumber from 'lodash/toNumber';
-import { forwardRef } from 'react';
 
 const otpLength = toNumber(process.env.SERVER_APP_OTP_LENGTH);
 
 const IDS = withId(range(otpLength));
 
-export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = forwardRef(
-  (
-    { elementState, onBack, onChange, onElementStateChange, onSubmit, testID, value, ...props },
-    ref,
-  ) => {
-    const { t } = useTranslation([AUTH]);
-    const { wrapperProps } = useLayoutStyles({ props });
-    const theme = useTheme();
-    const { valueControlled, valueControlledSet } = useValueControlled({
-      defaultValue: '',
-      onChange,
-      value,
-    });
-    const { elementStateControlledSet, isActive, isLoading } = useElementStateControlled({
-      elementState,
-      onElementStateChange,
-    });
+export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
+  elementState,
+  onBack,
+  onChange,
+  onElementStateChange,
+  onSubmit,
+  ref,
+  testID,
+  value,
+  ...props
+}) => {
+  const { t } = useTranslation([AUTH]);
+  const { wrapperProps } = useLayoutStyles({ props });
+  const theme = useTheme();
+  const { valueControlled, valueControlledSet } = useValueControlled({
+    defaultValue: '',
+    onChange,
+    value,
+  });
+  const { elementStateControlledSet, isActive, isLoading } = useElementStateControlled({
+    elementState,
+    onElementStateChange,
+  });
 
-    return (
+  return (
+    <Wrapper
+      {...wrapperProps}
+      s>
       <Wrapper
-        {...wrapperProps}
+        position={SHAPE_POSITION.RELATIVE}
         s>
         <Wrapper
-          position={SHAPE_POSITION.RELATIVE}
-          s>
-          <Wrapper
-            isAbsoluteFill
-            opacity={0}
-            zIndex={1}>
-            <TextInput
-              defaultValue=""
-              isNoClear
-              keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
-              maxLength={otpLength}
-              onChange={(value) => {
-                valueControlledSet(value);
-                if (value?.length === otpLength) {
-                  void sleep().then(onSubmit);
-                }
-              }}
-              onElementStateChange={elementStateControlledSet}
-              ref={ref}
-              size={THEME_SIZE.MEDIUM}
-              testID={testID}
-              value={valueControlled}
-            />
-          </Wrapper>
-
-          <Wrapper
-            isAlign
-            isCenter
-            isRow
-            position={SHAPE_POSITION.RELATIVE}>
-            <Appearable
-              isAbsoluteFill
-              isActive={isLoading}
-              isCenter
-              position={SHAPE_POSITION.ABSOLUTE}
-              zIndex={2}>
-              <Loading size={THEME_SIZE.SMALL} />
-            </Appearable>
-
-            {IDS.map(({ id }, i) => (
-              <TextInput
-                elementState={
-                  isActive &&
-                  ((!valueControlled?.length && i === 0) || i === valueControlled?.length)
-                    ? ELEMENT_STATE.ACTIVE
-                    : undefined
-                }
-                isCenter
-                isNoClear
-                key={id}
-                size={THEME_SIZE.MEDIUM}
-                value={(valueControlled && valueControlled[i]) ?? ''}
-                width={theme.shape.size[THEME_SIZE.MEDIUM]}
-              />
-            ))}
-          </Wrapper>
+          isAbsoluteFill
+          opacity={0}
+          zIndex={1}>
+          <TextInput
+            defaultValue=""
+            isNoClear
+            keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
+            maxLength={otpLength}
+            onChange={(value) => {
+              valueControlledSet(value);
+              if (value?.length === otpLength) {
+                void sleep().then(onSubmit);
+              }
+            }}
+            onElementStateChange={elementStateControlledSet}
+            ref={ref}
+            size={THEME_SIZE.MEDIUM}
+            testID={testID}
+            value={valueControlled}
+          />
         </Wrapper>
 
-        <Link
-          align={FONT_ALIGN.CENTER}
-          onPress={onBack}>
-          {t('auth:otpDidntGet')}
-        </Link>
-      </Wrapper>
-    );
-  },
-);
+        <Wrapper
+          isAlign
+          isCenter
+          isRow
+          position={SHAPE_POSITION.RELATIVE}>
+          <Appearable
+            isAbsoluteFill
+            isActive={isLoading}
+            isCenter
+            position={SHAPE_POSITION.ABSOLUTE}
+            zIndex={2}>
+            <Loading size={THEME_SIZE.SMALL} />
+          </Appearable>
 
-process.env.APP_IS_DEBUG && (OtpInput.displayName = variableName({ OtpInput }));
+          {IDS.map(({ id }, i) => (
+            <TextInput
+              elementState={
+                isActive && ((!valueControlled?.length && i === 0) || i === valueControlled?.length)
+                  ? ELEMENT_STATE.ACTIVE
+                  : undefined
+              }
+              isCenter
+              isNoClear
+              key={id}
+              size={THEME_SIZE.MEDIUM}
+              value={(valueControlled && valueControlled[i]) ?? ''}
+              width={theme.shape.size[THEME_SIZE.MEDIUM]}
+            />
+          ))}
+        </Wrapper>
+      </Wrapper>
+
+      <Link
+        align={FONT_ALIGN.CENTER}
+        onPress={onBack}>
+        {t('auth:otpDidntGet')}
+      </Link>
+    </Wrapper>
+  );
+};

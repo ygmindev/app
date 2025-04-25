@@ -18,166 +18,162 @@ import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/st
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import isFunction from 'lodash/isFunction';
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 
-export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = forwardRef(
-  (
-    {
-      animation,
-      children,
-      confirmColor,
-      confirmMessage,
-      elementState,
-      onActive,
-      onElementStateChange,
-      onHoverIn,
-      onHoverOut,
-      onInactive,
-      onPress,
-      onPressIn,
-      onPressOut,
-      round,
-      tooltip,
-      trigger,
-      ...props
-    },
-    ref,
-  ) => {
-    const theme = useTheme();
-    const { t } = useTranslation();
-    const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean | undefined>();
-    const { wrapperProps } = useLayoutStyles({ props });
+export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = ({
+  animation,
+  children,
+  confirmColor,
+  confirmMessage,
+  elementState,
+  onActive,
+  onElementStateChange,
+  onHoverIn,
+  onHoverOut,
+  onInactive,
+  onPress,
+  onPressIn,
+  onPressOut,
+  ref,
+  round,
+  tooltip,
+  trigger,
+  ...props
+}) => {
+  const theme = useTheme();
+  const { t } = useTranslation();
+  const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean | undefined>();
+  const { wrapperProps } = useLayoutStyles({ props });
 
-    const { elementStateControlled, elementStateControlledSet, isBlocked } =
-      useElementStateControlled({ elementState, onElementStateChange });
+  const { elementStateControlled, elementStateControlledSet, isBlocked } =
+    useElementStateControlled({ elementState, onElementStateChange });
 
-    const [isTooltipOpen, isTooltipOpenSet] = useState<boolean>();
-    const handleHover = (value?: boolean): void => {
-      value ? onHoverIn?.() : onHoverOut?.();
-      isTooltipOpenSet(value);
-    };
+  const [isTooltipOpen, isTooltipOpenSet] = useState<boolean>();
+  const handleHover = (value?: boolean): void => {
+    value ? onHoverIn?.() : onHoverOut?.();
+    isTooltipOpenSet(value);
+  };
 
-    const handleButtonPress = onPress
-      ? async (): Promise<void> => {
-          if (!isBlocked) {
-            if (confirmMessage) {
-              confirmModalIsOpenSet(true);
-            } else {
-              await handlePress?.();
-            }
+  const handleButtonPress = onPress
+    ? async (): Promise<void> => {
+        if (!isBlocked) {
+          if (confirmMessage) {
+            confirmModalIsOpenSet(true);
+          } else {
+            await handlePress?.();
           }
         }
-      : undefined;
+      }
+    : undefined;
 
-    const handlePress = onPress
-      ? async (): Promise<void> => {
-          if (!isBlocked) {
-            const result = onPress?.();
-            if (isPromise(result)) {
-              elementStateControlledSet(ELEMENT_STATE.LOADING);
-              await result;
-              elementStateControlledSet(ELEMENT_STATE.INACTIVE);
-            }
+  const handlePress = onPress
+    ? async (): Promise<void> => {
+        if (!isBlocked) {
+          const result = onPress?.();
+          if (isPromise(result)) {
+            elementStateControlledSet(ELEMENT_STATE.LOADING);
+            await result;
+            elementStateControlledSet(ELEMENT_STATE.INACTIVE);
           }
         }
-      : undefined;
+      }
+    : undefined;
 
-    const element = (
-      <>
-        <Activatable
-          onActive={
-            onPress
-              ? () => {
-                  onActive?.();
-                  elementStateControlledSet(ELEMENT_STATE.ACTIVE);
-                }
-              : undefined
-          }
-          onHoverIn={() => handleHover(true)}
-          onHoverOut={() => handleHover(false)}
-          onInactive={
-            onPress
-              ? () => {
-                  onInactive?.();
-                  elementStateControlledSet(ELEMENT_STATE.INACTIVE);
-                }
-              : undefined
-          }
-          trigger={trigger}>
-          <Wrapper
-            {...wrapperProps}
-            animation={{
-              states: {
-                ...animation?.states,
-                [ELEMENT_STATE.ACTIVE]: animation?.states?.[ELEMENT_STATE.ACTIVE] ?? {
-                  backgroundColor: theme.color.border,
-                },
-                [ELEMENT_STATE.INACTIVE]: animation?.states?.[ELEMENT_STATE.INACTIVE] ?? {
-                  backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED],
-                },
+  const element = (
+    <>
+      <Activatable
+        onActive={
+          onPress
+            ? () => {
+                onActive?.();
+                elementStateControlledSet(ELEMENT_STATE.ACTIVE);
+              }
+            : undefined
+        }
+        onHoverIn={() => handleHover(true)}
+        onHoverOut={() => handleHover(false)}
+        onInactive={
+          onPress
+            ? () => {
+                onInactive?.();
+                elementStateControlledSet(ELEMENT_STATE.INACTIVE);
+              }
+            : undefined
+        }
+        trigger={trigger}>
+        <Wrapper
+          {...wrapperProps}
+          animation={{
+            states: {
+              ...animation?.states,
+              [ELEMENT_STATE.ACTIVE]: animation?.states?.[ELEMENT_STATE.ACTIVE] ?? {
+                backgroundColor: theme.color.border,
               },
-            }}
-            elementState={elementStateControlled}
-            onPress={handleButtonPress}
-            onPressIn={onPressIn}
-            onPressOut={onPressOut}
-            pHorizontal
-            pVertical={THEME_SIZE.SMALL}
-            ref={ref}
-            round={round}>
-            {isFunction(children)
-              ? children(elementStateControlled === ELEMENT_STATE.ACTIVE)
-              : children}
-          </Wrapper>
-        </Activatable>
+              [ELEMENT_STATE.INACTIVE]: animation?.states?.[ELEMENT_STATE.INACTIVE] ?? {
+                backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MUTED],
+              },
+            },
+          }}
+          elementState={elementStateControlled}
+          onPress={handleButtonPress}
+          onPressIn={onPressIn}
+          onPressOut={onPressOut}
+          pHorizontal
+          pVertical={THEME_SIZE.SMALL}
+          ref={ref}
+          round={round}>
+          {isFunction(children)
+            ? children(elementStateControlled === ELEMENT_STATE.ACTIVE)
+            : children}
+        </Wrapper>
+      </Activatable>
 
-        {confirmMessage && (
-          <Modal
-            isOpen={confirmModalIsOpen}
-            onToggle={confirmModalIsOpenSet}>
+      {confirmMessage && (
+        <Modal
+          isOpen={confirmModalIsOpen}
+          onToggle={confirmModalIsOpenSet}>
+          <Wrapper
+            flex
+            isCenter
+            s>
+            {confirmMessage && <AsyncText>{confirmMessage}</AsyncText>}
+
             <Wrapper
-              flex
-              isCenter
-              s>
-              {confirmMessage && <AsyncText>{confirmMessage}</AsyncText>}
+              isAlign
+              isRow>
+              <Button
+                elementState={elementStateControlled}
+                icon="chevronLeft"
+                onPress={async () => confirmModalIsOpenSet(false)}>
+                {t('core:cancel')}
+              </Button>
 
-              <Wrapper
-                isAlign
-                isRow>
-                <Button
-                  elementState={elementStateControlled}
-                  icon="chevronLeft"
-                  onPress={async () => confirmModalIsOpenSet(false)}>
-                  {t('core:cancel')}
-                </Button>
-
-                <Button
-                  color={confirmColor}
-                  elementState={elementStateControlled}
-                  icon="chevronRight"
-                  onPress={async () => {
-                    await handlePress?.();
-                    confirmModalIsOpenSet(false);
-                  }}>
-                  {t('core:continue')}
-                </Button>
-              </Wrapper>
+              <Button
+                color={confirmColor}
+                elementState={elementStateControlled}
+                icon="chevronRight"
+                onPress={async () => {
+                  await handlePress?.();
+                  confirmModalIsOpenSet(false);
+                }}>
+                {t('core:continue')}
+              </Button>
             </Wrapper>
-          </Modal>
-        )}
-      </>
-    );
+          </Wrapper>
+        </Modal>
+      )}
+    </>
+  );
 
-    return tooltip ? (
-      <Droppable
-        anchor={() => element}
-        isOpen={isTooltipOpen}>
-        <AsyncText>{tooltip}</AsyncText>
-      </Droppable>
-    ) : (
-      element
-    );
-  },
-);
+  return tooltip ? (
+    <Droppable
+      anchor={() => element}
+      isOpen={isTooltipOpen}>
+      <AsyncText>{tooltip}</AsyncText>
+    </Droppable>
+  ) : (
+    element
+  );
+};
 
 process.env.APP_IS_DEBUG && (Pressable.displayName = variableName({ Pressable }));

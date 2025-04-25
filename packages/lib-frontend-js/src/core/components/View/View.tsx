@@ -7,9 +7,9 @@ import {
   type ViewRefModel,
 } from '@lib/frontend/core/components/View/View.models';
 import { type RSFCModel } from '@lib/frontend/core/core.models';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 
-export const View: RSFCModel<ViewRefModel, ViewPropsModel> = forwardRef(({ ...props }, ref) => {
+export const View: RSFCModel<ViewRefModel, ViewPropsModel> = ({ ref, ...props }) => {
   const Component =
     props.isHorizontalScrollable || props.isVerticalScrollable || props.onScroll
       ? _ViewScrollable
@@ -28,4 +28,4 @@ export const View: RSFCModel<ViewRefModel, ViewPropsModel> = forwardRef(({ ...pr
       ref={refF}
     />
   );
-});
+};

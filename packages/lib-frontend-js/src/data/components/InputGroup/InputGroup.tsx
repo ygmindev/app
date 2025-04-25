@@ -10,52 +10,53 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import some from 'lodash/some';
-import { cloneElement, forwardRef, Fragment, useState } from 'react';
+import { cloneElement, Fragment, useState } from 'react';
 
-export const InputGroup: RLFCModel<InputRefModel, InputGroupPropsModel> = forwardRef(
-  ({ fields, isVertical, ...props }, ref) => {
-    const theme = useTheme();
-    const { wrapperProps } = useLayoutStyles({ props });
-    const [elementState, elementStateSet] = useState<ElementStateModel>();
-    const isError = some(fields, (field) => !!field.element.props.error);
-    return (
-      <FocusableWrapper
-        {...wrapperProps}
-        elementState={elementState}
-        error={isError}
-        isRow={!isVertical}
-        onElementStateChange={elementStateSet}
-        ref={ref}>
-        {fields.map(({ element, id }, i) => (
-          <Fragment key={i}>
-            {i && (
-              <Divider
-                animation={{ states: ANIMATION_STATES_FOCUSABLE({ isError, theme }) }}
-                elementState={elementState}
-                isVertical={!isVertical}
-                key={`${id}-divider`}
-              />
-            )}
+export const InputGroup: RLFCModel<InputRefModel, InputGroupPropsModel> = ({
+  fields,
+  isVertical,
+  ...props
+}) => {
+  const theme = useTheme();
+  const { wrapperProps } = useLayoutStyles({ props });
+  const [elementState, elementStateSet] = useState<ElementStateModel>();
+  const isError = some(fields, (field) => !!field.element.props.error);
+  return (
+    <FocusableWrapper
+      {...wrapperProps}
+      elementState={elementState}
+      error={isError}
+      isRow={!isVertical}
+      onElementStateChange={elementStateSet}>
+      {fields.map(({ element, id }, i) => (
+        <Fragment key={i}>
+          {i && (
+            <Divider
+              animation={{ states: ANIMATION_STATES_FOCUSABLE({ isError, theme }) }}
+              elementState={elementState}
+              isVertical={!isVertical}
+              key={`${id}-divider`}
+            />
+          )}
 
-            <Wrapper
-              flex
-              justify={FLEX_JUSTIFY.CENTER}
-              key={`${id}-field`}>
-              {cloneElement(element, {
-                isTransparent: true,
-                onBlur: () => {
-                  element.props.onBlur && element.props.onBlur();
-                  elementStateSet(ELEMENT_STATE.INACTIVE);
-                },
-                onFocus: () => {
-                  element.props.onFocus && element.props.onFocus();
-                  elementStateSet(ELEMENT_STATE.ACTIVE);
-                },
-              })}
-            </Wrapper>
-          </Fragment>
-        ))}
-      </FocusableWrapper>
-    );
-  },
-);
+          <Wrapper
+            flex
+            justify={FLEX_JUSTIFY.CENTER}
+            key={`${id}-field`}>
+            {cloneElement(element, {
+              isTransparent: true,
+              onBlur: () => {
+                element.props.onBlur && element.props.onBlur();
+                elementStateSet(ELEMENT_STATE.INACTIVE);
+              },
+              onFocus: () => {
+                element.props.onFocus && element.props.onFocus();
+                elementStateSet(ELEMENT_STATE.ACTIVE);
+              },
+            })}
+          </Wrapper>
+        </Fragment>
+      ))}
+    </FocusableWrapper>
+  );
+};

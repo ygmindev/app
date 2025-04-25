@@ -22,137 +22,133 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
-import { type ComponentType, type ForwardedRef, type ReactElement } from 'react';
-import { cloneElement, forwardRef, useImperativeHandle, useRef } from 'react';
+import { type ComponentType, type ReactElement } from 'react';
+import { cloneElement, useImperativeHandle, useRef } from 'react';
 
-export const Menu = forwardRef(
-  <TType extends MenuOptionModel = MenuOptionModel>(
-    {
-      active,
-      anchor,
-      direction,
-      elementState,
-      isFullWidth,
-      onChange,
-      onElementStateChange,
-      options,
-      renderOption,
-      title,
-      value,
-      width,
-      ...props
-    }: RLFCPropsModel<MenuRefModel, MenuPropsModel<TType>>,
-    ref: ForwardedRef<MenuRefModel>,
-  ): ReactElement<RLFCPropsModel<MenuRefModel, MenuPropsModel<TType>>> => {
-    const { wrapperProps } = useLayoutStyles({ props });
-    const isMobile = useIsMobile();
-    const dropdownRef = useRef<DropdownRefModel>(null);
+export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
+  active,
+  anchor,
+  direction,
+  elementState,
+  isFullWidth,
+  onChange,
+  onElementStateChange,
+  options,
+  ref,
+  renderOption,
+  title,
+  value,
+  width,
+  ...props
+}: RLFCPropsModel<MenuRefModel, MenuPropsModel<TType>>): ReactElement<
+  RLFCPropsModel<MenuRefModel, MenuPropsModel<TType>>
+> => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const isMobile = useIsMobile();
+  const dropdownRef = useRef<DropdownRefModel>(null);
 
-    const { elementStateControlledSet, isActive, isBlocked } = useElementStateControlled({
-      elementState,
-      onElementStateChange,
-    });
+  const { elementStateControlledSet, isActive, isBlocked } = useElementStateControlled({
+    elementState,
+    onElementStateChange,
+  });
 
-    useImperativeHandle(ref, () => ({
-      scrollTo: (params) => dropdownRef.current?.scrollTo(params),
-      toggle: handleToggle,
-    }));
+  useImperativeHandle(ref, () => ({
+    scrollTo: (params) => dropdownRef.current?.scrollTo(params),
+    toggle: handleToggle,
+  }));
 
-    const handleToggle = (v?: boolean): void =>
-      elementStateControlledSet(v ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE);
+  const handleToggle = (v?: boolean): void =>
+    elementStateControlledSet(v ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE);
 
-    const handlePressOption = async ({ id, onPress }: MenuOptionModel): Promise<void> => {
-      onPress && (await onPress());
-      onChange && onChange(id);
-      handleToggle(false);
-    };
+  const handlePressOption = async ({ id, onPress }: MenuOptionModel): Promise<void> => {
+    onPress && (await onPress());
+    onChange && onChange(id);
+    handleToggle(false);
+  };
 
-    let anchorF: ReactElement<PressablePropsModel> = anchor(isActive);
+  let anchorF: ReactElement<PressablePropsModel> = anchor(isActive);
 
-    const { onPress } = anchorF.props;
-    anchorF = cloneElement(anchorF, {
-      onPress: async () => {
-        if (!isBlocked) {
-          onPress && (await onPress());
-          handleToggle(!isActive);
-        }
-      },
-    });
+  const { onPress } = anchorF.props;
+  anchorF = cloneElement(anchorF, {
+    onPress: async () => {
+      if (!isBlocked) {
+        onPress && (await onPress());
+        handleToggle(!isActive);
+      }
+    },
+  });
 
-    const children = (
-      <VirtualizedList
-        items={options}
-        pTop={THEME_SIZE.SMALL}
-        render={(option: TType, index) => {
-          const { color, confirmMessage, icon, id, label } = option;
-          return (
-            <Button
-              color={color}
-              confirmMessage={confirmMessage}
-              elementState={
-                (active ?? 0) >= 0 && index === active ? ELEMENT_STATE.ACTIVE : option.elementState
-              }
-              icon={icon}
-              key={id}
-              onPress={() => handlePressOption(option)}
-              rightElement={
-                value && id === value ? (
-                  <Wrapper
-                    bottom={0}
-                    position={SHAPE_POSITION.ABSOLUTE}
-                    right={0}
-                    top={0}>
-                    <Icon icon="check" />
-                  </Wrapper>
-                ) : undefined
-              }
-              type={BUTTON_TYPE.INVISIBLE}>
-              {(renderOption ? renderOption(option) : label) ?? id}
-            </Button>
-          );
-        }}
-        s={THEME_SIZE.SMALL}
-      />
-    );
-    return isMobile ? (
-      <>
-        {anchorF}
+  const children = (
+    <VirtualizedList
+      items={options}
+      pTop={THEME_SIZE.SMALL}
+      render={(option: TType, index) => {
+        const { color, confirmMessage, icon, id, label } = option;
+        return (
+          <Button
+            color={color}
+            confirmMessage={confirmMessage}
+            elementState={
+              (active ?? 0) >= 0 && index === active ? ELEMENT_STATE.ACTIVE : option.elementState
+            }
+            icon={icon}
+            key={id}
+            onPress={() => handlePressOption(option)}
+            rightElement={
+              value && id === value ? (
+                <Wrapper
+                  bottom={0}
+                  position={SHAPE_POSITION.ABSOLUTE}
+                  right={0}
+                  top={0}>
+                  <Icon icon="check" />
+                </Wrapper>
+              ) : undefined
+            }
+            type={BUTTON_TYPE.INVISIBLE}>
+            {(renderOption ? renderOption(option) : label) ?? id}
+          </Button>
+        );
+      }}
+      s={THEME_SIZE.SMALL}
+    />
+  );
+  return isMobile ? (
+    <>
+      {anchorF}
 
-        <Modal
-          {...wrapperProps}
-          isFullSize={false}
-          isOpen={isActive}
-          onToggle={handleToggle}
-          title={title}>
-          {children}
-        </Modal>
-      </>
-    ) : (
-      <Dropdown
+      <Modal
         {...wrapperProps}
-        anchor={anchorF}
-        direction={direction}
-        isFullWidth={isFullWidth}
-        isHidden={!options?.length}
+        isFullSize={false}
         isOpen={isActive}
         onToggle={handleToggle}
-        ref={dropdownRef}
-        width={width}>
-        {title && (
-          <Wrapper
-            border={DIRECTION.BOTTOM}
-            mBottom={THEME_SIZE.SMALL}
-            p>
-            <AsyncText align={FONT_ALIGN.CENTER}>{title}</AsyncText>
-          </Wrapper>
-        )}
-
+        title={title}>
         {children}
-      </Dropdown>
-    );
-  },
-) as <TType extends MenuOptionModel = MenuOptionModel>(
-  props: RLFCPropsModel<MenuRefModel, MenuPropsModel<TType>>,
-) => ReactElement<RLFCPropsModel<MenuRefModel, MenuPropsModel<TType>>>;
+      </Modal>
+    </>
+  ) : (
+    <Dropdown
+      {...wrapperProps}
+      anchor={anchorF}
+      direction={direction}
+      isFullWidth={isFullWidth}
+      isHidden={!options?.length}
+      isOpen={isActive}
+      onToggle={handleToggle}
+      ref={dropdownRef}
+      width={width}>
+      {title && (
+        <Wrapper
+          border={DIRECTION.BOTTOM}
+          mBottom={THEME_SIZE.SMALL}
+          p>
+          <AsyncText align={FONT_ALIGN.CENTER}>{title}</AsyncText>
+        </Wrapper>
+      )}
+
+      {children}
+    </Dropdown>
+  );
+};
 
 process.env.APP_IS_DEBUG && ((Menu as ComponentType).displayName = variableName({ Menu }));

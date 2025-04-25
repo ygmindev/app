@@ -44,8 +44,6 @@ import partition from 'lodash/partition';
 import remove from 'lodash/remove';
 import {
   cloneElement,
-  type ForwardedRef,
-  forwardRef,
   type ReactElement,
   type ReactNode,
   useImperativeHandle,
@@ -54,318 +52,312 @@ import {
   useState,
 } from 'react';
 
-export const Table = forwardRef(
-  <TType,>(
-    {
-      columns,
-      data,
-      elementState,
-      emptyCell = '-',
-      emptyElement,
-      idField,
-      isFullWidth = true,
-      isHeadless,
-      isRemovable,
-      onChange,
-      onRemove,
-      onSelect,
-      select,
-      sorting,
-      validators,
-      ...props
-    }: RLFCPropsModel<TableRefModel<TType>, TablePropsModel<TType>>,
-    ref: ForwardedRef<TableRefModel<TType>>,
-  ): ReactElement<RLFCPropsModel<TableRefModel<TType>, TablePropsModel<TType>>> => {
-    const { t } = useTranslation();
-    const theme = useTheme();
-    const { wrapperProps } = useLayoutStyles({ props });
-    const [selected, selectedSet] = useState<Record<string, true>>({});
+export const Table = <TType,>({
+  columns,
+  data,
+  elementState,
+  emptyCell = '-',
+  emptyElement,
+  idField,
+  isFullWidth = true,
+  isHeadless,
+  isRemovable,
+  onChange,
+  onRemove,
+  onSelect,
+  ref,
+  select,
+  sorting,
+  validators,
+  ...props
+}: RLFCPropsModel<TableRefModel<TType>, TablePropsModel<TType>>): ReactElement<
+  RLFCPropsModel<TableRefModel<TType>, TablePropsModel<TType>>
+> => {
+  const { t } = useTranslation();
+  const theme = useTheme();
+  const { wrapperProps } = useLayoutStyles({ props });
+  const [selected, selectedSet] = useState<Record<string, true>>({});
 
-    const listRef = useRef<VirtualizedListRefModel>(null);
-    const frozenListRef = useRef<VirtualizedListRefModel>(null);
+  const listRef = useRef<VirtualizedListRefModel>(null);
+  const frozenListRef = useRef<VirtualizedListRefModel>(null);
 
-    const columnsF = useMemo<TablePropsModel<TType>['columns']>(
-      () =>
-        filterNil([
-          ...(columns ?? []),
+  const columnsF = useMemo<TablePropsModel<TType>['columns']>(
+    () =>
+      filterNil([
+        ...(columns ?? []),
 
-          isRemovable && {
-            id: 'remove' as StringKeyModel<TType>,
-            isFilterDisabled: false,
-            isFrozen: true,
-            label: '',
-            renderer: ({ index }) => (
-              <Button
-                color={THEME_COLOR.ERROR}
-                confirmMessage={t('core:confirmRemove')}
-                icon="trash"
-                onPress={() => handleRemove && handleRemove(index)}
-                size={THEME_SIZE.SMALL}
-                type={BUTTON_TYPE.INVISIBLE}
-              />
-            ),
-            width: theme.shape.size[THEME_SIZE.SMALL],
-          },
+        isRemovable && {
+          id: 'remove' as StringKeyModel<TType>,
+          isFilterDisabled: false,
+          isFrozen: true,
+          label: '',
+          renderer: ({ index }) => (
+            <Button
+              color={THEME_COLOR.ERROR}
+              confirmMessage={t('core:confirmRemove')}
+              icon="trash"
+              onPress={() => handleRemove && handleRemove(index)}
+              size={THEME_SIZE.SMALL}
+              type={BUTTON_TYPE.INVISIBLE}
+            />
+          ),
+          width: theme.shape.size[THEME_SIZE.SMALL],
+        },
 
-          select && {
-            headerRenderer: () => <Button>hi</Button>,
-            id: 'select' as StringKeyModel<TType>,
-            isFilterDisabled: false,
-            isFrozen: true,
-            label: '',
-            renderer: ({ id }) => (
-              <CheckboxInput
-                isCenter
-                onChange={(v) => {
-                  if (select === TABLE_SELECT_TYPE.SINGLE) {
-                    selectedSet({ [id]: true });
+        select && {
+          headerRenderer: () => <Button>hi</Button>,
+          id: 'select' as StringKeyModel<TType>,
+          isFilterDisabled: false,
+          isFrozen: true,
+          label: '',
+          renderer: ({ id }) => (
+            <CheckboxInput
+              isCenter
+              onChange={(v) => {
+                if (select === TABLE_SELECT_TYPE.SINGLE) {
+                  selectedSet({ [id]: true });
+                } else {
+                  const selectedNew = cloneDeep(selected);
+                  if (v) {
+                    selectedNew[id] = true;
                   } else {
-                    const selectedNew = cloneDeep(selected);
-                    if (v) {
-                      selectedNew[id] = true;
-                    } else {
-                      delete selectedNew[id];
-                    }
-                    selectedSet(selectedNew);
-                    onSelect &&
-                      onSelect(data?.filter((row) => selectedNew[row[idField] as string]));
+                    delete selectedNew[id];
                   }
-                }}
-                value={selected[id] ?? false}
-              />
-            ),
-            width: theme.shape.size[THEME_SIZE.SMALL],
-          },
-        ]),
-      [columns, isRemovable, select, selected],
-    );
+                  selectedSet(selectedNew);
+                  onSelect && onSelect(data?.filter((row) => selectedNew[row[idField] as string]));
+                }
+              }}
+              value={selected[id] ?? false}
+            />
+          ),
+          width: theme.shape.size[THEME_SIZE.SMALL],
+        },
+      ]),
+    [columns, isRemovable, select, selected],
+  );
 
-    const [sortingF, sortingSet] = useState<Array<TableSortModel<TType>>>(sorting ?? []);
-    const { headers, rows } = useTable({
-      columns: columnsF,
-      data,
-      idField,
-      sorting: sortingF,
-    });
-    const validate = useValidator();
-    const [errors, errorsSet] = useState<Record<string, FormErrorModel<TType>>>();
+  const [sortingF, sortingSet] = useState<Array<TableSortModel<TType>>>(sorting ?? []);
+  const { headers, rows } = useTable({
+    columns: columnsF,
+    data,
+    idField,
+    sorting: sortingF,
+  });
+  const validate = useValidator();
+  const [errors, errorsSet] = useState<Record<string, FormErrorModel<TType>>>();
 
-    useImperativeHandle(ref, () => ({
-      remove: handleRemove,
-      select: () => selectedSet({}),
-      validate: () => {
-        if (rows && validators) {
-          const errorsF = rows.reduce((result, row) => {
-            const rowErrors = validate({ data: row.value, validators });
-            return rowErrors ? { ...result, [row.id]: rowErrors } : result;
-          }, {});
-          errorsSet(errorsF);
-          return isEmpty(errorsF);
+  useImperativeHandle(ref, () => ({
+    remove: handleRemove,
+    select: () => selectedSet({}),
+    validate: () => {
+      if (rows && validators) {
+        const errorsF = rows.reduce((result, row) => {
+          const rowErrors = validate({ data: row.value, validators });
+          return rowErrors ? { ...result, [row.id]: rowErrors } : result;
+        }, {});
+        errorsSet(errorsF);
+        return isEmpty(errorsF);
+      }
+      return true;
+    },
+  }));
+
+  const handleRemove = onChange
+    ? (i: number) => {
+        const newValue = cloneDeep(data);
+        if (onRemove) {
+          const row = newValue?.[i];
+          row && void onRemove(row);
         }
-        return true;
-      },
-    }));
+        newValue?.splice(i, 1);
+        onChange(newValue);
+      }
+    : undefined;
 
-    const handleRemove = onChange
-      ? (i: number) => {
-          const newValue = cloneDeep(data);
-          if (onRemove) {
-            const row = newValue?.[i];
-            row && void onRemove(row);
-          }
-          newValue?.splice(i, 1);
-          onChange(newValue);
-        }
-      : undefined;
+  const [headersFrozen, headersAll] = useMemo<
+    [Array<TableHeaderModel<TType>>, Array<TableHeaderModel<TType>>]
+  >(() => partition(headers, (v) => v.isFrozen), [headers]);
 
-    const [headersFrozen, headersAll] = useMemo<
-      [Array<TableHeaderModel<TType>>, Array<TableHeaderModel<TType>>]
-    >(() => partition(headers, (v) => v.isFrozen), [headers]);
+  const renderTable = (h: Array<TableHeaderModel<TType>>, isFrozenTable?: boolean): ReactNode => (
+    <Wrapper
+      flex
+      isHorizontalScrollable
+      pLeft={THEME_SIZE.SMALL}
+      pRight={THEME_SIZE.SMALL}
+      pTop={THEME_SIZE.SMALL}>
+      {/* headers */}
+      {!isHeadless && (
+        <Wrapper
+          height={theme.shape.size[THEME_SIZE.SMALL]}
+          isAlign
+          isFullWidth={isFullWidth}
+          isRow>
+          {h.map(({ align, headerRenderer, id, isFrozen, isHidden, label, width }) => {
+            if (isHidden || (isFrozen ?? false !== isFrozenTable ?? false)) {
+              return null;
+            }
+            const sortIndex = sortingF.findIndex((v) => v.id === id);
+            const isSorted = sortIndex >= 0 && !!sortingF[sortIndex];
+            return (
+              <Wrapper
+                isAlign
+                isRow
+                key={id}
+                onPress={() =>
+                  sortingSet(
+                    isSorted
+                      ? sortingF[sortIndex]?.isDescending
+                        ? remove(sortingF, sortIndex)
+                        : updateArray(sortingF, sortIndex, (v) => ({
+                            ...v,
+                            isDescending: !v?.isDescending,
+                          }))
+                      : [{ id }],
+                  )
+                }
+                position={SHAPE_POSITION.RELATIVE}
+                width={width || TABLE_CELL_WIDTH_DEFAULT}>
+                {headerRenderer ? (
+                  headerRenderer()
+                ) : (
+                  <Text
+                    align={align}
+                    isBold
+                    isEllipsis>
+                    {label}
+                  </Text>
+                )}
 
-    const renderTable = (h: Array<TableHeaderModel<TType>>, isFrozenTable?: boolean): ReactNode => (
-      <Wrapper
+                <Appearable
+                  isActive={isSorted}
+                  isCenter
+                  zIndex>
+                  <Rotatable isActive={!isSorted || sortingF[sortIndex]?.isDescending}>
+                    <Icon icon="arrowUp" />
+                  </Rotatable>
+                </Appearable>
+              </Wrapper>
+            );
+          })}
+        </Wrapper>
+      )}
+
+      {/* rows */}
+      <VirtualizedList
         flex
-        isHorizontalScrollable
-        pLeft={THEME_SIZE.SMALL}
-        pRight={THEME_SIZE.SMALL}
-        pTop={THEME_SIZE.SMALL}>
-        {/* headers */}
-        {!isHeadless && (
+        isFullWidth={isFullWidth}
+        isVerticalScrollable
+        isVerticalScrollableVisible={isFrozenTable ? false : undefined}
+        itemSize={theme.shape.size[THEME_SIZE.SMALL]}
+        items={rows}
+        onScroll={(position) =>
+          isFrozenTable
+            ? listRef.current?.scrollTo(position)
+            : frozenListRef.current?.scrollTo(position)
+        }
+        ref={isFrozenTable ? frozenListRef : listRef}
+        render={(row, i) => (
           <Wrapper
-            height={theme.shape.size[THEME_SIZE.SMALL]}
+            border={DIRECTION.TOP}
+            borderColor={theme.color.border}
             isAlign
-            isFullWidth={isFullWidth}
-            isRow>
-            {h.map(({ align, headerRenderer, id, isFrozen, isHidden, label, width }) => {
-              if (isHidden || (isFrozen ?? false !== isFrozenTable ?? false)) {
+            isOverflowHidden
+            isRow
+            key={row.id}
+            pVertical={THEME_SIZE.SMALL}>
+            {row.cells.map((cell) => {
+              if (cell.isHidden || (cell.isFrozen ?? false) !== (isFrozenTable ?? false)) {
                 return null;
               }
-              const sortIndex = sortingF.findIndex((v) => v.id === id);
-              const isSorted = sortIndex >= 0 && !!sortingF[sortIndex];
+              let element: ReactElement | null = null;
+              if (cell.renderer) {
+                element = cell.renderer({
+                  id: row.id,
+                  index: i,
+                  row: row.value,
+                  value: cell.value,
+                });
+              } else if (cell.field) {
+                const field = cell.field({ index: i, row: row.value, value: cell.value });
+                const onChangeF = field?.props.onChange;
+                element = cloneElement(field, {
+                  error: row.id && cell.columnId && getValue(errors, `${row.id}.${cell.columnId}`),
+                  onChange: onChange
+                    ? <TKey extends StringKeyModel<TType>>(value: TType[TKey]) => {
+                        const newValue = cloneDeep(data);
+                        cell.columnId && newValue && (newValue[i][cell.columnId] = value);
+                        onChange(newValue);
+                        onChangeF && onChangeF(value);
+                      }
+                    : onChangeF,
+                  value: cell.value,
+                });
+              } else {
+                element = (
+                  <AsyncText
+                    align={cell.align}
+                    isEllipsis>
+                    {isNil(cell.value) ? emptyCell : stringify(cell.value)}
+                  </AsyncText>
+                );
+              }
               return (
-                <Wrapper
-                  isAlign
-                  isRow
-                  key={id}
-                  onPress={() =>
-                    sortingSet(
-                      isSorted
-                        ? sortingF[sortIndex]?.isDescending
-                          ? remove(sortingF, sortIndex)
-                          : updateArray(sortingF, sortIndex, (v) => ({
-                              ...v,
-                              isDescending: !v?.isDescending,
-                            }))
-                        : [{ id }],
-                    )
-                  }
-                  position={SHAPE_POSITION.RELATIVE}
-                  width={width || TABLE_CELL_WIDTH_DEFAULT}>
-                  {headerRenderer ? (
-                    headerRenderer()
-                  ) : (
-                    <Text
-                      align={align}
-                      isBold
-                      isEllipsis>
-                      {label}
-                    </Text>
-                  )}
-
-                  <Appearable
-                    isActive={isSorted}
-                    isCenter
-                    zIndex>
-                    <Rotatable isActive={!isSorted || sortingF[sortIndex]?.isDescending}>
-                      <Icon icon="arrowUp" />
-                    </Rotatable>
-                  </Appearable>
-                </Wrapper>
+                <Skeleton
+                  elementState={elementState}
+                  key={cell.id}
+                  width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
+                  <Wrapper
+                    height={theme.shape.size[THEME_SIZE.SMALL]}
+                    justify={FLEX_JUSTIFY.CENTER}>
+                    {element ?? <AsyncText>{emptyCell}</AsyncText>}
+                  </Wrapper>
+                </Skeleton>
               );
             })}
           </Wrapper>
         )}
+      />
+    </Wrapper>
+  );
 
-        {/* rows */}
-        <VirtualizedList
-          flex
-          isFullWidth={isFullWidth}
-          isVerticalScrollable
-          isVerticalScrollableVisible={isFrozenTable ? false : undefined}
-          itemSize={theme.shape.size[THEME_SIZE.SMALL]}
-          items={rows}
-          onScroll={(position) =>
-            isFrozenTable
-              ? listRef.current?.scrollTo(position)
-              : frozenListRef.current?.scrollTo(position)
-          }
-          ref={isFrozenTable ? frozenListRef : listRef}
-          render={(row, i) => (
-            <Wrapper
-              border={DIRECTION.TOP}
-              borderColor={theme.color.border}
-              isAlign
-              isOverflowHidden
-              isRow
-              key={row.id}
-              pVertical={THEME_SIZE.SMALL}>
-              {row.cells.map((cell) => {
-                if (cell.isHidden || (cell.isFrozen ?? false) !== (isFrozenTable ?? false)) {
-                  return null;
-                }
-                let element: ReactElement | null = null;
-                if (cell.renderer) {
-                  element = cell.renderer({
-                    id: row.id,
-                    index: i,
-                    row: row.value,
-                    value: cell.value,
-                  });
-                } else if (cell.field) {
-                  const field = cell.field({ index: i, row: row.value, value: cell.value });
-                  const onChangeF = field?.props.onChange;
-                  element = cloneElement(field, {
-                    error:
-                      row.id && cell.columnId && getValue(errors, `${row.id}.${cell.columnId}`),
-                    onChange: onChange
-                      ? <TKey extends StringKeyModel<TType>>(value: TType[TKey]) => {
-                          const newValue = cloneDeep(data);
-                          cell.columnId && newValue && (newValue[i][cell.columnId] = value);
-                          onChange(newValue);
-                          onChangeF && onChangeF(value);
-                        }
-                      : onChangeF,
-                    value: cell.value,
-                  });
-                } else {
-                  element = (
-                    <AsyncText
-                      align={cell.align}
-                      isEllipsis>
-                      {isNil(cell.value) ? emptyCell : stringify(cell.value)}
-                    </AsyncText>
-                  );
-                }
-                return (
-                  <Skeleton
-                    elementState={elementState}
-                    key={cell.id}
-                    width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
-                    <Wrapper
-                      height={theme.shape.size[THEME_SIZE.SMALL]}
-                      justify={FLEX_JUSTIFY.CENTER}>
-                      {element ?? <AsyncText>{emptyCell}</AsyncText>}
-                    </Wrapper>
-                  </Skeleton>
-                );
-              })}
-            </Wrapper>
-          )}
-        />
-      </Wrapper>
-    );
+  const [frozenMeasure, frozenMeasureSet] = useState<MeasureModel>();
 
-    const [frozenMeasure, frozenMeasureSet] = useState<MeasureModel>();
+  return rows?.length ? (
+    <Wrapper
+      {...wrapperProps}
+      flex
+      isFullWidth
+      position={SHAPE_POSITION.RELATIVE}>
+      {headersFrozen?.length > 0 && (
+        <Wrapper
+          border={DIRECTION.RIGHT}
+          bottom={0}
+          left={0}
+          onMeasure={frozenMeasureSet}
+          position={SHAPE_POSITION.ABSOLUTE}
+          top={0}
+          zIndex>
+          {renderTable(headersFrozen, true)}
+        </Wrapper>
+      )}
 
-    return rows?.length ? (
       <Wrapper
-        {...wrapperProps}
         flex
-        isFullWidth
-        position={SHAPE_POSITION.RELATIVE}>
-        {headersFrozen?.length > 0 && (
-          <Wrapper
-            border={DIRECTION.RIGHT}
-            bottom={0}
-            left={0}
-            onMeasure={frozenMeasureSet}
-            position={SHAPE_POSITION.ABSOLUTE}
-            top={0}
-            zIndex>
-            {renderTable(headersFrozen, true)}
-          </Wrapper>
-        )}
-
-        <Wrapper
-          flex
-          mLeft={frozenMeasure?.width ?? 0}>
-          {renderTable(headersAll, false)}
-        </Wrapper>
+        mLeft={frozenMeasure?.width ?? 0}>
+        {renderTable(headersAll, false)}
       </Wrapper>
-    ) : (
-      (emptyElement ?? (
-        <Wrapper
-          flex
-          isCenter>
-          <Text
-            align={FONT_ALIGN.CENTER}
-            colorRole={THEME_ROLE.MUTED}>
-            {t('core:nothingToShow')}
-          </Text>
-        </Wrapper>
-      ))
-    );
-  },
-) as unknown as <TType>(
-  props: RLFCPropsModel<TableRefModel<TType>, TablePropsModel<TType>>,
-) => ReactElement<RLFCPropsModel<TableRefModel<TType>, TablePropsModel<TType>>>;
+    </Wrapper>
+  ) : (
+    (emptyElement ?? (
+      <Wrapper
+        flex
+        isCenter>
+        <Text
+          align={FONT_ALIGN.CENTER}
+          colorRole={THEME_ROLE.MUTED}>
+          {t('core:nothingToShow')}
+        </Text>
+      </Wrapper>
+    ))
+  );
+};

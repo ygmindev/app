@@ -6,36 +6,31 @@ import {
 } from '@lib/frontend/data/components/TableInput/TableInput.models';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { cloneElement, type ForwardedRef, forwardRef, type ReactElement } from 'react';
+import { cloneElement, type ReactElement } from 'react';
 
-export const TableInput = forwardRef(
-  <TType,>(
-    {
-      defaultValue,
-      element,
-      onChange,
-      value,
-      ...props
-    }: RLFCPropsModel<TableInputRefModel<TType>, TableInputPropsModel<TType>>,
-    _: ForwardedRef<TableInputRefModel<TType>>,
-  ): ReactElement<RLFCPropsModel<TableInputRefModel<TType>, TableInputPropsModel<TType>>> => {
-    const { wrapperProps } = useLayoutStyles({ props });
-    const { valueControlled, valueControlledSet } = useValueControlled<Array<TType>>({
-      defaultValue,
-      onChange,
-      value,
-    });
+export const TableInput = <TType,>({
+  defaultValue,
+  element,
+  onChange,
+  value,
+  ...props
+}: RLFCPropsModel<TableInputRefModel<TType>, TableInputPropsModel<TType>>): ReactElement<
+  RLFCPropsModel<TableInputRefModel<TType>, TableInputPropsModel<TType>>
+> => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { valueControlled, valueControlledSet } = useValueControlled<Array<TType>>({
+    defaultValue,
+    onChange,
+    value,
+  });
 
-    return (
-      <Wrapper {...wrapperProps}>
-        {cloneElement(element, {
-          data: valueControlled,
-          isRemovable: true,
-          onChange: valueControlledSet,
-        })}
-      </Wrapper>
-    );
-  },
-) as unknown as <TType>(
-  props: RLFCPropsModel<TableInputRefModel<TType>, TableInputPropsModel<TType>>,
-) => ReactElement<RLFCPropsModel<TableInputRefModel<TType>, TableInputPropsModel<TType>>>;
+  return (
+    <Wrapper {...wrapperProps}>
+      {cloneElement(element, {
+        data: valueControlled,
+        isRemovable: true,
+        onChange: valueControlledSet,
+      })}
+    </Wrapper>
+  );
+};

@@ -4,7 +4,6 @@ import { Link } from '@lib/frontend/core/components/Link/Link';
 import { type LinkPropsModel } from '@lib/frontend/core/components/Link/Link.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import isNumber from 'lodash/isNumber';
 
 export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
@@ -29,5 +28,3 @@ export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
     };
   },
 });
-
-process.env.APP_IS_DEBUG && (Logo.displayName = variableName({ Logo }));

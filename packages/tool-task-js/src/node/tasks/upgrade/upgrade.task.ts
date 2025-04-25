@@ -7,7 +7,7 @@ const upgrade: TaskParamsModel<unknown> = {
   task: [
     () => {
       const { fixedVersions, name } = pacakgeManagerConfig.params();
-      return `npx ncu -i --deep -p ${name} -x ${Object.keys(fixedVersions).join(',')}`;
+      return `npx ncu -i --deep -p ${name} ${fixedVersions ? `-x ${Object.keys(fixedVersions).join(',')}` : ''}`;
     },
   ],
 };

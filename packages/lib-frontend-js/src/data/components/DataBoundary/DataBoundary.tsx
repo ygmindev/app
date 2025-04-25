@@ -2,7 +2,7 @@ import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type LFCPropsModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import {
   type DataBoundaryPropsModel,
@@ -20,224 +20,201 @@ import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import {
   cloneElement,
-  type ForwardedRef,
-  forwardRef,
   type ReactElement,
   type RefObject,
   useImperativeHandle,
   useRef,
 } from 'react';
 
-const QueryComponent = forwardRef(
-  <TParams = undefined, TResult = void>(
-    {
-      children,
-      emptyMessage,
-      id,
-      isBlocking,
-      params,
-      query,
-      ...props
-    }: LFCPropsModel<QueryComponentPropsModel<TParams, TResult>>,
-    ref: ForwardedRef<QueryComponentRefModel<TResult>>,
-  ): ReactElement<
-    RLFCPropsModel<QueryComponentRefModel<TResult>, QueryComponentPropsModel<TParams, TResult>>
-  > => {
-    const { wrapperProps } = useLayoutStyles({ props });
-    const {
-      data,
-      query: queryF,
-      reset,
-      setData,
-    } = useQuery<TParams, TResult>(id, query, params, { isBlocking });
-
-    useImperativeHandle(ref, () => ({
-      getData: () => data,
-      query: async () => {
-        await queryF();
-      },
-      reset,
-      setData,
-    }));
-
-    return (
-      (children &&
-        children({
-          data,
-          onChange: (values) => {
-            void setData(values);
-          },
-          reset,
-          setData,
-        })) || (
-        <Wrapper
-          {...wrapperProps}
-          flex
-          isCenter>
-          <AsyncText
-            colorRole={THEME_ROLE.MUTED}
-            fontStyle={FONT_STYLE.HEADLINE}>
-            {emptyMessage}
-          </AsyncText>
-        </Wrapper>
-      )
-    );
-  },
-) as <TParams = undefined, TResult = void>(
-  props: RLFCPropsModel<
-    QueryComponentRefModel<TResult>,
-    QueryComponentPropsModel<TParams, TResult>
-  >,
-) => ReactElement<
+const QueryComponent = <TParams = undefined, TResult = void>({
+  children,
+  emptyMessage,
+  id,
+  isBlocking,
+  params,
+  query,
+  ref,
+  ...props
+}: RLFCPropsModel<
+  QueryComponentRefModel<TResult>,
+  QueryComponentPropsModel<TParams, TResult>
+>): ReactElement<
   RLFCPropsModel<QueryComponentRefModel<TResult>, QueryComponentPropsModel<TParams, TResult>>
->;
+> => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const {
+    data,
+    query: queryF,
+    reset,
+    setData,
+  } = useQuery<TParams, TResult>(id, query, params, { isBlocking });
 
-const MutateComponent = forwardRef(
-  <TParams = undefined, TResult = void>(
-    {
-      children,
-      emptyMessage,
-      id,
-      isBlocking,
-      mutate,
-      params,
-      ...props
-    }: LFCPropsModel<MutateComponentPropsModel<TParams, TResult>>,
-    ref: ForwardedRef<MutateComponentRefModel<TResult>>,
-  ): ReactElement<
-    RLFCPropsModel<MutateComponentRefModel<TResult>, MutateComponentPropsModel<TParams, TResult>>
-  > => {
-    const { wrapperProps } = useLayoutStyles({ props });
-    const {
-      data,
-      mutate: mutateF,
-      reset,
-      setData,
-    } = useMutation<TParams, TResult>(id, mutate, { isBlocking });
+  useImperativeHandle(ref, () => ({
+    getData: () => data,
+    query: async () => {
+      await queryF();
+    },
+    reset,
+    setData,
+  }));
 
-    useAsync(async () => mutateF(params));
-
-    useImperativeHandle(ref, () => ({ getData: () => data, mutate: mutateF, reset, setData }));
-
-    return (
-      (children &&
-        children({
-          data,
-          onChange: (values) => {
-            void setData(values);
-          },
-          reset,
-          setData,
-        })) || (
-        <Wrapper
-          {...wrapperProps}
-          flex
-          isCenter>
-          <AsyncText
-            colorRole={THEME_ROLE.MUTED}
-            fontStyle={FONT_STYLE.HEADLINE}>
-            {emptyMessage}
-          </AsyncText>
-        </Wrapper>
-      )
-    );
-  },
-) as <TParams = undefined, TResult = void>(
-  props: RLFCPropsModel<
-    MutateComponentRefModel<TResult>,
-    MutateComponentPropsModel<TParams, TResult>
-  >,
-) => ReactElement<
-  RLFCPropsModel<MutateComponentRefModel<TResult>, MutateComponentPropsModel<TParams, TResult>>
->;
-
-export const DataBoundary = forwardRef(
-  <TParams = undefined, TResult = void>(
-    {
-      children,
-      elementState,
-      emptyMessage = ({ t }) => t('core:nothingToShow'),
-      fallback,
-      fallbackData,
-      id,
-      isBlocking,
-      mutate,
-      params,
-      query,
-      ...props
-    }: LFCPropsModel<DataBoundaryPropsModel<TParams, TResult>>,
-    ref?: ForwardedRef<DataBoundaryRefModel>,
-  ): ReactElement<
-    RLFCPropsModel<DataBoundaryRefModel, DataBoundaryPropsModel<TParams, TResult>>
-  > => {
-    const refF = useRef<DataBoundaryRefModel>(null);
-    const refFF = (ref ?? refF) as RefObject<DataBoundaryRefModel>;
-
-    const handleRefresh = async (): Promise<void> => {
-      const onRefresh = refFF.current?.query ?? refFF.current?.mutate;
-      await onRefresh?.();
-    };
-
-    let fallbackElement = fallback;
-    if (!fallbackElement) {
-      fallbackElement =
-        (fallbackData &&
-          children &&
-          children({
-            data: fallbackData,
-            elementState: ELEMENT_STATE.LOADING,
-            onChange: () => undefined,
-            reset: async () => undefined,
-            setData: async () => undefined,
-          })) ||
-        undefined;
-      fallbackElement = fallbackElement
-        ? cloneElement(fallbackElement, { elementState: ELEMENT_STATE.LOADING })
-        : undefined;
-    }
-
-    return (
-      <AsyncBoundary
-        {...props}
-        fallback={fallbackElement}
+  return (
+    (children &&
+      children({
+        data,
+        onChange: (values) => {
+          void setData(values);
+        },
+        reset,
+        setData,
+      })) || (
+      <Wrapper
+        {...wrapperProps}
         flex
-        onRefresh={handleRefresh}>
-        {query ? (
-          <QueryComponent<TParams, TResult>
-            elementState={elementState}
-            emptyMessage={emptyMessage}
-            id={id}
-            isBlocking={isBlocking}
-            params={params}
-            query={async (v) => {
-              // TODO: sleep for race condition suspense
-              await sleep();
-              return query(v);
-            }}
-            ref={refFF as ForwardedRef<QueryComponentRefModel<TResult>>}>
-            {children}
-          </QueryComponent>
-        ) : mutate ? (
-          <MutateComponent<TParams, TResult>
-            elementState={elementState}
-            emptyMessage={emptyMessage}
-            id={id}
-            isBlocking={isBlocking}
-            mutate={async (v) => {
-              // TODO: sleep for race condition suspense
-              await sleep();
-              return mutate(v);
-            }}
-            params={params}
-            ref={refFF as ForwardedRef<MutateComponentRefModel<TResult>>}>
-            {children}
-          </MutateComponent>
-        ) : null}
-      </AsyncBoundary>
-    );
-  },
-) as <TParams = undefined, TResult = void>(
-  props: RLFCPropsModel<DataBoundaryRefModel<TResult>, DataBoundaryPropsModel<TParams, TResult>>,
-) => ReactElement<
+        isCenter>
+        <AsyncText
+          colorRole={THEME_ROLE.MUTED}
+          fontStyle={FONT_STYLE.HEADLINE}>
+          {emptyMessage}
+        </AsyncText>
+      </Wrapper>
+    )
+  );
+};
+
+const MutateComponent = <TParams = undefined, TResult = void>({
+  children,
+  emptyMessage,
+  id,
+  isBlocking,
+  mutate,
+  params,
+  ref,
+  ...props
+}: RLFCPropsModel<
+  MutateComponentRefModel<TResult>,
+  MutateComponentPropsModel<TParams, TResult>
+>): ReactElement<
+  RLFCPropsModel<MutateComponentRefModel<TResult>, MutateComponentPropsModel<TParams, TResult>>
+> => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const {
+    data,
+    mutate: mutateF,
+    reset,
+    setData,
+  } = useMutation<TParams, TResult>(id, mutate, { isBlocking });
+
+  useAsync(async () => mutateF(params));
+
+  useImperativeHandle(ref, () => ({ getData: () => data, mutate: mutateF, reset, setData }));
+
+  return (
+    (children &&
+      children({
+        data,
+        onChange: (values) => {
+          void setData(values);
+        },
+        reset,
+        setData,
+      })) || (
+      <Wrapper
+        {...wrapperProps}
+        flex
+        isCenter>
+        <AsyncText
+          colorRole={THEME_ROLE.MUTED}
+          fontStyle={FONT_STYLE.HEADLINE}>
+          {emptyMessage}
+        </AsyncText>
+      </Wrapper>
+    )
+  );
+};
+
+export const DataBoundary = <TParams = undefined, TResult = void>({
+  children,
+  elementState,
+  emptyMessage = ({ t }) => t('core:nothingToShow'),
+  fallback,
+  fallbackData,
+  id,
+  isBlocking,
+  mutate,
+  params,
+  query,
+  ref,
+  ...props
+}: RLFCPropsModel<
+  DataBoundaryRefModel<TResult>,
+  DataBoundaryPropsModel<TParams, TResult>
+>): ReactElement<
   RLFCPropsModel<DataBoundaryRefModel<TResult>, DataBoundaryPropsModel<TParams, TResult>>
->;
+> => {
+  const refF = useRef<DataBoundaryRefModel<TResult>>(null);
+  const refFF = ref ?? refF;
+
+  const handleRefresh = async (): Promise<void> => {
+    const onRefresh = refFF.current?.query ?? refFF.current?.mutate;
+    await onRefresh?.();
+  };
+
+  let fallbackElement = fallback;
+  if (!fallbackElement) {
+    fallbackElement =
+      (fallbackData &&
+        children &&
+        children({
+          data: fallbackData,
+          elementState: ELEMENT_STATE.LOADING,
+          onChange: () => undefined,
+          reset: async () => undefined,
+          setData: async () => undefined,
+        })) ||
+      undefined;
+    fallbackElement = fallbackElement
+      ? cloneElement(fallbackElement, { elementState: ELEMENT_STATE.LOADING })
+      : undefined;
+  }
+
+  return (
+    <AsyncBoundary
+      {...props}
+      fallback={fallbackElement}
+      flex
+      onRefresh={handleRefresh}>
+      {query ? (
+        <QueryComponent<TParams, TResult>
+          elementState={elementState}
+          emptyMessage={emptyMessage}
+          id={id}
+          isBlocking={isBlocking}
+          params={params}
+          query={async (v) => {
+            // TODO: sleep for race condition suspense
+            await sleep();
+            return query(v);
+          }}
+          ref={refFF as RefObject<QueryComponentRefModel<TResult>>}>
+          {children}
+        </QueryComponent>
+      ) : mutate ? (
+        <MutateComponent<TParams, TResult>
+          elementState={elementState}
+          emptyMessage={emptyMessage}
+          id={id}
+          isBlocking={isBlocking}
+          mutate={async (v) => {
+            // TODO: sleep for race condition suspense
+            await sleep();
+            return mutate(v);
+          }}
+          params={params}
+          ref={refFF as RefObject<MutateComponentRefModel<TResult>>}>
+          {children}
+        </MutateComponent>
+      ) : null}
+    </AsyncBoundary>
+  );
+};

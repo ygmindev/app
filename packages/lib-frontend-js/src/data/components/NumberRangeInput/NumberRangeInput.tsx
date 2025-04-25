@@ -3,7 +3,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Slider } from '@lib/frontend/core/components/Slider/Slider';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { type LFCPropsModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import { NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput.constants';
 import {
@@ -28,156 +28,154 @@ import {
   RELATIVE_DATE_UNIT,
 } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
 import { type NumberUnitModel } from '@lib/shared/data/utils/numberFormat/numberFormat.models';
-import { type ForwardedRef, forwardRef, type ReactElement, useEffect, useState } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 
-export const NumberRangeInput = forwardRef(
-  <TType extends NumberUnitModel>(
-    {
-      defaultUnit,
-      defaultValue,
-      error,
-      label,
-      onChange,
-      rangeType,
-      type = NUMBER_UNIT_TYPE.AMOUNT,
-      value,
-      ...props
-    }: LFCPropsModel<NumberRangeInputPropsModel<TType>>,
-    ref: ForwardedRef<NumberRangeInputRefModel>,
-  ): ReactElement<RLFCPropsModel<NumberRangeInputRefModel, NumberRangeInputPropsModel<TType>>> => {
-    const theme = useTheme();
-    const { t } = useTranslation([DATA]);
-    const { wrapperProps } = useLayoutStyles({ props });
-    const [rangeTypeState, rangeTypeSet] = useState<NumberRangeTypeModel>(
-      rangeType ?? NUMBER_RANGE_TYPE.EXACT,
+export const NumberRangeInput = <TType extends NumberUnitModel>({
+  defaultUnit,
+  defaultValue,
+  error,
+  label,
+  onChange,
+  rangeType,
+  ref,
+  type = NUMBER_UNIT_TYPE.AMOUNT,
+  value,
+  ...props
+}: RLFCPropsModel<NumberRangeInputRefModel, NumberRangeInputPropsModel<TType>>): ReactElement<
+  RLFCPropsModel<NumberRangeInputRefModel, NumberRangeInputPropsModel<TType>>
+> => {
+  const theme = useTheme();
+  const { t } = useTranslation([DATA]);
+  const { wrapperProps } = useLayoutStyles({ props });
+  const [rangeTypeState, rangeTypeSet] = useState<NumberRangeTypeModel>(
+    rangeType ?? NUMBER_RANGE_TYPE.EXACT,
+  );
+  const isRange = rangeTypeState === NUMBER_RANGE_TYPE.RANGE;
+  // TODO: adjust default range
+  const [range, rangeSet] = useState<[number, number]>([0, 1e3]);
+
+  const unitOptionsF = unitOptions(type);
+  const { unit, valueControlled, valueControlledSet, valueScaled } = useValueScaled({
+    defaultUnit,
+    defaultValue,
+    onChange,
+    value,
+  });
+
+  useEffect(() => {
+    !unit && handleChange({ unit: unitOptionsF[0].id as TType });
+  }, []);
+
+  const handleBlur = (): void => {
+    isRange &&
+      valueScaled?.min &&
+      valueScaled?.max &&
+      valueScaled.min > valueScaled.max &&
+      handleChange({ max: valueScaled.min, min: valueScaled.max });
+  };
+
+  const handleChange = ({
+    max,
+    min,
+    rangeType: rangeTypeF,
+    unit: unitF,
+  }: NumberRangeModel & { unit?: TType } & {
+    rangeType?: NumberRangeTypeModel;
+  }): void => {
+    const rangeTypeFF = rangeTypeF ?? rangeTypeState;
+    const unitFF = unitF ?? unit;
+    const { lowerF, upperF } = (() => {
+      switch (unitFF) {
+        case RELATIVE_DATE_UNIT.DAY:
+          return { lowerF: 0, upperF: 365 };
+        case RELATIVE_DATE_UNIT.WEEK:
+          return { lowerF: 0, upperF: 52 };
+        case RELATIVE_DATE_UNIT.MONTH:
+          return { lowerF: 0, upperF: 18 };
+        case RELATIVE_DATE_UNIT.YEAR:
+          return { lowerF: 0, upperF: 1e2 };
+        case AMOUNT_UNIT.BILLION:
+          return { lowerF: 0, upperF: 1e1 };
+        default:
+          return { lowerF: 10, upperF: 1e3 };
+      }
+    })();
+    rangeSet([lowerF, upperF]);
+    rangeTypeSet(rangeTypeFF);
+    valueControlledSet(
+      {
+        max: max ?? (max === null ? undefined : valueControlled?.max),
+        min: min ?? (min === null ? undefined : valueControlled?.min),
+      },
+      unitFF,
     );
-    const isRange = rangeTypeState === NUMBER_RANGE_TYPE.RANGE;
-    // TODO: adjust default range
-    const [range, rangeSet] = useState<[number, number]>([0, 1e3]);
+  };
 
-    const unitOptionsF = unitOptions(type);
-    const { unit, valueControlled, valueControlledSet, valueScaled } = useValueScaled({
-      defaultUnit,
-      defaultValue,
-      onChange,
-      value,
-    });
+  return (
+    <Wrapper
+      {...wrapperProps}
+      s={THEME_SIZE.SMALL}>
+      {label && <Text isBold>{t(label)}</Text>}
 
-    useEffect(() => {
-      !unit && handleChange({ unit: unitOptionsF[0].id as TType });
-    }, []);
+      <Text>{t('core:measureIn')}</Text>
 
-    const handleBlur = (): void => {
-      isRange &&
-        valueScaled?.min &&
-        valueScaled?.max &&
-        valueScaled.min > valueScaled.max &&
-        handleChange({ max: valueScaled.min, min: valueScaled.max });
-    };
+      <SelectInput<TType>
+        onChange={(v) => handleChange({ unit: v })}
+        options={unitOptionsF}
+        value={unit}
+      />
 
-    const handleChange = ({
-      max,
-      min,
-      rangeType: rangeTypeF,
-      unit: unitF,
-    }: NumberRangeModel & { unit?: TType } & {
-      rangeType?: NumberRangeTypeModel;
-    }): void => {
-      const rangeTypeFF = rangeTypeF ?? rangeTypeState;
-      const unitFF = unitF ?? unit;
-      const { lowerF, upperF } = (() => {
-        switch (unitFF) {
-          case RELATIVE_DATE_UNIT.DAY:
-            return { lowerF: 0, upperF: 365 };
-          case RELATIVE_DATE_UNIT.WEEK:
-            return { lowerF: 0, upperF: 52 };
-          case RELATIVE_DATE_UNIT.MONTH:
-            return { lowerF: 0, upperF: 18 };
-          case RELATIVE_DATE_UNIT.YEAR:
-            return { lowerF: 0, upperF: 1e2 };
-          case AMOUNT_UNIT.BILLION:
-            return { lowerF: 0, upperF: 1e1 };
-          default:
-            return { lowerF: 10, upperF: 1e3 };
-        }
-      })();
-      rangeSet([lowerF, upperF]);
-      rangeTypeSet(rangeTypeFF);
-      valueControlledSet(
-        {
-          max: max ?? (max === null ? undefined : valueControlled?.max),
-          min: min ?? (min === null ? undefined : valueControlled?.min),
-        },
-        unitFF,
-      );
-    };
-
-    return (
       <Wrapper
-        {...wrapperProps}
-        s={THEME_SIZE.SMALL}>
-        {label && <Text isBold>{t(label)}</Text>}
-
-        <Text>{t('core:measureIn')}</Text>
-
-        <SelectInput<TType>
-          onChange={(v) => handleChange({ unit: v })}
-          options={unitOptionsF}
-          value={unit}
+        isAlign
+        isRow>
+        <NumberInput
+          error={error}
+          flex
+          keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
+          label={isRange ? t('data:min', { value: label }) : label}
+          onBlur={handleBlur}
+          onChange={(v) => handleChange({ min: v ?? null })}
+          placeholder={t('core:any')}
+          ref={ref}
+          rightElement={<Text color={theme.color.border}>{unit}</Text>}
+          value={valueScaled?.min}
         />
 
-        <Wrapper
-          isAlign
-          isRow>
+        {isRange && (
           <NumberInput
             error={error}
             flex
             keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
-            label={isRange ? t('data:min', { value: label }) : label}
+            label={t('data:max', { value: label })}
             onBlur={handleBlur}
-            onChange={(v) => handleChange({ min: v ?? null })}
+            onChange={(v) => handleChange({ max: v ?? null })}
             placeholder={t('core:any')}
-            ref={ref}
             rightElement={<Text color={theme.color.border}>{unit}</Text>}
-            value={valueScaled?.min}
+            value={valueScaled?.max}
           />
-
-          {isRange && (
-            <NumberInput
-              error={error}
-              flex
-              keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
-              label={t('data:max', { value: label })}
-              onBlur={handleBlur}
-              onChange={(v) => handleChange({ max: v ?? null })}
-              placeholder={t('core:any')}
-              rightElement={<Text color={theme.color.border}>{unit}</Text>}
-              value={valueScaled?.max}
-            />
-          )}
-        </Wrapper>
-
-        <Slider
-          formatter={(v) => numberFormat(v, { unit })}
-          isRange={isRange}
-          lower={range[0]}
-          onChange={handleChange}
-          upper={range[1]}
-          value={{ max: valueScaled?.max, min: valueScaled?.min }}
-        />
-
-        {!rangeType && (
-          <Button
-            onPress={() =>
-              handleChange({
-                rangeType: isRange ? NUMBER_RANGE_TYPE.EXACT : NUMBER_RANGE_TYPE.RANGE,
-              })
-            }
-            type={BUTTON_TYPE.INVISIBLE}>
-            {isRange ? t('data:exactMessage') : t('data:rangeMessage')}
-          </Button>
         )}
       </Wrapper>
-    );
-  },
-);
+
+      <Slider
+        formatter={(v) => numberFormat(v, { unit })}
+        isRange={isRange}
+        lower={range[0]}
+        onChange={handleChange}
+        upper={range[1]}
+        value={{ max: valueScaled?.max, min: valueScaled?.min }}
+      />
+
+      {!rangeType && (
+        <Button
+          onPress={() =>
+            handleChange({
+              rangeType: isRange ? NUMBER_RANGE_TYPE.EXACT : NUMBER_RANGE_TYPE.RANGE,
+            })
+          }
+          type={BUTTON_TYPE.INVISIBLE}>
+          {isRange ? t('data:exactMessage') : t('data:rangeMessage')}
+        </Button>
+      )}
+    </Wrapper>
+  );
+};

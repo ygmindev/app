@@ -7,7 +7,7 @@ import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement } from 'react';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 import { FlatList, type FlatListProps } from 'react-native';
 
 const viewParamsScrollable = getViewParamsScrollable<
@@ -15,7 +15,7 @@ const viewParamsScrollable = getViewParamsScrollable<
   FlatListProps<WithIdModel>,
   _VirtualizedListRefModel
 >({
-  Component: forwardRef<_VirtualizedListRefModel, FlatListProps<WithIdModel>>((props, ref) => {
+  Component: ({ ref, ...props }) => {
     const refF = useRef<FlatList>(null);
 
     useImperativeHandle(ref, () => ({
@@ -32,7 +32,7 @@ const viewParamsScrollable = getViewParamsScrollable<
         ref={refF}
       />
     );
-  }),
+  },
 
   getProps: ({ divider, isHorizontal, itemSize, items, render }) => ({
     ItemSeparatorComponent: divider ? () => divider : undefined,

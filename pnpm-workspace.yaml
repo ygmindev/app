@@ -3,3 +3,21 @@ packages:
 
 overrides:
   app: 'link:'
+
+ignoredBuiltDependencies:
+  - '@apollo/protobufjs'
+  - '@firebase/util'
+  - '@parcel/watcher'
+  - '@swc/core'
+  - aws-sdk
+  - core-js
+  - dooboolab-welcome
+  - esbuild
+  - mongodb-memory-server
+  - protobufjs
+  - puppeteer
+  - serverless
+  - sharp
+  - spawn-sync
+  - unrs-resolver
+  - workerd

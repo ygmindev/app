@@ -38,12 +38,12 @@ import {
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
-import { forwardRef, useRef } from 'react';
+import { useRef } from 'react';
 
 export const PaymentMethodInput: RLFCModel<
   PaymentMethodInputRefModel,
   PaymentMethodInputPropsModel
-> = forwardRef(({ defaultValue, isEditable, onChange, value, ...props }, ref) => {
+> = ({ defaultValue, isEditable, onChange, ref, value, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
   const currentUser = useCurrentUser();
@@ -202,4 +202,4 @@ export const PaymentMethodInput: RLFCModel<
       </DataBoundary>
     </Wrapper>
   );
-});
+};

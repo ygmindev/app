@@ -13,49 +13,53 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 
-export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = forwardRef(
-  ({ defaultValue, label, onChange, value, ...props }, _) => {
-    const { wrapperProps } = useLayoutStyles({ props });
-    const { valueControlled, valueControlledSet } = useValueControlled({
-      defaultValue,
-      onChange,
-      value,
-    });
-    const [isActive, isActiveSet] = useState<boolean>();
-    return (
-      <Dropdown
-        {...wrapperProps}
-        anchor={
-          <Wrapper position={SHAPE_POSITION.RELATIVE}>
-            <Wrapper
-              isAbsoluteFill
-              zIndex
-            />
+export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = ({
+  defaultValue,
+  label,
+  onChange,
+  value,
+  ...props
+}) => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  const { valueControlled, valueControlledSet } = useValueControlled({
+    defaultValue,
+    onChange,
+    value,
+  });
+  const [isActive, isActiveSet] = useState<boolean>();
+  return (
+    <Dropdown
+      {...wrapperProps}
+      anchor={
+        <Wrapper position={SHAPE_POSITION.RELATIVE}>
+          <Wrapper
+            isAbsoluteFill
+            zIndex
+          />
 
-            <TextInput
-              elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
-              icon="calendar"
-              isNoClear
-              label={label}
-              value={dateTimeFormat(valueControlled)}
-            />
-          </Wrapper>
-        }
-        isOpen={isActive}
-        onToggle={isActiveSet}>
-        <CalendarInput
-          isRange={false}
-          onChange={(v) => {
-            isActiveSet(false);
-            valueControlledSet(v);
-          }}
-          value={valueControlled}
-        />
-      </Dropdown>
-    );
-  },
-);
+          <TextInput
+            elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+            icon="calendar"
+            isNoClear
+            label={label}
+            value={dateTimeFormat(valueControlled)}
+          />
+        </Wrapper>
+      }
+      isOpen={isActive}
+      onToggle={isActiveSet}>
+      <CalendarInput
+        isRange={false}
+        onChange={(v) => {
+          isActiveSet(false);
+          valueControlledSet(v);
+        }}
+        value={valueControlled}
+      />
+    </Dropdown>
+  );
+};
 
 process.env.APP_IS_DEBUG && (DateInput.displayName = variableName({ DateInput }));

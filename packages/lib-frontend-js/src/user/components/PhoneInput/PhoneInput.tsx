@@ -7,27 +7,28 @@ import {
   type PhoneInputPropsModel,
   type PhoneInputRefModel,
 } from '@lib/frontend/user/components/PhoneInput/PhoneInput.models';
-import { forwardRef } from 'react';
 
-export const PhoneInput: RLFCModel<PhoneInputRefModel, PhoneInputPropsModel> = forwardRef(
-  ({ defaultValue, onChange, value, ...props }, ref) => {
-    const { t } = useTranslation();
-    const { valueControlled, valueControlledSet } = useValueControlled({
-      defaultValue,
-      onChange,
-      value,
-    });
-    return (
-      <TextInput
-        {...props}
-        autoComplete="cell"
-        icon="phone"
-        keyboard={TEXT_INPUT_KEYBOARD.TELEPHONE}
-        label={t('user:phone')}
-        onChange={valueControlledSet}
-        ref={ref}
-        value={valueControlled}
-      />
-    );
-  },
-);
+export const PhoneInput: RLFCModel<PhoneInputRefModel, PhoneInputPropsModel> = ({
+  defaultValue,
+  onChange,
+  value,
+  ...props
+}) => {
+  const { t } = useTranslation();
+  const { valueControlled, valueControlledSet } = useValueControlled({
+    defaultValue,
+    onChange,
+    value,
+  });
+  return (
+    <TextInput
+      {...props}
+      autoComplete="cell"
+      icon="phone"
+      keyboard={TEXT_INPUT_KEYBOARD.TELEPHONE}
+      label={t('user:phone')}
+      onChange={valueControlledSet}
+      value={valueControlled}
+    />
+  );
+};
