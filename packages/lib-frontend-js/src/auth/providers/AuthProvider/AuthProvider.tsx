@@ -1,3 +1,4 @@
+import { sleepForTransition } from '@lib/frontend/animation/utils/sleepForTransition/sleepForTransition';
 import { useAuth } from '@lib/frontend/auth/hooks/useAuth/useAuth';
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import { type AuthProviderPropsModel } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider.models';
@@ -38,8 +39,9 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
         if (user) {
           authStatusF = AUTH_STATUS.AUTHENTICATED;
         } else {
-          await signOut();
           authStatusF = AUTH_STATUS.UNAUTHENTICATED;
+          await sleepForTransition();
+          await signOut();
         }
         currentUserSet(user);
       }

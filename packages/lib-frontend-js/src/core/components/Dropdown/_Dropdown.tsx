@@ -12,13 +12,11 @@ import {
   useRole,
 } from '@floating-ui/react';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { sleepForTransition } from '@lib/frontend/animation/utils/sleepForTransition/sleepForTransition';
 import { type _DropdownPropsModel } from '@lib/frontend/core/components/Dropdown/_Dropdown.models';
 import { type SFCModel } from '@lib/frontend/core/core.models';
-import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useValueDelayed';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { type CSSProperties, useState } from 'react';
+import { type CSSProperties } from 'react';
 
 export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   anchor,
@@ -54,23 +52,16 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
     placement: direction,
     whileElementsMounted: autoUpdate,
   });
+
   const click = useClick(context);
   const dismiss = useDismiss(context);
   const role = useRole(context);
   const { getFloatingProps, getReferenceProps } = useInteractions([click, dismiss, role]);
 
-  // TODO: to fix infinite loop in floating-ui
-  const [isMountedF, isMountedSet] = useState<boolean>();
-
-  useAsync(async (isMounted) => {
-    await sleepForTransition();
-    isMounted() && isMountedSet(true);
-  });
-
   return (
     <>
       <div
-        ref={isMountedF ? refs.setReference : undefined}
+        ref={refs.setReference}
         style={styles as CSSProperties}
         {...getReferenceProps()}>
         {anchor}

@@ -5,5 +5,5 @@ import { Portal, type PortalProps } from 'react-native-paper';
 export const _Portal = composeComponent<_PortalPropsModel, Omit<PortalProps, 'theme'>>({
   Component: Portal,
 
-  getProps: ({ children }) => ({ backgroundColor: 'blue', children }),
+  getProps: ({ children }) => ({ children }),
 });
