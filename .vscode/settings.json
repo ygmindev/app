@@ -33,8 +33,7 @@
   "editor.minimap.enabled": false,
   "eslint.debug": true,
   "eslint.options": {
-    "overrideConfigFile": "_dist/.eslintrc.json",
-    "useEslintrc": false
+    "overrideConfigFile": "./_dist/eslint.config.mjs"
   },
   "eslint.validate": [
     "javascript",
@@ -44,6 +43,7 @@
     "typescript",
     "typescriptreact",
   ],
+  "eslint.useFlatConfig": true,
   "explorer.compactFolders": false,
   "explorer.expandSingleFolderWorkspaces": false,
   "files.associations": {

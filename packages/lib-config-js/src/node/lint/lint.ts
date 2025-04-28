@@ -5,6 +5,7 @@ import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import fileConfig from '@lib/config/file/file';
 import { EXTENSIONS_BASE } from '@lib/config/file/file.constants';
 import { _lint } from '@lib/config/node/lint/_lint';
+import { ESLINT_CONFIG_FILENAME } from '@lib/config/node/lint/lint.constants';
 import { type _LintConfigModel, type LintConfigModel } from '@lib/config/node/lint/lint.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
@@ -22,9 +23,9 @@ export const config = defineConfig<LintConfigModel, _LintConfigModel>({
   config: _lint,
 
   params: () => ({
-    configFilename: '.eslintrc.json',
+    configFilename: ESLINT_CONFIG_FILENAME,
 
-    exclude: [],
+    exclude: ['**/node_modules'],
 
     include: cartesianString(
       [

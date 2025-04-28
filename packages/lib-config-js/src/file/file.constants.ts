@@ -6,10 +6,13 @@ export const BUILD_DIR = '_build';
 
 export const CACHE_DIR = '_cache';
 
+export const TEMP_DIR = '_temp';
+
 // TODO: Update
 export const CLEAN_PATTERNS = [
   BUILD_DIR,
   CACHE_DIR,
+  TEMP_DIR,
   '__pycache__',
   '.coverage*',
   '.DS_Store',

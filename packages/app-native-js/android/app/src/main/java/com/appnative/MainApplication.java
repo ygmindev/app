@@ -19,7 +19,7 @@ public class MainApplication extends Application implements ReactApplication {
       new ReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
-          return BuildConfig.DEBUG;
+          return BuildObject.DEBUG;
         }
 
         @Override
@@ -42,7 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public ReactNativeHost getReactNativeHost() {
-    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+    if (BuildObject.IS_NEW_ARCHITECTURE_ENABLED) {
       return mNewArchitectureNativeHost;
     } else {
       return mReactNativeHost;
@@ -53,7 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     // If you opted-in for the New Architecture, we enable the TurboModule system
-    ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+    ReactFeatureFlags.useTurboModules = BuildObject.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
@@ -67,7 +67,7 @@ public class MainApplication extends Application implements ReactApplication {
    */
   private static void initializeFlipper(
       Context context, ReactInstanceManager reactInstanceManager) {
-    if (BuildConfig.DEBUG) {
+    if (BuildObject.DEBUG) {
       try {
         /*
          We use reflection here to pick up the class that initializes Flipper,

@@ -1,5 +1,7 @@
 import { type FileConfigModel } from '@lib/config/file/file.models';
+import { type BUNDLE_FORMAT } from '@lib/config/node/bundle/bundle.constants';
 import { type TypescriptConfigModel } from '@lib/config/node/typescript/typescript.models';
+import { type BuildOptions } from 'esbuild';
 import { type UserConfig } from 'vite';
 
 export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
@@ -17,7 +19,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   define?: Record<string, string>;
 
-  entryPathname?: string;
+  entryFiles?: Record<string, string>;
 
   envPrefix: Array<string>;
 
@@ -25,9 +27,17 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   externals?: Array<string | RegExp>;
 
+  format?: BundleFormatModel;
+
+  isPreserveModules?: boolean;
+
+  isTranspileProject?: boolean;
+
   logSuppressPatterns?: Array<RegExp>;
 
   mainFields?: Array<string>;
+
+  outputPathname?: string;
 
   packager: string;
 
@@ -39,11 +49,17 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   serverExtension?: string;
 
-  transpiles?: Array<string>;
+  transpileModules?: Array<string>;
+
+  transpilePatterns?: Array<RegExp>;
 
   typescript: TypescriptConfigModel;
 
   watch?: Array<string>;
 };
 
-export type _BundleConfigModel = UserConfig;
+export type _BundleConfigModel = UserConfig & {
+  esbuildConfig?: BuildOptions;
+};
+
+export type BundleFormatModel = `${BUNDLE_FORMAT}`;

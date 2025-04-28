@@ -26,4 +26,4 @@ export type LintConfigModel = {
   unusedIgnore?: string;
 };
 
-export type _LintConfigModel = Linter.Config;
+export type _LintConfigModel = Linter.FlatConfig;

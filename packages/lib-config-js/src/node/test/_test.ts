@@ -29,7 +29,7 @@ export const _test = ({
   timeout,
   typescript,
 }: TestConfigModel): _TestConfigModel => {
-  const { aliases, define, extensions, transpiles } = bundle;
+  const { aliases, define, extensions, transpileModules } = bundle;
   const { compilerOptions } = _typescript(typescript);
   const testExtension =
     process.env.TEST_IS_ETE === BOOLEAN_STRING.TRUE ? eteExtension : specExtension;
@@ -110,7 +110,9 @@ export const _test = ({
       ],
     },
 
-    transformIgnorePatterns: transpiles ? [`node_modules/(?!(${transpiles.join('|')})/)`] : [],
+    transformIgnorePatterns: transpileModules
+      ? [`node_modules/(?!(${transpileModules.join('|')})/)`]
+      : [],
 
     watch: isWatch,
   };

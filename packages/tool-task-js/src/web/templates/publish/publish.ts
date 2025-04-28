@@ -1,5 +1,5 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { FILE_CONFIG } from '@lib/config/file/file.constants';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { config as webConfig } from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
@@ -19,6 +19,6 @@ export const publish: TaskParamsModel<PublishParamsModel> = {
       target &&
       webConfig
         .params()
-        .publishCommand({ pathname: fromWorking(FILE_CONFIG.buildDir, 'client'), target }),
+        .publishCommand({ pathname: fromWorking(BUILD_DIR, 'client'), target }),
   ],
 };

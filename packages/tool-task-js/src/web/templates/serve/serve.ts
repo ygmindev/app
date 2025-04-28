@@ -1,5 +1,5 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { FILE_CONFIG } from '@lib/config/file/file.constants';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { staticServer } from '@tool/task/server/utils/staticServer/staticServer';
@@ -13,6 +13,6 @@ export const serve: TaskParamsModel<ServeParamsModel> = {
   onBefore: [({ options, target }) => !options?.noBuild && `${target}-build`],
 
   task: [
-    ({ root }) => staticServer({ pathname: joinPaths([root, FILE_CONFIG.buildDir, 'client']) }),
+    ({ root }) => staticServer({ pathname: joinPaths([root, BUILD_DIR, 'client']) }),
   ],
 };

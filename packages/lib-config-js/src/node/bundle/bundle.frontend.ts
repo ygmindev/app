@@ -48,26 +48,26 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       envPrefix: ['APP_', 'SERVER_APP_'],
 
-      externals: [
-        // 'json-stringify-safe',
-        // 'normalize-css-color',
-        // 'pino',
-        // 'postcss-value-parser',
-        // 'raf/polyfill.js',
-        // 'react-dom',
-        // 'react',
-        // 'react-fast-compare',
-        // 'react-redux',
-        // 'react/jsx-runtime',
-        // 'setimmediate',
-        // 'styleq',
-        // 'void-elements',
-        // /lodash/,
-      ],
+      // externals: [
+      //   'json-stringify-safe',
+      //   'normalize-css-color',
+      //   'pino',
+      //   'postcss-value-parser',
+      //   'raf/polyfill.js',
+      //   'react-dom',
+      //   'react',
+      //   'react-fast-compare',
+      //   'react-redux',
+      //   'react/jsx-runtime',
+      //   'setimmediate',
+      //   'styleq',
+      //   'void-elements',
+      //   /lodash/,
+      // ],
 
       publicDir: PUBLIC_DIR,
 
-      transpiles: [
+      transpileModules: [
         '@egjs/react-infinitegrid',
         '@expo/react-native-action-sheet',
         'countries-list',

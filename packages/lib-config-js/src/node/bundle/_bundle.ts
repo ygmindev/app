@@ -2,15 +2,18 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
 import { _plugins } from '@lib/config/node/bundle/_plugins';
+import { BUNDLE_FORMAT } from '@lib/config/node/bundle/bundle.constants';
 import {
   type _BundleConfigModel,
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
-import { lintCommand } from '@lib/config/node/lint/lint';
 import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { lintCommand } from '@lib/config/node/lint/lint';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
+import { merge } from '@lib/shared/core/utils/merge/merge';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type PlatformModel } from '@lib/shared/platform/platform.models';
@@ -19,7 +22,10 @@ import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
+// import circularDependencyPlugin from 'vite-plugin-circular-dependency';
+// import { VitePluginNode } from 'vite-plugin-node';
 import react from '@vitejs/plugin-react-swc';
+import { type BuildOptions } from 'esbuild';
 import { existsSync } from 'fs';
 import { getTsconfig } from 'get-tsconfig';
 import isString from 'lodash/isString';
@@ -29,8 +35,6 @@ import { nodeExternals } from 'rollup-plugin-node-externals';
 // import { visualizer } from 'rollup-plugin-visualizer';
 import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
 import { checker } from 'vite-plugin-checker';
-// import circularDependencyPlugin from 'vite-plugin-circular-dependency';
-// import { VitePluginNode } from 'vite-plugin-node';
 
 function vitePluginIsomorphicImport(serverExtension: string): Plugin {
   return {
@@ -68,17 +72,22 @@ export const _bundle = ({
   babel,
   buildDir,
   define,
-  entryPathname,
+  entryFiles,
   envPrefix,
   extensions,
   externals,
+  format = BUNDLE_FORMAT.ESM,
+  isPreserveModules = false,
+  isTranspileProject = false,
   logSuppressPatterns,
   mainFields,
+  outputPathname,
   provide,
   publicDir,
   rootDirs,
   serverExtension,
-  transpiles,
+  transpileModules,
+  transpilePatterns,
   typescript,
   watch,
 }: BundleConfigModel): _BundleConfigModel => {
@@ -97,6 +106,12 @@ export const _bundle = ({
   }
 
   const tsconfigDir = fromWorking(typescript?.configFilename);
+
+  const transpilePatternsF = [
+    ...(transpilePatterns ?? []),
+    ...(isTranspileProject ? PACKAGE_PREFIXES.map((v) => new RegExp(`@${v}/*`)) : []),
+  ];
+  const transpileAll = [...(transpileModules ?? []), ...(transpilePatternsF ?? [])];
 
   const config: _BundleConfigModel = {
     build: {
@@ -117,10 +132,10 @@ export const _bundle = ({
 
       minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
 
-      outDir: fromWorking(buildDir),
+      outDir: outputPathname ?? fromWorking(buildDir),
 
       rollupOptions: {
-        ...(entryPathname ? { input: entryPathname } : {}),
+        ...(entryFiles ? { input: entryFiles } : {}),
 
         external: externals
           ? (name: string) => some(externals.map((v) => (isString(v) ? name === v : v.test(name))))
@@ -133,14 +148,14 @@ export const _bundle = ({
                 compact: process.env.NODE_ENV === 'production',
                 entryFileNames: '[name].js',
                 exports: 'named',
-                format: 'cjs',
+                format: format === BUNDLE_FORMAT.ESM ? 'esm' : 'cjs',
                 interop: 'auto',
-                preserveModules: false, // TODO: true if serverless
+                preserveModules: isPreserveModules,
               }
             : undefined,
 
         plugins: [
-          nodeExternals({ exclude: transpiles, include: externals }),
+          externals && nodeExternals({ exclude: transpileAll, include: externals }),
 
           resolve({
             // browser: true,
@@ -175,7 +190,7 @@ export const _bundle = ({
       esbuildOptions: {
         define,
 
-        format: 'esm',
+        format: format === BUNDLE_FORMAT.ESM ? 'esm' : 'cjs',
 
         keepNames: true,
 
@@ -191,45 +206,28 @@ export const _bundle = ({
 
         platform: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
 
-        plugins: _plugins({ rootDirs, transpiles }) as Array<never>,
+        plugins: _plugins({
+          externals,
+          format,
+          rootDirs,
+          transpileModules,
+          transpilePatterns: transpilePatternsF,
+        }) as Array<never>,
 
         resolveExtensions: extensions,
 
-        target: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
+        target: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node20' : undefined,
 
         tsconfig: tsconfigDir,
       },
 
       force: true,
 
-      include: transpiles,
+      include: transpileModules,
     },
 
     plugins: filterNil([
       serverExtension && vitePluginIsomorphicImport(serverExtension),
-
-      // ...(process.env.ENV_PLATFORM === PLATFORM.NODE && entryPathname
-      //   ? VitePluginNode({
-      //       adapter: 'fastify',
-      //       appPath: entryPathname,
-      //       exportName: 'app',
-      //       initAppOnBoot: false,
-      //       swcOptions: {
-      //         // jsc: {
-      //         //   parser: {
-      //         //     decorators: true,
-      //         //     syntax: 'typescript',
-      //         //   },
-      //         //   target: 'esnext',
-      //         //   transform: {
-      //         //     decoratorMetadata: true,
-      //         //     legacyDecorator: true,
-      //         //   },
-      //         // },
-      //       },
-      //       tsCompiler: 'swc',
-      //     })
-      //   : []),
 
       // circularDependencyPlugin({}),
 
@@ -295,7 +293,7 @@ export const _bundle = ({
     //   },
     // },
 
-    ssr: { noExternal: transpiles },
+    ssr: { noExternal: transpileAll },
   };
 
   const defineF = {
@@ -305,6 +303,16 @@ export const _bundle = ({
 
   config.define = defineF;
   config.optimizeDeps?.esbuildOptions && (config.optimizeDeps.esbuildOptions.define = defineF);
+
+  config.esbuildConfig = merge([
+    {
+      bundle: !isPreserveModules,
+      entryPoints: entryFiles,
+      outdir: config.build?.outDir,
+      outExtension: format === BUNDLE_FORMAT.ESM ? { '.js': '.mjs' } : undefined,
+    },
+    config.optimizeDeps?.esbuildOptions as Partial<BuildOptions>,
+  ]);
 
   return config;
 };

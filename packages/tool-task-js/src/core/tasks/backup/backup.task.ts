@@ -1,6 +1,6 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import fileConfig from '@lib/config/file/file';
-import { FILE_CONFIG } from '@lib/config/file/file.constants';
+import { EXCLUDE_PATTERNS } from '@lib/config/file/file.constants';
 import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
 import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
@@ -19,7 +19,7 @@ const backup: TaskParamsModel<BackupParamsModel> = {
     async ({ options }) => {
       const { backupPath } = fileConfig.params();
       const includesF = options?.includes ?? [fromRoot('*')];
-      const excludesF = options?.excludes ?? FILE_CONFIG.excludePatterns;
+      const excludesF = options?.excludes ?? EXCLUDE_PATTERNS;
       const dest = join(
         backupPath,
         `${kebabCase(options?.name)}-${kebabCase(

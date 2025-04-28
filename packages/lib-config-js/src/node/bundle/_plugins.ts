@@ -4,7 +4,6 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
@@ -35,9 +34,12 @@ const excludeVendorFromSourceMap = (includes = []): Plugin => ({
 });
 
 export const _plugins = ({
+  externals,
+  format,
   rootDirs,
-  transpiles,
-}: Pick<BundleConfigModel, 'transpiles' | 'rootDirs'>): Array<Plugin> =>
+  transpileModules,
+  transpilePatterns,
+}: Pick<BundleConfigModel, 'externals' | 'format' | 'rootDirs' | 'transpileModules' | 'transpilePatterns'>): Array<Plugin> =>
   filterNil([
     {
       name: 'js-to-jsx',
@@ -53,15 +55,14 @@ export const _plugins = ({
 
     esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
 
-    transpiles && esbuildCommonjs(transpiles),
+    transpileModules && esbuildCommonjs(transpileModules),
 
     excludeVendorFromSourceMap(),
 
     (esbuildFlowPlugin as () => unknown)() as Plugin,
 
-    process.env.ENV_PLATFORM === PLATFORM.NODE &&
-      nodeExternalsPlugin({
-        allowList: transpiles,
-        packagePath: rootDirs?.map((path) => joinPaths([path, 'package.json'])),
-      }),
+    externals && nodeExternalsPlugin({
+      allowList: [...(transpileModules ?? []), ...(transpilePatterns ?? [])],
+      packagePath: rootDirs?.map((path) => joinPaths([path, 'package.json'])),
+    }),
   ]) as Array<Plugin>;

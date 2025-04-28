@@ -6,7 +6,7 @@ export const config = defineConfig<PackageManagerConfigModel>({
   params: () => ({
     fixedVersions: {
       '@types/eslint': '^8.56.11',
-      eslint: '^8.56.0', // eslint9 flat config incompatible
+      eslint: '^8.56.0',
     },
 
     installCommand: (names, packages, options = {}) =>

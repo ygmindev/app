@@ -1,6 +1,6 @@
 import { fromAssets } from '@lib/backend/file/utils/fromAssets/fromAssets';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { FILE_CONFIG } from '@lib/config/file/file.constants';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { config as webConfig } from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildApp } from '@lib/shared/web/utils/buildApp/buildApp';
@@ -16,14 +16,14 @@ export const build: TaskParamsModel<unknown> = {
   onBefore: ['build-config-typescript', 'build-config-lint'],
 
   task: [
-    async () => runClean({ patterns: [FILE_CONFIG.buildDir] }),
+    async () => runClean({ patterns: [BUILD_DIR] }),
 
     () => buildApp({ web: webConfig.params() }),
 
     ({ root }) =>
       copy({
         from: fromAssets(),
-        to: joinPaths([root, FILE_CONFIG.buildDir, 'client']),
+        to: joinPaths([root, BUILD_DIR, 'client']),
       }),
   ],
 };
