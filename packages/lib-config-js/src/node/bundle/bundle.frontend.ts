@@ -9,6 +9,7 @@ import {
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
 export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
   ...configBase,
@@ -67,19 +68,21 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       publicDir: PUBLIC_DIR,
 
-      transpileModules: [
-        '@egjs/react-infinitegrid',
-        '@expo/react-native-action-sheet',
-        'countries-list',
-        'css-in-js-utils',
-        'expo-linear-gradient',
-        'inline-style-prefixer',
-        'moti',
-        'react-use',
-        'redux-persist',
-        'inversify-react',
-        ...fromGlobs(['react-native-!(codegen|gradle-plugin)'], { root: fromModules() }),
-      ],
+      transpileModules:
+        filterNil([
+          '@egjs/react-infinitegrid',
+          '@expo/react-native-action-sheet',
+          'countries-list',
+          'css-in-js-utils',
+          'expo-linear-gradient',
+          'inline-style-prefixer',
+          'moti',
+          'react-use',
+          'redux-persist',
+          // TODO: fix?
+          process.env.NODE_ENV === 'production' && 'inversify-react',
+          ...fromGlobs(['react-native-!(codegen|gradle-plugin)'], { root: fromModules() }),
+        ]) ?? [],
 
       watch: [fromPackages('lib-frontend-js/src/**/*')],
     },

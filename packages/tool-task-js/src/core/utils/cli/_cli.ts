@@ -17,6 +17,9 @@ import { existsSync } from 'fs';
 import gulp from 'gulp';
 import noop from 'lodash/noop';
 import reduce from 'lodash/reduce';
+import some from 'lodash/some';
+
+const BUILD_TASKS = ['build', 'publish'];
 
 export const _cli = async ({
   configFilename,
@@ -26,7 +29,9 @@ export const _cli = async ({
 }: _CliParamsModel): Promise<_CliModel> => {
   const taskRunner = Container.get(TaskRunner);
 
-  process.env.NODE_ENV = ENVIRONMENT.PRODUCTION;
+  if (task && some(BUILD_TASKS, (v) => task.includes(v) || task.endsWith(v[0]))) {
+    process.env.NODE_ENV = ENVIRONMENT.PRODUCTION;
+  }
 
   let tasks = await reduceSequence<Array<string>, Array<TaskParamsModel<unknown>>>(
     packageDirs,
@@ -83,11 +88,6 @@ export const _cli = async ({
   ]);
 
   tasks.forEach(taskRunner.register);
-
-  // const alias = task && taskRunner.aliases[task];
-  // if (alias?.includes('build') || alias?.includes('publish')) {
-  // process.env.NODE_ENV = ENVIRONMENT.PRODUCTION;
-  // }
 
   const taskF = gulp.task(task ?? 'default');
   if (taskF) {
