@@ -19,11 +19,13 @@ export const setEnvironment = ({
   writes,
 }: SetEnvironmentParamsModel = {}): SetEnvironmentModel => {
   const environmentF = process.env.NODE_ENV ?? environment;
+
   const paths = filterNil([
     fromConfig('environment/.env.base'),
     environmentF && fromConfig(`environment/.env.${environmentF}`),
     fromWorking('.env'),
   ]);
+
   const envs = paths.reduce((result, path) => {
     if (existsSync(path)) {
       const { error, parsed } = config({ override: true, path });

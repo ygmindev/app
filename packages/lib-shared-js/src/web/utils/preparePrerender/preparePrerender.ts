@@ -33,7 +33,7 @@ const pages = (routes?: Array<RouteModel>): _PreparePrerenderParamsModel['pages'
           ...(isArray(route.prerender)
             ? route.prerender.map((value) => ({
                 getContext: undefined,
-                pathname: pathnameF.replace(/\/:[^\/]+/, value),
+                pathname: pathnameF.replace(/\/:[^/]+/, value),
               }))
             : []),
         ];

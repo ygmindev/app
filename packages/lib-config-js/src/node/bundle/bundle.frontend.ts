@@ -77,7 +77,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
         'moti',
         'react-use',
         'redux-persist',
-        // 'inversify-react',
+        'inversify-react',
         ...fromGlobs(['react-native-!(codegen|gradle-plugin)'], { root: fromModules() }),
       ],
 

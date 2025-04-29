@@ -4,10 +4,9 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 export const config = defineConfig<PackageManagerConfigModel>({
   params: () => ({
-    fixedVersions: {
-      '@types/eslint': '^8.56.11',
-      eslint: '^8.56.0',
-    },
+    // fixedVersions: {
+    //   eslint: '^8.56.0',
+    // },
 
     installCommand: (names, packages, options = {}) =>
       `corepack use pnpm@latest && ${

@@ -1,5 +1,6 @@
 import jsPlugin from '@eslint/js';
 import { type _LintConfigModel, type LintConfigModel } from '@lib/config/node/lint/lint.models';
+import { trimValue } from '@lib/shared/core/utils/trimValue/trimValue';
 import importPlugin from 'eslint-plugin-import';
 import jsoncPlugin from 'eslint-plugin-jsonc';
 import prettierPlugin from 'eslint-plugin-prettier/recommended';
@@ -166,12 +167,12 @@ export const _lint = ({
       languageOptions: {
         ecmaVersion: 'latest',
 
-        globals: {
+        globals: trimValue({
           ...globals.browser,
           ...globals.jest,
           ...globals.node,
           ...globals.serviceworker,
-        },
+        }),
 
         parser: typescriptPlugin.parser,
 
