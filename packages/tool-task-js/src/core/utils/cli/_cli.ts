@@ -7,6 +7,7 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { importInterop } from '@lib/shared/core/utils/importInterop/importInterop';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequence';
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type _CliModel, type _CliParamsModel } from '@tool/task/core/utils/cli/_cli.models';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
@@ -24,6 +25,8 @@ export const _cli = async ({
   taskExtension,
 }: _CliParamsModel): Promise<_CliModel> => {
   const taskRunner = Container.get(TaskRunner);
+
+  process.env.NODE_ENV = ENVIRONMENT.PRODUCTION;
 
   let tasks = await reduceSequence<Array<string>, Array<TaskParamsModel<unknown>>>(
     packageDirs,
@@ -80,6 +83,11 @@ export const _cli = async ({
   ]);
 
   tasks.forEach(taskRunner.register);
+
+  // const alias = task && taskRunner.aliases[task];
+  // if (alias?.includes('build') || alias?.includes('publish')) {
+  // process.env.NODE_ENV = ENVIRONMENT.PRODUCTION;
+  // }
 
   const taskF = gulp.task(task ?? 'default');
   if (taskF) {

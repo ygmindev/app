@@ -1,5 +1,5 @@
 import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
-import databaseConfig from '@lib/config/database/database.mongo';
+import { config as databaseConfig } from '@lib/config/database/database.mongo';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { merge } from '@lib/shared/core/utils/merge/merge';

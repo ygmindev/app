@@ -9,9 +9,9 @@ import {
   type _BundleConfigModel,
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
+import { lintCommand } from '@lib/config/node/lint/lint';
 import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { lintCommand } from '@lib/config/node/lint/lint';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
@@ -308,8 +308,8 @@ export const _bundle = ({
     {
       bundle: !isPreserveModules,
       entryPoints: entryFiles,
-      outdir: config.build?.outDir,
       outExtension: format === BUNDLE_FORMAT.ESM ? { '.js': '.mjs' } : undefined,
+      outdir: config.build?.outDir,
     },
     config.optimizeDeps?.esbuildOptions as Partial<BuildOptions>,
   ]);
