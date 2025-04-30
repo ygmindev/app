@@ -21,6 +21,7 @@
     "inversify-react": "^1.2.0",
     "lexical": "^0.30.0",
     "libphonenumber-js": "^1.12.7",
+    "nanoid": "^5.1.5",
     "react-day-picker": "^9.6.7",
     "react-native-is-edge-to-edge": "^1.1.7",
     "react-native-reanimated": "3.17.5",

@@ -18,12 +18,12 @@ const patchPackage: TaskParamsModel<PatchPackageParamsModel> = {
 
   options: async () => {
     const { packageDirs } = fileConfig.params();
+    const { listCommand } = pacakgeManagerConfig.params();
     let options = await reduceSequence(
       packageDirs,
       async (result, v) => {
         const content = readFileSync(fromPackages(`${v}/package.json`), 'utf-8');
         const { name } = JSON.parse(content) as { name: string };
-        const { listCommand } = pacakgeManagerConfig.params();
         const dependencies = JSON.parse(await execute({ command: listCommand(name) })) as Array<{
           dependencies?: Record<string, { version: string }>;
         }>;
@@ -46,8 +46,10 @@ const patchPackage: TaskParamsModel<PatchPackageParamsModel> = {
   task: [
     ({ options }) => {
       const pkg = options?.package;
-      console.warn(pkg);
-      // return pkg && `pnpm patch ${pkg}`;
+      if (pkg) {
+        const { patchCommand, patchDir } = pacakgeManagerConfig.params();
+        return patchCommand(pkg, patchDir);
+      }
     },
   ],
 };

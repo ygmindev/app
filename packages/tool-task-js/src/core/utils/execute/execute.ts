@@ -6,6 +6,7 @@ import { spawn } from 'child_process';
 
 export const execute = async ({
   command,
+  isPipe = true,
   onError,
   onFinish,
   onMessage,
@@ -18,7 +19,7 @@ export const execute = async ({
     cwd: root,
     env: process.env,
     shell: true,
-    stdio: 'pipe',
+    stdio: isPipe ? 'pipe' : 'inherit',
   });
 
   const { pid } = cp;

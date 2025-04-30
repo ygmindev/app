@@ -49,6 +49,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
         } else {
           await execute({
             command: value,
+            isPipe: false,
             onFinish: (pid) => this._pids.delete(pid),
             onStart: (pid) => this._pids.add(pid),
           });

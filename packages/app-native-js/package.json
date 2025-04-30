@@ -43,6 +43,7 @@
     "libphonenumber-js": "^1.12.7",
     "lodash": "^4.17.21",
     "moti": "^0.30.0",
+    "nanoid": "^5.1.5",
     "prop-types": "^15.8.1",
     "raf": "^3.4.1",
     "random-js": "^2.1.0",
