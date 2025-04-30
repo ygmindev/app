@@ -35,7 +35,7 @@ export type TaskParamsModel<TType extends unknown> = Omit<
     onFinish?: Array<TaskModel<TType>>;
     options?: (
       context: Pick<TaskContextModel<TType>, 'name' | 'root' | 'overrides'>,
-    ) => PromptParamsModel<TType>;
+    ) => Promise<PromptParamsModel<TType>>;
     overrides?(): PartialModel<TType>;
     task: Array<TaskModel<TType>>;
   };

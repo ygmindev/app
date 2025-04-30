@@ -9,9 +9,13 @@ export type PackageManagerConfigModel = {
     options?: PackageManagerInstallOptionsModel,
   ): string;
 
+  listCommand(pkg: string): string;
+
   modulesDir: string;
 
   name: string;
+
+  patchCommand(): string;
 
   removeCommand(names?: string, packages?: Array<string>): string;
 };

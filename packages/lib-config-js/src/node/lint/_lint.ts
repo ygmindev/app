@@ -118,11 +118,12 @@ export const _lint = ({
 
     {
       plugins: {
-        rules: {
-          'typescript-sort-keys/interface': 'error',
-          'typescript-sort-keys/string-enum': 'error',
-        },
         'typescript-sort-keys': typescriptSortKeysPlugin,
+      },
+
+      rules: {
+        'typescript-sort-keys/interface': 'error',
+        'typescript-sort-keys/string-enum': 'error',
       },
     },
 

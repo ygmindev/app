@@ -1,10 +1,10 @@
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { WEB_CONFIG } from '@lib/config/node/web/web.constants';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { CACHE_RESOURCES } from '@tool/task/asset/tasks/cacheDatabase/cacheDatabase.constants';
@@ -24,7 +24,7 @@ const cacheDatabase: TaskParamsModel<CacheDatabaseParamsModel> = {
 
   onFinish: ['database-kill'],
 
-  options: () => [
+  options: async () => [
     {
       defaultValue: resources,
       key: 'resources',
@@ -40,7 +40,9 @@ const cacheDatabase: TaskParamsModel<CacheDatabaseParamsModel> = {
       const tasks = options?.resources?.map(async (name) => {
         const { result } = await database.getRepository({ name }).getMany({
           filter: [],
-          options: () => ({ take: CACHE_RESOURCES[name as keyof typeof CACHE_RESOURCES].count }),
+          options: () => ({
+            take: CACHE_RESOURCES[name as keyof typeof CACHE_RESOURCES].count,
+          }),
         });
         if (result) {
           const value = { created: new Date(), data: result } satisfies CacheAssetModel;

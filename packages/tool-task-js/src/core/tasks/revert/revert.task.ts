@@ -11,7 +11,7 @@ import { resolve } from 'path';
 const revert: TaskParamsModel<RevertParamsModel> = {
   name: 're-vert',
 
-  options: () => {
+  options: async () => {
     const { backupPath } = fileConfig.params();
     const backups = sortBy(
       children(backupPath, { isDirectory: true }),

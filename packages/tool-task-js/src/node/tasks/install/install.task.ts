@@ -9,7 +9,7 @@ import { type InstallParamsModel } from '@tool/task/node/tasks/install/install.m
 const install: TaskParamsModel<InstallParamsModel> = {
   name: 'node-install',
 
-  options: () => [
+  options: async () => [
     {
       key: 'packages',
       options: children(fromPackages(), { isDirectory: true }).reduce(

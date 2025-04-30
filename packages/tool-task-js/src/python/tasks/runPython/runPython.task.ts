@@ -13,7 +13,7 @@ const runPython: TaskParamsModel<RunPythonParamsModel> = {
 
   name: 'run-python',
 
-  options: () => [
+  options: async () => [
     {
       key: 'package',
       options: children(fromPackages(), { isDirectory: true }).reduce(

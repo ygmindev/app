@@ -15,9 +15,13 @@ export const config = defineConfig<PackageManagerConfigModel>({
           : 'pnpm install --shamefully-hoist'
       }`,
 
+    listCommand: (pkg) => `pnpm list --json --recursive --depth 0 --filter ${pkg}`,
+
     modulesDir: 'node_modules',
 
     name: 'pnpm',
+
+    patchCommand: () => 'pnpm list --json --depth 0',
 
     removeCommand: (names, packages) =>
       `pnpm remove ${packages ? packages.map((v) => `--filter @${v.replace('-js', '').replace('-', '/')}`).join(' ') : ''} ${names}`,

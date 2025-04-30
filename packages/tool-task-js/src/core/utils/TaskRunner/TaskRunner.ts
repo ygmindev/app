@@ -12,12 +12,12 @@ import {
   type TaskModel,
   type TaskParamsModel,
 } from '@tool/task/core/core.models';
+import { execute } from '@tool/task/core/utils/execute/execute';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { runParallel } from '@tool/task/core/utils/runParallel/runParallel';
 import { _TaskRunner } from '@tool/task/core/utils/TaskRunner/_TaskRunner';
 import { type TaskRunnerModel } from '@tool/task/core/utils/TaskRunner/TaskRunner.models';
-import { type ChildProcess, spawn } from 'child_process';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';
@@ -26,29 +26,6 @@ import kebabCase from 'lodash/kebabCase';
 export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   protected _aliases: Record<string, string> = {};
   protected _pids: Set<number> = new Set();
-
-  handleProcess = (p: ChildProcess | NodeJS.Process): Promise<void> =>
-    new Promise((resolve, reject) => {
-      const pidF = p.pid;
-      pidF && this._pids.add(pidF);
-      const handleFinish = (): void => {
-        pidF && this._pids.delete(pidF);
-      };
-      const handleSuccess = (): void => {
-        handleFinish();
-        resolve();
-      };
-      const handleError = (message: string): void => {
-        handleFinish();
-        reject(new Error(message));
-      };
-      p.once('SIGTERM', handleSuccess);
-      p.once('SIGINT', handleSuccess);
-      p.once('close', handleSuccess);
-      p.once('exit', handleSuccess);
-      p.once('uncaughtException', handleError);
-      p.once('unhandledRejection', handleError);
-    });
 
   resolveTask = async <TType extends unknown>(
     value: TaskModel<TType>,
@@ -70,8 +47,11 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
         if (valueF) {
           await valueF();
         } else {
-          const cp = spawn(value, { env: process.env, shell: true, stdio: 'inherit' });
-          return this.handleProcess(cp);
+          await execute({
+            command: value,
+            onFinish: (pid) => this._pids.delete(pid),
+            onStart: (pid) => this._pids.add(pid),
+          });
         }
       }
     }
@@ -99,7 +79,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     const overridesF = overrides?.();
     let optionsF = { ...(overridesF ?? {}), ...parseArgs() } as TType & object;
     if (options) {
-      const optionsPrompts = options({ name, overrides: overridesF, root });
+      const optionsPrompts = await options({ name, overrides: overridesF, root });
       optionsF = {
         ...optionsF,
         ...((await prompt(optionsPrompts.filter(({ key }) => !(key in optionsF)))) as object),

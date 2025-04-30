@@ -8,7 +8,7 @@ import { type UpgradePythonParamsModel } from '@tool/task/python/tasks/upgradePy
 const upgradePython: TaskParamsModel<UpgradePythonParamsModel> = {
   name: 'upgrade-python',
 
-  options: () => [
+  options: async () => [
     {
       key: 'packages',
       options: children(fromPackages(), { isDirectory: true }).reduce(

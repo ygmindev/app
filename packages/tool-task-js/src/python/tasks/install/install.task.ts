@@ -8,7 +8,7 @@ import { type InstallParamsModel } from '@tool/task/python/tasks/install/install
 const install: TaskParamsModel<InstallParamsModel> = {
   name: 'python-install',
 
-  options: () => [
+  options: async () => [
     {
       key: 'packages',
       options: children(fromPackages(), { isDirectory: true }).reduce(

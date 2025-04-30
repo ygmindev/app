@@ -232,7 +232,7 @@ export const _bundle = ({
       // circularDependencyPlugin({}),
 
       checker({
-        eslint: { lintCommand: lintCommand() },
+        eslint: { lintCommand: lintCommand(), useFlatConfig: true },
         typescript: { tsconfigPath: tsconfigDir },
       }),
 
