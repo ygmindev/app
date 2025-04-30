@@ -47,8 +47,8 @@ const patchPackage: TaskParamsModel<PatchPackageParamsModel> = {
     ({ options }) => {
       const pkg = options?.package;
       if (pkg) {
-        const { patchCommand, patchDir } = pacakgeManagerConfig.params();
-        return patchCommand(pkg, patchDir);
+        const { patchCommand } = pacakgeManagerConfig.params();
+        return patchCommand(pkg);
       }
     },
   ],
