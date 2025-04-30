@@ -4,7 +4,6 @@
 **/.build
 **/_build
 **/_cache
-**/_temp
 
 # Node
 node_modules
