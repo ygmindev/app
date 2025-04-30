@@ -2,8 +2,8 @@
 **/.esbuild
 **/.serverless
 **/.build
-**/_build
-**/_cache
+**/__build
+**/__cache
 
 # Node
 node_modules

@@ -2,11 +2,11 @@ import { type FileConfigModel } from '@lib/config/file/file.models';
 
 export const BACKUP_DIR = 'backups';
 
-export const BUILD_DIR = '_build';
+export const BUILD_DIR = '__build__';
 
-export const CACHE_DIR = '_cache';
+export const CACHE_DIR = '__cache__';
 
-export const TEMP_DIR = '_temp';
+export const TEMP_DIR = '__temp__';
 
 // TODO: Update
 export const CLEAN_PATTERNS = [
@@ -30,7 +30,7 @@ export const CLEAN_PATTERNS = [
   'coverage',
 ];
 
-export const DIST_DIR = '_dist';
+export const DIST_DIR = '__dist';
 
 export const PACKAGE_PREFIXES = ['app', 'service', 'lib', 'tool'];
 
