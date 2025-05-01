@@ -17,6 +17,12 @@ export type PromptArgsModel<TKey> = {
   options?: Array<string | { label?: string; value: string }>;
 };
 
+export type ConfirmPromptArgsModel<TKey> = PromptArgsModel<TKey> & {
+  basePath?: never;
+  defaultValue?: boolean;
+  type?: PROMPT_TYPE.CONFIRM;
+};
+
 export type StringPromptArgsModel<TKey> = PromptArgsModel<TKey> &
   (
     | { basePath?: string; defaultValue?: string; type?: PROMPT_TYPE.DIRECTORY }

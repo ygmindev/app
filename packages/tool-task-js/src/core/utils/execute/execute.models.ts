@@ -1,11 +1,8 @@
-export type ExecuteParamsModel = {
-  command: string;
-  isPipe?: boolean;
-  onError?(e: Error): void;
-  onFinish?(pid: number): void;
-  onMessage?(message: string): void;
-  onStart?(pid: number): void;
-  root?: string;
-};
+import {
+  type _ExecuteModel,
+  type _ExecuteParamsModel,
+} from '@tool/task/core/utils/execute/_execute.models';
 
-export type ExecuteModel = string;
+export type ExecuteParamsModel = _ExecuteParamsModel;
+
+export type ExecuteModel = _ExecuteModel;

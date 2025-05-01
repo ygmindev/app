@@ -2,7 +2,6 @@ import { TEMP_DIR } from '@lib/config/file/file.constants';
 import { PACAKGE_INSTALL_MODE } from '@lib/config/node/packageManager/packageManager.constants';
 import { type PackageManagerConfigModel } from '@lib/config/node/packageManager/packageManager.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import { uid } from '@lib/shared/core/utils/uid/uid';
 
 export const config = defineConfig<PackageManagerConfigModel>({
   params: () => ({
@@ -23,7 +22,9 @@ export const config = defineConfig<PackageManagerConfigModel>({
 
     name: 'pnpm',
 
-    patchCommand: (pkg) => `npx pnpm-patch-i ${pkg}`,
+    patchCommand: (pkg, dir) => `pnpm patch ${pkg} --edit-dir ${dir}`,
+
+    patchDir: TEMP_DIR,
 
     removeCommand: (names, packages) =>
       `pnpm remove ${packages ? packages.map((v) => `--filter @${v.replace('-js', '').replace('-', '/')}`).join(' ') : ''} ${names}`,

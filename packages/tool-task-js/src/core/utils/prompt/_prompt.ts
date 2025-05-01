@@ -1,4 +1,4 @@
-import { checkbox, input, select } from '@inquirer/prompts';
+import { checkbox, confirm, input, select } from '@inquirer/prompts';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequence';
@@ -36,7 +36,10 @@ export const _prompt = async <TType extends unknown>(
               ? { name: option, value: option }
               : { name: option.label, value: option.value };
             return {
-              checked: type === PROMPT_TYPE.MULTIPLE && options && defaultValue?.includes(value),
+              checked:
+                type === PROMPT_TYPE.MULTIPLE &&
+                options &&
+                (defaultValue as Array<string>)?.includes(value),
               name,
               value,
             };
@@ -46,6 +49,8 @@ export const _prompt = async <TType extends unknown>(
         switch (type) {
           case PROMPT_TYPE.INPUT:
             return input({ message: messageF });
+          case PROMPT_TYPE.CONFIRM:
+            return confirm({ default: (defaultValue as boolean) ?? true, message: messageF });
           case PROMPT_TYPE.LIST:
             return select({ choices, message: messageF });
           case PROMPT_TYPE.MULTIPLE:

@@ -30,7 +30,7 @@ export const CLEAN_PATTERNS = [
   'coverage',
 ];
 
-export const DIST_DIR = '__dist';
+export const DIST_DIR = '__dist__';
 
 export const PACKAGE_PREFIXES = ['app', 'service', 'lib', 'tool'];
 

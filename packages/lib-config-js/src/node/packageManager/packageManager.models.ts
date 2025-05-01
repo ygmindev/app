@@ -15,7 +15,9 @@ export type PackageManagerConfigModel = {
 
   name: string;
 
-  patchCommand(pkg: string): string;
+  patchCommand(pkg: string, dir: string): string;
+
+  patchDir: string;
 
   removeCommand(names?: string, packages?: Array<string>): string;
 };

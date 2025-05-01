@@ -1,4 +1,5 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { config as fileConfig } from '@lib/config/file/file';
 import { PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
 import { config as pacakgeManagerConfig } from '@lib/config/node/packageManager/packageManager';
@@ -6,9 +7,11 @@ import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequ
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { execute } from '@tool/task/core/utils/execute/execute';
+import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { type PatchPackageParamsModel } from '@tool/task/node/patchPackage/patchPackage.models';
 import { readFileSync } from 'fs';
+import launch from 'launch-editor';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 import uniq from 'lodash/uniq';
@@ -47,8 +50,21 @@ const patchPackage: TaskParamsModel<PatchPackageParamsModel> = {
     ({ options }) => {
       const pkg = options?.package;
       if (pkg) {
-        const { patchCommand } = pacakgeManagerConfig.params();
-        return patchCommand(pkg);
+        const { modulesDir, patchCommand, patchDir } = pacakgeManagerConfig.params();
+        const dirname = fromWorking(modulesDir, patchDir);
+        return patchCommand(pkg, dirname);
+      }
+    },
+
+    async ({ options }) => {
+      const pkg = options?.package;
+      if (pkg) {
+        const { modulesDir, patchDir } = pacakgeManagerConfig.params();
+        const dirname = fromWorking(modulesDir, patchDir);
+        await launch(dirname);
+        const { confirm } = await prompt<{ confirm: boolean }>([
+          { key: 'confirm', type: PROMPT_TYPE.CONFIRM },
+        ]);
       }
     },
   ],
