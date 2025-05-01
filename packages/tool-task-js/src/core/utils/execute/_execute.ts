@@ -1,3 +1,4 @@
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import {
   type _ExecuteModel,
   type _ExecuteParamsModel,
@@ -8,7 +9,7 @@ export const _execute = async ({
   command,
   onFinish,
   onStart,
-  root,
+  root = fromWorking(),
 }: _ExecuteParamsModel): Promise<_ExecuteModel> => {
   const cp = execa({
     cwd: root,

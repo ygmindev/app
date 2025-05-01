@@ -12,7 +12,7 @@ import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesia
 
 export const lintCommand = (fix?: boolean): string => {
   const { configFilename, exclude, include } = config.params();
-  return `npx eslint --config ${fromDist(configFilename)} ${
+  return `eslint --config ${fromDist(configFilename)} ${
     fix ? '--fix' : ''
   } --no-error-on-unmatched-pattern ${exclude
     .map((pattern) => `--ignore-pattern "${pattern}"`)
