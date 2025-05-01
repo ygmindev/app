@@ -1,0 +1,16 @@
+diff --git a/dist/checkers/eslint/main.js b/dist/checkers/eslint/main.js
+index 8386329bcc4f403134208656f60a7842509ac28b..9db4abb542a11734196c746c465866a7b7ac4551 100644
+--- a/dist/checkers/eslint/main.js
++++ b/dist/checkers/eslint/main.js
+@@ -65,7 +65,10 @@ const createDiagnostic = (pluginConfig) => {
+         } = require2("eslint/use-at-your-own-risk");
+         if (shouldUseFlatConfig == null ? void 0 : shouldUseFlatConfig()) {
+           eslint = new FlatESLint({
+-            cwd: root
++            cwd: root,
++            cache: eslintOptions.cache,
++            cacheLocation: eslintOptions.cacheLocation,
++            cacheStrategy: eslintOptions.cacheStrategy,        
+           });
+         } else {
+           throw Error(

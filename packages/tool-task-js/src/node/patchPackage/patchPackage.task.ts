@@ -1,5 +1,4 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { config as fileConfig } from '@lib/config/file/file';
 import { PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
 import { config as pacakgeManagerConfig } from '@lib/config/node/packageManager/packageManager';
@@ -47,24 +46,18 @@ const patchPackage: TaskParamsModel<PatchPackageParamsModel> = {
   },
 
   task: [
-    ({ options }) => {
-      const pkg = options?.package;
-      if (pkg) {
-        const { modulesDir, patchCommand, patchDir } = pacakgeManagerConfig.params();
-        const dirname = fromWorking(modulesDir, patchDir);
-        return patchCommand(pkg, dirname);
-      }
-    },
-
     async ({ options }) => {
       const pkg = options?.package;
       if (pkg) {
-        const { modulesDir, patchDir } = pacakgeManagerConfig.params();
-        const dirname = fromWorking(modulesDir, patchDir);
+        const { patchCommand, patchCommitCommand, patchDir } = pacakgeManagerConfig.params();
+        const dirname = patchDir(pkg);
+        await execute({ command: patchCommand(pkg, dirname) });
         await launch(dirname);
         const { confirm } = await prompt<{ confirm: boolean }>([
-          { key: 'confirm', type: PROMPT_TYPE.CONFIRM },
+          { key: 'confirm', message: `commit patch from ${dirname}`, type: PROMPT_TYPE.CONFIRM },
         ]);
+        console.warn(confirm);
+        return confirm && patchCommitCommand(dirname);
       }
     },
   ],

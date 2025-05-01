@@ -1,9 +1,5 @@
 packages:
   - packages/*
-
-overrides:
-  app: 'link:'
-
 ignoredBuiltDependencies:
   - '@apollo/protobufjs'
   - '@firebase/util'
@@ -21,3 +17,7 @@ ignoredBuiltDependencies:
   - spawn-sync
   - unrs-resolver
   - workerd
+overrides:
+  app: 'link:'
+patchedDependencies:
+  vite-plugin-checker@0.9.1: patches/vite-plugin-checker@0.9.1.patch

@@ -7,6 +7,11 @@ settings:
 overrides:
   app: 'link:'
 
+patchedDependencies:
+  vite-plugin-checker@0.9.1:
+    hash: 74eab93616ce8af0b8a2decd627c32b6eb0b89f5f142585720b37ef217470631
+    path: patches/vite-plugin-checker@0.9.1.patch
+
 importers:
 
   .:
@@ -2059,7 +2064,7 @@ importers:
         version: 3.1.2(@types/node@22.15.3)(lightningcss@1.27.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)
       vite-plugin-checker:
         specifier: ^0.9.1
-        version: 0.9.1(eslint@9.25.1)(optionator@0.9.4)(typescript@5.8.3)(vite@6.3.3(@types/node@22.15.3)(lightningcss@1.27.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
+        version: 0.9.1(patch_hash=74eab93616ce8af0b8a2decd627c32b6eb0b89f5f142585720b37ef217470631)(eslint@9.25.1)(optionator@0.9.4)(typescript@5.8.3)(vite@6.3.3(@types/node@22.15.3)(lightningcss@1.27.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
       vite-plugin-circular-dependency:
         specifier: ^0.5.0
         version: 0.5.0(rollup@4.40.1)
@@ -35353,7 +35358,7 @@ snapshots:
       - tsx
       - yaml
 
-  vite-plugin-checker@0.9.1(eslint@9.25.1)(optionator@0.9.4)(typescript@5.8.3)(vite@6.3.3(@types/node@22.15.3)(lightningcss@1.27.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)):
+  vite-plugin-checker@0.9.1(patch_hash=74eab93616ce8af0b8a2decd627c32b6eb0b89f5f142585720b37ef217470631)(eslint@9.25.1)(optionator@0.9.4)(typescript@5.8.3)(vite@6.3.3(@types/node@22.15.3)(lightningcss@1.27.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)):
     dependencies:
       '@babel/code-frame': 7.26.2
       chokidar: 4.0.3
