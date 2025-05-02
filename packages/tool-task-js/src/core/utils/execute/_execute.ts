@@ -1,4 +1,5 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import {
   type _ExecuteModel,
   type _ExecuteParamsModel,
@@ -7,26 +8,34 @@ import { execa } from 'execa';
 
 export const _execute = async ({
   command,
+  isSilent,
   onFinish,
   onStart,
   root = fromWorking(),
 }: _ExecuteParamsModel): Promise<_ExecuteModel> => {
+  const stdio = filterNil([!isSilent && 'inherit', 'pipe']);
   const cp = execa({
     cwd: root,
     env: process.env,
     shell: true,
-    stdout: 'inherit',
+    stderr: stdio,
+    stdout: stdio,
   })`${command}`;
 
-  const { pid, stdout } = cp;
-  pid && onStart?.(pid);
+  const pidF = cp.pid;
+  pidF && onStart?.(pidF);
 
-  // stdout.pipe(process.stdout);
+  const handleFinish = (): void => {
+    pidF && onFinish?.(pidF);
+  };
+
+  cp.once('SIGTERM', handleFinish);
+  cp.once('SIGINT', handleFinish);
 
   try {
     const { stdout } = await cp;
     return stdout ?? '';
   } finally {
-    pid && onFinish?.(pid);
+    handleFinish();
   }
 };

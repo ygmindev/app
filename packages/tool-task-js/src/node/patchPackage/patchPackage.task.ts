@@ -2,6 +2,7 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { config as fileConfig } from '@lib/config/file/file';
 import { PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
 import { config as pacakgeManagerConfig } from '@lib/config/node/packageManager/packageManager';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequence';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
@@ -52,13 +53,13 @@ const patchPackage: TaskParamsModel<PatchPackageParamsModel> = {
         const { patchCommand, patchCommitCommand, patchDir } = pacakgeManagerConfig.params();
         const dirname = patchDir(pkg);
         await execute({ command: patchCommand(pkg, dirname) });
-        await launch(dirname);
+        launch(dirname);
         const { confirm } = await prompt<{ confirm: boolean }>([
           { key: 'confirm', message: `commit patch from ${dirname}`, type: PROMPT_TYPE.CONFIRM },
         ]);
-        console.warn(confirm);
-        return confirm && patchCommitCommand(dirname);
+        confirm && (await execute({ command: patchCommitCommand(dirname) }));
       }
+      throw new NotFoundError('pkg');
     },
   ],
 };
