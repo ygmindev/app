@@ -1,4 +1,3 @@
-import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
@@ -18,13 +17,6 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
   params: () => {
     const { extensions, packageDirs } = fileConfig.params();
     return {
-      aliases: [
-        {
-          from: /^uuid$/,
-          to: fromModules('uuid/dist/index.js'),
-        },
-      ],
-
       babel: {
         plugins: [
           '@babel/plugin-transform-runtime',
