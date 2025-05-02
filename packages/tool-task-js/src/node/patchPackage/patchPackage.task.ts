@@ -27,7 +27,9 @@ const patchPackage: TaskParamsModel<PatchPackageParamsModel> = {
       async (result, v) => {
         const content = readFileSync(fromPackages(`${v}/package.json`), 'utf-8');
         const { name } = JSON.parse(content) as { name: string };
-        const dependencies = JSON.parse(await execute({ command: listCommand(name) })) as Array<{
+        const dependencies = JSON.parse(
+          await execute({ command: listCommand(name), isSilent: true }),
+        ) as Array<{
           dependencies?: Record<string, { version: string }>;
         }>;
         return [
