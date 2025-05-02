@@ -1,8 +1,5 @@
 import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import fileConfig from '@lib/config/file/file';
 import { EXTENSIONS_BASE } from '@lib/config/file/file.constants';
 import { _lint } from '@lib/config/node/lint/_lint';
 import { ESLINT_CONFIG_FILENAME } from '@lib/config/node/lint/lint.constants';
@@ -28,10 +25,7 @@ export const config = defineConfig<LintConfigModel, _LintConfigModel>({
     exclude: ['**/node_modules'],
 
     include: cartesianString(
-      [
-        toRelative({ from: fromDist(), to: fromPackages('*/src/**/*') }),
-        toRelative({ from: fromDist(), to: fromPackages('*/tests/**/*') }),
-      ],
+      [fromPackages('*/src/**/*'), fromPackages('*/tests/**/*')],
       EXTENSIONS_BASE,
     ),
 
@@ -48,10 +42,6 @@ export const config = defineConfig<LintConfigModel, _LintConfigModel>({
     isTrailingComma: true,
 
     printWidth: 100,
-
-    roots: [fromRoot(), ...fileConfig.params().packageDirs.map((pkg) => fromPackages(pkg))].map(
-      (to) => toRelative({ from: fromDist(), to }),
-    ),
 
     unusedIgnore: '^_',
   }),

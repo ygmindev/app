@@ -1,4 +1,5 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { BUILD_DIR, DIST_DIR } from '@lib/config/file/file.constants';
@@ -8,9 +9,9 @@ import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { runClean } from '@tool/task/core/utils/runClean/runClean';
 import buildJs from '@tool/task/node/templates/buildJs/buildJs';
-import { BuildJsParamsModel } from '@tool/task/node/templates/buildJs/buildJs.models';
+import { type BuildJsParamsModel } from '@tool/task/node/templates/buildJs/buildJs.models';
 
-const paramsPathname = fromWorking(BUILD_DIR, ESLINT_CONFIG_PARAMS_FILENAME)
+const paramsPathname = fromWorking(BUILD_DIR, ESLINT_CONFIG_PARAMS_FILENAME);
 
 const buildConfigLint: TaskParamsModel<BuildJsParamsModel> = {
   ...buildJs,
@@ -21,13 +22,11 @@ const buildConfigLint: TaskParamsModel<BuildJsParamsModel> = {
     async () =>
       writeFile({
         filename: paramsPathname,
-        value: stringify(lintConfig.params()),
+        value: stringify({ ...lintConfig.params(), workingDir: fromDist() }),
       }),
   ],
 
-  onFinish: [
-    async () => runClean({ patterns: [paramsPathname] }),
-  ],
+  onFinish: [async () => runClean({ patterns: [paramsPathname] })],
 
   overrides: () => ({
     entryFiles: {
@@ -38,4 +37,3 @@ const buildConfigLint: TaskParamsModel<BuildJsParamsModel> = {
 };
 
 export default buildConfigLint;
-

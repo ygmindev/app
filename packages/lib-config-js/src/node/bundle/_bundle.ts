@@ -236,6 +236,7 @@ export const _bundle = ({
           lintCommand: lintCommand(),
           useFlatConfig: true,
         },
+        root: fromWorking(),
         typescript: { tsconfigPath: tsconfigDir },
       }),
 
