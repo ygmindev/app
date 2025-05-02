@@ -15,16 +15,17 @@ export const _execute = async ({
     cwd: root,
     env: process.env,
     shell: true,
-    stdin: 'inherit',
-    stdout: 'pipe',
+    stdout: 'inherit',
   })`${command}`;
 
-  const { pid } = cp;
+  const { pid, stdout } = cp;
   pid && onStart?.(pid);
+
+  // stdout.pipe(process.stdout);
 
   try {
     const { stdout } = await cp;
-    return stdout;
+    return stdout ?? '';
   } finally {
     pid && onFinish?.(pid);
   }
