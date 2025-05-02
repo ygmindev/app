@@ -1,9 +1,6 @@
-import {
-  type _FrameworkConfigModel,
-  type FrameworkConfigModel,
-} from '@lib/config/node/framework/framework.models';
+import { type _FrameworkConfigModel } from '@lib/config/node/framework/framework.models';
 
-export const _framework = (params: FrameworkConfigModel): _FrameworkConfigModel => ({
+export const _framework = (): _FrameworkConfigModel => ({
   extends: ['import:vike-react/config:default'],
 
   hydrationCanBeAborted: true,

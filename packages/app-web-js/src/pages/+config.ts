@@ -1,3 +1,5 @@
-import { type Config } from 'vike/types';
+import { config as frameworkConfig } from '@lib/config/node/framework/framework';
 
-export default { prerender: { partial: true } } satisfies Config;
+const config = frameworkConfig.config();
+
+export { config };
