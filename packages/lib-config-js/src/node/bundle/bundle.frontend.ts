@@ -72,6 +72,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
         filterNil([
           '@egjs/react-infinitegrid',
           '@expo/react-native-action-sheet',
+          '@expo/vector-icons',
           'countries-list',
           'css-in-js-utils',
           'expo-linear-gradient',

@@ -12,7 +12,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
   overrides: () => [
     {
       aliases: filterNil([
-        { from: /react-native$/, to: 'react-native-web' },
+        { from: 'react-native', to: 'react-native-web' },
         {
           from: 'react-native/Libraries/Image/AssetRegistry',
           to: 'react-native-web/dist/modules/AssetRegistry',

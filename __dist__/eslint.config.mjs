@@ -369,15 +369,6 @@ var require_src = __commonJS({
   }
 });
 
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isArray.js
-var require_isArray = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isArray.js"(exports, module) {
-    "use strict";
-    var isArray2 = Array.isArray;
-    module.exports = isArray2;
-  }
-});
-
 // node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_freeGlobal.js
 var require_freeGlobal = __commonJS({
   "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_freeGlobal.js"(exports, module) {
@@ -405,6 +396,31 @@ var require_Symbol = __commonJS({
     var root = require_root();
     var Symbol2 = root.Symbol;
     module.exports = Symbol2;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_arrayMap.js
+var require_arrayMap = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_arrayMap.js"(exports, module) {
+    "use strict";
+    function arrayMap(array, iteratee) {
+      var index = -1, length = array == null ? 0 : array.length, result = Array(length);
+      while (++index < length) {
+        result[index] = iteratee(array[index], index, array);
+      }
+      return result;
+    }
+    __name(arrayMap, "arrayMap");
+    module.exports = arrayMap;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isArray.js
+var require_isArray = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isArray.js"(exports, module) {
+    "use strict";
+    var isArray2 = Array.isArray;
+    module.exports = isArray2;
   }
 });
 
@@ -474,6 +490,300 @@ var require_baseGetTag = __commonJS({
   }
 });
 
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isObjectLike.js
+var require_isObjectLike = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isObjectLike.js"(exports, module) {
+    "use strict";
+    function isObjectLike(value) {
+      return value != null && typeof value == "object";
+    }
+    __name(isObjectLike, "isObjectLike");
+    module.exports = isObjectLike;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isSymbol.js
+var require_isSymbol = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isSymbol.js"(exports, module) {
+    "use strict";
+    var baseGetTag = require_baseGetTag();
+    var isObjectLike = require_isObjectLike();
+    var symbolTag = "[object Symbol]";
+    function isSymbol(value) {
+      return typeof value == "symbol" || isObjectLike(value) && baseGetTag(value) == symbolTag;
+    }
+    __name(isSymbol, "isSymbol");
+    module.exports = isSymbol;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseToString.js
+var require_baseToString = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseToString.js"(exports, module) {
+    "use strict";
+    var Symbol2 = require_Symbol();
+    var arrayMap = require_arrayMap();
+    var isArray2 = require_isArray();
+    var isSymbol = require_isSymbol();
+    var INFINITY = 1 / 0;
+    var symbolProto = Symbol2 ? Symbol2.prototype : void 0;
+    var symbolToString = symbolProto ? symbolProto.toString : void 0;
+    function baseToString(value) {
+      if (typeof value == "string") {
+        return value;
+      }
+      if (isArray2(value)) {
+        return arrayMap(value, baseToString) + "";
+      }
+      if (isSymbol(value)) {
+        return symbolToString ? symbolToString.call(value) : "";
+      }
+      var result = value + "";
+      return result == "0" && 1 / value == -INFINITY ? "-0" : result;
+    }
+    __name(baseToString, "baseToString");
+    module.exports = baseToString;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseSlice.js
+var require_baseSlice = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseSlice.js"(exports, module) {
+    "use strict";
+    function baseSlice(array, start, end) {
+      var index = -1, length = array.length;
+      if (start < 0) {
+        start = -start > length ? 0 : length + start;
+      }
+      end = end > length ? length : end;
+      if (end < 0) {
+        end += length;
+      }
+      length = start > end ? 0 : end - start >>> 0;
+      start >>>= 0;
+      var result = Array(length);
+      while (++index < length) {
+        result[index] = array[index + start];
+      }
+      return result;
+    }
+    __name(baseSlice, "baseSlice");
+    module.exports = baseSlice;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_castSlice.js
+var require_castSlice = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_castSlice.js"(exports, module) {
+    "use strict";
+    var baseSlice = require_baseSlice();
+    function castSlice(array, start, end) {
+      var length = array.length;
+      end = end === void 0 ? length : end;
+      return !start && end >= length ? array : baseSlice(array, start, end);
+    }
+    __name(castSlice, "castSlice");
+    module.exports = castSlice;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseFindIndex.js
+var require_baseFindIndex = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseFindIndex.js"(exports, module) {
+    "use strict";
+    function baseFindIndex(array, predicate, fromIndex, fromRight) {
+      var length = array.length, index = fromIndex + (fromRight ? 1 : -1);
+      while (fromRight ? index-- : ++index < length) {
+        if (predicate(array[index], index, array)) {
+          return index;
+        }
+      }
+      return -1;
+    }
+    __name(baseFindIndex, "baseFindIndex");
+    module.exports = baseFindIndex;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseIsNaN.js
+var require_baseIsNaN = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseIsNaN.js"(exports, module) {
+    "use strict";
+    function baseIsNaN(value) {
+      return value !== value;
+    }
+    __name(baseIsNaN, "baseIsNaN");
+    module.exports = baseIsNaN;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_strictIndexOf.js
+var require_strictIndexOf = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_strictIndexOf.js"(exports, module) {
+    "use strict";
+    function strictIndexOf(array, value, fromIndex) {
+      var index = fromIndex - 1, length = array.length;
+      while (++index < length) {
+        if (array[index] === value) {
+          return index;
+        }
+      }
+      return -1;
+    }
+    __name(strictIndexOf, "strictIndexOf");
+    module.exports = strictIndexOf;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseIndexOf.js
+var require_baseIndexOf = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseIndexOf.js"(exports, module) {
+    "use strict";
+    var baseFindIndex = require_baseFindIndex();
+    var baseIsNaN = require_baseIsNaN();
+    var strictIndexOf = require_strictIndexOf();
+    function baseIndexOf(array, value, fromIndex) {
+      return value === value ? strictIndexOf(array, value, fromIndex) : baseFindIndex(array, baseIsNaN, fromIndex);
+    }
+    __name(baseIndexOf, "baseIndexOf");
+    module.exports = baseIndexOf;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_charsStartIndex.js
+var require_charsStartIndex = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_charsStartIndex.js"(exports, module) {
+    "use strict";
+    var baseIndexOf = require_baseIndexOf();
+    function charsStartIndex(strSymbols, chrSymbols) {
+      var index = -1, length = strSymbols.length;
+      while (++index < length && baseIndexOf(chrSymbols, strSymbols[index], 0) > -1) {
+      }
+      return index;
+    }
+    __name(charsStartIndex, "charsStartIndex");
+    module.exports = charsStartIndex;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_asciiToArray.js
+var require_asciiToArray = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_asciiToArray.js"(exports, module) {
+    "use strict";
+    function asciiToArray(string) {
+      return string.split("");
+    }
+    __name(asciiToArray, "asciiToArray");
+    module.exports = asciiToArray;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_hasUnicode.js
+var require_hasUnicode = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_hasUnicode.js"(exports, module) {
+    "use strict";
+    var rsAstralRange = "\\ud800-\\udfff";
+    var rsComboMarksRange = "\\u0300-\\u036f";
+    var reComboHalfMarksRange = "\\ufe20-\\ufe2f";
+    var rsComboSymbolsRange = "\\u20d0-\\u20ff";
+    var rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange;
+    var rsVarRange = "\\ufe0e\\ufe0f";
+    var rsZWJ = "\\u200d";
+    var reHasUnicode = RegExp("[" + rsZWJ + rsAstralRange + rsComboRange + rsVarRange + "]");
+    function hasUnicode(string) {
+      return reHasUnicode.test(string);
+    }
+    __name(hasUnicode, "hasUnicode");
+    module.exports = hasUnicode;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_unicodeToArray.js
+var require_unicodeToArray = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_unicodeToArray.js"(exports, module) {
+    "use strict";
+    var rsAstralRange = "\\ud800-\\udfff";
+    var rsComboMarksRange = "\\u0300-\\u036f";
+    var reComboHalfMarksRange = "\\ufe20-\\ufe2f";
+    var rsComboSymbolsRange = "\\u20d0-\\u20ff";
+    var rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange;
+    var rsVarRange = "\\ufe0e\\ufe0f";
+    var rsAstral = "[" + rsAstralRange + "]";
+    var rsCombo = "[" + rsComboRange + "]";
+    var rsFitz = "\\ud83c[\\udffb-\\udfff]";
+    var rsModifier = "(?:" + rsCombo + "|" + rsFitz + ")";
+    var rsNonAstral = "[^" + rsAstralRange + "]";
+    var rsRegional = "(?:\\ud83c[\\udde6-\\uddff]){2}";
+    var rsSurrPair = "[\\ud800-\\udbff][\\udc00-\\udfff]";
+    var rsZWJ = "\\u200d";
+    var reOptMod = rsModifier + "?";
+    var rsOptVar = "[" + rsVarRange + "]?";
+    var rsOptJoin = "(?:" + rsZWJ + "(?:" + [rsNonAstral, rsRegional, rsSurrPair].join("|") + ")" + rsOptVar + reOptMod + ")*";
+    var rsSeq = rsOptVar + reOptMod + rsOptJoin;
+    var rsSymbol = "(?:" + [rsNonAstral + rsCombo + "?", rsCombo, rsRegional, rsSurrPair, rsAstral].join("|") + ")";
+    var reUnicode = RegExp(rsFitz + "(?=" + rsFitz + ")|" + rsSymbol + rsSeq, "g");
+    function unicodeToArray(string) {
+      return string.match(reUnicode) || [];
+    }
+    __name(unicodeToArray, "unicodeToArray");
+    module.exports = unicodeToArray;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_stringToArray.js
+var require_stringToArray = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_stringToArray.js"(exports, module) {
+    "use strict";
+    var asciiToArray = require_asciiToArray();
+    var hasUnicode = require_hasUnicode();
+    var unicodeToArray = require_unicodeToArray();
+    function stringToArray(string) {
+      return hasUnicode(string) ? unicodeToArray(string) : asciiToArray(string);
+    }
+    __name(stringToArray, "stringToArray");
+    module.exports = stringToArray;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/toString.js
+var require_toString = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/toString.js"(exports, module) {
+    "use strict";
+    var baseToString = require_baseToString();
+    function toString(value) {
+      return value == null ? "" : baseToString(value);
+    }
+    __name(toString, "toString");
+    module.exports = toString;
+  }
+});
+
+// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/trimStart.js
+var require_trimStart = __commonJS({
+  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/trimStart.js"(exports, module) {
+    "use strict";
+    var baseToString = require_baseToString();
+    var castSlice = require_castSlice();
+    var charsStartIndex = require_charsStartIndex();
+    var stringToArray = require_stringToArray();
+    var toString = require_toString();
+    var reTrimStart = /^\s+/;
+    function trimStart2(string, chars, guard) {
+      string = toString(string);
+      if (string && (guard || chars === void 0)) {
+        return string.replace(reTrimStart, "");
+      }
+      if (!string || !(chars = baseToString(chars))) {
+        return string;
+      }
+      var strSymbols = stringToArray(string), start = charsStartIndex(strSymbols, stringToArray(chars));
+      return castSlice(strSymbols, start).join("");
+    }
+    __name(trimStart2, "trimStart");
+    module.exports = trimStart2;
+  }
+});
+
 // node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_overArg.js
 var require_overArg = __commonJS({
   "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_overArg.js"(exports, module) {
@@ -495,18 +805,6 @@ var require_getPrototype = __commonJS({
     var overArg = require_overArg();
     var getPrototype = overArg(Object.getPrototypeOf, Object);
     module.exports = getPrototype;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isObjectLike.js
-var require_isObjectLike = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isObjectLike.js"(exports, module) {
-    "use strict";
-    function isObjectLike(value) {
-      return value != null && typeof value == "object";
-    }
-    __name(isObjectLike, "isObjectLike");
-    module.exports = isObjectLike;
   }
 });
 
@@ -2299,21 +2597,6 @@ var require_baseMatches = __commonJS({
   }
 });
 
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isSymbol.js
-var require_isSymbol = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/isSymbol.js"(exports, module) {
-    "use strict";
-    var baseGetTag = require_baseGetTag();
-    var isObjectLike = require_isObjectLike();
-    var symbolTag = "[object Symbol]";
-    function isSymbol(value) {
-      return typeof value == "symbol" || isObjectLike(value) && baseGetTag(value) == symbolTag;
-    }
-    __name(isSymbol, "isSymbol");
-    module.exports = isSymbol;
-  }
-});
-
 // node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_isKey.js
 var require_isKey = __commonJS({
   "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_isKey.js"(exports, module) {
@@ -2404,64 +2687,6 @@ var require_stringToPath = __commonJS({
       return result;
     });
     module.exports = stringToPath;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_arrayMap.js
-var require_arrayMap = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_arrayMap.js"(exports, module) {
-    "use strict";
-    function arrayMap(array, iteratee) {
-      var index = -1, length = array == null ? 0 : array.length, result = Array(length);
-      while (++index < length) {
-        result[index] = iteratee(array[index], index, array);
-      }
-      return result;
-    }
-    __name(arrayMap, "arrayMap");
-    module.exports = arrayMap;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseToString.js
-var require_baseToString = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseToString.js"(exports, module) {
-    "use strict";
-    var Symbol2 = require_Symbol();
-    var arrayMap = require_arrayMap();
-    var isArray2 = require_isArray();
-    var isSymbol = require_isSymbol();
-    var INFINITY = 1 / 0;
-    var symbolProto = Symbol2 ? Symbol2.prototype : void 0;
-    var symbolToString = symbolProto ? symbolProto.toString : void 0;
-    function baseToString(value) {
-      if (typeof value == "string") {
-        return value;
-      }
-      if (isArray2(value)) {
-        return arrayMap(value, baseToString) + "";
-      }
-      if (isSymbol(value)) {
-        return symbolToString ? symbolToString.call(value) : "";
-      }
-      var result = value + "";
-      return result == "0" && 1 / value == -INFINITY ? "-0" : result;
-    }
-    __name(baseToString, "baseToString");
-    module.exports = baseToString;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/toString.js
-var require_toString = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/toString.js"(exports, module) {
-    "use strict";
-    var baseToString = require_baseToString();
-    function toString(value) {
-      return value == null ? "" : baseToString(value);
-    }
-    __name(toString, "toString");
-    module.exports = toString;
   }
 });
 
@@ -2765,110 +2990,6 @@ var require_baseTrim = __commonJS({
   }
 });
 
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseSlice.js
-var require_baseSlice = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseSlice.js"(exports, module) {
-    "use strict";
-    function baseSlice(array, start, end) {
-      var index = -1, length = array.length;
-      if (start < 0) {
-        start = -start > length ? 0 : length + start;
-      }
-      end = end > length ? length : end;
-      if (end < 0) {
-        end += length;
-      }
-      length = start > end ? 0 : end - start >>> 0;
-      start >>>= 0;
-      var result = Array(length);
-      while (++index < length) {
-        result[index] = array[index + start];
-      }
-      return result;
-    }
-    __name(baseSlice, "baseSlice");
-    module.exports = baseSlice;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_castSlice.js
-var require_castSlice = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_castSlice.js"(exports, module) {
-    "use strict";
-    var baseSlice = require_baseSlice();
-    function castSlice(array, start, end) {
-      var length = array.length;
-      end = end === void 0 ? length : end;
-      return !start && end >= length ? array : baseSlice(array, start, end);
-    }
-    __name(castSlice, "castSlice");
-    module.exports = castSlice;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseFindIndex.js
-var require_baseFindIndex = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseFindIndex.js"(exports, module) {
-    "use strict";
-    function baseFindIndex(array, predicate, fromIndex, fromRight) {
-      var length = array.length, index = fromIndex + (fromRight ? 1 : -1);
-      while (fromRight ? index-- : ++index < length) {
-        if (predicate(array[index], index, array)) {
-          return index;
-        }
-      }
-      return -1;
-    }
-    __name(baseFindIndex, "baseFindIndex");
-    module.exports = baseFindIndex;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseIsNaN.js
-var require_baseIsNaN = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseIsNaN.js"(exports, module) {
-    "use strict";
-    function baseIsNaN(value) {
-      return value !== value;
-    }
-    __name(baseIsNaN, "baseIsNaN");
-    module.exports = baseIsNaN;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_strictIndexOf.js
-var require_strictIndexOf = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_strictIndexOf.js"(exports, module) {
-    "use strict";
-    function strictIndexOf(array, value, fromIndex) {
-      var index = fromIndex - 1, length = array.length;
-      while (++index < length) {
-        if (array[index] === value) {
-          return index;
-        }
-      }
-      return -1;
-    }
-    __name(strictIndexOf, "strictIndexOf");
-    module.exports = strictIndexOf;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseIndexOf.js
-var require_baseIndexOf = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_baseIndexOf.js"(exports, module) {
-    "use strict";
-    var baseFindIndex = require_baseFindIndex();
-    var baseIsNaN = require_baseIsNaN();
-    var strictIndexOf = require_strictIndexOf();
-    function baseIndexOf(array, value, fromIndex) {
-      return value === value ? strictIndexOf(array, value, fromIndex) : baseFindIndex(array, baseIsNaN, fromIndex);
-    }
-    __name(baseIndexOf, "baseIndexOf");
-    module.exports = baseIndexOf;
-  }
-});
-
 // node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_charsEndIndex.js
 var require_charsEndIndex = __commonJS({
   "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_charsEndIndex.js"(exports, module) {
@@ -2882,101 +3003,6 @@ var require_charsEndIndex = __commonJS({
     }
     __name(charsEndIndex, "charsEndIndex");
     module.exports = charsEndIndex;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_charsStartIndex.js
-var require_charsStartIndex = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_charsStartIndex.js"(exports, module) {
-    "use strict";
-    var baseIndexOf = require_baseIndexOf();
-    function charsStartIndex(strSymbols, chrSymbols) {
-      var index = -1, length = strSymbols.length;
-      while (++index < length && baseIndexOf(chrSymbols, strSymbols[index], 0) > -1) {
-      }
-      return index;
-    }
-    __name(charsStartIndex, "charsStartIndex");
-    module.exports = charsStartIndex;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_asciiToArray.js
-var require_asciiToArray = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_asciiToArray.js"(exports, module) {
-    "use strict";
-    function asciiToArray(string) {
-      return string.split("");
-    }
-    __name(asciiToArray, "asciiToArray");
-    module.exports = asciiToArray;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_hasUnicode.js
-var require_hasUnicode = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_hasUnicode.js"(exports, module) {
-    "use strict";
-    var rsAstralRange = "\\ud800-\\udfff";
-    var rsComboMarksRange = "\\u0300-\\u036f";
-    var reComboHalfMarksRange = "\\ufe20-\\ufe2f";
-    var rsComboSymbolsRange = "\\u20d0-\\u20ff";
-    var rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange;
-    var rsVarRange = "\\ufe0e\\ufe0f";
-    var rsZWJ = "\\u200d";
-    var reHasUnicode = RegExp("[" + rsZWJ + rsAstralRange + rsComboRange + rsVarRange + "]");
-    function hasUnicode(string) {
-      return reHasUnicode.test(string);
-    }
-    __name(hasUnicode, "hasUnicode");
-    module.exports = hasUnicode;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_unicodeToArray.js
-var require_unicodeToArray = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_unicodeToArray.js"(exports, module) {
-    "use strict";
-    var rsAstralRange = "\\ud800-\\udfff";
-    var rsComboMarksRange = "\\u0300-\\u036f";
-    var reComboHalfMarksRange = "\\ufe20-\\ufe2f";
-    var rsComboSymbolsRange = "\\u20d0-\\u20ff";
-    var rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange;
-    var rsVarRange = "\\ufe0e\\ufe0f";
-    var rsAstral = "[" + rsAstralRange + "]";
-    var rsCombo = "[" + rsComboRange + "]";
-    var rsFitz = "\\ud83c[\\udffb-\\udfff]";
-    var rsModifier = "(?:" + rsCombo + "|" + rsFitz + ")";
-    var rsNonAstral = "[^" + rsAstralRange + "]";
-    var rsRegional = "(?:\\ud83c[\\udde6-\\uddff]){2}";
-    var rsSurrPair = "[\\ud800-\\udbff][\\udc00-\\udfff]";
-    var rsZWJ = "\\u200d";
-    var reOptMod = rsModifier + "?";
-    var rsOptVar = "[" + rsVarRange + "]?";
-    var rsOptJoin = "(?:" + rsZWJ + "(?:" + [rsNonAstral, rsRegional, rsSurrPair].join("|") + ")" + rsOptVar + reOptMod + ")*";
-    var rsSeq = rsOptVar + reOptMod + rsOptJoin;
-    var rsSymbol = "(?:" + [rsNonAstral + rsCombo + "?", rsCombo, rsRegional, rsSurrPair, rsAstral].join("|") + ")";
-    var reUnicode = RegExp(rsFitz + "(?=" + rsFitz + ")|" + rsSymbol + rsSeq, "g");
-    function unicodeToArray(string) {
-      return string.match(reUnicode) || [];
-    }
-    __name(unicodeToArray, "unicodeToArray");
-    module.exports = unicodeToArray;
-  }
-});
-
-// node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_stringToArray.js
-var require_stringToArray = __commonJS({
-  "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash/_stringToArray.js"(exports, module) {
-    "use strict";
-    var asciiToArray = require_asciiToArray();
-    var hasUnicode = require_hasUnicode();
-    var unicodeToArray = require_unicodeToArray();
-    function stringToArray(string) {
-      return hasUnicode(string) ? unicodeToArray(string) : asciiToArray(string);
-    }
-    __name(stringToArray, "stringToArray");
-    module.exports = stringToArray;
   }
 });
 
@@ -3007,82 +3033,266 @@ var require_trim = __commonJS({
   }
 });
 
-// node_modules/.pnpm/globals@16.0.0/node_modules/globals/globals.json
+// node_modules/.pnpm/globals@11.12.0/node_modules/globals/globals.json
 var require_globals = __commonJS({
-  "node_modules/.pnpm/globals@16.0.0/node_modules/globals/globals.json"(exports, module) {
+  "node_modules/.pnpm/globals@11.12.0/node_modules/globals/globals.json"(exports, module) {
     module.exports = {
-      amd: {
-        define: false,
-        require: false
+      builtin: {
+        Array: false,
+        ArrayBuffer: false,
+        Atomics: false,
+        BigInt: false,
+        BigInt64Array: false,
+        BigUint64Array: false,
+        Boolean: false,
+        constructor: false,
+        DataView: false,
+        Date: false,
+        decodeURI: false,
+        decodeURIComponent: false,
+        encodeURI: false,
+        encodeURIComponent: false,
+        Error: false,
+        escape: false,
+        eval: false,
+        EvalError: false,
+        Float32Array: false,
+        Float64Array: false,
+        Function: false,
+        globalThis: false,
+        hasOwnProperty: false,
+        Infinity: false,
+        Int16Array: false,
+        Int32Array: false,
+        Int8Array: false,
+        isFinite: false,
+        isNaN: false,
+        isPrototypeOf: false,
+        JSON: false,
+        Map: false,
+        Math: false,
+        NaN: false,
+        Number: false,
+        Object: false,
+        parseFloat: false,
+        parseInt: false,
+        Promise: false,
+        propertyIsEnumerable: false,
+        Proxy: false,
+        RangeError: false,
+        ReferenceError: false,
+        Reflect: false,
+        RegExp: false,
+        Set: false,
+        SharedArrayBuffer: false,
+        String: false,
+        Symbol: false,
+        SyntaxError: false,
+        toLocaleString: false,
+        toString: false,
+        TypeError: false,
+        Uint16Array: false,
+        Uint32Array: false,
+        Uint8Array: false,
+        Uint8ClampedArray: false,
+        undefined: false,
+        unescape: false,
+        URIError: false,
+        valueOf: false,
+        WeakMap: false,
+        WeakSet: false
       },
-      applescript: {
-        $: false,
-        Application: false,
-        Automation: false,
-        console: false,
-        delay: false,
-        Library: false,
-        ObjC: false,
-        ObjectSpecifier: false,
-        Path: false,
-        Progress: false,
-        Ref: false
+      es5: {
+        Array: false,
+        Boolean: false,
+        constructor: false,
+        Date: false,
+        decodeURI: false,
+        decodeURIComponent: false,
+        encodeURI: false,
+        encodeURIComponent: false,
+        Error: false,
+        escape: false,
+        eval: false,
+        EvalError: false,
+        Function: false,
+        hasOwnProperty: false,
+        Infinity: false,
+        isFinite: false,
+        isNaN: false,
+        isPrototypeOf: false,
+        JSON: false,
+        Math: false,
+        NaN: false,
+        Number: false,
+        Object: false,
+        parseFloat: false,
+        parseInt: false,
+        propertyIsEnumerable: false,
+        RangeError: false,
+        ReferenceError: false,
+        RegExp: false,
+        String: false,
+        SyntaxError: false,
+        toLocaleString: false,
+        toString: false,
+        TypeError: false,
+        undefined: false,
+        unescape: false,
+        URIError: false,
+        valueOf: false
       },
-      atomtest: {
-        advanceClock: false,
-        atom: false,
-        fakeClearInterval: false,
-        fakeClearTimeout: false,
-        fakeSetInterval: false,
-        fakeSetTimeout: false,
-        resetTimeouts: false,
-        waitsForPromise: false
+      es2015: {
+        Array: false,
+        ArrayBuffer: false,
+        Boolean: false,
+        constructor: false,
+        DataView: false,
+        Date: false,
+        decodeURI: false,
+        decodeURIComponent: false,
+        encodeURI: false,
+        encodeURIComponent: false,
+        Error: false,
+        escape: false,
+        eval: false,
+        EvalError: false,
+        Float32Array: false,
+        Float64Array: false,
+        Function: false,
+        hasOwnProperty: false,
+        Infinity: false,
+        Int16Array: false,
+        Int32Array: false,
+        Int8Array: false,
+        isFinite: false,
+        isNaN: false,
+        isPrototypeOf: false,
+        JSON: false,
+        Map: false,
+        Math: false,
+        NaN: false,
+        Number: false,
+        Object: false,
+        parseFloat: false,
+        parseInt: false,
+        Promise: false,
+        propertyIsEnumerable: false,
+        Proxy: false,
+        RangeError: false,
+        ReferenceError: false,
+        Reflect: false,
+        RegExp: false,
+        Set: false,
+        String: false,
+        Symbol: false,
+        SyntaxError: false,
+        toLocaleString: false,
+        toString: false,
+        TypeError: false,
+        Uint16Array: false,
+        Uint32Array: false,
+        Uint8Array: false,
+        Uint8ClampedArray: false,
+        undefined: false,
+        unescape: false,
+        URIError: false,
+        valueOf: false,
+        WeakMap: false,
+        WeakSet: false
+      },
+      es2017: {
+        Array: false,
+        ArrayBuffer: false,
+        Atomics: false,
+        Boolean: false,
+        constructor: false,
+        DataView: false,
+        Date: false,
+        decodeURI: false,
+        decodeURIComponent: false,
+        encodeURI: false,
+        encodeURIComponent: false,
+        Error: false,
+        escape: false,
+        eval: false,
+        EvalError: false,
+        Float32Array: false,
+        Float64Array: false,
+        Function: false,
+        hasOwnProperty: false,
+        Infinity: false,
+        Int16Array: false,
+        Int32Array: false,
+        Int8Array: false,
+        isFinite: false,
+        isNaN: false,
+        isPrototypeOf: false,
+        JSON: false,
+        Map: false,
+        Math: false,
+        NaN: false,
+        Number: false,
+        Object: false,
+        parseFloat: false,
+        parseInt: false,
+        Promise: false,
+        propertyIsEnumerable: false,
+        Proxy: false,
+        RangeError: false,
+        ReferenceError: false,
+        Reflect: false,
+        RegExp: false,
+        Set: false,
+        SharedArrayBuffer: false,
+        String: false,
+        Symbol: false,
+        SyntaxError: false,
+        toLocaleString: false,
+        toString: false,
+        TypeError: false,
+        Uint16Array: false,
+        Uint32Array: false,
+        Uint8Array: false,
+        Uint8ClampedArray: false,
+        undefined: false,
+        unescape: false,
+        URIError: false,
+        valueOf: false,
+        WeakMap: false,
+        WeakSet: false
       },
       browser: {
         AbortController: false,
         AbortSignal: false,
-        AbsoluteOrientationSensor: false,
-        AbstractRange: false,
-        Accelerometer: false,
         addEventListener: false,
-        ai: false,
-        AI: false,
-        AITextSession: false,
         alert: false,
         AnalyserNode: false,
         Animation: false,
-        AnimationEffect: false,
+        AnimationEffectReadOnly: false,
+        AnimationEffectTiming: false,
+        AnimationEffectTimingReadOnly: false,
         AnimationEvent: false,
         AnimationPlaybackEvent: false,
         AnimationTimeline: false,
+        applicationCache: false,
+        ApplicationCache: false,
+        ApplicationCacheErrorEvent: false,
         atob: false,
         Attr: false,
         Audio: false,
         AudioBuffer: false,
         AudioBufferSourceNode: false,
         AudioContext: false,
-        AudioData: false,
-        AudioDecoder: false,
         AudioDestinationNode: false,
-        AudioEncoder: false,
         AudioListener: false,
         AudioNode: false,
         AudioParam: false,
-        AudioParamMap: false,
         AudioProcessingEvent: false,
         AudioScheduledSourceNode: false,
-        AudioSinkInfo: false,
-        AudioWorklet: false,
-        AudioWorkletGlobalScope: false,
+        "AudioWorkletGlobalScope ": false,
         AudioWorkletNode: false,
         AudioWorkletProcessor: false,
-        AuthenticatorAssertionResponse: false,
-        AuthenticatorAttestationResponse: false,
-        AuthenticatorResponse: false,
-        BackgroundFetchManager: false,
-        BackgroundFetchRecord: false,
-        BackgroundFetchRegistration: false,
-        BarcodeDetector: false,
         BarProp: false,
         BaseAudioContext: false,
         BatteryManager: false,
@@ -3090,155 +3300,75 @@ var require_globals = __commonJS({
         BiquadFilterNode: false,
         Blob: false,
         BlobEvent: false,
-        Bluetooth: false,
-        BluetoothCharacteristicProperties: false,
-        BluetoothDevice: false,
-        BluetoothRemoteGATTCharacteristic: false,
-        BluetoothRemoteGATTDescriptor: false,
-        BluetoothRemoteGATTServer: false,
-        BluetoothRemoteGATTService: false,
-        BluetoothUUID: false,
         blur: false,
         BroadcastChannel: false,
-        BrowserCaptureMediaStreamTrack: false,
         btoa: false,
+        BudgetService: false,
         ByteLengthQueuingStrategy: false,
         Cache: false,
         caches: false,
         CacheStorage: false,
         cancelAnimationFrame: false,
         cancelIdleCallback: false,
-        CanvasCaptureMediaStream: false,
         CanvasCaptureMediaStreamTrack: false,
         CanvasGradient: false,
         CanvasPattern: false,
         CanvasRenderingContext2D: false,
-        CaptureController: false,
-        CaretPosition: false,
-        CDATASection: false,
         ChannelMergerNode: false,
         ChannelSplitterNode: false,
-        ChapterInformation: false,
-        CharacterBoundsUpdateEvent: false,
         CharacterData: false,
         clearInterval: false,
         clearTimeout: false,
         clientInformation: false,
-        Clipboard: false,
         ClipboardEvent: false,
-        ClipboardItem: false,
         close: false,
         closed: false,
         CloseEvent: false,
-        CloseWatcher: false,
         Comment: false,
         CompositionEvent: false,
-        CompressionStream: false,
         confirm: false,
         console: false,
         ConstantSourceNode: false,
-        ContentVisibilityAutoStateChangeEvent: false,
         ConvolverNode: false,
-        CookieChangeEvent: false,
-        CookieDeprecationLabel: false,
-        cookieStore: false,
-        CookieStore: false,
-        CookieStoreManager: false,
         CountQueuingStrategy: false,
         createImageBitmap: false,
         Credential: false,
-        credentialless: false,
         CredentialsContainer: false,
-        CropTarget: false,
-        crossOriginIsolated: false,
         crypto: false,
         Crypto: false,
         CryptoKey: false,
         CSS: false,
-        CSSAnimation: false,
         CSSConditionRule: false,
-        CSSContainerRule: false,
-        CSSCounterStyleRule: false,
         CSSFontFaceRule: false,
-        CSSFontFeatureValuesRule: false,
-        CSSFontPaletteValuesRule: false,
         CSSGroupingRule: false,
-        CSSImageValue: false,
         CSSImportRule: false,
         CSSKeyframeRule: false,
         CSSKeyframesRule: false,
-        CSSKeywordValue: false,
-        CSSLayerBlockRule: false,
-        CSSLayerStatementRule: false,
-        CSSMarginRule: false,
-        CSSMathClamp: false,
-        CSSMathInvert: false,
-        CSSMathMax: false,
-        CSSMathMin: false,
-        CSSMathNegate: false,
-        CSSMathProduct: false,
-        CSSMathSum: false,
-        CSSMathValue: false,
-        CSSMatrixComponent: false,
         CSSMediaRule: false,
         CSSNamespaceRule: false,
-        CSSNestedDeclarations: false,
-        CSSNumericArray: false,
-        CSSNumericValue: false,
-        CSSPageDescriptors: false,
         CSSPageRule: false,
-        CSSPerspective: false,
-        CSSPositionTryDescriptors: false,
-        CSSPositionTryRule: false,
-        CSSPositionValue: false,
-        CSSPropertyRule: false,
-        CSSRotate: false,
         CSSRule: false,
         CSSRuleList: false,
-        CSSScale: false,
-        CSSScopeRule: false,
-        CSSSkew: false,
-        CSSSkewX: false,
-        CSSSkewY: false,
-        CSSStartingStyleRule: false,
         CSSStyleDeclaration: false,
         CSSStyleRule: false,
         CSSStyleSheet: false,
-        CSSStyleValue: false,
         CSSSupportsRule: false,
-        CSSTransformComponent: false,
-        CSSTransformValue: false,
-        CSSTransition: false,
-        CSSTranslate: false,
-        CSSUnitValue: false,
-        CSSUnparsedValue: false,
-        CSSVariableReferenceValue: false,
-        CSSViewTransitionRule: false,
-        currentFrame: false,
-        currentTime: false,
         CustomElementRegistry: false,
         customElements: false,
         CustomEvent: false,
-        CustomStateSet: false,
         DataTransfer: false,
         DataTransferItem: false,
         DataTransferItemList: false,
-        DecompressionStream: false,
+        defaultstatus: false,
+        defaultStatus: false,
         DelayNode: false,
-        DelegatedInkTrailPresenter: false,
         DeviceMotionEvent: false,
-        DeviceMotionEventAcceleration: false,
-        DeviceMotionEventRotationRate: false,
         DeviceOrientationEvent: false,
         devicePixelRatio: false,
         dispatchEvent: false,
         document: false,
         Document: false,
         DocumentFragment: false,
-        documentPictureInPicture: false,
-        DocumentPictureInPicture: false,
-        DocumentPictureInPictureEvent: false,
-        DocumentTimeline: false,
         DocumentType: false,
         DOMError: false,
         DOMException: false,
@@ -3250,125 +3380,39 @@ var require_globals = __commonJS({
         DOMPointReadOnly: false,
         DOMQuad: false,
         DOMRect: false,
-        DOMRectList: false,
         DOMRectReadOnly: false,
         DOMStringList: false,
         DOMStringMap: false,
         DOMTokenList: false,
         DragEvent: false,
         DynamicsCompressorNode: false,
-        EditContext: false,
         Element: false,
-        ElementInternals: false,
-        EncodedAudioChunk: false,
-        EncodedVideoChunk: false,
         ErrorEvent: false,
         event: false,
         Event: false,
-        EventCounts: false,
         EventSource: false,
         EventTarget: false,
         external: false,
-        External: false,
-        EyeDropper: false,
-        FeaturePolicy: false,
-        FederatedCredential: false,
-        fence: false,
-        Fence: false,
-        FencedFrameConfig: false,
         fetch: false,
-        fetchLater: false,
-        FetchLaterResult: false,
         File: false,
         FileList: false,
         FileReader: false,
-        FileSystem: false,
-        FileSystemDirectoryEntry: false,
-        FileSystemDirectoryHandle: false,
-        FileSystemDirectoryReader: false,
-        FileSystemEntry: false,
-        FileSystemFileEntry: false,
-        FileSystemFileHandle: false,
-        FileSystemHandle: false,
-        FileSystemWritableFileStream: false,
         find: false,
-        Float16Array: false,
         focus: false,
         FocusEvent: false,
-        FontData: false,
         FontFace: false,
-        FontFaceSet: false,
         FontFaceSetLoadEvent: false,
         FormData: false,
-        FormDataEvent: false,
-        FragmentDirective: false,
         frameElement: false,
         frames: false,
         GainNode: false,
         Gamepad: false,
-        GamepadAxisMoveEvent: false,
         GamepadButton: false,
-        GamepadButtonEvent: false,
         GamepadEvent: false,
-        GamepadHapticActuator: false,
-        GamepadPose: false,
-        Geolocation: false,
-        GeolocationCoordinates: false,
-        GeolocationPosition: false,
-        GeolocationPositionError: false,
         getComputedStyle: false,
-        getScreenDetails: false,
         getSelection: false,
-        GPU: false,
-        GPUAdapter: false,
-        GPUAdapterInfo: false,
-        GPUBindGroup: false,
-        GPUBindGroupLayout: false,
-        GPUBuffer: false,
-        GPUBufferUsage: false,
-        GPUCanvasContext: false,
-        GPUColorWrite: false,
-        GPUCommandBuffer: false,
-        GPUCommandEncoder: false,
-        GPUCompilationInfo: false,
-        GPUCompilationMessage: false,
-        GPUComputePassEncoder: false,
-        GPUComputePipeline: false,
-        GPUDevice: false,
-        GPUDeviceLostInfo: false,
-        GPUError: false,
-        GPUExternalTexture: false,
-        GPUInternalError: false,
-        GPUMapMode: false,
-        GPUOutOfMemoryError: false,
-        GPUPipelineError: false,
-        GPUPipelineLayout: false,
-        GPUQuerySet: false,
-        GPUQueue: false,
-        GPURenderBundle: false,
-        GPURenderBundleEncoder: false,
-        GPURenderPassEncoder: false,
-        GPURenderPipeline: false,
-        GPUSampler: false,
-        GPUShaderModule: false,
-        GPUShaderStage: false,
-        GPUSupportedFeatures: false,
-        GPUSupportedLimits: false,
-        GPUTexture: false,
-        GPUTextureUsage: false,
-        GPUTextureView: false,
-        GPUUncapturedErrorEvent: false,
-        GPUValidationError: false,
-        GravitySensor: false,
-        Gyroscope: false,
         HashChangeEvent: false,
         Headers: false,
-        HID: false,
-        HIDConnectionEvent: false,
-        HIDDevice: false,
-        HIDInputReportEvent: false,
-        Highlight: false,
-        HighlightRegistry: false,
         history: false,
         History: false,
         HTMLAllCollection: false,
@@ -3381,6 +3425,7 @@ var require_globals = __commonJS({
         HTMLButtonElement: false,
         HTMLCanvasElement: false,
         HTMLCollection: false,
+        HTMLContentElement: false,
         HTMLDataElement: false,
         HTMLDataListElement: false,
         HTMLDetailsElement: false,
@@ -3391,7 +3436,6 @@ var require_globals = __commonJS({
         HTMLDocument: false,
         HTMLElement: false,
         HTMLEmbedElement: false,
-        HTMLFencedFrameElement: false,
         HTMLFieldSetElement: false,
         HTMLFontElement: false,
         HTMLFormControlsCollection: false,
@@ -3430,6 +3474,7 @@ var require_globals = __commonJS({
         HTMLQuoteElement: false,
         HTMLScriptElement: false,
         HTMLSelectElement: false,
+        HTMLShadowElement: false,
         HTMLSlotElement: false,
         HTMLSourceElement: false,
         HTMLSpanElement: false,
@@ -3459,83 +3504,51 @@ var require_globals = __commonJS({
         IDBRequest: false,
         IDBTransaction: false,
         IDBVersionChangeEvent: false,
-        IdentityCredential: false,
-        IdentityCredentialError: false,
-        IdentityProvider: false,
         IdleDeadline: false,
-        IdleDetector: false,
         IIRFilterNode: false,
         Image: false,
         ImageBitmap: false,
         ImageBitmapRenderingContext: false,
         ImageCapture: false,
         ImageData: false,
-        ImageDecoder: false,
-        ImageTrack: false,
-        ImageTrackList: false,
         indexedDB: false,
-        Ink: false,
         innerHeight: false,
         innerWidth: false,
-        InputDeviceCapabilities: false,
-        InputDeviceInfo: false,
         InputEvent: false,
         IntersectionObserver: false,
         IntersectionObserverEntry: false,
+        Intl: false,
         isSecureContext: false,
-        Keyboard: false,
         KeyboardEvent: false,
-        KeyboardLayoutMap: false,
         KeyframeEffect: false,
-        LargestContentfulPaint: false,
-        LaunchParams: false,
-        launchQueue: false,
-        LaunchQueue: false,
-        LayoutShift: false,
-        LayoutShiftAttribution: false,
+        KeyframeEffectReadOnly: false,
         length: false,
-        LinearAccelerationSensor: false,
         localStorage: false,
         location: true,
         Location: false,
         locationbar: false,
-        Lock: false,
-        LockManager: false,
         matchMedia: false,
-        MathMLElement: false,
-        MediaCapabilities: false,
-        MediaCapabilitiesInfo: false,
         MediaDeviceInfo: false,
         MediaDevices: false,
         MediaElementAudioSourceNode: false,
         MediaEncryptedEvent: false,
         MediaError: false,
-        MediaKeyError: false,
         MediaKeyMessageEvent: false,
-        MediaKeys: false,
         MediaKeySession: false,
         MediaKeyStatusMap: false,
         MediaKeySystemAccess: false,
         MediaList: false,
-        MediaMetadata: false,
         MediaQueryList: false,
         MediaQueryListEvent: false,
         MediaRecorder: false,
-        MediaRecorderErrorEvent: false,
-        MediaSession: false,
+        MediaSettingsRange: false,
         MediaSource: false,
-        MediaSourceHandle: false,
         MediaStream: false,
         MediaStreamAudioDestinationNode: false,
         MediaStreamAudioSourceNode: false,
         MediaStreamEvent: false,
         MediaStreamTrack: false,
-        MediaStreamTrackAudioSourceNode: false,
-        MediaStreamTrackAudioStats: false,
         MediaStreamTrackEvent: false,
-        MediaStreamTrackGenerator: false,
-        MediaStreamTrackProcessor: false,
-        MediaStreamTrackVideoStats: false,
         menubar: false,
         MessageChannel: false,
         MessageEvent: false,
@@ -3550,9 +3563,6 @@ var require_globals = __commonJS({
         MIDIPort: false,
         MimeType: false,
         MimeTypeArray: false,
-        model: false,
-        ModelGenericSession: false,
-        ModelManager: false,
         MouseEvent: false,
         moveBy: false,
         moveTo: false,
@@ -3561,49 +3571,29 @@ var require_globals = __commonJS({
         MutationRecord: false,
         name: false,
         NamedNodeMap: false,
-        NavigateEvent: false,
-        navigation: false,
-        Navigation: false,
-        NavigationActivation: false,
-        NavigationCurrentEntryChangeEvent: false,
-        NavigationDestination: false,
-        NavigationHistoryEntry: false,
         NavigationPreloadManager: false,
-        NavigationTransition: false,
         navigator: false,
         Navigator: false,
-        NavigatorLogin: false,
-        NavigatorManagedData: false,
-        NavigatorUAData: false,
         NetworkInformation: false,
         Node: false,
         NodeFilter: false,
         NodeIterator: false,
         NodeList: false,
         Notification: false,
-        NotifyPaintEvent: false,
-        NotRestoredReasonDetails: false,
-        NotRestoredReasons: false,
         OfflineAudioCompletionEvent: false,
         OfflineAudioContext: false,
         offscreenBuffering: false,
-        OffscreenCanvas: false,
-        OffscreenCanvasRenderingContext2D: false,
+        OffscreenCanvas: true,
         onabort: true,
         onafterprint: true,
-        onanimationcancel: true,
         onanimationend: true,
         onanimationiteration: true,
         onanimationstart: true,
         onappinstalled: true,
         onauxclick: true,
-        onbeforeinput: true,
         onbeforeinstallprompt: true,
-        onbeforematch: true,
         onbeforeprint: true,
-        onbeforetoggle: true,
         onbeforeunload: true,
-        onbeforexrselect: true,
         onblur: true,
         oncancel: true,
         oncanplay: true,
@@ -3611,13 +3601,8 @@ var require_globals = __commonJS({
         onchange: true,
         onclick: true,
         onclose: true,
-        oncontentvisibilityautostatechange: true,
-        oncontextlost: true,
         oncontextmenu: true,
-        oncontextrestored: true,
-        oncopy: true,
         oncuechange: true,
-        oncut: true,
         ondblclick: true,
         ondevicemotion: true,
         ondeviceorientation: true,
@@ -3634,9 +3619,6 @@ var require_globals = __commonJS({
         onended: true,
         onerror: true,
         onfocus: true,
-        onformdata: true,
-        ongamepadconnected: true,
-        ongamepaddisconnected: true,
         ongotpointercapture: true,
         onhashchange: true,
         oninput: true,
@@ -3663,10 +3645,7 @@ var require_globals = __commonJS({
         onoffline: true,
         ononline: true,
         onpagehide: true,
-        onpagereveal: true,
         onpageshow: true,
-        onpageswap: true,
-        onpaste: true,
         onpause: true,
         onplay: true,
         onplaying: true,
@@ -3677,7 +3656,6 @@ var require_globals = __commonJS({
         onpointermove: true,
         onpointerout: true,
         onpointerover: true,
-        onpointerrawupdate: true,
         onpointerup: true,
         onpopstate: true,
         onprogress: true,
@@ -3686,64 +3664,43 @@ var require_globals = __commonJS({
         onreset: true,
         onresize: true,
         onscroll: true,
-        onscrollend: true,
-        onscrollsnapchange: true,
-        onscrollsnapchanging: true,
         onsearch: true,
-        onsecuritypolicyviolation: true,
         onseeked: true,
         onseeking: true,
         onselect: true,
-        onselectionchange: true,
-        onselectstart: true,
-        onslotchange: true,
         onstalled: true,
         onstorage: true,
         onsubmit: true,
         onsuspend: true,
         ontimeupdate: true,
         ontoggle: true,
-        ontransitioncancel: true,
         ontransitionend: true,
-        ontransitionrun: true,
-        ontransitionstart: true,
         onunhandledrejection: true,
         onunload: true,
         onvolumechange: true,
         onwaiting: true,
         onwheel: true,
         open: false,
+        openDatabase: false,
         opener: false,
         Option: false,
-        OrientationSensor: false,
         origin: false,
-        originAgentCluster: false,
         OscillatorNode: false,
-        OTPCredential: false,
         outerHeight: false,
         outerWidth: false,
-        OverconstrainedError: false,
-        PageRevealEvent: false,
-        PageSwapEvent: false,
         PageTransitionEvent: false,
         pageXOffset: false,
         pageYOffset: false,
         PannerNode: false,
         parent: false,
-        PasswordCredential: false,
         Path2D: false,
         PaymentAddress: false,
-        PaymentManager: false,
-        PaymentMethodChangeEvent: false,
         PaymentRequest: false,
         PaymentRequestUpdateEvent: false,
         PaymentResponse: false,
         performance: false,
         Performance: false,
-        PerformanceElementTiming: false,
         PerformanceEntry: false,
-        PerformanceEventTiming: false,
-        PerformanceLongAnimationFrameTiming: false,
         PerformanceLongTaskTiming: false,
         PerformanceMark: false,
         PerformanceMeasure: false,
@@ -3753,17 +3710,12 @@ var require_globals = __commonJS({
         PerformanceObserverEntryList: false,
         PerformancePaintTiming: false,
         PerformanceResourceTiming: false,
-        PerformanceScriptTiming: false,
-        PerformanceServerTiming: false,
         PerformanceTiming: false,
-        PeriodicSyncManager: false,
         PeriodicWave: false,
         Permissions: false,
         PermissionStatus: false,
-        PERSISTENT: false,
         personalbar: false,
-        PictureInPictureEvent: false,
-        PictureInPictureWindow: false,
+        PhotoCapabilities: false,
         Plugin: false,
         PluginArray: false,
         PointerEvent: false,
@@ -3777,75 +3729,47 @@ var require_globals = __commonJS({
         PresentationConnectionList: false,
         PresentationReceiver: false,
         PresentationRequest: false,
-        PressureObserver: false,
-        PressureRecord: false,
         print: false,
         ProcessingInstruction: false,
-        Profiler: false,
         ProgressEvent: false,
         PromiseRejectionEvent: false,
         prompt: false,
-        ProtectedAudience: false,
-        PublicKeyCredential: false,
         PushManager: false,
         PushSubscription: false,
         PushSubscriptionOptions: false,
-        queryLocalFonts: false,
         queueMicrotask: false,
         RadioNodeList: false,
         Range: false,
-        ReadableByteStreamController: false,
         ReadableStream: false,
-        ReadableStreamBYOBReader: false,
-        ReadableStreamBYOBRequest: false,
-        ReadableStreamDefaultController: false,
-        ReadableStreamDefaultReader: false,
         registerProcessor: false,
-        RelativeOrientationSensor: false,
         RemotePlayback: false,
         removeEventListener: false,
-        reportError: false,
-        ReportingObserver: false,
         Request: false,
         requestAnimationFrame: false,
         requestIdleCallback: false,
         resizeBy: false,
         ResizeObserver: false,
         ResizeObserverEntry: false,
-        ResizeObserverSize: false,
         resizeTo: false,
         Response: false,
         RTCCertificate: false,
         RTCDataChannel: false,
         RTCDataChannelEvent: false,
         RTCDtlsTransport: false,
-        RTCDTMFSender: false,
-        RTCDTMFToneChangeEvent: false,
-        RTCEncodedAudioFrame: false,
-        RTCEncodedVideoFrame: false,
-        RTCError: false,
-        RTCErrorEvent: false,
         RTCIceCandidate: false,
+        RTCIceGatherer: false,
         RTCIceTransport: false,
         RTCPeerConnection: false,
-        RTCPeerConnectionIceErrorEvent: false,
         RTCPeerConnectionIceEvent: false,
+        RTCRtpContributingSource: false,
         RTCRtpReceiver: false,
-        RTCRtpScriptTransform: false,
         RTCRtpSender: false,
-        RTCRtpTransceiver: false,
         RTCSctpTransport: false,
         RTCSessionDescription: false,
         RTCStatsReport: false,
         RTCTrackEvent: false,
-        sampleRate: false,
-        scheduler: false,
-        Scheduler: false,
-        Scheduling: false,
         screen: false,
         Screen: false,
-        ScreenDetailed: false,
-        ScreenDetails: false,
         screenLeft: false,
         ScreenOrientation: false,
         screenTop: false,
@@ -3855,17 +3779,12 @@ var require_globals = __commonJS({
         scroll: false,
         scrollbars: false,
         scrollBy: false,
-        ScrollTimeline: false,
         scrollTo: false,
         scrollX: false,
         scrollY: false,
         SecurityPolicyViolationEvent: false,
         Selection: false,
         self: false,
-        Sensor: false,
-        SensorErrorEvent: false,
-        Serial: false,
-        SerialPort: false,
         ServiceWorker: false,
         ServiceWorkerContainer: false,
         ServiceWorkerRegistration: false,
@@ -3873,39 +3792,23 @@ var require_globals = __commonJS({
         setInterval: false,
         setTimeout: false,
         ShadowRoot: false,
-        sharedStorage: false,
-        SharedStorage: false,
-        SharedStorageWorklet: false,
         SharedWorker: false,
-        showDirectoryPicker: false,
-        showOpenFilePicker: false,
-        showSaveFilePicker: false,
-        SnapEvent: false,
         SourceBuffer: false,
         SourceBufferList: false,
         speechSynthesis: false,
-        SpeechSynthesis: false,
-        SpeechSynthesisErrorEvent: false,
         SpeechSynthesisEvent: false,
         SpeechSynthesisUtterance: false,
-        SpeechSynthesisVoice: false,
         StaticRange: false,
         status: false,
         statusbar: false,
         StereoPannerNode: false,
         stop: false,
         Storage: false,
-        StorageBucket: false,
-        StorageBucketManager: false,
         StorageEvent: false,
         StorageManager: false,
-        structuredClone: false,
         styleMedia: false,
-        StylePropertyMap: false,
-        StylePropertyMapReadOnly: false,
         StyleSheet: false,
         StyleSheetList: false,
-        SubmitEvent: false,
         SubtleCrypto: false,
         SVGAElement: false,
         SVGAngle: false,
@@ -3930,6 +3833,7 @@ var require_globals = __commonJS({
         SVGComponentTransferFunctionElement: false,
         SVGDefsElement: false,
         SVGDescElement: false,
+        SVGDiscardElement: false,
         SVGElement: false,
         SVGEllipseElement: false,
         SVGFEBlendElement: false,
@@ -4004,81 +3908,32 @@ var require_globals = __commonJS({
         SVGUnitTypes: false,
         SVGUseElement: false,
         SVGViewElement: false,
-        SyncManager: false,
         TaskAttributionTiming: false,
-        TaskController: false,
-        TaskPriorityChangeEvent: false,
-        TaskSignal: false,
-        TEMPORARY: false,
         Text: false,
         TextDecoder: false,
-        TextDecoderStream: false,
         TextEncoder: false,
-        TextEncoderStream: false,
         TextEvent: false,
-        TextFormat: false,
-        TextFormatUpdateEvent: false,
         TextMetrics: false,
         TextTrack: false,
         TextTrackCue: false,
         TextTrackCueList: false,
         TextTrackList: false,
-        TextUpdateEvent: false,
-        TimeEvent: false,
         TimeRanges: false,
-        ToggleEvent: false,
         toolbar: false,
         top: false,
         Touch: false,
         TouchEvent: false,
         TouchList: false,
         TrackEvent: false,
-        TransformStream: false,
-        TransformStreamDefaultController: false,
         TransitionEvent: false,
         TreeWalker: false,
-        TrustedHTML: false,
-        TrustedScript: false,
-        TrustedScriptURL: false,
-        TrustedTypePolicy: false,
-        TrustedTypePolicyFactory: false,
-        trustedTypes: false,
         UIEvent: false,
         URL: false,
-        URLPattern: false,
         URLSearchParams: false,
-        USB: false,
-        USBAlternateInterface: false,
-        USBConfiguration: false,
-        USBConnectionEvent: false,
-        USBDevice: false,
-        USBEndpoint: false,
-        USBInterface: false,
-        USBInTransferResult: false,
-        USBIsochronousInTransferPacket: false,
-        USBIsochronousInTransferResult: false,
-        USBIsochronousOutTransferPacket: false,
-        USBIsochronousOutTransferResult: false,
-        USBOutTransferResult: false,
-        UserActivation: false,
         ValidityState: false,
-        VideoColorSpace: false,
-        VideoDecoder: false,
-        VideoEncoder: false,
-        VideoFrame: false,
-        VideoPlaybackQuality: false,
-        ViewTimeline: false,
-        ViewTransition: false,
-        ViewTransitionTypeSet: false,
-        VirtualKeyboard: false,
-        VirtualKeyboardGeometryChangeEvent: false,
-        VisibilityStateEntry: false,
         visualViewport: false,
         VisualViewport: false,
         VTTCue: false,
-        VTTRegion: false,
-        WakeLock: false,
-        WakeLockSentinel: false,
         WaveShaperNode: false,
         WebAssembly: false,
         WebGL2RenderingContext: false,
@@ -4086,7 +3941,6 @@ var require_globals = __commonJS({
         WebGLBuffer: false,
         WebGLContextEvent: false,
         WebGLFramebuffer: false,
-        WebGLObject: false,
         WebGLProgram: false,
         WebGLQuery: false,
         WebGLRenderbuffer: false,
@@ -4100,26 +3954,11 @@ var require_globals = __commonJS({
         WebGLUniformLocation: false,
         WebGLVertexArrayObject: false,
         WebSocket: false,
-        WebSocketError: false,
-        WebSocketStream: false,
-        WebTransport: false,
-        WebTransportBidirectionalStream: false,
-        WebTransportDatagramDuplexStream: false,
-        WebTransportError: false,
-        WebTransportReceiveStream: false,
-        WebTransportSendStream: false,
-        WGSLLanguageFeatures: false,
         WheelEvent: false,
         window: false,
         Window: false,
-        WindowControlsOverlay: false,
-        WindowControlsOverlayGeometryChangeEvent: false,
         Worker: false,
-        Worklet: false,
-        WorkletGlobalScope: false,
         WritableStream: false,
-        WritableStreamDefaultController: false,
-        WritableStreamDefaultWriter: false,
         XMLDocument: false,
         XMLHttpRequest: false,
         XMLHttpRequestEventTarget: false,
@@ -4128,119 +3967,202 @@ var require_globals = __commonJS({
         XPathEvaluator: false,
         XPathExpression: false,
         XPathResult: false,
-        XRAnchor: false,
-        XRAnchorSet: false,
-        XRBoundedReferenceSpace: false,
-        XRCamera: false,
-        XRCPUDepthInformation: false,
-        XRDepthInformation: false,
-        XRDOMOverlayState: false,
-        XRFrame: false,
-        XRHand: false,
-        XRHitTestResult: false,
-        XRHitTestSource: false,
-        XRInputSource: false,
-        XRInputSourceArray: false,
-        XRInputSourceEvent: false,
-        XRInputSourcesChangeEvent: false,
-        XRJointPose: false,
-        XRJointSpace: false,
-        XRLayer: false,
-        XRLightEstimate: false,
-        XRLightProbe: false,
-        XRPose: false,
-        XRRay: false,
-        XRReferenceSpace: false,
-        XRReferenceSpaceEvent: false,
-        XRRenderState: false,
-        XRRigidTransform: false,
-        XRSession: false,
-        XRSessionEvent: false,
-        XRSpace: false,
-        XRSystem: false,
-        XRTransientInputHitTestResult: false,
-        XRTransientInputHitTestSource: false,
-        XRView: false,
-        XRViewerPose: false,
-        XRViewport: false,
-        XRWebGLBinding: false,
-        XRWebGLDepthInformation: false,
-        XRWebGLLayer: false,
         XSLTProcessor: false
       },
-      builtin: {
-        AggregateError: false,
-        Array: false,
-        ArrayBuffer: false,
-        Atomics: false,
-        BigInt: false,
-        BigInt64Array: false,
-        BigUint64Array: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        FinalizationRegistry: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        globalThis: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        Iterator: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
+      worker: {
+        addEventListener: false,
+        applicationCache: false,
+        atob: false,
+        Blob: false,
+        BroadcastChannel: false,
+        btoa: false,
+        Cache: false,
+        caches: false,
+        clearInterval: false,
+        clearTimeout: false,
+        close: true,
+        console: false,
+        fetch: false,
+        FileReaderSync: false,
+        FormData: false,
+        Headers: false,
+        IDBCursor: false,
+        IDBCursorWithValue: false,
+        IDBDatabase: false,
+        IDBFactory: false,
+        IDBIndex: false,
+        IDBKeyRange: false,
+        IDBObjectStore: false,
+        IDBOpenDBRequest: false,
+        IDBRequest: false,
+        IDBTransaction: false,
+        IDBVersionChangeEvent: false,
+        ImageData: false,
+        importScripts: true,
+        indexedDB: false,
+        location: false,
+        MessageChannel: false,
+        MessagePort: false,
+        name: false,
+        navigator: false,
+        Notification: false,
+        onclose: true,
+        onconnect: true,
+        onerror: true,
+        onlanguagechange: true,
+        onmessage: true,
+        onoffline: true,
+        ononline: true,
+        onrejectionhandled: true,
+        onunhandledrejection: true,
+        performance: false,
+        Performance: false,
+        PerformanceEntry: false,
+        PerformanceMark: false,
+        PerformanceMeasure: false,
+        PerformanceNavigation: false,
+        PerformanceResourceTiming: false,
+        PerformanceTiming: false,
+        postMessage: true,
         Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        SharedArrayBuffer: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakRef: false,
-        WeakSet: false
+        queueMicrotask: false,
+        removeEventListener: false,
+        Request: false,
+        Response: false,
+        self: true,
+        ServiceWorkerRegistration: false,
+        setInterval: false,
+        setTimeout: false,
+        TextDecoder: false,
+        TextEncoder: false,
+        URL: false,
+        URLSearchParams: false,
+        WebSocket: false,
+        Worker: false,
+        WorkerGlobalScope: false,
+        XMLHttpRequest: false
       },
-      chai: {
-        assert: true,
-        expect: true,
-        should: true
+      node: {
+        __dirname: false,
+        __filename: false,
+        Buffer: false,
+        clearImmediate: false,
+        clearInterval: false,
+        clearTimeout: false,
+        console: false,
+        exports: true,
+        global: false,
+        Intl: false,
+        module: false,
+        process: false,
+        queueMicrotask: false,
+        require: false,
+        setImmediate: false,
+        setInterval: false,
+        setTimeout: false,
+        TextDecoder: false,
+        TextEncoder: false,
+        URL: false,
+        URLSearchParams: false
       },
       commonjs: {
         exports: true,
         global: false,
         module: false,
         require: false
+      },
+      amd: {
+        define: false,
+        require: false
+      },
+      mocha: {
+        after: false,
+        afterEach: false,
+        before: false,
+        beforeEach: false,
+        context: false,
+        describe: false,
+        it: false,
+        mocha: false,
+        run: false,
+        setup: false,
+        specify: false,
+        suite: false,
+        suiteSetup: false,
+        suiteTeardown: false,
+        teardown: false,
+        test: false,
+        xcontext: false,
+        xdescribe: false,
+        xit: false,
+        xspecify: false
+      },
+      jasmine: {
+        afterAll: false,
+        afterEach: false,
+        beforeAll: false,
+        beforeEach: false,
+        describe: false,
+        expect: false,
+        fail: false,
+        fdescribe: false,
+        fit: false,
+        it: false,
+        jasmine: false,
+        pending: false,
+        runs: false,
+        spyOn: false,
+        spyOnProperty: false,
+        waits: false,
+        waitsFor: false,
+        xdescribe: false,
+        xit: false
+      },
+      jest: {
+        afterAll: false,
+        afterEach: false,
+        beforeAll: false,
+        beforeEach: false,
+        describe: false,
+        expect: false,
+        fdescribe: false,
+        fit: false,
+        it: false,
+        jest: false,
+        pit: false,
+        require: false,
+        test: false,
+        xdescribe: false,
+        xit: false,
+        xtest: false
+      },
+      qunit: {
+        asyncTest: false,
+        deepEqual: false,
+        equal: false,
+        expect: false,
+        module: false,
+        notDeepEqual: false,
+        notEqual: false,
+        notOk: false,
+        notPropEqual: false,
+        notStrictEqual: false,
+        ok: false,
+        propEqual: false,
+        QUnit: false,
+        raises: false,
+        start: false,
+        stop: false,
+        strictEqual: false,
+        test: false,
+        throws: false
+      },
+      phantomjs: {
+        console: true,
+        exports: true,
+        phantom: true,
+        require: true,
+        WebPage: true
       },
       couch: {
         emit: false,
@@ -4255,831 +4177,144 @@ var require_globals = __commonJS({
         start: false,
         sum: false
       },
-      devtools: {
-        $: false,
-        $_: false,
-        $$: false,
-        $0: false,
-        $1: false,
-        $2: false,
-        $3: false,
-        $4: false,
-        $x: false,
-        chrome: false,
-        clear: false,
-        copy: false,
-        debug: false,
-        dir: false,
-        dirxml: false,
-        getEventListeners: false,
-        inspect: false,
-        keys: false,
-        monitor: false,
-        monitorEvents: false,
-        profile: false,
-        profileEnd: false,
-        queryObjects: false,
-        table: false,
-        undebug: false,
-        unmonitor: false,
-        unmonitorEvents: false,
-        values: false
+      rhino: {
+        defineClass: false,
+        deserialize: false,
+        gc: false,
+        help: false,
+        importClass: false,
+        importPackage: false,
+        java: false,
+        load: false,
+        loadClass: false,
+        Packages: false,
+        print: false,
+        quit: false,
+        readFile: false,
+        readUrl: false,
+        runCommand: false,
+        seal: false,
+        serialize: false,
+        spawn: false,
+        sync: false,
+        toint32: false,
+        version: false
       },
-      embertest: {
-        andThen: false,
-        click: false,
-        currentPath: false,
-        currentRouteName: false,
-        currentURL: false,
-        fillIn: false,
-        find: false,
-        findAll: false,
-        findWithAssert: false,
-        keyEvent: false,
-        pauseTest: false,
-        resumeTest: false,
-        triggerEvent: false,
-        visit: false,
-        wait: false
+      nashorn: {
+        __DIR__: false,
+        __FILE__: false,
+        __LINE__: false,
+        com: false,
+        edu: false,
+        exit: false,
+        java: false,
+        Java: false,
+        javafx: false,
+        JavaImporter: false,
+        javax: false,
+        JSAdapter: false,
+        load: false,
+        loadWithNewGlobal: false,
+        org: false,
+        Packages: false,
+        print: false,
+        quit: false
       },
-      es2015: {
-        Array: false,
-        ArrayBuffer: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakSet: false
-      },
-      es2016: {
-        Array: false,
-        ArrayBuffer: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakSet: false
-      },
-      es2017: {
-        Array: false,
-        ArrayBuffer: false,
-        Atomics: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        SharedArrayBuffer: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakSet: false
-      },
-      es2018: {
-        Array: false,
-        ArrayBuffer: false,
-        Atomics: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        SharedArrayBuffer: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakSet: false
-      },
-      es2019: {
-        Array: false,
-        ArrayBuffer: false,
-        Atomics: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        SharedArrayBuffer: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakSet: false
-      },
-      es2020: {
-        Array: false,
-        ArrayBuffer: false,
-        Atomics: false,
-        BigInt: false,
-        BigInt64Array: false,
-        BigUint64Array: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        globalThis: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        SharedArrayBuffer: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakSet: false
-      },
-      es2021: {
-        AggregateError: false,
-        Array: false,
-        ArrayBuffer: false,
-        Atomics: false,
-        BigInt: false,
-        BigInt64Array: false,
-        BigUint64Array: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        FinalizationRegistry: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        globalThis: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        SharedArrayBuffer: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakRef: false,
-        WeakSet: false
-      },
-      es2022: {
-        AggregateError: false,
-        Array: false,
-        ArrayBuffer: false,
-        Atomics: false,
-        BigInt: false,
-        BigInt64Array: false,
-        BigUint64Array: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        FinalizationRegistry: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        globalThis: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        SharedArrayBuffer: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakRef: false,
-        WeakSet: false
-      },
-      es2023: {
-        AggregateError: false,
-        Array: false,
-        ArrayBuffer: false,
-        Atomics: false,
-        BigInt: false,
-        BigInt64Array: false,
-        BigUint64Array: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        FinalizationRegistry: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        globalThis: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        SharedArrayBuffer: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakRef: false,
-        WeakSet: false
-      },
-      es2024: {
-        AggregateError: false,
-        Array: false,
-        ArrayBuffer: false,
-        Atomics: false,
-        BigInt: false,
-        BigInt64Array: false,
-        BigUint64Array: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        FinalizationRegistry: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        globalThis: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        SharedArrayBuffer: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakRef: false,
-        WeakSet: false
-      },
-      es2025: {
-        AggregateError: false,
-        Array: false,
-        ArrayBuffer: false,
-        Atomics: false,
-        BigInt: false,
-        BigInt64Array: false,
-        BigUint64Array: false,
-        Boolean: false,
-        DataView: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        FinalizationRegistry: false,
-        Float32Array: false,
-        Float64Array: false,
-        Function: false,
-        globalThis: false,
-        Infinity: false,
-        Int16Array: false,
-        Int32Array: false,
-        Int8Array: false,
-        Intl: false,
-        isFinite: false,
-        isNaN: false,
-        Iterator: false,
-        JSON: false,
-        Map: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        Promise: false,
-        Proxy: false,
-        RangeError: false,
-        ReferenceError: false,
-        Reflect: false,
-        RegExp: false,
-        Set: false,
-        SharedArrayBuffer: false,
-        String: false,
-        Symbol: false,
-        SyntaxError: false,
-        TypeError: false,
-        Uint16Array: false,
-        Uint32Array: false,
-        Uint8Array: false,
-        Uint8ClampedArray: false,
-        undefined: false,
-        unescape: false,
-        URIError: false,
-        WeakMap: false,
-        WeakRef: false,
-        WeakSet: false
-      },
-      es3: {
-        Array: false,
-        Boolean: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        Function: false,
-        Infinity: false,
-        isFinite: false,
-        isNaN: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        RangeError: false,
-        ReferenceError: false,
-        RegExp: false,
-        String: false,
-        SyntaxError: false,
-        TypeError: false,
-        undefined: false,
-        unescape: false,
-        URIError: false
-      },
-      es5: {
-        Array: false,
-        Boolean: false,
-        Date: false,
-        decodeURI: false,
-        decodeURIComponent: false,
-        encodeURI: false,
-        encodeURIComponent: false,
-        Error: false,
-        escape: false,
-        eval: false,
-        EvalError: false,
-        Function: false,
-        Infinity: false,
-        isFinite: false,
-        isNaN: false,
-        JSON: false,
-        Math: false,
-        NaN: false,
-        Number: false,
-        Object: false,
-        parseFloat: false,
-        parseInt: false,
-        RangeError: false,
-        ReferenceError: false,
-        RegExp: false,
-        String: false,
-        SyntaxError: false,
-        TypeError: false,
-        undefined: false,
-        unescape: false,
-        URIError: false
-      },
-      greasemonkey: {
-        cloneInto: false,
-        createObjectIn: false,
-        exportFunction: false,
-        GM: false,
-        GM_addElement: false,
-        GM_addStyle: false,
-        GM_addValueChangeListener: false,
-        GM_deleteValue: false,
-        GM_download: false,
-        GM_getResourceText: false,
-        GM_getResourceURL: false,
-        GM_getTab: false,
-        GM_getTabs: false,
-        GM_getValue: false,
-        GM_info: false,
-        GM_listValues: false,
-        GM_log: false,
-        GM_notification: false,
-        GM_openInTab: false,
-        GM_registerMenuCommand: false,
-        GM_removeValueChangeListener: false,
-        GM_saveTab: false,
-        GM_setClipboard: false,
-        GM_setValue: false,
-        GM_unregisterMenuCommand: false,
-        GM_xmlhttpRequest: false,
-        unsafeWindow: false
-      },
-      jasmine: {
-        afterAll: false,
-        afterEach: false,
-        beforeAll: false,
-        beforeEach: false,
-        describe: false,
-        expect: false,
-        expectAsync: false,
-        fail: false,
-        fdescribe: false,
-        fit: false,
-        it: false,
-        jasmine: false,
-        pending: false,
-        runs: false,
-        spyOn: false,
-        spyOnAllFunctions: false,
-        spyOnProperty: false,
-        waits: false,
-        waitsFor: false,
-        xdescribe: false,
-        xit: false
-      },
-      jest: {
-        afterAll: false,
-        afterEach: false,
-        beforeAll: false,
-        beforeEach: false,
-        describe: false,
-        expect: false,
-        fit: false,
-        it: false,
-        jest: false,
-        test: false,
-        xdescribe: false,
-        xit: false,
-        xtest: false
+      wsh: {
+        ActiveXObject: true,
+        Enumerator: true,
+        GetObject: true,
+        ScriptEngine: true,
+        ScriptEngineBuildVersion: true,
+        ScriptEngineMajorVersion: true,
+        ScriptEngineMinorVersion: true,
+        VBArray: true,
+        WScript: true,
+        WSH: true,
+        XDomainRequest: true
       },
       jquery: {
         $: false,
         jQuery: false
       },
+      yui: {
+        YAHOO: false,
+        YAHOO_config: false,
+        YUI: false,
+        YUI_config: false
+      },
+      shelljs: {
+        cat: false,
+        cd: false,
+        chmod: false,
+        config: false,
+        cp: false,
+        dirs: false,
+        echo: false,
+        env: false,
+        error: false,
+        exec: false,
+        exit: false,
+        find: false,
+        grep: false,
+        ln: false,
+        ls: false,
+        mkdir: false,
+        mv: false,
+        popd: false,
+        pushd: false,
+        pwd: false,
+        rm: false,
+        sed: false,
+        set: false,
+        target: false,
+        tempdir: false,
+        test: false,
+        touch: false,
+        which: false
+      },
+      prototypejs: {
+        $: false,
+        $$: false,
+        $A: false,
+        $break: false,
+        $continue: false,
+        $F: false,
+        $H: false,
+        $R: false,
+        $w: false,
+        Abstract: false,
+        Ajax: false,
+        Autocompleter: false,
+        Builder: false,
+        Class: false,
+        Control: false,
+        Draggable: false,
+        Draggables: false,
+        Droppables: false,
+        Effect: false,
+        Element: false,
+        Enumerable: false,
+        Event: false,
+        Field: false,
+        Form: false,
+        Hash: false,
+        Insertion: false,
+        ObjectRange: false,
+        PeriodicalExecuter: false,
+        Position: false,
+        Prototype: false,
+        Scriptaculous: false,
+        Selector: false,
+        Sortable: false,
+        SortableObserver: false,
+        Sound: false,
+        Template: false,
+        Toggle: false,
+        Try: false
+      },
       meteor: {
+        _: false,
         $: false,
         Accounts: false,
         AccountsClient: false,
@@ -5122,28 +4357,6 @@ var require_globals = __commonJS({
         WebApp: false,
         WebAppInternals: false
       },
-      mocha: {
-        after: false,
-        afterEach: false,
-        before: false,
-        beforeEach: false,
-        context: false,
-        describe: false,
-        it: false,
-        mocha: false,
-        run: false,
-        setup: false,
-        specify: false,
-        suite: false,
-        suiteSetup: false,
-        suiteTeardown: false,
-        teardown: false,
-        test: false,
-        xcontext: false,
-        xdescribe: false,
-        xit: false,
-        xspecify: false
-      },
       mongo: {
         _isWindows: false,
         _rand: false,
@@ -5177,219 +4390,139 @@ var require_globals = __commonJS({
         version: false,
         WriteResult: false
       },
-      nashorn: {
-        __DIR__: false,
-        __FILE__: false,
-        __LINE__: false,
-        com: false,
-        edu: false,
-        exit: false,
-        java: false,
-        Java: false,
-        javafx: false,
-        JavaImporter: false,
-        javax: false,
-        JSAdapter: false,
-        load: false,
-        loadWithNewGlobal: false,
-        org: false,
-        Packages: false,
-        print: false,
-        quit: false
-      },
-      node: {
-        __dirname: false,
-        __filename: false,
-        AbortController: false,
-        AbortSignal: false,
-        atob: false,
-        Blob: false,
-        BroadcastChannel: false,
-        btoa: false,
-        Buffer: false,
-        ByteLengthQueuingStrategy: false,
-        clearImmediate: false,
-        clearInterval: false,
-        clearTimeout: false,
-        CloseEvent: false,
-        CompressionStream: false,
-        console: false,
-        CountQueuingStrategy: false,
-        crypto: false,
-        Crypto: false,
-        CryptoKey: false,
-        CustomEvent: false,
-        DecompressionStream: false,
-        DOMException: false,
-        Event: false,
-        EventTarget: false,
-        exports: true,
-        fetch: false,
-        File: false,
-        FormData: false,
-        global: false,
-        Headers: false,
-        MessageChannel: false,
-        MessageEvent: false,
-        MessagePort: false,
-        module: false,
-        navigator: false,
-        Navigator: false,
-        performance: false,
-        Performance: false,
-        PerformanceEntry: false,
-        PerformanceMark: false,
-        PerformanceMeasure: false,
-        PerformanceObserver: false,
-        PerformanceObserverEntryList: false,
-        PerformanceResourceTiming: false,
-        process: false,
-        queueMicrotask: false,
-        ReadableByteStreamController: false,
-        ReadableStream: false,
-        ReadableStreamBYOBReader: false,
-        ReadableStreamBYOBRequest: false,
-        ReadableStreamDefaultController: false,
-        ReadableStreamDefaultReader: false,
-        Request: false,
-        require: false,
-        Response: false,
-        setImmediate: false,
-        setInterval: false,
-        setTimeout: false,
-        structuredClone: false,
-        SubtleCrypto: false,
-        TextDecoder: false,
-        TextDecoderStream: false,
-        TextEncoder: false,
-        TextEncoderStream: false,
-        TransformStream: false,
-        TransformStreamDefaultController: false,
-        URL: false,
-        URLSearchParams: false,
-        WebAssembly: false,
-        WebSocket: false,
-        WritableStream: false,
-        WritableStreamDefaultController: false,
-        WritableStreamDefaultWriter: false
-      },
-      nodeBuiltin: {
-        AbortController: false,
-        AbortSignal: false,
-        atob: false,
-        Blob: false,
-        BroadcastChannel: false,
-        btoa: false,
-        Buffer: false,
-        ByteLengthQueuingStrategy: false,
-        clearImmediate: false,
-        clearInterval: false,
-        clearTimeout: false,
-        CloseEvent: false,
-        CompressionStream: false,
-        console: false,
-        CountQueuingStrategy: false,
-        crypto: false,
-        Crypto: false,
-        CryptoKey: false,
-        CustomEvent: false,
-        DecompressionStream: false,
-        DOMException: false,
-        Event: false,
-        EventTarget: false,
-        fetch: false,
-        File: false,
-        FormData: false,
-        global: false,
-        Headers: false,
-        MessageChannel: false,
-        MessageEvent: false,
-        MessagePort: false,
-        navigator: false,
-        Navigator: false,
-        performance: false,
-        Performance: false,
-        PerformanceEntry: false,
-        PerformanceMark: false,
-        PerformanceMeasure: false,
-        PerformanceObserver: false,
-        PerformanceObserverEntryList: false,
-        PerformanceResourceTiming: false,
-        process: false,
-        queueMicrotask: false,
-        ReadableByteStreamController: false,
-        ReadableStream: false,
-        ReadableStreamBYOBReader: false,
-        ReadableStreamBYOBRequest: false,
-        ReadableStreamDefaultController: false,
-        ReadableStreamDefaultReader: false,
-        Request: false,
-        Response: false,
-        setImmediate: false,
-        setInterval: false,
-        setTimeout: false,
-        structuredClone: false,
-        SubtleCrypto: false,
-        TextDecoder: false,
-        TextDecoderStream: false,
-        TextEncoder: false,
-        TextEncoderStream: false,
-        TransformStream: false,
-        TransformStreamDefaultController: false,
-        URL: false,
-        URLSearchParams: false,
-        WebAssembly: false,
-        WebSocket: false,
-        WritableStream: false,
-        WritableStreamDefaultController: false,
-        WritableStreamDefaultWriter: false
-      },
-      phantomjs: {
-        console: true,
-        exports: true,
-        phantom: true,
-        require: true,
-        WebPage: true
-      },
-      prototypejs: {
+      applescript: {
         $: false,
-        $$: false,
-        $A: false,
-        $break: false,
-        $continue: false,
-        $F: false,
-        $H: false,
-        $R: false,
-        $w: false,
-        Abstract: false,
-        Ajax: false,
-        Autocompleter: false,
-        Builder: false,
-        Class: false,
-        Control: false,
-        Draggable: false,
-        Draggables: false,
-        Droppables: false,
-        Effect: false,
-        Element: false,
-        Enumerable: false,
-        Event: false,
-        Field: false,
-        Form: false,
-        Hash: false,
-        Insertion: false,
-        ObjectRange: false,
-        PeriodicalExecuter: false,
-        Position: false,
-        Prototype: false,
-        Scriptaculous: false,
-        Selector: false,
-        Sortable: false,
-        SortableObserver: false,
-        Sound: false,
-        Template: false,
-        Toggle: false,
-        Try: false
+        Application: false,
+        Automation: false,
+        console: false,
+        delay: false,
+        Library: false,
+        ObjC: false,
+        ObjectSpecifier: false,
+        Path: false,
+        Progress: false,
+        Ref: false
+      },
+      serviceworker: {
+        addEventListener: false,
+        applicationCache: false,
+        atob: false,
+        Blob: false,
+        BroadcastChannel: false,
+        btoa: false,
+        Cache: false,
+        caches: false,
+        CacheStorage: false,
+        clearInterval: false,
+        clearTimeout: false,
+        Client: false,
+        clients: false,
+        Clients: false,
+        close: true,
+        console: false,
+        ExtendableEvent: false,
+        ExtendableMessageEvent: false,
+        fetch: false,
+        FetchEvent: false,
+        FileReaderSync: false,
+        FormData: false,
+        Headers: false,
+        IDBCursor: false,
+        IDBCursorWithValue: false,
+        IDBDatabase: false,
+        IDBFactory: false,
+        IDBIndex: false,
+        IDBKeyRange: false,
+        IDBObjectStore: false,
+        IDBOpenDBRequest: false,
+        IDBRequest: false,
+        IDBTransaction: false,
+        IDBVersionChangeEvent: false,
+        ImageData: false,
+        importScripts: false,
+        indexedDB: false,
+        location: false,
+        MessageChannel: false,
+        MessagePort: false,
+        name: false,
+        navigator: false,
+        Notification: false,
+        onclose: true,
+        onconnect: true,
+        onerror: true,
+        onfetch: true,
+        oninstall: true,
+        onlanguagechange: true,
+        onmessage: true,
+        onmessageerror: true,
+        onnotificationclick: true,
+        onnotificationclose: true,
+        onoffline: true,
+        ononline: true,
+        onpush: true,
+        onpushsubscriptionchange: true,
+        onrejectionhandled: true,
+        onsync: true,
+        onunhandledrejection: true,
+        performance: false,
+        Performance: false,
+        PerformanceEntry: false,
+        PerformanceMark: false,
+        PerformanceMeasure: false,
+        PerformanceNavigation: false,
+        PerformanceResourceTiming: false,
+        PerformanceTiming: false,
+        postMessage: true,
+        Promise: false,
+        queueMicrotask: false,
+        registration: false,
+        removeEventListener: false,
+        Request: false,
+        Response: false,
+        self: false,
+        ServiceWorker: false,
+        ServiceWorkerContainer: false,
+        ServiceWorkerGlobalScope: false,
+        ServiceWorkerMessageEvent: false,
+        ServiceWorkerRegistration: false,
+        setInterval: false,
+        setTimeout: false,
+        skipWaiting: false,
+        TextDecoder: false,
+        TextEncoder: false,
+        URL: false,
+        URLSearchParams: false,
+        WebSocket: false,
+        WindowClient: false,
+        Worker: false,
+        WorkerGlobalScope: false,
+        XMLHttpRequest: false
+      },
+      atomtest: {
+        advanceClock: false,
+        fakeClearInterval: false,
+        fakeClearTimeout: false,
+        fakeSetInterval: false,
+        fakeSetTimeout: false,
+        resetTimeouts: false,
+        waitsForPromise: false
+      },
+      embertest: {
+        andThen: false,
+        click: false,
+        currentPath: false,
+        currentRouteName: false,
+        currentURL: false,
+        fillIn: false,
+        find: false,
+        findAll: false,
+        findWithAssert: false,
+        keyEvent: false,
+        pauseTest: false,
+        resumeTest: false,
+        triggerEvent: false,
+        visit: false,
+        wait: false
       },
       protractor: {
         $: false,
@@ -5401,789 +4534,110 @@ var require_globals = __commonJS({
         element: false,
         protractor: false
       },
-      qunit: {
-        asyncTest: false,
-        deepEqual: false,
-        equal: false,
-        expect: false,
-        module: false,
-        notDeepEqual: false,
-        notEqual: false,
-        notOk: false,
-        notPropEqual: false,
-        notStrictEqual: false,
-        ok: false,
-        propEqual: false,
-        QUnit: false,
-        raises: false,
-        start: false,
-        stop: false,
-        strictEqual: false,
-        test: false,
-        throws: false
-      },
-      rhino: {
-        defineClass: false,
-        deserialize: false,
-        gc: false,
-        help: false,
-        importClass: false,
-        importPackage: false,
-        java: false,
-        load: false,
-        loadClass: false,
-        Packages: false,
-        print: false,
-        quit: false,
-        readFile: false,
-        readUrl: false,
-        runCommand: false,
-        seal: false,
-        serialize: false,
-        spawn: false,
-        sync: false,
-        toint32: false,
-        version: false
-      },
-      serviceworker: {
-        AbortController: false,
-        AbortPaymentEvent: false,
-        AbortSignal: false,
-        addEventListener: false,
-        atob: false,
-        BackgroundFetchEvent: false,
-        BackgroundFetchManager: false,
-        BackgroundFetchRecord: false,
-        BackgroundFetchRegistration: false,
-        BackgroundFetchUpdateUIEvent: false,
-        BarcodeDetector: false,
-        Blob: false,
-        BroadcastChannel: false,
-        btoa: false,
-        ByteLengthQueuingStrategy: false,
-        Cache: false,
-        caches: false,
-        CacheStorage: false,
-        CanMakePaymentEvent: false,
-        CanvasGradient: false,
-        CanvasPattern: false,
-        clearInterval: false,
-        clearTimeout: false,
-        Client: false,
-        clients: false,
-        Clients: false,
-        CloseEvent: false,
-        CompressionStream: false,
-        console: false,
-        cookieStore: false,
-        CookieStore: false,
-        CookieStoreManager: false,
-        CountQueuingStrategy: false,
-        createImageBitmap: false,
-        CropTarget: false,
-        crossOriginIsolated: false,
-        crypto: false,
-        Crypto: false,
-        CryptoKey: false,
-        CSSSkewX: false,
-        CSSSkewY: false,
-        CustomEvent: false,
-        DecompressionStream: false,
-        dispatchEvent: false,
-        DOMException: false,
-        DOMMatrix: false,
-        DOMMatrixReadOnly: false,
-        DOMPoint: false,
-        DOMPointReadOnly: false,
-        DOMQuad: false,
-        DOMRect: false,
-        DOMRectReadOnly: false,
-        DOMStringList: false,
-        ErrorEvent: false,
-        Event: false,
-        EventSource: false,
-        EventTarget: false,
-        ExtendableCookieChangeEvent: false,
-        ExtendableEvent: false,
-        ExtendableMessageEvent: false,
-        fetch: false,
-        FetchEvent: false,
-        File: false,
-        FileList: false,
-        FileReader: false,
-        FileSystemDirectoryHandle: false,
-        FileSystemFileHandle: false,
-        FileSystemHandle: false,
-        FileSystemWritableFileStream: false,
-        FontFace: false,
-        fonts: false,
-        FormData: false,
-        GPU: false,
-        GPUAdapter: false,
-        GPUAdapterInfo: false,
-        GPUBindGroup: false,
-        GPUBindGroupLayout: false,
-        GPUBuffer: false,
-        GPUBufferUsage: false,
-        GPUCanvasContext: false,
-        GPUColorWrite: false,
-        GPUCommandBuffer: false,
-        GPUCommandEncoder: false,
-        GPUCompilationInfo: false,
-        GPUCompilationMessage: false,
-        GPUComputePassEncoder: false,
-        GPUComputePipeline: false,
-        GPUDevice: false,
-        GPUDeviceLostInfo: false,
-        GPUError: false,
-        GPUExternalTexture: false,
-        GPUInternalError: false,
-        GPUMapMode: false,
-        GPUOutOfMemoryError: false,
-        GPUPipelineError: false,
-        GPUPipelineLayout: false,
-        GPUQuerySet: false,
-        GPUQueue: false,
-        GPURenderBundle: false,
-        GPURenderBundleEncoder: false,
-        GPURenderPassEncoder: false,
-        GPURenderPipeline: false,
-        GPUSampler: false,
-        GPUShaderModule: false,
-        GPUShaderStage: false,
-        GPUSupportedFeatures: false,
-        GPUSupportedLimits: false,
-        GPUTexture: false,
-        GPUTextureUsage: false,
-        GPUTextureView: false,
-        GPUUncapturedErrorEvent: false,
-        GPUValidationError: false,
-        Headers: false,
-        IDBCursor: false,
-        IDBCursorWithValue: false,
-        IDBDatabase: false,
-        IDBFactory: false,
-        IDBIndex: false,
-        IDBKeyRange: false,
-        IDBObjectStore: false,
-        IDBOpenDBRequest: false,
-        IDBRequest: false,
-        IDBTransaction: false,
-        IDBVersionChangeEvent: false,
-        ImageBitmap: false,
-        ImageBitmapRenderingContext: false,
-        ImageData: false,
-        importScripts: false,
-        indexedDB: false,
-        InstallEvent: false,
-        isSecureContext: false,
-        location: false,
-        Lock: false,
-        LockManager: false,
-        MediaCapabilities: false,
-        MessageChannel: false,
-        MessageEvent: false,
-        MessagePort: false,
-        NavigationPreloadManager: false,
-        navigator: false,
-        NavigatorUAData: false,
-        NetworkInformation: false,
-        Notification: false,
-        NotificationEvent: false,
-        OffscreenCanvas: false,
-        OffscreenCanvasRenderingContext2D: false,
-        onabortpayment: true,
-        onactivate: true,
-        onbackgroundfetchabort: true,
-        onbackgroundfetchclick: true,
-        onbackgroundfetchfail: true,
-        onbackgroundfetchsuccess: true,
-        oncanmakepayment: true,
-        oncookiechange: true,
-        onerror: true,
-        onfetch: true,
-        oninstall: true,
-        onlanguagechange: true,
-        onmessage: true,
-        onmessageerror: true,
-        onnotificationclick: true,
-        onnotificationclose: true,
-        onpaymentrequest: true,
-        onperiodicsync: true,
-        onpush: true,
-        onpushsubscriptionchange: true,
-        onrejectionhandled: true,
-        onsync: true,
-        onunhandledrejection: true,
-        origin: false,
-        Path2D: false,
-        PaymentRequestEvent: false,
-        performance: false,
-        Performance: false,
-        PerformanceEntry: false,
-        PerformanceMark: false,
-        PerformanceMeasure: false,
-        PerformanceObserver: false,
-        PerformanceObserverEntryList: false,
-        PerformanceResourceTiming: false,
-        PerformanceServerTiming: false,
-        PeriodicSyncEvent: false,
-        PeriodicSyncManager: false,
-        Permissions: false,
-        PermissionStatus: false,
-        PromiseRejectionEvent: false,
-        PushEvent: false,
-        PushManager: false,
-        PushMessageData: false,
-        PushSubscription: false,
-        PushSubscriptionOptions: false,
-        queueMicrotask: false,
-        ReadableByteStreamController: false,
-        ReadableStream: false,
-        ReadableStreamBYOBReader: false,
-        ReadableStreamBYOBRequest: false,
-        ReadableStreamDefaultController: false,
-        ReadableStreamDefaultReader: false,
-        registration: false,
-        removeEventListener: false,
-        reportError: false,
-        ReportingObserver: false,
-        Request: false,
-        Response: false,
-        scheduler: false,
-        Scheduler: false,
-        SecurityPolicyViolationEvent: false,
-        self: false,
-        serviceWorker: false,
-        ServiceWorker: false,
-        ServiceWorkerGlobalScope: false,
-        ServiceWorkerRegistration: false,
-        setInterval: false,
-        setTimeout: false,
-        skipWaiting: false,
-        StorageBucket: false,
-        StorageBucketManager: false,
-        StorageManager: false,
-        structuredClone: false,
-        SubtleCrypto: false,
-        SyncEvent: false,
-        SyncManager: false,
-        TaskController: false,
-        TaskPriorityChangeEvent: false,
-        TaskSignal: false,
-        TextDecoder: false,
-        TextDecoderStream: false,
-        TextEncoder: false,
-        TextEncoderStream: false,
-        TextMetrics: false,
-        TransformStream: false,
-        TransformStreamDefaultController: false,
-        TrustedHTML: false,
-        TrustedScript: false,
-        TrustedScriptURL: false,
-        TrustedTypePolicy: false,
-        TrustedTypePolicyFactory: false,
-        trustedTypes: false,
-        URL: false,
-        URLPattern: false,
-        URLSearchParams: false,
-        UserActivation: false,
-        WebAssembly: false,
-        WebGL2RenderingContext: false,
-        WebGLActiveInfo: false,
-        WebGLBuffer: false,
-        WebGLContextEvent: false,
-        WebGLFramebuffer: false,
-        WebGLObject: false,
-        WebGLProgram: false,
-        WebGLQuery: false,
-        WebGLRenderbuffer: false,
-        WebGLRenderingContext: false,
-        WebGLSampler: false,
-        WebGLShader: false,
-        WebGLShaderPrecisionFormat: false,
-        WebGLSync: false,
-        WebGLTexture: false,
-        WebGLTransformFeedback: false,
-        WebGLUniformLocation: false,
-        WebGLVertexArrayObject: false,
-        WebSocket: false,
-        WebSocketError: false,
-        WebSocketStream: false,
-        WebTransport: false,
-        WebTransportBidirectionalStream: false,
-        WebTransportDatagramDuplexStream: false,
-        WebTransportError: false,
-        WGSLLanguageFeatures: false,
-        WindowClient: false,
-        WorkerGlobalScope: false,
-        WorkerLocation: false,
-        WorkerNavigator: false,
-        WritableStream: false,
-        WritableStreamDefaultController: false,
-        WritableStreamDefaultWriter: false
-      },
       "shared-node-browser": {
-        AbortController: false,
-        AbortSignal: false,
-        atob: false,
-        Blob: false,
-        BroadcastChannel: false,
-        btoa: false,
-        ByteLengthQueuingStrategy: false,
         clearInterval: false,
         clearTimeout: false,
-        CloseEvent: false,
-        CompressionStream: false,
         console: false,
-        CountQueuingStrategy: false,
-        crypto: false,
-        Crypto: false,
-        CryptoKey: false,
-        CustomEvent: false,
-        DecompressionStream: false,
-        DOMException: false,
-        Event: false,
-        EventTarget: false,
-        fetch: false,
-        File: false,
-        FormData: false,
-        Headers: false,
-        MessageChannel: false,
-        MessageEvent: false,
-        MessagePort: false,
-        navigator: false,
-        Navigator: false,
-        performance: false,
-        Performance: false,
-        PerformanceEntry: false,
-        PerformanceMark: false,
-        PerformanceMeasure: false,
-        PerformanceObserver: false,
-        PerformanceObserverEntryList: false,
-        PerformanceResourceTiming: false,
-        queueMicrotask: false,
-        ReadableByteStreamController: false,
-        ReadableStream: false,
-        ReadableStreamBYOBReader: false,
-        ReadableStreamBYOBRequest: false,
-        ReadableStreamDefaultController: false,
-        ReadableStreamDefaultReader: false,
-        Request: false,
-        Response: false,
         setInterval: false,
         setTimeout: false,
-        structuredClone: false,
-        SubtleCrypto: false,
-        TextDecoder: false,
-        TextDecoderStream: false,
-        TextEncoder: false,
-        TextEncoderStream: false,
-        TransformStream: false,
-        TransformStreamDefaultController: false,
         URL: false,
-        URLSearchParams: false,
-        WebAssembly: false,
-        WebSocket: false,
-        WritableStream: false,
-        WritableStreamDefaultController: false,
-        WritableStreamDefaultWriter: false
-      },
-      shelljs: {
-        cat: false,
-        cd: false,
-        chmod: false,
-        config: false,
-        cp: false,
-        dirs: false,
-        echo: false,
-        env: false,
-        error: false,
-        exec: false,
-        exit: false,
-        find: false,
-        grep: false,
-        head: false,
-        ln: false,
-        ls: false,
-        mkdir: false,
-        mv: false,
-        popd: false,
-        pushd: false,
-        pwd: false,
-        rm: false,
-        sed: false,
-        set: false,
-        ShellString: false,
-        sort: false,
-        tail: false,
-        tempdir: false,
-        test: false,
-        touch: false,
-        uniq: false,
-        which: false
-      },
-      vitest: {
-        afterAll: false,
-        afterEach: false,
-        assert: false,
-        assertType: false,
-        beforeAll: false,
-        beforeEach: false,
-        chai: false,
-        describe: false,
-        expect: false,
-        expectTypeOf: false,
-        it: false,
-        onTestFailed: false,
-        onTestFinished: false,
-        suite: false,
-        test: false,
-        vi: false,
-        vitest: false
+        URLSearchParams: false
       },
       webextensions: {
         browser: false,
         chrome: false,
         opr: false
       },
-      worker: {
-        AbortController: false,
-        AbortSignal: false,
-        addEventListener: false,
-        ai: false,
-        atob: false,
-        AudioData: false,
-        AudioDecoder: false,
-        AudioEncoder: false,
-        BackgroundFetchManager: false,
-        BackgroundFetchRecord: false,
-        BackgroundFetchRegistration: false,
-        BarcodeDetector: false,
-        Blob: false,
-        BroadcastChannel: false,
-        btoa: false,
-        ByteLengthQueuingStrategy: false,
-        Cache: false,
-        caches: false,
-        CacheStorage: false,
-        cancelAnimationFrame: false,
-        CanvasGradient: false,
-        CanvasPattern: false,
-        clearInterval: false,
-        clearTimeout: false,
-        close: false,
-        CloseEvent: false,
-        CompressionStream: false,
-        console: false,
-        CountQueuingStrategy: false,
-        createImageBitmap: false,
-        CropTarget: false,
-        crossOriginIsolated: false,
-        crypto: false,
-        Crypto: false,
-        CryptoKey: false,
-        CSSSkewX: false,
-        CSSSkewY: false,
-        CustomEvent: false,
-        DecompressionStream: false,
-        DedicatedWorkerGlobalScope: false,
-        dispatchEvent: false,
-        DOMException: false,
-        DOMMatrix: false,
-        DOMMatrixReadOnly: false,
-        DOMPoint: false,
-        DOMPointReadOnly: false,
-        DOMQuad: false,
-        DOMRect: false,
-        DOMRectReadOnly: false,
-        DOMStringList: false,
-        EncodedAudioChunk: false,
-        EncodedVideoChunk: false,
-        ErrorEvent: false,
-        Event: false,
-        EventSource: false,
-        EventTarget: false,
-        fetch: false,
-        File: false,
-        FileList: false,
-        FileReader: false,
-        FileReaderSync: false,
-        FileSystemDirectoryHandle: false,
-        FileSystemFileHandle: false,
-        FileSystemHandle: false,
-        FileSystemSyncAccessHandle: false,
-        FileSystemWritableFileStream: false,
-        FontFace: false,
-        fonts: false,
-        FormData: false,
-        GPU: false,
-        GPUAdapter: false,
-        GPUAdapterInfo: false,
-        GPUBindGroup: false,
-        GPUBindGroupLayout: false,
-        GPUBuffer: false,
-        GPUBufferUsage: false,
-        GPUCanvasContext: false,
-        GPUColorWrite: false,
-        GPUCommandBuffer: false,
-        GPUCommandEncoder: false,
-        GPUCompilationInfo: false,
-        GPUCompilationMessage: false,
-        GPUComputePassEncoder: false,
-        GPUComputePipeline: false,
-        GPUDevice: false,
-        GPUDeviceLostInfo: false,
-        GPUError: false,
-        GPUExternalTexture: false,
-        GPUInternalError: false,
-        GPUMapMode: false,
-        GPUOutOfMemoryError: false,
-        GPUPipelineError: false,
-        GPUPipelineLayout: false,
-        GPUQuerySet: false,
-        GPUQueue: false,
-        GPURenderBundle: false,
-        GPURenderBundleEncoder: false,
-        GPURenderPassEncoder: false,
-        GPURenderPipeline: false,
-        GPUSampler: false,
-        GPUShaderModule: false,
-        GPUShaderStage: false,
-        GPUSupportedFeatures: false,
-        GPUSupportedLimits: false,
-        GPUTexture: false,
-        GPUTextureUsage: false,
-        GPUTextureView: false,
-        GPUUncapturedErrorEvent: false,
-        GPUValidationError: false,
-        Headers: false,
-        HID: false,
-        HIDConnectionEvent: false,
-        HIDDevice: false,
-        HIDInputReportEvent: false,
-        IDBCursor: false,
-        IDBCursorWithValue: false,
-        IDBDatabase: false,
-        IDBFactory: false,
-        IDBIndex: false,
-        IDBKeyRange: false,
-        IDBObjectStore: false,
-        IDBOpenDBRequest: false,
-        IDBRequest: false,
-        IDBTransaction: false,
-        IDBVersionChangeEvent: false,
-        IdleDetector: false,
-        ImageBitmap: false,
-        ImageBitmapRenderingContext: false,
-        ImageData: false,
-        ImageDecoder: false,
-        ImageTrack: false,
-        ImageTrackList: false,
-        importScripts: false,
-        indexedDB: false,
-        isSecureContext: false,
-        location: false,
-        Lock: false,
-        LockManager: false,
-        MediaCapabilities: false,
-        MediaSource: false,
-        MediaSourceHandle: false,
-        MessageChannel: false,
-        MessageEvent: false,
-        MessagePort: false,
-        name: false,
-        NavigationPreloadManager: false,
-        navigator: false,
-        NavigatorUAData: false,
-        NetworkInformation: false,
-        Notification: false,
-        OffscreenCanvas: false,
-        OffscreenCanvasRenderingContext2D: false,
-        onerror: true,
-        onlanguagechange: true,
-        onmessage: true,
-        onmessageerror: true,
-        onrejectionhandled: true,
-        onunhandledrejection: true,
-        origin: false,
-        Path2D: false,
-        performance: false,
-        Performance: false,
-        PerformanceEntry: false,
-        PerformanceMark: false,
-        PerformanceMeasure: false,
-        PerformanceObserver: false,
-        PerformanceObserverEntryList: false,
-        PerformanceResourceTiming: false,
-        PerformanceServerTiming: false,
-        PeriodicSyncManager: false,
-        Permissions: false,
-        PermissionStatus: false,
-        PERSISTENT: false,
-        postMessage: false,
-        PressureObserver: false,
-        PressureRecord: false,
-        ProgressEvent: false,
-        PromiseRejectionEvent: false,
-        PushManager: false,
-        PushSubscription: false,
-        PushSubscriptionOptions: false,
-        queueMicrotask: false,
-        ReadableByteStreamController: false,
-        ReadableStream: false,
-        ReadableStreamBYOBReader: false,
-        ReadableStreamBYOBRequest: false,
-        ReadableStreamDefaultController: false,
-        ReadableStreamDefaultReader: false,
-        removeEventListener: false,
-        reportError: false,
-        ReportingObserver: false,
-        Request: false,
-        requestAnimationFrame: false,
-        Response: false,
-        RTCDataChannel: false,
-        RTCEncodedAudioFrame: false,
-        RTCEncodedVideoFrame: false,
-        scheduler: false,
-        Scheduler: false,
-        SecurityPolicyViolationEvent: false,
-        self: false,
-        Serial: false,
-        SerialPort: false,
-        ServiceWorkerRegistration: false,
-        setInterval: false,
-        setTimeout: false,
-        SourceBuffer: false,
-        SourceBufferList: false,
-        StorageBucket: false,
-        StorageBucketManager: false,
-        StorageManager: false,
-        structuredClone: false,
-        SubtleCrypto: false,
-        SyncManager: false,
-        TaskController: false,
-        TaskPriorityChangeEvent: false,
-        TaskSignal: false,
-        TEMPORARY: false,
-        TextDecoder: false,
-        TextDecoderStream: false,
-        TextEncoder: false,
-        TextEncoderStream: false,
-        TextMetrics: false,
-        TransformStream: false,
-        TransformStreamDefaultController: false,
-        TrustedHTML: false,
-        TrustedScript: false,
-        TrustedScriptURL: false,
-        TrustedTypePolicy: false,
-        TrustedTypePolicyFactory: false,
-        trustedTypes: false,
-        URL: false,
-        URLPattern: false,
-        URLSearchParams: false,
-        USB: false,
-        USBAlternateInterface: false,
-        USBConfiguration: false,
-        USBConnectionEvent: false,
-        USBDevice: false,
-        USBEndpoint: false,
-        USBInterface: false,
-        USBInTransferResult: false,
-        USBIsochronousInTransferPacket: false,
-        USBIsochronousInTransferResult: false,
-        USBIsochronousOutTransferPacket: false,
-        USBIsochronousOutTransferResult: false,
-        USBOutTransferResult: false,
-        UserActivation: false,
-        VideoColorSpace: false,
-        VideoDecoder: false,
-        VideoEncoder: false,
-        VideoFrame: false,
-        WebAssembly: false,
-        WebGL2RenderingContext: false,
-        WebGLActiveInfo: false,
-        WebGLBuffer: false,
-        WebGLContextEvent: false,
-        WebGLFramebuffer: false,
-        WebGLObject: false,
-        WebGLProgram: false,
-        WebGLQuery: false,
-        WebGLRenderbuffer: false,
-        WebGLRenderingContext: false,
-        WebGLSampler: false,
-        WebGLShader: false,
-        WebGLShaderPrecisionFormat: false,
-        WebGLSync: false,
-        WebGLTexture: false,
-        WebGLTransformFeedback: false,
-        WebGLUniformLocation: false,
-        WebGLVertexArrayObject: false,
-        webkitRequestFileSystem: false,
-        webkitRequestFileSystemSync: false,
-        webkitResolveLocalFileSystemSyncURL: false,
-        webkitResolveLocalFileSystemURL: false,
-        WebSocket: false,
-        WebSocketError: false,
-        WebSocketStream: false,
-        WebTransport: false,
-        WebTransportBidirectionalStream: false,
-        WebTransportDatagramDuplexStream: false,
-        WebTransportError: false,
-        WGSLLanguageFeatures: false,
-        Worker: false,
-        WorkerGlobalScope: false,
-        WorkerLocation: false,
-        WorkerNavigator: false,
-        WritableStream: false,
-        WritableStreamDefaultController: false,
-        WritableStreamDefaultWriter: false,
-        XMLHttpRequest: false,
-        XMLHttpRequestEventTarget: false,
-        XMLHttpRequestUpload: false
+      greasemonkey: {
+        cloneInto: false,
+        createObjectIn: false,
+        exportFunction: false,
+        GM: false,
+        GM_addStyle: false,
+        GM_deleteValue: false,
+        GM_getResourceText: false,
+        GM_getResourceURL: false,
+        GM_getValue: false,
+        GM_info: false,
+        GM_listValues: false,
+        GM_log: false,
+        GM_openInTab: false,
+        GM_registerMenuCommand: false,
+        GM_setClipboard: false,
+        GM_setValue: false,
+        GM_xmlhttpRequest: false,
+        unsafeWindow: false
       },
-      wsh: {
-        ActiveXObject: false,
-        CollectGarbage: false,
-        Debug: false,
-        Enumerator: false,
-        GetObject: false,
-        RuntimeObject: false,
-        ScriptEngine: false,
-        ScriptEngineBuildVersion: false,
-        ScriptEngineMajorVersion: false,
-        ScriptEngineMinorVersion: false,
-        VBArray: false,
-        WScript: false,
-        WSH: false
-      },
-      yui: {
-        YAHOO: false,
-        YAHOO_config: false,
-        YUI: false,
-        YUI_config: false
+      devtools: {
+        $: false,
+        $_: false,
+        $$: false,
+        $0: false,
+        $1: false,
+        $2: false,
+        $3: false,
+        $4: false,
+        $x: false,
+        chrome: false,
+        clear: false,
+        copy: false,
+        debug: false,
+        dir: false,
+        dirxml: false,
+        getEventListeners: false,
+        inspect: false,
+        keys: false,
+        monitor: false,
+        monitorEvents: false,
+        profile: false,
+        profileEnd: false,
+        queryObjects: false,
+        table: false,
+        undebug: false,
+        unmonitor: false,
+        unmonitorEvents: false,
+        values: false
       }
     };
   }
 });
 
-// node_modules/.pnpm/globals@16.0.0/node_modules/globals/index.js
+// node_modules/.pnpm/globals@11.12.0/node_modules/globals/index.js
 var require_globals2 = __commonJS({
-  "node_modules/.pnpm/globals@16.0.0/node_modules/globals/index.js"(exports, module) {
+  "node_modules/.pnpm/globals@11.12.0/node_modules/globals/index.js"(exports, module) {
     "use strict";
     module.exports = require_globals();
   }
 });
 
-// _build/eslint.config.mjs.json
+// __build__/eslint.config.mjs.json
 var require_eslint_config_mjs = __commonJS({
-  "_build/eslint.config.mjs.json"(exports, module) {
-    module.exports = { configFilename: "eslint.config.mjs", exclude: ["**/node_modules"], include: ["../packages/*/src/**/*.tsx", "../packages/*/src/**/*.ts", "../packages/*/src/**/*.jsx", "../packages/*/src/**/*.js", "../packages/*/tests/**/*.tsx", "../packages/*/tests/**/*.ts", "../packages/*/tests/**/*.jsx", "../packages/*/tests/**/*.js"], indentWidth: 2, isParenthesis: true, isSameLine: true, isSingleQuote: true, isSpacing: true, isTrailingComma: true, printWidth: 100, roots: ["..", "../packages/app-native-js", "../packages/app-web-admin-js", "../packages/app-web-js", "../packages/app-web-library-js", "../packages/app-web-template-js", "../packages/lib-backend-js", "../packages/lib-config-js", "../packages/lib-frontend-js", "../packages/lib-shared-js", "../packages/service-graphql-sandbox-js", "../packages/service-lambda-js", "../packages/service-server-js", "../packages/tool-task-js"], unusedIgnore: "^_" };
+  "__build__/eslint.config.mjs.json"(exports, module) {
+    module.exports = { configFilename: "eslint.config.mjs", exclude: ["**/node_modules"], include: ["/Users/yoongeemin/Developer/Projects/app/packages/*/src/**/*.tsx", "/Users/yoongeemin/Developer/Projects/app/packages/*/src/**/*.ts", "/Users/yoongeemin/Developer/Projects/app/packages/*/src/**/*.jsx", "/Users/yoongeemin/Developer/Projects/app/packages/*/src/**/*.js", "/Users/yoongeemin/Developer/Projects/app/packages/*/tests/**/*.tsx", "/Users/yoongeemin/Developer/Projects/app/packages/*/tests/**/*.ts", "/Users/yoongeemin/Developer/Projects/app/packages/*/tests/**/*.jsx", "/Users/yoongeemin/Developer/Projects/app/packages/*/tests/**/*.js"], indentWidth: 2, isParenthesis: true, isSameLine: true, isSingleQuote: true, isSpacing: true, isTrailingComma: true, printWidth: 100, unusedIgnore: "^_", workingDir: "/Users/yoongeemin/Developer/Projects/app/__dist__" };
   }
 });
 
 // packages/lib-config-js/src/node/lint/_lint.ts
 var import_js = __toESM(require_src(), 1);
+
+// packages/lib-shared-js/src/core/utils/filterNil/filterNil.ts
+var filterNil = /* @__PURE__ */ __name((params2) => params2?.filter(Boolean), "filterNil");
+
+// packages/lib-backend-js/src/file/utils/joinPaths/joinPaths.ts
+var import_trimStart = __toESM(require_trimStart(), 1);
+import { join } from "path";
+var joinPaths = /* @__PURE__ */ __name((...[paths, options]) => {
+  let path = join(...filterNil(paths));
+  options?.extension && (path = `${path}.${(0, import_trimStart.default)(options.extension, ".")}`);
+  return path;
+}, "joinPaths");
+
+// packages/lib-backend-js/src/file/utils/fromWorking/fromWorking.ts
+var fromWorking = /* @__PURE__ */ __name((...paths) => joinPaths([process.cwd(), ...paths]), "fromWorking");
+
+// packages/lib-backend-js/src/file/utils/toRelative/toRelative.ts
+import { relative } from "path";
+var toRelative = /* @__PURE__ */ __name(({ from = fromWorking(), to }) => relative(from, to), "toRelative");
 
 // packages/lib-shared-js/src/core/utils/trimValue/trimValue.ts
 var import_isArray = __toESM(require_isArray(), 1);
@@ -6215,10 +4669,15 @@ var _lint = /* @__PURE__ */ __name(({
   isSpacing,
   isTrailingComma,
   printWidth,
-  roots,
-  unusedIgnore
+  unusedIgnore,
+  workingDir = fromWorking()
 }) => typescriptPlugin.config(
-  { ignores: [`!(${include.join("|")})`, ...exclude] },
+  {
+    ignores: [
+      `!(${include.map((v) => toRelative({ from: workingDir, to: v })).join("|")})`,
+      ...exclude
+    ]
+  },
   import_js.default.configs.recommended,
   {
     rules: {
@@ -6262,6 +4721,7 @@ var _lint = /* @__PURE__ */ __name(({
   reactPlugin.configs.flat.recommended,
   {
     rules: {
+      ...reactPlugin.configs["jsx-runtime"].rules,
       "react/jsx-newline": "error",
       "react/jsx-sort-props": "error"
     }
@@ -6373,13 +4833,13 @@ var _lint = /* @__PURE__ */ __name(({
 var ESLINT_CONFIG_FILENAME = "eslint.config.mjs";
 var ESLINT_CONFIG_PARAMS_FILENAME = `${ESLINT_CONFIG_FILENAME}.json`;
 
-// import("../../../../../_build/**/*") in packages/lib-config-js/src/node/lint/eslint.config.ts
-var globImport__build = __glob({
-  "../../../../../_build/eslint.config.mjs.json": () => Promise.resolve().then(() => __toESM(require_eslint_config_mjs()))
+// import("../../../../../__build__/**/*") in packages/lib-config-js/src/node/lint/eslint.config.ts
+var globImport___build__ = __glob({
+  "../../../../../__build__/eslint.config.mjs.json": () => Promise.resolve().then(() => __toESM(require_eslint_config_mjs()))
 });
 
 // packages/lib-config-js/src/node/lint/eslint.config.ts
-var params = await globImport__build(`../../../../../_build/${ESLINT_CONFIG_PARAMS_FILENAME}`);
+var params = await globImport___build__(`../../../../../__build__/${ESLINT_CONFIG_PARAMS_FILENAME}`);
 var eslint_config_default = _lint(params);
 export {
   eslint_config_default as default
