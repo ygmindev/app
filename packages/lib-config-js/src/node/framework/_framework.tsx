@@ -1,6 +1,8 @@
 import { type _FrameworkConfigModel } from '@lib/config/node/framework/framework.models';
 
 export const _framework = (): _FrameworkConfigModel => ({
+  clientRouting: true,
+
   extends: ['import:vike-react/config:default'],
 
   hydrationCanBeAborted: true,

@@ -6,7 +6,6 @@ import {
 export const _publish = ({ assetsPathname, name }: PublishConfigModel): _PublishConfigModel => ({
   assets: assetsPathname
     ? {
-        binding: 'ASSETS',
         directory: assetsPathname,
       }
     : undefined,

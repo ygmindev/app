@@ -286,7 +286,8 @@ export const _bundle = ({
 
       extensions,
 
-      preserveSymlinks: true,
+      // preserveSymlinks: true,
+      // TODO: enabling this causes https://vike.dev/client-runtime-duplicated
     },
 
     root: fromWorking(),
