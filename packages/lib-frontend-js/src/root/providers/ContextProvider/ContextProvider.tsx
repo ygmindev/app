@@ -12,7 +12,7 @@ export const ContextProvider = composeComponent<
   ContextProviderPropsModel,
   RequiredModel<ProviderPropsModel<RootContextModel>>
 >({
-  Component: rootContext.Provider,
+  Component: rootContext,
 });
 
 process.env.APP_IS_DEBUG && (ContextProvider.displayName = variableName({ ContextProvider }));
