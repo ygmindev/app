@@ -7,13 +7,15 @@ import { buildApp } from '@lib/shared/web/utils/buildApp/buildApp';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { runClean } from '@tool/task/core/utils/runClean/runClean';
 import { copy } from '@tool/task/file/utils/copy/copy';
+import buildConfigLint from '@tool/task/node/tasks/buildConfigLint/buildConfigLint.task';
+import buildConfigTypescript from '@tool/task/node/tasks/buildConfigTypescript/buildConfigTypescript.task';
 
 export const build: TaskParamsModel<unknown> = {
   environment: ENVIRONMENT.PRODUCTION,
 
   name: 'build',
 
-  onBefore: ['build-config-typescript', 'build-config-lint'],
+  onBefore: [buildConfigTypescript.name, buildConfigLint.name],
 
   task: [
     async () => runClean({ patterns: [BUILD_DIR] }),
