@@ -1,6 +1,6 @@
 import themeConfigBase from '@lib/config/theme/theme.base';
 import { THEME_COLOR_TONES } from '@lib/config/theme/theme.constants';
-import { type _ThemeConfigModel, type ThemeConfigModel } from '@lib/config/theme/theme.models';
+import { type ThemeConfigModel } from '@lib/config/theme/theme.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { THEME_COLOR, THEME_COLOR_MORE, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { type ThemeColorModel, type ThemeRoleModel } from '@lib/frontend/style/style.models';
@@ -16,7 +16,7 @@ const LIGHTNESS_THEME_CONTRAST = 0.2;
 const LIGHTNESS_THEME_MUTED = 0.3;
 const LIGHTNESS_SURFACE_MUTED = 0.9;
 
-export const config = defineConfig<ThemeConfigModel, _ThemeConfigModel>({
+export const config = defineConfig<ThemeConfigModel>({
   ...themeConfigBase,
 
   overrides: () => [

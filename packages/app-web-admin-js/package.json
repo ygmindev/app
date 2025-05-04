@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@egjs/react-infinitegrid": "^4.12.0",
+    "@expo/vector-icons": "^14.1.0",
     "@floating-ui/react": "^0.27.8",
     "@floating-ui/react-dom": "^2.1.2",
     "@lexical/react": "^0.30.0",

@@ -1,11 +1,25 @@
-import { _Portal } from '@lib/frontend/core/components/Portal/_Portal';
-import { type _PortalPropsModel } from '@lib/frontend/core/components/Portal/_Portal.models';
 import { type PortalPropsModel } from '@lib/frontend/core/components/Portal/Portal.models';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import { type FCModel } from '@lib/frontend/core/core.models';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
+import { remove } from '@lib/shared/core/utils/remove/remove';
+import { uid } from '@lib/shared/core/utils/uid/uid';
+import { useEffect, useMemo } from 'react';
 
-export const Portal = composeComponent<PortalPropsModel, _PortalPropsModel>({
-  Component: _Portal,
-});
+export const Portal: FCModel<PortalPropsModel> = ({ children, root = 'root' }) => {
+  const [portals, portalsSet] = useStore('app.portals');
+  const name = useMemo(() => uid(), []);
 
-process.env.APP_IS_DEBUG && (Portal.displayName = variableName({ Portal }));
+  useEffect(() => {
+    portalsSet({
+      ...portals,
+      [root]: [...(portals?.[root] ?? []), { name, node: children }],
+    });
+    return () =>
+      portalsSet({
+        ...portals,
+        [root]: remove(portals?.[root] ?? [], (v) => v.name === name),
+      });
+  }, []);
+
+  return null;
+};

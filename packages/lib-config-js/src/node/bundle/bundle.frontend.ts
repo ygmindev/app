@@ -72,7 +72,6 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
         filterNil([
           '@egjs/react-infinitegrid',
           '@expo/react-native-action-sheet',
-          '@expo/vector-icons',
           'countries-list',
           'css-in-js-utils',
           'expo-linear-gradient',
@@ -82,7 +81,10 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
           'redux-persist',
           // TODO: fix?
           process.env.NODE_ENV === 'production' && 'inversify-react',
-          ...fromGlobs(['react-native-!(codegen|gradle-plugin)'], { root: fromModules() }),
+          ...fromGlobs(['react-native-!(codegen|gradle-plugin|web)'], {
+            root: fromModules(),
+          }),
+          ...fromGlobs(['@react-native-'], { root: fromModules() }),
         ]) ?? [],
 
       watch: [fromPackages('lib-frontend-js/src/**/*')],

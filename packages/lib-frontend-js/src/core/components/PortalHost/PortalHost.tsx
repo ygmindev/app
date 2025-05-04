@@ -1,11 +1,14 @@
-import { _PortalHost } from '@lib/frontend/core/components/PortalHost/_PortalHost';
-import { type _PortalHostPropsModel } from '@lib/frontend/core/components/PortalHost/_PortalHost.models';
 import { type PortalHostPropsModel } from '@lib/frontend/core/components/PortalHost/PortalHost.models';
-import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
+import { type FCModel } from '@lib/frontend/core/core.models';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
-export const PortalHost = composeComponent<PortalHostPropsModel, _PortalHostPropsModel>({
-  Component: _PortalHost,
-});
+export const PortalHost: FCModel<PortalHostPropsModel> = ({ children, root = 'root' }) => {
+  const [portals] = useStore('app.portals');
+  return (
+    <>
+      {(portals?.[root] ?? []).map(({ node }) => node)}
 
-process.env.APP_IS_DEBUG && (PortalHost.displayName = variableName({ PortalHost }));
+      {children}
+    </>
+  );
+};

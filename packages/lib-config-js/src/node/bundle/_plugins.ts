@@ -39,7 +39,10 @@ export const _plugins = ({
   rootDirs,
   transpileModules,
   transpilePatterns,
-}: Pick<BundleConfigModel, 'externals' | 'format' | 'rootDirs' | 'transpileModules' | 'transpilePatterns'>): Array<Plugin> =>
+}: Pick<
+  BundleConfigModel,
+  'externals' | 'format' | 'rootDirs' | 'transpileModules' | 'transpilePatterns'
+>): Array<Plugin> =>
   filterNil([
     {
       name: 'js-to-jsx',
@@ -61,8 +64,9 @@ export const _plugins = ({
 
     (esbuildFlowPlugin as () => unknown)() as Plugin,
 
-    externals && nodeExternalsPlugin({
-      allowList: [...(transpileModules ?? []), ...(transpilePatterns ?? [])],
-      packagePath: rootDirs?.map((path) => joinPaths([path, 'package.json'])),
-    }),
+    externals &&
+      nodeExternalsPlugin({
+        allowList: [...(transpileModules ?? []), ...(transpilePatterns ?? [])],
+        packagePath: rootDirs?.map((path) => joinPaths([path, 'package.json'])),
+      }),
   ]) as Array<Plugin>;

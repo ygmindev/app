@@ -84,6 +84,7 @@ export const _lint = ({
         ...reactPlugin.configs['jsx-runtime'].rules,
         'react/jsx-newline': 'error',
         'react/jsx-sort-props': 'error',
+        'react/prop-types': 'off',
       },
     },
 

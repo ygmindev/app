@@ -1,4 +1,7 @@
-import { type ScrollTypeModel } from '@lib/frontend/core/components/View/View.models';
+import {
+  type PointerEventsModel,
+  type ScrollTypeModel,
+} from '@lib/frontend/core/components/View/View.models';
 import {
   type ChildrenPropsModel,
   type MeasureModel,
@@ -23,6 +26,7 @@ export type _ViewPropsModel = ChildrenPropsModel &
     onResponderGrant?(): void;
     onResponderRelease?(): void;
     onScroll?(position: PositionModel): void;
+    pointerEvents?: PointerEventsModel;
     scrollType?: ScrollTypeModel;
   };
 

@@ -1,3 +1,5 @@
-import { type _PortalHostPropsModel } from '@lib/frontend/core/components/PortalHost/_PortalHost.models';
+import { type ChildrenPropsModel } from '@lib/frontend/core/core.models';
 
-export type PortalHostPropsModel = _PortalHostPropsModel;
+export type PortalHostPropsModel = ChildrenPropsModel & {
+  root?: string;
+};

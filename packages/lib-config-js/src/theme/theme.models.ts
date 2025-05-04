@@ -7,7 +7,6 @@ import {
 } from '@lib/frontend/style/style.models';
 import { type FontFamilyModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import { type TextStyle } from 'react-native';
-import { type MD3Theme } from 'react-native-paper';
 
 export type ThemeConfigModel = {
   animation: {
@@ -88,5 +87,3 @@ export type ThemeConfigModel = {
     spacing: Record<ThemeSizeModel, number>;
   };
 };
-
-export type _ThemeConfigModel = MD3Theme;

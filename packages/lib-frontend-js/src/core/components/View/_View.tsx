@@ -27,6 +27,7 @@ export const getViewParams = (): ComposeComponentParamsModel<
     onPressOut,
     onResponderGrant,
     onResponderRelease,
+    pointerEvents,
   }) => ({
     children,
 
@@ -51,7 +52,7 @@ export const getViewParams = (): ComposeComponentParamsModel<
 
     onResponderRelease: () => onResponderRelease?.(),
 
-    pointerEvents: isHidden ? 'none' : undefined,
+    pointerEvents: isHidden ? 'none' : pointerEvents,
   }),
 });
 

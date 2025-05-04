@@ -1,6 +1,5 @@
-import { _theme } from '@lib/config/theme/_theme';
 import { THEME_ANIMATION, THEME_COLOR_TONES } from '@lib/config/theme/theme.constants';
-import { type _ThemeConfigModel, type ThemeConfigModel } from '@lib/config/theme/theme.models';
+import { type ThemeConfigModel } from '@lib/config/theme/theme.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import {
   THEME_COLOR,
@@ -22,9 +21,7 @@ const LIGHTNESS_ACTIVE = 0.4;
 const LIGHTNESS_THEME_MUTED = 0.85;
 const LIGHTNESS_SURFACE_MUTED = 0.9;
 
-export const config = defineConfig<ThemeConfigModel, _ThemeConfigModel>({
-  config: _theme,
-
+export const config = defineConfig<ThemeConfigModel>({
   params: () => ({
     animation: THEME_ANIMATION,
 
