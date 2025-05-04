@@ -10,8 +10,6 @@ export type WebConfigModel = {
 
   isSsr?: boolean;
 
-  publishCommand(parmas: { pathname: string; target: string }): string;
-
   rootId: string;
 
   server: ServerConfigModel;

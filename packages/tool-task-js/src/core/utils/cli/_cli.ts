@@ -42,7 +42,10 @@ export const _cli = async ({
       const path = fromPackages(target, configFilename);
       if (existsSync(path)) {
         const tasks = await importInterop<Array<TaskParamsModel<unknown>>>(path);
-        resultF = [...resultF, ...tasks.map((task) => ({ ...task, target }))];
+        resultF = [
+          ...resultF,
+          ...tasks.map((task) => ({ ...task, root: fromPackages(target), target })),
+        ];
       }
 
       return resultF;

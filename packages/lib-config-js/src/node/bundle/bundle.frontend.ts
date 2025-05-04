@@ -81,7 +81,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
           'redux-persist',
           // TODO: fix?
           process.env.NODE_ENV === 'production' && 'inversify-react',
-          ...fromGlobs(['react-native-!(codegen|gradle-plugin|web)'], {
+          ...fromGlobs(['react-native-!(codegen|gradle-plugin)'], {
             root: fromModules(),
           }),
           ...fromGlobs(['@react-native-'], { root: fromModules() }),

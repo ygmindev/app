@@ -156,7 +156,7 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest-react-native": "^0.1.5",
     "wait-on": "^8.0.3",
-    "wrangler": "^4.13.2"
+    "wrangler": "^4.14.1"
   },
   "private": true,
   "type": "module",

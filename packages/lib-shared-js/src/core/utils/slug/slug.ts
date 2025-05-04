@@ -6,6 +6,7 @@ export const slug = (params: SlugParamsModel): SlugModel =>
     .replace(/(.+)([A-Z])/g, '$1-$2')
     .toLowerCase()
     .trim()
+    .replace(/\//g, '-')
     .replace(/\s+/g, '-')
     .replace(/[^(\w|?)-]+/g, '')
     .replace(/_/g, '-')

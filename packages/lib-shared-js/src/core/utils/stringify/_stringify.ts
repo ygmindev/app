@@ -5,4 +5,4 @@ import {
 import stringify from 'json-stringify-safe';
 
 export const _stringify = (...[params, options]: _StringifyParamsModel): _StringifyModel =>
-  options?.isMinify ?? true ? stringify(params) : stringify(params, null, '  ');
+  (options?.isMinify ?? false) ? stringify(params) : stringify(params, null, '  ');

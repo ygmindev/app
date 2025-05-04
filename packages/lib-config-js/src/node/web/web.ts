@@ -15,9 +15,6 @@ export const config = defineConfig<WebConfigModel, _WebConfigModel>({
 
     isSsr: true,
 
-    publishCommand: ({ pathname, target }) =>
-      `npx wrangler pages deploy ${pathname} --no-bundle --project-name ${target} --branch main`,
-
     server: serverConfig.params(),
   }),
 });

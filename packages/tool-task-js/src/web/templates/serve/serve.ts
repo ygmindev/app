@@ -12,7 +12,5 @@ export const serve: TaskParamsModel<ServeParamsModel> = {
 
   onBefore: [({ options, target }) => !options?.noBuild && `${target}-build`],
 
-  task: [
-    ({ root }) => staticServer({ pathname: joinPaths([root, BUILD_DIR, 'client']) }),
-  ],
+  task: [({ root }) => staticServer({ pathname: joinPaths([root, BUILD_DIR, 'client']) })],
 };

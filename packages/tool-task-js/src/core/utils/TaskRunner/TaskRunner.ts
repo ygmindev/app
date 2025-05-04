@@ -1,6 +1,7 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
@@ -76,15 +77,18 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     task,
     variables,
   }: TaskParamsModel<TType>): Promise<void> => {
-    const overridesF = overrides?.();
+    const workingDir = fromWorking();
+    target && process.chdir(fromPackages(target));
+    const overridesF = overrides?.({ name, root, target });
     let optionsF = { ...(overridesF ?? {}), ...parseArgs() } as TType & object;
     if (options) {
-      const optionsPrompts = await options({ name, overrides: overridesF, root });
+      const optionsPrompts = await options({ name, overrides: overridesF, root, target });
       optionsF = {
         ...optionsF,
         ...((await prompt(optionsPrompts.filter(({ key }) => !(key in optionsF)))) as object),
       };
     }
+    target && process.chdir(workingDir);
 
     const context: TaskContextModel<TType> = { name, options: optionsF, root, target };
     try {
