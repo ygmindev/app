@@ -193,7 +193,7 @@ export const Table = <TType,>({
           isFullWidth={isFullWidth}
           isRow>
           {h.map(({ align, headerRenderer, id, isFrozen, isHidden, label, width }) => {
-            if (isHidden || (isFrozen ?? false !== isFrozenTable ?? false)) {
+            if (isHidden || (isFrozen ?? false) !== (isFrozenTable ?? false)) {
               return null;
             }
             const sortIndex = sortingF.findIndex((v) => v.id === id);

@@ -4,6 +4,8 @@ import { type LibraryPropsModel } from '@lib/frontend/library/components/Library
 
 export const props: LibraryPropsModel<ItemTablePropsModel> = {
   Component: ItemTable,
-  defaultProps: {},
+  defaultProps: {
+    items: [],
+  },
   variants: [],
 };

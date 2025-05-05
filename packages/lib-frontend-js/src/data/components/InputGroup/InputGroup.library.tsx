@@ -4,6 +4,6 @@ import { type LibraryPropsModel } from '@lib/frontend/library/components/Library
 
 export const props: LibraryPropsModel<InputGroupPropsModel> = {
   Component: InputGroup,
-  defaultProps: {},
+  defaultProps: { fields: [] },
   variants: [],
 };

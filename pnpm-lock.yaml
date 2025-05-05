@@ -1786,6 +1786,9 @@ importers:
       '@types/json-stringify-safe':
         specifier: ^5.0.3
         version: 5.0.3
+      '@types/loadable__component':
+        specifier: ^5.13.9
+        version: 5.13.9
       '@types/lodash':
         specifier: ^4.17.16
         version: 4.17.16
@@ -7747,6 +7750,9 @@ packages:
 
   '@types/jsonwebtoken@9.0.9':
     resolution: {integrity: sha512-uoe+GxEuHbvy12OUQct2X9JenKM3qAscquYymuQN4fMWG9DBQtykrQEFcAbVACF7qaLw9BePSodUL0kquqBJpQ==}
+
+  '@types/loadable__component@5.13.9':
+    resolution: {integrity: sha512-QWOtIkwZqHNdQj3nixQ8oyihQiTMKZLk/DNuvNxMSbTfxf47w+kqcbnxlUeBgAxdOtW0Dh48dTAIp83iJKtnrQ==}
 
   '@types/lodash.isequal@4.5.8':
     resolution: {integrity: sha512-uput6pg4E/tj2LGxCZo9+y27JNyB2OZuuI/T5F+ylVDYuqICLG2/ktjxx0v6GvVntAf8TvEzeQLcV0ffRirXuA==}
@@ -24372,6 +24378,10 @@ snapshots:
     dependencies:
       '@types/ms': 2.1.0
       '@types/node': 22.15.3
+
+  '@types/loadable__component@5.13.9':
+    dependencies:
+      '@types/react': 19.1.2
 
   '@types/lodash.isequal@4.5.8':
     dependencies:

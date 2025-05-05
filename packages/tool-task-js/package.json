@@ -54,6 +54,7 @@
     "@types/inquirer": "^9.0.7",
     "@types/jest-image-snapshot": "^6.4.0",
     "@types/json-stringify-safe": "^5.0.3",
+    "@types/loadable__component": "^5.13.9",
     "@types/lodash": "^4.17.16",
     "@types/react": "^19.1.2",
     "@types/react-beautiful-dnd": "^13.1.8",

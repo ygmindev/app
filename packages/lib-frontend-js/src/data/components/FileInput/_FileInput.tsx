@@ -44,13 +44,14 @@ const Component: FCModel<UploadButtonProps & ValuePropsModel<Array<FileModel>>> 
       ),
   );
   const handleClick = useCallback((e: MouseEvent) => onClick && onClick(e), [onClick]);
-  return (
-    children && (
-      <UploadDropZone>
-        {cloneElement(children as ReactElement, { onPress: handleClick })}
-      </UploadDropZone>
-    )
-  );
+  return children ? (
+    <UploadDropZone>
+      {/* TODO: fix typing */}
+      {cloneElement(children as ReactElement<{ onPress: (e: MouseEvent) => void }>, {
+        onPress: handleClick,
+      })}
+    </UploadDropZone>
+  ) : null;
 };
 
 const Button = asUploadButton(Component);
