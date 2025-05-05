@@ -9,7 +9,5 @@ export const APP_REDUCER: AppReducerModel = {
     isLoading: false,
 
     isOffline: false,
-
-    portals: {},
   },
 };

@@ -17,7 +17,8 @@ export const getViewParams = (): ComposeComponentParamsModel<
   ViewStyleModel,
   _ViewRefModel
 > => ({
-  Component: Pressable,
+  // TODO: fix
+  Component: Pressable as never,
 
   getProps: (
     { onPress, onPressIn, onPressOut, onResponderGrant, onResponderRelease, ...props },

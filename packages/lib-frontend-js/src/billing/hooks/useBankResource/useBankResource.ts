@@ -14,7 +14,7 @@ export const useBankResource = ({
   return useOwnResource<BankModel>({
     ...BANK_RESOURCE_PARAMS,
     afterRemove: async ({ output }) => {
-      actions?.billing.paymentMethodsRemove({ _id: output.result?._id });
+      actions?.billing.paymentMethodsRemove({ _id: '' });
       return output;
     },
     root,

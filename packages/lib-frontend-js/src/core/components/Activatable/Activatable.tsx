@@ -8,6 +8,7 @@ import { type PressablePropsModel } from '@lib/frontend/core/components/Pressabl
 import { type RSFCModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { type ViewStyleModel } from '@lib/frontend/style/style.models';
 import isFunction from 'lodash/isFunction';
 import { cloneElement, type ReactElement, useImperativeHandle, useState } from 'react';
 
@@ -84,6 +85,10 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
   })();
 
   return childrenF
-    ? cloneElement(childrenF, { ...triggerProps, style: { ...childrenF.props.style, ...styles } })
+    ? cloneElement(childrenF, {
+        ...triggerProps,
+        // TODO: fix typing
+        style: { ...childrenF.props.style, ...styles } as ViewStyleModel,
+      })
     : childrenF || null;
 };

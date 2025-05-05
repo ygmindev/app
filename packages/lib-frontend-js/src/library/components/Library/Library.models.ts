@@ -4,7 +4,7 @@ import { type ComponentType, type ReactElement } from 'react';
 
 export type LibraryPropsModel<TProps> = Pick<WrapperPropsModel, 'minWidth'> & {
   Component: ComponentType<TProps>;
-  Renderer?: ComponentType<{ element: ReactElement; props: TProps }>;
+  Renderer?: ComponentType<{ element: ReactElement<TProps>; props: TProps }>;
   category?: string;
   defaultProps: TProps;
   title?: string;

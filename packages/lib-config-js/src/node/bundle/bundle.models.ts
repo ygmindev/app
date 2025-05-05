@@ -24,15 +24,19 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   envPrefix: Array<string>;
 
+  exclude?: Array<string>;
+
   extensions: Array<string>;
 
   externals?: Array<string | RegExp>;
 
   format?: BundleFormatModel;
 
-  isSourcemap?: boolean;
+  include?: Array<string>;
 
   isPreserveModules?: boolean;
+
+  isSourcemap?: boolean;
 
   isTranspileProject?: boolean;
 

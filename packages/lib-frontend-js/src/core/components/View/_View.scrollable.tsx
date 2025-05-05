@@ -12,14 +12,14 @@ import {
   type MeasureModel,
   type PositionModel,
   type RefPropsModel,
-  type RSFCPropsModel,
+  type RSFCModel,
 } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
-import { type ViewStyleModel } from '@lib/frontend/style/style.models';
+import { type StylePropsModel, type ViewStyleModel } from '@lib/frontend/style/style.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { partionObject } from '@lib/shared/core/utils/partionObject/partionObject';
-import { type ComponentType, Fragment, useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { ScrollView, type ScrollViewProps, StyleSheet } from 'react-native';
 
 const viewParamsBase = getViewParamsBase();
@@ -29,7 +29,7 @@ export const getViewParams = <
   TResult extends ScrollViewProps,
   TRef extends _ViewRefModel,
 >({
-  Component = ScrollView as unknown as ComponentType<RSFCPropsModel<TRef, TResult>>,
+  Component = ScrollView as unknown as RSFCModel<TRef, TResult, ViewStyleModel>,
   getProps,
   stylers,
 }: PartialModel<
@@ -89,7 +89,7 @@ export const getViewParams = <
       scrollToOverflowEnabled: true,
       showsHorizontalScrollIndicator: false,
       showsVerticalScrollIndicator: false,
-    } as TResult & RefPropsModel<TRef>;
+    } as TResult & RefPropsModel<TRef> & StylePropsModel;
 
     const isBar = (props.scrollType ?? SCROLL_TYPE.BAR) === SCROLL_TYPE.BAR;
     const ScrollComponent = isBar ? ScrollBar : ScrollButton;

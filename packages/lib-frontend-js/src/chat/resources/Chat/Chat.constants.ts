@@ -1,8 +1,8 @@
 import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models';
-import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
 import { type ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
+import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const CHAT_RESOURCE_PARAMS = {
   fields: [{ id: 'name' }],
-  name: CHAT_RESOURCE_NAME,
-} satisfies ResourceParamsModel<ChatModel>;
+  name: 'chats',
+} satisfies ResourceParamsModel<ChatModel, UserModel>;

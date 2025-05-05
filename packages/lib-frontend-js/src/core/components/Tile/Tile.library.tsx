@@ -14,7 +14,6 @@ export const props: LibraryPropsModel<TilePropsModel> = {
     {
       props: {
         children: <WrapperFixture />,
-        onPress: () => null,
       },
     },
   ],

@@ -1,5 +1,5 @@
 // import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+// import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
@@ -27,6 +27,7 @@ import { default as rollupPluginCommonjs } from '@rollup/plugin-commonjs';
 // import { default as rollupPluginEslint } from '@rollup/plugin-eslint';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
+import { default as rollupPluginTerser } from '@rollup/plugin-terser';
 import { default as rollupPluginTypescript } from '@rollup/plugin-typescript';
 // import circularDependencyPlugin from 'vite-plugin-circular-dependency';
 import react from '@vitejs/plugin-react-swc';
@@ -81,9 +82,11 @@ export const _bundle = ({
   define,
   entryFiles,
   envPrefix,
+  exclude,
   extensions,
   externals,
   format = BUNDLE_FORMAT.ESM,
+  include,
   isPreserveModules = false,
   isSourcemap = false,
   isTranspileProject = false,
@@ -342,11 +345,16 @@ export const _bundle = ({
 
         plugins: [
           rollupPluginTypescript({
-            include: [fromPackages('*/src/**/*')],
-            noEmit: true,
+            exclude,
+            include,
             noEmitOnError: true,
-            outputToFilesystem: false,
             tsconfig: tsconfigDir,
+          }),
+
+          rollupPluginTerser({
+            module: format === BUNDLE_FORMAT.ESM,
+            sourceMap: isSourcemap,
+            toplevel: format === BUNDLE_FORMAT.CJS,
           }),
 
           // rollupPluginEslint({
@@ -368,6 +376,7 @@ export const _bundle = ({
           }),
         ],
       },
+
       rollupOptions,
     ],
 

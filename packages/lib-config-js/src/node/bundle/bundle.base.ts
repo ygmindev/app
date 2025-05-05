@@ -2,7 +2,8 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import fileConfig from '@lib/config/file/file';
-import { BUILD_DIR } from '@lib/config/file/file.constants';
+import { BUILD_DIR, EXTENSIONS_BASE } from '@lib/config/file/file.constants';
+import { config as libraryConfig } from '@lib/config/library/library';
 import { _bundle } from '@lib/config/node/bundle/_bundle';
 import {
   type _BundleConfigModel,
@@ -10,6 +11,7 @@ import {
 } from '@lib/config/node/bundle/bundle.models';
 import typescriptConfig from '@lib/config/node/typescript/typescript';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
 
 export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
   config: _bundle,
@@ -34,7 +36,19 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       envPrefix: ['ENV_', 'NODE_ENV'],
 
+      exclude: [
+        ...cartesianString(
+          [
+            fromPackages(`*/src/**/*.${libraryConfig.params().extension}`),
+            fromPackages('*/tests/**/*'),
+          ],
+          EXTENSIONS_BASE,
+        ),
+      ],
+
       extensions,
+
+      include: [...cartesianString([fromPackages('*/src/**/*')], EXTENSIONS_BASE)],
 
       logSuppressPatterns: [/.*sourcemap.*/i, /.*source map.*/i],
 
