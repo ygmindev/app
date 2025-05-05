@@ -31,7 +31,6 @@ export const ItemStepForm = <TType, TStep extends PartialModel<TType>>({
           element: (
             <CategoryInput
               emptyLabel={emptyLabel}
-              id={id}
               options={options}
             />
           ),
