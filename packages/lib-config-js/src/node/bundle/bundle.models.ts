@@ -2,6 +2,7 @@ import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type BUNDLE_FORMAT } from '@lib/config/node/bundle/bundle.constants';
 import { type TypescriptConfigModel } from '@lib/config/node/typescript/typescript.models';
 import { type BuildOptions } from 'esbuild';
+import { type RollupOptions } from 'rollup';
 import { type UserConfig } from 'vite';
 
 export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
@@ -28,6 +29,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
   externals?: Array<string | RegExp>;
 
   format?: BundleFormatModel;
+
+  isSourcemap?: boolean;
 
   isPreserveModules?: boolean;
 
@@ -60,6 +63,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
 export type _BundleConfigModel = UserConfig & {
   esbuildConfig?: BuildOptions;
+
+  rollupConfig?: RollupOptions;
 };
 
 export type BundleFormatModel = `${BUNDLE_FORMAT}`;

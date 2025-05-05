@@ -31,10 +31,10 @@ export const _telemetry = ({
     dsn: source,
     instrumentations: [
       getNodeAutoInstrumentations({ '@opentelemetry/instrumentation-fs': { enabled: false } }),
-      new AwsLambdaInstrumentation({ disableAwsContextPropagation: true }),
+      new AwsLambdaInstrumentation({}),
     ],
     serviceName: name,
-    spanProcessor,
-    traceExporter: exporter,
+    // spanProcessor,
+    // traceExporter: exporter,
   });
 };
