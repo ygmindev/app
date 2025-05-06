@@ -3,7 +3,7 @@ import { LocaleSettingsPage } from '@lib/frontend/locale/pages/LocaleSettingsPag
 import { type LocaleSettingsPagePropsModel } from '@lib/frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage.models';
 
 export const props: LibraryPropsModel<LocaleSettingsPagePropsModel> = {
-  defaultProps: {},
   Component: LocaleSettingsPage,
+  defaultProps: {},
   variants: [],
 };

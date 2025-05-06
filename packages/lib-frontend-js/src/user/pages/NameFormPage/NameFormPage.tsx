@@ -1,4 +1,3 @@
-import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
@@ -16,7 +15,7 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
   const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
   const { back } = useRouter();
-  const { userUpdate } = useSignInResource();
+  // const { userUpdate } = useSignInResource();
   return currentUser ? (
     <FormContainer
       {...wrapperProps}
@@ -37,12 +36,12 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
       ]}
       initialValues={{ first: currentUser.first, last: currentUser.last }}
       onCancel={back}
-      onSubmit={async ({ first, last }: NameFormModel) =>
-        userUpdate({
-          filter: [{ field: '_id', stringValue: currentUser._id }],
-          update: { first, last },
-        })
-      }
+      onSubmit={async ({ first, last }: NameFormModel) => {
+        // userUpdate({
+        //   filter: [{ field: '_id', stringValue: currentUser._id }],
+        //   update: { first, last },
+        // })
+      }}
       p
       successMessage={t('core:updatedSuccess', { value: t('user:name') })}
     />

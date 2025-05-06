@@ -4645,7 +4645,7 @@ var require_eslint_config_mjs = __commonJS({
 var import_js = __toESM(require_src(), 1);
 
 // packages/lib-shared-js/src/core/utils/filterNil/filterNil.ts
-var filterNil = /* @__PURE__ */ __name((params2) => params2?.filter(Boolean), "filterNil");
+var filterNil = /* @__PURE__ */ __name((params) => params?.filter(Boolean), "filterNil");
 
 // packages/lib-backend-js/src/file/utils/joinPaths/joinPaths.ts
 var import_trimStart = __toESM(require_trimStart(), 1);
@@ -4669,7 +4669,7 @@ var import_isPlainObject = __toESM(require_isPlainObject(), 1);
 var import_isString = __toESM(require_isString(), 1);
 var import_reduce = __toESM(require_reduce(), 1);
 var import_trim = __toESM(require_trim(), 1);
-var trimValue = /* @__PURE__ */ __name((params2) => (0, import_isString.default)(params2) ? (0, import_trim.default)(params2, " ") : (0, import_isArray.default)(params2) ? params2.map((v) => trimValue(v)) : (0, import_isPlainObject.default)(params2) ? (0, import_reduce.default)(params2, (r, v, k) => ({ ...r, [(0, import_trim.default)(k, " ")]: trimValue(v) }), {}) : params2, "trimValue");
+var trimValue = /* @__PURE__ */ __name((params) => (0, import_isString.default)(params) ? (0, import_trim.default)(params, " ") : (0, import_isArray.default)(params) ? params.map((v) => trimValue(v)) : (0, import_isPlainObject.default)(params) ? (0, import_reduce.default)(params, (r, v, k) => ({ ...r, [(0, import_trim.default)(k, " ")]: trimValue(v) }), {}) : params, "trimValue");
 
 // packages/lib-config-js/src/node/lint/_lint.ts
 var import_globals = __toESM(require_globals2(), 1);
@@ -4746,6 +4746,7 @@ var _lint = /* @__PURE__ */ __name(({
   {
     rules: {
       ...reactPlugin.configs["jsx-runtime"].rules,
+      "react/display-name": "off",
       "react/jsx-key": "off",
       "react/jsx-newline": "error",
       "react/jsx-sort-props": "error",
@@ -4865,9 +4866,13 @@ var globImport___build__ = __glob({
 });
 
 // packages/lib-config-js/src/node/lint/eslint.config.ts
-var params = await globImport___build__(`../../../../../__build__/${ESLINT_CONFIG_PARAMS_FILENAME}`);
-var eslint_config_default = _lint(params);
+var config;
+try {
+  const params = await globImport___build__(`../../../../../__build__/${ESLINT_CONFIG_PARAMS_FILENAME}`);
+  config = _lint(params);
+} catch (_) {
+}
+var eslint_config_default = config;
 export {
   eslint_config_default as default
 };
-//# sourceMappingURL=eslint.config.mjs.map

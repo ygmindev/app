@@ -72,6 +72,7 @@ export const SpecificationInputForm = <TType extends unknown>({
         //       </Wrapper>
         //     );
         // }
+        return <></>;
       }
       default:
         return <></>;

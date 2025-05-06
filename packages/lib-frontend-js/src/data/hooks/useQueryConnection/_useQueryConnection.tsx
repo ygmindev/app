@@ -45,6 +45,8 @@ export const _useQueryConnection = <TParams = undefined, TResult = void>(
     reset: async () => {
       void queryClient.invalidateQueries({ queryKey: [id] });
     },
-    setData: async (values) => queryClient.setQueryData([id, params], values as never),
+    setData: async (values) => {
+      queryClient.setQueryData([id, params], values as never);
+    },
   };
 };

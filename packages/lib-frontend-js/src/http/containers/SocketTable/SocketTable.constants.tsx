@@ -4,6 +4,6 @@ import { SOCKET_RESOURCE_NAME } from '@lib/shared/http/resources/Socket/Socket.c
 import { type SocketModel } from '@lib/shared/http/resources/Socket/Socket.models';
 
 export const SOCKET_TABLE_PROPS = {
-  columns: [{ id: 'name', type: DATA_TYPE.STRING }],
+  fields: [{ id: 'name', type: DATA_TYPE.STRING }],
   name: SOCKET_RESOURCE_NAME,
 } satisfies Omit<ResourceTablePropsModel<SocketModel>, 'implementation'>;

@@ -3,7 +3,7 @@ import { SsrPage } from '@lib/frontend/test/pages/SsrPage/SsrPage';
 import { type SsrPagePropsModel } from '@lib/frontend/test/pages/SsrPage/SsrPage.models';
 
 export const props: LibraryPropsModel<SsrPagePropsModel> = {
-  defaultProps: {},
   Component: SsrPage,
+  defaultProps: {},
   variants: [],
 };

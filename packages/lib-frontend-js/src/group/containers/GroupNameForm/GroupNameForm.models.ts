@@ -1,6 +1,7 @@
 import { type FormStepPropsModel } from '@lib/frontend/data/components/StepForm/StepForm.models';
-import { type GroupFormModel } from '@lib/shared/group/resources/Group/Group.models';
 
-export type GroupNameFormModel = Pick<GroupFormModel, 'name'>;
+export type GroupNameFormModel = {
+  name?: string;
+};
 
-export type GroupNameFormPropsModel = FormStepPropsModel<GroupFormModel, GroupNameFormModel>;
+export type GroupNameFormPropsModel = FormStepPropsModel<GroupNameFormModel, GroupNameFormModel>;

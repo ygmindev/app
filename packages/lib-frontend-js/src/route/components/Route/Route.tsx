@@ -1,7 +1,6 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
-import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -21,6 +20,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_COLOR_MORE } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
+import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import {
   TRACKING_EVENT_ACTION,
   TRACKING_EVENT_OBJECT,

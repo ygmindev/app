@@ -4,6 +4,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { type TestableRelatedResourceTablePropsModel } from '@lib/frontend/test/containers/TestableRelatedResourceTable/TestableRelatedResourceTable.models';
 import { useTestableRelatedResourceResource } from '@lib/frontend/test/hooks/useTestableRelatedResourceResource/useTestableRelatedResourceResource';
 import { TESTABLE_RELATED_RESOURCE_RESOURCE_PARAMS } from '@lib/frontend/test/resources/TestableRelatedResource/TestableRelatedResource.constants';
+import { type TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 import { type TestableRelatedResourceModel } from '@lib/shared/test/resources/TestableRelatedResource/TestableRelatedResource.models';
 
 export const TestableRelatedResourceTable: LFCModel<TestableRelatedResourceTablePropsModel> = ({
@@ -12,7 +13,7 @@ export const TestableRelatedResourceTable: LFCModel<TestableRelatedResourceTable
   const { wrapperProps } = useLayoutStyles({ props });
   const implementation = useTestableRelatedResourceResource();
   return (
-    <ResourceTable<TestableRelatedResourceModel>
+    <ResourceTable<TestableRelatedResourceModel, TestableEntityResourceModel>
       {...wrapperProps}
       {...TESTABLE_RELATED_RESOURCE_RESOURCE_PARAMS}
       implementation={implementation}

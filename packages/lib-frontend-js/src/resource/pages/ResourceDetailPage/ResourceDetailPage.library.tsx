@@ -3,7 +3,7 @@ import { ResourceDetailPage } from '@lib/frontend/resource/pages/ResourceDetailP
 import { type ResourceDetailPagePropsModel } from '@lib/frontend/resource/pages/ResourceDetailPage/ResourceDetailPage.models';
 
 export const props: LibraryPropsModel<ResourceDetailPagePropsModel> = {
-  defaultProps: {},
   Component: ResourceDetailPage,
+  defaultProps: {},
   variants: [],
 };

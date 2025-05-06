@@ -6,7 +6,7 @@ import Color from 'color';
 
 export const _palette = (...[color, options]: _PaletteParamsModel): _PaletteModel => {
   let colorF = Color(color);
-  if (!!options.alpha) {
+  if (options.alpha) {
     colorF = colorF.alpha(options.alpha);
   }
   if (!!options.lightness && options.lightness !== 0.5) {

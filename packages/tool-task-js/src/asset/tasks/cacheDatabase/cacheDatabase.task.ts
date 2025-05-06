@@ -2,8 +2,7 @@ import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
-import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
-import { WEB_CONFIG } from '@lib/config/node/web/web.constants';
+import { PUBLIC_DIR } from '@lib/config/file/file.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
@@ -35,18 +34,18 @@ const cacheDatabase: TaskParamsModel<CacheDatabaseParamsModel> = {
 
   task: [
     async ({ options }) => {
-      await initialize();
+      // await initialize();
       const database = Container.get(Database, DATABASE_TYPE.MONGO);
       const tasks = options?.resources?.map(async (name) => {
         const { result } = await database.getRepository({ name }).getMany({
           filter: [],
-          options: () => ({
-            take: CACHE_RESOURCES[name as keyof typeof CACHE_RESOURCES].count,
-          }),
+          // options: () => ({
+          //   take: CACHE_RESOURCES[name as keyof typeof CACHE_RESOURCES].count,
+          // }),
         });
         if (result) {
           const value = { created: new Date(), data: result } satisfies CacheAssetModel;
-          const filename = fromStatic(WEB_CONFIG.publicPath, 'resources', `${name}.json`);
+          const filename = fromStatic(PUBLIC_DIR, 'resources', `${name}.json`);
           writeFile({ filename, value: JSON.stringify(value, null, '  ') });
         }
       });

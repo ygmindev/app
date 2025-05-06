@@ -24,6 +24,8 @@ export const _useMutation = <TParams = undefined, TResult = void>(
     reset: async () => {
       void queryClient.invalidateQueries({ queryKey: [id] });
     },
-    setData: async (values) => queryClient.setQueryData([id], values as never),
+    setData: async (values) => {
+      queryClient.setQueryData([id], values as never);
+    },
   };
 };

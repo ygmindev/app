@@ -1,10 +1,10 @@
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { SocketImplementation } from '@lib/backend/http/resources/Socket/SocketImplementation/SocketImplementation';
 import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
 import {
   LAMBDA_PLUGIN,
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 
 export const main = createLambdaHandler({
@@ -13,7 +13,7 @@ export const main = createLambdaHandler({
     const { pathname, user } = context;
     switch (pathname) {
       case '$connect': {
-        if (user) {
+        if (user && context.requestId) {
           await socketImplementation.create({
             form: { connections: [context.requestId], name: 'test' },
           });

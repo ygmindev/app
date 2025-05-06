@@ -9,7 +9,7 @@ import isString from 'lodash/isString';
 export const runAll: TaskParamsModel<RunAllParamsModel> = {
   name: 'run-all',
 
-  options: ({ name, overrides }) => {
+  options: async ({ name, overrides }) => {
     const { registry } = Container.get(TaskRunner);
     const options = Object.keys(registry).filter(
       (k) =>

@@ -1,9 +1,11 @@
+import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { Map } from '@lib/frontend/map/components/Map/Map';
 import { type MapPropsModel } from '@lib/frontend/map/components/Map/Map.models';
-import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 
 export const props: LibraryPropsModel<MapPropsModel> = {
   Component: Map,
-  defaultProps: {},
+  defaultProps: {
+    zoom: 1,
+  },
   variants: [],
 };

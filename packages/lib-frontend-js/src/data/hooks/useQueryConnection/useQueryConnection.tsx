@@ -11,5 +11,5 @@ export const useQueryConnection = <TParams = undefined, TResult = void>(
   const { cacheTime, cacheTimeDefault } = queryConfig.params();
   const cache = options?.cache;
   const cacheF = (cache === true ? cacheTime : cache) ?? cacheTimeDefault;
-  return _useQueryConnection(id, callback, { ...options, cache: cacheF }, params);
+  return _useQueryConnection(id, callback, params, { ...options, cache: cacheF });
 };

@@ -3,7 +3,7 @@ import { AppearanceSettingsPage } from '@lib/frontend/settings/pages/AppearanceS
 import { type AppearanceSettingsPagePropsModel } from '@lib/frontend/settings/pages/AppearanceSettingsPage/AppearanceSettingsPage.models';
 
 export const props: LibraryPropsModel<AppearanceSettingsPagePropsModel> = {
-  defaultProps: {},
   Component: AppearanceSettingsPage,
+  defaultProps: {},
   variants: [],
 };

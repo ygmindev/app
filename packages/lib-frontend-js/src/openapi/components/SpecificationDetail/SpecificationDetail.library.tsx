@@ -2,8 +2,10 @@ import { type LibraryPropsModel } from '@lib/frontend/library/components/Library
 import { SpecificationDetail } from '@lib/frontend/openapi/components/SpecificationDetail/SpecificationDetail';
 import { type SpecificationDetailPropsModel } from '@lib/frontend/openapi/components/SpecificationDetail/SpecificationDetail.models';
 
-export const props: LibraryPropsModel<SpecificationDetailPropsModel> = {
+export const props: LibraryPropsModel<SpecificationDetailPropsModel<unknown>> = {
   Component: SpecificationDetail,
-  defaultProps: {},
+  defaultProps: {
+    specification: {},
+  },
   variants: [],
 };

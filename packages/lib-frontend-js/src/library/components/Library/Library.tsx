@@ -105,7 +105,7 @@ export const Library = <TType extends unknown>({
 
                     {Renderer ? (
                       <Renderer
-                        element={element}
+                        element={element as ReactElement<TType>}
                         props={propsF}
                       />
                     ) : (
