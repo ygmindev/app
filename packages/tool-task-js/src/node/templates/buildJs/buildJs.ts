@@ -29,7 +29,6 @@
 // export default buildJs;
 
 import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
-import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type BuildJsParamsModel } from '@tool/task/node/templates/buildJs/buildJs.models';
@@ -47,7 +46,6 @@ const buildJs: TaskParamsModel<BuildJsParamsModel> = {
           outputPathname: options.outputPathname,
           transpilePatterns: [/^((?!eslint).)*$/],
         });
-        console.warn(stringify(esbuildConfig));
         esbuildConfig && (await build(esbuildConfig));
       }
     },

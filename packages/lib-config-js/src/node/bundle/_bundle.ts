@@ -12,7 +12,7 @@ import {
 } from '@lib/config/node/bundle/bundle.models';
 // import { config as lintConfig, lintCommand } from '@lib/config/node/lint/lint';
 import { lintCommand } from '@lib/config/node/lint/lint';
-import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
+// import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -211,9 +211,9 @@ export const _bundle = ({
 
         minify: process.env.NODE_ENV === 'production',
 
-        nodePaths: rootDirs.map((root) =>
-          joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
-        ),
+        // nodePaths: rootDirs.map((root) =>
+        //   joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
+        // ),
 
         platform: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
 
