@@ -1,67 +1,8 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-var __glob = (map) => (path) => {
-  var fn = map[path];
-  if (fn) return fn();
-  throw new Error("Module not found in bundle: " + path);
-};
-var __commonJS = (cb, mod) => function __require() {
-  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
 
-// __build__/eslint.config.mjs.json
-var require_eslint_config_mjs = __commonJS({
-  "__build__/eslint.config.mjs.json"(exports, module) {
-    module.exports = {
-      configFilename: "eslint.config.mjs",
-      exclude: [
-        "**/node_modules"
-      ],
-      include: [
-        "packages/*/src/**/*.tsx",
-        "packages/*/src/**/*.ts",
-        "packages/*/src/**/*.jsx",
-        "packages/*/src/**/*.js",
-        "packages/*/tests/**/*.tsx",
-        "packages/*/tests/**/*.ts",
-        "packages/*/tests/**/*.jsx",
-        "packages/*/tests/**/*.js"
-      ],
-      indentWidth: 2,
-      isParenthesis: true,
-      isSameLine: true,
-      isSingleQuote: true,
-      isSpacing: true,
-      isTrailingComma: true,
-      printWidth: 100,
-      unusedIgnore: "^_"
-    };
-  }
-});
-
-// packages/lib-config-js/src/node/lint/_lint.ts
-import eslintPlugin from "@eslint/js";
+// packages/lib-backend-js/src/file/utils/getRoot/_getRoot.ts
+import appRootPath from "app-root-path";
 
 // packages/lib-shared-js/src/core/utils/filterNil/filterNil.ts
 var filterNil = /* @__PURE__ */ __name((params) => params?.filter(Boolean), "filterNil");
@@ -74,6 +15,103 @@ var joinPaths = /* @__PURE__ */ __name((...[paths, options]) => {
   options?.extension && (path = `${path}.${trimStart(options.extension, ".")}`);
   return path;
 }, "joinPaths");
+
+// packages/lib-config-js/src/file/file.constants.ts
+var BUILD_DIR = "__build__";
+var CACHE_DIR = "__cache__";
+var TEMP_DIR = "__temp__";
+var CLEAN_PATTERNS = [
+  BUILD_DIR,
+  CACHE_DIR,
+  TEMP_DIR,
+  "__pycache__",
+  ".coverage*",
+  ".DS_Store",
+  ".esbuild",
+  ".eslintcache",
+  ".mypy_cache",
+  ".pytest_cache",
+  ".serverless",
+  ".swc",
+  ".test",
+  ".vite",
+  ".wrangler",
+  "*.0x",
+  "*.log*",
+  "coverage"
+];
+var DIST_DIR = "__dist__";
+var PACKAGE_PREFIXES = ["app", "service", "lib", "tool"];
+var PRUNE_PATTERNS = [
+  "node_modules/rxjs/src/**",
+  "node_modules/rxjs/bundles/**",
+  "node_modules/rxjs/_esm5/**",
+  "node_modules/rxjs/_esm2015/**",
+  "node_modules/grpc/deps/grpc/third_party/**",
+  "node_modules/@aws-sdk",
+  "node_modules/aws-sdk",
+  "node_modules/**/*.md",
+  "node_modules/**/*.flow",
+  "node_modules/**/*.patch",
+  "node_modules/**/*.conf",
+  "node_modules/**/*.markdown",
+  "node_modules/**/*.coffee",
+  "node_modules/**/jsdoc_conf.json",
+  "node_modules/**/*Makefile",
+  "node_modules/**/Dockerfile",
+  "node_modules/**/*.txt",
+  "node_modules/**/*.yml",
+  "node_modules/**/*.xml",
+  "node_modules/**/*.html",
+  "node_modules/**/test/**",
+  "node_modules/**/tests/**",
+  "node_modules/**/examples/**",
+  "node_modules/**/coverage/**",
+  "node_modules/**/.nyc_output/**",
+  "node_modules/**/(!chromium)/bin/**",
+  "node_modules/**/bower.json",
+  "node_modules/**/karma.conf.js",
+  "node_modules/**/Gruntfile.js",
+  "node_modules/**/rollup.config.*",
+  "node_modules/**/yarn.lock",
+  "node_modules/**/sonar-project.properties",
+  "node_modules/**/package-lock.json",
+  "node_modules/**/*.d.ts",
+  "node_modules/**/*.map",
+  "node_modules/**/tsconfig.json",
+  "node_modules/**/AUTHORS",
+  "node_modules/**/CODEOWNERS",
+  "node_modules/**/OWNERS",
+  "node_modules/**/*.iml",
+  "node_module/**/*.bash_completion.in",
+  "node_modules/**/*.gif",
+  "node_modules/**/*.png",
+  "node_modules/**/*.jpg",
+  "node_modules/**/*.jpeg",
+  "node_modules/**/winston/scratch/**",
+  "node_modules/**/sshpk/man/**",
+  "node_modules/**/bluebird/js/browser/**",
+  "node_modules/**/date-fns/docs.json",
+  "node_modules/**/aws-xray-sdk-core/doc-src/**"
+];
+var PUBLIC_DIR = "public";
+var ASSETS_DIR = "assets";
+var EXCLUDE_PATTERNS = [...CLEAN_PATTERNS, ".git", "ios/Pods", "node_modules"];
+var EXTENSIONS_BASE = [".tsx", ".ts", ".jsx", ".js"];
+var FILE_CONFIG = {
+  assetsDir: ASSETS_DIR,
+  buildDir: BUILD_DIR,
+  cacheDir: CACHE_DIR,
+  cleanPatterns: CLEAN_PATTERNS,
+  distDir: DIST_DIR,
+  excludePatterns: [...CLEAN_PATTERNS, ".git", ".venv", "ios/Pods", "node_modules"],
+  packagePrefixes: PACKAGE_PREFIXES,
+  prunePatterns: PRUNE_PATTERNS,
+  publicDir: PUBLIC_DIR
+};
+
+// packages/lib-config-js/src/node/lint/_lint.ts
+import eslintPlugin from "@eslint/js";
 
 // packages/lib-backend-js/src/file/utils/fromWorking/fromWorking.ts
 var fromWorking = /* @__PURE__ */ __name((...paths) => joinPaths([process.cwd(), ...paths]), "fromWorking");
@@ -273,21 +311,111 @@ var _lint = /* @__PURE__ */ __name(({
 
 // packages/lib-config-js/src/node/lint/lint.constants.ts
 var ESLINT_CONFIG_FILENAME = "eslint.config.mjs";
-var ESLINT_CONFIG_PARAMS_FILENAME = `${ESLINT_CONFIG_FILENAME}.json`;
 
-// import("../../../../../__build__/**/*") in packages/lib-config-js/src/node/lint/eslint.config.ts
-var globImport___build__ = __glob({
-  "../../../../../__build__/eslint.config.mjs.json": () => Promise.resolve().then(() => __toESM(require_eslint_config_mjs()))
+// packages/lib-backend-js/src/resource/utils/Collection/_Collection.ts
+import { Collection } from "@mikro-orm/core";
+var _Collection = class extends Collection {
+  static {
+    __name(this, "_Collection");
+  }
+  constructor(root) {
+    super(root);
+  }
+  push(...items) {
+    super.add(items);
+    return super.length + 1;
+  }
+  filter(cb, _) {
+    return super.filter((x, y) => cb(x, y, []));
+  }
+  find(cb, _) {
+    return super.find((x, y) => cb(x, y, []));
+  }
+  map(cb, _) {
+    return super.map((x, y) => cb(x, y, []));
+  }
+  delete(params) {
+    super.remove(params);
+  }
+  slice(start, end) {
+    return super.slice(start, end);
+  }
+};
+
+// packages/lib-backend-js/src/resource/utils/Collection/Collection.ts
+var Collection2 = class extends _Collection {
+  static {
+    __name(this, "Collection");
+  }
+};
+
+// packages/lib-shared-js/src/core/utils/isArray/isArray.base.ts
+var isArray2 = /* @__PURE__ */ __name((params) => Array.isArray(params), "isArray");
+
+// packages/lib-shared-js/src/core/utils/isArray/isArray.node.ts
+var isArray3 = /* @__PURE__ */ __name((params) => isArray2(params) || params instanceof Collection2 ? true : false, "isArray");
+
+// packages/lib-shared-js/src/core/utils/merge/merge.ts
+import isPlainObject2 from "lodash/isPlainObject.js";
+import mergeWith from "lodash/mergeWith.js";
+import uniq from "lodash/uniq.js";
+var merge = /* @__PURE__ */ __name((...[values, strategy = "DEEP" /* DEEP */]) => mergeWith({}, ...values, (x, y) => {
+  switch (strategy) {
+    case "DEEP" /* DEEP */:
+      return isPlainObject2(x) && isPlainObject2(y) ? merge([x, y], strategy) : x === void 0 ? y : x;
+    case "DEEP_APPEND" /* DEEP_APPEND */:
+    case "DEEP_PREPEND" /* DEEP_PREPEND */:
+      return isArray3(x) && isArray3(y) ? uniq(strategy === "DEEP_APPEND" /* DEEP_APPEND */ ? [...y, ...x] : [...x, ...y]) : isPlainObject2(x) && isPlainObject2(y) ? merge([x, y], strategy) : x === void 0 ? y : x;
+    default:
+      return x === void 0 ? y : x;
+  }
+}), "merge");
+
+// packages/lib-config-js/src/utils/defineConfig/defineConfig.ts
+var getConfigs = /* @__PURE__ */ __name(({
+  overrides,
+  params,
+  strategy
+}) => merge([...overrides ? overrides() : [], params()], strategy), "getConfigs");
+var defineConfig = /* @__PURE__ */ __name(({
+  config: config2,
+  overrides,
+  params,
+  strategy = "DEEP_PREPEND" /* DEEP_PREPEND */
+}) => ({
+  config: config2 ? (paramsF) => config2(
+    getConfigs({
+      overrides: /* @__PURE__ */ __name(() => filterNil([paramsF, ...overrides ? overrides() : []]), "overrides"),
+      params,
+      strategy
+    })
+  ) : void 0,
+  params: /* @__PURE__ */ __name(() => getConfigs({ overrides, params, strategy }), "params")
+}), "defineConfig");
+
+// packages/lib-shared-js/src/core/utils/cartesianString/cartesianString.ts
+var cartesianString = /* @__PURE__ */ __name((...[x, y]) => x.flatMap((a) => y.map((b) => `${a}${b}`)), "cartesianString");
+
+// packages/lib-config-js/src/node/lint/lint.ts
+var config = defineConfig({
+  config: _lint,
+  params: /* @__PURE__ */ __name(() => ({
+    configFilename: ESLINT_CONFIG_FILENAME,
+    exclude: ["**/node_modules"],
+    include: cartesianString(["packages/*/src/**/*", "packages/*/tests/**/*"], EXTENSIONS_BASE),
+    indentWidth: 2,
+    isParenthesis: true,
+    isSameLine: true,
+    isSingleQuote: true,
+    isSpacing: true,
+    isTrailingComma: true,
+    printWidth: 100,
+    unusedIgnore: "^_"
+  }), "params")
 });
 
 // packages/lib-config-js/src/node/lint/eslint.config.ts
-var config;
-try {
-  const params = await globImport___build__(`../../../../../__build__/${ESLINT_CONFIG_PARAMS_FILENAME}`);
-  config = _lint(params);
-} catch (_) {
-}
-var eslint_config_default = config;
+var eslint_config_default = config.config();
 export {
   eslint_config_default as default
 };
