@@ -4,7 +4,7 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
-import { _plugins } from '@lib/config/node/bundle/_plugins';
+import { _plugins, esbuildPluginResolveAlias } from '@lib/config/node/bundle/_plugins';
 import { BUNDLE_FORMAT } from '@lib/config/node/bundle/bundle.constants';
 import {
   type _BundleConfigModel,
@@ -12,7 +12,7 @@ import {
 } from '@lib/config/node/bundle/bundle.models';
 // import { config as lintConfig, lintCommand } from '@lib/config/node/lint/lint';
 import { lintCommand } from '@lib/config/node/lint/lint';
-// import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
+// import {config as pacakgeManagerConfig} from '@lib/config/node/packageManager/packageManager';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -144,7 +144,8 @@ export const _bundle = ({
       : undefined,
 
     plugins: [
-      externals && nodeExternals({ exclude: transpileAll, include: externals }),
+      process.env.ENV_PLATFORM === PLATFORM.NODE &&
+        nodeExternals({ exclude: transpileAll, include: externals }),
 
       resolve({
         extensions,
@@ -209,7 +210,7 @@ export const _bundle = ({
 
         mainFields,
 
-        minify: process.env.NODE_ENV === 'production',
+        minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
 
         // nodePaths: rootDirs.map((root) =>
         //   joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
@@ -218,6 +219,7 @@ export const _bundle = ({
         platform: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
 
         plugins: _plugins({
+          extensions,
           externals,
           format,
           rootDirs,
@@ -319,10 +321,11 @@ export const _bundle = ({
         entryPoints: entryFiles,
         outExtension: format === BUNDLE_FORMAT.ESM ? { '.js': '.mjs' } : undefined,
         outdir: config.build?.outDir,
+        plugins: filterNil([aliases && esbuildPluginResolveAlias(aliases)]),
       },
       config.optimizeDeps?.esbuildOptions as Partial<BuildOptions>,
     ],
-    MERGE_STRATEGY.DEEP_APPEND,
+    MERGE_STRATEGY.DEEP_PREPEND,
   );
 
   config.rollupConfig = merge(

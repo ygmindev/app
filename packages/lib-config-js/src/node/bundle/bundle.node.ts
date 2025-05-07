@@ -12,13 +12,14 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
   overrides: () => [
     {
-      // entryFiles: { index: fromWorking('src/index.ts') },
+      aliases: [{ from: /lodash\/(.*)/, to: 'lodash/$1.js' }],
 
+      // entryFiles: { index: fromWorking('src/index.ts') },
       envPrefix: ['SERVER_'],
 
-      watch: [fromPackages('lib-backend-js/src/**/*')],
-      
       externals: [/node_modules/],
+
+      watch: [fromPackages('lib-backend-js/src/**/*')],
     },
   ],
 });

@@ -35,6 +35,7 @@
   "eslint.options": {
     "overrideConfigFile": "./__dist__/eslint.config.mjs"
   },
+  "eslint.useFlatConfig": true,
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -43,7 +44,6 @@
     "typescript",
     "typescriptreact",
   ],
-  "eslint.useFlatConfig": true,
   "explorer.compactFolders": false,
   "explorer.expandSingleFolderWorkspaces": false,
   "files.associations": {
@@ -56,6 +56,11 @@
   ],
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "mypy-type-checker.args": [
+    "--config-file=packages/lib-shared-py/pyproject.toml"
+  ],
+  "mypy.configFile": "packages/lib-shared-py/pyproject.toml",
+  "mypy.dmypyExecutable": "${workspaceFolder}/packages/lib-shared-py/.venv/bin/dmypy",
   "pylint.importStrategy": "fromEnvironment",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.diagnosticSeverityOverrides": {
@@ -72,10 +77,5 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "GitHub Dark",
   "workbench.iconTheme": "vs-minimal",
-  "workbench.sideBar.location": "right",
-  "mypy.dmypyExecutable": "${workspaceFolder}/packages/lib-shared-py/.venv/bin/dmypy",
-  "mypy.configFile": "packages/lib-shared-py/pyproject.toml",
-  "mypy-type-checker.args": [
-    "--config-file=packages/lib-shared-py/pyproject.toml"
-  ]
+  "workbench.sideBar.location": "right"
 }

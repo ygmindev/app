@@ -37,6 +37,7 @@ import { build } from 'esbuild';
 const buildJs: TaskParamsModel<BuildJsParamsModel> = {
   name: 'build-js',
 
+  
   task: [
     async ({ options }) => {
       if (options?.entryFiles) {
@@ -44,7 +45,7 @@ const buildJs: TaskParamsModel<BuildJsParamsModel> = {
           entryFiles: options.entryFiles,
           isTranspileProject: true,
           outputPathname: options.outputPathname,
-          transpilePatterns: [/^((?!eslint).)*$/],
+          transpilePatterns: options.transpilePatterns,
         });
         esbuildConfig && (await build(esbuildConfig));
       }

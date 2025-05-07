@@ -4,6 +4,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
@@ -12,8 +13,8 @@ import { readFileSync } from 'fs';
 import { sep } from 'path';
 import posix from 'path/posix';
 
-const excludeVendorFromSourceMap = (includes = []): Plugin => ({
-  name: 'excludeVendorFromSourceMap',
+export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): Plugin => ({
+  name: 'plugin:excludeVendorFromSourceMap',
   setup(build) {
     const emptySourceMap =
       '\n//# sourceMappingURL=data:application/json;base64,' +
@@ -33,7 +34,39 @@ const excludeVendorFromSourceMap = (includes = []): Plugin => ({
   },
 });
 
+export const esbuildPluginResolveAlias = (
+  aliases: Array<{ from: RegExp | string; to: string }>,
+): Plugin => ({
+  name: 'plugin:resolveAlias',
+  setup(build) {
+    build.onResolve(
+      {
+        filter: new RegExp(
+          `^${aliases
+            .map(({ from }) =>
+              from instanceof RegExp ? from.source : from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+            )
+            .join('|')}$`,
+        ),
+        namespace: 'file',
+      },
+      ({ path }) => {
+        const match = aliases.find(({ from }) =>
+          from instanceof RegExp ? from.test(path) : from === path,
+        );
+        return match
+          ? {
+              external: true,
+              path: match.from instanceof RegExp ? path.replace(match.from, match.to) : match.to,
+            }
+          : null;
+      },
+    );
+  },
+});
+
 export const _plugins = ({
+  extensions,
   externals,
   format,
   rootDirs,
@@ -41,7 +74,7 @@ export const _plugins = ({
   transpilePatterns,
 }: Pick<
   BundleConfigModel,
-  'externals' | 'format' | 'rootDirs' | 'transpileModules' | 'transpilePatterns'
+  'externals' | 'extensions' | 'format' | 'rootDirs' | 'transpileModules' | 'transpilePatterns'
 >): Array<Plugin> =>
   filterNil([
     {
@@ -60,11 +93,11 @@ export const _plugins = ({
 
     transpileModules && esbuildCommonjs(transpileModules),
 
-    excludeVendorFromSourceMap(),
+    esbuildPluginExcludeVendorFromSourceMap(),
 
     (esbuildFlowPlugin as () => unknown)() as Plugin,
 
-    externals &&
+    process.env.ENV_PLATFORM === PLATFORM.NODE &&
       nodeExternalsPlugin({
         allowList: [...(transpileModules ?? []), ...(transpilePatterns ?? [])],
         packagePath: rootDirs?.map((path) => joinPaths([path, 'package.json'])),

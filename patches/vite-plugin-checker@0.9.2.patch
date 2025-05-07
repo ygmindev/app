@@ -1,8 +1,8 @@
 diff --git a/dist/checkers/eslint/main.js b/dist/checkers/eslint/main.js
-index 8386329bcc4f403134208656f60a7842509ac28b..3eba09b2d3f2035fc8168f522039456c8b9aa755 100644
+index 5f44bab2c5753726fe9f8d877a519c428e479dcb..bd7baaef575ad75281bf3aed0144a79c8ff04524 100644
 --- a/dist/checkers/eslint/main.js
 +++ b/dist/checkers/eslint/main.js
-@@ -65,7 +65,12 @@ const createDiagnostic = (pluginConfig) => {
+@@ -66,7 +66,12 @@ const createDiagnostic = (pluginConfig) => {
          } = require2("eslint/use-at-your-own-risk");
          if (shouldUseFlatConfig == null ? void 0 : shouldUseFlatConfig()) {
            eslint = new FlatESLint({

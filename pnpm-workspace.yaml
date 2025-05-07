@@ -20,4 +20,4 @@ ignoredBuiltDependencies:
 overrides:
   app: 'link:'
 patchedDependencies:
-  vite-plugin-checker@0.9.1: patches/vite-plugin-checker@0.9.1.patch
+  vite-plugin-checker@0.9.2: patches/vite-plugin-checker@0.9.2.patch
