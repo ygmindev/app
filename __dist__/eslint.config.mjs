@@ -39,14 +39,14 @@ var require_eslint_config_mjs = __commonJS({
         "**/node_modules"
       ],
       include: [
-        "/Users/yoongeemin/Developer/Projects/app/packages/*/src/**/*.tsx",
-        "/Users/yoongeemin/Developer/Projects/app/packages/*/src/**/*.ts",
-        "/Users/yoongeemin/Developer/Projects/app/packages/*/src/**/*.jsx",
-        "/Users/yoongeemin/Developer/Projects/app/packages/*/src/**/*.js",
-        "/Users/yoongeemin/Developer/Projects/app/packages/*/tests/**/*.tsx",
-        "/Users/yoongeemin/Developer/Projects/app/packages/*/tests/**/*.ts",
-        "/Users/yoongeemin/Developer/Projects/app/packages/*/tests/**/*.jsx",
-        "/Users/yoongeemin/Developer/Projects/app/packages/*/tests/**/*.js"
+        "packages/*/src/**/*.tsx",
+        "packages/*/src/**/*.ts",
+        "packages/*/src/**/*.jsx",
+        "packages/*/src/**/*.js",
+        "packages/*/tests/**/*.tsx",
+        "packages/*/tests/**/*.ts",
+        "packages/*/tests/**/*.jsx",
+        "packages/*/tests/**/*.js"
       ],
       indentWidth: 2,
       isParenthesis: true,

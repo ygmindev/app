@@ -1,5 +1,4 @@
 import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { EXTENSIONS_BASE } from '@lib/config/file/file.constants';
 import { _lint } from '@lib/config/node/lint/_lint';
 import { ESLINT_CONFIG_FILENAME } from '@lib/config/node/lint/lint.constants';
@@ -24,10 +23,7 @@ export const config = defineConfig<LintConfigModel, _LintConfigModel>({
 
     exclude: ['**/node_modules'],
 
-    include: cartesianString(
-      [fromPackages('*/src/**/*'), fromPackages('*/tests/**/*')],
-      EXTENSIONS_BASE,
-    ),
+    include: cartesianString(['packages/*/src/**/*', 'packages/*/tests/**/*'], EXTENSIONS_BASE),
 
     indentWidth: 2,
 

@@ -90,13 +90,13 @@ export const _plugins = ({
 
     esbuildDecorators({ tsconfig: fromWorking('tsconfig.json') }),
 
-    transpileModules && esbuildCommonjs(transpileModules),
+    transpileModules?.length && esbuildCommonjs(transpileModules),
 
     esbuildPluginExcludeVendorFromSourceMap(),
 
     (esbuildFlowPlugin as () => unknown)() as Plugin,
 
-    externals &&
+    externals?.length &&
       nodeExternalsPlugin({
         allowList: [...(transpileModules ?? []), ...(transpilePatterns ?? [])],
         forceExternalList: externals,
