@@ -1,5 +1,4 @@
 import eslintPlugin from '@eslint/js';
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { type _LintConfigModel, type LintConfigModel } from '@lib/config/node/lint/lint.models';
 import { trimValue } from '@lib/shared/core/utils/trimValue/trimValue';
@@ -26,14 +25,10 @@ export const _lint = ({
   isTrailingComma,
   printWidth,
   unusedIgnore,
-  workingDir = fromWorking(),
 }: LintConfigModel): _LintConfigModel =>
   typescriptPlugin.config(
     {
-      ignores: [
-        `!(${include.map((v) => toRelative({ from: workingDir, to: v })).join('|')})`,
-        ...exclude,
-      ],
+      ignores: [`!(${include.map((v) => toRelative({ to: v })).join('|')})`, ...exclude],
     },
 
     eslintPlugin.configs.recommended,

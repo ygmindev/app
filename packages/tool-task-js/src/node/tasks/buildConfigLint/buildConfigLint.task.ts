@@ -1,5 +1,4 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
-import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { BUILD_DIR, DIST_DIR } from '@lib/config/file/file.constants';
@@ -19,11 +18,7 @@ const buildConfigLint: TaskParamsModel<BuildJsParamsModel> = {
   name: 'build-config-lint',
 
   onBefore: [
-    async () =>
-      writeFile({
-        filename: paramsPathname,
-        value: stringify({ ...lintConfig.params(), workingDir: fromDist() }),
-      }),
+    async () => writeFile({ filename: paramsPathname, value: stringify(lintConfig.params()) }),
   ],
 
   onFinish: [async () => runClean({ patterns: [paramsPathname] })],

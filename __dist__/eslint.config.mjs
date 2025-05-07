@@ -55,8 +55,7 @@ var require_eslint_config_mjs = __commonJS({
       isSpacing: true,
       isTrailingComma: true,
       printWidth: 100,
-      unusedIgnore: "^_",
-      workingDir: "/Users/yoongeemin/Developer/Projects/app/__dist__"
+      unusedIgnore: "^_"
     };
   }
 });
@@ -113,14 +112,10 @@ var _lint = /* @__PURE__ */ __name(({
   isSpacing,
   isTrailingComma,
   printWidth,
-  unusedIgnore,
-  workingDir = fromWorking()
+  unusedIgnore
 }) => typescriptPlugin.config(
   {
-    ignores: [
-      `!(${include.map((v) => toRelative({ from: workingDir, to: v })).join("|")})`,
-      ...exclude
-    ]
+    ignores: [`!(${include.map((v) => toRelative({ to: v })).join("|")})`, ...exclude]
   },
   eslintPlugin.configs.recommended,
   {
