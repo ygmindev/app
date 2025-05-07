@@ -14,10 +14,9 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
     {
       aliases: [{ from: /lodash\/(.*)/, to: 'lodash/$1.js' }],
 
-      // entryFiles: { index: fromWorking('src/index.ts') },
       envPrefix: ['SERVER_'],
 
-      externals: [/node_modules/],
+      externals: [/node_modules/, '@eslint/js', 'globals'],
 
       watch: [fromPackages('lib-backend-js/src/**/*')],
     },

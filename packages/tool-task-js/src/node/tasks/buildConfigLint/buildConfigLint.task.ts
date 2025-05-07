@@ -30,8 +30,8 @@ const buildConfigLint: TaskParamsModel<BuildJsParamsModel> = {
 
   overrides: () => ({
     entryFiles: { 'eslint.config': fromConfig('node/lint/eslint.config.ts') },
-    transpilePatterns: [new RegExp(paramsPathname)],
     outputPathname: fromWorking(DIST_DIR),
+    transpilePatterns: [new RegExp(paramsPathname)],
   }),
 };
 

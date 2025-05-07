@@ -37,7 +37,6 @@ import { build } from 'esbuild';
 const buildJs: TaskParamsModel<BuildJsParamsModel> = {
   name: 'build-js',
 
-  
   task: [
     async ({ options }) => {
       if (options?.entryFiles) {

@@ -1,9 +1,9 @@
-import jsPlugin from '@eslint/js';
+import eslintPlugin from '@eslint/js';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { type _LintConfigModel, type LintConfigModel } from '@lib/config/node/lint/lint.models';
 import { trimValue } from '@lib/shared/core/utils/trimValue/trimValue';
-import importPlugin from 'eslint-plugin-import';
+import { flatConfigs as importPlugin } from 'eslint-plugin-import';
 import jsoncPlugin from 'eslint-plugin-jsonc';
 import prettierPlugin from 'eslint-plugin-prettier/recommended';
 import reactPlugin from 'eslint-plugin-react';
@@ -36,7 +36,7 @@ export const _lint = ({
       ],
     },
 
-    jsPlugin.configs.recommended,
+    eslintPlugin.configs.recommended,
     {
       rules: {
         'no-param-reassign': 'error',
@@ -90,7 +90,7 @@ export const _lint = ({
       },
     },
 
-    importPlugin.flatConfigs.recommended,
+    importPlugin.recommended,
 
     ...jsoncPlugin.configs['flat/recommended-with-jsonc'],
     {

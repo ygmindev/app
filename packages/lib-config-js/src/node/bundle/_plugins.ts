@@ -4,7 +4,6 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
@@ -97,9 +96,10 @@ export const _plugins = ({
 
     (esbuildFlowPlugin as () => unknown)() as Plugin,
 
-    process.env.ENV_PLATFORM === PLATFORM.NODE &&
+    externals &&
       nodeExternalsPlugin({
         allowList: [...(transpileModules ?? []), ...(transpilePatterns ?? [])],
+        forceExternalList: externals,
         packagePath: rootDirs?.map((path) => joinPaths([path, 'package.json'])),
       }),
   ]) as Array<Plugin>;
