@@ -1,10 +1,9 @@
 import { config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.web';
 import { type FrameworkRenderParamsModel } from '@lib/config/node/framework/framework.models';
-import { type CookiesModel } from '@lib/frontend/state/state.models';
+import { cookies } from '@lib/frontend/http/utils/cookies/cookies';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { STATE } from '@lib/shared/state/state.constants';
-import Cookies from 'cookies-js';
 
 export const onBeforeClient = async (
   params: FrameworkRenderParamsModel,
@@ -15,7 +14,7 @@ export const onBeforeClient = async (
       [LOCALE]: {
         i18n: context?.[LOCALE]?.i18n ?? internationalizeConfig.config(),
       },
-      [STATE]: { cookies: Cookies as unknown as CookiesModel },
+      [STATE]: { cookies },
     },
     context,
   ]);

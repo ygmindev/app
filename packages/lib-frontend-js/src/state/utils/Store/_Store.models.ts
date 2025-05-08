@@ -1,5 +1,5 @@
+import { type CookiesModel } from '@lib/frontend/http/utils/cookies/cookies.models';
 import {
-  type CookiesModel,
   type NestedDefaultStateModel,
   type NestedInitialStateModel,
   type NestedReducerModel,

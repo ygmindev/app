@@ -1,6 +1,6 @@
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
+import { cookies } from '@lib/frontend/http/utils/cookies/cookies';
 import { type RootContextModel } from '@lib/frontend/root/root.models';
-import { type CookiesModel } from '@lib/frontend/state/state.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { STATE } from '@lib/shared/state/state.constants';
@@ -8,7 +8,6 @@ import {
   type _RenderClientModel,
   type _RenderClientParamsModel,
 } from '@lib/shared/web/utils/renderClient/_renderClient.models';
-import Cookies from 'cookies-js';
 import { type ComponentType } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
@@ -24,7 +23,7 @@ export const _renderClient =
     const contextF: RootContextModel = merge([
       {
         [LOCALE]: { i18n: context?.[LOCALE]?.i18n ?? _internationalize(internationalizeConfig) },
-        [STATE]: { cookies: Cookies as unknown as CookiesModel },
+        [STATE]: { cookies },
       },
       context,
     ]);

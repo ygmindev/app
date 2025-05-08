@@ -34,6 +34,7 @@
     "axios": "^1.9.0",
     "class-validator": "^0.14.1",
     "close-with-grace": "^2.2.0",
+    "cookies": "^0.9.1",
     "core-js": "^3.41.0",
     "date-fns": "^4.1.0",
     "ejs": "^3.1.10",

@@ -88,21 +88,6 @@ export type ActionModel<TType extends object, TValue> = (
   value?: TValue,
 ) => void;
 
-export type CookieOptionModel = {
-  domain?: string;
-  expires?: Date;
-  path?: string;
-  secure?: boolean;
-};
-
-export type CookiesModel = {
-  expire(key: string, options?: CookieOptionModel): void;
-
-  get<TType extends string = string>(key: string): TType | null;
-
-  set<TType extends string = string>(key: string, value: TType, options?: CookieOptionModel): void;
-};
-
 export type ArrayActionsModel<TType> = {
   [TKey in StringKeyModel<TType>]: RequiredModel<TType>[TKey] extends Array<unknown>
     ? ActionsModel<

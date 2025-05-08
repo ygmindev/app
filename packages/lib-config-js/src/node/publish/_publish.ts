@@ -12,6 +12,8 @@ export const _publish = ({ assetsPathname, name }: PublishConfigModel): _Publish
 
   compatibility_date: '2025-04-01',
 
+  compatibility_flags: ['nodejs_compat'],
+
   name,
 
   no_bundle: true,

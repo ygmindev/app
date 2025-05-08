@@ -11,7 +11,7 @@ export type _RenderModel = {
   redirectTo?: string;
   response?: {
     headers: Array<[string, string]>;
-    pipeStream(writable: NodeJS.WritableStream): void;
+    pipeStream(writable: WritableStream): void;
     statusCode: number;
   };
 };

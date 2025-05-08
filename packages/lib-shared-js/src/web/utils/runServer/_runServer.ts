@@ -6,7 +6,7 @@ import { fastifyStatic } from '@fastify/static';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
 import { _web } from '@lib/config/node/web/_web';
-import { type CookieOptionModel } from '@lib/frontend/state/state.models';
+import { type CookiesOptionModel } from '@lib/frontend/http/utils/cookies/cookies.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -83,7 +83,7 @@ export const _runServer = async ({
             set: <TType extends string = string>(
               key: string,
               value: TType,
-              options?: CookieOptionModel,
+              options?: CookiesOptionModel,
             ) => void res.setCookie(key, value, { domain: options?.domain, sameSite: 'strict' }),
           },
         },
@@ -97,7 +97,7 @@ export const _runServer = async ({
       const { headers, pipeStream, statusCode } = response;
       void res.status(statusCode);
       headers.forEach(([name, value]) => res.raw.setHeader(name, value));
-      pipeStream(res.raw);
+      pipeStream(res.raw as unknown as WritableStream);
     } else if (error) {
       // TODO: better error handling
       await res.status(500).send(error);

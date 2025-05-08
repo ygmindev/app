@@ -1090,6 +1090,9 @@ importers:
       close-with-grace:
         specifier: ^2.2.0
         version: 2.2.0
+      cookies:
+        specifier: ^0.9.1
+        version: 0.9.1
       core-js:
         specifier: ^3.41.0
         version: 3.42.0
@@ -1220,6 +1223,9 @@ importers:
       close-with-grace:
         specifier: ^2.2.0
         version: 2.2.0
+      cookies:
+        specifier: ^0.9.1
+        version: 0.9.1
       core-js:
         specifier: ^3.41.0
         version: 3.42.0
@@ -1403,6 +1409,9 @@ importers:
       close-with-grace:
         specifier: ^2.2.0
         version: 2.2.0
+      cookies:
+        specifier: ^0.9.1
+        version: 0.9.1
       core-js:
         specifier: ^3.41.0
         version: 3.42.0
@@ -1539,6 +1548,9 @@ importers:
       class-validator:
         specifier: ^0.14.1
         version: 0.14.2
+      cookies:
+        specifier: ^0.9.1
+        version: 0.9.1
       core-js:
         specifier: ^3.41.0
         version: 3.42.0
@@ -1666,6 +1678,9 @@ importers:
       '@bunchtogether/vite-plugin-flow':
         specifier: ^1.0.2
         version: 1.0.2
+      '@cloudflare/workers-types':
+        specifier: ^4.20250507.0
+        version: 4.20250507.0
       '@inquirer/checkbox':
         specifier: ^4.1.5
         version: 4.1.5(@types/node@22.15.11)
@@ -1756,6 +1771,9 @@ importers:
       '@types/color':
         specifier: ^4.2.0
         version: 4.2.0
+      '@types/cookies':
+        specifier: ^0.9.0
+        version: 0.9.0
       '@types/ejs':
         specifier: ^3.1.5
         version: 3.1.5
@@ -2118,7 +2136,7 @@ importers:
         version: 8.0.3
       wrangler:
         specifier: ^4.14.1
-        version: 4.14.1
+        version: 4.14.1(@cloudflare/workers-types@4.20250507.0)
     devDependencies:
       '@types/minimist':
         specifier: ^1.2.5
@@ -3304,6 +3322,9 @@ packages:
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
+
+  '@cloudflare/workers-types@4.20250507.0':
+    resolution: {integrity: sha512-fkrq7A6XWgPEmXJDwu9TS/Zw7qho3eGlrOlicKue32Bdul0Ma4Mym4sh7ZeGbayBXxkOx/fHpm5GfhVEtngRWQ==}
 
   '@codegenie/serverless-express@4.16.0':
     resolution: {integrity: sha512-TlvAHQysphN3OW6Ziz6AD2DnN9IIy/KkKNImZwMJpwGHHqLATi/9hMg8H8VBRg2L15pGt8ad3R6j6mfvHVWrCg==}
@@ -7619,6 +7640,9 @@ packages:
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
 
+  '@types/cookies@0.9.0':
+    resolution: {integrity: sha512-40Zk8qR147RABiQ7NQnBzWzDcjKzNrntB5BAmeGCb2p/MIyOE+4BVvc17wumsUqUw00bJYqoXFHYygQnEFh4/Q==}
+
   '@types/cors@2.8.12':
     resolution: {integrity: sha512-vt+kDhq/M2ayberEtJcIN/hxXy1Pk+59g2FV/ZQceeaTyCtCucjL2Q7FXlFjtWn4n15KCr1NE2lNNFhp0lEThw==}
 
@@ -7763,6 +7787,9 @@ packages:
 
   '@types/jsonwebtoken@9.0.9':
     resolution: {integrity: sha512-uoe+GxEuHbvy12OUQct2X9JenKM3qAscquYymuQN4fMWG9DBQtykrQEFcAbVACF7qaLw9BePSodUL0kquqBJpQ==}
+
+  '@types/keygrip@1.0.6':
+    resolution: {integrity: sha512-lZuNAY9xeJt7Bx4t4dx0rYCDqGPW8RXhQZK1td7d4H6E9zYbLoOtjBvfwdTKpsyxQI/2jv+armjX/RW+ZNpXOQ==}
 
   '@types/loadable__component@5.13.9':
     resolution: {integrity: sha512-QWOtIkwZqHNdQj3nixQ8oyihQiTMKZLk/DNuvNxMSbTfxf47w+kqcbnxlUeBgAxdOtW0Dh48dTAIp83iJKtnrQ==}
@@ -9471,6 +9498,10 @@ packages:
 
   cookies-js@1.2.3:
     resolution: {integrity: sha512-yqW9Kl46LcwedlF+2wyFSaCSwRKRrU6m3n9WoAsFfn23bpRfkEBwfOkD+lFw4jCLLs960ke/aM5Qe1BAhtgJmQ==}
+
+  cookies@0.9.1:
+    resolution: {integrity: sha512-TG2hpqe4ELx54QER/S3HQ9SRVnQnGBtKUz5bLQWtYAQ+o6GpgMs6sYUvaiJjVxb+UXwhRhAEP3m7LbsIZ77Hmw==}
+    engines: {node: '>= 0.8'}
 
   copy-props@4.0.0:
     resolution: {integrity: sha512-bVWtw1wQLzzKiYROtvNlbJgxgBYt2bMJpkCbKmXM3xyijvcjjWXEk5nyrrT3bgJ7ODb19ZohE2T0Y3FgNPyoTw==}
@@ -12705,6 +12736,10 @@ packages:
 
   kdbush@4.0.2:
     resolution: {integrity: sha512-WbCVYJ27Sz8zi9Q7Q0xHC+05iwkm3Znipc2XTlrnJbsHMYktW4hPhXUE8Ys1engBrvffoSCqbil1JQAa7clRpA==}
+
+  keygrip@1.1.0:
+    resolution: {integrity: sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==}
+    engines: {node: '>= 0.6'}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -16206,6 +16241,10 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
+  tsscmp@1.0.6:
+    resolution: {integrity: sha512-LxhtAkPDTkVCMQjt2h6eBVY28KCjikZqZfMcC15YBeNjkgUpdCfBu5HoiOTDu86v6smE8yOjyEktJ8hlbANHQA==}
+    engines: {node: '>=0.6.x'}
+
   tsutils@3.21.0:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
@@ -18914,6 +18953,8 @@ snapshots:
 
   '@cloudflare/workerd-windows-64@1.20250428.0':
     optional: true
+
+  '@cloudflare/workers-types@4.20250507.0': {}
 
   '@codegenie/serverless-express@4.16.0': {}
 
@@ -24297,6 +24338,13 @@ snapshots:
     dependencies:
       '@types/node': 22.15.11
 
+  '@types/cookies@0.9.0':
+    dependencies:
+      '@types/connect': 3.4.38
+      '@types/express': 4.17.21
+      '@types/keygrip': 1.0.6
+      '@types/node': 22.15.11
+
   '@types/cors@2.8.12': {}
 
   '@types/cors@2.8.17':
@@ -24376,8 +24424,8 @@ snapshots:
 
   '@types/express@4.17.14':
     dependencies:
-      '@types/body-parser': 1.19.2
-      '@types/express-serve-static-core': 4.17.31
+      '@types/body-parser': 1.19.5
+      '@types/express-serve-static-core': 4.19.6
       '@types/qs': 6.9.18
       '@types/serve-static': 1.15.7
 
@@ -24475,6 +24523,8 @@ snapshots:
     dependencies:
       '@types/ms': 2.1.0
       '@types/node': 22.15.11
+
+  '@types/keygrip@1.0.6': {}
 
   '@types/loadable__component@5.13.9':
     dependencies:
@@ -26627,6 +26677,11 @@ snapshots:
   cookiejar@2.1.4: {}
 
   cookies-js@1.2.3: {}
+
+  cookies@0.9.1:
+    dependencies:
+      depd: 2.0.0
+      keygrip: 1.1.0
 
   copy-props@4.0.0:
     dependencies:
@@ -30875,6 +30930,10 @@ snapshots:
 
   kdbush@4.0.2: {}
 
+  keygrip@1.1.0:
+    dependencies:
+      tsscmp: 1.0.6
+
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
@@ -34951,6 +35010,8 @@ snapshots:
 
   tslib@2.8.1: {}
 
+  tsscmp@1.0.6: {}
+
   tsutils@3.21.0(typescript@5.8.3):
     dependencies:
       tslib: 1.14.1
@@ -35734,7 +35795,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20250428.0
       '@cloudflare/workerd-windows-64': 1.20250428.0
 
-  wrangler@4.14.1:
+  wrangler@4.14.1(@cloudflare/workers-types@4.20250507.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.0
       '@cloudflare/unenv-preset': 2.3.1(unenv@2.0.0-rc.15)(workerd@1.20250428.0)
@@ -35745,6 +35806,7 @@ snapshots:
       unenv: 2.0.0-rc.15
       workerd: 1.20250428.0
     optionalDependencies:
+      '@cloudflare/workers-types': 4.20250507.0
       fsevents: 2.3.3
       sharp: 0.33.5
     transitivePeerDependencies:
