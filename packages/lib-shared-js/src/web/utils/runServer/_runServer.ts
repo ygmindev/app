@@ -1,12 +1,14 @@
 import { fastifyCompress } from '@fastify/compress';
-import { type FastifyCookieOptions } from '@fastify/cookie';
+import { type CookieSerializeOptions, type FastifyCookieOptions } from '@fastify/cookie';
 import { fastifyCookie } from '@fastify/cookie';
+import { createError } from '@fastify/error';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
 import { _web } from '@lib/config/node/web/_web';
-import { type CookiesOptionModel } from '@lib/frontend/http/utils/cookies/cookies.models';
+import { HTTP_STATUS_CODE, SAME_SITE } from '@lib/shared/http/http.constants';
+import { type CookieOptionsModel } from '@lib/shared/http/http.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -72,7 +74,7 @@ export const _runServer = async ({
 
     logger.info(req.method, url);
 
-    const { error, redirectTo, response } = await render({
+    const { error, headers, pipeStream, redirectTo, statusCode } = await render({
       context: {
         [LOCALE]: { i18n: i18n as I18nModel, lang: language },
         [ROUTE]: { location: { pathname: url } },
@@ -83,24 +85,33 @@ export const _runServer = async ({
             set: <TType extends string = string>(
               key: string,
               value: TType,
-              options?: CookiesOptionModel,
-            ) => void res.setCookie(key, value, { domain: options?.domain, sameSite: 'strict' }),
+              options?: CookieOptionsModel,
+            ) =>
+              void res.setCookie(key, value, {
+                domain: options?.domain,
+                sameSite: (
+                  options?.sameSite ?? SAME_SITE.STRICT
+                ).toLowerCase() as CookieSerializeOptions['sameSite'],
+              }),
           },
         },
       },
-      headers: req.headers,
+      headers: req.headers ? (Object.entries(req.headers) as Array<[string, string]>) : undefined,
     });
 
-    if (redirectTo) {
-      await res.redirect(redirectTo, 302);
-    } else if (response) {
-      const { headers, pipeStream, statusCode } = response;
+    if (error) {
+      const ErrorResponse = createError(
+        `${error.statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR}`,
+        error.message,
+        error.statusCode,
+      );
+      throw new ErrorResponse();
+    } else if (redirectTo) {
+      await res.redirect(redirectTo, HTTP_STATUS_CODE.REDIRECT);
+    } else {
       void res.status(statusCode);
       headers.forEach(([name, value]) => res.raw.setHeader(name, value));
       pipeStream(res.raw as unknown as WritableStream);
-    } else if (error) {
-      // TODO: better error handling
-      await res.status(500).send(error);
     }
   });
 

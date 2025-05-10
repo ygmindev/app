@@ -1,5 +1,8 @@
 import { type WritableStream } from 'node:stream/web';
 
+import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { ROUTE } from '@lib/shared/route/route.constants';
 import {
   type _RenderModel,
   type _RenderParamsModel,
@@ -11,17 +14,25 @@ export const _render = async ({ context, headers }: _RenderParamsModel): Promise
     context,
     headersOriginal: headers,
     redirectTo: undefined,
-    urlOriginal: context?.route?.location?.pathname ?? '',
+    urlOriginal: context?.[ROUTE]?.location?.pathname ?? '',
   });
+
+  const error = errorWhileRendering
+    ? new HttpError(
+        (errorWhileRendering as HttpError).statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
+        (errorWhileRendering as Error).message,
+        (errorWhileRendering as Error).stack,
+      )
+    : undefined;
+
   return {
-    error: errorWhileRendering as Error,
+    error,
+    headers: httpResponse.headers,
+    pipeStream: (stream) => httpResponse.pipe(stream as unknown as WritableStream),
     redirectTo,
-    response: httpResponse
-      ? {
-          headers: httpResponse.headers,
-          pipeStream: (stream) => httpResponse.pipe(stream as unknown as WritableStream),
-          statusCode: httpResponse.statusCode,
-        }
-      : undefined,
+    statusCode: redirectTo
+      ? HTTP_STATUS_CODE.REDIRECT
+      : (error?.statusCode ?? httpResponse.statusCode),
+    stream: httpResponse.getReadableWebStream(),
   };
 };

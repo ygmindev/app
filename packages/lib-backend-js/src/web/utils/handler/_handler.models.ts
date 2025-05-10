@@ -1,7 +1,22 @@
+import {
+  type HttpRequest,
+  type HttpResponse,
+  type HttpResponseInit,
+  type InvocationContext,
+} from '@azure/functions';
+import {
+  type HttpRequestContextModel,
+  type HttpResponseContextModel,
+} from '@lib/backend/http/utils/http.models';
+
 export type _HandlerParamsModel = {
-  onRequest(request: Request, response: Response): Promise<Response>;
+  isStream?: boolean;
+  onRequest(request: HttpRequestContextModel): Promise<HttpResponseContextModel>;
 };
 
 export type _HandlerModel = {
-  fetch(request: Request): Promise<Response>;
+  handle: (
+    request: HttpRequest,
+    context: InvocationContext,
+  ) => Promise<HttpResponse | HttpResponseInit>;
 };

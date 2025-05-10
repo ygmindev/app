@@ -1,17 +1,17 @@
 import { type RootContextModel } from '@lib/frontend/root/root.models';
 import { type PartialDeepModel } from '@lib/shared/core/core.models';
+import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 
 export type _RenderParamsModel = {
   context?: PartialDeepModel<RootContextModel>;
-  headers?: unknown;
+  headers?: Array<[string, string]>;
 };
 
 export type _RenderModel = {
-  error?: Error;
+  error?: HttpError;
+  headers: Array<[string, string]>;
+  pipeStream(writable: WritableStream): void;
   redirectTo?: string;
-  response?: {
-    headers: Array<[string, string]>;
-    pipeStream(writable: WritableStream): void;
-    statusCode: number;
-  };
+  statusCode: number;
+  stream: ReadableStream;
 };

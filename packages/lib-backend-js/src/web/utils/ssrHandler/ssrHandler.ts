@@ -1,53 +1,57 @@
-import { Cookies } from '@lib/backend/http/utils/Cookies/Cookies';
-import { type CookiesOptionModel } from '@lib/backend/http/utils/Cookies/Cookies.models';
+import { type HttpCookieModel } from '@lib/backend/http/utils/http.models';
 import { handler } from '@lib/backend/web/utils/handler/handler';
 import {
   type SsrHandlerModel,
   type SsrHandlerParamsModel,
 } from '@lib/backend/web/utils/ssrHandler/ssrHandler.models';
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
-import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
+import { type CookieOptionsModel } from '@lib/shared/http/http.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { STATE } from '@lib/shared/state/state.constants';
 import { render } from '@lib/shared/web/utils/render/render';
+import reduce from 'lodash/reduce';
 
 export const ssrHandler = ({ internationalize }: SsrHandlerParamsModel): SsrHandlerModel => {
   const i18n = _internationalize(internationalize);
   return handler({
-    onRequest: async (req, res) => {
-      const cookies = new Cookies({ req, res });
-      const { headers, url } = req;
-      const lang = headers.get('accept-language') ?? 'en';
-      const { error, redirectTo, response } = await render({
+    onRequest: async (request) => {
+      const cookies: Record<string, Omit<HttpCookieModel, 'key'>> = {};
+      const lang = request.headers?.get('accept-language') ?? 'en';
+      const { error, headers, redirectTo, statusCode, stream } = await render({
         context: {
           [LOCALE]: { i18n, lang },
-          [ROUTE]: { location: { pathname: url } },
+          [ROUTE]: { location: { pathname: request.url } },
           [STATE]: {
             cookies: {
-              expire: (key) => cookies.expire(key),
-              get: <TType extends string = string>(key: string) => cookies.get<TType>(key),
+              expire: (key) => delete cookies[key],
+              get: <TType extends string = string>(key: string) =>
+                (cookies[key]?.value as TType) || null,
               set: <TType extends string = string>(
                 key: string,
                 value: TType,
-                options?: CookiesOptionModel,
-              ) => cookies.set(key, value, options),
+                options?: CookieOptionsModel,
+              ) => (cookies[key] = { options, value }),
             },
           },
         },
-        headers: req.headers,
+        headers: request.headers?.entries(),
       });
-
-      if (error) {
-        return new Response(error.message, {
-          status: (error as HttpError).statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
-        });
-      }
-
-      const { readable, writable } = new TransformStream();
-      response?.pipeStream(writable);
-      return new Response(readable);
+      return {
+        body: stream,
+        cookies: isEmpty(cookies)
+          ? undefined
+          : reduce(
+              cookies,
+              (result, v: Omit<HttpCookieModel, 'key'>, k) => [...result, { key: k, ...v }],
+              [] as Array<HttpCookieModel>,
+            ),
+        error,
+        headers,
+        redirectTo,
+        statusCode,
+      };
     },
   });
 };

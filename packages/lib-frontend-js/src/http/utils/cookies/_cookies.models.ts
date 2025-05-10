@@ -1,9 +1,9 @@
-import { type CookiesOptionModel } from '@lib/frontend/http/utils/cookies/cookies.models';
+import { type CookieOptionsModel } from '@lib/shared/http/http.models';
 
 export type _CookiesModel = {
-  expire(key: string, options?: CookiesOptionModel): void;
+  expire(key: string, options?: CookieOptionsModel): void;
 
   get<TType extends string = string>(key: string): TType | null;
 
-  set<TType extends string = string>(key: string, value: TType, options?: CookiesOptionModel): void;
+  set<TType extends string = string>(key: string, value: TType, options?: CookieOptionsModel): void;
 };

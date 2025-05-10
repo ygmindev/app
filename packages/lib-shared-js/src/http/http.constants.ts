@@ -35,6 +35,7 @@ export const HTTP_STATUS_CODE = {
   INTERNAL_SERVER_ERROR: 500,
   INVALID_TOKEN: 498,
   NETWORK_CONNECT_TIMEOUT: 599,
+  REDIRECT: 302,
   SERVICE_UNAVAILABLE: 503,
   SUCCESS: 200,
   UNAUTHORIZED: 401,
@@ -58,3 +59,8 @@ export const SERVER_APP_URI = uri({
   host: process.env.SERVER_APP_HOST,
   port: process.env.SERVER_APP_PORT,
 });
+
+export enum SAME_SITE {
+  LAX = 'Lax',
+  STRICT = 'Strict',
+}

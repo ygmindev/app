@@ -2,6 +2,7 @@ import {
   type HTTP_METHOD,
   type HTTP_PROTOCOL,
   type HTTP_RESPONSE_TYPE,
+  type SAME_SITE,
   type WEBSOCKET_METHOD,
   type WEBSOCKET_STATUS,
 } from '@lib/shared/http/http.constants';
@@ -25,3 +26,15 @@ export type HttpResponseModel<TType = void> = {
   status?: number;
   type?: HttpResponseTypeModel;
 };
+
+export type CookieOptionsModel = {
+  domain?: string;
+  expires?: Date;
+  isHttpOnly?: boolean;
+  isSecure?: boolean;
+  maxAge?: number;
+  path?: string;
+  sameSite?: SameSiteModel;
+};
+
+export type SameSiteModel = `${SAME_SITE}`;
