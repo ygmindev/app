@@ -24,6 +24,7 @@ import { readFileSync } from 'fs';
 import { type SecureServerOptions } from 'http2';
 import { plugin as i18nextMiddleware } from 'i18next-http-middleware';
 import toNumber from 'lodash/toNumber';
+import { PassThrough } from 'stream';
 import { createDevMiddleware } from 'vike/server';
 
 export const _runServer = async ({
@@ -111,7 +112,11 @@ export const _runServer = async ({
     } else {
       void res.status(statusCode);
       headers.forEach(([name, value]) => res.raw.setHeader(name, value));
-      pipeStream(res.raw as unknown as WritableStream);
+
+      const transform = new PassThrough();
+      transform.pipe(res.raw);
+      pipeStream(transform as unknown as WritableStream);
+      // pipeStream(res.raw as unknown as WritableStream);
     }
   });
 

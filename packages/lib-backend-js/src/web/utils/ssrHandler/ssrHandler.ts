@@ -12,6 +12,7 @@ import { ROUTE } from '@lib/shared/route/route.constants';
 import { STATE } from '@lib/shared/state/state.constants';
 import { render } from '@lib/shared/web/utils/render/render';
 import reduce from 'lodash/reduce';
+import { PassThrough } from 'stream';
 
 export const ssrHandler = ({ internationalize }: SsrHandlerParamsModel): SsrHandlerModel => {
   const i18n = _internationalize(internationalize);
@@ -39,12 +40,11 @@ export const ssrHandler = ({ internationalize }: SsrHandlerParamsModel): SsrHand
         headers: request.headers?.entries(),
       });
 
-      const { readable, writable } = new TransformStream();
-
-      pipeStream(writable);
+      const transform = new PassThrough();
+      pipeStream(transform as unknown as WritableStream);
 
       return {
-        body: readable,
+        body: transform as unknown as ReadableStream,
         cookies: isEmpty(cookies)
           ? undefined
           : reduce(
