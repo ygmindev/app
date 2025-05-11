@@ -19,7 +19,7 @@ export const ssrHandler = ({ internationalize }: SsrHandlerParamsModel): SsrHand
     onRequest: async (request) => {
       const cookies: Record<string, Omit<HttpCookieModel, 'key'>> = {};
       const lang = request.headers?.get('accept-language') ?? 'en';
-      const { error, headers, redirectTo, statusCode, stream } = await render({
+      const { error, headers, pipeStream, redirectTo, statusCode } = await render({
         context: {
           [LOCALE]: { i18n, lang },
           [ROUTE]: { location: { pathname: request.url } },
@@ -38,8 +38,13 @@ export const ssrHandler = ({ internationalize }: SsrHandlerParamsModel): SsrHand
         },
         headers: request.headers?.entries(),
       });
+
+      const { readable, writable } = new TransformStream();
+
+      pipeStream(writable);
+
       return {
-        body: stream,
+        body: readable,
         cookies: isEmpty(cookies)
           ? undefined
           : reduce(

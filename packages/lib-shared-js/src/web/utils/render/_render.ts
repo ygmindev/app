@@ -1,5 +1,3 @@
-import { type WritableStream } from 'node:stream/web';
-
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
@@ -28,11 +26,10 @@ export const _render = async ({ context, headers }: _RenderParamsModel): Promise
   return {
     error,
     headers: httpResponse.headers,
-    pipeStream: (stream) => httpResponse.pipe(stream as unknown as WritableStream),
+    pipeStream: (stream) => httpResponse.pipe(stream),
     redirectTo,
     statusCode: redirectTo
       ? HTTP_STATUS_CODE.REDIRECT
       : (error?.statusCode ?? httpResponse.statusCode),
-    stream: httpResponse.getReadableWebStream(),
   };
 };

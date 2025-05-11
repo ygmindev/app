@@ -13,5 +13,4 @@ export type _RenderModel = {
   pipeStream(writable: WritableStream): void;
   redirectTo?: string;
   statusCode: number;
-  stream: ReadableStream;
 };
