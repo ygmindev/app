@@ -9,8 +9,11 @@ import {
   type HttpRequestModel,
   type HttpResponseModel,
 } from '@lib/shared/http/http.models';
+import { type FastifyReply, type FastifyRequest } from 'fastify';
 
 export type ApiConfigModel = {
+  onBeforeRegister?(endpoint: ApiEndpointModel<unknown, unknown>): Promise<void>;
+
   prefix: string;
 
   routes: Array<ApiEndpointModel<unknown, unknown>>;
@@ -28,13 +31,12 @@ export type RequestContextModel = {
 export type ApiHandlerModel<TType = void, TParams = void> = (
   request: HttpRequestModel<TParams>,
   context?: RequestContextModel,
+  params?: { rep: FastifyReply; req: FastifyRequest },
 ) => Promise<HttpResponseModel<TType>>;
 
 export type ApiEndpointTypeModel = `${API_ENDPOINT_TYPE}`;
 
 export type ApiEndpointModel<TType = void, TParams = void> = {
-  filename?: string;
-
   method: HttpMethodModel | Array<HttpMethodModel>;
 
   pathname: string;

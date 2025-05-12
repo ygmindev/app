@@ -1,3 +1,3 @@
-import { type FastifyInstance } from 'fastify';
+import { type ServerModel } from '@lib/backend/server/utils/Server/Server.models';
 
-export type _ServerPluginModel<TType> = (app: FastifyInstance, params: TType) => Promise<void>;
+export type ServerPluginModel<TType> = (server: ServerModel, params: TType) => Promise<void>;

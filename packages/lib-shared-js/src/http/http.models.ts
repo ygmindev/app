@@ -23,6 +23,7 @@ export type HttpRequestModel<TParams = void> = {
 
 export type HttpResponseModel<TType = void> = {
   body?: TType;
+  headers?: Headers;
   status?: number;
   type?: HttpResponseTypeModel;
 };

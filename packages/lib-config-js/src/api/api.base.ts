@@ -8,7 +8,13 @@ export const config = defineConfig<ApiConfigModel>({
     ({
       prefix: 'api',
 
-      routes: [{ handler: ping, method: HTTP_METHOD.GET, pathname: PING }],
+      routes: [
+        {
+          handler: ping,
+          method: HTTP_METHOD.GET,
+          pathname: PING,
+        },
+      ],
     }) as ApiConfigModel,
 });
 

@@ -1,5 +1,5 @@
-import { type _ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
+import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
 
-export type WebsocketPluginModel = _ServerPluginModel<{
+export type WebsocketPluginModel = ServerPluginModel<{
   maxPayload?: number;
 }>;

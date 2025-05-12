@@ -87,7 +87,7 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
 
     const contextF = await getContext({ context, event });
     const result: LambdaResponseModel = {
-      statusCode: HTTP_STATUS_CODE.SUCCESS,
+      statusCode: HTTP_STATUS_CODE.OK,
       ...(handler &&
         (await handler({
           body: {
@@ -107,7 +107,7 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
             Data: Buffer.from(result.body as string),
           });
           await api.send(command);
-          return { statusCode: HTTP_STATUS_CODE.SUCCESS };
+          return { statusCode: HTTP_STATUS_CODE.OK };
         }
         return result;
       }

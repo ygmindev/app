@@ -1,4 +1,5 @@
-import { type ApiConfigModel } from '@lib/config/api/api.models';
+import { type ApiConfigModel, type ApiEndpointModel } from '@lib/config/api/api.models';
+import { type FastifyInstance } from 'fastify';
 
 export type _ServerParamsModel = {
   api: ApiConfigModel;
@@ -25,5 +26,9 @@ export type _ServerParamsModel = {
 };
 
 export type _ServerModel = {
-  run(params: { port: number | string }): Promise<void>;
+  _app: FastifyInstance;
+
+  register<TType, TParams>(endpoint: ApiEndpointModel<TType, TParams>): Promise<void>;
+
+  run(): Promise<void>;
 };

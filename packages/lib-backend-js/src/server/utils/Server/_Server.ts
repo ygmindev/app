@@ -3,22 +3,24 @@ import {
   type _ServerModel,
   type _ServerParamsModel,
 } from '@lib/backend/server/utils/Server/_Server.models';
-import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
-import { isArray } from '@lib/shared/core/utils/isArray/isArray';
-import { uri } from '@lib/shared/http/utils/uri/uri';
+import { type ApiConfigModel, type ApiEndpointModel } from '@lib/config/api/api.models';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
-import { fastify, type FastifyInstance, type HTTPMethods, type RouteOptions } from 'fastify';
+import { fastify, type FastifyInstance, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
 import toNumber from 'lodash/toNumber';
 
 export class _Server implements _ServerModel {
-  protected _app: FastifyInstance;
-  private _port: number;
-  private _host: string;
+  _app: FastifyInstance;
+
+  protected _port: number;
+  protected _host: string;
+  protected _api: ApiConfigModel;
 
   constructor({ api, certificate, cors, host, port }: _ServerParamsModel) {
     this._host = host;
     this._port = port;
+    this._api = api;
 
     const { certificateDir, privateKeyFilename, publicKeyFilename } = certificate;
     this._app = fastify({
@@ -28,76 +30,31 @@ export class _Server implements _ServerModel {
         key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
       },
     });
+  }
 
-    api.routes.forEach(({ handler, method, pathname, protocol, schema, type }) => {
-      const url = `/${joinPaths([api.prefix, pathname])}`;
-      logger.info(
-        `${isArray(method) ? method.join(',') : method} ${uri({
-          host: this._host,
-          port: this._port,
-        })}${url}`,
-      );
+  async register<TType, TParams>({
+    handler,
+    method,
+    pathname,
+    protocol,
+  }: ApiEndpointModel<TType, TParams>): Promise<void> {
+    await this._app.register(async (fastify) =>
+      fastify.route({
+        handler: async (req, rep) => {
+          const { body, headers, status } = handler
+            ? await handler({ body: req.body as TParams }, undefined, { rep, req })
+            : { body: '', status: HTTP_STATUS_CODE.OK };
 
-      const route: RouteOptions = {
-        handler: async (req, reply) => {
-          const { body, status } = handler
-            ? await handler({ body: req.body })
-            : { body: '', status: 200 };
-          await reply.status(status ?? 200).send(body);
-        },
-        method: method as HTTPMethods,
-        url,
-      };
-
-      if (type === API_ENDPOINT_TYPE.GRAPHQL) {
-        try {
-          const schemaF = schema && _graphql(schema);
-          const yoga = createYoga<{ reply: FastifyReply; req: FastifyRequest }>({
-            context: async ({ request }) => {
-              const context: RequestContextModel = {};
-              const access = request.headers.get('authorization');
-              access && (context.token = { access });
-              // TODO: delete token if expired token
-              // request.headers.delete('authorization');
-              return context;
-            },
-            landingPage: false,
-            logging: logger,
-            maskedErrors: {
-              maskError(error, message, isDev) {
-                return formatGraphqlError(error as GraphQLError);
-              },
-            },
-            plugins: filterNil([protocol !== HTTP_PROTOCOL.WEBSOCKET && useGraphQLSSE]),
-            schema: schemaF,
+          headers?.forEach((v, k) => {
+            void rep.header(v, k);
           });
 
-          switch (protocol) {
-            case HTTP_PROTOCOL.WEBSOCKET: {
-              route.wsHandler = makeHandler({ schema: schemaF });
-              break;
-            }
-            default: {
-              route.handler = async (req, reply) => {
-                const response = await yoga.handleNodeRequestAndResponse(req, reply, {
-                  reply,
-                  req,
-                });
-                response.headers.forEach((value: unknown, key: string) => {
-                  void reply.header(key, value);
-                });
-                await reply.status(response.status ?? 200).send(response.body);
-              };
-              break;
-            }
-          }
-        } catch (e) {
-          console.warn(e);
-        }
-      }
-
-      this._app.register(async (fastify) => fastify.route(route));
-    });
+          await rep.status(status ?? HTTP_STATUS_CODE.OK).send(body);
+        },
+        method: method as HTTPMethods,
+        url: pathname,
+      }),
+    );
   }
 
   async run(): Promise<void> {

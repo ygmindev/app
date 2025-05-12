@@ -8,6 +8,6 @@ export const ping: ApiHandlerModel<PingModel, PingParamsModel> = async (
 ) => {
   return {
     body: { message: 'success', userId: user?._id },
-    status: HTTP_STATUS_CODE.SUCCESS,
+    status: HTTP_STATUS_CODE.OK,
   };
 };
