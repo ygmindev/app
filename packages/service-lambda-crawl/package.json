@@ -9,6 +9,7 @@
     "@aws-sdk/client-apigatewaymanagementapi": "^3.798.0",
     "@azure/functions": "^4.7.0",
     "@babel/core": "^7.26.10",
+    "@fastify/cors": "^11.0.1",
     "@fastify/error": "^4.1.0",
     "@graphql-yoga/redis-event-target": "^3.0.3",
     "@netlify/functions": "^3.1.5",
