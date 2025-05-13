@@ -1,6 +1,3 @@
-import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
+import { type _CorsPluginModel } from '@lib/backend/server/utils/Server/plugins/corsPlugin/_corsPlugin.models';
 
-export type CorsPluginModel = ServerPluginModel<{
-  headers?: Array<string>;
-  origins: Array<string | RegExp>;
-}>;
+export type CorsPluginModel = _CorsPluginModel;

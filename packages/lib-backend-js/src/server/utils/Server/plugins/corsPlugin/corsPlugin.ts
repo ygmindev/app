@@ -1,9 +1,4 @@
-import cors from '@fastify/cors';
+import { _corsPlugin } from '@lib/backend/server/utils/Server/plugins/corsPlugin/_corsPlugin';
 import { type CorsPluginModel } from '@lib/backend/server/utils/Server/plugins/corsPlugin/corsPlugin.models';
 
-export const corsPlugin: CorsPluginModel = async (server, { headers, origins }) => {
-  await server._app.register(cors, {
-    allowedHeaders: headers,
-    origin: origins,
-  });
-};
+export const corsPlugin: CorsPluginModel = _corsPlugin;

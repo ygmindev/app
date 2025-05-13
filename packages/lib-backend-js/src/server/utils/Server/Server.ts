@@ -6,16 +6,22 @@ import {
   type ServerParamsModel,
 } from '@lib/backend/server/utils/Server/Server.models';
 import { type ApiEndpointModel } from '@lib/config/api/api.models';
+import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
+import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export class Server<TParams extends Array<unknown>> extends _Server implements ServerModel {
-  _plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
+  protected _plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
+  protected _onInitialize: (() => Promise<void>) | undefined;
+  protected _onClose: (() => Promise<void>) | undefined;
 
-  constructor({ plugins, ...params }: ServerParamsModel<TParams>) {
+  constructor({ onClose: onClose, onInitialize, plugins, ...params }: ServerParamsModel<TParams>) {
     super(params);
     this._plugins = plugins;
+    this._onClose = onClose;
+    this._onInitialize = onInitialize;
   }
 
   async register<TType, TParams>(params: ApiEndpointModel<TType, TParams>): Promise<void> {
@@ -29,10 +35,24 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
     return super.register({ ...params, pathname });
   }
 
+  async handleClose(): Promise<void> {
+    await this._onClose?.();
+    await this.close();
+  }
+
   async run(): Promise<void> {
+    handleHmr({ onChange: this.handleClose });
+
+    await handleCleanup({ onCleanUp: this.handleClose });
+    await this._onInitialize?.();
+
     for (const [plugin, params] of this._plugins ?? []) {
       await plugin(this, params);
     }
     await super.run();
+  }
+
+  async close(): Promise<void> {
+    await super.close();
   }
 }

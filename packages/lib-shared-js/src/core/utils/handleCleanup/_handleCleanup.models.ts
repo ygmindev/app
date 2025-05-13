@@ -1,5 +1,5 @@
 export type _HandleCleanupParamsModel = {
-  onCleanup?(): Promise<void>;
+  onCleanUp?(): Promise<void>;
 };
 
 export type _HandleCleanupModel = void;
