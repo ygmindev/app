@@ -11,7 +11,7 @@ export const _handleCleanup = async ({
 }: _HandleCleanupParamsModel): Promise<_HandleCleanupModel> => {
   closeWithGrace(async (_) => {
     if (!isTerminated) {
-      onCleanUp && (await onCleanUp());
+      await onCleanUp?.();
       isTerminated = true;
     }
   });

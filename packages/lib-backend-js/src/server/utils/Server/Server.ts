@@ -5,6 +5,7 @@ import {
   type ServerModel,
   type ServerParamsModel,
 } from '@lib/backend/server/utils/Server/Server.models';
+import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type ApiEndpointModel } from '@lib/config/api/api.models';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
@@ -25,7 +26,7 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
   }
 
   async register<TType, TParams>(params: ApiEndpointModel<TType, TParams>): Promise<void> {
-    const pathname = `/${joinPaths([this._api.prefix, params.pathname])}`;
+    const pathname = `/${joinPaths([this._api?.prefix, params.pathname])}`;
     logger.info(
       `${isArray(params.method) ? params.method.join(',') : params.method} ${uri({
         host: this._host,
@@ -46,8 +47,9 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
     await handleCleanup({ onCleanUp: this.handleClose });
     await this._onInitialize?.();
 
-    for (const route of this._api.routes) {
-      await this.register(route);
+    for (const route of this._api?.routes ?? []) {
+      // graphql routes are handled by graphqlPlugin
+      route.type !== API_ENDPOINT_TYPE.GRAPHQL && (await this.register(route));
     }
 
     for (const [plugin, params] of this._plugins ?? []) {

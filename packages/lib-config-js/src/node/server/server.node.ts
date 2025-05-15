@@ -27,7 +27,7 @@ export const config = defineConfig<ServerConfigModel>({
           {
             config: garphqlConfig.params(),
             logger,
-            method: [HTTP_METHOD.POST, HTTP_METHOD.OPTIONS],
+            method: [HTTP_METHOD.GET, HTTP_METHOD.POST, HTTP_METHOD.OPTIONS],
             pathname: GRAPHQL,
           },
         ],

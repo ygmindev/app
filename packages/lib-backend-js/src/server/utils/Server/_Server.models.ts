@@ -2,7 +2,7 @@ import { type ApiConfigModel, type ApiEndpointModel } from '@lib/config/api/api.
 import { type FastifyInstance } from 'fastify';
 
 export type _ServerParamsModel = {
-  api: ApiConfigModel;
+  api?: ApiConfigModel;
 
   certificate: {
     caFilename: string;

@@ -1,4 +1,4 @@
-import configBase from '@lib/config/api/api.base';
+import { config as configBase } from '@lib/config/api/api.base';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type ApiConfigModel } from '@lib/config/api/api.models';
 import { config as graphqlConfigMain } from '@lib/config/graphql/graphql.main';
