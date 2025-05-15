@@ -21,8 +21,12 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
   constructor({ onClose: onClose, onInitialize, plugins, ...params }: ServerParamsModel<TParams>) {
     super(params);
     this._plugins = plugins;
-    this._onClose = onClose;
-    this._onInitialize = onInitialize;
+    this._onClose = onClose?.bind(this);
+    this._onInitialize = onInitialize?.bind(this);
+    this.register = this.register.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.run = this.run.bind(this);
+    this.close = this.close.bind(this);
   }
 
   async register<TType, TParams>(params: ApiEndpointModel<TType, TParams>): Promise<void> {
