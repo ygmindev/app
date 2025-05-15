@@ -10,4 +10,7 @@ export type ServerParamsModel<TParams extends Array<unknown>> = _ServerParamsMod
   plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
 };
 
-export type ServerModel = _ServerModel;
+export type ServerModel = _ServerModel & {
+  _onClose: (() => Promise<void>) | undefined;
+  _onInitialize: (() => Promise<void>) | undefined;
+};

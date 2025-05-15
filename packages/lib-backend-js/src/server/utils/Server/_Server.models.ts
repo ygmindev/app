@@ -14,12 +14,6 @@ export type _ServerParamsModel = {
     publicKeyFilename: string;
   };
 
-  cors: {
-    allowedHeaders: Array<string>;
-
-    allowedOrigins: Array<string>;
-  };
-
   host: string;
 
   port: number;

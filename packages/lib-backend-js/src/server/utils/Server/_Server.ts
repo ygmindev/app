@@ -17,7 +17,7 @@ export class _Server implements _ServerModel {
   protected _host: string;
   protected _api: ApiConfigModel;
 
-  constructor({ api, certificate, cors, host, port }: _ServerParamsModel) {
+  constructor({ api, certificate, host, port }: _ServerParamsModel) {
     this._host = host;
     this._port = port;
     this._api = api;

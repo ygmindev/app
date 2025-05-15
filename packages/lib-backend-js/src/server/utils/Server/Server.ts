@@ -13,9 +13,9 @@ import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export class Server<TParams extends Array<unknown>> extends _Server implements ServerModel {
-  protected _plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
-  protected _onInitialize: (() => Promise<void>) | undefined;
-  protected _onClose: (() => Promise<void>) | undefined;
+  _plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
+  _onInitialize: (() => Promise<void>) | undefined;
+  _onClose: (() => Promise<void>) | undefined;
 
   constructor({ onClose: onClose, onInitialize, plugins, ...params }: ServerParamsModel<TParams>) {
     super(params);
@@ -45,6 +45,10 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
 
     await handleCleanup({ onCleanUp: this.handleClose });
     await this._onInitialize?.();
+
+    for (const route of this._api.routes) {
+      await this.register(route);
+    }
 
     for (const [plugin, params] of this._plugins ?? []) {
       await plugin(this, params);

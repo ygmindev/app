@@ -12,14 +12,6 @@ export const config = defineConfig<ApiConfigModel>({
   overrides: () => [
     {
       routes: [
-        // {
-        //   method: HTTP_METHOD.GET,
-        //   pathname: `${GRAPHQL}/${WEBSOCKET}`,
-        //   protocol: HTTP_PROTOCOL.WEBSOCKET,
-        //   schema: graphqlConfigWebsocket.params(),
-        //   type: API_ENDPOINT_TYPE.GRAPHQL,
-        // },
-
         {
           method: [HTTP_METHOD.GET, HTTP_METHOD.POST, HTTP_METHOD.OPTIONS],
           pathname: GRAPHQL,

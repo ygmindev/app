@@ -1,14 +1,4 @@
-import { runServer } from '@lib/backend/server/utils/runServer/runServer';
-import { config as serverConfig } from '@lib/config/node/server/server';
-import { cleanup } from '@service/server/setup/utils/cleanup/cleanup';
-import { initialize } from '@service/server/setup/utils/initialize/initialize';
+import { Server } from '@lib/backend/server/utils/Server/Server';
+import { config as serverConfig } from '@lib/config/node/server/server.node';
 
-const configF = serverConfig.params();
-
-export const app = runServer({
-  ...configF,
-  onClose: cleanup,
-  onInitialize: async () => {
-    await initialize({ database: configF.database });
-  },
-});
+export const app = new Server(serverConfig.params()).run();
