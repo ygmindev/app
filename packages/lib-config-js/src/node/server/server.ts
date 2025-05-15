@@ -21,13 +21,6 @@ export const config = defineConfig<ServerConfigModel>({
       publicKeyFilename: process.env.SERVER_SSL_PUBLIC_KEY,
     },
 
-    cors: {
-      allowedHeaders: ['*'],
-
-      // allowedOrigins: process.env.NODE_ENV === 'production' ? [APP_URI] : ['*'],
-      allowedOrigins: ['*'],
-    },
-
     database: databaseConfig.params(),
 
     entryPathname: fromWorking('src/index.ts'),

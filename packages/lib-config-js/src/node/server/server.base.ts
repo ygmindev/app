@@ -1,5 +1,7 @@
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { corsPlugin } from '@lib/backend/server/utils/Server/plugins/corsPlugin/corsPlugin';
+import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
 import { PUBLIC_DIR } from '@lib/config/file/file.constants';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
@@ -20,6 +22,16 @@ export const config = defineConfig<ServerConfigModel>({
     entryPathname: fromWorking('src/index.ts'),
 
     host: process.env.SERVER_APP_HOST,
+
+    plugins: [
+      [
+        corsPlugin,
+        {
+          headers: ['*'],
+          origins: ['*'],
+        },
+      ],
+    ] as Array<[ServerPluginModel<unknown>, unknown]>,
 
     port: toNumber(process.env.SERVER_APP_PORT),
 
