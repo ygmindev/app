@@ -43,6 +43,7 @@ export const useGraphql = ({ query, ...params }: UseGraphqlParamsModel = {}): Us
         params,
         type,
       });
+      console.warn(`@@@ 222 ${queryString}`);
       const variablesF = variables && cleanObject(variables);
       const result = await queryF<TResult, TParams, TName>({
         isStreaming: type === GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,

@@ -45,16 +45,17 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
     handleHmr({ onChange: this.handleClose });
 
     await handleCleanup({ onCleanUp: this.handleClose });
-    await this._onInitialize?.();
+
+    for (const [plugin, params] of this._plugins ?? []) {
+      await plugin(this, params);
+    }
 
     for (const route of this._api?.routes ?? []) {
       // graphql routes are handled by graphqlPlugin
       route.type !== API_ENDPOINT_TYPE.GRAPHQL && (await this.register(route));
     }
 
-    for (const [plugin, params] of this._plugins ?? []) {
-      await plugin(this, params);
-    }
+    await this._onInitialize?.();
     await super.run();
   }
 

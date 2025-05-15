@@ -7,9 +7,12 @@ describe(displayName, () => {
   test('works', async () => {
     const VALUE = `
       string with new lines and
-      multiple  spaces
+      two  or more   spaces or\n
+      newline character
     `;
     const result = trimDeep(VALUE);
-    expect(result).toStrictEqual('string with new lines and multiple spaces');
+    expect(result).toStrictEqual(
+      'string with new lines and two or more spaces or newline character',
+    );
   });
 });

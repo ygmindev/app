@@ -1,5 +1,5 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import fileConfig from '@lib/config/file/file';
+import { config as fileConfig } from '@lib/config/file/file';
 import {
   type ImportFromEnvModel,
   type ImportFromEnvParamsModel,
@@ -13,8 +13,8 @@ export const importFromEnv = async <TType extends unknown>(
   resolveFirst<TType>(
     fileConfig.params().extensions.map((extension) => async () => {
       const name = extension ? joinPaths([params], { extension }) : params;
-      const result = (await import(name)) as TType;
+      const result = (await import(name)) as { default: TType };
       result && logger.debug('imported', name);
-      return result;
+      return (result.default ?? result) as TType;
     }),
   );

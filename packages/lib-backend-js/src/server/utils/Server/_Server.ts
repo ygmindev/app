@@ -44,11 +44,9 @@ export class _Server implements _ServerModel {
           const { body, headers, status } = handler
             ? await handler({ body: req.body as TParams }, undefined, { rep, req })
             : { body: '', status: HTTP_STATUS_CODE.OK };
-
           headers?.forEach((v, k) => {
-            void rep.header(v, k);
+            void rep.header(k, v);
           });
-
           await rep.status(status ?? HTTP_STATUS_CODE.OK).send(body);
         },
         method: method as HTTPMethods,

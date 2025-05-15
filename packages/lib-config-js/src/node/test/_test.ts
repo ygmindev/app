@@ -104,10 +104,7 @@ export const _test = ({
     testTimeout: timeout,
 
     transform: {
-      '^.+\\.(t|j)sx?$': [
-        'ts-jest',
-        { isolatedModules: true, tsconfig: fromWorking('tsconfig.json') },
-      ],
+      '^.+\\.(t|j)sx?$': ['ts-jest', { tsconfig: fromWorking('tsconfig.json') }],
     },
 
     transformIgnorePatterns: transpileModules

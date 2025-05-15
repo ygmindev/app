@@ -55,9 +55,9 @@ export const graphqlQuery = <TResult, TParams, TName extends string = string>({
       .map((k) => `${k}: $${k}`)
       .join(', ')})`;
   }
-  return print(gql`
-    ${trimDeep(
-      `${type} ${name}${paramsString} { ${name}${paramsKeys} ${getGraphqlFields<TResult>(fields)} }`,
-    )}
-  `);
+  return trimDeep(
+    print(
+      gql`${type} ${name}${paramsString} { ${name}${paramsKeys} ${getGraphqlFields<TResult>(fields)} }`,
+    ),
+  );
 };
