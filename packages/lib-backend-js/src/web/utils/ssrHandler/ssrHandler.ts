@@ -5,6 +5,7 @@ import {
   type SsrHandlerParamsModel,
 } from '@lib/backend/web/utils/ssrHandler/ssrHandler.models';
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
+import { config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { type CookieOptionsModel } from '@lib/shared/http/http.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
@@ -14,7 +15,11 @@ import { render } from '@lib/shared/web/utils/render/render';
 import reduce from 'lodash/reduce';
 import { PassThrough } from 'stream';
 
-export const ssrHandler = ({ internationalize }: SsrHandlerParamsModel): SsrHandlerModel => {
+export const ssrHandler = (
+  { internationalize }: SsrHandlerParamsModel = {
+    internationalize: internationalizeConfig.params(),
+  },
+): SsrHandlerModel => {
   const i18n = _internationalize(internationalize);
   return handler({
     onRequest: async (request) => {
