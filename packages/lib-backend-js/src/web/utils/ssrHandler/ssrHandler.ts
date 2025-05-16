@@ -22,6 +22,7 @@ export const ssrHandler = (
 ): SsrHandlerModel => {
   const i18n = _internationalize(internationalize);
   return handler({
+    name: 'ssr',
     onRequest: async (request) => {
       const cookies: Record<string, Omit<HttpCookieModel, 'key'>> = {};
       const lang = request.headers?.get('accept-language') ?? 'en';

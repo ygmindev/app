@@ -11,12 +11,11 @@ import {
 
 export type _HandlerParamsModel = {
   isStream?: boolean;
+  name: string;
   onRequest(request: HttpRequestContextModel): Promise<HttpResponseContextModel>;
 };
 
-export type _HandlerModel = {
-  handle: (
-    request: HttpRequest,
-    context: InvocationContext,
-  ) => Promise<HttpResponse | HttpResponseInit>;
-};
+export type _HandlerModel = (
+  request: HttpRequest,
+  context: InvocationContext,
+) => Promise<HttpResponse | HttpResponseInit>;

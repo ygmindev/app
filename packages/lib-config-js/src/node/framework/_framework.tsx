@@ -10,6 +10,8 @@ export const _framework = (): _FrameworkConfigModel => ({
   passToClient: ['context'],
 
   prerender: {
+    keepDistServer: true,
+
     partial: true,
   },
 

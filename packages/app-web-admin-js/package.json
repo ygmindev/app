@@ -31,7 +31,9 @@
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
     "redux-persist-cookie-storage": "^1.0.0",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "vike": "0.4.229",
+    "vike-react": "^0.6.1"
   },
   "peerDependencies": {
     "react": "^19.0.0",
