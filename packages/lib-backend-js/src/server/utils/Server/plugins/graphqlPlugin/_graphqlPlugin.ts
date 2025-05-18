@@ -1,4 +1,5 @@
 import { formatGraphqlError } from '@lib/backend/http/utils/formatGraphqlError/formatGraphqlError';
+import { HttpResponse } from '@lib/backend/http/utils/HttpResponse/HttpResponse';
 import { type _GraphqlPluginModel } from '@lib/backend/server/utils/Server/plugins/graphqlPlugin/_graphqlPlugin.models';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type RequestContextModel } from '@lib/config/api/api.models';
@@ -43,11 +44,11 @@ export const _graphqlPlugin: _GraphqlPluginModel = async (
             reply: params.rep,
             req: params.req,
           });
-          return {
+          return new HttpResponse({
             body: response.body,
-            headers: response.headers,
-            status: response.status ?? HTTP_STATUS_CODE.OK,
-          };
+            headers: Object.fromEntries(response.headers.entries()),
+            statusCode: response.status ?? HTTP_STATUS_CODE.OK,
+          });
         }
         throw new NotFoundError('');
       },

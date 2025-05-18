@@ -38,6 +38,7 @@ const graphqlQuery: TaskParamsModel<GraphqlQueryParamsModel> = {
       if (result.data.UserGet.result?.email !== email) {
         throw new Error(`${result.data.UserGet.result?.email} vs. ${email}`);
       }
+      console.warn(result.data.UserGet.result?.email);
       logger.info('Success');
     },
   ],

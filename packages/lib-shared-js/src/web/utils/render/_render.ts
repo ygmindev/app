@@ -22,7 +22,6 @@ export const _render = async ({ context, headers }: _RenderParamsModel): Promise
         (errorWhileRendering as Error).stack,
       )
     : undefined;
-
   return {
     error,
     headers: httpResponse.headers,

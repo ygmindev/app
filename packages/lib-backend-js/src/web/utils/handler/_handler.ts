@@ -1,48 +1,47 @@
-import { app, type HttpResponse, type HttpResponseInit } from '@azure/functions';
+import { app, type Cookie } from '@azure/functions';
+import { HttpRequest } from '@lib/backend/http/utils/HttpRequest/HttpRequest';
 import {
   type _HandlerModel,
   type _HandlerParamsModel,
 } from '@lib/backend/web/utils/handler/_handler.models';
-import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
-import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { type HttpMethodModel } from '@lib/shared/http/http.models';
+import reduce from 'lodash/reduce';
 
 export const _handler = ({ isStream, name, onRequest }: _HandlerParamsModel): _HandlerModel => {
   isStream && app.setup({ enableHttpStream: true });
   const handler: _HandlerModel = async (request) => {
-    const { body, cookies, error, headers, redirectTo, statusCode } = await onRequest({
-      body: request.body as ReadableStream,
-      headers: {
-        entries: () => Array.from(request.headers.entries()),
-        get: (key) => request.headers.get(key),
-      },
-      method: request.method as HttpMethodModel,
-      query: request.query,
-      url: request.url,
-    });
-    redirectTo && headers?.push(['location', redirectTo]);
-    const response: HttpResponse | HttpResponseInit = {
-      body: error ? error.message : body,
-      headers,
-      status: redirectTo
-        ? HTTP_STATUS_CODE.REDIRECT
-        : error
-          ? ((error as HttpError).statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR)
-          : statusCode,
+    const response = await onRequest(
+      new HttpRequest({
+        body: request.body as ReadableStream,
+        headers: Object.fromEntries(request.headers),
+        method: request.method as HttpMethodModel,
+        query: request.query,
+        url: request.url,
+      }),
+    );
+    return {
+      body: response.error?.message ?? response.body,
+      cookies: reduce(
+        response.cookies,
+        (result, v, k) => [
+          ...result,
+          {
+            domain: v.options?.domain,
+            expires: v.options?.expires,
+            httpOnly: v.options?.isHttpOnly,
+            maxAge: v.options?.maxAge,
+            name: k,
+            path: v.options?.path,
+            sameSite: v.options?.sameSite,
+            secure: v.options?.isSecure,
+            value: v.value,
+          },
+        ],
+        [] as Array<Cookie>,
+      ),
+      headers: response.headers && Object.entries(response.headers),
+      status: response.statusCode,
     };
-    cookies &&
-      (response.cookies = cookies.map(({ key, options, value }) => ({
-        domain: options?.domain,
-        expires: options?.expires,
-        httpOnly: options?.isHttpOnly,
-        maxAge: options?.maxAge,
-        name: key,
-        path: options?.path,
-        sameSite: options?.sameSite,
-        secure: options?.isSecure,
-        value,
-      })));
-    return response;
   };
   app.http(name, {
     // TODO: fix auth

@@ -4,11 +4,9 @@ import {
 } from '@lib/backend/http/utils/serializeCookie/_serializeCookie.models';
 import { serialize, type SerializeOptions } from 'cookie';
 
-export const _serializeCookie = ({
-  key,
-  options,
-  value,
-}: _SerializeCookieParamsModel): _SerializeCookieModel =>
+export const _serializeCookie = (
+  ...[key, value, options]: _SerializeCookieParamsModel
+): _SerializeCookieModel =>
   serialize(key, value, {
     domain: options?.domain,
     expires: options?.expires,

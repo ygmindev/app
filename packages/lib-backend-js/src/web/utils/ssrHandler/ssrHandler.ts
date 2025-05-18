@@ -1,4 +1,4 @@
-import { type HttpCookieModel } from '@lib/backend/http/utils/http.models';
+import { type HttpCookiesModel } from '@lib/backend/http/http.models';
 import { handler } from '@lib/backend/web/utils/handler/handler';
 import {
   type SsrHandlerModel,
@@ -6,13 +6,11 @@ import {
 } from '@lib/backend/web/utils/ssrHandler/ssrHandler.models';
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
 import { config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize';
-import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { type CookieOptionsModel } from '@lib/shared/http/http.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { STATE } from '@lib/shared/state/state.constants';
 import { render } from '@lib/shared/web/utils/render/render';
-import reduce from 'lodash/reduce';
 import { PassThrough } from 'stream';
 
 export const ssrHandler = (
@@ -24,9 +22,9 @@ export const ssrHandler = (
   return handler({
     name: 'ssr',
     onRequest: async (request) => {
-      const cookies: Record<string, Omit<HttpCookieModel, 'key'>> = {};
-      const lang = request.headers?.get('accept-language') ?? 'en';
-      const { error, headers, pipeStream, redirectTo, statusCode } = await render({
+      const cookies: HttpCookiesModel = {};
+      const lang = request.headers?.['accept-language'] ?? 'en';
+      const { pipeStream, response } = await render({
         context: {
           [LOCALE]: { i18n, lang },
           [ROUTE]: { location: { pathname: request.url } },
@@ -43,26 +41,13 @@ export const ssrHandler = (
             },
           },
         },
-        headers: request.headers?.entries(),
+        headers: request.headers,
       });
-
       const transform = new PassThrough();
       pipeStream(transform as unknown as WritableStream);
-
-      return {
-        body: transform as unknown as ReadableStream,
-        cookies: isEmpty(cookies)
-          ? undefined
-          : reduce(
-              cookies,
-              (result, v: Omit<HttpCookieModel, 'key'>, k) => [...result, { key: k, ...v }],
-              [] as Array<HttpCookieModel>,
-            ),
-        error,
-        headers,
-        redirectTo,
-        statusCode,
-      };
+      response.body = transform as unknown as ReadableStream;
+      response.cookies = cookies;
+      return response;
     },
   });
 };

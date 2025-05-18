@@ -17,17 +17,6 @@ export type WebsocketMethodModel = `${WEBSOCKET_METHOD}`;
 
 export type WebsocketStatusModel = `${WEBSOCKET_STATUS}`;
 
-export type HttpRequestModel<TParams = void> = {
-  body?: TParams;
-};
-
-export type HttpResponseModel<TType = void> = {
-  body?: TType;
-  headers?: Headers;
-  status?: number;
-  type?: HttpResponseTypeModel;
-};
-
 export type CookieOptionsModel = {
   domain?: string;
   expires?: Date;

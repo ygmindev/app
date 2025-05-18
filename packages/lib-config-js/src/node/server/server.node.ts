@@ -1,3 +1,4 @@
+import { cookiesPlugin } from '@lib/backend/server/utils/Server/plugins/cookiesPlugin/cookiesPlugin';
 import { databasePlugin } from '@lib/backend/server/utils/Server/plugins/databasePlugin/databasePlugin';
 import { graphqlPlugin } from '@lib/backend/server/utils/Server/plugins/graphqlPlugin/graphqlPlugin';
 import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
@@ -21,6 +22,8 @@ export const config = defineConfig<ServerConfigModel>({
 
       plugins: [
         [databasePlugin, { config: databaseConfig.params() }],
+
+        [cookiesPlugin, { secret: process.env.SERVER_APP_SECRET }],
 
         [
           graphqlPlugin,

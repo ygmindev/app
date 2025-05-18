@@ -1,5 +1,9 @@
-import { type HttpCookieModel } from '@lib/backend/http/utils/http.models';
+import { type CookieOptionsModel } from '@lib/shared/http/http.models';
 
-export type _SerializeCookieParamsModel = HttpCookieModel;
+export type _SerializeCookieParamsModel = [
+  key: string,
+  value: string,
+  options?: CookieOptionsModel,
+];
 
 export type _SerializeCookieModel = string;

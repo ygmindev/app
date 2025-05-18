@@ -4,15 +4,13 @@ import {
   type HttpResponseInit,
   type InvocationContext,
 } from '@azure/functions';
-import {
-  type HttpRequestContextModel,
-  type HttpResponseContextModel,
-} from '@lib/backend/http/utils/http.models';
+import { type HttpRequestModel } from '@lib/backend/http/utils/HttpRequest/HttpRequest.models';
+import { type HttpResponseModel } from '@lib/backend/http/utils/HttpResponse/HttpResponse.models';
 
 export type _HandlerParamsModel = {
   isStream?: boolean;
   name: string;
-  onRequest(request: HttpRequestContextModel): Promise<HttpResponseContextModel>;
+  onRequest(request: HttpRequestModel<ReadableStream>): Promise<HttpResponseModel<ReadableStream>>;
 };
 
 export type _HandlerModel = (

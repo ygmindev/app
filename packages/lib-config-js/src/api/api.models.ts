@@ -1,14 +1,11 @@
 import { type DatabaseModel } from '@lib/backend/database/utils/Database/Database.models';
+import { type HttpRequestModel } from '@lib/backend/http/utils/HttpRequest/HttpRequest.models';
+import { type HttpResponseModel } from '@lib/backend/http/utils/HttpResponse/HttpResponse.models';
 import { type API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type GraphqlConfigModel } from '@lib/config/graphql/graphql.models';
 import { type AuthStateModel } from '@lib/frontend/auth/stores/authStore/authStore.models';
 import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
-import {
-  type HttpMethodModel,
-  type HttpProtocolModel,
-  type HttpRequestModel,
-  type HttpResponseModel,
-} from '@lib/shared/http/http.models';
+import { type HttpMethodModel, type HttpProtocolModel } from '@lib/shared/http/http.models';
 import { type FastifyReply, type FastifyRequest } from 'fastify';
 
 export type ApiConfigModel = {

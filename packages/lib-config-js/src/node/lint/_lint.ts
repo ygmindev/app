@@ -34,6 +34,7 @@ export const _lint = ({
     eslintPlugin.configs.recommended,
     {
       rules: {
+        'no-empty': ['warn', { allowEmptyCatch: true }],
         'no-param-reassign': 'error',
         'no-return-await': 'off',
         'no-unused-expressions': 'off',

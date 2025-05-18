@@ -4,5 +4,5 @@ import {
   type SerializeCookieParamsModel,
 } from '@lib/backend/http/utils/serializeCookie/serializeCookie.models';
 
-export const serializeCookie = ({ ...params }: SerializeCookieParamsModel): SerializeCookieModel =>
-  _serializeCookie({ ...params });
+export const serializeCookie = (...params: SerializeCookieParamsModel): SerializeCookieModel =>
+  _serializeCookie(...params);

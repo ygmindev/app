@@ -1,13 +1,17 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { HttpRequest } from '@lib/backend/http/utils/HttpRequest/HttpRequest';
+import { HttpResponse } from '@lib/backend/http/utils/HttpResponse/HttpResponse';
 import {
   type _ServerModel,
   type _ServerParamsModel,
 } from '@lib/backend/server/utils/Server/_Server.models';
 import { type ApiConfigModel, type ApiEndpointModel } from '@lib/config/api/api.models';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { type HttpMethodModel } from '@lib/shared/http/http.models';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { fastify, type FastifyInstance, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
+import forEach from 'lodash/forEach';
 import toNumber from 'lodash/toNumber';
 
 export class _Server implements _ServerModel {
@@ -41,13 +45,21 @@ export class _Server implements _ServerModel {
     await this._app.register(async (fastify) =>
       fastify.route({
         handler: async (req, rep) => {
-          const { body, headers, status } = handler
-            ? await handler({ body: req.body as TParams }, undefined, { rep, req })
-            : { body: '', status: HTTP_STATUS_CODE.OK };
-          headers?.forEach((v, k) => {
+          const request = new HttpRequest({
+            body: req.body as TParams,
+            cookies: req.cookies as Record<string, string>,
+            headers: req.headers as Record<string, string>,
+            method: req.method as HttpMethodModel,
+            query: req.query as URLSearchParams,
+            url: req.originalUrl ?? req.url,
+          });
+          const response = handler
+            ? await handler(request, undefined, { rep, req })
+            : new HttpResponse({ body: '' });
+          forEach(response.headers, (v, k) => {
             void rep.header(k, v);
           });
-          await rep.status(status ?? HTTP_STATUS_CODE.OK).send(body);
+          await rep.status(response.statusCode ?? HTTP_STATUS_CODE.OK).send(response.body);
         },
         method: method as HTTPMethods,
         url: pathname,
