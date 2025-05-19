@@ -1,7 +1,6 @@
 import { fastifyCompress } from '@fastify/compress';
 import { type CookieSerializeOptions, type FastifyCookieOptions } from '@fastify/cookie';
 import { fastifyCookie } from '@fastify/cookie';
-import { createError } from '@fastify/error';
 import { fastifyMiddie } from '@fastify/middie';
 import { fastifyStatic } from '@fastify/static';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
@@ -38,13 +37,42 @@ export const _runServer = async ({
   root,
   web,
 }: _RunServerParamsModel): Promise<_RunServerModel> => {
+  const i18n = _internationalize(internationalize);
+
+  const { certificateDir, privateKeyFilename, publicKeyFilename } = certificate;
+  const app = fastify({
+    https: {
+      cert: readFileSync(joinPaths([certificateDir, publicKeyFilename])),
+      key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
+    } as SecureServerOptions,
+  });
+  await app.register(fastifyMiddie);
+  await app.register(fastifyCompress);
+
+  publicDir &&
+    assetsPathname &&
+    (await app.register(fastifyStatic, { prefix: `/${publicDir}/`, root: assetsPathname }));
+
+  await app.register(fastifyCookie, {
+    secret: process.env.SERVER_APP_SECRET,
+  } as FastifyCookieOptions);
+
+  const { devMiddleware } = await createDevMiddleware({
+    root,
+    viteConfig: { configFile: false, ..._web(web) },
+  });
+  await app.use(devMiddleware);
+
+  await app.register(
+    i18nextMiddleware as unknown as FastifyPluginCallback,
+    { i18next: i18n } as FastifyRegisterOptions<Record<never, never>>,
+  );
+
   app.get('*', async (req, res) => {
     const { cookies, i18n, language } = req;
     const url = req.originalUrl ?? req.url;
-
     logger.info(req.method, url);
-
-    const { error, headers, pipeStream, redirectTo, statusCode } = await render({
+    const response = await render({
       context: {
         [LOCALE]: { i18n: i18n as I18nModel, lang: language },
         [ROUTE]: { location: { pathname: url } },
@@ -69,18 +97,18 @@ export const _runServer = async ({
       headers: req.headers ? (Object.entries(req.headers) as Array<[string, string]>) : undefined,
     });
 
-    if (error) {
-      const ErrorResponse = createError(
-        `${error.statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR}`,
-        error.message,
-        error.statusCode,
-      );
-      throw new ErrorResponse();
-    } else if (redirectTo) {
-      await res.redirect(redirectTo, HTTP_STATUS_CODE.REDIRECT);
+    if (response.response.error) {
+      // const ErrorResponse = createError(
+      //   `${error.statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR}`,
+      //   error.message,
+      //   error.statusCode,
+      // );
+      // throw new ErrorResponse();
+    } else if (response.response.redirectTo) {
+      await res.redirect(response.response.redirectTo, HTTP_STATUS_CODE.REDIRECT);
     } else {
-      void res.status(statusCode);
-      headers.forEach(([name, value]) => res.raw.setHeader(name, value));
+      void res.status(response.response.statusCode ?? HTTP_STATUS_CODE.OK);
+      response.response.headers?.forEach(([name, value]) => res.raw.setHeader(name, value));
 
       const transform = new PassThrough();
       transform.pipe(res.raw);
@@ -88,6 +116,13 @@ export const _runServer = async ({
       // pipeStream(res.raw as unknown as WritableStream);
     }
   });
+
+  try {
+    await app.listen({ port: toNumber(port) });
+    onStart();
+  } catch (e) {
+    e && logger.error(e as Error);
+  }
 };
 
 // import { fastifyCompress } from '@fastify/compress';

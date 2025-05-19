@@ -1,4 +1,3 @@
-import { type HttpCookiesModel } from '@lib/backend/http/http.models';
 import { handler } from '@lib/backend/web/utils/handler/handler';
 import {
   type SsrHandlerModel,
@@ -22,7 +21,7 @@ export const ssrHandler = (
   return handler({
     name: 'ssr',
     onRequest: async (request) => {
-      const cookies: HttpCookiesModel = {};
+      const cookies: Record<string, string> = {};
       const lang = request.headers?.['accept-language'] ?? 'en';
       const { pipeStream, response } = await render({
         context: {
@@ -31,8 +30,7 @@ export const ssrHandler = (
           [STATE]: {
             cookies: {
               expire: (key) => delete cookies[key],
-              get: <TType extends string = string>(key: string) =>
-                (cookies[key]?.value as TType) || null,
+              get: <TType extends string = string>(key: string) => (cookies[key] as TType) || null,
               set: <TType extends string = string>(
                 key: string,
                 value: TType,

@@ -13,15 +13,7 @@ import { config as configBase } from '@lib/config/node/server/server.base';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { config as webConfig } from '@lib/config/node/web/web';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-
-// assetsPathname: fromAssets(),
-// certificate: serverConfig.params().certificate,
-// host: process.env.APP_HOST ?? '',
-// internationalize: internationalizeConfig.params(),
-// port: process.env.APP_PORT ?? '',
-// publicDir: PUBLIC_DIR,
-// root,
-// web: webConfig.params(),
+import toNumber from 'lodash/toNumber';
 
 export const config = defineConfig<ServerConfigModel>({
   ...configBase,
@@ -29,6 +21,8 @@ export const config = defineConfig<ServerConfigModel>({
   overrides: () => [
     {
       api: apiConfig.params(),
+
+      host: process.env.APP_HOST,
 
       plugins: [
         [compressPlugin, {}],
@@ -41,6 +35,8 @@ export const config = defineConfig<ServerConfigModel>({
 
         [webPlugin, { config: webConfig.params(), root: fromWorking() }],
       ] as Array<[ServerPluginModel<unknown>, unknown]>,
+
+      port: toNumber(process.env.APP_PORT),
     },
   ],
 });
