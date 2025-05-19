@@ -30,7 +30,7 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
   }
 
   async register<TType, TParams>(params: ApiEndpointModel<TType, TParams>): Promise<void> {
-    const pathname = `/${joinPaths([this._api?.prefix, params.pathname])}`;
+    const pathname = `/${joinPaths([params.prefix ?? this._api?.prefix, params.pathname])}`;
     logger.info(
       `${isArray(params.method) ? params.method.join(',') : params.method} ${uri({
         host: this._host,

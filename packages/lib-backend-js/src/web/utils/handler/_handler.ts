@@ -12,6 +12,7 @@ export const _handler = ({ isStream, name, onRequest }: _HandlerParamsModel): _H
   const handler: _HandlerModel = async (request) => {
     const response = await onRequest(
       new HttpRequest({
+        // i18n: request.i18n,
         body: request.body as ReadableStream,
         headers: Object.fromEntries(request.headers),
         method: request.method as HttpMethodModel,
@@ -23,20 +24,7 @@ export const _handler = ({ isStream, name, onRequest }: _HandlerParamsModel): _H
       body: response.error?.message ?? response.body,
       cookies: reduce(
         response.cookies,
-        (result, v, k) => [
-          ...result,
-          {
-            domain: v.options?.domain,
-            expires: v.options?.expires,
-            httpOnly: v.options?.isHttpOnly,
-            maxAge: v.options?.maxAge,
-            name: k,
-            path: v.options?.path,
-            sameSite: v.options?.sameSite,
-            secure: v.options?.isSecure,
-            value: v.value,
-          },
-        ],
+        (result, v, k) => [...result, { name: k, value: v }],
         [] as Array<Cookie>,
       ),
       headers: response.headers && Object.entries(response.headers),

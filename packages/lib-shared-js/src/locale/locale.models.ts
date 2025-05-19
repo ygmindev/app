@@ -7,4 +7,4 @@ export type PhoneNumberValueModel = {
   phone: string;
 };
 
-export type I18nModel = i18n & { reportNamespaces: ReportNamespaces };
+export type I18nModel = i18n & { reportNamespaces?: ReportNamespaces };

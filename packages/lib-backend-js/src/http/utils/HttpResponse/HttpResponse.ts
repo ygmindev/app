@@ -13,7 +13,7 @@ export class HttpResponse<TType> extends HttpMessage<TType> implements HttpRespo
   _redirectTo?: string;
   _statusCode?: number;
 
-  constructor({ error, redirectTo, statusCode, ...params }: HttpResponseParamsModel<TType>) {
+  constructor({ error, redirectTo, statusCode, ...params }: HttpResponseParamsModel<TType> = {}) {
     super({ ...params });
     this.error = error;
     this.redirectTo = redirectTo;

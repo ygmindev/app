@@ -49,6 +49,8 @@ export class _Server implements _ServerModel {
             body: req.body as TParams,
             cookies: req.cookies as Record<string, string>,
             headers: req.headers as Record<string, string>,
+            i18n: req.i18n,
+            language: req.language,
             method: req.method as HttpMethodModel,
             query: req.query as URLSearchParams,
             url: req.originalUrl ?? req.url,
