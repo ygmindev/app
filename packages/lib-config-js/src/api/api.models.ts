@@ -38,7 +38,7 @@ export type ApiEndpointModel<TType = void, TParams = void> = {
 
   pathname: string;
 
-  prefix?: string;
+  prefix?: boolean | string;
 
   protocol?: HttpProtocolModel;
 } & (

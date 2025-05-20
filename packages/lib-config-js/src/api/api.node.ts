@@ -15,6 +15,7 @@ export const config = defineConfig<ApiConfigModel>({
         {
           method: [HTTP_METHOD.GET, HTTP_METHOD.POST, HTTP_METHOD.OPTIONS],
           pathname: GRAPHQL,
+          prefix: true,
           schema: graphqlConfigMain.params(),
           type: API_ENDPOINT_TYPE.GRAPHQL,
         },

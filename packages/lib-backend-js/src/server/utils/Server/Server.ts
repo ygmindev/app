@@ -12,6 +12,7 @@ import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
+import isString from 'lodash/isString';
 
 export class Server<TParams extends Array<unknown>> extends _Server implements ServerModel {
   _plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
@@ -30,7 +31,12 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
   }
 
   async register<TType, TParams>(params: ApiEndpointModel<TType, TParams>): Promise<void> {
-    const pathname = `/${joinPaths([params.prefix ?? this._api?.prefix, params.pathname])}`;
+    const prefix = isString(params.prefix)
+      ? params.prefix
+      : params.prefix
+        ? this._api?.prefix
+        : undefined;
+    const pathname = `/${joinPaths([prefix, params.pathname])}`;
     logger.info(
       `${isArray(params.method) ? params.method.join(',') : params.method} ${uri({
         host: this._host,

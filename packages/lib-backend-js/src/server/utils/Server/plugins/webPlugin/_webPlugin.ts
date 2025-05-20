@@ -15,12 +15,10 @@ export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
     });
     server._app.use(devMiddleware);
   }
-
   await server.register<ReadableStream, ReadableStream>({
     handler: async (request) => render(request),
     method: HTTP_METHOD.GET,
     pathname: '*',
-    prefix: '',
     type: API_ENDPOINT_TYPE.REST,
   });
 };
