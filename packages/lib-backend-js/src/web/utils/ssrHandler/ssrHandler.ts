@@ -5,12 +5,7 @@ import {
 } from '@lib/backend/web/utils/ssrHandler/ssrHandler.models';
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
 import { config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize';
-import { type CookieOptionsModel } from '@lib/shared/http/http.models';
-import { LOCALE } from '@lib/shared/locale/locale.constants';
-import { ROUTE } from '@lib/shared/route/route.constants';
-import { STATE } from '@lib/shared/state/state.constants';
 import { render } from '@lib/shared/web/utils/render/render';
-import { PassThrough } from 'stream';
 
 export const ssrHandler = (
   { internationalize }: SsrHandlerParamsModel = {
@@ -21,30 +16,8 @@ export const ssrHandler = (
   return handler({
     name: 'ssr',
     onRequest: async (request) => {
-      const cookies: Record<string, string> = {};
-      const lang = request.headers?.['accept-language'] ?? 'en';
-      const { pipeStream, response } = await render({
-        context: {
-          [LOCALE]: { i18n, lang },
-          [ROUTE]: { location: { pathname: request.url } },
-          [STATE]: {
-            cookies: {
-              expire: (key) => delete cookies[key],
-              get: <TType extends string = string>(key: string) => (cookies[key] as TType) || null,
-              set: <TType extends string = string>(
-                key: string,
-                value: TType,
-                options?: CookieOptionsModel,
-              ) => (cookies[key] = { options, value }),
-            },
-          },
-        },
-        headers: request.headers,
-      });
-      const transform = new PassThrough();
-      pipeStream(transform as unknown as WritableStream);
-      response.body = transform as unknown as ReadableStream;
-      response.cookies = cookies;
+      request.i18n = i18n;
+      const response = await render(request);
       return response;
     },
   });

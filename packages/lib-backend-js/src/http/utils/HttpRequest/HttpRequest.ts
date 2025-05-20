@@ -6,15 +6,25 @@ import {
 import { type HttpMethodModel } from '@lib/shared/http/http.models';
 
 export class HttpRequest<TType> extends HttpMessage<TType> implements HttpRequestModel<TType> {
+  _language?: string;
   _method?: HttpMethodModel;
   _query?: URLSearchParams;
   _url!: string;
 
-  constructor({ method, query, url, ...params }: HttpRequestParamsModel<TType>) {
+  constructor({ language, method, query, url, ...params }: HttpRequestParamsModel<TType>) {
     super({ ...params });
+    this.language = language ?? this.headers?.['accept-language'] ?? 'en';
     this.method = method;
     this.query = query;
     this.url = url;
+  }
+
+  get language(): string | undefined {
+    return this._method;
+  }
+
+  set language(value: string | undefined) {
+    this._language = value;
   }
 
   get method(): HttpMethodModel | undefined {
