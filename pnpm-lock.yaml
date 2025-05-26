@@ -19,6 +19,10 @@ importers:
       app:
         specifier: 'link:'
         version: 'link:'
+    devDependencies:
+      azure-functions-core-tools:
+        specifier: ^4.0.7030
+        version: 4.0.7030
 
   packages/app-native-js:
     dependencies:

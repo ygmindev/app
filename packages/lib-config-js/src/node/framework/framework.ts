@@ -14,7 +14,9 @@ export const config = defineConfig<FrameworkConfigModel, _FrameworkConfigModel>(
   params: () => ({
     assetsUri: {
       host: process.env.SERVER_APP_STATIC_HOST,
-      port: process.env.SERVER_APP_STATIC_PORT ?? process.env.APP_PORT,
+      port:
+        process.env.SERVER_APP_STATIC_PORT ??
+        (process.env.NODE_ENV === 'development' ? process.env.APP_PORT : undefined),
     },
     // onAfterServer,
     // onBeforeClient,
