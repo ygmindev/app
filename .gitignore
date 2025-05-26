@@ -59,9 +59,6 @@ libpeerconnection.log
 testem.log
 typings
 
-# Cloudfare
-.wrangler
-
 # System Files
 .DS_Store
 Thumbs.db

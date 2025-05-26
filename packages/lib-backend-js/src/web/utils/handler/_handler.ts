@@ -36,6 +36,7 @@ export const _handler = ({ isStream, name, onRequest }: _HandlerParamsModel): _H
     authLevel: 'anonymous',
     handler,
     methods: ['GET', 'POST'],
+    route: '{*path}',
   });
   return handler;
 };

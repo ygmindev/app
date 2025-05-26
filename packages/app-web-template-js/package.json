@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
+  "main": "__build__/*.mjs",
   "dependencies": {
     "@babel/core": "^7.26.10",
     "@egjs/react-infinitegrid": "^4.12.0",

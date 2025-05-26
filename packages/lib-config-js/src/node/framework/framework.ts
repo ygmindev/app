@@ -12,6 +12,10 @@ export const config = defineConfig<FrameworkConfigModel, _FrameworkConfigModel>(
   config: _framework,
 
   params: () => ({
+    assetsUri: {
+      host: process.env.SERVER_APP_STATIC_HOST,
+      port: process.env.SERVER_APP_STATIC_PORT ?? process.env.APP_PORT,
+    },
     // onAfterServer,
     // onBeforeClient,
     // onBeforeServer,

@@ -34,6 +34,8 @@ export type EnvironmentConfigModel = {
   SERVER_APP_OTP_LENGTH: string;
   SERVER_APP_PORT: string;
   SERVER_APP_SECRET: string;
+  SERVER_APP_SSR_HOST: string;
+  SERVER_APP_SSR_PORT: string;
   SERVER_APP_STATIC_HOST: string;
   SERVER_APP_STATIC_PORT: string;
   SERVER_APP_WEBSOCKET_HOST: string;

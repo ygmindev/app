@@ -9,6 +9,7 @@ import { runClean } from '@tool/task/core/utils/runClean/runClean';
 import { copy } from '@tool/task/file/utils/copy/copy';
 import buildConfigLint from '@tool/task/node/tasks/buildConfigLint/buildConfigLint.task';
 import buildConfigTypescript from '@tool/task/node/tasks/buildConfigTypescript/buildConfigTypescript.task';
+import buildSsr from '@tool/task/web/templates/buildSsr/buildSsr.task';
 
 export const build: TaskParamsModel<unknown> = {
   environment: ENVIRONMENT.PRODUCTION,
@@ -27,5 +28,7 @@ export const build: TaskParamsModel<unknown> = {
         from: fromAssets(),
         to: joinPaths([root, BUILD_DIR, 'client']),
       }),
+
+    ({ target }) => `${target}-${buildSsr.name}`,
   ],
 };

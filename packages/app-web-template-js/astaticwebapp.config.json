@@ -1,0 +1,14 @@
+{
+  "platform": {
+    "apiRuntime": "node:18"
+  },
+  "routes": [
+    {
+      "route": "/favicon.ico"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/ssr"
+  },
+  "trailingSlash": "never"
+}

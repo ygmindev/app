@@ -9,6 +9,8 @@ import buildSsr from '@tool/task/web/templates/buildSsr/buildSsr.task';
 import { dev } from '@tool/task/web/templates/dev/dev';
 import { publish } from '@tool/task/web/templates/publish/publish';
 import { serve } from '@tool/task/web/templates/serve/serve';
+import { serveSsr } from '@tool/task/web/templates/serveSsr/serveSsr';
+import { serveStaticWeb } from '@tool/task/web/templates/serveStaticWeb/serveStaticWeb';
 import {
   type WebTasksModel,
   type WebTasksParamsModel,
@@ -23,10 +25,11 @@ export const webTasks = (params?: WebTasksParamsModel): WebTasksModel =>
             dev,
             build,
             serve,
+            serveSsr,
+            serveStaticWeb,
             publish,
             buildConfigPublish,
             buildSsr,
-            //proxy
           ] as Array<TaskParamsModel<unknown>>,
 
           // TODO: fix projects
