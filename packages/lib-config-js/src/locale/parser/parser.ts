@@ -1,4 +1,4 @@
-import { fromAssets } from '@lib/backend/file/utils/fromAssets/fromAssets';
+import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
 import { INTERNATIONALIZE_CONFIG } from '@lib/config/locale/internationalize/internationalize.constants';
 import { _parser } from '@lib/config/locale/parser/_parser';
 import {
@@ -13,7 +13,7 @@ export const config = defineConfig<ParserConfigModel, _ParserConfigModel>({
   config: _parser,
 
   params: () => ({
-    distDir: fromAssets('locales'),
+    distDir: fromPublic('locales'),
 
     languages: languages.map(({ id }) => id),
 

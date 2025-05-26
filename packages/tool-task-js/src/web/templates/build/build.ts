@@ -1,4 +1,4 @@
-import { fromAssets } from '@lib/backend/file/utils/fromAssets/fromAssets';
+import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { config as webConfig } from '@lib/config/node/web/web';
@@ -25,7 +25,7 @@ export const build: TaskParamsModel<unknown> = {
 
     ({ root }) =>
       copy({
-        from: fromAssets(),
+        from: fromStatic(),
         to: joinPaths([root, BUILD_DIR, 'client']),
       }),
 

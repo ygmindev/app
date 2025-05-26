@@ -1,8 +1,8 @@
-import { fromAssets } from '@lib/backend/file/utils/fromAssets/fromAssets';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import { PUBLIC_DIR } from '@lib/config/file/file.constants';
+import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
+import { ASSETS_DIR } from '@lib/config/file/file.constants';
 import configBase from '@lib/config/node/bundle/bundle.base';
 import {
   type _BundleConfigModel,
@@ -25,7 +25,23 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
         },
       ],
 
-      assetsPathname: fromAssets(),
+      // externals: [
+      //   'json-stringify-safe',
+      //   'normalize-css-color',
+      //   'pino',
+      //   'postcss-value-parser',
+      //   'raf/polyfill.js',
+      //   'react-dom',
+      //   'react',
+      //   'react-fast-compare',
+      //   'react-redux',
+      //   'react/jsx-runtime',
+      //   'setimmediate',
+      //   'styleq',
+      //   'void-elements',
+      //   /lodash/,
+      // ],
+      assetsDir: ASSETS_DIR,
 
       babel: {
         plugins: [
@@ -49,24 +65,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       envPrefix: ['APP_', 'SERVER_APP_'],
 
-      // externals: [
-      //   'json-stringify-safe',
-      //   'normalize-css-color',
-      //   'pino',
-      //   'postcss-value-parser',
-      //   'raf/polyfill.js',
-      //   'react-dom',
-      //   'react',
-      //   'react-fast-compare',
-      //   'react-redux',
-      //   'react/jsx-runtime',
-      //   'setimmediate',
-      //   'styleq',
-      //   'void-elements',
-      //   /lodash/,
-      // ],
-
-      publicDir: PUBLIC_DIR,
+      publicPathname: fromPublic(),
 
       transpileModules:
         filterNil([

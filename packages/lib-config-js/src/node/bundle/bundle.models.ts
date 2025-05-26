@@ -8,7 +8,7 @@ import { type UserConfig } from 'vite';
 export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
   aliases?: Array<{ from: RegExp | string; to: string }>;
 
-  assetsPathname?: string;
+  assetsDir?: string;
 
   babel?: {
     plugins?: Array<string | [string, Record<string, unknown>]>;
@@ -50,7 +50,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   provide?: Record<string, string>;
 
-  publicDir?: string;
+  publicPathname?: string;
 
   rootDirs: Array<string>;
 

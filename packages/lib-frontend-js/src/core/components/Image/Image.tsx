@@ -1,17 +1,16 @@
 import { _Image } from '@lib/frontend/core/components/Image/_Image';
 import { type ImagePropsModel } from '@lib/frontend/core/components/Image/Image.models';
 import { type DimensionModel, type SFCModel } from '@lib/frontend/core/core.models';
-import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
-import { uri } from '@lib/shared/http/utils/uri/uri';
+import { STATIC_URI } from '@lib/shared/http/http.constants';
 import { useMemo, useState } from 'react';
 import { Image as ImageBase } from 'react-native';
 
 export const Image: SFCModel<ImagePropsModel> = ({
-  baseUri,
+  baseUri = STATIC_URI,
   height,
   isAutoSize,
   src,
@@ -28,7 +27,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
   const srcF = useMemo(() => {
     let value = isArray(src) ? src[current] : src;
     if (baseUri) {
-      value = value.startsWith('/') ? trimPathname(`${uri(baseUri)}/${value}`) : value;
+      value = value.startsWith('/') ? `${baseUri}${value}` : value;
     }
     return value;
   }, [baseUri, current, src]);

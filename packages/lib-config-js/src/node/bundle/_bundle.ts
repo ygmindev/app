@@ -76,7 +76,7 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
 
 export const _bundle = ({
   aliases,
-  assetsPathname,
+  assetsDir,
   babel,
   buildDir,
   define,
@@ -94,7 +94,7 @@ export const _bundle = ({
   mainFields,
   outputPathname,
   provide,
-  publicDir,
+  publicPathname,
   rootDirs,
   serverExtension,
   transpileModules,
@@ -161,7 +161,7 @@ export const _bundle = ({
 
   const config: _BundleConfigModel = {
     build: {
-      assetsDir: publicDir,
+      assetsDir,
 
       commonjsOptions: {
         defaultIsModuleExports: true,
@@ -268,7 +268,7 @@ export const _bundle = ({
       // process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
     ]),
 
-    publicDir: process.env.NODE_ENV === 'production' ? publicDir : assetsPathname,
+    publicDir: process.env.NODE_ENV === 'production' ? assetsDir : publicPathname,
 
     resolve: {
       alias: [

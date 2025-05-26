@@ -1,28 +1,24 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { BUILD_DIR } from '@lib/config/file/file.constants';
-import { _publish } from '@lib/config/node/publish/_publish';
-import {
-  type _PublishConfigModel,
-  type PublishConfigModel,
-} from '@lib/config/node/publish/publish.models';
+import { type PublishConfigModel } from '@lib/config/node/publish/publish.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { slug } from '@lib/shared/core/utils/slug/slug';
 import { readFileSync } from 'fs';
 
-export const config = defineConfig<PublishConfigModel, _PublishConfigModel>({
-  config: _publish,
-
+export const config = defineConfig<PublishConfigModel>({
   params: () => {
     const packageJson = JSON.parse(readFileSync(fromWorking('package.json')).toString()) as {
       name: string;
     };
-    const configPathname = fromWorking(BUILD_DIR, 'publish.json');
+    const assetsPathname = fromWorking(BUILD_DIR, 'client');
+    const name = slug(packageJson.name);
     return {
-      configPathname,
+      assetsPathname,
 
-      name: slug(packageJson.name),
+      name,
 
-      publishCommand: () => `npx wrangler deploy --config ${configPathname}`,
+      publishCommand: () =>
+        `npx wrangler pages deploy ${assetsPathname} --project-name ${name} --branch main`,
     };
   },
 });

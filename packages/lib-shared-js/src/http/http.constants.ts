@@ -55,6 +55,13 @@ export enum WEBSOCKET_STATUS {
 
 export const APP_URI = uri({ host: process.env.APP_HOST, port: process.env.APP_PORT });
 
+export const STATIC_URI = uri({
+  host: process.env.SERVER_APP_STATIC_HOST,
+  port:
+    process.env.SERVER_APP_STATIC_PORT ??
+    (process.env.NODE_ENV === 'production' ? undefined : process.env.APP_PORT),
+});
+
 export const SERVER_APP_URI = uri({
   host: process.env.SERVER_APP_HOST,
   port: process.env.SERVER_APP_PORT,

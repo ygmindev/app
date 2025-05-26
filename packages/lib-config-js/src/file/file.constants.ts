@@ -90,6 +90,8 @@ export const PUBLIC_DIR = 'public';
 
 export const ASSETS_DIR = 'assets';
 
+export const STATIC_DIR = 'static';
+
 export const EXCLUDE_PATTERNS = [...CLEAN_PATTERNS, '.git', 'ios/Pods', 'node_modules'];
 
 export const EXTENSIONS_BASE = ['.tsx', '.ts', '.jsx', '.js'];

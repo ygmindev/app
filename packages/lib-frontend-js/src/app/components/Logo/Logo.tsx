@@ -1,3 +1,4 @@
+import { ASSETS_DIR } from '@lib/config/file/file.constants';
 import { type LogoPropsModel } from '@lib/frontend/app/components/Logo/Logo.models';
 import { Image } from '@lib/frontend/core/components/Image/Image';
 import { Link } from '@lib/frontend/core/components/Link/Link';
@@ -11,7 +12,7 @@ export const Logo = composeComponent<LogoPropsModel, LinkPropsModel>({
 
   getProps: (
     // TODO: CDN src for production
-    { size = THEME_SIZE.SMALL, src = '/images/logos/logo.png', ...props },
+    { size = THEME_SIZE.SMALL, src = `/${ASSETS_DIR}/images/logos/logo.png`, ...props },
     theme,
   ) => {
     const height = isNumber(size) ? size : theme.shape.size[size];

@@ -1,4 +1,4 @@
-import { fromAssets } from '@lib/backend/file/utils/fromAssets/fromAssets';
+import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { compressPlugin } from '@lib/backend/server/utils/Server/plugins/compressPlugin/compressPlugin';
 import { cookiesPlugin } from '@lib/backend/server/utils/Server/plugins/cookiesPlugin/cookiesPlugin';
@@ -7,7 +7,7 @@ import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins
 import { staticPlugin } from '@lib/backend/server/utils/Server/plugins/staticPlugin/staticPlugin';
 import { webPlugin } from '@lib/backend/server/utils/Server/plugins/webPlugin/webPlugin';
 import { config as apiConfig } from '@lib/config/api/api.node';
-import { PUBLIC_DIR } from '@lib/config/file/file.constants';
+import { ASSETS_DIR } from '@lib/config/file/file.constants';
 import { config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize';
 import { config as configBase } from '@lib/config/node/server/server.base';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
@@ -27,7 +27,7 @@ export const config = defineConfig<ServerConfigModel>({
       plugins: [
         [compressPlugin, {}],
 
-        [staticPlugin, { assetsPathname: fromAssets(), publicDir: PUBLIC_DIR }],
+        [staticPlugin, { prefix: ASSETS_DIR, root: fromPublic() }],
 
         [cookiesPlugin, { secret: process.env.SERVER_APP_SECRET }],
 

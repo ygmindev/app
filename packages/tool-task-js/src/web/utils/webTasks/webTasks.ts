@@ -4,7 +4,6 @@ import { type TaskParamsModel } from '@tool/task/core/core.models';
 // import { proxy } from '@tool/task/http/templates/proxy/proxy';
 import { nodeTasks } from '@tool/task/node/utils/nodeTasks/nodeTasks';
 import { build } from '@tool/task/web/templates/build/build';
-import { buildConfigPublish } from '@tool/task/web/templates/buildConfigPublish/buildConfigPublish';
 import buildSsr from '@tool/task/web/templates/buildSsr/buildSsr.task';
 import { dev } from '@tool/task/web/templates/dev/dev';
 import { publish } from '@tool/task/web/templates/publish/publish';
@@ -28,7 +27,6 @@ export const webTasks = (params?: WebTasksParamsModel): WebTasksModel =>
             serveSsr,
             serveStaticWeb,
             publish,
-            buildConfigPublish,
             buildSsr,
           ] as Array<TaskParamsModel<unknown>>,
 

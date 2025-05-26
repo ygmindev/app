@@ -1,6 +1,7 @@
 import { type CssConfigModel } from '@lib/config/css/css.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { ROOT } from '@lib/frontend/root/root.constants';
+import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
 import MaterialCommunityIcons from 'react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf';
@@ -32,7 +33,7 @@ export const config = defineConfig<CssConfigModel>({
     }
   
     body {
-      font-family: ${theme?.font.fontFamily.main};
+      font-family: ${theme?.font.fontFamily[FONT_FAMILY.MAIN]};
       font-smoothing: antialiased;
     }
   
