@@ -8,7 +8,7 @@ import { staticPlugin } from '@lib/backend/server/utils/Server/plugins/staticPlu
 import { webPlugin } from '@lib/backend/server/utils/Server/plugins/webPlugin/webPlugin';
 import { config as apiConfig } from '@lib/config/api/api.node';
 import { ASSETS_DIR } from '@lib/config/file/file.constants';
-import { config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize';
+import { config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.node';
 import { config as configBase } from '@lib/config/node/server/server.base';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { config as webConfig } from '@lib/config/node/web/web';

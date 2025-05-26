@@ -12,7 +12,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
   overrides: () => [
     {
-      aliases: [{ from: /lodash\/(.*)/, to: 'lodash/$1.js' }],
+      aliases: [{ from: /^lodash\/([^.]+)$/, to: 'lodash/$1.js' }],
 
       envPrefix: ['SERVER_'],
 

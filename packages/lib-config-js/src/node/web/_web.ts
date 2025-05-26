@@ -10,17 +10,13 @@ import { type WatchOptions } from 'vite';
 
 export const _web = ({ bundle, isSsr, server }: WebConfigModel): _WebConfigModel => {
   const bundleConfigF = _bundle(bundle);
-  const {
-    certificateDir,
-    privateKeyFilename: privateKeyFile,
-    publicKeyFilename: publicKeyFile,
-  } = server.certificate;
+  const { certificateDir, privateKeyFilename, publicKeyFilename } = server.certificate;
 
   let https;
   try {
     https = {
-      cert: readFileSync(joinPaths([certificateDir, publicKeyFile])),
-      key: readFileSync(joinPaths([certificateDir, privateKeyFile])),
+      cert: readFileSync(joinPaths([certificateDir, publicKeyFilename])),
+      key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
     };
   } catch (_) {}
 

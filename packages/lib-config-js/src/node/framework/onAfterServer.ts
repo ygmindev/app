@@ -11,7 +11,6 @@ export const onAfterServer = async (
   params: FrameworkRenderParamsModel,
 ): Promise<FrameworkRenderParamsModel> => {
   const { context } = params;
-
   const i18n = context?.[LOCALE]?.i18n;
   const client = context?.[QUERY]?.client;
   const contextF: RootContextModel = merge([

@@ -9,11 +9,11 @@ import {
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 
 export const render = async (params: RenderParamsModel): Promise<RenderModel> => {
-  const config = internationalizeConfig.config();
+  const i18n = internationalizeConfig.config();
   return _render({
     ...params,
     Wrapper: ({ children }) => (
-      <Root context={{ [LOCALE]: { i18n: config, lang: config.language } }}>
+      <Root context={{ [LOCALE]: { i18n, lang: i18n.language } }}>
         <Router routes={[{ element: children ?? undefined, pathname: '/' }]} />
       </Root>
     ),

@@ -70,7 +70,7 @@ export const onBeforeServer = async (
 
   const pathname = context?.[ROUTE]?.location?.pathname;
   const matchedRoutes = routes && pathname ? matchRoutes({ pathname, routes }) : [];
-  const { loaders: loadersF } = matchedRoutes?.reduce(
+  const { loaders: loadersF } = (matchedRoutes ?? []).reduce(
     (result, { isProtectable, loaders }) => ({
       isProtectable: result.isProtectable || isProtectable || false,
       loaders: loaders

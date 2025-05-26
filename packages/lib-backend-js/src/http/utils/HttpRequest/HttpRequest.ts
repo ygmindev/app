@@ -4,19 +4,30 @@ import {
   type HttpRequestParamsModel,
 } from '@lib/backend/http/utils/HttpRequest/HttpRequest.models';
 import { type HttpMethodModel } from '@lib/shared/http/http.models';
+import { type I18nModel } from '@lib/shared/locale/locale.models';
 
 export class HttpRequest<TType> extends HttpMessage<TType> implements HttpRequestModel<TType> {
+  _i18n?: I18nModel;
   _language?: string;
   _method?: HttpMethodModel;
   _query?: URLSearchParams;
   _url!: string;
 
-  constructor({ language, method, query, url, ...params }: HttpRequestParamsModel<TType>) {
+  constructor({ i18n, language, method, query, url, ...params }: HttpRequestParamsModel<TType>) {
     super({ ...params });
+    this.i18n = i18n;
     this.language = language ?? this.headers?.['accept-language'] ?? 'en';
     this.method = method;
     this.query = query;
     this.url = url;
+  }
+
+  get i18n(): I18nModel | undefined {
+    return this._i18n;
+  }
+
+  set i18n(value: I18nModel | undefined) {
+    this._i18n = value;
   }
 
   get language(): string | undefined {

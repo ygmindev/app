@@ -1,4 +1,5 @@
 import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
+import { ASSETS_DIR } from '@lib/config/file/file.constants';
 import configBase from '@lib/config/locale/internationalize/internationalize.frontend';
 import {
   type _InternationalizeConfigModel,
@@ -14,7 +15,7 @@ export const config = defineConfig<InternationalizeConfigModel, _Internationaliz
     {
       isPreload: true,
 
-      localePath: fromPublic(),
+      localePath: fromPublic(ASSETS_DIR),
 
       modules: [FsBackend],
     },

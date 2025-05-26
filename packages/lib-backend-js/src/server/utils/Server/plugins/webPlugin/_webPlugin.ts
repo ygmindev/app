@@ -1,4 +1,3 @@
-import { fastifyMiddie } from '@fastify/middie';
 import { type _WebPluginModel } from '@lib/backend/server/utils/Server/plugins/webPlugin/_webPlugin.models';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { _web } from '@lib/config/node/web/_web';
@@ -7,7 +6,6 @@ import { render } from '@lib/shared/web/utils/render/render';
 import { createDevMiddleware } from 'vike/server';
 
 export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
-  await server._app.register(fastifyMiddie);
   if (process.env.NODE_ENV === 'development') {
     const { devMiddleware } = await createDevMiddleware({
       root,

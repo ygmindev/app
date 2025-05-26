@@ -1,6 +1,6 @@
 try {
   if (process.env.NODE_ENV === 'production') {
-    await import('../../__build__/server/entry.mjs');
+    await import('../__build__/server/entry.mjs');
   }
 } catch (_) {}
 
