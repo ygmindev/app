@@ -10,6 +10,6 @@ export const serveSsr: TaskParamsModel<ServeSsrParamsModel> = {
   task: [
     // TODO fix root
     ({ options }) =>
-      `/opt/homebrew/bin/func host start --verbose --no-build --useHttps --port ${options?.port ?? process.env.SERVER_APP_SSR_PORT}`,
+      `/opt/homebrew/bin/func host start --no-build --useHttps --port ${options?.port ?? process.env.SERVER_APP_SSR_PORT}`,
   ],
 };
