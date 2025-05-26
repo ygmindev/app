@@ -5,7 +5,7 @@ import {
   type InternationalizeConfigModel,
 } from '@lib/config/locale/internationalize/internationalize.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import { APP_URI } from '@lib/shared/http/http.constants';
+import { STATIC_URI } from '@lib/shared/http/http.constants';
 
 export const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
   ...configBase,
@@ -14,7 +14,7 @@ export const config = defineConfig<InternationalizeConfigModel, _Internationaliz
     {
       isPreload: false,
 
-      localePath: `${APP_URI}/${ASSETS_DIR}`,
+      localePath: `${STATIC_URI}/${ASSETS_DIR}`,
     },
   ],
 });
