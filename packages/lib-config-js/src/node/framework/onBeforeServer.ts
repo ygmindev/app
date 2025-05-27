@@ -43,7 +43,6 @@ export const onBeforeServer = async (
   const { context, routes } = params;
 
   await initializeBackend({ database: databaseConfig.params() });
-
   const queryClient = new QueryClient();
   const store = new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
     cookies: context?.[STATE]?.cookies,

@@ -36,6 +36,7 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
       : params.prefix
         ? this._api?.prefix
         : undefined;
+
     const pathname = `/${joinPaths([prefix, params.pathname])}`;
     logger.info(
       `${isArray(params.method) ? params.method.join(',') : params.method} ${uri({

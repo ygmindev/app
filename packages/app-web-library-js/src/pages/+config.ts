@@ -1,1 +1,3 @@
-export default { prerender: { partial: true } };
+import { config } from '@lib/config/node/framework/framework';
+
+export default config.config();
