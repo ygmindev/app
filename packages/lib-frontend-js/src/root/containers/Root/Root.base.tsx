@@ -6,9 +6,9 @@ import { type FCModel } from '@lib/frontend/core/core.models';
 import { QueryProvider } from '@lib/frontend/data/providers/QueryProvider/QueryProvider';
 import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider';
 import {
-  actionContext,
-  defaultStateContext,
-  persistedStateContext,
+  ActionContext,
+  DefaultStateContext,
+  PersistedStateContext,
 } from '@lib/frontend/root/containers/Root/context';
 import { type RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
 import { ContextProvider } from '@lib/frontend/root/providers/ContextProvider/ContextProvider';
@@ -54,9 +54,9 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
         <store.Provider
           value={{
             ...context?.[STATE],
-            actionContext,
-            defaultStateContext,
-            persistedStateContext,
+            actionContext: ActionContext,
+            defaultStateContext: DefaultStateContext,
+            persistedStateContext: PersistedStateContext,
             store,
           }}
         />,

@@ -1,6 +1,6 @@
 import {
-  defaultStateContext,
-  persistedStateContext,
+  DefaultStateContext,
+  PersistedStateContext,
 } from '@lib/frontend/root/containers/Root/context';
 import { type RootStateModel } from '@lib/frontend/root/stores/rootStore.models';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
@@ -18,8 +18,8 @@ import { useContext } from 'react';
 export const useStore = <TKey extends DeepKeyModel<RootStateModel>>(
   key: UseStoreParamsModel<TKey>,
 ): UseStoreModel<TKey> => {
-  const defaultState = useContext(defaultStateContext);
-  const persistedState = useContext(persistedStateContext);
+  const defaultState = useContext(DefaultStateContext);
+  const persistedState = useContext(PersistedStateContext);
   const value = _useStore<RootStateModel, TKey>(key);
   const actions = useActions();
   const defaultValue = getValue(defaultState, key);

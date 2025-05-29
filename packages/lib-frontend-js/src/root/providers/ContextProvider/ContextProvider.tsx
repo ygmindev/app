@@ -6,13 +6,13 @@ import { type RequiredModel } from '@lib/shared/core/core.models';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { createContext } from 'react';
 
-export const rootContext = createContext<RootContextModel>({});
+export const RootContext = createContext<RootContextModel>({});
 
 export const ContextProvider = composeComponent<
   ContextProviderPropsModel,
   RequiredModel<ProviderPropsModel<RootContextModel>>
 >({
-  Component: rootContext,
+  Component: RootContext,
 });
 
 process.env.APP_IS_DEBUG && (ContextProvider.displayName = variableName({ ContextProvider }));

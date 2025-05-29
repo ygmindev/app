@@ -1,5 +1,5 @@
 import { type FCPropsModel } from '@lib/frontend/core/core.models';
-import { rootContext } from '@lib/frontend/root/providers/ContextProvider/ContextProvider';
+import { RootContext } from '@lib/frontend/root/providers/ContextProvider/ContextProvider';
 import { type RedirectPropsModel } from '@lib/frontend/route/components/Redirect/Redirect.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
@@ -14,7 +14,7 @@ export const Redirect = <TType extends unknown>({
   FCPropsModel<RedirectPropsModel<TType>>
 > => {
   const { replace } = useRouter();
-  const context = useContext(rootContext);
+  const context = useContext(RootContext);
 
   context[ROUTE] && (context[ROUTE].redirectTo = trimPathname(pathname));
 
