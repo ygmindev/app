@@ -126,7 +126,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   return (
     <>
       {isActiveF && route.header && (
-        <Portal key={`header-${route.fullpath}`}>
+        <Portal>
           <RouteHeader route={route} />
         </Portal>
       )}
