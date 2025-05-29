@@ -18,8 +18,7 @@ export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props })
       <Wrapper
         {...wrapperProps}
         backgroundColor={THEME_COLOR_MORE.SURFACE}
-        flex
-        position={SHAPE_POSITION.RELATIVE}>
+        flex>
         <PortalHost>
           <Wrapper
             flex

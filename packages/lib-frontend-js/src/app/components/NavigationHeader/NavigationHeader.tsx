@@ -19,6 +19,7 @@ import { useRef } from 'react';
 
 export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
   elementState,
+  isAbsolute,
   onBack,
   title,
   ...props
@@ -37,13 +38,13 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
       isAlign
       isFullWidth
       isRow
-      left={0}
+      left={isAbsolute ? 0 : undefined}
       pHorizontal
       pVertical={THEME_SIZE.SMALL}
-      position={SHAPE_POSITION.ABSOLUTE}
+      position={isAbsolute ? SHAPE_POSITION.ABSOLUTE : SHAPE_POSITION.RELATIVE}
       ref={ref}
-      right={0}
-      top={0}
+      right={isAbsolute ? 0 : undefined}
+      top={isAbsolute ? 0 : undefined}
       zIndex={2}>
       <Appearable isActive={!!onBack}>
         <Button
