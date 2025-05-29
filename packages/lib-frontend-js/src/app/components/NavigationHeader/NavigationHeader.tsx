@@ -37,10 +37,13 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
       isAlign
       isFullWidth
       isRow
+      left={0}
       pHorizontal
       pVertical={THEME_SIZE.SMALL}
-      position={SHAPE_POSITION.RELATIVE}
+      position={SHAPE_POSITION.ABSOLUTE}
       ref={ref}
+      right={0}
+      top={0}
       zIndex={2}>
       <Appearable isActive={!!onBack}>
         <Button

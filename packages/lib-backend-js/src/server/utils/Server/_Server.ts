@@ -9,8 +9,9 @@ import { type ApiConfigModel, type ApiEndpointModel } from '@lib/config/api/api.
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { type HttpMethodModel } from '@lib/shared/http/http.models';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
-import { fastify, type FastifyInstance, type HTTPMethods } from 'fastify';
+import { fastify, type FastifyInstance, type FastifyRequest, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
+import { type I18NextRequest } from 'i18next-http-middleware';
 import forEach from 'lodash/forEach';
 import toNumber from 'lodash/toNumber';
 
@@ -44,7 +45,7 @@ export class _Server implements _ServerModel {
   }: ApiEndpointModel<TType, TParams>): Promise<void> {
     await this._app.register(async (fastify) =>
       fastify.route({
-        handler: async (req, rep) => {
+        handler: async (req: FastifyRequest & I18NextRequest, rep) => {
           const request = new HttpRequest({
             body: req.body as TParams,
             cookies: req.cookies as Record<string, string>,

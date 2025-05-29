@@ -54,6 +54,7 @@ export const _graphqlPlugin: _GraphqlPluginModel = async (
       },
       method,
       pathname,
+      prefix: true,
       type: API_ENDPOINT_TYPE.REST,
     });
   } catch (e) {
