@@ -24,6 +24,7 @@ export const CLEAN_PATTERNS = [
   '.swc',
   '.test',
   '.vite',
+  '.wrangler',
   '*.0x',
   '*.log*',
   'coverage',
