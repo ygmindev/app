@@ -1,3 +1,4 @@
+import { ASSETS_DIR } from '@lib/config/file/file.constants';
 import { _Image } from '@lib/frontend/core/components/Image/_Image';
 import { type ImagePropsModel } from '@lib/frontend/core/components/Image/Image.models';
 import { type DimensionModel, type SFCModel } from '@lib/frontend/core/core.models';
@@ -27,7 +28,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
   const srcF = useMemo(() => {
     let value = isArray(src) ? src[current] : src;
     if (baseUri) {
-      value = value.startsWith('/') ? `${baseUri}${value}` : value;
+      value = value.startsWith('/') ? `${baseUri}/${ASSETS_DIR}${value}` : value;
     }
     return value;
   }, [baseUri, current, src]);

@@ -4,26 +4,34 @@ import {
 } from '@lib/config/node/framework/framework.models';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 
-export const _framework = ({ assetsUri }: FrameworkConfigModel): _FrameworkConfigModel => ({
-  baseAssets: assetsUri ? uri(assetsUri) : undefined,
+export const _framework = ({
+  assetsUri,
+  faviconDir,
+}: FrameworkConfigModel): _FrameworkConfigModel => {
+  const baseAssets = assetsUri ? uri(assetsUri) : undefined;
+  return {
+    baseAssets,
 
-  clientRouting: true,
+    clientRouting: true,
 
-  extends: ['import:vike-react/config:default'],
+    extends: ['import:vike-react/config:default'],
 
-  hydrationCanBeAborted: true,
+    favicon: `${baseAssets}/${faviconDir}`,
 
-  passToClient: ['context'],
+    hydrationCanBeAborted: true,
 
-  prerender: {
-    keepDistServer: true,
+    passToClient: ['context'],
 
-    partial: true,
-  },
+    prerender: {
+      keepDistServer: true,
 
-  route: '/*',
+      partial: true,
+    },
 
-  ssr: true,
+    route: '/*',
 
-  stream: true,
-});
+    ssr: true,
+
+    stream: true,
+  };
+};

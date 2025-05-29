@@ -16,7 +16,7 @@ export const _render = async (request: _RenderParamsModel): Promise<_RenderModel
   const response = new HttpResponse<ReadableStream>();
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
     context: {
-      [LOCALE]: { i18n: request.i18n, lang: request.language },
+      [LOCALE]: { i18n: request.i18n, lang: request.lang },
       [ROUTE]: { location: { pathname: request.url } },
       [STATE]: {
         cookies: {
@@ -39,6 +39,7 @@ export const _render = async (request: _RenderParamsModel): Promise<_RenderModel
     redirectTo: undefined,
     urlOriginal: request.url,
   });
+
   response.redirectTo = redirectTo;
   errorWhileRendering && (response.error = errorWhileRendering as Error);
   const transform = new PassThrough();

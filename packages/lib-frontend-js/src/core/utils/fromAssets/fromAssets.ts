@@ -7,6 +7,4 @@ import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathnam
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
 export const fromAssets = (...params: FromAssetsParamsModel): FromAssetsModel =>
-  filterNil(
-    [ASSETS_DIR, ...(params ?? [])].map((v) => (v ? trimPathname(v, false) : undefined)),
-  ).join('/');
+  `${ASSETS_DIR}${filterNil(params.map((v) => (v ? trimPathname(v, false) : undefined))).join('')}`;

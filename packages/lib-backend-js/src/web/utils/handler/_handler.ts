@@ -12,13 +12,11 @@ export const _handler = ({ isStream, name, onRequest }: _HandlerParamsModel): _H
   const handler: _HandlerModel = async (request) => {
     const response = await onRequest(
       new HttpRequest({
-        // i18n: request.i18n,
-        // language: request.language,
         body: request.body as ReadableStream,
         headers: Object.fromEntries(request.headers),
         method: request.method as HttpMethodModel,
         query: request.query,
-        url: request.url,
+        url: `/${request.params.path}`,
       }),
     );
     return {

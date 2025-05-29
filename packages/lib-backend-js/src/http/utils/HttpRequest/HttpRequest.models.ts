@@ -4,7 +4,7 @@ import { type I18nModel } from '@lib/shared/locale/locale.models';
 
 export type HttpRequestParamsModel<TType> = HttpMessageParamsModel<TType> & {
   i18n?: I18nModel;
-  language?: string;
+  lang?: string;
   method?: HttpMethodModel;
   query?: URLSearchParams;
   url: string;

@@ -9,6 +9,7 @@ import { type Config } from 'vike/types';
 
 export type FrameworkConfigModel = {
   assetsUri?: UriModel;
+  faviconDir?: string;
   onAfterServer?(params: FrameworkRenderParamsModel): Promise<FrameworkRenderParamsModel>;
   onBeforeClient?(params: FrameworkRenderParamsModel): Promise<FrameworkRenderParamsModel>;
   onBeforeServer?(params: FrameworkRenderParamsModel): Promise<FrameworkRenderParamsModel>;
