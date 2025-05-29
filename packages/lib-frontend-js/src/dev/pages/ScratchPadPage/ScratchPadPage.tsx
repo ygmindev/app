@@ -1,26 +1,24 @@
-// import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
+import { Tabs } from '@lib/frontend/core/components/Tabs/Tabs';
+import { Text } from '@lib/frontend/core/components/Text/Text';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { type ScratchPadPagePropsModel } from '@lib/frontend/dev/pages/ScratchPadPage/ScratchPadPage.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { motify } from 'moti';
-import { TextInput } from 'react-native';
-import { useAnimatedProps } from 'react-native-reanimated';
-
-const Animatable = motify(TextInput)();
+import { useState } from 'react';
 
 export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const animatedProps = useAnimatedProps(() => {
-    return {
-      text: 'person-outline',
-    };
-  });
-
+  const [tab, tabChange] = useState<string>('tab1');
   return (
     <MainLayout
       {...wrapperProps}
-      p></MainLayout>
+      p>
+      <Tabs
+        onChange={tabChange}
+        tabs={[{ id: 'tab1' }, { id: 'tab2' }]}
+        value={tab}></Tabs>
+      {tab === 'tab1' ? <Text>tab1</Text> : <Text>tab2</Text>}
+    </MainLayout>
   );
 };
 
