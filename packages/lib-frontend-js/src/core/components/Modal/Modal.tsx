@@ -66,7 +66,8 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
   useImperativeHandle(ref, () => ({ toggle: valueControlledSet }));
 
   const elementStateF = valueControlled ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
-  return isOpenF || isOpen ? (
+
+  return isOpenF || valueControlled ? (
     <Portal>
       <Exitable>
         {isOpen && (
@@ -78,6 +79,8 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
               elementState={elementStateF}
               isAbsoluteFill
               onPress={() => valueControlledSet(false)}
+              testID="backdrop"
+              zIndex
             />
 
             {deviceHeight && (
@@ -102,7 +105,8 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
                 position={SHAPE_POSITION.ABSOLUTE}
                 right={0}
                 round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
-                width={width}>
+                width={width}
+                zIndex>
                 <Wrapper
                   backgroundColor={THEME_COLOR_MORE.SURFACE}
                   backgroundRole={THEME_ROLE.MUTED}

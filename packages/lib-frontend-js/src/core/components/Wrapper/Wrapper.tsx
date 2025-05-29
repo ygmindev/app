@@ -55,7 +55,6 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = ({
   };
 
   const childrenF = useMemo(() => getChildren(children), [children]);
-
   return animation
     ? createElement(AnimatableView, { ...props, animation, ref, style: styles }, childrenF)
     : createElement(View, { ...props, ref, style: styles }, childrenF);

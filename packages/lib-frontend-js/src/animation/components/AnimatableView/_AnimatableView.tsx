@@ -28,6 +28,7 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
 }) => {
   const theme = useTheme();
   const { styles } = useStyles({ props });
+
   const { animationProps, animationState, to, toState } = useAnimationState({
     animation,
     elementState,

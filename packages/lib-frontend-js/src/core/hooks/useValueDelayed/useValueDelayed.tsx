@@ -12,8 +12,9 @@ export const useValueDelayed = <TType,>(
 ): UseValueDelayedModel<TType> => {
   const theme = useTheme();
   const [valueDelayed, valueDelayedSet] = useState<TType | undefined>(value);
+  const delayF = delay ?? theme.animation.effect;
   useChange(value, () => {
-    void sleep(delay ?? theme.animation.effect).then(() => valueDelayedSet(value));
+    void sleep(delayF).then(() => valueDelayedSet(value));
   });
   return valueDelayed;
 };
