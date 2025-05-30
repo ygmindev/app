@@ -44,6 +44,7 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = ({
       onPress:
         trigger === ACTIVATABLE_TRIGGER.PRESS
           ? async () => {
+              isActiveSet(!isActive);
               await onPress?.();
               await activatableRef.current?.press?.();
             }
@@ -66,23 +67,27 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = ({
   }
 
   const childrenF = (
-    <Dropdown
-      {...props}
-      anchor={anchorF}
-      isOpen={isOpen ?? isActive}
-      onToggle={(value) => isActiveSet(value || false)}
-      ref={dropdownRef}>
-      {children}
-    </Dropdown>
+    <View testID={testID}>
+      <Dropdown
+        {...props}
+        anchor={anchorF}
+        isOpen={isOpen ?? isActive}
+        onToggle={(value) => isActiveSet(value || false)}
+        ref={dropdownRef}>
+        {children}
+      </Dropdown>
+    </View>
   );
 
-  return (
+  return trigger === ACTIVATABLE_TRIGGER.PRESS ? (
+    childrenF
+  ) : (
     <Activatable
       onActive={() => isActiveSet(true)}
       onInactive={() => isActiveSet(false)}
       ref={isPressable ? activatableRef : undefined}
       trigger={trigger}>
-      <View testID={testID}>{childrenF}</View>
+      {childrenF}
     </Activatable>
   );
 };
