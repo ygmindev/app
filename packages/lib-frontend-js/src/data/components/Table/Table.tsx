@@ -105,7 +105,6 @@ export const Table = <TType,>({
         },
 
         select && {
-          headerRenderer: () => <Button>hi</Button>,
           id: 'select' as StringKeyModel<TType>,
           isFilterDisabled: false,
           isFrozen: true,
@@ -208,10 +207,9 @@ export const Table = <TType,>({
                     isSorted
                       ? sortingF[sortIndex]?.isDescending
                         ? remove(sortingF, sortIndex)
-                        : updateArray(sortingF, sortIndex, (v) => ({
-                            ...v,
-                            isDescending: !v?.isDescending,
-                          }))
+                        : updateArray(sortingF, sortIndex, (v) =>
+                            v ? { ...v, isDescending: !v.isDescending } : undefined,
+                          )
                       : [{ id }],
                   )
                 }

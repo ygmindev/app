@@ -16,9 +16,11 @@ export const updateArray = <TType extends unknown>(
   const valueF = value ? (isClone ? clone(value) : value) : [];
   const index = isNumber(selector) ? selector : valueF.findIndex(selector);
   if (index >= 0) {
-    valueF[index] = update(valueF[index]);
+    const v = update(valueF[index]);
+    v && (valueF[index] = v);
   } else if (isUpsert) {
-    valueF.push(update());
+    const v = update();
+    v && valueF.push(v);
   }
   return valueF;
 };

@@ -16,7 +16,6 @@ import {
   THEME_ROLE,
   THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 
 export const CheckboxInput: RLFCModel<CheckboxInputRefModel, CheckboxInputPropsModel> = ({
   defaultValue,
@@ -61,5 +60,3 @@ export const CheckboxInput: RLFCModel<CheckboxInputRefModel, CheckboxInputPropsM
     </Wrapper>
   );
 };
-
-process.env.APP_IS_DEBUG && (CheckboxInput.displayName = variableName({ CheckboxInput }));

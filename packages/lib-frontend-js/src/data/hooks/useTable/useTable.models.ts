@@ -1,3 +1,4 @@
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type TranslatableOptionModel } from '@lib/frontend/core/core.models';
 import {
   type DataFormatterModel,
@@ -9,7 +10,6 @@ import {
   type _UseTableParamsModel,
 } from '@lib/frontend/data/hooks/useTable/_useTable.models';
 import { type TABLE_SELECT_TYPE } from '@lib/frontend/data/hooks/useTable/useTable.constants';
-import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';

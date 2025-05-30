@@ -68,7 +68,7 @@ export const getViewParams = <
       alwaysBounceHorizontal: false,
       alwaysBounceVertical: false,
       contentContainerStyle: { ...stylesContainer, flexGrow: 1 },
-      horizontal: props.isHorizontalScrollable ?? false,
+      // horizontal: props.isHorizontalScrollable ?? false,
       onContentSizeChange: (width, height) => measureContentSet({ height, width }),
       onLayout: ({
         nativeEvent: {
