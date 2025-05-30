@@ -1,3 +1,4 @@
+import { ACTIVATABLE_TRIGGER } from '@lib/frontend/core/components/Activatable/Activatable.constants';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
@@ -129,7 +130,8 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
         </Button>
       )}
       direction={DIRECTION.BOTTOM}
-      ref={ref}>
+      ref={ref}
+      trigger={ACTIVATABLE_TRIGGER.PRESS}>
       <FormContainer
         {...props}
         cancelLabel={t('resource:clearFilters')}

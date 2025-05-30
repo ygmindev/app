@@ -173,6 +173,27 @@ export const ResourceTable = <TType extends EntityResourceModel, TRoot = undefin
               <Wrapper
                 isAlign
                 isRow>
+                {selectedRows.length > 0 && (
+                  <Menu
+                    anchor={(isActive) => (
+                      <Button
+                        elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+                        icon="dotsVertical"
+                        size={THEME_SIZE.SMALL}
+                        type={BUTTON_TYPE.TRANSPARENT}>
+                        {t('resource:rowsSelected', { count: selectedRows.length })}
+                      </Button>
+                    )}
+                    options={[
+                      {
+                        id: 'unselect',
+                        label: t('core:all', { value: t('resource:unselect') }),
+                        onPress: () => tableRef.current?.select?.([]),
+                      },
+                    ]}
+                  />
+                )}
+
                 <Button
                   icon="refresh"
                   onPress={async () => connectionBoundaryRef.current?.reset?.()}
@@ -200,27 +221,6 @@ export const ResourceTable = <TType extends EntityResourceModel, TRoot = undefin
                   {t('core:new', { value: name })}
                 </ModalButton>
               </Wrapper>
-
-              {selectedRows.length > 0 && (
-                <Menu
-                  anchor={(isActive) => (
-                    <Button
-                      elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
-                      icon="dotsVertical"
-                      size={THEME_SIZE.SMALL}
-                      type={BUTTON_TYPE.TRANSPARENT}>
-                      {t('resource:rowsSelected', { count: selectedRows.length })}
-                    </Button>
-                  )}
-                  options={[
-                    {
-                      id: 'unselect',
-                      label: t('core:all', { value: t('resource:unselect') }),
-                      onPress: () => tableRef.current?.select?.([]),
-                    },
-                  ]}
-                />
-              )}
             </Wrapper>
 
             <Wrapper

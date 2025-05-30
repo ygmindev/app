@@ -44,22 +44,22 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = ({
       onPress:
         trigger === ACTIVATABLE_TRIGGER.PRESS
           ? async () => {
-              onPress && (await onPress());
-              activatableRef?.current?.press && (await activatableRef.current.press());
+              await onPress?.();
+              await activatableRef.current?.press?.();
             }
           : undefined,
       onPressIn:
         trigger === ACTIVATABLE_TRIGGER.FOCUS
           ? () => {
-              onPressIn && onPressIn();
-              activatableRef?.current?.pressIn && activatableRef.current.pressIn();
+              onPressIn?.();
+              activatableRef.current?.pressIn?.();
             }
           : undefined,
       onPressOut:
         trigger === ACTIVATABLE_TRIGGER.FOCUS
           ? () => {
-              onPressOut && onPressOut();
-              activatableRef?.current?.pressOut && activatableRef.current.pressOut();
+              onPressOut?.();
+              activatableRef.current?.pressOut?.();
             }
           : undefined,
     });
