@@ -38,10 +38,12 @@ export class HttpResponse<TType> extends HttpMessage<TType> implements HttpRespo
   }
 
   setHeader(key: string, value?: string): void {
-    this._headers ? !value && delete this._headers[key] : value && (this.headers = {});
+    this._headers
+      ? !value && delete this._headers[key.toLowerCase()]
+      : value && (this.headers = {});
     value
-      ? ((this._headers as Record<string, string>)[key] = value)
-      : delete (this._headers as Record<string, string>)[key];
+      ? ((this._headers as Record<string, string>)[key.toLowerCase()] = value)
+      : delete (this._headers as Record<string, string>)[key.toLowerCase()];
   }
 
   get error(): Error | undefined {

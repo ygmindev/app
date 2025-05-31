@@ -131,7 +131,6 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       inputF = this.decorators.beforeCreateMany
         ? await this.decorators.beforeCreateMany({ input: inputF }, context)
         : inputF;
-
       inputF?.form &&
         (inputF.form = (await mapSequence(
           inputF.form?.map(
@@ -141,7 +140,6 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
                 : form,
           ),
         )) as Array<EntityResourceDataModel<TType>>);
-
       const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot> =
         await createMany(inputF, context);
       return this.decorators.afterCreateMany
@@ -157,7 +155,6 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       inputF = this.decorators.beforeGet
         ? await this.decorators.beforeGet({ input: inputF }, context)
         : inputF;
-
       const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot> = await get(
         inputF,
         context,
@@ -175,7 +172,6 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       inputF = this.decorators.beforeGetMany
         ? await this.decorators.beforeGetMany({ input: inputF }, context)
         : inputF;
-
       const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> =
         await getMany(inputF, context);
       return this.decorators.afterGetMany
@@ -191,7 +187,6 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       inputF = this.decorators.beforeGetConnection
         ? await this.decorators.beforeGetConnection({ input: inputF }, context)
         : inputF;
-
       const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> =
         await getConnection(inputF, context);
       return this.decorators.afterGetConnection
@@ -207,7 +202,6 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       inputF = this.decorators.beforeUpdate
         ? await this.decorators.beforeUpdate({ input: inputF }, context)
         : inputF;
-
       const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = await update(
         inputF,
         context,
@@ -242,7 +236,6 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       inputF = this.decorators.beforeRemove
         ? await this.decorators.beforeRemove({ input: inputF }, context)
         : inputF;
-
       const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot> = await remove(
         inputF,
         context,

@@ -17,7 +17,10 @@ import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
-import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
+import {
+  type FilterConditionModel,
+  type FilterModel,
+} from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import {
   type EntityManager,
@@ -39,18 +42,31 @@ export const getFilter = <TType extends unknown>(
 ): FilterQuery<NoInfer<NonNullable<TType>>> =>
   cleanObject(
     filters?.reduce(
-      (result, v) => ({
-        ...result,
-        [prefix ? `${prefix}.${v.field}` : v.field]: {
-          [v.condition ?? FILTER_CONDITION.EQUAL]: last(v.field.split('.'))?.startsWith('_')
-            ? isArray(v.value)
-              ? v.value.map((vv) => (isString(vv) ? new ObjectId(vv) : vv))
-              : isString(v.value)
-                ? new ObjectId(v.value)
-                : v.value
-            : v.value,
-        },
-      }),
+      (result, v) => {
+        let condition = v.condition ?? FILTER_CONDITION.EQUAL;
+        let { value } = v;
+        switch (condition) {
+          case FILTER_CONDITION.LIKE: {
+            if (isString(value)) {
+              condition = '$regex' as FilterConditionModel;
+              value = new RegExp(value);
+            }
+            break;
+          }
+        }
+        return {
+          ...result,
+          [prefix ? `${prefix}.${v.field}` : v.field]: {
+            [condition]: last(v.field.split('.'))?.startsWith('_')
+              ? isArray(value)
+                ? value.map((vv) => (isString(vv) ? new ObjectId(vv) : vv))
+                : isString(value)
+                  ? new ObjectId(value)
+                  : value
+              : value,
+          },
+        };
+      },
       {} as FilterQuery<NoInfer<NonNullable<TType>>>,
     ) ?? {},
   );

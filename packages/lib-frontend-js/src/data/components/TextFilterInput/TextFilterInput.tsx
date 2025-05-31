@@ -67,7 +67,7 @@ export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInput
         !isValueOnly && {
           element: (
             <MenuInput
-              defaultValue={FILTER_CONDITION.LIKE}
+              defaultValue={FILTER_CONDITION.EQUAL}
               label={t('core:condition')}
               onChange={(v) => conditionControlledSet(v as FilterConditionModel)}
               options={[

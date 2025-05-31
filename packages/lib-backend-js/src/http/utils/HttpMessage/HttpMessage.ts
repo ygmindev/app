@@ -35,6 +35,8 @@ export class HttpMessage<TType> implements HttpMessageModel<TType> {
   }
 
   set headers(value: Record<string, string> | undefined) {
-    this._headers = value;
+    this._headers = value
+      ? Object.fromEntries(Object.entries(value).map(([k, v]) => [k.toLowerCase(), v]))
+      : undefined;
   }
 }
