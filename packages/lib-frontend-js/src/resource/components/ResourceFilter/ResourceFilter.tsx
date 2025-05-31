@@ -17,7 +17,7 @@ import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInp
 import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/TextFilterInput';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
-import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
@@ -102,7 +102,7 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
     <Droppable
       anchor={(isActive) => (
         <Button
-          elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+          elementState={isActive || values?.length ? ELEMENT_STATE.ACTIVE : undefined}
           icon="filter"
           rightElement={
             <Wrapper
@@ -116,7 +116,6 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
                 {values && (
                   <Text
                     casing={TEXT_CASING.NONE}
-                    color={THEME_COLOR.SECONDARY}
                     isBold>
                     {values.map((v) => v.value).join(', ')}
                   </Text>
