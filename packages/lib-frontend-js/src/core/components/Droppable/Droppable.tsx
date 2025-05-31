@@ -12,6 +12,8 @@ import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { View } from '@lib/frontend/core/components/View/View';
 import { type RSFCModel } from '@lib/frontend/core/core.models';
+import { useKeyPress } from '@lib/frontend/core/hooks/useKeyPress/useKeyPress';
+import { TEXT_INPUT_KEY } from '@lib/frontend/data/components/TextInput/TextInput.constants';
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
 import { cloneElement, useImperativeHandle, useRef, useState } from 'react';
 
@@ -34,6 +36,10 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = ({
   }));
 
   let anchorF = anchor(isActive);
+
+  useKeyPress((key) => {
+    key === TEXT_INPUT_KEY.ESCAPE && isActiveSet(false);
+  });
 
   const { onPress, onPressIn, onPressOut } = anchorF.props as PressablePropsModel;
   const isPressable =
