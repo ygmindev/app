@@ -17,11 +17,14 @@ import some from 'lodash/some';
 export const cleanObject = <TType extends unknown>(
   ...[value, options, depth = 0]: CleanObjectParamsModel<TType>
 ): CleanObjectModel<TType> => {
+  if (
+    isPrimitive(value) ||
+    some([...(options?.primitiveTypes ?? []), RegExp], (type) => isTypeOf(value, type))
+  ) {
+    return value;
+  }
   if (isFunction(value)) {
     return null as TType;
-  }
-  if (isPrimitive(value) || some(options?.primitiveTypes ?? [], (type) => isTypeOf(value, type))) {
-    return value;
   }
   if (isArray(value)) {
     return filterNil(value.map((vv) => cleanObject(vv as object, options, depth))) as TType;

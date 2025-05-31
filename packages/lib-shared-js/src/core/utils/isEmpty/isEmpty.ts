@@ -5,4 +5,4 @@ export const isEmpty = (value: unknown): boolean =>
   value === null ||
   value === undefined ||
   isEqual(value, []) ||
-  JSON.stringify(value) === '{}';
+  (!(value instanceof RegExp) && JSON.stringify(value) === '{}');

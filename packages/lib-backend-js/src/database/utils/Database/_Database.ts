@@ -49,7 +49,7 @@ export const getFilter = <TType extends unknown>(
           case FILTER_CONDITION.LIKE: {
             if (isString(value)) {
               condition = '$regex' as FilterConditionModel;
-              value = new RegExp(value);
+              value = new RegExp(value, 'i');
             }
             break;
           }
@@ -180,7 +180,9 @@ export class _Database implements _DatabaseModel {
 
       getMany: async ({ filter, options } = {}) => {
         const em = this.getEntityManager();
+        console.warn(filter);
         const filterF = getFilter<TType>(filter);
+        console.warn(filterF);
         const result = await em.find(
           name,
           filterF,
