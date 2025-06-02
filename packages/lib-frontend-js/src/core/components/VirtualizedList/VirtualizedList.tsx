@@ -11,8 +11,6 @@ import { type ReactElement } from 'react';
 import { View } from 'react-native';
 
 export const VirtualizedList = <TType extends WithIdModel>({
-  isHorizontal,
-  items,
   render,
   s,
   ...props
@@ -27,13 +25,13 @@ export const VirtualizedList = <TType extends WithIdModel>({
         s ? (
           <View
             style={
-              isHorizontal ? { width: getSpacing(s, theme) } : { height: getSpacing(s, theme) }
+              props.isHorizontal
+                ? { width: getSpacing(s, theme) }
+                : { height: getSpacing(s, theme) }
             }
           />
         ) : undefined
       }
-      isHorizontal={isHorizontal}
-      items={items}
       render={render}
     />
   );

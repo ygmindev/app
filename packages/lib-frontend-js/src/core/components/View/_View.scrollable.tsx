@@ -6,7 +6,10 @@ import {
   type _ViewRefModel,
 } from '@lib/frontend/core/components/View/_View.models';
 import { View } from '@lib/frontend/core/components/View/View';
-import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
+import {
+  SCROLL_EVENT_THROTTLE,
+  SCROLL_TYPE,
+} from '@lib/frontend/core/components/View/View.constants';
 import {
   type ChildrenPropsModel,
   type MeasureModel,
@@ -18,9 +21,16 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import { type StylePropsModel, type ViewStyleModel } from '@lib/frontend/style/style.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
+import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { partionObject } from '@lib/shared/core/utils/partionObject/partionObject';
-import { Fragment, useMemo, useState } from 'react';
-import { ScrollView, type ScrollViewProps, StyleSheet } from 'react-native';
+import { Fragment, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import {
+  type NativeScrollEvent,
+  type NativeSyntheticEvent,
+  ScrollView,
+  type ScrollViewProps,
+  StyleSheet,
+} from 'react-native';
 
 const viewParamsBase = getViewParamsBase();
 
@@ -54,6 +64,13 @@ export const getViewParams = <
     const [measureContent, measureContentSet] = useState<MeasureModel>();
     const [value, valueSet] = useState<PositionModel>();
 
+    const viewRef = useRef<ScrollView>(null);
+    useImperativeHandle(
+      props.ref,
+      () =>
+        ({ scrollTo: ({ x, y }) => viewRef.current?.scrollTo({ animated: false, x, y }) }) as TRef,
+    );
+
     const isHorizontalScrollableVisibleF =
       props.isHorizontalScrollableVisible ??
       (props.isHorizontalScrollable && (measure?.width ?? 0) < (measureContent?.width ?? 0));
@@ -62,13 +79,22 @@ export const getViewParams = <
       props.isVerticalScrollableVisible ??
       (props.isVerticalScrollable && (measure?.height ?? 0) < (measureContent?.height ?? 0));
 
+    const handleScroll = debounce(
+      ({ nativeEvent }: NativeSyntheticEvent<NativeScrollEvent>) => {
+        const { x, y } = nativeEvent.contentOffset;
+        valueSet({ x, y });
+        props.onScroll?.({ x, y });
+      },
+      { duration: SCROLL_EVENT_THROTTLE },
+    );
+
     const propsF = {
       ...viewParamsBase.getProps?.(props, theme),
       ...getProps?.(props, theme),
       alwaysBounceHorizontal: false,
       alwaysBounceVertical: false,
       contentContainerStyle: { ...stylesContainer, flexGrow: 1 },
-      // horizontal: props.isHorizontalScrollable ?? false,
+      horizontal: props.isHorizontalScrollable ?? false,
       onContentSizeChange: (width, height) => measureContentSet({ height, width }),
       onLayout: ({
         nativeEvent: {
@@ -78,14 +104,12 @@ export const getViewParams = <
         measureSet({ height, width });
         props.onMeasure?.({ height, width });
       },
-      onScroll: ({ nativeEvent }) => {
-        const { x, y } = nativeEvent.contentOffset;
-        valueSet({ x, y });
-        props.onScroll?.({ x, y });
-      },
-      ref: props.ref,
+      onMomentumScrollEnd: props.onScrollEnd ? () => props.onScrollEnd?.() : undefined,
+      onScroll: handleScroll,
+      onScrollEndDrag: props.onScrollEnd ? () => props.onScrollEnd?.() : undefined,
+      ref: viewRef,
       scrollEnabled: true,
-      scrollEventThrottle: 16,
+      scrollEventThrottle: SCROLL_EVENT_THROTTLE,
       scrollToOverflowEnabled: true,
       showsHorizontalScrollIndicator: false,
       showsVerticalScrollIndicator: false,
@@ -95,7 +119,7 @@ export const getViewParams = <
     const ScrollComponent = isBar ? ScrollBar : ScrollButton;
 
     const handleScrollTo = (position: PositionModel): void => {
-      props.ref?.current?.scrollTo(position);
+      props.ref?.current?.scrollTo({ ...position, animated: false });
     };
 
     return {

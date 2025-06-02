@@ -1,5 +1,6 @@
 import {
   type PointerEventsModel,
+  type ScrollableViewRefModel,
   type ScrollTypeModel,
 } from '@lib/frontend/core/components/View/View.models';
 import {
@@ -26,10 +27,9 @@ export type _ViewPropsModel = ChildrenPropsModel &
     onResponderGrant?(): void;
     onResponderRelease?(): void;
     onScroll?(position: PositionModel): void;
+    onScrollEnd?(): void;
     pointerEvents?: PointerEventsModel;
     scrollType?: ScrollTypeModel;
   };
 
-export type _ViewRefModel = {
-  scrollTo(params: PositionModel): void;
-};
+export type _ViewRefModel = ScrollableViewRefModel;

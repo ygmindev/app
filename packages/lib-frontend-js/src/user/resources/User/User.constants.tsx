@@ -4,8 +4,8 @@ import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const USER_RESOURCE_PARAMS = {
   fields: [
-    { id: 'email' },
-    { id: 'first' },
+    { id: 'email', width: 300 },
+    { id: 'first', width: 300 },
     { id: 'last' },
     { id: 'callingCode', isHidden: true },
     {

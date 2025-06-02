@@ -9,3 +9,5 @@ export enum POINTER_EVENETS {
   BOX_ONLY = 'box-only',
   NONE = 'none',
 }
+
+export const SCROLL_EVENT_THROTTLE = 16;

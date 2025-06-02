@@ -38,7 +38,11 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
   });
 
   useImperativeHandle(ref, () => ({
-    scrollTo: (position) => (ref as RefObject<AnimatableViewRefModel>).current?.scrollTo(position),
+    scrollTo: (position) =>
+      (ref as RefObject<AnimatableViewRefModel>).current?.scrollTo({
+        ...position,
+        animated: false,
+      }),
     to,
     toState,
   }));
