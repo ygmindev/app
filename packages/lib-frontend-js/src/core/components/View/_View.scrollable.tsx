@@ -133,7 +133,7 @@ export const getViewParams = <
                 : props.isVerticalScrollable
                   ? 1
                   : undefined,
-            overflow: 'hidden',
+            // overflow: 'hidden',
             position: 'relative',
             ...stylesView,
           }}
