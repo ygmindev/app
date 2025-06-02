@@ -146,30 +146,10 @@ export const Table = <TType,>({
     [columns, isRemovable, select, selected],
   );
 
-  const dataF = useMemo(
-    () =>
-      [
-        { id: '1' },
-        { id: '2' },
-        { id: '3' },
-        { id: '4' },
-        { id: '5' },
-        { id: '6' },
-        { id: '7' },
-        { id: '8' },
-        { id: '9' },
-        { id: '10' },
-        { id: '11' },
-        { id: '12' },
-      ].map((x) => ({ _id: x.id, email: `${x.id}@email.com`, id: x.id })) as Array<TType>,
-    [],
-  );
-
   const [sortingF, sortingSet] = useState<Array<TableSortModel<TType>>>(sorting ?? []);
   const { headers, rows } = useTable({
     columns: columnsF,
-    data: dataF,
-    // data,
+    data,
     idField,
     sorting: sortingF,
   });

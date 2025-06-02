@@ -85,7 +85,7 @@ export const getViewParams = <
         valueSet({ x, y });
         props.onScroll?.({ x, y });
       },
-      { duration: SCROLL_EVENT_THROTTLE },
+      { duration: SCROLL_EVENT_THROTTLE, isLeading: true },
     );
 
     const propsF = {
