@@ -53,7 +53,7 @@ export const getViewParams = <
         partionObject(
           StyleSheet.flatten(props.style) as Record<string, unknown>,
           (_, k) =>
-            ['alignSelf', 'justifySelf', 'flex', 'width'].includes(k) ||
+            ['alignSelf', 'justifySelf', 'flex', 'width', 'overflow'].includes(k) ||
             k.startsWith('margin') ||
             k.startsWith('border'),
         ),
@@ -133,7 +133,6 @@ export const getViewParams = <
                 : props.isVerticalScrollable
                   ? 1
                   : undefined,
-            // overflow: 'hidden',
             position: 'relative',
             ...stylesView,
           }}
