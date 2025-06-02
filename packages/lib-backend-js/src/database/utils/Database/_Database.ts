@@ -180,9 +180,7 @@ export class _Database implements _DatabaseModel {
 
       getMany: async ({ filter, options } = {}) => {
         const em = this.getEntityManager();
-        console.warn(filter);
         const filterF = getFilter<TType>(filter);
-        console.warn(filterF);
         const result = await em.find(
           name,
           filterF,
