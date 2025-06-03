@@ -133,7 +133,7 @@ const FormContainerF = <TType, TResult = void>({
 
   const onSubmitF = async (data: TType): Promise<TResult | null> => {
     const dataF = await getValues(data, fields);
-    return (onSubmit && (await onSubmit(dataF))) ?? null;
+    return (await onSubmit?.(dataF)) ?? null;
   };
 
   const { errors, handleChange, handleReset, handleSubmit, isLoading, values, valuesSet } = useForm<
@@ -175,7 +175,7 @@ const FormContainerF = <TType, TResult = void>({
       },
       onSubmit: handleSubmitF,
       ref:
-        element?.ref ??
+        element?.props?.ref ??
         ((elementF: InputRefModel<TType, TKey>) =>
           inputRefs.current && (inputRefs.current[id] = elementF)),
       testID: id,

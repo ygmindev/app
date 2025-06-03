@@ -1401,7 +1401,7 @@ type Otp {
 input OtpCreateFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-06-02T03:35:53.533Z"
+  created: DateTimeISO = "2025-06-03T03:20:54.377Z"
   email: String
   isCheckExists: Boolean
   isFixture: Boolean
@@ -1417,7 +1417,7 @@ input OtpCreateInput {
 input OtpCreateManyFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-06-02T03:35:53.533Z"
+  created: DateTimeISO = "2025-06-03T03:20:54.377Z"
   email: String
   isCheckExists: Boolean
   isFixture: Boolean
@@ -1516,7 +1516,7 @@ type OtpGetOutput {
 input OtpInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-06-02T03:35:53.533Z"
+  created: DateTimeISO = "2025-06-03T03:20:54.377Z"
   email: String
   isCheckExists: Boolean
   isFixture: Boolean
@@ -1582,7 +1582,7 @@ type OtpUpdateOutput {
 input OtpUpdateUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-06-02T03:35:53.533Z"
+  created: DateTimeISO = "2025-06-03T03:20:54.377Z"
   email: String
   isCheckExists: Boolean
   isFixture: Boolean
@@ -1610,6 +1610,17 @@ input PaymentInput {
 }
 
 type PaymentMethod {
+  _id: String
+  created: DateTimeISO
+  externalId: String
+  fingerprint: String
+  isFixture: Boolean
+  last4: String
+  name: String
+  type: String
+}
+
+input PaymentMethodInput {
   _id: String
   created: DateTimeISO
   externalId: String
@@ -2392,7 +2403,7 @@ type Socket {
 input SocketCreateFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-06-02T03:35:53.533Z"
+  created: DateTimeISO = "2025-06-03T03:20:54.380Z"
   isFixture: Boolean
   name: String
 }
@@ -2405,7 +2416,7 @@ input SocketCreateInput {
 input SocketCreateManyFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-06-02T03:35:53.533Z"
+  created: DateTimeISO = "2025-06-03T03:20:54.380Z"
   isFixture: Boolean
   name: String
 }
@@ -2501,7 +2512,7 @@ type SocketGetOutput {
 input SocketInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-06-02T03:35:53.533Z"
+  created: DateTimeISO = "2025-06-03T03:20:54.380Z"
   isFixture: Boolean
   name: String
 }
@@ -2564,7 +2575,7 @@ type SocketUpdateOutput {
 input SocketUpdateUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-06-02T03:35:53.533Z"
+  created: DateTimeISO = "2025-06-03T03:20:54.380Z"
   isFixture: Boolean
   name: String
 }
@@ -2587,7 +2598,7 @@ type User {
   last: String
   linkedUser: [linkedUser]
   messages: [Message]
-  paymentMethodPrimary: String
+  paymentMethodPrimary: PaymentMethod
   phone: String
 }
 
@@ -2605,7 +2616,7 @@ input UserCreateFormInput {
   last: String
   linkedUser: [linkedUserInput]
   messages: [MessageInput] = []
-  paymentMethodPrimary: String
+  paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
 
@@ -2628,7 +2639,7 @@ input UserCreateManyFormInput {
   last: String
   linkedUser: [linkedUserInput]
   messages: [MessageInput] = []
-  paymentMethodPrimary: String
+  paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
 
@@ -2734,7 +2745,7 @@ input UserInput {
   last: String
   linkedUser: [linkedUserInput]
   messages: [MessageInput] = []
-  paymentMethodPrimary: String
+  paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
 
@@ -2807,7 +2818,7 @@ input UserUpdateUpdateInput {
   last: String
   linkedUser: [linkedUserInput]
   messages: [MessageInput] = []
-  paymentMethodPrimary: String
+  paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
 

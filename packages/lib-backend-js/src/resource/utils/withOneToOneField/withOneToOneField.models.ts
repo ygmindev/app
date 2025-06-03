@@ -1,0 +1,13 @@
+import {
+  type WithRefFieldModel,
+  type WithRefFieldParamsModel,
+} from '@lib/backend/resource/utils/withRefField/withRefField.models';
+import { type RequiredModel } from '@lib/shared/core/core.models';
+
+export type WithOneToOneFieldParamsModel<TType extends unknown> = Pick<
+  WithRefFieldParamsModel<TType>,
+  'isDatabase' | 'isOptional'
+> &
+  RequiredModel<Pick<WithRefFieldParamsModel<TType>, 'root' | 'Resource'>>;
+
+export type WithOneToOneFieldModel = WithRefFieldModel;

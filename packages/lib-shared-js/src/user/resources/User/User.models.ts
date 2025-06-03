@@ -36,7 +36,7 @@ export type UserModel = EntityResourceModel & {
 
   messages?: CollectionModel<MessageModel>;
 
-  paymentMethodPrimary?: string;
+  paymentMethodPrimary?: PaymentMethodModel;
 
   phone?: string;
 };

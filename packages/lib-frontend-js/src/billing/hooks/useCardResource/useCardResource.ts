@@ -12,11 +12,11 @@ export const useCardResource = ({
 }: UseCardResourceParamsModel = {}): UseCardResourceModel => {
   const actions = useActions();
   return useOwnResource<CardModel>({
+    root,
     ...CARD_RESOURCE_PARAMS,
-    // afterRemove: async ({ input, output }) => {
-    //   actions?.billing.paymentMethodsRemove({ _id: input?.id });
-    //   return output;
-    // },
-    // root,
+    afterRemove: async ({ input, output }) => {
+      input?.id?.forEach((v) => actions?.billing.paymentMethodsRemove({ _id: v }));
+      return output;
+    },
   });
 };

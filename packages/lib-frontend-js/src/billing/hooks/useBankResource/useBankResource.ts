@@ -13,8 +13,8 @@ export const useBankResource = ({
   const actions = useActions();
   return useOwnResource<BankModel>({
     ...BANK_RESOURCE_PARAMS,
-    afterRemove: async ({ output }) => {
-      actions?.billing.paymentMethodsRemove({ _id: '' });
+    afterRemove: async ({ input, output }) => {
+      input?.id?.forEach((v) => actions?.billing.paymentMethodsRemove({ _id: v }));
       return output;
     },
     root,

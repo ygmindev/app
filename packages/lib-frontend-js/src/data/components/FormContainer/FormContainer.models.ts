@@ -11,7 +11,7 @@ import {
 import { type UseFormParamsModel } from '@lib/frontend/data/hooks/useForm/useForm.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
-import { type FunctionComponentElement, type ReactNode, type RefObject } from 'react';
+import { type ReactElement, type ReactNode, type RefObject } from 'react';
 
 export type FormContainerPropsModel<TType, TResult = void> = WrapperPropsModel &
   UseFormParamsModel<TType, TResult> &
@@ -48,7 +48,7 @@ export type FormFieldModel<
   TType,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = WithIdModel<TKey> & {
-  element: FunctionComponentElement<InputPropsModel<TType[TKey]>>;
+  element: ReactElement<InputPropsModel<TType[TKey]> & { ref?: InputRefModel<TType, TKey> }>;
 };
 
 export type FormFieldsModel<TType> =

@@ -84,13 +84,13 @@ const getColumn = <TType extends unknown>({
         return ManyToOne({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          // ref: true,
         }) as PropertyDecorator;
       case FIELD_RELATION.ONE_TO_ONE:
         return OneToOne({
           ...defaultOptions,
           entity: Resource as () => EntityClass<TType>,
-          // ref: true,
+          mappedBy: root,
+          owner: !root,
         }) as PropertyDecorator;
       default:
         return Property({ ...defaultOptions, type: () => Resource }) as PropertyDecorator;

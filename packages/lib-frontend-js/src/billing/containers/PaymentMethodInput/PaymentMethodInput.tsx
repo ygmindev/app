@@ -51,8 +51,7 @@ export const PaymentMethodInput: RLFCModel<
   const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
   const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
   const { getAll } = usePaymentMethodResource();
-  const refF = useRef<DataBoundaryRefModel<Array<Partial<PaymentMethodModel>>>>(null);
-
+  const dataRef = useRef<DataBoundaryRefModel<Array<Partial<PaymentMethodModel>>>>(null);
   const inputRef = useRef<NewPaymentMethodInputRefModel>(null);
 
   const { valueControlled, valueControlledSet } = useValueControlled({
@@ -65,7 +64,8 @@ export const PaymentMethodInput: RLFCModel<
     let output = await getAll();
     if (!valueControlled) {
       const primary =
-        output?.find((v) => v._id && v._id === currentUser?.paymentMethodPrimary) ?? output?.[0];
+        output?.find((v) => v._id && v._id === currentUser?.paymentMethodPrimary?._id) ??
+        output?.[0];
       if (primary) {
         output = sort(output ?? [], [(v) => (v._id === primary._id ? 0 : 1)]);
         valueControlledSet(primary.externalId);
@@ -98,16 +98,16 @@ export const PaymentMethodInput: RLFCModel<
         <ModalFormButton
           fields={[
             {
-              element: <NewPaymentMethodInput ref={ref} />,
+              element: <NewPaymentMethodInput ref={ref ?? inputRef} />,
               id: PAYMENT_METHOD_RESOURCE_NAME,
             },
           ]}
           icon="add"
           isFullHeight
           onComplete={() => {
-            void refF.current?.reset?.();
+            void dataRef.current?.reset?.();
           }}
-          onSubmit={async () => (await inputRef.current?.submit()) || null}
+          onSubmit={async () => (await (ref ?? inputRef)?.current?.submit()) || null}
           p
           successMessage={t('billing:paymentMethodSuccess')}
           type={BUTTON_TYPE.TRANSPARENT}>
@@ -123,7 +123,7 @@ export const PaymentMethodInput: RLFCModel<
         })}
         id={PAYMENT_METHOD_RESOURCE_NAME}
         query={handleQuery}
-        ref={refF}>
+        ref={dataRef}>
         {({ data }) =>
           isEditable ? (
             <ItemList
@@ -139,7 +139,7 @@ export const PaymentMethodInput: RLFCModel<
                 <Wrapper
                   isAlign
                   isRow>
-                  {currentUser?.paymentMethodPrimary === item.id ? (
+                  {currentUser?.paymentMethodPrimary?._id === item.id ? (
                     <Chip>{t('billing:defaultPayment')}</Chip>
                   ) : (
                     <Button
@@ -166,11 +166,11 @@ export const PaymentMethodInput: RLFCModel<
                     onPress={async () => {
                       switch (item.type) {
                         case PAYMENT_METHOD_TYPE.BANK:
-                          await bankRemove({ filter: [{ field: '_id', value: item.id }] });
+                          return bankRemove({ filter: [{ field: '_id', value: item.id }] });
                         case PAYMENT_METHOD_TYPE.CARD:
-                          await cardRemove({ filter: [{ field: '_id', value: item.id }] });
+                          return cardRemove({ filter: [{ field: '_id', value: item.id }] });
                       }
-                      void refF.current?.reset?.();
+                      void dataRef.current?.reset?.();
                     }}
                     tooltip={t('core:remove')}
                     type={BUTTON_TYPE.INVISIBLE}

@@ -9,7 +9,6 @@ export const USER_FIXTURES: Array<UserModel> = getEntityResourceFixture({
     email: `user${index}@email.com`,
     first: `first ${index}`,
     last: `last ${index}`,
-    paymentMethodPrimary: '',
     phone: `917${randomInt(1000000, 9999999)}`,
   }),
 });

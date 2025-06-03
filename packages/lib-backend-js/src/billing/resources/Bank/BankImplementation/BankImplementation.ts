@@ -22,9 +22,10 @@ export class BankImplementation
       const paymentMethodId = output.result?._id;
       userId &&
         isPrimary &&
+        paymentMethodId &&
         (await Container.get(UserImplementation).update({
           filter: [{ field: '_id', value: userId }],
-          update: { paymentMethodPrimary: paymentMethodId },
+          update: { paymentMethodPrimary: { _id: paymentMethodId } },
         }));
       return output;
     },
