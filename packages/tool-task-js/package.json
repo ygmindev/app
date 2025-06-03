@@ -163,6 +163,7 @@
     "vite-node": "^3.1.2",
     "vite-plugin-checker": "^0.9.1",
     "vite-plugin-circular-dependency": "^0.5.0",
+    "vite-plugin-deadfile": "^1.4.0",
     "vite-plugin-node": "^5.0.1",
     "vite-plugin-static-copy": "^2.3.1",
     "vite-tsconfig-paths": "^5.1.4",
