@@ -32,3 +32,13 @@ export enum STYLE_BRIGHTNESS {
   DARK = 'dark',
   LIGHT = 'light',
 }
+
+export const Z_INDEX_BOTTOM = -3;
+
+export const Z_INDEX_BELOW = -2;
+
+export const Z_INDEX_MIDDLE = 0;
+
+export const Z_INDEX_ABOVE = 2;
+
+export const Z_INDEX_TOP = 3;

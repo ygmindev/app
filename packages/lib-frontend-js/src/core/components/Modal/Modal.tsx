@@ -30,6 +30,8 @@ import {
   THEME_ROLE,
   THEME_SIZE,
   THEME_SIZE_MORE,
+  Z_INDEX_ABOVE,
+  Z_INDEX_TOP,
 } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -82,7 +84,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
               isAbsoluteFill
               onPress={() => valueControlledSet(false)}
               testID="backdrop"
-              zIndex
+              zIndex={Z_INDEX_ABOVE}
             />
 
             {deviceHeight && (
@@ -108,7 +110,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
                 right={0}
                 round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
                 width={width}
-                zIndex>
+                zIndex={Z_INDEX_TOP}>
                 <Wrapper
                   backgroundColor={THEME_COLOR_MORE.SURFACE}
                   backgroundRole={THEME_ROLE.MUTED}
