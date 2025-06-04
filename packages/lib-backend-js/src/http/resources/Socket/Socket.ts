@@ -9,11 +9,12 @@ import { type SocketModel } from '@lib/shared/http/resources/Socket/Socket.model
 @withEntity({ isDatabase: true, name: SOCKET_RESOURCE_NAME })
 export class Socket extends EntityResource implements SocketModel {
   @withField({
+    Resource: () => Date,
+    defaultValue: () => new Date(),
     expire: DATABASE_CONFIG.expireSeconds,
     isDatabase: true,
-    Resource: () => Date,
   })
-  created: Date = new Date();
+  created!: Date;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   connections!: Array<string>;

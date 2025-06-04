@@ -8,12 +8,13 @@ import { TestableResourceModel } from '@lib/shared/test/resources/TestableResour
 @withEntity({ isAbstract: true, isDatabase: true })
 export class TestableResource extends EntityResource implements TestableResourceModel {
   @withField({
+    Resource: () => Date,
+    defaultValue: () => new Date(),
     expire: DATABASE_CONFIG.expireSeconds,
     isDatabase: true,
     isOptional: true,
-    Resource: () => Date,
   })
-  date?: Date = new Date();
+  date!: Date;
 
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   group!: string;

@@ -16,10 +16,11 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 export class Otp extends EntityResource implements OtpModel {
   @withField({
     Resource: () => Date,
+    defaultValue: () => new Date(),
     expire: DATABASE_CONFIG.expireSeconds,
     isDatabase: true,
   })
-  created: Date = new Date();
+  created!: Date;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   callingCode?: string;
