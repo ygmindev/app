@@ -8,7 +8,6 @@ import { type ChildrenPropsModel, type RLFCModel } from '@lib/frontend/core/core
 import { isFragment } from '@lib/frontend/core/utils/isFragment/isFragment';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import reduce from 'lodash/reduce';
 import { type ReactElement, type ReactNode } from 'react';
 import { Children, cloneElement, createElement, isValidElement, useMemo } from 'react';
@@ -59,5 +58,3 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = ({
     ? createElement(AnimatableView, { ...props, animation, ref, style: styles }, childrenF)
     : createElement(View, { ...props, ref, style: styles }, childrenF);
 };
-
-process.env.APP_IS_DEBUG && (Wrapper.displayName = variableName({ Wrapper }));

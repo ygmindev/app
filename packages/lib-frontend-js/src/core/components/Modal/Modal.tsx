@@ -33,6 +33,7 @@ import {
 } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { useImperativeHandle, useState } from 'react';
 
@@ -46,8 +47,10 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
   title,
   width,
 }) => {
+  const theme = useTheme();
   const [deviceHeight] = useStore('app.dimension.height');
   const [measure, measureSet] = useState<MeasureModel>();
+  const measureSetF = debounce(measureSet, { duration: theme.animation.effect });
   const isOpenF = useValueDelayed(isOpen ?? false);
   const [swipe, swipeSet] = useState<PositionModel>();
 
@@ -57,7 +60,6 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
     value: isOpen,
   });
 
-  const theme = useTheme();
   const heightF =
     (isFullSize
       ? (deviceHeight ?? 0) - theme.shape.spacing[THEME_SIZE.LARGE]
@@ -101,7 +103,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
                 isShadow
                 left={0}
                 mHorizontal="auto"
-                onMeasure={measureSet}
+                onMeasure={measureSetF}
                 position={SHAPE_POSITION.ABSOLUTE}
                 right={0}
                 round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
