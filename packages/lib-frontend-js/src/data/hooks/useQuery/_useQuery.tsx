@@ -18,15 +18,17 @@ export const _useQuery = <TParams = undefined, TResult = void>(
     initialData: undefined,
     queryFn: () => callback(params),
     queryKey: idF,
-    refetchOnMount: false,
+    refetchOnMount: true,
     refetchOnReconnect: false,
     retry: false,
     staleTime: cache,
   });
+
   const refetchF = debounce(async () => refetch());
   const setData = async (values: TResult): Promise<void> => {
     queryClient.setQueryData(idF, values as never);
   };
+
   return {
     data,
     id,

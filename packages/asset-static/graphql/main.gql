@@ -2077,7 +2077,6 @@ type Query {
   OtpGetConnection(input: OtpGetConnectionInput): OtpGetConnectionOutput
   OtpGetMany(input: OtpGetManyInput): OtpGetManyOutput
   OtpSearch(input: OtpSearchInput): OtpSearchOutput
-  PaymentMethodGetAll: [PaymentMethod]
   PricingGet(input: PricingGetInput): PricingGetOutput
   PricingGetConnection(input: PricingGetConnectionInput): PricingGetConnectionOutput
   PricingGetMany(input: PricingGetManyInput): PricingGetManyOutput
@@ -2117,6 +2116,7 @@ type Query {
   linkedUserGetConnection(input: linkedUserGetConnectionInput): linkedUserGetConnectionOutput
   linkedUserGetMany(input: linkedUserGetManyInput): linkedUserGetManyOutput
   linkedUserSearch(input: linkedUserSearchInput): linkedUserSearchOutput
+  paymentMethodGetAll: [PaymentMethod]
   removeToken(input: IdInput): Boolean
   signIn(input: SignInInput): SignIn
 }

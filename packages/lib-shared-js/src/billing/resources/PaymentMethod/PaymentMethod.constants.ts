@@ -4,7 +4,7 @@ export const CREATE_TOKEN = 'createToken';
 
 export const REMOVE_TOKEN = 'removeToken';
 
-export const PAYMENT_METHOD_GET_ALL = 'PaymentMethodGetAll';
+export const PAYMENT_METHOD_GET_ALL = 'paymentMethodGetAll';
 
 export enum PAYMENT_METHOD_TYPE {
   BANK = 'bank',

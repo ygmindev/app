@@ -192,7 +192,6 @@ export const DataBoundary = <TParams = undefined, TResult = void>({
           isBlocking={isBlocking}
           params={params}
           query={async (v) => {
-            // TODO: sleep for race condition suspense
             await sleep();
             return query(v);
           }}
@@ -206,7 +205,6 @@ export const DataBoundary = <TParams = undefined, TResult = void>({
           id={id}
           isBlocking={isBlocking}
           mutate={async (v) => {
-            // TODO: sleep for race condition suspense
             await sleep();
             return mutate(v);
           }}
