@@ -12,8 +12,8 @@ export const props: LibraryPropsModel<BarChartPropsModel<ChartContainerFixtureMo
   Component: BarChart,
   Renderer: ({ element }) => (
     <Wrapper
-      height={500}
-      width={500}>
+      height={400}
+      width={400}>
       {element}
     </Wrapper>
   ),

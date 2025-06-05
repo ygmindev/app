@@ -15,7 +15,7 @@ import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE, Z_INDEX_ABOVE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
@@ -92,7 +92,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
             isActive={isLoading}
             isCenter
             position={SHAPE_POSITION.ABSOLUTE}
-            zIndex={2}>
+            zIndex={Z_INDEX_ABOVE}>
             <Loading size={THEME_SIZE.SMALL} />
           </Appearable>
 

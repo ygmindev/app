@@ -7,7 +7,6 @@ export const _ScatterChart = <TType,>({
   components,
   data,
   height,
-  margin,
   series,
   textStyles,
   width,
@@ -17,7 +16,6 @@ export const _ScatterChart = <TType,>({
   <ScatterChart
     data={data}
     height={height}
-    margin={{ bottom: margin, left: margin, right: margin, top: margin }}
     style={textStyles}
     width={width}>
     {components}
