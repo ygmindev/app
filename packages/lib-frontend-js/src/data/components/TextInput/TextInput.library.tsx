@@ -2,12 +2,13 @@ import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type TextInputPropsModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
+import { LIBRARY_CATEGORY_FORM } from '@lib/frontend/library/components/Library/Library.constants';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesianObject';
 
 export const props: LibraryPropsModel<TextInputPropsModel> = {
   Component: TextInput,
-  category: 'form',
+  category: LIBRARY_CATEGORY_FORM,
   defaultProps: {},
   minWidth: 200,
   variants: [

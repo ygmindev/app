@@ -19,6 +19,7 @@ export const config = defineConfig<RoutesConfigModel>({
           const id = (props.title =
             props.title ?? getComponentDisplayName(props.Component as ComponentType));
           return {
+            category: props.category,
             element: <Library<unknown> {...(props as LibraryPropsModel<unknown>)} />,
             pathname: trimPathname(id),
             title: id,

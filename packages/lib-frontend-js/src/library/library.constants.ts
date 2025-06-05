@@ -3,7 +3,8 @@ import { props as appearableProps } from '@lib/frontend/animation/components/App
 import { props as slidesProps } from '@lib/frontend/animation/components/Slides/Slides.library';
 import { props as logoProps } from '@lib/frontend/app/components/Logo/Logo.library';
 import { props as otpInputProps } from '@lib/frontend/auth/components/OtpInput/OtpInput.library';
-// import { props as lineChartProps } from '@lib/frontend/chart/components/LineChart/LineChart.library';
+import { props as areaChartProps } from '@lib/frontend/chart/components/AreaChart/AreaChart.library';
+import { props as lineChartProps } from '@lib/frontend/chart/components/LineChart/LineChart.library';
 import { props as activatableProps } from '@lib/frontend/core/components/Activatable/Activatable.library';
 import { props as buttonProps } from '@lib/frontend/core/components/Button/Button.library';
 import { props as buttonGroupProps } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup.library';
@@ -46,6 +47,7 @@ export const LIBRARY_PROPS = [
   accordionProps,
   activatableProps,
   appearableProps,
+  areaChartProps,
   buttonGroupProps,
   buttonProps,
   calendarInputProps,
@@ -59,7 +61,7 @@ export const LIBRARY_PROPS = [
   // fileInputProps,
   iconProps,
   imageProps,
-  // lineChartProps,
+  lineChartProps,
   linkProps,
   loadingProps,
   logoProps,

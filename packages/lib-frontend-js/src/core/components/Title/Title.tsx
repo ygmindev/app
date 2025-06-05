@@ -8,7 +8,7 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 
 export const Title: LFCModel<TitlePropsModel> = ({
@@ -27,13 +27,14 @@ export const Title: LFCModel<TitlePropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
+  const isSmall = fontSize === THEME_SIZE.SMALL;
   return (
     <Wrapper
       {...wrapperProps}
       isAlign
       isRow
       justify={FLEX_JUSTIFY.SPACE_BETWEEN}
-      p>
+      p={isSmall ? THEME_SIZE.SMALL : fontSize}>
       <Wrapper
         isAlign={!description}
         isRow>
@@ -57,7 +58,7 @@ export const Title: LFCModel<TitlePropsModel> = ({
                 fontSize={fontSize}
                 fontStyle={fontStyle}
                 icon={icon}
-                width={theme.shape.size[THEME_SIZE.SMALL]}
+                width={theme.shape.size[isSmall ? THEME_SIZE_MORE.XSMALL : THEME_SIZE.SMALL]}
               />
             </Skeleton>
           )}

@@ -82,6 +82,7 @@ export const IONIC_ICONS = {
   personCircle: 'person-circle-outline',
   phone: 'call-outline',
   pie: 'pie-chart-outline',
+  play: 'play-circle-outline',
   preferences: 'options-outline',
   question: 'help-outline',
   redo: 'arrow-redo-outline',
@@ -155,6 +156,7 @@ export const MATERIAL_ICONS = {
   chevronUpDouble: 'chevron-double-up',
   numberList: 'format-list-numbered',
   text: 'format-text',
+  textbox: 'form-textbox',
 };
 
 export const ICONS = {

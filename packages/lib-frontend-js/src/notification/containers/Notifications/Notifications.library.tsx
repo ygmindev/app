@@ -1,5 +1,6 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { LIBRARY_CATEGORY_NOTIFICATION } from '@lib/frontend/library/components/Library/Library.constants';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { Notifications } from '@lib/frontend/notification/containers/Notifications/Notifications';
 import { type NotificationsPropsModel } from '@lib/frontend/notification/containers/Notifications/Notifications.models';
@@ -25,7 +26,7 @@ export const props: LibraryPropsModel<NotificationsPropsModel> = {
       </Wrapper>
     );
   },
-  category: 'notification',
+  category: LIBRARY_CATEGORY_NOTIFICATION,
   defaultProps: {},
   variants: [],
 };

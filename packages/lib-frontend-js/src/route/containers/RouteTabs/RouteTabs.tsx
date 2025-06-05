@@ -22,9 +22,10 @@ export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({ depth, routes, ...pro
   return (
     <Tabs
       {...wrapperProps}
-      tabs={routes.map(({ fullpath, icon, pathname, title }) => {
+      tabs={routes.map(({ category, fullpath, icon, pathname, title }) => {
         const pathnameF = fullpath ?? pathname;
         return {
+          category,
           icon,
           id: pathnameF,
           label: title ? t(title) : pathname.replace('/', ''),

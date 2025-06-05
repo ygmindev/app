@@ -7,6 +7,7 @@ import { type Payload } from 'recharts/types/component/DefaultLegendContent';
 export const _ChartContainer = <TType,>({
   axisColor,
   children,
+  components,
   data,
   height,
   series,
@@ -15,37 +16,37 @@ export const _ChartContainer = <TType,>({
   xKey,
 }: SFCPropsModel<_ChartContainerPropsModel<TType>>): ReactElement<
   SFCPropsModel<_ChartContainerPropsModel<TType>>
-> => {
-  return (
-    <ResponsiveContainer>
-      {cloneElement(children, {
-        children: (
-          <>
-            <XAxis
-              dataKey={xKey}
-              stroke={axisColor}
-              style={textStyles as CSSProperties}
-            />
+> => (
+  <ResponsiveContainer>
+    {cloneElement(children, {
+      components: [
+        <XAxis
+          dataKey={xKey}
+          key="x-axis"
+          stroke={axisColor}
+          style={textStyles as CSSProperties}
+        />,
 
-            <YAxis
-              stroke={axisColor}
-              style={textStyles as CSSProperties}
-            />
+        <YAxis
+          key="y-axis"
+          stroke={axisColor}
+          style={textStyles as CSSProperties}
+        />,
 
-            <Tooltip />
+        <Tooltip key="tooltip" />,
 
-            <Legend
-              payload={series as Array<Payload>}
-              style={textStyles as CSSProperties}
-            />
-          </>
-        ),
-        data,
-        height,
-        series,
-        textStyles,
-        width,
-      })}
-    </ResponsiveContainer>
-  );
-};
+        <Legend
+          key="legend"
+          payload={series as Array<Payload>}
+          style={textStyles as CSSProperties}
+          verticalAlign="top"
+        />,
+      ],
+      data,
+      height,
+      series,
+      textStyles,
+      width,
+    })}
+  </ResponsiveContainer>
+);

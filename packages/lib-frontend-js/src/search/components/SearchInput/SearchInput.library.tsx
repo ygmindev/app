@@ -4,7 +4,6 @@ import { type SearchInputPropsModel } from '@lib/frontend/search/components/Sear
 
 export const props: LibraryPropsModel<SearchInputPropsModel> = {
   Component: SearchInput,
-  category: 'search',
   defaultProps: {
     onSearch: async () => [],
   },

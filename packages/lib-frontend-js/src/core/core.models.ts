@@ -81,10 +81,15 @@ export type ElementStatePropsModel = {
   onElementStateChange?(value?: ElementStateModel): void;
 };
 
+export type CategoryModel = WithIconPropsModel & {
+  id: string;
+  label?: AsyncTextModel;
+};
+
 export type OptionModel<TType extends string = string> = WithIdModel<TType> &
   WithIconPropsModel &
   Pick<ButtonPropsModel, 'color' | 'onPress' | 'elementState' | 'confirmMessage'> & {
-    category?: string;
+    category?: CategoryModel;
     image?: string;
     label?: string;
   };

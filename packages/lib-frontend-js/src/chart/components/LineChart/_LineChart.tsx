@@ -4,7 +4,7 @@ import { type ReactElement } from 'react';
 import { Line, LineChart } from 'recharts';
 
 export const _LineChart = <TType,>({
-  children,
+  components,
   data,
   height,
   series,
@@ -18,7 +18,7 @@ export const _LineChart = <TType,>({
     height={height}
     style={textStyles}
     width={width}>
-    {children}
+    {components}
 
     {series?.map(({ color, id }) => (
       <Line

@@ -4,6 +4,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { LIBRARY_CATEGORY_ANIMATION } from '@lib/frontend/library/components/Library/Library.constants';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { withId } from '@lib/shared/core/utils/withId/withId';
 import { cloneElement, useState } from 'react';
@@ -39,7 +40,7 @@ export const props: LibraryPropsModel<SlidesPropsModel> = {
       </Wrapper>
     );
   },
-  category: 'animation',
+  category: LIBRARY_CATEGORY_ANIMATION,
   defaultProps: {
     slides: withId([
       {

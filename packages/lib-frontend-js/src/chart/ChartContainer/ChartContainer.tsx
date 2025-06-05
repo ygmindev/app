@@ -25,21 +25,25 @@ export const ChartContainer = <TType,>({
   const [measure, measureSet] = useState<MeasureModel>();
   const { wrapperProps } = useLayoutStyles({ props });
 
-  const seriesF = useMemo(
-    () =>
+  const seriesF = useMemo(() => {
+    const lightnesses = Array.from(Array(3).keys()).map((i) => 0.5 + 0.15 * i);
+    const colors = lightnesses.reduce(
+      (result, l) => [
+        ...result,
+        ...[THEME_COLOR.PRIMARY, THEME_COLOR.SECONDARY, THEME_COLOR.WARNING, THEME_COLOR.ERROR].map(
+          (c) => palette(theme.color.palette[c][THEME_ROLE.MAIN], { lightness: l }),
+        ),
+      ],
+      [] as Array<string>,
+    );
+    return (
       series?.map(({ color, id, value }, i) => ({
-        color:
-          color ??
-          (i
-            ? palette(theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN], {
-                lightness: 0.5 + i * 0.07,
-              })
-            : theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN]),
+        color: color ?? colors[i],
         id,
         value: value ? t(value) : id,
-      })) ?? [],
-    [series, theme, t],
-  );
+      })) ?? []
+    );
+  }, [series, theme, t]);
 
   return (
     <Wrapper

@@ -2,6 +2,7 @@ import { Text } from '@lib/frontend/core/components/Text/Text';
 import { VirtualizedList } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
+import { LIBRARY_MAX_CHARS } from '@lib/frontend/library/components/Library/Library.constants';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { type LibraryVariantModel } from '@lib/frontend/library/library.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -50,8 +51,8 @@ export const Library = <TType extends unknown>({
     [variants],
   );
 
-  const typeToString = (value: unknown): string =>
-    isArray(value)
+  const typeToString = (value: unknown): string => {
+    const v = isArray(value)
       ? `[${value.map(typeToString).join(', ')}]`
       : isValidElement(value)
         ? 'Element'
@@ -63,6 +64,8 @@ export const Library = <TType extends unknown>({
           : isPlainObject(value)
             ? stringify(mapValues(value as object, typeToString))
             : toString(value);
+    return v.length <= LIBRARY_MAX_CHARS ? v : `${v.slice(0, LIBRARY_MAX_CHARS)} ...`;
+  };
 
   return (
     <Wrapper
