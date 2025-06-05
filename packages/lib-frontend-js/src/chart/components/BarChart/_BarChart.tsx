@@ -1,9 +1,9 @@
-import { type _LineChartPropsModel } from '@lib/frontend/chart/components/LineChart/_LineChart.models';
+import { type _BarChartPropsModel } from '@lib/frontend/chart/components/BarChart/_BarChart.models';
 import { type SFCPropsModel } from '@lib/frontend/core/core.models';
 import { type ReactElement } from 'react';
-import { Line, LineChart } from 'recharts';
+import { Bar, BarChart } from 'recharts';
 
-export const _LineChart = <TType,>({
+export const _BarChart = <TType,>({
   components,
   data,
   height,
@@ -11,10 +11,10 @@ export const _LineChart = <TType,>({
   series,
   textStyles,
   width,
-}: SFCPropsModel<_LineChartPropsModel<TType>>): ReactElement<
-  SFCPropsModel<_LineChartPropsModel<TType>>
+}: SFCPropsModel<_BarChartPropsModel<TType>>): ReactElement<
+  SFCPropsModel<_BarChartPropsModel<TType>>
 > => (
-  <LineChart
+  <BarChart
     data={data}
     height={height}
     margin={{ bottom: margin, left: margin, right: margin, top: margin }}
@@ -23,14 +23,12 @@ export const _LineChart = <TType,>({
     {components}
 
     {series?.map(({ color, id }) => (
-      <Line
+      <Bar
         dataKey={id}
-        dot={false}
+        fill={color}
         key={id}
-        stroke={color}
-        strokeWidth={2}
         type="monotone"
       />
     ))}
-  </LineChart>
+  </BarChart>
 );

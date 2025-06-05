@@ -7,6 +7,7 @@ export const _AreaChart = <TType,>({
   components,
   data,
   height,
+  margin,
   series,
   textStyles,
   width,
@@ -16,6 +17,7 @@ export const _AreaChart = <TType,>({
   <AreaChart
     data={data}
     height={height}
+    margin={{ bottom: margin, left: margin, right: margin, top: margin }}
     style={textStyles}
     width={width}>
     <defs>

@@ -7,9 +7,9 @@ import { type Payload } from 'recharts/types/component/DefaultLegendContent';
 export const _ChartContainer = <TType,>({
   axisColor,
   children,
-  components,
   data,
   height,
+  margin,
   series,
   textStyles,
   width,
@@ -44,6 +44,7 @@ export const _ChartContainer = <TType,>({
       ],
       data,
       height,
+      margin,
       series,
       textStyles,
       width,

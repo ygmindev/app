@@ -9,6 +9,7 @@ export type ChartPropsModel<TType> = DimensionModel & {
   axisColor?: string;
   components?: Array<ReactElement>;
   data?: Array<TType>;
+  margin?: number;
   series?: Array<ChartSeriesModel<TType>>;
   textStyles?: TextStyleModel;
   xKey?: string;

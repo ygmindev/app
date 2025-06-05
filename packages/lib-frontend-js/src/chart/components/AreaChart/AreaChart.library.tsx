@@ -12,8 +12,8 @@ export const props: LibraryPropsModel<AreaChartPropsModel<ChartContainerFixtureM
   Component: AreaChart,
   Renderer: ({ element }) => (
     <Wrapper
-      height={300}
-      width={300}>
+      height={500}
+      width={500}>
       {element}
     </Wrapper>
   ),

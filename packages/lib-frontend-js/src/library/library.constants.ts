@@ -4,7 +4,9 @@ import { props as slidesProps } from '@lib/frontend/animation/components/Slides/
 import { props as logoProps } from '@lib/frontend/app/components/Logo/Logo.library';
 import { props as otpInputProps } from '@lib/frontend/auth/components/OtpInput/OtpInput.library';
 import { props as areaChartProps } from '@lib/frontend/chart/components/AreaChart/AreaChart.library';
+import { props as barChartProps } from '@lib/frontend/chart/components/BarChart/BarChart.library';
 import { props as lineChartProps } from '@lib/frontend/chart/components/LineChart/LineChart.library';
+import { props as scatterChartProps } from '@lib/frontend/chart/components/ScatterChart/ScatterChart.library';
 import { props as activatableProps } from '@lib/frontend/core/components/Activatable/Activatable.library';
 import { props as buttonProps } from '@lib/frontend/core/components/Button/Button.library';
 import { props as buttonGroupProps } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup.library';
@@ -48,6 +50,7 @@ export const LIBRARY_PROPS = [
   activatableProps,
   appearableProps,
   areaChartProps,
+  barChartProps,
   buttonGroupProps,
   buttonProps,
   calendarInputProps,
@@ -75,6 +78,7 @@ export const LIBRARY_PROPS = [
   otpInputProps,
   pressableProps,
   pressableTitleProps,
+  scatterChartProps,
   searchInputProps,
   selectInputProps,
   slidesProps,

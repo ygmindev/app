@@ -1,9 +1,9 @@
-import { type _LineChartPropsModel } from '@lib/frontend/chart/components/LineChart/_LineChart.models';
+import { type _ScatterChartPropsModel } from '@lib/frontend/chart/components/ScatterChart/_ScatterChart.models';
 import { type SFCPropsModel } from '@lib/frontend/core/core.models';
 import { type ReactElement } from 'react';
-import { Line, LineChart } from 'recharts';
+import { Scatter, ScatterChart } from 'recharts';
 
-export const _LineChart = <TType,>({
+export const _ScatterChart = <TType,>({
   components,
   data,
   height,
@@ -11,10 +11,10 @@ export const _LineChart = <TType,>({
   series,
   textStyles,
   width,
-}: SFCPropsModel<_LineChartPropsModel<TType>>): ReactElement<
-  SFCPropsModel<_LineChartPropsModel<TType>>
+}: SFCPropsModel<_ScatterChartPropsModel<TType>>): ReactElement<
+  SFCPropsModel<_ScatterChartPropsModel<TType>>
 > => (
-  <LineChart
+  <ScatterChart
     data={data}
     height={height}
     margin={{ bottom: margin, left: margin, right: margin, top: margin }}
@@ -23,14 +23,12 @@ export const _LineChart = <TType,>({
     {components}
 
     {series?.map(({ color, id }) => (
-      <Line
+      <Scatter
         dataKey={id}
-        dot={false}
+        fill={color}
         key={id}
-        stroke={color}
-        strokeWidth={2}
         type="monotone"
       />
     ))}
-  </LineChart>
+  </ScatterChart>
 );

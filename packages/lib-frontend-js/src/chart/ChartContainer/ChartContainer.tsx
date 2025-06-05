@@ -54,6 +54,7 @@ export const ChartContainer = <TType,>({
         {...props}
         axisColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
         height={measure?.height}
+        margin={theme.shape.spacing[THEME_SIZE.LARGE]}
         series={seriesF}
         textStyles={{
           color: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST],
