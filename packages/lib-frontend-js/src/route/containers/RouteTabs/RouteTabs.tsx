@@ -7,7 +7,11 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useMemo } from 'react';
 
-export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({ depth, routes, ...props }) => {
+export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({
+  routes,
+  type = TABS_TYPE.CONTAINED,
+  ...props
+}) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const { isActive, push } = useRouter();
@@ -32,7 +36,7 @@ export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({ depth, routes, ...pro
           onPress: () => push({ pathname: pathnameF }),
         };
       })}
-      type={depth ? TABS_TYPE.UNDERLINE : TABS_TYPE.CONTAINED}
+      type={type}
       value={value}
     />
   );

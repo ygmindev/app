@@ -1,0 +1,1 @@
+export const SCROLL_BUTTON_OFFSET = 150;

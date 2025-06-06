@@ -25,7 +25,9 @@ export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props })
             position={SHAPE_POSITION.RELATIVE}>
             <AppHeader />
 
-            <Wrapper grow>
+            <Wrapper
+              grow
+              m>
               {children}
 
               {notifications && notifications.length > 0 && <Notifications />}

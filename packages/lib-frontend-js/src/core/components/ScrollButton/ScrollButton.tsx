@@ -2,6 +2,7 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { ButtonGroup } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup';
+import { SCROLL_BUTTON_OFFSET } from '@lib/frontend/core/components/ScrollButton/ScrollButton.constants';
 import { type ScrollButtonPropsModel } from '@lib/frontend/core/components/ScrollButton/ScrollButton.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -20,7 +21,6 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
   const isScrollUpVisible =
     (value ?? 0) < (contentSize ?? 0) - (size ?? 0) - theme.shape.spacing[THEME_SIZE.MEDIUM];
   const isScrollDownVisible = (value ?? 0) > theme.shape.spacing[THEME_SIZE.MEDIUM];
-  const scrollOffset = 150;
   return (
     <>
       <Appearable
@@ -53,7 +53,10 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
             key="scrollDown"
             onPress={
               isScrollDownVisible
-                ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) - scrollOffset })
+                ? () =>
+                    onScrollTo?.({
+                      [isHorizontal ? 'x' : 'y']: (value ?? 0) - SCROLL_BUTTON_OFFSET,
+                    })
                 : undefined
             }
           />
@@ -80,7 +83,10 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
             key="scrollUp"
             onPress={
               isScrollUpVisible
-                ? () => onScrollTo?.({ [isHorizontal ? 'x' : 'y']: (value ?? 0) + scrollOffset })
+                ? () =>
+                    onScrollTo?.({
+                      [isHorizontal ? 'x' : 'y']: (value ?? 0) + SCROLL_BUTTON_OFFSET,
+                    })
                 : undefined
             }
           />
