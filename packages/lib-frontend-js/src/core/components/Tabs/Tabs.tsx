@@ -23,10 +23,11 @@ import {
 } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { sort } from '@lib/shared/core/utils/sort/sort';
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 
 export const Tabs: LFCModel<TabsPropsModel> = ({
   defaultValue,
+  isStickyCategory,
   onChange,
   tabs,
   type = TABS_TYPE.CONTAINED,
@@ -43,6 +44,8 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
   const theme = useTheme();
   const isContained = type === TABS_TYPE.CONTAINED;
   const isUnderline = type === TABS_TYPE.UNDERLINE;
+
+  const categoryRefs = useRef([]);
 
   const handlePress = (tab: TabModel): void => {
     valueControlledSet(tab.id);
