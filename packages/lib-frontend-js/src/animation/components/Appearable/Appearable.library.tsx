@@ -6,7 +6,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { LIBRARY_CATEGORY_ANIMATION } from '@lib/frontend/library/components/Library/Library.constants';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
-import { useState } from 'react';
+import { cloneElement, useState } from 'react';
 
 export const props: LibraryPropsModel<AppearablePropsModel> = {
   Component: Appearable,
@@ -20,7 +20,7 @@ export const props: LibraryPropsModel<AppearablePropsModel> = {
           {isActive ? 'Close' : 'Open'}
         </Button>
 
-        {/* {cloneElement(element, { isActive })} */}
+        {cloneElement(element, { isActive })}
       </Wrapper>
     );
   },
@@ -28,4 +28,5 @@ export const props: LibraryPropsModel<AppearablePropsModel> = {
   defaultProps: {
     children: <WrapperFixture />,
   },
+  variants: [{ props: { isLazy: false } }],
 };

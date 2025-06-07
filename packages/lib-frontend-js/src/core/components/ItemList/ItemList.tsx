@@ -30,6 +30,7 @@ export const ItemList = <TType extends WithIdModel>({
               border={i > 0 ? DIRECTION.TOP : undefined}
               elementState={elementState}
               key={item.id}
+              p
               rightElement={
                 rightElement ? (isActive) => rightElement({ isActive, item }) : undefined
               }
@@ -39,6 +40,7 @@ export const ItemList = <TType extends WithIdModel>({
           <PressableTitle
             elementState={ELEMENT_STATE.DISABLED}
             icon="empty"
+            p
             pVertical
             title={emptyString}
           />

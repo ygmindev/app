@@ -68,7 +68,10 @@ export const getViewParams = <
     useImperativeHandle(
       props.ref,
       () =>
-        ({ scrollTo: ({ x, y }) => viewRef.current?.scrollTo({ animated: false, x, y }) }) as TRef,
+        ({
+          scrollTo: ({ isAnimated, x, y }) =>
+            viewRef.current?.scrollTo({ animated: isAnimated, x, y }),
+        }) as TRef,
     );
 
     const isHorizontalScrollableVisibleF =
@@ -119,7 +122,7 @@ export const getViewParams = <
     const ScrollComponent = isBar ? ScrollBar : ScrollButton;
 
     const handleScrollTo = (position: PositionModel): void => {
-      props.ref?.current?.scrollTo({ ...position, animated: false });
+      props.ref?.current?.scrollTo({ ...position, isAnimated: true });
     };
 
     return {

@@ -10,7 +10,7 @@ import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
 import { type TabModel, type TabsPropsModel } from '@lib/frontend/core/components/Tabs/Tabs.models';
 import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { DIRECTION } from '@lib/frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -139,6 +139,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
               </Activatable>
             ) : (
               <Button
+                elementState={isActiveF ? ELEMENT_STATE.ACTIVE : undefined}
                 height={
                   theme.shape.size[THEME_SIZE.MEDIUM] - theme.shape.spacing[THEME_SIZE.MEDIUM]
                 }

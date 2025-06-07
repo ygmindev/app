@@ -19,11 +19,15 @@ export const chartContainerFixturePropsFixture: ChartPropsModel<ChartContainerFi
     x,
   })),
 
+  height: 400,
+
   series: [
     { id: 'exponential', value: 'exponential' },
     { id: 'weibull', value: 'weibull' },
     { id: 'gumbel', value: 'gumbel' },
   ],
+
+  width: 400,
 
   xKey: 'x',
 };

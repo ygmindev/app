@@ -15,7 +15,9 @@ import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { type ReactElement, useMemo, useState } from 'react';
 
 export const ChartContainer = <TType,>({
+  height,
   series,
+  width,
   ...props
 }: SFCPropsModel<ChartContainerPropsModel<TType>>): ReactElement<
   SFCPropsModel<ChartContainerPropsModel<TType>>
@@ -48,8 +50,10 @@ export const ChartContainer = <TType,>({
   return (
     <Wrapper
       {...wrapperProps}
-      flex
-      onMeasure={measureSet}>
+      flex={!width && !height}
+      height={height}
+      onMeasure={measureSet}
+      width={width}>
       <_ChartContainer
         {...props}
         axisColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}

@@ -6,7 +6,6 @@ import {
 } from '@lib/frontend/core/components/Activatable/Activatable.models';
 import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { type RSFCModel } from '@lib/frontend/core/core.models';
-import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { type ViewStyleModel } from '@lib/frontend/style/style.models';
 import isFunction from 'lodash/isFunction';
@@ -19,16 +18,14 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
   onHoverOut,
   onInactive,
   ref,
-  trigger,
+  trigger = ACTIVATABLE_TRIGGER.HOVER,
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const isMobile = useIsMobile();
   const [isActive, isActiveSet] = useState<boolean>(false);
   const childrenF: ReactElement<PressablePropsModel> | undefined | null = isFunction(children)
     ? children(isActive)
     : children;
-  const triggerF = trigger ?? (isMobile ? ACTIVATABLE_TRIGGER.PRESS : ACTIVATABLE_TRIGGER.HOVER);
 
   const handleToggle = (value?: boolean): void => {
     isActiveSet(value ?? false);
@@ -65,7 +62,7 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
   }));
 
   const triggerProps: PressablePropsModel = (() => {
-    switch (triggerF) {
+    switch (trigger) {
       case ACTIVATABLE_TRIGGER.HOVER:
         return _isHoverable()
           ? { onMouseEnter: () => handleHover(true), onMouseLeave: () => handleHover(false) }

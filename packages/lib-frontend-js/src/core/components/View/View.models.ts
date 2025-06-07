@@ -8,7 +8,7 @@ import { type PositionModel } from '@lib/frontend/core/core.models';
 export type ViewPropsModel = _ViewPropsModel;
 
 export type ScrollableViewRefModel = {
-  scrollTo(params: PositionModel & { animated?: boolean }): void;
+  scrollTo(params: PositionModel & { isAnimated?: boolean }): void;
 };
 
 export type ViewRefModel = ScrollableViewRefModel;
