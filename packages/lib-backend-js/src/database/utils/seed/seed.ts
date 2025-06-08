@@ -4,7 +4,10 @@ import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import {
+  type EntityResourceDataModel,
+  type EntityResourceModel,
+} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
@@ -26,11 +29,14 @@ export const seed = async (): Promise<SeedModel> => {
     for (const form of data?.() ?? []) {
       let rootF = await root?.();
       rootF && (rootF = toString(rootF));
-      const result = await implementation.create?.({ form, root: rootF } as ResourceInputModel<
-        RESOURCE_METHOD_TYPE.CREATE,
-        unknown,
-        unknown
-      >);
+
+      const formF = form as EntityResourceDataModel<EntityResourceModel>;
+      formF.isFixture = true;
+
+      const result = await implementation.create?.({
+        form: formF,
+        root: rootF,
+      } as ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, unknown, unknown>);
       await afterCreate?.(result as ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, unknown>);
     }
   }

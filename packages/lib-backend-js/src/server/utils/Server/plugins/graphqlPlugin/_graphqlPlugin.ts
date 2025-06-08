@@ -27,7 +27,7 @@ export const _graphqlPlugin: _GraphqlPluginModel = async (
         return context;
       },
       landingPage: false,
-      logging: logger,
+      logging: logger ? { ...logger, debug: () => ({}) } : undefined,
       maskedErrors: {
         maskError(error, message, isDev) {
           return formatGraphqlError(error as GraphQLError);

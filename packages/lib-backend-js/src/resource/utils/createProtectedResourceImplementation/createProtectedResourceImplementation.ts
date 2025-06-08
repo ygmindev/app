@@ -33,7 +33,6 @@ export const createProtectedResoureImplementation = <TType extends ProtectedReso
         if (!uid) {
           throw new UnauthenticatedError();
         }
-        // TODO: fix typing
         input?.form && (input.form.createdBy = uid);
       }
       return beforeCreate ? beforeCreate({ input }, context) : input;

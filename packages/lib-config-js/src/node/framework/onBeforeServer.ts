@@ -1,5 +1,5 @@
 import 'setimmediate';
-import 'source-map-support';
+import 'source-map-support/register';
 import 'raf/polyfill.js';
 
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';

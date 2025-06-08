@@ -68,7 +68,11 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
         formF._id = formF._id ?? new ObjectId();
         formF.created = formF.created ?? new Date();
         await formF.beforeCreate?.();
-        const inputF = { ...input, form: formF } as EntityResourceDataModel<TType>;
+        const inputF = { ...input, form: formF } as ResourceInputModel<
+          RESOURCE_METHOD_TYPE.CREATE,
+          TType,
+          TRoot
+        >;
         return beforeCreate ? beforeCreate({ input: inputF }, context) : inputF;
       },
       beforeCreateMany,
@@ -136,7 +140,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
           inputF.form?.map(
             (form) => async () =>
               this.decorators.beforeCreate
-                ? this.decorators.beforeCreate({ input: { form } }, context)
+                ? (await this.decorators.beforeCreate({ input: { form } }, context))?.form
                 : form,
           ),
         )) as Array<EntityResourceDataModel<TType>>);

@@ -19,7 +19,7 @@ export type EntityResourceDataModel<TType> = TType extends PrimitiveModel
   : {
       [TKey in keyof Omit<
         TType,
-        keyof RequiredModel<EntityResourceModel>
+        keyof RequiredModel<Omit<EntityResourceModel, 'isFixture'>>
       >]?: RequiredModel<TType>[TKey] extends EntityResourceModel
         ? Pick<EntityResourceModel, '_id'>
         : RequiredModel<TType>[TKey] extends Array<infer TElement>
@@ -30,6 +30,7 @@ export type EntityResourceDataModel<TType> = TType extends PrimitiveModel
               ? string
               : RequiredModel<TType>[TKey];
     };
+
 export type EntityResourcePartialModel<TType> = TType extends PrimitiveModel
   ? TType
   : TType extends Array<infer TElement>

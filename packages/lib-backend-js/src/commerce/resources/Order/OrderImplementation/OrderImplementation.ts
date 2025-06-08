@@ -18,6 +18,7 @@ export class OrderImplementation
           paymentMethodId: input.form.paymentMethodId,
           products: input.form.items,
         }));
+      console.warn('@@@ beforeCreate 222');
       return input;
     },
     name: ORDER_RESOURCE_NAME,

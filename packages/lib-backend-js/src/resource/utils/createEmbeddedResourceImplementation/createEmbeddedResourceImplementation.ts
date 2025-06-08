@@ -210,7 +210,7 @@ export const createEmbeddedResourceImplementation = <
 
     createMany: async (input) => {
       const root = await getRoot(input?.root);
-      const values = await Promise.all(input?.form?.map(async (v) => getForm(v)) ?? []);
+      const values = await Promise.all(input?.form?.map(getForm) ?? []);
       let result = (root?.[name] as unknown as Array<TType>) ?? [];
       result = result?.concat(values);
       await getRootImplementation().update({

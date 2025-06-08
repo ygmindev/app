@@ -3,12 +3,13 @@ import { type ClearSeedModel } from '@lib/backend/database/utils/clearSeed/clear
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import { SEED_DATA } from '@lib/backend/database/utils/seed/seed.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
+import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
 
 export const clearSeed = async (): Promise<ClearSeedModel> => {
   const database = Container.get(Database, DATABASE_TYPE.MONGO);
   for (const resource of SEED_DATA) {
     const { name } = resource;
-    const repository = database.getRepository({ name });
-    await repository.remove();
+    const repository = database.getRepository<EntityResourceModel>({ name });
+    await repository.remove({ filter: [{ field: 'isFixture', value: true }] });
   }
 };
