@@ -85,6 +85,8 @@ export const PaymentMethodInput: RLFCModel<
     }
   };
 
+  console.warn(currentUser);
+
   return (
     <Wrapper
       {...wrapperProps}

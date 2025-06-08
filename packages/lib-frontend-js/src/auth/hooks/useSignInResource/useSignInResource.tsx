@@ -11,7 +11,9 @@ import { SIGN_IN_INPUT } from '@lib/shared/auth/resources/SignIn/SignInInput/Sig
 import { type SignInInputModel } from '@lib/shared/auth/resources/SignIn/SignInInput/SignInInput.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 
-const USER_FIELDS = USER_RESOURCE_PARAMS.fields.map(({ id }) => id);
+const USER_FIELDS = USER_RESOURCE_PARAMS.fields.map(({ fields, id }) =>
+  fields ? { [id]: fields.map((v) => v.id) } : id,
+);
 
 export const useSignInResource = (): UseSignInResourceModel => {
   const [, currentUserSet] = useStore('user.currentUser');

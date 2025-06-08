@@ -1,4 +1,7 @@
-import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
+import {
+  type ResourceAccessTypeModel,
+  type ResourceClassModel,
+} from '@lib/backend/resource/resource.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type AccessLevelModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
@@ -25,7 +28,7 @@ export type CreateResourceResolverParamsModel<
 
   RootResource?(): TRoot extends undefined ? never : ResourceClassModel<TRoot>;
 
-  access?: PartialModel<Record<ResourceResolverAccessTypeModel, AccessLevelModel>>;
+  access?: PartialModel<Record<ResourceAccessTypeModel, AccessLevelModel>>;
 
   authorizer?: {
     default?: ResourceResolverAuthorizerModel<ResourceMethodTypeModel, TType>;
@@ -42,12 +45,6 @@ export type CreateResourceResolverModel<
   TType extends EntityResourceModel,
   TRoot = undefined,
 > = ResourceClassModel<ResourceImplementationModel<TType, TRoot>>;
-
-export type ResourceResolverAccessTypeModel =
-  | 'default'
-  | 'read'
-  | 'write'
-  | ResourceMethodTypeModel;
 
 export type ResourceResolverAuthorizerParamsModel<
   TMethod extends ResourceMethodTypeModel,

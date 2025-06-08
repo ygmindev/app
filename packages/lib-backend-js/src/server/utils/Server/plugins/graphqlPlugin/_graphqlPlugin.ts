@@ -34,6 +34,14 @@ export const _graphqlPlugin: _GraphqlPluginModel = async (
         },
       },
       // plugins: filterNil([protocol !== HTTP_PROTOCOL.WEBSOCKET && useGraphQLSSE]),
+      plugins: [
+        {
+          onRequest: async ({ request }) => {
+            const { method, url } = request;
+            logger?.info(`[GraphQL] ${method} ${url}`);
+          },
+        },
+      ],
       schema,
     });
 

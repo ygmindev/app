@@ -10,11 +10,15 @@ import { GraphQLError } from 'graphql';
 export const formatGraphqlError = (
   params: FormatGraphqlErrorParamsModel,
 ): FormatGraphqlErrorModel => {
-  const e = (params.originalError as HttpError) ?? params;
-  const error = new GraphQLError(e.message, {
+  const originalError = params.originalError as HttpError;
+  console.trace(originalError);
+  const error = new GraphQLError(originalError?.message ?? params.message, {
     extensions: {
-      stack: e?.stack ?? (params.extensions?.stacktrace as string),
-      statusCode: e?.statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
+      stack:
+        originalError?.stack ??
+        (params.extensions?.stacktrace as string) ??
+        (params as Error)?.stack,
+      statusCode: originalError?.statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
     },
   });
   logger.error(error.extensions.stack);

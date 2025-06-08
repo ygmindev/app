@@ -11,14 +11,16 @@ import { Container } from '@lib/shared/core/utils/Container/Container';
 export class OrderImplementation
   extends createEntityResourceImplementation<OrderModel>({
     Resource: Order,
-    beforeCreate: async ({ input }) => {
+    beforeCreate: async ({ input }, context) => {
       input?.form?.paymentMethodId &&
         input?.form?.items &&
-        (await Container.get(PaymentMethodImplementation).createToken({
-          paymentMethodId: input.form.paymentMethodId,
-          products: input.form.items,
-        }));
-      console.warn('@@@ beforeCreate 222');
+        (await Container.get(PaymentMethodImplementation).createToken(
+          {
+            paymentMethodId: input.form.paymentMethodId,
+            products: input.form.items,
+          },
+          context,
+        ));
       return input;
     },
     name: ORDER_RESOURCE_NAME,

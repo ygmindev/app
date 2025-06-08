@@ -1205,6 +1205,7 @@ type Order {
   isFixture: Boolean
   items: [ProductItem]
   paymentMethodId: String
+  status: String
 }
 
 input OrderCreateFormInput {
@@ -1213,6 +1214,7 @@ input OrderCreateFormInput {
   isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
+  status: String
 }
 
 input OrderCreateInput {
@@ -1226,6 +1228,7 @@ input OrderCreateManyFormInput {
   isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
+  status: String
 }
 
 input OrderCreateManyInput {
@@ -1322,6 +1325,7 @@ input OrderInput {
   isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
+  status: String
 }
 
 input OrderRemoveFilterInput {
@@ -1385,6 +1389,7 @@ input OrderUpdateUpdateInput {
   isFixture: Boolean
   items: [ProductItemInput]
   paymentMethodId: String
+  status: String
 }
 
 type Otp {
