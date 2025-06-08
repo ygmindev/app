@@ -26,8 +26,8 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
   const [product, productSet] = useState<EntityResourcePartialModel<ProductModel>>();
 
   const getProduct = async (): Promise<EntityResourcePartialModel<ProductModel> | undefined> => {
-    const result = (await get({ filter: [{ field: '_id', value: location.params?.id }] }))?.result;
-    return result && { ...result, _id: result._id ?? '' };
+    const result = location.params?.id && (await get({ id: [location.params?.id] }))?.result;
+    return result ? { ...result, _id: result._id ?? '' } : undefined;
   };
 
   return (

@@ -10,9 +10,7 @@ export const getUser = async (params?: GetUserParamsModel): Promise<GetUserModel
   if (params) {
     return {
       _id: params,
-      ...((
-        await Container.get(UserImplementation).get({ filter: [{ field: '_id', value: params }] })
-      ).result ?? null),
+      ...((await Container.get(UserImplementation).get({ id: [params] })).result ?? null),
     };
   }
   throw new UnauthenticatedError();

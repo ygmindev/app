@@ -22,6 +22,7 @@
     "@rpldy/upload-drop-zone": "^1.10.0",
     "@rpldy/uploader": "^1.10.0",
     "@rpldy/uploady": "^1.10.0",
+    "@shopify/flash-list": "2.0.0-rc.4",
     "@stripe/react-stripe-js": "^3.6.0",
     "@stripe/stripe-js": "^7.2.0",
     "@tanstack/query-async-storage-persister": "^5.74.7",

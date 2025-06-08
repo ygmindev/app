@@ -75,9 +75,7 @@ export const createEmbeddedResourceImplementation = <
 
   const getRoot = async (root?: TRoot extends undefined ? never : string): Promise<TRoot> => {
     if (root) {
-      const { result } = await getRootImplementation().get({
-        filter: [{ field: '_id', value: new ObjectId(root) }],
-      });
+      const { result } = await getRootImplementation().get({ id: [root] });
       if (!result) {
         throw new NotFoundError(root);
       }
@@ -172,7 +170,7 @@ export const createEmbeddedResourceImplementation = <
     const result = (root?.[name] as unknown as Array<TType>) ?? [];
     result?.push(form);
     await getRootImplementation().update({
-      filter: [{ field: '_id', value: root._id }],
+      id: [root._id],
       update: { [name]: result } as UpdateModel<TRoot>,
     });
     return { result: form, root };
@@ -216,7 +214,7 @@ export const createEmbeddedResourceImplementation = <
       let result = (root?.[name] as unknown as Array<TType>) ?? [];
       result = result?.concat(values);
       await getRootImplementation().update({
-        filter: [{ field: '_id', value: root._id }],
+        id: [root._id],
         update: { [name]: result } as UpdateModel<TRoot>,
       });
       return { result, root };
@@ -262,9 +260,7 @@ export const createEmbeddedResourceImplementation = <
     // TODO: fix
     search: async (input = {}) => {
       if (input.root) {
-        const { result: rootResult } = await getRootImplementation().get({
-          filter: [{ field: '_id', value: input.root }],
-        });
+        const { result: rootResult } = await getRootImplementation().get({ id: [input.root] });
         return {
           result: undefined,
           root: rootResult,

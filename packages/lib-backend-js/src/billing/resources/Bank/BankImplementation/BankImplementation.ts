@@ -24,7 +24,7 @@ export class BankImplementation
         isPrimary &&
         paymentMethodId &&
         (await Container.get(UserImplementation).update({
-          filter: [{ field: '_id', value: userId }],
+          id: [userId],
           update: { paymentMethodPrimary: { _id: paymentMethodId } },
         }));
       return output;
