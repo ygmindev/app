@@ -3,13 +3,13 @@ import {
   type _RunParallelModel,
   type _RunParallelParamsModel,
 } from '@tool/task/core/utils/runParallel/_runParallel.models';
-import _concurrently from 'concurrently';
+import concurrently from 'concurrently';
 
 export const _runParallel = async (
   ...[tasks, options, environment]: _RunParallelParamsModel
 ): Promise<_RunParallelModel> => {
   setEnvironment(environment);
-  const { result } = _concurrently(
+  const { result } = concurrently(
     tasks.map((command, i) => ({
       command,
       env: process.env,

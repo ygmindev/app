@@ -6,6 +6,7 @@ import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/Duplicate
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
@@ -89,13 +90,19 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       };
     }
     target && process.chdir(workingDir);
-
     const context: TaskContextModel<TType> = { name, options: optionsF, root, target };
     try {
       logger.info('running', name);
       onBefore && (await this.runTasks(onBefore, context));
       process.chdir(root ?? fromRoot());
       setEnvironment({ environment, variables });
+      logger.info(
+        stringify({
+          environment,
+          platform: process.env.ENV_PLATFORM,
+          target,
+        }),
+      );
       await this.runTasks(task, context);
     } catch (e) {
       logger.error(name, (e as Error).stack);
