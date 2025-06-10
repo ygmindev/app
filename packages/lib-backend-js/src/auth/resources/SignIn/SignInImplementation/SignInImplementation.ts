@@ -3,6 +3,8 @@ import { JwtImplementation } from '@lib/backend/auth/utils/JwtImplementation/Jwt
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { objectToEquality } from '@lib/backend/resource/utils/objectToEquality/objectToEquality';
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
+import { RequestContextModel } from '@lib/config/api/api.models';
+import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import {
   SIGN_IN_RESOURCE_NAME,
   SIGN_IN_TOKEN_CLAIM_KEYS,
@@ -13,6 +15,7 @@ import { SignInInputModel } from '@lib/shared/auth/resources/SignIn/SignInInput/
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
@@ -37,59 +40,61 @@ export class SignInImplementation implements SignInImplementationModel {
   };
 
   async signIn(input: SignInInputModel): Promise<SignInModel> {
-    if (input?.otp) {
-      const inputF = cleanObject(pick(input, ['callingCode', 'email', 'phone']));
-      await this.otpImplementation.verify({ ...inputF, otp: input.otp });
-      let { result: user } = await this.userImplementation.get({
-        filter: objectToEquality(inputF),
-      });
-      let isNew;
-      if (!user) {
-        const { result: created } = await this.userImplementation.create({ form: inputF });
-        user = created;
-        isNew = true;
-      }
-      const signIn = await this.createSignIn(user);
-      return { ...signIn, isNew };
+    const { otp } = input;
+    if (!otp) {
+      throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
     }
-    throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
+    const inputF = cleanObject(pick(input, ['callingCode', 'email', 'phone']));
+    await this.otpImplementation.verify({ ...inputF, otp });
+    let { result: user } = await this.userImplementation.get({
+      filter: objectToEquality(inputF),
+    });
+    let isNew;
+    if (!user) {
+      const { result: created } = await this.userImplementation.create({ form: inputF });
+      user = created;
+      isNew = true;
+    }
+    const signIn = await this.createSignIn(user);
+    return { ...signIn, isNew };
   }
 
-  // async userUpdate(
-  //   input: InputModel<UserModel, UserFormModel, RESOURCE_METHOD_TYPE.UPDATE> = {},
-  //   _context?: RequestContextModel,
-  // ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
+  async usernameUpdate(
+    input: SignInInputModel,
+    context?: RequestContextModel,
+  ): Promise<SignInModel> {
+    const uid = context?.user?._id;
+    if (!uid) {
+      throw new UnauthorizedError();
+    }
+
+    const { otp } = input;
+    if (!otp) {
+      throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
+    }
+
+    const inputF = cleanObject(input);
+    const otpVerified = await this.otpImplementation.verify(inputF);
+
+    const { result: user } = await this.userImplementation.update({
+      filter: filterNil([
+        { field: '_id', value: uid },
+        otpVerified.email && { field: 'email', value: otpVerified.email },
+        otpVerified.phone && { field: 'phone', value: otpVerified.phone },
+        otpVerified.callingCode && { field: 'callingCode', value: otpVerified.callingCode },
+      ]),
+      update: inputF,
+    });
+    const signIn = await this.createSignIn(user);
+    return signIn;
+  }
+
+  // async userUpdate(input: SignInInputModel): Promise<SignInModel> {
   //   const result = await this.userImplementation.update(input);
   //   if (result?.result) {
   //     const signIn = await this.createSignIn(result.result);
-  //     return { result: signIn };
+  //     return signIn;
   //   }
   //   throw new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR);
-  // }
-
-  // @withAccess({ access: ACCESS_LEVEL.PROTECTED })
-  // async usernameUpdate(
-  //   { form }: InputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel, SignInFormModel> = {},
-  //   context?: RequestContextModel,
-  // ): Promise<OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>> {
-  //   if (form?.otp) {
-  //     const formF = cleanObject(form);
-  //     const otp = await this.otpImplementation.verify(formF);
-  //     const { result: user } = await this.userImplementation.update({
-  //       filter: filterNil([
-  //         context?.user?._id && { field: '_id', value: context.user._id },
-  //         otp.email && { field: 'email', value: otp.email },
-  //         otp.phone && { field: 'phone', value: otp.phone },
-  //         otp.callingCode && { field: 'callingCode', value: otp.callingCode },
-  //       ]),
-  //       update: formF,
-  //     });
-  //     if (user) {
-  //       const signIn = await this.createSignIn(user);
-  //       return { result: signIn };
-  //     }
-  //     throw new UnauthorizedError();
-  //   }
-  //   throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
   // }
 }

@@ -2124,6 +2124,7 @@ type Query {
   paymentMethodGetAll: [PaymentMethod]
   removeToken(input: IdInput): Boolean
   signIn(input: SignInInput): SignIn
+  usernameUpdate(input: SignInInput): SignIn
 }
 
 type Role {

@@ -4,4 +4,6 @@ export type UseSignInResourceModel = {
   signIn(input: SignInInputModel): Promise<void>;
 
   signOut(): Promise<void>;
+
+  usernameUpdate(input: SignInInputModel): Promise<void>;
 };

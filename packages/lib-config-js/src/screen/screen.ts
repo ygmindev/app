@@ -14,7 +14,7 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
 
     elementTimeout: 10e3,
 
-    isHeadless: false,
+    isHeadless: true,
 
     isIgnoreMedia: true,
 
@@ -29,9 +29,7 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
     // ],
 
     snapshotPath:
-      process.env.NODE_ENV === 'production'
-        ? undefined
-        : fromWorking(BUILD_DIR, 'snapshots'),
+      process.env.NODE_ENV === 'production' ? undefined : fromWorking(BUILD_DIR, 'snapshots'),
   }),
 });
 

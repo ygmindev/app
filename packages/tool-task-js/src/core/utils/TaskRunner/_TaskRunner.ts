@@ -11,7 +11,7 @@ export class _TaskRunner implements _TaskRunnerModel {
     gulpTask(name, async () => task());
   };
 
-  getTask = (name: string): (() => Promise<void>) => this.registry[name];
+  getTask = (name: string): (() => Promise<void>) | null => this.registry[name];
 
   get registry(): Record<string, () => Promise<void>> {
     return reduce(

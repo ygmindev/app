@@ -4,7 +4,7 @@ import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGrap
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { USER_RESOURCE_PARAMS } from '@lib/frontend/user/resources/User/User.constants';
-import { SIGN_IN } from '@lib/shared/auth/auth.constants';
+import { SIGN_IN, USERNAME_UPDATE } from '@lib/shared/auth/auth.constants';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { type SignInModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { SIGN_IN_INPUT } from '@lib/shared/auth/resources/SignIn/SignInInput/SignInInput.constants';
@@ -71,9 +71,14 @@ export const useSignInResource = (): UseSignInResourceModel => {
     //   }
     // },
 
-    // usernameUpdate: async (form) => {
-    //   const { result } = await usernameUpdate({ form });
-    //   await signIn(result);
-    // },
+    usernameUpdate: async (input) => {
+      const output = await query<SignInModel, { input: SignInInputModel }>({
+        fields: ['token', { user: USER_FIELDS }],
+        name: USERNAME_UPDATE,
+        params: { input: SIGN_IN_INPUT },
+        variables: { input },
+      });
+      output && (await signIn(output));
+    },
   };
 };

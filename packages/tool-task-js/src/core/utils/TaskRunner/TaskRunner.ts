@@ -23,6 +23,7 @@ import { type TaskRunnerModel } from '@tool/task/core/utils/TaskRunner/TaskRunne
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';
+import partition from 'lodash/partition';
 
 @withContainer()
 export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
@@ -35,11 +36,18 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   ): Promise<void> => {
     if (value) {
       if (isArray(value)) {
-        await runParallel(
-          filterNil(value[0].map((v) => (isFunction(v) ? v(context) : v))),
-          value[1],
-          value[2],
+        const tasks = filterNil(
+          value[0].map((v) => {
+            const task = isFunction(v) ? v(context) : v;
+            const resolved = task ? this.getTask(task) : null;
+            return resolved ?? task;
+          }),
         );
+        const [promises, commands] = partition(tasks, isFunction);
+        await Promise.all([
+          ...(commands?.length ? [runParallel(commands, value[1], value[2])] : []),
+          ...(promises.map(async (v) => (v as () => Promise<void>)()) ?? []),
+        ]);
       } else if (isFunction(value)) {
         let valueF = value(context);
         valueF = valueF && (isString(valueF) ? this.resolveTask(valueF, context) : valueF);

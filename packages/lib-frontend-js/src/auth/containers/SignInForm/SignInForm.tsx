@@ -25,16 +25,14 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
   ...props
 }) => {
   const { t } = useTranslation([AUTH]);
-  // const { signIn, usernameUpdate } = useSignInResource();
-  const { signIn } = useSignInResource();
+  const { signIn, usernameUpdate } = useSignInResource();
   const { location } = useRouter();
   const pubsub = useContainer(PubSub);
 
   const handleSubmit = async (form: SignInInputModel): Promise<void> => {
     await Promise.all([
       pubsub.waitFor(SIGN_IN),
-      // mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form),
-      signIn(form),
+      mode === FORM_MODE.NEW ? signIn(form) : usernameUpdate(form),
     ]);
   };
 

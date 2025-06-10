@@ -31,7 +31,7 @@ export const webTasks = (params?: WebTasksParamsModel): WebTasksModel =>
           ] as Array<TaskParamsModel<unknown>>,
 
           // TODO: fix projects
-          eteTasks: ['run ssjd', 'run awjd'],
+          eteTasks: ['ssjd', 'awjd'],
         },
         params,
       ],

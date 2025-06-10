@@ -49,7 +49,7 @@ export const nodeTasks = ({
 
         task: [
           [
-            [({ target }) => `run ${target}-${testBase.name}`, ...(eteTasks ?? [])],
+            [({ target }) => `${target}-${testBase.name}`, ...(eteTasks ?? [])],
             {
               condition: PARALLEL_CONDITION.FIRST,
               // silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
