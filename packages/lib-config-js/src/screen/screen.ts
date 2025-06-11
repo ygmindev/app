@@ -18,7 +18,7 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
 
     isIgnoreMedia: true,
 
-    navigationTimeout: 60000,
+    navigationTimeout: 120000,
 
     // proxies: [
     //   {

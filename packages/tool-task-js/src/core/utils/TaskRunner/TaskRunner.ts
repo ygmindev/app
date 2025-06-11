@@ -6,6 +6,7 @@ import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/Duplicate
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
+import { partition } from '@lib/shared/core/utils/partition/partition';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -18,12 +19,12 @@ import { execute } from '@tool/task/core/utils/execute/execute';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { runParallel } from '@tool/task/core/utils/runParallel/runParallel';
+import { PARALLEL_CONDITION } from '@tool/task/core/utils/runParallel/runParallel.constants';
 import { _TaskRunner } from '@tool/task/core/utils/TaskRunner/_TaskRunner';
 import { type TaskRunnerModel } from '@tool/task/core/utils/TaskRunner/TaskRunner.models';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';
-import partition from 'lodash/partition';
 
 @withContainer()
 export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
@@ -43,11 +44,59 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
             return resolved ?? task;
           }),
         );
-        const [promises, commands] = partition(tasks, isFunction);
-        await Promise.all([
+        const [[promises, commands], [promiseIndices, commandIndices]] = partition(
+          tasks,
+          isFunction,
+          true,
+        );
+        const promisesF = [
           ...(commands?.length ? [runParallel(commands, value[1], value[2])] : []),
           ...(promises.map(async (v) => (v as () => Promise<void>)()) ?? []),
-        ]);
+        ];
+
+        switch (value[1]?.condition) {
+          case PARALLEL_CONDITION.FIRST: {
+            await new Promise<void>((resolve, reject) => {
+              let resolved = false;
+              let rejections = 0;
+              for (const p of promisesF) {
+                p.then(() => {
+                  if (!resolved) {
+                    resolved = true;
+                    resolve();
+                  }
+                }).catch(() => {
+                  rejections++;
+                  if (rejections === promises.length) {
+                    reject(new Error());
+                  }
+                });
+              }
+            });
+            break;
+          }
+          case PARALLEL_CONDITION.LAST: {
+            await new Promise<void>((resolve, reject) => {
+              let pending = promisesF.length;
+              let lastSuccess = false;
+              promisesF.forEach((p) => {
+                p.then(
+                  () => (lastSuccess = true),
+                  () => (lastSuccess = false),
+                ).finally(() => {
+                  if (--pending === 0) {
+                    lastSuccess ? resolve() : reject(new Error());
+                  }
+                });
+              });
+            });
+            break;
+          }
+          default: {
+            await Promise.all(promisesF);
+            break;
+          }
+        }
       } else if (isFunction(value)) {
         let valueF = value(context);
         valueF = valueF && (isString(valueF) ? this.resolveTask(valueF, context) : valueF);

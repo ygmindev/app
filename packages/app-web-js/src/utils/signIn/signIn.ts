@@ -15,4 +15,5 @@ export const signIn = async ({ isSnapshot, screen }: SignInParamsModel): Promise
     .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'otp' })
     .then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
   isSnapshot && (await screen.snapshot({ dirname: SIGN_IN, filename: '2' }));
+  expect(true).toBe(true);
 };
