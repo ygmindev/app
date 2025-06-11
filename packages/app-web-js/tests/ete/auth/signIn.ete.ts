@@ -12,4 +12,8 @@ describe('sign in', () => {
   test('works', async () => {
     await signIn({ isSnapshot: true, screen });
   });
+
+  afterAll(async () => {
+    await screen.close();
+  });
 });

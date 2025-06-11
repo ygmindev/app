@@ -51,7 +51,7 @@ export const nodeTasks = ({
           [
             [({ target }) => `${target}-${testBase.name}`, ...(eteTasks ?? [])],
             {
-              condition: PARALLEL_CONDITION.FIRST,
+              condition: PARALLEL_CONDITION.ALL,
               // silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
             },
             { environment: ENVIRONMENT.TEST },

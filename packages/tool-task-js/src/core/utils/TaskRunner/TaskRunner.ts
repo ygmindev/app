@@ -44,11 +44,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
             return resolved ?? task;
           }),
         );
-        const [[promises, commands], [promiseIndices, commandIndices]] = partition(
-          tasks,
-          isFunction,
-          true,
-        );
+        const [promises, commands] = partition(tasks, isFunction);
         const promisesF = [
           ...(commands?.length ? [runParallel(commands, value[1], value[2])] : []),
           ...(promises.map(async (v) => (v as () => Promise<void>)()) ?? []),
@@ -164,7 +160,20 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     } catch (e) {
       logger.error(name, (e as Error).stack);
     } finally {
-      this._pids.forEach(process.kill);
+      this._pids.forEach((pid) => {
+        try {
+          process.kill(pid);
+        } catch (e: unknown) {
+          switch ((e as { code: string }).code) {
+            case 'ESRCH':
+            case 'EINVAL':
+              break;
+            default: {
+              throw e;
+            }
+          }
+        }
+      });
       onFinish && (await this.runTasks(onFinish, context));
       logger.info('completed:', name);
     }
