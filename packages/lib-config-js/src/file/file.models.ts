@@ -15,6 +15,8 @@ export type FileConfigModel = {
 
   extensions: Array<string>;
 
+  imageExtension: 'png' | 'jpeg' | 'webp';
+
   packageDirs: Array<string>;
 
   packagePrefixes: Array<string>;

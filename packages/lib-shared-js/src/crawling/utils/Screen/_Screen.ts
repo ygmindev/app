@@ -4,6 +4,7 @@ import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentErr
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { slug } from '@lib/shared/core/utils/slug/slug';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import {
@@ -164,7 +165,13 @@ export class _Screen implements _ScreenModel {
         x: 0,
         y: 0,
       },
-      path: snapshotPath ? joinPaths([pathname, `${filename ?? uid()}.png`]) : undefined,
+      path: snapshotPath
+        ? joinPaths([
+            pathname,
+            `${uid()}${filename ? `-${slug(`${filename}`)}` : ''}.${this.options.imageExtension}`,
+          ])
+        : undefined,
+      type: this.options.imageExtension ?? 'webp',
     });
   }
 

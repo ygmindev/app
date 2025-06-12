@@ -93,6 +93,8 @@ export const ASSETS_DIR = 'assets';
 
 export const STATIC_DIR = 'static';
 
+export const IMAGE_EXTENSION = 'webp';
+
 export const EXCLUDE_PATTERNS = [...CLEAN_PATTERNS, '.git', 'ios/Pods', 'node_modules'];
 
 export const EXTENSIONS_BASE = ['.tsx', '.ts', '.jsx', '.js'];
@@ -105,6 +107,7 @@ export const FILE_CONFIG: Pick<
   | 'cleanPatterns'
   | 'distDir'
   | 'excludePatterns'
+  | 'imageExtension'
   | 'packagePrefixes'
   | 'prunePatterns'
   | 'publicDir'
@@ -115,6 +118,7 @@ export const FILE_CONFIG: Pick<
   cleanPatterns: CLEAN_PATTERNS,
   distDir: DIST_DIR,
   excludePatterns: [...CLEAN_PATTERNS, '.git', '.venv', 'ios/Pods', 'node_modules'],
+  imageExtension: IMAGE_EXTENSION,
   packagePrefixes: PACKAGE_PREFIXES,
   prunePatterns: PRUNE_PATTERNS,
   publicDir: PUBLIC_DIR,

@@ -1,8 +1,9 @@
+import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type DimensionModel } from '@lib/frontend/core/core.models';
 import { type RequiredModel } from '@lib/shared/core/core.models';
 import { type LaunchOptions } from 'puppeteer';
 
-export type ScreenConfigModel = {
+export type ScreenConfigModel = Pick<FileConfigModel, 'imageExtension'> & {
   delay: number;
 
   dimension: RequiredModel<DimensionModel>;
