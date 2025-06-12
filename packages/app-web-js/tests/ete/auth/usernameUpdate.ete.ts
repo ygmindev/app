@@ -5,8 +5,10 @@ import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Scree
 import { APP_URI } from '@lib/shared/http/http.constants';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
 
-describe('usernameUpdate', () => {
-  const screen = new TestScreen({ rootUri: APP_URI });
+const TEST_NAME = 'usernameUpdate';
+
+describe(TEST_NAME, () => {
+  const screen = new TestScreen({ dirname: TEST_NAME, rootUri: APP_URI });
 
   beforeAll(async () => {
     await screen.open(APP_URI);
@@ -24,11 +26,9 @@ describe('usernameUpdate', () => {
       .then((h) => h?.type(USERNAME_NEW));
     await screen.snapshot({ filename: 'enter new email' });
     await screen.key(KEY_TYPE.ENTER);
-
     await screen
       .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'otp' })
       .then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
-
     await screen.open(`${ACCOUNT}/${PROFILE}`);
     await screen.find({ type: SELECTOR_TYPE.TEXT, value: USERNAME_NEW });
     await screen.snapshot({ filename: 'profile page' });

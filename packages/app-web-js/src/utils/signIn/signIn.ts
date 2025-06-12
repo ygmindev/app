@@ -5,6 +5,7 @@ import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Scree
 import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
 
 export const signIn = async ({
+  dirname = SIGN_IN,
   email = USER_FIXTURE.email,
   isSnapshot = true,
   screen,
@@ -13,11 +14,11 @@ export const signIn = async ({
   await screen
     .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'email' })
     .then((h) => h?.type(email ?? ''));
-  isSnapshot && (await screen.snapshot({ dirname: SIGN_IN, filename: 'enter email' }));
+  isSnapshot && (await screen.snapshot({ dirname, filename: 'enter email' }));
   await screen.key(KEY_TYPE.ENTER);
   await screen
     .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'otp' })
     .then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
-  isSnapshot && (await screen.snapshot({ dirname: SIGN_IN, filename: 'enter otp' }));
+  isSnapshot && (await screen.snapshot({ dirname, filename: 'enter otp' }));
   expect(true).toBe(true);
 };

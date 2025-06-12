@@ -6,7 +6,6 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { slug } from '@lib/shared/core/utils/slug/slug';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
-import { uid } from '@lib/shared/core/utils/uid/uid';
 import {
   type _ScreenModel,
   type _ScreenParamsModel,
@@ -34,6 +33,8 @@ export class _Screen implements _ScreenModel {
   protected options!: _ScreenParamsModel;
 
   protected browser!: Browser;
+
+  protected counter: number = 0;
 
   protected page!: Page;
 
@@ -113,6 +114,7 @@ export class _Screen implements _ScreenModel {
   async close(): Promise<void> {
     await this.page.close();
     await this.browser.close();
+    this.counter = 0;
   }
 
   async key(value: KeyTypeModel, { delay = true }: SelectorOptionModel = {}): Promise<void> {
@@ -156,8 +158,10 @@ export class _Screen implements _ScreenModel {
     filename?: string | number;
   }): Promise<Uint8Array | null> {
     const { snapshotPath } = this.options;
-    const pathname = snapshotPath && joinPaths(filterNil([snapshotPath, dirname]));
+    const dirnameF = dirname ?? this.options.dirname;
+    const pathname = snapshotPath && joinPaths(filterNil([snapshotPath, dirnameF]));
     pathname && !existsSync(pathname) && mkdirSync(pathname, { recursive: true });
+    this.counter += 1;
     return this.page.screenshot({
       clip: {
         height: this.options.dimension.height ?? 1000,
@@ -168,7 +172,7 @@ export class _Screen implements _ScreenModel {
       path: snapshotPath
         ? joinPaths([
             pathname,
-            `${uid()}${filename ? `-${slug(`${filename}`)}` : ''}.${this.options.imageExtension}`,
+            `${this.counter}${filename ? `-${slug(`${filename}`)}` : ''}.${this.options.imageExtension}`,
           ])
         : undefined,
       type: this.options.imageExtension ?? 'webp',

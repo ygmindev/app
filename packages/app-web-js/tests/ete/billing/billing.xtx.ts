@@ -5,13 +5,22 @@ import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constant
 import { APP_URI } from '@lib/shared/http/http.constants';
 
 describe('billing', () => {
+  const screen = new TestScreen({ rootUri: APP_URI });
+
+  beforeAll(async () => {
+    await screen.open(APP_URI);
+  });
+
   test('works', async () => {
-    const screen = new TestScreen({ rootUri: APP_URI });
     await screen.open(PRODUCTS);
     const addToCartButtons = await screen.findAll({
       type: SELECTOR_TYPE.TEST_ID,
       value: ADD_TO_CART_BUTTON_TEST_ID,
     });
     expect(true).toBe(true);
+  });
+
+  afterAll(async () => {
+    await screen.close();
   });
 });

@@ -11,6 +11,8 @@ export type _ScreenParamsModel = ScreenConfigModel;
 export type _ScreenModel = Pick<HandleModel, 'find' | 'findAll'> & {
   close(): Promise<void>;
 
+  dirname?: string;
+
   initialize(): Promise<void>;
 
   key(value: KeyTypeModel, options?: SelectorOptionModel): Promise<void>;

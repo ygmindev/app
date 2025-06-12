@@ -44,13 +44,19 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       assetsDir: ASSETS_DIR,
 
       babel: {
-        plugins: [
+        plugins: filterNil([
           ['transform-react-remove-prop-types', { removeImport: true }] as [
             string,
             Record<string, unknown>,
           ],
+
+          process.env.NODE_ENV === 'production' && [
+            'react-remove-properties',
+            { properties: ['testID'] },
+          ],
+
           // 'react-native-reanimated/plugin',
-        ],
+        ]),
 
         presets: [
           ['@babel/preset-react', { runtime: 'automatic' }],

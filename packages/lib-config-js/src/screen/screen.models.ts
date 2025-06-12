@@ -8,6 +8,8 @@ export type ScreenConfigModel = Pick<FileConfigModel, 'imageExtension'> & {
 
   dimension: RequiredModel<DimensionModel>;
 
+  dirname?: string;
+
   elementTimeout: number;
 
   isHeadless: boolean;
