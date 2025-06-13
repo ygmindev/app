@@ -1,3 +1,4 @@
+import { ORDER_PAYMENT_TEST_ID } from '@lib/frontend/billing/containers/OrderPaymentPage/OrderPaymentPage.constants';
 import { type OrderPaymentPagePropsModel } from '@lib/frontend/billing/containers/OrderPaymentPage/OrderPaymentPage.models';
 import { PaymentMethodInput } from '@lib/frontend/billing/containers/PaymentMethodInput/PaymentMethodInput';
 import { type PaymentMethodInputRefModel } from '@lib/frontend/billing/containers/PaymentMethodInput/PaymentMethodInput.models';
@@ -43,6 +44,7 @@ export const OrderPaymentPage: LFCModel<OrderPaymentPagePropsModel> = ({ ...prop
       onSubmit={handleSubmit}
       onSuccess={handleSuccess}
       p
+      testID={ORDER_PAYMENT_TEST_ID}
     />
   );
 };

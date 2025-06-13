@@ -56,7 +56,7 @@ export const Image: SFCModel<ImagePropsModel> = ({
       onSuccess={isAutoSize ? handleSuccess : undefined}
       src={srcF}
       style={styles}
-      testID={testID}
+      testID={process.env.NODE_ENV === 'production' ? undefined : testID}
     />
   );
 };

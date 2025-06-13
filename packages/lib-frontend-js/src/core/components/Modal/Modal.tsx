@@ -7,6 +7,7 @@ import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { KeyboardContainer } from '@lib/frontend/core/components/KeyboardContainer/KeyboardContainer';
+import { BACKDROP_TEST_ID } from '@lib/frontend/core/components/Modal/Modal.constants';
 import {
   type ModalPropsModel,
   type ModalRefModel,
@@ -83,7 +84,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
               elementState={elementStateF}
               isAbsoluteFill
               onPress={() => valueControlledSet(false)}
-              testID="backdrop"
+              testID={BACKDROP_TEST_ID}
               zIndex={Z_INDEX_ABOVE}
             />
 

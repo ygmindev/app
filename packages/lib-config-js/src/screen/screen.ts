@@ -10,13 +10,13 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
   params: () => ({
     delay: 1000,
 
-    dimension: { height: 2000, width: 1440 },
+    dimension: { height: 700, width: 750 },
 
     elementTimeout: 10e3,
 
     imageExtension: IMAGE_EXTENSION,
 
-    isHeadless: true,
+    isHeadless: false,
 
     isIgnoreMedia: true,
 

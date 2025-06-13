@@ -49,7 +49,7 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
               {
                 field: ({ value }) => (
                   <NumberInput
-                    defaultValue={1}
+                    defaultValue={value as number}
                     isNoClear
                     min={1}
                     size={THEME_SIZE.SMALL}

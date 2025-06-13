@@ -1,6 +1,7 @@
 import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { NewPaymentMethodInput } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput';
 import { type NewPaymentMethodInputRefModel } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput.models';
+import { PAYMENT_METHOD_INPUT_NEW_TEST_ID } from '@lib/frontend/billing/containers/PaymentMethodInput/PaymentMethodInput.constants';
 import {
   type PaymentMethodInputPropsModel,
   type PaymentMethodInputRefModel,
@@ -112,6 +113,7 @@ export const PaymentMethodInput: RLFCModel<
           onSubmit={async () => (await (ref ?? inputRef)?.current?.submit()) || null}
           p
           successMessage={t('billing:paymentMethodSuccess')}
+          testID={PAYMENT_METHOD_INPUT_NEW_TEST_ID}
           type={BUTTON_TYPE.TRANSPARENT}>
           {t('core:new', { value: t('billing:paymentMethod') })}
         </ModalFormButton>

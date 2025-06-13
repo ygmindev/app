@@ -6,6 +6,5 @@ import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 
 export const cleanup = async (): Promise<CleanupModel> => {
   await Container.get(Database, DATABASE_TYPE.MONGO).close();
-
   Container.get(PubSub).close();
 };

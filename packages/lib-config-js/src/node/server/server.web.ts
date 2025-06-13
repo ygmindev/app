@@ -2,11 +2,13 @@ import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { compressPlugin } from '@lib/backend/server/utils/Server/plugins/compressPlugin/compressPlugin';
 import { cookiesPlugin } from '@lib/backend/server/utils/Server/plugins/cookiesPlugin/cookiesPlugin';
+import { databasePlugin } from '@lib/backend/server/utils/Server/plugins/databasePlugin/databasePlugin';
 import { internationalizePlugin } from '@lib/backend/server/utils/Server/plugins/internationalizePlugin/internationalizePlugin';
 import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
 import { staticPlugin } from '@lib/backend/server/utils/Server/plugins/staticPlugin/staticPlugin';
 import { webPlugin } from '@lib/backend/server/utils/Server/plugins/webPlugin/webPlugin';
 import { config as apiConfig } from '@lib/config/api/api.node';
+import { config as databaseConfig } from '@lib/config/database/database.mongo';
 import { ASSETS_DIR } from '@lib/config/file/file.constants';
 import { config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.node';
 import { config as configBase } from '@lib/config/node/server/server.base';
@@ -26,6 +28,8 @@ export const config = defineConfig<ServerConfigModel>({
 
       plugins: [
         [compressPlugin, {}],
+
+        [databasePlugin, { config: databaseConfig.params() }],
 
         [staticPlugin, { prefix: ASSETS_DIR, root: fromPublic() }],
 

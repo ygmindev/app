@@ -4,5 +4,6 @@ import {
   type HandleHmrParamsModel,
 } from '@lib/shared/core/utils/handleHmr/handleHmr.models';
 
-export const handleHmr = ({ ...params }: HandleHmrParamsModel): HandleHmrModel =>
-  _handleHmr({ ...params });
+export const handleHmr = ({ ...params }: HandleHmrParamsModel): HandleHmrModel => {
+  process.env.NODE_ENV === 'development' &&_handleHmr({ ...params });
+};

@@ -4,8 +4,9 @@ import { _sandbox } from '@service/graphql-sandbox/functions/graphql/_sandbox';
 import { toNumber } from 'lodash';
 
 export const sandbox = async (): Promise<void> => {
-  await initialize({ database: databaseConfig.params() });
+  const { cleanUp } = await initialize({ database: databaseConfig.params() });
   await _sandbox({
     port: process.env.SERVER_APP_PORT ? toNumber(process.env.SERVER_APP_PORT) : undefined,
   });
+  await cleanUp?.();
 };

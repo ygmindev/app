@@ -53,9 +53,9 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
   }
 
   async run(): Promise<void> {
-    handleHmr({ onChange: this.handleClose });
-
     await handleCleanup({ onCleanUp: this.handleClose });
+
+    handleHmr({ onChange: this.handleClose });
 
     for (const [plugin, params] of this._plugins ?? []) {
       await plugin(this, params);
@@ -68,6 +68,8 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
 
     await this._onInitialize?.();
     await super.run();
+
+    await new Promise(() => {});
   }
 
   async close(): Promise<void> {

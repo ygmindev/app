@@ -1,0 +1,66 @@
+import { ProductImplementation } from '@lib/backend/commerce/resources/Product/ProductImplementation/ProductImplementation';
+import { withTestScreen } from '@lib/backend/test/utils/withTestScreen/withTestScreen';
+import { ORDER_PAYMENT_TEST_ID } from '@lib/frontend/billing/containers/OrderPaymentPage/OrderPaymentPage.constants';
+import { PAYMENT_METHOD_INPUT_NEW_TEST_ID } from '@lib/frontend/billing/containers/PaymentMethodInput/PaymentMethodInput.constants';
+import { ORDER, PRODUCTS } from '@lib/frontend/commerce/commerce.constants';
+import { ADD_TO_CART_BUTTON_TEST_ID } from '@lib/frontend/commerce/components/AddToCartButton/AddToCartButton.constants';
+import { ORDER_PRODUCTS_TEST_ID } from '@lib/frontend/commerce/pages/OrderProductsPage/OrderProductsPage.constants';
+import { BACKDROP_TEST_ID } from '@lib/frontend/core/components/Modal/Modal.constants';
+import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { Container } from '@lib/shared/core/utils/Container/Container';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
+
+const TEST_NAME = 'checkout';
+
+describe(TEST_NAME, () => {
+  const { screen } = withTestScreen({ testName: TEST_NAME });
+
+  afterEach(async () => {
+    const productService = Container.get(ProductImplementation);
+    const [product1, product2] =
+      (await productService.getMany({ options: { take: 2 } })).result ?? [];
+
+    if (product1 && product2) {
+      await screen.open(PRODUCTS);
+
+      // add first product
+      const BUTTON_TEST_ID_1 = `${ADD_TO_CART_BUTTON_TEST_ID}-${product1._id}-${product1[PRICING_RESOURCE_NAME]?.[0]._id}`;
+      await (await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: BUTTON_TEST_ID_1 }))?.press();
+      await (await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: BACKDROP_TEST_ID }))?.press();
+
+      // add second product
+      const BUTTON_TEST_ID_2 = `${ADD_TO_CART_BUTTON_TEST_ID}-${product2._id}-${product2[PRICING_RESOURCE_NAME]?.[0]._id}`;
+      await (await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: BUTTON_TEST_ID_2 }))?.press();
+      await (await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: BACKDROP_TEST_ID }))?.press();
+
+      await screen.open(ORDER);
+
+      await (
+        await screen.find({
+          type: SELECTOR_TYPE.TEST_ID,
+          value: `${ORDER_PRODUCTS_TEST_ID}-submit`,
+        })
+      )?.press();
+
+      await (
+        await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: `${ORDER_PAYMENT_TEST_ID}-submit` })
+      )?.press();
+    }
+
+    throw new NotFoundError('products');
+  });
+
+  test('works with new payment card', async () => {
+    await (
+      await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: PAYMENT_METHOD_INPUT_NEW_TEST_ID })
+    )?.press();
+
+    await (
+      await screen.find({ type: SELECTOR_TYPE.ID, value: 'Field-numberInput' })
+    )?.type('4242424242424242');
+
+    await sleep(10000);
+  });
+});

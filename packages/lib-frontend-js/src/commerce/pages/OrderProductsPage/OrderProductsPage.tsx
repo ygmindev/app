@@ -1,6 +1,7 @@
 import { BILLING, PAYMENT } from '@lib/frontend/billing/billing.constants';
 import { ORDER, PRODUCTS } from '@lib/frontend/commerce/commerce.constants';
 import { ProductItemInput } from '@lib/frontend/commerce/containers/ProductItemInput/ProductItemInput';
+import { ORDER_PRODUCTS_TEST_ID } from '@lib/frontend/commerce/pages/OrderProductsPage/OrderProductsPage.constants';
 import { type OrderProductsPagePropsModel } from '@lib/frontend/commerce/pages/OrderProductsPage/OrderProductsPage.models';
 import { Link } from '@lib/frontend/core/components/Link/Link';
 import { Title } from '@lib/frontend/core/components/Title/Title';
@@ -31,6 +32,7 @@ export const OrderProductsPage: LFCModel<OrderProductsPagePropsModel> = ({ ...pr
       initialValues={{ items }}
       onSuccess={async () => push({ pathname: `${ORDER}/${PAYMENT}` })}
       p
+      testID={ORDER_PRODUCTS_TEST_ID}
     />
   ) : (
     <MainLayout

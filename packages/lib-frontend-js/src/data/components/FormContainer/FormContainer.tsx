@@ -254,6 +254,7 @@ const FormContainerF = <TType, TResult = void>({
                 onCancel={onCancel}
                 onSubmit={async () => handleSubmitF()}
                 submitLabel={submitLabel}
+                testID={props.testID}
               />
             )}
 

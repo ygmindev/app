@@ -21,7 +21,7 @@ export const _AnimatableText: RSFCModel<AnimatableTextRefModel, _AnimatableTextP
     elementState,
     onElementStateChange: props.onElementStateChange,
     ref,
-    testID: props.testID,
+    testID: process.env.NODE_ENV === 'production' ? undefined : props.testID,
   });
 
   useImperativeHandle(ref, () => ({ to, toState }));

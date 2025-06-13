@@ -17,15 +17,17 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
     animation,
     elementState,
     ref,
+    testID,
     ...props
   }) => {
     const { styles } = useStyles({ props });
+    const testIDF = process.env.NODE_ENV === 'production' ? undefined : testID;
     const { animationProps, animationState, to, toState } = useAnimationState({
       animation,
       elementState,
       onElementStateChange: props.onElementStateChange,
       ref,
-      testID: props.testID,
+      testID: testIDF,
     });
     useImperativeHandle(ref, () => ({ to, toState }));
 
@@ -35,6 +37,7 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
       ref,
       state: animationState,
       style: styles,
+      testID: testIDF,
     } as unknown as PropsModel<typeof ComponentF>);
   };
   return Animatable;

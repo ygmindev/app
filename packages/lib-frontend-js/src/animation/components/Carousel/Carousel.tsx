@@ -6,7 +6,7 @@ import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type SFCModel } from '@lib/frontend/core/core.models';
 import { useState } from 'react';
 
-export const Carousel: SFCModel<CarouselPropsModel> = ({ current, slides, testID, ...props }) => {
+export const Carousel: SFCModel<CarouselPropsModel> = ({ current, slides, ...props }) => {
   const [currentF, currentSet] = useState<number>(current ?? 0);
   const isFirst = currentF <= 0;
   const isLast = currentF >= (slides?.length ?? 0) - 1;

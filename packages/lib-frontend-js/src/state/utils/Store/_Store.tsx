@@ -276,6 +276,8 @@ export class _Store<
     });
   }
 
+  getState = (): TType => this.store.getState();
+
   getStatePersisted = async (): Promise<TType> =>
     mapValuesAsync(this.persistors, async (v) =>
       getStoredState(v as PersistConfig<TType[TKeys[number]]>),

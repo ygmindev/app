@@ -158,6 +158,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       );
       await this.runTasks(task, context);
     } catch (e) {
+      console.warn(e);
       logger.error(name, (e as Error).stack);
     } finally {
       this._pids.forEach((pid) => {

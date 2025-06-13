@@ -52,7 +52,7 @@ export const AddToCartButton: LFCModel<AddToCartButtonPropsModel> = ({ item, ...
       )}
       onPress={handleAdd}
       ref={ref}
-      testID={ADD_TO_CART_BUTTON_TEST_ID}>
+      testID={`${ADD_TO_CART_BUTTON_TEST_ID}-${item.productId}-${item.pricingId}`}>
       {t('commerce:addToCart')}
     </ModalButton>
   );

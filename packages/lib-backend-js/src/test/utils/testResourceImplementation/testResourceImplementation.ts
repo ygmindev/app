@@ -1,9 +1,8 @@
 import { clearSeed } from '@lib/backend/database/utils/clearSeed/clearSeed';
 import { seed } from '@lib/backend/database/utils/seed/seed';
-import { cleanup } from '@lib/backend/setup/utils/cleanup/cleanup';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type TestResourceImplementationParamsModel } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation.models';
-import databaseConfig from '@lib/config/database/database.mongo';
+import { config as databaseConfig } from '@lib/config/database/database.mongo';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
@@ -19,13 +18,13 @@ export const testResourceImplementation = <
   getImplementation,
   root: getRoot,
 }: TestResourceImplementationParamsModel<TType, TRoot>): void => {
+  let cleanUp: (() => Promise<void>) | undefined;
   let implementation: ResourceImplementationModel<TType, TRoot>;
-
   let root: (TRoot extends undefined ? never : string) | undefined;
   let first: PartialModel<TType> | undefined;
 
   beforeAll(async () => {
-    await initialize({ database: databaseConfig.params() });
+    ({ cleanUp } = await initialize({ database: databaseConfig.params() }));
     await seed();
     implementation = getImplementation();
     root = (await getRoot?.()) as TRoot extends undefined ? never : string;
@@ -35,7 +34,7 @@ export const testResourceImplementation = <
 
   afterAll(async () => {
     await clearSeed();
-    await cleanup();
+    await cleanUp?.();
   });
 
   test('works with create', async () => {

@@ -139,7 +139,7 @@ export const getViewParams = <
             position: 'relative',
             ...stylesView,
           }}
-          testID={props.testID}>
+          testID={process.env.NODE_ENV === 'production' ? undefined : props.testID}>
           <Component {...propsF} />
 
           {isHorizontalScrollableVisibleF && (

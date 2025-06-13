@@ -41,7 +41,12 @@ export const composeComponent =
         ...propsF,
         ...(isFragment(Component)
           ? {}
-          : { nativeid: props.nativeID, ref: props.ref, style: styles, testID: props.testID }),
+          : {
+              nativeid: props.nativeID,
+              ref: props.ref,
+              style: styles,
+              testID: process.env.NODE_ENV === 'production' ? undefined : props.testID,
+            }),
       } as TResult & StylePropsModel<TStyle>)
     );
   };

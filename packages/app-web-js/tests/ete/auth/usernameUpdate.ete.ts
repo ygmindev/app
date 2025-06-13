@@ -1,18 +1,13 @@
 import { signIn } from '@app/web/utils/signIn/signIn';
-import { TestScreen } from '@lib/backend/test/utils/TestScreen/TestScreen';
+import { withTestScreen } from '@lib/backend/test/utils/withTestScreen/withTestScreen';
 import { EMAIL, PROFILE } from '@lib/frontend/user/user.constants';
 import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
-import { APP_URI } from '@lib/shared/http/http.constants';
 import { ACCOUNT } from '@lib/shared/user/user.constants';
 
 const TEST_NAME = 'usernameUpdate';
 
 describe(TEST_NAME, () => {
-  const screen = new TestScreen({ dirname: TEST_NAME, rootUri: APP_URI });
-
-  beforeAll(async () => {
-    await screen.open(APP_URI);
-  });
+  const { screen } = withTestScreen({ email: false, testName: TEST_NAME });
 
   const USERNAME_OLD = 'old@old.com';
   const USERNAME_NEW = 'new@new.com';
@@ -22,19 +17,15 @@ describe(TEST_NAME, () => {
     await screen.snapshot({ filename: 'profile email page' });
     await signIn({ email: USERNAME_OLD, screen });
     await screen
-      .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'email' })
+      .find({ type: SELECTOR_TYPE.TEST_ID, value: 'email' })
       .then((h) => h?.type(USERNAME_NEW));
     await screen.snapshot({ filename: 'enter new email' });
     await screen.key(KEY_TYPE.ENTER);
     await screen
-      .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'otp' })
+      .find({ type: SELECTOR_TYPE.TEST_ID, value: 'otp' })
       .then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
     await screen.open(`${ACCOUNT}/${PROFILE}`);
     await screen.find({ type: SELECTOR_TYPE.TEXT, value: USERNAME_NEW });
     await screen.snapshot({ filename: 'profile page' });
-  });
-
-  afterAll(async () => {
-    await screen.close();
   });
 });

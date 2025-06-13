@@ -59,7 +59,7 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
       ref={ref}
       state={animationState}
       style={styles}
-      testID={testID}>
+      testID={process.env.NODE_ENV === 'production' ? undefined : testID}>
       {children}
     </Component>
   );

@@ -1,5 +1,6 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { _screen } from '@lib/config/screen/_screen';
+import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -138,16 +139,19 @@ export class _Screen implements _ScreenModel {
 
   async open(url: string): Promise<void> {
     !this.isInitialized && (await this.initialize());
-    const uriF = this.options.rootUri ? uri({ host: this.options.rootUri, pathname: url }) : url;
-    await this.page.goto(uriF, {
-      timeout: this.options.navigationTimeout,
-      waitUntil: 'networkidle0',
-    });
-    await this.page
-      .createCDPSession()
-      .then((client) =>
-        client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: './' }),
-      );
+    if (this.uri()?.pathname !== trimPathname(url)) {
+      const uriF = this.options.rootUri ? uri({ host: this.options.rootUri, pathname: url }) : url;
+      logger.debug(`open page ${uriF}`);
+      await this.page.goto(uriF, {
+        timeout: this.options.navigationTimeout,
+        waitUntil: 'networkidle0',
+      });
+      await this.page
+        .createCDPSession()
+        .then((client) =>
+          client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: './' }),
+        );
+    }
   }
 
   async snapshot({
@@ -208,7 +212,7 @@ const find = async (
   {
     delay = 0,
     index = -1,
-    isThrow = false,
+    isThrow = true,
     timeout = 0,
   }: Omit<SelectorOptionModel, 'isDelay' | 'timeout'> & {
     delay?: number;
@@ -248,7 +252,7 @@ const findAll = async (
   selector: SelectorModel,
   {
     delay,
-    isThrow = false,
+    isThrow = true,
     timeout,
   }: Omit<SelectorOptionModel, 'isDelay' | 'timeout'> & {
     delay?: number;

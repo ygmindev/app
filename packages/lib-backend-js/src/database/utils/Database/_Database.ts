@@ -14,7 +14,7 @@ import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/Duplicate
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
-import { logger } from '@lib/shared/logging/utils/Logger/Logger';
+import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import {
@@ -88,12 +88,7 @@ export class _Database implements _DatabaseModel {
   }
 
   async connect(): Promise<void> {
-    if (await this.isConnected()) {
-      logger.info('reusing connection', this.config.clientUrl);
-    } else {
-      logger.info('connecting', this.config.clientUrl);
-      this.em = (await MikroORM.init(this.config)).em;
-    }
+    this.em = (await MikroORM.init(this.config)).em;
   }
 
   getEntityManager = (): EntityManager => {
@@ -156,7 +151,9 @@ export class _Database implements _DatabaseModel {
           (id as FilterQuery<NoInfer<NonNullable<TType>>>) ?? getFilter<TType>(filter);
         const result = await em.findOne(
           name,
-          filterF,
+          isEmpty(filterF)
+            ? ({ $expr: { $eq: [1, 1] } } as unknown as FilterQuery<NoInfer<NonNullable<TType>>>)
+            : filterF,
           options &&
             ({ populate: options.populate ?? undefined } as FindOneOptions<
               NonNullable<TType>,
@@ -231,10 +228,7 @@ export class _Database implements _DatabaseModel {
     return implementation;
   };
 
-  close = async (): Promise<void> => {
-    if (await this.isConnected()) {
-      logger.debug('closing connections', this.config.clientUrl);
-      await this.getEntityManager().getConnection()?.close();
-    }
-  };
+  async close(): Promise<void> {
+    await this.getEntityManager().getConnection()?.close();
+  }
 }
