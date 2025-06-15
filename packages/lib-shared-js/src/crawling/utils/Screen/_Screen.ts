@@ -139,6 +139,7 @@ export class _Screen implements _ScreenModel {
 
   async open(url: string): Promise<void> {
     !this.isInitialized && (await this.initialize());
+
     if (this.uri()?.pathname !== trimPathname(url)) {
       const uriF = this.options.rootUri ? uri({ host: this.options.rootUri, pathname: url }) : url;
       logger.debug(`open page ${uriF}`);

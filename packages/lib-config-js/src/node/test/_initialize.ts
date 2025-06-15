@@ -11,4 +11,5 @@ global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder as typeof global.TextDecoder;
 
 expect.extend({ toMatchImageSnapshot });
+
 MetadataStorage.clear();

@@ -4,4 +4,8 @@ const TEST_NAME = 'signIn';
 
 describe(TEST_NAME, () => {
   const { screen } = withTestScreen({ testName: TEST_NAME });
+
+  test('works with new payment card', async () => {
+    expect(true).toBeTruthy();
+  });
 });

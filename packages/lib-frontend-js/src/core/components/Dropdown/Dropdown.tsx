@@ -47,7 +47,8 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = ({
       <Wrapper
         isFullWidth={width ? undefined : true}
         isHidden={isHidden}
-        p={THEME_SIZE.SMALL}>
+        p={THEME_SIZE.SMALL}
+        testID={props.testID}>
         <Wrapper
           backgroundColor={THEME_COLOR_MORE.SURFACE}
           border

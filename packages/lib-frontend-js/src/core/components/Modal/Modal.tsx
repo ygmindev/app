@@ -111,6 +111,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
                 position={SHAPE_POSITION.ABSOLUTE}
                 right={0}
                 round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
+                testID={props.testID}
                 width={width}
                 zIndex={Z_INDEX_TOP}>
                 <Wrapper
