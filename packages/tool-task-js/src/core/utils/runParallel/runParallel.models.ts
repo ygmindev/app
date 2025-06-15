@@ -10,4 +10,8 @@ export type RunParallelModel = _RunParallelModel;
 
 export type ParallelConditionModel = `${PARALLEL_CONDITION}`;
 
-export type ParallelOptionsModel = { condition?: ParallelConditionModel; silent?: Array<number> };
+export type ParallelOptionsModel = {
+  condition?: ParallelConditionModel;
+  root?: string;
+  silent?: Array<number>;
+};

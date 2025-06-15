@@ -3,7 +3,8 @@ import {
   type HandleHmrModel,
   type HandleHmrParamsModel,
 } from '@lib/shared/core/utils/handleHmr/handleHmr.models';
+import { isLocalDevelopment } from '@lib/shared/environment/utils/isLocalDevelopment/isLocalDevelopment';
 
 export const handleHmr = ({ ...params }: HandleHmrParamsModel): HandleHmrModel => {
-  process.env.NODE_ENV === 'development' &&_handleHmr({ ...params });
+  isLocalDevelopment && _handleHmr({ ...params });
 };

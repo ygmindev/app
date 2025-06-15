@@ -113,6 +113,7 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
         );
       }}
       s={THEME_SIZE.SMALL}
+      testID={`${props.testID}-body`}
     />
   );
   return isMobile ? (

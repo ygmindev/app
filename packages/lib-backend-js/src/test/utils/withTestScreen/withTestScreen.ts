@@ -38,8 +38,9 @@ export const withTestScreen = ({
 
       // verify user
       await screen.find({ value: `${APP_MENU_TEST_ID}-toggle` }).then((h) => h?.press());
+
       await screen
-        .find({ value: APP_MENU_TEST_ID })
+        .find({ value: `${APP_MENU_TEST_ID}-body` })
         .then((h) => h?.find({ type: SELECTOR_TYPE.TEXT, value: emailF }));
     }
   });

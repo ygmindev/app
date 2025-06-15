@@ -1,9 +1,9 @@
 import { type SleepParamsModel } from '@lib/shared/core/utils/sleep/sleep.models';
+import { isLocalDevelopment } from '@lib/shared/environment/utils/isLocalDevelopment/isLocalDevelopment';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export const sleep = (...[duration = 0, options]: SleepParamsModel): Promise<void> => {
-  const isVerboseF =
-    options?.isVerbose || process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test';
+  const isVerboseF = options?.isVerbose || isLocalDevelopment;
 
   let countdown = duration / 1000;
 

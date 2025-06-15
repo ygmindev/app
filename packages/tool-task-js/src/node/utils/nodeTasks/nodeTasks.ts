@@ -26,6 +26,7 @@ export const nodeTasks = ({
     params?: PartialModel<TaskParamsModel<TestParamsModel>>,
   ): Array<TaskParamsModel<TestParamsModel>> => {
     const testUnit: TaskParamsModel<TestParamsModel> = merge([params, testParams, test]);
+
     const testBase: TaskParamsModel<TestParamsModel> = merge([
       {
         name: `${testUnit.name}-base`,
@@ -50,11 +51,12 @@ export const nodeTasks = ({
 
         task: [
           [
-            [({ target }) => `${target}-${testBase.name}`, ...(eteTasks ?? [])],
+            [({ target }) => `run ${target}-${testBase.name}`, ...(eteTasks ?? [])],
             {
               condition: PARALLEL_CONDITION.ALL,
               // silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
             },
+            { environment: ENVIRONMENT.TEST },
           ],
         ],
 

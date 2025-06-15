@@ -6,7 +6,6 @@ import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/Duplicate
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
-import { partition } from '@lib/shared/core/utils/partition/partition';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -19,7 +18,6 @@ import { execute } from '@tool/task/core/utils/execute/execute';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { runParallel } from '@tool/task/core/utils/runParallel/runParallel';
-import { PARALLEL_CONDITION } from '@tool/task/core/utils/runParallel/runParallel.constants';
 import { _TaskRunner } from '@tool/task/core/utils/TaskRunner/_TaskRunner';
 import { type TaskRunnerModel } from '@tool/task/core/utils/TaskRunner/TaskRunner.models';
 import isFunction from 'lodash/isFunction';
@@ -37,62 +35,11 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   ): Promise<void> => {
     if (value) {
       if (isArray(value)) {
-        const tasks = filterNil(
-          value[0].map((v) => {
-            const task = isFunction(v) ? v(context) : v;
-            const resolved = task ? this.getTask(task) : null;
-            return resolved ?? task;
-          }),
+        await runParallel(
+          filterNil(value[0].map((v) => (isFunction(v) ? v(context) : v))),
+          value[1],
+          value[2],
         );
-        const [promises, commands] = partition(tasks, isFunction);
-        const promisesF = [
-          ...(commands?.length ? [runParallel(commands, value[1], value[2])] : []),
-          ...(promises.map(async (v) => (v as () => Promise<void>)()) ?? []),
-        ];
-
-        switch (value[1]?.condition) {
-          case PARALLEL_CONDITION.FIRST: {
-            await new Promise<void>((resolve, reject) => {
-              let resolved = false;
-              let rejections = 0;
-              for (const p of promisesF) {
-                p.then(() => {
-                  if (!resolved) {
-                    resolved = true;
-                    resolve();
-                  }
-                }).catch(() => {
-                  rejections++;
-                  if (rejections === promises.length) {
-                    reject(new Error());
-                  }
-                });
-              }
-            });
-            break;
-          }
-          case PARALLEL_CONDITION.LAST: {
-            await new Promise<void>((resolve, reject) => {
-              let pending = promisesF.length;
-              let lastSuccess = false;
-              promisesF.forEach((p) => {
-                p.then(
-                  () => (lastSuccess = true),
-                  () => (lastSuccess = false),
-                ).finally(() => {
-                  if (--pending === 0) {
-                    lastSuccess ? resolve() : reject(new Error());
-                  }
-                });
-              });
-            });
-            break;
-          }
-          default: {
-            await Promise.all(promisesF);
-            break;
-          }
-        }
       } else if (isFunction(value)) {
         let valueF = value(context);
         valueF = valueF && (isString(valueF) ? this.resolveTask(valueF, context) : valueF);
@@ -145,16 +92,16 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     target && process.chdir(workingDir);
     const context: TaskContextModel<TType> = { name, options: optionsF, root, target };
     try {
-      logger.info('running', name);
       onBefore && (await this.runTasks(onBefore, context));
       process.chdir(root ?? fromRoot());
       setEnvironment({ environment, variables });
+      const environmentContext = stringify({
+        environment: process.env.NODE_ENV,
+        platform: process.env.ENV_PLATFORM,
+        target,
+      });
       logger.info(
-        stringify({
-          environment,
-          platform: process.env.ENV_PLATFORM,
-          target,
-        }),
+        `running ${name}${environmentContext === '' ? '' : ` with context: ${environmentContext}`}`,
       );
       await this.runTasks(task, context);
     } catch (e) {

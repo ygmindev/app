@@ -4,6 +4,7 @@ import { type _WebConfigModel, type WebConfigModel } from '@lib/config/node/web/
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
+import { isLocalDevelopment } from '@lib/shared/environment/utils/isLocalDevelopment/isLocalDevelopment';
 import { readFileSync } from 'fs';
 import vike from 'vike/plugin';
 import { type WatchOptions } from 'vite';
@@ -25,18 +26,17 @@ export const _web = ({ bundle, isSsr, server }: WebConfigModel): _WebConfigModel
       {
         plugins: filterNil([isSsr && vike()]),
 
-        server:
-          process.env.NODE_ENV === 'development'
-            ? {
-                host: true,
+        server: isLocalDevelopment
+          ? {
+              host: true,
 
-                https,
+              https,
 
-                middlewareMode: true,
+              middlewareMode: true,
 
-                watch: (bundleConfigF.build?.watch as WatchOptions) ?? undefined,
-              }
-            : undefined,
+              watch: (bundleConfigF.build?.watch as WatchOptions) ?? undefined,
+            }
+          : undefined,
       },
 
       bundleConfigF,

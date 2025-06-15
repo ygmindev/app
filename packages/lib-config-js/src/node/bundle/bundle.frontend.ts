@@ -10,6 +10,7 @@ import {
 } from '@lib/config/node/bundle/bundle.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { isLocalDevelopment } from '@lib/shared/environment/utils/isLocalDevelopment/isLocalDevelopment';
 
 export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
   ...configBase,
@@ -66,7 +67,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       },
 
       define: {
-        __DEV__: `${process.env.NODE_ENV === 'development'}`,
+        __DEV__: `${isLocalDevelopment}`,
       },
 
       envPrefix: ['APP_', 'SERVER_APP_'],

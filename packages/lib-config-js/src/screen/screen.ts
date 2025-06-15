@@ -16,7 +16,7 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
 
     imageExtension: IMAGE_EXTENSION,
 
-    isHeadless: true,
+    isHeadless: false,
 
     isIgnoreMedia: true,
 

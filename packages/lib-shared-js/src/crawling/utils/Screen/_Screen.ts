@@ -226,7 +226,7 @@ const find = async (
     delay && (await sleep(delay));
     const selectorF = getSelector(selector);
     try {
-      logger.info(`Finding ${stringify(selector)}...`);
+      logger.info(`finding ${stringify(selector)}...`);
       timeout && (await handle.waitForSelector(selectorF, { timeout }));
     } catch (e) {
       if (isThrow) {
@@ -266,7 +266,7 @@ const findAll = async (
     delay && (await sleep(delay));
     const selectorF = getSelector(selector);
     try {
-      logger.info(`Finding all ${stringify(selector)}...`);
+      logger.info(`finding all ${stringify(selector)}...`);
       timeout &&
         (await handle.waitForSelector(selectorF, {
           timeout,
