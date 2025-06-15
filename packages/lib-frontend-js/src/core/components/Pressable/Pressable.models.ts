@@ -7,8 +7,10 @@ import {
 } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type ThemeColorModel } from '@lib/frontend/style/style.models';
 import { type FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
+import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
 
-export type PressablePropsModel = Pick<ActivatablePropsModel, 'children'> &
+export type PressablePropsModel = TestIdPropsModel &
+  Pick<ActivatablePropsModel, 'children'> &
   Omit<WrapperPropsModel, 'children'> &
   AnimatablePropsModel &
   Pick<

@@ -49,6 +49,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
   ref,
   title,
   width,
+  ...props
 }) => {
   const theme = useTheme();
   const [deviceHeight] = useStore('app.dimension.height');
@@ -134,7 +135,8 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
                       isAlign
                       isRow
                       pHorizontal
-                      pVertical={THEME_SIZE.SMALL}>
+                      pVertical={THEME_SIZE.SMALL}
+                      testID={`${props.testID}-title`}>
                       {title && (
                         <Wrapper flex>
                           {isAsyncText(title) ? (

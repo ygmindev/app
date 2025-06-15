@@ -5,6 +5,7 @@ import {
   type WithTestScreenParamsModel,
 } from '@lib/backend/test/utils/withTestScreen/withTestScreen.models';
 import { config as databaseConfig } from '@lib/config/database/database.mongo';
+import { APP_MENU_TEST_ID } from '@lib/frontend/app/containers/AppMenu/AppMenu.constants';
 import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import { APP_URI } from '@lib/shared/http/http.constants';
@@ -25,18 +26,19 @@ export const withTestScreen = ({
 
     // sign in
     if (email) {
+      const emailF = (email === true ? USER_FIXTURE.email : email) ?? '';
       await screen.open(SIGN_IN);
-      await screen
-        .find({ type: SELECTOR_TYPE.TEST_ID, value: 'email' })
-        .then((h) => h?.type((email === true ? USER_FIXTURE.email : email) ?? ''));
+      await screen.find({ value: 'email' }).then((h) => h?.type(emailF));
       testName === SIGN_IN && (await screen.snapshot({ filename: 'enter email' }));
       await screen.key(KEY_TYPE.ENTER);
-      await screen
-        .find({ type: SELECTOR_TYPE.TEST_ID, value: 'otp' })
-        .then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
+
+      await screen.find({ value: 'otp' }).then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
       testName === SIGN_IN && (await screen.snapshot({ filename: 'enter otp' }));
 
-      expect(true).toBeTruthy();
+      await screen.find({ value: `${APP_MENU_TEST_ID}-toggle` }).then((h) => h?.press());
+      await screen
+        .find({ value: APP_MENU_TEST_ID })
+        .then((h) => h?.find({ type: SELECTOR_TYPE.TEXT, value: emailF }));
     }
   });
 

@@ -1,3 +1,4 @@
+import { APP_MENU_TEST_ID } from '@lib/frontend/app/containers/AppMenu/AppMenu.constants';
 import { type AppMenuPropsModel } from '@lib/frontend/app/containers/AppMenu/AppMenu.models';
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
@@ -67,6 +68,7 @@ export const AppMenu: LFCModel<AppMenuPropsModel> = ({ ...props }) => {
       )}
       options={optionsF}
       ref={menuRef}
+      testID={APP_MENU_TEST_ID}
       title={isAuthenticated ? currentUser?.email : undefined}
     />
   );

@@ -27,26 +27,17 @@ describe(TEST_NAME, () => {
 
       // add first product
       const BUTTON_TEST_ID_1 = `${ADD_TO_CART_BUTTON_TEST_ID}-${product1._id}-${product1[PRICING_RESOURCE_NAME]?.[0]._id}`;
-      await (await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: BUTTON_TEST_ID_1 }))?.press();
-      await (await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: BACKDROP_TEST_ID }))?.press();
+      await screen.find({ value: BUTTON_TEST_ID_1 }).then((h) => h?.press());
+      await screen.find({ value: BACKDROP_TEST_ID }).then((h) => h?.press());
 
       // add second product
       const BUTTON_TEST_ID_2 = `${ADD_TO_CART_BUTTON_TEST_ID}-${product2._id}-${product2[PRICING_RESOURCE_NAME]?.[0]._id}`;
-      await (await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: BUTTON_TEST_ID_2 }))?.press();
-      await (await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: BACKDROP_TEST_ID }))?.press();
+      await screen.find({ value: BUTTON_TEST_ID_2 }).then((h) => h?.press());
+      await screen.find({ value: BACKDROP_TEST_ID }).then((h) => h?.press());
 
       await screen.open(ORDER);
-
-      await (
-        await screen.find({
-          type: SELECTOR_TYPE.TEST_ID,
-          value: `${ORDER_PRODUCTS_TEST_ID}-submit`,
-        })
-      )?.press();
-
-      await (
-        await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: `${ORDER_PAYMENT_TEST_ID}-submit` })
-      )?.press();
+      await screen.find({ value: `${ORDER_PRODUCTS_TEST_ID}-submit` }).then((h) => h?.press());
+      await screen.find({ value: `${ORDER_PAYMENT_TEST_ID}-submit` }).then((h) => h?.press());
     }
 
     throw new NotFoundError('products');

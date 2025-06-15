@@ -36,8 +36,6 @@ export const nodeTasks = ({
 
     const testEte: TaskParamsModel<TestParamsModel> = merge([
       {
-        name: `${testUnit.name}-ete`,
-
         // onFinish: [
         //   async ({ root }) =>
         //     copy({
@@ -46,6 +44,9 @@ export const nodeTasks = ({
         //       to: fromStatic(PUBLIC_DIR, DIST_DIR, 'test'),
         //     }),
         // ],
+        environment: ENVIRONMENT.TEST,
+
+        name: `${testUnit.name}-ete`,
 
         task: [
           [
@@ -54,7 +55,6 @@ export const nodeTasks = ({
               condition: PARALLEL_CONDITION.ALL,
               // silent: eteTasks ? range(1, eteTasks.length + 1) : undefined,
             },
-            { environment: ENVIRONMENT.TEST },
           ],
         ],
 

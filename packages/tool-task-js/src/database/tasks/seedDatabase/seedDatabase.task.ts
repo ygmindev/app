@@ -6,7 +6,7 @@ import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 
 const seedDatabase: TaskParamsModel<unknown> = {
-  environment: ENVIRONMENT.DEVELOPMENT,
+  environment: ENVIRONMENT.TEST,
 
   name: 'seed-database',
 

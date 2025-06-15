@@ -15,17 +15,17 @@ describe(displayName, () => {
     const condition = jest.fn();
     condition.mockReturnValue(false);
     setTimeout(() => condition.mockReturnValue(true), duration);
-    waitFor({ condition });
+    await waitFor({ condition });
     jest.advanceTimersByTime(WAIT_FOR_TIMEOUT_DEFAULT_MILLISECONDS);
-    expect(condition).toBeCalledTimes(duration / WAIT_FOR_INTERVAL_DEFAULT_MILLISECONDS);
+    expect(condition).toHaveBeenCalledTimes(duration / WAIT_FOR_INTERVAL_DEFAULT_MILLISECONDS);
   });
 
   test('works with timeout', async () => {
     const condition = jest.fn();
     condition.mockReturnValue(false);
-    waitFor({ condition });
+    await waitFor({ condition });
     jest.advanceTimersByTime(WAIT_FOR_TIMEOUT_DEFAULT_MILLISECONDS);
-    expect(condition).toBeCalledTimes(
+    expect(condition).toHaveBeenCalledTimes(
       WAIT_FOR_TIMEOUT_DEFAULT_MILLISECONDS / WAIT_FOR_INTERVAL_DEFAULT_MILLISECONDS,
     );
   });

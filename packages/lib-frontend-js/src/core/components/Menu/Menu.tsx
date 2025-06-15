@@ -72,10 +72,11 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
   anchorF = cloneElement(anchorF, {
     onPress: async () => {
       if (!isBlocked) {
-        onPress && (await onPress());
+        await onPress?.();
         handleToggle(!isActive);
       }
     },
+    testID: anchorF.props.testID ?? `${props.testID}-toggle`,
   });
 
   const children = (
@@ -105,6 +106,7 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
                 </Wrapper>
               ) : undefined
             }
+            testID={`menu-option-${id}`}
             type={BUTTON_TYPE.INVISIBLE}>
             {(renderOption ? renderOption(option) : label) ?? id}
           </Button>
@@ -141,7 +143,8 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
         <Wrapper
           border={DIRECTION.BOTTOM}
           mBottom={THEME_SIZE.SMALL}
-          p>
+          p
+          testID={`${props.testID}-title`}>
           <AsyncText align={FONT_ALIGN.CENTER}>{title}</AsyncText>
         </Wrapper>
       )}
