@@ -11,7 +11,6 @@ import { type PartialDeepModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { isLocalDevelopment } from '@lib/shared/environment/utils/isLocalDevelopment/isLocalDevelopment';
 import { HTTP_PROTOCOL } from '@lib/shared/http/http.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import reduce from 'lodash/reduce';
@@ -115,7 +114,11 @@ export const _serverless = ({
   return merge(
     [
       {
-        plugins: filterNil([isLocalDevelopment && 'serverless-offline']),
+        plugins: filterNil([
+          (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
+            !process.env.NODE_RUNTIME &&
+            'serverless-offline',
+        ]),
       },
 
       platformParams,

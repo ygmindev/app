@@ -2,7 +2,6 @@ import {
   type StorageBaseParamsModel,
   type StorageModel,
 } from '@lib/frontend/state/utils/Storage/Storage.models';
-import { isLocalDevelopment } from '@lib/shared/environment/utils/isLocalDevelopment/isLocalDevelopment';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export class Storage implements StorageModel {
@@ -14,7 +13,7 @@ export class Storage implements StorageModel {
 
   async getItem<TType extends string = string>(key: string): Promise<TType | null> {
     if (this.storages) {
-      isLocalDevelopment && logger.debug('storage get', key);
+      logger.debug('storage get', key);
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {
@@ -33,7 +32,7 @@ export class Storage implements StorageModel {
 
   async removeItem(key: string): Promise<void> {
     if (this.storages) {
-      isLocalDevelopment && console.warn('storage remove', key);
+      logger.debug('storage remove', key);
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {
@@ -49,7 +48,7 @@ export class Storage implements StorageModel {
 
   async setItem<TType extends string = string>(key: string, value: TType): Promise<void> {
     if (this.storages) {
-      isLocalDevelopment && value && console.warn('storage set', key, value);
+      value && logger.debug('storage set', key, value);
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {

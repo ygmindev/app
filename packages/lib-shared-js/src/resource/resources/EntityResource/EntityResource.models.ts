@@ -3,7 +3,6 @@ import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefFiel
 import {
   type PartialModel,
   type PrimitiveModel,
-  type RequiredModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
 
@@ -19,16 +18,16 @@ export type EntityResourceDataModel<TType> = TType extends PrimitiveModel
   : {
       [TKey in keyof Omit<
         TType,
-        keyof RequiredModel<Omit<EntityResourceModel, 'isFixture'>>
-      >]?: RequiredModel<TType>[TKey] extends EntityResourceModel
+        keyof Required<Omit<EntityResourceModel, 'isFixture'>>
+      >]?: Required<TType>[TKey] extends EntityResourceModel
         ? Pick<EntityResourceModel, '_id'>
-        : RequiredModel<TType>[TKey] extends Array<infer TElement>
+        : Required<TType>[TKey] extends Array<infer TElement>
           ? Array<PartialModel<TElement>>
-          : RequiredModel<TType>[TKey] extends CollectionModel<infer TElement>
+          : Required<TType>[TKey] extends CollectionModel<infer TElement>
             ? Array<PartialModel<TElement>>
-            : RequiredModel<TType>[TKey] extends RefFieldModel<EntityResourceModel>
+            : Required<TType>[TKey] extends RefFieldModel<EntityResourceModel>
               ? string
-              : RequiredModel<TType>[TKey];
+              : Required<TType>[TKey];
     };
 
 export type EntityResourcePartialModel<TType> = TType extends PrimitiveModel
@@ -37,8 +36,8 @@ export type EntityResourcePartialModel<TType> = TType extends PrimitiveModel
     ? Array<EntityResourcePartialModel<TElement>>
     : TType extends EntityResourceModel
       ? Pick<TType, '_id'> & {
-          [TKey in StringKeyModel<Omit<RequiredModel<TType>, '_id'>>]?: EntityResourcePartialModel<
-            RequiredModel<TType>[TKey]
+          [TKey in StringKeyModel<Omit<Required<TType>, '_id'>>]?: EntityResourcePartialModel<
+            Required<TType>[TKey]
           >;
         }
       : PartialModel<TType>;

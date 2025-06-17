@@ -22,6 +22,8 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
 
     navigationTimeout: 120000,
 
+    retry: 1,
+
     // proxies: [
     //   {
     //     password: 'baqs1fbshyxq',

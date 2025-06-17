@@ -1,4 +1,4 @@
-import { type PartialModel } from '@lib/shared/core/core.models';
+import { type OverrideModel, type PartialModel } from '@lib/shared/core/core.models';
 import {
   type _ScreenModel,
   type _ScreenParamsModel,
@@ -14,11 +14,8 @@ export type ScreenModel = _ScreenModel;
 
 export type HandleModel = {
   content(): Promise<string | null>;
-  find(
-    selector: SelectorModel,
-    options?: SelectorOptionModel & { index?: number },
-  ): Promise<HandleModel | null>;
-  findAll(selector: SelectorModel, options?: SelectorOptionModel): Promise<Array<HandleModel>>;
+  find(selector: SelectorModel, options?: FindOptionModel): Promise<HandleModel | null>;
+  findAll(selector: SelectorModel, options?: FindAllOptionModel): Promise<Array<HandleModel>>;
   next(): Promise<HandleModel | null>;
   parent(): Promise<HandleModel | null>;
   press(options?: SelectorOptionModel): Promise<void>;
@@ -30,6 +27,36 @@ export type HandleModel = {
   url(): Promise<string | null>;
   value(): Promise<string | null>;
 };
+
+export type FindOptionDefaultModel = SelectorOptionModel & {
+  index?: boolean | number;
+  isFrame?: boolean;
+  retry?: boolean | number;
+};
+
+export type FindAllOptionDefaultModel = SelectorOptionModel & {
+  isFrame?: boolean;
+  retry?: boolean | number;
+};
+
+export type FindOptionModel = OverrideModel<
+  FindOptionDefaultModel,
+  {
+    delay?: number;
+    index?: number;
+    retry?: number;
+    timeout?: number;
+  }
+>;
+
+export type FindAllOptionModel = OverrideModel<
+  FindAllOptionDefaultModel,
+  {
+    delay?: number;
+    retry?: number;
+    timeout?: number;
+  }
+>;
 
 export type SelectorOptionModel = {
   delay?: boolean | number;

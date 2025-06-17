@@ -24,8 +24,6 @@ export type PartialModel<TType> = Partial<NonNullable<TType>>;
 
 export type PartialDeepModel<TType> = PartialDeep<TType>;
 
-export type RequiredModel<TType> = Required<TType>;
-
 export type EmptyObjectModel = Record<string, unknown>;
 
 export type NilModel = false | undefined | null | '';
@@ -64,6 +62,14 @@ export type IntersectionModel<TType extends Array<unknown>> = TType extends [
   ? TValue & IntersectionModel<TResult>
   : object;
 
+export type ReplaceTypeModel<TType, TFrom, TTo> = {
+  [TKey in keyof TType]: TType[TKey] extends TFrom ? TTo : TType[TKey];
+} & {
+  [TKey in keyof TType as undefined extends TType[TKey] ? TKey : never]?: TType[TKey] extends TFrom
+    ? TTo
+    : TType[TKey];
+};
+
 export type UnionModel<TType extends Array<unknown>> = TupleToUnion<TType>;
 
 export type UnionToIntersectionModel<TType> = UnionToIntersection<TType>;
@@ -80,12 +86,12 @@ export type GetModel<TType extends object, TKey extends DeepKeyModel<TType>> = G
 
 export type KeysOfTypeModel<TType, TField> = Exclude<
   {
-    [TKey in keyof RequiredModel<TType>]: RequiredModel<TType>[TKey] extends TField ? TKey : never;
-  }[keyof RequiredModel<TType>],
+    [TKey in keyof Required<TType>]: Required<TType>[TKey] extends TField ? TKey : never;
+  }[keyof Required<TType>],
   undefined
 >;
 
-export type StringKeyModel<TType> = Extract<keyof RequiredModel<TType>, string>;
+export type StringKeyModel<TType> = Extract<keyof Required<TType>, string>;
 
 export type ExtractPropertiesModel<TType, TParams> = ConditionalKeys<TType, TParams>;
 
@@ -96,7 +102,7 @@ export type DeepKeyModel<TType, TDepth extends number = 10> = [TDepth] extends [
   :
       | StringKeyModel<TType>
       | {
-          [TKey in StringKeyModel<TType>]: RequiredModel<TType>[TKey] extends object
-            ? `${TKey}.${DeepKeyModel<RequiredModel<TType>[TKey], DepthArray[TDepth]>}`
+          [TKey in StringKeyModel<TType>]: Required<TType>[TKey] extends object
+            ? `${TKey}.${DeepKeyModel<Required<TType>[TKey], DepthArray[TDepth]>}`
             : `${TKey}`;
         }[StringKeyModel<TType>];

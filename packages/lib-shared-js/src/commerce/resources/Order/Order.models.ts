@@ -8,5 +8,5 @@ export type OrderStatusModel = `${ORDER_STATUS}`;
 export type OrderModel = EntityResourceModel & {
   items?: Array<PartialModel<ProductItemModel>>;
   paymentMethodId?: string;
-  status: OrderStatusModel;
+  status?: OrderStatusModel;
 };

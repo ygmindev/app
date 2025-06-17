@@ -12,6 +12,7 @@ import {
 } from '@lib/config/node/bundle/bundle.models';
 // import { config as lintConfig, lintCommand } from '@lib/config/node/lint/lint';
 import { lintCommand } from '@lib/config/node/lint/lint';
+import { type PartialModel } from '@lib/shared/core/core.models';
 // import {config as pacakgeManagerConfig} from '@lib/config/node/packageManager/packageManager';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
@@ -323,7 +324,7 @@ export const _bundle = ({
         outdir: config.build?.outDir,
         plugins: filterNil([aliases && esbuildPluginResolveAlias(aliases)]),
       },
-      config.optimizeDeps?.esbuildOptions as Partial<BuildOptions>,
+      config.optimizeDeps?.esbuildOptions as PartialModel<BuildOptions>,
     ],
     MERGE_STRATEGY.DEEP_PREPEND,
   );

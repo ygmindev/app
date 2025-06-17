@@ -3,7 +3,6 @@ import {
   type InferModel,
   type PartialModel,
   type PrimitiveModel,
-  type RequiredModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
 
@@ -18,11 +17,11 @@ export type ReducerModel<TType extends object, TParams extends object> = {
 };
 
 export type DefaultStateModel<TType extends object> = {
-  [TKey in keyof RequiredModel<TType>]:
-    | RequiredModel<TType>[TKey]
-    | (RequiredModel<TType>[TKey] extends PrimitiveModel
+  [TKey in keyof Required<TType>]:
+    | Required<TType>[TKey]
+    | (Required<TType>[TKey] extends PrimitiveModel
         ? undefined
-        : RequiredModel<TType>[TKey] extends Array<unknown>
+        : Required<TType>[TKey] extends Array<unknown>
           ? []
           : EmptyObjectModel);
 };
@@ -36,7 +35,7 @@ export type NestedReducerModel<
 };
 
 export type ActionsModel<TType extends object> = {
-  [TKey in keyof RequiredModel<TType>]: (params?: TType[TKey]) => void;
+  [TKey in keyof Required<TType>]: (params?: TType[TKey]) => void;
 };
 
 export type NestedActionsModel<
@@ -63,7 +62,7 @@ export type StateActionsModel<
   SetActionsModel<TType>;
 
 export type InitialStateModel<TType extends object> = {
-  [TKey in keyof RequiredModel<TType>]:
+  [TKey in keyof Required<TType>]:
     | TType[TKey]
     | (TType[TKey] extends PrimitiveModel
         ? undefined
@@ -89,7 +88,7 @@ export type ActionModel<TType extends object, TValue> = (
 ) => void;
 
 export type ArrayActionsModel<TType> = {
-  [TKey in StringKeyModel<TType>]: RequiredModel<TType>[TKey] extends Array<unknown>
+  [TKey in StringKeyModel<TType>]: Required<TType>[TKey] extends Array<unknown>
     ? ActionsModel<
         Record<`${TKey}Add`, InferModel<TType[TKey]>> &
           Record<`${TKey}Remove`, InferModel<TType[TKey]>> &
@@ -102,7 +101,7 @@ export type ArrayActionsModel<TType> = {
 }[StringKeyModel<TType>];
 
 export type NonPrimitiveActionsModel<TType> = {
-  [TKey in StringKeyModel<TType>]: RequiredModel<TType>[TKey] extends PrimitiveModel
+  [TKey in StringKeyModel<TType>]: Required<TType>[TKey] extends PrimitiveModel
     ? unknown
     : ActionsModel<Record<`${TKey}Update`, PartialModel<TType[TKey]>>>;
 }[StringKeyModel<TType>];

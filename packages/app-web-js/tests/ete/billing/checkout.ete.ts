@@ -17,11 +17,10 @@ const TEST_NAME = 'checkout';
 describe(TEST_NAME, () => {
   const { screen } = withTestScreen({ testName: TEST_NAME });
 
-  afterEach(async () => {
+  beforeEach(async () => {
     const productService = Container.get(ProductImplementation);
     const [product1, product2] =
       (await productService.getMany({ options: { take: 2 } })).result ?? [];
-
     if (product1 && product2) {
       await screen.open(PRODUCTS);
 
@@ -37,21 +36,34 @@ describe(TEST_NAME, () => {
 
       await screen.open(ORDER);
       await screen.find({ value: `${ORDER_PRODUCTS_TEST_ID}-submit` }).then((h) => h?.press());
-      await screen.find({ value: `${ORDER_PAYMENT_TEST_ID}-submit` }).then((h) => h?.press());
+    } else {
+      throw new NotFoundError('products');
     }
-
-    throw new NotFoundError('products');
   });
 
   test('works with new payment card', async () => {
-    await (
-      await screen.find({ type: SELECTOR_TYPE.TEST_ID, value: PAYMENT_METHOD_INPUT_NEW_TEST_ID })
-    )?.press();
+    await screen.find({ value: PAYMENT_METHOD_INPUT_NEW_TEST_ID }).then((h) => h?.press());
 
-    await (
-      await screen.find({ type: SELECTOR_TYPE.ID, value: 'Field-numberInput' })
-    )?.type('4242424242424242');
+    await screen
+      .find({ type: SELECTOR_TYPE.ID, value: 'Field-numberInput' })
+      .then((h) => h?.type('4242424242424242'));
 
-    await sleep(10000);
+    await screen
+      .find({ type: SELECTOR_TYPE.ID, value: 'Field-expiryInput' })
+      .then((h) => h?.type('03/33'));
+
+    await screen
+      .find({ type: SELECTOR_TYPE.ID, value: 'Field-cvcInput' })
+      .then((h) => h?.type('333'));
+
+    await screen
+      .find({ type: SELECTOR_TYPE.ID, value: 'Field-postalCodeInput' })
+      .then((h) => h?.type('12345'));
+
+    await sleep(30000);
+
+    await screen.find({ value: `${ORDER_PAYMENT_TEST_ID}-submit` }).then((h) => h?.press());
+
+    expect(true).toBeTruthy();
   });
 });

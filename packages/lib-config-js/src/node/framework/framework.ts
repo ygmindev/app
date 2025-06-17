@@ -5,7 +5,6 @@ import {
   type FrameworkConfigModel,
 } from '@lib/config/node/framework/framework.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import { isLocalDevelopment } from '@lib/shared/environment/utils/isLocalDevelopment/isLocalDevelopment';
 
 export const config = defineConfig<FrameworkConfigModel, _FrameworkConfigModel>({
   config: _framework,
@@ -15,7 +14,10 @@ export const config = defineConfig<FrameworkConfigModel, _FrameworkConfigModel>(
       host: process.env.SERVER_APP_STATIC_HOST,
       port:
         process.env.SERVER_APP_STATIC_PORT ??
-        (isLocalDevelopment ? process.env.APP_PORT : undefined),
+        ((process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
+        !process.env.NODE_RUNTIME
+          ? process.env.APP_PORT
+          : undefined),
     },
 
     faviconDir: `${ASSETS_DIR}/favicon/favicon.svg`,

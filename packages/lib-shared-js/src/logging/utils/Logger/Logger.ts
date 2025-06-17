@@ -1,6 +1,5 @@
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
-import { isLocalDevelopment } from '@lib/shared/environment/utils/isLocalDevelopment/isLocalDevelopment';
 import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger';
 import {
   type _LoggerModel,
@@ -35,5 +34,5 @@ class Logger implements LoggerModel {
 }
 
 export const logger = new Logger({
-  level: isLocalDevelopment ? 'debug' : 'info',
+  level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
 });

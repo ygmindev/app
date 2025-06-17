@@ -1,12 +1,11 @@
 import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type DimensionModel } from '@lib/frontend/core/core.models';
-import { type RequiredModel } from '@lib/shared/core/core.models';
 import { type LaunchOptions } from 'puppeteer';
 
 export type ScreenConfigModel = Pick<FileConfigModel, 'imageExtension'> & {
   delay: number;
 
-  dimension: RequiredModel<DimensionModel>;
+  dimension: Required<DimensionModel>;
 
   dirname?: string;
 
@@ -19,6 +18,8 @@ export type ScreenConfigModel = Pick<FileConfigModel, 'imageExtension'> & {
   navigationTimeout: number;
 
   proxies?: Array<ProxyModel>;
+
+  retry?: number;
 
   rootUri?: string;
 

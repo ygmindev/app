@@ -13,6 +13,10 @@ import {
 } from '@lib/shared/crawling/utils/Screen/_Screen.models';
 import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import {
+  type FindAllOptionDefaultModel,
+  type FindAllOptionModel,
+  type FindOptionDefaultModel,
+  type FindOptionModel,
   type HandleModel,
   type KeyTypeModel,
   type SelectorModel,
@@ -24,7 +28,7 @@ import { type UriModel } from '@lib/shared/route/route.models';
 import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
-import { type Browser, type ElementHandle, type Page } from 'puppeteer';
+import { type Browser, type ElementHandle, type Frame, type Page } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
@@ -78,38 +82,89 @@ export class _Screen implements _ScreenModel {
     });
   }
 
-  find(
+  async find(
     selector: SelectorModel,
     {
       delay = true,
+      isFrame,
+      retry = true,
       timeout = true,
       ...options
-    }: SelectorOptionModel & { index?: number | undefined } = {},
+    }: FindOptionDefaultModel = {},
   ): Promise<HandleModel | null> {
-    return find(
-      selector,
-      {
-        ...options,
-        delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
-        timeout: timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
-      },
-      this.page,
-    );
+    let tries = (retry === true ? this.options.retry : isNumber(retry) ? retry : 0) ?? 0;
+    while (tries >= 0) {
+      const handles = isFrame ? this.page.frames() : [this.page];
+      for (const [i, h] of handles.entries()) {
+        const isLast = i === handles.length - 1;
+        try {
+          const result = await find(
+            selector,
+            {
+              ...options,
+              delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
+              index: options.index === true ? 0 : options.index === false ? -1 : options.index,
+              timeout:
+                timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
+            },
+            h,
+          );
+          if (result) {
+            return result;
+          }
+        } catch (e) {
+          if (isLast && tries === 0 && options.isThrow) {
+            throw e;
+          }
+        } finally {
+          isLast && --tries;
+        }
+      }
+    }
+    return null;
   }
 
-  findAll(
+  async findAll(
     selector: SelectorModel,
-    { delay = true, timeout = true, ...options }: SelectorOptionModel = {},
-  ): Promise<HandleModel[]> {
-    return findAll(
-      selector,
-      {
-        ...options,
-        delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
-        timeout: timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
-      },
-      this.page,
-    );
+    {
+      delay = true,
+      isFrame,
+      retry = true,
+      timeout = true,
+      ...options
+    }: FindAllOptionDefaultModel = {},
+  ): Promise<Array<HandleModel>> {
+    let tries = (retry === true ? this.options.retry : isNumber(retry) ? retry : 0) ?? 0;
+    while (tries >= 0) {
+      const handles = isFrame ? this.page.frames() : [this.page];
+      for (const [i, h] of handles.entries()) {
+        const isLast = i === handles.length - 1;
+        try {
+          const result = await findAll(
+            selector,
+            {
+              ...options,
+              delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
+              timeout:
+                timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
+            },
+            h,
+          );
+          if (result) {
+            return result;
+          }
+        } catch (e) {
+          try {
+            if (isLast && tries === 0 && options.isThrow) {
+              throw e;
+            }
+          } finally {
+            isLast && --tries;
+          }
+        }
+      }
+    }
+    return [];
   }
 
   async close(): Promise<void> {
@@ -210,24 +265,15 @@ const getSelector = (selector: SelectorModel): string => {
 
 const find = async (
   selector: SelectorModel,
-  {
-    delay = 0,
-    index = -1,
-    isThrow = true,
-    timeout = 0,
-  }: Omit<SelectorOptionModel, 'isDelay' | 'timeout'> & {
-    delay?: number;
-    index?: number;
-    timeout?: number;
-  } = {},
-  handle?: ElementHandle | Page,
+  { delay = 0, index = -1, isThrow = true, timeout = 0 }: FindOptionModel = {},
+  handle?: ElementHandle | Frame | Page,
 ): Promise<HandleModel | null> => {
   if (handle) {
     delay && (await sleep(delay));
     const selectorF = getSelector(selector);
     try {
-      logger.info(`finding ${stringify(selector)}...`);
-      timeout && (await handle.waitForSelector(selectorF, { timeout }));
+      logger.debug(`finding ${stringify(selector, { isMinify: true })} with ${selectorF}...`);
+      timeout && (await handle.waitForSelector(selectorF, { timeout, visible: true }));
     } catch (e) {
       if (isThrow) {
         throw e;
@@ -241,7 +287,7 @@ const find = async (
       selected = (await handle.$(selectorF)) as ElementHandle;
     }
     if (selected) {
-      logger.info(`Found ${stringify(selector)}!`);
+      logger.debug(`found ${stringify(selector, { isMinify: true })}!`);
       return new _Handle(selected, { delay, timeout });
     }
   }
@@ -251,26 +297,15 @@ const find = async (
 
 const findAll = async (
   selector: SelectorModel,
-  {
-    delay,
-    isThrow = true,
-    timeout,
-  }: Omit<SelectorOptionModel, 'isDelay' | 'timeout'> & {
-    delay?: number;
-    index?: number;
-    timeout?: number;
-  } = {},
-  handle?: ElementHandle | Page,
+  { delay, isThrow = true, timeout }: FindAllOptionModel = {},
+  handle?: ElementHandle | Frame | Page,
 ): Promise<Array<HandleModel>> => {
   if (handle) {
     delay && (await sleep(delay));
     const selectorF = getSelector(selector);
     try {
-      logger.info(`finding all ${stringify(selector)}...`);
-      timeout &&
-        (await handle.waitForSelector(selectorF, {
-          timeout,
-        }));
+      logger.debug(`finding all ${stringify(selector, { isMinify: true })} with ${selectorF}...`);
+      timeout && (await handle.waitForSelector(selectorF, { timeout, visible: true }));
     } catch (e) {
       if (isThrow) {
         throw e;
@@ -279,11 +314,11 @@ const findAll = async (
     }
     const selected = await handle.$$(selectorF);
     if (selected) {
-      logger.info(`Found all ${stringify(selector)}!`);
+      logger.debug(`found all ${stringify(selector, { isMinify: true })}!`);
       return selected?.map((v) => v && new _Handle(v, { delay, timeout }));
     }
   }
-  isThrow && new NotFoundError(stringify(selector));
+  isThrow && new NotFoundError(stringify(selector, { isMinify: true }));
   return [];
 };
 
@@ -292,6 +327,7 @@ class _Handle implements HandleModel {
 
   protected options!: Omit<SelectorOptionModel, 'isDelay' | 'timeout'> & {
     delay?: number;
+    retry?: number;
     timeout?: number;
   };
 
@@ -299,6 +335,7 @@ class _Handle implements HandleModel {
     handle: ElementHandle,
     options: Omit<SelectorOptionModel, 'isDelay' | 'timeout'> & {
       delay?: number;
+      retry?: number;
       timeout?: number;
     },
   ) {
@@ -308,32 +345,72 @@ class _Handle implements HandleModel {
 
   async find(
     selector: SelectorModel,
-    { delay = true, timeout = true, ...options }: SelectorOptionModel = {},
+    {
+      delay = true,
+      retry = true,
+      timeout = true,
+      ...options
+    }: SelectorOptionModel & { retry?: boolean | number } = {},
   ): Promise<HandleModel | null> {
-    return find(
-      selector,
-      {
-        ...options,
-        delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
-        timeout: timeout === true ? this.options.timeout : isNumber(timeout) ? timeout : 0,
-      },
-      this.handle,
-    );
+    let tries = (retry === true ? this.options.retry : isNumber(retry) ? retry : 0) ?? 0;
+    while (tries >= 0) {
+      try {
+        const result = await find(
+          selector,
+          {
+            ...options,
+            delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
+            timeout: timeout === true ? this.options.timeout : isNumber(timeout) ? timeout : 0,
+          },
+          this.handle,
+        );
+        if (result) {
+          return result;
+        }
+      } catch (e) {
+        if (tries === 0 && options.isThrow) {
+          throw e;
+        }
+      } finally {
+        --tries;
+      }
+    }
+    return null;
   }
 
   async findAll(
     selector: SelectorModel,
-    { delay = true, timeout = true, ...options }: SelectorOptionModel = {},
+    {
+      delay = true,
+      retry = true,
+      timeout = true,
+      ...options
+    }: SelectorOptionModel & { retry?: boolean | number } = {},
   ): Promise<Array<HandleModel>> {
-    return findAll(
-      selector,
-      {
-        ...options,
-        delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
-        timeout: timeout === true ? this.options.timeout : isNumber(timeout) ? timeout : 0,
-      },
-      this.handle,
-    );
+    let tries = (retry === true ? this.options.retry : isNumber(retry) ? retry : 0) ?? 0;
+    while (tries >= 0) {
+      try {
+        const result = await findAll(
+          selector,
+          {
+            ...options,
+            delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
+            timeout: timeout === true ? this.options.timeout : isNumber(timeout) ? timeout : 0,
+          },
+          this.handle,
+        );
+        if (result) {
+          return result;
+        }
+      } catch (e) {
+        if (tries === 0 && options.isThrow) {
+          throw e;
+        }
+      } finally {
+        --tries;
+      }
+    }
+    return [];
   }
 
   async press(): Promise<void> {
@@ -392,7 +469,7 @@ class _Handle implements HandleModel {
 // import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 // import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 // import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
-// import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+// import { NotfoundError } from '@lib/shared/core/errors/NotfoundError/NotfoundError';
 // import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 // import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 // import { stringify } from '@lib/shared/core/utils/stringify/stringify';
@@ -619,11 +696,11 @@ class _Handle implements HandleModel {
 //       selected = (await handle.$(selectorF)) as ElementHandle;
 //     }
 //     if (selected) {
-//       logger.info(`Found ${stringify(selector)}!`);
+//       logger.info(`found ${stringify(selector)}!`);
 //       return new _Handle(selected, { delay, timeout });
 //     }
 //   }
-//   isThrow && new NotFoundError(stringify(selector));
+//   isThrow && new NotfoundError(stringify(selector));
 //   return null;
 // };
 
@@ -652,11 +729,11 @@ class _Handle implements HandleModel {
 //     } catch (e) {}
 //     const selected = await handle.$$(selectorF);
 //     if (selected) {
-//       logger.info(`Found all ${stringify(selector)}!`);
+//       logger.info(`found all ${stringify(selector)}!`);
 //       return selected?.map((v) => v && new _Handle(v, { delay, timeout }));
 //     }
 //   }
-//   isThrow && new NotFoundError(stringify(selector));
+//   isThrow && new NotfoundError(stringify(selector));
 //   return [];
 // };
 

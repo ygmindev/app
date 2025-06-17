@@ -5,7 +5,6 @@ import {
   type InternationalizeConfigModel,
 } from '@lib/config/locale/internationalize/internationalize.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import { isLocalDevelopment } from '@lib/shared/environment/utils/isLocalDevelopment/isLocalDevelopment';
 import { initReactI18next } from 'react-i18next';
 
 export const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
@@ -14,7 +13,7 @@ export const config = defineConfig<InternationalizeConfigModel, _Internationaliz
   params: () => ({
     ...INTERNATIONALIZE_CONFIG,
 
-    isDebug: isLocalDevelopment,
+    isDebug: process.env.NODE_ENV === 'development',
 
     isPreload: false,
 

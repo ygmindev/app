@@ -25,6 +25,6 @@ export class Order extends EntityResource implements OrderModel {
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   paymentMethodId?: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
-  status!: OrderStatusModel;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  status?: OrderStatusModel;
 }

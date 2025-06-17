@@ -2,7 +2,6 @@ import {
   type DepthArray,
   type InferModel,
   type PrimitiveModel,
-  type RequiredModel,
   type StringKeyModel,
   type UnionToIntersectionModel,
 } from '@lib/shared/core/core.models';
@@ -37,17 +36,17 @@ export type GraphqlFragmentFieldModel<TType> = Record<
 export type GraphqlFieldModel<TType, TDepth extends number = 10> = [TDepth] extends [0]
   ? never
   : {
-      [TKey in StringKeyModel<InferModel<TType>>]?: RequiredModel<InferModel<TType>>[TKey] extends
+      [TKey in StringKeyModel<InferModel<TType>>]?: Required<InferModel<TType>>[TKey] extends
         | PrimitiveModel
         | Array<PrimitiveModel>
         ? TKey
-        : RequiredModel<InferModel<TType>>[TKey] extends Array<infer TElement>
+        : Required<InferModel<TType>>[TKey] extends Array<infer TElement>
           ? Record<TKey, Array<GraphqlFieldModel<TElement, DepthArray[TDepth]>>>
-          : RequiredModel<InferModel<TType>>[TKey] extends ConnectionModel<infer TResource>
+          : Required<InferModel<TType>>[TKey] extends ConnectionModel<infer TResource>
             ? Record<TKey, Array<GraphqlFieldModel<TResource, DepthArray[TDepth]>>>
             : Record<
                 TKey,
-                Array<GraphqlFieldModel<RequiredModel<InferModel<TType>>[TKey], DepthArray[TDepth]>>
+                Array<GraphqlFieldModel<Required<InferModel<TType>>[TKey], DepthArray[TDepth]>>
               >;
     }[StringKeyModel<InferModel<TType>>];
 

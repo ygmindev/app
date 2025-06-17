@@ -1,17 +1,27 @@
 import { type ScreenConfigModel } from '@lib/config/screen/screen.models';
 import {
+  type FindAllOptionDefaultModel,
+  type FindOptionDefaultModel,
   type HandleModel,
   type KeyTypeModel,
+  type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/Screen/Screen.models';
 import { type UriModel } from '@lib/shared/route/route.models';
 
 export type _ScreenParamsModel = ScreenConfigModel;
 
-export type _ScreenModel = Pick<HandleModel, 'find' | 'findAll'> & {
+export type _ScreenModel = {
   close(): Promise<void>;
 
   dirname?: string;
+
+  find(selector: SelectorModel, options?: FindOptionDefaultModel): Promise<HandleModel | null>;
+
+  findAll(
+    selector: SelectorModel,
+    options?: FindAllOptionDefaultModel,
+  ): Promise<Array<HandleModel>>;
 
   initialize(): Promise<void>;
 

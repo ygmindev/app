@@ -8,6 +8,7 @@ import {
   type CreateRelatedResourceImplementationParamsModel,
 } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation.models';
 import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
+import { type PartialModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -97,7 +98,7 @@ export const createRelatedResourceImplementation = <
       const form = await getForm(input.form);
       const { result: rootResult } = await getRootImplementation().update({
         id: [input.root],
-        update: { [name]: form } as Partial<NonNullable<EntityResourceDataModel<TRoot>>>,
+        update: { [name]: form } as PartialModel<EntityResourceDataModel<TRoot>>,
       });
       return { result: form, root: rootResult };
     }

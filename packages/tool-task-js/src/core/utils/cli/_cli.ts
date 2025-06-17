@@ -84,7 +84,7 @@ export const _cli = async ({
               type: PROMPT_TYPE.LIST,
             },
           ]);
-          return taskRunner.getTask(name)();
+          return taskRunner.getTask(name)?.();
         },
       ],
     },
