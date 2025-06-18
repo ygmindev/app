@@ -30,12 +30,10 @@ export type HandleModel = {
 
 export type FindOptionDefaultModel = SelectorOptionModel & {
   index?: boolean | number;
-  isFrame?: boolean;
   retry?: boolean | number;
 };
 
 export type FindAllOptionDefaultModel = SelectorOptionModel & {
-  isFrame?: boolean;
   retry?: boolean | number;
 };
 

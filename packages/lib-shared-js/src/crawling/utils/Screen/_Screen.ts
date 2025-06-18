@@ -84,41 +84,31 @@ export class _Screen implements _ScreenModel {
 
   async find(
     selector: SelectorModel,
-    {
-      delay = true,
-      isFrame,
-      retry = true,
-      timeout = true,
-      ...options
-    }: FindOptionDefaultModel = {},
+    { delay = true, retry = true, timeout = true, ...options }: FindOptionDefaultModel = {},
   ): Promise<HandleModel | null> {
     let tries = (retry === true ? this.options.retry : isNumber(retry) ? retry : 0) ?? 0;
     while (tries >= 0) {
-      const handles = isFrame ? this.page.frames() : [this.page];
-      for (const [i, h] of handles.entries()) {
-        const isLast = i === handles.length - 1;
-        try {
-          const result = await find(
-            selector,
-            {
-              ...options,
-              delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
-              index: options.index === true ? 0 : options.index === false ? -1 : options.index,
-              timeout:
-                timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
-            },
-            h,
-          );
-          if (result) {
-            return result;
-          }
-        } catch (e) {
-          if (isLast && tries === 0 && options.isThrow) {
-            throw e;
-          }
-        } finally {
-          isLast && --tries;
+      try {
+        const result = await find(
+          selector,
+          {
+            ...options,
+            delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
+            index: options.index === true ? 0 : options.index === false ? -1 : options.index,
+            timeout:
+              timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
+          },
+          this.page,
+        );
+        if (result) {
+          return result;
         }
+      } catch (e) {
+        if (tries === 0 && options.isThrow) {
+          throw e;
+        }
+      } finally {
+        --tries;
       }
     }
     return null;
@@ -126,41 +116,31 @@ export class _Screen implements _ScreenModel {
 
   async findAll(
     selector: SelectorModel,
-    {
-      delay = true,
-      isFrame,
-      retry = true,
-      timeout = true,
-      ...options
-    }: FindAllOptionDefaultModel = {},
+    { delay = true, retry = true, timeout = true, ...options }: FindAllOptionDefaultModel = {},
   ): Promise<Array<HandleModel>> {
     let tries = (retry === true ? this.options.retry : isNumber(retry) ? retry : 0) ?? 0;
     while (tries >= 0) {
-      const handles = isFrame ? this.page.frames() : [this.page];
-      for (const [i, h] of handles.entries()) {
-        const isLast = i === handles.length - 1;
+      try {
+        const result = await findAll(
+          selector,
+          {
+            ...options,
+            delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
+            timeout:
+              timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
+          },
+          this.page,
+        );
+        if (result) {
+          return result;
+        }
+      } catch (e) {
         try {
-          const result = await findAll(
-            selector,
-            {
-              ...options,
-              delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
-              timeout:
-                timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
-            },
-            h,
-          );
-          if (result) {
-            return result;
+          if (tries === 0 && options.isThrow) {
+            throw e;
           }
-        } catch (e) {
-          try {
-            if (isLast && tries === 0 && options.isThrow) {
-              throw e;
-            }
-          } finally {
-            isLast && --tries;
-          }
+        } finally {
+          --tries;
         }
       }
     }
