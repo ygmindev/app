@@ -24,6 +24,7 @@ import { type DataBoundaryRefModel } from '@lib/frontend/data/components/DataBou
 import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
@@ -52,6 +53,7 @@ export const PaymentMethodInput: RLFCModel<
   // const { userUpdate } = useSignInResource();
   const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
   const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
+  const [paymentMethods, paymentMethodsSet] = useStore('billing.paymentMethods');
   const { getAll } = usePaymentMethodResource();
   const dataRef = useRef<DataBoundaryRefModel<Array<Partial<PaymentMethodModel>>>>(null);
   const inputRef = useRef<NewPaymentMethodInputRefModel>(null);
@@ -63,7 +65,7 @@ export const PaymentMethodInput: RLFCModel<
   });
 
   const handleQuery = async (): Promise<Array<Partial<PaymentMethodModel>>> => {
-    let output = await getAll();
+    let output = await getAll();f
     if (!valueControlled) {
       const primary =
         output?.find((v) => v._id && v._id === currentUser?.paymentMethodPrimary?._id) ??
@@ -175,9 +177,9 @@ export const PaymentMethodInput: RLFCModel<
                     onPress={async () => {
                       switch (item.type) {
                         case PAYMENT_METHOD_TYPE.BANK:
-                          return bankRemove({ filter: [{ field: '_id', value: item.id }] });
+                          return bankRemove({ id: [item.id] });
                         case PAYMENT_METHOD_TYPE.CARD:
-                          return cardRemove({ filter: [{ field: '_id', value: item.id }] });
+                          return cardRemove({ id: [item.id] });
                       }
                       void dataRef.current?.reset?.();
                     }}
