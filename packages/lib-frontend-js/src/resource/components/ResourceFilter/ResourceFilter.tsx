@@ -5,7 +5,6 @@ import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Droppable } from '@lib/frontend/core/components/Droppable/Droppable';
 import { type DroppableRefModel } from '@lib/frontend/core/components/Droppable/Droppable.models';
 import { Text } from '@lib/frontend/core/components/Text/Text';
-import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
@@ -113,13 +112,7 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
               <Wrapper
                 isAlign
                 isRow>
-                {values && (
-                  <Text
-                    casing={TEXT_CASING.NONE}
-                    isBold>
-                    {values.map((v) => v.value).join(', ')}
-                  </Text>
-                )}
+                {values && <Text isBold>{values.map((v) => v.value).join(', ')}</Text>}
               </Wrapper>
             </Wrapper>
           }

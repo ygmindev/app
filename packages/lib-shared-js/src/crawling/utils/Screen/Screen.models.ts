@@ -65,8 +65,11 @@ export type SelectorOptionModel = {
 export type SelectorModel = {
   value: string;
 } & (
-  | { key?: never; type?: SELECTOR_TYPE.ID | SELECTOR_TYPE.TEXT | SELECTOR_TYPE.TEST_ID }
-  | { key: string; type?: SELECTOR_TYPE.DATA }
+  | {
+      key?: never;
+      type?: SELECTOR_TYPE.ID | SELECTOR_TYPE.TEXT | SELECTOR_TYPE.TEST_ID;
+    }
+  | { key: string; type?: SELECTOR_TYPE.DATA | SELECTOR_TYPE.FRAME }
 );
 
 export type KeyTypeModel = `${KEY_TYPE}`;

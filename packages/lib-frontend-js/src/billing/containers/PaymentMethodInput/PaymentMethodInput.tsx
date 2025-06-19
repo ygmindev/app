@@ -37,6 +37,7 @@ import {
   type PaymentMethodModel,
   type PaymentMethodTypeModel,
 } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 import { useRef } from 'react';
@@ -86,8 +87,6 @@ export const PaymentMethodInput: RLFCModel<
     }
   };
 
-  console.warn(currentUser);
-
   return (
     <Wrapper
       {...wrapperProps}
@@ -110,7 +109,13 @@ export const PaymentMethodInput: RLFCModel<
           onComplete={() => {
             void dataRef.current?.reset?.();
           }}
-          onSubmit={async () => (await (ref ?? inputRef)?.current?.submit()) || null}
+          onSubmit={async () => {
+            const result = (await (ref ?? inputRef)?.current?.submit()) || null;
+            if (!result) {
+              throw new NotFoundError(PAYMENT_METHOD_RESOURCE_NAME);
+            }
+            return result;
+          }}
           p
           successMessage={t('billing:paymentMethodSuccess')}
           testID={PAYMENT_METHOD_INPUT_NEW_TEST_ID}

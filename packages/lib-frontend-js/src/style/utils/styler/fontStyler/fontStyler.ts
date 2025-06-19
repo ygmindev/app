@@ -13,7 +13,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
     align,
     family = FONT_FAMILY.MAIN,
     fontSize = THEME_SIZE.MEDIUM,
-    fontStyle = FONT_STYLE.BODY,
+    fontStyle,
     isBold,
     isLineHeight,
     isUnderline,
@@ -22,7 +22,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
 ) => ({
   fontFamily:
     fontStyle === FONT_STYLE.HEADLINE
-      ? theme.font.fontFamily.stylish
+      ? theme.font.fontFamily[FONT_FAMILY.STYLISH]
       : theme.font.fontFamily[family],
 
   fontSize: isNumber(fontSize)
@@ -40,7 +40,7 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
       ? theme.font.weight.bold
       : undefined,
 
-  lineHeight: isLineHeight && fontStyle === FONT_STYLE.BODY ? theme.font.lineHeight : undefined,
+  lineHeight: isLineHeight && !fontStyle ? theme.font.lineHeight : undefined,
 
   textAlign: align,
 

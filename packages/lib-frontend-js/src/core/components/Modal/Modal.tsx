@@ -137,7 +137,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
                       isRow
                       pHorizontal
                       pVertical={THEME_SIZE.SMALL}
-                      testID={`${props.testID}-title`}>
+                      testID={props.testID ? `${props.testID}-title` : undefined}>
                       {title && (
                         <Wrapper flex>
                           {isAsyncText(title) ? (

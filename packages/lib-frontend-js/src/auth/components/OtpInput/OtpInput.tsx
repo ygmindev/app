@@ -65,7 +65,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
           zIndex={1}>
           <TextInput
             defaultValue=""
-            isNoClear
+            isClearable={false}
             keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
             maxLength={otpLength}
             onChange={(value) => {
@@ -104,7 +104,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
                   : undefined
               }
               isCenter
-              isNoClear
+              isClearable={false}
               key={id}
               size={THEME_SIZE.MEDIUM}
               value={(valueControlled && valueControlled[i]) ?? ''}

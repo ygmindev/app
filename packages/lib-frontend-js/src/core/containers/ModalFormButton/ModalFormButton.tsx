@@ -35,43 +35,42 @@ export const ModalFormButton = <TType, TResult = void>({
   ModalFormButtonPropsModel<TType, TResult>
 >): ReactElement<
   RLFCPropsModel<ModalFormButtonRefModel<TType>, ModalFormButtonPropsModel<TType, TResult>>
-> => {
-  return (
-    <ModalButton
-      {...props}
-      element={({ onClose }) => (
-        <FormContainer
-          bottomElement={bottomElement}
-          cancelLabel={cancelLabel}
-          errorContextGet={errorContextGet}
-          fields={fields}
-          initialValues={initialValues}
-          isButton={isButton}
-          isFullHeight={isFullHeight}
-          isValidateChanged={isValidateChanged}
-          onCancel={() => {
-            onCancel?.();
-            onClose();
-          }}
-          onComplete={() => {
-            onComplete?.();
-            onClose();
-          }}
-          onError={onError}
-          onSubmit={onSubmit}
-          onSuccess={onSuccess}
-          onValidate={onValidate}
-          redirect={redirect}
-          ref={ref}
-          submitLabel={submitLabel}
-          successMessage={successMessage}
-          topElement={topElement}
-          validators={validators}
-        />
-      )}
-    />
-  );
-};
+> => (
+  <ModalButton
+    {...props}
+    element={({ onClose }) => (
+      <FormContainer
+        bottomElement={bottomElement}
+        cancelLabel={cancelLabel}
+        errorContextGet={errorContextGet}
+        fields={fields}
+        initialValues={initialValues}
+        isButton={isButton}
+        isFullHeight={isFullHeight}
+        isValidateChanged={isValidateChanged}
+        onCancel={() => {
+          onCancel?.();
+          onClose();
+        }}
+        onComplete={onComplete}
+        onError={onError}
+        onSubmit={onSubmit}
+        onSuccess={async () => {
+          await onSuccess?.();
+          onClose();
+        }}
+        onValidate={onValidate}
+        redirect={redirect}
+        ref={ref}
+        submitLabel={submitLabel}
+        successMessage={successMessage}
+        testID={props.testID ? `${props.testID}-form` : undefined}
+        topElement={topElement}
+        validators={validators}
+      />
+    )}
+  />
+);
 
 process.env.APP_IS_DEBUG &&
   ((ModalFormButton as ComponentType).displayName = variableName({ ModalFormButton }));

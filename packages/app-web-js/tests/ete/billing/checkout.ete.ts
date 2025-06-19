@@ -9,6 +9,7 @@ import { BACKDROP_TEST_ID } from '@lib/frontend/core/components/Modal/Modal.cons
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 
 const TEST_NAME = 'checkout';
@@ -43,23 +44,39 @@ describe(TEST_NAME, () => {
   test('works with new payment card', async () => {
     await screen.find({ value: PAYMENT_METHOD_INPUT_NEW_TEST_ID }).then((h) => h?.press());
 
-    await screen
-      .find({ type: SELECTOR_TYPE.ID, value: 'Field-numberInput' })
-      .then((h) => h?.type('4242424242424242'));
+    const frame = await screen.find({
+      key: 'title',
+      type: SELECTOR_TYPE.FRAME,
+      value: 'Secure payment input frame',
+    });
 
-    await screen
-      .find({ type: SELECTOR_TYPE.ID, value: 'Field-expiryInput' })
-      .then((h) => h?.type('03/33'));
+    if (frame) {
+      await frame
+        .find({ type: SELECTOR_TYPE.ID, value: 'Field-numberInput' })
+        .then((h) => h?.type('4242424242424242'));
 
-    await screen
-      .find({ type: SELECTOR_TYPE.ID, value: 'Field-cvcInput' })
-      .then((h) => h?.type('333'));
+      await frame
+        .find({ type: SELECTOR_TYPE.ID, value: 'Field-expiryInput' })
+        .then((h) => h?.type('03/33'));
 
-    await screen
-      .find({ type: SELECTOR_TYPE.ID, value: 'Field-postalCodeInput' })
-      .then((h) => h?.type('12345'));
+      await frame
+        .find({ type: SELECTOR_TYPE.ID, value: 'Field-cvcInput' })
+        .then((h) => h?.type('333'));
 
-    await screen.find({ value: `${ORDER_PAYMENT_TEST_ID}-submit` }).then((h) => h?.press());
+      await frame
+        .find({ type: SELECTOR_TYPE.ID, value: 'Field-postalCodeInput' })
+        .then((h) => h?.type('12345'));
+
+      await screen
+        .find({ value: `${PAYMENT_METHOD_INPUT_NEW_TEST_ID}-form-submit` })
+        .then((h) => h?.press());
+
+      await screen.find({ value: `${ORDER_PAYMENT_TEST_ID}-submit` }).then((h) => h?.press());
+
+      await sleep(30000);
+    } else {
+      throw new NotFoundError('stripe frame');
+    }
 
     expect(true).toBeTruthy();
   });

@@ -42,7 +42,7 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = ({
           <TextInput
             elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
             icon="calendar"
-            isNoClear
+            isClearable={false}
             label={label}
             value={dateTimeFormat(valueControlled)}
           />

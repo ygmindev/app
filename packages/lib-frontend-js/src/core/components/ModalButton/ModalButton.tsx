@@ -33,7 +33,7 @@ export const ModalButton: RLFCModel<ModalButtonRefModel, ModalButtonPropsModel> 
       <Button
         {...(props as Omit<RLFCPropsModel<ButtonPropsModel>, 'ref'>)}
         onPress={async () => {
-          onPress && (await onPress());
+          await onPress?.();
           handleToggle(!isOpen);
         }}
       />

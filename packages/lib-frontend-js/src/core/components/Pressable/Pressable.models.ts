@@ -6,7 +6,6 @@ import {
   type WrapperRefModel,
 } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type ThemeColorModel } from '@lib/frontend/style/style.models';
-import { type FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
 import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
 
 export type PressablePropsModel = TestIdPropsModel &
@@ -19,7 +18,6 @@ export type PressablePropsModel = TestIdPropsModel &
   > & {
     confirmColor?: ThemeColorModel;
     confirmMessage?: AsyncTextModel;
-    fontAlign?: FontAlignModel;
     tooltip?: AsyncTextModel;
   };
 

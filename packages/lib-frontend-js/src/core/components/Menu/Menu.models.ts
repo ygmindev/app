@@ -1,3 +1,4 @@
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import {
   type DropdownPropsModel,
   type DropdownRefModel,
@@ -6,7 +7,6 @@ import { type PressablePropsModel } from '@lib/frontend/core/components/Pressabl
 import { type VirtualizedListRefModel } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList.models';
 import { type TranslatableOptionModel } from '@lib/frontend/core/core.models';
 import { type InputPropsModel } from '@lib/frontend/data/data.models';
-import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type ReactElement } from 'react';
 
 export type MenuRefModel = DropdownRefModel & VirtualizedListRefModel;

@@ -4,6 +4,7 @@ import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathnam
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { slug } from '@lib/shared/core/utils/slug/slug';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
@@ -238,6 +239,8 @@ const getSelector = (selector: SelectorModel): string => {
       return `#${selector.value}`;
     case SELECTOR_TYPE.TEXT:
       return `::-p-text(${selector.value})`;
+    case SELECTOR_TYPE.FRAME:
+      return `iframe[${selector.key ?? 'name'}="${selector.value}"]`;
     default:
       return selector.value;
   }
@@ -267,6 +270,8 @@ const find = async (
       selected = (await handle.$(selectorF)) as ElementHandle;
     }
     if (selected) {
+      selector.type === SELECTOR_TYPE.FRAME &&
+        (selected = (await selected.contentFrame()) as unknown as ElementHandle<Element>);
       logger.debug(`found ${stringify(selector, { isMinify: true })}!`);
       return new _Handle(selected, { delay, timeout });
     }
@@ -295,7 +300,15 @@ const findAll = async (
     const selected = await handle.$$(selectorF);
     if (selected) {
       logger.debug(`found all ${stringify(selector, { isMinify: true })}!`);
-      return selected?.map((v) => v && new _Handle(v, { delay, timeout }));
+      return mapSequence(
+        selected.map((v) => async () => {
+          let vF = v;
+          vF &&
+            selector.type === SELECTOR_TYPE.FRAME &&
+            (vF = (await vF.contentFrame()) as unknown as ElementHandle<Element>);
+          return vF && new _Handle(vF, { delay, timeout });
+        }),
+      );
     }
   }
   isThrow && new NotFoundError(stringify(selector, { isMinify: true }));

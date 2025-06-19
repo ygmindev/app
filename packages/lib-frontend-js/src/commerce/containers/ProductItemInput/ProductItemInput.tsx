@@ -50,8 +50,10 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
                 field: ({ value }) => (
                   <NumberInput
                     defaultValue={value as number}
-                    isNoClear
+                    isClearable={false}
+                    isTypable={false}
                     min={1}
+                    removeIcon={value === 1 ? 'trash' : undefined}
                     size={THEME_SIZE.SMALL}
                     value={value as number}
                   />

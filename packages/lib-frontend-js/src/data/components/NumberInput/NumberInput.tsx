@@ -1,7 +1,8 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import {
   type NumberInputPropsModel,
   type NumberInputRefModel,
@@ -14,11 +15,16 @@ import toNumber from 'lodash/toNumber';
 import toString from 'lodash/toString';
 
 export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> = ({
+  addIcon = 'add',
   defaultValue,
+  elementState,
+  isTypable = true,
   keyboard,
   max,
   min,
   onChange,
+  onElementStateChange,
+  removeIcon = 'remove',
   value,
   ...props
 }) => {
@@ -30,6 +36,11 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
   const { valueControlled: valueString, valueControlledSet: valueStringSet } = useValueControlled({
     defaultValue: defaultValue ? `${defaultValue}` : undefined,
   });
+  const { elementStateControlled, elementStateControlledSet, isBlocked } =
+    useElementStateControlled({
+      elementState,
+      onElementStateChange,
+    });
 
   const handleChange = (v?: number | string): void => {
     let valueString = v ? toString(v) : undefined;
@@ -50,24 +61,29 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
   return (
     <TextInput
       {...props}
+      elementState={elementStateControlled}
+      isCenter
+      isRightElementFixed={false}
       keyboard={keyboard ?? TEXT_INPUT_KEYBOARD.NUMBER}
-      onChange={handleChange}
+      leftElement={
+        <Button
+          elementState={isBlocked ? ELEMENT_STATE.DISABLED : undefined}
+          icon={removeIcon}
+          onPress={() => handleChange((valueControlled ?? 0) - 1)}
+          size={THEME_SIZE.SMALL}
+          type={BUTTON_TYPE.INVISIBLE}
+        />
+      }
+      onChange={isTypable ? handleChange : undefined}
+      onElementStateChange={elementStateControlledSet}
       rightElement={
-        <Wrapper isRow>
-          <Button
-            icon="remove"
-            onPress={() => handleChange((valueControlled ?? 0) - 1)}
-            size={THEME_SIZE.SMALL}
-            type={BUTTON_TYPE.INVISIBLE}
-          />
-
-          <Button
-            icon="add"
-            onPress={() => handleChange((valueControlled ?? 0) + 1)}
-            size={THEME_SIZE.SMALL}
-            type={BUTTON_TYPE.INVISIBLE}
-          />
-        </Wrapper>
+        <Button
+          elementState={isBlocked ? ELEMENT_STATE.DISABLED : undefined}
+          icon={addIcon}
+          onPress={() => handleChange((valueControlled ?? 0) + 1)}
+          size={THEME_SIZE.SMALL}
+          type={BUTTON_TYPE.INVISIBLE}
+        />
       }
       value={valueString}
     />

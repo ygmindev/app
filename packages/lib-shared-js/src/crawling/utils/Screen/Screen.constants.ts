@@ -6,6 +6,7 @@ export enum KEY_TYPE {
 
 export enum SELECTOR_TYPE {
   DATA = 'data',
+  FRAME = 'frame',
   ID = 'id',
   TEST_ID = 'testID',
   TEXT = 'text',

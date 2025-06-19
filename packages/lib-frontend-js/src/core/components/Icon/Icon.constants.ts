@@ -110,7 +110,7 @@ export const IONIC_ICONS = {
   time: 'time-outline',
   times: 'close-outline',
   timesCircle: 'close-circle-outline',
-  trash: 'trash-bin-outline',
+  trash: 'trash-outline',
   undo: 'arrow-undo-outline',
   upload: 'cloud-upload-outline',
   wallet: 'wallet-outline',

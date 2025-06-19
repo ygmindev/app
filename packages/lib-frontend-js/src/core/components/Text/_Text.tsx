@@ -30,12 +30,7 @@ export const _textParams: ComposeComponentParamsModel<_TextPropsModel, TextProps
   {
     Component: Text,
 
-    getProps: ({
-      casing = TEXT_CASING.CAPITALIZE,
-      children,
-      isEllipsis,
-      onPress,
-    }: _TextPropsModel): TextProps => ({
+    getProps: ({ casing, children, isEllipsis, onPress }) => ({
       children: isArray(children) ? children : children ? capitalize(children, casing) : undefined,
       ellipsizeMode: isEllipsis ? 'tail' : undefined,
       numberOfLines: isEllipsis ? 1 : undefined,

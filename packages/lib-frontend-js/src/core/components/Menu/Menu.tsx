@@ -113,7 +113,7 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
         );
       }}
       s={THEME_SIZE.SMALL}
-      testID={`${props.testID}-body`}
+      testID={props.testID ? `${props.testID}-body` : undefined}
     />
   );
   return isMobile ? (
@@ -145,7 +145,7 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
           border={DIRECTION.BOTTOM}
           mBottom={THEME_SIZE.SMALL}
           p
-          testID={`${props.testID}-title`}>
+          testID={props.testID ? `${props.testID}-title` : undefined}>
           <AsyncText align={FONT_ALIGN.CENTER}>{title}</AsyncText>
         </Wrapper>
       )}

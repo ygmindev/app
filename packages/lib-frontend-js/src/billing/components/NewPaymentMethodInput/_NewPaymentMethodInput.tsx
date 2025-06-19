@@ -10,7 +10,7 @@ import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
-import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
+import { ExternalError } from '@lib/shared/core/errors/ExternalError/ExternalError';
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import {
   type PaymentIntent,
@@ -99,11 +99,12 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
             );
           }
           default:
-            throw new InvalidTypeError(type, 'payment method type');
+            throw new ExternalError('stripe payment type');
         }
       })();
       return form && (await onCreate?.(form));
     }
+    throw new ExternalError('stripe payments failed status');
   };
 
   useImperativeHandle(ref, () => ({
@@ -111,7 +112,7 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
       if (isReady) {
         const { error: submitError } = await elements.submit();
         if (submitError) {
-          throw new Error(submitError.message);
+          throw new ExternalError(submitError.message ?? 'stripe');
         }
         if (products) {
           const { error, paymentIntent } = await stripeClient.confirmPayment({
@@ -121,7 +122,7 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
             redirect: 'if_required',
           });
           if (error) {
-            throw new Error(error.message);
+            throw new ExternalError(error.message ?? 'stripe');
           }
           return paymentIntent && (await handleSetup(paymentIntent));
         } else {
@@ -132,7 +133,7 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
             redirect: 'if_required',
           });
           if (error) {
-            throw new Error(error.message);
+            throw new ExternalError(error.message ?? 'stripe');
           }
           return setupIntent && (await handleSetup(setupIntent));
         }

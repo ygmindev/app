@@ -9,7 +9,6 @@ import { useContainer } from '@lib/frontend/core/hooks/useContainer/useContainer
 import { StepForm } from '@lib/frontend/data/components/StepForm/StepForm';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { AUTH, SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { type SignInInputModel } from '@lib/shared/auth/resources/SignIn/SignInInput/SignInInput.models';
@@ -73,7 +72,7 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
               {t('core:welcome', { value: process.env.APP_NAME })}
             </Text>
 
-            <Text fontSize={THEME_SIZE.LARGE}>
+            <Text fontStyle={FONT_STYLE.SUBTITLE}>
               {`${t('auth:signIn')} ${t('core:or')} ${t('auth:register')}`}
             </Text>
           </Wrapper>

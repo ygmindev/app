@@ -13,7 +13,7 @@ export const props: LibraryPropsModel<TextInputPropsModel> = {
   minWidth: 200,
   variants: [
     { props: { label: 'label' } },
-    { props: { isNoClear: true } },
+    { props: { isClearable: false } },
     { props: { value: 'value' } },
     { props: { leftElement: <Icon icon="personCircle" /> } },
     { props: { rightElement: <Icon icon="personCircle" /> } },

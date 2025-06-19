@@ -25,10 +25,7 @@ export const props: LibraryPropsModel<TextPropsModel> = {
     ...cartesianObject({ casing: Object.values(TEXT_CASING) }).map((props) => ({ props })),
     { props: { isBold: true } },
     { props: { children: 'ellipsis text that is too long', isEllipsis: true } },
-    { props: { fontStyle: FONT_STYLE.HEADLINE } },
-    { props: { fontStyle: FONT_STYLE.TITLE } },
-    { props: { fontStyle: FONT_STYLE.SUBTITLE } },
-    { props: { fontStyle: FONT_STYLE.BODY } },
+    ...cartesianObject({ fontStyle: Object.values(FONT_STYLE) }).map((props) => ({ props })),
     { props: { isLineHeight: true } },
   ],
 };

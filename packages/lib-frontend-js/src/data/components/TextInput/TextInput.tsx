@@ -5,6 +5,7 @@ import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { TooltipIcon } from '@lib/frontend/core/components/TooltipIcon/TooltipIcon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
@@ -45,7 +46,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   height,
   icon,
   isCenter,
-  isNoClear,
+  isClearable = true,
+  isRightElementFixed = true,
   isTransparent,
   keyboard, // TODO: keyboard type from data type
   label,
@@ -66,7 +68,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   testID,
   value,
   width,
-
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -125,12 +126,11 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       bottom={0}
       isAlign
       isRow
-      pRight={THEME_SIZE.SMALL}
-      position={SHAPE_POSITION.ABSOLUTE}
+      position={isRightElementFixed ? SHAPE_POSITION.ABSOLUTE : undefined}
       right={0}
       top={0}
       zIndex>
-      {!isNoClear && isActive && (
+      {isClearable && isActive && (
         <Appearable
           elementState={elementStateControlled}
           isActive={(valueControlled?.length ?? 0) > 0}
@@ -200,7 +200,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       isTransparent={isTransparent}
       onElementStateChange={elementStateControlledSet}
       pLeft={!isCenter}
-      pRight={isCenter ? THEME_SIZE.SMALL : undefined}
       position={SHAPE_POSITION.RELATIVE}
       ref={focusableRef}
       width={width}>
@@ -228,7 +227,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
           onKey={(key) => {
             switch (key) {
               case TEXT_INPUT_KEY.ESCAPE: {
-                !isNoClear && handleChange('');
+                isClearable && handleChange('');
                 break;
               }
             }
@@ -268,6 +267,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
         {label && (
           <AsyncText
             animation={textAnimation}
+            casing={TEXT_CASING.CAPITALIZE}
             elementState={elementStateControlled}>
             {label}
           </AsyncText>

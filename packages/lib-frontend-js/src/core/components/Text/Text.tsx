@@ -1,5 +1,6 @@
 import { _Text } from '@lib/frontend/core/components/Text/_Text';
 import { type _TextPropsModel } from '@lib/frontend/core/components/Text/_Text.models';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { type TextPropsModel } from '@lib/frontend/core/components/Text/Text.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
@@ -13,6 +14,11 @@ export const textParams: ComposeComponentParamsModel<
   TextStyleModel
 > = {
   Component: _Text,
+
+  getProps: ({ casing, ...props }) => ({
+    ...props,
+    casing: casing ?? (props.fontStyle ? TEXT_CASING.CAPITALIZE : undefined),
+  }),
 
   stylers: [textStyler],
 };

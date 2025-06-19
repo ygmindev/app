@@ -9,6 +9,7 @@ import {
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
@@ -36,6 +37,7 @@ import { useMemo } from 'react';
 
 export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
   align = FLEX_ALIGN.CENTER,
+  casing = TEXT_CASING.CAPITALIZE,
   children,
   color = THEME_COLOR.PRIMARY,
   description,
@@ -141,6 +143,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
   let childrenF = isAsyncText(children) ? (
     <AsyncText
       align={fontAlign}
+      casing={casing}
       color={color}
       colorRole={childColorRole}
       fontSize={THEME_SIZE.SMALL}
