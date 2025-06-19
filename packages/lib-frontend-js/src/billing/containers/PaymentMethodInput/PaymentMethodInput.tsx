@@ -65,7 +65,7 @@ export const PaymentMethodInput: RLFCModel<
   });
 
   const handleQuery = async (): Promise<Array<Partial<PaymentMethodModel>>> => {
-    let output = await getAll();f
+    let output = await getAll();
     if (!valueControlled) {
       const primary =
         output?.find((v) => v._id && v._id === currentUser?.paymentMethodPrimary?._id) ??
