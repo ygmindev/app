@@ -51,7 +51,7 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
               {
                 field: ({ index, value }) => (
                   <NumberInput
-                    defaultValue={value as number}
+                    defaultValue={(value as number) ?? 1}
                     isClearable={false}
                     isTypable={false}
                     onChange={(v) =>
