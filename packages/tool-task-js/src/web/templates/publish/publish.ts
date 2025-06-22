@@ -8,7 +8,7 @@ export const publish: TaskParamsModel<PublishParamsModel> = {
 
   name: 'publish',
 
-  onBefore: [({ options, target }) => !options?.noBuild && `${target}-build`],
+  onBefore: [({ options, target }) => !options?.skipBuild && `${target}-build`],
 
   task: [() => publishConfig.params().publishCommand()],
 };

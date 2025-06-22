@@ -1,3 +1,3 @@
 export type PublishParamsModel = {
-  noBuild?: boolean;
+  skipBuild?: boolean;
 };

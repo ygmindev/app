@@ -1,3 +1,3 @@
 export type ServeParamsModel = {
-  noBuild?: boolean;
+  skipBuild?: boolean;
 };
