@@ -9,7 +9,7 @@ export const _preparePrerender =
   async () =>
     mapSequence(
       pages.map(({ getContext, pathname }) => async () => ({
-        pageContext: getContext ? await getContext() : {},
+        pageContext: (await getContext?.()) || {},
         url: pathname,
       })),
     );

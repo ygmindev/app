@@ -30,7 +30,7 @@ export const _framework = ({
 
     route: '/*',
 
-    ssr: false,
+    ssr: true,
 
     stream: true,
   };
