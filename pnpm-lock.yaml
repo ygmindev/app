@@ -1961,6 +1961,12 @@ importers:
       babel-plugin-react-native-web:
         specifier: ^0.20.0
         version: 0.20.0
+      babel-plugin-react-remove-prop-types:
+        specifier: ^3.0.0
+        version: 3.0.0
+      babel-plugin-react-remove-properties:
+        specifier: ^0.3.0
+        version: 0.3.0
       babel-plugin-transform-react-remove-prop-types:
         specifier: ^0.4.24
         version: 0.4.24
@@ -9021,6 +9027,13 @@ packages:
 
   babel-plugin-react-native-web@0.20.0:
     resolution: {integrity: sha512-n16dES+EBXCtZ0juCrOahIb2weO2ZD11DBEjj/VABclItWgajck1sX63+SyHJrGlbTPcW+d1Evh0SK1OmoUEDw==}
+
+  babel-plugin-react-remove-prop-types@3.0.0:
+    resolution: {integrity: sha512-0PNN4NT1b+yyJUZ/C4vR7+d6TM4w3T5n7XP1s5+D6UAbTOkXcCz1aDN1UGtSksZvIz2GuzfWzJV2XPtN4yk3fw==}
+    deprecated: Use babel-plugin-transform-react-remove-prop-types instead
+
+  babel-plugin-react-remove-properties@0.3.0:
+    resolution: {integrity: sha512-vbxegtXGyVcUkCvayLzftU95vuvpYFV85pRpeMpohMHeEY46Qe0VNWfkVVcCbaZ12CXHzDFOj0esumATcW83ng==}
 
   babel-plugin-syntax-hermes-parser@0.25.1:
     resolution: {integrity: sha512-IVNpGzboFLfXZUAwkLFcI/bnqVbwky0jP3eBno4HKtqvQJAHBLdgxiG6lQ4to0+Q/YCN3PO0od5NZwIKyY4REQ==}
@@ -26988,6 +27001,10 @@ snapshots:
   babel-plugin-react-native-web@0.19.13: {}
 
   babel-plugin-react-native-web@0.20.0: {}
+
+  babel-plugin-react-remove-prop-types@3.0.0: {}
+
+  babel-plugin-react-remove-properties@0.3.0: {}
 
   babel-plugin-syntax-hermes-parser@0.25.1:
     dependencies:

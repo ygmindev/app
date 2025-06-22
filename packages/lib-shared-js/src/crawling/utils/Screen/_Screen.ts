@@ -198,7 +198,7 @@ export class _Screen implements _ScreenModel {
   }: {
     dirname?: string;
     filename?: string | number;
-  }): Promise<() => Promise<void>> {
+  } = {}): Promise<() => Promise<void>> {
     const { dimension, snapshotPath, videoExtension } = this.options;
     const dirnameF = dirname ?? this.options.dirname;
     const pathname = snapshotPath && joinPaths(filterNil([snapshotPath, dirnameF]));
@@ -234,7 +234,7 @@ export class _Screen implements _ScreenModel {
   }: {
     dirname?: string;
     filename?: string | number;
-  }): Promise<Uint8Array | null> {
+  } = {}): Promise<Uint8Array | null> {
     const { delay, dimension, imageExtension, snapshotPath } = this.options;
     await sleep(delay);
     const dirnameF = dirname ?? this.options.dirname;
