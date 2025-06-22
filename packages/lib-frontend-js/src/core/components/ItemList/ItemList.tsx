@@ -34,6 +34,7 @@ export const ItemList = <TType extends WithIdModel>({
               rightElement={
                 rightElement ? (isActive) => rightElement({ isActive, item }) : undefined
               }
+              testID={item.id}
             />
           ))
         ) : (

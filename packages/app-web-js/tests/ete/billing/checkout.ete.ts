@@ -92,7 +92,6 @@ describe(TEST_NAME, () => {
     await screen.snapshot();
 
     await stop();
-
     expect(true).toBeTruthy();
   });
 
