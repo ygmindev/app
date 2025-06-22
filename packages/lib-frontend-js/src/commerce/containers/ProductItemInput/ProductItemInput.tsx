@@ -7,6 +7,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import { Table } from '@lib/frontend/data/components/Table/Table';
+import { type TableRefModel } from '@lib/frontend/data/components/Table/Table.models';
 import { TableInput } from '@lib/frontend/data/components/TableInput/TableInput';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
@@ -18,7 +19,7 @@ import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 
 export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemInputPropsModel> = ({
   defaultValue,
@@ -31,6 +32,7 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
   const { t } = useTranslation([COMMERCE]);
   const [items, itemsSet] = useStore('commerce.items');
   const price = useMemo(() => getPrice(items), [items]);
+  const tableRef = useRef<TableRefModel<PartialModel<ProductItemModel>>>(null);
   return (
     <Wrapper
       {...wrapperProps}
@@ -47,12 +49,14 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
                 label: t('commerce:price'),
               },
               {
-                field: ({ value }) => (
+                field: ({ index, value }) => (
                   <NumberInput
                     defaultValue={value as number}
                     isClearable={false}
                     isTypable={false}
-                    min={1}
+                    onChange={(v) =>
+                      v === 0 && (index ?? -1) >= 0 && tableRef.current?.remove?.(index as number)
+                    }
                     removeIcon={value === 1 ? 'trash' : undefined}
                     size={THEME_SIZE.SMALL}
                     value={value as number}
@@ -63,6 +67,7 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
               },
             ]}
             idField="name"
+            ref={tableRef}
           />
         }
         onChange={onChange ?? itemsSet}

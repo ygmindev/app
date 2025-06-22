@@ -23,14 +23,9 @@ export const TableInput = <TType,>({
     onChange,
     value,
   });
-
   return (
     <Wrapper {...wrapperProps}>
-      {cloneElement(element, {
-        data: valueControlled,
-        isRemovable: true,
-        onChange: valueControlledSet,
-      })}
+      {cloneElement(element, { data: valueControlled, onChange: valueControlledSet })}
     </Wrapper>
   );
 };

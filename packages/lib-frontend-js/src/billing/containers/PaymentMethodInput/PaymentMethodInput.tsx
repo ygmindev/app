@@ -20,16 +20,15 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ModalFormButton } from '@lib/frontend/core/containers/ModalFormButton/ModalFormButton';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
-import { type DataBoundaryRefModel } from '@lib/frontend/data/components/DataBoundary/DataBoundary.models';
 import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
 import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
@@ -50,12 +49,10 @@ export const PaymentMethodInput: RLFCModel<
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
   const currentUser = useCurrentUser();
-  // const { userUpdate } = useSignInResource();
+  const { update } = useUserResource();
   const { remove: bankRemove } = useBankResource({ root: currentUser?._id });
   const { remove: cardRemove } = useCardResource({ root: currentUser?._id });
-  const [paymentMethods, paymentMethodsSet] = useStore('billing.paymentMethods');
   const { getAll } = usePaymentMethodResource();
-  const dataRef = useRef<DataBoundaryRefModel<Array<Partial<PaymentMethodModel>>>>(null);
   const inputRef = useRef<NewPaymentMethodInputRefModel>(null);
 
   const { valueControlled, valueControlledSet } = useValueControlled({
@@ -90,53 +87,50 @@ export const PaymentMethodInput: RLFCModel<
   };
 
   return (
-    <Wrapper
+    <DataBoundary
       {...wrapperProps}
-      s>
-      <Wrapper
-        isAlign
-        isRow
-        justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
-        <Text fontStyle={FONT_STYLE.HEADLINE}>{t('billing:paymentMethod')}</Text>
+      fallbackData={getEntityResourceFixture({
+        count: 3,
+        data: () => ({ title: 'test' }),
+      })}
+      id={PAYMENT_METHOD_RESOURCE_NAME}
+      query={handleQuery}>
+      {({ data, reset }) => (
+        <Wrapper s>
+          <Wrapper
+            isAlign
+            isRow
+            justify={FLEX_JUSTIFY.SPACE_BETWEEN}>
+            <Text fontStyle={FONT_STYLE.HEADLINE}>{t('billing:paymentMethod')}</Text>
 
-        <ModalFormButton
-          fields={[
-            {
-              element: <NewPaymentMethodInput ref={ref ?? inputRef} />,
-              id: PAYMENT_METHOD_RESOURCE_NAME,
-            },
-          ]}
-          icon="add"
-          isFullHeight
-          onComplete={() => {
-            void dataRef.current?.reset?.();
-          }}
-          onSubmit={async () => {
-            const result = (await (ref ?? inputRef)?.current?.submit()) || null;
-            if (!result) {
-              throw new NotFoundError(PAYMENT_METHOD_RESOURCE_NAME);
-            }
-            return result;
-          }}
-          p
-          successMessage={t('billing:paymentMethodSuccess')}
-          testID={PAYMENT_METHOD_INPUT_NEW_TEST_ID}
-          type={BUTTON_TYPE.TRANSPARENT}>
-          {t('core:new', { value: t('billing:paymentMethod') })}
-        </ModalFormButton>
-      </Wrapper>
+            <ModalFormButton
+              fields={[
+                {
+                  element: <NewPaymentMethodInput ref={ref ?? inputRef} />,
+                  id: PAYMENT_METHOD_RESOURCE_NAME,
+                },
+              ]}
+              icon="add"
+              isFullHeight
+              onComplete={() => {
+                void reset?.();
+              }}
+              onSubmit={async () => {
+                const result = (await (ref ?? inputRef)?.current?.submit()) || null;
+                if (!result) {
+                  throw new NotFoundError(PAYMENT_METHOD_RESOURCE_NAME);
+                }
+                return result;
+              }}
+              p
+              successMessage={t('billing:paymentMethodSuccess')}
+              testID={PAYMENT_METHOD_INPUT_NEW_TEST_ID}
+              type={BUTTON_TYPE.TRANSPARENT}>
+              {t('core:new', { value: t('billing:paymentMethod') })}
+            </ModalFormButton>
+          </Wrapper>
 
-      <DataBoundary
-        {...wrapperProps}
-        fallbackData={getEntityResourceFixture({
-          count: 3,
-          data: () => ({ title: 'test' }),
-        })}
-        id={PAYMENT_METHOD_RESOURCE_NAME}
-        query={handleQuery}
-        ref={dataRef}>
-        {({ data }) =>
-          isEditable ? (
+          {isEditable ? (
             <ItemList
               items={data?.map(({ _id, last4, name, type }) => ({
                 icon: getIcon(type),
@@ -155,10 +149,10 @@ export const PaymentMethodInput: RLFCModel<
                   ) : (
                     <Button
                       onPress={async () => {
-                        // userUpdate({
-                        //   filter: [{ field: '_id', stringValue: currentUser?._id }],
-                        //   update: { paymentMethodPrimary: item.id },
-                        // })
+                        await update({
+                          id: [currentUser?._id ?? ''],
+                          update: { paymentMethodPrimary: { _id: item.id } },
+                        });
                       }}
                       type={BUTTON_TYPE.INVISIBLE}>
                       {t('billing:setAsDefault')}
@@ -176,12 +170,16 @@ export const PaymentMethodInput: RLFCModel<
                     icon="trash"
                     onPress={async () => {
                       switch (item.type) {
-                        case PAYMENT_METHOD_TYPE.BANK:
-                          return bankRemove({ id: [item.id] });
-                        case PAYMENT_METHOD_TYPE.CARD:
-                          return cardRemove({ id: [item.id] });
+                        case PAYMENT_METHOD_TYPE.BANK: {
+                          await bankRemove({ id: [item.id] });
+                          break;
+                        }
+                        case PAYMENT_METHOD_TYPE.CARD: {
+                          await cardRemove({ id: [item.id] });
+                          break;
+                        }
                       }
-                      void dataRef.current?.reset?.();
+                      await reset?.();
                     }}
                     tooltip={t('core:remove')}
                     type={BUTTON_TYPE.INVISIBLE}
@@ -208,9 +206,9 @@ export const PaymentMethodInput: RLFCModel<
               }
               value={valueControlled}
             />
-          )
-        }
-      </DataBoundary>
-    </Wrapper>
+          )}
+        </Wrapper>
+      )}
+    </DataBoundary>
   );
 };

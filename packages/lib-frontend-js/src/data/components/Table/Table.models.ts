@@ -1,9 +1,9 @@
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type FormValidatorsModel } from '@lib/frontend/data/data.models';
 import {
   type TableSelectTypeModel,
   type UseTableParamsModel,
 } from '@lib/frontend/data/hooks/useTable/useTable.models';
-import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type ReactElement } from 'react';
 
 export type TablePropsModel<TType> = UseTableParamsModel<TType> & {

@@ -2,6 +2,7 @@ import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Image } from '@lib/frontend/core/components/Image/Image';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { type TitlePropsModel } from '@lib/frontend/core/components/Title/Title.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -64,13 +65,16 @@ export const Title: LFCModel<TitlePropsModel> = ({
           )}
         </Wrapper>
 
-        <Wrapper s>
+        <Wrapper
+          pVertical
+          s>
           {title && (
             <Skeleton
               elementState={elementState}
               flex>
               {isAsyncText(title) ? (
                 <AsyncText
+                  casing={TEXT_CASING.CAPITALIZE}
                   color={color}
                   colorRole={colorRole}
                   fontSize={fontSize}

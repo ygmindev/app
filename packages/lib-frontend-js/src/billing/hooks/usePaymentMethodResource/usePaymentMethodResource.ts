@@ -14,7 +14,6 @@ import { type IdInputModel } from '@lib/shared/resource/utils/IdInput/IdInput.mo
 
 export const usePaymentMethodResource = (): UsePaymentMethodResourceModel => {
   const { query } = useAppGraphql();
-
   return {
     createToken: async (input) => {
       const output = await query<string, { input: PaymentInputModel }>({

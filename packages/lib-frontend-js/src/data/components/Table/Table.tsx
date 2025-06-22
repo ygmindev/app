@@ -6,6 +6,7 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Text } from '@lib/frontend/core/components/Text/Text';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { VirtualizedList } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList';
 import { type VirtualizedListRefModel } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -107,7 +108,7 @@ export const Table = <TType,>({
               color={THEME_COLOR.ERROR}
               confirmMessage={t('core:confirmRemove')}
               icon="trash"
-              onPress={() => handleRemove && handleRemove(index)}
+              onPress={() => handleRemove?.(index)}
               size={THEME_SIZE.SMALL}
               type={BUTTON_TYPE.INVISIBLE}
             />
@@ -225,6 +226,7 @@ export const Table = <TType,>({
         ) : (
           <Text
             align={align}
+            casing={TEXT_CASING.CAPITALIZE}
             isBold
             isEllipsis>
             {label}
@@ -273,7 +275,7 @@ export const Table = <TType,>({
                   const newValue = cloneDeep(data);
                   cell.columnId && newValue && (newValue[i][cell.columnId] = value);
                   onChange(newValue);
-                  onChangeF && onChangeF(value);
+                  onChangeF?.(value);
                 }
               : onChangeF,
             value: cell.value,
@@ -349,13 +351,15 @@ export const Table = <TType,>({
         <Wrapper
           isAlign
           isRow>
-          <Wrapper
-            border={DIRECTION.RIGHT}
-            isAlign
-            isRow
-            pHorizontal={THEME_SIZE.SMALL}>
-            {headersFrozen.map(renderHeader)}
-          </Wrapper>
+          {headersFrozen.length > 0 && (
+            <Wrapper
+              border={DIRECTION.RIGHT}
+              isAlign
+              isRow
+              pHorizontal={THEME_SIZE.SMALL}>
+              {headersFrozen.map(renderHeader)}
+            </Wrapper>
+          )}
 
           <Wrapper
             flex
@@ -377,21 +381,23 @@ export const Table = <TType,>({
       <Wrapper
         flex
         isRow>
-        <Wrapper
-          border={DIRECTION.RIGHT}
-          pHorizontal={THEME_SIZE.SMALL}>
-          <VirtualizedList
-            isVerticalScrollable
-            isVerticalScrollableVisible={false}
-            itemSize={theme.shape.size[THEME_SIZE.SMALL]}
-            items={rows}
-            onScroll={(position) =>
-              handleScrollSync(position, 'y', TABLE_COMPONENT_ID_FROZEN_ROWS_LIST)
-            }
-            ref={rowsListFrozenRef}
-            render={(row, i) => renderRow(row, i, true)}
-          />
-        </Wrapper>
+        {headersFrozen.length > 0 && (
+          <Wrapper
+            border={DIRECTION.RIGHT}
+            pHorizontal={THEME_SIZE.SMALL}>
+            <VirtualizedList
+              isVerticalScrollable
+              isVerticalScrollableVisible={false}
+              itemSize={theme.shape.size[THEME_SIZE.SMALL]}
+              items={rows}
+              onScroll={(position) =>
+                handleScrollSync(position, 'y', TABLE_COMPONENT_ID_FROZEN_ROWS_LIST)
+              }
+              ref={rowsListFrozenRef}
+              render={(row, i) => renderRow(row, i, true)}
+            />
+          </Wrapper>
+        )}
 
         <Wrapper
           flex
@@ -402,7 +408,6 @@ export const Table = <TType,>({
           ref={rowsWrapperRef}>
           <VirtualizedList
             isVerticalScrollable
-            isVerticalScrollableVisible
             itemSize={theme.shape.size[THEME_SIZE.SMALL]}
             items={rows}
             onScroll={(position) => handleScrollSync(position, 'y', TABLE_COMPONENT_ID_ROWS_LIST)}
