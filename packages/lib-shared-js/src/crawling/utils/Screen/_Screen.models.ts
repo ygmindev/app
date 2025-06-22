@@ -29,6 +29,8 @@ export type _ScreenModel = {
 
   open(url: string): Promise<void>;
 
+  record(params?: { dirname?: string; filename?: string | number }): Promise<() => Promise<void>>;
+
   snapshot(params?: { dirname?: string; filename?: string | number }): Promise<Uint8Array | null>;
 
   uri(): UriModel | null;

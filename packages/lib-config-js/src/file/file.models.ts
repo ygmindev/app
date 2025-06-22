@@ -24,4 +24,6 @@ export type FileConfigModel = {
   prunePatterns: Array<string>;
 
   publicDir: string;
+
+  videoExtension: 'mp4';
 };

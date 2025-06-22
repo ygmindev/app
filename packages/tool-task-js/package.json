@@ -134,6 +134,7 @@
     "prettier": "^3.5.3",
     "puppeteer": "^24.7.2",
     "puppeteer-cluster": "^0.24.0",
+    "puppeteer-screen-recorder": "^3.0.6",
     "raf": "^3.4.1",
     "react-docgen-typescript": "^2.2.2",
     "react-refresh": "^0.17.0",

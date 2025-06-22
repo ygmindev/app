@@ -93,7 +93,9 @@ export const ASSETS_DIR = 'assets';
 
 export const STATIC_DIR = 'static';
 
-export const IMAGE_EXTENSION = 'webp';
+export const IMAGE_EXTENSION_DEFAULT = 'webp';
+
+export const VIDEO_EXTENSION_DEFAULT = 'mp4';
 
 export const EXCLUDE_PATTERNS = [...CLEAN_PATTERNS, '.git', 'ios/Pods', 'node_modules'];
 
@@ -111,6 +113,7 @@ export const FILE_CONFIG: Pick<
   | 'packagePrefixes'
   | 'prunePatterns'
   | 'publicDir'
+  | 'videoExtension'
 > = {
   assetsDir: ASSETS_DIR,
   buildDir: BUILD_DIR,
@@ -118,8 +121,9 @@ export const FILE_CONFIG: Pick<
   cleanPatterns: CLEAN_PATTERNS,
   distDir: DIST_DIR,
   excludePatterns: [...CLEAN_PATTERNS, '.git', '.venv', 'ios/Pods', 'node_modules'],
-  imageExtension: IMAGE_EXTENSION,
+  imageExtension: IMAGE_EXTENSION_DEFAULT,
   packagePrefixes: PACKAGE_PREFIXES,
   prunePatterns: PRUNE_PATTERNS,
   publicDir: PUBLIC_DIR,
+  videoExtension: VIDEO_EXTENSION_DEFAULT,
 };

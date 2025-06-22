@@ -32,6 +32,7 @@ import isNumber from 'lodash/isNumber';
 import { type Browser, type ElementHandle, type Frame, type Page } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
 
 puppeteer.use(StealthPlugin());
 
@@ -191,6 +192,42 @@ export class _Screen implements _ScreenModel {
     }
   }
 
+  async record({
+    dirname,
+    filename,
+  }: {
+    dirname?: string;
+    filename?: string | number;
+  }): Promise<() => Promise<void>> {
+    const { dimension, snapshotPath, videoExtension } = this.options;
+    const dirnameF = dirname ?? this.options.dirname;
+    const pathname = snapshotPath && joinPaths(filterNil([snapshotPath, dirnameF]));
+    pathname && !existsSync(pathname) && mkdirSync(pathname, { recursive: true });
+    const recorder = new PuppeteerScreenRecorder(this.page, {
+      aspectRatio: '4:3',
+      autopad: { color: 'black' },
+      followNewTab: true,
+      fps: 25,
+      videoBitrate: 1000,
+      videoCodec: 'libx264',
+      videoCrf: 18,
+      videoFrame: {
+        height: dimension.height ?? 1000,
+        width: dimension.width ?? 1000,
+      },
+      videoPreset: 'ultrafast',
+    });
+    this.counter += 1;
+    await recorder.start(
+      joinPaths([pathname, `${this.counter}${filename ? `-${slug(`${filename}`)}` : ''}`], {
+        extension: videoExtension,
+      }),
+    );
+    return async () => {
+      await recorder.stop();
+    };
+  }
+
   async snapshot({
     dirname,
     filename,
@@ -198,25 +235,25 @@ export class _Screen implements _ScreenModel {
     dirname?: string;
     filename?: string | number;
   }): Promise<Uint8Array | null> {
-    const { snapshotPath } = this.options;
+    const { delay, dimension, imageExtension, snapshotPath } = this.options;
+    await sleep(delay);
     const dirnameF = dirname ?? this.options.dirname;
     const pathname = snapshotPath && joinPaths(filterNil([snapshotPath, dirnameF]));
     pathname && !existsSync(pathname) && mkdirSync(pathname, { recursive: true });
     this.counter += 1;
     return this.page.screenshot({
       clip: {
-        height: this.options.dimension.height ?? 1000,
-        width: this.options.dimension.width ?? 1000,
+        height: dimension.height ?? 1000,
+        width: dimension.width ?? 1000,
         x: 0,
         y: 0,
       },
       path: snapshotPath
-        ? joinPaths([
-            pathname,
-            `${this.counter}${filename ? `-${slug(`${filename}`)}` : ''}.${this.options.imageExtension}`,
-          ])
+        ? joinPaths([pathname, `${this.counter}${filename ? `-${slug(`${filename}`)}` : ''}`], {
+            extension: imageExtension,
+          })
         : undefined,
-      type: this.options.imageExtension ?? 'webp',
+      type: imageExtension ?? 'webp',
     });
   }
 
