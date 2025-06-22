@@ -9,7 +9,6 @@ import { BACKDROP_TEST_ID } from '@lib/frontend/core/components/Modal/Modal.cons
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 
 const TEST_NAME = 'checkout';
@@ -72,8 +71,6 @@ describe(TEST_NAME, () => {
         .then((h) => h?.press());
 
       await screen.find({ value: `${ORDER_PAYMENT_TEST_ID}-submit` }).then((h) => h?.press());
-
-      await sleep(30000);
     } else {
       throw new NotFoundError('stripe frame');
     }
