@@ -1,10 +1,10 @@
 import { type AnimationModel } from '@lib/frontend/animation/animation.models';
+import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import {
   type ChildrenPropsModel,
   type DimensionModel,
   type ElementStatePropsModel,
 } from '@lib/frontend/core/core.models';
-import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type ReactNode } from 'react';
 
 export type ModalPropsModel = ChildrenPropsModel &

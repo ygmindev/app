@@ -2,6 +2,7 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
+import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -123,9 +124,25 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
     }
   })();
 
+  route.isModal &&
+    isLeaf &&
+    (element = (
+      <Modal
+        isFullSize
+        isOpen
+        // onToggle={(value) =>
+        //   route.previous &&
+        //   !value &&
+        //   push({ isBack: true, params: location.params, pathname: route.previous })
+        // }
+        title={route.title}>
+        {element}
+      </Modal>
+    ));
+
   return (
     <>
-      {isActiveF && route.header && (
+      {isActiveF && route.header && !route.isModal && (
         <Portal>
           <RouteHeader route={route} />
         </Portal>

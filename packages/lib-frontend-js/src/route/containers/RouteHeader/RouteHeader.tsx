@@ -7,8 +7,8 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 
 export const RouteHeader: LFCModel<RouteHeaderPropsModel> = ({ route, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { back, getPath, location, push } = useRouter();
-  const previous = route.header?.previous;
+  const { location, push } = useRouter();
+  const { previous } = route;
   return (
     <NavigationHeader
       {...wrapperProps}
@@ -16,16 +16,7 @@ export const RouteHeader: LFCModel<RouteHeaderPropsModel> = ({ route, ...props }
       isAbsolute
       onBack={
         previous
-          ? previous === true
-            ? async () => back()
-            : async () => {
-                const pathnames = location.pathname.split('/');
-                pathnames.splice(pathnames.length - previous, previous);
-                return push({
-                  isBack: true,
-                  pathname: getPath(pathnames.join('/'), location.params),
-                });
-              }
+          ? async () => push({ isBack: true, params: location.params, pathname: previous })
           : undefined
       }
       title={route.title}

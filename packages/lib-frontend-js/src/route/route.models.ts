@@ -20,7 +20,8 @@ export type RouteModel<
     description?: AsyncTextModel;
     element?: ReactElement<ChildrenPropsModel>;
     fullpath?: string;
-    header?: { previous?: true | number };
+    header?: boolean;
+    isModal?: boolean;
     isNavigatable?: boolean;
     isProtectable?: boolean;
     layoutProps?: LayoutStylePropsModel;
@@ -33,6 +34,7 @@ export type RouteModel<
     parent?: string;
     pathname: string;
     prerender?: boolean | Array<string>;
+    previous?: string;
     routes?: Array<RouteModel>;
     title?: AsyncTextModel;
     transition?: RouteTransitionModel;
