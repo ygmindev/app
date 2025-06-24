@@ -130,11 +130,11 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
       <Modal
         isFullSize
         isOpen
-        // onToggle={(value) =>
-        //   route.previous &&
-        //   !value &&
-        //   push({ isBack: true, params: location.params, pathname: route.previous })
-        // }
+        onToggle={(value) =>
+          route.previous &&
+          !value &&
+          push({ isBack: true, params: location.params, pathname: route.previous })
+        }
         title={route.title}>
         {element}
       </Modal>

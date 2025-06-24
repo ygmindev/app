@@ -15,8 +15,9 @@ import { ACCOUNT } from '@lib/shared/user/user.constants';
 
 export const userRoutes: Array<RouteModel> = [
   {
+    isModal: true,
     isProtectable: true,
-    navigation: ROUTE_NAVIGATION.LIST,
+    navigation: ROUTE_NAVIGATION.TAB,
     pathname: ACCOUNT,
     routes: [
       {
@@ -69,7 +70,7 @@ export const userRoutes: Array<RouteModel> = [
       {
         icon: 'dollar',
         namespaces: [BILLING],
-        navigation: ROUTE_NAVIGATION.LIST,
+        // navigation: ROUTE_NAVIGATION.LIST,
         pathname: BILLING,
         routes: billingRoutes,
         title: ({ t }) => t('billing:billing'),
