@@ -5,6 +5,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
+import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
@@ -101,7 +102,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
         target,
       });
       logger.info(
-        `running ${name}${environmentContext === '' ? '' : ` with context: ${environmentContext}`}`,
+        `running ${name}${environmentContext === '' ? '' : ` with context: ${isEmpty(environmentContext) ? 'none' : environmentContext}`}`,
       );
       await this.runTasks(task, context);
     } catch (e) {

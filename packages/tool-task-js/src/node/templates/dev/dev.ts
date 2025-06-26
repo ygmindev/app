@@ -8,6 +8,11 @@ export const dev: TaskParamsModel<DevParamsModel> = {
   name: 'dev',
 
   overrides: () => ({
-    patterns: ['lib-backend-js/src/**', 'lib-config-js/src/**', 'lib-shared-js/src/**'],
+    patterns: [
+      'lib-backend-js/src/**',
+      'lib-config-js/src/**',
+      'lib-shared-js/src/**',
+      'lib-model-js/src/**',
+    ],
   }),
 };

@@ -66,6 +66,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
         fromPackages('asset-static/src/**/*'),
         fromPackages('lib-config-js/src/**/*'),
         fromPackages('lib-shared-js/src/**/*'),
+        fromPackages('lib-model-js/src/**/*'),
         fromWorking('src/**/*'),
       ],
     };

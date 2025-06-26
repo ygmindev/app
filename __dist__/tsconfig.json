@@ -58,6 +58,9 @@
       "@lib/frontend/*": [
         "packages/lib-frontend-js/src/*"
       ],
+      "@lib/model/*": [
+        "packages/lib-model-js/src/*"
+      ],
       "@lib/shared/*": [
         "packages/lib-shared-js/src/*"
       ],

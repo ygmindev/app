@@ -13,6 +13,7 @@
     "@lexical/react": "^0.30.0",
     "@lib/config": "workspace:^",
     "@lib/frontend": "workspace:^",
+    "@lib/model": "workspace:^",
     "@lib/shared": "workspace:^",
     "@react-google-maps/api": "^2.20.6",
     "@reduxjs/toolkit": "2.7.0",

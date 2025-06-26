@@ -16,6 +16,7 @@
     "@graphql-yoga/redis-event-target": "^3.0.3",
     "@lib/backend": "workspace:^",
     "@lib/config": "workspace:^",
+    "@lib/model": "workspace:^",
     "@lib/shared": "workspace:^",
     "@mikro-orm/core": "^6.4.13",
     "@mikro-orm/mongodb": "^6.4.13",
