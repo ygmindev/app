@@ -1,4 +1,4 @@
-import { type EntityResourceModel } from 'packages/lib-model-js/src/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/resources/EntityResource/EntityResource.models';
 
 export type UtilityModel = EntityResourceModel & {
   description?: string;

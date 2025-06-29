@@ -26,6 +26,8 @@ authors = ["YG Min <ygmindev@gmail.com>"]
 packages = [{ include = "*", from = "src" }]
 
 [tool.poetry.dependencies]
+lib_config = {path="../lib-config-py", develop=true}
+lib_shared = {path="../lib-shared-py", develop=true}
 python = "3.12.7"
 numpy = "1.26.4"
 pydash = "^8.0.4"

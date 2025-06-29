@@ -59,8 +59,6 @@
   "mypy-type-checker.args": [
     "--config-file=packages/lib-shared-py/pyproject.toml"
   ],
-  "mypy.configFile": "packages/lib-shared-py/pyproject.toml",
-  "mypy.dmypyExecutable": "${workspaceFolder}/packages/lib-shared-py/.venv/bin/dmypy",
   "pylint.importStrategy": "fromEnvironment",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.diagnosticSeverityOverrides": {
@@ -71,6 +69,7 @@
   "python.analysis.enablePytestSupport": false,
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.typeCheckingMode": "basic",
+  "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",

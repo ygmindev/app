@@ -1,6 +1,8 @@
 export type _SchemaGenerateParamsModel = {
-  from: Array<string>;
+  fromDirname?: string;
   isSilent?: boolean;
+  sources: Array<string>;
+  toDirname?: string;
 };
 
 export type _SchemaGenerateModel = void;

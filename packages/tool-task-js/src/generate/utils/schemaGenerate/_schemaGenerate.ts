@@ -2,6 +2,7 @@ import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
@@ -18,38 +19,49 @@ import snakeCase from 'lodash/snakeCase';
 import { createGenerator } from 'ts-json-schema-generator';
 
 export const _schemaGenerate = async ({
-  from,
+  fromDirname = fromWorking(),
   isSilent = false,
+  sources,
+  toDirname,
 }: _SchemaGenerateParamsModel): Promise<_SchemaGenerateModel> => {
-  const paths = fromGlobs(from);
+  const paths = fromGlobs(sources, { isAbsolute: true, root: fromDirname });
 
   const refs: Record<
     string,
-    { definitions: Array<string>; jsonPathname: string; pathname: string; schema: JSONSchema7 }
+    {
+      basePathname: string;
+      definitions: Array<string>;
+      jsonPathname: string;
+      pyPathname: string;
+      schema: JSONSchema7;
+    }
   > = {};
-  for (const pathname of paths) {
-    const { dirname, main } = fileInfo(pathname);
-    const filename = joinPaths([dirname, main], { extension: 'json' });
+
+  for (const basePathname of paths) {
+    const { dirname, main } = fileInfo(basePathname);
+    const outDirname = toDirname ? dirname.replace(fromDirname, toDirname) : dirname;
+    const jsonPathname = joinPaths([outDirname, main], { extension: 'json' });
+    const pyPathname = joinPaths([outDirname, snakeCase(main)], { extension: 'py' });
     const type = `${main}Model`;
     const schema = createGenerator({
       expose: 'all',
-      path: pathname,
+      path: basePathname,
       skipTypeCheck: true,
       topRef: true,
       tsconfig: fromRoot('tsconfig.json'),
       type,
     }).createSchema(type);
     refs[`${main}Model`] = {
+      basePathname,
       definitions: schema.definitions ? Object.keys(schema.definitions) : [],
-      jsonPathname: filename,
-      pathname,
+      jsonPathname,
+      pyPathname,
       schema,
     };
   }
 
   for (const [type, value] of Object.entries(refs)) {
-    const { jsonPathname, pathname, schema } = value;
-    const { dirname, main } = fileInfo(pathname);
+    const { basePathname, jsonPathname, schema } = value;
 
     // write to json
     let result = stringify(schema);
@@ -74,7 +86,7 @@ export const _schemaGenerate = async ({
                   ...modify(
                     result,
                     [...path, key.value as string],
-                    `${toRelative({ from: pathname, to: refs[ref].jsonPathname })}#/definitions/${ref}`,
+                    `${toRelative({ from: joinPaths([jsonPathname, '..']), to: refs[ref].jsonPathname })}#/definitions/${ref}`,
                     { formattingOptions: { insertSpaces: true, tabSize: 2 } },
                   ),
                 );
@@ -90,9 +102,9 @@ export const _schemaGenerate = async ({
     };
 
     const tree = parseTree(result);
-    walk(tree);
+    tree && walk(tree);
 
-    if (tree) {
+    if (edits.length && tree) {
       const definitions = findNodeAtLocation(tree, ['definitions']);
       for (const child of definitions?.children || []) {
         if (child.type === 'property') {
@@ -110,35 +122,29 @@ export const _schemaGenerate = async ({
           }
         }
       }
+
+      edits.sort((a, b) => b.offset - a.offset);
+      for (const edit of edits) {
+        result =
+          result.slice(0, edit.offset) +
+          (edit.content || '') +
+          result.slice(edit.offset + edit.length);
+      }
     }
 
-    edits.sort((a, b) => b.offset - a.offset);
-    for (const edit of edits) {
-      result =
-        result.slice(0, edit.offset) +
-        (edit.content || '') +
-        result.slice(edit.offset + edit.length);
-    }
-
-    !isSilent && logger.debug(`schema generated for: ${pathname}`);
+    !isSilent && logger.debug(`schema generated for: ${basePathname}`);
     writeFile({ filename: jsonPathname, value: result });
-
-    const root = fromPackages('lib-model-js');
-    const input = jsonPathname;
-    const output = joinPaths([dirname, snakeCase(main)], { extension: 'py' });
-
-    // write to python
-    // 1 + 1 === 3 &&
-    await execute({
-      command: `
-        poetry run datamodel-codegen \
-          --input ${toRelative({ from: root, to: input })} \
-          --output ${toRelative({ from: root, to: output })} \
-          --capitalize-enum-members \
-          --input-file-type jsonschema \
-          --output-model-type pydantic.BaseModel
-      `,
-      root,
-    });
   }
+
+  const schemas = Object.values(refs)
+    .map(({ jsonPathname }) => jsonPathname)
+    .join(',');
+
+  const scriptPathname = fromPackages(
+    'tool-task-py/src/tool_task/generate/utils/schemaGenerate/schemaGenerate.py',
+  );
+  await execute({
+    command: `poetry run python ${scriptPathname} --source ${schemas}`,
+    root: fromPackages('lib-model-py'),
+  });
 };

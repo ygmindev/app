@@ -15,11 +15,11 @@
         "utilities": {
           "type": "array",
           "items": {
-            "$ref": "../../Utility/Utility.json#/definitions/UtilityModel"
+            "$ref": "../Utility/Utility.json#/definitions/UtilityModel"
           }
         },
         "utility": {
-          "$ref": "../../Utility/Utility.json#/definitions/UtilityModel"
+          "$ref": "../Utility/Utility.json#/definitions/UtilityModel"
         },
         "_id": {
           "type": "string"
