@@ -4,7 +4,7 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { ORDER_RESOURCE_NAME } from '@lib/shared/commerce/resources/Order/Order.constants';
 import { type OrderModel } from '@lib/shared/commerce/resources/Order/Order.models';
-import { type OrderImplementationModel } from '@lib/shared/commerce/resources/Order/OrderImplementation/OrderImplementation.models';
+import { type OrderImplementationModel } from '@lib/model/commerce/Order/OrderImplementation/OrderImplementation.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 
 @withContainer({ name: `${ORDER_RESOURCE_NAME}Implementation` })

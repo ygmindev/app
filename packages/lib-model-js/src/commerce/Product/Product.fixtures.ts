@@ -1,5 +1,5 @@
-import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
-import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
+import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.constants';
+import { type ProductModel } from '@lib/model/commerce/Product/Product.models';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 
 export const PRODUCT_FIXTURES: Array<ProductModel> = getEntityResourceFixture({

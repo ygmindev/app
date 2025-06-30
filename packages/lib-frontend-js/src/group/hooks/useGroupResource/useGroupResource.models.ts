@@ -1,3 +1,3 @@
-import { type GroupImplementationModel } from '@lib/shared/group/resources/Group/GroupImplementation/GroupImplementation.models';
+import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImplementation/GroupImplementation.models';
 
 export type UseGroupResourceModel = GroupImplementationModel;

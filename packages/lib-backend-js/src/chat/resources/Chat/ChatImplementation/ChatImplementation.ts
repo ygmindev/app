@@ -4,7 +4,7 @@ import { createRelatedResourceImplementation } from '@lib/backend/resource/utils
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
 import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
 import { type ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
-import { type ChatImplementationModel } from '@lib/shared/chat/resources/Chat/ChatImplementation/ChatImplementation.models';
+import { type ChatImplementationModel } from '@lib/model/chat/Chat/ChatImplementation/ChatImplementation.models';
 import { UserModel } from '@lib/shared/user/resources/User/User.models';
 
 @withContainer({ name: `${CHAT_RESOURCE_NAME}Implementation` })

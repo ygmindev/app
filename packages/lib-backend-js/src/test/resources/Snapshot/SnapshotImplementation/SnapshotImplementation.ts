@@ -7,7 +7,7 @@ import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInpu
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import { SNAPSHOT_RESOURCE_NAME } from '@lib/shared/test/resources/Snapshot/Snapshot.constants';
 import { type SnapshotModel } from '@lib/shared/test/resources/Snapshot/Snapshot.models';
-import { type SnapshotImplementationModel } from '@lib/shared/test/resources/Snapshot/SnapshotImplementation/SnapshotImplementation.models';
+import { type SnapshotImplementationModel } from '@lib/model/test/Snapshot/SnapshotImplementation/SnapshotImplementation.models';
 
 @withContainer({ name: `${SNAPSHOT_RESOURCE_NAME}Implementation` })
 export class SnapshotImplementation implements SnapshotImplementationModel {

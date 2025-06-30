@@ -1,4 +1,4 @@
-import { type EntityResourceDataModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type TestableResourceModel } from '@lib/shared/test/resources/TestableResource/TestableResource.models';
 

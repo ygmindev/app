@@ -1,5 +1,5 @@
 import { type UseOwnResourceParamsModel } from '@lib/frontend/user/hooks/useOwnResource/useOwnResource.models';
-import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
+import { CARD_RESOURCE_NAME } from '@lib/model/billing/Card/Card.constants';
 import { type CardModel } from '@lib/shared/billing/resources/Card/Card.models';
 
 export const CARD_RESOURCE_PARAMS = {

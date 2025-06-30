@@ -12,7 +12,7 @@ import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.mode
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
-} from '@lib/model/core/EntityResource/EntityResource.models';
+} from '@lib/model/resource/EntityResource/EntityResource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
 import { type ResourceImplementationDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';

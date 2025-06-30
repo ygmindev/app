@@ -3,7 +3,7 @@ import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withHook } from '@lib/backend/resource/utils/withHook/withHook';
 import { HOOK_TYPE } from '@lib/backend/resource/utils/withHook/withHook.constants';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import forEach from 'lodash/forEach';
 import isNil from 'lodash/isNil';
 

@@ -1,4 +1,4 @@
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type GetEntityResourceFixtureParamsModel<
   TType extends EntityResourceModel,

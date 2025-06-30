@@ -9,8 +9,8 @@ import { LinkedUserImplementation } from '@lib/backend/user/resources/LinkedUser
 import { RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { type ChargeModel } from '@lib/shared/billing/billing.models';
-import { type BankImplementationModel } from '@lib/shared/billing/resources/Bank/BankImplementation/BankImplementation.models';
-import { type CardImplementationModel } from '@lib/shared/billing/resources/Card/CardImplementation/CardImplementation.models';
+import { type BankImplementationModel } from '@lib/model/billing/Bank/BankImplementation/BankImplementation.models.js';
+import { type CardImplementationModel } from '@lib/model/billing/Card/CardImplementation/CardImplementation.models';
 import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
@@ -18,7 +18,7 @@ import {
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodImplementationModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
 import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
-import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
+import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.constants';
 import { type ProductImplementationModel } from '@lib/shared/commerce/resources/Product/ProductImplementation/ProductImplementation.models';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type StringKeyModel } from '@lib/shared/core/core.models';

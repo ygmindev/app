@@ -5,7 +5,7 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEmbeddedResourceResolver } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
 import { User } from '@lib/backend/user/resources/User/User';
-import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
+import { CARD_RESOURCE_NAME } from '@lib/model/billing/Card/Card.constants';
 import { type CardModel } from '@lib/shared/billing/resources/Card/Card.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 

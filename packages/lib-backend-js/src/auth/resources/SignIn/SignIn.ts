@@ -2,7 +2,7 @@ import { EntityResource } from '@lib/backend/resource/resources/EntityResource/E
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { User } from '@lib/backend/user/resources/User/User';
-import { SIGN_IN_RESOURCE_NAME } from '@lib/shared/auth/resources/SignIn/SignIn.constants';
+import { SIGN_IN_RESOURCE_NAME } from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';

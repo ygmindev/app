@@ -3,7 +3,7 @@ import { EntityResource } from '@lib/backend/resource/resources/EntityResource/E
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
+import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.constants';
 import { type PricingModel } from '@lib/shared/commerce/resources/Pricing/Pricing.models';
 import { PRODUCT_RESOURCE_NAME } from '@lib/shared/commerce/resources/Product/Product.constants';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';

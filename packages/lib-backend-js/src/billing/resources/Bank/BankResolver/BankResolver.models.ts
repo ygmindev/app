@@ -1,3 +1,3 @@
-import { type BankImplementationModel } from '@lib/shared/billing/resources/Bank/BankImplementation/BankImplementation.models';
+import { type BankImplementationModel } from '@lib/model/billing/Bank/BankImplementation/BankImplementation.models.js';
 
 export type BankResolverModel = BankImplementationModel;

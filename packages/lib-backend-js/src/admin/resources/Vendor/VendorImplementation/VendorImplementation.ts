@@ -3,7 +3,7 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { VENDOR_RESOURCE_NAME } from '@lib/shared/admin/resources/Vendor/Vendor.constants';
 import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
-import { type VendorImplementationModel } from '@lib/shared/admin/resources/Vendor/VendorImplementation/VendorImplementation.models';
+import { type VendorImplementationModel } from '@lib/model/admin/Vendor/VendorImplementation/VendorImplementation.models';
 
 @withContainer({ name: `${VENDOR_RESOURCE_NAME}Implementation` })
 export class VendorImplementation

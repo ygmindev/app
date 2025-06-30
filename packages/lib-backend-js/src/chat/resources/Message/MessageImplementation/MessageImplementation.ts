@@ -3,7 +3,7 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { createProtectedResoureImplementation } from '@lib/backend/resource/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
 import { MESSAGE_RESOURCE_NAME } from '@lib/shared/chat/resources/Message/Message.constants';
 import { type MessageModel } from '@lib/shared/chat/resources/Message/Message.models';
-import { type MessageImplementationModel } from '@lib/shared/chat/resources/Message/MessageImplementation/MessageImplementation.models';
+import { type MessageImplementationModel } from '@lib/model/chat/Message/MessageImplementation/MessageImplementation.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 

@@ -5,7 +5,7 @@ import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyF
 import { User } from '@lib/backend/user/resources/User/User';
 import { Collection } from '@lib/backend/core/utils/Collection/Collection';
 import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
-import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
+import { CARD_RESOURCE_NAME } from '@lib/model/billing/Card/Card.constants';
 import {
   type CardFundingModel,
   type CardModel,

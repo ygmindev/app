@@ -8,9 +8,9 @@ import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/Una
 import {
   SIGN_IN_RESOURCE_NAME,
   SIGN_IN_TOKEN_CLAIM_KEYS,
-} from '@lib/shared/auth/resources/SignIn/SignIn.constants';
+} from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
-import { type SignInImplementationModel } from '@lib/shared/auth/resources/SignIn/SignInImplementation/SignInImplementation.models';
+import { type SignInImplementationModel } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.models';
 import { SignInInputModel } from '@lib/shared/auth/resources/SignIn/SignInInput/SignInInput.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';

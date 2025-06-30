@@ -2,7 +2,7 @@ import {
   type CreateResourceResolverModel,
   type CreateResourceResolverParamsModel,
 } from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver.models';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type CreateEmbeddedResourceResolverParamsModel<
   TType extends EntityResourceModel,

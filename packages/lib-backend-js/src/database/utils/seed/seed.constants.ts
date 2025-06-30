@@ -1,6 +1,6 @@
 import { PricingImplementation } from '@lib/backend/commerce/resources/Pricing/PricingImplementation/PricingImplementation';
 import { type SeedDataModel } from '@lib/backend/database/utils/seed/seed.models';
-import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
+import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.constants';
 import { PRODUCT_RESOURCE_NAME } from '@lib/shared/commerce/resources/Product/Product.constants';
 import { PRODUCT_FIXTURES } from '@lib/shared/commerce/resources/Product/Product.fixtures';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';

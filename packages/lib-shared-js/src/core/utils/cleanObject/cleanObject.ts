@@ -5,7 +5,7 @@ import {
   type CleanObjectParamsModel,
 } from '@lib/shared/core/utils/cleanObject/cleanObject.models';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import isEqual from 'lodash/isEqual';
 import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';

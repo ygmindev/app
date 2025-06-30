@@ -1,6 +1,6 @@
 import { type DatabaseTypeModel } from '@lib/backend/database/database.models';
 import { type ClassModel } from '@lib/shared/core/core.models';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type Options } from '@mikro-orm/core';
 import { type MongoDriver } from '@mikro-orm/mongodb';
 

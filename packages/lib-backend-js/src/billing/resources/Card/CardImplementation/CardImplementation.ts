@@ -3,9 +3,9 @@ import { getFingerprintInput } from '@lib/backend/billing/utils/getFingerprintIn
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createRelatedResourceImplementation } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation';
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
-import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
+import { CARD_RESOURCE_NAME } from '@lib/model/billing/Card/Card.constants';
 import { type CardModel } from '@lib/shared/billing/resources/Card/Card.models';
-import { type CardImplementationModel } from '@lib/shared/billing/resources/Card/CardImplementation/CardImplementation.models';
+import { type CardImplementationModel } from '@lib/model/billing/Card/CardImplementation/CardImplementation.models';
 import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';

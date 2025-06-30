@@ -1,3 +1,4 @@
+import { type OtpFormModel } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
 import { USERNAME_FORM_VALIDATORS } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.constants';
 import {
   type UsernameFormModel,
@@ -21,7 +22,6 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { PhoneInput } from '@lib/frontend/user/components/PhoneInput/PhoneInput';
 import { AUTH, SIGN_IN_METHOD } from '@lib/shared/auth/auth.constants';
 import { type SignInMethodModel } from '@lib/shared/auth/auth.models';
-import { type OtpFormModel } from '@lib/shared/auth/resources/Otp/Otp.models';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
 import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';

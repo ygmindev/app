@@ -9,14 +9,14 @@ import { objectToEquality } from '@lib/backend/resource/utils/objectToEquality/o
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';
 import { type OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
-import { type OtpImplementationModel } from '@lib/shared/auth/resources/Otp/OtpImplementation/OtpImplementation.models';
+import { type OtpImplementationModel } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation.models';
 import { PartialModel } from '@lib/shared/core/core.models';
 // import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 // import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 // import { pick } from '@lib/shared/core/utils/pick/pick';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
-import { type EntityResourceDataModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import toNumber from 'lodash/toNumber';
 
 @withContainer()

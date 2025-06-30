@@ -7,7 +7,7 @@ import { ORDER, PRODUCTS } from '@lib/frontend/commerce/commerce.constants';
 import { ADD_TO_CART_BUTTON_TEST_ID } from '@lib/frontend/commerce/components/AddToCartButton/AddToCartButton.constants';
 import { ORDER_PRODUCTS_TEST_ID } from '@lib/frontend/commerce/pages/OrderProductsPage/OrderProductsPage.constants';
 import { BACKDROP_TEST_ID } from '@lib/frontend/core/components/Modal/Modal.constants';
-import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
+import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.constants';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';

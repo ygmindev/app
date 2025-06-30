@@ -5,7 +5,7 @@ import {
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 

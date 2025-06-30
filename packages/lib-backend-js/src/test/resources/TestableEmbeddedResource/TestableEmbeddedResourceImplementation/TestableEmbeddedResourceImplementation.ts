@@ -4,7 +4,7 @@ import { TestableEmbeddedResource } from '@lib/backend/test/resources/TestableEm
 import { TestableEntityResourceImplementation } from '@lib/backend/test/resources/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
 import { TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.constants';
 import { type TestableEmbeddedResourceModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
-import { type TestableEmbeddedResourceImplementationModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResourceImplementation/TestableEmbeddedResourceImplementation.models';
+import { type TestableEmbeddedResourceImplementationModel } from '@lib/model/test/TestableEmbeddedResource/TestableEmbeddedResourceImplementation/TestableEmbeddedResourceImplementation.models';
 import { type TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 
 @withContainer({ name: `${TESTABLE_EMBEDDED_RESOURCE_RESOURCE_NAME}Implementation` })

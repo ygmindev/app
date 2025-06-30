@@ -2,8 +2,8 @@ import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collect
 import { type CreateResourceImplementationParamsModel } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation.models';
 import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { type ClassModel, type KeysOfTypeModel } from '@lib/shared/core/core.models';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
-import { type EntityResourceImplementationModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 
 export type CreateRelatedResourceImplementationParamsModel<

@@ -7,7 +7,7 @@ import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constan
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
-} from '@lib/model/core/EntityResource/EntityResource.models';
+} from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';

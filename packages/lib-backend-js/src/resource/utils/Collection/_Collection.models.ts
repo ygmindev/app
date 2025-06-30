@@ -1,7 +1,7 @@
 import {
   type EntityResourceModel,
   type EntityResourcePartialModel,
-} from '@lib/model/core/EntityResource/EntityResource.models';
+} from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type _CollectionParamsModel<TRoot extends EntityResourceModel> = TRoot;
 

@@ -19,8 +19,8 @@ import { type FilterableResourceMethodTypeModel } from '@lib/shared/resource/res
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
-} from '@lib/model/core/EntityResource/EntityResource.models';
-import { type EntityResourceImplementationModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
+} from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';

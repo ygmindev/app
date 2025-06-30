@@ -5,7 +5,7 @@ import {
 import {
   type EntityResourceModel,
   type EntityResourcePartialModel,
-} from '@lib/model/core/EntityResource/EntityResource.models';
+} from '@lib/model/resource/EntityResource/EntityResource.models';
 import { Collection } from '@mikro-orm/core';
 
 export class _Collection<TType extends EntityResourceModel, TRoot extends EntityResourceModel>

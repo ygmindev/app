@@ -1,7 +1,7 @@
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
-import { type EntityResourceDataModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type _NewPaymentMethodInputPropsModel = {
   onCreate?(

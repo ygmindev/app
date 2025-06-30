@@ -15,7 +15,7 @@ import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
-import { type GroupImplementationModel } from '@lib/shared/group/resources/Group/GroupImplementation/GroupImplementation.models';
+import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImplementation/GroupImplementation.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';

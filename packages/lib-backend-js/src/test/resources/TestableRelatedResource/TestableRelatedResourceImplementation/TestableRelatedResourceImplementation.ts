@@ -5,7 +5,7 @@ import { TestableRelatedResource } from '@lib/backend/test/resources/TestableRel
 import { TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 import { TESTABLE_RELATED_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableRelatedResource/TestableRelatedResource.constants';
 import { type TestableRelatedResourceModel } from '@lib/shared/test/resources/TestableRelatedResource/TestableRelatedResource.models';
-import { type TestableRelatedResourceImplementationModel } from '@lib/shared/test/resources/TestableRelatedResource/TestableRelatedResourceImplementation/TestableRelatedResourceImplementation.models';
+import { type TestableRelatedResourceImplementationModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResourceImplementation/TestableRelatedResourceImplementation.models';
 
 @withContainer({ name: `${TESTABLE_RELATED_RESOURCE_RESOURCE_NAME}Implementation` })
 export class TestableRelatedResourceImplementation

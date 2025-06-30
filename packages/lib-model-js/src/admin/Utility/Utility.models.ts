@@ -1,4 +1,5 @@
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type UTILITY_TYPE } from '@lib/model/admin/Utility/Utility.constants';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type UtilityModel = EntityResourceModel & {
   description?: string;
@@ -13,14 +14,3 @@ export type UtilityModel = EntityResourceModel & {
 
   url?: string;
 };
-
-export enum UTILITY_TYPE {
-  AUTHENTICATION = 'authentication',
-  DATABASE = 'database',
-  FUNCTION = 'function',
-  HOSTING = 'hosting',
-  PAYMENT = 'payment',
-  SMS = 'sms',
-  SMTP = 'smtp',
-  USAGE = 'usage',
-}

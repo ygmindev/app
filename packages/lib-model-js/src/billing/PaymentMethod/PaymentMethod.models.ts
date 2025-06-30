@@ -1,4 +1,5 @@
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type PaymentMethodModel = EntityResourceModel & {
   externalId: string;
@@ -13,8 +14,3 @@ export type PaymentMethodModel = EntityResourceModel & {
 
   type: PAYMENT_METHOD_TYPE;
 };
-
-export enum PAYMENT_METHOD_TYPE {
-  BANK = 'bank',
-  CARD = 'card',
-}

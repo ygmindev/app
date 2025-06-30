@@ -1,5 +1,5 @@
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
-import { type EntityResourceDataModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import _filter from 'lodash/filter';

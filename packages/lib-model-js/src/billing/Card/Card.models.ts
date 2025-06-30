@@ -1,5 +1,6 @@
 import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type CARD_FUNDING } from '@lib/model/billing/Card/Card.constants';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
 
 export type CardModel = EntityResourceModel & {
@@ -21,9 +22,3 @@ export type CardModel = EntityResourceModel & {
 
   user?: CollectionModel<UserModel>;
 };
-
-export enum CARD_FUNDING {
-  CREDIT = 'credit',
-
-  DEBIT = 'debit',
-}

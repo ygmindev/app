@@ -2,7 +2,7 @@ import { type UseResourceParamsModel } from '@lib/frontend/resource/hooks/useRes
 import {
   PRICING_FREQUENCY,
   PRICING_RESOURCE_NAME,
-} from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
+} from '@lib/model/commerce/Pricing/Pricing.constants';
 import { type PricingModel } from '@lib/shared/commerce/resources/Pricing/Pricing.models';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';

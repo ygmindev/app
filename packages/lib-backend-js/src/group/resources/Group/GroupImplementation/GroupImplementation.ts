@@ -7,7 +7,7 @@ import { ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constan
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
 import { type GroupModel } from '@lib/shared/group/resources/Group/Group.models';
-import { type GroupImplementationModel } from '@lib/shared/group/resources/Group/GroupImplementation/GroupImplementation.models';
+import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImplementation/GroupImplementation.models';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 
 @withContainer({ name: `${GROUP_RESOURCE_NAME}Implementation` })

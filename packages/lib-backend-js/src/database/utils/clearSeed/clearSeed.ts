@@ -3,7 +3,7 @@ import { type ClearSeedModel } from '@lib/backend/database/utils/clearSeed/clear
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import { SEED_DATA } from '@lib/backend/database/utils/seed/seed.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export const clearSeed = async (): Promise<ClearSeedModel> => {
   const database = Container.get(Database, DATABASE_TYPE.MONGO);

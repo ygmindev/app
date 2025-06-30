@@ -1,3 +1,3 @@
-import { type TestableRelatedResourceImplementationModel } from '@lib/shared/test/resources/TestableRelatedResource/TestableRelatedResourceImplementation/TestableRelatedResourceImplementation.models';
+import { type TestableRelatedResourceImplementationModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResourceImplementation/TestableRelatedResourceImplementation.models';
 
 export type UseTestableRelatedResourceResourceModel = TestableRelatedResourceImplementationModel;

@@ -1,4 +1,4 @@
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type UserModel = EntityResourceModel & {
   // [ACCESS_RESOURCE_NAME]?: Array<AccessModel>;

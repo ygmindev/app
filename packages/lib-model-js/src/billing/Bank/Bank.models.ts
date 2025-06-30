@@ -1,5 +1,5 @@
 import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
 
 export type BankModel = EntityResourceModel & {

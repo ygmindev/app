@@ -4,7 +4,7 @@ import { User } from '@lib/backend/user/resources/User/User';
 import { PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
-import { type UserImplementationModel } from '@lib/shared/user/resources/User/UserImplementation/UserImplementation.models';
+import { type UserImplementationModel } from '@lib/model/user/User/UserImplementation/UserImplementation.models';
 import { ObjectId } from 'mongodb';
 
 @withContainer({ name: `${USER_RESOURCE_NAME}Implementation` })

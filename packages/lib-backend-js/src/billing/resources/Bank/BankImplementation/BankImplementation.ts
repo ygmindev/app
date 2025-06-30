@@ -5,7 +5,7 @@ import { createRelatedResourceImplementation } from '@lib/backend/resource/utils
 import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
 import { BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.constants';
 import { type BankModel } from '@lib/shared/billing/resources/Bank/Bank.models';
-import { type BankImplementationModel } from '@lib/shared/billing/resources/Bank/BankImplementation/BankImplementation.models';
+import { type BankImplementationModel } from '@lib/model/billing/Bank/BankImplementation/BankImplementation.models.js';
 import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';

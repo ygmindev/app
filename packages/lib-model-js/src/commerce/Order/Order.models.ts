@@ -1,5 +1,6 @@
+import { type ORDER_STATUS } from '@lib/model/commerce/Order/Order.constants';
 import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type OrderModel = EntityResourceModel & {
   items?: Array<ProductItemModel>;
@@ -8,9 +9,3 @@ export type OrderModel = EntityResourceModel & {
 
   status?: ORDER_STATUS;
 };
-
-export enum ORDER_STATUS {
-  CANCELED = 'canceled',
-  COMPLETED = 'completed',
-  REFUNDED = 'refunded',
-}

@@ -25,7 +25,7 @@ import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import {
   TRACKING_EVENT_ACTION,
   TRACKING_EVENT_OBJECT,
-} from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.constants';
+} from '@lib/shared/tracking/utils/TrackingEvent/TrackingEvent.constants';
 import { cloneElement, useEffect } from 'react';
 
 export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {

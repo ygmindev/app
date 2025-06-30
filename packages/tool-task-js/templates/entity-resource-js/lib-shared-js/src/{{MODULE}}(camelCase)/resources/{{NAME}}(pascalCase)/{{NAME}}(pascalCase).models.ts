@@ -1,6 +1,6 @@
 import {
   type EntityResourceModel,
-} from '@lib/model/core/EntityResource/EntityResource.models';
+} from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type {{NAME}}(pascalCase)Model = EntityResourceModel & {
   name: string;

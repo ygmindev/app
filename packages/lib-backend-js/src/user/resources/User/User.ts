@@ -18,7 +18,7 @@ import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.c
 import { AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.constants';
 import { type BankModel } from '@lib/shared/billing/resources/Bank/Bank.models';
-import { CARD_RESOURCE_NAME } from '@lib/shared/billing/resources/Card/Card.constants';
+import { CARD_RESOURCE_NAME } from '@lib/model/billing/Card/Card.constants';
 import { type CardModel } from '@lib/shared/billing/resources/Card/Card.models';
 import { PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';

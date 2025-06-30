@@ -5,7 +5,7 @@ import {
 } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
-import { type EntityResourceDataModel } from '@lib/model/core/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';

@@ -5,7 +5,7 @@ import { Snapshot } from '@lib/backend/test/resources/Snapshot/Snapshot';
 import { SnapshotImplementation } from '@lib/backend/test/resources/Snapshot/SnapshotImplementation/SnapshotImplementation';
 import { SNAPSHOT_RESOURCE_NAME } from '@lib/shared/test/resources/Snapshot/Snapshot.constants';
 import { type SnapshotModel } from '@lib/shared/test/resources/Snapshot/Snapshot.models';
-import { type SnapshotImplementationModel } from '@lib/shared/test/resources/Snapshot/SnapshotImplementation/SnapshotImplementation.models';
+import { type SnapshotImplementationModel } from '@lib/model/test/Snapshot/SnapshotImplementation/SnapshotImplementation.models';
 
 @withContainer()
 @withResolver({ Resource: () => Snapshot })
