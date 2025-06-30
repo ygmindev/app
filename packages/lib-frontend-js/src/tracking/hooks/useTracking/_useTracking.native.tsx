@@ -1,7 +1,7 @@
 import { Amplitude } from '@amplitude/react-native';
 
 import { type _UseTrackingModel } from '@lib/frontend/tracking/hooks/useTracking/_useTracking.models';
-import { type TrackingEventModel } from '@lib/shared/tracking/resources/TrackingEvent/TrackingEvent.models';
+import { type TrackingEventModel } from '@lib/model/tracking/TrackingEvent/TrackingEvent.models';
 
 let client: Amplitude | null;
 

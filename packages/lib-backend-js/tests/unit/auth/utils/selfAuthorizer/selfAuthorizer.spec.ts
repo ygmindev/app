@@ -1,8 +1,8 @@
 import { selfAuthorizer } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer';
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import { SIGN_IN_TOKEN_FIXTURE } from '@lib/shared/auth/resources/SignIn/SignIn.fixture';
+import { SIGN_IN_TOKEN_FIXTURE } from '@lib/model/auth/SignIn/SignIn.fixture';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
+import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 
 const { displayName } = withTest({ selfAuthorizer });
 

@@ -1,4 +1,4 @@
-import { SocketImplementation } from '@lib/backend/http/resources/Socket/SocketImplementation/SocketImplementation';
+import { SocketImplementation } from '@lib/model/http/Socket/SocketImplementation/SocketImplementation';
 import { createLambdaHandler } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler';
 import {
   LAMBDA_PLUGIN,

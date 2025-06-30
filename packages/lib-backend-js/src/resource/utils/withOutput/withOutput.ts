@@ -4,7 +4,7 @@ import {
   type WithOutputModel,
   type WithOutputParamsModel,
 } from '@lib/backend/resource/utils/withOutput/withOutput.models';
-import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
+import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 
 export const withOutput =

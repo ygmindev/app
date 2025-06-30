@@ -35,11 +35,11 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
 // import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 // import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 // import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
-// import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
-// // import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
+// import { CHAT_RESOURCE_NAME } from '@lib/model/chat/Chat/Chat.constants';
+// // import { CHAT_RESOURCE_NAME } from '@lib/model/chat/Chat/Chat.constants';
 // import { type PartialModel } from '@lib/shared/core/core.models';
 // import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
-// import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+// import { type UserModel } from '@lib/model/user/User/User.models';
 // import { useEffect } from 'react';
 
 // export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props }) => {

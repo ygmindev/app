@@ -6,7 +6,7 @@ import { config as databaseConfig } from '@lib/config/database/database.mongo';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
-import { type TestableResourceModel } from '@lib/shared/test/resources/TestableResource/TestableResource.models';
+import { type TestableResourceModel } from '@lib/model/test/TestableResource/TestableResource.models';
 import every from 'lodash/every';
 import toString from 'lodash/toString';
 

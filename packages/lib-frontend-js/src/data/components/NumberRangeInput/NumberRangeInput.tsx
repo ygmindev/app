@@ -20,7 +20,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { type NumberRangeModel } from '@lib/shared/data/resources/NumberRange/NumberRange.models';
+import { type NumberRangeModel } from '@lib/model/data/NumberRange/NumberRange.models';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
 import {
   AMOUNT_UNIT,

@@ -1,4 +1,4 @@
-import { type AccessLevelModel } from '@lib/shared/auth/resources/Access/Access.models';
+import { type AccessLevelModel } from '@lib/model/auth/Access/Access.models';
 import { type ClassModel, type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 

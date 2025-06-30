@@ -1,4 +1,4 @@
-import { type MessageModel } from '@lib/shared/chat/resources/Message/Message.models';
+import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 
 export type MainPubSubSchemaModel = {
   message: Array<MessageModel>;

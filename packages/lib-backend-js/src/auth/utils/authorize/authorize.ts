@@ -1,12 +1,12 @@
-import { AccessImplementation } from '@lib/backend/auth/resources/Access/AccessImplementation/AccessImplementation';
+import { AccessImplementation } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation';
 import {
   type AuthorizeModel,
   type AuthorizeParamsModel,
 } from '@lib/backend/auth/utils/authorize/authorize.models';
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
-import { ACCESS_ROLE } from '@lib/shared/auth/resources/Access/Access.constants';
-import { type AccessRoleMoreModel } from '@lib/shared/auth/resources/Access/Access.models';
-import { ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constants';
+import { ACCESS_ROLE } from '@lib/model/auth/Access/Access.constants';
+import { type AccessRoleMoreModel } from '@lib/model/auth/Access/Access.models';
+import { ROLE_RESOURCE_NAME } from '@lib/model/auth/Role/Role.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import pullAt from 'lodash/pullAt';
 

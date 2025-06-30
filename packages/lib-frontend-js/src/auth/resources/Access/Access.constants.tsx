@@ -6,8 +6,8 @@ import { UserInput } from '@lib/frontend/user/components/UserInput/UserInput';
 import {
   ACCESS_RESOURCE_NAME,
   ACCESS_ROLE_MORE,
-} from '@lib/shared/auth/resources/Access/Access.constants';
-import { type AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
+} from '@lib/model/auth/Access/Access.constants';
+import { type AccessModel } from '@lib/model/auth/Access/Access.models';
 
 export const ACCESS_RESOURCE_PARAMS = {
   fields: [

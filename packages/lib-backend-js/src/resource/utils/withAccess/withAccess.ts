@@ -7,12 +7,12 @@ import {
   ACCESS_LEVEL,
   ACCESS_ROLE,
   ACCESS_ROLE_MORE,
-} from '@lib/shared/auth/resources/Access/Access.constants';
+} from '@lib/model/auth/Access/Access.constants';
 import {
   type AccessLevelModel,
   type AccessRoleModel,
   type AccessRoleMoreModel,
-} from '@lib/shared/auth/resources/Access/Access.models';
+} from '@lib/model/auth/Access/Access.models';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 
 // TODO: should come from database?

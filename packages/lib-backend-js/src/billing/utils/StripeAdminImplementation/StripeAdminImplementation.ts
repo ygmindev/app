@@ -3,8 +3,8 @@ import {
   type StripeCreateTokenParamsModel,
 } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodTypeModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodTypeModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { ExternalError } from '@lib/shared/core/errors/ExternalError/ExternalError';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import Stripe from 'stripe';

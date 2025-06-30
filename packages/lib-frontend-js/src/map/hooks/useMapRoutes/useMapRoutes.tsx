@@ -5,9 +5,9 @@ export const useMapRoutes = (): UseMapRoutesModel => {};
 // import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
 // import { type UseMapRoutesModel } from '@lib/frontend/map/hooks/useMapRoutes/useMapRoutes.models';
 // import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
-// import { MAP_ROUTE_RESOURCE } from '@lib/shared/map/resources/MapRoute/MapRoute.constants';
-// import { type MapRouteModel } from '@lib/shared/map/resources/MapRoute/MapRoute.models';
-// import { type GetRouteInputModel } from '@lib/shared/map/resources/MapRoute/MapRouteImplementation/MapRouteImplementation.models';
+// import { MAP_ROUTE_RESOURCE } from '@lib/model/map/MapRoute/MapRoute.constants';
+// import { type MapRouteModel } from '@lib/model/map/MapRoute/MapRoute.models';
+// import { type GetRouteInputModel } from '@lib/model/map/MapRoute/MapRouteImplementation/MapRouteImplementation.models';
 // import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 
 // export const useMapRoutes = (): UseMapRoutesModel => {

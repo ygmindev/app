@@ -1,4 +1,4 @@
-// import { ProductImplementation } from '@lib/backend/commerce/resources/Product/ProductImplementation/ProductImplementation';
+// import { ProductImplementation } from '@lib/model/commerce/Product/ProductImplementation/ProductImplementation';
 // import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type ProductsPageParamsModel } from '@lib/frontend/commerce/pages/ProductsPage/ProductsPage.models';
 import { productsRoute as productsRouteBase } from '@lib/frontend/commerce/pages/ProductsPage/ProductsPage.route.base';

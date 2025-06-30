@@ -1,4 +1,4 @@
-import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
+import { type SignInTokenModel } from '@lib/model/auth/SignIn/SignIn.models';
 
 export type GetTokenFromHeaderParamsModel = string | undefined;
 

@@ -1,5 +1,5 @@
 import { type ChargeModel } from '@lib/shared/billing/billing.models';
-import { type PaymentMethodTypeModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type PaymentMethodTypeModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 
 export type StripeAdminImplementationModel = {
   createCustomer(): Promise<string>;

@@ -5,7 +5,7 @@ import {
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { type CredentialsModel } from '@lib/shared/auth/auth.models';
-import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
+import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
 
 export const useCredentials = ({}: UseCredentialsParamsModel = {}): UseCredentialsModel => {
   const [token] = useStore('auth.token.access');

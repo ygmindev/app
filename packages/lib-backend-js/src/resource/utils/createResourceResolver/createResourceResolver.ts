@@ -8,7 +8,7 @@ import { withAuthorizer } from '@lib/backend/resource/utils/withAuthorizer/withA
 import { withResourceInput } from '@lib/backend/resource/utils/withResourceInput/withResourceInput';
 import { withResourceOutput } from '@lib/backend/resource/utils/withResourceOutput/withResourceOutput';
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
+import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';
 import { Container } from '@lib/shared/core/utils/Container/Container';

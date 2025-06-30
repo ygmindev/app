@@ -3,7 +3,7 @@ import {
   type GetFingerprintInputParamsModel,
 } from '@lib/backend/billing/utils/getFingerprintInput/getFingerprintInput.models';
 import { StripeAdminImplementation } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation';
-import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 
 export const getFingerprintInput = async <TType extends PaymentMethodModel>({

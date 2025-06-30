@@ -5,9 +5,9 @@ import {
 } from '@lib/frontend/billing/components/NewPaymentMethodInput/_NewPaymentMethodInput.models';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { type CardFundingModel } from '@lib/shared/billing/resources/Card/Card.models';
-import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { type CardFundingModel } from '@lib/model/billing/Card/Card.models';
+import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { ExternalError } from '@lib/shared/core/errors/ExternalError/ExternalError';

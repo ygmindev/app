@@ -1,4 +1,4 @@
-import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
+import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';

@@ -11,7 +11,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { AUTH, SIGN_IN } from '@lib/shared/auth/auth.constants';
-import { type SignInInputModel } from '@lib/shared/auth/resources/SignIn/SignInInput/SignInInput.models';
+import { type SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
 import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';

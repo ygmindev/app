@@ -6,7 +6,7 @@ import {
 } from '@lib/frontend/user/hooks/useOwnResource/useOwnResource.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
+import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import filter from 'lodash/filter';
 
 export const useOwnResource = <TType extends EntityResourceModel>({

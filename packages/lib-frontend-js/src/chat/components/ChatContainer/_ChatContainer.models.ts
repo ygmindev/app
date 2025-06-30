@@ -1,6 +1,6 @@
 import { type ChatMessageModel } from '@lib/shared/chat/chat.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
-import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { type UserModel } from '@lib/model/user/User/User.models';
 import { type ReactElement } from 'react';
 
 export type _ChatContainerPropsModel = {

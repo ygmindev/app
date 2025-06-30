@@ -3,7 +3,7 @@ import {
   type ResourceClassModel,
 } from '@lib/backend/resource/resource.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import { type AccessLevelModel } from '@lib/shared/auth/resources/Access/Access.models';
+import { type AccessLevelModel } from '@lib/model/auth/Access/Access.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import {

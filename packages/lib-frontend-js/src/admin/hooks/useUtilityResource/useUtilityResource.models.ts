@@ -1,6 +1,6 @@
 import { type UseResourceMethodHookParamsModel } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import { type UtilityImplementationModel } from '@lib/shared/admin/resources/Utility/UtilityImplementation/UtilityImplementation.models';
-import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
+import { type UtilityImplementationModel } from '@lib/model/admin/Utility/UtilityImplementation/UtilityImplementation.models';
+import { type VendorModel } from '@lib/model/admin/Vendor/Vendor.models';
 
 export type UseUtilityResourceParamsModel = UseResourceMethodHookParamsModel<VendorModel>;
 

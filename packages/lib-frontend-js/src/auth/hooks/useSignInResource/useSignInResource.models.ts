@@ -1,4 +1,4 @@
-import { type SignInInputModel } from '@lib/shared/auth/resources/SignIn/SignInInput/SignInInput.models';
+import { type SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
 
 export type UseSignInResourceModel = {
   signIn(input: SignInInputModel): Promise<void>;

@@ -1,11 +1,11 @@
-import { OtpImplementation } from '@lib/backend/auth/resources/Otp/OtpImplementation/OtpImplementation';
+import { OtpImplementation } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
 import { mail } from '@lib/backend/notification/utils/mail/mail';
-import { OTP_RESOURCE_NAME } from '@lib/shared/auth/resources/Otp/Otp.constants';
+import { OTP_RESOURCE_NAME } from '@lib/model/auth/Otp/Otp.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
+import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 
 const { displayName } = withTest({ OtpImplementation });
 

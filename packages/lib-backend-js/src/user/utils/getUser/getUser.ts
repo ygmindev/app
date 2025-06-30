@@ -1,4 +1,4 @@
-import { UserImplementation } from '@lib/backend/user/resources/User/UserImplementation/UserImplementation';
+import { UserImplementation } from '@lib/model/user/User/UserImplementation/UserImplementation';
 import {
   type GetUserModel,
   type GetUserParamsModel,

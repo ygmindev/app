@@ -3,8 +3,8 @@ import {
   PRICING_FREQUENCY,
   PRICING_RESOURCE_NAME,
 } from '@lib/model/commerce/Pricing/Pricing.constants';
-import { type PricingModel } from '@lib/shared/commerce/resources/Pricing/Pricing.models';
-import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
+import { type PricingModel } from '@lib/model/commerce/Pricing/Pricing.models';
+import { type ProductModel } from '@lib/model/commerce/Product/Product.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 export const PRICING_RESOURCE_PARAMS = {

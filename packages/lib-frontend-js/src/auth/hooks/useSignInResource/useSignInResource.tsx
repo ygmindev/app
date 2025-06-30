@@ -6,9 +6,9 @@ import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTrackin
 import { USER_RESOURCE_PARAMS } from '@lib/frontend/user/resources/User/User.constants';
 import { SIGN_IN, USERNAME_UPDATE } from '@lib/shared/auth/auth.constants';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
-import { type SignInModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
-import { SIGN_IN_INPUT } from '@lib/shared/auth/resources/SignIn/SignInInput/SignInInput.constants';
-import { type SignInInputModel } from '@lib/shared/auth/resources/SignIn/SignInInput/SignInInput.models';
+import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
+import { SIGN_IN_INPUT } from '@lib/model/auth/SignIn/SignInInput/SignInInput.constants';
+import { type SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 
 const USER_FIELDS = USER_RESOURCE_PARAMS.fields.map(({ fields, id }) =>

@@ -9,7 +9,7 @@ import { APP_MENU_TEST_ID } from '@lib/frontend/app/containers/AppMenu/AppMenu.c
 import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import { APP_URI } from '@lib/shared/http/http.constants';
-import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
+import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 
 export const withTestScreen = ({
   email = true,

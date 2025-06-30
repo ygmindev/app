@@ -1,5 +1,5 @@
 import { type CreateEntityResourceImplementationParamsModel } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation.models';
-import { type ProtectedResourceModel } from '@lib/shared/auth/resources/ProtectedResource/ProtectedResource.models';
+import { type ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/ProtectedResource.models';
 import { type ProtectedResourceImplementationModel } from '@lib/model/auth/ProtectedResource/ProtectedResourceImplementation/ProtectedResourceImplementation.models';
 import { type ClassModel } from '@lib/shared/core/core.models';
 

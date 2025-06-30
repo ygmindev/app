@@ -1,4 +1,4 @@
-import { type EntityResourceDataModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 import { type InferModel, type PartialModel } from '@lib/shared/core/core.models';
 
 export type UnsetModel<TType> = {

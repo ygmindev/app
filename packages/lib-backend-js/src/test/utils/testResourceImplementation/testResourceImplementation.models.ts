@@ -1,6 +1,6 @@
-import { type EntityResourceDataModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
-import { type TestableResourceModel } from '@lib/shared/test/resources/TestableResource/TestableResource.models';
+import { type TestableResourceModel } from '@lib/model/test/TestableResource/TestableResource.models';
 
 export type TestResourceImplementationParamsModel<
   TType extends TestableResourceModel,

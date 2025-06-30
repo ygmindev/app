@@ -1,4 +1,4 @@
-import { ProductImplementation } from '@lib/backend/commerce/resources/Product/ProductImplementation/ProductImplementation';
+import { ProductImplementation } from '@lib/model/commerce/Product/ProductImplementation/ProductImplementation';
 import { withTestScreen } from '@lib/backend/test/utils/withTestScreen/withTestScreen';
 import { TEST_CARD_NUMBER_VALID } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput.constants';
 import { ORDER_PAYMENT_TEST_ID } from '@lib/frontend/billing/containers/OrderPaymentPage/OrderPaymentPage.constants';

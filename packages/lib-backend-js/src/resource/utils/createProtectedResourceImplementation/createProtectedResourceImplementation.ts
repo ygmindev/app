@@ -1,6 +1,6 @@
-import { AccessImplementation } from '@lib/backend/auth/resources/Access/AccessImplementation/AccessImplementation';
+import { AccessImplementation } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation';
 import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
-import { GroupImplementation } from '@lib/backend/group/resources/Group/GroupImplementation/GroupImplementation';
+import { GroupImplementation } from '@lib/model/group/Group/GroupImplementation/GroupImplementation';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import {
   type CreateProtectedResoureImplementationModel,
@@ -9,12 +9,12 @@ import {
 import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
-import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
-import { type ProtectedResourceModel } from '@lib/shared/auth/resources/ProtectedResource/ProtectedResource.models';
+import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
+import { type ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/ProtectedResource.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
-import { GROUP_RESOURCE_NAME } from '@lib/shared/group/resources/Group/Group.constants';
+import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
 import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImplementation/GroupImplementation.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';

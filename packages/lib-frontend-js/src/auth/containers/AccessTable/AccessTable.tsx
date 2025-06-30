@@ -4,7 +4,7 @@ import { ACCESS_RESOURCE_PARAMS } from '@lib/frontend/auth/resources/Access/Acce
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
+import { type AccessModel } from '@lib/model/auth/Access/Access.models';
 
 export const AccessTable: LFCModel<AccessTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });

@@ -4,7 +4,7 @@ import {
   type WithResourceOutputModel,
   type WithResourceOutputParamsModel,
 } from '@lib/backend/resource/utils/withResourceOutput/withResourceOutput.models';
-import { ACCESS_LEVEL } from '@lib/shared/auth/resources/Access/Access.constants';
+import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import { getOperationType } from '@lib/shared/resource/utils/getOperationType/getOperationType';
 

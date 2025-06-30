@@ -4,7 +4,7 @@ import { MESSAGE_RESOURCE_PARAMS } from '@lib/frontend/chat/resources/Message/Me
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type MessageModel } from '@lib/shared/chat/resources/Message/Message.models';
+import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 
 export const MessageTable: LFCModel<MessageTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });

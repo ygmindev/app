@@ -32,11 +32,11 @@ import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUse
 import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
+} from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
 import {
   type PaymentMethodModel,
   type PaymentMethodTypeModel,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+} from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';

@@ -8,8 +8,8 @@ import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormC
 import { type FormContainerRefModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
-import { type EntityResourceDataModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type OtpModel } from '@lib/model/auth/Otp/Otp.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 import { useRef } from 'react';
 
 export const OtpForm: LFCModel<OtpFormPropsModel> = ({

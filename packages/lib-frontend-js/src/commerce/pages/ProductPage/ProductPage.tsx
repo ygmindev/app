@@ -14,7 +14,7 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.constants';
-import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
+import { type ProductModel } from '@lib/model/commerce/Product/Product.models';
 import { type EntityResourcePartialModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { useState } from 'react';
 

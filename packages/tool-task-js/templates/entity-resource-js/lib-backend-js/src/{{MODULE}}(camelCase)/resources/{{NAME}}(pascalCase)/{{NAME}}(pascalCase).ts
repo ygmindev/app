@@ -1,4 +1,4 @@
-import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
+import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { {{NAME}}(constantCase)_RESOURCE_NAME } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';

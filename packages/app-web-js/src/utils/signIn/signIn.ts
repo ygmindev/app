@@ -1,7 +1,7 @@
 import { type SignInModel, type SignInParamsModel } from '@app/web/utils/signIn/signIn.models';
 import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
-import { USER_FIXTURE } from '@lib/shared/user/resources/User/User.fixtures';
+import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 
 export const signIn = async ({
   dirname = SIGN_IN,

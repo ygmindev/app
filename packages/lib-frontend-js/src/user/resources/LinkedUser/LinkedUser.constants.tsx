@@ -1,8 +1,8 @@
 import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models';
-import { LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
-import { type LinkedUserModel } from '@lib/shared/user/resources/LinkedUser/LinkedUser.models';
-import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
-import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { LINKED_USER_RESOURCE_NAME } from '@lib/model/user/LinkedUser/LinkedUser.constants';
+import { type LinkedUserModel } from '@lib/model/user/LinkedUser/LinkedUser.models';
+import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
+import { type UserModel } from '@lib/model/user/User/User.models';
 
 export const LINKED_USER_RESOURCE_PARAMS = {
   fields: [],

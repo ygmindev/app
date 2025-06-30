@@ -1,3 +1,3 @@
-import { type RoleImplementationModel } from '@lib/shared/auth/resources/Role/RoleImplementation/RoleImplementation.models';
+import { type RoleImplementationModel } from '@lib/model/auth/Role/RoleImplementation/RoleImplementation.models';
 
 export type UseRoleResourceModel = RoleImplementationModel;

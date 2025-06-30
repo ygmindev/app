@@ -2,7 +2,7 @@ import {
   type _UseAuthModel,
   type _UseAuthParamsModel,
 } from '@lib/frontend/auth/hooks/useAuth/_useAuth.models';
-import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
+import { type SignInTokenModel } from '@lib/model/auth/SignIn/SignIn.models';
 import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
 import { initializeApp } from 'firebase/app';
 import { type AuthError, onIdTokenChanged, type User } from 'firebase/auth';

@@ -11,7 +11,7 @@ import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUse
 import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
-import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { type UserModel } from '@lib/model/user/User/User.models';
 
 export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const { get } = useUserResource();

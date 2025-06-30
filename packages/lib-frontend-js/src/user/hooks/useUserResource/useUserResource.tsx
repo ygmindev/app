@@ -4,7 +4,7 @@ import { useResource } from '@lib/frontend/resource/hooks/useResource/useResourc
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { type UseUserResourceModel } from '@lib/frontend/user/hooks/useUserResource/useUserResource.models';
 import { USER_RESOURCE_PARAMS } from '@lib/frontend/user/resources/User/User.constants';
-import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { type UserModel } from '@lib/model/user/User/User.models';
 
 export const useUserResource = (): UseUserResourceModel => {
   const { t } = useTranslation();

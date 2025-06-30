@@ -1,3 +1,3 @@
-import { type AccessImplementationModel } from '@lib/shared/auth/resources/Access/AccessImplementation/AccessImplementation.models';
+import { type AccessImplementationModel } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation.models';
 
 export type UseAccessResourceModel = AccessImplementationModel;

@@ -9,7 +9,7 @@ import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormC
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type OrderModel } from '@lib/shared/commerce/resources/Order/Order.models';
+import { type OrderModel } from '@lib/model/commerce/Order/Order.models';
 import { SUCCESS } from '@lib/shared/core/core.constants';
 import { type PickModel } from '@lib/shared/core/utils/pick/pick.models';
 import { useRef } from 'react';

@@ -17,11 +17,11 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
-import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { APP_URI } from '@lib/shared/http/http.constants';
-import { type EntityResourceDataModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 import { useState } from 'react';
 
 export const NewPaymentMethodInput: RLFCModel<

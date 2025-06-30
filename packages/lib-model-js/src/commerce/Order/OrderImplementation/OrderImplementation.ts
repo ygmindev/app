@@ -1,0 +1,28 @@
+import { PaymentMethodImplementation } from '@lib/model/billing/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation';
+import { Order } from '@lib/model/commerce/Order/Order';
+import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
+import { ORDER_RESOURCE_NAME } from '@lib/model/commerce/Order/Order.constants';
+import { type OrderModel } from '@lib/model/commerce/Order/Order.models';
+import { type OrderImplementationModel } from '@lib/model/commerce/Order/OrderImplementation/OrderImplementation.models';
+import { Container } from '@lib/shared/core/utils/Container/Container';
+
+@withContainer({ name: `${ORDER_RESOURCE_NAME}Implementation` })
+export class OrderImplementation
+  extends createEntityResourceImplementation<OrderModel>({
+    Resource: Order,
+    beforeCreate: async ({ input }, context) => {
+      input?.form?.paymentMethodId &&
+        input?.form?.items &&
+        (await Container.get(PaymentMethodImplementation).createToken(
+          {
+            paymentMethodId: input.form.paymentMethodId,
+            products: input.form.items,
+          },
+          context,
+        ));
+      return input;
+    },
+    name: ORDER_RESOURCE_NAME,
+  })
+  implements OrderImplementationModel {}

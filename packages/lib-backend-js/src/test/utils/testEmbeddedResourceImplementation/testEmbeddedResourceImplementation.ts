@@ -1,4 +1,4 @@
-import { TestableEntityResourceImplementation } from '@lib/backend/test/resources/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
+import { TestableEntityResourceImplementation } from '@lib/model/test/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
 import { type TestEmbeddedResourceImplementationParamsModel } from '@lib/backend/test/utils/testEmbeddedResourceImplementation/testEmbeddedResourceImplementation.models';
 import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';
 import { Container } from '@lib/shared/core/utils/Container/Container';

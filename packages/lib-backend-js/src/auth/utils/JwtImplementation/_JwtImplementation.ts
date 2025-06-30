@@ -1,11 +1,11 @@
 import { type _JwtImplementationModel } from '@lib/backend/auth/utils/JwtImplementation/_JwtImplementation.models';
 import { AuthTokenError } from '@lib/shared/auth/errors/AuthTokenError/AuthTokenError';
 import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignIn.constants';
-import { type SignInTokenModel } from '@lib/shared/auth/resources/SignIn/SignIn.models';
+import { type SignInTokenModel } from '@lib/model/auth/SignIn/SignIn.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
-import { type UserModel } from '@lib/shared/user/resources/User/User.models';
+import { type UserModel } from '@lib/model/user/User/User.models';
 import { type AuthError } from 'firebase/auth';
 import admin from 'firebase-admin';
 import toString from 'lodash/toString';

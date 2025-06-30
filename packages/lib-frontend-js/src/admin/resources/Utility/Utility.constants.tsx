@@ -7,10 +7,10 @@ import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import {
   UTILITY_RESOURCE_NAME,
   UTILITY_TYPE,
-} from '@lib/shared/admin/resources/Utility/Utility.constants';
-import { type UtilityModel } from '@lib/shared/admin/resources/Utility/Utility.models';
-import { VENDOR_RESOURCE_NAME } from '@lib/shared/admin/resources/Vendor/Vendor.constants';
-import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.models';
+} from '@lib/model/admin/Utility/Utility.constants';
+import { type UtilityModel } from '@lib/model/admin/Utility/Utility.models';
+import { VENDOR_RESOURCE_NAME } from '@lib/model/admin/Vendor/Vendor.constants';
+import { type VendorModel } from '@lib/model/admin/Vendor/Vendor.models';
 import { cartesianObject } from '@lib/shared/core/utils/cartesianObject/cartesianObject';
 
 export const UTILITY_RESOURCE_PARAMS = {

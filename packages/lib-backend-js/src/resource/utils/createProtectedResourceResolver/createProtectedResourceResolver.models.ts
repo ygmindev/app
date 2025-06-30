@@ -1,6 +1,6 @@
 import { type CreateProtectedResoureImplementationModel } from '@lib/backend/resource/utils/createProtectedResourceImplementation/createProtectedResourceImplementation.models';
 import { type CreateResourceResolverParamsModel } from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver.models';
-import { type ProtectedResourceModel } from '@lib/shared/auth/resources/ProtectedResource/ProtectedResource.models';
+import { type ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/ProtectedResource.models';
 
 export type CreateProtectedResourceResolverParamsModel<TType extends ProtectedResourceModel> = Omit<
   CreateResourceResolverParamsModel<TType>,

@@ -5,8 +5,8 @@ import {
   CREATE_TOKEN,
   PAYMENT_METHOD_GET_ALL,
   REMOVE_TOKEN,
-} from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
+} from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
+import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { PAYMENT_INPUT } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.constants';
 import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
 import { ID_INPUT } from '@lib/shared/resource/utils/IdInput/IdInput.constants';
