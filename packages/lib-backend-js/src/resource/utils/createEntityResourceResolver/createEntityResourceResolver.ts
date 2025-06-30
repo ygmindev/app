@@ -4,7 +4,7 @@ import {
   type CreateEntityResourceResolverParamsModel,
 } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver.models';
 import { createResourceResolver } from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver';
-import { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 
 export const createEntityResourceResolver = <TType extends EntityResourceModel>(
   params: CreateEntityResourceResolverParamsModel<TType>,

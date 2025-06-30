@@ -16,7 +16,7 @@ import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constan
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
-} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+} from '@lib/model/core/EntityResource/EntityResource.models';
 import { type EntityResourceImplementationModel } from '@lib/shared/resource/resources/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';

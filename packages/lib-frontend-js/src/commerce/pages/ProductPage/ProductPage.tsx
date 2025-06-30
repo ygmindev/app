@@ -15,7 +15,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PRICING_RESOURCE_NAME } from '@lib/shared/commerce/resources/Pricing/Pricing.constants';
 import { type ProductModel } from '@lib/shared/commerce/resources/Product/Product.models';
-import { type EntityResourcePartialModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourcePartialModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { useState } from 'react';
 
 export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {

@@ -1,4 +1,4 @@
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { type TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';
 
 export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: Array<

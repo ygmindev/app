@@ -1,4 +1,4 @@
-import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 
 export type OtpModel = Omit<EntityResourceModel, 'created'> & {
   callingCode?: string;

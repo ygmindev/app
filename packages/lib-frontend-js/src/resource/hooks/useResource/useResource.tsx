@@ -8,7 +8,7 @@ import { type UseResourceMethodParamsModel } from '@lib/frontend/resource/hooks/
 import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 
 export const toGraphqlParamsFields = <TType,>(
   fields?: ResourceFieldsModel<TType>,

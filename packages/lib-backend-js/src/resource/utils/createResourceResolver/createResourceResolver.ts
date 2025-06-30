@@ -14,7 +14,7 @@ import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 

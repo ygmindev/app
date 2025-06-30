@@ -13,13 +13,7 @@
           "type": "string"
         },
         "utilities": {
-          "type": "array",
-          "items": {
-            "$ref": "../Utility/Utility.json#/definitions/UtilityModel"
-          }
-        },
-        "utility": {
-          "$ref": "../Utility/Utility.json#/definitions/UtilityModel"
+          "$ref": "#/definitions/CollectionModel<UtilityModel>"
         },
         "_id": {
           "type": "string"
@@ -40,5 +34,11 @@
         "created",
         "name"
       ]
+    },
+    "CollectionModel<UtilityModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "../Utility/Utility.json#/definitions/UtilityModel"
+      }
     },  }
 }

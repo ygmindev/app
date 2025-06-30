@@ -5,7 +5,7 @@ import { type VendorModel } from '@lib/shared/admin/resources/Vendor/Vendor.mode
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
-} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+} from '@lib/model/core/EntityResource/EntityResource.models';
 
 export type UtilityModel = EntityResourceModel & {
   [VENDOR_RESOURCE_NAME]?: RefFieldModel<VendorModel>;

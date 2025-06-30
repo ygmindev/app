@@ -1,4 +1,4 @@
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { type UserModel } from '@lib/shared/user/resources/User/User.models';
 
 export const SIGN_IN_RESOURCE_NAME = 'SignIn';

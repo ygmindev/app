@@ -7,20 +7,18 @@ import { schemaGenerate as _schemaGenerate } from '@tool/task/generate/utils/sch
 const schemaGenerate: TaskParamsModel<SchemaGenerateParamsModel> = {
   name: 'schema-generate',
 
-  // options: () => [{ isOptional: true, key: 'key' }],
-
   // TODO: from config?
   task: [
     async () =>
       runClean({
-        patterns: ['**/*/resources/*/*.json', '**/*/resources/*/*.py'],
+        patterns: ['*/resources/*'],
         root: fromPackages('lib-model-py/src/lib_model'),
       }),
 
     async ({ options }) =>
       _schemaGenerate({
         fromDirname: fromPackages('lib-model-js/src'),
-        sources: ['admin/resources/*/*.models.ts', 'admin/resources/*/*.models.ts'],
+        sources: ['*/*.models.ts'],
         toDirname: fromPackages('lib-model-py/src/lib_model'),
       }),
   ],

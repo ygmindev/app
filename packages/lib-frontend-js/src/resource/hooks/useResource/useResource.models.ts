@@ -1,6 +1,6 @@
 import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models';
 import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
-import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import {
   type ResourceImplementationDecoratorModel,
   type ResourceImplementationModel,

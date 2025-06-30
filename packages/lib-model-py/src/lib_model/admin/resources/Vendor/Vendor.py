@@ -8,14 +8,17 @@ from pydantic import BaseModel, ConfigDict, Field, RootModel
 from ..Utility import Utility
 
 
+class CollectionModelUtilityModel(RootModel[List[Utility.UtilityModel]]):
+    root: List[Utility.UtilityModel]
+
+
 class VendorModel(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
     )
     imageSrc: Optional[str] = None
     name: str
-    utilities: Optional[List[Utility.UtilityModel]] = None
-    utility: Optional[Utility.UtilityModel] = None
+    utilities: Optional[CollectionModelUtilityModel] = None
     field_id: str = Field(..., alias='_id')
     beforeCreate: None = None
     created: datetime

@@ -28,7 +28,7 @@ import { uid } from '@lib/shared/core/utils/uid/uid';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,
-} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+} from '@lib/model/core/EntityResource/EntityResource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import cloneDeep from 'lodash/cloneDeep';

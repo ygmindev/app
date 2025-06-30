@@ -44,7 +44,8 @@ export const _schemaGenerate = async ({
     const pyPathname = joinPaths([outDirname, snakeCase(main)], { extension: 'py' });
     const type = `${main}Model`;
     const schema = createGenerator({
-      expose: 'all',
+      // expose: 'all',
+      encodeRefs: false,
       path: basePathname,
       skipTypeCheck: true,
       topRef: true,

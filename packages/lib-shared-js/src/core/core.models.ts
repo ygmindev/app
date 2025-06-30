@@ -1,4 +1,4 @@
-import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
+import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
 import { type BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import {
   type Class,

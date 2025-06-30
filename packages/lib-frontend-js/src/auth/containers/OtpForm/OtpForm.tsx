@@ -9,7 +9,7 @@ import { type FormContainerRefModel } from '@lib/frontend/data/components/FormCo
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { type OtpModel } from '@lib/shared/auth/resources/Otp/Otp.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { useRef } from 'react';
 
 export const OtpForm: LFCModel<OtpFormPropsModel> = ({

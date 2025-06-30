@@ -21,7 +21,7 @@ import { PAYMENT_METHOD_TYPE } from '@lib/shared/billing/resources/PaymentMethod
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { APP_URI } from '@lib/shared/http/http.constants';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { useState } from 'react';
 
 export const NewPaymentMethodInput: RLFCModel<

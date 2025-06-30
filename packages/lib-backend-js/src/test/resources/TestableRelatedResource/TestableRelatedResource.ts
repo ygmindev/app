@@ -1,4 +1,4 @@
-import { type CollectionModel } from '@lib/backend/resource/utils/Collection/Collection.models';
+import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
 import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';

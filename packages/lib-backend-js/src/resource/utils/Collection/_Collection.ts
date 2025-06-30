@@ -1,11 +1,11 @@
 import {
   type _CollectionModel,
   type _CollectionParamsModel,
-} from '@lib/backend/resource/utils/Collection/_Collection.models';
+} from '@lib/model/core/Collection/_Collection.models';
 import {
   type EntityResourceModel,
   type EntityResourcePartialModel,
-} from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+} from '@lib/model/core/EntityResource/EntityResource.models';
 import { Collection } from '@mikro-orm/core';
 
 export class _Collection<TType extends EntityResourceModel, TRoot extends EntityResourceModel>

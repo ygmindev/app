@@ -12,7 +12,7 @@ import {
   type ResourceReadMethodTypeModel,
   type ResourceWriteMethodTypeModel,
 } from '@lib/shared/resource/resource.models';
-import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 

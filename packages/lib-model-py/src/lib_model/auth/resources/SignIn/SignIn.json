@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/SignInModel",
+  "definitions": {
+    "SignInModel": {
+      "type": "object",
+      "properties": {
+        "isNew": {
+          "type": "boolean"
+        },
+        "token": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "../../../user/resources/User/User.json#/definitions/UserModel"
+        }
+      },
+      "required": [
+        "user"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -16,7 +16,7 @@ import { PartialModel } from '@lib/shared/core/core.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 // import { pick } from '@lib/shared/core/utils/pick/pick';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceDataModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import toNumber from 'lodash/toNumber';
 
 @withContainer()

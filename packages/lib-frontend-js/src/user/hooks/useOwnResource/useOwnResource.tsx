@@ -4,7 +4,7 @@ import {
   type UseOwnResourceModel,
   type UseOwnResourceParamsModel,
 } from '@lib/frontend/user/hooks/useOwnResource/useOwnResource.models';
-import { type EntityResourceModel } from '@lib/shared/resource/resources/EntityResource/EntityResource.models';
+import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
 import { USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';
 import filter from 'lodash/filter';
