@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/VendorModel",
+  "definitions": {
+    "VendorModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "imageSrc": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "utilities": {
+          "$ref": "#/definitions/CollectionModel<UtilityModel>"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "name"
+      ]
+    },
+    "CollectionModel<UtilityModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "../Utility/Utility.json#/definitions/UtilityModel"
+      }
+    }
+  }
+}

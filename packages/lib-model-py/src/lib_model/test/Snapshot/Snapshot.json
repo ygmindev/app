@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/SnapshotModel",
+  "definitions": {
+    "SnapshotModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "name"
+      ]
+    }
+  }
+}

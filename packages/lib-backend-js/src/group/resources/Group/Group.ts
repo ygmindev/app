@@ -1,11 +1,11 @@
 import { Access } from '@lib/backend/auth/resources/Access/Access';
 import { Role } from '@lib/backend/auth/resources/Role/Role';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import { Collection } from '@lib/model/core/Collection/Collection';
-import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
+import { Collection } from '@lib/backend/core/utils/Collection/Collection';
+import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
 import { AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { ROLE_RESOURCE_NAME } from '@lib/shared/auth/resources/Role/Role.constants';

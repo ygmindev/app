@@ -14,7 +14,14 @@ import {
   type _SchemaGenerateParamsModel,
 } from '@tool/task/generate/utils/schemaGenerate/_schemaGenerate.models';
 import { type JSONSchema7 } from 'json-schema';
-import { type EditResult, findNodeAtLocation, modify, type Node, parseTree } from 'jsonc-parser';
+import {
+  type EditResult,
+  findNodeAtLocation,
+  modify,
+  type Node,
+  parse,
+  parseTree,
+} from 'jsonc-parser';
 import snakeCase from 'lodash/snakeCase';
 import { createGenerator } from 'ts-json-schema-generator';
 
@@ -132,6 +139,8 @@ export const _schemaGenerate = async ({
           result.slice(edit.offset + edit.length);
       }
     }
+
+    result = stringify(parse(result, [], { allowTrailingComma: true }));
 
     !isSilent && logger.debug(`schema generated for: ${basePathname}`);
     writeFile({ filename: jsonPathname, value: result });

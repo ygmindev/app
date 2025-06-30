@@ -1,5 +1,5 @@
-import { _Collection } from '@lib/model/core/Collection/_Collection';
-import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
+import { _Collection } from '@lib/backend/core/utils/Collection/_Collection';
+import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 
 export class Collection<TType extends EntityResourceModel, TRoot extends EntityResourceModel>

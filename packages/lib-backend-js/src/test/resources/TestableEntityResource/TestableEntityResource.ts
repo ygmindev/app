@@ -1,5 +1,3 @@
-import { Collection } from '@lib/model/core/Collection/Collection';
-import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
@@ -7,6 +5,8 @@ import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyFie
 import { TestableEmbeddedResource } from '@lib/backend/test/resources/TestableEmbeddedResource/TestableEmbeddedResource';
 import { TestableRelatedResource } from '@lib/backend/test/resources/TestableRelatedResource/TestableRelatedResource';
 import { TestableResource } from '@lib/backend/test/resources/TestableResource/TestableResource';
+import { Collection } from '@lib/backend/core/utils/Collection/Collection';
+import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { TestableEmbeddedResourceModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
 import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.constants';
 import { type TestableEntityResourceModel } from '@lib/shared/test/resources/TestableEntityResource/TestableEntityResource.models';

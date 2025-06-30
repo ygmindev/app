@@ -1,4 +1,4 @@
-import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
+import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { type TestableEmbeddedResourceModel } from '@lib/shared/test/resources/TestableEmbeddedResource/TestableEmbeddedResource.models';
 import { type TestableRelatedResourceModel } from '@lib/shared/test/resources/TestableRelatedResource/TestableRelatedResource.models';
 import { type TestableResourceModel } from '@lib/shared/test/resources/TestableResource/TestableResource.models';

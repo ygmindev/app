@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/ProductModel",
+  "definitions": {
+    "ProductModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Pricing": {
+          "type": "array",
+          "items": {
+            "$ref": "../Pricing/Pricing.json#/definitions/PricingModel"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageSrc": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "name"
+      ]
+    }
+  }
+}

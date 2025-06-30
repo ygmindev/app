@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/ProductItemModel",
+  "definitions": {
+    "ProductItemModel": {
+      "type": "object",
+      "properties": {
+        "imageSrc": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "pricingId": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "pricingId",
+        "productId"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

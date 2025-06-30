@@ -1,7 +1,7 @@
 import {
   type _CollectionModel,
   type _CollectionParamsModel,
-} from '@lib/model/core/Collection/_Collection.models';
+} from '@lib/backend/core/utils/Collection/_Collection.models';
 import {
   type EntityResourceModel,
   type EntityResourcePartialModel,

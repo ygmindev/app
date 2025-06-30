@@ -1,4 +1,4 @@
-import { Collection } from '@lib/model/core/Collection/Collection';
+import { Collection } from '@lib/backend/core/utils/Collection/Collection';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ Collection });

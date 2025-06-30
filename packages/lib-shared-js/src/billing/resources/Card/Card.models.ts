@@ -1,4 +1,4 @@
-import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
+import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { type CARD_FUNDING } from '@lib/shared/billing/resources/Card/Card.constants';
 import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { type USER_RESOURCE_NAME } from '@lib/shared/user/resources/User/User.constants';

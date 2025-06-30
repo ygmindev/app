@@ -1,4 +1,5 @@
-import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
+import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
+import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { type ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
 import { type AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { type BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.constants';
@@ -9,7 +10,6 @@ import { type PAYMENT_METHOD_RESOURCE_NAME } from '@lib/shared/billing/resources
 import { type PaymentMethodModel } from '@lib/shared/billing/resources/PaymentMethod/PaymentMethod.models';
 import { type ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
 import { type MessageModel } from '@lib/shared/chat/resources/Message/Message.models';
-import { type EntityResourceModel } from '@lib/model/core/EntityResource/EntityResource.models';
 import { type LINKED_USER_RESOURCE_NAME } from '@lib/shared/user/resources/LinkedUser/LinkedUser.constants';
 import { type LinkedUserModel } from '@lib/shared/user/resources/LinkedUser/LinkedUser.models';
 

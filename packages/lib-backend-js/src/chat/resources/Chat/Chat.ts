@@ -1,12 +1,12 @@
 import { Message } from '@lib/backend/chat/resources/Message/Message';
-import { Collection } from '@lib/model/core/Collection/Collection';
-import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
 import { createProtectedResource } from '@lib/backend/resource/utils/createProtectedResource/createProtectedResource';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
 import { User } from '@lib/backend/user/resources/User/User';
+import { Collection } from '@lib/backend/core/utils/Collection/Collection';
+import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { CHAT_RESOURCE_NAME } from '@lib/shared/chat/resources/Chat/Chat.constants';
 import { type ChatModel } from '@lib/shared/chat/resources/Chat/Chat.models';
 import { MessageModel } from '@lib/shared/chat/resources/Message/Message.models';

@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/GroupModel",
+  "definitions": {
+    "GroupModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Access": {
+          "$ref": "#/definitions/CollectionModel<AccessModel>"
+        },
+        "Role": {
+          "$ref": "#/definitions/CollectionModel<RoleModel>"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GROUP_TYPE"
+          }
+        },
+        "_id": {
+          "type": "string"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "name"
+      ]
+    },
+    "CollectionModel<AccessModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AccessModel"
+      }
+    },
+    "AccessModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Group": {
+          "$ref": "#/definitions/RefFieldModel<GroupModel>"
+        },
+        "Role": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessRoleMoreModel"
+          }
+        },
+        "User": {
+          "$ref": "#/definitions/RefFieldModel<UserModel>"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Role",
+        "User",
+        "_id",
+        "created"
+      ]
+    },
+    "RefFieldModel<GroupModel>": {},
+    "AccessRoleMoreModel": {
+      "type": "string",
+      "const": "Admin"
+    },
+    "RefFieldModel<UserModel>": {},
+    "CollectionModel<RoleModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RoleModel"
+      }
+    },
+    "RoleModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Group": {
+          "$ref": "#/definitions/RefFieldModel<GroupModel>"
+        },
+        "name": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "_id",
+        "created"
+      ]
+    },
+    "GROUP_TYPE": {
+      "type": [],
+      "enum": []
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/ProtectedResourceModel",
+  "definitions": {
+    "ProtectedResourceModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "createdBy": {
+          "$ref": "../../user/User/User.json#/definitions/UserModel"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "_id",
+        "created"
+      ]
+    }
+  }
+}

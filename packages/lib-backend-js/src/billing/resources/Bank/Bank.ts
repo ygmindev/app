@@ -1,6 +1,6 @@
+import { Collection } from '@lib/backend/core/utils/Collection/Collection';
+import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import { Collection } from '@lib/model/core/Collection/Collection';
-import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';

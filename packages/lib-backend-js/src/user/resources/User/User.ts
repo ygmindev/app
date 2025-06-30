@@ -5,8 +5,6 @@ import { PaymentMethod } from '@lib/backend/billing/resources/PaymentMethod/Paym
 import { Chat } from '@lib/backend/chat/resources/Chat/Chat';
 import { Message } from '@lib/backend/chat/resources/Message/Message';
 import { EntityResource } from '@lib/backend/resource/resources/EntityResource/EntityResource';
-import { Collection } from '@lib/model/core/Collection/Collection';
-import { type CollectionModel } from '@lib/model/core/Collection/Collection.models';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
@@ -14,6 +12,8 @@ import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyF
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
 import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefField';
 import { LinkedUser } from '@lib/backend/user/resources/LinkedUser/LinkedUser';
+import { Collection } from '@lib/backend/core/utils/Collection/Collection';
+import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { ACCESS_RESOURCE_NAME } from '@lib/shared/auth/resources/Access/Access.constants';
 import { AccessModel } from '@lib/shared/auth/resources/Access/Access.models';
 import { BANK_RESOURCE_NAME } from '@lib/shared/billing/resources/Bank/Bank.constants';

@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/PaymentMethodModel",
+  "definitions": {
+    "PaymentMethodModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "externalId": {
+          "type": "string"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "isPrimary": {
+          "type": "boolean"
+        },
+        "last4": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/PAYMENT_METHOD_TYPE"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "externalId",
+        "fingerprint",
+        "last4",
+        "name",
+        "type"
+      ]
+    },
+    "PAYMENT_METHOD_TYPE": {
+      "type": "string",
+      "enum": [
+        "bank",
+        "card"
+      ]
+    }
+  }
+}

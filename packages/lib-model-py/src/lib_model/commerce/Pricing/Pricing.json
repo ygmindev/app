@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/PricingModel",
+  "definitions": {
+    "PricingModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Product": {
+          "$ref": "#/definitions/RefFieldModel<ProductModel>"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "frequency": {
+          "$ref": "#/definitions/PricingFrequencyModel"
+        },
+        "price": {
+          "type": "number"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "_id",
+        "created"
+      ]
+    },
+    "RefFieldModel<ProductModel>": {},
+    "PricingFrequencyModel": {
+      "type": "string",
+      "const": "recurring"
+    }
+  }
+}

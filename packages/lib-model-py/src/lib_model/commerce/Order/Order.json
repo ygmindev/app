@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/OrderModel",
+  "definitions": {
+    "OrderModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "../ProductItem/ProductItem.json#/definitions/ProductItemModel"
+          }
+        },
+        "paymentMethodId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/ORDER_STATUS"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "_id",
+        "created"
+      ]
+    },
+    "ORDER_STATUS": {
+      "type": "string",
+      "enum": [
+        "canceled",
+        "completed",
+        "refunded"
+      ]
+    }
+  }
+}
