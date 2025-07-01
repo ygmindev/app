@@ -1,4 +1,4 @@
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';

@@ -1,8 +1,8 @@
 import { type _WithAccessModel } from '@lib/backend/resource/utils/withAccess/_withAccess.models';
-import { type AccessLevelModel } from '@lib/model/auth/Access/Access.models';
+import { type ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 
 export type WithAccessParamsModel = {
-  access?: AccessLevelModel;
+  access?: ACCESS_LEVEL;
 };
 
 export type WithAccessModel = _WithAccessModel;

@@ -7,7 +7,7 @@ import {
   type OrderModel,
   OrderStatusModel,
 } from '@lib/model/commerce/Order/Order.models';
-import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 

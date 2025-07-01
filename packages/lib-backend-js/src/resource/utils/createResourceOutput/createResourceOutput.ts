@@ -9,13 +9,12 @@ import { createRoot } from '@lib/backend/resource/utils/createRoot/createRoot';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import { type ResultModel } from '@lib/shared/resource/utils/Result/Result.models';
 
 export const createResourceOutput = <
-  TMethod extends ResourceMethodTypeModel,
+  TMethod extends RESOURCE_METHOD_TYPE,
   TType,
   TRoot = undefined,
 >({
@@ -38,13 +37,7 @@ export const createResourceOutput = <
 
   const isArrayF =
     isArray ||
-    (method &&
-      (
-        [
-          RESOURCE_METHOD_TYPE.GET_MANY,
-          RESOURCE_METHOD_TYPE.SEARCH,
-        ] as Array<ResourceMethodTypeModel>
-      ).includes(method));
+    (method && [RESOURCE_METHOD_TYPE.GET_MANY, RESOURCE_METHOD_TYPE.SEARCH].includes(method));
 
   @withEntity({ name: nameF })
   class Output extends (Root ?? class {}) implements ResourceOutputModel<TMethod, TType, TRoot> {

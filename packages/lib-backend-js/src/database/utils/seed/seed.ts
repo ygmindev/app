@@ -3,7 +3,7 @@ import { type SeedModel } from '@lib/backend/database/utils/seed/seed.models';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import {
   type EntityResourceDataModel,
   type EntityResourceModel,

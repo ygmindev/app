@@ -4,13 +4,9 @@ import {
   type WithResourceInputModel,
   type WithResourceInputParamsModel,
 } from '@lib/backend/resource/utils/withResourceInput/withResourceInput.models';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
-export const withResourceInput = <
-  TMethod extends ResourceMethodTypeModel,
-  TType,
-  TRoot = undefined,
->({
+export const withResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot = undefined>({
   Resource,
   method,
   name,

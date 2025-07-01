@@ -15,7 +15,7 @@ import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/U
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import {
   type FilterConditionModel,

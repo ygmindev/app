@@ -6,6 +6,8 @@ import {
 } from '@lib/backend/resource/utils/createEmbeddedResourceImplementation/createEmbeddedResourceImplementation.models';
 import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
 import { getMetadata } from '@lib/backend/resource/utils/getMetadata/getMetadata';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
@@ -14,13 +16,11 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type FilterableResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import {
   type EntityResourceDataModel,
-  type EntityResourceModel,
-} from '@lib/model/resource/EntityResource/EntityResource.models';
-import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
+  type FilterableResourceMethodTypeModel,
+} from '@lib/shared/resource/resource.models';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';

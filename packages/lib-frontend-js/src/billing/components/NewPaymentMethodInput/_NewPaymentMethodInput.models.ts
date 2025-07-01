@@ -1,5 +1,5 @@
 import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
-import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { type EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 

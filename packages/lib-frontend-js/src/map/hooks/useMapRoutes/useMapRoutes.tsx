@@ -8,7 +8,7 @@ export const useMapRoutes = (): UseMapRoutesModel => {};
 // import { MAP_ROUTE_RESOURCE } from '@lib/model/map/MapRoute/MapRoute.constants';
 // import { type MapRouteModel } from '@lib/model/map/MapRoute/MapRoute.models';
 // import { type GetRouteInputModel } from '@lib/model/map/MapRoute/MapRouteImplementation/MapRouteImplementation.models';
-// import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+// import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
 // export const useMapRoutes = (): UseMapRoutesModel => {
 //   const { query } = useAppGraphql();

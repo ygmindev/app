@@ -8,16 +8,16 @@ import {
   type CreateRelatedResourceImplementationParamsModel,
 } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation.models';
 import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import {
   type EntityResourceDataModel,
-  type EntityResourceModel,
-} from '@lib/model/resource/EntityResource/EntityResource.models';
-import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
+  type RESOURCE_METHOD_TYPE,
+} from '@lib/shared/resource/resource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';

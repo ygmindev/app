@@ -1,15 +1,15 @@
-import { Bank } from '@lib/model/billing/Bank/Bank';
 import { getFingerprintInput } from '@lib/backend/billing/utils/getFingerprintInput/getFingerprintInput';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createRelatedResourceImplementation } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation';
-import { UserImplementation } from '@lib/model/user/User/UserImplementation/UserImplementation';
+import { Bank } from '@lib/model/billing/Bank/Bank';
 import { BANK_RESOURCE_NAME } from '@lib/model/billing/Bank/Bank.constants';
 import { type BankModel } from '@lib/model/billing/Bank/Bank.models';
 import { type BankImplementationModel } from '@lib/model/billing/Bank/BankImplementation/BankImplementation.models.js';
-import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
-import { Container } from '@lib/shared/core/utils/Container/Container';
+import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { type UserModel } from '@lib/model/user/User/User.models';
+import { UserImplementation } from '@lib/model/user/User/UserImplementation/UserImplementation';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 
 @withContainer()
 export class BankImplementation

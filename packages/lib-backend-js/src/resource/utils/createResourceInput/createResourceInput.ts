@@ -4,10 +4,10 @@ import {
   type CreateResourceInputParamsModel,
 } from '@lib/backend/resource/utils/createResourceInput/createResourceInput.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
 export const createResourceInput = <
-  TMethod extends ResourceMethodTypeModel,
+  TMethod extends RESOURCE_METHOD_TYPE,
   TType,
   TRoot = undefined,
 >({

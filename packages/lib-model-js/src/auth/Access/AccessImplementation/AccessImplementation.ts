@@ -7,7 +7,7 @@ import { ACCESS_LEVEL, ACCESS_RESOURCE_NAME } from '@lib/model/auth/Access/Acces
 import { type AccessModel } from '@lib/model/auth/Access/Access.models';
 import { type AccessImplementationModel } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 

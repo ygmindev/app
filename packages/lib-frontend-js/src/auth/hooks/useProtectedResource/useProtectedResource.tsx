@@ -9,7 +9,7 @@ import {
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { type UseResourceMethodParamsFieldsModel } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
 import { type ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/ProtectedResource.models';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
 export const useProtectedResource = <TType extends ProtectedResourceModel>({
   fields,

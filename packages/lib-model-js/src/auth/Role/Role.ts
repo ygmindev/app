@@ -1,4 +1,3 @@
-import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';
@@ -13,7 +12,7 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 @withEntity({ isDatabase: true, name: ROLE_RESOURCE_NAME })
 export class Role extends EntityResource implements RoleModel {
   @withManyToOneField({ Resource: () => Group })
-  [GROUP_RESOURCE_NAME]?: RefFieldModel<GroupModel>;
+  [GROUP_RESOURCE_NAME]?: Partial<GroupModel>;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   name?: string;

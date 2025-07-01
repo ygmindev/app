@@ -1,13 +1,24 @@
 from __future__ import annotations
 
-from typing import Any
+from datetime import datetime
+from typing import Any, Optional
 
-from pydantic import RootModel
-
-
-class CollectionModelMessageModel(RootModel[Any]):
-    root: Any
+from pydantic import BaseModel, ConfigDict, Field, RootModel
 
 
-class Model(RootModel[Any]):
-    root: Any
+class ChatModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    messsages: Optional[Any] = None
+    name: Optional[str] = None
+    participants: Optional[Any] = None
+    createdBy: Optional[Any] = None
+    field_id: str = Field(..., alias='_id')
+    beforeCreate: None = None
+    created: datetime
+    isFixture: Optional[bool] = None
+
+
+class Model(RootModel[ChatModel]):
+    root: ChatModel

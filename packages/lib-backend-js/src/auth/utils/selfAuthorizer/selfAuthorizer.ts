@@ -3,9 +3,9 @@ import {
   type SelfAuthorizerParamsModel,
 } from '@lib/backend/auth/utils/selfAuthorizer/selfAuthorizer.models';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
-export const selfAuthorizer = <TMethod extends ResourceMethodTypeModel, TType>({
+export const selfAuthorizer = <TMethod extends RESOURCE_METHOD_TYPE, TType>({
   context,
   input,
 }: SelfAuthorizerParamsModel<TMethod, TType>): SelfAuthorizerModel =>

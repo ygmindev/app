@@ -1,4 +1,4 @@
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 

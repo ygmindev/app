@@ -1,11 +1,10 @@
-import { AccessImplementation } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation';
 import {
   type AuthorizeModel,
   type AuthorizeParamsModel,
 } from '@lib/backend/auth/utils/authorize/authorize.models';
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
 import { ACCESS_ROLE } from '@lib/model/auth/Access/Access.constants';
-import { type AccessRoleMoreModel } from '@lib/model/auth/Access/Access.models';
+import { AccessImplementation } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation';
 import { ROLE_RESOURCE_NAME } from '@lib/model/auth/Role/Role.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import pullAt from 'lodash/pullAt';
@@ -32,9 +31,7 @@ export const authorize = async ({
               filter: [{ field: '_user', value: user._id }],
             });
             return result?.[ROLE_RESOURCE_NAME]
-              ? (rolesF as Array<AccessRoleMoreModel>).every((v) =>
-                  result[ROLE_RESOURCE_NAME]?.includes(v),
-                )
+              ? rolesF.every((v) => result[ROLE_RESOURCE_NAME]?.includes(v))
               : false;
           }
         } catch (e) {

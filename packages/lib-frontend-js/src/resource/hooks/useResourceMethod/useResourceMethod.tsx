@@ -7,8 +7,7 @@ import {
   type UseResourceMethodModel,
   type UseResourceMethodParamsModel,
 } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { expandFilter } from '@lib/shared/resource/utils/expandFilter/expandFilter';
 import { getOperationType } from '@lib/shared/resource/utils/getOperationType/getOperationType';
 import { type ResourceImplementationBeforeDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
@@ -37,11 +36,7 @@ const getConnectionFields = <TType, TRoot = undefined>(
     GraphqlFieldModel<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>>
   >;
 
-export const useResourceMethod = <
-  TMethod extends ResourceMethodTypeModel,
-  TType,
-  TRoot = undefined,
->({
+export const useResourceMethod = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot = undefined>({
   after,
   before,
   fields,
@@ -67,16 +62,14 @@ export const useResourceMethod = <
     let inputF = before ? await before({ input }) : input;
     if (
       method &&
-      (
-        [
-          RESOURCE_METHOD_TYPE.GET,
-          RESOURCE_METHOD_TYPE.GET_MANY,
-          RESOURCE_METHOD_TYPE.GET_CONNECTION,
-          RESOURCE_METHOD_TYPE.UPDATE,
-          RESOURCE_METHOD_TYPE.REMOVE,
-          RESOURCE_METHOD_TYPE.SUBSCRIBE,
-        ] as Array<ResourceMethodTypeModel>
-      ).includes(method)
+      [
+        RESOURCE_METHOD_TYPE.GET,
+        RESOURCE_METHOD_TYPE.GET_MANY,
+        RESOURCE_METHOD_TYPE.GET_CONNECTION,
+        RESOURCE_METHOD_TYPE.UPDATE,
+        RESOURCE_METHOD_TYPE.REMOVE,
+        RESOURCE_METHOD_TYPE.SUBSCRIBE,
+      ].includes(method)
     ) {
       const inputFF = inputF as unknown as ResourceInputModel<
         | RESOURCE_METHOD_TYPE.GET

@@ -9,7 +9,7 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.constants';
-import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 

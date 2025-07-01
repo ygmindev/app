@@ -3,7 +3,6 @@ import { type ACCESS_RESOURCE_NAME } from '@lib/model/auth/Access/Access.constan
 import { type AccessModel } from '@lib/model/auth/Access/Access.models';
 import { type ROLE_RESOURCE_NAME } from '@lib/model/auth/Role/Role.constants';
 import { type RoleModel } from '@lib/model/auth/Role/Role.models';
-import { type GROUP_TYPE } from '@lib/model/group/Group/Group.constants';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type GroupModel = EntityResourceModel & {
@@ -17,3 +16,5 @@ export type GroupModel = EntityResourceModel & {
 
   types?: Array<GROUP_TYPE>;
 };
+
+export enum GROUP_TYPE {}

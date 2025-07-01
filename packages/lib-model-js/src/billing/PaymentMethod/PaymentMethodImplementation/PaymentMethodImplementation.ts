@@ -7,16 +7,16 @@ import { BankImplementation } from '@lib/model/billing/Bank/BankImplementation/B
 import { type BankImplementationModel } from '@lib/model/billing/Bank/BankImplementation/BankImplementation.models.js';
 import { CardImplementation } from '@lib/model/billing/Card/CardImplementation/CardImplementation';
 import { type CardImplementationModel } from '@lib/model/billing/Card/CardImplementation/CardImplementation.models';
+import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
 import {
-  PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
-} from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
+  type PaymentMethodModel,
+} from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodImplementationModel } from '@lib/model/billing/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
 import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.constants';
 import { ProductImplementation } from '@lib/model/commerce/Product/ProductImplementation/ProductImplementation';
 import { type ProductImplementationModel } from '@lib/model/commerce/Product/ProductImplementation/ProductImplementation.models';
-import { LINKED_USER_TYPE } from '@lib/model/user/LinkedUser/LinkedUser.constants';
+import { LINKED_USER_TYPE } from '@lib/model/user/LinkedUser/LinkedUser.models';
 import { LinkedUserImplementation } from '@lib/model/user/LinkedUser/LinkedUserImplementation/LinkedUserImplementation';
 import { type LinkedUserImplementationModel } from '@lib/model/user/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
@@ -35,39 +35,20 @@ import round from 'lodash/round';
 
 @withContainer({ name: `${PAYMENT_METHOD_RESOURCE_NAME}Implementation` })
 export class PaymentMethodImplementation implements PaymentMethodImplementationModel {
+  @withInject(BankImplementation)
+  protected bankImplementation!: BankImplementationModel;
+
+  @withInject(CardImplementation)
+  protected cardImplementation!: CardImplementationModel;
+
   @withInject(LinkedUserImplementation)
   protected linkedUserImplementation!: LinkedUserImplementationModel;
 
   @withInject(ProductImplementation)
   protected productImplementation!: ProductImplementationModel;
 
-  @withInject(CardImplementation)
-  protected cardImplementation!: CardImplementationModel;
-
-  @withInject(BankImplementation)
-  protected bankImplementation!: BankImplementationModel;
-
   @withInject(StripeAdminImplementation)
   protected stripeAdminImplementation!: StripeAdminImplementationModel;
-
-  async getAll(context?: RequestContextModel): Promise<Array<Partial<PaymentMethodModel>>> {
-    const userId = context?.user?._id;
-    if (userId) {
-      const fields: Array<StringKeyModel<PaymentMethodModel>> = [
-        '_id',
-        'externalId',
-        'last4',
-        'name',
-      ];
-      const { result: banks } = await this.bankImplementation.getMany({ root: userId });
-      const { result: cards } = await this.cardImplementation.getMany({ root: userId });
-      return [
-        ...(banks?.map((v) => ({ ...pick(v, fields), type: PAYMENT_METHOD_TYPE.BANK })) ?? []),
-        ...(cards?.map((v) => ({ ...pick(v, fields), type: PAYMENT_METHOD_TYPE.CARD })) ?? []),
-      ];
-    }
-    throw new UnauthenticatedError();
-  }
 
   async createToken(input: PaymentInputModel, context?: RequestContextModel): Promise<string> {
     const userId = context?.user?._id;
@@ -137,6 +118,25 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
         throw new Error('failed to create token');
       }
       throw new NotFoundError('linked user');
+    }
+    throw new UnauthenticatedError();
+  }
+
+  async getAll(context?: RequestContextModel): Promise<Array<Partial<PaymentMethodModel>>> {
+    const userId = context?.user?._id;
+    if (userId) {
+      const fields: Array<StringKeyModel<PaymentMethodModel>> = [
+        '_id',
+        'externalId',
+        'last4',
+        'name',
+      ];
+      const { result: banks } = await this.bankImplementation.getMany({ root: userId });
+      const { result: cards } = await this.cardImplementation.getMany({ root: userId });
+      return [
+        ...(banks?.map((v) => ({ ...pick(v, fields), type: PAYMENT_METHOD_TYPE.BANK })) ?? []),
+        ...(cards?.map((v) => ({ ...pick(v, fields), type: PAYMENT_METHOD_TYPE.CARD })) ?? []),
+      ];
     }
     throw new UnauthenticatedError();
   }

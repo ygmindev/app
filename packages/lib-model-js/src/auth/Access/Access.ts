@@ -1,4 +1,3 @@
-import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';
@@ -17,11 +16,11 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 @withEntity({ isDatabase: true, name: ACCESS_RESOURCE_NAME })
 export class Access extends EntityResource implements AccessModel {
   @withManyToOneField({ Resource: () => Group })
-  [GROUP_RESOURCE_NAME]?: RefFieldModel<GroupModel>;
+  [GROUP_RESOURCE_NAME]?: Partial<GroupModel>;
 
   @withField({ isArray: true, isDatabase: true, type: DATA_TYPE.STRING })
   [ROLE_RESOURCE_NAME]!: Array<ACCESS_ROLE>;
 
   @withManyToOneField({ Resource: () => User })
-  [USER_RESOURCE_NAME]!: RefFieldModel<UserModel>;
+  [USER_RESOURCE_NAME]!: Partial<UserModel>;
 }

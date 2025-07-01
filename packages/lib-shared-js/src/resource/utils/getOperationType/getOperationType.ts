@@ -1,6 +1,6 @@
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import {
   type GetOperationTypeModel,
   type GetOperationTypeParamsModel,

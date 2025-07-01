@@ -3,25 +3,14 @@ import {
   type WithAccessModel,
   type WithAccessParamsModel,
 } from '@lib/backend/resource/utils/withAccess/withAccess.models';
-import {
-  ACCESS_LEVEL,
-  ACCESS_ROLE,
-  ACCESS_ROLE_MORE,
-} from '@lib/model/auth/Access/Access.constants';
-import {
-  type AccessLevelModel,
-  type AccessRoleModel,
-  type AccessRoleMoreModel,
-} from '@lib/model/auth/Access/Access.models';
+import { ACCESS_LEVEL, ACCESS_ROLE } from '@lib/model/auth/Access/Access.constants';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 
 // TODO: should come from database?
-export const getAccessRole = (
-  access: AccessLevelModel,
-): Array<AccessRoleModel | AccessRoleMoreModel> => {
+export const getAccessRole = (access: ACCESS_LEVEL): Array<ACCESS_ROLE> => {
   switch (access) {
     case ACCESS_LEVEL.RESTRICTED:
-      return [ACCESS_ROLE_MORE.ADMIN];
+      return [ACCESS_ROLE.ADMIN];
     case ACCESS_LEVEL.PROTECTED:
       return [ACCESS_ROLE.USER];
     default:

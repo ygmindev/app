@@ -5,11 +5,11 @@ import {
   type WithResourceOutputParamsModel,
 } from '@lib/backend/resource/utils/withResourceOutput/withResourceOutput.models';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { getOperationType } from '@lib/shared/resource/utils/getOperationType/getOperationType';
 
 export const withResourceOutput =
-  <TMethod extends ResourceMethodTypeModel, TType, TRoot = undefined>({
+  <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot = undefined>({
     Resource,
     RootResource,
     access = ACCESS_LEVEL.RESTRICTED,

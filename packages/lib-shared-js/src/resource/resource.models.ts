@@ -6,9 +6,6 @@ import {
   type PrimitiveModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-
-export type ResourceMethodTypeModel = `${RESOURCE_METHOD_TYPE}`;
 
 export type ResourceReadMethodTypeModel =
   | RESOURCE_METHOD_TYPE.GET
@@ -69,3 +66,15 @@ export type EntityResourcePartialModel<TType> = TType extends PrimitiveModel
           >;
         }
       : PartialModel<TType>;
+
+export enum RESOURCE_METHOD_TYPE {
+  CREATE = 'Create',
+  CREATE_MANY = 'CreateMany',
+  GET = 'Get',
+  GET_CONNECTION = 'GetConnection',
+  GET_MANY = 'GetMany',
+  REMOVE = 'Remove',
+  SEARCH = 'Search',
+  SUBSCRIBE = 'Subscribe',
+  UPDATE = 'Update',
+}

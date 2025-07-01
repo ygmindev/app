@@ -3,16 +3,15 @@ import {
   type ResourceClassModel,
 } from '@lib/backend/resource/resource.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import { type AccessLevelModel } from '@lib/model/auth/Access/Access.models';
+import { type ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import {
-  type ResourceMethodTypeModel,
+  type RESOURCE_METHOD_TYPE,
   type ResourceNameParamsModel,
   type ResourceReadMethodTypeModel,
   type ResourceWriteMethodTypeModel,
 } from '@lib/shared/resource/resource.models';
-import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 
@@ -28,10 +27,10 @@ export type CreateResourceResolverParamsModel<
 
   RootResource?(): TRoot extends undefined ? never : ResourceClassModel<TRoot>;
 
-  access?: PartialModel<Record<ResourceAccessTypeModel, AccessLevelModel>>;
+  access?: PartialModel<Record<ResourceAccessTypeModel, ACCESS_LEVEL>>;
 
   authorizer?: {
-    default?: ResourceResolverAuthorizerModel<ResourceMethodTypeModel, TType>;
+    default?: ResourceResolverAuthorizerModel<RESOURCE_METHOD_TYPE, TType>;
 
     read?: ResourceResolverAuthorizerModel<ResourceReadMethodTypeModel, TType>;
 
@@ -46,14 +45,11 @@ export type CreateResourceResolverModel<
   TRoot = undefined,
 > = ResourceClassModel<ResourceImplementationModel<TType, TRoot>>;
 
-export type ResourceResolverAuthorizerParamsModel<
-  TMethod extends ResourceMethodTypeModel,
-  TType,
-> = {
+export type ResourceResolverAuthorizerParamsModel<TMethod extends RESOURCE_METHOD_TYPE, TType> = {
   context?: RequestContextModel;
   input?: ResourceInputModel<TMethod, TType>;
 };
 
-export type ResourceResolverAuthorizerModel<TMethod extends ResourceMethodTypeModel, TType> = (
+export type ResourceResolverAuthorizerModel<TMethod extends RESOURCE_METHOD_TYPE, TType> = (
   params: ResourceResolverAuthorizerParamsModel<TMethod, TType>,
 ) => boolean;

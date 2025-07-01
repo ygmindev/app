@@ -24,11 +24,11 @@ import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 
 @withContainer({ name: `${SIGN_IN_RESOURCE_NAME}Implementation` })
 export class SignInImplementation implements SignInImplementationModel {
-  @withInject(UserImplementation) protected userImplementation!: UserImplementation;
+  @withInject(JwtImplementation) protected jwtImplementation!: JwtImplementation;
 
   @withInject(OtpImplementation) protected otpImplementation!: OtpImplementation;
 
-  @withInject(JwtImplementation) protected jwtImplementation!: JwtImplementation;
+  @withInject(UserImplementation) protected userImplementation!: UserImplementation;
 
   createSignIn = async (user: PartialModel<UserModel> | null | undefined): Promise<SignInModel> => {
     if (user?._id) {

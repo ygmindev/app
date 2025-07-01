@@ -1,7 +1,7 @@
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { UTILITY_RESOURCE_NAME, UTILITY_TYPE } from '@lib/model/admin/Utility/Utility.constants';
-import { type UtilityModel } from '@lib/model/admin/Utility/Utility.models';
+import { UTILITY_RESOURCE_NAME } from '@lib/model/admin/Utility/Utility.constants';
+import { UTILITY_TYPE, type UtilityModel } from '@lib/model/admin/Utility/Utility.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 

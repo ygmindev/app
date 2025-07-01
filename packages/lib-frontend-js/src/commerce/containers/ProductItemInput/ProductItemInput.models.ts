@@ -2,7 +2,7 @@ import {
   type TableInputPropsModel,
   type TableInputRefModel,
 } from '@lib/frontend/data/components/TableInput/TableInput.models';
-import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 
 export type ProductItemInputPropsModel = Pick<

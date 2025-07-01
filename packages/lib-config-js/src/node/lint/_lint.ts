@@ -54,6 +54,15 @@ export const _lint = ({
           { fixStyle: 'inline-type-imports' },
         ],
         '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
+        '@typescript-eslint/member-ordering': [
+          'error',
+          {
+            default: {
+              memberTypes: ['field', 'constructor', 'method'],
+              order: 'alphabetically',
+            },
+          },
+        ],
         '@typescript-eslint/no-empty-interface': 'off',
         '@typescript-eslint/no-floating-promises': ['error', { ignoreVoid: true }],
         '@typescript-eslint/no-require-imports': ['error', { allow: ['/*\.js$'] }],

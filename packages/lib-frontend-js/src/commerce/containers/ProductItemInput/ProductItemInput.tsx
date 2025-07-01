@@ -16,7 +16,7 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
-import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
 import { useMemo, useRef } from 'react';

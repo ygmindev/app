@@ -33,10 +33,7 @@ import {
   PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
 } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
-import {
-  type PaymentMethodModel,
-  type PaymentMethodTypeModel,
-} from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
+import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
@@ -75,7 +72,7 @@ export const PaymentMethodInput: RLFCModel<
     return output;
   };
 
-  const getIcon = (type?: PaymentMethodTypeModel): WithIconPropsModel['icon'] => {
+  const getIcon = (type?: PAYMENT_METHOD_TYPE): WithIconPropsModel['icon'] => {
     switch (type) {
       case PAYMENT_METHOD_TYPE.BANK:
         return 'bank';

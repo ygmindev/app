@@ -1,6 +1,6 @@
 import { type GraphqlQueryParamsFieldsModel } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import {
-  type ResourceMethodTypeModel,
+  type RESOURCE_METHOD_TYPE,
   type ResourceNameParamsModel,
 } from '@lib/shared/resource/resource.models';
 import {
@@ -12,13 +12,13 @@ import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOut
 import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
 
 export type UseResourceMethodParamsFieldsModel<
-  TMethod extends ResourceMethodTypeModel,
+  TMethod extends RESOURCE_METHOD_TYPE,
   TType,
   TRoot = undefined,
 > = GraphqlQueryParamsFieldsModel<ResourceOutputModel<TMethod, TType, TRoot>>;
 
 export type UseResourceMethodParamsModel<
-  TMethod extends ResourceMethodTypeModel,
+  TMethod extends RESOURCE_METHOD_TYPE,
   TType,
   TRoot = undefined,
 > = ResourceNameParamsModel &
@@ -30,7 +30,7 @@ export type UseResourceMethodParamsModel<
   };
 
 export type UseResourceMethodModel<
-  TMethod extends ResourceMethodTypeModel,
+  TMethod extends RESOURCE_METHOD_TYPE,
   TType,
   TRoot = undefined,
 > = {

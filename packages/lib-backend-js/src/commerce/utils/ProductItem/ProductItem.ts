@@ -1,6 +1,6 @@
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { type ProductItemModel } from '@lib/shared/commerce/utils/ProductItem/ProductItem.models';
+import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: 'ProductItem' })

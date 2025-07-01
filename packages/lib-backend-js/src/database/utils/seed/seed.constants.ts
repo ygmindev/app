@@ -5,7 +5,7 @@ import { PRODUCT_RESOURCE_NAME } from '@lib/model/commerce/Product/Product.const
 import { PRODUCT_FIXTURES } from '@lib/model/commerce/Product/Product.fixtures';
 import { type ProductModel } from '@lib/model/commerce/Product/Product.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { USER_FIXTURES } from '@lib/model/user/User/User.fixtures';

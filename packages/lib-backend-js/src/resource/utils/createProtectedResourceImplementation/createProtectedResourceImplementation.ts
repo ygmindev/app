@@ -1,6 +1,4 @@
-import { AccessImplementation } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation';
 import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
-import { GroupImplementation } from '@lib/model/group/Group/GroupImplementation/GroupImplementation';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import {
   type CreateProtectedResoureImplementationModel,
@@ -8,15 +6,17 @@ import {
 } from '@lib/backend/resource/utils/createProtectedResourceImplementation/createProtectedResourceImplementation.models';
 import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
+import { AccessImplementation } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation';
 import { type ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/ProtectedResource.models';
+import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
+import { GroupImplementation } from '@lib/model/group/Group/GroupImplementation/GroupImplementation';
+import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImplementation/GroupImplementation.models';
+import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
-import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
-import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImplementation/GroupImplementation.models';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
@@ -33,7 +33,7 @@ export const createProtectedResoureImplementation = <TType extends ProtectedReso
         if (!uid) {
           throw new UnauthenticatedError();
         }
-        input?.form && (input.form.createdBy = uid);
+        input?.form && (input.form.createdBy = { _id: uid });
       }
       return beforeCreate ? beforeCreate({ input }, context) : input;
     },

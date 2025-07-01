@@ -3,8 +3,7 @@ import {
   type StripeCreateTokenParamsModel,
 } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodTypeModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
+import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { ExternalError } from '@lib/shared/core/errors/ExternalError/ExternalError';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import Stripe from 'stripe';
@@ -18,36 +17,6 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
   createCustomer = async (): Promise<string> => {
     const { id } = await this.stripe.customers.create();
     return id;
-  };
-
-  getFingerprint = async ({
-    id,
-    type,
-  }: {
-    id: string;
-    type: PaymentMethodTypeModel;
-  }): Promise<string | undefined> => {
-    const paymentMethod = await this.stripe.paymentMethods.retrieve(id);
-    return (
-      (() => {
-        switch (type) {
-          case PAYMENT_METHOD_TYPE.BANK:
-            return paymentMethod.us_bank_account?.fingerprint;
-          case PAYMENT_METHOD_TYPE.CARD:
-            return paymentMethod.card?.fingerprint;
-          default:
-            return undefined;
-        }
-      })() ?? undefined
-    );
-  };
-
-  removeToken = async (params: string): Promise<void> => {
-    try {
-      await this.stripe.paymentIntents.cancel(params);
-    } catch (e) {
-      logger.error(e);
-    }
   };
 
   createToken = async ({
@@ -78,5 +47,35 @@ export class StripeAdminImplementation implements StripeAdminImplementationModel
       return token;
     }
     throw new ExternalError('Stripe create intent');
+  };
+
+  getFingerprint = async ({
+    id,
+    type,
+  }: {
+    id: string;
+    type: PAYMENT_METHOD_TYPE;
+  }): Promise<string | undefined> => {
+    const paymentMethod = await this.stripe.paymentMethods.retrieve(id);
+    return (
+      (() => {
+        switch (type) {
+          case PAYMENT_METHOD_TYPE.BANK:
+            return paymentMethod.us_bank_account?.fingerprint;
+          case PAYMENT_METHOD_TYPE.CARD:
+            return paymentMethod.card?.fingerprint;
+          default:
+            return undefined;
+        }
+      })() ?? undefined
+    );
+  };
+
+  removeToken = async (params: string): Promise<void> => {
+    try {
+      await this.stripe.paymentIntents.cancel(params);
+    } catch (e) {
+      logger.error(e);
+    }
   };
 }

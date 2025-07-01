@@ -5,8 +5,8 @@ import {
 } from '@lib/frontend/billing/components/NewPaymentMethodInput/_NewPaymentMethodInput.models';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { type CardFundingModel } from '@lib/model/billing/Card/Card.models';
-import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
+import { type CARD_FUNDING } from '@lib/model/billing/Card/Card.constants';
+import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
@@ -91,7 +91,7 @@ const StripeInput: RLFCModel<_NewPaymentMethodInputRefModel, _NewPaymentMethodIn
                 expMonth: card.exp_month,
                 expYear: card.exp_year,
                 externalId: id,
-                funding: card.funding as CardFundingModel,
+                funding: card.funding as CARD_FUNDING,
                 last4: card.last4,
                 name: card.brand,
                 type: PAYMENT_METHOD_TYPE.CARD,

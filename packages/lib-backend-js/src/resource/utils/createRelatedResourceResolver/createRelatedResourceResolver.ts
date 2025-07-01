@@ -4,8 +4,8 @@ import {
   type CreateRelatedResourceResolverParamsModel,
 } from '@lib/backend/resource/utils/createRelatedResourceResolver/createRelatedResourceResolver.models';
 import { createResourceResolver } from '@lib/backend/resource/utils/createResourceResolver/createResourceResolver';
-import { ClassModel } from '@lib/shared/core/core.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { ClassModel } from '@lib/shared/core/core.models';
 
 export const createRelatedResourceResolver = <
   TType extends EntityResourceModel,

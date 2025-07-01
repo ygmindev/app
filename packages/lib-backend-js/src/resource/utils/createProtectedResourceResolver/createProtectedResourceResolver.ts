@@ -15,7 +15,7 @@ import { type ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/P
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type GroupModel } from '@lib/model/group/Group/Group.models';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 

@@ -13,9 +13,10 @@ import { StringKeyModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
-import { EntityResourceDataModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import {
+  EntityResourceDataModel,
+  RESOURCE_METHOD_TYPE,
+} from '@lib/shared/resource/resource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 import { type ResourceArgsModel } from '@lib/shared/resource/utils/ResourceArgs/ResourceArgs.models';
@@ -28,11 +29,7 @@ class Root<TRoot = undefined> implements RootInputModel<TRoot> {
   root?: TRoot extends undefined ? never : string;
 }
 
-export const createResourceArgs = <
-  TMethod extends ResourceMethodTypeModel,
-  TType,
-  TRoot = undefined,
->({
+export const createResourceArgs = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot = undefined>({
   Resource,
   method,
   name,

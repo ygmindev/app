@@ -3,10 +3,9 @@ import {
   type PrimitiveModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import {
   type EntityResourceDataModel,
-  type ResourceMethodTypeModel,
+  type RESOURCE_METHOD_TYPE,
 } from '@lib/shared/resource/resource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
@@ -110,7 +109,7 @@ type UpdateArgsModel<TType> = {
 };
 
 export type ResourceArgsModel<
-  TMethod extends ResourceMethodTypeModel,
+  TMethod extends RESOURCE_METHOD_TYPE,
   TType,
   TRoot = undefined,
 > = RootInputModel<TRoot> &

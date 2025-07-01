@@ -1,18 +1,16 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import List, Optional
+from typing import Any, List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, RootModel
-
-from ..Pricing import Pricing as Pricing_1
 
 
 class ProductModel(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
     )
-    Pricing: Optional[List[Pricing_1.PricingModel]] = None
+    Pricing: Optional[Any] = None
     description: Optional[str] = None
     imageSrc: Optional[List[str]] = None
     name: str

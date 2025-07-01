@@ -18,8 +18,7 @@ const schemaGenerate: TaskParamsModel<SchemaGenerateParamsModel> = {
     async ({ options }) =>
       _schemaGenerate({
         fromDirname: fromPackages('lib-model-js/src'),
-        // sources: ['*/*/*.models.ts'],
-        sources: ['admin/*/*.models.ts'],
+        sources: ['*/*/*.models.ts'],
         toDirname: fromPackages('lib-model-py/src/lib_model'),
       }),
   ],

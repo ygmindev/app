@@ -4,15 +4,14 @@ import {
   type CreateResourceImplementationParamsModel,
 } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
 import {
   type EntityResourceDataModel,
-  type EntityResourceModel,
-} from '@lib/model/resource/EntityResource/EntityResource.models';
+  type RESOURCE_METHOD_TYPE,
+} from '@lib/shared/resource/resource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
 import { type ResourceImplementationDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
@@ -110,6 +109,10 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       this.remove = this.remove.bind(this);
     }
 
+    async count(input?: ResourceInputModel<RESOURCE_METHOD_TYPE, TType, TRoot>): Promise<number> {
+      return count(input);
+    }
+
     async create(
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
       context?: RequestContextModel,
@@ -168,21 +171,6 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
         : output;
     }
 
-    async getMany(
-      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
-      context?: RequestContextModel,
-    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
-      let inputF = cleanObject(input);
-      inputF = this.decorators.beforeGetMany
-        ? await this.decorators.beforeGetMany({ input: inputF }, context)
-        : inputF;
-      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> =
-        await getMany(inputF, context);
-      return this.decorators.afterGetMany
-        ? this.decorators.afterGetMany({ input: inputF, output }, context)
-        : output;
-    }
-
     async getConnection(
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
       context?: RequestContextModel,
@@ -198,37 +186,18 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
         : output;
     }
 
-    async update(
-      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
+    async getMany(
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
       context?: RequestContextModel,
-    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
       let inputF = cleanObject(input);
-      inputF = this.decorators.beforeUpdate
-        ? await this.decorators.beforeUpdate({ input: inputF }, context)
+      inputF = this.decorators.beforeGetMany
+        ? await this.decorators.beforeGetMany({ input: inputF }, context)
         : inputF;
-      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = await update(
-        inputF,
-        context,
-      );
-      return this.decorators.afterUpdate
-        ? this.decorators.afterUpdate({ input: inputF, output }, context)
-        : output;
-    }
-
-    async search(
-      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>,
-      context?: RequestContextModel,
-    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
-      let inputF = cleanObject(input);
-      inputF = this.decorators.beforeSearch
-        ? await this.decorators.beforeSearch({ input: inputF }, context)
-        : inputF;
-      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> = await search(
-        inputF,
-        context,
-      );
-      return this.decorators.afterSearch
-        ? this.decorators.afterSearch({ input: inputF, output }, context)
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> =
+        await getMany(inputF, context);
+      return this.decorators.afterGetMany
+        ? this.decorators.afterGetMany({ input: inputF, output }, context)
         : output;
     }
 
@@ -249,10 +218,38 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
         : output;
     }
 
-    async count(
-      input?: ResourceInputModel<ResourceMethodTypeModel, TType, TRoot>,
-    ): Promise<number> {
-      return count(input);
+    async search(
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>,
+      context?: RequestContextModel,
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeSearch
+        ? await this.decorators.beforeSearch({ input: inputF }, context)
+        : inputF;
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> = await search(
+        inputF,
+        context,
+      );
+      return this.decorators.afterSearch
+        ? this.decorators.afterSearch({ input: inputF, output }, context)
+        : output;
+    }
+
+    async update(
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
+      context?: RequestContextModel,
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeUpdate
+        ? await this.decorators.beforeUpdate({ input: inputF }, context)
+        : inputF;
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = await update(
+        inputF,
+        context,
+      );
+      return this.decorators.afterUpdate
+        ? this.decorators.afterUpdate({ input: inputF, output }, context)
+        : output;
     }
   }
 

@@ -1,15 +1,15 @@
-import { Card } from '@lib/model/billing/Card/Card';
 import { getFingerprintInput } from '@lib/backend/billing/utils/getFingerprintInput/getFingerprintInput';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createRelatedResourceImplementation } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation';
-import { UserImplementation } from '@lib/model/user/User/UserImplementation/UserImplementation';
+import { Card } from '@lib/model/billing/Card/Card';
 import { CARD_RESOURCE_NAME } from '@lib/model/billing/Card/Card.constants';
 import { type CardModel } from '@lib/model/billing/Card/Card.models';
 import { type CardImplementationModel } from '@lib/model/billing/Card/CardImplementation/CardImplementation.models';
-import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
-import { Container } from '@lib/shared/core/utils/Container/Container';
+import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { type UserModel } from '@lib/model/user/User/User.models';
+import { UserImplementation } from '@lib/model/user/User/UserImplementation/UserImplementation';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 
 @withContainer()
 export class CardImplementation

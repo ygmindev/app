@@ -3,7 +3,7 @@ import {
   type _CollectionParamsModel,
 } from '@lib/backend/core/utils/Collection/_Collection.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
-import { type EntityResourcePartialModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type EntityResourcePartialModel } from '@lib/shared/resource/resource.models';
 import { Collection } from '@mikro-orm/core';
 
 export class _Collection<TType extends EntityResourceModel, TRoot extends EntityResourceModel>
@@ -14,9 +14,8 @@ export class _Collection<TType extends EntityResourceModel, TRoot extends Entity
     super(root);
   }
 
-  push(...items: Array<EntityResourcePartialModel<TType>>): number {
-    super.add(items);
-    return super.length + 1;
+  delete(params: EntityResourcePartialModel<TType>): void {
+    super.remove(params);
   }
 
   filter(
@@ -52,8 +51,9 @@ export class _Collection<TType extends EntityResourceModel, TRoot extends Entity
     return super.map((x, y) => cb(x, y, []));
   }
 
-  delete(params: EntityResourcePartialModel<TType>): void {
-    super.remove(params);
+  push(...items: Array<EntityResourcePartialModel<TType>>): number {
+    super.add(items);
+    return super.length + 1;
   }
 
   slice(start?: number, end?: number): Array<EntityResourcePartialModel<TType>> {

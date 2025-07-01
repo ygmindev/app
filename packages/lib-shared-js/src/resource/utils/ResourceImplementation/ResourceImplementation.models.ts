@@ -1,6 +1,5 @@
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
-import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
@@ -49,7 +48,7 @@ export type ResourceImplementationModel<TType, TRoot = undefined> = {
 };
 
 export type ResourceImplementationBeforeDecoratorModel<
-  TMethod extends ResourceMethodTypeModel,
+  TMethod extends RESOURCE_METHOD_TYPE,
   TType,
   TRoot = undefined,
 > = (
@@ -58,7 +57,7 @@ export type ResourceImplementationBeforeDecoratorModel<
 ) => Promise<ResourceInputModel<TMethod, TType, TRoot> | undefined>;
 
 export type ResourceImplementationAfterDecoratorModel<
-  TMethod extends ResourceMethodTypeModel,
+  TMethod extends RESOURCE_METHOD_TYPE,
   TType,
   TRoot = undefined,
 > = (

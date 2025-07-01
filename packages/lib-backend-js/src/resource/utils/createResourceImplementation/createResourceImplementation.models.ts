@@ -1,9 +1,9 @@
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type ClassModel } from '@lib/shared/core/core.models';
 import {
   type FilterableResourceMethodTypeModel,
   type ResourceNameParamsModel,
 } from '@lib/shared/resource/resource.models';
-import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import {
   type ResourceImplementationDecoratorModel,
   type ResourceImplementationModel,

@@ -7,7 +7,7 @@ import { OTP_RESOURCE_NAME } from '@lib/model/auth/Otp/Otp.constants';
 import { type OtpModel } from '@lib/model/auth/Otp/Otp.models';
 import { OtpImplementation } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation';
 import { type OtpResolverModel } from '@lib/model/auth/Otp/OtpResolver/OtpResolver.models';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
 @withContainer()
 @withResolver({ Resource: () => Otp })

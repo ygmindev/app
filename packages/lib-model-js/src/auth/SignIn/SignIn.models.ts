@@ -5,11 +5,11 @@ export type SignInModel = {
 
   token?: string;
 
-  user: UserModel;
+  user: Partial<UserModel>;
 };
 
 export type SignInTokenModel = {
   _id: string;
 
-  claims: UserModel;
+  claims: Partial<UserModel>;
 };

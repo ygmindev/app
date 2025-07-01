@@ -1,18 +1,16 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Optional
+from typing import Any, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, RootModel
-
-from ...user.User import User
 
 
 class ProtectedResourceModel(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
     )
-    createdBy: Optional[User.UserModel] = None
+    createdBy: Optional[Any] = None
     field_id: str = Field(..., alias='_id')
     beforeCreate: None = None
     created: datetime
