@@ -1,3 +1,10 @@
+import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
+import { config as configBase } from '@lib/config/graphql/graphql.base';
+import {
+  type _GraphqlConfigModel,
+  type GraphqlConfigModel,
+} from '@lib/config/graphql/graphql.models';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { UtilityResolver } from '@lib/model/admin/Utility/UtilityResolver/UtilityResolver';
 import { VendorResolver } from '@lib/model/admin/Vendor/VendorResolver/VendorResolver';
 import { AccessResolver } from '@lib/model/auth/Access/AccessResolver/AccessResolver';
@@ -12,18 +19,11 @@ import { MessageResolver } from '@lib/model/chat/Message/MessageResolver/Message
 import { OrderResolver } from '@lib/model/commerce/Order/OrderResolver/OrderResolver';
 import { PricingResolver } from '@lib/model/commerce/Pricing/PricingResolver/PricingResolver';
 import { ProductResolver } from '@lib/model/commerce/Product/ProductResolver/ProductResolver';
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { GroupResolver } from '@lib/model/group/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '@lib/model/http/Socket/SocketResolver/SocketResolver';
 import { SnapshotResolver } from '@lib/model/test/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '@lib/model/user/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '@lib/model/user/User/UserResolver/UserResolver';
-import { config as configBase } from '@lib/config/graphql/graphql.base';
-import {
-  type _GraphqlConfigModel,
-  type GraphqlConfigModel,
-} from '@lib/config/graphql/graphql.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
 export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
