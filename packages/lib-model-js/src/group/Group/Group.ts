@@ -1,21 +1,18 @@
-import { Access } from '@lib/model/auth/Access/Access';
-import { Role } from '@lib/model/auth/Role/Role';
-import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
+import { Collection } from '@lib/backend/core/utils/Collection/Collection';
+import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
-import { Collection } from '@lib/backend/core/utils/Collection/Collection';
-import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
+import { Access } from '@lib/model/auth/Access/Access';
 import { ACCESS_RESOURCE_NAME } from '@lib/model/auth/Access/Access.constants';
 import { AccessModel } from '@lib/model/auth/Access/Access.models';
+import { Role } from '@lib/model/auth/Role/Role';
 import { ROLE_RESOURCE_NAME } from '@lib/model/auth/Role/Role.constants';
 import { RoleModel } from '@lib/model/auth/Role/Role.models';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
-import {
-  type GroupModel,
-  type GroupTypeModel,
-} from '@lib/model/group/Group/Group.models';
+import { GROUP_TYPE, type GroupModel } from '@lib/model/group/Group/Group.models';
+import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: GROUP_RESOURCE_NAME })
 export class Group extends EntityResource implements GroupModel {
@@ -32,5 +29,5 @@ export class Group extends EntityResource implements GroupModel {
   name!: string;
 
   @withField({ isArray: true, isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
-  types?: Array<GroupTypeModel>;
+  types?: Array<GROUP_TYPE>;
 }

@@ -1,5 +1,4 @@
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
-import { type UserModel } from '@lib/model/user/User/User.models';
 
 export type UtilityModel = EntityResourceModel & {
   description?: string;
@@ -9,8 +8,6 @@ export type UtilityModel = EntityResourceModel & {
   name: string;
 
   pricing?: string;
-
-  rrr?: Partial<UserModel>;
 
   type: Array<UTILITY_TYPE>;
 

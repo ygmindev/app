@@ -15,7 +15,6 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.constants';
 import { type ProductModel } from '@lib/model/commerce/Product/Product.models';
-import { type EntityResourcePartialModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { useState } from 'react';
 
 export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
@@ -23,9 +22,9 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
   const { location } = useRouter<ProductPageParamsModel>();
   const { get } = useProductResource();
 
-  const [product, productSet] = useState<EntityResourcePartialModel<ProductModel>>();
+  const [product, productSet] = useState<Partial<ProductModel>>();
 
-  const getProduct = async (): Promise<EntityResourcePartialModel<ProductModel> | undefined> => {
+  const getProduct = async (): Promise<Partial<ProductModel> | undefined> => {
     const result = location.params?.id && (await get({ id: [location.params?.id] }))?.result;
     return result ? { ...result, _id: result._id ?? '' } : undefined;
   };

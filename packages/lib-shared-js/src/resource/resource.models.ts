@@ -1,5 +1,5 @@
 import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
-import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
+import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import {
   type PartialModel,
@@ -50,7 +50,7 @@ export type EntityResourceDataModel<TType> = TType extends PrimitiveModel
           ? Array<PartialModel<TElement>>
           : Required<TType>[TKey] extends CollectionModel<infer TElement>
             ? Array<PartialModel<TElement>>
-            : Required<TType>[TKey] extends RefFieldModel<EntityResourceModel>
+            : Required<TType>[TKey] extends RefModel<EntityResourceModel>
               ? string
               : Required<TType>[TKey];
     };

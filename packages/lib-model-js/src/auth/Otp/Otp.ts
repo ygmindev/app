@@ -14,6 +14,9 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
   name: OTP_RESOURCE_NAME,
 })
 export class Otp extends EntityResource implements OtpModel {
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  callingCode?: string;
+
   @withField({
     Resource: () => Date,
     defaultValue: () => new Date(),
@@ -21,9 +24,6 @@ export class Otp extends EntityResource implements OtpModel {
     isDatabase: true,
   })
   created!: Date;
-
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
-  callingCode?: string;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   email?: string;

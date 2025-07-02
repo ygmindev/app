@@ -1,5 +1,6 @@
 import { Collection } from '@lib/backend/core/utils/Collection/Collection';
 import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
+import { RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
@@ -18,8 +19,10 @@ import { type CardModel } from '@lib/model/billing/Card/Card.models';
 import { PaymentMethod } from '@lib/model/billing/PaymentMethod/PaymentMethod';
 import { PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { Chat } from '@lib/model/chat/Chat/Chat';
+import { CHAT_RESOURCE_NAME } from '@lib/model/chat/Chat/Chat.constants';
 import { ChatModel } from '@lib/model/chat/Chat/Chat.models';
 import { Message } from '@lib/model/chat/Message/Message';
+import { MESSAGE_RESOURCE_NAME } from '@lib/model/chat/Message/Message.constants';
 import { MessageModel } from '@lib/model/chat/Message/Message.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 import { LinkedUser } from '@lib/model/user/LinkedUser/LinkedUser';
@@ -44,14 +47,17 @@ export class User extends EntityResource implements UserModel {
   @withManyToManyField({ Resource: () => Card, root: USER_RESOURCE_NAME })
   [CARD_RESOURCE_NAME]?: CollectionModel<CardModel> = new Collection(this);
 
+  @withManyToManyField({ Resource: () => Chat, root: 'participants' })
+  [CHAT_RESOURCE_NAME]?: CollectionModel<ChatModel> = new Collection(this);
+
   @withEmbeddedField({ Resource: () => LinkedUser })
-  [LINKED_USER_RESOURCE_NAME]?: Array<LinkedUserModel>;
+  [LINKED_USER_RESOURCE_NAME]?: Array<RefModel<LinkedUserModel>>;
+
+  @withOneToManyField({ Resource: () => Message, root: 'createdBy' })
+  [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   callingCode?: string;
-
-  @withManyToManyField({ Resource: () => Chat, root: 'participants' })
-  chats?: CollectionModel<ChatModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, isUnique: true, type: DATA_TYPE.STRING })
   email?: string;
@@ -62,11 +68,8 @@ export class User extends EntityResource implements UserModel {
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   last?: string;
 
-  @withOneToManyField({ Resource: () => Message, root: 'createdBy' })
-  messages?: CollectionModel<MessageModel> = new Collection(this);
-
   @withRefField({ Resource: () => PaymentMethod, isDatabase: true, isOptional: true })
-  paymentMethodPrimary?: PaymentMethodModel;
+  paymentMethodPrimary?: RefModel<PaymentMethodModel>;
 
   @withField({ isDatabase: true, isOptional: true, isUnique: true, type: DATA_TYPE.STRING })
   phone?: string;

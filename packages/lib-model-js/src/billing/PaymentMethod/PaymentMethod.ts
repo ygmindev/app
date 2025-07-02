@@ -23,5 +23,5 @@ export class PaymentMethod extends EntityResource implements PaymentMethodModel 
   name!: string;
 
   @withField({ type: DATA_TYPE.STRING })
-  type!: PAYMENT_METHOD_TYPEg;
+  type!: PAYMENT_METHOD_TYPE;
 }

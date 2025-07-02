@@ -1,3 +1,4 @@
+import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
 
 export type SignInModel = {
@@ -5,7 +6,7 @@ export type SignInModel = {
 
   token?: string;
 
-  user: Partial<UserModel>;
+  user: RefModel<UserModel>;
 };
 
 export type SignInTokenModel = {

@@ -3,60 +3,47 @@ import {
   type _CollectionParamsModel,
 } from '@lib/backend/core/utils/Collection/_Collection.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
-import { type EntityResourcePartialModel } from '@lib/shared/resource/resource.models';
 import { Collection } from '@mikro-orm/core';
 
 export class _Collection<TType extends EntityResourceModel, TRoot extends EntityResourceModel>
-  extends Collection<EntityResourcePartialModel<TType>, TRoot>
+  extends Collection<Partial<TType>, TRoot>
   implements _CollectionModel<TType>
 {
   constructor(root: _CollectionParamsModel<TRoot>) {
     super(root);
   }
 
-  delete(params: EntityResourcePartialModel<TType>): void {
+  delete(params: Partial<TType>): void {
     super.remove(params);
   }
 
   filter(
-    cb: (
-      item: EntityResourcePartialModel<TType>,
-      index: number,
-      values: Array<EntityResourcePartialModel<TType>>,
-    ) => boolean,
+    cb: (item: Partial<TType>, index: number, values: Array<Partial<TType>>) => boolean,
     _?: unknown,
-  ): Array<EntityResourcePartialModel<TType>> {
+  ): Array<Partial<TType>> {
     return super.filter((x, y) => cb(x, y, []));
   }
 
   find(
-    cb: (
-      item: EntityResourcePartialModel<TType>,
-      index: number,
-      values: Array<EntityResourcePartialModel<TType>>,
-    ) => boolean,
+    cb: (item: Partial<TType>, index: number, values: Array<Partial<TType>>) => boolean,
     _?: unknown,
-  ): EntityResourcePartialModel<TType> | undefined {
+  ): Partial<TType> | undefined {
     return super.find((x, y) => cb(x, y, []));
   }
 
   map<TResult>(
-    cb: (
-      value: EntityResourcePartialModel<TType>,
-      index: number,
-      array: Array<EntityResourcePartialModel<TType>>,
-    ) => TResult,
+    cb: (value: Partial<TType>, index: number, array: Array<Partial<TType>>) => TResult,
     _?: unknown,
   ): Array<TResult> {
     return super.map((x, y) => cb(x, y, []));
   }
 
-  push(...items: Array<EntityResourcePartialModel<TType>>): number {
+  push(...items: Array<Partial<TType>>): number {
     super.add(items);
     return super.length + 1;
   }
 
-  slice(start?: number, end?: number): Array<EntityResourcePartialModel<TType>> {
+  slice(start?: number, end?: number): Array<Partial<TType>> {
     return super.slice(start, end);
   }
 }

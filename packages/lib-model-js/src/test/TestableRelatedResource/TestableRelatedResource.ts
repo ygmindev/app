@@ -1,4 +1,5 @@
 import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
+import { RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';
@@ -17,5 +18,5 @@ export class TestableRelatedResource
   rootManyToMany?: CollectionModel<TestableEntityResourceModel>;
 
   @withManyToOneField({ Resource: () => TestableEntityResource })
-  rootOneToMany?: Partial<TestableEntityResourceModel>;
+  rootOneToMany?: RefModel<TestableEntityResourceModel>;
 }
