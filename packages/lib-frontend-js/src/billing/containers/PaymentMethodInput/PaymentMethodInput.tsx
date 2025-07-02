@@ -29,11 +29,11 @@ import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexSt
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
+import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
 import {
-  PAYMENT_METHOD_RESOURCE_NAME,
   PAYMENT_METHOD_TYPE,
-} from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
-import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
+  type PaymentMethodModel,
+} from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';

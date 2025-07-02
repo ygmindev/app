@@ -79,16 +79,16 @@ export class _Database implements _DatabaseModel {
     this.config = _database(config);
   }
 
-  async flush(): Promise<void> {
-    await this.getEntityManager().flush();
-  }
-
-  async isConnected(): Promise<boolean> {
-    return this.em?.getConnection().isConnected() ?? false;
+  async close(): Promise<void> {
+    await this.getEntityManager().getConnection()?.close();
   }
 
   async connect(): Promise<void> {
     this.em = (await MikroORM.init(this.config)).em;
+  }
+
+  async flush(): Promise<void> {
+    await this.getEntityManager().flush();
   }
 
   getEntityManager = (): EntityManager => {
@@ -115,7 +115,7 @@ export class _Database implements _DatabaseModel {
           const em = this.getEntityManager();
           const result = em.create(
             name,
-            form as RequiredEntityData<Pick<TType, keyof TType>, never, false>,
+            form as unknown as RequiredEntityData<Pick<TType, keyof TType>, never, false>,
           );
           options?.isFlush !== false && (await em.persistAndFlush(result));
           return { result: result as PartialModel<TType> };
@@ -228,7 +228,7 @@ export class _Database implements _DatabaseModel {
     return implementation;
   };
 
-  async close(): Promise<void> {
-    await this.getEntityManager().getConnection()?.close();
+  async isConnected(): Promise<boolean> {
+    return this.em?.getConnection().isConnected() ?? false;
   }
 }

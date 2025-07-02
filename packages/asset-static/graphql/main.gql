@@ -674,6 +674,119 @@ type Chat {
   participants: [User]
 }
 
+input ChatCreateFormInput {
+  _id: String
+  created: DateTimeISO
+  createdBy: UserInput
+  isFixture: Boolean
+  messages: [MessageInput] = []
+  name: String
+  participants: [UserInput] = []
+}
+
+input ChatCreateInput {
+  form: ChatCreateFormInput
+  root: String
+}
+
+input ChatCreateManyFormInput {
+  _id: String
+  created: DateTimeISO
+  createdBy: UserInput
+  isFixture: Boolean
+  messages: [MessageInput] = []
+  name: String
+  participants: [UserInput] = []
+}
+
+input ChatCreateManyInput {
+  form: [ChatCreateManyFormInput]
+  root: String
+}
+
+type ChatCreateManyOutput {
+  result: Chat
+}
+
+type ChatCreateOutput {
+  result: Chat
+}
+
+type ChatGetConnectionConnection {
+  edges: [ChatGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type ChatGetConnectionEdge {
+  cursor: String
+  node: Chat
+}
+
+input ChatGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatGetConnectionInput {
+  filter: [ChatGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type ChatGetConnectionOutput {
+  result: ChatGetConnectionConnection
+}
+
+input ChatGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatGetInput {
+  filter: [ChatGetFilterInput]
+  id: [String]
+  root: String
+}
+
+input ChatGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatGetManyInput {
+  filter: [ChatGetManyFilterInput]
+  root: String
+}
+
+type ChatGetManyOutput {
+  result: [Chat]
+}
+
+type ChatGetOutput {
+  result: Chat
+}
+
 input ChatInput {
   _id: String
   created: DateTimeISO
@@ -682,6 +795,38 @@ input ChatInput {
   messages: [MessageInput] = []
   name: String
   participants: [UserInput] = []
+}
+
+input ChatRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatRemoveInput {
+  filter: [ChatRemoveFilterInput]
+  id: [String]
+  root: String
+}
+
+type ChatRemoveOutput {
+  result: Chat
+}
+
+input ChatSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type ChatSearchOutput {
+  result: [Chat]
 }
 
 input ChatSubscribeFilterInput {
@@ -703,6 +848,39 @@ input ChatSubscribeInput {
 
 type ChatSubscribeOutput {
   result: Message
+}
+
+input ChatUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput]
+  resourceValue: ChatInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input ChatUpdateInput {
+  filter: [ChatUpdateFilterInput]
+  id: [String]
+  root: String
+  update: ChatUpdateUpdateInput
+}
+
+type ChatUpdateOutput {
+  result: Chat
+}
+
+input ChatUpdateUpdateInput {
+  _id: String
+  created: DateTimeISO
+  createdBy: UserInput
+  isFixture: Boolean
+  messages: [MessageInput] = []
+  name: String
+  participants: [UserInput] = []
 }
 
 """
@@ -1145,6 +1323,10 @@ type Mutation {
   CardCreateMany(input: CardCreateManyInput): CardCreateManyOutput
   CardRemove(input: CardRemoveInput): CardRemoveOutput
   CardUpdate(input: CardUpdateInput): CardUpdateOutput
+  ChatCreate(input: ChatCreateInput): ChatCreateOutput
+  ChatCreateMany(input: ChatCreateManyInput): ChatCreateManyOutput
+  ChatRemove(input: ChatRemoveInput): ChatRemoveOutput
+  ChatUpdate(input: ChatUpdateInput): ChatUpdateOutput
   GroupCreate(input: GroupCreateInput): GroupCreateOutput
   GroupCreateMany(input: GroupCreateManyInput): GroupCreateManyOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
@@ -1189,10 +1371,6 @@ type Mutation {
   VendorCreateMany(input: VendorCreateManyInput): VendorCreateManyOutput
   VendorRemove(input: VendorRemoveInput): VendorRemoveOutput
   VendorUpdate(input: VendorUpdateInput): VendorUpdateOutput
-  chatsCreate(input: chatsCreateInput): chatsCreateOutput
-  chatsCreateMany(input: chatsCreateManyInput): chatsCreateManyOutput
-  chatsRemove(input: chatsRemoveInput): chatsRemoveOutput
-  chatsUpdate(input: chatsUpdateInput): chatsUpdateOutput
   linkedUserCreate(input: linkedUserCreateInput): linkedUserCreateOutput
   linkedUserCreateMany(input: linkedUserCreateManyInput): linkedUserCreateManyOutput
   linkedUserRemove(input: linkedUserRemoveInput): linkedUserRemoveOutput
@@ -1637,6 +1815,7 @@ input PaymentMethodInput {
 }
 
 type Pricing {
+  Product: Product
   _id: String
   created: DateTimeISO
   currency: String
@@ -1646,6 +1825,7 @@ type Pricing {
 }
 
 input PricingCreateFormInput {
+  Product: ProductInput
   _id: String
   created: DateTimeISO
   currency: String
@@ -1660,6 +1840,7 @@ input PricingCreateInput {
 }
 
 input PricingCreateManyFormInput {
+  Product: ProductInput
   _id: String
   created: DateTimeISO
   currency: String
@@ -1762,6 +1943,7 @@ type PricingGetOutput {
 }
 
 input PricingInput {
+  Product: ProductInput
   _id: String
   created: DateTimeISO
   currency: String
@@ -1829,6 +2011,7 @@ type PricingUpdateOutput {
 }
 
 input PricingUpdateUpdateInput {
+  Product: ProductInput
   _id: String
   created: DateTimeISO
   currency: String
@@ -2065,6 +2248,10 @@ type Query {
   CardGetConnection(input: CardGetConnectionInput): CardGetConnectionOutput
   CardGetMany(input: CardGetManyInput): CardGetManyOutput
   CardSearch(input: CardSearchInput): CardSearchOutput
+  ChatGet(input: ChatGetInput): ChatGetOutput
+  ChatGetConnection(input: ChatGetConnectionInput): ChatGetConnectionOutput
+  ChatGetMany(input: ChatGetManyInput): ChatGetManyOutput
+  ChatSearch(input: ChatSearchInput): ChatSearchOutput
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
@@ -2112,10 +2299,6 @@ type Query {
   VendorGetConnection(input: VendorGetConnectionInput): VendorGetConnectionOutput
   VendorGetMany(input: VendorGetManyInput): VendorGetManyOutput
   VendorSearch(input: VendorSearchInput): VendorSearchOutput
-  chatsGet(input: chatsGetInput): chatsGetOutput
-  chatsGetConnection(input: chatsGetConnectionInput): chatsGetConnectionOutput
-  chatsGetMany(input: chatsGetManyInput): chatsGetManyOutput
-  chatsSearch(input: chatsSearchInput): chatsSearchOutput
   createToken(input: PaymentInput): String
   linkedUserGet(input: linkedUserGetInput): linkedUserGetOutput
   linkedUserGetConnection(input: linkedUserGetConnectionInput): linkedUserGetConnectionOutput
@@ -2594,16 +2777,17 @@ type User {
   Access: [Access]
   Bank: [Bank]
   Card: [Card]
+  Chat: [Chat]
+  Message: [Message]
+  PaymentMethod: [Card]
   _id: String
   callingCode: String
-  chats: [Chat]
   created: DateTimeISO
   email: String
   first: String
   isFixture: Boolean
   last: String
   linkedUser: [linkedUser]
-  messages: [Message]
   paymentMethodPrimary: PaymentMethod
   phone: String
 }
@@ -2612,16 +2796,17 @@ input UserCreateFormInput {
   Access: [AccessInput] = []
   Bank: [BankInput] = []
   Card: [CardInput] = []
+  Chat: [ChatInput] = []
+  Message: [MessageInput] = []
+  PaymentMethod: [CardInput] = []
   _id: String
   callingCode: String
-  chats: [ChatInput] = []
   created: DateTimeISO
   email: String
   first: String
   isFixture: Boolean
   last: String
   linkedUser: [linkedUserInput]
-  messages: [MessageInput] = []
   paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
@@ -2635,16 +2820,17 @@ input UserCreateManyFormInput {
   Access: [AccessInput] = []
   Bank: [BankInput] = []
   Card: [CardInput] = []
+  Chat: [ChatInput] = []
+  Message: [MessageInput] = []
+  PaymentMethod: [CardInput] = []
   _id: String
   callingCode: String
-  chats: [ChatInput] = []
   created: DateTimeISO
   email: String
   first: String
   isFixture: Boolean
   last: String
   linkedUser: [linkedUserInput]
-  messages: [MessageInput] = []
   paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
@@ -2741,16 +2927,17 @@ input UserInput {
   Access: [AccessInput] = []
   Bank: [BankInput] = []
   Card: [CardInput] = []
+  Chat: [ChatInput] = []
+  Message: [MessageInput] = []
+  PaymentMethod: [CardInput] = []
   _id: String
   callingCode: String
-  chats: [ChatInput] = []
   created: DateTimeISO
   email: String
   first: String
   isFixture: Boolean
   last: String
   linkedUser: [linkedUserInput]
-  messages: [MessageInput] = []
   paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
@@ -2814,16 +3001,17 @@ input UserUpdateUpdateInput {
   Access: [AccessInput] = []
   Bank: [BankInput] = []
   Card: [CardInput] = []
+  Chat: [ChatInput] = []
+  Message: [MessageInput] = []
+  PaymentMethod: [CardInput] = []
   _id: String
   callingCode: String
-  chats: [ChatInput] = []
   created: DateTimeISO
   email: String
   first: String
   isFixture: Boolean
   last: String
   linkedUser: [linkedUserInput]
-  messages: [MessageInput] = []
   paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
@@ -3235,184 +3423,6 @@ input VendorUpdateUpdateInput {
   imageSrc: String
   isFixture: Boolean
   name: String
-}
-
-input chatsCreateFormInput {
-  _id: String
-  created: DateTimeISO
-  createdBy: UserInput
-  isFixture: Boolean
-  messages: [MessageInput] = []
-  name: String
-  participants: [UserInput] = []
-}
-
-input chatsCreateInput {
-  form: chatsCreateFormInput
-  root: String
-}
-
-input chatsCreateManyFormInput {
-  _id: String
-  created: DateTimeISO
-  createdBy: UserInput
-  isFixture: Boolean
-  messages: [MessageInput] = []
-  name: String
-  participants: [UserInput] = []
-}
-
-input chatsCreateManyInput {
-  form: [chatsCreateManyFormInput]
-  root: String
-}
-
-type chatsCreateManyOutput {
-  result: Chat
-}
-
-type chatsCreateOutput {
-  result: Chat
-}
-
-type chatsGetConnectionConnection {
-  edges: [chatsGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type chatsGetConnectionEdge {
-  cursor: String
-  node: Chat
-}
-
-input chatsGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ChatInput]
-  resourceValue: ChatInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input chatsGetConnectionInput {
-  filter: [chatsGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
-type chatsGetConnectionOutput {
-  result: chatsGetConnectionConnection
-}
-
-input chatsGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ChatInput]
-  resourceValue: ChatInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input chatsGetInput {
-  filter: [chatsGetFilterInput]
-  id: [String]
-  root: String
-}
-
-input chatsGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ChatInput]
-  resourceValue: ChatInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input chatsGetManyInput {
-  filter: [chatsGetManyFilterInput]
-  root: String
-}
-
-type chatsGetManyOutput {
-  result: [Chat]
-}
-
-type chatsGetOutput {
-  result: Chat
-}
-
-input chatsRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ChatInput]
-  resourceValue: ChatInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input chatsRemoveInput {
-  filter: [chatsRemoveFilterInput]
-  id: [String]
-  root: String
-}
-
-type chatsRemoveOutput {
-  result: Chat
-}
-
-input chatsSearchInput {
-  keys: [String]
-  query: String
-  root: String
-}
-
-type chatsSearchOutput {
-  result: [Chat]
-}
-
-input chatsUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [ChatInput]
-  resourceValue: ChatInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input chatsUpdateInput {
-  filter: [chatsUpdateFilterInput]
-  id: [String]
-  root: String
-  update: chatsUpdateUpdateInput
-}
-
-type chatsUpdateOutput {
-  result: Chat
-}
-
-input chatsUpdateUpdateInput {
-  _id: String
-  created: DateTimeISO
-  createdBy: UserInput
-  isFixture: Boolean
-  messages: [MessageInput] = []
-  name: String
-  participants: [UserInput] = []
 }
 
 type linkedUser {

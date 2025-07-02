@@ -16,10 +16,9 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { toPlainObject } from '@lib/shared/core/utils/toPlainObject/toPlainObject';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import {
-  type EntityResourceDataModel,
   type FilterableResourceMethodTypeModel,
+  type RESOURCE_METHOD_TYPE,
 } from '@lib/shared/resource/resource.models';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
@@ -64,7 +63,7 @@ export const createEmbeddedResourceImplementation = <
     return rootImplementation;
   };
 
-  const getForm = async (form?: EntityResourceDataModel<TType>): Promise<TType> => {
+  const getForm = async (form?: Partial<TType>): Promise<TType> => {
     const formF = new Resource();
     forEach(form as unknown as object, (v, k) => (formF[k as keyof typeof formF] = v));
     formF._id = formF._id ?? new ObjectId();

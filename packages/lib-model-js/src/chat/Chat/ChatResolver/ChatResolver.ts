@@ -37,7 +37,7 @@ export class ChatResolver
       const user = await getUser(context?.user?._id);
       console.warn(user);
       console.warn('@@@ chats:');
-      console.warn(user?.chats);
+      console.warn(user?.[CHAT_RESOURCE_NAME]);
       return true;
     },
     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,

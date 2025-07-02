@@ -3,11 +3,11 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEmbeddedResourceResolver } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
 import { LinkedUser } from '@lib/model/user/LinkedUser/LinkedUser';
-import { LinkedUserImplementation } from '@lib/model/user/LinkedUser/LinkedUserImplementation/LinkedUserImplementation';
-import { User } from '@lib/model/user/User/User';
 import { LINKED_USER_RESOURCE_NAME } from '@lib/model/user/LinkedUser/LinkedUser.constants';
 import { type LinkedUserModel } from '@lib/model/user/LinkedUser/LinkedUser.models';
+import { LinkedUserImplementation } from '@lib/model/user/LinkedUser/LinkedUserImplementation/LinkedUserImplementation';
 import { type LinkedUserImplementationModel } from '@lib/model/user/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';
+import { User } from '@lib/model/user/User/User';
 import { type UserModel } from '@lib/model/user/User/User.models';
 
 @withContainer()

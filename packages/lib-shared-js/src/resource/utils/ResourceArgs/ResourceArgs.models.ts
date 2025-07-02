@@ -3,10 +3,7 @@ import {
   type PrimitiveModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
-import {
-  type EntityResourceDataModel,
-  type RESOURCE_METHOD_TYPE,
-} from '@lib/shared/resource/resource.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 import { type RootInputModel } from '@lib/shared/resource/utils/Root/Root.models';
@@ -33,12 +30,12 @@ type CreateOptionsModel = CommonOptionsModel & {
 };
 
 type CreateResourceArgsModel<TType> = {
-  form?: EntityResourceDataModel<TType>;
+  form?: Partial<TType>;
   options?: CreateOptionsModel;
 };
 
 type CreateManyArgsModel<TType> = {
-  form?: Array<EntityResourceDataModel<TType>>;
+  form?: Array<Partial<TType>>;
   options?: CreateOptionsModel;
 };
 

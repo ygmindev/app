@@ -1,9 +1,12 @@
 import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { type CARD_FUNDING } from '@lib/model/billing/Card/Card.constants';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { type UserModel } from '@lib/model/user/User/User.models';
 
 export type CardModel = EntityResourceModel & {
+  [USER_RESOURCE_NAME]?: CollectionModel<UserModel>;
+
   expMonth: number;
 
   expYear: number;
@@ -19,6 +22,4 @@ export type CardModel = EntityResourceModel & {
   last4: string;
 
   name: string;
-
-  user?: CollectionModel<UserModel>;
 };

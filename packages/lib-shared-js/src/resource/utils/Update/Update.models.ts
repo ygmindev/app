@@ -1,5 +1,5 @@
-import { type EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 import { type InferModel, type PartialModel } from '@lib/shared/core/core.models';
+import { type EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 
 export type UnsetModel<TType> = {
   [TKey in keyof EntityResourceDataModel<TType>]?:
@@ -11,4 +11,4 @@ export type UpdateElementModel<TType> = {
   [TKey in keyof EntityResourceDataModel<TType>]?: InferModel<EntityResourceDataModel<TType>[TKey]>;
 };
 
-export type UpdateModel<TType> = PartialModel<EntityResourceDataModel<TType>>;
+export type UpdateModel<TType> = PartialModel<TType>;

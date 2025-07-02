@@ -4,6 +4,8 @@ import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInpu
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
 export type ResourceImplementationModel<TType, TRoot = undefined> = {
+  decorators?: ResourceImplementationDecoratorModel<TType, TRoot>;
+
   create(
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
     context?: RequestContextModel,
@@ -13,8 +15,6 @@ export type ResourceImplementationModel<TType, TRoot = undefined> = {
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>,
     context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>>;
-
-  decorators?: ResourceImplementationDecoratorModel<TType, TRoot>;
 
   get(
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>,

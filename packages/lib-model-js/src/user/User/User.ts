@@ -17,6 +17,7 @@ import { Card } from '@lib/model/billing/Card/Card';
 import { CARD_RESOURCE_NAME } from '@lib/model/billing/Card/Card.constants';
 import { type CardModel } from '@lib/model/billing/Card/Card.models';
 import { PaymentMethod } from '@lib/model/billing/PaymentMethod/PaymentMethod';
+import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
 import { PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { Chat } from '@lib/model/chat/Chat/Chat';
 import { CHAT_RESOURCE_NAME } from '@lib/model/chat/Chat/Chat.constants';
@@ -55,6 +56,9 @@ export class User extends EntityResource implements UserModel {
 
   @withOneToManyField({ Resource: () => Message, root: 'createdBy' })
   [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel> = new Collection(this);
+
+  @withManyToManyField({ Resource: () => Card, root: USER_RESOURCE_NAME })
+  [PAYMENT_METHOD_RESOURCE_NAME]?: CollectionModel<PaymentMethodModel> = new Collection(this);
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   callingCode?: string;

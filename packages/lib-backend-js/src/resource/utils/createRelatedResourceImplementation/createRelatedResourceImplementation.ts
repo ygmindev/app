@@ -14,10 +14,7 @@ import { type PartialModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import {
-  type EntityResourceDataModel,
-  type RESOURCE_METHOD_TYPE,
-} from '@lib/shared/resource/resource.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
@@ -61,7 +58,7 @@ export const createRelatedResourceImplementation = <
   const getRepository = (): RepositoryModel<TType> =>
     Container.get(Database, DATABASE_TYPE.MONGO).getRepository({ name: Resource });
 
-  const getForm = async (form?: EntityResourceDataModel<TType>): Promise<TType> => {
+  const getForm = async (form?: Partial<TType>): Promise<TType> => {
     const formF = new Resource();
     forEach(form as unknown as object, (v, k) => (formF[k as keyof typeof formF] = v));
     formF._id = formF._id ?? new ObjectId();
@@ -94,11 +91,11 @@ export const createRelatedResourceImplementation = <
   const create = async (
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> => {
-    if (input?.root) {
+    if (input?.root && input?.form) {
       const form = await getForm(input.form);
       const { result: rootResult } = await getRootImplementation().update({
         id: [input.root],
-        update: { [name]: form } as PartialModel<EntityResourceDataModel<TRoot>>,
+        update: { [name]: form } as PartialModel<TRoot>,
       });
       return { result: form, root: rootResult };
     }

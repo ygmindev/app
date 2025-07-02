@@ -15,7 +15,7 @@ export type CreateRelatedResourceImplementationParamsModel<
 > & {
   RootImplementation: ClassModel<EntityResourceImplementationModel<TRoot>>;
   name: KeysOfTypeModel<TRoot, CollectionModel<TType>>;
-  root: KeysOfTypeModel<TType, RefModel<TRoot> | CollectionModel<TType>>;
+  root: KeysOfTypeModel<TType, RefModel<TRoot> | CollectionModel<TRoot>>;
 };
 
 export type CreateRelatedResourceImplementationModel<

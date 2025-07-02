@@ -13,10 +13,7 @@ import { StringKeyModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
-import {
-  EntityResourceDataModel,
-  RESOURCE_METHOD_TYPE,
-} from '@lib/shared/resource/resource.models';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 import { type ResourceArgsModel } from '@lib/shared/resource/utils/ResourceArgs/ResourceArgs.models';
@@ -104,7 +101,7 @@ export const createResourceArgs = <TMethod extends RESOURCE_METHOD_TYPE, TType, 
               type: PROPERTY_TYPE.RESOURCE,
             }),
         )
-        form!: EntityResourceDataModel<TType>;
+        form!: Partial<TType>;
       }
       return Args as ResourceClassModel<ResourceArgsModel<TMethod, TType, TRoot>>;
     }
@@ -123,7 +120,7 @@ export const createResourceArgs = <TMethod extends RESOURCE_METHOD_TYPE, TType, 
               type: PROPERTY_TYPE.RESOURCE,
             }),
         )
-        form!: Array<EntityResourceDataModel<TType>>;
+        form!: Array<Partial<TType>>;
       }
       return Args as ResourceClassModel<ResourceArgsModel<TMethod, TType, TRoot>>;
     }

@@ -21,6 +21,6 @@ export class Chat extends createProtectedResource() implements ChatModel {
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
   name?: string;
 
-  @withManyToManyField({ Resource: () => User, leaf: 'chats' })
+  @withManyToManyField({ Resource: () => User, leaf: CHAT_RESOURCE_NAME })
   participants?: CollectionModel<UserModel> = new Collection(this);
 }
