@@ -9,6 +9,18 @@ from pydantic import BaseModel, ConfigDict, Field, RootModel
 from ..ProductItem import ProductItem
 
 
+class ProductItemModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    imageSrc: Optional[str] = None
+    name: str
+    price: Optional[float] = None
+    pricingId: str
+    productId: str
+    quantity: Optional[float] = None
+
+
 class ORDERSTATUS(Enum):
     canceled = 'canceled'
     completed = 'completed'
@@ -23,9 +35,9 @@ class OrderModel(BaseModel):
     paymentMethodId: Optional[str] = None
     status: Optional[ORDERSTATUS] = None
     field_id: str = Field(..., alias='_id')
-    beforeCreate: None = None
     created: datetime
     isFixture: Optional[bool] = None
+    beforeCreate: None = None
 
 
 class Model(RootModel[OrderModel]):

@@ -8,15 +8,15 @@
         "_id": {
           "type": "string"
         },
-        "beforeCreate": {
-          "type": "null"
-        },
         "created": {
           "type": "string",
           "format": "date-time"
         },
         "isFixture": {
           "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
         }
       },
       "required": [

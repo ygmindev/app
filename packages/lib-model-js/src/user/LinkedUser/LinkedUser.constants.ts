@@ -1,1 +1,1 @@
-export const LINKED_USER_RESOURCE_NAME = 'linkedUser';
+export const LINKED_USER_RESOURCE_NAME = 'LinkedUser';

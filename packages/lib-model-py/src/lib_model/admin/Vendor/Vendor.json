@@ -18,15 +18,15 @@
         "_id": {
           "type": "string"
         },
-        "beforeCreate": {
-          "type": "null"
-        },
         "created": {
           "type": "string",
           "format": "date-time"
         },
         "isFixture": {
           "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
         }
       },
       "required": [
@@ -40,6 +40,65 @@
       "items": {
         "$ref": "../Utility/Utility.json#/definitions/UtilityModel"
       }
+    },
+    "UtilityModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "imageSrc": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pricing": {
+          "type": "string"
+        },
+        "type": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UTILITY_TYPE"
+          }
+        },
+        "url": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "name",
+        "type"
+      ]
+    },
+    "UTILITY_TYPE": {
+      "type": "string",
+      "enum": [
+        "authentication",
+        "database",
+        "function",
+        "hosting",
+        "payment",
+        "sms",
+        "smtp",
+        "usage"
+      ]
     }
   }
 }

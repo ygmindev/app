@@ -18,58 +18,6 @@
         "pricing": {
           "type": "string"
         },
-        "rrr": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "string"
-            },
-            "beforeCreate": {
-              "type": "null"
-            },
-            "created": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "isFixture": {
-              "type": "boolean"
-            },
-            "Access": {
-              "$ref": "#/definitions/CollectionModel<AccessModel>"
-            },
-            "Bank": {
-              "$ref": "#/definitions/CollectionModel<BankModel>"
-            },
-            "Card": {
-              "$ref": "#/definitions/CollectionModel<CardModel>"
-            },
-            "linkedUser": {
-              "$ref": "#/definitions/CollectionModel<LinkedUserModel>"
-            },
-            "PaymentMethod": {
-              "$ref": "#/definitions/CollectionModel<PaymentMethodModel>"
-            },
-            "callingCode": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "first": {
-              "type": "string"
-            },
-            "last": {
-              "type": "string"
-            },
-            "paymentMethodPrimary": {
-              "$ref": "../../billing/PaymentMethod/PaymentMethod.json#/definitions/PaymentMethodModel"
-            },
-            "phone": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
-        },
         "type": {
           "type": "array",
           "items": {
@@ -82,15 +30,15 @@
         "_id": {
           "type": "string"
         },
-        "beforeCreate": {
-          "type": "null"
-        },
         "created": {
           "type": "string",
           "format": "date-time"
         },
         "isFixture": {
           "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
         }
       },
       "required": [
@@ -98,6 +46,19 @@
         "created",
         "name",
         "type"
+      ]
+    },
+    "UTILITY_TYPE": {
+      "type": "string",
+      "enum": [
+        "authentication",
+        "database",
+        "function",
+        "hosting",
+        "payment",
+        "sms",
+        "smtp",
+        "usage"
       ]
     }
   }

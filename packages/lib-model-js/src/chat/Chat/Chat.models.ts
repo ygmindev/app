@@ -1,3 +1,4 @@
+
 import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { type ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/ProtectedResource.models';
 import { type MessageModel } from '@lib/model/chat/Message/Message.models';

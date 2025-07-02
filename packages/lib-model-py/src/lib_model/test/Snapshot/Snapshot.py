@@ -13,9 +13,9 @@ class SnapshotModel(BaseModel):
     images: Optional[List[str]] = None
     name: str
     field_id: str = Field(..., alias='_id')
-    beforeCreate: None = None
     created: datetime
     isFixture: Optional[bool] = None
+    beforeCreate: None = None
 
 
 class Model(RootModel[SnapshotModel]):

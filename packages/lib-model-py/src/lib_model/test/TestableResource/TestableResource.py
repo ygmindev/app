@@ -18,9 +18,9 @@ class TestableResourceModel(BaseModel):
     stringArray: Optional[List[str]] = None
     stringOptional: Optional[str] = None
     field_id: str = Field(..., alias='_id')
-    beforeCreate: None = None
     created: datetime
     isFixture: Optional[bool] = None
+    beforeCreate: None = None
 
 
 class Model(RootModel[TestableResourceModel]):

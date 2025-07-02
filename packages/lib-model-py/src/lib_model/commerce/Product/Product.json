@@ -7,7 +7,10 @@
       "additionalProperties": false,
       "properties": {
         "Pricing": {
-          "$ref": "#/definitions/CollectionModel<PricingModel>"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RefModel<PricingModel>"
+          }
         },
         "description": {
           "type": "string"
@@ -24,15 +27,15 @@
         "_id": {
           "type": "string"
         },
-        "beforeCreate": {
-          "type": "null"
-        },
         "created": {
           "type": "string",
           "format": "date-time"
         },
         "isFixture": {
           "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
         }
       },
       "required": [
@@ -40,6 +43,45 @@
         "created",
         "name"
       ]
+    },
+    "RefModel<PricingModel>": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "Product": {
+          "$ref": "#/definitions/RefModel<ProductModel>"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "frequency": {
+          "$ref": "#/definitions/PRICING_FREQUENCY"
+        },
+        "price": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RefModel<ProductModel>": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "PRICING_FREQUENCY": {
+      "type": "string",
+      "const": "recurring"
     }
   }
 }

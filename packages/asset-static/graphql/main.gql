@@ -1095,6 +1095,202 @@ input IdInput {
   id: String
 }
 
+type LinkedUser {
+  _id: String
+  created: DateTimeISO
+  externalId: String
+  isFixture: Boolean
+  type: String
+}
+
+input LinkedUserCreateFormInput {
+  _id: String
+  created: DateTimeISO
+  externalId: String
+  isFixture: Boolean
+  type: String
+}
+
+input LinkedUserCreateInput {
+  form: LinkedUserCreateFormInput
+  root: String
+}
+
+input LinkedUserCreateManyFormInput {
+  _id: String
+  created: DateTimeISO
+  externalId: String
+  isFixture: Boolean
+  type: String
+}
+
+input LinkedUserCreateManyInput {
+  form: [LinkedUserCreateManyFormInput]
+  root: String
+}
+
+type LinkedUserCreateManyOutput {
+  result: LinkedUser
+  root: User
+}
+
+type LinkedUserCreateOutput {
+  result: LinkedUser
+  root: User
+}
+
+type LinkedUserGetConnectionConnection {
+  edges: [LinkedUserGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type LinkedUserGetConnectionEdge {
+  cursor: String
+  node: LinkedUser
+}
+
+input LinkedUserGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [LinkedUserInput]
+  resourceValue: LinkedUserInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input LinkedUserGetConnectionInput {
+  filter: [LinkedUserGetConnectionFilterInput]
+  pagination: PaginationInput
+  root: String
+}
+
+type LinkedUserGetConnectionOutput {
+  result: LinkedUserGetConnectionConnection
+  root: User
+}
+
+input LinkedUserGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [LinkedUserInput]
+  resourceValue: LinkedUserInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input LinkedUserGetInput {
+  filter: [LinkedUserGetFilterInput]
+  id: [String]
+  root: String
+}
+
+input LinkedUserGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [LinkedUserInput]
+  resourceValue: LinkedUserInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input LinkedUserGetManyInput {
+  filter: [LinkedUserGetManyFilterInput]
+  root: String
+}
+
+type LinkedUserGetManyOutput {
+  result: [LinkedUser]
+  root: User
+}
+
+type LinkedUserGetOutput {
+  result: LinkedUser
+  root: User
+}
+
+input LinkedUserInput {
+  _id: String
+  created: DateTimeISO
+  externalId: String
+  isFixture: Boolean
+  type: String
+}
+
+input LinkedUserRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [LinkedUserInput]
+  resourceValue: LinkedUserInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input LinkedUserRemoveInput {
+  filter: [LinkedUserRemoveFilterInput]
+  id: [String]
+  root: String
+}
+
+type LinkedUserRemoveOutput {
+  result: LinkedUser
+  root: User
+}
+
+input LinkedUserSearchInput {
+  keys: [String]
+  query: String
+  root: String
+}
+
+type LinkedUserSearchOutput {
+  result: [LinkedUser]
+  root: User
+}
+
+input LinkedUserUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [LinkedUserInput]
+  resourceValue: LinkedUserInput
+  stringArrayValue: [String]
+  stringValue: String
+}
+
+input LinkedUserUpdateInput {
+  filter: [LinkedUserUpdateFilterInput]
+  id: [String]
+  root: String
+  update: LinkedUserUpdateUpdateInput
+}
+
+type LinkedUserUpdateOutput {
+  result: LinkedUser
+  root: User
+}
+
+input LinkedUserUpdateUpdateInput {
+  _id: String
+  created: DateTimeISO
+  externalId: String
+  isFixture: Boolean
+  type: String
+}
+
 type Message {
   Group: Group
   _id: String
@@ -1331,6 +1527,10 @@ type Mutation {
   GroupCreateMany(input: GroupCreateManyInput): GroupCreateManyOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
   GroupUpdate(input: GroupUpdateInput): GroupUpdateOutput
+  LinkedUserCreate(input: LinkedUserCreateInput): LinkedUserCreateOutput
+  LinkedUserCreateMany(input: LinkedUserCreateManyInput): LinkedUserCreateManyOutput
+  LinkedUserRemove(input: LinkedUserRemoveInput): LinkedUserRemoveOutput
+  LinkedUserUpdate(input: LinkedUserUpdateInput): LinkedUserUpdateOutput
   MessageCreate(input: MessageCreateInput): MessageCreateOutput
   MessageCreateMany(input: MessageCreateManyInput): MessageCreateManyOutput
   MessageRemove(input: MessageRemoveInput): MessageRemoveOutput
@@ -1371,10 +1571,6 @@ type Mutation {
   VendorCreateMany(input: VendorCreateManyInput): VendorCreateManyOutput
   VendorRemove(input: VendorRemoveInput): VendorRemoveOutput
   VendorUpdate(input: VendorUpdateInput): VendorUpdateOutput
-  linkedUserCreate(input: linkedUserCreateInput): linkedUserCreateOutput
-  linkedUserCreateMany(input: linkedUserCreateManyInput): linkedUserCreateManyOutput
-  linkedUserRemove(input: linkedUserRemoveInput): linkedUserRemoveOutput
-  linkedUserUpdate(input: linkedUserUpdateInput): linkedUserUpdateOutput
 }
 
 type Order {
@@ -2256,6 +2452,10 @@ type Query {
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
   GroupSearch(input: GroupSearchInput): GroupSearchOutput
+  LinkedUserGet(input: LinkedUserGetInput): LinkedUserGetOutput
+  LinkedUserGetConnection(input: LinkedUserGetConnectionInput): LinkedUserGetConnectionOutput
+  LinkedUserGetMany(input: LinkedUserGetManyInput): LinkedUserGetManyOutput
+  LinkedUserSearch(input: LinkedUserSearchInput): LinkedUserSearchOutput
   MessageGet(input: MessageGetInput): MessageGetOutput
   MessageGetConnection(input: MessageGetConnectionInput): MessageGetConnectionOutput
   MessageGetMany(input: MessageGetManyInput): MessageGetManyOutput
@@ -2300,10 +2500,6 @@ type Query {
   VendorGetMany(input: VendorGetManyInput): VendorGetManyOutput
   VendorSearch(input: VendorSearchInput): VendorSearchOutput
   createToken(input: PaymentInput): String
-  linkedUserGet(input: linkedUserGetInput): linkedUserGetOutput
-  linkedUserGetConnection(input: linkedUserGetConnectionInput): linkedUserGetConnectionOutput
-  linkedUserGetMany(input: linkedUserGetManyInput): linkedUserGetManyOutput
-  linkedUserSearch(input: linkedUserSearchInput): linkedUserSearchOutput
   paymentMethodGetAll: [PaymentMethod]
   removeToken(input: IdInput): Boolean
   signIn(input: SignInInput): SignIn
@@ -2778,6 +2974,7 @@ type User {
   Bank: [Bank]
   Card: [Card]
   Chat: [Chat]
+  LinkedUser: [LinkedUser]
   Message: [Message]
   PaymentMethod: [Card]
   _id: String
@@ -2787,7 +2984,6 @@ type User {
   first: String
   isFixture: Boolean
   last: String
-  linkedUser: [linkedUser]
   paymentMethodPrimary: PaymentMethod
   phone: String
 }
@@ -2797,6 +2993,7 @@ input UserCreateFormInput {
   Bank: [BankInput] = []
   Card: [CardInput] = []
   Chat: [ChatInput] = []
+  LinkedUser: [LinkedUserInput]
   Message: [MessageInput] = []
   PaymentMethod: [CardInput] = []
   _id: String
@@ -2806,7 +3003,6 @@ input UserCreateFormInput {
   first: String
   isFixture: Boolean
   last: String
-  linkedUser: [linkedUserInput]
   paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
@@ -2821,6 +3017,7 @@ input UserCreateManyFormInput {
   Bank: [BankInput] = []
   Card: [CardInput] = []
   Chat: [ChatInput] = []
+  LinkedUser: [LinkedUserInput]
   Message: [MessageInput] = []
   PaymentMethod: [CardInput] = []
   _id: String
@@ -2830,7 +3027,6 @@ input UserCreateManyFormInput {
   first: String
   isFixture: Boolean
   last: String
-  linkedUser: [linkedUserInput]
   paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
@@ -2928,6 +3124,7 @@ input UserInput {
   Bank: [BankInput] = []
   Card: [CardInput] = []
   Chat: [ChatInput] = []
+  LinkedUser: [LinkedUserInput]
   Message: [MessageInput] = []
   PaymentMethod: [CardInput] = []
   _id: String
@@ -2937,7 +3134,6 @@ input UserInput {
   first: String
   isFixture: Boolean
   last: String
-  linkedUser: [linkedUserInput]
   paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
@@ -3002,6 +3198,7 @@ input UserUpdateUpdateInput {
   Bank: [BankInput] = []
   Card: [CardInput] = []
   Chat: [ChatInput] = []
+  LinkedUser: [LinkedUserInput]
   Message: [MessageInput] = []
   PaymentMethod: [CardInput] = []
   _id: String
@@ -3011,7 +3208,6 @@ input UserUpdateUpdateInput {
   first: String
   isFixture: Boolean
   last: String
-  linkedUser: [linkedUserInput]
   paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
@@ -3423,200 +3619,4 @@ input VendorUpdateUpdateInput {
   imageSrc: String
   isFixture: Boolean
   name: String
-}
-
-type linkedUser {
-  _id: String
-  created: DateTimeISO
-  externalId: String
-  isFixture: Boolean
-  type: String
-}
-
-input linkedUserCreateFormInput {
-  _id: String
-  created: DateTimeISO
-  externalId: String
-  isFixture: Boolean
-  type: String
-}
-
-input linkedUserCreateInput {
-  form: linkedUserCreateFormInput
-  root: String
-}
-
-input linkedUserCreateManyFormInput {
-  _id: String
-  created: DateTimeISO
-  externalId: String
-  isFixture: Boolean
-  type: String
-}
-
-input linkedUserCreateManyInput {
-  form: [linkedUserCreateManyFormInput]
-  root: String
-}
-
-type linkedUserCreateManyOutput {
-  result: linkedUser
-  root: User
-}
-
-type linkedUserCreateOutput {
-  result: linkedUser
-  root: User
-}
-
-type linkedUserGetConnectionConnection {
-  edges: [linkedUserGetConnectionEdge]
-  pageInfo: PageInfo
-}
-
-type linkedUserGetConnectionEdge {
-  cursor: String
-  node: linkedUser
-}
-
-input linkedUserGetConnectionFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [linkedUserInput]
-  resourceValue: linkedUserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input linkedUserGetConnectionInput {
-  filter: [linkedUserGetConnectionFilterInput]
-  pagination: PaginationInput
-  root: String
-}
-
-type linkedUserGetConnectionOutput {
-  result: linkedUserGetConnectionConnection
-  root: User
-}
-
-input linkedUserGetFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [linkedUserInput]
-  resourceValue: linkedUserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input linkedUserGetInput {
-  filter: [linkedUserGetFilterInput]
-  id: [String]
-  root: String
-}
-
-input linkedUserGetManyFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [linkedUserInput]
-  resourceValue: linkedUserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input linkedUserGetManyInput {
-  filter: [linkedUserGetManyFilterInput]
-  root: String
-}
-
-type linkedUserGetManyOutput {
-  result: [linkedUser]
-  root: User
-}
-
-type linkedUserGetOutput {
-  result: linkedUser
-  root: User
-}
-
-input linkedUserInput {
-  _id: String
-  created: DateTimeISO
-  externalId: String
-  isFixture: Boolean
-  type: String
-}
-
-input linkedUserRemoveFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [linkedUserInput]
-  resourceValue: linkedUserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input linkedUserRemoveInput {
-  filter: [linkedUserRemoveFilterInput]
-  id: [String]
-  root: String
-}
-
-type linkedUserRemoveOutput {
-  result: linkedUser
-  root: User
-}
-
-input linkedUserSearchInput {
-  keys: [String]
-  query: String
-  root: String
-}
-
-type linkedUserSearchOutput {
-  result: [linkedUser]
-  root: User
-}
-
-input linkedUserUpdateFilterInput {
-  booleanValue: Boolean
-  condition: String
-  dateValue: DateTimeISO
-  field: String
-  numberValue: Float
-  resourceArrayValue: [linkedUserInput]
-  resourceValue: linkedUserInput
-  stringArrayValue: [String]
-  stringValue: String
-}
-
-input linkedUserUpdateInput {
-  filter: [linkedUserUpdateFilterInput]
-  id: [String]
-  root: String
-  update: linkedUserUpdateUpdateInput
-}
-
-type linkedUserUpdateOutput {
-  result: linkedUser
-  root: User
-}
-
-input linkedUserUpdateUpdateInput {
-  _id: String
-  created: DateTimeISO
-  externalId: String
-  isFixture: Boolean
-  type: String
 }

@@ -7,38 +7,7 @@
       "additionalProperties": false,
       "properties": {
         "Product": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "string"
-            },
-            "beforeCreate": {
-              "type": "null"
-            },
-            "created": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "isFixture": {
-              "type": "boolean"
-            },
-            "Pricing": {
-              "$ref": "#/definitions/CollectionModel<PricingModel>"
-            },
-            "description": {
-              "type": "string"
-            },
-            "imageSrc": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "name": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/RefModel<ProductModel>"
         },
         "currency": {
           "type": "string"
@@ -52,8 +21,28 @@
         "_id": {
           "type": "string"
         },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
         "beforeCreate": {
           "type": "null"
+        }
+      },
+      "required": [
+        "Product",
+        "_id",
+        "created"
+      ]
+    },
+    "RefModel<ProductModel>": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
         },
         "created": {
           "type": "string",
@@ -61,18 +50,34 @@
         },
         "isFixture": {
           "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "Pricing": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RefModel<PricingModel>"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageSrc": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
         }
       },
-      "required": [
-        "_id",
-        "created"
-      ]
+      "additionalProperties": false
     },
-    "CollectionModel<PricingModel>": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/PricingModel"
-      }
+    "RefModel<PricingModel>": {
+      "type": "object",
+      "additionalProperties": false
     },
     "PRICING_FREQUENCY": {
       "type": "string",

@@ -7,47 +7,16 @@
       "additionalProperties": false,
       "properties": {
         "chat": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "string"
-            },
-            "beforeCreate": {
-              "type": "null"
-            },
-            "created": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "isFixture": {
-              "type": "boolean"
-            },
-            "createdBy": {
-              "$ref": "../../user/User/User.json#/definitions/UserModel"
-            },
-            "messsages": {
-              "$ref": "#/definitions/CollectionModel<MessageModel>"
-            },
-            "name": {
-              "type": "string"
-            },
-            "participants": {
-              "$ref": "#/definitions/CollectionModel<UserModel>"
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/RefModel<ChatModel>"
         },
         "text": {
           "type": "string"
         },
         "createdBy": {
-          "$ref": "../../user/User/User.json#/definitions/UserModel"
+          "$ref": "#/definitions/RefModel<UserModel>"
         },
         "_id": {
           "type": "string"
-        },
-        "beforeCreate": {
-          "type": "null"
         },
         "created": {
           "type": "string",
@@ -55,6 +24,9 @@
         },
         "isFixture": {
           "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
         }
       },
       "required": [
@@ -62,6 +34,589 @@
         "chat",
         "created"
       ]
+    },
+    "RefModel<ChatModel>": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/RefModel<UserModel>"
+        },
+        "messsages": {
+          "$ref": "#/definitions/CollectionModel<MessageModel>"
+        },
+        "name": {
+          "type": "string"
+        },
+        "participants": {
+          "$ref": "#/definitions/CollectionModel<UserModel>"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RefModel<UserModel>": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "Access": {
+          "$ref": "#/definitions/CollectionModel<AccessModel>"
+        },
+        "Bank": {
+          "$ref": "#/definitions/CollectionModel<BankModel>"
+        },
+        "Card": {
+          "$ref": "#/definitions/CollectionModel<CardModel>"
+        },
+        "Chat": {
+          "$ref": "#/definitions/CollectionModel<ChatModel>"
+        },
+        "linkedUser": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RefModel<LinkedUserModel>"
+          }
+        },
+        "Message": {
+          "$ref": "#/definitions/CollectionModel<MessageModel>"
+        },
+        "PaymentMethod": {
+          "$ref": "#/definitions/CollectionModel<PaymentMethodModel>"
+        },
+        "callingCode": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "paymentMethodPrimary": {
+          "$ref": "#/definitions/RefModel<PaymentMethodModel>"
+        },
+        "phone": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CollectionModel<AccessModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "../../auth/Access/Access.json#/definitions/AccessModel"
+      }
+    },
+    "AccessModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Group": {
+          "$ref": "#/definitions/RefModel<GroupModel>"
+        },
+        "Role": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ACCESS_ROLE"
+          }
+        },
+        "User": {
+          "$ref": "#/definitions/RefModel<UserModel>"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "Role",
+        "User",
+        "_id",
+        "created"
+      ]
+    },
+    "RefModel<GroupModel>": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "Access": {
+          "$ref": "#/definitions/CollectionModel<AccessModel>"
+        },
+        "Role": {
+          "$ref": "#/definitions/CollectionModel<RoleModel>"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GROUP_TYPE"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "CollectionModel<RoleModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "../../auth/Role/Role.json#/definitions/RoleModel"
+      }
+    },
+    "RoleModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Group": {
+          "$ref": "#/definitions/RefModel<GroupModel>"
+        },
+        "name": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "_id",
+        "created"
+      ]
+    },
+    "GROUP_TYPE": {
+      "type": [],
+      "enum": []
+    },
+    "ACCESS_ROLE": {
+      "type": "string",
+      "enum": [
+        "Admin",
+        "User"
+      ]
+    },
+    "CollectionModel<BankModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "../../billing/Bank/Bank.json#/definitions/BankModel"
+      }
+    },
+    "BankModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "User": {
+          "$ref": "#/definitions/CollectionModel<UserModel>"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "isPrimary": {
+          "type": "boolean"
+        },
+        "last4": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "User",
+        "_id",
+        "created",
+        "externalId",
+        "fingerprint",
+        "last4",
+        "name"
+      ]
+    },
+    "CollectionModel<UserModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "../../user/User/User.json#/definitions/UserModel"
+      }
+    },
+    "UserModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Access": {
+          "$ref": "#/definitions/CollectionModel<AccessModel>"
+        },
+        "Bank": {
+          "$ref": "#/definitions/CollectionModel<BankModel>"
+        },
+        "Card": {
+          "$ref": "#/definitions/CollectionModel<CardModel>"
+        },
+        "Chat": {
+          "$ref": "#/definitions/CollectionModel<ChatModel>"
+        },
+        "linkedUser": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RefModel<LinkedUserModel>"
+          }
+        },
+        "Message": {
+          "$ref": "#/definitions/CollectionModel<MessageModel>"
+        },
+        "PaymentMethod": {
+          "$ref": "#/definitions/CollectionModel<PaymentMethodModel>"
+        },
+        "callingCode": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "paymentMethodPrimary": {
+          "$ref": "#/definitions/RefModel<PaymentMethodModel>"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "_id",
+        "created"
+      ]
+    },
+    "CollectionModel<CardModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "../../billing/Card/Card.json#/definitions/CardModel"
+      }
+    },
+    "CardModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "User": {
+          "$ref": "#/definitions/CollectionModel<UserModel>"
+        },
+        "expMonth": {
+          "type": "number"
+        },
+        "expYear": {
+          "type": "number"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "funding": {
+          "$ref": "#/definitions/CARD_FUNDING"
+        },
+        "isPrimary": {
+          "type": "boolean"
+        },
+        "last4": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "expMonth",
+        "expYear",
+        "externalId",
+        "fingerprint",
+        "funding",
+        "last4",
+        "name"
+      ]
+    },
+    "CARD_FUNDING": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ]
+    },
+    "CollectionModel<ChatModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "../Chat/Chat.json#/definitions/ChatModel"
+      }
+    },
+    "ChatModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "messsages": {
+          "$ref": "#/definitions/CollectionModel<MessageModel>"
+        },
+        "name": {
+          "type": "string"
+        },
+        "participants": {
+          "$ref": "#/definitions/CollectionModel<UserModel>"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/RefModel<UserModel>"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "_id",
+        "created"
+      ]
+    },
+    "CollectionModel<MessageModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MessageModel"
+      }
+    },
+    "RefModel<LinkedUserModel>": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/LINKED_USER_TYPE"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LINKED_USER_TYPE": {
+      "type": "string",
+      "const": "stripe"
+    },
+    "CollectionModel<PaymentMethodModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "../../billing/PaymentMethod/PaymentMethod.json#/definitions/PaymentMethodModel"
+      }
+    },
+    "PaymentMethodModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "externalId": {
+          "type": "string"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "isPrimary": {
+          "type": "boolean"
+        },
+        "last4": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/PAYMENT_METHOD_TYPE"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "externalId",
+        "fingerprint",
+        "last4",
+        "name",
+        "type"
+      ]
+    },
+    "PAYMENT_METHOD_TYPE": {
+      "type": "string",
+      "enum": [
+        "bank",
+        "card"
+      ]
+    },
+    "RefModel<PaymentMethodModel>": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "fingerprint": {
+          "type": "string"
+        },
+        "isPrimary": {
+          "type": "boolean"
+        },
+        "last4": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/PAYMENT_METHOD_TYPE"
+        }
+      },
+      "additionalProperties": false
     }
   }
 }

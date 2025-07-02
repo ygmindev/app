@@ -61,7 +61,11 @@ export const _schemaGenerate = async ({
     }).createSchema(type);
     refs[`${main}Model`] = {
       basePathname,
-      definitions: schema.definitions ? Object.keys(schema.definitions) : [],
+      // definitions: schema.definitions
+      //   ? Object.keys(schema.definitions).filter((d) => !d.includes('<'))
+      //   : [],
+      // definitions: schema.definitions ? Object.keys(schema.definitions) : [],
+      definitions: [],
       jsonPathname,
       pyPathname,
       schema,
@@ -82,25 +86,25 @@ export const _schemaGenerate = async ({
       if (node.type === 'object' && node.children) {
         for (const child of node.children) {
           if (child.type === 'property') {
-            const [key, value] = (child as unknown as { children: [Node, Node] }).children;
+            const [k, v] = (child as unknown as { children: [Node, Node] }).children;
             if (
-              key.value === '$ref' &&
-              typeof value.value === 'string' &&
-              value.value.startsWith('#/definitions/')
+              k.value === '$ref' &&
+              typeof v.value === 'string' &&
+              v.value.startsWith('#/definitions/')
             ) {
-              const ref = value.value.split('/').pop();
+              const ref = v.value.split('/').pop();
               if (ref && type !== ref && !!refs[ref]) {
                 edits.push(
                   ...modify(
                     result,
-                    [...path, key.value as string],
+                    [...path, k.value as string],
                     `${toRelative({ from: joinPaths([jsonPathname, '..']), to: refs[ref].jsonPathname })}#/definitions/${ref}`,
                     { formattingOptions: { insertSpaces: true, tabSize: 2 } },
                   ),
                 );
               }
             } else {
-              walk(value, [...path, key.value as string]);
+              walk(v, [...path, k.value as string]);
             }
           }
         }

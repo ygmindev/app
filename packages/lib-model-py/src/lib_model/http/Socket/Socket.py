@@ -13,9 +13,9 @@ class SocketModel(BaseModel):
     connections: List[str]
     name: Optional[str] = None
     field_id: str = Field(..., alias='_id')
-    beforeCreate: None = None
     created: datetime
     isFixture: Optional[bool] = None
+    beforeCreate: None = None
 
 
 class Model(RootModel[SocketModel]):
