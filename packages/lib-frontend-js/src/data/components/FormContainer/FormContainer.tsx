@@ -23,6 +23,8 @@ import {
 import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequence';
@@ -63,7 +65,7 @@ const FormContainerF = <TType, TResult = void>({
   initialValues,
   isBlocking,
   isButton = true,
-  isFullHeight,
+  isFullHeight = true,
   isFullWidth = true,
   isValidateChanged,
   onCancel,
@@ -86,6 +88,7 @@ const FormContainerF = <TType, TResult = void>({
 > => {
   const [isAppLoading] = useStore('app.isLoading');
   const { wrapperProps } = useLayoutStyles({ props });
+  const theme = useTheme();
 
   const inputRefs = useRef<FormFieldsRefModel<TType>>({});
 
@@ -247,6 +250,8 @@ const FormContainerF = <TType, TResult = void>({
         flex={isFullHeight}
         isFullHeight={isFullHeight}
         isFullWidth={isFullWidth}
+        m="auto"
+        maxWidth={theme.layout.width[THEME_SIZE.MEDIUM]}
         s>
         {topElement?.({ elementState: elementStateF })}
 

@@ -16,8 +16,8 @@ export const props: LibraryPropsModel<SpecificationInputFormPropsModel<Specifica
     Component: SpecificationInputForm,
     Renderer: ({ element }) => (
       <Wrapper
-        height={500}
-        width={500}>
+        height={400}
+        isFullWidth>
         {element}
       </Wrapper>
     ),
