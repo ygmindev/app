@@ -14,6 +14,7 @@ import {
 } from '@lib/frontend/core/components/Modal/Modal.models';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Swipeable } from '@lib/frontend/core/components/Swipeable/Swipeable';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { CORNER, DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import {
@@ -141,7 +142,11 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
                       {title && (
                         <Wrapper flex>
                           {isAsyncText(title) ? (
-                            <AsyncText fontStyle={FONT_STYLE.TITLE}>{title}</AsyncText>
+                            <AsyncText
+                              casing={TEXT_CASING.CAPITALIZE}
+                              fontStyle={FONT_STYLE.TITLE}>
+                              {title}
+                            </AsyncText>
                           ) : (
                             title
                           )}
