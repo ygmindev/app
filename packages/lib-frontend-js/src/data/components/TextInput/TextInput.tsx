@@ -126,6 +126,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       bottom={0}
       isAlign
       isRow
+      pBottom={label ? THEME_SIZE.SMALL : undefined}
       position={isRightElementFixed ? SHAPE_POSITION.ABSOLUTE : undefined}
       right={0}
       top={0}

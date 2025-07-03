@@ -1,6 +1,7 @@
 import { props as accordionProps } from '@lib/frontend/animation/components/Accordion/Accordion.library';
 import { props as appearableProps } from '@lib/frontend/animation/components/Appearable/Appearable.library';
 import { props as slidesProps } from '@lib/frontend/animation/components/Slides/Slides.library';
+import { props as typingTextProps } from '@lib/frontend/animation/components/TypingText/TypingText.library';
 import { props as specificationInputFormProps } from '@lib/frontend/api/components/SpecificationInputForm/SpecificationInputForm.library';
 import { props as logoProps } from '@lib/frontend/app/components/Logo/Logo.library';
 import { props as otpInputProps } from '@lib/frontend/auth/components/OtpInput/OtpInput.library';
@@ -90,6 +91,7 @@ export const LIBRARY_PROPS = [
   textProps,
   tileProps,
   titleProps,
+  typingTextProps,
   tooltipIconProps,
   wrapperProps,
 ];

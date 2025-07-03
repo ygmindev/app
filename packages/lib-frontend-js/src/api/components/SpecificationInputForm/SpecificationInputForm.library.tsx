@@ -1,5 +1,6 @@
 import { SpecificationInputForm } from '@lib/frontend/api/components/SpecificationInputForm/SpecificationInputForm';
 import { type SpecificationInputFormPropsModel } from '@lib/frontend/api/components/SpecificationInputForm/SpecificationInputForm.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 import { FIELD_TYPE } from '@lib/shared/api/utils/Field/Field.constants';
 
@@ -13,6 +14,13 @@ type SpecificationFixtureModel = {
 export const props: LibraryPropsModel<SpecificationInputFormPropsModel<SpecificationFixtureModel>> =
   {
     Component: SpecificationInputForm,
+    Renderer: ({ element }) => (
+      <Wrapper
+        height={500}
+        width={500}>
+        {element}
+      </Wrapper>
+    ),
     defaultProps: {
       specification: {
         fields: [

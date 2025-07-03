@@ -27,6 +27,7 @@
     "react-day-picker": "^9.6.7",
     "react-native-is-edge-to-edge": "^1.1.7",
     "react-native-reanimated": "3.17.5",
+    "react-native-type-animation": "^0.4.4",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "^0.20.0",
     "react-redux": "^9.2.0",

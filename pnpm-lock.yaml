@@ -197,6 +197,9 @@ importers:
       react-native-safe-area-context:
         specifier: ^5.4.0
         version: 5.4.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
+      react-native-type-animation:
+        specifier: ^0.4.4
+        version: 0.4.4(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
       react-native-typing-animation:
         specifier: ^0.1.7
         version: 0.1.7(prop-types@15.8.1)(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
@@ -320,6 +323,9 @@ importers:
       react-native-reanimated:
         specifier: 3.17.5
         version: 3.17.5(@babel/core@7.27.1)(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
+      react-native-type-animation:
+        specifier: ^0.4.4
+        version: 0.4.4(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
       react-native-vector-icons:
         specifier: ^10.2.0
         version: 10.2.0
@@ -569,6 +575,9 @@ importers:
       react-native-safe-area-context:
         specifier: ^5.4.0
         version: 5.4.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
+      react-native-type-animation:
+        specifier: ^0.4.4
+        version: 0.4.4(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
       react-native-typing-animation:
         specifier: ^0.1.7
         version: 0.1.7(prop-types@15.8.1)(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
@@ -707,6 +716,9 @@ importers:
       react-native-reanimated:
         specifier: 3.17.5
         version: 3.17.5(@babel/core@7.27.1)(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
+      react-native-type-animation:
+        specifier: ^0.4.4
+        version: 0.4.4(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
       react-native-vector-icons:
         specifier: ^10.2.0
         version: 10.2.0
@@ -959,6 +971,9 @@ importers:
       react-native-safe-area-context:
         specifier: ^5.4.0
         version: 5.4.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
+      react-native-type-animation:
+        specifier: ^0.4.4
+        version: 0.4.4(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
       react-native-typing-animation:
         specifier: ^0.1.7
         version: 0.1.7(prop-types@15.8.1)(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0)
@@ -2297,6 +2312,9 @@ importers:
       '@types/pubsub-js':
         specifier: ^1.8.6
         version: 1.8.6
+      '@types/react-native-typewriter':
+        specifier: ^0.7.4
+        version: 0.7.4(@babel/core@7.27.1)(react@19.1.0)
       '@types/ws':
         specifier: ^8.18.1
         version: 8.18.1
@@ -8094,6 +8112,9 @@ packages:
 
   '@types/react-native-calendar-picker@8.0.0':
     resolution: {integrity: sha512-Mymc+MxHx2ue+YoTdF6nnu9V7r2Sxn2eecFZ5qX3B+87MAMBAd7+/jaJzfUVEkIeb8rQKhWiYI1QvvN+hCglXw==}
+
+  '@types/react-native-typewriter@0.7.4':
+    resolution: {integrity: sha512-zybDKXoK9l2kLJFvQtLD44eDfvCQfHWGL/P8ObHV9CbjG4Y/6dgB7C/s2R2w7YR1FwZNQ4zItn71ZyRaiA2gWg==}
 
   '@types/react-native-vector-icons@6.4.18':
     resolution: {integrity: sha512-YGlNWb+k5laTBHd7+uZowB9DpIK3SXUneZqAiKQaj1jnJCZM0x71GDim5JCTMi4IFkhc9m8H/Gm28T5BjyivUw==}
@@ -15615,6 +15636,13 @@ packages:
 
   react-native-screens@4.10.0:
     resolution: {integrity: sha512-Tw21NGuXm3PbiUGtZd0AnXirUixaAbPXDjNR0baBH7/WJDaDTTELLcQ7QRXuqAWbmr/EVCrKj1348ei1KFIr8A==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+
+  react-native-type-animation@0.4.4:
+    resolution: {integrity: sha512-l1SbeRZGdNbeAVtjtkvvl8e1rJCy1nDiLsFrd5aMVLcX6LmYWBv7PK7j+rdR6gWcl2+fGqdmNWH7/sJkr9joAA==}
+    engines: {node: '>= 18.0.0'}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -25951,6 +25979,18 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@types/react-native-typewriter@0.7.4(@babel/core@7.27.1)(react@19.1.0)':
+    dependencies:
+      '@types/react': 19.1.3
+      react-native: 0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@react-native-community/cli'
+      - bufferutil
+      - react
+      - supports-color
+      - utf-8-validate
+
   '@types/react-native-vector-icons@6.4.18':
     dependencies:
       '@types/react': 19.1.3
@@ -35346,6 +35386,11 @@ snapshots:
       react-freeze: 1.0.4(react@19.1.0)
       react-native: 0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0)
       warn-once: 0.1.1
+
+  react-native-type-animation@0.4.4(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-native: 0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0)
 
   react-native-typing-animation@0.1.7(prop-types@15.8.1)(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.3)(react@19.1.0))(react@19.1.0):
     dependencies:

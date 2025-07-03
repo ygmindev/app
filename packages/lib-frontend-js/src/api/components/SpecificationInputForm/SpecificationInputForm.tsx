@@ -91,7 +91,7 @@ export const SpecificationInputForm = <TType extends unknown>({
       element: (
         <FormContainer
           fields={[{ element, id: field.id }] as Array<FormFieldsModel<unknown>>}
-          isCenter
+          isVerticalCenter
           validators={validators}
         />
       ),
@@ -106,11 +106,11 @@ export const SpecificationInputForm = <TType extends unknown>({
       border
       flex
       isOverflowHidden
+      p
       round>
       <StepForm
         isProgress
         onSubmit={handleSubmit}
-        p
         steps={steps}
       />
     </Wrapper>

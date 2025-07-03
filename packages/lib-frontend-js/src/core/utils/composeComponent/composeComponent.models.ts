@@ -20,12 +20,12 @@ export type ComposeComponentParamsModel<
     | ComponentType<TResult & RefPropsModel<TRef>>
     | string;
 
+  isWeb?: boolean;
+
   getProps?(
     props: RSFCPropsModel<TRef, TProps & TestIdPropsModel, TStyle>,
     theme: UseThemeModel,
   ): TResult | null;
-
-  isWeb?: boolean;
 } & Pick<UseStylesParamsModel<TProps, TStyle>, 'stylers'>;
 
 export type ComposeComponentModel<

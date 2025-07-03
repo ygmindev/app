@@ -60,6 +60,7 @@
     "react-native-is-edge-to-edge": "^1.1.7",
     "react-native-reanimated": "3.17.5",
     "react-native-safe-area-context": "^5.4.0",
+    "react-native-type-animation": "^0.4.4",
     "react-native-typing-animation": "^0.1.7",
     "react-native-vector-icons": "^10.2.0",
     "react-redux": "^9.2.0",

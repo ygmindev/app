@@ -3,7 +3,6 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
-import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { Form } from '@lib/frontend/data/components/Form/Form';
 import {
   type FormContainerPropsModel,
@@ -65,7 +64,7 @@ const FormContainerF = <TType, TResult = void>({
   isBlocking,
   isButton = true,
   isFullHeight,
-  isFullWidth,
+  isFullWidth = true,
   isValidateChanged,
   onCancel,
   onComplete,
@@ -243,32 +242,29 @@ const FormContainerF = <TType, TResult = void>({
               void handleSubmitF();
             }
       }>
-      <MainLayout
+      <Wrapper
         {...wrapperProps}
-        bottomElement={
-          <Wrapper s>
-            {isButton && (
-              <SubmittableButtons
-                cancelLabel={cancelLabel}
-                elementState={elementStateF}
-                onCancel={onCancel}
-                onSubmit={async () => handleSubmitF()}
-                submitLabel={submitLabel}
-                testID={props.testID}
-              />
-            )}
-
-            {bottomElement && bottomElement({ elementState: elementStateF })}
-          </Wrapper>
-        }
         flex={isFullHeight}
         isFullHeight={isFullHeight}
         isFullWidth={isFullWidth}
         s>
-        {topElement && topElement({ elementState: elementStateF })}
+        {topElement?.({ elementState: elementStateF })}
 
         {getFields()}
-      </MainLayout>
+
+        {isButton && (
+          <SubmittableButtons
+            cancelLabel={cancelLabel}
+            elementState={elementStateF}
+            onCancel={onCancel}
+            onSubmit={async () => handleSubmitF()}
+            submitLabel={submitLabel}
+            testID={props.testID}
+          />
+        )}
+
+        {bottomElement?.({ elementState: elementStateF })}
+      </Wrapper>
     </Form>
   );
 };
