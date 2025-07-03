@@ -35,17 +35,15 @@ export const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
         isNavigatable: false,
         namespaces: route.namespaces,
         pathname: '/',
-        previous: isHeader ? route.parent : (route.previous ?? route.parent),
+        previous: route.previous ?? (isHeader ? route.parent : route.previous),
         title: route.title,
       },
       ...(route.routes?.map((child) => ({
         ...child,
         header: isHeader || child.header,
-        previous: isHeader
-          ? isTabbed
-            ? route.parent
-            : route.fullpath
-          : (child.previous ?? route.parent),
+        previous:
+          child.previous ??
+          (isHeader ? (isTabbed ? route.parent : route.fullpath) : route.previous),
         title: child.title ?? child.pathname,
       })) ?? []),
     ];
@@ -59,6 +57,7 @@ export const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
           ...child,
           isModal: child.isModal || route.isModal,
           parent: route.fullpath,
+          previous: child.previous || route.previous,
         },
         route.depth,
       ),

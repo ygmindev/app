@@ -17,8 +17,8 @@ export const userRoutes: Array<RouteModel> = [
   {
     isModal: true,
     isProtectable: true,
-    navigation: ROUTE_NAVIGATION.TAB,
     pathname: ACCOUNT,
+    previous: '/',
     routes: [
       {
         icon: 'person',

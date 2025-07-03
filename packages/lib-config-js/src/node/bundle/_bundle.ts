@@ -18,7 +18,6 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type PlatformModel } from '@lib/shared/platform/platform.models';
@@ -387,8 +386,6 @@ export const _bundle = ({
 
     MERGE_STRATEGY.DEEP_APPEND,
   );
-
-  console.warn(stringify(config));
 
   return config;
 };
