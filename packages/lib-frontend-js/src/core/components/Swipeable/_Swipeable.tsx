@@ -4,6 +4,7 @@ import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type PropsModel } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { runOnJS } from 'react-native-reanimated';
 
 export const _Swipeable = composeComponent<
   _SwipeablePropsModel,
@@ -14,8 +15,18 @@ export const _Swipeable = composeComponent<
   getProps: ({ children, onChange, onEnd, onSwipe, threshold = SWIPEABLE_THRESHOLD }) => ({
     children,
     gesture: Gesture.Pan()
-      .onUpdate((e) => onChange && onChange({ x: e.translationX, y: e.translationY }))
+      .onStart(() => {
+        'worklet';
+        runOnJS(() => {
+          console.log('Running on JS thread');
+        })();
+      })
+      .onUpdate((e) => {
+        'worklet';
+        onChange?.({ x: e.translationX, y: e.translationY });
+      })
       .onEnd((e) => {
+        'worklet';
         if (onSwipe) {
           if (e.translationX >= threshold) {
             onSwipe(DIRECTION.RIGHT);
@@ -27,7 +38,7 @@ export const _Swipeable = composeComponent<
             onSwipe(DIRECTION.TOP);
           }
         }
-        onEnd && onEnd({ x: e.translationX, y: e.translationY });
+        onEnd?.({ x: e.translationX, y: e.translationY });
       }),
   }),
 });
