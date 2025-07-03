@@ -124,10 +124,6 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
     }
   })();
 
-  if (route.isModal && isLeaf) {
-    console.warn(route.previous);
-  }
-
   route.isModal &&
     isLeaf &&
     (element = (
