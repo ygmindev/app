@@ -14,14 +14,7 @@ import {
   type _SchemaGenerateParamsModel,
 } from '@tool/task/generate/utils/schemaGenerate/_schemaGenerate.models';
 import { type JSONSchema7 } from 'json-schema';
-import {
-  type EditResult,
-  findNodeAtLocation,
-  modify,
-  type Node,
-  parse,
-  parseTree,
-} from 'jsonc-parser';
+import { type EditResult, modify, type Node, parse, parseTree } from 'jsonc-parser';
 import snakeCase from 'lodash/snakeCase';
 import { createGenerator } from 'ts-json-schema-generator';
 
@@ -37,7 +30,6 @@ export const _schemaGenerate = async ({
     string,
     {
       basePathname: string;
-      definitions: Array<string>;
       jsonPathname: string;
       pyPathname: string;
       schema: JSONSchema7;
@@ -51,7 +43,6 @@ export const _schemaGenerate = async ({
     const pyPathname = joinPaths([outDirname, snakeCase(main)], { extension: 'py' });
     const type = `${main}Model`;
     const schema = createGenerator({
-      // expose: 'all',
       encodeRefs: false,
       path: basePathname,
       skipTypeCheck: true,
@@ -59,13 +50,9 @@ export const _schemaGenerate = async ({
       tsconfig: fromRoot('tsconfig.json'),
       type,
     }).createSchema(type);
+
     refs[`${main}Model`] = {
       basePathname,
-      // definitions: schema.definitions
-      //   ? Object.keys(schema.definitions).filter((d) => !d.includes('<'))
-      //   : [],
-      // definitions: schema.definitions ? Object.keys(schema.definitions) : [],
-      definitions: [],
       jsonPathname,
       pyPathname,
       schema,
@@ -79,6 +66,7 @@ export const _schemaGenerate = async ({
     let result = stringify(schema);
 
     const edits = [] as EditResult;
+    const definitions = [] as Array<string>;
     const walk = (node: Node | undefined, path: Array<string | number> = []): void => {
       if (!node || typeof node !== 'object') {
         return;
@@ -117,23 +105,30 @@ export const _schemaGenerate = async ({
     tree && walk(tree);
 
     if (edits.length && tree) {
-      const definitions = findNodeAtLocation(tree, ['definitions']);
-      for (const child of definitions?.children || []) {
-        if (child.type === 'property') {
-          const [key, _] = (child as unknown as { children: [Node, Node] }).children;
-          const ref = key.value as string;
-          if (key && type !== ref && !!refs[ref]) {
-            const { definitions } = refs[ref];
-            definitions.forEach((k) =>
-              edits.push(
-                ...modify(result, ['definitions', k], undefined, {
-                  formattingOptions: { insertSpaces: true, tabSize: 2 },
-                }),
-              ),
-            );
-          }
-        }
-      }
+      // const definitions = findNodeAtLocation(tree, ['definitions']);
+      // for (const child of definitions?.children || []) {
+      //   if (child.type === 'property') {
+      //     const [key, _] = (child as unknown as { children: [Node, Node] }).children;
+      //     const ref = key.value as string;
+      //     if (key && type !== ref && !!refs[ref]) {
+      //       const { definitions } = refs[ref];
+      //       definitions.forEach((k) =>
+      //         edits.push(
+      //           ...modify(result, ['definitions', k], undefined, {
+      //             formattingOptions: { insertSpaces: true, tabSize: 2 },
+      //           }),
+      //         ),
+      //       );
+      //     }
+      //   }
+      // }
+      definitions?.forEach((k) =>
+        edits.push(
+          ...modify(result, ['definitions', k], undefined, {
+            formattingOptions: { insertSpaces: true, tabSize: 2 },
+          }),
+        ),
+      );
 
       edits.sort((a, b) => b.offset - a.offset);
       for (const edit of edits) {

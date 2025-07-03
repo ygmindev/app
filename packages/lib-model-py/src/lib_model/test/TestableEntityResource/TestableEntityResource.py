@@ -9,23 +9,6 @@ from ..TestableEmbeddedResource import TestableEmbeddedResource
 from ..TestableRelatedResource import TestableRelatedResource
 
 
-class TestableEmbeddedResourceModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    date: Optional[datetime] = None
-    group: str
-    index: float
-    number: Optional[float] = None
-    string: str
-    stringArray: Optional[List[str]] = None
-    stringOptional: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
 class RefModelTestableEntityResourceModel(BaseModel):
     pass
     model_config = ConfigDict(
@@ -57,25 +40,9 @@ class TestableEntityResourceModel(BaseModel):
     beforeCreate: None = None
 
 
-class TestableRelatedResourceModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    rootManyToMany: Optional[List[TestableEntityResourceModel]] = None
-    rootOneToMany: Optional[RefModelTestableEntityResourceModel] = None
-    date: Optional[datetime] = None
-    group: str
-    index: float
-    number: Optional[float] = None
-    string: str
-    stringArray: Optional[List[str]] = None
-    stringOptional: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
+class CollectionModelTestableEntityResourceModel(RootModel[List[TestableEntityResourceModel]]):
+    root: List[TestableEntityResourceModel]
 
 
 Model.model_rebuild()
 TestableEntityResourceModel.model_rebuild()
-TestableRelatedResourceModel.model_rebuild()

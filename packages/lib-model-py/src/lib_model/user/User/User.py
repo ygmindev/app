@@ -16,39 +16,39 @@ from ...chat.Message import Message as Message_1
 
 
 class ACCESSROLE(Enum):
-    Admin = 'Admin'
-    User = 'User'
+    Admin = "Admin"
+    User = "User"
 
 
 class RefModelUserModel(BaseModel):
     pass
     model_config = ConfigDict(
-        extra='forbid',
+        extra="forbid",
     )
 
 
 class CARDFUNDING(Enum):
-    credit = 'credit'
-    debit = 'debit'
+    credit = "credit"
+    debit = "debit"
 
 
 class RefModelChatModel(BaseModel):
     pass
     model_config = ConfigDict(
-        extra='forbid',
+        extra="forbid",
     )
 
 
 class PAYMENTMETHODTYPE(Enum):
-    bank = 'bank'
-    card = 'card'
+    bank = "bank"
+    card = "card"
 
 
 class RefModelPaymentMethodModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra="forbid",
     )
-    field_id: Optional[str] = Field(None, alias='_id')
+    field_id: Optional[str] = Field(None, alias="_id")
     created: Optional[datetime] = None
     isFixture: Optional[bool] = None
     beforeCreate: None = None
@@ -60,45 +60,16 @@ class RefModelPaymentMethodModel(BaseModel):
     type: Optional[PAYMENTMETHODTYPE] = None
 
 
-class MessageModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    chat: RefModelChatModel
-    text: Optional[str] = None
-    createdBy: Optional[RefModelUserModel] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
 class RefModelLinkedUserModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra="forbid",
     )
-    field_id: Optional[str] = Field(None, alias='_id')
+    field_id: Optional[str] = Field(None, alias="_id")
     created: Optional[datetime] = None
     isFixture: Optional[bool] = None
     beforeCreate: None = None
     externalId: Optional[str] = None
-    type: Literal['stripe'] = 'stripe'
-
-
-class PaymentMethodModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    externalId: str
-    fingerprint: str
-    isPrimary: Optional[bool] = None
-    last4: str
-    name: str
-    type: PAYMENTMETHODTYPE
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
+    type: Literal["stripe"] = "stripe"
 
 
 class Model(RootModel[UserModel]):
@@ -107,13 +78,13 @@ class Model(RootModel[UserModel]):
 
 class UserModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra="forbid",
     )
     Access: Optional[List[Access_1.AccessModel]] = None
     Bank: Optional[List[Bank_1.BankModel]] = None
     Card: Optional[List[Card_1.CardModel]] = None
     Chat: Optional[List[Chat_1.ChatModel]] = None
-    linkedUser: Optional[List[RefModelLinkedUserModel]] = None
+    LinkedUser: Optional[List[RefModelLinkedUserModel]] = None
     Message: Optional[List[Message_1.MessageModel]] = None
     PaymentMethod: Optional[List[PaymentMethod_1.PaymentMethodModel]] = None
     callingCode: Optional[str] = None
@@ -122,20 +93,7 @@ class UserModel(BaseModel):
     last: Optional[str] = None
     paymentMethodPrimary: Optional[RefModelPaymentMethodModel] = None
     phone: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class AccessModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    Group: Optional[RefModelGroupModel] = None
-    Role: List[ACCESSROLE]
-    User: RefModelUserModel
-    field_id: str = Field(..., alias='_id')
+    field_id: str = Field(..., alias="_id")
     created: datetime
     isFixture: Optional[bool] = None
     beforeCreate: None = None
@@ -143,9 +101,9 @@ class AccessModel(BaseModel):
 
 class RefModelGroupModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra="forbid",
     )
-    field_id: Optional[str] = Field(None, alias='_id')
+    field_id: Optional[str] = Field(None, alias="_id")
     created: Optional[datetime] = None
     isFixture: Optional[bool] = None
     beforeCreate: None = None
@@ -156,70 +114,10 @@ class RefModelGroupModel(BaseModel):
     types: Optional[List[Any]] = None
 
 
-class RoleModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    Group: Optional[RefModelGroupModel] = None
-    name: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class BankModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    User: List[UserModel]
-    externalId: str
-    fingerprint: str
-    isPrimary: Optional[bool] = None
-    last4: str
-    name: str
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class CardModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    User: Optional[List[UserModel]] = None
-    expMonth: float
-    expYear: float
-    externalId: str
-    fingerprint: str
-    funding: CARDFUNDING
-    isPrimary: Optional[bool] = None
-    last4: str
-    name: str
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class ChatModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    messsages: Optional[List[Message_1.MessageModel]] = None
-    name: Optional[str] = None
-    participants: Optional[List[UserModel]] = None
-    createdBy: Optional[RefModelUserModel] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
+class CollectionModelUserModel(RootModel[List[UserModel]]):
+    root: List[UserModel]
 
 
 Model.model_rebuild()
 UserModel.model_rebuild()
-AccessModel.model_rebuild()
 RefModelGroupModel.model_rebuild()
-BankModel.model_rebuild()
-ChatModel.model_rebuild()
