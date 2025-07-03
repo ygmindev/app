@@ -1,5 +1,5 @@
-import { type AddressSpecificationModel } from '@lib/shared/openapi/specifications/addressSpecification/addressSpecification.models';
-import { FIELD_TYPE } from '@lib/shared/openapi/utils/Field/Field.constants';
+import { type AddressSpecificationModel } from '@lib/shared/api/specifications/addressSpecification/addressSpecification.models';
+import { FIELD_TYPE } from '@lib/shared/api/utils/Field/Field.constants';
 
 export const addressSpecification = {
   fields: [

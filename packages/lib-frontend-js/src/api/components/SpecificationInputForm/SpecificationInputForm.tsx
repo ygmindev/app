@@ -1,4 +1,5 @@
 import { type SpecificationInputFormPropsModel } from '@lib/frontend/api/components/SpecificationInputForm/SpecificationInputForm.models';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { DateInput } from '@lib/frontend/data/components/DateInput/DateInput';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
@@ -11,6 +12,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { PhoneInput } from '@lib/frontend/user/components/PhoneInput/PhoneInput';
 import { FIELD_TYPE } from '@lib/shared/api/utils/Field/Field.constants';
 import { type SpecificationFieldModel } from '@lib/shared/api/utils/Specification/Specification.models';
+import startCase from 'lodash/startCase';
 import { type ReactElement } from 'react';
 
 export const SpecificationInputForm = <TType extends unknown>({
@@ -94,16 +96,23 @@ export const SpecificationInputForm = <TType extends unknown>({
         />
       ),
       id: field.id,
-      title: field.id,
+      title: startCase(field.id),
     };
   });
 
   return (
-    <StepForm
+    <Wrapper
       {...wrapperProps}
-      isProgress
-      onSubmit={handleSubmit}
-      steps={steps}
-    />
+      border
+      flex
+      isOverflowHidden
+      round>
+      <StepForm
+        isProgress
+        onSubmit={handleSubmit}
+        p
+        steps={steps}
+      />
+    </Wrapper>
   );
 };

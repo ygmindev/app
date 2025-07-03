@@ -1,5 +1,5 @@
+import { type FieldModel } from '@lib/shared/api/utils/Field/Field.models';
 import { type InferModel, type StringKeyModel } from '@lib/shared/core/core.models';
-import { type FieldModel } from '@lib/shared/openapi/utils/Field/Field.models';
 
 export type SpecificationModel<TType> = {
   fields: Array<SpecificationFieldModel<TType>>;

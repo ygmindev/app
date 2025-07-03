@@ -1,6 +1,7 @@
 import { props as accordionProps } from '@lib/frontend/animation/components/Accordion/Accordion.library';
 import { props as appearableProps } from '@lib/frontend/animation/components/Appearable/Appearable.library';
 import { props as slidesProps } from '@lib/frontend/animation/components/Slides/Slides.library';
+import { props as specificationInputFormProps } from '@lib/frontend/api/components/SpecificationInputForm/SpecificationInputForm.library';
 import { props as logoProps } from '@lib/frontend/app/components/Logo/Logo.library';
 import { props as otpInputProps } from '@lib/frontend/auth/components/OtpInput/OtpInput.library';
 import { props as areaChartProps } from '@lib/frontend/chart/components/AreaChart/AreaChart.library';
@@ -82,6 +83,7 @@ export const LIBRARY_PROPS = [
   searchInputProps,
   selectInputProps,
   slidesProps,
+  specificationInputFormProps,
   switchInputProps,
   // textEditorProps,
   textInputProps,

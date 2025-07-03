@@ -4,6 +4,7 @@ import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
+import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
@@ -16,7 +17,6 @@ import {
 } from '@lib/frontend/data/components/StepForm/StepForm.models';
 import { type FormErrorModel, type FormValidatorsModel } from '@lib/frontend/data/data.models';
 import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -59,7 +59,6 @@ export const StepFormF = <TType, TResult = void>({
 }: LFCPropsModel<StepFormPropsModel<TType, TResult>>): ReactElement<
   LFCPropsModel<StepFormPropsModel<TType, TResult>>
 > => {
-  const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const [width] = useStore('app.dimension.width');
   const theme = useTheme();
@@ -117,14 +116,15 @@ export const StepFormF = <TType, TResult = void>({
                 flex
                 isAlign
                 isCenter
-                isRow>
+                isHorizontalScrollable
+                isRow
+                scrollType={SCROLL_TYPE.BUTTON}>
                 {steps.map((step, i) => {
                   const isActive = i === current;
                   const isValidPrevious = isValid[steps[i - 1]?.id];
                   const isValidCurrent = isValid[step.id];
                   return (
                     <Button
-                      description={t('core:step', { value: i + 1 })}
                       elementState={
                         elementState ??
                         (isActive || isValidCurrent || isValidPrevious
