@@ -1,6 +1,7 @@
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { type ChipPropsModel } from '@lib/frontend/core/components/Chip/Chip.models';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -33,6 +34,7 @@ export const Chip: LFCModel<ChipPropsModel> = ({
       )}
 
       <AsyncText
+        casing={TEXT_CASING.CAPITALIZE}
         color={color}
         colorRole={THEME_ROLE.CONTRAST}
         fontSize={THEME_SIZE.SMALL}
