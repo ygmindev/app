@@ -7,7 +7,9 @@ export const lint: TaskParamsModel<unknown> = {
   name: 'lint',
 
   task: [
-    () => `${fromExecutable('tsc')} --project ${fromWorking('tsconfig.json')}`,
-    lintCommand(true),
+    () =>
+      `${fromExecutable('tsc')} --noEmitOnError false --project ${fromWorking('tsconfig.json')}`,
+
+    () => lintCommand(true),
   ],
 };
