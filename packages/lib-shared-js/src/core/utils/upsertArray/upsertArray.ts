@@ -11,7 +11,7 @@ export const updateArray = <TType extends unknown>(
   const valueF = value ? (isClone ? cloneDeep(value) : value) : [];
   const index = isNumber(selector) ? selector : valueF.findIndex(selector);
   if (index >= 0) {
-    valueF[index] = update(valueF[index]);
+    valueF[index] = update(valueF[index]) ?? valueF[index];
   }
   return valueF;
 };

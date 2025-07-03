@@ -8,5 +8,5 @@ import { build } from 'vike/api';
 export const _buildApp = async ({ web }: _BuildAppParamsModel): _BuildAppModel => {
   await build({
     viteConfig: { ..._web(web), configFile: false },
-  });
+  } as Parameters<typeof build>[0]);
 };
