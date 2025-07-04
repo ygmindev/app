@@ -29,7 +29,7 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import find from 'lodash/find';
 import lowerCase from 'lodash/lowerCase';
-import { type ReactElement, useEffect, useState } from 'react';
+import { type ReactElement, useEffect, useMemo, useState } from 'react';
 import { useCallback, useImperativeHandle, useRef } from 'react';
 
 export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
@@ -70,11 +70,9 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
     { elementState, onElementStateChange },
   );
 
-  const [selectedOption, selectedOptionSet] = useState<TType | undefined>();
-
   useEffect(() => {
     defaultValue && handleChange(defaultValue);
-  }, []);
+  }, [defaultValue]);
 
   const [focused, focusedSet] = useState<number | undefined>();
   const menuRef = useRef<MenuRefModel>(null);
@@ -100,16 +98,17 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
   };
 
   const { delay, minLength } = searchConfig.params();
+
   const handleSearch = useCallback(
-    debounce((v?: string) => (v?.length ?? 0) >= minLength && (onSearch ? onSearch(v) : null), {
+    debounce((v?: string) => (v?.length ?? 0) >= minLength && (onSearch ?? search)(v ?? ''), {
       duration: delay,
     }),
-    [delay, minLength, onSearch],
+    [delay, minLength, onSearch, search],
   );
 
   const handleTextChange = (v: string): void => {
     textValueSet(v);
-    (handleSearch ?? search)(v);
+    handleSearch(v);
     focusedSet(undefined);
   };
 
@@ -119,6 +118,11 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
     <Rotatable isActive={isActive}>
       <Icon icon="chevronDown" />
     </Rotatable>
+  );
+
+  const selectedOption = useMemo(
+    () => options.find(({ id }) => id === valueControlled),
+    [options, valueControlled],
   );
 
   const displayLabel =
@@ -147,7 +151,6 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
   };
 
   const handleChange = (v: string): void => {
-    selectedOptionSet(options.find(({ id }) => id === v));
     valueControlledSet(v);
     handleBlur();
     void sleepForEffect().then(() => focusedSet(undefined));
@@ -158,6 +161,8 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
   useImperativeHandle(ref, () => ({
     ...inputRef.current,
   }));
+
+  const widthF = width ?? theme.layout.width[THEME_SIZE.MEDIUM];
 
   return (
     <Menu
@@ -171,7 +176,6 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
           isTransparent={isTransparent}
           label={label}
           leftElement={selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />}
-          // onBlur={handleBlur}
           onChange={handleTextChange}
           onFocus={onFocus}
           onKey={optionsF?.length ? handleKey : undefined}
@@ -194,7 +198,8 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
           }
           round={round}
           value={isActive ? textValue : t(displayLabel)}
-          width={width}
+          width={widthF}
+          // onBlur={handleBlur}
         />
       )}
       elementState={elementStateControlled}
