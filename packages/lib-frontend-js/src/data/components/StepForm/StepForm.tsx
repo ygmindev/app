@@ -65,6 +65,7 @@ export const StepFormF = <TType, TResult = void>({
   const [isLoading, isLoadingSet] = useState<boolean>(false);
   const isLastStep = current === steps.length - 1;
   const [isValid, isValidSet] = useState<Record<string, boolean>>({});
+  const isProgressF = isProgress && steps.length > 2;
 
   const {
     handleSubmit,
@@ -115,7 +116,7 @@ export const StepFormF = <TType, TResult = void>({
         elementState={ELEMENT_STATE.ACTIVE}
         onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
         title={
-          isProgress ? (
+          isProgressF ? (
             <Wrapper
               flex
               isAlign

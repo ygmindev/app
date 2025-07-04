@@ -147,6 +147,18 @@ export const config = defineConfig<ThemeConfigModel>({
         [THEME_SIZE_MORE.XSMALL]: 5,
       },
 
+      height: {
+        [THEME_SIZE.LARGE]: 60,
+
+        [THEME_SIZE.MEDIUM]: 48,
+
+        [THEME_SIZE.SMALL]: 32,
+
+        [THEME_SIZE_MORE.XLARGE]: 60,
+
+        [THEME_SIZE_MORE.XSMALL]: 20,
+      },
+
       scaling: {
         [THEME_SIZE.LARGE]: 0.9,
 
@@ -181,6 +193,18 @@ export const config = defineConfig<ThemeConfigModel>({
         [THEME_SIZE.MEDIUM]: 12,
 
         [THEME_SIZE.SMALL]: 6,
+      },
+
+      width: {
+        [THEME_SIZE.LARGE]: 150,
+
+        [THEME_SIZE.MEDIUM]: 100,
+
+        [THEME_SIZE.SMALL]: 50,
+
+        [THEME_SIZE_MORE.XLARGE]: 200,
+
+        [THEME_SIZE_MORE.XSMALL]: 25,
       },
     },
   }),

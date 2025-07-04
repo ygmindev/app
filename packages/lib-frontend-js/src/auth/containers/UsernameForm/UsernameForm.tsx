@@ -137,7 +137,6 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
             }
           : undefined
       }
-      isCenter
       isVerticalCenter
       onComplete={onComplete}
       onSubmit={handleSubmit}

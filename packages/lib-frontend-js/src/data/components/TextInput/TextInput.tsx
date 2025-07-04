@@ -201,7 +201,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       isRow
       isTransparent={isTransparent}
       onElementStateChange={elementStateControlledSet}
-      pLeft
+      pLeft={!isCenter}
       position={SHAPE_POSITION.RELATIVE}
       ref={focusableRef}
       s={THEME_SIZE.SMALL}>

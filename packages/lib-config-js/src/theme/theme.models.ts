@@ -72,6 +72,8 @@ export type ThemeConfigModel = {
   shape: {
     borderRadius: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
 
+    height: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
+
     scaling: Record<ThemeSizeModel, number>;
 
     shadow: {
@@ -85,5 +87,7 @@ export type ThemeConfigModel = {
     size: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
 
     spacing: Record<ThemeSizeModel, number>;
+
+    width: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
   };
 };

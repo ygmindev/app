@@ -7,7 +7,6 @@ import {
   type MenuOptionModel,
   type MenuRefModel,
 } from '@lib/frontend/core/components/Menu/Menu.models';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import {
@@ -182,20 +181,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
           onSubmit={handleSubmit}
           placeholder={displayLabel ? t(displayLabel) : t('core:search')}
           ref={inputRef}
-          rightElement={
-            <Wrapper
-              isAlign
-              isRow>
-              {valueControlled && (
-                <Icon
-                  fontSize={THEME_SIZE.SMALL}
-                  icon="edit"
-                />
-              )}
-
-              {rightElementF}
-            </Wrapper>
-          }
+          rightElement={rightElementF}
           round={round}
           value={isActive ? textValue : t(displayLabel)}
           width={widthF}
