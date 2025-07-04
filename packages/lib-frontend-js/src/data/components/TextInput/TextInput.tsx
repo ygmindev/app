@@ -67,7 +67,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   size,
   testID,
   value,
-  width,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -130,11 +129,12 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       right={0}
       top={0}
       zIndex>
-      {isClearable && isActive && (
+      {isClearable && (
         <Appearable
           elementState={elementStateControlled}
-          isActive={(valueControlled?.length ?? 0) > 0}
-          isCenter>
+          isActive={isActive && (valueControlled?.length ?? 0) > 0}
+          isCenter
+          isLazy={false}>
           <Button
             icon="times"
             onPress={() => handleChange('')}
@@ -204,8 +204,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       pLeft
       position={SHAPE_POSITION.RELATIVE}
       ref={focusableRef}
-      s={THEME_SIZE.SMALL}
-      width={width}>
+      s={THEME_SIZE.SMALL}>
       {leftElementF}
 
       <Wrapper

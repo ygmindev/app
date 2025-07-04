@@ -3,7 +3,6 @@ import { NavigationHeader } from '@lib/frontend/app/components/NavigationHeader/
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
@@ -88,136 +87,140 @@ export const StepFormF = <TType, TResult = void>({
   const isLoadingFF = isLoadingF || isLoading;
 
   return (
-    <>
-      <Portal>
+    <Wrapper
+      {...wrapperProps}
+      flex
+      isFullWidth
+      s>
+      <Wrapper
+        backgroundColor={theme.color.border}
+        height={7}
+        isFullWidth
+        round>
         <Wrapper
           animation={{ states: { [ELEMENT_STATE.INACTIVE]: { width: 0 } } }}
           backgroundColor={THEME_COLOR.PRIMARY}
-          height={3}
+          bottom={0}
           left={0}
           position={SHAPE_POSITION.ABSOLUTE}
           ref={barRef}
+          round
           top={0}
           width={0}
-        />
-      </Portal>
-
-      <Wrapper
-        {...wrapperProps}
-        flex
-        isFullWidth
-        s>
-        <NavigationHeader
-          elementState={ELEMENT_STATE.ACTIVE}
-          onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
-          title={
-            isProgress ? (
-              <Wrapper
-                flex
-                isAlign
-                isCenter
-                isHorizontalScrollable
-                isRow
-                scrollType={SCROLL_TYPE.BUTTON}>
-                {steps.map((step, i) => {
-                  const isActive = i === current;
-                  const isValidPrevious = isValid[steps[i - 1]?.id];
-                  const isValidCurrent = isValid[step.id];
-                  return (
-                    <Button
-                      elementState={
-                        elementState ??
-                        (isActive || isValidCurrent || isValidPrevious
-                          ? undefined
-                          : ELEMENT_STATE.DISABLED)
-                      }
-                      icon={isValidCurrent ? 'check' : 'dotsCircle'}
-                      key={step.id}
-                      onPress={() => {
-                        void handleCurrentSet(i);
-                      }}
-                      type={isActive ? BUTTON_TYPE.FILLED : BUTTON_TYPE.TRANSPARENT}>
-                      {step.title}
-                    </Button>
-                  );
-                })}
-              </Wrapper>
-            ) : undefined
-          }
-        />
-
-        {topElement}
-
-        <Slides
-          current={current}
-          slides={filterNil(
-            steps.map(({ element, fields, id, message, title }) => {
-              const elementF:
-                | ReactElement<FormStepPropsModel<TType, PartialModel<TType>, TResult>>
-                | undefined = fields ? (
-                <FormContainer
-                  elementState={elementState}
-                  fields={fields}
-                  flex
-                  isCenter
-                  onElementStateChange={onElementStateChange}
-                />
-              ) : (
-                element
-              );
-              return (
-                elementF && {
-                  element: (
-                    <Wrapper flex>
-                      {message && <AsyncText fontStyle={FONT_STYLE.HEADLINE}>{message}</AsyncText>}
-
-                      {cloneElement(elementF, {
-                        data: values as PartialModel<TType>,
-                        elementState:
-                          elementState ?? (isLoadingFF ? ELEMENT_STATE.LOADING : undefined),
-                        initialValues: { ...initialValues, ...values } as PartialModel<TType>,
-                        key: id,
-                        onBack: () => {
-                          elementF.props.onBack && elementF.props.onBack();
-                          void handleCurrentSet(current - 1);
-                        },
-                        onComplete: () => {
-                          isLoadingSet(false);
-                          elementF.props.onComplete && elementF.props.onComplete();
-                        },
-                        onError: (error: Error) => {
-                          elementF.props.onError && elementF.props.onError(error);
-                        },
-                        onSubmit: async (stepValues: PartialModel<TType>) => {
-                          isLoadingSet(true);
-                          elementF.props.onSubmit && (await elementF.props.onSubmit(stepValues));
-                          const valuesF = { ...values, ...stepValues };
-                          await valuesSet(valuesF);
-                          isLastStep && handleSubmit && handleSubmit();
-                          return null;
-                        },
-                        onSuccess: async (stepValues: PartialModel<TType>) => {
-                          elementF.props.onSuccess && (await elementF.props.onSuccess(stepValues));
-                          !isLastStep && void handleCurrentSet(current + 1);
-                          isValidSet({ ...isValid, [id]: true });
-                        },
-                        onValidate: (e?: FormErrorModel<PartialModel<TType>>) =>
-                          !isEmpty(e) && isValidSet({ ...isValid, [id]: false }),
-                        validators: {
-                          ...elementF.props.validators,
-                          ...validators,
-                        } as FormValidatorsModel<PartialModel<TType>>,
-                      })}
-                    </Wrapper>
-                  ),
-                  id,
-                  title,
-                }
-              );
-            }),
-          )}
+          zIndex
         />
       </Wrapper>
-    </>
+
+      <NavigationHeader
+        elementState={ELEMENT_STATE.ACTIVE}
+        onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
+        title={
+          isProgress ? (
+            <Wrapper
+              flex
+              isAlign
+              isCenter
+              isHorizontalScrollable
+              isRow
+              scrollType={SCROLL_TYPE.BUTTON}>
+              {steps.map((step, i) => {
+                const isActive = i === current;
+                const isValidPrevious = isValid[steps[i - 1]?.id];
+                const isValidCurrent = isValid[step.id];
+                return (
+                  <Button
+                    elementState={
+                      elementState ??
+                      (isActive || isValidCurrent || isValidPrevious
+                        ? undefined
+                        : ELEMENT_STATE.DISABLED)
+                    }
+                    icon={isValidCurrent ? 'check' : 'dotsCircle'}
+                    key={step.id}
+                    onPress={() => {
+                      void handleCurrentSet(i);
+                    }}
+                    type={isActive ? BUTTON_TYPE.FILLED : BUTTON_TYPE.TRANSPARENT}>
+                    {step.title}
+                  </Button>
+                );
+              })}
+            </Wrapper>
+          ) : undefined
+        }
+      />
+
+      {topElement}
+
+      <Slides
+        current={current}
+        slides={filterNil(
+          steps.map(({ element, fields, id, message, title }) => {
+            const elementF:
+              | ReactElement<FormStepPropsModel<TType, PartialModel<TType>, TResult>>
+              | undefined = fields ? (
+              <FormContainer
+                elementState={elementState}
+                fields={fields}
+                flex
+                isCenter
+                onElementStateChange={onElementStateChange}
+              />
+            ) : (
+              element
+            );
+            return (
+              elementF && {
+                element: (
+                  <Wrapper flex>
+                    {message && <AsyncText fontStyle={FONT_STYLE.HEADLINE}>{message}</AsyncText>}
+
+                    {cloneElement(elementF, {
+                      data: values as PartialModel<TType>,
+                      elementState:
+                        elementState ?? (isLoadingFF ? ELEMENT_STATE.LOADING : undefined),
+                      initialValues: { ...initialValues, ...values } as PartialModel<TType>,
+                      key: id,
+                      onBack: () => {
+                        elementF.props.onBack && elementF.props.onBack();
+                        void handleCurrentSet(current - 1);
+                      },
+                      onComplete: () => {
+                        isLoadingSet(false);
+                        elementF.props.onComplete && elementF.props.onComplete();
+                      },
+                      onError: (error: Error) => {
+                        elementF.props.onError && elementF.props.onError(error);
+                      },
+                      onSubmit: async (stepValues: PartialModel<TType>) => {
+                        isLoadingSet(true);
+                        elementF.props.onSubmit && (await elementF.props.onSubmit(stepValues));
+                        const valuesF = { ...values, ...stepValues };
+                        await valuesSet(valuesF);
+                        isLastStep && handleSubmit && handleSubmit();
+                        return null;
+                      },
+                      onSuccess: async (stepValues: PartialModel<TType>) => {
+                        elementF.props.onSuccess && (await elementF.props.onSuccess(stepValues));
+                        !isLastStep && void handleCurrentSet(current + 1);
+                        isValidSet({ ...isValid, [id]: true });
+                      },
+                      onValidate: (e?: FormErrorModel<PartialModel<TType>>) =>
+                        !isEmpty(e) && isValidSet({ ...isValid, [id]: false }),
+                      validators: {
+                        ...elementF.props.validators,
+                        ...validators,
+                      } as FormValidatorsModel<PartialModel<TType>>,
+                    })}
+                  </Wrapper>
+                ),
+                id,
+                title,
+              }
+            );
+          }),
+        )}
+      />
+    </Wrapper>
   );
 };

@@ -29,7 +29,7 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import find from 'lodash/find';
 import lowerCase from 'lodash/lowerCase';
-import { type ReactElement, useState } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 import { useCallback, useImperativeHandle, useRef } from 'react';
 
 export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
@@ -65,13 +65,16 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
     onChange,
     value,
   });
+
   const { elementStateControlled, elementStateControlledSet, isActive } = useElementStateControlled(
-    {
-      elementState,
-      onElementStateChange,
-    },
+    { elementState, onElementStateChange },
   );
-  const [selectedOption, selectedOptionSet] = useState<TType>();
+
+  const [selectedOption, selectedOptionSet] = useState<TType | undefined>();
+
+  useEffect(() => {
+    defaultValue && handleChange(defaultValue);
+  }, []);
 
   const [focused, focusedSet] = useState<number | undefined>();
   const menuRef = useRef<MenuRefModel>(null);
@@ -119,7 +122,9 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
   );
 
   const displayLabel =
-    renderValue?.(selectedOption) ?? selectedOption?.label ?? selectedOption?.id ?? valueControlled;
+    selectedOption && renderValue
+      ? renderValue(selectedOption)
+      : (selectedOption?.label ?? selectedOption?.id ?? valueControlled);
 
   const handleBlur = (): void => {
     onBlur && onBlur();

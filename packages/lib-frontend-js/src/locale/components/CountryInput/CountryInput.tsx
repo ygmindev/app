@@ -53,6 +53,7 @@ export const CountryInput: RLFCModel<CountryInputRefModel, CountryInputPropsMode
       label={t('core:country')}
       onChange={valueControlledSet}
       options={options}
+      renderValue={(v) => `+${v.id} ${v.label}`}
       value={valueControlled}
     />
   );

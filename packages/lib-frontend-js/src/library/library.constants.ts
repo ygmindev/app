@@ -41,13 +41,19 @@ import { props as numberInputProps } from '@lib/frontend/data/components/NumberI
 import { props as selectInputProps } from '@lib/frontend/data/components/SelectInput/SelectInput.library';
 import { props as switchInputProps } from '@lib/frontend/data/components/SwitchInput/SwitchInput.library';
 import { props as textInputProps } from '@lib/frontend/data/components/TextInput/TextInput.library';
+import { props as yesNoInput } from '@lib/frontend/data/components/YesNoInput/YesNoInput.library';
+import { props as countryInputProps } from '@lib/frontend/locale/components/CountryInput/CountryInput.library';
 import { props as notificationProps } from '@lib/frontend/notification/components/Notification/Notification.library';
 import { props as notificationsProps } from '@lib/frontend/notification/containers/Notifications/Notifications.library';
 import { props as searchInputProps } from '@lib/frontend/search/components/SearchInput/SearchInput.library';
+import { props as phoneInput } from '@lib/frontend/user/components/PhoneInput/PhoneInput.library';
+import { props as userInputProps } from '@lib/frontend/user/components/UserInput/UserInput.library';
 
 export const LIBRARY = 'library';
 
 export const LIBRARY_PROPS = [
+  // fileInputProps,
+  // textEditorProps,
   accordionProps,
   activatableProps,
   appearableProps,
@@ -60,10 +66,10 @@ export const LIBRARY_PROPS = [
   checkboxInput,
   chipProps,
   circleProps,
+  countryInputProps,
   dateInputProps,
   dividerProps,
   droppableProps,
-  // fileInputProps,
   iconProps,
   imageProps,
   lineChartProps,
@@ -78,6 +84,7 @@ export const LIBRARY_PROPS = [
   notificationsProps,
   numberInputProps,
   otpInputProps,
+  phoneInput,
   pressableProps,
   pressableTitleProps,
   scatterChartProps,
@@ -86,12 +93,13 @@ export const LIBRARY_PROPS = [
   slidesProps,
   specificationInputFormProps,
   switchInputProps,
-  // textEditorProps,
   textInputProps,
   textProps,
   tileProps,
   titleProps,
-  typingTextProps,
   tooltipIconProps,
+  typingTextProps,
+  userInputProps,
   wrapperProps,
+  yesNoInput,
 ];
