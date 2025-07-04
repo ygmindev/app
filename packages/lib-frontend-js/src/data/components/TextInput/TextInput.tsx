@@ -1,6 +1,7 @@
 import { ANIMATION_STATES_FOCUSABLE } from '@lib/frontend/animation/animation.constants';
 import { type AnimationModel } from '@lib/frontend/animation/animation.models';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
+import { sleepForEffect } from '@lib/frontend/animation/utils/sleepForEffect/sleepForEffect';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
@@ -96,14 +97,15 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   });
 
   const handleFocus = async (v?: boolean): Promise<void> => {
+    !v && (await sleepForEffect());
     if (!isBlocked) {
       if (v) {
-        onFocus && onFocus();
+        onFocus?.();
         focusableRef.current?.focus && focusableRef.current?.focus();
         inputRef.current?.focus?.();
         elementStateControlledSet(ELEMENT_STATE.ACTIVE);
       } else {
-        onBlur && onBlur();
+        onBlur?.();
         focusableRef.current?.blur && focusableRef.current?.blur();
         inputRef.current?.blur?.();
         elementStateControlledSet(ELEMENT_STATE.INACTIVE);
@@ -125,7 +127,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       isAlign
       isRow
       pRight
-      position={isRightElementFixed ? SHAPE_POSITION.ABSOLUTE : undefined}
+      position={isRightElementFixed || isCenter ? SHAPE_POSITION.ABSOLUTE : undefined}
       right={0}
       top={0}
       zIndex>
@@ -208,8 +210,12 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       {leftElementF}
 
       <Wrapper
+        bottom={0}
         flex
-        position={SHAPE_POSITION.RELATIVE}>
+        left={0}
+        position={isCenter ? SHAPE_POSITION.ABSOLUTE : SHAPE_POSITION.RELATIVE}
+        right={0}
+        top={0}>
         {/* TODO: to item? */}
         <Wrapper
           animation={containerAnimation}
@@ -219,7 +225,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
           isRow
           left={0}
           position={SHAPE_POSITION.ABSOLUTE}
-          style={{ transformOrigin: `0px 0px` }}
+          right={0}
+          style={isCenter ? { transformOrigin: 'top' } : { transformOrigin: `0px 0px` }}
           zIndex={-1}>
           {icon && (
             <Icon
