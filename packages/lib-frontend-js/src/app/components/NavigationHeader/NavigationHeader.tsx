@@ -9,23 +9,27 @@ import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrap
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import {
+  FONT_ALIGN,
+  FONT_STYLE,
+} from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { useRef } from 'react';
 
 export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
   elementState,
-  isAbsolute,
   onBack,
   title,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
+  const { t } = useTranslation();
   const ref = useRef<WrapperRefModel>(null);
   const [isLoading] = useStore('app.isLoading');
   return (
@@ -38,18 +42,21 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
       isAlign
       isFullWidth
       isRow
-      left={isAbsolute ? 0 : undefined}
       pHorizontal
       pVertical={THEME_SIZE.SMALL}
-      position={isAbsolute ? SHAPE_POSITION.ABSOLUTE : SHAPE_POSITION.RELATIVE}
-      ref={ref}
-      right={isAbsolute ? 0 : undefined}
-      top={isAbsolute ? 0 : undefined}
-      zIndex={2}>
-      <Appearable isActive={!!onBack}>
+      position={SHAPE_POSITION.RELATIVE}
+      ref={ref}>
+      <Appearable
+        isActive={!!onBack}
+        left={0}
+        position={SHAPE_POSITION.ABSOLUTE}
+        right={0}
+        top={0}
+        zIndex>
         <Button
           elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
           icon="chevronLeft"
+          iconText={t('core:goBack')}
           onPress={onBack}
           type={BUTTON_TYPE.INVISIBLE}
         />
@@ -59,7 +66,11 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
         flex
         isActive={!!title}>
         {isAsyncText(title) ? (
-          <AsyncText fontStyle={FONT_STYLE.SUBTITLE}>{title}</AsyncText>
+          <AsyncText
+            align={FONT_ALIGN.CENTER}
+            fontStyle={FONT_STYLE.SUBTITLE}>
+            {title}
+          </AsyncText>
         ) : (
           title
         )}

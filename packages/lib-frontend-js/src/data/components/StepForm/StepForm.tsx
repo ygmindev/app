@@ -112,43 +112,42 @@ export const StepFormF = <TType, TResult = void>({
         />
       </Wrapper>
 
+      {isProgressF && (
+        <Wrapper
+          isAlign
+          isCenter
+          isHorizontalScrollable
+          isRow
+          scrollType={SCROLL_TYPE.BUTTON}>
+          {steps.map((step, i) => {
+            const isActive = i === current;
+            const isValidPrevious = isValid[steps[i - 1]?.id];
+            const isValidCurrent = isValid[step.id];
+            return (
+              <Button
+                elementState={
+                  elementState ??
+                  (isActive || isValidCurrent || isValidPrevious
+                    ? undefined
+                    : ELEMENT_STATE.DISABLED)
+                }
+                icon={isValidCurrent ? 'check' : 'dotsCircle'}
+                key={step.id}
+                onPress={() => {
+                  void handleCurrentSet(i);
+                }}
+                type={isActive ? BUTTON_TYPE.FILLED : BUTTON_TYPE.TRANSPARENT}>
+                {step.title}
+              </Button>
+            );
+          })}
+        </Wrapper>
+      )}
+
       <NavigationHeader
         elementState={ELEMENT_STATE.ACTIVE}
         onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
-        title={
-          isProgressF ? (
-            <Wrapper
-              flex
-              isAlign
-              isCenter
-              isHorizontalScrollable
-              isRow
-              scrollType={SCROLL_TYPE.BUTTON}>
-              {steps.map((step, i) => {
-                const isActive = i === current;
-                const isValidPrevious = isValid[steps[i - 1]?.id];
-                const isValidCurrent = isValid[step.id];
-                return (
-                  <Button
-                    elementState={
-                      elementState ??
-                      (isActive || isValidCurrent || isValidPrevious
-                        ? undefined
-                        : ELEMENT_STATE.DISABLED)
-                    }
-                    icon={isValidCurrent ? 'check' : 'dotsCircle'}
-                    key={step.id}
-                    onPress={() => {
-                      void handleCurrentSet(i);
-                    }}
-                    type={isActive ? BUTTON_TYPE.FILLED : BUTTON_TYPE.TRANSPARENT}>
-                    {step.title}
-                  </Button>
-                );
-              })}
-            </Wrapper>
-          ) : undefined
-        }
+        title={'title'}
       />
 
       {topElement}

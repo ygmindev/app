@@ -13,7 +13,6 @@ export const RouteHeader: LFCModel<RouteHeaderPropsModel> = ({ route, ...props }
     <NavigationHeader
       {...wrapperProps}
       elementState={ELEMENT_STATE.ACTIVE}
-      isAbsolute
       onBack={
         previous
           ? async () => push({ isBack: true, params: location.params, pathname: previous })

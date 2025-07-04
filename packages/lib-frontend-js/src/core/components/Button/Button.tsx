@@ -71,7 +71,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
     childColorRole?: ThemeRoleModel;
   }>(() => {
     const colorF = theme.color.palette[color];
-    const opacity = theme.opaque[THEME_SIZE.MEDIUM];
+    const opacity = theme.opaque[THEME_SIZE.SMALL];
     const activeColor = colorF[THEME_ROLE.ACTIVE];
     const mainColor = colorF[THEME_ROLE.MAIN];
     switch (type) {
