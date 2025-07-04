@@ -24,10 +24,18 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   const elementStateF = states && elementState ? (states[elementState] as never) : undefined;
   return {
     animationProps: {
-      animate: ref?.current ? undefined : states && elementStateF,
+      animate: isInfinite
+        ? (states?.[ELEMENT_STATE.ACTIVE] as never)
+        : ref?.current
+          ? undefined
+          : states && elementStateF,
       animateInitialState: isInitial,
-      exit: states?.exit,
-      from: ref?.current ? states && elementStateF : (states?.inactive as never),
+      exit: states?.[ELEMENT_STATE.EXIT],
+      from: isInfinite
+        ? (states?.[ELEMENT_STATE.INACTIVE] as never)
+        : ref?.current
+          ? states && elementStateF
+          : (states?.[ELEMENT_STATE.INACTIVE] as never),
       transition: {
         delay,
         duration,
