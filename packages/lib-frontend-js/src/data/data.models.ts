@@ -30,16 +30,16 @@ export type DataFormatterModel<
 
 export type ValuePropsModel<TType = string> = {
   defaultValue?: TType;
-  onChange?(value: TType): void;
   value?: TType;
+  onChange?(value: TType): void;
 };
 
 export type InputPropsModel<TType = string> = FocusableWrapperPropsModel &
   WithIconPropsModel &
   ValuePropsModel<TType> & {
-    beforeSubmit?(value: TType, id: string): Promise<unknown>;
     isTransparent?: boolean;
     label?: AsyncTextModel;
+    beforeSubmit?(value: TType, id: string): Promise<unknown>;
     onBlur?(): void;
     onFocus?(): void;
     onSubmit?(): void;

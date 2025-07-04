@@ -25,6 +25,7 @@
     "libphonenumber-js": "^1.12.7",
     "nanoid": "^5.1.5",
     "react-day-picker": "^9.6.7",
+    "react-native-advanced-input-mask": "^1.4.2",
     "react-native-is-edge-to-edge": "^1.1.7",
     "react-native-reanimated": "3.17.5",
     "react-native-type-animation": "^0.4.4",

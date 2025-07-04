@@ -15,6 +15,7 @@ import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementSt
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
 import { type FocusableRefModel } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper.models';
+import { _MaskedInput } from '@lib/frontend/data/components/TextInput/_MaskedInput';
 import { _TextInput } from '@lib/frontend/data/components/TextInput/_TextInput';
 import {
   TEXT_INPUT_KEY,
@@ -54,6 +55,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   label,
   language,
   leftElement,
+  mask,
   maxLength,
   numberOfLines,
   onBlur,
@@ -78,7 +80,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
     beforeSubmit,
     blur: () => handleFocus(false),
     focus: () => handleFocus(true),
-    submit: inputRef.current?.submit,
   }));
 
   const { elementStateControlled, elementStateControlledSet, isActive, isBlocked } =
@@ -194,6 +195,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
     states: ANIMATION_STATES_FOCUSABLE({ isError, isText: true, theme }),
   };
 
+  const Component = mask ? _MaskedInput : _TextInput;
+
   return (
     <FocusableWrapper
       {...wrapperProps}
@@ -249,7 +252,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
           align={label ? FLEX_ALIGN.END : FLEX_ALIGN.CENTER}
           flex
           isRow>
-          <_TextInput
+          <Component
             autoComplete={autoComplete}
             foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
             height={theme.shape.size[THEME_SIZE.SMALL]}
@@ -257,6 +260,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
             isDisabled={isBlocked}
             keyboard={keyboard}
             language={language}
+            mask={mask}
             maxLength={maxLength}
             numberOfLines={numberOfLines}
             onBlur={() => void handleFocus(false)}

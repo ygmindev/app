@@ -11,6 +11,7 @@ export type _TextInputPropsModel = {
   isDisabled?: boolean;
   keyboard?: TextInputKeyboardModel;
   language?: string;
+  mask?: string;
   maxLength?: number;
   numberOfLines?: number;
   placeholder?: string;

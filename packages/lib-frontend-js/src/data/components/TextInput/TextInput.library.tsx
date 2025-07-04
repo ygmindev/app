@@ -22,5 +22,7 @@ export const props: LibraryPropsModel<TextInputPropsModel> = {
     { props: { error: true } },
     { props: { error: 'error' } },
     ...cartesianObject({ elementState: Object.values(ELEMENT_STATE) }).map((props) => ({ props })),
+    { props: { mask: '[000]-[000]-[0000]' } },
+    { props: { label: 'date', mask: '[00]{/}[00]{/}[0000]' } },
   ],
 };

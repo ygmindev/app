@@ -53,6 +53,7 @@
     "react-fast-compare": "^3.2.2",
     "react-i18next": "^15.5.1",
     "react-native": "^0.79.1",
+    "react-native-advanced-input-mask": "^1.4.2",
     "react-native-animated-spinkit": "^1.5.2",
     "react-native-draglist": "^3.9.5",
     "react-native-gesture-handler": "^2.25.0",

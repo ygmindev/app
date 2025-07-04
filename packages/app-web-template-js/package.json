@@ -71,6 +71,7 @@
     "react-error-boundary": "^5.0.0",
     "react-fast-compare": "^3.2.2",
     "react-i18next": "^15.5.1",
+    "react-native-advanced-input-mask": "^1.4.2",
     "react-native-animated-spinkit": "^1.5.2",
     "react-native-gesture-handler": "^2.25.0",
     "react-native-gifted-chat": "^2.8.1",
