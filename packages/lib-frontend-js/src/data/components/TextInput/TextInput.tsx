@@ -225,7 +225,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
           isRow
           left={0}
           position={SHAPE_POSITION.ABSOLUTE}
-          right={0}
+          right={isCenter ? 0 : undefined}
           style={isCenter ? { transformOrigin: 'top' } : { transformOrigin: `0px 0px` }}
           zIndex={-1}>
           {icon && (
