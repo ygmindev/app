@@ -117,7 +117,9 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   const leftElementF = leftElement && (
     <Wrapper
       isAlign
-      isRow>
+      isRow
+      pLeft
+      zIndex>
       {leftElement}
     </Wrapper>
   );
@@ -205,6 +207,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       height={height ?? (isNumber(sizeF) ? sizeF : theme.shape.size[sizeF])}
       isRow
       isTransparent={isTransparent}
+      minWidth={theme.layout.width[THEME_SIZE.SMALL]}
       onElementStateChange={elementStateControlledSet}
       pLeft={!isCenter}
       position={SHAPE_POSITION.RELATIVE}

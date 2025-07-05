@@ -6,6 +6,7 @@ import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/dat
 export type NumberInputPropsModel = InputPropsModel<number> &
   Omit<TextInputPropsModel, 'defaultValue' | 'keyboard' | 'onChange' | 'value'> & {
     addIcon?: IconPropsModel['icon'];
+    increment?: number;
     isTypable?: boolean;
     keyboard?: TEXT_INPUT_KEYBOARD.NUMBER | TEXT_INPUT_KEYBOARD.DECIMAL;
     max?: number;

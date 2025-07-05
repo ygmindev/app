@@ -126,13 +126,14 @@ export const StepFormF = <TType, TResult = void>({
             const isValidCurrent = isValid[step.id];
             return (
               <Button
+                color={isValidCurrent ? THEME_COLOR.SUCCESS : undefined}
                 elementState={
                   elementState ??
                   (isActive || isValidCurrent || isValidPrevious
                     ? undefined
                     : ELEMENT_STATE.DISABLED)
                 }
-                icon={isValidCurrent ? 'check' : 'dotsCircle'}
+                icon={isValidCurrent ? 'checkCircle' : 'dotsCircle'}
                 key={step.id}
                 onPress={() => {
                   void handleCurrentSet(i);

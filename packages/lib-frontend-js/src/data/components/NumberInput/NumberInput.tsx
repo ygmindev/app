@@ -18,6 +18,7 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
   addIcon = 'add',
   defaultValue,
   elementState,
+  increment = 1,
   isTypable = true,
   keyboard,
   max,
@@ -70,7 +71,7 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
         <Button
           elementState={isBlocked ? ELEMENT_STATE.DISABLED : undefined}
           icon={removeIcon}
-          onPress={() => handleChange((valueControlled ?? 0) - 1)}
+          onPress={() => handleChange((valueControlled ?? 0) - increment)}
           size={THEME_SIZE.SMALL}
           type={BUTTON_TYPE.INVISIBLE}
         />
@@ -81,7 +82,7 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
         <Button
           elementState={isBlocked ? ELEMENT_STATE.DISABLED : undefined}
           icon={addIcon}
-          onPress={() => handleChange((valueControlled ?? 0) + 1)}
+          onPress={() => handleChange((valueControlled ?? 0) + increment)}
           size={THEME_SIZE.SMALL}
           type={BUTTON_TYPE.INVISIBLE}
         />
