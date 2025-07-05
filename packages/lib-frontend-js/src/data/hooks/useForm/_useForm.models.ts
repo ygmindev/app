@@ -6,18 +6,19 @@ export type _UseFormParamsModel<TType, TResult = void> = Pick<
   'onSubmit' | 'onSuccess' | 'onComplete' | 'onError'
 > & {
   initialValues?: PartialModel<TType>;
+  isValidateOnChange?: boolean;
   onValidate?(data: TType): Promise<FormErrorModel<TType>>;
 };
 
 export type _UseFormModel<TType, TResult = void> = {
   data?: TResult | null;
   errors: FormErrorModel<TType>;
-  errorsSet(errors?: FormErrorModel<TType>): void;
   handleChange: <TKey extends StringKeyModel<TType>>(key: TKey) => (value: TType[TKey]) => void;
-  handleReset(): void;
-  handleSubmit(): void;
   isLoading: boolean;
   isValid: boolean;
   values: TType;
+  errorsSet(errors?: FormErrorModel<TType>): void;
+  handleReset(): void;
+  handleSubmit(): void;
   valuesSet(data?: TType): Promise<void>;
 };

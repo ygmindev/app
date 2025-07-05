@@ -56,7 +56,6 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
         <Button
           elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}
           icon="chevronLeft"
-          iconText={t('core:goBack')}
           onPress={onBack}
           type={BUTTON_TYPE.INVISIBLE}
         />

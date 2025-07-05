@@ -12,11 +12,11 @@ export type TablePropsModel<TType> = UseTableParamsModel<TType> & {
   isFullWidth?: boolean;
   isHeadless?: boolean;
   isRemovable?: boolean;
+  select?: TableSelectTypeModel;
+  validators?: FormValidatorsModel<TType>;
   onChange?(data?: Array<TType>): void;
   onRemove?(row: TType): Promise<void>;
   onSelect?(rows?: Array<TType>): void;
-  select?: TableSelectTypeModel;
-  validators?: FormValidatorsModel<TType>;
 };
 
 export type TableRefModel<TType> = {

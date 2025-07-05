@@ -44,8 +44,9 @@ export const NumberInput: RLFCModel<NumberInputRefModel, NumberInputPropsModel> 
 
   const handleChange = (v?: number | string): void => {
     let valueString = v ? toString(v) : undefined;
-    let valueF = v === undefined ? defaultValue : toNumber(v);
-    if (valueF !== undefined) {
+    let valueF;
+    if (v !== '') {
+      valueF = toNumber(v);
       if (max !== undefined && valueF > max) {
         valueF = max;
         valueString = toString(valueF);

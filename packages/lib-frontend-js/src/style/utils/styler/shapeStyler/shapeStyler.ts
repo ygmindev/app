@@ -4,6 +4,7 @@ import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models
 
 export const shapeStyler: StylerModel<ShapeStylerParamsModel> = ({
   bottom,
+  cursor,
   height,
   isAbsoluteFill,
   isFullHeight,
@@ -24,6 +25,7 @@ export const shapeStyler: StylerModel<ShapeStylerParamsModel> = ({
   zIndex,
 }) => ({
   bottom: isAbsoluteFill ? bottom || 0 : bottom,
+  cursor,
   height: isFullHeight ? '100%' : height,
   left: isAbsoluteFill ? left || 0 : left,
   maxHeight,

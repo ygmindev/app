@@ -25,19 +25,21 @@ export const props: LibraryPropsModel<SpecificationInputFormPropsModel<Specifica
       specification: {
         fields: [
           {
-            id: 'numberFieldOptional',
-            type: FIELD_TYPE.NUMBER,
-          },
-          {
             id: 'numberFieldRequired',
             type: FIELD_TYPE.NUMBER,
           },
           {
-            id: 'stringFieldOptional',
-            type: FIELD_TYPE.STRING,
+            id: 'numberFieldOptional',
+            isOptional: true,
+            type: FIELD_TYPE.NUMBER,
           },
           {
             id: 'stringFieldRequired',
+            type: FIELD_TYPE.STRING,
+          },
+          {
+            id: 'stringFieldOptional',
+            isOptional: true,
             type: FIELD_TYPE.STRING,
           },
         ],

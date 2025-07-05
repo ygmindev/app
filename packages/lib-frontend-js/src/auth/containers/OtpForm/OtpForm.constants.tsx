@@ -5,5 +5,5 @@ import { type EntityResourceDataModel } from '@lib/shared/resource/resource.mode
 import toNumber from 'lodash/toNumber';
 
 export const OTP_FORM_VALIDATORS: FormValidatorsModel<EntityResourceDataModel<OtpModel>> = {
-  otp: validateLength(toNumber(process.env.SERVER_APP_OTP_LENGTH)),
+  otp: [validateLength(toNumber(process.env.SERVER_APP_OTP_LENGTH))],
 };

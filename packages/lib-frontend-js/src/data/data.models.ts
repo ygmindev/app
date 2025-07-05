@@ -69,7 +69,7 @@ export type FormValidatorModel<TType = string | undefined, TForm = unknown> = (p
 export type FormValidatorsModel<TType> = {
   [TKey in keyof TType]?: TType[TKey] extends object
     ? FormValidatorsModel<TType[TKey]>
-    : FormValidatorModel<TType[TKey], TType>;
+    : Array<FormValidatorModel<TType[TKey], TType>>;
 };
 
 export type FormInputModel<TType> = {

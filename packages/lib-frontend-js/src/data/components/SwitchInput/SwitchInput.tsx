@@ -4,6 +4,7 @@ import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import {
   SWITCH_INPUT_OFFSET,
   SWITCH_INPUT_WIDTH,
@@ -31,6 +32,7 @@ export const SwitchInput: RLFCModel<SwitchInputRefModel, SwitchInputPropsModel> 
   iconInactive = 'times',
   label,
   onChange,
+  onElementStateChange,
   value,
   ...props
 }) => {
@@ -41,11 +43,15 @@ export const SwitchInput: RLFCModel<SwitchInputRefModel, SwitchInputPropsModel> 
     onChange,
     value,
   });
-  const elementStateF = valueControlled
+
+  const { elementStateControlled, isBlocked } = useElementStateControlled({
+    elementState,
+    onElementStateChange,
+  });
+
+  const elementStateStyle = valueControlled
     ? ELEMENT_STATE.ACTIVE
-    : elementState === ELEMENT_STATE.DISABLED || elementState === ELEMENT_STATE.LOADING
-      ? ELEMENT_STATE.DISABLED
-      : ELEMENT_STATE.INACTIVE;
+    : (elementStateControlled ?? ELEMENT_STATE.INACTIVE);
 
   const {
     childActiveLeft,
@@ -70,20 +76,23 @@ export const SwitchInput: RLFCModel<SwitchInputRefModel, SwitchInputPropsModel> 
   return (
     <Wrapper
       {...wrapperProps}
-      elementState={elementStateF}
+      elementState={elementStateStyle}
       isAlign
       isRow
-      onPress={() => valueControlledSet(!valueControlled)}>
+      onPress={() => !isBlocked && valueControlledSet(!valueControlled)}>
       <Wrapper
         animation={{
           states: {
             [ELEMENT_STATE.ACTIVE]: {
               backgroundColor: theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN],
+              opacity: 1,
             },
-            [ELEMENT_STATE.INACTIVE]: { backgroundColor: theme.color.border },
+            [ELEMENT_STATE.INACTIVE]: { backgroundColor: theme.color.border, opacity: 1 },
+            [ELEMENT_STATE.DISABLED]: { opacity: theme.opaque[THEME_SIZE.MEDIUM] },
+            [ELEMENT_STATE.LOADING]: { opacity: theme.opaque[THEME_SIZE.MEDIUM] },
           },
         }}
-        elementState={elementStateF}
+        elementState={elementStateStyle}
         height={containerHeight}
         position={SHAPE_POSITION.RELATIVE}
         round={containerBorderRadius}
@@ -96,7 +105,7 @@ export const SwitchInput: RLFCModel<SwitchInputRefModel, SwitchInputPropsModel> 
             },
           }}
           backgroundColor={THEME_COLOR_MORE.SURFACE}
-          elementState={elementStateF}
+          elementState={elementStateStyle}
           height={childSize}
           left={SWITCH_INPUT_OFFSET}
           mVertical={SWITCH_INPUT_OFFSET}

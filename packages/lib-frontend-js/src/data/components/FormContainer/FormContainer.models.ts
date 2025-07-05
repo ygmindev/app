@@ -17,11 +17,11 @@ export type FormContainerPropsModel<TType, TResult = void> = WrapperPropsModel &
   UseFormParamsModel<TType, TResult> &
   SubmittablePropsModel<TType, TResult> &
   Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
-    bottomElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
     cancelLabel?: AsyncTextModel;
     fields?: Array<FormFieldsModel<TType>>;
     isButton?: boolean;
     submitLabel?: AsyncTextModel;
+    bottomElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
     topElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
   };
 

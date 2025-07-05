@@ -68,6 +68,7 @@ const FormContainerF = <TType, TResult = void>({
   isFullHeight = true,
   isFullWidth = true,
   isValidateChanged,
+  isValidateOnChange,
   onCancel,
   onComplete,
   onError,
@@ -138,21 +139,21 @@ const FormContainerF = <TType, TResult = void>({
     return (await onSubmit?.(dataF)) ?? null;
   };
 
-  const { errors, handleChange, handleReset, handleSubmit, isLoading, values, valuesSet } = useForm<
-    TType,
-    TResult
-  >({
-    initialValues,
-    isBlocking,
-    isValidateChanged,
-    onComplete,
-    onError,
-    onSubmit: onSubmitF,
-    onSuccess,
-    onValidate,
-    successMessage,
-    validators: validators && (pick(validators, fieldIds) as unknown as FormValidatorsModel<TType>),
-  });
+  const { errors, handleChange, handleReset, handleSubmit, isLoading, isValid, values, valuesSet } =
+    useForm<TType, TResult>({
+      initialValues,
+      isBlocking,
+      isValidateChanged,
+      isValidateOnChange,
+      onComplete,
+      onError,
+      onSubmit: onSubmitF,
+      onSuccess,
+      onValidate,
+      successMessage,
+      validators:
+        validators && (pick(validators, fieldIds) as unknown as FormValidatorsModel<TType>),
+    });
 
   const elementStateF = isAppLoading || isLoading ? ELEMENT_STATE.LOADING : elementState;
   const isDisabled =
@@ -261,6 +262,7 @@ const FormContainerF = <TType, TResult = void>({
           <SubmittableButtons
             cancelLabel={cancelLabel}
             elementState={elementStateF}
+            elementStateSubmit={isValid ? undefined : ELEMENT_STATE.DISABLED}
             onCancel={onCancel}
             onSubmit={async () => handleSubmitF()}
             submitLabel={submitLabel}

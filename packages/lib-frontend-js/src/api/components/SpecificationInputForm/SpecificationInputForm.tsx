@@ -7,11 +7,14 @@ import { type FormFieldsModel } from '@lib/frontend/data/components/FormContaine
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import { StepForm } from '@lib/frontend/data/components/StepForm/StepForm';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
+import { validateNotEmpty } from '@lib/frontend/data/utils/validateNotEmpty/validateNotEmpty';
 import { AddressInput } from '@lib/frontend/map/components/AddressInput/AddressInput';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { PhoneInput } from '@lib/frontend/user/components/PhoneInput/PhoneInput';
 import { FIELD_TYPE } from '@lib/shared/api/utils/Field/Field.constants';
 import { type SpecificationFieldModel } from '@lib/shared/api/utils/Specification/Specification.models';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import startCase from 'lodash/startCase';
 import { type ReactElement } from 'react';
 
@@ -91,8 +94,14 @@ export const SpecificationInputForm = <TType extends unknown>({
       element: (
         <FormContainer
           fields={[{ element, id: field.id }] as Array<FormFieldsModel<unknown>>}
+          isValidateOnChange
           isVerticalCenter
-          validators={validators}
+          validators={{
+            [field.id]: filterNil([
+              validators?.[field.id as StringKeyModel<TType>],
+              !field.isOptional && validateNotEmpty,
+            ]),
+          }}
         />
       ),
       id: field.id,

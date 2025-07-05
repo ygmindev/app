@@ -63,8 +63,9 @@ export const StepFormF = <TType, TResult = void>({
   const theme = useTheme();
   const [current, currentSet] = useState<number>(0);
   const [isLoading, isLoadingSet] = useState<boolean>(false);
-  const isLastStep = current === steps.length - 1;
   const [isValid, isValidSet] = useState<Record<string, boolean>>({});
+  const isLastStep = current === steps.length - 1;
+
   const isProgressF = isProgress && steps.length > 2;
 
   const {
@@ -144,11 +145,13 @@ export const StepFormF = <TType, TResult = void>({
         </Wrapper>
       )}
 
-      <NavigationHeader
-        elementState={ELEMENT_STATE.ACTIVE}
-        onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
-        title={'title'}
-      />
+      {steps?.[current] && (
+        <NavigationHeader
+          elementState={ELEMENT_STATE.ACTIVE}
+          onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
+          title={steps?.[current].title}
+        />
+      )}
 
       {topElement}
 
@@ -164,6 +167,7 @@ export const StepFormF = <TType, TResult = void>({
                 fields={fields}
                 flex
                 isCenter
+                isValidateChanged
                 onElementStateChange={onElementStateChange}
               />
             ) : (
@@ -182,26 +186,26 @@ export const StepFormF = <TType, TResult = void>({
                       initialValues: { ...initialValues, ...values } as PartialModel<TType>,
                       key: id,
                       onBack: () => {
-                        elementF.props.onBack && elementF.props.onBack();
+                        elementF.props.onBack?.();
                         void handleCurrentSet(current - 1);
                       },
                       onComplete: () => {
                         isLoadingSet(false);
-                        elementF.props.onComplete && elementF.props.onComplete();
+                        elementF.props.onComplete?.();
                       },
                       onError: (error: Error) => {
                         elementF.props.onError && elementF.props.onError(error);
                       },
                       onSubmit: async (stepValues: PartialModel<TType>) => {
                         isLoadingSet(true);
-                        elementF.props.onSubmit && (await elementF.props.onSubmit(stepValues));
+                        await elementF.props.onSubmit?.(stepValues);
                         const valuesF = { ...values, ...stepValues };
                         await valuesSet(valuesF);
                         isLastStep && handleSubmit && handleSubmit();
                         return null;
                       },
                       onSuccess: async (stepValues: PartialModel<TType>) => {
-                        elementF.props.onSuccess && (await elementF.props.onSuccess(stepValues));
+                        await elementF.props.onSuccess?.(stepValues);
                         !isLastStep && void handleCurrentSet(current + 1);
                         isValidSet({ ...isValid, [id]: true });
                       },

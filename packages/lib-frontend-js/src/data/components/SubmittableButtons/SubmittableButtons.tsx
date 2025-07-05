@@ -12,6 +12,8 @@ import { type ReactElement } from 'react';
 export const SubmittableButtons = <TType,>({
   cancelLabel,
   elementState,
+  elementStateCancel,
+  elementStateSubmit,
   onCancel,
   onSubmit,
   submitLabel,
@@ -32,7 +34,7 @@ export const SubmittableButtons = <TType,>({
       justify={FLEX_JUSTIFY.END}>
       {onCancel && (
         <Button
-          elementState={isDisabled ? ELEMENT_STATE.DISABLED : undefined}
+          elementState={elementStateCancel ?? (isDisabled ? ELEMENT_STATE.DISABLED : undefined)}
           icon="chevronLeft"
           onPress={onCancel}
           testID={props.testID ? `${props.testID}-cancel` : undefined}
@@ -43,7 +45,7 @@ export const SubmittableButtons = <TType,>({
 
       {onSubmit && (
         <Button
-          elementState={elementState}
+          elementState={elementStateSubmit ?? elementState}
           icon="chevronRight"
           onPress={onSubmit}
           testID={props.testID ? `${props.testID}-submit` : undefined}>

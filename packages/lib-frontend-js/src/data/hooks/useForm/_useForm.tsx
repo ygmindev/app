@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 export const _useForm = <TType, TResult = void>({
   initialValues,
+  isValidateOnChange = false,
   onSubmit,
   onValidate,
 }: _UseFormParamsModel<TType, TResult>): _UseFormModel<TType, TResult> => {
@@ -29,7 +30,7 @@ export const _useForm = <TType, TResult = void>({
       dataSet((onSubmit && (await onSubmit(data))) ?? null);
     },
     validate: onValidate,
-    validateOnChange: false,
+    validateOnChange: isValidateOnChange,
   });
 
   return {

@@ -353,8 +353,8 @@ const _Toolbar: LFCModel = () => {
         },
         tooltip: t('text:link'),
         validators: {
-          link: validateNotEmpty,
-          text: validateNotEmpty,
+          link: [validateNotEmpty],
+          text: [validateNotEmpty],
         },
       },
     ],

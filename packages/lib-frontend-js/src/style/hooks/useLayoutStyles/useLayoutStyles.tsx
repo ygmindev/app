@@ -1,3 +1,4 @@
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import {
   type UseLayoutStylesModel,
   type UseLayoutStylesParamsModel,
@@ -13,12 +14,17 @@ import {
   type FlexJustifyModel,
 } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.models';
 import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler';
+import { type CursorValue } from 'react-native';
 
 export const useLayoutStyles = <TType,>({
   props,
 }: UseLayoutStylesParamsModel<TType>): UseLayoutStylesModel => {
+  const isBlocked =
+    props.elementState === ELEMENT_STATE.DISABLED || props.elementState === ELEMENT_STATE.LOADING;
+
   const wrapperProps = {
     ...props,
+
     align:
       props.isCenter ||
       props.isAlign ||
@@ -26,15 +32,21 @@ export const useLayoutStyles = <TType,>({
       (props.isHorizontalCenter && !props.isRow)
         ? (FLEX_ALIGN.CENTER as FlexAlignModel)
         : props.align,
+
+    cursor: isBlocked ? ('not-allowed' as CursorValue) : undefined,
+
     justify:
       props.isCenter ||
       (props.isVerticalCenter && !props.isRow) ||
       (props.isHorizontalCenter && props.isRow)
         ? (FLEX_JUSTIFY.CENTER as FlexJustifyModel)
         : props.justify,
+
     s: props.isAlign ? THEME_SIZE.SMALL : props.s,
   };
+
   const styles = useStyles({ props: wrapperProps, stylers: [viewStyler] });
+
   return {
     ...styles,
     wrapperProps: { ...wrapperProps, style: styles.styles },

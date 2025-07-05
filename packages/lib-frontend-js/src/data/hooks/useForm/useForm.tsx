@@ -17,6 +17,7 @@ export const useForm = <TType, TResult = void>({
   initialValues,
   isBlocking = true,
   isValidateChanged,
+  isValidateOnChange,
   onComplete,
   onError,
   onSubmit,
@@ -60,10 +61,11 @@ export const useForm = <TType, TResult = void>({
 
   const form = _useForm<TType, TResult>({
     initialValues,
+    isValidateOnChange,
     onSubmit: handleSubmit,
     onValidate: async (data) => {
       const error = validate({ data, validators });
-      onValidate && onValidate(error);
+      onValidate?.(error);
       return error;
     },
   });
