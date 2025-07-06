@@ -1,4 +1,5 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
+import { sleepForTransition } from '@lib/frontend/animation/utils/sleepForTransition/sleepForTransition';
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
@@ -11,8 +12,10 @@ import { type TabModel, type TabsPropsModel } from '@lib/frontend/core/component
 import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type LFCModel } from '@lib/frontend/core/core.models';
+import { type LFCModel, type MeasureModel } from '@lib/frontend/core/core.models';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -24,7 +27,7 @@ import {
 } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { sort } from '@lib/shared/core/utils/sort/sort';
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 
 export const Tabs: LFCModel<TabsPropsModel> = ({
   defaultValue,
@@ -45,6 +48,8 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
   const theme = useTheme();
   const isContained = type === TABS_TYPE.CONTAINED;
   const isUnderline = type === TABS_TYPE.UNDERLINE;
+  const wrapperRef = useRef<WrapperRefModel>(null);
+  const tabRefs = useRef<Record<string, MeasureModel>>({});
 
   // const [categoryPositions, categoryPositionsSet] = useState<Record<string, PositionModel>>({});
 
@@ -52,6 +57,16 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
     valueControlledSet(tab.id);
     void tab.onPress?.();
   };
+
+  useAsync(async () => {
+    await sleepForTransition();
+    const measure =
+      valueControlled && valueControlled !== defaultValue && tabRefs.current?.[valueControlled];
+    measure &&
+      measure.x &&
+      measure.width &&
+      wrapperRef.current?.scrollTo({ x: measure.x - measure.width });
+  });
 
   const tabsSorted = useMemo(() => sort(tabs ?? [], [(v) => v.category?.id ?? 'z']), [tabs]);
 
@@ -67,6 +82,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
       isRow
       justifySelf={FLEX_JUSTIFY.CENTER}
       p={isContained ? THEME_SIZE.SMALL : undefined}
+      ref={wrapperRef}
       round={isContained}
       s={THEME_SIZE.SMALL}
       scrollType={SCROLL_TYPE.BUTTON}>
@@ -77,6 +93,9 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
           <Wrapper
             isRow
             key={tab.id}
+            onMeasure={(v) => {
+              tabRefs.current[tab.id] = v;
+            }}
             // onMeasure={
             //   isCategory && tab.category
             //     ? (v) =>
