@@ -163,7 +163,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
           error={error}
           icon={icon}
           isTransparent={isTransparent}
-          label={label}
+          label={label ?? t('core:search')}
           leftElement={selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />}
           onBlur={handleBlur}
           onChange={handleTextChange}
@@ -182,8 +182,8 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
       isFullWidth
       onChange={handleChange}
       onElementStateChange={(v) => {
-        v && inputRef.current?.focus?.();
         elementStateControlledSet(v);
+        v === ELEMENT_STATE.ACTIVE ? inputRef.current?.focus?.() : inputRef?.current?.blur?.();
       }}
       options={optionsF}
       ref={menuRef}

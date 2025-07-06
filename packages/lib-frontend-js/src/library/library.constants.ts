@@ -27,6 +27,7 @@ import { props as modalProps } from '@lib/frontend/core/components/Modal/Modal.l
 import { props as modalButtonProps } from '@lib/frontend/core/components/ModalButton/ModalButton.library';
 import { props as pressableProps } from '@lib/frontend/core/components/Pressable/Pressable.library';
 import { props as pressableTitleProps } from '@lib/frontend/core/components/PressableTitle/PressableTitle.library';
+import { props as tabsProps } from '@lib/frontend/core/components/Tabs/Tabs.library';
 import { props as textProps } from '@lib/frontend/core/components/Text/Text.library';
 // import { props as textEditorProps } from '@lib/frontend/core/components/TextEditor/TextEditor.library';
 import { props as tileProps } from '@lib/frontend/core/components/Tile/Tile.library';
@@ -99,6 +100,7 @@ export const LIBRARY_PROPS = [
   slidesProps,
   specificationInputFormProps,
   switchInputProps,
+  tabsProps,
   textInputProps,
   textProps,
   tileProps,

@@ -8,6 +8,7 @@ import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
 import { type TabModel, type TabsPropsModel } from '@lib/frontend/core/components/Tabs/Tabs.models';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
@@ -103,7 +104,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
                   const isActiveFF = isActiveF || isActive;
                   return (
                     <Wrapper
-                      height={theme.shape.size[THEME_SIZE.MEDIUM]}
+                      height={theme.shape.height[THEME_SIZE.SMALL]}
                       onPress={() => handlePress(tab)}
                       position={SHAPE_POSITION.RELATIVE}>
                       <Wrapper
@@ -118,7 +119,9 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
                           />
                         )}
 
-                        <AsyncText color={isActiveFF ? THEME_COLOR.PRIMARY : undefined}>
+                        <AsyncText
+                          casing={TEXT_CASING.CAPITALIZE}
+                          color={isActiveFF ? THEME_COLOR.PRIMARY : undefined}>
                           {tab.label ?? tab.id}
                         </AsyncText>
                       </Wrapper>
