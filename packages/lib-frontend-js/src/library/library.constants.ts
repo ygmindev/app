@@ -33,6 +33,7 @@ import { props as textProps } from '@lib/frontend/core/components/Text/Text.libr
 import { props as tileProps } from '@lib/frontend/core/components/Tile/Tile.library';
 import { props as titleProps } from '@lib/frontend/core/components/Title/Title.library';
 import { props as tooltipIconProps } from '@lib/frontend/core/components/TooltipIcon/TooltipIcon.library';
+import { props as webViewProps } from '@lib/frontend/core/components/WebView/WebView.library';
 import { props as wrapperProps } from '@lib/frontend/core/components/Wrapper/Wrapper.library';
 import { props as modalFormButtonProps } from '@lib/frontend/core/containers/ModalFormButton/ModalFormButton.library';
 import { props as calendarInputProps } from '@lib/frontend/data/components/CalendarInput/CalendarInput.library';
@@ -108,6 +109,7 @@ export const LIBRARY_PROPS = [
   tooltipIconProps,
   typingTextProps,
   userInputProps,
+  webViewProps,
   wrapperProps,
   yesNoInput,
 ];

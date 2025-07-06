@@ -25,8 +25,8 @@ export const _web = ({ bundle, isSsr, server }: WebConfigModel): _WebConfigModel
       {
         plugins: filterNil([isSsr && vike()]),
 
-        server:
-          (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
+        server: {
+          ...((process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
           !process.env.NODE_RUNTIME
             ? {
                 host: true,
@@ -37,7 +37,10 @@ export const _web = ({ bundle, isSsr, server }: WebConfigModel): _WebConfigModel
 
                 watch: (bundleConfigF.build?.watch as WatchOptions) ?? undefined,
               }
-            : undefined,
+            : {}),
+
+          // cors: true,
+        },
       },
 
       bundleConfigF,
