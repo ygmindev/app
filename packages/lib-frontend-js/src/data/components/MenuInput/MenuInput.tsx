@@ -183,7 +183,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
       onChange={handleChange}
       onElementStateChange={(v) => {
         elementStateControlledSet(v);
-        v === ELEMENT_STATE.ACTIVE ? inputRef.current?.focus?.() : inputRef?.current?.blur?.();
+        inputRef.current?.[v === ELEMENT_STATE.ACTIVE ? 'focus' : 'blur']?.();
       }}
       options={optionsF}
       ref={menuRef}
