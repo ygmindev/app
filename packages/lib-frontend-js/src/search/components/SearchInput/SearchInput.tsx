@@ -35,9 +35,7 @@ export const SearchInput = <TType extends MenuOptionModel>({
       defaultValue={defaultValue?.id}
       onBlur={() => optionsSet([])}
       onChange={(v) => valueControlledSet(options.find((option) => option.id === v))}
-      onSearch={(query) => {
-        void handleSearch(query);
-      }}
+      onSearch={handleSearch}
       options={options}
       value={valueControlled?.id}
     />

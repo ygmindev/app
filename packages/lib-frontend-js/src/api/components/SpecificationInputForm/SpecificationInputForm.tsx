@@ -2,8 +2,6 @@ import { type SpecificationInputFormPropsModel } from '@lib/frontend/api/compone
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { DateInput } from '@lib/frontend/data/components/DateInput/DateInput';
-import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
-import { type FormFieldsModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import { StepForm } from '@lib/frontend/data/components/StepForm/StepForm';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
@@ -88,27 +86,6 @@ export const SpecificationInputForm = <TType extends unknown>({
     console.warn(data);
   };
 
-  const steps = specification.fields.map((field) => {
-    const element = getElement(field);
-    return {
-      element: (
-        <FormContainer
-          fields={[{ element, id: field.id }] as Array<FormFieldsModel<unknown>>}
-          isValidateOnChange
-          isVerticalCenter
-          validators={{
-            [field.id]: filterNil([
-              validators?.[field.id as StringKeyModel<TType>],
-              !field.isOptional && validateNotEmpty,
-            ]),
-          }}
-        />
-      ),
-      id: field.id,
-      title: startCase(field.id),
-    };
-  });
-
   return (
     <Wrapper
       {...wrapperProps}
@@ -120,7 +97,17 @@ export const SpecificationInputForm = <TType extends unknown>({
       <StepForm
         isProgress
         onSubmit={handleSubmit}
-        steps={steps}
+        steps={specification.fields.map((field) => ({
+          fields: [{ element: getElement(field), id: field.id }],
+          id: field.id,
+          title: startCase(field.id),
+          validators: {
+            [field.id]: filterNil([
+              validators?.[field.id as StringKeyModel<TType>],
+              !field.isOptional && validateNotEmpty,
+            ]),
+          },
+        }))}
       />
     </Wrapper>
   );

@@ -12,7 +12,7 @@ import { useImperativeHandle, useRef, useState } from 'react';
 
 export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsModel> = ({
   defaultValue,
-  label,
+  label = ({ t }) => t('core:address'),
   onChange,
   ref,
   value,
@@ -25,8 +25,8 @@ export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsMode
     onChange,
     value,
   });
-  const { data, query } = useMapQuery();
-  const options = data.map((v) => ({ ...v, id: v.name ?? '' }));
+  const { data, mutate } = useMapQuery();
+  const options = data?.map((v) => ({ ...v, id: v.name ?? '' }));
   const inputRef = useRef<MenuInputRefModel>(null);
 
   useImperativeHandle(ref, () => ({
@@ -46,14 +46,12 @@ export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsMode
       icon="location"
       label={label}
       onChange={(v) => {
-        const selectedValue = options.find(({ id }) => id === v);
+        const selectedValue = options?.find(({ id }) => id === v);
         selectedValue && valueControlledSet(selectedValue);
         textValueSet(v);
       }}
-      onSearch={(v) => {
-        void query(v);
-      }}
-      options={options}
+      onSearch={mutate}
+      options={options ?? []}
       ref={inputRef}
       rightElement={() => null}
       value={textValue}

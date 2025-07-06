@@ -13,7 +13,7 @@ export const useMutation = <TParams = undefined, TResult = void>(
 ): UseMutationModel<TParams, TResult> => {
   const { cacheTime, cacheTimeDefault } = queryConfig.params();
   const { handleError } = useErrorContext();
-  const [, isLoadingSet] = useStore('app.isLoading');
+  const [_, isLoadingSet] = useStore('app.isLoading');
   const cache = options?.cache;
   const cacheF = (cache === true ? cacheTime : cache) ?? cacheTimeDefault;
   return _useMutation<TParams, TResult>(

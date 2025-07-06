@@ -237,6 +237,8 @@ const FormContainerF = <TType, TResult = void>({
       return getField(field as FormFieldModel<TType>).element;
     });
 
+  props.testID === 'step-0' && console.warn(elementStateF);
+
   return (
     <Form
       onSubmit={
@@ -266,6 +268,7 @@ const FormContainerF = <TType, TResult = void>({
             onCancel={onCancel}
             onSubmit={async () => handleSubmitF()}
             submitLabel={submitLabel}
+            // submitTooltip={isValid ? undefined : 'TODO: error message'}
             testID={props.testID}
           />
         )}

@@ -16,7 +16,7 @@ export const _useMapQuery = (): _UseMapQueryModel => {
   const [data, dataSet] = useState<Array<MapQueryResultModel>>([]);
   return {
     data,
-    query: async (params) => {
+    mutate: async (params) => {
       if (params) {
         const result = await get<_UseMapQueryApiParamsModel, _UseMapQueryApiResultModel>({
           params: { addressdetails: 1, format: 'json', q: params },

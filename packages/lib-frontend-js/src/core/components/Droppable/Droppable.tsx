@@ -73,7 +73,9 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = ({
   }
 
   const childrenF = (
-    <View testID={process.env.NODE_ENV === 'production' ? undefined : testID}>
+    <View
+      style={{ flex: 1 }}
+      testID={process.env.NODE_ENV === 'production' ? undefined : testID}>
       <Dropdown
         {...props}
         anchor={anchorF}

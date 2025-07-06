@@ -10,7 +10,7 @@ export const _useMutation = <TParams = undefined, TResult = void>(
 ): _UseMutationModel<TParams, TResult> => {
   const cache = isNumber(options?.cache) ? options?.cache : 0;
   const queryClient = useQueryClient();
-  const { data, mutate } = useMutation({
+  const { data, isPending, mutate } = useMutation({
     gcTime: cache,
     mutationFn: callback,
     mutationKey: [id],
@@ -20,6 +20,7 @@ export const _useMutation = <TParams = undefined, TResult = void>(
   return {
     data,
     id,
+    isLoading: isPending,
     mutate: async (params) => mutate(params),
     reset: async () => {
       void queryClient.invalidateQueries({ queryKey: [id] });

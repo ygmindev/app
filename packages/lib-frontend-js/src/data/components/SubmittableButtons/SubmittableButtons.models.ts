@@ -8,5 +8,6 @@ export type SubmittableButtonsPropsModel<TType> = ElementStatePropsModel &
     elementStateCancel?: ElementStatePropsModel['elementState'];
     elementStateSubmit?: ElementStatePropsModel['elementState'];
     submitLabel?: AsyncTextModel;
+    submitTooltip?: AsyncTextModel;
     onSubmit(): Promise<void>;
   };

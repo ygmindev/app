@@ -13,7 +13,7 @@ export const _useQuery = <TParams = undefined, TResult = void>(
   const idF = filterNil([id, params]);
   const cache = isNumber(options?.cache) ? options?.cache : 0;
   const queryClient = useQueryClient();
-  const { data, isStale, refetch } = useSuspenseQuery<TResult | null, Error>({
+  const { data, isPending, isStale, refetch } = useSuspenseQuery<TResult | null, Error>({
     gcTime: cache,
     initialData: undefined,
     queryFn: () => callback(params),
@@ -32,6 +32,7 @@ export const _useQuery = <TParams = undefined, TResult = void>(
   return {
     data,
     id,
+    isLoading: isPending,
     query: async () => (isStale ? (await refetchF())?.data : data) ?? null,
     reset: async () => {
       await queryClient.resetQueries({ queryKey: idF });

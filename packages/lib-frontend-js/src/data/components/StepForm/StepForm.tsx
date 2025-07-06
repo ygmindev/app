@@ -159,7 +159,7 @@ export const StepFormF = <TType, TResult = void>({
       <Slides
         current={current}
         slides={filterNil(
-          steps.map(({ element, fields, id, message, title }) => {
+          steps.map(({ element, fields, id, message, title, validators }, i) => {
             const elementF:
               | ReactElement<FormStepPropsModel<TType, PartialModel<TType>, TResult>>
               | undefined = fields ? (
@@ -167,9 +167,11 @@ export const StepFormF = <TType, TResult = void>({
                 elementState={elementState}
                 fields={fields}
                 flex
-                isCenter
                 isValidateChanged
+                isValidateOnChange
+                isVerticalCenter
                 onElementStateChange={onElementStateChange}
+                validators={validators}
               />
             ) : (
               element

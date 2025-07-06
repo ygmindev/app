@@ -44,6 +44,7 @@ import { props as switchInputProps } from '@lib/frontend/data/components/SwitchI
 import { props as textInputProps } from '@lib/frontend/data/components/TextInput/TextInput.library';
 import { props as yesNoInput } from '@lib/frontend/data/components/YesNoInput/YesNoInput.library';
 import { props as countryInputProps } from '@lib/frontend/locale/components/CountryInput/CountryInput.library';
+import { props as addressInputProps } from '@lib/frontend/map/components/AddressInput/AddressInput.library';
 import { props as notificationProps } from '@lib/frontend/notification/components/Notification/Notification.library';
 import { props as notificationsProps } from '@lib/frontend/notification/containers/Notifications/Notifications.library';
 import { props as searchInputProps } from '@lib/frontend/search/components/SearchInput/SearchInput.library';
@@ -58,6 +59,7 @@ export const LIBRARY_PROPS = [
   // textEditorProps,
   accordionProps,
   activatableProps,
+  addressInputProps,
   appearableProps,
   areaChartProps,
   barChartProps,

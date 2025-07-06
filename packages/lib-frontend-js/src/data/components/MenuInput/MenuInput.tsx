@@ -1,4 +1,3 @@
-import searchConfig from '@lib/config/search/search/search';
 import { Rotatable } from '@lib/frontend/animation/components/Rotatable/Rotatable';
 import { sleepForEffect } from '@lib/frontend/animation/utils/sleepForEffect/sleepForEffect';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
@@ -7,6 +6,7 @@ import {
   type MenuOptionModel,
   type MenuRefModel,
 } from '@lib/frontend/core/components/Menu/Menu.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import {
@@ -25,11 +25,10 @@ import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import find from 'lodash/find';
 import lowerCase from 'lodash/lowerCase';
 import { type ReactElement, useEffect, useMemo, useState } from 'react';
-import { useCallback, useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 
 export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
   defaultValue,
@@ -65,10 +64,6 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
     value,
   });
 
-  const { elementStateControlled, elementStateControlledSet, isActive } = useElementStateControlled(
-    { elementState, onElementStateChange },
-  );
-
   useEffect(() => {
     defaultValue && handleChange(defaultValue);
   }, [defaultValue]);
@@ -76,7 +71,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
   const [focused, focusedSet] = useState<number | undefined>();
   const menuRef = useRef<MenuRefModel>(null);
 
-  const { query, result, search } = useSearch<TType>({
+  const { isLoading, query, result, search } = useSearch<TType>({
     items: options.map(({ label, ...option }) => ({
       ...option,
       label: label ? t(label) : undefined,
@@ -84,6 +79,10 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
     keys: ['label', 'id'],
     onChange: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
   });
+
+  const { elementStateControlled, elementStateControlledSet, isActive } = useElementStateControlled(
+    { elementState, onElementStateChange },
+  );
 
   const optionsF = result.length > 0 ? result : options;
 
@@ -96,18 +95,9 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
     handleChange(id);
   };
 
-  const { delay, minLength } = searchConfig.params();
-
-  const handleSearch = useCallback(
-    debounce((v?: string) => (v?.length ?? 0) >= minLength && (onSearch ?? search)(v ?? ''), {
-      duration: delay,
-    }),
-    [delay, minLength, onSearch, search],
-  );
-
   const handleTextChange = (v: string): void => {
     textValueSet(v);
-    handleSearch(v);
+    void (onSearch ?? search)(v ?? '');
     focusedSet(undefined);
   };
 
@@ -130,7 +120,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
       : (selectedOption?.label ?? selectedOption?.id ?? valueControlled);
 
   const handleBlur = (): void => {
-    onBlur && onBlur();
+    onBlur?.();
     handleTextChange('');
   };
 
@@ -169,23 +159,23 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
       anchor={() => (
         <TextInput
           {...wrapperProps}
-          elementState={elementStateControlled}
+          elementState={isLoading ? ELEMENT_STATE.LOADING : elementStateControlled}
           error={error}
           icon={icon}
           isTransparent={isTransparent}
           label={label}
           leftElement={selectedOption && selectedOption.icon && <Icon icon={selectedOption.icon} />}
+          onBlur={handleBlur}
           onChange={handleTextChange}
           onFocus={onFocus}
           onKey={optionsF?.length ? handleKey : undefined}
           onSubmit={handleSubmit}
-          placeholder={displayLabel ? t(displayLabel) : t('core:search')}
+          placeholder={isActive || !displayLabel ? t('core:search') : t(displayLabel)}
           ref={inputRef}
           rightElement={rightElementF}
           round={round}
           value={isActive ? textValue : t(displayLabel)}
           width={widthF}
-          // onBlur={handleBlur}
         />
       )}
       elementState={elementStateControlled}

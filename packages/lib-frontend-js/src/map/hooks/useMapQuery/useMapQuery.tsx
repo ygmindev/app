@@ -6,8 +6,8 @@ import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { useCallback } from 'react';
 
 export const useMapQuery = (): UseMapQueryModel => {
-  const { data, query } = _useMapQuery();
-  const { mutate } = useMutation('map', query);
+  const { data, mutate: _mutate } = _useMapQuery();
+  const { isLoading, mutate } = useMutation('map', _mutate);
   const queryF = useCallback(debounce(mutate, { duration: USE_MAP_QUERY_DEBOUNCE_DURATION }), []);
-  return { data, query: queryF };
+  return { data, isLoading, mutate: queryF };
 };

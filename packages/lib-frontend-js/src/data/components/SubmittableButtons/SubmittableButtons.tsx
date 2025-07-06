@@ -17,6 +17,7 @@ export const SubmittableButtons = <TType,>({
   onCancel,
   onSubmit,
   submitLabel,
+  submitTooltip,
   ...props
 }: LFCPropsModel<SubmittableButtonsPropsModel<TType>>): ReactElement<
   LFCPropsModel<SubmittableButtonsPropsModel<TType>>
@@ -48,7 +49,8 @@ export const SubmittableButtons = <TType,>({
           elementState={elementStateSubmit ?? elementState}
           icon="chevronRight"
           onPress={onSubmit}
-          testID={props.testID ? `${props.testID}-submit` : undefined}>
+          testID={props.testID ? `${props.testID}-submit` : undefined}
+          tooltip={submitTooltip}>
           {submitLabel ?? t('core:continue')}
         </Button>
       )}

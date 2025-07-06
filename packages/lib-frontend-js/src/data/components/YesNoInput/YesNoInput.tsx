@@ -7,6 +7,7 @@ import {
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 
 export const YesNoInput: RLFCModel<YesNoInputRefModel, YesNoInputPropsModel> = ({
@@ -33,8 +34,13 @@ export const YesNoInput: RLFCModel<YesNoInputRefModel, YesNoInputPropsModel> = (
       label={label}
       onChange={(v) => valueControlledSet(v === BOOLEAN_STRING.TRUE ? true : undefined)}
       options={[
-        { icon: falseIcon, id: BOOLEAN_STRING.FALSE, label: falseLabel ?? t('core:no') },
         { icon: trueIcon, id: BOOLEAN_STRING.TRUE, label: trueLabel ?? t('core:yes') },
+        {
+          color: THEME_COLOR.ERROR,
+          icon: falseIcon,
+          id: BOOLEAN_STRING.FALSE,
+          label: falseLabel ?? t('core:no'),
+        },
       ]}
       value={valueControlled ? BOOLEAN_STRING.TRUE : BOOLEAN_STRING.FALSE}
     />

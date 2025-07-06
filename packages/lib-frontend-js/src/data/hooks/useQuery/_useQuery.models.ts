@@ -10,6 +10,7 @@ export type _UseQueryParamsModel<TParams = undefined, TResult = void> = [
 
 export type _UseQueryModel<TResult = void> = WithIdModel & {
   data?: TResult | null;
+  isLoading?: boolean;
   query(): Promise<TResult | null>;
   reset(): Promise<void>;
   setData(values?: TResult): Promise<void>;

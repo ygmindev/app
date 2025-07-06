@@ -8,7 +8,8 @@ export type _UseSearchParamsModel<TType extends WithIdModel> = SearchConfigModel
 };
 
 export type _UseSearchModel<TResult> = {
+  isLoading?: boolean;
   query?: string;
   result: Array<TResult>;
-  search(query: string): void;
+  search(query: string): Promise<void>;
 };

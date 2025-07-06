@@ -23,7 +23,7 @@ export type FormStepPropsModel<
 };
 
 export type FormStepModel<TType, TStep extends PartialModel<TType>, TResult = void> = WithIdModel &
-  Pick<FormContainerPropsModel<TStep, TResult>, 'fields'> & {
+  Pick<FormContainerPropsModel<TStep, TResult>, 'fields' | 'validators'> & {
     element?: ReactElement<FormStepPropsModel<TType, TStep, TResult>>;
     message?: AsyncTextModel;
     title: AsyncTextModel;

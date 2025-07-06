@@ -19,5 +19,5 @@ export const _MaskedInput = composeComponent<
     mask: mask ?? '',
   }),
 
-  stylers: [{ height: 32 }],
+  stylers: [{ height: 32, width: '100%' }],
 });
