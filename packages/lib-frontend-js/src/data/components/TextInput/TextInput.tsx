@@ -280,7 +280,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
             }}
             onSubmit={onSubmit}
             placeholder={isActive ? placeholder : undefined}
-            ref={inputRef}
+            ref={ref}
             testID={testID}
             value={valueControlled}
           />

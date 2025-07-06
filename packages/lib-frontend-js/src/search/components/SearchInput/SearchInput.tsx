@@ -10,6 +10,7 @@ import { type ReactElement, useState } from 'react';
 
 export const SearchInput = <TType extends MenuOptionModel>({
   defaultValue,
+  onBlur,
   onChange,
   onSearch,
   value,
@@ -29,11 +30,16 @@ export const SearchInput = <TType extends MenuOptionModel>({
     value,
   });
 
+  const handleBlur = (): void => {
+    optionsSet([]);
+    onBlur?.();
+  };
+
   return (
     <MenuInput
       {...props}
       defaultValue={defaultValue?.id}
-      onBlur={() => optionsSet([])}
+      onBlur={handleBlur}
       onChange={(v) => valueControlledSet(options.find((option) => option.id === v))}
       onSearch={handleSearch}
       options={options}

@@ -28,7 +28,7 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import find from 'lodash/find';
 import lowerCase from 'lodash/lowerCase';
 import { type ReactElement, useEffect, useMemo, useState } from 'react';
-import { useImperativeHandle, useRef } from 'react';
+import { useRef } from 'react';
 
 export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
   defaultValue,
@@ -146,10 +146,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
   };
 
   const inputRef = useRef<TextInputRefModel>(null);
-
-  useImperativeHandle(ref, () => ({
-    ...inputRef.current,
-  }));
+  const inputRefF = ref ?? inputRef;
 
   const widthF = width ?? theme.layout.width[THEME_SIZE.MEDIUM];
 
@@ -171,7 +168,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
           onKey={optionsF?.length ? handleKey : undefined}
           onSubmit={handleSubmit}
           placeholder={isActive || !displayLabel ? t('core:search') : t(displayLabel)}
-          ref={inputRef}
+          ref={inputRefF}
           rightElement={rightElementF}
           round={round}
           value={isActive ? textValue : t(displayLabel)}
@@ -183,7 +180,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
       onChange={handleChange}
       onElementStateChange={(v) => {
         elementStateControlledSet(v);
-        inputRef.current?.[v === ELEMENT_STATE.ACTIVE ? 'focus' : 'blur']?.();
+        inputRefF.current?.[v === ELEMENT_STATE.ACTIVE ? 'focus' : 'blur']?.();
       }}
       options={optionsF}
       ref={menuRef}
