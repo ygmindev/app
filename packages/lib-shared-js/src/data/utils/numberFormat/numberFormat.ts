@@ -20,7 +20,7 @@ export const numberFormat = (
   const { currency, isReverse, isSeparated = true, multiplier, precision, prefix, unit } = options;
   let { postfix } = options;
   const valueF = numberScale(value, { isReverse, multiplier, unit });
-  if (!!valueF) {
+  if (valueF) {
     if (!postfix) {
       // TODO: postfix to translation
       switch (unit) {
@@ -64,7 +64,7 @@ export const numberFormat = (
       }
     }
     const localeOptions: Intl.NumberFormatOptions = {};
-    if (!!precision) {
+    if (precision) {
       localeOptions.maximumFractionDigits = precision;
       localeOptions.minimumFractionDigits = precision;
     }

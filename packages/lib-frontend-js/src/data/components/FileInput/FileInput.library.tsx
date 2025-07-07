@@ -7,5 +7,5 @@ export const props: LibraryPropsModel<FileInputPropsModel> = {
   Component: FileInput,
   category: LIBRARY_CATEGORY_FORM,
   defaultProps: {},
-  variants: [],
+  variants: [{ props: { label: 'file input' } }],
 };

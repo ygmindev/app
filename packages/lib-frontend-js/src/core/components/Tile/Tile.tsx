@@ -31,6 +31,7 @@ export const Tile: LFCModel<TilePropsModel> = ({
           fontStyle={FONT_STYLE.TITLE}
           icon={icon}
           image={image}
+          pVertical
           rightElement={rightElement}
           title={title}
         />

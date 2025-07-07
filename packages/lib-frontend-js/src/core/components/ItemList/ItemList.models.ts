@@ -8,5 +8,6 @@ export type ItemListPropsModel<TType extends WithIdModel> = Pick<TilePropsModel,
   emptyString?: AsyncTextModel;
   isSearchable?: boolean;
   items?: Array<TType & PressableTitlePropsModel>;
+  topElement?: ReactElement;
   rightElement?(params: { isActive?: boolean; item: TType }): ReactElement;
 };

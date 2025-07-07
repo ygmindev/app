@@ -4,6 +4,7 @@ import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { _FileInput } from '@lib/frontend/data/components/FileInput/_FileInput';
 import {
@@ -15,7 +16,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { BORDER_STYLE } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
-import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
+import { fileSizeFormat } from '@lib/shared/data/utils/fileSizeFormat/fileSizeFormat';
 
 export const FileInput: RLFCModel<FileInputRefModel, FileInputPropsModel> = ({
   defaultValue,
@@ -33,109 +34,71 @@ export const FileInput: RLFCModel<FileInputRefModel, FileInputPropsModel> = ({
     value,
   });
   return (
-    <Wrapper
+    <ItemList
       {...wrapperProps}
-      border
-      p
-      round
-      s>
-      <_FileInput
-        isMultiple={isMultiple}
-        onChange={valueControlledSet}
-        value={valueControlled}>
-        <Wrapper
-          border
-          borderStyle={BORDER_STYLE.DASHED}
-          borderWidth
-          isAlign
-          isCenter
-          isRow
-          p
-          round
-          s>
-          <Icon
-            color={THEME_COLOR.PRIMARY}
-            fontSize={THEME_SIZE_MORE.XLARGE}
-            icon="upload"
-          />
+      items={valueControlled?.map(({ id, name, size }) => ({
+        description: fileSizeFormat(size ?? 0),
+        icon: 'image',
+        id,
+        title: name,
+      }))}
+      rightElement={({ item }) => (
+        <Button
+          color={THEME_COLOR.ERROR}
+          icon="trash"
+          onPress={() => valueControlledSet(valueControlled?.filter((file) => file.id !== item.id))}
+          size={THEME_SIZE.SMALL}
+        />
+      )}
+      title={label}
+      topElement={
+        <_FileInput
+          isMultiple={isMultiple}
+          onChange={valueControlledSet}
+          value={valueControlled}>
+          {(isActive) => (
+            <Wrapper
+              border
+              borderStyle={BORDER_STYLE.DASHED}
+              borderWidth
+              isAlign
+              isCenter
+              isRow
+              m
+              p
+              round
+              s>
+              <Icon
+                color={THEME_COLOR.PRIMARY}
+                fontSize={THEME_SIZE_MORE.XLARGE}
+                icon="upload"
+              />
 
-          <Text casing={TEXT_CASING.CAPITALIZE}>{`${t('core:dragAndDrop')} ${t('core:or')}`}</Text>
+              <Text
+                casing={
+                  TEXT_CASING.CAPITALIZE
+                }>{`${t('core:dropFilesHere')} ${t('core:or')}`}</Text>
 
-          <Button
-            icon="folder"
-            isHidden>
-            {label ?? t('core:browse')}
-          </Button>
-        </Wrapper>
-      </_FileInput>
-
-      <ItemList
-        items={valueControlled?.map(({ id, name, size }) => ({
-          description: `${numberFormat(size, { multiplier: 1 / 1e3, precision: 0 })}KB`,
-          icon: 'image',
-          id,
-          title: name,
-        }))}
-        rightElement={({ isActive, item }) => (
-          <Button
-            color={THEME_COLOR.ERROR}
-            icon="trash"
-            onPress={() =>
-              valueControlledSet(valueControlled?.filter((file) => file.id !== item.id))
-            }
-            size={THEME_SIZE.SMALL}
-          />
-        )}
-      />
-    </Wrapper>
+              <Button
+                elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+                icon="folder"
+                isHidden>
+                {t('core:browse')}
+              </Button>
+            </Wrapper>
+          )}
+        </_FileInput>
+      }
+    />
   );
 };
 
-// <Wrapper
-//   border
-//   isVerticalScrollable
-//   p
-//   round
-//   s={THEME_SIZE.SMALL}>
-//   {valueControlled?.length ? (
-//     valueControlled.map(({ name, size }) => (
-//       <Title
-//         description={`${numberFormat(size, { multiplier: 1 / 1e3, precision: 0 })}KB`}
-//         icon="image"
-//         key={name}
-//         rightElement={
-//           <Button
-//             color={THEME_COLOR.ERROR}
-//             icon="trash"
-//             onPress={() =>
-//               valueControlledSet(valueControlled.filter((file) => file.name !== name))
-//             }
-//             size={THEME_SIZE.SMALL}
-//           />
-//         }
-//         title={name}
-//       />
-//     ))
-//   ) : (
-//     <Wrapper
-//       flex
-//       isCenter
-//       s={THEME_SIZE.SMALL}>
-//       <Icon
-//         colorRole={THEME_ROLE.MUTED}
-//         fontSize={THEME_SIZE_MORE.XLARGE}
-//         icon="empty"
-//       />
-
-//       <Text colorRole={THEME_ROLE.MUTED}>{t('core:nothingToShow')}</Text>
-//     </Wrapper>
-//   )}
-// </Wrapper>
-
+// import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 // import { Button } from '@lib/frontend/core/components/Button/Button';
 // import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+// import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
 // import { Text } from '@lib/frontend/core/components/Text/Text';
-// import { Title } from '@lib/frontend/core/components/Title/Title';
+// import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 // import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 // import { type RLFCModel } from '@lib/frontend/core/core.models';
 // import { _FileInput } from '@lib/frontend/data/components/FileInput/_FileInput';
@@ -146,14 +109,13 @@ export const FileInput: RLFCModel<FileInputRefModel, FileInputPropsModel> = ({
 // import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 // import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 // import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+// import { THEME_COLOR, THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
+// import { BORDER_STYLE } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
 // import {
-//   THEME_COLOR,
-//   THEME_ROLE,
-//   THEME_SIZE,
-//   THEME_SIZE_MORE,
-// } from '@lib/frontend/style/style.constants';
-// import { variableName } from '@lib/shared/core/utils/variableName/variableName';
-// import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
+//   FONT_ALIGN,
+//   FONT_STYLE,
+// } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+// import { fileSizeFormat } from '@lib/shared/data/utils/fileSizeFormat/fileSizeFormat';
 
 // export const FileInput: RLFCModel<FileInputRefModel, FileInputPropsModel> = ({
 //   defaultValue,
@@ -171,20 +133,33 @@ export const FileInput: RLFCModel<FileInputRefModel, FileInputPropsModel> = ({
 //     value,
 //   });
 //   return (
-//     <_FileInput
-//       isMultiple={isMultiple}
-//       onChange={valueControlledSet}
-//       value={valueControlled}>
-//       <Wrapper
-//         {...wrapperProps}
-//         border
-//         isRow
-//         p
-//         round
-//         s>
+//     <Wrapper
+//       {...wrapperProps}
+//       border
+//       p
+//       round
+//       s>
+//       {label && (
+//         <AsyncText
+//           align={FONT_ALIGN.CENTER}
+//           fontStyle={FONT_STYLE.SUBTITLE}>
+//           {label}
+//         </AsyncText>
+//       )}
+
+//       <_FileInput
+//         isMultiple={isMultiple}
+//         onChange={valueControlledSet}
+//         value={valueControlled}>
 //         <Wrapper
-//           flex
+//           border
+//           borderStyle={BORDER_STYLE.DASHED}
+//           borderWidth
+//           isAlign
 //           isCenter
+//           isRow
+//           p
+//           round
 //           s>
 //           <Icon
 //             color={THEME_COLOR.PRIMARY}
@@ -192,68 +167,34 @@ export const FileInput: RLFCModel<FileInputRefModel, FileInputPropsModel> = ({
 //             icon="upload"
 //           />
 
-//           <Text>{`${t('core:dragAndDrop')} ${t('core:or')}`}</Text>
+//           <Text casing={TEXT_CASING.CAPITALIZE}>{`${t('core:dragAndDrop')} ${t('core:or')}`}</Text>
 
 //           <Button
 //             icon="folder"
 //             isHidden>
-//             {label ?? t('core:browse')}
+//             {t('core:browse')}
 //           </Button>
 //         </Wrapper>
+//       </_FileInput>
 
-//         <Wrapper
-//           border
-//           isVerticalScrollable
-//           p
-//           round
-//           s={THEME_SIZE.SMALL}>
-//           {valueControlled?.length ? (
-//             valueControlled.map(({ name, size }) => (
-//               <Title
-//                 icon="image"
-//                 key={name}
-//                 leftElement={
-//                   <Button
-//                     color={THEME_COLOR.ERROR}
-//                     icon="trash"
-//                     onPress={() =>
-//                       valueControlledSet(valueControlled.filter((file) => file.name !== name))
-//                     }
-//                     size={THEME_SIZE.SMALL}
-//                   />
-//                 }
-//                 title={
-//                   <Wrapper>
-//                     <Text>{name}</Text>
-
-//                     {size && (
-//                       <Text
-//                         colorRole={
-//                           THEME_ROLE.MUTED
-//                         }>{`${numberFormat(size, { multiplier: 1 / 1e3, precision: 0 })}KB`}</Text>
-//                     )}
-//                   </Wrapper>
-//                 }
-//               />
-//             ))
-//           ) : (
-//             <Wrapper
-//               flex
-//               isCenter
-//               s>
-//               <Icon
-//                 colorRole={THEME_ROLE.MUTED}
-//                 fontSize={THEME_SIZE_MORE.XLARGE}
-//                 icon="empty"
-//               />
-
-//               <Text colorRole={THEME_ROLE.MUTED}>{t('core:nothingToShow')}</Text>
-//             </Wrapper>
-//           )}
-//         </Wrapper>
-//       </Wrapper>
-//     </_FileInput>
+//       <ItemList
+//         items={valueControlled?.map(({ id, name, size }) => ({
+//           description: fileSizeFormat(size ?? 0),
+//           icon: 'image',
+//           id,
+//           title: name,
+//         }))}
+//         rightElement={({ item }) => (
+//           <Button
+//             color={THEME_COLOR.ERROR}
+//             icon="trash"
+//             onPress={() =>
+//               valueControlledSet(valueControlled?.filter((file) => file.id !== item.id))
+//             }
+//             size={THEME_SIZE.SMALL}
+//           />
+//         )}
+//       />
+//     </Wrapper>
 //   );
 // };
-
-// process.env.APP_IS_DEBUG && (FileInput.displayName = variableName({ FileInput }));

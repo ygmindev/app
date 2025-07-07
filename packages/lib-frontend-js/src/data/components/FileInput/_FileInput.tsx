@@ -1,3 +1,5 @@
+import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
+import { View } from '@lib/frontend/core/components/View/View';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type _FileInputPropsModel } from '@lib/frontend/data/components/FileInput/_FileInput.models';
@@ -14,11 +16,17 @@ export const _FileInput = composeComponent<_FileInputPropsModel, UploadyProps>({
 
   getProps: ({ children, isMultiple, onChange, value }) => ({
     children: (
-      <_Button
-        autoUpload={false}
-        extraProps={{ onChange, value }}>
-        {children as ReactElement}
-      </_Button>
+      <Activatable>
+        {(isActive) => (
+          <View>
+            <_Button
+              autoUpload={false}
+              extraProps={{ onChange, value }}>
+              {children?.(isActive) ?? null}
+            </_Button>
+          </View>
+        )}
+      </Activatable>
     ),
     destination: { url: '' },
     multiple: isMultiple,

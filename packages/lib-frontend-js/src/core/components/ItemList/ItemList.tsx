@@ -15,6 +15,7 @@ export const ItemList = <TType extends WithIdModel>({
   items,
   rightElement,
   title,
+  topElement,
   ...props
 }: LFCPropsModel<ItemListPropsModel<TType>>): ReactElement<
   LFCPropsModel<ItemListPropsModel<TType>>
@@ -23,6 +24,8 @@ export const ItemList = <TType extends WithIdModel>({
   return (
     <MainLayout {...wrapperProps}>
       <Tile title={title}>
+        {topElement}
+
         {items && items.length > 0 ? (
           items.map((item, i) => (
             <PressableTitle
@@ -42,7 +45,6 @@ export const ItemList = <TType extends WithIdModel>({
             elementState={ELEMENT_STATE.DISABLED}
             icon="empty"
             p
-            pVertical
             title={emptyString}
           />
         )}
