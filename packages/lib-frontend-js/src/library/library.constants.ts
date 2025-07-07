@@ -39,7 +39,7 @@ import { props as modalFormButtonProps } from '@lib/frontend/core/containers/Mod
 import { props as calendarInputProps } from '@lib/frontend/data/components/CalendarInput/CalendarInput.library';
 import { props as checkboxInput } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput.library';
 import { props as dateInputProps } from '@lib/frontend/data/components/DateInput/DateInput.library';
-// import { props as fileInputProps } from '@lib/frontend/data/components/FileInput/FileInput.library';
+import { props as fileInputProps } from '@lib/frontend/data/components/FileInput/FileInput.library';
 import { props as numberInputProps } from '@lib/frontend/data/components/NumberInput/NumberInput.library';
 import { props as selectInputProps } from '@lib/frontend/data/components/SelectInput/SelectInput.library';
 import { props as switchInputProps } from '@lib/frontend/data/components/SwitchInput/SwitchInput.library';
@@ -58,7 +58,6 @@ import { props as userInputProps } from '@lib/frontend/user/components/UserInput
 export const LIBRARY = 'library';
 
 export const LIBRARY_PROPS = [
-  // fileInputProps,
   // textEditorProps,
   accordionProps,
   activatableProps,
@@ -77,6 +76,7 @@ export const LIBRARY_PROPS = [
   dateInputProps,
   dividerProps,
   droppableProps,
+  fileInputProps,
   iconProps,
   imageProps,
   lineChartProps,
@@ -97,8 +97,8 @@ export const LIBRARY_PROPS = [
   pressableTitleProps,
   pulsableWrapperProps,
   scatterChartProps,
-  searchInputProps,
   searchInputCompactProps,
+  searchInputProps,
   selectInputProps,
   slidesProps,
   specificationInputFormProps,

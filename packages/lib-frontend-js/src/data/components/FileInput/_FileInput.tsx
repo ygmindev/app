@@ -6,7 +6,7 @@ import { type FileModel } from '@lib/shared/data/data.models';
 import { asUploadButton, type UploadButtonProps } from '@rpldy/upload-button';
 import { UploadDropZone } from '@rpldy/upload-drop-zone';
 import { Uploady, type UploadyProps } from '@rpldy/uploady';
-import { useBatchAddListener } from '@rpldy/uploady';
+import { useBatchAddListener, useItemProgressListener } from '@rpldy/uploady';
 import { cloneElement, type MouseEvent, type ReactElement, useCallback } from 'react';
 
 export const _FileInput = composeComponent<_FileInputPropsModel, UploadyProps>({
@@ -14,11 +14,11 @@ export const _FileInput = composeComponent<_FileInputPropsModel, UploadyProps>({
 
   getProps: ({ children, isMultiple, onChange, value }) => ({
     children: (
-      <Button
+      <_Button
         autoUpload={false}
         extraProps={{ onChange, value }}>
         {children as ReactElement}
-      </Button>
+      </_Button>
     ),
     destination: { url: '' },
     multiple: isMultiple,
@@ -26,23 +26,27 @@ export const _FileInput = composeComponent<_FileInputPropsModel, UploadyProps>({
   }),
 });
 
-const Component: FCModel<UploadButtonProps & ValuePropsModel<Array<FileModel>>> = ({
+const _Component: FCModel<UploadButtonProps & ValuePropsModel<Array<FileModel>>> = ({
   children,
   onChange,
   onClick,
 }) => {
-  useBatchAddListener(
-    (batch) =>
-      onChange &&
-      onChange(
-        batch.items.map((item) => ({
-          name: item.file.name,
-          size: item.file.size,
-          type: item.file.type,
-          url: item.url,
-        })),
-      ),
+  useBatchAddListener((batch) =>
+    onChange?.(
+      batch.items.map((item) => ({
+        id: item.id,
+        name: item.file.name,
+        size: item.file.size,
+        type: item.file.type,
+        url: item.url,
+      })),
+    ),
   );
+
+  useItemProgressListener((item) => {
+    console.warn(item);
+  });
+
   const handleClick = useCallback((e: MouseEvent) => onClick && onClick(e), [onClick]);
   return children ? (
     <UploadDropZone>
@@ -54,4 +58,4 @@ const Component: FCModel<UploadButtonProps & ValuePropsModel<Array<FileModel>>> 
   ) : null;
 };
 
-const Button = asUploadButton(Component);
+const _Button = asUploadButton(_Component);

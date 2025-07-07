@@ -1,3 +1,4 @@
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import {
   type DATA_TYPE,
   type DATA_TYPE_MORE,
@@ -22,7 +23,7 @@ export type RangeModel<TType> = {
   min?: TType;
 };
 
-export type FileModel = {
+export type FileModel = WithIdModel & {
   name: string;
   size?: number;
   type: string;
