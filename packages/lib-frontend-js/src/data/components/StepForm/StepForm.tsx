@@ -204,7 +204,7 @@ export const StepFormF = <TType, TResult = void>({
                         await elementF.props.onSubmit?.(stepValues);
                         const valuesF = { ...values, ...stepValues };
                         await valuesSet(valuesF);
-                        isLastStep && handleSubmit && handleSubmit();
+                        isLastStep && handleSubmit?.();
                         return null;
                       },
                       onSuccess: async (stepValues: PartialModel<TType>) => {

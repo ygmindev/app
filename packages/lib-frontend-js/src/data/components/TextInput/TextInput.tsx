@@ -80,6 +80,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
     beforeSubmit,
     blur: () => handleFocus(false),
     focus: () => handleFocus(true),
+    submit: inputRef.current?.submit,
   }));
 
   const { elementStateControlled, elementStateControlledSet, isActive, isBlocked } =
@@ -102,12 +103,12 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
     if (!isBlocked) {
       if (v) {
         onFocus?.();
-        focusableRef.current?.focus && focusableRef.current?.focus();
+        focusableRef.current?.focus?.();
         inputRef.current?.focus?.();
         elementStateControlledSet(ELEMENT_STATE.ACTIVE);
       } else {
         onBlur?.();
-        focusableRef.current?.blur && focusableRef.current?.blur();
+        focusableRef.current?.blur?.();
         inputRef.current?.blur?.();
         elementStateControlledSet(ELEMENT_STATE.INACTIVE);
       }
@@ -207,7 +208,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       height={height ?? (isNumber(sizeF) ? sizeF : theme.shape.size[sizeF])}
       isRow
       isTransparent={isTransparent}
-      minWidth={theme.layout.width[THEME_SIZE.SMALL]}
       onElementStateChange={elementStateControlledSet}
       pLeft={!isCenter && !leftElementF}
       position={SHAPE_POSITION.RELATIVE}
@@ -280,7 +280,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
             }}
             onSubmit={onSubmit}
             placeholder={isActive ? placeholder : undefined}
-            ref={ref}
+            ref={inputRef}
             testID={testID}
             value={valueControlled}
           />

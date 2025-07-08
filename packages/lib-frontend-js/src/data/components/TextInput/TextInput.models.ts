@@ -16,7 +16,7 @@ export type TextInputPropsModel = InputPropsModel &
     rightElement?: ReactElement | null;
   };
 
-export type TextInputRefModel = Pick<InputRefModel, 'blur' | 'focus'>;
+export type TextInputRefModel = Pick<InputRefModel, 'blur' | 'focus' | 'submit'>;
 
 export type TextInputKeyboardModel = `${TEXT_INPUT_KEYBOARD}`;
 
