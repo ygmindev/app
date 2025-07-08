@@ -3,7 +3,6 @@ import { Icon } from '@lib/frontend/core/components/Icon/Icon';
 import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { _FileInput } from '@lib/frontend/data/components/FileInput/_FileInput';
@@ -35,65 +34,60 @@ export const FileInput: RLFCModel<FileInputRefModel, FileInputPropsModel> = ({
     value,
   });
   return (
-    <Wrapper
+    <ItemList
       {...wrapperProps}
-      border
-      p
-      round
-      s>
-      <_FileInput
-        isMultiple={isMultiple}
-        onChange={valueControlledSet}
-        value={valueControlled}>
-        {(isActive) => (
-          <FocusableWrapper
-            border
-            borderStyle={BORDER_STYLE.DASHED}
-            borderWidth
-            elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
-            isAlign
-            isCenter
-            isRow
-            mTop
-            p>
-            <Icon
-              color={THEME_COLOR.PRIMARY}
-              fontSize={THEME_SIZE_MORE.XLARGE}
-              icon="upload"
-            />
-
-            <Text
-              casing={TEXT_CASING.CAPITALIZE}>{`${t('core:dropFilesHere')} ${t('core:or')}`}</Text>
-
-            <Button
+      items={valueControlled?.map(({ id, name, size }) => ({
+        description: fileSizeFormat(size ?? 0),
+        icon: 'image',
+        id,
+        title: name,
+      }))}
+      rightElement={({ item }) => (
+        <Button
+          color={THEME_COLOR.ERROR}
+          icon="trash"
+          onPress={() => valueControlledSet(valueControlled?.filter((file) => file.id !== item.id))}
+          size={THEME_SIZE.SMALL}
+        />
+      )}
+      title={label}
+      topElement={
+        <_FileInput
+          isMultiple={isMultiple}
+          onChange={valueControlledSet}
+          value={valueControlled}>
+          {(isActive) => (
+            <FocusableWrapper
+              border
+              borderStyle={BORDER_STYLE.DASHED}
+              borderWidth
               elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
-              icon="folder"
-              isHidden>
-              {t('core:browse')}
-            </Button>
-          </FocusableWrapper>
-        )}
-      </_FileInput>
+              isAlign
+              isCenter
+              isRow
+              mTop
+              p>
+              <Icon
+                color={THEME_COLOR.PRIMARY}
+                fontSize={THEME_SIZE_MORE.XLARGE}
+                icon="upload"
+              />
 
-      <ItemList
-        items={valueControlled?.map(({ id, name, size }) => ({
-          description: fileSizeFormat(size ?? 0),
-          icon: 'image',
-          id,
-          title: name,
-        }))}
-        rightElement={({ item }) => (
-          <Button
-            color={THEME_COLOR.ERROR}
-            icon="trash"
-            onPress={() =>
-              valueControlledSet(valueControlled?.filter((file) => file.id !== item.id))
-            }
-            size={THEME_SIZE.SMALL}
-          />
-        )}
-        title={label}
-      />
-    </Wrapper>
+              <Text
+                casing={
+                  TEXT_CASING.CAPITALIZE
+                }>{`${t('core:dropFilesHere')} ${t('core:or')}`}</Text>
+
+              <Button
+                elementState={isActive ? ELEMENT_STATE.ACTIVE : undefined}
+                icon="folder"
+                isHidden>
+                {t('core:browse')}
+              </Button>
+            </FocusableWrapper>
+          )}
+        </_FileInput>
+      }
+    />
   );
 };
