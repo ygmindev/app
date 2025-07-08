@@ -27,11 +27,11 @@ export const SearchInputCompact: LFCModel<SearchInputCompactPropsModel> = ({
   );
   const inputRef = useRef<SearchInputRefModel>(null);
 
-  const handleToggle = (): void => {
+  const handleToggle = async (): Promise<void> => {
     elementStateControlledSet(isActive ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE);
     if (!isActive) {
-      console.warn(inputRef);
-      void sleepForEffect().then(inputRef.current?.focus);
+      await sleepForEffect();
+      inputRef.current?.focus?.();
     }
   };
 
@@ -51,12 +51,16 @@ export const SearchInputCompact: LFCModel<SearchInputCompactPropsModel> = ({
       <Appearable isActive={!isActive}>
         <Button
           icon="search"
-          onPress={handleToggle}
+          onPress={() => {
+            void handleToggle();
+          }}
           type={BUTTON_TYPE.TRANSPARENT}
         />
       </Appearable>
 
-      <Appearable isActive={isActive}>
+      <Appearable
+        isActive={isActive}
+        isLazy={false}>
         <SearchInput
           {...props}
           onBlur={() => elementStateControlledSet(ELEMENT_STATE.INACTIVE)}
