@@ -3,6 +3,6 @@ import { type ReactElement } from 'react';
 
 export type NavigationHeaderPropsModel = {
   isAbsolute?: boolean;
-  onBack?(): Promise<void>;
   title?: AsyncTextModel | ReactElement;
+  onBack?(): Promise<void>;
 };

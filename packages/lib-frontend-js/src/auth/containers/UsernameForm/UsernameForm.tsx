@@ -4,6 +4,7 @@ import {
   type UsernameFormModel,
   type UsernameFormPropsModel,
 } from '@lib/frontend/auth/containers/UsernameForm/UsernameForm.models';
+import { useOAuth } from '@lib/frontend/auth/hooks/useOAuth/useOAuth';
 import { useOtpResource } from '@lib/frontend/auth/hooks/useOtpResource/useOtpResource';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
@@ -46,6 +47,8 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
     value: method,
   });
   const [currentUser] = useStore('user.currentUser');
+  const { google } = useOAuth();
+
   const isCheckExists = mode === FORM_MODE.UPDATE;
 
   const handleSubmit = async (data: UsernameFormModel): Promise<void> => {
@@ -118,6 +121,13 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
                       {t('core:continueWith', { value: t('user:email') })}
                     </Button>
                   )}
+
+                  <Button
+                    imageSrc="/images/brands/google.svg"
+                    onPress={google.signIn}
+                    type={BUTTON_TYPE.TRANSPARENT}>
+                    {t('core:continueWith', { value: t('external:google') })}
+                  </Button>
                 </Wrapper>
               );
             }

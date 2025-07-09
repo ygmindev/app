@@ -6,13 +6,14 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
-import { SearchInput } from '@lib/frontend/search/components/SearchInput/SearchInput';
+import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type SearchInputRefModel } from '@lib/frontend/search/components/SearchInput/SearchInput.models';
 import { type SearchInputCompactPropsModel } from '@lib/frontend/search/components/SearchInputCompact/SearchInputCompact.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { useRef } from 'react';
 
 export const SearchInputCompact: LFCModel<SearchInputCompactPropsModel> = ({
@@ -29,6 +30,7 @@ export const SearchInputCompact: LFCModel<SearchInputCompactPropsModel> = ({
 
   const handleToggle = async (): Promise<void> => {
     elementStateControlledSet(isActive ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE);
+    await sleep(1000);
     if (!isActive) {
       await sleepForEffect();
       inputRef.current?.focus?.();
@@ -58,15 +60,20 @@ export const SearchInputCompact: LFCModel<SearchInputCompactPropsModel> = ({
         />
       </Appearable>
 
-      <Appearable
+      <TextInput
+        label="test"
+        ref={inputRef}
+      />
+
+      {/* <Appearable
         isActive={isActive}
-        isLazy={false}>
-        <SearchInput
-          {...props}
-          onBlur={() => elementStateControlledSet(ELEMENT_STATE.INACTIVE)}
-          ref={inputRef}
-        />
-      </Appearable>
+        isLazy={false}> */}
+      {/* <SearchInput
+        {...props}
+        onBlur={() => elementStateControlledSet(ELEMENT_STATE.INACTIVE)}
+        ref={inputRef}
+      /> */}
+      {/* </Appearable> */}
     </Wrapper>
   );
 };

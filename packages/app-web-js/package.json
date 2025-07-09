@@ -16,6 +16,7 @@
     "@lib/model": "workspace:^",
     "@lib/shared": "workspace:^",
     "@react-google-maps/api": "^2.20.6",
+    "@react-oauth/google": "^0.12.2",
     "@reduxjs/toolkit": "2.7.0",
     "@rpldy/upload-button": "^1.10.0",
     "@rpldy/upload-drop-zone": "^1.10.0",

@@ -1,5 +1,6 @@
 import { AppProvider } from '@lib/frontend/app/containers/AppProvider/AppProvider';
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
+import { OAuthProvider } from '@lib/frontend/auth/providers/OAuthProvider/OAuthProvider';
 import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ContainerProvider } from '@lib/frontend/core/containers/ContainerProvider/ContainerProvider';
 import { type FCModel } from '@lib/frontend/core/core.models';
@@ -46,6 +47,7 @@ export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, c
         <ContextProvider value={context} />,
         <TrackingProvider />,
         <QueryProvider value={context?.[QUERY]} />,
+        <OAuthProvider />,
         <AuthProvider />,
         <StyleProvider />,
         <LocaleProvider value={context?.[LOCALE]} />,

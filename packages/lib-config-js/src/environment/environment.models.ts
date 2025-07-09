@@ -15,6 +15,7 @@ export type EnvironmentConfigModel = {
   APP_FIREBASE_PROJECT_ID: string;
   APP_FIREBASE_SENDER_ID: string;
   APP_FIREBASE_STORAGE_BUCKET: string;
+  APP_GOOGLE_OAUTH_APP_ID: string;
   APP_HOST: string;
   APP_IS_DEBUG: BooleanStringModel;
   APP_NAME?: string;

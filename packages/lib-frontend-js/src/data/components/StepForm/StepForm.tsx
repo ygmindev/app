@@ -94,24 +94,26 @@ export const StepFormF = <TType, TResult = void>({
       flex
       isFullWidth
       s>
-      <Wrapper
-        backgroundColor={theme.color.border}
-        height={7}
-        isFullWidth
-        round>
+      {isProgressF && (
         <Wrapper
-          animation={{ states: { [ELEMENT_STATE.INACTIVE]: { width: 0 } } }}
-          backgroundColor={THEME_COLOR.PRIMARY}
-          bottom={0}
-          left={0}
-          position={SHAPE_POSITION.ABSOLUTE}
-          ref={barRef}
-          round
-          top={0}
-          width={0}
-          zIndex
-        />
-      </Wrapper>
+          backgroundColor={theme.color.border}
+          height={7}
+          isFullWidth
+          round>
+          <Wrapper
+            animation={{ states: { [ELEMENT_STATE.INACTIVE]: { width: 0 } } }}
+            backgroundColor={THEME_COLOR.PRIMARY}
+            bottom={0}
+            left={0}
+            position={SHAPE_POSITION.ABSOLUTE}
+            ref={barRef}
+            round
+            top={0}
+            width={0}
+            zIndex
+          />
+        </Wrapper>
+      )}
 
       {isProgressF && (
         <Wrapper
@@ -150,7 +152,7 @@ export const StepFormF = <TType, TResult = void>({
         <NavigationHeader
           elementState={ELEMENT_STATE.ACTIVE}
           onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
-          title={steps?.[current].title}
+          title={isProgressF ? steps?.[current].title : undefined}
         />
       )}
 

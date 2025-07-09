@@ -7,6 +7,7 @@ import {
   type ButtonRefModel,
 } from '@lib/frontend/core/components/Button/Button.models';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { Image } from '@lib/frontend/core/components/Image/Image';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
@@ -46,6 +47,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
   height,
   icon,
   iconText,
+  imageSrc,
   isShadow,
   leftElement,
   onElementStateChange,
@@ -174,6 +176,13 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
       {isFunction(leftElement) ? leftElement(isActive) : leftElement}
 
       {iconF}
+
+      {imageSrc && (
+        <Image
+          height={theme.shape.height[THEME_SIZE_MORE.XSMALL]}
+          src={imageSrc}
+        />
+      )}
 
       {childrenF}
 

@@ -42,6 +42,7 @@ export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel | ReactNode> &
   > & {
     description?: AsyncTextModel;
     fontAlign?: FontAlignModel;
+    imageSrc?: string;
     leftElement?: PressablePropsModel['children'];
     rightElement?: PressablePropsModel['children'];
     type?: ButtonTypeModel;
