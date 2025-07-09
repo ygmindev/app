@@ -11,6 +11,7 @@ import { TooltipIcon } from '@lib/frontend/core/components/TooltipIcon/TooltipIc
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
@@ -47,6 +48,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   elementState,
   height,
   icon,
+  isAutoFocus,
   isCenter,
   isClearable = true,
   isRightElementFixed = true,
@@ -82,6 +84,16 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
     focus: () => handleFocus(true),
     submit: inputRef.current?.submit,
   }));
+
+  useAsync(
+    async (isMounted) => {
+      if (isAutoFocus && isMounted()) {
+        await sleepForEffect();
+        inputRef.current?.focus?.();
+      }
+    },
+    [isAutoFocus],
+  );
 
   const { elementStateControlled, elementStateControlledSet, isActive, isBlocked } =
     useElementStateControlled({

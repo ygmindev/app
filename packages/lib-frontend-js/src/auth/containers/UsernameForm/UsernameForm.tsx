@@ -70,6 +70,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
               <TextInput
                 autoComplete="email"
                 icon="email"
+                isAutoFocus
                 label={t('user:email')}
               />
             ),
@@ -80,7 +81,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
       case SIGN_IN_METHOD.PHONE:
         return [
           { element: <CountryInput />, id: 'callingCode' },
-          { element: <PhoneInput />, id: 'phone' },
+          { element: <PhoneInput isAutoFocus />, id: 'phone' },
         ];
       default:
         return [];

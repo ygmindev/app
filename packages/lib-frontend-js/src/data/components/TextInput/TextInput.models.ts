@@ -10,6 +10,7 @@ import { type ReactElement } from 'react';
 export type TextInputPropsModel = InputPropsModel &
   SizablePropsModel &
   Omit<_TextInputPropsModel, 'foregroundColor' | 'height'> & {
+    isAutoFocus?: boolean;
     isClearable?: boolean;
     isRightElementFixed?: boolean;
     leftElement?: ReactElement | null;
