@@ -22,6 +22,7 @@ import { pick } from '@lib/shared/core/utils/pick/pick';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import toString from 'lodash/toString';
 
 @withContainer({ name: `${SIGN_IN_RESOURCE_NAME}Implementation` })
 export class SignInImplementation implements SignInImplementationModel {
@@ -33,8 +34,9 @@ export class SignInImplementation implements SignInImplementationModel {
 
   createSignIn = async (user: PartialModel<UserModel> | null | undefined): Promise<SignInModel> => {
     if (user?._id) {
+      user._id = toString(user?._id);
       const claims = pick(user, SIGN_IN_TOKEN_CLAIM_KEYS);
-      const token = await this.jwtImplementation.createToken(user._id, claims);
+      const token = await this.jwtImplementation.createToken(claims);
       return { token, user };
     }
     throw new NotFoundError('user');

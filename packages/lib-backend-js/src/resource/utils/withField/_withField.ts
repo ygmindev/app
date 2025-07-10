@@ -29,6 +29,7 @@ const getField = <TType extends unknown>({
     return Field(() => (isArray ? [Resource()] : Resource()), { simple: true });
   }
   switch (type) {
+    case PROPERTY_TYPE.PRIMARY_KEY:
     case DATA_TYPE.STRING:
       return Field(() => (isArray ? [String] : String));
     case DATA_TYPE.BOOLEAN:

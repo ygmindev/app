@@ -4,8 +4,6 @@ import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type DataTypeModel, type FieldTypeModel } from '@lib/shared/data/data.models';
 
 export type _WithFieldParamsModel<TType> = {
-  Resource?(): ResourceClassModel<TType>;
-  defaultValue?(): TType;
   expire?: number;
   isArray?: boolean;
   isDatabase?: boolean;
@@ -17,6 +15,8 @@ export type _WithFieldParamsModel<TType> = {
   relation?: FieldRelation;
   root?: StringKeyModel<TType>;
   type?: DataTypeModel | FieldTypeModel;
+  Resource?(): ResourceClassModel<TType>;
+  defaultValue?(): TType;
 };
 
 export type _WithFieldModel = PropertyDecorator;

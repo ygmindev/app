@@ -44,7 +44,7 @@ export const _useAuth = ({
                   : (e as Error);
               onError(error);
             })
-        : void onAuthenticate(null);
+        : void onAuthenticate(undefined);
     });
 
     const unsubscribeOnIdTokenChanged = onIdTokenChanged(

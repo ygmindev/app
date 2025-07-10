@@ -4,11 +4,11 @@ import { type SignInTokenModel } from '@lib/model/auth/SignIn/SignIn.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { AuthTokenError } from '@lib/shared/auth/errors/AuthTokenError/AuthTokenError';
 import { type PartialModel } from '@lib/shared/core/core.models';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
 import { type AuthError } from 'firebase/auth';
 import admin from 'firebase-admin';
-import toString from 'lodash/toString';
 
 export class _JwtImplementation implements _JwtImplementationModel {
   constructor() {
@@ -22,8 +22,13 @@ export class _JwtImplementation implements _JwtImplementationModel {
       });
   }
 
-  createToken = async (_id: string, claims: PartialModel<UserModel>): Promise<string> =>
-    admin.auth().createCustomToken(toString(_id), claims);
+  createToken = async (claims: PartialModel<UserModel>): Promise<string> => {
+    const uid = claims._id;
+    if (uid) {
+      return admin.auth().createCustomToken(uid, claims);
+    }
+    throw new NotFoundError('uid');
+  };
 
   verifyToken = async (token: string): Promise<SignInTokenModel | null> => {
     try {

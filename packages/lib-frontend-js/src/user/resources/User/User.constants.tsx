@@ -4,6 +4,7 @@ import { type UserModel } from '@lib/model/user/User/User.models';
 
 export const USER_RESOURCE_PARAMS = {
   fields: [
+    { id: '_id', isHidden: true },
     { id: 'email', width: 300 },
     { id: 'first', width: 300 },
     { id: 'last' },
