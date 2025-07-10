@@ -9,11 +9,11 @@ import { type HttpMethodModel, type HttpProtocolModel } from '@lib/shared/http/h
 import { type FastifyReply, type FastifyRequest } from 'fastify';
 
 export type ApiConfigModel = {
-  onBeforeRegister?(endpoint: ApiEndpointModel<unknown, unknown>): Promise<void>;
-
   prefix: string;
 
   routes: Array<ApiEndpointModel<unknown, unknown>>;
+
+  onBeforeRegister?(endpoint: ApiEndpointModel<unknown, unknown>): Promise<void>;
 };
 
 export type RequestContextModel = {

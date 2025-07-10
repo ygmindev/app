@@ -25,7 +25,7 @@ export const _useAuth = ({
         user
           ? user
               .getIdTokenResult(true)
-              .then(({ claims, token }) => onAuthenticate({ _id: user.uid, claims }, token))
+              .then(({ claims, token }) => onAuthenticate(claims, token))
               .catch((e) => {
                 const error =
                   (e as AuthError).code === 'auth/network-request-failed'

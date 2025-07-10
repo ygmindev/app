@@ -9,8 +9,4 @@ export type SignInModel = {
   user: RefModel<UserModel>;
 };
 
-export type SignInTokenModel = {
-  _id: string;
-
-  claims: Partial<UserModel>;
-};
+export type SignInTokenModel = Partial<UserModel>;

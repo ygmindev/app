@@ -6,7 +6,6 @@ import { type FCModel } from '@lib/frontend/core/core.models';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useUserResource } from '@lib/frontend/user/hooks/useUserResource/useUserResource';
 import { type UserModel } from '@lib/model/user/User/User.models';
-import { type PartialModel } from '@lib/shared/core/core.models';
 
 export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const { get } = useUserResource();
@@ -16,9 +15,7 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
 
   useAuth({
     onAuthenticate: async (signInToken, token) => {
-      let user: PartialModel<UserModel> | undefined = signInToken
-        ? { ...signInToken.claims, _id: signInToken._id }
-        : undefined;
+      let user: Partial<UserModel> | undefined = signInToken ?? undefined;
       signInToken &&
         (user = (await get({ filter: [{ field: '_id', value: signInToken._id }] }))?.result);
       await setAuth(token, user);

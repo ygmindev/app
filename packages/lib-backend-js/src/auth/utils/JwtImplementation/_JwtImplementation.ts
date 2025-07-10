@@ -29,11 +29,8 @@ export class _JwtImplementation implements _JwtImplementationModel {
     try {
       const decoded = await admin.auth().verifyIdToken(token);
       return {
-        _id: decoded.uid,
-        claims: {
-          ...((decoded.additionalClaims as PartialModel<UserModel>) ?? {}),
-          ...pick(decoded, SIGN_IN_TOKEN_CLAIM_KEYS),
-        },
+        ...((decoded.additionalClaims as SignInTokenModel) ?? {}),
+        ...pick(decoded, SIGN_IN_TOKEN_CLAIM_KEYS),
       };
     } catch (e) {
       switch ((e as AuthError).code) {

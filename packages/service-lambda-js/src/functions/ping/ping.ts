@@ -9,10 +9,10 @@ export const main = createLambdaHandler({
       body: {
         message: 'success',
         requestId,
-        user: user?.claims.email,
+        user: user?.email,
       },
       headers: { 'Access-Control-Allow-Origin': '*' },
-      statusCode: HTTP_STATUS_CODE.SUCCESS,
+      statusCode: HTTP_STATUS_CODE.OK,
     };
   },
   plugins: [LAMBDA_PLUGIN.AUTHENTICATION],

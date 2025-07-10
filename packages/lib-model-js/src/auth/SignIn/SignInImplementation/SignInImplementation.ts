@@ -93,7 +93,7 @@ export class SignInImplementation implements SignInImplementationModel {
   async verifyToken(input: string): Promise<SignInModel> {
     const signInToken = await this.jwtImplementation.verifyToken(input);
     if (signInToken) {
-      const inputF = cleanObject(pick(signInToken.claims, JWT_CLAIM_KEYS));
+      const inputF = cleanObject(pick(signInToken, JWT_CLAIM_KEYS));
       let { result: user } = await this.userImplementation.get({
         filter: objectToEquality(inputF),
       });
