@@ -8,6 +8,7 @@ import {
   SIGN_IN_TOKEN_CLAIM_KEYS,
 } from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
+import { JWT_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.constants';
 import { type SignInImplementationModel } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.models';
 import { SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
@@ -44,7 +45,7 @@ export class SignInImplementation implements SignInImplementationModel {
     if (!otp) {
       throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
     }
-    const inputF = cleanObject(pick(input, ['callingCode', 'email', 'phone']));
+    const inputF = cleanObject(pick(input, JWT_CLAIM_KEYS));
     await this.otpImplementation.verify({ ...inputF, otp });
     let { result: user } = await this.userImplementation.get({
       filter: objectToEquality(inputF),
@@ -87,6 +88,25 @@ export class SignInImplementation implements SignInImplementationModel {
     });
     const signIn = await this.createSignIn(user);
     return signIn;
+  }
+
+  async verifyToken(input: string): Promise<SignInModel> {
+    const signInToken = await this.jwtImplementation.verifyToken(input);
+    if (signInToken) {
+      const inputF = cleanObject(pick(signInToken.claims, JWT_CLAIM_KEYS));
+      let { result: user } = await this.userImplementation.get({
+        filter: objectToEquality(inputF),
+      });
+      let isNew;
+      if (!user) {
+        const { result: created } = await this.userImplementation.create({ form: inputF });
+        user = created;
+        isNew = true;
+      }
+      const signIn = await this.createSignIn(user);
+      return { ...signIn, isNew };
+    }
+    throw new UnauthorizedError();
   }
 
   // async userUpdate(input: SignInInputModel): Promise<SignInModel> {

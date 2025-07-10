@@ -15,16 +15,9 @@ export const _useForm = <TType, TResult = void>({
 }: _UseFormParamsModel<TType, TResult>): _UseFormModel<TType, TResult> => {
   const [data, dataSet] = useState<TResult | null>();
 
-  const {
-    errors,
-    handleSubmit,
-    isSubmitting,
-    isValid,
-    setErrors,
-    setFieldValue,
-    setValues,
-    values,
-  } = useFormik<TType & FormikValues>({
+  const { errors, handleSubmit, isValid, setErrors, setFieldValue, setValues, values } = useFormik<
+    TType & FormikValues
+  >({
     initialValues: (initialValues ?? {}) as TType & FormikValues,
     onSubmit: async (data) => {
       dataSet((onSubmit && (await onSubmit(data))) ?? null);
@@ -40,7 +33,6 @@ export const _useForm = <TType, TResult = void>({
     handleChange: (id) => (value) => setFieldValue(id, value),
     handleReset: () => void setValues({} as TType & FormikValues),
     handleSubmit: () => handleSubmit(),
-    isLoading: isSubmitting,
     isValid,
     values,
     valuesSet: async (data) => {

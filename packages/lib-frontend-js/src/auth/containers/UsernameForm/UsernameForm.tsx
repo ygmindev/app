@@ -58,7 +58,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
       form.isCheckExists = true;
     }
     const { result } = await create({ form });
-    result && onSuccess && (await onSuccess());
+    result && (await onSuccess?.());
   };
 
   const fields: Array<FormFieldModel<UsernameFormModel>> = useMemo(() => {

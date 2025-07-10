@@ -7,6 +7,8 @@ export type SignInImplementationModel = {
 
   usernameUpdate(input: SignInInputModel, context?: RequestContextModel): Promise<SignInModel>;
 
+  verifyToken(input: string): Promise<SignInModel>;
+
   // userUpdate(
   //   input: EntityResourceDataModel<UserModel>,
   //   context?: RequestContextModel,

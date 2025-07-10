@@ -12,6 +12,7 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
+import { useState } from 'react';
 
 export const useForm = <TType, TResult = void>({
   initialValues,
@@ -32,10 +33,12 @@ export const useForm = <TType, TResult = void>({
   const validate = useValidator();
   const { success } = useNotification();
   const { replace } = useRouter();
-  const [, isLoadingSet] = useStore('app.isLoading');
+  const [isAppLoading, isAppLoadingSet] = useStore('app.isLoading');
+  const [isLoading, isLoadingSet] = useState<boolean>();
 
   const handleSubmit = async (values: TType): Promise<TResult | null> => {
     try {
+      isLoadingSet(true);
       form.errorsSet(undefined);
 
       const valuesF = cleanObject(values);
@@ -43,9 +46,9 @@ export const useForm = <TType, TResult = void>({
         const error = Error(t('core:validateChanged'));
         onError ? onError(error) : handleError(error);
       }
-      isBlocking && isLoadingSet(true);
-      const data = onSubmit && (await onSubmit(valuesF));
-      onSuccess && (await onSuccess(valuesF, data));
+      isBlocking && isAppLoadingSet(true);
+      const data = await onSubmit?.(valuesF);
+      await onSuccess?.(valuesF, data);
       successMessage && void success({ description: t('core:updatedSuccess') });
       redirect && replace(redirect);
       return data ?? null;
@@ -53,8 +56,9 @@ export const useForm = <TType, TResult = void>({
       logger.error(e);
       onError ? onError(e as Error) : handleError(e as Error);
     } finally {
-      isBlocking && isLoadingSet(false);
-      onComplete && onComplete();
+      isBlocking && isAppLoadingSet(false);
+      isLoadingSet(false);
+      onComplete?.();
     }
     return null;
   };
@@ -70,5 +74,8 @@ export const useForm = <TType, TResult = void>({
     },
   });
 
-  return form;
+  return {
+    ...form,
+    isLoading: isAppLoading || isLoading,
+  };
 };

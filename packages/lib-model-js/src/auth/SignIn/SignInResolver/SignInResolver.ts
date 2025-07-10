@@ -11,7 +11,7 @@ import { SignInImplementation } from '@lib/model/auth/SignIn/SignInImplementatio
 import { SignInInput } from '@lib/model/auth/SignIn/SignInInput/SignInInput';
 import { SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
 import { type SignInResolverModel } from '@lib/model/auth/SignIn/SignInResolver/SignInResolver.models';
-import { SIGN_IN, USERNAME_UPDATE } from '@lib/shared/auth/auth.constants';
+import { SIGN_IN, USERNAME_UPDATE, VERIFY_TOKEN } from '@lib/shared/auth/auth.constants';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 
 @withContainer()
@@ -43,5 +43,17 @@ export class SignInResolver implements SignInResolverModel {
     context?: RequestContextModel,
   ): Promise<SignInModel> {
     return this.signInImplementation.usernameUpdate(input, context);
+  }
+
+  @withOutput({
+    Resource: () => SignIn,
+    access: ACCESS_LEVEL.PUBLIC,
+    name: VERIFY_TOKEN,
+  })
+  async verifyToken(
+    @withInput({ Resource: () => String })
+    input: string,
+  ): Promise<SignInModel> {
+    return this.signInImplementation.verifyToken(input);
   }
 }

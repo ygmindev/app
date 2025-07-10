@@ -22,4 +22,6 @@ export type UseFormParamsModel<TType, TResult = void> = AsyncPropsModel &
     onValidate?(errors?: FormErrorModel<TType>): void;
   };
 
-export type UseFormModel<TType, TResult = void> = _UseFormModel<TType, TResult>;
+export type UseFormModel<TType, TResult = void> = _UseFormModel<TType, TResult> & {
+  isLoading?: boolean;
+};

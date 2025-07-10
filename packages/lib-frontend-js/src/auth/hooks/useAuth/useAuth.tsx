@@ -11,13 +11,13 @@ import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 export const useAuth = ({ ...props }: UseAuthParamsModel): UseAuthModel => {
   const [isOffline, isOfflineSet] = useStore('app.isOffline');
   const [, authStatusSet] = useStore('auth.status');
-  return _useAuth({
+
+  _useAuth({
     ...props,
     onError: (e) => {
       (e as HttpError).statusCode === HTTP_STATUS_CODE.NETWORK_CONNECT_TIMEOUT &&
         !isOffline &&
         isOfflineSet(true);
-
       authStatusSet(AUTH_STATUS.UNAUTHENTICATED);
       throw e;
     },

@@ -237,8 +237,6 @@ const FormContainerF = <TType, TResult = void>({
       return getField(field as FormFieldModel<TType>).element;
     });
 
-  props.testID === 'step-0' && console.warn(elementStateF);
-
   return (
     <Form
       onSubmit={

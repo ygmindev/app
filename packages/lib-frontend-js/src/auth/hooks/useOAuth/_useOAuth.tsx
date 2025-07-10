@@ -1,26 +1,22 @@
+import { _auth } from '@lib/frontend/auth/hooks/useAuth/_useAuth';
 import { type _UseOAuthModel } from '@lib/frontend/auth/hooks/useOAuth/_useOAuth.models';
-import { useGoogleLogin } from '@react-oauth/google';
+import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
+const _provider = new GoogleAuthProvider();
 
 export const _useOAuth = (): _UseOAuthModel => {
-  const _signInGoogle = useGoogleLogin({
-    flow: 'auth-code',
-    onSuccess: (codeResponse) => console.log(codeResponse),
-  });
+  const { signOut, verifyToken } = useSignInResource();
 
   return {
     google: {
-      signIn: async () => _signInGoogle(),
-      signOut: async () => {
-        const token = localStorage.getItem('google_token');
-        if (token) {
-          await fetch(`https://oauth2.googleapis.com/revoke?token=${token}`, {
-            headers: { 'Content-type': 'application/x-www-form-urlencoded' },
-            method: 'POST',
-          });
-        }
-        localStorage.removeItem('google_token');
-        // setUser(null);
+      signIn: async () => {
+        const result = await signInWithPopup(_auth, _provider);
+        const token = await result.user.getIdToken();
+        await verifyToken(token);
       },
+
+      signOut,
     },
   };
 };

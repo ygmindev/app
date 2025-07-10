@@ -14,7 +14,6 @@ export type _UseFormModel<TType, TResult = void> = {
   data?: TResult | null;
   errors: FormErrorModel<TType>;
   handleChange: <TKey extends StringKeyModel<TType>>(key: TKey) => (value: TType[TKey]) => void;
-  isLoading: boolean;
   isValid: boolean;
   values: TType;
   errorsSet(errors?: FormErrorModel<TType>): void;
