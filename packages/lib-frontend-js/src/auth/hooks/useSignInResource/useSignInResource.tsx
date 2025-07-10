@@ -1,4 +1,3 @@
-import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { sleepForTransition } from '@lib/frontend/animation/utils/sleepForTransition/sleepForTransition';
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import { type UseSignInResourceModel } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource.models';
@@ -43,7 +42,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
     }
   };
 
-  const setAuth = async (token?: string, user?: RefModel<UserModel>): Promise<void> => {
+  const setAuth = async (token?: string, user?: Partial<UserModel>): Promise<void> => {
     authTokenSet({ access: token ?? undefined });
 
     let authStatusF: AuthStatusModel = currentUser
@@ -125,8 +124,8 @@ export const useSignInResource = (): UseSignInResourceModel => {
       });
       if (output) {
         // await handleSignOut();
-        const { user } = output;
-        await setAuth(output.token, user);
+        await signIn(output);
+        // await setAuth(output.token, output.user);
       }
     },
   };
