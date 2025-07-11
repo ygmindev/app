@@ -15,7 +15,6 @@ import { ACCOUNT } from '@lib/shared/user/user.constants';
 
 export const userRoutes: Array<RouteModel> = [
   {
-    isModal: true,
     isProtectable: true,
     pathname: ACCOUNT,
     previous: '/',

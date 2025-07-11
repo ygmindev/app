@@ -9,7 +9,6 @@ import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrap
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
-import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -29,7 +28,6 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
-  const { t } = useTranslation();
   const ref = useRef<WrapperRefModel>(null);
   const [isLoading] = useStore('app.isLoading');
   return (
@@ -48,10 +46,6 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
       ref={ref}>
       <Appearable
         isActive={!!onBack}
-        left={0}
-        position={SHAPE_POSITION.ABSOLUTE}
-        right={0}
-        top={0}
         zIndex>
         <Button
           elementState={isLoading ? ELEMENT_STATE.DISABLED : undefined}

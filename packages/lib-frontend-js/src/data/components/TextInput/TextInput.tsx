@@ -2,6 +2,7 @@ import { ANIMATION_STATES_FOCUSABLE } from '@lib/frontend/animation/animation.co
 import { type AnimationModel } from '@lib/frontend/animation/animation.models';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { sleepForEffect } from '@lib/frontend/animation/utils/sleepForEffect/sleepForEffect';
+import { sleepForTransition } from '@lib/frontend/animation/utils/sleepForTransition/sleepForTransition';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
@@ -88,7 +89,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   useAsync(
     async (isMounted) => {
       if (isAutoFocus && isMounted()) {
-        await sleepForEffect();
+        await sleepForTransition();
         inputRef.current?.focus?.();
       }
     },
