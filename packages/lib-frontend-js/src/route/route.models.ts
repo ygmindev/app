@@ -25,9 +25,6 @@ export type RouteModel<
     isNavigatable?: boolean;
     isProtectable?: boolean;
     layoutProps?: LayoutStylePropsModel;
-    loaders?(params: { pathname?: string }): {
-      [TKey in StringKeyModel<TType>]?: (params?: RequestContextModel) => Promise<TType[TKey]>;
-    };
     namespaces?: Array<string>;
     navigation?: RouteNavigationModel;
     params?: TParams;
@@ -38,6 +35,9 @@ export type RouteModel<
     routes?: Array<RouteModel>;
     title?: AsyncTextModel;
     transition?: RouteTransitionModel;
+    loaders?(params: { pathname?: string }): {
+      [TKey in StringKeyModel<TType>]?: (params?: RequestContextModel) => Promise<TType[TKey]>;
+    };
   };
 
 export type LocationModel<TType = object> = {
