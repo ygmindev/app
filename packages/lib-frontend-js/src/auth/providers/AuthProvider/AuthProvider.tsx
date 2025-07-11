@@ -16,6 +16,8 @@ export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   useAuth({
     onAuthenticate: async (signInToken, token) => {
       let user: Partial<UserModel> | undefined = signInToken;
+
+      // TODO: handle security concerns in backend (separate auth user get endpoint?)
       signInToken?._id &&
         (user = (await get({ filter: [{ field: '_id', value: signInToken._id }] }))?.result);
 
