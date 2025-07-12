@@ -8,6 +8,7 @@
     "@babel/core": "^7.26.10",
     "@expo/vector-icons": "^14.1.0",
     "@floating-ui/react-native": "^0.10.7",
+    "@fragaria/address-formatter": "^6.6.1",
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-native-firebase/app": "^22.0.0",

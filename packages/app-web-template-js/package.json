@@ -11,6 +11,7 @@
     "@expo/vector-icons": "^14.1.0",
     "@floating-ui/react": "^0.27.8",
     "@floating-ui/react-dom": "^2.1.2",
+    "@fragaria/address-formatter": "^6.6.1",
     "@lexical/react": "^0.30.0",
     "@lib/config": "workspace:^",
     "@lib/frontend": "workspace:^",

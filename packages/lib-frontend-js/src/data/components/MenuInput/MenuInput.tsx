@@ -107,7 +107,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
   const displayLabel = useMemo(
     () =>
       valueControlled
-        ? t(renderValue?.(valueControlled) ?? valueControlled?.label ?? valueControlled?.id)
+        ? t(renderValue?.(valueControlled) || valueControlled?.label || valueControlled?.id)
         : undefined,
     [valueControlled, t],
   );

@@ -9,6 +9,7 @@ import {
 } from '@lib/frontend/map/components/AddressInput/AddressInput.models';
 import { useMapQuery } from '@lib/frontend/map/hooks/useMapQuery/useMapQuery';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { addressFormat } from '@lib/shared/data/utils/addressFormat/addressFormat';
 
 export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsModel> = ({
   defaultValue,
@@ -32,7 +33,11 @@ export const AddressInput: RLFCModel<AddressInputRefModel, AddressInputPropsMode
       label={label ?? t('core:address')}
       onChange={valueControlledSet}
       options={search}
-      value={valueControlled ? ({ ...valueControlled, id: '' } as AddressOptionModel) : undefined}
+      value={
+        valueControlled
+          ? ({ ...valueControlled, id: addressFormat(valueControlled) } as AddressOptionModel)
+          : undefined
+      }
     />
   );
 };
