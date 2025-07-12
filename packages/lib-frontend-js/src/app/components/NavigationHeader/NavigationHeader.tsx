@@ -4,11 +4,11 @@ import { type NavigationHeaderPropsModel } from '@lib/frontend/app/components/Na
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
@@ -58,15 +58,12 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
       <Appearable
         flex
         isActive={!!title}>
-        {isAsyncText(title) ? (
-          <AsyncText
-            align={FONT_ALIGN.CENTER}
-            fontStyle={FONT_STYLE.SUBTITLE}>
-            {title}
-          </AsyncText>
-        ) : (
-          title
-        )}
+        <AsyncText
+          align={FONT_ALIGN.CENTER}
+          casing={TEXT_CASING.CAPITALIZE}
+          fontStyle={FONT_STYLE.SUBTITLE}>
+          {title}
+        </AsyncText>
       </Appearable>
     </Wrapper>
   );

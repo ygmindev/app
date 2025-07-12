@@ -15,5 +15,5 @@ export const THEME_ANIMATION: ThemeConfigModel['animation'] = {
 
   isInitial: true,
 
-  transition: 350,
+  transition: 300,
 };
