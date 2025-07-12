@@ -28,6 +28,7 @@ export const getViewParams = (): ComposeComponentParamsModel<
     onResponderGrant,
     onResponderRelease,
     pointerEvents,
+    tabIndex,
   }) => ({
     children,
 
@@ -53,6 +54,8 @@ export const getViewParams = (): ComposeComponentParamsModel<
     onResponderRelease: () => onResponderRelease?.(),
 
     pointerEvents: isHidden ? 'none' : pointerEvents,
+
+    tabIndex,
   }),
 });
 

@@ -158,6 +158,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
             icon="times"
             onPress={() => handleChange('')}
             size={THEME_SIZE.SMALL}
+            tabIndex={-1}
             type={BUTTON_TYPE.INVISIBLE}
           />
         </Appearable>
