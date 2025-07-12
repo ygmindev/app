@@ -40,6 +40,7 @@ import { props as calendarInputProps } from '@lib/frontend/data/components/Calen
 import { props as checkboxInput } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput.library';
 import { props as dateInputProps } from '@lib/frontend/data/components/DateInput/DateInput.library';
 import { props as fileInputProps } from '@lib/frontend/data/components/FileInput/FileInput.library';
+import { props as menuInputProps } from '@lib/frontend/data/components/MenuInput/MenuInput.library';
 import { props as numberInputProps } from '@lib/frontend/data/components/NumberInput/NumberInput.library';
 import { props as selectInputProps } from '@lib/frontend/data/components/SelectInput/SelectInput.library';
 import { props as switchInputProps } from '@lib/frontend/data/components/SwitchInput/SwitchInput.library';
@@ -49,8 +50,8 @@ import { props as countryInputProps } from '@lib/frontend/locale/components/Coun
 import { props as addressInputProps } from '@lib/frontend/map/components/AddressInput/AddressInput.library';
 import { props as notificationProps } from '@lib/frontend/notification/components/Notification/Notification.library';
 import { props as notificationsProps } from '@lib/frontend/notification/containers/Notifications/Notifications.library';
-import { props as searchInputProps } from '@lib/frontend/search/components/SearchInput/SearchInput.library';
-import { props as searchInputCompactProps } from '@lib/frontend/search/components/SearchInputCompact/SearchInputCompact.library';
+// import { props as searchInputProps } from '@lib/frontend/search/components/SearchInput/SearchInput.library';
+// import { props as searchInputCompactProps } from '@lib/frontend/search/components/SearchInputCompact/SearchInputCompact.library';
 import { props as phoneFormProps } from '@lib/frontend/user/components/PhoneForm/PhoneForm.library';
 import { props as phoneInputProps } from '@lib/frontend/user/components/PhoneInput/PhoneInput.library';
 import { props as userInputProps } from '@lib/frontend/user/components/UserInput/UserInput.library';
@@ -83,6 +84,7 @@ export const LIBRARY_PROPS = [
   linkProps,
   loadingProps,
   logoProps,
+  menuInputProps,
   menuProps,
   modalButtonProps,
   modalFormButtonProps,
@@ -97,8 +99,8 @@ export const LIBRARY_PROPS = [
   pressableTitleProps,
   pulsableWrapperProps,
   scatterChartProps,
-  searchInputCompactProps,
-  searchInputProps,
+  // searchInputCompactProps,
+  // searchInputProps,
   selectInputProps,
   slidesProps,
   specificationInputFormProps,

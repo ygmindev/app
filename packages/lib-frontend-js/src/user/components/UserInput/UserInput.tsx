@@ -1,9 +1,9 @@
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { SearchInput } from '@lib/frontend/search/components/SearchInput/SearchInput';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import {
   type UserInputPropsModel,
@@ -37,7 +37,7 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = ({
       : [];
 
   return (
-    <SearchInput<UserOptionModel>
+    <MenuInput<UserOptionModel>
       {...wrapperProps}
       label={t('user:user')}
       onChange={(v) => valueControlledSet(v.user)}

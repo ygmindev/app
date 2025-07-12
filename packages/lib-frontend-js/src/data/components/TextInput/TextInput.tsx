@@ -148,6 +148,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       right={0}
       top={0}
       zIndex>
+      {rightElement}
+
       {isClearable && (
         <Appearable
           elementState={elementStateControlled}
@@ -167,8 +169,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       {isAsyncText(props.error) && (
         <TooltipIcon color={THEME_COLOR.ERROR}>{props.error}</TooltipIcon>
       )}
-
-      {rightElement}
     </Wrapper>
   );
 

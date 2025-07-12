@@ -1,12 +1,21 @@
-import { type SearchConfigModel } from '@lib/config/search/search/search.models';
-import {
-  type _UseSearchModel,
-  type _UseSearchParamsModel,
-} from '@lib/frontend/search/hooks/useSearch/_useSearch.models';
-import { type PartialModel } from '@lib/shared/core/core.models';
-import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
+import { type TranslatableOptionModel } from '@lib/frontend/core/core.models';
+import { type FuzzyParamsModel } from '@lib/frontend/search/utils/Fuzzy/Fuzzy.models';
 
-export type UseSearchParamsModel<TType extends WithIdModel> = PartialModel<SearchConfigModel> &
-  Pick<_UseSearchParamsModel<TType>, 'items' | 'keys' | 'onChange'>;
+export type UseSearchParamsModel<TType extends TranslatableOptionModel> = Omit<
+  FuzzyParamsModel<TType>,
+  'options'
+> & {
+  limit?: number;
+} & {
+  duration?: number;
+  minLength?: number;
+  options: Array<TType> | ((query?: string) => Promise<Array<TType>>);
+  onSearch?(query?: string): void;
+};
 
-export type UseSearchModel<TType> = _UseSearchModel<TType>;
+export type UseSearchModel<TType extends TranslatableOptionModel> = {
+  isLoading?: boolean;
+  query?: string;
+  result: Array<TType>;
+  search(query?: string): Promise<void>;
+};

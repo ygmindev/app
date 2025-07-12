@@ -1,10 +1,6 @@
-import { type UseMutationModel } from '@lib/frontend/data/hooks/useMutation/useMutation.models';
-import { type MapQueryResultModel } from '@lib/frontend/map/hooks/useMapQuery/useMapQuery.models';
+import { type AddressOptionModel } from '@lib/frontend/map/components/AddressInput/AddressInput.models';
 
-export type _UseMapQueryModel = Pick<
-  UseMutationModel<string, Array<MapQueryResultModel>>,
-  'data' | 'isLoading' | 'mutate'
->;
+export type _UseMapQueryModel = (query?: string) => Promise<Array<AddressOptionModel>>;
 
 export type _UseMapQueryApiParamsModel = {
   addressdetails: number;
