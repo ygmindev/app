@@ -7,7 +7,7 @@ import {
 import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/data.models';
 import { type ReactElement } from 'react';
 
-export type TextInputPropsModel = InputPropsModel &
+export type TextInputPropsModel = Omit<InputPropsModel, 'onSubmit'> &
   SizablePropsModel &
   Omit<_TextInputPropsModel, 'foregroundColor' | 'height'> & {
     isAutoFocus?: boolean;
@@ -15,6 +15,7 @@ export type TextInputPropsModel = InputPropsModel &
     isRightElementFixed?: boolean;
     leftElement?: ReactElement | null;
     rightElement?: ReactElement | null;
+    onClear?(): void;
   };
 
 export type TextInputRefModel = Pick<InputRefModel, 'blur' | 'focus' | 'submit'>;

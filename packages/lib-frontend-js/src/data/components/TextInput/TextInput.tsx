@@ -13,6 +13,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
+import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
@@ -63,6 +64,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   numberOfLines,
   onBlur,
   onChange,
+  onClear,
   onElementStateChange,
   onFocus,
   onKey,
@@ -117,12 +119,10 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       if (v) {
         onFocus?.();
         focusableRef.current?.focus?.();
-        inputRef.current?.focus?.();
         elementStateControlledSet(ELEMENT_STATE.ACTIVE);
       } else {
         onBlur?.();
         focusableRef.current?.blur?.();
-        inputRef.current?.blur?.();
         elementStateControlledSet(ELEMENT_STATE.INACTIVE);
       }
     }
@@ -158,7 +158,10 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
           isLazy={false}>
           <Button
             icon="times"
-            onPress={() => handleChange('')}
+            onPress={() => {
+              onClear?.();
+              handleChange('');
+            }}
             size={THEME_SIZE.SMALL}
             tabIndex={-1}
             type={BUTTON_TYPE.INVISIBLE}
@@ -213,6 +216,14 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   };
 
   const Component = mask ? _MaskedInput : _TextInput;
+
+  useChange(isActive, () => {
+    if (isActive) {
+      inputRef.current?.focus?.();
+    } else {
+      inputRef.current?.blur?.();
+    }
+  });
 
   return (
     <FocusableWrapper
@@ -290,7 +301,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
                   break;
                 }
               }
-              onKey && onKey(key);
+              onKey?.(key);
             }}
             onSubmit={onSubmit}
             placeholder={isActive ? placeholder : undefined}
