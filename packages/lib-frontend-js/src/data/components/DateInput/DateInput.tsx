@@ -10,6 +10,7 @@ import {
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
 import { useState } from 'react';
@@ -35,6 +36,36 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = ({
     { elementState, onElementStateChange },
   );
 
+  const handleKey = (v: string): void => {
+    if (v === '/' && textValue) {
+      let [m, d, y] = textValue.split('/');
+      if (m?.length === 1) {
+        m = `0${m}`;
+      }
+      if (d?.length === 1) {
+        d = `0${d}`;
+      }
+      textValueSet(`${filterNil([m, d, y]).join('/')}/`);
+    }
+  };
+
+  const handleValue = (v?: string): void => {
+    if (v?.length) {
+      const parsed = Date.parse(v);
+      if (!isNaN(parsed) && parsed > 0) {
+        const value = new Date(parsed);
+        valueControlledSet(value);
+        textValueSet(dateTimeFormat(value));
+      } else {
+        valueControlledSet(undefined);
+        textValueSet(undefined);
+      }
+    } else {
+      valueControlledSet(undefined);
+      textValueSet(undefined);
+    }
+  };
+
   return (
     <Dropdown
       {...wrapperProps}
@@ -46,22 +77,10 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = ({
           mask="[00]{/}[00]{/}[0000]"
           onChange={textValueSet}
           onClear={() => valueControlledSet(undefined)}
+          onKey={handleKey}
           onSubmit={(v) => {
-            if (v?.length) {
-              const parsed = Date.parse(v);
-              if (!isNaN(parsed) && parsed > 0) {
-                const value = new Date(parsed);
-                valueControlledSet(value);
-                textValueSet(dateTimeFormat(value));
-                onSubmit?.();
-              } else {
-                textValueSet(undefined);
-                valueControlledSet(undefined);
-              }
-            } else {
-              valueControlledSet(undefined);
-              textValueSet(undefined);
-            }
+            handleValue(v);
+            onSubmit?.();
             elementStateControlledSet(ELEMENT_STATE.INACTIVE);
           }}
           value={textValue}

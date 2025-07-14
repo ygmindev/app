@@ -67,8 +67,9 @@ export const getTextInputParams = (): ComposeComponentParamsModel<
               return onKey(TEXT_INPUT_KEY.REMOVE);
             case 'Escape':
               return onKey(TEXT_INPUT_KEY.ESCAPE);
-            default:
-              return null;
+            default: {
+              return onKey(e.nativeEvent.key);
+            }
           }
         }
       : undefined,
