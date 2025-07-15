@@ -1,6 +1,6 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import pacakgeManagerConfig from '@lib/config/python/packageManager/packageManager';
+import { config as pacakgeManagerConfig } from '@lib/config/python/packageManager/packageManager';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { type InstallParamsModel } from '@tool/task/python/tasks/install/install.models';

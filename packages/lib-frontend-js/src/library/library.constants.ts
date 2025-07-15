@@ -50,8 +50,8 @@ import { props as countryInputProps } from '@lib/frontend/locale/components/Coun
 import { props as addressInputProps } from '@lib/frontend/map/components/AddressInput/AddressInput.library';
 import { props as notificationProps } from '@lib/frontend/notification/components/Notification/Notification.library';
 import { props as notificationsProps } from '@lib/frontend/notification/containers/Notifications/Notifications.library';
-// import { props as searchInputProps } from '@lib/frontend/search/components/SearchInput/SearchInput.library';
-// import { props as searchInputCompactProps } from '@lib/frontend/search/components/SearchInputCompact/SearchInputCompact.library';
+import { props as searchInputProps } from '@lib/frontend/search/components/SearchInput/SearchInput.library';
+// import { props as SearchInputProps } from '@lib/frontend/search/components/SearchInput/SearchInput.library';
 import { props as phoneFormProps } from '@lib/frontend/user/components/PhoneForm/PhoneForm.library';
 import { props as phoneInputProps } from '@lib/frontend/user/components/PhoneInput/PhoneInput.library';
 import { props as userInputProps } from '@lib/frontend/user/components/UserInput/UserInput.library';
@@ -99,8 +99,7 @@ export const LIBRARY_PROPS = [
   pressableTitleProps,
   pulsableWrapperProps,
   scatterChartProps,
-  // searchInputCompactProps,
-  // searchInputProps,
+  searchInputProps,
   selectInputProps,
   slidesProps,
   specificationInputFormProps,
