@@ -357,7 +357,7 @@ name = "lib-config"
 version = "0.0.1"
 description = ""
 optional = false
-python-versions = "3.12.7"
+python-versions = "3.12.5"
 groups = ["main"]
 files = []
 develop = true
@@ -374,7 +374,7 @@ name = "lib-shared"
 version = "0.0.1"
 description = ""
 optional = false
-python-versions = "3.12.7"
+python-versions = "3.12.5"
 groups = ["main"]
 files = []
 develop = true
@@ -1049,5 +1049,5 @@ typing-extensions = ">=4.12.0"
 
 [metadata]
 lock-version = "2.1"
-python-versions = "3.12.7"
+python-versions = "3.12.5"
 content-hash = "07ac913026006b26c01d97c265c7808a2ca911e06d4c6d27fb574ec847e55f52"

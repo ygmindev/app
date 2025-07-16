@@ -28,7 +28,7 @@ packages = [{ include = "*", from = "src" }]
 [tool.poetry.dependencies]
 lib_config = {path="../lib-config-py", develop=true}
 lib_shared = {path="../lib-shared-py", develop=true}
-python = "3.12.7"
+python = "3.12.5"
 scikit-learn = "^1.5.2"
 polars = "^1.8.2"
 torch = "^2.5.1"

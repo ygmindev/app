@@ -1,4 +1,8 @@
+import ast
+import json
 import os
+import random
+import string
 
 import dspy
 import requests
@@ -85,9 +89,6 @@ flight_database = {
 itinery_database = {}
 ticket_database = {}
 
-import random
-import string
-
 
 def fetch_flight_info(date: Date, origin: str, destination: str):
     """Fetch flight information from origin to destination on the given date"""
@@ -165,13 +166,7 @@ def file_ticket(user_request: str, user_profile: UserProfile):
     return ticket_id
 
 
-TOKEN = "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"
-os.environ["HF_TOKEN"] = TOKEN
-
-# ollama run llama3.2:3b-instruct-fp16
-
-
-class OllamaLM(dspy.LM):
+class APILM(dspy.LM):
     def __init__(self, model_name="llama3.2:3b-instruct-fp16"):
         super().__init__(model_name)
         self.model_name = model_name
@@ -179,46 +174,57 @@ class OllamaLM(dspy.LM):
 
     def __call__(self, messages, **kwargs):
         prompt = self._convert_messages_to_prompt(messages)
+        prompt += (
+            "\n\n"
+            "Important: Respond ONLY with a JSON object in the format:\n"
+            "{\n"
+            '  "next_thought": "...",\n'
+            '  "next_tool_name": "...",\n'
+            '  "next_tool_args": { ... }\n'
+            "}\n"
+            "DO NOT include any commentary or extra text. JSON only.\n"
+            "Do NOT describe or define the schema. Instead, provide concrete values. For next_tool_args, the value must be a real dictionary of parameters (e.g., a list of actual flights). Do not include schema definitions, OpenAPI specs, or explanations.\n"
+            '**Ensure that all numeric fields (e.g., year, month, day, hour, price, duration) are integers or floats — NOT quoted strings or "null" (in which case replace null with 0).**\n'
+        )
+
+        print("@@@ PROMPT")
+        print(prompt)
+        print("@@@ \n\n")
 
         payload = {
             "model": self.model_name,
             "prompt": prompt,
             "temperature": kwargs.get("temperature", 0.7),
-            "max_tokens": kwargs.get("max_tokens", 512),
-            "stream": False,  # Required for predictable JSON
+            "max_tokens": kwargs.get("max_tokens", 2048),
+            "stream": False,
         }
-
         response = requests.post(self.api_url, json=payload)
         response.raise_for_status()
-        result = response.json()
-        return result["response"].strip()
+        result = response.json()["response"].strip()
+
+        print("@@@ RESULT")
+        print(result)
+        print("@@@ \n\n")
+        try:
+            return json.loads(result)
+        except json.JSONDecodeError:
+            return result
 
     def _convert_messages_to_prompt(self, messages):
-        """Convert DSPy-style OpenAI messages to a single prompt string."""
-        prompt = ""
-        for msg in messages:
-            role = msg.get("role", "user")
-            content = msg.get("content", "")
-            if role == "system":
-                prompt += f"[System]\n{content}\n\n"
-            elif role == "user":
-                prompt += f"[User]\n{content}\n\n"
-            elif role == "assistant":
-                prompt += f"[Assistant]\n{content}\n\n"
-        prompt += "[Assistant]\n"
+        """Converts a list of chat-style messages into a single prompt string."""
+        prompt = "\n".join(
+            f"{m['role'].capitalize()}: {m['content'].strip()}"
+            for m in messages
+            if m.get("content")
+        ).strip()
         return prompt
 
 
-# Usage
-lm = OllamaLM()
-dspy.configure(lm=lm)
-
-
-class DSPyAirlineCustomerSerice(dspy.Signature):
-    """You are an airline customer service agent that helps user book and manage flights.
-
-    You are given a list of tools to handle user request, and you should decide the right tool to use in order to
-    fullfil users' request."""
+class DSPyAirlineCustomerService(dspy.Signature):
+    """
+    You are an airline customer service agent that helps user book and manage flights.
+    You are given a list of tools to handle user request, and you should decide the right tool to use in order to fullfil users' request.
+    """
 
     user_request: str = dspy.InputField()
     process_result: str = dspy.OutputField(
@@ -229,20 +235,10 @@ class DSPyAirlineCustomerSerice(dspy.Signature):
     )
 
 
-demo = dspy.Example(
-    user_request="I want to fly from SFO to JFK on 09/01/2025, my name is Adam",
-    next_thought="I should check available flights from SFO to JFK on 09/01/2025.",
-    next_tool_name="fetch_flight_info",
-    next_tool_args={
-        "date": {"year": 2025, "month": 9, "day": 1, "hour": 0},
-        "origin": "SFO",
-        "destination": "JFK",
-    },
-)
-
-
+lm = APILM()
+dspy.configure(lm=lm)
 agent = dspy.ReAct(
-    DSPyAirlineCustomerSerice,
+    DSPyAirlineCustomerService,
     tools=[
         fetch_flight_info,
         fetch_itinerary,
@@ -257,4 +253,7 @@ agent = dspy.ReAct(
 result = agent(
     user_request="please help me book a flight from SFO to JFK on 09/01/2025, my name is Adam"
 )
+
+dspy.inspect_history(n=10)
+
 print(result)
