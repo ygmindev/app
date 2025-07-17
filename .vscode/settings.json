@@ -32,8 +32,6 @@
   },
   "editor.minimap.enabled": false,
   "eslint.debug": true,
-  "editor.defaultFormatter": null,
-  "editor.formatOnSave": false,
   "eslint.options": {
     "overrideConfigFile": "./__dist__/eslint.config.mjs"
   },
@@ -69,14 +67,19 @@
     "reportUnusedImport": "none"
   },
   "python.analysis.enablePytestSupport": false,
+  "python.analysis.indexing": true,
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
+  "pylint.interpreter": [
+    "${workspaceFolder}/packages/service-ai-py/.venv/bin/python"
+  ],
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "GitHub Dark",
   "workbench.iconTheme": "vs-minimal",
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
+  "azureFunctions.createPythonVenv": false
 }
