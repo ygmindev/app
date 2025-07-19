@@ -38,7 +38,7 @@ export const config = defineConfig<FileConfigModel>({
           PACKAGE_PREFIXES.map(
             (prefix) =>
               pkg.startsWith(prefix) &&
-              pkg.endsWith('-js') &&
+              (pkg.endsWith('-js') || pkg.endsWith('-py')) &&
               existsSync(joinPaths([fromPackages(pkg), 'package.json'])),
           ),
         ),

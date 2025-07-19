@@ -3,4 +3,4 @@ from {{PATH}}.{{NAME}}(snakeCase).{{NAME}}(snakeCase)_models import {{NAME}}(pas
 
 
 class {{NAME}}(pascalCase)(_{{NAME}}(pascalCase), {{NAME}}(pascalCase)Model):
-    pass
+    ...

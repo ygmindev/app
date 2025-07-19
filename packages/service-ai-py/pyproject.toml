@@ -3,7 +3,7 @@ requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-line-length = 100
+line-length = 88
 
 [tool.isort]
 force_grid_wrap = 0
@@ -29,6 +29,7 @@ packages = [{ include = "*", from = "src" }]
 lib_ai = {path="../lib-ai-py", develop=true}
 lib_config = {path="../lib-config-py", develop=true}
 lib_shared = {path="../lib-shared-py", develop=true}
+lib_quant = {path="../lib-quant-py", develop=true}
 python = "3.12.5"
 transformers = "^4.46.3"
 torch = "^2.5.1"
@@ -66,3 +67,4 @@ autoflake = "^2.3.1"
 tqdm = "^4.67.0"
 ollama = "^0.4.1"
 mlx-lm = "^0.20.1"
+ruff = "^0.12.4"

@@ -18,7 +18,7 @@ enable_incomplete_feature = ["NewGenericSyntax", "Unpack"]
 pythonpath = ["src"]
 
 [tool.poetry]
-name = "lib-shared"
+name = "lib-quant"
 description = ""
 version = "0.0.1"
 license = "MIT"
@@ -29,6 +29,7 @@ packages = [{ include = "*", from = "src" }]
 python = "3.12.5"
 numpy = "1.26.4"
 pydash = "^8.0.4"
+quantlib = "^1.38"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"

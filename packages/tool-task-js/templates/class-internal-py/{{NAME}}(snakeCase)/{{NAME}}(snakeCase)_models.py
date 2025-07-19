@@ -1,5 +1,5 @@
-from {{PATH}}.{{NAME}}(snakeCase)._{{NAME}}(snakeCase)_models import _{{NAME}}(pascalCase)Model
+from pydantic import BaseModel
 
 
-class {{NAME}}(pascalCase)Model(_{{NAME}}(pascalCase)Model):
-    pass
+class {{NAME}}(pascalCase)Model(BaseModel):
+    ...
