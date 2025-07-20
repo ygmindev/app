@@ -20,6 +20,22 @@ class UTILITYTYPE(Enum):
     usage = 'usage'
 
 
+class UtilityModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    description: Optional[str] = None
+    imageSrc: Optional[str] = None
+    name: str
+    pricing: Optional[str] = None
+    type: List[UTILITYTYPE]
+    url: Optional[str] = None
+    field_id: str = Field(..., alias='_id')
+    created: datetime
+    isFixture: Optional[bool] = None
+    beforeCreate: None = None
+
+
 class VendorModel(BaseModel):
     model_config = ConfigDict(
         extra='forbid',

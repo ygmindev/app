@@ -15,7 +15,6 @@ import {
 } from '@tool/task/generate/utils/schemaGenerate/_schemaGenerate.models';
 import { type JSONSchema7 } from 'json-schema';
 import { type EditResult, modify, type Node, parse, parseTree } from 'jsonc-parser';
-import snakeCase from 'lodash/snakeCase';
 import { createGenerator } from 'ts-json-schema-generator';
 
 export const _schemaGenerate = async ({
@@ -26,21 +25,13 @@ export const _schemaGenerate = async ({
 }: _SchemaGenerateParamsModel): Promise<_SchemaGenerateModel> => {
   const paths = fromGlobs(sources, { isAbsolute: true, root: fromDirname });
 
-  const refs: Record<
-    string,
-    {
-      basePathname: string;
-      jsonPathname: string;
-      pyPathname: string;
-      schema: JSONSchema7;
-    }
-  > = {};
+  const refs: Record<string, { basePathname: string; jsonPathname: string; schema: JSONSchema7 }> =
+    {};
 
   for (const basePathname of paths) {
     const { dirname, main } = fileInfo(basePathname);
     const outDirname = toDirname ? dirname.replace(fromDirname, toDirname) : dirname;
     const jsonPathname = joinPaths([outDirname, main], { extension: 'json' });
-    const pyPathname = joinPaths([outDirname, snakeCase(main)], { extension: 'py' });
     const type = `${main}Model`;
     const schema = createGenerator({
       encodeRefs: false,
@@ -54,7 +45,6 @@ export const _schemaGenerate = async ({
     refs[`${main}Model`] = {
       basePathname,
       jsonPathname,
-      pyPathname,
       schema,
     };
   }
@@ -150,8 +140,9 @@ export const _schemaGenerate = async ({
     .join(',');
 
   const scriptPathname = fromPackages(
-    'tool-task-py/src/tool_task/generate/utils/schemaGenerate/schemaGenerate.py',
+    'lib-model-py/src/lib_model/generate/utils/schemaGenerate/schemaGenerate.py',
   );
+
   await execute({
     command: `poetry run python ${scriptPathname} --source ${schemas}`,
     root: fromPackages('lib-model-py'),

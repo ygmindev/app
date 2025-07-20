@@ -8,11 +8,11 @@ from pydantic import BaseModel, ConfigDict, Field, RootModel
 
 from ...auth.Access import Access as Access_1
 from ...auth.Role import Role as Role_1
-from ...chat.Chat import Chat
-from ...chat.Message import Message
+from ...chat.Chat import Chat as Chat_1
+from ...chat.Message import Message as Message_1
 from ...user.User import User as User_1
-from ..Bank import Bank
-from ..PaymentMethod import PaymentMethod
+from ..Bank import Bank as Bank_1
+from ..PaymentMethod import PaymentMethod as PaymentMethod_1
 
 
 class ACCESSROLE(Enum):
@@ -60,6 +60,19 @@ class CARDFUNDING(Enum):
     debit = 'debit'
 
 
+class MessageModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    chat: RefModelChatModel
+    text: Optional[str] = None
+    createdBy: Optional[RefModelUserModel] = None
+    field_id: str = Field(..., alias='_id')
+    created: datetime
+    isFixture: Optional[bool] = None
+    beforeCreate: None = None
+
+
 class RefModelLinkedUserModel(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
@@ -72,8 +85,20 @@ class RefModelLinkedUserModel(BaseModel):
     type: Literal['stripe'] = 'stripe'
 
 
-class CollectionModelPaymentMethodModel(RootModel[List[PaymentMethod.PaymentMethodModel]]):
-    root: List[PaymentMethod.PaymentMethodModel]
+class PaymentMethodModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    externalId: str
+    fingerprint: str
+    isPrimary: Optional[bool] = None
+    last4: str
+    name: str
+    type: PAYMENTMETHODTYPE
+    field_id: str = Field(..., alias='_id')
+    created: datetime
+    isFixture: Optional[bool] = None
+    beforeCreate: None = None
 
 
 class Model(RootModel[CardModel]):
@@ -99,6 +124,42 @@ class CardModel(BaseModel):
     beforeCreate: None = None
 
 
+class UserModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    Access: Optional[List[Access_1.AccessModel]] = None
+    Bank: Optional[List[Bank_1.BankModel]] = None
+    Card: Optional[List[CardModel]] = None
+    Chat: Optional[List[Chat_1.ChatModel]] = None
+    LinkedUser: Optional[List[RefModelLinkedUserModel]] = None
+    Message: Optional[List[Message_1.MessageModel]] = None
+    PaymentMethod: Optional[List[PaymentMethod_1.PaymentMethodModel]] = None
+    callingCode: Optional[str] = None
+    email: Optional[str] = None
+    first: Optional[str] = None
+    last: Optional[str] = None
+    paymentMethodPrimary: Optional[RefModelPaymentMethodModel] = None
+    phone: Optional[str] = None
+    field_id: str = Field(..., alias='_id')
+    created: datetime
+    isFixture: Optional[bool] = None
+    beforeCreate: None = None
+
+
+class AccessModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    Group: Optional[RefModelGroupModel] = None
+    Role: List[ACCESSROLE]
+    User: RefModelUserModel
+    field_id: str = Field(..., alias='_id')
+    created: datetime
+    isFixture: Optional[bool] = None
+    beforeCreate: None = None
+
+
 class RefModelGroupModel(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
@@ -114,23 +175,51 @@ class RefModelGroupModel(BaseModel):
     types: Optional[List[Any]] = None
 
 
-class CollectionModelBankModel(RootModel[List[Bank.BankModel]]):
-    root: List[Bank.BankModel]
+class RoleModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    Group: Optional[RefModelGroupModel] = None
+    name: Optional[str] = None
+    field_id: str = Field(..., alias='_id')
+    created: datetime
+    isFixture: Optional[bool] = None
+    beforeCreate: None = None
 
 
-class CollectionModelCardModel(RootModel[List[CardModel]]):
-    root: List[CardModel]
+class BankModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    User: List[User_1.UserModel]
+    externalId: str
+    fingerprint: str
+    isPrimary: Optional[bool] = None
+    last4: str
+    name: str
+    field_id: str = Field(..., alias='_id')
+    created: datetime
+    isFixture: Optional[bool] = None
+    beforeCreate: None = None
 
 
-class CollectionModelChatModel(RootModel[List[Chat.ChatModel]]):
-    root: List[Chat.ChatModel]
-
-
-class CollectionModelMessageModel(RootModel[List[Message.MessageModel]]):
-    root: List[Message.MessageModel]
+class ChatModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    messsages: Optional[List[Message_1.MessageModel]] = None
+    name: Optional[str] = None
+    participants: Optional[List[User_1.UserModel]] = None
+    createdBy: Optional[RefModelUserModel] = None
+    field_id: str = Field(..., alias='_id')
+    created: datetime
+    isFixture: Optional[bool] = None
+    beforeCreate: None = None
 
 
 Model.model_rebuild()
 CardModel.model_rebuild()
+UserModel.model_rebuild()
+AccessModel.model_rebuild()
 RefModelGroupModel.model_rebuild()
-CollectionModelBankModel.model_rebuild()
+ChatModel.model_rebuild()

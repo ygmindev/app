@@ -11,6 +11,7 @@ const schemaGenerate: TaskParamsModel<SchemaGenerateParamsModel> = {
   task: [
     async () =>
       runClean({
+        excludes: ['generate'],
         patterns: ['*'],
         root: fromPackages('lib-model-py/src/lib_model'),
       }),

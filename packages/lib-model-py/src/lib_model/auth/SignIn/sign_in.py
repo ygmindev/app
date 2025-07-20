@@ -11,13 +11,21 @@ from ...billing.Card import Card as Card_1
 from ...billing.PaymentMethod import PaymentMethod as PaymentMethod_1
 from ...chat.Chat import Chat as Chat_1
 from ...chat.Message import Message as Message_1
-from ...user.User import User as User_1
+from ...user.User import User as User_2
+from ..Access import Access as Access_1
 from ..Role import Role as Role_1
 
 
 class ACCESSROLE(Enum):
     Admin = 'Admin'
     User = 'User'
+
+
+class RefModelUserModel(BaseModel):
+    pass
+    model_config = ConfigDict(
+        extra='forbid',
+    )
 
 
 class CARDFUNDING(Enum):
@@ -53,6 +61,19 @@ class RefModelPaymentMethodModel(BaseModel):
     type: Optional[PAYMENTMETHODTYPE] = None
 
 
+class MessageModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    chat: RefModelChatModel
+    text: Optional[str] = None
+    createdBy: Optional[RefModelUserModel] = None
+    field_id: str = Field(..., alias='_id')
+    created: datetime
+    isFixture: Optional[bool] = None
+    beforeCreate: None = None
+
+
 class RefModelLinkedUserModel(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
@@ -81,8 +102,40 @@ class PaymentMethodModel(BaseModel):
     beforeCreate: None = None
 
 
-class Model(RootModel[AccessModel]):
-    root: AccessModel
+class Model(RootModel[SignInModel]):
+    root: SignInModel
+
+
+class User(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    field_id: Optional[str] = Field(None, alias='_id')
+    created: Optional[datetime] = None
+    isFixture: Optional[bool] = None
+    beforeCreate: None = None
+    Access: Optional[List[Access_1.AccessModel]] = None
+    Bank: Optional[List[Bank_1.BankModel]] = None
+    Card: Optional[List[Card_1.CardModel]] = None
+    Chat: Optional[List[Chat_1.ChatModel]] = None
+    LinkedUser: Optional[List[RefModelLinkedUserModel]] = None
+    Message: Optional[List[Message_1.MessageModel]] = None
+    PaymentMethod: Optional[List[PaymentMethod_1.PaymentMethodModel]] = None
+    callingCode: Optional[str] = None
+    email: Optional[str] = None
+    first: Optional[str] = None
+    last: Optional[str] = None
+    paymentMethodPrimary: Optional[RefModelPaymentMethodModel] = None
+    phone: Optional[str] = None
+
+
+class SignInModel(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    isNew: Optional[bool] = None
+    token: Optional[str] = None
+    user: User
 
 
 class AccessModel(BaseModel):
@@ -106,7 +159,7 @@ class RefModelGroupModel(BaseModel):
     created: Optional[datetime] = None
     isFixture: Optional[bool] = None
     beforeCreate: None = None
-    Access: Optional[List[AccessModel]] = None
+    Access: Optional[List[Access_1.AccessModel]] = None
     Role: Optional[List[Role_1.RoleModel]] = None
     logo: Optional[str] = None
     name: Optional[str] = None
@@ -125,34 +178,11 @@ class RoleModel(BaseModel):
     beforeCreate: None = None
 
 
-class RefModelUserModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    field_id: Optional[str] = Field(None, alias='_id')
-    created: Optional[datetime] = None
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-    Access: Optional[List[AccessModel]] = None
-    Bank: Optional[List[Bank_1.BankModel]] = None
-    Card: Optional[List[Card_1.CardModel]] = None
-    Chat: Optional[List[Chat_1.ChatModel]] = None
-    LinkedUser: Optional[List[RefModelLinkedUserModel]] = None
-    Message: Optional[List[Message_1.MessageModel]] = None
-    PaymentMethod: Optional[List[PaymentMethod_1.PaymentMethodModel]] = None
-    callingCode: Optional[str] = None
-    email: Optional[str] = None
-    first: Optional[str] = None
-    last: Optional[str] = None
-    paymentMethodPrimary: Optional[RefModelPaymentMethodModel] = None
-    phone: Optional[str] = None
-
-
 class BankModel(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
     )
-    User: List[User_1.UserModel]
+    User: List[User_2.UserModel]
     externalId: str
     fingerprint: str
     isPrimary: Optional[bool] = None
@@ -168,7 +198,7 @@ class UserModel(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
     )
-    Access: Optional[List[AccessModel]] = None
+    Access: Optional[List[Access_1.AccessModel]] = None
     Bank: Optional[List[Bank_1.BankModel]] = None
     Card: Optional[List[Card_1.CardModel]] = None
     Chat: Optional[List[Chat_1.ChatModel]] = None
@@ -191,7 +221,7 @@ class CardModel(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
     )
-    User: Optional[List[User_1.UserModel]] = None
+    User: Optional[List[User_2.UserModel]] = None
     expMonth: float
     expYear: float
     externalId: str
@@ -212,20 +242,7 @@ class ChatModel(BaseModel):
     )
     messsages: Optional[List[Message_1.MessageModel]] = None
     name: Optional[str] = None
-    participants: Optional[List[User_1.UserModel]] = None
-    createdBy: Optional[RefModelUserModel] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class MessageModel(BaseModel):
-    model_config = ConfigDict(
-        extra='forbid',
-    )
-    chat: RefModelChatModel
-    text: Optional[str] = None
+    participants: Optional[List[User_2.UserModel]] = None
     createdBy: Optional[RefModelUserModel] = None
     field_id: str = Field(..., alias='_id')
     created: datetime
@@ -234,9 +251,9 @@ class MessageModel(BaseModel):
 
 
 Model.model_rebuild()
+User.model_rebuild()
 AccessModel.model_rebuild()
 RefModelGroupModel.model_rebuild()
-RefModelUserModel.model_rebuild()
 BankModel.model_rebuild()
 UserModel.model_rebuild()
 ChatModel.model_rebuild()
