@@ -1,76 +1,87 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$ref": "#/definitions/UserModel",
+  "$ref": "#/definitions/SignInModel",
   "definitions": {
-    "UserModel": {
+    "SignInModel": {
       "type": "object",
-      "additionalProperties": false,
       "properties": {
-        "Access": {
-          "$ref": "#/definitions/CollectionModel<AccessModel>"
-        },
-        "Bank": {
-          "$ref": "#/definitions/CollectionModel<BankModel>"
-        },
-        "Card": {
-          "$ref": "#/definitions/CollectionModel<CardModel>"
-        },
-        "Chat": {
-          "$ref": "#/definitions/CollectionModel<ChatModel>"
-        },
-        "LinkedUser": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RefModel<LinkedUserModel>"
-          }
-        },
-        "Message": {
-          "$ref": "#/definitions/CollectionModel<MessageModel>"
-        },
-        "PaymentMethod": {
-          "$ref": "#/definitions/CollectionModel<PaymentMethodModel>"
-        },
-        "callingCode": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "first": {
-          "type": "string"
-        },
-        "last": {
-          "type": "string"
-        },
-        "paymentMethodPrimary": {
-          "$ref": "#/definitions/RefModel<PaymentMethodModel>"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
+        "isNew": {
           "type": "boolean"
         },
-        "beforeCreate": {
-          "type": "null"
+        "token": {
+          "type": "string"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "created": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "isFixture": {
+              "type": "boolean"
+            },
+            "beforeCreate": {
+              "type": "null"
+            },
+            "Access": {
+              "$ref": "#/definitions/CollectionModel<AccessModel>"
+            },
+            "Bank": {
+              "$ref": "#/definitions/CollectionModel<BankModel>"
+            },
+            "Card": {
+              "$ref": "#/definitions/CollectionModel<CardModel>"
+            },
+            "Chat": {
+              "$ref": "#/definitions/CollectionModel<ChatModel>"
+            },
+            "LinkedUser": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RefModel<LinkedUserModel>"
+              }
+            },
+            "Message": {
+              "$ref": "#/definitions/CollectionModel<MessageModel>"
+            },
+            "PaymentMethod": {
+              "$ref": "#/definitions/CollectionModel<PaymentMethodModel>"
+            },
+            "callingCode": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "first": {
+              "type": "string"
+            },
+            "last": {
+              "type": "string"
+            },
+            "paymentMethodPrimary": {
+              "$ref": "#/definitions/RefModel<PaymentMethodModel>"
+            },
+            "phone": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "required": [
-        "_id",
-        "created"
-      ]
+        "user"
+      ],
+      "additionalProperties": false
     },
     "CollectionModel<AccessModel>": {
       "type": "array",
       "items": {
-        "$ref": "../../auth/Access/access.json#/definitions/AccessModel"
+        "$ref": "../Access/access.json#/definitions/AccessModel"
       }
     },
     "AccessModel": {
@@ -150,7 +161,7 @@
     "CollectionModel<RoleModel>": {
       "type": "array",
       "items": {
-        "$ref": "../../auth/Role/role.json#/definitions/RoleModel"
+        "$ref": "../Role/role.json#/definitions/RoleModel"
       }
     },
     "RoleModel": {
@@ -252,8 +263,73 @@
     "CollectionModel<UserModel>": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/UserModel"
+        "$ref": "../../user/User/user.json#/definitions/UserModel"
       }
+    },
+    "UserModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Access": {
+          "$ref": "#/definitions/CollectionModel<AccessModel>"
+        },
+        "Bank": {
+          "$ref": "#/definitions/CollectionModel<BankModel>"
+        },
+        "Card": {
+          "$ref": "#/definitions/CollectionModel<CardModel>"
+        },
+        "Chat": {
+          "$ref": "#/definitions/CollectionModel<ChatModel>"
+        },
+        "LinkedUser": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RefModel<LinkedUserModel>"
+          }
+        },
+        "Message": {
+          "$ref": "#/definitions/CollectionModel<MessageModel>"
+        },
+        "PaymentMethod": {
+          "$ref": "#/definitions/CollectionModel<PaymentMethodModel>"
+        },
+        "callingCode": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "paymentMethodPrimary": {
+          "$ref": "#/definitions/RefModel<PaymentMethodModel>"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "_id",
+        "created"
+      ]
     },
     "CollectionModel<CardModel>": {
       "type": "array",

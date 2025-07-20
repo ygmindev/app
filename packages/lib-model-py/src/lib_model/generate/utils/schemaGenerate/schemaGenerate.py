@@ -25,6 +25,7 @@ def main() -> None:
     sources = list(map(lambda s: Path(s.strip()), args.source.split(",")))
     _parser = JsonSchemaParser(
         sources,
+        capitalise_enum_members=True,
         collapse_root_models=True,
         data_model_type=data_model_types.data_model,
         data_model_root_type=data_model_types.root_model,
@@ -69,10 +70,7 @@ def main() -> None:
         pathname = from_packages("lib-model-py", *k)
         dirname, filename = os.path.split(pathname)
         filename, ext = os.path.splitext(filename)
-        filename = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", filename)
-        filename = re.sub(r"[-\s]+", "_", filename)
-        filename = filename.lower()
-        pathname = os.path.join(dirname, f"{filename}{ext}")
+        pathname = os.path.join(dirname, f"{filename}_models{ext}")
         Path(pathname).parent.mkdir(parents=True, exist_ok=True)
         Path(pathname).write_text(v.body, "utf-8")
 

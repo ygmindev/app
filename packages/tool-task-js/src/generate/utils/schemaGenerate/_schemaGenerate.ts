@@ -15,6 +15,7 @@ import {
 } from '@tool/task/generate/utils/schemaGenerate/_schemaGenerate.models';
 import { type JSONSchema7 } from 'json-schema';
 import { type EditResult, modify, type Node, parse, parseTree } from 'jsonc-parser';
+import snakeCase from 'lodash/snakeCase';
 import { createGenerator } from 'ts-json-schema-generator';
 
 export const _schemaGenerate = async ({
@@ -31,7 +32,13 @@ export const _schemaGenerate = async ({
   for (const basePathname of paths) {
     const { dirname, main } = fileInfo(basePathname);
     const outDirname = toDirname ? dirname.replace(fromDirname, toDirname) : dirname;
-    const jsonPathname = joinPaths([outDirname, main], { extension: 'json' });
+
+    const index = outDirname.lastIndexOf('/');
+
+    const jsonPathname = joinPaths(
+      [outDirname.slice(0, index), snakeCase(outDirname.slice(index + 1)), snakeCase(main)],
+      { extension: 'json' },
+    );
     const type = `${main}Model`;
     const schema = createGenerator({
       encodeRefs: false,

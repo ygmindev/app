@@ -1,0 +1,193 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/TestableEntityResourceModel",
+  "definitions": {
+    "TestableEntityResourceModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "embedded": {
+          "type": "array",
+          "items": {
+            "$ref": "../TestableEmbeddedResource/testable_embedded_resource.json#/definitions/TestableEmbeddedResourceModel"
+          }
+        },
+        "relatedManyToMany": {
+          "$ref": "#/definitions/CollectionModel<TestableRelatedResourceModel>"
+        },
+        "relatedOneToMany": {
+          "$ref": "#/definitions/CollectionModel<TestableRelatedResourceModel>"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "type": "string"
+        },
+        "index": {
+          "type": "number"
+        },
+        "number": {
+          "type": "number"
+        },
+        "string": {
+          "type": "string"
+        },
+        "stringArray": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stringOptional": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "group",
+        "index",
+        "string"
+      ]
+    },
+    "TestableEmbeddedResourceModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "type": "string"
+        },
+        "index": {
+          "type": "number"
+        },
+        "number": {
+          "type": "number"
+        },
+        "string": {
+          "type": "string"
+        },
+        "stringArray": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stringOptional": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "group",
+        "index",
+        "string"
+      ]
+    },
+    "CollectionModel<TestableRelatedResourceModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "../TestableRelatedResource/testable_related_resource.json#/definitions/TestableRelatedResourceModel"
+      }
+    },
+    "TestableRelatedResourceModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rootManyToMany": {
+          "$ref": "#/definitions/CollectionModel<TestableEntityResourceModel>"
+        },
+        "rootOneToMany": {
+          "$ref": "#/definitions/RefModel<TestableEntityResourceModel>"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "type": "string"
+        },
+        "index": {
+          "type": "number"
+        },
+        "number": {
+          "type": "number"
+        },
+        "string": {
+          "type": "string"
+        },
+        "stringArray": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stringOptional": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "_id",
+        "created",
+        "group",
+        "index",
+        "string"
+      ]
+    },
+    "CollectionModel<TestableEntityResourceModel>": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TestableEntityResourceModel"
+      }
+    },
+    "RefModel<TestableEntityResourceModel>": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

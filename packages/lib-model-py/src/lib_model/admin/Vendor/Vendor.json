@@ -38,7 +38,7 @@
     "CollectionModel<UtilityModel>": {
       "type": "array",
       "items": {
-        "$ref": "../Utility/Utility.json#/definitions/UtilityModel"
+        "$ref": "../Utility/utility.json#/definitions/UtilityModel"
       }
     },
     "UtilityModel": {
