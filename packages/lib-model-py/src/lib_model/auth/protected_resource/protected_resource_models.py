@@ -6,14 +6,14 @@ from typing import Any, List, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, RootModel
 
-from ...billing.Bank import bank as bank_1
-from ...billing.Card import card as card_1
-from ...billing.PaymentMethod import payment_method
-from ...chat.Chat import chat as chat_1
-from ...chat.Message import message
-from ...user.User import user
-from ..Access import access
-from ..Role import role
+from ...billing.bank import bank as bank_1
+from ...billing.card import card as card_1
+from ...billing.payment_method import payment_method
+from ...chat.chat import chat as chat_1
+from ...chat.message import message
+from ...user.user import user
+from ..access import access
+from ..role import role
 
 
 class ACCESSROLE(Enum):

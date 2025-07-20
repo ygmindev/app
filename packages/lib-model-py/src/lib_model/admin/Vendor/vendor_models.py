@@ -6,7 +6,7 @@ from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, RootModel
 
-from ..Utility import utility
+from ..utility import utility
 
 
 class UTILITYTYPE(Enum):

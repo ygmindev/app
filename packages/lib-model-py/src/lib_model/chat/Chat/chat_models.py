@@ -6,13 +6,13 @@ from typing import Any, List, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, RootModel
 
-from ...auth.Access import access
-from ...auth.Role import role
-from ...billing.Bank import bank as bank_1
-from ...billing.Card import card as card_1
-from ...billing.PaymentMethod import payment_method
-from ...user.User import user
-from ..Message import message
+from ...auth.access import access
+from ...auth.role import role
+from ...billing.bank import bank as bank_1
+from ...billing.card import card as card_1
+from ...billing.payment_method import payment_method
+from ...user.user import user
+from ..message import message
 
 
 class RefModelChatModel(BaseModel):

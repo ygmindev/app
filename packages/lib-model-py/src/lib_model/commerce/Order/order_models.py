@@ -6,7 +6,7 @@ from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, RootModel
 
-from ..ProductItem import product_item
+from ..product_item import product_item
 
 
 class ProductItemModel(BaseModel):

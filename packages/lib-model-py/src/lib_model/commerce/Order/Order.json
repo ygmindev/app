@@ -9,7 +9,7 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "../ProductItem/product_item.json#/definitions/ProductItemModel"
+            "$ref": "../product_item/product_item.json#/definitions/ProductItemModel"
           }
         },
         "paymentMethodId": {

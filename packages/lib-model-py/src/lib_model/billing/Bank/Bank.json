@@ -51,7 +51,7 @@
     "CollectionModel<UserModel>": {
       "type": "array",
       "items": {
-        "$ref": "../../user/User/user.json#/definitions/UserModel"
+        "$ref": "../../user/user/user.json#/definitions/UserModel"
       }
     },
     "UserModel": {
@@ -122,7 +122,7 @@
     "CollectionModel<AccessModel>": {
       "type": "array",
       "items": {
-        "$ref": "../../auth/Access/access.json#/definitions/AccessModel"
+        "$ref": "../../auth/access/access.json#/definitions/AccessModel"
       }
     },
     "AccessModel": {
@@ -202,7 +202,7 @@
     "CollectionModel<RoleModel>": {
       "type": "array",
       "items": {
-        "$ref": "../../auth/Role/role.json#/definitions/RoleModel"
+        "$ref": "../../auth/role/role.json#/definitions/RoleModel"
       }
     },
     "RoleModel": {
@@ -258,7 +258,7 @@
     "CollectionModel<CardModel>": {
       "type": "array",
       "items": {
-        "$ref": "../Card/card.json#/definitions/CardModel"
+        "$ref": "../card/card.json#/definitions/CardModel"
       }
     },
     "CardModel": {
@@ -328,7 +328,7 @@
     "CollectionModel<ChatModel>": {
       "type": "array",
       "items": {
-        "$ref": "../../chat/Chat/chat.json#/definitions/ChatModel"
+        "$ref": "../../chat/chat/chat.json#/definitions/ChatModel"
       }
     },
     "ChatModel": {
@@ -369,7 +369,7 @@
     "CollectionModel<MessageModel>": {
       "type": "array",
       "items": {
-        "$ref": "../../chat/Message/message.json#/definitions/MessageModel"
+        "$ref": "../../chat/message/message.json#/definitions/MessageModel"
       }
     },
     "MessageModel": {
@@ -441,7 +441,7 @@
     "CollectionModel<PaymentMethodModel>": {
       "type": "array",
       "items": {
-        "$ref": "../PaymentMethod/payment_method.json#/definitions/PaymentMethodModel"
+        "$ref": "../payment_method/payment_method.json#/definitions/PaymentMethodModel"
       }
     },
     "PaymentMethodModel": {

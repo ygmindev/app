@@ -5,8 +5,8 @@ from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, RootModel
 
-from ..TestableEmbeddedResource import testable_embedded_resource
-from ..TestableEntityResource import testable_entity_resource
+from ..testable_embedded_resource import testable_embedded_resource
+from ..testable_entity_resource import testable_entity_resource
 
 
 class TestableEmbeddedResourceModel(BaseModel):
