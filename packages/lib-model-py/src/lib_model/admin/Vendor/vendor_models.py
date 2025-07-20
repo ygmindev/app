@@ -22,7 +22,7 @@ class UTILITYTYPE(Enum):
 
 class UtilityModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     description: Optional[str] = None
     imageSrc: Optional[str] = None
@@ -36,11 +36,15 @@ class UtilityModel(BaseModel):
     beforeCreate: None = None
 
 
+class CollectionModelUtilityModel(RootModel[List[utility.UtilityModel]]):
+    root: List[utility.UtilityModel]
+
+
 class VendorModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
-    Utility: Optional[List[utility.UtilityModel]] = None
+    Utility: Optional[CollectionModelUtilityModel] = None
     imageSrc: Optional[str] = None
     name: str
     field_id: str = Field(..., alias='_id')

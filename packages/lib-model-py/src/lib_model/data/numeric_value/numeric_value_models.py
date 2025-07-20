@@ -16,7 +16,7 @@ class NUMERICUNIT(Enum):
 
 class NumericValueModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     unit: Optional[NUMERICUNIT] = None
     value: float

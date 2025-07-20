@@ -8,7 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field, RootModel
 
 class SnapshotModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     images: Optional[List[str]] = None
     name: str

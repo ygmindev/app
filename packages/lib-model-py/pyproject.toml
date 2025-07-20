@@ -28,7 +28,7 @@ packages = [{ include = "*", from = "src" }]
 [tool.poetry.dependencies]
 lib_config = {path="../lib-config-py", develop=true}
 lib_shared = {path="../lib-shared-py", develop=true}
-python = "3.12.5"
+python = "3.12.6"
 numpy = "1.26.4"
 pydash = "^8.0.4"
 datamodel-code-generator = "^0.31.2"

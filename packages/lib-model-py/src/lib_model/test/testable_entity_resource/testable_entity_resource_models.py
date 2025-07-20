@@ -11,7 +11,7 @@ from ..testable_related_resource import testable_related_resource
 
 class TestableEmbeddedResourceModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     date: Optional[datetime] = None
     group: str
@@ -29,7 +29,7 @@ class TestableEmbeddedResourceModel(BaseModel):
 class RefModelTestableEntityResourceModel(BaseModel):
     pass
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
 
 
@@ -39,17 +39,13 @@ class Model(RootModel[TestableEntityResourceModel]):
 
 class TestableEntityResourceModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     embedded: Optional[
         List[testable_embedded_resource.TestableEmbeddedResourceModel]
     ] = None
-    relatedManyToMany: Optional[
-        List[testable_related_resource.TestableRelatedResourceModel]
-    ] = None
-    relatedOneToMany: Optional[
-        List[testable_related_resource.TestableRelatedResourceModel]
-    ] = None
+    relatedManyToMany: Optional[CollectionModelTestableRelatedResourceModel] = None
+    relatedOneToMany: Optional[CollectionModelTestableRelatedResourceModel] = None
     date: Optional[datetime] = None
     group: str
     index: float
@@ -63,11 +59,17 @@ class TestableEntityResourceModel(BaseModel):
     beforeCreate: None = None
 
 
+class CollectionModelTestableRelatedResourceModel(
+    RootModel[List[testable_related_resource.TestableRelatedResourceModel]]
+):
+    root: List[testable_related_resource.TestableRelatedResourceModel]
+
+
 class TestableRelatedResourceModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
-    rootManyToMany: Optional[List[TestableEntityResourceModel]] = None
+    rootManyToMany: Optional[CollectionModelTestableEntityResourceModel] = None
     rootOneToMany: Optional[RefModelTestableEntityResourceModel] = None
     date: Optional[datetime] = None
     group: str
@@ -80,6 +82,12 @@ class TestableRelatedResourceModel(BaseModel):
     created: datetime
     isFixture: Optional[bool] = None
     beforeCreate: None = None
+
+
+class CollectionModelTestableEntityResourceModel(
+    RootModel[List[TestableEntityResourceModel]]
+):
+    root: List[TestableEntityResourceModel]
 
 
 Model.model_rebuild()

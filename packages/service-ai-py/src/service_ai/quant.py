@@ -13,5 +13,9 @@ bond = FixedRateBond(
     settlement_days=2,
 )
 
-yld = bond.yield_from_price(price=BondPrice(value=100.0), as_of_date=datetime.date.today(),)
+yld = bond.yield_from_price(
+    price=BondPrice(value=100.0),
+    as_of_date=datetime.date.today(),
+)
+
 print(yld)

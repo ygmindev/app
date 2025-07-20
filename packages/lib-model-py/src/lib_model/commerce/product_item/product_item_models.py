@@ -7,7 +7,7 @@ from pydantic import BaseModel, ConfigDict, RootModel
 
 class ProductItemModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     imageSrc: Optional[str] = None
     name: str

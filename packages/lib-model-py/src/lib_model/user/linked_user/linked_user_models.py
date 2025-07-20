@@ -6,12 +6,16 @@ from typing import Literal, Optional
 from pydantic import BaseModel, ConfigDict, Field, RootModel
 
 
+class LINKEDUSERTYPE(RootModel[Literal['stripe']]):
+    root: Literal['stripe']
+
+
 class LinkedUserModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     externalId: str
-    type: Literal['stripe']
+    type: LINKEDUSERTYPE
     field_id: str = Field(..., alias='_id')
     created: datetime
     isFixture: Optional[bool] = None

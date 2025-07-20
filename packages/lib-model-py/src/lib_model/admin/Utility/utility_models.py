@@ -20,7 +20,7 @@ class UTILITYTYPE(Enum):
 
 class UtilityModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     description: Optional[str] = None
     imageSrc: Optional[str] = None

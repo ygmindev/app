@@ -9,13 +9,17 @@ from pydantic import BaseModel, ConfigDict, Field, RootModel
 class RefModelPricingModel(BaseModel):
     pass
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
+
+
+class PRICINGFREQUENCY(RootModel[Literal['recurring']]):
+    root: Literal['recurring']
 
 
 class RefModelProductModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     field_id: Optional[str] = Field(None, alias='_id')
     created: Optional[datetime] = None
@@ -29,11 +33,11 @@ class RefModelProductModel(BaseModel):
 
 class PricingModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     Product: RefModelProductModel
     currency: Optional[str] = None
-    frequency: Literal['recurring'] = 'recurring'
+    frequency: Optional[PRICINGFREQUENCY] = None
     price: Optional[float] = None
     field_id: str = Field(..., alias='_id')
     created: datetime

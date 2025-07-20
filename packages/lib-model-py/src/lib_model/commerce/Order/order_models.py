@@ -11,7 +11,7 @@ from ..product_item import product_item
 
 class ProductItemModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     imageSrc: Optional[str] = None
     name: str
@@ -29,7 +29,7 @@ class ORDERSTATUS(Enum):
 
 class OrderModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     items: Optional[List[product_item.ProductItemModel]] = None
     paymentMethodId: Optional[str] = None

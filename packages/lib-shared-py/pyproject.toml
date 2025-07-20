@@ -26,7 +26,7 @@ authors = ["YG Min <ygmindev@gmail.com>"]
 packages = [{ include = "*", from = "src" }]
 
 [tool.poetry.dependencies]
-python = "3.12.5"
+python = "3.12.6"
 numpy = "1.26.4"
 pydash = "^8.0.4"
 

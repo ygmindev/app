@@ -14,7 +14,7 @@ class PAYMENTMETHODTYPE(Enum):
 
 class PaymentMethodModel(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra='allow',
     )
     externalId: str
     fingerprint: str
