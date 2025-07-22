@@ -5,6 +5,8 @@ from lib_quant.pricing.utils.bond_price import BondPrice
 from lib_quant.pricing.utils.bond_yield import BondYield
 from lib_quant.security.credit.bond.fixed_rate_bond import FixedRateBond
 
+# 4cacf5310e674dc617b8152061d223af
+
 bond = FixedRateBond(
     issue_date=datetime.date(2022, 1, 1),
     maturity_date=datetime.date(2030, 1, 1),
@@ -20,10 +22,8 @@ yld = bond.yield_from_price(
 )
 print(yld)
 
-
 price = bond.price_from_yield(
     yld=BondYield(value=yld),
     as_of_date=datetime.date.today(),
 )
-
 print(price)
