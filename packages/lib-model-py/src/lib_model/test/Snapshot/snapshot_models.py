@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel
+from pydantic import BaseModel, ConfigDict, RootModel
 
 
 class SnapshotModel(BaseModel):
@@ -12,7 +12,7 @@ class SnapshotModel(BaseModel):
     )
     images: Optional[List[str]] = None
     name: str
-    field_id: str = Field(..., alias='_id')
+    field_id: str
     created: datetime
     isFixture: Optional[bool] = None
     beforeCreate: None = None

@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Literal, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel
+from pydantic import BaseModel, ConfigDict, RootModel
 
 
 class RefModelPricingModel(BaseModel):
@@ -13,15 +13,11 @@ class RefModelPricingModel(BaseModel):
     )
 
 
-class PRICINGFREQUENCY(RootModel[Literal['recurring']]):
-    root: Literal['recurring']
-
-
 class RefModelProductModel(BaseModel):
     model_config = ConfigDict(
         extra='allow',
     )
-    field_id: Optional[str] = Field(None, alias='_id')
+    field_id: Optional[str] = None
     created: Optional[datetime] = None
     isFixture: Optional[bool] = None
     beforeCreate: None = None
@@ -37,9 +33,9 @@ class PricingModel(BaseModel):
     )
     Product: RefModelProductModel
     currency: Optional[str] = None
-    frequency: Optional[PRICINGFREQUENCY] = None
+    frequency: Literal['recurring'] = 'recurring'
     price: Optional[float] = None
-    field_id: str = Field(..., alias='_id')
+    field_id: str
     created: datetime
     isFixture: Optional[bool] = None
     beforeCreate: None = None

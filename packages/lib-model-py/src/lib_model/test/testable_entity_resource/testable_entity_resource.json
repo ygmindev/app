@@ -65,119 +65,11 @@
         "string"
       ]
     },
-    "TestableEmbeddedResourceModel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "type": "string"
-        },
-        "index": {
-          "type": "number"
-        },
-        "number": {
-          "type": "number"
-        },
-        "string": {
-          "type": "string"
-        },
-        "stringArray": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "stringOptional": {
-          "type": "string"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
-          "type": "boolean"
-        },
-        "beforeCreate": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "_id",
-        "created",
-        "group",
-        "index",
-        "string"
-      ]
-    },
     "CollectionModel<TestableRelatedResourceModel>": {
       "type": "array",
       "items": {
         "$ref": "../testable_related_resource/testable_related_resource.json#/definitions/TestableRelatedResourceModel"
       }
-    },
-    "TestableRelatedResourceModel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "rootManyToMany": {
-          "$ref": "#/definitions/CollectionModel<TestableEntityResourceModel>"
-        },
-        "rootOneToMany": {
-          "$ref": "#/definitions/RefModel<TestableEntityResourceModel>"
-        },
-        "date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "group": {
-          "type": "string"
-        },
-        "index": {
-          "type": "number"
-        },
-        "number": {
-          "type": "number"
-        },
-        "string": {
-          "type": "string"
-        },
-        "stringArray": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "stringOptional": {
-          "type": "string"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
-          "type": "boolean"
-        },
-        "beforeCreate": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "_id",
-        "created",
-        "group",
-        "index",
-        "string"
-      ]
     },
     "CollectionModel<TestableEntityResourceModel>": {
       "type": "array",

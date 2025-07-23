@@ -37,35 +37,6 @@
         "created"
       ]
     },
-    "ProductItemModel": {
-      "type": "object",
-      "properties": {
-        "imageSrc": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "price": {
-          "type": "number"
-        },
-        "pricingId": {
-          "type": "string"
-        },
-        "productId": {
-          "type": "string"
-        },
-        "quantity": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "name",
-        "pricingId",
-        "productId"
-      ],
-      "additionalProperties": false
-    },
     "ORDER_STATUS": {
       "type": "string",
       "enum": [

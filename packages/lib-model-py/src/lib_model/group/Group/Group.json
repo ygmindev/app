@@ -50,43 +50,6 @@
         "$ref": "../../auth/access/access.json#/definitions/AccessModel"
       }
     },
-    "AccessModel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Group": {
-          "$ref": "#/definitions/RefModel<GroupModel>"
-        },
-        "Role": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ACCESS_ROLE"
-          }
-        },
-        "User": {
-          "$ref": "#/definitions/RefModel<UserModel>"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
-          "type": "boolean"
-        },
-        "beforeCreate": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "Role",
-        "User",
-        "_id",
-        "created"
-      ]
-    },
     "RefModel<GroupModel>": {
       "type": "object",
       "additionalProperties": false
@@ -165,185 +128,17 @@
         "$ref": "../../billing/bank/bank.json#/definitions/BankModel"
       }
     },
-    "BankModel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "User": {
-          "$ref": "#/definitions/CollectionModel<UserModel>"
-        },
-        "externalId": {
-          "type": "string"
-        },
-        "fingerprint": {
-          "type": "string"
-        },
-        "isPrimary": {
-          "type": "boolean"
-        },
-        "last4": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
-          "type": "boolean"
-        },
-        "beforeCreate": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "User",
-        "_id",
-        "created",
-        "externalId",
-        "fingerprint",
-        "last4",
-        "name"
-      ]
-    },
     "CollectionModel<UserModel>": {
       "type": "array",
       "items": {
         "$ref": "../../user/user/user.json#/definitions/UserModel"
       }
     },
-    "UserModel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Access": {
-          "$ref": "#/definitions/CollectionModel<AccessModel>"
-        },
-        "Bank": {
-          "$ref": "#/definitions/CollectionModel<BankModel>"
-        },
-        "Card": {
-          "$ref": "#/definitions/CollectionModel<CardModel>"
-        },
-        "Chat": {
-          "$ref": "#/definitions/CollectionModel<ChatModel>"
-        },
-        "LinkedUser": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RefModel<LinkedUserModel>"
-          }
-        },
-        "Message": {
-          "$ref": "#/definitions/CollectionModel<MessageModel>"
-        },
-        "PaymentMethod": {
-          "$ref": "#/definitions/CollectionModel<PaymentMethodModel>"
-        },
-        "callingCode": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "first": {
-          "type": "string"
-        },
-        "last": {
-          "type": "string"
-        },
-        "paymentMethodPrimary": {
-          "$ref": "#/definitions/RefModel<PaymentMethodModel>"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
-          "type": "boolean"
-        },
-        "beforeCreate": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "_id",
-        "created"
-      ]
-    },
     "CollectionModel<CardModel>": {
       "type": "array",
       "items": {
         "$ref": "../../billing/card/card.json#/definitions/CardModel"
       }
-    },
-    "CardModel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "User": {
-          "$ref": "#/definitions/CollectionModel<UserModel>"
-        },
-        "expMonth": {
-          "type": "number"
-        },
-        "expYear": {
-          "type": "number"
-        },
-        "externalId": {
-          "type": "string"
-        },
-        "fingerprint": {
-          "type": "string"
-        },
-        "funding": {
-          "$ref": "#/definitions/CARD_FUNDING"
-        },
-        "isPrimary": {
-          "type": "boolean"
-        },
-        "last4": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
-          "type": "boolean"
-        },
-        "beforeCreate": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "_id",
-        "created",
-        "expMonth",
-        "expYear",
-        "externalId",
-        "fingerprint",
-        "funding",
-        "last4",
-        "name"
-      ]
     },
     "CARD_FUNDING": {
       "type": "string",
@@ -358,79 +153,11 @@
         "$ref": "../../chat/chat/chat.json#/definitions/ChatModel"
       }
     },
-    "ChatModel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "messsages": {
-          "$ref": "#/definitions/CollectionModel<MessageModel>"
-        },
-        "name": {
-          "type": "string"
-        },
-        "participants": {
-          "$ref": "#/definitions/CollectionModel<UserModel>"
-        },
-        "createdBy": {
-          "$ref": "#/definitions/RefModel<UserModel>"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
-          "type": "boolean"
-        },
-        "beforeCreate": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "_id",
-        "created"
-      ]
-    },
     "CollectionModel<MessageModel>": {
       "type": "array",
       "items": {
         "$ref": "../../chat/message/message.json#/definitions/MessageModel"
       }
-    },
-    "MessageModel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "chat": {
-          "$ref": "#/definitions/RefModel<ChatModel>"
-        },
-        "text": {
-          "type": "string"
-        },
-        "createdBy": {
-          "$ref": "#/definitions/RefModel<UserModel>"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
-          "type": "boolean"
-        },
-        "beforeCreate": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "_id",
-        "chat",
-        "created"
-      ]
     },
     "RefModel<ChatModel>": {
       "type": "object",
@@ -470,52 +197,6 @@
       "items": {
         "$ref": "../../billing/payment_method/payment_method.json#/definitions/PaymentMethodModel"
       }
-    },
-    "PaymentMethodModel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "externalId": {
-          "type": "string"
-        },
-        "fingerprint": {
-          "type": "string"
-        },
-        "isPrimary": {
-          "type": "boolean"
-        },
-        "last4": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/PAYMENT_METHOD_TYPE"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
-          "type": "boolean"
-        },
-        "beforeCreate": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "_id",
-        "created",
-        "externalId",
-        "fingerprint",
-        "last4",
-        "name",
-        "type"
-      ]
     },
     "PAYMENT_METHOD_TYPE": {
       "type": "string",
@@ -566,35 +247,6 @@
       "items": {
         "$ref": "../../auth/role/role.json#/definitions/RoleModel"
       }
-    },
-    "RoleModel": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Group": {
-          "$ref": "#/definitions/RefModel<GroupModel>"
-        },
-        "name": {
-          "type": "string"
-        },
-        "_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "isFixture": {
-          "type": "boolean"
-        },
-        "beforeCreate": {
-          "type": "null"
-        }
-      },
-      "required": [
-        "_id",
-        "created"
-      ]
     },
     "GROUP_TYPE": {
       "type": [],

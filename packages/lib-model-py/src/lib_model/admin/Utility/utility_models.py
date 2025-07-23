@@ -4,7 +4,7 @@ from datetime import datetime
 from enum import Enum
 from typing import List, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel
+from pydantic import BaseModel, ConfigDict, RootModel
 
 
 class UTILITYTYPE(Enum):
@@ -28,7 +28,7 @@ class UtilityModel(BaseModel):
     pricing: Optional[str] = None
     type: List[UTILITYTYPE]
     url: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
+    field_id: str
     created: datetime
     isFixture: Optional[bool] = None
     beforeCreate: None = None

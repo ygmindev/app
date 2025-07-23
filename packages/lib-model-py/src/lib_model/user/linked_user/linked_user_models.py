@@ -3,11 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Literal, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel
-
-
-class LINKEDUSERTYPE(RootModel[Literal['stripe']]):
-    root: Literal['stripe']
+from pydantic import BaseModel, ConfigDict, RootModel
 
 
 class LinkedUserModel(BaseModel):
@@ -15,8 +11,8 @@ class LinkedUserModel(BaseModel):
         extra='allow',
     )
     externalId: str
-    type: LINKEDUSERTYPE
-    field_id: str = Field(..., alias='_id')
+    type: Literal['stripe']
+    field_id: str
     created: datetime
     isFixture: Optional[bool] = None
     beforeCreate: None = None

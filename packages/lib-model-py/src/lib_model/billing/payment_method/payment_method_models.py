@@ -4,7 +4,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel
+from pydantic import BaseModel, ConfigDict, RootModel
 
 
 class PAYMENTMETHODTYPE(Enum):
@@ -22,7 +22,7 @@ class PaymentMethodModel(BaseModel):
     last4: str
     name: str
     type: PAYMENTMETHODTYPE
-    field_id: str = Field(..., alias='_id')
+    field_id: str
     created: datetime
     isFixture: Optional[bool] = None
     beforeCreate: None = None

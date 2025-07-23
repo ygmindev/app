@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel
+from pydantic import BaseModel, ConfigDict, RootModel
 
 
 class TestableResourceModel(BaseModel):
@@ -17,7 +17,7 @@ class TestableResourceModel(BaseModel):
     string: str
     stringArray: Optional[List[str]] = None
     stringOptional: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
+    field_id: str
     created: datetime
     isFixture: Optional[bool] = None
     beforeCreate: None = None

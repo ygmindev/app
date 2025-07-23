@@ -4,7 +4,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, List, Literal, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel
+from pydantic import BaseModel, ConfigDict, RootModel
 
 from ...auth.access import access
 from ...auth.role import role
@@ -22,10 +22,6 @@ class RefModelChatModel(BaseModel):
     )
 
 
-class GROUPTYPE(RootModel[Any]):
-    root: Any
-
-
 class ACCESSROLE(Enum):
     Admin = 'Admin'
     User = 'User'
@@ -34,10 +30,6 @@ class ACCESSROLE(Enum):
 class CARDFUNDING(Enum):
     credit = 'credit'
     debit = 'debit'
-
-
-class LINKEDUSERTYPE(RootModel[Literal['stripe']]):
-    root: Literal['stripe']
 
 
 class PAYMENTMETHODTYPE(Enum):
@@ -49,7 +41,7 @@ class RefModelPaymentMethodModel(BaseModel):
     model_config = ConfigDict(
         extra='allow',
     )
-    field_id: Optional[str] = Field(None, alias='_id')
+    field_id: Optional[str] = None
     created: Optional[datetime] = None
     isFixture: Optional[bool] = None
     beforeCreate: None = None
@@ -65,34 +57,12 @@ class RefModelLinkedUserModel(BaseModel):
     model_config = ConfigDict(
         extra='allow',
     )
-    field_id: Optional[str] = Field(None, alias='_id')
+    field_id: Optional[str] = None
     created: Optional[datetime] = None
     isFixture: Optional[bool] = None
     beforeCreate: None = None
     externalId: Optional[str] = None
-    type: Optional[LINKEDUSERTYPE] = None
-
-
-class PaymentMethodModel(BaseModel):
-    model_config = ConfigDict(
-        extra='allow',
-    )
-    externalId: str
-    fingerprint: str
-    isPrimary: Optional[bool] = None
-    last4: str
-    name: str
-    type: PAYMENTMETHODTYPE
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class CollectionModelPaymentMethodModel(
-    RootModel[List[payment_method.PaymentMethodModel]]
-):
-    root: List[payment_method.PaymentMethodModel]
+    type: Literal['stripe'] = 'stripe'
 
 
 class Model(RootModel[ChatModel]):
@@ -103,28 +73,11 @@ class ChatModel(BaseModel):
     model_config = ConfigDict(
         extra='allow',
     )
-    messsages: Optional[CollectionModelMessageModel] = None
+    messsages: Optional[List[message.MessageModel]] = None
     name: Optional[str] = None
-    participants: Optional[CollectionModelUserModel] = None
+    participants: Optional[List[user.UserModel]] = None
     createdBy: Optional[RefModelUserModel] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class CollectionModelMessageModel(RootModel[List[message.MessageModel]]):
-    root: List[message.MessageModel]
-
-
-class MessageModel(BaseModel):
-    model_config = ConfigDict(
-        extra='allow',
-    )
-    chat: RefModelChatModel
-    text: Optional[str] = None
-    createdBy: Optional[RefModelUserModel] = None
-    field_id: str = Field(..., alias='_id')
+    field_id: str
     created: datetime
     isFixture: Optional[bool] = None
     beforeCreate: None = None
@@ -134,156 +87,41 @@ class RefModelUserModel(BaseModel):
     model_config = ConfigDict(
         extra='allow',
     )
-    field_id: Optional[str] = Field(None, alias='_id')
+    field_id: Optional[str] = None
     created: Optional[datetime] = None
     isFixture: Optional[bool] = None
     beforeCreate: None = None
-    Access: Optional[CollectionModelAccessModel] = None
-    Bank: Optional[CollectionModelBankModel] = None
-    Card: Optional[CollectionModelCardModel] = None
-    Chat: Optional[CollectionModelChatModel] = None
+    Access: Optional[List[access.AccessModel]] = None
+    Bank: Optional[List[bank_1.BankModel]] = None
+    Card: Optional[List[card_1.CardModel]] = None
+    Chat: Optional[List[ChatModel]] = None
     LinkedUser: Optional[List[RefModelLinkedUserModel]] = None
-    Message: Optional[CollectionModelMessageModel] = None
-    PaymentMethod: Optional[CollectionModelPaymentMethodModel] = None
+    Message: Optional[List[message.MessageModel]] = None
+    PaymentMethod: Optional[List[payment_method.PaymentMethodModel]] = None
     callingCode: Optional[str] = None
     email: Optional[str] = None
     first: Optional[str] = None
     last: Optional[str] = None
     paymentMethodPrimary: Optional[RefModelPaymentMethodModel] = None
     phone: Optional[str] = None
-
-
-class CollectionModelAccessModel(RootModel[List[access.AccessModel]]):
-    root: List[access.AccessModel]
-
-
-class AccessModel(BaseModel):
-    model_config = ConfigDict(
-        extra='allow',
-    )
-    Group: Optional[RefModelGroupModel] = None
-    Role: List[ACCESSROLE]
-    User: RefModelUserModel
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
 
 
 class RefModelGroupModel(BaseModel):
     model_config = ConfigDict(
         extra='allow',
     )
-    field_id: Optional[str] = Field(None, alias='_id')
+    field_id: Optional[str] = None
     created: Optional[datetime] = None
     isFixture: Optional[bool] = None
     beforeCreate: None = None
-    Access: Optional[CollectionModelAccessModel] = None
-    Role: Optional[CollectionModelRoleModel] = None
+    Access: Optional[List[access.AccessModel]] = None
+    Role: Optional[List[role.RoleModel]] = None
     logo: Optional[str] = None
     name: Optional[str] = None
-    types: Optional[List[GROUPTYPE]] = None
-
-
-class CollectionModelRoleModel(RootModel[List[role.RoleModel]]):
-    root: List[role.RoleModel]
-
-
-class RoleModel(BaseModel):
-    model_config = ConfigDict(
-        extra='allow',
-    )
-    Group: Optional[RefModelGroupModel] = None
-    name: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class CollectionModelBankModel(RootModel[List[bank_1.BankModel]]):
-    root: List[bank_1.BankModel]
-
-
-class BankModel(BaseModel):
-    model_config = ConfigDict(
-        extra='allow',
-    )
-    User: CollectionModelUserModel
-    externalId: str
-    fingerprint: str
-    isPrimary: Optional[bool] = None
-    last4: str
-    name: str
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class CollectionModelUserModel(RootModel[List[user.UserModel]]):
-    root: List[user.UserModel]
-
-
-class UserModel(BaseModel):
-    model_config = ConfigDict(
-        extra='allow',
-    )
-    Access: Optional[CollectionModelAccessModel] = None
-    Bank: Optional[CollectionModelBankModel] = None
-    Card: Optional[CollectionModelCardModel] = None
-    Chat: Optional[CollectionModelChatModel] = None
-    LinkedUser: Optional[List[RefModelLinkedUserModel]] = None
-    Message: Optional[CollectionModelMessageModel] = None
-    PaymentMethod: Optional[CollectionModelPaymentMethodModel] = None
-    callingCode: Optional[str] = None
-    email: Optional[str] = None
-    first: Optional[str] = None
-    last: Optional[str] = None
-    paymentMethodPrimary: Optional[RefModelPaymentMethodModel] = None
-    phone: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class CollectionModelCardModel(RootModel[List[card_1.CardModel]]):
-    root: List[card_1.CardModel]
-
-
-class CardModel(BaseModel):
-    model_config = ConfigDict(
-        extra='allow',
-    )
-    User: Optional[CollectionModelUserModel] = None
-    expMonth: float
-    expYear: float
-    externalId: str
-    fingerprint: str
-    funding: CARDFUNDING
-    isPrimary: Optional[bool] = None
-    last4: str
-    name: str
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class CollectionModelChatModel(RootModel[List[ChatModel]]):
-    root: List[ChatModel]
+    types: Optional[List[Any]] = None
 
 
 Model.model_rebuild()
 ChatModel.model_rebuild()
-MessageModel.model_rebuild()
 RefModelUserModel.model_rebuild()
-CollectionModelAccessModel.model_rebuild()
-AccessModel.model_rebuild()
 RefModelGroupModel.model_rebuild()
-CollectionModelRoleModel.model_rebuild()
-CollectionModelBankModel.model_rebuild()
-BankModel.model_rebuild()
-UserModel.model_rebuild()
-CollectionModelCardModel.model_rebuild()

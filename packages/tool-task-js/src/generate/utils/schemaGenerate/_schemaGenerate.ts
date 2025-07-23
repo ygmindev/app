@@ -32,9 +32,7 @@ export const _schemaGenerate = async ({
   for (const basePathname of paths) {
     const { dirname, main } = fileInfo(basePathname);
     const outDirname = toDirname ? dirname.replace(fromDirname, toDirname) : dirname;
-
     const index = outDirname.lastIndexOf('/');
-
     const jsonPathname = joinPaths(
       [outDirname.slice(0, index), snakeCase(outDirname.slice(index + 1)), snakeCase(main)],
       { extension: 'json' },
@@ -48,7 +46,6 @@ export const _schemaGenerate = async ({
       tsconfig: fromRoot('tsconfig.json'),
       type,
     }).createSchema(type);
-
     refs[`${main}Model`] = {
       basePathname,
       jsonPathname,
@@ -58,10 +55,7 @@ export const _schemaGenerate = async ({
 
   for (const [type, value] of Object.entries(refs)) {
     const { basePathname, jsonPathname, schema } = value;
-
-    // write to json
     let result = stringify(schema);
-
     const edits = [] as EditResult;
     const definitions = [] as Array<string>;
     const walk = (node: Node | undefined, path: Array<string | number> = []): void => {
@@ -87,6 +81,7 @@ export const _schemaGenerate = async ({
                     { formattingOptions: { insertSpaces: true, tabSize: 2 } },
                   ),
                 );
+                definitions.push(ref);
               }
             } else {
               walk(v, [...path, k.value as string]);

@@ -1,5 +1,4 @@
 import os
-import re
 from argparse import ArgumentParser
 from pathlib import Path
 
@@ -32,6 +31,7 @@ def main() -> None:
         data_model_field_type=data_model_types.field_model,
         data_type_manager_type=data_model_types.data_type_manager,
         dump_resolve_reference_action=data_model_types.dump_resolve_reference_action,
+        no_alias=True,
     )
     result = _parser.parse()
     for k, v in result.items():

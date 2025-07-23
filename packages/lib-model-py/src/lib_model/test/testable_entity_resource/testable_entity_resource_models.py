@@ -3,27 +3,10 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel
+from pydantic import BaseModel, ConfigDict, RootModel
 
 from ..testable_embedded_resource import testable_embedded_resource
 from ..testable_related_resource import testable_related_resource
-
-
-class TestableEmbeddedResourceModel(BaseModel):
-    model_config = ConfigDict(
-        extra='allow',
-    )
-    date: Optional[datetime] = None
-    group: str
-    index: float
-    number: Optional[float] = None
-    string: str
-    stringArray: Optional[List[str]] = None
-    stringOptional: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
 
 
 class RefModelTestableEntityResourceModel(BaseModel):
@@ -44,8 +27,12 @@ class TestableEntityResourceModel(BaseModel):
     embedded: Optional[
         List[testable_embedded_resource.TestableEmbeddedResourceModel]
     ] = None
-    relatedManyToMany: Optional[CollectionModelTestableRelatedResourceModel] = None
-    relatedOneToMany: Optional[CollectionModelTestableRelatedResourceModel] = None
+    relatedManyToMany: Optional[
+        List[testable_related_resource.TestableRelatedResourceModel]
+    ] = None
+    relatedOneToMany: Optional[
+        List[testable_related_resource.TestableRelatedResourceModel]
+    ] = None
     date: Optional[datetime] = None
     group: str
     index: float
@@ -53,32 +40,7 @@ class TestableEntityResourceModel(BaseModel):
     string: str
     stringArray: Optional[List[str]] = None
     stringOptional: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
-    created: datetime
-    isFixture: Optional[bool] = None
-    beforeCreate: None = None
-
-
-class CollectionModelTestableRelatedResourceModel(
-    RootModel[List[testable_related_resource.TestableRelatedResourceModel]]
-):
-    root: List[testable_related_resource.TestableRelatedResourceModel]
-
-
-class TestableRelatedResourceModel(BaseModel):
-    model_config = ConfigDict(
-        extra='allow',
-    )
-    rootManyToMany: Optional[CollectionModelTestableEntityResourceModel] = None
-    rootOneToMany: Optional[RefModelTestableEntityResourceModel] = None
-    date: Optional[datetime] = None
-    group: str
-    index: float
-    number: Optional[float] = None
-    string: str
-    stringArray: Optional[List[str]] = None
-    stringOptional: Optional[str] = None
-    field_id: str = Field(..., alias='_id')
+    field_id: str
     created: datetime
     isFixture: Optional[bool] = None
     beforeCreate: None = None
@@ -92,4 +54,3 @@ class CollectionModelTestableEntityResourceModel(
 
 Model.model_rebuild()
 TestableEntityResourceModel.model_rebuild()
-TestableRelatedResourceModel.model_rebuild()
