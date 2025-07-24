@@ -39,6 +39,9 @@
       ]
     },
     "RefModel<ProductModel>": {
+      "$ref": "#/definitions/Partial<ProductModel>"
+    },
+    "Partial<ProductModel>": {
       "type": "object",
       "properties": {
         "_id": {
@@ -76,6 +79,9 @@
       "additionalProperties": false
     },
     "RefModel<PricingModel>": {
+      "$ref": "#/definitions/Partial<PricingModel>"
+    },
+    "Partial<PricingModel>": {
       "type": "object",
       "additionalProperties": false
     },

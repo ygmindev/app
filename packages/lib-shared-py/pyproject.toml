@@ -29,6 +29,7 @@ packages = [{ include = "*", from = "src" }]
 python = "3.12.6"
 numpy = "1.26.4"
 pydash = "^8.0.4"
+python-dotenv = "^1.1.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"

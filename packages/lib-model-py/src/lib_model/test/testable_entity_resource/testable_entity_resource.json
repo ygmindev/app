@@ -78,6 +78,9 @@
       }
     },
     "RefModel<TestableEntityResourceModel>": {
+      "$ref": "#/definitions/Partial<TestableEntityResourceModel>"
+    },
+    "Partial<TestableEntityResourceModel>": {
       "type": "object",
       "additionalProperties": false
     }

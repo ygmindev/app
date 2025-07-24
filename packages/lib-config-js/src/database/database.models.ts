@@ -1,6 +1,6 @@
-import { type DatabaseTypeModel } from '@lib/backend/database/database.models';
-import { type ClassModel } from '@lib/shared/core/core.models';
+import { type DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type ClassModel } from '@lib/shared/core/core.models';
 import { type Options } from '@mikro-orm/core';
 import { type MongoDriver } from '@mikro-orm/mongodb';
 
@@ -17,7 +17,7 @@ export type DatabaseConfigModel = {
 
   pool: { max: number };
 
-  type?: DatabaseTypeModel;
+  type?: DATABASE_TYPE;
 
   username?: string;
 };

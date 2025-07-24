@@ -65,5 +65,8 @@
         "$ref": "../testable_entity_resource/testable_entity_resource.json#/definitions/TestableEntityResourceModel"
       }
     }
+  },
+  "items": {
+    "type": "string"
   }
 }

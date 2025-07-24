@@ -12,70 +12,73 @@
           "type": "string"
         },
         "user": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "string"
-            },
-            "created": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "isFixture": {
-              "type": "boolean"
-            },
-            "beforeCreate": {
-              "type": "null"
-            },
-            "Access": {
-              "$ref": "#/definitions/CollectionModel<AccessModel>"
-            },
-            "Bank": {
-              "$ref": "#/definitions/CollectionModel<BankModel>"
-            },
-            "Card": {
-              "$ref": "#/definitions/CollectionModel<CardModel>"
-            },
-            "Chat": {
-              "$ref": "#/definitions/CollectionModel<ChatModel>"
-            },
-            "LinkedUser": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RefModel<LinkedUserModel>"
-              }
-            },
-            "Message": {
-              "$ref": "#/definitions/CollectionModel<MessageModel>"
-            },
-            "PaymentMethod": {
-              "$ref": "#/definitions/CollectionModel<PaymentMethodModel>"
-            },
-            "callingCode": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "first": {
-              "type": "string"
-            },
-            "last": {
-              "type": "string"
-            },
-            "paymentMethodPrimary": {
-              "$ref": "#/definitions/RefModel<PaymentMethodModel>"
-            },
-            "phone": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/Partial<UserModel>"
         }
       },
       "required": [
         "user"
       ],
+      "additionalProperties": false
+    },
+    "Partial<UserModel>": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isFixture": {
+          "type": "boolean"
+        },
+        "beforeCreate": {
+          "type": "null"
+        },
+        "Access": {
+          "$ref": "#/definitions/CollectionModel<AccessModel>"
+        },
+        "Bank": {
+          "$ref": "#/definitions/CollectionModel<BankModel>"
+        },
+        "Card": {
+          "$ref": "#/definitions/CollectionModel<CardModel>"
+        },
+        "Chat": {
+          "$ref": "#/definitions/CollectionModel<ChatModel>"
+        },
+        "LinkedUser": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RefModel<LinkedUserModel>"
+          }
+        },
+        "Message": {
+          "$ref": "#/definitions/CollectionModel<MessageModel>"
+        },
+        "PaymentMethod": {
+          "$ref": "#/definitions/CollectionModel<PaymentMethodModel>"
+        },
+        "callingCode": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "paymentMethodPrimary": {
+          "$ref": "#/definitions/RefModel<PaymentMethodModel>"
+        },
+        "phone": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "CollectionModel<AccessModel>": {
@@ -85,6 +88,9 @@
       }
     },
     "RefModel<GroupModel>": {
+      "$ref": "#/definitions/Partial<GroupModel>"
+    },
+    "Partial<GroupModel>": {
       "type": "object",
       "properties": {
         "_id": {
@@ -139,8 +145,7 @@
       ]
     },
     "RefModel<UserModel>": {
-      "type": "object",
-      "additionalProperties": false
+      "$ref": "#/definitions/Partial<UserModel>"
     },
     "CollectionModel<BankModel>": {
       "type": "array",
@@ -180,10 +185,16 @@
       }
     },
     "RefModel<ChatModel>": {
+      "$ref": "#/definitions/Partial<ChatModel>"
+    },
+    "Partial<ChatModel>": {
       "type": "object",
       "additionalProperties": false
     },
     "RefModel<LinkedUserModel>": {
+      "$ref": "#/definitions/Partial<LinkedUserModel>"
+    },
+    "Partial<LinkedUserModel>": {
       "type": "object",
       "properties": {
         "_id": {
@@ -226,6 +237,9 @@
       ]
     },
     "RefModel<PaymentMethodModel>": {
+      "$ref": "#/definitions/Partial<PaymentMethodModel>"
+    },
+    "Partial<PaymentMethodModel>": {
       "type": "object",
       "properties": {
         "_id": {

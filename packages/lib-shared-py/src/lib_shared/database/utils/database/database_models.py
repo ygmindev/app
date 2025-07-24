@@ -1,5 +1,4 @@
-from pydantic import BaseModel
+from lib_shared.database.utils.database._database_models import _DatabaseModel
 
 
-class DatabaseModel(BaseModel):
-    ...
+class DatabaseModel(_DatabaseModel): ...

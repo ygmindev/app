@@ -40,12 +40,19 @@ export const _schemaGenerate = async ({
     const type = `${main}Model`;
     const schema = createGenerator({
       encodeRefs: false,
+      expose: 'export',
       path: basePathname,
       skipTypeCheck: true,
       topRef: true,
       tsconfig: fromRoot('tsconfig.json'),
       type,
     }).createSchema(type);
+
+    if (schema.definitions) {
+      const keys = Object.keys(schema.definitions).filter((v) => v !== type);
+      console.warn(`@@@ ${type}: ${keys.join(',')}\n\n`);
+    }
+
     refs[`${main}Model`] = {
       basePathname,
       jsonPathname,
@@ -97,23 +104,6 @@ export const _schemaGenerate = async ({
     tree && walk(tree);
 
     if (edits.length && tree) {
-      // const definitions = findNodeAtLocation(tree, ['definitions']);
-      // for (const child of definitions?.children || []) {
-      //   if (child.type === 'property') {
-      //     const [key, _] = (child as unknown as { children: [Node, Node] }).children;
-      //     const ref = key.value as string;
-      //     if (key && type !== ref && !!refs[ref]) {
-      //       const { definitions } = refs[ref];
-      //       definitions.forEach((k) =>
-      //         edits.push(
-      //           ...modify(result, ['definitions', k], undefined, {
-      //             formattingOptions: { insertSpaces: true, tabSize: 2 },
-      //           }),
-      //         ),
-      //       );
-      //     }
-      //   }
-      // }
       definitions?.forEach((k) =>
         edits.push(
           ...modify(result, ['definitions', k], undefined, {

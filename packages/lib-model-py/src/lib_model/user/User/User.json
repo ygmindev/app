@@ -74,6 +74,9 @@
       }
     },
     "RefModel<GroupModel>": {
+      "$ref": "#/definitions/Partial<GroupModel>"
+    },
+    "Partial<GroupModel>": {
       "type": "object",
       "properties": {
         "_id": {
@@ -128,6 +131,9 @@
       ]
     },
     "RefModel<UserModel>": {
+      "$ref": "#/definitions/Partial<UserModel>"
+    },
+    "Partial<UserModel>": {
       "type": "object",
       "additionalProperties": false
     },
@@ -169,10 +175,16 @@
       }
     },
     "RefModel<ChatModel>": {
+      "$ref": "#/definitions/Partial<ChatModel>"
+    },
+    "Partial<ChatModel>": {
       "type": "object",
       "additionalProperties": false
     },
     "RefModel<LinkedUserModel>": {
+      "$ref": "#/definitions/Partial<LinkedUserModel>"
+    },
+    "Partial<LinkedUserModel>": {
       "type": "object",
       "properties": {
         "_id": {
@@ -215,6 +227,9 @@
       ]
     },
     "RefModel<PaymentMethodModel>": {
+      "$ref": "#/definitions/Partial<PaymentMethodModel>"
+    },
+    "Partial<PaymentMethodModel>": {
       "type": "object",
       "properties": {
         "_id": {
