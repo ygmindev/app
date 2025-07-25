@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, Union
 
-import requests
+import httpx
 
 from lib_shared.http.utils.constants import HTTP_METHOD
 from lib_shared.http.utils.http_client._http_client import _HttpClient
@@ -11,48 +11,84 @@ class HttpClient(_HttpClient, HttpClientModel):
     def __init__(
         self,
         base_url: str = "",
-        default_headers: Optional[Dict[str, str]] = None,
+        headers: Optional[Dict[str, str]] = None,
         timeout: int = 10,
     ):
-        super().__init__()
-        self.base_url = base_url.rstrip("/")
-        self.default_headers = default_headers or {}
-        self.timeout = timeout
+        self._base_url = base_url.rstrip("/")
+        self._headers = headers or {}
+        self._timeout = timeout
 
-    def request(
+    async def request(
         self,
         method: HTTP_METHOD,
-        endpoint: str,
-        headers: Optional[Dict[str, str]] = None,
+        url: str,
         params: Optional[Dict[str, Any]] = None,
         data: Optional[Union[Dict[str, Any], str]] = None,
-    ) -> requests.Response:
-        url = f"{self.base_url}/{endpoint.lstrip('/')}"
-        all_headers = {**self.default_headers, **(headers or {})}
-
-        try:
-            response = requests.request(
-                method=str(method).upper(),
-                url=url,
-                headers=all_headers,
+        json: Optional[Dict[str, Any]] = None,
+        headers: Optional[Dict[str, str]] = None,
+    ) -> Any:
+        async with httpx.AsyncClient(timeout=self._timeout) as client:
+            full_url = f"{self._base_url}{url}"
+            response = await client.request(
+                method=method.name,
+                url=full_url,
+                headers={**self._headers, **(headers or {})},
                 params=params,
                 data=data,
-                timeout=self.timeout,
+                json=json,
             )
             response.raise_for_status()
-            return response
-        except requests.exceptions.RequestException as e:
-            print(f"[HTTP ERROR] {method} {url} failed: {e}")
-            raise
+            return response.json()
 
-    def get(self, endpoint: str, **kwargs) -> requests.Response:
-        return self.request(HTTP_METHOD.GET, endpoint, **kwargs)
+    async def get(
+        self,
+        url: str,
+        params: Optional[Dict[str, Any]] = None,
+        **kwargs,
+    ) -> Any:
+        return await self.request(
+            HTTP_METHOD.GET,
+            url,
+            params=params,
+            **kwargs,
+        )
 
-    def post(self, endpoint: str, **kwargs) -> requests.Response:
-        return self.request(HTTP_METHOD.POST, endpoint, **kwargs)
+    async def post(
+        self,
+        url: str,
+        json: Optional[Dict[str, Any]] = None,
+        data: Any = None,
+        **kwargs,
+    ) -> Any:
+        return await self.request(
+            HTTP_METHOD.POST,
+            url,
+            json=json,
+            data=data,
+            **kwargs,
+        )
 
-    def put(self, endpoint: str, **kwargs) -> requests.Response:
-        return self.request(HTTP_METHOD.PUT, endpoint, **kwargs)
+    async def put(
+        self,
+        url: str,
+        json: Optional[Dict[str, Any]] = None,
+        data: Any = None,
+        **kwargs,
+    ) -> Any:
+        return await self.request(
+            HTTP_METHOD.PUT,
+            url,
+            json=json,
+            data=data,
+            **kwargs,
+        )
 
-    def delete(self, endpoint: str, **kwargs) -> requests.Response:
-        return self.request(HTTP_METHOD.DELETE, endpoint, **kwargs)
+    async def delete(self, url: str, **kwargs) -> Any:
+        return await self.request(
+            HTTP_METHOD.DELETE,
+            url,
+            **kwargs,
+        )
+
+
+http_client = HttpClient()
