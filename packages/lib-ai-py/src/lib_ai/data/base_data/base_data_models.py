@@ -5,7 +5,7 @@ from typing import Any, NotRequired, Self, Sequence, Tuple, TypedDict, Unpack, o
 
 import numpy as np
 import torch
-from lib_shared.core.core import DataType
+from lib_shared.core.constants import DATA_TYPE
 from lib_shared.core.utils.indexable.indexable_models import (
     IndexableModel,
     IndexableMultiKeyModel,
@@ -30,7 +30,9 @@ class BaseDataModel[T](IndexableModel, ABC):
     def __getitem__(self, key: IndexableMultiKeyModel) -> Any: ...
 
     @abstractmethod
-    def __getitem__(self, key: IndexableSingleKeyModel | IndexableMultiKeyModel) -> Self | Any: ...
+    def __getitem__(
+        self, key: IndexableSingleKeyModel | IndexableMultiKeyModel
+    ) -> Self | Any: ...
 
     @abstractmethod
     def __len__(self) -> int: ...
@@ -68,11 +70,11 @@ class BaseDataModel[T](IndexableModel, ABC):
     @abstractmethod
     def to_numpy(
         self,
-        dtype: DataType | None,
+        dtype: DATA_TYPE | None,
     ) -> np.ndarray: ...
 
     @abstractmethod
     def to_tensor(
         self,
-        dtype: DataType | None,
+        dtype: DATA_TYPE | None,
     ) -> torch.Tensor: ...

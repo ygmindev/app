@@ -1,10 +1,10 @@
-from typing import Optional, Type
+from typing import Type
 
-from beanie import Document, init_beanie
+from beanie import init_beanie
 from lib_config.database.database_models import DatabaseConfigModel
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from lib_shared.database.utils.database._database_models import _DatabaseModel
+from lib_shared.database.utils.database._database_models import TType, _DatabaseModel
 
 
 class _Database(_DatabaseModel):
@@ -22,36 +22,38 @@ class _Database(_DatabaseModel):
         self._client = AsyncIOMotorClient(self._params.host)
         await init_beanie(
             database=self._client[self._params.database],
-            document_models=self._entities,
+            document_models=self._params.entities,
         )
         self._is_initialized = True
 
-    async def insert(
+    async def create(
         self,
-        doc: Document,
-    ) -> Document:
+        doc: TType,
+    ) -> TType:
         await doc.insert()
         return doc
 
-    async def get_by_id(
+    async def create_many(
         self,
-        model: Type[Document],
-        doc_id: str,
-    ) -> Optional[Document]:
-        return await model.get(doc_id)
+        docs: list[TType],
+        model: Type[TType],
+    ) -> list[TType]:
+        await model.insert_many(docs)
+        return docs
 
     async def find(
         self,
-        model: Type[Document],
-        query: dict = {},
-    ) -> list[Document]:
-        return await model.find(query).to_list()
+        query: dict,
+        model: Type[TType],
+    ) -> list[TType]:
+        results = await model.find(query).to_list()
+        return results
 
     async def update(
         self,
-        doc: Document,
+        doc: TType,
         update_fields: dict,
-    ) -> Document:
+    ) -> TType:
         for key, value in update_fields.items():
             setattr(doc, key, value)
         await doc.save()
@@ -59,6 +61,6 @@ class _Database(_DatabaseModel):
 
     async def delete(
         self,
-        doc: Document,
+        doc: TType,
     ) -> None:
         await doc.delete()

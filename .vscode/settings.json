@@ -13,7 +13,7 @@
   },
   "[python]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll": true,
+      "source.fixAll": "explicit",
       "source.organizeImports": "always"
     },
     "editor.defaultFormatter": "ms-python.black-formatter",
@@ -71,7 +71,7 @@
   "python.analysis.indexing": true,
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.typeCheckingMode": "basic",
-  "python.defaultInterpreterPath": "${workspaceFolder}/packages/service-ai-py/.venv/bin/python",
+  "python.defaultInterpreterPath": "${workspaceFolder}/packages/service-server-py/.venv/bin/python",
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "pylint.interpreter": [

@@ -4,9 +4,7 @@ from typing import Any, Self, Tuple, Unpack, overload
 
 import numpy as np
 import torch
-from lib_ai.core.utils.split_indices import split_indices
-from lib_ai.data.base_data.base_data_models import BaseDataModel, SplitParamsModel
-from lib_shared.core.core import DataType
+from lib_shared.core.constants import DATA_TYPE
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.indexable.indexable_models import (
     IndexableMultiKeyModel,
@@ -14,6 +12,9 @@ from lib_shared.core.utils.indexable.indexable_models import (
 )
 from lib_shared.core.utils.is_listlike import is_listlike
 from lib_shared.core.utils.not_implemented_exception import NotImplementedException
+
+from lib_ai.core.utils.split_indices import split_indices
+from lib_ai.data.base_data.base_data_models import BaseDataModel, SplitParamsModel
 
 
 class BaseData[T](BaseDataModel[T]):
@@ -26,7 +27,9 @@ class BaseData[T](BaseDataModel[T]):
     @overload
     def __getitem__(self, key: IndexableMultiKeyModel) -> Any: ...
 
-    def __getitem__(self, key: IndexableSingleKeyModel | IndexableMultiKeyModel) -> Self | Any:
+    def __getitem__(
+        self, key: IndexableSingleKeyModel | IndexableMultiKeyModel
+    ) -> Self | Any:
         if is_listlike(key):
             return type(self)(data=[self.data[k] for k in key])
         return type(self)(data=self.data[key])
@@ -65,12 +68,14 @@ class BaseData[T](BaseDataModel[T]):
 
     def to_numpy(
         self,
-        _dtype: DataType | None = DataType.FLOAT,
+        _dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> np.ndarray:
         return np.array(self.data)
 
     def to_tensor(
         self,
-        _dtype: DataType | None = DataType.STRING,
+        _dtype: DATA_TYPE | None = DATA_TYPE.STRING,
     ) -> torch.Tensor:
+        raise NotImplementedException()
+        raise NotImplementedException()
         raise NotImplementedException()

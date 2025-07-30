@@ -2,13 +2,14 @@ from typing import Any, Self, Sequence, Tuple, cast
 
 import numpy as np
 import torch
+from lib_shared.core.constants import DATA_TYPE
+from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
+
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.core.utils.get_numpy_type import get_numpy_type
 from lib_ai.core.utils.get_tensor_type import get_tensor_type
 from lib_ai.data.matrix_data._matrix_data_models import _MatrixDataModel
 from lib_ai.data.matrix_data.matrix_data_constants import MatrixDataType
-from lib_shared.core.core import DataType
-from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 
 
 class _MatrixData(_MatrixDataModel):
@@ -16,7 +17,9 @@ class _MatrixData(_MatrixDataModel):
         result = self.data
         match self.get_type():
             case MatrixDataType.TENSOR:
-                result = torch.concatenate([cast(torch.Tensor, result), other.to_tensor()])
+                result = torch.concatenate(
+                    [cast(torch.Tensor, result), other.to_tensor()]
+                )
             case MatrixDataType.NUMPY:
                 result = np.concatenate([result, other.to_numpy()], axis=0)
         return type(self)(data=result)
@@ -68,7 +71,7 @@ class _MatrixData(_MatrixDataModel):
 
     def to_numpy(
         self,
-        dtype: DataType | None = DataType.FLOAT,
+        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> np.ndarray:
         to_type = get_numpy_type(dtype)
         match self.get_type():
@@ -81,7 +84,7 @@ class _MatrixData(_MatrixDataModel):
 
     def to_tensor(
         self,
-        dtype: DataType | None = DataType.FLOAT,
+        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> torch.Tensor:
         to_type = get_tensor_type(dtype)
         device = get_device()
@@ -91,4 +94,6 @@ class _MatrixData(_MatrixDataModel):
             case MatrixDataType.NUMPY:
                 return torch.tensor(self.data).to(to_type).to(device)
             case _:
+                raise InvalidTypeException()
+                raise InvalidTypeException()
                 raise InvalidTypeException()

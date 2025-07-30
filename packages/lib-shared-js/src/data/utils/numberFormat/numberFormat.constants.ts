@@ -20,8 +20,8 @@ export enum NUMBER_UNIT_TYPE {
 }
 
 export enum RELATIVE_DATE_UNIT {
-  DAY = 'day',
-  MONTH = 'month',
-  WEEK = 'week',
-  YEAR = 'year',
+  DAY = 'DAY',
+  MONTH = 'MONTH',
+  WEEK = 'WEEK',
+  YEAR = 'YEAR',
 }

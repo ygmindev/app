@@ -1,6 +1,9 @@
-from typing import Any, Optional, Protocol, Type
+from typing import Protocol, Type, TypeVar
 
+from beanie import Document
 from lib_config.database.database_models import DatabaseConfigModel
+
+TType = TypeVar("TType", bound=Document)
 
 
 class _DatabaseModel(Protocol):
@@ -11,30 +14,30 @@ class _DatabaseModel(Protocol):
 
     async def initialize(self) -> None: ...
 
-    async def insert(
+    async def create(
         self,
-        doc: Any,
-    ) -> Any: ...
+        doc: TType,
+    ) -> TType: ...
 
-    async def get_by_id(
+    async def create_many(
         self,
-        model: Type[Any],
-        doc_id: str,
-    ) -> Optional[Any]: ...
+        doc: list[TType],
+        model: Type[TType],
+    ) -> list[TType]: ...
 
     async def find(
         self,
-        model: Type[Any],
-        query: dict = {},
-    ) -> list[Any]: ...
+        query: dict,
+        model: Type[TType],
+    ) -> list[TType]: ...
 
     async def update(
         self,
-        doc: Any,
+        doc: TType,
         update_fields: dict,
-    ) -> Any: ...
+    ) -> TType: ...
 
     async def delete(
         self,
-        doc: Any,
+        doc: TType,
     ) -> None: ...

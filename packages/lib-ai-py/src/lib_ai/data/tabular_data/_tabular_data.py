@@ -3,6 +3,9 @@ from typing import Any, Callable, Mapping, Self, Sequence, Tuple, cast, overload
 import numpy as np
 import polars as pl
 import torch
+from lib_shared.core.constants import DATA_TYPE
+from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
+
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.core.utils.get_numpy_type import get_numpy_type
 from lib_ai.core.utils.get_tensor_type import get_tensor_type
@@ -13,8 +16,6 @@ from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataStringKeyModel,
 )
 from lib_ai.data.tabular_data.tabular_data_constants import TabularDataType
-from lib_shared.core.core import DataType
-from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 
 
 class _TabularData(_TabularDataModel):
@@ -129,7 +130,7 @@ class _TabularData(_TabularDataModel):
 
     def to_numpy(
         self,
-        dtype: DataType | None = DataType.FLOAT,
+        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> np.ndarray:
         to_type = get_numpy_type(dtype)
         match self.get_type():
@@ -141,7 +142,7 @@ class _TabularData(_TabularDataModel):
 
     def to_tensor(
         self,
-        dtype: DataType | None = DataType.FLOAT,
+        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
     ) -> torch.Tensor:
         to_type = get_tensor_type(dtype)
         match self.get_type():
@@ -164,7 +165,11 @@ class _TabularData(_TabularDataModel):
                 data = cast(pl.DataFrame, self.data)
                 device = get_device()
                 return MatrixData(
-                    pl.select(v.cast(pl.Float32, strict=False) for v in data).to_torch().to(device)
+                    pl.select(v.cast(pl.Float32, strict=False) for v in data)
+                    .to_torch()
+                    .to(device)
                 )
             case _:
+                raise InvalidTypeException()
+                raise InvalidTypeException()
                 raise InvalidTypeException()

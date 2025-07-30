@@ -1,10 +1,12 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional, Type, TypeVar, Union, cast
 
 import httpx
 
 from lib_shared.http.utils.constants import HTTP_METHOD
 from lib_shared.http.utils.http_client._http_client import _HttpClient
 from lib_shared.http.utils.http_client.http_client_models import HttpClientModel
+
+TType = TypeVar("TType")
 
 
 class HttpClient(_HttpClient, HttpClientModel):
@@ -26,7 +28,8 @@ class HttpClient(_HttpClient, HttpClientModel):
         data: Optional[Union[Dict[str, Any], str]] = None,
         json: Optional[Dict[str, Any]] = None,
         headers: Optional[Dict[str, str]] = None,
-    ) -> Any:
+        response_type: Type[TType] = Type[Any],
+    ) -> TType:
         async with httpx.AsyncClient(timeout=self._timeout) as client:
             full_url = f"{self._base_url}{url}"
             response = await client.request(
@@ -38,18 +41,20 @@ class HttpClient(_HttpClient, HttpClientModel):
                 json=json,
             )
             response.raise_for_status()
-            return response.json()
+            return cast(TType, response.json())
 
     async def get(
         self,
         url: str,
         params: Optional[Dict[str, Any]] = None,
+        response_type: Type[TType] = Type[Any],
         **kwargs,
-    ) -> Any:
+    ) -> TType:
         return await self.request(
             HTTP_METHOD.GET,
             url,
             params=params,
+            response_type=response_type,
             **kwargs,
         )
 
@@ -58,13 +63,15 @@ class HttpClient(_HttpClient, HttpClientModel):
         url: str,
         json: Optional[Dict[str, Any]] = None,
         data: Any = None,
+        response_type: Type[TType] = Type[Any],
         **kwargs,
-    ) -> Any:
+    ) -> TType:
         return await self.request(
             HTTP_METHOD.POST,
             url,
             json=json,
             data=data,
+            response_type=response_type,
             **kwargs,
         )
 
@@ -73,20 +80,28 @@ class HttpClient(_HttpClient, HttpClientModel):
         url: str,
         json: Optional[Dict[str, Any]] = None,
         data: Any = None,
+        response_type: Type[TType] = Type[Any],
         **kwargs,
-    ) -> Any:
+    ) -> TType:
         return await self.request(
             HTTP_METHOD.PUT,
             url,
             json=json,
             data=data,
+            response_type=response_type,
             **kwargs,
         )
 
-    async def delete(self, url: str, **kwargs) -> Any:
+    async def delete(
+        self,
+        url: str,
+        response_type: Type[TType] = Type[Any],
+        **kwargs,
+    ) -> TType:
         return await self.request(
             HTTP_METHOD.DELETE,
             url,
+            response_type=response_type,
             **kwargs,
         )
 

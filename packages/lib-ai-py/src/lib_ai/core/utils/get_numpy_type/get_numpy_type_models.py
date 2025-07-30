@@ -1,4 +1,4 @@
-from lib_shared.core.core import DataType
+from lib_shared.core.constants import DATA_TYPE
 
-type GetNumpyTypeParamsModel = DataType | None
+type GetNumpyTypeParamsModel = DATA_TYPE | None
 type GetNumpyTypeModel = type

@@ -1,5 +1,5 @@
 import torch
-from lib_shared.core.core import DataType
+from lib_shared.core.constants import DATA_TYPE
 
-type GetTensorTypeParamsModel = DataType | None
+type GetTensorTypeParamsModel = DATA_TYPE | None
 type GetTensorTypeModel = torch.dtype
