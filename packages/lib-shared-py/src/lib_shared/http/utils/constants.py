@@ -8,6 +8,6 @@ class HTTP_METHOD(Enum):
     DELETE = "DELETE"
 
 
-class CONTENT_TYPE(Enum):
-    JSON = "JSON"
-    XML = "XML"
+class HTTP_CONTENT_TYPE(Enum):
+    JSON = "application/json"
+    XML = "application/xml"

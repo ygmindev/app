@@ -11,6 +11,9 @@ from lib_model.models import (
     TreasuryYieldCurve,
 )
 from lib_shared.database.utils.api_data_loader import ApiDataLoader
+from lib_shared.database.utils.api_data_loader.api_data_loader_models import (
+    ApiDataLoaderParams,
+)
 from lib_shared.database.utils.database import database
 from lib_shared.date.constants import CURVE_TENORS, DATE_UNIT
 from lib_shared.http.utils.http_client import http_client
@@ -42,15 +45,17 @@ async def main() -> None:
             return docs
 
         loader = ApiDataLoader(
-            uri="https://api.polygon.io/fed/v1/treasury-yields",
-            response=PolygonTreasuryYieldResponseModel,
-            resource=TreasuryYieldCurve,
-            params={
-                "sort": "date.desc",
-                "limit": 1,
-                "apiKey": "spl4XZ9HTCTndp3nu5B4zzBM2u_gstCV",
-            },
-            transformer=load_treasury_yield,
+            ApiDataLoaderParams(
+                uri="https://api.polygon.io/fed/v1/treasury-yields",
+                response=PolygonTreasuryYieldResponseModel,
+                resource=TreasuryYieldCurve,
+                params={
+                    "sort": "date.desc",
+                    "limit": 1,
+                    "apiKey": "spl4XZ9HTCTndp3nu5B4zzBM2u_gstCV",
+                },
+                transformer=load_treasury_yield,
+            )
         )
         await loader.upload()
 

@@ -1,27 +1,31 @@
 from dataclasses import dataclass
 from typing import Callable, Generic, Optional, Type, TypeVar
 
+import attr
+
 from lib_shared.database.utils.data_loader.data_loader_models import (
     DataLoaderModel,
+    DataLoaderParams,
     TType,
 )
-from lib_shared.database.utils.database import Database
-from lib_shared.database.utils.database import database as db
-from lib_shared.http.utils.constants import CONTENT_TYPE, HTTP_METHOD
+from lib_shared.http.utils.constants import HTTP_CONTENT_TYPE, HTTP_METHOD
 
 TResponse = TypeVar("TResponse")
+
+
+@attr.s(auto_attribs=True, kw_only=True)
+class ApiDataLoaderParams(DataLoaderParams, Generic[TType, TResponse]):
+    uri: str
+    response: Type[TResponse]
+    transformer: Callable[[TResponse], list[TType]]
+    method: Optional[HTTP_METHOD] = HTTP_METHOD.GET
+    content_type: Optional[HTTP_CONTENT_TYPE] = HTTP_CONTENT_TYPE.JSON
+    headers: Optional[dict] = {}
+    params: Optional[dict] = {}
 
 
 class ApiDataLoaderModel(DataLoaderModel):
     def __init__(
         self,
-        uri: str,
-        response: Type[TResponse],
-        resource: Type[TType],
-        transformer: Callable[[TResponse], list[TType]],
-        method: Optional[HTTP_METHOD] = HTTP_METHOD.GET,
-        content_type: Optional[CONTENT_TYPE] = CONTENT_TYPE.JSON,
-        headers: Optional[dict] = None,
-        params: Optional[dict] = None,
-        database: Optional[Database] = db,
+        params: ApiDataLoaderParams,
     ) -> None: ...

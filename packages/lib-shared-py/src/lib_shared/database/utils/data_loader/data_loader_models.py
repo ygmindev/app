@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
 from typing import Generic, Optional, Type, TypeVar
 
 from lib_model.resource.entity_resource import EntityResource
@@ -9,8 +8,10 @@ from lib_shared.database.utils.database import database as db
 
 TType = TypeVar("TType", bound=EntityResource)
 
+import attr
 
-@dataclass
+
+@attr.s(auto_attribs=True, kw_only=True)
 class DataLoaderParams(Generic[TType]):
     resource: Type[TType]
     database: Optional[Database] = db
