@@ -6,3 +6,8 @@ class HTTP_METHOD(Enum):
     POST = "POST"
     PUT = "PUT"
     DELETE = "DELETE"
+
+
+class CONTENT_TYPE(Enum):
+    JSON = "JSON"
+    XML = "XML"

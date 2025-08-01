@@ -1,10 +1,10 @@
 import datetime
 from typing import Optional, TypedDict
 
-from lib_model.resource.entity_resource.entity_resource import EntityResourceModel
+from lib_model.resource.entity_resource import EntityResource
 
 
-class CurveSnapshotModel(EntityResourceModel):
+class CurveSnapshot(EntityResource):
     date: datetime.date
     value_1MONTH: Optional[float] = None
     value_3MONTH: Optional[float] = None
@@ -19,8 +19,11 @@ class CurveSnapshotModel(EntityResourceModel):
     value_30YEAR: Optional[float] = None
     value_40YEAR: Optional[float] = None
 
+    class Settings:
+        indexes = ["date"]
 
-class TreasuryYieldCurveModel(CurveSnapshotModel): ...
+
+class TreasuryYieldCurve(CurveSnapshot): ...
 
 
 class PolygonTreasuryYieldModel(TypedDict):
@@ -40,7 +43,7 @@ class PolygonTreasuryYieldResponseModel(TypedDict):
     results: list[PolygonTreasuryYieldModel]
 
 
-class SwapRateCurveModel(CurveSnapshotModel): ...
+class SwapRateCurve(CurveSnapshot): ...
 
 
 class ChatamSofrOisModel(TypedDict):

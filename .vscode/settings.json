@@ -85,5 +85,7 @@
   "workbench.sideBar.location": "right",
   "azureFunctions.createPythonVenv": false,
   "black-formatter.importStrategy": "fromEnvironment",
-  "black-formatter.cwd": "${workspaceFolder}/packages/service-ai-py"
+  "black-formatter.cwd": "${workspaceFolder}/packages/service-ai-py",
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "python-envs.pythonProjects": []
 }

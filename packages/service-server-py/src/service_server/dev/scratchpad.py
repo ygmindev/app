@@ -1,55 +1,58 @@
 import asyncio
 import xml.etree.ElementTree as ET
-from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime
 
 import httpx
-import pandas as pd
 import QuantLib as ql
 from lib_model.models import (
     ChatamSofrOisResponseModel,
     PolygonTreasuryYieldResponseModel,
-    SwapRateCurveModel,
-    TreasuryYieldCurveModel,
+    SwapRateCurve,
+    TreasuryYieldCurve,
 )
+from lib_shared.database.utils.api_data_loader import ApiDataLoader
 from lib_shared.database.utils.database import database
 from lib_shared.date.constants import CURVE_TENORS, DATE_UNIT
 from lib_shared.http.utils.http_client import http_client
 from scipy import optimize
 
-trial = 5
+trial = 1
 
 
 async def main() -> None:
     await database.initialize()
 
     if trial == 1:
-        result = await http_client.get(
-            "https://api.polygon.io/fed/v1/treasury-yields",
-            response_type=PolygonTreasuryYieldResponseModel,
+
+        def load_treasury_yield(
+            response: PolygonTreasuryYieldResponseModel,
+        ) -> list[TreasuryYieldCurve]:
+            docs = []
+            for row in response["results"]:
+                doc = {"date": datetime.strptime(row["date"], "%Y-%m-%d").date()}
+                for tenor in CURVE_TENORS:
+                    column = (
+                        f"yield_{tenor["tenor"]}_{tenor["tenor_unit"].value.lower()}"
+                    )
+                    if column in row:
+                        doc[f"value_{tenor["tenor"]}{tenor["tenor_unit"].value}"] = row[
+                            column
+                        ]
+                docs.append(doc)
+            return docs
+
+        loader = ApiDataLoader(
+            uri="https://api.polygon.io/fed/v1/treasury-yields",
+            response=PolygonTreasuryYieldResponseModel,
+            resource=TreasuryYieldCurve,
             params={
                 "sort": "date.desc",
                 "limit": 1,
                 "apiKey": "spl4XZ9HTCTndp3nu5B4zzBM2u_gstCV",
             },
-            headers={
-                "Accept-Encoding": "gzip, deflate, br, zstd",
-                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-            },
+            transformer=load_treasury_yield,
         )
-        docs = []
-        for row in result["results"]:
-            doc = {"date": datetime.strptime(row["date"], "%Y-%m-%d").date()}
-            for tenor in CURVE_TENORS:
-                column = f"yield_{tenor["tenor"]}_{tenor["tenor_unit"].value.lower()}"
-                if column in row:
-                    doc[f"value_{tenor["tenor"]}{tenor["tenor_unit"].value}"] = row[
-                        column
-                    ]
-            docs.append(TreasuryYieldCurveModel(**doc))
-
-        await database.create_many(docs=docs, model=TreasuryYieldCurveModel)
+        await loader.upload()
 
     if trial == 2:
         result = await http_client.get(
@@ -71,8 +74,8 @@ async def main() -> None:
                 tenor = tenor // 12
                 tenor_unit = DATE_UNIT.YEAR
             doc[f"value_{tenor}{tenor_unit.value}"] = float(row["PreviousDay"])
-        docs.append(SwapRateCurveModel(**doc))
-        await database.create_many(docs=docs, model=SwapRateCurveModel)
+        docs.append(SwapRateCurve(**doc))
+        await database.create_many(data=docs, resource=SwapRateCurve)
 
     if trial == 3:
         result = await http_client.get(
@@ -96,7 +99,7 @@ async def main() -> None:
     if trial == 4:
         # bday = pd.Timestamp(str(datetime.today())) - pd.tseries.offsets.BusinessDay(n=1)
         result = await database.find(
-            model=SwapRateCurveModel,
+            model=SwapRateCurve,
             query={},
             # query={"date": bday.date()},
         )
@@ -203,7 +206,6 @@ async def main() -> None:
         print(f"Z-spread: {z_spread:.2f} bps")
 
     if trial == 5:
-
         URL = "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xmlview?data=daily_treasury_yield_curve&field_tdr_date_value_month=202507"
 
         def fetch_and_parse_treasury_yields(url: str):
@@ -211,22 +213,17 @@ async def main() -> None:
             with httpx.Client(timeout=timeout) as client:
                 response = client.get(url)
                 response.raise_for_status()
-
             root = ET.fromstring(response.content)
-
-            # Define namespaces
             ns = {
                 "atom": "http://www.w3.org/2005/Atom",
                 "m": "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata",
                 "d": "http://schemas.microsoft.com/ado/2007/08/dataservices",
             }
-
             data = []
             for entry in root.findall("atom:entry", ns):
                 props = entry.find("atom:content/m:properties", ns)
                 if props is None:
                     continue
-
                 row = {}
                 for child in props:
                     tag = child.tag.split("}")[-1]
@@ -237,7 +234,6 @@ async def main() -> None:
                         except ValueError:
                             row[tag] = text
                 data.append(row)
-
             return data
 
         data = fetch_and_parse_treasury_yields(URL)

@@ -22,45 +22,45 @@ class _Database(_DatabaseModel):
         self._client = AsyncIOMotorClient(self._params.host)
         await init_beanie(
             database=self._client[self._params.database],
-            document_models=self._params.entities,
+            document_models=self._params.resources,
         )
         self._is_initialized = True
 
     async def create(
         self,
-        doc: TType,
+        data: TType,
     ) -> TType:
-        await doc.insert()
-        return doc
+        await data.insert()
+        return data
 
     async def create_many(
         self,
-        docs: list[TType],
-        model: Type[TType],
+        data: list[TType],
+        resource: Type[TType],
     ) -> list[TType]:
-        await model.insert_many(docs)
-        return docs
+        await resource.insert_many(data)
+        return data
 
     async def find(
         self,
         query: dict,
-        model: Type[TType],
+        resource: Type[TType],
     ) -> list[TType]:
-        results = await model.find(query).to_list()
+        results = await resource.find(query).to_list()
         return results
 
     async def update(
         self,
-        doc: TType,
+        data: TType,
         update_fields: dict,
     ) -> TType:
         for key, value in update_fields.items():
-            setattr(doc, key, value)
-        await doc.save()
-        return doc
+            setattr(data, key, value)
+        await data.save()
+        return data
 
     async def delete(
         self,
-        doc: TType,
+        data: TType,
     ) -> None:
-        await doc.delete()
+        await data.delete()
