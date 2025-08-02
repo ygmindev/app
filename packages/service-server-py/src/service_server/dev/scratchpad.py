@@ -1,6 +1,6 @@
 import asyncio
 import xml.etree.ElementTree as ET
-from datetime import datetime
+from datetime import date, datetime
 from typing import Any, TypedDict, cast
 
 import QuantLib as ql
@@ -11,7 +11,9 @@ from lib_model.models import (
     TreasuryYieldCurve,
 )
 from lib_shared.database.utils.api_data_loader import ApiDataLoader
-from lib_shared.database.utils.api_data_loader.api_data_loader_models import ApiDataLoaderParams
+from lib_shared.database.utils.api_data_loader.api_data_loader_models import (
+    ApiDataLoaderParams,
+)
 from lib_shared.database.utils.database import database
 from lib_shared.date.constants import CURVE_TENORS, DATE_UNIT
 from lib_shared.http.utils.constants import HTTP_CONTENT_TYPE
@@ -273,6 +275,7 @@ async def main() -> None:
                 )
             return data
 
+        month_str = date.today().strftime("%Y%m")
         loader = ApiDataLoader(
             ApiDataLoaderParams(
                 uri="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xmlview",
@@ -281,7 +284,7 @@ async def main() -> None:
                 content_type=HTTP_CONTENT_TYPE.XML,
                 params={
                     "data": "daily_treasury_yield_curve",
-                    "field_tdr_date_value_month": "202507",
+                    "field_tdr_date_value_month": month_str,
                 },
                 transformer=load_treasury_yield_xml,
             )

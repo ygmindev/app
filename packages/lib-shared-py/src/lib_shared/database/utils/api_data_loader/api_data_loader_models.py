@@ -1,5 +1,4 @@
-from dataclasses import dataclass
-from typing import Any, Callable, Dict, Generic, Optional, Type, TypeVar
+from typing import Callable, Generic, Optional, Type, TypeVar
 
 import attr
 
@@ -14,7 +13,7 @@ TResponse = TypeVar("TResponse")
 
 
 @attr.s(auto_attribs=True, kw_only=True)
-class ApiDataLoaderParams(DataLoaderParams, Generic[TType, TResponse]):
+class ApiDataLoaderParams(DataLoaderParams[TType], Generic[TType, TResponse]):
     uri: str
     transformer: Callable[[TResponse], list[TType]]
     response: Optional[Type[TResponse]]

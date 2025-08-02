@@ -26,6 +26,10 @@ class DataLoader(DataLoaderModel, Generic[TType]):
         data = await self.load()
         if len(data):
             if self._params.database:
+                if self._params.source:
+                    for v in data:
+                        v.source = v.source or self._params.source
+
                 result = await self._params.database.create_many(
                     data=data,
                     resource=self._params.resource,

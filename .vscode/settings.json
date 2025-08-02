@@ -57,9 +57,6 @@
   ],
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "mypy-type-checker.args": [
-    "--config-file=packages/lib-shared-py/pyproject.toml"
-  ],
   "pylint.importStrategy": "fromEnvironment",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.diagnosticSeverityOverrides": {
@@ -75,7 +72,7 @@
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "pylint.interpreter": [
-    "${workspaceFolder}/packages/service-ai-py/.venv/bin/python"
+    "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
   ],
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",

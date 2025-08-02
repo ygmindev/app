@@ -1,19 +1,19 @@
 from abc import ABC, abstractmethod
 from typing import Generic, Optional, Type, TypeVar
 
-from lib_model.resource.entity_resource import EntityResource
+import attr
+from lib_model.models import SourcedEntityResource
 
 from lib_shared.database.utils.database import Database
 from lib_shared.database.utils.database import database as db
 
-TType = TypeVar("TType", bound=EntityResource)
-
-import attr
+TType = TypeVar("TType", bound=SourcedEntityResource)
 
 
 @attr.s(auto_attribs=True, kw_only=True)
 class DataLoaderParams(Generic[TType]):
     resource: Type[TType]
+    source: Optional[str] = None
     database: Optional[Database] = db
 
 

@@ -18,7 +18,6 @@ export const CLEAN_PATTERNS = [
   '.DS_Store',
   '.esbuild',
   '.eslintcache',
-  '.mypy_cache',
   '.pytest_cache',
   '.serverless',
   '.swc',

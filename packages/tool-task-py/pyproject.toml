@@ -11,9 +11,6 @@ line_length = 100
 include_trailing_comma = true
 profile = "black"
 
-[tool.mypy]
-enable_incomplete_feature = ["NewGenericSyntax", "Unpack"]
-
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 
@@ -59,7 +56,6 @@ motor = "^3.7.1"
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
 isort = "^5.13.2"
-mypy = "^1.11.2"
 pytest-cov = "^5.0.0"
 pytest = "^8.3.3"
 flake8 = "^7.1.1"

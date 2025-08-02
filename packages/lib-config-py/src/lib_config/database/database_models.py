@@ -1,8 +1,9 @@
-from dataclasses import dataclass
 from typing import Any, Optional
 
+import attr
 
-@dataclass
+
+@attr.s(auto_attribs=True, kw_only=True)
 class DatabaseConfigModel:
     database: Optional[str]
     resources: list[Any]
