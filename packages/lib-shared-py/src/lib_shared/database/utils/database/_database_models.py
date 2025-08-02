@@ -4,6 +4,8 @@ from beanie import Document
 from lib_config.database.database_models import DatabaseConfigModel
 from pydantic import BaseModel
 
+from lib_shared.database.utils.database.constants import UPSERT_STRATEGY
+
 TType = TypeVar("TType", bound=Document)
 
 
@@ -34,12 +36,6 @@ class DeleteResultModel(BaseModel):
 
 class UpsertResultModel(BaseModel, Generic[TType]):
     result: TType
-    success: bool
-
-
-class UpsertManyResultModel(BaseModel, Generic[TType]):
-    result: list[TType]
-    count: int
     success: bool
 
 
@@ -80,3 +76,12 @@ class _DatabaseModel(Protocol, Generic[TType]):
         self,
         data: TType,
     ) -> DeleteResultModel: ...
+
+    async def upsert(
+        self,
+        data: TType,
+        update: dict,
+        resource: Type[TType],
+        index_field: str = "_id",
+        strategy: UPSERT_STRATEGY = UPSERT_STRATEGY.REPLACE,
+    ) -> UpsertResultModel[TType]: ...
