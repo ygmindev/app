@@ -26,6 +26,7 @@ class ApiDataLoader(DataLoader, ApiDataLoaderModel, Generic[TType]):
         result = await http_client.get(
             self._params.uri,
             response_type=self._params.response,
+            content_type=content_type,
             params=self._params.params,
             headers=merge(
                 {

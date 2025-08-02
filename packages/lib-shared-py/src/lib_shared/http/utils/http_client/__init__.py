@@ -2,7 +2,7 @@ from typing import Any, Dict, Optional, Type, TypeVar, Union, cast
 
 import httpx
 
-from lib_shared.http.utils.constants import HTTP_METHOD
+from lib_shared.http.utils.constants import HTTP_CONTENT_TYPE, HTTP_METHOD
 from lib_shared.http.utils.http_client._http_client import _HttpClient
 from lib_shared.http.utils.http_client.http_client_models import HttpClientModel
 
@@ -29,6 +29,7 @@ class HttpClient(_HttpClient, HttpClientModel):
         json: Optional[Dict[str, Any]] = None,
         headers: Optional[Dict[str, str]] = None,
         response_type: Type[TType] = Type[Any],
+        content_type: Optional[HTTP_CONTENT_TYPE] = HTTP_CONTENT_TYPE.JSON,
     ) -> TType:
         async with httpx.AsyncClient(timeout=self._timeout) as client:
             full_url = f"{self._base_url}{url}"
@@ -41,7 +42,11 @@ class HttpClient(_HttpClient, HttpClientModel):
                 json=json,
             )
             response.raise_for_status()
-            return cast(TType, response.json())
+            match content_type:
+                case HTTP_CONTENT_TYPE.JSON:
+                    return cast(TType, response.json())
+                case _:
+                    return cast(TType, response.content)
 
     async def get(
         self,

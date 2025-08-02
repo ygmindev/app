@@ -1,4 +1,4 @@
-from typing import Generic, Optional, Type
+from typing import Generic
 
 from lib_shared.core.utils.logger import logger
 from lib_shared.database.utils.data_loader.data_loader_models import (
@@ -6,8 +6,6 @@ from lib_shared.database.utils.data_loader.data_loader_models import (
     DataLoaderParams,
     TType,
 )
-from lib_shared.database.utils.database import Database
-from lib_shared.database.utils.database import database as db
 
 
 class DataLoader(DataLoaderModel, Generic[TType]):
@@ -27,12 +25,12 @@ class DataLoader(DataLoaderModel, Generic[TType]):
     ) -> list[TType]:
         data = await self.load()
         if len(data):
-
             if self._params.database:
-                return await self._params.database.create_many(
+                result = await self._params.database.create_many(
                     data=data,
                     resource=self._params.resource,
                 )
+                return result.result
             raise Exception("Database not initialized")
         else:
             logger.info("no data to upload")

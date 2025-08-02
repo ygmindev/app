@@ -1,8 +1,8 @@
 import asyncio
 import xml.etree.ElementTree as ET
 from datetime import datetime
+from typing import Any, TypedDict, cast
 
-import httpx
 import QuantLib as ql
 from lib_model.models import (
     ChatamSofrOisResponseModel,
@@ -11,15 +11,14 @@ from lib_model.models import (
     TreasuryYieldCurve,
 )
 from lib_shared.database.utils.api_data_loader import ApiDataLoader
-from lib_shared.database.utils.api_data_loader.api_data_loader_models import (
-    ApiDataLoaderParams,
-)
+from lib_shared.database.utils.api_data_loader.api_data_loader_models import ApiDataLoaderParams
 from lib_shared.database.utils.database import database
 from lib_shared.date.constants import CURVE_TENORS, DATE_UNIT
+from lib_shared.http.utils.constants import HTTP_CONTENT_TYPE
 from lib_shared.http.utils.http_client import http_client
 from scipy import optimize
 
-trial = 1
+trial = 5
 
 
 async def main() -> None:
@@ -211,14 +210,27 @@ async def main() -> None:
         print(f"Z-spread: {z_spread:.2f} bps")
 
     if trial == 5:
-        URL = "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xmlview?data=daily_treasury_yield_curve&field_tdr_date_value_month=202507"
 
-        def fetch_and_parse_treasury_yields(url: str):
-            timeout = httpx.Timeout(30.0)
-            with httpx.Client(timeout=timeout) as client:
-                response = client.get(url)
-                response.raise_for_status()
-            root = ET.fromstring(response.content)
+        class ResponseModel(TypedDict):
+            NEW_DATE: str
+            BC_1MONTH: float
+            BC_2MONTH: float
+            BC_3MONTH: float
+            BC_4MONTH: float
+            BC_6MONTH: float
+            BC_1YEAR: float
+            BC_2YEAR: float
+            BC_3YEAR: float
+            BC_5YEAR: float
+            BC_7YEAR: float
+            BC_10YEAR: float
+            BC_20YEAR: float
+            BC_30YEAR: float
+
+        def load_treasury_yield_xml(
+            response: Any,
+        ) -> list[TreasuryYieldCurve]:
+            root = ET.fromstring(response)
             ns = {
                 "atom": "http://www.w3.org/2005/Atom",
                 "m": "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata",
@@ -238,11 +250,43 @@ async def main() -> None:
                             row[tag] = float(text)
                         except ValueError:
                             row[tag] = text
-                data.append(row)
+                row = cast(ResponseModel, row)
+                data.append(
+                    {
+                        "date": datetime.strptime(
+                            row["NEW_DATE"], "%Y-%m-%dT%H:%M:%S"
+                        ).date(),
+                        "value_1MONTH": row["BC_1MONTH"],
+                        "value_2MONTH": row["BC_2MONTH"],
+                        "value_3MONTH": row["BC_3MONTH"],
+                        "value_4MONTH": row["BC_4MONTH"],
+                        "value_6MONTH": row["BC_6MONTH"],
+                        "value_1YEAR": row["BC_1YEAR"],
+                        "value_2YEAR": row["BC_2YEAR"],
+                        "value_3YEAR": row["BC_3YEAR"],
+                        "value_5YEAR": row["BC_5YEAR"],
+                        "value_7YEAR": row["BC_7YEAR"],
+                        "value_10YEAR": row["BC_10YEAR"],
+                        "value_20YEAR": row["BC_20YEAR"],
+                        "value_30YEAR": row["BC_30YEAR"],
+                    }
+                )
             return data
 
-        data = fetch_and_parse_treasury_yields(URL)
-        print(data)
+        loader = ApiDataLoader(
+            ApiDataLoaderParams(
+                uri="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xmlview",
+                response=Any,
+                resource=TreasuryYieldCurve,
+                content_type=HTTP_CONTENT_TYPE.XML,
+                params={
+                    "data": "daily_treasury_yield_curve",
+                    "field_tdr_date_value_month": "202507",
+                },
+                transformer=load_treasury_yield_xml,
+            )
+        )
+        await loader.upload()
 
 
 if __name__ == "__main__":

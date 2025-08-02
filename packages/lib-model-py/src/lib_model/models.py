@@ -1,13 +1,17 @@
 import datetime
 from typing import Optional, TypedDict
 
+from pymongo import IndexModel
+
 from lib_model.resource.entity_resource import EntityResource
 
 
 class CurveSnapshot(EntityResource):
     date: datetime.date
     value_1MONTH: Optional[float] = None
+    value_2MONTH: Optional[float] = None
     value_3MONTH: Optional[float] = None
+    value_4MONTH: Optional[float] = None
     value_6MONTH: Optional[float] = None
     value_1YEAR: Optional[float] = None
     value_2YEAR: Optional[float] = None
@@ -20,7 +24,9 @@ class CurveSnapshot(EntityResource):
     value_40YEAR: Optional[float] = None
 
     class Settings:
-        indexes = ["date"]
+        indexes = [
+            IndexModel([("date", -1)], unique=True),
+        ]
 
 
 class TreasuryYieldCurve(CurveSnapshot): ...
@@ -58,6 +64,8 @@ class ChatamSofrOisResponseModel(TypedDict):
     PreviousMonthDate: str
     PreviousYearDate: str
     Rates: list[ChatamSofrOisModel]
+    Updated: list[PolygonTreasuryYieldModel]
+    Updated: list[PolygonTreasuryYieldModel]
     Updated: list[PolygonTreasuryYieldModel]
     Updated: list[PolygonTreasuryYieldModel]
     Updated: list[PolygonTreasuryYieldModel]
