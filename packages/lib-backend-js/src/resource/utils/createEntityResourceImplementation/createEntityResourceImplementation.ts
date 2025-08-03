@@ -6,8 +6,8 @@ import {
   type CreateEntityResourceImplementationParamsModel,
 } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation.models';
 import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 
 export const createEntityResourceImplementation = <TType extends EntityResourceModel>({
   Resource,

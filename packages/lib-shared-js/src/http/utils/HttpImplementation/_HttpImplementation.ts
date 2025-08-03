@@ -59,6 +59,43 @@ export class _HttpImplementation implements _HttpImplementationModel {
       );
   }
 
+  delete = async <TParams, TResult>({
+    params,
+    request,
+    url,
+  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
+    this.request<TParams, TResult>(HTTP_METHOD.DELETE, {
+      request,
+      url: uri<TParams>({ host: url, params }),
+    });
+
+  get = async <TParams, TResult>({
+    onMessage,
+    params,
+    request,
+    url,
+  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
+    this.request<TParams, TResult>(HTTP_METHOD.GET, {
+      onMessage,
+      request,
+      url: uri<TParams>({ host: url, params }),
+    });
+
+  post = async <TParams, TResult>({
+    onMessage,
+    params,
+    request,
+    url,
+  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
+    this.request<TParams, TResult>(HTTP_METHOD.POST, { onMessage, params, request, url });
+
+  put = async <TParams, TResult>({
+    params,
+    request,
+    url,
+  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
+    this.request<TParams, TResult>(HTTP_METHOD.PUT, { params, request, url });
+
   request = async <TParams, TResult>(
     method: HttpMethodModel,
     { onMessage, params, request, url }: _HttpRequestParamsModel<TParams>,
@@ -109,41 +146,4 @@ export class _HttpImplementation implements _HttpImplementationModel {
       throw eF;
     }
   };
-
-  get = async <TParams, TResult>({
-    onMessage,
-    params,
-    request,
-    url,
-  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this.request<TParams, TResult>(HTTP_METHOD.GET, {
-      onMessage,
-      request,
-      url: uri<TParams>({ host: url, params }),
-    });
-
-  delete = async <TParams, TResult>({
-    params,
-    request,
-    url,
-  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this.request<TParams, TResult>(HTTP_METHOD.DELETE, {
-      request,
-      url: uri<TParams>({ host: url, params }),
-    });
-
-  post = async <TParams, TResult>({
-    onMessage,
-    params,
-    request,
-    url,
-  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this.request<TParams, TResult>(HTTP_METHOD.POST, { onMessage, params, request, url });
-
-  put = async <TParams, TResult>({
-    params,
-    request,
-    url,
-  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
-    this.request<TParams, TResult>(HTTP_METHOD.PUT, { params, request, url });
 }

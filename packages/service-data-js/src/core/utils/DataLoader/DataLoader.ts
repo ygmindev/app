@@ -14,7 +14,7 @@ export class DataLoader<TType extends SourcedEntityResourceModel, TRoot = undefi
     this.params = params;
   }
 
-  async load(): Promise<Array<TType>> {
+  async load(): Promise<Array<Partial<TType>>> {
     throw new Error('Method not implemented.');
   }
 
