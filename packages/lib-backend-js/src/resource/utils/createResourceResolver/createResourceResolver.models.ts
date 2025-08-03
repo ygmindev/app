@@ -19,13 +19,9 @@ export type CreateResourceResolverParamsModel<
   TType extends EntityResourceModel,
   TRoot = undefined,
 > = ResourceNameParamsModel<TRoot> & {
-  Resource(): ResourceClassModel<TType>;
-
   ResourceImplementation: ResourceClassModel<
     PartialModel<ResourceImplementationModel<TType, TRoot>>
   >;
-
-  RootResource?(): TRoot extends undefined ? never : ResourceClassModel<TRoot>;
 
   access?: PartialModel<Record<ResourceAccessTypeModel, ACCESS_LEVEL>>;
 
@@ -38,6 +34,10 @@ export type CreateResourceResolverParamsModel<
   } & {
     [TKey in RESOURCE_METHOD_TYPE]?: ResourceResolverAuthorizerModel<TKey, TType>;
   };
+
+  Resource(): ResourceClassModel<TType>;
+
+  RootResource?(): TRoot extends undefined ? never : ResourceClassModel<TRoot>;
 };
 
 export type CreateResourceResolverModel<

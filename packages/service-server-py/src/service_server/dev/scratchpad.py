@@ -72,7 +72,9 @@ async def main() -> None:
         )
 
         docs = []
-        doc = {"date": datetime.strptime(result["PreviousDayDate"], "%Y-%m-%d").date()}
+        doc: dict = {
+            "date": datetime.strptime(result["PreviousDayDate"], "%Y-%m-%d").date()
+        }
         for row in result["Rates"]:
             tenor = row["LengthInMonths"]
             tenor_unit = DATE_UNIT.MONTH
@@ -105,11 +107,11 @@ async def main() -> None:
     if trial == 4:
         # bday = pd.Timestamp(str(datetime.today())) - pd.tseries.offsets.BusinessDay(n=1)
         result = await database.find(
-            model=SwapRateCurve,
+            resource=SwapRateCurve,
             query={},
             # query={"date": bday.date()},
         )
-        row = result[-1]
+        row = result.result[-1]
         quotes = {
             "1Y": row.value_1YEAR,
             "2Y": row.value_2YEAR,

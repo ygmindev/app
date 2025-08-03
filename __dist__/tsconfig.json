@@ -64,6 +64,9 @@
       "@lib/shared/*": [
         "packages/lib-shared-js/src/*"
       ],
+      "@service/data/*": [
+        "packages/service-data-js/src/*"
+      ],
       "@service/graphql-sandbox/*": [
         "packages/service-graphql-sandbox-js/src/*"
       ],
