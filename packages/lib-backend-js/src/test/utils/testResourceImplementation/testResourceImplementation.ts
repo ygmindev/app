@@ -3,10 +3,10 @@ import { seed } from '@lib/backend/database/utils/seed/seed';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type TestResourceImplementationParamsModel } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation.models';
 import { config as databaseConfig } from '@lib/config/database/database.mongo';
+import { type TestableResourceModel } from '@lib/model/test/TestableResource/TestableResource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
-import { type TestableResourceModel } from '@lib/model/test/TestableResource/TestableResource.models';
 import every from 'lodash/every';
 import toString from 'lodash/toString';
 

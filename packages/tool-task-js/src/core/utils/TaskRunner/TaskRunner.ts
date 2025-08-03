@@ -30,6 +30,33 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   protected _aliases: Record<string, string> = {};
   protected _pids: Set<number> = new Set();
 
+  register = <TType extends unknown>({
+    name,
+    root,
+    target,
+    ...options
+  }: TaskParamsModel<TType>): void => {
+    const rootF = root ?? (target ? fromPackages(target) : fromRoot());
+    const targetF = target && kebabCase(target);
+    const nameF = filterNil([targetF, kebabCase(name)]).join('-');
+    const alias = kebabCase(nameF)
+      .split('-')
+      .map((p) => p.charAt(0))
+      .join('');
+
+    if (this._aliases[alias]) {
+      throw new DuplicateError(`alias ${alias} (${nameF}) exists`);
+    }
+
+    this._aliases[alias] = nameF;
+
+    [nameF, alias].forEach((value) => {
+      this.registerTask(value, async () =>
+        this.runTask({ ...options, name: nameF, root: rootF, target: targetF }),
+      );
+    });
+  };
+
   resolveTask = async <TType extends unknown>(
     value: TaskModel<TType>,
     context: TaskContextModel<TType>,
@@ -58,13 +85,6 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
         }
       }
     }
-  };
-
-  runTasks = async <TType extends unknown>(
-    value: Array<TaskModel<TType>>,
-    context: TaskContextModel<TType>,
-  ): Promise<void> => {
-    await mapSequence(value.map((v) => async () => this.resolveTask(v, context)));
   };
 
   runTask = async <TType extends unknown>({
@@ -128,31 +148,11 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     }
   };
 
-  register = <TType extends unknown>({
-    name,
-    root,
-    target,
-    ...options
-  }: TaskParamsModel<TType>): void => {
-    const rootF = root ?? (target ? fromPackages(target) : fromRoot());
-    const targetF = target && kebabCase(target);
-    const nameF = filterNil([targetF, kebabCase(name)]).join('-');
-    const alias = kebabCase(nameF)
-      .split('-')
-      .map((p) => p.charAt(0))
-      .join('');
-
-    if (this._aliases[alias]) {
-      throw new DuplicateError(`alias ${alias} (${nameF}) exists`);
-    }
-
-    this._aliases[alias] = nameF;
-
-    [nameF, alias].forEach((value) => {
-      this.registerTask(value, async () =>
-        this.runTask({ ...options, name: nameF, root: rootF, target: targetF }),
-      );
-    });
+  runTasks = async <TType extends unknown>(
+    value: Array<TaskModel<TType>>,
+    context: TaskContextModel<TType>,
+  ): Promise<void> => {
+    await mapSequence(value.map((v) => async () => this.resolveTask(v, context)));
   };
 
   get aliases(): Record<string, string> {

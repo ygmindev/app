@@ -1,0 +1,53 @@
+import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { SourcedEntityResource } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource';
+import { CurveModel } from '@lib/model/quant/Curve/Curve.models';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
+
+@withEntity({ isAbstract: true })
+export class Curve extends SourcedEntityResource implements CurveModel {
+  @withField({ isDatabase: true, isUnique: true, type: DATA_TYPE.DATE })
+  date!: Date;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_10yr?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_1mo?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_1yr?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_20yr?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_2mo?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_2yr?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_30yr?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_3mo?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_3yr?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_40yr?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_4mo?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_5yr?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_6mo?: number;
+
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_7yr?: number;
+}

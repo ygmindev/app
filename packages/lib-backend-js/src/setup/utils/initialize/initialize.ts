@@ -7,13 +7,18 @@ import {
   type InitializeModel,
   type InitializeParamsModel,
 } from '@lib/backend/setup/utils/initialize/initialize.models';
+import { config as databaseConfig } from '@lib/config/database/database.mongo';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 let result: InitializeModel;
 
-export const initialize = async ({ database }: InitializeParamsModel): Promise<InitializeModel> => {
+export const initialize = async (
+  { database = databaseConfig.params() }: InitializeParamsModel = {
+    database: databaseConfig.params(),
+  },
+): Promise<InitializeModel> => {
   const onCleanUp = async (): Promise<void> => {
     await cleanup();
   };

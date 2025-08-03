@@ -1,3 +1,10 @@
+import { _database } from '@lib/config/database/_database';
+import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
+import {
+  type _DatabaseConfigModel,
+  type DatabaseConfigModel,
+} from '@lib/config/database/database.models';
+import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { Utility } from '@lib/model/admin/Utility/Utility';
 import { Vendor } from '@lib/model/admin/Vendor/Vendor';
 import { Access } from '@lib/model/auth/Access/Access';
@@ -12,19 +19,13 @@ import { Order } from '@lib/model/commerce/Order/Order';
 import { Product } from '@lib/model/commerce/Product/Product';
 import { Group } from '@lib/model/group/Group/Group';
 import { Socket } from '@lib/model/http/Socket/Socket';
+import { TreasuryRate } from '@lib/model/quant/TreasuryRate/TreasuryRate';
 import { Snapshot } from '@lib/model/test/Snapshot/Snapshot';
 import { TestableEmbeddedResource } from '@lib/model/test/TestableEmbeddedResource/TestableEmbeddedResource';
 import { TestableEntityResource } from '@lib/model/test/TestableEntityResource/TestableEntityResource';
 import { TestableRelatedResource } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource';
 import { LinkedUser } from '@lib/model/user/LinkedUser/LinkedUser';
 import { User } from '@lib/model/user/User/User';
-import { _database } from '@lib/config/database/_database';
-import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
-import {
-  type _DatabaseConfigModel,
-  type DatabaseConfigModel,
-} from '@lib/config/database/database.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
 export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
@@ -47,6 +48,7 @@ export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
       Product,
       Role,
       Socket,
+      TreasuryRate,
       User,
       Utility,
       Vendor,

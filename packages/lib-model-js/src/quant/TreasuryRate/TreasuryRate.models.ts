@@ -1,5 +1,3 @@
-import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
 
-export type TreasuryRateModel = EntityResourceModel & {
-  name: string;
-};
+export type TreasuryRateModel = CurveModel;

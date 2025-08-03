@@ -25,6 +25,7 @@ export enum HTTP_RESPONSE_TYPE {
   BLOB = 'blob',
   JSON = 'json',
   STREAM = 'stream',
+  XML = 'xml',
 }
 
 export const HTTP_STATUS_CODE = {

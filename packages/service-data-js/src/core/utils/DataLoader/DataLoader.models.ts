@@ -10,5 +10,5 @@ export type DataLoaderParamsModel<TType extends SourcedEntityResourceModel, TRoo
 
 export type DataLoaderModel<TType extends SourcedEntityResourceModel> = {
   load(): Promise<Array<Partial<TType>>>;
-  upload(): Promise<Array<TType>>;
+  upload(): Promise<Array<Partial<TType>>>;
 };

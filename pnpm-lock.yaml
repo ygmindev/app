@@ -1115,11 +1115,19 @@ importers:
 
   packages/lib-model-js: {}
 
+  packages/lib-quant-py: {}
+
   packages/lib-shared-js: {}
 
   packages/lib-shared-py: {}
 
   packages/service-ai-py: {}
+
+  packages/service-data-js:
+    dependencies:
+      xml2js:
+        specifier: ^0.6.2
+        version: 0.6.2
 
   packages/service-graphql-sandbox-js:
     dependencies:
@@ -1838,6 +1846,8 @@ importers:
         specifier: ^1.9.5
         version: 1.9.5
 
+  packages/service-server-py: {}
+
   packages/tool-task-js:
     dependencies:
       0x:
@@ -2453,6 +2463,7 @@ packages:
   '@apollo/server@4.12.0':
     resolution: {integrity: sha512-Z5RNTCnIia+dFsP5HW2ugQMrIOWgyNWyKP+jMVXthp/ECjYyyRYPC41ukCDwxHQY4vNZ3rgbgqroWVQUGFt2gA==}
     engines: {node: '>=14.16.0'}
+    deprecated: Apollo Server v4 is deprecated and will transition to end-of-life on January 26, 2026. As long as you are already using a non-EOL version of Node.js, upgrading to v5 should take only a few minutes. See https://www.apollographql.com/docs/apollo-server/previous-versions for details.
     peerDependencies:
       graphql: ^16.6.0
 
@@ -13982,6 +13993,7 @@ packages:
   metro-react-native-babel-preset@0.77.0:
     resolution: {integrity: sha512-HPPD+bTxADtoE4y/4t1txgTQ1LVR6imOBy7RMHUsqMVTbekoi8Ph5YI9vKX2VMPtVWeFt0w9YnCSLPa76GcXsA==}
     engines: {node: '>=18'}
+    deprecated: Use @react-native/babel-preset instead
     peerDependencies:
       '@babel/core': '*'
 
@@ -15737,6 +15749,7 @@ packages:
 
   react-native-vector-icons@10.2.0:
     resolution: {integrity: sha512-n5HGcxUuVaTf9QJPs/W22xQpC2Z9u0nb0KgLPnVltP8vdUvOp6+R26gF55kilP/fV4eL4vsAHUqUjewppJMBOQ==}
+    deprecated: react-native-vector-icons package has moved to a new model of per-icon-family packages. See the https://github.com/oblador/react-native-vector-icons/blob/master/MIGRATION.md on how to migrate
     hasBin: true
 
   react-native-web@0.20.0:

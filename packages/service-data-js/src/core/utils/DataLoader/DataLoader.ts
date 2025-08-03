@@ -18,7 +18,7 @@ export class DataLoader<TType extends SourcedEntityResourceModel, TRoot = undefi
     throw new Error('Method not implemented.');
   }
 
-  async upload(): Promise<Array<TType>> {
+  async upload(): Promise<Array<Partial<TType>>> {
     let data = await this.load();
     data = data.map((v) => ({ ...v, source: this.params?.source }));
     await Container.get(this.params.ResourceImplementation)?.createMany?.({ form: data });
