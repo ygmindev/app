@@ -13,20 +13,19 @@ import { DataLoader } from '@service/data/core/utils/DataLoader/DataLoader';
 
 export class ApiDataLoader<
     TType extends SourcedEntityResourceModel,
-    TRoot = undefined,
     TResponse = unknown,
     TResponseType extends HTTP_RESPONSE_TYPE = HTTP_RESPONSE_TYPE.JSON,
   >
-  extends DataLoader<TType, TRoot>
+  extends DataLoader<TType>
   implements ApiDataLoaderModel<TType>
 {
-  params!: ApiDataLoaderParamsModel<TType, TRoot, TResponse, TResponseType>;
+  params!: ApiDataLoaderParamsModel<TType, TResponse, TResponseType>;
 
-  constructor(params: ApiDataLoaderParamsModel<TType, TRoot, TResponse, TResponseType>) {
-    super(params);
+  constructor(params: ApiDataLoaderParamsModel<TType, TResponse, TResponseType>) {
+    super({ ...params, source: params.source ?? params.uri });
   }
 
-  async load(): Promise<Array<Partial<TType>>> {
+  async fetch(): Promise<Array<Partial<TType>>> {
     const {
       headers,
       method = HTTP_METHOD.GET,

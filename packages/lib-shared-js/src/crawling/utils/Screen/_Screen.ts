@@ -29,7 +29,7 @@ import { type UriModel } from '@lib/shared/route/route.models';
 import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
-import { type Browser, type ElementHandle, type Frame, type Page } from 'puppeteer';
+import { type Browser, type ElementHandle, executablePath, type Frame, type Page } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
@@ -37,51 +37,20 @@ import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
 puppeteer.use(StealthPlugin());
 
 export class _Screen implements _ScreenModel {
-  protected options!: _ScreenParamsModel;
-
   protected browser!: Browser;
-
   protected counter: number = 0;
-
-  protected page!: Page;
-
   protected isInitialized?: boolean;
+  protected options!: _ScreenParamsModel;
+  protected page!: Page;
 
   constructor(options: _ScreenParamsModel) {
     this.options = options;
   }
 
-  async initialize(): Promise<void> {
-    this.browser = await puppeteer.launch({
-      ..._screen(this.options),
-      executablePath:
-        process.env.NODE_ENV === 'production' ? await chromium.executablePath() : undefined,
-    });
-
-    this.isInitialized = true;
-
-    this.page = await this.browser.newPage();
-    await this.page.setCacheEnabled(false);
-    await this.page.setUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
-    );
-    await this.page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
-    await this.page.setRequestInterception(true);
-    await this.page.evaluateOnNewDocument(() => {
-      Object.defineProperty(navigator, 'webdriver', {
-        get: () => false,
-      });
-    });
-
-    this.page.on('request', (req) => {
-      const type = req.resourceType();
-      if (this.options.isIgnoreMedia && (type === 'image' || type === 'font' || type === 'media')) {
-        void req.abort();
-      } else {
-        const headers = req.headers();
-        void req.continue(headers);
-      }
-    });
+  async close(): Promise<void> {
+    await this.page.close();
+    await this.browser.close();
+    this.counter = 0;
   }
 
   async find(
@@ -149,10 +118,37 @@ export class _Screen implements _ScreenModel {
     return [];
   }
 
-  async close(): Promise<void> {
-    await this.page.close();
-    await this.browser.close();
-    this.counter = 0;
+  async initialize(): Promise<void> {
+    this.browser = await puppeteer.launch({
+      ..._screen(this.options),
+      executablePath:
+        process.env.NODE_ENV === 'production' ? await chromium.executablePath() : executablePath(),
+    });
+
+    this.isInitialized = true;
+
+    this.page = await this.browser.newPage();
+    await this.page.setCacheEnabled(false);
+    await this.page.setUserAgent(
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+    );
+    await this.page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9' });
+    await this.page.setRequestInterception(true);
+    await this.page.evaluateOnNewDocument(() => {
+      Object.defineProperty(navigator, 'webdriver', {
+        get: () => false,
+      });
+    });
+
+    this.page.on('request', (req) => {
+      const type = req.resourceType();
+      if (this.options.isIgnoreMedia && (type === 'image' || type === 'font' || type === 'media')) {
+        void req.abort();
+      } else {
+        const headers = req.headers();
+        void req.continue(headers);
+      }
+    });
   }
 
   async key(value: KeyTypeModel, { delay = true }: SelectorOptionModel = {}): Promise<void> {
@@ -182,7 +178,7 @@ export class _Screen implements _ScreenModel {
       logger.debug(`open page ${uriF}`);
       await this.page.goto(uriF, {
         timeout: this.options.navigationTimeout,
-        waitUntil: 'networkidle0',
+        waitUntil: 'domcontentloaded',
       });
       await this.page
         .createCDPSession()
@@ -268,6 +264,8 @@ export class _Screen implements _ScreenModel {
 
 const getSelector = (selector: SelectorModel): string => {
   switch (selector.type ?? SELECTOR_TYPE.TEST_ID) {
+    case SELECTOR_TYPE.CLASS:
+      return `.${selector.value}`;
     case SELECTOR_TYPE.DATA:
       return `[${selector.key}="${selector.value}"]`;
     case SELECTOR_TYPE.TEST_ID:
@@ -373,6 +371,11 @@ class _Handle implements HandleModel {
     this.options = options;
   }
 
+  async content(): Promise<string | null> {
+    const text = await this.handle.evaluate(async (el) => el?.innerHTML);
+    return text ?? null;
+  }
+
   async find(
     selector: SelectorModel,
     {
@@ -443,8 +446,9 @@ class _Handle implements HandleModel {
     return [];
   }
 
-  async press(): Promise<void> {
-    await this.handle.click();
+  async next(): Promise<HandleModel | null> {
+    const next = await this.handle.evaluateHandle((h) => h?.nextElementSibling);
+    return next ? new _Handle(next as ElementHandle, this.options) : null;
   }
 
   async parent(): Promise<HandleModel | null> {
@@ -452,38 +456,22 @@ class _Handle implements HandleModel {
     return parent ? new _Handle(parent as ElementHandle, this.options) : null;
   }
 
+  async press(): Promise<void> {
+    await this.handle.click();
+  }
+
   async previous(): Promise<HandleModel | null> {
     const previous = await this.handle.evaluateHandle((h) => h?.previousElementSibling);
     return previous ? new _Handle(previous as ElementHandle, this.options) : null;
   }
 
-  async next(): Promise<HandleModel | null> {
-    const next = await this.handle.evaluateHandle((h) => h?.nextElementSibling);
-    return next ? new _Handle(next as ElementHandle, this.options) : null;
-  }
-
-  async url(): Promise<string | null> {
-    const text = await this.handle.evaluate(async (el) => (el as HTMLAnchorElement)?.href);
-    return text ?? null;
-  }
-
-  async content(): Promise<string | null> {
-    const text = await this.handle.evaluate(async (el) => el?.innerHTML);
-    return text ?? null;
+  async select(value: string): Promise<void> {
+    this.handle.select && (await this.handle.select(value));
   }
 
   async src(): Promise<string | null> {
     const text = await this.handle.evaluate(async (el) => (el as HTMLImageElement)?.src);
     return text ?? null;
-  }
-
-  async value(): Promise<string | null> {
-    const text = await this.handle.evaluate(async (el) => (el as HTMLInputElement)?.value);
-    return text ?? null;
-  }
-
-  async select(value: string): Promise<void> {
-    this.handle.select && (await this.handle.select(value));
   }
 
   async text(): Promise<string | null> {
@@ -493,6 +481,15 @@ class _Handle implements HandleModel {
 
   async type(value: string): Promise<void> {
     await this.handle.type(value);
+  }
+
+  async url(): Promise<string | null> {
+    const text = await this.handle.evaluate(async (el) => (el as HTMLAnchorElement)?.href);
+    return text ?? null;
+  }
+  async value(): Promise<string | null> {
+    const text = await this.handle.evaluate(async (el) => (el as HTMLInputElement)?.value);
+    return text ?? null;
   }
 }
 

@@ -8,10 +8,9 @@ import {
 
 export type ApiDataLoaderParamsModel<
   TType extends SourcedEntityResourceModel,
-  TRoot = undefined,
   TResponse = unknown,
   TResponseType extends HTTP_RESPONSE_TYPE = HTTP_RESPONSE_TYPE.JSON,
-> = DataLoaderParamsModel<TType, TRoot> & {
+> = DataLoaderParamsModel<TType> & {
   headers?: Record<string, unknown>;
   method?: HTTP_METHOD;
   params?: Record<string, unknown>;

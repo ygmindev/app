@@ -30,8 +30,8 @@ lib_shared = {path="../lib-shared-py", develop=true}
 lib_quant = {path="../lib-quant-py", develop=true}
 python = "3.12.6"
 transformers = "^4.46.3"
-torch = "^2.5.1"
-torchvision = "^0.20.1"
+torch = "2.7.1"
+torchvision = "0.22.1"
 torchaudio = "^2.5.1"
 torcheval = "^0.0.7"
 numpy = "1.26.4"
@@ -61,6 +61,10 @@ beautifulsoup4 = "^4.13.4"
 httpx = "^0.28.1"
 lxml = "^6.0.0"
 attr = "^0.3.2"
+surya-ocr = "^0.15.2"
+img2table = "^1.4.1"
+streamlit = "^1.47.1"
+pdftext = "^0.6.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"

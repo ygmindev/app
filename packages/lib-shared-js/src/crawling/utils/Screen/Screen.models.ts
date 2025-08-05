@@ -67,7 +67,7 @@ export type SelectorModel = {
 } & (
   | {
       key?: never;
-      type?: SELECTOR_TYPE.ID | SELECTOR_TYPE.TEXT | SELECTOR_TYPE.TEST_ID;
+      type?: SELECTOR_TYPE.CLASS | SELECTOR_TYPE.ID | SELECTOR_TYPE.TEXT | SELECTOR_TYPE.TEST_ID;
     }
   | { key: string; type?: SELECTOR_TYPE.DATA | SELECTOR_TYPE.FRAME }
 );

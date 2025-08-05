@@ -12,8 +12,7 @@ import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { JWT } from 'google-auth-library';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import { toNumber } from 'lodash';
-import { trimStart } from 'lodash';
+import { toNumber, trimStart } from 'lodash';
 
 let screen: Screen;
 
@@ -170,7 +169,6 @@ export const main = createLambdaHandler<{
             if (row['Product title']) {
               const titles = (row['Product title'] as string).split('\n\n');
               if (titles.length > 1) {
-                // eslint-disable-next-line prefer-destructuring
                 row['Product title'] = titles[1].trim();
               }
             }

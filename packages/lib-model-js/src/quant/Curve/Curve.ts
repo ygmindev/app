@@ -9,6 +9,9 @@ export class Curve extends SourcedEntityResource implements CurveModel {
   @withField({ isDatabase: true, isUnique: true, type: DATA_TYPE.DATE })
   date!: Date;
 
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.DATE })
+  lastUpdated?: Date;
+
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   value_10yr?: number;
 
