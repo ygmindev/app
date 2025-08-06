@@ -23,6 +23,7 @@ import {
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/Screen/Screen.models';
+import { RUNTIME } from '@lib/shared/environment/environment.constants';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type UriModel } from '@lib/shared/route/route.models';
@@ -122,7 +123,9 @@ export class _Screen implements _ScreenModel {
     this.browser = await puppeteer.launch({
       ..._screen(this.options),
       executablePath:
-        process.env.NODE_ENV === 'production' ? await chromium.executablePath() : executablePath(),
+        process.env.NODE_RUNTIME === RUNTIME.AWS_LAMBDA
+          ? await chromium.executablePath()
+          : executablePath(),
     });
 
     this.isInitialized = true;

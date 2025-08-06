@@ -2,13 +2,13 @@ import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
 import { CurveImplementation } from '@lib/model/quant/Curve/CurveImplementation/CurveImplementation';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import { dateTimeParse } from '@lib/shared/data/utils/dateTimeParse/dateTimeParse';
-import { MultiDataLoader } from '@service/data/core/utils/MultiDataLoader/MultiDataLoader';
+import { MultiSourceDataLoader } from '@service/data/core/utils/MultiSourceDataLoader/MultiSourceDataLoader';
 import { TableCrawlDataLoader } from '@service/data/core/utils/TableCrawlDataLoader/TableCrawlDataLoader';
 import { OIS_SWAP_RATE } from '@service/data/quant/utils/oisSwapRateLoader/oisSwapRateLoader.constants';
 import { type OisSwapRateLoaderModel } from '@service/data/quant/utils/oisSwapRateLoader/oisSwapRateLoader.models';
 import toNumber from 'lodash/toNumber';
 
-export const oisSwapRateLoader: OisSwapRateLoaderModel = new MultiDataLoader({
+export const oisSwapRateLoader: OisSwapRateLoaderModel = new MultiSourceDataLoader({
   ResourceImplementation: CurveImplementation,
 
   loaders: [

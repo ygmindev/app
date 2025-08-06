@@ -27,6 +27,7 @@ export type TableCrawlDataLoaderParamsModel<
   rowsSelector?:
     | SelectorModel
     | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<Array<HandleModel>>);
+  skipRows?: number;
   tableSelector?:
     | SelectorModel
     | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<HandleModel | null>);

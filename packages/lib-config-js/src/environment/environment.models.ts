@@ -1,10 +1,7 @@
 // COMPLETE
 import { type ServerlessRuntimeModel } from '@lib/backend/serverless/serverless.models';
 import { type BooleanStringModel } from '@lib/shared/core/core.models';
-import {
-  type EnvironmentModel,
-  type RuntimeModel,
-} from '@lib/shared/environment/environment.models';
+import { type RUNTIME } from '@lib/shared/environment/environment.constants';
 import { type PlatformModel } from '@lib/shared/platform/platform.models';
 
 export type EnvironmentConfigModel = {
@@ -28,10 +25,10 @@ export type EnvironmentConfigModel = {
   AWS_SECRET_ACCESS_KEY: string;
   ENV_NAME: string;
   ENV_PLATFORM: PlatformModel;
-  NODE_ENV: EnvironmentModel;
+  NODE_ENV: string;
   NODE_EXTRA_CA_CERTS: string;
   NODE_OPTIONS?: string;
-  NODE_RUNTIME?: RuntimeModel;
+  NODE_RUNTIME?: `${RUNTIME}`;
   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: BooleanStringModel;
   SERVERLESS_RUNTIME: ServerlessRuntimeModel;
   SERVER_APP_GOOGLE_API_KEY: string;

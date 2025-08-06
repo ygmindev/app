@@ -3,17 +3,17 @@ import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type SourcedEntityResourceModel } from '@service/data/core/core.models';
 import { DataLoader } from '@service/data/core/utils/DataLoader/DataLoader';
 import {
-  type MultiDataLoaderModel,
-  type MultiDataLoaderParamsModel,
-} from '@service/data/core/utils/MultiDataLoader/MultiDataLoader.models';
+  type MultiSourceDataLoaderModel,
+  type MultiSourceDataLoaderParamsModel,
+} from '@service/data/core/utils/MultiSourceDataLoader/MultiSourceDataLoader.models';
 
-export class MultiDataLoader<TType extends SourcedEntityResourceModel>
+export class MultiSourceDataLoader<TType extends SourcedEntityResourceModel>
   extends DataLoader<TType>
-  implements MultiDataLoaderModel<TType>
+  implements MultiSourceDataLoaderModel<TType>
 {
-  params!: MultiDataLoaderParamsModel<TType>;
+  params!: MultiSourceDataLoaderParamsModel<TType>;
 
-  constructor(params: MultiDataLoaderParamsModel<TType>) {
+  constructor(params: MultiSourceDataLoaderParamsModel<TType>) {
     super(params);
   }
 
@@ -22,7 +22,7 @@ export class MultiDataLoader<TType extends SourcedEntityResourceModel>
       await mapParallel(
         this.params.loaders.map((v) => async () => {
           try {
-            return await v.fetch();
+            return await v.fetchPostProcess();
           } catch (e) {
             logger.error(`skipping ${v.source} with error: ${e as Error}`);
             return [];

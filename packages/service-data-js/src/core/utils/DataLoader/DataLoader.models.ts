@@ -10,5 +10,6 @@ export type DataLoaderParamsModel<TType extends SourcedEntityResourceModel> = {
 export type DataLoaderModel<TType extends SourcedEntityResourceModel> = {
   get source(): string | undefined;
   fetch(): Promise<Array<Partial<TType>>>;
+  fetchPostProcess(): Promise<Array<Partial<TType>>>;
   upload(): Promise<Array<Partial<TType>>>;
 };

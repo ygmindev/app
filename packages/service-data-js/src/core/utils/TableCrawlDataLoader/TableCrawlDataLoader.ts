@@ -23,6 +23,7 @@ export class TableCrawlDataLoader<
     nCols,
     nRows,
     rowsSelector = { value: 'tr' },
+    skipRows = 0,
     tableSelector = { value: 'table' },
     transformer,
     ...params
@@ -49,8 +50,9 @@ export class TableCrawlDataLoader<
             values.push(await mapParallel(cells?.map((h) => async () => h.text())));
           }
 
-          const [headers, ...rowData] = values;
-          const headersF = headers.map((h) => h ?? '');
+          const headers = values.slice(0, skipRows + 1);
+          const rowData = values.slice(skipRows + 1);
+          const headersF = headers[0].map((h) => h ?? '');
           const data = rowData.map(
             (row) =>
               cleanObject(

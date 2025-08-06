@@ -1,4 +1,4 @@
 import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
-import { type MultiDataLoaderModel } from '@service/data/core/utils/MultiDataLoader/MultiDataLoader.models';
+import { type MultiSourceDataLoaderModel } from '@service/data/core/utils/MultiSourceDataLoader/MultiSourceDataLoader.models';
 
-export type OisSwapRateLoaderModel = MultiDataLoaderModel<CurveModel>;
+export type OisSwapRateLoaderModel = MultiSourceDataLoaderModel<CurveModel>;

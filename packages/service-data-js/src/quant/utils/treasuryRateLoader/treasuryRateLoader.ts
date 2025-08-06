@@ -8,12 +8,12 @@ import { dateTimeParse } from '@lib/shared/data/utils/dateTimeParse/dateTimePars
 import { RELATIVE_DATE_UNIT } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
 import { HTTP_RESPONSE_TYPE } from '@lib/shared/http/http.constants';
 import { ApiDataLoader } from '@service/data/core/utils/ApiDataLoader/ApiDataLoader';
-import { MultiDataLoader } from '@service/data/core/utils/MultiDataLoader/MultiDataLoader';
+import { MultiSourceDataLoader } from '@service/data/core/utils/MultiSourceDataLoader/MultiSourceDataLoader';
 import { TREASURY_RATE } from '@service/data/quant/utils/treasuryRateLoader/treasuryRateLoader.constants';
 import { type TreasuryRateLoaderModel } from '@service/data/quant/utils/treasuryRateLoader/treasuryRateLoader.models';
 import isNil from 'lodash/isNil';
 
-export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiDataLoader({
+export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLoader({
   ResourceImplementation: CurveImplementation,
 
   loaders: [

@@ -7,6 +7,7 @@ import {
 import { _screen } from '@lib/config/screen/_screen';
 import { type _ScreenConfigModel, type ScreenConfigModel } from '@lib/config/screen/screen.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { RUNTIME } from '@lib/shared/environment/environment.constants';
 
 export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
   config: _screen,
@@ -36,7 +37,9 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
     //   },
     // ],
     snapshotPath:
-      process.env.NODE_ENV === 'production' ? undefined : fromWorking(BUILD_DIR, 'snapshots'),
+      process.env.NODE_RUNTIME === RUNTIME.AWS_LAMBDA
+        ? undefined
+        : fromWorking(BUILD_DIR, 'snapshots'),
 
     videoExtension: VIDEO_EXTENSION_DEFAULT,
   }),

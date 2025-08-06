@@ -19,10 +19,13 @@ export class DataLoader<TType extends SourcedEntityResourceModel>
     throw new Error('Method not implemented.');
   }
 
+  async fetchPostProcess(): Promise<Array<Partial<TType>>> {
+    return (await this.fetch()).map((v) => ({ ...v, source: v.source ?? this.params?.source }));
+  }
+
   async upload(): Promise<Array<Partial<TType>>> {
     if (this.params.ResourceImplementation) {
-      let data = await this.fetch();
-      data = data.map((v) => ({ ...v, source: this.params?.source }));
+      const data = await this.fetchPostProcess();
       await Container.get(this.params.ResourceImplementation)?.createMany?.({ form: data });
       return data;
     }

@@ -5,7 +5,7 @@ import {
 import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
-import { type EnvironmentModel } from '@lib/shared/environment/environment.models';
+import { type ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type HttpMethodModel, type HttpProtocolModel } from '@lib/shared/http/http.models';
 import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { type AWS } from '@serverless/typescript';
@@ -18,7 +18,7 @@ export type ServerlessConfigModel = Pick<FileConfigModel, 'buildDir' | 'prunePat
 
   dotenv(): void;
 
-  environment: EnvironmentModel;
+  environment: ENVIRONMENT;
 
   // TODO: to api
   functions: Record<

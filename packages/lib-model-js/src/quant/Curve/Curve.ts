@@ -19,45 +19,36 @@ export class Curve extends SourcedEntityResource implements CurveModel {
   @withField({ isDatabase: true, type: DATA_TYPE.STRING })
   name!: string;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
-  value_10yr?: number;
-
+  /* eslint-disable @typescript-eslint/member-ordering */
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   value_1mo?: number;
-
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
-  value_1yr?: number;
-
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
-  value_20yr?: number;
-
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   value_2mo?: number;
-
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
-  value_2yr?: number;
-
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
-  value_30yr?: number;
-
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   value_3mo?: number;
-
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
-  value_3yr?: number;
-
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
-  value_40yr?: number;
-
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   value_4mo?: number;
-
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
-  value_5yr?: number;
-
+  value_5mo?: number;
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   value_6mo?: number;
-
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_1yr?: number;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_2yr?: number;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_3yr?: number;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_5yr?: number;
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   value_7yr?: number;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_10yr?: number;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_20yr?: number;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_30yr?: number;
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  value_40yr?: number;
+  /* eslint-enable @typescript-eslint/member-ordering */
 }
