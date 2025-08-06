@@ -11,14 +11,31 @@ import {
 
 export type TableCrawlDataLoaderParamsModel<
   TType extends SourcedEntityResourceModel,
-  TResponse extends Record<string, unknown>,
+  TResponse extends Record<string, unknown> = Record<string, unknown>,
 > = Omit<CrawlDataLoaderParamsModel<TType>, 'transformer'> & {
-  cellsSelector?: SelectorModel | ((handle?: HandleModel | null) => Promise<Array<HandleModel>>);
+  cellsSelector?:
+    | SelectorModel
+    | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<Array<HandleModel>>);
+  dateSelector?:
+    | SelectorModel
+    | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<HandleModel | null>);
+  lastUpdatedSelector?:
+    | SelectorModel
+    | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<HandleModel | null>);
   nCols?: number;
   nRows?: number;
-  rowsSelector?: SelectorModel | ((handle?: HandleModel | null) => Promise<Array<HandleModel>>);
-  tableSelector?: SelectorModel | ((screen: ScreenModel) => Promise<HandleModel | null>);
-  transformer(response: Array<TResponse>): Array<Partial<TType>>;
+  rowsSelector?:
+    | SelectorModel
+    | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<Array<HandleModel>>);
+  tableSelector?:
+    | SelectorModel
+    | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<HandleModel | null>);
+  transformer(response: {
+    data: Array<TResponse>;
+    date?: string | null;
+    headers: Array<string>;
+    lastUpdated?: string | null;
+  }): Array<Partial<TType>>;
 };
 
 export type TableCrawlDataLoaderModel<TType extends SourcedEntityResourceModel> =

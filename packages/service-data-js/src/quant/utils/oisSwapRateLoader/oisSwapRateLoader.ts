@@ -1,0 +1,47 @@
+import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
+import { CurveImplementation } from '@lib/model/quant/Curve/CurveImplementation/CurveImplementation';
+import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
+import { dateTimeParse } from '@lib/shared/data/utils/dateTimeParse/dateTimeParse';
+import { MultiDataLoader } from '@service/data/core/utils/MultiDataLoader/MultiDataLoader';
+import { TableCrawlDataLoader } from '@service/data/core/utils/TableCrawlDataLoader/TableCrawlDataLoader';
+import { OIS_SWAP_RATE } from '@service/data/quant/utils/oisSwapRateLoader/oisSwapRateLoader.constants';
+import { type OisSwapRateLoaderModel } from '@service/data/quant/utils/oisSwapRateLoader/oisSwapRateLoader.models';
+import toNumber from 'lodash/toNumber';
+
+export const oisSwapRateLoader: OisSwapRateLoaderModel = new MultiDataLoader({
+  ResourceImplementation: CurveImplementation,
+
+  loaders: [
+    new TableCrawlDataLoader<CurveModel>({
+      lastUpdatedSelector: { value: 'footer' },
+      nCols: 2,
+      tableSelector: async (screen) => {
+        const tables = await screen.findAll({ type: SELECTOR_TYPE.CLASS, value: 'rates' });
+        for (const table of tables) {
+          const title = await table.find({ value: 'header' })?.then((h) => h?.text());
+          if (title?.includes('SOFR swap rate (annual/annual)')) {
+            return table;
+          }
+        }
+        return null;
+      },
+      transformer: ({ data, headers, lastUpdated }) => {
+        const dateHeader = headers[1];
+        const date = dateTimeParse(dateHeader, 'dd MMM yyyy');
+        const result: Partial<CurveModel> = { date, name: OIS_SWAP_RATE };
+        const match = lastUpdated?.match(/(\d{2} \w{3} \d{4}) \| (\d{2}:\d{2}) (\w{2})/);
+        if (match) {
+          const [_, dateStr, timeStr, tz] = match;
+          result.lastUpdated = new Date(`${dateStr} ${timeStr} GMT-0400`);
+        }
+        data.forEach((row) => {
+          const year = row[''];
+          const value = row[dateHeader];
+          result[`value_${year}yr`] = toNumber(value);
+        });
+        return [result];
+      },
+      uri: 'https://www.chathamfinancial.com/technology/us-market-rates',
+    }),
+  ],
+});

@@ -1,5 +1,5 @@
-import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 import { dateTimeParse } from '@lib/shared/data/utils/dateTimeParse/dateTimeParse';
+import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ dateTimeParse });
 
