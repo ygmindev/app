@@ -21,6 +21,7 @@ import { PricingResolver } from '@lib/model/commerce/Pricing/PricingResolver/Pri
 import { ProductResolver } from '@lib/model/commerce/Product/ProductResolver/ProductResolver';
 import { GroupResolver } from '@lib/model/group/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '@lib/model/http/Socket/SocketResolver/SocketResolver';
+import { CurveResolver } from '@lib/model/quant/Curve/CurveResolver/CurveResolver';
 import { SnapshotResolver } from '@lib/model/test/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '@lib/model/user/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '@lib/model/user/User/UserResolver/UserResolver';
@@ -36,6 +37,7 @@ export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
         BankResolver,
         CardResolver,
         ChatResolver,
+        CurveResolver,
         MessageResolver,
         GroupResolver,
         LinkedUserResolver,

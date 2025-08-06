@@ -1,16 +1,23 @@
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { SourcedEntityResource } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource';
-import { CurveModel } from '@lib/model/quant/Curve/Curve.models';
+import { CURVE_RESOURCE_NAME } from '@lib/model/quant/Curve/Curve.constants';
+import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ isAbstract: true })
+@withEntity({
+  isDatabase: true,
+  name: CURVE_RESOURCE_NAME,
+})
 export class Curve extends SourcedEntityResource implements CurveModel {
   @withField({ isDatabase: true, isUnique: true, type: DATA_TYPE.DATE })
   date!: Date;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.DATE })
   lastUpdated?: Date;
+
+  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  name!: string;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   value_10yr?: number;

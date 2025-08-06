@@ -12,9 +12,9 @@ import { type UriModel } from '@lib/shared/route/route.models';
 export type _ScreenParamsModel = ScreenConfigModel;
 
 export type _ScreenModel = {
-  close(): Promise<void>;
-
   dirname?: string;
+
+  close(): Promise<void>;
 
   find(selector: SelectorModel, options?: FindOptionDefaultModel): Promise<HandleModel | null>;
 

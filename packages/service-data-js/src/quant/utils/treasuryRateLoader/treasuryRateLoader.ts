@@ -1,6 +1,6 @@
 import { CURVE_TENORS } from '@lib/model/quant/Curve/Curve.constants';
-import { type TreasuryRateModel } from '@lib/model/quant/TreasuryRate/TreasuryRate.models';
-import { TreasuryRateImplementation } from '@lib/model/quant/TreasuryRate/TreasuryRateImplementation/TreasuryRateImplementation';
+import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
+import { CurveImplementation } from '@lib/model/quant/Curve/CurveImplementation/CurveImplementation';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
 import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
@@ -9,11 +9,12 @@ import { RELATIVE_DATE_UNIT } from '@lib/shared/data/utils/numberFormat/numberFo
 import { HTTP_RESPONSE_TYPE } from '@lib/shared/http/http.constants';
 import { ApiDataLoader } from '@service/data/core/utils/ApiDataLoader/ApiDataLoader';
 import { MultiDataLoader } from '@service/data/core/utils/MultiDataLoader/MultiDataLoader';
-import { type TreasuryYieldLoaderModel } from '@service/data/quant/utils/treasuryYieldLoader/treasuryYieldLoader.models';
+import { TREASURY_RATE } from '@service/data/quant/utils/treasuryRateLoader/treasuryRateLoader.constants';
+import { type TreasuryRateLoaderModel } from '@service/data/quant/utils/treasuryRateLoader/treasuryRateLoader.models';
 import isNil from 'lodash/isNil';
 
-export const treasuryYieldLoader: TreasuryYieldLoaderModel = new MultiDataLoader({
-  ResourceImplementation: TreasuryRateImplementation,
+export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiDataLoader({
+  ResourceImplementation: CurveImplementation,
 
   loaders: [
     new ApiDataLoader({
@@ -32,7 +33,8 @@ export const treasuryYieldLoader: TreasuryYieldLoaderModel = new MultiDataLoader
               if (date) {
                 const rate = {
                   date: dateTimeParse(date, DATE_TIME_FORMAT_TYPE.ISO),
-                } as TreasuryRateModel;
+                  name: TREASURY_RATE,
+                } as CurveModel;
                 updated && (rate.lastUpdated = dateTimeParse(updated, DATE_TIME_FORMAT_TYPE.ISO));
                 return [
                   ...r,
@@ -58,13 +60,13 @@ export const treasuryYieldLoader: TreasuryYieldLoaderModel = new MultiDataLoader
             }
             return r;
           },
-          [] as Array<Partial<TreasuryRateModel>>,
+          [] as Array<Partial<CurveModel>>,
         ),
       uri: 'https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xmlview',
     }),
 
     new ApiDataLoader<
-      TreasuryRateModel,
+      CurveModel,
       {
         results: Array<{
           date: string;
@@ -102,7 +104,10 @@ export const treasuryYieldLoader: TreasuryYieldLoaderModel = new MultiDataLoader
               }
               return result;
             },
-            { date: dateTimeParse(v.date, 'yyyy-MM-dd') } as TreasuryRateModel,
+            {
+              date: dateTimeParse(v.date, 'yyyy-MM-dd'),
+              name: TREASURY_RATE,
+            } as CurveModel,
           ),
         );
       },

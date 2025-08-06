@@ -15,7 +15,6 @@ export type ApiDataLoaderParamsModel<
   method?: HTTP_METHOD;
   params?: Record<string, unknown>;
   responseType?: TResponseType;
-  source?: string;
   uri: string;
   transformer(
     response: TResponseType extends HTTP_RESPONSE_TYPE.XML ? XmlNodeModel : TResponse,

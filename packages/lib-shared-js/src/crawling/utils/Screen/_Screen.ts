@@ -263,7 +263,7 @@ export class _Screen implements _ScreenModel {
 }
 
 const getSelector = (selector: SelectorModel): string => {
-  switch (selector.type ?? SELECTOR_TYPE.TEST_ID) {
+  switch (selector.type) {
     case SELECTOR_TYPE.CLASS:
       return `.${selector.value}`;
     case SELECTOR_TYPE.DATA:

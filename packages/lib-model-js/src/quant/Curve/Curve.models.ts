@@ -3,6 +3,7 @@ import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityRe
 export type CurveModel = SourcedEntityResourceModel & {
   date: Date;
   lastUpdated?: Date;
+  name: string;
   value_10yr?: number;
   value_1mo?: number;
   value_1yr?: number;

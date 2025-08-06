@@ -1,5 +1,7 @@
 import { RELATIVE_DATE_UNIT } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
 
+export const CURVE_RESOURCE_NAME = 'Curve';
+
 export const CURVE_TENORS = [
   { unit: RELATIVE_DATE_UNIT.MONTH, value: 1 },
   { unit: RELATIVE_DATE_UNIT.MONTH, value: 2 },
