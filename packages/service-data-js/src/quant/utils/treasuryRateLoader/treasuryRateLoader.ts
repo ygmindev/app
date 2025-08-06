@@ -104,10 +104,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiDataLoader({
               }
               return result;
             },
-            {
-              date: dateTimeParse(v.date, 'yyyy-MM-dd'),
-              name: TREASURY_RATE,
-            } as CurveModel,
+            { date: dateTimeParse(v.date, 'yyyy-MM-dd'), name: TREASURY_RATE } as CurveModel,
           ),
         );
       },
