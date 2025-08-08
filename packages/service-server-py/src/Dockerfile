@@ -20,7 +20,6 @@ RUN apt-get update \
     libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
-
 RUN curl -sSL https://install.python-poetry.org | python3 \
     && ln -s /opt/poetry/bin/poetry /usr/local/bin/poetry
 

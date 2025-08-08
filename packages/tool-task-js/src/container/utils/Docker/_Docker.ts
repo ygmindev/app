@@ -51,6 +51,7 @@ export class _Docker implements _DockerModel {
       this.docker.buildImage(
         tarStream,
         {
+          buildargs: { ...process.env },
           dockerfile: toRelative({
             from: this.rootDir,
             to: joinPaths([this.workingDir, 'src', 'Dockerfile']),

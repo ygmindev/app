@@ -6299,7 +6299,10 @@ cffi = {version = ">=1.11", markers = "platform_python_implementation == \"PyPy\
 [package.extras]
 cffi = ["cffi (>=1.11)"]
 
+[extras]
+local-mac = []
+
 [metadata]
 lock-version = "2.1"
 python-versions = "3.12.6"
-content-hash = "a65b651f9cc78a523cf27f2becf8b7edeb013553a3e3a1d5acac3803d91d726c"
+content-hash = "294190e3ed56006b2466298ba797165552fd87ecabee9bdc27fe7bc8a3e413ce"
