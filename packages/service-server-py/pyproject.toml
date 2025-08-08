@@ -62,9 +62,9 @@ httpx = "^0.28.1"
 lxml = "^6.0.0"
 attr = "^0.3.2"
 surya-ocr = "^0.15.2"
-img2table = "^1.4.1"
 streamlit = "^1.47.1"
 pdftext = "^0.6.3"
+click = "8.1.8"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
@@ -76,5 +76,7 @@ pylint = "3.3.3"
 autoflake = "^2.3.1"
 tqdm = "^4.67.0"
 ollama = "^0.4.1"
-mlx-lm = "^0.20.1"
 ruff = "^0.12.4"
+
+[tool.poetry.extras]
+local_mac = ["mlk-lm"]

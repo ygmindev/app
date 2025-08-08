@@ -1,6 +1,6 @@
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-// import { oisSwapRateLoader } from '@service/data/quant/utils/oisSwapRateLoader/oisSwapRateLoader';
+import { oisSwapRateLoader } from '@service/data/quant/utils/oisSwapRateLoader/oisSwapRateLoader';
 import { treasuryRateLoader } from '@service/data/quant/utils/treasuryRateLoader/treasuryRateLoader';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type DataUploadParamsModel } from '@tool/task/data/templates/dataUpload/dataUpload.models';
@@ -14,7 +14,7 @@ const dataUpload: TaskParamsModel<DataUploadParamsModel> = {
     async () => {
       await initialize();
       await treasuryRateLoader.upload();
-      // await oisSwapRateLoader.upload();
+      await oisSwapRateLoader.upload();
     },
   ],
 };

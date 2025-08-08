@@ -30,6 +30,7 @@ import { type UriModel } from '@lib/shared/route/route.models';
 import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
+import trim from 'lodash/trim';
 import { type Browser, type ElementHandle, executablePath, type Frame, type Page } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
@@ -479,7 +480,7 @@ class _Handle implements HandleModel {
 
   async text(): Promise<string | null> {
     const text = await this.handle.evaluate(async (el) => (el as HTMLSpanElement)?.innerText);
-    return text ?? null;
+    return text ? trim(text.replaceAll('\n', ' ')) : null;
   }
 
   async type(value: string): Promise<void> {
@@ -490,6 +491,7 @@ class _Handle implements HandleModel {
     const text = await this.handle.evaluate(async (el) => (el as HTMLAnchorElement)?.href);
     return text ?? null;
   }
+
   async value(): Promise<string | null> {
     const text = await this.handle.evaluate(async (el) => (el as HTMLInputElement)?.value);
     return text ?? null;

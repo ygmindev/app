@@ -96,7 +96,7 @@ export const IMAGE_EXTENSION_DEFAULT = 'webp';
 
 export const VIDEO_EXTENSION_DEFAULT = 'mp4';
 
-export const EXCLUDE_PATTERNS = [...CLEAN_PATTERNS, '.git', 'ios/Pods', 'node_modules'];
+export const EXCLUDE_PATTERNS = [...CLEAN_PATTERNS, '.git', '.venv', 'ios/Pods', 'node_modules'];
 
 export const EXTENSIONS_BASE = ['.tsx', '.ts', '.jsx', '.js'];
 
@@ -119,7 +119,7 @@ export const FILE_CONFIG: Pick<
   cacheDir: CACHE_DIR,
   cleanPatterns: CLEAN_PATTERNS,
   distDir: DIST_DIR,
-  excludePatterns: [...CLEAN_PATTERNS, '.git', '.venv', 'ios/Pods', 'node_modules'],
+  excludePatterns: EXCLUDE_PATTERNS,
   imageExtension: IMAGE_EXTENSION_DEFAULT,
   packagePrefixes: PACKAGE_PREFIXES,
   prunePatterns: PRUNE_PATTERNS,

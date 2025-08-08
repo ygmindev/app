@@ -4,8 +4,8 @@ import { type CopyParamsModel } from '@tool/task/file/utils/copy/copy.models';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync } from 'fs';
 import every from 'lodash/every';
 import forEach from 'lodash/forEach';
-import { minimatch } from 'minimatch';
 import { join } from 'path';
+import picomatch from 'picomatch';
 
 export const copy = async ({
   excludes = EXCLUDE_PATTERNS,
@@ -18,7 +18,7 @@ export const copy = async ({
   let toF = to;
   if (
     existsSync(from) &&
-    ((!excludes && !includes) || every(excludes.map((pattern) => !minimatch(toF, pattern))))
+    ((!excludes && !includes) || every(excludes.map((pattern) => !picomatch(pattern)(toF))))
   ) {
     overrides && forEach(overrides, (v, k) => (toF = toF.replaceAll(k, v)));
     if (statSync(from).isDirectory()) {

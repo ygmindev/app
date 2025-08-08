@@ -1,10 +1,11 @@
 // COMPLETE
 import { type ServerlessRuntimeModel } from '@lib/backend/serverless/serverless.models';
-import { type BooleanStringModel } from '@lib/shared/core/core.models';
+import { type BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import { type RUNTIME } from '@lib/shared/environment/environment.constants';
-import { type PlatformModel } from '@lib/shared/platform/platform.models';
+import { type PLATFORM } from '@lib/shared/platform/platform.constants';
 
 export type EnvironmentConfigModel = {
+  __DEV__: `${BOOLEAN_STRING}`;
   APP_AMPLITUDE_API_KEY: string;
   APP_FIREBASE_API_KEY: string;
   APP_FIREBASE_APP_ID: string;
@@ -14,7 +15,7 @@ export type EnvironmentConfigModel = {
   APP_FIREBASE_STORAGE_BUCKET: string;
   APP_GOOGLE_OAUTH_APP_ID: string;
   APP_HOST: string;
-  APP_IS_DEBUG: BooleanStringModel;
+  APP_IS_DEBUG: `${BOOLEAN_STRING}`;
   APP_NAME?: string;
   APP_PORT?: string;
   APP_STRIPE_TOKEN: string;
@@ -24,13 +25,14 @@ export type EnvironmentConfigModel = {
   AWS_ACCESS_KEY_ID: string;
   AWS_SECRET_ACCESS_KEY: string;
   ENV_NAME: string;
-  ENV_PLATFORM: PlatformModel;
+  ENV_PLATFORM: `${PLATFORM}`;
+  GITHUB_TOKEN: string;
+  GITHUB_USERNAME: string;
   NODE_ENV: string;
   NODE_EXTRA_CA_CERTS: string;
   NODE_OPTIONS?: string;
   NODE_RUNTIME?: `${RUNTIME}`;
-  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: BooleanStringModel;
-  SERVERLESS_RUNTIME: ServerlessRuntimeModel;
+  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: `${BOOLEAN_STRING}`;
   SERVER_APP_GOOGLE_API_KEY: string;
   SERVER_APP_HOST: string;
   SERVER_APP_OTP_LENGTH: string;
@@ -57,7 +59,7 @@ export type EnvironmentConfigModel = {
   SERVER_GOOGLE_API_KEY: string;
   SERVER_GOOGLE_EMAIL: string;
   SERVER_GOOGLE_PRIVATE_KEY: string;
-  SERVER_IS_DISABLE_HOT_RELOAD: BooleanStringModel;
+  SERVER_IS_DISABLE_HOT_RELOAD: `${BOOLEAN_STRING}`;
   SERVER_IV_LENGTH: string;
   SERVER_KEY_LENGTH: string;
   SERVER_OTP_STATIC?: string;
@@ -78,7 +80,7 @@ export type EnvironmentConfigModel = {
   SERVER_TWILIO_FROM: string;
   SERVER_TWILIO_SID: string;
   SERVER_TWILIO_TOKEN: string;
-  TEST_IS_ETE?: BooleanStringModel;
+  SERVERLESS_RUNTIME: ServerlessRuntimeModel;
+  TEST_IS_ETE?: `${BOOLEAN_STRING}`;
   TEST_MATCH?: string;
-  __DEV__: BooleanStringModel;
 };
