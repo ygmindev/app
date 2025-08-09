@@ -1138,15 +1138,6 @@ importers:
 
   packages/service-ai-py: {}
 
-  packages/service-data-js:
-    dependencies:
-      date-fns-tz:
-        specifier: ^3.2.0
-        version: 3.2.0(date-fns@4.1.0)
-      xml2js:
-        specifier: ^0.6.2
-        version: 0.6.2
-
   packages/service-graphql-sandbox-js:
     dependencies:
       '@apollo/server':
@@ -1354,6 +1345,15 @@ importers:
       pubsub-js:
         specifier: ^1.9.5
         version: 1.9.5
+
+  packages/service-job-js:
+    dependencies:
+      date-fns-tz:
+        specifier: ^3.2.0
+        version: 3.2.0(date-fns@4.1.0)
+      xml2js:
+        specifier: ^0.6.2
+        version: 0.6.2
 
   packages/service-lambda-crawl:
     dependencies:

@@ -8,5 +8,7 @@ export type _DockerParamsModel = ContainerConfigModel & {
 
 export type _DockerModel = {
   build(): Promise<void>;
-  publish(): Promise<void>;
+  delete(): Promise<void>;
+  publish(isBuild?: boolean): Promise<void>;
+  run<TType>(args?: Array<string>): Promise<TType>;
 };

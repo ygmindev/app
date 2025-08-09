@@ -4,6 +4,7 @@ import { type PartialModel } from '@lib/shared/core/core.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { publish as containerPublish } from '@tool/task/container/tasks/publish/publish';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import clean from '@tool/task/core/templates/clean/clean';
 import { PARALLEL_CONDITION } from '@tool/task/core/utils/runParallel/runParallel.constants';
@@ -72,6 +73,7 @@ export const nodeTasks = ({
   return [
     lint,
     clean,
+    containerPublish,
     ...getTestTasks(),
     ...getTestTasks({ name: `${test.name}-watch`, overrides: () => ({ isWatch: true }) }),
     ...getTestTasks({ name: `${test.name}-match`, overrides: () => ({ isPrompt: true }) }),

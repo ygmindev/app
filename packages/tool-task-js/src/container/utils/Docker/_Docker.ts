@@ -4,6 +4,7 @@ import { globMatch } from '@lib/backend/file/utils/globMatch/globMatch';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { EXCLUDE_PATTERNS } from '@lib/config/file/file.constants';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
   type _DockerModel,
@@ -14,10 +15,11 @@ import tar from 'tar-fs';
 
 export class _Docker implements _DockerModel {
   docker: Docker;
-  image: string;
+  ignore?: Array<string>;
   password: string;
   rootDir: string;
   server: string;
+  tag: string;
   username: string;
   workingDir: string;
 
@@ -31,12 +33,40 @@ export class _Docker implements _DockerModel {
     workingDir = fromWorking(),
   }: _DockerParamsModel) {
     this.docker = new Docker();
-    this.image = image;
+    this.ignore = ignore;
     this.password = password;
     this.rootDir = rootDir;
     this.server = server;
+    this.tag = `${this.server}/${process.env.GITHUB_USERNAME}/${image}`;
     this.username = username;
     this.workingDir = workingDir;
+  }
+
+  async _handleStream(stream?: NodeJS.ReadableStream): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (!stream) {
+        return reject(new NotFoundError('Stream missing'));
+      }
+      this.docker.modem.followProgress(
+        stream,
+        (err: Error | null, res: Array<{ error?: string; errorDetail?: Error }>) => {
+          if (err) {
+            return reject(err);
+          }
+          const error = res?.find((err) => err.error ?? err.errorDetail);
+          if (error) {
+            logger.error('❌ Error:', error);
+            reject(new Error(error.error || error.errorDetail?.message));
+          }
+          logger.info('✅ Complete');
+          return resolve();
+        },
+        (event: { error?: string; stream?: string }) => {
+          event.stream && process.stdout.write(event.stream);
+          event.error && process.stderr.write(event.error);
+        },
+      );
+    });
   }
 
   async build(): Promise<void> {
@@ -44,62 +74,68 @@ export class _Docker implements _DockerModel {
       ignore: (name) =>
         globMatch(
           name,
-          EXCLUDE_PATTERNS.map((v) => `**/*/${v}`),
+          (this.ignore ?? []).map((v) => `**/*/${v}`),
         ),
     });
-    return new Promise<void>((resolve, reject) => {
-      this.docker.buildImage(
-        tarStream,
-        {
-          buildargs: { ...process.env },
-          dockerfile: toRelative({
-            from: this.rootDir,
-            to: joinPaths([this.workingDir, 'src', 'Dockerfile']),
-          }),
-          t: this.image,
-        },
-        (_, stream) => {
-          if (!stream) {
-            return reject(new Error('Build stream missing'));
-          }
-          this.docker.modem.followProgress(
-            stream,
-            (err: Error | null, res) => {
-              if (err) {
-                return reject(err);
-              }
-              const buildError = res?.find((err) => err.error ?? err.errorDetail);
-              if (buildError) {
-                logger.error('❌ Docker build failed:', buildError);
-                return reject(new Error(buildError.error || buildError.errorDetail?.message));
-              }
-              logger.info('✅ Build complete');
-              resolve();
-            },
-            (event: { error?: string; stream?: string }) => {
-              event.stream && process.stdout.write(event.stream);
-              event.error && process.stderr.write(event.error);
-            },
-          );
-        },
-      );
-    });
+
+    try {
+      const stream = await this.docker.buildImage(tarStream, {
+        buildargs: { ...process.env },
+        dockerfile: toRelative({
+          from: this.rootDir,
+          to: joinPaths([this.workingDir, 'src', 'Dockerfile']),
+        }),
+        t: this.tag,
+      });
+      await this._handleStream(stream);
+    } catch {
+      await this.delete();
+    }
   }
 
-  async publish(): Promise<void> {
-    const image = this.docker.getImage(this.image);
-    const stream = await image.push({
-      authconfig: { password: this.password, serveraddress: this.server, username: this.username },
-    });
-    return new Promise<void>((resolve, reject) => {
-      this.docker.modem.followProgress(stream, (err) => {
-        if (err) {
-          console.error('Push failed:', err);
-          return reject(err);
-        }
-        console.log('🚀 Pushed container');
-        resolve();
+  async delete(): Promise<void> {
+    try {
+      await this.docker.getImage(this.tag).remove({ force: true });
+      const danglingImages = await this.docker.listImages({ filters: { dangling: ['true'] } });
+      for (const image of danglingImages) {
+        await this.docker.getImage(image.Id).remove({ force: true });
+      }
+    } catch {}
+  }
+
+  async publish(isBuild: boolean = true): Promise<void> {
+    try {
+      isBuild && (await this.build());
+      const stream = await this.docker.getImage(this.tag).push({
+        authconfig: {
+          password: this.password,
+          serveraddress: this.server,
+          username: this.username,
+        },
       });
-    });
+      await this._handleStream(stream);
+    } finally {
+      await this.delete();
+    }
+  }
+
+  async run<TType>(args: Array<string> = []): Promise<TType> {
+    try {
+      await this.docker.getImage(this.tag).inspect();
+    } catch {
+      console.log(`📥 Pulling image: ${this.tag}`);
+      const stream = await this.docker.pull(this.tag, {
+        authconfig: {
+          password: this.password,
+          serveraddress: this.server,
+          username: this.username,
+        },
+      });
+      await this._handleStream(stream);
+    }
+
+    const result = (await this.docker.run(this.tag, args, process.stdout)) as TType;
+    console.warn(result);
+    throw new Error('Method not implemented.');
   }
 }

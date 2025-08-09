@@ -12,7 +12,7 @@ import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
-import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
+import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { useState } from 'react';
 
 export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = ({
@@ -51,11 +51,10 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = ({
 
   const handleValue = (v?: string): void => {
     if (v?.length) {
-      const parsed = Date.parse(v);
-      if (!isNaN(parsed) && parsed > 0) {
-        const value = new Date(parsed);
-        valueControlledSet(value);
-        textValueSet(dateTimeFormat(value));
+      const parsed = new DateTime(v);
+      if (parsed.isValid()) {
+        valueControlledSet(parsed.date);
+        textValueSet(parsed.format());
       } else {
         valueControlledSet(undefined);
         textValueSet(undefined);

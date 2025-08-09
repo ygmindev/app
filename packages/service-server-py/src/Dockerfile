@@ -1,6 +1,6 @@
 ARG PYTHON_VERSION=3.12.6
 
-FROM python:${PYTHON_VERSION}-slim
+FROM python:${PYTHON_VERSION}-alpine
 
 ARG WORKING_DIR=packages/service-server-py
 ARG TARGET_DIR=/app

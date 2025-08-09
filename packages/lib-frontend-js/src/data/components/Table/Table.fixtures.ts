@@ -1,6 +1,5 @@
 import { type TableColumnModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
-import { dateTimeFormat } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat';
-import { DATE_TIME_FORMAT_TYPE } from '@lib/shared/data/utils/dateTimeFormat/dateTimeFormat.constants';
+import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import range from 'lodash/range';
 
 export type TableFixtureRowModel = {
@@ -19,7 +18,7 @@ export const TABLE_FIXTURE_COLUMNS: Array<TableColumnModel<TableFixtureRowModel>
     label: 'Number Column',
   },
   {
-    formatter: ({ value }) => dateTimeFormat(value as Date, DATE_TIME_FORMAT_TYPE.DATE),
+    formatter: ({ value }) => new DateTime(value as Date).format(),
     id: 'dateColumn',
     label: 'Date Column',
   },

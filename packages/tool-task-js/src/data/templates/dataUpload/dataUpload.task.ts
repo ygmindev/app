@@ -1,7 +1,7 @@
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-import { oisSwapRateLoader } from '@service/data/quant/utils/oisSwapRateLoader/oisSwapRateLoader';
-import { treasuryRateLoader } from '@service/data/quant/utils/treasuryRateLoader/treasuryRateLoader';
+import { oisSwapRateLoader } from '@service/job/quant/utils/oisSwapRateLoader/oisSwapRateLoader';
+import { treasuryRateLoader } from '@service/job/quant/utils/treasuryRateLoader/treasuryRateLoader';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type DataUploadParamsModel } from '@tool/task/data/templates/dataUpload/dataUpload.models';
 

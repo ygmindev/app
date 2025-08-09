@@ -5,7 +5,7 @@ export const config = defineConfig<ContainerConfigModel>({
   params: () => ({
     image: 'app:latest',
     password: process.env.GITHUB_TOKEN,
-    server: 'ghcr.io/ygmindev',
+    server: 'ghcr.io',
     username: process.env.GITHUB_USERNAME,
   }),
 });
