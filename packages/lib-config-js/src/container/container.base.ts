@@ -3,7 +3,7 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 export const config = defineConfig<ContainerConfigModel>({
   params: () => ({
-    image: 'app:latest',
+    image: 'app',
     password: process.env.GITHUB_TOKEN,
     server: 'ghcr.io',
     username: process.env.GITHUB_USERNAME,

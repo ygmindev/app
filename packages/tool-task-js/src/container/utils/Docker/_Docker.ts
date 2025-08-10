@@ -37,7 +37,7 @@ export class _Docker implements _DockerModel {
     this.password = password;
     this.rootDir = rootDir;
     this.server = server;
-    this.tag = `${this.server}/${process.env.GITHUB_USERNAME}/${image}`;
+    this.tag = `${this.server}/${process.env.GITHUB_USERNAME}/${image}:latest`;
     this.username = username;
     this.workingDir = workingDir;
   }

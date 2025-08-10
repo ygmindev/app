@@ -74,6 +74,7 @@ export const nodeTasks = ({
     lint,
     clean,
     containerPublish,
+    containerPublish,
     ...getTestTasks(),
     ...getTestTasks({ name: `${test.name}-watch`, overrides: () => ({ isWatch: true }) }),
     ...getTestTasks({ name: `${test.name}-match`, overrides: () => ({ isPrompt: true }) }),
