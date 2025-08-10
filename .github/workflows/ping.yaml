@@ -9,7 +9,7 @@ jobs:
           registry: ghcr.io
           username: ${{ secrets.GITHUB_USERNAME }}
       - name: run ping
-        run: docker run --rm ghcr.io/ygmindev/app:latest ni
+        run: docker run --rm ghcr.io/ygmindev/app:latest echo hello
 name: ping
 on:
   schedule:
