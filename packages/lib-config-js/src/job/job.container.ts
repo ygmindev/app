@@ -1,4 +1,4 @@
-import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { config as containerConfig } from '@lib/config/container/container.base';
 import { _job } from '@lib/config/job/_job';
 import { type _JobConfigModel } from '@lib/config/job/_job.models';
@@ -21,7 +21,7 @@ export const config = defineConfig<JobConfigModel, _JobConfigModel>({
           schedule: { freq: FREQUENCY.DAILY },
         },
       ],
-      outPathname: fromDist('.github/workflows'),
+      outPathname: fromRoot('.github/workflows'),
     };
   },
 });
