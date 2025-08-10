@@ -1,1 +1,1 @@
-export type IsArrayParamsModel<TType> = TType;
+export type IsArrayParamsModel = unknown;
