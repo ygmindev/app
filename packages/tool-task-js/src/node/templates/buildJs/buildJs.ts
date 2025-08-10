@@ -1,9 +1,8 @@
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type BuildJsParamsModel } from '@tool/task/node/templates/buildJs/buildJs.models';
-import { build } from 'esbuild';
+import { bundle } from '@tool/task/node/utils/bundle/bundle';
 
 const buildJs: TaskParamsModel<BuildJsParamsModel> = {
   environment: ENVIRONMENT.PRODUCTION,
@@ -13,13 +12,7 @@ const buildJs: TaskParamsModel<BuildJsParamsModel> = {
   task: [
     async ({ options }) => {
       if (options?.entryFiles) {
-        const { esbuildConfig } = bundleConfig.config({
-          entryFiles: options.entryFiles,
-          isTranspileProject: true,
-          outputPathname: options.outputPathname,
-          transpilePatterns: options.transpilePatterns,
-        });
-        esbuildConfig && (await build(esbuildConfig));
+        await bundle(options);
       }
     },
   ],

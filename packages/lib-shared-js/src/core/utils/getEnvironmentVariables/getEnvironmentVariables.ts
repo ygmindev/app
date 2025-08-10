@@ -12,7 +12,7 @@ export const getEnvironmentVariables = ({
   reduce(
     process.env,
     (result, v, k) =>
-      some([envPrefix].flat(), (prefix) => prefix && k.startsWith(prefix))
+      some(envPrefix, (prefix) => prefix && k.startsWith(prefix))
         ? { ...result, [isPrefix ? `process.env.${k}` : k]: JSON.stringify(v) }
         : result,
     {},

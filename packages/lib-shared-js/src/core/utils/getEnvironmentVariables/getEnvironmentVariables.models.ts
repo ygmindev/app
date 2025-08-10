@@ -2,7 +2,7 @@ import { type EnvironmentConfigModel } from '@lib/config/environment/environment
 import { type PartialModel } from '@lib/shared/core/core.models';
 
 export type GetEnvironmentVariablesParamsModel = {
-  envPrefix?: Array<string> | string;
+  envPrefix?: Array<string>;
   isPrefix?: boolean;
 };
 

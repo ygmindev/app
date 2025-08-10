@@ -18,9 +18,9 @@ export const createDataUploadJob = async <TType extends SourcedEntityResourceMod
       for (const loader of loaders) {
         try {
           await loader.upload();
-          logger.success(`Load complete: ${loader.name}`);
+          logger.success(`Upload complete: ${loader.name}`);
         } catch (e) {
-          logger.raise(`Load failed: ${loader.name}`, e);
+          logger.raise(`Upload failed: ${loader.name}`, e);
         }
       }
       await cleanUp?.();

@@ -3,8 +3,8 @@ import { type JobConfigModel } from '@lib/config/job/job.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { FREQUENCY } from '@lib/shared/datetime/datetime.models';
 
-export const _job = ({ jobs }: JobConfigModel): _JobConfigModel =>
-  jobs.map(({ command, container, name, schedule }) => ({
+export const _job = ({ container, jobs }: JobConfigModel): _JobConfigModel =>
+  jobs.map(({ command, name, schedule }) => ({
     jobs: {
       'run-container': {
         'runs-on': 'ubuntu-latest',

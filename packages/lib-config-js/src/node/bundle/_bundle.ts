@@ -18,7 +18,6 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
-import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
@@ -177,14 +176,13 @@ export const _bundle = ({
 
       emptyOutDir: true,
 
-      minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
+      minify: process.env.NODE_ENV === 'production',
 
       outDir: outputPathname ?? fromWorking(buildDir),
 
       rollupOptions,
 
-      watch:
-        process.env.NODE_ENV === ENVIRONMENT.DEVELOPMENT && watch ? { include: watch } : undefined,
+      watch: process.env.NODE_ENV === 'development' && watch ? { include: watch } : undefined,
     },
 
     customLogger,
@@ -211,7 +209,7 @@ export const _bundle = ({
 
         mainFields,
 
-        minify: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
+        minify: process.env.NODE_ENV === 'production',
 
         // nodePaths: rootDirs.map((root) =>
         //   joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
@@ -266,7 +264,7 @@ export const _bundle = ({
 
       viteCommonjs(),
 
-      // process.env.NODE_ENV === ENVIRONMENT.PRODUCTION && visualizer(),
+      // process.env.NODE_ENV === 'production' && visualizer(),
     ]),
 
     publicDir: process.env.NODE_ENV === 'production' ? assetsDir : publicPathname,
@@ -309,7 +307,7 @@ export const _bundle = ({
 
   const defineF = {
     ...config.define,
-    ...getEnvironmentVariables({ envPrefix: config.envPrefix, isPrefix: true }),
+    ...getEnvironmentVariables({ envPrefix: filterNil([config.envPrefix].flat()), isPrefix: true }),
   };
 
   config.define = defineF;
@@ -338,7 +336,7 @@ export const _bundle = ({
           process.env.ENV_PLATFORM === PLATFORM.NODE
             ? {
                 chunkFileNames: '[name].js',
-                compact: process.env.NODE_ENV === ENVIRONMENT.PRODUCTION,
+                compact: process.env.NODE_ENV === 'production',
                 entryFileNames: '[name].js',
                 exports: 'named',
                 format: format === BUNDLE_FORMAT.ESM ? 'esm' : 'cjs',

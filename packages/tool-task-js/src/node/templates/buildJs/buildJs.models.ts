@@ -1,6 +1,3 @@
-import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import { type BundleParamsModel } from '@tool/task/node/utils/bundle/bundle.models';
 
-export type BuildJsParamsModel = Pick<
-  BundleConfigModel,
-  'entryFiles' | 'outputPathname' | 'transpilePatterns'
->;
+export type BuildJsParamsModel = BundleParamsModel;
