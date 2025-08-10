@@ -69,6 +69,7 @@ export type EnvironmentConfigModel = {
   SERVER_PLAID_REDIRECT_URI: string;
   SERVER_PLAID_SECRET: string;
   SERVER_PLAID_VERSION: string;
+  SERVER_POLYGON_API_KEY: string;
   SERVER_REGION: string;
   SERVER_SALT_LENGTH: string;
   SERVER_SSL_PRIVATE_KEY: string;

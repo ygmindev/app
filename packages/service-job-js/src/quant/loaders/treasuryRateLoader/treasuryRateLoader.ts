@@ -84,7 +84,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
       }
     >({
       params: {
-        apiKey: 'spl4XZ9HTCTndp3nu5B4zzBM2u_gstCV',
+        apiKey: process.env.SERVER_POLYGON_API_KEY,
         limit: 1,
         sort: 'date.desc',
       },
