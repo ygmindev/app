@@ -5,7 +5,6 @@ import { type RUNTIME } from '@lib/shared/environment/environment.constants';
 import { type PLATFORM } from '@lib/shared/platform/platform.constants';
 
 export type EnvironmentConfigModel = {
-  __DEV__: `${BOOLEAN_STRING}`;
   APP_AMPLITUDE_API_KEY: string;
   APP_FIREBASE_API_KEY: string;
   APP_FIREBASE_APP_ID: string;
@@ -24,7 +23,6 @@ export type EnvironmentConfigModel = {
   APP_USERNAME: string;
   AWS_ACCESS_KEY_ID: string;
   AWS_SECRET_ACCESS_KEY: string;
-  ENV_NAME: string;
   ENV_PLATFORM: `${PLATFORM}`;
   GITHUB_TOKEN: string;
   GITHUB_USERNAME: string;
@@ -33,6 +31,7 @@ export type EnvironmentConfigModel = {
   NODE_OPTIONS?: string;
   NODE_RUNTIME?: `${RUNTIME}`;
   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: `${BOOLEAN_STRING}`;
+  SERVERLESS_RUNTIME: ServerlessRuntimeModel;
   SERVER_APP_GOOGLE_API_KEY: string;
   SERVER_APP_HOST: string;
   SERVER_APP_OTP_LENGTH: string;
@@ -80,7 +79,7 @@ export type EnvironmentConfigModel = {
   SERVER_TWILIO_FROM: string;
   SERVER_TWILIO_SID: string;
   SERVER_TWILIO_TOKEN: string;
-  SERVERLESS_RUNTIME: ServerlessRuntimeModel;
   TEST_IS_ETE?: `${BOOLEAN_STRING}`;
   TEST_MATCH?: string;
+  __DEV__: `${BOOLEAN_STRING}`;
 };

@@ -1,4 +1,4 @@
-import { RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
+import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';
@@ -11,7 +11,7 @@ import { GroupModel } from '@lib/model/group/Group/Group.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 import { User } from '@lib/model/user/User/User';
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
-import { UserModel } from '@lib/model/user/User/User.models';
+import { type UserModel } from '@lib/model/user/User/User.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: ACCESS_RESOURCE_NAME })

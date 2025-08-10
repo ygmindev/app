@@ -10,7 +10,7 @@ import { type ChatModel } from '@lib/model/chat/Chat/Chat.models';
 import { Message } from '@lib/model/chat/Message/Message';
 import { MessageModel } from '@lib/model/chat/Message/Message.models';
 import { User } from '@lib/model/user/User/User';
-import { UserModel } from '@lib/model/user/User/User.models';
+import { type UserModel } from '@lib/model/user/User/User.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: CHAT_RESOURCE_NAME })

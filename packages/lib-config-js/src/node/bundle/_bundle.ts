@@ -82,6 +82,7 @@ export const _bundle = ({
   define,
   entryFiles,
   envPrefix,
+  envPublic,
   exclude,
   extensions,
   externals,
@@ -189,7 +190,8 @@ export const _bundle = ({
 
     define,
 
-    envPrefix,
+    envPrefix:
+      process.env.NODE_ENV === 'production' ? envPublic : [...envPrefix, ...(envPublic ?? [])],
 
     esbuild: {
       loader: 'tsx',

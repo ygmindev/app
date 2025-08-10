@@ -1,4 +1,4 @@
-import { RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
+import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';

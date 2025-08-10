@@ -34,7 +34,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       configFilename: 'bundle.js',
 
-      envPrefix: ['ENV_', 'NODE_ENV'],
+      envPublic: ['APP_NAME', 'ENV_PLATFORM', 'NODE_ENV'],
 
       exclude: [
         ...cartesianString(

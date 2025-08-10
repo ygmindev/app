@@ -7,7 +7,7 @@ import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneFie
 import { ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/ProtectedResource.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 import { User } from '@lib/model/user/User/User';
-import { UserModel } from '@lib/model/user/User/User.models';
+import { type UserModel } from '@lib/model/user/User/User.models';
 
 export const createProtectedResource = (
   { isDatabase = true }: CreateProtectedResourceParamsModel = { isDatabase: true },

@@ -1,6 +1,6 @@
 import { Collection } from '@lib/backend/core/utils/Collection/Collection';
 import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
-import { RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
+import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';

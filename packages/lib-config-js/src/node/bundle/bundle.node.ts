@@ -15,7 +15,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       envPrefix: ['SERVER_'],
 
-      externals: [/node_modules/, '@eslint/js', 'globals'],
+      externals: [/node_modules/, '@eslint/js', 'globals', 'canvas'],
 
       watch: [fromPackages('lib-backend-js/src/**/*')],
     },
