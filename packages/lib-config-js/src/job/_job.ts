@@ -36,5 +36,6 @@ export const _job = ({ jobs }: JobConfigModel): _JobConfigModel =>
           cron: `${schedule.minute ?? 0} ${schedule.hour ?? 0} * * ${schedule.freq === FREQUENCY.DAILY ? '*' : FREQUENCY.WEEKLY ? (schedule.day ?? 0) : '*'}`,
         },
       ],
+      workflow_dispatch: 'trigger',
     },
   }));
