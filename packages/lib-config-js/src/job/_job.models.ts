@@ -1,5 +1,5 @@
 export type _JobConfigModel = Array<{
-  jobs: Array<{
+  jobs: {
     'run-container': {
       'runs-on': string;
       steps: Array<{
@@ -13,7 +13,7 @@ export type _JobConfigModel = Array<{
         };
       }>;
     };
-  }>;
+  };
 
   name: string;
 
