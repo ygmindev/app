@@ -101,6 +101,7 @@
     "eslint-plugin-typescript-sort-keys": "^3.3.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "execa": "^9.5.2",
+    "fast-xml-parser": "^5.2.5",
     "fs-extra": "^11.3.0",
     "generate-template-files": "^3.2.1",
     "get-tsconfig": "^4.10.0",
