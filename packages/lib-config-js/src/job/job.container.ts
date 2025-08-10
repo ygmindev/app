@@ -16,7 +16,7 @@ export const config = defineConfig<JobConfigModel, _JobConfigModel>({
       jobs: [
         {
           ...base,
-          command: 'ni',
+          command: 'echo hello',
           name: 'ping',
           schedule: { freq: FREQUENCY.DAILY },
         },
