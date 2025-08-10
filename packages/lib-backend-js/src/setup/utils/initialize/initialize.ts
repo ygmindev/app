@@ -34,7 +34,7 @@ export const initialize = async (
         Container.set(Database, databaseF, DATABASE_TYPE.MONGO);
         result.database = databaseF;
       } catch (e) {
-        logger.warn(`failed to connect to ${database.host} with error: ${e as Error}`);
+        logger.raise(`Failed to connect to ${database.host}`, e);
       }
     }
   }

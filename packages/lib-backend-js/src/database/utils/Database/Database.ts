@@ -5,16 +5,16 @@ import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 export class Database extends _Database implements DatabaseModel {
   async close(): Promise<void> {
     if (await this.isConnected()) {
-      logger.info('closing connections', this.config.clientUrl);
+      logger.info(`Closing connection ${this.config.clientUrl}`);
       await super.close();
     }
   }
 
   async connect(): Promise<void> {
     if (await this.isConnected()) {
-      logger.info('reusing connection', this.config.clientUrl);
+      logger.info(`Reusing connection ${this.config.clientUrl}`);
     } else {
-      logger.info('connecting', this.config.clientUrl);
+      logger.progress(`Connecting ${this.config.clientUrl}`);
       await super.connect();
     }
   }

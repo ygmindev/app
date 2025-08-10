@@ -12,13 +12,15 @@ import isPlainObject from 'lodash/isPlainObject';
 const format = (params: Array<unknown>): string => {
   const formatted = params
     .map((value) =>
-      isPlainObject(value)
-        ? stringify(value)
-        : isArray(value)
-          ? value.map((v) => format([v]))
-          : value,
+      value instanceof Error
+        ? `Error: ${value}`
+        : isPlainObject(value)
+          ? stringify(value)
+          : isArray(value)
+            ? value.map((v) => format([v]))
+            : value,
     )
-    .join(' ');
+    .join('\n');
   return `[${new DateTime().format()}] ${formatted}`;
 };
 
@@ -32,8 +34,9 @@ class Logger implements LoggerModel {
   debug: LogModel = (...params) => this._logger.debug(format(params));
   error: LogModel = (...params) => this._logger.error(format(params));
   info: LogModel = (...params) => this._logger.info(format(params));
-  raise: LogModel = (...params) => this.error('❌', params);
-  success: LogModel = (...params) => this.info('✅', params);
+  progress: LogModel = (...params) => this._logger.info(`⌛ ${format(params)}...`);
+  raise: LogModel = (...params) => this._logger.error(`❌ ${format(params)}`);
+  success: LogModel = (...params) => this._logger.info(`✅ ${format(params)}`);
   trace: LogModel = (...params) => this._logger.trace(format(params));
   warn: LogModel = (...params) => this._logger.warn(format(params));
 }

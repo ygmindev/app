@@ -1,11 +1,11 @@
+import { timeit } from '@lib/shared/core/utils/timeit/timeit';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { DataLoader } from '@service/job/data/utils/DataLoader/DataLoader';
 
-const { displayName } = withTest({ DataLoader });
+const { displayName } = withTest({ timeit });
 
 describe(displayName, () => {
   test('works', async () => {
-    const result = await DataLoader({});
+    const result = await timeit({});
     expect(result).toStrictEqual({});
   });
 });
