@@ -1,4 +1,4 @@
-export type _JobConfigModel = {
+export type _JobConfigModel = Array<{
   jobs: Array<{
     'run-container': {
       'runs-on': string;
@@ -22,4 +22,4 @@ export type _JobConfigModel = {
       cron: string;
     }>;
   };
-};
+}>;

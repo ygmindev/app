@@ -1,16 +1,29 @@
-import { config as jobConfig } from '@lib/config/job/job';
+import { buildYaml } from '@lib/backend/file/utils/buildYaml/buildYaml';
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
+import { config as jobConfig } from '@lib/config/job/job.container';
+import { slug } from '@lib/shared/core/utils/slug/slug';
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
-import { type BuildYamlJobsParamsModel } from '@tool/task/job/tasks/buildYamlJobs/buildYamlJobs.models';
-import buildYaml from '@tool/task/node/templates/buildYaml/buildYaml';
 
-const buildYamlJobs: TaskParamsModel<BuildYamlJobsParamsModel> = {
-  ...buildYaml,
+const buildYamlJobs: TaskParamsModel<unknown> = {
+  environment: ENVIRONMENT.PRODUCTION,
 
-  name: 'build-yaml-jobs',
+  name: 'build-yaml-job',
 
-  overrides: () => ({
-    value: jobConfig.params(),
-  }),
+  task: [
+    async () => {
+      const { outPathname } = jobConfig.params();
+      await Promise.all(
+        jobConfig.config().map((job) =>
+          writeFile({
+            filename: joinPaths([outPathname, `${slug(job.name)}.yaml`]),
+            value: buildYaml(job),
+          }),
+        ),
+      );
+    },
+  ],
 };
 
 export default buildYamlJobs;
