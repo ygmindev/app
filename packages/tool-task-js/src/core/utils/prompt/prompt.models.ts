@@ -8,8 +8,6 @@ export type PromptParamsModel<TType> = _PromptParamsModel<TType>;
 
 export type PromptModel<TType> = _PromptModel<TType>;
 
-export type PromptTypeModel = `${PROMPT_TYPE}`;
-
 export type PromptArgsModel<TKey> = {
   isOptional?: boolean;
   key: TKey;
@@ -26,7 +24,7 @@ export type ConfirmPromptArgsModel<TKey> = PromptArgsModel<TKey> & {
 export type StringPromptArgsModel<TKey> = PromptArgsModel<TKey> &
   (
     | { basePath?: string; defaultValue?: string; type?: PROMPT_TYPE.DIRECTORY }
-    | { basePath?: never; defaultValue?: string; type?: PromptTypeModel }
+    | { basePath?: never; defaultValue?: string; type?: PROMPT_TYPE }
   );
 
 export type ArrayPromptArgsModel<TKey> = PromptArgsModel<TKey> & {
