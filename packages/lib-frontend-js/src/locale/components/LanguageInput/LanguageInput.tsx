@@ -1,4 +1,4 @@
-import { INTERNATIONALIZE_CONFIG } from '@lib/config/locale/internationalize/internationalize.constants';
+import { LANGUAGES } from '@lib/config/locale/internationalize/internationalize.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { type LanguageInputPropsModel } from '@lib/frontend/locale/components/LanguageInput/LanguageInput.models';
@@ -18,7 +18,7 @@ export const LanguageInput: LFCModel<LanguageInputPropsModel> = ({ elementState,
       onChange={(value) => {
         void currentLanguageSet(value);
       }}
-      options={INTERNATIONALIZE_CONFIG.languages}
+      options={LANGUAGES}
       value={currentLanguage}
     />
   );

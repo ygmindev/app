@@ -3,7 +3,7 @@ import {
   type HttpRequestModel,
   type HttpRequestParamsModel,
 } from '@lib/backend/http/utils/HttpRequest/HttpRequest.models';
-import { INTERNATIONALIZE_CONFIG } from '@lib/config/locale/internationalize/internationalize.constants';
+import { LANGUAGE_DEFAULT } from '@lib/config/locale/internationalize/internationalize.constants';
 import { type HttpMethodModel } from '@lib/shared/http/http.models';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
 
@@ -17,8 +17,7 @@ export class HttpRequest<TType> extends HttpMessage<TType> implements HttpReques
   constructor({ i18n, lang, method, query, url, ...params }: HttpRequestParamsModel<TType>) {
     super({ ...params });
     this.i18n = i18n;
-    this.lang =
-      lang ?? this.headers?.['accept-language'] ?? INTERNATIONALIZE_CONFIG.languageDefault;
+    this.lang = lang ?? this.headers?.['accept-language'] ?? LANGUAGE_DEFAULT;
     this.method = method;
     this.query = query;
     this.url = url;

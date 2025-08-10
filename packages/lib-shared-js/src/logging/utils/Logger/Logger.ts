@@ -1,5 +1,6 @@
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger';
 import {
   type _LoggerModel,
@@ -8,16 +9,18 @@ import {
 import { type LoggerModel, type LogModel } from '@lib/shared/logging/utils/Logger/Logger.models';
 import isPlainObject from 'lodash/isPlainObject';
 
-const stringifyF = (params: Array<unknown>): string =>
-  params
+const format = (params: Array<unknown>): string => {
+  const formatted = params
     .map((value) =>
       isPlainObject(value)
-        ? stringify(value as object)
+        ? stringify(value)
         : isArray(value)
-          ? value.map((v) => stringifyF([v]))
+          ? value.map((v) => format([v]))
           : value,
     )
     .join(' ');
+  return `[${new DateTime().format()}] ${formatted}`;
+};
 
 class Logger implements LoggerModel {
   protected _logger!: _LoggerModel;
@@ -26,11 +29,13 @@ class Logger implements LoggerModel {
     this._logger = new _Logger(params);
   }
 
-  debug: LogModel = (...params) => this._logger.debug(stringifyF(params));
-  error: LogModel = (...params) => this._logger.error(stringifyF(params));
-  info: LogModel = (...params) => this._logger.info(stringifyF(params));
-  trace: LogModel = (...params) => this._logger.trace(stringifyF(params));
-  warn: LogModel = (...params) => this._logger.warn(stringifyF(params));
+  debug: LogModel = (...params) => this._logger.debug(format(params));
+  error: LogModel = (...params) => this._logger.error(format(params));
+  info: LogModel = (...params) => this._logger.info(format(params));
+  raise: LogModel = (...params) => this.error('❌', params);
+  success: LogModel = (...params) => this.info('✅', params);
+  trace: LogModel = (...params) => this._logger.trace(format(params));
+  warn: LogModel = (...params) => this._logger.warn(format(params));
 }
 
 export const logger = new Logger({

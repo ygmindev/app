@@ -1,13 +1,10 @@
 import { type InternationalizeConfigModel } from '@lib/config/locale/internationalize/internationalize.models';
 
-export const INTERNATIONALIZE_CONFIG: Pick<
-  InternationalizeConfigModel,
-  'languageDefault' | 'languages'
-> = {
-  languageDefault: 'en',
+export const LANGUAGE_DEFAULT: InternationalizeConfigModel['languageDefault'] = 'en';
 
-  languages: [
-    { id: 'en', label: 'English' },
-    { id: 'kr', label: '한국어' },
-  ],
-};
+export const LANGUAGES: InternationalizeConfigModel['languages'] = [
+  { id: 'en', label: 'English' },
+  { id: 'kr', label: '한국어' },
+];
+
+export const TIMEZONE_DEFAULT: InternationalizeConfigModel['timezoneDefault'] = 'America/New_York';

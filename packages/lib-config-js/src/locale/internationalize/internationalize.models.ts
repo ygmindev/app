@@ -16,6 +16,8 @@ export type InternationalizeConfigModel = {
   localePath?: string;
 
   modules?: Array<Module>;
+
+  timezoneDefault: string;
 };
 
 export type _InternationalizeConfigModel = I18nModel;

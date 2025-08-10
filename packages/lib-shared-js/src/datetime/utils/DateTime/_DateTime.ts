@@ -1,4 +1,5 @@
 import { type TZDate, TZDateMini } from '@date-fns/tz';
+import { TIMEZONE_DEFAULT } from '@lib/config/locale/internationalize/internationalize.constants';
 import {
   type _DateTimeModel,
   type _DateTimeParamsModel,
@@ -11,7 +12,7 @@ export class _DateTime implements _DateTimeModel {
   _date!: TZDate;
 
   constructor(...[value, options]: _DateTimeParamsModel) {
-    const tz = options?.tz ?? 'America/New_York';
+    const tz = options?.tz ?? TIMEZONE_DEFAULT;
 
     let valueF = new TZDateMini();
     if (value instanceof Date) {
@@ -32,7 +33,6 @@ export class _DateTime implements _DateTimeModel {
         tz,
       );
     }
-
     this._date = valueF;
   }
 
@@ -49,7 +49,7 @@ export class _DateTime implements _DateTimeModel {
   }
 
   get tz(): string {
-    return this._date.timeZone ?? 'America/New_York';
+    return this._date.timeZone ?? TIMEZONE_DEFAULT;
   }
 
   set tz(value: string) {

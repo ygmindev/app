@@ -1,4 +1,4 @@
-import { INTERNATIONALIZE_CONFIG } from '@lib/config/locale/internationalize/internationalize.constants';
+import { LANGUAGE_DEFAULT } from '@lib/config/locale/internationalize/internationalize.constants';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { type EmptyObjectModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -12,13 +12,13 @@ import {
 import { type ComponentType, type ReactElement } from 'react';
 import { AppRegistry } from 'react-native-web';
 
-const { languageDefault } = INTERNATIONALIZE_CONFIG;
-
 export const renderApp = ({ Root, children, context }: RenderAppParamsModel): RenderAppModel => {
   const contextF = merge(
     filterNil([
       context?.[LOCALE]?.lang &&
-        languageDefault !== context[LOCALE].lang && { [ROUTE]: { basename: context[LOCALE].lang } },
+        LANGUAGE_DEFAULT !== context[LOCALE].lang && {
+          [ROUTE]: { basename: context[LOCALE].lang },
+        },
       context,
     ]),
   );

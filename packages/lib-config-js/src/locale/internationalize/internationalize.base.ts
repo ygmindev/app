@@ -1,5 +1,9 @@
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
-import { INTERNATIONALIZE_CONFIG } from '@lib/config/locale/internationalize/internationalize.constants';
+import {
+  LANGUAGE_DEFAULT,
+  LANGUAGES,
+  TIMEZONE_DEFAULT,
+} from '@lib/config/locale/internationalize/internationalize.constants';
 import {
   type _InternationalizeConfigModel,
   type InternationalizeConfigModel,
@@ -11,13 +15,17 @@ export const config = defineConfig<InternationalizeConfigModel, _Internationaliz
   config: _internationalize,
 
   params: () => ({
-    ...INTERNATIONALIZE_CONFIG,
-
     isDebug: process.env.NODE_ENV === 'development',
 
     isPreload: false,
 
+    languageDefault: LANGUAGE_DEFAULT,
+
+    languages: LANGUAGES,
+
     modules: [initReactI18next],
+
+    timezoneDefault: TIMEZONE_DEFAULT,
   }),
 });
 

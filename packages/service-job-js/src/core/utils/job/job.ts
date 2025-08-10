@@ -12,8 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
 const main = async ({ command, container, name, schedule }: JobModel): Promise<void> => {
   logger.info(`⌚ Starting job ${name}...`);
   try {
-    await runJob();
-    console.log(`[${new Date().toISOString()}] Job finished successfully`);
+    logger.info(`✅ Completed job ${name}...`);
     process.exit(0);
   } catch (err) {
     console.error(`[${new Date().toISOString()}] Job failed`, err);

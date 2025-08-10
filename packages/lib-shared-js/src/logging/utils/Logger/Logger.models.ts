@@ -6,6 +6,8 @@ export type LoggerModel = {
   debug: LogModel;
   error: LogModel;
   info: LogModel;
+  raise: LogModel;
+  success: LogModel;
   trace: LogModel;
   warn: LogModel;
 };
