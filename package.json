@@ -36,8 +36,5 @@
     ],
     "dependencies": {
         "app": "link:"
-    },
-    "devDependencies": {
-        "azure-functions-core-tools": "^4.0.7030"
     }
 }

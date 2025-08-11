@@ -5,7 +5,11 @@ import { isIdentifier, isMemberExpression } from '@babel/types';
 import { esbuildFlowPlugin } from '@bunchtogether/vite-plugin-flow';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
+import { type EnvironmentConfigModel } from '@lib/config/environment/environment.models';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { requireInterop } from '@lib/shared/core/utils/requireInterop/requireInterop';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
@@ -13,6 +17,7 @@ import { type Plugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 // import pinoPlugin from 'esbuild-plugin-pino';
 import { readFileSync } from 'fs';
+import reduce from 'lodash/reduce';
 import { sep } from 'path';
 import posix from 'path/posix';
 
@@ -38,15 +43,15 @@ export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): Plugin =
   },
 });
 
-export const esbuildEnvVarCollect = (): Plugin => {
-  const used = new Set();
+export const esbuildEnvVarCollect = ({ outputPathname }: { outputPathname: string }): Plugin => {
+  const used = new Set<{ key: StringKeyModel<EnvironmentConfigModel>; path: string }>();
   return {
     name: 'plugin:envVarCollect',
     setup(build) {
       build.onLoad({ filter: /\.[tj]sx?$/ }, async (args) => {
         const code = readFileSync(args.path, 'utf-8');
         const ast = parse(code, {
-          plugins: ['typescript', 'jsx', 'importAssertions'],
+          plugins: ['typescript', 'jsx', 'importAttributes'],
           sourceType: 'module',
         });
         traverse(ast, {
@@ -64,15 +69,26 @@ export const esbuildEnvVarCollect = (): Plugin => {
               isIdentifier(object.property, { name: 'env' }) &&
               isIdentifier(property)
             ) {
-              used.add(property.name);
+              used.add({
+                key: property.name as StringKeyModel<EnvironmentConfigModel>,
+                path: args.path,
+              });
             }
           },
         });
-        return { contents: code };
+        return { contents: code, loader: 'ts' };
       });
 
       build.onEnd(() => {
-        console.log('Used env vars:', [...used]);
+        const env = reduce(
+          [...used],
+          (result, v) => (process.env[v.key] ? { ...result, [v.key]: process.env[v.key] } : result),
+          {} as EnvironmentConfigModel,
+        );
+        const dotenv = Object.entries(env)
+          .map(([key, val]) => `${key}=${val}`)
+          .join('\n');
+        writeFile({ filename: fromWorking(BUILD_DIR, '.env'), value: dotenv });
       });
     },
   };
@@ -118,7 +134,7 @@ export const _plugins = ({
   transpilePatterns,
 }: Pick<
   BundleConfigModel,
-  'externals' | 'extensions' | 'format' | 'rootDirs' | 'transpileModules' | 'transpilePatterns'
+  'extensions' | 'externals' | 'format' | 'rootDirs' | 'transpileModules' | 'transpilePatterns'
 >): Array<Plugin> =>
   filterNil([
     {
@@ -139,7 +155,7 @@ export const _plugins = ({
 
     esbuildPluginExcludeVendorFromSourceMap(),
 
-    process.env.NODE_ENV === 'production' && esbuildEnvVarCollect(),
+    process.env.NODE_ENV === 'production' && esbuildEnvVarCollect({ outputPathname }),
 
     (esbuildFlowPlugin as () => unknown)() as Plugin,
 
