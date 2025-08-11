@@ -8,18 +8,19 @@ import { type InstallParamsModel } from '@tool/task/python/tasks/install/install
 const install: TaskParamsModel<InstallParamsModel> = {
   name: 'python-install',
 
-  options: async () => ({
-    install: { isOptional: true },
-    installDev: { isOptional: true },
-    packages: {
+  options: async () => [
+    {
+      key: 'packages',
       options: children(fromPackages(), { isDirectory: true }).reduce(
         (result, { name }) => (name.endsWith('-py') ? [...result, name] : result),
         [] as Array<string>,
       ),
       type: PROMPT_TYPE.MULTIPLE,
     },
-    remove: { isOptional: true },
-  }),
+    { isOptional: true, key: 'install' },
+    { isOptional: true, key: 'installDev' },
+    { isOptional: true, key: 'remove' },
+  ],
 
   task: [
     ({ options }) =>

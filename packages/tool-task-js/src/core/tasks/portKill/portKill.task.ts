@@ -4,9 +4,7 @@ import { type PortKillParamsModel } from '@tool/task/core/tasks/portKill/portKil
 const portKill: TaskParamsModel<PortKillParamsModel> = {
   name: 'port-kill',
 
-  options: async () => ({
-    port: {},
-  }),
+  options: async () => [{ key: 'port' }],
 
   task: [({ options }) => `if pids=$(lsof -ti:${options?.port}); then kill -9 $pids; fi`],
 };

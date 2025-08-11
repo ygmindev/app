@@ -1,8 +1,4 @@
-import {
-  type NilModel,
-  type PartialModel,
-  type StringKeyModel,
-} from '@lib/shared/core/core.models';
+import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { type EnvironmentOverrideParamsModel } from '@lib/shared/environment/environment.models';
 import { type TASK_STATUS } from '@tool/task/core/core.constants';
 import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
@@ -39,9 +35,7 @@ export type TaskParamsModel<TType extends unknown> = Omit<
     onFinish?: Array<TaskModel<TType>>;
     options?: (
       context: Pick<TaskContextModel<TType>, 'name' | 'root' | 'overrides' | 'target'>,
-    ) => Promise<{
-      [TKey in StringKeyModel<TType>]?: Omit<PromptParamsModel<TType>[number], 'key'>;
-    }>;
+    ) => Promise<PromptParamsModel<TType>>;
     task: Array<TaskModel<TType>>;
     overrides?(
       context: Pick<TaskContextModel<TType>, 'name' | 'root' | 'target'>,

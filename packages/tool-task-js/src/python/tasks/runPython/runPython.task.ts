@@ -13,8 +13,9 @@ const runPython: TaskParamsModel<RunPythonParamsModel> = {
 
   name: 'run-python',
 
-  options: async () => ({
-    package: {
+  options: async () => [
+    {
+      key: 'package',
       options: children(fromPackages(), { isDirectory: true }).reduce(
         (result, { name }) =>
           existsSync(joinPaths([fromPackages(name), 'pyproject.toml']))
@@ -24,7 +25,7 @@ const runPython: TaskParamsModel<RunPythonParamsModel> = {
       ),
       type: PROMPT_TYPE.LIST,
     },
-  }),
+  ],
 
   task: [
     ({ options }) => {

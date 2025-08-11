@@ -9,7 +9,7 @@ export const test: TaskParamsModel<TestParamsModel> = {
 
   name: 'test',
 
-  options: async () => ({ testMatch: { isOptional: true } }),
+  options: async () => [{ isOptional: true, key: 'testMatch' }],
 
   task: [
     ({ options }) => {

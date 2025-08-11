@@ -13,9 +13,7 @@ const backup: TaskParamsModel<BackupParamsModel> = {
 
   onFinish: [({ root }) => process.chdir(root ?? fromRoot())],
 
-  options: async () => ({
-    name: {},
-  }),
+  options: async () => [{ key: 'name' }],
 
   task: [
     async ({ options }) => {

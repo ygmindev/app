@@ -17,12 +17,7 @@ const revert: TaskParamsModel<RevertParamsModel> = {
       children(backupPath, { isDirectory: true }),
       ({ lastUpdated }) => -lastUpdated.valueOf(),
     ).map(({ name }) => name);
-    return {
-      name: {
-        options: backups,
-        type: PROMPT_TYPE.LIST,
-      },
-    };
+    return [{ key: 'name', options: backups, type: PROMPT_TYPE.LIST }];
   },
 
   task: [

@@ -45,7 +45,7 @@ const patchPackage: TaskParamsModel<PatchPackageParamsModel> = {
     );
     options = sort(uniq(options));
     options = options.filter((v) => !some(PACKAGE_PREFIXES, (p) => v.startsWith(`@${p}`)));
-    return { package: { options, type: PROMPT_TYPE.LIST } };
+    return [{ key: 'package', options, type: PROMPT_TYPE.LIST }];
   },
 
   task: [

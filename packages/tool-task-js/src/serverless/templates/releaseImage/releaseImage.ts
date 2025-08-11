@@ -14,13 +14,14 @@ export const releaseImage: TaskParamsModel<ReleaseImageParamsModel> = {
     ({ options, target }) => options?.isBuild === BOOLEAN_STRING.TRUE && `run ${target}-build`,
   ],
 
-  options: async () => ({
-    isBuild: {
+  options: async () => [
+    {
       defaultValue: BOOLEAN_STRING.TRUE,
+      key: 'isBuild',
       options: [BOOLEAN_STRING.TRUE, BOOLEAN_STRING.FALSE],
       type: PROMPT_TYPE.LIST,
     },
-  }),
+  ],
 
   variables: () => ({
     SERVERLESS_RUNTIME: SERVERLESS_RUNTIME.CONTAINER,

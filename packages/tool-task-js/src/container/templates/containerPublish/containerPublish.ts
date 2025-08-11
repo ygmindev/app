@@ -13,12 +13,7 @@ export const containerPublish: TaskParamsModel<ContainerPublishParamsModel> = {
 
   onBefore: [({ options, target }) => options?.isBuild && target && `${target}-container-build`],
 
-  options: async () => ({
-    isBuild: {
-      defaultValue: true,
-      type: PROMPT_TYPE.CONFIRM,
-    },
-  }),
+  options: async () => [{ defaultValue: true, key: 'isBuild', type: PROMPT_TYPE.CONFIRM }],
 
   task: [
     async ({ options, target }) => {

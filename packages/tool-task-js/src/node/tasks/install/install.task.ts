@@ -9,11 +9,9 @@ import { type InstallParamsModel } from '@tool/task/node/tasks/install/install.m
 const install: TaskParamsModel<InstallParamsModel> = {
   name: 'node-install',
 
-  options: async () => ({
-    install: { isOptional: true },
-    installDev: { isOptional: true },
-    installPeer: { isOptional: true },
-    packages: {
+  options: async () => [
+    {
+      key: 'packages',
       options: children(fromPackages(), { isDirectory: true }).reduce(
         (result, { name }) =>
           name.startsWith('app') || name.startsWith('service') || name.startsWith('tool')
@@ -23,8 +21,11 @@ const install: TaskParamsModel<InstallParamsModel> = {
       ),
       type: PROMPT_TYPE.MULTIPLE,
     },
-    remove: { isOptional: true },
-  }),
+    { isOptional: true, key: 'install' },
+    { isOptional: true, key: 'installDev' },
+    { isOptional: true, key: 'installPeer' },
+    { isOptional: true, key: 'remove' },
+  ],
 
   task: [
     ({ options }) =>
