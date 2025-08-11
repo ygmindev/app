@@ -24,6 +24,7 @@ export type EnvironmentConfigModel = {
   AWS_ACCESS_KEY_ID: string;
   AWS_SECRET_ACCESS_KEY: string;
   ENV_PLATFORM: `${PLATFORM}`;
+  GITHUB_REPO: string;
   GITHUB_TOKEN: string;
   GITHUB_USERNAME: string;
   NODE_ENV: string;

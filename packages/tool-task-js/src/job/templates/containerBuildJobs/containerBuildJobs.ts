@@ -1,10 +1,11 @@
 import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { DIST_DIR } from '@lib/config/file/file.constants';
+import { BUILD_DIR, DIST_DIR } from '@lib/config/file/file.constants';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
+import { runClean } from '@tool/task/core/utils/runClean/runClean';
 import { bundle } from '@tool/task/node/utils/bundle/bundle';
 
 export const containerBuildJobs: TaskParamsModel<unknown> = {
@@ -12,15 +13,19 @@ export const containerBuildJobs: TaskParamsModel<unknown> = {
 
   name: 'container-build',
 
+  onBefore: ['build-yaml-jobs'],
+
   task: [
     async () => {
+      const outputPathname = fromWorking(DIST_DIR);
+      await runClean({ patterns: [DIST_DIR, BUILD_DIR], root: fromWorking() });
       const jobEntries = fromGlobs(['**/*.job.ts'], { isAbsolute: true });
       if (jobEntries) {
         const entryFiles = jobEntries.reduce(
           (result, v) => ({ ...result, [fileInfo(v).main]: v }),
           {} as Record<string, string>,
         );
-        await bundle({ entryFiles, outputPathname: fromWorking(DIST_DIR) });
+        await bundle({ entryFiles, outputPathname });
       }
     },
   ],

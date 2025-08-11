@@ -7,7 +7,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { type EnvironmentConfigModel } from '@lib/config/environment/environment.models';
-import { TEMP_DIR } from '@lib/config/file/file.constants';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -88,7 +88,7 @@ export const esbuildEnvVarCollect = (): Plugin => {
         const dotenv = Object.entries(env)
           .map(([key, val]) => `${key}=${val}`)
           .join('\n');
-        writeFile({ filename: fromWorking(TEMP_DIR, '.env'), value: dotenv });
+        writeFile({ filename: fromWorking(BUILD_DIR, '.env'), value: dotenv });
       });
     },
   };

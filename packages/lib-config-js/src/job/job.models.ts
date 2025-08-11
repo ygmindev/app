@@ -8,7 +8,8 @@ export type JobConfigModel = {
 };
 
 export type JobModel = {
-  command: string;
+  command?: string;
+  env?: Array<string>;
   name: string;
   schedule: {
     hour?: number;

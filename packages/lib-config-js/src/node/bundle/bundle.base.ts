@@ -2,7 +2,7 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import fileConfig from '@lib/config/file/file';
-import { BUILD_DIR, EXTENSIONS_BASE } from '@lib/config/file/file.constants';
+import { BUILD_DIR, EXTENSIONS_BASE, TEMP_DIR } from '@lib/config/file/file.constants';
 import { config as libraryConfig } from '@lib/config/library/library';
 import { _bundle } from '@lib/config/node/bundle/_bundle';
 import {
@@ -34,6 +34,8 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       configFilename: 'bundle.js',
 
+      envPrefix: [],
+
       envPublic: ['APP_NAME', 'ENV_PLATFORM', 'NODE_ENV'],
 
       exclude: [
@@ -59,6 +61,8 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       rootDirs: [fromRoot(), ...packageDirs.map((path) => fromPackages(path))],
 
       serverExtension: '.node',
+
+      tempPathname: TEMP_DIR,
 
       typescript: typescriptConfig.params(),
 

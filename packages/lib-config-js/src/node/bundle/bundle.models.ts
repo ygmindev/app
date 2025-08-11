@@ -58,6 +58,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   serverExtension?: string;
 
+  tempPathname?: string;
+
   transpileModules?: Array<string>;
 
   transpilePatterns?: Array<RegExp>;
