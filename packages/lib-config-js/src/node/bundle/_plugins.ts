@@ -7,7 +7,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { type EnvironmentConfigModel } from '@lib/config/environment/environment.models';
-import { BUILD_DIR, TEMP_DIR } from '@lib/config/file/file.constants';
+import { TEMP_DIR } from '@lib/config/file/file.constants';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
