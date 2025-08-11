@@ -10,15 +10,14 @@ import { rename as renameBase } from '@tool/task/core/utils/rename/rename';
 const rename: TaskParamsModel<RenameParamsModel> = {
   name: 're-name',
 
-  options: async () => [
-    {
-      key: 'packages',
+  options: async () => ({
+    from: {},
+    packages: {
       options: children(fromPackages(), { isDirectory: true }).map(({ name }) => name),
       type: PROMPT_TYPE.MULTIPLE,
     },
-    { key: 'from' },
-    { key: 'to' },
-  ],
+    to: {},
+  }),
 
   task: [
     async ({ options }) => {

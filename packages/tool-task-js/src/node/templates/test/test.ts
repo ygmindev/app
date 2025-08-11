@@ -2,7 +2,6 @@ import { type Config } from '@jest/types';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
 import { importConfig } from '@lib/config/utils/importConfig/importConfig';
-import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type TestParamsModel } from '@tool/task/node/templates/test/test.models';
@@ -14,7 +13,7 @@ export const test: TaskParamsModel<TestParamsModel> = {
   name: 'test',
 
   options: async ({ overrides }) =>
-    filterNil([overrides?.isPrompt && { isOptional: true, key: 'testMatch' }]),
+    overrides?.isPrompt ? { testMatch: { isOptional: true } } : {},
 
   task: [
     async ({ options, root }) => {

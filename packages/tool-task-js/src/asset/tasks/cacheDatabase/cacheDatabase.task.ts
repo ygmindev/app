@@ -23,14 +23,13 @@ const cacheDatabase: TaskParamsModel<CacheDatabaseParamsModel> = {
 
   onFinish: ['database-kill'],
 
-  options: async () => [
-    {
+  options: async () => ({
+    resources: {
       defaultValue: resources,
-      key: 'resources',
       options: resources,
       type: PROMPT_TYPE.MULTIPLE,
     },
-  ],
+  }),
 
   task: [
     async ({ options }) => {

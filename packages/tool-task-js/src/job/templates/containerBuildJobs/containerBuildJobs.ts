@@ -5,10 +5,10 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { bundle } from '@tool/task/node/utils/bundle/bundle';
 
-const buildJobs: TaskParamsModel<unknown> = {
+export const containerBuildJobs: TaskParamsModel<unknown> = {
   environment: ENVIRONMENT.PRODUCTION,
 
-  name: 'build',
+  name: 'container-build',
 
   task: [
     async () => {
@@ -27,5 +27,3 @@ const buildJobs: TaskParamsModel<unknown> = {
     ENV_PLATFORM: PLATFORM.NODE,
   }),
 };
-
-export default buildJobs;

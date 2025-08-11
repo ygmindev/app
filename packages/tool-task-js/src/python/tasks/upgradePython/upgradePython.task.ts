@@ -8,17 +8,16 @@ import { type UpgradePythonParamsModel } from '@tool/task/python/tasks/upgradePy
 const upgradePython: TaskParamsModel<UpgradePythonParamsModel> = {
   name: 'upgrade-python',
 
-  options: async () => [
-    {
-      key: 'packages',
+  options: async () => ({
+    packages: {
       options: children(fromPackages(), { isDirectory: true }).reduce(
         (result, { name }) => (name.endsWith('-py') ? [...result, name] : result),
         [] as Array<string>,
       ),
       type: PROMPT_TYPE.MULTIPLE,
     },
-    { key: 'version' },
-  ],
+    version: {},
+  }),
 
   task: [
     ({ options }) => {

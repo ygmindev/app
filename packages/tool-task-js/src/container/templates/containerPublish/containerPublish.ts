@@ -1,19 +1,24 @@
 import { config as containerConfig } from '@lib/config/container/container.node';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import { type PublishParamsModel } from '@tool/task/container/templates/publish/publish.models';
+import { type ContainerPublishParamsModel } from '@tool/task/container/templates/containerPublish/containerPublish.models';
 import { Docker } from '@tool/task/container/utils/Docker/Docker';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 
-const publishJobs: TaskParamsModel<PublishParamsModel> = {
+export const containerPublish: TaskParamsModel<ContainerPublishParamsModel> = {
   environment: ENVIRONMENT.PRODUCTION,
 
-  name: 'publish',
+  name: 'container-publish',
 
-  onBefore: [({ options, target }) => options?.isBuild && target && `${target}-build`],
+  onBefore: [({ options, target }) => options?.isBuild && target && `${target}-container-build`],
 
-  options: async () => [{ key: 'isBuild', type: PROMPT_TYPE.CONFIRM }],
+  options: async () => ({
+    isBuild: {
+      defaultValue: true,
+      type: PROMPT_TYPE.CONFIRM,
+    },
+  }),
 
   task: [
     async ({ options, target }) => {
@@ -31,5 +36,3 @@ const publishJobs: TaskParamsModel<PublishParamsModel> = {
     ENV_PLATFORM: PLATFORM.NODE,
   }),
 };
-
-export default publishJobs;

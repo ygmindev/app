@@ -6,9 +6,12 @@ import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 const buildApp: TaskParamsModel<BuildAppParamsModel> = {
   name: 'build-app',
 
-  options: async () => [
-    { key: 'apps', options: Object.values(APP_NAME), type: PROMPT_TYPE.MULTIPLE },
-  ],
+  options: async () => ({
+    apps: {
+      options: Object.values(APP_NAME),
+      type: PROMPT_TYPE.MULTIPLE,
+    },
+  }),
 
   task: [
     ({ options }) => {

@@ -2,6 +2,7 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { StringKeyModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
@@ -18,12 +19,14 @@ import {
 import { execute } from '@tool/task/core/utils/execute/execute';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
+import { PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
 import { runParallel } from '@tool/task/core/utils/runParallel/runParallel';
 import { _TaskRunner } from '@tool/task/core/utils/TaskRunner/_TaskRunner';
 import { type TaskRunnerModel } from '@tool/task/core/utils/TaskRunner/TaskRunner.models';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 import kebabCase from 'lodash/kebabCase';
+import reduce from 'lodash/reduce';
 
 @withContainer()
 export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
@@ -104,10 +107,16 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     const overridesF = overrides?.({ name, root, target });
     let optionsF = { ...(overridesF ?? {}), ...parseArgs() } as TType & object;
     if (options) {
-      const optionsPrompts = await options({ name, overrides: overridesF, root, target });
+      const optionsPrompted = await options({ name, overrides: overridesF, root, target });
+      const optionsPrompts = reduce(
+        optionsPrompted as Record<StringKeyModel<TType>, PromptParamsModel<TType>[number]>,
+        (result, v, k) => [...result, { ...v, key: k }],
+        [] as PromptParamsModel<TType>,
+      );
       optionsF = {
         ...optionsF,
-        ...((await prompt(optionsPrompts.filter(({ key }) => !(key in optionsF)))) as object),
+        ...((await prompt(optionsPrompts.filter(({ key }) => !(key in optionsF)))) as TType &
+          object),
       };
     }
     target && process.chdir(workingDir);
