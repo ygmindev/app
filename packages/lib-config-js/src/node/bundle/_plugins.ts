@@ -7,7 +7,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { type EnvironmentConfigModel } from '@lib/config/environment/environment.models';
-import { BUILD_DIR } from '@lib/config/file/file.constants';
+import { BUILD_DIR, TEMP_DIR } from '@lib/config/file/file.constants';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -43,7 +43,7 @@ export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): Plugin =
   },
 });
 
-export const esbuildEnvVarCollect = ({ outputPathname }: { outputPathname: string }): Plugin => {
+export const esbuildEnvVarCollect = (): Plugin => {
   const used = new Set<{ key: StringKeyModel<EnvironmentConfigModel>; path: string }>();
   return {
     name: 'plugin:envVarCollect',
@@ -88,7 +88,7 @@ export const esbuildEnvVarCollect = ({ outputPathname }: { outputPathname: strin
         const dotenv = Object.entries(env)
           .map(([key, val]) => `${key}=${val}`)
           .join('\n');
-        writeFile({ filename: fromWorking(BUILD_DIR, '.env'), value: dotenv });
+        writeFile({ filename: fromWorking(TEMP_DIR, '.env'), value: dotenv });
       });
     },
   };
@@ -155,7 +155,7 @@ export const _plugins = ({
 
     esbuildPluginExcludeVendorFromSourceMap(),
 
-    process.env.NODE_ENV === 'production' && esbuildEnvVarCollect({ outputPathname }),
+    process.env.NODE_ENV === 'production' && esbuildEnvVarCollect(),
 
     (esbuildFlowPlugin as () => unknown)() as Plugin,
 
