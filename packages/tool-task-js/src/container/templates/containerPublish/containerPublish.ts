@@ -1,4 +1,6 @@
+import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { config as containerConfig } from '@lib/config/container/container.node';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type ContainerPublishParamsModel } from '@tool/task/container/templates/containerPublish/containerPublish.models';
@@ -11,7 +13,12 @@ export const containerPublish: TaskParamsModel<ContainerPublishParamsModel> = {
 
   name: 'container-publish',
 
-  onBefore: [({ options, target }) => options?.isBuild && target && `${target}-container-build`],
+  onBefore: [
+    ({ options, target }) => options?.isBuild && target && `${target}-build`,
+
+    ({ target }) =>
+      `gh secret set -f ${fromPackages(target, BUILD_DIR, '.env')} --repo ${process.env.GITHUB_REPO}`,
+  ],
 
   options: async () => [{ defaultValue: true, key: 'isBuild', type: PROMPT_TYPE.CONFIRM }],
 
