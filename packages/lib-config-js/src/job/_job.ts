@@ -18,9 +18,9 @@ export const _job = ({ container, jobs }: JobConfigModel): _JobConfigModel =>
               name: 'sign in',
               uses: 'docker/login-action@v2',
               with: {
-                password: '${{ secrets.GITHUB_TOKEN }}',
+                password: '${{ github.token }}',
                 registry: container?.server ?? '',
-                username: '${{ secrets.GITHUB_USERNAME }}',
+                username: '${{ github.actor }}',
               },
             },
             {

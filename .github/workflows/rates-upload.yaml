@@ -5,9 +5,9 @@ jobs:
       - name: sign in
         uses: docker/login-action@v2
         with:
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ github.token }}
           registry: ghcr.io
-          username: ${{ secrets.GITHUB_USERNAME }}
+          username: ${{ github.actor }}
       - name: run ratesUpload
         run: docker run --rm ghcr.io/ygmindev/service-job-js ratesUpload
 name: ratesUpload
