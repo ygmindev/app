@@ -17,6 +17,7 @@ export class _Docker implements _DockerModel {
   docker: Docker;
   ignore?: Array<string>;
   password: string;
+  platform: string;
   rootDir: string;
   server: string;
   tag: string;
@@ -27,6 +28,7 @@ export class _Docker implements _DockerModel {
     ignore = EXCLUDE_PATTERNS,
     image,
     password,
+    platform,
     rootDir = fromRoot(),
     server,
     username,
@@ -35,6 +37,7 @@ export class _Docker implements _DockerModel {
     this.docker = new Docker();
     this.ignore = ignore;
     this.password = password;
+    this.platform = platform;
     this.rootDir = rootDir;
     this.server = server;
     this.tag = `${this.server}/${process.env.GITHUB_USERNAME}/${image}:latest`;
@@ -85,6 +88,7 @@ export class _Docker implements _DockerModel {
           from: this.rootDir,
           to: joinPaths([this.workingDir, 'src', 'Dockerfile']),
         }),
+        platform: this.platform,
         t: this.tag,
       });
       await this._handleStream(stream);
