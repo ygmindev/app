@@ -12,6 +12,7 @@ export const config = defineConfig<JobConfigModel, _JobConfigModel>({
     const { image, server, username } = containerConfig.params();
     return {
       container: { image, server, username },
+      env: { ...process.env },
       jobs: [],
       outPathname: fromRoot('.github/workflows'),
     };

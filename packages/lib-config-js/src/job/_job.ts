@@ -3,8 +3,8 @@ import { type JobConfigModel } from '@lib/config/job/job.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { FREQUENCY } from '@lib/shared/datetime/datetime.models';
 
-export const _job = ({ container, jobs }: JobConfigModel): _JobConfigModel =>
-  jobs.map(({ command, env, name, schedule }) => {
+export const _job = ({ container, env, jobs }: JobConfigModel): _JobConfigModel =>
+  jobs.map(({ command, name, schedule }) => {
     const commandF = command ?? name;
     return {
       jobs: {
@@ -13,7 +13,10 @@ export const _job = ({ container, jobs }: JobConfigModel): _JobConfigModel =>
           steps: filterNil([
             container && {
               env: env
-                ? env.reduce((result, k) => ({ ...result, [k]: `\${{ secrets.${k} }}` }), {})
+                ? Object.keys(env).reduce(
+                    (result, k) => ({ ...result, [k]: `\${{ secrets.${k} }}` }),
+                    {},
+                  )
                 : undefined,
               name: 'sign in',
               uses: 'docker/login-action@v2',
