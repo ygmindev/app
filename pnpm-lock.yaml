@@ -2302,6 +2302,9 @@ importers:
       prettier:
         specifier: ^3.5.3
         version: 3.6.2
+      pubsub-js:
+        specifier: ^1.9.5
+        version: 1.9.5
       puppeteer:
         specifier: ^24.7.2
         version: 24.16.1(typescript@5.9.2)

@@ -26,7 +26,7 @@ export const _job = ({ container, jobs }: JobConfigModel): _JobConfigModel =>
             {
               name: `run ${name}`,
               run: container
-                ? `docker run --rm ${`${container.server ?? ''}/${container.username ?? ''}/${container.image ?? ''}`} -- ${commandF}`
+                ? `docker run --rm ${`${container.server ?? ''}/${container.username ?? ''}/${container.image ?? ''}`} ${commandF}`
                 : commandF,
             },
           ]),

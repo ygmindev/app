@@ -27,4 +27,4 @@ RUN pnpm install --frozen-lockfile
 
 WORKDIR ${TARGET_DIR}/packages/service-job-js
 
-CMD ["sh", "-c", "node __dist__/$1.mjs", "--"]
+CMD ["sh", "-c", "node __dist__/$0.mjs", "--"]
