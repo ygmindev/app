@@ -20,8 +20,9 @@ export const build: TaskParamsModel<unknown> = {
 
   task: [
     async () => {
-      const outputPathname = fromWorking(DIST_DIR);
       await runClean({ patterns: [DIST_DIR, BUILD_DIR], root: fromWorking() });
+
+      const outputPathname = fromWorking(DIST_DIR);
       const jobEntries = fromGlobs(['**/*.job.ts'], { isAbsolute: true });
       if (jobEntries) {
         const entryFiles = jobEntries.reduce(
