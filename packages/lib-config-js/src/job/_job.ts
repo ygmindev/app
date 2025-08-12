@@ -1,5 +1,3 @@
-import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { DIST_DIR } from '@lib/config/file/file.constants';
 import { type _JobConfigModel } from '@lib/config/job/_job.models';
 import { type JobConfigModel } from '@lib/config/job/job.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -28,7 +26,7 @@ export const _job = ({ container, jobs }: JobConfigModel): _JobConfigModel =>
             {
               name: `run ${name}`,
               run: container
-                ? `docker run --rm ${`${container.server ?? ''}/${container.username ?? ''}/${container.image ?? ''}`} ${joinPaths([DIST_DIR, commandF])}`
+                ? `docker run --rm ${`${container.server ?? ''}/${container.username ?? ''}/${container.image ?? ''}`} ${commandF}`
                 : commandF,
             },
           ]),
