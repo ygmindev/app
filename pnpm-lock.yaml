@@ -1362,6 +1362,15 @@ importers:
       fast-xml-parser:
         specifier: ^5.2.5
         version: 5.2.5
+      graphql:
+        specifier: ^16.11.0
+        version: 16.11.0
+      graphql-relay:
+        specifier: ^0.10.2
+        version: 0.10.2(graphql@16.11.0)
+      graphql-scalars:
+        specifier: ^1.24.2
+        version: 1.24.2(graphql@16.11.0)
       http-errors:
         specifier: ^2.0.0
         version: 2.0.0
