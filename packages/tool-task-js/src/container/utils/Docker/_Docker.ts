@@ -93,7 +93,9 @@ export class _Docker implements _DockerModel {
           from: this.rootDir,
           to: joinPaths([this.workingDir, 'src', 'Dockerfile']),
         }),
+        nocache: true,
         platform: this.platform,
+        pull: false,
         t: `${this.image}:${this.tag}`,
       });
       await this._handleStream(stream);

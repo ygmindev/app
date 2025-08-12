@@ -19,6 +19,7 @@ COPY packages/lib-frontend-js ${TARGET_DIR}/packages/lib-frontend-js
 COPY packages/lib-model-js ${TARGET_DIR}/packages/lib-model-js
 COPY packages/lib-shared-js ${TARGET_DIR}/packages/lib-shared-js
 COPY packages/service-job-js ${TARGET_DIR}/packages/service-job-js
+COPY packages/service-job-js/__dist__ ${TARGET_DIR}/packages/service-job-js/__dist__
 
 WORKDIR ${TARGET_DIR}
 
