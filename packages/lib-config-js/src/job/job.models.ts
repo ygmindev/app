@@ -5,6 +5,7 @@ export type JobConfigModel = {
   container?: Pick<ContainerConfigModel, 'image' | 'server' | 'username'>;
   jobs: Array<JobModel>;
   outPathname: string;
+  root: string;
 };
 
 export type JobModel = {

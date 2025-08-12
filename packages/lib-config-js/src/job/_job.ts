@@ -1,9 +1,12 @@
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { DIST_DIR } from '@lib/config/file/file.constants';
 import { type _JobConfigModel } from '@lib/config/job/_job.models';
 import { type JobConfigModel } from '@lib/config/job/job.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { FREQUENCY } from '@lib/shared/datetime/datetime.models';
 
-export const _job = ({ container, jobs }: JobConfigModel): _JobConfigModel =>
+export const _job = ({ container, jobs, root = fromWorking() }: JobConfigModel): _JobConfigModel =>
   jobs.map(({ command, env, name, schedule }) => {
     const commandF = command ?? name;
     return {
@@ -26,7 +29,7 @@ export const _job = ({ container, jobs }: JobConfigModel): _JobConfigModel =>
             {
               name: `run ${name}`,
               run: container
-                ? `docker run --rm ${`${container.server ?? ''}/${container.username ?? ''}/${container.image ?? ''}`} ${commandF}`
+                ? `docker run --rm ${`${container.server ?? ''}/${container.username ?? ''}/${container.image ?? ''}`} ${joinPaths([root, DIST_DIR, commandF])}`
                 : commandF,
             },
           ]),
