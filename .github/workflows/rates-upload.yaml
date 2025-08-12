@@ -8,9 +8,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           username: ${{ secrets.GITHUB_USERNAME }}
-      - name: run ping
-        run: docker run --rm ghcr.io/ygmindev/app:latest echo hello
-name: ping
+      - name: run ratesUpload
+        run: docker run --rm ghcr.io/ygmindev/service-job-js ratesUpload
+name: ratesUpload
 on:
   schedule:
     - cron: 0 0 * * *

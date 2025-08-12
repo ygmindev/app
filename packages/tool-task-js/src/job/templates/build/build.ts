@@ -5,7 +5,7 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { BUILD_DIR, DIST_DIR } from '@lib/config/file/file.constants';
-import { config as jobConfig } from '@lib/config/job/job.base';
+import { config as jobConfig } from '@lib/config/job/job.quant';
 import { slug } from '@lib/shared/core/utils/slug/slug';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
