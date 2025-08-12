@@ -20,6 +20,7 @@ COPY packages/lib-model-js ${TARGET_DIR}/packages/lib-model-js
 COPY packages/lib-shared-js ${TARGET_DIR}/packages/lib-shared-js
 COPY packages/service-job-js ${TARGET_DIR}/packages/service-job-js
 COPY packages/service-job-js/__dist__ ${TARGET_DIR}/packages/service-job-js/__dist__
+COPY packages/service-job-js/src/entrypoint.sh ${TARGET_DIR}/packages/service-job-js/src/entrypoint.sh
 
 WORKDIR ${TARGET_DIR}
 
@@ -27,4 +28,6 @@ RUN pnpm install --frozen-lockfile
 
 WORKDIR ${TARGET_DIR}/packages/service-job-js
 
-CMD ["sh", "-c", "node __dist__/$0.mjs", "--"]
+RUN chmod +x ./src/entrypoint.sh
+ENTRYPOINT ["./src/entrypoint.sh"]
+
