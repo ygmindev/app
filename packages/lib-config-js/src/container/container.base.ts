@@ -7,6 +7,7 @@ export const config = defineConfig<ContainerConfigModel>({
     password: process.env.GITHUB_TOKEN,
     platform: 'linux/amd64',
     server: 'ghcr.io',
+    tag: 'latest',
     username: process.env.GITHUB_USERNAME,
   }),
 });

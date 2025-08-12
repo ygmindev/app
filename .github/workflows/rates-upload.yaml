@@ -9,8 +9,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
       - name: run ratesUpload
-        run: docker run --rm ghcr.io/ygmindev/service-job-js
-          /Users/yoongeemin/Developer/Projects/app/packages/service-job-js/__dist__/ratesUpload
+        run: docker run --rm ghcr.io/ygmindev/service-job-js __dist__/ratesUpload
 name: ratesUpload
 on:
   schedule:

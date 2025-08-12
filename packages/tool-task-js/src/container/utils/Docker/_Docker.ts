@@ -16,11 +16,13 @@ import tar from 'tar-fs';
 export class _Docker implements _DockerModel {
   docker: Docker;
   ignore?: Array<string>;
+  image: string;
   password: string;
   platform: string;
   rootDir: string;
   server: string;
   tag: string;
+  url: string;
   username: string;
   workingDir: string;
 
@@ -31,16 +33,19 @@ export class _Docker implements _DockerModel {
     platform,
     rootDir = fromRoot(),
     server,
+    tag,
     username,
     workingDir = fromWorking(),
   }: _DockerParamsModel) {
     this.docker = new Docker();
     this.ignore = ignore;
+    this.image = image;
     this.password = password;
     this.platform = platform;
     this.rootDir = rootDir;
     this.server = server;
-    this.tag = `${this.server}/${process.env.GITHUB_USERNAME}/${image}:latest`;
+    this.tag = tag;
+    this.url = `${server}/${process.env.GITHUB_USERNAME}/${image}:${tag}`;
     this.username = username;
     this.workingDir = workingDir;
   }
@@ -89,7 +94,7 @@ export class _Docker implements _DockerModel {
           to: joinPaths([this.workingDir, 'src', 'Dockerfile']),
         }),
         platform: this.platform,
-        t: this.tag,
+        t: `${this.image}:${this.tag}`,
       });
       await this._handleStream(stream);
     } catch {
@@ -99,7 +104,7 @@ export class _Docker implements _DockerModel {
 
   async delete(): Promise<void> {
     try {
-      await this.docker.getImage(this.tag).remove({ force: true });
+      await this.docker.getImage(`${this.image}:${this.tag}`).remove({ force: true });
       const danglingImages = await this.docker.listImages({ filters: { dangling: ['true'] } });
       for (const image of danglingImages) {
         await this.docker.getImage(image.Id).remove({ force: true });
@@ -110,7 +115,12 @@ export class _Docker implements _DockerModel {
   async publish(isBuild: boolean = true): Promise<void> {
     try {
       isBuild && (await this.build());
-      const stream = await this.docker.getImage(this.tag).push({
+      const image = this.docker.getImage(`${this.image}:${this.tag}`);
+      await image.tag({
+        repo: `${this.server}/${process.env.GITHUB_USERNAME}/${this.image}`,
+        tag: this.tag,
+      });
+      const stream = await this.docker.getImage(this.url).push({
         authconfig: {
           password: this.password,
           serveraddress: this.server,
@@ -125,10 +135,10 @@ export class _Docker implements _DockerModel {
 
   async run<TType>(args: Array<string> = []): Promise<TType> {
     try {
-      await this.docker.getImage(this.tag).inspect();
+      await this.docker.getImage(this.url).inspect();
     } catch {
-      console.log(`📥 Pulling image: ${this.tag}`);
-      const stream = await this.docker.pull(this.tag, {
+      console.log(`📥 Pulling image: ${this.url}`);
+      const stream = await this.docker.pull(this.url, {
         authconfig: {
           password: this.password,
           serveraddress: this.server,
@@ -138,7 +148,7 @@ export class _Docker implements _DockerModel {
       await this._handleStream(stream);
     }
 
-    const result = (await this.docker.run(this.tag, args, process.stdout)) as TType;
+    const result = (await this.docker.run(this.url, args, process.stdout)) as TType;
     console.warn(result);
     throw new Error('Method not implemented.');
   }

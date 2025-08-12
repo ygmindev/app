@@ -3,5 +3,6 @@ export type ContainerConfigModel = {
   password: string;
   platform: string;
   server: string;
+  tag: string;
   username: string;
 };
