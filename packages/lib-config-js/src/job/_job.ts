@@ -12,12 +12,6 @@ export const _job = ({ container, env, jobs }: JobConfigModel): _JobConfigModel 
           'runs-on': 'ubuntu-latest',
           steps: filterNil([
             container && {
-              env: env
-                ? Object.keys(env).reduce(
-                    (result, k) => ({ ...result, [k]: `\${{ secrets.${k} }}` }),
-                    {},
-                  )
-                : undefined,
               name: 'sign in',
               uses: 'docker/login-action@v2',
               with: {
@@ -29,7 +23,7 @@ export const _job = ({ container, env, jobs }: JobConfigModel): _JobConfigModel 
             {
               name: `run ${name}`,
               run: container
-                ? `docker run --rm ${`${container.server ?? ''}/${container.username ?? ''}/${container.image ?? ''}`} ${commandF}`
+                ? `docker run ${env?.map((v) => `-e ${v}=\${{ secrets.${v} }}`).join(' ')} --rm ${`${container.server ?? ''}/${container.username ?? ''}/${container.image ?? ''}`} ${commandF}`
                 : commandF,
             },
           ]),

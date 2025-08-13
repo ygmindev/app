@@ -81,6 +81,7 @@ export const _bundle = ({
   buildDir,
   define,
   entryFiles,
+  envFilename,
   envPrefix,
   envPublic,
   exclude,
@@ -220,6 +221,8 @@ export const _bundle = ({
         platform: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
 
         plugins: _plugins({
+          buildDir,
+          envFilename,
           extensions,
           externals,
           format,

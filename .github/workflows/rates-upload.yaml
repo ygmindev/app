@@ -2,140 +2,22 @@ jobs:
   run-container:
     runs-on: ubuntu-latest
     steps:
-      - env:
-          NVM_INC: ${{ secrets.NVM_INC }}
-          TERM_PROGRAM: ${{ secrets.TERM_PROGRAM }}
-          NODE: ${{ secrets.NODE }}
-          NVM_CD_FLAGS: ${{ secrets.NVM_CD_FLAGS }}
-          INIT_CWD: ${{ secrets.INIT_CWD }}
-          WARP_HONOR_PS1: ${{ secrets.WARP_HONOR_PS1 }}
-          TERM: ${{ secrets.TERM }}
-          SHELL: ${{ secrets.SHELL }}
-          HOMEBREW_REPOSITORY: ${{ secrets.HOMEBREW_REPOSITORY }}
-          TMPDIR: ${{ secrets.TMPDIR }}
-          npm_config_global_prefix: ${{ secrets.npm_config_global_prefix }}
-          TERM_PROGRAM_VERSION: ${{ secrets.TERM_PROGRAM_VERSION }}
-          npm_config_node_likner: ${{ secrets.npm_config_node_likner }}
-          COLOR: ${{ secrets.COLOR }}
-          npm_config_noproxy: ${{ secrets.npm_config_noproxy }}
-          PNPM_HOME: ${{ secrets.PNPM_HOME }}
-          npm_config_local_prefix: ${{ secrets.npm_config_local_prefix }}
-          NVM_DIR: ${{ secrets.NVM_DIR }}
-          USER: ${{ secrets.USER }}
-          COMMAND_MODE: ${{ secrets.COMMAND_MODE }}
-          npm_config_globalconfig: ${{ secrets.npm_config_globalconfig }}
-          SSH_AUTH_SOCK: ${{ secrets.SSH_AUTH_SOCK }}
-          __CF_USER_TEXT_ENCODING: ${{ secrets.__CF_USER_TEXT_ENCODING }}
-          WARP_IS_LOCAL_SHELL_SESSION: ${{ secrets.WARP_IS_LOCAL_SHELL_SESSION }}
-          npm_execpath: ${{ secrets.npm_execpath }}
-          WARP_USE_SSH_WRAPPER: ${{ secrets.WARP_USE_SSH_WRAPPER }}
-          PATH: ${{ secrets.PATH }}
-          LaunchInstanceID: ${{ secrets.LaunchInstanceID }}
-          npm_package_json: ${{ secrets.npm_package_json }}
-          __CFBundleIdentifier: ${{ secrets.__CFBundleIdentifier }}
-          npm_config_init_module: ${{ secrets.npm_config_init_module }}
-          npm_config_userconfig: ${{ secrets.npm_config_userconfig }}
-          PWD: ${{ secrets.PWD }}
-          npm_command: ${{ secrets.npm_command }}
-          npm_package_bin_run: ${{ secrets.npm_package_bin_run }}
-          EDITOR: ${{ secrets.EDITOR }}
-          npm_lifecycle_event: ${{ secrets.npm_lifecycle_event }}
-          LANG: ${{ secrets.LANG }}
-          npm_package_name: ${{ secrets.npm_package_name }}
-          NODE_PATH: ${{ secrets.NODE_PATH }}
-          XPC_FLAGS: ${{ secrets.XPC_FLAGS }}
-          npm_config_npm_version: ${{ secrets.npm_config_npm_version }}
-          npm_config_node_gyp: ${{ secrets.npm_config_node_gyp }}
-          XPC_SERVICE_NAME: ${{ secrets.XPC_SERVICE_NAME }}
-          npm_package_version: ${{ secrets.npm_package_version }}
-          SHLVL: ${{ secrets.SHLVL }}
-          HOME: ${{ secrets.HOME }}
-          HOMEBREW_PREFIX: ${{ secrets.HOMEBREW_PREFIX }}
-          LOGNAME: ${{ secrets.LOGNAME }}
-          npm_config_cache: ${{ secrets.npm_config_cache }}
-          npm_lifecycle_script: ${{ secrets.npm_lifecycle_script }}
-          SSH_SOCKET_DIR: ${{ secrets.SSH_SOCKET_DIR }}
-          NVM_BIN: ${{ secrets.NVM_BIN }}
-          npm_config_user_agent: ${{ secrets.npm_config_user_agent }}
-          INFOPATH: ${{ secrets.INFOPATH }}
-          HOMEBREW_CELLAR: ${{ secrets.HOMEBREW_CELLAR }}
-          CONDA_CHANGEPS1: ${{ secrets.CONDA_CHANGEPS1 }}
-          SECURITYSESSIONID: ${{ secrets.SECURITYSESSIONID }}
-          COLORTERM: ${{ secrets.COLORTERM }}
-          npm_config_prefix: ${{ secrets.npm_config_prefix }}
-          npm_node_execpath: ${{ secrets.npm_node_execpath }}
-          NODE_ENV: ${{ secrets.NODE_ENV }}
-          ENV_PLATFORM: ${{ secrets.ENV_PLATFORM }}
-          APP_NAME: ${{ secrets.APP_NAME }}
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-          SERVER_ENCRYPTION_ALGORITHM: ${{ secrets.SERVER_ENCRYPTION_ALGORITHM }}
-          SERVER_KEY_LENGTH: ${{ secrets.SERVER_KEY_LENGTH }}
-          SERVER_IV_LENGTH: ${{ secrets.SERVER_IV_LENGTH }}
-          SERVER_SALT_LENGTH: ${{ secrets.SERVER_SALT_LENGTH }}
-          SERVER_SSL_PUBLIC_KEY: ${{ secrets.SERVER_SSL_PUBLIC_KEY }}
-          SERVER_SSL_PRIVATE_KEY: ${{ secrets.SERVER_SSL_PRIVATE_KEY }}
-          SERVER_APP_OTP_LENGTH: ${{ secrets.SERVER_APP_OTP_LENGTH }}
-          SERVER_APP_PORT: ${{ secrets.SERVER_APP_PORT }}
-          SERVER_APP_WEBSOCKET_PORT: ${{ secrets.SERVER_APP_WEBSOCKET_PORT }}
-          SERVER_APP_SSR_PORT: ${{ secrets.SERVER_APP_SSR_PORT }}
-          SERVER_REGION: ${{ secrets.SERVER_REGION }}
-          SERVER_EMAIL_HOST: ${{ secrets.SERVER_EMAIL_HOST }}
-          SERVER_EMAIL_PORT: ${{ secrets.SERVER_EMAIL_PORT }}
-          SERVER_EMAIL_USERNAME: ${{ secrets.SERVER_EMAIL_USERNAME }}
-          SERVER_EMAIL_PASSWORD: ${{ secrets.SERVER_EMAIL_PASSWORD }}
-          SERVER_FIREBASE_ADMIN_PROJECT_ID: ${{ secrets.SERVER_FIREBASE_ADMIN_PROJECT_ID }}
-          SERVER_FIREBASE_ADMIN_EMAIL: ${{ secrets.SERVER_FIREBASE_ADMIN_EMAIL }}
-          SERVER_FIREBASE_ADMIN_SECRET: ${{ secrets.SERVER_FIREBASE_ADMIN_SECRET }}
-          APP_FIREBASE_API_KEY: ${{ secrets.APP_FIREBASE_API_KEY }}
-          APP_FIREBASE_APP_ID: ${{ secrets.APP_FIREBASE_APP_ID }}
-          APP_FIREBASE_AUTH_DOMAIN: ${{ secrets.APP_FIREBASE_AUTH_DOMAIN }}
-          APP_FIREBASE_PROJECT_ID: ${{ secrets.APP_FIREBASE_PROJECT_ID }}
-          APP_FIREBASE_SENDER_ID: ${{ secrets.APP_FIREBASE_SENDER_ID }}
-          APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.APP_FIREBASE_STORAGE_BUCKET }}
-          APP_AMPLITUDE_API_KEY: ${{ secrets.APP_AMPLITUDE_API_KEY }}
-          APP_USERNAME: ${{ secrets.APP_USERNAME }}
-          SERVER_PLAID_CLIENT_ID: ${{ secrets.SERVER_PLAID_CLIENT_ID }}
-          SERVER_PLAID_SECRET: ${{ secrets.SERVER_PLAID_SECRET }}
-          SERVER_PLAID_PRODUCTS: ${{ secrets.SERVER_PLAID_PRODUCTS }}
-          SERVER_PLAID_COUNTRY_CODES: ${{ secrets.SERVER_PLAID_COUNTRY_CODES }}
-          SERVER_PLAID_REDIRECT_URL: ${{ secrets.SERVER_PLAID_REDIRECT_URL }}
-          SERVER_PLAID_VERSION: ${{ secrets.SERVER_PLAID_VERSION }}
-          APP_TRACKING_NAME: ${{ secrets.APP_TRACKING_NAME }}
-          APP_UPTRACE_SOURCE: ${{ secrets.APP_UPTRACE_SOURCE }}
-          SERVER_GOOGLE_API_KEY: ${{ secrets.SERVER_GOOGLE_API_KEY }}
-          SERVER_GOOGLE_EMAIL: ${{ secrets.SERVER_GOOGLE_EMAIL }}
-          SERVER_GOOGLE_PRIVATE_KEY: ${{ secrets.SERVER_GOOGLE_PRIVATE_KEY }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SERVER_STRIPE_API_VERSION: ${{ secrets.SERVER_STRIPE_API_VERSION }}
-          SLS_DEBUG: ${{ secrets.SLS_DEBUG }}
-          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
-          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PYTHON_VERSION: ${{ secrets.PYTHON_VERSION }}
-          NODE_VERSION: ${{ secrets.NODE_VERSION }}
-          SERVER_POLYGON_API_KEY: ${{ secrets.SERVER_POLYGON_API_KEY }}
-          SERVER_APP_SECRET: ${{ secrets.SERVER_APP_SECRET }}
-          APP_HOST: ${{ secrets.APP_HOST }}
-          SERVER_APP_HOST: ${{ secrets.SERVER_APP_HOST }}
-          SERVER_APP_SSR_HOST: ${{ secrets.SERVER_APP_SSR_HOST }}
-          SERVER_APP_WEBSOCKET_HOST: ${{ secrets.SERVER_APP_WEBSOCKET_HOST }}
-          SERVER_DB_MONGO_URL: ${{ secrets.SERVER_DB_MONGO_URL }}
-          SERVER_DB_MONGO_USERNAME: ${{ secrets.SERVER_DB_MONGO_USERNAME }}
-          SERVER_DB_MONGO_PASSWORD: ${{ secrets.SERVER_DB_MONGO_PASSWORD }}
-          SERVER_DB_MONGO_NAME: ${{ secrets.SERVER_DB_MONGO_NAME }}
-          APP_STRIPE_TOKEN: ${{ secrets.APP_STRIPE_TOKEN }}
-          SERVER_STRIPE_TOKEN: ${{ secrets.SERVER_STRIPE_TOKEN }}
-          SERVER_PLAID_ENV: ${{ secrets.SERVER_PLAID_ENV }}
-          NODE_TLS_REJECT_UNAUTHORIZED: ${{ secrets.NODE_TLS_REJECT_UNAUTHORIZED }}
-        name: sign in
+      - name: sign in
         uses: docker/login-action@v2
         with:
           password: ${{ github.token }}
           registry: ghcr.io
           username: ${{ github.actor }}
       - name: run ratesUpload
-        run: docker run --rm ghcr.io/ygmindev/service-job-js ratesUpload
+        run: docker run -e SERVER_POLYGON_API_KEY=${{ secrets.SERVER_POLYGON_API_KEY }}
+          -e NODE_ENV=${{ secrets.NODE_ENV }} -e SERVER_DB_MONGO_NAME=${{
+          secrets.SERVER_DB_MONGO_NAME }} -e SERVER_DB_MONGO_URL=${{
+          secrets.SERVER_DB_MONGO_URL }} -e SERVER_DB_MONGO_PASSWORD=${{
+          secrets.SERVER_DB_MONGO_PASSWORD }} -e SERVER_DB_MONGO_USERNAME=${{
+          secrets.SERVER_DB_MONGO_USERNAME }} -e APP_HOST=${{ secrets.APP_HOST
+          }} -e SERVER_APP_HOST=${{ secrets.SERVER_APP_HOST }} -e
+          SERVER_APP_PORT=${{ secrets.SERVER_APP_PORT }} --rm
+          ghcr.io/ygmindev/service-job-js ratesUpload
 name: ratesUpload
 on:
   schedule:

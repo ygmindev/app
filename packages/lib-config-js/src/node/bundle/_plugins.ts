@@ -7,7 +7,6 @@ import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { type EnvironmentConfigModel } from '@lib/config/environment/environment.models';
-import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -43,7 +42,13 @@ export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): Plugin =
   },
 });
 
-export const esbuildEnvVarCollect = (): Plugin => {
+export const esbuildEnvVarCollect = ({
+  buildDir,
+  envFilename,
+}: {
+  buildDir: string;
+  envFilename: string;
+}): Plugin => {
   const used = new Set<{ key: StringKeyModel<EnvironmentConfigModel>; path: string }>();
   return {
     name: 'plugin:envVarCollect',
@@ -88,7 +93,7 @@ export const esbuildEnvVarCollect = (): Plugin => {
         const dotenv = Object.entries(env)
           .map(([key, val]) => `${key}=${val}`)
           .join('\n');
-        writeFile({ filename: fromWorking(BUILD_DIR, '.env'), value: dotenv });
+        writeFile({ filename: fromWorking(buildDir, envFilename), value: dotenv });
       });
     },
   };
@@ -126,6 +131,8 @@ export const esbuildPluginResolveAlias = (
 });
 
 export const _plugins = ({
+  buildDir,
+  envFilename,
   extensions,
   externals,
   format,
@@ -134,7 +141,14 @@ export const _plugins = ({
   transpilePatterns,
 }: Pick<
   BundleConfigModel,
-  'extensions' | 'externals' | 'format' | 'rootDirs' | 'transpileModules' | 'transpilePatterns'
+  | 'buildDir'
+  | 'envFilename'
+  | 'extensions'
+  | 'externals'
+  | 'format'
+  | 'rootDirs'
+  | 'transpileModules'
+  | 'transpilePatterns'
 >): Array<Plugin> =>
   filterNil([
     {
@@ -155,7 +169,7 @@ export const _plugins = ({
 
     esbuildPluginExcludeVendorFromSourceMap(),
 
-    process.env.NODE_ENV === 'production' && esbuildEnvVarCollect(),
+    process.env.NODE_ENV === 'production' && esbuildEnvVarCollect({ buildDir, envFilename }),
 
     (esbuildFlowPlugin as () => unknown)() as Plugin,
 

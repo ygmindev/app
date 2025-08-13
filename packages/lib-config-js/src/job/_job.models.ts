@@ -3,7 +3,6 @@ export type _JobConfigModel = Array<{
     'run-container': {
       'runs-on': string;
       steps: Array<{
-        env?: Record<string, string>;
         name: string;
         run?: string;
         uses?: string;

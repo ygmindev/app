@@ -22,6 +22,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   entryFiles?: Record<string, string>;
 
+  envFilename: string;
+
   envPrefix: Array<string>;
 
   envPublic?: Array<string>;

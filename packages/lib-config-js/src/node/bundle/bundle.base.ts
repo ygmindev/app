@@ -34,6 +34,8 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       configFilename: 'bundle.js',
 
+      envFilename: '.env.production',
+
       envPrefix: [],
 
       envPublic: ['APP_NAME', 'ENV_PLATFORM', 'NODE_ENV'],
