@@ -23,7 +23,6 @@ RUN apk add --no-cache \
     mesa-gl \
     && rm -rf /var/cache/apk/*
 
-ENV PUPPETEER_EXECUTABLE_PATH=${PUPPETEER_EXECUTABLE_PATH}
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 RUN npm install -g pnpm

@@ -36,6 +36,8 @@ import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
 
+process.env.NODE_ENV === 'production' && (chromium.setGraphicsMode = false);
+
 puppeteer.use(StealthPlugin());
 
 export class _Screen implements _ScreenModel {
@@ -121,6 +123,7 @@ export class _Screen implements _ScreenModel {
   }
 
   async initialize(): Promise<void> {
+    console.info(`@@@${process.env.PUPPETEER_EXECUTABLE_PATH}`);
     this.browser = await puppeteer.launch({
       ..._screen(this.options),
       args:
@@ -143,6 +146,7 @@ export class _Screen implements _ScreenModel {
         (process.env.NODE_RUNTIME === RUNTIME.AWS_LAMBDA
           ? await chromium.executablePath()
           : executablePath()),
+      protocolTimeout: 0,
     });
 
     this.isInitialized = true;
