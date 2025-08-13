@@ -8,9 +8,24 @@ RUN apk add --no-cache \
     freetype \
     harfbuzz \
     ca-certificates \
-    ttf-freefont
+    ttf-freefont \
+    libstdc++ \
+    udev \
+    dumb-init \
+    gtk+3.0 \
+    at-spi2-core \
+    libx11 \
+    libxcomposite \
+    libxdamage \
+    libxrandr \
+    libxfixes \
+    libxi \
+    libxtst \
+    mesa-gl \
+    && rm -rf /var/cache/apk/*
 
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 RUN npm install -g pnpm
 
