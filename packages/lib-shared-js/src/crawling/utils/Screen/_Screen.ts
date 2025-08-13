@@ -123,10 +123,26 @@ export class _Screen implements _ScreenModel {
   async initialize(): Promise<void> {
     this.browser = await puppeteer.launch({
       ..._screen(this.options),
+      args:
+        process.env.NODE_ENV === 'production'
+          ? [
+              '--disable-dev-shm-usage',
+              '--disable-features=NetworkServiceInProcess2',
+              '--disable-features=site-per-process',
+              '--disable-gpu',
+              '--disable-setuid-sandbox',
+              '--disable-web-security',
+              '--ignore-certificate-errors',
+              '--no-first-run',
+              '--no-sandbox',
+              '--no-zygote',
+            ]
+          : undefined,
       executablePath:
-        process.env.NODE_RUNTIME === RUNTIME.AWS_LAMBDA
+        process.env.PUPPETEER_EXECUTABLE_PATH ??
+        (process.env.NODE_RUNTIME === RUNTIME.AWS_LAMBDA
           ? await chromium.executablePath()
-          : executablePath(),
+          : executablePath()),
     });
 
     this.isInitialized = true;

@@ -31,6 +31,7 @@ export type EnvironmentConfigModel = {
   NODE_EXTRA_CA_CERTS: string;
   NODE_OPTIONS?: string;
   NODE_RUNTIME?: `${RUNTIME}`;
+  PUPPETEER_EXECUTABLE_PATH?: string;
   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: `${BOOLEAN_STRING}`;
   SERVERLESS_RUNTIME: ServerlessRuntimeModel;
   SERVER_APP_GOOGLE_API_KEY: string;

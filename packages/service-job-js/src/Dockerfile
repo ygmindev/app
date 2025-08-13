@@ -1,4 +1,5 @@
 ARG NODE_VERSION=22
+ARG PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 FROM node:${NODE_VERSION}-alpine
 
@@ -7,11 +8,9 @@ RUN apk add --no-cache \
     nss \
     freetype \
     harfbuzz \
-    ca-certificates \
     ttf-freefont \
     libstdc++ \
     udev \
-    dumb-init \
     gtk+3.0 \
     at-spi2-core \
     libx11 \
@@ -24,7 +23,7 @@ RUN apk add --no-cache \
     mesa-gl \
     && rm -rf /var/cache/apk/*
 
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV PUPPETEER_EXECUTABLE_PATH=${PUPPETEER_EXECUTABLE_PATH}
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 RUN npm install -g pnpm

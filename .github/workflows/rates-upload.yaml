@@ -16,8 +16,9 @@ jobs:
           SERVER_DB_MONGO_NAME=${{ secrets.SERVER_DB_MONGO_NAME }} -e
           SERVER_DB_MONGO_URL=${{ secrets.SERVER_DB_MONGO_URL }} -e
           SERVER_DB_MONGO_PASSWORD=${{ secrets.SERVER_DB_MONGO_PASSWORD }} -e
-          SERVER_DB_MONGO_USERNAME=${{ secrets.SERVER_DB_MONGO_USERNAME }} --rm
-          ghcr.io/ygmindev/service-job-js ratesUpload
+          SERVER_DB_MONGO_USERNAME=${{ secrets.SERVER_DB_MONGO_USERNAME }} -e
+          PUPPETEER_EXECUTABLE_PATH=${{ secrets.PUPPETEER_EXECUTABLE_PATH }}
+          --rm ghcr.io/ygmindev/service-job-js ratesUpload
 name: ratesUpload
 on:
   schedule:
