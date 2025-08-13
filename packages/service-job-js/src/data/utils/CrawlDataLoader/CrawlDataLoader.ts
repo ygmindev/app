@@ -18,20 +18,14 @@ export class CrawlDataLoader<TType extends SourcedEntityResourceModel>
   }
 
   async fetch(): Promise<Array<Partial<TType>>> {
-    console.info(111);
     const { transformer, uri } = this.params;
-    console.info(222);
     const screen = new Screen();
-    console.info(333);
     try {
-      console.info(444);
       await screen.open(uri);
-      console.info(555);
       return await transformer(screen);
     } catch (e) {
-      console.info(screen);
+      console.warn(e);
       await screen.close();
-      console.info(777);
     }
     return [];
   }
