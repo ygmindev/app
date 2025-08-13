@@ -2330,11 +2330,17 @@ importers:
         specifier: ^1.9.5
         version: 1.9.5
       puppeteer:
-        specifier: ^24.7.2
+        specifier: ^24.16.1
         version: 24.16.1(typescript@5.9.2)
       puppeteer-cluster:
         specifier: ^0.24.0
         version: 0.24.0(puppeteer@24.16.1(typescript@5.9.2))
+      puppeteer-extra:
+        specifier: ^3.3.6
+        version: 3.3.6(puppeteer-core@24.16.1)(puppeteer@24.16.1(typescript@5.9.2))
+      puppeteer-extra-plugin-stealth:
+        specifier: ^2.11.2
+        version: 2.11.2(puppeteer-extra@3.3.6(puppeteer-core@24.16.1)(puppeteer@24.16.1(typescript@5.9.2)))
       puppeteer-screen-recorder:
         specifier: ^3.0.6
         version: 3.0.6(puppeteer@24.16.1(typescript@5.9.2))

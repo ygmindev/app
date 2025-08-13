@@ -33,12 +33,12 @@ import isNumber from 'lodash/isNumber';
 import trim from 'lodash/trim';
 import { type Browser, type ElementHandle, executablePath, type Frame, type Page } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
-import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+// import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
 
 process.env.NODE_ENV === 'production' && (chromium.setGraphicsMode = false);
 
-puppeteer.use(StealthPlugin());
+// puppeteer.use(StealthPlugin());
 
 export class _Screen implements _ScreenModel {
   protected browser!: Browser;
@@ -123,6 +123,11 @@ export class _Screen implements _ScreenModel {
   }
 
   async initialize(): Promise<void> {
+    const executablePathF = isCloud()
+      ? (process.env.PUPPETEER_EXECUTABLE_PATH ?? executablePath())
+      : // : process.env.NODE_ENV === 'production'
+        //   ? await chromium.executablePath()
+        executablePath();
     this.browser = await puppeteer.launch({
       ..._screen(this.options),
       args: isCloud()
@@ -139,9 +144,7 @@ export class _Screen implements _ScreenModel {
             '--no-zygote',
           ]
         : undefined,
-      executablePath: isCloud()
-        ? (process.env.PUPPETEER_EXECUTABLE_PATH ?? (await chromium.executablePath()))
-        : executablePath(),
+      executablePath: executablePathF,
       protocolTimeout: 0,
     });
 

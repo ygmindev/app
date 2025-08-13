@@ -35,8 +35,8 @@ export const oisSwapRateLoader: OisSwapRateLoaderModel = new MultiSourceDataLoad
           result.lastUpdated = new Date(`${dateStr} ${timeStr} GMT-0400`);
         }
         data.forEach((row) => {
-          const year = row[''];
-          const value = row[dateHeader];
+          const year = (row[''] as string).replace(' Year', '');
+          const value = (row[dateHeader] as srting).replace('%', '');
           result[`value_${year}yr`] = toNumber(value);
         });
         return [result];
