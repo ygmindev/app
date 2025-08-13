@@ -1347,6 +1347,9 @@ importers:
       '@mikro-orm/mongodb':
         specifier: ^6.4.14
         version: 6.4.16(@mikro-orm/core@6.4.16)(socks@2.8.6)
+      '@sparticuz/chromium':
+        specifier: ^133.0.0
+        version: 133.0.0
       axios:
         specifier: ^1.9.0
         version: 1.11.0
@@ -1407,6 +1410,18 @@ importers:
       pubsub-js:
         specifier: ^1.9.5
         version: 1.9.5
+      puppeteer:
+        specifier: ^24.16.1
+        version: 24.16.1(typescript@5.9.2)
+      puppeteer-extra:
+        specifier: ^3.3.6
+        version: 3.3.6(puppeteer-core@24.16.1)(puppeteer@24.16.1(typescript@5.9.2))
+      puppeteer-extra-plugin-stealth:
+        specifier: ^2.11.2
+        version: 2.11.2(puppeteer-extra@3.3.6(puppeteer-core@24.16.1)(puppeteer@24.16.1(typescript@5.9.2)))
+      puppeteer-screen-recorder:
+        specifier: ^3.0.6
+        version: 3.0.6(puppeteer@24.16.1(typescript@5.9.2))
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2

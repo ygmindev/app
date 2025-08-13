@@ -10,13 +10,13 @@ jobs:
           username: ${{ github.actor }}
       - name: run ratesUpload
         run: docker run -e SERVER_POLYGON_API_KEY=${{ secrets.SERVER_POLYGON_API_KEY }}
-          -e NODE_ENV=${{ secrets.NODE_ENV }} -e SERVER_DB_MONGO_NAME=${{
-          secrets.SERVER_DB_MONGO_NAME }} -e SERVER_DB_MONGO_URL=${{
-          secrets.SERVER_DB_MONGO_URL }} -e SERVER_DB_MONGO_PASSWORD=${{
-          secrets.SERVER_DB_MONGO_PASSWORD }} -e SERVER_DB_MONGO_USERNAME=${{
-          secrets.SERVER_DB_MONGO_USERNAME }} -e APP_HOST=${{ secrets.APP_HOST
+          -e NODE_ENV=${{ secrets.NODE_ENV }} -e APP_HOST=${{ secrets.APP_HOST
           }} -e SERVER_APP_HOST=${{ secrets.SERVER_APP_HOST }} -e
-          SERVER_APP_PORT=${{ secrets.SERVER_APP_PORT }} --rm
+          SERVER_APP_PORT=${{ secrets.SERVER_APP_PORT }} -e
+          SERVER_DB_MONGO_NAME=${{ secrets.SERVER_DB_MONGO_NAME }} -e
+          SERVER_DB_MONGO_URL=${{ secrets.SERVER_DB_MONGO_URL }} -e
+          SERVER_DB_MONGO_PASSWORD=${{ secrets.SERVER_DB_MONGO_PASSWORD }} -e
+          SERVER_DB_MONGO_USERNAME=${{ secrets.SERVER_DB_MONGO_USERNAME }} --rm
           ghcr.io/ygmindev/service-job-js ratesUpload
 name: ratesUpload
 on:
