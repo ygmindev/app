@@ -8,6 +8,7 @@ import { execa } from 'execa';
 
 export const _execute = async ({
   command,
+  isInteractive,
   isSilent,
   onFinish,
   onStart,
@@ -18,8 +19,7 @@ export const _execute = async ({
     cwd: root,
     env: process.env,
     shell: true,
-    stderr: stdio,
-    stdout: stdio,
+    ...(isInteractive ? { stdio: 'inherit' } : { stderr: stdio, stdout: stdio }),
   })`${command}`;
 
   const pidF = cp.pid;

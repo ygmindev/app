@@ -6,5 +6,6 @@ export enum ENVIRONMENT {
 
 export enum RUNTIME {
   AWS_LAMBDA = 'AWS_LAMBDA',
+  CONTAINER = 'CONTAINER',
   OSX = 'OSX',
 }

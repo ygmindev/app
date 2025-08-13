@@ -23,7 +23,7 @@ import {
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/Screen/Screen.models';
-import { RUNTIME } from '@lib/shared/environment/environment.constants';
+import { isCloud } from '@lib/shared/environment/utils/isCloud/isCloud';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type UriModel } from '@lib/shared/route/route.models';
@@ -123,29 +123,25 @@ export class _Screen implements _ScreenModel {
   }
 
   async initialize(): Promise<void> {
-    console.info(`@@@${process.env.PUPPETEER_EXECUTABLE_PATH}`);
     this.browser = await puppeteer.launch({
       ..._screen(this.options),
-      args:
-        process.env.NODE_ENV === 'production'
-          ? [
-              '--disable-dev-shm-usage',
-              '--disable-features=NetworkServiceInProcess2',
-              '--disable-features=site-per-process',
-              '--disable-gpu',
-              '--disable-setuid-sandbox',
-              '--disable-web-security',
-              '--ignore-certificate-errors',
-              '--no-first-run',
-              '--no-sandbox',
-              '--no-zygote',
-            ]
-          : undefined,
-      executablePath:
-        process.env.PUPPETEER_EXECUTABLE_PATH ??
-        (process.env.NODE_RUNTIME === RUNTIME.AWS_LAMBDA
-          ? await chromium.executablePath()
-          : executablePath()),
+      args: isCloud()
+        ? [
+            '--disable-dev-shm-usage',
+            '--disable-features=NetworkServiceInProcess2',
+            '--disable-features=site-per-process',
+            '--disable-gpu',
+            '--disable-setuid-sandbox',
+            '--disable-web-security',
+            '--ignore-certificate-errors',
+            '--no-first-run',
+            '--no-sandbox',
+            '--no-zygote',
+          ]
+        : undefined,
+      executablePath: isCloud()
+        ? (process.env.PUPPETEER_EXECUTABLE_PATH ?? (await chromium.executablePath()))
+        : executablePath(),
       protocolTimeout: 0,
     });
 

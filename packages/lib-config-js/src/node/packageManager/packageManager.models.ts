@@ -11,9 +11,9 @@ export type PackageManagerConfigModel = {
 
   listCommand(pkg: string): string;
 
-  modulesDir: string;
-
   name: string;
+
+  modulesDir: string;
 
   patchCommand(pkg: string, dirname: string): string;
 

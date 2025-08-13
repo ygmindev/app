@@ -1,13 +1,20 @@
 import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
 import { type EnvironmentOverrideParamsModel } from '@lib/shared/environment/environment.models';
 import { type TASK_STATUS } from '@tool/task/core/core.constants';
+import { type ExecuteParamsModel } from '@tool/task/core/utils/execute/execute.models';
 import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
 import { type ParallelOptionsModel } from '@tool/task/core/utils/runParallel/runParallel.models';
 
 export type TaskStatusModel = `${TASK_STATUS}`;
 
 export type TaskModel<TType extends unknown> =
-  | ((context: TaskContextModel<TType>) => Promise<void> | void | NilModel)
+  | ((
+      context: TaskContextModel<TType>,
+    ) =>
+      | Promise<void>
+      | void
+      | NilModel
+      | [command: string, options?: Omit<ExecuteParamsModel, 'command'>])
   | TaskCommandModel<TType>
   | [
       tasks: Array<TaskCommandModel<TType>>,

@@ -57,6 +57,14 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     });
   };
 
+  //   const [command, options] = value;
+  // await execute({
+  //   command,
+  //   ...options,
+  //   onFinish: (pid) => this._pids.delete(pid),
+  //   onStart: (pid) => this._pids.add(pid),
+  // });
+
   resolveTask = async <TType extends unknown>(
     value: TaskModel<TType>,
     context: TaskContextModel<TType>,
@@ -70,8 +78,18 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
         );
       } else if (isFunction(value)) {
         let valueF = value(context);
-        valueF = valueF && (isString(valueF) ? this.resolveTask(valueF, context) : valueF);
-        await valueF;
+        if (isArray(valueF)) {
+          const [command, options] = valueF;
+          await execute({
+            command,
+            ...options,
+            onFinish: (pid) => this._pids.delete(pid),
+            onStart: (pid) => this._pids.add(pid),
+          });
+        } else {
+          valueF = valueF && (isString(valueF) ? this.resolveTask(valueF, context) : valueF);
+          await valueF;
+        }
       } else if (isString(value)) {
         const valueF = this.getTask(value);
         if (valueF) {
@@ -107,7 +125,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       const optionsPrompts = await options({ name, overrides: overridesF, root, target });
       optionsF = {
         ...optionsF,
-        ...(await prompt(optionsPrompts.filter(({ key }) => !(key in optionsF)))),
+        ...(await prompt<TType & object>(optionsPrompts.filter(({ key }) => !(key in optionsF)))),
       };
     }
     target && process.chdir(workingDir);
