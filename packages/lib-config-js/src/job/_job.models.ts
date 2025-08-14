@@ -1,6 +1,7 @@
 export type _JobConfigModel = Array<{
-  jobs: {
-    'run-container': {
+  jobs: Record<
+    string,
+    {
       'runs-on': string;
       steps: Array<{
         name: string;
@@ -12,8 +13,8 @@ export type _JobConfigModel = Array<{
           username: string;
         };
       }>;
-    };
-  };
+    }
+  >;
 
   name: string;
 

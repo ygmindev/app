@@ -8,7 +8,7 @@ export const _job = ({ container, env, jobs }: JobConfigModel): _JobConfigModel 
     const commandF = command ?? name;
     return {
       jobs: {
-        'run-container': {
+        [commandF]: {
           'runs-on': 'ubuntu-latest',
           steps: filterNil([
             container && {

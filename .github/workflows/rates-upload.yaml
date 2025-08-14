@@ -1,5 +1,5 @@
 jobs:
-  run-container:
+  ratesUpload:
     runs-on: ubuntu-latest
     steps:
       - name: sign in
