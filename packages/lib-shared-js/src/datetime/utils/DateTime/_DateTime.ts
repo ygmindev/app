@@ -1,4 +1,4 @@
-import { type TZDate, TZDateMini } from '@date-fns/tz';
+import { TZDate, TZDateMini } from '@date-fns/tz';
 import { TIMEZONE_DEFAULT } from '@lib/config/locale/internationalize/internationalize.constants';
 import {
   type _DateTimeModel,
@@ -8,51 +8,46 @@ import { format as _format, isValid, parse } from 'date-fns';
 import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 
-export class _DateTime implements _DateTimeModel {
-  _date!: TZDate;
-
+export class _DateTime extends TZDate implements _DateTimeModel {
   constructor(...[value, options]: _DateTimeParamsModel) {
     const tz = options?.tz ?? TIMEZONE_DEFAULT;
 
-    let valueF = new TZDateMini();
+    let date = new TZDateMini();
     if (value instanceof Date) {
-      valueF = new TZDateMini(value, tz);
+      date = new TZDateMini(value, tz);
     } else if (isString(value)) {
-      valueF = options?.format
+      date = options?.format
         ? parse(value, options.format, new TZDateMini()).withTimeZone(tz)
         : new TZDateMini(value, tz);
     } else if (isPlainObject(value)) {
-      valueF = new TZDateMini(
-        value?.year ?? valueF.getFullYear(),
-        (value?.month ?? valueF.getMonth()) - 1,
-        value?.day ?? valueF.getDate(),
-        value?.hour ?? valueF.getHours(),
-        value?.minute ?? valueF.getMinutes(),
-        value?.second ?? valueF.getSeconds(),
-        value?.millisecond ?? valueF.getMilliseconds(),
+      date = new TZDateMini(
+        value?.year ?? date.getFullYear(),
+        (value?.month ?? date.getMonth()) - 1,
+        value?.day ?? date.getDate(),
+        value?.hour ?? date.getHours(),
+        value?.minute ?? date.getMinutes(),
+        value?.second ?? date.getSeconds(),
+        value?.millisecond ?? date.getMilliseconds(),
         tz,
       );
     }
-    this._date = valueF;
+
+    super(date.getTime());
   }
 
   format(format?: string): string {
-    return format ? _format(this._date, format) : this._date.toISOString();
+    return format ? _format(this, format) : this.toISOString();
   }
 
   isValid(): boolean {
-    return isValid(this._date);
-  }
-
-  get date(): Date {
-    return this._date;
+    return isValid(this);
   }
 
   get tz(): string {
-    return this._date.timeZone ?? TIMEZONE_DEFAULT;
+    return this.timeZone ?? TIMEZONE_DEFAULT;
   }
 
   set tz(value: string) {
-    this._date = this._date.withTimeZone(value);
+    Object.assign(this, this.withTimeZone(value));
   }
 }

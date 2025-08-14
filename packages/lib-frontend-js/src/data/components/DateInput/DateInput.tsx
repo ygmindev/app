@@ -53,7 +53,7 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = ({
     if (v?.length) {
       const parsed = new DateTime(v);
       if (parsed.isValid()) {
-        valueControlledSet(parsed.date);
+        valueControlledSet(parsed);
         textValueSet(parsed.format());
       } else {
         valueControlledSet(undefined);

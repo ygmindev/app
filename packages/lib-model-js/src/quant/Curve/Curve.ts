@@ -4,6 +4,7 @@ import { SourcedEntityResource } from '@lib/model/data/SourcedEntityResource/Sou
 import { CURVE_RESOURCE_NAME } from '@lib/model/quant/Curve/Curve.constants';
 import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 
 @withEntity({
   isDatabase: true,
@@ -11,7 +12,7 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 })
 export class Curve extends SourcedEntityResource implements CurveModel {
   @withField({ isDatabase: true, isUnique: true, type: DATA_TYPE.DATE })
-  date!: Date;
+  date!: DateTime;
 
   @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.DATE })
   lastUpdated?: Date;

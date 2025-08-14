@@ -4,7 +4,7 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { type DATE_UNIT } from '@lib/shared/datetime/datetime.constants';
 import { type PeriodModel } from '@lib/shared/datetime/utils/Period/Period.models';
 
-@withEntity()
+@withEntity({ name: 'Period' })
 export class Period implements PeriodModel {
   @withField({ type: DATA_TYPE.STRING })
   unit!: DATE_UNIT;

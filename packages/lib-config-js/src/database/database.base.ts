@@ -20,6 +20,7 @@ import { Product } from '@lib/model/commerce/Product/Product';
 import { Group } from '@lib/model/group/Group/Group';
 import { Socket } from '@lib/model/http/Socket/Socket';
 import { Curve } from '@lib/model/quant/Curve/Curve';
+import { Rate } from '@lib/model/quant/Rate/Rate';
 import { Snapshot } from '@lib/model/test/Snapshot/Snapshot';
 import { TestableEmbeddedResource } from '@lib/model/test/TestableEmbeddedResource/TestableEmbeddedResource';
 import { TestableEntityResource } from '@lib/model/test/TestableEntityResource/TestableEntityResource';
@@ -46,6 +47,7 @@ export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
       Otp,
       PaymentMethod,
       Product,
+      Rate,
       Role,
       Socket,
       Curve,

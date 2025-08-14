@@ -1,7 +1,8 @@
 import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource.models';
+import { type DateTimeModel } from '@lib/shared/datetime/utils/DateTime/DateTime.models';
 
 export type CurveModel = SourcedEntityResourceModel & {
-  date: Date;
+  date: DateTimeModel;
   lastUpdated?: Date;
   name: string;
   /* eslint-disable @typescript-eslint/member-ordering */

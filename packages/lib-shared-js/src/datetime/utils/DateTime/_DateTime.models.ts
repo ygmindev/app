@@ -1,3 +1,4 @@
+import { type TZDate } from '@date-fns/tz';
 import { type DateTimeOptionsModel } from '@lib/shared/datetime/utils/DateTime/DateTime.models';
 
 export type _DateTimeParamsModel =
@@ -17,10 +18,9 @@ export type _DateTimeParamsModel =
     ]
   | [value?: string, options?: DateTimeOptionsModel & { format?: string }];
 
-export type _DateTimeModel = {
+export type _DateTimeModel = TZDate & {
   format(format?: string): string;
   isValid(): boolean;
-  get date(): Date;
   get tz(): string;
   set tz(value: string);
 };

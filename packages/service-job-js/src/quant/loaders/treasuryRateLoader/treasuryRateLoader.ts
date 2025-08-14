@@ -36,7 +36,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
                   date: new DateTime(date).date,
                   name: TREASURY_RATE,
                 } as CurveModel;
-                updated && (rate.lastUpdated = new DateTime(updated).date);
+                updated && (rate.lastUpdated = new DateTime(updated));
                 return [
                   ...r,
                   CURVE_TENORS.reduce((rr, { unit, value }) => {
@@ -98,7 +98,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
               return result;
             },
             {
-              date: new DateTime(v.date, { format: 'yyyy-MM-dd' }).date,
+              date: new DateTime(v.date, { format: 'yyyy-MM-dd' }),
               name: TREASURY_RATE,
             } as CurveModel,
           ),
@@ -112,7 +112,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
       tableSelector: { type: SELECTOR_TYPE.ID, value: 'h15table' },
       transformer: ({ data, headers, lastUpdated }) => {
         const lastUpdatedF = lastUpdated
-          ? new DateTime(lastUpdated.replace('Release date: ', ''), { format: 'MMMM d, yyyy' }).date
+          ? new DateTime(lastUpdated.replace('Release date: ', ''), { format: 'MMMM d, yyyy' })
           : undefined;
         const results: Array<Partial<CurveModel>> = [];
         const startIndex = data.findIndex((v) => toString(v[headers[0]]).includes('Nominal'));
@@ -123,7 +123,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
           const dataF = data.slice(startIndex + 1, endIndex);
           const dateHeader = headers.at(-1);
           if (dateHeader) {
-            const { date } = new DateTime(dateHeader, { format: 'yyyy MMM d' });
+            const date = new DateTime(dateHeader, { format: 'yyyy MMM d' });
             const result: Partial<CurveModel> = {
               date,
               lastUpdated: lastUpdatedF,

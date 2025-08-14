@@ -1,14 +1,26 @@
+import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { SourcedEntityResource } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource';
+import { RATE_RESOURCE_NAME } from '@lib/model/quant/Rate/Rate.constants';
 import { type RateModel } from '@lib/model/quant/Rate/Rate.models';
-import { type PeriodModel } from '@lib/shared/datetime/utils/Period/Period.models';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
+import { Period } from '@lib/shared/datetime/utils/Period/Period';
 
-export class Rate implements RateModel {
-  @withField({})
-  currency: string;
+@withEntity({
+  isDatabase: true,
+  name: RATE_RESOURCE_NAME,
+})
+export class Rate extends SourcedEntityResource implements RateModel {
+  @withField({ type: DATA_TYPE.STRING })
+  currency!: string;
 
-  maturity?: Date;
+  @withField({ isOptional: true, type: DATA_TYPE.DATE })
+  maturity?: DateTime;
 
-  name: string;
+  @withField({ type: DATA_TYPE.STRING })
+  name!: string;
 
-  tenor?: PeriodModel;
+  @withField({ Resource: () => Period, isOptional: true })
+  tenor?: Period;
 }

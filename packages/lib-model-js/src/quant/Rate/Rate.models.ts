@@ -1,9 +1,11 @@
+import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource.models';
+import { type DateTimeModel } from '@lib/shared/datetime/utils/DateTime/DateTime.models';
 import { type PeriodModel } from '@lib/shared/datetime/utils/Period/Period.models';
 
-export type RateModel = {
+export type RateModel = SourcedEntityResourceModel & {
   currency: string;
 
-  maturity?: Date;
+  maturity?: DateTimeModel;
 
   name: string;
 
