@@ -4,7 +4,7 @@ import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
 import {
   AMOUNT_UNIT_OPTIONS,
-  RELATIVE_DATE_UNIT_OPTIONS,
+  DATE_UNIT_OPTIONS,
 } from '@lib/frontend/data/components/ScaledNumberInput/ScaledNumberInput.constants';
 import { type ScaledNumberInputPropsModel } from '@lib/frontend/data/components/ScaledNumberInput/ScaledNumberInput.models';
 import { useValueScaled } from '@lib/frontend/data/hooks/useValueScaled/useValueScaled';
@@ -26,7 +26,7 @@ export const unitOptions = <TType extends NumberUnitModel>(
       // case NUMBER_UNIT_TYPE.RATE:
       //   return RATE_UNIT_OPTIONS as Array<TranslatableOptionModel<TType>>;
       // case NUMBER_UNIT_TYPE.RELATIVE_DATE:
-      return RELATIVE_DATE_UNIT_OPTIONS as Array<TranslatableOptionModel<TType>>;
+      return DATE_UNIT_OPTIONS as Array<TranslatableOptionModel<TType>>;
     default:
       return [];
   }

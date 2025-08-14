@@ -2,12 +2,12 @@ import {
   AMOUNT_UNIT,
   OTHER_NUMBER_UNIT,
   RATE_UNIT,
-  RELATIVE_DATE_UNIT,
 } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
 import {
   type NumberScaleModel,
   type NumberScaleParamsModel,
 } from '@lib/shared/data/utils/numberScale/numberScale.models';
+import { DATE_UNIT } from '@lib/shared/datetime/datetime.constants';
 
 export const numberScale = (...[value, options = {}]: NumberScaleParamsModel): NumberScaleModel => {
   if (value) {
@@ -35,22 +35,22 @@ export const numberScale = (...[value, options = {}]: NumberScaleParamsModel): N
           multiplier = 1e2;
           break;
         }
-        case RELATIVE_DATE_UNIT.WEEK: {
+        case DATE_UNIT.WEEK: {
           multiplier = 1 / 7;
           break;
         }
         // TODO: day count convention
-        case RELATIVE_DATE_UNIT.MONTH: {
+        case DATE_UNIT.MONTH: {
           multiplier = 1 / 30;
           break;
         }
-        case RELATIVE_DATE_UNIT.YEAR: {
+        case DATE_UNIT.YEAR: {
           multiplier = 1 / 365;
           break;
         }
       }
     }
-    if (!!multiplier) {
+    if (multiplier) {
       return value * (options?.isReverse ? 1 / multiplier : multiplier);
     }
   }

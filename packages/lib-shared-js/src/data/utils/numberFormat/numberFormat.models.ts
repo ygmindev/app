@@ -3,9 +3,9 @@ import {
   type NUMBER_UNIT_TYPE,
   type OTHER_NUMBER_UNIT,
   type RATE_UNIT,
-  type RELATIVE_DATE_UNIT,
 } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
 import { type NumberScaleOptionsModel } from '@lib/shared/data/utils/numberScale/numberScale.models';
+import { type DATE_UNIT } from '@lib/shared/datetime/datetime.constants';
 
 export type NumberFormatParamsModel = [value?: number, options?: NumberFormatOptionsModel];
 
@@ -17,15 +17,9 @@ export type RateUnitModel = `${RATE_UNIT}`;
 
 export type OtherNumberUnitModel = `${OTHER_NUMBER_UNIT}`;
 
-export type RelativeDateUnitModel = `${RELATIVE_DATE_UNIT}`;
-
 export type NumberUnitTypeModel = `${NUMBER_UNIT_TYPE}`;
 
-export type NumberUnitModel =
-  | AmountUnitModel
-  | RateUnitModel
-  | RelativeDateUnitModel
-  | OtherNumberUnitModel;
+export type NumberUnitModel = AmountUnitModel | RateUnitModel | DATE_UNIT | OtherNumberUnitModel;
 
 export type NumberFormatOptionsModel = NumberScaleOptionsModel & {
   currency?: string;

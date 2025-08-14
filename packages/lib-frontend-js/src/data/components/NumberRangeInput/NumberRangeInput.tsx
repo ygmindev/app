@@ -25,9 +25,9 @@ import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
 import {
   AMOUNT_UNIT,
   NUMBER_UNIT_TYPE,
-  RELATIVE_DATE_UNIT,
 } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
 import { type NumberUnitModel } from '@lib/shared/data/utils/numberFormat/numberFormat.models';
+import { DATE_UNIT } from '@lib/shared/datetime/datetime.constants';
 import { type ReactElement, useEffect, useState } from 'react';
 
 export const NumberRangeInput = <TType extends NumberUnitModel>({
@@ -86,13 +86,13 @@ export const NumberRangeInput = <TType extends NumberUnitModel>({
     const unitFF = unitF ?? unit;
     const { lowerF, upperF } = (() => {
       switch (unitFF) {
-        case RELATIVE_DATE_UNIT.DAY:
+        case DATE_UNIT.DAY:
           return { lowerF: 0, upperF: 365 };
-        case RELATIVE_DATE_UNIT.WEEK:
+        case DATE_UNIT.WEEK:
           return { lowerF: 0, upperF: 52 };
-        case RELATIVE_DATE_UNIT.MONTH:
+        case DATE_UNIT.MONTH:
           return { lowerF: 0, upperF: 18 };
-        case RELATIVE_DATE_UNIT.YEAR:
+        case DATE_UNIT.YEAR:
           return { lowerF: 0, upperF: 1e2 };
         case AMOUNT_UNIT.BILLION:
           return { lowerF: 0, upperF: 1e1 };

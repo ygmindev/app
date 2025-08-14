@@ -2,13 +2,13 @@ import {
   AMOUNT_UNIT,
   OTHER_NUMBER_UNIT,
   RATE_UNIT,
-  RELATIVE_DATE_UNIT,
 } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
 import {
   type NumberFormatModel,
   type NumberFormatParamsModel,
 } from '@lib/shared/data/utils/numberFormat/numberFormat.models';
 import { numberScale } from '@lib/shared/data/utils/numberScale/numberScale';
+import { DATE_UNIT } from '@lib/shared/datetime/datetime.constants';
 import isNil from 'lodash/isNil';
 
 export const numberFormat = (
@@ -45,19 +45,19 @@ export const numberFormat = (
           postfix = 'k';
           break;
         }
-        case RELATIVE_DATE_UNIT.DAY: {
+        case DATE_UNIT.DAY: {
           postfix = 'd';
           break;
         }
-        case RELATIVE_DATE_UNIT.WEEK: {
+        case DATE_UNIT.WEEK: {
           postfix = 'w';
           break;
         }
-        case RELATIVE_DATE_UNIT.MONTH: {
+        case DATE_UNIT.MONTH: {
           postfix = 'm';
           break;
         }
-        case RELATIVE_DATE_UNIT.YEAR: {
+        case DATE_UNIT.YEAR: {
           postfix = 'y';
           break;
         }

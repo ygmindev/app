@@ -18,10 +18,3 @@ export enum NUMBER_UNIT_TYPE {
   AMOUNT = 'AMOUNT',
   RATE = 'RATE',
 }
-
-export enum RELATIVE_DATE_UNIT {
-  DAY = 'd',
-  MONTH = 'mo',
-  WEEK = 'w',
-  YEAR = 'yr',
-}

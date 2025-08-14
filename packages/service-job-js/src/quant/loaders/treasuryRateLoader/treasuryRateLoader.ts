@@ -3,7 +3,7 @@ import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
 import { CurveImplementation } from '@lib/model/quant/Curve/CurveImplementation/CurveImplementation';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
-import { RELATIVE_DATE_UNIT } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
+import { DATE_UNIT } from '@lib/shared/datetime/datetime.constants';
 import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { HTTP_RESPONSE_TYPE } from '@lib/shared/http/http.constants';
 import { ApiDataLoader } from '@service/job/data/utils/ApiDataLoader/ApiDataLoader';
@@ -41,11 +41,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
                   ...r,
                   CURVE_TENORS.reduce((rr, { unit, value }) => {
                     const selectorUnit =
-                      unit === RELATIVE_DATE_UNIT.MONTH
-                        ? 'MONTH'
-                        : unit === RELATIVE_DATE_UNIT.YEAR
-                          ? 'YEAR'
-                          : null;
+                      unit === DATE_UNIT.MONTH ? 'MONTH' : unit === DATE_UNIT.YEAR ? 'YEAR' : null;
                     if (selectorUnit) {
                       const key = `value_${value}${unit}`;
                       const selector = `BC_${value}${selectorUnit}`;
@@ -93,11 +89,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
           CURVE_TENORS.reduce(
             (result, { unit, value }) => {
               const responseUnit =
-                unit === RELATIVE_DATE_UNIT.MONTH
-                  ? 'month'
-                  : unit === RELATIVE_DATE_UNIT.YEAR
-                    ? 'year'
-                    : null;
+                unit === DATE_UNIT.MONTH ? 'month' : unit === DATE_UNIT.YEAR ? 'year' : null;
               if (responseUnit) {
                 const vF = v[`yield_${value}_${responseUnit}` as StringKeyModel<typeof v>];
                 const key = `value_${value}${unit}`;
@@ -144,9 +136,9 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
               const unit = (() => {
                 switch (responseUnit) {
                   case 'month':
-                    return RELATIVE_DATE_UNIT.MONTH;
+                    return DATE_UNIT.MONTH;
                   case 'year':
-                    return RELATIVE_DATE_UNIT.YEAR;
+                    return DATE_UNIT.YEAR;
                   default:
                     return null;
                 }
