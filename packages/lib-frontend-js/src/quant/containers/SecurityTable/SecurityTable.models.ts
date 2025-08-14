@@ -1,3 +1,3 @@
 import { type EmptyObjectModel } from '@lib/shared/core/core.models';
 
-export type TreasuryRateTablePropsModel = EmptyObjectModel;
+export type SecurityTablePropsModel = EmptyObjectModel;

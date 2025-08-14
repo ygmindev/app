@@ -6,13 +6,14 @@ import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/R
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import {
   type {{NAME}}(pascalCase)Model,
-} from '@lib/model/{{MODULE}}(camelCase)/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
+} from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
+import { type {{NAME_ROOT}}(pascalCase)Model } from '@lib/shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
 
 export const {{NAME}}(pascalCase)Table: LFCModel<{{NAME}}(pascalCase)TablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const implementation = use{{NAME}}(pascalCase)Resource();
   return (
-    <ResourceTable<{{NAME}}(pascalCase)Model>
+    <ResourceTable<{{NAME}}(pascalCase)Model, {{NAME_ROOT}}(pascalCase)Model>
       {...wrapperProps}
       {...{{NAME}}(constantCase)_RESOURCE_PARAMS}
       implementation={implementation}

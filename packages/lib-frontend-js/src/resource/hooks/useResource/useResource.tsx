@@ -6,9 +6,9 @@ import {
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { type UseResourceMethodParamsModel } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
 import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export const toGraphqlParamsFields = <TType,>(
   fields?: ResourceFieldsModel<TType>,

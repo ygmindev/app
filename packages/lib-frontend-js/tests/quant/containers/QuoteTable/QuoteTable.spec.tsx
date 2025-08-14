@@ -1,10 +1,10 @@
-import { TreasuryRateTable } from '@lib/frontend/quant/containers/TreasuryRateTable/TreasuryRateTable';
-import { type TreasuryRateTablePropsModel } from '@lib/frontend/quant/containers/TreasuryRateTable/TreasuryRateTable.models';
+import { QuoteTable } from '@lib/frontend/quant/containers/QuoteTable/QuoteTable';
+import { type QuoteTablePropsModel } from '@lib/frontend/quant/containers/QuoteTable/QuoteTable.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 
-const { Component, displayName, testID } = withTestComponent<TreasuryRateTablePropsModel>({
-  target: TreasuryRateTable,
+const { Component, displayName, testID } = withTestComponent<QuoteTablePropsModel>({
+  target: QuoteTable,
 });
 
 describe(displayName, () => {
