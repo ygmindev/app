@@ -5,7 +5,6 @@ import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { EXCLUDE_PATTERNS } from '@lib/config/file/file.constants';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
-import { RUNTIME } from '@lib/shared/environment/environment.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
   type _DockerModel,
@@ -89,7 +88,7 @@ export class _Docker implements _DockerModel {
 
     try {
       const stream = await this.docker.buildImage(tarStream, {
-        buildargs: { ...process.env, NODE_RUNTIME: RUNTIME.CONTAINER },
+        buildargs: { ...process.env },
         dockerfile: toRelative({
           from: this.rootDir,
           to: joinPaths([this.workingDir, 'src', 'Dockerfile']),

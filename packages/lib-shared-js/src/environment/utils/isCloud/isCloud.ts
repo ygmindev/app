@@ -5,6 +5,6 @@ import {
 
 export const isCloud = (params?: IsCloudParamsModel): IsCloudModel => {
   const runtime = params ?? process.env.NODE_RUNTIME;
-  console.warn(`@@@${runtime}`);
+  console.info(`@@@${runtime}`);
   return runtime === 'AWS_LAMBDA' || runtime === 'CONTAINER';
 };

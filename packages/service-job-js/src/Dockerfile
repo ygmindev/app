@@ -13,6 +13,7 @@ RUN apk add --no-cache \
     && rm -rf /var/cache/apk/*
 
 ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV NODE_RUNTIME=CONTAINER
 
 RUN npm install -g pnpm
 
