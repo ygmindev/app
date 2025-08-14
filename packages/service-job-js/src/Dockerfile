@@ -8,19 +8,8 @@ RUN apk add --no-cache \
     nss \
     freetype \
     harfbuzz \
+    ca-certificates \
     ttf-freefont \
-    libstdc++ \
-    udev \
-    gtk+3.0 \
-    at-spi2-core \
-    libx11 \
-    libxcomposite \
-    libxdamage \
-    libxrandr \
-    libxfixes \
-    libxi \
-    libxtst \
-    mesa-gl \
     && rm -rf /var/cache/apk/*
 
 ENV PUPPETEER_SKIP_DOWNLOAD=true
