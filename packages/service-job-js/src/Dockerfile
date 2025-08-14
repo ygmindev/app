@@ -14,6 +14,7 @@ RUN apk add --no-cache \
 
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 ENV NODE_RUNTIME=CONTAINER
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 RUN npm install -g pnpm
 
