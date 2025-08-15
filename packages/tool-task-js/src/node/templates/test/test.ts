@@ -13,7 +13,7 @@ export const test: TaskParamsModel<TestParamsModel> = {
   name: 'test',
 
   options: async ({ overrides }) =>
-    overrides?.isPrompt ? { testMatch: { isOptional: true } } : {},
+    overrides?.isPrompt ? [{ isOptional: true, key: 'testMatch' }] : [],
 
   task: [
     async ({ options, root }) => {

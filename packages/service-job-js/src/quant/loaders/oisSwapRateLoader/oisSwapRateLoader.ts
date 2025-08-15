@@ -26,7 +26,7 @@ export const oisSwapRateLoader: OisSwapRateLoaderModel = new MultiSourceDataLoad
         return null;
       },
       transformer: ({ data, headers, lastUpdated }) => {
-        const dateHeader = headers[1];
+        const [, dateHeader] = headers;
         const date = new DateTime(dateHeader, { format: 'dd MMM yyyy' });
         const result: Partial<CurveModel> = { date, name: OIS_SWAP_RATE };
         const match = lastUpdated?.match(/(\d{2} \w{3} \d{4}) \| (\d{2}:\d{2}) (\w{2})/);
@@ -36,8 +36,8 @@ export const oisSwapRateLoader: OisSwapRateLoaderModel = new MultiSourceDataLoad
         }
         data.forEach((row) => {
           const year = (row[''] as string).replace(' Year', '');
-          const value = (row[dateHeader] as srting).replace('%', '');
-          result[`value_${year}yr`] = toNumber(value);
+          const value = (row[dateHeader] as string).replace('%', '');
+          (result as Record<string, unknown>)[`value_${year}yr`] = toNumber(value);
         });
         return [result];
       },

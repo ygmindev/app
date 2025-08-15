@@ -1,9 +1,6 @@
 import { type TestableEntityResourceModel } from '@lib/model/test/TestableEntityResource/TestableEntityResource.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 
-export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: Array<
-  EntityResourceDataModel<TestableEntityResourceModel>
-> = [
+export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: Array<Partial<TestableEntityResourceModel>> = [
   {
     group: '1',
     index: 1,

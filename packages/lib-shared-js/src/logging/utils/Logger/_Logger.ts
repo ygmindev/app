@@ -3,7 +3,8 @@ import {
   type _LoggerParamsModel,
   type _LogModel,
 } from '@lib/shared/logging/utils/Logger/_Logger.models';
-import { type Logger, pino } from 'pino';
+import { type Logger } from 'pino';
+import pino from 'pino';
 
 export class _Logger implements _LoggerModel {
   protected _logger!: Logger;

@@ -5,4 +5,6 @@ import { type EntityResourceModel } from '@lib/model/resource/EntityResource/Ent
 
 export type QuoteModel = EntityResourceModel & {
   [SECURITY_RESOURCE_NAME]: RefModel<SecurityModel>;
+
+  value?: number;
 };

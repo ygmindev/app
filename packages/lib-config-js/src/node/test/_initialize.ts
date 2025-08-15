@@ -7,7 +7,7 @@ import { TextDecoder, TextEncoder } from 'util';
 
 jest.restoreAllMocks();
 
-global.TextEncoder = TextEncoder;
+global.TextEncoder = TextEncoder as typeof global.TextEncoder;
 global.TextDecoder = TextDecoder as typeof global.TextDecoder;
 
 expect.extend({ toMatchImageSnapshot });

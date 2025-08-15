@@ -125,7 +125,7 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       const optionsPrompts = await options({ name, overrides: overridesF, root, target });
       optionsF = {
         ...optionsF,
-        ...(await prompt<TType & object>(optionsPrompts.filter(({ key }) => !(key in optionsF)))),
+        ...(await prompt<TType & object>(optionsPrompts?.filter(({ key }) => !(key in optionsF)))),
       };
     }
     target && process.chdir(workingDir);

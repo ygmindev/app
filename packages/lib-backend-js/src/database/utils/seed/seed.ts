@@ -2,12 +2,9 @@ import { SEED_DATA } from '@lib/backend/database/utils/seed/seed.constants';
 import { type SeedModel } from '@lib/backend/database/utils/seed/seed.models';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import {
-  type EntityResourceDataModel,
-  type EntityResourceModel,
-} from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
@@ -30,7 +27,7 @@ export const seed = async (): Promise<SeedModel> => {
       let rootF = await root?.();
       rootF && (rootF = toString(rootF));
 
-      const formF = form as EntityResourceDataModel<EntityResourceModel>;
+      const formF = form as Partial<EntityResourceModel>;
       formF.isFixture = true;
 
       const result = await implementation.create?.({

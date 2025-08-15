@@ -33,7 +33,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
               const date = nnn.find('NEW_DATE', 'd')?.text();
               if (date) {
                 const rate = {
-                  date: new DateTime(date).date,
+                  date: new DateTime(date),
                   name: TREASURY_RATE,
                 } as CurveModel;
                 updated && (rate.lastUpdated = new DateTime(updated));
@@ -131,7 +131,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
             };
             dataF.forEach((row) => {
               const instrument = toString(row[headers[0]]);
-              const value = row[dateHeader];
+              const value = row[dateHeader] as number;
               const [tenor, responseUnit] = instrument.split('-');
               const unit = (() => {
                 switch (responseUnit) {
@@ -144,7 +144,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
                 }
               })();
               if (unit) {
-                result[`value_${tenor}${unit}`] = value;
+                (result as Record<string, number>)[`value_${tenor}${unit}`] = value;
               }
               results.push(result);
             });
