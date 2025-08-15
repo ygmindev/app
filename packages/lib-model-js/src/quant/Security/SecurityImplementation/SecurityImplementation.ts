@@ -5,7 +5,7 @@ import { SECURITY_RESOURCE_NAME } from '@lib/model/quant/Security/Security.const
 import { type SecurityModel } from '@lib/model/quant/Security/Security.models';
 import { type SecurityImplementationModel } from '@lib/model/quant/Security/SecurityImplementation/SecurityImplementation.models';
 
-@withContainer({ name: `${SECURITY_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class SecurityImplementation
   extends createEntityResourceImplementation<SecurityModel>({
     Resource: Security,

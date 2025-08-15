@@ -5,7 +5,7 @@ import { VENDOR_RESOURCE_NAME } from '@lib/model/admin/Vendor/Vendor.constants';
 import { type VendorModel } from '@lib/model/admin/Vendor/Vendor.models';
 import { type VendorImplementationModel } from '@lib/model/admin/Vendor/VendorImplementation/VendorImplementation.models';
 
-@withContainer({ name: `${VENDOR_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class VendorImplementation
   extends createEntityResourceImplementation<VendorModel>({
     Resource: Vendor,

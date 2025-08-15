@@ -2,14 +2,13 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import screenConfig from '@lib/config/screen/screen';
-import { SNAPSHOT_RESOURCE_NAME } from '@lib/model/test/Snapshot/Snapshot.constants';
 import { type SnapshotModel } from '@lib/model/test/Snapshot/Snapshot.models';
 import { type SnapshotImplementationModel } from '@lib/model/test/Snapshot/SnapshotImplementation/SnapshotImplementation.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
-@withContainer({ name: `${SNAPSHOT_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class SnapshotImplementation implements SnapshotImplementationModel {
   async get({
     filter,

@@ -7,7 +7,7 @@ import { type ChatImplementationModel } from '@lib/model/chat/Chat/ChatImplement
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { UserImplementation } from '@lib/model/user/User/UserImplementation/UserImplementation';
 
-@withContainer({ name: `${CHAT_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class ChatImplementation
   extends createRelatedResourceImplementation<ChatModel, UserModel>({
     Resource: Chat,

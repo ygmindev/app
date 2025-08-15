@@ -1,7 +1,11 @@
 import { type ClassModel } from '@lib/shared/core/core.models';
 import { type _ContainerModel } from '@lib/shared/core/utils/Container/_Container.models';
-import { Container } from 'inversify';
-import isFunction from 'lodash/isFunction';
+import {
+  type BindInWhenOnFluentSyntax,
+  type BindToFluentSyntax,
+  type BindWhenOnFluentSyntax,
+  Container,
+} from 'inversify';
 
 export const _container = new Container({
   autobind: true,
@@ -11,17 +15,25 @@ export const _container = new Container({
 export const _Container: _ContainerModel = {
   container: () => _container,
 
-  get: <TType extends unknown>(type: ClassModel<TType> | string, name?: string): TType =>
-    _container.get<TType>(type, name ? { name } : undefined),
+  get: <TType>(type: ClassModel<TType>, name?: string): TType =>
+    _container.get<TType>(type, { autobind: true, name }),
 
-  set: <TType extends unknown>(
-    type: ClassModel<TType> | string,
-    value: TType | ClassModel<TType>,
-    name?: string,
-  ): void => {
-    const valueF = isFunction(value)
-      ? _container.bind<TType>(type).to(value as ClassModel<TType>)
-      : _container.bind<TType>(type).toDynamicValue(() => value as TType);
-    name && valueF.whenNamed(name);
+  set<TType>(type: ClassModel<TType>, value?: TType | string, name?: string): void {
+    let binding:
+      | BindInWhenOnFluentSyntax<TType>
+      | BindWhenOnFluentSyntax<TType>
+      | BindToFluentSyntax<TType> = _container.bind(type);
+
+    if (arguments.length === 2) {
+      if (!value || typeof value === 'string') {
+        binding = binding.toSelf();
+        value && binding.whenNamed(value as string);
+      } else if (value) {
+        binding = binding.toConstantValue(value as TType);
+      }
+    } else if (arguments.length === 3) {
+      binding = binding.toConstantValue(value as TType);
+      name && binding.whenNamed(name);
+    }
   },
 };

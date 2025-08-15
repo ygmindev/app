@@ -7,7 +7,7 @@ import { type UserModel } from '@lib/model/user/User/User.models';
 import { type UserImplementationModel } from '@lib/model/user/User/UserImplementation/UserImplementation.models';
 import { ObjectId } from 'mongodb';
 
-@withContainer({ name: `${USER_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class UserImplementation
   extends createEntityResourceImplementation<UserModel>({
     Resource: User,

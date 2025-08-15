@@ -7,7 +7,7 @@ import { type MessageImplementationModel } from '@lib/model/chat/Message/Message
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 
-@withContainer({ name: `${MESSAGE_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class MessageImplementation
   extends createProtectedResoureImplementation<MessageModel>({
     Resource: Message,

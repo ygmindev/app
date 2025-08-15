@@ -29,7 +29,7 @@ export const testResourceImplementation = <
     implementation = getImplementation();
     root = (await getRoot?.()) as TRoot extends undefined ? never : string;
     root && (root = toString(root) as TRoot extends undefined ? never : string);
-    first = (await implementation.getMany({ filter: [], root }))?.result?.[0];
+    first = (await implementation.getMany({ root }))?.result?.[0];
   });
 
   afterAll(async () => {

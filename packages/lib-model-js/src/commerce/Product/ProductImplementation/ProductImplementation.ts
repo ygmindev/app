@@ -5,7 +5,7 @@ import { PRODUCT_RESOURCE_NAME } from '@lib/model/commerce/Product/Product.const
 import { type ProductModel } from '@lib/model/commerce/Product/Product.models';
 import { type ProductImplementationModel } from '@lib/model/commerce/Product/ProductImplementation/ProductImplementation.models';
 
-@withContainer({ name: `${PRODUCT_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class ProductImplementation
   extends createEntityResourceImplementation<ProductModel>({
     Resource: Product,

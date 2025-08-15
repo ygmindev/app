@@ -3,6 +3,7 @@ import { type SeedModel } from '@lib/backend/database/utils/seed/seed.models';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type ClassModel } from '@lib/shared/core/core.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
@@ -12,29 +13,29 @@ import toString from 'lodash/toString';
 
 export const seed = async (): Promise<SeedModel> => {
   for (const { afterCreate, data, name, root } of SEED_DATA) {
-    const implementations = fromGlobs([`**/resources/**/${name}Implementation.ts`], {
+    const implementations = fromGlobs([`**/*/${name}Implementation.ts`], {
       isAbsolute: true,
-      root: fromPackages('lib-backend-js/src'),
+      root: fromPackages('lib-model-js/src'),
     });
-    for (const implementation of implementations) {
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      require(implementation);
-    }
-    const implementation = Container.get<ResourceImplementationModel<EntityResourceModel, unknown>>(
-      `${name}Implementation`,
-    );
-    for (const form of data?.() ?? []) {
-      let rootF = await root?.();
-      rootF && (rootF = toString(rootF));
-
-      const formF = form as Partial<EntityResourceModel>;
-      formF.isFixture = true;
-
-      const result = await implementation.create?.({
-        form: formF,
-        root: rootF,
-      } as ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, unknown, unknown>);
-      await afterCreate?.(result as ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, unknown>);
+    for (const pathname of implementations) {
+      const cls = (
+        (await import(pathname)) as Record<
+          string,
+          ClassModel<ResourceImplementationModel<EntityResourceModel, unknown>>
+        >
+      )[`${name}Implementation`];
+      const implementation = Container.get(cls);
+      for (const form of data?.() ?? []) {
+        let rootF = await root?.();
+        rootF && (rootF = toString(rootF));
+        const formF = form as Partial<EntityResourceModel>;
+        formF.isFixture = true;
+        const result = await implementation.create?.({
+          form,
+          root: rootF,
+        } as ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, unknown, unknown>);
+        await afterCreate?.(result as ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, unknown>);
+      }
     }
   }
 };

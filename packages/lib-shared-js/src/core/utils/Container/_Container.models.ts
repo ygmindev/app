@@ -3,6 +3,7 @@ import { type Container } from 'inversify';
 
 export type _ContainerModel = {
   container(): Container;
-  get<TType extends unknown>(type: ClassModel<TType> | string, name?: string): TType;
-  set<TType extends unknown>(type: ClassModel<TType> | string, value: TType, name?: string): void;
+  get<TType>(type: ClassModel<TType>, name?: string): TType;
+  set<TType>(type: ClassModel<TType>, name?: string): void;
+  set<TType>(type: ClassModel<TType>, value: TType, name?: string): void;
 };

@@ -7,7 +7,7 @@ import { type OrderModel } from '@lib/model/commerce/Order/Order.models';
 import { type OrderImplementationModel } from '@lib/model/commerce/Order/OrderImplementation/OrderImplementation.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 
-@withContainer({ name: `${ORDER_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class OrderImplementation
   extends createEntityResourceImplementation<OrderModel>({
     Resource: Order,

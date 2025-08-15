@@ -7,7 +7,7 @@ import {
 import { type {{NAME}}(pascalCase)ImplementationModel } from '@lib/model/{{MODULE}}(camelCase)/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)Implementation/{{NAME}}(pascalCase)Implementation.models';
 import { {{NAME}}(pascalCase) } from '@lib/model/{{MODULE}}(camelCase)/{{NAME}}(pascalCase)/{{NAME}}(pascalCase)';
 
-@withContainer({ name: `${{{NAME}}(constantCase)_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class {{NAME}}(pascalCase)Implementation
   extends createEntityResourceImplementation<{{NAME}}(pascalCase)Model>({
     Resource: {{NAME}}(pascalCase),

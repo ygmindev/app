@@ -4,4 +4,4 @@ import { type EntityResourceModel } from '@lib/model/resource/EntityResource/Ent
 export type CollectionParamsModel<TRoot extends EntityResourceModel> =
   _CollectionParamsModel<TRoot>;
 
-export type CollectionModel<TType extends EntityResourceModel> = Array<TType>;
+export type CollectionModel<TType extends EntityResourceModel> = Array<Partial<TType>>;

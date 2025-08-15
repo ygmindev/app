@@ -10,7 +10,7 @@ import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImple
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 
-@withContainer({ name: `${GROUP_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class GroupImplementation
   extends createEntityResourceImplementation<GroupModel>({
     Resource: Group,

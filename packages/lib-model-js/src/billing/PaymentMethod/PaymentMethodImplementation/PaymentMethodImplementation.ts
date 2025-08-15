@@ -7,7 +7,6 @@ import { BankImplementation } from '@lib/model/billing/Bank/BankImplementation/B
 import { type BankImplementationModel } from '@lib/model/billing/Bank/BankImplementation/BankImplementation.models.js';
 import { CardImplementation } from '@lib/model/billing/Card/CardImplementation/CardImplementation';
 import { type CardImplementationModel } from '@lib/model/billing/Card/CardImplementation/CardImplementation.models';
-import { PAYMENT_METHOD_RESOURCE_NAME } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
 import {
   PAYMENT_METHOD_TYPE,
   type PaymentMethodModel,
@@ -33,7 +32,7 @@ import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.const
 import { IdInputModel } from '@lib/shared/resource/utils/IdInput/IdInput.models';
 import round from 'lodash/round';
 
-@withContainer({ name: `${PAYMENT_METHOD_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class PaymentMethodImplementation implements PaymentMethodImplementationModel {
   @withInject(BankImplementation)
   protected bankImplementation!: BankImplementationModel;

@@ -11,7 +11,7 @@ import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models'
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
-@withContainer({ name: `${ACCESS_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class AccessImplementation
   extends createProtectedResoureImplementation<AccessModel>({
     Resource: Access,

@@ -3,10 +3,7 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { objectToEquality } from '@lib/backend/resource/utils/objectToEquality/objectToEquality';
 import { RequestContextModel } from '@lib/config/api/api.models';
 import { OtpImplementation } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation';
-import {
-  SIGN_IN_RESOURCE_NAME,
-  SIGN_IN_TOKEN_CLAIM_KEYS,
-} from '@lib/model/auth/SignIn/SignIn.constants';
+import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
 import { JWT_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.constants';
 import { type SignInImplementationModel } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.models';
@@ -24,7 +21,7 @@ import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import toString from 'lodash/toString';
 
-@withContainer({ name: `${SIGN_IN_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class SignInImplementation implements SignInImplementationModel {
   @withInject(JwtImplementation) protected jwtImplementation!: JwtImplementation;
 

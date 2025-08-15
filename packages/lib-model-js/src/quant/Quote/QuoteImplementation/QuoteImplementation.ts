@@ -8,7 +8,7 @@ import { SECURITY_RESOURCE_NAME } from '@lib/model/quant/Security/Security.const
 import { SecurityModel } from '@lib/model/quant/Security/Security.models';
 import { SecurityImplementation } from '@lib/model/quant/Security/SecurityImplementation/SecurityImplementation';
 
-@withContainer({ name: `${QUOTE_RESOURCE_NAME}Implementation` })
+@withContainer()
 export class QuoteImplementation
   extends createRelatedResourceImplementation<QuoteModel, SecurityModel>({
     Resource: Quote,
