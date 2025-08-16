@@ -1,5 +1,6 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { _screen } from '@lib/config/screen/_screen';
+import { HIGHLIGHT_CLASS, IS_HEADLESS } from '@lib/config/screen/screen.constants';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
@@ -23,7 +24,6 @@ import {
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/Screen/Screen.models';
-import { isCloud } from '@lib/shared/environment/utils/isCloud/isCloud';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type UriModel } from '@lib/shared/route/route.models';
@@ -31,7 +31,7 @@ import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
 import trim from 'lodash/trim';
-import { type Browser, type ElementHandle, executablePath, type Frame, type Page } from 'puppeteer';
+import { type Browser, type ElementHandle, type Frame, type Page } from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
@@ -123,33 +123,8 @@ export class _Screen implements _ScreenModel {
   }
 
   async initialize(): Promise<void> {
-    const executablePathF = isCloud()
-      ? (process.env.PUPPETEER_EXECUTABLE_PATH ?? executablePath())
-      : // : process.env.NODE_ENV === 'production'
-        //   ? await chromium.executablePath()
-        executablePath();
-    this.browser = await puppeteer.launch({
-      ..._screen(this.options),
-      args: isCloud()
-        ? [
-            '--disable-dev-shm-usage',
-            '--disable-features=NetworkServiceInProcess2',
-            '--disable-features=site-per-process',
-            '--disable-gpu',
-            '--disable-setuid-sandbox',
-            '--disable-web-security',
-            '--ignore-certificate-errors',
-            '--no-first-run',
-            '--no-sandbox',
-            '--no-zygote',
-          ]
-        : undefined,
-      executablePath: executablePathF,
-      protocolTimeout: 0,
-    });
-
+    this.browser = await puppeteer.launch(_screen(this.options));
     this.isInitialized = true;
-
     this.page = await this.browser.newPage();
     await this.page.setCacheEnabled(false);
     await this.page.setUserAgent(
@@ -195,6 +170,11 @@ export class _Screen implements _ScreenModel {
 
   async open(url: string): Promise<void> {
     !this.isInitialized && (await this.initialize());
+
+    !this.options.isHeadless &&
+      (await this.page.addStyleTag({
+        content: `.${this.options.highlightClass} { background-color: ${this.options.highlightColor} }`,
+      }));
 
     if (this.uri()?.pathname !== trimPathname(url)) {
       const uriF = this.options.rootUri ? uri({ host: this.options.rootUri, pathname: url }) : url;
@@ -328,6 +308,7 @@ const find = async (
       selected = (await handle.$(selectorF)) as ElementHandle;
     }
     if (selected) {
+      !IS_HEADLESS && (await selected.evaluate((el) => el.classList.add(HIGHLIGHT_CLASS)));
       selector.type === SELECTOR_TYPE.FRAME &&
         (selected = (await selected.contentFrame()) as unknown as ElementHandle<Element>);
       logger.debug(`found ${stringify(selector, { isMinify: true })}!`);

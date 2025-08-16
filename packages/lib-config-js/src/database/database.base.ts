@@ -20,9 +20,9 @@ import { Product } from '@lib/model/commerce/Product/Product';
 import { Group } from '@lib/model/group/Group/Group';
 import { Socket } from '@lib/model/http/Socket/Socket';
 import { Curve } from '@lib/model/quant/Curve/Curve';
+import { InterestRate } from '@lib/model/quant/InterestRate/InterestRate';
 import { Quote } from '@lib/model/quant/Quote/Quote';
 import { Rate } from '@lib/model/quant/Rate/Rate';
-import { Security } from '@lib/model/quant/Security/Security';
 import { Snapshot } from '@lib/model/test/Snapshot/Snapshot';
 import { TestableEmbeddedResource } from '@lib/model/test/TestableEmbeddedResource/TestableEmbeddedResource';
 import { TestableEntityResource } from '@lib/model/test/TestableEntityResource/TestableEntityResource';
@@ -44,6 +44,7 @@ export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
       Chat,
       Curve,
       Group,
+      InterestRate,
       LinkedUser,
       Message,
       Order,
@@ -53,7 +54,6 @@ export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
       Quote,
       Rate,
       Role,
-      Security,
       Socket,
       User,
       Utility,

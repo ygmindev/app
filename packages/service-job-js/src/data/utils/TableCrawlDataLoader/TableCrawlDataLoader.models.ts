@@ -18,10 +18,16 @@ export type TableCrawlDataLoaderParamsModel<
     | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<Array<HandleModel>>);
   dateSelector?:
     | SelectorModel
-    | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<HandleModel | null>);
+    | ((
+        screen: ScreenModel,
+        handle?: HandleModel | null,
+      ) => Promise<HandleModel | null | undefined>);
   lastUpdatedSelector?:
     | SelectorModel
-    | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<HandleModel | null>);
+    | ((
+        screen: ScreenModel,
+        handle?: HandleModel | null,
+      ) => Promise<HandleModel | null | undefined>);
   nCols?: number;
   nRows?: number;
   rowsSelector?:
@@ -30,7 +36,10 @@ export type TableCrawlDataLoaderParamsModel<
   skipRows?: number;
   tableSelector?:
     | SelectorModel
-    | ((screen: ScreenModel, handle?: HandleModel | null) => Promise<HandleModel | null>);
+    | ((
+        screen: ScreenModel,
+        handle?: HandleModel | null,
+      ) => Promise<HandleModel | null | undefined>);
   transformer(response: {
     data: Array<TResponse>;
     date?: string | null;

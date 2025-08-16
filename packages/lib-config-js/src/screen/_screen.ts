@@ -1,34 +1,44 @@
 import { type _ScreenConfigModel, type ScreenConfigModel } from '@lib/config/screen/screen.models';
-import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import chromium from '@sparticuz/chromium';
+import { isCloud } from '@lib/shared/environment/utils/isCloud/isCloud';
+import { executablePath } from 'puppeteer';
 
 // TODO: use
 export const _screen = ({
   delay,
   dimension,
   elementTimeout,
+  highlightClass,
   isHeadless,
   isIgnoreMedia,
   navigationTimeout,
   proxies,
   snapshotPath,
-}: ScreenConfigModel): _ScreenConfigModel => ({
-  args: filterNil([
-    ...(process.env.NODE_ENV === 'production' ? chromium.args : []),
-    // proxy && `--proxy-server=${proxy.url}`,
-    '--disable-dev-shm-usage',
-    '--disable-features=site-per-process',
-    '--disable-gpu',
-    '--disable-setuid-sandbox',
-    '--disable-web-security',
-    '--ignore-certificate-errors',
-    '--no-first-run',
-    '--no-sandbox',
-    '--no-zygote',
-  ])
-    .filter((v) => !v.includes('--use-gl'))
-    .filter(Boolean),
-  defaultViewport: dimension,
-  headless: process.env.NODE_ENV === 'production' ? (chromium.headless as 'shell') : isHeadless,
-  protocolTimeout: 0,
-});
+}: ScreenConfigModel): _ScreenConfigModel => {
+  const isCloudF = isCloud();
+  const executablePathF = isCloudF
+    ? (process.env.PUPPETEER_EXECUTABLE_PATH ?? executablePath())
+    : // : process.env.NODE_ENV === 'production'
+      //   ? await chromium.executablePath()
+      executablePath();
+  return {
+    args: isCloudF
+      ? [
+          // proxy && `--proxy-server=${proxy.url}`,
+          '--disable-dev-shm-usage',
+          '--disable-features=NetworkServiceInProcess2',
+          '--disable-features=site-per-process',
+          '--disable-gpu',
+          '--disable-setuid-sandbox',
+          '--disable-web-security',
+          '--ignore-certificate-errors',
+          '--no-first-run',
+          '--no-sandbox',
+          '--no-zygote',
+        ]
+      : undefined,
+    defaultViewport: dimension,
+    executablePath: executablePathF,
+    headless: isCloudF ? true : isHeadless,
+    protocolTimeout: 0,
+  };
+};

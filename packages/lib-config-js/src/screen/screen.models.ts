@@ -11,6 +11,10 @@ export type ScreenConfigModel = Pick<FileConfigModel, 'imageExtension' | 'videoE
 
   elementTimeout: number;
 
+  highlightClass: string;
+
+  highlightColor: string;
+
   isHeadless: boolean;
 
   isIgnoreMedia: boolean;
