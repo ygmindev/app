@@ -96,6 +96,7 @@ type SubscribeArgsModel<TType> = {
 
 type UpdateOptionsModel = {
   isFlush?: boolean;
+  isUpsert?: boolean;
 };
 
 type UpdateArgsModel<TType> = {

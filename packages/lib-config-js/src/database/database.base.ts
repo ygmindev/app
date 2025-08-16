@@ -1,4 +1,5 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { _database } from '@lib/config/database/_database';
 import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
 import {
@@ -16,6 +17,7 @@ export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
   params: () => {
     const entities = fromGlobs([`**/*/*${DATABASE_CONFIG.resourcePostfix}`], {
       isAbsolute: true,
+      root: fromRoot(),
     })?.map(requireInterop) as Array<ClassModel<EntityResourceModel>>;
     return {
       ...DATABASE_CONFIG,

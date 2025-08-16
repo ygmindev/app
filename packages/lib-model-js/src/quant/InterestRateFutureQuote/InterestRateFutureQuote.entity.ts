@@ -17,4 +17,4 @@ export class InterestRateFutureQuote extends Quote implements InterestRateFuture
   [INTEREST_RATE_FUTURE_RESOURCE_NAME]!: RefModel<InterestRateFutureModel>;
 }
 
-export default InterestRateFutureQuoteModel;
+export default InterestRateFutureQuote;
