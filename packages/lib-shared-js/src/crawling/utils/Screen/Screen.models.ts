@@ -30,10 +30,12 @@ export type HandleModel = {
 
 export type FindOptionDefaultModel = SelectorOptionModel & {
   index?: boolean | number;
+  isHeadless?: boolean;
   retry?: boolean | number;
 };
 
 export type FindAllOptionDefaultModel = SelectorOptionModel & {
+  isHeadless?: boolean;
   retry?: boolean | number;
 };
 

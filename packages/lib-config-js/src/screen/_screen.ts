@@ -1,5 +1,4 @@
 import { type _ScreenConfigModel, type ScreenConfigModel } from '@lib/config/screen/screen.models';
-import { isCloud } from '@lib/shared/environment/utils/isCloud/isCloud';
 import { executablePath } from 'puppeteer';
 
 // TODO: use
@@ -7,21 +6,18 @@ export const _screen = ({
   delay,
   dimension,
   elementTimeout,
-  highlightClass,
   isHeadless,
   isIgnoreMedia,
   navigationTimeout,
   proxies,
   snapshotPath,
+  zoom,
 }: ScreenConfigModel): _ScreenConfigModel => {
-  const isCloudF = isCloud();
-  const executablePathF = isCloudF
+  const executablePathF = isHeadless
     ? (process.env.PUPPETEER_EXECUTABLE_PATH ?? executablePath())
-    : // : process.env.NODE_ENV === 'production'
-      //   ? await chromium.executablePath()
-      executablePath();
+    : executablePath();
   return {
-    args: isCloudF
+    args: isHeadless
       ? [
           // proxy && `--proxy-server=${proxy.url}`,
           '--disable-dev-shm-usage',
@@ -30,6 +26,7 @@ export const _screen = ({
           '--disable-gpu',
           '--disable-setuid-sandbox',
           '--disable-web-security',
+          `--force-device-scale-factor=${zoom}`,
           '--ignore-certificate-errors',
           '--no-first-run',
           '--no-sandbox',
@@ -38,7 +35,7 @@ export const _screen = ({
       : undefined,
     defaultViewport: dimension,
     executablePath: executablePathF,
-    headless: isCloudF ? true : isHeadless,
+    headless: isHeadless,
     protocolTimeout: 0,
   };
 };

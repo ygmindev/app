@@ -11,10 +11,6 @@ export type ScreenConfigModel = Pick<FileConfigModel, 'imageExtension' | 'videoE
 
   elementTimeout: number;
 
-  highlightClass: string;
-
-  highlightColor: string;
-
   isHeadless: boolean;
 
   isIgnoreMedia: boolean;
@@ -28,6 +24,8 @@ export type ScreenConfigModel = Pick<FileConfigModel, 'imageExtension' | 'videoE
   rootUri?: string;
 
   snapshotPath?: string;
+
+  zoom: number;
 };
 
 export type _ScreenConfigModel = LaunchOptions;

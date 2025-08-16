@@ -1,6 +1,5 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { _screen } from '@lib/config/screen/_screen';
-import { HIGHLIGHT_CLASS, IS_HEADLESS } from '@lib/config/screen/screen.constants';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
@@ -31,7 +30,13 @@ import chromium from '@sparticuz/chromium';
 import { existsSync, mkdirSync } from 'fs';
 import isNumber from 'lodash/isNumber';
 import trim from 'lodash/trim';
-import { type Browser, type ElementHandle, type Frame, type Page } from 'puppeteer';
+import {
+  type Browser,
+  type ElementHandle,
+  type Frame,
+  type Page,
+  type ScreenshotOptions,
+} from 'puppeteer';
 import puppeteer from 'puppeteer-extra';
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { PuppeteerScreenRecorder } from 'puppeteer-screen-recorder';
@@ -70,6 +75,7 @@ export class _Screen implements _ScreenModel {
             ...options,
             delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
             index: options.index === true ? 0 : options.index === false ? -1 : options.index,
+            isHeadless: this.options.isHeadless,
             timeout:
               timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
           },
@@ -101,6 +107,7 @@ export class _Screen implements _ScreenModel {
           {
             ...options,
             delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
+            isHeadless: this.options.isHeadless,
             timeout:
               timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
           },
@@ -170,12 +177,6 @@ export class _Screen implements _ScreenModel {
 
   async open(url: string): Promise<void> {
     !this.isInitialized && (await this.initialize());
-
-    !this.options.isHeadless &&
-      (await this.page.addStyleTag({
-        content: `.${this.options.highlightClass} { background-color: ${this.options.highlightColor} }`,
-      }));
-
     if (this.uri()?.pathname !== trimPathname(url)) {
       const uriF = this.options.rootUri ? uri({ host: this.options.rootUri, pathname: url }) : url;
       logger.debug(`open page ${uriF}`);
@@ -248,9 +249,9 @@ export class _Screen implements _ScreenModel {
         y: 0,
       },
       path: snapshotPath
-        ? joinPaths([pathname, `${this.counter}${filename ? `-${slug(`${filename}`)}` : ''}`], {
+        ? (joinPaths([pathname, `${this.counter}${filename ? `-${slug(`${filename}`)}` : ''}`], {
             extension: imageExtension,
-          })
+          }) as ScreenshotOptions['path'])
         : undefined,
       type: imageExtension ?? 'webp',
     });
@@ -286,7 +287,7 @@ const getSelector = (selector: SelectorModel): string => {
 
 const find = async (
   selector: SelectorModel,
-  { delay = 0, index = -1, isThrow = true, timeout = 0 }: FindOptionModel = {},
+  { delay = 0, index = -1, isHeadless, isThrow = true, timeout = 0 }: FindOptionModel = {},
   handle?: ElementHandle | Frame | Page,
 ): Promise<HandleModel | null> => {
   if (handle) {
@@ -308,7 +309,6 @@ const find = async (
       selected = (await handle.$(selectorF)) as ElementHandle;
     }
     if (selected) {
-      !IS_HEADLESS && (await selected.evaluate((el) => el.classList.add(HIGHLIGHT_CLASS)));
       selector.type === SELECTOR_TYPE.FRAME &&
         (selected = (await selected.contentFrame()) as unknown as ElementHandle<Element>);
       logger.debug(`found ${stringify(selector, { isMinify: true })}!`);
@@ -321,7 +321,7 @@ const find = async (
 
 const findAll = async (
   selector: SelectorModel,
-  { delay, isThrow = true, timeout }: FindAllOptionModel = {},
+  { delay, isHeadless, isThrow = true, timeout }: FindAllOptionModel = {},
   handle?: ElementHandle | Frame | Page,
 ): Promise<Array<HandleModel>> => {
   if (handle) {

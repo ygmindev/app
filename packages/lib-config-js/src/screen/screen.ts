@@ -5,10 +5,11 @@ import {
   VIDEO_EXTENSION_DEFAULT,
 } from '@lib/config/file/file.constants';
 import { _screen } from '@lib/config/screen/_screen';
-import { HIGHLIGHT_CLASS, HIGHLIGHT_COLOR, IS_HEADLESS } from '@lib/config/screen/screen.constants';
+import { HIGHLIGHT_CLASS, HIGHLIGHT_COLOR } from '@lib/config/screen/screen.constants';
 import { type _ScreenConfigModel, type ScreenConfigModel } from '@lib/config/screen/screen.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { RUNTIME } from '@lib/shared/environment/environment.constants';
+import { isCloud } from '@lib/shared/environment/utils/isCloud/isCloud';
 
 export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
   config: _screen,
@@ -16,7 +17,7 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
   params: () => ({
     delay: 1000,
 
-    dimension: { height: 550, width: 750 },
+    dimension: { height: 1400, width: 2400 },
 
     elementTimeout: 10e3,
 
@@ -26,7 +27,7 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
 
     imageExtension: IMAGE_EXTENSION_DEFAULT,
 
-    isHeadless: IS_HEADLESS,
+    isHeadless: isCloud(),
 
     isIgnoreMedia: true,
 
@@ -47,6 +48,8 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
         : fromWorking(BUILD_DIR, 'snapshots'),
 
     videoExtension: VIDEO_EXTENSION_DEFAULT,
+
+    zoom: 0.5,
   }),
 });
 
