@@ -1,7 +1,7 @@
 import { getFingerprintInput } from '@lib/backend/billing/utils/getFingerprintInput/getFingerprintInput';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createRelatedResourceImplementation } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation';
-import { Bank } from '@lib/model/billing/Bank/Bank';
+import { Bank } from '@lib/model/billing/Bank/Bank.entity';
 import { BANK_RESOURCE_NAME } from '@lib/model/billing/Bank/Bank.constants';
 import { type BankModel } from '@lib/model/billing/Bank/Bank.models';
 import { type BankImplementationModel } from '@lib/model/billing/Bank/BankImplementation/BankImplementation.models.js';

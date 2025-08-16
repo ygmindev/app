@@ -1,6 +1,6 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createEmbeddedResourceImplementation } from '@lib/backend/resource/utils/createEmbeddedResourceImplementation/createEmbeddedResourceImplementation';
-import { LinkedUser } from '@lib/model/user/LinkedUser/LinkedUser';
+import { LinkedUser } from '@lib/model/user/LinkedUser/LinkedUser.entity';
 import { LINKED_USER_RESOURCE_NAME } from '@lib/model/user/LinkedUser/LinkedUser.constants';
 import { type LinkedUserModel } from '@lib/model/user/LinkedUser/LinkedUser.models';
 import { type LinkedUserImplementationModel } from '@lib/model/user/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';

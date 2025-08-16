@@ -3,7 +3,7 @@ import { createEntityResourceImplementation } from '@lib/backend/resource/utils/
 import { ACCESS_ROLE } from '@lib/model/auth/Access/Access.constants';
 import { AccessImplementation } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation';
 import { ROLE_RESOURCE_NAME } from '@lib/model/auth/Role/Role.constants';
-import { Group } from '@lib/model/group/Group/Group';
+import { Group } from '@lib/model/group/Group/Group.entity';
 import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
 import { type GroupModel } from '@lib/model/group/Group/Group.models';
 import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImplementation/GroupImplementation.models';

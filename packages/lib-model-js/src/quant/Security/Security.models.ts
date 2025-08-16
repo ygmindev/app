@@ -1,5 +1,6 @@
-import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource.models';
+import { type AssetModel } from '@lib/model/quant/Asset/Asset.models';
+import { type DateTimeModel } from '@lib/shared/datetime/utils/DateTime/DateTime.models';
 
-export type SecurityModel = SourcedEntityResourceModel & {
-  description?: string;
+export type SecurityModel = AssetModel & {
+  expiration?: DateTimeModel;
 };

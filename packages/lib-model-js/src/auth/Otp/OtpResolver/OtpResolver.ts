@@ -2,7 +2,7 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
-import { Otp } from '@lib/model/auth/Otp/Otp';
+import { Otp } from '@lib/model/auth/Otp/Otp.entity';
 import { OTP_RESOURCE_NAME } from '@lib/model/auth/Otp/Otp.constants';
 import { type OtpModel } from '@lib/model/auth/Otp/Otp.models';
 import { OtpImplementation } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation';

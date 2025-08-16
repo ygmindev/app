@@ -1,5 +1,5 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { Socket } from '@lib/model/http/Socket/Socket';
+import { Socket } from '@lib/model/http/Socket/Socket.entity';
 import { SocketImplementation } from '@lib/model/http/Socket/SocketImplementation/SocketImplementation';
 import { type SocketResolverModel } from '@lib/model/http/Socket/SocketResolver/SocketResolver.models';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';

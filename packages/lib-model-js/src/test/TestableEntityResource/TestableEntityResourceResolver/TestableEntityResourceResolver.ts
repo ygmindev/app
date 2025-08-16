@@ -1,7 +1,7 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
-import { TestableEntityResource } from '@lib/model/test/TestableEntityResource/TestableEntityResource';
+import { TestableEntityResource } from '@lib/model/test/TestableEntityResource/TestableEntityResource.entity';
 import { TestableEntityResourceImplementation } from '@lib/model/test/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
 import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/model/test/TestableEntityResource/TestableEntityResource.constants';
 import { type TestableEntityResourceModel } from '@lib/model/test/TestableEntityResource/TestableEntityResource.models';

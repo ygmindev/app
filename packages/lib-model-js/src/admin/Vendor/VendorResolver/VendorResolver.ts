@@ -1,7 +1,7 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
-import { Vendor } from '@lib/model/admin/Vendor/Vendor';
+import { Vendor } from '@lib/model/admin/Vendor/Vendor.entity';
 import { VENDOR_RESOURCE_NAME } from '@lib/model/admin/Vendor/Vendor.constants';
 import { type VendorModel } from '@lib/model/admin/Vendor/Vendor.models';
 import { VendorImplementation } from '@lib/model/admin/Vendor/VendorImplementation/VendorImplementation';

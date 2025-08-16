@@ -1,4 +1,4 @@
-import { Curve } from '@lib/model/quant/Curve/Curve';
+import { Curve } from '@lib/model/quant/Curve/Curve.entity';
 import { CurveImplementation } from '@lib/model/quant/Curve/CurveImplementation/CurveImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';

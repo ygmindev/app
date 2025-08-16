@@ -1,6 +1,6 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
-import { Curve } from '@lib/model/quant/Curve/Curve';
+import { Curve } from '@lib/model/quant/Curve/Curve.entity';
 import { CURVE_RESOURCE_NAME } from '@lib/model/quant/Curve/Curve.constants';
 import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
 import { type CurveImplementationModel } from '@lib/model/quant/Curve/CurveImplementation/CurveImplementation.models';

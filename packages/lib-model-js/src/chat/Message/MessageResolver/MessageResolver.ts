@@ -1,4 +1,4 @@
-import { Message } from '@lib/model/chat/Message/Message';
+import { Message } from '@lib/model/chat/Message/Message.entity';
 import { MessageImplementation } from '@lib/model/chat/Message/MessageImplementation/MessageImplementation';
 import { type MessageResolverModel } from '@lib/model/chat/Message/MessageResolver/MessageResolver.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';

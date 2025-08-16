@@ -5,7 +5,7 @@ import {
   type InterestRateModel,
 } from '@lib/model/quant/InterestRate/InterestRate.models';
 import { type InterestRateImplementationModel } from '@lib/model/quant/InterestRate/InterestRateImplementation/InterestRateImplementation.models';
-import { InterestRate } from '@lib/model/quant/InterestRate/InterestRate';
+import { InterestRate } from '@lib/model/quant/InterestRate/InterestRate.entity';
 
 @withContainer()
 export class InterestRateImplementation

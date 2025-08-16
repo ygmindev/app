@@ -1,6 +1,6 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
-import { Product } from '@lib/model/commerce/Product/Product';
+import { Product } from '@lib/model/commerce/Product/Product.entity';
 import { PRODUCT_RESOURCE_NAME } from '@lib/model/commerce/Product/Product.constants';
 import { type ProductModel } from '@lib/model/commerce/Product/Product.models';
 import { type ProductImplementationModel } from '@lib/model/commerce/Product/ProductImplementation/ProductImplementation.models';

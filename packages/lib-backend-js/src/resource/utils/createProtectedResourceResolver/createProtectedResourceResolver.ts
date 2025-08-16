@@ -1,4 +1,4 @@
-import { Group } from '@lib/model/group/Group/Group';
+import { Group } from '@lib/model/group/Group/Group.entity';
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withFieldResolver } from '@lib/backend/http/utils/withFieldResolver/withFieldResolver';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';

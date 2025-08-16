@@ -17,6 +17,8 @@ export type DatabaseConfigModel = {
 
   pool: { max: number };
 
+  resourcePostfix: string;
+
   type?: DATABASE_TYPE;
 
   username?: string;

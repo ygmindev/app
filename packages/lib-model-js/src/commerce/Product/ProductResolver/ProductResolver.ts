@@ -1,4 +1,4 @@
-import { Product } from '@lib/model/commerce/Product/Product';
+import { Product } from '@lib/model/commerce/Product/Product.entity';
 import { ProductImplementation } from '@lib/model/commerce/Product/ProductImplementation/ProductImplementation';
 import { type ProductResolverModel } from '@lib/model/commerce/Product/ProductResolver/ProductResolver.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';

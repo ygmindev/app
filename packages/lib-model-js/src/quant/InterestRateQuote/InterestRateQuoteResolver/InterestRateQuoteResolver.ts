@@ -1,4 +1,4 @@
-import { InterestRateQuote } from '@lib/model/quant/InterestRateQuote/InterestRateQuote';
+import { InterestRateQuote } from '@lib/model/quant/InterestRateQuote/InterestRateQuote.entity';
 import { InterestRateQuoteImplementation } from '@lib/model/quant/InterestRateQuote/InterestRateQuoteImplementation/InterestRateQuoteImplementation';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';

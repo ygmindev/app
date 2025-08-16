@@ -1,5 +1,5 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { Group } from '@lib/model/group/Group/Group';
+import { Group } from '@lib/model/group/Group/Group.entity';
 import { GroupImplementation } from '@lib/model/group/Group/GroupImplementation/GroupImplementation';
 import { type GroupResolverModel } from '@lib/model/group/Group/GroupResolver/GroupResolver.models';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';

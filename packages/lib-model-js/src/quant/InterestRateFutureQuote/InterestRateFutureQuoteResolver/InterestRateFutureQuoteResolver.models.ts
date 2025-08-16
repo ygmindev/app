@@ -1,0 +1,3 @@
+import { type InterestRateFutureQuoteImplementationModel } from '@lib/model/quant/InterestRateFutureQuote/InterestRateFutureQuoteImplementation/InterestRateFutureQuoteImplementation.models';
+
+export type InterestRateFutureQuoteResolverModel = InterestRateFutureQuoteImplementationModel;

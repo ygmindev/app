@@ -1,7 +1,7 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
-import { User } from '@lib/model/user/User/User';
+import { User } from '@lib/model/user/User/User.entity';
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { type UserImplementationModel } from '@lib/model/user/User/UserImplementation/UserImplementation.models';

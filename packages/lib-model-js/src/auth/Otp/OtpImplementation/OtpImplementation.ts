@@ -4,7 +4,7 @@ import { mail } from '@lib/backend/notification/utils/mail/mail';
 import { sms } from '@lib/backend/notification/utils/sms/sms';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { objectToEquality } from '@lib/backend/resource/utils/objectToEquality/objectToEquality';
-import { Otp } from '@lib/model/auth/Otp/Otp';
+import { Otp } from '@lib/model/auth/Otp/Otp.entity';
 import { OTP_RESOURCE_NAME } from '@lib/model/auth/Otp/Otp.constants';
 import { type OtpModel } from '@lib/model/auth/Otp/Otp.models';
 import { type OtpImplementationModel } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation.models';

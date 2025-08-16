@@ -6,7 +6,7 @@ import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';
 import { ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/ProtectedResource.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
-import { User } from '@lib/model/user/User/User';
+import { User } from '@lib/model/user/User/User.entity';
 import { type UserModel } from '@lib/model/user/User/User.models';
 
 export const createProtectedResource = (

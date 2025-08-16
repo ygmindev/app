@@ -1,7 +1,7 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { PaymentMethodImplementation } from '@lib/model/billing/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation';
-import { Order } from '@lib/model/commerce/Order/Order';
+import { Order } from '@lib/model/commerce/Order/Order.entity';
 import { ORDER_RESOURCE_NAME } from '@lib/model/commerce/Order/Order.constants';
 import { type OrderModel } from '@lib/model/commerce/Order/Order.models';
 import { type OrderImplementationModel } from '@lib/model/commerce/Order/OrderImplementation/OrderImplementation.models';

@@ -6,12 +6,12 @@ import { withResourceOutput } from '@lib/backend/resource/utils/withResourceOutp
 import { withRoot } from '@lib/backend/resource/utils/withRoot/withRoot';
 import { getUser } from '@lib/backend/user/utils/getUser/getUser';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
-import { Chat } from '@lib/model/chat/Chat/Chat';
+import { Chat } from '@lib/model/chat/Chat/Chat.entity';
 import { CHAT_RESOURCE_NAME } from '@lib/model/chat/Chat/Chat.constants';
 import { type ChatModel } from '@lib/model/chat/Chat/Chat.models';
 import { ChatImplementation } from '@lib/model/chat/Chat/ChatImplementation/ChatImplementation';
 import { type ChatResolverModel } from '@lib/model/chat/Chat/ChatResolver/ChatResolver.models';
-import { Message } from '@lib/model/chat/Message/Message';
+import { Message } from '@lib/model/chat/Message/Message.entity';
 import { MessageModel } from '@lib/model/chat/Message/Message.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';

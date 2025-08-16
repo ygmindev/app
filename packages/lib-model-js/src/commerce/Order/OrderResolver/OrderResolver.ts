@@ -1,4 +1,4 @@
-import { Order } from '@lib/model/commerce/Order/Order';
+import { Order } from '@lib/model/commerce/Order/Order.entity';
 import { OrderImplementation } from '@lib/model/commerce/Order/OrderImplementation/OrderImplementation';
 import { type OrderResolverModel } from '@lib/model/commerce/Order/OrderResolver/OrderResolver.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';

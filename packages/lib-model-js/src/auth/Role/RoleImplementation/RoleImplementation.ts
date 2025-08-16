@@ -1,6 +1,6 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createRelatedResourceImplementation } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation';
-import { Role } from '@lib/model/auth/Role/Role';
+import { Role } from '@lib/model/auth/Role/Role.entity';
 import { ROLE_RESOURCE_NAME } from '@lib/model/auth/Role/Role.constants';
 import { RoleModel } from '@lib/model/auth/Role/Role.models';
 import { type RoleImplementationModel } from '@lib/model/auth/Role/RoleImplementation/RoleImplementation.models';

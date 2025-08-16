@@ -1,7 +1,7 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
-import { InterestRate } from '@lib/model/quant/InterestRate/InterestRate';
+import { InterestRate } from '@lib/model/quant/InterestRate/InterestRate.entity';
 import { INTEREST_RATE_RESOURCE_NAME } from '@lib/model/quant/InterestRate/InterestRate.constants';
 import { type InterestRateModel } from '@lib/model/quant/InterestRate/InterestRate.models';
 import { InterestRateImplementation } from '@lib/model/quant/InterestRate/InterestRateImplementation/InterestRateImplementation';
