@@ -5,7 +5,6 @@ import {
   VIDEO_EXTENSION_DEFAULT,
 } from '@lib/config/file/file.constants';
 import { _screen } from '@lib/config/screen/_screen';
-import { HIGHLIGHT_CLASS, HIGHLIGHT_COLOR } from '@lib/config/screen/screen.constants';
 import { type _ScreenConfigModel, type ScreenConfigModel } from '@lib/config/screen/screen.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { RUNTIME } from '@lib/shared/environment/environment.constants';
@@ -20,10 +19,6 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
     dimension: { height: 1400, width: 2400 },
 
     elementTimeout: 10e3,
-
-    highlightClass: HIGHLIGHT_CLASS,
-
-    highlightColor: HIGHLIGHT_COLOR,
 
     imageExtension: IMAGE_EXTENSION_DEFAULT,
 

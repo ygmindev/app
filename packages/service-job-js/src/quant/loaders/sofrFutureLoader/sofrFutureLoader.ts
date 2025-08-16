@@ -10,13 +10,8 @@ export const sofrFutureLoader: TreasuryRateLoaderModel = new MultiSourceDataLoad
 
   loaders: [
     new TableCrawlDataLoader<InterestRateModel>({
-      lastUpdatedSelector: (screen) =>
-        screen
-          .find({ type: SELECTOR_TYPE.CLASS, value: 'timestamp date-time' })
-          .then((h) => h?.find({ type: SELECTOR_TYPE.CLASS, value: 'date' })),
       tableSelector: { type: SELECTOR_TYPE.CLASS, value: 'futures-table' },
-      transformer: ({ data, headers, lastUpdated }) => {
-        console.warn(`\n@@@ ${lastUpdated}`);
+      transformer: ({ data, headers }) => {
         console.warn('\n@@@ headers:');
         console.warn(headers);
         console.warn('\n@@@ data:');
