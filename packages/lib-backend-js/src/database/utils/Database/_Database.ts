@@ -11,6 +11,7 @@ import {
 } from '@lib/config/database/database.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
@@ -24,12 +25,16 @@ import {
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import {
   type EntityManager,
+  type EntityName,
   type FilterQuery,
   type FindOneOptions,
   MikroORM,
   type Primary,
+  ReferenceKind,
   type RequiredEntityData,
 } from '@mikro-orm/mongodb';
+import forEach from 'lodash/forEach';
+import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import last from 'lodash/last';
 import toString from 'lodash/toString';
@@ -112,16 +117,14 @@ export class _Database implements _DatabaseModel {
       create: async ({ form, options } = {}) => {
         try {
           const em = this.getEntityManager();
-          // const result = em.create(
-          //   name,
-          //   form as unknown as RequiredEntityData<Pick<TType, keyof TType>, never, false>,
-          // );
-          const result = em.create(name, {} as RequiredEntityData<TType>);
-          console.warn(cleanObject(form));
-          em.assign(result, cleanObject(form) as unknown as RequiredEntityData<TType>, {
-            merge: true,
-          });
-
+          const result = em.create(
+            name,
+            this.hydrate(name, form) as unknown as RequiredEntityData<
+              Pick<TType, keyof TType>,
+              never,
+              false
+            >,
+          );
           options?.isFlush !== false && (await em.persistAndFlush(result));
           return { result: result as PartialModel<TType> };
         } catch (e) {
@@ -236,6 +239,37 @@ export class _Database implements _DatabaseModel {
       },
     };
     return implementation;
+  };
+
+  hydrate = <TType extends unknown>(
+    name: EntityName<TType>,
+    form?: Partial<TType>,
+  ): Partial<TType> => {
+    if (!form) {
+      throw new NotFoundError('form');
+    }
+    const formF = form as Record<string, unknown>;
+    const em = this.getEntityManager();
+    const meta = em.getMetadata().get(name);
+    forEach(meta.properties, (v) => {
+      const value = (form as Record<string, unknown>)[v.name];
+      switch (v.kind) {
+        case ReferenceKind.ONE_TO_MANY:
+        case ReferenceKind.MANY_TO_MANY: {
+          if (isArray(value)) {
+            formF[v.name] = value.map((vv) => em.create(v.type, vv as object));
+          }
+          break;
+        }
+        case ReferenceKind.MANY_TO_ONE: {
+          if (!!value && isPlainObject(value)) {
+            formF[v.name] = em.create(v.type, value);
+          }
+          break;
+        }
+      }
+    });
+    return formF as Partial<TType>;
   };
 
   async isConnected(): Promise<boolean> {
