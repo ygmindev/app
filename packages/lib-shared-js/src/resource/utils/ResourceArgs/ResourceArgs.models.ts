@@ -56,7 +56,7 @@ type GetManyOptionsModel<TType> = GetOptionsModel<TType> & {
 
 type GetManyArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
-  id?: Array<never>;
+  id?: Array<string>;
   options?: GetManyOptionsModel<TType>;
 };
 

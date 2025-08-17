@@ -183,9 +183,10 @@ export class _Database implements _DatabaseModel {
         return { result: result ?? undefined };
       },
 
-      getMany: async ({ filter, options } = {}) => {
+      getMany: async ({ filter, id, options } = {}) => {
         const em = this.getEntityManager();
-        const filterF = getFilter<TType>(filter);
+        const filterF =
+          (id as FilterQuery<NoInfer<NonNullable<TType>>>) ?? getFilter<TType>(filter);
         const result = await em.find(
           name,
           filterF,

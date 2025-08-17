@@ -7,6 +7,7 @@ import { TESTABLE_RELATED_RESOURCE_SEED_DATA } from '@lib/model/test/TestableRel
 import { type TestableRelatedResourceModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.models';
 import { TestableRelatedResourceImplementation } from '@lib/model/test/TestableRelatedResource/TestableRelatedResourceImplementation/TestableRelatedResourceImplementation';
 import { Container } from '@lib/shared/core/utils/Container/Container';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
@@ -35,16 +36,21 @@ describe(displayName, () => {
   });
 
   test('works with create related', async () => {
-    const { result } = await implementation.create({
-      form: {
-        ...TESTABLE_ENTITY_RESOURCE_SEED_DATA[0],
-        relatedOneToMany: [
-          TESTABLE_RELATED_RESOURCE_SEED_DATA[0],
-          TESTABLE_RELATED_RESOURCE_SEED_DATA[1],
-        ],
-      },
-    });
-    console.warn(result);
-    expect(1).toBe(1);
+    const form = {
+      ...TESTABLE_ENTITY_RESOURCE_SEED_DATA[0],
+      relatedOneToMany: [
+        TESTABLE_RELATED_RESOURCE_SEED_DATA[0],
+        TESTABLE_RELATED_RESOURCE_SEED_DATA[1],
+      ],
+    };
+    const { result } = await implementation.create({ form });
+    expect(result?._id).toBeDefined();
+    expect(result?.created).toBeDefined();
+    expect(result?.string).toStrictEqual(form.string);
+    expect(result?.relatedOneToMany?.length).toStrictEqual(form.relatedOneToMany.length);
+
+    const relatedIds = filterNil(result?.relatedOneToMany?.map((v) => v._id));
+    const { result: relatedResult } = await relatedImplementation.getMany({ id: relatedIds });
+    expect(relatedResult?.length).toStrictEqual(form.relatedOneToMany.length);
   });
 });
