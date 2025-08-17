@@ -31,7 +31,6 @@ export const createEntityResourceImplementation = <TType extends EntityResourceM
 }: CreateEntityResourceImplementationParamsModel<TType>): CreateEntityResourceImplementationModel<TType> => {
   const getRepository = (): RepositoryModel<TType> =>
     Container.get(Database, DATABASE_TYPE.MONGO).getRepository({ name });
-
   return createResourceImplementation<TType>({
     Resource,
     afterCreate,

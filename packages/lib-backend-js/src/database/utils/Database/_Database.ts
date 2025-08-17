@@ -23,7 +23,6 @@ import {
 } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import {
-  type EntityDictionary,
   type EntityManager,
   type FilterQuery,
   type FindOneOptions,
@@ -113,10 +112,16 @@ export class _Database implements _DatabaseModel {
       create: async ({ form, options } = {}) => {
         try {
           const em = this.getEntityManager();
-          const result = em.create(
-            name,
-            form as unknown as RequiredEntityData<Pick<TType, keyof TType>, never, false>,
-          );
+          // const result = em.create(
+          //   name,
+          //   form as unknown as RequiredEntityData<Pick<TType, keyof TType>, never, false>,
+          // );
+          const result = em.create(name, {} as RequiredEntityData<TType>);
+          console.warn(cleanObject(form));
+          em.assign(result, cleanObject(form) as unknown as RequiredEntityData<TType>, {
+            merge: true,
+          });
+
           options?.isFlush !== false && (await em.persistAndFlush(result));
           return { result: result as PartialModel<TType> };
         } catch (e) {
@@ -212,36 +217,23 @@ export class _Database implements _DatabaseModel {
       },
 
       update: async ({ filter, id, options, update } = {}) => {
-        const filterF =
-          (id as FilterQuery<NoInfer<NonNullable<TType>>>) ?? getFilter<TType>(filter);
+        const filterF = id
+          ? { _id: { $in: id.map((v) => new ObjectId(v)) } }
+          : getFilter<TType>(filter);
         const updateF = cleanObject(update);
         const em = this.getEntityManager();
         const driver = em.getDriver();
         const collectionName = isString(name) ? name : em.getCollection(name).collectionName;
-        const result = await driver.nativeUpdate(
-          collectionName,
+        const collection = driver.getConnection().getCollection(collectionName);
+        const result = await collection.findOneAndUpdate(
           isEmpty(filterF)
             ? ({ $expr: { $eq: [1, 1] } } as unknown as FilterQuery<NoInfer<NonNullable<TType>>>)
             : filterF,
-          updateF as EntityDictionary<TType>,
-          { upsert: options?.isUpsert },
+          { $set: updateF },
+          { returnDocument: 'after', upsert: options?.isUpsert },
         );
-        return { result: result.row } as ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
+        return { result } as ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
       },
-
-      // update: async ({ filter, id, options, update } = {}) => {
-      //   const em = this.getEntityManager();
-      //   const updateF = cleanObject(update);
-      //   const { result } = await implementation.get({ filter, id });
-      //   if (result) {
-      //     wrap(result).assign(updateF as object, {
-      //       mergeObjectProperties: true,
-      //       updateByPrimaryKey: true,
-      //     });
-      //     options?.isFlush !== false && (await em.persistAndFlush(result));
-      //   }
-      //   return { result } as ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
-      // },
     };
     return implementation;
   };
