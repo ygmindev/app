@@ -19,7 +19,7 @@ class TestableRelatedResourceModel(BaseModel):
     rootManyToMany: Optional[
         List[testable_entity_resource.TestableEntityResourceModel]
     ] = None
-    rootOneToMany: Optional[Any] = None
+    rootManyToOne: Optional[Any] = None
     date: Optional[datetime] = None
     group: str
     index: float

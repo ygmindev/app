@@ -1,5 +1,3 @@
-import { Collection } from '@lib/backend/core/utils/Collection/Collection';
-import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
@@ -31,7 +29,7 @@ import { LinkedUser } from '@lib/model/user/LinkedUser/LinkedUser.entity';
 import { type LinkedUserModel } from '@lib/model/user/LinkedUser/LinkedUser.models';
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { type UserModel } from '@lib/model/user/User/User.models';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { PartialArrayModel } from '@lib/shared/core/core.models';
 
 @withEntity({
   indices: [{ keys: ['first', 'last', 'email', 'phone'], type: 'text' }],
@@ -40,42 +38,42 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 })
 export class User extends EntityResource implements UserModel {
   @withOneToManyField({ Resource: () => Access, root: USER_RESOURCE_NAME })
-  [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel> = new Collection(this);
+  [ACCESS_RESOURCE_NAME]?: PartialArrayModel<AccessModel>;
 
   @withManyToManyField({ Resource: () => Bank, root: USER_RESOURCE_NAME })
-  [BANK_RESOURCE_NAME]?: CollectionModel<BankModel> = new Collection(this);
+  [BANK_RESOURCE_NAME]?: PartialArrayModel<BankModel>;
 
   @withManyToManyField({ Resource: () => Card, root: USER_RESOURCE_NAME })
-  [CARD_RESOURCE_NAME]?: CollectionModel<CardModel> = new Collection(this);
+  [CARD_RESOURCE_NAME]?: PartialArrayModel<CardModel>;
 
   @withManyToManyField({ Resource: () => Chat, root: 'participants' })
-  [CHAT_RESOURCE_NAME]?: CollectionModel<ChatModel> = new Collection(this);
+  [CHAT_RESOURCE_NAME]?: PartialArrayModel<ChatModel>;
 
   @withEmbeddedField({ Resource: () => LinkedUser })
-  [LINKED_USER_RESOURCE_NAME]?: Array<RefModel<LinkedUserModel>>;
+  [LINKED_USER_RESOURCE_NAME]?: PartialArrayModel<RefModel<LinkedUserModel>>;
 
   @withOneToManyField({ Resource: () => Message, root: 'createdBy' })
-  [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel> = new Collection(this);
+  [MESSAGE_RESOURCE_NAME]?: PartialArrayModel<MessageModel>;
 
   @withManyToManyField({ Resource: () => Card, root: USER_RESOURCE_NAME })
-  [PAYMENT_METHOD_RESOURCE_NAME]?: CollectionModel<PaymentMethodModel> = new Collection(this);
+  [PAYMENT_METHOD_RESOURCE_NAME]?: PartialArrayModel<PaymentMethodModel>;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   callingCode?: string;
 
-  @withField({ isDatabase: true, isOptional: true, isUnique: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, isUnique: true })
   email?: string;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   first?: string;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   last?: string;
 
   @withRefField({ Resource: () => PaymentMethod, isDatabase: true, isOptional: true })
   paymentMethodPrimary?: RefModel<PaymentMethodModel>;
 
-  @withField({ isDatabase: true, isOptional: true, isUnique: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true, isUnique: true })
   phone?: string;
 }
 

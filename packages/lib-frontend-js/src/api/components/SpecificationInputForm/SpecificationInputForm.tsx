@@ -9,7 +9,7 @@ import { validateNotEmpty } from '@lib/frontend/data/utils/validateNotEmpty/vali
 import { AddressInput } from '@lib/frontend/map/components/AddressInput/AddressInput';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { PhoneInput } from '@lib/frontend/user/components/PhoneInput/PhoneInput';
-import { FIELD_TYPE } from '@lib/shared/api/utils/Field/Field.constants';
+import { FORM_FIELD_TYPE } from '@lib/shared/api/utils/Field/Field.constants';
 import { type SpecificationFieldModel } from '@lib/shared/api/utils/Specification/Specification.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -27,42 +27,42 @@ export const SpecificationInputForm = <TType extends unknown>({
 
   const getElement = (field: SpecificationFieldModel<TType>): ReactElement => {
     switch (field.type) {
-      case FIELD_TYPE.ADDRESS:
+      case FORM_FIELD_TYPE.ADDRESS:
         return (
           <AddressInput
             key={field.id}
             label={field.id}
           />
         );
-      case FIELD_TYPE.DATE:
+      case FORM_FIELD_TYPE.DATE:
         return (
           <DateInput
             key={field.id}
             label={field.id}
           />
         );
-      case FIELD_TYPE.NUMBER:
+      case FORM_FIELD_TYPE.NUMBER:
         return (
           <NumberInput
             key={field.id}
             label={field.id}
           />
         );
-      case FIELD_TYPE.PHONE:
+      case FORM_FIELD_TYPE.PHONE:
         return (
           <PhoneInput
             key={field.id}
             label={field.id}
           />
         );
-      case FIELD_TYPE.STRING:
+      case FORM_FIELD_TYPE.STRING:
         return (
           <TextInput
             key={field.id}
             label={field.id}
           />
         );
-      case FIELD_TYPE.PROPERTY: {
+      case FORM_FIELD_TYPE.PROPERTY: {
         // switch (field.specification.widget) {
         //   case WIDGET_TYPE.ADDRESS:
         //     return <AddressInput label={field.id} />;

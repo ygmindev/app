@@ -7,8 +7,8 @@ import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInp
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ResourceFormPropsModel } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { cloneElement, type ReactElement, useState } from 'react';
 
 export const ResourceForm = <TType extends EntityResourceModel, TRoot = undefined>({
@@ -38,13 +38,13 @@ export const ResourceForm = <TType extends EntityResourceModel, TRoot = undefine
               return cloneElement(field({}), { label: labelF });
             }
             switch (type) {
-              case PROPERTY_TYPE.RESOURCE:
-                return (
-                  <TextInput
-                    beforeSubmit={async (v) => ({ _id: v })}
-                    label={labelF}
-                  />
-                );
+              // case PROPERTY_TYPE.RESOURCE:
+              //   return (
+              //     <TextInput
+              //       beforeSubmit={async (v) => ({ _id: v })}
+              //       label={labelF}
+              //     />
+              //   );
               case DATA_TYPE.NUMBER:
                 return <NumberInput label={labelF} />;
               default:

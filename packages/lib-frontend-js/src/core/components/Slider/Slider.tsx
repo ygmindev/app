@@ -15,7 +15,7 @@ import {
   THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
-import { type NumberRangeModel } from '@lib/model/data/NumberRange/NumberRange.models';
+import { type NumberRangeModel } from '@lib/shared/data/utils/NumberRange/NumberRange.models';
 import toString from 'lodash/toString';
 
 export const Slider: LFCModel<SliderPropsModel> = ({

@@ -22,8 +22,10 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       babel: {
         plugins: [
           '@babel/plugin-transform-runtime',
-          // ['@babel/plugin-transform-private-methods', { loose: true }],
           '@babel/plugin-transform-class-static-block',
+          'babel-plugin-transform-typescript-metadata',
+          // ['@babel/plugin-transform-private-methods', { loose: true }],
+          // ['@babel/plugin-proposal-decorators', { legacy: true, decoratorsBeforeExport: true }],
           // ['@babel/plugin-proposal-class-properties', { loose: true }],
           // ['@babel/plugin-proposal-object-rest-spread', { loose: true }],
         ],

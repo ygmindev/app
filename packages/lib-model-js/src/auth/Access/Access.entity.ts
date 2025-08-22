@@ -12,14 +12,13 @@ import { EntityResource } from '@lib/model/resource/EntityResource/EntityResourc
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { User } from '@lib/model/user/User/User.entity';
 import { type UserModel } from '@lib/model/user/User/User.models';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: ACCESS_RESOURCE_NAME })
 export class Access extends EntityResource implements AccessModel {
-  @withManyToOneField({ Resource: () => Group })
+  @withManyToOneField({ Resource: () => Group, isOptional: true })
   [GROUP_RESOURCE_NAME]?: RefModel<GroupModel>;
 
-  @withField({ isArray: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true })
   [ROLE_RESOURCE_NAME]!: Array<ACCESS_ROLE>;
 
   @withManyToOneField({ Resource: () => User })

@@ -152,7 +152,7 @@ export const createEmbeddedResourceImplementation = <
     const root = await getRoot(input.root);
     const result = getFilter({
       input,
-      isArray: true,
+      
       skip: input.options?.skip,
       take: input.options?.take,
       values: (root?.[name] as unknown as Array<TType>) ?? [],
@@ -180,7 +180,7 @@ export const createEmbeddedResourceImplementation = <
   ): Promise<number> => {
     const root = await getRoot(input?.root);
     let result = (root?.[name] as unknown as Array<TType>) ?? [];
-    result = getFilter({ input, isArray: true, values: result });
+    result = getFilter({ input,  values: result });
     return result?.length ?? 0;
   };
 
@@ -245,7 +245,7 @@ export const createEmbeddedResourceImplementation = <
       const root = await getRoot(input?.root);
       const result = getFilter({
         input,
-        isArray: true,
+        
         isInverse: true,
         values: (root?.[name] as unknown as Array<TType>) ?? [],
       });

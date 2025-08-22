@@ -1,4 +1,3 @@
-import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { type ACCESS_RESOURCE_NAME } from '@lib/model/auth/Access/Access.constants';
 import { type AccessModel } from '@lib/model/auth/Access/Access.models';
@@ -15,21 +14,22 @@ import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type LINKED_USER_RESOURCE_NAME } from '@lib/model/user/LinkedUser/LinkedUser.constants';
 import { type LinkedUserModel } from '@lib/model/user/LinkedUser/LinkedUser.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 
 export type UserModel = EntityResourceModel & {
-  [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel>;
+  [ACCESS_RESOURCE_NAME]?: PartialArrayModel<AccessModel>;
 
-  [BANK_RESOURCE_NAME]?: CollectionModel<BankModel>;
+  [BANK_RESOURCE_NAME]?: PartialArrayModel<BankModel>;
 
-  [CARD_RESOURCE_NAME]?: CollectionModel<CardModel>;
+  [CARD_RESOURCE_NAME]?: PartialArrayModel<CardModel>;
 
-  [CHAT_RESOURCE_NAME]?: CollectionModel<ChatModel>;
+  [CHAT_RESOURCE_NAME]?: PartialArrayModel<ChatModel>;
 
-  [LINKED_USER_RESOURCE_NAME]?: Array<RefModel<LinkedUserModel>>;
+  [LINKED_USER_RESOURCE_NAME]?: PartialArrayModel<RefModel<LinkedUserModel>>;
 
-  [MESSAGE_RESOURCE_NAME]?: CollectionModel<MessageModel>;
+  [MESSAGE_RESOURCE_NAME]?: PartialArrayModel<MessageModel>;
 
-  [PAYMENT_METHOD_RESOURCE_NAME]?: CollectionModel<PaymentMethodModel>;
+  [PAYMENT_METHOD_RESOURCE_NAME]?: PartialArrayModel<PaymentMethodModel>;
 
   callingCode?: string;
 

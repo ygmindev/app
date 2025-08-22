@@ -7,17 +7,17 @@ import { type UtilityModel } from '@lib/model/admin/Utility/Utility.models';
 import { VENDOR_RESOURCE_NAME } from '@lib/model/admin/Vendor/Vendor.constants';
 import { type VendorModel } from '@lib/model/admin/Vendor/Vendor.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { PartialArrayModel } from '@lib/shared/core/core.models';
 
 @withEntity({ isDatabase: true, name: VENDOR_RESOURCE_NAME })
 export class Vendor extends EntityResource implements VendorModel {
   @withEmbeddedField({ Resource: () => Utility })
-  [UTILITY_RESOURCE_NAME]?: Array<UtilityModel>;
+  [UTILITY_RESOURCE_NAME]?: PartialArrayModel<UtilityModel>;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   imageSrc?: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true })
   name!: string;
 }
 

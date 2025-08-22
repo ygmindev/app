@@ -6,14 +6,13 @@ import {
   LINKED_USER_TYPE,
   type LinkedUserModel,
 } from '@lib/model/user/LinkedUser/LinkedUser.models';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: LINKED_USER_RESOURCE_NAME })
 export class LinkedUser extends EntityResource implements LinkedUserModel {
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true })
   externalId!: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true })
   type!: LINKED_USER_TYPE;
 }
 

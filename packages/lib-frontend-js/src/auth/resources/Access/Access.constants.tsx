@@ -13,7 +13,7 @@ export const ACCESS_RESOURCE_PARAMS = {
   fields: [
     {
       id: 'Role',
-      isArray: true,
+      
       options: Object.values(ACCESS_ROLE_MORE).map((v) => ({ id: v })),
       renderer: ({ value }) => (
         <Wrapper

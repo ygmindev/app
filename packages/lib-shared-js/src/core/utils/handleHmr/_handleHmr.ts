@@ -4,8 +4,8 @@ import {
 } from '@lib/shared/core/utils/handleHmr/_handleHmr.models';
 
 export const _handleHmr = ({ onChange }: _HandleHmrParamsModel): _HandleHmrModel => {
-  if (import.meta.hot) {
-    import.meta.hot.on('vite:beforeFullReload', () => void onChange());
-    import.meta.hot.dispose(() => void onChange());
-  }
+  try {
+    import.meta.hot?.on('vite:beforeFullReload', () => void onChange());
+    import.meta.hot?.dispose(() => void onChange());
+  } catch {}
 };

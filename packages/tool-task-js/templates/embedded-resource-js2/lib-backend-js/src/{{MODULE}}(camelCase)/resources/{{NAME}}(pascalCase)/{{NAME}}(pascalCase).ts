@@ -2,7 +2,6 @@ import { EntityResource } from '@lib/model/resource/EntityResource/EntityResourc
 import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { {{NAME}}(constantCase)_RESOURCE_NAME } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).constants';
 import { type {{NAME}}(pascalCase)Model } from '@lib/shared/{{MODULE}}(camelCase)/resources/{{NAME}}(pascalCase)/{{NAME}}(pascalCase).models';
 import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
@@ -15,6 +14,6 @@ export class {{NAME}}(pascalCase) extends EntityResource implements {{NAME}}(pas
   @withRefField({ Resource: () => User })
   _{{NAME_ROOT}}(camelCase)?: RefFieldModel<{{NAME_ROOT}}(pascalCase)Model>;
 
-  @withField({ isOptional: true, isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true, isDatabase: true })
   name?: string;
 }

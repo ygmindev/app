@@ -11,20 +11,19 @@ import { PRODUCT_RESOURCE_NAME } from '@lib/model/commerce/Product/Product.const
 import { Product } from '@lib/model/commerce/Product/Product.entity';
 import { ProductModel } from '@lib/model/commerce/Product/Product.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, isEmbeddable: true, name: PRICING_RESOURCE_NAME })
 export class Pricing extends EntityResource implements PricingModel {
   @withManyToOneField({ Resource: () => Product })
   [PRODUCT_RESOURCE_NAME]!: RefModel<ProductModel>;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   currency?: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true })
   frequency!: PRICING_FREQUENCY;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  @withField({ isDatabase: true, isOptional: true })
   price?: number;
 }
 

@@ -8,14 +8,13 @@ import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
 import { Group } from '@lib/model/group/Group/Group.entity';
 import { type GroupModel } from '@lib/model/group/Group/Group.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: ROLE_RESOURCE_NAME })
 export class Role extends EntityResource implements RoleModel {
   @withManyToOneField({ Resource: () => Group })
   [GROUP_RESOURCE_NAME]?: RefModel<GroupModel>;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   name?: string;
 }
 

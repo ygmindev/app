@@ -5,23 +5,21 @@ import { ORDER_RESOURCE_NAME, ORDER_STATUS } from '@lib/model/commerce/Order/Ord
 import { type OrderModel } from '@lib/model/commerce/Order/Order.models';
 import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
-import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
+import { PartialArrayModel } from '@lib/shared/core/core.models';
 
 @withEntity({ isDatabase: true, name: ORDER_RESOURCE_NAME })
 export class Order extends EntityResource implements OrderModel {
   @withField({
     Resource: () => ProductItem,
-    isArray: true,
     isDatabase: true,
     isOptional: true,
-    type: PROPERTY_TYPE.RESOURCE,
   })
-  items?: Array<ProductItemModel>;
+  items?: PartialArrayModel<ProductItemModel>;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   paymentMethodId?: string;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   status?: ORDER_STATUS;
 }
 

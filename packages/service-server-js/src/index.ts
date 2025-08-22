@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import { Server } from '@lib/backend/server/utils/Server/Server';
 import { config as serverConfig } from '@lib/config/node/server/server.node';
 

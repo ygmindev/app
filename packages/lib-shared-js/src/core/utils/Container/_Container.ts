@@ -15,10 +15,10 @@ export const _container = new Container({
 export const _Container: _ContainerModel = {
   container: () => _container,
 
-  get: <TType>(type: ClassModel<TType>, name?: string): TType =>
+  get: <TType extends unknown>(type: ClassModel<TType>, name?: string): TType =>
     _container.get<TType>(type, { autobind: true, name }),
 
-  set<TType>(type: ClassModel<TType>, value?: TType | string, name?: string): void {
+  set<TType extends unknown>(type: ClassModel<TType>, value?: TType | string, name?: string): void {
     let binding:
       | BindInWhenOnFluentSyntax<TType>
       | BindWhenOnFluentSyntax<TType>

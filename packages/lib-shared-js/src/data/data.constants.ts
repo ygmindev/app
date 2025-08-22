@@ -17,5 +17,4 @@ export enum DATA_TYPE_MORE {
 export enum PROPERTY_TYPE {
   ID = 'id',
   PRIMARY_KEY = 'primaryKey',
-  RESOURCE = 'resource',
 }

@@ -22,6 +22,8 @@ export type PrimitiveModel = Primitive | Date;
 
 export type PartialModel<TType> = Partial<NonNullable<TType>>;
 
+export type PartialArrayModel<TType> = Array<Partial<TType>>;
+
 export type PartialDeepModel<TType> = PartialDeep<TType>;
 
 export type EmptyObjectModel = Record<string, unknown>;

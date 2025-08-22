@@ -1,4 +1,4 @@
-import '../lib-shared-js/src/core/utils/nodeRegister/nodeRegister';
+import '../tool-task-js/src/node/utils/nodeRegister/nodeRegister';
 
 const { config } = await import('@lib/config/node/bundle/bundle.node');
 

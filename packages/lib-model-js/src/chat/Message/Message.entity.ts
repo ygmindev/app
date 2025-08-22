@@ -7,14 +7,13 @@ import { Chat } from '@lib/model/chat/Chat/Chat.entity';
 import { ChatModel } from '@lib/model/chat/Chat/Chat.models';
 import { MESSAGE_RESOURCE_NAME } from '@lib/model/chat/Message/Message.constants';
 import { type MessageModel } from '@lib/model/chat/Message/Message.models';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: MESSAGE_RESOURCE_NAME })
 export class Message extends createProtectedResource() implements MessageModel {
   @withManyToOneField({ Resource: () => Chat })
   chat!: RefModel<ChatModel>;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   text?: string;
 }
 

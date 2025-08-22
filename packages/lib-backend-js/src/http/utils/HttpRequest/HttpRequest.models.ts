@@ -2,7 +2,7 @@ import { type HttpMessageParamsModel } from '@lib/backend/http/utils/HttpMessage
 import { type HttpMethodModel } from '@lib/shared/http/http.models';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
 
-export type HttpRequestParamsModel<TType> = HttpMessageParamsModel<TType> & {
+export type HttpRequestParamsModel<TType extends unknown> = HttpMessageParamsModel<TType> & {
   i18n?: I18nModel;
   lang?: string;
   method?: HttpMethodModel;
@@ -10,4 +10,4 @@ export type HttpRequestParamsModel<TType> = HttpMessageParamsModel<TType> & {
   url: string;
 };
 
-export type HttpRequestModel<TType> = HttpRequestParamsModel<TType>;
+export type HttpRequestModel<TType extends unknown> = HttpRequestParamsModel<TType>;

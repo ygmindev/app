@@ -44,7 +44,7 @@ export class PaymentMethodResolver implements PaymentMethodResolverModel {
   @withOutput({
     Resource: () => PaymentMethod,
     access: ACCESS_LEVEL.PROTECTED,
-    isArray: true,
+    
     name: PAYMENT_METHOD_GET_ALL,
   })
   async getAll(

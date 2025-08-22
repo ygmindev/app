@@ -16,11 +16,10 @@ import forEach from 'lodash/forEach';
 import toNumber from 'lodash/toNumber';
 
 export class _Server implements _ServerModel {
-  _app: FastifyInstance;
-
-  protected _port: number;
-  protected _host: string;
   protected _api?: ApiConfigModel;
+  _app: FastifyInstance;
+  protected _host: string;
+  protected _port: number;
 
   constructor({ api, certificate, host, port }: _ServerParamsModel) {
     this._host = host;
@@ -35,6 +34,10 @@ export class _Server implements _ServerModel {
         key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
       },
     });
+  }
+
+  async close(): Promise<void> {
+    this._app.server.listening && (await this._app.close());
   }
 
   async register<TType, TParams>({
@@ -76,9 +79,5 @@ export class _Server implements _ServerModel {
     } catch (e) {
       logger.error(e);
     }
-  }
-
-  async close(): Promise<void> {
-    this._app.server.listening && (await this._app.close());
   }
 }

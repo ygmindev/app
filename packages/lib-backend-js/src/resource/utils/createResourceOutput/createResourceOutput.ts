@@ -8,7 +8,6 @@ import {
 import { createRoot } from '@lib/backend/resource/utils/createRoot/createRoot';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import { type ResultModel } from '@lib/shared/resource/utils/Result/Result.models';
@@ -49,7 +48,6 @@ export const createResourceOutput = <
           TMethod extends RESOURCE_METHOD_TYPE.GET_CONNECTION ? GetConnectionModel<TType> : TType
         >,
       isArray: isArrayF,
-      type: PROPERTY_TYPE.RESOURCE,
     })
     result?: ResultModel<TMethod, TType>;
   }

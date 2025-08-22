@@ -7,7 +7,7 @@ import { LANGUAGE_DEFAULT } from '@lib/config/locale/internationalize/internatio
 import { type HttpMethodModel } from '@lib/shared/http/http.models';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
 
-export class HttpRequest<TType> extends HttpMessage<TType> implements HttpRequestModel<TType> {
+export class HttpRequest<TType extends unknown> extends HttpMessage<TType> implements HttpRequestModel<TType> {
   _i18n?: I18nModel;
   _lang?: string;
   _method?: HttpMethodModel;

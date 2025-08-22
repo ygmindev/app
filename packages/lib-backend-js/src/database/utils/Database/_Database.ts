@@ -18,10 +18,7 @@ import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
-import {
-  type FilterConditionModel,
-  type FilterModel,
-} from '@lib/shared/resource/utils/Filter/Filter.models';
+import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import {
   type EntityManager,
@@ -52,7 +49,7 @@ export const getFilter = <TType extends unknown>(
         switch (condition) {
           case FILTER_CONDITION.LIKE: {
             if (isString(value)) {
-              condition = '$regex' as FilterConditionModel;
+              condition = '$regex' as FILTER_CONDITION;
               value = new RegExp(value, 'i');
             }
             break;

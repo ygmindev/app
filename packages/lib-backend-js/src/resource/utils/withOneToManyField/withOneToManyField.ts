@@ -15,7 +15,7 @@ export const withOneToManyField =
   (target, propertyKey) =>
     withRefField({
       Resource,
-      isArray: true,
+      
       isDatabase,
       isOptional,
       relation: FIELD_RELATION.ONE_TO_MANY,

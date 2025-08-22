@@ -17,9 +17,7 @@ export const _runClean = async ({
   root && process.chdir(root);
   await rimraf(
     patterns ??
-      CLEAN_PATTERNS
-        .map((pattern) => [resolve(root, pattern), join(root, '**/*', pattern)])
-        .flat(),
+      CLEAN_PATTERNS.map((pattern) => [resolve(root, pattern), join(root, '**/*', pattern)]).flat(),
     {
       filter: excludes ? (path) => some(excludes, (exc) => !path.includes(exc)) : undefined,
       glob: true,

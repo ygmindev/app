@@ -15,9 +15,9 @@ import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import isString from 'lodash/isString';
 
 export class Server<TParams extends Array<unknown>> extends _Server implements ServerModel {
-  _plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
-  _onInitialize: (() => Promise<void>) | undefined;
   _onClose: (() => Promise<void>) | undefined;
+  _onInitialize: (() => Promise<void>) | undefined;
+  _plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
 
   constructor({ onClose: onClose, onInitialize, plugins, ...params }: ServerParamsModel<TParams>) {
     super(params);
@@ -28,6 +28,15 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
     this.handleClose = this.handleClose.bind(this);
     this.run = this.run.bind(this);
     this.close = this.close.bind(this);
+  }
+
+  async close(): Promise<void> {
+    await super.close();
+  }
+
+  async handleClose(): Promise<void> {
+    await this._onClose?.();
+    await this.close();
   }
 
   async register<TType, TParams>(params: ApiEndpointModel<TType, TParams>): Promise<void> {
@@ -47,14 +56,8 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
     return super.register({ ...params, pathname });
   }
 
-  async handleClose(): Promise<void> {
-    await this._onClose?.();
-    await this.close();
-  }
-
   async run(): Promise<void> {
     await handleCleanup({ onCleanUp: this.handleClose });
-
     handleHmr({ onChange: this.handleClose });
 
     for (const [plugin, params] of this._plugins ?? []) {
@@ -70,9 +73,5 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
     await super.run();
 
     await new Promise(() => {});
-  }
-
-  async close(): Promise<void> {
-    await super.close();
   }
 }

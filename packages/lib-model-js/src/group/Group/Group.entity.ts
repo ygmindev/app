@@ -1,5 +1,3 @@
-import { Collection } from '@lib/backend/core/utils/Collection/Collection';
-import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
@@ -12,23 +10,23 @@ import { RoleModel } from '@lib/model/auth/Role/Role.models';
 import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
 import { GROUP_TYPE, type GroupModel } from '@lib/model/group/Group/Group.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
+import { PartialArrayModel } from '@lib/shared/core/core.models';
 
 @withEntity({ isDatabase: true, name: GROUP_RESOURCE_NAME })
 export class Group extends EntityResource implements GroupModel {
   @withOneToManyField({ Resource: () => Access, root: GROUP_RESOURCE_NAME })
-  [ACCESS_RESOURCE_NAME]?: CollectionModel<AccessModel> = new Collection(this);
+  [ACCESS_RESOURCE_NAME]?: PartialArrayModel<AccessModel>;
 
   @withOneToManyField({ Resource: () => Role, root: GROUP_RESOURCE_NAME })
-  [ROLE_RESOURCE_NAME]?: CollectionModel<RoleModel> = new Collection(this);
+  [ROLE_RESOURCE_NAME]?: PartialArrayModel<RoleModel>;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   logo?: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true })
   name!: string;
 
-  @withField({ isArray: true, isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   types?: Array<GROUP_TYPE>;
 }
 

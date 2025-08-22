@@ -6,14 +6,13 @@ import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 import { User } from '@lib/model/user/User/User.entity';
 import { type UserModel } from '@lib/model/user/User/User.models';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: SIGN_IN_RESOURCE_NAME })
 export class SignIn extends EntityResource implements SignInModel {
-  @withField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
+  @withField({ isOptional: true })
   isNew?: boolean;
 
-  @withField({ type: DATA_TYPE.STRING })
+  @withField()
   token!: string;
 
   @withField({ Resource: () => User })

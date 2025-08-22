@@ -4,7 +4,7 @@ import { type ResourceImplementationModel } from '@lib/shared/resource/utils/Res
 
 export type DatabaseModel = _DatabaseModel;
 
-export type RepositoryModel<TType> = ResourceImplementationModel<TType> & {
+export type RepositoryModel<TType extends unknown> = ResourceImplementationModel<TType> & {
   clear(): Promise<void>;
   count(filter?: Array<FilterModel<TType>>): Promise<number>;
   flush(): Promise<void>;

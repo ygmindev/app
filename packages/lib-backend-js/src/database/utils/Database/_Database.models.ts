@@ -10,4 +10,4 @@ export type _DatabaseModel = {
   isConnected(): Promise<boolean>;
 };
 
-export type GetRepositoryParamsModel<TType> = ResourceNameParamsModel | { name: ClassModel<TType> };
+export type GetRepositoryParamsModel<TType extends unknown> = ResourceNameParamsModel | { name: ClassModel<TType> };

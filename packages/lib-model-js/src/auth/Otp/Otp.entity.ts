@@ -6,7 +6,6 @@ import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { OTP_RESOURCE_NAME } from '@lib/model/auth/Otp/Otp.constants';
 import { type OtpModel } from '@lib/model/auth/Otp/Otp.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({
   indices: [{ keys: ['email', 'phone'], type: 'text' }],
@@ -14,7 +13,7 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
   name: OTP_RESOURCE_NAME,
 })
 export class Otp extends EntityResource implements OtpModel {
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   callingCode?: string;
 
   @withField({
@@ -25,17 +24,17 @@ export class Otp extends EntityResource implements OtpModel {
   })
   created!: Date;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   email?: string;
 
-  @withField({ type: DATA_TYPE.BOOLEAN })
+  @withField({ isOptional: true })
   isCheckExists?: boolean;
 
   @withAccess({ access: ACCESS_LEVEL.RESTRICTED })
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   otp?: string;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   phone?: string;
 }
 

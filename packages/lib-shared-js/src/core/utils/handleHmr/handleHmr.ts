@@ -6,6 +6,5 @@ import {
 
 export const handleHmr = ({ ...params }: HandleHmrParamsModel): HandleHmrModel => {
   (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
-    !process.env.NODE_RUNTIME &&
     _handleHmr({ ...params });
 };

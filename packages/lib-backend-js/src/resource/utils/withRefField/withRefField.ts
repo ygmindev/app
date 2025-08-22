@@ -3,7 +3,6 @@ import {
   type WithRefFieldModel,
   type WithRefFieldParamsModel,
 } from '@lib/backend/resource/utils/withRefField/withRefField.models';
-import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
 export const withRefField =
   <TType extends unknown>({
@@ -12,7 +11,6 @@ export const withRefField =
     isDatabase = false,
     isOptional = true,
     leaf,
-    name,
     relation,
     root,
   }: WithRefFieldParamsModel<TType>): WithRefFieldModel =>
@@ -23,8 +21,6 @@ export const withRefField =
       isDatabase,
       isOptional,
       leaf,
-      name,
       relation,
       root,
-      type: PROPERTY_TYPE.RESOURCE,
     })(target, propertyKey);

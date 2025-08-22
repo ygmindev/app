@@ -15,6 +15,6 @@ export class TestableRelatedResourceImplementation
     Resource: TestableRelatedResource,
     RootImplementation: TestableEntityResourceImplementation,
     name: 'relatedOneToMany',
-    root: 'rootOneToMany',
+    root: 'rootManyToOne',
   })
   implements TestableRelatedResourceImplementationModel {}

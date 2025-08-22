@@ -6,22 +6,21 @@ import {
   PaymentMethodModel,
 } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: PAYMENT_METHOD_RESOURCE_NAME })
 export class PaymentMethod extends EntityResource implements PaymentMethodModel {
-  @withField({ type: DATA_TYPE.STRING })
+  @withField()
   externalId!: string;
 
-  @withField({ type: DATA_TYPE.STRING })
+  @withField()
   fingerprint!: string;
 
-  @withField({ type: DATA_TYPE.STRING })
+  @withField()
   last4!: string;
 
-  @withField({ type: DATA_TYPE.STRING })
+  @withField()
   name!: string;
 
-  @withField({ type: DATA_TYPE.STRING })
+  @withField()
   type!: PAYMENT_METHOD_TYPE;
 }

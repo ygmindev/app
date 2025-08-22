@@ -1,48 +1,162 @@
-// import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
-// import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { esbuildDecorators } from '@anatine/esbuild-decorators';
+import { parse } from '@babel/parser';
+import { default as _traverse } from '@babel/traverse';
+import { isIdentifier, isMemberExpression } from '@babel/types';
+import { esbuildFlowPlugin } from '@bunchtogether/vite-plugin-flow';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
+import { type EnvironmentConfigModel } from '@lib/config/environment/environment.models';
 import { PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
-import { _plugins, esbuildPluginResolveAlias } from '@lib/config/node/bundle/_plugins';
 import { BUNDLE_FORMAT } from '@lib/config/node/bundle/bundle.constants';
 import {
   type _BundleConfigModel,
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
-// import { config as lintConfig, lintCommand } from '@lib/config/node/lint/lint';
 import { lintCommand } from '@lib/config/node/lint/lint';
-import { type PartialModel } from '@lib/shared/core/core.models';
-// import {config as pacakgeManagerConfig} from '@lib/config/node/packageManager/packageManager';
+import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type PlatformModel } from '@lib/shared/platform/platform.models';
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
+import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
 import { default as rollupPluginCommonjs } from '@rollup/plugin-commonjs';
-// import { default as rollupPluginEslint } from '@rollup/plugin-eslint';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
 import { default as rollupPluginTerser } from '@rollup/plugin-terser';
 import { default as rollupPluginTypescript } from '@rollup/plugin-typescript';
-// import circularDependencyPlugin from 'vite-plugin-circular-dependency';
 import react from '@vitejs/plugin-react-swc';
-import { type BuildOptions } from 'esbuild';
-import { existsSync } from 'fs';
+import { type BuildOptions, type Plugin as EsbuildPlugin } from 'esbuild';
+import { nodeExternalsPlugin } from 'esbuild-node-externals';
+import esbuildPluginTsc from 'esbuild-plugin-tsc';
+import { existsSync, readFileSync } from 'fs';
 import { getTsconfig } from 'get-tsconfig';
 import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
-import { type Plugin as RollupPlugin, type RollupOptions } from 'rollup';
+import { sep } from 'path';
+import posix from 'path/posix';
+import { type RollupOptions } from 'rollup';
 import esbuildPlugin from 'rollup-plugin-esbuild';
 import { nodeExternals } from 'rollup-plugin-node-externals';
-// import { visualizer } from 'rollup-plugin-visualizer';
 import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
 import { checker } from 'vite-plugin-checker';
+
+type TraverseModel = typeof _traverse;
+const traverse = (_traverse as unknown as { default: TraverseModel }).default ?? _traverse;
+
+export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): EsbuildPlugin => ({
+  name: 'plugin:excludeVendorFromSourceMap',
+  setup(build) {
+    const emptySourceMap =
+      '\n//# sourceMappingURL=data:application/json;base64,' +
+      Buffer.from(JSON.stringify({ mappings: 'A', sources: [''], version: 3 })).toString('base64');
+    build.onLoad({ filter: /node_modules/ }, async (args) => {
+      if (
+        /\.[mc]?js$/.test(args.path) &&
+        !new RegExp(includes.join('|'), 'u').test(args.path.split(sep).join(posix.sep))
+      ) {
+        return {
+          contents: `${readFileSync(args.path, 'utf8')}${emptySourceMap}`,
+          loader: 'default',
+        };
+      }
+    });
+  },
+});
+
+export const esbuildEnvVarCollect = ({
+  buildDir,
+  envFilename,
+}: {
+  buildDir: string;
+  envFilename: string;
+}): EsbuildPlugin => {
+  const used = new Set<{ key: StringKeyModel<EnvironmentConfigModel>; path: string }>();
+  return {
+    name: 'plugin:envVarCollect',
+    setup(build) {
+      build.onLoad({ filter: /\.[tj]sx?$/ }, async (args) => {
+        const code = readFileSync(args.path, 'utf-8');
+        const ast = parse(code, {
+          plugins: ['typescript', 'jsx', 'importAttributes'],
+          sourceType: 'module',
+        });
+        traverse(ast, {
+          ImportDeclaration(path) {
+            if (path.node.importKind === 'type') {
+              path.skip();
+            }
+          },
+
+          MemberExpression(path) {
+            const { object, property } = path.node;
+            if (
+              isMemberExpression(object) &&
+              isIdentifier(object.object, { name: 'process' }) &&
+              isIdentifier(object.property, { name: 'env' }) &&
+              isIdentifier(property)
+            ) {
+              used.add({
+                key: property.name as StringKeyModel<EnvironmentConfigModel>,
+                path: args.path,
+              });
+            }
+          },
+        });
+        return { contents: code, loader: 'ts' };
+      });
+
+      build.onEnd(() => {
+        const env = reduce(
+          [...used],
+          (result, v) => (process.env[v.key] ? { ...result, [v.key]: process.env[v.key] } : result),
+          {} as EnvironmentConfigModel,
+        );
+        const dotenv = Object.entries(env)
+          .map(([key, val]) => `${key}=${val}`)
+          .join('\n');
+        writeFile({ filename: fromWorking(buildDir, envFilename), value: dotenv });
+      });
+    },
+  };
+};
+
+export const esbuildPluginResolveAlias = (
+  aliases: Array<{ from: RegExp | string; to: string }>,
+): EsbuildPlugin => ({
+  name: 'plugin:resolveAlias',
+  setup(build) {
+    build.onResolve(
+      {
+        filter: new RegExp(
+          `^${aliases
+            .map(({ from }) =>
+              from instanceof RegExp ? from.source : from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+            )
+            .join('|')}$`,
+        ),
+        namespace: 'file',
+      },
+      ({ path }) => {
+        const match = aliases.find(({ from }) =>
+          from instanceof RegExp ? from.test(path) : from === path,
+        );
+        return match
+          ? {
+              external: true,
+              path: match.from instanceof RegExp ? path.replace(match.from, match.to) : match.to,
+            }
+          : null;
+      },
+    );
+  },
+});
 
 function vitePluginIsomorphicImport(serverExtension: string): Plugin {
   return {
@@ -126,20 +240,6 @@ export const _bundle = ({
   ];
   const transpileAll = [...(transpileModules ?? []), ...(transpilePatternsF ?? [])];
 
-  const rollupPlugins: Array<RollupPlugin> = filterNil([
-    provide && inject(provide),
-
-    babel &&
-      babelPlugin({
-        babelHelpers: 'runtime',
-        compact: process.env.NODE_ENV === 'production',
-        minified: process.env.NODE_ENV === 'production',
-        plugins: babel.plugins,
-        presets: babel.presets,
-        skipPreflightCheck: true,
-      } as RollupBabelInputPluginOptions),
-  ]);
-
   const rollupOptions: RollupOptions = {
     external: externals
       ? (name: string) => some(externals.map((v) => (isString(v) ? name === v : v.test(name))))
@@ -149,15 +249,7 @@ export const _bundle = ({
       process.env.ENV_PLATFORM === PLATFORM.NODE &&
         nodeExternals({ exclude: transpileAll, include: externals }),
 
-      resolve({
-        extensions,
-        // extensions,
-        // browser: true,
-        // modulePaths: rootDirs.map((root) =>
-        //   joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
-        // ),
-        // modulesOnly: true,
-      }),
+      resolve({ extensions }),
     ],
   };
 
@@ -177,6 +269,14 @@ export const _bundle = ({
       copyPublicDir: false,
 
       emptyOutDir: true,
+
+      lib:
+        format === BUNDLE_FORMAT.CJS
+          ? {
+              entry: 'src/index.ts',
+              formats: ['cjs'],
+            }
+          : undefined,
 
       minify: process.env.NODE_ENV === 'production',
 
@@ -214,22 +314,38 @@ export const _bundle = ({
 
         minify: process.env.NODE_ENV === 'production',
 
-        // nodePaths: rootDirs.map((root) =>
-        //   joinPaths([root, pacakgeManagerConfig.params().modulesDir]),
-        // ),
-
         platform: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
 
-        plugins: _plugins({
-          buildDir,
-          envFilename,
-          extensions,
-          externals,
-          format,
-          rootDirs,
-          transpileModules,
-          transpilePatterns: transpilePatternsF,
-        }) as Array<never>,
+        plugins: filterNil([
+          {
+            name: 'js-to-jsx',
+            setup(build) {
+              build.onLoad({ filter: /node_modules\/.*\.[j|t]s?$/ }, (args) => ({
+                contents: readFileSync(args.path, 'utf8'),
+                loader: 'tsx',
+              }));
+            },
+          } as EsbuildPlugin,
+
+          esbuildPluginTsc({ tsconfigPath: fromWorking('tsconfig.json') }),
+
+          esbuildDecorators({ force: true, tsconfig: fromWorking('tsconfig.json'), tsx: true }),
+
+          transpileModules?.length && esbuildCommonjs(transpileModules),
+
+          esbuildPluginExcludeVendorFromSourceMap(),
+
+          process.env.NODE_ENV === 'production' && esbuildEnvVarCollect({ buildDir, envFilename }),
+
+          (esbuildFlowPlugin as () => unknown)() as Plugin,
+
+          externals?.length &&
+            nodeExternalsPlugin({
+              allowList: [...(transpileModules ?? []), ...(transpilePatternsF ?? [])],
+              forceExternalList: externals,
+              packagePath: rootDirs?.map((path) => joinPaths([path, 'package.json'])),
+            }),
+        ]) as Array<EsbuildPlugin>,
 
         resolveExtensions: extensions,
 
@@ -246,7 +362,19 @@ export const _bundle = ({
     },
 
     plugins: filterNil([
-      ...rollupPlugins,
+      ...filterNil([
+        provide && inject(provide),
+
+        babel &&
+          babelPlugin({
+            babelHelpers: 'runtime',
+            compact: process.env.NODE_ENV === 'production',
+            minified: process.env.NODE_ENV === 'production',
+            plugins: babel.plugins,
+            presets: babel.presets,
+            skipPreflightCheck: true,
+          } as RollupBabelInputPluginOptions),
+      ]),
 
       serverExtension && vitePluginIsomorphicImport(serverExtension),
 

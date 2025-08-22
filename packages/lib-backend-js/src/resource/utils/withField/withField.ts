@@ -6,4 +6,4 @@ import {
 
 export const withField = <TType extends unknown>({
   ...params
-}: WithFieldParamsModel<TType>): WithFieldModel => _withField({ ...params });
+}: WithFieldParamsModel<TType> = {}): WithFieldModel => _withField({ ...params });

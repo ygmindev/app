@@ -1,4 +1,4 @@
-export enum FIELD_TYPE {
+export enum FORM_FIELD_TYPE {
   ADDRESS = 'address',
   CATEGORY = 'category',
   DATE = 'date',

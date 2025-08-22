@@ -1,5 +1,3 @@
-import { Collection } from '@lib/backend/core/utils/Collection/Collection';
-import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
@@ -11,6 +9,7 @@ import { type TestableEntityResourceModel } from '@lib/model/test/TestableEntity
 import { TestableRelatedResource } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.entity';
 import { TestableRelatedResourceModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.models';
 import { TestableResource } from '@lib/model/test/TestableResource/TestableResource';
+import { PartialArrayModel } from '@lib/shared/core/core.models';
 
 @withEntity({ isDatabase: true, name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME })
 export class TestableEntityResource
@@ -18,13 +17,13 @@ export class TestableEntityResource
   implements TestableEntityResourceModel
 {
   @withEmbeddedField({ Resource: () => TestableEmbeddedResource })
-  embedded?: Array<TestableEmbeddedResourceModel>;
+  embedded?: PartialArrayModel<TestableEmbeddedResourceModel>;
 
   @withManyToManyField({ Resource: () => TestableRelatedResource, root: 'rootManyToMany' })
-  relatedManyToMany?: CollectionModel<TestableRelatedResourceModel> = new Collection(this);
+  relatedManyToMany?: PartialArrayModel<TestableRelatedResourceModel>;
 
-  @withOneToManyField({ Resource: () => TestableRelatedResource, root: 'rootOneToMany' })
-  relatedOneToMany?: CollectionModel<TestableRelatedResourceModel> = new Collection(this);
+  @withOneToManyField({ Resource: () => TestableRelatedResource, root: 'rootManyToOne' })
+  relatedOneToMany?: PartialArrayModel<TestableRelatedResourceModel>;
 }
 
 export default TestableEntityResource;

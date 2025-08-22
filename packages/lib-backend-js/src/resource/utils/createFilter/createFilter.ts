@@ -5,15 +5,13 @@ import {
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import {
+  PartialArrayModel,
   type PartialModel,
   type PrimitiveModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
-import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
-import {
-  type FilterConditionModel,
-  type FilterModel,
-} from '@lib/shared/resource/utils/Filter/Filter.models';
+import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
+import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 
 export const createFilter = <TType extends unknown>({
   Resource,
@@ -21,31 +19,31 @@ export const createFilter = <TType extends unknown>({
 }: CreateFilterParamsModel<TType>): CreateFilterModel<TType> => {
   @withEntity({ name: `${name}Filter` })
   class Filter implements FilterModel<TType> {
-    @withField({ type: DATA_TYPE.BOOLEAN })
+    @withField({ isOptional: true })
     booleanValue?: boolean;
 
-    @withField({ type: DATA_TYPE.STRING })
-    condition!: FilterConditionModel;
+    @withField()
+    condition!: FILTER_CONDITION;
 
-    @withField({ Resource: () => Date })
+    @withField({ isOptional: true })
     dateValue?: Date;
 
-    @withField({ type: DATA_TYPE.STRING })
+    @withField()
     field!: StringKeyModel<TType>;
 
-    @withField({ Resource, isArray: true, type: PROPERTY_TYPE.RESOURCE })
-    resourceArrayValue?: Array<PartialModel<TType>>;
-
-    @withField({ Resource, type: PROPERTY_TYPE.RESOURCE })
-    resourceValue?: PartialModel<TType>;
-
-    @withField({ type: DATA_TYPE.NUMBER })
+    @withField({ isOptional: true })
     numberValue?: number;
 
-    @withField({ isArray: true, type: DATA_TYPE.STRING })
+    @withField({ Resource, isOptional: true })
+    resourceArrayValue?: PartialArrayModel<TType>;
+
+    @withField({ Resource })
+    resourceValue?: PartialModel<TType>;
+
+    @withField({ isOptional: true })
     stringArrayValue?: Array<string>;
 
-    @withField({ type: DATA_TYPE.STRING })
+    @withField({ isOptional: true })
     stringValue?: string;
 
     value?: PrimitiveModel | keyof TType;

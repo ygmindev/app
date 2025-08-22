@@ -1,9 +1,11 @@
 import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
-import { type FieldRelation } from '@lib/backend/resource/utils/withField/withField.models';
+import {
+  type FIELD_RELATION,
+  type FIELD_TYPE,
+} from '@lib/backend/resource/utils/withField/withField.constants';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
-import { type DataTypeModel, type FieldTypeModel } from '@lib/shared/data/data.models';
 
-export type _WithFieldParamsModel<TType> = {
+export type _WithFieldParamsModel<TType extends unknown> = {
   expire?: number;
   isArray?: boolean;
   isDatabase?: boolean;
@@ -11,10 +13,9 @@ export type _WithFieldParamsModel<TType> = {
   isSchema?: boolean;
   isUnique?: boolean;
   leaf?: StringKeyModel<TType>;
-  name?: string;
-  relation?: FieldRelation;
+  relation?: FIELD_RELATION;
   root?: StringKeyModel<TType>;
-  type?: DataTypeModel | FieldTypeModel;
+  type?: FIELD_TYPE;
   Resource?(): ResourceClassModel<TType>;
   defaultValue?(): TType;
 };

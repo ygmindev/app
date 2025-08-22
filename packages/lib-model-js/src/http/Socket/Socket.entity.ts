@@ -4,11 +4,10 @@ import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
 import { SOCKET_RESOURCE_NAME } from '@lib/model/http/Socket/Socket.constants';
 import { type SocketModel } from '@lib/model/http/Socket/Socket.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ isDatabase: true, name: SOCKET_RESOURCE_NAME })
 export class Socket extends EntityResource implements SocketModel {
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true })
   connections!: Array<string>;
 
   @withField({
@@ -19,7 +18,7 @@ export class Socket extends EntityResource implements SocketModel {
   })
   created!: Date;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isDatabase: true, isOptional: true })
   name?: string;
 }
 

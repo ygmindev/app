@@ -1,13 +1,13 @@
 import { Accordion } from '@lib/frontend/animation/components/Accordion/Accordion';
+import { type SpecificationDetailPropsModel } from '@lib/frontend/api/components/SpecificationDetail/SpecificationDetail.models';
 import { Chip } from '@lib/frontend/core/components/Chip/Chip';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
-import { type SpecificationDetailPropsModel } from '@lib/frontend/api/components/SpecificationDetail/SpecificationDetail.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import { FIELD_TYPE } from '@lib/shared/api/utils/Field/Field.constants';
+import { FORM_FIELD_TYPE } from '@lib/shared/api/utils/Field/Field.constants';
 import { type ReactElement } from 'react';
 
 export const SpecificationDetail = <TType,>({
@@ -24,7 +24,7 @@ export const SpecificationDetail = <TType,>({
       <Text isBold>{specification.name}</Text>
 
       {specification.fields.map((field) => {
-        const isProperty = field.type === FIELD_TYPE.PROPERTY;
+        const isProperty = field.type === FORM_FIELD_TYPE.PROPERTY;
         return (
           <Accordion
             isTransparent

@@ -9,7 +9,7 @@
         "rootManyToMany": {
           "$ref": "#/definitions/CollectionModel<TestableEntityResourceModel>"
         },
-        "rootOneToMany": {
+        "rootManyToOne": {
           "$ref": "#/definitions/RefModel<TestableEntityResourceModel>"
         },
         "date": {

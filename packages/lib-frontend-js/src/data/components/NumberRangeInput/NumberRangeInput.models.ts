@@ -1,6 +1,6 @@
 import { type NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput.constants';
 import { type InputPropsModel, type InputRefModel } from '@lib/frontend/data/data.models';
-import { type NumberRangeModel } from '@lib/model/data/NumberRange/NumberRange.models';
+import { type NumberRangeModel } from '@lib/shared/data/utils/NumberRange/NumberRange.models';
 import {
   type NumberUnitModel,
   type NumberUnitTypeModel,

@@ -4,19 +4,14 @@ import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
 import { PAYMENT_INPUT } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.constants';
 import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
-import { type PartialModel } from '@lib/shared/core/core.models';
-import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
+import { PartialArrayModel } from '@lib/shared/core/core.models';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: PAYMENT_INPUT })
 export class PaymentInput implements PaymentInputModel {
   @withField({ isOptional: true, type: DATA_TYPE.STRING })
   paymentMethodId?: string;
 
-  @withField({
-    Resource: () => ProductItem,
-    isArray: true,
-    isOptional: true,
-    type: PROPERTY_TYPE.RESOURCE,
-  })
-  products?: Array<PartialModel<ProductItemModel>>;
+  @withField({ Resource: () => ProductItem, isArray: true, isOptional: true })
+  products?: PartialArrayModel<ProductItemModel>;
 }
