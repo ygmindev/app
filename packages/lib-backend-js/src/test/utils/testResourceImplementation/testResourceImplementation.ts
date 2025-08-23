@@ -276,6 +276,39 @@ export const testResourceImplementation = <
       expect(getResult?.string).toStrictEqual(NEW_VALUE);
     });
 
+    test('works with upsert by partial', async () => {
+      const VALUE_UNKNOWN = 'does not exist';
+      const NEW_VALUE = 'new';
+
+      // Do nothing for non-existant partial
+      const { result: updateResultNull } = await implementation.update({
+        filter: [{ field: 'string', value: VALUE_UNKNOWN }],
+        options: { isUpsert: false },
+        root,
+        update: { isFixture: true, string: NEW_VALUE } as UpdateModel<TType>,
+      });
+      expect(updateResultNull).toBeFalsy();
+      const { result: getResultNull } = await implementation.get({
+        filter: [{ field: 'string', value: VALUE_UNKNOWN }],
+        root,
+      });
+      expect(getResultNull?.string).toBeFalsy();
+
+      // Upsert for existing partial
+      const { result: updateResult } = await implementation.update({
+        filter: [{ field: 'string', value: first?.string }],
+        options: { isUpsert: true },
+        root,
+        update: { isFixture: true, string: NEW_VALUE } as UpdateModel<TType>,
+      });
+      expect(updateResult?.string).toStrictEqual(NEW_VALUE);
+      const { result: getResult } = await implementation.get({
+        filter: [{ field: 'string', value: NEW_VALUE }],
+        root,
+      });
+      expect(getResult?.string).toStrictEqual(NEW_VALUE);
+    });
+
     //   test('works with update by push', async () => {
     //     const { result: data = [] } = await implementation.getMany({ filter: [] });
     //     const input = {
