@@ -21,8 +21,6 @@ import {
 } from '@mikro-orm/mongodb';
 import { Field, Float } from 'type-graphql';
 
-// import schemas from '../../../../../lib-model-js/__dist__/schemas.json';
-
 export const _withField =
   <TType extends unknown>({
     Resource,
@@ -39,19 +37,9 @@ export const _withField =
     type,
   }: _WithFieldParamsModel<TType> = {}): _WithFieldModel =>
   (target, propertyKey) => {
-    // const name = target?.constructor?.name;
-    // const schema = name
-    //   ? (schemas as Record<string, Record<string, FieldSchemaModel>>)[name]?.[propertyKey as string]
-    //   : undefined;
-
-    // const typeF = type ?? schema?.type;
-    // const isArrayF = isArray ?? schema?.isArray;
-    const typeF = type;
-    const isArrayF = isArray;
-
     const isResource = !!Resource;
-    const isId = typeF === PROPERTY_TYPE.ID || typeF === PROPERTY_TYPE.PRIMARY_KEY;
-    const isDate = typeF === DATA_TYPE.DATE;
+    const isId = type === PROPERTY_TYPE.ID || type === PROPERTY_TYPE.PRIMARY_KEY;
+    const isDate = type === DATA_TYPE.DATE;
 
     let gqlType: () => object = () => String;
     let ormType: PropertyOptions<unknown>['type'] = 'string';
@@ -65,7 +53,7 @@ export const _withField =
         ormType = Date;
         gqlType = () => Date;
       } else {
-        switch (typeF) {
+        switch (type) {
           case DATA_TYPE.STRING: {
             ormType = 'string';
             gqlType = () => String;
@@ -84,9 +72,10 @@ export const _withField =
         }
       }
     }
-    if (isArrayF) {
+    if (isArray) {
+      const gqlTypeF = gqlType();
       ormType = ArrayType;
-      gqlType = () => [gqlType()];
+      gqlType = () => [gqlTypeF];
     }
 
     // GraphQl
@@ -107,7 +96,7 @@ export const _withField =
         const entity = Resource as () => EntityClass<TType>;
         switch (relation) {
           case FIELD_RELATION.EMBEDDED: {
-            Embedded({ array: isArrayF, entity, nullable: isOptional, object: !isArrayF })(
+            Embedded({ array: isArray, entity, nullable: isOptional, object: !isArray })(
               target,
               propertyKey as string,
             );

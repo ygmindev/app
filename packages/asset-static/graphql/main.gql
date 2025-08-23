@@ -5,20 +5,20 @@
 
 type Access {
   Group: Group
-  Role: [String]
+  Role: String
   User: User
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
 }
 
 input AccessCreateFormInput {
   Group: GroupInput
-  Role: [String]
+  Role: String
   User: UserInput
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
 }
 
 input AccessCreateInput {
@@ -28,15 +28,15 @@ input AccessCreateInput {
 
 input AccessCreateManyFormInput {
   Group: GroupInput
-  Role: [String]
+  Role: String
   User: UserInput
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
 }
 
 input AccessCreateManyInput {
-  form: [AccessCreateManyFormInput]
+  form: AccessCreateManyFormInput
   root: String
 }
 
@@ -64,14 +64,14 @@ input AccessGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [AccessInput]
+  resourceArrayValue: [AccessInput!]
   resourceValue: AccessInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input AccessGetConnectionInput {
-  filter: [AccessGetConnectionFilterInput]
+  filter: AccessGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -86,15 +86,15 @@ input AccessGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [AccessInput]
+  resourceArrayValue: [AccessInput!]
   resourceValue: AccessInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input AccessGetInput {
-  filter: [AccessGetFilterInput]
-  id: [String]
+  filter: AccessGetFilterInput
+  id: String
   root: String
 }
 
@@ -104,14 +104,14 @@ input AccessGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [AccessInput]
+  resourceArrayValue: [AccessInput!]
   resourceValue: AccessInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input AccessGetManyInput {
-  filter: [AccessGetManyFilterInput]
+  filter: AccessGetManyFilterInput
   root: String
 }
 
@@ -125,14 +125,14 @@ input AccessGetManyProtectedGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [AccessInput]
+  resourceArrayValue: [AccessInput!]
   resourceValue: AccessInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input AccessGetManyProtectedGetManyInput {
-  filter: [AccessGetManyProtectedGetManyFilterInput]
+  filter: AccessGetManyProtectedGetManyFilterInput
   root: String
 }
 
@@ -146,11 +146,11 @@ type AccessGetOutput {
 
 input AccessInput {
   Group: GroupInput
-  Role: [String]
+  Role: String
   User: UserInput
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
 }
 
 input AccessRemoveFilterInput {
@@ -159,15 +159,15 @@ input AccessRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [AccessInput]
+  resourceArrayValue: [AccessInput!]
   resourceValue: AccessInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input AccessRemoveInput {
-  filter: [AccessRemoveFilterInput]
-  id: [String]
+  filter: AccessRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -176,7 +176,7 @@ type AccessRemoveOutput {
 }
 
 input AccessSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -191,15 +191,15 @@ input AccessUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [AccessInput]
+  resourceArrayValue: [AccessInput!]
   resourceValue: AccessInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input AccessUpdateInput {
-  filter: [AccessUpdateFilterInput]
-  id: [String]
+  filter: AccessUpdateFilterInput
+  id: String
   root: String
   update: AccessUpdateUpdateInput
 }
@@ -210,33 +210,33 @@ type AccessUpdateOutput {
 
 input AccessUpdateUpdateInput {
   Group: GroupInput
-  Role: [String]
+  Role: String
   User: UserInput
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
 }
 
 type Bank {
-  User: [User]
+  User: User
   _id: String
   created: DateTimeISO
   externalId: String
   fingerprint: String
-  isFixture: Boolean
-  isPrimary: Boolean
+  isFixture: String
+  isPrimary: String
   last4: String
   name: String
 }
 
 input BankCreateFormInput {
-  User: [UserInput] = []
+  User: UserInput = {}
   _id: String
   created: DateTimeISO
   externalId: String
   fingerprint: String
-  isFixture: Boolean
-  isPrimary: Boolean
+  isFixture: String
+  isPrimary: String
   last4: String
   name: String
 }
@@ -247,19 +247,19 @@ input BankCreateInput {
 }
 
 input BankCreateManyFormInput {
-  User: [UserInput] = []
+  User: UserInput = {}
   _id: String
   created: DateTimeISO
   externalId: String
   fingerprint: String
-  isFixture: Boolean
-  isPrimary: Boolean
+  isFixture: String
+  isPrimary: String
   last4: String
   name: String
 }
 
 input BankCreateManyInput {
-  form: [BankCreateManyFormInput]
+  form: BankCreateManyFormInput
   root: String
 }
 
@@ -289,14 +289,14 @@ input BankGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [BankInput]
+  resourceArrayValue: [BankInput!]
   resourceValue: BankInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input BankGetConnectionInput {
-  filter: [BankGetConnectionFilterInput]
+  filter: BankGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -312,15 +312,15 @@ input BankGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [BankInput]
+  resourceArrayValue: [BankInput!]
   resourceValue: BankInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input BankGetInput {
-  filter: [BankGetFilterInput]
-  id: [String]
+  filter: BankGetFilterInput
+  id: String
   root: String
 }
 
@@ -330,14 +330,14 @@ input BankGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [BankInput]
+  resourceArrayValue: [BankInput!]
   resourceValue: BankInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input BankGetManyInput {
-  filter: [BankGetManyFilterInput]
+  filter: BankGetManyFilterInput
   root: String
 }
 
@@ -352,13 +352,13 @@ type BankGetOutput {
 }
 
 input BankInput {
-  User: [UserInput] = []
+  User: UserInput = {}
   _id: String
   created: DateTimeISO
   externalId: String
   fingerprint: String
-  isFixture: Boolean
-  isPrimary: Boolean
+  isFixture: String
+  isPrimary: String
   last4: String
   name: String
 }
@@ -369,15 +369,15 @@ input BankRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [BankInput]
+  resourceArrayValue: [BankInput!]
   resourceValue: BankInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input BankRemoveInput {
-  filter: [BankRemoveFilterInput]
-  id: [String]
+  filter: BankRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -387,7 +387,7 @@ type BankRemoveOutput {
 }
 
 input BankSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -403,15 +403,15 @@ input BankUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [BankInput]
+  resourceArrayValue: [BankInput!]
   resourceValue: BankInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input BankUpdateInput {
-  filter: [BankUpdateFilterInput]
-  id: [String]
+  filter: BankUpdateFilterInput
+  id: String
   root: String
   update: BankUpdateUpdateInput
 }
@@ -422,43 +422,43 @@ type BankUpdateOutput {
 }
 
 input BankUpdateUpdateInput {
-  User: [UserInput] = []
+  User: UserInput = {}
   _id: String
   created: DateTimeISO
   externalId: String
   fingerprint: String
-  isFixture: Boolean
-  isPrimary: Boolean
+  isFixture: String
+  isPrimary: String
   last4: String
   name: String
 }
 
 type Card {
-  User: [User]
+  User: User
   _id: String
   created: DateTimeISO
-  expMonth: Float
-  expYear: Float
+  expMonth: String
+  expYear: String
   externalId: String
   fingerprint: String
   funding: String
-  isFixture: Boolean
-  isPrimary: Boolean
+  isFixture: String
+  isPrimary: String
   last4: String
   name: String
 }
 
 input CardCreateFormInput {
-  User: [UserInput] = []
+  User: UserInput = {}
   _id: String
   created: DateTimeISO
-  expMonth: Float
-  expYear: Float
+  expMonth: String
+  expYear: String
   externalId: String
   fingerprint: String
   funding: String
-  isFixture: Boolean
-  isPrimary: Boolean
+  isFixture: String
+  isPrimary: String
   last4: String
   name: String
 }
@@ -469,22 +469,22 @@ input CardCreateInput {
 }
 
 input CardCreateManyFormInput {
-  User: [UserInput] = []
+  User: UserInput = {}
   _id: String
   created: DateTimeISO
-  expMonth: Float
-  expYear: Float
+  expMonth: String
+  expYear: String
   externalId: String
   fingerprint: String
   funding: String
-  isFixture: Boolean
-  isPrimary: Boolean
+  isFixture: String
+  isPrimary: String
   last4: String
   name: String
 }
 
 input CardCreateManyInput {
-  form: [CardCreateManyFormInput]
+  form: CardCreateManyFormInput
   root: String
 }
 
@@ -514,14 +514,14 @@ input CardGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [CardInput]
+  resourceArrayValue: [CardInput!]
   resourceValue: CardInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input CardGetConnectionInput {
-  filter: [CardGetConnectionFilterInput]
+  filter: CardGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -537,15 +537,15 @@ input CardGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [CardInput]
+  resourceArrayValue: [CardInput!]
   resourceValue: CardInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input CardGetInput {
-  filter: [CardGetFilterInput]
-  id: [String]
+  filter: CardGetFilterInput
+  id: String
   root: String
 }
 
@@ -555,14 +555,14 @@ input CardGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [CardInput]
+  resourceArrayValue: [CardInput!]
   resourceValue: CardInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input CardGetManyInput {
-  filter: [CardGetManyFilterInput]
+  filter: CardGetManyFilterInput
   root: String
 }
 
@@ -577,16 +577,16 @@ type CardGetOutput {
 }
 
 input CardInput {
-  User: [UserInput] = []
+  User: UserInput = {}
   _id: String
   created: DateTimeISO
-  expMonth: Float
-  expYear: Float
+  expMonth: String
+  expYear: String
   externalId: String
   fingerprint: String
   funding: String
-  isFixture: Boolean
-  isPrimary: Boolean
+  isFixture: String
+  isPrimary: String
   last4: String
   name: String
 }
@@ -597,15 +597,15 @@ input CardRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [CardInput]
+  resourceArrayValue: [CardInput!]
   resourceValue: CardInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input CardRemoveInput {
-  filter: [CardRemoveFilterInput]
-  id: [String]
+  filter: CardRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -615,7 +615,7 @@ type CardRemoveOutput {
 }
 
 input CardSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -631,15 +631,15 @@ input CardUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [CardInput]
+  resourceArrayValue: [CardInput!]
   resourceValue: CardInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input CardUpdateInput {
-  filter: [CardUpdateFilterInput]
-  id: [String]
+  filter: CardUpdateFilterInput
+  id: String
   root: String
   update: CardUpdateUpdateInput
 }
@@ -650,16 +650,16 @@ type CardUpdateOutput {
 }
 
 input CardUpdateUpdateInput {
-  User: [UserInput] = []
+  User: UserInput = {}
   _id: String
   created: DateTimeISO
-  expMonth: Float
-  expYear: Float
+  expMonth: String
+  expYear: String
   externalId: String
   fingerprint: String
   funding: String
-  isFixture: Boolean
-  isPrimary: Boolean
+  isFixture: String
+  isPrimary: String
   last4: String
   name: String
 }
@@ -668,20 +668,20 @@ type Chat {
   _id: String
   created: DateTimeISO
   createdBy: User
-  isFixture: Boolean
-  messages: [Message]
+  isFixture: String
+  messages: Message
   name: String
-  participants: [User]
+  participants: User
 }
 
 input ChatCreateFormInput {
   _id: String
   created: DateTimeISO
   createdBy: UserInput
-  isFixture: Boolean
-  messages: [MessageInput] = []
+  isFixture: String
+  messages: MessageInput = {}
   name: String
-  participants: [UserInput] = []
+  participants: UserInput = {}
 }
 
 input ChatCreateInput {
@@ -693,14 +693,14 @@ input ChatCreateManyFormInput {
   _id: String
   created: DateTimeISO
   createdBy: UserInput
-  isFixture: Boolean
-  messages: [MessageInput] = []
+  isFixture: String
+  messages: MessageInput = {}
   name: String
-  participants: [UserInput] = []
+  participants: UserInput = {}
 }
 
 input ChatCreateManyInput {
-  form: [ChatCreateManyFormInput]
+  form: ChatCreateManyFormInput
   root: String
 }
 
@@ -728,14 +728,14 @@ input ChatGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [ChatInput]
+  resourceArrayValue: [ChatInput!]
   resourceValue: ChatInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ChatGetConnectionInput {
-  filter: [ChatGetConnectionFilterInput]
+  filter: ChatGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -750,15 +750,15 @@ input ChatGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [ChatInput]
+  resourceArrayValue: [ChatInput!]
   resourceValue: ChatInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ChatGetInput {
-  filter: [ChatGetFilterInput]
-  id: [String]
+  filter: ChatGetFilterInput
+  id: String
   root: String
 }
 
@@ -768,14 +768,14 @@ input ChatGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [ChatInput]
+  resourceArrayValue: [ChatInput!]
   resourceValue: ChatInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ChatGetManyInput {
-  filter: [ChatGetManyFilterInput]
+  filter: ChatGetManyFilterInput
   root: String
 }
 
@@ -791,10 +791,10 @@ input ChatInput {
   _id: String
   created: DateTimeISO
   createdBy: UserInput
-  isFixture: Boolean
-  messages: [MessageInput] = []
+  isFixture: String
+  messages: MessageInput = {}
   name: String
-  participants: [UserInput] = []
+  participants: UserInput = {}
 }
 
 input ChatRemoveFilterInput {
@@ -803,15 +803,15 @@ input ChatRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [ChatInput]
+  resourceArrayValue: [ChatInput!]
   resourceValue: ChatInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ChatRemoveInput {
-  filter: [ChatRemoveFilterInput]
-  id: [String]
+  filter: ChatRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -820,7 +820,7 @@ type ChatRemoveOutput {
 }
 
 input ChatSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -835,14 +835,14 @@ input ChatSubscribeFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [MessageInput]
+  resourceArrayValue: [MessageInput!]
   resourceValue: MessageInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ChatSubscribeInput {
-  filter: [ChatSubscribeFilterInput]
+  filter: ChatSubscribeFilterInput
   root: String
 }
 
@@ -856,15 +856,15 @@ input ChatUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [ChatInput]
+  resourceArrayValue: [ChatInput!]
   resourceValue: ChatInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ChatUpdateInput {
-  filter: [ChatUpdateFilterInput]
-  id: [String]
+  filter: ChatUpdateFilterInput
+  id: String
   root: String
   update: ChatUpdateUpdateInput
 }
@@ -877,10 +877,283 @@ input ChatUpdateUpdateInput {
   _id: String
   created: DateTimeISO
   createdBy: UserInput
-  isFixture: Boolean
-  messages: [MessageInput] = []
+  isFixture: String
+  messages: MessageInput = {}
   name: String
-  participants: [UserInput] = []
+  participants: UserInput = {}
+}
+
+type Curve {
+  _id: String
+  created: DateTimeISO
+  date: String
+  isFixture: String
+  lastUpdated: String
+  name: String
+  source: String
+  value_1mo: String
+  value_1yr: String
+  value_2mo: String
+  value_2yr: String
+  value_3mo: String
+  value_3yr: String
+  value_4mo: String
+  value_5mo: String
+  value_5yr: String
+  value_6mo: String
+  value_7yr: String
+  value_10yr: String
+  value_20yr: String
+  value_30yr: String
+  value_40yr: String
+}
+
+input CurveCreateFormInput {
+  _id: String
+  created: DateTimeISO
+  date: String
+  isFixture: String
+  lastUpdated: String
+  name: String
+  source: String
+  value_1mo: String
+  value_1yr: String
+  value_2mo: String
+  value_2yr: String
+  value_3mo: String
+  value_3yr: String
+  value_4mo: String
+  value_5mo: String
+  value_5yr: String
+  value_6mo: String
+  value_7yr: String
+  value_10yr: String
+  value_20yr: String
+  value_30yr: String
+  value_40yr: String
+}
+
+input CurveCreateInput {
+  form: CurveCreateFormInput
+  root: String
+}
+
+input CurveCreateManyFormInput {
+  _id: String
+  created: DateTimeISO
+  date: String
+  isFixture: String
+  lastUpdated: String
+  name: String
+  source: String
+  value_1mo: String
+  value_1yr: String
+  value_2mo: String
+  value_2yr: String
+  value_3mo: String
+  value_3yr: String
+  value_4mo: String
+  value_5mo: String
+  value_5yr: String
+  value_6mo: String
+  value_7yr: String
+  value_10yr: String
+  value_20yr: String
+  value_30yr: String
+  value_40yr: String
+}
+
+input CurveCreateManyInput {
+  form: CurveCreateManyFormInput
+  root: String
+}
+
+type CurveCreateManyOutput {
+  result: Curve
+}
+
+type CurveCreateOutput {
+  result: Curve
+}
+
+type CurveGetConnectionConnection {
+  edges: [CurveGetConnectionEdge]
+  pageInfo: PageInfo
+}
+
+type CurveGetConnectionEdge {
+  cursor: String
+  node: Curve
+}
+
+input CurveGetConnectionFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [CurveInput!]
+  resourceValue: CurveInput
+  stringArrayValue: [String!]
+  stringValue: String
+}
+
+input CurveGetConnectionInput {
+  filter: CurveGetConnectionFilterInput
+  pagination: PaginationInput
+  root: String
+}
+
+type CurveGetConnectionOutput {
+  result: CurveGetConnectionConnection
+}
+
+input CurveGetFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [CurveInput!]
+  resourceValue: CurveInput
+  stringArrayValue: [String!]
+  stringValue: String
+}
+
+input CurveGetInput {
+  filter: CurveGetFilterInput
+  id: String
+  root: String
+}
+
+input CurveGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [CurveInput!]
+  resourceValue: CurveInput
+  stringArrayValue: [String!]
+  stringValue: String
+}
+
+input CurveGetManyInput {
+  filter: CurveGetManyFilterInput
+  root: String
+}
+
+type CurveGetManyOutput {
+  result: [Curve]
+}
+
+type CurveGetOutput {
+  result: Curve
+}
+
+input CurveInput {
+  _id: String
+  created: DateTimeISO
+  date: String
+  isFixture: String
+  lastUpdated: String
+  name: String
+  source: String
+  value_1mo: String
+  value_1yr: String
+  value_2mo: String
+  value_2yr: String
+  value_3mo: String
+  value_3yr: String
+  value_4mo: String
+  value_5mo: String
+  value_5yr: String
+  value_6mo: String
+  value_7yr: String
+  value_10yr: String
+  value_20yr: String
+  value_30yr: String
+  value_40yr: String
+}
+
+input CurveRemoveFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [CurveInput!]
+  resourceValue: CurveInput
+  stringArrayValue: [String!]
+  stringValue: String
+}
+
+input CurveRemoveInput {
+  filter: CurveRemoveFilterInput
+  id: String
+  root: String
+}
+
+type CurveRemoveOutput {
+  result: Curve
+}
+
+input CurveSearchInput {
+  keys: String
+  query: String
+  root: String
+}
+
+type CurveSearchOutput {
+  result: [Curve]
+}
+
+input CurveUpdateFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [CurveInput!]
+  resourceValue: CurveInput
+  stringArrayValue: [String!]
+  stringValue: String
+}
+
+input CurveUpdateInput {
+  filter: CurveUpdateFilterInput
+  id: String
+  root: String
+  update: CurveUpdateUpdateInput
+}
+
+type CurveUpdateOutput {
+  result: Curve
+}
+
+input CurveUpdateUpdateInput {
+  _id: String
+  created: DateTimeISO
+  date: String
+  isFixture: String
+  lastUpdated: String
+  name: String
+  source: String
+  value_1mo: String
+  value_1yr: String
+  value_2mo: String
+  value_2yr: String
+  value_3mo: String
+  value_3yr: String
+  value_4mo: String
+  value_5mo: String
+  value_5yr: String
+  value_6mo: String
+  value_7yr: String
+  value_10yr: String
+  value_20yr: String
+  value_30yr: String
+  value_40yr: String
 }
 
 """
@@ -889,25 +1162,25 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTimeISO
 
 type Group {
-  Access: [Access]
-  Role: [Role]
+  Access: Access
+  Role: Role
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   logo: String
   name: String
-  types: [String]
+  types: String
 }
 
 input GroupCreateFormInput {
-  Access: [AccessInput] = []
-  Role: [RoleInput] = []
+  Access: AccessInput = {}
+  Role: RoleInput = {}
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   logo: String
   name: String
-  types: [String]
+  types: String
 }
 
 input GroupCreateInput {
@@ -916,18 +1189,18 @@ input GroupCreateInput {
 }
 
 input GroupCreateManyFormInput {
-  Access: [AccessInput] = []
-  Role: [RoleInput] = []
+  Access: AccessInput = {}
+  Role: RoleInput = {}
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   logo: String
   name: String
-  types: [String]
+  types: String
 }
 
 input GroupCreateManyInput {
-  form: [GroupCreateManyFormInput]
+  form: GroupCreateManyFormInput
   root: String
 }
 
@@ -955,14 +1228,14 @@ input GroupGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [GroupInput]
+  resourceArrayValue: [GroupInput!]
   resourceValue: GroupInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input GroupGetConnectionInput {
-  filter: [GroupGetConnectionFilterInput]
+  filter: GroupGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -977,15 +1250,15 @@ input GroupGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [GroupInput]
+  resourceArrayValue: [GroupInput!]
   resourceValue: GroupInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input GroupGetInput {
-  filter: [GroupGetFilterInput]
-  id: [String]
+  filter: GroupGetFilterInput
+  id: String
   root: String
 }
 
@@ -995,14 +1268,14 @@ input GroupGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [GroupInput]
+  resourceArrayValue: [GroupInput!]
   resourceValue: GroupInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input GroupGetManyInput {
-  filter: [GroupGetManyFilterInput]
+  filter: GroupGetManyFilterInput
   root: String
 }
 
@@ -1015,14 +1288,14 @@ type GroupGetOutput {
 }
 
 input GroupInput {
-  Access: [AccessInput] = []
-  Role: [RoleInput] = []
+  Access: AccessInput = {}
+  Role: RoleInput = {}
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   logo: String
   name: String
-  types: [String]
+  types: String
 }
 
 input GroupRemoveFilterInput {
@@ -1031,15 +1304,15 @@ input GroupRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [GroupInput]
+  resourceArrayValue: [GroupInput!]
   resourceValue: GroupInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input GroupRemoveInput {
-  filter: [GroupRemoveFilterInput]
-  id: [String]
+  filter: GroupRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -1048,7 +1321,7 @@ type GroupRemoveOutput {
 }
 
 input GroupSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -1063,15 +1336,15 @@ input GroupUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [GroupInput]
+  resourceArrayValue: [GroupInput!]
   resourceValue: GroupInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input GroupUpdateInput {
-  filter: [GroupUpdateFilterInput]
-  id: [String]
+  filter: GroupUpdateFilterInput
+  id: String
   root: String
   update: GroupUpdateUpdateInput
 }
@@ -1081,14 +1354,14 @@ type GroupUpdateOutput {
 }
 
 input GroupUpdateUpdateInput {
-  Access: [AccessInput] = []
-  Role: [RoleInput] = []
+  Access: AccessInput = {}
+  Role: RoleInput = {}
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   logo: String
   name: String
-  types: [String]
+  types: String
 }
 
 input IdInput {
@@ -1099,7 +1372,7 @@ type LinkedUser {
   _id: String
   created: DateTimeISO
   externalId: String
-  isFixture: Boolean
+  isFixture: String
   type: String
 }
 
@@ -1107,7 +1380,7 @@ input LinkedUserCreateFormInput {
   _id: String
   created: DateTimeISO
   externalId: String
-  isFixture: Boolean
+  isFixture: String
   type: String
 }
 
@@ -1120,12 +1393,12 @@ input LinkedUserCreateManyFormInput {
   _id: String
   created: DateTimeISO
   externalId: String
-  isFixture: Boolean
+  isFixture: String
   type: String
 }
 
 input LinkedUserCreateManyInput {
-  form: [LinkedUserCreateManyFormInput]
+  form: LinkedUserCreateManyFormInput
   root: String
 }
 
@@ -1155,14 +1428,14 @@ input LinkedUserGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [LinkedUserInput]
+  resourceArrayValue: [LinkedUserInput!]
   resourceValue: LinkedUserInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input LinkedUserGetConnectionInput {
-  filter: [LinkedUserGetConnectionFilterInput]
+  filter: LinkedUserGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -1178,15 +1451,15 @@ input LinkedUserGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [LinkedUserInput]
+  resourceArrayValue: [LinkedUserInput!]
   resourceValue: LinkedUserInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input LinkedUserGetInput {
-  filter: [LinkedUserGetFilterInput]
-  id: [String]
+  filter: LinkedUserGetFilterInput
+  id: String
   root: String
 }
 
@@ -1196,14 +1469,14 @@ input LinkedUserGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [LinkedUserInput]
+  resourceArrayValue: [LinkedUserInput!]
   resourceValue: LinkedUserInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input LinkedUserGetManyInput {
-  filter: [LinkedUserGetManyFilterInput]
+  filter: LinkedUserGetManyFilterInput
   root: String
 }
 
@@ -1221,7 +1494,7 @@ input LinkedUserInput {
   _id: String
   created: DateTimeISO
   externalId: String
-  isFixture: Boolean
+  isFixture: String
   type: String
 }
 
@@ -1231,15 +1504,15 @@ input LinkedUserRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [LinkedUserInput]
+  resourceArrayValue: [LinkedUserInput!]
   resourceValue: LinkedUserInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input LinkedUserRemoveInput {
-  filter: [LinkedUserRemoveFilterInput]
-  id: [String]
+  filter: LinkedUserRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -1249,7 +1522,7 @@ type LinkedUserRemoveOutput {
 }
 
 input LinkedUserSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -1265,15 +1538,15 @@ input LinkedUserUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [LinkedUserInput]
+  resourceArrayValue: [LinkedUserInput!]
   resourceValue: LinkedUserInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input LinkedUserUpdateInput {
-  filter: [LinkedUserUpdateFilterInput]
-  id: [String]
+  filter: LinkedUserUpdateFilterInput
+  id: String
   root: String
   update: LinkedUserUpdateUpdateInput
 }
@@ -1287,7 +1560,7 @@ input LinkedUserUpdateUpdateInput {
   _id: String
   created: DateTimeISO
   externalId: String
-  isFixture: Boolean
+  isFixture: String
   type: String
 }
 
@@ -1297,7 +1570,7 @@ type Message {
   chat: Chat
   created: DateTimeISO
   createdBy: User
-  isFixture: Boolean
+  isFixture: String
   text: String
 }
 
@@ -1306,7 +1579,7 @@ input MessageCreateFormInput {
   chat: ChatInput
   created: DateTimeISO
   createdBy: UserInput
-  isFixture: Boolean
+  isFixture: String
   text: String
 }
 
@@ -1320,12 +1593,12 @@ input MessageCreateManyFormInput {
   chat: ChatInput
   created: DateTimeISO
   createdBy: UserInput
-  isFixture: Boolean
+  isFixture: String
   text: String
 }
 
 input MessageCreateManyInput {
-  form: [MessageCreateManyFormInput]
+  form: MessageCreateManyFormInput
   root: String
 }
 
@@ -1353,14 +1626,14 @@ input MessageGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [MessageInput]
+  resourceArrayValue: [MessageInput!]
   resourceValue: MessageInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input MessageGetConnectionInput {
-  filter: [MessageGetConnectionFilterInput]
+  filter: MessageGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -1375,15 +1648,15 @@ input MessageGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [MessageInput]
+  resourceArrayValue: [MessageInput!]
   resourceValue: MessageInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input MessageGetInput {
-  filter: [MessageGetFilterInput]
-  id: [String]
+  filter: MessageGetFilterInput
+  id: String
   root: String
 }
 
@@ -1393,14 +1666,14 @@ input MessageGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [MessageInput]
+  resourceArrayValue: [MessageInput!]
   resourceValue: MessageInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input MessageGetManyInput {
-  filter: [MessageGetManyFilterInput]
+  filter: MessageGetManyFilterInput
   root: String
 }
 
@@ -1414,14 +1687,14 @@ input MessageGetManyProtectedGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [MessageInput]
+  resourceArrayValue: [MessageInput!]
   resourceValue: MessageInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input MessageGetManyProtectedGetManyInput {
-  filter: [MessageGetManyProtectedGetManyFilterInput]
+  filter: MessageGetManyProtectedGetManyFilterInput
   root: String
 }
 
@@ -1438,7 +1711,7 @@ input MessageInput {
   chat: ChatInput
   created: DateTimeISO
   createdBy: UserInput
-  isFixture: Boolean
+  isFixture: String
   text: String
 }
 
@@ -1448,15 +1721,15 @@ input MessageRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [MessageInput]
+  resourceArrayValue: [MessageInput!]
   resourceValue: MessageInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input MessageRemoveInput {
-  filter: [MessageRemoveFilterInput]
-  id: [String]
+  filter: MessageRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -1465,7 +1738,7 @@ type MessageRemoveOutput {
 }
 
 input MessageSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -1480,15 +1753,15 @@ input MessageUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [MessageInput]
+  resourceArrayValue: [MessageInput!]
   resourceValue: MessageInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input MessageUpdateInput {
-  filter: [MessageUpdateFilterInput]
-  id: [String]
+  filter: MessageUpdateFilterInput
+  id: String
   root: String
   update: MessageUpdateUpdateInput
 }
@@ -1502,7 +1775,7 @@ input MessageUpdateUpdateInput {
   chat: ChatInput
   created: DateTimeISO
   createdBy: UserInput
-  isFixture: Boolean
+  isFixture: String
   text: String
 }
 
@@ -1523,6 +1796,10 @@ type Mutation {
   ChatCreateMany(input: ChatCreateManyInput): ChatCreateManyOutput
   ChatRemove(input: ChatRemoveInput): ChatRemoveOutput
   ChatUpdate(input: ChatUpdateInput): ChatUpdateOutput
+  CurveCreate(input: CurveCreateInput): CurveCreateOutput
+  CurveCreateMany(input: CurveCreateManyInput): CurveCreateManyOutput
+  CurveRemove(input: CurveRemoveInput): CurveRemoveOutput
+  CurveUpdate(input: CurveUpdateInput): CurveUpdateOutput
   GroupCreate(input: GroupCreateInput): GroupCreateOutput
   GroupCreateMany(input: GroupCreateManyInput): GroupCreateManyOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
@@ -1576,8 +1853,8 @@ type Mutation {
 type Order {
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
-  items: [ProductItem]
+  isFixture: String
+  items: ProductItem
   paymentMethodId: String
   status: String
 }
@@ -1585,8 +1862,8 @@ type Order {
 input OrderCreateFormInput {
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
-  items: [ProductItemInput]
+  isFixture: String
+  items: ProductItemInput
   paymentMethodId: String
   status: String
 }
@@ -1599,14 +1876,14 @@ input OrderCreateInput {
 input OrderCreateManyFormInput {
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
-  items: [ProductItemInput]
+  isFixture: String
+  items: ProductItemInput
   paymentMethodId: String
   status: String
 }
 
 input OrderCreateManyInput {
-  form: [OrderCreateManyFormInput]
+  form: OrderCreateManyFormInput
   root: String
 }
 
@@ -1634,14 +1911,14 @@ input OrderGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [OrderInput]
+  resourceArrayValue: [OrderInput!]
   resourceValue: OrderInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input OrderGetConnectionInput {
-  filter: [OrderGetConnectionFilterInput]
+  filter: OrderGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -1656,15 +1933,15 @@ input OrderGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [OrderInput]
+  resourceArrayValue: [OrderInput!]
   resourceValue: OrderInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input OrderGetInput {
-  filter: [OrderGetFilterInput]
-  id: [String]
+  filter: OrderGetFilterInput
+  id: String
   root: String
 }
 
@@ -1674,14 +1951,14 @@ input OrderGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [OrderInput]
+  resourceArrayValue: [OrderInput!]
   resourceValue: OrderInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input OrderGetManyInput {
-  filter: [OrderGetManyFilterInput]
+  filter: OrderGetManyFilterInput
   root: String
 }
 
@@ -1696,8 +1973,8 @@ type OrderGetOutput {
 input OrderInput {
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
-  items: [ProductItemInput]
+  isFixture: String
+  items: ProductItemInput
   paymentMethodId: String
   status: String
 }
@@ -1708,15 +1985,15 @@ input OrderRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [OrderInput]
+  resourceArrayValue: [OrderInput!]
   resourceValue: OrderInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input OrderRemoveInput {
-  filter: [OrderRemoveFilterInput]
-  id: [String]
+  filter: OrderRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -1725,7 +2002,7 @@ type OrderRemoveOutput {
 }
 
 input OrderSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -1740,15 +2017,15 @@ input OrderUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [OrderInput]
+  resourceArrayValue: [OrderInput!]
   resourceValue: OrderInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input OrderUpdateInput {
-  filter: [OrderUpdateFilterInput]
-  id: [String]
+  filter: OrderUpdateFilterInput
+  id: String
   root: String
   update: OrderUpdateUpdateInput
 }
@@ -1760,8 +2037,8 @@ type OrderUpdateOutput {
 input OrderUpdateUpdateInput {
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
-  items: [ProductItemInput]
+  isFixture: String
+  items: ProductItemInput
   paymentMethodId: String
   status: String
 }
@@ -1771,8 +2048,8 @@ type Otp {
   callingCode: String
   created: DateTimeISO
   email: String
-  isCheckExists: Boolean
-  isFixture: Boolean
+  isCheckExists: String
+  isFixture: String
   otp: String
   phone: String
 }
@@ -1782,8 +2059,8 @@ input OtpCreateFormInput {
   callingCode: String
   created: DateTimeISO
   email: String
-  isCheckExists: Boolean
-  isFixture: Boolean
+  isCheckExists: String
+  isFixture: String
   otp: String
   phone: String
 }
@@ -1798,14 +2075,14 @@ input OtpCreateManyFormInput {
   callingCode: String
   created: DateTimeISO
   email: String
-  isCheckExists: Boolean
-  isFixture: Boolean
+  isCheckExists: String
+  isFixture: String
   otp: String
   phone: String
 }
 
 input OtpCreateManyInput {
-  form: [OtpCreateManyFormInput]
+  form: OtpCreateManyFormInput
   root: String
 }
 
@@ -1833,14 +2110,14 @@ input OtpGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [OtpInput]
+  resourceArrayValue: [OtpInput!]
   resourceValue: OtpInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input OtpGetConnectionInput {
-  filter: [OtpGetConnectionFilterInput]
+  filter: OtpGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -1855,15 +2132,15 @@ input OtpGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [OtpInput]
+  resourceArrayValue: [OtpInput!]
   resourceValue: OtpInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input OtpGetInput {
-  filter: [OtpGetFilterInput]
-  id: [String]
+  filter: OtpGetFilterInput
+  id: String
   root: String
 }
 
@@ -1873,14 +2150,14 @@ input OtpGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [OtpInput]
+  resourceArrayValue: [OtpInput!]
   resourceValue: OtpInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input OtpGetManyInput {
-  filter: [OtpGetManyFilterInput]
+  filter: OtpGetManyFilterInput
   root: String
 }
 
@@ -1897,8 +2174,8 @@ input OtpInput {
   callingCode: String
   created: DateTimeISO
   email: String
-  isCheckExists: Boolean
-  isFixture: Boolean
+  isCheckExists: String
+  isFixture: String
   otp: String
   phone: String
 }
@@ -1909,15 +2186,15 @@ input OtpRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [OtpInput]
+  resourceArrayValue: [OtpInput!]
   resourceValue: OtpInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input OtpRemoveInput {
-  filter: [OtpRemoveFilterInput]
-  id: [String]
+  filter: OtpRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -1926,7 +2203,7 @@ type OtpRemoveOutput {
 }
 
 input OtpSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -1941,15 +2218,15 @@ input OtpUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [OtpInput]
+  resourceArrayValue: [OtpInput!]
   resourceValue: OtpInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input OtpUpdateInput {
-  filter: [OtpUpdateFilterInput]
-  id: [String]
+  filter: OtpUpdateFilterInput
+  id: String
   root: String
   update: OtpUpdateUpdateInput
 }
@@ -1963,29 +2240,29 @@ input OtpUpdateUpdateInput {
   callingCode: String
   created: DateTimeISO
   email: String
-  isCheckExists: Boolean
-  isFixture: Boolean
+  isCheckExists: String
+  isFixture: String
   otp: String
   phone: String
 }
 
 type PageInfo {
   endCursor: String
-  hasNextPage: Boolean
-  hasPreviousPage: Boolean
+  hasNextPage: String
+  hasPreviousPage: String
   startCursor: String
 }
 
 input PaginationInput {
   after: String
   before: String
-  first: Float
-  last: Float
+  first: String
+  last: String
 }
 
 input PaymentInput {
   paymentMethodId: String
-  products: [ProductItemInput]
+  products: [ProductItemInput!]
 }
 
 type PaymentMethod {
@@ -1993,7 +2270,7 @@ type PaymentMethod {
   created: DateTimeISO
   externalId: String
   fingerprint: String
-  isFixture: Boolean
+  isFixture: String
   last4: String
   name: String
   type: String
@@ -2004,7 +2281,7 @@ input PaymentMethodInput {
   created: DateTimeISO
   externalId: String
   fingerprint: String
-  isFixture: Boolean
+  isFixture: String
   last4: String
   name: String
   type: String
@@ -2016,8 +2293,8 @@ type Pricing {
   created: DateTimeISO
   currency: String
   frequency: String
-  isFixture: Boolean
-  price: Float
+  isFixture: String
+  price: String
 }
 
 input PricingCreateFormInput {
@@ -2026,8 +2303,8 @@ input PricingCreateFormInput {
   created: DateTimeISO
   currency: String
   frequency: String
-  isFixture: Boolean
-  price: Float
+  isFixture: String
+  price: String
 }
 
 input PricingCreateInput {
@@ -2041,12 +2318,12 @@ input PricingCreateManyFormInput {
   created: DateTimeISO
   currency: String
   frequency: String
-  isFixture: Boolean
-  price: Float
+  isFixture: String
+  price: String
 }
 
 input PricingCreateManyInput {
-  form: [PricingCreateManyFormInput]
+  form: PricingCreateManyFormInput
   root: String
 }
 
@@ -2076,14 +2353,14 @@ input PricingGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [PricingInput]
+  resourceArrayValue: [PricingInput!]
   resourceValue: PricingInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input PricingGetConnectionInput {
-  filter: [PricingGetConnectionFilterInput]
+  filter: PricingGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -2099,15 +2376,15 @@ input PricingGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [PricingInput]
+  resourceArrayValue: [PricingInput!]
   resourceValue: PricingInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input PricingGetInput {
-  filter: [PricingGetFilterInput]
-  id: [String]
+  filter: PricingGetFilterInput
+  id: String
   root: String
 }
 
@@ -2117,14 +2394,14 @@ input PricingGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [PricingInput]
+  resourceArrayValue: [PricingInput!]
   resourceValue: PricingInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input PricingGetManyInput {
-  filter: [PricingGetManyFilterInput]
+  filter: PricingGetManyFilterInput
   root: String
 }
 
@@ -2144,8 +2421,8 @@ input PricingInput {
   created: DateTimeISO
   currency: String
   frequency: String
-  isFixture: Boolean
-  price: Float
+  isFixture: String
+  price: String
 }
 
 input PricingRemoveFilterInput {
@@ -2154,15 +2431,15 @@ input PricingRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [PricingInput]
+  resourceArrayValue: [PricingInput!]
   resourceValue: PricingInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input PricingRemoveInput {
-  filter: [PricingRemoveFilterInput]
-  id: [String]
+  filter: PricingRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -2172,7 +2449,7 @@ type PricingRemoveOutput {
 }
 
 input PricingSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -2188,15 +2465,15 @@ input PricingUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [PricingInput]
+  resourceArrayValue: [PricingInput!]
   resourceValue: PricingInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input PricingUpdateInput {
-  filter: [PricingUpdateFilterInput]
-  id: [String]
+  filter: PricingUpdateFilterInput
+  id: String
   root: String
   update: PricingUpdateUpdateInput
 }
@@ -2212,27 +2489,27 @@ input PricingUpdateUpdateInput {
   created: DateTimeISO
   currency: String
   frequency: String
-  isFixture: Boolean
-  price: Float
+  isFixture: String
+  price: String
 }
 
 type Product {
-  Pricing: [Pricing]
+  Pricing: Pricing
   _id: String
   created: DateTimeISO
   description: String
-  imageSrc: [String]
-  isFixture: Boolean
+  imageSrc: String
+  isFixture: String
   name: String
 }
 
 input ProductCreateFormInput {
-  Pricing: [PricingInput]
+  Pricing: PricingInput
   _id: String
   created: DateTimeISO
   description: String
-  imageSrc: [String]
-  isFixture: Boolean
+  imageSrc: String
+  isFixture: String
   name: String
 }
 
@@ -2242,17 +2519,17 @@ input ProductCreateInput {
 }
 
 input ProductCreateManyFormInput {
-  Pricing: [PricingInput]
+  Pricing: PricingInput
   _id: String
   created: DateTimeISO
   description: String
-  imageSrc: [String]
-  isFixture: Boolean
+  imageSrc: String
+  isFixture: String
   name: String
 }
 
 input ProductCreateManyInput {
-  form: [ProductCreateManyFormInput]
+  form: ProductCreateManyFormInput
   root: String
 }
 
@@ -2280,14 +2557,14 @@ input ProductGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [ProductInput]
+  resourceArrayValue: [ProductInput!]
   resourceValue: ProductInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ProductGetConnectionInput {
-  filter: [ProductGetConnectionFilterInput]
+  filter: ProductGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -2302,15 +2579,15 @@ input ProductGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [ProductInput]
+  resourceArrayValue: [ProductInput!]
   resourceValue: ProductInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ProductGetInput {
-  filter: [ProductGetFilterInput]
-  id: [String]
+  filter: ProductGetFilterInput
+  id: String
   root: String
 }
 
@@ -2320,14 +2597,14 @@ input ProductGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [ProductInput]
+  resourceArrayValue: [ProductInput!]
   resourceValue: ProductInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ProductGetManyInput {
-  filter: [ProductGetManyFilterInput]
+  filter: ProductGetManyFilterInput
   root: String
 }
 
@@ -2340,12 +2617,12 @@ type ProductGetOutput {
 }
 
 input ProductInput {
-  Pricing: [PricingInput]
+  Pricing: PricingInput
   _id: String
   created: DateTimeISO
   description: String
-  imageSrc: [String]
-  isFixture: Boolean
+  imageSrc: String
+  isFixture: String
   name: String
 }
 
@@ -2371,15 +2648,15 @@ input ProductRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [ProductInput]
+  resourceArrayValue: [ProductInput!]
   resourceValue: ProductInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ProductRemoveInput {
-  filter: [ProductRemoveFilterInput]
-  id: [String]
+  filter: ProductRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -2388,7 +2665,7 @@ type ProductRemoveOutput {
 }
 
 input ProductSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -2403,15 +2680,15 @@ input ProductUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [ProductInput]
+  resourceArrayValue: [ProductInput!]
   resourceValue: ProductInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input ProductUpdateInput {
-  filter: [ProductUpdateFilterInput]
-  id: [String]
+  filter: ProductUpdateFilterInput
+  id: String
   root: String
   update: ProductUpdateUpdateInput
 }
@@ -2421,12 +2698,12 @@ type ProductUpdateOutput {
 }
 
 input ProductUpdateUpdateInput {
-  Pricing: [PricingInput]
+  Pricing: PricingInput
   _id: String
   created: DateTimeISO
   description: String
-  imageSrc: [String]
-  isFixture: Boolean
+  imageSrc: String
+  isFixture: String
   name: String
 }
 
@@ -2448,6 +2725,10 @@ type Query {
   ChatGetConnection(input: ChatGetConnectionInput): ChatGetConnectionOutput
   ChatGetMany(input: ChatGetManyInput): ChatGetManyOutput
   ChatSearch(input: ChatSearchInput): ChatSearchOutput
+  CurveGet(input: CurveGetInput): CurveGetOutput
+  CurveGetConnection(input: CurveGetConnectionInput): CurveGetConnectionOutput
+  CurveGetMany(input: CurveGetManyInput): CurveGetManyOutput
+  CurveSearch(input: CurveSearchInput): CurveSearchOutput
   GroupGet(input: GroupGetInput): GroupGetOutput
   GroupGetConnection(input: GroupGetConnectionInput): GroupGetConnectionOutput
   GroupGetMany(input: GroupGetManyInput): GroupGetManyOutput
@@ -2500,7 +2781,7 @@ type Query {
   VendorGetMany(input: VendorGetManyInput): VendorGetManyOutput
   VendorSearch(input: VendorSearchInput): VendorSearchOutput
   createToken(input: PaymentInput): String
-  paymentMethodGetAll: [PaymentMethod]
+  paymentMethodGetAll: PaymentMethod
   removeToken(input: IdInput): Boolean
   signIn(input: SignInInput): SignIn
   usernameUpdate(input: SignInInput): SignIn
@@ -2511,7 +2792,7 @@ type Role {
   Group: Group
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
@@ -2519,7 +2800,7 @@ input RoleCreateFormInput {
   Group: GroupInput
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
@@ -2532,12 +2813,12 @@ input RoleCreateManyFormInput {
   Group: GroupInput
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
 input RoleCreateManyInput {
-  form: [RoleCreateManyFormInput]
+  form: RoleCreateManyFormInput
   root: String
 }
 
@@ -2567,14 +2848,14 @@ input RoleGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [RoleInput]
+  resourceArrayValue: [RoleInput!]
   resourceValue: RoleInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input RoleGetConnectionInput {
-  filter: [RoleGetConnectionFilterInput]
+  filter: RoleGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -2590,15 +2871,15 @@ input RoleGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [RoleInput]
+  resourceArrayValue: [RoleInput!]
   resourceValue: RoleInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input RoleGetInput {
-  filter: [RoleGetFilterInput]
-  id: [String]
+  filter: RoleGetFilterInput
+  id: String
   root: String
 }
 
@@ -2608,14 +2889,14 @@ input RoleGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [RoleInput]
+  resourceArrayValue: [RoleInput!]
   resourceValue: RoleInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input RoleGetManyInput {
-  filter: [RoleGetManyFilterInput]
+  filter: RoleGetManyFilterInput
   root: String
 }
 
@@ -2633,7 +2914,7 @@ input RoleInput {
   Group: GroupInput
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
@@ -2643,15 +2924,15 @@ input RoleRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [RoleInput]
+  resourceArrayValue: [RoleInput!]
   resourceValue: RoleInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input RoleRemoveInput {
-  filter: [RoleRemoveFilterInput]
-  id: [String]
+  filter: RoleRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -2661,7 +2942,7 @@ type RoleRemoveOutput {
 }
 
 input RoleSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -2677,15 +2958,15 @@ input RoleUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [RoleInput]
+  resourceArrayValue: [RoleInput!]
   resourceValue: RoleInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input RoleUpdateInput {
-  filter: [RoleUpdateFilterInput]
-  id: [String]
+  filter: RoleUpdateFilterInput
+  id: String
   root: String
   update: RoleUpdateUpdateInput
 }
@@ -2699,15 +2980,15 @@ input RoleUpdateUpdateInput {
   Group: GroupInput
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
 type SignIn {
   _id: String
   created: DateTimeISO
-  isFixture: Boolean
-  isNew: Boolean
+  isFixture: String
+  isNew: String
   token: String
   user: User
 }
@@ -2722,8 +3003,8 @@ input SignInInput {
 type Snapshot {
   _id: String
   created: DateTimeISO
-  images: [String]
-  isFixture: Boolean
+  images: String
+  isFixture: String
   name: String
 }
 
@@ -2733,15 +3014,15 @@ input SnapshotGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [SnapshotInput]
+  resourceArrayValue: [SnapshotInput!]
   resourceValue: SnapshotInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input SnapshotGetInput {
-  filter: [SnapshotGetFilterInput]
-  id: [String]
+  filter: SnapshotGetFilterInput
+  id: String
   root: String
 }
 
@@ -2751,14 +3032,14 @@ input SnapshotGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [SnapshotInput]
+  resourceArrayValue: [SnapshotInput!]
   resourceValue: SnapshotInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input SnapshotGetManyInput {
-  filter: [SnapshotGetManyFilterInput]
+  filter: SnapshotGetManyFilterInput
   root: String
 }
 
@@ -2773,8 +3054,8 @@ type SnapshotGetOutput {
 input SnapshotInput {
   _id: String
   created: DateTimeISO
-  images: [String]
-  isFixture: Boolean
+  images: String
+  isFixture: String
   name: String
 }
 
@@ -2782,7 +3063,7 @@ type Socket {
   _id: String
   connections: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
@@ -2790,7 +3071,7 @@ input SocketCreateFormInput {
   _id: String
   connections: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
@@ -2803,12 +3084,12 @@ input SocketCreateManyFormInput {
   _id: String
   connections: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
 input SocketCreateManyInput {
-  form: [SocketCreateManyFormInput]
+  form: SocketCreateManyFormInput
   root: String
 }
 
@@ -2836,14 +3117,14 @@ input SocketGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [SocketInput]
+  resourceArrayValue: [SocketInput!]
   resourceValue: SocketInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input SocketGetConnectionInput {
-  filter: [SocketGetConnectionFilterInput]
+  filter: SocketGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -2858,15 +3139,15 @@ input SocketGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [SocketInput]
+  resourceArrayValue: [SocketInput!]
   resourceValue: SocketInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input SocketGetInput {
-  filter: [SocketGetFilterInput]
-  id: [String]
+  filter: SocketGetFilterInput
+  id: String
   root: String
 }
 
@@ -2876,14 +3157,14 @@ input SocketGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [SocketInput]
+  resourceArrayValue: [SocketInput!]
   resourceValue: SocketInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input SocketGetManyInput {
-  filter: [SocketGetManyFilterInput]
+  filter: SocketGetManyFilterInput
   root: String
 }
 
@@ -2899,7 +3180,7 @@ input SocketInput {
   _id: String
   connections: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
@@ -2909,15 +3190,15 @@ input SocketRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [SocketInput]
+  resourceArrayValue: [SocketInput!]
   resourceValue: SocketInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input SocketRemoveInput {
-  filter: [SocketRemoveFilterInput]
-  id: [String]
+  filter: SocketRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -2926,7 +3207,7 @@ type SocketRemoveOutput {
 }
 
 input SocketSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -2941,15 +3222,15 @@ input SocketUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [SocketInput]
+  resourceArrayValue: [SocketInput!]
   resourceValue: SocketInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input SocketUpdateInput {
-  filter: [SocketUpdateFilterInput]
-  id: [String]
+  filter: SocketUpdateFilterInput
+  id: String
   root: String
   update: SocketUpdateUpdateInput
 }
@@ -2962,7 +3243,7 @@ input SocketUpdateUpdateInput {
   _id: String
   connections: String
   created: DateTimeISO
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
@@ -2971,38 +3252,38 @@ type Subscription {
 }
 
 type User {
-  Access: [Access]
-  Bank: [Bank]
-  Card: [Card]
-  Chat: [Chat]
-  LinkedUser: [LinkedUser]
-  Message: [Message]
-  PaymentMethod: [Card]
+  Access: Access
+  Bank: Bank
+  Card: Card
+  Chat: Chat
+  LinkedUser: LinkedUser
+  Message: Message
+  PaymentMethod: Card
   _id: String
   callingCode: String
   created: DateTimeISO
   email: String
   first: String
-  isFixture: Boolean
+  isFixture: String
   last: String
   paymentMethodPrimary: PaymentMethod
   phone: String
 }
 
 input UserCreateFormInput {
-  Access: [AccessInput] = []
-  Bank: [BankInput] = []
-  Card: [CardInput] = []
-  Chat: [ChatInput] = []
-  LinkedUser: [LinkedUserInput]
-  Message: [MessageInput] = []
-  PaymentMethod: [CardInput] = []
+  Access: AccessInput = {}
+  Bank: BankInput = {}
+  Card: CardInput = {}
+  Chat: ChatInput = {}
+  LinkedUser: LinkedUserInput
+  Message: MessageInput = {}
+  PaymentMethod: CardInput = {}
   _id: String
   callingCode: String
   created: DateTimeISO
   email: String
   first: String
-  isFixture: Boolean
+  isFixture: String
   last: String
   paymentMethodPrimary: PaymentMethodInput
   phone: String
@@ -3014,26 +3295,26 @@ input UserCreateInput {
 }
 
 input UserCreateManyFormInput {
-  Access: [AccessInput] = []
-  Bank: [BankInput] = []
-  Card: [CardInput] = []
-  Chat: [ChatInput] = []
-  LinkedUser: [LinkedUserInput]
-  Message: [MessageInput] = []
-  PaymentMethod: [CardInput] = []
+  Access: AccessInput = {}
+  Bank: BankInput = {}
+  Card: CardInput = {}
+  Chat: ChatInput = {}
+  LinkedUser: LinkedUserInput
+  Message: MessageInput = {}
+  PaymentMethod: CardInput = {}
   _id: String
   callingCode: String
   created: DateTimeISO
   email: String
   first: String
-  isFixture: Boolean
+  isFixture: String
   last: String
   paymentMethodPrimary: PaymentMethodInput
   phone: String
 }
 
 input UserCreateManyInput {
-  form: [UserCreateManyFormInput]
+  form: UserCreateManyFormInput
   root: String
 }
 
@@ -3061,14 +3342,14 @@ input UserGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [UserInput]
+  resourceArrayValue: [UserInput!]
   resourceValue: UserInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input UserGetConnectionInput {
-  filter: [UserGetConnectionFilterInput]
+  filter: UserGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -3083,15 +3364,15 @@ input UserGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [UserInput]
+  resourceArrayValue: [UserInput!]
   resourceValue: UserInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input UserGetInput {
-  filter: [UserGetFilterInput]
-  id: [String]
+  filter: UserGetFilterInput
+  id: String
   root: String
 }
 
@@ -3101,14 +3382,14 @@ input UserGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [UserInput]
+  resourceArrayValue: [UserInput!]
   resourceValue: UserInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input UserGetManyInput {
-  filter: [UserGetManyFilterInput]
+  filter: UserGetManyFilterInput
   root: String
 }
 
@@ -3121,19 +3402,19 @@ type UserGetOutput {
 }
 
 input UserInput {
-  Access: [AccessInput] = []
-  Bank: [BankInput] = []
-  Card: [CardInput] = []
-  Chat: [ChatInput] = []
-  LinkedUser: [LinkedUserInput]
-  Message: [MessageInput] = []
-  PaymentMethod: [CardInput] = []
+  Access: AccessInput = {}
+  Bank: BankInput = {}
+  Card: CardInput = {}
+  Chat: ChatInput = {}
+  LinkedUser: LinkedUserInput
+  Message: MessageInput = {}
+  PaymentMethod: CardInput = {}
   _id: String
   callingCode: String
   created: DateTimeISO
   email: String
   first: String
-  isFixture: Boolean
+  isFixture: String
   last: String
   paymentMethodPrimary: PaymentMethodInput
   phone: String
@@ -3145,15 +3426,15 @@ input UserRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [UserInput]
+  resourceArrayValue: [UserInput!]
   resourceValue: UserInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input UserRemoveInput {
-  filter: [UserRemoveFilterInput]
-  id: [String]
+  filter: UserRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -3162,7 +3443,7 @@ type UserRemoveOutput {
 }
 
 input UserSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -3177,15 +3458,15 @@ input UserUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [UserInput]
+  resourceArrayValue: [UserInput!]
   resourceValue: UserInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input UserUpdateInput {
-  filter: [UserUpdateFilterInput]
-  id: [String]
+  filter: UserUpdateFilterInput
+  id: String
   root: String
   update: UserUpdateUpdateInput
 }
@@ -3195,19 +3476,19 @@ type UserUpdateOutput {
 }
 
 input UserUpdateUpdateInput {
-  Access: [AccessInput] = []
-  Bank: [BankInput] = []
-  Card: [CardInput] = []
-  Chat: [ChatInput] = []
-  LinkedUser: [LinkedUserInput]
-  Message: [MessageInput] = []
-  PaymentMethod: [CardInput] = []
+  Access: AccessInput = {}
+  Bank: BankInput = {}
+  Card: CardInput = {}
+  Chat: ChatInput = {}
+  LinkedUser: LinkedUserInput
+  Message: MessageInput = {}
+  PaymentMethod: CardInput = {}
   _id: String
   callingCode: String
   created: DateTimeISO
   email: String
   first: String
-  isFixture: Boolean
+  isFixture: String
   last: String
   paymentMethodPrimary: PaymentMethodInput
   phone: String
@@ -3218,10 +3499,10 @@ type Utility {
   created: DateTimeISO
   description: String
   imageSrc: String
-  isFixture: Boolean
+  isFixture: String
   name: String
   pricing: String
-  type: [String]
+  type: String
   url: String
 }
 
@@ -3230,10 +3511,10 @@ input UtilityCreateFormInput {
   created: DateTimeISO
   description: String
   imageSrc: String
-  isFixture: Boolean
+  isFixture: String
   name: String
   pricing: String
-  type: [String]
+  type: String
   url: String
 }
 
@@ -3247,15 +3528,15 @@ input UtilityCreateManyFormInput {
   created: DateTimeISO
   description: String
   imageSrc: String
-  isFixture: Boolean
+  isFixture: String
   name: String
   pricing: String
-  type: [String]
+  type: String
   url: String
 }
 
 input UtilityCreateManyInput {
-  form: [UtilityCreateManyFormInput]
+  form: UtilityCreateManyFormInput
   root: String
 }
 
@@ -3285,14 +3566,14 @@ input UtilityGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [UtilityInput]
+  resourceArrayValue: [UtilityInput!]
   resourceValue: UtilityInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input UtilityGetConnectionInput {
-  filter: [UtilityGetConnectionFilterInput]
+  filter: UtilityGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -3308,15 +3589,15 @@ input UtilityGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [UtilityInput]
+  resourceArrayValue: [UtilityInput!]
   resourceValue: UtilityInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input UtilityGetInput {
-  filter: [UtilityGetFilterInput]
-  id: [String]
+  filter: UtilityGetFilterInput
+  id: String
   root: String
 }
 
@@ -3326,14 +3607,14 @@ input UtilityGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [UtilityInput]
+  resourceArrayValue: [UtilityInput!]
   resourceValue: UtilityInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input UtilityGetManyInput {
-  filter: [UtilityGetManyFilterInput]
+  filter: UtilityGetManyFilterInput
   root: String
 }
 
@@ -3352,10 +3633,10 @@ input UtilityInput {
   created: DateTimeISO
   description: String
   imageSrc: String
-  isFixture: Boolean
+  isFixture: String
   name: String
   pricing: String
-  type: [String]
+  type: String
   url: String
 }
 
@@ -3365,15 +3646,15 @@ input UtilityRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [UtilityInput]
+  resourceArrayValue: [UtilityInput!]
   resourceValue: UtilityInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input UtilityRemoveInput {
-  filter: [UtilityRemoveFilterInput]
-  id: [String]
+  filter: UtilityRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -3383,7 +3664,7 @@ type UtilityRemoveOutput {
 }
 
 input UtilitySearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -3399,15 +3680,15 @@ input UtilityUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [UtilityInput]
+  resourceArrayValue: [UtilityInput!]
   resourceValue: UtilityInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input UtilityUpdateInput {
-  filter: [UtilityUpdateFilterInput]
-  id: [String]
+  filter: UtilityUpdateFilterInput
+  id: String
   root: String
   update: UtilityUpdateUpdateInput
 }
@@ -3422,28 +3703,28 @@ input UtilityUpdateUpdateInput {
   created: DateTimeISO
   description: String
   imageSrc: String
-  isFixture: Boolean
+  isFixture: String
   name: String
   pricing: String
-  type: [String]
+  type: String
   url: String
 }
 
 type Vendor {
-  Utility: [Utility]
+  Utility: Utility
   _id: String
   created: DateTimeISO
   imageSrc: String
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
 input VendorCreateFormInput {
-  Utility: [UtilityInput]
+  Utility: UtilityInput
   _id: String
   created: DateTimeISO
   imageSrc: String
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
@@ -3453,16 +3734,16 @@ input VendorCreateInput {
 }
 
 input VendorCreateManyFormInput {
-  Utility: [UtilityInput]
+  Utility: UtilityInput
   _id: String
   created: DateTimeISO
   imageSrc: String
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
 input VendorCreateManyInput {
-  form: [VendorCreateManyFormInput]
+  form: VendorCreateManyFormInput
   root: String
 }
 
@@ -3490,14 +3771,14 @@ input VendorGetConnectionFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [VendorInput]
+  resourceArrayValue: [VendorInput!]
   resourceValue: VendorInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input VendorGetConnectionInput {
-  filter: [VendorGetConnectionFilterInput]
+  filter: VendorGetConnectionFilterInput
   pagination: PaginationInput
   root: String
 }
@@ -3512,15 +3793,15 @@ input VendorGetFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [VendorInput]
+  resourceArrayValue: [VendorInput!]
   resourceValue: VendorInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input VendorGetInput {
-  filter: [VendorGetFilterInput]
-  id: [String]
+  filter: VendorGetFilterInput
+  id: String
   root: String
 }
 
@@ -3530,14 +3811,14 @@ input VendorGetManyFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [VendorInput]
+  resourceArrayValue: [VendorInput!]
   resourceValue: VendorInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input VendorGetManyInput {
-  filter: [VendorGetManyFilterInput]
+  filter: VendorGetManyFilterInput
   root: String
 }
 
@@ -3550,11 +3831,11 @@ type VendorGetOutput {
 }
 
 input VendorInput {
-  Utility: [UtilityInput]
+  Utility: UtilityInput
   _id: String
   created: DateTimeISO
   imageSrc: String
-  isFixture: Boolean
+  isFixture: String
   name: String
 }
 
@@ -3564,15 +3845,15 @@ input VendorRemoveFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [VendorInput]
+  resourceArrayValue: [VendorInput!]
   resourceValue: VendorInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input VendorRemoveInput {
-  filter: [VendorRemoveFilterInput]
-  id: [String]
+  filter: VendorRemoveFilterInput
+  id: String
   root: String
 }
 
@@ -3581,7 +3862,7 @@ type VendorRemoveOutput {
 }
 
 input VendorSearchInput {
-  keys: [String]
+  keys: String
   query: String
   root: String
 }
@@ -3596,15 +3877,15 @@ input VendorUpdateFilterInput {
   dateValue: DateTimeISO
   field: String
   numberValue: Float
-  resourceArrayValue: [VendorInput]
+  resourceArrayValue: [VendorInput!]
   resourceValue: VendorInput
-  stringArrayValue: [String]
+  stringArrayValue: [String!]
   stringValue: String
 }
 
 input VendorUpdateInput {
-  filter: [VendorUpdateFilterInput]
-  id: [String]
+  filter: VendorUpdateFilterInput
+  id: String
   root: String
   update: VendorUpdateUpdateInput
 }
@@ -3614,10 +3895,10 @@ type VendorUpdateOutput {
 }
 
 input VendorUpdateUpdateInput {
-  Utility: [UtilityInput]
+  Utility: UtilityInput
   _id: String
   created: DateTimeISO
   imageSrc: String
-  isFixture: Boolean
+  isFixture: String
   name: String
 }

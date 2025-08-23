@@ -19,7 +19,7 @@ export const createConnection = <TType extends unknown>({
 
   @withEntity({ name: `${name}Connection` })
   class ConnectionF implements ConnectionModel<TType> {
-    @withField({ Resource: () => Edge })
+    @withField({ Resource: () => Edge, isArray: true })
     edges!: Array<EdgeModel<PartialModel<TType>>>;
 
     @withField({ Resource: () => PageInfo })

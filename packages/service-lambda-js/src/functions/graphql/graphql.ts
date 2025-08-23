@@ -4,7 +4,7 @@ import {
   LAMBDA_PLUGIN,
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
-import databaseConfig from '@lib/config/database/database.mongo';
+import { config as databaseConfig } from '@lib/config/database/database.mongo';
 import { initialize } from '@service/lambda/setup/utils/initialize/initialize';
 // import { cleanup } from '@service/lambda/src/setup/utils/cleanup/cleanup';
 

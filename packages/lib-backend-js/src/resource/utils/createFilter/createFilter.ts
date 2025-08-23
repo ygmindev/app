@@ -10,6 +10,7 @@ import {
   type PrimitiveModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 
@@ -19,31 +20,31 @@ export const createFilter = <TType extends unknown>({
 }: CreateFilterParamsModel<TType>): CreateFilterModel<TType> => {
   @withEntity({ name: `${name}Filter` })
   class Filter implements FilterModel<TType> {
-    @withField({ isOptional: true })
+    @withField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
     booleanValue?: boolean;
 
-    @withField()
+    @withField({ type: DATA_TYPE.STRING })
     condition!: FILTER_CONDITION;
 
-    @withField({ isOptional: true })
+    @withField({ isOptional: true, type: DATA_TYPE.DATE })
     dateValue?: Date;
 
-    @withField()
+    @withField({ type: DATA_TYPE.STRING })
     field!: StringKeyModel<TType>;
 
-    @withField({ isOptional: true })
+    @withField({ isOptional: true, type: DATA_TYPE.NUMBER })
     numberValue?: number;
 
-    @withField({ Resource, isOptional: true })
+    @withField({ Resource, isArray: true, isOptional: true })
     resourceArrayValue?: PartialArrayModel<TType>;
 
-    @withField({ Resource })
+    @withField({ Resource, isOptional: true })
     resourceValue?: PartialModel<TType>;
 
-    @withField({ isOptional: true })
+    @withField({ isArray: true, isOptional: true, type: DATA_TYPE.STRING })
     stringArrayValue?: Array<string>;
 
-    @withField({ isOptional: true })
+    @withField({ isOptional: true, type: DATA_TYPE.STRING })
     stringValue?: string;
 
     value?: PrimitiveModel | keyof TType;
