@@ -2,14 +2,13 @@ import {
   type GetConnectionModel,
   type GetConnectionParamsModel,
 } from '@lib/backend/database/utils/getConnection/getConnection.models';
+import { type RequestContextModel } from '@lib/config/api/api.models';
 import { getOffsetWithDefault, offsetToCursor } from 'graphql-relay';
 
-export const getConnection = async <TType, TRoot = undefined>({
-  count,
-  getMany,
-  input = {},
-  pagination = {},
-}: GetConnectionParamsModel<TType, TRoot>): Promise<GetConnectionModel<TType, TRoot>> => {
+export const getConnection = async <TType, TRoot = undefined>(
+  { count, getMany, input = {}, pagination = {} }: GetConnectionParamsModel<TType, TRoot>,
+  context?: RequestContextModel,
+): Promise<GetConnectionModel<TType, TRoot>> => {
   const { after, before, first, last } = pagination;
   const beforeOffset = getOffsetWithDefault(before, count);
   const afterOffset = getOffsetWithDefault(after, -1);
@@ -19,7 +18,7 @@ export const getConnection = async <TType, TRoot = undefined>({
   last && (startOffset = Math.max(startOffset, endOffset - last));
   const skip = Math.max(startOffset, 0);
   const take = Math.max(endOffset - startOffset, 1);
-  const { result, root } = await getMany({ ...input, options: { skip, take } });
+  const { result, root } = await getMany({ ...input, options: { skip, take } }, context);
   if (result && result.length) {
     const edges = result.map((node, index) => ({
       cursor: offsetToCursor(startOffset + index),

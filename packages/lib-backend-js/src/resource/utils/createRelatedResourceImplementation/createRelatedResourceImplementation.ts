@@ -14,7 +14,10 @@ import { type PartialModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
+import {
+  type FilterableResourceMethodTypeModel,
+  type RESOURCE_METHOD_TYPE,
+} from '@lib/shared/resource/resource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
@@ -67,25 +70,25 @@ export const createRelatedResourceImplementation = <
     return formF;
   };
 
-  const getFilter = <
-    TMethod extends
-      | RESOURCE_METHOD_TYPE.GET
-      | RESOURCE_METHOD_TYPE.GET_MANY
-      | RESOURCE_METHOD_TYPE.GET_CONNECTION
-      | RESOURCE_METHOD_TYPE.REMOVE
-      | RESOURCE_METHOD_TYPE.UPDATE,
-  >(
+  const getFilter = <TMethod extends FilterableResourceMethodTypeModel>(
     input?: ResourceInputModel<TMethod, TType, TRoot>,
   ): Array<FilterModel<TType>> =>
     filterNil([
-      ...(input?.filter ?? []),
+      ...[
+        input?.id
+          ? input.id.map((v) => ({ field: '_id', value: new ObjectId(v) }))
+          : (input?.filter ?? []),
+      ],
       input?.root && { field: root, value: new ObjectId(input.root) },
     ]) as Array<FilterModel<TType>>;
 
   const getMany = async (
     input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = {},
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> => {
-    return getRepository().getMany({ filter: getFilter(input), options: input.options });
+    return getRepository().getMany({
+      filter: getFilter(input),
+      options: input.options,
+    });
   };
 
   const create = async (
@@ -120,7 +123,7 @@ export const createRelatedResourceImplementation = <
     beforeRemove,
     beforeSearch,
     beforeUpdate,
-    count: (input) => getRepository().count(input?.filter),
+    count: (input) => getRepository().count({ filter: input?.filter, id: input?.id }),
     create,
     createMany: async (input) => {
       if (input?.root) {
@@ -136,15 +139,19 @@ export const createRelatedResourceImplementation = <
       throw new InvalidArgumentError('root');
     },
 
-    get: async (input) => getRepository().get({ filter: getFilter(input), id: input?.id }),
+    get: async (input, context) =>
+      getRepository().get({ filter: getFilter(input), id: input?.id }, context),
 
-    getConnection: async (input) => {
-      return getConnection({
-        count: await getRepository().count(getFilter(input)),
-        getMany: getMany.bind(this),
-        input,
-        pagination: input?.pagination,
-      });
+    getConnection: async (input, context) => {
+      return getConnection(
+        {
+          count: await getRepository().count({ filter: getFilter(input) }),
+          getMany: getMany.bind(this),
+          input,
+          pagination: input?.pagination,
+        },
+        context,
+      );
     },
 
     getMany,
@@ -152,7 +159,7 @@ export const createRelatedResourceImplementation = <
     name,
 
     remove: async (input) => {
-      const { result } = await getRepository().remove({ filter: getFilter(input), id: input?.id });
+      const { result } = await getRepository().remove({ filter: getFilter(input) });
       return { result };
     },
 

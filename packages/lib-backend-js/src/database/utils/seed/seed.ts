@@ -1,3 +1,5 @@
+import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
+import { Database } from '@lib/backend/database/utils/Database/Database';
 import { SEED_DATA } from '@lib/backend/database/utils/seed/seed.constants';
 import { type SeedModel } from '@lib/backend/database/utils/seed/seed.models';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
@@ -12,6 +14,8 @@ import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOut
 import toString from 'lodash/toString';
 
 export const seed = async (): Promise<SeedModel> => {
+  const database = Container.get(Database, DATABASE_TYPE.MONGO);
+
   for (const { afterCreate, data, name, root } of SEED_DATA) {
     const implementations = fromGlobs([`**/*/${name}Implementation.ts`], {
       isAbsolute: true,
@@ -38,4 +42,13 @@ export const seed = async (): Promise<SeedModel> => {
       }
     }
   }
+
+  return {
+    cleanUp: async () => {
+      for (const name of database.getRepositories()) {
+        const repository = database.getRepository<EntityResourceModel>({ name });
+        await repository.remove({ filter: [{ field: 'isFixture', value: true }] });
+      }
+    },
+  };
 };

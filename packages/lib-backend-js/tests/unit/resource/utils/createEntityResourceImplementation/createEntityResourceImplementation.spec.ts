@@ -1,3 +1,5 @@
+import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
+import { Database } from '@lib/backend/database/utils/Database/Database';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';
 import { TESTABLE_ENTITY_RESOURCE_SEED_DATA } from '@lib/model/test/TestableEntityResource/TestableEntityResource.fixtures';
@@ -39,8 +41,8 @@ describe(displayName, () => {
     const form = {
       ...TESTABLE_ENTITY_RESOURCE_SEED_DATA[0],
       relatedOneToMany: [
-        TESTABLE_RELATED_RESOURCE_SEED_DATA[0],
-        TESTABLE_RELATED_RESOURCE_SEED_DATA[1],
+        { ...TESTABLE_RELATED_RESOURCE_SEED_DATA[0], isFixture: true },
+        { ...TESTABLE_RELATED_RESOURCE_SEED_DATA[1], isFixture: true },
       ],
     };
     const { result } = await implementation.create({ form });
@@ -52,5 +54,33 @@ describe(displayName, () => {
     const relatedIds = filterNil(result?.relatedOneToMany?.map((v) => v._id));
     const { result: relatedResult } = await relatedImplementation.getMany({ id: relatedIds });
     expect(relatedResult?.length).toStrictEqual(form.relatedOneToMany.length);
+  });
+
+  test('works with delete related', async () => {
+    Container.get(Database, DATABASE_TYPE.MONGO).getRepositories();
+    const form = {
+      ...TESTABLE_ENTITY_RESOURCE_SEED_DATA[0],
+      relatedOneToMany: [
+        { ...TESTABLE_RELATED_RESOURCE_SEED_DATA[0], isFixture: true },
+        { ...TESTABLE_RELATED_RESOURCE_SEED_DATA[1], isFixture: true },
+      ],
+    };
+    const { result } = await implementation.create({ form });
+    if (result?._id) {
+      const relatedIds = filterNil(result?.relatedOneToMany?.map((v) => v._id) ?? []);
+      const { result: relatedResultExists } = await relatedImplementation.getMany({
+        id: relatedIds,
+      });
+      console.warn(`@@@ find ${relatedIds}`);
+      console.warn(`@@@ found ${relatedResultExists?.map((v) => v._id)}`);
+      expect(relatedResultExists?.map((v) => v._id)).toBe(relatedIds);
+
+      // await implementation.remove({ id: [result?._id] });
+      // const { result: relatedResultUnknown } = await relatedImplementation.getMany({
+      //   id: relatedIds,
+      // });
+      // expect(relatedResultUnknown).toBeUndefined();
+    }
+    throw new Error();
   });
 });

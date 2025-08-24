@@ -5,7 +5,7 @@ import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 export class Database extends _Database implements DatabaseModel {
   async close(): Promise<void> {
     if (await this.isConnected()) {
-      logger.info(`Closing connection ${this.config.clientUrl}`);
+      logger.progress(`Closing connection ${this.config.clientUrl}`);
       await super.close();
     }
   }
@@ -16,6 +16,7 @@ export class Database extends _Database implements DatabaseModel {
     } else {
       logger.progress(`Connecting ${this.config.clientUrl}`);
       await super.connect();
+      logger.success(`Connected to ${this.config.clientUrl}`);
     }
   }
 }

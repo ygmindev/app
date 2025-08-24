@@ -1,5 +1,3 @@
-import { clearSeed } from '@lib/backend/database/utils/clearSeed/clearSeed';
-import { seed } from '@lib/backend/database/utils/seed/seed';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type TestResourceImplementationParamsModel } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation.models';
 import { config as databaseConfig } from '@lib/config/database/database.mongo';
@@ -26,7 +24,6 @@ export const testResourceImplementation = <
 
     beforeAll(async () => {
       ({ cleanUp } = await initialize({ database: databaseConfig.params() }));
-      await seed();
       implementation = getImplementation();
       root = (await getRoot?.()) as TRoot extends undefined ? never : string;
       root && (root = toString(root) as TRoot extends undefined ? never : string);
@@ -34,7 +31,6 @@ export const testResourceImplementation = <
     });
 
     afterAll(async () => {
-      await clearSeed();
       await cleanUp?.();
     });
 
@@ -351,7 +347,7 @@ export const testResourceImplementation = <
       const { result: removeResult } = await implementation.remove(input);
       expect(removeResult).toBeTruthy();
       const { result: getResult } = await implementation.get(input);
-      expect(getResult).toBeFalsy();
+      expect(getResult).toBeUndefined();
     });
   });
 };

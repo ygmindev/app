@@ -6,8 +6,11 @@ export type _DatabaseModel = {
   close(): Promise<void>;
   connect(): Promise<void>;
   flush(): Promise<void>;
+  getRepositories(): Array<string>;
   getRepository<TType>(params: GetRepositoryParamsModel<TType>): RepositoryModel<TType>;
   isConnected(): Promise<boolean>;
 };
 
-export type GetRepositoryParamsModel<TType extends unknown> = ResourceNameParamsModel | { name: ClassModel<TType> };
+export type GetRepositoryParamsModel<TType extends unknown> =
+  | ResourceNameParamsModel
+  | { name: ClassModel<TType> };

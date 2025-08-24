@@ -1,7 +1,7 @@
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type ClassModel } from '@lib/shared/core/core.models';
 import {
-  type FilterableResourceMethodTypeModel,
+  type RESOURCE_METHOD_TYPE,
   type ResourceNameParamsModel,
 } from '@lib/shared/resource/resource.models';
 import {
@@ -17,9 +17,7 @@ export type CreateResourceImplementationParamsModel<
   ResourceImplementationModel<TType, TRoot> &
   ResourceImplementationDecoratorModel<TType, TRoot> & {
     Resource: ClassModel<TType>;
-    count(
-      input?: ResourceInputModel<FilterableResourceMethodTypeModel, TType, TRoot>,
-    ): Promise<number>;
+    count(input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>): Promise<number>;
   };
 
 export type CreateResourceImplementationModel<
@@ -27,8 +25,6 @@ export type CreateResourceImplementationModel<
   TRoot = undefined,
 > = ClassModel<
   ResourceImplementationModel<TType, TRoot> & {
-    count(
-      input?: ResourceInputModel<FilterableResourceMethodTypeModel, TType, TRoot>,
-    ): Promise<number>;
+    count(input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>): Promise<number>;
   }
 >;

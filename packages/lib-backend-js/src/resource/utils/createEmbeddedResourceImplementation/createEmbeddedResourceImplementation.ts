@@ -6,6 +6,7 @@ import {
 } from '@lib/backend/resource/utils/createEmbeddedResourceImplementation/createEmbeddedResourceImplementation.models';
 import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
 import { getMetadata } from '@lib/backend/resource/utils/getMetadata/getMetadata';
+import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
@@ -148,11 +149,12 @@ export const createEmbeddedResourceImplementation = <
 
   const getMany = async (
     input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
+    context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> => {
     const root = await getRoot(input.root);
     const result = getFilter({
       input,
-      
+
       skip: input.options?.skip,
       take: input.options?.take,
       values: (root?.[name] as unknown as Array<TType>) ?? [],
@@ -162,16 +164,17 @@ export const createEmbeddedResourceImplementation = <
 
   const create = async (
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
+    context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> => {
     // TODO: LOCK
     const root = await getRoot(input?.root);
     const form = await getForm(input?.form);
     const result = (root?.[name] as unknown as Array<TType>) ?? [];
     result?.push(form);
-    await getRootImplementation().update({
-      id: [root._id],
-      update: { [name]: result } as UpdateModel<TRoot>,
-    });
+    await getRootImplementation().update(
+      { id: [root._id], update: { [name]: result } as UpdateModel<TRoot> },
+      context,
+    );
     return { result: form, root };
   };
 
@@ -180,7 +183,7 @@ export const createEmbeddedResourceImplementation = <
   ): Promise<number> => {
     const root = await getRoot(input?.root);
     let result = (root?.[name] as unknown as Array<TType>) ?? [];
-    result = getFilter({ input,  values: result });
+    result = getFilter({ input, values: result });
     return result?.length ?? 0;
   };
 
@@ -207,19 +210,19 @@ export const createEmbeddedResourceImplementation = <
 
     create,
 
-    createMany: async (input) => {
+    createMany: async (input, context) => {
       const root = await getRoot(input?.root);
       const values = await Promise.all(input?.form?.map(getForm) ?? []);
       let result = (root?.[name] as unknown as Array<TType>) ?? [];
       result = result?.concat(values);
-      await getRootImplementation().update({
-        id: [root._id],
-        update: { [name]: result } as UpdateModel<TRoot>,
-      });
+      await getRootImplementation().update(
+        { id: [root._id], update: { [name]: result } as UpdateModel<TRoot> },
+        context,
+      );
       return { result, root };
     },
 
-    get: async (input) => {
+    get: async (input, context) => {
       const root = await getRoot(input?.root);
       const result = getFilter({
         input,
@@ -228,7 +231,7 @@ export const createEmbeddedResourceImplementation = <
       return { result };
     },
 
-    getConnection: async (input) => {
+    getConnection: async (input, context) => {
       return getConnection({
         count: await count(input),
         getMany: getMany.bind(this),
@@ -241,25 +244,30 @@ export const createEmbeddedResourceImplementation = <
 
     name,
 
-    remove: async (input) => {
+    remove: async (input, context) => {
       const root = await getRoot(input?.root);
       const result = getFilter({
         input,
-        
         isInverse: true,
         values: (root?.[name] as unknown as Array<TType>) ?? [],
       });
-      await getRootImplementation().update({
-        id: [root._id],
-        update: { [name]: result } as UpdateModel<TRoot>,
-      });
+      await getRootImplementation().update(
+        {
+          id: [root._id],
+          update: { [name]: result } as UpdateModel<TRoot>,
+        },
+        context,
+      );
       return { result: true };
     },
 
     // TODO: fix
-    search: async (input = {}) => {
+    search: async (input = {}, context) => {
       if (input.root) {
-        const { result: rootResult } = await getRootImplementation().get({ id: [input.root] });
+        const { result: rootResult } = await getRootImplementation().get(
+          { id: [input.root] },
+          context,
+        );
         return {
           result: undefined,
           root: rootResult,
@@ -268,16 +276,16 @@ export const createEmbeddedResourceImplementation = <
       throw new InvalidArgumentError('root');
     },
 
-    update: async (input) => {
+    update: async (input, context) => {
       const root = await getRoot(input?.root);
       let values = (root?.[name] as unknown as Array<TType>) ?? [];
       let result = getFilter({ input, values })?.[0];
       result = merge([toPlainObject(input?.update) as unknown as TType, toPlainObject(result)]);
       values = values.map((v) => (toString(v._id) === toString(result._id) ? result : v));
-      await getRootImplementation().update({
-        id: [root._id],
-        update: { [name]: values } as UpdateModel<TRoot>,
-      });
+      await getRootImplementation().update(
+        { id: [root._id], update: { [name]: values } as UpdateModel<TRoot> },
+        context,
+      );
       return { result, root };
     },
   });
