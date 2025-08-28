@@ -1,5 +1,5 @@
-import { type ScreenModel } from '@lib/shared/crawling/utils/Screen/Screen.models';
 import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource.models';
+import { type ScreenModel } from '@lib/shared/crawling/utils/Screen/Screen.models';
 import {
   type DataLoaderModel,
   type DataLoaderParamsModel,

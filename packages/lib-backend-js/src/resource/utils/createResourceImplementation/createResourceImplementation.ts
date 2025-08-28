@@ -106,7 +106,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       this.remove = this.remove.bind(this);
     }
 
-    async count(input?: ResourceInputModel<RESOURCE_METHOD_TYPE, TType, TRoot>): Promise<number> {
+    async count(
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
+    ): Promise<number> {
       return count(input);
     }
 

@@ -18,6 +18,7 @@ import {
   type FilterableResourceMethodTypeModel,
   type RESOURCE_METHOD_TYPE,
 } from '@lib/shared/resource/resource.models';
+import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
@@ -74,11 +75,15 @@ export const createRelatedResourceImplementation = <
     input?: ResourceInputModel<TMethod, TType, TRoot>,
   ): Array<FilterModel<TType>> =>
     filterNil([
-      ...[
-        input?.id
-          ? input.id.map((v) => ({ field: '_id', value: new ObjectId(v) }))
-          : (input?.filter ?? []),
-      ],
+      ...(input?.id
+        ? [
+            {
+              condition: FILTER_CONDITION.IN,
+              field: '_id',
+              value: input.id.map((v) => new ObjectId(v)),
+            },
+          ]
+        : (input?.filter ?? [])),
       input?.root && { field: root, value: new ObjectId(input.root) },
     ]) as Array<FilterModel<TType>>;
 

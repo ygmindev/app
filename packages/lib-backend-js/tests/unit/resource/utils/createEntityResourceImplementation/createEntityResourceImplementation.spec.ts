@@ -71,16 +71,13 @@ describe(displayName, () => {
       const { result: relatedResultExists } = await relatedImplementation.getMany({
         id: relatedIds,
       });
-      console.warn(`@@@ find ${relatedIds}`);
-      console.warn(`@@@ found ${relatedResultExists?.map((v) => v._id)}`);
-      expect(relatedResultExists?.map((v) => v._id)).toBe(relatedIds);
+      expect(relatedResultExists?.map((v) => v._id)).toStrictEqual(relatedIds);
 
-      // await implementation.remove({ id: [result?._id] });
-      // const { result: relatedResultUnknown } = await relatedImplementation.getMany({
-      //   id: relatedIds,
-      // });
-      // expect(relatedResultUnknown).toBeUndefined();
+      await implementation.remove({ id: [result?._id] });
+      const { result: relatedResultUnknown } = await relatedImplementation.getMany({
+        id: relatedIds,
+      });
+      expect(relatedResultUnknown).toStrictEqual([]);
     }
-    throw new Error();
   });
 });

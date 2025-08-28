@@ -116,7 +116,10 @@ export class _Database implements _DatabaseModel {
         await this.getEntityManager().getRepository(name).nativeDelete({});
       },
 
-      count: async (params) => this.getEntityManager().getRepository(name).count(params),
+      count: async (params) =>
+        this.getEntityManager()
+          .getRepository(name)
+          .count(params ? getFilter({ filter: params.filter, id: params.id }) : undefined),
 
       create: async ({ form, options } = {}) => {
         try {
