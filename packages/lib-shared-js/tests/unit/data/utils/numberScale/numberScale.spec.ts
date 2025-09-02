@@ -8,17 +8,17 @@ const { displayName } = withTest({ numberFormat });
 describe(displayName, () => {
   const VALUE = 1e6;
 
-  test('works with no formatting', async () => {
+  test('no formatting', async () => {
     const result = numberScale(VALUE);
     expect(result).toStrictEqual(VALUE);
   });
 
-  test('works with multiplier', async () => {
+  test('multiplier', async () => {
     const result = numberScale(VALUE, { multiplier: 1e3 });
     expect(result).toStrictEqual(VALUE * 1e3);
   });
 
-  test('works with amount unit', async () => {
+  test('amount unit', async () => {
     const result = numberScale(VALUE, { unit: AMOUNT_UNIT.MILLION });
     expect(result).toStrictEqual(VALUE / 1e6);
   });

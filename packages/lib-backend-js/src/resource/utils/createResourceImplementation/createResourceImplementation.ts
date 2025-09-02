@@ -1,4 +1,4 @@
-import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
+// import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 import {
   type CreateResourceImplementationModel,
   type CreateResourceImplementationParamsModel,
@@ -13,7 +13,6 @@ import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collap
 import { type ResourceImplementationDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
-import forEach from 'lodash/forEach';
 
 export const createResourceImplementation = <TType extends EntityResourceModel, TRoot = undefined>({
   Resource,
@@ -39,6 +38,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
   get,
   getConnection,
   getMany,
+  name,
   remove,
   search,
   update,
@@ -58,19 +58,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       afterRemove,
       afterSearch,
       afterUpdate,
-      beforeCreate: async ({ input }, context) => {
-        const formF = new Resource();
-        forEach(input?.form as unknown as object, (v, k) => (formF[k as keyof typeof formF] = v));
-        formF._id = formF._id ?? new ObjectId();
-        formF.created = formF.created ?? new Date();
-        await formF.beforeCreate?.();
-        const inputF = { ...input, form: formF } as ResourceInputModel<
-          RESOURCE_METHOD_TYPE.CREATE,
-          TType,
-          TRoot
-        >;
-        return beforeCreate ? beforeCreate({ input: inputF }, context) : inputF;
-      },
+      beforeCreate,
       beforeCreateMany,
       beforeGet: async ({ input }, context) => {
         const inputF = { ...input, filter: collapseFilter(input?.filter) };
@@ -94,6 +82,8 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
         return beforeUpdate ? beforeUpdate({ input: inputF }, context) : inputF;
       },
     };
+
+    entity: string = name;
 
     constructor() {
       this.create = this.create.bind(this);

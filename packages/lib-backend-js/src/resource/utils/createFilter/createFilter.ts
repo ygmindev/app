@@ -41,10 +41,10 @@ export const createFilter = <TType extends unknown>({
     @withField({ Resource, isOptional: true })
     resourceValue?: PartialModel<TType>;
 
-    @withField({ isArray: true, isOptional: true, type: DATA_TYPE.STRING })
+    @withField({ isArray: true, isOptional: true })
     stringArrayValue?: Array<string>;
 
-    @withField({ isOptional: true, type: DATA_TYPE.STRING })
+    @withField({ isOptional: true })
     stringValue?: string;
 
     value?: PrimitiveModel | keyof TType;

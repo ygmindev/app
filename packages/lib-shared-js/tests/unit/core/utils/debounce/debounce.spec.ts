@@ -13,7 +13,7 @@ describe(displayName, () => {
     jest.clearAllMocks();
   });
 
-  test('works with no duration', async () => {
+  test('no duration', async () => {
     const DURATION = 0;
     const debounced = debounce(fn, { duration: DURATION });
     Array.from(Array(TIMES)).forEach(() => debounced());
@@ -21,7 +21,7 @@ describe(displayName, () => {
     expect(fn).toBeCalledTimes(1);
   });
 
-  test('works with duration', async () => {
+  test('duration', async () => {
     const DURATION = 1000;
     const debounced = debounce(fn, { duration: DURATION });
     Array.from(Array(TIMES)).forEach(() => debounced());

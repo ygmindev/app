@@ -16,7 +16,7 @@ describe(displayName, () => {
   };
   const SUCCESS = 'success';
 
-  test('works with get', async () => {
+  test('get', async () => {
     const scope = nock(uri(URI_PARAMS)).get('').reply(200, SUCCESS);
     const { result, unmount } = renderHook(() => useApi(URI_PARAMS));
     await result.current.get({ url: '' });

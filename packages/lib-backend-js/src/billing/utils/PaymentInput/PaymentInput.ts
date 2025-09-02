@@ -5,11 +5,10 @@ import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductIt
 import { PAYMENT_INPUT } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.constants';
 import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
-import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: PAYMENT_INPUT })
 export class PaymentInput implements PaymentInputModel {
-  @withField({ isOptional: true, type: DATA_TYPE.STRING })
+  @withField({ isOptional: true })
   paymentMethodId?: string;
 
   @withField({ Resource: () => ProductItem, isArray: true, isOptional: true })

@@ -4,7 +4,7 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ isDigits });
 
 describe(displayName, () => {
-  test('works with positive', async () => {
+  test('positive', async () => {
     let result = isDigits('12345');
     expect(result).toStrictEqual(true);
 
@@ -12,7 +12,7 @@ describe(displayName, () => {
     expect(result).toStrictEqual(true);
   });
 
-  test('works with negative', async () => {
+  test('negative', async () => {
     let result = isDigits('');
     expect(result).toStrictEqual(false);
 

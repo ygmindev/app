@@ -7,12 +7,12 @@ describe(displayName, () => {
   class X {}
   class Y {}
 
-  test('works with string', async () => {
+  test('string', async () => {
     expect(isTypeOf(new X(), 'X')).toStrictEqual(true);
     expect(isTypeOf(new Y(), 'X')).toStrictEqual(false);
   });
 
-  test('works with constructor', async () => {
+  test('constructor', async () => {
     expect(isTypeOf(new X(), X)).toStrictEqual(true);
     expect(isTypeOf(new Y(), X)).toStrictEqual(false);
   });

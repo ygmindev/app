@@ -3,4 +3,6 @@ import { type DateTimeModel } from '@lib/shared/datetime/utils/DateTime/DateTime
 
 export type SecurityModel = AssetModel & {
   expiration?: DateTimeModel;
+
+  issue?: DateTimeModel;
 };

@@ -1,6 +1,7 @@
 import { type TestableEntityResourceModel } from '@lib/model/test/TestableEntityResource/TestableEntityResource.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 
-export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: Array<Partial<TestableEntityResourceModel>> = [
+export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: PartialArrayModel<TestableEntityResourceModel> = [
   {
     group: '1',
     index: 1,
@@ -34,4 +35,4 @@ export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: Array<Partial<TestableEntityRes
     index: 3,
     string: 'string6',
   },
-];
+].map((v) => ({ ...v, isFixture: true }));

@@ -5,7 +5,7 @@ import {
 import { FIELD_RELATION } from '@lib/backend/resource/utils/withField/withField.constants';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
-import { Collection } from '@mikro-orm/core';
+import { Cascade, Collection } from '@mikro-orm/core';
 import {
   ArrayType,
   Embedded,
@@ -34,7 +34,7 @@ export const _withField =
     leaf,
     relation,
     root,
-    type,
+    type = DATA_TYPE.STRING,
   }: _WithFieldParamsModel<TType> = {}): _WithFieldModel =>
   (target, propertyKey) => {
     const isResource = !!Resource;
@@ -73,9 +73,8 @@ export const _withField =
       }
     }
     if (isArray) {
-      const gqlTypeF = gqlType();
       ormType = ArrayType;
-      gqlType = () => [gqlTypeF];
+      gqlType = () => [gqlType()];
     }
 
     // GraphQl
@@ -105,6 +104,7 @@ export const _withField =
           case FIELD_RELATION.MANY_TO_MANY: {
             ManyToMany({
               ...options,
+              cascade: [Cascade.PERSIST],
               entity,
               inversedBy: leaf,
               mappedBy: root,
@@ -115,6 +115,7 @@ export const _withField =
           case FIELD_RELATION.ONE_TO_MANY: {
             OneToMany({
               ...options,
+              cascade: [Cascade.PERSIST],
               entity,
               mappedBy: root as StringKeyModel<TType>,
               nullable: true,
@@ -124,14 +125,22 @@ export const _withField =
             break;
           }
           case FIELD_RELATION.MANY_TO_ONE: {
-            ManyToOne({ ...options, entity })(target, propertyKey as string);
+            ManyToOne({
+              ...options,
+              cascade: [Cascade.PERSIST],
+              entity,
+            })(target, propertyKey as string);
             break;
           }
           case FIELD_RELATION.ONE_TO_ONE: {
-            OneToOne({ ...options, entity, mappedBy: root, owner: !root })(
-              target,
-              propertyKey as string,
-            );
+            OneToOne({
+              ...options,
+              cascade: [Cascade.PERSIST],
+              entity,
+              mappedBy: root,
+              orphanRemoval: true,
+              owner: !root,
+            })(target, propertyKey as string);
             break;
           }
           default: {
@@ -154,7 +163,10 @@ export const _withField =
         }
       } else {
         options.type = ormType;
-        (isId ? PrimaryKey(options) : Property(options))(target, propertyKey as string);
+        (isId ? PrimaryKey({ ...options, fieldName: '_id' }) : Property(options))(
+          target,
+          propertyKey as string,
+        );
       }
     }
   };

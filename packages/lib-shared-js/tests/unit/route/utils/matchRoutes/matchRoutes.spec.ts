@@ -5,7 +5,7 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ matchRoutes });
 
 describe(displayName, () => {
-  test('works with depth=0', async () => {
+  test('depth=0', async () => {
     const result = matchRoutes({
       pathname: '/b',
       routes: [{ pathname: '/a' }, { pathname: '/b' }, { pathname: '/c' }],
@@ -13,7 +13,7 @@ describe(displayName, () => {
     expect(result).toStrictEqual([{ pathname: '/b' }]);
   });
 
-  test('works with isDeep', async () => {
+  test('isDeep', async () => {
     const result = matchRoutes({
       isDeep: true,
       pathname: '/b/b2',

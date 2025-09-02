@@ -13,7 +13,7 @@ describe(displayName, () => {
     expect(result).toStrictEqual('2');
   });
 
-  test('works with reject', async () => {
+  test('reject', async () => {
     const result = async (): Promise<unknown> =>
       resolveFirst([
         async () => Promise.reject(new Error('1')),

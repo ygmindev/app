@@ -6,7 +6,7 @@ import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 const { displayName } = withTest({ authorize });
 
 describe(displayName, () => {
-  test('works with any role', async () => {
+  test('any role', async () => {
     let result = await authorize({ context: {}, roles: [] });
     expect(result).toStrictEqual(true);
 

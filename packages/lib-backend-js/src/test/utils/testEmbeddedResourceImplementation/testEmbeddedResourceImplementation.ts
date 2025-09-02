@@ -1,6 +1,6 @@
-import { TestableEntityResourceImplementation } from '@lib/model/test/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
 import { type TestEmbeddedResourceImplementationParamsModel } from '@lib/backend/test/utils/testEmbeddedResourceImplementation/testEmbeddedResourceImplementation.models';
 import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';
+import { TestableEntityResourceImplementation } from '@lib/model/test/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 
 export const testEmbeddedResourceImplementation = async ({

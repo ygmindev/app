@@ -16,7 +16,7 @@ export const withManyToManyField =
   (target, propertyKey) =>
     withRefField({
       Resource,
-      
+      isArray: true,
       isDatabase,
       isOptional,
       leaf,

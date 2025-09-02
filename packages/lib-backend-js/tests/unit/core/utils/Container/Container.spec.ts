@@ -15,7 +15,7 @@ describe(displayName, () => {
     expect(result.property).toStrictEqual(WITH_CONTAINER_PROPERTY);
   });
 
-  test('works with constructor', async () => {
+  test('constructor', async () => {
     const result = Container.get(WithContainerChildFixture);
     expect(result.parent.property).toStrictEqual(WITH_CONTAINER_PROPERTY);
   });
@@ -24,7 +24,7 @@ describe(displayName, () => {
     expect(() => Container.get(WithoutContainerFixture)).toThrow();
   });
 
-  test('works with set', async () => {
+  test('set', async () => {
     const PROPERTY = 'PROPERTY';
     class A {
       property = PROPERTY;

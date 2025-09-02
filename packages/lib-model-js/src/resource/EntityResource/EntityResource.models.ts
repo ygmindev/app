@@ -3,6 +3,8 @@ export type EntityResourceModel = {
 
   created: Date;
 
+  id?: string;
+
   isFixture?: boolean;
 
   beforeCreate?(): Promise<void>;

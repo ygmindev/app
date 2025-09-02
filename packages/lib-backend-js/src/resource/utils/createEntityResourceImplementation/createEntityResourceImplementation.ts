@@ -29,8 +29,13 @@ export const createEntityResourceImplementation = <TType extends EntityResourceM
   beforeUpdate,
   name,
 }: CreateEntityResourceImplementationParamsModel<TType>): CreateEntityResourceImplementationModel<TType> => {
-  const getRepository = (): RepositoryModel<TType> =>
-    Container.get(Database, DATABASE_TYPE.MONGO).getRepository({ name });
+  let repositry: RepositoryModel<TType>;
+
+  const getRepository = (): RepositoryModel<TType> => {
+    repositry = repositry ?? Container.get(Database, DATABASE_TYPE.MONGO).getRepository({ name });
+    return repositry;
+  };
+
   return createResourceImplementation<TType>({
     Resource,
     afterCreate,

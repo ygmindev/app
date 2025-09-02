@@ -4,77 +4,55 @@ import {
 } from '@lib/backend/database/utils/Database/_Database.models';
 import { type RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
 import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
+import { mongoFilter } from '@lib/backend/database/utils/mongoFilter/mongoFilter';
 import { _database } from '@lib/config/database/_database';
 import {
   type _DatabaseConfigModel,
   type DatabaseConfigModel,
 } from '@lib/config/database/database.models';
-import { type PartialModel } from '@lib/shared/core/core.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type ClassModel, type PartialArrayModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
-import { type ResourceArgsModel } from '@lib/shared/resource/utils/ResourceArgs/ResourceArgs.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
+import { type EntityName, type FilterQuery, ReferenceKind, wrap } from '@mikro-orm/core';
 import {
   type EntityManager,
-  type EntityName,
-  type FilterQuery,
   type FindOneOptions,
   MikroORM,
   type Primary,
-  ReferenceKind,
   type RequiredEntityData,
 } from '@mikro-orm/mongodb';
 import forEach from 'lodash/forEach';
+import isNil from 'lodash/isNil';
 import isPlainObject from 'lodash/isPlainObject';
-import isString from 'lodash/isString';
-import last from 'lodash/last';
 import toString from 'lodash/toString';
-import { type MongoError, ObjectId } from 'mongodb';
+import {
+  type Collection,
+  type Document,
+  type Filter,
+  type MatchKeysAndValues,
+  type MongoError,
+} from 'mongodb';
 
-export const getFilter = <TType extends unknown>(
-  params?: ResourceArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>,
-  prefix?: string,
-): FilterQuery<NoInfer<NonNullable<TType>>> =>
-  params?.id
-    ? (params.id as FilterQuery<NoInfer<NonNullable<TType>>>)
-    : params?.filter
-      ? cleanObject(
-          params?.filter?.reduce(
-            (result, v) => {
-              let condition = v.condition ?? FILTER_CONDITION.EQUAL;
-              let { value } = v;
-              switch (condition) {
-                case FILTER_CONDITION.LIKE: {
-                  if (isString(value)) {
-                    condition = '$regex' as FILTER_CONDITION;
-                    value = new RegExp(value, 'i');
-                  }
-                  break;
-                }
-              }
-              return {
-                ...result,
-                [prefix ? `${prefix}.${v.field}` : v.field]: {
-                  [condition]: last(v.field.split('.'))?.startsWith('_')
-                    ? isArray(value)
-                      ? value.map((vv) => (isString(vv) ? new ObjectId(vv) : vv))
-                      : isString(value)
-                        ? new ObjectId(value)
-                        : value
-                    : value,
-                },
-              };
-            },
-            {} as FilterQuery<NoInfer<NonNullable<TType>>>,
-          ),
-        )
-      : {};
+const normalize = <TType extends unknown>(
+  params?: Partial<TType> | null,
+): Partial<TType> | undefined => {
+  if (isNil(params)) return undefined;
+  // const result = wrap(params).toObject() as unknown as Partial<EntityResourceModel>;
+  const result = params as Partial<EntityResourceModel>;
+  if (result.id) {
+    result._id = result.id;
+    delete result.id;
+  }
+  return result as Partial<TType>;
+};
 
 export class _Database implements _DatabaseModel {
   protected config: _DatabaseConfigModel;
@@ -111,15 +89,30 @@ export class _Database implements _DatabaseModel {
   getRepository = <TType extends unknown>({
     name,
   }: GetRepositoryParamsModel<TType>): RepositoryModel<TType> => {
+    const getCollection = (): Collection<TType & Document> => {
+      const em = this.getEntityManager();
+      const collection = em.getCollection(name);
+      return collection;
+    };
+
     const implementation: RepositoryModel<TType> = {
       clear: async () => {
         await this.getEntityManager().getRepository(name).nativeDelete({});
       },
 
+      collection: getCollection,
+
       count: async (params) =>
         this.getEntityManager()
           .getRepository(name)
-          .count(params ? getFilter({ filter: params.filter, id: params.id }) : undefined),
+          .count(
+            params
+              ? mongoFilter<TType>(params).reduce(
+                  (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
+                  {} as FilterQuery<NoInfer<NonNullable<TType>>>,
+                )
+              : undefined,
+          ),
 
       create: async ({ form, options } = {}) => {
         try {
@@ -131,9 +124,10 @@ export class _Database implements _DatabaseModel {
               never,
               false
             >,
+            { persist: true },
           );
           options?.isFlush !== false && (await em.persistAndFlush(result));
-          return { result: result as PartialModel<TType> };
+          return { result: normalize(result) };
         } catch (e) {
           switch ((e as MongoError).code as unknown as number) {
             case 11000:
@@ -153,7 +147,7 @@ export class _Database implements _DatabaseModel {
           ) ?? [],
         );
         options?.isFlush !== false && (await em.persistAndFlush(result));
-        return { result: result as Array<PartialModel<TType>> };
+        return { result: filterNil(result.map(normalize)) };
       },
 
       flush: async () => {
@@ -162,12 +156,15 @@ export class _Database implements _DatabaseModel {
 
       get: async ({ filter, id, options } = {}) => {
         const em = this.getEntityManager();
-        const filterF = getFilter<TType>({ filter, id });
+        const filterF = mongoFilter<TType>({ filter, id }).reduce(
+          (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
+          {} as FilterQuery<NoInfer<NonNullable<TType>>>,
+        );
         const result = await em.findOne(
           name,
-          isEmpty(filterF)
-            ? ({ $expr: { $eq: [1, 1] } } as unknown as FilterQuery<NoInfer<NonNullable<TType>>>)
-            : filterF,
+          (isEmpty(filterF) ? { $expr: { $eq: [1, 1] } } : filterF) as FilterQuery<
+            NoInfer<NonNullable<TType>>
+          >,
           options &&
             ({ populate: options.populate ?? undefined } as FindOneOptions<
               NonNullable<TType>,
@@ -176,7 +173,7 @@ export class _Database implements _DatabaseModel {
               never
             >),
         );
-        return { result: result ?? undefined };
+        return { result: normalize(result as Partial<TType>) ?? undefined };
       },
 
       getConnection: async ({ filter, id, pagination } = {}) => {
@@ -191,13 +188,16 @@ export class _Database implements _DatabaseModel {
 
       getMany: async ({ filter, id, options } = {}) => {
         const em = this.getEntityManager();
-        const filterF = getFilter<TType>({ filter, id });
+        const filterF = mongoFilter<TType>({ filter, id }).reduce(
+          (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
+          {} as FilterQuery<NoInfer<NonNullable<TType>>>,
+        );
         const result = await em.find(
           name,
           filterF,
           options && { limit: options.take, offset: options.skip },
         );
-        return { result: (result as Array<PartialModel<TType>>) ?? undefined };
+        return { result: filterNil(result.map(normalize)) as PartialArrayModel<TType> };
       },
 
       remove: async ({ filter, id, options } = {}) => {
@@ -207,7 +207,10 @@ export class _Database implements _DatabaseModel {
           const result = em.remove(ref);
           options?.isFlush !== false && (await result.flush());
         } else {
-          const filterF = getFilter<TType>({ filter, id });
+          const filterF = mongoFilter<TType>({ filter, id }).reduce(
+            (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
+            {} as FilterQuery<NoInfer<NonNullable<TType>>>,
+          );
           await em.getRepository(name).nativeDelete(filterF);
           options?.isFlush !== false && (await implementation.flush());
         }
@@ -217,8 +220,7 @@ export class _Database implements _DatabaseModel {
       search: async ({ keys, query } = {}) => {
         if (query) {
           // TODO: handle keys as regex
-          const em = this.getEntityManager();
-          const collection = em.getCollection(name);
+          const collection = getCollection();
           const result = await collection.find({ $text: { $search: query } }).toArray();
           return { result } as unknown as ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
         }
@@ -226,19 +228,15 @@ export class _Database implements _DatabaseModel {
       },
 
       update: async ({ filter, id, options, update } = {}) => {
-        const filterF = id
-          ? { _id: { $in: id.map((v) => new ObjectId(v)) } }
-          : getFilter<TType>({ filter });
+        const filterF = mongoFilter<TType>({ filter, id }).reduce(
+          (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
+          {} as FilterQuery<NoInfer<NonNullable<TType>>>,
+        );
         const updateF = cleanObject(update);
-        const em = this.getEntityManager();
-        const driver = em.getDriver();
-        const collectionName = isString(name) ? name : em.getCollection(name).collectionName;
-        const collection = driver.getConnection().getCollection(collectionName);
+        const collection = getCollection();
         const result = await collection.findOneAndUpdate(
-          isEmpty(filterF)
-            ? ({ $expr: { $eq: [1, 1] } } as unknown as FilterQuery<NoInfer<NonNullable<TType>>>)
-            : filterF,
-          { $set: updateF },
+          (isEmpty(filterF) ? { $expr: { $eq: [1, 1] } } : filterF) as Filter<TType & Document>,
+          { $set: updateF as MatchKeysAndValues<TType & Document> },
           { returnDocument: 'after', upsert: options?.isUpsert },
         );
         return { result } as ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
@@ -248,18 +246,23 @@ export class _Database implements _DatabaseModel {
   };
 
   hydrate = <TType extends unknown>(
-    name: EntityName<TType>,
+    name: string | ClassModel<TType>,
     form?: Partial<TType>,
+    isLeaf?: boolean,
   ): Partial<TType> => {
-    if (!form) {
-      throw new NotFoundError('form');
-    }
+    if (!form) throw new NotFoundError('form');
     const formF = form as Record<string, unknown>;
     const em = this.getEntityManager();
+    if (isLeaf) {
+      const entity = em.create(name as EntityName<object>, {});
+      wrap(entity).assign(form, { em, mergeEmbeddedProperties: true, mergeObjectProperties: true });
+      return entity;
+    }
     const meta = em.getMetadata().get(name);
     forEach(meta.properties, (v) => {
       const value = (form as Record<string, unknown>)[v.name];
       switch (v.kind) {
+        case ReferenceKind.EMBEDDED:
         case ReferenceKind.ONE_TO_MANY:
         case ReferenceKind.MANY_TO_MANY: {
           if (isArray(value)) {
@@ -275,6 +278,7 @@ export class _Database implements _DatabaseModel {
         }
       }
     });
+
     return formF as Partial<TType>;
   };
 

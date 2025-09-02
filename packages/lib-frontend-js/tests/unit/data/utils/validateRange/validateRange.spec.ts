@@ -9,12 +9,12 @@ describe(displayName, () => {
   const VALUE_VALID = '15';
   const VALUE_INVALID = '5';
 
-  test('works with valid', async () => {
+  test('valid', async () => {
     const result = validateRange(MIN, MAX)({ value: VALUE_VALID });
     expect(result).toBeFalsy();
   });
 
-  test('works with invalid', async () => {
+  test('invalid', async () => {
     const result = validateRange(MIN, MAX)({ value: VALUE_INVALID });
     expect(result).toBeTruthy();
   });

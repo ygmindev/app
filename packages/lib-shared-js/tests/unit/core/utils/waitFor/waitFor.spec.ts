@@ -20,7 +20,7 @@ describe(displayName, () => {
     expect(condition).toHaveBeenCalledTimes(duration / WAIT_FOR_INTERVAL_DEFAULT_MILLISECONDS);
   });
 
-  test('works with timeout', async () => {
+  test('timeout', async () => {
     const condition = jest.fn();
     condition.mockReturnValue(false);
     await waitFor({ condition });

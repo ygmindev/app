@@ -12,7 +12,7 @@ export const CONTEXT: RequestContextModel = {
 };
 
 describe(displayName, () => {
-  test('works with authorized', async () => {
+  test('authorized', async () => {
     const result = selfAuthorizer({
       context: CONTEXT,
       input: { filter: [], root: { _id: USER_FIXTURE._id } },
@@ -20,7 +20,7 @@ describe(displayName, () => {
     expect(result).toStrictEqual(true);
   });
 
-  test('works with unauthorized', async () => {
+  test('unauthorized', async () => {
     const result = selfAuthorizer({
       context: CONTEXT,
       input: { filter: [], root: { _id: 'unauthorized user' } },

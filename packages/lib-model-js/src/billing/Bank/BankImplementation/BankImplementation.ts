@@ -1,19 +1,18 @@
 import { getFingerprintInput } from '@lib/backend/billing/utils/getFingerprintInput/getFingerprintInput';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { createRelatedResourceImplementation } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation';
-import { Bank } from '@lib/model/billing/Bank/Bank.entity';
+import { createEmbeddedResourceImplementation } from '@lib/backend/resource/utils/createEmbeddedResourceImplementation/createEmbeddedResourceImplementation';
 import { BANK_RESOURCE_NAME } from '@lib/model/billing/Bank/Bank.constants';
+import { Bank } from '@lib/model/billing/Bank/Bank.entity';
 import { type BankModel } from '@lib/model/billing/Bank/Bank.models';
 import { type BankImplementationModel } from '@lib/model/billing/Bank/BankImplementation/BankImplementation.models.js';
 import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
-import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { UserImplementation } from '@lib/model/user/User/UserImplementation/UserImplementation';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 
 @withContainer()
 export class BankImplementation
-  extends createRelatedResourceImplementation<BankModel, UserModel>({
+  extends createEmbeddedResourceImplementation<BankModel, UserModel>({
     Resource: Bank,
     RootImplementation: UserImplementation,
     afterCreate: async ({ input, output }, context) => {
@@ -32,6 +31,5 @@ export class BankImplementation
     beforeCreate: async ({ input }) =>
       input && getFingerprintInput({ input, type: PAYMENT_METHOD_TYPE.BANK }),
     name: BANK_RESOURCE_NAME,
-    root: USER_RESOURCE_NAME,
   })
   implements BankImplementationModel {}

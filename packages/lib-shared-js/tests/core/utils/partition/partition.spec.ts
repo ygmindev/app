@@ -13,7 +13,7 @@ describe(displayName, () => {
     expect(falseValues).toStrictEqual([1, 2, 4, 5, 7, 8]);
   });
 
-  test('works with index', async () => {
+  test('index', async () => {
     const [[trueValues, falseValues], [trueIndices, falseIndices]] = partition(
       VALUES,
       CONDITION,

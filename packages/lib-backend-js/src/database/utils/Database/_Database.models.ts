@@ -8,6 +8,11 @@ export type _DatabaseModel = {
   flush(): Promise<void>;
   getRepositories(): Array<string>;
   getRepository<TType>(params: GetRepositoryParamsModel<TType>): RepositoryModel<TType>;
+  hydrate<TType extends unknown>(
+    name: string,
+    form?: Partial<TType>,
+    isLeaf?: boolean,
+  ): Partial<TType>;
   isConnected(): Promise<boolean>;
 };
 

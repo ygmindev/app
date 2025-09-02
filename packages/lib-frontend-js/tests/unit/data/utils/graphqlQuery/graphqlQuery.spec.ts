@@ -24,7 +24,7 @@ describe(displayName, () => {
     expect(result).toStrictEqual(expected);
   });
 
-  test('works with params', async () => {
+  test('params', async () => {
     const PARAMS: GraphqlQueryParamsModel<TestableEntityResourceModel, { a: string; b: string }> = {
       fields: ['_id', 'created'],
       name: 'NAME',

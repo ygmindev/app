@@ -3,10 +3,11 @@ import { type TestResourceImplementationParamsModel } from '@lib/backend/test/ut
 import { config as databaseConfig } from '@lib/config/database/database.mongo';
 import { type TestableResourceModel } from '@lib/model/test/TestableResource/TestableResource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
+import { expectEqualsTestableResource } from '@lib/shared/test/utils/expectEqualsTestableResource/expectEqualsTestableResource';
 import every from 'lodash/every';
-import toString from 'lodash/toString';
 
 export const testResourceImplementation = <
   TType extends TestableResourceModel,
@@ -19,44 +20,54 @@ export const testResourceImplementation = <
   describe('test resource implementation', () => {
     let cleanUp: (() => Promise<void>) | undefined;
     let implementation: ResourceImplementationModel<TType, TRoot>;
-    let root: (TRoot extends undefined ? never : string) | undefined;
-    let first: PartialModel<TType> | undefined;
+    let root: TRoot extends undefined ? never : string;
+    let first: PartialModel<TType>;
+    let second: PartialModel<TType>;
 
     beforeAll(async () => {
       ({ cleanUp } = await initialize({ database: databaseConfig.params() }));
       implementation = getImplementation();
       root = (await getRoot?.()) as TRoot extends undefined ? never : string;
-      root && (root = toString(root) as TRoot extends undefined ? never : string);
-      first = (await implementation.getMany({ root }))?.result?.[0];
+      const { result } = await implementation.getMany({ root });
+      if (!result) throw new NotFoundError('first');
+      [first, second] = result;
     });
 
     afterAll(async () => {
       await cleanUp?.();
     });
 
-    test('works with create', async () => {
+    test('create', async () => {
       const { result } = await implementation.create({ form, root });
-      expect(result?._id).toBeDefined();
-      expect(result?.created).toBeDefined();
-      expect(result?.string).toStrictEqual(form.string);
+      expectEqualsTestableResource(result, form);
     });
 
-    test('works with get by id', async () => {
-      const input = { id: [first?._id ?? ''], root };
-      const { result } = await implementation.get(input);
-      expect(result?._id).toStrictEqual(first?._id);
+    test('get by id', async () => {
+      const { result } = await implementation.get({ id: [first._id ?? ''], root });
+      expectEqualsTestableResource(result, first);
     });
 
-    test('works with get by partial', async () => {
-      const input = { filter: [{ field: 'string', value: first?.string }], root };
-      const { result } = await implementation.get(input);
-      expect(result?._id).toStrictEqual(first?._id);
+    test('get by partial', async () => {
+      const { result } = await implementation.get({
+        filter: [{ field: 'string', value: first.string }],
+        root,
+      });
+      expectEqualsTestableResource(result, first);
     });
 
-    test('works with getMany by partial', async () => {
+    test('getMany by id', async () => {
+      const { result } = await implementation.getMany({
+        id: [first._id ?? '', second._id ?? ''],
+        root,
+      });
+      expectEqualsTestableResource(result, [first, second]);
+    });
+
+    test('getMany by partial', async () => {
       const GROUP = '3';
       const input = { filter: [{ field: 'group', value: GROUP }], root };
       const { result } = await implementation.getMany(input);
+      expect(result).toBeDefined();
       expect(
         every(
           result?.map((v) => v.group),
@@ -65,7 +76,7 @@ export const testResourceImplementation = <
       ).toBeTruthy();
     });
 
-    test('works with getMany with skip and take', async () => {
+    test('getMany with skip and take', async () => {
       const SKIP = 1;
       const TAKE = 2;
       const GROUP = '2';
@@ -79,7 +90,7 @@ export const testResourceImplementation = <
       expect(result?.map((v) => v.index)).toStrictEqual([SKIP + 1, SKIP + 2]);
     });
 
-    test('works with getConnection all result', async () => {
+    test('getConnection all result', async () => {
       const FIRST = 2;
       const GROUP = '2';
       const { result } = await implementation.getConnection({
@@ -100,7 +111,7 @@ export const testResourceImplementation = <
       expect(result?.pageInfo.hasPreviousPage).toBeFalsy();
     });
 
-    //   test('works with getConnection filtered result', async () => {
+    //   test('getConnection filtered result', async () => {
     //     const { result: data } = await implementation.getMany({ filter: [] });
     //     const input = {
     //       filter: [{ field: 'string', value: 'string1' }],
@@ -121,7 +132,7 @@ export const testResourceImplementation = <
     //     expect(result?.pageInfo.hasPreviousPage).toBeFalsy();
     //   });
 
-    //   test('works with getConnection paged result first', async () => {
+    //   test('getConnection paged result first', async () => {
     //     const { result: data = [] } = await implementation.getMany({ filter: [] });
     //     const size = 2;
     //     const input = {
@@ -141,7 +152,7 @@ export const testResourceImplementation = <
     //     expect(result?.pageInfo.hasPreviousPage).toBeFalsy();
     //   });
 
-    //   test('works with getConnection cursored paged result first', async () => {
+    //   test('getConnection cursored paged result first', async () => {
     //     const { result: data = [] } = await implementation.getMany({ filter: [] });
     //     const size = 2;
     //     const { result: allResult } = await implementation.getConnection({
@@ -165,7 +176,7 @@ export const testResourceImplementation = <
     //     expect(result?.pageInfo.hasPreviousPage).toBeFalsy();
     //   });
 
-    //   test('works with getConnection paged result last', async () => {
+    //   test('getConnection paged result last', async () => {
     //     const { result: data = [] } = await implementation.getMany({ filter: [] });
     //     const size = 2;
     //     const input = {
@@ -185,7 +196,7 @@ export const testResourceImplementation = <
     //     expect(result?.pageInfo.hasPreviousPage).toBeTruthy();
     //   });
 
-    //   test('works with getConnection cursored paged result last', async () => {
+    //   test('getConnection cursored paged result last', async () => {
     //     const { result: data = [] } = await implementation.getMany({ filter: [] });
     //     const size = 2;
     //     const { result: allResult } = await implementation.getConnection({
@@ -209,37 +220,37 @@ export const testResourceImplementation = <
     //     expect(result?.pageInfo.hasPreviousPage).toBeFalsy();
     //   });
 
-    test('works with update by id', async () => {
+    test('update by id', async () => {
       const NEW_VALUE = 'new';
       const { result: updateResult } = await implementation.update({
-        id: [first?._id ?? ''],
+        id: [first._id ?? ''],
         root,
         update: { string: NEW_VALUE } as UpdateModel<TType>,
       });
       expect(updateResult?.string).toStrictEqual(NEW_VALUE);
       const { result: getResult } = await implementation.get({
-        id: [first?._id ?? ''],
+        id: [first._id ?? ''],
         root,
       });
       expect(getResult?.string).toStrictEqual(NEW_VALUE);
     });
 
-    test('works with update by partial', async () => {
+    test('update by partial', async () => {
       const NEW_VALUE = 'new';
       const { result: updateResult } = await implementation.update({
-        filter: [{ field: 'string', value: first?.string }],
+        filter: [{ field: 'string', value: first.string }],
         root,
         update: { string: NEW_VALUE } as UpdateModel<TType>,
       });
       expect(updateResult?.string).toStrictEqual(NEW_VALUE);
       const { result: getResult } = await implementation.get({
-        id: [first?._id ?? ''],
+        id: [first._id ?? ''],
         root,
       });
       expect(getResult?.string).toStrictEqual(NEW_VALUE);
     });
 
-    test('works with upsert by id', async () => {
+    test('upsert by id', async () => {
       const ID_UNKNOWN = '62170c5af3d27e919f30b100';
       const NEW_VALUE = 'new';
 
@@ -272,7 +283,7 @@ export const testResourceImplementation = <
       expect(getResult?.string).toStrictEqual(NEW_VALUE);
     });
 
-    test('works with upsert by partial', async () => {
+    test('upsert by partial', async () => {
       const VALUE_UNKNOWN = 'does not exist';
       const NEW_VALUE = 'new';
 
@@ -292,7 +303,7 @@ export const testResourceImplementation = <
 
       // Upsert for existing partial
       const { result: updateResult } = await implementation.update({
-        filter: [{ field: 'string', value: first?.string }],
+        filter: [{ field: 'string', value: first.string }],
         options: { isUpsert: true },
         root,
         update: { isFixture: true, string: NEW_VALUE } as UpdateModel<TType>,
@@ -305,7 +316,7 @@ export const testResourceImplementation = <
       expect(getResult?.string).toStrictEqual(NEW_VALUE);
     });
 
-    //   test('works with update by push', async () => {
+    //   test('update by push', async () => {
     //     const { result: data = [] } = await implementation.getMany({ filter: [] });
     //     const input = {
     //       filter: [{ field: '_id', value: data[0]._id }],
@@ -318,7 +329,7 @@ export const testResourceImplementation = <
     //     ]);
     //   });
 
-    //   test('works with update by pull', async () => {
+    //   test('update by pull', async () => {
     //     const { result: data = [] } = await implementation.getMany({ filter: [] });
     //     const input = {
     //       filter: [{ field: '_id', value: data[0]._id }],
@@ -329,7 +340,7 @@ export const testResourceImplementation = <
     //     expect(result?.stringArray ?? []).toStrictEqual(expected);
     //   });
 
-    //   test('works with update with project', async () => {
+    //   test('update with project', async () => {
     //     const { result: data = [] } = await implementation.getMany({ filter: [] });
     //     const input = {
     //       filter: [{ field: '_id', value: data[0]._id }],
@@ -342,8 +353,17 @@ export const testResourceImplementation = <
     //     expect(result && Object.keys(result)).toStrictEqual(PROJECT_FIELDS);
     //   });
 
-    test('works with remove by id', async () => {
-      const input = { id: [first?._id ?? ''], root };
+    test('remove by id', async () => {
+      const input = { id: [first._id ?? ''], root };
+      const { result: removeResult } = await implementation.remove(input);
+      expect(removeResult).toBeTruthy();
+      const { result: getResult } = await implementation.get(input);
+      expect(getResult).toBeUndefined();
+    });
+
+    test('remove by partial', async () => {
+      const GROUP = '3';
+      const input = { filter: [{ field: 'group', value: GROUP }], root };
       const { result: removeResult } = await implementation.remove(input);
       expect(removeResult).toBeTruthy();
       const { result: getResult } = await implementation.get(input);

@@ -5,7 +5,7 @@ import { createEntityResourceResolver } from '@lib/backend/resource/utils/create
 import { TestableEntityResource } from '@lib/model/test/TestableEntityResource/TestableEntityResource';
 import { TestableEntityResourceImplementation } from '@lib/model/test/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
 import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';
-import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/model/test/TestableEntityResource/TestableEntityResource.constants';
+import { TESTABLE_ENTITY_RESOURCE_NAME } from '@lib/model/test/TestableEntityResource/TestableEntityResource.constants';
 import {
   type TestableEntityResourceFormModel,
   type TestableEntityResourceModel,
@@ -22,7 +22,7 @@ describe(displayName, () => {
   >({
     Resource: () => TestableEntityResource,
     ResourceImplementation: TestableEntityResourceImplementation,
-    name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
+    name: TESTABLE_ENTITY_RESOURCE_NAME,
   }) {}
 
   void testResourceImplementation({ getImplementation: () => Container.get(Resolver) });

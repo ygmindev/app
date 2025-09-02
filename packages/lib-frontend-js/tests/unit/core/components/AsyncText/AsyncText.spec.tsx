@@ -12,12 +12,12 @@ describe(displayName, () => {
     expect(await findByTestId(testID)).toBeTruthy();
   });
 
-  test('works with children', async () => {
+  test('children', async () => {
     const { findByText } = await render({ element: <Component>{TEST}</Component> });
     expect(await findByText('test with string')).toBeTruthy();
   });
 
-  test('works with function children', async () => {
+  test('function children', async () => {
     const { findByText } = await render({ element: <Component>{({ t }) => t(TEST)}</Component> });
     expect(await findByText('test with string')).toBeTruthy();
   });

@@ -81,7 +81,7 @@ describe(TEST_NAME, () => {
     }
   };
 
-  test('works with new payment card', async () => {
+  test('new payment card', async () => {
     const stop = await screen.record();
 
     await addProductsToCart();
@@ -95,7 +95,7 @@ describe(TEST_NAME, () => {
     expect(true).toBeTruthy();
   });
 
-  // test('works with existing payment card', async () => {
+  // test('existing payment card', async () => {
   //   await screen.open(`/${BILLING}/${PAYMENT_METHOD}`);
   //   await screen.find({ value: PAYMENT_METHOD_INPUT_NEW_TEST_ID }).then((h) => h?.press());
   //   await screen.snapshot();

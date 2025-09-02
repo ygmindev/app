@@ -26,7 +26,7 @@ describe(displayName, () => {
     expect(config).toStrictEqual({ v1: '1', v2: '2' });
   });
 
-  test('works with overrides', async () => {
+  test('overrides', async () => {
     const { config } = defineConfig({
       config: CONFIG,
       overrides: () => [{ k1: 1, k2: 3 }],

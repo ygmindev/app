@@ -4,12 +4,12 @@ import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyF
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';
 import { TestableEntityResource } from '@lib/model/test/TestableEntityResource/TestableEntityResource.entity';
 import { TestableEntityResourceModel } from '@lib/model/test/TestableEntityResource/TestableEntityResource.models';
-import { TESTABLE_RELATED_RESOURCE_RESOURCE_NAME } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.constants';
+import { TESTABLE_RELATED_RESOURCE_NAME } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.constants';
 import { type TestableRelatedResourceModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.models';
 import { TestableResource } from '@lib/model/test/TestableResource/TestableResource';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
 
-@withEntity({ isDatabase: true, name: TESTABLE_RELATED_RESOURCE_RESOURCE_NAME })
+@withEntity({ isDatabase: true, name: TESTABLE_RELATED_RESOURCE_NAME })
 export class TestableRelatedResource
   extends TestableResource
   implements TestableRelatedResourceModel

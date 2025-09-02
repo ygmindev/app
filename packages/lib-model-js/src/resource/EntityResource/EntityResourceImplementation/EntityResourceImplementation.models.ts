@@ -2,4 +2,6 @@ import { type EntityResourceModel } from '@lib/model/resource/EntityResource/Ent
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 
 export type EntityResourceImplementationModel<TType extends EntityResourceModel> =
-  ResourceImplementationModel<TType>;
+  ResourceImplementationModel<TType> & {
+    entity: string;
+  };

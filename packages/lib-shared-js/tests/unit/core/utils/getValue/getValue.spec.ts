@@ -12,17 +12,17 @@ describe(displayName, () => {
     },
   };
 
-  test('works with depth 1', async () => {
+  test('depth 1', async () => {
     const result = getValue(VALUE, 'k1');
     expect(result).toStrictEqual('v1');
   });
 
-  test('works with depth 2', async () => {
+  test('depth 2', async () => {
     const result = getValue(VALUE, 'k2.k22');
     expect(result).toStrictEqual('v22');
   });
 
-  test('works with default', async () => {
+  test('default', async () => {
     const result = getValue(VALUE, 'k2.k23', 'default');
     expect(result).toStrictEqual('default');
   });

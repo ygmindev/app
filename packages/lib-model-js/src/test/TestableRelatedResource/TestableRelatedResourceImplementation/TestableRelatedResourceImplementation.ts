@@ -1,20 +1,14 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { createRelatedResourceImplementation } from '@lib/backend/resource/utils/createRelatedResourceImplementation/createRelatedResourceImplementation';
-import { TestableEntityResourceModel } from '@lib/model/test/TestableEntityResource/TestableEntityResource.models';
-import { TestableEntityResourceImplementation } from '@lib/model/test/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
+import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
+import { TESTABLE_RELATED_RESOURCE_NAME } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.constants';
 import { TestableRelatedResource } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.entity';
-import { type TestableRelatedResourceModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.models';
+import { TestableRelatedResourceModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.models';
 import { type TestableRelatedResourceImplementationModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResourceImplementation/TestableRelatedResourceImplementation.models';
 
 @withContainer()
 export class TestableRelatedResourceImplementation
-  extends createRelatedResourceImplementation<
-    TestableRelatedResourceModel,
-    TestableEntityResourceModel
-  >({
+  extends createEntityResourceImplementation<TestableRelatedResourceModel>({
     Resource: TestableRelatedResource,
-    RootImplementation: TestableEntityResourceImplementation,
-    name: 'relatedOneToMany',
-    root: 'rootManyToOne',
+    name: TESTABLE_RELATED_RESOURCE_NAME,
   })
   implements TestableRelatedResourceImplementationModel {}

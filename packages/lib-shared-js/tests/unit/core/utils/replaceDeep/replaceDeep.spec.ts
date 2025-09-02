@@ -9,18 +9,18 @@ describe(displayName, () => {
   const STRING = 'string to replace from';
   const EXPECTED = STRING.replaceAll(FROM, TO);
 
-  test('works with string', async () => {
+  test('string', async () => {
     const result = replaceDeep(STRING, FROM, TO);
     expect(result).toStrictEqual(EXPECTED);
   });
 
-  test('works with object', async () => {
+  test('object', async () => {
     const value = { a: 1, b: STRING, c: { d: STRING } };
     const result = replaceDeep(value, FROM, TO);
     expect(result).toStrictEqual({ a: 1, b: EXPECTED, c: { d: EXPECTED } });
   });
 
-  test('works with array', async () => {
+  test('array', async () => {
     const value = [STRING, { a: 1, b: STRING, c: { d: STRING } }];
     const result = replaceDeep(value, FROM, TO);
     expect(result).toStrictEqual([EXPECTED, { a: 1, b: EXPECTED, c: { d: EXPECTED } }]);

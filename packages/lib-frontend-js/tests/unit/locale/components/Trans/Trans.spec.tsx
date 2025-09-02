@@ -11,7 +11,7 @@ const { Component: Trans, displayName } = withTestComponent<
 >({ target: _Trans });
 
 describe(displayName, () => {
-  test('works with string', async () => {
+  test('string', async () => {
     const { findByText } = await render({
       element: (
         <Trans
@@ -23,7 +23,7 @@ describe(displayName, () => {
     await waitForExpect(async () => expect(await findByText('test with string')).toBeTruthy());
   });
 
-  test('works with params', async () => {
+  test('params', async () => {
     const { findByText } = await render({
       element: (
         <Trans
@@ -38,7 +38,7 @@ describe(displayName, () => {
     );
   });
 
-  test('works with elements', async () => {
+  test('elements', async () => {
     const { findByText } = await render({
       element: (
         <Trans

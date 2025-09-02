@@ -28,7 +28,7 @@ describe(displayName, () => {
     expect(result?.edges.map(({ node }) => node)).toStrictEqual(entities);
   });
 
-  test('works with filter', async () => {
+  test('filter', async () => {
     const filter = { string: 'string' };
     const result = await getConnection({
       count: entities.length,

@@ -14,7 +14,7 @@ describe(displayName, () => {
     expect(result).toStrictEqual({ key1: 'a', key2: 'b', key3: 'd' });
   });
 
-  test('works with deep', async () => {
+  test('deep', async () => {
     const a: Record<string, unknown> = { key1: 'a', key2: 'b' };
     const b: Record<string, unknown> = { key2: 'c', key3: 'd' };
     a.nestedKey = cloneDeep(a);
@@ -29,7 +29,7 @@ describe(displayName, () => {
     });
   });
 
-  test('works with deep append', async () => {
+  test('deep append', async () => {
     const a: Record<string, unknown> = { key1: 'a', key2: ['b'] };
     const b: Record<string, unknown> = { key2: ['c'], key3: 'd' };
     a.nestedKey = cloneDeep(a);

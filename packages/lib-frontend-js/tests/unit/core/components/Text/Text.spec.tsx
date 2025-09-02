@@ -13,7 +13,7 @@ describe(displayName, () => {
     expect(await findByTestId(testID)).toBeTruthy();
   });
 
-  test('works with children', async () => {
+  test('children', async () => {
     const { findByText } = await render({ element: <Component>{TEST}</Component> });
     expect(await findByText(TEST)).toBeTruthy();
   });

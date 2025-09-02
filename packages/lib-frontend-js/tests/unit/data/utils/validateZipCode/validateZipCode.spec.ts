@@ -7,12 +7,12 @@ describe(displayName, () => {
   const VALUE_VALID = 'VALUE_VALID';
   const VALUE_INVALID = '';
 
-  test('works with valid', async () => {
+  test('valid', async () => {
     const result = validateZipCode()({ value: VALUE_VALID });
     expect(result).toBeFalsy();
   });
 
-  test('works with invalid', async () => {
+  test('invalid', async () => {
     const result = validateZipCode()({ value: VALUE_INVALID });
     expect(result).toBeTruthy();
   });

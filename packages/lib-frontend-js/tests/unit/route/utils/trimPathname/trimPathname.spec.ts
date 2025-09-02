@@ -6,11 +6,11 @@ const { displayName } = withTest({ trimPathname });
 describe(displayName, () => {
   const PATHNAME = '/test/path/sub-path';
 
-  test('works with trailing slash', async () => {
+  test('trailing slash', async () => {
     expect(trimPathname('/test/path/sub-path')).toStrictEqual(PATHNAME);
   });
 
-  test('works with duplicate slash', async () => {
+  test('duplicate slash', async () => {
     expect(trimPathname('//test/path/sub-path')).toStrictEqual(PATHNAME);
     expect(trimPathname('///test/path/sub-path')).toStrictEqual(PATHNAME);
     expect(trimPathname('/test/path/sub-path')).toStrictEqual(PATHNAME);
@@ -18,7 +18,7 @@ describe(displayName, () => {
     expect(trimPathname('//test/path/sub-path')).toStrictEqual(PATHNAME);
   });
 
-  test('works with kebab case', async () => {
+  test('kebab case', async () => {
     expect(trimPathname('/test/path/subPath')).toStrictEqual(PATHNAME);
     expect(trimPathname('/test/path/SUBPATH')).toStrictEqual(PATHNAME);
   });

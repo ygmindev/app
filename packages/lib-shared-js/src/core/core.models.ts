@@ -1,4 +1,3 @@
-import { type CollectionModel } from '@lib/backend/core/utils/Collection/Collection.models';
 import { type BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import {
   type Class,
@@ -50,12 +49,7 @@ export type ReturnTypeModel<TType> = TType extends
   ? TReturn
   : TType;
 
-export type InferModel<TType> =
-  TType extends Array<infer TElement>
-    ? TElement
-    : TType extends CollectionModel<infer TElement>
-      ? TElement
-      : TType;
+export type InferModel<TType> = TType extends Array<infer TElement> ? TElement : TType;
 
 export type IntersectionModel<TType extends Array<unknown>> = TType extends [
   v: infer TValue,

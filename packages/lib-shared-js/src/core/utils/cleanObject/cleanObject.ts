@@ -20,8 +20,10 @@ import last from 'lodash/last';
 //           ? reduce(value as object, (result, v, k) => ({ ...result, [k]: resolveObjectId(v) }), {})
 //           : value) as TType);
 
+// const resolveObjectId = <TType extends unknown>(value: TType): TType =>
+//   (isString(value) ? new ObjectId(value) : value) as TType;
 const resolveObjectId = <TType extends unknown>(value: TType): TType =>
-  (isString(value) ? new ObjectId(value) : value) as TType;
+  isString(value) ? value : value;
 
 const keyValueTransformer = <TValue extends unknown>(v: TValue, k?: string): TValue => {
   let vF = v;

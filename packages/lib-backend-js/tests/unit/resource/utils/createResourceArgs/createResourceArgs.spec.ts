@@ -1,5 +1,5 @@
 import { createResourceArgs } from '@lib/backend/resource/utils/createResourceArgs/createResourceArgs';
-import { TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME } from '@lib/model/test/TestableEntityResource/TestableEntityResource.constants';
+import { TESTABLE_ENTITY_RESOURCE_NAME } from '@lib/model/test/TestableEntityResource/TestableEntityResource.constants';
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.constants';
 import { type ResourceMethodTypeModel } from '@lib/shared/resource/resource.models';
@@ -19,62 +19,62 @@ describe(displayName, () => {
       createResourceArgs({
         Resource: () => ResourceF,
         method: 'unsupported method' as ResourceMethodTypeModel,
-        name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
+        name: TESTABLE_ENTITY_RESOURCE_NAME,
       }),
     ).toThrow(InvalidTypeError);
   });
 
-  test('works with create', async () => {
+  test('create', async () => {
     const result = new (createResourceArgs({
       Resource: () => ResourceF,
       method: RESOURCE_METHOD_TYPE.CREATE,
-      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('form');
   });
 
-  test('works with get', async () => {
+  test('get', async () => {
     const result = new (createResourceArgs({
       Resource: () => ResourceF,
       method: RESOURCE_METHOD_TYPE.GET,
-      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('filter');
   });
 
-  test('works with get many', async () => {
+  test('get many', async () => {
     const result = new (createResourceArgs({
       Resource: () => ResourceF,
       method: RESOURCE_METHOD_TYPE.GET_MANY,
-      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('filter');
   });
 
-  test('works with get connection', async () => {
+  test('get connection', async () => {
     const result = new (createResourceArgs({
       Resource: () => ResourceF,
       method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
-      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('filter');
     expect(result).toHaveProperty('pagination');
   });
 
-  test('works with remove', async () => {
+  test('remove', async () => {
     const result = new (createResourceArgs({
       Resource: () => ResourceF,
       method: RESOURCE_METHOD_TYPE.REMOVE,
-      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('filter');
   });
 
-  test('works with update', async () => {
+  test('update', async () => {
     const result = new (createResourceArgs({
       Resource: () => ResourceF,
       method: RESOURCE_METHOD_TYPE.UPDATE,
-      name: TESTABLE_ENTITY_RESOURCE_RESOURCE_NAME,
+      name: TESTABLE_ENTITY_RESOURCE_NAME,
     }))();
     expect(result).toHaveProperty('filter');
     expect(result).toHaveProperty('update');

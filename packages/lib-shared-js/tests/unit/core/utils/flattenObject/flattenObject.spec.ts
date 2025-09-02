@@ -23,7 +23,7 @@ describe(displayName, () => {
     });
   });
 
-  test('works with delimiter', async () => {
+  test('delimiter', async () => {
     const result = flattenObject(VALUE, { delimiter: '/' });
     expect(result).toEqual({
       $c: { ck: 'cv' },
@@ -34,7 +34,7 @@ describe(displayName, () => {
     });
   });
 
-  test('works with prefix', async () => {
+  test('prefix', async () => {
     const result = flattenObject(VALUE, { prefixes: ['%'] });
     expect(result).toEqual({
       '$c.ck': 'cv',

@@ -19,7 +19,7 @@ describe(displayName, () => {
     expect(result).toEqual(pick(VALUE, ['a', 'b', 'c']));
   });
 
-  test('works with nested object', async () => {
+  test('nested object', async () => {
     const value = cloneDeep(VALUE);
     value.nestedKey = cloneDeep(value);
     const result = cleanObject(value);
