@@ -13,6 +13,7 @@ import {
   Index,
   ManyToMany,
   ManyToOne,
+  ObjectId,
   OneToMany,
   OneToOne,
   PrimaryKey,
@@ -48,7 +49,7 @@ export const _withField =
       gqlType = () => Resource();
     } else {
       if (isId) {
-        ormType = 'ObjectId';
+        ormType = ObjectId;
       } else if (isDate) {
         ormType = Date;
         gqlType = () => Date;

@@ -18,6 +18,7 @@ export const getOperationType = (params: GetOperationTypeParamsModel): GetOperat
     case RESOURCE_METHOD_TYPE.CREATE:
     case RESOURCE_METHOD_TYPE.CREATE_MANY:
     case RESOURCE_METHOD_TYPE.UPDATE:
+    case RESOURCE_METHOD_TYPE.UPDATE_MANY:
     case RESOURCE_METHOD_TYPE.REMOVE:
       return GRAPHQL_OPERATION_TYPE.MUTATION;
     default:

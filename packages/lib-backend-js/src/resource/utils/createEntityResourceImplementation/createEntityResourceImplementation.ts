@@ -19,6 +19,7 @@ export const createEntityResourceImplementation = <TType extends EntityResourceM
   afterRemove,
   afterSearch,
   afterUpdate,
+  afterUpdateMany,
   beforeCreate,
   beforeCreateMany,
   beforeGet,
@@ -27,6 +28,7 @@ export const createEntityResourceImplementation = <TType extends EntityResourceM
   beforeRemove,
   beforeSearch,
   beforeUpdate,
+  beforeUpdateMany,
   name,
 }: CreateEntityResourceImplementationParamsModel<TType>): CreateEntityResourceImplementationModel<TType> => {
   let repositry: RepositoryModel<TType>;
@@ -46,6 +48,7 @@ export const createEntityResourceImplementation = <TType extends EntityResourceM
     afterRemove,
     afterSearch,
     afterUpdate,
+    afterUpdateMany,
     beforeCreate,
     beforeCreateMany,
     beforeGet,
@@ -54,6 +57,7 @@ export const createEntityResourceImplementation = <TType extends EntityResourceM
     beforeRemove,
     beforeSearch,
     beforeUpdate,
+    beforeUpdateMany,
     count: async (input) => getRepository().count(input),
     create: async (...input) => getRepository().create(...input),
     createMany: async (...input) => getRepository().createMany(...input),
@@ -64,5 +68,6 @@ export const createEntityResourceImplementation = <TType extends EntityResourceM
     remove: async (...input) => getRepository().remove(...input),
     search: async (...input) => getRepository().search(...input),
     update: async (...input) => getRepository().update(...input),
+    updateMany: async (...input) => getRepository().updateMany(...input),
   });
 };

@@ -45,7 +45,7 @@ type GetOptionsModel<TType> = {
 
 type GetArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
-  id?: Array<string>;
+  id?: string;
   options?: GetOptionsModel<TType>;
 };
 
@@ -99,10 +99,18 @@ type UpdateOptionsModel = {
   isUpsert?: boolean;
 };
 
+type UpdateManyOptionsModel = EmptyObjectModel;
+
 type UpdateArgsModel<TType> = {
+  id?: string;
+  options?: UpdateOptionsModel;
+  update?: UpdateModel<TType>;
+};
+
+type UpdateManyArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
   id?: Array<string>;
-  options?: UpdateOptionsModel;
+  options?: UpdateManyOptionsModel;
   update?: UpdateModel<TType>;
 };
 
@@ -129,4 +137,6 @@ export type ResourceArgsModel<
                   ? SubscribeArgsModel<TType>
                   : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
                     ? UpdateArgsModel<TType>
-                    : never);
+                    : TMethod extends RESOURCE_METHOD_TYPE.UPDATE_MANY
+                      ? UpdateManyArgsModel<TType>
+                      : never);

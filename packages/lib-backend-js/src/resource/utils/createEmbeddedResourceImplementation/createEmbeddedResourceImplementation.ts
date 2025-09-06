@@ -37,6 +37,7 @@ export const createEmbeddedResourceImplementation = <
   afterRemove,
   afterSearch,
   afterUpdate,
+  afterUpdateMany,
   beforeCreate,
   beforeCreateMany,
   beforeGet,
@@ -45,6 +46,7 @@ export const createEmbeddedResourceImplementation = <
   beforeRemove,
   beforeSearch,
   beforeUpdate,
+  beforeUpdateMany,
   name,
 }: CreateEmbeddedResourceImplementationParamsModel<
   TType,
@@ -129,6 +131,20 @@ export const createEmbeddedResourceImplementation = <
     return rootResult.count ?? 0;
   };
 
+  const create = async (
+    input: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
+    context?: RequestContextModel,
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> => {
+    if (!input?.root) throw new NotFoundError('root');
+    const form = hydrate(input?.form);
+    const result = await getRootCollection().findOneAndUpdate(
+      { _id: new ObjectId(input.root) },
+      { $push: { [name]: form } as PushOperator<TType> },
+      { returnDocument: 'after' },
+    );
+    return { result: form, root: result as unknown as Partial<TRoot> };
+  };
+
   return createResourceImplementation<TType, TRoot>({
     Resource,
     afterCreate,
@@ -139,6 +155,7 @@ export const createEmbeddedResourceImplementation = <
     afterRemove,
     afterSearch,
     afterUpdate,
+    afterUpdateMany,
     beforeCreate,
     beforeCreateMany,
     beforeGet,
@@ -147,18 +164,11 @@ export const createEmbeddedResourceImplementation = <
     beforeRemove,
     beforeSearch,
     beforeUpdate,
+    beforeUpdateMany,
 
     count,
 
-    create: async (input, context) => {
-      if (!input?.root) throw new NotFoundError('root');
-      const form = hydrate(input?.form);
-      const result = await getRootCollection().updateOne(
-        { _id: new ObjectId(input.root) },
-        { $push: { [name]: form } as PushOperator<TType> },
-      );
-      return { result: form, root: result as unknown as Partial<TRoot> };
-    },
+    create,
 
     createMany: async (input, context) => {
       if (!input?.root) throw new NotFoundError('root');
@@ -214,7 +224,10 @@ export const createEmbeddedResourceImplementation = <
         {
           $pull: {
             [name]: elemMatch.reduce(
-              (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
+              (result, v) => ({
+                ...result,
+                [v.field]: { [v.condition]: v.value },
+              }),
               {},
             ),
           } as PullOperator<TType>,
@@ -226,74 +239,66 @@ export const createEmbeddedResourceImplementation = <
     // TODO: fix
     search: async (input = {}, context) => {
       if (!input?.root) throw new NotFoundError('root');
-      const { result: rootResult } = await getRootImplementation().get(
-        { id: [input.root] },
-        context,
-      );
       return {
         result: undefined,
-        root: rootResult,
+        root: undefined,
       };
     },
 
     update: async (input, context) => {
       if (!input?.root) throw new NotFoundError('root');
       if (!input?.update) throw new NotFoundError('update');
-
-      const elemMatch = mongoFilter({ filter: input.filter, id: input.id });
+      const elemMatch = mongoFilter({ id: input.id });
       if (isEmpty(elemMatch)) throw new NotFoundError('filter');
-      const setPayload = reduce(
-        input.update,
-        (result, v, k) => ({ ...result, [`${name}.$[elem].${k}`]: v }),
-        {},
-      );
-      const arrayFilters = [
-        elemMatch.reduce(
-          (result, v) => ({ ...result, [`elem.${v.field}`]: { [v.condition]: v.value } }),
-          {},
-        ),
-      ];
-      const rootResult = (await getRootCollection().findOneAndUpdate(
-        { _id: new ObjectId(input.root) },
-        { $set: setPayload },
+      const rootResult = await getRootCollection().findOneAndUpdate(
+        { _id: new ObjectId(input.root), [`${name}._id`]: new ObjectId(input.id) },
         {
-          arrayFilters,
-          projection: { [name]: { $elemMatch: arrayFilters[0] } },
-          returnDocument: 'after', // only return matching element
+          $set: reduce(input.update, (result, v, k) => ({ ...result, [`${name}.$.${k}`]: v }), {}),
         },
-      )) as unknown as Partial<TRoot>;
-      console.warn(rootResult);
-      const updatedElement = (rootResult?.[name] as unknown as PartialArrayModel<TType>)?.[0];
-      return { result: updatedElement, root: rootResult };
+        {
+          projection: { [name]: { $elemMatch: { _id: new ObjectId(input.id) } } },
+          returnDocument: 'after',
+        },
+      );
+
+      if (!rootResult && input.options?.isUpsert) {
+        return create({ form: { ...input.update, _id: input.id }, root: input.root }, context);
+      }
+
+      return {
+        result: rootResult?.[name]?.[0] as Partial<TType>,
+        root: rootResult as unknown as Partial<TRoot>,
+      };
     },
 
-    // update: async (input, context) => {
-    //   if (!input?.root) throw new NotFoundError('root');
-    //   if (!input?.update) throw new NotFoundError('update');
-    //   const elemMatch = mongoFilter({ filter: input.filter, id: input.id });
-    //   if (isEmpty(elemMatch)) throw new NotFoundError('filter');
-    //   const rootResult = (await getRootCollection().findOneAndUpdate(
-    //     { _id: new ObjectId(input.root) },
-    //     {
-    //       $set: reduce(
-    //         input.update,
-    //         (result, v, k) => ({ ...result, [`${name}.$[elem].${k}`]: v }),
-    //         {},
-    //       ),
-    //     },
-    //     {
-    //       arrayFilters: [
-    //         elemMatch.reduce(
-    //           (result, v) => ({ ...result, [`elem.${v.field}`]: { [v.condition]: v.value } }),
-    //           {},
-    //         ),
-    //       ],
-    //       returnDocument: 'after',
-    //     },
-    //   )) as unknown as Partial<TRoot>;
-    //   console.warn(rootResult);
-    //   // TODO: return updated embedded document
-    //   return { result: undefined };
-    // },
+    updateMany: async (input, context) => {
+      if (!input?.root) throw new NotFoundError('root');
+      if (!input?.update) throw new NotFoundError('update');
+      const elemMatch = mongoFilter({ filter: input.filter, id: input.id });
+      if (isEmpty(elemMatch)) throw new NotFoundError('filter');
+      const rootResult = (await getRootCollection().findOneAndUpdate(
+        { _id: new ObjectId(input.root) },
+        {
+          $set: reduce(
+            input.update,
+            (result, v, k) => ({ ...result, [`${name}.$[elem].${k}`]: v }),
+            {},
+          ),
+        },
+        {
+          arrayFilters: [
+            elemMatch.reduce(
+              (result, v) => ({ ...result, [`elem.${v.field}`]: { [v.condition]: v.value } }),
+              {},
+            ),
+          ],
+          returnDocument: 'after',
+        },
+      )) as unknown as Partial<TRoot>;
+      return {
+        result: true,
+        root: rootResult as unknown as Partial<TRoot>,
+      };
+    },
   });
 };

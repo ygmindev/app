@@ -24,6 +24,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
   afterRemove,
   afterSearch,
   afterUpdate,
+  afterUpdateMany,
   beforeCreate,
   beforeCreateMany,
   beforeGet,
@@ -32,6 +33,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
   beforeRemove,
   beforeSearch,
   beforeUpdate,
+  beforeUpdateMany,
   count,
   create,
   createMany,
@@ -42,6 +44,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
   remove,
   search,
   update,
+  updateMany,
 }: CreateResourceImplementationParamsModel<TType, TRoot>): CreateResourceImplementationModel<
   TType,
   TRoot
@@ -58,6 +61,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       afterRemove,
       afterSearch,
       afterUpdate,
+      afterUpdateMany,
       beforeCreate,
       beforeCreateMany,
       beforeGet: async ({ input }, context) => {
@@ -77,9 +81,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
         return beforeRemove ? beforeRemove({ input: inputF }, context) : inputF;
       },
       beforeSearch,
-      beforeUpdate: async ({ input }, context) => {
+      beforeUpdateMany: async ({ input }, context) => {
         const inputF = { ...input, filter: collapseFilter(input?.filter) };
-        return beforeUpdate ? beforeUpdate({ input: inputF }, context) : inputF;
+        return beforeUpdateMany ? beforeUpdateMany({ input: inputF }, context) : inputF;
       },
     };
 
@@ -92,6 +96,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       this.getMany = this.getMany.bind(this);
       this.getConnection = this.getConnection.bind(this);
       this.update = this.update.bind(this);
+      this.updateMany = this.updateMany.bind(this);
       this.search = this.search.bind(this);
       this.remove = this.remove.bind(this);
     }
@@ -238,6 +243,21 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       );
       return this.decorators.afterUpdate
         ? this.decorators.afterUpdate({ input: inputF, output }, context)
+        : output;
+    }
+
+    async updateMany(
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot>,
+      context?: RequestContextModel,
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot>> {
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeUpdateMany
+        ? await this.decorators.beforeUpdateMany({ input: inputF }, context)
+        : inputF;
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot> =
+        await updateMany(inputF, context);
+      return this.decorators.afterUpdateMany
+        ? this.decorators.afterUpdateMany({ input: inputF, output }, context)
         : output;
     }
   }

@@ -3,7 +3,9 @@ import { type ResourceArgsModel } from '@lib/shared/resource/utils/ResourceArgs/
 import { type FilterOperators } from 'mongodb';
 
 export type _MongoFilterParamsModel<TType extends unknown> = [
-  params?: ResourceArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>,
+  params?:
+    | ResourceArgsModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>
+    | ResourceArgsModel<RESOURCE_METHOD_TYPE.GET, TType>,
   prefix?: string,
 ];
 

@@ -45,6 +45,11 @@ export type ResourceImplementationModel<TType, TRoot = undefined> = {
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
     context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>>;
+
+  updateMany(
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot>,
+    context?: RequestContextModel,
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot>>;
 };
 
 export type ResourceImplementationBeforeDecoratorModel<
@@ -105,6 +110,11 @@ export type ResourceImplementationDecoratorModel<TType, TRoot = undefined> = {
     TType,
     TRoot
   >;
+  afterUpdateMany?: ResourceImplementationAfterDecoratorModel<
+    RESOURCE_METHOD_TYPE.UPDATE_MANY,
+    TType,
+    TRoot
+  >;
   beforeCreate?: ResourceImplementationBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.CREATE,
     TType,
@@ -138,6 +148,11 @@ export type ResourceImplementationDecoratorModel<TType, TRoot = undefined> = {
   >;
   beforeUpdate?: ResourceImplementationBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.UPDATE,
+    TType,
+    TRoot
+  >;
+  beforeUpdateMany?: ResourceImplementationBeforeDecoratorModel<
+    RESOURCE_METHOD_TYPE.UPDATE_MANY,
     TType,
     TRoot
   >;

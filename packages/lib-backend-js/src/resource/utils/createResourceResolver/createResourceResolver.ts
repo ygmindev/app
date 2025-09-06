@@ -26,7 +26,7 @@ export const createResourceResolver = <TType extends EntityResourceModel, TRoot 
   authorizer,
   name,
 }: CreateResourceResolverParamsModel<TType, TRoot>): CreateResourceResolverModel<TType, TRoot> => {
-  const { create, createMany, get, getConnection, getMany, remove, search, update } =
+  const { create, createMany, get, getConnection, getMany, remove, search, update, updateMany } =
     ResourceImplementation.prototype;
   const createExists = create !== undefined;
   const createManyExists = createMany !== undefined;
@@ -34,6 +34,7 @@ export const createResourceResolver = <TType extends EntityResourceModel, TRoot 
   const getManyExists = getMany !== undefined;
   const getConnectionExists = getConnection !== undefined;
   const updateExists = update !== undefined;
+  const updateManyExists = updateMany !== undefined;
   const removeExists = remove !== undefined;
   const searchExists = search !== undefined;
 
@@ -147,37 +148,6 @@ export const createResourceResolver = <TType extends EntityResourceModel, TRoot 
     }
 
     @withCondition(
-      () => getManyExists,
-      () => [
-        withAuthorizer({
-          authorizer:
-            authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.GET_MANY],
-        }),
-        withResourceOutput({
-          Resource,
-          RootResource,
-          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET_MANY],
-          method: RESOURCE_METHOD_TYPE.GET_MANY,
-          name,
-        }),
-      ],
-    )
-    async getMany(
-      @withCondition(
-        () => getManyExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.GET_MANY, name }),
-      )
-      input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = {},
-      @withContext()
-      context?: RequestContextModel,
-    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
-      if (this._implementation.getMany) {
-        return this._implementation.getMany(input, context);
-      }
-      throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_MANY);
-    }
-
-    @withCondition(
       () => getConnectionExists,
       () => [
         withAuthorizer({
@@ -211,34 +181,34 @@ export const createResourceResolver = <TType extends EntityResourceModel, TRoot 
     }
 
     @withCondition(
-      () => updateExists,
+      () => getManyExists,
       () => [
         withAuthorizer({
           authorizer:
-            authorizer?.default ?? authorizer?.write ?? authorizer?.[RESOURCE_METHOD_TYPE.UPDATE],
+            authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.GET_MANY],
         }),
         withResourceOutput({
           Resource,
           RootResource,
-          access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.UPDATE],
-          method: RESOURCE_METHOD_TYPE.UPDATE,
+          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET_MANY],
+          method: RESOURCE_METHOD_TYPE.GET_MANY,
           name,
         }),
       ],
     )
-    async update(
+    async getMany(
       @withCondition(
-        () => updateExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.UPDATE, name }),
+        () => getManyExists,
+        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.GET_MANY, name }),
       )
-      input: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = {},
+      input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = {},
       @withContext()
       context?: RequestContextModel,
-    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
-      if (this._implementation.update) {
-        return this._implementation.update(input, context);
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
+      if (this._implementation.getMany) {
+        return this._implementation.getMany(input, context);
       }
-      throw new NotImplementedError(RESOURCE_METHOD_TYPE.UPDATE);
+      throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_MANY);
     }
 
     @withCondition(
@@ -301,6 +271,70 @@ export const createResourceResolver = <TType extends EntityResourceModel, TRoot 
         return this._implementation.search(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.SEARCH);
+    }
+
+    @withCondition(
+      () => updateExists,
+      () => [
+        withAuthorizer({
+          authorizer:
+            authorizer?.default ?? authorizer?.write ?? authorizer?.[RESOURCE_METHOD_TYPE.UPDATE],
+        }),
+        withResourceOutput({
+          Resource,
+          RootResource,
+          access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.UPDATE],
+          method: RESOURCE_METHOD_TYPE.UPDATE,
+          name,
+        }),
+      ],
+    )
+    async update(
+      @withCondition(
+        () => updateExists,
+        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.UPDATE, name }),
+      )
+      input: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = {},
+      @withContext()
+      context?: RequestContextModel,
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
+      if (this._implementation.update) {
+        return this._implementation.update(input, context);
+      }
+      throw new NotImplementedError(RESOURCE_METHOD_TYPE.UPDATE);
+    }
+
+    @withCondition(
+      () => updateManyExists,
+      () => [
+        withAuthorizer({
+          authorizer:
+            authorizer?.default ??
+            authorizer?.write ??
+            authorizer?.[RESOURCE_METHOD_TYPE.UPDATE_MANY],
+        }),
+        withResourceOutput({
+          Resource,
+          RootResource,
+          access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.UPDATE_MANY],
+          method: RESOURCE_METHOD_TYPE.UPDATE_MANY,
+          name,
+        }),
+      ],
+    )
+    async updateMany(
+      @withCondition(
+        () => updateManyExists,
+        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.UPDATE_MANY, name }),
+      )
+      input: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot> = {},
+      @withContext()
+      context?: RequestContextModel,
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot>> {
+      if (this._implementation.updateMany) {
+        return this._implementation.updateMany(input, context);
+      }
+      throw new NotImplementedError(RESOURCE_METHOD_TYPE.UPDATE_MANY);
     }
   }
 

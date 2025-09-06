@@ -26,6 +26,7 @@ export const useResource = <TType extends EntityResourceModel, TRoot = undefined
   afterRemove,
   afterSearch,
   afterUpdate,
+  afterUpdateMany,
   beforeCreate,
   beforeCreateMany,
   beforeGet,
@@ -34,6 +35,7 @@ export const useResource = <TType extends EntityResourceModel, TRoot = undefined
   beforeRemove,
   beforeSearch,
   beforeUpdate,
+  beforeUpdateMany,
   fields,
   name,
   root,
@@ -109,6 +111,19 @@ export const useResource = <TType extends EntityResourceModel, TRoot = undefined
     root,
   });
 
+  const { query: updateMany } = useResourceMethod<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot>({
+    after: afterUpdateMany,
+    before: beforeUpdateMany,
+    fields: [{ result: fieldsF }] as unknown as UseResourceMethodParamsModel<
+      RESOURCE_METHOD_TYPE.UPDATE_MANY,
+      TType,
+      TRoot
+    >['fields'],
+    method: RESOURCE_METHOD_TYPE.UPDATE_MANY,
+    name,
+    root,
+  });
+
   const { query: remove } = useResourceMethod<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>({
     after: afterRemove,
     before: beforeRemove,
@@ -168,5 +183,7 @@ export const useResource = <TType extends EntityResourceModel, TRoot = undefined
     search,
 
     update,
+
+    updateMany,
   };
 };

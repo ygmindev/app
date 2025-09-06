@@ -32,6 +32,7 @@ import {
 import forEach from 'lodash/forEach';
 import isNil from 'lodash/isNil';
 import isPlainObject from 'lodash/isPlainObject';
+import isString from 'lodash/isString';
 import toString from 'lodash/toString';
 import {
   type Collection,
@@ -39,6 +40,7 @@ import {
   type Filter,
   type MatchKeysAndValues,
   type MongoError,
+  ObjectId,
 } from 'mongodb';
 
 const normalize = <TType extends unknown>(
@@ -227,19 +229,29 @@ export class _Database implements _DatabaseModel {
         return { result: [] } as unknown as ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
       },
 
-      update: async ({ filter, id, options, update } = {}) => {
+      update: async ({ id, options, update } = {}) => {
+        const updateF = cleanObject(update);
+        const collection = getCollection();
+        const result = await collection.findOneAndUpdate(
+          { _id: new ObjectId(id) } as Filter<TType & Document>,
+          { $set: updateF as MatchKeysAndValues<TType & Document> },
+          { returnDocument: 'after', upsert: options?.isUpsert },
+        );
+        return { result } as ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
+      },
+      updateMany: async ({ filter, id, options, update } = {}) => {
         const filterF = mongoFilter<TType>({ filter, id }).reduce(
           (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
           {} as FilterQuery<NoInfer<NonNullable<TType>>>,
         );
         const updateF = cleanObject(update);
         const collection = getCollection();
-        const result = await collection.findOneAndUpdate(
-          (isEmpty(filterF) ? { $expr: { $eq: [1, 1] } } : filterF) as Filter<TType & Document>,
-          { $set: updateF as MatchKeysAndValues<TType & Document> },
-          { returnDocument: 'after', upsert: options?.isUpsert },
-        );
-        return { result } as ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType>;
+        const result = await collection.updateMany(filterF as Filter<TType & Document>, {
+          $set: updateF as MatchKeysAndValues<TType & Document>,
+        });
+        return {
+          result: result.acknowledged && (result.modifiedCount ?? 0) > 0,
+        } as ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType>;
       },
     };
     return implementation;
@@ -256,6 +268,11 @@ export class _Database implements _DatabaseModel {
     if (isLeaf) {
       const entity = em.create(name as EntityName<object>, {});
       wrap(entity).assign(form, { em, mergeEmbeddedProperties: true, mergeObjectProperties: true });
+      const id = (entity as EntityResourceModel)._id;
+      id &&
+        ((entity as EntityResourceModel)._id = isString(id)
+          ? (new ObjectId(id) as unknown as string)
+          : id);
       return entity;
     }
     const meta = em.getMetadata().get(name);
