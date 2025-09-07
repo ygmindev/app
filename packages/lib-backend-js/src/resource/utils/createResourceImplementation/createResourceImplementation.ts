@@ -87,7 +87,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       },
     };
 
-    entity: string = name;
+    name: string = name;
 
     constructor() {
       this.create = this.create.bind(this);

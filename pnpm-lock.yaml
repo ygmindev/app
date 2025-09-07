@@ -2223,6 +2223,9 @@ importers:
       fast-xml-parser:
         specifier: ^5.2.5
         version: 5.2.5
+      flow-remove-types:
+        specifier: ^2.281.0
+        version: 2.281.0
       fs-extra:
         specifier: ^11.3.0
         version: 11.3.1
@@ -2460,6 +2463,9 @@ importers:
       vite-plugin-node:
         specifier: ^5.0.1
         version: 5.0.1(@swc/core@1.13.3(@swc/helpers@0.5.17))(vite@6.3.3(@types/node@24.2.1)(lightningcss@1.27.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
+      vite-plugin-react-native-web:
+        specifier: ^2.2.1
+        version: 2.2.1
       vite-plugin-static-copy:
         specifier: ^2.3.1
         version: 2.3.1(vite@6.3.3(@types/node@24.2.1)(lightningcss@1.27.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1))
@@ -12008,8 +12014,8 @@ packages:
   flow-enums-runtime@0.0.6:
     resolution: {integrity: sha512-3PYnM29RFXwvAN6Pc/scUfkI7RwhQ/xqyLUyPNlXUp9S40zI8nup9tUSrTLSVnWGBN38FNiGWbwZOB6uR4OGdw==}
 
-  flow-remove-types@2.278.0:
-    resolution: {integrity: sha512-0tqh3y8wGoTrgqGR9dT4UJdlmrE2IfzgTiuZyH+bUIfNdZcJ3ZagBW82+4BINftGlWiAf2eY+n7FKhx1spdmBg==}
+  flow-remove-types@2.281.0:
+    resolution: {integrity: sha512-L/mDYbvt9iJje3rMsHZ/RXHHwtgsoCHGmihpM/qf60Mmxh8aZ3oYBKpG2B2jQQIr3jhpalpuv0USJLsRq8/Xuw==}
     engines: {node: '>=4'}
     hasBin: true
 
@@ -12576,11 +12582,17 @@ packages:
   hermes-estree@0.29.1:
     resolution: {integrity: sha512-jl+x31n4/w+wEqm0I2r4CMimukLbLQEYpisys5oCre611CI5fc9TxhqkBBCJ1edDG4Kza0f7CgNz8xVMLZQOmQ==}
 
+  hermes-estree@0.32.0:
+    resolution: {integrity: sha512-KWn3BqnlDOl97Xe1Yviur6NbgIZ+IP+UVSpshlZWkq+EtoHg6/cwiDj/osP9PCEgFE15KBm1O55JRwbMEm5ejQ==}
+
   hermes-parser@0.25.1:
     resolution: {integrity: sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA==}
 
   hermes-parser@0.29.1:
     resolution: {integrity: sha512-xBHWmUtRC5e/UL0tI7Ivt2riA/YBq9+SiYFU7C1oBa/j2jYGlIF9043oak1F47ihuDIxQ5nbsKueYJDRY02UgA==}
+
+  hermes-parser@0.32.0:
+    resolution: {integrity: sha512-g4nBOWFpuiTqjR3LZdRxKUkij9iyveWeuks7INEsMX741f3r9xxrOe8TeQfUxtda0eXmiIFiMQzoeSQEno33Hw==}
 
   hey-listen@1.0.8:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
@@ -18124,6 +18136,10 @@ packages:
       '@swc/core':
         optional: true
 
+  vite-plugin-react-native-web@2.2.1:
+    resolution: {integrity: sha512-WItWjGXPZUh+MSCXmx450T1sZiysV0ZatwFzs1PSGqqmvQsnYYYf5X6ULetBZ+pnGiauK+IEHRKbBSWMogpoIQ==}
+    engines: {node: '>=14.0.0'}
+
   vite-plugin-static-copy@2.3.1:
     resolution: {integrity: sha512-EfsPcBm3ewg3UMG8RJaC0ADq6/qnUZnokXx4By4+2cAcipjT9i0Y0owIJGqmZI7d6nxk4qB1q5aXOwNuSyPdyA==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -20571,7 +20587,7 @@ snapshots:
 
   '@bunchtogether/vite-plugin-flow@1.0.2':
     dependencies:
-      flow-remove-types: 2.278.0
+      flow-remove-types: 2.281.0
       rollup-pluginutils: 2.8.2
 
   '@cfcs/core@0.0.24':
@@ -30889,9 +30905,9 @@ snapshots:
 
   flow-enums-runtime@0.0.6: {}
 
-  flow-remove-types@2.278.0:
+  flow-remove-types@2.281.0:
     dependencies:
-      hermes-parser: 0.29.1
+      hermes-parser: 0.32.0
       pirates: 3.0.2
       vlq: 0.2.3
 
@@ -31568,6 +31584,8 @@ snapshots:
 
   hermes-estree@0.29.1: {}
 
+  hermes-estree@0.32.0: {}
+
   hermes-parser@0.25.1:
     dependencies:
       hermes-estree: 0.25.1
@@ -31575,6 +31593,10 @@ snapshots:
   hermes-parser@0.29.1:
     dependencies:
       hermes-estree: 0.29.1
+
+  hermes-parser@0.32.0:
+    dependencies:
+      hermes-estree: 0.32.0
 
   hey-listen@1.0.8: {}
 
@@ -38233,6 +38255,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  vite-plugin-react-native-web@2.2.1:
+    dependencies:
+      flow-remove-types: 2.281.0
+
   vite-plugin-static-copy@2.3.1(vite@6.3.3(@types/node@24.2.1)(lightningcss@1.27.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.1)):
     dependencies:
       chokidar: 3.6.0
@@ -38274,7 +38300,7 @@ snapshots:
       '@bunchtogether/vite-plugin-flow': 1.0.2
       '@react-native/polyfills': 2.0.0
       esbuild: 0.17.19
-      flow-remove-types: 2.278.0
+      flow-remove-types: 2.281.0
       pirates: 4.0.7
       react: 19.1.1
       react-native: 0.79.5(@babel/core@7.28.0)(@types/react@19.1.10)(react@19.1.1)

@@ -6,7 +6,7 @@ import { type ResourceImplementationModel } from '@lib/shared/resource/utils/Res
 
 export type CreateEntityResourceImplementationParamsModel<TType extends EntityResourceModel> = Omit<
   CreateResourceImplementationParamsModel<TType>,
-  'count' | keyof ResourceImplementationModel<TType>
+  'count' | keyof Omit<ResourceImplementationModel<TType>, 'name'>
 >;
 
 export type CreateEntityResourceImplementationModel<TType extends EntityResourceModel> = ClassModel<

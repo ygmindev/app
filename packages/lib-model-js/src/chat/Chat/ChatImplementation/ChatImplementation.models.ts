@@ -1,5 +1,4 @@
 import { type ChatModel } from '@lib/model/chat/Chat/Chat.models';
-import { type EmbeddedResourceImplementationModel } from '@lib/model/resource/EmbeddedResource/EmbeddedResourceImplementation/EmbeddedResourceImplementation.models';
-import { type UserModel } from '@lib/model/user/User/User.models';
+import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 
-export type ChatImplementationModel = EmbeddedResourceImplementationModel<ChatModel, UserModel>;
+export type ChatImplementationModel = EntityResourceImplementationModel<ChatModel>;

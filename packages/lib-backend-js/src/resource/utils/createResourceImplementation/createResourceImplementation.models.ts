@@ -25,7 +25,6 @@ export type CreateResourceImplementationModel<
   TRoot = undefined,
 > = ClassModel<
   ResourceImplementationModel<TType, TRoot> & {
-    entity: string;
     count(input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>): Promise<number>;
   }
 >;

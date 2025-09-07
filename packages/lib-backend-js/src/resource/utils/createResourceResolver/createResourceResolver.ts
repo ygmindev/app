@@ -28,6 +28,7 @@ export const createResourceResolver = <TType extends EntityResourceModel, TRoot 
 }: CreateResourceResolverParamsModel<TType, TRoot>): CreateResourceResolverModel<TType, TRoot> => {
   const { create, createMany, get, getConnection, getMany, remove, search, update, updateMany } =
     ResourceImplementation.prototype;
+
   const createExists = create !== undefined;
   const createManyExists = createMany !== undefined;
   const getExists = get !== undefined;
@@ -41,6 +42,8 @@ export const createResourceResolver = <TType extends EntityResourceModel, TRoot 
   @withResolver()
   class ResourceResolver implements PrototypeModel<CreateResourceResolverModel<TType, TRoot>> {
     protected _implementation = Container.get(ResourceImplementation);
+
+    name: string = name;
 
     @withCondition(
       () => createExists,

@@ -15,11 +15,11 @@ import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 let result: InitializeModel;
 
-export const initialize = async (
-  { database = databaseConfig.params() }: InitializeParamsModel = {
-    database: databaseConfig.params(),
-  },
-): Promise<InitializeModel> => {
+export const initialize = async ({
+  database,
+}: InitializeParamsModel = {}): Promise<InitializeModel> => {
+  const databaseF = database ?? databaseConfig.params();
+
   const cleanUps: Array<() => Promise<void>> = [
     async () => Container.get(PubSub).close(),
     async () => Container.get(Database, DATABASE_TYPE.MONGO)?.close(),
@@ -32,12 +32,11 @@ export const initialize = async (
   };
 
   await handleCleanup({ onCleanUp });
-
   if (!result) {
     result = {};
-    if (database) {
+    if (databaseF) {
       try {
-        const db = new Database(database);
+        const db = new Database(databaseF);
         await db.connect();
         Container.set(Database, db, DATABASE_TYPE.MONGO);
 
@@ -48,7 +47,7 @@ export const initialize = async (
 
         result.database = db;
       } catch (e) {
-        logger.raise(`Failed to connect to ${database.host}`, e);
+        logger.raise(`Failed to connect to ${databaseF.host}`, e);
       }
     }
   }

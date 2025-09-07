@@ -8,4 +8,6 @@ export type CreateEntityResourceResolverParamsModel<TType extends EntityResource
   CreateResourceResolverParamsModel<TType>;
 
 export type CreateEntityResourceResolverModel<TType extends EntityResourceModel> =
-  CreateResourceResolverModel<TType>;
+  CreateResourceResolverModel<TType> & {
+    entity: string;
+  };

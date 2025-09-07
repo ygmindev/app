@@ -23,7 +23,7 @@ export class BankImplementation
         isPrimary &&
         paymentMethodId &&
         (await Container.get(UserImplementation).update({
-          id: [userId],
+          id: userId,
           update: { paymentMethodPrimary: { _id: paymentMethodId } },
         }));
       return output;

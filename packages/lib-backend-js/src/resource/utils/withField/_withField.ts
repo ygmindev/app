@@ -75,7 +75,9 @@ export const _withField =
     }
     if (isArray) {
       ormType = ArrayType;
-      gqlType = () => [gqlType()];
+
+      const gqlTypeF = gqlType;
+      gqlType = () => [gqlTypeF()];
     }
 
     // GraphQl

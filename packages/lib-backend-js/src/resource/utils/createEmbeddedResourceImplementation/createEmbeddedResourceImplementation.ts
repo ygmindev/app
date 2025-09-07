@@ -10,7 +10,7 @@ import { createResourceImplementation } from '@lib/backend/resource/utils/create
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
-import { type PartialArrayModel } from '@lib/shared/core/core.models';
+import { type PartialArrayModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
@@ -61,10 +61,10 @@ export const createEmbeddedResourceImplementation = <
   };
 
   const getRootCollection = (): Collection => {
-    const { entity } = getRootImplementation();
+    const { name: rootName } = getRootImplementation();
     rootCollection =
       rootCollection ??
-      Container.get(Database, DATABASE_TYPE.MONGO).getRepository({ name: entity }).collection();
+      Container.get(Database, DATABASE_TYPE.MONGO).getRepository({ name: rootName }).collection();
     return rootCollection;
   };
 
@@ -213,7 +213,7 @@ export const createEmbeddedResourceImplementation = <
 
     getMany,
 
-    name,
+    name: name as unknown as TRoot extends undefined ? string : StringKeyModel<TRoot>,
 
     remove: async (input, context) => {
       if (!input?.root) throw new NotFoundError('root');

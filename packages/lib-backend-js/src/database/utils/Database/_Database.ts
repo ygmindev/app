@@ -94,7 +94,7 @@ export class _Database implements _DatabaseModel {
     const getCollection = (): Collection<TType & Document> => {
       const em = this.getEntityManager();
       const collection = em.getCollection(name);
-      return collection;
+      return collection as unknown as Collection<TType & Document>;
     };
 
     const implementation: RepositoryModel<TType> = {
@@ -201,6 +201,8 @@ export class _Database implements _DatabaseModel {
         );
         return { result: filterNil(result.map(normalize)) as PartialArrayModel<TType> };
       },
+
+      name,
 
       remove: async ({ filter, id, options } = {}) => {
         const em = this.getEntityManager();

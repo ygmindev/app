@@ -16,8 +16,8 @@ input AccessCreateFormInput {
   Group: GroupInput
   Role: String
   User: UserInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
 }
 
@@ -30,13 +30,13 @@ input AccessCreateManyFormInput {
   Group: GroupInput
   Role: String
   User: UserInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
 }
 
 input AccessCreateManyInput {
-  form: AccessCreateManyFormInput
+  form: [AccessCreateManyFormInput]
   root: String
 }
 
@@ -71,7 +71,7 @@ input AccessGetConnectionFilterInput {
 }
 
 input AccessGetConnectionInput {
-  filter: AccessGetConnectionFilterInput
+  filter: [AccessGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -93,7 +93,7 @@ input AccessGetFilterInput {
 }
 
 input AccessGetInput {
-  filter: AccessGetFilterInput
+  filter: [AccessGetFilterInput!]
   id: String
   root: String
 }
@@ -111,7 +111,7 @@ input AccessGetManyFilterInput {
 }
 
 input AccessGetManyInput {
-  filter: AccessGetManyFilterInput
+  filter: [AccessGetManyFilterInput!]
   root: String
 }
 
@@ -132,7 +132,7 @@ input AccessGetManyProtectedGetManyFilterInput {
 }
 
 input AccessGetManyProtectedGetManyInput {
-  filter: AccessGetManyProtectedGetManyFilterInput
+  filter: [AccessGetManyProtectedGetManyFilterInput!]
   root: String
 }
 
@@ -148,8 +148,8 @@ input AccessInput {
   Group: GroupInput
   Role: String
   User: UserInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
 }
 
@@ -166,8 +166,8 @@ input AccessRemoveFilterInput {
 }
 
 input AccessRemoveInput {
-  filter: AccessRemoveFilterInput
-  id: String
+  filter: [AccessRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -176,7 +176,7 @@ type AccessRemoveOutput {
 }
 
 input AccessSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -185,7 +185,13 @@ type AccessSearchOutput {
   result: [Access]
 }
 
-input AccessUpdateFilterInput {
+input AccessUpdateInput {
+  id: String
+  root: String
+  update: AccessUpdateUpdateInput
+}
+
+input AccessUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -197,11 +203,24 @@ input AccessUpdateFilterInput {
   stringValue: String
 }
 
-input AccessUpdateInput {
-  filter: AccessUpdateFilterInput
-  id: String
+input AccessUpdateManyInput {
+  filter: [AccessUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: AccessUpdateUpdateInput
+  update: AccessUpdateManyUpdateInput
+}
+
+type AccessUpdateManyOutput {
+  result: Access
+}
+
+input AccessUpdateManyUpdateInput {
+  Group: GroupInput
+  Role: String
+  User: UserInput
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  isFixture: String
 }
 
 type AccessUpdateOutput {
@@ -212,13 +231,13 @@ input AccessUpdateUpdateInput {
   Group: GroupInput
   Role: String
   User: UserInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
 }
 
 type Bank {
-  User: User
+  User: [User!]
   _id: String
   created: DateTimeISO
   externalId: String
@@ -230,9 +249,9 @@ type Bank {
 }
 
 input BankCreateFormInput {
-  User: UserInput = {}
-  _id: String
-  created: DateTimeISO
+  User: [UserInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   externalId: String
   fingerprint: String
   isFixture: String
@@ -247,9 +266,9 @@ input BankCreateInput {
 }
 
 input BankCreateManyFormInput {
-  User: UserInput = {}
-  _id: String
-  created: DateTimeISO
+  User: [UserInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   externalId: String
   fingerprint: String
   isFixture: String
@@ -259,7 +278,7 @@ input BankCreateManyFormInput {
 }
 
 input BankCreateManyInput {
-  form: BankCreateManyFormInput
+  form: [BankCreateManyFormInput]
   root: String
 }
 
@@ -296,7 +315,7 @@ input BankGetConnectionFilterInput {
 }
 
 input BankGetConnectionInput {
-  filter: BankGetConnectionFilterInput
+  filter: [BankGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -319,7 +338,7 @@ input BankGetFilterInput {
 }
 
 input BankGetInput {
-  filter: BankGetFilterInput
+  filter: [BankGetFilterInput!]
   id: String
   root: String
 }
@@ -337,7 +356,7 @@ input BankGetManyFilterInput {
 }
 
 input BankGetManyInput {
-  filter: BankGetManyFilterInput
+  filter: [BankGetManyFilterInput!]
   root: String
 }
 
@@ -352,9 +371,9 @@ type BankGetOutput {
 }
 
 input BankInput {
-  User: UserInput = {}
-  _id: String
-  created: DateTimeISO
+  User: [UserInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   externalId: String
   fingerprint: String
   isFixture: String
@@ -376,8 +395,8 @@ input BankRemoveFilterInput {
 }
 
 input BankRemoveInput {
-  filter: BankRemoveFilterInput
-  id: String
+  filter: [BankRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -387,7 +406,7 @@ type BankRemoveOutput {
 }
 
 input BankSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -397,7 +416,13 @@ type BankSearchOutput {
   root: User
 }
 
-input BankUpdateFilterInput {
+input BankUpdateInput {
+  id: String
+  root: String
+  update: BankUpdateUpdateInput
+}
+
+input BankUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -409,11 +434,28 @@ input BankUpdateFilterInput {
   stringValue: String
 }
 
-input BankUpdateInput {
-  filter: BankUpdateFilterInput
-  id: String
+input BankUpdateManyInput {
+  filter: [BankUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: BankUpdateUpdateInput
+  update: BankUpdateManyUpdateInput
+}
+
+type BankUpdateManyOutput {
+  result: Bank
+  root: User
+}
+
+input BankUpdateManyUpdateInput {
+  User: [UserInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  externalId: String
+  fingerprint: String
+  isFixture: String
+  isPrimary: String
+  last4: String
+  name: String
 }
 
 type BankUpdateOutput {
@@ -422,9 +464,9 @@ type BankUpdateOutput {
 }
 
 input BankUpdateUpdateInput {
-  User: UserInput = {}
-  _id: String
-  created: DateTimeISO
+  User: [UserInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   externalId: String
   fingerprint: String
   isFixture: String
@@ -434,7 +476,7 @@ input BankUpdateUpdateInput {
 }
 
 type Card {
-  User: User
+  User: [User!]
   _id: String
   created: DateTimeISO
   expMonth: String
@@ -449,9 +491,9 @@ type Card {
 }
 
 input CardCreateFormInput {
-  User: UserInput = {}
-  _id: String
-  created: DateTimeISO
+  User: [UserInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   expMonth: String
   expYear: String
   externalId: String
@@ -469,9 +511,9 @@ input CardCreateInput {
 }
 
 input CardCreateManyFormInput {
-  User: UserInput = {}
-  _id: String
-  created: DateTimeISO
+  User: [UserInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   expMonth: String
   expYear: String
   externalId: String
@@ -484,7 +526,7 @@ input CardCreateManyFormInput {
 }
 
 input CardCreateManyInput {
-  form: CardCreateManyFormInput
+  form: [CardCreateManyFormInput]
   root: String
 }
 
@@ -521,7 +563,7 @@ input CardGetConnectionFilterInput {
 }
 
 input CardGetConnectionInput {
-  filter: CardGetConnectionFilterInput
+  filter: [CardGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -544,7 +586,7 @@ input CardGetFilterInput {
 }
 
 input CardGetInput {
-  filter: CardGetFilterInput
+  filter: [CardGetFilterInput!]
   id: String
   root: String
 }
@@ -562,7 +604,7 @@ input CardGetManyFilterInput {
 }
 
 input CardGetManyInput {
-  filter: CardGetManyFilterInput
+  filter: [CardGetManyFilterInput!]
   root: String
 }
 
@@ -577,9 +619,9 @@ type CardGetOutput {
 }
 
 input CardInput {
-  User: UserInput = {}
-  _id: String
-  created: DateTimeISO
+  User: [UserInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   expMonth: String
   expYear: String
   externalId: String
@@ -604,8 +646,8 @@ input CardRemoveFilterInput {
 }
 
 input CardRemoveInput {
-  filter: CardRemoveFilterInput
-  id: String
+  filter: [CardRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -615,7 +657,7 @@ type CardRemoveOutput {
 }
 
 input CardSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -625,7 +667,13 @@ type CardSearchOutput {
   root: User
 }
 
-input CardUpdateFilterInput {
+input CardUpdateInput {
+  id: String
+  root: String
+  update: CardUpdateUpdateInput
+}
+
+input CardUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -637,11 +685,31 @@ input CardUpdateFilterInput {
   stringValue: String
 }
 
-input CardUpdateInput {
-  filter: CardUpdateFilterInput
-  id: String
+input CardUpdateManyInput {
+  filter: [CardUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: CardUpdateUpdateInput
+  update: CardUpdateManyUpdateInput
+}
+
+type CardUpdateManyOutput {
+  result: Card
+  root: User
+}
+
+input CardUpdateManyUpdateInput {
+  User: [UserInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  expMonth: String
+  expYear: String
+  externalId: String
+  fingerprint: String
+  funding: String
+  isFixture: String
+  isPrimary: String
+  last4: String
+  name: String
 }
 
 type CardUpdateOutput {
@@ -650,9 +718,9 @@ type CardUpdateOutput {
 }
 
 input CardUpdateUpdateInput {
-  User: UserInput = {}
-  _id: String
-  created: DateTimeISO
+  User: [UserInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   expMonth: String
   expYear: String
   externalId: String
@@ -669,19 +737,19 @@ type Chat {
   created: DateTimeISO
   createdBy: User
   isFixture: String
-  messages: Message
+  messages: [Message!]
   name: String
-  participants: User
+  participants: [User!]
 }
 
 input ChatCreateFormInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   createdBy: UserInput
   isFixture: String
-  messages: MessageInput = {}
+  messages: [MessageInput!] = []
   name: String
-  participants: UserInput = {}
+  participants: [UserInput!] = []
 }
 
 input ChatCreateInput {
@@ -690,17 +758,17 @@ input ChatCreateInput {
 }
 
 input ChatCreateManyFormInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   createdBy: UserInput
   isFixture: String
-  messages: MessageInput = {}
+  messages: [MessageInput!] = []
   name: String
-  participants: UserInput = {}
+  participants: [UserInput!] = []
 }
 
 input ChatCreateManyInput {
-  form: ChatCreateManyFormInput
+  form: [ChatCreateManyFormInput]
   root: String
 }
 
@@ -735,7 +803,7 @@ input ChatGetConnectionFilterInput {
 }
 
 input ChatGetConnectionInput {
-  filter: ChatGetConnectionFilterInput
+  filter: [ChatGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -757,7 +825,7 @@ input ChatGetFilterInput {
 }
 
 input ChatGetInput {
-  filter: ChatGetFilterInput
+  filter: [ChatGetFilterInput!]
   id: String
   root: String
 }
@@ -775,7 +843,7 @@ input ChatGetManyFilterInput {
 }
 
 input ChatGetManyInput {
-  filter: ChatGetManyFilterInput
+  filter: [ChatGetManyFilterInput!]
   root: String
 }
 
@@ -788,13 +856,13 @@ type ChatGetOutput {
 }
 
 input ChatInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   createdBy: UserInput
   isFixture: String
-  messages: MessageInput = {}
+  messages: [MessageInput!] = []
   name: String
-  participants: UserInput = {}
+  participants: [UserInput!] = []
 }
 
 input ChatRemoveFilterInput {
@@ -810,8 +878,8 @@ input ChatRemoveFilterInput {
 }
 
 input ChatRemoveInput {
-  filter: ChatRemoveFilterInput
-  id: String
+  filter: [ChatRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -820,7 +888,7 @@ type ChatRemoveOutput {
 }
 
 input ChatSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -842,7 +910,7 @@ input ChatSubscribeFilterInput {
 }
 
 input ChatSubscribeInput {
-  filter: ChatSubscribeFilterInput
+  filter: [ChatSubscribeFilterInput]
   root: String
 }
 
@@ -850,7 +918,13 @@ type ChatSubscribeOutput {
   result: Message
 }
 
-input ChatUpdateFilterInput {
+input ChatUpdateInput {
+  id: String
+  root: String
+  update: ChatUpdateUpdateInput
+}
+
+input ChatUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -862,11 +936,25 @@ input ChatUpdateFilterInput {
   stringValue: String
 }
 
-input ChatUpdateInput {
-  filter: ChatUpdateFilterInput
-  id: String
+input ChatUpdateManyInput {
+  filter: [ChatUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: ChatUpdateUpdateInput
+  update: ChatUpdateManyUpdateInput
+}
+
+type ChatUpdateManyOutput {
+  result: Chat
+}
+
+input ChatUpdateManyUpdateInput {
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  createdBy: UserInput
+  isFixture: String
+  messages: [MessageInput!] = []
+  name: String
+  participants: [UserInput!] = []
 }
 
 type ChatUpdateOutput {
@@ -874,13 +962,13 @@ type ChatUpdateOutput {
 }
 
 input ChatUpdateUpdateInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   createdBy: UserInput
   isFixture: String
-  messages: MessageInput = {}
+  messages: [MessageInput!] = []
   name: String
-  participants: UserInput = {}
+  participants: [UserInput!] = []
 }
 
 type Curve {
@@ -909,8 +997,8 @@ type Curve {
 }
 
 input CurveCreateFormInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   date: String
   isFixture: String
   lastUpdated: String
@@ -939,8 +1027,8 @@ input CurveCreateInput {
 }
 
 input CurveCreateManyFormInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   date: String
   isFixture: String
   lastUpdated: String
@@ -964,7 +1052,7 @@ input CurveCreateManyFormInput {
 }
 
 input CurveCreateManyInput {
-  form: CurveCreateManyFormInput
+  form: [CurveCreateManyFormInput]
   root: String
 }
 
@@ -999,7 +1087,7 @@ input CurveGetConnectionFilterInput {
 }
 
 input CurveGetConnectionInput {
-  filter: CurveGetConnectionFilterInput
+  filter: [CurveGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -1021,7 +1109,7 @@ input CurveGetFilterInput {
 }
 
 input CurveGetInput {
-  filter: CurveGetFilterInput
+  filter: [CurveGetFilterInput!]
   id: String
   root: String
 }
@@ -1039,7 +1127,7 @@ input CurveGetManyFilterInput {
 }
 
 input CurveGetManyInput {
-  filter: CurveGetManyFilterInput
+  filter: [CurveGetManyFilterInput!]
   root: String
 }
 
@@ -1052,8 +1140,8 @@ type CurveGetOutput {
 }
 
 input CurveInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   date: String
   isFixture: String
   lastUpdated: String
@@ -1089,8 +1177,8 @@ input CurveRemoveFilterInput {
 }
 
 input CurveRemoveInput {
-  filter: CurveRemoveFilterInput
-  id: String
+  filter: [CurveRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -1099,7 +1187,7 @@ type CurveRemoveOutput {
 }
 
 input CurveSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -1108,7 +1196,13 @@ type CurveSearchOutput {
   result: [Curve]
 }
 
-input CurveUpdateFilterInput {
+input CurveUpdateInput {
+  id: String
+  root: String
+  update: CurveUpdateUpdateInput
+}
+
+input CurveUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -1120,11 +1214,40 @@ input CurveUpdateFilterInput {
   stringValue: String
 }
 
-input CurveUpdateInput {
-  filter: CurveUpdateFilterInput
-  id: String
+input CurveUpdateManyInput {
+  filter: [CurveUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: CurveUpdateUpdateInput
+  update: CurveUpdateManyUpdateInput
+}
+
+type CurveUpdateManyOutput {
+  result: Curve
+}
+
+input CurveUpdateManyUpdateInput {
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  date: String
+  isFixture: String
+  lastUpdated: String
+  name: String
+  source: String
+  value_1mo: String
+  value_1yr: String
+  value_2mo: String
+  value_2yr: String
+  value_3mo: String
+  value_3yr: String
+  value_4mo: String
+  value_5mo: String
+  value_5yr: String
+  value_6mo: String
+  value_7yr: String
+  value_10yr: String
+  value_20yr: String
+  value_30yr: String
+  value_40yr: String
 }
 
 type CurveUpdateOutput {
@@ -1132,8 +1255,8 @@ type CurveUpdateOutput {
 }
 
 input CurveUpdateUpdateInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   date: String
   isFixture: String
   lastUpdated: String
@@ -1162,8 +1285,8 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTimeISO
 
 type Group {
-  Access: Access
-  Role: Role
+  Access: [Access!]
+  Role: [Role!]
   _id: String
   created: DateTimeISO
   isFixture: String
@@ -1173,10 +1296,10 @@ type Group {
 }
 
 input GroupCreateFormInput {
-  Access: AccessInput = {}
-  Role: RoleInput = {}
-  _id: String
-  created: DateTimeISO
+  Access: [AccessInput!] = []
+  Role: [RoleInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   logo: String
   name: String
@@ -1189,10 +1312,10 @@ input GroupCreateInput {
 }
 
 input GroupCreateManyFormInput {
-  Access: AccessInput = {}
-  Role: RoleInput = {}
-  _id: String
-  created: DateTimeISO
+  Access: [AccessInput!] = []
+  Role: [RoleInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   logo: String
   name: String
@@ -1200,7 +1323,7 @@ input GroupCreateManyFormInput {
 }
 
 input GroupCreateManyInput {
-  form: GroupCreateManyFormInput
+  form: [GroupCreateManyFormInput]
   root: String
 }
 
@@ -1235,7 +1358,7 @@ input GroupGetConnectionFilterInput {
 }
 
 input GroupGetConnectionInput {
-  filter: GroupGetConnectionFilterInput
+  filter: [GroupGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -1257,7 +1380,7 @@ input GroupGetFilterInput {
 }
 
 input GroupGetInput {
-  filter: GroupGetFilterInput
+  filter: [GroupGetFilterInput!]
   id: String
   root: String
 }
@@ -1275,7 +1398,7 @@ input GroupGetManyFilterInput {
 }
 
 input GroupGetManyInput {
-  filter: GroupGetManyFilterInput
+  filter: [GroupGetManyFilterInput!]
   root: String
 }
 
@@ -1288,10 +1411,10 @@ type GroupGetOutput {
 }
 
 input GroupInput {
-  Access: AccessInput = {}
-  Role: RoleInput = {}
-  _id: String
-  created: DateTimeISO
+  Access: [AccessInput!] = []
+  Role: [RoleInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   logo: String
   name: String
@@ -1311,8 +1434,8 @@ input GroupRemoveFilterInput {
 }
 
 input GroupRemoveInput {
-  filter: GroupRemoveFilterInput
-  id: String
+  filter: [GroupRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -1321,7 +1444,7 @@ type GroupRemoveOutput {
 }
 
 input GroupSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -1330,7 +1453,13 @@ type GroupSearchOutput {
   result: [Group]
 }
 
-input GroupUpdateFilterInput {
+input GroupUpdateInput {
+  id: String
+  root: String
+  update: GroupUpdateUpdateInput
+}
+
+input GroupUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -1342,11 +1471,26 @@ input GroupUpdateFilterInput {
   stringValue: String
 }
 
-input GroupUpdateInput {
-  filter: GroupUpdateFilterInput
-  id: String
+input GroupUpdateManyInput {
+  filter: [GroupUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: GroupUpdateUpdateInput
+  update: GroupUpdateManyUpdateInput
+}
+
+type GroupUpdateManyOutput {
+  result: Group
+}
+
+input GroupUpdateManyUpdateInput {
+  Access: [AccessInput!] = []
+  Role: [RoleInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  isFixture: String
+  logo: String
+  name: String
+  types: String
 }
 
 type GroupUpdateOutput {
@@ -1354,10 +1498,10 @@ type GroupUpdateOutput {
 }
 
 input GroupUpdateUpdateInput {
-  Access: AccessInput = {}
-  Role: RoleInput = {}
-  _id: String
-  created: DateTimeISO
+  Access: [AccessInput!] = []
+  Role: [RoleInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   logo: String
   name: String
@@ -1377,8 +1521,8 @@ type LinkedUser {
 }
 
 input LinkedUserCreateFormInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   externalId: String
   isFixture: String
   type: String
@@ -1390,15 +1534,15 @@ input LinkedUserCreateInput {
 }
 
 input LinkedUserCreateManyFormInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   externalId: String
   isFixture: String
   type: String
 }
 
 input LinkedUserCreateManyInput {
-  form: LinkedUserCreateManyFormInput
+  form: [LinkedUserCreateManyFormInput]
   root: String
 }
 
@@ -1435,7 +1579,7 @@ input LinkedUserGetConnectionFilterInput {
 }
 
 input LinkedUserGetConnectionInput {
-  filter: LinkedUserGetConnectionFilterInput
+  filter: [LinkedUserGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -1458,7 +1602,7 @@ input LinkedUserGetFilterInput {
 }
 
 input LinkedUserGetInput {
-  filter: LinkedUserGetFilterInput
+  filter: [LinkedUserGetFilterInput!]
   id: String
   root: String
 }
@@ -1476,7 +1620,7 @@ input LinkedUserGetManyFilterInput {
 }
 
 input LinkedUserGetManyInput {
-  filter: LinkedUserGetManyFilterInput
+  filter: [LinkedUserGetManyFilterInput!]
   root: String
 }
 
@@ -1491,8 +1635,8 @@ type LinkedUserGetOutput {
 }
 
 input LinkedUserInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   externalId: String
   isFixture: String
   type: String
@@ -1511,8 +1655,8 @@ input LinkedUserRemoveFilterInput {
 }
 
 input LinkedUserRemoveInput {
-  filter: LinkedUserRemoveFilterInput
-  id: String
+  filter: [LinkedUserRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -1522,7 +1666,7 @@ type LinkedUserRemoveOutput {
 }
 
 input LinkedUserSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -1532,7 +1676,13 @@ type LinkedUserSearchOutput {
   root: User
 }
 
-input LinkedUserUpdateFilterInput {
+input LinkedUserUpdateInput {
+  id: String
+  root: String
+  update: LinkedUserUpdateUpdateInput
+}
+
+input LinkedUserUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -1544,11 +1694,24 @@ input LinkedUserUpdateFilterInput {
   stringValue: String
 }
 
-input LinkedUserUpdateInput {
-  filter: LinkedUserUpdateFilterInput
-  id: String
+input LinkedUserUpdateManyInput {
+  filter: [LinkedUserUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: LinkedUserUpdateUpdateInput
+  update: LinkedUserUpdateManyUpdateInput
+}
+
+type LinkedUserUpdateManyOutput {
+  result: LinkedUser
+  root: User
+}
+
+input LinkedUserUpdateManyUpdateInput {
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  externalId: String
+  isFixture: String
+  type: String
 }
 
 type LinkedUserUpdateOutput {
@@ -1557,8 +1720,8 @@ type LinkedUserUpdateOutput {
 }
 
 input LinkedUserUpdateUpdateInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   externalId: String
   isFixture: String
   type: String
@@ -1575,9 +1738,9 @@ type Message {
 }
 
 input MessageCreateFormInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   chat: ChatInput
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   createdBy: UserInput
   isFixture: String
   text: String
@@ -1589,16 +1752,16 @@ input MessageCreateInput {
 }
 
 input MessageCreateManyFormInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   chat: ChatInput
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   createdBy: UserInput
   isFixture: String
   text: String
 }
 
 input MessageCreateManyInput {
-  form: MessageCreateManyFormInput
+  form: [MessageCreateManyFormInput]
   root: String
 }
 
@@ -1633,7 +1796,7 @@ input MessageGetConnectionFilterInput {
 }
 
 input MessageGetConnectionInput {
-  filter: MessageGetConnectionFilterInput
+  filter: [MessageGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -1655,7 +1818,7 @@ input MessageGetFilterInput {
 }
 
 input MessageGetInput {
-  filter: MessageGetFilterInput
+  filter: [MessageGetFilterInput!]
   id: String
   root: String
 }
@@ -1673,7 +1836,7 @@ input MessageGetManyFilterInput {
 }
 
 input MessageGetManyInput {
-  filter: MessageGetManyFilterInput
+  filter: [MessageGetManyFilterInput!]
   root: String
 }
 
@@ -1694,7 +1857,7 @@ input MessageGetManyProtectedGetManyFilterInput {
 }
 
 input MessageGetManyProtectedGetManyInput {
-  filter: MessageGetManyProtectedGetManyFilterInput
+  filter: [MessageGetManyProtectedGetManyFilterInput!]
   root: String
 }
 
@@ -1707,9 +1870,9 @@ type MessageGetOutput {
 }
 
 input MessageInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   chat: ChatInput
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   createdBy: UserInput
   isFixture: String
   text: String
@@ -1728,8 +1891,8 @@ input MessageRemoveFilterInput {
 }
 
 input MessageRemoveInput {
-  filter: MessageRemoveFilterInput
-  id: String
+  filter: [MessageRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -1738,7 +1901,7 @@ type MessageRemoveOutput {
 }
 
 input MessageSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -1747,7 +1910,13 @@ type MessageSearchOutput {
   result: [Message]
 }
 
-input MessageUpdateFilterInput {
+input MessageUpdateInput {
+  id: String
+  root: String
+  update: MessageUpdateUpdateInput
+}
+
+input MessageUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -1759,11 +1928,24 @@ input MessageUpdateFilterInput {
   stringValue: String
 }
 
-input MessageUpdateInput {
-  filter: MessageUpdateFilterInput
-  id: String
+input MessageUpdateManyInput {
+  filter: [MessageUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: MessageUpdateUpdateInput
+  update: MessageUpdateManyUpdateInput
+}
+
+type MessageUpdateManyOutput {
+  result: Message
+}
+
+input MessageUpdateManyUpdateInput {
+  _id: String = "68bc9221083425ca5abc4e4c"
+  chat: ChatInput
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  createdBy: UserInput
+  isFixture: String
+  text: String
 }
 
 type MessageUpdateOutput {
@@ -1771,9 +1953,9 @@ type MessageUpdateOutput {
 }
 
 input MessageUpdateUpdateInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   chat: ChatInput
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   createdBy: UserInput
   isFixture: String
   text: String
@@ -1784,70 +1966,87 @@ type Mutation {
   AccessCreateMany(input: AccessCreateManyInput): AccessCreateManyOutput
   AccessRemove(input: AccessRemoveInput): AccessRemoveOutput
   AccessUpdate(input: AccessUpdateInput): AccessUpdateOutput
+  AccessUpdateMany(input: AccessUpdateManyInput): AccessUpdateManyOutput
   BankCreate(input: BankCreateInput): BankCreateOutput
   BankCreateMany(input: BankCreateManyInput): BankCreateManyOutput
   BankRemove(input: BankRemoveInput): BankRemoveOutput
   BankUpdate(input: BankUpdateInput): BankUpdateOutput
+  BankUpdateMany(input: BankUpdateManyInput): BankUpdateManyOutput
   CardCreate(input: CardCreateInput): CardCreateOutput
   CardCreateMany(input: CardCreateManyInput): CardCreateManyOutput
   CardRemove(input: CardRemoveInput): CardRemoveOutput
   CardUpdate(input: CardUpdateInput): CardUpdateOutput
+  CardUpdateMany(input: CardUpdateManyInput): CardUpdateManyOutput
   ChatCreate(input: ChatCreateInput): ChatCreateOutput
   ChatCreateMany(input: ChatCreateManyInput): ChatCreateManyOutput
   ChatRemove(input: ChatRemoveInput): ChatRemoveOutput
   ChatUpdate(input: ChatUpdateInput): ChatUpdateOutput
+  ChatUpdateMany(input: ChatUpdateManyInput): ChatUpdateManyOutput
   CurveCreate(input: CurveCreateInput): CurveCreateOutput
   CurveCreateMany(input: CurveCreateManyInput): CurveCreateManyOutput
   CurveRemove(input: CurveRemoveInput): CurveRemoveOutput
   CurveUpdate(input: CurveUpdateInput): CurveUpdateOutput
+  CurveUpdateMany(input: CurveUpdateManyInput): CurveUpdateManyOutput
   GroupCreate(input: GroupCreateInput): GroupCreateOutput
   GroupCreateMany(input: GroupCreateManyInput): GroupCreateManyOutput
   GroupRemove(input: GroupRemoveInput): GroupRemoveOutput
   GroupUpdate(input: GroupUpdateInput): GroupUpdateOutput
+  GroupUpdateMany(input: GroupUpdateManyInput): GroupUpdateManyOutput
   LinkedUserCreate(input: LinkedUserCreateInput): LinkedUserCreateOutput
   LinkedUserCreateMany(input: LinkedUserCreateManyInput): LinkedUserCreateManyOutput
   LinkedUserRemove(input: LinkedUserRemoveInput): LinkedUserRemoveOutput
   LinkedUserUpdate(input: LinkedUserUpdateInput): LinkedUserUpdateOutput
+  LinkedUserUpdateMany(input: LinkedUserUpdateManyInput): LinkedUserUpdateManyOutput
   MessageCreate(input: MessageCreateInput): MessageCreateOutput
   MessageCreateMany(input: MessageCreateManyInput): MessageCreateManyOutput
   MessageRemove(input: MessageRemoveInput): MessageRemoveOutput
   MessageUpdate(input: MessageUpdateInput): MessageUpdateOutput
+  MessageUpdateMany(input: MessageUpdateManyInput): MessageUpdateManyOutput
   OrderCreate(input: OrderCreateInput): OrderCreateOutput
   OrderCreateMany(input: OrderCreateManyInput): OrderCreateManyOutput
   OrderRemove(input: OrderRemoveInput): OrderRemoveOutput
   OrderUpdate(input: OrderUpdateInput): OrderUpdateOutput
+  OrderUpdateMany(input: OrderUpdateManyInput): OrderUpdateManyOutput
   OtpCreate(input: OtpCreateInput): OtpCreateOutput
   OtpCreateMany(input: OtpCreateManyInput): OtpCreateManyOutput
   OtpRemove(input: OtpRemoveInput): OtpRemoveOutput
   OtpUpdate(input: OtpUpdateInput): OtpUpdateOutput
+  OtpUpdateMany(input: OtpUpdateManyInput): OtpUpdateManyOutput
   PricingCreate(input: PricingCreateInput): PricingCreateOutput
   PricingCreateMany(input: PricingCreateManyInput): PricingCreateManyOutput
   PricingRemove(input: PricingRemoveInput): PricingRemoveOutput
   PricingUpdate(input: PricingUpdateInput): PricingUpdateOutput
+  PricingUpdateMany(input: PricingUpdateManyInput): PricingUpdateManyOutput
   ProductCreate(input: ProductCreateInput): ProductCreateOutput
   ProductCreateMany(input: ProductCreateManyInput): ProductCreateManyOutput
   ProductRemove(input: ProductRemoveInput): ProductRemoveOutput
   ProductUpdate(input: ProductUpdateInput): ProductUpdateOutput
+  ProductUpdateMany(input: ProductUpdateManyInput): ProductUpdateManyOutput
   RoleCreate(input: RoleCreateInput): RoleCreateOutput
   RoleCreateMany(input: RoleCreateManyInput): RoleCreateManyOutput
   RoleRemove(input: RoleRemoveInput): RoleRemoveOutput
   RoleUpdate(input: RoleUpdateInput): RoleUpdateOutput
+  RoleUpdateMany(input: RoleUpdateManyInput): RoleUpdateManyOutput
   SocketCreate(input: SocketCreateInput): SocketCreateOutput
   SocketCreateMany(input: SocketCreateManyInput): SocketCreateManyOutput
   SocketRemove(input: SocketRemoveInput): SocketRemoveOutput
   SocketUpdate(input: SocketUpdateInput): SocketUpdateOutput
+  SocketUpdateMany(input: SocketUpdateManyInput): SocketUpdateManyOutput
   UserCreate(input: UserCreateInput): UserCreateOutput
   UserCreateMany(input: UserCreateManyInput): UserCreateManyOutput
   UserRemove(input: UserRemoveInput): UserRemoveOutput
   UserUpdate(input: UserUpdateInput): UserUpdateOutput
+  UserUpdateMany(input: UserUpdateManyInput): UserUpdateManyOutput
   UtilityCreate(input: UtilityCreateInput): UtilityCreateOutput
   UtilityCreateMany(input: UtilityCreateManyInput): UtilityCreateManyOutput
   UtilityRemove(input: UtilityRemoveInput): UtilityRemoveOutput
   UtilityUpdate(input: UtilityUpdateInput): UtilityUpdateOutput
+  UtilityUpdateMany(input: UtilityUpdateManyInput): UtilityUpdateManyOutput
   VendorCreate(input: VendorCreateInput): VendorCreateOutput
   VendorCreateMany(input: VendorCreateManyInput): VendorCreateManyOutput
   VendorRemove(input: VendorRemoveInput): VendorRemoveOutput
   VendorUpdate(input: VendorUpdateInput): VendorUpdateOutput
+  VendorUpdateMany(input: VendorUpdateManyInput): VendorUpdateManyOutput
 }
 
 type Order {
@@ -1860,8 +2059,8 @@ type Order {
 }
 
 input OrderCreateFormInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   items: ProductItemInput
   paymentMethodId: String
@@ -1874,8 +2073,8 @@ input OrderCreateInput {
 }
 
 input OrderCreateManyFormInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   items: ProductItemInput
   paymentMethodId: String
@@ -1883,7 +2082,7 @@ input OrderCreateManyFormInput {
 }
 
 input OrderCreateManyInput {
-  form: OrderCreateManyFormInput
+  form: [OrderCreateManyFormInput]
   root: String
 }
 
@@ -1918,7 +2117,7 @@ input OrderGetConnectionFilterInput {
 }
 
 input OrderGetConnectionInput {
-  filter: OrderGetConnectionFilterInput
+  filter: [OrderGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -1940,7 +2139,7 @@ input OrderGetFilterInput {
 }
 
 input OrderGetInput {
-  filter: OrderGetFilterInput
+  filter: [OrderGetFilterInput!]
   id: String
   root: String
 }
@@ -1958,7 +2157,7 @@ input OrderGetManyFilterInput {
 }
 
 input OrderGetManyInput {
-  filter: OrderGetManyFilterInput
+  filter: [OrderGetManyFilterInput!]
   root: String
 }
 
@@ -1971,8 +2170,8 @@ type OrderGetOutput {
 }
 
 input OrderInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   items: ProductItemInput
   paymentMethodId: String
@@ -1992,8 +2191,8 @@ input OrderRemoveFilterInput {
 }
 
 input OrderRemoveInput {
-  filter: OrderRemoveFilterInput
-  id: String
+  filter: [OrderRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -2002,7 +2201,7 @@ type OrderRemoveOutput {
 }
 
 input OrderSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -2011,7 +2210,13 @@ type OrderSearchOutput {
   result: [Order]
 }
 
-input OrderUpdateFilterInput {
+input OrderUpdateInput {
+  id: String
+  root: String
+  update: OrderUpdateUpdateInput
+}
+
+input OrderUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -2023,11 +2228,24 @@ input OrderUpdateFilterInput {
   stringValue: String
 }
 
-input OrderUpdateInput {
-  filter: OrderUpdateFilterInput
-  id: String
+input OrderUpdateManyInput {
+  filter: [OrderUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: OrderUpdateUpdateInput
+  update: OrderUpdateManyUpdateInput
+}
+
+type OrderUpdateManyOutput {
+  result: Order
+}
+
+input OrderUpdateManyUpdateInput {
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  isFixture: String
+  items: ProductItemInput
+  paymentMethodId: String
+  status: String
 }
 
 type OrderUpdateOutput {
@@ -2035,8 +2253,8 @@ type OrderUpdateOutput {
 }
 
 input OrderUpdateUpdateInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   items: ProductItemInput
   paymentMethodId: String
@@ -2055,9 +2273,9 @@ type Otp {
 }
 
 input OtpCreateFormInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   callingCode: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.585Z"
   email: String
   isCheckExists: String
   isFixture: String
@@ -2071,9 +2289,9 @@ input OtpCreateInput {
 }
 
 input OtpCreateManyFormInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   callingCode: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.585Z"
   email: String
   isCheckExists: String
   isFixture: String
@@ -2082,7 +2300,7 @@ input OtpCreateManyFormInput {
 }
 
 input OtpCreateManyInput {
-  form: OtpCreateManyFormInput
+  form: [OtpCreateManyFormInput]
   root: String
 }
 
@@ -2117,7 +2335,7 @@ input OtpGetConnectionFilterInput {
 }
 
 input OtpGetConnectionInput {
-  filter: OtpGetConnectionFilterInput
+  filter: [OtpGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -2139,7 +2357,7 @@ input OtpGetFilterInput {
 }
 
 input OtpGetInput {
-  filter: OtpGetFilterInput
+  filter: [OtpGetFilterInput!]
   id: String
   root: String
 }
@@ -2157,7 +2375,7 @@ input OtpGetManyFilterInput {
 }
 
 input OtpGetManyInput {
-  filter: OtpGetManyFilterInput
+  filter: [OtpGetManyFilterInput!]
   root: String
 }
 
@@ -2170,9 +2388,9 @@ type OtpGetOutput {
 }
 
 input OtpInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   callingCode: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.585Z"
   email: String
   isCheckExists: String
   isFixture: String
@@ -2193,8 +2411,8 @@ input OtpRemoveFilterInput {
 }
 
 input OtpRemoveInput {
-  filter: OtpRemoveFilterInput
-  id: String
+  filter: [OtpRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -2203,7 +2421,7 @@ type OtpRemoveOutput {
 }
 
 input OtpSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -2212,7 +2430,13 @@ type OtpSearchOutput {
   result: [Otp]
 }
 
-input OtpUpdateFilterInput {
+input OtpUpdateInput {
+  id: String
+  root: String
+  update: OtpUpdateUpdateInput
+}
+
+input OtpUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -2224,11 +2448,26 @@ input OtpUpdateFilterInput {
   stringValue: String
 }
 
-input OtpUpdateInput {
-  filter: OtpUpdateFilterInput
-  id: String
+input OtpUpdateManyInput {
+  filter: [OtpUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: OtpUpdateUpdateInput
+  update: OtpUpdateManyUpdateInput
+}
+
+type OtpUpdateManyOutput {
+  result: Otp
+}
+
+input OtpUpdateManyUpdateInput {
+  _id: String = "68bc9221083425ca5abc4e4c"
+  callingCode: String
+  created: DateTimeISO = "2025-09-06T19:57:21.585Z"
+  email: String
+  isCheckExists: String
+  isFixture: String
+  otp: String
+  phone: String
 }
 
 type OtpUpdateOutput {
@@ -2236,9 +2475,9 @@ type OtpUpdateOutput {
 }
 
 input OtpUpdateUpdateInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   callingCode: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.585Z"
   email: String
   isCheckExists: String
   isFixture: String
@@ -2277,8 +2516,8 @@ type PaymentMethod {
 }
 
 input PaymentMethodInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   externalId: String
   fingerprint: String
   isFixture: String
@@ -2299,8 +2538,8 @@ type Pricing {
 
 input PricingCreateFormInput {
   Product: ProductInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   currency: String
   frequency: String
   isFixture: String
@@ -2314,8 +2553,8 @@ input PricingCreateInput {
 
 input PricingCreateManyFormInput {
   Product: ProductInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   currency: String
   frequency: String
   isFixture: String
@@ -2323,7 +2562,7 @@ input PricingCreateManyFormInput {
 }
 
 input PricingCreateManyInput {
-  form: PricingCreateManyFormInput
+  form: [PricingCreateManyFormInput]
   root: String
 }
 
@@ -2360,7 +2599,7 @@ input PricingGetConnectionFilterInput {
 }
 
 input PricingGetConnectionInput {
-  filter: PricingGetConnectionFilterInput
+  filter: [PricingGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -2383,7 +2622,7 @@ input PricingGetFilterInput {
 }
 
 input PricingGetInput {
-  filter: PricingGetFilterInput
+  filter: [PricingGetFilterInput!]
   id: String
   root: String
 }
@@ -2401,7 +2640,7 @@ input PricingGetManyFilterInput {
 }
 
 input PricingGetManyInput {
-  filter: PricingGetManyFilterInput
+  filter: [PricingGetManyFilterInput!]
   root: String
 }
 
@@ -2417,8 +2656,8 @@ type PricingGetOutput {
 
 input PricingInput {
   Product: ProductInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   currency: String
   frequency: String
   isFixture: String
@@ -2438,8 +2677,8 @@ input PricingRemoveFilterInput {
 }
 
 input PricingRemoveInput {
-  filter: PricingRemoveFilterInput
-  id: String
+  filter: [PricingRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -2449,7 +2688,7 @@ type PricingRemoveOutput {
 }
 
 input PricingSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -2459,7 +2698,13 @@ type PricingSearchOutput {
   root: Product
 }
 
-input PricingUpdateFilterInput {
+input PricingUpdateInput {
+  id: String
+  root: String
+  update: PricingUpdateUpdateInput
+}
+
+input PricingUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -2471,11 +2716,26 @@ input PricingUpdateFilterInput {
   stringValue: String
 }
 
-input PricingUpdateInput {
-  filter: PricingUpdateFilterInput
-  id: String
+input PricingUpdateManyInput {
+  filter: [PricingUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: PricingUpdateUpdateInput
+  update: PricingUpdateManyUpdateInput
+}
+
+type PricingUpdateManyOutput {
+  result: Pricing
+  root: Product
+}
+
+input PricingUpdateManyUpdateInput {
+  Product: ProductInput
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  currency: String
+  frequency: String
+  isFixture: String
+  price: String
 }
 
 type PricingUpdateOutput {
@@ -2485,8 +2745,8 @@ type PricingUpdateOutput {
 
 input PricingUpdateUpdateInput {
   Product: ProductInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   currency: String
   frequency: String
   isFixture: String
@@ -2505,8 +2765,8 @@ type Product {
 
 input ProductCreateFormInput {
   Pricing: PricingInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   description: String
   imageSrc: String
   isFixture: String
@@ -2520,8 +2780,8 @@ input ProductCreateInput {
 
 input ProductCreateManyFormInput {
   Pricing: PricingInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   description: String
   imageSrc: String
   isFixture: String
@@ -2529,7 +2789,7 @@ input ProductCreateManyFormInput {
 }
 
 input ProductCreateManyInput {
-  form: ProductCreateManyFormInput
+  form: [ProductCreateManyFormInput]
   root: String
 }
 
@@ -2564,7 +2824,7 @@ input ProductGetConnectionFilterInput {
 }
 
 input ProductGetConnectionInput {
-  filter: ProductGetConnectionFilterInput
+  filter: [ProductGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -2586,7 +2846,7 @@ input ProductGetFilterInput {
 }
 
 input ProductGetInput {
-  filter: ProductGetFilterInput
+  filter: [ProductGetFilterInput!]
   id: String
   root: String
 }
@@ -2604,7 +2864,7 @@ input ProductGetManyFilterInput {
 }
 
 input ProductGetManyInput {
-  filter: ProductGetManyFilterInput
+  filter: [ProductGetManyFilterInput!]
   root: String
 }
 
@@ -2618,8 +2878,8 @@ type ProductGetOutput {
 
 input ProductInput {
   Pricing: PricingInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   description: String
   imageSrc: String
   isFixture: String
@@ -2655,8 +2915,8 @@ input ProductRemoveFilterInput {
 }
 
 input ProductRemoveInput {
-  filter: ProductRemoveFilterInput
-  id: String
+  filter: [ProductRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -2665,7 +2925,7 @@ type ProductRemoveOutput {
 }
 
 input ProductSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -2674,7 +2934,13 @@ type ProductSearchOutput {
   result: [Product]
 }
 
-input ProductUpdateFilterInput {
+input ProductUpdateInput {
+  id: String
+  root: String
+  update: ProductUpdateUpdateInput
+}
+
+input ProductUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -2686,11 +2952,25 @@ input ProductUpdateFilterInput {
   stringValue: String
 }
 
-input ProductUpdateInput {
-  filter: ProductUpdateFilterInput
-  id: String
+input ProductUpdateManyInput {
+  filter: [ProductUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: ProductUpdateUpdateInput
+  update: ProductUpdateManyUpdateInput
+}
+
+type ProductUpdateManyOutput {
+  result: Product
+}
+
+input ProductUpdateManyUpdateInput {
+  Pricing: PricingInput
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  description: String
+  imageSrc: String
+  isFixture: String
+  name: String
 }
 
 type ProductUpdateOutput {
@@ -2699,8 +2979,8 @@ type ProductUpdateOutput {
 
 input ProductUpdateUpdateInput {
   Pricing: PricingInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   description: String
   imageSrc: String
   isFixture: String
@@ -2798,8 +3078,8 @@ type Role {
 
 input RoleCreateFormInput {
   Group: GroupInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   name: String
 }
@@ -2811,14 +3091,14 @@ input RoleCreateInput {
 
 input RoleCreateManyFormInput {
   Group: GroupInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   name: String
 }
 
 input RoleCreateManyInput {
-  form: RoleCreateManyFormInput
+  form: [RoleCreateManyFormInput]
   root: String
 }
 
@@ -2855,7 +3135,7 @@ input RoleGetConnectionFilterInput {
 }
 
 input RoleGetConnectionInput {
-  filter: RoleGetConnectionFilterInput
+  filter: [RoleGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -2878,7 +3158,7 @@ input RoleGetFilterInput {
 }
 
 input RoleGetInput {
-  filter: RoleGetFilterInput
+  filter: [RoleGetFilterInput!]
   id: String
   root: String
 }
@@ -2896,7 +3176,7 @@ input RoleGetManyFilterInput {
 }
 
 input RoleGetManyInput {
-  filter: RoleGetManyFilterInput
+  filter: [RoleGetManyFilterInput!]
   root: String
 }
 
@@ -2912,8 +3192,8 @@ type RoleGetOutput {
 
 input RoleInput {
   Group: GroupInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   name: String
 }
@@ -2931,8 +3211,8 @@ input RoleRemoveFilterInput {
 }
 
 input RoleRemoveInput {
-  filter: RoleRemoveFilterInput
-  id: String
+  filter: [RoleRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -2942,7 +3222,7 @@ type RoleRemoveOutput {
 }
 
 input RoleSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -2952,7 +3232,13 @@ type RoleSearchOutput {
   root: Group
 }
 
-input RoleUpdateFilterInput {
+input RoleUpdateInput {
+  id: String
+  root: String
+  update: RoleUpdateUpdateInput
+}
+
+input RoleUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -2964,11 +3250,24 @@ input RoleUpdateFilterInput {
   stringValue: String
 }
 
-input RoleUpdateInput {
-  filter: RoleUpdateFilterInput
-  id: String
+input RoleUpdateManyInput {
+  filter: [RoleUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: RoleUpdateUpdateInput
+  update: RoleUpdateManyUpdateInput
+}
+
+type RoleUpdateManyOutput {
+  result: Role
+  root: Group
+}
+
+input RoleUpdateManyUpdateInput {
+  Group: GroupInput
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  isFixture: String
+  name: String
 }
 
 type RoleUpdateOutput {
@@ -2978,8 +3277,8 @@ type RoleUpdateOutput {
 
 input RoleUpdateUpdateInput {
   Group: GroupInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   isFixture: String
   name: String
 }
@@ -3021,7 +3320,7 @@ input SnapshotGetFilterInput {
 }
 
 input SnapshotGetInput {
-  filter: SnapshotGetFilterInput
+  filter: [SnapshotGetFilterInput!]
   id: String
   root: String
 }
@@ -3039,7 +3338,7 @@ input SnapshotGetManyFilterInput {
 }
 
 input SnapshotGetManyInput {
-  filter: SnapshotGetManyFilterInput
+  filter: [SnapshotGetManyFilterInput!]
   root: String
 }
 
@@ -3052,8 +3351,8 @@ type SnapshotGetOutput {
 }
 
 input SnapshotInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   images: String
   isFixture: String
   name: String
@@ -3068,9 +3367,9 @@ type Socket {
 }
 
 input SocketCreateFormInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   connections: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.587Z"
   isFixture: String
   name: String
 }
@@ -3081,15 +3380,15 @@ input SocketCreateInput {
 }
 
 input SocketCreateManyFormInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   connections: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.587Z"
   isFixture: String
   name: String
 }
 
 input SocketCreateManyInput {
-  form: SocketCreateManyFormInput
+  form: [SocketCreateManyFormInput]
   root: String
 }
 
@@ -3124,7 +3423,7 @@ input SocketGetConnectionFilterInput {
 }
 
 input SocketGetConnectionInput {
-  filter: SocketGetConnectionFilterInput
+  filter: [SocketGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -3146,7 +3445,7 @@ input SocketGetFilterInput {
 }
 
 input SocketGetInput {
-  filter: SocketGetFilterInput
+  filter: [SocketGetFilterInput!]
   id: String
   root: String
 }
@@ -3164,7 +3463,7 @@ input SocketGetManyFilterInput {
 }
 
 input SocketGetManyInput {
-  filter: SocketGetManyFilterInput
+  filter: [SocketGetManyFilterInput!]
   root: String
 }
 
@@ -3177,9 +3476,9 @@ type SocketGetOutput {
 }
 
 input SocketInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   connections: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.587Z"
   isFixture: String
   name: String
 }
@@ -3197,8 +3496,8 @@ input SocketRemoveFilterInput {
 }
 
 input SocketRemoveInput {
-  filter: SocketRemoveFilterInput
-  id: String
+  filter: [SocketRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -3207,7 +3506,7 @@ type SocketRemoveOutput {
 }
 
 input SocketSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -3216,7 +3515,13 @@ type SocketSearchOutput {
   result: [Socket]
 }
 
-input SocketUpdateFilterInput {
+input SocketUpdateInput {
+  id: String
+  root: String
+  update: SocketUpdateUpdateInput
+}
+
+input SocketUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -3228,11 +3533,23 @@ input SocketUpdateFilterInput {
   stringValue: String
 }
 
-input SocketUpdateInput {
-  filter: SocketUpdateFilterInput
-  id: String
+input SocketUpdateManyInput {
+  filter: [SocketUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: SocketUpdateUpdateInput
+  update: SocketUpdateManyUpdateInput
+}
+
+type SocketUpdateManyOutput {
+  result: Socket
+}
+
+input SocketUpdateManyUpdateInput {
+  _id: String = "68bc9221083425ca5abc4e4c"
+  connections: String
+  created: DateTimeISO = "2025-09-06T19:57:21.587Z"
+  isFixture: String
+  name: String
 }
 
 type SocketUpdateOutput {
@@ -3240,9 +3557,9 @@ type SocketUpdateOutput {
 }
 
 input SocketUpdateUpdateInput {
-  _id: String
+  _id: String = "68bc9221083425ca5abc4e4c"
   connections: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.587Z"
   isFixture: String
   name: String
 }
@@ -3252,13 +3569,13 @@ type Subscription {
 }
 
 type User {
-  Access: Access
-  Bank: Bank
-  Card: Card
-  Chat: Chat
+  Access: [Access!]
+  Bank: [Bank!]
+  Card: [Card!]
+  Chat: [Chat!]
   LinkedUser: LinkedUser
-  Message: Message
-  PaymentMethod: Card
+  Message: [Message!]
+  PaymentMethod: [Card!]
   _id: String
   callingCode: String
   created: DateTimeISO
@@ -3271,16 +3588,16 @@ type User {
 }
 
 input UserCreateFormInput {
-  Access: AccessInput = {}
-  Bank: BankInput = {}
-  Card: CardInput = {}
-  Chat: ChatInput = {}
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
   LinkedUser: LinkedUserInput
-  Message: MessageInput = {}
-  PaymentMethod: CardInput = {}
-  _id: String
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
   callingCode: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   email: String
   first: String
   isFixture: String
@@ -3295,16 +3612,16 @@ input UserCreateInput {
 }
 
 input UserCreateManyFormInput {
-  Access: AccessInput = {}
-  Bank: BankInput = {}
-  Card: CardInput = {}
-  Chat: ChatInput = {}
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
   LinkedUser: LinkedUserInput
-  Message: MessageInput = {}
-  PaymentMethod: CardInput = {}
-  _id: String
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
   callingCode: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   email: String
   first: String
   isFixture: String
@@ -3314,7 +3631,7 @@ input UserCreateManyFormInput {
 }
 
 input UserCreateManyInput {
-  form: UserCreateManyFormInput
+  form: [UserCreateManyFormInput]
   root: String
 }
 
@@ -3349,7 +3666,7 @@ input UserGetConnectionFilterInput {
 }
 
 input UserGetConnectionInput {
-  filter: UserGetConnectionFilterInput
+  filter: [UserGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -3371,7 +3688,7 @@ input UserGetFilterInput {
 }
 
 input UserGetInput {
-  filter: UserGetFilterInput
+  filter: [UserGetFilterInput!]
   id: String
   root: String
 }
@@ -3389,7 +3706,7 @@ input UserGetManyFilterInput {
 }
 
 input UserGetManyInput {
-  filter: UserGetManyFilterInput
+  filter: [UserGetManyFilterInput!]
   root: String
 }
 
@@ -3402,16 +3719,16 @@ type UserGetOutput {
 }
 
 input UserInput {
-  Access: AccessInput = {}
-  Bank: BankInput = {}
-  Card: CardInput = {}
-  Chat: ChatInput = {}
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
   LinkedUser: LinkedUserInput
-  Message: MessageInput = {}
-  PaymentMethod: CardInput = {}
-  _id: String
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
   callingCode: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   email: String
   first: String
   isFixture: String
@@ -3433,8 +3750,8 @@ input UserRemoveFilterInput {
 }
 
 input UserRemoveInput {
-  filter: UserRemoveFilterInput
-  id: String
+  filter: [UserRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -3443,7 +3760,7 @@ type UserRemoveOutput {
 }
 
 input UserSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -3452,7 +3769,13 @@ type UserSearchOutput {
   result: [User]
 }
 
-input UserUpdateFilterInput {
+input UserUpdateInput {
+  id: String
+  root: String
+  update: UserUpdateUpdateInput
+}
+
+input UserUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -3464,11 +3787,34 @@ input UserUpdateFilterInput {
   stringValue: String
 }
 
-input UserUpdateInput {
-  filter: UserUpdateFilterInput
-  id: String
+input UserUpdateManyInput {
+  filter: [UserUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: UserUpdateUpdateInput
+  update: UserUpdateManyUpdateInput
+}
+
+type UserUpdateManyOutput {
+  result: User
+}
+
+input UserUpdateManyUpdateInput {
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
+  LinkedUser: LinkedUserInput
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
+  callingCode: String
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  email: String
+  first: String
+  isFixture: String
+  last: String
+  paymentMethodPrimary: PaymentMethodInput
+  phone: String
 }
 
 type UserUpdateOutput {
@@ -3476,16 +3822,16 @@ type UserUpdateOutput {
 }
 
 input UserUpdateUpdateInput {
-  Access: AccessInput = {}
-  Bank: BankInput = {}
-  Card: CardInput = {}
-  Chat: ChatInput = {}
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
   LinkedUser: LinkedUserInput
-  Message: MessageInput = {}
-  PaymentMethod: CardInput = {}
-  _id: String
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
+  _id: String = "68bc9221083425ca5abc4e4c"
   callingCode: String
-  created: DateTimeISO
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   email: String
   first: String
   isFixture: String
@@ -3507,8 +3853,8 @@ type Utility {
 }
 
 input UtilityCreateFormInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   description: String
   imageSrc: String
   isFixture: String
@@ -3524,8 +3870,8 @@ input UtilityCreateInput {
 }
 
 input UtilityCreateManyFormInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   description: String
   imageSrc: String
   isFixture: String
@@ -3536,7 +3882,7 @@ input UtilityCreateManyFormInput {
 }
 
 input UtilityCreateManyInput {
-  form: UtilityCreateManyFormInput
+  form: [UtilityCreateManyFormInput]
   root: String
 }
 
@@ -3573,7 +3919,7 @@ input UtilityGetConnectionFilterInput {
 }
 
 input UtilityGetConnectionInput {
-  filter: UtilityGetConnectionFilterInput
+  filter: [UtilityGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -3596,7 +3942,7 @@ input UtilityGetFilterInput {
 }
 
 input UtilityGetInput {
-  filter: UtilityGetFilterInput
+  filter: [UtilityGetFilterInput!]
   id: String
   root: String
 }
@@ -3614,7 +3960,7 @@ input UtilityGetManyFilterInput {
 }
 
 input UtilityGetManyInput {
-  filter: UtilityGetManyFilterInput
+  filter: [UtilityGetManyFilterInput!]
   root: String
 }
 
@@ -3629,8 +3975,8 @@ type UtilityGetOutput {
 }
 
 input UtilityInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   description: String
   imageSrc: String
   isFixture: String
@@ -3653,8 +3999,8 @@ input UtilityRemoveFilterInput {
 }
 
 input UtilityRemoveInput {
-  filter: UtilityRemoveFilterInput
-  id: String
+  filter: [UtilityRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -3664,7 +4010,7 @@ type UtilityRemoveOutput {
 }
 
 input UtilitySearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -3674,7 +4020,13 @@ type UtilitySearchOutput {
   root: Vendor
 }
 
-input UtilityUpdateFilterInput {
+input UtilityUpdateInput {
+  id: String
+  root: String
+  update: UtilityUpdateUpdateInput
+}
+
+input UtilityUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -3686,11 +4038,28 @@ input UtilityUpdateFilterInput {
   stringValue: String
 }
 
-input UtilityUpdateInput {
-  filter: UtilityUpdateFilterInput
-  id: String
+input UtilityUpdateManyInput {
+  filter: [UtilityUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: UtilityUpdateUpdateInput
+  update: UtilityUpdateManyUpdateInput
+}
+
+type UtilityUpdateManyOutput {
+  result: Utility
+  root: Vendor
+}
+
+input UtilityUpdateManyUpdateInput {
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  description: String
+  imageSrc: String
+  isFixture: String
+  name: String
+  pricing: String
+  type: String
+  url: String
 }
 
 type UtilityUpdateOutput {
@@ -3699,8 +4068,8 @@ type UtilityUpdateOutput {
 }
 
 input UtilityUpdateUpdateInput {
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   description: String
   imageSrc: String
   isFixture: String
@@ -3721,8 +4090,8 @@ type Vendor {
 
 input VendorCreateFormInput {
   Utility: UtilityInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   imageSrc: String
   isFixture: String
   name: String
@@ -3735,15 +4104,15 @@ input VendorCreateInput {
 
 input VendorCreateManyFormInput {
   Utility: UtilityInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   imageSrc: String
   isFixture: String
   name: String
 }
 
 input VendorCreateManyInput {
-  form: VendorCreateManyFormInput
+  form: [VendorCreateManyFormInput]
   root: String
 }
 
@@ -3778,7 +4147,7 @@ input VendorGetConnectionFilterInput {
 }
 
 input VendorGetConnectionInput {
-  filter: VendorGetConnectionFilterInput
+  filter: [VendorGetConnectionFilterInput]
   pagination: PaginationInput
   root: String
 }
@@ -3800,7 +4169,7 @@ input VendorGetFilterInput {
 }
 
 input VendorGetInput {
-  filter: VendorGetFilterInput
+  filter: [VendorGetFilterInput!]
   id: String
   root: String
 }
@@ -3818,7 +4187,7 @@ input VendorGetManyFilterInput {
 }
 
 input VendorGetManyInput {
-  filter: VendorGetManyFilterInput
+  filter: [VendorGetManyFilterInput!]
   root: String
 }
 
@@ -3832,8 +4201,8 @@ type VendorGetOutput {
 
 input VendorInput {
   Utility: UtilityInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   imageSrc: String
   isFixture: String
   name: String
@@ -3852,8 +4221,8 @@ input VendorRemoveFilterInput {
 }
 
 input VendorRemoveInput {
-  filter: VendorRemoveFilterInput
-  id: String
+  filter: [VendorRemoveFilterInput!]
+  id: [String!]
   root: String
 }
 
@@ -3862,7 +4231,7 @@ type VendorRemoveOutput {
 }
 
 input VendorSearchInput {
-  keys: String
+  keys: [String!]
   query: String
   root: String
 }
@@ -3871,7 +4240,13 @@ type VendorSearchOutput {
   result: [Vendor]
 }
 
-input VendorUpdateFilterInput {
+input VendorUpdateInput {
+  id: String
+  root: String
+  update: VendorUpdateUpdateInput
+}
+
+input VendorUpdateManyFilterInput {
   booleanValue: Boolean
   condition: String
   dateValue: DateTimeISO
@@ -3883,11 +4258,24 @@ input VendorUpdateFilterInput {
   stringValue: String
 }
 
-input VendorUpdateInput {
-  filter: VendorUpdateFilterInput
-  id: String
+input VendorUpdateManyInput {
+  filter: [VendorUpdateManyFilterInput!]
+  id: [String!]
   root: String
-  update: VendorUpdateUpdateInput
+  update: VendorUpdateManyUpdateInput
+}
+
+type VendorUpdateManyOutput {
+  result: Vendor
+}
+
+input VendorUpdateManyUpdateInput {
+  Utility: UtilityInput
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
+  imageSrc: String
+  isFixture: String
+  name: String
 }
 
 type VendorUpdateOutput {
@@ -3896,8 +4284,8 @@ type VendorUpdateOutput {
 
 input VendorUpdateUpdateInput {
   Utility: UtilityInput
-  _id: String
-  created: DateTimeISO
+  _id: String = "68bc9221083425ca5abc4e4c"
+  created: DateTimeISO = "2025-09-06T19:57:21.584Z"
   imageSrc: String
   isFixture: String
   name: String

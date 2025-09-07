@@ -14,7 +14,6 @@ import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/Una
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
-import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
@@ -77,12 +76,13 @@ export class SignInImplementation implements SignInImplementationModel {
     const otpVerified = await this.otpImplementation.verify(inputF);
 
     const { result: user } = await this.userImplementation.update({
-      filter: filterNil([
-        { field: '_id', value: uid },
-        otpVerified.email && { field: 'email', value: otpVerified.email },
-        otpVerified.phone && { field: 'phone', value: otpVerified.phone },
-        otpVerified.callingCode && { field: 'callingCode', value: otpVerified.callingCode },
-      ]),
+      id: uid,
+      // filter: filterNil([
+      //   { field: '_id', value: uid },
+      //   otpVerified.email && { field: 'email', value: otpVerified.email },
+      //   otpVerified.phone && { field: 'phone', value: otpVerified.phone },
+      //   otpVerified.callingCode && { field: 'callingCode', value: otpVerified.callingCode },
+      // ]),
       update: inputF,
     });
     const signIn = await this.createSignIn(user);

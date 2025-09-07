@@ -82,8 +82,8 @@ export type GetModel<TType extends object, TKey extends DeepKeyModel<TType>> = G
 
 export type KeysOfTypeModel<TType, TField> = Exclude<
   {
-    [TKey in keyof Required<TType>]: Required<TType>[TKey] extends TField ? TKey : never;
-  }[keyof Required<TType>],
+    [TKey in StringKeyModel<TType>]: Required<TType>[TKey] extends TField ? TKey : never;
+  }[StringKeyModel<TType>],
   undefined
 >;
 

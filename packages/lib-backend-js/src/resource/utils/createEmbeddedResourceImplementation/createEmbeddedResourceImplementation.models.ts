@@ -1,8 +1,11 @@
 import { type CreateResourceImplementationParamsModel } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation.models';
-import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
-import { type ClassModel, type KeysOfTypeModel } from '@lib/shared/core/core.models';
+import {
+  type ClassModel,
+  type KeysOfTypeModel,
+  type PartialArrayModel,
+} from '@lib/shared/core/core.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 
 export type CreateEmbeddedResourceImplementationParamsModel<
@@ -13,7 +16,7 @@ export type CreateEmbeddedResourceImplementationParamsModel<
   'count' | keyof ResourceImplementationModel<TType, TRoot>
 > & {
   RootImplementation: ClassModel<EntityResourceImplementationModel<TRoot>>;
-  name: KeysOfTypeModel<TRoot, Array<RefModel<TType>>>;
+  name: KeysOfTypeModel<TRoot, PartialArrayModel<TType>>;
 };
 
 export type CreateEmbeddedResourceImplementationModel<

@@ -6,6 +6,8 @@ import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOut
 export type ResourceImplementationModel<TType, TRoot = undefined> = {
   decorators?: ResourceImplementationDecoratorModel<TType, TRoot>;
 
+  name: string;
+
   create(
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
     context?: RequestContextModel,

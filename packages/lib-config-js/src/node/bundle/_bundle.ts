@@ -2,7 +2,6 @@ import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { parse } from '@babel/parser';
 import { default as _traverse } from '@babel/traverse';
 import { isIdentifier, isMemberExpression } from '@babel/types';
-import { esbuildFlowPlugin } from '@bunchtogether/vite-plugin-flow';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
@@ -34,6 +33,7 @@ import react from '@vitejs/plugin-react-swc';
 import { type BuildOptions, type Plugin as EsbuildPlugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import esbuildPluginTsc from 'esbuild-plugin-tsc';
+import flowRemoveTypes from 'flow-remove-types';
 import { existsSync, readFileSync } from 'fs';
 import { getTsconfig } from 'get-tsconfig';
 import isString from 'lodash/isString';
@@ -320,10 +320,11 @@ export const _bundle = ({
           {
             name: 'js-to-jsx',
             setup(build) {
-              build.onLoad({ filter: /node_modules\/.*\.[j|t]s?$/ }, (args) => ({
-                contents: readFileSync(args.path, 'utf8'),
-                loader: 'tsx',
-              }));
+              build.onLoad({ filter: /node_modules\/.*\.(js|ts)x?$/ }, (args) => {
+                let contents = readFileSync(args.path, 'utf8');
+                /@flow\b/.test(contents) && (contents = flowRemoveTypes(contents).toString());
+                return { contents, loader: 'tsx' };
+              });
             },
           } as EsbuildPlugin,
 
@@ -336,8 +337,6 @@ export const _bundle = ({
           esbuildPluginExcludeVendorFromSourceMap(),
 
           process.env.NODE_ENV === 'production' && esbuildEnvVarCollect({ buildDir, envFilename }),
-
-          (esbuildFlowPlugin as () => unknown)() as Plugin,
 
           externals?.length &&
             nodeExternalsPlugin({

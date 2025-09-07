@@ -16,14 +16,14 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
   overrides: () => [
     {
-      aliases: [
-        // { from: /^react$/, to: fromModules('react/cjs/react.development.js') },
-        // { from: /^react-dom$/, to: fromModules('react-dom/cjs/react-dom.development.js') },
-        {
-          from: 'react-native-is-edge-to-edge',
-          to: fromModules('react-native-is-edge-to-edge/dist/index.mjs'),
-        },
-      ],
+      // aliases: [
+      //   // { from: /^react$/, to: fromModules('react/cjs/react.development.js') },
+      //   // { from: /^react-dom$/, to: fromModules('react-dom/cjs/react-dom.development.js') },
+      //   {
+      //     from: 'react-native-is-edge-to-edge',
+      //     to: fromModules('react-native-is-edge-to-edge/dist/index.mjs'),
+      //   },
+      // ],
 
       // externals: [
       //   'json-stringify-safe',
@@ -41,6 +41,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       //   'void-elements',
       //   /lodash/,
       // ],
+      
       assetsDir: ASSETS_DIR,
 
       babel: {
