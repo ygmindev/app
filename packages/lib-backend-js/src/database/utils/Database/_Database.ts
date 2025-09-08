@@ -271,10 +271,11 @@ export class _Database implements _DatabaseModel {
       const entity = em.create(name as EntityName<object>, {});
       wrap(entity).assign(form, { em, mergeEmbeddedProperties: true, mergeObjectProperties: true });
       const id = (entity as EntityResourceModel)._id;
-      id &&
-        ((entity as EntityResourceModel)._id = isString(id)
+      (entity as EntityResourceModel)._id = id
+        ? isString(id)
           ? (new ObjectId(id) as unknown as string)
-          : id);
+          : id
+        : (new ObjectId() as unknown as string);
       return entity;
     }
     const meta = em.getMetadata().get(name);
