@@ -1,4 +1,4 @@
 {
-    "extends": "../../__dist__/tsconfig.json",
+    "extends": "../../tsconfig.json",
     "include": ["../lib-config-js/src/node/typescript/types/index.d.ts", "src/**/*", "tests/**/*", "*.ts", "*.js", "../lib-shared-js/src/core/utils/fileSizeFormat"]
 }

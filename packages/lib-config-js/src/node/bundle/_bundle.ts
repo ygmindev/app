@@ -270,13 +270,7 @@ export const _bundle = ({
 
       emptyOutDir: true,
 
-      lib:
-        format === BUNDLE_FORMAT.CJS
-          ? {
-              entry: 'src/index.ts',
-              formats: ['cjs'],
-            }
-          : undefined,
+      lib: format === BUNDLE_FORMAT.CJS ? { entry: 'src/index.ts', formats: ['cjs'] } : undefined,
 
       minify: process.env.NODE_ENV === 'production',
 
@@ -377,8 +371,6 @@ export const _bundle = ({
 
       serverExtension && vitePluginIsomorphicImport(serverExtension),
 
-      // circularDependencyPlugin({}),
-
       checker({
         eslint: {
           lintCommand: lintCommand(),
@@ -394,9 +386,7 @@ export const _bundle = ({
         ? [react({ tsDecorators: true })]
         : []),
 
-      viteCommonjs(),
-
-      // process.env.NODE_ENV === 'production' && visualizer(),
+      viteCommonjs() as Plugin,
     ]),
 
     publicDir: process.env.NODE_ENV === 'production' ? assetsDir : publicPathname,

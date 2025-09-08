@@ -33,9 +33,6 @@
   },
   "editor.minimap.enabled": false,
   "eslint.debug": true,
-  "eslint.options": {
-    "overrideConfigFile": "./__dist__/eslint.config.mjs"
-  },
   "eslint.useFlatConfig": true,
   "eslint.validate": [
     "javascript",

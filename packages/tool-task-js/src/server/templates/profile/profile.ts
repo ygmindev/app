@@ -9,5 +9,5 @@ export const profile: TaskParamsModel<unknown> = {
 
   name: 'profile',
 
-  task: [fromExecutable(`0x ${joinPaths([BUILD_DIR, 'index.js'])}`)],
+  task: [() => fromExecutable(`0x ${joinPaths([BUILD_DIR, 'index.js'])}`)],
 };

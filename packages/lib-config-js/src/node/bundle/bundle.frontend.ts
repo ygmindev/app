@@ -25,6 +25,13 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       //   },
       // ],
 
+      aliases: [
+        {
+          from: 'react-native-is-edge-to-edge',
+          to: fromModules('react-native-is-edge-to-edge/dist/index.mjs'),
+        },
+      ],
+
       // externals: [
       //   'json-stringify-safe',
       //   'normalize-css-color',
@@ -41,7 +48,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       //   'void-elements',
       //   /lodash/,
       // ],
-      
+
       assetsDir: ASSETS_DIR,
 
       babel: {
@@ -55,8 +62,6 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
             'react-remove-properties',
             { properties: ['testID'] },
           ],
-
-          // 'react-native-reanimated/plugin',
         ]),
 
         presets: [
@@ -85,6 +90,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
           'countries-list',
           'css-in-js-utils',
           'expo-linear-gradient',
+          'framer-motion',
           'inline-style-prefixer',
           'moti',
           'react-use',

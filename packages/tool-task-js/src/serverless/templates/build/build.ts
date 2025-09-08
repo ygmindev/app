@@ -57,6 +57,7 @@ export const build: TaskParamsModel<unknown> = {
 
   task: [
     ...LAYER_TASKS,
-    fromExecutable(`sls package --config ${serverlessConfig.params().configFilename} --verbose`),
+    () =>
+      fromExecutable(`sls package --config ${serverlessConfig.params().configFilename} --verbose`),
   ],
 };

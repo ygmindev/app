@@ -2,12 +2,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "awjb",
-            "args": ["awjb"],
+            "name": "awjd",
+            "args": ["awjd"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "outputCapture": "std",
-            "program": "${workspaceRoot}/packages/tool-task-js/cli.js",
+            "program": "${workspaceRoot}/packages/tool-task-js/src/index.js",
             "request": "launch",
             "runtimeExecutable": "tsx",
             "sourceMaps": true,

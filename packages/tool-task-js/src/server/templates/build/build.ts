@@ -8,5 +8,5 @@ export const build: TaskParamsModel<unknown> = {
 
   name: 'build',
 
-  task: [fromExecutable(`vite build --config ${bundleConfig.params().configFilename}`)],
+  task: [() => fromExecutable(`vite build --config ${bundleConfig.params().configFilename}`)],
 };

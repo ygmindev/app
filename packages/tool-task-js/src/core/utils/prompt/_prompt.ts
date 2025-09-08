@@ -7,7 +7,7 @@ import {
   type _PromptParamsModel,
 } from '@tool/task/core/utils/prompt/_prompt.models';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
-import fileSelector from 'inquirer-file-selector';
+import { fileSelector } from 'inquirer-file-selector';
 import isString from 'lodash/isString';
 import startCase from 'lodash/startCase';
 import toString from 'lodash/toString';

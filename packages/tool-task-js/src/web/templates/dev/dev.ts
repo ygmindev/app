@@ -9,7 +9,6 @@ export const dev: TaskParamsModel<unknown> = {
 
   name: 'dev',
 
-  // task: [async ({ root }) => new Server(serverConfig.params()).run()],
   task: [
     async ({ root }) => {
       const { cleanUp } = await initializeBackend();

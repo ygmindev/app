@@ -19,8 +19,5 @@ ignoredBuiltDependencies:
   - unrs-resolver
   - workerd
 
-overrides:
-  app: 'link:'
-
 patchedDependencies:
-  vite-plugin-checker@0.9.3: patches/vite-plugin-checker@0.9.3.patch
+  vite-plugin-checker@0.10.3: patches/vite-plugin-checker@0.10.3.patch

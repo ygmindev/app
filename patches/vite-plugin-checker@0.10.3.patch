@@ -1,5 +1,5 @@
 diff --git a/dist/checkers/eslint/main.js b/dist/checkers/eslint/main.js
-index 5f44bab2c5753726fe9f8d877a519c428e479dcb..bd7baaef575ad75281bf3aed0144a79c8ff04524 100644
+index 27a775515049aa60f23c2778632b86d2db6d3513..58983773e289e117b4adffc038807eff6d631206 100644
 --- a/dist/checkers/eslint/main.js
 +++ b/dist/checkers/eslint/main.js
 @@ -66,7 +66,12 @@ const createDiagnostic = (pluginConfig) => {

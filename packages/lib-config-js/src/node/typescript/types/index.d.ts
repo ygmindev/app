@@ -3,6 +3,7 @@ declare module 'eslint-plugin-import';
 declare module 'eslint-plugin-sort-destructure-keys';
 declare module 'eslint-plugin-sort-keys-fix';
 declare module 'eslint-plugin-typescript-sort-keys';
+declare module 'flow-remove-types';
 declare module 'geolocator';
 declare module 'globals';
 declare module 'i18next-parser';

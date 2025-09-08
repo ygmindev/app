@@ -13,6 +13,11 @@ import typescriptSortKeysPlugin from 'eslint-plugin-typescript-sort-keys';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import typescriptPlugin from 'typescript-eslint';
+import { defineConfig } from 'eslint/config';
+import { fileURLToPath } from 'url';
+import path from 'path';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 
 export const _lint = ({
   exclude,
@@ -26,7 +31,7 @@ export const _lint = ({
   printWidth,
   unusedIgnore,
 }: LintConfigModel): _LintConfigModel =>
-  typescriptPlugin.config(
+  defineConfig(
     {
       ignores: [`!(${include.map((v) => toRelative({ to: v })).join('|')})`, ...exclude],
     },
@@ -45,7 +50,8 @@ export const _lint = ({
       },
     },
 
-    ...typescriptPlugin.configs.recommendedTypeChecked,
+    // ...typescriptPlugin.configs.recommendedTypeChecked,
+    ...typescriptPlugin.configs.recommended,
     {
       rules: {
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
@@ -193,8 +199,11 @@ export const _lint = ({
         parser: typescriptPlugin.parser,
 
         parserOptions: {
+          allowDefaultProject: true,
+          extraFileExtensions: ['.json'],
+          project: './tsconfig.json',
           projectService: true,
-          tsconfigRootDir: './',
+          tsconfigRootDir: __dirname,
         },
 
         sourceType: 'module',

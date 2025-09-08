@@ -23,9 +23,12 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
       babel: {
         plugins: [
           // 'react-native-web',
+
           // For react-native-reanimated
           // https://docs.swmansion.com/react-native-reanimated/docs/guides/web-support
           '@babel/plugin-proposal-export-namespace-from',
+
+          // 'react-native-worklets/plugin',
         ],
       },
 

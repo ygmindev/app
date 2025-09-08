@@ -4,7 +4,7 @@ import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type BuildJsParamsModel } from '@tool/task/node/templates/buildJs/buildJs.models';
 import { bundle } from '@tool/task/node/utils/bundle/bundle';
 
-const buildJs: TaskParamsModel<BuildJsParamsModel> = {
+export const buildJs: TaskParamsModel<BuildJsParamsModel> = {
   environment: ENVIRONMENT.PRODUCTION,
 
   name: 'build-js',

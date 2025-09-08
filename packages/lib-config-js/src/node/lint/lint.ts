@@ -1,4 +1,5 @@
 import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { EXTENSIONS_BASE } from '@lib/config/file/file.constants';
 import { _lint } from '@lib/config/node/lint/_lint';
 import { ESLINT_CONFIG_FILENAME } from '@lib/config/node/lint/lint.constants';
@@ -8,7 +9,7 @@ import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesia
 
 export const lintCommand = (fix?: boolean): string => {
   const { configFilename, exclude, include } = config.params();
-  return `eslint --config ${fromDist(configFilename)} ${
+  return `eslint --config ${fromRoot(configFilename)} ${
     fix ? '--fix' : ''
   } --no-error-on-unmatched-pattern ${exclude
     .map((pattern) => `--ignore-pattern "${pattern}"`)
