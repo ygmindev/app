@@ -62,12 +62,13 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
         <Wrapper
           isAbsoluteFill
           opacity={0}
-          zIndex={1}>
+          zIndex>
           <TextInput
             defaultValue=""
             isClearable={false}
             keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
             maxLength={otpLength}
+            onBlur={() => console.warn('blur')}
             onChange={(value) => {
               valueControlledSet(value);
               if (value?.length === otpLength) {
@@ -75,6 +76,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
               }
             }}
             onElementStateChange={elementStateControlledSet}
+            onFocus={() => console.warn('focus')}
             ref={ref}
             size={THEME_SIZE.MEDIUM}
             testID={testID}
@@ -105,6 +107,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
               }
               isCenter
               isClearable={false}
+              isDisabled
               key={id}
               size={THEME_SIZE.MEDIUM}
               value={(valueControlled && valueControlled[i]) ?? ''}

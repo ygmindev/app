@@ -265,7 +265,7 @@ export class _Database implements _DatabaseModel {
     isLeaf?: boolean,
   ): Partial<TType> => {
     if (!form) throw new NotFoundError('form');
-    const formF = form as Record<string, unknown>;
+    const formF = { ...form } as Record<string, unknown>;
     const em = this.getEntityManager();
     if (isLeaf) {
       const entity = em.create(name as EntityName<object>, {});

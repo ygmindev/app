@@ -1,4 +1,3 @@
-import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withHook } from '@lib/backend/resource/utils/withHook/withHook';
@@ -12,7 +11,7 @@ import isNil from 'lodash/isNil';
 @withEntity({ isAbstract: true, isDatabase: true })
 export class EntityResource implements EntityResourceModel {
   @withField({ isDatabase: true, type: PROPERTY_TYPE.PRIMARY_KEY })
-  _id: PrimaryKeyModel = new ObjectId() as unknown as string;
+  _id!: PrimaryKeyModel;
 
   @withField({ Resource: () => Date, isDatabase: true })
   created: Date = new Date();
