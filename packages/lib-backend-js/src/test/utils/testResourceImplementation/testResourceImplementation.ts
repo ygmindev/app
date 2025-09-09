@@ -60,7 +60,6 @@ export const testResourceImplementation = <
         id: [first._id ?? '', second._id ?? ''],
         root,
       });
-      console.warn(result);
       expectEqualsTestableResource(result, [first, second]);
     });
 

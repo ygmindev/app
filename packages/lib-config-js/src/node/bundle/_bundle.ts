@@ -383,7 +383,7 @@ export const _bundle = ({
       ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
         process.env.ENV_PLATFORM,
       )
-        ? [react({ tsDecorators: true })]
+        ? [react({ tsDecorators: true, plugins: [['swc-plugin-add-display-name', {}]], })]
         : []),
 
       viteCommonjs() as Plugin,
