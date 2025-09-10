@@ -1,12 +1,8 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
-import { parse } from '@babel/parser';
 import { default as _traverse } from '@babel/traverse';
-import { isIdentifier, isMemberExpression } from '@babel/types';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
-import { type EnvironmentConfigModel } from '@lib/config/environment/environment.models';
 import { PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
 import { BUNDLE_FORMAT } from '@lib/config/node/bundle/bundle.constants';
 import {
@@ -14,7 +10,7 @@ import {
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
 import { lintCommand } from '@lib/config/node/lint/lint';
-import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
+import { type PartialModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -34,11 +30,13 @@ import { type BuildOptions, type Plugin as EsbuildPlugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import esbuildPluginTsc from 'esbuild-plugin-tsc';
 import flowRemoveTypes from 'flow-remove-types';
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { getTsconfig } from 'get-tsconfig';
 import isString from 'lodash/isString';
+import map from 'lodash/map';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
+import toString from 'lodash/toString';
 import { sep } from 'path';
 import posix from 'path/posix';
 import { type RollupOptions } from 'rollup';
@@ -70,58 +68,20 @@ export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): EsbuildP
   },
 });
 
-export const esbuildEnvVarCollect = ({
-  buildDir,
-  envFilename,
+export const esbuildEnvVarExport = ({
+  envPrefix,
+  pathname,
 }: {
-  buildDir: string;
-  envFilename: string;
+  envPrefix: Array<string>;
+  pathname: string;
 }): EsbuildPlugin => {
-  const used = new Set<{ key: StringKeyModel<EnvironmentConfigModel>; path: string }>();
   return {
-    name: 'plugin:envVarCollect',
+    name: 'plugin:esbuildEnvVarExport',
     setup(build) {
-      build.onLoad({ filter: /\.[tj]sx?$/ }, async (args) => {
-        const code = readFileSync(args.path, 'utf-8');
-        const ast = parse(code, {
-          plugins: ['typescript', 'jsx', 'importAttributes'],
-          sourceType: 'module',
-        });
-        traverse(ast, {
-          ImportDeclaration(path) {
-            if (path.node.importKind === 'type') {
-              path.skip();
-            }
-          },
-
-          MemberExpression(path) {
-            const { object, property } = path.node;
-            if (
-              isMemberExpression(object) &&
-              isIdentifier(object.object, { name: 'process' }) &&
-              isIdentifier(object.property, { name: 'env' }) &&
-              isIdentifier(property)
-            ) {
-              used.add({
-                key: property.name as StringKeyModel<EnvironmentConfigModel>,
-                path: args.path,
-              });
-            }
-          },
-        });
-        return { contents: code, loader: 'ts' };
-      });
-
       build.onEnd(() => {
-        const env = reduce(
-          [...used],
-          (result, v) => (process.env[v.key] ? { ...result, [v.key]: process.env[v.key] } : result),
-          {} as EnvironmentConfigModel,
-        );
-        const dotenv = Object.entries(env)
-          .map(([key, val]) => `${key}=${val}`)
-          .join('\n');
-        writeFile({ filename: fromWorking(buildDir, envFilename), value: dotenv });
+        const envs = getEnvironmentVariables({ envPrefix });
+        const value = map(envs, (v, k) => `${k.trim()}=${toString(v).trim()}`).join('\n');
+        writeFileSync(pathname, value);
       });
     },
   };
@@ -330,7 +290,8 @@ export const _bundle = ({
 
           esbuildPluginExcludeVendorFromSourceMap(),
 
-          process.env.NODE_ENV === 'production' && esbuildEnvVarCollect({ buildDir, envFilename }),
+          process.env.NODE_ENV === 'production' &&
+            esbuildEnvVarExport({ envPrefix, pathname: joinPaths([buildDir, envFilename]) }),
 
           externals?.length &&
             nodeExternalsPlugin({
@@ -383,7 +344,7 @@ export const _bundle = ({
       ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
         process.env.ENV_PLATFORM,
       )
-        ? [react({ tsDecorators: true, plugins: [['swc-plugin-add-display-name', {}]], })]
+        ? [react({ plugins: [['swc-plugin-add-display-name', {}]], tsDecorators: true })]
         : []),
 
       viteCommonjs() as Plugin,

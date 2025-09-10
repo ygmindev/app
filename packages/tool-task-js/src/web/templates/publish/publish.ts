@@ -10,5 +10,11 @@ export const publish: TaskParamsModel<PublishParamsModel> = {
 
   onBefore: [({ options, target }) => !options?.skipBuild && `${target}-build`],
 
-  task: [() => publishConfig.params().publishCommand()],
+  // task: [() => publishConfig.params().publishCommand()],
+  task: [
+    () => {
+      console.warn(`@@@ command: ${publishConfig.params().publishCommand()}`);
+      return publishConfig.params().publishCommand();
+    },
+  ],
 };

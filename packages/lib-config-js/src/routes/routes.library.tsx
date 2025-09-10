@@ -19,7 +19,6 @@ export const config = defineConfig<RoutesConfigModel>({
         routes: LIBRARY_PROPS.map((props) => {
           const id = (props.title =
             props.title ?? getComponentDisplayName(props.Component as ComponentType));
-          props.category && console.warn(id);
           return {
             category: props.category,
             element: <Library<unknown> {...(props as LibraryPropsModel<unknown>)} />,
