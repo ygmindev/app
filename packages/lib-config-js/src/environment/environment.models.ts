@@ -9,6 +9,7 @@ export type EnvironmentConfigModel = {
   APP_FIREBASE_API_KEY: string;
   APP_FIREBASE_APP_ID: string;
   APP_FIREBASE_AUTH_DOMAIN: string;
+  APP_FIREBASE_MEASUREMENT_ID: string;
   APP_FIREBASE_PROJECT_ID: string;
   APP_FIREBASE_SENDER_ID: string;
   APP_FIREBASE_STORAGE_BUCKET: string;

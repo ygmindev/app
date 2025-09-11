@@ -14,6 +14,7 @@ export const _auth = getAuth(
     apiKey: process.env.APP_FIREBASE_API_KEY,
     appId: process.env.APP_FIREBASE_APP_ID,
     authDomain: process.env.APP_FIREBASE_AUTH_DOMAIN,
+    measurementId: process.env.APP_FIREBASE_MEASUREMENT_ID,
     messagingSenderId: process.env.APP_FIREBASE_SENDER_ID,
     projectId: process.env.APP_FIREBASE_PROJECT_ID,
     storageBucket: process.env.APP_FIREBASE_STORAGE_BUCKET,

@@ -2,7 +2,6 @@ import 'reflect-metadata';
 
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
-import { seed } from '@lib/backend/database/utils/seed/seed';
 import {
   type InitializeModel,
   type InitializeParamsModel,
@@ -41,6 +40,7 @@ export const initialize = async ({
         Container.set(Database, db, DATABASE_TYPE.MONGO);
 
         if (process.env.NODE_ENV === 'test') {
+          const { seed } = await import('@lib/backend/database/utils/seed/seed');
           const { cleanUp: cleanUpSeed } = await seed();
           cleanUps.unshift(cleanUpSeed);
         }
