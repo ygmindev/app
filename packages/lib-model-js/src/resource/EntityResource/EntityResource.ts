@@ -13,8 +13,8 @@ export class EntityResource implements EntityResourceModel {
   @withField({ isDatabase: true, type: PROPERTY_TYPE.PRIMARY_KEY })
   _id!: PrimaryKeyModel;
 
-  @withField({ Resource: () => Date, isDatabase: true })
-  created: Date = new Date();
+  @withField({ Resource: () => Date, defaultValue: () => new Date(), isDatabase: true })
+  created?: Date;
 
   id?: string;
 

@@ -17,7 +17,7 @@ input AccessCreateFormInput {
   Role: String
   User: UserInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
 }
 
@@ -31,7 +31,7 @@ input AccessCreateManyFormInput {
   Role: String
   User: UserInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
 }
 
@@ -149,7 +149,7 @@ input AccessInput {
   Role: String
   User: UserInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
 }
 
@@ -219,7 +219,7 @@ input AccessUpdateManyUpdateInput {
   Role: String
   User: UserInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
 }
 
@@ -232,7 +232,7 @@ input AccessUpdateUpdateInput {
   Role: String
   User: UserInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
 }
 
@@ -251,7 +251,7 @@ type Bank {
 input BankCreateFormInput {
   User: [UserInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: String
@@ -268,7 +268,7 @@ input BankCreateInput {
 input BankCreateManyFormInput {
   User: [UserInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: String
@@ -373,7 +373,7 @@ type BankGetOutput {
 input BankInput {
   User: [UserInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: String
@@ -449,7 +449,7 @@ type BankUpdateManyOutput {
 input BankUpdateManyUpdateInput {
   User: [UserInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: String
@@ -466,7 +466,7 @@ type BankUpdateOutput {
 input BankUpdateUpdateInput {
   User: [UserInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: String
@@ -493,7 +493,7 @@ type Card {
 input CardCreateFormInput {
   User: [UserInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   expMonth: String
   expYear: String
   externalId: String
@@ -513,7 +513,7 @@ input CardCreateInput {
 input CardCreateManyFormInput {
   User: [UserInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   expMonth: String
   expYear: String
   externalId: String
@@ -621,7 +621,7 @@ type CardGetOutput {
 input CardInput {
   User: [UserInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   expMonth: String
   expYear: String
   externalId: String
@@ -700,7 +700,7 @@ type CardUpdateManyOutput {
 input CardUpdateManyUpdateInput {
   User: [UserInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   expMonth: String
   expYear: String
   externalId: String
@@ -720,7 +720,7 @@ type CardUpdateOutput {
 input CardUpdateUpdateInput {
   User: [UserInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   expMonth: String
   expYear: String
   externalId: String
@@ -744,7 +744,7 @@ type Chat {
 
 input ChatCreateFormInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   createdBy: UserInput
   isFixture: String
   messages: [MessageInput!] = []
@@ -759,7 +759,7 @@ input ChatCreateInput {
 
 input ChatCreateManyFormInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   createdBy: UserInput
   isFixture: String
   messages: [MessageInput!] = []
@@ -857,7 +857,7 @@ type ChatGetOutput {
 
 input ChatInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   createdBy: UserInput
   isFixture: String
   messages: [MessageInput!] = []
@@ -949,7 +949,7 @@ type ChatUpdateManyOutput {
 
 input ChatUpdateManyUpdateInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   createdBy: UserInput
   isFixture: String
   messages: [MessageInput!] = []
@@ -963,7 +963,7 @@ type ChatUpdateOutput {
 
 input ChatUpdateUpdateInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   createdBy: UserInput
   isFixture: String
   messages: [MessageInput!] = []
@@ -998,7 +998,7 @@ type Curve {
 
 input CurveCreateFormInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   date: String
   isFixture: String
   lastUpdated: String
@@ -1028,7 +1028,7 @@ input CurveCreateInput {
 
 input CurveCreateManyFormInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   date: String
   isFixture: String
   lastUpdated: String
@@ -1141,7 +1141,7 @@ type CurveGetOutput {
 
 input CurveInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   date: String
   isFixture: String
   lastUpdated: String
@@ -1227,7 +1227,7 @@ type CurveUpdateManyOutput {
 
 input CurveUpdateManyUpdateInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   date: String
   isFixture: String
   lastUpdated: String
@@ -1256,7 +1256,7 @@ type CurveUpdateOutput {
 
 input CurveUpdateUpdateInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   date: String
   isFixture: String
   lastUpdated: String
@@ -1299,7 +1299,7 @@ input GroupCreateFormInput {
   Access: [AccessInput!] = []
   Role: [RoleInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   logo: String
   name: String
@@ -1315,7 +1315,7 @@ input GroupCreateManyFormInput {
   Access: [AccessInput!] = []
   Role: [RoleInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   logo: String
   name: String
@@ -1414,7 +1414,7 @@ input GroupInput {
   Access: [AccessInput!] = []
   Role: [RoleInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   logo: String
   name: String
@@ -1486,7 +1486,7 @@ input GroupUpdateManyUpdateInput {
   Access: [AccessInput!] = []
   Role: [RoleInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   logo: String
   name: String
@@ -1501,7 +1501,7 @@ input GroupUpdateUpdateInput {
   Access: [AccessInput!] = []
   Role: [RoleInput!] = []
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   logo: String
   name: String
@@ -1522,7 +1522,7 @@ type LinkedUser {
 
 input LinkedUserCreateFormInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   isFixture: String
   type: String
@@ -1535,7 +1535,7 @@ input LinkedUserCreateInput {
 
 input LinkedUserCreateManyFormInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   isFixture: String
   type: String
@@ -1636,7 +1636,7 @@ type LinkedUserGetOutput {
 
 input LinkedUserInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   isFixture: String
   type: String
@@ -1708,7 +1708,7 @@ type LinkedUserUpdateManyOutput {
 
 input LinkedUserUpdateManyUpdateInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   isFixture: String
   type: String
@@ -1721,7 +1721,7 @@ type LinkedUserUpdateOutput {
 
 input LinkedUserUpdateUpdateInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   isFixture: String
   type: String
@@ -1740,7 +1740,7 @@ type Message {
 input MessageCreateFormInput {
   _id: String
   chat: ChatInput
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   createdBy: UserInput
   isFixture: String
   text: String
@@ -1754,7 +1754,7 @@ input MessageCreateInput {
 input MessageCreateManyFormInput {
   _id: String
   chat: ChatInput
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   createdBy: UserInput
   isFixture: String
   text: String
@@ -1872,7 +1872,7 @@ type MessageGetOutput {
 input MessageInput {
   _id: String
   chat: ChatInput
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   createdBy: UserInput
   isFixture: String
   text: String
@@ -1942,7 +1942,7 @@ type MessageUpdateManyOutput {
 input MessageUpdateManyUpdateInput {
   _id: String
   chat: ChatInput
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   createdBy: UserInput
   isFixture: String
   text: String
@@ -1955,7 +1955,7 @@ type MessageUpdateOutput {
 input MessageUpdateUpdateInput {
   _id: String
   chat: ChatInput
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   createdBy: UserInput
   isFixture: String
   text: String
@@ -2060,7 +2060,7 @@ type Order {
 
 input OrderCreateFormInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   items: ProductItemInput
   paymentMethodId: String
@@ -2074,7 +2074,7 @@ input OrderCreateInput {
 
 input OrderCreateManyFormInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   items: ProductItemInput
   paymentMethodId: String
@@ -2171,7 +2171,7 @@ type OrderGetOutput {
 
 input OrderInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   items: ProductItemInput
   paymentMethodId: String
@@ -2241,7 +2241,7 @@ type OrderUpdateManyOutput {
 
 input OrderUpdateManyUpdateInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   items: ProductItemInput
   paymentMethodId: String
@@ -2254,7 +2254,7 @@ type OrderUpdateOutput {
 
 input OrderUpdateUpdateInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   items: ProductItemInput
   paymentMethodId: String
@@ -2275,7 +2275,7 @@ type Otp {
 input OtpCreateFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO = "2025-09-11T03:20:29.708Z"
   email: String
   isCheckExists: String
   isFixture: String
@@ -2291,7 +2291,7 @@ input OtpCreateInput {
 input OtpCreateManyFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO = "2025-09-11T03:20:29.708Z"
   email: String
   isCheckExists: String
   isFixture: String
@@ -2390,7 +2390,7 @@ type OtpGetOutput {
 input OtpInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO = "2025-09-11T03:20:29.708Z"
   email: String
   isCheckExists: String
   isFixture: String
@@ -2462,7 +2462,7 @@ type OtpUpdateManyOutput {
 input OtpUpdateManyUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO = "2025-09-11T03:20:29.708Z"
   email: String
   isCheckExists: String
   isFixture: String
@@ -2477,7 +2477,7 @@ type OtpUpdateOutput {
 input OtpUpdateUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO = "2025-09-11T03:20:29.708Z"
   email: String
   isCheckExists: String
   isFixture: String
@@ -2517,7 +2517,7 @@ type PaymentMethod {
 
 input PaymentMethodInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   externalId: String
   fingerprint: String
   isFixture: String
@@ -2539,7 +2539,7 @@ type Pricing {
 input PricingCreateFormInput {
   Product: ProductInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   currency: String
   frequency: String
   isFixture: String
@@ -2554,7 +2554,7 @@ input PricingCreateInput {
 input PricingCreateManyFormInput {
   Product: ProductInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   currency: String
   frequency: String
   isFixture: String
@@ -2657,7 +2657,7 @@ type PricingGetOutput {
 input PricingInput {
   Product: ProductInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   currency: String
   frequency: String
   isFixture: String
@@ -2731,7 +2731,7 @@ type PricingUpdateManyOutput {
 input PricingUpdateManyUpdateInput {
   Product: ProductInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   currency: String
   frequency: String
   isFixture: String
@@ -2746,7 +2746,7 @@ type PricingUpdateOutput {
 input PricingUpdateUpdateInput {
   Product: ProductInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   currency: String
   frequency: String
   isFixture: String
@@ -2766,7 +2766,7 @@ type Product {
 input ProductCreateFormInput {
   Pricing: PricingInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: String
@@ -2781,7 +2781,7 @@ input ProductCreateInput {
 input ProductCreateManyFormInput {
   Pricing: PricingInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: String
@@ -2879,7 +2879,7 @@ type ProductGetOutput {
 input ProductInput {
   Pricing: PricingInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: String
@@ -2966,7 +2966,7 @@ type ProductUpdateManyOutput {
 input ProductUpdateManyUpdateInput {
   Pricing: PricingInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: String
@@ -2980,7 +2980,7 @@ type ProductUpdateOutput {
 input ProductUpdateUpdateInput {
   Pricing: PricingInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: String
@@ -3079,7 +3079,7 @@ type Role {
 input RoleCreateFormInput {
   Group: GroupInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   name: String
 }
@@ -3092,7 +3092,7 @@ input RoleCreateInput {
 input RoleCreateManyFormInput {
   Group: GroupInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   name: String
 }
@@ -3193,7 +3193,7 @@ type RoleGetOutput {
 input RoleInput {
   Group: GroupInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   name: String
 }
@@ -3265,7 +3265,7 @@ type RoleUpdateManyOutput {
 input RoleUpdateManyUpdateInput {
   Group: GroupInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   name: String
 }
@@ -3278,7 +3278,7 @@ type RoleUpdateOutput {
 input RoleUpdateUpdateInput {
   Group: GroupInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   isFixture: String
   name: String
 }
@@ -3352,7 +3352,7 @@ type SnapshotGetOutput {
 
 input SnapshotInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   images: String
   isFixture: String
   name: String
@@ -3369,7 +3369,7 @@ type Socket {
 input SocketCreateFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-11T02:30:31.043Z"
+  created: DateTimeISO = "2025-09-11T03:20:29.709Z"
   isFixture: String
   name: String
 }
@@ -3382,7 +3382,7 @@ input SocketCreateInput {
 input SocketCreateManyFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-11T02:30:31.043Z"
+  created: DateTimeISO = "2025-09-11T03:20:29.709Z"
   isFixture: String
   name: String
 }
@@ -3478,7 +3478,7 @@ type SocketGetOutput {
 input SocketInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-11T02:30:31.043Z"
+  created: DateTimeISO = "2025-09-11T03:20:29.709Z"
   isFixture: String
   name: String
 }
@@ -3547,7 +3547,7 @@ type SocketUpdateManyOutput {
 input SocketUpdateManyUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-11T02:30:31.043Z"
+  created: DateTimeISO = "2025-09-11T03:20:29.709Z"
   isFixture: String
   name: String
 }
@@ -3559,7 +3559,7 @@ type SocketUpdateOutput {
 input SocketUpdateUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-11T02:30:31.043Z"
+  created: DateTimeISO = "2025-09-11T03:20:29.709Z"
   isFixture: String
   name: String
 }
@@ -3597,7 +3597,7 @@ input UserCreateFormInput {
   PaymentMethod: [CardInput!] = []
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   email: String
   first: String
   isFixture: String
@@ -3621,7 +3621,7 @@ input UserCreateManyFormInput {
   PaymentMethod: [CardInput!] = []
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   email: String
   first: String
   isFixture: String
@@ -3728,7 +3728,7 @@ input UserInput {
   PaymentMethod: [CardInput!] = []
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   email: String
   first: String
   isFixture: String
@@ -3808,7 +3808,7 @@ input UserUpdateManyUpdateInput {
   PaymentMethod: [CardInput!] = []
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   email: String
   first: String
   isFixture: String
@@ -3831,7 +3831,7 @@ input UserUpdateUpdateInput {
   PaymentMethod: [CardInput!] = []
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   email: String
   first: String
   isFixture: String
@@ -3854,7 +3854,7 @@ type Utility {
 
 input UtilityCreateFormInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: String
@@ -3871,7 +3871,7 @@ input UtilityCreateInput {
 
 input UtilityCreateManyFormInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: String
@@ -3976,7 +3976,7 @@ type UtilityGetOutput {
 
 input UtilityInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: String
@@ -4052,7 +4052,7 @@ type UtilityUpdateManyOutput {
 
 input UtilityUpdateManyUpdateInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: String
@@ -4069,7 +4069,7 @@ type UtilityUpdateOutput {
 
 input UtilityUpdateUpdateInput {
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   description: String
   imageSrc: String
   isFixture: String
@@ -4091,7 +4091,7 @@ type Vendor {
 input VendorCreateFormInput {
   Utility: UtilityInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   imageSrc: String
   isFixture: String
   name: String
@@ -4105,7 +4105,7 @@ input VendorCreateInput {
 input VendorCreateManyFormInput {
   Utility: UtilityInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   imageSrc: String
   isFixture: String
   name: String
@@ -4202,7 +4202,7 @@ type VendorGetOutput {
 input VendorInput {
   Utility: UtilityInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   imageSrc: String
   isFixture: String
   name: String
@@ -4272,7 +4272,7 @@ type VendorUpdateManyOutput {
 input VendorUpdateManyUpdateInput {
   Utility: UtilityInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   imageSrc: String
   isFixture: String
   name: String
@@ -4285,7 +4285,7 @@ type VendorUpdateOutput {
 input VendorUpdateUpdateInput {
   Utility: UtilityInput
   _id: String
-  created: DateTimeISO = "2025-09-11T02:30:31.042Z"
+  created: DateTimeISO
   imageSrc: String
   isFixture: String
   name: String

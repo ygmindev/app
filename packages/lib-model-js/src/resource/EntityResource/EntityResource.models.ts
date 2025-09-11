@@ -1,7 +1,7 @@
 export type EntityResourceModel = {
   _id: string;
 
-  created: Date;
+  created?: Date;
 
   id?: string;
 
