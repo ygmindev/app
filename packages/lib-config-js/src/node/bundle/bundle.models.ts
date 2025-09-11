@@ -26,8 +26,6 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   envPrefix: Array<string>;
 
-  envPublic?: Array<string>;
-
   exclude?: Array<string>;
 
   extensions: Array<string>;

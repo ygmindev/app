@@ -1,10 +1,12 @@
 import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { BUILD_DIR } from '@lib/config/file/file.constants';
+import { config as bundleConfig } from '@lib/config/node/bundle/bundle.web';
 import { config as webConfig } from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildApp } from '@lib/shared/web/utils/buildApp/buildApp';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
+import { exportEnvironemnt } from '@tool/task/core/utils/exportEnvironment/exportEnvironment';
 import { runClean } from '@tool/task/core/utils/runClean/runClean';
 import { copy } from '@tool/task/file/utils/copy/copy';
 import buildConfigLint from '@tool/task/node/tasks/buildConfigLint/buildConfigLint.task';
@@ -22,6 +24,8 @@ export const build: TaskParamsModel<unknown> = {
     async () => runClean({ patterns: [BUILD_DIR] }),
 
     () => buildApp({ web: webConfig.params() }),
+
+    () => exportEnvironemnt({ envPrefix: bundleConfig.params().envPrefix }),
 
     ({ root }) =>
       copy({

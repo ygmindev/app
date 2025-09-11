@@ -30,13 +30,11 @@ import { type BuildOptions, type Plugin as EsbuildPlugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import esbuildPluginTsc from 'esbuild-plugin-tsc';
 import flowRemoveTypes from 'flow-remove-types';
-import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { getTsconfig } from 'get-tsconfig';
 import isString from 'lodash/isString';
-import map from 'lodash/map';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
-import toString from 'lodash/toString';
 import { sep } from 'path';
 import posix from 'path/posix';
 import { type RollupOptions } from 'rollup';
@@ -67,25 +65,6 @@ export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): EsbuildP
     });
   },
 });
-
-export const esbuildEnvVarExport = ({
-  envPrefix,
-  pathname,
-}: {
-  envPrefix: Array<string>;
-  pathname: string;
-}): EsbuildPlugin => {
-  return {
-    name: 'plugin:esbuildEnvVarExport',
-    setup(build) {
-      build.onEnd(() => {
-        const envs = getEnvironmentVariables({ envPrefix });
-        const value = map(envs, (v, k) => `${k.trim()}=${toString(v).trim()}`).join('\n');
-        writeFileSync(pathname, value);
-      });
-    },
-  };
-};
 
 export const esbuildPluginResolveAlias = (
   aliases: Array<{ from: RegExp | string; to: string }>,
@@ -157,7 +136,6 @@ export const _bundle = ({
   entryFiles,
   envFilename,
   envPrefix,
-  envPublic,
   exclude,
   extensions,
   externals,
@@ -245,8 +223,7 @@ export const _bundle = ({
 
     define,
 
-    envPrefix:
-      process.env.NODE_ENV === 'production' ? envPublic : [...envPrefix, ...(envPublic ?? [])],
+    envPrefix,
 
     esbuild: {
       loader: 'tsx',
@@ -289,9 +266,6 @@ export const _bundle = ({
           transpileModules?.length && esbuildCommonjs(transpileModules),
 
           esbuildPluginExcludeVendorFromSourceMap(),
-
-          process.env.NODE_ENV === 'production' &&
-            esbuildEnvVarExport({ envPrefix, pathname: joinPaths([buildDir, envFilename]) }),
 
           externals?.length &&
             nodeExternalsPlugin({

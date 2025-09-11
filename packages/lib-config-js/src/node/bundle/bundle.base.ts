@@ -38,9 +38,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       envFilename: '.env.production',
 
-      envPrefix: [],
-
-      envPublic: ['APP_NAME', 'ENV_PLATFORM', 'NODE_ENV'],
+      envPrefix: ['APP_NAME', 'ENV_PLATFORM', 'NODE_ENV'],
 
       exclude: [
         ...cartesianString(
