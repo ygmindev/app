@@ -40,9 +40,8 @@ export const useForm = <TType, TResult = void>({
     try {
       isLoadingSet(true);
       form.errorsSet(undefined);
-
       const valuesF = cleanObject(values);
-      if (isValidateChanged && isEqual(valuesF, initialValues)) {
+      if (isValidateChanged && isEqual<Partial<TType>>(valuesF, initialValues)) {
         const error = Error(t('core:validateChanged'));
         onError ? onError(error) : handleError(error);
       }
@@ -77,5 +76,6 @@ export const useForm = <TType, TResult = void>({
   return {
     ...form,
     isLoading: isAppLoading || isLoading,
+    isValid: !validators || form.isValid,
   };
 };

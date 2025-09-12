@@ -31,7 +31,6 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
       initialValues={{ first: currentUser.first, last: currentUser.last }}
       onCancel={back}
       onSubmit={async ({ first, last }: NameFormModel) => {
-        console.warn(first);
         // userUpdate({
         //   filter: [{ field: '_id', stringValue: currentUser._id }],
         //   update: { first, last },

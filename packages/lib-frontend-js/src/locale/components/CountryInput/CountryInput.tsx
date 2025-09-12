@@ -42,7 +42,7 @@ export const CountryInput: RLFCModel<CountryInputRefModel, CountryInputPropsMode
     // TODO: better workflow?
     if (!valueControlled && countryCode) {
       const option = find(options, ({ code }) => code.includes(countryCode));
-      option && valueControlledSet(option.id);
+      option && valueControlledSet(option);
     }
   }, [countryCode, options, valueControlled]);
 
