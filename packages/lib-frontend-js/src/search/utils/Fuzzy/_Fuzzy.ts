@@ -21,7 +21,7 @@ export class _Fuzzy<TType extends WithIdModel> implements _FuzzyModel<TType> {
     options.forEach((v) => this.index.add(v));
   }
 
-  search = async (query: string, { limit }: { limit?: number }): Promise<Array<TType>> => {
+  search = async (query: string, { limit }: { limit?: number } = {}): Promise<Array<TType>> => {
     return filterNil(
       (await this.index.searchAsync({ enrich: true, limit, query }))
         ?.map((v) => v.result.map((vv) => vv.doc))

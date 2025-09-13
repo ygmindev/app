@@ -1,3 +1,4 @@
+import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import {
   type _PromptModel,
   type _PromptParamsModel,
@@ -12,7 +13,7 @@ export type PromptArgsModel<TKey> = {
   isOptional?: boolean;
   key: TKey;
   message?: string;
-  options?: Array<string | { label?: string; value: string }>;
+  options?: Array<string | (WithIdModel & { label?: string })>;
 };
 
 export type ConfirmPromptArgsModel<TKey> = PromptArgsModel<TKey> & {

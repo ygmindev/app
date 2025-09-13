@@ -95,6 +95,7 @@
     "eslint-plugin-unused-imports": "^4.2.0",
     "execa": "^9.6.0",
     "fast-xml-parser": "^5.2.5",
+    "flexsearch": "^0.8.212",
     "flow-remove-types": "^2.281.0",
     "fs-extra": "^11.3.1",
     "generate-template-files": "^3.2.1",

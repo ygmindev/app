@@ -1,4 +1,3 @@
-import { ProductImplementation } from '@lib/model/commerce/Product/ProductImplementation/ProductImplementation';
 import { withTestScreen } from '@lib/backend/test/utils/withTestScreen/withTestScreen';
 import { TEST_CARD_NUMBER_VALID } from '@lib/frontend/billing/components/NewPaymentMethodInput/NewPaymentMethodInput.constants';
 import { ORDER_PAYMENT_TEST_ID } from '@lib/frontend/billing/containers/OrderPaymentPage/OrderPaymentPage.constants';
@@ -8,6 +7,7 @@ import { ADD_TO_CART_BUTTON_TEST_ID } from '@lib/frontend/commerce/components/Ad
 import { ORDER_PRODUCTS_TEST_ID } from '@lib/frontend/commerce/pages/OrderProductsPage/OrderProductsPage.constants';
 import { BACKDROP_TEST_ID } from '@lib/frontend/core/components/Modal/Modal.constants';
 import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.constants';
+import { ProductImplementation } from '@lib/model/commerce/Product/ProductImplementation/ProductImplementation';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';

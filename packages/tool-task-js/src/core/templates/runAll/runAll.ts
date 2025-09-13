@@ -18,12 +18,13 @@ export const runAll: TaskParamsModel<RunAllParamsModel> = {
           isString(pattern) ? pattern === k : pattern.test(k),
         ),
     );
-    return {
-      tasks: {
+    return [
+      {
         defaultValue: options,
+        key: 'tasks',
         type: PROMPT_TYPE.MULTIPLE,
       },
-    };
+    ];
   },
 
   task: [

@@ -2213,6 +2213,9 @@ importers:
       fast-xml-parser:
         specifier: ^5.2.5
         version: 5.2.5
+      flexsearch:
+        specifier: ^0.8.212
+        version: 0.8.212
       flow-remove-types:
         specifier: ^2.281.0
         version: 2.281.0

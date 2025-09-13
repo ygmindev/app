@@ -76,8 +76,8 @@ export const _cli = async ({
               options: [
                 ...reduce(
                   taskRunner.aliases,
-                  (result, v, k) => [...result, { label: `${k} (${v})`, value: k }],
-                  [] as Array<{ label?: string; value: string }>,
+                  (result, v, k) => [...result, { id: k, label: `${k} (${v})` }],
+                  [] as Array<{ id: string; label?: string }>,
                 ),
                 ...Object.keys(taskRunner.registry),
               ],
