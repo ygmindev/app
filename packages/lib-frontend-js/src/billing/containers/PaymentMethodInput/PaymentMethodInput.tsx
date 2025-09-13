@@ -34,6 +34,7 @@ import {
   PAYMENT_METHOD_TYPE,
   type PaymentMethodModel,
 } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
@@ -58,7 +59,7 @@ export const PaymentMethodInput: RLFCModel<
     value,
   });
 
-  const handleQuery = async (): Promise<Array<Partial<PaymentMethodModel>>> => {
+  const handleQuery = async (): Promise<PartialArrayModel<PaymentMethodModel>> => {
     let output = await getAll();
     if (!valueControlled) {
       const primary =
@@ -147,7 +148,7 @@ export const PaymentMethodInput: RLFCModel<
                     <Button
                       onPress={async () => {
                         await update({
-                          id: [currentUser?._id ?? ''],
+                          id: currentUser?._id ?? '',
                           update: { paymentMethodPrimary: { _id: item.id } },
                         });
                       }}

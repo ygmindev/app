@@ -1,4 +1,5 @@
 import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import {
   type HandleModel,
   type ScreenModel,
@@ -45,7 +46,7 @@ export type TableCrawlDataLoaderParamsModel<
     date?: string | null;
     headers: Array<string>;
     lastUpdated?: string | null;
-  }): Array<Partial<TType>>;
+  }): PartialArrayModel<TType>;
 };
 
 export type TableCrawlDataLoaderModel<TType extends SourcedEntityResourceModel> =

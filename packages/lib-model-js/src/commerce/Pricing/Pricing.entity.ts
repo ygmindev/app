@@ -11,6 +11,7 @@ import { PRODUCT_RESOURCE_NAME } from '@lib/model/commerce/Product/Product.const
 import { Product } from '@lib/model/commerce/Product/Product.entity';
 import { ProductModel } from '@lib/model/commerce/Product/Product.models';
 import { EmbeddedResource } from '@lib/model/resource/EmbeddedResource/EmbeddedResource';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEmbeddedEntity({ name: PRICING_RESOURCE_NAME })
 export class Pricing extends EmbeddedResource implements PricingModel {
@@ -23,7 +24,7 @@ export class Pricing extends EmbeddedResource implements PricingModel {
   @withField({ isDatabase: true, isOptional: true })
   frequency?: PRICING_FREQUENCY;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
   price?: number;
 }
 

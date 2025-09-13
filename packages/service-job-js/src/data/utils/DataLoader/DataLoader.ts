@@ -1,4 +1,5 @@
 import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import {
@@ -15,15 +16,15 @@ export class DataLoader<TType extends SourcedEntityResourceModel>
     this.params = params;
   }
 
-  async fetch(): Promise<Array<Partial<TType>>> {
+  async fetch(): Promise<PartialArrayModel<TType>> {
     throw new Error('Method not implemented.');
   }
 
-  async fetchPostProcess(): Promise<Array<Partial<TType>>> {
+  async fetchPostProcess(): Promise<PartialArrayModel<TType>> {
     return (await this.fetch()).map((v) => ({ ...v, source: v.source ?? this.params?.source }));
   }
 
-  async upload(): Promise<Array<Partial<TType>>> {
+  async upload(): Promise<PartialArrayModel<TType>> {
     if (this.params.ResourceImplementation) {
       const data = await this.fetchPostProcess();
       await Container.get(this.params.ResourceImplementation)?.createMany?.({ form: data });

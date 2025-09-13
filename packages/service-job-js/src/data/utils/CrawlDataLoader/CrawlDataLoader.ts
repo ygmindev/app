@@ -1,4 +1,5 @@
 import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import { Screen } from '@lib/shared/crawling/utils/Screen/Screen';
 import {
   type CrawlDataLoaderModel,
@@ -17,7 +18,7 @@ export class CrawlDataLoader<TType extends SourcedEntityResourceModel>
     super({ ...params, name: params.name ?? source, source });
   }
 
-  async fetch(): Promise<Array<Partial<TType>>> {
+  async fetch(): Promise<PartialArrayModel<TType>> {
     const { transformer, uri } = this.params;
     const screen = new Screen();
     try {

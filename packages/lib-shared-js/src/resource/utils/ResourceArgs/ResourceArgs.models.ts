@@ -1,5 +1,6 @@
 import {
   type EmptyObjectModel,
+  type PartialArrayModel,
   type PrimitiveModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
@@ -35,7 +36,7 @@ type CreateResourceArgsModel<TType> = {
 };
 
 type CreateManyArgsModel<TType> = {
-  form?: Array<Partial<TType>>;
+  form?: PartialArrayModel<TType>;
   options?: CreateOptionsModel;
 };
 

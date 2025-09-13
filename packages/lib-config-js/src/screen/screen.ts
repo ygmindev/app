@@ -16,7 +16,7 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
   params: () => ({
     delay: 1000,
 
-    dimension: { height: 2000, width: 1250 },
+    dimension: { height: 1400, width: 1000 },
 
     elementTimeout: 10e3,
 

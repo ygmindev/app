@@ -1,4 +1,5 @@
 import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import { type ScreenModel } from '@lib/shared/crawling/utils/Screen/Screen.models';
 import {
   type DataLoaderModel,
@@ -8,7 +9,7 @@ import {
 export type CrawlDataLoaderParamsModel<TType extends SourcedEntityResourceModel> =
   DataLoaderParamsModel<TType> & {
     uri: string;
-    transformer(screen: ScreenModel): Promise<Array<Partial<TType>>>;
+    transformer(screen: ScreenModel): Promise<PartialArrayModel<TType>>;
   };
 
 export type CrawlDataLoaderModel<TType extends SourcedEntityResourceModel> = DataLoaderModel<TType>;

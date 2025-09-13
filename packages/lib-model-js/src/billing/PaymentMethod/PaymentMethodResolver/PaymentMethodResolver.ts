@@ -18,6 +18,7 @@ import { PaymentMethodImplementation } from '@lib/model/billing/PaymentMethod/Pa
 import { PaymentMethodImplementationModel } from '@lib/model/billing/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
 import { type PaymentMethodResolverModel } from '@lib/model/billing/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver.models';
 import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
+import { PartialArrayModel } from '@lib/shared/core/core.models';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { IdInputModel } from '@lib/shared/resource/utils/IdInput/IdInput.models';
@@ -44,12 +45,12 @@ export class PaymentMethodResolver implements PaymentMethodResolverModel {
   @withOutput({
     Resource: () => PaymentMethod,
     access: ACCESS_LEVEL.PROTECTED,
-
+    isArray: true,
     name: PAYMENT_METHOD_GET_ALL,
   })
   async getAll(
     @withContext() context?: RequestContextModel,
-  ): Promise<Array<Partial<PaymentMethodModel>>> {
+  ): Promise<PartialArrayModel<PaymentMethodModel>> {
     return this.paymentMethodImplementation.getAll(context);
   }
 

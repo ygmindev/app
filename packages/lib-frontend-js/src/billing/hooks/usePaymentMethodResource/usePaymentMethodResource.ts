@@ -9,6 +9,7 @@ import {
 import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { PAYMENT_INPUT } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.constants';
 import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import { ID_INPUT } from '@lib/shared/resource/utils/IdInput/IdInput.constants';
 import { type IdInputModel } from '@lib/shared/resource/utils/IdInput/IdInput.models';
 
@@ -26,7 +27,7 @@ export const usePaymentMethodResource = (): UsePaymentMethodResourceModel => {
     },
 
     getAll: async () => {
-      const output = await query<Array<Partial<PaymentMethodModel>>, undefined>({
+      const output = await query<PartialArrayModel<PaymentMethodModel>, undefined>({
         fields: PAYMENT_METHOD_RESOURCE_PARAMS.fields.map((v) => v.id),
         name: PAYMENT_METHOD_GET_ALL,
       });

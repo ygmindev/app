@@ -108,8 +108,10 @@ export const SelectInput = <TType extends string | Array<string> = string>({
               elementState={elementState ?? (isValue ? ELEMENT_STATE.ACTIVE : undefined)}
               fontAlign={FONT_ALIGN.LEFT}
               icon={icon}
+              isFullWidth
               key={id}
-              leftElement={(isActive) => (
+              onPress={handleChange(id)}
+              rightElement={(isActive) => (
                 <Circle
                   backgroundColor={isValue ? THEME_COLOR.PRIMARY : THEME_COLOR_MORE.SURFACE}
                   border
@@ -137,8 +139,7 @@ export const SelectInput = <TType extends string | Array<string> = string>({
                   )}
                 </Circle>
               )}
-              onPress={handleChange(id)}
-              type={BUTTON_TYPE.INVISIBLE}>
+              type={BUTTON_TYPE.BORDERED}>
               {label ?? id}
             </Button>
           );

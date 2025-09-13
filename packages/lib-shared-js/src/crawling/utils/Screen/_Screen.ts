@@ -133,6 +133,7 @@ export class _Screen implements _ScreenModel {
     this.browser = await puppeteer.launch(_screen(this.options));
     this.isInitialized = true;
     this.page = await this.browser.newPage();
+    this.options.dimension && (await this.page.setViewport(this.options.dimension));
     await this.page.setCacheEnabled(false);
     await this.page.setUserAgent(
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
@@ -143,8 +144,8 @@ export class _Screen implements _ScreenModel {
       Object.defineProperty(navigator, 'webdriver', {
         get: () => false,
       });
+      window.dispatchEvent(new Event('resize'));
     });
-
     this.page.on('request', (req) => {
       const type = req.resourceType();
       if (this.options.isIgnoreMedia && (type === 'image' || type === 'font' || type === 'media')) {

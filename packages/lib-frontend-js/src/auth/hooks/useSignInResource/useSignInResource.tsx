@@ -44,11 +44,9 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
   const setAuth = async (token?: string, user?: Partial<UserModel>): Promise<void> => {
     authTokenSet({ access: token ?? undefined });
-
     let authStatusF: AuthStatusModel = currentUser
       ? AUTH_STATUS.AUTHENTICATED
       : AUTH_STATUS.UNAUTHENTICATED;
-
     // TODO: load full user from fields
     if (!token || currentUser?._id !== user?._id || !currentUser?.email) {
       if (user) {

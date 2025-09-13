@@ -1,5 +1,6 @@
 import { HttpImplementation } from '@lib/backend/http/utils/HttpImplementation/HttpImplementation';
 import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { parseXml } from '@lib/shared/data/utils/parseXml/parseXml';
@@ -26,7 +27,7 @@ export class ApiDataLoader<
     super({ ...params, name: params.name ?? source, source });
   }
 
-  async fetch(): Promise<Array<Partial<TType>>> {
+  async fetch(): Promise<PartialArrayModel<TType>> {
     const {
       headers,
       method = HTTP_METHOD.GET,

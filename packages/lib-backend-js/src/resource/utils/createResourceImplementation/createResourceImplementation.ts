@@ -5,7 +5,7 @@ import {
 } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
-import { type PrototypeModel } from '@lib/shared/core/core.models';
+import { type PartialArrayModel, type PrototypeModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
@@ -140,7 +140,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
                 ? (await this.decorators.beforeCreate({ input: { form } }, context))?.form
                 : form,
           ),
-        )) as Array<Partial<TType>>);
+        )) as PartialArrayModel<TType>);
       const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot> =
         await createMany(inputF, context);
       return this.decorators.afterCreateMany
@@ -189,7 +189,7 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
         ? await this.decorators.beforeGetMany({ input: inputF }, context)
         : inputF;
       const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> =
-        await getMany(inputF, context);
+        (await getMany(inputF, context)) ?? [];
       return this.decorators.afterGetMany
         ? this.decorators.afterGetMany({ input: inputF, output }, context)
         : output;

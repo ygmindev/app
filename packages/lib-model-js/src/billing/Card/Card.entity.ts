@@ -8,16 +8,17 @@ import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { User } from '@lib/model/user/User/User.entity';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ indices: [{ keys: ['fingerprint'] }], isDatabase: true, name: CARD_RESOURCE_NAME })
 export class Card extends EntityResource implements CardModel {
   @withManyToManyField({ Resource: () => User, leaf: CARD_RESOURCE_NAME })
   [USER_RESOURCE_NAME]?: PartialArrayModel<UserModel>;
 
-  @withField({ isDatabase: true })
+  @withField({ isDatabase: true, type: DATA_TYPE.NUMBER })
   expMonth!: number;
 
-  @withField({ isDatabase: true })
+  @withField({ isDatabase: true, type: DATA_TYPE.NUMBER })
   expYear!: number;
 
   @withField({ isDatabase: true })
@@ -29,7 +30,7 @@ export class Card extends EntityResource implements CardModel {
   @withField({ isDatabase: true })
   funding!: CARD_FUNDING;
 
-  @withField({ isOptional: true })
+  @withField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
   isPrimary?: boolean;
 
   @withField({ isDatabase: true })

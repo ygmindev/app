@@ -479,13 +479,13 @@ type Card {
   User: [User!]
   _id: String
   created: DateTimeISO
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   externalId: String
   fingerprint: String
   funding: String
   isFixture: Boolean
-  isPrimary: String
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -494,13 +494,13 @@ input CardCreateFormInput {
   User: [UserInput!] = []
   _id: String
   created: DateTimeISO
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   externalId: String
   fingerprint: String
   funding: String
   isFixture: Boolean
-  isPrimary: String
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -514,13 +514,13 @@ input CardCreateManyFormInput {
   User: [UserInput!] = []
   _id: String
   created: DateTimeISO
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   externalId: String
   fingerprint: String
   funding: String
   isFixture: Boolean
-  isPrimary: String
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -622,13 +622,13 @@ input CardInput {
   User: [UserInput!] = []
   _id: String
   created: DateTimeISO
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   externalId: String
   fingerprint: String
   funding: String
   isFixture: Boolean
-  isPrimary: String
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -701,13 +701,13 @@ input CardUpdateManyUpdateInput {
   User: [UserInput!] = []
   _id: String
   created: DateTimeISO
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   externalId: String
   fingerprint: String
   funding: String
   isFixture: Boolean
-  isPrimary: String
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -721,13 +721,13 @@ input CardUpdateUpdateInput {
   User: [UserInput!] = []
   _id: String
   created: DateTimeISO
-  expMonth: String
-  expYear: String
+  expMonth: Float
+  expYear: Float
   externalId: String
   fingerprint: String
   funding: String
   isFixture: Boolean
-  isPrimary: String
+  isPrimary: Boolean
   last4: String
   name: String
 }
@@ -2275,7 +2275,7 @@ type Otp {
 input OtpCreateFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-13T19:18:39.076Z"
+  created: DateTimeISO = "2025-09-13T21:09:44.296Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2291,7 +2291,7 @@ input OtpCreateInput {
 input OtpCreateManyFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-13T19:18:39.076Z"
+  created: DateTimeISO = "2025-09-13T21:09:44.296Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2390,7 +2390,7 @@ type OtpGetOutput {
 input OtpInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-13T19:18:39.076Z"
+  created: DateTimeISO = "2025-09-13T21:09:44.296Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2462,7 +2462,7 @@ type OtpUpdateManyOutput {
 input OtpUpdateManyUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-13T19:18:39.076Z"
+  created: DateTimeISO = "2025-09-13T21:09:44.296Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2477,7 +2477,7 @@ type OtpUpdateOutput {
 input OtpUpdateUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-13T19:18:39.076Z"
+  created: DateTimeISO = "2025-09-13T21:09:44.296Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2533,7 +2533,7 @@ type Pricing {
   currency: String
   frequency: String
   isFixture: Boolean
-  price: String
+  price: Float
 }
 
 input PricingCreateFormInput {
@@ -2543,7 +2543,7 @@ input PricingCreateFormInput {
   currency: String
   frequency: String
   isFixture: Boolean
-  price: String
+  price: Float
 }
 
 input PricingCreateInput {
@@ -2558,7 +2558,7 @@ input PricingCreateManyFormInput {
   currency: String
   frequency: String
   isFixture: Boolean
-  price: String
+  price: Float
 }
 
 input PricingCreateManyInput {
@@ -2661,7 +2661,7 @@ input PricingInput {
   currency: String
   frequency: String
   isFixture: Boolean
-  price: String
+  price: Float
 }
 
 input PricingRemoveFilterInput {
@@ -2735,7 +2735,7 @@ input PricingUpdateManyUpdateInput {
   currency: String
   frequency: String
   isFixture: Boolean
-  price: String
+  price: Float
 }
 
 type PricingUpdateOutput {
@@ -2750,7 +2750,7 @@ input PricingUpdateUpdateInput {
   currency: String
   frequency: String
   isFixture: Boolean
-  price: String
+  price: Float
 }
 
 type Product {
@@ -3061,7 +3061,7 @@ type Query {
   VendorGetMany(input: VendorGetManyInput): VendorGetManyOutput
   VendorSearch(input: VendorSearchInput): VendorSearchOutput
   createToken(input: PaymentInput): String
-  paymentMethodGetAll: PaymentMethod
+  paymentMethodGetAll: [PaymentMethod]
   removeToken(input: IdInput): Boolean
   signIn(input: SignInInput): SignIn
   usernameUpdate(input: SignInInput): SignIn
@@ -3369,7 +3369,7 @@ type Socket {
 input SocketCreateFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-13T19:18:39.077Z"
+  created: DateTimeISO = "2025-09-13T21:09:44.299Z"
   isFixture: Boolean
   name: String
 }
@@ -3382,7 +3382,7 @@ input SocketCreateInput {
 input SocketCreateManyFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-13T19:18:39.077Z"
+  created: DateTimeISO = "2025-09-13T21:09:44.299Z"
   isFixture: Boolean
   name: String
 }
@@ -3478,7 +3478,7 @@ type SocketGetOutput {
 input SocketInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-13T19:18:39.077Z"
+  created: DateTimeISO = "2025-09-13T21:09:44.299Z"
   isFixture: Boolean
   name: String
 }
@@ -3547,7 +3547,7 @@ type SocketUpdateManyOutput {
 input SocketUpdateManyUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-13T19:18:39.077Z"
+  created: DateTimeISO = "2025-09-13T21:09:44.299Z"
   isFixture: Boolean
   name: String
 }
@@ -3559,7 +3559,7 @@ type SocketUpdateOutput {
 input SocketUpdateUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-13T19:18:39.077Z"
+  created: DateTimeISO = "2025-09-13T21:09:44.299Z"
   isFixture: Boolean
   name: String
 }

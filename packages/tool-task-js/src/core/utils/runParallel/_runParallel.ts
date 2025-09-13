@@ -20,7 +20,7 @@ export const _runParallel = async (
     })),
     {
       hide: options?.silent,
-      killOthers: ['success', 'failure'],
+      killOthersOn: ['success', 'failure'],
       successCondition: options?.condition ?? 'all',
     },
   );

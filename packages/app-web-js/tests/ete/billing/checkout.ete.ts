@@ -28,20 +28,30 @@ describe(TEST_NAME, () => {
 
       // add first product
       const BUTTON_TEST_ID_1 = `${ADD_TO_CART_BUTTON_TEST_ID}-${product1._id}-${product1[PRICING_RESOURCE_NAME]?.[0]._id}`;
-      await screen.find({ value: BUTTON_TEST_ID_1 }).then((h) => h?.press());
+      await screen
+        .find({ type: SELECTOR_TYPE.TEST_ID, value: BUTTON_TEST_ID_1 })
+        .then((h) => h?.press());
       await screen.snapshot();
-      await screen.find({ value: BACKDROP_TEST_ID }).then((h) => h?.press());
+      await screen
+        .find({ type: SELECTOR_TYPE.TEST_ID, value: BACKDROP_TEST_ID })
+        .then((h) => h?.press());
 
       // add second product
       const BUTTON_TEST_ID_2 = `${ADD_TO_CART_BUTTON_TEST_ID}-${product2._id}-${product2[PRICING_RESOURCE_NAME]?.[0]._id}`;
-      await screen.find({ value: BUTTON_TEST_ID_2 }).then((h) => h?.press());
+      await screen
+        .find({ type: SELECTOR_TYPE.TEST_ID, value: BUTTON_TEST_ID_2 })
+        .then((h) => h?.press());
       await screen.snapshot();
-      await screen.find({ value: BACKDROP_TEST_ID }).then((h) => h?.press());
+      await screen
+        .find({ type: SELECTOR_TYPE.TEST_ID, value: BACKDROP_TEST_ID })
+        .then((h) => h?.press());
 
       await screen.open(ORDER);
       await screen.snapshot();
 
-      await screen.find({ value: `${ORDER_PRODUCTS_TEST_ID}-submit` }).then((h) => h?.press());
+      await screen
+        .find({ type: SELECTOR_TYPE.TEST_ID, value: `${ORDER_PRODUCTS_TEST_ID}-submit` })
+        .then((h) => h?.press());
       await screen.snapshot();
     } else {
       throw new NotFoundError('products');
@@ -73,7 +83,10 @@ describe(TEST_NAME, () => {
         .then((h) => h?.type('12345'));
 
       await screen
-        .find({ value: `${PAYMENT_METHOD_INPUT_NEW_TEST_ID}-form-submit` })
+        .find({
+          type: SELECTOR_TYPE.TEST_ID,
+          value: `${PAYMENT_METHOD_INPUT_NEW_TEST_ID}-form-submit`,
+        })
         .then((h) => h?.press());
       await screen.snapshot();
     } else {
@@ -85,10 +98,14 @@ describe(TEST_NAME, () => {
     const stop = await screen.record();
 
     await addProductsToCart();
-    await screen.find({ value: PAYMENT_METHOD_INPUT_NEW_TEST_ID }).then((h) => h?.press());
+    await screen
+      .find({ type: SELECTOR_TYPE.TEST_ID, value: PAYMENT_METHOD_INPUT_NEW_TEST_ID })
+      .then((h) => h?.press());
     await screen.snapshot();
     await cardSubmit(TEST_CARD_NUMBER_VALID);
-    await screen.find({ value: `${ORDER_PAYMENT_TEST_ID}-submit` }).then((h) => h?.press());
+    await screen
+      .find({ type: SELECTOR_TYPE.TEST_ID, value: `${ORDER_PAYMENT_TEST_ID}-submit` })
+      .then((h) => h?.press());
     await screen.snapshot();
 
     await stop();

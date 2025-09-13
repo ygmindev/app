@@ -24,20 +24,26 @@ export const withTestScreen = ({
     await screen.open('/');
 
     // sign in
-    if (email) {
+    const emailF = email === true ? USER_FIXTURE.email : email;
+    if (emailF) {
       // enter email
-      const emailF = (email === true ? USER_FIXTURE.email : email) ?? '';
       await screen.open(SIGN_IN);
-      await screen.find({ value: 'email' }).then((h) => h?.type(emailF));
+      await screen
+        .find({ type: SELECTOR_TYPE.TEST_ID, value: 'email' })
+        .then((h) => h?.type(emailF));
       testName === SIGN_IN && (await screen.snapshot({ filename: 'enter email' }));
       await screen.key(KEY_TYPE.ENTER);
 
       // enter otp
-      await screen.find({ value: 'otp' }).then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
+      await screen
+        .find({ type: SELECTOR_TYPE.TEST_ID, value: 'otp' })
+        .then((h) => h?.type(process.env.SERVER_OTP_STATIC ?? ''));
       testName === SIGN_IN && (await screen.snapshot({ filename: 'enter otp' }));
 
       // verify user
-      await screen.find({ value: `${APP_MENU_TEST_ID}-toggle` }).then((h) => h?.press());
+      await screen
+        .find({ type: SELECTOR_TYPE.TEST_ID, value: `${APP_MENU_TEST_ID}-toggle` })
+        .then((h) => h?.press());
       await screen
         .find({ value: `${APP_MENU_TEST_ID}-title` })
         .then((h) => h?.find({ type: SELECTOR_TYPE.TEXT, value: emailF }));

@@ -73,9 +73,11 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
     childColorRole?: ThemeRoleModel;
   }>(() => {
     const colorF = theme.color.palette[color];
+    const borderColor = theme.color.border;
     const opacity = theme.opaque[THEME_SIZE.SMALL];
     const activeColor = colorF[THEME_ROLE.ACTIVE];
     const mainColor = colorF[THEME_ROLE.MAIN];
+    const surfaceColor = theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN];
     switch (type) {
       case BUTTON_TYPE.FILLED: {
         return {
@@ -108,7 +110,6 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
       }
       case BUTTON_TYPE.INVISIBLE:
       case BUTTON_TYPE.TRANSPARENT: {
-        const colorInactive = theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN];
         return {
           animation: {
             states: {
@@ -118,18 +119,51 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
                 opacity: 1,
               },
               [ELEMENT_STATE.DISABLED]: {
-                backgroundColor: colorInactive,
+                backgroundColor: surfaceColor,
                 borderColor: mainColor,
                 opacity,
               },
               [ELEMENT_STATE.LOADING]: {
-                backgroundColor: colorInactive,
+                backgroundColor: surfaceColor,
                 borderColor: mainColor,
                 opacity,
               },
               [ELEMENT_STATE.INACTIVE]: {
-                backgroundColor: colorInactive,
+                backgroundColor: surfaceColor,
                 borderColor: mainColor,
+                opacity: 1,
+              },
+            },
+          },
+          childColorRole: THEME_ROLE.MAIN,
+        };
+      }
+      case BUTTON_TYPE.BORDERED: {
+        return {
+          animation: {
+            states: {
+              [ELEMENT_STATE.ACTIVE]: {
+                backgroundColor: surfaceColor,
+                borderColor: mainColor,
+                borderWidth: 2,
+                opacity: 1,
+              },
+              [ELEMENT_STATE.DISABLED]: {
+                backgroundColor: surfaceColor,
+                borderColor,
+                borderWidth: 2,
+                opacity,
+              },
+              [ELEMENT_STATE.LOADING]: {
+                backgroundColor: surfaceColor,
+                borderColor,
+                borderWidth: 2,
+                opacity,
+              },
+              [ELEMENT_STATE.INACTIVE]: {
+                backgroundColor: surfaceColor,
+                borderColor,
+                borderWidth: 2,
                 opacity: 1,
               },
             },

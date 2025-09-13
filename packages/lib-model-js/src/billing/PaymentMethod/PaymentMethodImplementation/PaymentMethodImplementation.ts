@@ -22,7 +22,7 @@ import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedErr
 import { type ChargeModel } from '@lib/shared/billing/billing.models';
 import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
-import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { PartialArrayModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
@@ -121,7 +121,7 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
     throw new UnauthenticatedError();
   }
 
-  async getAll(context?: RequestContextModel): Promise<Array<Partial<PaymentMethodModel>>> {
+  async getAll(context?: RequestContextModel): Promise<PartialArrayModel<PaymentMethodModel>> {
     const userId = context?.user?._id;
     if (userId) {
       const fields: Array<StringKeyModel<PaymentMethodModel>> = [

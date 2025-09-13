@@ -1,4 +1,5 @@
 import { type SourcedEntityResourceModel } from '@lib/model/data/SourcedEntityResource/SourcedEntityResource.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import { type XmlNodeModel } from '@lib/shared/data/utils/parseXml/parseXml.models';
 import { type HTTP_METHOD, type HTTP_RESPONSE_TYPE } from '@lib/shared/http/http.constants';
 import {
@@ -18,7 +19,7 @@ export type ApiDataLoaderParamsModel<
   uri: string;
   transformer(
     response: TResponseType extends HTTP_RESPONSE_TYPE.XML ? XmlNodeModel : TResponse,
-  ): Promise<Array<Partial<TType>>>;
+  ): Promise<PartialArrayModel<TType>>;
 };
 
 export type ApiDataLoaderModel<TType extends SourcedEntityResourceModel> = DataLoaderModel<TType>;

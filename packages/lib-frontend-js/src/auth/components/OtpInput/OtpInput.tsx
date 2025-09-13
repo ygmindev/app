@@ -30,6 +30,7 @@ const IDS = withId(range(otpLength));
 
 export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
   elementState,
+  isAutoFocus,
   onBack,
   onChange,
   onElementStateChange,
@@ -65,6 +66,7 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
           zIndex>
           <TextInput
             defaultValue=""
+            isAutoFocus={isAutoFocus}
             isClearable={false}
             keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
             maxLength={otpLength}

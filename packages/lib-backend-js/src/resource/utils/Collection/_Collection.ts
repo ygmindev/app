@@ -3,6 +3,7 @@ import {
   type _CollectionParamsModel,
 } from '@lib/backend/core/utils/Collection/_Collection.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import { Collection } from '@mikro-orm/core';
 
 export class _Collection<TType extends EntityResourceModel, TRoot extends EntityResourceModel>
@@ -18,32 +19,32 @@ export class _Collection<TType extends EntityResourceModel, TRoot extends Entity
   }
 
   filter(
-    cb: (item: Partial<TType>, index: number, values: Array<Partial<TType>>) => boolean,
+    cb: (item: Partial<TType>, index: number, values: PartialArrayModel<TType>) => boolean,
     _?: unknown,
-  ): Array<Partial<TType>> {
+  ): PartialArrayModel<TType> {
     return super.filter((x, y) => cb(x, y, []));
   }
 
   find(
-    cb: (item: Partial<TType>, index: number, values: Array<Partial<TType>>) => boolean,
+    cb: (item: Partial<TType>, index: number, values: PartialArrayModel<TType>) => boolean,
     _?: unknown,
   ): Partial<TType> | undefined {
     return super.find((x, y) => cb(x, y, []));
   }
 
   map<TResult>(
-    cb: (value: Partial<TType>, index: number, array: Array<Partial<TType>>) => TResult,
+    cb: (value: Partial<TType>, index: number, array: PartialArrayModel<TType>) => TResult,
     _?: unknown,
   ): Array<TResult> {
     return super.map((x, y) => cb(x, y, []));
   }
 
-  push(...items: Array<Partial<TType>>): number {
+  push(...items: PartialArrayModel<TType>): number {
     super.add(items);
     return super.length + 1;
   }
 
-  slice(start?: number, end?: number): Array<Partial<TType>> {
+  slice(start?: number, end?: number): PartialArrayModel<TType> {
     return super.slice(start, end);
   }
 }

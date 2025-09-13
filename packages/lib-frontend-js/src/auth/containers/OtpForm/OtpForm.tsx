@@ -26,7 +26,17 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
   return (
     <FormContainer
       {...wrapperProps}
-      fields={[{ element: <OtpInput onBack={onBack} />, id: 'otp' }]}
+      fields={[
+        {
+          element: (
+            <OtpInput
+              isAutoFocus
+              onBack={onBack}
+            />
+          ),
+          id: 'otp',
+        },
+      ]}
       flex
       isButton={false}
       isCenter

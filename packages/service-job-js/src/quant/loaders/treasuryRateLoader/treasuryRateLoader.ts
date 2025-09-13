@@ -1,7 +1,7 @@
 import { CURVE_TENORS } from '@lib/model/quant/Curve/Curve.constants';
 import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
 import { CurveImplementation } from '@lib/model/quant/Curve/CurveImplementation/CurveImplementation';
-import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { type PartialArrayModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import { DATE_UNIT } from '@lib/shared/datetime/datetime.constants';
 import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
@@ -25,40 +25,37 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
       },
       responseType: HTTP_RESPONSE_TYPE.XML,
       transformer: async (n) =>
-        n.findAll('entry').reduce(
-          (r, nn) => {
-            const updated = nn.find('updated')?.text() ?? undefined;
-            const nnn = nn.find('properties', 'm');
-            if (nnn) {
-              const date = nnn.find('NEW_DATE', 'd')?.text();
-              if (date) {
-                const rate = {
-                  date: new DateTime(date),
-                  name: TREASURY_RATE,
-                } as CurveModel;
-                updated && (rate.lastUpdated = new DateTime(updated));
-                return [
-                  ...r,
-                  CURVE_TENORS.reduce((rr, { unit, value }) => {
-                    const selectorUnit =
-                      unit === DATE_UNIT.MONTH ? 'MONTH' : unit === DATE_UNIT.YEAR ? 'YEAR' : null;
-                    if (selectorUnit) {
-                      const key = `value_${value}${unit}`;
-                      const selector = `BC_${value}${selectorUnit}`;
-                      const v = nnn.find(selector, 'd')?.text();
-                      const vF = v && parseFloat(v);
-                      return isNil(vF) ? rr : { ...rr, [key]: vF };
-                    }
-                    return rr;
-                  }, rate),
-                ];
-              }
-              return r;
+        n.findAll('entry').reduce((r, nn) => {
+          const updated = nn.find('updated')?.text() ?? undefined;
+          const nnn = nn.find('properties', 'm');
+          if (nnn) {
+            const date = nnn.find('NEW_DATE', 'd')?.text();
+            if (date) {
+              const rate = {
+                date: new DateTime(date),
+                name: TREASURY_RATE,
+              } as CurveModel;
+              updated && (rate.lastUpdated = new DateTime(updated));
+              return [
+                ...r,
+                CURVE_TENORS.reduce((rr, { unit, value }) => {
+                  const selectorUnit =
+                    unit === DATE_UNIT.MONTH ? 'MONTH' : unit === DATE_UNIT.YEAR ? 'YEAR' : null;
+                  if (selectorUnit) {
+                    const key = `value_${value}${unit}`;
+                    const selector = `BC_${value}${selectorUnit}`;
+                    const v = nnn.find(selector, 'd')?.text();
+                    const vF = v && parseFloat(v);
+                    return isNil(vF) ? rr : { ...rr, [key]: vF };
+                  }
+                  return rr;
+                }, rate),
+              ];
             }
             return r;
-          },
-          [] as Array<Partial<CurveModel>>,
-        ),
+          }
+          return r;
+        }, [] as PartialArrayModel<CurveModel>),
       uri: 'https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xmlview',
     }),
 
@@ -114,7 +111,7 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
         const lastUpdatedF = lastUpdated
           ? new DateTime(lastUpdated.replace('Release date: ', ''), { format: 'MMMM d, yyyy' })
           : undefined;
-        const results: Array<Partial<CurveModel>> = [];
+        const results: PartialArrayModel<CurveModel> = [];
         const startIndex = data.findIndex((v) => toString(v[headers[0]]).includes('Nominal'));
         const endIndex = data.findIndex((v) =>
           toString(v[headers[0]]).includes('Inflation indexed'),

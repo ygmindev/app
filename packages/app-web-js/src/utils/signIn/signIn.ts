@@ -1,7 +1,7 @@
 import { type SignInModel, type SignInParamsModel } from '@app/web/utils/signIn/signIn.models';
+import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
-import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 
 export const signIn = async ({
   dirname = SIGN_IN,
@@ -10,6 +10,7 @@ export const signIn = async ({
   screen,
 }: SignInParamsModel): Promise<SignInModel> => {
   await screen.open(SIGN_IN);
+  console.warn(email);
   await screen
     .find({ key: 'data-testid', type: SELECTOR_TYPE.DATA, value: 'email' })
     .then((h) => h?.type(email ?? ''));
