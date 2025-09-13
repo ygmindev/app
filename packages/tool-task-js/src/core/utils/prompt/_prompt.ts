@@ -40,7 +40,7 @@ export const _prompt = async <TType extends unknown>(
         if (query) {
           const fuzzy = new Fuzzy({
             keys: ['id', 'label'],
-            options: optionsF.map((v) => (isString(v) ? { id: v } : v)),
+            options: optionsF.map((v) => (isString(v) ? { id: v, label: v } : v)),
           });
           optionsF = await fuzzy.search(query);
         }

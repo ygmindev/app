@@ -7,11 +7,21 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type ClassModel } from '@lib/shared/core/core.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import toString from 'lodash/toString';
 
 export const seed = async (): Promise<SeedModel> => {
   const database = Container.get(Database, DATABASE_TYPE.MONGO);
+
+  const cleanUp = async (): Promise<void> => {
+    for (const name of database.getRepositories()) {
+      const repository = database.getRepository<EntityResourceModel>({ name });
+      await repository.remove({ filter: [{ field: 'isFixture', value: true }] });
+    }
+  };
+
+  await cleanUp();
 
   for (const { data, name, root } of SEED_DATA) {
     const implementations = fromGlobs([`**/*/${name}Implementation.ts`], {
@@ -34,16 +44,13 @@ export const seed = async (): Promise<SeedModel> => {
       }));
       try {
         await implementation.createMany?.({ form: formsF, root: rootF });
-      } catch (_) {}
+      } catch (e) {
+        logger.fail(e);
+      }
     }
   }
 
   return {
-    cleanUp: async () => {
-      for (const name of database.getRepositories()) {
-        const repository = database.getRepository<EntityResourceModel>({ name });
-        await repository.remove({ filter: [{ field: 'isFixture', value: true }] });
-      }
-    },
+    cleanUp,
   };
 };

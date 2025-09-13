@@ -10,10 +10,10 @@ import { type PricingModel } from '@lib/model/commerce/Pricing/Pricing.models';
 import { PRODUCT_RESOURCE_NAME } from '@lib/model/commerce/Product/Product.constants';
 import { Product } from '@lib/model/commerce/Product/Product.entity';
 import { ProductModel } from '@lib/model/commerce/Product/Product.models';
-import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
+import { EmbeddedResource } from '@lib/model/resource/EmbeddedResource/EmbeddedResource';
 
 @withEmbeddedEntity({ name: PRICING_RESOURCE_NAME })
-export class Pricing extends EntityResource implements PricingModel {
+export class Pricing extends EmbeddedResource implements PricingModel {
   @withManyToOneField({ Resource: () => Product })
   [PRODUCT_RESOURCE_NAME]!: RefModel<ProductModel>;
 

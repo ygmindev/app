@@ -286,7 +286,16 @@ export class _Database implements _DatabaseModel {
         case ReferenceKind.ONE_TO_MANY:
         case ReferenceKind.MANY_TO_MANY: {
           if (isArray(value)) {
-            formF[v.name] = value.map((vv) => em.create(v.type, vv as object));
+            formF[v.name] = value.map((vv) => {
+              const child = em.create(v.type, vv as object);
+              const cid = (child as EntityResourceModel)._id;
+              (child as EntityResourceModel)._id = cid
+                ? isString(cid)
+                  ? (new ObjectId(cid) as unknown as string)
+                  : cid
+                : (new ObjectId() as unknown as string);
+              return child;
+            });
           }
           break;
         }

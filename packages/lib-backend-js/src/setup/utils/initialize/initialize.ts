@@ -40,7 +40,7 @@ export const initialize = async ({
         Container.set(Database, db, DATABASE_TYPE.MONGO);
         result.database = db;
       } catch (e) {
-        logger.raise(`Failed to connect to ${databaseF.host}`, e);
+        logger.fail(`Failed to connect to ${databaseF.host}`, e);
       }
     }
   }

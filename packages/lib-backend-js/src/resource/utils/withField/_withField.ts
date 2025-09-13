@@ -98,10 +98,12 @@ export const _withField =
         const entity = Resource as () => EntityClass<TType>;
         switch (relation) {
           case FIELD_RELATION.EMBEDDED: {
-            Embedded({ array: isArray, entity, nullable: isOptional, object: !isArray })(
-              target,
-              propertyKey as string,
-            );
+            Embedded({
+              ...options,
+              array: isArray,
+              entity,
+              object: !isArray,
+            })(target, propertyKey as string);
             break;
           }
           case FIELD_RELATION.MANY_TO_MANY: {

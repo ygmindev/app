@@ -50,7 +50,7 @@ export class User extends EntityResource implements UserModel {
   [CHAT_RESOURCE_NAME]?: PartialArrayModel<ChatModel>;
 
   @withEmbeddedField({ Resource: () => LinkedUser })
-  [LINKED_USER_RESOURCE_NAME]?: PartialArrayModel<RefModel<LinkedUserModel>>;
+  [LINKED_USER_RESOURCE_NAME]?: PartialArrayModel<LinkedUserModel>;
 
   @withOneToManyField({ Resource: () => Message, root: 'createdBy' })
   [MESSAGE_RESOURCE_NAME]?: PartialArrayModel<MessageModel>;
