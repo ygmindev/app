@@ -25,8 +25,8 @@ export const userRoutes: Array<RouteModel> = [
         pathname: PROFILE,
         routes: [
           {
-            description: ({ currentUser }) =>
-              filterNil([currentUser?.first, currentUser?.last]).join(' '),
+            description: ({ currentUser, t }) =>
+              filterNil([currentUser?.first, currentUser?.last]).join(' ') || t('core:notSet'),
             element: <NameFormPage />,
             icon: 'id',
             pathname: NAME,
