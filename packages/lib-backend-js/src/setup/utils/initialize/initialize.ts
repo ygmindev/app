@@ -38,13 +38,6 @@ export const initialize = async ({
         const db = new Database(databaseF);
         await db.connect();
         Container.set(Database, db, DATABASE_TYPE.MONGO);
-
-        if (process.env.NODE_ENV === 'test') {
-          const { seed } = await import('@lib/backend/database/utils/seed/seed');
-          const { cleanUp: cleanUpSeed } = await seed();
-          cleanUps.unshift(cleanUpSeed);
-        }
-
         result.database = db;
       } catch (e) {
         logger.raise(`Failed to connect to ${databaseF.host}`, e);

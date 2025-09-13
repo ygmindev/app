@@ -8,6 +8,8 @@ import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { EnvironmentOverrideParamsModel } from '@lib/shared/environment/environment.models';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
@@ -122,7 +124,12 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     const overridesF = overrides?.({ name, root, target });
     let optionsF = { ...(overridesF ?? {}), ...parseArgs() } as TType & object;
     if (options) {
-      const optionsPrompts = await options({ name, overrides: overridesF, root, target });
+      let optionsPrompts = await options({ name, overrides: overridesF, root, target });
+      optionsPrompts = optionsPrompts.map((v) =>
+        v.key === 'environment'
+          ? { ...v, defaultValue: environment, options: Object.values(ENVIRONMENT) }
+          : v,
+      );
       optionsF = {
         ...optionsF,
         ...(await prompt<TType & object>(optionsPrompts?.filter(({ key }) => !(key in optionsF)))),
@@ -133,7 +140,8 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
     try {
       onBefore && (await this.runTasks(onBefore, context));
       process.chdir(root ?? fromRoot());
-      setEnvironment({ environment, variables });
+      const environmentF = (optionsF as EnvironmentOverrideParamsModel).environment ?? environment;
+      setEnvironment({ environment: environmentF, variables });
       const environmentContext = stringify({
         environment: process.env.NODE_ENV,
         platform: process.env.ENV_PLATFORM,

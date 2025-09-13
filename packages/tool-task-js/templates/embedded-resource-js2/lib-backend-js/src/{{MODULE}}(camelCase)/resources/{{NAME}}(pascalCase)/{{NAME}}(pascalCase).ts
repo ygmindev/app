@@ -8,8 +8,9 @@ import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefFiel
 import { {{NAME_ROOT}}(pascalCase) } from '@lib/backend/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase)';
 import { type {{NAME_ROOT}}(pascalCase)Model } from '@lib/shared/{{MODULE_ROOT}}(camelCase)/resources/{{NAME_ROOT}}(pascalCase)/{{NAME_ROOT}}(pascalCase).models';
 import { type RefFieldModel } from '@lib/backend/resource/utils/RefField/RefField.models';
+import { withEmbeddedEntity } from '@lib/backend/resource/utils/withEmbeddedEntity/withEmbeddedEntity';
 
-@withEntity({ isEmbeddable: true, isDatabase: true, name: {{NAME}}(constantCase)_RESOURCE_NAME })
+@withEmbeddedEntity({ name: {{NAME}}(constantCase)_RESOURCE_NAME })
 export class {{NAME}}(pascalCase) extends EntityResource implements {{NAME}}(pascalCase)Model {
   @withRefField({ Resource: () => User })
   _{{NAME_ROOT}}(camelCase)?: RefFieldModel<{{NAME_ROOT}}(pascalCase)Model>;

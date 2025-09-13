@@ -3,7 +3,7 @@ import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withHook } from '@lib/backend/resource/utils/withHook/withHook';
 import { HOOK_TYPE } from '@lib/backend/resource/utils/withHook/withHook.constants';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
-import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
+import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { PrimaryKeyModel } from '@lib/shared/resource/resource.models';
 import forEach from 'lodash/forEach';
 import isNil from 'lodash/isNil';
@@ -22,7 +22,7 @@ export class EntityResource implements EntityResourceModel {
 
   id?: string;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.BOOLEAN })
   isFixture?: boolean;
 
   @withHook({ type: HOOK_TYPE.BEFORE_CREATE })

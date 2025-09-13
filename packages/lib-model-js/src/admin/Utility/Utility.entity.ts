@@ -1,10 +1,10 @@
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withEmbeddedEntity } from '@lib/backend/resource/utils/withEmbeddedEntity/withEmbeddedEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { UTILITY_RESOURCE_NAME } from '@lib/model/admin/Utility/Utility.constants';
 import { UTILITY_TYPE, type UtilityModel } from '@lib/model/admin/Utility/Utility.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 
-@withEntity({ isDatabase: true, isEmbeddable: true, name: UTILITY_RESOURCE_NAME })
+@withEmbeddedEntity({ name: UTILITY_RESOURCE_NAME })
 export class Utility extends EntityResource implements UtilityModel {
   @withField({ isDatabase: true, isOptional: true })
   description?: string;

@@ -7,16 +7,13 @@ import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages'
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type ClassModel } from '@lib/shared/core/core.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
-import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
-import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import toString from 'lodash/toString';
 
 export const seed = async (): Promise<SeedModel> => {
   const database = Container.get(Database, DATABASE_TYPE.MONGO);
 
-  for (const { afterCreate, data, name, root } of SEED_DATA) {
+  for (const { data, name, root } of SEED_DATA) {
     const implementations = fromGlobs([`**/*/${name}Implementation.ts`], {
       isAbsolute: true,
       root: fromPackages('lib-model-js/src'),
@@ -29,17 +26,15 @@ export const seed = async (): Promise<SeedModel> => {
         >
       )[`${name}Implementation`];
       const implementation = Container.get(cls);
-      for (const form of data?.() ?? []) {
-        let rootF = await root?.();
-        rootF && (rootF = toString(rootF));
-        const formF = form as Partial<EntityResourceModel>;
-        formF.isFixture = true;
-        const result = await implementation.create?.({
-          form,
-          root: rootF,
-        } as ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, unknown, unknown>);
-        await afterCreate?.(result as ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, unknown>);
-      }
+      let rootF = await root?.();
+      rootF && (rootF = toString(rootF));
+      const formsF = (data?.() ?? []).map((form) => ({
+        ...(form as Partial<EntityResourceModel>),
+        isFixture: true,
+      }));
+      try {
+        await implementation.createMany?.({ form: formsF, root: rootF });
+      } catch (_) {}
     }
   }
 

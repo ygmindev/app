@@ -22,7 +22,7 @@ export const _prompt = async <TType extends unknown>(
       result,
       {
         key,
-        type = PROMPT_TYPE.INPUT,
+        type,
         message = `${startCase(toString(key))}?`,
         options,
         isOptional,
@@ -30,6 +30,8 @@ export const _prompt = async <TType extends unknown>(
         basePath = fromPackages(),
       },
     ) => {
+      const typeF = type ?? (options ? PROMPT_TYPE.LIST : PROMPT_TYPE.INPUT);
+
       const messageF = `${message}${isOptional ? ' (Optional)' : ''}`;
       const getChoices = async (
         query?: string,
@@ -42,13 +44,22 @@ export const _prompt = async <TType extends unknown>(
           });
           optionsF = await fuzzy.search(query);
         }
+
+        if (defaultValue) {
+          const i = optionsF.findIndex((v) => (isString(v) ? v : v.id) === defaultValue);
+          if (i > 0) {
+            const [match] = optionsF.splice(i, 1);
+            optionsF.unshift(match);
+          }
+        }
+
         return optionsF.map((option) => {
           const { name, value } = isString(option)
             ? { name: option, value: option }
             : { name: option.label, value: option.id };
           return {
             checked:
-              type === PROMPT_TYPE.MULTIPLE &&
+              typeF === PROMPT_TYPE.MULTIPLE &&
               options &&
               (defaultValue as Array<string>)?.includes(value),
             name,
@@ -58,7 +69,7 @@ export const _prompt = async <TType extends unknown>(
       };
 
       const v = await (async () => {
-        switch (type) {
+        switch (typeF) {
           case PROMPT_TYPE.INPUT:
             return input({ message: messageF });
           case PROMPT_TYPE.CONFIRM:
