@@ -1,7 +1,8 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import fileConfig from '@lib/config/file/file';
-import { DIST_DIR } from '@lib/config/file/file.constants';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
 import { _typescript } from '@lib/config/node/typescript/_typescript';
 import {
@@ -18,9 +19,7 @@ export const config = defineConfig<TypescriptConfigModel, _TypescriptConfigModel
   params: () => ({
     configFilename: 'tsconfig.json',
 
-    distDir: DIST_DIR,
-
-    outDir: './out-tsc',
+    outPathname: fromWorking(BUILD_DIR, './out-tsc'),
 
     paths: {
       'css-in-js-utils/lib/*': `${pacakgeManagerConfig.params().modulesDir}/css-in-js-utils/es/*`,

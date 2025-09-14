@@ -1,8 +1,9 @@
-import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type TranspileOptions } from 'typescript';
 
-export type TypescriptConfigModel = Pick<FileConfigModel, 'distDir'> & {
+export type TypescriptConfigModel = {
   configFilename: string;
+
+  outPathname: string;
 
   paths?: Record<string, string>;
 

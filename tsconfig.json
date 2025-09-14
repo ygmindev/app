@@ -23,7 +23,7 @@
     "moduleResolution": "bundler",
     "noEmit": true,
     "noEmitOnError": false,
-    "outDir": "./out-tsc",
+    "outDir": "__build__/out-tsc",
     "paths": {
       "css-in-js-utils/lib/*": [
         "node_modules/css-in-js-utils/es/*"

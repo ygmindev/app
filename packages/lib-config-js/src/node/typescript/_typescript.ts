@@ -1,3 +1,4 @@
+import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import {
   type _TypescriptConfigModel,
   type TypescriptConfigModel,
@@ -11,7 +12,7 @@ import {
 } from 'typescript';
 
 export const _typescript = ({
-  distDir,
+  outPathname,
   paths,
   rootDir,
   types,
@@ -35,7 +36,7 @@ export const _typescript = ({
     moduleResolution: 'bundler' as unknown as ModuleResolutionKind,
     noEmit: true,
     noEmitOnError: false,
-    outDir: './out-tsc',
+    outDir: toRelative({ from: rootDir, to: outPathname }),
     paths: reduce(paths, (result, v, k) => ({ ...result, [k]: [v] }), {}),
     resolveJsonModule: true,
     rootDir: './',

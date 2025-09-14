@@ -16,7 +16,6 @@ import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVa
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
-import { type PlatformModel } from '@lib/shared/platform/platform.models';
 import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
@@ -315,7 +314,7 @@ export const _bundle = ({
         typescript: { tsconfigPath: tsconfigDir },
       }),
 
-      ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<PlatformModel>).includes(
+      ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<string>).includes(
         process.env.ENV_PLATFORM,
       )
         ? [react({ plugins: [['swc-plugin-add-display-name', {}]], tsDecorators: true })]
