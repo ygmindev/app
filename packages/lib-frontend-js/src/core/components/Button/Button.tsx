@@ -67,10 +67,11 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
 
   const isIconOnly = icon && !children;
 
-  const { animation, childColor, childColorRole } = useMemo<{
-    animation?: AnimationModel;
+  const { borderAnimation, childColor, childColorRole, containerAnimation } = useMemo<{
+    borderAnimation?: AnimationModel;
     childColor?: THEME_COLOR | string;
     childColorRole?: THEME_ROLE;
+    containerAnimation?: AnimationModel;
   }>(() => {
     const colorF = theme.color.palette[color];
     const opacity = theme.opaque[THEME_SIZE.SMALL];
@@ -81,95 +82,115 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
     switch (type) {
       case BUTTON_TYPE.FILLED: {
         return {
-          animation: {
+          borderAnimation: {
+            states: {
+              [ELEMENT_STATE.ACTIVE]: { borderColor: activeColor },
+              [ELEMENT_STATE.DISABLED]: { borderColor: activeColor },
+              [ELEMENT_STATE.LOADING]: { borderColor: activeColor },
+              [ELEMENT_STATE.INACTIVE]: { borderColor: mainColor },
+            },
+          },
+          childColorRole: THEME_ROLE.CONTRAST,
+          containerAnimation: {
             states: {
               [ELEMENT_STATE.ACTIVE]: {
                 backgroundColor: activeColor,
-                borderColor: activeColor,
                 opacity: 1,
               },
               [ELEMENT_STATE.DISABLED]: {
                 backgroundColor: activeColor,
-                borderColor: activeColor,
                 opacity,
               },
               [ELEMENT_STATE.LOADING]: {
                 backgroundColor: activeColor,
-                borderColor: activeColor,
                 opacity,
               },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: mainColor,
-                borderColor: mainColor,
                 opacity: 1,
               },
             },
           },
-          childColorRole: THEME_ROLE.CONTRAST,
         };
       }
       case BUTTON_TYPE.INVISIBLE:
       case BUTTON_TYPE.TRANSPARENT: {
         return {
-          animation: {
+          borderAnimation: {
+            states: {
+              [ELEMENT_STATE.ACTIVE]: { borderColor: mainColor },
+              [ELEMENT_STATE.DISABLED]: { borderColor: mainColor },
+              [ELEMENT_STATE.LOADING]: { borderColor: mainColor },
+              [ELEMENT_STATE.INACTIVE]: { borderColor: mainColor },
+            },
+          },
+          childColorRole: THEME_ROLE.MAIN,
+          containerAnimation: {
             states: {
               [ELEMENT_STATE.ACTIVE]: {
                 backgroundColor: colorF[THEME_ROLE.MUTED],
-                borderColor: mainColor,
                 opacity: 1,
               },
               [ELEMENT_STATE.DISABLED]: {
                 backgroundColor: surfaceColor,
-                borderColor: mainColor,
                 opacity,
               },
               [ELEMENT_STATE.LOADING]: {
                 backgroundColor: surfaceColor,
-                borderColor: mainColor,
                 opacity,
               },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: surfaceColor,
-                borderColor: mainColor,
                 opacity: 1,
               },
             },
           },
-          childColorRole: THEME_ROLE.MAIN,
         };
       }
       case BUTTON_TYPE.BORDERED: {
         return {
-          animation: {
+          borderAnimation: {
             states: {
               [ELEMENT_STATE.ACTIVE]: {
-                backgroundColor: surfaceColor,
                 borderColor: mainColor,
                 borderWidth: 1.5,
-                opacity: 1,
               },
               [ELEMENT_STATE.DISABLED]: {
-                backgroundColor: surfaceColor,
                 borderColor: contrastColor,
                 borderWidth: 1,
-                opacity,
               },
               [ELEMENT_STATE.LOADING]: {
-                backgroundColor: surfaceColor,
                 borderColor: contrastColor,
                 borderWidth: 1,
-                opacity,
               },
               [ELEMENT_STATE.INACTIVE]: {
-                backgroundColor: surfaceColor,
                 borderColor: contrastColor,
                 borderWidth: 1,
-                opacity: 1,
               },
             },
           },
           childColor: isActive ? activeColor : contrastColor,
           childColorRole: THEME_ROLE.MAIN,
+          containerAnimation: {
+            states: {
+              [ELEMENT_STATE.ACTIVE]: {
+                backgroundColor: surfaceColor,
+                opacity: 1,
+              },
+              [ELEMENT_STATE.DISABLED]: {
+                backgroundColor: surfaceColor,
+                opacity,
+              },
+              [ELEMENT_STATE.LOADING]: {
+                backgroundColor: surfaceColor,
+                opacity,
+              },
+              [ELEMENT_STATE.INACTIVE]: {
+                backgroundColor: surfaceColor,
+                opacity: 1,
+              },
+            },
+          },
         };
       }
       default:
@@ -249,9 +270,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
     <Pressable
       {...wrapperProps}
       align={align}
-      animation={animation}
-      border={type === BUTTON_TYPE.TRANSPARENT}
-      borderRole={THEME_ROLE.MAIN}
+      animation={containerAnimation}
       confirmColor={color}
       elementState={elementStateControlled}
       height={heightF}
@@ -263,6 +282,15 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
       tooltip={tooltip}
       width={props.width ?? (children ? undefined : heightF)}>
       <>
+        <Wrapper
+          animation={borderAnimation}
+          border={type === BUTTON_TYPE.TRANSPARENT}
+          borderRole={THEME_ROLE.MAIN}
+          elementState={elementStateControlled}
+          isAbsoluteFill
+          round={isIconOnly ? heightF / 2 : true}
+        />
+
         <Appearable
           isActive={!isLoading}
           isFullWidth={!isIconOnly}
@@ -273,7 +301,8 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
         <Appearable
           isAbsoluteFill
           isActive={isLoading}
-          isCenter>
+          isCenter
+          isOverflowHidden>
           <Loading
             color={colorF}
             colorRole={childColorRole}

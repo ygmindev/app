@@ -12,7 +12,6 @@ import { usePaymentMethodResource } from '@lib/frontend/billing/hooks/usePayment
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Chip } from '@lib/frontend/core/components/Chip/Chip';
-import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import { ItemList } from '@lib/frontend/core/components/ItemList/ItemList';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Title } from '@lib/frontend/core/components/Title/Title';
@@ -73,16 +72,10 @@ export const PaymentMethodInput: RLFCModel<
     return output;
   };
 
-  const getIcon = (type?: PAYMENT_METHOD_TYPE): WithIconPropsModel['icon'] => {
-    switch (type) {
-      case PAYMENT_METHOD_TYPE.BANK:
-        return 'bank';
-      case PAYMENT_METHOD_TYPE.CARD:
-        return 'card';
-      default:
-        return 'dollar';
-    }
-  };
+  const getLogo = (brand?: string): Array<string> => [
+    `/images/brands/${brand}.svg`,
+    '/images/brands/card.svg',
+  ];
 
   return (
     <DataBoundary
@@ -130,9 +123,9 @@ export const PaymentMethodInput: RLFCModel<
 
           {isEditable ? (
             <ItemList
-              items={data?.map(({ _id, last4, name, type }) => ({
-                icon: getIcon(type),
+              items={data?.map(({ _id, brand, last4, name, type }) => ({
                 id: _id ?? '',
+                image: getLogo(brand),
                 last4,
                 name,
                 title: t('billing:paymentMethodTitle', { last4, name }),
@@ -190,12 +183,12 @@ export const PaymentMethodInput: RLFCModel<
               isVertical
               onChange={(v) => valueControlledSet(v)}
               options={
-                data?.map(({ _id, externalId, last4, name, type }) => ({
+                data?.map(({ _id, brand, externalId, last4, name, type }) => ({
                   id: externalId ?? _id ?? '',
                   label: (
                     <Title
                       flex
-                      icon={getIcon(type)}
+                      image={getLogo(brand)}
                       key={_id}
                       title={t('billing:paymentMethodTitle', { last4, name })}
                     />

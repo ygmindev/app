@@ -76,6 +76,6 @@ export const useForm = <TType, TResult = void>({
   return {
     ...form,
     isLoading: isAppLoading || isLoading,
-    isValid: !validators || form.isValid,
+    isValid: !validators || !form.errors || form.isValid,
   };
 };

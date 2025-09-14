@@ -8,7 +8,7 @@ export type TitlePropsModel = ElementStatePropsModel &
   WithIconPropsModel &
   Pick<TextPropsModel, 'color' | 'colorRole' | 'fontSize' | 'fontStyle'> & {
     description?: AsyncTextModel | ReactElement;
-    image?: string;
+    image?: string | Array<string>;
     leftElement?: ReactElement | null;
     rightElement?: ReactElement | null;
     title?: AsyncTextModel | ReactElement;

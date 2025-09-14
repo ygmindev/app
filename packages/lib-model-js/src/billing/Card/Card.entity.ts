@@ -15,6 +15,9 @@ export class Card extends EntityResource implements CardModel {
   @withManyToManyField({ Resource: () => User, leaf: CARD_RESOURCE_NAME })
   [USER_RESOURCE_NAME]?: PartialArrayModel<UserModel>;
 
+  @withField({ isDatabase: true, isOptional: true })
+  brand?: string;
+
   @withField({ isDatabase: true, type: DATA_TYPE.NUMBER })
   expMonth!: number;
 
@@ -37,7 +40,7 @@ export class Card extends EntityResource implements CardModel {
   last4!: string;
 
   @withField({ isDatabase: true })
-  name!: string;
+  name?: string;
 }
 
 export default Card;

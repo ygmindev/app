@@ -126,6 +126,7 @@ export class PaymentMethodImplementation implements PaymentMethodImplementationM
     if (userId) {
       const fields: Array<StringKeyModel<PaymentMethodModel>> = [
         '_id',
+        'brand',
         'externalId',
         'last4',
         'name',

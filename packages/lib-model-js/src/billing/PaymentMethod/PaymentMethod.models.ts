@@ -1,6 +1,8 @@
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
 export type PaymentMethodModel = EntityResourceModel & {
+  brand?: string;
+
   externalId: string;
 
   fingerprint: string;
@@ -9,7 +11,7 @@ export type PaymentMethodModel = EntityResourceModel & {
 
   last4: string;
 
-  name: string;
+  name?: string;
 
   type: PAYMENT_METHOD_TYPE;
 };

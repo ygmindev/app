@@ -6,6 +6,8 @@ import { type PartialArrayModel } from '@lib/shared/core/core.models';
 export type BankModel = EntityResourceModel & {
   [USER_RESOURCE_NAME]?: PartialArrayModel<UserModel>;
 
+  brand?: string;
+
   externalId: string;
 
   fingerprint: string;
@@ -14,5 +16,5 @@ export type BankModel = EntityResourceModel & {
 
   last4: string;
 
-  name: string;
+  name?: string;
 };

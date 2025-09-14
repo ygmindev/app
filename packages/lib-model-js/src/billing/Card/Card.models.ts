@@ -7,6 +7,8 @@ import { type PartialArrayModel } from '@lib/shared/core/core.models';
 export type CardModel = EntityResourceModel & {
   [USER_RESOURCE_NAME]?: PartialArrayModel<UserModel>;
 
+  brand?: string;
+
   expMonth: number;
 
   expYear: number;
@@ -21,5 +23,5 @@ export type CardModel = EntityResourceModel & {
 
   last4: string;
 
-  name: string;
+  name?: string;
 };

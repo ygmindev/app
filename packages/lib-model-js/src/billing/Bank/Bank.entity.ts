@@ -14,6 +14,9 @@ export class Bank extends EntityResource implements BankModel {
   @withManyToManyField({ Resource: () => User, leaf: BANK_RESOURCE_NAME })
   [USER_RESOURCE_NAME]?: PartialArrayModel<UserModel>;
 
+  @withField({ isDatabase: true, isOptional: true })
+  brand?: string;
+
   @withField({ isDatabase: true })
   externalId!: string;
 
@@ -26,8 +29,8 @@ export class Bank extends EntityResource implements BankModel {
   @withField({ isDatabase: true })
   last4!: string;
 
-  @withField({ isDatabase: true })
-  name!: string;
+  @withField({ isDatabase: true, isOptional: true })
+  name?: string;
 }
 
 export default Bank;

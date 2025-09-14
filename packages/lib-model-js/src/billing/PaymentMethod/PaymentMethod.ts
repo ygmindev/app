@@ -9,6 +9,9 @@ import { EntityResource } from '@lib/model/resource/EntityResource/EntityResourc
 
 @withEntity({ name: PAYMENT_METHOD_RESOURCE_NAME })
 export class PaymentMethod extends EntityResource implements PaymentMethodModel {
+  @withField({ isOptional: true })
+  brand?: string;
+
   @withField()
   externalId!: string;
 
@@ -18,8 +21,8 @@ export class PaymentMethod extends EntityResource implements PaymentMethodModel 
   @withField()
   last4!: string;
 
-  @withField()
-  name!: string;
+  @withField({ isOptional: true })
+  name?: string;
 
   @withField()
   type!: PAYMENT_METHOD_TYPE;
