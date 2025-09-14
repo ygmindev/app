@@ -128,7 +128,7 @@ export const PaymentMethodInput: RLFCModel<
                 image: getLogo(brand),
                 last4,
                 name,
-                title: t('billing:paymentMethodTitle', { last4, name }),
+                title: t('billing:paymentMethodTitle', { last4, name: name ?? brand }),
                 type,
               }))}
               rightElement={({ item }) => (
@@ -190,7 +190,7 @@ export const PaymentMethodInput: RLFCModel<
                       flex
                       image={getLogo(brand)}
                       key={_id}
-                      title={t('billing:paymentMethodTitle', { last4, name })}
+                      title={t('billing:paymentMethodTitle', { last4, name: name ?? brand })}
                     />
                   ),
                 })) ?? []

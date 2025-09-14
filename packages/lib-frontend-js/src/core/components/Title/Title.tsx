@@ -45,10 +45,10 @@ export const Title: LFCModel<TitlePropsModel> = ({
           {image && (
             <Skeleton elementState={elementState}>
               <Image
+                height={theme.shape.size[THEME_SIZE.SMALL]}
                 isAutoSize
                 round={THEME_SIZE.SMALL}
                 src={image}
-                width={theme.shape.size[THEME_SIZE.MEDIUM]}
               />
             </Skeleton>
           )}

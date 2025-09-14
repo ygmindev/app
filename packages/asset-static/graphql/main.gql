@@ -2287,7 +2287,7 @@ type Otp {
 input OtpCreateFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-14T18:57:15.141Z"
+  created: DateTimeISO = "2025-09-14T19:32:46.630Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2303,7 +2303,7 @@ input OtpCreateInput {
 input OtpCreateManyFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-14T18:57:15.141Z"
+  created: DateTimeISO = "2025-09-14T19:32:46.630Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2402,7 +2402,7 @@ type OtpGetOutput {
 input OtpInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-14T18:57:15.141Z"
+  created: DateTimeISO = "2025-09-14T19:32:46.630Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2474,7 +2474,7 @@ type OtpUpdateManyOutput {
 input OtpUpdateManyUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-14T18:57:15.141Z"
+  created: DateTimeISO = "2025-09-14T19:32:46.630Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2489,7 +2489,7 @@ type OtpUpdateOutput {
 input OtpUpdateUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-14T18:57:15.141Z"
+  created: DateTimeISO = "2025-09-14T19:32:46.630Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -3383,7 +3383,7 @@ type Socket {
 input SocketCreateFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-14T18:57:15.142Z"
+  created: DateTimeISO = "2025-09-14T19:32:46.631Z"
   isFixture: Boolean
   name: String
 }
@@ -3396,7 +3396,7 @@ input SocketCreateInput {
 input SocketCreateManyFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-14T18:57:15.142Z"
+  created: DateTimeISO = "2025-09-14T19:32:46.631Z"
   isFixture: Boolean
   name: String
 }
@@ -3492,7 +3492,7 @@ type SocketGetOutput {
 input SocketInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-14T18:57:15.142Z"
+  created: DateTimeISO = "2025-09-14T19:32:46.631Z"
   isFixture: Boolean
   name: String
 }
@@ -3561,7 +3561,7 @@ type SocketUpdateManyOutput {
 input SocketUpdateManyUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-14T18:57:15.142Z"
+  created: DateTimeISO = "2025-09-14T19:32:46.631Z"
   isFixture: Boolean
   name: String
 }
@@ -3573,7 +3573,7 @@ type SocketUpdateOutput {
 input SocketUpdateUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-14T18:57:15.142Z"
+  created: DateTimeISO = "2025-09-14T19:32:46.631Z"
   isFixture: Boolean
   name: String
 }
