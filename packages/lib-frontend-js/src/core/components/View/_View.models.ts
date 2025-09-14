@@ -1,8 +1,8 @@
 import {
-  type PointerEventsModel,
-  type ScrollableViewRefModel,
-  type ScrollTypeModel,
-} from '@lib/frontend/core/components/View/View.models';
+  type POINTER_EVENTS,
+  type SCROLL_TYPE,
+} from '@lib/frontend/core/components/View/View.constants';
+import { type ScrollableViewRefModel } from '@lib/frontend/core/components/View/View.models';
 import {
   type ChildrenPropsModel,
   type MeasureModel,
@@ -12,15 +12,15 @@ import { type StylePropsModel, type ViewStyleModel } from '@lib/frontend/style/s
 
 export type _ViewPropsModel = ChildrenPropsModel &
   StylePropsModel<ViewStyleModel> & {
-    onPress?: (() => void) | (() => Promise<void>);
     isFocusable?: boolean;
     isHidden?: boolean;
     isHorizontalScrollable?: boolean;
     isHorizontalScrollableVisible?: boolean;
     isVerticalScrollable?: boolean;
     isVerticalScrollableVisible?: boolean;
-    pointerEvents?: PointerEventsModel;
-    scrollType?: ScrollTypeModel;
+    onPress?: (() => void) | (() => Promise<void>);
+    pointerEvents?: POINTER_EVENTS;
+    scrollType?: SCROLL_TYPE;
     tabIndex?: 0 | -1;
     onMeasure?(measure: MeasureModel): void;
     onMouseEnter?(): void;

@@ -1,4 +1,3 @@
-import { type BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import {
   type Class,
   type ConditionalKeys,
@@ -30,8 +29,6 @@ export type EmptyObjectModel = Record<string, unknown>;
 export type NilModel = false | undefined | null | '';
 
 export type NillableArrayModel<TType> = Array<TType | NilModel>;
-
-export type BooleanStringModel = `${BOOLEAN_STRING}`;
 
 export type DecoratorModel =
   | ClassDecorator

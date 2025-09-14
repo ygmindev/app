@@ -9,10 +9,6 @@ import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
 } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
-import {
-  type FlexAlignModel,
-  type FlexJustifyModel,
-} from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.models';
 import { viewStyler } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler';
 import { type CursorValue } from 'react-native';
 
@@ -30,7 +26,7 @@ export const useLayoutStyles = <TType,>({
       props.isAlign ||
       (props.isVerticalCenter && props.isRow) ||
       (props.isHorizontalCenter && !props.isRow)
-        ? (FLEX_ALIGN.CENTER as FlexAlignModel)
+        ? (FLEX_ALIGN.CENTER as FLEX_ALIGN)
         : props.align,
 
     cursor: isBlocked ? ('not-allowed' as CursorValue) : undefined,
@@ -39,7 +35,7 @@ export const useLayoutStyles = <TType,>({
       props.isCenter ||
       (props.isVerticalCenter && !props.isRow) ||
       (props.isHorizontalCenter && props.isRow)
-        ? (FLEX_JUSTIFY.CENTER as FlexJustifyModel)
+        ? (FLEX_JUSTIFY.CENTER as FLEX_JUSTIFY)
         : props.justify,
 
     s: props.isAlign ? THEME_SIZE.SMALL : props.s,

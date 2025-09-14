@@ -2,8 +2,6 @@ import { type DimensionModel } from '@lib/frontend/core/core.models';
 import { type SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { type CursorValue } from 'react-native';
 
-export type ShapePositionModel = `${SHAPE_POSITION}`;
-
 export type ShapeStylerParamsModel = DimensionModel & {
   bottom?: number;
   cursor?: CursorValue;
@@ -18,7 +16,7 @@ export type ShapeStylerParamsModel = DimensionModel & {
   minHeight?: number;
   minWidth?: number;
   opacity?: number;
-  position?: ShapePositionModel;
+  position?: SHAPE_POSITION;
   right?: number;
   scale?: number;
   top?: number;

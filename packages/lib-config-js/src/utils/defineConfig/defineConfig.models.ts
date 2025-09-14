@@ -1,9 +1,9 @@
 import { type PartialDeepModel } from '@lib/shared/core/core.models';
-import { type MergeStrategyModel } from '@lib/shared/core/utils/merge/merge.models';
+import { type MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
 export type DefineConfigParamsModel<TParams, TType = undefined> = {
   config?: TType extends undefined ? never : (params: TParams) => TType;
-  strategy?: MergeStrategyModel;
+  strategy?: MERGE_STRATEGY;
   overrides?(): Array<PartialDeepModel<TParams>>;
   params(): TParams;
 };

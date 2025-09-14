@@ -15,7 +15,6 @@ import { THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { type GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
-import { type GraphqlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
 import {
   cloneElement,
   type ReactElement,
@@ -114,7 +113,7 @@ const MutateComponent = <TParams = undefined, TResult = void>({
 export const DataBoundary = <
   TParams = undefined,
   TResult = void,
-  TOperation extends GraphqlOperationTypeModel = GRAPHQL_OPERATION_TYPE.QUERY,
+  TOperation extends GRAPHQL_OPERATION_TYPE = GRAPHQL_OPERATION_TYPE.QUERY,
 >({
   children,
   elementState,

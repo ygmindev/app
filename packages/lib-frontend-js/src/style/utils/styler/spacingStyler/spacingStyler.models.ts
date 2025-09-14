@@ -1,6 +1,6 @@
-import { type ThemeSizeModel, type ThemeSizeMoreModel } from '@lib/frontend/style/style.models';
+import { type THEME_SIZE, type THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 
-export type SpacingModel = number | boolean | ThemeSizeModel | ThemeSizeMoreModel;
+export type SpacingModel = number | boolean | THEME_SIZE | THEME_SIZE_MORE;
 
 export type SpacingStylerParamsModel = {
   m?: SpacingModel | 'auto';

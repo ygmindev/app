@@ -6,7 +6,6 @@ import { ModalFormButton } from '@lib/frontend/core/containers/ModalFormButton/M
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
-import { type ThemeSizeModel, type ThemeSizeMoreModel } from '@lib/frontend/style/style.models';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import isNumber from 'lodash/isNumber';
 import { cloneElement, useMemo } from 'react';
@@ -21,11 +20,11 @@ export const ButtonGroup: LFCModel<ButtonGroupPropsModel> = ({
 
   const heightF = useMemo(
     () =>
-      (isNumber(height) ? height : (height ?? theme.shape.size[size as ThemeSizeModel])) -
+      (isNumber(height) ? height : (height ?? theme.shape.size[size as THEME_SIZE])) -
       theme.shape.spacing[
-        size === THEME_SIZE.LARGE || (size as ThemeSizeMoreModel) === THEME_SIZE_MORE.XLARGE
+        size === THEME_SIZE.LARGE || (size as THEME_SIZE_MORE) === THEME_SIZE_MORE.XLARGE
           ? THEME_SIZE.MEDIUM
-          : (size as ThemeSizeModel)
+          : (size as THEME_SIZE)
       ],
     [height, size],
   );

@@ -1,11 +1,11 @@
 import {
-  type ThemeColorModel,
-  type ThemeColorMoreModel,
-  type ThemeRoleModel,
-  type ThemeSizeModel,
-  type ThemeSizeMoreModel,
-} from '@lib/frontend/style/style.models';
-import { type FontFamilyModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
+  type THEME_COLOR,
+  type THEME_COLOR_MORE,
+  type THEME_ROLE,
+  type THEME_SIZE,
+  type THEME_SIZE_MORE,
+} from '@lib/frontend/style/style.constants';
+import { type FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type TextStyle } from 'react-native';
 
 export type ThemeConfigModel = {
@@ -22,15 +22,15 @@ export type ThemeConfigModel = {
 
     isDark?: boolean;
 
-    palette: Record<ThemeColorModel | ThemeColorMoreModel, Record<ThemeRoleModel, string>>;
+    palette: Record<THEME_COLOR | THEME_COLOR_MORE, Record<THEME_ROLE, string>>;
   };
 
   font: {
-    fontFamily: Record<FontFamilyModel, string>;
+    fontFamily: Record<FONT_FAMILY, string>;
 
     lineHeight: number;
 
-    size: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
+    size: Record<THEME_SIZE | THEME_SIZE_MORE, number>;
 
     weight: {
       bold: TextStyle['fontWeight'];
@@ -48,7 +48,7 @@ export type ThemeConfigModel = {
       height: number;
     };
 
-    height: Record<ThemeSizeModel, number>;
+    height: Record<THEME_SIZE, number>;
 
     navigation: {
       width: number;
@@ -58,7 +58,7 @@ export type ThemeConfigModel = {
       thickness: number;
     };
 
-    width: Record<ThemeSizeModel, number>;
+    width: Record<THEME_SIZE, number>;
   };
 
   notification: {
@@ -67,14 +67,14 @@ export type ThemeConfigModel = {
     width: number;
   };
 
-  opaque: Record<ThemeSizeModel, number>;
+  opaque: Record<THEME_SIZE, number>;
 
   shape: {
-    borderRadius: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
+    borderRadius: Record<THEME_SIZE | THEME_SIZE_MORE, number>;
 
-    height: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
+    height: Record<THEME_SIZE | THEME_SIZE_MORE, number>;
 
-    scaling: Record<ThemeSizeModel, number>;
+    scaling: Record<THEME_SIZE, number>;
 
     shadow: {
       elevation: number;
@@ -84,10 +84,10 @@ export type ThemeConfigModel = {
       size: number;
     };
 
-    size: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
+    size: Record<THEME_SIZE | THEME_SIZE_MORE, number>;
 
-    spacing: Record<ThemeSizeModel, number>;
+    spacing: Record<THEME_SIZE, number>;
 
-    width: Record<ThemeSizeModel | ThemeSizeMoreModel, number>;
+    width: Record<THEME_SIZE | THEME_SIZE_MORE, number>;
   };
 };

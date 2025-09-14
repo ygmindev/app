@@ -1,4 +1,4 @@
-import { type TextInputKeyboardModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
+import { type TEXT_INPUT_KEYBOARD } from '@lib/frontend/data/components/TextInput/TextInput.constants';
 
 export type _TextInputPropsModel = {
   autoComplete?: string;
@@ -6,7 +6,7 @@ export type _TextInputPropsModel = {
   height?: number;
   isCenter?: boolean;
   isDisabled?: boolean;
-  keyboard?: TextInputKeyboardModel;
+  keyboard?: TEXT_INPUT_KEYBOARD;
   language?: string;
   mask?: string;
   maxLength?: number;

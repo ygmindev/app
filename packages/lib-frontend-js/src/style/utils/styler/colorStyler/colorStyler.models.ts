@@ -1,6 +1,6 @@
-import { type ThemeRoleModel } from '@lib/frontend/style/style.models';
+import { type THEME_ROLE } from '@lib/frontend/style/style.constants';
 
 export type ColorStylerParamsModel = {
   color?: string;
-  colorRole?: ThemeRoleModel;
+  colorRole?: THEME_ROLE;
 };

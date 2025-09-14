@@ -25,7 +25,6 @@ import {
   THEME_SIZE,
   THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
-import { type ThemeRoleModel, type ThemeSizeModel } from '@lib/frontend/style/style.models';
 import {
   FLEX_ALIGN,
   FLEX_JUSTIFY,
@@ -64,20 +63,21 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
   const { elementStateControlled, elementStateControlledSet, isActive, isLoading } =
     useElementStateControlled({ elementState, onElementStateChange });
 
-  const heightF = isNumber(height) ? height : (height ?? theme.shape.size[size as ThemeSizeModel]);
+  const heightF = isNumber(height) ? height : (height ?? theme.shape.size[size as THEME_SIZE]);
 
   const isIconOnly = icon && !children;
 
-  const { animation, childColorRole } = useMemo<{
+  const { animation, childColor, childColorRole } = useMemo<{
     animation?: AnimationModel;
-    childColorRole?: ThemeRoleModel;
+    childColor?: THEME_COLOR | string;
+    childColorRole?: THEME_ROLE;
   }>(() => {
     const colorF = theme.color.palette[color];
-    const borderColor = theme.color.border;
     const opacity = theme.opaque[THEME_SIZE.SMALL];
     const activeColor = colorF[THEME_ROLE.ACTIVE];
     const mainColor = colorF[THEME_ROLE.MAIN];
     const surfaceColor = theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN];
+    const contrastColor = theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST];
     switch (type) {
       case BUTTON_TYPE.FILLED: {
         return {
@@ -150,24 +150,25 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
               },
               [ELEMENT_STATE.DISABLED]: {
                 backgroundColor: surfaceColor,
-                borderColor,
+                borderColor: contrastColor,
                 borderWidth: 2,
                 opacity,
               },
               [ELEMENT_STATE.LOADING]: {
                 backgroundColor: surfaceColor,
-                borderColor,
+                borderColor: contrastColor,
                 borderWidth: 2,
                 opacity,
               },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: surfaceColor,
-                borderColor,
+                borderColor: contrastColor,
                 borderWidth: 2,
                 opacity: 1,
               },
             },
           },
+          childColor: isActive ? activeColor : contrastColor,
           childColorRole: THEME_ROLE.MAIN,
         };
       }
@@ -175,12 +176,13 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
         return {};
     }
   }, [color, theme, type]);
+  const colorF = childColor ?? color;
 
   let childrenF = isAsyncText(children) ? (
     <AsyncText
       align={fontAlign}
       casing={casing}
-      color={color}
+      color={colorF}
       colorRole={childColorRole}
       fontSize={THEME_SIZE.SMALL}
       isEllipsis
@@ -194,7 +196,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
   const iconF = icon ? (
     <Icon
       align={FONT_ALIGN.CENTER}
-      color={color}
+      color={colorF}
       colorRole={childColorRole}
       icon={icon}
       iconText={iconText}
@@ -273,7 +275,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
           isActive={isLoading}
           isCenter>
           <Loading
-            color={color}
+            color={colorF}
             colorRole={childColorRole}
           />
         </Appearable>

@@ -1,21 +1,4 @@
-import {
-  type HTTP_METHOD,
-  type HTTP_PROTOCOL,
-  type HTTP_RESPONSE_TYPE,
-  type SAME_SITE,
-  type WEBSOCKET_METHOD,
-  type WEBSOCKET_STATUS,
-} from '@lib/shared/http/http.constants';
-
-export type HttpMethodModel = `${HTTP_METHOD}`;
-
-export type HttpProtocolModel = `${HTTP_PROTOCOL}`;
-
-export type HttpResponseTypeModel = `${HTTP_RESPONSE_TYPE}`;
-
-export type WebsocketMethodModel = `${WEBSOCKET_METHOD}`;
-
-export type WebsocketStatusModel = `${WEBSOCKET_STATUS}`;
+import { type SAME_SITE } from '@lib/shared/http/http.constants';
 
 export type CookieOptionsModel = {
   domain?: string;
@@ -24,7 +7,5 @@ export type CookieOptionsModel = {
   isSecure?: boolean;
   maxAge?: number;
   path?: string;
-  sameSite?: SameSiteModel;
+  sameSite?: SAME_SITE;
 };
-
-export type SameSiteModel = `${SAME_SITE}`;

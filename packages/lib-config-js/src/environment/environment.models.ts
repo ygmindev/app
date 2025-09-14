@@ -1,5 +1,5 @@
 // COMPLETE
-import { type ServerlessRuntimeModel } from '@lib/backend/serverless/serverless.models';
+import { type SERVERLESS_RUNTIME } from '@lib/backend/serverless/serverless.constants';
 import { type BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import { type RUNTIME } from '@lib/shared/environment/environment.constants';
 import { type PLATFORM } from '@lib/shared/platform/platform.constants';
@@ -34,7 +34,7 @@ export type EnvironmentConfigModel = {
   NODE_RUNTIME?: `${RUNTIME}`;
   PUPPETEER_EXECUTABLE_PATH?: string;
   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: `${BOOLEAN_STRING}`;
-  SERVERLESS_RUNTIME: ServerlessRuntimeModel;
+  SERVERLESS_RUNTIME: `${SERVERLESS_RUNTIME}`;
   SERVER_APP_GOOGLE_API_KEY: string;
   SERVER_APP_HOST: string;
   SERVER_APP_OTP_LENGTH: string;

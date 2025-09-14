@@ -5,10 +5,7 @@ import {
   TEXT_INPUT_KEY,
   TEXT_INPUT_KEYBOARD,
 } from '@lib/frontend/data/components/TextInput/TextInput.constants';
-import {
-  type TextInputKeyboardModel,
-  type TextInputRefModel,
-} from '@lib/frontend/data/components/TextInput/TextInput.models';
+import { type TextInputRefModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
 import { type ViewStyleModel } from '@lib/frontend/style/style.models';
 import { type InputModeOptions, type TextInputProps } from 'react-native';
 import { TextInput } from 'react-native';
@@ -95,7 +92,7 @@ export const getTextInputParams = (): ComposeComponentParamsModel<
   ],
 });
 
-const getKeyboardType = (type?: TextInputKeyboardModel): InputModeOptions => {
+const getKeyboardType = (type?: TEXT_INPUT_KEYBOARD): InputModeOptions => {
   switch (type) {
     case TEXT_INPUT_KEYBOARD.NUMBER:
     case TEXT_INPUT_KEYBOARD.DECIMAL:
@@ -111,7 +108,7 @@ const getKeyboardType = (type?: TextInputKeyboardModel): InputModeOptions => {
 
 const getAutoCompleteType = (
   autoComplete?: string,
-  type?: TextInputKeyboardModel,
+  type?: TEXT_INPUT_KEYBOARD,
 ): TextInputProps['autoComplete'] => {
   if (autoComplete) {
     switch (type) {
@@ -128,7 +125,7 @@ const getAutoCompleteType = (
 
 const getTextContentType = (
   autoComplete?: string | boolean,
-  type?: TextInputKeyboardModel,
+  type?: TEXT_INPUT_KEYBOARD,
 ): TextInputProps['textContentType'] => {
   if (autoComplete) {
     switch (type) {

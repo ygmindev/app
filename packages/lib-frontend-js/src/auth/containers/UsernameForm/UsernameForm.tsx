@@ -22,7 +22,6 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { PhoneInput } from '@lib/frontend/user/components/PhoneInput/PhoneInput';
 import { AUTH, SIGN_IN_METHOD } from '@lib/shared/auth/auth.constants';
-import { type SignInMethodModel } from '@lib/shared/auth/auth.models';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
 import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
@@ -41,7 +40,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
   const { t } = useTranslation([AUTH]);
   const { wrapperProps } = useLayoutStyles({ props });
   const { create } = useOtpResource();
-  const { valueControlled, valueControlledSet } = useValueControlled<SignInMethodModel>({
+  const { valueControlled, valueControlledSet } = useValueControlled<SIGN_IN_METHOD>({
     defaultValue: SIGN_IN_METHOD.EMAIL,
     onChange: onMethodChange,
     value: method,

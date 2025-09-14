@@ -1,6 +1,5 @@
 import { type _TextPropsModel } from '@lib/frontend/core/components/Text/_Text.models';
 import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
-import { type TextCasingModel } from '@lib/frontend/core/components/Text/Text.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import { type TextStyleModel } from '@lib/frontend/style/style.models';
@@ -10,7 +9,7 @@ import upperCase from 'lodash/upperCase';
 import { type TextProps } from 'react-native';
 import { Text } from 'react-native';
 
-const capitalize = (text: string, casing?: TextCasingModel): string => {
+const capitalize = (text: string, casing?: TEXT_CASING): string => {
   switch (casing) {
     case TEXT_CASING.CAPITALIZE: {
       return `${text[0].toUpperCase()}${text.substring(1)}`;

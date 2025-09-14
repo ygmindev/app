@@ -19,7 +19,6 @@ import {
   type FindOptionDefaultModel,
   type FindOptionModel,
   type HandleModel,
-  type KeyTypeModel,
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/Screen/Screen.models';
@@ -157,7 +156,7 @@ export class _Screen implements _ScreenModel {
     });
   }
 
-  async key(value: KeyTypeModel, { delay = true }: SelectorOptionModel = {}): Promise<void> {
+  async key(value: KEY_TYPE, { delay = true }: SelectorOptionModel = {}): Promise<void> {
     // delay: delay === true ? this.options.delay : isNumber(delay) ? delay : 0,
     // timeout: timeout === true ? this.options.elementTimeout : isNumber(timeout) ? timeout : 0,
     await sleep(delay === true ? this.options.delay : isNumber(delay) ? delay : 0);

@@ -32,7 +32,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   externals?: Array<string | RegExp>;
 
-  format?: BundleFormatModel;
+  format?: BUNDLE_FORMAT;
 
   include?: Array<string>;
 
@@ -74,5 +74,3 @@ export type _BundleConfigModel = UserConfig & {
 
   rollupConfig?: RollupOptions;
 };
-
-export type BundleFormatModel = `${BUNDLE_FORMAT}`;

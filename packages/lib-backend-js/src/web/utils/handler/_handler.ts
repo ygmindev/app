@@ -4,7 +4,7 @@ import {
   type _HandlerModel,
   type _HandlerParamsModel,
 } from '@lib/backend/web/utils/handler/_handler.models';
-import { type HttpMethodModel } from '@lib/shared/http/http.models';
+import { type HTTP_METHOD } from '@lib/shared/http/http.constants';
 import reduce from 'lodash/reduce';
 
 export const _handler = ({ isStream, name, onRequest }: _HandlerParamsModel): _HandlerModel => {
@@ -14,7 +14,7 @@ export const _handler = ({ isStream, name, onRequest }: _HandlerParamsModel): _H
       new HttpRequest({
         body: request.body as ReadableStream,
         headers: Object.fromEntries(request.headers),
-        method: request.method as HttpMethodModel,
+        method: request.method as HTTP_METHOD,
         query: request.query,
         url: `/${request.params.path}`,
       }),

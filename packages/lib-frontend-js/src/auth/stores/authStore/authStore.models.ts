@@ -2,10 +2,8 @@ import { type AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.
 import { type ReducerModel } from '@lib/frontend/state/state.models';
 import { type EmptyObjectModel } from '@lib/shared/core/core.models';
 
-export type AuthStatusModel = `${AUTH_STATUS}`;
-
 export type AuthStateModel = {
-  status?: AuthStatusModel;
+  status?: AUTH_STATUS;
   token?: {
     access?: string;
   };

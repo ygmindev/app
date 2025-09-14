@@ -8,7 +8,6 @@ import {
   THEME_SIZE,
   THEME_SIZE_MORE,
 } from '@lib/frontend/style/style.constants';
-import { type ThemeColorModel, type ThemeRoleModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
@@ -52,7 +51,7 @@ export const config = defineConfig<ThemeConfigModel>({
               },
             };
           },
-          {} as Record<ThemeColorModel, Record<ThemeRoleModel, string>>,
+          {} as Record<THEME_COLOR, Record<THEME_ROLE, string>>,
         ),
       },
     },

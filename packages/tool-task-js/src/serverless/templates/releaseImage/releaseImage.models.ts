@@ -1,5 +1,5 @@
-import { type BooleanStringModel } from '@lib/shared/core/core.models';
+import { type BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 
 export type ReleaseImageParamsModel = {
-  isBuild?: BooleanStringModel;
+  isBuild?: BOOLEAN_STRING;
 };

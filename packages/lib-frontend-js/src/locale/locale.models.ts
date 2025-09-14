@@ -1,4 +1,3 @@
-import { type COUNTRY_FORMAT } from '@lib/frontend/locale/locale.constants';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
 
 export type LocaleStoreModel = Record<string, Record<string, object>>;
@@ -8,8 +7,6 @@ export type LocaleContextModel = {
   lang?: string;
   store?: LocaleStoreModel;
 };
-
-export type CountryFormatModel = `${COUNTRY_FORMAT}`;
 
 export type TimezoneModel = {
   name: string;

@@ -18,10 +18,7 @@ import {
 } from '@lib/frontend/data/components/MenuInput/MenuInput.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { TEXT_INPUT_KEY } from '@lib/frontend/data/components/TextInput/TextInput.constants';
-import {
-  type TextInputKeyModel,
-  type TextInputRefModel,
-} from '@lib/frontend/data/components/TextInput/TextInput.models';
+import { type TextInputRefModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useSearch } from '@lib/frontend/search/hooks/useSearch/useSearch';
@@ -119,7 +116,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
 
   const optionHeight = theme.shape.size[THEME_SIZE.MEDIUM];
 
-  const handleKey = (key: TextInputKeyModel): void => {
+  const handleKey = (key: TEXT_INPUT_KEY): void => {
     const index = (() => {
       switch (key) {
         case TEXT_INPUT_KEY.UP:

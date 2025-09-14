@@ -6,8 +6,7 @@ import {
   type _ServerParamsModel,
 } from '@lib/backend/server/utils/Server/_Server.models';
 import { type ApiConfigModel, type ApiEndpointModel } from '@lib/config/api/api.models';
-import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
-import { type HttpMethodModel } from '@lib/shared/http/http.models';
+import { type HTTP_METHOD, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { fastify, type FastifyInstance, type FastifyRequest, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
@@ -55,7 +54,7 @@ export class _Server implements _ServerModel {
             headers: req.headers as Record<string, string>,
             i18n: req.i18n,
             lang: req.language,
-            method: req.method as HttpMethodModel,
+            method: req.method as HTTP_METHOD,
             query: req.query as URLSearchParams,
             url: req.originalUrl ?? req.url,
           });

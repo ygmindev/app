@@ -13,10 +13,8 @@ import {
   type SizableMorePropsModel,
 } from '@lib/frontend/core/core.models';
 import { type ThemeColorPropsModel } from '@lib/frontend/style/style.models';
-import { type FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
+import { type FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type ReactNode } from 'react';
-
-export type ButtonTypeModel = `${BUTTON_TYPE}`;
 
 export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel | ReactNode> &
   AnimatablePropsModel &
@@ -41,11 +39,11 @@ export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel | ReactNode> &
     | 'trigger'
   > & {
     description?: AsyncTextModel;
-    fontAlign?: FontAlignModel;
+    fontAlign?: FONT_ALIGN;
     imageSrc?: string;
     leftElement?: PressablePropsModel['children'];
     rightElement?: PressablePropsModel['children'];
-    type?: ButtonTypeModel;
+    type?: BUTTON_TYPE;
   };
 
 export type ButtonRefModel = PressableRefModel;

@@ -1,6 +1,5 @@
 import { type UseThemeModel } from '@lib/frontend/style/hooks/useTheme/useTheme.models';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { type ThemeSizeModel } from '@lib/frontend/style/style.models';
 import {
   type SpacingModel,
   type SpacingStylerParamsModel,
@@ -15,7 +14,7 @@ export const getSpacing = <TType extends SpacingModel | 'auto' | number | undefi
   (value === undefined || value === 'auto' || isNumber(value)
     ? value
     : theme.shape.spacing[
-        value === true ? THEME_SIZE.MEDIUM : (value as ThemeSizeModel)
+        value === true ? THEME_SIZE.MEDIUM : (value as THEME_SIZE)
       ]) as TType extends 'auto' ? 'auto' : number | undefined;
 
 export const spacingStyler: StylerModel<SpacingStylerParamsModel> = (

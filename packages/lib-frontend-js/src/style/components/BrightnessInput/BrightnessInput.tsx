@@ -4,7 +4,6 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { type BrightnessInputPropsModel } from '@lib/frontend/style/components/BrightnessInput/BrightnessInput.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type StyleBrightnessStateModel } from '@lib/frontend/style/stores/styleStore/styleStore.models';
 import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 import { STYLE } from '@lib/shared/style/style.constants';
 
@@ -16,7 +15,7 @@ export const BrightnessInput: LFCModel<BrightnessInputPropsModel> = ({
   const { t } = useTranslation([STYLE]);
   const [brightness, brightnessSet] = useStore('style.brightness');
   return (
-    <SelectInput<StyleBrightnessStateModel>
+    <SelectInput<STYLE_BRIGHTNESS>
       {...wrapperProps}
       elementState={elementState}
       onChange={brightnessSet}

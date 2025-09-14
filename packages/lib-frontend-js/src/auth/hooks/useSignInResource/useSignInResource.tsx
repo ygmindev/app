@@ -2,7 +2,6 @@ import { sleepForTransition } from '@lib/frontend/animation/utils/sleepForTransi
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import { type UseSignInResourceModel } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
-import { type AuthStatusModel } from '@lib/frontend/auth/stores/authStore/authStore.models';
 import { useContainer } from '@lib/frontend/core/hooks/useContainer/useContainer';
 import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
@@ -44,7 +43,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
   const setAuth = async (token?: string, user?: Partial<UserModel>): Promise<void> => {
     authTokenSet({ access: token ?? undefined });
-    let authStatusF: AuthStatusModel = currentUser
+    let authStatusF: AUTH_STATUS = currentUser
       ? AUTH_STATUS.AUTHENTICATED
       : AUTH_STATUS.UNAUTHENTICATED;
     // TODO: load full user from fields

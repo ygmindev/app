@@ -9,7 +9,6 @@ import { NUMBER_RANGE_TYPE } from '@lib/frontend/data/components/NumberRangeInpu
 import {
   type NumberRangeInputPropsModel,
   type NumberRangeInputRefModel,
-  type NumberRangeTypeModel,
 } from '@lib/frontend/data/components/NumberRangeInput/NumberRangeInput.models';
 import { unitOptions } from '@lib/frontend/data/components/ScaledNumberInput/ScaledNumberInput';
 import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInput';
@@ -20,13 +19,13 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { type NumberRangeModel } from '@lib/shared/data/utils/NumberRange/NumberRange.models';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
 import {
   AMOUNT_UNIT,
   NUMBER_UNIT_TYPE,
 } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
 import { type NumberUnitModel } from '@lib/shared/data/utils/numberFormat/numberFormat.models';
+import { type NumberRangeModel } from '@lib/shared/data/utils/NumberRange/NumberRange.models';
 import { DATE_UNIT } from '@lib/shared/datetime/datetime.constants';
 import { type ReactElement, useEffect, useState } from 'react';
 
@@ -47,7 +46,7 @@ export const NumberRangeInput = <TType extends NumberUnitModel>({
   const theme = useTheme();
   const { t } = useTranslation([DATA]);
   const { wrapperProps } = useLayoutStyles({ props });
-  const [rangeTypeState, rangeTypeSet] = useState<NumberRangeTypeModel>(
+  const [rangeTypeState, rangeTypeSet] = useState<NUMBER_RANGE_TYPE>(
     rangeType ?? NUMBER_RANGE_TYPE.EXACT,
   );
   const isRange = rangeTypeState === NUMBER_RANGE_TYPE.RANGE;
@@ -80,7 +79,7 @@ export const NumberRangeInput = <TType extends NumberUnitModel>({
     rangeType: rangeTypeF,
     unit: unitF,
   }: NumberRangeModel & { unit?: TType } & {
-    rangeType?: NumberRangeTypeModel;
+    rangeType?: NUMBER_RANGE_TYPE;
   }): void => {
     const rangeTypeFF = rangeTypeF ?? rangeTypeState;
     const unitFF = unitF ?? unit;

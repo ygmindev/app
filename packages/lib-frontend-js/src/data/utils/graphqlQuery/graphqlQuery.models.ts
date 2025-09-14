@@ -5,7 +5,7 @@ import {
   type StringKeyModel,
   type UnionToIntersectionModel,
 } from '@lib/shared/core/core.models';
-import { type GraphqlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
+import { type GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { type ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import { type GraphQLError } from 'graphql';
 
@@ -56,7 +56,7 @@ export type GraphqlQueryParamsModel<TResult, TParams, TName extends string = str
   fields: GraphqlQueryParamsFieldsModel<TResult>;
   name: TName;
   params?: { [TKey in keyof TParams]?: string };
-  type?: GraphqlOperationTypeModel;
+  type?: GRAPHQL_OPERATION_TYPE;
 };
 
 export type GraphqlQueryModel = string;

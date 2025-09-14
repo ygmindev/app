@@ -1,7 +1,7 @@
-import { type ThemeRoleModel } from '@lib/frontend/style/style.models';
+import { type THEME_ROLE } from '@lib/frontend/style/style.constants';
 
 export type BackgroundStylerParamsModel = {
   backgroundColor?: string;
-  backgroundRole?: ThemeRoleModel;
+  backgroundRole?: THEME_ROLE;
   isTransparent?: boolean;
 };

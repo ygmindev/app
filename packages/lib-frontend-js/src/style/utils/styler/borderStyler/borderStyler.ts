@@ -1,7 +1,5 @@
 import { CORNER, DIRECTION } from '@lib/frontend/core/core.constants';
-import { type CornerModel } from '@lib/frontend/core/core.models';
-import { THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { type ThemeColorModel, type ThemeSizeModel } from '@lib/frontend/style/style.models';
+import { type THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { BORDER_STYLE } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.constants';
 import { type BorderStylerParamsModel } from '@lib/frontend/style/utils/styler/borderStyler/borderStyler.models';
 import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models';
@@ -20,8 +18,8 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
   },
   theme,
 ) => {
-  const getBorderRadius = (value?: typeof round, key?: CornerModel): number | undefined =>
-    theme.shape.borderRadius[value as unknown as ThemeSizeModel] ||
+  const getBorderRadius = (value?: typeof round, key?: CORNER): number | undefined =>
+    theme.shape.borderRadius[value as unknown as THEME_SIZE] ||
     (value === true
       ? theme.shape.borderRadius[THEME_SIZE.MEDIUM]
       : isNumber(value)
@@ -30,7 +28,7 @@ export const borderStyler: StylerModel<BorderStylerParamsModel> = (
           ? getBorderRadius(value[key as keyof typeof value])
           : undefined);
 
-  const colorF = theme.color.palette[borderColor as ThemeColorModel];
+  const colorF = theme.color.palette[borderColor as THEME_COLOR];
   const borderColorF = colorF ? colorF[borderRole] : theme.color.border;
   const boderWidthF = borderWidth === true ? 2 : isNumber(borderWidth) ? borderWidth : 1;
 

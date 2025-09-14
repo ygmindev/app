@@ -1,8 +1,5 @@
 import { type ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import {
-  type ElementStateModel,
-  type ElementStatePropsModel,
-} from '@lib/frontend/core/core.models';
+import { type ElementStatePropsModel } from '@lib/frontend/core/core.models';
 import {
   type StyleModel,
   type StylePropsModel,
@@ -17,13 +14,13 @@ export type AnimationModel<
   duration?: number;
   isInfinite?: boolean;
   isInitial?: boolean;
-  onEnd?(): void;
   states?: TStates;
+  onEnd?(): void;
 };
 
 export type AnimatableRefModel<TStyle extends StyleModel = ViewStyleModel> = {
   to(params: TStyle): void;
-  toState(params: ElementStateModel): void;
+  toState(params: ELEMENT_STATE): void;
 };
 
 export type AnimationStatesModel<TStyle extends StyleModel = ViewStyleModel> = {

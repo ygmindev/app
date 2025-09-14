@@ -1,3 +1,3 @@
-import { type ConnectivityModel } from '@lib/frontend/http/http.models';
+import { type CONNECTIVITY } from '@lib/frontend/http/http.constants';
 
-export type _GetConnectivityModel = ConnectivityModel;
+export type _GetConnectivityModel = CONNECTIVITY;

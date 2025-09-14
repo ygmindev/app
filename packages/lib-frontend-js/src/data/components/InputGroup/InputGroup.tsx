@@ -2,7 +2,7 @@ import { ANIMATION_STATES_FOCUSABLE } from '@lib/frontend/animation/animation.co
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type ElementStateModel, type RLFCModel } from '@lib/frontend/core/core.models';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { FocusableWrapper } from '@lib/frontend/data/components/FocusableWrapper/FocusableWrapper';
 import { type InputGroupPropsModel } from '@lib/frontend/data/components/InputGroup/InputGroup.models';
 import { type InputRefModel } from '@lib/frontend/data/data.models';
@@ -19,7 +19,7 @@ export const InputGroup: RLFCModel<InputRefModel, InputGroupPropsModel> = ({
 }) => {
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
-  const [elementState, elementStateSet] = useState<ElementStateModel>();
+  const [elementState, elementStateSet] = useState<ELEMENT_STATE>();
   const isError = some(fields, (field) => !!field.element.props.error);
   return (
     <FocusableWrapper

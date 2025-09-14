@@ -6,13 +6,12 @@ import { type UseMutationParamsModel } from '@lib/frontend/data/hooks/useMutatio
 import { type UseQueryParamsModel } from '@lib/frontend/data/hooks/useQuery/useQuery.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
-import { type GraphqlOperationTypeModel } from '@lib/shared/graphql/graphql.models';
 import { type ReactElement } from 'react';
 
 export type DataBoundaryPropsModel<
   TParams = undefined,
   TResult = void,
-  TOperation extends GraphqlOperationTypeModel = GRAPHQL_OPERATION_TYPE.QUERY,
+  TOperation extends GRAPHQL_OPERATION_TYPE = GRAPHQL_OPERATION_TYPE.QUERY,
 > = Omit<AsyncBoundaryPropsModel, 'children'> &
   WithIdModel &
   AsyncPropsModel &
@@ -28,7 +27,7 @@ export type DataBoundaryPropsModel<
 
 export type DataBoundaryChildProps<
   TResult = void,
-  TOperation extends GraphqlOperationTypeModel = GRAPHQL_OPERATION_TYPE.QUERY,
+  TOperation extends GRAPHQL_OPERATION_TYPE = GRAPHQL_OPERATION_TYPE.QUERY,
 > = (
   props: ElementStatePropsModel &
     Pick<DataBoundaryRefModel<TResult, TOperation>, 'reset' | 'setData'> & {
@@ -39,9 +38,9 @@ export type DataBoundaryChildProps<
 
 export type DataBoundaryRefModel<
   TResult = void,
-  TOperation extends GraphqlOperationTypeModel = GRAPHQL_OPERATION_TYPE.QUERY,
+  TOperation extends GRAPHQL_OPERATION_TYPE = GRAPHQL_OPERATION_TYPE.QUERY,
 > = (TOperation extends GRAPHQL_OPERATION_TYPE.MUTATION
-  ? { mutate?(): Promise<void>; query?: never }
+  ? { query?: never; mutate?(): Promise<void> }
   : { mutate?: never; query?(): Promise<void> }) & {
   getData(): TResult | null | undefined;
   reset?(): Promise<void>;

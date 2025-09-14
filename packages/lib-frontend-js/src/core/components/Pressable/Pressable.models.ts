@@ -5,7 +5,7 @@ import {
   type WrapperPropsModel,
   type WrapperRefModel,
 } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
-import { type ThemeColorModel } from '@lib/frontend/style/style.models';
+import { type THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
 
 export type PressablePropsModel = TestIdPropsModel &
@@ -16,7 +16,7 @@ export type PressablePropsModel = TestIdPropsModel &
     ActivatablePropsModel,
     'onActive' | 'onInactive' | 'onHoverIn' | 'onHoverOut' | 'trigger'
   > & {
-    confirmColor?: ThemeColorModel;
+    confirmColor?: THEME_COLOR;
     confirmMessage?: AsyncTextModel;
     tooltip?: AsyncTextModel;
   };

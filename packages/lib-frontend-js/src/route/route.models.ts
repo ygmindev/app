@@ -26,7 +26,7 @@ export type RouteModel<
     isProtectable?: boolean;
     layoutProps?: LayoutStylePropsModel;
     namespaces?: Array<string>;
-    navigation?: RouteNavigationModel;
+    navigation?: ROUTE_NAVIGATION;
     params?: TParams;
     parent?: string;
     pathname: string;
@@ -34,7 +34,7 @@ export type RouteModel<
     previous?: string;
     routes?: Array<RouteModel>;
     title?: AsyncTextModel;
-    transition?: RouteTransitionModel;
+    transition?: ROUTE_TRANSITION;
     loaders?(params: { pathname?: string }): {
       [TKey in StringKeyModel<TType>]?: (params?: RequestContextModel) => Promise<TType[TKey]>;
     };
@@ -60,7 +60,3 @@ export type LocationUpdateModel<TTypeNext = object> = LocationModel<TTypeNext> &
   Pick<RouteStateModel, 'isBack'> & {
     root?: string | boolean | number;
   };
-
-export type RouteTransitionModel = `${ROUTE_TRANSITION}`;
-
-export type RouteNavigationModel = `${ROUTE_NAVIGATION}`;

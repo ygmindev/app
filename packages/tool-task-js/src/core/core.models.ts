@@ -5,8 +5,6 @@ import { type ExecuteParamsModel } from '@tool/task/core/utils/execute/execute.m
 import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
 import { type ParallelOptionsModel } from '@tool/task/core/utils/runParallel/runParallel.models';
 
-export type TaskStatusModel = `${TASK_STATUS}`;
-
 export type TaskModel<TType extends unknown> =
   | ((
       context: TaskContextModel<TType>,
@@ -30,7 +28,7 @@ export type TaskCommandModel<TType extends unknown> =
 export type TaskResultModel = {
   error?: Error;
   message?: string;
-  status: TaskStatusModel;
+  status: TASK_STATUS;
 };
 
 export type TaskParamsModel<TType extends unknown> = Omit<

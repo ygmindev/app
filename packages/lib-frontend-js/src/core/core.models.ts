@@ -1,14 +1,13 @@
 import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type ButtonPropsModel } from '@lib/frontend/core/components/Button/Button.models';
 import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
-import { type CORNER, type DIRECTION, type ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LayoutStylePropsModel } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
 import { type TextStylePropsModel } from '@lib/frontend/style/hooks/useTextStyles/useTextStyles.models';
+import { type THEME_SIZE, type THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import {
   type StyleModel,
   type StylePropsModel,
-  type ThemeSizeModel,
-  type ThemeSizeMoreModel,
   type ViewStyleModel,
 } from '@lib/frontend/style/style.models';
 import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
@@ -72,13 +71,9 @@ export type ProviderPropsModel<TType = undefined, TChildren = ReactNode | Array<
 export type PagePropsModel<TType = undefined> = LayoutStylePropsModel &
   ChildrenPropsModel & { pageProps?: TType };
 
-export type ElementStateModel = `${ELEMENT_STATE}`;
-
-export type DirectionModel = `${DIRECTION}`;
-
 export type ElementStatePropsModel = {
-  elementState?: ElementStateModel;
-  onElementStateChange?(value?: ElementStateModel): void;
+  elementState?: ELEMENT_STATE;
+  onElementStateChange?(value?: ELEMENT_STATE): void;
 };
 
 export type CategoryModel = WithIconPropsModel & {
@@ -109,14 +104,12 @@ export type DimensionModel = {
   width?: number;
 };
 
-export type CornerModel = `${CORNER}`;
-
 export type MeasureModel = PositionModel & DimensionModel;
 
 export type SizablePropsModel = {
-  size?: ThemeSizeModel | number;
+  size?: THEME_SIZE | number;
 };
 
 export type SizableMorePropsModel = {
-  size?: ThemeSizeModel | ThemeSizeMoreModel | number;
+  size?: THEME_SIZE | THEME_SIZE_MORE | number;
 };

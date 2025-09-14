@@ -4,7 +4,7 @@ import { type ChildPropsModel } from '@lib/frontend/core/core.models';
 import { type ReactElement } from 'react';
 
 export type ActivatablePropsModel = {
-  trigger?: ActivatableTriggerModel;
+  trigger?: ACTIVATABLE_TRIGGER;
   onActive?(): void;
   onHoverIn?(): void;
   onHoverOut?(): void;
@@ -12,8 +12,6 @@ export type ActivatablePropsModel = {
 } & ChildPropsModel<
   ReactElement<PressablePropsModel> | ((isActive?: boolean) => ReactElement<PressablePropsModel>)
 >;
-
-export type ActivatableTriggerModel = `${ACTIVATABLE_TRIGGER}`;
 
 export type ActivatableRefModel = {
   press: PressablePropsModel['onPress'];

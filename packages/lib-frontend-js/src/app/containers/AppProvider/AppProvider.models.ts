@@ -6,8 +6,6 @@ export type AppProviderPropsModel = ProviderPropsModel;
 
 export type PortalsStateModel = Record<string, Array<{ name: string; node: ReactNode }>>;
 
-export type PortalActionTypeModel = `${PORTAL_ACTION_TYPE}`;
-
 export type PortalsActionModel =
   | {
       payload: { name: string; node: ReactNode; root: string };

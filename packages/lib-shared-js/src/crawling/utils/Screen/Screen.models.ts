@@ -3,10 +3,7 @@ import {
   type _ScreenModel,
   type _ScreenParamsModel,
 } from '@lib/shared/crawling/utils/Screen/_Screen.models';
-import {
-  type KEY_TYPE,
-  type SELECTOR_TYPE,
-} from '@lib/shared/crawling/utils/Screen/Screen.constants';
+import { type SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 
 export type ScreenParamsModel = PartialModel<_ScreenParamsModel>;
 
@@ -73,7 +70,3 @@ export type SelectorModel = {
     }
   | { key: string; type?: SELECTOR_TYPE.DATA | SELECTOR_TYPE.FRAME }
 );
-
-export type KeyTypeModel = `${KEY_TYPE}`;
-
-export type SelectorType = `${SELECTOR_TYPE}`;

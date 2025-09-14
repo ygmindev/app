@@ -1,9 +1,7 @@
 import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type FormValidatorsModel } from '@lib/frontend/data/data.models';
-import {
-  type TableSelectTypeModel,
-  type UseTableParamsModel,
-} from '@lib/frontend/data/hooks/useTable/useTable.models';
+import { type TABLE_SELECT_TYPE } from '@lib/frontend/data/hooks/useTable/useTable.constants';
+import { type UseTableParamsModel } from '@lib/frontend/data/hooks/useTable/useTable.models';
 import { type ReactElement } from 'react';
 
 export type TablePropsModel<TType> = UseTableParamsModel<TType> & {
@@ -12,7 +10,7 @@ export type TablePropsModel<TType> = UseTableParamsModel<TType> & {
   isFullWidth?: boolean;
   isHeadless?: boolean;
   isRemovable?: boolean;
-  select?: TableSelectTypeModel;
+  select?: TABLE_SELECT_TYPE;
   validators?: FormValidatorsModel<TType>;
   onChange?(data?: Array<TType>): void;
   onRemove?(row: TType): Promise<void>;

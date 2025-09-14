@@ -9,8 +9,7 @@ import {
   type _UseTableModel,
   type _UseTableParamsModel,
 } from '@lib/frontend/data/hooks/useTable/_useTable.models';
-import { type TABLE_SELECT_TYPE } from '@lib/frontend/data/hooks/useTable/useTable.constants';
-import { type FontAlignModel } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.models';
+import { type FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type FormattableTypeModel } from '@lib/shared/data/data.models';
@@ -20,8 +19,6 @@ export type UseTableParamsModel<TType extends unknown> = _UseTableParamsModel<TT
 
 export type UseTableModel<TType extends unknown> = _UseTableModel<TType>;
 
-export type TableSelectTypeModel = `${TABLE_SELECT_TYPE}`;
-
 export type TableSortModel<TType extends unknown> = WithIdModel<StringKeyModel<TType>> & {
   isDescending?: boolean;
 };
@@ -30,14 +27,8 @@ export type TableColumnModel<
   TType,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = WithIdModel<TKey> & {
-  align?: FontAlignModel;
-  field?(params: {
-    index?: number;
-    row?: TType;
-    value?: TType[TKey];
-  }): ReactElement<InputPropsModel<TType[TKey]>>;
+  align?: FONT_ALIGN;
   formatter?: DataFormatterModel<TType, TKey>;
-  headerRenderer?(): ReactElement;
   isArray?: boolean;
   isFilterDisabled?: boolean;
   isFrozen?: boolean;
@@ -48,6 +39,12 @@ export type TableColumnModel<
   renderer?: DataRendererModel<TType, TKey>;
   type?: FormattableTypeModel;
   width?: number;
+  field?(params: {
+    index?: number;
+    row?: TType;
+    value?: TType[TKey];
+  }): ReactElement<InputPropsModel<TType[TKey]>>;
+  headerRenderer?(): ReactElement;
 };
 
 export type TableRenderModel<TType> = Pick<

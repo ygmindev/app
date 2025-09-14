@@ -3,6 +3,10 @@ import { type PACAKGE_INSTALL_MODE } from '@lib/config/node/packageManager/packa
 export type PackageManagerConfigModel = {
   fixedVersions?: Record<string, string>;
 
+  modulesDir: string;
+
+  name: string;
+
   installCommand(
     names?: string,
     packages?: Array<string>,
@@ -10,10 +14,6 @@ export type PackageManagerConfigModel = {
   ): string;
 
   listCommand(pkg: string): string;
-
-  name: string;
-
-  modulesDir: string;
 
   patchCommand(pkg: string, dirname: string): string;
 
@@ -25,7 +25,5 @@ export type PackageManagerConfigModel = {
 };
 
 export type PackageManagerInstallOptionsModel = {
-  mode?: PackageInstallMode;
+  mode?: PACAKGE_INSTALL_MODE;
 };
-
-export type PackageInstallMode = `${PACAKGE_INSTALL_MODE}`;

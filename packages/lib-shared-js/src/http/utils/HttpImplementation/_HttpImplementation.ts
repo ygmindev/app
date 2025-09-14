@@ -1,7 +1,6 @@
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_METHOD, HTTP_RESPONSE_TYPE, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
-import { type HttpMethodModel, type HttpResponseTypeModel } from '@lib/shared/http/http.models';
 import {
   type _HttpImplementationModel,
   type _HttpRequestParamsModel,
@@ -40,7 +39,7 @@ export class _HttpImplementation implements _HttpImplementationModel {
           onRequest({
             ...params,
             headers,
-            responseType: responseType as HttpResponseTypeModel,
+            responseType: responseType as HTTP_RESPONSE_TYPE,
             timeout,
             withCredentials,
           }) as unknown as InternalAxiosRequestConfig,
@@ -97,7 +96,7 @@ export class _HttpImplementation implements _HttpImplementationModel {
     this.request<TParams, TResult>(HTTP_METHOD.PUT, { params, request, url });
 
   request = async <TParams, TResult>(
-    method: HttpMethodModel,
+    method: HTTP_METHOD,
     { onMessage, params, request, url }: _HttpRequestParamsModel<TParams>,
   ): Promise<TResult | null> => {
     try {

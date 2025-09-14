@@ -3,7 +3,6 @@ import { THEME_COLOR_TONES } from '@lib/config/theme/theme.constants';
 import { type ThemeConfigModel } from '@lib/config/theme/theme.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { THEME_COLOR, THEME_COLOR_MORE, THEME_ROLE } from '@lib/frontend/style/style.constants';
-import { type ThemeColorModel, type ThemeRoleModel } from '@lib/frontend/style/style.models';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import reduce from 'lodash/reduce';
 
@@ -48,7 +47,7 @@ export const config = defineConfig<ThemeConfigModel>({
                 },
               };
             },
-            {} as Record<ThemeColorModel, Record<ThemeRoleModel, string>>,
+            {} as Record<THEME_COLOR, Record<THEME_ROLE, string>>,
           ),
         },
       },

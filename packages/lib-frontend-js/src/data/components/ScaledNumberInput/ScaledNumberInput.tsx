@@ -11,14 +11,11 @@ import { useValueScaled } from '@lib/frontend/data/hooks/useValueScaled/useValue
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { NUMBER_UNIT_TYPE } from '@lib/shared/data/utils/numberFormat/numberFormat.constants';
-import {
-  type NumberUnitModel,
-  type NumberUnitTypeModel,
-} from '@lib/shared/data/utils/numberFormat/numberFormat.models';
+import { type NumberUnitModel } from '@lib/shared/data/utils/numberFormat/numberFormat.models';
 import { type ReactElement } from 'react';
 
 export const unitOptions = <TType extends NumberUnitModel>(
-  type: NumberUnitTypeModel,
+  type: NUMBER_UNIT_TYPE,
 ): Array<TranslatableOptionModel<TType>> => {
   switch (type) {
     case NUMBER_UNIT_TYPE.AMOUNT:

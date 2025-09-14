@@ -1,7 +1,5 @@
 import { type APP_NAME } from '@tool/task/core/tasks/buildApp/buildApp.constants';
 
 export type BuildAppParamsModel = {
-  apps: Array<AppNameModel>;
+  apps: Array<APP_NAME>;
 };
-
-export type AppNameModel = `${APP_NAME}`;

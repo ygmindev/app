@@ -1,9 +1,9 @@
 import { type ScreenConfigModel } from '@lib/config/screen/screen.models';
+import { type KEY_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import {
   type FindAllOptionDefaultModel,
   type FindOptionDefaultModel,
   type HandleModel,
-  type KeyTypeModel,
   type SelectorModel,
   type SelectorOptionModel,
 } from '@lib/shared/crawling/utils/Screen/Screen.models';
@@ -25,7 +25,7 @@ export type _ScreenModel = {
 
   initialize(): Promise<void>;
 
-  key(value: KeyTypeModel, options?: SelectorOptionModel): Promise<void>;
+  key(value: KEY_TYPE, options?: SelectorOptionModel): Promise<void>;
 
   open(url: string): Promise<void>;
 

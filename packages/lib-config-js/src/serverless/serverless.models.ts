@@ -1,13 +1,13 @@
 import {
-  type ServerlessProviderModel,
-  type ServerlessRuntimeModel,
-} from '@lib/backend/serverless/serverless.models';
+  type SERVERLESS_PROVIDER,
+  type SERVERLESS_RUNTIME,
+} from '@lib/backend/serverless/serverless.constants';
 import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { type ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-import { type HttpMethodModel, type HttpProtocolModel } from '@lib/shared/http/http.models';
-import { type PlatformModel } from '@lib/shared/platform/platform.models';
+import { type HTTP_METHOD, type HTTP_PROTOCOL } from '@lib/shared/http/http.constants';
+import { type PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type AWS } from '@serverless/typescript';
 
 export type ServerlessConfigModel = Pick<FileConfigModel, 'buildDir' | 'prunePatterns'> & {
@@ -16,8 +16,6 @@ export type ServerlessConfigModel = Pick<FileConfigModel, 'buildDir' | 'prunePat
 
   configFilename: string;
 
-  dotenv(): void;
-
   environment: ENVIRONMENT;
 
   // TODO: to api
@@ -25,9 +23,9 @@ export type ServerlessConfigModel = Pick<FileConfigModel, 'buildDir' | 'prunePat
     string,
     {
       handler: string;
-      method: HttpMethodModel;
+      method: HTTP_METHOD;
       pathname: string;
-      protocol?: HttpProtocolModel;
+      protocol?: HTTP_PROTOCOL;
     }
   >;
 
@@ -35,17 +33,19 @@ export type ServerlessConfigModel = Pick<FileConfigModel, 'buildDir' | 'prunePat
 
   name: string;
 
-  platform: PlatformModel;
+  platform: PLATFORM;
 
-  provider: ServerlessProviderModel;
+  provider: SERVERLESS_PROVIDER;
 
   region: string;
 
-  runtime: ServerlessRuntimeModel;
+  runtime: SERVERLESS_RUNTIME;
 
   server: ServerConfigModel;
 
   timeout: number;
+
+  dotenv(): void;
 };
 
 export type _ServerlessConfigModel = AWS;

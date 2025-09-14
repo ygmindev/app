@@ -3,7 +3,7 @@ export enum SCROLL_TYPE {
   BUTTON = 'button',
 }
 
-export enum POINTER_EVENETS {
+export enum POINTER_EVENTS {
   AUTO = 'auto',
   BOX_NONE = 'box-none',
   BOX_ONLY = 'box-only',

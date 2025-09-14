@@ -4,13 +4,16 @@ import {
   type HttpRequestParamsModel,
 } from '@lib/backend/http/utils/HttpRequest/HttpRequest.models';
 import { LANGUAGE_DEFAULT } from '@lib/config/locale/internationalize/internationalize.constants';
-import { type HttpMethodModel } from '@lib/shared/http/http.models';
+import { type HTTP_METHOD } from '@lib/shared/http/http.constants';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
 
-export class HttpRequest<TType extends unknown> extends HttpMessage<TType> implements HttpRequestModel<TType> {
+export class HttpRequest<TType extends unknown>
+  extends HttpMessage<TType>
+  implements HttpRequestModel<TType>
+{
   _i18n?: I18nModel;
   _lang?: string;
-  _method?: HttpMethodModel;
+  _method?: HTTP_METHOD;
   _query?: URLSearchParams;
   _url!: string;
 
@@ -39,11 +42,11 @@ export class HttpRequest<TType extends unknown> extends HttpMessage<TType> imple
     this._lang = value;
   }
 
-  get method(): HttpMethodModel | undefined {
+  get method(): HTTP_METHOD | undefined {
     return this._method;
   }
 
-  set method(value: HttpMethodModel | undefined) {
+  set method(value: HTTP_METHOD | undefined) {
     this._method = value;
   }
 

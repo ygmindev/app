@@ -5,7 +5,7 @@ import { type API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type GraphqlConfigModel } from '@lib/config/graphql/graphql.models';
 import { type AuthStateModel } from '@lib/frontend/auth/stores/authStore/authStore.models';
 import { type SignInTokenModel } from '@lib/model/auth/SignIn/SignIn.models';
-import { type HttpMethodModel, type HttpProtocolModel } from '@lib/shared/http/http.models';
+import { type HTTP_METHOD, type HTTP_PROTOCOL } from '@lib/shared/http/http.constants';
 import { type FastifyReply, type FastifyRequest } from 'fastify';
 
 export type ApiConfigModel = {
@@ -31,16 +31,14 @@ export type ApiHandlerModel<TType = void, TParams = void> = (
   params?: { rep: FastifyReply; req: FastifyRequest },
 ) => Promise<HttpResponseModel<TType>>;
 
-export type ApiEndpointTypeModel = `${API_ENDPOINT_TYPE}`;
-
 export type ApiEndpointModel<TType = void, TParams = void> = {
-  method: HttpMethodModel | Array<HttpMethodModel>;
+  method: HTTP_METHOD | Array<HTTP_METHOD>;
 
   pathname: string;
 
   prefix?: boolean | string;
 
-  protocol?: HttpProtocolModel;
+  protocol?: HTTP_PROTOCOL;
 } & (
   | {
       handler?: never;
