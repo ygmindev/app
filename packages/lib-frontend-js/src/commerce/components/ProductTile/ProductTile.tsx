@@ -15,7 +15,6 @@ import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 
 export const ProductTile: LFCModel<ProductTilePropsModel> = ({ product, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  console.warn(product);
   const pricing = product[PRICING_RESOURCE_NAME]?.[0];
   const item: PartialModel<ProductItemModel> = {
     imageSrc: product.imageSrc?.[0],

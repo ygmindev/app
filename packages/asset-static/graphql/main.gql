@@ -250,7 +250,7 @@ type Bank {
 }
 
 input BankCreateFormInput {
-  User: [UserInput!]
+  User: [UserInput!] = []
   _id: String
   brand: String
   created: DateTimeISO
@@ -268,7 +268,7 @@ input BankCreateInput {
 }
 
 input BankCreateManyFormInput {
-  User: [UserInput!]
+  User: [UserInput!] = []
   _id: String
   brand: String
   created: DateTimeISO
@@ -374,7 +374,7 @@ type BankGetOutput {
 }
 
 input BankInput {
-  User: [UserInput!]
+  User: [UserInput!] = []
   _id: String
   brand: String
   created: DateTimeISO
@@ -451,7 +451,7 @@ type BankUpdateManyOutput {
 }
 
 input BankUpdateManyUpdateInput {
-  User: [UserInput!]
+  User: [UserInput!] = []
   _id: String
   brand: String
   created: DateTimeISO
@@ -469,7 +469,7 @@ type BankUpdateOutput {
 }
 
 input BankUpdateUpdateInput {
-  User: [UserInput!]
+  User: [UserInput!] = []
   _id: String
   brand: String
   created: DateTimeISO
@@ -498,7 +498,7 @@ type Card {
 }
 
 input CardCreateFormInput {
-  User: [UserInput!]
+  User: [UserInput!] = []
   _id: String
   brand: String
   created: DateTimeISO
@@ -519,7 +519,7 @@ input CardCreateInput {
 }
 
 input CardCreateManyFormInput {
-  User: [UserInput!]
+  User: [UserInput!] = []
   _id: String
   brand: String
   created: DateTimeISO
@@ -628,7 +628,7 @@ type CardGetOutput {
 }
 
 input CardInput {
-  User: [UserInput!]
+  User: [UserInput!] = []
   _id: String
   brand: String
   created: DateTimeISO
@@ -708,7 +708,7 @@ type CardUpdateManyOutput {
 }
 
 input CardUpdateManyUpdateInput {
-  User: [UserInput!]
+  User: [UserInput!] = []
   _id: String
   brand: String
   created: DateTimeISO
@@ -729,7 +729,7 @@ type CardUpdateOutput {
 }
 
 input CardUpdateUpdateInput {
-  User: [UserInput!]
+  User: [UserInput!] = []
   _id: String
   brand: String
   created: DateTimeISO
@@ -759,9 +759,9 @@ input ChatCreateFormInput {
   created: DateTimeISO
   createdBy: UserInput
   isFixture: Boolean
-  messages: [MessageInput!]
+  messages: [MessageInput!] = []
   name: String
-  participants: [UserInput!]
+  participants: [UserInput!] = []
 }
 
 input ChatCreateInput {
@@ -774,9 +774,9 @@ input ChatCreateManyFormInput {
   created: DateTimeISO
   createdBy: UserInput
   isFixture: Boolean
-  messages: [MessageInput!]
+  messages: [MessageInput!] = []
   name: String
-  participants: [UserInput!]
+  participants: [UserInput!] = []
 }
 
 input ChatCreateManyInput {
@@ -872,9 +872,9 @@ input ChatInput {
   created: DateTimeISO
   createdBy: UserInput
   isFixture: Boolean
-  messages: [MessageInput!]
+  messages: [MessageInput!] = []
   name: String
-  participants: [UserInput!]
+  participants: [UserInput!] = []
 }
 
 input ChatRemoveFilterInput {
@@ -964,9 +964,9 @@ input ChatUpdateManyUpdateInput {
   created: DateTimeISO
   createdBy: UserInput
   isFixture: Boolean
-  messages: [MessageInput!]
+  messages: [MessageInput!] = []
   name: String
-  participants: [UserInput!]
+  participants: [UserInput!] = []
 }
 
 type ChatUpdateOutput {
@@ -978,9 +978,9 @@ input ChatUpdateUpdateInput {
   created: DateTimeISO
   createdBy: UserInput
   isFixture: Boolean
-  messages: [MessageInput!]
+  messages: [MessageInput!] = []
   name: String
-  participants: [UserInput!]
+  participants: [UserInput!] = []
 }
 
 type Curve {
@@ -1308,8 +1308,8 @@ type Group {
 }
 
 input GroupCreateFormInput {
-  Access: [AccessInput!]
-  Role: [RoleInput!]
+  Access: [AccessInput!] = []
+  Role: [RoleInput!] = []
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -1324,8 +1324,8 @@ input GroupCreateInput {
 }
 
 input GroupCreateManyFormInput {
-  Access: [AccessInput!]
-  Role: [RoleInput!]
+  Access: [AccessInput!] = []
+  Role: [RoleInput!] = []
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -1423,8 +1423,8 @@ type GroupGetOutput {
 }
 
 input GroupInput {
-  Access: [AccessInput!]
-  Role: [RoleInput!]
+  Access: [AccessInput!] = []
+  Role: [RoleInput!] = []
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -1495,8 +1495,8 @@ type GroupUpdateManyOutput {
 }
 
 input GroupUpdateManyUpdateInput {
-  Access: [AccessInput!]
-  Role: [RoleInput!]
+  Access: [AccessInput!] = []
+  Role: [RoleInput!] = []
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -1510,8 +1510,8 @@ type GroupUpdateOutput {
 }
 
 input GroupUpdateUpdateInput {
-  Access: [AccessInput!]
-  Role: [RoleInput!]
+  Access: [AccessInput!] = []
+  Role: [RoleInput!] = []
   _id: String
   created: DateTimeISO
   isFixture: Boolean
@@ -2039,6 +2039,7 @@ type Mutation {
   RoleRemove(input: RoleRemoveInput): RoleRemoveOutput
   RoleUpdate(input: RoleUpdateInput): RoleUpdateOutput
   RoleUpdateMany(input: RoleUpdateManyInput): RoleUpdateManyOutput
+  SignInUserUpdate(input: SignInUserUpdateInput): SignIn
   SocketCreate(input: SocketCreateInput): SocketCreateOutput
   SocketCreateMany(input: SocketCreateManyInput): SocketCreateManyOutput
   SocketRemove(input: SocketRemoveInput): SocketRemoveOutput
@@ -2287,7 +2288,7 @@ type Otp {
 input OtpCreateFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-14T19:32:46.630Z"
+  created: DateTimeISO = "2025-09-16T01:53:14.270Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2303,7 +2304,7 @@ input OtpCreateInput {
 input OtpCreateManyFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-14T19:32:46.630Z"
+  created: DateTimeISO = "2025-09-16T01:53:14.270Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2402,7 +2403,7 @@ type OtpGetOutput {
 input OtpInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-14T19:32:46.630Z"
+  created: DateTimeISO = "2025-09-16T01:53:14.270Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2474,7 +2475,7 @@ type OtpUpdateManyOutput {
 input OtpUpdateManyUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-14T19:32:46.630Z"
+  created: DateTimeISO = "2025-09-16T01:53:14.270Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2489,7 +2490,7 @@ type OtpUpdateOutput {
 input OtpUpdateUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-14T19:32:46.630Z"
+  created: DateTimeISO = "2025-09-16T01:53:14.270Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -3056,6 +3057,7 @@ type Query {
   RoleGetConnection(input: RoleGetConnectionInput): RoleGetConnectionOutput
   RoleGetMany(input: RoleGetManyInput): RoleGetManyOutput
   RoleSearch(input: RoleSearchInput): RoleSearchOutput
+  SignInUsernameUpdate(input: SignInInput): SignIn
   SnapshotGet(input: SnapshotGetInput): SnapshotGetOutput
   SnapshotGetMany(input: SnapshotGetManyInput): SnapshotGetManyOutput
   SocketGet(input: SocketGetInput): SocketGetOutput
@@ -3078,7 +3080,6 @@ type Query {
   paymentMethodGetAll: [PaymentMethod]
   removeToken(input: IdInput): Boolean
   signIn(input: SignInInput): SignIn
-  usernameUpdate(input: SignInInput): SignIn
   verifyToken(input: String): SignIn
 }
 
@@ -3313,6 +3314,31 @@ input SignInInput {
   phone: String
 }
 
+input SignInUserUpdateInput {
+  id: String
+  root: String
+  update: SignInUserUpdateInputUpdate
+}
+
+input SignInUserUpdateInputUpdate {
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
+  LinkedUser: [LinkedUserInput!]
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
+  _id: String
+  callingCode: String
+  created: DateTimeISO
+  email: String
+  first: String
+  isFixture: Boolean
+  last: String
+  paymentMethodPrimary: PaymentMethodInput
+  phone: String
+}
+
 type Snapshot {
   _id: String
   created: DateTimeISO
@@ -3383,7 +3409,7 @@ type Socket {
 input SocketCreateFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-14T19:32:46.631Z"
+  created: DateTimeISO = "2025-09-16T01:53:14.271Z"
   isFixture: Boolean
   name: String
 }
@@ -3396,7 +3422,7 @@ input SocketCreateInput {
 input SocketCreateManyFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-14T19:32:46.631Z"
+  created: DateTimeISO = "2025-09-16T01:53:14.271Z"
   isFixture: Boolean
   name: String
 }
@@ -3492,7 +3518,7 @@ type SocketGetOutput {
 input SocketInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-14T19:32:46.631Z"
+  created: DateTimeISO = "2025-09-16T01:53:14.271Z"
   isFixture: Boolean
   name: String
 }
@@ -3561,7 +3587,7 @@ type SocketUpdateManyOutput {
 input SocketUpdateManyUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-14T19:32:46.631Z"
+  created: DateTimeISO = "2025-09-16T01:53:14.271Z"
   isFixture: Boolean
   name: String
 }
@@ -3573,7 +3599,7 @@ type SocketUpdateOutput {
 input SocketUpdateUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-14T19:32:46.631Z"
+  created: DateTimeISO = "2025-09-16T01:53:14.271Z"
   isFixture: Boolean
   name: String
 }
@@ -3602,13 +3628,13 @@ type User {
 }
 
 input UserCreateFormInput {
-  Access: [AccessInput!]
-  Bank: [BankInput!]
-  Card: [CardInput!]
-  Chat: [ChatInput!]
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
   LinkedUser: [LinkedUserInput!]
-  Message: [MessageInput!]
-  PaymentMethod: [CardInput!]
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
   _id: String
   callingCode: String
   created: DateTimeISO
@@ -3626,13 +3652,13 @@ input UserCreateInput {
 }
 
 input UserCreateManyFormInput {
-  Access: [AccessInput!]
-  Bank: [BankInput!]
-  Card: [CardInput!]
-  Chat: [ChatInput!]
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
   LinkedUser: [LinkedUserInput!]
-  Message: [MessageInput!]
-  PaymentMethod: [CardInput!]
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
   _id: String
   callingCode: String
   created: DateTimeISO
@@ -3733,13 +3759,13 @@ type UserGetOutput {
 }
 
 input UserInput {
-  Access: [AccessInput!]
-  Bank: [BankInput!]
-  Card: [CardInput!]
-  Chat: [ChatInput!]
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
   LinkedUser: [LinkedUserInput!]
-  Message: [MessageInput!]
-  PaymentMethod: [CardInput!]
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
   _id: String
   callingCode: String
   created: DateTimeISO
@@ -3813,13 +3839,13 @@ type UserUpdateManyOutput {
 }
 
 input UserUpdateManyUpdateInput {
-  Access: [AccessInput!]
-  Bank: [BankInput!]
-  Card: [CardInput!]
-  Chat: [ChatInput!]
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
   LinkedUser: [LinkedUserInput!]
-  Message: [MessageInput!]
-  PaymentMethod: [CardInput!]
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
   _id: String
   callingCode: String
   created: DateTimeISO
@@ -3836,13 +3862,13 @@ type UserUpdateOutput {
 }
 
 input UserUpdateUpdateInput {
-  Access: [AccessInput!]
-  Bank: [BankInput!]
-  Card: [CardInput!]
-  Chat: [ChatInput!]
+  Access: [AccessInput!] = []
+  Bank: [BankInput!] = []
+  Card: [CardInput!] = []
+  Chat: [ChatInput!] = []
   LinkedUser: [LinkedUserInput!]
-  Message: [MessageInput!]
-  PaymentMethod: [CardInput!]
+  Message: [MessageInput!] = []
+  PaymentMethod: [CardInput!] = []
   _id: String
   callingCode: String
   created: DateTimeISO

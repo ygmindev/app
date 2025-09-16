@@ -6,18 +6,22 @@ import { OtpImplementation } from '@lib/model/auth/Otp/OtpImplementation/OtpImpl
 import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
 import { JWT_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.constants';
-import { type SignInImplementationModel } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.models';
+import {
+  type SignInImplementationModel,
+  SignInUserUpdateInputModel,
+} from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.models';
 import { SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { UserImplementation } from '@lib/model/user/User/UserImplementation/UserImplementation';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
-import { type PartialModel } from '@lib/shared/core/core.models';
+import { MissingArgumentError } from '@lib/shared/core/errors/MissingArgumentError/MissingArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import intersection from 'lodash/intersection';
 import toString from 'lodash/toString';
 
 @withContainer()
@@ -28,7 +32,7 @@ export class SignInImplementation implements SignInImplementationModel {
 
   @withInject(UserImplementation) protected userImplementation!: UserImplementation;
 
-  createSignIn = async (user: PartialModel<UserModel> | null | undefined): Promise<SignInModel> => {
+  createSignIn = async (user: Partial<UserModel> | null | undefined): Promise<SignInModel> => {
     if (user?._id) {
       user._id = toString(user?._id);
       const claims = pick(user, SIGN_IN_TOKEN_CLAIM_KEYS);
@@ -58,6 +62,22 @@ export class SignInImplementation implements SignInImplementationModel {
     return { ...signIn, isNew };
   }
 
+  async userUpdate(
+    input: SignInUserUpdateInputModel,
+    context?: RequestContextModel,
+  ): Promise<SignInModel> {
+    if (!input.update) throw new MissingArgumentError('update');
+    if (input.id !== context?.user?._id) throw new UnauthorizedError();
+    if (intersection(Object.keys(input.update), JWT_CLAIM_KEYS)?.length)
+      throw new UnauthorizedError('auth fields should be set with usernameUpdate');
+    const result = await this.userImplementation.update(input, context);
+    if (result?.result) {
+      const signIn = await this.createSignIn(result.result);
+      return signIn;
+    }
+    throw new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR);
+  }
+
   async usernameUpdate(
     input: SignInInputModel,
     context?: RequestContextModel,
@@ -66,7 +86,6 @@ export class SignInImplementation implements SignInImplementationModel {
     if (!uid) {
       throw new UnauthorizedError();
     }
-
     const { otp } = input;
     if (!otp) {
       throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
@@ -107,13 +126,4 @@ export class SignInImplementation implements SignInImplementationModel {
     }
     throw new UnauthorizedError();
   }
-
-  // async userUpdate(input: SignInInputModel): Promise<SignInModel> {
-  //   const result = await this.userImplementation.update(input);
-  //   if (result?.result) {
-  //     const signIn = await this.createSignIn(result.result);
-  //     return signIn;
-  //   }
-  //   throw new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR);
-  // }
 }

@@ -35,6 +35,7 @@ import {
 } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 import { useRef } from 'react';
@@ -72,10 +73,8 @@ export const PaymentMethodInput: RLFCModel<
     return output;
   };
 
-  const getLogo = (brand?: string): Array<string> => [
-    `/images/brands/${brand}.svg`,
-    '/images/brands/card.svg',
-  ];
+  const getLogo = (brand?: string): Array<string> =>
+    filterNil([brand && `/images/brands/${brand}.svg`, '/images/brands/card.svg']);
 
   return (
     <DataBoundary

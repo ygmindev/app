@@ -7,14 +7,20 @@ import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGrap
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { USER_RESOURCE_PARAMS } from '@lib/frontend/user/resources/User/User.constants';
+import {
+  SIGN_IN_USER_UPDATE,
+  SIGN_IN_USERNAME_UPDATE,
+} from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
+import { type SignInUserUpdateInputModel } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.models';
 import { SIGN_IN_INPUT } from '@lib/model/auth/SignIn/SignInInput/SignInInput.constants';
 import { type SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
-import { SIGN_IN, USERNAME_UPDATE, VERIFY_TOKEN } from '@lib/shared/auth/auth.constants';
+import { SIGN_IN, VERIFY_TOKEN } from '@lib/shared/auth/auth.constants';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
+import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 
 const USER_FIELDS = USER_RESOURCE_PARAMS.fields.map(({ fields, id }) =>
   fields ? { [id]: fields.map((v) => v.id) } : id,
@@ -82,30 +88,27 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
     signOut: handleSignOut,
 
-    // userUpdate: async (input = {}) => {
-    //   const name = `${SIGN_IN_USER}${RESOURCE_METHOD_TYPE.UPDATE}`;
-    //   const output = await query<
-    //     { input: InputModel<RESOURCE_METHOD_TYPE.UPDATE, UserModel, UserFormModel> },
-    //     OutputModel<RESOURCE_METHOD_TYPE.CREATE, SignInModel>
-    //   >({
-    //     fields: [{ result: ['token', { user: userFields }] }],
-    //     name,
-    //     params: { input: `${name}Input` },
-    //     type: GRAPHQL_OPERATION_TYPE.MUTATION,
-    //     variables: { input },
-    //   });
-    //   if (output?.result) {
-    //     await signIn(output.result);
-    //     actions?.user.currentUserUpdate(output.result.user);
-    //   } else {
-    //     throw new UnauthorizedError();
-    //   }
-    // },
+    userUpdate: async (input) => {
+      const name = SIGN_IN_USER_UPDATE;
+      const output = await query<SignInModel, { input: SignInUserUpdateInputModel }>({
+        fields: ['token', { user: USER_FIELDS }],
+        name,
+        params: { input: `${name}Input` },
+        type: GRAPHQL_OPERATION_TYPE.MUTATION,
+        variables: { input },
+      });
+      if (output) {
+        await signIn(output);
+        currentUserSet({ ...currentUser, ...output });
+      } else {
+        throw new UnauthorizedError();
+      }
+    },
 
     usernameUpdate: async (input) => {
       const output = await query<SignInModel, { input: SignInInputModel }>({
         fields: ['token', { user: USER_FIELDS }],
-        name: USERNAME_UPDATE,
+        name: SIGN_IN_USERNAME_UPDATE,
         params: { input: SIGN_IN_INPUT },
         variables: { input },
       });

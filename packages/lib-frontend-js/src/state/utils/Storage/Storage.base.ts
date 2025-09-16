@@ -13,12 +13,12 @@ export class Storage implements StorageModel {
 
   async getItem<TType extends string = string>(key: string): Promise<TType | null> {
     if (this.storages) {
-      logger.debug('storage get', key);
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {
           try {
             const value = await storage.getItem<TType>(key);
+            value && logger.debug('storage get', key);
             return value;
           } catch {
             continue;
@@ -32,12 +32,12 @@ export class Storage implements StorageModel {
 
   async removeItem(key: string): Promise<void> {
     if (this.storages) {
-      logger.debug('storage remove', key);
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {
           try {
             await storage.removeItem(key);
+            logger.debug('storage remove', key);
           } catch (e) {
             continue;
           }
@@ -48,11 +48,11 @@ export class Storage implements StorageModel {
 
   async setItem<TType extends string = string>(key: string, value: TType): Promise<void> {
     if (this.storages) {
-      value && logger.debug('storage set', key, value);
       for (let i = 0; i < this.storages.length; ++i) {
         const storage = this.storages[i];
         if (storage) {
           try {
+            value && logger.debug('storage set', key, value);
             await storage.setItem<TType>(key, value);
           } catch {
             continue;
