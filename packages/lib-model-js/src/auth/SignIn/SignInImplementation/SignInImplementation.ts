@@ -6,11 +6,10 @@ import { OtpImplementation } from '@lib/model/auth/Otp/OtpImplementation/OtpImpl
 import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
 import { JWT_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.constants';
-import {
-  type SignInImplementationModel,
-  SignInUserUpdateInputModel,
-} from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.models';
+import { type SignInImplementationModel } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.models';
 import { SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
+import { SignInUserUpdateModel } from '@lib/model/auth/SignIn/SignInUserUpdate/SignInUserUpdate.models';
+import { SignInUserUpdateInputModel } from '@lib/model/auth/SignIn/SignInUserUpdateInput/SignInUserUpdateInput.model';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { UserImplementation } from '@lib/model/user/User/UserImplementation/UserImplementation';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
@@ -65,7 +64,7 @@ export class SignInImplementation implements SignInImplementationModel {
   async userUpdate(
     input: SignInUserUpdateInputModel,
     context?: RequestContextModel,
-  ): Promise<SignInModel> {
+  ): Promise<SignInUserUpdateModel> {
     if (!input.update) throw new MissingArgumentError('update');
     if (input.id !== context?.user?._id) throw new UnauthorizedError();
     if (intersection(Object.keys(input.update), JWT_CLAIM_KEYS)?.length)
@@ -73,7 +72,7 @@ export class SignInImplementation implements SignInImplementationModel {
     const result = await this.userImplementation.update(input, context);
     if (result?.result) {
       const signIn = await this.createSignIn(result.result);
-      return signIn;
+      return { result: result.result, signIn };
     }
     throw new HttpError(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR);
   }

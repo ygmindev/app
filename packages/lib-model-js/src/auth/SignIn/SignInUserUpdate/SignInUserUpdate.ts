@@ -1,11 +1,17 @@
-import { createResourceInput } from '@lib/backend/resource/utils/createResourceInput/createResourceInput';
+import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { SIGN_IN_USER_UPDATE } from '@lib/model/auth/SignIn/SignIn.constants';
+import SignIn from '@lib/model/auth/SignIn/SignIn.entity';
+import { SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
+import { SignInUserUpdateModel } from '@lib/model/auth/SignIn/SignInUserUpdate/SignInUserUpdate.models';
 import User from '@lib/model/user/User/User.entity';
-import { type UserModel } from '@lib/model/user/User/User.models';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
+import { UserModel } from '@lib/model/user/User/User.models';
 
-export const SignInUserUpdateInput = createResourceInput<RESOURCE_METHOD_TYPE.UPDATE, UserModel>({
-  Resource: () => User,
-  method: RESOURCE_METHOD_TYPE.UPDATE,
-  name: `${SIGN_IN_USER_UPDATE}Input`,
-});
+@withEntity({ name: SIGN_IN_USER_UPDATE })
+export class SignInUserUpdate implements SignInUserUpdateModel {
+  @withField({ Resource: () => User })
+  result!: Partial<UserModel>;
+
+  @withField({ Resource: () => SignIn })
+  signIn!: SignInModel;
+}

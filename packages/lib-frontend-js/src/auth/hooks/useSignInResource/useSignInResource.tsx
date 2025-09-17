@@ -12,9 +12,10 @@ import {
   SIGN_IN_USERNAME_UPDATE,
 } from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
-import { type SignInUserUpdateInputModel } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.models';
 import { SIGN_IN_INPUT } from '@lib/model/auth/SignIn/SignInInput/SignInInput.constants';
 import { type SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
+import { type SignInUserUpdateModel } from '@lib/model/auth/SignIn/SignInUserUpdate/SignInUserUpdate.models';
+import { type SignInUserUpdateInputModel } from '@lib/model/auth/SignIn/SignInUserUpdateInput/SignInUserUpdateInput.model';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { SIGN_IN, VERIFY_TOKEN } from '@lib/shared/auth/auth.constants';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
@@ -90,16 +91,16 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
     userUpdate: async (input) => {
       const name = SIGN_IN_USER_UPDATE;
-      const output = await query<SignInModel, { input: SignInUserUpdateInputModel }>({
-        fields: ['token', { user: USER_FIELDS }],
+      const output = await query<SignInUserUpdateModel, { input: SignInUserUpdateInputModel }>({
+        fields: [{ result: USER_FIELDS, signIn: ['token', { user: USER_FIELDS }] }],
         name,
         params: { input: `${name}Input` },
         type: GRAPHQL_OPERATION_TYPE.MUTATION,
         variables: { input },
       });
       if (output) {
-        await signIn(output);
-        currentUserSet({ ...currentUser, ...output });
+        await signIn(output.signIn);
+        currentUserSet({ ...currentUser, ...output.result });
       } else {
         throw new UnauthorizedError();
       }

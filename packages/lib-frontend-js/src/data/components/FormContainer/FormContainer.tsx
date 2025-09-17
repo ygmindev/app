@@ -262,7 +262,6 @@ const FormContainerF = <TType, TResult = void>({
           <SubmittableButtons
             cancelLabel={cancelLabel}
             elementState={elementStateF}
-            elementStateSubmit={isValid ? undefined : ELEMENT_STATE.DISABLED}
             onCancel={onCancel}
             onSubmit={async () => handleSubmitF()}
             submitLabel={submitLabel}

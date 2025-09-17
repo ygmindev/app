@@ -12,11 +12,13 @@ import {
 import { SignIn } from '@lib/model/auth/SignIn/SignIn.entity';
 import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
 import { SignInImplementation } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation';
-import { SignInUserUpdateInputModel } from '@lib/model/auth/SignIn/SignInImplementation/SignInImplementation.models';
 import { SignInInput } from '@lib/model/auth/SignIn/SignInInput/SignInInput';
 import { SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
 import { type SignInResolverModel } from '@lib/model/auth/SignIn/SignInResolver/SignInResolver.models';
-import { SignInUserUpdateInput } from '@lib/model/auth/SignIn/SignInUserUpdate/SignInUserUpdate';
+import { SignInUserUpdate } from '@lib/model/auth/SignIn/SignInUserUpdate/SignInUserUpdate';
+import { SignInUserUpdateModel } from '@lib/model/auth/SignIn/SignInUserUpdate/SignInUserUpdate.models';
+import { SignInUserUpdateInput } from '@lib/model/auth/SignIn/SignInUserUpdateInput/SignInUserUpdateInput';
+import { SignInUserUpdateInputModel } from '@lib/model/auth/SignIn/SignInUserUpdateInput/SignInUserUpdateInput.model';
 import { SIGN_IN, VERIFY_TOKEN } from '@lib/shared/auth/auth.constants';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
@@ -39,7 +41,7 @@ export class SignInResolver implements SignInResolverModel {
   }
 
   @withOutput({
-    Resource: () => SignIn,
+    Resource: () => SignInUserUpdate,
     access: ACCESS_LEVEL.PROTECTED,
     name: SIGN_IN_USER_UPDATE,
     operation: GRAPHQL_OPERATION_TYPE.MUTATION,
@@ -49,7 +51,7 @@ export class SignInResolver implements SignInResolverModel {
     input: SignInUserUpdateInputModel,
     @withContext()
     context?: RequestContextModel,
-  ): Promise<SignInModel> {
+  ): Promise<SignInUserUpdateModel> {
     return this.signInImplementation.userUpdate(input, context);
   }
 
