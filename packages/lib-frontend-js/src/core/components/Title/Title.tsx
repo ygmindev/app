@@ -93,6 +93,7 @@ export const Title: LFCModel<TitlePropsModel> = ({
               flex>
               {isAsyncText(description) ? (
                 <AsyncText
+                  casing={TEXT_CASING.CAPITALIZE}
                   color={color}
                   colorRole={colorRole}>
                   {description}
