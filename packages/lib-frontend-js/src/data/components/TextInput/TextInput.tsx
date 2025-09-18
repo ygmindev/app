@@ -84,6 +84,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
     beforeSubmit,
     blur: () => handleFocus(false),
     focus: () => handleFocus(true),
+    onChange: inputRef?.current?.onChange,
     submit: inputRef.current?.submit,
   }));
 

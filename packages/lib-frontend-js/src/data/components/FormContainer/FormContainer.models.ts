@@ -1,7 +1,7 @@
 import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type AsyncBoundaryContextModel } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
-import { type ElementStatePropsModel } from '@lib/frontend/core/core.models';
+import { type ElementStatePropsModel, type RefPropsModel } from '@lib/frontend/core/core.models';
 import {
   type FormRefModel,
   type InputPropsModel,
@@ -14,6 +14,7 @@ import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement, type ReactNode, type RefObject } from 'react';
 
 export type FormContainerPropsModel<TType, TResult = void> = WrapperPropsModel &
+  RefPropsModel<FormContainerRefModel<TType>> &
   UseFormParamsModel<TType, TResult> &
   SubmittablePropsModel<TType, TResult> &
   Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
@@ -27,6 +28,7 @@ export type FormContainerPropsModel<TType, TResult = void> = WrapperPropsModel &
 
 export type FormContainerRefModel<TType> = FormRefModel<TType> & {
   inputRefs: RefObject<FormFieldsRefModel<TType>>;
+  values?: TType;
 };
 
 export type FormTileModel<TType> = WithIdModel & {

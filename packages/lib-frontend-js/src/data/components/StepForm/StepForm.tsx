@@ -8,8 +8,9 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type LFCPropsModel } from '@lib/frontend/core/core.models';
+import { type LFCPropsModel, type RefPropsModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
+import { type FormContainerRefModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
 import {
   type FormStepPropsModel,
   type StepFormPropsModel,
@@ -22,7 +23,6 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { type PartialModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
@@ -65,7 +65,6 @@ export const StepFormF = <TType, TResult = void>({
   const [isLoading, isLoadingSet] = useState<boolean>(false);
   const [isValid, isValidSet] = useState<Record<string, boolean>>({});
   const isLastStep = current === steps.length - 1;
-
   const isProgressF = isProgress && steps.length > 2;
 
   const {
@@ -87,6 +86,7 @@ export const StepFormF = <TType, TResult = void>({
   }, [width]);
 
   const isLoadingFF = isLoadingF || isLoading;
+  const stepRefs = useRef<Record<string, FormContainerRefModel<Partial<TType>>>>({});
 
   return (
     <Wrapper
@@ -151,7 +151,19 @@ export const StepFormF = <TType, TResult = void>({
       {steps?.[current] && (
         <NavigationHeader
           elementState={ELEMENT_STATE.ACTIVE}
-          onBack={current > 0 ? async () => handleCurrentSet(current - 1) : undefined}
+          onBack={
+            current > 0
+              ? async () => {
+                  const currentId = steps?.[current]?.id;
+                  if (currentId) {
+                    const stepValues = stepRefs.current?.[currentId]?.values;
+                    const valuesF = { ...values, ...stepValues };
+                    await valuesSet(valuesF);
+                  }
+                  void handleCurrentSet(current - 1);
+                }
+              : undefined
+          }
           title={isProgressF ? steps?.[current].title : undefined}
         />
       )}
@@ -163,7 +175,10 @@ export const StepFormF = <TType, TResult = void>({
         slides={filterNil(
           steps.map(({ element, fields, id, message, title, validators }, i) => {
             const elementF:
-              | ReactElement<FormStepPropsModel<TType, PartialModel<TType>, TResult>>
+              | ReactElement<
+                  FormStepPropsModel<TType, Partial<TType>, TResult> &
+                    RefPropsModel<FormContainerRefModel<Partial<TType>>>
+                >
               | undefined = fields ? (
               <FormContainer
                 elementState={elementState}
@@ -185,23 +200,26 @@ export const StepFormF = <TType, TResult = void>({
                     {message && <AsyncText fontStyle={FONT_STYLE.HEADLINE}>{message}</AsyncText>}
 
                     {cloneElement(elementF, {
-                      data: values as PartialModel<TType>,
+                      data: values as Partial<TType>,
                       elementState:
                         elementState ?? (isLoadingFF ? ELEMENT_STATE.LOADING : undefined),
-                      initialValues: { ...initialValues, ...values } as PartialModel<TType>,
+                      initialValues: { ...initialValues, ...values } as Partial<TType>,
                       key: id,
-                      onBack: () => {
-                        elementF.props.onBack?.();
+                      onBack: async () => {
+                        const stepValues = stepRefs.current?.[id]?.values;
+                        const valuesF = { ...values, ...stepValues };
+                        await valuesSet(valuesF);
                         void handleCurrentSet(current - 1);
+                        await elementF.props.onBack?.();
                       },
                       onComplete: () => {
                         isLoadingSet(false);
                         elementF.props.onComplete?.();
                       },
                       onError: (error: Error) => {
-                        elementF.props.onError && elementF.props.onError(error);
+                        elementF.props.onError?.(error);
                       },
-                      onSubmit: async (stepValues: PartialModel<TType>) => {
+                      onSubmit: async (stepValues) => {
                         isLoadingSet(true);
                         await elementF.props.onSubmit?.(stepValues);
                         const valuesF = { ...values, ...stepValues };
@@ -209,17 +227,20 @@ export const StepFormF = <TType, TResult = void>({
                         isLastStep && handleSubmit?.();
                         return null;
                       },
-                      onSuccess: async (stepValues: PartialModel<TType>) => {
+                      onSuccess: async (stepValues: Partial<TType>) => {
                         await elementF.props.onSuccess?.(stepValues);
                         !isLastStep && void handleCurrentSet(current + 1);
                         isValidSet({ ...isValid, [id]: true });
                       },
-                      onValidate: (e?: FormErrorModel<PartialModel<TType>>) =>
+                      onValidate: (e?: FormErrorModel<Partial<TType>>) =>
                         !isEmpty(e) && isValidSet({ ...isValid, [id]: false }),
+                      ref: (v) => {
+                        v && stepRefs.current && (stepRefs.current[id] = v);
+                      },
                       validators: {
                         ...elementF.props.validators,
                         ...validators,
-                      } as FormValidatorsModel<PartialModel<TType>>,
+                      } as FormValidatorsModel<Partial<TType>>,
                     })}
                   </Wrapper>
                 ),

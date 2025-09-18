@@ -14,4 +14,4 @@ export type TextInputPropsModel = Omit<InputPropsModel, 'onSubmit'> &
     onClear?(): void;
   };
 
-export type TextInputRefModel = Pick<InputRefModel, 'blur' | 'focus' | 'submit'>;
+export type TextInputRefModel = Pick<InputRefModel, 'blur' | 'focus' | 'onChange' | 'submit'>;

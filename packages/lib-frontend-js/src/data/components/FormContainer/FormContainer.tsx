@@ -97,6 +97,7 @@ const FormContainerF = <TType, TResult = void>({
     inputRefs,
     reset: handleReset,
     submit: async () => handleSubmitF(),
+    values,
     valuesSet,
   }));
 

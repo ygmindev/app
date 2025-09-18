@@ -24,9 +24,9 @@ import { withId } from '@lib/shared/core/utils/withId/withId';
 import range from 'lodash/range';
 import toNumber from 'lodash/toNumber';
 
-const otpLength = toNumber(process.env.SERVER_APP_OTP_LENGTH);
+const OTP_LENGTH = toNumber(process.env.SERVER_APP_OTP_LENGTH);
 
-const IDS = withId(range(otpLength));
+const IDS = withId(range(OTP_LENGTH));
 
 export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
   elementState,
@@ -52,7 +52,6 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
     elementState,
     onElementStateChange,
   });
-
   return (
     <Wrapper
       {...wrapperProps}
@@ -69,11 +68,14 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
             isAutoFocus={isAutoFocus}
             isClearable={false}
             keyboard={TEXT_INPUT_KEYBOARD.NUMBER}
-            maxLength={otpLength}
+            maxLength={OTP_LENGTH}
             onChange={(value) => {
               valueControlledSet(value);
-              if (value?.length === otpLength) {
-                void sleep().then(onSubmit);
+              if (value?.length === OTP_LENGTH) {
+                void sleep().then(async () => {
+                  valueControlledSet('');
+                  onSubmit?.();
+                });
               }
             }}
             onElementStateChange={elementStateControlledSet}
