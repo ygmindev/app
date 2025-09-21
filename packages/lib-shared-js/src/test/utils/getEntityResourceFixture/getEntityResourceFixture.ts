@@ -1,4 +1,5 @@
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { generateResourceId } from '@lib/shared/resource/utils/generateResourceId/generateResourceId';
 import {
   type GetEntityResourceFixtureModel,
@@ -19,7 +20,7 @@ export const getEntityResourceFixture = <
   const fixtures = range(count ?? 1).map((i) => {
     const _id = generateResourceId();
     const dataF = data({ _id, index: i });
-    return { ...dataF, _id, created: new Date(), isFixture: true } as TType;
+    return { ...dataF, _id, created: dataF.created ?? new DateTime(), isFixture: true } as TType;
   });
   return (count && count > 1 ? fixtures : fixtures[0]) as GetEntityResourceFixtureModel<
     TType,

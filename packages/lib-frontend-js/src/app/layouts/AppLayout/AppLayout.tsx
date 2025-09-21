@@ -1,4 +1,4 @@
-import { AppHeader } from '@lib/frontend/app/containers/AppHeader/AppHeader';
+import { AppToolbar } from '@lib/frontend/app/containers/AppToolbar/AppToolbar';
 import { type AppLayoutPropsModel } from '@lib/frontend/app/layouts/AppLayout/AppLayout.models';
 import { KeyboardContainer } from '@lib/frontend/core/components/KeyboardContainer/KeyboardContainer';
 import { PortalHost } from '@lib/frontend/core/components/PortalHost/PortalHost';
@@ -23,7 +23,7 @@ export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props })
           <Wrapper
             flex
             position={SHAPE_POSITION.RELATIVE}>
-            <AppHeader />
+            <AppToolbar />
 
             <Wrapper grow>
               {children}

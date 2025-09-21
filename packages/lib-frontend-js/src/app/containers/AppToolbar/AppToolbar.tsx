@@ -1,7 +1,7 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Logo } from '@lib/frontend/app/components/Logo/Logo';
-import { type AppHeaderPropsModel } from '@lib/frontend/app/containers/AppHeader/AppHeader.models';
 import { AppMenu } from '@lib/frontend/app/containers/AppMenu/AppMenu';
+import { type AppToolbarPropsModel } from '@lib/frontend/app/containers/AppToolbar/AppToolbar.models';
 import { ORDER } from '@lib/frontend/commerce/commerce.constants';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
@@ -18,7 +18,7 @@ import { THEME_COLOR, THEME_ROLE, THEME_SIZE_MORE } from '@lib/frontend/style/st
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 
-export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ ...props }) => {
+export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ ...props }) => {
   const { t } = useTranslation([COMMERCE]);
   const { push } = useRouter();
   const { wrapperProps } = useLayoutStyles({ props });

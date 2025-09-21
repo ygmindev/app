@@ -5,7 +5,10 @@ export type GetEntityResourceFixtureParamsModel<
   TCount extends undefined | number = undefined,
 > = {
   count?: TCount;
-  data(params: { _id: string; index: number }): Omit<TType, keyof EntityResourceModel>;
+  data(params: {
+    _id: string;
+    index: number;
+  }): Partial<EntityResourceModel> & Omit<TType, keyof EntityResourceModel>;
 };
 
 export type GetEntityResourceFixtureModel<

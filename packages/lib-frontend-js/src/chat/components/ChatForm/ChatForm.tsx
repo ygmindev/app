@@ -1,4 +1,5 @@
 import { type ChatFormPropsModel } from '@lib/frontend/chat/components/ChatForm/ChatForm.models';
+import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
@@ -26,7 +27,10 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({ onAdd, ...props }) => {
   };
 
   return (
-    <Wrapper {...wrapperProps}>
+    <Wrapper
+      {...wrapperProps}
+      isAlign
+      isRow>
       <TextInput
         border
         error={errors?.text}
@@ -37,6 +41,11 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({ onAdd, ...props }) => {
         onSubmit={onSubmit}
         round
         value={values.text}
+      />
+
+      <Button
+        icon="send"
+        onPress={onSubmit}
       />
     </Wrapper>
   );

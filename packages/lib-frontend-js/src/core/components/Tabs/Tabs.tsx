@@ -13,7 +13,7 @@ import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
-import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { DIRECTION } from '@lib/frontend/core/core.constants';
 import { type LFCModel, type MeasureModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
@@ -161,7 +161,6 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
               </Activatable>
             ) : (
               <Button
-                elementState={isActiveF ? ELEMENT_STATE.ACTIVE : undefined}
                 height={
                   theme.shape.size[THEME_SIZE.MEDIUM] - theme.shape.spacing[THEME_SIZE.MEDIUM]
                 }
