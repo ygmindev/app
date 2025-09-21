@@ -38,7 +38,7 @@ export class Storage implements StorageModel {
           try {
             await storage.removeItem(key);
             logger.debug('storage remove', key);
-          } catch (e) {
+          } catch {
             continue;
           }
         }

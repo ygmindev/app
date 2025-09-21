@@ -90,7 +90,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
               [ELEMENT_STATE.INACTIVE]: { borderColor: mainColor },
             },
           },
-          childColorRole: THEME_ROLE.CONTRAST,
+          childColorRole: theme.color.isDark ? THEME_ROLE.MAIN : THEME_ROLE.CONTRAST,
           containerAnimation: {
             states: {
               [ELEMENT_STATE.ACTIVE]: {
@@ -169,7 +169,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
               },
             },
           },
-          childColor: isActive ? activeColor : contrastColor,
+          // childColor: isActive ? activeColor : contrastColor,
           childColorRole: THEME_ROLE.MAIN,
           containerAnimation: {
             states: {

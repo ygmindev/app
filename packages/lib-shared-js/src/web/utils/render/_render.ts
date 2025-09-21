@@ -22,7 +22,7 @@ export const _render = async (request: _RenderParamsModel): Promise<_RenderModel
         cookies: {
           expire: (key) => void response.setCookie(key, undefined),
           get: <TType extends string = string>(key: string) =>
-            (response.cookies?.[key] as TType) ?? null,
+            (request.cookies?.[key] as TType) ?? null,
           set: <TType extends string = string>(
             key: string,
             value: TType,

@@ -4,6 +4,7 @@ export type _TextInputPropsModel = {
   autoComplete?: string;
   foregroundColor: string;
   height?: number;
+  isBlurOnSubmit?: boolean;
   isCenter?: boolean;
   isDisabled?: boolean;
   keyboard?: TEXT_INPUT_KEYBOARD;

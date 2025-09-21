@@ -18,9 +18,10 @@ export type FrameworkConfigModel = {
 export type FrameworkRenderParamsModel = RootContextPropsModel & {
   Page?: FCModel;
   enableEagerStreaming?: boolean;
-  getStyleSheet?(): ReactElement;
+  headers?: Record<string, string>;
   redirectTo?: string;
   routes?: Array<RouteModel>;
+  getStyleSheet?(): ReactElement;
 };
 
 export type _FrameworkConfigModel = Config & Vike.Config;

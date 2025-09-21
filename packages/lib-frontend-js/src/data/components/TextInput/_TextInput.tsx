@@ -22,6 +22,7 @@ export const getTextInputParams = (): ComposeComponentParamsModel<
     {
       autoComplete,
       foregroundColor,
+      isBlurOnSubmit,
       isDisabled,
       keyboard,
       language,
@@ -41,6 +42,7 @@ export const getTextInputParams = (): ComposeComponentParamsModel<
     autoCapitalize: 'none',
     autoComplete: getAutoCompleteType(autoComplete, keyboard),
     autoCorrect: false,
+    blurOnSubmit: isBlurOnSubmit,
     editable: !isDisabled,
     inputMode: getKeyboardType(keyboard),
     maxLength,

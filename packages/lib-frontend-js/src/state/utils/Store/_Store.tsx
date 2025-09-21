@@ -88,16 +88,16 @@ export class _Store<
   TParams extends Record<TKeys[number], object>,
 > implements _StoreModel<TKeys, TType, TParams>
 {
-  protected store: EnhancedStore<TType>;
   protected actions: {
     [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKey]>, TKey>;
   };
   protected defaultState: NestedDefaultStateModel<TKeys, TType>;
   protected persistedState?: NestedDefaultStateModel<TKeys, TType>;
+  protected persistor: Persistor;
   protected persistors: {
     [TKey in TKeys[number]]?: PersistConfig<TType[TKey]>;
   };
-  protected persistor: Persistor;
+  protected store: EnhancedStore<TType>;
 
   constructor({ cookies, initialState, reducers }: _StoreParamsModel<TKeys, TType, TParams>) {
     const {
@@ -109,7 +109,6 @@ export class _Store<
       reducers,
       (result, reducer, name) => {
         type StateModel = TType[TKeys[number]];
-
         const storage = new Storage({ cookies });
 
         // TODO: better typing

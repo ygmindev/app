@@ -1,8 +1,8 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import fileConfig from '@lib/config/file/file';
 import { EXCLUDE_PATTERNS } from '@lib/config/file/file.constants';
-import { DATETIME_FORMAT } from '@lib/shared/datetime/datetime.models';
 import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
+import { DATETIME_FORMAT } from '@lib/shared/datetime/utils/DateTime/DateTime.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type BackupParamsModel } from '@tool/task/core/tasks/backup/backup.models';
 import kebabCase from 'lodash/kebabCase';
@@ -23,7 +23,7 @@ const backup: TaskParamsModel<BackupParamsModel> = {
       const dest = join(
         backupPath,
         `${kebabCase(options?.name)}-${kebabCase(
-          new DateTime().format(DATETIME_FORMAT.DATE_TIME_MINUTES),
+          new DateTime().format(DATETIME_FORMAT.DATE_HOUR_MINUTE),
         )}`,
       );
       return `mkdir -p backups && mkdir -p ${dest} && rsync -r ${includesF.join(' ')}  ${excludesF

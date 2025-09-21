@@ -10,6 +10,7 @@ import { props as areaChartProps } from '@lib/frontend/chart/components/AreaChar
 import { props as barChartProps } from '@lib/frontend/chart/components/BarChart/BarChart.library';
 import { props as lineChartProps } from '@lib/frontend/chart/components/LineChart/LineChart.library';
 import { props as scatterChartProps } from '@lib/frontend/chart/components/ScatterChart/ScatterChart.library';
+import { props as chatContainerProps } from '@lib/frontend/chat/components/ChatContainer/ChatContainer.library';
 import { props as activatableProps } from '@lib/frontend/core/components/Activatable/Activatable.library';
 import { props as buttonProps } from '@lib/frontend/core/components/Button/Button.library';
 import { props as buttonGroupProps } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup.library';
@@ -37,7 +38,7 @@ import { props as webViewProps } from '@lib/frontend/core/components/WebView/Web
 import { props as wrapperProps } from '@lib/frontend/core/components/Wrapper/Wrapper.library';
 import { props as modalFormButtonProps } from '@lib/frontend/core/containers/ModalFormButton/ModalFormButton.library';
 import { props as calendarInputProps } from '@lib/frontend/data/components/CalendarInput/CalendarInput.library';
-import { props as checkboxInput } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput.library';
+import { props as checkboxInputProps } from '@lib/frontend/data/components/CheckboxInput/CheckboxInput.library';
 import { props as dateInputProps } from '@lib/frontend/data/components/DateInput/DateInput.library';
 import { props as fileInputProps } from '@lib/frontend/data/components/FileInput/FileInput.library';
 import { props as menuInputProps } from '@lib/frontend/data/components/MenuInput/MenuInput.library';
@@ -45,7 +46,7 @@ import { props as numberInputProps } from '@lib/frontend/data/components/NumberI
 import { props as selectInputProps } from '@lib/frontend/data/components/SelectInput/SelectInput.library';
 import { props as switchInputProps } from '@lib/frontend/data/components/SwitchInput/SwitchInput.library';
 import { props as textInputProps } from '@lib/frontend/data/components/TextInput/TextInput.library';
-import { props as yesNoInput } from '@lib/frontend/data/components/YesNoInput/YesNoInput.library';
+import { props as yesNoInputProps } from '@lib/frontend/data/components/YesNoInput/YesNoInput.library';
 import { props as countryInputProps } from '@lib/frontend/locale/components/CountryInput/CountryInput.library';
 import { props as addressInputProps } from '@lib/frontend/map/components/AddressInput/AddressInput.library';
 import { props as notificationProps } from '@lib/frontend/notification/components/Notification/Notification.library';
@@ -70,7 +71,8 @@ export const LIBRARY_PROPS = [
   buttonProps,
   calendarInputProps,
   categoryInputProps,
-  checkboxInput,
+  chatContainerProps,
+  checkboxInputProps,
   chipProps,
   circleProps,
   countryInputProps,
@@ -114,5 +116,5 @@ export const LIBRARY_PROPS = [
   userInputProps,
   webViewProps,
   wrapperProps,
-  yesNoInput,
+  yesNoInputProps,
 ];

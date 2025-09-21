@@ -1,4 +1,3 @@
-import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
@@ -41,8 +40,6 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
             width={widthF}>
             {topElement}
           </Wrapper>
-
-          {isFullHeight && <Divider />}
         </Wrapper>
       )}
 
@@ -64,8 +61,6 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
 
       {bottomElement && (
         <Wrapper isFullWidth>
-          {isFullHeight && <Divider />}
-
           <Wrapper
             isFullWidth={isFullWidthF}
             mHorizontal="auto"

@@ -10,9 +10,10 @@ import { uid } from '@lib/shared/core/utils/uid/uid';
 
 export const config = defineConfig<PackageManagerConfigModel>({
   params: () => ({
-    // fixedVersions: {
-    //   eslint: '^8.56.0',
-    // },
+    fixedVersions: {
+      // https://github.com/software-mansion/react-native-reanimated/issues/8254
+      'react-native-reanimated': '^3.19.1',
+    },
 
     installCommand: (names, packages, options = {}) =>
       `corepack use pnpm@latest && ${

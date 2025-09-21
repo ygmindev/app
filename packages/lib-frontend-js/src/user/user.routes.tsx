@@ -16,6 +16,7 @@ import { ACCOUNT } from '@lib/shared/user/user.constants';
 export const userRoutes: Array<RouteModel> = [
   {
     isProtectable: true,
+    navigation: ROUTE_NAVIGATION.LIST,
     pathname: ACCOUNT,
     previous: '/',
     routes: [

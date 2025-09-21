@@ -51,7 +51,6 @@ export const onBeforeServer = async (
   const initialState = await store.getStatePersisted();
   const token = initialState?.[AUTH]?.token;
   const requestContext: RequestContextModel | undefined = {};
-
   let userId: string | undefined;
   try {
     const signIn = token?.access && (await getTokenFromHeader(`Bearer ${token.access}`));

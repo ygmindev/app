@@ -45,7 +45,6 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
       : params.prefix
         ? this._api?.prefix
         : undefined;
-
     const pathname = `/${joinPaths([prefix, params.pathname])}`;
     logger.info(
       `${isArray(params.method) ? params.method.join(',') : params.method} ${uri({
@@ -59,19 +58,15 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
   async run(): Promise<void> {
     await handleCleanup({ onCleanUp: this.handleClose });
     handleHmr({ onChange: this.handleClose });
-
     for (const [plugin, params] of this._plugins ?? []) {
       await plugin(this, params);
     }
-
     for (const route of this._api?.routes ?? []) {
       // graphql routes are handled by graphqlPlugin
       route.type !== API_ENDPOINT_TYPE.GRAPHQL && (await this.register(route));
     }
-
     await this._onInitialize?.();
     await super.run();
-
     await new Promise(() => {});
   }
 }

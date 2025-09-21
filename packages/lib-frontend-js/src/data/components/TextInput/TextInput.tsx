@@ -50,6 +50,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   height,
   icon,
   isAutoFocus,
+  isBlurOnSubmit = true,
   isCenter,
   isClearable = true,
   isRightElementFixed = true,
@@ -275,7 +276,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
           <Component
             autoComplete={autoComplete}
             foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
-            height={theme.shape.size[THEME_SIZE.SMALL]}
+            height={height ?? theme.shape.size[THEME_SIZE.SMALL]}
+            isBlurOnSubmit={isBlurOnSubmit}
             isCenter={isCenter}
             isDisabled={isBlocked}
             keyboard={keyboard}

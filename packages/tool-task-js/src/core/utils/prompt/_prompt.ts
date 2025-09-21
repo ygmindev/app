@@ -79,12 +79,13 @@ export const _prompt = async <TType extends unknown>(
           case PROMPT_TYPE.MULTIPLE:
             return checkbox({ choices: await getChoices(), message: messageF });
           case PROMPT_TYPE.DIRECTORY:
-            return fileSelector({
-              allowCancel: true,
-              basePath,
-              message: messageF,
-              type: 'file+directory',
-            });
+            return (
+              await fileSelector({
+                allowCancel: true,
+                basePath,
+                message: messageF,
+              })
+            )?.path;
           default:
             throw new InvalidArgumentError('prompt type');
         }
