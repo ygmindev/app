@@ -92,6 +92,8 @@ export const config = defineConfig<ThemeConfigModel>({
 
       header: {
         height: 58,
+
+        width: 250,
       },
 
       height: {
@@ -100,10 +102,6 @@ export const config = defineConfig<ThemeConfigModel>({
         [THEME_SIZE.MEDIUM]: 500,
 
         [THEME_SIZE.LARGE]: 750,
-      },
-
-      navigation: {
-        width: 200,
       },
 
       scrollBar: {

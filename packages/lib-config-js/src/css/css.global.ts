@@ -5,6 +5,7 @@ import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontSty
 import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
 import MaterialCommunityIcons from 'react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf';
+import Octicons from 'react-native-vector-icons/Fonts/Octicons.ttf';
 
 export const config = defineConfig<CssConfigModel>({
   params: () => ({
@@ -22,6 +23,11 @@ export const config = defineConfig<CssConfigModel>({
     @font-face {
       font-family: 'MaterialCommunityIcons';
       src: url("${MaterialCommunityIcons as string}") format("truetype");
+    }
+
+    @font-face {
+      font-family: 'Octicons';
+      src: url("${Octicons as string}") format("truetype");
     }
   
     html {

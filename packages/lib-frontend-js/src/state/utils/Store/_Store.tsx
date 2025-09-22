@@ -11,6 +11,7 @@ import {
 } from '@lib/frontend/state/utils/Store/_Store.models';
 import { type StateProviderPropsModel } from '@lib/frontend/state/utils/Store/Store.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { getValue } from '@lib/shared/core/utils/getValue/getValue';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { mapValuesAsync } from '@lib/shared/core/utils/mapValuesAsync/mapValuesAsync';
 import { isServer } from '@lib/shared/web/utils/isServer/isServer';
@@ -31,7 +32,9 @@ import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'lodash/mapValues';
 import reduce from 'lodash/reduce';
+import set from 'lodash/set';
 import uniq from 'lodash/uniq';
+import unset from 'lodash/unset';
 import { cloneElement, type ComponentType, type ReactElement, useMemo } from 'react';
 import { Provider as _Provider, useDispatch } from 'react-redux';
 import { type PersistConfig, type Persistor } from 'redux-persist';
@@ -64,7 +67,6 @@ const StoreContextProvider = <
   const actionsF = mapValues(actions, (actions) =>
     mapValues(actions, (action) => (value: unknown) => dispatch(action(value) as UnknownAction)),
   ) as NestedActionsModel<TKeys, TType, TParams>;
-
   const providers = useMemo<Array<ReactElement>>(
     () =>
       filterNil([
@@ -204,15 +206,15 @@ export class _Store<
                 (action as ActionModel<StateModel, unknown>)(
                   {
                     get: <TKey extends keyof StateModel>(key: TKey) =>
-                      original(state as StateModel)?.[key] as StateModel[TKey],
+                      getValue(original(state as StateModel), key as string) as StateModel[TKey],
                     set: <TKey extends keyof StateModel>(
                       key: TKey,
                       value: StateModel[TKey],
                     ): void => {
-                      (state as StateModel)[key] = value;
+                      void set(state, key, value);
                     },
                     unset: <TKey extends keyof StateModel>(key: TKey): void => {
-                      delete (state as StateModel)[key];
+                      unset(state, key);
                     },
                   },
                   payload,

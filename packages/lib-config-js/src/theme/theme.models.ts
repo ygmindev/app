@@ -46,13 +46,11 @@ export type ThemeConfigModel = {
 
     header: {
       height: number;
+
+      width: number;
     };
 
     height: Record<THEME_SIZE, number>;
-
-    navigation: {
-      width: number;
-    };
 
     scrollBar: {
       thickness: number;

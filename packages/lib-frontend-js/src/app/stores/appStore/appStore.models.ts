@@ -6,6 +6,9 @@ export type AppStateModel = {
   dimension: DimensionModel;
   isLoading?: boolean;
   isOffline?: boolean;
+  layout: {
+    isMinimized: boolean;
+  };
 };
 
 export type AppActionsParamsModel = EmptyObjectModel;

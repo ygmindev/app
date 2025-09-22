@@ -5,6 +5,7 @@ import {
   ICONS,
   IONIC_ICONS,
   MATERIAL_ICONS,
+  OCTICON_ICONS,
 } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { type RTFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
@@ -14,6 +15,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { type IconProps } from 'react-native-vector-icons/Icon';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Octicons from 'react-native-vector-icons/Octicons';
 
 export const _Icon: RTFCModel<AnimatableTextRefModel, _IconPropsModel> = ({
   icon,
@@ -30,7 +32,9 @@ export const _Icon: RTFCModel<AnimatableTextRefModel, _IconPropsModel> = ({
             ? FontAwesome
             : (MATERIAL_ICONS as Record<string, string>)[icon]
               ? MaterialCommunityIcons
-              : null,
+              : (OCTICON_ICONS as Record<string, string>)[icon]
+                ? Octicons
+                : undefined,
       [icon],
     );
 

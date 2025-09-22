@@ -5,7 +5,7 @@ import {
   type WithTestScreenParamsModel,
 } from '@lib/backend/test/utils/withTestScreen/withTestScreen.models';
 import { config as databaseConfig } from '@lib/config/database/database.mongo';
-import { APP_MENU_TEST_ID } from '@lib/frontend/app/containers/AppMenu/AppMenu.constants';
+import { APP_MENU_BUTTON_TEST_ID } from '@lib/frontend/app/containers/AppMenuButton/AppMenuButton.constants';
 import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 import { KEY_TYPE, SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
@@ -42,10 +42,10 @@ export const withTestScreen = ({
 
       // verify user
       await screen
-        .find({ type: SELECTOR_TYPE.TEST_ID, value: `${APP_MENU_TEST_ID}-toggle` })
+        .find({ type: SELECTOR_TYPE.TEST_ID, value: `${APP_MENU_BUTTON_TEST_ID}-toggle` })
         .then((h) => h?.press());
       await screen
-        .find({ value: `${APP_MENU_TEST_ID}-title` })
+        .find({ value: `${APP_MENU_BUTTON_TEST_ID}-title` })
         .then((h) => h?.find({ type: SELECTOR_TYPE.TEXT, value: emailF }));
     }
   });

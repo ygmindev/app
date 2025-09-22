@@ -159,10 +159,15 @@ export const MATERIAL_ICONS = {
   textbox: 'form-textbox',
 };
 
+export const OCTICON_ICONS = {
+  sidebarMinimize: 'sidebar-expand',
+};
+
 export const ICONS = {
   ...IONIC_ICONS,
   ...FONTAWESOME_ICONS,
   ...MATERIAL_ICONS,
+  ...OCTICON_ICONS,
 };
 
 export const ICON_FONT_SIZE_OFFSET = 4;
