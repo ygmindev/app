@@ -1,3 +1,4 @@
+import { APP_MENU_BUTTON_TEST_ID } from '@lib/frontend/app/containers/AppMenuButton/AppMenuButton.constants';
 import { _Dropdown } from '@lib/frontend/core/components/Dropdown/_Dropdown';
 import {
   type DropdownPropsModel,
@@ -20,6 +21,8 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = ({
   isOpen,
   maxHeight,
   maxWidth,
+  minHeight,
+  minWidth,
   onToggle,
   ref,
   width,
@@ -33,6 +36,9 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = ({
     scrollTo: (params) => wrapperRef?.current?.scrollTo(params),
     toggle: onToggle,
   }));
+  if (props.testID === APP_MENU_BUTTON_TEST_ID) {
+    console.warn(`@${width} ${isFullWidth}`);
+  }
   return (
     <_Dropdown
       anchor={anchor}
@@ -45,7 +51,7 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = ({
       onToggle={onToggle}
       style={styles}>
       <Wrapper
-        isFullWidth={width ? undefined : true}
+        isFullWidth={width ? undefined : isFullWidth}
         isHidden={isHidden}
         p={THEME_SIZE.SMALL}
         testID={props.testID}>
@@ -56,6 +62,8 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = ({
           isOverflowHidden
           isShadow
           maxWidth={maxWidth}
+          minHeight={minHeight}
+          minWidth={minWidth}
           round
           width={width}>
           <Wrapper

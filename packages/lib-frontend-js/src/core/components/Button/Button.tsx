@@ -215,14 +215,16 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
   );
 
   const iconF = icon ? (
-    <Icon
-      align={FONT_ALIGN.CENTER}
-      color={colorF}
-      colorRole={childColorRole}
-      icon={icon}
-      iconText={iconText}
-      width={isIconOnly ? undefined : theme.shape.size[THEME_SIZE_MORE.XSMALL]}
-    />
+    <Wrapper
+      isCenter
+      width={isIconOnly ? undefined : theme.shape.size[THEME_SIZE_MORE.XSMALL]}>
+      <Icon
+        color={colorF}
+        colorRole={childColorRole}
+        icon={icon}
+        iconText={iconText}
+      />
+    </Wrapper>
   ) : undefined;
 
   childrenF = childrenF ? (

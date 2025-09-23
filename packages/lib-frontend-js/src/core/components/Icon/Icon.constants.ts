@@ -160,6 +160,7 @@ export const MATERIAL_ICONS = {
 };
 
 export const OCTICON_ICONS = {
+  sidebarMaximize: 'sidebar-collapse',
   sidebarMinimize: 'sidebar-expand',
 };
 

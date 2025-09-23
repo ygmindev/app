@@ -18,6 +18,7 @@ import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
@@ -45,6 +46,7 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
   const isMobile = useIsMobile();
+  const theme = useTheme();
   const dropdownRef = useRef<DropdownRefModel>(null);
 
   const { elementStateControlledSet, isActive, isBlocked } = useElementStateControlled({
@@ -116,6 +118,7 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
       testID={props.testID ? `${props.testID}-body` : undefined}
     />
   );
+
   return isMobile ? (
     <>
       {anchorF}
@@ -137,6 +140,7 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
       isFullWidth={isFullWidth}
       isHidden={!options?.length}
       isOpen={isActive}
+      minWidth={theme.shape.width[THEME_SIZE.LARGE]}
       onToggle={handleToggle}
       ref={dropdownRef}
       width={width}>

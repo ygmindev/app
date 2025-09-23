@@ -26,6 +26,8 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) =
   const { signOut } = useSignInResource();
   const { push } = useRouter();
   const [authStatus] = useStore('auth.status');
+  const [isMinimized] = useStore('app.layout.isMinimized');
+
   const menuRef = useRef<MenuRefModel>(null);
   const isAuthenticated = authStatus === AUTH_STATUS.AUTHENTICATED;
   const currentUser = useCurrentUser();
