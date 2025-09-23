@@ -18,7 +18,6 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const [isMinimized, isMinimizedSet] = useStore('app.layout.isMinimized');
-  console.warn(isMinimizedSet);
   return (
     <Wrapper
       {...wrapperProps}
@@ -38,7 +37,7 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ ...props }) => {
           <Wrapper>
             <Button
               icon="sidebarMinimize"
-              onPress={() => isMinimizedSet(true)}
+              onPress={() => isMinimizedSet(!isMinimized)}
               tooltip={t('app:closeSidebar')}
               type={BUTTON_TYPE.INVISIBLE}
             />
