@@ -21,7 +21,6 @@ export const _withEntity = <TType extends unknown>({
     !isInputOnly && isSchema && ObjectType(nameF)(target as unknown as ClassModel);
     isSchemaInput &&
       InputType(isInputOnly ? nameF : `${nameF}Input`)(target as unknown as ClassModel);
-
     let BaseF = target;
     if (isDatabase) {
       const Base = (isEmbeddable ? Embeddable : Entity)({
@@ -30,12 +29,13 @@ export const _withEntity = <TType extends unknown>({
         tableName: nameF,
       })(target as unknown as ClassModel);
       isEmbeddable && (BaseF = Base as TType);
+
+      for (const { keys, type } of indices) {
+        BaseF = Index({ properties: keys as Array<never>, type })(
+          BaseF as unknown as ClassModel,
+        ) as TType;
+      }
     }
 
-    for (const { keys, type } of indices) {
-      BaseF = Index({ properties: keys as Array<never>, type })(
-        BaseF as unknown as ClassModel,
-      ) as TType;
-    }
     return BaseF;
   }) as _WithEntityModel;

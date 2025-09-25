@@ -1,5 +1,5 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
+import { createProtectedResoureImplementation } from '@lib/backend/resource/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
 import { CHAT_RESOURCE_NAME } from '@lib/model/chat/Chat/Chat.constants';
 import { Chat } from '@lib/model/chat/Chat/Chat.entity';
 import { type ChatModel } from '@lib/model/chat/Chat/Chat.models';
@@ -7,7 +7,7 @@ import { type ChatImplementationModel } from '@lib/model/chat/Chat/ChatImplement
 
 @withContainer()
 export class ChatImplementation
-  extends createEntityResourceImplementation<ChatModel>({
+  extends createProtectedResoureImplementation<ChatModel>({
     Resource: Chat,
     name: CHAT_RESOURCE_NAME,
   })

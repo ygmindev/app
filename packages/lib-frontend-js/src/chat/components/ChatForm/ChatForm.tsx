@@ -7,6 +7,7 @@ import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const ChatForm: LFCModel<ChatFormPropsModel> = ({ onAdd, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -23,7 +24,7 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({ onAdd, ...props }) => {
 
   const onSubmit = async (): Promise<void> => {
     handleSubmit();
-    handleReset();
+    void sleep().then(handleReset);
   };
 
   return (

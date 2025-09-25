@@ -4,10 +4,11 @@ export class HttpError extends Error {
   statusCode: number;
 
   constructor(statusCode?: number, message?: string, stack?: string) {
-    super();
-    Object.setPrototypeOf(this, HttpError.prototype);
+    super(message ?? 'HttpError');
     this.statusCode = statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR;
-    this.message = message ?? 'HttpError';
-    this.stack = stack;
+    Error.captureStackTrace(this, HttpError);
+
+    // Object.setPrototypeOf(this, HttpError.prototype);
+    // this.stack = stack;
   }
 }

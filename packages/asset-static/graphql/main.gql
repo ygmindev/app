@@ -863,6 +863,27 @@ type ChatGetManyOutput {
   result: [Chat]
 }
 
+input ChatGetManyProtectedGetManyFilterInput {
+  booleanValue: Boolean
+  condition: String
+  dateValue: DateTimeISO
+  field: String
+  numberValue: Float
+  resourceArrayValue: [ChatInput!]
+  resourceValue: ChatInput
+  stringArrayValue: [String!]
+  stringValue: String
+}
+
+input ChatGetManyProtectedGetManyInput {
+  filter: [ChatGetManyProtectedGetManyFilterInput!]
+  root: String
+}
+
+type ChatGetManyProtectedGetManyOutput {
+  result: [Chat]
+}
+
 type ChatGetOutput {
   result: Chat
 }
@@ -1740,7 +1761,6 @@ input LinkedUserUpdateUpdateInput {
 }
 
 type Message {
-  Group: Group
   _id: String
   chat: Chat
   created: DateTimeISO
@@ -2288,7 +2308,7 @@ type Otp {
 input OtpCreateFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-21T16:54:38.562Z"
+  created: DateTimeISO = "2025-09-24T03:55:58.230Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2304,7 +2324,7 @@ input OtpCreateInput {
 input OtpCreateManyFormInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-21T16:54:38.562Z"
+  created: DateTimeISO = "2025-09-24T03:55:58.230Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2403,7 +2423,7 @@ type OtpGetOutput {
 input OtpInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-21T16:54:38.562Z"
+  created: DateTimeISO = "2025-09-24T03:55:58.230Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2475,7 +2495,7 @@ type OtpUpdateManyOutput {
 input OtpUpdateManyUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-21T16:54:38.562Z"
+  created: DateTimeISO = "2025-09-24T03:55:58.230Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -2490,7 +2510,7 @@ type OtpUpdateOutput {
 input OtpUpdateUpdateInput {
   _id: String
   callingCode: String
-  created: DateTimeISO = "2025-09-21T16:54:38.562Z"
+  created: DateTimeISO = "2025-09-24T03:55:58.230Z"
   email: String
   isCheckExists: String
   isFixture: Boolean
@@ -3019,6 +3039,7 @@ type Query {
   ChatGet(input: ChatGetInput): ChatGetOutput
   ChatGetConnection(input: ChatGetConnectionInput): ChatGetConnectionOutput
   ChatGetMany(input: ChatGetManyInput): ChatGetManyOutput
+  ChatGetManyProtectedGetMany(input: ChatGetManyProtectedGetManyInput): ChatGetManyProtectedGetManyOutput
   ChatSearch(input: ChatSearchInput): ChatSearchOutput
   CurveGet(input: CurveGetInput): CurveGetOutput
   CurveGetConnection(input: CurveGetConnectionInput): CurveGetConnectionOutput
@@ -3414,7 +3435,7 @@ type Socket {
 input SocketCreateFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-21T16:54:38.562Z"
+  created: DateTimeISO = "2025-09-24T03:55:58.234Z"
   isFixture: Boolean
   name: String
 }
@@ -3427,7 +3448,7 @@ input SocketCreateInput {
 input SocketCreateManyFormInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-21T16:54:38.562Z"
+  created: DateTimeISO = "2025-09-24T03:55:58.234Z"
   isFixture: Boolean
   name: String
 }
@@ -3523,7 +3544,7 @@ type SocketGetOutput {
 input SocketInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-21T16:54:38.562Z"
+  created: DateTimeISO = "2025-09-24T03:55:58.234Z"
   isFixture: Boolean
   name: String
 }
@@ -3592,7 +3613,7 @@ type SocketUpdateManyOutput {
 input SocketUpdateManyUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-21T16:54:38.562Z"
+  created: DateTimeISO = "2025-09-24T03:55:58.234Z"
   isFixture: Boolean
   name: String
 }
@@ -3604,7 +3625,7 @@ type SocketUpdateOutput {
 input SocketUpdateUpdateInput {
   _id: String
   connections: String
-  created: DateTimeISO = "2025-09-21T16:54:38.562Z"
+  created: DateTimeISO = "2025-09-24T03:55:58.234Z"
   isFixture: Boolean
   name: String
 }

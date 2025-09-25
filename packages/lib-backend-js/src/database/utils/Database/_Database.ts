@@ -31,7 +31,6 @@ import {
 } from '@mikro-orm/mongodb';
 import forEach from 'lodash/forEach';
 import isNil from 'lodash/isNil';
-import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import toString from 'lodash/toString';
 import {
@@ -265,7 +264,6 @@ export class _Database implements _DatabaseModel {
     isLeaf?: boolean,
   ): Partial<TType> => {
     if (!form) throw new NotFoundError('form');
-    const formF = { ...form } as Record<string, unknown>;
     const em = this.getEntityManager();
     if (isLeaf) {
       const entity = em.create(name as EntityName<object>, {});
@@ -278,9 +276,10 @@ export class _Database implements _DatabaseModel {
         : (new ObjectId() as unknown as string);
       return entity;
     }
+    const formF = { ...form } as Record<string, unknown>;
     const meta = em.getMetadata().get(name);
     forEach(meta.properties, (v) => {
-      const value = (form as Record<string, unknown>)[v.name];
+      const value = formF[v.name];
       switch (v.kind) {
         case ReferenceKind.EMBEDDED:
         case ReferenceKind.ONE_TO_MANY:
@@ -300,8 +299,15 @@ export class _Database implements _DatabaseModel {
           break;
         }
         case ReferenceKind.MANY_TO_ONE: {
-          if (!!value && isPlainObject(value)) {
-            formF[v.name] = em.create(v.type, value);
+          if (value) {
+            const valueF = em.create(v.type, value);
+            const id = (valueF as EntityResourceModel)._id;
+            (valueF as EntityResourceModel)._id = id
+              ? isString(id)
+                ? (new ObjectId(id) as unknown as string)
+                : id
+              : (new ObjectId() as unknown as string);
+            formF[v.name] = valueF;
           }
           break;
         }

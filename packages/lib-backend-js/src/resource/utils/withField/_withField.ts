@@ -75,7 +75,6 @@ export const _withField =
     }
     if (isArray) {
       ormType = ArrayType;
-
       const gqlTypeF = gqlType;
       gqlType = () => [gqlTypeF()];
     }

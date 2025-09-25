@@ -31,6 +31,10 @@ export class _QueryClient implements _QueryClientModel {
     }
   }
 
+  clear = async (): Promise<void> => {
+    void this._client.clear();
+  };
+
   prefetch = async (
     ...[id, query, params]: _UseQueryParamsModel<unknown, unknown>
   ): Promise<void> => {
@@ -39,10 +43,6 @@ export class _QueryClient implements _QueryClientModel {
       queryFn: async () => query(params),
       queryKey: idF,
     });
-  };
-
-  clear = async (): Promise<void> => {
-    void this._client.clear();
   };
 
   public get client(): QueryClient {

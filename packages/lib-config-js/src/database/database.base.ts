@@ -15,7 +15,7 @@ import { Card } from '@lib/model/billing/Card/Card.entity';
 import { Chat } from '@lib/model/chat/Chat/Chat.entity';
 import { Message } from '@lib/model/chat/Message/Message.entity';
 import { Order } from '@lib/model/commerce/Order/Order.entity';
-import Pricing from '@lib/model/commerce/Pricing/Pricing.entity';
+import { Pricing } from '@lib/model/commerce/Pricing/Pricing.entity';
 import { Product } from '@lib/model/commerce/Product/Product.entity';
 import { Group } from '@lib/model/group/Group/Group.entity';
 import { Socket } from '@lib/model/http/Socket/Socket.entity';

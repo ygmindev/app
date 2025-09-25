@@ -1,4 +1,3 @@
-import { APP_MENU_BUTTON_TEST_ID } from '@lib/frontend/app/containers/AppMenuButton/AppMenuButton.constants';
 import { _Dropdown } from '@lib/frontend/core/components/Dropdown/_Dropdown';
 import {
   type DropdownPropsModel,
@@ -36,9 +35,6 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = ({
     scrollTo: (params) => wrapperRef?.current?.scrollTo(params),
     toggle: onToggle,
   }));
-  if (props.testID === APP_MENU_BUTTON_TEST_ID) {
-    console.warn(`@${width} ${isFullWidth}`);
-  }
   return (
     <_Dropdown
       anchor={anchor}

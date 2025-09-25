@@ -1,7 +1,7 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createProtectedResoureImplementation } from '@lib/backend/resource/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
-import { Message } from '@lib/model/chat/Message/Message.entity';
 import { MESSAGE_RESOURCE_NAME } from '@lib/model/chat/Message/Message.constants';
+import { Message } from '@lib/model/chat/Message/Message.entity';
 import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 import { type MessageImplementationModel } from '@lib/model/chat/Message/MessageImplementation/MessageImplementation.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';

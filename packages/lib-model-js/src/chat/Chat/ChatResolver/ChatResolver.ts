@@ -1,6 +1,6 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
-import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
+import { createProtectedResourceResolver } from '@lib/backend/resource/utils/createProtectedResourceResolver/createProtectedResourceResolver';
 import { withResourceInput } from '@lib/backend/resource/utils/withResourceInput/withResourceInput';
 import { withResourceOutput } from '@lib/backend/resource/utils/withResourceOutput/withResourceOutput';
 import { withRoot } from '@lib/backend/resource/utils/withRoot/withRoot';
@@ -20,7 +20,7 @@ import { ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/R
 @withContainer()
 @withResolver({ Resource: () => Chat })
 export class ChatResolver
-  extends createEntityResourceResolver<ChatModel>({
+  extends createProtectedResourceResolver<ChatModel>({
     Resource: () => Chat,
     ResourceImplementation: ChatImplementation,
     name: CHAT_RESOURCE_NAME,

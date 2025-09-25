@@ -1,7 +1,5 @@
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
-import { withFieldResolver } from '@lib/backend/http/utils/withFieldResolver/withFieldResolver';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
-import { withSelf } from '@lib/backend/http/utils/withSelf/withSelf';
 import {
   type CreateProtectedResourceResolverModel,
   type CreateProtectedResourceResolverParamsModel,
@@ -11,9 +9,6 @@ import { withResourceInput } from '@lib/backend/resource/utils/withResourceInput
 import { withResourceOutput } from '@lib/backend/resource/utils/withResourceOutput/withResourceOutput';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/ProtectedResource.models';
-import { Group } from '@lib/model/group/Group/Group.entity';
-import { type GroupModel } from '@lib/model/group/Group/Group.models';
-import { type PartialModel } from '@lib/shared/core/core.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
@@ -44,10 +39,10 @@ export const createProtectedResourceResolver = <TType extends ProtectedResourceM
       return this.implementation.getManyProtected(input, context);
     }
 
-    @withFieldResolver({ Resource: () => Group })
-    async Group(@withSelf() self: TType): Promise<PartialModel<GroupModel> | null> {
-      return this.implementation.Group?.(self) ?? null;
-    }
+    // @withFieldResolver({ Resource: () => Group })
+    // async Group(@withSelf() self: TType): Promise<PartialModel<GroupModel> | null> {
+    //   return this.implementation.Group?.(self) ?? null;
+    // }
   }
   return ProtectedResourceResolver;
 };

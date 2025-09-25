@@ -2,6 +2,7 @@ import {
   type CreateProtectedResourceModel,
   type CreateProtectedResourceParamsModel,
 } from '@lib/backend/resource/utils/createProtectedResource/createProtectedResource.models';
+import { RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';
 import { ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/ProtectedResource.models';
@@ -18,7 +19,7 @@ export const createProtectedResource = (
     // [GROUP_RESOURCE_NAME]?: RefFieldModel<GroupModel>;
 
     @withManyToOneField({ Resource: () => User, isDatabase })
-    createdBy?: UserModel;
+    createdBy?: RefModel<UserModel>;
   }
   return ProtectedResource;
 };

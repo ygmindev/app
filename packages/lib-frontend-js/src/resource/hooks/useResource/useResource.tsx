@@ -9,6 +9,7 @@ import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
+import uniqBy from 'lodash/uniqBy';
 
 export const toGraphqlParamsFields = <TType,>(
   fields?: ResourceFieldsModel<TType>,
@@ -40,10 +41,9 @@ export const useResource = <TType extends EntityResourceModel, TRoot = undefined
   name,
   root,
 }: UseResourceParamsModel<TType, TRoot>): UseResourceModel<TType, TRoot> => {
-  const fieldsF = toGraphqlParamsFields<TType>([
-    { id: '_id' as StringKeyModel<TType> },
-    ...(fields ?? []),
-  ]);
+  const fieldsF = toGraphqlParamsFields<TType>(
+    uniqBy([{ id: '_id' as StringKeyModel<TType> }, ...(fields ?? [])], 'id'),
+  );
 
   const { query: get } = useResourceMethod<RESOURCE_METHOD_TYPE.GET, TType, TRoot>({
     after: afterGet,
@@ -177,6 +177,8 @@ export const useResource = <TType extends EntityResourceModel, TRoot = undefined
     getConnection,
 
     getMany,
+
+    name,
 
     remove,
 
