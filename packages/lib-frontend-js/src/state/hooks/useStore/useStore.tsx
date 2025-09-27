@@ -27,6 +27,7 @@ export const useStore = <TKey extends DeepKeyModel<RootStateModel>>(
     isEmpty(value) ? defaultValue : value,
     (params?: GetValueModel<RootStateModel, TKey>) =>
       actions?.[store as keyof RootActionsModel]?.set({ key: path.join('.'), value: params }),
+    () => actions?.[store as keyof RootActionsModel]?.unset({ key: path.join('.') }),
   ];
 };
 

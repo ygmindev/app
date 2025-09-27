@@ -120,7 +120,9 @@ export class _Store<
               return currentState;
             },
             unset: (state, action: PayloadAction<{ key: string }>) => {
-              unset(state, action.payload.key);
+              const currentState = state as unknown as TType[TKeys[number]];
+              unset(currentState, action.payload.key);
+              return currentState;
             },
           },
         });

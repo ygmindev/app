@@ -39,6 +39,12 @@ export const _render = async (request: _RenderParamsModel): Promise<_RenderModel
     redirectTo: undefined,
     urlOriginal: request.url,
   });
+  response.headers = {
+    ...response.headers,
+    ['Accept-CH']: 'Sec-CH-Prefers-Color-Scheme',
+    ['Critical-CH']: 'Sec-CH-Prefers-Color-Scheme',
+    Vary: 'Sec-CH-Prefers-Color-Scheme',
+  };
   response.redirectTo = redirectTo;
   errorWhileRendering && (response.error = errorWhileRendering as Error);
   const transform = new PassThrough();

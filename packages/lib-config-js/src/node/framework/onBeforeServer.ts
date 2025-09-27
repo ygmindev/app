@@ -6,7 +6,7 @@ import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/g
 import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { config as databaseConfig } from '@lib/config/database/database.mongo';
-import { type FrameworkRenderParamsModel } from '@lib/config/node/framework/framework.models';
+import { type onBeforeServerModel } from '@lib/config/node/framework/framework.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { QueryClient } from '@lib/frontend/data/utils/QueryClient/QueryClient';
@@ -17,12 +17,14 @@ import {
   type RootStateModel,
 } from '@lib/frontend/root/stores/rootStore.models';
 import { Store } from '@lib/frontend/state/utils/Store/Store';
+import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { QUERY } from '@lib/shared/query/query.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 import { matchRoutes } from '@lib/shared/route/utils/matchRoutes/matchRoutes';
 import { STATE } from '@lib/shared/state/state.constants';
+import { STYLE } from '@lib/shared/style/style.constants';
 import { USER } from '@lib/shared/user/user.constants';
 import reduce from 'lodash/reduce';
 import { type ObjectId } from 'mongodb';
@@ -37,10 +39,8 @@ export type AppRegistryModel = {
   registerComponent(name: string, component: () => FCModel | undefined): void;
 };
 
-export const onBeforeServer = async (
-  params: FrameworkRenderParamsModel,
-): Promise<FrameworkRenderParamsModel> => {
-  const { context, routes } = params;
+export const onBeforeServer: onBeforeServerModel = async (params) => {
+  const { context, headers, routes } = params;
 
   await initializeBackend({ database: databaseConfig.params() });
   const queryClient = new QueryClient();
@@ -57,6 +57,11 @@ export const onBeforeServer = async (
     signIn && (userId = (signIn._id as unknown as ObjectId).toString());
   } catch (e) {
     console.error(e);
+  }
+
+  const brightness = initialState?.[STYLE]?.brightness;
+  if (!brightness && headers?.['sec-ch-prefers-color-scheme'] === 'dark') {
+    initialState[STYLE].brightness = STYLE_BRIGHTNESS.DARK;
   }
 
   if (userId) {

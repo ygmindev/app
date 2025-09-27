@@ -1,5 +1,5 @@
 import { getLocaleStoreFromI18n } from '@lib/backend/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
-import { type FrameworkRenderParamsModel } from '@lib/config/node/framework/framework.models';
+import { type onAfterServerModel } from '@lib/config/node/framework/framework.models';
 import { WEB_CONFIG } from '@lib/config/node/web/web.constants';
 import { type RootContextModel } from '@lib/frontend/root/root.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -7,9 +7,7 @@ import { pick } from '@lib/shared/core/utils/pick/pick';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { QUERY } from '@lib/shared/query/query.constants';
 
-export const onAfterServer = async (
-  params: FrameworkRenderParamsModel,
-): Promise<FrameworkRenderParamsModel> => {
+export const onAfterServer: onAfterServerModel = async (params) => {
   const { context } = params;
   const i18n = context?.[LOCALE]?.i18n;
   const client = context?.[QUERY]?.client;

@@ -31,6 +31,7 @@ export enum THEME_SIZE_MORE {
 export enum STYLE_BRIGHTNESS {
   DARK = 'dark',
   LIGHT = 'light',
+  SYSTEM = 'system',
 }
 
 export const Z_INDEX_BOTTOM = -3;

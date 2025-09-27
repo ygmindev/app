@@ -34,7 +34,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
   isStickyCategory,
   onChange,
   tabs,
-  type = TABS_TYPE.CONTAINED,
+  type = TABS_TYPE.BUTTON,
   value,
   ...props
 }) => {
@@ -46,7 +46,6 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
     value,
   });
   const theme = useTheme();
-  const isContained = type === TABS_TYPE.CONTAINED;
   const isUnderline = type === TABS_TYPE.UNDERLINE;
   const wrapperRef = useRef<WrapperRefModel>(null);
   const tabRefs = useRef<Record<string, MeasureModel>>({});
@@ -75,15 +74,13 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
       {...wrapperProps}
       align={FLEX_ALIGN.END}
       alignSelf={FLEX_ALIGN.CENTER}
-      border={isContained ? true : isUnderline ? DIRECTION.BOTTOM : undefined}
+      border={isUnderline ? DIRECTION.BOTTOM : undefined}
       isFullWidth
       isHorizontalScrollable
       isOverflowHidden
       isRow
       justifySelf={FLEX_JUSTIFY.CENTER}
-      p={isContained ? THEME_SIZE.SMALL : undefined}
       ref={wrapperRef}
-      round={isContained}
       s={THEME_SIZE.SMALL}
       scrollType={SCROLL_TYPE.BUTTON}>
       {tabsSorted?.map((tab, i) => {
@@ -167,13 +164,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
                 icon={tab.icon}
                 key={tab.id}
                 onPress={() => handlePress(tab)}
-                type={
-                  isActiveF
-                    ? undefined
-                    : isContained
-                      ? BUTTON_TYPE.INVISIBLE
-                      : BUTTON_TYPE.TRANSPARENT
-                }>
+                type={isActiveF ? undefined : BUTTON_TYPE.TRANSPARENT}>
                 {tab.label ? t(tab.label) : tab.id}
               </Button>
             )}

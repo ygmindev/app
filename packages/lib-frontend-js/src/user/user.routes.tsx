@@ -1,28 +1,30 @@
 import { SignInPage } from '@lib/frontend/auth/pages/SignInPage/SignInPage';
 import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { billingRoutes } from '@lib/frontend/billing/billing.routes';
-import { ROUTE_NAVIGATION } from '@lib/frontend/route/route.constants';
+import { LocaleSettingsPage } from '@lib/frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage';
+import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { type RouteModel } from '@lib/frontend/route/route.models';
-import { SETTINGS } from '@lib/frontend/settings/settings.constants';
-import { settingsRoutes } from '@lib/frontend/settings/settings.routes';
+import { AppearanceSettingsPage } from '@lib/frontend/settings/pages/AppearanceSettingsPage/AppearanceSettingsPage';
+import { APPEARANCE, SETTINGS } from '@lib/frontend/settings/settings.constants';
 import { NameFormPage } from '@lib/frontend/user/pages/NameFormPage/NameFormPage';
 import { EMAIL, NAME, PHONE, PROFILE } from '@lib/frontend/user/user.constants';
 import { SIGN_IN_METHOD } from '@lib/shared/auth/auth.constants';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { FORM_MODE } from '@lib/shared/data/data.constants';
+import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { phoneNumber } from '@lib/shared/locale/utils/phoneNumber/phoneNumber';
-import { ACCOUNT } from '@lib/shared/user/user.constants';
 
 export const userRoutes: Array<RouteModel> = [
   {
+    icon: 'settings',
     isProtectable: true,
-    navigation: ROUTE_NAVIGATION.LIST,
-    pathname: ACCOUNT,
+    navigation: ROUTE_NAVIGATION.TAB,
+    pathname: SETTINGS,
     previous: '/',
     routes: [
       {
         icon: 'person',
-        navigation: ROUTE_NAVIGATION.LIST,
+        navigation: ROUTE_NAVIGATION.TAB,
         pathname: PROFILE,
         routes: [
           {
@@ -68,6 +70,19 @@ export const userRoutes: Array<RouteModel> = [
       },
 
       {
+        element: <AppearanceSettingsPage />,
+        icon: 'eye',
+        pathname: APPEARANCE,
+        title: ({ t }) => t('settings:appearance'),
+      },
+      {
+        element: <LocaleSettingsPage />,
+        icon: 'globe',
+        pathname: LOCALE,
+        title: ({ t }) => t('locale:location'),
+      },
+
+      {
         icon: 'dollar',
         namespaces: [BILLING],
         // navigation: ROUTE_NAVIGATION.LIST,
@@ -75,15 +90,8 @@ export const userRoutes: Array<RouteModel> = [
         routes: billingRoutes,
         title: ({ t }) => t('billing:billing'),
       },
-
-      {
-        icon: 'settings',
-        navigation: ROUTE_NAVIGATION.LIST,
-        pathname: SETTINGS,
-        routes: settingsRoutes,
-        title: ({ t }) => t('settings:settings'),
-      },
     ],
-    title: ({ t }) => t('user:account'),
+    title: ({ t }) => t('settings:settings'),
+    transition: ROUTE_TRANSITION.MODAL,
   },
 ];

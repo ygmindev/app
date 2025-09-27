@@ -57,7 +57,7 @@ export type RTFCModel<TType = undefined, TProps = object> = TFCModel<TProps & Re
 export type PropsModel<TType> = TType extends ComponentType<infer TProps> ? TProps : never;
 
 export type RefPropsModel<TType = unknown> = {
-  ref?: RefObject<TType | null> | ((ref?: TType | null) => void);
+  ref?: RefObject<TType | null>;
 };
 
 export type ChildrenPropsModel<TType = ReactNode | Array<ReactNode>> = ChildPropsModel<TType>;

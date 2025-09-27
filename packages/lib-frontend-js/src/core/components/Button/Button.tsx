@@ -156,15 +156,15 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
                 borderWidth: 1.5,
               },
               [ELEMENT_STATE.DISABLED]: {
-                borderColor: contrastColor,
+                borderColor: theme.color.border,
                 borderWidth: 1,
               },
               [ELEMENT_STATE.LOADING]: {
-                borderColor: contrastColor,
+                borderColor: theme.color.border,
                 borderWidth: 1,
               },
               [ELEMENT_STATE.INACTIVE]: {
-                borderColor: contrastColor,
+                borderColor: theme.color.border,
                 borderWidth: 1,
               },
             },

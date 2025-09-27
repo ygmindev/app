@@ -68,7 +68,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
 
   const { isLoading, query, result, search } = useSearch({
     keys: ['label', 'id'],
-    onSearch: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
+    // onSearch: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
     options,
   });
 
@@ -142,8 +142,6 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
   const inputRef = useRef<TextInputRefModel>(null);
   const inputRefF = ref ?? inputRef;
 
-  const widthF = width ?? theme.layout.width[THEME_SIZE.MEDIUM];
-
   const renderOptionF = (v: TType): ReactElement => {
     const isActive = v.id === valueControlled?.id;
     const option = renderOption?.(v) ?? v.label ?? v.id;
@@ -168,6 +166,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
           elementState={elementStateControlled}
           error={error}
           icon={icon}
+          isFullWidth
           isTransparent={isTransparent}
           label={label ?? t('core:search')}
           leftElement={
@@ -178,12 +177,12 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
           onFocus={onFocus}
           onKey={result?.length ? handleKey : undefined}
           onSubmit={handleSubmit}
-          // placeholder={isActive || !displayLabel ? t('core:search') : t(displayLabel)}
+          placeholder={isActive ? t('core:search') : displayLabel}
           ref={inputRefF}
           rightElement={rightElementF}
           round={round}
           value={isActive ? textValue : displayLabel}
-          width={widthF}
+          width={width}
         />
       )}
       elementState={elementStateControlled}

@@ -5,6 +5,7 @@ import {
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { Document, type FieldName } from 'flexsearch';
+import uniqBy from 'lodash/uniqBy';
 
 export class _Fuzzy<TType extends WithIdModel> implements _FuzzyModel<TType> {
   index: Document<TType, false, false>;
@@ -23,7 +24,7 @@ export class _Fuzzy<TType extends WithIdModel> implements _FuzzyModel<TType> {
 
   search = async (query: string, { limit }: { limit?: number } = {}): Promise<Array<TType>> => {
     return filterNil(
-      (await this.index.searchAsync({ enrich: true, limit, query }))
+      uniqBy(await this.index.searchAsync({ enrich: true, limit, query }), 'id')
         ?.map((v) => v.result.map((vv) => vv.doc))
         .flat(),
     );

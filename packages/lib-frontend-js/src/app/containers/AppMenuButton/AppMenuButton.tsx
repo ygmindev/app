@@ -12,12 +12,12 @@ import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
+import { SETTINGS } from '@lib/frontend/settings/settings.constants';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { AUTH, SIGN_IN, SIGN_OUT } from '@lib/shared/auth/auth.constants';
-import { ACCOUNT } from '@lib/shared/user/user.constants';
 import { useRef } from 'react';
 
 export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) => {
@@ -35,10 +35,10 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) =
   const optionsF: Array<MenuOptionModel> = isAuthenticated
     ? [
         {
-          icon: 'personCircle',
-          id: ACCOUNT,
-          label: t('user:account'),
-          onPress: () => push({ pathname: ACCOUNT }),
+          icon: 'settings',
+          id: SETTINGS,
+          label: t('settings:settings'),
+          onPress: () => push({ pathname: SETTINGS }),
         },
         {
           color: THEME_COLOR.ERROR,

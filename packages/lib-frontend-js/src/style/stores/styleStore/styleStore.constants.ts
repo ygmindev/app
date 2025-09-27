@@ -5,7 +5,7 @@ export const STYLE_REDUCER: StyleReducerModel = {
   actions: {},
 
   defaultState: {
-    brightness: STYLE_BRIGHTNESS.LIGHT,
+    brightness: STYLE_BRIGHTNESS.SYSTEM,
   },
 
   persist: true,

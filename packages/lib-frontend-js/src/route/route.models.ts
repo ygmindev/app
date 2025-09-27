@@ -21,7 +21,6 @@ export type RouteModel<
     element?: ReactElement<ChildrenPropsModel>;
     fullpath?: string;
     header?: boolean;
-    isModal?: boolean;
     isNavigatable?: boolean;
     isProtectable?: boolean;
     layoutProps?: LayoutStylePropsModel;

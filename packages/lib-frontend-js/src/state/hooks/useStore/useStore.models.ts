@@ -14,5 +14,5 @@ export type UseStoreParamsModel<TKey extends DeepKeyModel<RootStateModel>> = _Us
 export type UseStoreModel<TKey extends DeepKeyModel<RootStateModel>> = [
   value: _UseStoreModel<RootStateModel, TKey> | undefined,
   valueSet: (params?: GetValueModel<RootStateModel, TKey>) => void,
-  // persistedState: _UseStoreModel<RootStateModel, TKey> | undefined,
+  valueUnset: () => void,
 ];

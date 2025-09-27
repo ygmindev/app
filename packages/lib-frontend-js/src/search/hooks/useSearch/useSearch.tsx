@@ -33,7 +33,7 @@ export const useSearch = <TType extends TranslatableOptionModel>({
 
   useEffect(() => {
     searchRef.current = isArrayF ? new Fuzzy<TType>({ keys, options }) : null;
-  }, [keys, isArrayF, options]);
+  }, []);
 
   const search = useDebounce(
     async (query?: string): Promise<void> => {

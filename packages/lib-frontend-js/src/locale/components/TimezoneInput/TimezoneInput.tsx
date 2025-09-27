@@ -27,7 +27,7 @@ export const TimezoneInput: LFCModel<TimezoneInputPropsModel> = ({
   });
 
   useAsync(async () => {
-    timezone && valueControlledSet(timezone.name);
+    timezone && valueControlledSet({ id: timezone.name });
   });
 
   const options = useMemo(

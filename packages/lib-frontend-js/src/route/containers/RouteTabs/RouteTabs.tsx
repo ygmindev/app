@@ -9,7 +9,7 @@ import { useMemo } from 'react';
 
 export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({
   routes,
-  type = TABS_TYPE.CONTAINED,
+  type = TABS_TYPE.BUTTON,
   ...props
 }) => {
   const { t } = useTranslation();

@@ -154,6 +154,7 @@ export const MATERIAL_ICONS = {
   chevronRightDouble: 'chevron-double-right',
   chevronUp: 'chevron-up',
   chevronUpDouble: 'chevron-double-up',
+  monitor: 'monitor',
   numberList: 'format-list-numbered',
   text: 'format-text',
   textbox: 'form-textbox',

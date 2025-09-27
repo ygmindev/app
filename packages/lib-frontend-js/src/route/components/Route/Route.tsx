@@ -42,6 +42,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   const isLeaf = !route.routes;
   const isActiveF = isActive({ pathname: route.fullpath });
   const isActiveLeaf = isLeaf && isActive({ isExact: true, pathname: route.fullpath });
+  const isModal = route.transition === ROUTE_TRANSITION.MODAL;
 
   useEffect(() => {
     route.isProtectable &&
@@ -93,6 +94,8 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
                         {child.element}
                       </Slide>
                     );
+                  case ROUTE_TRANSITION.MODAL:
+                    return <>{child.element}</>;
                   default:
                     return (
                       <Appearable
@@ -124,8 +127,9 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
     }
   })();
 
-  route.isModal &&
-    isLeaf &&
+  isModal &&
+    isActiveF &&
+    !isLeaf &&
     (element = (
       <Modal
         isFullSize
@@ -142,7 +146,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
 
   return (
     <>
-      {isActiveF && route.header && !route.isModal && (
+      {isActiveF && route.header && !isModal && (
         <Portal>
           <RouteHeader route={route} />
         </Portal>

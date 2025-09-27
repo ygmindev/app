@@ -21,6 +21,11 @@ export const BrightnessInput: LFCModel<BrightnessInputPropsModel> = ({
       onChange={brightnessSet}
       options={[
         {
+          icon: 'monitor',
+          id: STYLE_BRIGHTNESS.SYSTEM,
+          label: t('settings:system'),
+        },
+        {
           icon: 'light',
           id: STYLE_BRIGHTNESS.LIGHT,
           label: t('style:light'),
