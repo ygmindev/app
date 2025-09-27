@@ -7,7 +7,6 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { timezones } from '@lib/frontend/locale/utils/timezones/timezones';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { timezoneFormat } from '@lib/shared/datetime/utils/timezoneFormat/timezoneFormat';
 import { useMemo } from 'react';
 
 export const TimezoneInput: LFCModel<TimezoneInputPropsModel> = ({
@@ -31,11 +30,7 @@ export const TimezoneInput: LFCModel<TimezoneInputPropsModel> = ({
   });
 
   const options = useMemo(
-    () =>
-      timezones().map(({ name, offset }) => ({
-        id: timezoneFormat(name),
-        label: timezoneFormat({ name, offset }),
-      })),
+    () => timezones().map(({ name, offset }) => ({ id: name, label: name })),
     [],
   );
 
