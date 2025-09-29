@@ -7,8 +7,6 @@ export enum AUTH_STATUS {
 }
 
 export const AUTH_REDUCER: AuthReducerModel = {
-  actions: {},
-
   defaultState: {
     status: AUTH_STATUS.UNKNOWN,
     token: {

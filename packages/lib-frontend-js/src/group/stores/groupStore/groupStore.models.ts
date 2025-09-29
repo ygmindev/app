@@ -1,11 +1,9 @@
 import { type ReducerModel } from '@lib/frontend/state/state.models';
-import { type EmptyObjectModel, type PartialModel } from '@lib/shared/core/core.models';
 import { type GroupModel } from '@lib/model/group/Group/Group.models';
+import { type PartialModel } from '@lib/shared/core/core.models';
 
 export type GroupStateModel = {
   currentGroup?: PartialModel<GroupModel>;
 };
 
-export type GroupActionsParamsModel = EmptyObjectModel;
-
-export type GroupReducerModel = ReducerModel<GroupStateModel, GroupActionsParamsModel>;
+export type GroupReducerModel = ReducerModel<GroupStateModel>;

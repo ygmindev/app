@@ -12,7 +12,6 @@ import { type FCModel } from '@lib/frontend/core/core.models';
 import { QueryClient } from '@lib/frontend/data/utils/QueryClient/QueryClient';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
 import {
-  type RootActionsParamsModel,
   type RootStateContextModel,
   type RootStateModel,
 } from '@lib/frontend/root/stores/rootStore.models';
@@ -44,7 +43,7 @@ export const onBeforeServer: onBeforeServerModel = async (params) => {
 
   await initializeBackend({ database: databaseConfig.params() });
   const queryClient = new QueryClient();
-  const store = new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
+  const store = new Store<RootStateModel>({
     cookies: context?.[STATE]?.cookies,
     reducers: ROOT_REDUCERS,
   });
@@ -61,7 +60,7 @@ export const onBeforeServer: onBeforeServerModel = async (params) => {
 
   const brightness = initialState?.[STYLE]?.brightness;
   if (!brightness && headers?.['sec-ch-prefers-color-scheme'] === 'dark') {
-    initialState[STYLE].brightness = STYLE_BRIGHTNESS.DARK;
+    initialState[STYLE] = { ...initialState[STYLE], brightness: STYLE_BRIGHTNESS.DARK };
   }
 
   if (userId) {

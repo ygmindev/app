@@ -73,8 +73,8 @@ export const OtpInput: RLFCModel<OtpInputRefModel, OtpInputPropsModel> = ({
               valueControlledSet(value);
               if (value?.length === OTP_LENGTH) {
                 void sleep().then(async () => {
-                  valueControlledSet('');
                   onSubmit?.();
+                  valueControlledSet('');
                 });
               }
             }}

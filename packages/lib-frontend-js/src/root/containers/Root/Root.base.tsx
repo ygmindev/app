@@ -14,10 +14,7 @@ import {
 import { type RootPropsModel } from '@lib/frontend/root/containers/Root/Root.models';
 import { ContextProvider } from '@lib/frontend/root/providers/ContextProvider/ContextProvider';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
-import {
-  type RootActionsParamsModel,
-  type RootStateModel,
-} from '@lib/frontend/root/stores/rootStore.models';
+import { type RootStateModel } from '@lib/frontend/root/stores/rootStore.models';
 import { Store } from '@lib/frontend/state/utils/Store/Store';
 import { StyleProvider } from '@lib/frontend/style/providers/StyleProvider/StyleProvider';
 import { TrackingProvider } from '@lib/frontend/tracking/providers/TrackingProvider/TrackingProvider';
@@ -31,14 +28,13 @@ import { cloneElement, useMemo } from 'react';
 export const Root: FCModel<RootPropsModel> = ({ additionalProviders, children, context }) => {
   const store = useMemo(
     () =>
-      new Store<Array<keyof RootStateModel>, RootStateModel, RootActionsParamsModel>({
+      new Store<RootStateModel>({
         cookies: context?.[STATE]?.cookies,
         initialState: context?.[STATE]?.initialState,
         reducers: ROOT_REDUCERS,
       }),
     [context?.[STATE]?.cookies, context?.[STATE]?.initialState],
   );
-
   const providers = useMemo<Array<ReactElement>>(
     () =>
       filterNil([

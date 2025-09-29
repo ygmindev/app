@@ -7,10 +7,7 @@ import { GROUP } from '@lib/frontend/group/group.constants';
 import { GROUP_REDUCER } from '@lib/frontend/group/stores/groupStore/groupStore.constants';
 import { LOCALE_REDUCER } from '@lib/frontend/locale/stores/localeStore/localeStore.constants';
 import { NOTIFICATION_REDUCER } from '@lib/frontend/notification/stores/notificationStore/notificationStore.constants';
-import {
-  type RootActionsParamsModel,
-  type RootStateModel,
-} from '@lib/frontend/root/stores/rootStore.models';
+import { type RootStateModel } from '@lib/frontend/root/stores/rootStore.models';
 import { ROUTE_REDUCER } from '@lib/frontend/route/stores/routeStore/routeStore.constants';
 import { type ReducerModel } from '@lib/frontend/state/state.models';
 import { STYLE_REDUCER } from '@lib/frontend/style/stores/styleStore/styleStore.constants';
@@ -36,5 +33,5 @@ export const ROOT_REDUCERS = {
   [STYLE]: STYLE_REDUCER,
   [USER]: USER_REDUCER,
 } satisfies {
-  [TKey in keyof RootStateModel]: ReducerModel<RootStateModel[TKey], RootActionsParamsModel[TKey]>;
+  [TKey in keyof RootStateModel]: ReducerModel<RootStateModel[TKey]>;
 };

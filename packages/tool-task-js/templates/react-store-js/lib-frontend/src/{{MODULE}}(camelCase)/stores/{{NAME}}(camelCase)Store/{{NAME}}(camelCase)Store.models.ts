@@ -4,8 +4,4 @@ export type {{NAME}}(pascalCase)StateModel = {
   value: null;
 }
 
-export type {{NAME}}(pascalCase)ActionsParamsModel = {
-  setValue: null;
-}
-
-export type {{NAME}}(pascalCase)ReducerModel = ReducerModel<{{NAME}}(pascalCase)StateModel, {{NAME}}(pascalCase)ActionsParamsModel>;
+export type {{NAME}}(pascalCase)ReducerModel = ReducerModel<{{NAME}}(pascalCase)StateModel>;

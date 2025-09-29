@@ -20,7 +20,8 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ ...props }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
   const [isMinimized, isMinimizedSet] = useStore('app.layout.isMinimized');
-  const elementState = isMinimized ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE;
+  const elementState = isMinimized ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
+  console.warn(isMinimized);
   return (
     <Activatable>
       {(isActive) => (
@@ -28,10 +29,10 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ ...props }) => {
           {...wrapperProps}
           animation={{
             states: {
-              [ELEMENT_STATE.ACTIVE]: { width: theme.layout.header.width },
-              [ELEMENT_STATE.INACTIVE]: {
+              [ELEMENT_STATE.ACTIVE]: {
                 width: theme.shape.size[THEME_SIZE.LARGE] + theme.shape.spacing[THEME_SIZE.MEDIUM],
               },
+              [ELEMENT_STATE.INACTIVE]: { width: theme.layout.header.width },
             },
           }}
           border={DIRECTION.RIGHT}

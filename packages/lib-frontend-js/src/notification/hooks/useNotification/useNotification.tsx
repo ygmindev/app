@@ -15,7 +15,7 @@ export const useNotification = (): UseNotificationModel => {
 
   const notify = debounce(async (alert: NotificationModel): Promise<void> => {
     const id = alert.id ?? uid();
-    actions?.notification.notificationsAdd({
+    actions?.notification.notifications.add({
       ...alert,
       description: t(alert.description),
       id,
@@ -24,7 +24,7 @@ export const useNotification = (): UseNotificationModel => {
 
     if (!alert.isInfinite) {
       await sleep(alert.duration ?? theme.notification.duration);
-      actions?.notification.notificationsRemove({ id });
+      actions?.notification.notifications.remove({ id });
     }
   });
 
@@ -35,7 +35,7 @@ export const useNotification = (): UseNotificationModel => {
       notify({ ...alert, color: THEME_COLOR.ERROR, icon: alert.icon ?? 'exclamationCircle' }),
 
     remove: async (id) => {
-      actions?.notification.notificationsRemove({ id });
+      actions?.notification.notifications.remove({ id });
     },
 
     success: (alert) =>

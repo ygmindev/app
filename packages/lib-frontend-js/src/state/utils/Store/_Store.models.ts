@@ -5,39 +5,44 @@ import {
   type NestedReducerModel,
 } from '@lib/frontend/state/state.models';
 import { type StateProviderPropsModel } from '@lib/frontend/state/utils/Store/Store.models';
-import { type CaseReducerActions, type SliceCaseReducers } from '@reduxjs/toolkit';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { type CaseReducerActions, type PayloadAction } from '@reduxjs/toolkit';
 import { type ComponentType } from 'react';
 
-export type _StoreParamsModel<
-  TKeys extends Array<string>,
-  TType extends Record<TKeys[number], object>,
-  TParams extends Record<TKeys[number], object>,
-> = {
+export type _StoreParamsModel<TType extends Record<string, unknown>> = {
   cookies?: CookiesModel;
-  initialState?: NestedInitialStateModel<TKeys, TType>;
-  reducers?: NestedReducerModel<TKeys, TType, TParams>;
+  initialState?: NestedInitialStateModel<TType>;
+  reducers?: NestedReducerModel<TType>;
 };
 
-export type _StoreModel<
-  TKeys extends Array<string>,
-  TType extends Record<TKeys[number], object>,
-  TParams extends Record<TKeys[number], object>,
-> = {
-  Provider: ComponentType<StateProviderPropsModel<TKeys, TType, TParams>>;
+export type _StoreModel<TType extends Record<string, unknown>> = {
+  Provider: ComponentType<StateProviderPropsModel<TType>>;
 
   getState(): TType;
 
   getStatePersisted(): Promise<TType>;
 };
 
-export type _StoreContextProviderPropsModel<
-  TKeys extends Array<string>,
-  TType extends Record<TKeys[number], object>,
-  TParams extends Record<TKeys[number], object>,
-> = StateProviderPropsModel<TKeys, TType, TParams> & {
-  actions: {
-    [TKey in TKeys[number]]: CaseReducerActions<SliceCaseReducers<TType[TKey]>, TKey>;
-  };
-  defaultState: NestedDefaultStateModel<TKeys, TType>;
-  persistedState?: NestedDefaultStateModel<TKeys, TType>;
+export type _StoreActionsModel<TType extends Record<string, unknown>> = {
+  [TKey in StringKeyModel<TType>]: CaseReducerActions<
+    {
+      add(state: TType, action: PayloadAction<{ key: string; value: unknown }>): TType;
+      get(state: TType, action: PayloadAction<{ key: string }>): TType;
+      remove(state: TType, action: PayloadAction<{ key: string; value: unknown }>): TType;
+      set(state: TType, action: PayloadAction<{ key: string; value: unknown }>): TType;
+      unset(state: TType, action: PayloadAction<{ key: string }>): TType;
+      update(
+        state: TType,
+        action: PayloadAction<{ filter: unknown; key: string; value: unknown }>,
+      ): TType;
+    },
+    TKey
+  >;
 };
+
+export type _StoreContextProviderPropsModel<TType extends Record<string, unknown>> =
+  StateProviderPropsModel<TType> & {
+    actions: _StoreActionsModel<TType>;
+    defaultState: NestedDefaultStateModel<TType>;
+    persistedState?: NestedDefaultStateModel<TType>;
+  };

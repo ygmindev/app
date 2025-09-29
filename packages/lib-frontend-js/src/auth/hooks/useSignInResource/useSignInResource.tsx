@@ -65,7 +65,6 @@ export const useSignInResource = (): UseSignInResourceModel => {
       currentUserSet(user);
     }
     authStatusSet(authStatusF);
-    pubsub.publish(SIGN_IN, authStatusF);
     user?._id && void identify(user._id);
   };
 

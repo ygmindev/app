@@ -59,7 +59,7 @@ export const NewPaymentMethodInput: RLFCModel<
           return (await cardCreate({ form: formF })).result;
       }
     })();
-    paymentMethod && actions?.billing.paymentMethodsAdd(paymentMethod);
+    paymentMethod && actions?.billing.paymentMethods.add(paymentMethod);
     return paymentMethod;
   };
 
@@ -74,7 +74,7 @@ export const NewPaymentMethodInput: RLFCModel<
         return token;
       }}>
       {({ data }) =>
-        data && (
+        data ? (
           <Wrapper s>
             <SwitchInput
               label={t('billing:setAsDefault')}
@@ -89,6 +89,8 @@ export const NewPaymentMethodInput: RLFCModel<
               token={data}
             />
           </Wrapper>
+        ) : (
+          <></>
         )
       }
     </DataBoundary>

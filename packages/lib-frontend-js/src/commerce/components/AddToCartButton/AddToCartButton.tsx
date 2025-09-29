@@ -29,8 +29,8 @@ export const AddToCartButton: LFCModel<AddToCartButtonPropsModel> = ({ item, ...
     );
     const itemF = i !== undefined && items?.[i];
     itemF
-      ? actions?.commerce.itemsUpdate([i, { ...itemF, quantity: (itemF.quantity ?? 1) + 1 }])
-      : actions?.commerce.itemsAdd(item);
+      ? actions?.commerce.items.update(i, { ...itemF, quantity: (itemF.quantity ?? 1) + 1 })
+      : actions?.commerce.items.add(item);
     void success({ description: t('core:addedSuccess', { value: item.name }) });
   };
 

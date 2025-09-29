@@ -15,7 +15,7 @@ export const useUserResource = (): UseUserResourceModel => {
     afterUpdate: async ({ output }) => {
       if (output.result) {
         void success({ description: t('core:updatedSuccess') });
-        actions?.user.currentUserUpdate(output.result);
+        actions?.user.currentUser.set(output.result);
       }
       return output;
     },

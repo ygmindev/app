@@ -224,6 +224,7 @@ export const StepFormF = <TType, TResult = void>({
                         await elementF.props.onSubmit?.(stepValues);
                         const valuesF = { ...values, ...stepValues };
                         await valuesSet(valuesF);
+                        await sleep();
                         isLastStep && handleSubmit?.();
                         return null;
                       },

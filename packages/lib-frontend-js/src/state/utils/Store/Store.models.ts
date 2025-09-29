@@ -9,25 +9,13 @@ import {
 } from '@lib/frontend/state/utils/Store/_Store.models';
 import { type Context } from 'react';
 
-export type StoreParamsModel<
-  TKeys extends Array<string>,
-  TType extends Record<TKeys[number], object>,
-  TParams extends Record<TKeys[number], object>,
-> = _StoreParamsModel<TKeys, TType, TParams>;
+export type StoreParamsModel<TType extends Record<string, unknown>> = _StoreParamsModel<TType>;
 
-export type StoreModel<
-  TKeys extends Array<string>,
-  TType extends Record<TKeys[number], object>,
-  TParams extends Record<TKeys[number], object>,
-> = _StoreModel<TKeys, TType, TParams>;
+export type StoreModel<TType extends Record<string, unknown>> = _StoreModel<TType>;
 
-export type StateProviderPropsModel<
-  TKeys extends Array<string>,
-  TType extends Record<TKeys[number], object>,
-  TParams extends Record<TKeys[number], object>,
-> = ProviderPropsModel<{
-  actionContext: Context<NestedActionsModel<TKeys, TType, TParams> | undefined>;
-  defaultStateContext: Context<NestedDefaultStateModel<TKeys, TType> | undefined>;
-  persistedStateContext: Context<NestedDefaultStateModel<TKeys, TType> | undefined>;
-  store: StoreModel<TKeys, TType, TParams>;
+export type StateProviderPropsModel<TType extends Record<string, unknown>> = ProviderPropsModel<{
+  actionContext: Context<NestedActionsModel<TType> | undefined>;
+  defaultStateContext: Context<NestedDefaultStateModel<TType> | undefined>;
+  persistedStateContext: Context<NestedDefaultStateModel<TType> | undefined>;
+  store: StoreModel<TType>;
 }>;
