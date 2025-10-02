@@ -2,8 +2,8 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
-import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { Portal } from '@lib/frontend/core/components/Portal/Portal';
+import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
@@ -42,7 +42,8 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   const isLeaf = !route.routes;
   const isActiveF = isActive({ pathname: route.fullpath });
   const isActiveLeaf = isLeaf && isActive({ isExact: true, pathname: route.fullpath });
-  const isModal = route.transition === ROUTE_TRANSITION.MODAL;
+  let isModal = route.transition === ROUTE_TRANSITION.MODAL;
+  isModal = false;
 
   useEffect(() => {
     route.isProtectable &&
@@ -51,17 +52,19 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
   }, [route.isProtectable]);
 
   const findChildLeaf = (routes?: Array<RouteModel>): RouteModel | null => {
-    const child = routes?.find((v) => !v.routes);
-    return child ?? findChildLeaf(routes?.[0]?.routes);
+    const childLeaf = routes?.find((v) => !v.routes);
+    return (
+      childLeaf ?? findChildLeaf(routes?.find((v) => isActive({ pathname: v.fullpath }))?.routes)
+    );
   };
 
   useEffect(() => {
     if (isActiveF && route.routes) {
       const child = route.routes.find((v) => isActive({ pathname: v.fullpath }));
-      if (!child) {
-        const childLeaf = findChildLeaf(route.routes);
-        childLeaf?.fullpath && push({ pathname: childLeaf.fullpath });
-      }
+      // if (!child) {
+      //   const childLeaf = findChildLeaf(route.routes);
+      //   childLeaf?.fullpath && push({ pathname: childLeaf.fullpath });
+      // }
     }
   }, [isActiveF, route.routes]);
 
@@ -94,8 +97,8 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
                         {child.element}
                       </Slide>
                     );
-                  case ROUTE_TRANSITION.MODAL:
-                    return <>{child.element}</>;
+                  // case ROUTE_TRANSITION.MODAL:
+                  //   return <>{child.element}</>;
                   default:
                     return (
                       <Appearable
@@ -120,29 +123,37 @@ export const Route: LFCModel<RoutePropsModel> = ({ route, ...props }) => {
     switch (route.navigation) {
       case ROUTE_NAVIGATION.NAVIGATION:
         return <NavigationLayout route={route}>{element}</NavigationLayout>;
-      case ROUTE_NAVIGATION.TAB:
-        return <TabLayout route={route}>{element}</TabLayout>;
+      case ROUTE_NAVIGATION.TAB: {
+        const childTabs = route.routes?.find((v) => v.navigation === ROUTE_NAVIGATION.TAB);
+        return (
+          <TabLayout
+            route={route}
+            type={childTabs ? TABS_TYPE.BUTTON : TABS_TYPE.UNDERLINE}>
+            {element}
+          </TabLayout>
+        );
+      }
       default:
         return element;
     }
   })();
 
-  isModal &&
-    isActiveF &&
-    !isLeaf &&
-    (element = (
-      <Modal
-        isFullSize
-        isOpen
-        onToggle={(value) =>
-          route.previous &&
-          !value &&
-          push({ isBack: true, params: location.params, pathname: route.previous })
-        }
-        title={route.title}>
-        {element}
-      </Modal>
-    ));
+  // isModal &&
+  //   isActiveF &&
+  //   !isLeaf &&
+  //   (element = (
+  //     <Modal
+  //       isFullSize
+  //       isOpen
+  //       onToggle={(value) =>
+  //         route.previous &&
+  //         !value &&
+  //         push({ isBack: true, params: location.params, pathname: route.previous })
+  //       }
+  //       title={route.title}>
+  //       {element}
+  //     </Modal>
+  //   ));
 
   return (
     <>

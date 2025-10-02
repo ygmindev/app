@@ -17,24 +17,27 @@ export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type
   const { wrapperProps } = useLayoutStyles({ props });
   const { getPath, isActive, location, push } = useRouter();
 
-  const isActiveF = route?.routes?.find(
+  const activeChild = route?.routes?.find(
     ({ fullpath, isNavigatable = true, pathname }) =>
-      isNavigatable && isActive({ isExact: true, pathname: fullpath ?? pathname }),
+      isNavigatable && isActive({ isExact: false, pathname: fullpath ?? pathname }),
   );
 
   useEffect(() => {
     const isMountedF = isActive({ isExact: true, pathname: route?.fullpath });
-    if (isMountedF && !isActiveF && route?.routes) {
+    if (isMountedF && !activeChild && route?.routes) {
       const child = find<RouteModel>(route.routes, ({ isNavigatable = true }) => isNavigatable);
       if (child) {
         const pathname = getPath(child.fullpath ?? child.pathname, location.params);
-        // push({ pathname });
+        push({ pathname });
       }
     }
-  }, [isActiveF]);
+  }, [activeChild]);
 
   return (
-    <MainLayout {...wrapperProps}>
+    <MainLayout
+      {...wrapperProps}
+      flex
+      isFullHeight>
       <Tabs
         onChange={(pathname) => {
           const pathnameF = getPath(pathname, location.params);
@@ -51,13 +54,13 @@ export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type
           ),
         )}
         type={type}
-        value={isActiveF?.fullpath}
+        value={activeChild?.fullpath}
       />
 
       <Wrapper
         flex
         position={SHAPE_POSITION.RELATIVE}>
-        {isActiveF?.element}
+        {children}
       </Wrapper>
     </MainLayout>
   );

@@ -21,7 +21,6 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const [isMinimized, isMinimizedSet] = useStore('app.layout.isMinimized');
   const elementState = isMinimized ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
-  console.warn(isMinimized);
   return (
     <Activatable>
       {(isActive) => (

@@ -108,8 +108,6 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
         : undefined,
     [valueControlled, t],
   );
-  console.warn(valueControlled);
-  console.warn(displayLabel);
 
   const handleBlur = (): void => {
     handleTextChange('');

@@ -1,3 +1,4 @@
+import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { Route } from '@lib/frontend/route/components/Route/Route';
 import { RouteList } from '@lib/frontend/route/components/RouteList/RouteList';
 import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
@@ -63,7 +64,18 @@ export const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
       ),
     ));
 
-  route.element = <Route route={{ ...route, element: route.element }} />;
+  let { element } = route;
+
+  route.transition === ROUTE_TRANSITION.MODAL &&
+    (element = (
+      <Modal
+        isFullSize
+        isOpen>
+        {element}
+      </Modal>
+    ));
+
+  route.element = <Route route={{ ...route, element }} />;
 
   return route;
 };

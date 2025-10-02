@@ -9,8 +9,7 @@ export const PaymentMethodPage: LFCModel<PaymentMethodPagePropsModel> = ({ ...pr
   return (
     <MainLayout
       {...wrapperProps}
-      isFullHeight
-      p>
+      isFullHeight>
       <PaymentMethodInput isEditable />
     </MainLayout>
   );

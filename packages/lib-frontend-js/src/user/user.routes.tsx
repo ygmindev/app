@@ -18,13 +18,13 @@ export const userRoutes: Array<RouteModel> = [
   {
     icon: 'settings',
     isProtectable: true,
-    navigation: ROUTE_NAVIGATION.TAB,
+    // navigation: ROUTE_NAVIGATION.TAB,
     pathname: SETTINGS,
     previous: '/',
     routes: [
       {
         icon: 'person',
-        navigation: ROUTE_NAVIGATION.TAB,
+        // navigation: ROUTE_NAVIGATION.TAB,
         pathname: PROFILE,
         routes: [
           {
@@ -81,11 +81,10 @@ export const userRoutes: Array<RouteModel> = [
         pathname: LOCALE,
         title: ({ t }) => t('locale:location'),
       },
-
       {
         icon: 'dollar',
         namespaces: [BILLING],
-        // navigation: ROUTE_NAVIGATION.LIST,
+        navigation: ROUTE_NAVIGATION.TAB,
         pathname: BILLING,
         routes: billingRoutes,
         title: ({ t }) => t('billing:billing'),
