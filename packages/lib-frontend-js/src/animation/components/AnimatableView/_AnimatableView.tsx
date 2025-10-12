@@ -21,6 +21,7 @@ const viewParamsPressable = getViewParamsPressable();
 export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewPropsModel> = ({
   animation,
   children,
+  defaultState,
   elementState,
   ref,
   testID,
@@ -31,6 +32,7 @@ export const _AnimatableView: RSFCModel<AnimatableViewRefModel, _AnimatableViewP
 
   const { animationProps, animationState, to, toState } = useAnimationState({
     animation,
+    defaultState,
     elementState,
     onElementStateChange: props.onElementStateChange,
     ref,

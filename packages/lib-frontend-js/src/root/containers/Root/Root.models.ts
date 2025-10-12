@@ -1,8 +1,4 @@
-import { type ChildrenPropsModel, type ProviderPropsModel } from '@lib/frontend/core/core.models';
-import { type RootContextModel, type RootContextPropsModel } from '@lib/frontend/root/root.models';
-import { type ReactElement } from 'react';
+import { type ChildrenPropsModel } from '@lib/frontend/core/core.models';
+import { type RootContextPropsModel } from '@lib/frontend/root/root.models';
 
-export type RootPropsModel = ChildrenPropsModel &
-  RootContextPropsModel & {
-    additionalProviders?: Array<ReactElement<ProviderPropsModel<RootContextModel>>>;
-  };
+export type RootPropsModel = ChildrenPropsModel & RootContextPropsModel;

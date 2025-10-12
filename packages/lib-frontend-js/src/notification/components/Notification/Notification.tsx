@@ -53,7 +53,7 @@ export const Notification: LFCModel<NotificationPropsModel> = ({
           position={SHAPE_POSITION.ABSOLUTE}
           right={0}
           top={0}
-          zIndex={1}
+          zIndex
         />
       )}
 

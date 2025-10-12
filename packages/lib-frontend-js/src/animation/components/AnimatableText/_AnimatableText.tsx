@@ -10,6 +10,7 @@ import { useImperativeHandle } from 'react';
 
 export const _AnimatableText: RSFCModel<AnimatableTextRefModel, _AnimatableTextPropsModel> = ({
   animation,
+  defaultState,
   elementState,
   ref,
   ...props
@@ -18,6 +19,7 @@ export const _AnimatableText: RSFCModel<AnimatableTextRefModel, _AnimatableTextP
   const { styles } = useStyles({ props });
   const { animationProps, animationState, to, toState } = useAnimationState({
     animation,
+    defaultState,
     elementState,
     onElementStateChange: props.onElementStateChange,
     ref,

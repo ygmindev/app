@@ -8,7 +8,7 @@ export const _Link = composeComponent<_LinkPropsModel, AnchorHTMLAttributes<HTML
   getProps: ({ children, isNewTab, onPress, pathname }) => ({
     children,
     href: onPress ? undefined : pathname,
-    onClick: pathname ? undefined : () => onPress && onPress(),
+    onClick: pathname ? undefined : () => onPress?.(),
     target: isNewTab ? '_blank' : undefined,
   }),
 

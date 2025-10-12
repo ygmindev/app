@@ -8,7 +8,6 @@ import {
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type ApiEndpointModel } from '@lib/config/api/api.models';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
-import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -50,14 +49,17 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
       `${isArray(params.method) ? params.method.join(',') : params.method} ${uri({
         host: this._host,
         port: this._port,
+        subdomain: params.subdomain,
       })}${pathname}`,
     );
-    return super.register({ ...params, pathname });
+    return super.register({ ...params, pathname, prefix });
   }
 
   async run(): Promise<void> {
     await handleCleanup({ onCleanUp: this.handleClose });
-    handleHmr({ onChange: this.handleClose });
+
+    // handleHmr({ onChange: this.handleClose });
+
     for (const [plugin, params] of this._plugins ?? []) {
       await plugin(this, params);
     }

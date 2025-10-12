@@ -74,6 +74,7 @@ export type PagePropsModel<TType = undefined> = LayoutStylePropsModel &
   ChildrenPropsModel & { pageProps?: TType };
 
 export type ElementStatePropsModel = {
+  defaultState?: ELEMENT_STATE;
   elementState?: ELEMENT_STATE;
   onElementStateChange?(value?: ELEMENT_STATE): void;
 };

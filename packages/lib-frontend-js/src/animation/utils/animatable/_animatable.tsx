@@ -15,6 +15,7 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
   const ComponentF = motify(Component)();
   const Animatable: _AnimatableModel<TProps, TStyle> = ({
     animation,
+    defaultState,
     elementState,
     ref,
     testID,
@@ -24,6 +25,7 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
     const testIDF = process.env.NODE_ENV === 'production' ? undefined : testID;
     const { animationProps, animationState, to, toState } = useAnimationState({
       animation,
+      defaultState,
       elementState,
       onElementStateChange: props.onElementStateChange,
       ref,

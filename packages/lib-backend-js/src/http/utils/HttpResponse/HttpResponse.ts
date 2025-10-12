@@ -8,7 +8,10 @@ import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { type CookieOptionsModel } from '@lib/shared/http/http.models';
 import capitalize from 'lodash/capitalize';
 
-export class HttpResponse<TType extends unknown> extends HttpMessage<TType> implements HttpResponseModel<TType> {
+export class HttpResponse<TType extends unknown>
+  extends HttpMessage<TType>
+  implements HttpResponseModel<TType>
+{
   _error?: Error;
   _redirectTo?: string;
   _statusCode?: number;
@@ -44,10 +47,6 @@ export class HttpResponse<TType extends unknown> extends HttpMessage<TType> impl
     value
       ? ((this._headers as Record<string, string>)[key.toLowerCase()] = value)
       : delete (this._headers as Record<string, string>)[key.toLowerCase()];
-  }
-
-  get error(): Error | undefined {
-    return this._error;
   }
 
   set error(value: Error | undefined) {

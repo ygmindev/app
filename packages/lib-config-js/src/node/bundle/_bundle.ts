@@ -1,5 +1,6 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { default as _traverse } from '@babel/traverse';
+import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
@@ -39,7 +40,7 @@ import posix from 'path/posix';
 import { type RollupOptions } from 'rollup';
 import esbuildPlugin from 'rollup-plugin-esbuild';
 import { nodeExternals } from 'rollup-plugin-node-externals';
-import { type Alias, createLogger, type Logger, type Plugin } from 'vite';
+import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
 import { checker } from 'vite-plugin-checker';
 
 type TraverseModel = typeof _traverse;
@@ -352,11 +353,11 @@ export const _bundle = ({
 
     root: fromWorking(),
 
-    // server: {
-    //   fs: {
-    //     allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
-    //   },
-    // },
+    server: {
+      fs: {
+        allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
+      },
+    },
 
     ssr: { noExternal: transpileAll },
   };

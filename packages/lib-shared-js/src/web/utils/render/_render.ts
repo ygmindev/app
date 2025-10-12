@@ -14,33 +14,40 @@ import { renderPage } from 'vike/server';
 
 export const _render = async (request: _RenderParamsModel): Promise<_RenderModel> => {
   const response = new HttpResponse<ReadableStream>();
+  const isClientSide = request.url.endsWith('.pageContext.json');
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
-    context: {
-      [LOCALE]: { i18n: request.i18n, lang: request.lang },
-      [ROUTE]: { location: { pathname: request.url } },
-      [STATE]: {
-        cookies: {
-          expire: (key) => void response.setCookie(key, undefined),
-          get: <TType extends string = string>(key: string) =>
-            (request.cookies?.[key] as TType) ?? null,
-          set: <TType extends string = string>(
-            key: string,
-            value: TType,
-            options?: CookieOptionsModel,
-          ) =>
-            void response.setCookie(key, value, {
-              domain: options?.domain,
-              sameSite: options?.sameSite ?? SAME_SITE.STRICT,
-            }),
-        } as CookiesModel,
-      },
-    },
+    context: isClientSide
+      ? {
+          [LOCALE]: { lang: request.lang },
+          [ROUTE]: { location: { pathname: request.url } },
+        }
+      : {
+          [LOCALE]: { i18n: request.i18n, lang: request.lang },
+          [ROUTE]: { location: { pathname: request.url } },
+          [STATE]: {
+            cookies: {
+              expire: (key) => void response.setCookie(key, undefined),
+              get: <TType extends string = string>(key: string) =>
+                (request.cookies?.[key] as TType) ?? null,
+              set: <TType extends string = string>(
+                key: string,
+                value: TType,
+                options?: CookieOptionsModel,
+              ) =>
+                void response.setCookie(key, value, {
+                  domain: options?.domain,
+                  sameSite: options?.sameSite ?? SAME_SITE.STRICT,
+                }),
+            } as CookiesModel,
+          },
+        },
     headersOriginal: request.headers,
     redirectTo: undefined,
     urlOriginal: request.url,
   });
   response.headers = {
     ...response.headers,
+    ...httpResponse.headers.reduce((result, v) => ({ ...result, [v[0]]: v[1] }), {}),
     ['Accept-CH']: 'Sec-CH-Prefers-Color-Scheme',
     ['Critical-CH']: 'Sec-CH-Prefers-Color-Scheme',
     Vary: 'Sec-CH-Prefers-Color-Scheme',

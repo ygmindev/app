@@ -1,6 +1,6 @@
 import { getLocaleStoreFromI18n } from '@lib/backend/locale/utils/getLocaleStoreFromI18n/getLocaleStoreFromI18n';
 import { type onAfterServerModel } from '@lib/config/node/framework/framework.models';
-import { WEB_CONFIG } from '@lib/config/node/web/web.constants';
+import { WEB_SSR_CONTEXT_KEYS } from '@lib/config/node/web/web.constants';
 import { type RootContextModel } from '@lib/frontend/root/root.models';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { pick } from '@lib/shared/core/utils/pick/pick';
@@ -18,8 +18,7 @@ export const onAfterServer: onAfterServerModel = async (params) => {
     },
     context,
   ]);
-  params.context = pick(contextF, WEB_CONFIG.ssrContextKeys);
+  params.context = pick(contextF, WEB_SSR_CONTEXT_KEYS);
   await client?.clear();
-
   return params;
 };

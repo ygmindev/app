@@ -39,7 +39,7 @@ export type RouteModel<
     };
   };
 
-export type LocationModel<TType = object> = {
+export type LocationModel<TType = undefined> = {
   params?: TType & LocationParamsModel;
   pathname: string;
 };
@@ -49,13 +49,13 @@ export type LocationParamsModel = {
   redirect?: LocationModel<unknown>;
 };
 
-export type RouteContextModel<TType = object> = {
+export type RouteContextModel<TType = undefined> = {
   basename?: string;
   location?: LocationModel<TType>;
   redirectTo?: string;
 };
 
-export type LocationUpdateModel<TTypeNext = object> = LocationModel<TTypeNext> &
+export type LocationUpdateModel<TTypeNext = undefined> = LocationModel<TTypeNext> &
   Pick<RouteStateModel, 'isBack'> & {
     root?: string | boolean | number;
   };

@@ -1,6 +1,8 @@
 import { type LocationModel, type LocationUpdateModel } from '@lib/frontend/route/route.models';
 
 export type _UseRouterModel<TType = object> = {
+  isMounted: boolean;
+
   location: LocationModel<TType>;
 
   back(): void;

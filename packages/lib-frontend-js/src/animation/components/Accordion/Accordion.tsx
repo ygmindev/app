@@ -9,6 +9,7 @@ import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel, type MeasureModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { useState } from 'react';
 
 export const Accordion: LFCModel<AccordionPropsModel> = ({
@@ -42,7 +43,9 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
     <Wrapper
       {...wrapperProps}
       border={!isTransparent}
-      round>
+      p={THEME_SIZE.SMALL}
+      round
+      s={THEME_SIZE.SMALL}>
       <PressableTitle
         color={color}
         elementState={elementStateControlled}

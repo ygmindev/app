@@ -1,4 +1,3 @@
-import { THEME_ANIMATION } from '@lib/config/theme/theme.constants';
 import { _useAnimationState } from '@lib/frontend/animation/hooks/useAnimationState/_useAnimationState';
 import {
   type UseAnimationStateModel,
@@ -17,7 +16,6 @@ export const useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
     animation: {
       ...animation,
       duration: animation?.duration ?? theme.animation.effect,
-      isInitial: animation?.isInitial ?? THEME_ANIMATION.isInitial,
     },
   });
 };

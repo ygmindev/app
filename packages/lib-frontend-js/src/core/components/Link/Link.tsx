@@ -6,6 +6,8 @@ import { type LinkPropsModel } from '@lib/frontend/core/components/Link/Link.mod
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type TFCModel } from '@lib/frontend/core/core.models';
+import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useTextStyles } from '@lib/frontend/style/hooks/useTextStyles/useTextStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR, THEME_ROLE } from '@lib/frontend/style/style.constants';
@@ -22,8 +24,10 @@ export const Link: TFCModel<LinkPropsModel> = ({
 }) => {
   const { textProps } = useTextStyles({ props: { ...props, isUnderline } });
   const theme = useTheme();
+  const { t } = useTranslation();
   const ref = useRef<AnimatableRefModel>(null);
-  const childrenF = isArray(children) ? children[0] : children;
+  let childrenF = isArray(children) ? children[0] : children;
+  isAsyncText(childrenF) && (childrenF = t(childrenF));
   return isString(childrenF) ? (
     <_Link
       {...textProps}

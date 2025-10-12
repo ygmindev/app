@@ -6,6 +6,8 @@ import { render } from '@lib/shared/web/utils/render/render';
 import { createDevMiddleware } from 'vike/server';
 
 export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
+  const { prefix } = config;
+
   if (
     (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
     !process.env.NODE_RUNTIME
@@ -14,12 +16,18 @@ export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
       root,
       viteConfig: { configFile: false, ..._web(config) },
     });
-    server._app.use(devMiddleware);
+    server._app.use((req, res, next) => {
+      const host = req.headers.host ?? '';
+      const [subdomain] = host.split('.');
+      subdomain === prefix ? devMiddleware(req, res, next) : next();
+    });
   }
+
   await server.register<ReadableStream, ReadableStream>({
     handler: async (request) => render(request),
     method: HTTP_METHOD.GET,
     pathname: '*',
+    subdomain: prefix,
     type: API_ENDPOINT_TYPE.REST,
   });
 };

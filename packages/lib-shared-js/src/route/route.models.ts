@@ -3,4 +3,5 @@ export type UriModel<TType = object> = {
   params?: TType;
   pathname?: string;
   port?: number | string;
+  subdomain?: string;
 };

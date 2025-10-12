@@ -86,6 +86,10 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
         filterNil([
           '@egjs/react-infinitegrid',
           '@expo/react-native-action-sheet',
+          '@react-navigation/elements',
+          '@react-navigation/native',
+          '@react-navigation/native-stack',
+          '@react-navigation/stack',
           '@shopify/flash-list',
           'countries-list',
           'css-in-js-utils',
@@ -101,6 +105,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
             root: fromModules(),
           }),
           ...fromGlobs(['@react-native-'], { root: fromModules() }),
+          ...fromGlobs(['expo-'], { root: fromModules() }),
         ]) ?? [],
 
       watch: [fromPackages('lib-frontend-js/src/**/*')],

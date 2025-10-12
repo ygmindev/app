@@ -294,6 +294,7 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
         />
 
         <Appearable
+          defaultState={ELEMENT_STATE.ACTIVE}
           isActive={!isLoading}
           isFullWidth={!isIconOnly}
           isLazy={false}>

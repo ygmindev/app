@@ -6,8 +6,11 @@ import { slug } from '@lib/shared/core/utils/slug/slug';
 import trim from 'lodash/trim';
 
 export const trimPathname = (
-  ...[value, isSlug = true]: TrimPathnameParamsModel
+  ...[value, options = {}]: TrimPathnameParamsModel
 ): TrimPathnameModel => {
+  if (value === '*') return value;
+  const isPrefix = options?.isPrefix ?? true;
+  const isSlug = options?.isSlug ?? true;
   const pathname = value
     .split('/')
     .filter(Boolean)
@@ -17,5 +20,6 @@ export const trimPathname = (
       return v;
     })
     .join('/');
-  return `/${trim(pathname, '/')}`;
+  const result = trim(pathname, '/');
+  return isPrefix ? `/${result}` : result;
 };

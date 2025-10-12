@@ -9,9 +9,7 @@ export const onBeforeClient: onBeforeClientModel = async (params) => {
   const { context } = params;
   params.context = merge([
     {
-      [LOCALE]: {
-        i18n: context?.[LOCALE]?.i18n ?? internationalizeConfig.config(),
-      },
+      [LOCALE]: { i18n: context?.[LOCALE]?.i18n ?? internationalizeConfig.config() },
       [STATE]: { cookies },
     },
     context,

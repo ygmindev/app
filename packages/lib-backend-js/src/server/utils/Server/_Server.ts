@@ -44,10 +44,17 @@ export class _Server implements _ServerModel {
     method,
     pathname,
     protocol,
+    subdomain,
   }: ApiEndpointModel<TType, TParams>): Promise<void> {
     await this._app.register(async (fastify) =>
       fastify.route({
         handler: async (req: FastifyRequest & I18NextRequest, rep) => {
+          if (subdomain) {
+            const host = req.headers.host ?? '';
+            if (host.split('.')[0] !== subdomain) {
+              return;
+            }
+          }
           const request = new HttpRequest({
             body: req.body as TParams,
             cookies: req.cookies as Record<string, string>,

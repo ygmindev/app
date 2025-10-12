@@ -6,6 +6,6 @@ import {
 export type _LinkPropsModel = ChildrenPropsModel &
   ElementStatePropsModel & {
     isNewTab?: boolean;
-    onPress?(): void;
     pathname?: string;
+    onPress?(): void;
   };

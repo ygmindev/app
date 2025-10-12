@@ -22,8 +22,6 @@ export const renderApp = ({ Root, children, context }: RenderAppParamsModel): Re
       context,
     ]),
   );
-  console.warn('@@@ CONTEXT:');
-  console.warn(contextF);
   const App: FCModel = () => <Root context={contextF}>{children}</Root>;
   const AppRegistryF = AppRegistry as {
     registerComponent: (name: string, component: () => ComponentType) => void;

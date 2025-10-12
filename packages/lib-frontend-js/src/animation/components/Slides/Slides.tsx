@@ -2,6 +2,7 @@ import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { type SlidesPropsModel } from '@lib/frontend/animation/components/Slides/Slides.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -25,6 +26,7 @@ export const Slides: LFCModel<SlidesPropsModel> = ({ current, slides, ...props }
           ({ element, id }, i) =>
             i === currentF && (
               <Slide
+                defaultState={i === 0 ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}
                 isBack={isBack}
                 key={id}>
                 {element}

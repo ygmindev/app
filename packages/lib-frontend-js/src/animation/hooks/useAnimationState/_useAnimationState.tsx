@@ -1,3 +1,4 @@
+import { THEME_ANIMATION } from '@lib/config/theme/theme.constants';
 import {
   type _UseAnimationStateModel,
   type _UseAnimationStateParamsModel,
@@ -15,13 +16,22 @@ import { ReduceMotion } from 'react-native-reanimated';
 
 export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   animation,
-  elementState = ELEMENT_STATE.INACTIVE,
+  defaultState,
+  elementState,
   onElementStateChange,
   ref,
 }: _UseAnimationStateParamsModel<TStyle>): _UseAnimationStateModel<TStyle> => {
-  const { delay, duration, isInfinite, isInitial, states } = animation ?? {};
+  const {
+    delay,
+    duration,
+    isInfinite,
+    isInitial = THEME_ANIMATION.isInitial,
+    states,
+  } = animation ?? {};
   const animationState = useDynamicAnimation();
-  const elementStateF = states && elementState ? (states[elementState] as never) : undefined;
+  const defaultStateF = defaultState ?? (isInitial ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE);
+  const currentState = elementState ?? defaultStateF;
+  const elementStateF = states?.[currentState] as never;
   return {
     animationProps: {
       animate: isInfinite
@@ -32,10 +42,10 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       animateInitialState: isInitial,
       exit: states?.[ELEMENT_STATE.EXIT],
       from: isInfinite
-        ? (states?.[ELEMENT_STATE.INACTIVE] as never)
+        ? (states?.[defaultStateF] as never)
         : ref?.current
           ? states && elementStateF
-          : (states?.[ELEMENT_STATE.INACTIVE] as never),
+          : (states?.[defaultStateF] as never),
       transition: {
         delay,
         duration,
@@ -50,9 +60,9 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
       animationState.animateTo(params as DynamicStyleProp<MotiTranformProps>);
     },
     toState: (params) => {
-      if (states && states[params]) {
+      if (states?.[params]) {
         animationState.animateTo(states[params] as DynamicStyleProp<MotiTranformProps>);
-        onElementStateChange && onElementStateChange(params);
+        onElementStateChange?.(params);
       }
     },
   };

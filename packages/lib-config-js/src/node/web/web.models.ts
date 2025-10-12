@@ -10,6 +10,8 @@ export type WebConfigModel = {
 
   isSsr?: boolean;
 
+  prefix: string;
+
   rootId: string;
 
   server: ServerConfigModel;
