@@ -42,7 +42,7 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
           : undefined
       }
       onSubmit={handleSubmit}
-      redirect={location.params?.redirect ?? { pathname: '/' }}
+      redirect={location.params?.redirect ?? { pathname: '' }}
       steps={[
         {
           element: (

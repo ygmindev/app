@@ -1,4 +1,3 @@
-import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import {
   type AsyncPropsModel,
   type FormErrorModel,
@@ -8,6 +7,7 @@ import {
   type _UseFormModel,
   type _UseFormParamsModel,
 } from '@lib/frontend/data/hooks/useForm/_useForm.models';
+import { type NotificationModel } from '@lib/frontend/notification/notification.models';
 import { type LocationModel } from '@lib/frontend/route/route.models';
 
 export type UseFormParamsModel<TType, TResult = void> = AsyncPropsModel &
@@ -17,9 +17,9 @@ export type UseFormParamsModel<TType, TResult = void> = AsyncPropsModel &
   > & {
     isValidateChanged?: boolean;
     redirect?: LocationModel<unknown>;
-    successMessage?: AsyncTextModel;
     validators?: FormValidatorsModel<TType>;
     onValidate?(errors?: FormErrorModel<TType>): void;
+    successMessage?(values?: TType): NotificationModel;
   };
 
 export type UseFormModel<TType, TResult = void> = _UseFormModel<TType, TResult> & {

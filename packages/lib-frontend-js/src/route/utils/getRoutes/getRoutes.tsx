@@ -1,4 +1,5 @@
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
+import { AppHomePage } from '@lib/frontend/app/pages/AppHomePage/AppHomePage';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
 import { devRoutes } from '@lib/frontend/dev/dev.routes';
 import { PingPage } from '@lib/frontend/http/pages/PingPage/PingPage';
@@ -17,6 +18,11 @@ import { trimRoutes } from '@lib/shared/route/utils/trimRoutes/trimRoutes';
 
 export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel => {
   let routes: Array<RouteModel> = trimRoutes([
+    {
+      element: <AppHomePage />,
+      pathname: '/',
+    },
+
     {
       element: <PingPage />,
       pathname: PING,

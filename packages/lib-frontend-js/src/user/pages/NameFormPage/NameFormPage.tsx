@@ -35,7 +35,7 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
         userUpdate({ id: currentUser._id, update: { first, last } })
       }
       p
-      successMessage={t('core:updatedSuccess', { value: t('user:name') })}
+      successMessage={() => ({ description: t('core:updatedSuccess', { value: t('user:name') }) })}
     />
   ) : null;
 };

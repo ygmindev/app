@@ -48,6 +48,6 @@
   "validateRange": "TRANSLATION_MISSING",
   "validateZipCode": "TRANSLATION_MISSING",
   "welcome": "welcome to {{value}}",
-  "welcomeBack": "welcome back",
+  "welcomeBack": "welcome back {{value}}",
   "yes": "yes"
 }

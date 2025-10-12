@@ -113,7 +113,9 @@ export const PaymentMethodInput: RLFCModel<
                 return result;
               }}
               p
-              successMessage={t('billing:paymentMethodSuccess')}
+              successMessage={() => ({
+                description: t('billing:paymentMethodSuccess'),
+              })}
               testID={PAYMENT_METHOD_INPUT_NEW_TEST_ID}
               type={BUTTON_TYPE.TRANSPARENT}>
               {t('core:new', { value: t('billing:paymentMethod') })}

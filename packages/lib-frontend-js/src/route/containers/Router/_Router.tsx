@@ -61,12 +61,12 @@ const getRouteConfig = (
     },
   );
 
-  let initialRoute = location?.pathname.split('/')[depth + 1];
-  initialRoute && (initialRoute = trimPathname(initialRoute));
+  let initialRoute = location?.pathname.split('/')[depth + 1] ?? '';
+  initialRoute = trimPathname(initialRoute);
 
   return {
     config: {
-      path: route.pathname,
+      path: route.pathname ?? '/',
       ...(routesConfig?.screens ? { screens: routesConfig.screens } : {}),
     } as LinkingOptions<EmptyObjectModel>['config'],
 
@@ -89,6 +89,7 @@ export const _Router = composeComponent<_RouterPropsModel, NavigationContainerPr
 
   getProps: ({ routes, value }) => {
     const { config, element } = getRouteConfig({ pathname: '', routes }, value?.location);
+    console.warn(config);
     return {
       children: element,
       linking: {
