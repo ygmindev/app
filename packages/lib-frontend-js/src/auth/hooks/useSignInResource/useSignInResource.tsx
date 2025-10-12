@@ -2,7 +2,6 @@ import { sleepForTransition } from '@lib/frontend/animation/utils/sleepForTransi
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import { type UseSignInResourceModel } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
-import { useContainer } from '@lib/frontend/core/hooks/useContainer/useContainer';
 import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
@@ -20,7 +19,7 @@ import { type UserModel } from '@lib/model/user/User/User.models';
 import { SIGN_IN, VERIFY_TOKEN } from '@lib/shared/auth/auth.constants';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { type PartialModel } from '@lib/shared/core/core.models';
-import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 
 const USER_FIELDS = USER_RESOURCE_PARAMS.fields.map(({ fields, id }) =>
@@ -33,7 +32,6 @@ export const useSignInResource = (): UseSignInResourceModel => {
   const { signInWithToken, signOut } = useSession();
   const [, authStatusSet] = useStore('auth.status');
   const [, authTokenSet] = useStore('auth.token');
-  const pubsub = useContainer(PubSub);
 
   const { query } = useAppGraphql();
 
@@ -43,6 +41,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
       const { token, user } = signIn;
       user && currentUserSet(user);
       token && (await signInWithToken(token));
+      await sleep();
     } else {
       throw new UnauthorizedError();
     }

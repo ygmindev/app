@@ -1,3 +1,4 @@
+import { AppContainer } from '@lib/frontend/app/containers/AppContainer/AppContainer';
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { AppHomePage } from '@lib/frontend/app/pages/AppHomePage/AppHomePage';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
@@ -13,6 +14,7 @@ import {
 } from '@lib/frontend/route/utils/getRoutes/getRoutes.models';
 import { testRoutes } from '@lib/frontend/test/test.routes';
 import { userRoutes } from '@lib/frontend/user/user.routes';
+import { APP } from '@lib/shared/app/app.constants';
 import { PING } from '@lib/shared/http/http.constants';
 import { trimRoutes } from '@lib/shared/route/utils/trimRoutes/trimRoutes';
 
@@ -29,17 +31,11 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel => 
       prerender: true,
     },
 
-    {
-      element: <PingPage />,
-      pathname: 'ping2',
-      prerender: true,
-    },
-
     ...authRoutes,
 
     {
       element: <AppLayout />,
-      pathname: 'app',
+      pathname: APP,
       routes: [
         ...params,
 
@@ -70,5 +66,11 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel => 
     ]),
   ];
 
-  return routes;
+  return [
+    {
+      element: <AppContainer />,
+      pathname: '/',
+      routes,
+    },
+  ];
 };

@@ -1,5 +1,5 @@
 {
-  "brightness": "TRANSLATION_MISSING",
-  "dark": "Dark",
-  "light": "Light"
+  "brightness": "brightness",
+  "dark": "dark",
+  "light": "light"
 }

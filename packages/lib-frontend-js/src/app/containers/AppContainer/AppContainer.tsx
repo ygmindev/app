@@ -55,7 +55,7 @@ export const AppContainer: LFCModel<AppContainerPropsModel> = ({ children, ...pr
 
               {children}
 
-              {notifications && notifications.length > 0 && <Notifications />}
+              {(notifications?.length ?? 0) > 0 && <Notifications />}
             </Wrapper>
           </Wrapper>
         </PortalHost>

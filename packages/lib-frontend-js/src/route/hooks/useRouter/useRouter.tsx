@@ -8,7 +8,7 @@ import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import isNumber from 'lodash/isNumber';
 import isString from 'lodash/isString';
 
-export const useRouter = <TType = object,>(): UseRouterModel<TType> => {
+export const useRouter = <TType,>(): UseRouterModel<TType> => {
   const { back, getPath, isActive, isMounted, location, push, replace } = _useRouter<TType>();
   const [, isBackSet] = useStore('route.isBack');
   const [isLoading] = useStore('app.isLoading');

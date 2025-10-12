@@ -57,7 +57,6 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   const dismiss = useDismiss(context);
   const role = useRole(context);
   const { getFloatingProps, getReferenceProps } = useInteractions([click, dismiss, role]);
-
   return (
     <>
       <div
@@ -67,7 +66,7 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
         {anchor}
       </div>
 
-      {(isOpen || isOpenF) && (
+      {(isOpen || isOpenF) && refs.reference.current && (
         <FloatingPortal>
           <FloatingFocusManager
             closeOnFocusOut

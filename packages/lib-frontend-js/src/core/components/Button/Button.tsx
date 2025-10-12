@@ -78,7 +78,6 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
     const activeColor = colorF[THEME_ROLE.ACTIVE];
     const mainColor = colorF[THEME_ROLE.MAIN];
     const surfaceColor = theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN];
-    const contrastColor = theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST];
     switch (type) {
       case BUTTON_TYPE.FILLED: {
         return {
@@ -153,23 +152,22 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
             states: {
               [ELEMENT_STATE.ACTIVE]: {
                 borderColor: mainColor,
-                borderWidth: 1.5,
+                borderWidth: 2,
               },
               [ELEMENT_STATE.DISABLED]: {
-                borderColor: theme.color.border,
+                borderColor: mainColor,
                 borderWidth: 1,
               },
               [ELEMENT_STATE.LOADING]: {
-                borderColor: theme.color.border,
+                borderColor: mainColor,
                 borderWidth: 1,
               },
               [ELEMENT_STATE.INACTIVE]: {
-                borderColor: theme.color.border,
+                borderColor: mainColor,
                 borderWidth: 1,
               },
             },
           },
-          // childColor: isActive ? activeColor : contrastColor,
           childColorRole: THEME_ROLE.MAIN,
           containerAnimation: {
             states: {

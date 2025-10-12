@@ -1,4 +1,3 @@
-import { AppContainer } from '@lib/frontend/app/containers/AppContainer/AppContainer';
 import { AppProvider } from '@lib/frontend/app/containers/AppProvider/AppProvider';
 import { AuthProvider } from '@lib/frontend/auth/providers/AuthProvider/AuthProvider';
 import { OAuthProvider } from '@lib/frontend/auth/providers/OAuthProvider/OAuthProvider';
@@ -39,7 +38,6 @@ export const Root: FCModel<RootPropsModel> = ({ children, context }) => {
   const providers = useMemo<Array<ReactElement>>(
     () =>
       filterNil([
-        <AppContainer />,
         <AsyncBoundary />,
         <ContextProvider value={context} />,
         <TrackingProvider />,

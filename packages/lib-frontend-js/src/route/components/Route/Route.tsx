@@ -2,6 +2,7 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useValueDelayed';
 import { type RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -12,6 +13,7 @@ import { cloneElement, useMemo } from 'react';
 export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { isMounted } = useRouter();
+  const isMountedF = useValueDelayed(isMounted);
 
   const element = useMemo(() => {
     let elementF = route?.element ?? (
@@ -29,7 +31,8 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
           <Appearable
             defaultState={ELEMENT_STATE.ACTIVE}
             isAbsoluteFill
-            isActive={isMounted}>
+            isActive={isMounted}
+            zIndex={isMounted ? true : undefined}>
             {elementF}
           </Appearable>
         );
@@ -38,13 +41,15 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
   }, [route, children, isMounted]);
 
   return (
-    <Wrapper
-      {...wrapperProps}
-      backgroundColor={THEME_COLOR_MORE.SURFACE}
-      isAbsoluteFill
-      isVerticalScrollable
-      zIndex>
-      {element}
-    </Wrapper>
+    (isMountedF || isMounted) && (
+      <Wrapper
+        {...wrapperProps}
+        backgroundColor={THEME_COLOR_MORE.SURFACE}
+        isAbsoluteFill
+        isVerticalScrollable
+        zIndex>
+        {element}
+      </Wrapper>
+    )
   );
 };
