@@ -86,10 +86,6 @@ export const config = defineConfig<ThemeConfigModel>({
     },
 
     layout: {
-      dropdown: {
-        maxHeight: 300,
-      },
-
       header: {
         height: 58,
 

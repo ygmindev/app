@@ -43,6 +43,7 @@ import { useImperativeHandle, useState } from 'react';
 
 export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
   children,
+  defaultState,
   height,
   isFullSize,
   isOpen,
@@ -60,7 +61,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
   const [swipe, swipeSet] = useState<PositionModel>();
 
   const { valueControlled, valueControlledSet } = useValueControlled({
-    defaultValue: false,
+    defaultValue: defaultState === ELEMENT_STATE.ACTIVE ? true : false,
     onChange: onToggle,
     value: isOpen,
   });

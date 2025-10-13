@@ -32,6 +32,7 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
   direction,
   elementState,
   isFullWidth,
+  maxHeight,
   onChange,
   onElementStateChange,
   options,
@@ -81,9 +82,14 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
     testID: anchorF.props.testID ?? `${props.testID}-toggle`,
   });
 
+  const maxHeightF =
+    maxHeight ?? theme.layout.height[isMobile ? THEME_SIZE.LARGE : THEME_SIZE.SMALL];
+
   const children = (
     <VirtualizedList
+      itemSize={theme.shape.size[THEME_SIZE.MEDIUM]}
       items={options}
+      maxHeight={maxHeightF}
       pTop={THEME_SIZE.SMALL}
       render={(option: TType, index) => {
         const { color, confirmMessage, icon, id, label } = option;
@@ -127,6 +133,7 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
         {...wrapperProps}
         isFullSize={false}
         isOpen={isActive}
+        maxHeight={maxHeightF}
         onToggle={handleToggle}
         title={title}>
         {children}
@@ -140,6 +147,7 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
       isFullWidth={isFullWidth}
       isHidden={!options?.length}
       isOpen={isActive}
+      maxHeight={maxHeightF}
       minWidth={theme.shape.width[THEME_SIZE.LARGE]}
       onToggle={handleToggle}
       ref={dropdownRef}

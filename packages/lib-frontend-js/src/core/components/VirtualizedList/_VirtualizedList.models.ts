@@ -8,6 +8,7 @@ export type _VirtualizedListPropsModel<TType extends WithIdModel> = _ViewPropsMo
   isHorizontal?: boolean;
   itemSize?: number;
   items: Array<TType>;
+  maxHeight?: number;
   render(item: TType, index: number): ReactElement;
 };
 

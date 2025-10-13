@@ -66,7 +66,7 @@ export const Dropdown: RLFCModel<DropdownRefModel, DropdownPropsModel> = ({
             flex
             isFullWidth
             isVerticalScrollable
-            maxHeight={maxHeight ?? theme.layout.dropdown.maxHeight}
+            maxHeight={maxHeight ?? theme.layout.height[THEME_SIZE.SMALL]}
             p={THEME_SIZE.SMALL}
             ref={wrapperRef}>
             {children}
