@@ -2,6 +2,7 @@ import { AppContainer } from '@lib/frontend/app/containers/AppContainer/AppConta
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { AppHomePage } from '@lib/frontend/app/pages/AppHomePage/AppHomePage';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { devRoutes } from '@lib/frontend/dev/dev.routes';
 import { PingPage } from '@lib/frontend/http/pages/PingPage/PingPage';
 import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
@@ -29,6 +30,22 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel => 
       element: <PingPage />,
       pathname: PING,
       prerender: true,
+    },
+
+    {
+      element: (
+        <Wrapper
+          backgroundColor="red"
+          flex
+        />
+      ),
+      pathname: 'ping-parent',
+      routes: [
+        {
+          element: <PingPage />,
+          pathname: PING,
+        },
+      ],
     },
 
     ...authRoutes,

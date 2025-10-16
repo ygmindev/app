@@ -1,5 +1,5 @@
 export enum ROUTE_TRANSITION {
-  MODAL = 'modal',
+  // MODAL = 'modal',
   SLIDE = 'slide',
 }
 

@@ -55,11 +55,11 @@ export const _useRouter = <TType,>(): _UseRouterModel<TType> => {
     },
 
     push: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
-      navigation.dispatch(StackActions.push(...getNestedPathname(pathname, params)));
+      navigation.dispatch(StackActions.push(pathname, params));
     },
 
     replace: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
-      navigation.dispatch(StackActions.replace(...getNestedPathname(pathname, params)));
+      navigation.dispatch(StackActions.replace(pathname, params));
     },
   };
 };

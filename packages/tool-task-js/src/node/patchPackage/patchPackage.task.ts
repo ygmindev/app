@@ -60,8 +60,9 @@ const patchPackage: TaskParamsModel<PatchPackageParamsModel> = {
           { key: 'confirm', message: `commit patch from ${dirname}`, type: PROMPT_TYPE.CONFIRM },
         ]);
         confirm && (await execute({ command: patchCommitCommand(dirname) }));
+      } else {
+        throw new NotFoundError('pkg');
       }
-      throw new NotFoundError('pkg');
     },
   ],
 };

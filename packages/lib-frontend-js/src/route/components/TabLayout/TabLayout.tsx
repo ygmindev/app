@@ -5,11 +5,11 @@ import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type TabLayoutPropsModel } from '@lib/frontend/route/components/TabLayout/TabLayout.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { type RouteModel } from '@lib/frontend/route/route.models';
+// import { type RouteModel } from '@lib/frontend/route/route.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import find from 'lodash/find';
+// import find from 'lodash/find';
 import { useEffect } from 'react';
 
 export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type, ...props }) => {
@@ -23,14 +23,14 @@ export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type
   );
 
   useEffect(() => {
-    const isMountedF = isActive({ isExact: true, pathname: route?.fullpath });
-    if (isMountedF && !activeChild && route?.routes) {
-      const child = find<RouteModel>(route.routes, ({ isNavigatable = true }) => isNavigatable);
-      if (child) {
-        const pathname = getPath(child.fullpath ?? child.pathname, location.params);
-        push({ pathname });
-      }
-    }
+    // const isMountedF = isActive({ isExact: true, pathname: route?.fullpath });
+    // if (isMountedF && !activeChild && route?.routes) {
+    //   const child = find<RouteModel>(route.routes, ({ isNavigatable = true }) => isNavigatable);
+    //   if (child) {
+    //     const pathname = getPath(child.fullpath ?? child.pathname, location.params);
+    //     push({ pathname });
+    //   }
+    // }
   }, [activeChild]);
 
   return (
@@ -40,8 +40,8 @@ export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type
       isFullHeight>
       <Tabs
         onChange={(pathname) => {
-          const pathnameF = getPath(pathname, location.params);
-          void push({ pathname: pathnameF });
+          // const pathnameF = getPath(pathname, location.params);
+          void push({ pathname });
         }}
         tabs={filterNil(
           route?.routes?.map(

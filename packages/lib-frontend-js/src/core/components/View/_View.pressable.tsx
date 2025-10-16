@@ -24,7 +24,7 @@ export const getViewParams = (): ComposeComponentParamsModel<
     { onPress, onPressIn, onPressOut, onResponderGrant, onResponderRelease, ...props },
     ...params
   ) => ({
-    ...(viewParamsBase.getProps && viewParamsBase.getProps(props, ...params)),
+    ...(viewParamsBase.getProps?.(props, ...params) ?? {}),
 
     activeOpacity: 1,
 

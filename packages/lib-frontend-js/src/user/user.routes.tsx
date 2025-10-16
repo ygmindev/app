@@ -17,16 +17,16 @@ import { phoneNumber } from '@lib/shared/locale/utils/phoneNumber/phoneNumber';
 export const userRoutes: Array<RouteModel> = [
   {
     icon: 'settings',
+
     isProtectable: true,
 
-    pathname: SETTINGS,
+    navigation: ROUTE_NAVIGATION.TAB,
 
-    previous: '/',
+    pathname: SETTINGS,
 
     routes: [
       {
         icon: 'person',
-        // navigation: ROUTE_NAVIGATION.TAB,
         pathname: PROFILE,
         routes: [
           {
@@ -94,7 +94,5 @@ export const userRoutes: Array<RouteModel> = [
     ],
 
     title: ({ t }) => t('settings:settings'),
-
-    // transition: ROUTE_TRANSITION.MODAL,
   },
 ];

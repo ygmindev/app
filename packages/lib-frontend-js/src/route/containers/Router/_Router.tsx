@@ -12,15 +12,14 @@ import {
   type NavigationState,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { cloneElement, type ComponentClass, type ReactElement } from 'react';
+import { cloneElement, type ComponentClass, type ComponentType, type ReactElement } from 'react';
 
-const getActivePathname = (state: NavigationState, root: string = ''): string => {
+const getActivePathname = (state: NavigationState): string => {
   const route = state.routes[state.index ?? 0];
-  const pathname = `${root}/${route.name ?? ''}`;
   if (route.state?.routes) {
-    return trimPathname(getActivePathname(route.state as NavigationState, pathname));
+    return trimPathname(getActivePathname(route.state as NavigationState));
   }
-  return trimPathname(pathname);
+  return trimPathname(route.name);
 };
 
 const getRouteConfig = (
@@ -36,22 +35,25 @@ const getRouteConfig = (
   const routesConfig = route.routes?.reduce(
     (result, v) => {
       const childConfig = getRouteConfig(v, location, depth + 1);
+      const fullPathname = v.fullpath ?? v.pathname;
+      const Component: ComponentType = () =>
+        elementF && cloneElement(elementF, { children: childConfig.element });
       return {
         elements: [
           ...(result?.elements ?? []),
           ...(childConfig.element && Stack
             ? [
                 <Stack.Screen
-                  key={v.pathname}
-                  name={v.pathname}>
-                  {() => elementF && cloneElement(elementF, { children: childConfig.element })}
-                </Stack.Screen>,
+                  component={Component}
+                  key={fullPathname}
+                  name={fullPathname}
+                />,
               ]
             : []),
         ],
         screens: {
           ...result?.screens,
-          [v.pathname]: v.routes ? childConfig.config : v.pathname,
+          [fullPathname]: v.routes ? childConfig.config : v.pathname,
         },
       };
     },
@@ -62,8 +64,11 @@ const getRouteConfig = (
   );
 
   let initialRoute: string | undefined;
-  if (route.routes) {
-    initialRoute = location?.pathname.split('/')[depth] ?? '';
+  if (location?.pathname && route.routes) {
+    initialRoute = location.pathname
+      .split('/')
+      .slice(0, depth + 1)
+      .join('/');
     initialRoute = trimPathname(initialRoute);
     !Object.keys(routesConfig?.screens ?? {}).includes(initialRoute) && (initialRoute = undefined);
   }
@@ -77,10 +82,10 @@ const getRouteConfig = (
     element:
       route.routes && Stack ? (
         <Stack.Navigator
-          detachInactiveScreens
+          detachInactiveScreens={false}
           initialRouteName={initialRoute}
-          key={route.pathname}
-          screenOptions={{ detachPreviousScreen: false, headerShown: false }}>
+          key={route.fullpath ?? route.pathname}
+          screenOptions={{ headerShown: false }}>
           {routesConfig?.elements}
         </Stack.Navigator>
       ) : (
@@ -99,10 +104,6 @@ export const _Router = composeComponent<_RouterPropsModel, NavigationContainerPr
       linking: {
         config: { screens: config?.screens },
         getPathFromState: (state) => getActivePathname(state as NavigationState),
-        // getStateFromPath: (path, options) => {
-        //   const normalized = path.startsWith('/') ? path.slice(1) : path;
-        //   return getStateFromPath(normalized, options);
-        // },
         prefixes: process.env.ENV_PLATFORM === 'web' ? [APP_URI] : [],
       } as LinkingOptions<EmptyObjectModel>,
     };
