@@ -77,6 +77,7 @@ export const userRoutes: Array<RouteModel> = [
         pathname: APPEARANCE,
         title: ({ t }) => t('settings:appearance'),
       },
+
       {
         element: <LocaleSettingsPage />,
         icon: 'globe',

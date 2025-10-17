@@ -10,9 +10,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
   const { wrapperProps } = useLayoutStyles({ props });
   const [tab, tabChange] = useState<string>('tab1');
   return (
-    <MainLayout
-      {...wrapperProps}
-      p>
+    <MainLayout {...wrapperProps}>
       <Tabs
         onChange={tabChange}
         tabs={[{ id: 'tab1' }, { id: 'tab2' }]}

@@ -45,7 +45,6 @@ export const ProductPage: LFCModel<ProductPagePropsModel> = ({ ...props }) => {
           //   />
           // }
           isFullHeight
-          p
           s>
           <Skeleton>
             <Text fontStyle={FONT_STYLE.TITLE}>{data?.name}</Text>

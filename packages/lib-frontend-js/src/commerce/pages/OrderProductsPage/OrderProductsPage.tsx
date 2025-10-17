@@ -31,13 +31,10 @@ export const OrderProductsPage: LFCModel<OrderProductsPagePropsModel> = ({ ...pr
       ]}
       initialValues={{ items }}
       onSuccess={async () => push({ pathname: `${ORDER}/${PAYMENT}` })}
-      p
       testID={ORDER_PRODUCTS_TEST_ID}
     />
   ) : (
-    <MainLayout
-      {...wrapperProps}
-      p>
+    <MainLayout {...wrapperProps}>
       <Title
         description={
           <Trans

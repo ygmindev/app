@@ -1,3 +1,4 @@
+import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import {
@@ -9,17 +10,22 @@ export const trimRoute = (route: RouteModel, depth = 0): RouteModel => {
   route.pathname = route.pathname && trimPathname(route.pathname);
   route.depth = route.pathname === '/' ? depth : depth + 1;
   route.fullpath = trimPathname(`${route.parent ?? ''}/${route.pathname}`);
-  route.routes &&
-    (route.routes = route.routes.map((child) =>
+  if (route.routes) {
+    route.routes = route.routes.map((child) =>
       trimRoute(
         {
           ...child,
           parent: route.fullpath,
           previous: child.previous ?? route.previous,
+          transition:
+            child.transition ??
+            (route.navigation === ROUTE_NAVIGATION.TAB ? ROUTE_TRANSITION.SLIDE : undefined),
         },
         route.depth,
       ),
-    ));
+    );
+  }
+
   return route;
 };
 

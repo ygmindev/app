@@ -85,7 +85,7 @@ const getRouteConfig = (
           detachInactiveScreens={false}
           initialRouteName={initialRoute}
           key={route.fullpath ?? route.pathname}
-          screenOptions={{ headerShown: false }}>
+          screenOptions={{ animation: 'none', headerShown: false }}>
           {routesConfig?.elements}
         </Stack.Navigator>
       ) : (

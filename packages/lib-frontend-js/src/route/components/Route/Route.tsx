@@ -36,13 +36,27 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
     );
     children && (elementF = cloneElement(elementF, { children }));
 
+    const defaultState = isMounted
+      ? appPhase == APP_PHASE.CLIENT_SIDE_NAVIGATION
+        ? undefined
+        : ELEMENT_STATE.ACTIVE
+      : undefined;
+
     switch (route?.transition) {
+      // case ROUTE_TRANSITION.SLIDE: {
+      //   elementF = (
+      //     <Slide
+      //       defaultState={defaultState}
+      //       elementState={isMounted ? ELEMENT_STATE.ACTIVE : undefined}>
+      //       {elementF}
+      //     </Slide>
+      //   );
+      //   break;
+      // }
       default: {
         elementF = (
           <Appearable
-            defaultState={
-              appPhase == APP_PHASE.CLIENT_SIDE_NAVIGATION ? undefined : ELEMENT_STATE.ACTIVE
-            }
+            defaultState={defaultState}
             isAbsoluteFill
             isActive={isMounted}
             zIndex={isMounted ? true : undefined}>

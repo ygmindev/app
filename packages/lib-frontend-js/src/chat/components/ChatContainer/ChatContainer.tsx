@@ -35,7 +35,6 @@ export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
       bottomElement={<ChatForm onAdd={handleAdd} />}
       isFullHeight
       isFullWidth
-      p
       round>
       <Wrapper
         flex

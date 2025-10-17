@@ -13,7 +13,6 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
   return (
     <MainLayout
       {...wrapperProps}
-      p
       s>
       <Text fontStyle={FONT_STYLE.HEADLINE}>{t('core:welcomeBack')}</Text>
 
