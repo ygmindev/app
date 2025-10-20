@@ -52,6 +52,7 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ ...props }) => {
                 isActive={!isMinimized || !isActive}
                 isCenter
                 isLazy={false}
+                isScalable={false}
                 left={0}
                 position={SHAPE_POSITION.ABSOLUTE}
                 top={0}
@@ -61,12 +62,6 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ ...props }) => {
               </Appearable>
 
               <Wrapper
-                animation={{
-                  states: {
-                    [ELEMENT_STATE.ACTIVE]: { opacity: 1 },
-                    [ELEMENT_STATE.INACTIVE]: { opacity: theme.opaque[THEME_SIZE.MEDIUM] },
-                  },
-                }}
                 elementState={elementState}
                 height={theme.shape.size[THEME_SIZE.MEDIUM]}
                 position={SHAPE_POSITION.ABSOLUTE}

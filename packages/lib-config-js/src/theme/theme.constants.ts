@@ -12,7 +12,5 @@ export const THEME_COLOR_TONES: Record<THEME_COLOR, string> = {
 export const THEME_ANIMATION: ThemeConfigModel['animation'] = {
   effect: 100,
 
-  isInitial: true,
-
   transition: 300,
 };

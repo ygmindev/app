@@ -5,6 +5,7 @@ import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/Async
 import { ContainerProvider } from '@lib/frontend/core/containers/ContainerProvider/ContainerProvider';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { QueryProvider } from '@lib/frontend/data/providers/QueryProvider/QueryProvider';
+import { DevProvider } from '@lib/frontend/dev/providers/DevProvider/DevProvider';
 import { LocaleProvider } from '@lib/frontend/locale/providers/LocaleProvider/LocaleProvider';
 import {
   ActionContext,
@@ -48,6 +49,7 @@ export const Root: FCModel<RootPropsModel> = ({ children, context }) => {
         <LocaleProvider value={context?.[LOCALE]} />,
         <AppProvider />,
         <ContainerProvider />,
+        process.env.NODE_ENV === 'development' && <DevProvider />,
         <store.Provider
           value={{
             ...context?.[STATE],

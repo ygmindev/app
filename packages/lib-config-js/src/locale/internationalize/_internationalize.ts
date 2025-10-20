@@ -44,7 +44,7 @@ export const _internationalize = ({
     react: {
       bindI18n: 'languageChanged loaded',
       defaultTransParent: 'div',
-      useSuspense: false,
+      useSuspense: isPreload,
     },
 
     supportedLngs: languages.map(({ id }) => id),

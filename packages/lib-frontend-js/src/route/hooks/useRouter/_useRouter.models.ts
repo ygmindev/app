@@ -1,13 +1,13 @@
 import { type LocationModel, type LocationUpdateModel } from '@lib/frontend/route/route.models';
 
-export type _UseRouterModel<TType = object> = {
-  isMounted: boolean;
+export type _UseRouterModel = {
+  depth?: number;
 
-  location: LocationModel<TType>;
+  isMounted?: boolean;
+
+  location: LocationModel;
 
   back(): void;
-
-  getPath<TTypeNext>(pathname: string, params?: TTypeNext): string;
 
   isActive(params: { from?: string; isExact?: boolean; pathname?: string }): boolean;
 

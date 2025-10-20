@@ -1,5 +1,3 @@
-import { type RouteModel } from '@lib/frontend/route/route.models';
+import { type _RouterPropsModel } from '@lib/frontend/route/containers/Router/_Router.models';
 
-export type RouterPropsModel = {
-  routes: Array<RouteModel>;
-};
+export type RouterPropsModel = Pick<_RouterPropsModel, 'routes'>;

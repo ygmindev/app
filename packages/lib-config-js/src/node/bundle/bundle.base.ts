@@ -54,6 +54,8 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       include: [...cartesianString([fromPackages('*/src/**/*')], EXTENSIONS_BASE)],
 
+      isSourcemap: process.env.NODE_ENV === 'development',
+
       logSuppressPatterns: [/.*sourcemap.*/i, /.*source map.*/i],
 
       mainFields: ['module', 'main'],

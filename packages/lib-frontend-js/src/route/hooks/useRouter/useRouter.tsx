@@ -9,7 +9,7 @@ import isNumber from 'lodash/isNumber';
 import isString from 'lodash/isString';
 
 export const useRouter = <TType,>(): UseRouterModel<TType> => {
-  const { back, getPath, isActive, isMounted, location, push, replace } = _useRouter<TType>();
+  const { back, isActive, isMounted, location, push, replace } = _useRouter();
   const [, isBackSet] = useStore('route.isBack');
   const [isLoading] = useStore('app.isLoading');
   const theme = useTheme();
@@ -46,8 +46,6 @@ export const useRouter = <TType,>(): UseRouterModel<TType> => {
     back: () => {
       void update(back, { isBack: true });
     },
-
-    getPath,
 
     isActive: ({ from, pathname, ...params }) =>
       pathname

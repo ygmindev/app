@@ -17,6 +17,8 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { PROFILE } from '@lib/frontend/user/user.constants';
+import { APP } from '@lib/shared/app/app.constants';
 import { AUTH, SIGN_IN, SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import { useRef } from 'react';
 
@@ -24,9 +26,8 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) =
   const { t } = useTranslation([AUTH]);
   const { wrapperProps } = useLayoutStyles({ props });
   const { signOut } = useSignInResource();
-  const { push } = useRouter();
+  const { location, push } = useRouter();
   const [authStatus] = useStore('auth.status');
-  const [isMinimized] = useStore('app.layout.isMinimized');
 
   const menuRef = useRef<MenuRefModel>(null);
   const isAuthenticated = authStatus === AUTH_STATUS.AUTHENTICATED;
@@ -38,7 +39,7 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) =
           icon: 'settings',
           id: SETTINGS,
           label: t('settings:settings'),
-          onPress: () => push({ pathname: SETTINGS }),
+          onPress: () => push({ pathname: `/${APP}/${SETTINGS}/${PROFILE}` }),
         },
         {
           color: THEME_COLOR.ERROR,
@@ -63,10 +64,10 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) =
       anchor={(isOpen) => (
         <Button
           elementState={isOpen ? ELEMENT_STATE.ACTIVE : undefined}
-          icon="menu"
+          icon={isAuthenticated ? 'menu' : 'signin'}
           isFullWidth
           tooltip={t('core:menu')}>
-          {isAuthenticated ? currentUser?.email : ''}
+          {isAuthenticated ? currentUser?.email : t('auth:signIn')}
         </Button>
       )}
       direction={DIRECTION.TOP}

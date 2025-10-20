@@ -216,6 +216,8 @@ export const _bundle = ({
 
       rollupOptions,
 
+      sourcemap: isSourcemap,
+
       watch: process.env.NODE_ENV === 'development' && watch ? { include: watch } : undefined,
     },
 
@@ -227,6 +229,8 @@ export const _bundle = ({
 
     esbuild: {
       loader: 'tsx',
+
+      sourcemap: isSourcemap,
     },
 
     mode: process.env.NODE_ENV,
@@ -277,7 +281,7 @@ export const _bundle = ({
 
         resolveExtensions: extensions,
 
-        sourcemap: isSourcemap ? 'linked' : undefined,
+        sourcemap: isSourcemap ? true : undefined,
 
         target: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node20' : undefined,
 

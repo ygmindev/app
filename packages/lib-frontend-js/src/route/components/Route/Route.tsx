@@ -1,4 +1,5 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
+import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { useAppPhase } from '@lib/frontend/app/hooks/useAppPhase/useAppPhase';
 import { APP_PHASE } from '@lib/frontend/app/hooks/useAppPhase/useAppPhase.constants';
 import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
@@ -9,10 +10,9 @@ import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useVal
 import { type RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { TabLayout } from '@lib/frontend/route/components/TabLayout/TabLayout';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
-import { ROUTE_NAVIGATION } from '@lib/frontend/route/route.constants';
+import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { cloneElement, useMemo } from 'react';
 
@@ -43,23 +43,24 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
       : undefined;
 
     switch (route?.transition) {
-      // case ROUTE_TRANSITION.SLIDE: {
-      //   elementF = (
-      //     <Slide
-      //       defaultState={defaultState}
-      //       elementState={isMounted ? ELEMENT_STATE.ACTIVE : undefined}>
-      //       {elementF}
-      //     </Slide>
-      //   );
-      //   break;
-      // }
+      case ROUTE_TRANSITION.SLIDE: {
+        elementF = (
+          <Slide
+            defaultState={defaultState}
+            elementState={isMounted ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
+            zIndex={isMountedF ? true : undefined}>
+            {elementF}
+          </Slide>
+        );
+        break;
+      }
       default: {
         elementF = (
           <Appearable
             defaultState={defaultState}
             isAbsoluteFill
             isActive={isMounted}
-            zIndex={isMounted ? true : undefined}>
+            zIndex={isMountedF ? true : undefined}>
             {elementF}
           </Appearable>
         );
@@ -87,10 +88,9 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
     (isMounted || isMountedF) && (
       <Wrapper
         {...wrapperProps}
-        backgroundColor={THEME_COLOR_MORE.SURFACE}
-        isAbsoluteFill
-        isVerticalScrollable
-        zIndex>
+        flex
+        isTransparent
+        position={SHAPE_POSITION.RELATIVE}>
         {element}
       </Wrapper>
     )

@@ -34,7 +34,6 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
       onSubmit={async ({ first, last }: NameFormModel) =>
         userUpdate({ id: currentUser._id, update: { first, last } })
       }
-      p
       successMessage={() => ({ description: t('core:updatedSuccess', { value: t('user:name') }) })}
     />
   ) : null;

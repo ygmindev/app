@@ -2,12 +2,12 @@ import { AppContainer } from '@lib/frontend/app/containers/AppContainer/AppConta
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { AppHomePage } from '@lib/frontend/app/pages/AppHomePage/AppHomePage';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { devRoutes } from '@lib/frontend/dev/dev.routes';
 import { PingPage } from '@lib/frontend/http/pages/PingPage/PingPage';
 import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
 import { SITE_MAP } from '@lib/frontend/route/pages/route.constants';
 import { SitemapPage } from '@lib/frontend/route/pages/SitemapPage/SitemapPage';
+import { ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 import {
   type GetRoutesModel,
@@ -30,22 +30,21 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel => 
       element: <PingPage />,
       pathname: PING,
       prerender: true,
+      transition: ROUTE_TRANSITION.SLIDE,
     },
 
     {
-      element: (
-        <Wrapper
-          backgroundColor="red"
-          flex
-        />
-      ),
-      pathname: 'ping-parent',
-      routes: [
-        {
-          element: <PingPage />,
-          pathname: PING,
-        },
-      ],
+      element: <PingPage />,
+      pathname: 'ping1',
+      prerender: true,
+      transition: ROUTE_TRANSITION.SLIDE,
+    },
+
+    {
+      element: <PingPage />,
+      pathname: 'ping2',
+      prerender: true,
+      transition: ROUTE_TRANSITION.SLIDE,
     },
 
     ...authRoutes,

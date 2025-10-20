@@ -1,4 +1,3 @@
-import { THEME_ANIMATION } from '@lib/config/theme/theme.constants';
 import {
   type _UseAnimationStateModel,
   type _UseAnimationStateParamsModel,
@@ -21,13 +20,7 @@ export const _useAnimationState = <TStyle extends StyleModel = ViewStyleModel>({
   onElementStateChange,
   ref,
 }: _UseAnimationStateParamsModel<TStyle>): _UseAnimationStateModel<TStyle> => {
-  const {
-    delay,
-    duration,
-    isInfinite,
-    isInitial = THEME_ANIMATION.isInitial,
-    states,
-  } = animation ?? {};
+  const { delay, duration, isInfinite, isInitial = true, states } = animation ?? {};
   const animationState = useDynamicAnimation();
   const defaultStateF = defaultState ?? (isInitial ? ELEMENT_STATE.INACTIVE : ELEMENT_STATE.ACTIVE);
   const currentState = elementState ?? defaultStateF;
