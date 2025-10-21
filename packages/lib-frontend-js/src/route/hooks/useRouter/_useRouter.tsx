@@ -1,3 +1,4 @@
+import { navigationRef } from '@lib/frontend/route/containers/Router/_Router';
 import { type _UseRouterModel } from '@lib/frontend/route/hooks/useRouter/_useRouter.models';
 import {
   type LocationParamsModel,
@@ -32,12 +33,6 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
   return {
     back: () => navigation.canGoBack() && navigation.goBack(),
 
-    // getPath: <TTypeNext,>(pathname: string, params?: TTypeNext) => {
-    //   if (!params) return pathname;
-    //   const query = new URLSearchParams(params as Record<string, string>).toString();
-    //   return query ? `${pathname}?${query}` : pathname;
-    // },
-
     isActive: ({ from, isExact = false, pathname } = {}) => {
       if (!pathname) return isFocused;
       const current = from ?? route.name?.toLowerCase?.() ?? '';
@@ -45,7 +40,7 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
       return isExact ? current === target : current.startsWith(target);
     },
 
-    // isMounted: isFocused,
+    isMounted: isFocused,
 
     location: {
       params: route.params as TType & LocationParamsModel,
@@ -55,11 +50,11 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
     push: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
       console.warn(`@@@ ${route.name} -> ${pathname}`);
       console.warn(getNestedPathname(pathname, params));
-      navigation.dispatch(StackActions.push(...getNestedPathname(pathname, params)));
+      navigationRef.current?.dispatch(StackActions.push(...getNestedPathname(pathname, params)));
     },
 
     replace: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
-      navigation.dispatch(StackActions.replace(...getNestedPathname(pathname, params)));
+      navigationRef.current?.dispatch(StackActions.replace(...getNestedPathname(pathname, params)));
     },
   };
 };
