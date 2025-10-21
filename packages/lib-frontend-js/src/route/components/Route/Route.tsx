@@ -43,6 +43,18 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
       : undefined;
 
     switch (route?.transition) {
+      // case ROUTE_TRANSITION.MODAL: {
+      //   elementF = (
+      //     <Modal
+      //       defaultState={defaultState}
+      //       isFullSize
+      //       isOpen={isMounted}
+      //       zIndex={isMountedF ? true : undefined}>
+      //       {elementF}
+      //     </Modal>
+      //   );
+      //   break;
+      // }
       case ROUTE_TRANSITION.SLIDE: {
         elementF = (
           <Slide
