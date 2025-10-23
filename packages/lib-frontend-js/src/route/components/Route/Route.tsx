@@ -2,6 +2,7 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { useAppPhase } from '@lib/frontend/app/hooks/useAppPhase/useAppPhase';
 import { APP_PHASE } from '@lib/frontend/app/hooks/useAppPhase/useAppPhase.constants';
+import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
@@ -34,6 +35,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
         position={SHAPE_POSITION.RELATIVE}
       />
     );
+
     children && (elementF = cloneElement(elementF, { children }));
 
     const defaultState = isMounted
@@ -43,18 +45,6 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
       : undefined;
 
     switch (route?.transition) {
-      // case ROUTE_TRANSITION.MODAL: {
-      //   elementF = (
-      //     <Modal
-      //       defaultState={defaultState}
-      //       isFullSize
-      //       isOpen={isMounted}
-      //       zIndex={isMountedF ? true : undefined}>
-      //       {elementF}
-      //     </Modal>
-      //   );
-      //   break;
-      // }
       case ROUTE_TRANSITION.SLIDE: {
         elementF = (
           <Slide
@@ -93,6 +83,19 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
         break;
       }
     }
+
+    if (route?.transition === ROUTE_TRANSITION.MODAL) {
+      elementF = (
+        <Modal
+          defaultState={defaultState}
+          isFullSize
+          isOpen={isMounted}
+          zIndex={isMountedF ? true : undefined}>
+          {elementF}
+        </Modal>
+      );
+    }
+
     return elementF;
   }, [appPhase, route, children, isMounted]);
 

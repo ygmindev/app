@@ -8,7 +8,9 @@ import { APP_URI } from '@lib/shared/http/http.constants';
 import {
   type LinkingOptions,
   NavigationContainer,
+  type NavigationRoute,
   type NavigationState,
+  type ParamListBase,
 } from '@react-navigation/native';
 import { createNavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -36,6 +38,7 @@ const getRouteConfig = (
   const Stack = route.routes && createStackNavigator();
   const routesConfig = route.routes?.reduce(
     (result, v) => {
+      const isLeaf = !v.routes;
       const childConfig = getRouteConfig(v, location, depth + 1);
       const fullPathname = v.fullpath ?? v.pathname;
 
@@ -50,6 +53,20 @@ const getRouteConfig = (
                 <Stack.Screen
                   component={Component}
                   key={fullPathname}
+                  listeners={() => ({
+                    state: isLeaf
+                      ? (e) => {
+                          const { state } = e.data;
+                          let active = state.routes[state.index];
+                          while (active.state && active.state.index != null) {
+                            active = active.state.routes[active.state.index] as NavigationRoute<
+                              ParamListBase,
+                              string
+                            >;
+                          }
+                        }
+                      : undefined,
+                  })}
                   name={fullPathname}
                 />,
               ]

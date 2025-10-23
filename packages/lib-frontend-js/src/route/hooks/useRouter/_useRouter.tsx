@@ -16,8 +16,8 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
 
     isActive: ({ from, isExact = false, pathname } = {}) => {
       if (!pathname) return isFocused;
-      const current = from ?? route.name?.toLowerCase?.() ?? '';
-      const target = pathname.toLowerCase();
+      const current = from ?? route.name ?? '';
+      const target = pathname;
       return isExact ? current === target : current.startsWith(target);
     },
 
