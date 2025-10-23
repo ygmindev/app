@@ -10,6 +10,7 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useValueDelayed';
 import { type RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { TabLayout } from '@lib/frontend/route/components/TabLayout/TabLayout';
+import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -104,9 +105,15 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
       <Wrapper
         {...wrapperProps}
         flex
-        isTransparent
-        position={SHAPE_POSITION.RELATIVE}>
-        {element}
+        isTransparent>
+        {route.header && <RouteHeader route={route} />}
+
+        <Wrapper
+          flex
+          isVerticalScrollable
+          position={SHAPE_POSITION.RELATIVE}>
+          {element}
+        </Wrapper>
       </Wrapper>
     )
   );

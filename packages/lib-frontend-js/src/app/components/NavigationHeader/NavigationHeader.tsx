@@ -12,7 +12,7 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import {
   FONT_ALIGN,
   FONT_STYLE,
@@ -22,6 +22,7 @@ import { useRef } from 'react';
 
 export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
   elementState,
+  isPortal,
   onBack,
   title,
   ...props
@@ -34,7 +35,6 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
     <Wrapper
       {...wrapperProps}
       animation={{ duration: theme.animation.transition, states: ANIMATION_STATES_APPEARABLE }}
-      backgroundColor={THEME_COLOR_MORE.SURFACE}
       elementState={elementState}
       height={theme.layout.header.height}
       isAlign
