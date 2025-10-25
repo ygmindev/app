@@ -23,9 +23,7 @@ export const TimezoneInput: LFCModel<TimezoneInputPropsModel> = ({
     onChange,
     value,
   });
-
   const options = useMemo(timezones, []);
-
   return (
     timezone && (
       <MenuInput

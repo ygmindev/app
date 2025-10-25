@@ -10,7 +10,7 @@ export const useChange = <TType extends unknown>(
 ): UseChangeModel<TType> => {
   const previous = _useChange<TType>(value);
   useEffect(() => {
-    onChange && onChange(previous);
+    onChange?.(previous);
   }, [previous]);
   return previous;
 };

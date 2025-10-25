@@ -5,7 +5,7 @@ import {
 
 export type UseChangeParamsModel<TType> = [
   value: _UseChangeParamsModel<TType>,
-  onChange: (previous?: TType | undefined) => void,
+  onChange?: (previous?: TType | undefined) => void,
 ];
 
 export type UseChangeModel<TType> = _UseChangeModel<TType>;

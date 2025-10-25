@@ -21,7 +21,11 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
   const state = useNavigationState((state) => state);
 
   return {
-    back: () => navigation.canGoBack() && navigation.goBack(),
+    back: () => {
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      }
+    },
 
     isActive: ({ from, isExact = false, pathname } = {}) => {
       if (!pathname) return isFocused;
