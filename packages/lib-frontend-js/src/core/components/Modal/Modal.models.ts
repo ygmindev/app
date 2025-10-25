@@ -15,8 +15,9 @@ export type ModalPropsModel = ChildrenPropsModel &
     deviceWidth?: number;
     isFullSize?: boolean;
     isOpen?: boolean;
-    onToggle?(value?: boolean): void;
+    isPortal?: boolean;
     title?: ReactNode | AsyncTextModel;
+    onToggle?(value?: boolean): void;
   };
 
 export type ModalRefModel = {

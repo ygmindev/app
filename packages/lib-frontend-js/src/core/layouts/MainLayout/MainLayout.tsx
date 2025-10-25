@@ -34,10 +34,10 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
       {topElement && (
         <Wrapper isFullWidth>
           <Wrapper
+            flex
             isFullWidth={isFullWidthF}
             mHorizontal="auto"
-            p={isFullHeight}
-            width={widthF}>
+            p={isFullHeight}>
             {topElement}
           </Wrapper>
         </Wrapper>

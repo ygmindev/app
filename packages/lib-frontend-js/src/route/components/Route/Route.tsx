@@ -22,13 +22,14 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
   const { wrapperProps } = useLayoutStyles({ props });
   const { isMounted } = useRouter();
   const theme = useTheme();
-  const isMountedF = useValueDelayed(isMounted, theme.animation.transition);
+  const isMountedDelayed = useValueDelayed(isMounted, theme.animation.transition);
   const appPhase = useAppPhase();
 
   if (!route) {
     return null;
   }
 
+  const isLeaf = !route?.routes;
   const element = useMemo(() => {
     let elementF = route?.element ?? (
       <Wrapper
@@ -51,22 +52,25 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
           <Slide
             defaultState={defaultState}
             elementState={isMounted ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
-            zIndex={isMountedF ? true : undefined}>
+            zIndex={isMountedDelayed ? true : undefined}>
             {elementF}
           </Slide>
         );
         break;
       }
       default: {
-        elementF = (
-          <Appearable
-            defaultState={defaultState}
-            isAbsoluteFill
-            isActive={isMounted}
-            zIndex={isMountedF ? true : undefined}>
-            {elementF}
-          </Appearable>
-        );
+        if (isLeaf) {
+          elementF = (
+            <Appearable
+              defaultState={defaultState}
+              isAbsoluteFill
+              isActive={isMounted}
+              zIndex={isMountedDelayed ? true : undefined}>
+              {elementF}
+            </Appearable>
+          );
+        }
+
         break;
       }
     }
@@ -91,7 +95,9 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
           defaultState={defaultState}
           isFullSize
           isOpen={isMounted}
-          zIndex={isMountedF ? true : undefined}>
+          isPortal={false}
+          title={route.title}
+          zIndex={isMountedDelayed ? true : undefined}>
           {elementF}
         </Modal>
       );
@@ -101,7 +107,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
   }, [appPhase, route, children, isMounted]);
 
   return (
-    (isMounted || isMountedF) && (
+    (isMounted || isMountedDelayed) && (
       <Wrapper
         {...wrapperProps}
         flex

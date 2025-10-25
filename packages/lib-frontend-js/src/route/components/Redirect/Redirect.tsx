@@ -7,7 +7,6 @@ import { ROUTE } from '@lib/shared/route/route.constants';
 import { type ReactElement, useContext, useEffect } from 'react';
 
 export const Redirect = <TType extends unknown>({
-  isBack,
   params,
   pathname,
 }: FCPropsModel<RedirectPropsModel<TType>>): ReactElement<
@@ -19,7 +18,7 @@ export const Redirect = <TType extends unknown>({
   context[ROUTE] && (context[ROUTE].redirectTo = trimPathname(pathname));
 
   useEffect(() => {
-    void replace<TType>({ isBack, params, pathname });
+    void replace<TType>({ params, pathname });
   }, []);
 
   return <></>;

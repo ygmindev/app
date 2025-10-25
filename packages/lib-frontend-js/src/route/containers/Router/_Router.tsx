@@ -8,13 +8,13 @@ import { APP_URI } from '@lib/shared/http/http.constants';
 import {
   type LinkingOptions,
   NavigationContainer,
-  type NavigationRoute,
   type NavigationState,
   type ParamListBase,
+  type PathConfigMap,
 } from '@react-navigation/native';
 import { createNavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { cloneElement, type ComponentType, type ReactElement } from 'react';
+import { type ComponentType, type ReactElement } from 'react';
 
 export const navigationRef = createNavigationContainerRef();
 
@@ -34,94 +34,79 @@ const getRouteConfig = (
   config: LinkingOptions<EmptyObjectModel>['config'];
   element?: ReactElement;
 } => {
-  const elementF = <Route route={route} />;
-  const Stack = route.routes && createStackNavigator();
-  const routesConfig = route.routes?.reduce(
-    (result, v) => {
-      const isLeaf = !v.routes;
-      const childConfig = getRouteConfig(v, location, depth + 1);
-      const fullPathname = v.fullpath ?? v.pathname;
+  const isLeaf = !route.routes;
+  const result = {
+    config: { path: route.pathname ?? '/' } as LinkingOptions<EmptyObjectModel>['config'],
+    element: <Route route={route} />,
+  };
+  if (isLeaf) {
+    return result;
+  } else {
+    const Stack = createStackNavigator();
+    const routesConfig = route.routes?.reduce(
+      (r, v) => {
+        const fullPathname = v.fullpath ?? v.pathname;
+        const childConfig = getRouteConfig(v, location, depth + 1);
+        const Component: ComponentType = () => <Route route={v}>{childConfig.element}</Route>;
+        return {
+          elements: [
+            ...(r?.elements ?? []),
+            <Stack.Screen
+              component={Component}
+              key={fullPathname}
+              name={fullPathname}
+            />,
+          ],
+          screens: {
+            ...r?.screens,
+            [fullPathname]: v.routes ? childConfig.config : v.pathname,
+          },
+        };
+      },
+      { elements: [], screens: {} } as {
+        elements?: Array<ReactElement>;
+        screens?: PathConfigMap<ParamListBase>;
+      },
+    );
 
-      const Component: ComponentType = () =>
-        elementF && cloneElement(elementF, { children: childConfig.element });
+    let initialRoute: string | undefined;
+    if (location?.pathname && route.routes) {
+      initialRoute = location.pathname
+        .split('/')
+        .slice(0, depth + 1)
+        .join('/');
+      initialRoute = trimPathname(initialRoute);
+      !Object.keys(routesConfig?.screens ?? {}).includes(initialRoute) &&
+        (initialRoute = undefined);
+    }
 
-      return {
-        elements: [
-          ...(result?.elements ?? []),
-          ...(childConfig.element && Stack
-            ? [
-                <Stack.Screen
-                  component={Component}
-                  key={fullPathname}
-                  listeners={() => ({
-                    state: isLeaf
-                      ? (e) => {
-                          const { state } = e.data;
-                          let active = state.routes[state.index];
-                          while (active.state && active.state.index != null) {
-                            active = active.state.routes[active.state.index] as NavigationRoute<
-                              ParamListBase,
-                              string
-                            >;
-                          }
-                        }
-                      : undefined,
-                  })}
-                  name={fullPathname}
-                />,
-              ]
-            : []),
-        ],
-        screens: {
-          ...result?.screens,
-          [fullPathname]: v.routes ? childConfig.config : v.pathname,
-        },
-      };
-    },
-    { elements: [], screens: {} } as {
-      elements?: Array<ReactElement>;
-      screens?: Record<string, unknown>;
-    },
-  );
+    result.config = {
+      path: result.config?.path ?? '/',
+      screens: routesConfig?.screens ?? {},
+    };
 
-  let initialRoute: string | undefined;
-  if (location?.pathname && route.routes) {
-    initialRoute = location.pathname
-      .split('/')
-      .slice(0, depth + 1)
-      .join('/');
-    initialRoute = trimPathname(initialRoute);
-    !Object.keys(routesConfig?.screens ?? {}).includes(initialRoute) && (initialRoute = undefined);
+    result.element = (
+      <Stack.Navigator
+        detachInactiveScreens={false}
+        initialRouteName={initialRoute}
+        key={route.fullpath ?? route.pathname}
+        screenOptions={{
+          animation: 'none',
+          cardStyle: { backgroundColor: 'transparent', flex: 1, opacity: 1 },
+          gestureEnabled: false,
+          headerShown: false,
+          presentation: 'transparentModal',
+        }}>
+        {routesConfig?.elements}
+      </Stack.Navigator>
+    );
   }
 
-  return {
-    config: {
-      path: route.pathname ?? '/',
-      ...(routesConfig?.screens ? { screens: routesConfig.screens } : {}),
-    } as LinkingOptions<EmptyObjectModel>['config'],
-
-    element:
-      route.routes && Stack ? (
-        <Stack.Navigator
-          detachInactiveScreens={false}
-          initialRouteName={initialRoute}
-          key={route.fullpath ?? route.pathname}
-          screenOptions={{
-            cardStyle: { backgroundColor: 'transparent' },
-            gestureEnabled: false,
-            headerShown: false,
-            presentation: 'transparentModal',
-          }}>
-          {routesConfig?.elements}
-        </Stack.Navigator>
-      ) : (
-        elementF
-      ),
-  };
+  return result;
 };
 
 export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
-  const { config, element } = getRouteConfig({ pathname: '', routes }, value?.location);
+  const { config, element } = getRouteConfig({ pathname: '/', routes }, value?.location);
   return (
     <NavigationContainer
       linking={
@@ -136,3 +121,125 @@ export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
     </NavigationContainer>
   );
 };
+
+// import { type FCModel } from '@lib/frontend/core/core.models';
+// import { Route } from '@lib/frontend/route/components/Route/Route';
+// import { type _RouterPropsModel } from '@lib/frontend/route/containers/Router/_Router.models';
+// import { type LocationModel, type RouteModel } from '@lib/frontend/route/route.models';
+// import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
+// import { type EmptyObjectModel } from '@lib/shared/core/core.models';
+// import { APP_URI } from '@lib/shared/http/http.constants';
+// import {
+//   type LinkingOptions,
+//   NavigationContainer,
+//   type NavigationState,
+//   type ParamListBase,
+//   type PathConfigMap,
+// } from '@react-navigation/native';
+// import { createNavigationContainerRef } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
+// import { type ComponentType, type ReactElement } from 'react';
+
+// export const navigationRef = createNavigationContainerRef();
+
+// const getActivePathname = (state: NavigationState): string => {
+//   const route = state.routes[state.index ?? 0];
+//   if (route.state?.routes) {
+//     return trimPathname(getActivePathname(route.state as NavigationState));
+//   }
+//   return trimPathname(route.name);
+// };
+
+// const getRouteConfig = (
+//   route: RouteModel,
+//   location?: LocationModel,
+//   depth: number = 0,
+// ): {
+//   config: LinkingOptions<EmptyObjectModel>['config'];
+//   element?: ReactElement;
+// } => {
+//   const isLeaf = !route.routes;
+//   const result = {
+//     config: { path: route.pathname ?? '/' } as LinkingOptions<EmptyObjectModel>['config'],
+//     element: <Route route={route} />,
+//   };
+//   if (!isLeaf) {
+//     const Stack = createStackNavigator();
+//     const routesConfig = route.routes?.reduce(
+//       (r, v) => {
+//         const fullPathname = v.fullpath ?? v.pathname;
+//         const childConfig = getRouteConfig(v, location, depth + 1);
+//         const Component: ComponentType = () => childConfig.element;
+//         return {
+//           elements: [
+//             ...(r?.elements ?? []),
+//             <Stack.Screen
+//               component={Component}
+//               key={fullPathname}
+//               name={fullPathname}
+//             />,
+//           ],
+//           screens: {
+//             ...r?.screens,
+//             [fullPathname]: v.routes ? childConfig.config : v.pathname,
+//           },
+//         };
+//       },
+//       { elements: [], screens: {} } as {
+//         elements?: Array<ReactElement>;
+//         screens?: PathConfigMap<ParamListBase>;
+//       },
+//     );
+
+//     let initialRoute: string | undefined;
+//     if (location?.pathname && route.routes) {
+//       initialRoute = location.pathname
+//         .split('/')
+//         .slice(0, depth + 1)
+//         .join('/');
+//       initialRoute = trimPathname(initialRoute);
+//       !Object.keys(routesConfig?.screens ?? {}).includes(initialRoute) &&
+//         (initialRoute = undefined);
+//     }
+
+//     result.config = {
+//       path: result.config?.path ?? '/',
+//       screens: routesConfig?.screens ?? {},
+//     };
+
+//     result.element = (
+//       <Stack.Navigator
+//         detachInactiveScreens={false}
+//         initialRouteName={initialRoute}
+//         key={route.fullpath ?? route.pathname}
+//         screenOptions={{
+//           animation: 'none',
+//           cardStyle: { backgroundColor: 'transparent', flex: 1, opacity: 1 },
+//           gestureEnabled: false,
+//           headerShown: false,
+//           presentation: 'transparentModal',
+//         }}>
+//         {routesConfig?.elements}
+//       </Stack.Navigator>
+//     );
+//   }
+
+//   return result;
+// };
+
+// export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
+//   const { config, element } = getRouteConfig({ pathname: '/', routes }, value?.location);
+//   return (
+//     <NavigationContainer
+//       linking={
+//         {
+//           config: { screens: config?.screens },
+//           getPathFromState: (state) => getActivePathname(state as NavigationState),
+//           prefixes: process.env.ENV_PLATFORM === 'web' ? [APP_URI] : [],
+//         } as LinkingOptions<object>
+//       }
+//       ref={navigationRef}>
+//       {element}
+//     </NavigationContainer>
+//   );
+// };

@@ -2,6 +2,7 @@ import { AppContainer } from '@lib/frontend/app/containers/AppContainer/AppConta
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { AppHomePage } from '@lib/frontend/app/pages/AppHomePage/AppHomePage';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { devRoutes } from '@lib/frontend/dev/dev.routes';
 import { PingPage } from '@lib/frontend/http/pages/PingPage/PingPage';
 import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
@@ -13,6 +14,7 @@ import {
   type GetRoutesModel,
   type GetRoutesParamsModel,
 } from '@lib/frontend/route/utils/getRoutes/getRoutes.models';
+import { settingRoutes } from '@lib/frontend/settings/settings.routes';
 import { testRoutes } from '@lib/frontend/test/test.routes';
 import { userRoutes } from '@lib/frontend/user/user.routes';
 import { APP } from '@lib/shared/app/app.constants';
@@ -27,27 +29,47 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel => 
     },
 
     {
+      element: (
+        <Wrapper
+          flex
+          s
+        />
+      ),
+      pathname: '1',
+      routes: [
+        {
+          element: <PingPage />,
+          pathname: 'ping1',
+        },
+        {
+          element: <PingPage />,
+          pathname: 'ping2',
+        },
+      ],
+      transition: ROUTE_TRANSITION.MODAL,
+    },
+
+    {
       element: <PingPage />,
       pathname: PING,
       prerender: true,
-      transition: ROUTE_TRANSITION.SLIDE,
     },
 
     {
       element: <PingPage />,
       pathname: 'ping1',
       prerender: true,
-      transition: ROUTE_TRANSITION.SLIDE,
     },
 
     {
       element: <PingPage />,
       pathname: 'ping2',
       prerender: true,
-      transition: ROUTE_TRANSITION.SLIDE,
     },
 
     ...authRoutes,
+
+    ...settingRoutes,
 
     {
       element: <AppLayout />,

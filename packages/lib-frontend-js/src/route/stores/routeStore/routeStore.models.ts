@@ -4,8 +4,6 @@ export type RouteHeaderModel = {
   title?: string;
 };
 
-export type RouteStateModel = {
-  isBack?: boolean;
-};
+export type RouteStateModel = {};
 
 export type RouteReducerModel = ReducerModel<RouteStateModel>;

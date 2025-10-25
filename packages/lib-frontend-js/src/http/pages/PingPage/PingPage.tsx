@@ -18,11 +18,11 @@ export const PingPage: LFCModel<PingPagePropsModel> = ({ testID, ...props }) => 
       <Wrapper
         m="auto"
         width={250}>
-        <Text>ping</Text>
+        <Text>{location.pathname.includes('2') ? 'ping1' : 'ping2'}</Text>
 
         <Button
           onPress={() =>
-            push({ pathname: location.pathname.includes('2') ? '/ping1' : '/ping2' })
+            push({ pathname: location.pathname.includes('2') ? '/1/ping1' : '/1/ping2' })
           }>{`Switch to ${location.pathname.includes('2') ? 'ping1' : 'ping2'}`}</Button>
 
         <Button

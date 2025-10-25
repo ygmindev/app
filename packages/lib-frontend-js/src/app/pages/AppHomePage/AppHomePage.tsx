@@ -15,31 +15,6 @@ export const AppHomePage: LFCModel<AppHomePagePropsModel> = ({ ...props }) => {
       {...wrapperProps}
       s>
       <Text fontStyle={FONT_STYLE.HEADLINE}>{t('core:welcomeBack')}</Text>
-
-      {/* <DataBoundary
-        fallbackData={{
-          result: range(3).map((i) => ({ _id: `${i}`, name: TEST_TEXT_LONG })),
-        }}
-        id="accesses"
-        query={async () => getMany({ filter: [] })}>
-        {({ data }) => (
-          <ItemList
-            items={data?.result?.map(({ _id, name, types }) => ({
-              id: _id ?? '',
-            }))}
-            title={t('group:group_other', { value: currentUser?.email })}>
-            {data?.result?.map(({ _id, name, types }) => (
-              <RouteItem
-                key={_id}
-                root={GROUP}
-                route={{ pathname: _id ?? '' }}
-                title={name}>
-                <Wrapper isRow isAlign>{types?.map((type) => <Chip key={type}>{type}</Chip>)}</Wrapper>
-              </RouteItem>
-            ))}
-          </ItemList>
-        )}
-      </DataBoundary> */}
     </MainLayout>
   );
 };

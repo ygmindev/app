@@ -3,7 +3,6 @@ import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/Asy
 import { type WithIconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import { type ChildrenPropsModel, type OptionModel } from '@lib/frontend/core/core.models';
 import { type ROUTE_NAVIGATION, type ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
-import { type RouteStateModel } from '@lib/frontend/route/stores/routeStore/routeStore.models';
 import { type LayoutStylePropsModel } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
@@ -56,7 +55,6 @@ export type RouteContextModel<TType = Record<string, unknown>> = {
   redirectTo?: string;
 };
 
-export type LocationUpdateModel<TTypeNext = Record<string, unknown>> = LocationModel<TTypeNext> &
-  Pick<RouteStateModel, 'isBack'> & {
-    root?: string | boolean | number;
-  };
+export type LocationUpdateModel<TTypeNext = Record<string, unknown>> = LocationModel<TTypeNext> & {
+  root?: string | boolean | number;
+};
