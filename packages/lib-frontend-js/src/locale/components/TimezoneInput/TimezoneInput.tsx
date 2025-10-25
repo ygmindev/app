@@ -1,5 +1,4 @@
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { useAsync } from '@lib/frontend/core/hooks/useAsync/useAsync';
 import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { type TimezoneInputPropsModel } from '@lib/frontend/locale/components/TimezoneInput/TimezoneInput.models';
@@ -25,24 +24,20 @@ export const TimezoneInput: LFCModel<TimezoneInputPropsModel> = ({
     value,
   });
 
-  useAsync(async () => {
-    timezone && valueControlledSet({ id: timezone.name });
-  });
-
-  const options = useMemo(
-    () => timezones().map(({ name, offset }) => ({ id: name, label: name })),
-    [],
-  );
+  const options = useMemo(timezones, []);
 
   return (
-    <MenuInput
-      {...wrapperProps}
-      elementState={elementState}
-      icon="time"
-      label={t('locale:timezone')}
-      onChange={valueControlledSet}
-      options={options}
-      value={valueControlled}
-    />
+    timezone && (
+      <MenuInput
+        {...wrapperProps}
+        defaultValue={timezone}
+        elementState={elementState}
+        icon="time"
+        label={t('locale:timezone')}
+        onChange={valueControlledSet}
+        options={options}
+        value={valueControlled}
+      />
+    )
   );
 };

@@ -4,5 +4,6 @@ import spacetime from 'spacetime';
 
 export const _currentTimezone = (): _CurrentTimezoneModel => {
   const current = spacetime().timezone();
-  return { name: timezoneFormat(current.name), offset: current.current.offset };
+  const id = timezoneFormat(current.name);
+  return { id, label: id, offset: current.current.offset };
 };

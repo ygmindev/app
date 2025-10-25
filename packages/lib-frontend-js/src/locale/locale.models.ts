@@ -1,3 +1,4 @@
+import { type OptionModel } from '@lib/frontend/core/core.models';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
 
 export type LocaleStoreModel = Record<string, Record<string, object>>;
@@ -8,8 +9,7 @@ export type LocaleContextModel = {
   store?: LocaleStoreModel;
 };
 
-export type TimezoneModel = {
-  name: string;
+export type TimezoneModel = OptionModel & {
   offset: number;
 };
 

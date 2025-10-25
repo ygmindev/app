@@ -17,7 +17,6 @@ import {
 export const _useRouter = <TType,>(): _UseRouterModel => {
   const navigation = useNavigation();
   const route = useRoute();
-  // const isFocused = useNavigationState((state) => state.routes[state.index]?.name === route.name);
   const isFocused = useIsFocused();
   const state = useNavigationState((state) => state);
 

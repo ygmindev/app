@@ -6,6 +6,9 @@ import spacetime from 'spacetime';
 
 export const _timezones = (): _TimezonesModel =>
   uniqBy(
-    map(spacetime.timezones(), (v, k) => ({ name: timezoneFormat(k), offset: v.offset })),
-    'name',
+    map(spacetime.timezones(), (v, k) => {
+      const id = timezoneFormat(k);
+      return { id, label: id, offset: v.offset };
+    }),
+    'id',
   );
