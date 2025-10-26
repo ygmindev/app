@@ -5,6 +5,7 @@ import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
+import { FORM_SUBMIT_TYPE } from '@lib/frontend/data/components/FormContainer/FormContainer.constants';
 import { Trans } from '@lib/frontend/locale/components/Trans/Trans';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
@@ -34,13 +35,13 @@ export const OtpForm: LFCModel<OtpFormPropsModel> = ({
         },
       ]}
       flex
-      isButton={false}
       isCenter
       onComplete={onComplete}
       onError={onError}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       ref={ref}
+      submitType={FORM_SUBMIT_TYPE.NONE}
       topElement={() =>
         data?.email && (
           <Wrapper isCenter>

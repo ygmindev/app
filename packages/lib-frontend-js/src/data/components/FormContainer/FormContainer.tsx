@@ -1,9 +1,11 @@
 import { Accordion } from '@lib/frontend/animation/components/Accordion/Accordion';
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type RLFCModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { Form } from '@lib/frontend/data/components/Form/Form';
+import { FORM_SUBMIT_TYPE } from '@lib/frontend/data/components/FormContainer/FormContainer.constants';
 import {
   type FormContainerPropsModel,
   type FormContainerRefModel,
@@ -77,6 +79,7 @@ const FormContainerF = <TType, TResult = void>({
   onValidate,
   ref,
   submitLabel,
+  submitType = FORM_SUBMIT_TYPE.BUTTON,
   successMessage,
   topElement,
   validators,
@@ -140,21 +143,29 @@ const FormContainerF = <TType, TResult = void>({
     return (await onSubmit?.(dataF)) ?? null;
   };
 
-  const { errors, handleChange, handleReset, handleSubmit, isLoading, isValid, values, valuesSet } =
-    useForm<TType, TResult>({
-      initialValues,
-      isBlocking,
-      isValidateChanged,
-      isValidateOnChange,
-      onComplete,
-      onError,
-      onSubmit: onSubmitF,
-      onSuccess,
-      onValidate,
-      successMessage,
-      validators:
-        validators && (pick(validators, fieldIds) as unknown as FormValidatorsModel<TType>),
-    });
+  const {
+    errors,
+    handleChange,
+    handleReset,
+    handleSubmit,
+    isChanged,
+    isLoading,
+    isValid,
+    values,
+    valuesSet,
+  } = useForm<TType, TResult>({
+    initialValues,
+    isBlocking,
+    isValidateChanged,
+    isValidateOnChange,
+    onComplete,
+    onError,
+    onSubmit: onSubmitF,
+    onSuccess,
+    onValidate,
+    successMessage,
+    validators: validators && (pick(validators, fieldIds) as unknown as FormValidatorsModel<TType>),
+  });
 
   const elementStateF = isAppLoading || isLoading ? ELEMENT_STATE.LOADING : elementState;
   const isDisabled =
@@ -238,6 +249,19 @@ const FormContainerF = <TType, TResult = void>({
       return getField(field as FormFieldModel<TType>).element;
     });
 
+  const buttons = (submitType === FORM_SUBMIT_TYPE.BUTTON ||
+    submitType === FORM_SUBMIT_TYPE.ON_CHANGE) && (
+    <SubmittableButtons
+      cancelLabel={cancelLabel}
+      elementState={elementStateF}
+      onCancel={onCancel}
+      onSubmit={async () => handleSubmitF()}
+      submitLabel={submitLabel}
+      // submitTooltip={isValid ? undefined : 'TODO: error message'}
+      testID={props.testID}
+    />
+  );
+
   return (
     <Form
       onSubmit={
@@ -259,16 +283,10 @@ const FormContainerF = <TType, TResult = void>({
 
         {getFields()}
 
-        {isButton && (
-          <SubmittableButtons
-            cancelLabel={cancelLabel}
-            elementState={elementStateF}
-            onCancel={onCancel}
-            onSubmit={async () => handleSubmitF()}
-            submitLabel={submitLabel}
-            // submitTooltip={isValid ? undefined : 'TODO: error message'}
-            testID={props.testID}
-          />
+        {submitType === FORM_SUBMIT_TYPE.ON_CHANGE ? (
+          <Appearable isActive={isChanged}>{buttons}</Appearable>
+        ) : (
+          buttons
         )}
 
         {bottomElement?.({ elementState: elementStateF })}

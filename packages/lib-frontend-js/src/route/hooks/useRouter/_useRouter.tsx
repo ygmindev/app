@@ -4,6 +4,7 @@ import {
   type LocationParamsModel,
   type LocationUpdateModel,
 } from '@lib/frontend/route/route.models';
+import { waitFor } from '@lib/shared/core/utils/waitFor/waitFor';
 import {
   type NavigationRoute,
   type ParamListBase,
@@ -54,11 +55,15 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
     },
 
     push: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
-      navigationRef.current?.dispatch(StackActions.push(pathname, params));
+      void waitFor({ condition: () => navigationRef.isReady() }).then(() =>
+        navigationRef.current?.dispatch(StackActions.push(pathname, params)),
+      );
     },
 
     replace: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
-      navigationRef.current?.dispatch(StackActions.replace(pathname, params));
+      void waitFor({ condition: () => navigationRef.isReady() }).then(() =>
+        navigationRef.current?.dispatch(StackActions.replace(pathname, params)),
+      );
     },
   };
 };

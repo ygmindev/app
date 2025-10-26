@@ -2,6 +2,7 @@ import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/Asy
 import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type AsyncBoundaryContextModel } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import { type ElementStatePropsModel, type RefPropsModel } from '@lib/frontend/core/core.models';
+import { type FORM_SUBMIT_TYPE } from '@lib/frontend/data/components/FormContainer/FormContainer.constants';
 import {
   type FormRefModel,
   type InputPropsModel,
@@ -22,6 +23,7 @@ export type FormContainerPropsModel<TType, TResult = void> = WrapperPropsModel &
     fields?: Array<FormFieldsModel<TType>>;
     isButton?: boolean;
     submitLabel?: AsyncTextModel;
+    submitType?: FORM_SUBMIT_TYPE;
     bottomElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
     topElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;
   };

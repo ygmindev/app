@@ -42,4 +42,6 @@ export type _GetValueModel<
       ? FieldKey extends keyof TType
         ? IndexedFieldWithPossiblyUndefined<TType[FieldKey], IndexKey>
         : undefined
-      : undefined;
+      : TType extends object
+        ? undefined
+        : TType;

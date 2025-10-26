@@ -1,6 +1,7 @@
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
+import { FORM_SUBMIT_TYPE } from '@lib/frontend/data/components/FormContainer/FormContainer.constants';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
@@ -34,6 +35,7 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
       onSubmit={async ({ first, last }: NameFormModel) =>
         userUpdate({ id: currentUser._id, update: { first, last } })
       }
+      submitType={FORM_SUBMIT_TYPE.ON_CHANGE}
       successMessage={() => ({ description: t('core:updatedSuccess', { value: t('user:name') }) })}
     />
   ) : null;

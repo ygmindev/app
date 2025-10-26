@@ -2,6 +2,7 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { useAppPhase } from '@lib/frontend/app/hooks/useAppPhase/useAppPhase';
 import { APP_PHASE } from '@lib/frontend/app/hooks/useAppPhase/useAppPhase.constants';
+import { Protectable } from '@lib/frontend/auth/components/Protectable/Protectable';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -24,10 +25,6 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
   const theme = useTheme();
   const isMountedDelayed = useValueDelayed(isMounted, theme.animation.transition);
   const appPhase = useAppPhase();
-
-  if (!route) {
-    return null;
-  }
 
   const isLeaf = !route?.routes;
   const element = useMemo(() => {
@@ -103,6 +100,8 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
       );
     }
 
+    route?.isProtectable && (elementF = <Protectable>{elementF}</Protectable>);
+
     return elementF;
   }, [appPhase, route, children, isMounted]);
 
@@ -112,7 +111,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
         {...wrapperProps}
         flex
         isTransparent>
-        {route.header && <RouteHeader route={route} />}
+        {route?.header && <RouteHeader route={route} />}
 
         <Wrapper
           flex

@@ -1,0 +1,5 @@
+export enum FORM_SUBMIT_TYPE {
+  BUTTON = 'BUTTON',
+  NONE = 'NONE',
+  ON_CHANGE = 'ON_CHANGE',
+}

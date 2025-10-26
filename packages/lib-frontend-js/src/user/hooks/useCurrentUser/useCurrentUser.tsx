@@ -18,5 +18,5 @@ export const useCurrentUser = (
     }
   }, [isProtected, currentUser]);
 
-  return currentUser;
+  return currentUser?._id ? currentUser : null;
 };
