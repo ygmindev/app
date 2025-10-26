@@ -30,14 +30,6 @@ export const config = defineConfig<PublishConfigModel>({
 
       name,
 
-      // publishCommand: () =>
-      //   filterNil([
-      //     `npx wrangler pages deploy ${assetsPathname} --project-name ${name} --branch main`,
-      //     jsonPathname &&
-      //       `npx wrangler pages secret put bulk ${jsonPathname} --project-name ${name}`,
-      //     jsonPathname && `rm -rf ${jsonPathname}`,
-      //   ]).join(' && '),
-
       publishCommand: () =>
         filterNil([
           `npx wrangler pages deploy ${assetsPathname} --project-name ${name} --branch main`,

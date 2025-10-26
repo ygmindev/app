@@ -43,8 +43,8 @@
       "@app/web/*": [
         "packages/app-web-js/src/*"
       ],
-      "@app/web-library/*": [
-        "packages/app-web-library-js/src/*"
+      "@app/web-documentation/*": [
+        "packages/app-web-documentation-js/src/*"
       ],
       "@app/web-template/*": [
         "packages/app-web-template-js/src/*"

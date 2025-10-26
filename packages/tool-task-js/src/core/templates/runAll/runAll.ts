@@ -22,6 +22,7 @@ export const runAll: TaskParamsModel<RunAllParamsModel> = {
       {
         defaultValue: options,
         key: 'tasks',
+        options,
         type: PROMPT_TYPE.MULTIPLE,
       },
     ];

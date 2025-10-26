@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/app-web-library-js/src",
+  "sourceRoot": "packages/app-web-documentation-js/src",
   "projectType": "library",
   "tags": []
 }

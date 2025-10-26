@@ -7,7 +7,7 @@
         "@app/native",
         "@app/web",
         "@app/web-admin",
-        "@app/web-library",
+        "@app/web-documentation",
         "@app/web-template",
         "@asset/static",
         "@service/job",
