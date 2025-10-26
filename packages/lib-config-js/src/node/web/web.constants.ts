@@ -10,5 +10,3 @@ export const WEB_SSR_CONTEXT_KEYS: WebConfigModel['ssrContextKeys'] = [
   'route.location.pathname',
   'query.state',
 ];
-
-export const WEB_PREFIX: WebConfigModel['prefix'] = 'web';

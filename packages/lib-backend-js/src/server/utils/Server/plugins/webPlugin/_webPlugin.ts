@@ -6,7 +6,7 @@ import { render } from '@lib/shared/web/utils/render/render';
 import { createDevMiddleware } from 'vike/server';
 
 export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
-  const { prefix } = config;
+  const { subdomain } = config;
 
   if (
     (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
@@ -18,8 +18,8 @@ export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
     });
     server._app.use((req, res, next) => {
       const host = req.headers.host ?? '';
-      const [subdomain] = host.split('.');
-      subdomain === prefix ? devMiddleware(req, res, next) : next();
+      const [v] = host.split('.');
+      v === subdomain ? devMiddleware(req, res, next) : next();
     });
   }
 
@@ -27,7 +27,7 @@ export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
     handler: async (request) => render(request),
     method: HTTP_METHOD.GET,
     pathname: '*',
-    subdomain: prefix,
+    subdomain,
     type: API_ENDPOINT_TYPE.REST,
   });
 };

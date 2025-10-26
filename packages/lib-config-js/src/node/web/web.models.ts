@@ -10,13 +10,13 @@ export type WebConfigModel = {
 
   isSsr?: boolean;
 
-  prefix: string;
-
   rootId: string;
 
   server: ServerConfigModel;
 
   ssrContextKeys: Array<DeepKeyModel<RootContextModel>>;
+
+  subdomain: string;
 };
 
 export type _WebConfigModel = UserConfig;

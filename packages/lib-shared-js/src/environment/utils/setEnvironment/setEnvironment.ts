@@ -16,6 +16,7 @@ export const setEnvironment = ({
 
   const paths = filterNil([
     fromWorking('.env'),
+    fromWorking('.env.public'),
     environmentF && fromWorking(`.env.${environmentF}`),
     fromConfig('environment/.env.base'),
     environmentF && fromConfig(`environment/.env.${environmentF}`),

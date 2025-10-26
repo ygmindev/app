@@ -4,7 +4,6 @@ import {
   type _FrameworkConfigModel,
   type FrameworkConfigModel,
 } from '@lib/config/node/framework/framework.models';
-import { WEB_PREFIX } from '@lib/config/node/web/web.constants';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 export const config = defineConfig<FrameworkConfigModel, _FrameworkConfigModel>({
@@ -19,7 +18,7 @@ export const config = defineConfig<FrameworkConfigModel, _FrameworkConfigModel>(
         !process.env.NODE_RUNTIME
           ? process.env.APP_PORT
           : undefined),
-      subdomain: WEB_PREFIX,
+      subdomain: process.env.SERVER_APP_SUBDOMAIN,
     },
 
     faviconDir: `${ASSETS_DIR}/favicon/favicon.svg`,

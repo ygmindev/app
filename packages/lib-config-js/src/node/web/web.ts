@@ -13,13 +13,13 @@ export const config = defineConfig<WebConfigModel, _WebConfigModel>({
 
     isSsr: true,
 
-    prefix: WEB_PREFIX,
-
     rootId: WEB_ROOT_ID,
 
     server: serverConfig.params(),
 
     ssrContextKeys: WEB_SSR_CONTEXT_KEYS,
+
+    subdomain: WEB_PREFIX,
   }),
 });
 

@@ -16,7 +16,9 @@ node_modules
 *.0x
 
 # Environments
+**/.env
 **/.env.*
+!**/.env.public
 
 # Node (yarn)
 .pnp.*
