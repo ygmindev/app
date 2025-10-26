@@ -3,8 +3,6 @@ import {
   type _UseFormModel,
   type _UseFormParamsModel,
 } from '@lib/frontend/data/hooks/useForm/_useForm.models';
-import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
-import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 import { type FormikErrors, type FormikValues } from 'formik';
 import { useFormik } from 'formik';
 import { useState } from 'react';
@@ -35,7 +33,6 @@ export const _useForm = <TType, TResult = void>({
     handleChange: (id) => (value) => setFieldValue(id, value),
     handleReset: () => void setValues({} as TType & FormikValues),
     handleSubmit: () => handleSubmit(),
-    isChanged: !isEqual(cleanObject(initialValues), cleanObject(values)),
     isValid,
     values,
     valuesSet: async (data) => {

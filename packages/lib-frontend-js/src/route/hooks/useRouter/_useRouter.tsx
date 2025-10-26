@@ -55,9 +55,9 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
     },
 
     push: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
-      void waitFor({ condition: () => navigationRef.isReady() }).then(() =>
-        navigationRef.current?.dispatch(StackActions.push(pathname, params)),
-      );
+      void waitFor({ condition: () => navigationRef.isReady() }).then(() => {
+        navigationRef.current?.dispatch(StackActions.push(pathname, params));
+      });
     },
 
     replace: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {

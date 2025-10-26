@@ -1,7 +1,11 @@
 import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
 import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type AsyncBoundaryContextModel } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
-import { type ElementStatePropsModel, type RefPropsModel } from '@lib/frontend/core/core.models';
+import {
+  type ElementStatePropsModel,
+  type RefPropsModel,
+  type SizableMorePropsModel,
+} from '@lib/frontend/core/core.models';
 import { type FORM_SUBMIT_TYPE } from '@lib/frontend/data/components/FormContainer/FormContainer.constants';
 import {
   type FormRefModel,
@@ -18,6 +22,7 @@ export type FormContainerPropsModel<TType, TResult = void> = WrapperPropsModel &
   RefPropsModel<FormContainerRefModel<TType>> &
   UseFormParamsModel<TType, TResult> &
   SubmittablePropsModel<TType, TResult> &
+  SizableMorePropsModel &
   Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
     cancelLabel?: AsyncTextModel;
     fields?: Array<FormFieldsModel<TType>>;

@@ -78,6 +78,7 @@ const FormContainerF = <TType, TResult = void>({
   onSuccess,
   onValidate,
   ref,
+  size,
   submitLabel,
   submitType = FORM_SUBMIT_TYPE.BUTTON,
   successMessage,
@@ -143,29 +144,21 @@ const FormContainerF = <TType, TResult = void>({
     return (await onSubmit?.(dataF)) ?? null;
   };
 
-  const {
-    errors,
-    handleChange,
-    handleReset,
-    handleSubmit,
-    isChanged,
-    isLoading,
-    isValid,
-    values,
-    valuesSet,
-  } = useForm<TType, TResult>({
-    initialValues,
-    isBlocking,
-    isValidateChanged,
-    isValidateOnChange,
-    onComplete,
-    onError,
-    onSubmit: onSubmitF,
-    onSuccess,
-    onValidate,
-    successMessage,
-    validators: validators && (pick(validators, fieldIds) as unknown as FormValidatorsModel<TType>),
-  });
+  const { errors, handleChange, handleReset, handleSubmit, isLoading, isValid, values, valuesSet } =
+    useForm<TType, TResult>({
+      initialValues,
+      isBlocking,
+      isValidateChanged,
+      isValidateOnChange,
+      onComplete,
+      onError,
+      onSubmit: onSubmitF,
+      onSuccess,
+      onValidate,
+      successMessage,
+      validators:
+        validators && (pick(validators, fieldIds) as unknown as FormValidatorsModel<TType>),
+    });
 
   const elementStateF = isAppLoading || isLoading ? ELEMENT_STATE.LOADING : elementState;
   const isDisabled =
@@ -193,6 +186,7 @@ const FormContainerF = <TType, TResult = void>({
         element?.props?.ref ??
         ((elementF: InputRefModel<TType, TKey>) =>
           inputRefs.current && (inputRefs.current[id] = elementF)),
+      size,
       testID: id,
       value: values?.[id] ?? element?.props?.value,
     } as InputPropsModel<TType[TKey]>),
@@ -256,6 +250,7 @@ const FormContainerF = <TType, TResult = void>({
       elementState={elementStateF}
       onCancel={onCancel}
       onSubmit={async () => handleSubmitF()}
+      size={size}
       submitLabel={submitLabel}
       // submitTooltip={isValid ? undefined : 'TODO: error message'}
       testID={props.testID}
@@ -284,7 +279,12 @@ const FormContainerF = <TType, TResult = void>({
         {getFields()}
 
         {submitType === FORM_SUBMIT_TYPE.ON_CHANGE ? (
-          <Appearable isActive={isChanged}>{buttons}</Appearable>
+          <Appearable
+            isActive
+            // isActive={!isEqual(cleanObject(initialValues), cleanObject(values as object))}
+          >
+            {buttons}
+          </Appearable>
         ) : (
           buttons
         )}

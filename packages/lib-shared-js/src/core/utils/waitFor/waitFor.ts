@@ -10,6 +10,7 @@ export const waitFor = ({
   timeout = WAIT_FOR_TIMEOUT_DEFAULT_MILLISECONDS,
 }: WaitForParamsModel): Promise<boolean> =>
   new Promise((resolve) => {
+    condition() && resolve(true);
     let timer = 0;
     const loop = setInterval(() => {
       timer += interval;

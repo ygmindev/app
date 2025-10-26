@@ -25,7 +25,6 @@ export const SettingsInput = <TType = string,>({
       title={title}>
       <Wrapper
         flex
-        p
         s>
         {cloneElement(element, {
           onChange: valueSet as (value: TType) => void,

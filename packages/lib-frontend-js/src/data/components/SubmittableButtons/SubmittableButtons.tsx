@@ -16,6 +16,7 @@ export const SubmittableButtons = <TType,>({
   elementStateSubmit,
   onCancel,
   onSubmit,
+  size,
   submitLabel,
   submitTooltip,
   ...props
@@ -35,9 +36,12 @@ export const SubmittableButtons = <TType,>({
       justify={FLEX_JUSTIFY.END}>
       {onCancel && (
         <Button
+          basis={0}
           elementState={elementStateCancel ?? (isDisabled ? ELEMENT_STATE.DISABLED : undefined)}
+          flex
           icon="chevronLeft"
           onPress={onCancel}
+          size={size}
           testID={props.testID ? `${props.testID}-cancel` : undefined}
           type={BUTTON_TYPE.TRANSPARENT}>
           {cancelLabel ?? t('core:cancel')}
@@ -46,9 +50,12 @@ export const SubmittableButtons = <TType,>({
 
       {onSubmit && (
         <Button
+          basis={0}
           elementState={elementStateSubmit ?? elementState}
+          flex
           icon="chevronRight"
           onPress={onSubmit}
+          size={size}
           testID={props.testID ? `${props.testID}-submit` : undefined}
           tooltip={submitTooltip}>
           {submitLabel ?? t('core:continue')}
