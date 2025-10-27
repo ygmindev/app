@@ -2,13 +2,11 @@ import { AppContainer } from '@lib/frontend/app/containers/AppContainer/AppConta
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { AppHomePage } from '@lib/frontend/app/pages/AppHomePage/AppHomePage';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { devRoutes } from '@lib/frontend/dev/dev.routes';
 import { PingPage } from '@lib/frontend/http/pages/PingPage/PingPage';
 import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
 import { SITE_MAP } from '@lib/frontend/route/pages/route.constants';
 import { SitemapPage } from '@lib/frontend/route/pages/SitemapPage/SitemapPage';
-import { ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 import {
   type GetRoutesModel,
@@ -21,32 +19,11 @@ import { APP } from '@lib/shared/app/app.constants';
 import { PING } from '@lib/shared/http/http.constants';
 import { trimRoutes } from '@lib/shared/route/utils/trimRoutes/trimRoutes';
 
-export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel => {
-  let routes: Array<RouteModel> = trimRoutes([
+export const getRoutes = (routes: GetRoutesParamsModel = []): GetRoutesModel => {
+  let routesF: Array<RouteModel> = trimRoutes([
     {
       element: <AppHomePage />,
       pathname: '/',
-    },
-
-    {
-      element: (
-        <Wrapper
-          flex
-          s
-        />
-      ),
-      pathname: '1',
-      routes: [
-        {
-          element: <PingPage />,
-          pathname: 'ping1',
-        },
-        {
-          element: <PingPage />,
-          pathname: 'ping2',
-        },
-      ],
-      transition: ROUTE_TRANSITION.MODAL,
     },
 
     {
@@ -72,10 +49,10 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel => 
     ...settingRoutes,
 
     {
-      element: <AppLayout />,
+      element: <AppLayout routes={routes} />,
       pathname: APP,
       routes: [
-        ...params,
+        ...routes,
 
         ...userRoutes,
 
@@ -92,12 +69,12 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel => 
     },
   ]);
 
-  routes = [
-    ...routes,
+  routesF = [
+    ...routesF,
 
     ...trimRoutes([
       {
-        element: <SitemapPage routes={routes} />,
+        element: <SitemapPage routes={routesF} />,
         pathname: SITE_MAP,
         prerender: true,
       },
@@ -108,7 +85,7 @@ export const getRoutes = (params: GetRoutesParamsModel = []): GetRoutesModel => 
     {
       element: <AppContainer />,
       pathname: '/',
-      routes,
+      routes: routesF,
     },
   ];
 };

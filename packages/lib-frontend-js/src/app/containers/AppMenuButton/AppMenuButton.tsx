@@ -18,7 +18,6 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { PROFILE } from '@lib/frontend/user/user.constants';
-import { APP } from '@lib/shared/app/app.constants';
 import { AUTH, SIGN_IN, SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import { useRef } from 'react';
 
@@ -26,7 +25,7 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) =
   const { t } = useTranslation([AUTH]);
   const { wrapperProps } = useLayoutStyles({ props });
   const { signOut } = useSignInResource();
-  const { location, push } = useRouter();
+  const { push } = useRouter();
   const [authStatus] = useStore('auth.status');
 
   const menuRef = useRef<MenuRefModel>(null);
@@ -39,7 +38,7 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) =
           icon: 'settings',
           id: SETTINGS,
           label: t('settings:settings'),
-          onPress: () => push({ pathname: `/${APP}/${SETTINGS}/${PROFILE}` }),
+          onPress: () => push({ pathname: `/${SETTINGS}/${PROFILE}` }),
         },
         {
           color: THEME_COLOR.ERROR,

@@ -1,4 +1,3 @@
-import { WEB_PREFIX } from '@lib/config/node/web/web.constants';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 
 export const PING = 'ping';
@@ -58,7 +57,7 @@ export enum WEBSOCKET_STATUS {
 export const APP_URI = uri({
   host: process.env.APP_HOST,
   port: process.env.APP_PORT,
-  subdomain: WEB_PREFIX,
+  subdomain: process.env.SERVER_APP_SUBDOMAIN,
 });
 
 export const STATIC_URI = uri({
@@ -66,7 +65,6 @@ export const STATIC_URI = uri({
   port:
     process.env.SERVER_APP_STATIC_PORT ??
     (process.env.NODE_ENV === 'production' ? undefined : process.env.APP_PORT),
-  subdomain: WEB_PREFIX,
 });
 
 export const SERVER_APP_URI = uri({

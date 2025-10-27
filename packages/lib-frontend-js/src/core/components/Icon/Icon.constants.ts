@@ -35,7 +35,6 @@ export const IONIC_ICONS = {
   chevronHorizontal: 'code-outline',
   chip: 'hardware-chip-outline',
   cloud: 'cloud-outline',
-  code: 'code-slash-outline',
   contrast: 'contrast-outline',
   cube: 'cube-outline',
   dark: 'moon',
@@ -161,6 +160,7 @@ export const MATERIAL_ICONS = {
 };
 
 export const OCTICON_ICONS = {
+  code: 'code-square',
   sidebarMaximize: 'sidebar-collapse',
   sidebarMinimize: 'sidebar-expand',
 };

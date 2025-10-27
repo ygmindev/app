@@ -5,7 +5,7 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props }) => {
+export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, routes, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
     <Wrapper
@@ -13,7 +13,7 @@ export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, ...props })
       flex
       isRow
       position={SHAPE_POSITION.RELATIVE}>
-      <AppToolbar />
+      <AppToolbar routes={routes} />
 
       <Wrapper
         flex

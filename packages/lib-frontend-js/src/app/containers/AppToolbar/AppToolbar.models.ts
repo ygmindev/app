@@ -1,3 +1,5 @@
-import { type EmptyObjectModel } from '@lib/shared/core/core.models';
+import { type RouteModel } from '@lib/frontend/route/route.models';
 
-export type AppToolbarPropsModel = EmptyObjectModel;
+export type AppToolbarPropsModel = {
+  routes?: Array<RouteModel>;
+};

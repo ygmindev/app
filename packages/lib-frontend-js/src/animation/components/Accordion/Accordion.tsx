@@ -5,7 +5,7 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { PressableTitle } from '@lib/frontend/core/components/PressableTitle/PressableTitle';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel, type MeasureModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -43,28 +43,29 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
     <Wrapper
       {...wrapperProps}
       border={!isTransparent}
-      p={THEME_SIZE.SMALL}
-      round
-      s={THEME_SIZE.SMALL}>
+      p={isTransparent ? undefined : THEME_SIZE.SMALL}
+      round={!isTransparent}>
       <PressableTitle
         color={color}
         elementState={elementStateControlled}
         fontStyle={fontStyle}
         icon={icon}
         image={image}
-        leftElement={(isActiveF) => (
-          <Rotatable isActive={elementStateControlled === ELEMENT_STATE.ACTIVE}>
+        onPress={handleToggle}
+        rightElement={(isActiveF) => (
+          <Rotatable
+            directionActive={DIRECTION.RIGHT}
+            isActive={elementStateControlled === ELEMENT_STATE.ACTIVE}>
             <Button
               elementState={isActiveF ? ELEMENT_STATE.ACTIVE : undefined}
-              icon="chevronDown"
+              icon="chevronRight"
               isHidden
               size={size}
               type={BUTTON_TYPE.INVISIBLE}
             />
           </Rotatable>
         )}
-        onPress={handleToggle}
-        rightElement={() => <></>}
+        // rightElement={() => <></>}
         title={title}
       />
 
@@ -78,7 +79,12 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
         elementState={elementStateControlled}
         isOverflowHidden>
         <Wrapper onMeasure={measureSet}>
-          {!isTransparent && <Divider mHorizontal />}
+          {!isTransparent && (
+            <Divider
+              mHorizontal
+              mTop
+            />
+          )}
 
           <Wrapper p>{children}</Wrapper>
         </Wrapper>
