@@ -49,7 +49,6 @@ export const getRoutes = (routes: GetRoutesParamsModel = []): GetRoutesModel => 
     ...settingRoutes,
 
     {
-      element: <AppLayout routes={routes} />,
       pathname: APP,
       routes: [
         ...routes,
@@ -62,12 +61,9 @@ export const getRoutes = (routes: GetRoutesParamsModel = []): GetRoutesModel => 
         ...testRoutes,
       ],
     },
-
-    {
-      element: <NotFoundPage />,
-      pathname: '*',
-    },
   ]);
+
+  routesF[routesF.length - 1].element = <AppLayout routes={routesF[routesF.length - 1].routes} />;
 
   routesF = [
     ...routesF,
@@ -77,6 +73,11 @@ export const getRoutes = (routes: GetRoutesParamsModel = []): GetRoutesModel => 
         element: <SitemapPage routes={routesF} />,
         pathname: SITE_MAP,
         prerender: true,
+      },
+
+      {
+        element: <NotFoundPage />,
+        pathname: '*',
       },
     ]),
   ];

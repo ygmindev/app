@@ -91,6 +91,8 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
           '@react-navigation/native-stack',
           '@react-navigation/stack',
           '@shopify/flash-list',
+          '@uiw/react-markdown-preview',
+          '@uiw/react-md-editor',
           'countries-list',
           'css-in-js-utils',
           'expo-linear-gradient',

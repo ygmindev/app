@@ -49,6 +49,7 @@ export const config = defineConfig<RoutesConfigModel>({
           return {
             category: props.category,
             element: <Library<unknown> {...(props as LibraryPropsModel<unknown>)} />,
+            isNavigatable: true,
             pathname: trimPathname(id),
             prerender: true,
             title: id,

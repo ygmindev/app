@@ -4,6 +4,7 @@ import {
   type LocationParamsModel,
   type LocationUpdateModel,
 } from '@lib/frontend/route/route.models';
+import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { waitFor } from '@lib/shared/core/utils/waitFor/waitFor';
 import {
   type NavigationRoute,
@@ -11,15 +12,47 @@ import {
   StackActions,
   useIsFocused,
   useNavigation,
-  useNavigationState,
   useRoute,
 } from '@react-navigation/native';
+import { useCallback } from 'react';
 
 export const _useRouter = <TType,>(): _UseRouterModel => {
   const navigation = useNavigation();
   const route = useRoute();
   const isFocused = useIsFocused();
-  const state = useNavigationState((state) => state);
+
+  const getNestedPathname = useCallback(
+    (to: string, params: Record<string, unknown> = {}): [string, Record<string, unknown>] => {
+      const fromParts = getLeaf().split('/').filter(Boolean);
+      const toParts = to.split('/').filter(Boolean);
+      let common = 0;
+      while (
+        common < fromParts.length &&
+        common < toParts.length &&
+        fromParts[common] === toParts[common]
+      )
+        common++;
+      const get = (depth: number = 0): Record<string, unknown> =>
+        depth >= toParts.length
+          ? params
+          : { params: get(depth + 1), screen: trimPathname(toParts.slice(0, depth + 1).join('/')) };
+      const currentDepth = Math.min(common, fromParts.length);
+      return [trimPathname(toParts.slice(0, currentDepth).join('/')), get(currentDepth)];
+    },
+    [route.name],
+  );
+
+  const getLeaf = (): string => {
+    const state = navigationRef.current?.getRootState();
+    if (!state) {
+      return route.name;
+    }
+    let active = state.routes[state.index];
+    while (active.state && active.state.index != null) {
+      active = active.state.routes[active.state.index] as NavigationRoute<ParamListBase, string>;
+    }
+    return active.name;
+  };
 
   return {
     back: () => {
@@ -30,18 +63,7 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
 
     isActive: ({ from, isExact = false, pathname } = {}) => {
       if (!pathname) return isFocused;
-
-      let current = from;
-      if (!from) {
-        let active = state.routes[state.index];
-        while (active.state && active.state.index != null) {
-          active = active.state.routes[active.state.index] as NavigationRoute<
-            ParamListBase,
-            string
-          >;
-        }
-        current = active.name;
-      }
+      const current = from ?? getLeaf();
       const target = pathname;
       const isMatch = current === target;
       return isExact ? isMatch : isMatch || (current?.startsWith(target) ?? false);
@@ -56,13 +78,16 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
 
     push: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
       void waitFor({ condition: () => navigationRef.isReady() }).then(() => {
-        navigationRef.current?.dispatch(StackActions.push(pathname, params));
+        navigationRef.current?.dispatch(StackActions.push(...getNestedPathname(pathname, params)));
       });
     },
 
     replace: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
       void waitFor({ condition: () => navigationRef.isReady() }).then(() =>
-        navigationRef.current?.dispatch(StackActions.replace(pathname, params)),
+        // navigationRef.current?.dispatch(StackActions.replace(pathname, params)),
+        navigationRef.current?.dispatch(
+          StackActions.replace(...getNestedPathname(pathname, params)),
+        ),
       );
     },
   };

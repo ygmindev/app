@@ -4,13 +4,13 @@ import { Logo } from '@lib/frontend/app/components/Logo/Logo';
 import { AppMenuButton } from '@lib/frontend/app/containers/AppMenuButton/AppMenuButton';
 import { type AppToolbarPropsModel } from '@lib/frontend/app/containers/AppToolbar/AppToolbar.models';
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
-import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { RouteLink } from '@lib/frontend/route/components/RouteLink/RouteLink';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -28,57 +28,12 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
   const [isMinimized, isMinimizedSet] = useStore('app.layout.isMinimized');
   const elementState = isMinimized ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
 
-  // const getRoutes = (value?: Array<RouteModel>): Array<RouteModel> => {
-  //   const routesNavigatable =
-  //     value?.reduce(
-  //       (result, v) => [...result, ...(v.isNavigatable ? [v, ...getRoutes(v.routes)] : [])],
-  //       [] as Array<RouteModel>,
-  //     ) ?? [];
-  //   if (!routesNavigatable.length) {
-  //     return [];
-  //   }
-  //   const grouped = groupBy(routesNavigatable, (v) => v.category?.id ?? '');
-  //   return reduce(
-  //     grouped,
-  //     (result, v, k) => {
-  //       if (k) {
-  //         const category = v?.[0]?.category;
-  //         return [
-  //           ...result,
-  //           { icon: category?.icon, pathname: k, routes: v., title: category?.label },
-  //         ];
-  //       }
-  //       return result;
-  //     },
-  //     [] as Array<RouteModel>,
-  //   );
-  // };
-
   const getRoutes = (value?: Array<RouteModel>): Array<RouteModel> =>
     value?.reduce(
       (result, v) =>
         v.isNavigatable ? [...result, { ...v, routes: getRoutes(v.routes) }] : result,
       [] as Array<RouteModel>,
     ) ?? [];
-
-  // const getNavigationElement = (value?: Array<RouteModel>): ReactElement | null =>
-  //   value?.length ? (
-  //     <Wrapper>
-  //       {getRoutes(value)?.map((v) =>
-  //         v.routes ? (
-  //           <Accordion
-  //             icon={v.icon}
-  //             isTransparent
-  //             key={v.pathname}
-  //             title={v.title}>
-  //             {getNavigationElement(v.routes)}
-  //           </Accordion>
-  //         ) : (
-  //           <AsyncText key={v.pathname}>{v.title}</AsyncText>
-  //         ),
-  //       )}
-  //     </Wrapper>
-  //   ) : null;
 
   const getNavigationElement = (value?: Array<RouteModel>): ReactElement | null => {
     const grouped = groupBy(getRoutes(value), (v) => v.category?.id ?? '');
@@ -87,34 +42,27 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
         {reduce(
           grouped,
           (result, v, k) => {
-            if (k) {
-              const category = v?.[0]?.category;
-              return [
-                ...result,
-                <Accordion
-                  icon={category?.icon}
-                  isTransparent
-                  key={category?.id}
-                  title={category?.label}>
-                  {/* {v.map((vv) =>
-                    vv.routes ? (
-                      getNavigationElement(vv.routes)
-                    ) : (
-                      <AsyncText key={vv.pathname}>{vv.title}</AsyncText>
-                    ),
-                  )} */}
-                  {v.map((vv) => {
-                    console.warn(vv);
-                    return vv.routes ? (
-                      getNavigationElement(vv.routes)
-                    ) : (
-                      <AsyncText key={vv.pathname}>{vv.title}</AsyncText>
-                    );
-                  })}
-                </Accordion>,
-              ];
-            }
-            return result;
+            const category = v?.[0]?.category;
+            return [
+              ...result,
+              ...(k
+                ? [
+                    <Accordion
+                      icon={category?.icon}
+                      isTransparent
+                      key={category?.id}
+                      title={category?.label}>
+                      {v.map((vv) => getNavigationElement(vv.routes))}
+                    </Accordion>,
+                  ]
+                : v.map((vv) => (
+                    <RouteLink
+                      key={vv.fullpath}
+                      pathname={vv.fullpath ?? vv.pathname}>
+                      {vv.title}
+                    </RouteLink>
+                  ))),
+            ];
           },
           [] as Array<ReactElement>,
         )}
@@ -144,7 +92,10 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
           position={SHAPE_POSITION.RELATIVE}
           s
           zIndex>
-          <Wrapper flex>
+          <Wrapper
+            basis={0}
+            flex
+            shrink>
             <Wrapper
               isAlign
               isRow

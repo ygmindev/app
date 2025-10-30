@@ -17,14 +17,16 @@ export const RouteLink = <TType = object,>({
   const { styles } = useStyles({ props });
   const { t } = useTranslation();
   const { push } = useRouter();
-  return (
+  return children ? (
     <Link
       onPress={() => {
         void push({ pathname });
       }}
       style={styles}
       testID={testID}>
-      {children && t(children)}
+      {t(children)}
     </Link>
+  ) : (
+    <></>
   );
 };
