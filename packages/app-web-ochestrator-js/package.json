@@ -1,0 +1,63 @@
+{
+  "name": "@app/web-task",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@egjs/react-infinitegrid": "^4.12.0",
+    "@expo/vector-icons": "^15.0.2",
+    "@floating-ui/react": "^0.27.16",
+    "@floating-ui/react-dom": "^2.1.6",
+    "@fragaria/address-formatter": "^6.6.2",
+    "@lexical/react": "^0.35.0",
+    "@react-google-maps/api": "^2.20.7",
+    "@react-navigation/native": "^7.1.17",
+    "@react-navigation/native-stack": "^7.3.26",
+    "@react-navigation/stack": "^7.4.8",
+    "@react-oauth/google": "^0.12.2",
+    "@reduxjs/toolkit": "2.9.0",
+    "@rpldy/upload-button": "^1.11.0",
+    "@rpldy/upload-drop-zone": "^1.11.0",
+    "@rpldy/uploader": "^1.11.0",
+    "@rpldy/uploady": "^1.11.0",
+    "@shopify/flash-list": "2.0.3",
+    "@uiw/react-md-editor": "^4.0.8",
+    "color": "^5.0.0",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "expo-linking": "^8.0.8",
+    "flexsearch": "^0.8.212",
+    "graphql-ws": "^6.0.6",
+    "inversify": "^7.9.1",
+    "inversify-react": "^1.2.0",
+    "lexical": "^0.35.0",
+    "libphonenumber-js": "^1.12.15",
+    "nanoid": "^5.1.5",
+    "react-day-picker": "^9.9.0",
+    "react-markdown": "^10.1.0",
+    "react-native-advanced-input-mask": "^1.4.5",
+    "react-native-is-edge-to-edge": "^1.2.1",
+    "react-native-reanimated": "3.19.1",
+    "react-native-screens": "^4.16.0",
+    "react-native-type-animation": "^0.4.4",
+    "react-native-vector-icons": "^10.3.0",
+    "react-native-web": "^0.21.1",
+    "react-native-webview": "^13.16.0",
+    "react-redux": "^9.2.0",
+    "redux-persist": "^6.0.0",
+    "redux-persist-cookie-storage": "^1.0.0",
+    "reflect-metadata": "^0.2.2",
+    "vike": "0.4.239",
+    "vike-react": "^0.6.5"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "exports": {
+    "./*": {
+      "development": "./src/*",
+      "default": "./src/*"
+    }
+  }
+}

@@ -5,7 +5,7 @@ import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins
 import { websocketPlugin } from '@lib/backend/server/utils/Server/plugins/websocketPlugin/websocketPlugin';
 import { config as apiConfig } from '@lib/config/api/api.node';
 import { config as databaseConfig } from '@lib/config/database/database.mongo';
-import { config as graphqlConfig } from '@lib/config/graphql/graphql.main';
+import { config as graphqlConfig } from '@lib/config/graphql/graphql.orchestrator';
 import { config as configBase } from '@lib/config/node/server/server.base';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';

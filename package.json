@@ -22,10 +22,6 @@
         "@lib/shared",
         "@tool/task"
     ],
-    "engines": {
-        "node": "22.19.0",
-        "pnpm": "10.20.0"
-    },
     "license": "MIT",
     "name": "app",
     "private": true,

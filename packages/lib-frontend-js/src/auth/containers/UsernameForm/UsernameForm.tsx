@@ -123,7 +123,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
                   )}
 
                   <Button
-                    imageSrc="/images/brands/google.svg"
+                    imageSrc="assets/images/brands/google.svg"
                     onPress={google.signIn}
                     type={BUTTON_TYPE.TRANSPARENT}>
                     {t('core:continueWith', { value: t('external:google') })}
