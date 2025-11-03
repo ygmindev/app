@@ -39,12 +39,12 @@ export type DecoratorModel =
 export type CallableModel = (args?: Array<unknown>) => unknown;
 
 export type ReturnTypeModel<TType> = TType extends
-  | ((args?: unknown) => infer TReturn)
   | ((args?: unknown) => Promise<infer TReturn>)
-  | ((args?: unknown) => Array<infer TReturn>)
   | ((args?: unknown) => Promise<Array<infer TReturn>>)
-  ? TReturn
-  : TType;
+  ? Awaited<TReturn>
+  : TType extends ((args?: unknown) => infer TReturn) | ((args?: unknown) => Array<infer TReturn>)
+    ? TReturn
+    : TType;
 
 export type InferModel<TType> = TType extends Array<infer TElement> ? TElement : TType;
 

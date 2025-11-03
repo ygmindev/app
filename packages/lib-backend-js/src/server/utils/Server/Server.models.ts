@@ -5,9 +5,9 @@ import {
 import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
 
 export type ServerParamsModel<TParams extends Array<unknown>> = _ServerParamsModel & {
+  plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
   onClose?(): Promise<void>;
   onInitialize?(): Promise<void>;
-  plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
 };
 
 export type ServerModel = _ServerModel & {

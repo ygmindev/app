@@ -4,7 +4,7 @@ import { type GraphqlConfigModel } from '@lib/config/graphql/graphql.models';
 import { type LoggerModel } from '@lib/shared/logging/utils/Logger/Logger.models';
 
 export type _GraphqlPluginModel = ServerPluginModel<
-  Pick<ApiEndpointModel<unknown, unknown>, 'method' | 'pathname'> & {
+  Pick<ApiEndpointModel<unknown, unknown>, 'pathname'> & {
     config: GraphqlConfigModel;
     logger?: LoggerModel;
   }

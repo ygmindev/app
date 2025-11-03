@@ -4,14 +4,24 @@ import {
 } from '@lib/backend/http/utils/HttpMessage/HttpMessage.models';
 
 export class HttpMessage<TType> implements HttpMessageModel<TType> {
+  _id?: string;
   _body?: TType;
   _cookies?: Record<string, string>;
   _headers?: Record<string, string>;
 
-  constructor({ body, cookies, headers }: HttpMessageParamsModel<TType>) {
+  constructor({ body, cookies, headers, id }: HttpMessageParamsModel<TType>) {
+    this.id = id;
     this.body = body;
     this.cookies = cookies;
     this.headers = headers;
+  }
+
+  get id(): string | undefined {
+    return this._id;
+  }
+
+  set id(value: string | undefined) {
+    this._id = value;
   }
 
   get body(): TType | undefined {

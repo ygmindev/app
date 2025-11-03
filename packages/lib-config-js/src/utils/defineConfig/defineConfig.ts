@@ -7,7 +7,7 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
-const getConfigs = <TParams, TType = undefined>({
+const mergeConfigs = <TParams, TType = undefined>({
   overrides,
   params,
   strategy,
@@ -24,12 +24,12 @@ export const defineConfig = <TParams, TType = undefined>({
     config: config
       ? (paramsF?: PartialDeepModel<TParams>) =>
           config(
-            getConfigs<TParams, TType>({
+            mergeConfigs<TParams, TType>({
               overrides: () => filterNil([paramsF, ...(overrides ? overrides() : [])]),
               params,
               strategy,
             }),
           )
       : undefined,
-    params: () => getConfigs({ overrides, params, strategy }),
+    params: () => mergeConfigs({ overrides, params, strategy }),
   }) as DefineConfigModel<TParams, TType>;

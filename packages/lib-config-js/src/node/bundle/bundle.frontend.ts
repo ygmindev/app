@@ -3,7 +3,7 @@ import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
 import { ASSETS_DIR } from '@lib/config/file/file.constants';
-import configBase from '@lib/config/node/bundle/bundle.base';
+import { config as configBase } from '@lib/config/node/bundle/bundle.base';
 import {
   type _BundleConfigModel,
   type BundleConfigModel,
@@ -70,6 +70,8 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
           '@babel/preset-typescript',
         ],
       },
+
+      commonjsDeps: ['inversify-react'],
 
       define: {
         __DEV__: `${

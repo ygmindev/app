@@ -23,19 +23,16 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
-import {
-  type EntityResourceDataModel,
-  type EntityResourceModel,
-} from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import cloneDeep from 'lodash/cloneDeep';
 import range from 'lodash/range';
 import { type ReactElement, useCallback, useRef, useState } from 'react';
 
-export const ResourceTable = <TType extends EntityResourceModel, TRoot = undefined>({
+export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
   fields,
   implementation,
   name,
@@ -70,7 +67,7 @@ export const ResourceTable = <TType extends EntityResourceModel, TRoot = undefin
           root,
           update: data as UpdateModel<TType>,
         })
-      : await create({ form: data as EntityResourceDataModel<TType>, root });
+      : await create({ form: data as Partial<TType>, root });
   };
 
   const getColumns = useCallback(
@@ -210,7 +207,7 @@ export const ResourceTable = <TType extends EntityResourceModel, TRoot = undefin
                       onCancel={onClose}
                       onSubmit={async (input, root) => {
                         await handleUpsert(input, root);
-                        await reset();
+                        await reset?.();
                         onClose();
                       }}
                       rootName={rootName}
@@ -267,7 +264,7 @@ export const ResourceTable = <TType extends EntityResourceModel, TRoot = undefin
               idField={'_id' as StringKeyModel<TType>}
               isRemovable
               onChange={() => {
-                void reset();
+                void reset?.();
               }}
               onRemove={async ({ _id }) => {
                 void remove({ filter: [{ field: '_id', value: _id }] });

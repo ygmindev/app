@@ -1,6 +1,6 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { BUILD_DIR, CACHE_DIR } from '@lib/config/file/file.constants';
-import bundleConfig from '@lib/config/node/bundle/bundle.base';
+import { config as bundleConfig } from '@lib/config/node/bundle/bundle.base';
 import { _test } from '@lib/config/node/test/_test';
 import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
 import typescriptConfig from '@lib/config/node/typescript/typescript';

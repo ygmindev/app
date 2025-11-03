@@ -4,10 +4,7 @@ import { Link } from '@lib/frontend/core/components/Link/Link';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
-import {
-  UTILITY_RESOURCE_NAME,
-  UTILITY_TYPE,
-} from '@lib/model/admin/Utility/Utility.constants';
+import { UTILITY_RESOURCE_NAME, UTILITY_TYPE } from '@lib/model/admin/Utility/Utility.constants';
 import { type UtilityModel } from '@lib/model/admin/Utility/Utility.models';
 import { VENDOR_RESOURCE_NAME } from '@lib/model/admin/Vendor/Vendor.constants';
 import { type VendorModel } from '@lib/model/admin/Vendor/Vendor.models';

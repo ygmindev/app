@@ -1,6 +1,5 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type RLFCModel } from '@lib/frontend/core/core.models';
-import { useStatic } from '@lib/frontend/data/hooks/useStatic/useStatic';
 import { _MarkdownEditor } from '@lib/frontend/documentation/components/MarkdownEditor/_MarkdownEditor';
 import {
   type MarkdownEditorPropsModel,
@@ -17,8 +16,8 @@ export const MarkdownEditor: RLFCModel<MarkdownEditorRefModel, MarkdownEditorPro
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
-  const x = useStatic({ src: '/assets/images/brands/google.svg' });
-  console.warn(x);
+  // const x = useStatic({ src: '/assets/images/brands/google.svg' });
+  // console.warn(x);
   return (
     <Wrapper
       {...wrapperProps}

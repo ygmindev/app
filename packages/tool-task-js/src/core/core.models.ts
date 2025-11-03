@@ -36,6 +36,7 @@ export type TaskParamsModel<TType extends unknown> = Omit<
   'options' | 'overrides'
 > &
   EnvironmentOverrideParamsModel & {
+    alias?: string;
     onBefore?: Array<TaskModel<TType>>;
     onFinish?: Array<TaskModel<TType>>;
     options?: (

@@ -5,16 +5,13 @@ import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { _graphql } from '@lib/config/graphql/_graphql';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
-import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { HTTP_METHOD, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { type FastifyReply, type FastifyRequest } from 'fastify';
 import { type GraphQLError } from 'graphql';
 import { createYoga } from 'graphql-yoga';
 // import { useGraphQLSSE } from '@graphql-yoga/plugin-graphql-sse';
 
-export const _graphqlPlugin: _GraphqlPluginModel = async (
-  server,
-  { config, logger, method, pathname },
-) => {
+export const _graphqlPlugin: _GraphqlPluginModel = async (server, { config, logger, pathname }) => {
   try {
     const schema = _graphql(config);
     const yoga = createYoga<{ reply: FastifyReply; req: FastifyRequest }>({
@@ -60,7 +57,7 @@ export const _graphqlPlugin: _GraphqlPluginModel = async (
         }
         throw new NotFoundError('');
       },
-      method,
+      method: [HTTP_METHOD.GET, HTTP_METHOD.POST, HTTP_METHOD.OPTIONS],
       pathname,
       prefix: true,
       type: API_ENDPOINT_TYPE.REST,

@@ -1,9 +1,7 @@
-export type EntityResourceModel = {
-  _id: string;
+import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 
+export type EntityResourceModel = ResourceModel & {
   created?: Date;
-
-  id?: string;
 
   isFixture?: boolean;
 

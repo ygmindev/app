@@ -19,9 +19,8 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
-import { type NilModel, type PartialModel } from '@lib/shared/core/core.models';
+import { type NilModel } from '@lib/shared/core/core.models';
 import { APP_URI } from '@lib/shared/http/http.constants';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 import { useState } from 'react';
 
 export const NewPaymentMethodInput: RLFCModel<
@@ -47,9 +46,7 @@ export const NewPaymentMethodInput: RLFCModel<
   const handleCreate = async ({
     type,
     ...form
-  }: EntityResourceDataModel<PaymentMethodModel>): Promise<
-    PartialModel<PaymentMethodModel> | NilModel
-  > => {
+  }: Partial<PaymentMethodModel>): Promise<Partial<PaymentMethodModel> | NilModel> => {
     const formF = isPrimary ? { ...form, isPrimary: true } : form;
     const paymentMethod = await (async () => {
       switch (type) {

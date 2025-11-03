@@ -4,7 +4,7 @@ import {
 } from '@lib/backend/resource/resource.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
-import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import {
   type RESOURCE_METHOD_TYPE,
@@ -16,7 +16,7 @@ import { type ResourceImplementationModel } from '@lib/shared/resource/utils/Res
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 
 export type CreateResourceResolverParamsModel<
-  TType extends EntityResourceModel,
+  TType extends ResourceModel,
   TRoot = undefined,
 > = ResourceNameParamsModel<TRoot> & {
   ResourceImplementation: ResourceClassModel<
@@ -41,7 +41,7 @@ export type CreateResourceResolverParamsModel<
 };
 
 export type CreateResourceResolverModel<
-  TType extends EntityResourceModel,
+  TType extends ResourceModel,
   TRoot = undefined,
 > = ResourceClassModel<ResourceImplementationModel<TType, TRoot>>;
 

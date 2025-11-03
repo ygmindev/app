@@ -868,6 +868,150 @@ importers:
         specifier: ^0.6.5
         version: 0.6.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(vike@0.4.239(react-streaming@0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.4(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.27.0)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
 
+  packages/app-web-ochestrator-js:
+    dependencies:
+      '@egjs/react-infinitegrid':
+        specifier: ^4.12.0
+        version: 4.12.0
+      '@expo/vector-icons':
+        specifier: ^15.0.2
+        version: 15.0.2(expo-font@14.0.7(expo@53.0.22(@babel/core@7.28.4)(graphql@16.11.0)(react-native-webview@13.16.0(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      '@floating-ui/react':
+        specifier: ^0.27.16
+        version: 0.27.16(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@floating-ui/react-dom':
+        specifier: ^2.1.6
+        version: 2.1.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@fragaria/address-formatter':
+        specifier: ^6.6.2
+        version: 6.6.2
+      '@lexical/react':
+        specifier: ^0.35.0
+        version: 0.35.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(yjs@13.6.27)
+      '@react-google-maps/api':
+        specifier: ^2.20.7
+        version: 2.20.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@react-navigation/native':
+        specifier: ^7.1.17
+        version: 7.1.17(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      '@react-navigation/native-stack':
+        specifier: ^7.3.26
+        version: 7.3.26(@react-navigation/native@7.1.17(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native-safe-area-context@5.6.1(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native-screens@4.16.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      '@react-navigation/stack':
+        specifier: ^7.4.8
+        version: 7.4.8(@react-navigation/native@7.1.17(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native-gesture-handler@2.28.0(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native-safe-area-context@5.6.1(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native-screens@4.16.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      '@react-oauth/google':
+        specifier: ^0.12.2
+        version: 0.12.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@reduxjs/toolkit':
+        specifier: 2.9.0
+        version: 2.9.0(react-redux@9.2.0(@types/react@19.1.12)(react@19.1.1)(redux@5.0.1))(react@19.1.1)
+      '@rpldy/upload-button':
+        specifier: ^1.11.0
+        version: 1.11.0(react@19.1.1)
+      '@rpldy/upload-drop-zone':
+        specifier: ^1.11.0
+        version: 1.11.0(react@19.1.1)
+      '@rpldy/uploader':
+        specifier: ^1.11.0
+        version: 1.11.0
+      '@rpldy/uploady':
+        specifier: ^1.11.0
+        version: 1.11.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@shopify/flash-list':
+        specifier: 2.0.3
+        version: 2.0.3(@babel/runtime@7.28.4)(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      '@uiw/react-md-editor':
+        specifier: ^4.0.8
+        version: 4.0.8(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      color:
+        specifier: ^5.0.0
+        version: 5.0.0
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
+      date-fns-tz:
+        specifier: ^3.2.0
+        version: 3.2.0(date-fns@4.1.0)
+      expo-linking:
+        specifier: ^8.0.8
+        version: 8.0.8(expo@53.0.22(@babel/core@7.28.4)(graphql@16.11.0)(react-native-webview@13.16.0(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1))(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      flexsearch:
+        specifier: ^0.8.212
+        version: 0.8.212
+      graphql-ws:
+        specifier: ^6.0.6
+        version: 6.0.6(@fastify/websocket@11.2.0)(graphql@16.11.0)(ws@8.18.3)
+      inversify:
+        specifier: ^7.9.1
+        version: 7.9.1(reflect-metadata@0.2.2)
+      inversify-react:
+        specifier: ^1.2.0
+        version: 1.2.0(inversify@7.9.1(reflect-metadata@0.2.2))(react@19.1.1)
+      lexical:
+        specifier: ^0.35.0
+        version: 0.35.0
+      libphonenumber-js:
+        specifier: ^1.12.15
+        version: 1.12.15
+      nanoid:
+        specifier: ^5.1.5
+        version: 5.1.5
+      react:
+        specifier: ^19.0.0
+        version: 19.1.1
+      react-day-picker:
+        specifier: ^9.9.0
+        version: 9.9.0(react@19.1.1)
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.1.1(react@19.1.1)
+      react-markdown:
+        specifier: ^10.1.0
+        version: 10.1.0(@types/react@19.1.12)(react@19.1.1)
+      react-native-advanced-input-mask:
+        specifier: ^1.4.5
+        version: 1.4.5(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      react-native-is-edge-to-edge:
+        specifier: ^1.2.1
+        version: 1.2.1(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      react-native-reanimated:
+        specifier: 3.19.1
+        version: 3.19.1(@babel/core@7.28.4)(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      react-native-screens:
+        specifier: ^4.16.0
+        version: 4.16.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      react-native-type-animation:
+        specifier: ^0.4.4
+        version: 0.4.4(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      react-native-vector-icons:
+        specifier: ^10.3.0
+        version: 10.3.0
+      react-native-web:
+        specifier: ^0.21.1
+        version: 0.21.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react-native-webview:
+        specifier: ^13.16.0
+        version: 13.16.0(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.1.12)(react@19.1.1))(react@19.1.1)
+      react-redux:
+        specifier: ^9.2.0
+        version: 9.2.0(@types/react@19.1.12)(react@19.1.1)(redux@5.0.1)
+      redux-persist:
+        specifier: ^6.0.0
+        version: 6.0.0(react@19.1.1)(redux@5.0.1)
+      redux-persist-cookie-storage:
+        specifier: ^1.0.0
+        version: 1.0.0
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      vike:
+        specifier: 0.4.239
+        version: 0.4.239(react-streaming@0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.4(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.27.0)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
+      vike-react:
+        specifier: ^0.6.5
+        version: 0.6.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(vike@0.4.239(react-streaming@0.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(vite@7.1.4(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.27.0)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
+
   packages/app-web-template-js:
     dependencies:
       '@babel/core':
@@ -1207,211 +1351,6 @@ importers:
   packages/lib-shared-py: {}
 
   packages/service-ai-py: {}
-
-  packages/service-graphql-sandbox-js:
-    dependencies:
-      '@apollo/server':
-        specifier: ^5.0.0
-        version: 5.0.0(graphql@16.11.0)
-      '@as-integrations/aws-lambda':
-        specifier: ^3.1.0
-        version: 3.1.0(@apollo/server@5.0.0(graphql@16.11.0))
-      '@aws-sdk/client-apigatewaymanagementapi':
-        specifier: ^3.883.0
-        version: 3.883.0
-      '@azure/functions':
-        specifier: ^4.7.3
-        version: 4.7.3
-      '@babel/core':
-        specifier: ^7.28.4
-        version: 7.28.4
-      '@fastify/compress':
-        specifier: ^8.1.0
-        version: 8.1.0
-      '@fastify/cookie':
-        specifier: ^11.0.2
-        version: 11.0.2
-      '@fastify/cors':
-        specifier: ^11.1.0
-        version: 11.1.0
-      '@fastify/error':
-        specifier: ^4.2.0
-        version: 4.2.0
-      '@fastify/middie':
-        specifier: ^9.0.3
-        version: 9.0.3
-      '@fastify/static':
-        specifier: ^8.2.0
-        version: 8.2.0
-      '@fastify/websocket':
-        specifier: ^11.2.0
-        version: 11.2.0
-      '@graphql-yoga/plugin-graphql-sse':
-        specifier: ^3.15.2
-        version: 3.15.2(graphql-yoga@5.15.2(graphql@16.11.0))(graphql@16.11.0)
-      '@graphql-yoga/redis-event-target':
-        specifier: ^3.0.3
-        version: 3.0.3(ioredis@5.7.0)
-      '@mikro-orm/core':
-        specifier: ^6.5.2
-        version: 6.5.2
-      '@mikro-orm/mongodb':
-        specifier: ^6.5.2
-        version: 6.5.2(@mikro-orm/core@6.5.2)(socks@2.8.7)
-      '@netlify/functions':
-        specifier: ^4.2.5
-        version: 4.2.5(rollup@4.50.1)
-      '@opentelemetry/api':
-        specifier: ^1.9.0
-        version: 1.9.0
-      '@opentelemetry/auto-instrumentations-node':
-        specifier: ^0.62.2
-        version: 0.62.2(@opentelemetry/api@1.9.0)(@opentelemetry/core@2.1.0(@opentelemetry/api@1.9.0))
-      '@opentelemetry/exporter-trace-otlp-http':
-        specifier: ^0.204.0
-        version: 0.204.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/instrumentation':
-        specifier: ^0.204.0
-        version: 0.204.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/instrumentation-aws-lambda':
-        specifier: ^0.54.1
-        version: 0.54.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/otlp-exporter-base':
-        specifier: ^0.204.0
-        version: 0.204.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/resources':
-        specifier: ^2.1.0
-        version: 2.1.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-node':
-        specifier: ^0.204.0
-        version: 0.204.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-trace-base':
-        specifier: ^2.1.0
-        version: 2.1.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-trace-node':
-        specifier: ^2.1.0
-        version: 2.1.0(@opentelemetry/api@1.9.0)
-      '@uptrace/core':
-        specifier: ^2.0.2
-        version: 2.0.2
-      '@uptrace/node':
-        specifier: ^2.0.2
-        version: 2.0.2
-      apollo-server-lambda:
-        specifier: ^3.13.0
-        version: 3.13.0(graphql@16.11.0)
-      aws-lambda:
-        specifier: ^1.0.7
-        version: 1.0.7
-      axios:
-        specifier: ^1.11.0
-        version: 1.11.0
-      class-validator:
-        specifier: ^0.14.2
-        version: 0.14.2
-      close-with-grace:
-        specifier: ^2.2.0
-        version: 2.2.0
-      cookie:
-        specifier: ^1.0.2
-        version: 1.0.2
-      core-js:
-        specifier: ^3.45.1
-        version: 3.45.1
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
-      ejs:
-        specifier: ^3.1.10
-        version: 3.1.10
-      email-templates:
-        specifier: ^12.0.3
-        version: 12.0.3(@babel/core@7.28.4)(ejs@3.1.10)(handlebars@4.7.8)(mustache@4.2.0)(pug@3.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(underscore@1.13.7)(velocityjs@2.1.5)
-      fastify:
-        specifier: ^5.6.0
-        version: 5.6.0
-      firebase-admin:
-        specifier: ^13.5.0
-        version: 13.5.0
-      graphql:
-        specifier: ^16.11.0
-        version: 16.11.0
-      graphql-relay:
-        specifier: ^0.10.2
-        version: 0.10.2(graphql@16.11.0)
-      graphql-scalars:
-        specifier: ^1.24.2
-        version: 1.24.2(graphql@16.11.0)
-      graphql-ws:
-        specifier: ^6.0.6
-        version: 6.0.6(@fastify/websocket@11.2.0)(graphql@16.11.0)(ws@8.18.3)
-      graphql-yoga:
-        specifier: ^5.15.2
-        version: 5.15.2(graphql@16.11.0)
-      http-errors:
-        specifier: ^2.0.0
-        version: 2.0.0
-      i18next:
-        specifier: ^25.5.2
-        version: 25.5.2(typescript@5.9.2)
-      i18next-http-middleware:
-        specifier: ^3.8.0
-        version: 3.8.0
-      inversify:
-        specifier: ^7.9.1
-        version: 7.9.1(reflect-metadata@0.2.2)
-      ioredis:
-        specifier: ^5.7.0
-        version: 5.7.0
-      json-stringify-safe:
-        specifier: ^5.0.1
-        version: 5.0.1
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
-      mongodb:
-        specifier: 6.19.0
-        version: 6.19.0(socks@2.8.7)
-      nanoid:
-        specifier: ^5.1.5
-        version: 5.1.5
-      nodemailer:
-        specifier: ^7.0.6
-        version: 7.0.6
-      p-queue:
-        specifier: ^8.1.1
-        version: 8.1.1
-      pino:
-        specifier: ^9.9.4
-        version: 9.9.4
-      pino-pretty:
-        specifier: ^13.1.1
-        version: 13.1.1
-      reflect-metadata:
-        specifier: ^0.2.2
-        version: 0.2.2
-      serverless:
-        specifier: 4.18.2
-        version: 4.18.2
-      stripe:
-        specifier: ^18.5.0
-        version: 18.5.0(@types/node@24.3.1)
-      thenby:
-        specifier: ^1.3.4
-        version: 1.3.4
-      twilio:
-        specifier: ^5.9.0
-        version: 5.9.0
-      type-graphql:
-        specifier: 2.0.0-rc.2
-        version: 2.0.0-rc.2(class-validator@0.14.2)(graphql-scalars@1.24.2(graphql@16.11.0))(graphql@16.11.0)
-      ws:
-        specifier: ^8.18.3
-        version: 8.18.3
-    devDependencies:
-      pubsub-js:
-        specifier: ^1.9.5
-        version: 1.9.5
 
   packages/service-job-js:
     dependencies:
@@ -1857,6 +1796,159 @@ importers:
       pubsub-js:
         specifier: ^1.9.5
         version: 1.9.5
+
+  packages/service-orchestrator-js:
+    dependencies:
+      '@azure/functions':
+        specifier: ^4.7.3
+        version: 4.7.3
+      '@babel/core':
+        specifier: ^7.28.4
+        version: 7.28.4
+      '@fastify/compress':
+        specifier: ^8.1.0
+        version: 8.1.0
+      '@fastify/cookie':
+        specifier: ^11.0.2
+        version: 11.0.2
+      '@fastify/cors':
+        specifier: ^11.1.0
+        version: 11.1.0
+      '@fastify/error':
+        specifier: ^4.2.0
+        version: 4.2.0
+      '@fastify/static':
+        specifier: ^8.2.0
+        version: 8.2.0
+      '@fastify/websocket':
+        specifier: ^11.2.0
+        version: 11.2.0
+      '@graphql-yoga/plugin-graphql-sse':
+        specifier: ^3.15.2
+        version: 3.15.2(graphql-yoga@5.15.2(graphql@16.11.0))(graphql@16.11.0)
+      '@graphql-yoga/redis-event-target':
+        specifier: ^3.0.3
+        version: 3.0.3(ioredis@5.7.0)
+      '@lib/backend':
+        specifier: workspace:^
+        version: link:../lib-backend-js
+      '@lib/config':
+        specifier: workspace:^
+        version: link:../lib-config-js
+      '@lib/model':
+        specifier: workspace:^
+        version: link:../lib-model-js
+      '@lib/shared':
+        specifier: workspace:^
+        version: link:../lib-shared-js
+      '@mikro-orm/core':
+        specifier: ^6.5.2
+        version: 6.5.2
+      '@mikro-orm/mongodb':
+        specifier: ^6.5.2
+        version: 6.5.2(@mikro-orm/core@6.5.2)(socks@2.8.7)
+      '@netlify/functions':
+        specifier: ^4.2.5
+        version: 4.2.5(rollup@4.50.1)
+      axios:
+        specifier: ^1.11.0
+        version: 1.11.0
+      class-validator:
+        specifier: ^0.14.2
+        version: 0.14.2
+      cookie:
+        specifier: ^1.0.2
+        version: 1.0.2
+      core-js:
+        specifier: ^3.45.1
+        version: 3.45.1
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
+      date-fns-tz:
+        specifier: ^3.2.0
+        version: 3.2.0(date-fns@4.1.0)
+      ejs:
+        specifier: ^3.1.10
+        version: 3.1.10
+      email-templates:
+        specifier: ^12.0.3
+        version: 12.0.3(@babel/core@7.28.4)(ejs@3.1.10)(handlebars@4.7.8)(mustache@4.2.0)(pug@3.0.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(underscore@1.13.7)(velocityjs@2.1.5)
+      fastify:
+        specifier: ^5.6.0
+        version: 5.6.0
+      firebase-admin:
+        specifier: ^13.5.0
+        version: 13.5.0
+      graphql:
+        specifier: ^16.11.0
+        version: 16.11.0
+      graphql-relay:
+        specifier: ^0.10.2
+        version: 0.10.2(graphql@16.11.0)
+      graphql-ws:
+        specifier: ^6.0.6
+        version: 6.0.6(@fastify/websocket@11.2.0)(graphql@16.11.0)(ws@8.18.3)
+      graphql-yoga:
+        specifier: ^5.15.2
+        version: 5.15.2(graphql@16.11.0)
+      http-errors:
+        specifier: ^2.0.0
+        version: 2.0.0
+      i18next:
+        specifier: ^25.5.2
+        version: 25.5.2(typescript@5.9.2)
+      inversify:
+        specifier: ^7.9.1
+        version: 7.9.1(reflect-metadata@0.2.2)
+      ioredis:
+        specifier: ^5.7.0
+        version: 5.7.0
+      json-stringify-safe:
+        specifier: ^5.0.1
+        version: 5.0.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      mongodb:
+        specifier: 6.19.0
+        version: 6.19.0(socks@2.8.7)
+      nanoid:
+        specifier: ^5.1.5
+        version: 5.1.5
+      nodemailer:
+        specifier: ^7.0.6
+        version: 7.0.6
+      p-queue:
+        specifier: ^8.1.1
+        version: 8.1.1
+      pino:
+        specifier: ^9.9.4
+        version: 9.9.4
+      pino-pretty:
+        specifier: ^13.1.1
+        version: 13.1.1
+      pubsub-js:
+        specifier: ^1.9.5
+        version: 1.9.5
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      stripe:
+        specifier: ^18.5.0
+        version: 18.5.0(@types/node@24.3.1)
+      thenby:
+        specifier: ^1.3.4
+        version: 1.3.4
+      twilio:
+        specifier: ^5.9.0
+        version: 5.9.0
+      type-graphql:
+        specifier: 2.0.0-rc.2
+        version: 2.0.0-rc.2(class-validator@0.14.2)(graphql-scalars@1.24.2(graphql@16.11.0))(graphql@16.11.0)
+      ws:
+        specifier: ^8.18.3
+        version: 8.18.3
 
   packages/service-server-js:
     dependencies:
@@ -2528,6 +2620,9 @@ importers:
       vite-plugin-circular-dependency:
         specifier: ^0.5.0
         version: 0.5.0(rollup@4.50.1)
+      vite-plugin-cjs-interop:
+        specifier: ^2.3.0
+        version: 2.3.0(vite@7.1.4(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.27.0)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
       vite-plugin-deadfile:
         specifier: ^1.4.0
         version: 1.4.0(@swc/helpers@0.5.17)(vite@7.1.4(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.27.0)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
@@ -5739,6 +5834,9 @@ packages:
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
 
+  '@napi-rs/wasm-runtime@1.0.7':
+    resolution: {integrity: sha512-SeDnOO0Tk7Okiq6DbXmmBODgOAb9dp9gjlphokTUxmt8U3liIP1ZsozBahH69j/RJv+Rfs6IwUKHTgQYJ/HBAw==}
+
   '@netlify/binary-info@1.0.0':
     resolution: {integrity: sha512-4wMPu9iN3/HL97QblBsBay3E1etIciR84izI3U+4iALY+JHCrI+a2jO0qbAZ/nxKoegypYEaiiqWXylm+/zfrw==}
 
@@ -6417,6 +6515,98 @@ packages:
 
   '@originjs/vite-plugin-commonjs@1.0.3':
     resolution: {integrity: sha512-KuEXeGPptM2lyxdIEJ4R11+5ztipHoE7hy8ClZt3PYaOVQ/pyngd2alaSrPnwyFeOW1UagRBaQ752aA1dTMdOQ==}
+
+  '@oxc-parser/binding-android-arm64@0.82.3':
+    resolution: {integrity: sha512-hU9TSCa/dmYx0UCQyH+b9iONRGv5cfnvoSMKFf0v9xNwqlQu7mEil4po1d0a3Yjb7YyI9mz6e6bfg0XcjbMdBg==}
+    engines: {node: '>=20.0.0'}
+    cpu: [arm64]
+    os: [android]
+
+  '@oxc-parser/binding-darwin-arm64@0.82.3':
+    resolution: {integrity: sha512-LjBFMUtYYGZyA2g3+ajNPcn6RwsBoDbKELSf/pwVNCWHmAQwptw8zRc4VVDnBqANvkjmoe7MSp6TqKGi359/rw==}
+    engines: {node: '>=20.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@oxc-parser/binding-darwin-x64@0.82.3':
+    resolution: {integrity: sha512-/d4uUlq2F3S0lwXnMjcGWkFUgZsPT/urypIQKFuumXbf9cHsy4bnkRDLL67+KpQ373R9boOEH+yUBYrLE9+LxA==}
+    engines: {node: '>=20.0.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@oxc-parser/binding-freebsd-x64@0.82.3':
+    resolution: {integrity: sha512-H8wJ8LNrRAZ1Q75r+bnEn79pPAq8zQKnbE5+mWu9Xq5qcaQ6l/ZgjdamjvK05hZZXicCV5xji315f+OKK2BayQ==}
+    engines: {node: '>=20.0.0'}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@oxc-parser/binding-linux-arm-gnueabihf@0.82.3':
+    resolution: {integrity: sha512-iomV7aBUubRHcsLkEnl8ORsPc2yIRfB4AD6N9KweUUZMEAiNFjS5DU83NcdmkMajejWqCNczzeFIyBkyRkptDw==}
+    engines: {node: '>=20.0.0'}
+    cpu: [arm]
+    os: [linux]
+
+  '@oxc-parser/binding-linux-arm-musleabihf@0.82.3':
+    resolution: {integrity: sha512-DUZT8W//2MwQCbz7XSFSp/F4qwIq5ZSZVcLp/G++4Fo38ERzc8CvcQHiHOJXKY68BHHlBrkGp81RjhvWiRUJVw==}
+    engines: {node: '>=20.0.0'}
+    cpu: [arm]
+    os: [linux]
+
+  '@oxc-parser/binding-linux-arm64-gnu@0.82.3':
+    resolution: {integrity: sha512-p66Mlm9ZpraOf1YyyJTIlastfDWMr4For132Ns8iT4AWc1L+Ml4hJew5x/5Y0HXw6zX5q290FvHfWMIh499hxg==}
+    engines: {node: '>=20.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@oxc-parser/binding-linux-arm64-musl@0.82.3':
+    resolution: {integrity: sha512-eTeubc6GaGSGa09s9vffbg3Nxve4okUe79UQAd/vXPCPaGcbC/3VXoMutEjRyewOEEXihdYzggxa3v9yv7bNoA==}
+    engines: {node: '>=20.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@oxc-parser/binding-linux-riscv64-gnu@0.82.3':
+    resolution: {integrity: sha512-gOLpW5RZLajzc/PfPBxYGLLQu9ErBJBZSboBpDafP1Vv8t/vmwEr0WA95oxPdFo0lMl2xkjcVNbOiVQA70U56Q==}
+    engines: {node: '>=20.0.0'}
+    cpu: [riscv64]
+    os: [linux]
+
+  '@oxc-parser/binding-linux-s390x-gnu@0.82.3':
+    resolution: {integrity: sha512-K8FiSCsjUxwo5uKIlwoQd8Dgtvjplk1fYXLnU4CKH0BxWVihf34NQ3DCyELMjAOhyrslfih5cWULIyKOdWSUqw==}
+    engines: {node: '>=20.0.0'}
+    cpu: [s390x]
+    os: [linux]
+
+  '@oxc-parser/binding-linux-x64-gnu@0.82.3':
+    resolution: {integrity: sha512-/n13gpaEWlDHGWExq5lfZpvxKkA2w+zWA79C13F4yVskEzfZSk1x6dTBrkGSf3pFAUFHtzrlT/LPHiUyMJt5Tg==}
+    engines: {node: '>=20.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@oxc-parser/binding-linux-x64-musl@0.82.3':
+    resolution: {integrity: sha512-P6eBYtOmAP0uihOeteOzXwAS4s5FB79gt1THYEMBGNe482PPhesqEXyq5jFCwBzpM1QKg7xG7N+EC+ZUktXOTg==}
+    engines: {node: '>=20.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@oxc-parser/binding-wasm32-wasi@0.82.3':
+    resolution: {integrity: sha512-oFL0vJfrR7Qkj+n3q9MQhqOsaWGiDg4B1Ch/mJMZGXJAkZ1dnYKQWLVymJkWsl4Ydgs82h6L20mX2IthbF0wHQ==}
+    engines: {node: '>=14.0.0'}
+    cpu: [wasm32]
+
+  '@oxc-parser/binding-win32-arm64-msvc@0.82.3':
+    resolution: {integrity: sha512-2t3j5pWgL7ZWj/3Q1aiUBnH79oAzQO+KOM5tTVawIWpsHFqsuGEL5ckikap1JczHaugAaEvc067ihTjpSDoXVA==}
+    engines: {node: '>=20.0.0'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@oxc-parser/binding-win32-x64-msvc@0.82.3':
+    resolution: {integrity: sha512-MeMOFDIZ3vSZyjgjSkWKb/zdRc4eSwK0kUl5OmysjRIIyIK7LEFLpuk7R+Of4nUGYAQNRHyC8BcMJKO2OLBeqA==}
+    engines: {node: '>=20.0.0'}
+    cpu: [x64]
+    os: [win32]
+
+  '@oxc-project/types@0.82.3':
+    resolution: {integrity: sha512-6nCUxBnGX0c6qfZW5MaF6/fmu5dHJDMiMPaioKHKs5mi5+8/FHQ7WGjgQIz1zxpmceMYfdIXkOaLYE+ejbuOtA==}
 
   '@paralleldrive/cuid2@2.2.2':
     resolution: {integrity: sha512-ZOBkgDwEdoYVlSeRbYYXs0S9MejQofiVYoTbKzy/6GQa39/q5tQU2IX46+shYnUkpEl3wc+J6wRlar7r2EK2xA==}
@@ -7482,6 +7672,9 @@ packages:
 
   '@tybys/wasm-util@0.10.0':
     resolution: {integrity: sha512-VyyPYFlOMNylG45GoAe0xDoLwWuowvf92F9kySqzYh8vmYm7D2u4iUJKa1tOUpS70Ku13ASrOkS4ScXFsTaCNQ==}
+
+  '@tybys/wasm-util@0.10.1':
+    resolution: {integrity: sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==}
 
   '@types/accepts@1.3.7':
     resolution: {integrity: sha512-Pay9fq2lM2wXPWbteBsRAGiWH2hig4ZE2asK+mm7kUzlxRTfL961rj89I6zV/E3PcIkDqyuBEcMxFT7rccugeQ==}
@@ -10987,6 +11180,9 @@ packages:
 
   estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
+
+  estree-walker@3.0.3:
+    resolution: {integrity: sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g==}
 
   esutils@2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
@@ -14584,6 +14780,10 @@ packages:
     resolution: {integrity: sha512-qFOyK5PjiWZd+QQIh+1jhdb9LpxTF0qs7Pm8o5QHYZ0M3vKqSqzsZaEB6oWlxZ+q2sJBMI/Ktgd2N5ZwQoRHfg==}
     engines: {node: '>= 0.4'}
 
+  oxc-parser@0.82.3:
+    resolution: {integrity: sha512-mJGrcrzaPYfCJwXsqPRJ8yeS3/Brn0qpt8jq7tPg3B7n3VSvKuKYhXhC0gBFQ+aIa9TdttdR/NWGh48lvUodjg==}
+    engines: {node: '>=20.0.0'}
+
   p-event@4.2.0:
     resolution: {integrity: sha512-KXatOjCRXXkSePPb1Nbi0p0m+gQAwdlbhi4wQKJPI1HsMQS9g+Sqp2o+QHziPr7eYJyOZet836KoHEVM1mwOrQ==}
     engines: {node: '>=8'}
@@ -17766,6 +17966,11 @@ packages:
 
   vite-plugin-circular-dependency@0.5.0:
     resolution: {integrity: sha512-7SQX1IZbf5to/S3A3/syfntRNg20Cth6KgTCwHpNZIcuDCtPclV2Bwvdd9HWG+alKZ04mmdlchNOPQgBl7/vQQ==}
+
+  vite-plugin-cjs-interop@2.3.0:
+    resolution: {integrity: sha512-gNeh8anoG4QrdQf4LNcoQZTVEdqrrAdwjDDyNc4bHLi0u6XSXaaOiJiuKwwY38KWfYZdQsmoytBOHCRf+0gHjQ==}
+    peerDependencies:
+      vite: 4 || 5 || 6 || 7
 
   vite-plugin-deadfile@1.4.0:
     resolution: {integrity: sha512-bHJw4S7Xg3ydlbPEKilHkAiA+l0/L6yAmoUeD5la2D9iyXJSaVqQr2AbHMZ7wa5dy0atd9+laniqRdJHS6221w==}
@@ -22711,6 +22916,13 @@ snapshots:
       '@tybys/wasm-util': 0.10.0
     optional: true
 
+  '@napi-rs/wasm-runtime@1.0.7':
+    dependencies:
+      '@emnapi/core': 1.5.0
+      '@emnapi/runtime': 1.5.0
+      '@tybys/wasm-util': 0.10.1
+    optional: true
+
   '@netlify/binary-info@1.0.0': {}
 
   '@netlify/blobs@10.0.10':
@@ -23786,6 +23998,55 @@ snapshots:
   '@originjs/vite-plugin-commonjs@1.0.3':
     dependencies:
       esbuild: 0.14.54
+
+  '@oxc-parser/binding-android-arm64@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-darwin-arm64@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-darwin-x64@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-freebsd-x64@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm-gnueabihf@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm-musleabihf@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm64-gnu@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm64-musl@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-linux-riscv64-gnu@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-linux-s390x-gnu@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-linux-x64-gnu@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-linux-x64-musl@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-wasm32-wasi@0.82.3':
+    dependencies:
+      '@napi-rs/wasm-runtime': 1.0.7
+    optional: true
+
+  '@oxc-parser/binding-win32-arm64-msvc@0.82.3':
+    optional: true
+
+  '@oxc-parser/binding-win32-x64-msvc@0.82.3':
+    optional: true
+
+  '@oxc-project/types@0.82.3': {}
 
   '@paralleldrive/cuid2@2.2.2':
     dependencies:
@@ -24982,6 +25243,11 @@ snapshots:
   '@tsconfig/react-native@3.0.6': {}
 
   '@tybys/wasm-util@0.10.0':
+    dependencies:
+      tslib: 2.8.1
+    optional: true
+
+  '@tybys/wasm-util@0.10.1':
     dependencies:
       tslib: 2.8.1
     optional: true
@@ -29302,6 +29568,10 @@ snapshots:
   estree-walker@0.6.1: {}
 
   estree-walker@2.0.2: {}
+
+  estree-walker@3.0.3:
+    dependencies:
+      '@types/estree': 1.0.8
 
   esutils@2.0.3: {}
 
@@ -34043,6 +34313,26 @@ snapshots:
       object-keys: 1.1.1
       safe-push-apply: 1.0.0
 
+  oxc-parser@0.82.3:
+    dependencies:
+      '@oxc-project/types': 0.82.3
+    optionalDependencies:
+      '@oxc-parser/binding-android-arm64': 0.82.3
+      '@oxc-parser/binding-darwin-arm64': 0.82.3
+      '@oxc-parser/binding-darwin-x64': 0.82.3
+      '@oxc-parser/binding-freebsd-x64': 0.82.3
+      '@oxc-parser/binding-linux-arm-gnueabihf': 0.82.3
+      '@oxc-parser/binding-linux-arm-musleabihf': 0.82.3
+      '@oxc-parser/binding-linux-arm64-gnu': 0.82.3
+      '@oxc-parser/binding-linux-arm64-musl': 0.82.3
+      '@oxc-parser/binding-linux-riscv64-gnu': 0.82.3
+      '@oxc-parser/binding-linux-s390x-gnu': 0.82.3
+      '@oxc-parser/binding-linux-x64-gnu': 0.82.3
+      '@oxc-parser/binding-linux-x64-musl': 0.82.3
+      '@oxc-parser/binding-wasm32-wasi': 0.82.3
+      '@oxc-parser/binding-win32-arm64-msvc': 0.82.3
+      '@oxc-parser/binding-win32-x64-msvc': 0.82.3
+
   p-event@4.2.0:
     dependencies:
       p-timeout: 3.2.0
@@ -37843,6 +38133,14 @@ snapshots:
       chalk: 4.1.2
     transitivePeerDependencies:
       - rollup
+
+  vite-plugin-cjs-interop@2.3.0(vite@7.1.4(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.27.0)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)):
+    dependencies:
+      estree-walker: 3.0.3
+      magic-string: 0.30.18
+      minimatch: 10.0.3
+      oxc-parser: 0.82.3
+      vite: 7.1.4(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.27.0)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)
 
   vite-plugin-deadfile@1.4.0(@swc/helpers@0.5.17)(vite@7.1.4(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.27.0)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)):
     dependencies:

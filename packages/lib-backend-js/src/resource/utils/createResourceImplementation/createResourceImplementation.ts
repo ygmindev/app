@@ -4,7 +4,7 @@ import {
   type CreateResourceImplementationParamsModel,
 } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 import { type PartialArrayModel, type PrototypeModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
@@ -14,7 +14,7 @@ import { type ResourceImplementationDecoratorModel } from '@lib/shared/resource/
 import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
-export const createResourceImplementation = <TType extends EntityResourceModel, TRoot = undefined>({
+export const createResourceImplementation = <TType extends ResourceModel, TRoot = undefined>({
   Resource,
   afterCreate,
   afterCreateMany,
@@ -111,6 +111,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>,
       context?: RequestContextModel,
     ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>> {
+      if (!create) {
+        return {};
+      }
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeCreate
         ? await this.decorators.beforeCreate({ input: inputF }, context)
@@ -128,6 +131,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>,
       context?: RequestContextModel,
     ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>> {
+      if (!createMany) {
+        return {};
+      }
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeCreateMany
         ? await this.decorators.beforeCreateMany({ input: inputF }, context)
@@ -152,6 +158,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>,
       context?: RequestContextModel,
     ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>> {
+      if (!get) {
+        return {};
+      }
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeGet
         ? await this.decorators.beforeGet({ input: inputF }, context)
@@ -169,6 +178,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
       context?: RequestContextModel,
     ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
+      if (!getConnection) {
+        return {};
+      }
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeGetConnection
         ? await this.decorators.beforeGetConnection({ input: inputF }, context)
@@ -184,6 +196,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
       context?: RequestContextModel,
     ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> {
+      if (!getMany) {
+        return {};
+      }
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeGetMany
         ? await this.decorators.beforeGetMany({ input: inputF }, context)
@@ -199,6 +214,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>,
       context?: RequestContextModel,
     ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>> {
+      if (!remove) {
+        return {};
+      }
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeRemove
         ? await this.decorators.beforeRemove({ input: inputF }, context)
@@ -216,6 +234,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>,
       context?: RequestContextModel,
     ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
+      if (!search) {
+        return {};
+      }
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeSearch
         ? await this.decorators.beforeSearch({ input: inputF }, context)
@@ -233,6 +254,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
       context?: RequestContextModel,
     ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>> {
+      if (!update) {
+        return {};
+      }
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeUpdate
         ? await this.decorators.beforeUpdate({ input: inputF }, context)
@@ -250,6 +274,9 @@ export const createResourceImplementation = <TType extends EntityResourceModel, 
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot>,
       context?: RequestContextModel,
     ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot>> {
+      if (!updateMany) {
+        return {};
+      }
       let inputF = cleanObject(input);
       inputF = this.decorators.beforeUpdateMany
         ? await this.decorators.beforeUpdateMany({ input: inputF }, context)

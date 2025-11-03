@@ -40,11 +40,14 @@
       "@app/web-admin/*": [
         "packages/app-web-admin-js/src/*"
       ],
+      "@app/web-documentation/*": [
+        "packages/app-web-documentation-js/src/*"
+      ],
       "@app/web/*": [
         "packages/app-web-js/src/*"
       ],
-      "@app/web-documentation/*": [
-        "packages/app-web-documentation-js/src/*"
+      "@app/web-orchestrator/*": [
+        "packages/app-web-ochestrator-js/src/*"
       ],
       "@app/web-template/*": [
         "packages/app-web-template-js/src/*"
@@ -79,14 +82,14 @@
       "service_ai/*": [
         "packages/service-ai-py/src/*"
       ],
-      "@service/graphql-sandbox/*": [
-        "packages/service-graphql-sandbox-js/src/*"
-      ],
       "@service/job/*": [
         "packages/service-job-js/src/*"
       ],
       "@service/lambda/*": [
         "packages/service-lambda-js/src/*"
+      ],
+      "@service/orchestrator/*": [
+        "packages/service-orchestrator-js/src/*"
       ],
       "@service/server/*": [
         "packages/service-server-js/src/*"

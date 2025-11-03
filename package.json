@@ -12,7 +12,6 @@
         "@asset/static",
         "@service/job",
         "@service/server",
-        "@service/graphql-sandbox",
         "@service/lambda",
         "@service/lambda-crawl",
         "@lib/backend",

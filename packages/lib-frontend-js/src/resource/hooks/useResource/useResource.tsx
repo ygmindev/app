@@ -6,7 +6,7 @@ import {
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { type UseResourceMethodParamsModel } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
 import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
-import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import uniqBy from 'lodash/uniqBy';
@@ -18,7 +18,7 @@ export const toGraphqlParamsFields = <TType,>(
     field.fields ? { [field.id]: toGraphqlParamsFields(field.fields) } : field.id,
   ) as GraphqlQueryParamsFieldsModel<TType>) ?? [];
 
-export const useResource = <TType extends EntityResourceModel, TRoot = undefined>({
+export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   afterCreate,
   afterCreateMany,
   afterGet,

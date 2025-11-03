@@ -30,7 +30,7 @@ export const seed = async (): Promise<SeedModel> => {
     });
     for (const pathname of implementations) {
       const cls = (
-        (await import(pathname)) as Record<
+        (await import(/* @vite-ignore */ pathname)) as Record<
           string,
           ClassModel<ResourceImplementationModel<EntityResourceModel, unknown>>
         >

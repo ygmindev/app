@@ -1,5 +1,6 @@
 import { type FileConfigModel } from '@lib/config/file/file.models';
 import { type BUNDLE_FORMAT } from '@lib/config/node/bundle/bundle.constants';
+import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { type TypescriptConfigModel } from '@lib/config/node/typescript/typescript.models';
 import { type BuildOptions } from 'esbuild';
 import { type RollupOptions } from 'rollup';
@@ -15,6 +16,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
     presets?: Array<string | [string, Record<string, unknown>]>;
   };
+
+  commonjsDeps?: Array<string>;
 
   configFilename: string;
 
@@ -42,6 +45,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   isTranspileProject?: boolean;
 
+  isWebServer?: boolean;
+
   logSuppressPatterns?: Array<RegExp>;
 
   mainFields?: Array<string>;
@@ -55,6 +60,12 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
   publicPathname?: string;
 
   rootDirs: Array<string>;
+
+  server?: {
+    certificate?: ServerConfigModel['certificate'];
+
+    isWebServer?: boolean;
+  };
 
   serverExtension?: string;
 

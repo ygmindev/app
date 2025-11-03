@@ -1,3 +1,4 @@
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import {
   type _GraphqlConfigModel,
@@ -11,14 +12,15 @@ import { buildSchemaSync } from 'type-graphql';
 export const _graphql = ({
   authorize,
   container,
+  outDir,
   resolvers,
-  schemaDir,
+  schemaFilename,
 }: GraphqlConfigModel): _GraphqlConfigModel =>
   buildSchemaSync({
     authChecker: ({ context }, roles) =>
       authorize({ context: context as RequestContextModel, roles }),
     container: container as unknown as ContainerType,
-    emitSchemaFile: schemaDir,
+    emitSchemaFile: joinPaths([outDir, schemaFilename]),
     nullableByDefault: true,
     pubSub: Container.get(_PubSub) as unknown as PubSub,
     resolvers: resolvers as unknown as BuildSchemaOptions['resolvers'],

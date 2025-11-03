@@ -1,11 +1,14 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { HttpRequest } from '@lib/backend/http/utils/HttpRequest/HttpRequest';
 import { HttpResponse } from '@lib/backend/http/utils/HttpResponse/HttpResponse';
+import { type HttpResponseModel } from '@lib/backend/http/utils/HttpResponse/HttpResponse.models';
 import {
   type _ServerModel,
   type _ServerParamsModel,
 } from '@lib/backend/server/utils/Server/_Server.models';
 import { type ApiConfigModel, type ApiEndpointModel } from '@lib/config/api/api.models';
+import { timeit } from '@lib/shared/core/utils/timeit/timeit';
+import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { type HTTP_METHOD, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { fastify, type FastifyInstance, type FastifyRequest, type HTTPMethods } from 'fastify';
@@ -55,24 +58,43 @@ export class _Server implements _ServerModel {
               return;
             }
           }
+
           const request = new HttpRequest({
             body: req.body as TParams,
             cookies: req.cookies as Record<string, string>,
             headers: req.headers as Record<string, string>,
             i18n: req.i18n,
+            id: req.id,
             lang: req.language,
             method: req.method as HTTP_METHOD,
             query: req.query as URLSearchParams,
             url: req.originalUrl ?? req.url,
           });
-          const response = handler
-            ? await handler(request, undefined, { rep, req })
-            : new HttpResponse({ body: '' });
-          forEach(response.headers, (v, k) => {
-            void rep.header(k, v);
+
+          const handleRequest = async (): Promise<HttpResponseModel<TType | string>> => {
+            const response = handler
+              ? await handler(request, undefined, { rep, req })
+              : new HttpResponse({ body: '' });
+            forEach(response.headers, (v, k) => {
+              void rep.header(k, v);
+            });
+            return response;
+          };
+
+          const [r, duration] = await timeit(handleRequest, false);
+          const status = r.statusCode ?? HTTP_STATUS_CODE.OK;
+          logger.info({
+            duration: duration.toFixed(5),
+            id: request.id,
+            method: request.method,
+            status,
+            timestamp: new DateTime(),
+            url: request.url,
           });
-          await rep.status(response.statusCode ?? HTTP_STATUS_CODE.OK).send(response.body);
+
+          await rep.status(status).send(r.body);
         },
+
         method: method as HTTPMethods,
         url: pathname,
       }),

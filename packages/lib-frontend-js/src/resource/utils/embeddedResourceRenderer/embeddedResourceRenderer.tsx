@@ -6,8 +6,8 @@ import {
   type EmbeddedResourceRendererParamsModel,
 } from '@lib/frontend/resource/utils/embeddedResourceRenderer/embeddedResourceRenderer.models';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
-import { type PartialModel } from '@lib/shared/core/core.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type PartialModel } from '@lib/shared/core/core.models';
 import { cloneElement } from 'react';
 
 export const embeddedResourceRenderer =

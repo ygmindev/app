@@ -2,7 +2,7 @@ import { type FrameworkRenderParamsModel } from '@lib/config/node/framework/fram
 import { onBeforeClient } from '@lib/config/node/framework/onBeforeClient';
 import type { PageContextClient } from 'vike/types';
 
-import { routes } from '../routes';
+import { routes } from '../config/routes';
 
 export const onBeforeRenderClient = async (
   params: PageContextClient & FrameworkRenderParamsModel,

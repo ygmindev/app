@@ -1,8 +1,9 @@
 import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
-import { type WebConfigModel } from '@lib/config/node/web/web.models';
+import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 
 export type _WebPluginModel = ServerPluginModel<{
-  config: WebConfigModel;
+  config: BundleConfigModel;
   root: string;
+  subdomain?: string;
   threshold?: number;
 }>;

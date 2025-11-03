@@ -1,8 +1,7 @@
 import { type FormStepPropsModel } from '@lib/frontend/data/components/StepForm/StepForm.models';
 import { type OtpModel } from '@lib/model/auth/Otp/Otp.models';
-import { type EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 
-export type SignInFormModel = EntityResourceDataModel<OtpModel>;
+export type SignInFormModel = Partial<OtpModel>;
 
 export type OtpFormPropsModel = FormStepPropsModel<SignInFormModel, OtpFormModel>;
 

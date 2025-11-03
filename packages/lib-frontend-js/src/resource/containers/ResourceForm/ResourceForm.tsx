@@ -7,11 +7,11 @@ import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInp
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { type ResourceFormPropsModel } from '@lib/frontend/resource/containers/ResourceForm/ResourceForm.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { cloneElement, type ReactElement, useState } from 'react';
 
-export const ResourceForm = <TType extends EntityResourceModel, TRoot = undefined>({
+export const ResourceForm = <TType extends ResourceModel, TRoot = undefined>({
   data,
   fields,
   onSubmit,

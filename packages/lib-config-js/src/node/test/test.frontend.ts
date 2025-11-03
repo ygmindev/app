@@ -1,4 +1,4 @@
-import bundleConfig from '@lib/config/node/bundle/bundle.frontend';
+import { config as bundleConfig } from '@lib/config/node/bundle/bundle.frontend';
 import configBase from '@lib/config/node/test/test.base';
 import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';

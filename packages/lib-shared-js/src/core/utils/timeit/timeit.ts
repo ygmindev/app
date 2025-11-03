@@ -1,4 +1,7 @@
-import { type CallableModel } from '@lib/shared/core/core.models';
+import {
+  type TimeitModel,
+  type TimeitParamsModel,
+} from '@lib/shared/core/utils/timeit/timeit.models';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 const now = (): number => {
@@ -8,22 +11,19 @@ const now = (): number => {
   return Date.now();
 };
 
-export const timeit = <TType extends CallableModel>(fn: TType): TType => {
-  const wrapped = (...args: Parameters<TType>): ReturnType<TType> => {
-    const start = now();
-    const result = fn(...args);
-    if (result instanceof Promise) {
-      return result.then((res) => {
-        const end = now();
-        logger.info(`${fn.name} took ${(end - start).toFixed(3)} ms`);
-        return res as Awaited<ReturnType<TType>>;
-      }) as ReturnType<TType>;
-    } else {
-      const end = now();
-      logger.info(` ${fn.name} took ${(end - start).toFixed(3)} ms`);
-      return result as ReturnType<TType>;
-    }
-  };
-  Object.defineProperty(wrapped, 'name', { value: fn.name });
-  return wrapped as TType;
+export const timeit = <TType extends (() => unknown) | (() => Promise<unknown>)>(
+  ...[fn, isVerbose = true]: TimeitParamsModel<TType>
+): TimeitModel<TType> => {
+  const start = now();
+  const result = fn();
+  if (result instanceof Promise) {
+    return result.then((r) => {
+      const duration = now() - start;
+      isVerbose && logger.info(`${fn.name} took ${duration.toFixed(3)} ms`);
+      return [r, duration];
+    }) as TimeitModel<TType>;
+  }
+  const duration = now() - start;
+  isVerbose && logger.info(`${fn.name} took ${duration.toFixed(3)} ms`);
+  return [result, duration] as TimeitModel<TType>;
 };

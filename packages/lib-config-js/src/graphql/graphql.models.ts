@@ -7,13 +7,15 @@ import { type ContainerModel } from '@lib/shared/core/utils/Container/Container.
 import { type GraphQLSchema } from 'graphql';
 
 export type GraphqlConfigModel = {
-  authorize(params: AuthorizeParamsModel): Promise<AuthorizeModel>;
-
   container: ContainerModel;
+
+  outDir: string;
 
   resolvers: Array<ClassModel>;
 
-  schemaDir: string;
+  schemaFilename: string;
+
+  authorize(params: AuthorizeParamsModel): Promise<AuthorizeModel>;
 };
 
 export type _GraphqlConfigModel = GraphQLSchema;

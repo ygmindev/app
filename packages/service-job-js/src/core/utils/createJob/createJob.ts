@@ -16,7 +16,7 @@ export const createJob = async ({
   if (isMain) {
     logger.progress('Starting');
     try {
-      await timeit(job)();
+      await timeit(job);
       logger.success('Completed');
     } catch (e) {
       logger.fail('Failed', e);

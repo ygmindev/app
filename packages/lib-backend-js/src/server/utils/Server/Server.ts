@@ -5,9 +5,9 @@ import {
   type ServerModel,
   type ServerParamsModel,
 } from '@lib/backend/server/utils/Server/Server.models';
-import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { type ApiEndpointModel } from '@lib/config/api/api.models';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
+import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -44,7 +44,9 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
       : params.prefix
         ? this._api?.prefix
         : undefined;
+
     const pathname = `/${joinPaths([prefix, params.pathname])}`;
+
     logger.info(
       `${isArray(params.method) ? params.method.join(',') : params.method} ${uri({
         host: this._host,
@@ -52,21 +54,22 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
         subdomain: params.subdomain,
       })}${pathname}`,
     );
+
     return super.register({ ...params, pathname, prefix });
   }
 
   async run(): Promise<void> {
     await handleCleanup({ onCleanUp: this.handleClose });
-
-    // handleHmr({ onChange: this.handleClose });
+    handleHmr({ onChange: this.handleClose });
 
     for (const [plugin, params] of this._plugins ?? []) {
       await plugin(this, params);
     }
+
     for (const route of this._api?.routes ?? []) {
-      // graphql routes are handled by graphqlPlugin
-      route.type !== API_ENDPOINT_TYPE.GRAPHQL && (await this.register(route));
+      await this.register(route);
     }
+
     await this._onInitialize?.();
     await super.run();
     await new Promise(() => {});

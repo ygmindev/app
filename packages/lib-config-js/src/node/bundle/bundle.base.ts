@@ -34,7 +34,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       buildDir: BUILD_DIR,
 
-      configFilename: 'bundle.js',
+      configFilename: 'bundle.ts',
 
       envFilename: '.env.production',
 

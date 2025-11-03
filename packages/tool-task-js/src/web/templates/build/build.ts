@@ -2,7 +2,6 @@ import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { config as bundleConfig } from '@lib/config/node/bundle/bundle.web';
-import { config as webConfig } from '@lib/config/node/web/web';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildApp } from '@lib/shared/web/utils/buildApp/buildApp';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
@@ -23,7 +22,7 @@ export const build: TaskParamsModel<unknown> = {
   task: [
     async () => runClean({ patterns: [BUILD_DIR] }),
 
-    () => buildApp({ web: webConfig.params() }),
+    () => buildApp({ bundle: bundleConfig.params() }),
 
     () => exportEnvironemnt({ envPrefix: bundleConfig.params().envPrefix }),
 

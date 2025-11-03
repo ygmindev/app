@@ -1,6 +1,6 @@
 import { fromExecutable } from '@lib/backend/file/utils/fromExecutable/fromExecutable';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { config as serverConfig } from '@lib/config/node/server/server';
+import { config as serverConfig } from '@lib/config/node/server/server.node';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type ServeStaticWebParamsModel } from '@tool/task/web/templates/serveStaticWeb/serveStaticWeb.models';

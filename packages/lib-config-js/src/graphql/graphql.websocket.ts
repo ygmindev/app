@@ -1,4 +1,3 @@
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { config as configBase } from '@lib/config/graphql/graphql.base';
 import {
   type _GraphqlConfigModel,
@@ -14,7 +13,7 @@ export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
       // resolvers: [SubscriptionResolver],
       resolvers: [],
 
-      schemaDir: fromStatic('graphql/websocket.gql'),
+      schemaFilename: 'websocket.gql',
     },
   ],
 });

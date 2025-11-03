@@ -1,5 +1,4 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
-import { default as _traverse } from '@babel/traverse';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
@@ -40,11 +39,17 @@ import posix from 'path/posix';
 import { type RollupOptions } from 'rollup';
 import esbuildPlugin from 'rollup-plugin-esbuild';
 import { nodeExternals } from 'rollup-plugin-node-externals';
-import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
+import vike from 'vike/plugin';
+import {
+  type Alias,
+  createLogger,
+  type Logger,
+  type Plugin,
+  searchForWorkspaceRoot,
+  type WatchOptions,
+} from 'vite';
 import { checker } from 'vite-plugin-checker';
-
-type TraverseModel = typeof _traverse;
-const traverse = (_traverse as unknown as { default: TraverseModel }).default ?? _traverse;
+import { cjsInterop } from 'vite-plugin-cjs-interop';
 
 export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): EsbuildPlugin => ({
   name: 'plugin:excludeVendorFromSourceMap',
@@ -132,6 +137,7 @@ export const _bundle = ({
   assetsDir,
   babel,
   buildDir,
+  commonjsDeps,
   define,
   entryFiles,
   envFilename,
@@ -150,6 +156,7 @@ export const _bundle = ({
   provide,
   publicPathname,
   rootDirs,
+  server,
   serverExtension,
   transpileModules,
   transpilePatterns,
@@ -297,6 +304,8 @@ export const _bundle = ({
       ...filterNil([
         provide && inject(provide),
 
+        server?.isWebServer && vike(),
+
         babel &&
           babelPlugin({
             babelHelpers: 'runtime',
@@ -306,6 +315,8 @@ export const _bundle = ({
             presets: babel.presets,
             skipPreflightCheck: true,
           } as RollupBabelInputPluginOptions),
+
+        commonjsDeps && cjsInterop({ dependencies: commonjsDeps }),
       ]),
 
       serverExtension && vitePluginIsomorphicImport(serverExtension),
@@ -365,6 +376,29 @@ export const _bundle = ({
 
     ssr: { noExternal: transpileAll },
   };
+
+  if (server && config.server) {
+    config.server = {
+      ...config.server,
+
+      ...((process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
+      !process.env.NODE_RUNTIME
+        ? {
+            host: true,
+            middlewareMode: true,
+            watch: (config.build?.watch as WatchOptions) ?? undefined,
+          }
+        : {}),
+    };
+
+    if (server.certificate) {
+      const { certificateDir, privateKeyFilename, publicKeyFilename } = server.certificate;
+      config.server.https = {
+        cert: readFileSync(joinPaths([certificateDir, publicKeyFilename])),
+        key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
+      };
+    }
+  }
 
   const defineF = {
     ...config.define,

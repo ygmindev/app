@@ -1,7 +1,7 @@
-import { type WebConfigModel } from '@lib/config/node/web/web.models';
+import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 
 export type _BuildAppParamsModel = {
-  web: WebConfigModel;
+  bundle: BundleConfigModel;
 };
 
 export type _BuildAppModel = Promise<void>;

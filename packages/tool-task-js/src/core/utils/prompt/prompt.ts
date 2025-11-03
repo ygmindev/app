@@ -4,6 +4,6 @@ import {
   type PromptParamsModel,
 } from '@tool/task/core/utils/prompt/prompt.models';
 
-export const prompt = async <TType>(
+export const prompt = async <TType extends unknown>(
   params: PromptParamsModel<TType>,
 ): Promise<PromptModel<TType>> => _prompt(params);

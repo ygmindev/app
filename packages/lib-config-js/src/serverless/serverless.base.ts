@@ -3,8 +3,8 @@ import {
   SERVERLESS_RUNTIME,
 } from '@lib/backend/serverless/serverless.constants';
 import { BUILD_DIR, PRUNE_PATTERNS } from '@lib/config/file/file.constants';
-import bundleConfig from '@lib/config/node/bundle/bundle.node.js';
-import serverConfig from '@lib/config/node/server/server';
+import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
+import { config as serverConfig } from '@lib/config/node/server/server.node';
 import { _serverless } from '@lib/config/serverless/_serverless';
 import {
   type _ServerlessConfigModel,

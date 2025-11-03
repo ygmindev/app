@@ -1,8 +1,9 @@
-import configBase from '@lib/config/node/bundle/bundle.frontend';
+import { config as configBase } from '@lib/config/node/bundle/bundle.frontend';
 import {
   type _BundleConfigModel,
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
+import { config as serverConfig } from '@lib/config/node/server/server.base';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
@@ -32,6 +33,12 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       define: {
         global: 'globalThis',
+      },
+
+      server: {
+        certificate: serverConfig.params().certificate,
+
+        isWebServer: true,
       },
     },
   ],

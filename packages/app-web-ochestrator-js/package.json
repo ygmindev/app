@@ -1,5 +1,5 @@
 {
-  "name": "@app/web-task",
+  "name": "@app/web-orchestrator",
   "version": "0.0.1",
   "type": "module",
   "private": true,

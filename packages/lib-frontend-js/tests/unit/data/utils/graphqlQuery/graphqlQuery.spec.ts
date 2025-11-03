@@ -1,8 +1,8 @@
 import { graphqlQuery } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery';
 import { type GraphqlQueryParamsModel } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
+import { type TestableEntityResourceModel } from '@lib/model/test/TestableEntityResource/TestableEntityResource.models';
 import { trimDeep } from '@lib/shared/core/utils/trimDeep/trimDeep';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
-import { type TestableEntityResourceModel } from '@lib/model/test/TestableEntityResource/TestableEntityResource.models';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ graphqlQuery });

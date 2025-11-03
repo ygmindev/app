@@ -1,8 +1,9 @@
 import 'vike-react/Config';
 
 import { type FCModel } from '@lib/frontend/core/core.models';
-import { type RootContextPropsModel } from '@lib/frontend/root/root.models';
+import { type RootContextModel, type RootContextPropsModel } from '@lib/frontend/root/root.models';
 import { type RouteModel } from '@lib/frontend/route/route.models';
+import { type DeepKeyModel } from '@lib/shared/core/core.models';
 import { type UriModel } from '@lib/shared/route/route.models';
 import { type ReactElement, type ReactNode } from 'react';
 import { type Config } from 'vike/types';
@@ -28,6 +29,7 @@ export type FrameworkConfigModel = {
   onBeforeClient?: onBeforeClientModel;
   onBeforeServer?: onBeforeServerModel;
   onHeader?: onHeaderModel;
+  ssrContextKeys?: Array<DeepKeyModel<RootContextModel>>;
 };
 
 export type FrameworkRenderParamsModel = RootContextPropsModel & {

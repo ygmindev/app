@@ -1,24 +1,31 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { RequestContextModel } from '@lib/config/api/api.models';
+import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
+import { Task } from '@lib/model/orchestrator/Task/Task';
+import { TASK_RESOURCE_NAME } from '@lib/model/orchestrator/Task/Task.constants';
 import { type TaskModel } from '@lib/model/orchestrator/Task/Task.models';
 import { type TaskImplementationModel } from '@lib/model/orchestrator/Task/TaskImplementation/TaskImplementation.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
-import { ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
+import { uid } from '@lib/shared/core/utils/uid/uid';
 import { TaskRunner } from '@tool/task/core/utils/TaskRunner/TaskRunner';
+import reduce from 'lodash/reduce';
 
 @withContainer()
-export class TaskImplementation implements TaskImplementationModel {
-  protected _taskRunner = Container.get(TaskRunner);
-
-  getMany = async (
-    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TaskModel>,
-    context?: RequestContextModel,
-  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TaskModel>> => {
-    this._taskRunner.registry
-    return {
-      result: [],
-    };
-  };
-}
+export class TaskImplementation
+  extends createResourceImplementation<TaskModel>({
+    Resource: Task,
+    count: async () => Object.keys(Container.get(TaskRunner).tasks).length,
+    getMany: async (input, context) => {
+      const x = {
+        result: reduce(
+          Container.get(TaskRunner).tasks,
+          (result, v, k) => [...result, { _id: uid(), name: k }],
+          [] as Array<TaskModel>,
+        ),
+      };
+      return {
+        result: [],
+      };
+    },
+    name: TASK_RESOURCE_NAME,
+  })
+  implements TaskImplementationModel {}
