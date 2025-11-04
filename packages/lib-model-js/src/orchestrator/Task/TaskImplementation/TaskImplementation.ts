@@ -25,7 +25,7 @@ export class TaskImplementation
       const values = await getMany({ filter });
       const { result } = await getConnection({
         count: values.result?.length ?? 0,
-        getMany: async () => values,
+        getMany,
         input: { filter, id },
         pagination,
       });

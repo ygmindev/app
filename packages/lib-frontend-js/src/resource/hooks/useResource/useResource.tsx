@@ -8,7 +8,9 @@ import { type UseResourceMethodParamsModel } from '@lib/frontend/resource/hooks/
 import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { merge } from '@lib/shared/core/utils/merge/merge';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
+import { CONNECTION_PAGE_SIZE_DEFAULT } from '@lib/shared/resource/utils/Connection/Connection.constants';
 import uniqBy from 'lodash/uniqBy';
 
 export const toGraphqlParamsFields = <TType,>(
@@ -141,7 +143,10 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
     TRoot
   >({
     after: afterGetConnection,
-    before: beforeGetConnection,
+    before: async ({ input }) => {
+      const inputF = merge([input, { pagination: { first: CONNECTION_PAGE_SIZE_DEFAULT } }]);
+      return beforeGetConnection?.({ input: inputF }) ?? inputF;
+    },
     fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.GET_CONNECTION,
       TType,

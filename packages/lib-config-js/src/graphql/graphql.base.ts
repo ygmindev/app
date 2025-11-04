@@ -22,8 +22,14 @@ import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
   config: _graphql,
 
-  overrides: () => [
-    {
+  params: () =>
+    ({
+      authorize,
+
+      container: Container,
+
+      outDir: fromWorking(BUILD_DIR, GRAPHQL),
+
       resolvers: filterNil([
         AccessResolver,
         GroupResolver,
@@ -34,16 +40,6 @@ export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
         UserResolver,
         ...(process.env.NODE_ENV !== 'production' ? [SnapshotResolver] : []),
       ]),
-    },
-  ],
-
-  params: () =>
-    ({
-      authorize,
-
-      container: Container,
-
-      outDir: fromWorking(BUILD_DIR, GRAPHQL),
     }) as GraphqlConfigModel,
 });
 

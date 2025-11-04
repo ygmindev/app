@@ -8,16 +8,20 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 
 export const OrchestratorPage: LFCModel<OrchestratorPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { getMany } = useTaskResource();
+  const { getConnection } = useTaskResource();
   return (
     <DataBoundary
       id="tasks"
-      query={getMany}
+      query={getConnection}
       {...wrapperProps}>
       {(x) => {
         return (
-          <Wrapper>
-            <Text>{JSON.stringify(x)}</Text>
+          <Wrapper s>
+            {x.data?.result?.edges?.map((v) => (
+              <Wrapper key={v.node._id}>
+                <Text>{v.node.name}</Text>
+              </Wrapper>
+            ))}
           </Wrapper>
         );
       }}
