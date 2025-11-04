@@ -13,7 +13,6 @@ export type ResourceReadMethodTypeModel =
   | RESOURCE_METHOD_TYPE.GET
   | RESOURCE_METHOD_TYPE.GET_MANY
   | RESOURCE_METHOD_TYPE.GET_CONNECTION
-  | RESOURCE_METHOD_TYPE.SEARCH
   | RESOURCE_METHOD_TYPE.SUBSCRIBE;
 
 export type ResourceWriteMethodTypeModel =
@@ -76,7 +75,6 @@ export enum RESOURCE_METHOD_TYPE {
   GET_CONNECTION = 'GetConnection',
   GET_MANY = 'GetMany',
   REMOVE = 'Remove',
-  SEARCH = 'Search',
   SUBSCRIBE = 'Subscribe',
   UPDATE = 'Update',
   UPDATE_MANY = 'UpdateMany',

@@ -9,7 +9,7 @@ import { createUpdate } from '@lib/backend/resource/utils/createUpdate/createUpd
 import { Pagination } from '@lib/backend/resource/utils/Pagination/Pagination';
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { PartialArrayModel, StringKeyModel } from '@lib/shared/core/core.models';
+import { PartialArrayModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
@@ -126,21 +126,6 @@ export const createResourceArgs = <TMethod extends RESOURCE_METHOD_TYPE, TType, 
 
         @withField({ isArray: true, isOptional: true })
         id?: Array<string>;
-      }
-      return Args as ResourceClassModel<ResourceArgsModel<TMethod, TType, TRoot>>;
-    }
-
-    case RESOURCE_METHOD_TYPE.SEARCH: {
-      @withEntity({ isAbstract: true })
-      class Args
-        extends Root<TRoot>
-        implements ResourceArgsModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>
-      {
-        @withField({ isArray: true, isOptional: true })
-        keys?: Array<StringKeyModel<TType>>;
-
-        @withField({ isOptional: true })
-        query?: string;
       }
       return Args as ResourceClassModel<ResourceArgsModel<TMethod, TType, TRoot>>;
     }

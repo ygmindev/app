@@ -38,11 +38,6 @@ export type ResourceImplementationModel<TType, TRoot = undefined> = {
     context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>>;
 
-  search(
-    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>,
-    context?: RequestContextModel,
-  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>>;
-
   update(
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>,
     context?: RequestContextModel,
@@ -102,11 +97,6 @@ export type ResourceImplementationDecoratorModel<TType, TRoot = undefined> = {
     TType,
     TRoot
   >;
-  afterSearch?: ResourceImplementationAfterDecoratorModel<
-    RESOURCE_METHOD_TYPE.SEARCH,
-    TType,
-    TRoot
-  >;
   afterUpdate?: ResourceImplementationAfterDecoratorModel<
     RESOURCE_METHOD_TYPE.UPDATE,
     TType,
@@ -140,11 +130,6 @@ export type ResourceImplementationDecoratorModel<TType, TRoot = undefined> = {
   >;
   beforeRemove?: ResourceImplementationBeforeDecoratorModel<
     RESOURCE_METHOD_TYPE.REMOVE,
-    TType,
-    TRoot
-  >;
-  beforeSearch?: ResourceImplementationBeforeDecoratorModel<
-    RESOURCE_METHOD_TYPE.SEARCH,
     TType,
     TRoot
   >;

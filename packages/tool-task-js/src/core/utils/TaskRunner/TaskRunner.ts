@@ -39,9 +39,9 @@ import reduce from 'lodash/reduce';
 export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
   protected _aliases: Record<string, string> = {};
   protected _pids: Set<number> = new Set();
-  protected _tasks: Record<string, TaskParamsModel<unknown>> = {};
+  protected _tasks: Array<TaskParamsModel<unknown>> = [];
 
-  get tasks(): Record<string, TaskParamsModel<unknown>> {
+  get tasks(): Array<TaskParamsModel<unknown>> {
     return this._tasks;
   }
 
@@ -136,12 +136,12 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
       );
     });
 
-    this._tasks[nameF] = {
+    this._tasks.push({
       ...options,
       alias: aliasF,
       name: nameF,
       root: rootF,
-    } as TaskParamsModel<unknown>;
+    } as TaskParamsModel<unknown>);
   };
 
   resolveTask = async <TType extends unknown>(

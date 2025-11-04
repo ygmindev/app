@@ -220,16 +220,6 @@ export class _Database implements _DatabaseModel {
         return { result: true };
       },
 
-      search: async ({ keys, query } = {}) => {
-        if (query) {
-          // TODO: handle keys as regex
-          const collection = getCollection();
-          const result = await collection.find({ $text: { $search: query } }).toArray();
-          return { result } as unknown as ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
-        }
-        return { result: [] } as unknown as ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType>;
-      },
-
       update: async ({ id, options, update } = {}) => {
         const updateF = cleanObject(update);
         const collection = getCollection();

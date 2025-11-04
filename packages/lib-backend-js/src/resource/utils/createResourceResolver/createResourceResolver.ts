@@ -26,7 +26,7 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
   authorizer,
   name,
 }: CreateResourceResolverParamsModel<TType, TRoot>): CreateResourceResolverModel<TType, TRoot> => {
-  const { create, createMany, get, getConnection, getMany, remove, search, update, updateMany } =
+  const { create, createMany, get, getConnection, getMany, remove, update, updateMany } =
     ResourceImplementation.prototype;
 
   const createExists = create !== undefined;
@@ -37,7 +37,6 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
   const updateExists = update !== undefined;
   const updateManyExists = updateMany !== undefined;
   const removeExists = remove !== undefined;
-  const searchExists = search !== undefined;
 
   @withResolver()
   class ResourceResolver implements PrototypeModel<CreateResourceResolverModel<TType, TRoot>> {
@@ -243,37 +242,6 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
         return this._implementation.remove(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.REMOVE);
-    }
-
-    @withCondition(
-      () => searchExists,
-      () => [
-        withAuthorizer({
-          authorizer:
-            authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.SEARCH],
-        }),
-        withResourceOutput({
-          Resource,
-          RootResource,
-          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.SEARCH],
-          method: RESOURCE_METHOD_TYPE.SEARCH,
-          name,
-        }),
-      ],
-    )
-    async search(
-      @withCondition(
-        () => searchExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.SEARCH, name }),
-      )
-      input: ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> = {},
-      @withContext()
-      context?: RequestContextModel,
-    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
-      if (this._implementation.search) {
-        return this._implementation.search(input, context);
-      }
-      throw new NotImplementedError(RESOURCE_METHOD_TYPE.SEARCH);
     }
 
     @withCondition(

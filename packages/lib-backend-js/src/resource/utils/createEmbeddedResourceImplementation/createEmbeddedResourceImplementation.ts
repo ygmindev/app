@@ -35,7 +35,6 @@ export const createEmbeddedResourceImplementation = <
   afterGetConnection,
   afterGetMany,
   afterRemove,
-  afterSearch,
   afterUpdate,
   afterUpdateMany,
   beforeCreate,
@@ -44,7 +43,6 @@ export const createEmbeddedResourceImplementation = <
   beforeGetConnection,
   beforeGetMany,
   beforeRemove,
-  beforeSearch,
   beforeUpdate,
   beforeUpdateMany,
   name,
@@ -153,7 +151,6 @@ export const createEmbeddedResourceImplementation = <
     afterGetConnection,
     afterGetMany,
     afterRemove,
-    afterSearch,
     afterUpdate,
     afterUpdateMany,
     beforeCreate,
@@ -162,7 +159,6 @@ export const createEmbeddedResourceImplementation = <
     beforeGetConnection,
     beforeGetMany,
     beforeRemove,
-    beforeSearch,
     beforeUpdate,
     beforeUpdateMany,
 
@@ -234,15 +230,6 @@ export const createEmbeddedResourceImplementation = <
         },
       );
       return { result: result.acknowledged && (result.modifiedCount ?? 0) > 0 };
-    },
-
-    // TODO: fix
-    search: async (input = {}, context) => {
-      if (!input?.root) throw new NotFoundError('root');
-      return {
-        result: undefined,
-        root: undefined,
-      };
     },
 
     update: async (input, context) => {

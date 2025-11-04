@@ -5,7 +5,7 @@ import { type _TaskRunnerModel } from '@tool/task/core/utils/TaskRunner/_TaskRun
 export type TaskRunnerModel = Omit<_TaskRunnerModel, 'registry'> & {
   aliases: Record<string, string>;
 
-  tasks: Record<string, TaskParamsModel<unknown>>;
+  tasks: Array<TaskParamsModel<unknown>>;
 
   initialize(): Promise<void>;
 

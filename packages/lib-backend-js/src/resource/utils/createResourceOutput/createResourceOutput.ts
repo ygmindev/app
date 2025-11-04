@@ -27,16 +27,12 @@ export const createResourceOutput = <
   TType,
   TRoot
 > => {
+  const isConnection = method === RESOURCE_METHOD_TYPE.GET_CONNECTION;
+
   const nameF = `${name}Output`;
   const Root = createRoot({ RootResource, name: nameF });
-  const Result =
-    (method === RESOURCE_METHOD_TYPE.GET_CONNECTION
-      ? createConnection({ Resource, name })
-      : Resource()) ?? Boolean;
-
-  const isArrayF =
-    isArray ||
-    (method && [RESOURCE_METHOD_TYPE.GET_MANY, RESOURCE_METHOD_TYPE.SEARCH].includes(method));
+  const Result = (isConnection ? createConnection({ Resource, name }) : Resource()) ?? Boolean;
+  const isArrayF = isArray || method === RESOURCE_METHOD_TYPE.GET_MANY;
 
   @withEntity({ name: nameF })
   class Output extends (Root ?? class {}) implements ResourceOutputModel<TMethod, TType, TRoot> {

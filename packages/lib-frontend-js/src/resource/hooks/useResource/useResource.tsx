@@ -25,7 +25,6 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   afterGetConnection,
   afterGetMany,
   afterRemove,
-  afterSearch,
   afterUpdate,
   afterUpdateMany,
   beforeCreate,
@@ -34,7 +33,6 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   beforeGetConnection,
   beforeGetMany,
   beforeRemove,
-  beforeSearch,
   beforeUpdate,
   beforeUpdateMany,
   fields,
@@ -137,19 +135,6 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
     root,
   });
 
-  const { query: search } = useResourceMethod<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>({
-    after: afterSearch,
-    before: beforeSearch,
-    fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
-      RESOURCE_METHOD_TYPE.SEARCH,
-      TType,
-      TRoot
-    >['fields'],
-    method: RESOURCE_METHOD_TYPE.SEARCH,
-    name,
-    root,
-  });
-
   const { query: getConnection } = useResourceMethod<
     RESOURCE_METHOD_TYPE.GET_CONNECTION,
     TType,
@@ -181,8 +166,6 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
     name,
 
     remove,
-
-    search,
 
     update,
 

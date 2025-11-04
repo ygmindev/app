@@ -80,14 +80,6 @@ type RemoveArgsModel<TType> = {
   options?: RemoveOptionsModel;
 };
 
-type SearchOptionsModel = CommonOptionsModel;
-
-type SearchArgsModel<TType> = {
-  keys?: Array<StringKeyModel<TType>>;
-  options?: SearchOptionsModel;
-  query?: string;
-};
-
 type SubscribeOptionsModel = EmptyObjectModel;
 
 type SubscribeArgsModel<TType> = {
@@ -132,12 +124,10 @@ export type ResourceArgsModel<
             ? GetConnectionArgsModel<TType>
             : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
               ? RemoveArgsModel<TType>
-              : TMethod extends RESOURCE_METHOD_TYPE.SEARCH
-                ? SearchArgsModel<TType>
-                : TMethod extends RESOURCE_METHOD_TYPE.SUBSCRIBE
-                  ? SubscribeArgsModel<TType>
-                  : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
-                    ? UpdateArgsModel<TType>
-                    : TMethod extends RESOURCE_METHOD_TYPE.UPDATE_MANY
-                      ? UpdateManyArgsModel<TType>
-                      : never);
+              : TMethod extends RESOURCE_METHOD_TYPE.SUBSCRIBE
+                ? SubscribeArgsModel<TType>
+                : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
+                  ? UpdateArgsModel<TType>
+                  : TMethod extends RESOURCE_METHOD_TYPE.UPDATE_MANY
+                    ? UpdateManyArgsModel<TType>
+                    : never);
