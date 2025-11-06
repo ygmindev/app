@@ -1,3 +1,16 @@
-import { type _CliModel } from '@tool/task/core/utils/cli/_cli.models';
+import { type AsyncCallableModel } from '@lib/shared/core/core.models';
 
-export type CliModel = _CliModel;
+export type TaskRegistryModel = {
+  pathname: string;
+  task: AsyncCallableModel;
+};
+
+export type CliModel = {
+  aliases: Record<string, string>;
+
+  registry: Record<string, TaskRegistryModel>;
+
+  initialize(): Promise<void>;
+
+  register(name: string, params: TaskRegistryModel): void;
+};

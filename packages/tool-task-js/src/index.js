@@ -1,9 +1,7 @@
 #!/usr/bin/env -S npx tsx
 
-console.warn('HI');
+import { Cli } from '@tool/task/core/utils/Cli/Cli';
 
-// #!/usr/bin/env -S npx tsx
-
-// import { cli } from '@tool/task/core/utils/cli/cli';
-
-// export default cli();
+const cli = new Cli();
+await cli.initialize();
+await cli.run(process.argv[2]);

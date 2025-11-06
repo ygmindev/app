@@ -7,5 +7,5 @@ export const importInterop = async <TType extends unknown>(
   params: ImportInteropParamsModel,
 ): Promise<ImportInteropModel<TType>> => {
   const result = (await import(params)) as unknown;
-  return (result as { default: TType }).default ?? (result as TType);
+  return (result as { default: TType })?.default ?? (result as TType);
 };

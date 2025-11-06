@@ -8,6 +8,8 @@ export const config = defineConfig<TaskConfigModel>({
 
     packageDirs: fileConfig.params().packageDirs,
 
+    promptsExtension: '.prompts.ts',
+
     taskExtension: '.task.ts',
 
     wait: {

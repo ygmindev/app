@@ -36,7 +36,14 @@ export type DecoratorModel =
   | ParameterDecorator
   | PropertyDecorator;
 
-export type CallableModel = (args?: Array<unknown>) => unknown;
+export type CallableModel<TType = unknown, TParams extends Array<unknown> = Array<unknown>> = (
+  ...args: TParams
+) => TType;
+
+export type AsyncCallableModel<
+  TType = unknown,
+  TParams extends Array<unknown> = Array<unknown>,
+> = CallableModel<Promise<TType>, TParams>;
 
 export type ReturnTypeModel<TType> = TType extends
   | ((args?: unknown) => Promise<infer TReturn>)
