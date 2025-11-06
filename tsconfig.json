@@ -47,7 +47,7 @@
         "packages/app-web-js/src/*"
       ],
       "@app/web-orchestrator/*": [
-        "packages/app-web-ochestrator-js/src/*"
+        "packages/app-web-orchestrator-js/src/*"
       ],
       "@app/web-template/*": [
         "packages/app-web-template-js/src/*"

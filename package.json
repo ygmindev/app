@@ -8,6 +8,7 @@
         "@app/web",
         "@app/web-admin",
         "@app/web-documentation",
+        "@app/web-orchestrator",
         "@app/web-template",
         "@asset/static",
         "@service/job",

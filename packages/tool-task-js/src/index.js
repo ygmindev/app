@@ -1,5 +1,9 @@
 #!/usr/bin/env -S npx tsx
 
-import { cli } from '@tool/task/core/utils/cli/cli';
+console.warn('HI');
 
-export default cli();
+// #!/usr/bin/env -S npx tsx
+
+// import { cli } from '@tool/task/core/utils/cli/cli';
+
+// export default cli();

@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/app-web-ochestrator-js/src",
+  "sourceRoot": "packages/app-web-orchestrator-js/src",
   "projectType": "library",
   "tags": []
 }
