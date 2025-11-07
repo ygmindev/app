@@ -12,4 +12,6 @@ export type TaskConfigModel = Pick<FileConfigModel, 'packageDirs'> & {
     interval: number;
     timeout: number;
   };
+
+  workflowExtension: string;
 };

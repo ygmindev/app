@@ -19,6 +19,8 @@ export const config = defineConfig<TaskConfigModel>({
 
       timeout: 60e3,
     },
+
+    workflowExtension: '.workflow.ts',
   }),
 });
 

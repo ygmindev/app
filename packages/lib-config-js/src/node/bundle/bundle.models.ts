@@ -51,7 +51,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   mainFields?: Array<string>;
 
-  outputPathname?: string;
+  outputDir?: string;
 
   packager: string;
 

@@ -11,8 +11,8 @@ import { type CliModel, type TaskRegistryModel } from '@tool/task/core/utils/Cli
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
-import { toNumber } from 'lodash';
 import kebabCase from 'lodash/kebabCase';
+import toNumber from 'lodash/toNumber';
 
 export class Cli implements CliModel {
   protected _aliases: Record<string, string> = {};
@@ -32,9 +32,9 @@ export class Cli implements CliModel {
 
   initialize = async (): Promise<void> => {
     const { taskExtension } = taskConfig.params();
-    const pathnames = fromGlobs([joinPaths(['*/src/**/*'], { extension: taskExtension })], {
+    const pathnames = fromGlobs([joinPaths(['src/**/*'], { extension: taskExtension })], {
       isAbsolute: true,
-      root: fromPackages('toolt-task-js'),
+      root: fromPackages('tool-task-js'),
     });
     for (const pathname of pathnames) {
       const { main } = fileInfo(pathname);

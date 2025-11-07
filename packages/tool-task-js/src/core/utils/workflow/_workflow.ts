@@ -12,7 +12,7 @@ import {
   WORKFLOW_INTERVAL_DEFAULT,
   WORKFLOW_RETRY_DEFAULT,
 } from '@tool/task/core/utils/workflow/workflow.constants';
-import { isPlainObject } from 'lodash';
+import isPlainObject from 'lodash/isPlainObject';
 import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';

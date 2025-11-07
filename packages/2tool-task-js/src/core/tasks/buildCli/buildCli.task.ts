@@ -11,7 +11,7 @@ const buildCli: TaskParamsModel<BuildCliParamsModel> = {
 
   overrides: () => ({
     entryFiles: { cli: fromPackages('tool-task-js/src/cli.ts') },
-    outputPathname: fromPackages('tool-task-js', DIST_DIR),
+    outputDir: fromPackages('tool-task-js', DIST_DIR),
   }),
 };
 

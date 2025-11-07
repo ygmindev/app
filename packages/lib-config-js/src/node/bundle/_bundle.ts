@@ -152,7 +152,7 @@ export const _bundle = ({
   isTranspileProject = false,
   logSuppressPatterns,
   mainFields,
-  outputPathname,
+  outputDir,
   provide,
   publicPathname,
   rootDirs,
@@ -219,13 +219,16 @@ export const _bundle = ({
 
       minify: process.env.NODE_ENV === 'production',
 
-      outDir: outputPathname ?? fromWorking(buildDir),
+      outDir: outputDir ?? fromWorking(buildDir),
 
       rollupOptions,
 
       sourcemap: isSourcemap,
 
-      watch: process.env.NODE_ENV === 'development' && watch ? { include: watch } : undefined,
+      watch:
+        process.env.NODE_ENV === 'development'
+          ? { include: [...(watch ?? []), ...(entryFiles ? Object.values(entryFiles) : [])] }
+          : undefined,
     },
 
     customLogger,
