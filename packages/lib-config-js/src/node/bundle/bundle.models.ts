@@ -23,7 +23,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   define?: Record<string, string>;
 
-  entryFiles?: Record<string, string>;
+  entryFiles?: string | Array<string> | Record<string, string>;
 
   envFilename: string;
 

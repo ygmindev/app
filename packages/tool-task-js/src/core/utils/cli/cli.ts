@@ -38,7 +38,7 @@ export class Cli implements CliModel {
     });
     for (const pathname of pathnames) {
       const { main } = fileInfo(pathname);
-      const task = await importInterop<AsyncCallableModel>(pathname);
+      const task = ((await importInterop(pathname)) as Record<string, AsyncCallableModel>)[main];
       const aliasF = kebabCase(main)
         .split('-')
         .map((p) => p.charAt(0))

@@ -31,6 +31,7 @@ import esbuildPluginTsc from 'esbuild-plugin-tsc';
 import flowRemoveTypes from 'flow-remove-types';
 import { existsSync, readFileSync } from 'fs';
 import { getTsconfig } from 'get-tsconfig';
+import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
@@ -227,7 +228,18 @@ export const _bundle = ({
 
       watch:
         process.env.NODE_ENV === 'development'
-          ? { include: [...(watch ?? []), ...(entryFiles ? Object.values(entryFiles) : [])] }
+          ? {
+              include: [
+                ...(watch ?? []),
+                ...(entryFiles
+                  ? isString(entryFiles)
+                    ? [entryFiles]
+                    : isArray(entryFiles)
+                      ? entryFiles
+                      : Object.values(entryFiles)
+                  : []),
+              ],
+            }
           : undefined,
     },
 
@@ -415,7 +427,7 @@ export const _bundle = ({
     [
       {
         bundle: !isPreserveModules,
-        entryPoints: entryFiles,
+        entryPoints: entryFiles ? (isString(entryFiles) ? [entryFiles] : entryFiles) : undefined,
         outExtension: format === BUNDLE_FORMAT.ESM ? { '.js': '.mjs' } : undefined,
         outdir: config.build?.outDir,
         plugins: filterNil([aliases && esbuildPluginResolveAlias(aliases)]),
