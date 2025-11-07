@@ -1,4 +1,5 @@
 import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
+import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
   type _BuildModel,
@@ -18,10 +19,14 @@ export const _build = async ({
   if (esbuildConfig) {
     if (process.env.NODE_ENV === 'development') {
       logger.progress('build watching');
-      await (await context(esbuildConfig)).watch();
+      const ctx = await context(esbuildConfig);
+      await handleCleanup({ onCleanUp: ctx.dispose });
+      await ctx.watch();
       await new Promise(() => {});
     } else {
       await build(esbuildConfig);
     }
   }
 };
+
+// NODE_ENV=development run build --entryFiles=/Users/yoongeemin/Developer/Projects/app/packages/tool-task-js/src/dev/workflows/echo/echo.workflow.ts
