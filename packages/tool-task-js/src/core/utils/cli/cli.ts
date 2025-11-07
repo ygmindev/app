@@ -74,8 +74,13 @@ export class Cli implements CliModel {
     if (promptsPathname) {
       try {
         const keys = Object.keys(args);
-        const promptParams = await importInterop<PromptParamsModel<unknown>>(promptsPathname);
-        await prompt<Record<string, unknown>>(promptParams.filter((v) => !keys.includes(v.key)));
+        const promptParams =
+          await importInterop<() => Promise<PromptParamsModel<Record<string, string>>>>(
+            promptsPathname,
+          );
+        await prompt<Record<string, string>>(
+          (await promptParams())?.filter((v) => !keys.includes(v.key)),
+        );
       } catch {}
     }
 
