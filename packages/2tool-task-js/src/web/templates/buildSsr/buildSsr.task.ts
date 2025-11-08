@@ -11,7 +11,7 @@ const buildSsr: TaskParamsModel<BuildSsrParamsModel> = {
 
   overrides: () => ({
     entryFiles: { worker: fromWorking('src/worker.ts') },
-    outputDir: fromWorking(BUILD_DIR),
+    outDir: fromWorking(BUILD_DIR),
   }),
 };
 

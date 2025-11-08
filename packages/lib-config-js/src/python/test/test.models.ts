@@ -1,7 +1,7 @@
 export type TestConfigModel = {
   command(params: Omit<TestConfigModel, 'command'>): string;
 
-  outputDir: string;
+  outDir: string;
 
   testDir: string;
 };

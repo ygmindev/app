@@ -4,28 +4,22 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
-import { BUNDLE_FORMAT } from '@lib/config/node/bundle/bundle.constants';
+import { BUNDLE_FORMAT, BUNDLE_SOURCEMAP } from '@lib/config/node/bundle/bundle.constants';
 import {
   type _BundleConfigModel,
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
-import { lintCommand } from '@lib/config/node/lint/lint';
-import { type PartialModel } from '@lib/shared/core/core.models';
+// import { lintCommand } from '@lib/config/node/lint/lint';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
-import { merge } from '@lib/shared/core/utils/merge/merge';
-import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
-import { default as rollupPluginCommonjs } from '@rollup/plugin-commonjs';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
-import { default as rollupPluginTerser } from '@rollup/plugin-terser';
-import { default as rollupPluginTypescript } from '@rollup/plugin-typescript';
 import react from '@vitejs/plugin-react-swc';
-import { type BuildOptions, type Plugin as EsbuildPlugin } from 'esbuild';
+import { type Plugin as EsbuildPlugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import esbuildPluginTsc from 'esbuild-plugin-tsc';
 import flowRemoveTypes from 'flow-remove-types';
@@ -37,8 +31,6 @@ import reduce from 'lodash/reduce';
 import some from 'lodash/some';
 import { sep } from 'path';
 import posix from 'path/posix';
-import { type RollupOptions } from 'rollup';
-import esbuildPlugin from 'rollup-plugin-esbuild';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vike from 'vike/plugin';
 import {
@@ -49,7 +41,7 @@ import {
   searchForWorkspaceRoot,
   type WatchOptions,
 } from 'vite';
-import { checker } from 'vite-plugin-checker';
+// import { checker } from 'vite-plugin-checker';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 
 export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): EsbuildPlugin => ({
@@ -149,16 +141,17 @@ export const _bundle = ({
   format = BUNDLE_FORMAT.ESM,
   include,
   isPreserveModules = false,
-  isSourcemap = false,
   isTranspileProject = false,
   logSuppressPatterns,
   mainFields,
-  outputDir,
+  outDir,
+  outExtension,
   provide,
   publicPathname,
   rootDirs,
   server,
   serverExtension,
+  sourcemap,
   transpileModules,
   transpilePatterns,
   typescript,
@@ -180,24 +173,21 @@ export const _bundle = ({
 
   const tsconfigDir = fromWorking(typescript?.configFilename);
 
-  const transpilePatternsF = [
+  const transpiles = [
+    ...(transpileModules ?? []),
     ...(transpilePatterns ?? []),
-    ...(isTranspileProject ? PACKAGE_PREFIXES.map((v) => new RegExp(`@${v}/*`)) : []),
+    ...(isTranspileProject
+      ? [new RegExp('/*'), ...PACKAGE_PREFIXES.map((v) => new RegExp(`@${v}/*`))]
+      : []),
   ];
-  const transpileAll = [...(transpileModules ?? []), ...(transpilePatternsF ?? [])];
 
-  const rollupOptions: RollupOptions = {
-    external: externals
-      ? (name: string) => some(externals.map((v) => (isString(v) ? name === v : v.test(name))))
-      : undefined,
-
-    plugins: [
-      process.env.ENV_PLATFORM === PLATFORM.NODE &&
-        nodeExternals({ exclude: transpileAll, include: externals }),
-
-      resolve({ extensions }),
-    ],
-  };
+  const input = entryFiles
+    ? isString(entryFiles)
+      ? [entryFiles]
+      : isArray(entryFiles)
+        ? entryFiles
+        : Object.values(entryFiles)
+    : undefined;
 
   const config: _BundleConfigModel = {
     build: {
@@ -216,48 +206,78 @@ export const _bundle = ({
 
       emptyOutDir: true,
 
-      lib: format === BUNDLE_FORMAT.CJS ? { entry: 'src/index.ts', formats: ['cjs'] } : undefined,
+      lib: entryFiles
+        ? {
+            entry: entryFiles,
+            formats: [format === BUNDLE_FORMAT.ESM ? 'es' : 'cjs'],
+          }
+        : undefined,
 
       minify: process.env.NODE_ENV === 'production',
 
-      outDir: outputDir ?? fromWorking(buildDir),
+      outDir: outDir ?? fromWorking(buildDir),
 
-      rollupOptions,
+      rollupOptions: {
+        external: externals
+          ? (name: string) => some(externals.map((v) => (isString(v) ? name === v : v.test(name))))
+          : undefined,
 
-      sourcemap: isSourcemap,
+        input,
+
+        output:
+          process.env.ENV_PLATFORM === PLATFORM.NODE
+            ? {
+                chunkFileNames: '[name].js',
+                compact: process.env.NODE_ENV === 'production',
+                entryFileNames: '[name].js',
+                exports: 'named',
+                format: format === BUNDLE_FORMAT.ESM ? 'esm' : 'cjs',
+                interop: 'auto',
+                preserveModules: isPreserveModules,
+              }
+            : undefined,
+
+        plugins: [
+          process.env.ENV_PLATFORM === PLATFORM.NODE &&
+            nodeExternals({ exclude: transpiles, include: externals }),
+
+          resolve({ extensions }),
+        ],
+
+        treeshake: true,
+      },
+
+      sourcemap:
+        sourcemap === BUNDLE_SOURCEMAP.INLINE
+          ? 'inline'
+          : sourcemap === BUNDLE_SOURCEMAP.OUTPUT
+            ? true
+            : undefined,
 
       watch:
         process.env.NODE_ENV === 'development'
-          ? {
-              include: [
-                ...(watch ?? []),
-                ...(entryFiles
-                  ? isString(entryFiles)
-                    ? [entryFiles]
-                    : isArray(entryFiles)
-                      ? entryFiles
-                      : Object.values(entryFiles)
-                  : []),
-              ],
-            }
+          ? { include: [...(watch ?? []), ...(input ?? [])] }
           : undefined,
     },
 
     customLogger,
 
-    define,
+    define: {
+      ...define,
+      ...getEnvironmentVariables({ envPrefix: filterNil([envPrefix].flat()), isPrefix: true }),
+    },
 
     envPrefix,
 
     esbuild: {
       loader: 'tsx',
-
-      sourcemap: isSourcemap,
     },
 
     mode: process.env.NODE_ENV,
 
     optimizeDeps: {
+      entries: input,
+
       esbuildOptions: {
         define,
 
@@ -285,9 +305,9 @@ export const _bundle = ({
             },
           } as EsbuildPlugin,
 
-          esbuildPluginTsc({ tsconfigPath: fromWorking('tsconfig.json') }),
+          esbuildPluginTsc({ tsconfigPath: tsconfigDir }),
 
-          esbuildDecorators({ force: true, tsconfig: fromWorking('tsconfig.json'), tsx: true }),
+          esbuildDecorators({ force: true, tsconfig: tsconfigDir, tsx: true }),
 
           transpileModules?.length && esbuildCommonjs(transpileModules),
 
@@ -295,15 +315,13 @@ export const _bundle = ({
 
           externals?.length &&
             nodeExternalsPlugin({
-              allowList: [...(transpileModules ?? []), ...(transpilePatternsF ?? [])],
+              allowList: transpiles,
               forceExternalList: externals,
               packagePath: rootDirs?.map((path) => joinPaths([path, 'package.json'])),
             }),
         ]) as Array<EsbuildPlugin>,
 
         resolveExtensions: extensions,
-
-        sourcemap: isSourcemap ? true : undefined,
 
         target: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node20' : undefined,
 
@@ -319,7 +337,7 @@ export const _bundle = ({
       ...filterNil([
         provide && inject(provide),
 
-        server?.isWebServer && vike(),
+        process.env.ENV_PLATFORM === PLATFORM.WEB && vike(),
 
         babel &&
           babelPlugin({
@@ -336,14 +354,14 @@ export const _bundle = ({
 
       serverExtension && vitePluginIsomorphicImport(serverExtension),
 
-      checker({
-        eslint: {
-          lintCommand: lintCommand(),
-          useFlatConfig: true,
-        },
-        root: fromWorking(),
-        typescript: { tsconfigPath: tsconfigDir },
-      }),
+      // checker({
+      //   eslint: {
+      //     lintCommand: lintCommand(),
+      //     useFlatConfig: true,
+      //   },
+      //   root: fromWorking(),
+      //   typescript: { tsconfigPath: tsconfigDir },
+      // }),
 
       ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<string>).includes(
         process.env.ENV_PLATFORM,
@@ -389,7 +407,7 @@ export const _bundle = ({
       },
     },
 
-    ssr: { noExternal: transpileAll },
+    ssr: { noExternal: transpiles },
   };
 
   if (server && config.server) {
@@ -414,86 +432,6 @@ export const _bundle = ({
       };
     }
   }
-
-  const defineF = {
-    ...config.define,
-    ...getEnvironmentVariables({ envPrefix: filterNil([config.envPrefix].flat()), isPrefix: true }),
-  };
-
-  config.define = defineF;
-  config.optimizeDeps?.esbuildOptions && (config.optimizeDeps.esbuildOptions.define = defineF);
-
-  config.esbuildConfig = merge(
-    [
-      {
-        bundle: !isPreserveModules,
-        entryPoints: entryFiles ? (isString(entryFiles) ? [entryFiles] : entryFiles) : undefined,
-        outExtension: format === BUNDLE_FORMAT.ESM ? { '.js': '.mjs' } : undefined,
-        outdir: config.build?.outDir,
-        plugins: filterNil([aliases && esbuildPluginResolveAlias(aliases)]),
-      },
-      config.optimizeDeps?.esbuildOptions as PartialModel<BuildOptions>,
-    ],
-    MERGE_STRATEGY.DEEP_PREPEND,
-  );
-
-  config.rollupConfig = merge(
-    [
-      {
-        ...(entryFiles ? { input: entryFiles } : {}),
-
-        output:
-          process.env.ENV_PLATFORM === PLATFORM.NODE
-            ? {
-                chunkFileNames: '[name].js',
-                compact: process.env.NODE_ENV === 'production',
-                entryFileNames: '[name].js',
-                exports: 'named',
-                format: format === BUNDLE_FORMAT.ESM ? 'esm' : 'cjs',
-                interop: 'auto',
-                preserveModules: isPreserveModules,
-              }
-            : undefined,
-
-        plugins: [
-          rollupPluginTypescript({
-            exclude,
-            include,
-            noEmitOnError: true,
-            tsconfig: tsconfigDir,
-          }),
-
-          rollupPluginTerser({
-            module: format === BUNDLE_FORMAT.ESM,
-            sourceMap: isSourcemap,
-            toplevel: format === BUNDLE_FORMAT.CJS,
-          }),
-
-          // rollupPluginEslint({
-          //   fix: true,
-          //   overrideConfigFile: fromDist(lintConfig.params().configFilename),
-          // }),
-
-          rollupPluginCommonjs(config.build?.commonjsOptions),
-
-          esbuildPlugin({
-            define: config.esbuildConfig?.define,
-            format: config.esbuildConfig?.format,
-            keepNames: config.esbuildConfig?.keepNames,
-            loaders: config.esbuildConfig?.loader,
-            minify: config.esbuildConfig?.minify,
-            platform: config.esbuildConfig?.platform,
-            target: config.esbuildConfig?.target,
-            tsconfig: config.esbuildConfig?.tsconfig,
-          }),
-        ],
-      },
-
-      rollupOptions,
-    ],
-
-    MERGE_STRATEGY.DEEP_APPEND,
-  );
 
   return config;
 };

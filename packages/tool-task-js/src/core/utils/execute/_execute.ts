@@ -3,7 +3,7 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import {
   type _ExecuteModel,
   type _ExecuteParamsModel,
-} from '@tool/task/core/tasks/execute/_execute.models';
+} from '@tool/task/core/utils/execute/_execute.models';
 import { execa } from 'execa';
 
 export const _execute = async ({

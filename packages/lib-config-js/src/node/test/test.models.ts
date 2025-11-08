@@ -28,7 +28,7 @@ export type TestConfigModel = Pick<FileConfigModel, 'buildDir' | 'cacheDir'> & {
 
   onFinishEach?(): Promise<void>;
 
-  outputDir: string;
+  outDir: string;
 
   root?: string;
 

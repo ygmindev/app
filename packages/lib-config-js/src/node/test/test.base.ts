@@ -24,7 +24,7 @@ export const config = defineConfig<TestConfigModel, _TestConfigModel>({
 
     mockPath: fromConfig('node/test/__mocks__'),
 
-    outputDir: 'test',
+    outDir: 'test',
 
     specExtension: '.spec',
 

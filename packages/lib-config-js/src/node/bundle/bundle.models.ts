@@ -1,5 +1,8 @@
 import { type FileConfigModel } from '@lib/config/file/file.models';
-import { type BUNDLE_FORMAT } from '@lib/config/node/bundle/bundle.constants';
+import {
+  type BUNDLE_FORMAT,
+  type BUNDLE_SOURCEMAP,
+} from '@lib/config/node/bundle/bundle.constants';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { type TypescriptConfigModel } from '@lib/config/node/typescript/typescript.models';
 import { type BuildOptions } from 'esbuild';
@@ -41,8 +44,6 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   isPreserveModules?: boolean;
 
-  isSourcemap?: boolean;
-
   isTranspileProject?: boolean;
 
   isWebServer?: boolean;
@@ -51,7 +52,9 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   mainFields?: Array<string>;
 
-  outputDir?: string;
+  outDir?: string;
+
+  outExtension?: string;
 
   packager: string;
 
@@ -68,6 +71,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
   };
 
   serverExtension?: string;
+
+  sourcemap?: BUNDLE_SOURCEMAP;
 
   tempPathname?: string;
 

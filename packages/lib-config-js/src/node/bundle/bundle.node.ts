@@ -1,4 +1,3 @@
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import configBase from '@lib/config/node/bundle/bundle.base';
 import {
   type _BundleConfigModel,
@@ -17,7 +16,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       externals: [/node_modules/, '@eslint/js', 'globals', 'canvas'],
 
-      watch: [fromPackages('lib-backend-js/src/**/*')],
+      // watch: [fromPackages('lib-backend-js/src/**/*')],
     },
   ],
 });

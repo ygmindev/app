@@ -1,10 +1,10 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import fileConfig from '@lib/config/file/file';
 import { BUILD_DIR, EXTENSIONS_BASE, TEMP_DIR } from '@lib/config/file/file.constants';
 import { config as libraryConfig } from '@lib/config/library/library';
 import { _bundle } from '@lib/config/node/bundle/_bundle';
+import { BUNDLE_SOURCEMAP } from '@lib/config/node/bundle/bundle.constants';
 import {
   type _BundleConfigModel,
   type BundleConfigModel,
@@ -54,8 +54,6 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       include: [...cartesianString([fromPackages('*/src/**/*')], EXTENSIONS_BASE)],
 
-      isSourcemap: process.env.NODE_ENV === 'development',
-
       logSuppressPatterns: [/.*sourcemap.*/i, /.*source map.*/i],
 
       mainFields: ['module', 'main'],
@@ -66,17 +64,19 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       serverExtension: '.node',
 
+      sourcemap: process.env.NODE_ENV === 'development' ? BUNDLE_SOURCEMAP.INLINE : undefined,
+
       tempPathname: TEMP_DIR,
 
       typescript: typescriptConfig.params(),
 
-      watch: [
-        fromPackages('asset-static/src/**/*'),
-        fromPackages('lib-config-js/src/**/*'),
-        fromPackages('lib-shared-js/src/**/*'),
-        fromPackages('lib-model-js/src/**/*'),
-        fromWorking('src/**/*'),
-      ],
+      // watch: [
+      //   fromPackages('asset-static/src/**/*'),
+      //   fromPackages('lib-config-js/src/**/*'),
+      //   fromPackages('lib-shared-js/src/**/*'),
+      //   fromPackages('lib-model-js/src/**/*'),
+      //   fromWorking('src/**/*'),
+      // ],
     };
   },
 });

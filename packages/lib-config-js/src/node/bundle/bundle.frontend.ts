@@ -1,6 +1,5 @@
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
 import { ASSETS_DIR } from '@lib/config/file/file.constants';
 import { config as configBase } from '@lib/config/node/bundle/bundle.base';
@@ -112,7 +111,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
           ...fromGlobs(['expo-'], { root: fromModules() }),
         ]) ?? [],
 
-      watch: [fromPackages('lib-frontend-js/src/**/*')],
+      // watch: [fromPackages('lib-frontend-js/src/**/*')],
     },
   ],
 });

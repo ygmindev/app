@@ -7,13 +7,13 @@ import { build } from 'esbuild';
 
 export const _bundle = async ({
   entryFiles,
-  outputDir,
+  outDir,
   transpilePatterns,
 }: _BundleParamsModel): Promise<_BundleModel> => {
   const { esbuildConfig } = bundleConfig.config({
     entryFiles,
     isTranspileProject: true,
-    outputDir,
+    outDir,
     transpilePatterns,
   });
   esbuildConfig && (await build(esbuildConfig));

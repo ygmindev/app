@@ -25,14 +25,14 @@ export const build: TaskParamsModel<unknown> = {
     async () => {
       await runClean({ patterns: [DIST_DIR, BUILD_DIR], root: fromWorking() });
 
-      const outputDir = fromWorking(DIST_DIR);
+      const outDir = fromWorking(DIST_DIR);
       const jobEntries = fromGlobs(['**/*.job.ts'], { isAbsolute: true });
       if (jobEntries) {
         const entryFiles = jobEntries.reduce(
           (result, v) => ({ ...result, [fileInfo(v).main]: v }),
           {} as Record<string, string>,
         );
-        await bundle({ entryFiles, outputDir });
+        await bundle({ entryFiles, outDir });
       }
     },
 

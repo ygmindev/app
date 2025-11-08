@@ -21,7 +21,7 @@ export const nodeTasks = ({
   eteTasks,
   testParams,
 }: NodeTasksParamsModel = {}): NodeTasksMdoel => {
-  const { outputDir } = testConfig.params();
+  const { outDir } = testConfig.params();
 
   const getTestTasks = (
     params?: PartialModel<TaskParamsModel<TestParamsModel>>,
@@ -41,7 +41,7 @@ export const nodeTasks = ({
         // onFinish: [
         //   async ({ root }) =>
         //     copy({
-        //       from: joinPaths([root, outputDir]),
+        //       from: joinPaths([root, outDir]),
         //       isOverwrite: true,
         //       to: fromStatic(PUBLIC_DIR, DIST_DIR, 'test'),
         //     }),

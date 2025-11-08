@@ -23,7 +23,7 @@ export const _test = ({
   isWatch,
   match,
   mockPath,
-  outputDir,
+  outDir,
   root,
   specExtension,
   timeout,
@@ -34,11 +34,11 @@ export const _test = ({
   const testExtension =
     process.env.TEST_IS_ETE === BOOLEAN_STRING.TRUE ? eteExtension : specExtension;
   return {
-    cacheDirectory: fromWorking(BUILD_DIR, cacheDir, outputDir),
+    cacheDirectory: fromWorking(BUILD_DIR, cacheDir, outDir),
 
     collectCoverage: true,
 
-    coverageDirectory: fromWorking(BUILD_DIR, outputDir, 'coverage'),
+    coverageDirectory: fromWorking(BUILD_DIR, outDir, 'coverage'),
 
     coverageReporters: ['lcov'],
 
@@ -71,7 +71,7 @@ export const _test = ({
         {
           darkTheme: true,
           openReport: false,
-          publicPath: fromWorking(BUILD_DIR, outputDir, 'reports'),
+          publicPath: fromWorking(BUILD_DIR, outDir, 'reports'),
         },
       ],
     ],

@@ -4,10 +4,10 @@ import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 export const config = defineConfig<TestConfigModel>({
   params: () => ({
-    command: ({ outputDir, testDir }) =>
-      `poetry run python -m pytest --capture=no --log-cli-level=DEBUG --cov=src --cov-report=html:${outputDir}/html ${testDir}`,
+    command: ({ outDir, testDir }) =>
+      `poetry run python -m pytest --capture=no --log-cli-level=DEBUG --cov=src --cov-report=html:${outDir}/html ${testDir}`,
 
-    outputDir: fromWorking('.test'),
+    outDir: fromWorking('.test'),
 
     testDir: fromWorking('tests'),
   }),
