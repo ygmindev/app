@@ -1,12 +1,11 @@
-import fileConfig from '@lib/config/file/file';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { type TaskConfigModel } from '@lib/config/task/task.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
 export const config = defineConfig<TaskConfigModel>({
   params: () => ({
-    configFilename: 'tasks.ts',
-
-    packageDirs: fileConfig.params().packageDirs,
+    outDir: fromWorking(BUILD_DIR),
 
     promptsExtension: '.prompts.ts',
 

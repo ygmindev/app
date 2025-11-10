@@ -29,6 +29,7 @@ export const workerRun = async ({
   const workers: Array<Worker> = new Array(count).fill(
     new Worker({ queue, tasks: tasksF, workflowsDir, workflowsName }),
   );
+
   try {
     await Promise.all(
       workers.map(async (v) => {

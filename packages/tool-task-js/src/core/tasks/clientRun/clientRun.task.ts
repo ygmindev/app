@@ -12,9 +12,10 @@ export const clientRun = async ({
   workflow,
 }: ClientRunParamsModel): Promise<ClientRunModel> => {
   const client = new Client({ id });
+  const app = 'server-orchestrator-js';
   try {
     await client.initialize();
-    await client.run(workflow, { params, queue });
+    await client.run(workflow, { params: { app }, queue });
   } catch (e) {
     logger.fail(e);
   }

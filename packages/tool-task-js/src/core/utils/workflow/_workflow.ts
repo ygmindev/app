@@ -12,20 +12,20 @@ import {
   WORKFLOW_INTERVAL_DEFAULT,
   WORKFLOW_RETRY_DEFAULT,
 } from '@tool/task/core/utils/workflow/workflow.constants';
-import isPlainObject from 'lodash/isPlainObject';
 import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
+import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import toString from 'lodash/toString';
 
 export const _workflow =
-  <TResult = void, TParams = void>({
+  <TParams = void, TResult = void>({
     duriation = WORKFLOW_DURATION_DEFAULT,
     execution = WORKFLOW_EXECUTION.SEQUENTIAL,
     interval = WORKFLOW_INTERVAL_DEFAULT,
     retry = WORKFLOW_RETRY_DEFAULT,
     steps,
-  }: _WorkflowParamsModel<TResult, TParams>): _WorkflowModel<TResult, TParams> =>
+  }: _WorkflowParamsModel<TParams, TResult>): _WorkflowModel<TParams, TResult> =>
   async (workflowParams) => {
     const isParallel = execution === WORKFLOW_EXECUTION.PARALLEL;
     const proxy = proxyActivities({
@@ -35,7 +35,7 @@ export const _workflow =
       },
       startToCloseTimeout: duriation,
     });
-    const executions = steps.map((v) => {
+    const executions = steps(workflowParams).map((v) => {
       if (isArray(v)) {
         const [stepTask, stepParams] = v;
         if (isString(stepTask)) {
