@@ -1,12 +1,11 @@
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { Client, Connection } from '@temporalio/client';
 import { TASK_QUEUE_DEFAULT } from '@tool/task/core/core.constants';
+import { type ExceutionContextModel } from '@tool/task/core/core.models';
 import {
   type _ClientModel,
   type _ClientParamsModel,
 } from '@tool/task/core/utils/Client/_Client.models';
-import { type ClientRunOptionsModel } from '@tool/task/core/utils/Client/Client.models';
-import isArray from 'lodash/isArray';
 
 export class _Client implements _ClientModel {
   protected _client?: Client;
@@ -24,10 +23,14 @@ export class _Client implements _ClientModel {
     });
   };
 
-  run = async (workflow: string, params: ClientRunOptionsModel = {}): Promise<void> => {
+  run = async (
+    workflow: string,
+    params: Record<string, unknown>,
+    context?: ExceutionContextModel,
+  ): Promise<void> => {
     const handle = await this._client?.workflow.start(workflow, {
-      args: params.params ? (isArray(params.params) ? params.params : [params.params]) : [],
-      taskQueue: params.queue ?? TASK_QUEUE_DEFAULT,
+      args: [params, context],
+      taskQueue: context?.queue ?? TASK_QUEUE_DEFAULT,
       workflowId: `${workflow}-${uid()}`,
     });
     const result = await handle?.result();

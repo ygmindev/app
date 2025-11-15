@@ -4,6 +4,10 @@ import {
   type WorkflowParamsModel,
 } from '@tool/task/core/utils/workflow/workflow.models';
 
-export const workflow = <TParams = void, TResult = void>(
-  params: WorkflowParamsModel<TParams, TResult>,
+export const workflow = <
+  TParams = void,
+  TResult = void,
+  TSteps extends Array<unknown> = Array<unknown>,
+>(
+  params: WorkflowParamsModel<TParams, TResult, TSteps>,
 ): WorkflowModel<TParams, TResult> => _workflow(params);

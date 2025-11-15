@@ -9,6 +9,5 @@ export const withRootField =
   (target, propertyKey) =>
     withManyToOneField({
       Resource,
-      isDatabase: true,
       isOptional: false,
     })(target, propertyKey);

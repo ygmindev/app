@@ -1,5 +1,5 @@
 import { RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';
 import InterestRateFuture from '@lib/model/quant/InterestRateFuture/InterestRateFuture';
 import { INTEREST_RATE_FUTURE_RESOURCE_NAME } from '@lib/model/quant/InterestRateFuture/InterestRateFuture.constants';
@@ -8,8 +8,7 @@ import { INTEREST_RATE_FUTURE_QUOTE_RESOURCE_NAME } from '@lib/model/quant/Inter
 import { type InterestRateFutureQuoteModel } from '@lib/model/quant/InterestRateFutureQuote/InterestRateFutureQuote.models';
 import { Quote } from '@lib/model/quant/Quote/Quote';
 
-@withEntity({
-  isDatabase: true,
+@withDatabaseEntity({
   name: INTEREST_RATE_FUTURE_QUOTE_RESOURCE_NAME,
 })
 export class InterestRateFutureQuote extends Quote implements InterestRateFutureQuoteModel {

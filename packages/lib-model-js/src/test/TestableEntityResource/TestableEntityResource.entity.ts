@@ -1,5 +1,5 @@
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
 import { TestableEmbeddedResource } from '@lib/model/test/TestableEmbeddedResource/TestableEmbeddedResource.entity';
@@ -11,7 +11,7 @@ import { TestableRelatedResourceModel } from '@lib/model/test/TestableRelatedRes
 import { TestableResource } from '@lib/model/test/TestableResource/TestableResource';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
 
-@withEntity({ isDatabase: true, name: TESTABLE_ENTITY_RESOURCE_NAME })
+@withDatabaseEntity({ name: TESTABLE_ENTITY_RESOURCE_NAME })
 export class TestableEntityResource
   extends TestableResource
   implements TestableEntityResourceModel

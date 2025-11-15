@@ -1,0 +1,3 @@
+export const WAIT_FOR_PORT_TIMEOUT = 30000;
+
+export const WAIT_FOR_PORT_INTERVAL = 500;

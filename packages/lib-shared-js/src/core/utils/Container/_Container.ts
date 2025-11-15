@@ -22,7 +22,9 @@ export const _Container: _ContainerModel = {
     let binding:
       | BindInWhenOnFluentSyntax<TType>
       | BindWhenOnFluentSyntax<TType>
-      | BindToFluentSyntax<TType> = _container.bind(type);
+      | BindToFluentSyntax<TType> = _container.isBound(type)
+      ? _container.rebindSync(type)
+      : _container.bind(type);
 
     if (arguments.length === 2) {
       if (!value || typeof value === 'string') {

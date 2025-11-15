@@ -74,7 +74,7 @@
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.colorTheme": "GitHub Light",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right",
   "azureFunctions.createPythonVenv": false,

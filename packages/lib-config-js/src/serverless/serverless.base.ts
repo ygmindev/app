@@ -1,3 +1,4 @@
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import {
   SERVERLESS_PROVIDER,
   SERVERLESS_RUNTIME,
@@ -11,6 +12,7 @@ import {
   type ServerlessConfigModel,
 } from '@lib/config/serverless/serverless.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
@@ -19,47 +21,48 @@ import toNumber from 'lodash/toNumber';
 export const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
   config: _serverless,
 
-  params: () => ({
-    buildDir: BUILD_DIR,
+  params: () => {
+    const environment = Container.get(Environment);
+    return {
+      buildDir: BUILD_DIR,
 
-    bundle: bundleConfig.params(),
+      bundle: bundleConfig.params(),
 
-    configFilename: 'serverless.js',
+      configFilename: 'serverless.js',
 
-    dotenv: () => setEnvironment(),
+      dotenv: () => setEnvironment(),
 
-    environment: process.env.NODE_ENV,
-
-    functions: {
-      [PING]: {
-        handler: 'src/functions/ping/ping.main',
-        method: HTTP_METHOD.GET,
-        pathname: `/api/${PING}`,
+      functions: {
+        [PING]: {
+          handler: 'src/functions/ping/ping.main',
+          method: HTTP_METHOD.GET,
+          pathname: `/api/${PING}`,
+        },
       },
-    },
 
-    host: process.env.SERVER_APP_HOST,
+      host: environment.variables.SERVER_APP_HOST ?? '',
 
-    memory: 3008,
+      memory: 3008,
 
-    name: 'serverless',
+      name: 'serverless',
 
-    platform: PLATFORM.BASE,
+      platform: PLATFORM.BASE,
 
-    port: toNumber(process.env.SERVER_APP_PORT),
+      port: toNumber(environment.variables.SERVER_APP_PORT ?? ''),
 
-    provider: SERVERLESS_PROVIDER.AWS,
+      provider: SERVERLESS_PROVIDER.AWS,
 
-    prunePatterns: PRUNE_PATTERNS,
+      prunePatterns: PRUNE_PATTERNS,
 
-    region: process.env.SERVER_REGION,
+      region: environment.variables.SERVER_REGION ?? '',
 
-    runtime: SERVERLESS_RUNTIME.ZIP,
+      runtime: SERVERLESS_RUNTIME.ZIP,
 
-    server: serverConfig.params(),
+      server: serverConfig.params(),
 
-    timeout: 900,
-  }),
+      timeout: 900,
+    };
+  },
 });
 
 export default config;

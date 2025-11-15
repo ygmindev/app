@@ -1,15 +1,15 @@
-import { OtpImplementation } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation';
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
-import { mail } from '@lib/backend/notification/utils/mail/mail';
+import { EmailClient } from '@lib/backend/notification/utils/EmailClient/EmailClient';
 import { OTP_RESOURCE_NAME } from '@lib/model/auth/Otp/Otp.constants';
+import { OtpImplementation } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation';
+import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
-import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 
 const { displayName } = withTest({ OtpImplementation });
 
-const mailer = { mail };
+const emailClient = new EmailClient();
 
 describe(displayName, () => {
   const database = Container.get(Database, DATABASE_TYPE.MONGO);
@@ -21,7 +21,7 @@ describe(displayName, () => {
   });
 
   test('create by email', async () => {
-    const sendSpy = jest.spyOn(mailer, 'mail');
+    const sendSpy = jest.spyOn(emailClient, 'send');
     await otpImplementation.create({ form: { email: USER_FIXTURE.email } });
     const { result } = await otpImplementation.getMany({
       filter: [{ field: 'email', value: USER_FIXTURE.email }],

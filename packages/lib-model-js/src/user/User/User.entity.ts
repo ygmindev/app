@@ -1,7 +1,7 @@
 import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
+import { withDatabaseField } from '@lib/backend/resource/utils/withDatabaseField/withDatabaseField';
 import { withEmbeddedField } from '@lib/backend/resource/utils/withEmbeddedField/withEmbeddedField';
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
 import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefField';
@@ -31,9 +31,8 @@ import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
 
-@withEntity({
+@withDatabaseEntity({
   indices: [{ keys: ['first', 'last', 'email', 'phone'], type: 'text' }],
-  isDatabase: true,
   name: USER_RESOURCE_NAME,
 })
 export class User extends EntityResource implements UserModel {
@@ -58,22 +57,22 @@ export class User extends EntityResource implements UserModel {
   @withManyToManyField({ Resource: () => Card, root: USER_RESOURCE_NAME })
   [PAYMENT_METHOD_RESOURCE_NAME]?: PartialArrayModel<PaymentMethodModel>;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   callingCode?: string;
 
-  @withField({ isDatabase: true, isOptional: true, isUnique: true })
+  @withDatabaseField({ isOptional: true, isUnique: true })
   email?: string;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   first?: string;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   last?: string;
 
   @withRefField({ Resource: () => PaymentMethod, isDatabase: true, isOptional: true })
   paymentMethodPrimary?: RefModel<PaymentMethodModel>;
 
-  @withField({ isDatabase: true, isOptional: true, isUnique: true })
+  @withDatabaseField({ isOptional: true, isUnique: true })
   phone?: string;
 }
 

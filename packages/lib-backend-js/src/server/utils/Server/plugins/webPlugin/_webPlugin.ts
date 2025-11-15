@@ -1,14 +1,17 @@
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { type _WebPluginModel } from '@lib/backend/server/utils/Server/plugins/webPlugin/_webPlugin.models';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
 import { _bundle } from '@lib/config/node/bundle/_bundle';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { HTTP_METHOD } from '@lib/shared/http/http.constants';
 import { render } from '@lib/shared/web/utils/render/render';
 import { createDevMiddleware } from 'vike/server';
 
 export const _webPlugin: _WebPluginModel = async (server, { config, root, subdomain }) => {
+  const environment = Container.get(Environment);
   if (
     (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
-    !process.env.NODE_RUNTIME
+    !environment.variables.NODE_RUNTIME
   ) {
     const { devMiddleware } = await createDevMiddleware({
       root,

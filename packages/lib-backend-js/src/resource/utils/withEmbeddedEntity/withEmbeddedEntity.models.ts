@@ -1,8 +1,9 @@
 import {
-  type WithEntityModel,
-  type WithEntityParamsModel,
-} from '@lib/backend/resource/utils/withEntity/withEntity.models';
+  type WithDatabaseEntityModel,
+  type WithDatabaseEntityParamsModel,
+} from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity.models';
 
-export type WithEmbeddedEntityParamsModel<TType extends unknown> = WithEntityParamsModel<TType>;
+export type WithEmbeddedEntityParamsModel<TType extends unknown> =
+  WithDatabaseEntityParamsModel<TType>;
 
-export type WithEmbeddedEntityModel = WithEntityModel;
+export type WithEmbeddedEntityModel = WithDatabaseEntityModel;

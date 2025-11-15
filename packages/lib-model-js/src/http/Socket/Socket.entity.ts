@@ -1,23 +1,22 @@
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
+import { withDatabaseField } from '@lib/backend/resource/utils/withDatabaseField/withDatabaseField';
 import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
 import { SOCKET_RESOURCE_NAME } from '@lib/model/http/Socket/Socket.constants';
 import { type SocketModel } from '@lib/model/http/Socket/Socket.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 
-@withEntity({ isDatabase: true, name: SOCKET_RESOURCE_NAME })
+@withDatabaseEntity({ name: SOCKET_RESOURCE_NAME })
 export class Socket extends EntityResource implements SocketModel {
-  @withField({ isDatabase: true })
+  @withDatabaseField({ isArray: true })
   connections!: Array<string>;
 
-  @withField({
+  @withDatabaseField({
     Resource: () => Date,
     expire: DATABASE_CONFIG.expireSeconds,
-    isDatabase: true,
   })
   created: Date = new Date();
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   name?: string;
 }
 

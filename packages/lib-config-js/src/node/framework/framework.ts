@@ -1,3 +1,4 @@
+// import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { ASSETS_DIR } from '@lib/config/file/file.constants';
 import { _framework } from '@lib/config/node/framework/_framework';
 import { SSR_CONTEXT_KEYS } from '@lib/config/node/framework/framework.constants';
@@ -6,28 +7,32 @@ import {
   type FrameworkConfigModel,
 } from '@lib/config/node/framework/framework.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+// import { Container } from '@lib/shared/core/utils/Container/Container';
 
 export const config = defineConfig<FrameworkConfigModel, _FrameworkConfigModel>({
   config: _framework,
 
-  params: () => ({
-    assetsUri: {
-      host: process.env.SERVER_APP_STATIC_HOST,
+  params: () => {
+    // const environment = Container.get(Environment);
+    return {
+      assetsUri: {
+        host: process.env.SERVER_APP_STATIC_HOST,
 
-      port:
-        process.env.SERVER_APP_STATIC_PORT ??
-        ((process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
-        !process.env.NODE_RUNTIME
-          ? process.env.APP_PORT
-          : undefined),
+        port:
+          process.env.SERVER_APP_STATIC_PORT ??
+          ((process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
+          !process.env.NODE_RUNTIME
+            ? process.env.APP_PORT
+            : undefined),
 
-      subdomain: process.env.SERVER_APP_SUBDOMAIN,
-    },
+        subdomain: process.env.SERVER_APP_SUBDOMAIN,
+      },
 
-    faviconDir: `${ASSETS_DIR}/favicon/favicon.svg`,
+      faviconDir: `${ASSETS_DIR}/favicon/favicon.svg`,
 
-    ssrContextKeys: SSR_CONTEXT_KEYS,
-  }),
+      ssrContextKeys: SSR_CONTEXT_KEYS,
+    };
+  },
 });
 
 export default config;

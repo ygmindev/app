@@ -4,19 +4,16 @@ import {
   type ClientRunParamsModel,
 } from '@tool/task/core/tasks/clientRun/clientRun.models';
 import { Client } from '@tool/task/core/utils/Client/Client';
+import { task } from '@tool/task/core/utils/task/task';
 
-export const clientRun = async ({
-  id,
-  params,
-  queue,
-  workflow,
-}: ClientRunParamsModel): Promise<ClientRunModel> => {
-  const client = new Client({ id });
-  const app = 'server-orchestrator-js';
-  try {
-    await client.initialize();
-    await client.run(workflow, { params: { app }, queue });
-  } catch (e) {
-    logger.fail(e);
-  }
-};
+export const clientRun = task({
+  task: async ({ id, workflow }: ClientRunParamsModel, context): Promise<ClientRunModel> => {
+    const client = new Client({ id });
+    try {
+      await client.initialize();
+      await client.run(workflow, {}, context);
+    } catch (e) {
+      logger.fail(e);
+    }
+  },
+});

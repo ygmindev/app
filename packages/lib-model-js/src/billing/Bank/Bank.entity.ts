@@ -1,5 +1,5 @@
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
+import { withDatabaseField } from '@lib/backend/resource/utils/withDatabaseField/withDatabaseField';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { BANK_RESOURCE_NAME } from '@lib/model/billing/Bank/Bank.constants';
 import { type BankModel } from '@lib/model/billing/Bank/Bank.models';
@@ -9,27 +9,27 @@ import { User } from '@lib/model/user/User/User.entity';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
 
-@withEntity({ indices: [{ keys: ['fingerprint'] }], isDatabase: true, name: BANK_RESOURCE_NAME })
+@withDatabaseEntity({ indices: [{ keys: ['fingerprint'] }], name: BANK_RESOURCE_NAME })
 export class Bank extends EntityResource implements BankModel {
   @withManyToManyField({ Resource: () => User, leaf: BANK_RESOURCE_NAME })
   [USER_RESOURCE_NAME]?: PartialArrayModel<UserModel>;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   brand?: string;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   externalId!: string;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   fingerprint!: string;
 
-  @withField({ isOptional: true })
+  @withDatabaseField({ isOptional: true })
   isPrimary?: boolean;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   last4!: string;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   name?: string;
 }
 

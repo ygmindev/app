@@ -1,5 +1,5 @@
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
+import { withDatabaseField } from '@lib/backend/resource/utils/withDatabaseField/withDatabaseField';
 import { withHook } from '@lib/backend/resource/utils/withHook/withHook';
 import { HOOK_TYPE } from '@lib/backend/resource/utils/withHook/withHook.constants';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
@@ -8,16 +8,15 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import forEach from 'lodash/forEach';
 import isNil from 'lodash/isNil';
 
-@withEntity({ isAbstract: true, isDatabase: true })
+@withDatabaseEntity({ isAbstract: true })
 export class EntityResource extends Resource({ isDatabase: true }) implements EntityResourceModel {
-  @withField({
+  @withDatabaseField({
     Resource: () => Date,
     defaultValue: () => new Date(),
-    isDatabase: true,
   })
   created?: Date;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.BOOLEAN })
+  @withDatabaseField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
   isFixture?: boolean;
 
   @withHook({ type: HOOK_TYPE.BEFORE_CREATE })

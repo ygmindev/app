@@ -1,4 +1,7 @@
-import { type _JwtImplementationModel } from '@lib/backend/auth/utils/JwtImplementation/_JwtImplementation.models';
+import {
+  type _JwtImplementationModel,
+  type _JwtImplementationParamsModel,
+} from '@lib/backend/auth/utils/JwtImplementation/_JwtImplementation.models';
 import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInTokenModel } from '@lib/model/auth/SignIn/SignIn.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
@@ -11,13 +14,13 @@ import { type AuthError } from 'firebase/auth';
 import admin from 'firebase-admin';
 
 export class _JwtImplementation implements _JwtImplementationModel {
-  constructor() {
+  constructor({ email, projectId, secret }: _JwtImplementationParamsModel) {
     !admin.apps.length &&
       admin.initializeApp({
         credential: admin.credential.cert({
-          clientEmail: process.env.SERVER_FIREBASE_ADMIN_EMAIL,
-          privateKey: process.env.SERVER_FIREBASE_ADMIN_SECRET.replace(/\\n/gm, '\n'),
-          projectId: process.env.SERVER_FIREBASE_ADMIN_PROJECT_ID,
+          clientEmail: email,
+          privateKey: secret?.replace(/\\n/gm, '\n'),
+          projectId,
         }),
       });
   }

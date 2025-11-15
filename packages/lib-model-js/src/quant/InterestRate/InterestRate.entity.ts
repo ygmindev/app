@@ -1,4 +1,4 @@
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
 import { withOneToManyField } from '@lib/backend/resource/utils/withOneToManyField/withOneToManyField';
 import { INTEREST_RATE_RESOURCE_NAME } from '@lib/model/quant/InterestRate/InterestRate.constants';
 import { type InterestRateModel } from '@lib/model/quant/InterestRate/InterestRate.models';
@@ -8,8 +8,7 @@ import { QUOTE_RESOURCE_NAME } from '@lib/model/quant/Quote/Quote.constants';
 import { Security } from '@lib/model/quant/Security/Security';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
 
-@withEntity({
-  isDatabase: true,
+@withDatabaseEntity({
   name: INTEREST_RATE_RESOURCE_NAME,
 })
 export class InterestRate extends Security implements InterestRateModel {

@@ -29,6 +29,7 @@ export class _Server implements _ServerModel {
     this._api = api;
 
     const { certificateDir, privateKeyFilename, publicKeyFilename } = certificate;
+
     this._app = fastify({
       disableRequestLogging: true,
       https: {

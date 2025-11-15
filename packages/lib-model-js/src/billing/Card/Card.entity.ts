@@ -1,5 +1,5 @@
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
+import { withDatabaseField } from '@lib/backend/resource/utils/withDatabaseField/withDatabaseField';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { CARD_FUNDING, CARD_RESOURCE_NAME } from '@lib/model/billing/Card/Card.constants';
 import { type CardModel } from '@lib/model/billing/Card/Card.models';
@@ -10,36 +10,36 @@ import { type UserModel } from '@lib/model/user/User/User.models';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
-@withEntity({ indices: [{ keys: ['fingerprint'] }], isDatabase: true, name: CARD_RESOURCE_NAME })
+@withDatabaseEntity({ indices: [{ keys: ['fingerprint'] }], name: CARD_RESOURCE_NAME })
 export class Card extends EntityResource implements CardModel {
   @withManyToManyField({ Resource: () => User, leaf: CARD_RESOURCE_NAME })
   [USER_RESOURCE_NAME]?: PartialArrayModel<UserModel>;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   brand?: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.NUMBER })
+  @withDatabaseField({ type: DATA_TYPE.NUMBER })
   expMonth!: number;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.NUMBER })
+  @withDatabaseField({ type: DATA_TYPE.NUMBER })
   expYear!: number;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   externalId!: string;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   fingerprint!: string;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   funding!: CARD_FUNDING;
 
-  @withField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
+  @withDatabaseField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
   isPrimary?: boolean;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   last4!: string;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   name?: string;
 }
 

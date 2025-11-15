@@ -2,10 +2,7 @@ import {
   type _UseContainerModel,
   type _UseContainerParamsModel,
 } from '@lib/frontend/core/hooks/useContainer/_useContainer.models';
-// import { useInjection } from 'inversify-react';
-// TODO: named import
-import * as inversifyReact from 'inversify-react';
-const { useInjection } = inversifyReact;
+import { useInjection } from 'inversify-react';
 
 export const _useContainer = <TType,>(
   type: _UseContainerParamsModel<TType>,

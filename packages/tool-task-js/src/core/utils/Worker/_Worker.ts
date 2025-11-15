@@ -1,10 +1,10 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { BUILD_DIR } from '@lib/config/file/file.constants';
-import { type AsyncCallableModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { Worker } from '@temporalio/Worker';
 import { TASK_QUEUE_DEFAULT } from '@tool/task/core/core.constants';
+import { type TaskModel } from '@tool/task/core/utils/task/task.models';
 import {
   type _WorkerModel,
   type _WorkerParamsModel,
@@ -13,7 +13,7 @@ import {
 export class _Worker implements _WorkerModel {
   protected _id: string;
   protected _queue: string;
-  protected _tasks?: Record<string, AsyncCallableModel>;
+  protected _tasks?: Record<string, TaskModel>;
   protected _worker?: Worker;
   protected _workflowsPath: string;
 

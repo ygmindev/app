@@ -1,5 +1,5 @@
 import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
 import { withManyToManyField } from '@lib/backend/resource/utils/withManyToManyField/withManyToManyField';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';
 import { TestableEntityResource } from '@lib/model/test/TestableEntityResource/TestableEntityResource.entity';
@@ -9,7 +9,7 @@ import { type TestableRelatedResourceModel } from '@lib/model/test/TestableRelat
 import { TestableResource } from '@lib/model/test/TestableResource/TestableResource';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
 
-@withEntity({ isDatabase: true, name: TESTABLE_RELATED_RESOURCE_NAME })
+@withDatabaseEntity({ name: TESTABLE_RELATED_RESOURCE_NAME })
 export class TestableRelatedResource
   extends TestableResource
   implements TestableRelatedResourceModel

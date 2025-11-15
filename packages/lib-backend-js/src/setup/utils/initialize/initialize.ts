@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import {
   type InitializeModel,
   type InitializeParamsModel,
@@ -17,6 +18,9 @@ let result: InitializeModel;
 export const initialize = async ({
   database,
 }: InitializeParamsModel = {}): Promise<InitializeModel> => {
+  const environment = new Environment();
+  await environment.initialize();
+
   const databaseF = database ?? databaseConfig.params();
 
   const cleanUps: Array<() => Promise<void>> = [

@@ -1,5 +1,5 @@
+import { withDatabaseField } from '@lib/backend/resource/utils/withDatabaseField/withDatabaseField';
 import { withEmbeddedEntity } from '@lib/backend/resource/utils/withEmbeddedEntity/withEmbeddedEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { EmbeddedResource } from '@lib/model/resource/EmbeddedResource/EmbeddedResource';
 import { LINKED_USER_RESOURCE_NAME } from '@lib/model/user/LinkedUser/LinkedUser.constants';
 import {
@@ -9,10 +9,10 @@ import {
 
 @withEmbeddedEntity({ name: LINKED_USER_RESOURCE_NAME })
 export class LinkedUser extends EmbeddedResource implements LinkedUserModel {
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   externalId!: string;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   type!: LINKED_USER_TYPE;
 }
 

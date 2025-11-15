@@ -1,4 +1,5 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
@@ -9,6 +10,7 @@ import {
   type _BundleConfigModel,
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 // import { lintCommand } from '@lib/config/node/lint/lint';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
@@ -157,6 +159,7 @@ export const _bundle = ({
   typescript,
   watch,
 }: BundleConfigModel): _BundleConfigModel => {
+  const environment = Container.get(Environment);
   const customLogger = createLogger();
   if (logSuppressPatterns) {
     const methods = ['warn', 'warnOnce', 'info', 'error'] satisfies Array<keyof Logger>;
@@ -213,7 +216,7 @@ export const _bundle = ({
           }
         : undefined,
 
-      minify: process.env.NODE_ENV === 'production',
+      minify: environment.variables.NODE_ENV === 'production',
 
       outDir: outDir ?? fromWorking(buildDir),
 
@@ -225,10 +228,10 @@ export const _bundle = ({
         input,
 
         output:
-          process.env.ENV_PLATFORM === PLATFORM.NODE
+          environment.variables.ENV_PLATFORM === PLATFORM.NODE
             ? {
                 chunkFileNames: '[name].js',
-                compact: process.env.NODE_ENV === 'production',
+                compact: environment.variables.NODE_ENV === 'production',
                 entryFileNames: '[name].js',
                 exports: 'named',
                 format: format === BUNDLE_FORMAT.ESM ? 'esm' : 'cjs',
@@ -238,7 +241,7 @@ export const _bundle = ({
             : undefined,
 
         plugins: [
-          process.env.ENV_PLATFORM === PLATFORM.NODE &&
+          environment.variables.ENV_PLATFORM === PLATFORM.NODE &&
             nodeExternals({ exclude: transpiles, include: externals }),
 
           resolve({ extensions }),
@@ -255,7 +258,7 @@ export const _bundle = ({
             : undefined,
 
       watch:
-        process.env.NODE_ENV === 'development'
+        environment.variables.NODE_ENV === 'development'
           ? { include: [...(watch ?? []), ...(input ?? [])] }
           : undefined,
     },
@@ -273,7 +276,7 @@ export const _bundle = ({
       loader: 'tsx',
     },
 
-    mode: process.env.NODE_ENV,
+    mode: environment.variables.NODE_ENV,
 
     optimizeDeps: {
       entries: input,
@@ -289,9 +292,9 @@ export const _bundle = ({
 
         mainFields,
 
-        minify: process.env.NODE_ENV === 'production',
+        minify: environment.variables.NODE_ENV === 'production',
 
-        platform: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
+        platform: environment.variables.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
 
         plugins: filterNil([
           {
@@ -323,7 +326,7 @@ export const _bundle = ({
 
         resolveExtensions: extensions,
 
-        target: process.env.ENV_PLATFORM === PLATFORM.NODE ? 'node20' : undefined,
+        target: environment.variables.ENV_PLATFORM === PLATFORM.NODE ? 'node20' : undefined,
 
         tsconfig: tsconfigDir,
       },
@@ -337,13 +340,13 @@ export const _bundle = ({
       ...filterNil([
         provide && inject(provide),
 
-        process.env.ENV_PLATFORM === PLATFORM.WEB && vike(),
+        environment.variables.ENV_PLATFORM === PLATFORM.WEB && vike(),
 
         babel &&
           babelPlugin({
             babelHelpers: 'runtime',
-            compact: process.env.NODE_ENV === 'production',
-            minified: process.env.NODE_ENV === 'production',
+            compact: environment.variables.NODE_ENV === 'production',
+            minified: environment.variables.NODE_ENV === 'production',
             plugins: babel.plugins,
             presets: babel.presets,
             skipPreflightCheck: true,
@@ -364,7 +367,7 @@ export const _bundle = ({
       // }),
 
       ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<string>).includes(
-        process.env.ENV_PLATFORM,
+        environment.variables.ENV_PLATFORM ?? '',
       )
         ? [react({ plugins: [['swc-plugin-add-display-name', {}]], tsDecorators: true })]
         : []),
@@ -372,7 +375,7 @@ export const _bundle = ({
       viteCommonjs() as Plugin,
     ]),
 
-    publicDir: process.env.NODE_ENV === 'production' ? assetsDir : publicPathname,
+    publicDir: environment.variables.NODE_ENV === 'production' ? assetsDir : publicPathname,
 
     resolve: {
       alias: [
@@ -414,8 +417,9 @@ export const _bundle = ({
     config.server = {
       ...config.server,
 
-      ...((process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
-      !process.env.NODE_RUNTIME
+      ...((environment.variables.NODE_ENV === 'development' ||
+        environment.variables.NODE_ENV === 'test') &&
+      !environment.variables.NODE_RUNTIME
         ? {
             host: true,
             middlewareMode: true,

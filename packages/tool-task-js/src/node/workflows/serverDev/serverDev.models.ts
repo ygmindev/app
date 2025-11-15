@@ -1,3 +1,1 @@
-export type ServerDevParamsModel = {
-  app: string;
-};
+export type ServerDevParamsModel = {};

@@ -1,3 +1,4 @@
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { compressPlugin } from '@lib/backend/server/utils/Server/plugins/compressPlugin/compressPlugin';
@@ -12,35 +13,39 @@ import { config as bundleConfig } from '@lib/config/node/bundle/bundle.web';
 import { config as configBase } from '@lib/config/node/server/server.base';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import toNumber from 'lodash/toNumber';
 
 export const config = defineConfig<ServerConfigModel>({
   ...configBase,
 
-  overrides: () => [
-    {
-      host: process.env.APP_HOST,
+  overrides: () => {
+    const environment = Container.get(Environment);
+    return [
+      {
+        host: environment.variables.APP_HOST,
 
-      plugins: [
-        [compressPlugin, {}],
+        plugins: [
+          [compressPlugin, {}],
 
-        [staticPlugin, { prefix: ASSETS_DIR, root: fromPublic() }],
+          [staticPlugin, { prefix: ASSETS_DIR, root: fromPublic() }],
 
-        [cookiesPlugin, { secret: process.env.SERVER_APP_SECRET }],
+          [cookiesPlugin, { secret: environment.variables.SERVER_APP_SECRET }],
 
-        [internationalizePlugin, { config: internationalizeConfig.params() }],
+          [internationalizePlugin, { config: internationalizeConfig.params() }],
 
-        [
-          webPlugin,
-          {
-            config: bundleConfig.params(),
-            root: fromWorking(),
-            subdomain: process.env.SERVER_APP_SUBDOMAIN,
-          },
-        ],
-      ] as Array<[ServerPluginModel<unknown>, unknown]>,
+          [
+            webPlugin,
+            {
+              config: bundleConfig.params(),
+              root: fromWorking(),
+              subdomain: environment.variables.SERVER_APP_SUBDOMAIN,
+            },
+          ],
+        ] as Array<[ServerPluginModel<unknown>, unknown]>,
 
-      port: toNumber(process.env.APP_PORT),
-    },
-  ],
+        port: toNumber(environment.variables.APP_PORT),
+      },
+    ];
+  },
 });

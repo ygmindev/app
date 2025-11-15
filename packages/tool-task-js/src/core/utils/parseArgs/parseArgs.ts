@@ -7,7 +7,9 @@ import reduce from 'lodash/reduce';
 import toNumber from 'lodash/toNumber';
 import toString from 'lodash/toString';
 
-export const parseArgs = (): ParseArgsModel =>
+export const parseArgs = <
+  TType extends Record<string, unknown> = Record<string, unknown>,
+>(): ParseArgsModel<TType> =>
   reduce(
     _parseArgs(),
     (result, v, k) => {
@@ -29,5 +31,5 @@ export const parseArgs = (): ParseArgsModel =>
       })();
       return { ...result, [camelCase(k)]: vF };
     },
-    {},
+    {} as ParseArgsModel<TType>,
   );

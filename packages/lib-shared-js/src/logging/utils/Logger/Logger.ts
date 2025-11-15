@@ -1,6 +1,5 @@
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
-import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger';
 import {
   type _LoggerModel,
@@ -21,7 +20,7 @@ const format = (params: Array<unknown>): string => {
             : value,
     )
     .join('\n');
-  return `[${new DateTime().format()}] ${formatted}`;
+  return `[${new Date().toISOString()}] ${formatted}`;
 };
 
 class Logger implements LoggerModel {

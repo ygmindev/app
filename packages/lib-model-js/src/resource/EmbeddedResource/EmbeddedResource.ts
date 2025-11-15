@@ -1,12 +1,12 @@
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
+import { withDatabaseField } from '@lib/backend/resource/utils/withDatabaseField/withDatabaseField';
 import { type EmbeddedResourceModel } from '@lib/model/resource/EmbeddedResource/EmbeddedResource.models';
 import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { PrimaryKeyModel } from '@lib/shared/resource/resource.models';
 
-@withEntity({ isAbstract: true, isDatabase: true })
+@withDatabaseEntity({ isAbstract: true })
 export class EmbeddedResource extends EntityResource implements EmbeddedResourceModel {
-  @withField({ isDatabase: true, type: DATA_TYPE.STRING })
+  @withDatabaseField({ type: DATA_TYPE.STRING })
   _id!: PrimaryKeyModel;
 }

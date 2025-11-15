@@ -6,8 +6,3 @@ import {
 export type ClientParamsModel = _ClientParamsModel;
 
 export type ClientModel = _ClientModel;
-
-export type ClientRunOptionsModel = {
-  params?: Array<unknown>;
-  queue?: string;
-};

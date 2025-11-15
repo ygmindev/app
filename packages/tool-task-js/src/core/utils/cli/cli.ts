@@ -3,14 +3,15 @@ import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { config as taskConfig } from '@lib/config/task/task';
-import { type AsyncCallableModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { importInterop } from '@lib/shared/core/utils/importInterop/importInterop';
+import { type ExceutionContextModel } from '@tool/task/core/core.models';
 import { type CliModel, type TaskRegistryModel } from '@tool/task/core/utils/Cli/Cli.models';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
+import { type TaskModel } from '@tool/task/core/utils/task/task.models';
 import kebabCase from 'lodash/kebabCase';
 import toNumber from 'lodash/toNumber';
 
@@ -38,18 +39,19 @@ export class Cli implements CliModel {
     });
     for (const pathname of pathnames) {
       const { main } = fileInfo(pathname);
-      const task = ((await importInterop(pathname)) as Record<string, AsyncCallableModel>)[main];
-      const aliasF = kebabCase(main)
+      const task = ((await importInterop(pathname)) as Record<string, TaskModel>)[main];
+      const mainF = kebabCase(main);
+      const aliasF = mainF
         .split('-')
         .map((p) => p.charAt(0))
         .join('');
 
       if (this._aliases[aliasF]) {
-        throw new DuplicateError(`alias ${aliasF} (${main}) already exists`);
+        throw new DuplicateError(`alias ${aliasF} (${mainF}) already exists`);
       }
 
-      this.register(main, { pathname, task });
-      this._aliases[aliasF] = main;
+      this.register(mainF, { pathname, task });
+      this._aliases[aliasF] = mainF;
     }
   };
 
@@ -62,11 +64,11 @@ export class Cli implements CliModel {
       name ??
       (await prompt<{ task: string }>([{ key: 'task', options: Object.keys(this.registry) }])).task;
     nameF = this._aliases[nameF] ?? nameF;
-    const v = this.registry[nameF];
+    const v = this.registry[nameF] ?? this.registry[kebabCase(nameF)];
     if (!v) {
       throw new NotFoundError(nameF);
     }
-    const args = parseArgs();
+    const args = parseArgs<ExceutionContextModel>();
     const { promptsExtension, taskExtension } = taskConfig.params();
     const { pathname, task } = v;
     const promptsPathname = pathname.replace(taskExtension, promptsExtension);
@@ -84,11 +86,12 @@ export class Cli implements CliModel {
       } catch {}
     }
 
-    const { workers, ...rest } = args;
+    const { app, environment, queue, workers, ...rest } = args;
+    const context: ExceutionContextModel = { app, environment, queue };
     if (workers) {
-      await Promise.all(new Array(toNumber(workers)).fill(task(rest)));
+      await Promise.all(new Array(toNumber(workers)).fill(task(rest, context)));
     } else {
-      await task(rest);
+      await task(rest, context);
     }
   };
 }

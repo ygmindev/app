@@ -1,27 +1,27 @@
+import { withDatabaseField } from '@lib/backend/resource/utils/withDatabaseField/withDatabaseField';
 import { withEmbeddedEntity } from '@lib/backend/resource/utils/withEmbeddedEntity/withEmbeddedEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { UTILITY_RESOURCE_NAME } from '@lib/model/admin/Utility/Utility.constants';
 import { UTILITY_TYPE, type UtilityModel } from '@lib/model/admin/Utility/Utility.models';
 import { EmbeddedResource } from '@lib/model/resource/EmbeddedResource/EmbeddedResource';
 
 @withEmbeddedEntity({ name: UTILITY_RESOURCE_NAME })
 export class Utility extends EmbeddedResource implements UtilityModel {
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   description?: string;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   imageSrc?: string;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   name!: string;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   pricing?: string;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField({ isArray: true })
   type!: Array<UTILITY_TYPE>;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   url?: string;
 }
 

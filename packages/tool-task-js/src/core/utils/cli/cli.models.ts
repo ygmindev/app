@@ -1,8 +1,8 @@
-import { type AsyncCallableModel } from '@lib/shared/core/core.models';
+import { type TaskModel } from '@tool/task/core/utils/task/task.models';
 
 export type TaskRegistryModel = {
   pathname: string;
-  task: AsyncCallableModel;
+  task: TaskModel;
 };
 
 export type CliModel = {

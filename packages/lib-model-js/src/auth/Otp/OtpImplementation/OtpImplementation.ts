@@ -1,7 +1,8 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
-import { mail } from '@lib/backend/notification/utils/mail/mail';
-import { sms } from '@lib/backend/notification/utils/sms/sms';
+import { EmailClient } from '@lib/backend/notification/utils/EmailClient/EmailClient';
+import { SmsClient } from '@lib/backend/notification/utils/SmsClient/SmsClient';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { objectToEquality } from '@lib/backend/resource/utils/objectToEquality/objectToEquality';
 import { OTP_RESOURCE_NAME } from '@lib/model/auth/Otp/Otp.constants';
@@ -25,19 +26,24 @@ export class OtpImplementation
     Resource: Otp,
     afterCreate: async ({ output }) => {
       if (output.result?.otp) {
+        const environment = Container.get(Environment);
+
         // phone verification
         if (output.result.phone && output.result.callingCode) {
-          await sms<{ otp: string }>({
-            from: process.env.SERVER_TWILIO_FROM,
-            params: { otp: output.result.otp },
-            pathname: fromStatic('templates/otp/sms.ejs'),
+          await Container.get(SmsClient).send<{ otp: string }>({
+            body: {
+              params: { otp: output.result.otp },
+              pathname: fromStatic('templates/otp/sms.ejs'),
+            },
+            from: environment.variables.SERVER_TWILIO_FROM ?? '',
             to: `+${output.result.callingCode}${output.result.phone}`,
           });
         }
         // email verification
         if (output.result.email) {
-          await mail<{ otp: string }>({
-            from: process.env.SERVER_EMAIL_USERNAME,
+          const emailClient = Container.get(EmailClient);
+          await emailClient.send<{ otp: string }>({
+            from: environment.variables.SERVER_EMAIL_USERNAME ?? '',
             params: { otp: output.result.otp },
             template: 'otp',
             to: [output.result.email],
@@ -48,6 +54,8 @@ export class OtpImplementation
     },
 
     beforeCreate: async ({ input }) => {
+      const environment = Container.get(Environment);
+
       // const { isCheckExists, ...formF } = input?.form ?? {};
       const { ...formF } = input?.form ?? {};
       // if (isCheckExists) {
@@ -63,8 +71,8 @@ export class OtpImplementation
       await otpImplementation.remove({ filter: objectToEquality(formF) });
       input?.form &&
         (input.form.otp =
-          process.env.SERVER_OTP_STATIC ??
-          randomInt(toNumber(process.env.SERVER_APP_OTP_LENGTH)).toString());
+          environment.variables.SERVER_OTP_STATIC ??
+          randomInt(toNumber(environment.variables.SERVER_APP_OTP_LENGTH)).toString());
       return input;
     },
 

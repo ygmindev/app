@@ -2,8 +2,8 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { createProtectedResoureImplementation } from '@lib/backend/resource/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
 import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import { Access } from '@lib/model/auth/Access/Access.entity';
 import { ACCESS_LEVEL, ACCESS_RESOURCE_NAME } from '@lib/model/auth/Access/Access.constants';
+import { Access } from '@lib/model/auth/Access/Access.entity';
 import { type AccessModel } from '@lib/model/auth/Access/Access.models';
 import { type AccessImplementationModel } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';

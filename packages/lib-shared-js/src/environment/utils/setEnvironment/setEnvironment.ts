@@ -1,4 +1,5 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import {
@@ -9,6 +10,7 @@ import { config } from 'dotenv';
 import { existsSync } from 'fs';
 
 export const setEnvironment = ({
+  app,
   environment,
   variables,
 }: SetEnvironmentParamsModel = {}): SetEnvironmentModel => {
@@ -16,10 +18,16 @@ export const setEnvironment = ({
 
   const paths = filterNil([
     fromWorking('.env'),
+
     fromWorking('.env.public'),
-    environmentF && fromWorking(`.env.${environmentF}`),
+
     fromConfig('environment/.env.base'),
-    environmentF && fromConfig(`environment/.env.${environmentF}`),
+
+    ...(environmentF
+      ? [fromWorking(`.env.${environmentF}`), fromConfig(`environment/.env.${environmentF}`)]
+      : []),
+
+    ...(app ? [fromPackages(app, '.env'), fromPackages(app, '.env.public')] : []),
   ]);
 
   const envs = paths.reduce((result, path) => {

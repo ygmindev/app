@@ -1,4 +1,6 @@
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { type _ScreenConfigModel, type ScreenConfigModel } from '@lib/config/screen/screen.models';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { executablePath } from 'puppeteer';
 
 // TODO: use
@@ -13,8 +15,9 @@ export const _screen = ({
   snapshotPath,
   zoom,
 }: ScreenConfigModel): _ScreenConfigModel => {
+  const environment = Container.get(Environment);
   const executablePathF = isHeadless
-    ? (process.env.PUPPETEER_EXECUTABLE_PATH ?? executablePath())
+    ? (environment.variables.PUPPETEER_EXECUTABLE_PATH ?? executablePath())
     : executablePath();
   return {
     args: isHeadless

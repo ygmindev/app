@@ -1,5 +1,5 @@
 import { RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
-import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { withDatabaseEntity } from '@lib/backend/resource/utils/withDatabaseEntity/withDatabaseEntity';
 import { withRefField } from '@lib/backend/resource/utils/withRefField/withRefField';
 import { ASSET_RESOURCE_NAME } from '@lib/model/quant/Asset/Asset.constants';
 import { Future } from '@lib/model/quant/Future/Future';
@@ -8,8 +8,7 @@ import { InterestRateModel } from '@lib/model/quant/InterestRate/InterestRate.mo
 import { INTEREST_RATE_FUTURE_RESOURCE_NAME } from '@lib/model/quant/InterestRateFuture/InterestRateFuture.constants';
 import { type InterestRateFutureModel } from '@lib/model/quant/InterestRateFuture/InterestRateFuture.models';
 
-@withEntity({
-  isDatabase: true,
+@withDatabaseEntity({
   name: INTEREST_RATE_FUTURE_RESOURCE_NAME,
 })
 export class InterestRateFuture extends Future implements InterestRateFutureModel {

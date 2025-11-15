@@ -1,3 +1,4 @@
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
@@ -7,6 +8,7 @@ import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/te
 import { _typescript } from '@lib/config/node/typescript/_typescript';
 import { BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import reduce from 'lodash/reduce';
 import trim from 'lodash/trim';
@@ -29,10 +31,11 @@ export const _test = ({
   timeout,
   typescript,
 }: TestConfigModel): _TestConfigModel => {
+  const environment = Container.get(Environment);
   const { aliases, define, extensions, transpileModules } = bundle;
   const { compilerOptions } = _typescript(typescript);
   const testExtension =
-    process.env.TEST_IS_ETE === BOOLEAN_STRING.TRUE ? eteExtension : specExtension;
+    environment.variables.TEST_IS_ETE === BOOLEAN_STRING.TRUE ? eteExtension : specExtension;
   return {
     cacheDirectory: fromWorking(BUILD_DIR, cacheDir, outDir),
 
@@ -84,7 +87,7 @@ export const _test = ({
 
     setupFilesAfterEnv: [fromConfig('node/test/_initialize.ts')],
 
-    testEnvironment: process.env.ENV_PLATFORM === PLATFORM.WEB ? 'jsdom' : 'node',
+    testEnvironment: environment.variables.ENV_PLATFORM === PLATFORM.WEB ? 'jsdom' : 'node',
 
     testMatch: testExtension
       ? reduce(

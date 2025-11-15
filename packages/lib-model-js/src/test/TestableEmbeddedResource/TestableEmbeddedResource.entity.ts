@@ -1,5 +1,5 @@
+import { withDatabaseField } from '@lib/backend/resource/utils/withDatabaseField/withDatabaseField';
 import { withEmbeddedEntity } from '@lib/backend/resource/utils/withEmbeddedEntity/withEmbeddedEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { DATABASE_CONFIG } from '@lib/config/database/database.constants';
 import { EmbeddedResource } from '@lib/model/resource/EmbeddedResource/EmbeddedResource';
 import { TESTABLE_EMBEDDED_RESOURCE_NAME } from '@lib/model/test/TestableEmbeddedResource/TestableEmbeddedResource.constants';
@@ -11,31 +11,30 @@ export class TestableEmbeddedResource
   extends EmbeddedResource
   implements TestableEmbeddedResourceModel
 {
-  @withField({
+  @withDatabaseField({
     Resource: () => Date,
     expire: DATABASE_CONFIG.expireSeconds,
-    isDatabase: true,
     isOptional: true,
     type: DATA_TYPE.DATE,
   })
   date: Date = new Date();
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   group!: string;
 
-  @withField({ isDatabase: true, type: DATA_TYPE.NUMBER })
+  @withDatabaseField({ type: DATA_TYPE.NUMBER })
   index!: number;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  @withDatabaseField({ isOptional: true, type: DATA_TYPE.NUMBER })
   number?: number;
 
-  @withField({ isDatabase: true })
+  @withDatabaseField()
   string!: string;
 
-  @withField({ isArray: true, isDatabase: true, isOptional: true })
+  @withDatabaseField({ isArray: true, isOptional: true })
   stringArray?: Array<string>;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   stringOptional?: string;
 }
 

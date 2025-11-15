@@ -1,4 +1,4 @@
-import { type ClientRunOptionsModel } from '@tool/task/core/utils/Client/Client.models';
+import { type ExceutionContextModel } from '@tool/task/core/core.models';
 
 export type _ClientParamsModel = {
   id?: string;
@@ -6,5 +6,10 @@ export type _ClientParamsModel = {
 
 export type _ClientModel = {
   initialize(): Promise<void>;
-  run(workflow: string, params?: ClientRunOptionsModel): Promise<void>;
+
+  run(
+    workflow: string,
+    params?: Record<string, unknown>,
+    context?: ExceutionContextModel,
+  ): Promise<void>;
 };

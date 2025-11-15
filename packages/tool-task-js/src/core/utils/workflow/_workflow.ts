@@ -1,6 +1,9 @@
+import { type AsyncCallableModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
+import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { executeChild, proxyActivities, startChild } from '@temporalio/workflow';
 import {
   type _WorkflowModel,
@@ -19,38 +22,55 @@ import isString from 'lodash/isString';
 import toString from 'lodash/toString';
 
 export const _workflow =
-  <TParams = void, TResult = void>({
-    duriation = WORKFLOW_DURATION_DEFAULT,
+  <TParams = void, TResult = void, TSteps extends Array<unknown> = Array<unknown>>({
+    duration = WORKFLOW_DURATION_DEFAULT,
     execution = WORKFLOW_EXECUTION.SEQUENTIAL,
     interval = WORKFLOW_INTERVAL_DEFAULT,
     retry = WORKFLOW_RETRY_DEFAULT,
     steps,
-  }: _WorkflowParamsModel<TParams, TResult>): _WorkflowModel<TParams, TResult> =>
-  async (workflowParams) => {
+  }: _WorkflowParamsModel<TParams, TResult, TSteps>): _WorkflowModel<TParams, TResult> =>
+  async (workflowParams, workflowContext) => {
     const isParallel = execution === WORKFLOW_EXECUTION.PARALLEL;
     const proxy = proxyActivities({
       retry: {
         initialInterval: interval,
         maximumAttempts: retry,
       },
-      startToCloseTimeout: duriation,
+      startToCloseTimeout: duration,
     });
-    const executions = steps(workflowParams).map((v) => {
+    const executions = steps(workflowParams, workflowContext).map((v) => {
+      let key: string | undefined = undefined;
+      let runnable: AsyncCallableModel | undefined = undefined;
       if (isArray(v)) {
-        const [stepTask, stepParams] = v;
+        const [stepTask, stepParams, stepContext] = v;
+        const context = { ...workflowContext, ...stepContext };
         if (isString(stepTask)) {
+          key = stepTask;
           const task = proxy[stepTask];
           if (!task) {
             throw new NotFoundError(stepTask);
           }
-          return async () => task(stepParams, workflowParams);
+          runnable = async () => task(stepParams, context);
         } else if (isFunction(stepTask)) {
-          return async () =>
-            (isParallel ? startChild : executeChild)(stepTask, {
-              args: [stepParams, workflowParams],
-            });
+          key = stepTask.name;
+          runnable = async () =>
+            (isParallel ? startChild : executeChild)(stepTask, { args: [stepParams, context] });
+        } else {
+          throw new InvalidArgumentError(toString(stepTask));
         }
-        throw new InvalidArgumentError(toString(stepTask));
+        return async () => {
+          try {
+            logger.progress(
+              `${key} starting with params: ${stringify(stepParams)}, context: ${stringify(context)}`,
+            );
+            const result = await runnable?.();
+            logger.success(`${key} succeeded`);
+            return result;
+          } catch (e) {
+            logger.fail(`${key} failed`);
+            throw e;
+          }
+        };
       } else if (isPlainObject(v)) {
         return async () => _workflow(v);
       }

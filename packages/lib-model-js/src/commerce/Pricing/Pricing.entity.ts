@@ -1,6 +1,6 @@
 import { type RefModel } from '@lib/backend/resource/utils/RefModel/RefModel.models';
+import { withDatabaseField } from '@lib/backend/resource/utils/withDatabaseField/withDatabaseField';
 import { withEmbeddedEntity } from '@lib/backend/resource/utils/withEmbeddedEntity/withEmbeddedEntity';
-import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { withManyToOneField } from '@lib/backend/resource/utils/withManyToOneField/withManyToOneField';
 import {
   PRICING_FREQUENCY,
@@ -18,13 +18,13 @@ export class Pricing extends EmbeddedResource implements PricingModel {
   @withManyToOneField({ Resource: () => Product })
   [PRODUCT_RESOURCE_NAME]!: RefModel<ProductModel>;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   currency?: string;
 
-  @withField({ isDatabase: true, isOptional: true })
+  @withDatabaseField({ isOptional: true })
   frequency?: PRICING_FREQUENCY;
 
-  @withField({ isDatabase: true, isOptional: true, type: DATA_TYPE.NUMBER })
+  @withDatabaseField({ isOptional: true, type: DATA_TYPE.NUMBER })
   price?: number;
 }
 

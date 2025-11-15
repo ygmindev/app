@@ -3,16 +3,26 @@ import {
   type StripeCreateTokenParamsModel,
 } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
+import { EnvironmentModel } from '@lib/backend/environment/utils/Environment/Environment.models';
 import { PAYMENT_METHOD_TYPE } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { ExternalError } from '@lib/shared/core/errors/ExternalError/ExternalError';
+import { Container } from '@lib/shared/core/utils/Container/Container';
+import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import Stripe from 'stripe';
 
 @withContainer()
 export class StripeAdminImplementation implements StripeAdminImplementationModel {
-  stripe: Stripe = new Stripe(process.env.SERVER_STRIPE_TOKEN, {
-    apiVersion: process.env.SERVER_STRIPE_API_VERSION as Stripe.LatestApiVersion,
-  });
+  @withInject(Environment) protected environment!: EnvironmentModel;
+  stripe: Stripe;
+
+  constructor() {
+    Container.get(Environment);
+    this.stripe = new Stripe(this.environment.variables.SERVER_STRIPE_TOKEN ?? '', {
+      apiVersion: this.environment.variables.SERVER_STRIPE_API_VERSION as Stripe.LatestApiVersion,
+    });
+  }
 
   createCustomer = async (): Promise<string> => {
     const { id } = await this.stripe.customers.create();
