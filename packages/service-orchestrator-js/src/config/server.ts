@@ -13,6 +13,7 @@ import { HTTP_METHOD } from '@lib/shared/http/http.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 import { config as apiConfig } from './api';
+import { config as databaseConfig } from './database';
 import { config as graphqlConfig } from './graphql';
 
 export const config = defineConfig<ServerConfigModel>({
@@ -25,7 +26,7 @@ export const config = defineConfig<ServerConfigModel>({
         api: apiConfig.params(),
 
         onInitialize: async () => {
-          await initializeBackend();
+          await initializeBackend({ database: databaseConfig.params() });
         },
 
         plugins: [

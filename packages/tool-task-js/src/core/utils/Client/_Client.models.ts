@@ -1,4 +1,4 @@
-import { type ExceutionContextModel } from '@tool/task/core/core.models';
+import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 
 export type _ClientParamsModel = {
   id?: string;
@@ -10,6 +10,6 @@ export type _ClientModel = {
   run(
     workflow: string,
     params?: Record<string, unknown>,
-    context?: ExceutionContextModel,
+    context?: ExecutionContextModel,
   ): Promise<void>;
 };

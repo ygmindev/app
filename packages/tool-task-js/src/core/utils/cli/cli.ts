@@ -6,7 +6,7 @@ import { config as taskConfig } from '@lib/config/task/task';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { importInterop } from '@lib/shared/core/utils/importInterop/importInterop';
-import { type ExceutionContextModel } from '@tool/task/core/core.models';
+import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 import { type CliModel, type TaskRegistryModel } from '@tool/task/core/utils/Cli/Cli.models';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
@@ -68,7 +68,7 @@ export class Cli implements CliModel {
     if (!v) {
       throw new NotFoundError(nameF);
     }
-    const args = parseArgs<ExceutionContextModel>();
+    const args = parseArgs<ExecutionContextModel>();
     const { promptsExtension, taskExtension } = taskConfig.params();
     const { pathname, task } = v;
     const promptsPathname = pathname.replace(taskExtension, promptsExtension);
@@ -87,7 +87,7 @@ export class Cli implements CliModel {
     }
 
     const { app, environment, queue, workers, ...rest } = args;
-    const context: ExceutionContextModel = { app, environment, queue };
+    const context: ExecutionContextModel = { app, environment, queue };
     if (workers) {
       await Promise.all(new Array(toNumber(workers)).fill(task(rest, context)));
     } else {

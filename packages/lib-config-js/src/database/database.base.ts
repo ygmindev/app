@@ -19,6 +19,7 @@ import { Pricing } from '@lib/model/commerce/Pricing/Pricing.entity';
 import { Product } from '@lib/model/commerce/Product/Product.entity';
 import { Group } from '@lib/model/group/Group/Group.entity';
 import { Socket } from '@lib/model/http/Socket/Socket.entity';
+import { Workflow } from '@lib/model/orchestrator/Workflow/Workflow';
 import { Curve } from '@lib/model/quant/Curve/Curve.entity';
 import { Quote } from '@lib/model/quant/Quote/Quote';
 import { Rate } from '@lib/model/quant/Rate/Rate';
@@ -51,6 +52,7 @@ export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
         Product,
         Pricing,
         Quote,
+        Workflow,
         Rate,
         Role,
         Socket,

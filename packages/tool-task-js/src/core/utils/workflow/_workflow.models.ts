@@ -1,23 +1,20 @@
-import { type ExceutionContextModel } from '@tool/task/core/core.models';
-import { type WORKFLOW_EXECUTION } from '@tool/task/core/utils/workflow/workflow.constants';
-import { type WorkflowStepModel } from '@tool/task/core/utils/workflow/workflow.models';
+import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
+import { type WorkflowModel } from '@lib/model/orchestrator/Workflow/Workflow.models';
+import { type WorkflowStepModel } from '@lib/model/orchestrator/WorkflowStep/WorkflowStep.models';
+import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 
 export type _WorkflowParamsModel<
   TParams = void,
   TResult = void,
   TSteps extends Array<unknown> = Array<unknown>,
-> = {
-  duration?: number;
-  execution?: WORKFLOW_EXECUTION;
-  interval?: number;
-  retry?: number;
+> = Omit<WorkflowModel, keyof ResourceModel | 'name' | 'steps'> & {
   steps(
     params: TParams,
-    context?: ExceutionContextModel,
+    context?: ExecutionContextModel,
   ): Array<WorkflowStepModel<TSteps[number], unknown>>;
 };
 
 export type _WorkflowModel<TParams = void, TResult = void> = (
   params: TParams,
-  context?: ExceutionContextModel,
+  context?: ExecutionContextModel,
 ) => Promise<TResult>;

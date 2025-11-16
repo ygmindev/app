@@ -4,6 +4,8 @@ import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { config as configBase } from '@lib/config/node/server/server.web';
 import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 
+import { config as databaseConfig } from './database';
+
 export const config = defineConfig<ServerConfigModel>({
   ...configBase,
 
@@ -11,7 +13,7 @@ export const config = defineConfig<ServerConfigModel>({
     return [
       {
         onInitialize: async () => {
-          await initializeBackend();
+          await initializeBackend({ database: databaseConfig.params() });
         },
 
         plugins: [] as Array<[ServerPluginModel<unknown>, unknown]>,
