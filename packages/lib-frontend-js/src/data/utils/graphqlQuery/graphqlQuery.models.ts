@@ -6,7 +6,6 @@ import {
   type UnionToIntersectionModel,
 } from '@lib/shared/core/core.models';
 import { type GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
-import { type ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
 import { type GraphQLError } from 'graphql';
 
 export type GraphqlParamsModel<TParams> = {
@@ -42,12 +41,10 @@ export type GraphqlFieldModel<TType, TDepth extends number = 10> = [TDepth] exte
         ? TKey
         : Required<InferModel<TType>>[TKey] extends Array<infer TElement>
           ? Record<TKey, Array<GraphqlFieldModel<TElement, DepthArray[TDepth]>>>
-          : Required<InferModel<TType>>[TKey] extends ConnectionModel<infer TResource>
-            ? Record<TKey, Array<GraphqlFieldModel<TResource, DepthArray[TDepth]>>>
-            : Record<
-                TKey,
-                Array<GraphqlFieldModel<Required<InferModel<TType>>[TKey], DepthArray[TDepth]>>
-              >;
+          : Record<
+              TKey,
+              Array<GraphqlFieldModel<Required<InferModel<TType>>[TKey], DepthArray[TDepth]>>
+            >;
     }[StringKeyModel<InferModel<TType>>];
 
 export type GraphqlQueryParamsFieldsModel<TType> = Array<GraphqlFieldModel<TType>>;

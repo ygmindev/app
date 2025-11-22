@@ -19,7 +19,7 @@ export const config = defineConfig<PackageManagerConfigModel>({
       `corepack use pnpm@latest && ${
         names && packages
           ? `pnpm add ${names} ${packages ? packages.map((v) => `--filter @${v.replace('-js', '').replace('-', '/')}`).join(' ') : ''} ${options.mode === PACAKGE_INSTALL_MODE.DEV ? '-D' : options.mode === PACAKGE_INSTALL_MODE.PEER ? '--save-peer' : ''}`
-          : 'pnpm install --shamefully-hoist'
+          : 'pnpm install'
       }`,
 
     listCommand: (pkg) => `pnpm list --json --recursive --depth 0 --filter ${pkg}`,

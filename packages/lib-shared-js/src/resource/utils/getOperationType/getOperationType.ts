@@ -10,7 +10,6 @@ export const getOperationType = (params: GetOperationTypeParamsModel): GetOperat
   switch (params) {
     case RESOURCE_METHOD_TYPE.GET:
     case RESOURCE_METHOD_TYPE.GET_MANY:
-    case RESOURCE_METHOD_TYPE.GET_CONNECTION:
       return GRAPHQL_OPERATION_TYPE.QUERY;
     case RESOURCE_METHOD_TYPE.SUBSCRIBE:
       return GRAPHQL_OPERATION_TYPE.SUBSCRIPTION;

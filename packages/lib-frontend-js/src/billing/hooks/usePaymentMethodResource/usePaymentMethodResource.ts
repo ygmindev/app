@@ -7,11 +7,11 @@ import {
   REMOVE_TOKEN,
 } from '@lib/model/billing/PaymentMethod/PaymentMethod.constants';
 import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
+import { ID_INPUT } from '@lib/model/resource/IdInput/IdInput.constants';
+import { type IdInputModel } from '@lib/model/resource/IdInput/IdInput.models';
 import { PAYMENT_INPUT } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.constants';
 import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
 import { type PartialArrayModel } from '@lib/shared/core/core.models';
-import { ID_INPUT } from '@lib/shared/resource/utils/IdInput/IdInput.constants';
-import { type IdInputModel } from '@lib/shared/resource/utils/IdInput/IdInput.models';
 
 export const usePaymentMethodResource = (): UsePaymentMethodResourceModel => {
   const { query } = useAppGraphql();

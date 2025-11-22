@@ -1,8 +1,8 @@
+import { FILTER_CONDITION } from '@lib/model/resource/Filter/Filter.constants';
 import {
   type FilterArrayModel,
   type FilterArrayParamsModel,
 } from '@lib/shared/core/utils/filterArray/filterArray.models';
-import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
 
 export const filterArray = <TType extends unknown>(
   ...[values, filters, skip, take]: FilterArrayParamsModel<TType>

@@ -1,4 +1,5 @@
 import { HttpImplementation } from '@lib/backend/http/utils/HttpImplementation/HttpImplementation';
+import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
@@ -7,7 +8,6 @@ import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
 import { type GraphqlQueryParamsModel } from '@tool/task/http/graphqlQuery/graphqlQuery.models';
 

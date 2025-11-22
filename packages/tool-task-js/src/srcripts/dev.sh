@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# cd packages/tool-cli
+# pnpm link --global
+
 run executeParallel --commands=\
 "run orchestratorRun",\
 "run tasksBuild",\

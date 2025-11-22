@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { Server } from '@lib/backend/server/utils/Server/Server';
 

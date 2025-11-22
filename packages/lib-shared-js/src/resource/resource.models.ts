@@ -12,7 +12,6 @@ export type PrimaryKeyModel = string;
 export type ResourceReadMethodTypeModel =
   | RESOURCE_METHOD_TYPE.GET
   | RESOURCE_METHOD_TYPE.GET_MANY
-  | RESOURCE_METHOD_TYPE.GET_CONNECTION
   | RESOURCE_METHOD_TYPE.SUBSCRIBE;
 
 export type ResourceWriteMethodTypeModel =
@@ -32,7 +31,6 @@ export type ResourceMethodTypeCrudModel =
 
 export type FilterableResourceMethodTypeModel =
   | RESOURCE_METHOD_TYPE.GET_MANY
-  | RESOURCE_METHOD_TYPE.GET_CONNECTION
   | RESOURCE_METHOD_TYPE.REMOVE;
 
 export type ResourceNameParamsModel<TRoot = undefined> = {
@@ -72,7 +70,6 @@ export enum RESOURCE_METHOD_TYPE {
   CREATE = 'Create',
   CREATE_MANY = 'CreateMany',
   GET = 'Get',
-  GET_CONNECTION = 'GetConnection',
   GET_MANY = 'GetMany',
   REMOVE = 'Remove',
   SUBSCRIBE = 'Subscribe',

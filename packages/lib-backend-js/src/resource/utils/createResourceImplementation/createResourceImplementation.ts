@@ -5,21 +5,20 @@ import {
 } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { type PartialArrayModel, type PrototypeModel } from '@lib/shared/core/core.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collapseFilter';
 import { type ResourceImplementationDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
-import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
-import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
 export const createResourceImplementation = <TType extends ResourceModel, TRoot = undefined>({
   Resource,
   afterCreate,
   afterCreateMany,
   afterGet,
-  afterGetConnection,
   afterGetMany,
   afterRemove,
   afterUpdate,
@@ -27,7 +26,6 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
   beforeCreate,
   beforeCreateMany,
   beforeGet,
-  beforeGetConnection,
   beforeGetMany,
   beforeRemove,
   beforeUpdate,
@@ -36,7 +34,6 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
   create,
   createMany,
   get,
-  getConnection,
   getMany,
   name,
   remove,
@@ -53,7 +50,6 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
       afterCreate,
       afterCreateMany,
       afterGet,
-      afterGetConnection,
       afterGetMany,
       afterRemove,
       afterUpdate,
@@ -63,10 +59,6 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
       beforeGet: async ({ input }, context) => {
         const inputF = { ...input, filter: collapseFilter(input?.filter) };
         return beforeGet ? beforeGet({ input: inputF }, context) : inputF;
-      },
-      beforeGetConnection: async ({ input }, context) => {
-        const inputF = { ...input, filter: collapseFilter(input?.filter) };
-        return beforeGetConnection ? beforeGetConnection({ input: inputF }, context) : inputF;
       },
       beforeGetMany: async ({ input }, context) => {
         const inputF = { ...input, filter: collapseFilter(input?.filter) };
@@ -89,7 +81,6 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
       this.createMany = this.createMany.bind(this);
       this.get = this.get.bind(this);
       this.getMany = this.getMany.bind(this);
-      this.getConnection = this.getConnection.bind(this);
       this.update = this.update.bind(this);
       this.updateMany = this.updateMany.bind(this);
       this.remove = this.remove.bind(this);
@@ -165,24 +156,6 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
       );
       return this.decorators.afterGet
         ? this.decorators.afterGet({ input: inputF, output }, context)
-        : output;
-    }
-
-    async getConnection(
-      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>,
-      context?: RequestContextModel,
-    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
-      if (!getConnection) {
-        return {};
-      }
-      let inputF = cleanObject(input);
-      inputF = this.decorators.beforeGetConnection
-        ? await this.decorators.beforeGetConnection({ input: inputF }, context)
-        : inputF;
-      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> =
-        await getConnection(inputF, context);
-      return this.decorators.afterGetConnection
-        ? this.decorators.afterGetConnection({ input: inputF, output }, context)
         : output;
     }
 

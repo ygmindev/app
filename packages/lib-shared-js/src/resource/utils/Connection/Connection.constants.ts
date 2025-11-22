@@ -1,1 +1,0 @@
-export const CONNECTION_PAGE_SIZE_DEFAULT = 100;

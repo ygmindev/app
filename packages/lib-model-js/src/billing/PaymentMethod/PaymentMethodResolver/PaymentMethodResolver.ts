@@ -2,7 +2,7 @@ import { PaymentInput } from '@lib/backend/billing/utils/PaymentInput/PaymentInp
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
-import { IdInput } from '@lib/backend/resource/utils/IdInput/IdInput';
+import { IdInput } from '@lib/model/resource/IdInput/IdInput';
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
 import { RequestContextModel } from '@lib/config/api/api.models';
@@ -21,7 +21,7 @@ import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/P
 import { PartialArrayModel } from '@lib/shared/core/core.models';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
-import { IdInputModel } from '@lib/shared/resource/utils/IdInput/IdInput.models';
+import { IdInputModel } from '@lib/model/resource/IdInput/IdInput.models';
 
 @withContainer()
 @withResolver()

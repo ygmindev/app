@@ -12,7 +12,7 @@ const mergeConfigs = <TParams, TType = undefined>({
   params,
   strategy,
 }: Pick<DefineConfigParamsModel<TParams, TType>, 'overrides' | 'params' | 'strategy'>): TParams =>
-  merge([...(overrides ? overrides() : []), params()], strategy);
+  merge([...(overrides?.() ?? []), params()], strategy);
 
 export const defineConfig = <TParams, TType = undefined>({
   config,
@@ -25,11 +25,12 @@ export const defineConfig = <TParams, TType = undefined>({
       ? (paramsF?: PartialDeepModel<TParams>) =>
           config(
             mergeConfigs<TParams, TType>({
-              overrides: () => filterNil([paramsF, ...(overrides ? overrides() : [])]),
+              overrides: () => filterNil([paramsF, ...(overrides?.() ?? [])]),
               params,
               strategy,
             }),
           )
       : undefined,
+
     params: () => mergeConfigs({ overrides, params, strategy }),
   }) as DefineConfigModel<TParams, TType>;

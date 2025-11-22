@@ -7,8 +7,6 @@ import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE, TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
-import { ConnectionBoundary } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary';
-import { type ConnectionBoundaryRefModel } from '@lib/frontend/data/components/ConnectionBoundary/ConnectionBoundary.models';
 import { Table } from '@lib/frontend/data/components/Table/Table';
 import { type TableRefModel } from '@lib/frontend/data/components/Table/Table.models';
 import { TABLE_SELECT_TYPE } from '@lib/frontend/data/hooks/useTable/useTable.constants';
@@ -23,11 +21,11 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { type FilterModel } from '@lib/model/resource/Filter/Filter.models';
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
+import { type UpdateModel } from '@lib/model/resource/Update/Update.models';
 import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
-import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
-import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import cloneDeep from 'lodash/cloneDeep';
 import range from 'lodash/range';
 import { type ReactElement, useCallback, useRef, useState } from 'react';
@@ -44,7 +42,7 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
   const { t } = useTranslation();
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { create, getConnection, remove, update } = implementation;
+  const { create, remove, update } = implementation;
   const [filters, filtersSet] =
     useState<Record<StringKeyModel<TType>, Array<FilterModel<TType>>>>();
 
@@ -53,7 +51,7 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
     ...(fields ?? []),
   ];
   const tableRef = useRef<TableRefModel<TType>>(null);
-  const connectionBoundaryRef = useRef<ConnectionBoundaryRefModel<TType, TRoot>>(null);
+  // const connectionBoundaryRef = useRef<ConnectionBoundaryRefModel<TType, TRoot>>(null);
   const [selectedRows, selectedRowsSet] = useState<Array<PartialModel<TType>>>([]);
 
   const handleUpsert = async (

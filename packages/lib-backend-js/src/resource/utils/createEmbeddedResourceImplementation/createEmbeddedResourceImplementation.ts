@@ -1,6 +1,5 @@
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
-import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import { mongoFilter } from '@lib/backend/database/utils/mongoFilter/mongoFilter';
 import {
   type CreateEmbeddedResourceImplementationModel,
@@ -10,6 +9,8 @@ import { createResourceImplementation } from '@lib/backend/resource/utils/create
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { type PartialArrayModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
@@ -18,8 +19,6 @@ import {
   type FilterableResourceMethodTypeModel,
   type RESOURCE_METHOD_TYPE,
 } from '@lib/shared/resource/resource.models';
-import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
-import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 import reduce from 'lodash/reduce';
 import { type Collection, ObjectId, type PullOperator, type PushOperator } from 'mongodb';
 
@@ -32,7 +31,6 @@ export const createEmbeddedResourceImplementation = <
   afterCreate,
   afterCreateMany,
   afterGet,
-  afterGetConnection,
   afterGetMany,
   afterRemove,
   afterUpdate,
@@ -40,7 +38,6 @@ export const createEmbeddedResourceImplementation = <
   beforeCreate,
   beforeCreateMany,
   beforeGet,
-  beforeGetConnection,
   beforeGetMany,
   beforeRemove,
   beforeUpdate,
@@ -73,10 +70,13 @@ export const createEmbeddedResourceImplementation = <
     input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
     context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>> => {
+    // TODO: FIX THIS WITH CURSOR / OFFSET SUPPORT!
     if (!input?.root) throw new NotFoundError('root');
     const filters = mongoFilter({ filter: input.filter, id: input.id }, `$$e`);
-    const skip = input?.options?.skip ?? 0;
-    const take = input?.options?.take;
+    // const skip = input?.options?.skip ?? 0;
+    // const take = input?.options?.take;
+    const skip = 0;
+    const take = 10;
     let projection;
     if (isEmpty(filters)) {
       projection = take ? { $slice: [`$${name}`, skip, take] } : `$${name}`;
@@ -97,7 +97,7 @@ export const createEmbeddedResourceImplementation = <
       ])
       .next()) as unknown as Partial<TRoot>;
     const result = rootResult?.[name] as unknown as PartialArrayModel<TType>;
-    return { result, root: rootResult };
+    return { result: { items: result }, root: rootResult };
   };
 
   const count = async (
@@ -148,7 +148,6 @@ export const createEmbeddedResourceImplementation = <
     afterCreate,
     afterCreateMany,
     afterGet,
-    afterGetConnection,
     afterGetMany,
     afterRemove,
     afterUpdate,
@@ -156,7 +155,6 @@ export const createEmbeddedResourceImplementation = <
     beforeCreate,
     beforeCreateMany,
     beforeGet,
-    beforeGetConnection,
     beforeGetMany,
     beforeRemove,
     beforeUpdate,
@@ -196,15 +194,6 @@ export const createEmbeddedResourceImplementation = <
       )) as unknown as Partial<TRoot>;
       const result = (rootResult?.[name] as unknown as PartialArrayModel<TType>)?.[0];
       return { result, root: rootResult };
-    },
-
-    getConnection: async (input, context) => {
-      return getConnection({
-        count: await count(input),
-        getMany: getMany.bind(this),
-        input,
-        pagination: input?.pagination,
-      });
     },
 
     getMany,

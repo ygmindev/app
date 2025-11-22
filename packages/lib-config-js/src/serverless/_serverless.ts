@@ -50,7 +50,7 @@ export const _serverless = ({
               bundle: true,
               exclude: ['*'],
               format: 'cjs',
-              installExtraArgs: ['--shamefully-hoist'],
+              // installExtraArgs: ['--shamefully-hoist'],
               keepOutputDirectory: true,
               outputWorkFolder: buildDir,
               packager: 'pnpm',

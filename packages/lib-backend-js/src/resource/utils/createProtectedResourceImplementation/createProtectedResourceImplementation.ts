@@ -17,8 +17,8 @@ import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
-import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 
 export const createProtectedResoureImplementation = <TType extends ProtectedResourceModel>({
   beforeCreate,

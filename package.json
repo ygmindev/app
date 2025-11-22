@@ -1,8 +1,5 @@
 {
     "$schema": "https://json.schemastore.org/package.json",
-    "bin": {
-        "run": "./packages/tool-task-js/src/cli.js"
-    },
     "bundledDependencies": [
         "@app/native",
         "@app/web",
@@ -26,12 +23,40 @@
     "name": "app",
     "private": true,
     "scripts": {
-        "node-install": "pnpm install --shamefully-hoist && npm link && run bct && run bcl"
+        "node-install": "pnpm install && npm link && run bct && run bcl",
+        "cli": "cd packages/tool-task-js && tsx src/cli && cd ../..",
+        "dev": "cd packages/app-web-orchestrator-js && tsx src/index && cd ../..",
+        "server-dev": "cd packages/service-orchestrator-js && tsx src/index && cd ../.."
     },
     "type": "module",
     "version": "0.0.0",
     "workspaces": [
         "packages/*"
     ],
-    "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd"
+    "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd",
+    "devDependencies": {
+        "@eslint/js": "^9.39.1",
+        "@mikro-orm/core": "^6.6.0",
+        "@temporalio/activity": "^1.13.2",
+        "@temporalio/client": "^1.13.2",
+        "@temporalio/worker": "^1.13.2",
+        "@temporalio/workflow": "^1.13.2",
+        "@tool/task": "workspace:*",
+        "app-root-path": "^3.1.0",
+        "eslint": "^9.39.1",
+        "eslint-plugin-import": "^2.32.0",
+        "eslint-plugin-jsonc": "^2.21.0",
+        "eslint-plugin-prettier": "^5.5.4",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "eslint-plugin-sort-destructure-keys": "^2.0.0",
+        "eslint-plugin-sort-keys-fix": "^1.1.2",
+        "eslint-plugin-typescript-sort-keys": "^3.3.0",
+        "eslint-plugin-unused-imports": "^4.3.0",
+        "globals": "^16.5.0",
+        "lodash": "^4.17.21",
+        "tslib": "^2.8.1",
+        "tsx": "^4.20.6",
+        "typescript-eslint": "^8.46.4"
+    }
 }

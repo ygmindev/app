@@ -1,9 +1,10 @@
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
+import { ENTITY_SCHEMA_TYPE } from '@lib/backend/resource/utils/withEntity/withEntity.constants';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { SIGN_IN_INPUT } from '@lib/model/auth/SignIn/SignInInput/SignInInput.constants';
 import { SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
 
-@withEntity({ name: SIGN_IN_INPUT })
+@withEntity({ name: SIGN_IN_INPUT, schemaType: ENTITY_SCHEMA_TYPE.INPUT })
 export class SignInInput implements SignInInputModel {
   @withField({ isOptional: true })
   callingCode?: string;

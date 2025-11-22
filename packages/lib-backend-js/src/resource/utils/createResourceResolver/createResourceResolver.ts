@@ -10,13 +10,13 @@ import { withResourceOutput } from '@lib/backend/resource/utils/withResourceOutp
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { ResourceModel } from '@lib/model/resource/Resource/Resource.models';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { type PrototypeModel } from '@lib/shared/core/core.models';
 import { NotImplementedError } from '@lib/shared/core/errors/NotImplementedError/NotImplementedError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withCondition } from '@lib/shared/core/utils/withCondition/withCondition';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
-import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
 
 export const createResourceResolver = <TType extends ResourceModel, TRoot = undefined>({
   Resource,
@@ -26,14 +26,13 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
   authorizer,
   name,
 }: CreateResourceResolverParamsModel<TType, TRoot>): CreateResourceResolverModel<TType, TRoot> => {
-  const { create, createMany, get, getConnection, getMany, remove, update, updateMany } =
+  const { create, createMany, get, getMany, remove, update, updateMany } =
     ResourceImplementation.prototype;
 
   const createExists = create !== undefined;
   const createManyExists = createMany !== undefined;
   const getExists = get !== undefined;
   const getManyExists = getMany !== undefined;
-  const getConnectionExists = getConnection !== undefined;
   const updateExists = update !== undefined;
   const updateManyExists = updateMany !== undefined;
   const removeExists = remove !== undefined;
@@ -147,39 +146,6 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
         return this._implementation.get(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET);
-    }
-
-    @withCondition(
-      () => getConnectionExists,
-      () => [
-        withAuthorizer({
-          authorizer:
-            authorizer?.default ??
-            authorizer?.read ??
-            authorizer?.[RESOURCE_METHOD_TYPE.GET_CONNECTION],
-        }),
-        withResourceOutput({
-          Resource,
-          RootResource,
-          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET_CONNECTION],
-          method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
-          name,
-        }),
-      ],
-    )
-    async getConnection(
-      @withCondition(
-        () => getConnectionExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.GET_CONNECTION, name }),
-      )
-      input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot> = {},
-      @withContext()
-      context?: RequestContextModel,
-    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TType, TRoot>> {
-      if (this._implementation.getConnection) {
-        return this._implementation.getConnection(input, context);
-      }
-      throw new NotImplementedError(RESOURCE_METHOD_TYPE.GET_CONNECTION);
     }
 
     @withCondition(

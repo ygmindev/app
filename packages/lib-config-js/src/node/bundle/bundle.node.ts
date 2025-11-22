@@ -16,7 +16,7 @@ export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
 
       externals: [/node_modules/, '@eslint/js', 'globals', 'canvas'],
 
-      // watch: [fromPackages('lib-backend-js/src/**/*')],
+      transpileModules: ['type-graphql', 'graphql-scalars', 'reflect-metadata'],
     },
   ],
 });

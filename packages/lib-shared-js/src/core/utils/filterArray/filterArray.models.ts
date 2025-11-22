@@ -1,4 +1,4 @@
-import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
+import { type FilterModel } from '@lib/model/resource/Filter/Filter.models';
 
 export type FilterArrayParamsModel<TType extends unknown> = [
   values: Array<TType>,

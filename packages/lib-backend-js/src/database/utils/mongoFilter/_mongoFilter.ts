@@ -2,7 +2,7 @@ import {
   type _MongoFilterModel,
   type _MongoFilterParamsModel,
 } from '@lib/backend/database/utils/mongoFilter/_mongoFilter.models';
-import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
+import { FILTER_CONDITION } from '@lib/model/resource/Filter/Filter.constants';
 import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 import last from 'lodash/last';

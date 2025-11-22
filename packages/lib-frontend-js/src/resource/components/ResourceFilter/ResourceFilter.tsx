@@ -17,12 +17,12 @@ import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/T
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FILTER_CONDITION } from '@lib/model/resource/Filter/Filter.constants';
+import { type FilterModel } from '@lib/model/resource/Filter/Filter.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
-import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
-import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import isNil from 'lodash/isNil';
 import reduce from 'lodash/reduce';
 import { type ReactElement, useRef } from 'react';

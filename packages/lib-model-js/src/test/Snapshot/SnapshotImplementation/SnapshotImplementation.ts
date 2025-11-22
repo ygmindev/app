@@ -5,8 +5,8 @@ import screenConfig from '@lib/config/screen/screen';
 import { type SnapshotModel } from '@lib/model/test/Snapshot/Snapshot.models';
 import { type SnapshotImplementationModel } from '@lib/model/test/Snapshot/SnapshotImplementation/SnapshotImplementation.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
-import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 
 @withContainer()
 export class SnapshotImplementation implements SnapshotImplementationModel {

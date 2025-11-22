@@ -1,3 +1,4 @@
+import { type FilterModel } from '@lib/model/resource/Filter/Filter.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { trueTypeOf } from '@lib/shared/core/utils/trueTypeOf/trueTypeOf';
@@ -5,7 +6,6 @@ import {
   type ExpandFilterModel,
   type ExpandFilterParamsModel,
 } from '@lib/shared/resource/utils/expandFilter/expandFilter.models';
-import { type FilterModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 
 export const expandFilter = <TType extends unknown>(
   params?: ExpandFilterParamsModel<TType>,

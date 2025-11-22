@@ -1,11 +1,11 @@
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type TestResourceImplementationParamsModel } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation.models';
 import { config as databaseConfig } from '@lib/config/database/database.mongo';
+import { type UpdateModel } from '@lib/model/resource/Update/Update.models';
 import { type TestableResourceModel } from '@lib/model/test/TestableResource/TestableResource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
-import { type UpdateModel } from '@lib/shared/resource/utils/Update/Update.models';
 import { expectEqualsTestableResource } from '@lib/shared/test/utils/expectEqualsTestableResource/expectEqualsTestableResource';
 import every from 'lodash/every';
 
@@ -89,136 +89,6 @@ export const testResourceImplementation = <
       expect(result?.length).toStrictEqual(TAKE);
       expect(result?.map((v) => v.index)).toStrictEqual([SKIP + 1, SKIP + 2]);
     });
-
-    test('getConnection all result', async () => {
-      const FIRST = 2;
-      const GROUP = '2';
-      const { result } = await implementation.getConnection({
-        filter: [{ field: 'group', value: GROUP }],
-        pagination: { first: FIRST },
-        root,
-      });
-      expect(result?.edges.length).toStrictEqual(FIRST);
-      expect(
-        every(
-          result?.edges?.map((v) => v.node.group),
-          (v) => v === GROUP,
-        ),
-      ).toBeTruthy();
-      // TODO: test more scenarios
-      expect(result?.pageInfo.startCursor).toStrictEqual(result?.edges[0].cursor);
-      expect(result?.pageInfo.hasNextPage).toBeTruthy();
-      expect(result?.pageInfo.hasPreviousPage).toBeFalsy();
-    });
-
-    //   test('getConnection filtered result', async () => {
-    //     const { result: data } = await implementation.getMany({ filter: [] });
-    //     const input = {
-    //       filter: [{ field: 'string', value: 'string1' }],
-    //       pagination: {},
-    //     } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TestableEntityResourceModel>;
-    //     const { result } = await implementation.getConnection(input);
-    //     const expected = findAll(data, input.filter);
-    //     expect(result?.edges.length).toStrictEqual(expected.length);
-    //     expect(result?.edges[0].node._id).toStrictEqual(expected[0]._id);
-    //     expect(result?.edges[expected.length - 1].node._id).toStrictEqual(
-    //       expected[expected.length - 1]._id,
-    //     );
-    //     expect(result?.pageInfo.startCursor).toStrictEqual(result?.edges[0].cursor);
-    //     expect(result?.pageInfo.endCursor).toStrictEqual(
-    //       result?.edges[result?.edges.length - 1].cursor,
-    //     );
-    //     expect(result?.pageInfo.hasNextPage).toBeFalsy();
-    //     expect(result?.pageInfo.hasPreviousPage).toBeFalsy();
-    //   });
-
-    //   test('getConnection paged result first', async () => {
-    //     const { result: data = [] } = await implementation.getMany({ filter: [] });
-    //     const size = 2;
-    //     const input = {
-    //       filter: [],
-    //       pagination: { first: size },
-    //     } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TestableEntityResourceModel>;
-    //     const { result } = await implementation.getConnection(input);
-
-    //     expect(result?.edges.length).toStrictEqual(size);
-    //     expect(result?.edges[0].node._id).toStrictEqual(data[0]._id);
-    //     expect(result?.edges[size - 1].node._id).toStrictEqual(data[size - 1]._id);
-    //     expect(result?.pageInfo.startCursor).toStrictEqual(result?.edges[0].cursor);
-    //     expect(result?.pageInfo.endCursor).toStrictEqual(
-    //       result?.edges[result?.edges.length - 1].cursor,
-    //     );
-    //     expect(result?.pageInfo.hasNextPage).toBeTruthy();
-    //     expect(result?.pageInfo.hasPreviousPage).toBeFalsy();
-    //   });
-
-    //   test('getConnection cursored paged result first', async () => {
-    //     const { result: data = [] } = await implementation.getMany({ filter: [] });
-    //     const size = 2;
-    //     const { result: allResult } = await implementation.getConnection({
-    //       filter: [],
-    //       pagination: {},
-    //     });
-    //     const input = {
-    //       filter: [],
-    //       pagination: { after: allResult?.edges[size - 1].cursor, first: size },
-    //     } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TestableEntityResourceModel>;
-    //     const { result } = await implementation.getConnection(input);
-
-    //     expect(result?.edges.length).toStrictEqual(size);
-    //     expect(result?.edges[0].node._id).toStrictEqual(data[size]._id);
-    //     expect(result?.edges[size - 1].node._id).toStrictEqual(data[size + 1]._id);
-    //     expect(result?.pageInfo.startCursor).toStrictEqual(result?.edges[0].cursor);
-    //     expect(result?.pageInfo.endCursor).toStrictEqual(
-    //       result?.edges[result?.edges.length - 1].cursor,
-    //     );
-    //     expect(result?.pageInfo.hasNextPage).toBeTruthy();
-    //     expect(result?.pageInfo.hasPreviousPage).toBeFalsy();
-    //   });
-
-    //   test('getConnection paged result last', async () => {
-    //     const { result: data = [] } = await implementation.getMany({ filter: [] });
-    //     const size = 2;
-    //     const input = {
-    //       filter: [],
-    //       pagination: { last: size },
-    //     } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TestableEntityResourceModel>;
-    //     const { result } = await implementation.getConnection(input);
-
-    //     expect(result?.edges.length).toStrictEqual(size);
-    //     expect(result?.edges[0].node._id).toStrictEqual(data[data.length - 2]._id);
-    //     expect(result?.edges[1].node._id).toStrictEqual(data[data.length - 1]._id);
-    //     expect(result?.pageInfo.startCursor).toStrictEqual(result?.edges[0].cursor);
-    //     expect(result?.pageInfo.endCursor).toStrictEqual(
-    //       result?.edges[result?.edges.length - 1].cursor,
-    //     );
-    //     expect(result?.pageInfo.hasNextPage).toBeFalsy();
-    //     expect(result?.pageInfo.hasPreviousPage).toBeTruthy();
-    //   });
-
-    //   test('getConnection cursored paged result last', async () => {
-    //     const { result: data = [] } = await implementation.getMany({ filter: [] });
-    //     const size = 2;
-    //     const { result: allResult } = await implementation.getConnection({
-    //       filter: [],
-    //       pagination: {},
-    //     });
-    //     const input = {
-    //       filter: [],
-    //       pagination: { before: allResult?.edges[size].cursor, last: size },
-    //     } as InputModel<RESOURCE_METHOD_TYPE.GET_CONNECTION, TestableEntityResourceModel>;
-    //     const { result } = await implementation.getConnection(input);
-
-    //     expect(result?.edges.length).toStrictEqual(size);
-    //     expect(result?.edges[0].node._id).toStrictEqual(data[size - 2]._id);
-    //     expect(result?.edges[1].node._id).toStrictEqual(data[size - 1]._id);
-    //     expect(result?.pageInfo.startCursor).toStrictEqual(result?.edges[0].cursor);
-    //     expect(result?.pageInfo.endCursor).toStrictEqual(
-    //       result?.edges[result?.edges.length - 1].cursor,
-    //     );
-    //     expect(result?.pageInfo.hasNextPage).toBeFalsy();
-    //     expect(result?.pageInfo.hasPreviousPage).toBeFalsy();
-    //   });
 
     test('update by id', async () => {
       const NEW_VALUE = 'new';

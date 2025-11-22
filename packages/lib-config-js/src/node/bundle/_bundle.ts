@@ -329,6 +329,8 @@ export const _bundle = ({
         target: environment.variables.ENV_PLATFORM === PLATFORM.NODE ? 'node20' : undefined,
 
         tsconfig: tsconfigDir,
+
+        preserveSymlinks: false,
       },
 
       force: true,
@@ -337,23 +339,21 @@ export const _bundle = ({
     },
 
     plugins: filterNil([
-      ...filterNil([
-        provide && inject(provide),
+      provide && inject(provide),
 
-        environment.variables.ENV_PLATFORM === PLATFORM.WEB && vike(),
+      environment.variables.ENV_PLATFORM === PLATFORM.WEB && vike(),
 
-        babel &&
-          babelPlugin({
-            babelHelpers: 'runtime',
-            compact: environment.variables.NODE_ENV === 'production',
-            minified: environment.variables.NODE_ENV === 'production',
-            plugins: babel.plugins,
-            presets: babel.presets,
-            skipPreflightCheck: true,
-          } as RollupBabelInputPluginOptions),
+      babel &&
+        babelPlugin({
+          babelHelpers: 'runtime',
+          compact: environment.variables.NODE_ENV === 'production',
+          minified: environment.variables.NODE_ENV === 'production',
+          plugins: babel.plugins,
+          presets: babel.presets,
+          skipPreflightCheck: true,
+        } as RollupBabelInputPluginOptions),
 
-        commonjsDeps && cjsInterop({ dependencies: commonjsDeps }),
-      ]),
+      commonjsDeps && cjsInterop({ dependencies: commonjsDeps }),
 
       serverExtension && vitePluginIsomorphicImport(serverExtension),
 
@@ -398,8 +398,7 @@ export const _bundle = ({
 
       extensions,
 
-      // preserveSymlinks: true,
-      // TODO: enabling this causes https://vike.dev/client-runtime-duplicated
+      preserveSymlinks: false,
     },
 
     root: fromWorking(),

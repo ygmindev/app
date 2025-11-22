@@ -10,9 +10,9 @@ import { type InputRefModel } from '@lib/frontend/data/data.models';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { FILTER_CONDITION } from '@lib/model/resource/Filter/Filter.constants';
+import { type FilterConditionModel } from '@lib/model/resource/Filter/Filter.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { FILTER_CONDITION } from '@lib/shared/resource/utils/Filter/Filter.constants';
-import { type FilterConditionModel } from '@lib/shared/resource/utils/Filter/Filter.models';
 import { useImperativeHandle, useRef } from 'react';
 
 export const TextFilterInput: RLFCModel<TextFilterInputRefModel, TextFilterInputPropsModel> = ({

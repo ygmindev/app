@@ -1,13 +1,11 @@
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { useTaskResource } from '@lib/frontend/orchestrator/hooks/useTaskResource/useTaskResource';
 import { type OrchestratorPagePropsModel } from '@lib/frontend/orchestrator/pages/OrchestratorPage/OrchestratorPage.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 
 export const OrchestratorPage: LFCModel<OrchestratorPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { getConnection } = useTaskResource();
   return (
     <Wrapper>
       <Text>orchestrator</Text>

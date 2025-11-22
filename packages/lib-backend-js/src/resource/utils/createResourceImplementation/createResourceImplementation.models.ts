@@ -8,7 +8,7 @@ import {
   type ResourceImplementationDecoratorModel,
   type ResourceImplementationModel,
 } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
-import { type ResourceInputModel } from '@lib/shared/resource/utils/ResourceInput/ResourceInput.models';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 
 export type CreateResourceImplementationParamsModel<
   TType extends ResourceModel,

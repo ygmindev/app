@@ -3,16 +3,18 @@ import {
   type GetRepositoryParamsModel,
 } from '@lib/backend/database/utils/Database/_Database.models';
 import { type RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
-import { getConnection } from '@lib/backend/database/utils/getConnection/getConnection';
 import { mongoFilter } from '@lib/backend/database/utils/mongoFilter/mongoFilter';
+import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 import { _database } from '@lib/config/database/_database';
 import {
   type _DatabaseConfigModel,
   type DatabaseConfigModel,
 } from '@lib/config/database/database.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { type ClassModel, type PartialArrayModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
+import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
@@ -20,8 +22,13 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { type ResourceOutputModel } from '@lib/shared/resource/utils/ResourceOutput/ResourceOutput.models';
-import { type EntityName, type FilterQuery, ReferenceKind, wrap } from '@mikro-orm/core';
+import {
+  type EntityName,
+  type FilterQuery,
+  type FindOptions,
+  ReferenceKind,
+  wrap,
+} from '@mikro-orm/core';
 import {
   type EntityManager,
   type FindOneOptions,
@@ -39,7 +46,6 @@ import {
   type Filter,
   type MatchKeysAndValues,
   type MongoError,
-  ObjectId,
 } from 'mongodb';
 
 const normalize = <TType extends unknown>(
@@ -110,7 +116,7 @@ export class _Database implements _DatabaseModel {
             params
               ? mongoFilter<TType>(params).reduce(
                   (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
-                  {} as FilterQuery<NoInfer<NonNullable<TType>>>,
+                  {},
                 )
               : undefined,
           ),
@@ -177,17 +183,20 @@ export class _Database implements _DatabaseModel {
         return { result: normalize(result as Partial<TType>) ?? undefined };
       },
 
-      getConnection: async ({ filter, id, pagination } = {}) => {
-        const { result } = await getConnection({
-          count: await implementation.count({ filter, id }),
-          getMany: implementation.getMany,
-          input: { filter, id },
-          pagination,
-        });
-        return { result: result ?? undefined };
-      },
-
       getMany: async ({ filter, id, options } = {}) => {
+        const isCursor = options?.cursor;
+        const isOffset = options?.page;
+        if (isCursor && isOffset) {
+          throw new InvalidArgumentError('cursor and page cannot be used together');
+        }
+        const sortBy = options?.sortBy ?? [{ key: '_id' }];
+        if (isCursor) {
+          console.warn('@@@ options');
+          console.warn(options);
+          return {
+            result: { items: [] },
+          };
+        }
         const em = this.getEntityManager();
         const filterF = mongoFilter<TType>({ filter, id }).reduce(
           (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
@@ -196,9 +205,19 @@ export class _Database implements _DatabaseModel {
         const result = await em.find(
           name,
           filterF,
-          options && { limit: options.take, offset: options.skip },
+          options &&
+            ({ limit: options.limit, populate: options.populate } as FindOptions<
+              NonNullable<TType>,
+              string,
+              '*',
+              never
+            >),
         );
-        return { result: filterNil(result.map(normalize)) as PartialArrayModel<TType> };
+        return {
+          result: {
+            items: filterNil(result.map(normalize)) as PartialArrayModel<TType>,
+          },
+        };
       },
 
       name,

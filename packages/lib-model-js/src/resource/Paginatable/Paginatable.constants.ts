@@ -1,0 +1,1 @@
+export const PAGINATABLE_PAGE_SIZE_DEFAULT = 20;

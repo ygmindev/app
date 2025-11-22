@@ -8,9 +8,7 @@ import { type UseResourceMethodParamsModel } from '@lib/frontend/resource/hooks/
 import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
-import { merge } from '@lib/shared/core/utils/merge/merge';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { CONNECTION_PAGE_SIZE_DEFAULT } from '@lib/shared/resource/utils/Connection/Connection.constants';
 import uniqBy from 'lodash/uniqBy';
 
 export const toGraphqlParamsFields = <TType,>(
@@ -24,7 +22,6 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   afterCreate,
   afterCreateMany,
   afterGet,
-  afterGetConnection,
   afterGetMany,
   afterRemove,
   afterUpdate,
@@ -32,7 +29,6 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   beforeCreate,
   beforeCreateMany,
   beforeGet,
-  beforeGetConnection,
   beforeGetMany,
   beforeRemove,
   beforeUpdate,
@@ -88,7 +84,7 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   const { query: getMany } = useResourceMethod<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>({
     after: afterGetMany,
     before: beforeGetMany,
-    fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
+    fields: [{ result: [{ items: fieldsF }] }] as UseResourceMethodParamsModel<
       RESOURCE_METHOD_TYPE.GET_MANY,
       TType,
       TRoot
@@ -137,34 +133,12 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
     root,
   });
 
-  const { query: getConnection } = useResourceMethod<
-    RESOURCE_METHOD_TYPE.GET_CONNECTION,
-    TType,
-    TRoot
-  >({
-    after: afterGetConnection,
-    before: async ({ input }) => {
-      const inputF = merge([input, { pagination: { first: CONNECTION_PAGE_SIZE_DEFAULT } }]);
-      return beforeGetConnection?.({ input: inputF }) ?? inputF;
-    },
-    fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
-      RESOURCE_METHOD_TYPE.GET_CONNECTION,
-      TType,
-      TRoot
-    >['fields'],
-    method: RESOURCE_METHOD_TYPE.GET_CONNECTION,
-    name,
-    root,
-  });
-
   return {
     create,
 
     createMany,
 
     get,
-
-    getConnection,
 
     getMany,
 

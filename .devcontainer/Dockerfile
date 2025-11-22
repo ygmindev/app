@@ -26,7 +26,7 @@ COPY .npmrc \
 COPY patches ./patches    
 COPY packages ./packages
 
-RUN pnpm install --frozen-lockfile --shamefully-hoist && \
+RUN pnpm install --frozen-lockfile && \
     pnpm add @swc/core-linux-arm64-gnu && \
     pnpm rebuild @swc/core && \
     npm link && \

@@ -20,7 +20,7 @@ import {
   Property,
   type PropertyOptions,
 } from '@mikro-orm/mongodb';
-import GraphQLJSON from 'graphql-type-json';
+import { GraphQLJSONObject } from 'graphql-type-json';
 import { Field, Float } from 'type-graphql';
 
 export const _withField =
@@ -71,9 +71,14 @@ export const _withField =
             gqlType = () => Boolean;
             break;
           }
+          // case DATA_TYPE.JSON: {
+          //   ormType = 'string';
+          //   gqlType = () => String;
+          //   break;
+          // }
           case DATA_TYPE.JSON: {
             ormType = 'json';
-            gqlType = () => GraphQLJSON;
+            gqlType = () => GraphQLJSONObject;
             break;
           }
         }

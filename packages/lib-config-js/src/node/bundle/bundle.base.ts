@@ -1,6 +1,6 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import fileConfig from '@lib/config/file/file';
+import { config as fileConfig } from '@lib/config/file/file';
 import { BUILD_DIR, EXTENSIONS_BASE, TEMP_DIR } from '@lib/config/file/file.constants';
 import { config as libraryConfig } from '@lib/config/library/library';
 import { _bundle } from '@lib/config/node/bundle/_bundle';

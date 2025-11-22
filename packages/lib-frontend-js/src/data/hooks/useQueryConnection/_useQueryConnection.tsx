@@ -3,9 +3,9 @@ import {
   type _UseQueryConnectionParamsModel,
 } from '@lib/frontend/data/hooks/useQueryConnection/_useQueryConnection.models';
 import { USE_QUERY_CONNECTION_LIMIT_DEFAULT } from '@lib/frontend/data/hooks/useQueryConnection/useQueryConnection.constants';
+import { type ConnectionModel } from '@lib/model/resource/Connection/Connection.models';
+import { type PaginationModel } from '@lib/model/resource/Pagination/Pagination.models';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
-import { type ConnectionModel } from '@lib/shared/resource/utils/Connection/Connection.models';
-import { type PaginationModel } from '@lib/shared/resource/utils/Pagination/Pagination.models';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import isNumber from 'lodash/isNumber';
 
