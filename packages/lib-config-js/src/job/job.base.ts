@@ -1,11 +1,11 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { config as containerConfig } from '@lib/config/container/container.base';
+import { containerConfig } from '@lib/config/container/container.base';
 import { _job } from '@lib/config/job/_job';
 import { type _JobConfigModel } from '@lib/config/job/_job.models';
 import { type JobConfigModel } from '@lib/config/job/job.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 
-export const config = defineConfig<JobConfigModel, _JobConfigModel>({
+export const jobConfig = new Config<JobConfigModel, _JobConfigModel>({
   config: _job,
 
   params: () => {
@@ -17,5 +17,3 @@ export const config = defineConfig<JobConfigModel, _JobConfigModel>({
     };
   },
 });
-
-export default config;

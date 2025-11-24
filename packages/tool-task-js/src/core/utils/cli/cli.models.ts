@@ -13,4 +13,6 @@ export type CliModel = {
   initialize(): Promise<void>;
 
   register(name: string, params: TaskRegistryModel): void;
+
+  run(name?: string): Promise<void>;
 };

@@ -1,7 +1,7 @@
 import { type CountryConfigModel } from '@lib/config/country/country.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 
-export const config = defineConfig<CountryConfigModel>({
+export const countryConfig = new Config<CountryConfigModel>({
   params: () => ({
     supportedCountries: [
       'US',
@@ -37,38 +37,3 @@ export const config = defineConfig<CountryConfigModel>({
     ],
   }),
 });
-
-export default config;
-
-// {
-//   "US": "XXX-XXX-XXXX",
-//   "AR": "09XX XXXX-XXXX",
-//   "AU": "04XX XXX XXX",
-//   "BE": "04XX XX XX XX",
-//   "BR": "(0XX) 9XXXX-XXXX",
-//   "CA": "XXX-XXX-XXXX",
-//   "CN": "1XX XXXX XXXX",
-//   "ES": "6XX XXX XXX",
-//   "FR": "06 XX XX XX XX",
-//   "GB": "07XXX XXXXXX",
-//   "DE": "01XX XXXXXXXX",
-//   "ID": "08XX XXXX XXXX",
-//   "IE": "08X XXX XXXX",
-//   "IL": "05X-XXX-XXXX",
-//   "IN": "XXXXX-XXXXX",
-//   "IT": "3XX XXX XXXX",
-//   "JP": "090-XXXX-XXXX",
-//   "KR": "010-XXX-XXXX",
-//   "MX": "044 XX XXXX XXXX",
-//   "NZ": "02X XXX XXXX",
-//   "NO": "4XX XX XXX",
-//   "PL": "5XX XXX XXX",
-//   "RU": "8 9XX XXX XXXX",
-//   "SA": "05X XXX XXXX",
-//   "SE": "07X XXX XXXX",
-//   "SG": "8XXX XXXX",
-//   "SZ": "7X XX XXXX",
-//   "TH": "08X XXX XXXX",
-//   "TR": "05XX XXX XXXX",
-//   "TW": "09XX XXX XXX"
-// }

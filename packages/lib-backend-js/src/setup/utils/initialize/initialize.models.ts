@@ -2,7 +2,7 @@ import { type DatabaseModel } from '@lib/backend/database/utils/Database/Databas
 import { type DatabaseConfigModel } from '@lib/config/database/database.models';
 
 export type InitializeParamsModel = {
-  database?: DatabaseConfigModel;
+  database(): DatabaseConfigModel;
 };
 
 export type InitializeModel = {

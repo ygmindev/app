@@ -6,9 +6,9 @@ import {
   type _ParserConfigModel,
   type ParserConfigModel,
 } from '@lib/config/locale/parser/parser.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 
-export const config = defineConfig<ParserConfigModel, _ParserConfigModel>({
+export const parserConfig = new Config<ParserConfigModel, _ParserConfigModel>({
   config: _parser,
 
   params: () => ({
@@ -19,5 +19,3 @@ export const config = defineConfig<ParserConfigModel, _ParserConfigModel>({
     missingValue: 'TRANSLATION_MISSING',
   }),
 });
-
-export default config;

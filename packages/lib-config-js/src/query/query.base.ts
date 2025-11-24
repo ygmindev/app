@@ -1,8 +1,8 @@
 import { _query } from '@lib/config/query/_query';
 import { type _QueryConfigModel, type QueryConfigModel } from '@lib/config/query/query.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 
-export const config = defineConfig<QueryConfigModel, _QueryConfigModel>({
+export const queryConfig = new Config<QueryConfigModel, _QueryConfigModel>({
   config: _query,
 
   params: () => ({
@@ -11,5 +11,3 @@ export const config = defineConfig<QueryConfigModel, _QueryConfigModel>({
     cacheTimeDefault: 5e2, // 0.5 seconds
   }),
 });
-
-export default config;

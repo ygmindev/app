@@ -1,6 +1,6 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { config as taskConfig } from '@lib/config/task/task';
+import { taskConfig } from '@lib/config/task/task';
 import {
   type TasksBuildModel,
   type TasksBuildParamsModel,

@@ -202,7 +202,7 @@ export const _lint = ({
           allowDefaultProject: true,
           extraFileExtensions: ['.json'],
           project: './tsconfig.json',
-          projectService: true,
+          // projectService: true,
           tsconfigRootDir: __dirname,
         },
 

@@ -1,4 +1,4 @@
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
+import { bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import {
   type _NodeBuildModel,
   type _NodeBuildParamsModel,

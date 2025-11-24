@@ -1,7 +1,5 @@
-import themeConfigBase from '@lib/config/theme/theme.base';
+import { themeConfig as configBase } from '@lib/config/theme/theme.base';
 import { THEME_COLOR_TONES } from '@lib/config/theme/theme.constants';
-import { type ThemeConfigModel } from '@lib/config/theme/theme.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
 import { THEME_COLOR, THEME_COLOR_MORE, THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { palette } from '@lib/frontend/style/utils/palette/palette';
 import reduce from 'lodash/reduce';
@@ -15,44 +13,40 @@ const LIGHTNESS_THEME_CONTRAST = 0.2;
 const LIGHTNESS_THEME_MUTED = 0.3;
 const LIGHTNESS_SURFACE_MUTED = 0.9;
 
-export const config = defineConfig<ThemeConfigModel>({
-  ...themeConfigBase,
+let themeConfig = configBase;
 
-  overrides: () => [
-    {
-      color: {
-        border: COLOR_BORDER,
+themeConfig = themeConfig.extend(() => ({
+  color: {
+    border: COLOR_BORDER,
 
-        isDark: true,
+    isDark: true,
 
-        palette: {
-          [THEME_COLOR_MORE.SURFACE]: {
-            [THEME_ROLE.ACTIVE]: palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_ACTIVE }),
-            [THEME_ROLE.MAIN]: COLOR_SURFACE_BASE,
-            [THEME_ROLE.CONTRAST]: COLOR_SURFACE_CONTRAST,
-            [THEME_ROLE.MUTED]: palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_SURFACE_MUTED }),
-          },
-
-          ...reduce(
-            Object.values(THEME_COLOR),
-            (result, color) => {
-              const tone = THEME_COLOR_TONES[color];
-              return {
-                ...result,
-                [color]: {
-                  [THEME_ROLE.ACTIVE]: palette(tone, { lightness: LIGHTNESS_ACTIVE }),
-                  [THEME_ROLE.MAIN]: palette(tone, { lightness: LIGHTNESS_THEME_BASE }),
-                  [THEME_ROLE.CONTRAST]: palette(tone, { lightness: LIGHTNESS_THEME_CONTRAST }),
-                  [THEME_ROLE.MUTED]: palette(tone, { lightness: LIGHTNESS_THEME_MUTED }),
-                },
-              };
-            },
-            {} as Record<THEME_COLOR, Record<THEME_ROLE, string>>,
-          ),
-        },
+    palette: {
+      [THEME_COLOR_MORE.SURFACE]: {
+        [THEME_ROLE.ACTIVE]: palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_ACTIVE }),
+        [THEME_ROLE.MAIN]: COLOR_SURFACE_BASE,
+        [THEME_ROLE.CONTRAST]: COLOR_SURFACE_CONTRAST,
+        [THEME_ROLE.MUTED]: palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_SURFACE_MUTED }),
       },
-    } as ThemeConfigModel,
-  ],
-});
 
-export default config;
+      ...reduce(
+        Object.values(THEME_COLOR),
+        (result, color) => {
+          const tone = THEME_COLOR_TONES[color];
+          return {
+            ...result,
+            [color]: {
+              [THEME_ROLE.ACTIVE]: palette(tone, { lightness: LIGHTNESS_ACTIVE }),
+              [THEME_ROLE.MAIN]: palette(tone, { lightness: LIGHTNESS_THEME_BASE }),
+              [THEME_ROLE.CONTRAST]: palette(tone, { lightness: LIGHTNESS_THEME_CONTRAST }),
+              [THEME_ROLE.MUTED]: palette(tone, { lightness: LIGHTNESS_THEME_MUTED }),
+            },
+          };
+        },
+        {} as Record<THEME_COLOR, Record<THEME_ROLE, string>>,
+      ),
+    },
+  },
+}));
+
+export { themeConfig };

@@ -1,9 +1,9 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { type TaskConfigModel } from '@lib/config/task/task.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 
-export const config = defineConfig<TaskConfigModel>({
+export const taskConfig = new Config<TaskConfigModel>({
   params: () => ({
     outDir: fromWorking(BUILD_DIR),
 
@@ -22,5 +22,3 @@ export const config = defineConfig<TaskConfigModel>({
     workflowExtension: '.workflow.ts',
   }),
 });
-
-export default config;

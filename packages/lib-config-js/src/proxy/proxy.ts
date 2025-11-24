@@ -3,11 +3,11 @@ import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 import { _proxy } from '@lib/config/proxy/_proxy';
 import { PROXY_HANDLER } from '@lib/config/proxy/proxy.constants';
 import { type _ProxyConfigModel, type ProxyConfigModel } from '@lib/config/proxy/proxy.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 
-export const config = defineConfig<ProxyConfigModel, _ProxyConfigModel>({
+export const proxyConfig = new Config<ProxyConfigModel, _ProxyConfigModel>({
   config: _proxy,
 
   params: () => {
@@ -55,5 +55,3 @@ export const config = defineConfig<ProxyConfigModel, _ProxyConfigModel>({
     };
   },
 });
-
-export default config;

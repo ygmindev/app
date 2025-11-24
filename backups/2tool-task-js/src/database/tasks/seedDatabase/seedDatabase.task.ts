@@ -16,7 +16,7 @@ const seedDatabase: TaskParamsModel<SeedDatabaseModel> = {
     async () => {
       let cleanUp: (() => Promise<void>) | undefined;
       try {
-        ({ cleanUp } = await initialize({ database: databaseConfig.params() }));
+        ({ cleanUp } = await initialize({ database: () => databaseConfig.params() }));
         await seed();
       } finally {
         await cleanUp?.();

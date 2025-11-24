@@ -1,9 +1,4 @@
-import { config as configBase } from '@lib/config/graphql/graphql.base';
-import {
-  type _GraphqlConfigModel,
-  type GraphqlConfigModel,
-} from '@lib/config/graphql/graphql.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { graphqlConfig as configBase } from '@lib/config/graphql/graphql.base';
 import { UtilityResolver } from '@lib/model/admin/Utility/UtilityResolver/UtilityResolver';
 import { VendorResolver } from '@lib/model/admin/Vendor/VendorResolver/VendorResolver';
 import { AccessResolver } from '@lib/model/auth/Access/AccessResolver/AccessResolver';
@@ -26,37 +21,33 @@ import { LinkedUserResolver } from '@lib/model/user/LinkedUser/LinkedUserResolve
 import { UserResolver } from '@lib/model/user/User/UserResolver/UserResolver';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
-  ...configBase,
+let graphqlConfig = configBase;
 
-  overrides: () => [
-    {
-      resolvers: filterNil([
-        AccessResolver,
-        BankResolver,
-        CardResolver,
-        ChatResolver,
-        CurveResolver,
-        MessageResolver,
-        GroupResolver,
-        LinkedUserResolver,
-        OrderResolver,
-        OtpResolver,
-        PaymentMethodResolver,
-        PricingResolver,
-        ProductResolver,
-        RoleResolver,
-        SignInResolver,
-        SocketResolver,
-        UserResolver,
-        VendorResolver,
-        UtilityResolver,
-        ...(process.env.NODE_ENV !== 'production' ? [SnapshotResolver] : []),
-      ]),
+graphqlConfig = graphqlConfig.extend(() => ({
+  resolvers: filterNil([
+    AccessResolver,
+    BankResolver,
+    CardResolver,
+    ChatResolver,
+    CurveResolver,
+    MessageResolver,
+    GroupResolver,
+    LinkedUserResolver,
+    OrderResolver,
+    OtpResolver,
+    PaymentMethodResolver,
+    PricingResolver,
+    ProductResolver,
+    RoleResolver,
+    SignInResolver,
+    SocketResolver,
+    UserResolver,
+    VendorResolver,
+    UtilityResolver,
+    ...(process.env.NODE_ENV !== 'production' ? [SnapshotResolver] : []),
+  ]),
 
-      schemaFilename: 'main.gql',
-    },
-  ],
-});
+  schemaFilename: 'main.gql',
+}));
 
-export default config;
+export { graphqlConfig };

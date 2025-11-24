@@ -1,14 +1,13 @@
-import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { EXTENSIONS_BASE } from '@lib/config/file/file.constants';
 import { _lint } from '@lib/config/node/lint/_lint';
 import { ESLINT_CONFIG_FILENAME } from '@lib/config/node/lint/lint.constants';
 import { type _LintConfigModel, type LintConfigModel } from '@lib/config/node/lint/lint.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
 
 export const lintCommand = (fix?: boolean): string => {
-  const { configFilename, exclude, include } = config.params();
+  const { configFilename, exclude, include } = lintConfig.params();
   return `eslint --config ${fromRoot(configFilename)} ${
     fix ? '--fix' : ''
   } --no-error-on-unmatched-pattern ${exclude
@@ -16,7 +15,7 @@ export const lintCommand = (fix?: boolean): string => {
     .join(' ')} ${include.join(' ')}`;
 };
 
-export const config = defineConfig<LintConfigModel, _LintConfigModel>({
+export const lintConfig = new Config<LintConfigModel, _LintConfigModel>({
   config: _lint,
 
   params: () => ({
@@ -43,5 +42,3 @@ export const config = defineConfig<LintConfigModel, _LintConfigModel>({
     unusedIgnore: '^_',
   }),
 });
-
-export default config;

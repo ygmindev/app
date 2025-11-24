@@ -1,5 +1,5 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { config as fileConfig } from '@lib/config/file/file';
+import { fileConfig } from '@lib/config/file/file';
 import {
   type ImportFromEnvModel,
   type ImportFromEnvParamsModel,

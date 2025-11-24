@@ -1,12 +1,12 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
-import screenConfig from '@lib/config/screen/screen';
+import { screenConfig } from '@lib/config/screen/screen';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { type SnapshotModel } from '@lib/model/test/Snapshot/Snapshot.models';
 import { type SnapshotImplementationModel } from '@lib/model/test/Snapshot/SnapshotImplementation/SnapshotImplementation.models';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
-import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 
 @withContainer()
 export class SnapshotImplementation implements SnapshotImplementationModel {

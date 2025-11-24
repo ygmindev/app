@@ -3,7 +3,7 @@ import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
-import { config as taskConfig } from '@lib/config/task/task';
+import { taskConfig } from '@lib/config/task/task';
 import { Workflow } from '@lib/model/orchestrator/Workflow/Workflow';
 import { WORKFLOW_RESOURCE_NAME } from '@lib/model/orchestrator/Workflow/Workflow.constants';
 import { type WorkflowModel } from '@lib/model/orchestrator/Workflow/Workflow.models';

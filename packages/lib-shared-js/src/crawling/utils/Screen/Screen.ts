@@ -1,4 +1,4 @@
-import screenConfig from '@lib/config/screen/screen';
+import { screenConfig } from '@lib/config/screen/screen';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { _Screen } from '@lib/shared/crawling/utils/Screen/_Screen';
 import {

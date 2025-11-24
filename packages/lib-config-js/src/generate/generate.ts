@@ -1,9 +1,9 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { type GenerateConfigModel } from '@lib/config/generate/generate.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { jsPackage } from '@tool/task/generate/generators/jsPackage/jsPackage';
 
-export const config = defineConfig<GenerateConfigModel>({
+export const generateConfig = new Config<GenerateConfigModel>({
   params: () => ({
     generator: {
       'package-js': jsPackage,
@@ -12,5 +12,3 @@ export const config = defineConfig<GenerateConfigModel>({
     templateDir: fromPackages('tool-task-js/templates'),
   }),
 });
-
-export default config;

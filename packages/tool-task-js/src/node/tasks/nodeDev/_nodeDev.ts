@@ -1,5 +1,5 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
+import { bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
   type _NodeDevModel,
@@ -10,7 +10,9 @@ import { ViteNodeRunner } from 'vite-node/client';
 import { ViteNodeServer } from 'vite-node/server';
 import { installSourcemapsSupport } from 'vite-node/source-map';
 
-export const _nodeDev = async ({ pathname }: _NodeDevParamsModel): Promise<_NodeDevModel> => {
+export const _nodeDev = async ({
+  pathname = 'src/index.ts',
+}: _NodeDevParamsModel): Promise<_NodeDevModel> => {
   const config = bundleConfig.config();
   const server = await createServer({ ...config });
   const node = new ViteNodeServer(server);

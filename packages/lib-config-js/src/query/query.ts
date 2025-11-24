@@ -1,9 +1,7 @@
-import configBase from '@lib/config/query/query.base';
-import { type _QueryConfigModel, type QueryConfigModel } from '@lib/config/query/query.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { queryConfig as configBase } from '@lib/config/query/query.base';
 
-export const config = defineConfig<QueryConfigModel, _QueryConfigModel>({
-  ...configBase,
-});
+let queryConfig = configBase;
 
-export default config;
+queryConfig = queryConfig.extend(() => ({}));
+
+export { queryConfig };

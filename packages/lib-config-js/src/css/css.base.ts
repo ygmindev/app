@@ -1,5 +1,5 @@
 import { type CssConfigModel } from '@lib/config/css/css.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { ROOT } from '@lib/frontend/root/root.constants';
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import FontAwesome from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
@@ -7,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
 import MaterialCommunityIcons from 'react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf';
 import Octicons from 'react-native-vector-icons/Fonts/Octicons.ttf';
 
-export const config = defineConfig<CssConfigModel>({
+export const cssConfig = new Config<CssConfigModel>({
   params: () => ({
     stylesheet: (theme) => `
     @font-face {
@@ -79,5 +79,3 @@ export const config = defineConfig<CssConfigModel>({
   `,
   }),
 });
-
-export default config;

@@ -16,7 +16,7 @@ export type _ServerParamsModel = {
 
   host: string;
 
-  port: number;
+  port?: number;
 };
 
 export type _ServerModel = {

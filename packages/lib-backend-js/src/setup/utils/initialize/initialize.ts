@@ -7,7 +7,6 @@ import {
   type InitializeModel,
   type InitializeParamsModel,
 } from '@lib/backend/setup/utils/initialize/initialize.models';
-import { config as databaseConfig } from '@lib/config/database/database.mongo';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
@@ -15,13 +14,9 @@ import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 let result: InitializeModel;
 
-export const initialize = async ({
-  database,
-}: InitializeParamsModel = {}): Promise<InitializeModel> => {
-  const environment = new Environment();
-  await environment.initialize();
-
-  const databaseF = database ?? databaseConfig.params();
+export const initialize = async ({ database }: InitializeParamsModel): Promise<InitializeModel> => {
+  await new Environment().initialize();
+  const databaseF = database();
 
   const cleanUps: Array<() => Promise<void>> = [
     async () => Container.get(PubSub).close(),

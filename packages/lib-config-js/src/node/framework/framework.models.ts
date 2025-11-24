@@ -1,5 +1,6 @@
 import 'vike-react/Config';
 
+import { type DatabaseConfigModel } from '@lib/config/database/database.models';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { type RootContextModel, type RootContextPropsModel } from '@lib/frontend/root/root.models';
 import { type RouteModel } from '@lib/frontend/route/route.models';
@@ -38,6 +39,7 @@ export type FrameworkRenderParamsModel = RootContextPropsModel & {
   headers?: Record<string, string>;
   redirectTo?: string;
   routes?: Array<RouteModel>;
+  database(): DatabaseConfigModel;
   getStyleSheet?(): ReactElement;
 };
 

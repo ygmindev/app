@@ -1,24 +1,18 @@
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.frontend';
-import configBase from '@lib/config/node/test/test.base';
-import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { bundleConfig } from '@lib/config/node/bundle/bundle.frontend';
+import { testConfig as configBase } from '@lib/config/node/test/test.base';
 
-export const config = defineConfig<TestConfigModel, _TestConfigModel>({
-  ...configBase,
+let testConfig = configBase;
 
-  overrides: () => [
-    {
-      bundle: bundleConfig.params(),
+testConfig = testConfig.extend(() => ({
+  bundle: bundleConfig.params(),
 
-      mocks: [
-        // TODO: fix typing?
-        ['react-native-reanimated', () => jest.requireActual('react-native-reanimated/mock')] as [
-          string,
-          () => unknown,
-        ],
-      ],
-    },
+  mocks: [
+    // TODO: fix typing?
+    ['react-native-reanimated', () => jest.requireActual('react-native-reanimated/mock')] as [
+      string,
+      () => unknown,
+    ],
   ],
-});
+}));
 
-export default config;
+export { testConfig };

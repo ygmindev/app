@@ -1,25 +1,19 @@
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
-import { cookiesPlugin } from '@lib/backend/server/utils/Server/plugins/cookiesPlugin/cookiesPlugin';
 import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
 import { websocketPlugin } from '@lib/backend/server/utils/Server/plugins/websocketPlugin/websocketPlugin';
-import { config as configBase } from '@lib/config/node/server/server.base';
-import { type ServerConfigModel } from '@lib/config/node/server/server.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { serverConfig as configBase } from '@lib/config/node/server/server.base';
 import { Container } from '@lib/shared/core/utils/Container/Container';
+import toNumber from 'lodash/toNumber';
 
-export const config = defineConfig<ServerConfigModel>({
-  ...configBase,
+let serverConfig = configBase;
 
-  overrides: () => {
-    const environment = Container.get(Environment);
-    return [
-      {
-        plugins: [
-          [cookiesPlugin, { secret: environment.variables.SERVER_APP_SECRET }],
+serverConfig = serverConfig.extend(() => {
+  const environment = Container.get(Environment);
+  return {
+    plugins: [[websocketPlugin, {}]] as Array<[ServerPluginModel<unknown>, unknown]>,
 
-          [websocketPlugin, {}],
-        ] as Array<[ServerPluginModel<unknown>, unknown]>,
-      },
-    ];
-  },
+    port: toNumber(environment.variables.SERVER_APP_PORT),
+  };
 });
+
+export { serverConfig };

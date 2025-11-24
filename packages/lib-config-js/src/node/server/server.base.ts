@@ -1,15 +1,15 @@
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { cookiesPlugin } from '@lib/backend/server/utils/Server/plugins/cookiesPlugin/cookiesPlugin';
 import { corsPlugin } from '@lib/backend/server/utils/Server/plugins/corsPlugin/corsPlugin';
 import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
 import { PUBLIC_DIR } from '@lib/config/file/file.constants';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import toNumber from 'lodash/toNumber';
 
-export const config = defineConfig<ServerConfigModel>({
+export const serverConfig = new Config<ServerConfigModel>({
   params: () => {
     const environment = Container.get(Environment);
     return {
@@ -35,13 +35,11 @@ export const config = defineConfig<ServerConfigModel>({
             origins: ['*'],
           },
         ],
-      ] as Array<[ServerPluginModel<unknown>, unknown]>,
 
-      port: toNumber(environment.variables.SERVER_APP_PORT ?? ''),
+        [cookiesPlugin, { secret: environment.variables.SERVER_APP_SECRET }],
+      ] as Array<[ServerPluginModel<unknown>, unknown]>,
 
       publicDir: PUBLIC_DIR,
     };
   },
 });
-
-export default config;

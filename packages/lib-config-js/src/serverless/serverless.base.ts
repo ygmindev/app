@@ -4,21 +4,21 @@ import {
   SERVERLESS_RUNTIME,
 } from '@lib/backend/serverless/serverless.constants';
 import { BUILD_DIR, PRUNE_PATTERNS } from '@lib/config/file/file.constants';
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
-import { config as serverConfig } from '@lib/config/node/server/server.node';
+import { bundleConfig } from '@lib/config/node/bundle/bundle.node';
+import { serverConfig } from '@lib/config/node/server/server.node';
 import { _serverless } from '@lib/config/serverless/_serverless';
 import {
   type _ServerlessConfigModel,
   type ServerlessConfigModel,
 } from '@lib/config/serverless/serverless.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { setEnvironment } from '@lib/shared/environment/utils/setEnvironment/setEnvironment';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import toNumber from 'lodash/toNumber';
 
-export const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel>({
+export const serverlessConfig = new Config<ServerlessConfigModel, _ServerlessConfigModel>({
   config: _serverless,
 
   params: () => {
@@ -64,5 +64,3 @@ export const config = defineConfig<ServerlessConfigModel, _ServerlessConfigModel
     };
   },
 });
-
-export default config;

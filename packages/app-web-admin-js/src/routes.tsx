@@ -1,3 +1,3 @@
-import { config as routesConfig } from '@lib/config/routes/routes.admin';
+import { routesConfig } from '@lib/config/routes/routes';
 
 export const { routes } = routesConfig.params();

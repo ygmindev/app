@@ -4,10 +4,10 @@ import {
   type _TelemetryConfigModel,
   type TelemetryConfigModel,
 } from '@lib/config/telemetry/telemetry.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 
-export const config = defineConfig<TelemetryConfigModel, _TelemetryConfigModel>({
+export const telemetryConfig = new Config<TelemetryConfigModel, _TelemetryConfigModel>({
   config: _telemetry,
 
   params: () => {
@@ -22,5 +22,3 @@ export const config = defineConfig<TelemetryConfigModel, _TelemetryConfigModel>(
     };
   },
 });
-
-export default config;

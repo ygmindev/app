@@ -16,7 +16,7 @@ import {
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
 import { type LambdaResponseModel } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.models';
-import { config as graphqlConfig } from '@lib/config/graphql/graphql.main';
+import { graphqlConfig } from '@lib/config/graphql/graphql.main';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import {
@@ -73,7 +73,7 @@ export const _createLambdaHandler = <TType = Record<string, unknown>>({
       const schema = graphqlConfig.config();
       const server = new ApolloServer({
         allowBatchedHttpRequests: true,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+
         formatError: (e, originalError) => formatGraphqlError(e as GraphQLError),
         schema,
       });

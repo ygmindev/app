@@ -1,8 +1,8 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { type SchemaConfigModel } from '@lib/config/schema/schema.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 
-export const config = defineConfig<SchemaConfigModel>({
+export const schemaConfig = new Config<SchemaConfigModel>({
   params: () => ({
     modelExtension: '.models.ts',
 
@@ -11,5 +11,3 @@ export const config = defineConfig<SchemaConfigModel>({
     schemaFilename: 'schemas.json',
   }),
 });
-
-export default config;

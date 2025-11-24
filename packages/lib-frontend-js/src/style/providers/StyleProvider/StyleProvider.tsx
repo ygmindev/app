@@ -1,4 +1,4 @@
-import cssConfig from '@lib/config/css/css.global';
+import { cssConfig } from '@lib/config/css/css.base';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { GlobalStyle } from '@lib/frontend/style/components/GlobalStyle/GlobalStyle';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';

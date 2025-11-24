@@ -1,4 +1,4 @@
-import { config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.web';
+import { internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.web';
 import { type onBeforeClientModel } from '@lib/config/node/framework/framework.models';
 import { cookies } from '@lib/frontend/http/utils/cookies/cookies';
 import { merge } from '@lib/shared/core/utils/merge/merge';

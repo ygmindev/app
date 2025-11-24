@@ -1,12 +1,13 @@
 import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { config as taskConfig } from '@lib/config/task/task';
+import { taskConfig } from '@lib/config/task/task';
+import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { importInterop } from '@lib/shared/core/utils/importInterop/importInterop';
-import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 import { type CliModel, type TaskRegistryModel } from '@tool/task/core/utils/Cli/Cli.models';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
@@ -86,12 +87,15 @@ export class Cli implements CliModel {
       } catch {}
     }
 
+    const workingDir = fromWorking();
     const { app, environment, queue, workers, ...rest } = args;
+    app && process.chdir(fromPackages(app));
     const context: ExecutionContextModel = { app, environment, queue };
     if (workers) {
       await Promise.all(new Array(toNumber(workers)).fill(task(rest, context)));
     } else {
       await task(rest, context);
     }
+    app && process.chdir(workingDir);
   };
 }

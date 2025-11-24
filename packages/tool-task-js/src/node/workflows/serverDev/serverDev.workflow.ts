@@ -10,7 +10,7 @@ export const params: WorkflowParamsModel<ServerDevParamsModel, void, [StartParam
     {
       name: START,
       params: {
-        command: `run ${NODE_DEV} --pathname="packages/${context?.app}/src/index.ts"`,
+        command: `run ${NODE_DEV} --app=${context?.app}`,
       },
     },
   ],

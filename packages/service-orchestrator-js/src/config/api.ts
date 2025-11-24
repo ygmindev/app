@@ -1,13 +1,9 @@
-import { config as configBase } from '@lib/config/api/api';
-import { type ApiConfigModel } from '@lib/config/api/api.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { apiConfig as configBase } from '@lib/config/api/api';
 
-export const config = defineConfig<ApiConfigModel>({
-  ...configBase,
+let apiConfig = configBase;
 
-  overrides: () => [
-    {
-      routes: [],
-    },
-  ],
-});
+apiConfig = apiConfig.extend(() => ({
+  routes: [],
+}));
+
+export { apiConfig };

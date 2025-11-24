@@ -25,12 +25,6 @@
     "noEmitOnError": false,
     "outDir": "__build__/out-tsc",
     "paths": {
-      "css-in-js-utils/lib/*": [
-        "node_modules/css-in-js-utils/es/*"
-      ],
-      "inline-style-prefixer/lib/*": [
-        "node_modules/inline-style-prefixer/es/*"
-      ],
       "redux-persist/integration/*": [
         "node_modules/redux-persist/types/integration/*"
       ],

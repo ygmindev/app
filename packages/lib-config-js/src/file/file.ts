@@ -4,7 +4,7 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { EXTENSIONS_BASE, FILE_CONFIG, PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
 import { type FileConfigModel } from '@lib/config/file/file.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -12,7 +12,7 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { existsSync, readdirSync } from 'fs';
 import some from 'lodash/some';
 
-export const config = defineConfig<FileConfigModel>({
+export const fileConfig = new Config<FileConfigModel>({
   params: () => {
     const environment = Container.get(Environment);
     const isWeb = environment.variables.ENV_PLATFORM === 'web';
@@ -50,5 +50,3 @@ export const config = defineConfig<FileConfigModel>({
     };
   },
 });
-
-export default config;

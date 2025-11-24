@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# cd packages/tool-cli
-# pnpm link --global
+run tasksBuild
 
 run executeParallel --commands=\
 "run orchestratorRun",\
-"run tasksBuild",\
-"run workerRun"
-
-# "run clientRun --workflow=serverDev --app=app-web-orchestrator-js",\
-# "run clientRun --workflow=serverDev --app=service-orchestrator-js"
+"run workerRun --count=2",\
+"run clientRun --workflow=serverDev --app=app-web-orchestrator-js",\
+"run clientRun --workflow=serverDev --app=service-orchestrator-js"

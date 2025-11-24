@@ -4,7 +4,7 @@ import {
   type WithTestScreenModel,
   type WithTestScreenParamsModel,
 } from '@lib/backend/test/utils/withTestScreen/withTestScreen.models';
-import { config as databaseConfig } from '@lib/config/database/database.mongo';
+import { databaseConfig } from '@lib/config/database/database.mongo';
 import { APP_MENU_BUTTON_TEST_ID } from '@lib/frontend/app/containers/AppMenuButton/AppMenuButton.constants';
 import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 import { SIGN_IN } from '@lib/shared/auth/auth.constants';
@@ -19,7 +19,7 @@ export const withTestScreen = ({
   const screen = new TestScreen({ dirname: testName, rootUri: APP_URI });
 
   beforeAll(async () => {
-    ({ cleanUp } = await initialize({ database: databaseConfig.params() }));
+    ({ cleanUp } = await initialize({ database: () => databaseConfig.params() }));
 
     await screen.open('/');
 

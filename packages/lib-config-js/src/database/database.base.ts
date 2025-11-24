@@ -4,7 +4,7 @@ import {
   type _DatabaseConfigModel,
   type DatabaseConfigModel,
 } from '@lib/config/database/database.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { Utility } from '@lib/model/admin/Utility/Utility.entity';
 import { Vendor } from '@lib/model/admin/Vendor/Vendor.entity';
 import { Access } from '@lib/model/auth/Access/Access.entity';
@@ -19,7 +19,6 @@ import { Pricing } from '@lib/model/commerce/Pricing/Pricing.entity';
 import { Product } from '@lib/model/commerce/Product/Product.entity';
 import { Group } from '@lib/model/group/Group/Group.entity';
 import { Socket } from '@lib/model/http/Socket/Socket.entity';
-import { Workflow } from '@lib/model/orchestrator/Workflow/Workflow';
 import { Curve } from '@lib/model/quant/Curve/Curve.entity';
 import { Quote } from '@lib/model/quant/Quote/Quote';
 import { Rate } from '@lib/model/quant/Rate/Rate';
@@ -31,7 +30,7 @@ import { LinkedUser } from '@lib/model/user/LinkedUser/LinkedUser.entity';
 import { User } from '@lib/model/user/User/User.entity';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
+export const databaseConfig = new Config<DatabaseConfigModel, _DatabaseConfigModel>({
   config: _database,
 
   params: () => {
@@ -52,7 +51,6 @@ export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
         Product,
         Pricing,
         Quote,
-        Workflow,
         Rate,
         Role,
         Socket,
@@ -66,5 +64,3 @@ export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
     };
   },
 });
-
-export default config;

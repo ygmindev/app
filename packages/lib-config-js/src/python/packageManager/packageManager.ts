@@ -1,9 +1,9 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { type PackageManagerConfigModel } from '@lib/config/python/packageManager/packageManager.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 
-export const config = defineConfig<PackageManagerConfigModel>({
+export const packageManagerCofing = new Config<PackageManagerConfigModel>({
   params: () => ({
     // TODO: ignore fixed versions
     fixedVersions: {},
@@ -49,5 +49,3 @@ export const config = defineConfig<PackageManagerConfigModel>({
     },
   }),
 });
-
-export default config;

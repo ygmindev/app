@@ -1,13 +1,13 @@
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { type PublishConfigModel } from '@lib/config/node/publish/publish.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { slug } from '@lib/shared/core/utils/slug/slug';
 import { config as dotenvConfig } from 'dotenv';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 
-export const config = defineConfig<PublishConfigModel>({
+export const publishConfig = new Config<PublishConfigModel>({
   params: () => {
     const packageJson = JSON.parse(readFileSync(fromWorking('package.json')).toString()) as {
       name: string;
@@ -40,5 +40,3 @@ export const config = defineConfig<PublishConfigModel>({
     };
   },
 });
-
-export default config;

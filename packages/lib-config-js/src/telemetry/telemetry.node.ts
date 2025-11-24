@@ -1,12 +1,7 @@
-import configBase from '@lib/config/telemetry/telemetry.base';
-import {
-  type _TelemetryConfigModel,
-  type TelemetryConfigModel,
-} from '@lib/config/telemetry/telemetry.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { telemetryConfig as configBase } from '@lib/config/telemetry/telemetry.base';
 
-export const config = defineConfig<TelemetryConfigModel, _TelemetryConfigModel>({
-  ...configBase,
-});
+let telemetryConfig = configBase;
 
-export default config;
+telemetryConfig = telemetryConfig.extend(() => ({}));
+
+export { telemetryConfig };

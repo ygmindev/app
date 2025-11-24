@@ -1,17 +1,10 @@
-import {
-  type _DatabaseConfigModel,
-  type DatabaseConfigModel,
-} from '@lib/config/database/database.models';
-import { config as configBase } from '@lib/config/database/database.mongo';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { databaseConfig as configBase } from '@lib/config/database/database.mongo';
 import { Workflow } from '@lib/model/orchestrator/Workflow/Workflow';
 
-export const config = defineConfig<DatabaseConfigModel, _DatabaseConfigModel>({
-  ...configBase,
+let databaseConfig = configBase;
 
-  overrides: () => [
-    {
-      entities: [Workflow],
-    },
-  ],
-});
+databaseConfig = databaseConfig.extend(() => ({
+  entities: [Workflow],
+}));
+
+export { databaseConfig };

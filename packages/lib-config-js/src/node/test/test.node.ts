@@ -1,16 +1,10 @@
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.node';
-import { config as configBase } from '@lib/config/node/test/test.base';
-import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { bundleConfig } from '@lib/config/node/bundle/bundle.node';
+import { testConfig as configBase } from '@lib/config/node/test/test.base';
 
-export const config = defineConfig<TestConfigModel, _TestConfigModel>({
-  ...configBase,
+let testConfig = configBase;
 
-  overrides: () => [
-    {
-      bundle: bundleConfig.params(),
-    },
-  ],
-});
+testConfig = testConfig.extend(() => ({
+  bundle: bundleConfig.params(),
+}));
 
-export default config;
+export { testConfig };

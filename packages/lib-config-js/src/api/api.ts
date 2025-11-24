@@ -1,9 +1,9 @@
 import { ping } from '@lib/backend/http/handlers/ping/ping';
 import { type ApiConfigModel } from '@lib/config/api/api.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { HTTP_METHOD, PING } from '@lib/shared/http/http.constants';
 
-export const config = defineConfig<ApiConfigModel>({
+export const apiConfig = new Config<ApiConfigModel>({
   params: () =>
     ({
       prefix: 'api',
@@ -17,5 +17,3 @@ export const config = defineConfig<ApiConfigModel>({
       ],
     }) as ApiConfigModel,
 });
-
-export default config;

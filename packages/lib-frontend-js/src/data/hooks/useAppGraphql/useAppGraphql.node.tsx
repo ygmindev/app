@@ -1,4 +1,4 @@
-import { config } from '@lib/config/graphql/graphql.main';
+import { graphqlConfig } from '@lib/config/graphql/graphql.main';
 import { useAppGraphql as useAppGraphqlBase } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql.base';
 import {
   type UseAppGraphqlModel,
@@ -18,7 +18,7 @@ export const useAppGraphql = ({ ...params }: UseAppGraphqlParamsModel = {}): Use
       variables,
     }: GraphqlParamsModel<TParams>) =>
       graphql({
-        schema: config.config(),
+        schema: graphqlConfig.config(),
         source: query,
         variableValues: variables as Record<string, unknown>,
       }) as GraphqlHttpResponseModel<TResult, TName>,

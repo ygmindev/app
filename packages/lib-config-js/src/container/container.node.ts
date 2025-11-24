@@ -1,9 +1,7 @@
-import configBase from '@lib/config/container/container.base';
-import { type ContainerConfigModel } from '@lib/config/container/container.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { containerConfig as configBase } from '@lib/config/container/container.base';
 
-export const config = defineConfig<ContainerConfigModel>({
-  ...configBase,
-});
+let containerConfig = configBase;
 
-export default config;
+containerConfig = containerConfig.extend(() => ({}));
+
+export { containerConfig };

@@ -4,7 +4,7 @@ import minimist from 'minimist';
 export const _parseArgs = (): _ParseArgsModel => {
   const result = minimist(process.argv.slice(2));
   for (const [key, value] of Object.entries(result).slice(1)) {
-    let valueF: string | Array<string> = (value as string).trim();
+    let valueF: string | Array<string> = `${value}`.trim();
     valueF.includes(',') && (valueF = valueF.split(',').filter(Boolean));
     result[key] = valueF;
   }

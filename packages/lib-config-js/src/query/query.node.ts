@@ -1,11 +1,9 @@
-import configBase from '@lib/config/query/query.base';
-import { type _QueryConfigModel, type QueryConfigModel } from '@lib/config/query/query.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { queryConfig as configBase } from '@lib/config/query/query.base';
 
-export const config = defineConfig<QueryConfigModel, _QueryConfigModel>({
-  ...configBase,
+let queryConfig = configBase;
 
-  overrides: () => [{ cacheTimeDefault: Infinity }],
-});
+queryConfig = queryConfig.extend(() => ({
+  cacheTimeDefault: Infinity,
+}));
 
-export default config;
+export { queryConfig };

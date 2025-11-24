@@ -1,3 +1,4 @@
+import middie from '@fastify/middie';
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { type _WebPluginModel } from '@lib/backend/server/utils/Server/plugins/webPlugin/_webPlugin.models';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
@@ -13,9 +14,10 @@ export const _webPlugin: _WebPluginModel = async (server, { config, root, subdom
     (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
     !environment.variables.NODE_RUNTIME
   ) {
+    await server._app.register(middie);
     const { devMiddleware } = await createDevMiddleware({
       root,
-      viteConfig: { configFile: false, ..._bundle(config) },
+      viteConfig: { configFile: false, ..._bundle(config), root },
     });
     server._app.use((req, res, next) => {
       const host = req.headers.host ?? '';

@@ -1,4 +1,4 @@
-import countryConfig from '@lib/config/country/country';
+import { countryConfig } from '@lib/config/country/country';
 import { type _UseCountriesModel } from '@lib/frontend/locale/hooks/useCountries/_useCountries.models';
 import { pick } from '@lib/shared/core/utils/pick/pick';
 import { countries, type ICountry } from 'countries-list';

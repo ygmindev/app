@@ -6,10 +6,9 @@ import {
   type _FrameworkConfigModel,
   type FrameworkConfigModel,
 } from '@lib/config/node/framework/framework.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-// import { Container } from '@lib/shared/core/utils/Container/Container';
+import { Config } from '@lib/config/utils/Config/Config';
 
-export const config = defineConfig<FrameworkConfigModel, _FrameworkConfigModel>({
+export const frameworkConfig = new Config<FrameworkConfigModel, _FrameworkConfigModel>({
   config: _framework,
 
   params: () => {
@@ -34,5 +33,3 @@ export const config = defineConfig<FrameworkConfigModel, _FrameworkConfigModel>(
     };
   },
 });
-
-export default config;

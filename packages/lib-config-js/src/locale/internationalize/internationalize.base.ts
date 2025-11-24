@@ -8,10 +8,13 @@ import {
   type _InternationalizeConfigModel,
   type InternationalizeConfigModel,
 } from '@lib/config/locale/internationalize/internationalize.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { initReactI18next } from 'react-i18next';
 
-export const config = defineConfig<InternationalizeConfigModel, _InternationalizeConfigModel>({
+export const internationalizeConfig = new Config<
+  InternationalizeConfigModel,
+  _InternationalizeConfigModel
+>({
   config: _internationalize,
 
   params: () => ({
@@ -28,5 +31,3 @@ export const config = defineConfig<InternationalizeConfigModel, _Internationaliz
     timezoneDefault: TIMEZONE_DEFAULT,
   }),
 });
-
-export default config;

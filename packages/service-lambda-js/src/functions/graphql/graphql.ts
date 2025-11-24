@@ -4,7 +4,7 @@ import {
   LAMBDA_PLUGIN,
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
-import { config as databaseConfig } from '@lib/config/database/database.mongo';
+import { databaseConfig } from '@lib/config/database/database.mongo';
 import { initialize } from '@service/lambda/setup/utils/initialize/initialize';
 
 const context: ServerlessRequestContextModel = {};
@@ -15,7 +15,7 @@ export const main = createLambdaHandler({
   // onClose: cleanup,
   onInitialize: async () => {
     !context.database &&
-      (context.database = (await initialize({ database: databaseConfig.params() })).database);
+      (context.database = (await initialize({ database: () => databaseConfig.params() })).database);
   },
   plugins: [LAMBDA_PLUGIN.AUTHENTICATION],
   type: LAMBDA_TYPE.GRAPHQL,

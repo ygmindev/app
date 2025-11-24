@@ -1,6 +1,6 @@
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type TestResourceImplementationParamsModel } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation.models';
-import { config as databaseConfig } from '@lib/config/database/database.mongo';
+import { databaseConfig } from '@lib/config/database/database.mongo';
 import { type UpdateModel } from '@lib/model/resource/Update/Update.models';
 import { type TestableResourceModel } from '@lib/model/test/TestableResource/TestableResource.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
@@ -25,7 +25,7 @@ export const testResourceImplementation = <
     let second: PartialModel<TType>;
 
     beforeAll(async () => {
-      ({ cleanUp } = await initialize({ database: databaseConfig.params() }));
+      ({ cleanUp } = await initialize({ database: () => databaseConfig.params() }));
       implementation = getImplementation();
       root = (await getRoot?.()) as TRoot extends undefined ? never : string;
       const { result } = await implementation.getMany({ root });

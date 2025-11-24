@@ -7,12 +7,12 @@ import {
 } from '@lib/config/file/file.constants';
 import { _screen } from '@lib/config/screen/_screen';
 import { type _ScreenConfigModel, type ScreenConfigModel } from '@lib/config/screen/screen.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { RUNTIME } from '@lib/shared/environment/environment.constants';
 import { isCloud } from '@lib/shared/environment/utils/isCloud/isCloud';
 
-export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
+export const screenConfig = new Config<ScreenConfigModel, _ScreenConfigModel>({
   config: _screen,
 
   params: () => {
@@ -52,5 +52,3 @@ export const config = defineConfig<ScreenConfigModel, _ScreenConfigModel>({
     };
   },
 });
-
-export default config;

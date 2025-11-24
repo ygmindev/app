@@ -1,12 +1,12 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { BUILD_DIR, CACHE_DIR } from '@lib/config/file/file.constants';
-import { config as bundleConfig } from '@lib/config/node/bundle/bundle.base';
+import { bundleConfig } from '@lib/config/node/bundle/bundle.base';
 import { _test } from '@lib/config/node/test/_test';
 import { type _TestConfigModel, type TestConfigModel } from '@lib/config/node/test/test.models';
-import typescriptConfig from '@lib/config/node/typescript/typescript';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { typescriptConfig } from '@lib/config/node/typescript/typescript';
+import { Config } from '@lib/config/utils/Config/Config';
 
-export const config = defineConfig<TestConfigModel, _TestConfigModel>({
+export const testConfig = new Config<TestConfigModel, _TestConfigModel>({
   config: _test,
 
   params: () => ({
@@ -33,5 +33,3 @@ export const config = defineConfig<TestConfigModel, _TestConfigModel>({
     typescript: typescriptConfig.params(),
   }),
 });
-
-export default config;

@@ -14,13 +14,14 @@ import { Container } from '@lib/shared/core/utils/Container/Container';
 // import { lintCommand } from '@lib/config/node/lint/lint';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
+import { packageInfo } from '@lib/shared/core/utils/packageInfo/packageInfo';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import resolve from '@rollup/plugin-node-resolve';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import { type Plugin as EsbuildPlugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import esbuildPluginTsc from 'esbuild-plugin-tsc';
@@ -31,6 +32,7 @@ import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
+import uniq from 'lodash/uniq';
 import { sep } from 'path';
 import posix from 'path/posix';
 import { nodeExternals } from 'rollup-plugin-node-externals';
@@ -184,6 +186,20 @@ export const _bundle = ({
       : []),
   ];
 
+  const pkg = packageInfo();
+  const dependencies = Object.keys({
+    ...pkg.dependencies,
+    ...pkg.devDependencies,
+    ...pkg.peerDependencies,
+  });
+
+  const transpileModulesF = uniq([
+    ...(transpileModules?.filter((v) => some(dependencies, (d) => d.includes(v))) ?? []),
+    ...(transpilePatterns
+      ? dependencies.filter((d) => some(transpilePatterns, (re) => re.test(d)))
+      : []),
+  ]);
+
   const input = entryFiles
     ? isString(entryFiles)
       ? [entryFiles]
@@ -312,7 +328,7 @@ export const _bundle = ({
 
           esbuildDecorators({ force: true, tsconfig: tsconfigDir, tsx: true }),
 
-          transpileModules?.length && esbuildCommonjs(transpileModules),
+          transpileModulesF?.length && esbuildCommonjs(transpileModulesF),
 
           esbuildPluginExcludeVendorFromSourceMap(),
 
@@ -329,13 +345,11 @@ export const _bundle = ({
         target: environment.variables.ENV_PLATFORM === PLATFORM.NODE ? 'node20' : undefined,
 
         tsconfig: tsconfigDir,
-
-        preserveSymlinks: false,
       },
 
       force: true,
 
-      include: transpileModules,
+      include: transpileModulesF,
     },
 
     plugins: filterNil([
@@ -369,7 +383,8 @@ export const _bundle = ({
       ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<string>).includes(
         environment.variables.ENV_PLATFORM ?? '',
       )
-        ? [react({ plugins: [['swc-plugin-add-display-name', {}]], tsDecorators: true })]
+        ? // ? [react({ plugins: [['swc-plugin-add-display-name', {}]], tsDecorators: true })]
+          [react()]
         : []),
 
       viteCommonjs() as Plugin,

@@ -1,7 +1,7 @@
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
-const { displayName } = withTest({ defineConfig });
+const { displayName } = withTest({ Config });
 
 describe(displayName, () => {
   const CONFIG = ({
@@ -19,7 +19,7 @@ describe(displayName, () => {
   });
 
   test('works', async () => {
-    const { config } = defineConfig({
+    const { config } = new Config({
       config: CONFIG,
       params: () => ({ k1: 1, k2: 2 }),
     });
@@ -27,7 +27,7 @@ describe(displayName, () => {
   });
 
   test('overrides', async () => {
-    const { config } = defineConfig({
+    const { config } = new Config({
       config: CONFIG,
       overrides: () => [{ k1: 1, k2: 3 }],
       params: () => ({ k1: 1, k2: 2 }),

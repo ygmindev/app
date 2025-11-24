@@ -1,5 +1,5 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import fileConfig from '@lib/config/file/file';
+import { fileConfig } from '@lib/config/file/file';
 import { EXCLUDE_PATTERNS } from '@lib/config/file/file.constants';
 import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { DATETIME_FORMAT } from '@lib/shared/datetime/utils/DateTime/DateTime.constants';

@@ -1,11 +1,10 @@
-import 'setimmediate';
-import 'source-map-support/register';
+// import 'setimmediate';
+// import 'source-map-support/register';
 import 'raf/polyfill.js';
 
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
 import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
 import { type RequestContextModel } from '@lib/config/api/api.models';
-import { config as databaseConfig } from '@lib/config/database/database.mongo';
 import { type onBeforeServerModel } from '@lib/config/node/framework/framework.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { type FCModel } from '@lib/frontend/core/core.models';
@@ -39,9 +38,10 @@ export type AppRegistryModel = {
 };
 
 export const onBeforeServer: onBeforeServerModel = async (params) => {
-  const { context, headers, routes } = params;
+  const { context, database, headers, routes } = params;
 
-  await initializeBackend({ database: databaseConfig.params() });
+  await initializeBackend({ database });
+
   const queryClient = new QueryClient();
   const store = new Store<RootStateModel>({
     cookies: context?.[STATE]?.cookies,

@@ -1,4 +1,4 @@
-import { config as frameworkConfig } from '@lib/config/node/framework/framework';
+import { frameworkConfig } from '@lib/config/node/framework/framework';
 import { type onHeaderModel } from '@lib/config/node/framework/framework.models';
 
 export const onHeader: onHeaderModel = () => {

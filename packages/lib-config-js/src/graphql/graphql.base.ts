@@ -6,7 +6,7 @@ import {
   type _GraphqlConfigModel,
   type GraphqlConfigModel,
 } from '@lib/config/graphql/graphql.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { AccessResolver } from '@lib/model/auth/Access/AccessResolver/AccessResolver';
 import { OtpResolver } from '@lib/model/auth/Otp/OtpResolver/OtpResolver';
 import { RoleResolver } from '@lib/model/auth/Role/RoleResolver/RoleResolver';
@@ -19,7 +19,7 @@ import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 
-export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
+export const graphqlConfig = new Config<GraphqlConfigModel, _GraphqlConfigModel>({
   config: _graphql,
 
   params: () =>
@@ -42,5 +42,3 @@ export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
       ]),
     }) as GraphqlConfigModel,
 });
-
-export default config;

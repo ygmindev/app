@@ -4,7 +4,7 @@ import {
   type SsrHandlerParamsModel,
 } from '@lib/backend/web/utils/ssrHandler/ssrHandler.models';
 import { _internationalize } from '@lib/config/locale/internationalize/_internationalize';
-import { config as internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.node';
+import { internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.node';
 import { render } from '@lib/shared/web/utils/render/render';
 
 export const ssrHandler = (

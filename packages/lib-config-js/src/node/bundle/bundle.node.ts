@@ -1,24 +1,15 @@
-import configBase from '@lib/config/node/bundle/bundle.base';
-import {
-  type _BundleConfigModel,
-  type BundleConfigModel,
-} from '@lib/config/node/bundle/bundle.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { bundleConfig as configBase } from '@lib/config/node/bundle/bundle.base';
 
-export const config = defineConfig<BundleConfigModel, _BundleConfigModel>({
-  ...configBase,
+let bundleConfig = configBase;
 
-  overrides: () => [
-    {
-      aliases: [{ from: /^lodash\/([^.]+)$/, to: 'lodash/$1.js' }],
+bundleConfig = bundleConfig.extend(() => ({
+  aliases: [{ from: /^lodash\/([^.]+)$/, to: 'lodash/$1.js' }],
 
-      envPrefix: ['SERVER_'],
+  envPrefix: ['SERVER_'],
 
-      externals: [/node_modules/, '@eslint/js', 'globals', 'canvas'],
+  externals: [/node_modules/, '@eslint/js', 'globals', 'canvas'],
 
-      transpileModules: ['type-graphql', 'graphql-scalars', 'reflect-metadata'],
-    },
-  ],
-});
+  transpileModules: ['type-graphql', 'graphql-scalars', 'reflect-metadata'],
+}));
 
-export default config;
+export { bundleConfig };

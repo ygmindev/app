@@ -1,5 +1,5 @@
 export type _NodeDevParamsModel = {
-  pathname: string;
+  pathname?: string;
 };
 
 export type _NodeDevModel = void;

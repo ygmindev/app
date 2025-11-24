@@ -1,9 +1,9 @@
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { type LibraryConfigModel } from '@lib/config/library/library.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 
 // TODO: delete?
-export const config = defineConfig<LibraryConfigModel>({
+export const libraryConfig = new Config<LibraryConfigModel>({
   params: () => ({
     configDir: 'assets/library/components.json',
 
@@ -12,5 +12,3 @@ export const config = defineConfig<LibraryConfigModel>({
     patterns: [fromPackages('lib-frontend-js/src/**/components/**/+([A-Za-z]).tsx')],
   }),
 });
-
-export default config;

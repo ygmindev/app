@@ -1,19 +1,12 @@
-import { config as configBase } from '@lib/config/graphql/graphql.base';
-import {
-  type _GraphqlConfigModel,
-  type GraphqlConfigModel,
-} from '@lib/config/graphql/graphql.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-// import { WorkflowResolver } from '@lib/model/orchestrator/Workflow/WorkflowResolver/WorkflowResolver';
+import { graphqlConfig as configBase } from '@lib/config/graphql/graphql.base';
+import { WorkflowResolver } from '@lib/model/orchestrator/Workflow/WorkflowResolver/WorkflowResolver';
 
-export const config = defineConfig<GraphqlConfigModel, _GraphqlConfigModel>({
-  ...configBase,
+let graphqlConfig = configBase;
 
-  overrides: () => [
-    {
-      // resolvers: [WorkflowResolver],
+graphqlConfig = graphqlConfig.extend(() => ({
+  resolvers: [WorkflowResolver],
 
-      schemaFilename: 'orchestrator.gql',
-    },
-  ],
-});
+  schemaFilename: 'orchestrator.gql',
+}));
+
+export { graphqlConfig };

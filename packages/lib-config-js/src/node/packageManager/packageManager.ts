@@ -5,10 +5,10 @@ import {
   PACAKGE_INSTALL_MODE,
 } from '@lib/config/node/packageManager/packageManager.constants';
 import { type PackageManagerConfigModel } from '@lib/config/node/packageManager/packageManager.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
+import { Config } from '@lib/config/utils/Config/Config';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 
-export const config = defineConfig<PackageManagerConfigModel>({
+export const packageManagerConfig = new Config<PackageManagerConfigModel>({
   params: () => ({
     fixedVersions: {
       // https://github.com/software-mansion/react-native-reanimated/issues/8254
@@ -38,5 +38,3 @@ export const config = defineConfig<PackageManagerConfigModel>({
       `pnpm remove ${packages ? packages.map((v) => `--filter @${v.replace('-js', '').replace('-', '/')}`).join(' ') : ''} ${names}`,
   }),
 });
-
-export default config;
