@@ -8,6 +8,16 @@ bundleConfig = bundleConfig.extend(() => ({
   aliases: filterNil([
     { from: /^react-native$/, to: 'react-native-web' },
 
+    // {
+    //   from: '@react-native/assets',
+    //   to: 'react-native-web/dist/modules/AssetRegistry/index.js',
+    // },
+
+    // {
+    //   from: '@react-native/assets-registry/registry',
+    //   to: 'react-native-web/dist/modules/AssetRegistry/index.js',
+    // },
+
     process.env.NODE_ENV === 'test' && {
       from: '\\.(css|sass)$',
       to: 'identity-obj-proxy',
@@ -24,10 +34,11 @@ bundleConfig = bundleConfig.extend(() => ({
     ],
   },
 
+  dedupe: ['react-dom'],
+
   define: {
     global: 'globalThis',
   },
-
   server: {
     certificate: serverConfig.params().certificate,
 

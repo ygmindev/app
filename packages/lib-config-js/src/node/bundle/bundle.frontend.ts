@@ -11,15 +11,6 @@ bundleConfig = bundleConfig.extend(() => {
   const environment = Container.get(Environment);
 
   return {
-    // aliases: [
-    //   // { from: /^react$/, to: fromModules('react/cjs/react.development.js') },
-    //   // { from: /^react-dom$/, to: fromModules('react-dom/cjs/react-dom.development.js') },
-    //   {
-    //     from: 'react-native-is-edge-to-edge',
-    //     to: fromModules('react-native-is-edge-to-edge/dist/index.mjs'),
-    //   },
-    // ],
-
     aliases: [
       {
         from: 'react-native-is-edge-to-edge',
@@ -65,7 +56,8 @@ bundleConfig = bundleConfig.extend(() => {
       ],
     },
 
-    // commonjsDeps: ['inversify-react'],
+    dedupe: ['react'],
+
     define: {
       __DEV__: `${
         (environment.variables.NODE_ENV === 'development' ||
@@ -88,7 +80,6 @@ bundleConfig = bundleConfig.extend(() => {
         // '@uiw/react-markdown-preview',
         // '@uiw/react-md-editor',
         // 'countries-list',
-        // 'inline-style-prefixer',
         'moti',
         // 'react-use',
         // 'redux-persist',

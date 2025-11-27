@@ -1,4 +1,3 @@
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
@@ -10,20 +9,17 @@ import { ViteNodeRunner } from 'vite-node/client';
 import { ViteNodeServer } from 'vite-node/server';
 import { installSourcemapsSupport } from 'vite-node/source-map';
 
-export const _nodeDev = async ({
-  pathname = 'src/index.ts',
-}: _NodeDevParamsModel): Promise<_NodeDevModel> => {
+export const _nodeDev = async ({ pathname }: _NodeDevParamsModel): Promise<_NodeDevModel> => {
   const config = bundleConfig.config();
   const server = await createServer({ ...config });
   const node = new ViteNodeServer(server);
-  const entryFile = fromWorking(pathname);
 
   installSourcemapsSupport({ getSourceMap: (source) => node.getSourceMap(source) });
 
   server.watcher.on('change', async (file) => {
     logger.info(`file changed: ${file}`);
     try {
-      await runner.executeFile(entryFile);
+      await runner.executeFile(pathname);
     } catch (err) {
       logger.fail(err);
     }
@@ -41,7 +37,7 @@ export const _nodeDev = async ({
   });
 
   try {
-    await runner.executeFile(entryFile);
+    await runner.executeFile(pathname);
   } finally {
     await server.close();
   }

@@ -182,12 +182,6 @@
   "private": true,
   "type": "module",
   "version": "0.0.1",
-  "exports": {
-    "./*": {
-      "development": "./src/*",
-      "default": "./src/*"
-    }
-  },
   "devDependencies": {
     "@babel/parser": "^7.28.4",
     "@babel/plugin-proposal-class-properties": "^7.18.6",

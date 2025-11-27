@@ -18,8 +18,6 @@
     "@fastify/middie": "^9.0.3",
     "@fastify/static": "^8.2.0",
     "@fastify/websocket": "^11.2.0",
-    "@graphql-yoga/plugin-graphql-sse": "^3.15.2",
-    "@graphql-yoga/redis-event-target": "^3.0.3",
     "@lib/backend": "workspace:^",
     "@lib/model": "workspace:^",
     "@lib/shared": "workspace:^",
@@ -51,10 +49,6 @@
     "email-templates": "^12.0.3",
     "fastify": "^5.6.0",
     "firebase-admin": "^13.5.0",
-    "graphql": "^16.11.0",
-    "graphql-relay": "^0.10.2",
-    "graphql-ws": "^6.0.6",
-    "graphql-yoga": "^5.15.2",
     "http-errors": "^2.0.0",
     "i18next": "^25.5.2",
     "i18next-http-middleware": "^3.8.0",
@@ -72,14 +66,7 @@
     "stripe": "^18.5.0",
     "thenby": "^1.3.4",
     "twilio": "^5.9.0",
-    "type-graphql": "2.0.0-rc.2",
     "ws": "^8.18.3"
-  },
-  "exports": {
-    "./*": {
-      "development": "./src/*",
-      "default": "./src/*"
-    }
   },
   "devDependencies": {
     "pubsub-js": "^1.9.5"

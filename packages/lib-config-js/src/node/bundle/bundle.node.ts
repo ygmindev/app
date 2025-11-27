@@ -9,7 +9,7 @@ bundleConfig = bundleConfig.extend(() => ({
 
   externals: [/node_modules/, '@eslint/js', 'globals', 'canvas'],
 
-  transpileModules: ['type-graphql', 'graphql-scalars', 'reflect-metadata'],
+  transpilePatterns: [/graphql/],
 }));
 
 export { bundleConfig };

@@ -1,0 +1,13 @@
+diff --git a/lib/module/components/Screen.web.js b/lib/module/components/Screen.web.js
+index 37f4306f3bb8c6dce8f07fb354a6a51d0369c426..62873bcb67e7aa1781774072b926a2ea322f7a59 100644
+--- a/lib/module/components/Screen.web.js
++++ b/lib/module/components/Screen.web.js
+@@ -31,7 +31,7 @@ export class NativeScreen extends React.Component {
+         }]
+       }, rest));
+     }
+-    return /*#__PURE__*/React.createElement(View, rest);
++    return /*#__PURE__*/React.createElement(View, _extends({ style: [style] }, rest));
+   }
+ }
+ const Screen = Animated.createAnimatedComponent(NativeScreen);

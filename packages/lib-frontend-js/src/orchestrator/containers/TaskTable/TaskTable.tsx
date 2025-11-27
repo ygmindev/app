@@ -1,6 +1,6 @@
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { type TaskTablePropsModel } from '@lib/frontend/orchestrator/containers/TaskTable/TaskTable.models';
-import { useTaskResource } from '@lib/frontend/orchestrator/hooks/useTaskResource/useTaskResource';
+import { useWorkflowResource } from '@lib/frontend/orchestrator/hooks/useWorkflowResource/useWorkflowResource';
 import { TASK_RESOURCE_PARAMS } from '@lib/frontend/orchestrator/resources/Task/Task.constants';
 import { ResourceTable } from '@lib/frontend/resource/components/ResourceTable/ResourceTable';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -10,7 +10,7 @@ import {
 
 export const TaskTable: LFCModel<TaskTablePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const implementation = useTaskResource();
+  const implementation = useWorkflowResource();
   return (
     <ResourceTable<TaskModel>
       {...wrapperProps}

@@ -1,6 +1,5 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
-import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
@@ -135,6 +134,7 @@ export const _bundle = ({
   babel,
   buildDir,
   commonjsDeps,
+  dedupe,
   define,
   entryFiles,
   envFilename,
@@ -409,19 +409,30 @@ export const _bundle = ({
         ),
       ],
 
-      dedupe: ['react', 'react-dom'],
+      dedupe,
 
       extensions,
 
-      preserveSymlinks: false,
+      preserveSymlinks: true,
     },
 
     root: fromWorking(),
 
+    // server: {
+    //   fs: {
+    //     allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
+    //   },
+    // },
+
     server: {
       fs: {
-        allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
+        allow: [searchForWorkspaceRoot(fromRoot()), fromRoot('node_modules')],
       },
+      hmr: {
+        protocol: 'wss',
+      },
+      // host: '0.0.0.0',
+      // port: 8080,
     },
 
     ssr: { noExternal: transpiles },

@@ -24,6 +24,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   configFilename: string;
 
+  dedupe?: Array<string>;
+
   define?: Record<string, string>;
 
   entryFiles?: string | Array<string> | Record<string, string>;

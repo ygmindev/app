@@ -1,3 +1,4 @@
+import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { START } from '@tool/task/core/tasks/start/start.constants';
 import { type StartParamsModel } from '@tool/task/core/tasks/start/start.models';
 import { workflow } from '@tool/task/core/utils/workflow/workflow';
@@ -10,7 +11,7 @@ export const params: WorkflowParamsModel<ServerDevParamsModel, void, [StartParam
     {
       name: START,
       params: {
-        command: `run ${NODE_DEV} --app=${context?.app}`,
+        command: `run ${NODE_DEV} --app=${context?.app} --pathname=${fromPackages(context?.app, 'src/index.ts')}`,
       },
     },
   ],

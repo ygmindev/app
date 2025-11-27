@@ -15,6 +15,7 @@ import {
 import { createNavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { type ComponentType, type ReactElement } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export const navigationRef = createNavigationContainerRef();
 
@@ -34,6 +35,7 @@ const getRouteConfig = (
   config: LinkingOptions<EmptyObjectModel>['config'];
   element?: ReactElement;
 } => {
+  const Stack = createStackNavigator();
   const isLeaf = !route.routes;
   const result = {
     config: { path: route.pathname ?? '/' } as LinkingOptions<EmptyObjectModel>['config'],
@@ -42,7 +44,7 @@ const getRouteConfig = (
   if (isLeaf) {
     return result;
   } else {
-    const Stack = createStackNavigator();
+    // const Stack = createStackNavigator();
     const routesConfig = route.routes?.reduce(
       (r, v) => {
         const fullPathname = v.fullpath ?? v.pathname;
@@ -108,16 +110,16 @@ const getRouteConfig = (
 export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
   const { config, element } = getRouteConfig({ pathname: '/', routes }, value?.location);
   return (
-    <NavigationContainer
-      linking={
-        {
-          config: { screens: config?.screens },
+    <SafeAreaProvider>
+      <NavigationContainer
+        linking={{
+          config: { screens: config?.screens ?? {} },
           getPathFromState: (state) => getActivePathname(state as NavigationState),
           prefixes: process.env.ENV_PLATFORM === 'web' ? [APP_URI] : [],
-        } as LinkingOptions<object>
-      }
-      ref={navigationRef}>
-      {element}
-    </NavigationContainer>
+        }}
+        ref={navigationRef}>
+        {element}
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };

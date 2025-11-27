@@ -89,7 +89,7 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
     async count(
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
     ): Promise<number> {
-      return count(input);
+      return count ? count(input) : ((await getMany?.(input))?.result?.items.length ?? 0);
     }
 
     async create(

@@ -1,4 +1,5 @@
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { type ClassModel } from '@lib/shared/core/core.models';
 import {
   type RESOURCE_METHOD_TYPE,
@@ -8,7 +9,6 @@ import {
   type ResourceImplementationDecoratorModel,
   type ResourceImplementationModel,
 } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
-import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 
 export type CreateResourceImplementationParamsModel<
   TType extends ResourceModel,
@@ -17,7 +17,9 @@ export type CreateResourceImplementationParamsModel<
   Partial<ResourceImplementationModel<TType, TRoot>> &
   ResourceImplementationDecoratorModel<TType, TRoot> & {
     Resource: ClassModel<TType>;
-    count(input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>): Promise<number>;
+    count?(
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
+    ): Promise<number>;
   };
 
 export type CreateResourceImplementationModel<
@@ -25,6 +27,8 @@ export type CreateResourceImplementationModel<
   TRoot = undefined,
 > = ClassModel<
   ResourceImplementationModel<TType, TRoot> & {
-    count(input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>): Promise<number>;
+    count?(
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
+    ): Promise<number>;
   }
 >;
