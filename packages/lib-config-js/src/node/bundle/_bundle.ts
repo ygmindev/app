@@ -46,6 +46,7 @@ import {
 } from 'vite';
 // import { checker } from 'vite-plugin-checker';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): EsbuildPlugin => ({
   name: 'plugin:excludeVendorFromSourceMap',
@@ -150,6 +151,7 @@ export const _bundle = ({
   mainFields,
   outDir,
   outExtension,
+  platform,
   provide,
   publicPathname,
   rootDirs,
@@ -162,6 +164,8 @@ export const _bundle = ({
   watch,
 }: BundleConfigModel): _BundleConfigModel => {
   const environment = Container.get(Environment);
+  const platformF = platform ?? environment.variables.ENV_PLATFORM;
+  console.warn(`@@@@ platformF : ${platformF}`);
   const customLogger = createLogger();
   if (logSuppressPatterns) {
     const methods = ['warn', 'warnOnce', 'info', 'error'] satisfies Array<keyof Logger>;
@@ -244,7 +248,7 @@ export const _bundle = ({
         input,
 
         output:
-          environment.variables.ENV_PLATFORM === PLATFORM.NODE
+          platformF === PLATFORM.NODE
             ? {
                 chunkFileNames: '[name].js',
                 compact: environment.variables.NODE_ENV === 'production',
@@ -257,8 +261,7 @@ export const _bundle = ({
             : undefined,
 
         plugins: [
-          environment.variables.ENV_PLATFORM === PLATFORM.NODE &&
-            nodeExternals({ exclude: transpiles, include: externals }),
+          platformF === PLATFORM.NODE && nodeExternals({ exclude: transpiles, include: externals }),
 
           resolve({ extensions }),
         ],
@@ -310,7 +313,7 @@ export const _bundle = ({
 
         minify: environment.variables.NODE_ENV === 'production',
 
-        platform: environment.variables.ENV_PLATFORM === PLATFORM.NODE ? 'node' : undefined,
+        platform: platformF === PLATFORM.NODE ? 'node' : undefined,
 
         plugins: filterNil([
           {
@@ -342,7 +345,7 @@ export const _bundle = ({
 
         resolveExtensions: extensions,
 
-        target: environment.variables.ENV_PLATFORM === PLATFORM.NODE ? 'node20' : undefined,
+        target: platformF === PLATFORM.NODE ? 'node20' : undefined,
 
         tsconfig: tsconfigDir,
       },
@@ -355,7 +358,9 @@ export const _bundle = ({
     plugins: filterNil([
       provide && inject(provide),
 
-      environment.variables.ENV_PLATFORM === PLATFORM.WEB && vike(),
+      platformF === PLATFORM.WEB && vike(),
+
+      platformF === PLATFORM.NODE && nodePolyfills(),
 
       babel &&
         babelPlugin({
@@ -381,7 +386,7 @@ export const _bundle = ({
       // }),
 
       ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<string>).includes(
-        environment.variables.ENV_PLATFORM ?? '',
+        platformF ?? '',
       )
         ? // ? [react({ plugins: [['swc-plugin-add-display-name', {}]], tsDecorators: true })]
           [react()]
@@ -418,19 +423,17 @@ export const _bundle = ({
 
     root: fromWorking(),
 
-    // server: {
-    //   fs: {
-    //     allow: [searchForWorkspaceRoot(fromRoot()), fromModules()],
-    //   },
-    // },
-
     server: {
       fs: {
         allow: [searchForWorkspaceRoot(fromRoot()), fromRoot('node_modules')],
       },
-      hmr: {
-        protocol: 'wss',
-      },
+      hmr:
+        process.env.NODE_ENV === 'development'
+          ? platformF === PLATFORM.WEB
+            ? { protocol: 'wss' }
+            : { port: 24678 + 1 }
+          : undefined,
+      middlewareMode: platformF === PLATFORM.NODE,
       // host: '0.0.0.0',
       // port: 8080,
     },

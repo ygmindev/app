@@ -28,6 +28,7 @@ export type TableColumnModel<
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = WithIdModel<TKey> & {
   align?: FONT_ALIGN;
+  defaultValue?: TType[TKey];
   formatter?: DataFormatterModel<TType, TKey>;
   isArray?: boolean;
   isFilterDisabled?: boolean;

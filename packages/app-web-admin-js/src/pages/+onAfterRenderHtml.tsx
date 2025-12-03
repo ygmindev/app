@@ -4,7 +4,7 @@ import { ROUTE } from '@lib/shared/route/route.constants';
 import type { PageContextServer } from 'vike/types';
 import { useConfig } from 'vike-react/useConfig';
 
-import { routes } from '../routes';
+import { routes } from '../config/routes';
 
 export const onAfterRenderHtml = async (
   params: PageContextServer & FrameworkRenderParamsModel,

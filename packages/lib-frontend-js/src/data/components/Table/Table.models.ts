@@ -10,6 +10,7 @@ export type TablePropsModel<TType> = UseTableParamsModel<TType> & {
   isFullWidth?: boolean;
   isHeadless?: boolean;
   isRemovable?: boolean;
+  rowHeight?: number;
   select?: TABLE_SELECT_TYPE;
   validators?: FormValidatorsModel<TType>;
   onChange?(data?: Array<TType>): void;

@@ -1,24 +1,25 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { createResourceImplementation } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation';
-import { Job } from '@lib/model/orchestrator/Job/Job';
+import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { JOB_RESOURCE_NAME } from '@lib/model/orchestrator/Job/Job.constants';
+import { Job } from '@lib/model/orchestrator/Job/Job.entity';
 import { type JobModel } from '@lib/model/orchestrator/Job/Job.models';
 import { type JobImplementationModel } from '@lib/model/orchestrator/Job/JobImplementation/JobImplementation.models';
-
-const getMany: JobImplementationModel['getMany'] = async (input, context) => {
-  const values = [] as Array<unknown>;
-  return {
-    result: { items: [] },
-    // result: filterArray(values, input?.filter, input?.options?.skip, input?.options?.take),
-  };
-};
+import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
+import { getClient } from '@tool/task/orchestrator/utils/getClient/getClient';
 
 @withContainer()
 export class JobImplementation
-  extends createResourceImplementation<JobModel>({
+  extends createEntityResourceImplementation<JobModel>({
     Resource: Job,
-    count: async () => 100,
-    getMany,
+    beforeCreate: async (input, context) => {
+      if (input.input?.form) {
+        const client = await getClient();
+        const { context, params, workflow } = input.input.form;
+        if (!workflow) throw new InvalidArgumentError('Workflow is required');
+        await client.run(workflow, params, context);
+      }
+      return input.input;
+    },
     name: JOB_RESOURCE_NAME,
   })
   implements JobImplementationModel {}

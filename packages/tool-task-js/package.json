@@ -141,6 +141,7 @@
     "ts-json-schema-generator": "^2.4.0",
     "ts-morph": "^26.0.0",
     "type-fest": "4.41.0",
+    "vite-plugin-node-polyfills": "^0.24.0",
     "wait-on": "^8.0.4"
   },
   "devDependencies": {
@@ -165,8 +166,8 @@
     "@types/dockerode": "^3.3.43",
     "@types/ejs": "^3.1.5",
     "@types/email-templates": "^10.0.4",
-    "@types/eslint__js": "^9.14.0",
     "@types/eslint": "^9.6.1",
+    "@types/eslint__js": "^9.14.0",
     "@types/fs-extra": "^11.0.4",
     "@types/google-libphonenumber": "^7.4.30",
     "@types/gulp": "^4.0.17",
@@ -177,13 +178,13 @@
     "@types/lodash": "^4.17.20",
     "@types/minimist": "^1.2.5",
     "@types/pubsub-js": "^1.8.6",
+    "@types/react": "^19.1.12",
     "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^19.1.9",
     "@types/react-native-calendar-picker": "^8.0.0",
     "@types/react-native-typewriter": "^0.7.4",
     "@types/react-native-vector-icons": "^6.4.18",
     "@types/react-test-renderer": "^19.1.0",
-    "@types/react": "^19.1.12",
     "@types/rollup-plugin-peer-deps-external": "^2.2.5",
     "@types/tar-fs": "^2.0.4",
     "@types/ws": "^8.18.1",
@@ -197,10 +198,11 @@
     "ts-node": "10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.20.6",
-    "typescript-eslint": "^8.42.0",
     "typescript": "^5.9.2",
-    "vike-react": "^0.6.5",
+    "typescript-eslint": "^8.42.0",
     "vike": "0.4.242",
+    "vike-react": "^0.6.5",
+    "vite": "7.1.4",
     "vite-node": "^3.2.4",
     "vite-plugin-checker": "^0.10.3",
     "vite-plugin-circular-dependency": "^0.5.0",
@@ -210,10 +212,15 @@
     "vite-plugin-react-native-web": "^2.2.1",
     "vite-plugin-static-copy": "^3.1.2",
     "vite-tsconfig-paths": "^5.1.4",
-    "vite": "7.1.4",
     "vitest-react-native": "^0.1.5"
   },
   "private": true,
   "type": "module",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "exports": {
+    "./*": {
+      "development": "./src/*",
+      "default": "./src/*"
+    }
+  }
 }

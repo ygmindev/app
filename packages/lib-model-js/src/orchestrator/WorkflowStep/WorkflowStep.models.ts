@@ -4,6 +4,8 @@ import { type WORKFLOW_STEP_TYPE } from '@lib/model/orchestrator/WorkflowStep/Wo
 export type WorkflowStepModel<TParams = unknown, TResult = unknown> = {
   context?: ExecutionContextModel;
 
+  description?: string;
+
   name: string;
 
   params?: TParams;

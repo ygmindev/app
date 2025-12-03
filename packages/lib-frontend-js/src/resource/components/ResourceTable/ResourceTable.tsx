@@ -7,6 +7,8 @@ import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE, TEST_TEXT_SHORT } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
+import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
+import { type DataBoundaryRefModel } from '@lib/frontend/data/components/DataBoundary/DataBoundary.models';
 import { Table } from '@lib/frontend/data/components/Table/Table';
 import { type TableRefModel } from '@lib/frontend/data/components/Table/Table.models';
 import { TABLE_SELECT_TYPE } from '@lib/frontend/data/hooks/useTable/useTable.constants';
@@ -23,9 +25,10 @@ import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexSt
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type FilterModel } from '@lib/model/resource/Filter/Filter.models';
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
-import { type UpdateModel } from '@lib/model/resource/Update/Update.models';
+import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { type PartialModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { uid } from '@lib/shared/core/utils/uid/uid';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import cloneDeep from 'lodash/cloneDeep';
 import range from 'lodash/range';
 import { type ReactElement, useCallback, useRef, useState } from 'react';
@@ -42,28 +45,31 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
   const { t } = useTranslation();
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { create, remove, update } = implementation;
+  const { create, getMany, remove, update } = implementation;
   const [filters, filtersSet] =
     useState<Record<StringKeyModel<TType>, Array<FilterModel<TType>>>>();
+  const dataBoundaryRef =
+    useRef<DataBoundaryRefModel<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>>>(
+      null,
+    );
 
   const fieldsF: ResourceFieldsModel<TType> = [
     { id: '_id' as StringKeyModel<TType>, isHidden: true },
     ...(fields ?? []),
   ];
   const tableRef = useRef<TableRefModel<TType>>(null);
-  // const connectionBoundaryRef = useRef<ConnectionBoundaryRefModel<TType, TRoot>>(null);
   const [selectedRows, selectedRowsSet] = useState<Array<PartialModel<TType>>>([]);
 
   const handleUpsert = async (
-    { _id, ...data }: PartialModel<TType>,
+    { _id, ...data }: Partial<TType>,
     root?: TRoot extends undefined ? never : string,
     id?: string,
   ): Promise<void> => {
     id
       ? await update({
-          filter: [{ field: '_id', value: id }],
+          id,
           root,
-          update: data as UpdateModel<TType>,
+          update: data as Partial<TType>,
         })
       : await create({ form: data as Partial<TType>, root });
   };
@@ -125,13 +131,12 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
   };
 
   return (
-    <ConnectionBoundary
+    <DataBoundary
       {...wrapperProps}
       fallbackData={{
         result: {
-          edges: range(5).map((i) => ({
-            cursor: `${i}`,
-            node: getColumns().reduce(
+          items: range(5).map((i) =>
+            getColumns().reduce(
               (result, column) => ({
                 ...result,
                 [column.id]:
@@ -139,20 +144,14 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
               }),
               {} as PartialModel<TType>,
             ),
-          })),
-          pageInfo: {
-            endCursor: '',
-            hasNextPage: false,
-            hasPreviousPage: false,
-            startCursor: '',
-          },
+          ),
         },
       }}
       flex
       id={name}
       params={filters ? { filter: Object.values(filters).flat() } : undefined}
-      query={getConnection}
-      ref={connectionBoundaryRef}>
+      query={getMany}
+      ref={dataBoundaryRef}>
       {({ data, elementState, reset }) => {
         const columns = getColumns(reset);
         return (
@@ -191,7 +190,7 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
 
                 <Button
                   icon="refresh"
-                  onPress={async () => connectionBoundaryRef.current?.reset?.()}
+                  onPress={async () => dataBoundaryRef.current?.reset?.()}
                   size={THEME_SIZE.SMALL}
                   type={BUTTON_TYPE.TRANSPARENT}>
                   {t('core:refresh')}
@@ -257,7 +256,7 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
 
             <Table<PartialModel<TType>>
               columns={columns}
-              data={data?.result?.edges.map((edge) => edge.node)}
+              data={data?.result?.items}
               elementState={elementState}
               idField={'_id' as StringKeyModel<TType>}
               isRemovable
@@ -274,6 +273,6 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
           </Wrapper>
         );
       }}
-    </ConnectionBoundary>
+    </DataBoundary>
   );
 };

@@ -5,6 +5,7 @@ import {
 } from '@lib/config/node/bundle/bundle.constants';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { type TypescriptConfigModel } from '@lib/config/node/typescript/typescript.models';
+import { type PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type BuildOptions } from 'esbuild';
 import { type RollupOptions } from 'rollup';
 import { type UserConfig } from 'vite';
@@ -59,6 +60,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
   outExtension?: string;
 
   packager: string;
+
+  platform?: PLATFORM;
 
   provide?: Record<string, string>;
 

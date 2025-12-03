@@ -10,11 +10,15 @@ import { WorkflowStepModel } from '@lib/model/orchestrator/WorkflowStep/Workflow
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: WORKFLOW_STEP_RESOURCE_NAME })
-export class WorkflowStep<TParams = unknown, TResult = unknown>
-  implements WorkflowStepModel<TParams, TResult>
-{
+export class WorkflowStep<TParams = unknown, TResult = unknown> implements WorkflowStepModel<
+  TParams,
+  TResult
+> {
   @withField({ Resource: () => ExecutionContext, isOptional: true })
   context?: ExecutionContextModel;
+
+  @withField({ isOptional: true })
+  description?: string;
 
   @withField()
   name!: string;

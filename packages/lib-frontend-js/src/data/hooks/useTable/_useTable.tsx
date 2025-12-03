@@ -72,7 +72,7 @@ export const _useTable = <TType,>({
                     row: row.original,
                     value: value as TType[StringKeyModel<TType>],
                   })
-                : value) as TType[StringKeyModel<TType>],
+                : (value ?? column?.defaultValue)) as TType[StringKeyModel<TType>],
               width: cell.column.getSize() ?? undefined,
               ...(column
                 ? {

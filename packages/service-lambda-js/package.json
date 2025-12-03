@@ -70,5 +70,11 @@
   },
   "devDependencies": {
     "pubsub-js": "^1.9.5"
+  },
+  "exports": {
+    "./*": {
+      "development": "./src/*",
+      "default": "./src/*"
+    }
   }
 }

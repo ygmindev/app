@@ -53,5 +53,11 @@
   },
   "peerDependencies": {
     "graphql": "^16.11.0"
+  },
+  "exports": {
+    "./*": {
+      "development": "./src/*",
+      "default": "./src/*"
+    }
   }
 }

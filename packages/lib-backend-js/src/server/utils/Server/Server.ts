@@ -7,7 +7,6 @@ import {
 } from '@lib/backend/server/utils/Server/Server.models';
 import { type ApiEndpointModel } from '@lib/config/api/api.models';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
-import { handleHmr } from '@lib/shared/core/utils/handleHmr/handleHmr';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -24,18 +23,13 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
     this._onClose = onClose?.bind(this);
     this._onInitialize = onInitialize?.bind(this);
     this.register = this.register.bind(this);
-    this.handleClose = this.handleClose.bind(this);
     this.run = this.run.bind(this);
     this.close = this.close.bind(this);
   }
 
   async close(): Promise<void> {
-    await super.close();
-  }
-
-  async handleClose(): Promise<void> {
     await this._onClose?.();
-    await this.close();
+    await super.close();
   }
 
   async register<TType, TParams>(params: ApiEndpointModel<TType, TParams>): Promise<void> {
@@ -59,8 +53,7 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
   }
 
   async run(): Promise<void> {
-    await handleCleanup({ onCleanUp: this.handleClose });
-    handleHmr({ onChange: this.handleClose });
+    await handleCleanup({ onCleanUp: this.close });
 
     for (const [plugin, params] of this._plugins ?? []) {
       await plugin(this, params);
@@ -70,8 +63,6 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
       await this.register(route);
     }
 
-    await this._onInitialize?.();
     await super.run();
-    await new Promise(() => {});
   }
 }

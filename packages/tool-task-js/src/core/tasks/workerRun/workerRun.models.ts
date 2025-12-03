@@ -1,4 +1,4 @@
-import { type WorkerParamsModel } from '@tool/task/core/utils/Worker/Worker.models';
+import { type WorkerParamsModel } from '@tool/task/orchestrator/utils/Worker/Worker.models';
 
 export type WorkerRunParamsModel = Partial<WorkerParamsModel> & {
   count?: number;

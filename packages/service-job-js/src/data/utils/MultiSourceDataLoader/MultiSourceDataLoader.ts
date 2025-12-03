@@ -21,7 +21,7 @@ export class MultiSourceDataLoader<TType extends SourcedEntityResourceModel>
   async fetch(): Promise<PartialArrayModel<TType>> {
     return (
       await mapParallel(
-        this.params.loaders.map((v) => async () => {
+        this.params.loaders.map(async (v) => {
           try {
             return await v.fetchPostProcess();
           } catch (e) {

@@ -1,4 +1,3 @@
-import { fromModules } from '@lib/backend/file/utils/fromModules/fromModules';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fileConfig } from '@lib/config/file/file';
@@ -20,12 +19,12 @@ export const bundleConfig = new Config<BundleConfigModel, _BundleConfigModel>({
   params: () => {
     const { extensions, packageDirs } = fileConfig.params();
     return {
-      aliases: [
-        {
-          from: /^graphql/,
-          to: fromModules('graphql'),
-        },
-      ],
+      // aliases: [
+      //   {
+      //     from: /^graphql/,
+      //     to: fromModules('graphql'),
+      //   },
+      // ],
 
       babel: {
         plugins: [

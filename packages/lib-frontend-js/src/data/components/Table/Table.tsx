@@ -75,6 +75,7 @@ export const Table = <TType,>({
   onRemove,
   onSelect,
   ref,
+  rowHeight,
   select,
   sorting,
   validators,
@@ -295,7 +296,7 @@ export const Table = <TType,>({
             key={cell.id}
             width={cell.width || TABLE_CELL_WIDTH_DEFAULT}>
             <Wrapper
-              height={theme.shape.size[THEME_SIZE.SMALL]}
+              height={rowHeight ?? theme.shape.size[THEME_SIZE.SMALL]}
               justify={FLEX_JUSTIFY.CENTER}>
               {element ?? <AsyncText>{emptyCell}</AsyncText>}
             </Wrapper>
@@ -388,7 +389,7 @@ export const Table = <TType,>({
             <VirtualizedList
               isVerticalScrollable
               isVerticalScrollableVisible={false}
-              itemSize={theme.shape.size[THEME_SIZE.SMALL]}
+              itemSize={rowHeight ?? theme.shape.size[THEME_SIZE.SMALL]}
               items={rows}
               onScroll={(position) =>
                 handleScrollSync(position, 'y', TABLE_COMPONENT_ID_FROZEN_ROWS_LIST)

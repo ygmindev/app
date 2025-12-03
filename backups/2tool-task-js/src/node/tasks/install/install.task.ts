@@ -1,5 +1,4 @@
-import { children } from '@lib/backend/file/utils/children/children';
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { getPackages } from '@lib/backend/file/utils/getPackages/getPackages';
 import pacakgeManagerConfig from '@lib/config/node/packageManager/packageManager';
 import { PACAKGE_INSTALL_MODE } from '@lib/config/node/packageManager/packageManager.constants';
 import { type TaskParamsModel } from '@tool/task/core/core.models';
@@ -12,13 +11,7 @@ const install: TaskParamsModel<InstallParamsModel> = {
   options: async () => [
     {
       key: 'packages',
-      options: children(fromPackages(), { isDirectory: true }).reduce(
-        (result, { name }) =>
-          name.startsWith('app') || name.startsWith('service') || name.startsWith('tool')
-            ? [...result, name]
-            : result,
-        [] as Array<string>,
-      ),
+      options: getPackages(),
       type: PROMPT_TYPE.MULTIPLE,
     },
     { isOptional: true, key: 'install' },

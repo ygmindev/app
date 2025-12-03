@@ -1,5 +1,7 @@
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
+import { ExecutionContext } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext';
+import { ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 import {
   WORKFLOW_EXECUTION,
   WORKFLOW_RESOURCE_NAME,
@@ -11,7 +13,13 @@ import { Resource } from '@lib/model/resource/Resource/Resource';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withEntity({ name: WORKFLOW_RESOURCE_NAME })
-export class Workflow extends Resource() implements WorkflowModel {
+export class Workflow<TParams = unknown, TResult = unknown>
+  extends Resource()
+  implements WorkflowModel
+{
+  @withField({ Resource: () => ExecutionContext, isOptional: true })
+  context?: ExecutionContextModel;
+
   @withField({ isOptional: true })
   description?: string;
 
@@ -23,6 +31,9 @@ export class Workflow extends Resource() implements WorkflowModel {
 
   @withField()
   name!: string;
+
+  @withField({ isOptional: true, type: DATA_TYPE.JSON })
+  params?: TParams;
 
   @withField({ isOptional: true, type: DATA_TYPE.NUMBER })
   retry?: number;

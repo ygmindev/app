@@ -10,9 +10,9 @@ import {
 import isFunction from 'lodash/isFunction';
 
 export class TableCrawlDataLoader<
-    TType extends SourcedEntityResourceModel,
-    TResponse extends Record<string, unknown> = Record<string, unknown>,
-  >
+  TType extends SourcedEntityResourceModel,
+  TResponse extends Record<string, unknown> = Record<string, unknown>,
+>
   extends CrawlDataLoader<TType>
   implements TableCrawlDataLoaderModel<TType>
 {
@@ -47,7 +47,7 @@ export class TableCrawlDataLoader<
               ? await cellsSelector(screen, row)
               : await row.findAll(cellsSelector);
             nCols && (cells = cells.slice(0, nCols));
-            values.push(await mapParallel(cells?.map((h) => async () => h.text())));
+            values.push(await mapParallel(cells?.map((h) => h.text())));
           }
 
           const headers = values.slice(0, skipRows + 1);

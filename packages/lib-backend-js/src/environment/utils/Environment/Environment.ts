@@ -4,8 +4,9 @@ import {
   EnvironmentParamsModel,
 } from '@lib/backend/environment/utils/Environment/Environment.models';
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
-import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { EnvironmentConfigModel } from '@lib/config/environment/environment.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -24,6 +25,13 @@ export class Environment implements EnvironmentModel {
   }: EnvironmentParamsModel = {}): Promise<void> {
     const currentEnv = { ...process.env };
     const environmentF = environment ?? process.env.NODE_ENV;
+
+    let appVariables: Array<string> = [];
+    if (app) {
+      const pkg = await getAppRoot(app);
+      appVariables = [joinPaths([pkg, '.env']), joinPaths([pkg, '.env.public'])];
+    }
+
     const paths = filterNil([
       fromWorking('.env'),
       fromWorking('.env.public'),
@@ -31,7 +39,7 @@ export class Environment implements EnvironmentModel {
       ...(environmentF
         ? [fromWorking(`.env.${environmentF}`), fromConfig(`environment/.env.${environmentF}`)]
         : []),
-      ...(app ? [fromPackages(app, '.env'), fromPackages(app, '.env.public')] : []),
+      ...appVariables,
     ]);
     paths.forEach((path) => existsSync(path) && config({ override: true, path }));
     this.variables = process.env = { ...process.env, ...currentEnv, ...(overrrides ?? {}) };

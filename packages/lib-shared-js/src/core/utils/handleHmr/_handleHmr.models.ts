@@ -1,5 +1,6 @@
 export type _HandleHmrParamsModel = {
-  onChange(): Promise<void>;
+  onDispose?(): Promise<void>;
+  onInitialize?(): Promise<void>;
 };
 
 export type _HandleHmrModel = void;

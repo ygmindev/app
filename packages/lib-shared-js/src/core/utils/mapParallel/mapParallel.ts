@@ -8,5 +8,5 @@ export const mapParallel = async <TType extends unknown>(
 ): Promise<MapParallelModel<TType>> => {
   if (params.length === 0) return [];
   const [first, ...rest] = params;
-  return [await first(), ...(await mapParallel(rest))];
+  return [await first, ...(await mapParallel(rest))];
 };

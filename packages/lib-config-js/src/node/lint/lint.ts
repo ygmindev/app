@@ -6,15 +6,6 @@ import { type _LintConfigModel, type LintConfigModel } from '@lib/config/node/li
 import { Config } from '@lib/config/utils/Config/Config';
 import { cartesianString } from '@lib/shared/core/utils/cartesianString/cartesianString';
 
-export const lintCommand = (fix?: boolean): string => {
-  const { configFilename, exclude, include } = lintConfig.params();
-  return `eslint --config ${fromRoot(configFilename)} ${
-    fix ? '--fix' : ''
-  } --no-error-on-unmatched-pattern ${exclude
-    .map((pattern) => `--ignore-pattern "${pattern}"`)
-    .join(' ')} ${include.join(' ')}`;
-};
-
 export const lintConfig = new Config<LintConfigModel, _LintConfigModel>({
   config: _lint,
 
@@ -23,7 +14,7 @@ export const lintConfig = new Config<LintConfigModel, _LintConfigModel>({
 
     exclude: ['**/node_modules'],
 
-    include: cartesianString(['packages/*/src/**/*', 'packages/*/tests/**/*'], EXTENSIONS_BASE),
+    include: cartesianString(['src/**/*', 'tests/**/*'], EXTENSIONS_BASE),
 
     indentWidth: 2,
 
@@ -40,5 +31,14 @@ export const lintConfig = new Config<LintConfigModel, _LintConfigModel>({
     printWidth: 100,
 
     unusedIgnore: '^_',
+
+    lintCommand: (config, root, isFix = true) => {
+      const { configFilename, exclude, include } = config;
+      return `eslint --config ${fromRoot(configFilename)} ${
+        isFix ? '--fix' : ''
+      } --no-error-on-unmatched-pattern ${exclude
+        .map((pattern) => `--ignore-pattern "${pattern}"`)
+        .join(' ')} ${include.map((v) => `${root}/${v}`).join(' ')}`;
+      },
   }),
 });

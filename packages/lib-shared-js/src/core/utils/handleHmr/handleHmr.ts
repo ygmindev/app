@@ -4,7 +4,7 @@ import {
   type HandleHmrParamsModel,
 } from '@lib/shared/core/utils/handleHmr/handleHmr.models';
 
-export const handleHmr = ({ ...params }: HandleHmrParamsModel): HandleHmrModel => {
+export const handleHmr = async ({ ...params }: HandleHmrParamsModel): Promise<HandleHmrModel> => {
   (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
-    _handleHmr({ ...params });
+    (await _handleHmr({ ...params }));
 };

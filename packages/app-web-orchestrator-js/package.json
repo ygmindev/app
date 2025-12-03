@@ -81,5 +81,11 @@
     "graphql": "^16.12.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "exports": {
+    "./*": {
+      "development": "./src/*",
+      "default": "./src/*"
+    }
   }
 }

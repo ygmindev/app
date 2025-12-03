@@ -104,6 +104,7 @@ export const IONIC_ICONS = {
   speedometer: 'speedometer-outline',
   star: 'star',
   starBlank: 'star-outline',
+  stop: 'stop',
   switch: 'toggle-outline',
   thunder: 'flash-outline',
   time: 'time-outline',

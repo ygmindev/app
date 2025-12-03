@@ -22,6 +22,8 @@ export type LintConfigModel = {
   printWidth: number;
 
   unusedIgnore?: string;
+
+  lintCommand(params: LintConfigModel, root: string, isFix?: boolean): string;
 };
 
 export type _LintConfigModel = Linter.FlatConfig;

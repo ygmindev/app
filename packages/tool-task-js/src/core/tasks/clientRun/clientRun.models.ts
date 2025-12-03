@@ -1,4 +1,4 @@
-import { type ClientParamsModel } from '@tool/task/core/utils/Client/Client.models';
+import { type ClientParamsModel } from '@tool/task/orchestrator/utils/Client/Client.models';
 
 export type ClientRunParamsModel = Partial<ClientParamsModel> & {
   queue?: string;
