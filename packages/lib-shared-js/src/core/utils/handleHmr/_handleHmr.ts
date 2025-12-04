@@ -9,7 +9,6 @@ export const _handleHmr = async ({
   onInitialize,
 }: _HandleHmrParamsModel): Promise<_HandleHmrModel> => {
   if (!import.meta?.hot) {
-    logger.warn('HMR not supported');
     return;
   }
 
@@ -28,14 +27,12 @@ export const _handleHmr = async ({
         logger.error('HMR dispose failed', err);
       }
     })();
-
     return disposable;
   };
 
   const handleInitialize = async (): Promise<void> => {
     if (isInitialized) return;
     isInitialized = true;
-
     try {
       await onInitialize?.();
     } catch (err) {
@@ -45,11 +42,11 @@ export const _handleHmr = async ({
 
   void handleInitialize();
 
-  import.meta.hot.dispose(handleDispose);
+  // import.meta.hot.dispose(handleDispose);
   import.meta.hot.on('vite:beforeFullReload', handleDispose);
-  import.meta.hot.accept(() => {
-    isInitialized = false;
-    isDisposed = false;
-    return handleInitialize();
-  });
+  // import.meta.hot.accept(() => {
+  //   isInitialized = false;
+  //   isDisposed = false;
+  //   return handleInitialize();
+  // });
 };

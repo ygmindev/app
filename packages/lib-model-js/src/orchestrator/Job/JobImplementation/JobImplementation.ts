@@ -13,6 +13,7 @@ export class JobImplementation
     Resource: Job,
     beforeCreate: async (input, context) => {
       if (input.input?.form) {
+        console.warn('job??');
         const client = await getClient();
         const { context, params, workflow } = input.input.form;
         if (!workflow) throw new InvalidArgumentError('Workflow is required');

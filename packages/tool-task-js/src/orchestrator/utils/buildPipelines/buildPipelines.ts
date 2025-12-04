@@ -25,7 +25,7 @@ export const buildPipelines = <
       workflows: workflows.map((w) => {
         const [workflow, workflowParams, workflowContext] = isArray(w)
           ? [w[0], w[1] ?? {}, w[2] ?? {}]
-          : [w, {}, {}];
+          : [w, w.context ?? {}, w.params ?? {}];
         const workflowContextF: ExecutionContextModel = {
           ...(workflow.context ?? {}),
           ...workflowContext,

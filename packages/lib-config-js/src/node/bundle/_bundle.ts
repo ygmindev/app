@@ -31,6 +31,7 @@ import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
+import toNumber from 'lodash/toNumber';
 import uniq from 'lodash/uniq';
 import { sep } from 'path';
 import posix from 'path/posix';
@@ -46,7 +47,15 @@ import {
 } from 'vite';
 // import { checker } from 'vite-plugin-checker';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
+// import { nodePolyfills } from 'vite-plugin-node-polyfills';
+
+const vitePluginullReload: Plugin = {
+  handleHotUpdate({ server }) {
+    server.ws.send({ type: 'full-reload' });
+    return [];
+  },
+  name: 'full-reload',
+};
 
 export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): EsbuildPlugin => ({
   name: 'plugin:excludeVendorFromSourceMap',
@@ -165,7 +174,6 @@ export const _bundle = ({
 }: BundleConfigModel): _BundleConfigModel => {
   const environment = Container.get(Environment);
   const platformF = platform ?? environment.variables.ENV_PLATFORM;
-  console.warn(`@@@@ platformF : ${platformF}`);
   const customLogger = createLogger();
   if (logSuppressPatterns) {
     const methods = ['warn', 'warnOnce', 'info', 'error'] satisfies Array<keyof Logger>;
@@ -360,7 +368,9 @@ export const _bundle = ({
 
       platformF === PLATFORM.WEB && vike(),
 
-      platformF === PLATFORM.NODE && nodePolyfills(),
+      platformF === PLATFORM.NODE && process.env.NODE_ENV === 'development' && vitePluginullReload,
+
+      // platformF === PLATFORM.NODE && nodePolyfills(),
 
       babel &&
         babelPlugin({
@@ -431,7 +441,11 @@ export const _bundle = ({
         process.env.NODE_ENV === 'development'
           ? platformF === PLATFORM.WEB
             ? { protocol: 'wss' }
-            : { port: 24678 + 1 }
+            : {
+                port: environment.variables.SERVER_APP_DEBUG_PORT
+                  ? toNumber(environment.variables.SERVER_APP_DEBUG_PORT)
+                  : undefined,
+              }
           : undefined,
       middlewareMode: platformF === PLATFORM.NODE,
       // host: '0.0.0.0',

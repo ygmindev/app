@@ -10,6 +10,7 @@ import { type ApiConfigModel, type ApiEndpointModel } from '@lib/config/api/api.
 import { timeit } from '@lib/shared/core/utils/timeit/timeit';
 import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { type HTTP_METHOD, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { type I18nModel } from '@lib/shared/locale/locale.models';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { fastify, type FastifyInstance, type FastifyRequest, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
@@ -21,7 +22,7 @@ export class _Server implements _ServerModel {
   protected _api?: ApiConfigModel;
   _app: FastifyInstance;
   protected _host: string;
-  protected _port: number;
+  protected _port?: number;
 
   constructor({ api, certificate, host, port }: _ServerParamsModel) {
     this._host = host;
@@ -40,7 +41,11 @@ export class _Server implements _ServerModel {
   }
 
   async close(): Promise<void> {
-    this._app.server.listening && (await this._app.close());
+    if (this._app.server.listening) {
+      logger.progress('server closing...');
+      await this._app.close();
+      logger.success('server closed');
+    }
   }
 
   async register<TType, TParams>({
@@ -64,7 +69,7 @@ export class _Server implements _ServerModel {
             body: req.body as TParams,
             cookies: req.cookies as Record<string, string>,
             headers: req.headers as Record<string, string>,
-            i18n: req.i18n,
+            i18n: req.i18n as I18nModel,
             id: req.id,
             lang: req.language,
             method: req.method as HTTP_METHOD,
@@ -104,7 +109,9 @@ export class _Server implements _ServerModel {
 
   async run(): Promise<void> {
     try {
+      logger.progress('server running...');
       await this._app.listen({ port: toNumber(this._port) });
+      logger.success('server listening');
     } catch (e) {
       logger.error(e);
     }
