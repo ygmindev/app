@@ -13,7 +13,7 @@ await environment.initialize();
 
 const server = new Server(serverConfig.params());
 
-void handleHmr({
+await handleHmr({
   onDispose: async () => {
     await server.close();
   },
@@ -21,5 +21,3 @@ void handleHmr({
     await server.run();
   },
 });
-
-await server.run();

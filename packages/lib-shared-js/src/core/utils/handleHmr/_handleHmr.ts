@@ -4,7 +4,10 @@ import {
 } from '@lib/shared/core/utils/handleHmr/_handleHmr.models';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
-export const _handleHmr = ({ onDispose, onInitialize }: _HandleHmrParamsModel): _HandleHmrModel => {
+export const _handleHmr = async ({
+  onDispose,
+  onInitialize,
+}: _HandleHmrParamsModel): Promise<_HandleHmrModel> => {
   if (!import.meta?.hot) {
     logger.warn('HMR not supported');
     return;
