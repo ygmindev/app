@@ -1,5 +1,6 @@
 import { type FileConfigModel } from '@lib/config/file/file.models';
 import {
+  type APP_TYPE,
   type BUNDLE_FORMAT,
   type BUNDLE_SOURCEMAP,
 } from '@lib/config/node/bundle/bundle.constants';
@@ -12,6 +13,8 @@ import { type UserConfig } from 'vite';
 
 export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
   aliases?: Array<{ from: RegExp | string; to: string }>;
+
+  appType?: APP_TYPE;
 
   assetsDir?: string;
 

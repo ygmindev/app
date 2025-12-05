@@ -34,7 +34,7 @@ class Logger implements LoggerModel {
   error: LogModel = (...params) => this._logger.error(format(params));
   fail: LogModel = (...params) => this._logger.error(`❌ ${format(params)}`);
   info: LogModel = (...params) => this._logger.info(format(params));
-  progress: LogModel = (...params) => this._logger.info(`⏳ ${format(params)}...`);
+  progress: LogModel = (...params) => this._logger.info(`🕑 ${format(params)}...`);
   success: LogModel = (...params) => this._logger.info(`✅ ${format(params)}`);
   trace: LogModel = (...params) => this._logger.trace(format(params));
   warn: LogModel = (...params) => this._logger.warn(format(params));

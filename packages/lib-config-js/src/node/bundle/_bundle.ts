@@ -4,13 +4,16 @@ import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
-import { BUNDLE_FORMAT, BUNDLE_SOURCEMAP } from '@lib/config/node/bundle/bundle.constants';
+import {
+  APP_TYPE,
+  BUNDLE_FORMAT,
+  BUNDLE_SOURCEMAP,
+} from '@lib/config/node/bundle/bundle.constants';
 import {
   type _BundleConfigModel,
   type BundleConfigModel,
 } from '@lib/config/node/bundle/bundle.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-// import { lintCommand } from '@lib/config/node/lint/lint';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { packageInfo } from '@lib/shared/core/utils/packageInfo/packageInfo';
@@ -31,31 +34,14 @@ import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 import reduce from 'lodash/reduce';
 import some from 'lodash/some';
-import toNumber from 'lodash/toNumber';
 import uniq from 'lodash/uniq';
 import { sep } from 'path';
 import posix from 'path/posix';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vike from 'vike/plugin';
-import {
-  type Alias,
-  createLogger,
-  type Logger,
-  type Plugin,
-  searchForWorkspaceRoot,
-  type WatchOptions,
-} from 'vite';
-// import { checker } from 'vite-plugin-checker';
+import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 // import { nodePolyfills } from 'vite-plugin-node-polyfills';
-
-const vitePluginullReload: Plugin = {
-  handleHotUpdate({ server }) {
-    server.ws.send({ type: 'full-reload' });
-    return [];
-  },
-  name: 'full-reload',
-};
 
 export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): EsbuildPlugin => ({
   name: 'plugin:excludeVendorFromSourceMap',
@@ -140,6 +126,7 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
 
 export const _bundle = ({
   aliases,
+  appType = APP_TYPE.TOOL,
   assetsDir,
   babel,
   buildDir,
@@ -221,6 +208,8 @@ export const _bundle = ({
     : undefined;
 
   const config: _BundleConfigModel = {
+    appType: appType === APP_TYPE.TOOL ? undefined : 'custom',
+
     build: {
       assetsDir,
 
@@ -368,8 +357,6 @@ export const _bundle = ({
 
       platformF === PLATFORM.WEB && vike(),
 
-      platformF === PLATFORM.NODE && process.env.NODE_ENV === 'development' && vitePluginullReload,
-
       // platformF === PLATFORM.NODE && nodePolyfills(),
 
       babel &&
@@ -386,20 +373,10 @@ export const _bundle = ({
 
       serverExtension && vitePluginIsomorphicImport(serverExtension),
 
-      // checker({
-      //   eslint: {
-      //     lintCommand: lintCommand(),
-      //     useFlatConfig: true,
-      //   },
-      //   root: fromWorking(),
-      //   typescript: { tsconfigPath: tsconfigDir },
-      // }),
-
       ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<string>).includes(
         platformF ?? '',
       )
-        ? // ? [react({ plugins: [['swc-plugin-add-display-name', {}]], tsDecorators: true })]
-          [react()]
+        ? [react()]
         : []),
 
       viteCommonjs() as Plugin,
@@ -430,53 +407,29 @@ export const _bundle = ({
 
       preserveSymlinks: true,
     },
-
     root: fromWorking(),
 
     server: {
       fs: {
         allow: [searchForWorkspaceRoot(fromRoot()), fromRoot('node_modules')],
       },
-      hmr:
-        process.env.NODE_ENV === 'development'
-          ? platformF === PLATFORM.WEB
-            ? { protocol: 'wss' }
-            : {
-                port: environment.variables.SERVER_APP_DEBUG_PORT
-                  ? toNumber(environment.variables.SERVER_APP_DEBUG_PORT)
-                  : undefined,
-              }
-          : undefined,
-      middlewareMode: platformF === PLATFORM.NODE,
-      // host: '0.0.0.0',
-      // port: 8080,
+
+      hmr: false,
+
+      host: true,
+
+      middlewareMode: appType !== APP_TYPE.TOOL,
     },
 
     ssr: { noExternal: transpiles },
   };
 
-  if (server && config.server) {
-    config.server = {
-      ...config.server,
-
-      ...((environment.variables.NODE_ENV === 'development' ||
-        environment.variables.NODE_ENV === 'test') &&
-      !environment.variables.NODE_RUNTIME
-        ? {
-            host: true,
-            middlewareMode: true,
-            watch: (config.build?.watch as WatchOptions) ?? undefined,
-          }
-        : {}),
+  if (server?.certificate && config.server) {
+    const { certificateDir, privateKeyFilename, publicKeyFilename } = server.certificate;
+    config.server.https = {
+      cert: readFileSync(joinPaths([certificateDir, publicKeyFilename])),
+      key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
     };
-
-    if (server.certificate) {
-      const { certificateDir, privateKeyFilename, publicKeyFilename } = server.certificate;
-      config.server.https = {
-        cert: readFileSync(joinPaths([certificateDir, publicKeyFilename])),
-        key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
-      };
-    }
   }
 
   return config;
