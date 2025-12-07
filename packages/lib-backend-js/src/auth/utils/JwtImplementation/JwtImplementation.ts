@@ -10,7 +10,7 @@ export class JwtImplementation extends _JwtImplementation implements JwtImplemen
     const environment = Container.get(Environment);
     super({
       email: environment.variables.SERVER_FIREBASE_ADMIN_EMAIL,
-      projectId: environment.variables.SERVER_FIREBASE_ADMIN_PROJECT_ID,
+      projectId: environment.variables.APP_FIREBASE_PROJECT_ID,
       secret: environment.variables.SERVER_FIREBASE_ADMIN_SECRET,
     });
   }

@@ -16,9 +16,9 @@ export const telemetryConfig = new Config<TelemetryConfigModel, _TelemetryConfig
       // batchSize: 512,
       // queueSize: 2048,
       batchSize: 5,
-      name: environment.variables.APP_TRACKING_NAME ?? '',
+      name: environment.variables.APP_TELEMETRY_NAME ?? '',
       queueSize: 5,
-      source: environment.variables.APP_UPTRACE_SOURCE ?? '',
+      source: environment.variables.APP_UPTRACE_DSN ?? '',
     };
   },
 });

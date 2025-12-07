@@ -1,7 +1,7 @@
 import { CURVE_TENORS } from '@lib/model/quant/Curve/Curve.constants';
 import { type CurveModel } from '@lib/model/quant/Curve/Curve.models';
 import { CurveImplementation } from '@lib/model/quant/Curve/CurveImplementation/CurveImplementation';
-import { type PartialArrayModel, type StringKeyModel } from '@lib/shared/core/core.models';
+import { type PartialArrayModel } from '@lib/shared/core/core.models';
 import { SELECTOR_TYPE } from '@lib/shared/crawling/utils/Screen/Screen.constants';
 import { DATE_UNIT } from '@lib/shared/datetime/datetime.constants';
 import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
@@ -59,50 +59,50 @@ export const treasuryRateLoader: TreasuryRateLoaderModel = new MultiSourceDataLo
       uri: 'https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xmlview',
     }),
 
-    new ApiDataLoader<
-      CurveModel,
-      {
-        results: Array<{
-          date: string;
-          yield_10_year?: number;
-          yield_1_month?: number;
-          yield_1_year?: number;
-          yield_2_year?: number;
-          yield_30_year?: number;
-          yield_3_month?: number;
-          yield_3_year?: number;
-          yield_5_year?: number;
-        }>;
-        status: string;
-      }
-    >({
-      params: {
-        apiKey: process.env.SERVER_POLYGON_API_KEY,
-        limit: 1,
-        sort: 'date.desc',
-      },
-      transformer: async (response) => {
-        return response.results.map((v) =>
-          CURVE_TENORS.reduce(
-            (result, { unit, value }) => {
-              const responseUnit =
-                unit === DATE_UNIT.MONTH ? 'month' : unit === DATE_UNIT.YEAR ? 'year' : null;
-              if (responseUnit) {
-                const vF = v[`yield_${value}_${responseUnit}` as StringKeyModel<typeof v>];
-                const key = `value_${value}${unit}`;
-                return isNil(vF) ? result : { ...result, [key]: vF };
-              }
-              return result;
-            },
-            {
-              date: new DateTime(v.date, { format: 'yyyy-MM-dd' }),
-              name: TREASURY_RATE,
-            } as CurveModel,
-          ),
-        );
-      },
-      uri: 'https://api.polygon.io/fed/v1/treasury-yields',
-    }),
+    // new ApiDataLoader<
+    //   CurveModel,
+    //   {
+    //     results: Array<{
+    //       date: string;
+    //       yield_10_year?: number;
+    //       yield_1_month?: number;
+    //       yield_1_year?: number;
+    //       yield_2_year?: number;
+    //       yield_30_year?: number;
+    //       yield_3_month?: number;
+    //       yield_3_year?: number;
+    //       yield_5_year?: number;
+    //     }>;
+    //     status: string;
+    //   }
+    // >({
+    //   params: {
+    //     apiKey: process.env.SERVER_POLYGON_API_KEY,
+    //     limit: 1,
+    //     sort: 'date.desc',
+    //   },
+    //   transformer: async (response) => {
+    //     return response.results.map((v) =>
+    //       CURVE_TENORS.reduce(
+    //         (result, { unit, value }) => {
+    //           const responseUnit =
+    //             unit === DATE_UNIT.MONTH ? 'month' : unit === DATE_UNIT.YEAR ? 'year' : null;
+    //           if (responseUnit) {
+    //             const vF = v[`yield_${value}_${responseUnit}` as StringKeyModel<typeof v>];
+    //             const key = `value_${value}${unit}`;
+    //             return isNil(vF) ? result : { ...result, [key]: vF };
+    //           }
+    //           return result;
+    //         },
+    //         {
+    //           date: new DateTime(v.date, { format: 'yyyy-MM-dd' }),
+    //           name: TREASURY_RATE,
+    //         } as CurveModel,
+    //       ),
+    //     );
+    //   },
+    //   uri: 'https://api.polygon.io/fed/v1/treasury-yields',
+    // }),
 
     new TableCrawlDataLoader<CurveModel>({
       lastUpdatedSelector: (screen) => screen.find({ type: SELECTOR_TYPE.CLASS, value: 'dates' }),

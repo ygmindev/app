@@ -54,7 +54,7 @@ export const serverlessConfig = new Config<ServerlessConfigModel, _ServerlessCon
 
       prunePatterns: PRUNE_PATTERNS,
 
-      region: environment.variables.SERVER_REGION ?? '',
+      region: environment.variables.SERVER_SERVERLESS_REGION ?? '',
 
       runtime: SERVERLESS_RUNTIME.ZIP,
 
