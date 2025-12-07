@@ -7,11 +7,11 @@ import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionCon
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { importInterop } from '@lib/shared/core/utils/importInterop/importInterop';
+import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 import { type CliModel, type TaskRegistryModel } from '@tool/task/core/utils/Cli/Cli.models';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
-import { type TaskModel } from '@tool/task/core/utils/task/task.models';
 import kebabCase from 'lodash/kebabCase';
 import toNumber from 'lodash/toNumber';
 

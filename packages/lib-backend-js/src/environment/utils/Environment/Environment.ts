@@ -42,7 +42,12 @@ export class Environment implements EnvironmentModel {
       ...appVariables,
     ]);
     paths.forEach((path) => existsSync(path) && config({ override: true, path }));
-    this.variables = process.env = { ...process.env, ...currentEnv, ...(overrrides ?? {}) };
+    this.variables = process.env = {
+      ...process.env,
+      ...currentEnv,
+      ...(overrrides ?? {}),
+      NODE_ENV: environmentF,
+    };
 
     Container.set(Environment, this);
   }

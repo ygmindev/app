@@ -1,13 +1,13 @@
 import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { task } from '@tool/task/core/utils/task/task';
+import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import { _nodeDev } from '@tool/task/node/tasks/nodeDev/_nodeDev';
 import {
   type NodeDevModel,
   type NodeDevParamsModel,
 } from '@tool/task/node/tasks/nodeDev/nodeDev.models';
 
-export const nodeDev = task<NodeDevParamsModel, NodeDevModel>({
+export const nodeDev = buildTask<NodeDevParamsModel, NodeDevModel>({
   task: async (params, context) => {
     let { pathname } = params;
     if (!pathname && context?.app) {

@@ -1,14 +1,19 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { typescriptConfig } from '@lib/config/node/typescript/typescript';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { writeFile } from '@tool/task/core/tasks/writeFile/writeFile.task';
-import { task } from '@tool/task/core/utils/task/task';
+import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import {
   type BuildTypescriptModel,
   type BuildTypescriptParamsModel,
 } from '@tool/task/node/tasks/buildTypescript/buildTypescript.models';
 
-export const buildTypescript = task<BuildTypescriptParamsModel, BuildTypescriptModel>({
+export const buildTypescript = buildTask<BuildTypescriptParamsModel, BuildTypescriptModel>({
+  context: {
+    environment: ENVIRONMENT.PRODUCTION,
+  },
+
   task: async () => {
     await writeFile({
       pathname: fromRoot(),

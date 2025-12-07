@@ -4,7 +4,7 @@ import { BUILD_DIR } from '@lib/config/file/file.constants';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { Worker } from '@temporalio/Worker';
 import { TASK_QUEUE_DEFAULT } from '@tool/task/core/core.constants';
-import { type TaskModel } from '@tool/task/core/utils/task/task.models';
+import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 import {
   type _WorkerModel,
   type _WorkerParamsModel,

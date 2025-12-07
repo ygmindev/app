@@ -1,4 +1,4 @@
-import { type TaskModel } from '@tool/task/core/utils/task/task.models';
+import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 
 export type TaskRegistryModel = {
   pathname: string;

@@ -4,12 +4,12 @@ import {
   type WorkerRunParamsModel,
 } from '@tool/task/core/tasks/workerRun/workerRun.models';
 import { Cli } from '@tool/task/core/utils/Cli/Cli';
-import { task } from '@tool/task/core/utils/task/task';
-import { type TaskModel } from '@tool/task/core/utils/task/task.models';
+import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
+import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 import { Worker } from '@tool/task/orchestrator/utils/Worker/Worker';
 import reduce from 'lodash/reduce';
 
-export const workerRun = task<WorkerRunParamsModel, WorkerRunModel>({
+export const workerRun = buildTask<WorkerRunParamsModel, WorkerRunModel>({
   task: async ({ count = 1, queue, tasks, workflowsDir, workflowsName = 'workflows' }) => {
     let tasksF = tasks;
     if (!tasksF) {

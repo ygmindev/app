@@ -1,13 +1,15 @@
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
-import { task } from '@tool/task/core/utils/task/task';
+import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import { _nodeBuild } from '@tool/task/node/tasks/nodeBuild/_nodeBuild';
 import {
   type NodeBuildModel,
   type NodeBuildParamsModel,
 } from '@tool/task/node/tasks/nodeBuild/nodeBuild.models';
 
-export const nodeBuild = task<NodeBuildParamsModel, NodeBuildModel>({
-  environment: ENVIRONMENT.PRODUCTION,
+export const nodeBuild = buildTask<NodeBuildParamsModel, NodeBuildModel>({
+  context: {
+    environment: ENVIRONMENT.PRODUCTION,
+  },
 
   task: async (params) => _nodeBuild(params),
 });

@@ -4,9 +4,9 @@ import {
   type WriteFileModel,
   type WriteFileParamsModel,
 } from '@tool/task/core/tasks/writeFile/writeFile.models';
-import { task } from '@tool/task/core/utils/task/task';
+import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 
-export const writeFile = task<WriteFileParamsModel, WriteFileModel>({
+export const writeFile = buildTask<WriteFileParamsModel, WriteFileModel>({
   task: async ({ pathname, value }) => {
     writeFileBase({ filename: pathname, value: stringify(value) });
   },
