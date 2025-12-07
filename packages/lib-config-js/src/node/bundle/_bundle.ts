@@ -48,7 +48,7 @@ import {
   type ViteDevServer,
 } from 'vite';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
-// import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 function vitePluginFullReload(entryFiles: Array<string>): Plugin {
   let server: ViteDevServer;
@@ -409,7 +409,7 @@ export const _bundle = ({
 
       platformF === PLATFORM.WEB && vike(),
 
-      // platformF === PLATFORM.NODE && nodePolyfills(),
+      platformF === PLATFORM.NODE && nodePolyfills(),
 
       babel &&
         babelPlugin({
