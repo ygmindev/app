@@ -4,7 +4,7 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 let bundleConfig = configBase;
 
 bundleConfig = bundleConfig.extend(() => ({
-  aliases: [{ from: /^lodash\/([^.]+)$/, to: 'lodash/$1.js' }],
+  // aliases: [{ from: /^lodash\/([^.]+)$/, to: 'lodash/$1.js' }],
 
   envPrefix: ['SERVER_'],
 

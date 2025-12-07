@@ -13,7 +13,7 @@ export const _nodeBuild = async ({
   const config = bundleConfig.config({
     entryFiles,
     format,
-    isTranspileProject: true,
+    // isTranspileProject: true,
     outDir,
   });
   await build({ ...config, configFile: false });

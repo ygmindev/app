@@ -48,7 +48,7 @@ import {
   type ViteDevServer,
 } from 'vite';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
+// import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 function vitePluginFullReload(entryFiles: Array<string>): Plugin {
   let server: ViteDevServer;
@@ -257,6 +257,8 @@ export const _bundle = ({
         : Object.values(entryFiles)
     : undefined;
 
+  const packagePaths = rootDirs?.map((path) => joinPaths([path, 'package.json']));
+
   const config: _BundleConfigModel = {
     appType: appType === APP_TYPE.TOOL ? undefined : 'custom',
 
@@ -308,10 +310,17 @@ export const _bundle = ({
             : undefined,
 
         plugins: [
-          platformF === PLATFORM.NODE && nodeExternals({ exclude: transpiles, include: externals }),
+          nodeExternals({
+            builtins: true,
+            exclude: transpiles,
+            include: externals,
+            packagePath: packagePaths,
+          }),
 
           nodeResolve({ extensions }),
         ],
+
+        preserveSymlinks: true,
 
         treeshake: true,
       },
@@ -322,6 +331,8 @@ export const _bundle = ({
           : sourcemap === BUNDLE_SOURCEMAP.OUTPUT
             ? true
             : undefined,
+
+      ssr: platformF === PLATFORM.NODE,
 
       watch:
         environment.variables.NODE_ENV === 'development'
@@ -386,7 +397,7 @@ export const _bundle = ({
             nodeExternalsPlugin({
               allowList: transpiles,
               forceExternalList: externals,
-              packagePath: rootDirs?.map((path) => joinPaths([path, 'package.json'])),
+              packagePath: packagePaths,
             }),
         ]) as Array<EsbuildPlugin>,
 
@@ -409,7 +420,7 @@ export const _bundle = ({
 
       platformF === PLATFORM.WEB && vike(),
 
-      platformF === PLATFORM.NODE && nodePolyfills(),
+      // platformF === PLATFORM.NODE && nodePolyfills(),
 
       babel &&
         babelPlugin({
