@@ -11,7 +11,6 @@ const buildConfigLint: TaskParamsModel<BuildJsParamsModel> = {
 
   overrides: () => ({
     entryFiles: { 'eslint.config': fromConfig('node/lint/eslint.config.ts') },
-    outDir: fromRoot(),
   }),
 };
 

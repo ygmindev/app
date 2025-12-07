@@ -1,5 +1,4 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import {
@@ -15,7 +14,6 @@ export const buildLint = buildTask<BuildLintParamsModel, BuildLintModel>({
   task: async () => {
     await nodeBuild({
       entryFiles: fromConfig('node/lint/eslint.config.ts'),
-      outDir: fromRoot(),
     });
   },
 });
