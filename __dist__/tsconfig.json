@@ -1,0 +1,113 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "baseUrl": "./",
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "incremental": true,
+    "inlineSourceMap": true,
+    "isolatedModules": false,
+    "jsx": "react-jsx",
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "dom",
+      "dom.iterable"
+    ],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "noEmitOnError": false,
+    "outDir": "__build__/out-tsc",
+    "paths": {
+      "redux-persist/integration/*": [
+        "node_modules/redux-persist/types/integration/*"
+      ],
+      "@app/native/*": [
+        "packages/app-native-js/src/*"
+      ],
+      "@app/web-admin/*": [
+        "packages/app-web-admin-js/src/*"
+      ],
+      "@app/web-documentation/*": [
+        "packages/app-web-documentation-js/src/*"
+      ],
+      "@app/web/*": [
+        "packages/app-web-js/src/*"
+      ],
+      "@app/web-orchestrator/*": [
+        "packages/app-web-orchestrator-js/src/*"
+      ],
+      "@app/web-template/*": [
+        "packages/app-web-template-js/src/*"
+      ],
+      "lib_ai/*": [
+        "packages/lib-ai-py/src/*"
+      ],
+      "@lib/backend/*": [
+        "packages/lib-backend-js/src/*"
+      ],
+      "@lib/config/*": [
+        "packages/lib-config-js/src/*"
+      ],
+      "lib_config/*": [
+        "packages/lib-config-py/src/*"
+      ],
+      "@lib/frontend/*": [
+        "packages/lib-frontend-js/src/*"
+      ],
+      "@lib/model/*": [
+        "packages/lib-model-js/src/*"
+      ],
+      "lib_quant/*": [
+        "packages/lib-quant-py/src/*"
+      ],
+      "@lib/shared/*": [
+        "packages/lib-shared-js/src/*"
+      ],
+      "lib_shared/*": [
+        "packages/lib-shared-py/src/*"
+      ],
+      "service_ai/*": [
+        "packages/service-ai-py/src/*"
+      ],
+      "@service/job/*": [
+        "packages/service-job-js/src/*"
+      ],
+      "@service/lambda/*": [
+        "packages/service-lambda-js/src/*"
+      ],
+      "@service/orchestrator/*": [
+        "packages/service-orchestrator-js/src/*"
+      ],
+      "@service/server/*": [
+        "packages/service-server-js/src/*"
+      ],
+      "service_server/*": [
+        "packages/service-server-py/src/*"
+      ],
+      "@tool/task/*": [
+        "packages/tool-task-js/src/*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "rootDir": "./",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "esnext",
+    "types": [
+      "react-native",
+      "react",
+      "jest",
+      "vite/client",
+      "@types/jest-image-snapshot"
+    ],
+    "useDefineForClassFields": false
+  }
+}

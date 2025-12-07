@@ -276,7 +276,7 @@ export const _bundle = ({
 
       copyPublicDir: false,
 
-      emptyOutDir: true,
+      emptyOutDir: false,
 
       lib: entryFiles
         ? {

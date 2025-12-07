@@ -1,2 +1,2 @@
-import config from '__build__/eslint.config.js';
+import config from './__dist__/eslint.config.js';
 export default config;

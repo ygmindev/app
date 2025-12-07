@@ -6,6 +6,7 @@ import {
   type BuildLintParamsModel,
 } from '@tool/task/node/tasks/buildLint/buildLint.models';
 import { nodeBuild } from '@tool/task/node/tasks/nodeBuild/nodeBuild.task';
+import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 
 export const buildLint = buildTask<BuildLintParamsModel, BuildLintModel>({
   context: {
@@ -14,6 +15,7 @@ export const buildLint = buildTask<BuildLintParamsModel, BuildLintModel>({
   task: async () => {
     await nodeBuild({
       entryFiles: fromConfig('node/lint/eslint.config.ts'),
+      outDir: fromDist(),
     });
   },
 });

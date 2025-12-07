@@ -14,9 +14,10 @@ import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import typescriptPlugin from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
+import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import path from 'path';
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
 export const _lint = ({
@@ -201,7 +202,7 @@ export const _lint = ({
         parserOptions: {
           allowDefaultProject: true,
           extraFileExtensions: ['.json'],
-          project: './tsconfig.json',
+          // project: './tsconfig.json',
           // projectService: true,
           tsconfigRootDir: __dirname,
         },
