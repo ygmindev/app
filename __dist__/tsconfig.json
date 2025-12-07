@@ -3,7 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "alwaysStrict": true,
-    "baseUrl": "./",
+    "baseUrl": "../",
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -96,7 +96,7 @@
       ]
     },
     "resolveJsonModule": true,
-    "rootDir": "./",
+    "rootDir": "../",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "strict": true,
