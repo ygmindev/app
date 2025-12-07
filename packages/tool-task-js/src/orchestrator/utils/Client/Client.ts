@@ -5,7 +5,7 @@ import {
 } from '@tool/task/orchestrator/utils/Client/Client.models';
 
 export class Client extends _Client implements ClientModel {
-  constructor(params: ClientParamsModel) {
+  constructor(params: ClientParamsModel = {}) {
     super(params);
   }
 }

@@ -22,7 +22,7 @@ import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
-import resolve from '@rollup/plugin-node-resolve';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import react from '@vitejs/plugin-react';
 import { type Plugin as EsbuildPlugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
@@ -39,9 +39,58 @@ import { sep } from 'path';
 import posix from 'path/posix';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vike from 'vike/plugin';
-import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
+import {
+  type Alias,
+  createLogger,
+  type Logger,
+  type Plugin,
+  searchForWorkspaceRoot,
+  type ViteDevServer,
+} from 'vite';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 // import { nodePolyfills } from 'vite-plugin-node-polyfills';
+
+function vitePluginFullReload(entryFiles: Array<string>): Plugin {
+  let server: ViteDevServer;
+  return {
+    configureServer(_server) {
+      server = _server;
+    },
+    async handleHotUpdate(ctx) {
+      const changed = ctx.file;
+      let modules = server.moduleGraph.getModulesByFile(changed);
+      if (!modules) return [];
+      for (const entry of entryFiles) {
+        modules = server.moduleGraph.getModulesByFile(entry);
+        if (!modules) continue;
+        const stack = [...modules];
+        const visited = new Set();
+        let isDep = false;
+        while (stack.length > 0) {
+          const mod = stack.pop();
+          if (!mod || visited.has(mod.id)) continue;
+          visited.add(mod.id);
+          if (mod.file === changed) {
+            isDep = true;
+            break;
+          }
+          for (const dep of mod.importedModules) {
+            if (!visited.has(dep.id)) {
+              stack.push(dep);
+            }
+          }
+        }
+        if (isDep) {
+          server.ws.send({ type: 'full-reload' });
+          return [];
+        }
+      }
+      return [];
+    },
+
+    name: 'vite-plugin-full-reload',
+  };
+}
 
 export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): EsbuildPlugin => ({
   name: 'plugin:excludeVendorFromSourceMap',
@@ -126,7 +175,7 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
 
 export const _bundle = ({
   aliases,
-  appType = APP_TYPE.TOOL,
+  appType,
   assetsDir,
   babel,
   buildDir,
@@ -161,6 +210,7 @@ export const _bundle = ({
 }: BundleConfigModel): _BundleConfigModel => {
   const environment = Container.get(Environment);
   const platformF = platform ?? environment.variables.ENV_PLATFORM;
+
   const customLogger = createLogger();
   if (logSuppressPatterns) {
     const methods = ['warn', 'warnOnce', 'info', 'error'] satisfies Array<keyof Logger>;
@@ -260,7 +310,7 @@ export const _bundle = ({
         plugins: [
           platformF === PLATFORM.NODE && nodeExternals({ exclude: transpiles, include: externals }),
 
-          resolve({ extensions }),
+          nodeResolve({ extensions }),
         ],
 
         treeshake: true,
@@ -353,6 +403,8 @@ export const _bundle = ({
     },
 
     plugins: filterNil([
+      // input && vitePluginFullReload(input),
+
       provide && inject(provide),
 
       platformF === PLATFORM.WEB && vike(),
@@ -414,7 +466,9 @@ export const _bundle = ({
         allow: [searchForWorkspaceRoot(fromRoot()), fromRoot('node_modules')],
       },
 
-      hmr: false,
+      // hmr: {
+      //   protocol: 'wss',
+      // },
 
       host: true,
 

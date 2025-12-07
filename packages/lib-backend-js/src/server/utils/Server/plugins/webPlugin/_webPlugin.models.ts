@@ -4,6 +4,5 @@ import { type BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 export type _WebPluginModel = ServerPluginModel<{
   config: BundleConfigModel;
   root: string;
-  subdomain?: string;
   threshold?: number;
 }>;

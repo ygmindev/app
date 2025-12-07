@@ -7,11 +7,11 @@ export const onHeader: onHeaderModel = () => {
     <>
       <title>My Awesome Website - Homepage</title>
 
-      <link
+      {/* <link
         href={faviconDir}
         rel="icon"
         type="image/svg+xml"
-      />
+      /> */}
 
       {/* <link rel="apple-touch-icon" href={iconMobile} type="image/svg+xml" /> */}
 

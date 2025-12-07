@@ -32,7 +32,6 @@ serverConfig = serverConfig.extend(() => {
         {
           config: bundleConfig.params(),
           root: fromWorking(),
-          subdomain: environment.variables.SERVER_APP_SUBDOMAIN,
         },
       ],
     ] as Array<[ServerPluginModel<unknown>, unknown]>,

@@ -12,8 +12,8 @@ export class _Client implements _ClientModel {
   protected _id: string;
   protected _isInitialized: boolean = false;
 
-  constructor({ id = `client-${uid()}` }: _ClientParamsModel) {
-    this._id = id;
+  constructor({ id }: _ClientParamsModel = {}) {
+    this._id = id ?? 'client';
   }
 
   initialize = async (): Promise<void> => {

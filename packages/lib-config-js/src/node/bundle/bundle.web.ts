@@ -44,8 +44,6 @@ bundleConfig = bundleConfig.extend(() => ({
   platform: PLATFORM.WEB,
   server: {
     certificate: serverConfig.params().certificate,
-
-    isWebServer: true,
   },
 
   transpileModules: ['react-dom/client'],

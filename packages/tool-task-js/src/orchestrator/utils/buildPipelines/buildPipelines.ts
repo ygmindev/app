@@ -35,8 +35,6 @@ export const buildPipelines = <
           ...(workflow.params ?? {}),
           ...workflowParams,
         };
-        console.warn('@@@ CONTEXT  2???????????');
-        console.warn(workflowContextF);
         return {
           _id: workflow.name,
           context: cleanObject(workflowContextF),

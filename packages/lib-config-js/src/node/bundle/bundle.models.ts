@@ -52,8 +52,6 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   isTranspileProject?: boolean;
 
-  isWebServer?: boolean;
-
   logSuppressPatterns?: Array<RegExp>;
 
   mainFields?: Array<string>;
@@ -74,8 +72,6 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   server?: {
     certificate?: ServerConfigModel['certificate'];
-
-    isWebServer?: boolean;
   };
 
   serverExtension?: string;

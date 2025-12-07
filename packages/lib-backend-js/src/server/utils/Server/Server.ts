@@ -45,7 +45,6 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
       `${isArray(params.method) ? params.method.join(',') : params.method} ${uri({
         host: this._host,
         port: this._port,
-        subdomain: params.subdomain,
       })}${pathname}`,
     );
 

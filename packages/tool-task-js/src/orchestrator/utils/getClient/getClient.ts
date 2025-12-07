@@ -7,12 +7,13 @@ import {
 } from '@tool/task/orchestrator/utils/getClient/getClient.models';
 
 export const getClient = async ({ id }: GetClientParamsModel = {}): Promise<GetClientModel> => {
+  const idF = id ?? 'client';
   let client: ClientModel;
   try {
-    client = Container.get(Client, id);
+    client = Container.get(Client, idF);
   } catch {
-    client = new Client({ id });
-    Container.set(Client, client, id);
+    client = new Client({ id: idF });
+    Container.set(Client, client, idF);
   }
   await client?.initialize();
   return client;

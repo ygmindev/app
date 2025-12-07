@@ -1,3 +1,4 @@
+import middie from '@fastify/middie';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { HttpRequest } from '@lib/backend/http/utils/HttpRequest/HttpRequest';
 import { HttpResponse } from '@lib/backend/http/utils/HttpResponse/HttpResponse';
@@ -38,6 +39,7 @@ export class _Server implements _ServerModel {
         key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
       },
     });
+    this._app.register(middie);
   }
 
   async close(): Promise<void> {
@@ -53,18 +55,10 @@ export class _Server implements _ServerModel {
     method,
     pathname,
     protocol,
-    subdomain,
   }: ApiEndpointModel<TType, TParams>): Promise<void> {
     await this._app.register(async (fastify) =>
       fastify.route({
         handler: async (req: FastifyRequest & I18NextRequest, rep) => {
-          if (subdomain) {
-            const host = req.headers.host ?? '';
-            if (host.split('.')[0] !== subdomain) {
-              return;
-            }
-          }
-
           const request = new HttpRequest({
             body: req.body as TParams,
             cookies: req.cookies as Record<string, string>,

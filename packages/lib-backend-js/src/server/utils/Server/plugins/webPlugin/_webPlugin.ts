@@ -1,4 +1,3 @@
-import middie from '@fastify/middie';
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { type _WebPluginModel } from '@lib/backend/server/utils/Server/plugins/webPlugin/_webPlugin.models';
 import { API_ENDPOINT_TYPE } from '@lib/config/api/api.constants';
@@ -8,29 +7,28 @@ import { HTTP_METHOD } from '@lib/shared/http/http.constants';
 import { render } from '@lib/shared/web/utils/render/render';
 import { createDevMiddleware } from 'vike/server';
 
-export const _webPlugin: _WebPluginModel = async (server, { config, root, subdomain }) => {
+export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
+  server._app.use((req, res, next) => {
+    if (req.url?.startsWith('/.well-known/')) return next('route');
+    next();
+  });
+
   const environment = Container.get(Environment);
   if (
     (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
     !environment.variables.NODE_RUNTIME
   ) {
-    await server._app.register(middie);
     const { devMiddleware } = await createDevMiddleware({
       root,
       viteConfig: { configFile: false, ..._bundle(config), root },
     });
-    server._app.use((req, res, next) => {
-      const host = req.headers.host ?? '';
-      const [v] = host.split('.');
-      v === subdomain ? devMiddleware(req, res, next) : next();
-    });
+    server._app.use(devMiddleware);
   }
 
   await server.register<ReadableStream, ReadableStream>({
     handler: async (request) => render(request),
     method: HTTP_METHOD.GET,
     pathname: '*',
-    subdomain,
     type: API_ENDPOINT_TYPE.REST,
   });
 };

@@ -39,8 +39,6 @@ export type ApiEndpointModel<TType = void, TParams = void> = {
   prefix?: boolean | string;
 
   protocol?: HTTP_PROTOCOL;
-
-  subdomain?: string;
 } & (
   | {
       handler?: never;

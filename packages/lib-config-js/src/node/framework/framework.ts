@@ -23,8 +23,6 @@ export const frameworkConfig = new Config<FrameworkConfigModel, _FrameworkConfig
           !process.env.NODE_RUNTIME
             ? process.env.APP_PORT
             : undefined),
-
-        subdomain: process.env.SERVER_APP_SUBDOMAIN,
       },
 
       faviconDir: `${ASSETS_DIR}/favicon/favicon.svg`,

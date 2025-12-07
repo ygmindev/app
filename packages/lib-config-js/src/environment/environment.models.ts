@@ -44,7 +44,6 @@ export type EnvironmentConfigModel = {
   SERVER_APP_SSR_PORT?: string;
   SERVER_APP_STATIC_HOST: string;
   SERVER_APP_STATIC_PORT?: string;
-  SERVER_APP_SUBDOMAIN: string;
   SERVER_APP_WEBSOCKET_HOST: string;
   SERVER_APP_WEBSOCKET_PORT?: string;
   SERVER_DB_MONGO_NAME: string;
