@@ -332,7 +332,7 @@ export const _bundle = ({
             ? true
             : undefined,
 
-      ssr: platformF === PLATFORM.NODE,
+      ssr: platformF === PLATFORM.NODE ? true : undefined,
 
       watch:
         environment.variables.NODE_ENV === 'development'

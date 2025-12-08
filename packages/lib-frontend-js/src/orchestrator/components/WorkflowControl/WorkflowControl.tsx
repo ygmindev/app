@@ -39,7 +39,7 @@ export const WorkflowControl: FCModel<WorkflowControlPropsModel> = ({ workflow, 
                   form: {
                     context: workflow.context,
                     params: workflow.params,
-                    workflow: workflow.id,
+                    workflow: workflow._id,
                   },
                 })
               }
