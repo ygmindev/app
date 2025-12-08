@@ -52,6 +52,8 @@ export class Server<TParams extends Array<unknown>> extends _Server implements S
   }
 
   async run(): Promise<void> {
+    await this._onInitialize?.();
+
     await handleCleanup({ onCleanUp: this.close });
 
     for (const [plugin, params] of this._plugins ?? []) {

@@ -40,18 +40,17 @@ export class Cli implements CliModel {
     for (const pathname of pathnames) {
       const { main } = fileInfo(pathname);
       const task = ((await importInterop(pathname)) as Record<string, TaskModel>)[main];
-      const mainF = kebabCase(main);
-      const aliasF = mainF
+      const aliasF = kebabCase(main)
         .split('-')
         .map((p) => p.charAt(0))
         .join('');
 
       if (this._aliases[aliasF]) {
-        throw new DuplicateError(`alias ${aliasF} (${mainF}) already exists`);
+        throw new DuplicateError(`alias ${aliasF} (${main}) already exists`);
       }
 
-      this.register(mainF, { pathname, task });
-      this._aliases[aliasF] = mainF;
+      this.register(main, { pathname, task });
+      this._aliases[aliasF] = main;
     }
   };
 
