@@ -50,7 +50,7 @@ import {
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 // import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
-function vitePluginFullReload(entryFiles: Array<string>): Plugin {
+function vitePluginFullReload(entryFiles: Array<string | RegExp>): Plugin {
   let server: ViteDevServer;
   return {
     configureServer(_server) {
@@ -58,31 +58,33 @@ function vitePluginFullReload(entryFiles: Array<string>): Plugin {
     },
     async handleHotUpdate(ctx) {
       const changed = ctx.file;
-      let modules = server.moduleGraph.getModulesByFile(changed);
-      if (!modules) return [];
       for (const entry of entryFiles) {
-        modules = server.moduleGraph.getModulesByFile(entry);
-        if (!modules) continue;
-        const stack = [...modules];
-        const visited = new Set();
-        let isDep = false;
-        while (stack.length > 0) {
-          const mod = stack.pop();
-          if (!mod || visited.has(mod.id)) continue;
-          visited.add(mod.id);
-          if (mod.file === changed) {
-            isDep = true;
-            break;
-          }
-          for (const dep of mod.importedModules) {
-            if (!visited.has(dep.id)) {
-              stack.push(dep);
+        if (entry instanceof RegExp) {
+          entry.test(changed) && server.ws.send({ type: 'full-reload' });
+        } else {
+          const modules = server.moduleGraph.getModulesByFile(entry);
+          if (!modules) continue;
+          const stack = [...modules];
+          const visited = new Set();
+          let isDep = false;
+          while (stack.length > 0) {
+            const mod = stack.pop();
+            if (!mod || visited.has(mod.id)) continue;
+            visited.add(mod.id);
+            if (mod.file === changed) {
+              isDep = true;
+              break;
+            }
+            for (const dep of mod.importedModules) {
+              if (!visited.has(dep.id)) {
+                stack.push(dep);
+              }
             }
           }
-        }
-        if (isDep) {
-          server.ws.send({ type: 'full-reload' });
-          return [];
+          if (isDep) {
+            server.ws.send({ type: 'full-reload' });
+            return [];
+          }
         }
       }
       return [];
@@ -257,6 +259,8 @@ export const _bundle = ({
         : Object.values(entryFiles)
     : undefined;
 
+  const watchF = filterNil([...(watch ?? []), ...(input ?? [])]);
+
   const packagePaths = rootDirs?.map((path) => joinPaths([path, 'package.json']));
 
   const config: _BundleConfigModel = {
@@ -334,10 +338,7 @@ export const _bundle = ({
 
       ssr: platformF === PLATFORM.NODE ? true : undefined,
 
-      watch:
-        environment.variables.NODE_ENV === 'development'
-          ? { include: [...(watch ?? []), ...(input ?? [])] }
-          : undefined,
+      watch: environment.variables.NODE_ENV === 'development' ? { include: watchF } : undefined,
     },
 
     customLogger,
@@ -414,7 +415,7 @@ export const _bundle = ({
     },
 
     plugins: filterNil([
-      // input && vitePluginFullReload(input),
+      // platformF === PLATFORM.NODE && watchF && vitePluginFullReload(watchF),
 
       provide && inject(provide),
 

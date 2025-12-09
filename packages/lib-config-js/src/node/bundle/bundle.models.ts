@@ -86,7 +86,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   typescript: TypescriptConfigModel;
 
-  watch?: Array<string>;
+  watch?: Array<string | RegExp>;
 };
 
 export type _BundleConfigModel = UserConfig & {

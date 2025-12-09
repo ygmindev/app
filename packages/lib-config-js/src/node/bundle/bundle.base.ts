@@ -77,6 +77,8 @@ export const bundleConfig = new Config<BundleConfigModel, _BundleConfigModel>({
 
       typescript: typescriptConfig.params(),
 
+      watch: [/tsconfig.json/],
+
       // watch: [
       //   fromPackages('asset-static/src/**/*'),
       //   fromPackages('lib-config-js/src/**/*'),

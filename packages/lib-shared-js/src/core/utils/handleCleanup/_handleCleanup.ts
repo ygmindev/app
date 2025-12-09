@@ -12,6 +12,7 @@ export const _handleCleanup = async ({
 }: _HandleCleanupParamsModel): Promise<_HandleCleanupModel> => {
   const handleCleanup = async (): Promise<void> => {
     if (!isTerminated) {
+      logger.debug('cleaning up...');
       isTerminated = true;
       await onCleanUp?.();
     }
@@ -22,8 +23,5 @@ export const _handleCleanup = async ({
     await handleCleanup();
   });
 
-  if (import.meta?.hot) {
-    import.meta.hot.on('vite:beforeFullReload', handleCleanup);
-    import.meta.hot.dispose(handleCleanup);
-  }
+  import.meta?.hot?.on('vite:beforeFullReload', handleCleanup);
 };

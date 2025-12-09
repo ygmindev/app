@@ -103,9 +103,13 @@ export class _Server implements _ServerModel {
 
   async run(): Promise<void> {
     try {
-      logger.progress('server running...');
-      await this._app.listen({ port: toNumber(this._port) });
-      logger.success('server listening');
+      if (this._app.server.listening) {
+        logger.warn('server already running...');
+      } else {
+        logger.progress('server running...');
+        await this._app.listen({ port: toNumber(this._port) });
+        logger.success(`server listening on ${this._host}:${this._port}`);
+      }
     } catch (e) {
       logger.error(e);
     }
