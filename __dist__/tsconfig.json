@@ -108,6 +108,6 @@
       "vite/client",
       "@types/jest-image-snapshot"
     ],
-    "useDefineForClassFields": true
+    "useDefineForClassFields": false
   }
 }
