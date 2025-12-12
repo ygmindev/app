@@ -2,8 +2,6 @@ import { WORKFLOW_EXECUTION } from '@lib/model/orchestrator/Workflow/Workflow.co
 import { WORKFLOW_STEP_TYPE } from '@lib/model/orchestrator/WorkflowStep/WorkflowStep.constants';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
-import { stringify } from '@lib/shared/core/utils/stringify/stringify';
-import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { executeChild, proxyActivities, startChild } from '@temporalio/workflow';
 import {
   type _BuildWorkflowModel,
@@ -54,19 +52,7 @@ export const _buildWorkflow =
           }
         }
       })();
-      return async () => {
-        try {
-          logger.progress(
-            `${name} starting with params: ${stringify(params)}, context: ${stringify(context)}`,
-          );
-          const result = await runnable?.();
-          logger.success(`${name} succeeded`);
-          return result;
-        } catch (e) {
-          logger.fail(`${name} failed`);
-          throw e;
-        }
-      };
+      return async () => runnable?.();
     });
     const result = (
       isParallel ? Promise.all(executions.map((v) => v())) : mapSequence(executions)

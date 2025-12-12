@@ -1,10 +1,10 @@
+import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+import { loggingConfig } from '@lib/config/node/logging/logging';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger';
-import {
-  type _LoggerModel,
-  type _LoggerParamsModel,
-} from '@lib/shared/logging/utils/Logger/_Logger.models';
+import { type _LoggerModel } from '@lib/shared/logging/utils/Logger/_Logger.models';
 import { type LoggerModel, type LogModel } from '@lib/shared/logging/utils/Logger/Logger.models';
 import isPlainObject from 'lodash/isPlainObject';
 
@@ -23,11 +23,12 @@ const format = (params: Array<unknown>): string => {
   return `[${new Date().toISOString()}] ${formatted}`;
 };
 
-class Logger implements LoggerModel {
+@withContainer()
+export class Logger implements LoggerModel {
   protected _logger!: _LoggerModel;
 
-  constructor(params: _LoggerParamsModel) {
-    this._logger = new _Logger(params);
+  constructor() {
+    this._logger = new _Logger(loggingConfig.config());
   }
 
   debug: LogModel = (...params) => this._logger.debug(format(params));
@@ -40,6 +41,13 @@ class Logger implements LoggerModel {
   warn: LogModel = (...params) => this._logger.warn(format(params));
 }
 
-export const logger = new Logger({
-  level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
-});
+export const logger: LoggerModel = {
+  debug: (...params) => Container.get(Logger).debug(...params),
+  error: (...params) => Container.get(Logger).error(...params),
+  fail: (...params) => Container.get(Logger).error(...params),
+  info: (...params) => Container.get(Logger).info(...params),
+  progress: (...params) => Container.get(Logger).info(...params),
+  success: (...params) => Container.get(Logger).info(...params),
+  trace: (...params) => Container.get(Logger).trace(...params),
+  warn: (...params) => Container.get(Logger).warn(...params),
+};

@@ -6,9 +6,11 @@ import { type RequestContextModel } from '@lib/config/api/api.models';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { GraphQLDateTime, GraphQLUnsignedFloat } from 'graphql-scalars';
+import { default as _isArray } from 'lodash/isArray';
+import isString from 'lodash/isString';
 import { Mutation, Query, Subscription } from 'type-graphql';
 
-export const _withOutput = <TType extends unknown, TData extends unknown>({
+export const _withOutput = <TType extends unknown, TData extends unknown, TParams extends unknown>({
   Resource,
   filter,
   isArray,
@@ -16,7 +18,7 @@ export const _withOutput = <TType extends unknown, TData extends unknown>({
   operation = GRAPHQL_OPERATION_TYPE.QUERY,
   topics,
   type,
-}: _WithOutputParamsModel<TType, TData>): _WithOutputModel => {
+}: _WithOutputParamsModel<TType, TData, TParams>): _WithOutputModel => {
   const ResourceF = Resource
     ? () => (isArray ? [Resource()] : Resource())
     : (() => {
@@ -41,7 +43,11 @@ export const _withOutput = <TType extends unknown, TData extends unknown>({
             })
         : undefined,
       name,
-      topics: topics ?? [],
+      topics: topics
+        ? isString(topics) || _isArray(topics)
+          ? topics
+          : ({ args, context }) => topics({ args, context })
+        : [],
     });
   } else {
     const Operation = (() => {

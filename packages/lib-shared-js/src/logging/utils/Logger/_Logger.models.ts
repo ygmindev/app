@@ -1,6 +1,6 @@
-export type _LoggerParamsModel = {
-  level?: keyof _LoggerModel;
-};
+import { type _LoggingConfigModel } from '@lib/config/node/logging/logging.models';
+
+export type _LoggerParamsModel = _LoggingConfigModel;
 
 export type _LoggerModel = {
   debug: _LogModel;

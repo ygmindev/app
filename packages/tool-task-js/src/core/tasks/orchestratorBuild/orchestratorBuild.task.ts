@@ -5,8 +5,8 @@ import {
   type OrchestratorBuildModel,
   type OrchestratorBuildParamsModel,
 } from '@tool/task/core/tasks/orchestratorBuild/orchestratorBuild.models';
-import { exportModules } from '@tool/task/core/utils/exportModules/exportModules';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
+import { exportModules } from '@tool/task/core/utils/exportModules/exportModules';
 
 export const orchestratorBuild = buildTask({
   task: async (params: OrchestratorBuildParamsModel): Promise<OrchestratorBuildModel> => {

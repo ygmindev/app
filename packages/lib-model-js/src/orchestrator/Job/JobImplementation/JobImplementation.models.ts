@@ -1,4 +1,4 @@
 import { type JobModel } from '@lib/model/orchestrator/Job/Job.models';
-import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
+import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 
-export type JobImplementationModel = ResourceImplementationModel<JobModel>;
+export type JobImplementationModel = EntityResourceImplementationModel<JobModel>;

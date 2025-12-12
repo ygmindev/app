@@ -1,7 +1,7 @@
 import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
-import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
+import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 
-export type JobModel<TParams extends unknown = unknown> = ResourceModel & {
+export type JobModel<TParams extends unknown = unknown> = EntityResourceModel & {
   context?: ExecutionContextModel;
 
   params?: TParams;

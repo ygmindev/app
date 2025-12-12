@@ -4,6 +4,7 @@ import { type _WithOutputParamsModel } from '@lib/backend/resource/utils/withOut
 export type WithOutputParamsModel<
   TType extends unknown,
   TData extends unknown,
-> = WithAccessParamsModel & _WithOutputParamsModel<TType, TData>;
+  TParams extends unknown,
+> = WithAccessParamsModel & _WithOutputParamsModel<TType, TData, TParams>;
 
 export type WithOutputModel = MethodDecorator;

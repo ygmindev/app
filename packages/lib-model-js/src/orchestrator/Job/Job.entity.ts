@@ -5,14 +5,14 @@ import { ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/
 import { JOB_RESOURCE_NAME } from '@lib/model/orchestrator/Job/Job.constants';
 import { type JobModel } from '@lib/model/orchestrator/Job/Job.models';
 import { WORKFLOW_STEP_TYPE } from '@lib/model/orchestrator/WorkflowStep/WorkflowStep.constants';
-import { Resource } from '@lib/model/resource/Resource/Resource';
+import { EntityResource } from '@lib/model/resource/EntityResource/EntityResource';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withDatabaseEntity({
   name: JOB_RESOURCE_NAME,
 })
 export class Job<TParams extends unknown = unknown>
-  extends Resource()
+  extends EntityResource
   implements JobModel<TParams>
 {
   @withDatabaseField({ Resource: () => ExecutionContext, isOptional: true })

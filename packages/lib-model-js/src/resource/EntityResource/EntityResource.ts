@@ -13,6 +13,7 @@ export class EntityResource extends Resource({ isDatabase: true }) implements En
   @withDatabaseField({
     Resource: () => Date,
     defaultValue: () => new Date(),
+    isOptional: true,
   })
   created?: Date;
 

@@ -26,24 +26,24 @@ export const buildPipelines = <
         const [workflow, workflowParams, workflowContext] = isArray(w)
           ? [w[0], w[1] ?? {}, w[2] ?? {}]
           : [w, w.context ?? {}, w.params ?? {}];
-        const workflowContextF: ExecutionContextModel = {
+        const workflowContextF: ExecutionContextModel = cleanObject({
           ...(workflow.context ?? {}),
           ...workflowContext,
           app: appF,
-        };
-        const workflowParamsF = {
+        });
+        const workflowParamsF = cleanObject({
           ...(workflow.params ?? {}),
           ...workflowParams,
-        };
+        });
         return {
           _id: workflow.name,
-          context: cleanObject(workflowContextF),
+          context: workflowContextF,
           name: workflow.name,
-          params: cleanObject(workflowParamsF),
+          params: workflowParamsF,
           steps: workflow.steps(workflowParamsF, workflowContextF).map((s) => ({
-            context: cleanObject({ ...workflowContextF, ...s.context }),
+            context: cleanObject({ ...workflowContextF, ...(s.context ?? {}) }),
             name: s.name,
-            params: cleanObject({ ...workflowContextF, ...(s.params ?? {}) }),
+            params: cleanObject({ ...workflowParamsF, ...(s.params ?? {}) }),
             type: s.type,
           })),
         };

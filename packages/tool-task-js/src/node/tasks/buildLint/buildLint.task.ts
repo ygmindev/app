@@ -1,4 +1,5 @@
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
+import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import {
@@ -6,7 +7,6 @@ import {
   type BuildLintParamsModel,
 } from '@tool/task/node/tasks/buildLint/buildLint.models';
 import { nodeBuild } from '@tool/task/node/tasks/nodeBuild/nodeBuild.task';
-import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 
 export const buildLint = buildTask<BuildLintParamsModel, BuildLintModel>({
   context: {

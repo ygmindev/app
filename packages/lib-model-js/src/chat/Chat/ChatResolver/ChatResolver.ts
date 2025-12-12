@@ -13,9 +13,9 @@ import { ChatImplementation } from '@lib/model/chat/Chat/ChatImplementation/Chat
 import { type ChatResolverModel } from '@lib/model/chat/Chat/ChatResolver/ChatResolver.models';
 import { Message } from '@lib/model/chat/Message/Message.entity';
 import { MessageModel } from '@lib/model/chat/Message/Message.models';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
+import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
 @withContainer()
 @withResolver({ Resource: () => Chat })

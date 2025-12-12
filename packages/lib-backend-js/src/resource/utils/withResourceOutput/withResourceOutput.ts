@@ -9,7 +9,7 @@ import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models'
 import { getOperationType } from '@lib/shared/resource/utils/getOperationType/getOperationType';
 
 export const withResourceOutput =
-  <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot = undefined>({
+  <TMethod extends RESOURCE_METHOD_TYPE, TType, TParams extends unknown, TRoot = undefined>({
     Resource,
     RootResource,
     access = ACCESS_LEVEL.RESTRICTED,
@@ -18,7 +18,7 @@ export const withResourceOutput =
     name,
     operation,
     topics,
-  }: WithResourceOutputParamsModel<TMethod, TType, TRoot>): WithResourceOutputModel =>
+  }: WithResourceOutputParamsModel<TMethod, TType, TParams, TRoot>): WithResourceOutputModel =>
   (target, propertyKey, descriptor) => {
     const nameF = `${name}${method}`;
     const OutputF = ResourceOutput({ Resource, RootResource, method, name: nameF });

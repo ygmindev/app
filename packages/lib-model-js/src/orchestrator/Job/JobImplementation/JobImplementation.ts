@@ -16,7 +16,8 @@ export class JobImplementation
         const client = await getClient();
         const { context, params, workflow } = input.input.form;
         if (!workflow) throw new InvalidArgumentError('Workflow is required');
-        await client.run(workflow, params, context);
+        const { id } = await client.run(workflow, params, context);
+        input.input.form._id = id;
       }
       return input.input;
     },

@@ -1,12 +1,9 @@
-import { type _LoggerParamsModel } from '@lib/shared/logging/utils/Logger/_Logger.models';
-
-export type LoggerParamsModel = _LoggerParamsModel;
-
 export type LoggerModel = {
   debug: LogModel;
   error: LogModel;
-  info: LogModel;
   fail: LogModel;
+  info: LogModel;
+  progress: LogModel;
   success: LogModel;
   trace: LogModel;
   warn: LogModel;

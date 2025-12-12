@@ -29,7 +29,6 @@ const getMany: WorkflowImplementationModel['getMany'] = async (input, context) =
     }),
   );
   const items = filterArray(values, input?.filter, undefined, input?.options?.limit);
-  console.warn('@@@ items 21221:');
   return {
     result: { items },
   };

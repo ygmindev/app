@@ -9,13 +9,8 @@ import pino from 'pino';
 export class _Logger implements _LoggerModel {
   protected _logger!: Logger;
 
-  constructor({ level }: _LoggerParamsModel) {
-    this._logger = pino({
-      level,
-      transport: {
-        pipeline: [{ options: { colorize: true, destination: 2 }, target: 'pino-pretty' }],
-      },
-    });
+  constructor(params: _LoggerParamsModel) {
+    this._logger = pino(params);
   }
 
   debug: _LogModel = (args) => this._logger.debug(args);
