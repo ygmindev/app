@@ -3,9 +3,9 @@ import {
   type WorkerRunModel,
   type WorkerRunParamsModel,
 } from '@tool/task/core/tasks/workerRun/workerRun.models';
-import { Cli } from '@tool/task/core/utils/Cli/Cli';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
+import { Cli } from '@tool/task/core/utils/Cli/Cli';
 import { Worker } from '@tool/task/orchestrator/utils/Worker/Worker';
 import reduce from 'lodash/reduce';
 
@@ -34,6 +34,7 @@ export const workerRun = buildTask<WorkerRunParamsModel, WorkerRunModel>({
         }),
       );
     } catch (e) {
+      await Promise.all(workers.map(async (v) => v.cleanUp()));
       logger.fail(e);
     }
   },

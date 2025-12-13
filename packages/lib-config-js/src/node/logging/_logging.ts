@@ -16,7 +16,7 @@ export const _logging = ({
   transport: {
     targets: filterNil([
       process.env.NODE_ENV === 'development' && {
-        options: { colorize: true },
+        options: { colorize: true, destination: 1 },
         target: 'pino-pretty',
       },
       ...transports,

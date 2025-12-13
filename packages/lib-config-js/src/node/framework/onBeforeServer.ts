@@ -39,7 +39,6 @@ export type AppRegistryModel = {
 
 export const onBeforeServer: onBeforeServerModel = async (params) => {
   const { context, database, headers, routes } = params;
-
   await initializeBackend({ database });
 
   const queryClient = new QueryClient();

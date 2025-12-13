@@ -8,6 +8,7 @@ import {
   type _ServerParamsModel,
 } from '@lib/backend/server/utils/Server/_Server.models';
 import { type ApiConfigModel, type ApiEndpointModel } from '@lib/config/api/api.models';
+import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { timeit } from '@lib/shared/core/utils/timeit/timeit';
 import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { type HTTP_METHOD, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
@@ -19,13 +20,14 @@ import { type I18NextRequest } from 'i18next-http-middleware';
 import forEach from 'lodash/forEach';
 import toNumber from 'lodash/toNumber';
 
-export class _Server implements _ServerModel {
+export class _Server extends Bootstrappable implements _ServerModel {
   protected _api?: ApiConfigModel;
   _app: FastifyInstance;
   protected _host: string;
   protected _port?: number;
 
   constructor({ api, certificate, host, port }: _ServerParamsModel) {
+    super();
     this._host = host;
     this._port = port;
     this._api = api;
@@ -42,7 +44,7 @@ export class _Server implements _ServerModel {
     this._app.register(middie);
   }
 
-  async close(): Promise<void> {
+  async onCleanUp(): Promise<void> {
     if (this._app.server.listening) {
       logger.progress('server closing...');
       await this._app.close();

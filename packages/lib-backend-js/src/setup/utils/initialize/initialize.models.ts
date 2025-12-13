@@ -7,6 +7,4 @@ export type InitializeParamsModel = {
 
 export type InitializeModel = {
   database?: DatabaseModel;
-
-  cleanUp?(): Promise<void>;
 };

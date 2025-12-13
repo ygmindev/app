@@ -9,7 +9,7 @@ export const sleep = (...[duration = 0, options]: SleepParamsModel): Promise<voi
   const timer =
     isVerboseF &&
     setInterval(() => {
-      logger.debug(`${countdown}s`);
+      logger.info(`${countdown}s`);
       countdown--;
       if (countdown <= 0) {
         clearInterval(timer as unknown as number);

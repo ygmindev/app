@@ -3,19 +3,17 @@ import {
   type RootPubSubSchemaModel,
 } from '@lib/config/pubSub/pubSub.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { type BootstrappableModel } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable.models';
 import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
 
 export type _PubSubParamsModel = PubSubConfigModel;
 
-export type _PubSubModel<TType extends PubSubSchemaModel = RootPubSubSchemaModel> = {
-  close(): Promise<void>;
+export type _PubSubModel<TType extends PubSubSchemaModel = RootPubSubSchemaModel> =
+  BootstrappableModel & {
+    publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void;
 
-  connect(): Promise<void>;
-
-  publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void;
-
-  subscribeTopic<TKey extends StringKeyModel<TType>>(
-    topic: TKey,
-    handler: (data?: TType[TKey]) => void,
-  ): Promise<() => void>;
-};
+    subscribeTopic<TKey extends StringKeyModel<TType>>(
+      topic: TKey,
+      handler: (data?: TType[TKey]) => void,
+    ): Promise<() => void>;
+  };

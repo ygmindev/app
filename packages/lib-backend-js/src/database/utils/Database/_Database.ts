@@ -17,6 +17,7 @@ import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/Duplicate
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { UninitializedError } from '@lib/shared/core/errors/UninitializedError/UninitializedError';
+import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
@@ -61,20 +62,13 @@ const normalize = <TType extends unknown>(
   return result as Partial<TType>;
 };
 
-export class _Database implements _DatabaseModel {
+export class _Database extends Bootstrappable implements _DatabaseModel {
   protected config: _DatabaseConfigModel;
   protected orm?: MikroORM;
 
   constructor(config: DatabaseConfigModel) {
+    super();
     this.config = _database(config);
-  }
-
-  async close(): Promise<void> {
-    await this.getEntityManager().getConnection()?.close();
-  }
-
-  async connect(): Promise<void> {
-    this.orm = await MikroORM.init(this.config);
   }
 
   async flush(): Promise<void> {
@@ -328,5 +322,13 @@ export class _Database implements _DatabaseModel {
 
   async isConnected(): Promise<boolean> {
     return this.orm?.em?.getConnection().isConnected() ?? false;
+  }
+
+  async onCleanUp(): Promise<void> {
+    await this.getEntityManager().getConnection()?.close();
+  }
+
+  async onInitialize(): Promise<void> {
+    this.orm = await MikroORM.init(this.config);
   }
 }

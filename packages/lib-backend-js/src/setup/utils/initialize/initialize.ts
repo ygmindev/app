@@ -9,7 +9,6 @@ import {
 } from '@lib/backend/setup/utils/initialize/initialize.models';
 import { pubSubConfig } from '@lib/config/pubSub/pubSub';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
@@ -19,33 +18,20 @@ export const initialize = async ({ database }: InitializeParamsModel): Promise<I
   await new Environment().initialize();
   const databaseF = database();
 
-  const cleanUps: Array<() => Promise<void>> = [
-    async () => Container.get(PubSub).close(),
-    async () => Container.get(Database, DATABASE_TYPE.MONGO)?.close(),
-  ];
-
-  const onCleanUp = async (): Promise<void> => {
-    for (const cleanUp of cleanUps) {
-      await cleanUp();
-    }
-  };
-
-  await handleCleanup({ onCleanUp });
-
   if (!result) {
     result = {};
 
     try {
       const pubSub = new PubSub(pubSubConfig.params());
-      await pubSub.connect();
+      await pubSub.initialize();
       Container.set(PubSub, pubSub);
     } catch (e) {
-      logger.warn(`Failed to connect to pubsub`, e);
+      logger.warn(`Failed to connect to pubSub`, e);
     }
 
     try {
       const db = new Database(databaseF);
-      await db.connect();
+      await db.initialize();
       Container.set(Database, db, DATABASE_TYPE.MONGO);
       result.database = db;
     } catch (e) {
@@ -55,7 +41,5 @@ export const initialize = async ({ database }: InitializeParamsModel): Promise<I
 
   return {
     ...result,
-
-    cleanUp: onCleanUp,
   };
 };

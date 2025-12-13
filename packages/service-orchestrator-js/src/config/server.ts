@@ -1,6 +1,5 @@
 import { graphqlPlugin } from '@lib/backend/server/utils/Server/plugins/graphqlPlugin/graphqlPlugin';
 import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
-import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
 import { serverConfig as configBase } from '@lib/config/node/server/server.node';
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { HTTP_METHOD } from '@lib/shared/http/http.constants';
@@ -16,9 +15,7 @@ serverConfig = serverConfig.extend(() => {
   return {
     api: apiConfig.params(),
 
-    onInitialize: async () => {
-      await initializeBackend({ database: () => databaseConfig.params() });
-    },
+    database: databaseConfig.params(),
 
     plugins: [
       [

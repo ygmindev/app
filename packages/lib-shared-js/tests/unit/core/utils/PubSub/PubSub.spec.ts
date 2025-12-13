@@ -9,13 +9,13 @@ describe(displayName, () => {
   const DATA = { data: 'data' };
 
   test('works', async () => {
-    const pubsub = new PubSub();
-    pubsub.subscribeTopic(TOPIC, (data) => {
+    const pubSub = new PubSub();
+    pubSub.subscribeTopic(TOPIC, (data) => {
       expect(data).toStrictEqual(DATA);
     });
-    pubsub.publish(TOPIC, DATA);
+    pubSub.publish(TOPIC, DATA);
     await sleep(1000);
-    pubsub.close();
+    pubSub.close();
     expect(1).toStrictEqual(1);
   });
 });

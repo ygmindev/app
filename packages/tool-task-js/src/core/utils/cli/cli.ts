@@ -6,6 +6,7 @@ import { taskConfig } from '@lib/config/task/task';
 import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { importInterop } from '@lib/shared/core/utils/importInterop/importInterop';
 import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 import { type CliModel, type TaskRegistryModel } from '@tool/task/core/utils/Cli/Cli.models';
@@ -15,11 +16,12 @@ import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.mode
 import kebabCase from 'lodash/kebabCase';
 import toNumber from 'lodash/toNumber';
 
-export class Cli implements CliModel {
+export class Cli extends Bootstrappable implements CliModel {
   protected _aliases: Record<string, string> = {};
   protected _registry: Record<string, TaskRegistryModel>;
 
   constructor() {
+    super();
     this._registry = {};
   }
 
@@ -31,7 +33,7 @@ export class Cli implements CliModel {
     return this._registry;
   }
 
-  initialize = async (): Promise<void> => {
+  onInitialize = async (): Promise<void> => {
     const { taskExtension } = taskConfig.params();
     const pathnames = fromGlobs([joinPaths(['src/**/*'], { extension: taskExtension })], {
       isAbsolute: true,
@@ -48,7 +50,6 @@ export class Cli implements CliModel {
       if (this._aliases[aliasF]) {
         throw new DuplicateError(`alias ${aliasF} (${main}) already exists`);
       }
-
       this.register(main, { pathname, task });
       this._aliases[aliasF] = main;
     }

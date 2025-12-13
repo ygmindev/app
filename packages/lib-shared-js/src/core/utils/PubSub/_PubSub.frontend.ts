@@ -1,4 +1,3 @@
-import { _pubSub } from '@lib/config/pubSub/_pubSub';
 import { type RootPubSubSchemaModel } from '@lib/config/pubSub/pubSub.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import {
@@ -6,44 +5,35 @@ import {
   type _PubSubParamsModel,
 } from '@lib/shared/core/utils/PubSub/_PubSub.models';
 import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
-import { type Codec, connect, JSONCodec, type NatsConnection, type Subscription } from 'nats';
+import mitt, { type Emitter } from 'mitt';
 
 export class _PubSub<
   TType extends PubSubSchemaModel = RootPubSubSchemaModel,
 > implements _PubSubModel<TType> {
-  protected _client!: NatsConnection;
-  protected _codec!: Codec<unknown>;
-  protected _config!: _PubSubParamsModel;
-  protected _subscriptions!: Map<string, Subscription>;
+  protected emitter: Emitter<Record<string, unknown>>;
 
   constructor(params: _PubSubParamsModel) {
-    this._codec = JSONCodec();
-    this._config = params;
-    this._subscriptions = new Map();
+    this.emitter = mitt();
   }
 
   async close(): Promise<void> {
-    await this._client.close();
-    await this._client.closed();
+    this.emitter.all.clear();
   }
 
   async connect(): Promise<void> {
-    this._client = await connect(_pubSub(this._config));
+    return Promise.resolve();
   }
 
   publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void {
-    this._client.publish(topic, this._codec.encode(data));
+    this.emitter.emit(topic, data);
   }
 
   async subscribeTopic<TKey extends StringKeyModel<TType>>(
     topic: TKey,
     handler: (data?: TType[TKey]) => void,
   ): Promise<() => void> {
-    const sub = this._client.subscribe(topic);
-    this._subscriptions.set(topic, sub);
-    for await (const v of sub) {
-      handler(this._codec.decode(v.data) as TType[TKey]);
-    }
-    return () => sub.unsubscribe();
+    const handle: (data?: unknown) => void = (data) => handler(data as TType[TKey]);
+    this.emitter.on(topic, handle);
+    return () => this.emitter.off(topic, handle);
   }
 }

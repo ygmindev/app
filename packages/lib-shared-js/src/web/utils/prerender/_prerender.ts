@@ -13,7 +13,8 @@ import {
 export const _prerender =
   ({ i18n, languageDefault, languages }: _PrerenderParamsModel): _PrerenderModel =>
   async ({ pageContexts }) => {
-    const { cleanUp } = await initializeBackend({ database: () => databaseConfig.params() });
+    await initializeBackend({ database: () => databaseConfig.params() });
+
     const pageContextPromises: Array<() => Promise<(typeof pageContexts)[number]>> = [];
     languages.forEach(({ id }) =>
       pageContexts.forEach(({ context, urlOriginal, ...pageContext }) =>
@@ -35,6 +36,5 @@ export const _prerender =
         }),
       ),
     );
-    await cleanUp?.();
     return { prerenderContext: { pageContexts: await mapSequence(pageContextPromises) } };
   };

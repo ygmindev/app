@@ -1,17 +1,19 @@
 import { type RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
+import { type BootstrappableModel } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable.models';
 import { type ResourceNameParamsModel } from '@lib/shared/resource/resource.models';
 
-export type _DatabaseModel = {
-  close(): Promise<void>;
-  connect(): Promise<void>;
+export type _DatabaseModel = BootstrappableModel & {
   flush(): Promise<void>;
+
   getRepositories(): Array<string>;
+
   getRepository<TType>(params: GetRepositoryParamsModel<TType>): RepositoryModel<TType>;
   hydrate<TType extends unknown>(
     name: string,
     form?: Partial<TType>,
     isLeaf?: boolean,
   ): Partial<TType>;
+
   isConnected(): Promise<boolean>;
 };
 

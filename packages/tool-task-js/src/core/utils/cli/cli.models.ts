@@ -1,3 +1,4 @@
+import { type BootstrappableModel } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable.models';
 import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 
 export type TaskRegistryModel = {
@@ -5,12 +6,10 @@ export type TaskRegistryModel = {
   task: TaskModel;
 };
 
-export type CliModel = {
+export type CliModel = BootstrappableModel & {
   aliases: Record<string, string>;
 
   registry: Record<string, TaskRegistryModel>;
-
-  initialize(): Promise<void>;
 
   register(name: string, params: TaskRegistryModel): void;
 

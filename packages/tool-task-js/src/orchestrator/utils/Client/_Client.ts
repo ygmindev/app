@@ -1,6 +1,7 @@
 import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { Client, Connection } from '@temporalio/client';
 import { TASK_QUEUE_DEFAULT } from '@tool/task/core/core.constants';
 import {
@@ -9,25 +10,27 @@ import {
 } from '@tool/task/orchestrator/utils/Client/_Client.models';
 import { type ExecutionResultModel } from '@tool/task/orchestrator/utils/Client/Client.models';
 
-export class _Client implements _ClientModel {
+export class _Client extends Bootstrappable implements _ClientModel {
   protected _client?: Client;
+  protected _connection?: Connection;
   protected _id: string;
-  protected _isInitialized: boolean = false;
 
   constructor({ id }: _ClientParamsModel = {}) {
+    super();
     this._id = id ?? 'client';
   }
 
-  initialize = async (): Promise<void> => {
-    if (!this._isInitialized) {
-      const connection = await Connection.connect();
-      this._client = new Client({
-        connection,
-        identity: this._id,
-      });
-      this._isInitialized = true;
-    }
-  };
+  async onCleanUp(): Promise<void> {
+    await this._connection?.close();
+  }
+
+  async onInitialize(): Promise<void> {
+    this._connection = await Connection.connect();
+    this._client = new Client({
+      connection: this._connection,
+      identity: this._id,
+    });
+  }
 
   run = async (
     workflow: string,

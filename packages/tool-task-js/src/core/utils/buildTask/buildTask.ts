@@ -13,11 +13,11 @@ export const buildTask =
   async (paramsOverrides, contextOverrides) => {
     const paramsF = { ...(params ?? {}), ...(paramsOverrides ?? {}) } as TParams;
     const contextF = { ...(context ?? {}), ...(contextOverrides ?? {}) };
-    const env = new Environment();
-    await env.initialize({
+    const env = new Environment({
       app: contextF.app,
       environment: contextF.environment,
       overrrides: contextF.overrrides,
     });
+    await env.initialize();
     return fn(paramsF, contextF);
   };

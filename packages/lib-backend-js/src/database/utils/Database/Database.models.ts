@@ -8,7 +8,10 @@ export type DatabaseModel = _DatabaseModel;
 
 export type RepositoryModel<TType extends unknown> = ResourceImplementationModel<TType> & {
   clear(): Promise<void>;
+
   collection(): Collection<TType & Document>;
+
   count(params?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType>): Promise<number>;
+
   flush(): Promise<void>;
 };

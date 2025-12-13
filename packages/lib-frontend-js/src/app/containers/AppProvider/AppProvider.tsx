@@ -52,7 +52,7 @@ export const AppProvider: FCModel<AppProviderPropsModel> = ({ children }) => {
   const [, dimensionSet] = useStore('app.dimension');
   const [portals, dispatch] = useReducer(portalsReducer, {});
 
-  const pubsub = useContainer(PubSub);
+  const pubSub = useContainer(PubSub);
 
   const update = debounce(() => dimensionSet(display.getDimension()), {
     duration: USE_DIMENSION_DELAY,
@@ -63,7 +63,7 @@ export const AppProvider: FCModel<AppProviderPropsModel> = ({ children }) => {
     display.subscribeResize(update);
     return () => {
       display.unsubscribeResize(update);
-      pubsub.close();
+      void pubSub.cleanUp();
     };
   }, []);
 

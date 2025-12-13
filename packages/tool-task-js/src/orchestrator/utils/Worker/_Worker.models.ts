@@ -1,3 +1,4 @@
+import { type BootstrappableModel } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable.models';
 import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 
 export type _WorkerParamsModel = {
@@ -8,7 +9,6 @@ export type _WorkerParamsModel = {
   workflowsName: string;
 };
 
-export type _WorkerModel = {
-  initialize(): Promise<void>;
+export type _WorkerModel = BootstrappableModel & {
   run(): Promise<void>;
 };

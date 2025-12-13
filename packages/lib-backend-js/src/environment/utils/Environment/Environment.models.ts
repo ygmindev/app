@@ -1,4 +1,5 @@
 import { type EnvironmentConfigModel } from '@lib/config/environment/environment.models';
+import { type BootstrappableModel } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable.models';
 import { type ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 
 export type EnvironmentParamsModel = {
@@ -7,7 +8,7 @@ export type EnvironmentParamsModel = {
   overrrides?: Partial<EnvironmentConfigModel>;
 };
 
-export type EnvironmentModel = {
+export type EnvironmentModel = BootstrappableModel & {
   variables: Partial<EnvironmentConfigModel>;
   initialize(params?: EnvironmentParamsModel): Promise<void>;
 };

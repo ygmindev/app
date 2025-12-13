@@ -3,6 +3,7 @@ import { type LocalContextModel } from '@lib/backend/core/utils/LocalStorage/Loc
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { BUILD_DIR } from '@lib/config/file/file.constants';
+import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import {
@@ -34,7 +35,7 @@ class ContextInterceptor implements ActivityInboundCallsInterceptor {
   }
 }
 
-export class _Worker implements _WorkerModel {
+export class _Worker extends Bootstrappable implements _WorkerModel {
   protected _id: string;
   protected _queue: string;
   protected _tasks?: Record<string, TaskModel>;
@@ -48,13 +49,18 @@ export class _Worker implements _WorkerModel {
     workflowsDir = fromWorking(BUILD_DIR),
     workflowsName,
   }: _WorkerParamsModel) {
+    super();
     this._tasks = tasks;
     this._queue = queue;
     this._id = `${workflowsName}-${id ?? uid()}`;
     this._workflowsPath = joinPaths([workflowsDir, workflowsName], { extension: '.js' });
   }
 
-  initialize = async (): Promise<void> => {
+  async onCleanUp(): Promise<void> {
+    this._worker?.shutdown();
+  }
+
+  onInitialize = async (): Promise<void> => {
     this._worker = await Worker.create({
       activities: this._tasks,
       identity: this._id,

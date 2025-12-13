@@ -3,19 +3,19 @@ import { type DatabaseModel } from '@lib/backend/database/utils/Database/Databas
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 export class Database extends _Database implements DatabaseModel {
-  async close(): Promise<void> {
+  async onCleanUp(): Promise<void> {
     if (await this.isConnected()) {
       logger.progress(`Closing connection ${this.config.clientUrl}`);
-      await super.close();
+      await super.onCleanUp();
     }
   }
 
-  async connect(): Promise<void> {
+  async onInitialize(): Promise<void> {
     if (await this.isConnected()) {
       logger.info(`Reusing connection ${this.config.clientUrl}`);
     } else {
       logger.progress(`Connecting ${this.config.clientUrl}`);
-      await super.connect();
+      await super.onInitialize();
       logger.success(`Connected to ${this.config.clientUrl}`);
     }
   }
