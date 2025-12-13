@@ -7,4 +7,6 @@ export type LogMessageModel = ResourceModel & {
   level?: LOGGING_LEVEL;
 
   message: string;
+
+  ns?: string;
 };

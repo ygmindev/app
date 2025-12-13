@@ -38,7 +38,6 @@ export const initialize = async ({ database }: InitializeParamsModel): Promise<I
     try {
       const pubSub = new PubSub(pubSubConfig.params());
       await pubSub.connect();
-      await pubSub.connect();
       Container.set(PubSub, pubSub);
     } catch (e) {
       logger.warn(`Failed to connect to pubsub`, e);

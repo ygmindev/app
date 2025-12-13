@@ -26,7 +26,7 @@ export class LogMessageResolver implements LogMessageResolverModel {
     },
     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
     name: LOG_MESSAGE_RESOURCE_NAME,
-    topics: ['message'],
+    topics: [LOG_MESSAGE_RESOURCE_NAME],
   })
   async subscribe(
     @withResourceInput({
