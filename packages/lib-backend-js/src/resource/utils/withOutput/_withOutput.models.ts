@@ -9,14 +9,20 @@ export type _WithOutputParamsModel<
   TParams extends unknown,
 > = {
   isArray?: boolean;
+
   name: string;
+
   operation?: GRAPHQL_OPERATION_TYPE;
+
   topics?:
     | string
     | Array<string>
     | ((params: { args?: TParams; context?: RequestContextModel }) => string | Array<string>);
+
   type?: DATA_TYPE;
+
   Resource?(): ResourceClassModel<TType>;
+
   filter?(params: { context?: RequestContextModel; payload?: TData }): Promise<boolean>;
 };
 

@@ -8,7 +8,9 @@ let serverConfig = configBase;
 
 serverConfig = serverConfig.extend(() => ({
   onInitialize: async () => {
-    await initializeBackend({ database: () => databaseConfig.params() });
+    await initializeBackend({
+      database: () => databaseConfig.params(),
+    });
   },
 
   plugins: [] as Array<[ServerPluginModel<unknown>, unknown]>,

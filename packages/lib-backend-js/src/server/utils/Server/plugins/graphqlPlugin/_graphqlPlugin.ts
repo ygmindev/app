@@ -60,7 +60,7 @@ export const _graphqlPlugin: _GraphqlPluginModel = async (server, { config, logg
             statusCode: response.status ?? HTTP_STATUS_CODE.OK,
           });
         }
-        throw new NotFoundError('');
+        throw new NotFoundError('no params');
       },
       method: [HTTP_METHOD.GET, HTTP_METHOD.POST, HTTP_METHOD.OPTIONS],
       pathname,

@@ -1,49 +1,46 @@
+import { type RootPubSubSchemaModel } from '@lib/config/pubSub/pubSub.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
-import { TimeoutError } from '@lib/shared/core/errors/TimeoutError/TimeoutError';
 import { _PubSub } from '@lib/shared/core/utils/PubSub/_PubSub';
-import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
-import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import {
+  type PubSubModel,
+  type PubSubSchemaModel,
+} from '@lib/shared/core/utils/PubSub/PubSub.models';
 
-export class PubSub<TType extends PubSubSchemaModel> extends _PubSub<TType> {
+export class PubSub<TType extends PubSubSchemaModel = RootPubSubSchemaModel>
+  extends _PubSub<TType>
+  implements PubSubModel<TType>
+{
   subscribe<TKey extends StringKeyModel<TType>>(topic: TKey): AsyncIterator<TType[TKey]> {
-    const { subscribe: subscribeSync } = this;
-    async function* stream(): AsyncGenerator<TType[TKey]> {
-      let results: Array<TType[TKey]> = [];
-      let resolve: (value?: unknown) => void;
-      let promise = new Promise((r) => (resolve = r));
-      const done = false;
-      subscribeSync(topic, (data) => {
-        data && (results = results.concat(data));
-        resolve();
-        promise = new Promise((r) => (resolve = r));
-      });
+    let unsubscribe: (() => void) | undefined;
+    const queue: Array<TType[TKey]> = [];
+    let resolveNext: (() => void) | null = null;
 
-      while (!done) {
-        await promise;
-        yield* results;
-        results = [];
+    const unsubscribePromise = this.subscribeTopic(topic, (data) => {
+      if (data !== undefined) {
+        queue.push(data);
+        if (resolveNext) {
+          resolveNext();
+          resolveNext = null;
+        }
+      }
+    });
+
+    async function* stream(): AsyncGenerator<TType[TKey]> {
+      unsubscribe = await unsubscribePromise;
+      try {
+        while (true) {
+          while (queue.length > 0) {
+            yield queue.shift()!;
+          }
+          await new Promise<void>((resolve) => {
+            resolveNext = resolve;
+          });
+        }
+      } finally {
+        if (unsubscribe) unsubscribe();
       }
     }
+
     return stream();
   }
-
-  waitFor<TKey extends StringKeyModel<TType>>(
-    topic: TKey,
-    timeout?: number,
-  ): Promise<TType[TKey] | undefined> {
-    return new Promise((resolve, reject) => {
-      timeout &&
-        void sleep(timeout).then(() => {
-          this.unsubscribe(topic);
-          reject(new TimeoutError(topic, timeout));
-        });
-
-      this.subscribe(topic, (data) => {
-        this.unsubscribe(topic);
-        resolve(data ?? undefined);
-      });
-    });
-  }
 }
-
-export const pubsub = new PubSub();

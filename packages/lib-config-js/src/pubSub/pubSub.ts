@@ -11,11 +11,18 @@ export const pubSubConfig = new Config<PubSubConfigModel, _PubSubConfigModel>({
   params: () => {
     const environment = Container.get(Environment);
     return {
-      command: (config) => `nats-server -js -a ${config.host} -p ${config.port}`,
+      command: (config) => {
+        let command = 'nats-server -js';
+        config.host && (command = `${command} -a ${config.host}`);
+        config.port && (command = `${command} -p ${config.port}`);
+        return command;
+      },
 
-      host: environment.variables.SERVER_PUBSUB_HOST ?? 'localhost',
+      host: environment.variables.SERVER_PUBSUB_HOST,
 
-      port: toNumber(environment.variables.SERVER_PUBSUB_PORT),
+      port: environment.variables.SERVER_PUBSUB_PORT
+        ? toNumber(environment.variables.SERVER_PUBSUB_PORT)
+        : undefined,
     };
   },
 });

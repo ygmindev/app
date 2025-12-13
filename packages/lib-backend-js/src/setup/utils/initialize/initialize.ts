@@ -7,6 +7,7 @@ import {
   type InitializeModel,
   type InitializeParamsModel,
 } from '@lib/backend/setup/utils/initialize/initialize.models';
+import { pubSubConfig } from '@lib/config/pubSub/pubSub';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
@@ -30,17 +31,26 @@ export const initialize = async ({ database }: InitializeParamsModel): Promise<I
   };
 
   await handleCleanup({ onCleanUp });
+
   if (!result) {
     result = {};
-    if (databaseF) {
-      try {
-        const db = new Database(databaseF);
-        await db.connect();
-        Container.set(Database, db, DATABASE_TYPE.MONGO);
-        result.database = db;
-      } catch (e) {
-        logger.fail(`Failed to connect to ${databaseF.host}`, e);
-      }
+
+    try {
+      const pubSub = new PubSub(pubSubConfig.params());
+      await pubSub.connect();
+      await pubSub.connect();
+      Container.set(PubSub, pubSub);
+    } catch (e) {
+      logger.warn(`Failed to connect to pubsub`, e);
+    }
+
+    try {
+      const db = new Database(databaseF);
+      await db.connect();
+      Container.set(Database, db, DATABASE_TYPE.MONGO);
+      result.database = db;
+    } catch (e) {
+      logger.fail(`Failed to connect to ${databaseF.host}`, e);
     }
   }
 

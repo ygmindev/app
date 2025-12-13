@@ -30,8 +30,6 @@ class ContextInterceptor implements ActivityInboundCallsInterceptor {
     next: Next<ActivityInboundCallsInterceptor, 'execute'>,
   ): Promise<unknown> {
     const storage = Container.get(LocalStorage);
-    console.warn('\n\n@@@withcontext:');
-    console.warn(this._context);
     return storage.run(async () => next(input), this._context);
   }
 }

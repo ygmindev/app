@@ -19,10 +19,16 @@ export const _graphql = ({
   buildSchemaSync({
     authChecker: ({ context }, roles) =>
       authorize({ context: context as RequestContextModel, roles }),
+
     container: container as unknown as ContainerType,
+
     emitSchemaFile: joinPaths([outDir, schemaFilename]),
+
     nullableByDefault: true,
+
     pubSub: Container.get(_PubSub) as unknown as PubSub,
+
     resolvers: resolvers as unknown as BuildSchemaOptions['resolvers'],
+
     validate: { forbidUnknownValues: false },
   });

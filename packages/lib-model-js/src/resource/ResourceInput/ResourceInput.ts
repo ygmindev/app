@@ -130,6 +130,9 @@ export const ResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot
           isArray: true,
         })
         filter!: Array<FilterModel<TType>>;
+
+        @withField({ isArray: true, isOptional: true })
+        id?: Array<string>;
       }
       return Input as ResourceClassModel<ResourceInputModel<TMethod, TType, TRoot>>;
     }

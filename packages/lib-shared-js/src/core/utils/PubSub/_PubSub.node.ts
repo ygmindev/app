@@ -1,16 +1,24 @@
-import { pubSubConfig } from '@lib/config/pubSub/pubSub';
+import { _pubSub } from '@lib/config/pubSub/_pubSub';
+import { type RootPubSubSchemaModel } from '@lib/config/pubSub/pubSub.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
-import { type _PubSubModel } from '@lib/shared/core/utils/PubSub/_PubSub.models';
+import {
+  type _PubSubModel,
+  type _PubSubParamsModel,
+} from '@lib/shared/core/utils/PubSub/_PubSub.models';
 import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
 import { type Codec, connect, JSONCodec, type NatsConnection, type Subscription } from 'nats';
 
-export class _PubSub<TType extends PubSubSchemaModel> implements _PubSubModel<TType> {
+export class _PubSub<
+  TType extends PubSubSchemaModel = RootPubSubSchemaModel,
+> implements _PubSubModel<TType> {
   protected _client!: NatsConnection;
   protected _codec!: Codec<unknown>;
+  protected _config!: _PubSubParamsModel;
   protected _subscriptions!: Map<string, Subscription>;
 
-  constructor() {
+  constructor(params: _PubSubParamsModel) {
     this._codec = JSONCodec();
+    this._config = params;
     this._subscriptions = new Map();
   }
 
@@ -20,25 +28,22 @@ export class _PubSub<TType extends PubSubSchemaModel> implements _PubSubModel<TT
   }
 
   async connect(): Promise<void> {
-    this._client = await connect(pubSubConfig.config());
+    this._client = await connect(_pubSub(this._config));
   }
 
   publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void {
     this._client.publish(topic, this._codec.encode(data));
   }
 
-  async subscribe<TKey extends StringKeyModel<TType>>(
+  async subscribeTopic<TKey extends StringKeyModel<TType>>(
     topic: TKey,
     handler: (data?: TType[TKey]) => void,
-  ): Promise<void> {
+  ): Promise<() => void> {
     const sub = this._client.subscribe(topic);
     this._subscriptions.set(topic, sub);
     for await (const v of sub) {
       handler(this._codec.decode(v.data) as TType[TKey]);
     }
-  }
-
-  async unsubscribe<TKey extends StringKeyModel<TType>>(topic?: TKey): Promise<void> {
-    await (topic ? this._client.drain() : this._subscriptions.get(topic as TKey)?.drain());
+    return () => sub.unsubscribe();
   }
 }

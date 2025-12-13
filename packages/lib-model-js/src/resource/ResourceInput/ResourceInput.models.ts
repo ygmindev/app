@@ -71,6 +71,7 @@ type SubscribeOptionsModel = EmptyObjectModel;
 
 type SubscribeArgsModel<TType> = {
   filter?: Array<FilterModel<TType>>;
+  id?: Array<string>;
   options?: SubscribeOptionsModel;
 };
 

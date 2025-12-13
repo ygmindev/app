@@ -8,6 +8,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { Table } from '@lib/frontend/data/components/Table/Table';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useLogMessageResource } from '@lib/frontend/logging/hooks/useLogMessageResource/useLogMessageResource';
 import { type WorkflowControlPropsModel } from '@lib/frontend/orchestrator/components/WorkflowControl/WorkflowControl.models';
 import { useJobResource } from '@lib/frontend/orchestrator/hooks/useJobResource/useJobResource';
 import { ORCHESTRATOR } from '@lib/frontend/orchestrator/orchestrator.constants';
@@ -21,6 +22,7 @@ export const WorkflowControl: FCModel<WorkflowControlPropsModel> = ({ workflow, 
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([ORCHESTRATOR]);
   const { create } = useJobResource();
+  const { subscribe } = useLogMessageResource();
   return (
     <Accordion
       {...wrapperProps}
@@ -34,15 +36,20 @@ export const WorkflowControl: FCModel<WorkflowControlPropsModel> = ({ workflow, 
             <Button
               color={THEME_COLOR.SUCCESS}
               icon="play"
-              onPress={async () =>
-                create({
+              onPress={async () => {
+                const result = await create({
                   form: {
                     context: workflow.context,
                     params: workflow.params,
                     workflow: workflow._id,
                   },
-                })
-              }
+                });
+                const workflowId = result.result?._id;
+                if (workflowId) {
+                  const x = await subscribe({ id: [workflowId] });
+                  console.warn(x);
+                }
+              }}
               tooltip={t('orchestrator:start', { value: 'orchestrator:workflow' })}
             />
             <Button
