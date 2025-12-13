@@ -1,64 +1,44 @@
+import { pubSubConfig } from '@lib/config/pubSub/pubSub';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type _PubSubModel } from '@lib/shared/core/utils/PubSub/_PubSub.models';
 import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
-import PubSub from 'pubsub-js';
+import { type Codec, connect, JSONCodec, type NatsConnection, type Subscription } from 'nats';
 
 export class _PubSub<TType extends PubSubSchemaModel> implements _PubSubModel<TType> {
-  close(): void {
-    PubSub.clearAllSubscriptions();
+  protected _client!: NatsConnection;
+  protected _codec!: Codec<unknown>;
+  protected _subscriptions!: Map<string, Subscription>;
+
+  constructor() {
+    this._codec = JSONCodec();
+    this._subscriptions = new Map();
+  }
+
+  async close(): Promise<void> {
+    await this._client.close();
+    await this._client.closed();
+  }
+
+  async connect(): Promise<void> {
+    this._client = await connect(pubSubConfig.config());
   }
 
   publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void {
-    PubSub.publishSync(topic, data);
+    this._client.publish(topic, this._codec.encode(data));
   }
 
-  subscribeSync<TKey extends StringKeyModel<TType>>(
+  async subscribe<TKey extends StringKeyModel<TType>>(
     topic: TKey,
     handler: (data?: TType[TKey]) => void,
-  ): void {
-    PubSub.subscribe(topic, (_, data) => handler(data as TType[TKey]));
+  ): Promise<void> {
+    const sub = this._client.subscribe(topic);
+    this._subscriptions.set(topic, sub);
+    for await (const v of sub) {
+      handler(this._codec.decode(v.data) as TType[TKey]);
+    }
   }
 
-  unsubscribe<TKey extends StringKeyModel<TType>>(topic: TKey): void {
-    PubSub.unsubscribe(topic);
+  async unsubscribe<TKey extends StringKeyModel<TType>>(topic?: TKey): Promise<void> {
+    await (topic ? this._client.drain() : this._subscriptions.get(topic as TKey)?.drain());
   }
 }
-
-// TODO: run redis in production
-
-// import { type _PubSubModel } from '@lib/shared/core/utils/PubSub/_PubSub.models';
-// import { Redis } from 'ioredis';
-
-// export class _PubSub implements _PubSubModel {
-//   protected pub: Redis;
-//   protected sub: Redis;
-
-//   constructor() {
-//     this.pub = new Redis();
-//     this.sub = new Redis();
-//   }
-
-//   close(): void {
-//     void this.pub.unsubscribe();
-//     void this.sub.unsubscribe();
-//   }
-
-//   publish<TType extends unknown>(topic: string, params?: TType): void {
-//     void this.pub.publish(topic, params ? JSON.stringify(params) : '');
-//   }
-
-//   subscribe<TType extends unknown>(topic: string, handler: (params?: TType) => void): void {
-//     this.sub.on(topic ?? 'message', (data: TType) => {
-//       let dataF = data;
-//       try {
-//         dataF = JSON.parse(dataF as string) as TType;
-//       } catch (_) {}
-//       void handler(dataF);
-//     });
-//   }
-
-//   unsubscribe(topic: string): void {
-//     void this.pub.unsubscribe(topic);
-//     void this.sub.unsubscribe(topic);
-//   }
-// }

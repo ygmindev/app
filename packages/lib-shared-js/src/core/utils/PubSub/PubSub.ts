@@ -6,7 +6,7 @@ import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export class PubSub<TType extends PubSubSchemaModel> extends _PubSub<TType> {
   subscribe<TKey extends StringKeyModel<TType>>(topic: TKey): AsyncIterator<TType[TKey]> {
-    const { subscribeSync } = this;
+    const { subscribe: subscribeSync } = this;
     async function* stream(): AsyncGenerator<TType[TKey]> {
       let results: Array<TType[TKey]> = [];
       let resolve: (value?: unknown) => void;
@@ -38,7 +38,7 @@ export class PubSub<TType extends PubSubSchemaModel> extends _PubSub<TType> {
           reject(new TimeoutError(topic, timeout));
         });
 
-      this.subscribeSync(topic, (data) => {
+      this.subscribe(topic, (data) => {
         this.unsubscribe(topic);
         resolve(data ?? undefined);
       });

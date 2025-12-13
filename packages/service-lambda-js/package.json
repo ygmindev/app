@@ -68,9 +68,6 @@
     "twilio": "^5.9.0",
     "ws": "^8.18.3"
   },
-  "devDependencies": {
-    "pubsub-js": "^1.9.5"
-  },
   "exports": {
     "./*": {
       "development": "./src/*",

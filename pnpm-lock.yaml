@@ -1576,6 +1576,9 @@ importers:
       nanoid:
         specifier: ^5.1.5
         version: 5.1.6
+      nats:
+        specifier: ^2.29.3
+        version: 2.29.3
       nodemailer:
         specifier: ^7.0.6
         version: 7.0.11
@@ -1588,9 +1591,6 @@ importers:
       pino-pretty:
         specifier: ^13.1.1
         version: 13.1.2
-      pubsub-js:
-        specifier: ^1.9.5
-        version: 1.9.5
       semver:
         specifier: ^7.7.3
         version: 7.7.3
@@ -2170,9 +2170,6 @@ importers:
       pino-pretty:
         specifier: ^13.1.1
         version: 13.1.2
-      pubsub-js:
-        specifier: ^1.9.5
-        version: 1.9.5
       random-js:
         specifier: ^2.1.0
         version: 2.1.0
@@ -2250,9 +2247,6 @@ importers:
       pino-pretty:
         specifier: ^13.1.1
         version: 13.1.2
-      pubsub-js:
-        specifier: ^1.9.5
-        version: 1.9.5
       puppeteer:
         specifier: ^24.19.0
         version: 24.31.0(typescript@5.9.3)
@@ -2571,10 +2565,6 @@ importers:
       ws:
         specifier: ^8.18.3
         version: 8.18.3
-    devDependencies:
-      pubsub-js:
-        specifier: ^1.9.5
-        version: 1.9.5
 
   packages/service-orchestrator-js:
     dependencies:
@@ -2701,9 +2691,6 @@ importers:
       pino-pretty:
         specifier: ^13.1.1
         version: 13.1.2
-      pubsub-js:
-        specifier: ^1.9.5
-        version: 1.9.5
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -2839,9 +2826,6 @@ importers:
       pino-pretty:
         specifier: ^13.1.1
         version: 13.1.2
-      pubsub-js:
-        specifier: ^1.9.5
-        version: 1.9.5
       stripe:
         specifier: ^18.5.0
         version: 18.5.0(@types/node@24.10.1)
@@ -3198,9 +3182,6 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.7.1
-      pubsub-js:
-        specifier: ^1.9.5
-        version: 1.9.5
       puppeteer:
         specifier: ^24.19.0
         version: 24.31.0(typescript@5.9.3)
@@ -3376,9 +3357,6 @@ importers:
       '@types/minimist':
         specifier: ^1.2.5
         version: 1.2.5
-      '@types/pubsub-js':
-        specifier: ^1.8.6
-        version: 1.8.6
       '@types/react':
         specifier: ^19.1.12
         version: 19.2.7
@@ -9069,9 +9047,6 @@ packages:
 
   '@types/prismjs@1.26.5':
     resolution: {integrity: sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ==}
-
-  '@types/pubsub-js@1.8.6':
-    resolution: {integrity: sha512-Kwug5cwV0paUDm/NfwDx1sp9xI0bGIvmWJjJWCU8NngkCCMt3EIC7oPDvb6fV7BR8kPpFyyBu4D11bda/2MdPA==}
 
   '@types/qs@6.14.0':
     resolution: {integrity: sha512-eOunJqu0K1923aExK6y8p6fsihYEn/BYuQ4g0CxAAgFc4b/ZLN4CrsRZ55srTdqoiLzU2B2evC+apEIxprEzkQ==}
@@ -15592,6 +15567,10 @@ packages:
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
     hasBin: true
 
+  nats@2.29.3:
+    resolution: {integrity: sha512-tOQCRCwC74DgBTk4pWZ9V45sk4d7peoE2njVprMRCBXrhJ5q5cYM7i6W+Uvw2qUrcfOSnuisrX7bEx3b3Wx4QA==}
+    engines: {node: '>= 14.0.0'}
+
   natural-compare-lite@1.4.0:
     resolution: {integrity: sha512-Tj+HTDSJJKaZnfiuw+iaF9skdPpTo2GtEly5JHnWV/hfv2Qj/9RKsGISQtLh2ox3l5EAGw487hnBee0sIJ6v2g==}
 
@@ -15634,6 +15613,10 @@ packages:
 
   nice-try@1.0.5:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
+
+  nkeys.js@1.1.0:
+    resolution: {integrity: sha512-tB/a0shZL5UZWSwsoeyqfTszONTt4k2YS0tuQioMOD180+MbombYVgzDUYHlx+gejYK6rgf08n/2Df99WY0Sxg==}
+    engines: {node: '>=10.0.0'}
 
   no-case@2.3.2:
     resolution: {integrity: sha512-rmTZ9kz+f3rCvK2TD1Ue/oZlns7OGoIWP4fc3llxxRXlOkHKoWPPWJOfFYpITabSow43QJbRIoHQXtt10VldyQ==}
@@ -16515,9 +16498,6 @@ packages:
 
   public-encrypt@4.0.3:
     resolution: {integrity: sha512-zVpa8oKZSz5bTMTFClc1fQOnyyEzpl5ozpi1B5YcvBrdohMjH2rfsBtyXcuNuwjsDIXmBYlF2N5FlJYhR29t8Q==}
-
-  pubsub-js@1.9.5:
-    resolution: {integrity: sha512-5MZ0I9i5JWVO7SizvOviKvZU2qaBbl2KQX150FAA+fJBwYpwOUId7aNygURWSdPzlsA/xZ/InUKXqBbzM0czTA==}
 
   pug-attrs@3.0.0:
     resolution: {integrity: sha512-azINV9dUtzPMFQktvTXciNAfAuVh/L/JCl0vtPCwvOA21uZrC08K/UnmrL+SXGEVc1FwzjW62+xw5S/uaLj6cA==}
@@ -18626,6 +18606,9 @@ packages:
 
   tweetnacl@0.14.5:
     resolution: {integrity: sha512-KXXFFdAbFXY4geFIwoyNK+f5Z1b7swfXABfL7HXCmoIWMKU3dmS26672A4EeQtDzLKy7SXmfBu51JolvEKwtGA==}
+
+  tweetnacl@1.0.3:
+    resolution: {integrity: sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==}
 
   twilio@5.10.6:
     resolution: {integrity: sha512-mZkB1JHvIuxv4J0MUP+iNyK4xQi6XhtqZdiowDSZzOgT2MhYhGOtDTorb6+Y8NFsb589W3njtAUnRCPcXaiX3g==}
@@ -27400,8 +27383,6 @@ snapshots:
 
   '@types/prismjs@1.26.5': {}
 
-  '@types/pubsub-js@1.8.6': {}
-
   '@types/qs@6.14.0': {}
 
   '@types/range-parser@1.2.7': {}
@@ -36097,6 +36078,10 @@ snapshots:
 
   napi-postinstall@0.3.4: {}
 
+  nats@2.29.3:
+    dependencies:
+      nkeys.js: 1.1.0
+
   natural-compare-lite@1.4.0: {}
 
   natural-compare@1.4.0: {}
@@ -36130,6 +36115,10 @@ snapshots:
 
   nice-try@1.0.5:
     optional: true
+
+  nkeys.js@1.1.0:
+    dependencies:
+      tweetnacl: 1.0.3
 
   no-case@2.3.2:
     dependencies:
@@ -37187,8 +37176,6 @@ snapshots:
       parse-asn1: 5.1.9
       randombytes: 2.1.0
       safe-buffer: 5.2.1
-
-  pubsub-js@1.9.5: {}
 
   pug-attrs@3.0.0:
     dependencies:
@@ -39755,6 +39742,8 @@ snapshots:
   tunnel@0.0.6: {}
 
   tweetnacl@0.14.5: {}
+
+  tweetnacl@1.0.3: {}
 
   twilio@5.10.6:
     dependencies:

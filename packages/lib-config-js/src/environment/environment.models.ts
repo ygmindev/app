@@ -59,6 +59,8 @@ export type EnvironmentConfigModel = {
   SERVER_OTP_STATIC?: string;
   SERVER_PLAID_CLIENT_ID: string;
   SERVER_PLAID_SECRET: string;
+  SERVER_PUBSUB_HOST: string;
+  SERVER_PUBSUB_PORT: string;
   SERVER_SALT_LENGTH: string;
   SERVER_SERVERLESS_REGION: string;
   SERVER_SSL_PRIVATE_KEY: string;

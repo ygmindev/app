@@ -3,6 +3,7 @@
 run orchestratorBuild
 
 run executeParallel --commands=\
+"run pubSubRun",\
 "run orchestratorRun",\
 "run workerRun",\
 "run nodeDev --app=@service/orchestrator",\

@@ -8,7 +8,7 @@ import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import { execute } from '@tool/task/core/utils/execute/execute';
 
 export const selfSignCertificates = buildTask({
-  task: async (parmas: SelfSignCertificatesParamsModel): Promise<SelfSignCertificatesModel> => {
+  task: async (params: SelfSignCertificatesParamsModel): Promise<SelfSignCertificatesModel> => {
     const { certificateDir, privateKeyFilename, publicKeyFilename } =
       serverConfig.params().certificate;
     return execute({

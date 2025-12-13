@@ -10,22 +10,26 @@ export class _PubSub<TType extends PubSubSchemaModel> implements _PubSubModel<TT
     this.emitter = mitt();
   }
 
-  close(): void {
+  async close(): Promise<void> {
     this.emitter.all.clear();
+  }
+
+  async connect(): Promise<void> {
+    return Promise.resolve();
   }
 
   publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void {
     this.emitter.emit(topic, data);
   }
 
-  subscribeSync<TKey extends StringKeyModel<TType>>(
+  async subscribe<TKey extends StringKeyModel<TType>>(
     topic: TKey,
     handler: (data?: TType[TKey]) => void,
-  ): void {
+  ): Promise<void> {
     this.emitter.on(topic, (data) => handler(data as TType[TKey]));
   }
 
-  unsubscribe<TKey extends StringKeyModel<TType>>(topic: TKey): void {
+  async unsubscribe<TKey extends StringKeyModel<TType>>(topic: TKey): Promise<void> {
     this.emitter.off(topic);
   }
 }
