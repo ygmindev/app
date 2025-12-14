@@ -1,12 +1,12 @@
 import 'reflect-metadata';
 
-import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { Server } from '@lib/backend/server/utils/Server/Server';
+import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 
+import { databaseConfig } from './config/database';
 import { serverConfig } from './config/server';
 
-const environment = new Environment();
-await environment.initialize();
+await initialize({ database: () => databaseConfig.params() });
 
 const server = new Server(serverConfig.params());
 await server.run();

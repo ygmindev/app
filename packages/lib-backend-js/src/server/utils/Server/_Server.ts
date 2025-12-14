@@ -33,7 +33,6 @@ export class _Server extends Bootstrappable implements _ServerModel {
     this._api = api;
 
     const { certificateDir, privateKeyFilename, publicKeyFilename } = certificate;
-
     this._app = fastify({
       disableRequestLogging: true,
       https: {

@@ -5,27 +5,18 @@ import {
   type ServerModel,
   type ServerParamsModel,
 } from '@lib/backend/server/utils/Server/Server.models';
-import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type ApiEndpointModel } from '@lib/config/api/api.models';
-import { type DatabaseConfigModel } from '@lib/config/database/database.models';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import isString from 'lodash/isString';
 
 export class Server<TParams extends Array<unknown>> extends _Server implements ServerModel {
-  _database?: DatabaseConfigModel;
   _plugins?: Array<[ServerPluginModel<TParams[number]>, TParams[number]]>;
 
-  constructor({ database, plugins, ...params }: ServerParamsModel<TParams>) {
+  constructor({ plugins, ...params }: ServerParamsModel<TParams>) {
     super(params);
-    this._database = database;
     this._plugins = plugins;
-  }
-
-  async onInitialize(): Promise<void> {
-    const database = this._database;
-    database && (await initialize({ database: () => database }));
   }
 
   async register<TType, TParams>(params: ApiEndpointModel<TType, TParams>): Promise<void> {

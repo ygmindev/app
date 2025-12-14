@@ -43,6 +43,7 @@ export const _withOutput = <TType extends unknown, TData extends unknown, TParam
             })
         : undefined,
       name,
+      subscribe: () => null,
       topics: topics
         ? isString(topics) || _isArray(topics)
           ? topics

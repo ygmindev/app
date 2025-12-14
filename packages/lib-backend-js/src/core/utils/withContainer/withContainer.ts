@@ -2,7 +2,7 @@ import { _withContainer } from '@lib/backend/core/utils/withContainer/_withConta
 import {
   type WithContainerModel,
   type WithContainerParamsModel,
-} from '@lib/backend/core/utils/withContainer/withContainer..models';
+} from '@lib/backend/core/utils/withContainer/withContainer.models';
 import { type ClassModel } from '@lib/shared/core/core.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 

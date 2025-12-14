@@ -6,7 +6,6 @@ import { HTTP_METHOD } from '@lib/shared/http/http.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 import { apiConfig } from './api';
-import { databaseConfig } from './database';
 import { graphqlConfig } from './graphql';
 
 let serverConfig = configBase;
@@ -14,8 +13,6 @@ let serverConfig = configBase;
 serverConfig = serverConfig.extend(() => {
   return {
     api: apiConfig.params(),
-
-    database: databaseConfig.params(),
 
     plugins: [
       [

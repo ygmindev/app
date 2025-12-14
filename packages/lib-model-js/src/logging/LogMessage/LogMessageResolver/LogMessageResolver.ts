@@ -20,13 +20,13 @@ export class LogMessageResolver implements LogMessageResolverModel {
     Resource: () => LogMessage,
     access: ACCESS_LEVEL.PUBLIC,
     filter: async (params) => {
-      console.info('\n@@@ subscribe params:');
-      console.info(params);
+      console.warn('\n@@@ subscribe params:');
+      console.warn(params);
       return true;
     },
     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
     name: LOG_MESSAGE_RESOURCE_NAME,
-    topics: LOG_MESSAGE_RESOURCE_NAME,
+    topics: [LOG_MESSAGE_RESOURCE_NAME],
   })
   async subscribe(
     @withResourceInput({
