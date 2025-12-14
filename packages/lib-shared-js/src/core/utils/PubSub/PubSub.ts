@@ -37,7 +37,7 @@ export class PubSub<TType extends PubSubSchemaModel = RootPubSubSchemaModel>
           });
         }
       } finally {
-        if (unsubscribe) unsubscribe();
+        unsubscribe?.();
       }
     }
 

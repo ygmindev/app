@@ -3,7 +3,7 @@
 import 'raf/polyfill.js';
 
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
-import { initialize as initializeBackend } from '@lib/backend/setup/utils/initialize/initialize';
+import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type onBeforeServerModel } from '@lib/config/node/framework/framework.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
@@ -39,7 +39,7 @@ export type AppRegistryModel = {
 
 export const onBeforeServer: onBeforeServerModel = async (params) => {
   const { context, database, headers, routes } = params;
-  await initializeBackend({ database });
+  await initialize({ database });
 
   const queryClient = new QueryClient();
   const store = new Store<RootStateModel>({

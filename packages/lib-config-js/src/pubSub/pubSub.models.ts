@@ -7,6 +7,8 @@ export type PubSubConfigModel = {
 
   port?: number;
 
+  timeout: number;
+
   command(config: PubSubConfigModel): string;
 };
 

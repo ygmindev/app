@@ -23,6 +23,8 @@ export const pubSubConfig = new Config<PubSubConfigModel, _PubSubConfigModel>({
       port: environment.variables.SERVER_PUBSUB_PORT
         ? toNumber(environment.variables.SERVER_PUBSUB_PORT)
         : undefined,
+
+      timeout: 30000,
     };
   },
 });

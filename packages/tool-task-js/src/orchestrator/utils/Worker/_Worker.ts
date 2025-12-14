@@ -60,7 +60,7 @@ export class _Worker extends Bootstrappable implements _WorkerModel {
     this._worker?.shutdown();
   }
 
-  onInitialize = async (): Promise<void> => {
+  async onInitialize(): Promise<void> {
     this._worker = await Worker.create({
       activities: this._tasks,
       identity: this._id,
@@ -73,13 +73,9 @@ export class _Worker extends Bootstrappable implements _WorkerModel {
       taskQueue: this._queue,
       workflowsPath: this._workflowsPath,
     });
-  };
+  }
 
   run = async (): Promise<void> => {
-    try {
-      await this._worker?.run();
-    } finally {
-      this._worker?.shutdown();
-    }
+    await this._worker?.run();
   };
 }

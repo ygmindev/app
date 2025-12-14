@@ -1,3 +1,4 @@
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
   type WorkerRunModel,
@@ -10,6 +11,10 @@ import { Worker } from '@tool/task/orchestrator/utils/Worker/Worker';
 import reduce from 'lodash/reduce';
 
 export const workerRun = buildTask<WorkerRunParamsModel, WorkerRunModel>({
+  context: {
+    environment: ENVIRONMENT.DEVELOPMENT,
+  },
+
   task: async ({ count = 1, queue, tasks, workflowsDir, workflowsName = 'workflows' }) => {
     let tasksF = tasks;
     if (!tasksF) {

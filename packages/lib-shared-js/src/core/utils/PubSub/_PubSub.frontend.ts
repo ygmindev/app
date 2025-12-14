@@ -1,5 +1,6 @@
 import { type RootPubSubSchemaModel } from '@lib/config/pubSub/pubSub.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import {
   type _PubSubModel,
   type _PubSubParamsModel,
@@ -7,12 +8,14 @@ import {
 import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
 import mitt, { type Emitter } from 'mitt';
 
-export class _PubSub<
-  TType extends PubSubSchemaModel = RootPubSubSchemaModel,
-> implements _PubSubModel<TType> {
+export class _PubSub<TType extends PubSubSchemaModel = RootPubSubSchemaModel>
+  extends Bootstrappable
+  implements _PubSubModel<TType>
+{
   protected emitter: Emitter<Record<string, unknown>>;
 
   constructor(params: _PubSubParamsModel) {
+    super();
     this.emitter = mitt();
   }
 

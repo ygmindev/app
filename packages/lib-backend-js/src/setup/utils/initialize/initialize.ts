@@ -10,6 +10,7 @@ import {
 import { pubSubConfig } from '@lib/config/pubSub/pubSub';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
+import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 let result: InitializeModel;
@@ -22,6 +23,7 @@ export const initialize = async ({ database }: InitializeParamsModel): Promise<I
     result = {};
 
     try {
+      await sleep(5000);
       const pubSub = new PubSub(pubSubConfig.params());
       await pubSub.initialize();
       Container.set(PubSub, pubSub);

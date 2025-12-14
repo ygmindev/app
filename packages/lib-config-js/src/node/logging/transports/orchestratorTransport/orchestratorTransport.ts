@@ -6,9 +6,9 @@ import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 export default buildTransport<OrchestratorTransportParamsModel>({
   handler: (params) => {
     const topic = params?.topic;
-    const pubSub = Container.get(PubSub);
     return async (context) => {
       if (topic && context?.ns) {
+        const pubSub = Container.get(PubSub);
         void pubSub.publish(topic, context);
       }
     };
