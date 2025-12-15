@@ -46,7 +46,7 @@ export const WorkflowControl: FCModel<WorkflowControlPropsModel> = ({ workflow, 
                 });
                 const workflowId = result.result?._id;
                 if (workflowId) {
-                  const x = await subscribe({ id: [workflowId] });
+                  const x = await subscribe({ id: workflowId });
                   console.warn(x);
                 }
               }}

@@ -12,7 +12,7 @@ export class PubSub<TType extends PubSubSchemaModel = RootPubSubSchemaModel>
   extends _PubSub<TType>
   implements PubSubModel<TType>
 {
-  subscribe<TKey extends StringKeyModel<TType>>(topic: TKey): AsyncIterator<TType[TKey]> {
+  subscribe<TKey extends StringKeyModel<TType>>(topic: TKey): AsyncIterable<TType[TKey]> {
     let unsubscribe: (() => void) | undefined;
     const queue: Array<TType[TKey]> = [];
     let resolveNext: (() => void) | null = null;

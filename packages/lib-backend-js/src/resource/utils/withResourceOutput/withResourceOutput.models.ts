@@ -12,7 +12,7 @@ export type WithResourceOutputParamsModel<
   ResourceOutputParamsModel<TMethod, TType, TRoot> &
   Pick<
     WithOutputParamsModel<ResourceOutputParamsModel<TMethod, TType, TRoot>, TType, TParams>,
-    'filter' | 'operation' | 'topics'
+    'operation' | 'topic'
   >;
 
 export type WithResourceOutputModel = MethodDecorator;

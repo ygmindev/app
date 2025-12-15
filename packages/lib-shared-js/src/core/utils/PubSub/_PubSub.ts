@@ -7,6 +7,7 @@ import {
   type _PubSubParamsModel,
 } from '@lib/shared/core/utils/PubSub/_PubSub.models';
 import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type Codec, connect, JSONCodec, type NatsConnection, type Subscription } from 'nats';
 
 export class _PubSub<TType extends PubSubSchemaModel = RootPubSubSchemaModel>
@@ -43,10 +44,16 @@ export class _PubSub<TType extends PubSubSchemaModel = RootPubSubSchemaModel>
     handler: (data?: TType[TKey]) => void,
   ): Promise<() => void> {
     const sub = this._client.subscribe(topic);
+    await this._client.flush();
     this._subscriptions.set(topic, sub);
-    for await (const v of sub) {
-      handler(this._codec.decode(v.data) as TType[TKey]);
-    }
+    (async () => {
+      for await (const v of sub) {
+        handler(this._codec.decode(v.data) as TType[TKey]);
+      }
+    })().catch((e) => {
+      logger.fail('subscription failed', e);
+    });
+    await this._client.flush();
     return () => sub.unsubscribe();
   }
 }

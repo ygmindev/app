@@ -13,11 +13,10 @@ export const withResourceOutput =
     Resource,
     RootResource,
     access = ACCESS_LEVEL.RESTRICTED,
-    filter,
     method,
     name,
     operation,
-    topics,
+    topic,
   }: WithResourceOutputParamsModel<TMethod, TType, TParams, TRoot>): WithResourceOutputModel =>
   (target, propertyKey, descriptor) => {
     const nameF = `${name}${method}`;
@@ -25,11 +24,8 @@ export const withResourceOutput =
     withOutput({
       Resource: () => OutputF ?? Boolean,
       access,
-      filter: filter
-        ? async ({ context, payload }) => filter({ context, payload: payload as TType })
-        : undefined,
       name: nameF,
       operation: operation ?? getOperationType(method),
-      topics,
+      topic,
     })(target, propertyKey, descriptor);
   };

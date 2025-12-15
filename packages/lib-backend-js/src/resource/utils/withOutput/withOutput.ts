@@ -11,16 +11,15 @@ export const withOutput =
   <TType extends unknown, TData extends unknown, TParams extends unknown>({
     Resource,
     access = ACCESS_LEVEL.RESTRICTED,
-    filter,
     isArray,
     name,
     operation = GRAPHQL_OPERATION_TYPE.QUERY,
-    topics,
+    topic,
     type,
   }: WithOutputParamsModel<TType, TData, TParams>): WithOutputModel =>
   (target, propertyKey, descriptor) => {
     withAccess({ access })(target, propertyKey, descriptor);
-    _withOutput({ Resource, filter, isArray, name, operation, topics, type })(
+    _withOutput({ Resource, isArray, name, operation, topic, type })(
       target,
       propertyKey,
       descriptor,
