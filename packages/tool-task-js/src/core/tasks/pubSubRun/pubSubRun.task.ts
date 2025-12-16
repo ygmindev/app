@@ -1,4 +1,5 @@
 import { pubSubConfig } from '@lib/config/pubSub/pubSub';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import {
   type PubSubRunModel,
@@ -14,6 +15,10 @@ export const pubSubRun = buildTask({
 
   task: async (params: PubSubRunParamsModel): Promise<PubSubRunModel> => {
     const config = pubSubConfig.params();
-    return execute({ command: config.command(config) });
+    const command = config.command?.(config);
+    if (command) {
+      return execute({ command });
+    }
+    throw new NotFoundError('command');
   },
 });

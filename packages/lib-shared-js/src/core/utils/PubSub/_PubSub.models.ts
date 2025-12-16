@@ -4,16 +4,14 @@ import {
 } from '@lib/config/pubSub/pubSub.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type BootstrappableModel } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable.models';
-import { type PubSubSchemaModel } from '@lib/shared/core/utils/PubSub/PubSub.models';
 
 export type _PubSubParamsModel = PubSubConfigModel;
 
-export type _PubSubModel<TType extends PubSubSchemaModel = RootPubSubSchemaModel> =
+export type _PubSubModel<TType extends Record<string, unknown> = RootPubSubSchemaModel> =
   BootstrappableModel & {
     publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void;
 
-    subscribeTopic<TKey extends StringKeyModel<TType>>(
+    subscribe<TKey extends StringKeyModel<TType>>(
       topic: TKey,
-      handler: (data?: TType[TKey]) => void,
-    ): Promise<() => void>;
+    ): Promise<AsyncIterableIterator<TType[TKey]>>;
   };

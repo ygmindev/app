@@ -7,9 +7,19 @@ export type PubSubConfigModel = {
 
   port?: number;
 
+  retention?: {
+    dirname: string;
+    maxAge: number;
+    maxRows: number;
+    maxSize: number;
+    nReplicas: number;
+    name: string;
+    prefixes: Array<string>;
+  };
+
   timeout: number;
 
-  command(config: PubSubConfigModel): string;
+  command?(config: PubSubConfigModel): string;
 };
 
 export type _PubSubConfigModel = ConnectionOptions;
