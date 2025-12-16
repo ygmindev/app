@@ -5,9 +5,9 @@ import { LOG_MESSAGE_RESOURCE_NAME } from '@lib/model/logging/LogMessage/LogMess
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import toNumber from 'lodash/toNumber';
 
-let bundleConfig = configBase;
+let pubSubConfig = configBase;
 
-bundleConfig = bundleConfig.extend(() => {
+pubSubConfig = pubSubConfig.extend(() => {
   const environment = Container.get(Environment);
 
   return {
@@ -27,7 +27,7 @@ bundleConfig = bundleConfig.extend(() => {
 
     retention: {
       dirname: fromTemp('pubSub'),
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      maxAge: 60 * 60 * 1000, // 1 hour
       maxRows: 1000,
       maxSize: 10 * 1e6, // 10MB
       nReplicas: 1,
@@ -37,4 +37,4 @@ bundleConfig = bundleConfig.extend(() => {
   };
 });
 
-export { bundleConfig };
+export { pubSubConfig };

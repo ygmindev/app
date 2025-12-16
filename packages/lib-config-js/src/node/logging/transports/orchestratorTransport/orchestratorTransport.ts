@@ -11,7 +11,7 @@ class OrchestratorTransport extends Transport<OrchestratorTransportParamsModel> 
     return async (context: TransportContextModel) => {
       if (topic && context?.ns) {
         const pubSub = Container.get(PubSub);
-        void pubSub.publish(`${topic}:${context.ns}`, context);
+        void pubSub.publish(`${topic}.${context.ns}`, context);
       }
     };
   }

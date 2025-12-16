@@ -25,7 +25,7 @@ export class LogMessageResolver implements LogMessageResolverModel {
     topic: (params) => {
       const id = params.args?.id;
       if (id) {
-        return `${LOG_MESSAGE_RESOURCE_NAME}:${id}`;
+        return `${LOG_MESSAGE_RESOURCE_NAME}.${id}`;
       }
       throw new NotFoundError('id');
     },

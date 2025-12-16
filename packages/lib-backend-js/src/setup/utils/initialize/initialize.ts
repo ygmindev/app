@@ -8,6 +8,7 @@ import {
   type InitializeParamsModel,
 } from '@lib/backend/setup/utils/initialize/initialize.models';
 import { pubSubConfig } from '@lib/config/pubSub/pubSub';
+import { type RootPubSubSchemaModel } from '@lib/config/pubSub/pubSub.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -29,7 +30,7 @@ export const initialize = async ({
     try {
       const pubSub = new PubSub(pubSubConfig.params());
       await pubSub.initialize();
-      Container.set(PubSub, pubSub);
+      Container.set(PubSub<RootPubSubSchemaModel>, pubSub);
     } catch (e) {
       logger.warn(`Failed to connect to pubSub`, e);
     }

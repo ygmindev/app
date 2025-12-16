@@ -9,7 +9,7 @@ export type _PubSubParamsModel = PubSubConfigModel;
 
 export type _PubSubModel<TType extends Record<string, unknown> = RootPubSubSchemaModel> =
   BootstrappableModel & {
-    publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void;
+    publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): Promise<void>;
 
     subscribe<TKey extends StringKeyModel<TType>>(
       topic: TKey,

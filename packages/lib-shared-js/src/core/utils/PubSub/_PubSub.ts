@@ -8,14 +8,15 @@ import {
   type _PubSubModel,
   type _PubSubParamsModel,
 } from '@lib/shared/core/utils/PubSub/_PubSub.models';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
   AckPolicy,
   type Codec,
   connect,
   DeliverPolicy,
-  type JetStreamManager,
   JSONCodec,
   type NatsConnection,
+  type NatsError,
   RetentionPolicy,
   StorageType,
 } from 'nats';
@@ -27,7 +28,6 @@ export class _PubSub<TType extends Record<string, unknown> = RootPubSubSchemaMod
   protected _client!: NatsConnection;
   protected _codec!: Codec<unknown>;
   protected _config!: _PubSubParamsModel;
-  protected _jetstream?: JetStreamManager;
   protected _subscriptions!: Map<string, Set<AsyncQueue<TType>>>;
 
   constructor(params: _PubSubParamsModel) {
@@ -49,27 +49,48 @@ export class _PubSub<TType extends Record<string, unknown> = RootPubSubSchemaMod
 
   async onInitialize(): Promise<void> {
     this._client = await connect(_pubSub(this._config));
-    this._jetstream = await this._client.jetstreamManager();
     if (this._config.retention) {
+      const js = await this._client.jetstreamManager();
       const { maxAge, maxRows, maxSize, nReplicas, name, prefixes } = this._config.retention;
-      await this._jetstream.streams.add({
-        max_age: maxAge,
-        max_bytes: maxSize,
-        max_msgs: maxRows,
-        name,
-        num_replicas: nReplicas,
-        retention: RetentionPolicy.Workqueue,
-        storage: StorageType.File,
-        subjects: prefixes.map((v) => `${v}:*`),
-      });
+      const subjects = prefixes.map((v) => `${v}.*`);
+      try {
+        const info = await js.streams.info(name);
+        await js.streams.update(name, {
+          ...info.config,
+          subjects,
+        });
+      } catch (error) {
+        if ((error as NatsError).code === '404') {
+          await js.streams.add({
+            max_age: maxAge * 1e6,
+            max_bytes: maxSize,
+            max_msgs: maxRows,
+            name,
+            num_replicas: nReplicas,
+            retention: RetentionPolicy.Limits,
+            storage: StorageType.File,
+            subjects,
+          });
+        } else {
+          throw error;
+        }
+      }
     }
   }
 
-  publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void {
-    if (this.isRetention(topic)) {
-      void this._jetstream?.jetstream().publish(topic, this._codec.encode(data));
-    } else {
-      this._client.publish(topic, this._codec.encode(data));
+  async publish<TKey extends StringKeyModel<TType>>(
+    topic: TKey,
+    data?: TType[TKey],
+  ): Promise<void> {
+    try {
+      if (this.isRetention(topic)) {
+        const js = this._client.jetstream();
+        await js.publish(topic, this._codec.encode(data));
+      } else {
+        this._client.publish(topic, this._codec.encode(data));
+      }
+    } catch (error) {
+      logger.error(error);
     }
   }
 
@@ -77,30 +98,33 @@ export class _PubSub<TType extends Record<string, unknown> = RootPubSubSchemaMod
     topic: TKey,
   ): Promise<AsyncIterableIterator<TType[TKey]>> {
     const codec = this._codec;
-
     if (this._config.retention && this.isRetention(topic)) {
+      const js = this._client.jetstream();
+      const jsm = await js.jetstreamManager();
       const { name } = this._config.retention;
-      await this._jetstream?.consumers.add(name, {
+      const consumer = await jsm.consumers.add(name, {
         ack_policy: AckPolicy.Explicit,
         deliver_policy: DeliverPolicy.All,
+        durable_name: undefined,
         filter_subject: topic,
       });
-      const consumer = await this._jetstream?.jetstream().consumers.get(name);
-      const subscription = await consumer?.consume();
-      if (subscription) {
-        return (async function* () {
-          for await (const v of subscription) {
-            try {
-              const data = codec.decode(v.data) as TType[TKey];
-              v.ack();
-              yield data;
-            } catch (error) {
-              v.term();
+      if (consumer) {
+        const handle = await js?.consumers.get(name, consumer.name);
+        const subscription = await handle?.consume();
+        if (subscription) {
+          return (async function* () {
+            for await (const v of subscription) {
+              try {
+                yield codec.decode(v.data) as TType[TKey];
+                v.ack();
+              } catch {
+                v.term();
+              }
             }
-          }
-        })();
+          })();
+        }
       }
-      throw new NotFoundError(`consumer ${name}`);
+      throw new NotFoundError(name);
     } else {
       const subscription = this._client.subscribe(topic);
       return (async function* () {

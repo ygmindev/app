@@ -23,7 +23,10 @@ export class _PubSub<TType extends Record<string, unknown> = RootPubSubSchemaMod
     this.emitter.all.clear();
   }
 
-  publish<TKey extends StringKeyModel<TType>>(topic: TKey, data?: TType[TKey]): void {
+  async publish<TKey extends StringKeyModel<TType>>(
+    topic: TKey,
+    data?: TType[TKey],
+  ): Promise<void> {
     data && this.emitter.emit(topic, data);
   }
 

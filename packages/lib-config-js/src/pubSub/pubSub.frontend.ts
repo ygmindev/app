@@ -1,7 +1,7 @@
 import { pubSubConfig as configBase } from '@lib/config/pubSub/pubSub.base';
 
-let bundleConfig = configBase;
+let pubSubConfig = configBase;
 
-bundleConfig = bundleConfig.extend(() => ({}));
+pubSubConfig = pubSubConfig.extend(() => ({}));
 
-export { bundleConfig };
+export { pubSubConfig };
