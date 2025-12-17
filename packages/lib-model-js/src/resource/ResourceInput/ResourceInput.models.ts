@@ -70,8 +70,7 @@ type RemoveArgsModel<TType> = {
 type SubscribeOptionsModel = EmptyObjectModel;
 
 type SubscribeArgsModel<TType> = {
-  filter?: Array<FilterModel<TType>>;
-  id?: Array<string>;
+  id: string;
   options?: SubscribeOptionsModel;
 };
 

@@ -6,12 +6,11 @@ import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models'
 export type WithResourceOutputParamsModel<
   TMethod extends RESOURCE_METHOD_TYPE,
   TType,
-  TParams extends unknown,
   TRoot = undefined,
 > = WithAccessParamsModel &
   ResourceOutputParamsModel<TMethod, TType, TRoot> &
   Pick<
-    WithOutputParamsModel<ResourceOutputParamsModel<TMethod, TType, TRoot>, TType, TParams>,
+    WithOutputParamsModel<ResourceOutputParamsModel<TMethod, TType, TRoot>>,
     'operation' | 'topic'
   >;
 

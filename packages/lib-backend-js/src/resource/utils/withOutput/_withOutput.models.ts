@@ -1,13 +1,11 @@
 import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { type DATA_TYPE } from '@lib/shared/data/data.constants';
 import { type GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
-export type _WithOutputParamsModel<
-  TType extends unknown,
-  TData extends unknown,
-  TParams extends unknown,
-> = {
+export type _WithOutputParamsModel<TType extends unknown> = {
   isArray?: boolean;
 
   name: string;
@@ -18,7 +16,10 @@ export type _WithOutputParamsModel<
 
   Resource?(): ResourceClassModel<TType>;
 
-  topic?(params: { args?: TParams; context?: RequestContextModel }): string;
+  topic?(
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType>,
+    context?: RequestContextModel,
+  ): string;
 };
 
 export type _WithOutputModel = MethodDecorator;

@@ -21,6 +21,7 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
   afterGet,
   afterGetMany,
   afterRemove,
+  afterSubscribe,
   afterUpdate,
   afterUpdateMany,
   beforeCreate,
@@ -28,6 +29,7 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
   beforeGet,
   beforeGetMany,
   beforeRemove,
+  beforeSubscribe,
   beforeUpdate,
   beforeUpdateMany,
   count,
@@ -37,21 +39,23 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
   getMany,
   name,
   remove,
+  subscribe,
   update,
   updateMany,
 }: CreateResourceImplementationParamsModel<TType, TRoot>): CreateResourceImplementationModel<
   TType,
   TRoot
 > => {
-  class ResourceImplementation
-    implements PrototypeModel<CreateResourceImplementationModel<TType, TRoot>>
-  {
+  class ResourceImplementation implements PrototypeModel<
+    CreateResourceImplementationModel<TType, TRoot>
+  > {
     decorators: ResourceImplementationDecoratorModel<TType, TRoot> = {
       afterCreate,
       afterCreateMany,
       afterGet,
       afterGetMany,
       afterRemove,
+      afterSubscribe,
       afterUpdate,
       afterUpdateMany,
       beforeCreate,
@@ -68,6 +72,8 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
         const inputF = { ...input, filter: collapseFilter(input?.filter) };
         return beforeRemove ? beforeRemove({ input: inputF }, context) : inputF;
       },
+      beforeSubscribe,
+      beforeUpdate,
       beforeUpdateMany: async ({ input }, context) => {
         const inputF = { ...input, filter: collapseFilter(input?.filter) };
         return beforeUpdateMany ? beforeUpdateMany({ input: inputF }, context) : inputF;
@@ -84,6 +90,7 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
       this.update = this.update.bind(this);
       this.updateMany = this.updateMany.bind(this);
       this.remove = this.remove.bind(this);
+      this.subscribe = this.subscribe.bind(this);
     }
 
     async count(
@@ -194,6 +201,25 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
       );
       return this.decorators.afterRemove
         ? this.decorators.afterRemove({ input: inputF, output }, context)
+        : output;
+    }
+
+    async subscribe(
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>,
+      payload?: Partial<TType>,
+      context?: RequestContextModel,
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>> {
+      if (!subscribe) {
+        return {};
+      }
+      let inputF = cleanObject(input);
+      inputF = this.decorators.beforeSubscribe
+        ? await this.decorators.beforeSubscribe({ input: inputF }, context)
+        : inputF;
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot> =
+        await subscribe(inputF, payload, context);
+      return this.decorators.afterSubscribe
+        ? this.decorators.afterSubscribe({ input: inputF, output }, context)
         : output;
     }
 

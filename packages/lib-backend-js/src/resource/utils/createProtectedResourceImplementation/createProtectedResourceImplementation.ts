@@ -12,13 +12,13 @@ import { type ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/P
 import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
 import { GroupImplementation } from '@lib/model/group/Group/GroupImplementation/GroupImplementation';
 import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImplementation/GroupImplementation.models';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
+import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
-import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 
 export const createProtectedResoureImplementation = <TType extends ProtectedResourceModel>({
   beforeCreate,

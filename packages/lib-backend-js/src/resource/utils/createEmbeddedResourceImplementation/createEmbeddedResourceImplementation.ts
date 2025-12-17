@@ -33,6 +33,7 @@ export const createEmbeddedResourceImplementation = <
   afterGet,
   afterGetMany,
   afterRemove,
+  afterSubscribe,
   afterUpdate,
   afterUpdateMany,
   beforeCreate,
@@ -40,6 +41,7 @@ export const createEmbeddedResourceImplementation = <
   beforeGet,
   beforeGetMany,
   beforeRemove,
+  beforeSubscribe,
   beforeUpdate,
   beforeUpdateMany,
   name,
@@ -150,6 +152,7 @@ export const createEmbeddedResourceImplementation = <
     afterGet,
     afterGetMany,
     afterRemove,
+    afterSubscribe,
     afterUpdate,
     afterUpdateMany,
     beforeCreate,
@@ -157,13 +160,11 @@ export const createEmbeddedResourceImplementation = <
     beforeGet,
     beforeGetMany,
     beforeRemove,
+    beforeSubscribe,
     beforeUpdate,
     beforeUpdateMany,
-
     count,
-
     create,
-
     createMany: async (input, context) => {
       if (!input?.root) throw new NotFoundError('root');
       const form = input?.form?.map(hydrate);
@@ -173,7 +174,6 @@ export const createEmbeddedResourceImplementation = <
       );
       return { result: form, root: result as unknown as Partial<TRoot> };
     },
-
     get: async (input, context) => {
       if (!input?.root) throw new NotFoundError('root');
       const elemMatch = mongoFilter({ filter: input.filter, id: input.id });
@@ -220,6 +220,9 @@ export const createEmbeddedResourceImplementation = <
       );
       return { result: result.acknowledged && (result.modifiedCount ?? 0) > 0 };
     },
+
+    // TODO: implement subscribe
+    // subscribe,
 
     update: async (input, context) => {
       if (!input?.root) throw new NotFoundError('root');

@@ -233,6 +233,11 @@ export class _Database extends Bootstrappable implements _DatabaseModel {
         return { result: true };
       },
 
+      subscribe: async (params) => {
+        // TODO: implement subscribe?
+        return { result: {} };
+      },
+
       update: async ({ id, options, update } = {}) => {
         const updateF = cleanObject(update);
         const collection = getCollection();

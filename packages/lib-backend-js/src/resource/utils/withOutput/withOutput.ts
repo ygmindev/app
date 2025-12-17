@@ -8,7 +8,7 @@ import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 
 export const withOutput =
-  <TType extends unknown, TData extends unknown, TParams extends unknown>({
+  <TType extends unknown>({
     Resource,
     access = ACCESS_LEVEL.RESTRICTED,
     isArray,
@@ -16,7 +16,7 @@ export const withOutput =
     operation = GRAPHQL_OPERATION_TYPE.QUERY,
     topic,
     type,
-  }: WithOutputParamsModel<TType, TData, TParams>): WithOutputModel =>
+  }: WithOutputParamsModel<TType>): WithOutputModel =>
   (target, propertyKey, descriptor) => {
     withAccess({ access })(target, propertyKey, descriptor);
     _withOutput({ Resource, isArray, name, operation, topic, type })(

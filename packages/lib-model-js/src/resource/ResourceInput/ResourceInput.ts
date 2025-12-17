@@ -125,14 +125,8 @@ export const ResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot
         extends Root<TRoot>
         implements ResourceInputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>
       {
-        @withField({
-          Resource: () => Filter as ResourceClassModel<FilterModel<TType>>,
-          isArray: true,
-        })
-        filter!: Array<FilterModel<TType>>;
-
-        @withField({ isArray: true, isOptional: true })
-        id?: Array<string>;
+        @withField()
+        id!: string;
       }
       return Input as ResourceClassModel<ResourceInputModel<TMethod, TType, TRoot>>;
     }

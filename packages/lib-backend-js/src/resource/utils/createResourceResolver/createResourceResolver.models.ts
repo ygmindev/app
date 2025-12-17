@@ -5,6 +5,7 @@ import {
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
+import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import {
   type RESOURCE_METHOD_TYPE,
@@ -13,7 +14,6 @@ import {
   type ResourceWriteMethodTypeModel,
 } from '@lib/shared/resource/resource.models';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
-import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 
 export type CreateResourceResolverParamsModel<
   TType extends ResourceModel,

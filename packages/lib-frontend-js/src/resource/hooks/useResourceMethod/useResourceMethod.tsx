@@ -36,15 +36,13 @@ export const useResourceMethod = <TMethod extends RESOURCE_METHOD_TYPE, TType, T
         RESOURCE_METHOD_TYPE.GET_MANY,
         RESOURCE_METHOD_TYPE.UPDATE_MANY,
         RESOURCE_METHOD_TYPE.REMOVE,
-        RESOURCE_METHOD_TYPE.SUBSCRIBE,
       ].includes(method)
     ) {
       const inputFF = inputF as unknown as ResourceInputModel<
         | RESOURCE_METHOD_TYPE.GET
         | RESOURCE_METHOD_TYPE.GET_MANY
         | RESOURCE_METHOD_TYPE.UPDATE_MANY
-        | RESOURCE_METHOD_TYPE.REMOVE
-        | RESOURCE_METHOD_TYPE.SUBSCRIBE,
+        | RESOURCE_METHOD_TYPE.REMOVE,
         TType,
         TRoot
       >;

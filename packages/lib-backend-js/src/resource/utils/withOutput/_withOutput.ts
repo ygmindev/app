@@ -10,14 +10,14 @@ import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { GraphQLDateTime, GraphQLUnsignedFloat } from 'graphql-scalars';
 import { Mutation, Query, Subscription } from 'type-graphql';
 
-export const _withOutput = <TType extends unknown, TData extends unknown, TParams extends unknown>({
+export const _withOutput = <TType extends unknown>({
   Resource,
   isArray,
   name,
   operation = GRAPHQL_OPERATION_TYPE.QUERY,
   topic,
   type,
-}: _WithOutputParamsModel<TType, TData, TParams>): _WithOutputModel => {
+}: _WithOutputParamsModel<TType>): _WithOutputModel => {
   const ResourceF = Resource
     ? () => (isArray ? [Resource()] : Resource())
     : (() => {
@@ -39,7 +39,7 @@ export const _withOutput = <TType extends unknown, TData extends unknown, TParam
     return Subscription(ResourceF, {
       name,
       subscribe: async ({ args, context }) =>
-        Container.get(PubSub).subscribe(topic({ args: args.input, context })),
+        Container.get(PubSub).subscribe(topic(args.input, context)),
     });
   } else {
     const Operation = (() => {

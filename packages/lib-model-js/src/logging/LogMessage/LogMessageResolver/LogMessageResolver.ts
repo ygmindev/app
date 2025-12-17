@@ -1,7 +1,8 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
-import { withIdInput } from '@lib/backend/resource/utils/withIdInput/withIdInput';
+import { withResourceInput } from '@lib/backend/resource/utils/withResourceInput/withResourceInput';
 import { withResourceOutput } from '@lib/backend/resource/utils/withResourceOutput/withResourceOutput';
+import { withRoot } from '@lib/backend/resource/utils/withRoot/withRoot';
 import { RequestContextModel } from '@lib/config/api/api.models';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { LOG_MESSAGE_RESOURCE_NAME } from '@lib/model/logging/LogMessage/LogMessage.constants';
@@ -10,6 +11,7 @@ import { LogMessageModel } from '@lib/model/logging/LogMessage/LogMessage.models
 import { LogMessageImplementation } from '@lib/model/logging/LogMessage/LogMessageImplementation/LogMessageImplementation';
 import { LogMessageResolverModel } from '@lib/model/logging/LogMessage/LogMessageResolver/LogMessageResolver.models';
 import { IdInputModel } from '@lib/model/resource/IdInput/IdInput.models';
+import { ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
@@ -22,8 +24,8 @@ export class LogMessageResolver implements LogMessageResolverModel {
     access: ACCESS_LEVEL.PUBLIC,
     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
     name: LOG_MESSAGE_RESOURCE_NAME,
-    topic: (params) => {
-      const id = params.args?.id;
+    topic: (input) => {
+      const id = input?.id;
       if (id) {
         return `${LOG_MESSAGE_RESOURCE_NAME}.${id}`;
       }
@@ -31,11 +33,17 @@ export class LogMessageResolver implements LogMessageResolverModel {
     },
   })
   async subscribe(
-    @withIdInput()
-    input?: IdInputModel,
+    @withResourceInput<RESOURCE_METHOD_TYPE.SUBSCRIBE, LogMessageModel>({
+      Resource: () => LogMessage,
+      method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
+      name: LOG_MESSAGE_RESOURCE_NAME,
+    })
+    input: ResourceInputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, LogMessageModel>,
+    @withRoot()
+    payload?: LogMessageModel,
     @withContext()
     context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, LogMessageModel>> {
-    return Container.get(LogMessageImplementation).subscribe(input, context);
+    return Container.get(LogMessageImplementation).subscribe(input, payload, context);
   }
 }

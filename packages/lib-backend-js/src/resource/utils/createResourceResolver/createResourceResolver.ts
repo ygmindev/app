@@ -7,6 +7,7 @@ import {
 import { withAuthorizer } from '@lib/backend/resource/utils/withAuthorizer/withAuthorizer';
 import { withResourceInput } from '@lib/backend/resource/utils/withResourceInput/withResourceInput';
 import { withResourceOutput } from '@lib/backend/resource/utils/withResourceOutput/withResourceOutput';
+import { withRoot } from '@lib/backend/resource/utils/withRoot/withRoot';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { ResourceModel } from '@lib/model/resource/Resource/Resource.models';
@@ -26,7 +27,7 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
   authorizer,
   name,
 }: CreateResourceResolverParamsModel<TType, TRoot>): CreateResourceResolverModel<TType, TRoot> => {
-  const { create, createMany, get, getMany, remove, update, updateMany } =
+  const { create, createMany, get, getMany, remove, subscribe, update, updateMany } =
     ResourceImplementation.prototype;
 
   const createExists = create !== undefined;
@@ -36,6 +37,7 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
   const updateExists = update !== undefined;
   const updateManyExists = updateMany !== undefined;
   const removeExists = remove !== undefined;
+  const subscribeExists = subscribe !== undefined;
 
   @withResolver()
   class ResourceResolver implements PrototypeModel<CreateResourceResolverModel<TType, TRoot>> {
@@ -208,6 +210,40 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
         return this._implementation.remove(input, context);
       }
       throw new NotImplementedError(RESOURCE_METHOD_TYPE.REMOVE);
+    }
+
+    @withCondition(
+      () => subscribeExists,
+      () => [
+        withAuthorizer({
+          authorizer:
+            authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.SUBSCRIBE],
+        }),
+        withResourceOutput<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>({
+          Resource,
+          RootResource,
+          access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.SUBSCRIBE],
+          method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
+          name,
+          topic: (input) => `${name}.${input?.id}`,
+        }),
+      ],
+    )
+    async subscribe(
+      @withCondition(
+        () => subscribeExists,
+        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.SUBSCRIBE, name }),
+      )
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>,
+      @withRoot()
+      payload?: Partial<TType>,
+      @withContext()
+      context?: RequestContextModel,
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>> {
+      if (this._implementation.subscribe) {
+        return this._implementation.subscribe(input, payload, context);
+      }
+      throw new NotImplementedError(RESOURCE_METHOD_TYPE.SUBSCRIBE);
     }
 
     @withCondition(
