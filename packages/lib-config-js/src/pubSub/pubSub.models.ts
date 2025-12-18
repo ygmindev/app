@@ -17,6 +17,10 @@ export type PubSubConfigModel = {
     prefixes: Array<string>;
   };
 
+  retry: number;
+
+  retryInterval: number;
+
   timeout: number;
 
   command?(config: PubSubConfigModel): string;

@@ -9,4 +9,6 @@ import { serverConfig } from './config/server';
 await initialize({ database: () => databaseConfig.params() });
 
 const server = new Server(serverConfig.params());
+export const { cleanUp } = server;
+
 await server.run();
