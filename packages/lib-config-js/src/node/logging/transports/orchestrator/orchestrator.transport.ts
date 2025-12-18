@@ -1,5 +1,5 @@
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
-import { type OrchestratorTransportParamsModel } from '@lib/config/node/logging/transports/orchestratorTransport/orchestratorTransport.models';
+import { type OrchestratorTransportParamsModel } from '@lib/config/node/logging/transports/orchestrator/orchestrator.transport.models';
 import { Transport } from '@lib/config/node/logging/utils/Transport/Transport';
 import { type TransportContextModel } from '@lib/config/node/logging/utils/Transport/Transport.model';
 import { Container } from '@lib/shared/core/utils/Container/Container';

@@ -7,6 +7,7 @@ import {
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { type TypescriptConfigModel } from '@lib/config/node/typescript/typescript.models';
 import { type PLATFORM } from '@lib/shared/platform/platform.constants';
+import { type NodeBuildParamsModel } from '@tool/task/node/tasks/nodeBuild/nodeBuild.models';
 import { type BuildOptions } from 'esbuild';
 import { type RollupOptions } from 'rollup';
 import { type UserConfig } from 'vite';
@@ -40,7 +41,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   exclude?: Array<string>;
 
-  extensions: Array<string>;
+  extensions?: Array<string>;
 
   externals?: Array<string | RegExp>;
 
@@ -63,6 +64,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
   packager: string;
 
   platform?: PLATFORM;
+
+  preBundle?: Array<[globs: Array<string>, config?: NodeBuildParamsModel]>;
 
   provide?: Record<string, string>;
 

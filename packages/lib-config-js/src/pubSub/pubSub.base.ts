@@ -5,5 +5,5 @@ import { Config } from '@lib/config/utils/Config/Config';
 export const pubSubConfig = new Config<PubSubConfigModel, _PubSubConfigModel>({
   config: _pubSub,
 
-  params: () => ({ timeout: 30000 }),
+  params: () => ({ timeout: 10000 }),
 });

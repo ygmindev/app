@@ -1,5 +1,6 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
+import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
@@ -23,6 +24,8 @@ import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import nodeResolve from '@rollup/plugin-node-resolve';
+import { type NodeBuildParamsModel } from '@tool/task/node/tasks/nodeBuild/nodeBuild.models';
+import { nodeBuild } from '@tool/task/node/tasks/nodeBuild/nodeBuild.task';
 import react from '@vitejs/plugin-react';
 import { type Plugin as EsbuildPlugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
@@ -47,8 +50,30 @@ import {
   searchForWorkspaceRoot,
   type ViteDevServer,
 } from 'vite';
-import { cjsInterop } from 'vite-plugin-cjs-interop';
 // import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { cjsInterop } from 'vite-plugin-cjs-interop';
+
+const vitePluginPreBundle = (params: BundleConfigModel['preBundle'] = []): Plugin => {
+  const inputs: Array<[globs: Array<string>, config?: NodeBuildParamsModel]> = params?.map((v) => [
+    fromGlobs(v[0]),
+    v[1],
+  ]);
+
+  const run = async (entryFiles: Array<string>, config?: NodeBuildParamsModel): Promise<void> =>
+    nodeBuild({ ...(config ?? {}), entryFiles });
+
+  return {
+    async buildStart() {
+      await Promise.all(inputs.map((v) => run(...v)));
+    },
+    async handleHotUpdate({ file }) {
+      const input = inputs.find((v) => v[0].some((vv) => file.includes(vv)));
+      input && (await run(...input));
+    },
+
+    name: 'vite-plugin-prebundle',
+  };
+};
 
 function vitePluginFullReload(entryFiles: Array<string | RegExp>): Plugin {
   let server: ViteDevServer;
@@ -199,6 +224,7 @@ export const _bundle = ({
   outDir,
   outExtension,
   platform,
+  preBundle,
   provide,
   publicPathname,
   rootDirs,
@@ -422,6 +448,8 @@ export const _bundle = ({
       platformF === PLATFORM.WEB && vike(),
 
       // platformF === PLATFORM.NODE && nodePolyfills(),
+
+      preBundle && vitePluginPreBundle(preBundle),
 
       babel &&
         babelPlugin({

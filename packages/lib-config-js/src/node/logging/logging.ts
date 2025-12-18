@@ -16,7 +16,7 @@ loggingConfig = loggingConfig.extend(() => ({
   transports: [
     {
       options: { topic: LOG_MESSAGE_RESOURCE_NAME },
-      target: resolve(__dirname, './transports/orchestratorTransport/orchestratorTransport.ts'),
+      target: resolve(__dirname, './transports/orchestrator/orchestrator.transport.ts'),
     },
   ],
 }));

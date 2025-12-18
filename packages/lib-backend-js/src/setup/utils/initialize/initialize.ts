@@ -11,7 +11,6 @@ import { pubSubConfig } from '@lib/config/pubSub/pubSub';
 import { type RootPubSubSchemaModel } from '@lib/config/pubSub/pubSub.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
-import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 let result: InitializeModel;
 
@@ -31,9 +30,7 @@ export const initialize = async ({
       const pubSub = new PubSub(pubSubConfig.params());
       await pubSub.initialize();
       Container.set(PubSub<RootPubSubSchemaModel>, pubSub);
-    } catch (e) {
-      logger.warn(`Failed to connect to pubSub`, e);
-    }
+    } catch {}
 
     if (databaseF) {
       try {
@@ -41,9 +38,7 @@ export const initialize = async ({
         await db.initialize();
         Container.set(Database, db, DATABASE_TYPE.MONGO);
         result.database = db;
-      } catch (e) {
-        logger.fail(`Failed to connect to ${databaseF.host}`, e);
-      }
+      } catch {}
     }
   }
 
