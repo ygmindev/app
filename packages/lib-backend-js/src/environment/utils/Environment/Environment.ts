@@ -10,7 +10,6 @@ import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { EnvironmentConfigModel } from '@lib/config/environment/environment.models';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
-import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { config } from 'dotenv';
 import { existsSync } from 'fs';
 
@@ -24,7 +23,7 @@ export class Environment extends Bootstrappable implements EnvironmentModel {
   constructor(params: EnvironmentParamsModel = {}) {
     super();
     this.app = params.app;
-    this.environment = params.environment ?? ENVIRONMENT.DEVELOPMENT;
+    this.environment = params.environment;
     this.overrrides = params.overrrides;
   }
 

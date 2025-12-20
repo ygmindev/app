@@ -1,15 +1,14 @@
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { BUILD_DIR } from '@lib/config/file/file.constants';
+import { fromBuild } from '@lib/backend/file/utils/fromBuild/fromBuild';
 import { type TaskConfigModel } from '@lib/config/task/task.models';
 import { Config } from '@lib/config/utils/Config/Config';
 
 export const taskConfig = new Config<TaskConfigModel>({
   params: () => ({
-    outDir: fromWorking(BUILD_DIR),
-
     promptsExtension: '.prompts.ts',
 
     taskExtension: '.task.ts',
+
+    tasksPathname: fromBuild('tasks.js'),
 
     wait: {
       delay: 1e3,
@@ -20,5 +19,7 @@ export const taskConfig = new Config<TaskConfigModel>({
     },
 
     workflowExtension: '.workflow.ts',
+
+    workflowsPathname: fromBuild('workflows.js'),
   }),
 });

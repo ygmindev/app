@@ -1,22 +1,10 @@
-import { type GraphqlQueryParamsFieldsModel } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import {
   type UseResourceModel,
   type UseResourceParamsModel,
 } from '@lib/frontend/resource/hooks/useResource/useResource.models';
 import { useResourceMethod } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
-import { type UseResourceMethodParamsModel } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models';
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
-import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
-import uniqBy from 'lodash/uniqBy';
-
-export const toGraphqlParamsFields = <TType,>(
-  fields?: ResourceFieldsModel<TType>,
-): GraphqlQueryParamsFieldsModel<TType> =>
-  (fields?.map((field) =>
-    field.fields ? { [field.id]: toGraphqlParamsFields(field.fields) } : field.id,
-  ) as GraphqlQueryParamsFieldsModel<TType>) ?? [];
 
 export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   afterCreate,
@@ -35,23 +23,15 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   beforeSubscribe,
   beforeUpdate,
   beforeUpdateMany,
-  fields,
+  fields = [],
   name,
   root,
 }: UseResourceParamsModel<TType, TRoot>): UseResourceModel<TType, TRoot> => {
-  const fieldsF = toGraphqlParamsFields<TType>(
-    uniqBy([{ id: '_id' as StringKeyModel<TType> }, ...(fields ?? [])], 'id'),
-  );
-
   const { query: get } = useResourceMethod<RESOURCE_METHOD_TYPE.GET, TType, TRoot>({
     after: afterGet,
     // TODO: solution until Graphql oneOf / union input
     before: beforeGet,
-    fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
-      RESOURCE_METHOD_TYPE.GET,
-      TType,
-      TRoot
-    >['fields'],
+    fields,
     method: RESOURCE_METHOD_TYPE.GET,
     name,
     root,
@@ -60,11 +40,7 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   const { query: create } = useResourceMethod<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot>({
     after: afterCreate,
     before: beforeCreate,
-    fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
-      RESOURCE_METHOD_TYPE.CREATE,
-      TType,
-      TRoot
-    >['fields'],
+    fields,
     method: RESOURCE_METHOD_TYPE.CREATE,
     name,
     root,
@@ -73,11 +49,7 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   const { query: createMany } = useResourceMethod<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>({
     after: afterCreateMany,
     before: beforeCreateMany,
-    fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
-      RESOURCE_METHOD_TYPE.CREATE_MANY,
-      TType,
-      TRoot
-    >['fields'],
+    fields,
     method: RESOURCE_METHOD_TYPE.CREATE_MANY,
     name,
     root,
@@ -86,11 +58,7 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   const { query: getMany } = useResourceMethod<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>({
     after: afterGetMany,
     before: beforeGetMany,
-    fields: [{ result: [{ items: fieldsF }] }] as UseResourceMethodParamsModel<
-      RESOURCE_METHOD_TYPE.GET_MANY,
-      TType,
-      TRoot
-    >['fields'],
+    fields,
     method: RESOURCE_METHOD_TYPE.GET_MANY,
     name,
     root,
@@ -99,11 +67,7 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   const { query: update } = useResourceMethod<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot>({
     after: afterUpdate,
     before: beforeUpdate,
-    fields: [{ result: fieldsF }] as UseResourceMethodParamsModel<
-      RESOURCE_METHOD_TYPE.UPDATE,
-      TType,
-      TRoot
-    >['fields'],
+    fields,
     method: RESOURCE_METHOD_TYPE.UPDATE,
     name,
     root,
@@ -112,11 +76,7 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   const { query: updateMany } = useResourceMethod<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot>({
     after: afterUpdateMany,
     before: beforeUpdateMany,
-    fields: [{ result: fieldsF }] as unknown as UseResourceMethodParamsModel<
-      RESOURCE_METHOD_TYPE.UPDATE_MANY,
-      TType,
-      TRoot
-    >['fields'],
+    fields,
     method: RESOURCE_METHOD_TYPE.UPDATE_MANY,
     name,
     root,
@@ -125,11 +85,7 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   const { query: remove } = useResourceMethod<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>({
     after: afterRemove,
     before: beforeRemove,
-    fields: [{ result: fieldsF }] as unknown as UseResourceMethodParamsModel<
-      RESOURCE_METHOD_TYPE.REMOVE,
-      TType,
-      TRoot
-    >['fields'],
+    fields,
     method: RESOURCE_METHOD_TYPE.REMOVE,
     name,
     root,
@@ -138,11 +94,7 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   const { query: subscribe } = useResourceMethod<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>({
     after: afterSubscribe,
     before: beforeSubscribe,
-    fields: [{ result: [{ items: fieldsF }] }] as UseResourceMethodParamsModel<
-      RESOURCE_METHOD_TYPE.SUBSCRIBE,
-      TType,
-      TRoot
-    >['fields'],
+    fields,
     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
     name,
     root,

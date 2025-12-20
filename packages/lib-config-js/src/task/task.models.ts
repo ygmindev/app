@@ -1,9 +1,9 @@
 export type TaskConfigModel = {
-  outDir: string;
-
   promptsExtension: string;
 
   taskExtension: string;
+
+  tasksPathname: string;
 
   wait: {
     delay: number;
@@ -12,4 +12,6 @@ export type TaskConfigModel = {
   };
 
   workflowExtension: string;
+
+  workflowsPathname: string;
 };

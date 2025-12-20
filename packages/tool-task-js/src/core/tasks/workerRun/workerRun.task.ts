@@ -1,3 +1,4 @@
+import { taskConfig } from '@lib/config/task/task';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
@@ -15,7 +16,7 @@ export const workerRun = buildTask<WorkerRunParamsModel, WorkerRunModel>({
     environment: ENVIRONMENT.DEVELOPMENT,
   },
 
-  task: async ({ count = 1, queue, tasks, workflowsDir, workflowsName = 'workflows' }) => {
+  task: async ({ count = 1, queue, tasks, workflowsPathname }) => {
     let tasksF = tasks;
     if (!tasksF) {
       const cli = new Cli();
@@ -27,8 +28,13 @@ export const workerRun = buildTask<WorkerRunParamsModel, WorkerRunModel>({
       );
     }
 
+    const config = taskConfig.params();
     const workers: Array<Worker> = new Array(count).fill(
-      new Worker({ queue, tasks: tasksF, workflowsDir, workflowsName }),
+      new Worker({
+        queue,
+        tasks: tasksF,
+        workflowsPathname: workflowsPathname ?? config.workflowsPathname,
+      }),
     );
 
     try {

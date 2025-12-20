@@ -118,8 +118,8 @@ export const _serverless = ({
     [
       {
         plugins: filterNil([
-          (environment.variables.NODE_ENV === 'development' ||
-            environment.variables.NODE_ENV === 'test') &&
+          (process.env.NODE_ENV === 'development' ||
+            process.env.NODE_ENV === 'test') &&
             !environment.variables.NODE_RUNTIME &&
             'serverless-offline',
         ]),
@@ -199,7 +199,7 @@ export const _serverless = ({
           memorySize: memory,
           name: provider,
           region: region as _ServerlessConfigModel['provider']['region'],
-          stage: environment.variables.NODE_ENV,
+          stage: process.env.NODE_ENV,
           timeout,
           versionFunctions: false,
         },

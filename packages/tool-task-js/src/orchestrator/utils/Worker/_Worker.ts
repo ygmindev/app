@@ -1,8 +1,6 @@
 import { LocalStorage } from '@lib/backend/core/utils/LocalStorage/LocalStorage';
 import { type LocalContextModel } from '@lib/backend/core/utils/LocalStorage/LocalStorage.models';
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { BUILD_DIR } from '@lib/config/file/file.constants';
+import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { uid } from '@lib/shared/core/utils/uid/uid';
@@ -42,18 +40,13 @@ export class _Worker extends Bootstrappable implements _WorkerModel {
   protected _worker?: Worker;
   protected _workflowsPath: string;
 
-  constructor({
-    id,
-    queue = TASK_QUEUE_DEFAULT,
-    tasks,
-    workflowsDir = fromWorking(BUILD_DIR),
-    workflowsName,
-  }: _WorkerParamsModel) {
+  constructor({ id, queue = TASK_QUEUE_DEFAULT, tasks, workflowsPathname }: _WorkerParamsModel) {
     super();
+    const { main } = fileInfo(workflowsPathname);
     this._tasks = tasks;
     this._queue = queue;
-    this._id = `${workflowsName}-${id ?? uid()}`;
-    this._workflowsPath = joinPaths([workflowsDir, workflowsName], { extension: '.js' });
+    this._id = `${main}-${id ?? uid()}`;
+    this._workflowsPath = workflowsPathname;
   }
 
   async onCleanUp(): Promise<void> {

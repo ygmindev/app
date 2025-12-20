@@ -8,7 +8,6 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 
 export const OrchestratorPage: LFCModel<OrchestratorPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  // const { getMany } = useWorkflowResource();
   const { getMany } = usePipelineResource();
   return (
     <DataBoundary

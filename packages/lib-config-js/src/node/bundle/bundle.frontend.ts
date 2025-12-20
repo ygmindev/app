@@ -43,7 +43,7 @@ bundleConfig = bundleConfig.extend(() => {
           Record<string, unknown>,
         ],
 
-        environment.variables.NODE_ENV === 'production' && [
+        process.env.NODE_ENV === 'production' && [
           'react-remove-properties',
           { properties: ['testID'] },
         ],
@@ -60,8 +60,7 @@ bundleConfig = bundleConfig.extend(() => {
 
     define: {
       __DEV__: `${
-        (environment.variables.NODE_ENV === 'development' ||
-          environment.variables.NODE_ENV === 'test') &&
+        (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
         !environment.variables.NODE_RUNTIME
       }`,
     },
@@ -84,7 +83,7 @@ bundleConfig = bundleConfig.extend(() => {
         // 'react-use',
         // 'redux-persist',
         // TODO: fix?
-        // environment.variables.NODE_ENV === 'production' && 'inversify-react',
+        // process.env.NODE_ENV === 'production' && 'inversify-react',
       ]) ?? [],
 
     transpilePatterns: [

@@ -1,6 +1,6 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
-import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
+import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
@@ -18,13 +18,13 @@ import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getEnvironmentVariables } from '@lib/shared/core/utils/getEnvironmentVariables/getEnvironmentVariables';
 import { packageInfo } from '@lib/shared/core/utils/packageInfo/packageInfo';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { esbuildCommonjs, viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { type NodeBuildParamsModel } from '@tool/task/node/tasks/nodeBuild/nodeBuild.models';
 import { nodeBuild } from '@tool/task/node/tasks/nodeBuild/nodeBuild.task';
 import react from '@vitejs/plugin-react';
 import { type Plugin as EsbuildPlugin } from 'esbuild';
@@ -42,82 +42,61 @@ import { sep } from 'path';
 import posix from 'path/posix';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vike from 'vike/plugin';
-import {
-  type Alias,
-  createLogger,
-  type Logger,
-  type Plugin,
-  searchForWorkspaceRoot,
-  type ViteDevServer,
-} from 'vite';
+import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
 // import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 
-const vitePluginPreBundle = (params: BundleConfigModel['preBundle'] = []): Plugin => {
-  const inputs: Array<[globs: Array<string>, config?: NodeBuildParamsModel]> = params?.map((v) => [
-    fromGlobs(v[0]),
-    v[1],
-  ]);
-
-  const run = async (entryFiles: Array<string>, config?: NodeBuildParamsModel): Promise<void> =>
-    nodeBuild({ ...(config ?? {}), entryFiles });
-
+const vitePluginBarrel = (barrelFiles: BundleConfigModel['barrelFiles'] = []): Plugin => {
+  const virtualModuleIds = barrelFiles.map((v) => `virtual:${fileInfo(v[1].outPathname).main}`);
+  const resolvedVirtualModuleIds = virtualModuleIds.map((v) => '\0' + v);
   return {
-    async buildStart() {
-      await Promise.all(inputs.map((v) => run(...v)));
+    enforce: 'pre',
+
+    load(id: string) {
+      const i = resolvedVirtualModuleIds.findIndex((v) => v === id);
+      if (i >= 0) {
+        logger.progress(`[vite-plugin-barrel] exporting ${barrelFiles[i][1].outPathname}`);
+        return barrelFiles[i][0].map((v) => `export * from '${v}';`).join('\n');
+      }
     },
+
+    name: 'vite-plugin-barrel',
+
+    resolveId(id: string) {
+      const i = virtualModuleIds.findIndex((v) => v === id);
+      if (i >= 0) {
+        return resolvedVirtualModuleIds[i];
+      }
+      return null;
+    },
+  };
+};
+
+const vitePluginPreBundle = (params: BundleConfigModel['preBundle'] = []): Plugin => {
+  const inputs = filterNil(
+    params.map(({ entryFiles }) =>
+      entryFiles
+        ? isString(entryFiles)
+          ? [entryFiles]
+          : isArray(entryFiles)
+            ? entryFiles
+            : Object.values(entryFiles)
+        : undefined,
+    ),
+  );
+  return {
+    async configureServer() {
+      await Promise.all(params.map(async (v) => nodeBuild(v)));
+    },
+
     async handleHotUpdate({ file }) {
-      const input = inputs.find((v) => v[0].some((vv) => file.includes(vv)));
-      input && (await run(...input));
+      const i = inputs.findIndex((v) => v.some(file.includes));
+      i >= 0 && (await nodeBuild(params[i]));
     },
 
     name: 'vite-plugin-prebundle',
   };
 };
-
-function vitePluginFullReload(entryFiles: Array<string | RegExp>): Plugin {
-  let server: ViteDevServer;
-  return {
-    configureServer(_server) {
-      server = _server;
-    },
-    async handleHotUpdate(ctx) {
-      const changed = ctx.file;
-      for (const entry of entryFiles) {
-        if (entry instanceof RegExp) {
-          entry.test(changed) && server.ws.send({ type: 'full-reload' });
-        } else {
-          const modules = server.moduleGraph.getModulesByFile(entry);
-          if (!modules) continue;
-          const stack = [...modules];
-          const visited = new Set();
-          let isDep = false;
-          while (stack.length > 0) {
-            const mod = stack.pop();
-            if (!mod || visited.has(mod.id)) continue;
-            visited.add(mod.id);
-            if (mod.file === changed) {
-              isDep = true;
-              break;
-            }
-            for (const dep of mod.importedModules) {
-              if (!visited.has(dep.id)) {
-                stack.push(dep);
-              }
-            }
-          }
-          if (isDep) {
-            server.ws.send({ type: 'full-reload' });
-            return [];
-          }
-        }
-      }
-      return [];
-    },
-
-    name: 'vite-plugin-full-reload',
-  };
-}
 
 export const esbuildPluginExcludeVendorFromSourceMap = (includes = []): EsbuildPlugin => ({
   name: 'plugin:excludeVendorFromSourceMap',
@@ -205,6 +184,7 @@ export const _bundle = ({
   appType,
   assetsDir,
   babel,
+  barrelFiles,
   buildDir,
   commonjsDeps,
   dedupe,
@@ -277,7 +257,7 @@ export const _bundle = ({
       : []),
   ]);
 
-  const input = entryFiles
+  const entries = entryFiles
     ? isString(entryFiles)
       ? [entryFiles]
       : isArray(entryFiles)
@@ -285,9 +265,17 @@ export const _bundle = ({
         : Object.values(entryFiles)
     : undefined;
 
-  const watchF = filterNil([...(watch ?? []), ...(input ?? [])]);
+  const watchF = filterNil([...(watch ?? []), ...(entries ?? [])]);
 
   const packagePaths = rootDirs?.map((path) => joinPaths([path, 'package.json']));
+
+  const preBundleF = [
+    ...(preBundle ?? []),
+    ...(barrelFiles?.map((v) => {
+      const { main } = fileInfo(v[1].outPathname);
+      return { entryFiles: { [main]: `virtual:${main}` } };
+    }) ?? []),
+  ];
 
   const config: _BundleConfigModel = {
     appType: appType === APP_TYPE.TOOL ? undefined : 'custom',
@@ -315,7 +303,7 @@ export const _bundle = ({
           }
         : undefined,
 
-      minify: environment.variables.NODE_ENV === 'production',
+      minify: process.env.NODE_ENV === 'production',
 
       outDir: outDir ?? fromWorking(buildDir),
 
@@ -324,13 +312,13 @@ export const _bundle = ({
           ? (name: string) => some(externals.map((v) => (isString(v) ? name === v : v.test(name))))
           : undefined,
 
-        input,
+        input: entryFiles,
 
         output:
           platformF === PLATFORM.NODE
             ? {
                 chunkFileNames: '[name].js',
-                compact: environment.variables.NODE_ENV === 'production',
+                compact: process.env.NODE_ENV === 'production',
                 entryFileNames: '[name].js',
                 exports: 'named',
                 format: format === BUNDLE_FORMAT.ESM ? 'esm' : 'cjs',
@@ -364,7 +352,7 @@ export const _bundle = ({
 
       ssr: platformF === PLATFORM.NODE ? true : undefined,
 
-      watch: environment.variables.NODE_ENV === 'development' ? { include: watchF } : undefined,
+      watch: process.env.NODE_ENV === 'development' ? { include: watchF } : undefined,
     },
 
     customLogger,
@@ -380,10 +368,10 @@ export const _bundle = ({
       loader: 'tsx',
     },
 
-    mode: environment.variables.NODE_ENV,
+    mode: process.env.NODE_ENV,
 
     optimizeDeps: {
-      entries: input,
+      entries,
 
       esbuildOptions: {
         define,
@@ -396,7 +384,7 @@ export const _bundle = ({
 
         mainFields,
 
-        minify: environment.variables.NODE_ENV === 'production',
+        minify: process.env.NODE_ENV === 'production',
 
         platform: platformF === PLATFORM.NODE ? 'node' : undefined,
 
@@ -449,13 +437,15 @@ export const _bundle = ({
 
       // platformF === PLATFORM.NODE && nodePolyfills(),
 
-      preBundle && vitePluginPreBundle(preBundle),
+      barrelFiles && vitePluginBarrel(barrelFiles),
+
+      preBundleF && vitePluginPreBundle(preBundleF),
 
       babel &&
         babelPlugin({
           babelHelpers: 'runtime',
-          compact: environment.variables.NODE_ENV === 'production',
-          minified: environment.variables.NODE_ENV === 'production',
+          compact: process.env.NODE_ENV === 'production',
+          minified: process.env.NODE_ENV === 'production',
           plugins: babel.plugins,
           presets: babel.presets,
           skipPreflightCheck: true,
@@ -474,7 +464,7 @@ export const _bundle = ({
       viteCommonjs() as Plugin,
     ]),
 
-    publicDir: environment.variables.NODE_ENV === 'production' ? assetsDir : publicPathname,
+    publicDir: process.env.NODE_ENV === 'production' ? assetsDir : publicPathname,
 
     resolve: {
       alias: [

@@ -25,6 +25,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
     presets?: Array<string | [string, Record<string, unknown>]>;
   };
 
+  barrelFiles?: Array<[globs: Array<string>, config: { outPathname: string }]>;
+
   commonjsDeps?: Array<string>;
 
   configFilename: string;
@@ -65,7 +67,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   platform?: PLATFORM;
 
-  preBundle?: Array<[globs: Array<string>, config?: NodeBuildParamsModel]>;
+  preBundle?: Array<NodeBuildParamsModel>;
 
   provide?: Record<string, string>;
 

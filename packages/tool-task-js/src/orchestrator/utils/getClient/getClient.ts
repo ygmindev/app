@@ -13,8 +13,8 @@ export const getClient = async ({ id }: GetClientParamsModel = {}): Promise<GetC
     client = Container.get(Client, idF);
   } catch {
     client = new Client({ id: idF });
+    await client?.initialize();
     Container.set(Client, client, idF);
   }
-  await client?.initialize();
   return client;
 };

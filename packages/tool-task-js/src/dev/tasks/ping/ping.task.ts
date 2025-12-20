@@ -4,6 +4,7 @@ import { type PingModel, type PingParamsModel } from '@tool/task/dev/tasks/ping/
 
 export const ping = buildTask({
   task: async (params: PingParamsModel): Promise<PingModel> => {
+    console.error('PING@@@@');
     await sleep(10000);
     return { message: 'success' };
   },

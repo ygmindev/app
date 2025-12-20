@@ -1,4 +1,8 @@
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
+import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
+import { merge } from '@lib/shared/core/utils/merge/merge';
+import { type ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import {
   type TaskModel,
   type TaskParamsModel,
@@ -11,11 +15,12 @@ export const buildTask =
     task: fn,
   }: TaskParamsModel<TParams, TResult>): TaskModel<TParams, TResult> =>
   async (paramsOverrides, contextOverrides) => {
-    const paramsF = { ...(params ?? {}), ...(paramsOverrides ?? {}) } as TParams;
-    const contextF = { ...(context ?? {}), ...(contextOverrides ?? {}) };
+    const paramsF = merge([cleanObject(paramsOverrides), params]) as TParams;
+    const contextF = merge([cleanObject(contextOverrides), context]) as ExecutionContextModel;
+    const environment = process.env.NODE_ENV === 'undefined' ? undefined : process.env.NODE_ENV;
     const env = new Environment({
       app: contextF.app,
-      environment: contextF.environment,
+      environment: (environment ?? contextF.environment) as ENVIRONMENT,
       overrrides: contextF.overrrides,
     });
     await env.initialize();

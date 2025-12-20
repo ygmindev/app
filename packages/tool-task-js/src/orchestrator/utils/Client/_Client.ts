@@ -43,9 +43,11 @@ export class _Client extends Bootstrappable implements _ClientModel {
       taskQueue: context?.queue ?? TASK_QUEUE_DEFAULT,
       workflowId,
     });
+    console.warn('@@@ workflow: ${workflow}, handle:', handle);
+    console.warn(this._client?.workflow.list());
     if (handle?.workflowId) {
       return { id: workflowId };
     }
-    throw new NotFoundError('workflow');
+    throw new NotFoundError(`workflow: ${workflow}`);
   };
 }

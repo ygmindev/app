@@ -1,7 +1,5 @@
 #!/bin/bash
 
-run orchestratorBuild
-
 run executeParallel --commands=\
 "run pubSubRun",\
 "run orchestratorRun",\
