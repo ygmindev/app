@@ -10,7 +10,6 @@ import {
   type Next,
   Worker,
 } from '@temporalio/worker';
-import { TASK_QUEUE_DEFAULT } from '@tool/task/core/core.constants';
 import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 import {
   type _WorkerModel,
@@ -40,7 +39,7 @@ export class _Worker extends Bootstrappable implements _WorkerModel {
   protected _worker?: Worker;
   protected _workflowsPath: string;
 
-  constructor({ id, queue = TASK_QUEUE_DEFAULT, tasks, workflowsPathname }: _WorkerParamsModel) {
+  constructor({ id, queue, tasks, workflowsPathname }: _WorkerParamsModel) {
     super();
     const { main } = fileInfo(workflowsPathname);
     this._tasks = tasks;

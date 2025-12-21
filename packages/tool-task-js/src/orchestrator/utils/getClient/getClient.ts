@@ -8,13 +8,15 @@ import {
 
 export const getClient = async ({ id }: GetClientParamsModel = {}): Promise<GetClientModel> => {
   const idF = id ?? 'client';
-  let client: ClientModel;
+  let client: ClientModel | undefined;
   try {
     client = Container.get(Client, idF);
-  } catch {
+  } catch {}
+  if (!client) {
     client = new Client({ id: idF });
-    await client?.initialize();
     Container.set(Client, client, idF);
   }
+
+  await client.initialize();
   return client;
 };

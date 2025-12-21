@@ -1,6 +1,8 @@
 export type TaskConfigModel = {
   promptsExtension: string;
 
+  queue: string;
+
   taskExtension: string;
 
   tasksPathname: string;
@@ -10,6 +12,8 @@ export type TaskConfigModel = {
     interval: number;
     timeout: number;
   };
+
+  workerCountDefault: number;
 
   workflowExtension: string;
 

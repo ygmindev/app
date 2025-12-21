@@ -2,11 +2,16 @@ import { type _ParseArgsModel } from '@tool/task/core/utils/parseArgs/_parseArgs
 import minimist from 'minimist';
 
 export const _parseArgs = (): _ParseArgsModel => {
-  const result = minimist(process.argv.slice(2));
-  for (const [key, value] of Object.entries(result).slice(1)) {
-    let valueF: string | Array<string> = `${value}`.trim();
-    valueF.includes(',') && (valueF = valueF.split(',').filter(Boolean));
-    result[key] = valueF;
+  const args = minimist(process.argv.slice(2));
+  for (const [key, value] of Object.entries(args)) {
+    if (key === '_') continue;
+    if (Array.isArray(value)) {
+      args[key] = value.map((v) => `${v}`.trim());
+    } else if (typeof value === 'string') {
+      args[key] = value.trim();
+    } else {
+      args[key] = value;
+    }
   }
-  return result;
+  return args as _ParseArgsModel;
 };

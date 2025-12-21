@@ -21,7 +21,6 @@ export class _Transport<TParams extends Record<string, unknown>>
   }
 
   async handler(params?: TParams): Promise<Transform & OnUnknown> {
-    await this.initialize();
     const h = this.handle(params);
     return build(async function (source) {
       for await (const obj of source) {

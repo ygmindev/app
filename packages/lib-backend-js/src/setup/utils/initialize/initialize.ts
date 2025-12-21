@@ -12,8 +12,6 @@ import { type RootPubSubSchemaModel } from '@lib/config/pubSub/pubSub.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 
-let result: InitializeModel;
-
 export const initialize = async ({
   database,
 }: InitializeParamsModel = {}): Promise<InitializeModel> => {
@@ -23,26 +21,17 @@ export const initialize = async ({
 
   const databaseF = database?.();
 
-  if (!result) {
-    result = {};
+  try {
+    const pubSub = new PubSub(pubSubConfig.params());
+    await pubSub.initialize();
+    Container.set(PubSub<RootPubSubSchemaModel>, pubSub);
+  } catch {}
 
+  if (databaseF) {
     try {
-      const pubSub = new PubSub(pubSubConfig.params());
-      await pubSub.initialize();
-      Container.set(PubSub<RootPubSubSchemaModel>, pubSub);
+      const db = new Database(databaseF);
+      await db.initialize();
+      Container.set(Database, db, DATABASE_TYPE.MONGO);
     } catch {}
-
-    if (databaseF) {
-      try {
-        const db = new Database(databaseF);
-        await db.initialize();
-        Container.set(Database, db, DATABASE_TYPE.MONGO);
-        result.database = db;
-      } catch {}
-    }
   }
-
-  return {
-    ...result,
-  };
 };

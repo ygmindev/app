@@ -3,7 +3,6 @@ import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionCon
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { Client, Connection } from '@temporalio/client';
-import { TASK_QUEUE_DEFAULT } from '@tool/task/core/core.constants';
 import {
   type _ClientModel,
   type _ClientParamsModel,
@@ -11,13 +10,15 @@ import {
 import { type ExecutionResultModel } from '@tool/task/orchestrator/utils/Client/Client.models';
 
 export class _Client extends Bootstrappable implements _ClientModel {
-  protected _client?: Client;
+  protected _client!: Client;
   protected _connection?: Connection;
   protected _id: string;
+  protected _queue: string;
 
-  constructor({ id }: _ClientParamsModel = {}) {
+  constructor({ id, queue }: _ClientParamsModel) {
     super();
     this._id = id ?? 'client';
+    this._queue = queue;
   }
 
   async onCleanUp(): Promise<void> {
@@ -38,13 +39,11 @@ export class _Client extends Bootstrappable implements _ClientModel {
     context?: ExecutionContextModel,
   ): Promise<ExecutionResultModel> => {
     const workflowId = new ObjectId().toString();
-    const handle = await this._client?.workflow.start(workflow, {
+    const handle = await this._client.workflow.start(workflow, {
       args: [params, context],
-      taskQueue: context?.queue ?? TASK_QUEUE_DEFAULT,
+      taskQueue: context?.queue ?? this._queue,
       workflowId,
     });
-    console.warn('@@@ workflow: ${workflow}, handle:', handle);
-    console.warn(this._client?.workflow.list());
     if (handle?.workflowId) {
       return { id: workflowId };
     }

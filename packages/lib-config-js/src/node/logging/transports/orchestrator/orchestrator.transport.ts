@@ -17,6 +17,7 @@ class OrchestratorTransport extends Transport<OrchestratorTransportParamsModel> 
   }
 
   async onInitialize(): Promise<void> {
+    console.warn('@@@ ORCEHSTRATOR INIT');
     await initialize();
   }
 }

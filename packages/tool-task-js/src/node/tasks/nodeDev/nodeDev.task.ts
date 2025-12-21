@@ -1,5 +1,7 @@
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import { _nodeDev } from '@tool/task/node/tasks/nodeDev/_nodeDev';
@@ -12,12 +14,17 @@ export const nodeDev = buildTask<NodeDevParamsModel, NodeDevModel>({
   context: {
     environment: ENVIRONMENT.DEVELOPMENT,
   },
+
   task: async (params, context) => {
-    let { pathname } = params;
-    if (!pathname && context?.app) {
-      const pkg = await getAppRoot(context.app);
-      pathname = joinPaths([pkg, 'src/index.ts']);
-    }
+    const app = context?.app ? await getAppRoot(context.app) : fromRoot();
+    let pathname = params.pathname
+      ? isArray(params.pathname)
+        ? params.pathname
+        : [params.pathname]
+      : ['src/index.ts'];
+    pathname = pathname.map((v) => joinPaths([app, v]));
+    console.warn('@@@ PATHNAMES:');
+    console.warn(pathname);
     return _nodeDev({ ...params, pathname });
   },
 });

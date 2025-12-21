@@ -1,10 +1,13 @@
 import { fromBuild } from '@lib/backend/file/utils/fromBuild/fromBuild';
+import { TASK_QUEUE_DEFAULT } from '@lib/config/task/task.constants';
 import { type TaskConfigModel } from '@lib/config/task/task.models';
 import { Config } from '@lib/config/utils/Config/Config';
 
 export const taskConfig = new Config<TaskConfigModel>({
   params: () => ({
     promptsExtension: '.prompts.ts',
+
+    queue: TASK_QUEUE_DEFAULT,
 
     taskExtension: '.task.ts',
 
@@ -17,6 +20,8 @@ export const taskConfig = new Config<TaskConfigModel>({
 
       timeout: 60e3,
     },
+
+    workerCountDefault: 1,
 
     workflowExtension: '.workflow.ts',
 

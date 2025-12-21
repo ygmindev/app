@@ -9,17 +9,16 @@ let bundleConfig = configBase;
 bundleConfig = bundleConfig.extend(() => {
   const { taskExtension, tasksPathname, workflowExtension, workflowsPathname } =
     taskConfig.params();
-
   return {
     barrelFiles: [
       [
-        fromGlobs([fromPackages(`*/src/**/*${workflowExtension}`)], { isAbsolute: true }),
-        { outPathname: workflowsPathname },
+        fromGlobs([fromPackages(`*/src/**/**${taskExtension}`)], { isAbsolute: true }),
+        { outPathname: tasksPathname },
       ],
 
       [
-        fromGlobs([fromPackages(`*/src/**/*${taskExtension}`)], { isAbsolute: true }),
-        { outPathname: tasksPathname },
+        fromGlobs([fromPackages(`*/src/**/**${workflowExtension}`)], { isAbsolute: true }),
+        { outPathname: workflowsPathname },
       ],
     ],
 
@@ -29,7 +28,11 @@ bundleConfig = bundleConfig.extend(() => {
 
     platform: PLATFORM.NODE,
 
-    preBundle: fromGlobs([fromPackages('*/src/**/*.transport.ts')]).map((v) => ({ entryFiles: v })),
+    preBundle: [
+      ...fromGlobs([fromPackages('*/src/**/*.transport.ts')], { isAbsolute: true }).map((v) => ({
+        entryFiles: v,
+      })),
+    ],
 
     transpilePatterns: [/graphql/],
   };

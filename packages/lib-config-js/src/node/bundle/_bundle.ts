@@ -50,8 +50,6 @@ const vitePluginBarrel = (barrelFiles: BundleConfigModel['barrelFiles'] = []): P
   const virtualModuleIds = barrelFiles.map((v) => `virtual:${fileInfo(v[1].outPathname).main}`);
   const resolvedVirtualModuleIds = virtualModuleIds.map((v) => '\0' + v);
   return {
-    enforce: 'pre',
-
     load(id: string) {
       const i = resolvedVirtualModuleIds.findIndex((v) => v === id);
       if (i >= 0) {
@@ -88,6 +86,8 @@ const vitePluginPreBundle = (params: BundleConfigModel['preBundle'] = []): Plugi
     async configureServer() {
       await Promise.all(params.map(async (v) => nodeBuild(v)));
     },
+
+    enforce: 'pre',
 
     async handleHotUpdate({ file }) {
       const i = inputs.findIndex((v) => v.some(file.includes));
