@@ -16,7 +16,6 @@ export const getClient = async ({ id }: GetClientParamsModel = {}): Promise<GetC
     client = new Client({ id: idF });
     Container.set(Client, client, idF);
   }
-
   await client.initialize();
   return client;
 };

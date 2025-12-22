@@ -300,7 +300,7 @@ const find = async (
       if (isThrow) {
         throw e;
       }
-      logger.warn(e);
+      logger.warn(e as Error);
     }
     let selected: ElementHandle;
     if (index >= 0) {
@@ -334,7 +334,7 @@ const findAll = async (
       if (isThrow) {
         throw e;
       }
-      logger.warn(e);
+      logger.warn(e as Error);
     }
     const selected = await handle.$$(selectorF);
     if (selected) {

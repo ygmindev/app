@@ -23,8 +23,8 @@ export const _handleHmr = async ({
       isDisposed = true;
       try {
         await onDispose?.();
-      } catch (err) {
-        logger.error('HMR dispose failed', err);
+      } catch (e) {
+        logger.error(`HMR dispose failed: ${e as Error}`);
       }
     })();
     return disposable;
@@ -35,8 +35,8 @@ export const _handleHmr = async ({
     isInitialized = true;
     try {
       await onInitialize?.();
-    } catch (err) {
-      logger.error('HMR init failed', err);
+    } catch (e) {
+      logger.error(`HMR init failed: ${e as Error}`);
     }
   };
 

@@ -224,13 +224,13 @@ export class TaskRunner extends _TaskRunner implements TaskRunnerModel {
         platform: process.env.ENV_PLATFORM,
         target,
       });
-      logger.info(
+      logger.progress(
         `running ${name}${environmentContext === '' ? '' : ` with context: ${isEmpty(environmentContext) ? 'none' : environmentContext}`}`,
       );
       await this.runTasks(task, context);
     } catch (e) {
       console.warn(e);
-      logger.error(name, (e as Error).stack);
+      logger.fail(name);
     } finally {
       this._pids.forEach((pid) => {
         try {

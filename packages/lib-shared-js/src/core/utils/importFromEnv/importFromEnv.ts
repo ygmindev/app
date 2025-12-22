@@ -14,7 +14,7 @@ export const importFromEnv = async <TType extends unknown>(
     fileConfig.params().extensions.map((extension) => async () => {
       const name = extension ? joinPaths([params], { extension }) : params;
       const result = (await import(name)) as { default: TType };
-      result && logger.debug('imported', name);
+      result && logger.debug(`imported ${name}`);
       return (result.default ?? result) as TType;
     }),
   );

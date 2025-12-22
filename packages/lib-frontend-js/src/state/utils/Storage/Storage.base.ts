@@ -18,7 +18,7 @@ export class Storage implements StorageModel {
         if (storage) {
           try {
             const value = await storage.getItem<TType>(key);
-            value && logger.debug('storage get', key);
+            value && logger.debug(`storage get ${key}`);
             return value;
           } catch {
             continue;
@@ -37,7 +37,7 @@ export class Storage implements StorageModel {
         if (storage) {
           try {
             await storage.removeItem(key);
-            logger.debug('storage remove', key);
+            logger.debug(`storage remove ${key}`);
           } catch {
             continue;
           }
@@ -52,7 +52,7 @@ export class Storage implements StorageModel {
         const storage = this.storages[i];
         if (storage) {
           try {
-            value && logger.debug('storage set', key, value);
+            value && logger.debug(`storage set ${key}: ${value}`);
             await storage.setItem<TType>(key, value);
           } catch {
             continue;

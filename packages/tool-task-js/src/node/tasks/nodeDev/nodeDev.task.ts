@@ -23,8 +23,6 @@ export const nodeDev = buildTask<NodeDevParamsModel, NodeDevModel>({
         : [params.pathname]
       : ['src/index.ts'];
     pathname = pathname.map((v) => joinPaths([app, v]));
-    console.warn('@@@ PATHNAMES:');
-    console.warn(pathname);
     return _nodeDev({ ...params, pathname });
   },
 });

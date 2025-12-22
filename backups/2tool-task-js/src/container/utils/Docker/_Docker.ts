@@ -63,10 +63,10 @@ export class _Docker implements _DockerModel {
           }
           const error = res?.find((err) => err.error ?? err.errorDetail);
           if (error) {
-            logger.error('❌ Error:', error);
+            logger.error(error);
             reject(new Error(error.error || error.errorDetail?.message));
           }
-          logger.info('✅ Complete');
+          logger.success('complete');
           return resolve();
         },
         (event: { error?: string; stream?: string }) => {

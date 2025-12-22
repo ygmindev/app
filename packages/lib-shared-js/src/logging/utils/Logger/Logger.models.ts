@@ -1,12 +1,5 @@
-export type LoggerModel = {
-  debug: LogModel;
-  error: LogModel;
-  fail: LogModel;
-  info: LogModel;
-  progress: LogModel;
-  success: LogModel;
-  trace: LogModel;
-  warn: LogModel;
-};
+import { type _LoggerModel } from '@lib/shared/logging/utils/Logger/_Logger.models';
 
-export type LogModel = (...params: Array<unknown>) => void;
+export type LoggerModel = _LoggerModel;
+
+export type LogArgsModel = string | Error | Record<string, unknown>;

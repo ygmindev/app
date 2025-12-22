@@ -10,6 +10,12 @@ let loggingConfig = configBase;
 loggingConfig = loggingConfig.extend(() => ({
   context: () => Container.get(LocalStorage).get() as LocalContextModel,
 
+  levels: {
+    fail: 55,
+    progress: 35,
+    success: 36,
+  },
+
   transports: [
     {
       options: { topic: LOG_MESSAGE_RESOURCE_NAME },
