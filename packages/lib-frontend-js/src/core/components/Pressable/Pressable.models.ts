@@ -8,9 +8,9 @@ import {
 import { type THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { type TestIdPropsModel } from '@lib/frontend/test/test.models';
 
-export type PressablePropsModel = TestIdPropsModel &
+export type PressablePropsModel<TType = void> = TestIdPropsModel &
   Pick<ActivatablePropsModel, 'children'> &
-  Omit<WrapperPropsModel, 'children'> &
+  Omit<WrapperPropsModel, 'children' | 'onPress'> &
   AnimatablePropsModel &
   Pick<
     ActivatablePropsModel,
@@ -18,6 +18,7 @@ export type PressablePropsModel = TestIdPropsModel &
   > & {
     confirmColor?: THEME_COLOR;
     confirmMessage?: AsyncTextModel;
+    onPress?: (() => TType | undefined) | (() => Promise<TType | undefined>);
     tooltip?: AsyncTextModel;
   };
 

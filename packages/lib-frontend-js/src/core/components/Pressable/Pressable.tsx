@@ -9,7 +9,7 @@ import {
 } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -17,9 +17,9 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { isPromise } from '@lib/shared/core/utils/isPromise/isPromise';
 import isFunction from 'lodash/isFunction';
-import { useState } from 'react';
+import { type ReactElement, useState } from 'react';
 
-export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = ({
+export const Pressable = <TType = void,>({
   animation,
   children,
   confirmColor,
@@ -38,7 +38,9 @@ export const Pressable: RLFCModel<PressableRefModel, PressablePropsModel> = ({
   tooltip,
   trigger,
   ...props
-}) => {
+}: RLFCPropsModel<PressableRefModel, PressablePropsModel<TType>>): ReactElement<
+  RLFCPropsModel<PressableRefModel, PressablePropsModel<TType>>
+> => {
   const theme = useTheme();
   const { t } = useTranslation();
   const [confirmModalIsOpen, confirmModalIsOpenSet] = useState<boolean | undefined>();

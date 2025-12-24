@@ -24,8 +24,9 @@ export const _graphqlPlugin: _GraphqlPluginModel = async (server, { config, logg
         return context;
       },
       graphiql: {
-        subscriptionsProtocol: 'WS',
+        subscriptionsProtocol: 'SSE',
       },
+      graphqlEndpoint: `/api/${pathname}`,
       landingPage: false,
       logging: logger ? { ...logger, debug: () => ({}) } : undefined,
       maskedErrors: {
@@ -33,7 +34,6 @@ export const _graphqlPlugin: _GraphqlPluginModel = async (server, { config, logg
           return formatGraphqlError(error as GraphQLError);
         },
       },
-      // plugins: filterNil([protocol !== HTTP_PROTOCOL.WEBSOCKET && useGraphQLSSE]),
       plugins: [
         useGraphQLSSE(),
 

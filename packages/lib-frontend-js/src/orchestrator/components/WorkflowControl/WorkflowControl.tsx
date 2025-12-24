@@ -1,16 +1,12 @@
 import { Accordion } from '@lib/frontend/animation/components/Accordion/Accordion';
-import { Button } from '@lib/frontend/core/components/Button/Button';
-import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import { ButtonGroup } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup';
 import { Chip } from '@lib/frontend/core/components/Chip/Chip';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { Table } from '@lib/frontend/data/components/Table/Table';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { useLogMessageResource } from '@lib/frontend/logging/hooks/useLogMessageResource/useLogMessageResource';
+import { WorkflowButtons } from '@lib/frontend/orchestrator/components/WorkflowButtons/WorkflowButtons';
 import { type WorkflowControlPropsModel } from '@lib/frontend/orchestrator/components/WorkflowControl/WorkflowControl.models';
-import { useJobResource } from '@lib/frontend/orchestrator/hooks/useJobResource/useJobResource';
 import { ORCHESTRATOR } from '@lib/frontend/orchestrator/orchestrator.constants';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
@@ -21,8 +17,6 @@ import { stringify } from '@lib/shared/core/utils/stringify/stringify';
 export const WorkflowControl: FCModel<WorkflowControlPropsModel> = ({ workflow, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([ORCHESTRATOR]);
-  const { create } = useJobResource();
-  const { subscribe } = useLogMessageResource();
   return (
     <Accordion
       {...wrapperProps}
@@ -32,33 +26,7 @@ export const WorkflowControl: FCModel<WorkflowControlPropsModel> = ({ workflow, 
         <Wrapper
           isAlign
           isRow>
-          <ButtonGroup type={BUTTON_TYPE.INVISIBLE}>
-            <Button
-              color={THEME_COLOR.SUCCESS}
-              icon="play"
-              onPress={async () => {
-                const result = await create({
-                  form: {
-                    context: workflow.context,
-                    params: workflow.params,
-                    workflow: workflow._id,
-                  },
-                });
-                const workflowId = result.result?._id;
-                if (workflowId) {
-                  const x = await subscribe({ id: workflowId });
-                  console.warn(x);
-                }
-              }}
-              tooltip={t('orchestrator:start', { value: 'orchestrator:workflow' })}
-            />
-            <Button
-              color={THEME_COLOR.ERROR}
-              icon="stop"
-              onPress={() => null}
-              tooltip={t('orchestrator:stop', { value: 'orchestrator:workflow' })}
-            />
-          </ButtonGroup>
+          <WorkflowButtons workflow={workflow} />
 
           <Text isBold>{workflow.name}</Text>
           <Chip>{t('orchestrator:workflow')}</Chip>

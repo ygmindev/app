@@ -11,6 +11,7 @@ export type UseQueryParamsModel<TParams = undefined, TResult = void> = _UseQuery
 
 export type UseQueryModel<TResult = void> = _UseQueryModel<TResult>;
 
-export type UseQueryOptionsModel = AsyncPropsModel & {
+export type UseQueryOptionsModel<TResult = void> = AsyncPropsModel & {
   cache?: boolean | number;
+  initialData?: TResult | null;
 };

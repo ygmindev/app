@@ -13,7 +13,8 @@ export type _DateTimeParamsModel =
             second?: number;
             year?: number;
           }
-        | Date,
+        | Date
+        | number,
       options?: DateTimeOptionsModel & { format: never },
     ]
   | [value?: string, options?: DateTimeOptionsModel & { format?: string }];

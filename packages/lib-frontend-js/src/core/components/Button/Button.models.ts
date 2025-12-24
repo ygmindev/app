@@ -16,7 +16,7 @@ import { type ThemeColorPropsModel } from '@lib/frontend/style/style.models';
 import { type FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { type ReactNode } from 'react';
 
-export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel | ReactNode> &
+export type ButtonPropsModel<TType = void> = ChildrenPropsModel<AsyncTextModel | ReactNode> &
   AnimatablePropsModel &
   WithIconPropsModel &
   Pick<WrapperPropsModel, 'isShadow'> &
@@ -24,7 +24,7 @@ export type ButtonPropsModel = ChildrenPropsModel<AsyncTextModel | ReactNode> &
   ThemeColorPropsModel &
   Pick<TextPropsModel, 'casing'> &
   Pick<
-    PressablePropsModel,
+    PressablePropsModel<TType>,
     | 'align'
     | 'confirmMessage'
     | 'height'

@@ -10,9 +10,8 @@ import {
 } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import { useApi } from '@lib/frontend/http/hooks/useApi/useApi';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
-import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
-import { HTTP_RESPONSE_TYPE, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
+import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 
 export const useGraphql = ({ query, ...params }: UseGraphqlParamsModel = {}): UseGraphqlModel => {
   const { post } = useApi(params);
@@ -20,12 +19,10 @@ export const useGraphql = ({ query, ...params }: UseGraphqlParamsModel = {}): Us
   const queryF =
     query ??
     (async <TResult, TParams, TName extends string = string>({
-      isStreaming,
       ...queryParams
     }: GraphqlParamsModel<TParams>): Promise<GraphqlHttpResponseModel<TResult, TName> | null> =>
       post({
         params: queryParams,
-        request: isStreaming ? { responseType: HTTP_RESPONSE_TYPE.STREAM } : undefined,
         url: '',
       }) as GraphqlHttpResponseModel<TResult, TName>);
 
@@ -45,7 +42,6 @@ export const useGraphql = ({ query, ...params }: UseGraphqlParamsModel = {}): Us
       });
       const variablesF = variables && cleanObject(variables);
       const result = await queryF<TResult, TParams, TName>({
-        isStreaming: type === GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,
         query: queryString,
         variables: variablesF,
       });

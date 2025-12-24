@@ -4,4 +4,4 @@ import {
   type UseSseParamsModel,
 } from '@lib/frontend/http/hooks/useSse/useSse.models';
 
-export const useSse = ({ ...props }: UseSseParamsModel): UseSseModel => _useSse({ ...props });
+export const useSse = ({ ...params }: UseSseParamsModel): UseSseModel => _useSse({ ...params });

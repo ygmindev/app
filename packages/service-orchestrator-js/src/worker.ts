@@ -32,7 +32,7 @@ try {
   );
 } catch (e) {
   await cleanUp();
-  logger.fail(e);
+  logger.fail(e as Error);
 }
 
 export { cleanUp };

@@ -16,7 +16,7 @@ import {
   type _WorkerParamsModel,
 } from '@tool/task/orchestrator/utils/Worker/_Worker.models';
 
-class ContextInterceptor implements ActivityInboundCallsInterceptor {
+class ContextActivityInterceptor implements ActivityInboundCallsInterceptor {
   _context: LocalContextModel;
 
   constructor(params: LocalContextModel) {
@@ -58,7 +58,7 @@ export class _Worker extends Bootstrappable implements _WorkerModel {
       identity: this._id,
       interceptors: {
         activityInbound: [
-          (ctx) => new ContextInterceptor({ ns: ctx.info.workflowExecution.workflowId }),
+          (ctx) => new ContextActivityInterceptor({ ns: ctx.info.workflowExecution.workflowId }),
         ],
       },
       // namespace,

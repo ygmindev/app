@@ -13,7 +13,7 @@ import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
-import { type RLFCModel } from '@lib/frontend/core/core.models';
+import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { useElementStateControlled } from '@lib/frontend/core/hooks/useElementStateControlled/useElementStateControlled';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -33,9 +33,9 @@ import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyl
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import isFunction from 'lodash/isFunction';
 import isNumber from 'lodash/isNumber';
-import { useMemo } from 'react';
+import { type ReactElement, useMemo } from 'react';
 
-export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
+export const Button = <TType = void,>({
   align = FLEX_ALIGN.CENTER,
   casing = TEXT_CASING.CAPITALIZE,
   children,
@@ -56,7 +56,9 @@ export const Button: RLFCModel<ButtonRefModel, ButtonPropsModel> = ({
   tooltip,
   type = BUTTON_TYPE.FILLED,
   ...props
-}) => {
+}: RLFCPropsModel<ButtonRefModel, ButtonPropsModel<TType>>): ReactElement<
+  RLFCPropsModel<ButtonRefModel, ButtonPropsModel<TType>>
+> => {
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props: { ...props, isShadow } });
 

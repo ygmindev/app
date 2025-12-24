@@ -9,6 +9,7 @@ let bundleConfig = configBase;
 bundleConfig = bundleConfig.extend(() => {
   const { taskExtension, tasksPathname, workflowExtension, workflowsPathname } =
     taskConfig.params();
+
   return {
     barrelFiles: [
       [

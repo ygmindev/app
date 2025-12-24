@@ -1,9 +1,8 @@
-import { type UriModel } from '@lib/shared/route/route.models';
+import {
+  type _UseSseModel,
+  type _UseSseParamsModel,
+} from '@lib/frontend/http/hooks/useSse/_useSse.models';
 
-export type UseSseParamsModel = {
-  onError?(error: Error): void;
-  onMessage?<TType>(data: TType): void;
-  uri(): Promise<UriModel>;
-};
+export type UseSseParamsModel = _UseSseParamsModel;
 
-export type UseSseModel = void;
+export type UseSseModel = _UseSseModel;

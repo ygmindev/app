@@ -2,7 +2,8 @@ import {
   type _UseMutationModel,
   type _UseMutationParamsModel,
 } from '@lib/frontend/data/hooks/useMutation/_useMutation.models';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@lib/frontend/data/hooks/useQueryClient/useQueryClient';
+import { useMutation } from '@tanstack/react-query';
 import isNumber from 'lodash/isNumber';
 
 export const _useMutation = <TParams = undefined, TResult = void>(
@@ -14,7 +15,7 @@ export const _useMutation = <TParams = undefined, TResult = void>(
     gcTime: cache,
     mutationFn: callback,
     mutationKey: [id],
-    onMutate: async () => queryClient.cancelQueries({ queryKey: [id] }),
+    onMutate: async () => queryClient.cancel([id]),
     retry: false,
   });
   return {
@@ -23,10 +24,10 @@ export const _useMutation = <TParams = undefined, TResult = void>(
     isLoading: isPending,
     mutate: async (params) => mutate(params),
     reset: async () => {
-      void queryClient.invalidateQueries({ queryKey: [id] });
+      void queryClient.invalidate([id]);
     },
     setData: async (values) => {
-      queryClient.setQueryData([id], values as never);
+      await queryClient.set([id], values);
     },
   };
 };

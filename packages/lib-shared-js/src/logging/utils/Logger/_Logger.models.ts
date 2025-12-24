@@ -8,7 +8,7 @@ import { type LogArgsModel } from '@lib/shared/logging/utils/Logger/Logger.model
 export type _LoggerParamsModel = _LoggingConfigModel;
 
 export type _LoggerModel = {
-  debug(msg: LogArgsModel): void;
+  debug(params: LogArgsModel): void;
 
   error(params: LogArgsModel): void;
 

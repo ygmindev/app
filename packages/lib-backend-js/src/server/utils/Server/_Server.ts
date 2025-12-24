@@ -92,10 +92,8 @@ export class _Server extends Bootstrappable implements _ServerModel {
             timestamp: new DateTime(),
             url: request.url,
           });
-
           await rep.status(status).send(r.body);
         },
-
         method: method as HTTPMethods,
         url: pathname,
       }),
@@ -112,7 +110,7 @@ export class _Server extends Bootstrappable implements _ServerModel {
         logger.success(`server listening on ${this._host}:${this._port}`);
       }
     } catch (e) {
-      logger.error(e);
+      logger.error(e as Error);
     }
   }
 }

@@ -11,5 +11,11 @@ export const loggingConfig = new Config<LoggingConfigModel, _LoggingConfigModel>
 
   params: () => ({
     level: process.env.NODE_ENV === 'production' ? LOGGING_LEVEL.INFO : LOGGING_LEVEL.DEBUG,
+
+    levels: {
+      fail: 55,
+      progress: 35,
+      success: 36,
+    },
   }),
 });

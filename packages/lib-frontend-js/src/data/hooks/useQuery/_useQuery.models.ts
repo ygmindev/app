@@ -5,7 +5,7 @@ export type _UseQueryParamsModel<TParams = undefined, TResult = void> = [
   id: string,
   query: (params?: TParams) => Promise<TResult | null>,
   params?: TParams,
-  options?: UseQueryOptionsModel,
+  options?: UseQueryOptionsModel<TResult>,
 ];
 
 export type _UseQueryModel<TResult = void> = WithIdModel & {

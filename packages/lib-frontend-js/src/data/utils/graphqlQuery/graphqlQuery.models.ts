@@ -9,7 +9,6 @@ import { type GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constan
 import { type GraphQLError } from 'graphql';
 
 export type GraphqlParamsModel<TParams> = {
-  isStreaming?: boolean;
   query: string;
   variables?: TParams;
 };

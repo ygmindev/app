@@ -11,15 +11,23 @@ import { getClient } from '@tool/task/orchestrator/utils/getClient/getClient';
 export class JobImplementation
   extends createEntityResourceImplementation<JobModel>({
     Resource: Job,
-    beforeCreate: async (input, context) => {
-      if (input.input?.form) {
+    beforeCreate: async ({ input }, context) => {
+      if (input?.form) {
         const client = await getClient();
-        const { context, params, workflow } = input.input.form;
+        const { context, params, workflow } = input.form;
         if (!workflow) throw new InvalidArgumentError('Workflow is required');
         const { id } = await client.run(workflow, params, context);
-        input.input.form._id = id;
+        input.form._id = id;
       }
-      return input.input;
+      return input;
+    },
+
+    beforeRemove: async ({ input }, context) => {
+      if (input?.id) {
+        const client = await getClient();
+        await Promise.all(input.id.map(async (v) => client.stop(v)));
+      }
+      return input;
     },
     name: JOB_RESOURCE_NAME,
   })

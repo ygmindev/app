@@ -26,20 +26,24 @@ export class _PubSub<TType extends Record<string, unknown> = RootPubSubSchemaMod
   async publish<TKey extends StringKeyModel<TType>>(
     topic: TKey,
     data?: TType[TKey],
+    id?: string,
   ): Promise<void> {
-    data && this.emitter.emit(topic, data);
+    const topicF = id ? `${topic}.${id}` : topic;
+    data && this.emitter.emit(topicF, data);
   }
 
   async subscribe<TKey extends StringKeyModel<TType>>(
     topic: TKey,
+    id?: string,
   ): Promise<AsyncIterableIterator<TType[TKey]>> {
+    const topicF = id ? `${topic}.${id}` : topic;
     const queue = new AsyncQueue<TType[TKey]>();
     const handler = (payload: unknown): void => {
       queue.push(payload as TType[TKey]);
     };
-    this.emitter.on(topic, handler);
+    this.emitter.on(topicF, handler);
     queue.return = async () => {
-      this.emitter.off(topic, handler);
+      this.emitter.off(topicF, handler);
       queue.stop();
       return { done: true, value: undefined };
     };

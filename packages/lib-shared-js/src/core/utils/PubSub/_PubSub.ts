@@ -1,5 +1,4 @@
 import { _pubSub } from '@lib/config/pubSub/_pubSub';
-import { type RootPubSubSchemaModel } from '@lib/config/pubSub/pubSub.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { type AsyncQueue } from '@lib/shared/core/utils/AsyncQueue/AsyncQueue';
@@ -21,7 +20,7 @@ import {
   StorageType,
 } from 'nats';
 
-export class _PubSub<TType extends Record<string, unknown> = RootPubSubSchemaModel>
+export class _PubSub<TType extends Record<string, unknown>>
   extends Bootstrappable
   implements _PubSubModel<TType>
 {
@@ -81,24 +80,28 @@ export class _PubSub<TType extends Record<string, unknown> = RootPubSubSchemaMod
   async publish<TKey extends StringKeyModel<TType>>(
     topic: TKey,
     data?: TType[TKey],
+    id?: string,
   ): Promise<void> {
+    const topicF = id ? `${topic}.${id}` : topic;
     try {
-      if (this.isRetention(topic)) {
+      if (this.isRetention(topicF)) {
         const js = this._client.jetstream();
-        await js.publish(topic, this._codec.encode(data));
+        await js.publish(topicF, this._codec.encode(data));
       } else {
-        this._client.publish(topic, this._codec.encode(data));
+        this._client.publish(topicF, this._codec.encode(data));
       }
-    } catch (error) {
-      logger.error(error);
+    } catch (e) {
+      logger.error(e as Error);
     }
   }
 
   async subscribe<TKey extends StringKeyModel<TType>>(
     topic: TKey,
+    id?: string,
   ): Promise<AsyncIterableIterator<TType[TKey]>> {
+    const topicF = id ? `${topic}.${id}` : topic;
     const codec = this._codec;
-    if (this._config.retention && this.isRetention(topic)) {
+    if (this._config.retention && this.isRetention(topicF)) {
       const js = this._client.jetstream();
       const jsm = await js.jetstreamManager();
       const { name } = this._config.retention;
@@ -106,7 +109,7 @@ export class _PubSub<TType extends Record<string, unknown> = RootPubSubSchemaMod
         ack_policy: AckPolicy.Explicit,
         deliver_policy: DeliverPolicy.All,
         durable_name: undefined,
-        filter_subject: topic,
+        filter_subject: topicF,
       });
       if (consumer) {
         const handle = await js?.consumers.get(name, consumer.name);
@@ -126,7 +129,7 @@ export class _PubSub<TType extends Record<string, unknown> = RootPubSubSchemaMod
       }
       throw new NotFoundError(name);
     } else {
-      const subscription = this._client.subscribe(topic);
+      const subscription = this._client.subscribe(topicF);
       return (async function* () {
         try {
           for await (const v of subscription) {

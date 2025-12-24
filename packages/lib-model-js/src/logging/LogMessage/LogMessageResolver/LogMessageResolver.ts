@@ -10,7 +10,6 @@ import { LogMessage } from '@lib/model/logging/LogMessage/LogMessage.entity';
 import { LogMessageModel } from '@lib/model/logging/LogMessage/LogMessage.models';
 import { LogMessageImplementation } from '@lib/model/logging/LogMessage/LogMessageImplementation/LogMessageImplementation';
 import { LogMessageResolverModel } from '@lib/model/logging/LogMessage/LogMessageResolver/LogMessageResolver.models';
-import { IdInputModel } from '@lib/model/resource/IdInput/IdInput.models';
 import { ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
@@ -19,7 +18,7 @@ import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
 @withContainer()
 export class LogMessageResolver implements LogMessageResolverModel {
-  @withResourceOutput<RESOURCE_METHOD_TYPE.SUBSCRIBE, LogMessageModel, IdInputModel>({
+  @withResourceOutput<RESOURCE_METHOD_TYPE.SUBSCRIBE, LogMessageModel>({
     Resource: () => LogMessage,
     access: ACCESS_LEVEL.PUBLIC,
     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,

@@ -22,6 +22,7 @@ export const _logging = ({
         options: { colorize: true, destination: 1 },
         target: 'pino-pretty',
       },
+
       ...transports,
     ]),
   },

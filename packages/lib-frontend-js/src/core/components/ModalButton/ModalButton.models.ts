@@ -5,9 +5,9 @@ import {
 } from '@lib/frontend/core/components/Modal/Modal.models';
 import { type ReactElement } from 'react';
 
-export type ModalButtonPropsModel = ButtonPropsModel &
+export type ModalButtonPropsModel<TType = void> = ButtonPropsModel<TType> &
   Pick<ModalPropsModel, 'title' | 'isFullSize'> & {
-    element({ onClose }: { onClose(): void }): ReactElement;
+    element(params: { data?: Awaited<TType>; onClose(): void }): ReactElement;
     onClose?(): void;
   };
 

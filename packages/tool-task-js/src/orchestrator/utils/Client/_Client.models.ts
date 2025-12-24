@@ -13,4 +13,6 @@ export type _ClientModel = BootstrappableModel & {
     params?: unknown,
     context?: ExecutionContextModel,
   ): Promise<ExecutionResultModel>;
+
+  stop(id: string, context?: ExecutionContextModel): Promise<void>;
 };

@@ -4,10 +4,10 @@ import {
 } from '@lib/backend/http/utils/HttpMessage/HttpMessage.models';
 
 export class HttpMessage<TType> implements HttpMessageModel<TType> {
-  _id?: string;
   _body?: TType;
   _cookies?: Record<string, string>;
   _headers?: Record<string, string>;
+  _id?: string;
 
   constructor({ body, cookies, headers, id }: HttpMessageParamsModel<TType>) {
     this.id = id;

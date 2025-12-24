@@ -15,7 +15,7 @@ export type UseResourceParamsModel<
   ResourceImplementationDecoratorModel<TType, TRoot> &
   ResourceParamsModel<TType, TRoot>;
 
-export type UseResourceModel<
-  TType extends ResourceModel,
-  TRoot = undefined,
-> = ResourceImplementationModel<TType, TRoot>;
+export type UseResourceModel<TType extends ResourceModel, TRoot = undefined> = Omit<
+  ResourceImplementationModel<TType, TRoot>,
+  'subscribe'
+>;

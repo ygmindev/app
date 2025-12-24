@@ -49,4 +49,12 @@ export class _Client extends Bootstrappable implements _ClientModel {
     }
     throw new NotFoundError(`workflow: ${workflow}`);
   };
+
+  stop = async (id: string, context?: ExecutionContextModel): Promise<void> => {
+    const handle = this._client.workflow.getHandle(id);
+    if (handle) {
+      await handle.cancel();
+    }
+    throw new NotFoundError(`workflow: ${id}`);
+  };
 }

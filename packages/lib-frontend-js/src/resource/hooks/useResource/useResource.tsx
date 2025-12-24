@@ -12,7 +12,6 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   afterGet,
   afterGetMany,
   afterRemove,
-  afterSubscribe,
   afterUpdate,
   afterUpdateMany,
   beforeCreate,
@@ -20,7 +19,6 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
   beforeGet,
   beforeGetMany,
   beforeRemove,
-  beforeSubscribe,
   beforeUpdate,
   beforeUpdateMany,
   fields = [],
@@ -91,15 +89,6 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
     root,
   });
 
-  const { query: subscribe } = useResourceMethod<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>({
-    after: afterSubscribe,
-    before: beforeSubscribe,
-    fields,
-    method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
-    name,
-    root,
-  });
-
   return {
     create,
 
@@ -112,8 +101,6 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
     name,
 
     remove,
-
-    subscribe,
 
     update,
 

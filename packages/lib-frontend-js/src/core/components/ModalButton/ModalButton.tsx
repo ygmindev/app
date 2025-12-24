@@ -5,13 +5,12 @@ import {
   type ModalButtonPropsModel,
   type ModalButtonRefModel,
 } from '@lib/frontend/core/components/ModalButton/ModalButton.models';
-import { type RLFCModel, type RLFCPropsModel } from '@lib/frontend/core/core.models';
+import { type RLFCPropsModel } from '@lib/frontend/core/core.models';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
-import { useState } from 'react';
+import { type ReactElement, useState } from 'react';
 
-export const ModalButton: RLFCModel<ModalButtonRefModel, ModalButtonPropsModel> = ({
+export const ModalButton = <TType = void,>({
   element,
   isFullSize,
   onClose,
@@ -19,22 +18,30 @@ export const ModalButton: RLFCModel<ModalButtonRefModel, ModalButtonPropsModel> 
   ref,
   title,
   ...props
-}) => {
+}: RLFCPropsModel<ModalButtonRefModel, ModalButtonPropsModel<TType>>): ReactElement<
+  RLFCPropsModel<ModalButtonRefModel, ModalButtonPropsModel<TType>>
+> => {
   const { t } = useTranslation();
   const [isOpen, isOpenSet] = useState<boolean>();
+  const [data, dataSet] = useState<Awaited<TType>>();
 
   const handleToggle = (isOpen?: boolean): void => {
-    !isOpen && onClose?.();
+    if (!isOpen) {
+      onClose?.();
+      dataSet(undefined);
+    }
     isOpenSet(isOpen);
   };
 
   return (
     <>
-      <Button
-        {...(props as Omit<RLFCPropsModel<ButtonPropsModel>, 'ref'>)}
+      <Button<TType>
+        {...(props as Omit<RLFCPropsModel<ButtonPropsModel<TType>>, 'ref'>)}
         onPress={async () => {
-          await onPress?.();
+          const result = await onPress?.();
+          result && dataSet(result);
           handleToggle(!isOpen);
+          return result;
         }}
       />
 
@@ -44,10 +51,8 @@ export const ModalButton: RLFCModel<ModalButtonRefModel, ModalButtonPropsModel> 
         onToggle={handleToggle}
         ref={ref}
         title={title ?? (isAsyncText(props.children) ? t(props.children) : undefined)}>
-        {element({ onClose: () => handleToggle(false) })}
+        {element({ data, onClose: () => handleToggle(false) })}
       </Modal>
     </>
   );
 };
-
-process.env.APP_IS_DEBUG && (ModalButton.displayName = variableName({ ModalButton }));
