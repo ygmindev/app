@@ -10,7 +10,6 @@ import { useSse } from '@lib/frontend/http/hooks/useSse/useSse';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
-import { EVENT_COMPLETE } from '@lib/shared/query/query.constants';
 import { useMemo } from 'react';
 
 export const useGraphqlSse = <
@@ -44,7 +43,6 @@ export const useGraphqlSse = <
     [fields, name, params, variables],
   );
   const { isOpen } = useSse({
-    closeEvents: [EVENT_COMPLETE],
     handlers: {
       next: (e: GraphqlHttpResponseModel<TResult, TName>) => {
         const data = e?.data?.[name] ?? null;

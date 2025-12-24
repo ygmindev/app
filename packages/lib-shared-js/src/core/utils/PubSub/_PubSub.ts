@@ -3,6 +3,7 @@ import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { type AsyncQueue } from '@lib/shared/core/utils/AsyncQueue/AsyncQueue';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import {
   type _PubSubModel,
   type _PubSubParamsModel,
@@ -80,9 +81,9 @@ export class _PubSub<TType extends Record<string, unknown>>
   async publish<TKey extends StringKeyModel<TType>>(
     topic: TKey,
     data?: TType[TKey],
-    id?: string,
+    id?: Array<string>,
   ): Promise<void> {
-    const topicF = id ? `${topic}.${id}` : topic;
+    const topicF = filterNil([topic, ...(id ?? [])]).join('.');
     try {
       if (this.isRetention(topicF)) {
         const js = this._client.jetstream();
@@ -97,9 +98,9 @@ export class _PubSub<TType extends Record<string, unknown>>
 
   async subscribe<TKey extends StringKeyModel<TType>>(
     topic: TKey,
-    id?: string,
+    id?: Array<string>,
   ): Promise<AsyncIterableIterator<TType[TKey]>> {
-    const topicF = id ? `${topic}.${id}` : topic;
+    const topicF = filterNil([topic, ...(id ?? [])]).join('.');
     const codec = this._codec;
     if (this._config.retention && this.isRetention(topicF)) {
       const js = this._client.jetstream();

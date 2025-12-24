@@ -1,5 +1,3 @@
-import { type LoggingCustomLevelModel } from '@lib/config/node/logging/logging.models';
-import { type StringKeyModel } from '@lib/shared/core/core.models';
 import {
   type _LoggerModel,
   type _LoggerParamsModel,
@@ -9,41 +7,29 @@ import { type Logger } from 'pino';
 import pino from 'pino';
 
 export class _Logger implements _LoggerModel {
-  protected _logger!: Logger<StringKeyModel<LoggingCustomLevelModel>>;
+  protected _logger!: Logger;
 
   constructor(params: _LoggerParamsModel) {
     this._logger = pino(params);
   }
 
-  debug(params: LogArgsModel): void {
-    this._logger.debug(params);
+  debug(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {
+    this._logger.debug(params, ...(rest as Array<never>));
   }
 
-  error(params: LogArgsModel): void {
-    this._logger.error(params);
+  error(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {
+    this._logger.error(params, ...(rest as Array<never>));
   }
 
-  fail(params: LogArgsModel): void {
-    this._logger.fail(`❌ ${params as string}`);
+  info(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {
+    this._logger.info(params, ...(rest as Array<never>));
   }
 
-  info(params: LogArgsModel): void {
-    this._logger.info(params);
+  trace(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {
+    this._logger.trace(params, ...(rest as Array<never>));
   }
 
-  progress(params: LogArgsModel): void {
-    this._logger.progress(`🕑 ${params as string}`);
-  }
-
-  success(params: LogArgsModel): void {
-    this._logger.success(`✅ ${params as string}`);
-  }
-
-  trace(params: LogArgsModel): void {
-    this._logger.trace(params);
-  }
-
-  warn(params: LogArgsModel): void {
-    this._logger.warn(params);
+  warn(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {
+    this._logger.warn(params, ...(rest as Array<never>));
   }
 }

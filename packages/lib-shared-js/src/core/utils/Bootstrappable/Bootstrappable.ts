@@ -26,7 +26,7 @@ export class Bootstrappable implements BootstrappableModel {
       this._isInitialized = true;
       try {
         await this.onInitialize();
-        logger.success(`successfullly initialized ${this.constructor.name}`);
+        logger.success(`successfully initialized ${this.constructor.name}`);
       } catch (e) {
         logger.fail(`failed to initialize ${this.constructor.name}: ${e as Error}`);
       }

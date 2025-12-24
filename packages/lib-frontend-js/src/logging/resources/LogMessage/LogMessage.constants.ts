@@ -3,6 +3,6 @@ import { LOG_MESSAGE_RESOURCE_NAME } from '@lib/model/logging/LogMessage/LogMess
 import { type LogMessageModel } from '@lib/model/logging/LogMessage/LogMessage.models';
 
 export const LOG_MESSAGE_RESOURCE_PARAMS = {
-  fields: [{ id: 'message' }, { id: 'created' }, { id: 'level' }],
+  fields: [{ id: 'message' }, { id: 'created' }, { id: 'level' }, { id: 'type' }],
   name: LOG_MESSAGE_RESOURCE_NAME,
 } satisfies ResourceParamsModel<LogMessageModel>;

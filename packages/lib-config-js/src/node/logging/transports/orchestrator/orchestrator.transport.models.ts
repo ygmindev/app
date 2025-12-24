@@ -1,3 +1,1 @@
-export type OrchestratorTransportParamsModel = {
-  topic: string;
-};
+export type OrchestratorTransportParamsModel = {};

@@ -7,35 +7,23 @@ import { type LogArgsModel } from '@lib/shared/logging/utils/Logger/Logger.model
 export class _Logger implements _LoggerModel {
   constructor(params: _LoggerParamsModel) {}
 
-  debug(params: LogArgsModel): void {
-    console.debug(params);
+  debug(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {
+    console.debug(params, ...rest);
   }
 
-  error(params: LogArgsModel): void {
-    console.error(params);
+  error(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {
+    console.error(params, ...rest);
   }
 
-  fail(params: LogArgsModel): void {
-    console.error(params, '❌');
+  info(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {
+    console.info(params, ...rest);
   }
 
-  info(params: LogArgsModel): void {
-    console.info(params);
+  trace(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {
+    console.trace(params, ...rest);
   }
 
-  progress(params: LogArgsModel): void {
-    console.info(params, '🕑');
-  }
-
-  success(params: LogArgsModel): void {
-    console.info(params, '✅');
-  }
-
-  trace(params: LogArgsModel): void {
-    console.trace(params);
-  }
-
-  warn(params: LogArgsModel): void {
-    console.warn(params);
+  warn(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {
+    console.warn(params, ...rest);
   }
 }

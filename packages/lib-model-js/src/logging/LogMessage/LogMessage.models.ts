@@ -1,3 +1,4 @@
+import { type LOG_MESSAGE_TYPE } from '@lib/model/logging/LogMessage/LogMessage.constants';
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 
 export type LogMessageModel = ResourceModel & {
@@ -8,4 +9,6 @@ export type LogMessageModel = ResourceModel & {
   message?: string;
 
   ns?: string;
+
+  type?: LOG_MESSAGE_TYPE;
 };

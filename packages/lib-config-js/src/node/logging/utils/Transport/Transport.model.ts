@@ -9,4 +9,5 @@ export type TransportContextModel = LocalContextModel & {
   msg?: string;
   pid?: number;
   time?: number;
+  type?: string;
 };

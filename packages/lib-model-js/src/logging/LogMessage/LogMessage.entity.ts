@@ -1,6 +1,9 @@
 import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
-import { LOG_MESSAGE_RESOURCE_NAME } from '@lib/model/logging/LogMessage/LogMessage.constants';
+import {
+  LOG_MESSAGE_RESOURCE_NAME,
+  LOG_MESSAGE_TYPE,
+} from '@lib/model/logging/LogMessage/LogMessage.constants';
 import { type LogMessageModel } from '@lib/model/logging/LogMessage/LogMessage.models';
 import { Resource } from '@lib/model/resource/Resource/Resource';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';
@@ -24,4 +27,7 @@ export class LogMessage extends Resource({ isDatabase: false }) implements LogMe
 
   @withField({ isOptional: true })
   ns?: string;
+
+  @withField({ isOptional: true })
+  type?: LOG_MESSAGE_TYPE;
 }

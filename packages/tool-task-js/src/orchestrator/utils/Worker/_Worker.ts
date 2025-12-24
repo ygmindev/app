@@ -1,6 +1,7 @@
 import { LocalStorage } from '@lib/backend/core/utils/LocalStorage/LocalStorage';
 import { type LocalContextModel } from '@lib/backend/core/utils/LocalStorage/LocalStorage.models';
 import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
+import { BOOLEAN_STRING } from '@lib/shared/core/core.constants';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { uid } from '@lib/shared/core/utils/uid/uid';
@@ -68,6 +69,7 @@ export class _Worker extends Bootstrappable implements _WorkerModel {
   }
 
   run = async (): Promise<void> => {
+    process.env.__WORKFLOW__ = BOOLEAN_STRING.TRUE;
     await this._worker?.run();
   };
 }

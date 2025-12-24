@@ -8,11 +8,11 @@ export type _PubSubModel<TType extends Record<string, unknown>> = Bootstrappable
   publish<TKey extends StringKeyModel<TType>>(
     topic: TKey,
     data?: TType[TKey],
-    id?: string,
+    id?: Array<string>,
   ): Promise<void>;
 
   subscribe<TKey extends StringKeyModel<TType>>(
     topic: TKey,
-    id?: string,
+    id?: Array<string>,
   ): Promise<AsyncIterableIterator<TType[TKey]>>;
 };

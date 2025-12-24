@@ -74,4 +74,5 @@ export type EnvironmentConfigModel = {
   TEST_IS_ETE?: `${BOOLEAN_STRING}`;
   TEST_MATCH?: string;
   __DEV__: `${BOOLEAN_STRING}`;
+  __WORKFLOW__: `${BOOLEAN_STRING}`;
 };

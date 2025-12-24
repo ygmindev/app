@@ -2,6 +2,7 @@ import { type RootPubSubSchemaModel } from '@lib/config/pubSub/pubSub.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { AsyncQueue } from '@lib/shared/core/utils/AsyncQueue/AsyncQueue';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import {
   type _PubSubModel,
   type _PubSubParamsModel,
@@ -26,17 +27,17 @@ export class _PubSub<TType extends Record<string, unknown> = RootPubSubSchemaMod
   async publish<TKey extends StringKeyModel<TType>>(
     topic: TKey,
     data?: TType[TKey],
-    id?: string,
+    id?: Array<string>,
   ): Promise<void> {
-    const topicF = id ? `${topic}.${id}` : topic;
+    const topicF = filterNil([topic, ...(id ?? [])]).join('.');
     data && this.emitter.emit(topicF, data);
   }
 
   async subscribe<TKey extends StringKeyModel<TType>>(
     topic: TKey,
-    id?: string,
+    id?: Array<string>,
   ): Promise<AsyncIterableIterator<TType[TKey]>> {
-    const topicF = id ? `${topic}.${id}` : topic;
+    const topicF = filterNil([topic, ...(id ?? [])]).join('.');
     const queue = new AsyncQueue<TType[TKey]>();
     const handler = (payload: unknown): void => {
       queue.push(payload as TType[TKey]);
