@@ -9,7 +9,6 @@ import {
 import { useSse } from '@lib/frontend/http/hooks/useSse/useSse';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
-import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { useMemo } from 'react';
 
 export const useGraphqlSse = <
@@ -22,6 +21,8 @@ export const useGraphqlSse = <
   id,
   isStreaming,
   name,
+  onData,
+  onError,
   params,
   uri,
   variables,
@@ -44,15 +45,16 @@ export const useGraphqlSse = <
   );
   const { isOpen } = useSse({
     handlers: {
-      next: (e: GraphqlHttpResponseModel<TResult, TName>) => {
-        const data = e?.data?.[name] ?? null;
+      next: (e: GraphqlHttpResponseModel<TResult, TName>, onClose) => {
+        const data = (e?.data?.[name] as TResult) ?? null;
+        onData?.(data, onClose);
         void queryClient.set(
           [id, paramsF],
           isStreaming ? (prev?: Array<TResult>) => [...(prev ?? []), data] : data,
         );
       },
     },
-    onError: (error) => logger.error(error),
+    onError,
     uri: { ...uri, params: paramsF },
   });
 

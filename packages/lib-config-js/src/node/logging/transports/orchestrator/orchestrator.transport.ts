@@ -6,6 +6,7 @@ import {
   LOG_MESSAGE_RESOURCE_NAME,
   type LOG_MESSAGE_TYPE,
 } from '@lib/model/logging/LogMessage/LogMessage.constants';
+import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 import { uid } from '@lib/shared/core/utils/uid/uid';
@@ -18,13 +19,14 @@ class OrchestratorTransport extends Transport<OrchestratorTransportParamsModel> 
         const pubSub = Container.get(PubSub);
         void pubSub.publish(
           LOG_MESSAGE_RESOURCE_NAME,
-          {
-            _id: `${context.ns}.${uid()}`,
+          cleanObject({
+            _id: uid(),
             created: new DateTime(context.time),
             level: context.level,
             message: context.msg,
+            process: context.process,
             type: context.type as LOG_MESSAGE_TYPE,
-          },
+          }),
           [context.ns],
         );
       }

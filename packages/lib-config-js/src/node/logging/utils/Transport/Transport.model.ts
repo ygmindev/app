@@ -7,7 +7,7 @@ export type TransportContextModel = LocalContextModel & {
   hostname?: string;
   level?: number;
   msg?: string;
-  pid?: number;
+  process?: string;
   time?: number;
   type?: string;
 };

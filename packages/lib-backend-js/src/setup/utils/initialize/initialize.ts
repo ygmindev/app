@@ -8,7 +8,6 @@ import {
   type InitializeParamsModel,
 } from '@lib/backend/setup/utils/initialize/initialize.models';
 import { pubSubConfig } from '@lib/config/pubSub/pubSub';
-import { type RootPubSubSchemaModel } from '@lib/config/pubSub/pubSub.models';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
 
@@ -18,6 +17,7 @@ export const initialize = async ({
   database,
 }: InitializeParamsModel = {}): Promise<InitializeModel> => {
   if (!isInitialized) {
+    isInitialized = true;
     const environment = new Environment();
     await environment.initialize();
     Container.set(Environment, environment);
@@ -25,7 +25,7 @@ export const initialize = async ({
     try {
       const pubSub = new PubSub(pubSubConfig.params());
       await pubSub.initialize();
-      Container.set(PubSub<RootPubSubSchemaModel>, pubSub);
+      Container.set(PubSub, pubSub);
     } catch {}
 
     if (databaseF) {
@@ -36,5 +36,4 @@ export const initialize = async ({
       } catch {}
     }
   }
-  isInitialized = true;
 };

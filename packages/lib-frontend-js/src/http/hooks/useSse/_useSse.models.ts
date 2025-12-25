@@ -1,7 +1,7 @@
 import { type UriModel } from '@lib/shared/route/route.models';
 
 export type _UseSseParamsModel = {
-  handlers?: Record<string, (data: never, handleClose: () => void) => void>;
+  handlers?: Record<string, (data: never, onClose: () => void) => void>;
   uri: UriModel;
   onError?(error: Error): void;
 };

@@ -61,10 +61,10 @@ export const _buildWorkflow = <
       const result = (await (isParallel
         ? Promise.all(executions.map((v) => v()))
         : mapSequence(executions))) as TResult;
-      await proxy[STATUS_UPDATE]({ type: LOG_MESSAGE_TYPE.SUCCESS });
+      await proxy[STATUS_UPDATE]({ id: workflowId, type: LOG_MESSAGE_TYPE.SUCCESS });
       return result;
     } catch (e) {
-      await proxy[STATUS_UPDATE]({ type: LOG_MESSAGE_TYPE.FAIL });
+      await proxy[STATUS_UPDATE]({ id: workflowId, type: LOG_MESSAGE_TYPE.FAIL });
       throw e;
     }
   };

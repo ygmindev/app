@@ -14,6 +14,8 @@ export type UseGraphqlSseParamsModel<
   id: string;
   isStreaming?: TStreaming;
   uri: UriModel;
+  onData?(params: TResult | null, onClose: () => void): void;
+  onError?(e: Error): void;
 };
 
 export type UseGraphqlSseModel<TResult, TStreaming extends boolean = false> = Pick<

@@ -1,6 +1,5 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { loggingConfig } from '@lib/config/node/logging/logging';
-import { LOG_MESSAGE_TYPE } from '@lib/model/logging/LogMessage/LogMessage.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger';
 import { LogArgsModel, type LoggerModel } from '@lib/shared/logging/utils/Logger/Logger.models';
@@ -12,13 +11,13 @@ export class Logger extends _Logger implements LoggerModel {
   }
 
   fail = (params: LogArgsModel, ...rest: Array<LogArgsModel>): void =>
-    this.error({ type: LOG_MESSAGE_TYPE.FAIL }, `❌ ${params as string}`, ...rest);
+    this.error(params, ...rest, '❌');
 
   progress = (params: LogArgsModel, ...rest: Array<LogArgsModel>): void =>
-    this.debug(`🕑 ${params as string}`, ...rest);
+    this.debug(params, ...rest, '🕑');
 
   success = (params: LogArgsModel, ...rest: Array<LogArgsModel>): void =>
-    this.info({ type: LOG_MESSAGE_TYPE.SUCCESS }, `✅ ${params as string}`, ...rest);
+    this.info(params, ...rest, '✅');
 }
 
 export const logger: LoggerModel = {

@@ -11,12 +11,15 @@ import { ORCHESTRATOR } from '@lib/frontend/orchestrator/orchestrator.constants'
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
+import { JOB_STATUS } from '@lib/model/orchestrator/Job/Job.constants';
 import { WORKFLOW_STEP_TYPE } from '@lib/model/orchestrator/WorkflowStep/WorkflowStep.constants';
 import { stringify } from '@lib/shared/core/utils/stringify/stringify';
+import { useState } from 'react';
 
 export const WorkflowControl: FCModel<WorkflowControlPropsModel> = ({ workflow, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([ORCHESTRATOR]);
+  const [status, statusSet] = useState<JOB_STATUS>(JOB_STATUS.UNKNOWN);
   return (
     <Accordion
       {...wrapperProps}
@@ -26,7 +29,11 @@ export const WorkflowControl: FCModel<WorkflowControlPropsModel> = ({ workflow, 
         <Wrapper
           isAlign
           isRow>
-          <WorkflowButtons workflow={workflow} />
+          <WorkflowButtons
+            onStatusChange={statusSet}
+            status={status}
+            workflow={workflow}
+          />
 
           <Text isBold>{workflow.name}</Text>
           <Chip>{t('orchestrator:workflow')}</Chip>

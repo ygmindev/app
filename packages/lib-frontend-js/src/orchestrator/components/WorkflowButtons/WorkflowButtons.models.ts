@@ -1,5 +1,6 @@
-import { type WorkflowModel } from '@lib/model/orchestrator/Workflow/Workflow.models';
+import { type WorkflowControlPropsModel } from '@lib/frontend/orchestrator/components/WorkflowControl/WorkflowControl.models';
 
-export type WorkflowButtonsPropsModel = {
-  workflow: Partial<WorkflowModel>;
-};
+export type WorkflowButtonsPropsModel = Pick<
+  WorkflowControlPropsModel,
+  'workflow' | 'status' | 'onStatusChange'
+>;

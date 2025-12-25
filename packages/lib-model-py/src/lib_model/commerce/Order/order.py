@@ -10,14 +10,14 @@ from ..product_item import product_item
 
 
 class ORDERSTATUS(Enum):
-    CANCELED = 'canceled'
-    COMPLETED = 'completed'
-    REFUNDED = 'refunded'
+    CANCELLED = "cancelled"
+    COMPLETED = "completed"
+    REFUNDED = "refunded"
 
 
 class OrderModel(BaseModel):
     model_config = ConfigDict(
-        extra='allow',
+        extra="allow",
     )
     items: Optional[List[product_item.ProductItemModel]] = None
     paymentMethodId: Optional[str] = None

@@ -1,7 +1,7 @@
 export const ORDER_RESOURCE_NAME = 'Order';
 
 export enum ORDER_STATUS {
-  CANCELED = 'canceled',
+  CANCELLED = 'cancelled',
   COMPLETED = 'completed',
   REFUNDED = 'refunded',
 }

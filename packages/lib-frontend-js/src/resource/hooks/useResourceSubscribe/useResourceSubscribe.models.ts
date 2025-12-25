@@ -14,6 +14,11 @@ export type UseResourceSubscribeParamsModel<
 > & {
   input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>;
   isStreaming?: TStreaming;
+  onData?: (
+    data: ResourceOutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType>,
+    onClose: () => void,
+  ) => void;
+  onError?(e: Error): void;
 };
 
 export type UseResourceSubscribeModel<

@@ -83,7 +83,6 @@ export const IONIC_ICONS = {
   pie: 'pie-chart-outline',
   play: 'play-circle-outline',
   preferences: 'options-outline',
-  question: 'help-outline',
   redo: 'arrow-redo-outline',
   refresh: 'refresh-outline',
   remove: 'remove-circle-outline',
@@ -108,6 +107,7 @@ export const IONIC_ICONS = {
   switch: 'toggle-outline',
   thunder: 'flash-outline',
   time: 'time-outline',
+  timer: 'timer-outline',
   times: 'close-outline',
   timesCircle: 'close-circle-outline',
   trash: 'trash-outline',
@@ -138,12 +138,14 @@ export const FONTAWESOME_ICONS = {
   link: 'link',
   outdent: 'outdent',
   range: 'arrows-h',
+  running: 'runnig',
   target: 'crosshairs',
   underline: 'underline',
   unlink: 'unlink',
 };
 
 export const MATERIAL_ICONS = {
+  block: 'block',
   brightness: 'brightness-4',
   bulletList: 'format-list-bulleted',
   chevronDown: 'chevron-down',
@@ -162,6 +164,7 @@ export const MATERIAL_ICONS = {
 
 export const OCTICON_ICONS = {
   code: 'code-square',
+  question: 'question',
   sidebarMaximize: 'sidebar-collapse',
   sidebarMinimize: 'sidebar-expand',
 };

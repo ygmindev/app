@@ -40,7 +40,7 @@
     "ORDER_STATUS": {
       "type": "string",
       "enum": [
-        "canceled",
+        "cancelled",
         "completed",
         "refunded"
       ]

@@ -16,6 +16,8 @@ export const useResourceSubscribe = <TType, TRoot = undefined, TStreaming extend
   input,
   isStreaming,
   name,
+  onData,
+  onError,
   root,
 }: UseResourceSubscribeParamsModel<TType, TRoot, TStreaming>): UseResourceSubscribeModel<
   TType,
@@ -32,6 +34,8 @@ export const useResourceSubscribe = <TType, TRoot = undefined, TStreaming extend
     id: nameF,
     isStreaming,
     name: nameF,
+    onData,
+    onError,
     params: { input: `${nameF}Input` },
     variables: JSON.stringify({ input: { ...input, root } }) as unknown as {
       input: ResourceInputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>;

@@ -1,5 +1,6 @@
 export enum THEME_COLOR {
   ERROR = 'error',
+  NEUTRAL = 'neutral',
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   SUCCESS = 'success',

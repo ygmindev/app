@@ -29,5 +29,8 @@ export class LogMessage extends Resource({ isDatabase: false }) implements LogMe
   ns?: string;
 
   @withField({ isOptional: true })
+  process?: string;
+
+  @withField({ isOptional: true })
   type?: LOG_MESSAGE_TYPE;
 }

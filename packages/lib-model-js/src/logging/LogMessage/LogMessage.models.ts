@@ -10,5 +10,7 @@ export type LogMessageModel = ResourceModel & {
 
   ns?: string;
 
+  process?: string;
+
   type?: LOG_MESSAGE_TYPE;
 };
