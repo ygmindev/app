@@ -4,6 +4,7 @@ import { ButtonGroup } from '@lib/frontend/core/components/ButtonGroup/ButtonGro
 import { Chip } from '@lib/frontend/core/components/Chip/Chip';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type WorkflowButtonsPropsModel } from '@lib/frontend/orchestrator/components/WorkflowButtons/WorkflowButtons.models';
@@ -70,6 +71,11 @@ export const WorkflowButtons: LFCModel<WorkflowButtonsPropsModel> = ({
               <></>
             )
           }
+          elementState={
+            status === JOB_STATUS.RUNNING || status === JOB_STATUS.STARTED
+              ? ELEMENT_STATE.DISABLED
+              : undefined
+          }
           icon="play"
           isFullSize
           onPress={async () =>
@@ -86,6 +92,11 @@ export const WorkflowButtons: LFCModel<WorkflowButtonsPropsModel> = ({
 
         <Button
           color={THEME_COLOR.ERROR}
+          elementState={
+            status == JOB_STATUS.RUNNING || status === JOB_STATUS.STARTED
+              ? undefined
+              : ELEMENT_STATE.DISABLED
+          }
           icon="stop"
           onPress={async () => workflow._id && remove({ id: [workflow._id] })}
           tooltip={t('orchestrator:stop', { value: 'orchestrator:workflow' })}
