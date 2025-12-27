@@ -25,7 +25,6 @@ import { type RollupBabelInputPluginOptions } from '@rollup/plugin-babel';
 import { babel as babelPlugin } from '@rollup/plugin-babel';
 import inject from '@rollup/plugin-inject';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { nodeBuild } from '@tool/task/node/tasks/nodeBuild/nodeBuild.task';
 import react from '@vitejs/plugin-react';
 import { type Plugin as EsbuildPlugin } from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
@@ -85,12 +84,14 @@ const vitePluginPreBundle = (params: BundleConfigModel['preBundle'] = []): Plugi
   );
   return {
     async configureServer() {
+      const { nodeBuild } = await import('@tool/task/node/tasks/nodeBuild/nodeBuild.task');
       await Promise.all(params.map(async (v) => nodeBuild(v)));
     },
 
     enforce: 'pre',
 
     async handleHotUpdate({ file }) {
+      const { nodeBuild } = await import('@tool/task/node/tasks/nodeBuild/nodeBuild.task');
       const i = inputs.findIndex((v) => v.some(file.includes));
       i >= 0 && (await nodeBuild(params[i]));
     },
