@@ -3,14 +3,10 @@ import { ASSETS_DIR } from '@lib/config/file/file.constants';
 import { internationalizeConfig as configBase } from '@lib/config/locale/internationalize/internationalize.frontend';
 import FsBackend from 'i18next-fs-backend';
 
-let internationalizeConfig = configBase;
-
-internationalizeConfig = internationalizeConfig.extend(() => ({
+export const internationalizeConfig = configBase.extend(() => ({
   isPreload: true,
 
   localePath: fromPublic(ASSETS_DIR),
 
   modules: [FsBackend],
 }));
-
-export { internationalizeConfig };

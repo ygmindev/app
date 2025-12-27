@@ -2,6 +2,7 @@ import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionCon
 
 export type TaskParamsModel<TParams = unknown, TResult = unknown> = {
   context?: ExecutionContextModel;
+  name?: string;
   params?: TParams;
   task(params: TParams, context?: ExecutionContextModel): Promise<TResult>;
 };

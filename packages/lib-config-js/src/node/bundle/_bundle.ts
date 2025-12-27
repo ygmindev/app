@@ -43,6 +43,7 @@ import posix from 'path/posix';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vike from 'vike/plugin';
 import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
+import circleDependency from 'vite-plugin-circular-dependency';
 // import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 
@@ -429,6 +430,7 @@ export const _bundle = ({
     },
 
     plugins: filterNil([
+      circleDependency(),
       // platformF === PLATFORM.NODE && watchF && vitePluginFullReload(watchF),
 
       provide && inject(provide),

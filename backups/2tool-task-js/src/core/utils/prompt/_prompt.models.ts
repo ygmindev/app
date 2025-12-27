@@ -1,19 +1,10 @@
-import {
-  type ArrayPromptArgsModel,
-  type ConfirmPromptArgsModel,
-  type StringPromptArgsModel,
-} from '@tool/task/core/utils/prompt/prompt.models';
+import { type PromptModel } from '@lib/model/orchestrator/Prompt/Prompt.models';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
 
 export type _PromptParamsModel<TType> = Array<
-  {
-    [TKey in keyof Required<TType>]: Required<TType>[TKey] extends Array<string | boolean>
-      ? ArrayPromptArgsModel<TKey>
-      : Required<TType>[TKey] extends boolean
-        ? ConfirmPromptArgsModel<TKey>
-        : Required<TType>[TKey] extends string
-          ? StringPromptArgsModel<TKey>
-          : never;
-  }[keyof Required<TType>]
+  { [TKey in StringKeyModel<Required<TType>>]: PromptModel<TType, TKey> }[StringKeyModel<
+    Required<TType>
+  >]
 >;
 
 export type _PromptModel<TType> = TType;

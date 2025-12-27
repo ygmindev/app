@@ -1,9 +1,5 @@
 import { databaseConfig as configBase } from '@lib/config/database/database.mongo';
 
-let databaseConfig = configBase;
-
-databaseConfig = databaseConfig.extend(() => ({
+export const databaseConfig = configBase.extend(() => ({
   entities: [],
 }));
-
-export { databaseConfig };

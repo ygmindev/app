@@ -2,9 +2,7 @@ import { bundleConfig } from '@lib/config/node/bundle/bundle.native';
 import { testConfig as configBase } from '@lib/config/node/test/test.base';
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
 
-let testConfig = configBase;
-
-testConfig = testConfig.extend(() => ({
+export const testConfig = configBase.extend(() => ({
   bundle: bundleConfig.params(),
 
   dimension: { height: 844, width: 390 },
@@ -19,5 +17,3 @@ testConfig = testConfig.extend(() => ({
     'react-native/Libraries/EventEmitter/NativeEventEmitter',
   ],
 }));
-
-export { testConfig };

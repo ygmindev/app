@@ -4,9 +4,7 @@ import { bundleConfig as configBase } from '@lib/config/node/bundle/bundle.base'
 import { taskConfig } from '@lib/config/task/task';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-let bundleConfig = configBase;
-
-bundleConfig = bundleConfig.extend(() => {
+export const bundleConfig = configBase.extend(() => {
   const { taskExtension, tasksPathname, workflowExtension, workflowsPathname } =
     taskConfig.params();
 
@@ -38,5 +36,3 @@ bundleConfig = bundleConfig.extend(() => {
     transpilePatterns: [/graphql/],
   };
 });
-
-export { bundleConfig };

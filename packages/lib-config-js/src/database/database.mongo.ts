@@ -3,9 +3,7 @@ import { Environment } from '@lib/backend/environment/utils/Environment/Environm
 import { databaseConfig as configBase } from '@lib/config/database/database.base';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 
-let databaseConfig = configBase;
-
-databaseConfig = databaseConfig.extend(() => {
+export const databaseConfig = configBase.extend(() => {
   const environment = Container.get(Environment);
   return {
     database: environment.variables.SERVER_DB_MONGO_NAME,
@@ -19,5 +17,3 @@ databaseConfig = databaseConfig.extend(() => {
     username: environment.variables.SERVER_DB_MONGO_USERNAME,
   };
 });
-
-export { databaseConfig };

@@ -41,12 +41,11 @@ export class Cli extends Bootstrappable implements CliModel {
     });
     for (const pathname of pathnames) {
       const { main } = fileInfo(pathname);
-      const task = ((await importInterop(pathname)) as Record<string, TaskModel>)[main];
+      const task = ((await import(pathname)) as Record<string, TaskModel>)[main];
       const aliasF = kebabCase(main)
         .split('-')
         .map((p) => p.charAt(0))
         .join('');
-
       if (this._aliases[aliasF]) {
         throw new DuplicateError(`alias ${aliasF} (${main}) already exists`);
       }
@@ -62,7 +61,11 @@ export class Cli extends Bootstrappable implements CliModel {
   run = async (name?: string): Promise<void> => {
     let nameF =
       name ??
-      (await prompt<{ task: string }>([{ key: 'task', options: Object.keys(this.registry) }])).task;
+      (
+        await prompt<{ task: string }>([
+          { key: 'task', options: Object.keys(this.registry).map((v) => ({ id: v })) },
+        ])
+      ).task;
     nameF = this._aliases[nameF] ?? nameF;
     const v = this.registry[nameF] ?? this.registry[kebabCase(nameF)];
     if (!v) {
@@ -72,7 +75,6 @@ export class Cli extends Bootstrappable implements CliModel {
     const { promptsExtension, taskExtension } = taskConfig.params();
     const { pathname, task } = v;
     const promptsPathname = pathname.replace(taskExtension, promptsExtension);
-
     if (promptsPathname) {
       try {
         const keys = Object.keys(args);

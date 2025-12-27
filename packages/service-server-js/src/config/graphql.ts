@@ -13,9 +13,7 @@ import { CurveResolver } from '@lib/model/quant/Curve/CurveResolver/CurveResolve
 import { LinkedUserResolver } from '@lib/model/user/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-let graphqlConfig = configBase;
-
-graphqlConfig = graphqlConfig.extend(() => ({
+export const graphqlConfig = configBase.extend(() => ({
   resolvers: filterNil([
     BankResolver,
     CardResolver,
@@ -33,5 +31,3 @@ graphqlConfig = graphqlConfig.extend(() => ({
 
   schemaFilename: 'server.gql',
 }));
-
-export { graphqlConfig };

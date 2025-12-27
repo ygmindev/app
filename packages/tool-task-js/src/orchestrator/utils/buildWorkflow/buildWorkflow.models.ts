@@ -4,12 +4,12 @@ import {
 } from '@tool/task/orchestrator/utils/buildWorkflow/_buildWorkflow.models';
 
 export type BuildWorkflowParamsModel<
-  TParams extends Record<string, unknown> | void = void,
+  TParams = void,
   TResult = void,
   TSteps extends Array<unknown> = Array<unknown>,
 > = _BuildWorkflowParamsModel<TParams, TResult, TSteps>;
 
-export type BuildWorkflowModel<
-  TParams extends Record<string, unknown> | void = void,
-  TResult = void,
-> = _BuildWorkflowModel<TParams, TResult>;
+export type BuildWorkflowModel<TParams = void, TResult = void> = _BuildWorkflowModel<
+  TParams,
+  TResult
+>;

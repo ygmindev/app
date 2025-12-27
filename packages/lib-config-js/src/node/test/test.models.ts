@@ -20,14 +20,6 @@ export type TestConfigModel = Pick<FileConfigModel, 'buildDir' | 'cacheDir'> & {
 
   mocks?: Array<string | [string, () => unknown]>;
 
-  onBeforeAll?(): Promise<void>;
-
-  onBeforeEach?(): Promise<void>;
-
-  onFinishAll?(): Promise<void>;
-
-  onFinishEach?(): Promise<void>;
-
   outDir: string;
 
   root?: string;
@@ -37,6 +29,14 @@ export type TestConfigModel = Pick<FileConfigModel, 'buildDir' | 'cacheDir'> & {
   timeout: number;
 
   typescript: TypescriptConfigModel;
+
+  onBeforeAll?(): Promise<void>;
+
+  onBeforeEach?(): Promise<void>;
+
+  onFinishAll?(): Promise<void>;
+
+  onFinishEach?(): Promise<void>;
 };
 
 export type _TestConfigModel = Config.InitialOptions;

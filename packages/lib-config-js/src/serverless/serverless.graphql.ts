@@ -2,9 +2,7 @@ import { serverlessConfig as configBase } from '@lib/config/serverless/serverles
 import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { HTTP_METHOD } from '@lib/shared/http/http.constants';
 
-let serverlessConfig = configBase;
-
-serverlessConfig = serverlessConfig.extend(() => ({
+export const serverlessConfig = configBase.extend(() => ({
   functions: {
     [GRAPHQL]: {
       handler: 'src/functions/graphql/graphql.main',
@@ -13,5 +11,3 @@ serverlessConfig = serverlessConfig.extend(() => ({
     },
   },
 }));
-
-export { serverlessConfig };

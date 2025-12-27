@@ -11,6 +11,7 @@ import {
 export const buildTask =
   <TParams = unknown, TResult = unknown>({
     context,
+    name,
     params,
     task: fn,
   }: TaskParamsModel<TParams, TResult>): TaskModel<TParams, TResult> =>

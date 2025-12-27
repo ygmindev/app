@@ -5,9 +5,7 @@ import { LOG_MESSAGE_RESOURCE_NAME } from '@lib/model/logging/LogMessage/LogMess
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import toNumber from 'lodash/toNumber';
 
-let pubSubConfig = configBase;
-
-pubSubConfig = pubSubConfig.extend(() => {
+export const pubSubConfig = configBase.extend(() => {
   const environment = Container.get(Environment);
 
   return {
@@ -36,5 +34,3 @@ pubSubConfig = pubSubConfig.extend(() => {
     },
   };
 });
-
-export { pubSubConfig };

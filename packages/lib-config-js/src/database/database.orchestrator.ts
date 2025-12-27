@@ -2,10 +2,6 @@ import { databaseConfig as configBase } from '@lib/config/database/database.mong
 import { Pipeline } from '@lib/model/orchestrator/Pipeline/Pipeline';
 import { Workflow } from '@lib/model/orchestrator/Workflow/Workflow';
 
-let databaseConfig = configBase;
-
-databaseConfig = databaseConfig.extend(() => ({
+export const databaseConfig = configBase.extend(() => ({
   entities: [Pipeline, Workflow],
 }));
-
-export { databaseConfig };

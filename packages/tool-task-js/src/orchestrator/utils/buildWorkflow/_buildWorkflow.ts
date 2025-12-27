@@ -17,7 +17,7 @@ import {
 } from '@tool/task/orchestrator/utils/buildWorkflow/buildWorkflow.constants';
 
 export const _buildWorkflow = <
-  TParams extends Record<string, unknown> | void = void,
+  TParams = void,
   TResult = void,
   TSteps extends Array<unknown> = Array<unknown>,
 >({
@@ -28,10 +28,7 @@ export const _buildWorkflow = <
   timeout = WORKFLOW_TIMEOUT_DEFAULT,
 }: _BuildWorkflowParamsModel<TParams, TResult, TSteps>): _BuildWorkflowModel<TParams, TResult> => {
   const proxy = proxyActivities({
-    retry: {
-      initialInterval: interval,
-      maximumAttempts: retry,
-    },
+    retry: { initialInterval: interval, maximumAttempts: retry },
     startToCloseTimeout: timeout,
   });
   const isParallel = execution === WORKFLOW_EXECUTION.PARALLEL;

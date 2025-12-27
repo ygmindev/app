@@ -9,6 +9,7 @@ export type BuildPipelinesParamsModel<
   >,
 > = {
   app?: string;
+
   pipelines: Array<{
     app?: string;
     name: string;

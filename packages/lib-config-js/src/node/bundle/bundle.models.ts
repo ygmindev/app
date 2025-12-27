@@ -43,7 +43,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   exclude?: Array<string>;
 
-  extensions?: Array<string>;
+  extensions: Array<string>;
 
   externals?: Array<string | RegExp>;
 

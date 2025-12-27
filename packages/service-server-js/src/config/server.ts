@@ -8,9 +8,7 @@ import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { apiConfig } from './api';
 import { graphqlConfig } from './graphql';
 
-let serverConfig = configBase;
-
-serverConfig = serverConfig.extend(() => {
+export const serverConfig = configBase.extend(() => {
   return {
     api: apiConfig.params(),
 
@@ -27,5 +25,3 @@ serverConfig = serverConfig.extend(() => {
     ] as Array<[ServerPluginModel<unknown>, unknown]>,
   };
 });
-
-export { serverConfig };

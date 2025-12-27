@@ -13,9 +13,7 @@ const LIGHTNESS_THEME_CONTRAST = 0.2;
 const LIGHTNESS_THEME_MUTED = 0.3;
 const LIGHTNESS_SURFACE_MUTED = 0.9;
 
-let themeConfig = configBase;
-
-themeConfig = themeConfig.extend(() => ({
+export const themeConfig = configBase.extend(() => ({
   color: {
     border: COLOR_BORDER,
 
@@ -48,5 +46,3 @@ themeConfig = themeConfig.extend(() => ({
     },
   },
 }));
-
-export { themeConfig };

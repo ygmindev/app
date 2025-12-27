@@ -5,6 +5,7 @@ import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import { _nodeDev } from '@tool/task/node/tasks/nodeDev/_nodeDev';
+import { NODE_DEV } from '@tool/task/node/tasks/nodeDev/nodeDev.constants';
 import {
   type NodeDevModel,
   type NodeDevParamsModel,
@@ -14,6 +15,8 @@ export const nodeDev = buildTask<NodeDevParamsModel, NodeDevModel>({
   context: {
     environment: ENVIRONMENT.DEVELOPMENT,
   },
+
+  name: NODE_DEV,
 
   task: async (params, context) => {
     const app = context?.app ? await getAppRoot(context.app) : fromRoot();

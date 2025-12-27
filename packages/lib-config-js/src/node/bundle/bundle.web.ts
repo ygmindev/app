@@ -3,9 +3,7 @@ import { serverConfig } from '@lib/config/node/server/server.base';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
-let bundleConfig = configBase;
-
-bundleConfig = bundleConfig.extend(() => ({
+export const bundleConfig = configBase.extend(() => ({
   aliases: filterNil([
     { from: /^react-native$/, to: 'react-native-web' },
 
@@ -48,5 +46,3 @@ bundleConfig = bundleConfig.extend(() => ({
 
   transpileModules: ['react-dom/client'],
 }));
-
-export { bundleConfig };

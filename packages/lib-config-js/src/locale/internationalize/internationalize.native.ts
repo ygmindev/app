@@ -2,10 +2,6 @@ import { internationalizeConfig as configBase } from '@lib/config/locale/interna
 import { locale } from 'expo-localization';
 import { type Module } from 'i18next';
 
-let internationalizeConfig = configBase;
-
-internationalizeConfig = internationalizeConfig.extend(() => ({
+export const internationalizeConfig = configBase.extend(() => ({
   modules: [{ detect: () => locale, type: 'languageDetector' } as Module],
 }));
-
-export { internationalizeConfig };

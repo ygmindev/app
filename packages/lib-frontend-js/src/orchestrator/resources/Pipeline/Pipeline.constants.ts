@@ -22,6 +22,10 @@ export const PIPELINE_RESOURCE_PARAMS = {
           ],
           id: 'steps',
         },
+        {
+          fields: [{ id: 'key' }, { id: 'isOptional' }],
+          id: 'prompts',
+        },
       ],
       id: 'workflows',
     },

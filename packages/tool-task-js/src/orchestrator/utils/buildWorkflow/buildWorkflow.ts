@@ -5,7 +5,7 @@ import {
 } from '@tool/task/orchestrator/utils/buildWorkflow/buildWorkflow.models';
 
 export const buildWorkflow = <
-  TParams extends Record<string, unknown> | void = void,
+  TParams = void,
   TResult = void,
   TSteps extends Array<unknown> = Array<unknown>,
 >(

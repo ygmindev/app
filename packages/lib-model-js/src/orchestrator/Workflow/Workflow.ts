@@ -2,6 +2,8 @@ import { withEntity } from '@lib/backend/resource/utils/withEntity/withEntity';
 import { withField } from '@lib/backend/resource/utils/withField/withField';
 import { ExecutionContext } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext';
 import { ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
+import { Prompt } from '@lib/model/orchestrator/Prompt/Prompt';
+import { PromptArrayModel } from '@lib/model/orchestrator/Prompt/Prompt.models';
 import {
   WORKFLOW_EXECUTION,
   WORKFLOW_RESOURCE_NAME,
@@ -15,7 +17,7 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 @withEntity({ name: WORKFLOW_RESOURCE_NAME })
 export class Workflow<TParams = unknown, TResult = unknown>
   extends Resource()
-  implements WorkflowModel
+  implements WorkflowModel<TParams, TResult>
 {
   @withField({ Resource: () => ExecutionContext, isOptional: true })
   context?: ExecutionContextModel;
@@ -34,6 +36,9 @@ export class Workflow<TParams = unknown, TResult = unknown>
 
   @withField({ isOptional: true, type: DATA_TYPE.JSON })
   params?: TParams;
+
+  @withField({ Resource: () => Prompt, isArray: true, isOptional: true })
+  prompts?: PromptArrayModel<TParams>;
 
   @withField({ isOptional: true, type: DATA_TYPE.NUMBER })
   retry?: number;

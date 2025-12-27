@@ -1,9 +1,7 @@
 import { jobConfig as configBase } from '@lib/config/job/job.base';
 import { FREQUENCY } from '@lib/shared/datetime/datetime.models';
 
-let jobConfig = configBase;
-
-jobConfig = jobConfig.extend(() => ({
+export const jobConfig = configBase.extend(() => ({
   jobs: [
     {
       name: 'ratesUpload',
@@ -11,5 +9,3 @@ jobConfig = jobConfig.extend(() => ({
     },
   ],
 }));
-
-export { jobConfig };

@@ -21,9 +21,7 @@ import { LinkedUserResolver } from '@lib/model/user/LinkedUser/LinkedUserResolve
 import { UserResolver } from '@lib/model/user/User/UserResolver/UserResolver';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-let graphqlConfig = configBase;
-
-graphqlConfig = graphqlConfig.extend(() => ({
+export const graphqlConfig = configBase.extend(() => ({
   resolvers: filterNil([
     AccessResolver,
     BankResolver,
@@ -49,5 +47,3 @@ graphqlConfig = graphqlConfig.extend(() => ({
 
   schemaFilename: 'main.gql',
 }));
-
-export { graphqlConfig };

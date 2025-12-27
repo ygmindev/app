@@ -4,17 +4,17 @@ import { type WorkflowStepModel } from '@lib/model/orchestrator/WorkflowStep/Wor
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 
 export type _BuildWorkflowParamsModel<
-  TParams extends Record<string, unknown> | void = void,
+  TParams = void,
   TResult = void,
   TSteps extends Array<unknown> = Array<unknown>,
-> = Omit<WorkflowModel, keyof ResourceModel | 'steps'> & {
+> = Omit<WorkflowModel<TParams, TResult>, keyof ResourceModel | 'steps'> & {
   steps(
     params: TParams,
     context?: ExecutionContextModel,
   ): Array<WorkflowStepModel<TSteps[number], unknown>>;
 };
 
-export type _BuildWorkflowModel<
-  TParams extends Record<string, unknown> | void = void,
-  TResult = void,
-> = (params: TParams, context?: ExecutionContextModel) => Promise<TResult>;
+export type _BuildWorkflowModel<TParams = void, TResult = void> = (
+  params: TParams,
+  context?: ExecutionContextModel,
+) => Promise<TResult>;

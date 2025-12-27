@@ -6,9 +6,7 @@ import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isMainThread } from 'worker_threads';
 
-let loggingConfig = configBase;
-
-loggingConfig = loggingConfig.extend(() => ({
+export const loggingConfig = configBase.extend(() => ({
   context: () => Container.get(LocalStorage).get() as LocalContextModel,
 
   transports: filterNil([
@@ -19,5 +17,3 @@ loggingConfig = loggingConfig.extend(() => ({
       },
   ]),
 }));
-
-export { loggingConfig };

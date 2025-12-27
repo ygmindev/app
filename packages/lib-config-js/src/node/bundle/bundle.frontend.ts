@@ -5,9 +5,7 @@ import { bundleConfig as configBase } from '@lib/config/node/bundle/bundle.base'
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
-let bundleConfig = configBase;
-
-bundleConfig = bundleConfig.extend(() => {
+export const bundleConfig = configBase.extend(() => {
   const environment = Container.get(Environment);
 
   return {
@@ -95,5 +93,3 @@ bundleConfig = bundleConfig.extend(() => {
     ],
   };
 });
-
-export { bundleConfig };
