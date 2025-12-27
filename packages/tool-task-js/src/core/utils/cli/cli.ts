@@ -7,12 +7,11 @@ import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionCon
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
-import { importInterop } from '@lib/shared/core/utils/importInterop/importInterop';
 import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 import { type CliModel, type TaskRegistryModel } from '@tool/task/core/utils/Cli/Cli.models';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
-import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
+// import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
 import kebabCase from 'lodash/kebabCase';
 import toNumber from 'lodash/toNumber';
 
@@ -66,27 +65,28 @@ export class Cli extends Bootstrappable implements CliModel {
           { key: 'task', options: Object.keys(this.registry).map((v) => ({ id: v })) },
         ])
       ).task;
+
     nameF = this._aliases[nameF] ?? nameF;
     const v = this.registry[nameF] ?? this.registry[kebabCase(nameF)];
     if (!v) {
       throw new NotFoundError(nameF);
     }
     const args = parseArgs<ExecutionContextModel>();
-    const { promptsExtension, taskExtension } = taskConfig.params();
+    const { taskExtension } = taskConfig.params();
     const { pathname, task } = v;
-    const promptsPathname = pathname.replace(taskExtension, promptsExtension);
-    if (promptsPathname) {
-      try {
-        const keys = Object.keys(args);
-        const promptParams =
-          await importInterop<() => Promise<PromptParamsModel<Record<string, string>>>>(
-            promptsPathname,
-          );
-        await prompt<Record<string, string>>(
-          (await promptParams())?.filter((v) => !keys.includes(v.key)),
-        );
-      } catch {}
-    }
+    // const promptsPathname = pathname.replace(taskExtension, promptsExtension);
+    // if (promptsPathname) {
+    //   try {
+    //     const keys = Object.keys(args);
+    //     const promptParams =
+    //       await importInterop<() => Promise<PromptParamsModel<Record<string, string>>>>(
+    //         promptsPathname,
+    //       );
+    //     await prompt<Record<string, string>>(
+    //       (await promptParams())?.filter((v) => !keys.includes(v.key)),
+    //     );
+    //   } catch {}
+    // }
 
     const { app, environment, queue, workers, ...rest } = args;
     const context: ExecutionContextModel = { app, environment, queue };

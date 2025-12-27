@@ -5,8 +5,6 @@ import { Config } from '@lib/config/utils/Config/Config';
 
 export const taskConfig = new Config<TaskConfigModel>({
   params: () => ({
-    promptsExtension: '.prompts.ts',
-
     queue: TASK_QUEUE_DEFAULT,
 
     taskExtension: '.task.ts',

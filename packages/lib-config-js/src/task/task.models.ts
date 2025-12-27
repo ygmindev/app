@@ -1,6 +1,4 @@
 export type TaskConfigModel = {
-  promptsExtension: string;
-
   queue: string;
 
   taskExtension: string;
