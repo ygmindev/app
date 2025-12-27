@@ -40,6 +40,7 @@ export const buildPipelines = <
           context: workflowContextF,
           name: workflow.name,
           params: workflowParamsF,
+          prompts: workflow.prompts,
           steps: workflow.steps(workflowParamsF, workflowContextF).map((s) => ({
             context: cleanObject({ ...workflowContextF, ...(s.context ?? {}) }),
             name: s.name,
