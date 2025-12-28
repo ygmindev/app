@@ -26,15 +26,12 @@ export const buildPipelines = <
         const [workflow, workflowParams, workflowContext] = isArray(w)
           ? [w[0], w[1] ?? {}, w[2] ?? {}]
           : [w, w.context ?? {}, w.params ?? {}];
-
         const workflowContextF: ExecutionContextModel = cleanObject({
           ...(workflow.context ?? {}),
           ...workflowContext,
           app: appF,
         });
-
         const workflowParamsF = cleanObject({ ...(workflow.params ?? {}), ...workflowParams });
-
         return {
           _id: workflow.name,
           context: workflowContextF,

@@ -11,7 +11,6 @@ import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models
 import { type CliModel, type TaskRegistryModel } from '@tool/task/core/utils/Cli/Cli.models';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
-// import { type PromptParamsModel } from '@tool/task/core/utils/prompt/prompt.models';
 import kebabCase from 'lodash/kebabCase';
 import toNumber from 'lodash/toNumber';
 
@@ -72,22 +71,7 @@ export class Cli extends Bootstrappable implements CliModel {
       throw new NotFoundError(nameF);
     }
     const args = parseArgs<ExecutionContextModel>();
-    const { taskExtension } = taskConfig.params();
-    const { pathname, task } = v;
-    // const promptsPathname = pathname.replace(taskExtension, promptsExtension);
-    // if (promptsPathname) {
-    //   try {
-    //     const keys = Object.keys(args);
-    //     const promptParams =
-    //       await importInterop<() => Promise<PromptParamsModel<Record<string, string>>>>(
-    //         promptsPathname,
-    //       );
-    //     await prompt<Record<string, string>>(
-    //       (await promptParams())?.filter((v) => !keys.includes(v.key)),
-    //     );
-    //   } catch {}
-    // }
-
+    const { task } = v;
     const { app, environment, queue, workers, ...rest } = args;
     const context: ExecutionContextModel = { app, environment, queue };
     if (workers) {
