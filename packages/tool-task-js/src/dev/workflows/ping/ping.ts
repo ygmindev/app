@@ -6,5 +6,7 @@ import { type BuildWorkflowParamsModel } from '@tool/task/orchestrator/utils/bui
 export const ping: BuildWorkflowParamsModel<PingParamsModel, void, [StartParamsModel]> = {
   name: PING,
 
+  prompts: [{ key: 'test' }],
+
   steps: (params, context) => [{ name: PING }],
 };

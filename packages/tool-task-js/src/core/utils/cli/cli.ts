@@ -14,6 +14,9 @@ import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import kebabCase from 'lodash/kebabCase';
 import toNumber from 'lodash/toNumber';
 
+// const promptsF = prompts?.filter((v) => !(v.key in (paramsF as object)) && !v.isOptional);
+// promptsF?.length && (paramsF = { ...paramsF, ...(await prompt(promptsF)) });
+
 export class Cli extends Bootstrappable implements CliModel {
   protected _aliases: Record<string, string> = {};
   protected _registry: Record<string, TaskRegistryModel>;

@@ -3,8 +3,6 @@ import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import { type PingModel, type PingParamsModel } from '@tool/task/dev/tasks/ping/ping.models';
 
 export const ping = buildTask<PingParamsModel, PingModel>({
-  prompts: [{ key: 'test' }],
-
   task: async ({ test }) => {
     await sleep(5000);
     return { message: 'success' };
