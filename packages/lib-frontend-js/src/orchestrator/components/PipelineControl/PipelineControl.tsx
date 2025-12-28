@@ -1,5 +1,4 @@
-import { Accordion } from '@lib/frontend/animation/components/Accordion/Accordion';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { Tile } from '@lib/frontend/core/components/Tile/Tile';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { type PipelineControlPropsModel } from '@lib/frontend/orchestrator/components/PipelineControl/PipelineControl.models';
 import { WorkflowControl } from '@lib/frontend/orchestrator/components/WorkflowControl/WorkflowControl';
@@ -8,9 +7,8 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 export const PipelineControl: FCModel<PipelineControlPropsModel> = ({ pipeline, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <Accordion
+    <Tile
       {...wrapperProps}
-      defaultValue={ELEMENT_STATE.ACTIVE}
       title={pipeline.name}>
       {pipeline.workflows?.map((v) => (
         <WorkflowControl
@@ -18,6 +16,6 @@ export const PipelineControl: FCModel<PipelineControlPropsModel> = ({ pipeline, 
           workflow={v}
         />
       ))}
-    </Accordion>
+    </Tile>
   );
 };

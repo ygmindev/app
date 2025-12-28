@@ -1,7 +1,7 @@
 import { type TestableEntityResourceModel } from '@lib/model/test/TestableEntityResource/TestableEntityResource.models';
 import { type PartialArrayModel } from '@lib/shared/core/core.models';
 
-export const TESTABLE_ENTITY_RESOURCE_SEED_DATA: PartialArrayModel<TestableEntityResourceModel> = [
+export const FIXTURES: PartialArrayModel<TestableEntityResourceModel> = [
   {
     group: '1',
     index: 1,

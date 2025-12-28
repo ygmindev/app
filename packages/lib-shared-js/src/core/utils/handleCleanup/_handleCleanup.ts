@@ -23,12 +23,11 @@ export const _handleCleanup = async ({
     await handleCleanup();
   });
 
-  import.meta.hot?.on('vite:beforeFullReload', async () => {
-    instance?.uninstall();
-    await handleCleanup();
-  });
-  import.meta.hot?.dispose(async () => {
-    instance?.uninstall();
-    await handleCleanup();
-  });
+  if (process.env.NODE_ENV === 'development' && !process.env.JEST_WORKER_ID) {
+    const { _handleHmr } = await import('@lib/shared/core/utils/handleCleanup/_handleHmr');
+    await _handleHmr(async () => {
+      instance?.uninstall();
+      await handleCleanup();
+    });
+  }
 };

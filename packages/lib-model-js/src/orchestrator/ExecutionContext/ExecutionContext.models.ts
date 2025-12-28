@@ -2,5 +2,6 @@ import { type EnvironmentParamsModel } from '@lib/backend/environment/utils/Envi
 
 export type ExecutionContextModel = EnvironmentParamsModel & {
   queue?: string;
+  root?: string;
   workflowId?: string;
 };

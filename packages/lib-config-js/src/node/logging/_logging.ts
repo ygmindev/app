@@ -7,11 +7,8 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 export const _logging = ({
   context,
   level,
-  levels,
   transports = [],
 }: LoggingConfigModel): _LoggingConfigModel => ({
-  customLevels: levels,
-
   level,
 
   mixin: context,

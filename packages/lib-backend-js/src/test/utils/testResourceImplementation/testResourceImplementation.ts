@@ -1,12 +1,13 @@
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type TestResourceImplementationParamsModel } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation.models';
 import { databaseConfig } from '@lib/config/database/database.mongo';
-import { type UpdateModel } from '@lib/model/resource/Update/Update.models';
+import { type InputtableModel } from '@lib/model/resource/Inputtable/Inputtable.models';
+import { TESTABLE_ENTITY_RESOURCE_NAME } from '@lib/model/test/TestableEntityResource/TestableEntityResource.constants';
 import { type TestableResourceModel } from '@lib/model/test/TestableResource/TestableResource.models';
-import { type PartialModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { expectEqualsTestableResource } from '@lib/shared/test/utils/expectEqualsTestableResource/expectEqualsTestableResource';
+import { seed } from '@tool/task/database/tasks/seed/seed.task';
 import every from 'lodash/every';
 
 export const testResourceImplementation = <
@@ -18,23 +19,20 @@ export const testResourceImplementation = <
   root: getRoot,
 }: TestResourceImplementationParamsModel<TType, TRoot>): void => {
   describe('test resource implementation', () => {
-    let cleanUp: (() => Promise<void>) | undefined;
     let implementation: ResourceImplementationModel<TType, TRoot>;
     let root: TRoot extends undefined ? never : string;
-    let first: PartialModel<TType>;
-    let second: PartialModel<TType>;
+    let first: Partial<TType>;
+    let second: Partial<TType>;
 
     beforeAll(async () => {
-      ({ cleanUp } = await initialize({ database: () => databaseConfig.params() }));
+      await initialize({ database: () => databaseConfig.params() });
+      await seed({ entities: [TESTABLE_ENTITY_RESOURCE_NAME] });
+
       implementation = getImplementation();
       root = (await getRoot?.()) as TRoot extends undefined ? never : string;
       const { result } = await implementation.getMany({ root });
       if (!result) throw new NotFoundError('first');
-      [first, second] = result;
-    });
-
-    afterAll(async () => {
-      await cleanUp?.();
+      [first, second] = result.items;
     });
 
     test('create', async () => {
@@ -60,7 +58,7 @@ export const testResourceImplementation = <
         id: [first._id ?? '', second._id ?? ''],
         root,
       });
-      expectEqualsTestableResource(result, [first, second]);
+      expectEqualsTestableResource(result?.items, [first, second]);
     });
 
     test('getMany by partial', async () => {
@@ -70,24 +68,23 @@ export const testResourceImplementation = <
       expect(result).toBeDefined();
       expect(
         every(
-          result?.map((v) => v.group),
+          result?.items?.map((v) => v.group),
           (v) => v === GROUP,
         ),
       ).toBeTruthy();
     });
 
     test('getMany with skip and take', async () => {
-      const SKIP = 1;
       const TAKE = 2;
       const GROUP = '2';
       const input = {
         filter: [{ field: 'group', value: GROUP }],
-        options: { skip: SKIP, take: TAKE },
+        options: { limit: TAKE },
         root,
       };
       const { result } = await implementation.getMany(input);
-      expect(result?.length).toStrictEqual(TAKE);
-      expect(result?.map((v) => v.index)).toStrictEqual([SKIP + 1, SKIP + 2]);
+      expect(result?.items?.length).toStrictEqual(TAKE);
+      expect(result?.items?.map((v) => v.index)).toStrictEqual([1, 2]);
     });
 
     test('update by id', async () => {
@@ -95,7 +92,7 @@ export const testResourceImplementation = <
       const { result: updateResult } = await implementation.update({
         id: first._id ?? '',
         root,
-        update: { string: NEW_VALUE } as UpdateModel<TType>,
+        update: { string: NEW_VALUE } as InputtableModel<TType>,
       });
       expect(updateResult?.string).toStrictEqual(NEW_VALUE);
       const { result: getResult } = await implementation.get({
@@ -110,7 +107,7 @@ export const testResourceImplementation = <
     //   const { result: updateResult } = await implementation.update({
     //     filter: [{ field: 'string', value: first.string }],
     //     root,
-    //     update: { string: NEW_VALUE } as UpdateModel<TType>,
+    //     update: { string: NEW_VALUE } as InputtableModel<TType>,
     //   });
     //   expect(updateResult?.string).toStrictEqual(NEW_VALUE);
     //   const { result: getResult } = await implementation.get({
@@ -129,7 +126,7 @@ export const testResourceImplementation = <
         id: ID_UNKNOWN,
         options: { isUpsert: false },
         root,
-        update: { isFixture: true, string: NEW_VALUE } as UpdateModel<TType>,
+        update: { isFixture: true, string: NEW_VALUE } as InputtableModel<TType>,
       });
       expect(updateResultNull).toBeFalsy();
       const { result: getResultNull } = await implementation.get({
@@ -143,7 +140,7 @@ export const testResourceImplementation = <
         id: ID_UNKNOWN,
         options: { isUpsert: true },
         root,
-        update: { isFixture: true, string: NEW_VALUE } as UpdateModel<TType>,
+        update: { isFixture: true, string: NEW_VALUE } as InputtableModel<TType>,
       });
       expect(updateResult?.string).toStrictEqual(NEW_VALUE);
       const { result: getResult } = await implementation.get({
@@ -162,7 +159,7 @@ export const testResourceImplementation = <
     //     filter: [{ field: 'string', value: VALUE_UNKNOWN }],
     //     options: { isUpsert: false },
     //     root,
-    //     update: { isFixture: true, string: NEW_VALUE } as UpdateModel<TType>,
+    //     update: { isFixture: true, string: NEW_VALUE } as InputtableModel<TType>,
     //   });
     //   expect(updateResultNull).toBeFalsy();
     //   const { result: getResultNull } = await implementation.get({
@@ -176,7 +173,7 @@ export const testResourceImplementation = <
     //     filter: [{ field: 'string', value: first.string }],
     //     options: { isUpsert: true },
     //     root,
-    //     update: { isFixture: true, string: NEW_VALUE } as UpdateModel<TType>,
+    //     update: { isFixture: true, string: NEW_VALUE } as InputtableModel<TType>,
     //   });
     //   expect(updateResult?.string).toStrictEqual(NEW_VALUE);
     //   const { result: getResult } = await implementation.get({

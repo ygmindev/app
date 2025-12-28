@@ -5,7 +5,10 @@ import {
 } from '@tool/task/core/tasks/executeParallel/executeParallel.models';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 
-export const executeParallel = buildTask({
-  task: async (params: ExecuteParallelParamsModel): Promise<ExecuteParallelModel> =>
-    _executeParallel(params),
+export const executeParallel = buildTask<ExecuteParallelParamsModel, ExecuteParallelModel>({
+  task: async (params, context): Promise<ExecuteParallelModel> =>
+    _executeParallel({
+      ...params,
+      root: context?.root,
+    }),
 });

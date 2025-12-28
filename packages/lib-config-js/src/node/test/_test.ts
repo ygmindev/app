@@ -34,8 +34,10 @@ export const _test = ({
   const environment = Container.get(Environment);
   const { aliases, define, extensions, transpileModules } = bundle;
   const { compilerOptions } = _typescript(typescript);
+
   const testExtension =
     environment.variables.TEST_IS_ETE === BOOLEAN_STRING.TRUE ? eteExtension : specExtension;
+
   return {
     cacheDirectory: fromWorking(BUILD_DIR, cacheDir, outDir),
 

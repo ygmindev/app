@@ -1,5 +1,4 @@
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
 import { lintConfig } from '@lib/config/node/lint/lint';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import { execute } from '@tool/task/core/utils/execute/execute';
@@ -11,12 +10,9 @@ export const lint = buildTask<LintParamsModel, LintModel>({
 
   task: async ({ isFix = true }, context) => {
     const config = lintConfig.params();
+    const root = context?.root ?? fromRoot();
     return execute({
-      command: config.lintCommand(
-        config,
-        context?.app ? await getAppRoot(context.app) : fromRoot(),
-        isFix,
-      ),
+      command: config.lintCommand(config, root, isFix),
     });
   },
 });

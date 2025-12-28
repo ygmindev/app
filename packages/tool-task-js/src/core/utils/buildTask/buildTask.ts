@@ -1,4 +1,6 @@
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
 import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -18,6 +20,7 @@ export const buildTask =
   async (paramsOverrides, contextOverrides) => {
     const paramsF = merge([cleanObject(paramsOverrides), params]) as TParams;
     const contextF = merge([cleanObject(contextOverrides), context]) as ExecutionContextModel;
+    contextF.root = contextF.root ?? (contextF.app ? await getAppRoot(contextF.app) : fromRoot());
     const environment = process.env.NODE_ENV === 'undefined' ? undefined : process.env.NODE_ENV;
     const env = new Environment({
       app: contextF.app,

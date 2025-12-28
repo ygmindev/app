@@ -1,4 +1,4 @@
-import { CHAT_FIXTURES } from '@lib/model/chat/Chat/Chat.fixtures';
+import { FIXTURES as CHAT_FIXTURES } from '@lib/model/chat/Chat/Chat.fixtures';
 import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 import { USER_FIXTURE } from '@lib/model/user/User/User.fixtures';
 import { DATE_UNIT, TIME_UNIT } from '@lib/shared/datetime/datetime.constants';
@@ -6,7 +6,7 @@ import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { dateTimeAdd } from '@lib/shared/datetime/utils/dateTimeAdd/dateTimeAdd';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 
-export const MESSAGE_FIXTURES: Array<MessageModel> = getEntityResourceFixture({
+export const FIXTURES: Array<MessageModel> = getEntityResourceFixture({
   count: 5,
   data: ({ index }) => {
     const result: Partial<MessageModel> = {

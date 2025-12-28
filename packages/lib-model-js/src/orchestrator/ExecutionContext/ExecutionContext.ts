@@ -19,4 +19,10 @@ export class ExecutionContext implements ExecutionContextModel {
 
   @withField({ isOptional: true })
   queue?: string;
+
+  @withField({ isOptional: true })
+  root?: string;
+
+  @withField({ isOptional: true })
+  workflowId?: string;
 }

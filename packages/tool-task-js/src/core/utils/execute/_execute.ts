@@ -1,4 +1,3 @@
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import {
   type _ExecuteModel,
@@ -12,7 +11,7 @@ export const _execute = async ({
   isSilent,
   onFinish,
   onStart,
-  root = fromWorking(),
+  root,
 }: _ExecuteParamsModel): Promise<_ExecuteModel> => {
   const stdio = filterNil([!isSilent && 'inherit', 'pipe']);
   const cp = execa({

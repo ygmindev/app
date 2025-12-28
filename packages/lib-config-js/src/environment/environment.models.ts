@@ -27,6 +27,7 @@ export type EnvironmentConfigModel = {
   GITHUB_REPO: string;
   GITHUB_TOKEN: string;
   GITHUB_USERNAME: string;
+  JEST_WORKER_ID?: string;
   NODE_ENV: string;
   NODE_RUNTIME?: `${RUNTIME}`;
   PUPPETEER_EXECUTABLE_PATH?: string;

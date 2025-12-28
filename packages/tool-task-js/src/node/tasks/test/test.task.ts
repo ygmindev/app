@@ -1,10 +1,8 @@
 import { type Config } from '@jest/types';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
 import { testConfig } from '@lib/config/node/test/test';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
-import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { TEST } from '@tool/task/node/tasks/test/test.constants';
 import { type TestModel, type TestParamsModel } from '@tool/task/node/tasks/test/test.models';
 import { runCLI } from 'jest';
@@ -16,14 +14,8 @@ export const test = buildTask<TestParamsModel, TestModel>({
 
   name: TEST,
 
-  prompts: [
-    { isOptional: true, key: 'match' },
-
-    { isOptional: true, key: 'isWatch', type: PROMPT_TYPE.CONFIRM },
-  ],
-
   task: async ({ isWatch, match }, context) => {
-    const root = context?.app ? await getAppRoot(context.app) : fromRoot();
+    const root = context?.root ?? fromRoot();
     const config = testConfig.config({ isWatch, match, root });
     await runCLI(
       {

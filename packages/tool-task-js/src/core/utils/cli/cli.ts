@@ -77,7 +77,7 @@ export class Cli extends Bootstrappable implements CliModel {
         context?: ExecutionContextModel,
       ): Promise<unknown> => {
         let paramsF = params ?? {};
-        const promptsF = prompts?.filter((v) => !(v.key in (paramsF as object)) && !v.isOptional);
+        const promptsF = prompts?.filter((v) => !(v.key in (paramsF as object)));
         promptsF?.length && (paramsF = { ...paramsF, ...(await prompt(promptsF)) });
         return steps(params, context).map(async (s) =>
           tasks[s.name](
@@ -112,8 +112,8 @@ export class Cli extends Bootstrappable implements CliModel {
     }
     const args = parseArgs<ExecutionContextModel>();
     const { workflow } = v;
-    const { app, environment, queue, workers, ...rest } = args;
-    const context: ExecutionContextModel = { app, environment, queue };
+    const { app, environment, queue, root, workers, ...rest } = args;
+    const context: ExecutionContextModel = { app, environment, queue, root };
     if (workers) {
       await Promise.all(new Array(toNumber(workers)).fill(workflow(rest, context)));
     } else {

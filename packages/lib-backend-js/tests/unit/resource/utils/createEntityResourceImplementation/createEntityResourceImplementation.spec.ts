@@ -1,9 +1,9 @@
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';
-import { TESTABLE_ENTITY_RESOURCE_SEED_DATA } from '@lib/model/test/TestableEntityResource/TestableEntityResource.fixtures';
+import { FIXTURES as TESTABLE_ENTITY_RESOURCE_FIXTURES } from '@lib/model/test/TestableEntityResource/TestableEntityResource.fixtures';
 import { type TestableEntityResourceModel } from '@lib/model/test/TestableEntityResource/TestableEntityResource.models';
 import { TestableEntityResourceImplementation } from '@lib/model/test/TestableEntityResource/TestableEntityResourceImplementation/TestableEntityResourceImplementation';
-import { TESTABLE_RELATED_RESOURCE_SEED_DATA } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.fixtures';
+import { FIXTURES as TESTABLE_RELATED_RESOURCE_FIXTURES } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.fixtures';
 import { type TestableRelatedResourceModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.models';
 import { TestableRelatedResourceImplementation } from '@lib/model/test/TestableRelatedResource/TestableRelatedResourceImplementation/TestableRelatedResourceImplementation';
 import { type PartialArrayModel } from '@lib/shared/core/core.models';
@@ -18,8 +18,8 @@ const { displayName } = withTest({ createEntityResourceImplementation });
 describe(displayName, () => {
   let implementation: ResourceImplementationModel<TestableEntityResourceModel>;
   let relatedImplementation: ResourceImplementationModel<TestableRelatedResourceModel>;
-  const [formData] = TESTABLE_ENTITY_RESOURCE_SEED_DATA;
-  const [relatedFormData1, relatedFormData2] = TESTABLE_RELATED_RESOURCE_SEED_DATA;
+  const [formData] = TESTABLE_ENTITY_RESOURCE_FIXTURES;
+  const [relatedFormData1, relatedFormData2] = TESTABLE_RELATED_RESOURCE_FIXTURES;
 
   const getImplementation = (): ResourceImplementationModel<
     TestableEntityResourceModel,
@@ -51,7 +51,7 @@ describe(displayName, () => {
     return {
       createResult,
       relatedManyToMany: [],
-      relatedOneToMany: relatedOneToMany ?? [],
+      relatedOneToMany: relatedOneToMany?.items ?? [],
     };
   };
 

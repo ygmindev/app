@@ -2,7 +2,7 @@ import { PRICING_RESOURCE_NAME } from '@lib/model/commerce/Pricing/Pricing.const
 import { type ProductModel } from '@lib/model/commerce/Product/Product.models';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 
-export const PRODUCT_FIXTURES: Array<ProductModel> = getEntityResourceFixture({
+export const FIXTURES: Array<ProductModel> = getEntityResourceFixture({
   count: 10,
   data: ({ index }) => ({
     [PRICING_RESOURCE_NAME]: getEntityResourceFixture({

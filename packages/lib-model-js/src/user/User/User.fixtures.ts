@@ -2,7 +2,7 @@ import { type UserModel } from '@lib/model/user/User/User.models';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
 import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 
-export const USER_FIXTURES: Array<UserModel> = getEntityResourceFixture({
+export const FIXTURES: Array<UserModel> = getEntityResourceFixture({
   count: 5,
   data: ({ index }) => ({
     callingCode: '1',
@@ -13,5 +13,5 @@ export const USER_FIXTURES: Array<UserModel> = getEntityResourceFixture({
   }),
 });
 
-const [USER_FIXTURE, ..._] = USER_FIXTURES;
+const [USER_FIXTURE, ..._] = FIXTURES;
 export { USER_FIXTURE };
