@@ -19,6 +19,7 @@ describe(displayName, () => {
   let relatedImplementation: ResourceImplementationModel<TestableRelatedResourceModel>;
   const [formData] = [...TESTABLE_ENTITY_RESOURCE_FIXTURES];
   const [relatedFormData1, relatedFormData2] = [...TESTABLE_RELATED_RESOURCE_FIXTURES];
+  const related = [relatedFormData1, relatedFormData2];
 
   const getImplementation = (): ResourceImplementationModel<
     TestableEntityResourceModel,
@@ -33,7 +34,6 @@ describe(displayName, () => {
   void testResourceImplementation({ form: formData, getImplementation });
 
   test('create related one to many', async () => {
-    const related = [relatedFormData1, relatedFormData2];
     const form = { ...formData, relatedOneToMany: related };
     const { result: createResult } = await implementation.create({ form });
     if (!createResult?._id) throw new NotFoundError('createResult');
@@ -42,9 +42,10 @@ describe(displayName, () => {
       filter: [{ field: 'rootManyToOne', value: createResult._id }],
     });
     expectEqualsTestableResource(relatedResult?.items, related);
-    const ids = relatedResult?.items?.map((v) => v._id ?? '');
+    relatedResult?.items.forEach((v) => v.rootManyToOne?._id === createResult._id);
 
     // test orphan removal
+    const ids = relatedResult?.items?.map((v) => v._id ?? '');
     expect((await implementation.remove({ id: [createResult._id] })).result).toBeTruthy();
     expect((await implementation.get({ id: createResult._id })).result).toBeFalsy();
     const relatedResult2 = (await relatedImplementation.getMany({ id: ids })).result;
@@ -52,7 +53,6 @@ describe(displayName, () => {
   });
 
   test('create related many to many', async () => {
-    const related = [relatedFormData1, relatedFormData2];
     const form = { ...formData, relatedManyToMany: related };
     const { result: createResult } = await implementation.create({ form });
     if (!createResult?._id) throw new NotFoundError('createResult');
@@ -61,12 +61,8 @@ describe(displayName, () => {
       filter: [{ field: 'rootManyToMany', value: createResult._id }],
     });
     expectEqualsTestableResource(relatedResult?.items, related);
-    const ids = relatedResult?.items?.map((v) => v._id ?? '');
-
-    // // test orphan removal
-    // expect((await implementation.remove({ id: [createResult._id] })).result).toBeTruthy();
-    // expect((await implementation.get({ id: createResult._id })).result).toBeFalsy();
-    // const relatedResult2 = (await relatedImplementation.getMany({ id: ids })).result;
-    // expect(relatedResult2?.items).toStrictEqual([]);
+    relatedResult?.items.forEach((v) =>
+      v.rootManyToMany?.map((vv) => vv._id).includes(createResult._id),
+    );
   });
 });
