@@ -12,7 +12,6 @@ export type _WithFieldParamsModel<TType extends unknown> = {
   isOptional?: boolean;
   isSchema?: boolean;
   isUnique?: boolean;
-  leaf?: StringKeyModel<TType>;
   relation?: FIELD_RELATION;
   root?: StringKeyModel<TType>;
   type?: FIELD_TYPE;

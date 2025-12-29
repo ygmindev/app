@@ -10,7 +10,6 @@ export const withManyToManyField =
     Resource,
     isDatabase = true,
     isOptional = true,
-    leaf,
     root,
   }: WithManyToManyFieldParamsModel<TType>): WithManyToManyFieldModel =>
   (target, propertyKey) =>
@@ -19,7 +18,6 @@ export const withManyToManyField =
       isArray: true,
       isDatabase,
       isOptional,
-      leaf,
       relation: FIELD_RELATION.MANY_TO_MANY,
       root,
     })(target, propertyKey);

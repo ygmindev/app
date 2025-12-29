@@ -39,7 +39,6 @@ import {
 } from '@mikro-orm/mongodb';
 import forEach from 'lodash/forEach';
 import isNil from 'lodash/isNil';
-import isString from 'lodash/isString';
 import toString from 'lodash/toString';
 import {
   type Collection,
@@ -53,13 +52,20 @@ const normalize = <TType extends unknown>(
   params?: Partial<TType> | null,
 ): Partial<TType> | undefined => {
   if (isNil(params)) return undefined;
-  // const result = wrap(params).toObject() as unknown as Partial<EntityResourceModel>;
   const result = params as Partial<EntityResourceModel>;
   if (result.id) {
     result._id = result.id;
     delete result.id;
   }
   return result as Partial<TType>;
+};
+
+const ensureObjectId = (id: string | ObjectId): string => {
+  return (id
+    ? typeof id === 'string'
+      ? new ObjectId(id)
+      : id
+    : new ObjectId()) as unknown as string;
 };
 
 export class _Database extends Bootstrappable implements _DatabaseModel {
@@ -273,56 +279,38 @@ export class _Database extends Bootstrappable implements _DatabaseModel {
   ): Partial<TType> => {
     if (!form) throw new NotFoundError('form');
     const em = this.getEntityManager();
+
     if (isLeaf) {
-      const entity = em.create(name as EntityName<object>, {});
+      const entity = em.create(name as EntityName<object>, {}) as EntityResourceModel;
       wrap(entity).assign(form, { em, mergeEmbeddedProperties: true, mergeObjectProperties: true });
-      const id = (entity as EntityResourceModel)._id;
-      (entity as EntityResourceModel)._id = id
-        ? isString(id)
-          ? (new ObjectId(id) as unknown as string)
-          : id
-        : (new ObjectId() as unknown as string);
-      return entity;
+      entity._id = ensureObjectId(entity._id);
+      return entity as unknown as Partial<TType>;
     }
+
     const formF = { ...form } as Record<string, unknown>;
     const meta = em.getMetadata().get(name);
-    forEach(meta.properties, (v) => {
-      const value = formF[v.name];
-      switch (v.kind) {
+    forEach(meta.properties, (prop) => {
+      const value = formF[prop.name];
+      if (isNil(value)) return;
+      switch (prop.kind) {
         case ReferenceKind.EMBEDDED:
         case ReferenceKind.ONE_TO_MANY:
         case ReferenceKind.MANY_TO_MANY: {
           if (isArray(value)) {
-            formF[v.name] = value.map((vv) => {
-              const child = em.create(v.type, vv as object);
-              const cid = (child as EntityResourceModel)._id;
-              (child as EntityResourceModel)._id = cid
-                ? isString(cid)
-                  ? (new ObjectId(cid) as unknown as string)
-                  : cid
-                : (new ObjectId() as unknown as string);
-              return child;
-            });
+            formF[prop.name] = value.map((v) => this.hydrate(prop.type, v as string));
           }
           break;
         }
         case ReferenceKind.MANY_TO_ONE: {
-          if (value) {
-            const valueF = em.create(v.type, value);
-            const id = (valueF as EntityResourceModel)._id;
-            (valueF as EntityResourceModel)._id = id
-              ? isString(id)
-                ? (new ObjectId(id) as unknown as string)
-                : id
-              : (new ObjectId() as unknown as string);
-            formF[v.name] = valueF;
-          }
+          formF[prop.name] = this.hydrate(prop.type, value);
           break;
         }
       }
     });
 
-    return formF as Partial<TType>;
+    const entity = em.create(name as EntityName<object>, formF) as EntityResourceModel;
+    entity._id = ensureObjectId(entity._id as string);
+    return entity as unknown as Partial<TType>;
   };
 
   async isConnected(): Promise<boolean> {

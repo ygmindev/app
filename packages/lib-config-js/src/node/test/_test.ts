@@ -65,8 +65,6 @@ export const _test = ({
       [`(${fileExtensions.join('|')})$`]: join(mockPath, 'file'),
     },
 
-    passWithNoTests: true,
-
     preset: 'ts-jest',
 
     reporters: [

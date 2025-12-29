@@ -9,8 +9,9 @@ import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 const { displayName } = withTest({ Database });
 
 describe(displayName, () => {
+  const [form] = TESTABLE_ENTITY_RESOURCE_FIXTURES;
   testResourceImplementation({
-    form: TESTABLE_ENTITY_RESOURCE_FIXTURES[0],
+    form,
     getImplementation: (name = TESTABLE_ENTITY_RESOURCE_NAME) =>
       Container.get(Database, DATABASE_TYPE.MONGO).getRepository({
         name,

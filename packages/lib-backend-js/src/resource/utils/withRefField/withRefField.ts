@@ -10,7 +10,6 @@ export const withRefField =
     isArray = false,
     isDatabase = false,
     isOptional = true,
-    leaf,
     relation,
     root,
   }: WithRefFieldParamsModel<TType>): WithRefFieldModel =>
@@ -20,7 +19,6 @@ export const withRefField =
       isArray,
       isDatabase,
       isOptional,
-      leaf,
       relation,
       root,
     })(target, propertyKey);

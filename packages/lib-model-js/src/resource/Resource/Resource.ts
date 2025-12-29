@@ -6,7 +6,6 @@ import {
 } from '@lib/model/resource/Resource/Resource.models';
 import { ClassModel } from '@lib/shared/core/core.models';
 import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
-import { PrimaryKeyModel } from '@lib/shared/resource/resource.models';
 
 export const Resource = (
   { isDatabase = true }: ResourceParamsModel = { isDatabase: true },
@@ -14,7 +13,7 @@ export const Resource = (
   @withEntity({ isAbstract: true, isDatabase })
   class Class implements ResourceModel {
     @withField({ isDatabase, type: PROPERTY_TYPE.PRIMARY_KEY })
-    _id!: PrimaryKeyModel;
+    _id!: string;
 
     id?: string;
   }

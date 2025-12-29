@@ -12,7 +12,7 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withDatabaseEntity({ indices: [{ keys: ['fingerprint'] }], name: CARD_RESOURCE_NAME })
 export class Card extends EntityResource implements CardModel {
-  @withManyToManyField({ Resource: () => User, leaf: CARD_RESOURCE_NAME })
+  @withManyToManyField({ Resource: () => User })
   [USER_RESOURCE_NAME]?: PartialArrayModel<UserModel>;
 
   @withDatabaseField({ isOptional: true })

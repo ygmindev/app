@@ -5,7 +5,7 @@ import {
 
 export type WithManyToManyFieldParamsModel<TType extends unknown> = Pick<
   WithRefFieldParamsModel<TType>,
-  'isDatabase' | 'isOptional' | 'leaf' | 'root' | 'Resource'
+  'isDatabase' | 'isOptional' | 'root' | 'Resource'
 >;
 
 export type WithManyToManyFieldModel = WithRefFieldModel;

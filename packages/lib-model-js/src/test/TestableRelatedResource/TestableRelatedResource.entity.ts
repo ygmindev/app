@@ -14,7 +14,7 @@ export class TestableRelatedResource
   extends TestableResource
   implements TestableRelatedResourceModel
 {
-  @withManyToManyField({ Resource: () => TestableEntityResource, leaf: 'relatedManyToMany' })
+  @withManyToManyField({ Resource: () => TestableEntityResource })
   rootManyToMany?: PartialArrayModel<TestableEntityResourceModel>;
 
   @withManyToOneField({ Resource: () => TestableEntityResource })

@@ -7,8 +7,6 @@ import {
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
 
-export type PrimaryKeyModel = string;
-
 export type ResourceReadMethodTypeModel =
   | RESOURCE_METHOD_TYPE.GET
   | RESOURCE_METHOD_TYPE.GET_MANY

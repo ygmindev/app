@@ -19,7 +19,7 @@ export class Chat extends createProtectedResource() implements ChatModel {
   @withDatabaseField({ isOptional: true })
   name?: string;
 
-  @withManyToManyField({ Resource: () => User, leaf: CHAT_RESOURCE_NAME })
+  @withManyToManyField({ Resource: () => User })
   participants?: PartialArrayModel<UserModel>;
 }
 

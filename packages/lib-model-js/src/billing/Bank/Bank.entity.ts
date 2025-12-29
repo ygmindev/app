@@ -11,7 +11,7 @@ import { PartialArrayModel } from '@lib/shared/core/core.models';
 
 @withDatabaseEntity({ indices: [{ keys: ['fingerprint'] }], name: BANK_RESOURCE_NAME })
 export class Bank extends EntityResource implements BankModel {
-  @withManyToManyField({ Resource: () => User, leaf: BANK_RESOURCE_NAME })
+  @withManyToManyField({ Resource: () => User })
   [USER_RESOURCE_NAME]?: PartialArrayModel<UserModel>;
 
   @withDatabaseField({ isOptional: true })

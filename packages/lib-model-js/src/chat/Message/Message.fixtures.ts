@@ -9,8 +9,9 @@ import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResour
 export const FIXTURES: Array<MessageModel> = getEntityResourceFixture({
   count: 5,
   data: ({ index }) => {
+    const [chat] = CHAT_FIXTURES;
     const result: Partial<MessageModel> = {
-      chat: { _id: CHAT_FIXTURES[0]._id },
+      chat: { _id: chat._id },
 
       created: new DateTime(),
 

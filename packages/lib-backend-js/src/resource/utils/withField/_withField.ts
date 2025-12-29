@@ -33,7 +33,6 @@ export const _withField =
     isOptional,
     isSchema = true,
     isUnique,
-    leaf,
     relation,
     root,
     type = DATA_TYPE.STRING,
@@ -71,11 +70,6 @@ export const _withField =
             gqlType = () => Boolean;
             break;
           }
-          // case DATA_TYPE.JSON: {
-          //   ormType = 'string';
-          //   gqlType = () => String;
-          //   break;
-          // }
           case DATA_TYPE.JSON: {
             ormType = 'json';
             gqlType = () => GraphQLJSONObject;
@@ -119,30 +113,65 @@ export const _withField =
           case FIELD_RELATION.MANY_TO_MANY: {
             ManyToMany({
               ...options,
-              cascade: [Cascade.PERSIST],
+              cascade: [Cascade.ALL],
               entity,
-              inversedBy: leaf,
               mappedBy: root,
               owner: !root,
             })(target, propertyKey as string);
+
+            if (!Object.prototype.hasOwnProperty.call(target, propertyKey)) {
+              Object.defineProperty(target, propertyKey, {
+                configurable: true,
+                enumerable: true,
+                get() {
+                  const collection = new Collection(this);
+                  Object.defineProperty(this, propertyKey, {
+                    configurable: true,
+                    enumerable: true,
+                    value: collection,
+                    writable: true,
+                  });
+                  return collection;
+                },
+                set(value) {
+                  Object.defineProperty(this, propertyKey, {
+                    configurable: true,
+                    enumerable: true,
+                    value: value instanceof Collection ? value : new Collection(this, value),
+                    writable: true,
+                  });
+                },
+              });
+            }
+
             break;
           }
           case FIELD_RELATION.ONE_TO_MANY: {
             OneToMany({
               ...options,
-              cascade: [Cascade.PERSIST],
+              cascade: [Cascade.ALL],
               entity,
               mappedBy: root as StringKeyModel<TType>,
               nullable: true,
               orphanRemoval: true,
               ref: true,
             })(target, propertyKey as string);
+
+            if (!Object.prototype.hasOwnProperty.call(target, propertyKey)) {
+              Object.defineProperty(target, propertyKey, {
+                configurable: true,
+                enumerable: true,
+                value: new Collection(target),
+                writable: true,
+              });
+            }
+
             break;
           }
           case FIELD_RELATION.MANY_TO_ONE: {
             ManyToOne({
               ...options,
-              cascade: [Cascade.PERSIST],
+              cascade: [Cascade.ALL],
               entity,
             })(target, propertyKey as string);
             break;
@@ -150,7 +179,7 @@ export const _withField =
           case FIELD_RELATION.ONE_TO_ONE: {
             OneToOne({
               ...options,
-              cascade: [Cascade.PERSIST],
+              cascade: [Cascade.ALL],
               entity,
               mappedBy: root,
               orphanRemoval: true,
@@ -162,19 +191,6 @@ export const _withField =
             Property({ ...options, type: () => Resource })(target, propertyKey as string);
             break;
           }
-        }
-
-        if (
-          relation === FIELD_RELATION.MANY_TO_MANY ||
-          (relation === FIELD_RELATION.ONE_TO_MANY &&
-            !Object.prototype.hasOwnProperty.call(target, propertyKey))
-        ) {
-          Object.defineProperty(target, propertyKey, {
-            configurable: true,
-            enumerable: true,
-            value: new Collection<TType & object>(target),
-            writable: true,
-          });
         }
       } else {
         options.type = ormType;
