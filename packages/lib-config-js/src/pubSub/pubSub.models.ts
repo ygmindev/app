@@ -23,7 +23,7 @@ export type PubSubConfigModel = {
 
   timeout: number;
 
-  command?(config: PubSubConfigModel): string;
+  command(config: PubSubConfigModel): string;
 };
 
 export type _PubSubConfigModel = ConnectionOptions;

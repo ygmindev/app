@@ -1,3 +1,4 @@
+import { bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import {
   type _NodeBuildModel,
@@ -10,7 +11,6 @@ export const _nodeBuild = async ({
   format,
   outDir,
 }: _NodeBuildParamsModel): Promise<_NodeBuildModel> => {
-  const { bundleConfig } = await import('@lib/config/node/bundle/bundle.node');
   const config = bundleConfig.config({ entryFiles, format, outDir }, MERGE_STRATEGY.DEEP_PREPEND);
   await build({ ...config, configFile: false });
 };

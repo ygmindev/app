@@ -7,16 +7,15 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 export const bundleConfig = configBase.extend(() => {
   const { taskExtension, tasksPathname, workflowExtension, workflowsPathname } =
     taskConfig.params();
-
   return {
     barrelFiles: [
       [
-        fromGlobs([fromPackages(`*/src/**/**${taskExtension}`)], { isAbsolute: true }),
+        fromGlobs([fromPackages(`*/src/**/*/*${taskExtension}`)], { isAbsolute: true }),
         { outPathname: tasksPathname },
       ],
 
       [
-        fromGlobs([fromPackages(`*/src/**/**${workflowExtension}`)], { isAbsolute: true }),
+        fromGlobs([fromPackages(`*/src/**/*/*${workflowExtension}`)], { isAbsolute: true }),
         { outPathname: workflowsPathname },
       ],
     ],

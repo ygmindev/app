@@ -14,7 +14,7 @@ const { queue, tasksPathname, workerCountDefault, workflowsPathname } = taskConf
 const workers: Array<Worker> = new Array(count ?? workerCountDefault).fill(
   new Worker({
     queue,
-    tasks: await import(tasksPathname),
+    tasks: await import(/* @vite-ignore */ tasksPathname),
     workflowsPathname,
   }),
 );

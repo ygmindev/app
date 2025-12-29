@@ -39,14 +39,16 @@ export const seed = buildTask<SeedParamsModel, SeedModel>({
     for (const fixture of fixtures) {
       const { dirname, main } = fileInfo(fixture);
 
-      const { FIXTURES } = (await import(fixture)) as {
+      const { FIXTURES } = (await import(/* @vite-ignore */ fixture)) as {
         FIXTURES: PartialArrayModel<EntityResourceModel>;
       };
 
       const implementationName = `${main}Implementation`;
-      const cls = (await import(`${dirname}/${implementationName}/${implementationName}`))[
-        implementationName
-      ] as ClassModel<ResourceImplementationModel<EntityResourceModel, unknown>>;
+      const cls = (
+        await import(/* @vite-ignore */ `${dirname}/${implementationName}/${implementationName}`)
+      )[implementationName] as ClassModel<
+        ResourceImplementationModel<EntityResourceModel, unknown>
+      >;
 
       const implementation = Container.get(cls);
 

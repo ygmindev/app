@@ -7,7 +7,6 @@ import toNumber from 'lodash/toNumber';
 
 export const pubSubConfig = configBase.extend(() => {
   const environment = Container.get(Environment);
-
   return {
     command: (config) => {
       let command = `nats-server -js`;

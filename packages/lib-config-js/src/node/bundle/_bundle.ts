@@ -42,8 +42,7 @@ import posix from 'path/posix';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vike from 'vike/plugin';
 import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
-import circleDependency from 'vite-plugin-circular-dependency';
-// import { nodePolyfills } from 'vite-plugin-node-polyfills';
+// import circleDependency from 'vite-plugin-circular-dependency';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 
 const vitePluginBarrel = (barrelFiles: BundleConfigModel['barrelFiles'] = []): Plugin => {
@@ -431,14 +430,13 @@ export const _bundle = ({
     },
 
     plugins: filterNil([
-      circleDependency(),
-      // platformF === PLATFORM.NODE && watchF && vitePluginFullReload(watchF),
+      // circleDependency(),
+
+      // platformF === PLATFORM.NODE && nodePolyfills(),
 
       provide && inject(provide),
 
       platformF === PLATFORM.WEB && vike(),
-
-      // platformF === PLATFORM.NODE && nodePolyfills(),
 
       barrelFiles && vitePluginBarrel(barrelFiles),
 

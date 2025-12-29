@@ -15,7 +15,9 @@ const getMany: PipelineImplementationModel['getMany'] = async (input, context) =
     await mapParallel(
       packages.map(async (pkg) => {
         try {
-          const { pipelines } = (await import(fromPackages(pkg, 'src/pipelines.ts'))) as {
+          const { pipelines } = (await import(
+            /* @vite-ignore */ fromPackages(pkg, 'src/pipelines.ts')
+          )) as {
             pipelines: Array<PipelineModel>;
           };
           return pipelines;
