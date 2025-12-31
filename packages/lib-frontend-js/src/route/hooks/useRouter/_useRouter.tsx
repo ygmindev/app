@@ -36,7 +36,9 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
         depth >= toParts.length
           ? params
           : { params: get(depth + 1), screen: trimPathname(toParts.slice(0, depth + 1).join('/')) };
-      const currentDepth = Math.min(common, fromParts.length);
+
+      const isDeep = common === fromParts.length && common < toParts.length;
+      const currentDepth = isDeep ? common + 1 : Math.min(common, fromParts.length);
       return [trimPathname(toParts.slice(0, currentDepth).join('/')), get(currentDepth)];
     },
     [route.name],
@@ -84,7 +86,6 @@ export const _useRouter = <TType,>(): _UseRouterModel => {
 
     replace: <TTypeNext,>({ params, pathname }: LocationUpdateModel<TTypeNext>) => {
       void waitFor({ condition: () => navigationRef.isReady() }).then(() =>
-        // navigationRef.current?.dispatch(StackActions.replace(pathname, params)),
         navigationRef.current?.dispatch(
           StackActions.replace(...getNestedPathname(pathname, params)),
         ),

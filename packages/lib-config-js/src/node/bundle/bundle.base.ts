@@ -19,24 +19,8 @@ export const bundleConfig = new Config<BundleConfigModel, _BundleConfigModel>({
   params: () => {
     const { extensions, packageDirs } = fileConfig.params();
     return {
-      // aliases: [
-      //   {
-      //     from: /^graphql/,
-      //     to: fromModules('graphql'),
-      //   },
-      // ],
-
       babel: {
-        plugins: [
-          '@babel/plugin-transform-runtime',
-          // '@babel/plugin-transform-class-static-block',
-          'babel-plugin-transform-typescript-metadata',
-          // ['@babel/plugin-transform-private-methods', { loose: true }],
-          // ['@babel/plugin-proposal-decorators', { legacy: true, decoratorsBeforeExport: true }],
-          // ['@babel/plugin-proposal-class-properties', { loose: true }],
-          // ['@babel/plugin-proposal-object-rest-spread', { loose: true }],
-        ],
-        // presets: [['@babel/preset-env', { loose: true, targets: { node: 'current' } }]],
+        plugins: ['@babel/plugin-transform-runtime', 'babel-plugin-transform-typescript-metadata'],
       },
 
       buildDir: BUILD_DIR,
@@ -78,14 +62,6 @@ export const bundleConfig = new Config<BundleConfigModel, _BundleConfigModel>({
       typescript: typescriptConfig.params(),
 
       watch: [/tsconfig.json/],
-
-      // watch: [
-      //   fromPackages('asset-static/src/**/*'),
-      //   fromPackages('lib-config-js/src/**/*'),
-      //   fromPackages('lib-shared-js/src/**/*'),
-      //   fromPackages('lib-model-js/src/**/*'),
-      //   fromWorking('src/**/*'),
-      // ],
     };
   },
 });

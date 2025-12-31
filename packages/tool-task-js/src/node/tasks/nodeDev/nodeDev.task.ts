@@ -1,5 +1,4 @@
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
@@ -19,13 +18,13 @@ export const nodeDev = buildTask<NodeDevParamsModel, NodeDevModel>({
   name: NODE_DEV,
 
   task: async (params, context) => {
-    const app = context?.app ? await getAppRoot(context.app) : fromRoot();
+    const root = context?.root ?? fromWorking();
     let pathname = params.pathname
       ? isArray(params.pathname)
         ? params.pathname
         : [params.pathname]
       : ['src/index.ts'];
-    pathname = pathname.map((v) => joinPaths([app, v]));
+    pathname = pathname.map((v) => joinPaths([root, v]));
     return _nodeDev({ ...params, pathname });
   },
 });

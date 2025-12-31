@@ -45,6 +45,8 @@ export const bundleConfig = configBase.extend(() => {
           'react-remove-properties',
           { properties: ['testID'] },
         ],
+
+        // 'react-native-reanimated/plugin',
       ]),
 
       presets: [

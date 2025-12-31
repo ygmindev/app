@@ -26,7 +26,6 @@ export type FormContainerPropsModel<TType, TResult = void> = WrapperPropsModel &
   Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
     cancelLabel?: AsyncTextModel;
     fields?: Array<FormFieldsModel<TType>>;
-    isButton?: boolean;
     submitLabel?: AsyncTextModel;
     submitType?: FORM_SUBMIT_TYPE;
     bottomElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;

@@ -5,6 +5,7 @@ import { Image } from '@lib/frontend/core/components/Image/Image';
 import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { type TitlePropsModel } from '@lib/frontend/core/components/Title/Title.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { isAsyncText } from '@lib/frontend/core/utils/isAsyncText/isAsyncText';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -38,7 +39,10 @@ export const Title: LFCModel<TitlePropsModel> = ({
       p={isSmall ? THEME_SIZE.SMALL : fontSize}>
       <Wrapper
         isAlign={!description}
-        isRow>
+        isRow
+        opacity={
+          elementState === ELEMENT_STATE.DISABLED ? theme.opaque[THEME_SIZE.MEDIUM] : undefined
+        }>
         <Wrapper isRow>
           {leftElement && <Skeleton elementState={elementState}>{leftElement}</Skeleton>}
 

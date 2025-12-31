@@ -8,15 +8,13 @@ export const serverDev: BuildWorkflowParamsModel<ServerDevParamsModel, void, [No
   {
     name: SERVER_DEV,
 
-    steps: ({ pathname }, context) => {
-      return [
-        {
-          context,
-          name: NODE_DEV,
-          params: {
-            pathname,
-          },
+    steps: ({ pathname }, context) => [
+      {
+        context,
+        name: NODE_DEV,
+        params: {
+          pathname,
         },
-      ];
-    },
+      },
+    ],
   };

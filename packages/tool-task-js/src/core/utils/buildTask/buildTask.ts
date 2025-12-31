@@ -1,6 +1,7 @@
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
+import { withDir } from '@lib/backend/file/utils/withDir/withDir';
 import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -28,5 +29,5 @@ export const buildTask =
       overrrides: contextF.overrrides,
     });
     await env.initialize();
-    return fn(paramsF, contextF);
+    return withDir(contextF.root, async () => fn(paramsF, contextF));
   };

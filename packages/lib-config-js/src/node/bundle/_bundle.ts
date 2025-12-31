@@ -459,7 +459,7 @@ export const _bundle = ({
       ...(([PLATFORM.WEB, PLATFORM.ANDROID, PLATFORM.IOS] as Array<string>).includes(
         platformF ?? '',
       )
-        ? [react()]
+        ? [react({ jsxRuntime: 'automatic' })]
         : []),
 
       viteCommonjs() as Plugin,
@@ -490,16 +490,21 @@ export const _bundle = ({
 
       preserveSymlinks: true,
     },
+
     root: fromWorking(),
 
     server: {
       fs: {
-        allow: [searchForWorkspaceRoot(fromRoot()), fromRoot('node_modules')],
+        allow: [
+          searchForWorkspaceRoot(fromRoot()),
+          fromRoot('node_modules'),
+          fromWorking('node_modules'),
+        ],
       },
 
-      // hmr: {
-      //   protocol: 'wss',
-      // },
+      hmr: {
+        protocol: 'wss',
+      },
 
       host: true,
 

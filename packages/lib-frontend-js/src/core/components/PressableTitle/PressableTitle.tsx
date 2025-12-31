@@ -28,7 +28,11 @@ export const PressableTitle: LFCModel<PressableTitlePropsModel> = ({
     ((isActive) => (
       <Button
         elementState={
-          onPress ? (elementState ?? (isActive ? ELEMENT_STATE.ACTIVE : undefined)) : undefined
+          elementState === ELEMENT_STATE.DISABLED
+            ? ELEMENT_STATE.DISABLED
+            : onPress
+              ? (elementState ?? (isActive ? ELEMENT_STATE.ACTIVE : undefined))
+              : undefined
         }
         icon={onPress ? 'chevronRight' : undefined}
         isHidden={!onPress}

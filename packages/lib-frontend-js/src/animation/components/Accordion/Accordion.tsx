@@ -63,7 +63,13 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
             {rightElement?.(isActiveF)}
             <Rotatable isActive={elementStateControlled === ELEMENT_STATE.ACTIVE}>
               <Button
-                elementState={isActiveF ? ELEMENT_STATE.ACTIVE : undefined}
+                elementState={
+                  elementStateControlled === ELEMENT_STATE.DISABLED
+                    ? ELEMENT_STATE.DISABLED
+                    : isActiveF
+                      ? ELEMENT_STATE.ACTIVE
+                      : undefined
+                }
                 icon="chevronRight"
                 isHidden
                 size={size}

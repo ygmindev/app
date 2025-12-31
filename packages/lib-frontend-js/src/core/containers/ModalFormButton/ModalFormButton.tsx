@@ -14,7 +14,6 @@ export const ModalFormButton = <TType, TResult = void>({
   errorContextGet,
   fields,
   initialValues,
-  isButton,
   isFullHeight,
   isValidateChanged,
   onCancel,
@@ -45,7 +44,6 @@ export const ModalFormButton = <TType, TResult = void>({
         errorContextGet={errorContextGet}
         fields={fields}
         initialValues={initialValues}
-        isButton={isButton}
         isFullHeight={isFullHeight}
         isValidateChanged={isValidateChanged}
         onCancel={() => {

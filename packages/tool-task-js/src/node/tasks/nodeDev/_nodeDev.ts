@@ -1,3 +1,5 @@
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { withDir } from '@lib/backend/file/utils/withDir/withDir';
 import { APP_TYPE } from '@lib/config/node/bundle/bundle.constants';
 import { bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { type BootstrappableModel } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable.models';
@@ -18,13 +20,13 @@ import { installSourcemapsSupport } from 'vite-node/source-map';
 export const _nodeDev = async ({ pathname }: _NodeDevParamsModel): Promise<_NodeDevModel> => {
   const entryFiles = isArray(pathname) ? pathname : [pathname];
   const config = bundleConfig.config({ appType: APP_TYPE.TOOL, entryFiles });
+  const root = fromWorking();
   const server = await createServer(
     merge(
-      [{ plugins: [viteNodeHmrPlugin()], server: { hmr: false } }, config],
+      [{ plugins: [viteNodeHmrPlugin()], root, server: { hmr: false } }, config],
       MERGE_STRATEGY.DEEP_APPEND,
     ),
   );
-
   const node = new ViteNodeServer(server);
   installSourcemapsSupport({ getSourceMap: (source) => node.getSourceMap(source) });
 
@@ -36,7 +38,7 @@ export const _nodeDev = async ({ pathname }: _NodeDevParamsModel): Promise<_Node
     resolveId(id, importer) {
       return node.resolveId(id, importer);
     },
-    root: server.config.root,
+    root,
   });
 
   let cleannable: Array<Pick<BootstrappableModel, 'cleanUp'>> = [];
@@ -52,8 +54,8 @@ export const _nodeDev = async ({ pathname }: _NodeDevParamsModel): Promise<_Node
     if (!module) return;
     logger.debug(`file changed: ${file}`);
     runner.moduleCache.clear();
-    await runAll();
+    await withDir(root, runAll);
   });
 
-  await runAll();
+  await withDir(root, runAll);
 };

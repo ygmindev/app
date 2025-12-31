@@ -7,12 +7,12 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 
 export const RouteHeader: LFCModel<RouteHeaderPropsModel> = ({ route, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { back } = useRouter();
+  const { back, push } = useRouter();
   return (
     <NavigationHeader
       {...wrapperProps}
       elementState={ELEMENT_STATE.ACTIVE}
-      onBack={async () => back()}
+      onBack={async () => (route?.previous ? push({ pathname: route.previous }) : back())}
       title={route?.title}
     />
   );

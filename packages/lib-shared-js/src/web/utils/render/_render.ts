@@ -13,8 +13,9 @@ import { PassThrough } from 'stream';
 import { renderPage } from 'vike/server';
 
 export const _render = async (request: _RenderParamsModel): Promise<_RenderModel> => {
+  const { url } = request;
   const response = new HttpResponse<ReadableStream>();
-  const isClientSide = request.url.endsWith('.pageContext.json');
+  const isClientSide = url.endsWith('.pageContext.json');
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
     context: isClientSide
       ? {
@@ -45,6 +46,7 @@ export const _render = async (request: _RenderParamsModel): Promise<_RenderModel
     redirectTo: undefined,
     urlOriginal: request.url,
   });
+
   response.headers = {
     ...response.headers,
     ...httpResponse.headers.reduce((result, v) => ({ ...result, [v[0]]: v[1] }), {}),
@@ -52,6 +54,7 @@ export const _render = async (request: _RenderParamsModel): Promise<_RenderModel
     ['Critical-CH']: 'Sec-CH-Prefers-Color-Scheme',
     Vary: 'Sec-CH-Prefers-Color-Scheme',
   };
+
   response.redirectTo = redirectTo;
   errorWhileRendering && (response.error = errorWhileRendering as Error);
   const transform = new PassThrough();

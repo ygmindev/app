@@ -66,7 +66,6 @@ const FormContainerF = <TType, TResult = void>({
   fields,
   initialValues,
   isBlocking,
-  isButton = true,
   isFullHeight = true,
   isFullWidth = true,
   isValidateChanged,
@@ -202,10 +201,10 @@ const FormContainerF = <TType, TResult = void>({
       />
     ) : (
       <Wrapper
-        isAlign
         isDistribute
         isRow
-        key={row.id}>
+        key={row.id}
+        s={THEME_SIZE.SMALL}>
         {fieldsF.map(({ element }) => element)}
       </Wrapper>
     );
@@ -272,7 +271,7 @@ const FormContainerF = <TType, TResult = void>({
         isFullHeight={isFullHeight}
         isFullWidth={isFullWidth}
         m="auto"
-        maxWidth={theme.layout.width[THEME_SIZE.MEDIUM]}
+        maxWidth={isFullWidth ? undefined : theme.layout.width[THEME_SIZE.MEDIUM]}
         s>
         {topElement?.({ elementState: elementStateF })}
 

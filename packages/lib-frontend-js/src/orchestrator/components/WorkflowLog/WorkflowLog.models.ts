@@ -1,7 +1,7 @@
-import { type WorkflowControlPropsModel } from '@lib/frontend/orchestrator/components/WorkflowControl/WorkflowControl.models';
+import { type WorkflowTitlePropsModel } from '@lib/frontend/orchestrator/components/WorkflowTitle/WorkflowTitle.models';
 
 export type WorkflowLogPropsModel = Pick<
-  WorkflowControlPropsModel,
+  WorkflowTitlePropsModel,
   'workflow' | 'status' | 'onStatusChange'
 > & {
   id: string;

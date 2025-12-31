@@ -1,7 +1,10 @@
 import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { withDir } from '@lib/backend/file/utils/withDir/withDir';
 import { taskConfig } from '@lib/config/task/task';
 import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
@@ -51,10 +54,7 @@ export class Cli extends Bootstrappable implements CliModel {
     );
     const workflowPathnames = fromGlobs(
       [joinPaths(['src/**/*'], { extension: workflowExtension })],
-      {
-        isAbsolute: true,
-        root: fromPackages('tool-task-js'),
-      },
+      { isAbsolute: true, root: fromPackages('tool-task-js') },
     );
 
     for (const pathname of workflowPathnames) {
@@ -113,11 +113,15 @@ export class Cli extends Bootstrappable implements CliModel {
     const args = parseArgs<ExecutionContextModel>();
     const { workflow } = v;
     const { app, environment, queue, root, workers, ...rest } = args;
-    const context: ExecutionContextModel = { app, environment, queue, root };
-    if (workers) {
-      await Promise.all(new Array(toNumber(workers)).fill(workflow(rest, context)));
-    } else {
-      await workflow(rest, context);
-    }
+    const rootF = root ?? (app ? await getAppRoot(app) : fromRoot());
+    const context: ExecutionContextModel = { app, environment, queue, root: rootF };
+
+    await withDir(rootF, async () => {
+      if (workers) {
+        await Promise.all(new Array(toNumber(workers)).fill(workflow(rest, context)));
+      } else {
+        await workflow(rest, context);
+      }
+    });
   };
 }
