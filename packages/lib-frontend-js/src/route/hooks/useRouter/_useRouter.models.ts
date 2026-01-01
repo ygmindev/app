@@ -1,11 +1,11 @@
 import { type LocationModel, type LocationUpdateModel } from '@lib/frontend/route/route.models';
 
-export type _UseRouterModel = {
+export type _UseRouterModel<TType extends unknown> = {
   depth?: number;
 
   isMounted?: boolean;
 
-  location: LocationModel;
+  location: LocationModel<TType>;
 
   back(): void;
 

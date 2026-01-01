@@ -3,6 +3,6 @@ import { JOB_RESOURCE_NAME } from '@lib/model/orchestrator/Job/Job.constants';
 import { type JobModel } from '@lib/model/orchestrator/Job/Job.models';
 
 export const JOB_RESOURCE_PARAMS = {
-  fields: [{ id: 'workflow' }, { id: 'created' }],
+  fields: [{ id: 'workflowName' }, { id: 'created' }],
   name: JOB_RESOURCE_NAME,
 } satisfies ResourceParamsModel<JobModel>;

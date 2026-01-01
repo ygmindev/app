@@ -1,3 +1,4 @@
-import { type OrderImplementationModel } from '@lib/model/commerce/Order/OrderImplementation/OrderImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type OrderModel } from '@lib/model/commerce/Order/Order.models';
 
-export type UseOrderResourceModel = OrderImplementationModel;
+export type UseOrderResourceModel = UseResourceModel<OrderModel>;

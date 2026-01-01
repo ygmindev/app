@@ -1,4 +1,5 @@
 import { type AsyncTextModel } from '@lib/frontend/core/components/AsyncText/AsyncText.models';
+import { type IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import { type WrapperPropsModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { type AsyncBoundaryContextModel } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
 import {
@@ -14,6 +15,7 @@ import {
   type SubmittablePropsModel,
 } from '@lib/frontend/data/data.models';
 import { type UseFormParamsModel } from '@lib/frontend/data/hooks/useForm/useForm.models';
+import { type THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement, type ReactNode, type RefObject } from 'react';
@@ -24,8 +26,11 @@ export type FormContainerPropsModel<TType, TResult = void> = WrapperPropsModel &
   SubmittablePropsModel<TType, TResult> &
   SizableMorePropsModel &
   Pick<AsyncBoundaryContextModel, 'errorContextGet'> & {
+    cancelIcon?: IconPropsModel['icon'];
     cancelLabel?: AsyncTextModel;
     fields?: Array<FormFieldsModel<TType>>;
+    submitColor?: THEME_COLOR;
+    submitIcon?: IconPropsModel['icon'];
     submitLabel?: AsyncTextModel;
     submitType?: FORM_SUBMIT_TYPE;
     bottomElement?(params: Pick<ElementStatePropsModel, 'elementState'>): ReactNode;

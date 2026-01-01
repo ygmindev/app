@@ -1,3 +1,4 @@
-import { type OtpImplementationModel } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type OtpModel } from '@lib/model/auth/Otp/Otp.models';
 
-export type UseOtpResourceModel = OtpImplementationModel;
+export type UseOtpResourceModel = UseResourceModel<OtpModel>;

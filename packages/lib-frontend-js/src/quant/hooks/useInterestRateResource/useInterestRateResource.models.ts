@@ -1,3 +1,4 @@
-import { type InterestRateImplementationModel } from '@lib/model/quant/InterestRate/InterestRateImplementation/InterestRateImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type InterestRateModel } from '@lib/model/quant/InterestRate/InterestRate.models';
 
-export type UseInterestRateResourceModel = InterestRateImplementationModel;
+export type UseInterestRateResourceModel = UseResourceModel<InterestRateModel>;

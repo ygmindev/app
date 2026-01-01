@@ -1,6 +1,10 @@
-import { type PagePropsModel } from '@lib/frontend/core/core.models';
+import { type JOB_STATUS } from '@lib/model/orchestrator/Job/Job.constants';
 import { type WorkflowModel } from '@lib/model/orchestrator/Workflow/Workflow.models';
 
-export type WorkflowPagePropsModel = PagePropsModel<{
+export type WorkflowPagePropsModel = {
+  status?: JOB_STATUS;
+
   workflow?: Partial<WorkflowModel>;
-}>;
+
+  onStatusChange?(status: JOB_STATUS): void;
+};

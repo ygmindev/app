@@ -15,15 +15,15 @@ export const PulsableWrapper: LFCModel<PulsableWrapperPropsModel> = ({ children,
       <Wrapper
         animation={{
           duration: theme.animation.transition,
-          isInfinite: true,
+          repeat: Infinity,
           states: {
             [ELEMENT_STATE.ACTIVE]: {
               opacity: theme.opaque[THEME_SIZE.SMALL],
-              transform: [{ scale: 1 }],
+              scale: 1,
             },
             [ELEMENT_STATE.INACTIVE]: {
               opacity: 0,
-              transform: [{ scale: 1.5 }],
+              scale: 1.5,
             },
           },
         }}

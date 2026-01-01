@@ -61,6 +61,7 @@ export const FormContainer = <TType, TResult = void>({
 
 const FormContainerF = <TType, TResult = void>({
   bottomElement,
+  cancelIcon,
   cancelLabel,
   elementState,
   fields,
@@ -78,9 +79,12 @@ const FormContainerF = <TType, TResult = void>({
   onValidate,
   ref,
   size,
+  submitColor,
+  submitIcon,
   submitLabel,
   submitType = FORM_SUBMIT_TYPE.BUTTON,
   successMessage,
+
   topElement,
   validators,
   ...props
@@ -245,11 +249,14 @@ const FormContainerF = <TType, TResult = void>({
   const buttons = (submitType === FORM_SUBMIT_TYPE.BUTTON ||
     submitType === FORM_SUBMIT_TYPE.ON_CHANGE) && (
     <SubmittableButtons
+      cancelIcon={cancelIcon}
       cancelLabel={cancelLabel}
       elementState={elementStateF}
       onCancel={onCancel}
       onSubmit={async () => handleSubmitF()}
       size={size}
+      submitColor={submitColor}
+      submitIcon={submitIcon}
       submitLabel={submitLabel}
       // submitTooltip={isValid ? undefined : 'TODO: error message'}
       testID={props.testID}

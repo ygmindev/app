@@ -31,8 +31,8 @@ export const Rotatable: LFCModel<RotatablePropsModel> = ({
       {...wrapperProps}
       animation={{
         states: {
-          [ELEMENT_STATE.INACTIVE]: { transform: [{ rotateZ: '0deg' }] },
-          [ELEMENT_STATE.ACTIVE]: { transform: [{ rotateZ: getRotation(directionActive) }] },
+          [ELEMENT_STATE.INACTIVE]: { rotateZ: '0deg' },
+          [ELEMENT_STATE.ACTIVE]: { rotateZ: getRotation(directionActive) },
         },
       }}
       elementState={isActive ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE}>

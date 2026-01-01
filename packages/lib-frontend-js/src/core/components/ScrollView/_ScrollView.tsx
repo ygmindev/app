@@ -1,15 +1,15 @@
 import { ScrollBar } from '@lib/frontend/core/components/ScrollBar/ScrollBar';
 import { ScrollButton } from '@lib/frontend/core/components/ScrollButton/ScrollButton';
-import { getViewParams as getViewParamsBase } from '@lib/frontend/core/components/View/_View';
 import {
-  type _ViewPropsModel,
-  type _ViewRefModel,
-} from '@lib/frontend/core/components/View/_View.models';
-import { View } from '@lib/frontend/core/components/View/View';
+  type _ScrollViewPropsModel,
+  type _ScrollViewRefModel,
+} from '@lib/frontend/core/components/ScrollView/_ScrollView.models';
 import {
   SCROLL_EVENT_THROTTLE,
   SCROLL_TYPE,
-} from '@lib/frontend/core/components/View/View.constants';
+} from '@lib/frontend/core/components/ScrollView/ScrollView.constants';
+import { getViewParams as getViewParamsBase } from '@lib/frontend/core/components/View/_View';
+import { View } from '@lib/frontend/core/components/View/View';
 import {
   type ChildrenPropsModel,
   type MeasureModel,
@@ -20,7 +20,6 @@ import {
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type ComposeComponentParamsModel } from '@lib/frontend/core/utils/composeComponent/composeComponent.models';
 import { type StylePropsModel, type ViewStyleModel } from '@lib/frontend/style/style.models';
-import { type PartialModel } from '@lib/shared/core/core.models';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
 import { partionObject } from '@lib/shared/core/utils/partionObject/partionObject';
 import { Fragment, useImperativeHandle, useMemo, useRef, useState } from 'react';
@@ -34,15 +33,15 @@ import {
 
 const viewParamsBase = getViewParamsBase();
 
-export const getViewParams = <
-  TProps extends _ViewPropsModel,
+export const getScrollViewParams = <
+  TProps extends _ScrollViewPropsModel,
   TResult extends ScrollViewProps,
-  TRef extends _ViewRefModel,
+  TRef extends _ScrollViewRefModel,
 >({
-  Component = ScrollView as unknown as RSFCModel<TRef, TResult, ViewStyleModel>,
+  Component = ScrollView as unknown as RSFCModel<TRef, TResult>,
   getProps,
   stylers,
-}: PartialModel<
+}: Partial<
   ComposeComponentParamsModel<TProps, TResult, ViewStyleModel, TRef>
 > = {}): ComposeComponentParamsModel<TProps, ChildrenPropsModel, ViewStyleModel, TRef> => ({
   Component: Fragment,
@@ -118,8 +117,8 @@ export const getViewParams = <
       showsVerticalScrollIndicator: false,
     } as TResult & RefPropsModel<TRef> & StylePropsModel;
 
-    const isBar = (props.scrollType ?? SCROLL_TYPE.BAR) === SCROLL_TYPE.BAR;
-    const ScrollComponent = isBar ? ScrollBar : ScrollButton;
+    const ScrollComponent =
+      (props.scrollType ?? SCROLL_TYPE.BAR) === SCROLL_TYPE.BAR ? ScrollBar : ScrollButton;
 
     const handleScrollTo = (position: PositionModel): void => {
       props.ref?.current?.scrollTo({ ...position, isAnimated: true });
@@ -168,5 +167,7 @@ export const getViewParams = <
   stylers,
 });
 
-export const _View =
-  composeComponent(getViewParams<_ViewPropsModel, ScrollViewProps, _ViewRefModel>());
+export const _ScrollView =
+  composeComponent(
+    getScrollViewParams<_ScrollViewPropsModel, ScrollViewProps, _ScrollViewRefModel>(),
+  );

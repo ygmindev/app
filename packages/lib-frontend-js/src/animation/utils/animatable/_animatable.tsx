@@ -1,4 +1,4 @@
-import { useAnimationState } from '@lib/frontend/animation/hooks/useAnimationState/useAnimationState';
+import { useAnimationProps } from '@lib/frontend/animation/hooks/useAnimationProps/useAnimationProps';
 import {
   type _AnimatableModel,
   type _AnimatableParamsModel,
@@ -6,41 +6,36 @@ import {
 import { type PropsModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { type StyleModel, type ViewStyleModel } from '@lib/frontend/style/style.models';
-import { motify } from 'moti';
-import { createElement, useImperativeHandle } from 'react';
+import { motion, type Target } from 'framer-motion';
+import { createElement } from 'react';
 
 export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>({
   Component,
+  stylers,
 }: _AnimatableParamsModel<TProps, TStyle>): _AnimatableModel<TProps, TStyle> => {
-  const ComponentF = motify(Component)();
-  const Animatable: _AnimatableModel<TProps, TStyle> = ({
-    animation,
-    defaultState,
-    elementState,
-    ref,
-    testID,
-    ...props
-  }) => {
-    const { styles } = useStyles({ props });
-    const testIDF = process.env.NODE_ENV === 'production' ? undefined : testID;
-    const { animationProps, animationState, to, toState } = useAnimationState({
-      animation,
-      defaultState,
-      elementState,
-      onElementStateChange: props.onElementStateChange,
-      ref,
-      testID: testIDF,
-    });
-    useImperativeHandle(ref, () => ({ to, toState }));
+  const ComponentF = motion(Component);
 
+  const Animatable: _AnimatableModel<TProps, TStyle> = (props) => {
+    const { styles } = useStyles<TProps, TStyle>({ props, stylers });
+    const { exit, from, to, transition } = useAnimationProps({
+      animation: props.animation,
+      defaultState: props.defaultState,
+      elementState: props.elementState,
+    });
     return createElement(ComponentF, {
-      ...animationProps,
       ...props,
-      ref,
-      state: animationState,
+      animate: to as Target,
+      exit: exit as Target,
+      initial: from as Target,
       style: styles,
-      testID: testIDF,
+      testID: process.env.NODE_ENV === 'production' ? undefined : props.testID,
+      transition: {
+        delay: transition?.delay,
+        duration: transition?.duration,
+        repeat: transition?.repeat,
+      },
     } as unknown as PropsModel<typeof ComponentF>);
   };
+
   return Animatable;
 };

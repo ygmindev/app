@@ -23,9 +23,9 @@ export const ANIMATION_STATES_APPEARABLE_OPAQUE: AnimationStatesModel<StyleModel
 };
 
 export const ANIMATION_STATES_SCALABLE: AnimationStatesModel<StyleModel> = {
-  [ELEMENT_STATE.ACTIVE]: { transform: [{ scale: 1.0 }] },
-  [ELEMENT_STATE.INACTIVE]: { transform: [{ scale: 0.9 }] },
-  [ELEMENT_STATE.EXIT]: { transform: [{ scale: 0.9 }] },
+  [ELEMENT_STATE.ACTIVE]: { scale: 1.0 },
+  [ELEMENT_STATE.INACTIVE]: { scale: 0.9 },
+  [ELEMENT_STATE.EXIT]: { scale: 0.9 },
 };
 
 export const ANIMATION_STATES_APPEAR_SCALABLE: AnimationStatesModel<StyleModel> = merge([

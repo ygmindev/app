@@ -3,7 +3,7 @@ import { NavigationHeader } from '@lib/frontend/app/components/NavigationHeader/
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
-import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
+import { SCROLL_TYPE } from '@lib/frontend/core/components/ScrollView/ScrollView.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
@@ -84,8 +84,6 @@ export const StepFormF = <TType, TResult = void>({
 
   const handleCurrentSet = async (value: number): Promise<void> => {
     currentSet(value);
-    await sleep(theme.animation.transition);
-    width && barRef.current?.to({ width: (width / (steps.length + 1)) * (value + 1) });
   };
 
   const barRef = useRef<WrapperRefModel>(null);
@@ -109,7 +107,10 @@ export const StepFormF = <TType, TResult = void>({
           isFullWidth
           round>
           <Wrapper
-            animation={{ states: { [ELEMENT_STATE.INACTIVE]: { width: 0 } } }}
+            animation={{
+              animate: width ? { width: (width / (steps.length + 1)) * (current + 1) } : undefined,
+              states: { [ELEMENT_STATE.INACTIVE]: { width: 0 } },
+            }}
             backgroundColor={THEME_COLOR.PRIMARY}
             bottom={0}
             left={0}

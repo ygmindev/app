@@ -1,10 +1,8 @@
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
 import { type UseResourceMethodHookParamsModel } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod.models';
-import { type CardImplementationModel } from '@lib/model/billing/Card/CardImplementation/CardImplementation.models';
+import { type CardModel } from '@lib/model/billing/Card/Card.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
 
 export type UseCardResourceParamsModel = UseResourceMethodHookParamsModel<UserModel>;
 
-export type UseCardResourceModel = Pick<
-  CardImplementationModel,
-  'create' | 'get' | 'update' | 'remove'
->;
+export type UseCardResourceModel = UseResourceModel<CardModel>;

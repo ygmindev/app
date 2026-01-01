@@ -19,7 +19,6 @@ export const routes = getRoutes([
         header: true,
         pathname: WORKFLOW,
         previous: `/${APP}/${ORCHESTRATOR}/${HOME}`,
-        title: ({ t }) => t('orchestrator:workflow'),
       },
     ],
     transition: ROUTE_TRANSITION.SLIDE,

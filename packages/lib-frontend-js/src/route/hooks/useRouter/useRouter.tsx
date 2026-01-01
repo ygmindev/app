@@ -3,9 +3,8 @@ import { type UseRouterModel } from '@lib/frontend/route/hooks/useRouter/useRout
 import { type LocationUpdateModel } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 
-export const useRouter = <TType,>(): UseRouterModel<TType> => {
-  const { back, isActive, isMounted, location, push, replace } = _useRouter();
-
+export const useRouter = <TType extends unknown>(): UseRouterModel<TType> => {
+  const { back, isActive, isMounted, location, push, replace } = _useRouter<TType>();
   return {
     back,
 

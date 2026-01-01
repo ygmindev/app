@@ -1,3 +1,4 @@
-import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImplementation/GroupImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type GroupModel } from '@lib/model/group/Group/Group.models';
 
-export type UseGroupResourceModel = GroupImplementationModel;
+export type UseGroupResourceModel = UseResourceModel<GroupModel>;

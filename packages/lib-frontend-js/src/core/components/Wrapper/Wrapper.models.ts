@@ -1,9 +1,13 @@
 import { type AnimatablePropsModel } from '@lib/frontend/animation/animation.models';
-import { type AnimatableViewRefModel } from '@lib/frontend/animation/components/AnimatableView/AnimatableView.models';
+import { type PressableViewPropsModel } from '@lib/frontend/core/components/PressableView/PressableView.models';
+import {
+  type ScrollViewPropsModel,
+  type ScrollViewRefModel,
+} from '@lib/frontend/core/components/ScrollView/ScrollView.models';
 import { type ViewPropsModel } from '@lib/frontend/core/components/View/View.models';
 import { type ViewStylerParamsModel } from '@lib/frontend/style/utils/styler/viewStyler/viewStyler.models';
 
-export type WrapperPropsModel = ViewPropsModel &
+export type WrapperPropsModel = (ViewPropsModel & PressableViewPropsModel & ScrollViewPropsModel) &
   ViewStylerParamsModel &
   AnimatablePropsModel & {
     isAlign?: boolean;
@@ -13,4 +17,4 @@ export type WrapperPropsModel = ViewPropsModel &
     isVerticalCenter?: boolean;
   };
 
-export type WrapperRefModel = AnimatableViewRefModel;
+export type WrapperRefModel = ScrollViewRefModel;

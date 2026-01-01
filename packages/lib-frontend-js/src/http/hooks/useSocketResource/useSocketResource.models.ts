@@ -1,3 +1,4 @@
-import { type SocketImplementationModel } from '@lib/model/http/Socket/SocketImplementation/SocketImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type SocketModel } from '@lib/model/http/Socket/Socket.models';
 
-export type UseSocketResourceModel = SocketImplementationModel;
+export type UseSocketResourceModel = UseResourceModel<SocketModel>;

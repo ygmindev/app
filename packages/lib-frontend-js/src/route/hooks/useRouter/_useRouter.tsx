@@ -16,7 +16,7 @@ import {
 } from '@react-navigation/native';
 import { useCallback } from 'react';
 
-export const _useRouter = <TType,>(): _UseRouterModel => {
+export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
   const navigation = useNavigation();
   const route = useRoute();
   const isFocused = useIsFocused();

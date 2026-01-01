@@ -14,9 +14,9 @@ export class JobImplementation
     beforeCreate: async ({ input }, context) => {
       if (input?.form) {
         const client = await getClient();
-        const { context, params, workflow } = input.form;
-        if (!workflow) throw new InvalidArgumentError('Workflow is required');
-        const { id } = await client.run(workflow, params, context);
+        const { context, params, workflowName } = input.form;
+        if (!workflowName) throw new InvalidArgumentError('Workflow is required');
+        const { id } = await client.run(workflowName, params, context);
         input.form._id = id;
       }
       return input;

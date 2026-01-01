@@ -1,6 +1,6 @@
-import { type WorkflowTitlePropsModel } from '@lib/frontend/orchestrator/components/WorkflowTitle/WorkflowTitle.models';
+import { type WorkflowPagePropsModel } from '@lib/frontend/orchestrator/pages/WorkflowPage/WorkflowPage.models';
 
 export type WorkflowButtonsPropsModel = Pick<
-  WorkflowTitlePropsModel,
-  'workflow' | 'status' | 'onStatusChange'
+  WorkflowPagePropsModel,
+  'status' | 'workflow' | 'onStatusChange'
 >;

@@ -6,10 +6,12 @@ import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { type SubmittableButtonsPropsModel } from '@lib/frontend/data/components/SubmittableButtons/SubmittableButtons.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { type ReactElement } from 'react';
 
 export const SubmittableButtons = <TType,>({
+  cancelIcon = 'chevronLeft',
   cancelLabel,
   elementState,
   elementStateCancel,
@@ -17,6 +19,8 @@ export const SubmittableButtons = <TType,>({
   onCancel,
   onSubmit,
   size,
+  submitColor = THEME_COLOR.PRIMARY,
+  submitIcon = 'chevronRight',
   submitLabel,
   submitTooltip,
   ...props
@@ -39,7 +43,7 @@ export const SubmittableButtons = <TType,>({
           basis={0}
           elementState={elementStateCancel ?? (isDisabled ? ELEMENT_STATE.DISABLED : undefined)}
           flex
-          icon="chevronLeft"
+          icon={cancelIcon}
           onPress={onCancel}
           size={size}
           testID={props.testID ? `${props.testID}-cancel` : undefined}
@@ -51,9 +55,10 @@ export const SubmittableButtons = <TType,>({
       {onSubmit && (
         <Button
           basis={0}
+          color={submitColor}
           elementState={elementStateSubmit ?? elementState}
           flex
-          icon="chevronRight"
+          icon={submitIcon}
           onPress={onSubmit}
           size={size}
           testID={props.testID ? `${props.testID}-submit` : undefined}

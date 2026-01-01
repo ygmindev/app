@@ -1,3 +1,4 @@
-import { type JobImplementationModel } from '@lib/model/orchestrator/Job/JobImplementation/JobImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type JobModel } from '@lib/model/orchestrator/Job/Job.models';
 
-export type UseJobResourceModel = JobImplementationModel;
+export type UseJobResourceModel = UseResourceModel<JobModel>;

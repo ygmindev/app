@@ -11,7 +11,7 @@ import { type ReactElement } from 'react';
 export type RouteIdParamsModel = WithIdModel;
 
 export type RouteModel<
-  TParams = Record<string, unknown>,
+  TParams extends unknown = unknown,
   TType extends Record<string, unknown> = Record<string, unknown>,
 > = WithIconPropsModel &
   Pick<OptionModel, 'category'> & {
@@ -39,7 +39,7 @@ export type RouteModel<
     };
   };
 
-export type LocationModel<TType = Record<string, unknown>> = {
+export type LocationModel<TType extends unknown> = {
   params?: TType & LocationParamsModel;
   pathname: string;
 };
@@ -47,14 +47,15 @@ export type LocationModel<TType = Record<string, unknown>> = {
 export type LocationParamsModel = {
   previous?: LocationModel<unknown>;
   redirect?: LocationModel<unknown>;
+  title?: AsyncTextModel;
 };
 
-export type RouteContextModel<TType = Record<string, unknown>> = {
+export type RouteContextModel<TType extends unknown> = {
   basename?: string;
   location?: LocationModel<TType>;
   redirectTo?: string;
 };
 
-export type LocationUpdateModel<TTypeNext = Record<string, unknown>> = LocationModel<TTypeNext> & {
+export type LocationUpdateModel<TTypeNext extends unknown> = LocationModel<TTypeNext> & {
   root?: string | boolean | number;
 };

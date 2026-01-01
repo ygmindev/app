@@ -1,18 +1,17 @@
-import { type AnimatableTextRefModel } from '@lib/frontend/animation/components/AnimatableText/AnimatableText.models';
 import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { _Icon } from '@lib/frontend/core/components/Icon/_Icon';
 import { ICON_FONT_SIZE_OFFSET } from '@lib/frontend/core/components/Icon/Icon.constants';
 import { type IconPropsModel } from '@lib/frontend/core/components/Icon/Icon.models';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { type RTFCModel } from '@lib/frontend/core/core.models';
+import { type SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { textStyler } from '@lib/frontend/style/utils/styler/textStyler/textStyler';
 
-const AnimatableIcon = animatable({ Component: _Icon });
+const _AnimatableIcon = animatable({ Component: _Icon });
 
-export const Icon: RTFCModel<AnimatableTextRefModel, IconPropsModel> = ({ iconText, ...props }) => {
+export const Icon: SFCModel<IconPropsModel> = ({ iconText, ...props }) => {
   const { computedStyles, styles } = useStyles({
     props,
     stylers: [
@@ -26,7 +25,7 @@ export const Icon: RTFCModel<AnimatableTextRefModel, IconPropsModel> = ({ iconTe
       },
     ],
   });
-  const Component = props.animation ? AnimatableIcon : _Icon;
+  const Component = props.animation ? _AnimatableIcon : _Icon;
   return iconText ? (
     <Wrapper style={styles}>
       <Component

@@ -1,3 +1,4 @@
-import { type ProductImplementationModel } from '@lib/model/commerce/Product/ProductImplementation/ProductImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type ProductModel } from '@lib/model/commerce/Product/Product.models';
 
-export type UseProductResourceModel = ProductImplementationModel;
+export type UseProductResourceModel = UseResourceModel<ProductModel>;

@@ -3,29 +3,28 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { ButtonGroup } from '@lib/frontend/core/components/ButtonGroup/ButtonGroup';
 import { Chip } from '@lib/frontend/core/components/Chip/Chip';
 import { ModalButton } from '@lib/frontend/core/components/ModalButton/ModalButton';
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type WorkflowButtonsPropsModel } from '@lib/frontend/orchestrator/components/WorkflowButtons/WorkflowButtons.models';
-import { WorkflowPage } from '@lib/frontend/orchestrator/pages/WorkflowPage/WorkflowPage';
 import { useJobResource } from '@lib/frontend/orchestrator/hooks/useJobResource/useJobResource';
 import { ORCHESTRATOR } from '@lib/frontend/orchestrator/orchestrator.constants';
+import { WorkflowPage } from '@lib/frontend/orchestrator/pages/WorkflowPage/WorkflowPage';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { JOB_STATUS } from '@lib/model/orchestrator/Job/Job.constants';
 
 export const WorkflowButtons: LFCModel<WorkflowButtonsPropsModel> = ({
   onStatusChange,
-  status = JOB_STATUS.UNKNOWN,
+  status,
   workflow,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([ORCHESTRATOR]);
   const { create, remove } = useJobResource();
-  return (
+  return workflow ? (
     <Wrapper
       {...wrapperProps}
       isAlign
@@ -59,9 +58,6 @@ export const WorkflowButtons: LFCModel<WorkflowButtonsPropsModel> = ({
         />
       </ButtonGroup>
 
-      <Text isBold>{workflow.name}</Text>
-      <Chip>{t('orchestrator:workflow')}</Chip>
-
       <Chip
         color={
           status === JOB_STATUS.SUCCESS
@@ -88,5 +84,7 @@ export const WorkflowButtons: LFCModel<WorkflowButtonsPropsModel> = ({
         {`${t('orchestrator:status')}: ${status}`}
       </Chip>
     </Wrapper>
+  ) : (
+    <></>
   );
 };

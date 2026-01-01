@@ -1,4 +1,3 @@
-import { type AnimatableTextRefModel } from '@lib/frontend/animation/components/AnimatableText/AnimatableText.models';
 import { type _IconPropsModel } from '@lib/frontend/core/components/Icon/_Icon.models';
 import {
   FONTAWESOME_ICONS,
@@ -7,7 +6,7 @@ import {
   MATERIAL_ICONS,
   OCTICON_ICONS,
 } from '@lib/frontend/core/components/Icon/Icon.constants';
-import { type RTFCModel } from '@lib/frontend/core/core.models';
+import { type SFCModel } from '@lib/frontend/core/core.models';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import { useMemo } from 'react';
@@ -17,11 +16,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 
-export const _Icon: RTFCModel<AnimatableTextRefModel, _IconPropsModel> = ({
-  icon,
-  ref,
-  ...props
-}) => {
+export const _Icon: SFCModel<_IconPropsModel> = ({ icon, ...props }) => {
   const { styles } = useStyles<_IconPropsModel, TextStyleModel>({ props });
   if (icon) {
     const Component = useMemo(
@@ -43,7 +38,6 @@ export const _Icon: RTFCModel<AnimatableTextRefModel, _IconPropsModel> = ({
         <Component
           {...props}
           name={(ICONS as Record<string, string>)[icon] ?? ''}
-          ref={ref as never}
           style={styles as IconProps['style']}
         />
       )

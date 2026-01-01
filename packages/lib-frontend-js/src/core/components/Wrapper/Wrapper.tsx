@@ -1,4 +1,6 @@
-import { AnimatableView } from '@lib/frontend/animation/components/AnimatableView/AnimatableView';
+import { animatable } from '@lib/frontend/animation/utils/animatable/animatable';
+import { PressableView } from '@lib/frontend/core/components/PressableView/PressableView';
+import { ScrollView } from '@lib/frontend/core/components/ScrollView/ScrollView';
 import { View } from '@lib/frontend/core/components/View/View';
 import {
   type WrapperPropsModel,
@@ -10,8 +12,12 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import reduce from 'lodash/reduce';
 import { type ReactElement, type ReactNode } from 'react';
-import { Children, cloneElement, createElement, isValidElement, useMemo } from 'react';
+import { Children, cloneElement, isValidElement, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
+
+const AnimatablePressableView = animatable({ Component: PressableView });
+const AnimatableScrollView = animatable({ Component: ScrollView });
+const AnimatableView = animatable({ Component: View });
 
 export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = ({
   animation,
@@ -54,7 +60,37 @@ export const Wrapper: RLFCModel<WrapperRefModel, WrapperPropsModel> = ({
   };
 
   const childrenF = useMemo(() => getChildren(children), [children]);
-  return animation
-    ? createElement(AnimatableView, { ...props, animation, ref, style: styles }, childrenF)
-    : createElement(View, { ...props, ref, style: styles }, childrenF);
+
+  const Component = useMemo(() => {
+    const isScrollable =
+      props.isHorizontalScrollable || props.isVerticalScrollable || props.onScroll;
+    const isPressable = props.onPress || props.onPressIn || props.onPressOut;
+    return animation
+      ? isScrollable
+        ? AnimatableScrollView
+        : isPressable
+          ? AnimatablePressableView
+          : AnimatableView
+      : isScrollable
+        ? ScrollView
+        : isPressable
+          ? PressableView
+          : View;
+  }, [
+    animation,
+    props.isHorizontalScrollable,
+    props.isVerticalScrollable,
+    props.onPress,
+    props.onScroll,
+  ]);
+
+  return (
+    <Component
+      {...props}
+      animation={animation}
+      ref={ref}
+      style={styles}>
+      {childrenF}
+    </Component>
+  );
 };

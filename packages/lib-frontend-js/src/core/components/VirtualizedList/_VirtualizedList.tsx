@@ -1,4 +1,4 @@
-import { getViewParams as getViewParamsScrollable } from '@lib/frontend/core/components/View/_View.scrollable';
+import { getScrollViewParams } from '@lib/frontend/core/components/ScrollView/_ScrollView';
 import {
   type _VirtualizedListPropsModel,
   type _VirtualizedListRefModel,
@@ -38,7 +38,7 @@ const _FlatList = <TType extends WithIdModel>({
   );
 };
 
-const viewParams = getViewParamsScrollable<
+const viewParams = getScrollViewParams<
   Omit<_VirtualizedListPropsModel<WithIdModel>, 'render'> & {
     renderItem: FlatListProps<WithIdModel>['renderItem'];
   },

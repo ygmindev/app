@@ -1,3 +1,4 @@
-import { type ChatImplementationModel } from '@lib/model/chat/Chat/ChatImplementation/ChatImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type UtilityModel } from '@lib/model/admin/Utility/Utility.models';
 
-export type UseChatResourceModel = ChatImplementationModel;
+export type UseChatResourceModel = UseResourceModel<UtilityModel>;

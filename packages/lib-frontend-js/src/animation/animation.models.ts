@@ -10,17 +10,13 @@ export type AnimationModel<
   TStyle extends StyleModel = ViewStyleModel,
   TStates extends AnimationStatesModel<TStyle> = AnimationStatesModel<TStyle>,
 > = {
+  animate?: TStyle;
   delay?: number;
   duration?: number;
-  isInfinite?: boolean;
   isInitial?: boolean;
+  repeat?: number;
   states?: TStates;
   onEnd?(): void;
-};
-
-export type AnimatableRefModel<TStyle extends StyleModel = ViewStyleModel> = {
-  to(params: TStyle): void;
-  toState(params: ELEMENT_STATE): void;
 };
 
 export type AnimationStatesModel<TStyle extends StyleModel = ViewStyleModel> = {

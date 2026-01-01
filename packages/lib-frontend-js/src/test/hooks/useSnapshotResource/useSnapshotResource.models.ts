@@ -1,3 +1,4 @@
-import { type SnapshotImplementationModel } from '@lib/model/test/Snapshot/SnapshotImplementation/SnapshotImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type SnapshotModel } from '@lib/model/test/Snapshot/Snapshot.models';
 
-export type UseSnapshotResourceModel = SnapshotImplementationModel;
+export type UseSnapshotResourceModel = UseResourceModel<SnapshotModel>;

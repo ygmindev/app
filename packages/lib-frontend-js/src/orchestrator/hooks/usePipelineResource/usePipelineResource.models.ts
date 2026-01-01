@@ -1,3 +1,4 @@
-import { type PipelineImplementationModel } from '@lib/model/orchestrator/Pipeline/PipelineImplementation/PipelineImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type PipelineModel } from '@lib/model/orchestrator/Pipeline/Pipeline.models';
 
-export type UsePipelineResourceModel = PipelineImplementationModel;
+export type UsePipelineResourceModel = UseResourceModel<PipelineModel>;

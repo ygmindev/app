@@ -6,4 +6,4 @@ export type PathMatchParamsModel = {
   to?: string;
 };
 
-export type UseRouterModel<TType = object> = _UseRouterModel;
+export type UseRouterModel<TType extends unknown> = _UseRouterModel<TType>;

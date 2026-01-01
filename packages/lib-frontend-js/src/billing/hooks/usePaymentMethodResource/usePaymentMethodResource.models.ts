@@ -1,3 +1,4 @@
-import { type PaymentMethodImplementationModel } from '@lib/model/billing/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 
-export type UsePaymentMethodResourceModel = PaymentMethodImplementationModel;
+export type UsePaymentMethodResourceModel = UseResourceModel<PaymentMethodModel>;

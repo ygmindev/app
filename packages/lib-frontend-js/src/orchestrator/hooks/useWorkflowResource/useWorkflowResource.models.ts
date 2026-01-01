@@ -1,3 +1,4 @@
-import { type WorkflowImplementationModel } from '@lib/model/orchestrator/Workflow/WorkflowImplementation/WorkflowImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type WorkflowModel } from '@lib/model/orchestrator/Workflow/Workflow.models';
 
-export type UseWorkflowResourceModel = WorkflowImplementationModel;
+export type UseWorkflowResourceModel = UseResourceModel<WorkflowModel>;

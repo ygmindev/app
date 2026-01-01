@@ -1,3 +1,5 @@
-import { type TestableRelatedResourceImplementationModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResourceImplementation/TestableRelatedResourceImplementation.models';
+import { type UseResourceModel } from '@lib/frontend/resource/hooks/useResource/useResource.models';
+import { type TestableRelatedResourceModel } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.models';
 
-export type UseTestableRelatedResourceResourceModel = TestableRelatedResourceImplementationModel;
+export type UseTestableRelatedResourceResourceModel =
+  UseResourceModel<TestableRelatedResourceModel>;

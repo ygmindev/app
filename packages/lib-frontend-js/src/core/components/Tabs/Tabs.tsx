@@ -7,10 +7,10 @@ import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constan
 import { Chip } from '@lib/frontend/core/components/Chip/Chip';
 import { Divider } from '@lib/frontend/core/components/Divider/Divider';
 import { Icon } from '@lib/frontend/core/components/Icon/Icon';
+import { SCROLL_TYPE } from '@lib/frontend/core/components/ScrollView/ScrollView.constants';
 import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
 import { type TabModel, type TabsPropsModel } from '@lib/frontend/core/components/Tabs/Tabs.models';
 import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
-import { SCROLL_TYPE } from '@lib/frontend/core/components/View/View.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
 import { DIRECTION } from '@lib/frontend/core/core.constants';
