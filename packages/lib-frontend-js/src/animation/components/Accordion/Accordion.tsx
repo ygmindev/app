@@ -60,6 +60,7 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
           icon={icon}
           image={image}
           leftElement={leftElement}
+          mVertical={THEME_SIZE.SMALL}
           onPress={handleToggle}
           rightElement={(isActiveF) => (
             <Wrapper
@@ -95,7 +96,7 @@ export const Accordion: LFCModel<AccordionPropsModel> = ({
           height={theme.shape.height[THEME_SIZE.MEDIUM]}
           icon={icon}
           image={image}
-          // leftElement={leftElement}
+          mVertical={THEME_SIZE.SMALL}
           title={title}
         />
       )}

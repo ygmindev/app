@@ -19,7 +19,7 @@ export const WORKFLOW_RESOURCE_PARAMS = {
       id: 'steps',
     },
     {
-      fields: [{ id: 'key' }, { id: 'isOptional' }],
+      fields: [{ id: 'key' }, { id: 'isOptional' }, { id: 'type' }],
       id: 'prompts',
     },
   ],

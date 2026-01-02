@@ -17,7 +17,6 @@ import { type WorkflowPagePropsModel } from '@lib/frontend/orchestrator/pages/Wo
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { LOG_MESSAGE_TYPE } from '@lib/model/logging/LogMessage/LogMessage.constants';
 import { JOB_STATUS } from '@lib/model/orchestrator/Job/Job.constants';
 import { type JobModel } from '@lib/model/orchestrator/Job/Job.models';
@@ -107,7 +106,6 @@ export const WorkflowPage: LFCModel<WorkflowPagePropsModel> = ({ ...props }) => 
                       return { element, id: v.key };
                     })}
                     onSubmit={handleSubmit}
-                    submitColor={THEME_COLOR.SUCCESS}
                     submitIcon="play"
                     submitLabel={t('orchestrator:start', { value: workflow.name })}
                   />

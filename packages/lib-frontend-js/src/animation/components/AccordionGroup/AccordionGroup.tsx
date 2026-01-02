@@ -25,7 +25,7 @@ export const AccordionGroup: LFCModel<AccordionGroupPropsModel> = ({
       s>
       {accordions?.map(({ element, id }) =>
         cloneElement(element, {
-          // isExpandable: valueControlled === id ? false : undefined,
+          isExpandable: valueControlled === id ? false : undefined,
           key: id,
           onChange: (v) => valueControlledSet(v ? id : undefined),
           value: element.props.value ?? (valueControlled === id ? ELEMENT_STATE.ACTIVE : undefined),

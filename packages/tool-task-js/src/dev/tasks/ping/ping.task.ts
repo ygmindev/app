@@ -6,7 +6,7 @@ import { type PingModel, type PingParamsModel } from '@tool/task/dev/tasks/ping/
 export const ping = buildTask<PingParamsModel, PingModel>({
   task: async ({ test }) => {
     await sleep(5000);
-    logger.info(`@@@ ping5: ${test}`);
+    logger.info(`@@@ ping2: ${test}`);
     return { message: 'success' };
   },
 });

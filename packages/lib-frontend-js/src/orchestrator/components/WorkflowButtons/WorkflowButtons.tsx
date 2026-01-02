@@ -67,7 +67,6 @@ export const WorkflowButtons: RLFCModel<WorkflowButtonsRefModel, WorkflowButtons
       s>
       <ButtonGroup type={BUTTON_TYPE.INVISIBLE}>
         <Button
-          color={THEME_COLOR.SUCCESS}
           elementState={
             status === JOB_STATUS.RUNNING || status === JOB_STATUS.STARTED
               ? ELEMENT_STATE.DISABLED
