@@ -50,21 +50,18 @@ const vitePluginBarrel = (barrelFiles: BundleConfigModel['barrelFiles'] = []): P
   const resolvedVirtualModuleIds = virtualModuleIds.map((v) => '\0' + v);
   return {
     load(id: string) {
-      const i = resolvedVirtualModuleIds.findIndex((v) => v === id);
-      if (i >= 0) {
-        logger.progress(`[vite-plugin-barrel] exporting ${barrelFiles[i][1].outPathname}`);
-        return barrelFiles[i][0].map((v) => `export * from '${v}';`).join('\n');
+      const idx = resolvedVirtualModuleIds.findIndex((v) => v === id);
+      if (idx >= 0) {
+        logger.progress(`[vite-plugin-barrel] exporting ${barrelFiles[idx][1].outPathname}`);
+        return barrelFiles[idx][0].map((v) => `export * from '${v}';`).join('\n');
       }
     },
 
     name: 'vite-plugin-barrel',
 
     resolveId(id: string) {
-      const i = virtualModuleIds.findIndex((v) => v === id);
-      if (i >= 0) {
-        return resolvedVirtualModuleIds[i];
-      }
-      return null;
+      const idx = virtualModuleIds.findIndex((v) => v === id);
+      if (idx >= 0) return resolvedVirtualModuleIds[idx];
     },
   };
 };
@@ -91,8 +88,8 @@ const vitePluginPreBundle = (params: BundleConfigModel['preBundle'] = []): Plugi
 
     async handleHotUpdate({ file }) {
       const { nodeBuild } = await import('@tool/task/node/tasks/nodeBuild/nodeBuild.task');
-      const i = inputs.findIndex((v) => v.some(file.includes));
-      i >= 0 && (await nodeBuild(params[i]));
+      const idx = inputs.findIndex((v) => v.some(file.includes));
+      idx >= 0 && (await nodeBuild(params[idx]));
     },
 
     name: 'vite-plugin-prebundle',
@@ -274,7 +271,7 @@ export const _bundle = ({
     ...(preBundle ?? []),
     ...(barrelFiles?.map((v) => {
       const { main } = fileInfo(v[1].outPathname);
-      return { entryFiles: { [main]: `virtual:${main}` } };
+      return { entryFiles: { [main]: `virtual:${main}` }, watch: v[0] };
     }) ?? []),
   ];
 

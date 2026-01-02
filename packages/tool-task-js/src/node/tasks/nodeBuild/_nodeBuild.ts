@@ -10,7 +10,11 @@ export const _nodeBuild = async ({
   entryFiles,
   format,
   outDir,
+  watch,
 }: _NodeBuildParamsModel): Promise<_NodeBuildModel> => {
-  const config = bundleConfig.config({ entryFiles, format, outDir }, MERGE_STRATEGY.DEEP_PREPEND);
+  const config = bundleConfig.config(
+    { entryFiles, format, outDir, watch },
+    MERGE_STRATEGY.DEEP_PREPEND,
+  );
   await build({ ...config, configFile: false });
 };

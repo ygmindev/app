@@ -13,7 +13,7 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
   Component,
   stylers,
 }: _AnimatableParamsModel<TProps, TStyle>): _AnimatableModel<TProps, TStyle> => {
-  const ComponentF = motion(Component);
+  const ComponentF = motion.create(Component);
 
   const Animatable: _AnimatableModel<TProps, TStyle> = (props) => {
     const { styles } = useStyles<TProps, TStyle>({ props, stylers });

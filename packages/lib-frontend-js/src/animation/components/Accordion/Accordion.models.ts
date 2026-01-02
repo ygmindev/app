@@ -8,6 +8,7 @@ export type AccordionPropsModel = ChildrenPropsModel &
   SizablePropsModel &
   ValuePropsModel<ELEMENT_STATE> &
   Omit<PressableTitlePropsModel, 'border' | 'children' | 'onPress'> & {
+    isExpandable?: boolean;
     isTransparent?: boolean;
     rightTooltip?: AsyncTextModel;
   };

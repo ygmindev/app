@@ -10,12 +10,7 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { APP } from '@lib/shared/app/app.constants';
 
-export const WorkflowTitle: FCModel<WorkflowTitlePropsModel> = ({
-  onStatusChange,
-  status,
-  workflow,
-  ...props
-}) => {
+export const WorkflowTitle: FCModel<WorkflowTitlePropsModel> = ({ status, workflow, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { push } = useRouter();
   return workflow ? (
@@ -34,7 +29,6 @@ export const WorkflowTitle: FCModel<WorkflowTitlePropsModel> = ({
           isAlign
           isRow>
           <WorkflowButtons
-            onStatusChange={onStatusChange}
             status={status}
             workflow={workflow}
           />

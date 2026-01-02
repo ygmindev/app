@@ -57,7 +57,6 @@ export const databaseConfig = new Config<DatabaseConfigModel, _DatabaseConfigMod
         User,
         Utility,
         Vendor,
-        Job,
         ...(process.env.NODE_ENV !== 'production'
           ? [Snapshot, TestableEntityResource, TestableEmbeddedResource, TestableRelatedResource]
           : []),
