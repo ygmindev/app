@@ -263,7 +263,11 @@ export const _bundle = ({
         : Object.values(entryFiles)
     : undefined;
 
-  const watchF = filterNil([...(watch ?? []), ...(entries ?? [])]);
+  const watchF = filterNil([
+    ...(watch ?? []),
+    ...(entries ?? []),
+    ...(barrelFiles?.map((v) => v[1].outPathname) ?? []),
+  ]);
 
   const packagePaths = rootDirs?.map((path) => joinPaths([path, 'package.json']));
 

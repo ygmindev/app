@@ -7,6 +7,7 @@ import { PLATFORM } from '@lib/shared/platform/platform.constants';
 export const bundleConfig = configBase.extend(() => {
   const { taskExtension, tasksPathname, workflowExtension, workflowsPathname } =
     taskConfig.params();
+
   return {
     barrelFiles: [
       [
