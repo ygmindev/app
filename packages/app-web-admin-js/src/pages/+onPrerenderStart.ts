@@ -1,4 +1,5 @@
-import { prerender } from '@lib/shared/web/utils/prerender/prerender';
-import { type OnPrerenderStartAsync } from 'vike/types';
+import { onPrerender } from '@lib/config/node/framework/onPrerender/onPrerender';
 
-export const onPrerenderStart: OnPrerenderStartAsync = prerender();
+import { databaseConfig } from '../config/database';
+
+export const onPrerenderStart = onPrerender({ database: () => databaseConfig.params() });

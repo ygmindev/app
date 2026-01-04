@@ -13,16 +13,22 @@ export const _withEntity = <TType extends unknown>({
   isDatabase = false,
   isEmbeddable = false,
   name,
-  schemaType = ENTITY_SCHEMA_TYPE.ENTITY,
+  schemaType,
 }: _WithEntityParamsModel<TType> = {}): _WithEntityModel =>
   ((target: TType) => {
     const cls = target as ClassModel;
     const nameF = name ?? (target as ClassModel).name;
-    // schemaType === ENTITY_SCHEMA_TYPE.ENTITY && ObjectType(nameF)(cls);
-    // schemaType === ENTITY_SCHEMA_TYPE.INPUT && InputType(nameF)(cls);
 
-    ObjectType(nameF)(cls);
-    InputType(`${nameF}Input`)(cls);
+    if (schemaType) {
+      switch (schemaType) {
+        case ENTITY_SCHEMA_TYPE.INPUT: {
+          InputType(`${nameF}Input`)(cls);
+          break;
+        }
+      }
+    } else {
+      ObjectType(nameF)(cls);
+    }
 
     let BaseF = target;
     if (isDatabase) {

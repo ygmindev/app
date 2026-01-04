@@ -11,7 +11,7 @@ import {
   SIGN_IN_USERNAME_UPDATE,
 } from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
-import { SIGN_IN_INPUT } from '@lib/model/auth/SignIn/SignInInput/SignInInput.constants';
+import { SIGN_IN_RESOURCE } from '@lib/model/auth/SignIn/SignInInput/SignInInput.constants';
 import { type SignInInputModel } from '@lib/model/auth/SignIn/SignInInput/SignInInput.models';
 import { type SignInUserUpdateModel } from '@lib/model/auth/SignIn/SignInUserUpdate/SignInUserUpdate.models';
 import { type SignInUserUpdateInputModel } from '@lib/model/auth/SignIn/SignInUserUpdateInput/SignInUserUpdateInput.model';
@@ -79,7 +79,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
       const output = await query<SignInModel, { input: SignInInputModel }>({
         fields: ['token', 'isNew', { user: USER_FIELDS }],
         name: SIGN_IN,
-        params: { input: SIGN_IN_INPUT },
+        params: { input: `${SIGN_IN_RESOURCE}Input` },
         variables: { input },
       });
       output && (await signIn(output));
@@ -108,7 +108,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
       const output = await query<SignInModel, { input: SignInInputModel }>({
         fields: ['token', { user: USER_FIELDS }],
         name: SIGN_IN_USERNAME_UPDATE,
-        params: { input: SIGN_IN_INPUT },
+        params: { input: `${SIGN_IN_RESOURCE}Input` },
         variables: { input },
       });
       output && (await signIn(output));

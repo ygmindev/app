@@ -20,6 +20,7 @@ export const _handleCleanup = async ({
 
   instance = closeWithGrace({ delay: 1000 }, async ({ err, signal }) => {
     logger.debug(`shutting down due to ${signal} ${err}`);
+    logger.trace(err as Error);
     await handleCleanup();
   });
 

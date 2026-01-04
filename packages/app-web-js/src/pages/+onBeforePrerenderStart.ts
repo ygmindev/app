@@ -1,6 +1,5 @@
-import { preparePrerender } from '@lib/shared/web/utils/preparePrerender/preparePrerender';
-import { type OnBeforePrerenderStartAsync } from 'vike/types';
+import { onBeforePrerender } from '@lib/config/node/framework/onBeforePrerender/onBeforePrerender';
 
-import { routes } from '../routes';
+import { routes } from '../config/routes';
 
-export const onBeforePrerenderStart: OnBeforePrerenderStartAsync = preparePrerender({ routes });
+export const onBeforePrerenderStart = onBeforePrerender({ routes });

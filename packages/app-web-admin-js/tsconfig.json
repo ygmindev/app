@@ -1,4 +1,4 @@
 {
     "extends": "../../tsconfig.json",
-    "include": ["../lib-config-js/src/node/typescript/types/index.d.ts", "src/**/*", "tests/**/*", "*.ts", "*.js"]
+    "include": ["../lib-config-js/src/node/typescript/types/index.d.ts", "src/**/*", "tests/**/*", "*.ts", "*.js", "../app-web-orchestrator-js/src/pages/+onBeforeRenderClient.tsx", "../app-web-orchestrator-js/src/pages/+onBeforeRenderHtml.tsx", "../app-web-orchestrator-js/src/pages/+onPrerenderStart.ts"]
 }

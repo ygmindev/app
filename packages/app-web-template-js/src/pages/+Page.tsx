@@ -1,6 +1,15 @@
 import { type FCModel } from '@lib/frontend/core/core.models';
-import { Router } from '@lib/frontend/route/containers/Router/Router';
+import { Root } from '@lib/frontend/root/containers/Root/Root';
+import { useRootContext } from '@lib/frontend/root/hooks/useRootContext/useRootContext';
 
-import { routes } from '../routes';
+import { routes } from '../config/routes';
 
-export const Page: FCModel = () => <Router routes={routes} />;
+export const Page: FCModel = () => {
+  const context = useRootContext();
+  return (
+    <Root
+      context={context}
+      routes={routes}
+    />
+  );
+};

@@ -11,6 +11,7 @@ import { pick } from '@lib/shared/core/utils/pick/pick';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { QUERY } from '@lib/shared/query/query.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
+
 export const onAfterServer = ({ routes }: OnAfterServerParamsModel): OnAfterServerModel =>
   _onAfterServer({
     render: async (params) => {

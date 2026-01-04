@@ -119,7 +119,7 @@ export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
         documentTitle={{ enabled: false }}
         linking={{
           config: { screens: config?.screens ?? {} },
-          // getPathFromState: (state) => getActivePathname(state as NavigationState),
+          getPathFromState: (state) => getActivePathname(state as NavigationState),
           prefixes: process.env.ENV_PLATFORM === 'web' ? [APP_URI] : [],
         }}
         ref={navigationRef}>

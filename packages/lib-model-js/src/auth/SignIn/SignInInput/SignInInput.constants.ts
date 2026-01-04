@@ -1,1 +1,1 @@
-export const SIGN_IN_INPUT = 'SignInInput';
+export const SIGN_IN_RESOURCE = 'SignIn';
