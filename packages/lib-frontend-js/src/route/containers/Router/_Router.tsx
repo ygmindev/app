@@ -1,4 +1,3 @@
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { Route } from '@lib/frontend/route/components/Route/Route';
 import { type _RouterPropsModel } from '@lib/frontend/route/containers/Router/_Router.models';
@@ -115,11 +114,7 @@ export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
         frame: { height: 0, width: 0, x: 0, y: 0 },
         insets: { bottom: 0, left: 0, right: 0, top: 0 },
       }}
-      style={{ backgroundColor: 'blue', display: 'flex', flex: 1, flexDirection: 'column' }}>
-      <Wrapper
-        backgroundColor="red"
-        flex
-      />
+      style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
       <NavigationContainer
         documentTitle={{ enabled: false }}
         linking={{

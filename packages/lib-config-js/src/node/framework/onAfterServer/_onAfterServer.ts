@@ -1,9 +1,15 @@
-import { type _OnAfterServerModel } from '@lib/config/node/framework/onAfterServer/_onAfterServer.models';
-// import { useConfig } from 'vike-react/useConfig';
+import {
+  type _OnAfterServerModel,
+  type _OnAfterServerParamsModel,
+} from '@lib/config/node/framework/onAfterServer/_onAfterServer.models';
+import { useConfig } from 'vike-react/useConfig';
 
-export const _onAfterServer: _OnAfterServerModel = async (params) => {
-  params.enableEagerStreaming = true;
-  // const config = useConfig();
-  // params.getStyleSheet && config({ Head: params.getStyleSheet() });
-  return params;
-};
+export const _onAfterServer =
+  ({ render }: _OnAfterServerParamsModel): _OnAfterServerModel =>
+  async (params) => {
+    const config = useConfig();
+    const result = await render(params);
+    result.enableEagerStreaming = true;
+    result.getStyleSheet && config({ Head: params.getStyleSheet?.() });
+    return result;
+  };

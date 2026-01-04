@@ -9,16 +9,17 @@ import { merge } from '@lib/shared/core/utils/merge/merge';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { STATE } from '@lib/shared/state/state.constants';
 
-export const onBeforeClient =
-  ({ routes }: OnBeforeClientParamsModel): OnBeforeClientModel =>
-  async (params) => {
-    const { context } = params;
-    params.context = merge([
-      {
-        [LOCALE]: { i18n: context?.[LOCALE]?.i18n ?? internationalizeConfig.config() },
-        [STATE]: { cookies },
-      },
-      context,
-    ]);
-    return _onBeforeClient(params);
-  };
+export const onBeforeClient = ({ routes }: OnBeforeClientParamsModel): OnBeforeClientModel =>
+  _onBeforeClient({
+    render: async (params) => {
+      const { context } = params;
+      params.context = merge([
+        {
+          [LOCALE]: { i18n: context?.[LOCALE]?.i18n ?? internationalizeConfig.config() },
+          [STATE]: { cookies },
+        },
+        context,
+      ]);
+      return params;
+    },
+  });

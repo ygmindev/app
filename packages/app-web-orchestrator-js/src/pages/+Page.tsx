@@ -1,18 +1,15 @@
 import { type FCModel } from '@lib/frontend/core/core.models';
-import { View } from 'react-native';
+import { Root } from '@lib/frontend/root/containers/Root/Root';
+import { useRootContext } from '@lib/frontend/root/hooks/useRootContext/useRootContext';
 
-export const Page: FCModel = () => (
-  <View style={{ backgroundColor: 'red', flex: 1, height: 500, width: 500 }} />
-);
+import { routes } from '../config/routes';
 
-// import { type FCModel } from '@lib/frontend/core/core.models';
-// import { PageContainer } from '@lib/frontend/framework/containers/PageContainer/PageContainer';
-// import { Root } from '@lib/frontend/root/containers/Root/Root';
-
-// import { routes } from '../config/routes';
-
-// export const Page: FCModel = () => (
-//   <PageContainer>
-//     <Root routes={routes} />
-//   </PageContainer>
-// );
+export const Page: FCModel = () => {
+  const context = useRootContext();
+  return (
+    <Root
+      context={context}
+      routes={routes}
+    />
+  );
+};

@@ -1,3 +1,9 @@
-import { type _OnBeforeServerModel } from '@lib/config/node/framework/onBeforeServer/_onBeforeServer.models';
+import {
+  type _OnBeforeServerModel,
+  type _OnBeforeServerParamsModel,
+} from '@lib/config/node/framework/onBeforeServer/_onBeforeServer.models';
 
-export const _onBeforeServer: _OnBeforeServerModel = async (params) => params;
+export const _onBeforeServer =
+  ({ render }: _OnBeforeServerParamsModel): _OnBeforeServerModel =>
+  async (params) =>
+    render(params);

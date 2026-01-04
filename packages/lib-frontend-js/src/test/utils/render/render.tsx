@@ -12,10 +12,17 @@ export const render = async (params: RenderParamsModel): Promise<RenderModel> =>
   const i18n = internationalizeConfig.config();
   return _render({
     ...params,
-    Wrapper: ({ children }) => (
-      <Root context={{ [LOCALE]: { i18n, lang: i18n.language } }}>
-        <Router routes={[{ element: children ?? undefined, pathname: '/' }]} />
-      </Root>
-    ),
+    Wrapper: ({ children }) => {
+      return (
+        <Root context={{ [LOCALE]: { i18n, lang: i18n.language } }}>
+          <Router routes={[{ element: children ?? undefined, pathname: '/' }]} />
+        </Root>
+      );
+    },
+    // Wrapper: ({ children }) => (
+    //   <Root context={{ [LOCALE]: { i18n, lang: i18n.language } }}>
+    //     <Router routes={[{ element: children ?? undefined, pathname: '/' }]} />
+    //   </Root>
+    // ),
   });
 };
