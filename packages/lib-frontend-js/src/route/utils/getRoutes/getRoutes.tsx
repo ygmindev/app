@@ -1,6 +1,5 @@
 import { AppContainer } from '@lib/frontend/app/containers/AppContainer/AppContainer';
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
-import { AppHomePage } from '@lib/frontend/app/pages/AppHomePage/AppHomePage';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
 import { devRoutes } from '@lib/frontend/dev/dev.routes';
 import { PingPage } from '@lib/frontend/http/pages/PingPage/PingPage';
@@ -22,25 +21,8 @@ import { trimRoutes } from '@lib/shared/route/utils/trimRoutes/trimRoutes';
 export const getRoutes = (routes: GetRoutesParamsModel = []): GetRoutesModel => {
   let routesF: Array<RouteModel> = trimRoutes([
     {
-      element: <AppHomePage />,
-      pathname: '/',
-    },
-
-    {
       element: <PingPage />,
       pathname: PING,
-      prerender: true,
-    },
-
-    {
-      element: <PingPage />,
-      pathname: 'ping1',
-      prerender: true,
-    },
-
-    {
-      element: <PingPage />,
-      pathname: 'ping2',
       prerender: true,
     },
 

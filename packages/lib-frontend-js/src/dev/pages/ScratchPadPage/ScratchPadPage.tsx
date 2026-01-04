@@ -14,7 +14,9 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
       <Tabs
         onChange={tabChange}
         tabs={[{ id: 'tab1' }, { id: 'tab2' }]}
-        value={tab}></Tabs>
+        value={tab}
+      />
+
       {tab === 'tab1' ? <Text>tab1</Text> : <Text>tab2</Text>}
     </MainLayout>
   );

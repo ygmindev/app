@@ -1,5 +1,5 @@
 import { type FCPropsModel } from '@lib/frontend/core/core.models';
-import { RootContext } from '@lib/frontend/root/providers/ContextProvider/ContextProvider';
+import { RootContext } from '@lib/frontend/root/containers/ContextProvider/ContextProvider';
 import { type RedirectPropsModel } from '@lib/frontend/route/components/Redirect/Redirect.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';

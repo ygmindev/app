@@ -15,6 +15,7 @@ import { merge } from '@lib/shared/core/utils/merge/merge';
 import { useMemo } from 'react';
 
 export const Slide: LFCModel<SlidePropsModel> = ({
+  animation: animationBase,
   children,
   elementState = ELEMENT_STATE.ACTIVE,
   isBack = false,
@@ -25,13 +26,14 @@ export const Slide: LFCModel<SlidePropsModel> = ({
   const [width] = useStore('app.dimension.width');
   const animation: AnimationModel = useMemo(
     () => ({
+      ...animationBase,
       duration: theme.animation.transition,
       states: merge([
         ANIMATION_STATES_APPEARABLE,
         ANIMATION_STATES_SLIDABLE_HORIZONTAL({ isBack, width }),
       ]),
     }),
-    [width, theme, isBack],
+    [animationBase, width, theme, isBack],
   );
   return (
     <Wrapper

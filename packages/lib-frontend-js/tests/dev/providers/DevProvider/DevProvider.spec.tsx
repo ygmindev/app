@@ -1,5 +1,5 @@
-import { DevProvider } from '@lib/frontend/dev/providers/DevProvider/DevProvider';
-import { type DevProviderPropsModel } from '@lib/frontend/dev/providers/DevProvider/DevProvider.models';
+import { DevProvider } from '@lib/frontend/dev/containers/DevProvider/DevProvider';
+import { type DevProviderPropsModel } from '@lib/frontend/dev/containers/DevProvider/DevProvider.models';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 

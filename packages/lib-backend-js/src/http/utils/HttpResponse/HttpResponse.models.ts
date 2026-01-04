@@ -3,6 +3,7 @@ import { type CookieOptionsModel } from '@lib/shared/http/http.models';
 
 export type HttpResponseParamsModel<TType extends unknown> = HttpMessageParamsModel<TType> & {
   error?: Error;
+  isSilent?: boolean;
   redirectTo?: string;
   statusCode?: number;
 };

@@ -16,7 +16,6 @@ import { type I18nModel } from '@lib/shared/locale/locale.models';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { fastify, type FastifyInstance, type FastifyRequest, type HTTPMethods } from 'fastify';
 import { readFileSync } from 'fs';
-import { type I18NextRequest } from 'i18next-http-middleware';
 import forEach from 'lodash/forEach';
 import toNumber from 'lodash/toNumber';
 
@@ -59,7 +58,7 @@ export class _Server extends Bootstrappable implements _ServerModel {
   }: ApiEndpointModel<TType, TParams>): Promise<void> {
     await this._app.register(async (fastify) =>
       fastify.route({
-        handler: async (req: FastifyRequest & I18NextRequest, rep) => {
+        handler: async (req: FastifyRequest, rep) => {
           const request = new HttpRequest({
             body: req.body as TParams,
             cookies: req.cookies as Record<string, string>,
@@ -84,14 +83,15 @@ export class _Server extends Bootstrappable implements _ServerModel {
 
           const [r, duration] = await timeit(handleRequest, false);
           const status = r.statusCode ?? HTTP_STATUS_CODE.OK;
-          logger.info({
-            duration: duration.toFixed(5),
-            id: request.id,
-            method: request.method,
-            status,
-            timestamp: new DateTime(),
-            url: request.url,
-          });
+          !r.isSilent &&
+            logger.info({
+              duration: duration.toFixed(5),
+              id: request.id,
+              method: request.method,
+              status,
+              timestamp: new DateTime(),
+              url: request.url,
+            });
           await rep.status(status).send(r.body);
         },
         method: method as HTTPMethods,

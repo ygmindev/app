@@ -1,5 +1,3 @@
-import { type OAuthProviderPropsModel } from '@lib/frontend/auth/providers/OAuthProvider/OAuthProvider.models';
-import { OAuthProvider } from '@lib/frontend/auth/providers/OAuthProvider/OAuthProvider';
 import { render } from '@lib/frontend/test/utils/render/render';
 import { withTestComponent } from '@lib/frontend/test/utils/withTestComponent/withTestComponent';
 

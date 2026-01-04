@@ -10,7 +10,7 @@ import { type STATE } from '@lib/shared/state/state.constants';
 export type RootContextModel = {
   [LOCALE]?: LocaleContextModel;
   [QUERY]?: QueryContextModel;
-  [ROUTE]?: RouteContextModel;
+  [ROUTE]?: RouteContextModel<unknown>;
   [STATE]?: RootStateContextModel;
 };
 

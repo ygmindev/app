@@ -13,14 +13,22 @@ export class HttpResponse<TType extends unknown>
   implements HttpResponseModel<TType>
 {
   _error?: Error;
+  _isSilent?: boolean;
   _redirectTo?: string;
   _statusCode?: number;
 
-  constructor({ error, redirectTo, statusCode, ...params }: HttpResponseParamsModel<TType> = {}) {
+  constructor({
+    error,
+    isSilent,
+    redirectTo,
+    statusCode,
+    ...params
+  }: HttpResponseParamsModel<TType> = {}) {
     super({ ...params });
     this.error = error;
     this.redirectTo = redirectTo;
     this.statusCode = statusCode;
+    this.isSilent = isSilent;
   }
 
   setCookie(key: string, value?: string, options?: CookieOptionsModel): void {
@@ -74,5 +82,13 @@ export class HttpResponse<TType extends unknown>
 
   set statusCode(value: number | undefined) {
     this._statusCode = value;
+  }
+
+  get isSilent(): boolean {
+    return this._isSilent ?? false;
+  }
+
+  set isSilent(value: boolean | undefined) {
+    this._isSilent = value;
   }
 }

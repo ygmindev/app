@@ -12,7 +12,6 @@ export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
     if (req.url?.startsWith('/.well-known/')) return next('route');
     next();
   });
-
   const environment = Container.get(Environment);
   if (
     (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&

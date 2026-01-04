@@ -1,6 +1,18 @@
 import { type FCModel } from '@lib/frontend/core/core.models';
-import { Router } from '@lib/frontend/route/containers/Router/Router';
+import { View } from 'react-native';
 
-import { routes } from '../config/routes';
+export const Page: FCModel = () => (
+  <View style={{ backgroundColor: 'red', flex: 1, height: 500, width: 500 }} />
+);
 
-export const Page: FCModel = () => <Router routes={routes} />;
+// import { type FCModel } from '@lib/frontend/core/core.models';
+// import { PageContainer } from '@lib/frontend/framework/containers/PageContainer/PageContainer';
+// import { Root } from '@lib/frontend/root/containers/Root/Root';
+
+// import { routes } from '../config/routes';
+
+// export const Page: FCModel = () => (
+//   <PageContainer>
+//     <Root routes={routes} />
+//   </PageContainer>
+// );

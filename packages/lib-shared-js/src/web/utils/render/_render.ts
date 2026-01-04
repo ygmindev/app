@@ -1,6 +1,6 @@
 import { HttpResponse } from '@lib/backend/http/utils/HttpResponse/HttpResponse';
 import { type CookiesModel } from '@lib/frontend/http/utils/cookies/cookies.models';
-import { SAME_SITE } from '@lib/shared/http/http.constants';
+import { HTTP_STATUS_CODE, SAME_SITE } from '@lib/shared/http/http.constants';
 import { type CookieOptionsModel } from '@lib/shared/http/http.models';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
@@ -15,6 +15,16 @@ import { renderPage } from 'vike/server';
 export const _render = async (request: _RenderParamsModel): Promise<_RenderModel> => {
   const { url } = request;
   const response = new HttpResponse<ReadableStream>();
+
+  if (
+    process.env.NODE_ENV === 'development' &&
+    (url.startsWith('/@') || url.includes('/node_modules/'))
+  ) {
+    response.isSilent = true;
+    response.statusCode = HTTP_STATUS_CODE.NOT_FOUND;
+    return response;
+  }
+
   const isClientSide = url.endsWith('.pageContext.json');
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
     context: isClientSide

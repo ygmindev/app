@@ -1,3 +1,4 @@
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { Route } from '@lib/frontend/route/components/Route/Route';
 import { type _RouterPropsModel } from '@lib/frontend/route/containers/Router/_Router.models';
@@ -29,7 +30,7 @@ const getActivePathname = (state: NavigationState): string => {
 
 const getRouteConfig = (
   route: RouteModel,
-  location?: LocationModel,
+  location?: LocationModel<unknown>,
   depth: number = 0,
 ): {
   config: LinkingOptions<EmptyObjectModel>['config'];
@@ -44,7 +45,6 @@ const getRouteConfig = (
   if (isLeaf) {
     return result;
   } else {
-    // const Stack = createStackNavigator();
     const routesConfig = route.routes?.reduce(
       (r, v) => {
         const fullPathname = v.fullpath ?? v.pathname;
@@ -77,7 +77,7 @@ const getRouteConfig = (
         .split('/')
         .slice(0, depth + 1)
         .join('/');
-      initialRoute = trimPathname(initialRoute);
+      initialRoute && (initialRoute = trimPathname(initialRoute));
       !Object.keys(routesConfig?.screens ?? {}).includes(initialRoute) &&
         (initialRoute = undefined);
     }
@@ -110,11 +110,21 @@ const getRouteConfig = (
 export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
   const { config, element } = getRouteConfig({ pathname: '/', routes }, value?.location);
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider
+      initialMetrics={{
+        frame: { height: 0, width: 0, x: 0, y: 0 },
+        insets: { bottom: 0, left: 0, right: 0, top: 0 },
+      }}
+      style={{ backgroundColor: 'blue', display: 'flex', flex: 1, flexDirection: 'column' }}>
+      <Wrapper
+        backgroundColor="red"
+        flex
+      />
       <NavigationContainer
+        documentTitle={{ enabled: false }}
         linking={{
           config: { screens: config?.screens ?? {} },
-          getPathFromState: (state) => getActivePathname(state as NavigationState),
+          // getPathFromState: (state) => getActivePathname(state as NavigationState),
           prefixes: process.env.ENV_PLATFORM === 'web' ? [APP_URI] : [],
         }}
         ref={navigationRef}>
