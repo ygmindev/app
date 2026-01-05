@@ -16,6 +16,7 @@ import { Store } from '@lib/frontend/state/utils/Store/Store';
 import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
 import { merge } from '@lib/shared/core/utils/merge/merge';
+import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { QUERY } from '@lib/shared/query/query.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
@@ -38,7 +39,6 @@ export const onBeforeServer = ({
 
       // 1. initialize backend
       await initialize({ database });
-      params.graphql = graphql;
 
       // 2. hydrate state from cookies and headers
       const queryClient = new QueryClient();
@@ -97,7 +97,11 @@ export const onBeforeServer = ({
 
       // hydrate context
       params.context = merge([
-        { [QUERY]: { client: queryClient }, [STATE]: { initialState } },
+        {
+          [GRAPHQL]: graphql?.(),
+          [QUERY]: { client: queryClient },
+          [STATE]: { initialState },
+        },
         context,
       ]);
 

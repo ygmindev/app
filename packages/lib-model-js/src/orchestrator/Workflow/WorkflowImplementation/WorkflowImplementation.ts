@@ -19,18 +19,18 @@ const getWorkflows = async (
   const { workflowExtension } = taskConfig.params();
   const pathnames = fromGlobs(
     [fromPackages(`*/src/**/${workflowName ?? '*'}${workflowExtension}`)],
-    {
-      isAbsolute: true,
-    },
+    { isAbsolute: true },
   );
   let workflows = await Promise.all(
     pathnames.map(async (v) => {
-      const { main } = fileInfo(v);
-      const workflow = (await import(/* @vite-ignore */ v)) as { params: BuildWorkflowParamsModel };
+      const { dirname, main } = fileInfo(v);
+      const workflow = (await import(/* @vite-ignore */ `${dirname}/${main}`))[
+        main
+      ] as BuildWorkflowParamsModel;
       return {
+        ...workflow,
         _id: main,
         name: main,
-        params: workflow.params,
         steps: [],
       } as WorkflowModel;
     }),
