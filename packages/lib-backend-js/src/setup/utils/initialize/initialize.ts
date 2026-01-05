@@ -21,6 +21,7 @@ export const initialize = async ({
     const environment = new Environment();
     await environment.initialize();
     Container.set(Environment, environment);
+
     const databaseF = database?.();
     try {
       const pubSub = new PubSub(pubSubConfig.params());

@@ -125,7 +125,7 @@ export class _HttpImplementation implements _HttpImplementationModel {
             let data = line as TResult;
             try {
               ({ data } = JSON.parse(line) as { data: TResult });
-            } catch (_) {}
+            } catch {}
             onMessage(data);
           }
         }

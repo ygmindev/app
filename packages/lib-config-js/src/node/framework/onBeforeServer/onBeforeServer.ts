@@ -29,6 +29,7 @@ import { AppRegistry } from 'react-native-web';
 
 export const onBeforeServer = ({
   database,
+  graphql,
   routes,
 }: OnBeforeServerParamsModel): OnBeforeServerModel =>
   _onBeforeServer({
@@ -37,6 +38,7 @@ export const onBeforeServer = ({
 
       // 1. initialize backend
       await initialize({ database });
+      params.graphql = graphql;
 
       // 2. hydrate state from cookies and headers
       const queryClient = new QueryClient();

@@ -17,7 +17,7 @@ export const routes = getRoutes([
       {
         element: <WorkflowPage />,
         header: true,
-        pathname: WORKFLOW,
+        pathname: `/${WORKFLOW}/:name`,
         previous: `/${APP}/${ORCHESTRATOR}/${HOME}`,
       },
     ],

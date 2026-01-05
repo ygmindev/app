@@ -1,5 +1,3 @@
-import { type WorkflowModel } from '@lib/model/orchestrator/Workflow/Workflow.models';
+import { type WorkflowTitlePropsModel } from '@lib/frontend/orchestrator/components/WorkflowTitle/WorkflowTitle.models';
 
-export type JobHistoryPropsModel = {
-  workflow: Partial<WorkflowModel>;
-};
+export type JobHistoryPropsModel = WorkflowTitlePropsModel & {};

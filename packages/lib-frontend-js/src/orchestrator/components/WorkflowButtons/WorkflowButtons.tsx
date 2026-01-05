@@ -59,6 +59,9 @@ export const WorkflowButtons: RLFCModel<WorkflowButtonsRefModel, WorkflowButtons
     }
   };
 
+  const isCompleted = status === JOB_STATUS.SUCCESS || status === JOB_STATUS.FAIL;
+  const isRunning = status === JOB_STATUS.RUNNING || status === JOB_STATUS.STARTED;
+
   return (
     <Wrapper
       {...wrapperProps}
@@ -67,23 +70,19 @@ export const WorkflowButtons: RLFCModel<WorkflowButtonsRefModel, WorkflowButtons
       s>
       <ButtonGroup type={BUTTON_TYPE.INVISIBLE}>
         <Button
-          elementState={
-            status === JOB_STATUS.RUNNING || status === JOB_STATUS.STARTED
-              ? ELEMENT_STATE.DISABLED
-              : undefined
-          }
-          icon="play"
+          elementState={isRunning ? ELEMENT_STATE.DISABLED : undefined}
+          icon={isCompleted ? 'refresh' : 'play'}
           onPress={handleStart}
-          tooltip={t('orchestrator:start', { value: workflow.name })}
+          tooltip={
+            isCompleted
+              ? t('orchestrator:rerun', { value: workflow.name })
+              : t('orchestrator:start', { value: workflow.name })
+          }
         />
 
         <Button
           color={THEME_COLOR.ERROR}
-          elementState={
-            status == JOB_STATUS.RUNNING || status === JOB_STATUS.STARTED
-              ? undefined
-              : ELEMENT_STATE.DISABLED
-          }
+          elementState={isRunning ? undefined : ELEMENT_STATE.DISABLED}
           icon="stop"
           onPress={async () => workflow._id && remove({ id: [workflow._id] })}
           tooltip={t('orchestrator:stop', { value: 'orchestrator:workflow' })}

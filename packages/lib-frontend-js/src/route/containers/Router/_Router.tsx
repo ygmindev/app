@@ -24,7 +24,8 @@ const getActivePathname = (state: NavigationState): string => {
   if (route.state?.routes) {
     return trimPathname(getActivePathname(route.state as NavigationState));
   }
-  return trimPathname(route.name);
+  const screenName = (route.params as { screen?: string })?.screen ?? route.name;
+  return trimPathname(screenName);
 };
 
 const getRouteConfig = (
@@ -47,6 +48,7 @@ const getRouteConfig = (
     const routesConfig = route.routes?.reduce(
       (r, v) => {
         const fullPathname = v.fullpath ?? v.pathname;
+        const [screenName] = fullPathname.split('/:');
         const childConfig = getRouteConfig(v, location, depth + 1);
         const Component: ComponentType = () => <Route route={v}>{childConfig.element}</Route>;
         return {
@@ -54,13 +56,13 @@ const getRouteConfig = (
             ...(r?.elements ?? []),
             <Stack.Screen
               component={Component}
-              key={fullPathname}
-              name={fullPathname}
+              key={screenName}
+              name={screenName}
             />,
           ],
           screens: {
             ...r?.screens,
-            [fullPathname]: v.routes ? childConfig.config : v.pathname,
+            [screenName]: v.routes ? childConfig.config : v.pathname,
           },
         };
       },

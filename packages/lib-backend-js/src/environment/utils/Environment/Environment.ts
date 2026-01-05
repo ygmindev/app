@@ -18,7 +18,7 @@ export class Environment extends Bootstrappable implements EnvironmentModel {
   public app?: string;
   public environment?: string;
   public overrrides?: Partial<EnvironmentConfigModel>;
-  public variables: Partial<EnvironmentConfigModel> = {};
+  public variables: Partial<EnvironmentConfigModel> = { ...process.env };
 
   constructor(params: EnvironmentParamsModel = {}) {
     super();

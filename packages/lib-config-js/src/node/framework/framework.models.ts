@@ -1,5 +1,6 @@
 import 'vike-react/Config';
 
+import { type GraphqlConfigModel } from '@lib/config/graphql/graphql.models';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { type RootContextModel, type RootContextPropsModel } from '@lib/frontend/root/root.models';
 import { type RouteModel } from '@lib/frontend/route/route.models';
@@ -21,6 +22,7 @@ export type FrameworkRenderParamsModel = RootContextPropsModel & {
   redirectTo?: string;
   routes?: Array<RouteModel>;
   getStyleSheet?(): ReactElement;
+  graphql?(): GraphqlConfigModel;
 };
 
 export type _FrameworkConfigModel = Config & Vike.Config;

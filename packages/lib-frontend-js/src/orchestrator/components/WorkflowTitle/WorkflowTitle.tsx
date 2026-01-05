@@ -9,11 +9,13 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { FONT_FAMILY } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { APP } from '@lib/shared/app/app.constants';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 
 export const WorkflowTitle: FCModel<WorkflowTitlePropsModel> = ({ status, workflow, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { push } = useRouter();
-  return workflow ? (
+  if (!workflow) throw new NotFoundError('workflow');
+  return (
     <PressableTitle
       {...wrapperProps}
       flex
@@ -21,7 +23,7 @@ export const WorkflowTitle: FCModel<WorkflowTitlePropsModel> = ({ status, workfl
       onPress={() =>
         push({
           params: { title: workflow.name, workflow },
-          pathname: `/${APP}/${ORCHESTRATOR}/${WORKFLOW}`,
+          pathname: `/${APP}/${ORCHESTRATOR}/${WORKFLOW}/${workflow.name}`,
         })
       }
       title={
@@ -37,7 +39,5 @@ export const WorkflowTitle: FCModel<WorkflowTitlePropsModel> = ({ status, workfl
         </Wrapper>
       }
     />
-  ) : (
-    <></>
   );
 };

@@ -47,6 +47,7 @@ export const useGraphql = ({ query, ...params }: UseGraphqlParamsModel = {}): Us
       });
       const graphqlError = result?.errors?.at(0)?.extensions as unknown as HttpError;
       if (graphqlError) {
+        console.trace(result);
         throw new HttpError(
           graphqlError.statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
           graphqlError.message,

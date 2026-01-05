@@ -56,6 +56,8 @@ export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
     return active.name;
   };
 
+  const { params } = route;
+
   return {
     back: () => {
       if (navigation.canGoBack()) {
@@ -74,7 +76,9 @@ export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
     isMounted: isFocused,
 
     location: {
-      params: route.params as TType & LocationParamsModel,
+      params: ((params as Record<string, unknown>)?.screen
+        ? (params as Record<string, unknown>)?.params
+        : params) as TType & LocationParamsModel,
       pathname: route.name ?? '',
     },
 

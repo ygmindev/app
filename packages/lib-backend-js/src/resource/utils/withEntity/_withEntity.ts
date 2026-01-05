@@ -28,6 +28,7 @@ export const _withEntity = <TType extends unknown>({
       }
     } else {
       ObjectType(nameF)(cls);
+      InputType(`${nameF}Input`)(cls);
     }
 
     let BaseF = target;

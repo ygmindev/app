@@ -2,6 +2,8 @@ import { type JOB_STATUS } from '@lib/model/orchestrator/Job/Job.constants';
 import { type WorkflowModel } from '@lib/model/orchestrator/Workflow/Workflow.models';
 
 export type WorkflowPagePropsModel = {
+  name?: string;
+
   status?: JOB_STATUS;
 
   workflow?: Partial<WorkflowModel>;

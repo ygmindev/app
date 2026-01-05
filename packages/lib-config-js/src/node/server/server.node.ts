@@ -10,6 +10,6 @@ export const serverConfig = configBase.extend(() => {
   return {
     plugins: [[websocketPlugin, {}]] as Array<[ServerPluginModel<unknown>, unknown]>,
 
-    port: toNumber(environment.variables.SERVER_APP_PORT),
+    port: toNumber(environment.variables.APP_PORT ?? environment.variables.SERVER_APP_PORT),
   };
 });
