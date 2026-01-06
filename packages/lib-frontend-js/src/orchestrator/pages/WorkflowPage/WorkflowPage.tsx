@@ -1,5 +1,6 @@
 import { Accordion } from '@lib/frontend/animation/components/Accordion/Accordion';
 import { AccordionGroup } from '@lib/frontend/animation/components/AccordionGroup/AccordionGroup';
+import { Skeleton } from '@lib/frontend/animation/components/Skeleton/Skeleton';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -22,6 +23,8 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { LOG_MESSAGE_TYPE } from '@lib/model/logging/LogMessage/LogMessage.constants';
 import { JOB_STATUS } from '@lib/model/orchestrator/Job/Job.constants';
 import { type JobModel } from '@lib/model/orchestrator/Job/Job.models';
+import { type WorkflowModel } from '@lib/model/orchestrator/Workflow/Workflow.models';
+import { getEntityResourceFixture } from '@lib/shared/test/utils/getEntityResourceFixture/getEntityResourceFixture';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { useRef, useState } from 'react';
 
@@ -49,6 +52,9 @@ export const WorkflowPage: LFCModel<WorkflowPagePropsModel> = ({ ...props }) => 
   return (
     <DataBoundary
       {...wrapperProps}
+      fallbackData={getEntityResourceFixture<WorkflowModel>({
+        data: () => ({ name: 'test' }),
+      })}
       flex
       id={`workflow-${workflow?.name ?? name}`}
       query={async () =>
@@ -59,12 +65,14 @@ export const WorkflowPage: LFCModel<WorkflowPagePropsModel> = ({ ...props }) => 
           <Wrapper
             flex
             s>
-            <WorkflowButtons
-              onWorkflowStart={handleJobStart}
-              ref={buttonRef}
-              status={status}
-              workflow={data}
-            />
+            <Skeleton>
+              <WorkflowButtons
+                onWorkflowStart={handleJobStart}
+                ref={buttonRef}
+                status={status}
+                workflow={data}
+              />
+            </Skeleton>
 
             <AccordionGroup
               accordions={[

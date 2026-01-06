@@ -33,6 +33,7 @@ export const _animatable = <TProps, TStyle extends StyleModel = ViewStyleModel>(
         delay: transition?.delay,
         duration: transition?.duration,
         repeat: transition?.repeat,
+        repeatType: 'mirror',
       },
     } as unknown as PropsModel<typeof ComponentF>);
   };

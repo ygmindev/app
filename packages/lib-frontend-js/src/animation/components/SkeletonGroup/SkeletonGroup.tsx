@@ -1,28 +1,23 @@
-import { _SkeletonGroup } from '@lib/frontend/animation/components/SkeletonGroup/_SkeletonGroup';
 import { type SkeletonGroupPropsModel } from '@lib/frontend/animation/components/SkeletonGroup/SkeletonGroup.models';
-import { View } from '@lib/frontend/core/components/View/View';
-import { type SFCModel } from '@lib/frontend/core/core.models';
-import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_COLOR_MORE, THEME_ROLE } from '@lib/frontend/style/style.constants';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { type ElementStatePropsModel, type LFCModel } from '@lib/frontend/core/core.models';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { createContext } from 'react';
 
-export const SkeletonGroup: SFCModel<SkeletonGroupPropsModel> = ({ children, ...props }) => {
-  const theme = useTheme();
-  const { styles } = useStyles({ props });
-  const element = <_SkeletonGroup {...props}>{children}</_SkeletonGroup>;
-  return styles.marginTop || styles.marginLeft ? (
-    <>
-      <View
-        style={{
-          backgroundColor: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN],
-          height: styles.marginTop,
-          width: styles.marginLeft,
-        }}
-      />
+export const SkeletonContext = createContext<ElementStatePropsModel>({
+  elementState: ELEMENT_STATE.INACTIVE,
+});
 
-      {element}
-    </>
-  ) : (
-    element
+export const SkeletonGroup: LFCModel<SkeletonGroupPropsModel> = ({
+  children,
+  elementState,
+  ...props
+}) => {
+  const { wrapperProps } = useLayoutStyles({ props });
+  return (
+    <SkeletonContext.Provider value={{ elementState }}>
+      <Wrapper {...wrapperProps}>{children}</Wrapper>
+    </SkeletonContext.Provider>
   );
 };

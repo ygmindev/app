@@ -77,7 +77,7 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = ({
   const childrenF = (
     <Wrapper
       {...wrapperProps}
-      // style={{ flex: 1 }}
+      flex
       testID={process.env.NODE_ENV === 'production' ? undefined : testID}>
       <Dropdown
         {...props}

@@ -1,3 +1,6 @@
-import { type _SkeletonGroupPropsModel } from '@lib/frontend/animation/components/SkeletonGroup/_SkeletonGroup.models';
+import {
+  type ChildrenPropsModel,
+  type ElementStatePropsModel,
+} from '@lib/frontend/core/core.models';
 
-export type SkeletonGroupPropsModel = _SkeletonGroupPropsModel;
+export type SkeletonGroupPropsModel = ChildrenPropsModel & ElementStatePropsModel;

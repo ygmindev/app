@@ -10,6 +10,7 @@ import {
   type AsyncBoundaryPropsModel,
   type ErrorContextModel,
 } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary.models';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useQueryContext } from '@lib/frontend/data/hooks/useQueryContext/useQueryContext';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -79,7 +80,10 @@ export const AsyncBoundary: LFCModel<AsyncBoundaryPropsModel> = ({
           </Button>
         </Appearable>
 
-        <Suspense fallback={<SkeletonGroup>{fallback}</SkeletonGroup>}>{children}</Suspense>
+        <Suspense
+          fallback={<SkeletonGroup elementState={ELEMENT_STATE.LOADING}>{fallback}</SkeletonGroup>}>
+          {children}
+        </Suspense>
       </Wrapper>
     </asyncBoundaryContext.Provider>
   );
