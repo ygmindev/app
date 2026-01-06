@@ -34,8 +34,12 @@ import range from 'lodash/range';
 import { type ReactElement, useCallback, useRef, useState } from 'react';
 
 export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
+  defaultFilters,
   fields,
   implementation,
+  isCreatable = true,
+  isDeletable = true,
+  limit = 10,
   name,
   rootName,
   ...props
@@ -46,8 +50,10 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
   const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
   const { create, getMany, remove, update } = implementation;
-  const [filters, filtersSet] =
-    useState<Record<StringKeyModel<TType>, Array<FilterModel<TType>>>>();
+  const [filters, filtersSet] = useState<
+    Partial<Record<StringKeyModel<TType>, Array<FilterModel<TType>>>> | undefined
+  >(defaultFilters);
+
   const dataBoundaryRef =
     useRef<DataBoundaryRefModel<ResourceOutputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>>>(
       null,
@@ -149,7 +155,10 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
       }}
       flex
       id={name}
-      params={filters ? { filter: Object.values(filters).flat() } : undefined}
+      params={{
+        ...(filters ? { filter: Object.values(filters).flat() } : {}),
+        options: { limit },
+      }}
       query={getMany}
       ref={dataBoundaryRef}>
       {({ data, elementState, reset }) => {
@@ -196,24 +205,26 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
                   {t('core:refresh')}
                 </Button>
 
-                <ModalButton
-                  element={({ onClose }) => (
-                    <ResourceForm<TType, TRoot>
-                      fields={fieldsF}
-                      name={name}
-                      onCancel={onClose}
-                      onSubmit={async (input, root) => {
-                        await handleUpsert(input, root);
-                        await reset?.();
-                        onClose();
-                      }}
-                      rootName={rootName}
-                    />
-                  )}
-                  icon="add"
-                  size={THEME_SIZE.SMALL}>
-                  {t('core:new', { value: name })}
-                </ModalButton>
+                {isCreatable && (
+                  <ModalButton
+                    element={({ onClose }) => (
+                      <ResourceForm<TType, TRoot>
+                        fields={fieldsF}
+                        name={name}
+                        onCancel={onClose}
+                        onSubmit={async (input, root) => {
+                          await handleUpsert(input, root);
+                          await reset?.();
+                          onClose();
+                        }}
+                        rootName={rootName}
+                      />
+                    )}
+                    icon="add"
+                    size={THEME_SIZE.SMALL}>
+                    {t('core:new', { value: name })}
+                  </ModalButton>
+                )}
               </Wrapper>
             </Wrapper>
 
@@ -226,7 +237,7 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
                 isRow>
                 <Button
                   elementState={filters ? undefined : ELEMENT_STATE.DISABLED}
-                  onPress={() => filtersSet(undefined)}
+                  onPress={() => filtersSet(defaultFilters)}
                   size={THEME_SIZE.SMALL}
                   type={BUTTON_TYPE.INVISIBLE}>
                   {filters ? t('resource:clearAllFilters') : t('resource:noFilterApplied')}
@@ -263,9 +274,13 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
               onChange={() => {
                 void reset?.();
               }}
-              onRemove={async ({ _id }) => {
-                void remove({ filter: [{ field: '_id', value: _id }] });
-              }}
+              onRemove={
+                isDeletable
+                  ? async ({ _id }) => {
+                      void remove({ filter: [{ field: '_id', value: _id }] });
+                    }
+                  : undefined
+              }
               onSelect={(v) => selectedRowsSet(v ?? [])}
               ref={tableRef}
               select={TABLE_SELECT_TYPE.MULTIPLE}

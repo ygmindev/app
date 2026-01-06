@@ -10,10 +10,11 @@ import {
 } from '@lib/frontend/core/components/Droppable/Droppable.models';
 import { Pressable } from '@lib/frontend/core/components/Pressable/Pressable';
 import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
-import { View } from '@lib/frontend/core/components/View/View';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type RSFCModel } from '@lib/frontend/core/core.models';
 import { useKeyPress } from '@lib/frontend/core/hooks/useKeyPress/useKeyPress';
 import { TEXT_INPUT_KEY } from '@lib/frontend/data/components/TextInput/TextInput.constants';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { isTypeOf } from '@lib/shared/core/utils/isTypeOf/isTypeOf';
 import { cloneElement, useImperativeHandle, useRef, useState } from 'react';
 
@@ -29,6 +30,7 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = ({
   const [isActive, isActiveSet] = useState<boolean>(false);
   const activatableRef = useRef<ActivatableRefModel>(null);
   const dropdownRef = useRef<DropdownRefModel>(null);
+  const { wrapperProps } = useLayoutStyles({ props });
 
   useImperativeHandle(ref, () => ({
     scrollTo: (position) => dropdownRef.current?.scrollTo(position),
@@ -73,8 +75,9 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = ({
   }
 
   const childrenF = (
-    <View
-      style={{ flex: 1 }}
+    <Wrapper
+      {...wrapperProps}
+      // style={{ flex: 1 }}
       testID={process.env.NODE_ENV === 'production' ? undefined : testID}>
       <Dropdown
         {...props}
@@ -84,7 +87,7 @@ export const Droppable: RSFCModel<DroppableRefModel, DroppablePropsModel> = ({
         ref={dropdownRef}>
         {children}
       </Dropdown>
-    </View>
+    </Wrapper>
   );
 
   return trigger === ACTIVATABLE_TRIGGER.PRESS ? (

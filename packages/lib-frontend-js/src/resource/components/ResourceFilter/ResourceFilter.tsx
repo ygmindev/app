@@ -16,6 +16,7 @@ import { SelectInput } from '@lib/frontend/data/components/SelectInput/SelectInp
 import { TextFilterInput } from '@lib/frontend/data/components/TextFilterInput/TextFilterInput';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type ResourceFilterPropsModel } from '@lib/frontend/resource/components/ResourceFilter/ResourceFilter.models';
+import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FILTER_CONDITION } from '@lib/model/resource/Filter/Filter.constants';
 import { type FilterModel } from '@lib/model/resource/Filter/Filter.models';
@@ -37,6 +38,7 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
 > => {
   const { t } = useTranslation();
   const ref = useRef<DroppableRefModel>(null);
+  const { wrapperProps } = useLayoutStyles({ props });
 
   const getFields = (): Array<FormFieldsModel<TType>> => {
     const labelF = field.label ?? field.id;
@@ -101,6 +103,7 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
     <Droppable
       anchor={(isActive) => (
         <Button
+          {...wrapperProps}
           elementState={isActive || values?.length ? ELEMENT_STATE.ACTIVE : undefined}
           icon="filter"
           rightElement={
@@ -125,7 +128,6 @@ export const ResourceFilter = <TType, TKey extends StringKeyModel<TType>>({
       ref={ref}
       trigger={ACTIVATABLE_TRIGGER.PRESS}>
       <FormContainer
-        {...props}
         cancelLabel={t('resource:clearFilters')}
         fields={getFields()}
         onCancel={
