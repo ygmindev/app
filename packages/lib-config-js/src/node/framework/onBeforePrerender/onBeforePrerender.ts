@@ -25,7 +25,6 @@ const getPrerenderRoutes = (routes?: Array<RouteModel>): Array<RouteModel> => {
       }
       return result;
     }, [] as Array<RouteModel>) ?? [];
-
   return prerenderRoutes;
 };
 

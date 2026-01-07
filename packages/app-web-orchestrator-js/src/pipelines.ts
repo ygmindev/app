@@ -9,7 +9,7 @@ export const pipelines = buildPipelines({
   pipelines: [
     {
       name: WEB_BUILD,
-      workflows: [[webBuild, {}, {}]],
+      workflows: [webBuild],
     },
   ],
 });

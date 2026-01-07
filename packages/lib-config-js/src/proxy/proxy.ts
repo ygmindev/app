@@ -24,8 +24,8 @@ export const proxyConfig = new Config<ProxyConfigModel, _ProxyConfigModel>({
             handler: PROXY_HANDLER.REVERSE_PROXY,
             host: uri({
               host: environment.variables.SERVER_APP_HOST,
-              isProtocol: false,
               port: environment.variables.SERVER_APP_PORT,
+              protocol: false,
             }),
           },
         },
@@ -35,8 +35,8 @@ export const proxyConfig = new Config<ProxyConfigModel, _ProxyConfigModel>({
             handler: PROXY_HANDLER.REVERSE_PROXY,
             host: uri({
               host: environment.variables.SERVER_APP_WEBSOCKET_HOST,
-              isProtocol: false,
               port: environment.variables.SERVER_APP_WEBSOCKET_PORT,
+              protocol: false,
             }),
           },
         },
@@ -46,8 +46,8 @@ export const proxyConfig = new Config<ProxyConfigModel, _ProxyConfigModel>({
             handler: PROXY_HANDLER.REVERSE_PROXY,
             host: uri({
               host: environment.variables.APP_HOST,
-              isProtocol: false,
               port: environment.variables.APP_PORT,
+              protocol: false,
             }),
           },
         },

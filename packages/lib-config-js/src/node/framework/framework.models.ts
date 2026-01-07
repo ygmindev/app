@@ -1,5 +1,6 @@
 import 'vike-react/Config';
 
+import { type _BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { type RootContextModel, type RootContextPropsModel } from '@lib/frontend/root/root.models';
 import { type RouteModel } from '@lib/frontend/route/route.models';
@@ -23,4 +24,4 @@ export type FrameworkRenderParamsModel = RootContextPropsModel & {
   getStyleSheet?(): ReactElement;
 };
 
-export type _FrameworkConfigModel = Config & Vike.Config;
+export type _FrameworkConfigModel = _BundleConfigModel & Config & Vike.Config;

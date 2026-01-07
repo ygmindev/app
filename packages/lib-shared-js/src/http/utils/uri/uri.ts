@@ -4,14 +4,13 @@ import trimStart from 'lodash/trimStart';
 
 export const uri = <TType extends unknown>({
   host = '',
-  isProtocol = true,
   isTrim = true,
   params,
   pathname,
   port,
+  protocol = true,
   subdomain,
 }: UriParamsModel<TType>): string => {
-  let protocol: string = '';
   let uri = `${host}${port ? `:${port}` : ''}${pathname ? (isTrim ? trimPathname(pathname) : pathname) : ''}`;
   if (params) {
     const queryParams = Object.entries(params as unknown as Record<string, string>)
@@ -19,8 +18,12 @@ export const uri = <TType extends unknown>({
       .join('&');
     uri = `${uri}?${queryParams}`;
   }
-  [protocol, uri] = uri.split('://');
+  let protocolF = protocol ? (process.env.SERVER_APP_IS_HTTPS === 'true' ? 'https' : 'http') : '';
+  const uriSplit = uri.split('://');
+  if (uriSplit.length > 1) {
+    [protocolF, uri] = uriSplit;
+  }
   subdomain && (uri = `${subdomain}.${trimStart(uri, 'www.')}`);
-  isProtocol && (uri = `${protocol}://${uri}`);
+  protocol && (uri = `${protocolF}://${uri}`);
   return uri;
 };

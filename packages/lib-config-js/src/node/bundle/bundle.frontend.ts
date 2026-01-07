@@ -79,11 +79,11 @@ export const bundleConfig = configBase.extend(() => {
         // '@uiw/react-markdown-preview',
         // '@uiw/react-md-editor',
         // 'countries-list',
-        'moti',
-        // 'react-use',
+        // 'moti',
         // 'redux-persist',
         // TODO: fix?
-        // process.env.NODE_ENV === 'production' && 'inversify-react',
+        process.env.NODE_ENV === 'production' && 'react-use',
+        process.env.NODE_ENV === 'production' && 'inversify-react',
       ]) ?? [],
 
     transpilePatterns: [
