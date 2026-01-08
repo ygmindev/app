@@ -46,6 +46,7 @@
     "flexsearch": "^0.8.212",
     "formik": "^2.4.6",
     "framer-motion": "^12.23.12",
+    "i18next-fs-backend": "^2.6.1",
     "invariant": "^2.2.4",
     "inversify": "^7.9.1",
     "inversify-react": "^1.2.0",

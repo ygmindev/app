@@ -1,0 +1,26 @@
+import { NODE_BUILD } from '@tool/task/node/tasks/nodeBuild/nodeBuild.constants';
+import { type NodeBuildParamsModel } from '@tool/task/node/tasks/nodeBuild/nodeBuild.models';
+import { SERVER_BUILD } from '@tool/task/node/workflows/serverBuild/serverBuild.constants';
+import { type ServerBuildParamsModel } from '@tool/task/node/workflows/serverBuild/serverBuild.models';
+import { type BuildWorkflowParamsModel } from '@tool/task/orchestrator/utils/buildWorkflow/buildWorkflow.models';
+
+export const serverBuild: BuildWorkflowParamsModel<
+  ServerBuildParamsModel,
+  void,
+  [NodeBuildParamsModel]
+> = {
+  name: SERVER_BUILD,
+
+  steps: ({ entryFiles = 'src/index.ts', format, outDir, watch }, context) => [
+    {
+      context,
+      name: NODE_BUILD,
+      params: {
+        entryFiles,
+        format,
+        outDir,
+        watch,
+      },
+    },
+  ],
+};

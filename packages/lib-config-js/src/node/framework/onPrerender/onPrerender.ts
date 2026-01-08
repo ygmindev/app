@@ -1,4 +1,3 @@
-import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { internationalizeConfig } from '@lib/config/locale/internationalize/internationalize.node';
 import { _onPrerender } from '@lib/config/node/framework/onPrerender/_onPrerender';
 import {
@@ -10,7 +9,7 @@ import { merge } from '@lib/shared/core/utils/merge/merge';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 
-export const onPrerender = ({ database }: onPrerenderParamsModel): onPrerenderModel => {
+export const onPrerender = (params?: onPrerenderParamsModel): onPrerenderModel => {
   const { languageDefault, languages } = internationalizeConfig.params();
   const i18n = internationalizeConfig.config();
   return _onPrerender({
@@ -31,8 +30,6 @@ export const onPrerender = ({ database }: onPrerenderParamsModel): onPrerenderMo
 
     languages,
 
-    onInitialize: async () => {
-      await initialize({ database });
-    },
+    onInitialize: async () => {},
   });
 };

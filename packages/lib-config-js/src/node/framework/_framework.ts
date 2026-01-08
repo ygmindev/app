@@ -7,6 +7,7 @@ import { uri } from '@lib/shared/http/utils/uri/uri';
 export const _framework = ({
   assetsUri,
   faviconDir,
+  onPrerender,
 }: FrameworkConfigModel): _FrameworkConfigModel => {
   const baseAssets = assetsUri ? uri(assetsUri) : undefined;
   return {
@@ -19,6 +20,8 @@ export const _framework = ({
     favicon: `${baseAssets}/${faviconDir}`,
 
     hydrationCanBeAborted: true,
+
+    onPrerenderStart: onPrerender(),
 
     passToClient: ['context'],
 
