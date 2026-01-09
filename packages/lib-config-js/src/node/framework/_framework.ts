@@ -7,7 +7,6 @@ import { uri } from '@lib/shared/http/utils/uri/uri';
 export const _framework = ({
   assetsUri,
   faviconDir,
-  onPrerender,
 }: FrameworkConfigModel): _FrameworkConfigModel => {
   const baseAssets = assetsUri ? uri(assetsUri) : undefined;
   return {
@@ -21,8 +20,6 @@ export const _framework = ({
 
     hydrationCanBeAborted: true,
 
-    onPrerenderStart: onPrerender(),
-
     passToClient: ['context'],
 
     prerender: {
@@ -33,7 +30,7 @@ export const _framework = ({
 
     route: '/*',
 
-    ssr: true,
+    // ssr: true,
 
     stream: true,
   };

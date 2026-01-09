@@ -49,6 +49,8 @@ const vitePluginBarrel = (barrelFiles: BundleConfigModel['barrelFiles'] = []): P
   const virtualModuleIds = barrelFiles.map((v) => `virtual:${fileInfo(v[1].outPathname).main}`);
   const resolvedVirtualModuleIds = virtualModuleIds.map((v) => '\0' + v);
   return {
+    enforce: 'pre',
+
     load(id: string) {
       const idx = resolvedVirtualModuleIds.findIndex((v) => v === id);
       if (idx >= 0) {

@@ -1,10 +1,6 @@
 import 'vike-react/Config';
 
 import { type _BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
-import {
-  type onPrerenderModel,
-  type onPrerenderParamsModel,
-} from '@lib/config/node/framework/onPrerender/onPrerender.models';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { type RootContextModel, type RootContextPropsModel } from '@lib/frontend/root/root.models';
 import { type RouteModel } from '@lib/frontend/route/route.models';
@@ -17,7 +13,6 @@ export type FrameworkConfigModel = {
   assetsUri?: UriModel;
   faviconDir?: string;
   ssrContextKeys?: Array<DeepKeyModel<RootContextModel>>;
-  onPrerender(params?: onPrerenderParamsModel): onPrerenderModel;
 };
 
 export type FrameworkRenderParamsModel = RootContextPropsModel & {

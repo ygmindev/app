@@ -5,7 +5,6 @@ import {
   type _FrameworkConfigModel,
   type FrameworkConfigModel,
 } from '@lib/config/node/framework/framework.models';
-import { onPrerender } from '@lib/config/node/framework/onPrerender/onPrerender';
 import { Config } from '@lib/config/utils/Config/Config';
 
 export const frameworkConfig = new Config<FrameworkConfigModel, _FrameworkConfigModel>({
@@ -24,8 +23,6 @@ export const frameworkConfig = new Config<FrameworkConfigModel, _FrameworkConfig
     },
 
     faviconDir: `${ASSETS_DIR}/favicon/favicon.svg`,
-
-    onPrerender,
 
     ssrContextKeys: SSR_CONTEXT_KEYS,
   }),

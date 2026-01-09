@@ -1102,6 +1102,9 @@ importers:
       color:
         specifier: ^5.0.0
         version: 5.0.3
+      cookies-js:
+        specifier: ^1.2.3
+        version: 1.2.3
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -1126,6 +1129,9 @@ importers:
       i18next-fs-backend:
         specifier: ^2.6.1
         version: 2.6.1
+      i18next-http-backend:
+        specifier: ^3.0.2
+        version: 3.0.2
       invariant:
         specifier: ^2.2.4
         version: 2.2.4
@@ -1189,6 +1195,9 @@ importers:
       react-redux:
         specifier: ^9.2.0
         version: 9.2.0(@types/react@19.2.7)(react@19.2.3)(redux@5.0.1)
+      react-spinners:
+        specifier: ^0.17.0
+        version: 0.17.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       redux:
         specifier: ^5.0.1
         version: 5.0.1
@@ -10562,6 +10571,9 @@ packages:
   cookiejar@2.1.4:
     resolution: {integrity: sha512-LDx6oHrK+PhzLKJU9j5S7/Y3jM/mUHvD/DeI1WQmJn652iPC5Y4TBzC9l+5OMOXlyTTA+SmVUPm0HQUwpD5Jqw==}
 
+  cookies-js@1.2.3:
+    resolution: {integrity: sha512-yqW9Kl46LcwedlF+2wyFSaCSwRKRrU6m3n9WoAsFfn23bpRfkEBwfOkD+lFw4jCLLs960ke/aM5Qe1BAhtgJmQ==}
+
   copy-file@11.1.0:
     resolution: {integrity: sha512-X8XDzyvYaA6msMyAM575CUoygY5b44QzLcGRKsK3MFmXcOvQa518dNPLsKYwkYsn72g3EiW+LE0ytd/FlqWmyw==}
     engines: {node: '>=18'}
@@ -10646,6 +10658,9 @@ packages:
 
   cross-fetch@3.2.0:
     resolution: {integrity: sha512-Q+xVJLoGOeIMXZmbUK4HYk+69cQH6LudR0Vu/pRm2YlU/hDV9CiS0gKUMaWY5f2NeUH9C1nV3bsTlCo0FsTV1Q==}
+
+  cross-fetch@4.0.0:
+    resolution: {integrity: sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==}
 
   cross-inspect@1.0.1:
     resolution: {integrity: sha512-Pcw1JTvZLSJH83iiGWt6fRcT+BjZlCDRVwYLbUcHzv/CRpB7r0MlSrGbIyQvVSNyGnbt7G4AXuyCiDR3POvZ1A==}
@@ -13102,6 +13117,9 @@ packages:
 
   i18next-fs-backend@2.6.1:
     resolution: {integrity: sha512-eYWTX7QT7kJ0sZyCPK6x1q+R63zvNKv2D6UdbMf15A8vNb2ZLyw4NNNZxPFwXlIv/U+oUtg8SakW6ZgJZcoqHQ==}
+
+  i18next-http-backend@3.0.2:
+    resolution: {integrity: sha512-PdlvPnvIp4E1sYi46Ik4tBYh/v/NbYfFFgTjkwFl0is8A18s7/bx9aXqsrOax9WUbeNS6mD2oix7Z0yGGf6m5g==}
 
   i18next-http-middleware@3.9.2:
     resolution: {integrity: sha512-vzd0Z89xR1yF2V2USVS2G6oOzNilTXsBkxQ16GFPGJO4whQI/LIreh4p4Qy7HXQlGrWVp83YaekuG36+t9anJA==}
@@ -16605,6 +16623,12 @@ packages:
     peerDependenciesMeta:
       react-dom:
         optional: true
+
+  react-spinners@0.17.0:
+    resolution: {integrity: sha512-L/8HTylaBmIWwQzIjMq+0vyaRXuoAevzWoD35wKpNTxxtYXWZp+xtgkfD7Y4WItuX0YvdxMPU79+7VhhmbmuTQ==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   react-streaming@0.4.15:
     resolution: {integrity: sha512-3/olKmuCRYNLy0nFGXI54ErYKK1cfxJ3UoKn6pPZkknaHSn1APvJHE9MkKow/2s2CG94emxXoj/RMVpGF4Lxzg==}
@@ -29651,6 +29675,8 @@ snapshots:
 
   cookiejar@2.1.4: {}
 
+  cookies-js@1.2.3: {}
+
   copy-file@11.1.0:
     dependencies:
       graceful-fs: 4.2.11
@@ -29751,6 +29777,12 @@ snapshots:
       cross-spawn: 7.0.6
 
   cross-fetch@3.2.0:
+    dependencies:
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+
+  cross-fetch@4.0.0:
     dependencies:
       node-fetch: 2.7.0
     transitivePeerDependencies:
@@ -32987,6 +33019,12 @@ snapshots:
       - supports-color
 
   i18next-fs-backend@2.6.1: {}
+
+  i18next-http-backend@3.0.2:
+    dependencies:
+      cross-fetch: 4.0.0
+    transitivePeerDependencies:
+      - encoding
 
   i18next-http-middleware@3.9.2: {}
 
@@ -37507,6 +37545,11 @@ snapshots:
       react: 19.2.3
       set-cookie-parser: 2.7.2
     optionalDependencies:
+      react-dom: 19.2.3(react@19.2.3)
+
+  react-spinners@0.17.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+    dependencies:
+      react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
 
   react-streaming@0.4.15(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
