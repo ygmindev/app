@@ -1,6 +1,6 @@
 export type _WriteFileParamsModel = {
   encoding?: BufferEncoding;
-  filename: string;
+  pathname: string;
   value: string;
 };
 

@@ -22,10 +22,6 @@ import { Socket } from '@lib/model/http/Socket/Socket.entity';
 import { Curve } from '@lib/model/quant/Curve/Curve.entity';
 import { Quote } from '@lib/model/quant/Quote/Quote';
 import { Rate } from '@lib/model/quant/Rate/Rate';
-import { Snapshot } from '@lib/model/test/Snapshot/Snapshot.entity';
-import { TestableEmbeddedResource } from '@lib/model/test/TestableEmbeddedResource/TestableEmbeddedResource.entity';
-import { TestableEntityResource } from '@lib/model/test/TestableEntityResource/TestableEntityResource.entity';
-import { TestableRelatedResource } from '@lib/model/test/TestableRelatedResource/TestableRelatedResource.entity';
 import { LinkedUser } from '@lib/model/user/LinkedUser/LinkedUser.entity';
 import { User } from '@lib/model/user/User/User.entity';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -57,9 +53,6 @@ export const databaseConfig = new Config<DatabaseConfigModel, _DatabaseConfigMod
         User,
         Utility,
         Vendor,
-        ...(process.env.NODE_ENV !== 'production'
-          ? [Snapshot, TestableEntityResource, TestableEmbeddedResource, TestableRelatedResource]
-          : []),
       ]),
     };
   },

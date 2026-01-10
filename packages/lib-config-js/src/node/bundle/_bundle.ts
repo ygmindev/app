@@ -4,7 +4,7 @@ import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
+import { BUILD_DIR, PACKAGE_PREFIXES } from '@lib/config/file/file.constants';
 import {
   APP_TYPE,
   BUNDLE_FORMAT,
@@ -95,6 +95,20 @@ const vitePluginPreBundle = (params: BundleConfigModel['preBundle'] = []): Plugi
     },
 
     name: 'vite-plugin-prebundle',
+  };
+};
+
+export const vitePluginEnvExport = (pathname: string): Plugin => {
+  return {
+    async buildStart() {
+      await Container.get(Environment).initialize();
+    },
+
+    async closeBundle() {
+      Container.get(Environment).exportEnv(pathname);
+    },
+
+    name: 'vite-plugin-env-export',
   };
 };
 
@@ -307,9 +321,9 @@ export const _bundle = ({
           }
         : undefined,
 
-      minify: process.env.NODE_ENV === 'production',
+      minify: process.env.NODE_ENV === 'production' ? 'terser' : false,
 
-      outDir: outDir ?? fromWorking(buildDir),
+      outDir: fromWorking(outDir ?? buildDir),
 
       rollupOptions: {
         external: externals
@@ -344,7 +358,7 @@ export const _bundle = ({
 
         preserveSymlinks: true,
 
-        treeshake: true,
+        treeshake: 'recommended',
       },
 
       sourcemap:
@@ -355,6 +369,12 @@ export const _bundle = ({
             : undefined,
 
       ssr: platformF === PLATFORM.NODE ? true : undefined,
+
+      terserOptions: {
+        mangle: {
+          keep_classnames: true,
+        },
+      },
 
       watch: process.env.NODE_ENV === 'development' ? { include: watchF } : undefined,
     },
@@ -466,6 +486,8 @@ export const _bundle = ({
         : []),
 
       viteCommonjs() as Plugin,
+
+      envFilename && vitePluginEnvExport(fromWorking(BUILD_DIR, envFilename)),
     ]),
 
     publicDir: process.env.NODE_ENV === 'production' ? assetsDir : publicPathname,

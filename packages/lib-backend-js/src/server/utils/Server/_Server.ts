@@ -106,7 +106,7 @@ export class _Server extends Bootstrappable implements _ServerModel {
         logger.warn('server already running...');
       } else {
         logger.progress('server running...');
-        await this._app.listen({ port: toNumber(this._port) });
+        await this._app.listen({ host: this._host, port: toNumber(this._port) });
         logger.success(`server listening on ${this._host}:${this._port}`);
       }
     } catch (e) {

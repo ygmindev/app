@@ -10,5 +10,6 @@ export type EnvironmentParamsModel = {
 
 export type EnvironmentModel = BootstrappableModel & {
   variables: Partial<EnvironmentConfigModel>;
+  exportEnv(pathname: string): void;
   initialize(params?: EnvironmentParamsModel): Promise<void>;
 };

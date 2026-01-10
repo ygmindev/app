@@ -8,6 +8,6 @@ import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 
 export const writeFile = buildTask<WriteFileParamsModel, WriteFileModel>({
   task: async ({ pathname, value }) => {
-    writeFileBase({ filename: pathname, value: stringify(value) });
+    writeFileBase({ pathname: pathname, value: stringify(value) });
   },
 });

@@ -12,7 +12,6 @@ import { ProductResolver } from '@lib/model/commerce/Product/ProductResolver/Pro
 import { GroupResolver } from '@lib/model/group/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '@lib/model/http/Socket/SocketResolver/SocketResolver';
 import { CurveResolver } from '@lib/model/quant/Curve/CurveResolver/CurveResolver';
-import { SnapshotResolver } from '@lib/model/test/Snapshot/SnapshotResolver/SnapshotResolver';
 import { LinkedUserResolver } from '@lib/model/user/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
@@ -32,7 +31,6 @@ export const graphqlConfig = configBase.extend(() => ({
     SocketResolver,
     VendorResolver,
     UtilityResolver,
-    ...(process.env.NODE_ENV !== 'production' ? [SnapshotResolver] : []),
   ]),
 
   schemaFilename: 'main.gql',

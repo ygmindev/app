@@ -27,7 +27,7 @@ export const bundleConfig = new Config<BundleConfigModel, _BundleConfigModel>({
 
       configFilename: 'bundle.ts',
 
-      envFilename: '.env.production',
+      envFilename: '.env.build',
 
       envPrefix: ['APP_NAME', 'ENV_PLATFORM', 'NODE_ENV'],
 

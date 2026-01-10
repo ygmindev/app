@@ -14,5 +14,5 @@ export const exportModules = async ({
   const result = pathnames
     .map((v) => `export ${outVariables ? `{ ${outVariables(v).join(', ')} }` : '*'} from '${v}';`)
     .join('\n');
-  writeFile({ filename: outPathname, value: result });
+  writeFile({ pathname: outPathname, value: result });
 };

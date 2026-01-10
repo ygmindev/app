@@ -13,4 +13,5 @@ const app = new ServerApp({
 });
 
 export const { cleanUp } = app;
+
 await app.run();

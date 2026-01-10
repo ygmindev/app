@@ -11,6 +11,7 @@
     "@fastify/cookie": "^11.0.2",
     "@fastify/cors": "^11.1.0",
     "@fastify/error": "^4.2.0",
+    "@fastify/middie": "^9.0.3",
     "@fastify/static": "^8.2.0",
     "@fastify/websocket": "^11.2.0",
     "@graphql-yoga/plugin-graphql-sse": "^3.18.0",
@@ -28,10 +29,13 @@
     "cookie": "^1.0.2",
     "core-js": "^3.45.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "email-templates": "^12.0.3",
     "fastify": "^5.6.0",
     "firebase-admin": "^13.5.0",
+    "fs-extra": "^11.3.3",
+    "glob": "^11.1.0",
     "graphql-scalars": "^1.25.0",
     "graphql-type-json": "^0.3.2",
     "graphql-yoga": "^5.18.0",
@@ -63,5 +67,6 @@
       "development": "./src/*",
       "default": "./src/*"
     }
-  }
+  },
+  "sideEffects": false
 }

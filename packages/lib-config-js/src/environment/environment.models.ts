@@ -23,6 +23,10 @@ export type EnvironmentConfigModel = {
   APP_UPTRACE_DSN: string;
   AWS_ACCESS_KEY_ID: string;
   AWS_SECRET_ACCESS_KEY: string;
+  CONTAINER_HOST: string;
+  CONTAINER_PLATFORM: string;
+  CONTAINER_TAG: string;
+  CONTAINER_USERNAME: string;
   ENV_PLATFORM: `${PLATFORM}`;
   GITHUB_REPO: string;
   GITHUB_TOKEN: string;
@@ -30,6 +34,7 @@ export type EnvironmentConfigModel = {
   JEST_WORKER_ID?: string;
   NODE_ENV: string;
   NODE_RUNTIME?: `${RUNTIME}`;
+  PORT?: string;
   PUPPETEER_EXECUTABLE_PATH?: string;
   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: `${BOOLEAN_STRING}`;
   SERVERLESS_RUNTIME: `${SERVERLESS_RUNTIME}`;

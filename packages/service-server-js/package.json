@@ -53,5 +53,6 @@
       "development": "./src/*",
       "default": "./src/*"
     }
-  }
+  },
+  "sideEffects": false
 }

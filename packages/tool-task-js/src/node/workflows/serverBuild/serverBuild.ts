@@ -1,3 +1,4 @@
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { NODE_BUILD } from '@tool/task/node/tasks/nodeBuild/nodeBuild.constants';
 import { type NodeBuildParamsModel } from '@tool/task/node/tasks/nodeBuild/nodeBuild.models';
 import { SERVER_BUILD } from '@tool/task/node/workflows/serverBuild/serverBuild.constants';
@@ -9,6 +10,10 @@ export const serverBuild: BuildWorkflowParamsModel<
   void,
   [NodeBuildParamsModel]
 > = {
+  context: {
+    environment: ENVIRONMENT.PRODUCTION,
+  },
+
   name: SERVER_BUILD,
 
   steps: ({ entryFiles = 'src/index.ts', format, outDir, watch }, context) => [
