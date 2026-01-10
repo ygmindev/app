@@ -11,6 +11,7 @@ import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/Duplicate
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
+import { packageInfo } from '@lib/shared/core/utils/packageInfo/packageInfo';
 import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequence';
 import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 import { type CliModel, type CliRegistryModel } from '@tool/task/core/utils/Cli/Cli.models';
@@ -114,7 +115,14 @@ export class Cli extends Bootstrappable implements CliModel {
     const { workflow } = v;
     const { app, environment, queue, root, workers, ...rest } = args;
     const rootF = root ?? (app ? await getAppRoot(app) : fromRoot());
-    const context: ExecutionContextModel = { app, environment, queue, root: rootF };
+    const { name: appName } = packageInfo();
+    const context: ExecutionContextModel = {
+      app,
+      environment,
+      overrrides: { APP_NAME: process.env.NODE_ENV ?? appName },
+      queue,
+      root: rootF,
+    };
 
     await withDir(rootF, async () => {
       if (workers) {

@@ -1,53 +1,27 @@
-import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
-import { globMatch } from '@lib/backend/file/utils/globMatch/globMatch';
-import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
-import { EXCLUDE_PATTERNS } from '@lib/config/file/file.constants';
-import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
-import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import {
   type _DockerModel,
   type _DockerParamsModel,
-} from '@tool/task/container/utils/Docker/_Docker.models';
+} from '@lib/backend/container/utils/Docker/_Docker.models';
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
+import { globMatch } from '@lib/backend/file/utils/globMatch/globMatch';
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { type ContainerConfigModel } from '@lib/config/container/container.models';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { Container } from '@lib/shared/core/utils/Container/Container';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import Docker from 'dockerode';
 import tar from 'tar-fs';
 
 export class _Docker implements _DockerModel {
+  container: ContainerConfigModel;
   docker: Docker;
-  ignore?: Array<string>;
-  image: string;
-  password: string;
-  platform: string;
-  rootDir: string;
-  server: string;
-  tag: string;
   url: string;
-  username: string;
-  workingDir: string;
 
-  constructor({
-    ignore = EXCLUDE_PATTERNS,
-    image,
-    password,
-    platform,
-    rootDir = fromRoot(),
-    server,
-    tag,
-    username,
-    workingDir = fromWorking(),
-  }: _DockerParamsModel) {
+  constructor({ container }: _DockerParamsModel) {
     this.docker = new Docker();
-    this.ignore = ignore;
-    this.image = image;
-    this.password = password;
-    this.platform = platform;
-    this.rootDir = rootDir;
-    this.server = server;
-    this.tag = tag;
-    this.url = `${server}/${process.env.GITHUB_USERNAME}/${image}:${tag}`;
-    this.username = username;
-    this.workingDir = workingDir;
+    this.container = container;
+    const { image, server, tag, username } = container;
+    this.url = `${server}/${username}/${image}:${tag}`;
   }
 
   async _handleStream(stream?: NodeJS.ReadableStream): Promise<void> {
@@ -78,25 +52,25 @@ export class _Docker implements _DockerModel {
   }
 
   async build(): Promise<void> {
-    const tarStream = tar.pack(this.rootDir, {
+    const { dirname, ignore, image, platform, tag } = this.container;
+
+    const tarStream = tar.pack(dirname, {
       ignore: (name) =>
         globMatch(
           name,
-          (this.ignore ?? []).map((v) => `**/*/${v}`),
+          (ignore ?? []).map((v) => `**/*/${v}`),
         ),
     });
 
     try {
+      const environment = Container.get(Environment);
       const stream = await this.docker.buildImage(tarStream, {
-        buildargs: { ...process.env },
-        dockerfile: toRelative({
-          from: this.rootDir,
-          to: joinPaths([this.workingDir, 'src', 'Dockerfile']),
-        }),
+        buildargs: { ...environment.variables },
+        dockerfile: joinPaths([dirname, 'Dockerfile']),
         nocache: true,
-        platform: this.platform,
+        platform,
         pull: false,
-        t: `${this.image}:${this.tag}`,
+        t: `${image}:${tag}`,
       });
       await this._handleStream(stream);
     } catch {
@@ -105,8 +79,10 @@ export class _Docker implements _DockerModel {
   }
 
   async delete(): Promise<void> {
+    const { image, tag } = this.container;
+
     try {
-      await this.docker.getImage(`${this.image}:${this.tag}`).remove({ force: true });
+      await this.docker.getImage(`${image}:${tag}`).remove({ force: true });
       const danglingImages = await this.docker.listImages({ filters: { dangling: ['true'] } });
       for (const image of danglingImages) {
         await this.docker.getImage(image.Id).remove({ force: true });
@@ -115,18 +91,20 @@ export class _Docker implements _DockerModel {
   }
 
   async publish(isBuild: boolean = true): Promise<void> {
+    const { image, password, server, tag, username } = this.container;
+
     try {
       isBuild && (await this.build());
-      const image = this.docker.getImage(`${this.image}:${this.tag}`);
-      await image.tag({
-        repo: `${this.server}/${process.env.GITHUB_USERNAME}/${this.image}`,
-        tag: this.tag,
+      const img = this.docker.getImage(`${image}:${tag}`);
+      await img.tag({
+        repo: `${server}/${username}/${image}`,
+        tag,
       });
       const stream = await this.docker.getImage(this.url).push({
         authconfig: {
-          password: this.password,
-          serveraddress: this.server,
-          username: this.username,
+          password,
+          serveraddress: server,
+          username,
         },
       });
       await this._handleStream(stream);
@@ -136,22 +114,22 @@ export class _Docker implements _DockerModel {
   }
 
   async run<TType>(args: Array<string> = []): Promise<TType> {
+    const { password, server, username } = this.container;
+
     try {
       await this.docker.getImage(this.url).inspect();
     } catch {
-      console.log(`📥 Pulling image: ${this.url}`);
+      logger.info(`📥 Pulling image: ${this.url}`);
       const stream = await this.docker.pull(this.url, {
         authconfig: {
-          password: this.password,
-          serveraddress: this.server,
-          username: this.username,
+          password,
+          serveraddress: server,
+          username,
         },
       });
       await this._handleStream(stream);
     }
 
-    const result = (await this.docker.run(this.url, args, process.stdout)) as TType;
-    console.warn(result);
-    throw new Error('Method not implemented.');
+    return (await this.docker.run(this.url, args, process.stdout)) as TType;
   }
 }

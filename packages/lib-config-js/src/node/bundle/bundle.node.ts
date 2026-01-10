@@ -2,6 +2,7 @@ import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { bundleConfig as configBase } from '@lib/config/node/bundle/bundle.base';
 import { taskConfig } from '@lib/config/task/task';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 
 export const bundleConfig = configBase.extend(() => {
@@ -33,6 +34,6 @@ export const bundleConfig = configBase.extend(() => {
       })),
     ],
 
-    transpilePatterns: [/graphql/],
+    transpilePatterns: filterNil([process.env.NODE_ENV !== 'production' && /graphql/]),
   };
 });
