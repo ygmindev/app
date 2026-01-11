@@ -87,9 +87,15 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
     }
 
     if (route?.transition === ROUTE_TRANSITION.MODAL) {
+      if (route?.fullpath === '/settings') {
+        console.warn(
+          `@@ ${route?.fullpath}: isMounted: ${isMounted}, isMountedDelayed: ${isMountedDelayed}, defaultState: ${defaultState}`,
+        );
+      }
+
       elementF = (
         <Modal
-          defaultState={defaultState}
+          // defaultState={defaultState}
           isFullSize
           isOpen={isMounted}
           isPortal={false}

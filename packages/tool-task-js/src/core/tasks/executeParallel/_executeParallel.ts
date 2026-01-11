@@ -21,6 +21,8 @@ export const _executeParallel = async ({
     })),
     {
       killOthersOn: ['failure'],
+      prefix: '[#{index}] ',
+      prefixColors: 'auto',
       successCondition: condition,
     },
   );

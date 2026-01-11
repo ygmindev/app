@@ -1,5 +1,5 @@
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { SettingsInput } from '@lib/frontend/settings/components/SettingsInput/SettingsInput';
 import { APPEARANCE_SETTINGS_PAGE_FIELDS } from '@lib/frontend/settings/pages/AppearanceSettingsPage/AppearanceSettingsPage.constants';
 import { type AppearanceSettingsPagePropsModel } from '@lib/frontend/settings/pages/AppearanceSettingsPage/AppearanceSettingsPage.models';
@@ -10,7 +10,7 @@ export const AppearanceSettingsPage: LFCModel<AppearanceSettingsPagePropsModel> 
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   return (
-    <MainLayout
+    <Wrapper
       {...wrapperProps}
       s>
       {APPEARANCE_SETTINGS_PAGE_FIELDS.map(({ element, id, title }) => (
@@ -21,6 +21,6 @@ export const AppearanceSettingsPage: LFCModel<AppearanceSettingsPagePropsModel> 
           title={title}
         />
       ))}
-    </MainLayout>
+    </Wrapper>
   );
 };

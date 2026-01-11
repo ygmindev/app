@@ -1,7 +1,4 @@
-import {
-  ANIMATION_STATES_APPEARABLE_OPAQUE,
-  ANIMATION_STATES_SLIDABLE_VERTICAL,
-} from '@lib/frontend/animation/animation.constants';
+import { ANIMATION_STATES_APPEARABLE_OPAQUE } from '@lib/frontend/animation/animation.constants';
 import { Exitable } from '@lib/frontend/animation/components/Exitable/Exitable';
 import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
@@ -16,7 +13,7 @@ import { Portal } from '@lib/frontend/core/components/Portal/Portal';
 import { Swipeable } from '@lib/frontend/core/components/Swipeable/Swipeable';
 import { TEXT_CASING } from '@lib/frontend/core/components/Text/Text.constants';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { CORNER, DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import {
   type MeasureModel,
   type PositionModel,
@@ -45,6 +42,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
   defaultState,
   height,
   isFullSize,
+  isFullWidth,
   isOpen,
   isPortal = true,
   onToggle,
@@ -94,26 +92,28 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
             <Wrapper
               animation={{
                 isInitial: true,
-                states: ANIMATION_STATES_SLIDABLE_VERTICAL({
-                  deviceHeight,
-                  height: heightF,
-                  offset: swipe?.y ?? 0,
-                }),
+                states: {
+                  [ELEMENT_STATE.ACTIVE]: {
+                    top: (deviceHeight - heightF) / 2 + (swipe?.y ?? 0),
+                  },
+                  [ELEMENT_STATE.INACTIVE]: {
+                    top: deviceHeight,
+                  },
+                },
               }}
               backgroundColor={THEME_COLOR_MORE.SURFACE}
               elementState={elementStateF}
-              flex={isFullSize}
-              height={isFullSize ? heightF : undefined}
-              isFullWidth={!width}
+              height={heightF}
+              isFullWidth={isFullWidth}
               isShadow
               left={0}
               mHorizontal="auto"
               onMeasure={measureSetF}
               position={SHAPE_POSITION.ABSOLUTE}
               right={0}
-              round={{ [CORNER.TOP_LEFT]: true, [CORNER.TOP_RIGHT]: true }}
+              round
               testID={props.testID}
-              width={width}
+              width={isFullWidth ? undefined : (width ?? theme.layout.width[THEME_SIZE.MEDIUM])}
               zIndex={Z_INDEX_TOP}>
               <Wrapper
                 backgroundColor={THEME_COLOR_MORE.SURFACE}
