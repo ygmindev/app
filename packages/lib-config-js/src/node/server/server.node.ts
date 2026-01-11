@@ -7,9 +7,13 @@ import toNumber from 'lodash/toNumber';
 
 export const serverConfig = configBase.extend(() => {
   const environment = Container.get(Environment);
+  const port =
+    environment.variables.PORT ??
+    environment.variables.APP_PORT ??
+    environment.variables.SERVER_APP_PORT;
   return {
     plugins: [[websocketPlugin, {}]] as Array<[ServerPluginModel<unknown>, unknown]>,
 
-    port: toNumber(environment.variables.APP_PORT ?? environment.variables.SERVER_APP_PORT),
+    port: toNumber(port),
   };
 });

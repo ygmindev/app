@@ -1,3 +1,5 @@
+import { type Server } from 'node:https';
+
 import middie from '@fastify/middie';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { HttpRequest } from '@lib/backend/http/utils/HttpRequest/HttpRequest';
@@ -14,7 +16,14 @@ import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { type HTTP_METHOD, HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 import { type I18nModel } from '@lib/shared/locale/locale.models';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
-import { fastify, type FastifyInstance, type FastifyRequest, type HTTPMethods } from 'fastify';
+import {
+  fastify,
+  type FastifyHttpsOptions,
+  type FastifyInstance,
+  type FastifyRequest,
+  type FastifyServerOptions,
+  type HTTPMethods,
+} from 'fastify';
 import { readFileSync } from 'fs';
 import forEach from 'lodash/forEach';
 import toNumber from 'lodash/toNumber';
@@ -31,14 +40,18 @@ export class _Server extends Bootstrappable implements _ServerModel {
     this._port = port;
     this._api = api;
 
-    const { certificateDir, privateKeyFilename, publicKeyFilename } = certificate;
-    this._app = fastify({
+    const config: FastifyServerOptions & Partial<FastifyHttpsOptions<Server>> = {
       disableRequestLogging: true,
-      https: {
+    };
+
+    if (certificate) {
+      const { certificateDir, privateKeyFilename, publicKeyFilename } = certificate;
+      config.https = {
         cert: readFileSync(joinPaths([certificateDir, publicKeyFilename])),
         key: readFileSync(joinPaths([certificateDir, privateKeyFilename])),
-      },
-    });
+      };
+    }
+    this._app = fastify(config);
     this._app.register(middie);
   }
 

@@ -13,15 +13,18 @@ export const serverConfig = new Config<ServerConfigModel>({
   params: () => {
     const environment = Container.get(Environment);
     return {
-      certificate: {
-        caFilename: 'rootCA.pem',
+      certificate:
+        environment.variables.NODE_RUNTIME === 'container'
+          ? undefined
+          : {
+              caFilename: 'rootCA.pem',
 
-        certificateDir: fromStatic('certificates'),
+              certificateDir: fromStatic('certificates'),
 
-        privateKeyFilename: environment.variables.SERVER_SSL_PRIVATE_KEY ?? '',
+              privateKeyFilename: environment.variables.SERVER_SSL_PRIVATE_KEY ?? '',
 
-        publicKeyFilename: environment.variables.SERVER_SSL_PUBLIC_KEY ?? '',
-      },
+              publicKeyFilename: environment.variables.SERVER_SSL_PUBLIC_KEY ?? '',
+            },
 
       entryPathname: fromWorking('src/index.ts'),
 

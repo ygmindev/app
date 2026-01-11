@@ -27,8 +27,9 @@ export class _Docker implements _DockerModel {
   constructor({ container }: _DockerParamsModel) {
     this.docker = new Docker();
     this.container = container;
-    const { image, tag } = container;
-    this.url = `${image}:${tag}`;
+
+    const { image, server, tag, username } = container;
+    this.url = `${filterNil([server, username, image]).join('/')}:${tag}`;
   }
 
   async _handleStream(stream?: NodeJS.ReadableStream): Promise<void> {
@@ -59,7 +60,7 @@ export class _Docker implements _DockerModel {
   }
 
   async build(): Promise<void> {
-    const { dirname, ignore, image, platform, tag } = this.container;
+    const { dirname, ignore, platform } = this.container;
     await this.delete();
     const tarStream = tar.pack(fromRoot(), {
       ignore: (name) =>
@@ -78,7 +79,7 @@ export class _Docker implements _DockerModel {
         nocache: true,
         platform,
         pull: false,
-        t: `${image}:${tag}`,
+        t: this.url,
       });
       await this._handleStream(stream);
     } catch (e) {
@@ -88,9 +89,8 @@ export class _Docker implements _DockerModel {
   }
 
   async delete(): Promise<void> {
-    const { image, tag } = this.container;
     try {
-      await this.docker.getImage(`${image}:${tag}`).remove({ force: true });
+      await this.docker.getImage(this.url).remove({ force: true });
       const danglingImages = await this.docker.listImages({ filters: { dangling: ['true'] } });
       for (const image of danglingImages) {
         await this.docker.getImage(image.Id).remove({ force: true });
@@ -101,13 +101,10 @@ export class _Docker implements _DockerModel {
   }
 
   async publish(isBuild: boolean = true): Promise<void> {
-    const { image, password, server, tag, username } = this.container;
+    const { password, server, username } = this.container;
     try {
       isBuild && (await this.build());
-      const repo = filterNil([server, username, image]).join('/');
-      const img = this.docker.getImage(this.url);
-      await img.tag({ repo, tag });
-      const stream = await this.docker.getImage(`${repo}:${tag}`).push({
+      const stream = await this.docker.getImage(this.url).push({
         authconfig: {
           password,
           serveraddress: server,

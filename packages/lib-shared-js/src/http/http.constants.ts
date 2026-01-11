@@ -69,7 +69,7 @@ export const STATIC_URI = uri({
 
 export const SERVER_APP_URI = uri({
   host: process.env.SERVER_APP_HOST,
-  port: process.env.SERVER_APP_PORT,
+  port: process.env.PORT ?? process.env.SERVER_APP_PORT,
 });
 
 export enum SAME_SITE {

@@ -23,6 +23,10 @@ export const serverlessConfig = new Config<ServerlessConfigModel, _ServerlessCon
 
   params: () => {
     const environment = Container.get(Environment);
+    const port =
+      environment.variables.PORT ??
+      environment.variables.APP_PORT ??
+      environment.variables.SERVER_APP_PORT;
     return {
       buildDir: BUILD_DIR,
 
@@ -48,7 +52,7 @@ export const serverlessConfig = new Config<ServerlessConfigModel, _ServerlessCon
 
       platform: PLATFORM.BASE,
 
-      port: toNumber(environment.variables.SERVER_APP_PORT ?? ''),
+      port: toNumber(port),
 
       provider: SERVERLESS_PROVIDER.AWS,
 

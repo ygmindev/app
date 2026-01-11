@@ -5,7 +5,7 @@ import { type FastifyInstance } from 'fastify';
 export type _ServerParamsModel = {
   api?: ApiConfigModel;
 
-  certificate: {
+  certificate?: {
     caFilename: string;
 
     certificateDir: string;

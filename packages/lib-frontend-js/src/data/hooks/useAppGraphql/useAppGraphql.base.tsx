@@ -10,5 +10,5 @@ export const useAppGraphql = ({ ...params }: UseAppGraphqlParamsModel = {}): Use
     ...params,
     host: process.env.SERVER_APP_HOST,
     pathname: `api/${GRAPHQL}`,
-    port: process.env.SERVER_APP_PORT,
+    port: process.env.PORT ?? process.env.SERVER_APP_PORT,
   });
