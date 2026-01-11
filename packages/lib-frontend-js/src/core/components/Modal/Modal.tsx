@@ -38,7 +38,6 @@ import {
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import { debounce } from '@lib/shared/core/utils/debounce/debounce';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import { useImperativeHandle, useState } from 'react';
 
 export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
@@ -178,5 +177,3 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
 
   return isOpenF || valueControlled ? isPortal ? <Portal>{element}</Portal> : element : null;
 };
-
-process.env.APP_IS_DEBUG && (Modal.displayName = variableName({ Modal }));
