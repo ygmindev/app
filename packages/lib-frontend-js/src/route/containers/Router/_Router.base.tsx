@@ -19,10 +19,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export const navigationRef = createNavigationContainerRef();
 
-const getActivePathname = (state: NavigationState): string => {
+const getPathFromState = (state: NavigationState): string => {
   const route = state.routes[state.index ?? 0];
   if (route.state?.routes) {
-    return trimPathname(getActivePathname(route.state as NavigationState));
+    return trimPathname(getPathFromState(route.state as NavigationState));
   }
   const screenName = (route.params as { screen?: string })?.screen ?? route.name;
   return trimPathname(screenName);
@@ -121,7 +121,7 @@ export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
         documentTitle={{ enabled: false }}
         linking={{
           config: { screens: config?.screens ?? {} },
-          getPathFromState: (state) => getActivePathname(state as NavigationState),
+          getPathFromState: (state) => getPathFromState(state as NavigationState),
           prefixes: process.env.ENV_PLATFORM === 'web' ? [APP_URI] : [],
         }}
         ref={navigationRef}>
