@@ -76,7 +76,6 @@ export const bundleConfig = configBase.extend(() => {
         // '@egjs/react-infinitegrid',
         // '@expo/react-native-action-sheet',
         // '@shopify/flash-list',
-        // '@uiw/react-markdown-preview',
         // '@uiw/react-md-editor',
         // 'countries-list',
         // 'moti',

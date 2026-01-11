@@ -1,7 +1,6 @@
 import { Tabs } from '@lib/frontend/core/components/Tabs/Tabs';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type TabLayoutPropsModel } from '@lib/frontend/route/components/TabLayout/TabLayout.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
@@ -20,10 +19,9 @@ export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type
   );
 
   return (
-    <MainLayout
+    <Wrapper
       {...wrapperProps}
       flex
-      isFullHeight
       s>
       <Tabs
         onChange={(pathname) => {
@@ -48,6 +46,6 @@ export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type
         position={SHAPE_POSITION.RELATIVE}>
         {children}
       </Wrapper>
-    </MainLayout>
+    </Wrapper>
   );
 };

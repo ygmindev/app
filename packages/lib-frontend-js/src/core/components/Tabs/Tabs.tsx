@@ -80,6 +80,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
       isOverflowHidden
       isRow
       justifySelf={FLEX_JUSTIFY.CENTER}
+      pVertical={THEME_SIZE.SMALL}
       ref={wrapperRef}
       s={THEME_SIZE.SMALL}
       scrollType={SCROLL_TYPE.BUTTON}>

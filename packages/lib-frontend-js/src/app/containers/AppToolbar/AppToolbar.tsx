@@ -1,4 +1,3 @@
-import { Accordion } from '@lib/frontend/animation/components/Accordion/Accordion';
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { Logo } from '@lib/frontend/app/components/Logo/Logo';
 import { AppMenuButton } from '@lib/frontend/app/containers/AppMenuButton/AppMenuButton';
@@ -10,20 +9,19 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
-import { RouteLink } from '@lib/frontend/route/components/RouteLink/RouteLink';
+import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_COLOR_MORE, THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { groupBy } from '@lib/shared/core/utils/groupBy/groupBy';
-import reduce from 'lodash/reduce';
-import { type ReactElement, useMemo } from 'react';
 
 export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props }) => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const { push } = useRouter();
   const { wrapperProps } = useLayoutStyles({ props });
   const [isMinimized, isMinimizedSet] = useStore('app.layout.isMinimized');
   const elementState = isMinimized ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
@@ -34,43 +32,6 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
         v.isNavigatable ? [...result, { ...v, routes: getRoutes(v.routes) }] : result,
       [] as Array<RouteModel>,
     ) ?? [];
-
-  const getNavigationElement = (value?: Array<RouteModel>): ReactElement | null => {
-    const grouped = groupBy(getRoutes(value), (v) => v.category?.id ?? '');
-    return (
-      <Wrapper>
-        {reduce(
-          grouped,
-          (result, v, k) => {
-            const category = v?.[0]?.category;
-            return [
-              ...result,
-              ...(k
-                ? [
-                    <Accordion
-                      icon={category?.icon}
-                      isTransparent
-                      key={category?.id}
-                      title={category?.label}>
-                      {v.map((vv) => getNavigationElement(vv.routes))}
-                    </Accordion>,
-                  ]
-                : v.map((vv) => (
-                    <RouteLink
-                      key={vv.fullpath}
-                      pathname={vv.fullpath ?? vv.pathname}>
-                      {vv.title}
-                    </RouteLink>
-                  ))),
-            ];
-          },
-          [] as Array<ReactElement>,
-        )}
-      </Wrapper>
-    );
-  };
-
-  const navigationElement = useMemo(() => getNavigationElement(routes), [routes]);
 
   return (
     <Activatable>
@@ -130,8 +91,18 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
 
             <Wrapper
               flex
-              isVerticalScrollable>
-              {navigationElement}
+              isVerticalScrollable
+              s={THEME_SIZE.SMALL}>
+              {getRoutes(routes).map((v) => (
+                <Button
+                  fontAlign={FONT_ALIGN.LEFT}
+                  icon={v.icon}
+                  key={v.fullpath}
+                  onPress={() => push({ pathname: v.fullpath ?? v.pathname })}
+                  type={BUTTON_TYPE.INVISIBLE}>
+                  {v.title}
+                </Button>
+              ))}
             </Wrapper>
           </Wrapper>
 

@@ -1,6 +1,7 @@
 import { useSignInResource } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource';
 import { Tile } from '@lib/frontend/core/components/Tile/Tile';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { type FormContainerRefModel } from '@lib/frontend/data/components/FormContainer/FormContainer.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
@@ -21,36 +22,36 @@ export const NameFormPage: LFCModel<NameFormPagePropsModel> = ({ ...props }) => 
   const initialValues = { first: currentUser?.first, last: currentUser?.last };
   const ref = useRef<FormContainerRefModel<NameFormModel>>(null);
   return (
-    <Tile
-      title={t('user:name')}
-      {...wrapperProps}>
-      <FormContainer
-        fields={[
-          {
-            fields: [
-              {
-                element: <TextInput label={t('user:first')} />,
-                id: 'first',
-              },
-              {
-                element: <TextInput label={t('user:last')} />,
-                id: 'last',
-              },
-            ],
-            id: 'name',
-          },
-        ]}
-        initialValues={initialValues}
-        onCancel={() => ref.current?.reset?.()}
-        onSubmit={async ({ first, last }: NameFormModel) =>
-          userUpdate({ id: currentUser?._id, update: { first, last } })
-        }
-        ref={ref}
-        submitLabel={t('core:save')}
-        successMessage={() => ({
-          description: t('core:updatedSuccess', { value: t('user:name') }),
-        })}
-      />
-    </Tile>
+    <MainLayout {...wrapperProps}>
+      <Tile title={t('user:name')}>
+        <FormContainer
+          fields={[
+            {
+              fields: [
+                {
+                  element: <TextInput label={t('user:first')} />,
+                  id: 'first',
+                },
+                {
+                  element: <TextInput label={t('user:last')} />,
+                  id: 'last',
+                },
+              ],
+              id: 'name',
+            },
+          ]}
+          initialValues={initialValues}
+          onCancel={() => ref.current?.reset?.()}
+          onSubmit={async ({ first, last }: NameFormModel) =>
+            userUpdate({ id: currentUser?._id, update: { first, last } })
+          }
+          ref={ref}
+          submitLabel={t('core:save')}
+          successMessage={() => ({
+            description: t('core:updatedSuccess', { value: t('user:name') }),
+          })}
+        />
+      </Tile>
+    </MainLayout>
   );
 };

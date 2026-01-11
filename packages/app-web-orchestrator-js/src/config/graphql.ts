@@ -4,8 +4,10 @@ import { JobResolver } from '@lib/model/orchestrator/Job/JobResolver/JobResolver
 import { PipelineResolver } from '@lib/model/orchestrator/Pipeline/PipelineResolver/PipelineResolver';
 import { WorkflowResolver } from '@lib/model/orchestrator/Workflow/WorkflowResolver/WorkflowResolver';
 
+import { name } from '../../package.json';
+
 export const graphqlConfig = configBase.extend(() => ({
   resolvers: [WorkflowResolver, PipelineResolver, JobResolver, LogMessageResolver],
 
-  schemaFilename: 'orchestrator.gql',
+  schemaFilename: `${name}.gql`,
 }));

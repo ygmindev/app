@@ -95,7 +95,11 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
           isPortal={false}
           title={route.title}
           zIndex={isMountedDelayed ? true : undefined}>
-          {elementF}
+          <Wrapper
+            flex
+            p>
+            {elementF}
+          </Wrapper>
         </Modal>
       );
     }

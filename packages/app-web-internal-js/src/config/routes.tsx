@@ -1,5 +1,5 @@
 import { getComponentDisplayName } from '@lib/frontend/core/utils/getComponentDisplayName/getComponentDisplayName';
-import { DEVELOPER, GETTING_STARTED } from '@lib/frontend/documentation/documentation.constants';
+import { GETTING_STARTED } from '@lib/frontend/documentation/documentation.constants';
 import { GettingStartedPage } from '@lib/frontend/documentation/pages/GettingStartedPage/GettingStartedPage';
 import { Library } from '@lib/frontend/library/components/Library/Library';
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
@@ -11,34 +11,18 @@ import { type ComponentType } from 'react';
 
 export const routes = getRoutes([
   {
-    category: {
-      icon: 'code',
-      id: DEVELOPER,
-      label: ({ t }) => t('documentation:developer'),
-    },
+    element: <GettingStartedPage />,
+    icon: 'rocket',
     isNavigatable: true,
-    pathname: DEVELOPER,
-    prerender: true,
-    routes: [
-      {
-        element: <GettingStartedPage />,
-        isNavigatable: true,
-        pathname: GETTING_STARTED,
-        title: ({ t }) => t('documentation:gettingStarted'),
-      },
-    ],
+    pathname: GETTING_STARTED,
+    title: ({ t }) => t('developer:gettingStarted'),
   },
 
   {
-    category: {
-      icon: 'book',
-      id: LIBRARY,
-      label: ({ t }) => t('documentation:library'),
-    },
+    icon: 'book',
     isNavigatable: true,
-    navigation: ROUTE_NAVIGATION.NAVIGATION,
+    navigation: ROUTE_NAVIGATION.TAB,
     pathname: LIBRARY,
-    prerender: true,
     routes: LIBRARY_PROPS.map((props) => {
       const id = (props.title =
         props.title ?? getComponentDisplayName(props.Component as ComponentType));
@@ -51,5 +35,6 @@ export const routes = getRoutes([
         title: id,
       };
     }),
+    title: ({ t }) => t('developer:library'),
   },
 ]);

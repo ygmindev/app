@@ -1,4 +1,4 @@
-import { navigationRef } from '@lib/frontend/route/containers/Router/_Router';
+import { navigationRef } from '@lib/frontend/route/containers/Router/_Router.base';
 import { type _UseRouterModel } from '@lib/frontend/route/hooks/useRouter/_useRouter.models';
 import {
   type LocationParamsModel,
@@ -7,29 +7,43 @@ import {
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { waitFor } from '@lib/shared/core/utils/waitFor/waitFor';
 import {
-  type NavigationRoute,
-  type ParamListBase,
+  type NavigationState,
   StackActions,
   useIsFocused,
   useNavigation,
+  useNavigationState,
   useRoute,
 } from '@react-navigation/native';
 import { useCallback } from 'react';
 
 export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
   const navigation = useNavigation();
+
+  const activeChild = useNavigationState((state) => {
+    if (!state) return null;
+    const currentState = state;
+    let active = currentState.routes[currentState.index ?? 0];
+    while (active?.state || (active as unknown as NavigationState)?.routes) {
+      const next = (active.state || active) as unknown as NavigationState;
+      const nextIndex = next.index ?? 0;
+      if (!next.routes || !next.routes[nextIndex]) break;
+      active = next.routes[nextIndex];
+    }
+    return active;
+  });
+
   const route = useRoute();
   const isFocused = useIsFocused();
 
   const getNestedPathname = useCallback(
     (to: string, params: Record<string, unknown> = {}): [string, Record<string, unknown>] => {
-      const fromParts = getLeaf().split('/').filter(Boolean);
+      const fromParts = activeChild?.name?.split('/').filter(Boolean);
       const toParts = to.split('/').filter(Boolean);
       let common = 0;
       while (
-        common < fromParts.length &&
+        common < (fromParts?.length ?? 0) &&
         common < toParts.length &&
-        fromParts[common] === toParts[common]
+        fromParts?.[common] === toParts[common]
       )
         common++;
       const get = (depth: number = 0): Record<string, unknown> =>
@@ -37,24 +51,12 @@ export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
           ? params
           : { params: get(depth + 1), screen: trimPathname(toParts.slice(0, depth + 1).join('/')) };
 
-      const isDeep = common === fromParts.length && common < toParts.length;
-      const currentDepth = isDeep ? common + 1 : Math.min(common, fromParts.length);
+      const isDeep = common === (fromParts?.length ?? 0) && common < toParts.length;
+      const currentDepth = isDeep ? common + 1 : Math.min(common, fromParts?.length ?? 0);
       return [trimPathname(toParts.slice(0, currentDepth).join('/')), get(currentDepth)];
     },
-    [route.name],
+    [route.name, activeChild?.name],
   );
-
-  const getLeaf = (): string => {
-    const state = navigationRef.current?.getRootState();
-    if (!state) {
-      return route.name;
-    }
-    let active = state.routes[state.index];
-    while (active.state && active.state.index != null) {
-      active = active.state.routes[active.state.index] as NavigationRoute<ParamListBase, string>;
-    }
-    return active.name;
-  };
 
   const { params } = route;
 
@@ -67,7 +69,7 @@ export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
 
     isActive: ({ from, isExact = false, pathname } = {}) => {
       if (!pathname) return isFocused;
-      const current = from ?? getLeaf();
+      const current = from ?? activeChild?.name;
       const target = pathname;
       const isMatch = current === target;
       return isExact ? isMatch : isMatch || (current?.startsWith(target) ?? false);

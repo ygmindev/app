@@ -88,6 +88,7 @@ export const IONIC_ICONS = {
   remove: 'remove-circle-outline',
   repeat: 'repeat-outline',
   return: 'return-down-back-outline',
+  rocket: 'rocket-outline',
   sad: 'sad-outline',
   save: 'save-outline',
   scissor: 'cut-outline',

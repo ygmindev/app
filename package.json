@@ -4,7 +4,7 @@
         "@app/native",
         "@app/web",
         "@app/web-admin",
-        "@app/web-documentation",
+        "@app/web-internal",
         "@app/web-orchestrator",
         "@app/web-template",
         "@asset/static",

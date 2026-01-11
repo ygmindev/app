@@ -34,8 +34,8 @@
       "@app/web-admin/*": [
         "packages/app-web-admin-js/src/*"
       ],
-      "@app/web-documentation/*": [
-        "packages/app-web-documentation-js/src/*"
+      "@app/web-internal/*": [
+        "packages/app-web-internal-js/src/*"
       ],
       "@app/web/*": [
         "packages/app-web-js/src/*"
