@@ -11,7 +11,9 @@ export const trimPathname = (
   if (value === '*') return value;
   const isPrefix = options?.isPrefix ?? true;
   const isSlug = options?.isSlug ?? true;
-  const pathname = value
+  const [url, hash] = value.split('#');
+  const hashPathname = hash && trimPathname(hash, { isPrefix: false });
+  const pathname = url
     .split('/')
     .filter(Boolean)
     .map((char) => {
@@ -21,5 +23,5 @@ export const trimPathname = (
     })
     .join('/');
   const result = trim(pathname, '/');
-  return isPrefix ? `/${result}` : result;
+  return hash ? `${result}#${hashPathname}` : isPrefix ? `/${result}` : result;
 };

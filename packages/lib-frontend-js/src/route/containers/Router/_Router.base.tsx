@@ -1,31 +1,67 @@
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { Route } from '@lib/frontend/route/components/Route/Route';
 import { type _RouterPropsModel } from '@lib/frontend/route/containers/Router/_Router.models';
-import { type LocationModel, type RouteModel } from '@lib/frontend/route/route.models';
+import {
+  type LocationModel,
+  type LocationParamsModel,
+  type RouteModel,
+} from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 import { type EmptyObjectModel } from '@lib/shared/core/core.models';
 import { APP_URI } from '@lib/shared/http/http.constants';
 import {
+  createNavigationContainerRef,
+  getPathFromState as _getPathFromState,
+  getStateFromPath as _getStateFromPath,
   type LinkingOptions,
   NavigationContainer,
   type NavigationState,
   type ParamListBase,
+  type PartialRoute,
+  type PartialState,
   type PathConfigMap,
+  type Route as RouteType,
 } from '@react-navigation/native';
-import { createNavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { type ComponentType, type ReactElement } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export const navigationRef = createNavigationContainerRef();
 
-const getPathFromState = (state: NavigationState): string => {
-  const route = state.routes[state.index ?? 0];
-  if (route.state?.routes) {
-    return trimPathname(getPathFromState(route.state as NavigationState));
+const getStateFromPath: typeof _getStateFromPath = (path, config) => {
+  const rootState = navigationRef.current?.getRootState();
+  const child = rootState?.routes[rootState.index ?? 0];
+  let { hash } = (child?.params ?? {}) as LocationParamsModel;
+  const state = _getStateFromPath(path, config);
+  if (state) {
+    const child = state.routes[state.index ?? 0];
+    if (!hash && typeof window !== 'undefined') {
+      [, hash] = window.location.href.split('#');
+    }
+    (child as { params: LocationParamsModel }).params = { ...child.params, hash };
   }
-  const screenName = (route.params as { screen?: string })?.screen ?? route.name;
-  return trimPathname(screenName);
+  return state;
+};
+
+const getActive = (
+  state: NavigationState | Omit<PartialState<NavigationState>, 'stale'>,
+): PartialRoute<RouteType<string, object | undefined>> => {
+  const route = state?.routes?.[state.index ?? 0];
+  if (route?.state?.routes) {
+    return getActive(route.state);
+  }
+  return route as PartialRoute<RouteType<string, object | undefined>>;
+};
+
+const getPathFromState: typeof _getPathFromState = (state, config): string => {
+  const active = getActive(state) ?? state.routes[state.routes.length - 1];
+  const path = _getPathFromState(state, config);
+  let { hash } = (active.params ?? {}) as LocationParamsModel;
+  let [url] = path.split('?');
+  if (!hash) {
+    [url, hash] = url.split('#');
+  }
+  return hash ? `${url}#${hash}` : url;
 };
 
 const getRouteConfig = (
@@ -121,7 +157,8 @@ export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
         documentTitle={{ enabled: false }}
         linking={{
           config: { screens: config?.screens ?? {} },
-          getPathFromState: (state) => getPathFromState(state as NavigationState),
+          getPathFromState,
+          getStateFromPath,
           prefixes: process.env.ENV_PLATFORM === 'web' ? [APP_URI] : [],
         }}
         ref={navigationRef}>

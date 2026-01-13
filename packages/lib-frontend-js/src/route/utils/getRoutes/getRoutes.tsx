@@ -32,16 +32,7 @@ export const getRoutes = (routes: GetRoutesParamsModel = []): GetRoutesModel => 
 
     {
       pathname: APP,
-      routes: [
-        ...routes,
-
-        ...userRoutes,
-
-        ...devRoutes,
-
-        // TODO: test environment only?
-        ...testRoutes,
-      ],
+      routes: [...routes, ...userRoutes, ...devRoutes, ...testRoutes],
     },
   ]);
 

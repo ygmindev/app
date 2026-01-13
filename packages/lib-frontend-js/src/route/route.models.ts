@@ -45,6 +45,7 @@ export type LocationModel<TType extends unknown> = {
 };
 
 export type LocationParamsModel = {
+  hash?: string;
   previous?: LocationModel<unknown>;
   redirect?: LocationModel<unknown>;
   title?: AsyncTextModel;
@@ -54,8 +55,4 @@ export type RouteContextModel<TType extends unknown> = {
   basename?: string;
   location?: LocationModel<TType>;
   redirectTo?: string;
-};
-
-export type LocationUpdateModel<TTypeNext extends unknown> = LocationModel<TTypeNext> & {
-  root?: string | boolean | number;
 };

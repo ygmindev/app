@@ -1,7 +1,7 @@
 import { BILLING } from '@lib/frontend/billing/billing.constants';
 import { billingRoutes } from '@lib/frontend/billing/billing.routes';
 import { LocaleSettingsPage } from '@lib/frontend/locale/pages/LocaleSettingsPage/LocaleSettingsPage';
-import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
+import { ROUTE_NAVIGATION } from '@lib/frontend/route/route.constants';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 import { AppearanceSettingsPage } from '@lib/frontend/settings/pages/AppearanceSettingsPage/AppearanceSettingsPage';
 import { APPEARANCE, SETTINGS } from '@lib/frontend/settings/settings.constants';
@@ -17,7 +17,7 @@ export const settingRoutes: Array<RouteModel> = [
 
     navigation: ROUTE_NAVIGATION.TAB,
 
-    pathname: SETTINGS,
+    pathname: `#${SETTINGS}`,
 
     routes: [
       {
@@ -51,7 +51,5 @@ export const settingRoutes: Array<RouteModel> = [
     ],
 
     title: ({ t }) => t('settings:settings'),
-
-    transition: ROUTE_TRANSITION.MODAL,
   },
 ];

@@ -1,4 +1,4 @@
-import { type LocationModel, type LocationUpdateModel } from '@lib/frontend/route/route.models';
+import { type LocationModel } from '@lib/frontend/route/route.models';
 
 export type _UseRouterModel<TType extends unknown> = {
   depth?: number;
@@ -9,9 +9,16 @@ export type _UseRouterModel<TType extends unknown> = {
 
   back(): void;
 
-  isActive(params: { from?: string; isExact?: boolean; pathname?: string }): boolean;
+  isActive(params: IsActiveParamsModel): boolean;
 
-  push<TTypeNext>(params: LocationUpdateModel<TTypeNext>): void;
+  push<TTypeNext>(params: LocationModel<TTypeNext>): void;
 
-  replace<TTypeNext>(params: LocationUpdateModel<TTypeNext>): void;
+  replace<TTypeNext>(params: LocationModel<TTypeNext>): void;
+};
+
+export type IsActiveParamsModel = {
+  from?: string;
+  isExact?: boolean;
+  isHashable?: boolean;
+  pathname?: string;
 };

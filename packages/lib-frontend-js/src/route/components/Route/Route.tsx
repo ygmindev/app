@@ -21,10 +21,14 @@ import { cloneElement, useMemo } from 'react';
 
 export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { isMounted } = useRouter();
+  const { isActive, isMounted, location, push } = useRouter();
   const theme = useTheme();
   const isMountedDelayed = useValueDelayed(isMounted, theme.animation.transition);
   const appPhase = useAppPhase();
+
+  if (location.pathname.includes('settings/billing')) {
+    console.warn(`@@@ ${location.pathname} vs. ${isMounted}`);
+  }
 
   const isLeaf = !route?.routes;
   const element = useMemo(() => {
@@ -67,7 +71,6 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
             </Appearable>
           );
         }
-
         break;
       }
     }
@@ -86,27 +89,39 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
       }
     }
 
-    if (route?.transition === ROUTE_TRANSITION.MODAL) {
-      if (route?.fullpath === '/settings') {
-        console.warn(
-          `@@ ${route?.fullpath}: isMounted: ${isMounted}, isMountedDelayed: ${isMountedDelayed}, defaultState: ${defaultState}`,
-        );
-      }
-
+    const hashRoutes = route?.routes?.filter((v) => v.pathname.startsWith('#'));
+    if (route && hashRoutes?.length) {
+      const { hash } = location.params ?? {};
+      const hashRoute = hashRoutes.find((v) => {
+        const [, pathname] = v.pathname.split('#');
+        return isActive({ from: hash, pathname });
+      });
       elementF = (
-        <Modal
-          // defaultState={defaultState}
-          isFullSize
-          isOpen={isMounted}
-          isPortal={false}
-          title={route.title}
-          zIndex={isMountedDelayed ? true : undefined}>
-          <Wrapper
-            flex
-            p>
-            {elementF}
-          </Wrapper>
-        </Modal>
+        <>
+          {elementF}
+
+          <Modal
+            defaultState={defaultState}
+            isFullSize
+            isOpen={isMounted && !!hashRoute}
+            isPortal={false}
+            onToggle={(v) => {
+              if (!v) {
+                const { params } = location;
+                delete params?.['hash'];
+                push({ params, pathname: location.pathname });
+              }
+            }}
+            title={route.title}
+            zIndex={isMountedDelayed ? true : undefined}>
+            <Wrapper
+              flex
+              p
+              position={SHAPE_POSITION.RELATIVE}>
+              <Route route={hashRoute} />
+            </Wrapper>
+          </Modal>
+        </>
       );
     }
 
