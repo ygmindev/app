@@ -26,6 +26,7 @@ export const _render = async (request: _RenderParamsModel): Promise<_RenderModel
   }
 
   const isClientSide = url.endsWith('.pageContext.json');
+
   const { errorWhileRendering, httpResponse, redirectTo } = await renderPage({
     context: isClientSide
       ? {

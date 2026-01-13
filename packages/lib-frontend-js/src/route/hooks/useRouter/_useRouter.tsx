@@ -116,7 +116,6 @@ export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
 
     push: <TTypeNext,>({ params, pathname }: LocationModel<TTypeNext>) => {
       void waitFor({ condition: () => navigationRef.isReady() }).then(() => {
-        // navigationRef.current?.dispatch(StackActions.push(...getNestedPathname(pathname, params)));
         navigationRef.current?.navigate(...(getNestedPathname(pathname, params) as never));
       });
     },

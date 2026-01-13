@@ -1,6 +1,7 @@
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { Route } from '@lib/frontend/route/components/Route/Route';
 import { type _RouterPropsModel } from '@lib/frontend/route/containers/Router/_Router.models';
+import { useUrl } from '@lib/frontend/route/hooks/useUrl/useUrl';
 import {
   type LocationModel,
   type LocationParamsModel,
@@ -27,21 +28,6 @@ import { type ComponentType, type ReactElement } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export const navigationRef = createNavigationContainerRef();
-
-const getStateFromPath: typeof _getStateFromPath = (path, config) => {
-  const rootState = navigationRef.current?.getRootState();
-  const child = rootState?.routes[rootState.index ?? 0];
-  let { hash } = (child?.params ?? {}) as LocationParamsModel;
-  const state = _getStateFromPath(path, config);
-  if (state) {
-    const child = state.routes[state.index ?? 0];
-    if (!hash && typeof window !== 'undefined') {
-      [, hash] = window.location.href.split('#');
-    }
-    (child as { params: LocationParamsModel }).params = { ...child.params, hash };
-  }
-  return state;
-};
 
 const getActive = (
   state: NavigationState | Omit<PartialState<NavigationState>, 'stale'>,
@@ -146,6 +132,7 @@ const getRouteConfig = (
 
 export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
   const { config, element } = getRouteConfig({ pathname: '/', routes }, value?.location);
+  const { hash: hashUrl } = useUrl();
   return (
     <SafeAreaProvider
       initialMetrics={{
@@ -158,7 +145,20 @@ export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
         linking={{
           config: { screens: config?.screens ?? {} },
           getPathFromState,
-          getStateFromPath,
+          getStateFromPath: (path, config) => {
+            const rootState = navigationRef.current?.getRootState();
+            const child = rootState?.routes[rootState.index ?? 0];
+            const { hash } = (child?.params ?? {}) as LocationParamsModel;
+            const state = _getStateFromPath(path, config);
+            if (state) {
+              const child = state.routes[state.index ?? 0];
+              (child as { params: LocationParamsModel }).params = {
+                ...child.params,
+                hash: hashUrl ?? hash,
+              };
+            }
+            return state;
+          },
           prefixes: process.env.ENV_PLATFORM === 'web' ? [APP_URI] : [],
         }}
         ref={navigationRef}>

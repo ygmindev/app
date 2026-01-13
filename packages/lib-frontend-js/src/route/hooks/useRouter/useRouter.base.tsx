@@ -1,12 +1,10 @@
 import { _useRouter } from '@lib/frontend/route/hooks/useRouter/_useRouter';
 import { type UseRouterModel } from '@lib/frontend/route/hooks/useRouter/useRouter.models';
-import { useUrl } from '@lib/frontend/route/hooks/useUrl/useUrl';
 import { type LocationModel } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
 
 export const useRouter = <TType extends unknown>(): UseRouterModel<TType> => {
   const { back, isActive, isMounted, location, push, replace } = _useRouter<TType>();
-  const { push: pushUrl, replace: replaceUrl } = useUrl();
   return {
     back,
 
@@ -28,7 +26,6 @@ export const useRouter = <TType extends unknown>(): UseRouterModel<TType> => {
         params: { ...params, previous: location },
         pathname: trimPathname(pathname),
       });
-      pathname.startsWith('#') && pushUrl(pathname);
     },
 
     replace: <TTypeNext = undefined,>({ params, pathname }: LocationModel<TTypeNext>) => {
@@ -36,7 +33,6 @@ export const useRouter = <TType extends unknown>(): UseRouterModel<TType> => {
         params: { ...params, previous: location },
         pathname: trimPathname(pathname),
       });
-      pathname.startsWith('#') && replaceUrl(pathname);
     },
   };
 };

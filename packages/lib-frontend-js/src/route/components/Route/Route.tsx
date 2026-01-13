@@ -26,10 +26,6 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
   const isMountedDelayed = useValueDelayed(isMounted, theme.animation.transition);
   const appPhase = useAppPhase();
 
-  if (location.pathname.includes('settings/billing')) {
-    console.warn(`@@@ ${location.pathname} vs. ${isMounted}`);
-  }
-
   const isLeaf = !route?.routes;
   const element = useMemo(() => {
     let elementF = route?.element ?? (
@@ -96,6 +92,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
         const [, pathname] = v.pathname.split('#');
         return isActive({ from: hash, pathname });
       });
+      console.warn(hashRoute);
       elementF = (
         <>
           {elementF}
