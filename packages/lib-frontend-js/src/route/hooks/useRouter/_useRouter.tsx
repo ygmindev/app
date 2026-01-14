@@ -72,22 +72,10 @@ export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
     [activeChild],
   );
 
-  const isActive = ({
-    from,
-    isExact = false,
-    isHashable = true,
-    pathname,
-  }: IsActiveParamsModel = {}): boolean => {
+  const isActive = ({ from, isExact = false, pathname }: IsActiveParamsModel = {}): boolean => {
     const current = from ?? activeChild?.name;
     const isMatch = current === pathname;
-    const result = isExact ? isMatch : isMatch || (current?.startsWith(pathname ?? '') ?? false);
-    if (result) {
-      return true;
-    }
-    const { hash } = (route.params ?? {}) as LocationParamsModel;
-    return hash && isHashable
-      ? isActive({ from: hash, isExact, isHashable: false, pathname: trimStart(pathname, '#') })
-      : false;
+    return isExact ? isMatch : isMatch || (current?.startsWith(pathname ?? '') ?? false);
   };
 
   return {

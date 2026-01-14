@@ -11,11 +11,14 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 export const TabLayout: LFCModel<TabLayoutPropsModel> = ({ children, route, type, ...props }) => {
   const { t } = useTranslation();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { isActive, push } = useRouter();
+  const { isActive, location, push } = useRouter();
 
   const activeChild = route?.routes?.find(
     ({ fullpath, isNavigatable = true, pathname }) =>
-      isNavigatable && isActive({ isExact: false, pathname: fullpath ?? pathname }),
+      isNavigatable &&
+      (route.fullpath?.startsWith('#')
+        ? isActive({ from: `#${location.params?.hash}`, pathname: fullpath })
+        : isActive({ pathname: fullpath ?? pathname })),
   );
 
   return (

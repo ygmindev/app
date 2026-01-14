@@ -17,91 +17,93 @@ import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.co
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { cloneElement, useMemo } from 'react';
+import { cloneElement } from 'react';
 
-export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) => {
+export const Route: LFCModel<RoutePropsModel> = ({
+  children,
+  isMounted: isMountedOverride,
+  route,
+  ...props
+}) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { isActive, isMounted, location, push } = useRouter();
+  const isMountedF = isMountedOverride ?? isMounted;
   const theme = useTheme();
-  const isMountedDelayed = useValueDelayed(isMounted, theme.animation.transition);
+
+  const isMountedDelayed = useValueDelayed(isMountedF, theme.animation.transition);
   const appPhase = useAppPhase();
 
   const isLeaf = !route?.routes;
-  const element = useMemo(() => {
-    let elementF = route?.element ?? (
-      <Wrapper
-        flex
-        position={SHAPE_POSITION.RELATIVE}
-      />
-    );
 
-    children && (elementF = cloneElement(elementF, { children }));
+  let elementF = route?.element ?? (
+    <Wrapper
+      flex
+      position={SHAPE_POSITION.RELATIVE}
+    />
+  );
 
-    const defaultState = isMounted
-      ? appPhase == APP_PHASE.CLIENT_SIDE_NAVIGATION
-        ? undefined
-        : ELEMENT_STATE.ACTIVE
-      : undefined;
+  children && (elementF = cloneElement(elementF, { children }));
 
-    switch (route?.transition) {
-      case ROUTE_TRANSITION.SLIDE: {
+  const defaultState = isMountedF
+    ? appPhase == APP_PHASE.CLIENT_SIDE_NAVIGATION
+      ? undefined
+      : ELEMENT_STATE.ACTIVE
+    : undefined;
+
+  switch (route?.transition) {
+    case ROUTE_TRANSITION.SLIDE: {
+      elementF = (
+        <Slide
+          // defaultState={defaultState}
+          elementState={isMountedF ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
+          zIndex={isMountedDelayed ? true : undefined}>
+          {elementF}
+        </Slide>
+      );
+      break;
+    }
+    default: {
+      if (isLeaf) {
         elementF = (
-          <Slide
-            defaultState={defaultState}
-            elementState={isMounted ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
+          <Appearable
+            // defaultState={defaultState}
+            isAbsoluteFill
+            isActive={isMountedF}
             zIndex={isMountedDelayed ? true : undefined}>
             {elementF}
-          </Slide>
+          </Appearable>
         );
-        break;
       }
-      default: {
-        if (isLeaf) {
-          elementF = (
-            <Appearable
-              defaultState={defaultState}
-              isAbsoluteFill
-              isActive={isMounted}
-              zIndex={isMountedDelayed ? true : undefined}>
-              {elementF}
-            </Appearable>
-          );
-        }
-        break;
-      }
+      break;
     }
+  }
 
-    switch (route?.navigation) {
-      case ROUTE_NAVIGATION.TAB: {
-        const childTabs = route.routes?.find((v) => v.navigation === ROUTE_NAVIGATION.TAB);
-        elementF = (
-          <TabLayout
-            route={route}
-            type={childTabs ? TABS_TYPE.BUTTON : TABS_TYPE.UNDERLINE}>
-            {elementF}
-          </TabLayout>
-        );
-        break;
-      }
-    }
-
-    const hashRoutes = route?.routes?.filter((v) => v.pathname.startsWith('#'));
-    if (route && hashRoutes?.length) {
-      const { hash } = location.params ?? {};
-      const hashRoute = hashRoutes.find((v) => {
-        const [, pathname] = v.pathname.split('#');
-        return isActive({ from: hash, pathname });
-      });
-      console.warn(hashRoute);
+  switch (route?.navigation) {
+    case ROUTE_NAVIGATION.TAB: {
+      const childTabs = route.routes?.find((v) => v.navigation === ROUTE_NAVIGATION.TAB);
       elementF = (
-        <>
+        <TabLayout
+          route={route}
+          type={childTabs ? TABS_TYPE.BUTTON : TABS_TYPE.UNDERLINE}>
           {elementF}
+        </TabLayout>
+      );
+      break;
+    }
+  }
 
+  const hashRoutes = route?.routes?.filter((v) => v.pathname.startsWith('#'));
+  if (route && hashRoutes?.length) {
+    const { hash } = location.params ?? {};
+    elementF = (
+      <>
+        {elementF}
+
+        {hashRoutes.map((v) => (
           <Modal
-            defaultState={defaultState}
             isFullSize
-            isOpen={isMounted && !!hashRoute}
-            isPortal={false}
+            isOpen={isMountedF && isActive({ from: `#${hash}`, pathname: v.pathname })}
+            key={v.pathname}
             onToggle={(v) => {
               if (!v) {
                 const { params } = location;
@@ -109,26 +111,32 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
                 push({ params, pathname: location.pathname });
               }
             }}
-            title={route.title}
-            zIndex={isMountedDelayed ? true : undefined}>
+            title={route.title}>
             <Wrapper
               flex
               p
               position={SHAPE_POSITION.RELATIVE}>
-              <Route route={hashRoute} />
+              <Route route={v}>
+                {v.routes?.map((vv) => (
+                  <Route
+                    isAbsoluteFill
+                    isMounted={isActive({ from: `#${hash}`, pathname: vv.fullpath })}
+                    key={vv.pathname}
+                    route={vv}
+                  />
+                ))}
+              </Route>
             </Wrapper>
           </Modal>
-        </>
-      );
-    }
+        ))}
+      </>
+    );
+  }
 
-    route?.isProtectable && (elementF = <Protectable>{elementF}</Protectable>);
-
-    return elementF;
-  }, [appPhase, route, children, isMounted]);
+  route?.isProtectable && (elementF = <Protectable>{elementF}</Protectable>);
 
   return (
-    (isMounted || isMountedDelayed) && (
+    (isMountedF || isMountedDelayed) && (
       <Wrapper
         {...wrapperProps}
         flex
@@ -139,7 +147,7 @@ export const Route: LFCModel<RoutePropsModel> = ({ children, route, ...props }) 
           flex
           isVerticalScrollable
           position={SHAPE_POSITION.RELATIVE}>
-          {element}
+          {elementF}
         </Wrapper>
       </Wrapper>
     )

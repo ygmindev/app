@@ -19,6 +19,5 @@ export type _UseRouterModel<TType extends unknown> = {
 export type IsActiveParamsModel = {
   from?: string;
   isExact?: boolean;
-  isHashable?: boolean;
   pathname?: string;
 };
