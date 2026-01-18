@@ -1,6 +1,5 @@
 import { SignInForm } from '@lib/frontend/auth/containers/SignInForm/SignInForm';
 import { type SignInPagePropsModel } from '@lib/frontend/auth/pages/SignInPage/SignInPage.models';
-import { WrapperFixture } from '@lib/frontend/core/components/Wrapper/Wrapper.fixtures';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -20,7 +19,6 @@ export const SignInPage: LFCModel<SignInPagePropsModel> = ({
       {...wrapperProps}
       flex
       isFullHeight>
-      <WrapperFixture />
       <SignInForm
         method={method}
         mode={mode}
