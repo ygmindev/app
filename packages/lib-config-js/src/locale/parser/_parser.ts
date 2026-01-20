@@ -1,4 +1,5 @@
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
+import { EXTENSIONS_BASE } from '@lib/config/file/file.constants';
 import {
   type _ParserConfigModel,
   type ParserConfigModel,
@@ -9,15 +10,12 @@ export const _parser = ({
   languages,
   missingValue,
 }: ParserConfigModel): _ParserConfigModel => ({
-  createOldCatalogs: false,
-
-  defaultValue: missingValue,
+  extract: {
+    defaultValue: missingValue,
+    input: [`src/**/*.{${EXTENSIONS_BASE.join(',')}}`],
+    output: joinPaths([distDir, '{{language}}/{{namespace}}.json']),
+    sort: true,
+  },
 
   locales: languages,
-
-  output: joinPaths([distDir, '$LOCALE/$NAMESPACE.json']),
-
-  sort: true,
-
-  verbose: true,
 });

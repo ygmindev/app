@@ -1,3 +1,5 @@
+import { type I18nextToolkitConfig } from 'i18next-cli';
+
 export type ParserConfigModel = {
   distDir: string;
 
@@ -6,4 +8,4 @@ export type ParserConfigModel = {
   missingValue: string;
 };
 
-export type _ParserConfigModel = object;
+export type _ParserConfigModel = I18nextToolkitConfig;

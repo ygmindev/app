@@ -41,6 +41,7 @@
     "graphql-yoga": "^5.18.0",
     "http-errors": "^2.0.0",
     "i18next": "^25.5.2",
+    "i18next-cli": "^1.36.1",
     "inversify": "^7.9.1",
     "ioredis": "^5.7.0",
     "json-stringify-safe": "^5.0.1",
