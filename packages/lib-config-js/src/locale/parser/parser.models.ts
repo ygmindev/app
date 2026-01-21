@@ -6,6 +6,8 @@ export type ParserConfigModel = {
   languages: Array<string>;
 
   missingValue: string;
+
+  patterns: Array<string>;
 };
 
 export type _ParserConfigModel = I18nextToolkitConfig;

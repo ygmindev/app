@@ -1,9 +1,1 @@
-{
-  "field": "field",
-  "fieldName": "field name",
-  "fieldType": "field type",
-  "isMultiple": "is multiple",
-  "isOptional": "is optional",
-  "isRequired": "is required",
-  "isSingle": "is single"
-}
+{}

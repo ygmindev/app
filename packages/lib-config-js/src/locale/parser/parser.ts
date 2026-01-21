@@ -1,5 +1,6 @@
+import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { fromPublic } from '@lib/backend/file/utils/fromPublic/fromPublic';
-import { ASSETS_DIR } from '@lib/config/file/file.constants';
+import { ASSETS_DIR, EXTENSIONS_BASE } from '@lib/config/file/file.constants';
 import { LANGUAGES } from '@lib/config/locale/internationalize/internationalize.constants';
 import { _parser } from '@lib/config/locale/parser/_parser';
 import {
@@ -17,5 +18,7 @@ export const parserConfig = new Config<ParserConfigModel, _ParserConfigModel>({
     languages: LANGUAGES.map(({ id }) => id),
 
     missingValue: 'TRANSLATION_MISSING',
+
+    patterns: [fromPackages(`*/src/**/*{${EXTENSIONS_BASE.join(',')}}`)],
   }),
 });

@@ -1,9 +1,10 @@
+import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
 import { type BootstrappableModel } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable.models';
-import { type BuildWorkflowModel } from '@tool/task/orchestrator/utils/buildWorkflow/buildWorkflow.models';
 
 export type CliRegistryModel = {
   pathname: string;
-  workflow: BuildWorkflowModel<unknown, unknown>;
+
+  func(params: unknown, context?: ExecutionContextModel): Promise<unknown>;
 };
 
 export type CliModel = BootstrappableModel & {
