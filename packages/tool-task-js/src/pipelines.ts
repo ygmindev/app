@@ -1,5 +1,5 @@
 import { PING } from '@lib/shared/http/http.constants';
-import { ping } from '@tool/task/dev/workflows/ping/ping';
+import { pingWorkflow } from '@tool/task/dev/workflows/pingWorkflow/pingWorkflow';
 import { buildConfig } from '@tool/task/node/workflows/buildConfig/buildConfig';
 import { BUILD_CONFIG } from '@tool/task/node/workflows/buildConfig/buildConfig.constants';
 import { buildPipelines } from '@tool/task/orchestrator/utils/buildPipelines/buildPipelines';
@@ -16,7 +16,7 @@ export const pipelines = buildPipelines({
 
     {
       name: PING,
-      workflows: [ping],
+      workflows: [pingWorkflow],
     },
   ],
 });

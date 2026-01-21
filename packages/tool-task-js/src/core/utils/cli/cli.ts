@@ -7,7 +7,6 @@ import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { withDir } from '@lib/backend/file/utils/withDir/withDir';
 import { taskConfig } from '@lib/config/task/task';
 import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
-import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
@@ -93,7 +92,8 @@ export class Cli extends Bootstrappable implements CliModel {
       .map((p) => p.charAt(0))
       .join('');
     if (this._aliases[alias]) {
-      throw new DuplicateError(`alias ${alias} (${name}) already exists`);
+      // throw new DuplicateError(`alias ${alias} (${name}) already exists`);
+      console.warn(`alias ${alias} (${name}) already exists`);
     }
     this._registry[name] = params;
     this._aliases[alias] = name;
