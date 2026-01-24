@@ -9,7 +9,7 @@ export const generateConfig = new Config<GenerateConfigModel>({
       'package-js': jsPackage,
     },
 
-    templateDir: fromPackages('lib-config-js/templates'),
+    templateDir: fromPackages('lib-config-js/src/generate/templates'),
 
     variablePattern: /{{[A-Z_]+}}/g,
   }),

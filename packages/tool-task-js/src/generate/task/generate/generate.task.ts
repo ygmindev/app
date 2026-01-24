@@ -6,17 +6,19 @@ import { GENERATE } from '@tool/task/generate/task/generate/generate.constants';
 import { type GenerateParamsModel, type GenerateModel } from '@tool/task/generate/task/generate/generate.models';
 import { boilerplate } from '@tool/task/generate/utils/boilerplate/boilerplate';
 import { moveFile } from '@lib/backend/file/utils/moveFile/moveFile';
+import { children } from '@lib/backend/file/utils/children/children';
+
+const { templateDir } = generateConfig.params();
 
 export const generate = buildTask<GenerateParamsModel, GenerateModel>({
-  // options: async () => [
-  //   {
-  //     key: 'template',
-  //     options: children(fromPackages('tool-task-js/templates'), { isDirectory: true }).map(
-  //       ({ name }) => name,
-  //     ),
-  //     type: PROMPT_TYPE.LIST,
-  //   },
-  // ],
+  prompts: [
+    {
+      key: 'template',
+      options: children(templateDir, { isDirectory: true }).map(
+        ({ name }) => ({id: name}),
+      ),
+    },
+  ],
 
   name: GENERATE,
 
