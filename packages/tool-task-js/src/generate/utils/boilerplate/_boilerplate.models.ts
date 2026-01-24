@@ -1,7 +1,7 @@
 export type _BoilerplateParamsModel = {
-  input: string;
-  output: string;
+  outPathname: string;
   template: string;
+  templatePathname: string;
   variables?: Record<string, string>;
 };
 

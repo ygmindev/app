@@ -19,6 +19,6 @@ export const buildLint = buildTask<BuildLintParamsModel, BuildLintModel>({
   task: async () =>
     nodeBuild({
       entryFiles: fromConfig('node/lint/eslint.config.ts'),
-      outDir: fromDist(),
+      outDirname: fromDist(),
     }),
 });

@@ -5,7 +5,7 @@ import {
 
 export type _NodeBuildParamsModel = Pick<
   BundleConfigModel,
-  'entryFiles' | 'format' | 'outDir' | 'watch'
+  'entryFiles' | 'format' | 'outDirname' | 'watch'
 > & {
   configRaw?: _BundleConfigModel;
 };

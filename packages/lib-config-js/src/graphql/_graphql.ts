@@ -12,7 +12,7 @@ import { buildSchemaSync } from 'type-graphql';
 export const _graphql = ({
   authorize,
   container,
-  outDir,
+  outDirname,
   resolvers,
   schemaFilename,
 }: GraphqlConfigModel): _GraphqlConfigModel =>
@@ -22,7 +22,7 @@ export const _graphql = ({
 
     container: container as unknown as ContainerType,
 
-    emitSchemaFile: joinPaths([outDir, schemaFilename]),
+    emitSchemaFile: joinPaths([outDirname, schemaFilename]),
 
     nullableByDefault: true,
 

@@ -27,7 +27,7 @@ export const graphqlConfig = new Config<GraphqlConfigModel, _GraphqlConfigModel>
 
       container: Container,
 
-      outDir: fromWorking(BUILD_DIR, GRAPHQL),
+      outDirname: fromWorking(BUILD_DIR, GRAPHQL),
 
       resolvers: filterNil([
         AccessResolver,

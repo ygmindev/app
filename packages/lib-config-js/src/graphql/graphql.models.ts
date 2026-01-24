@@ -9,7 +9,7 @@ import { type GraphQLSchema } from 'graphql';
 export type GraphqlConfigModel = {
   container: ContainerModel;
 
-  outDir: string;
+  outDirname: string;
 
   resolvers: Array<ClassModel>;
 

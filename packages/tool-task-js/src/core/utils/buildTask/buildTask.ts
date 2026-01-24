@@ -10,16 +10,20 @@ import {
   type TaskModel,
   type TaskParamsModel,
 } from '@tool/task/core/utils/buildTask/buildTask.models';
+import { prompt } from '@tool/task/core/utils/prompt/prompt';
 
 export const buildTask =
   <TParams = unknown, TResult = unknown>({
     context,
     name,
     params,
+    prompts,
     task: fn,
   }: TaskParamsModel<TParams, TResult>): TaskModel<TParams, TResult> =>
   async (paramsOverrides, contextOverrides) => {
-    const paramsF = merge([cleanObject(paramsOverrides), params]) as TParams;
+    let paramsF = merge([cleanObject(paramsOverrides), params]) as TParams;
+    const promptsF = prompts?.filter((v) => !(v.key in (paramsF as object)));
+        promptsF?.length && (paramsF = { ...paramsF, ...(await prompt(promptsF)) });
     const contextF = merge([cleanObject(contextOverrides), context]) as ExecutionContextModel;
     contextF.root = contextF.root ?? (contextF.app ? await getAppRoot(contextF.app) : fromRoot());
     const environment = process.env.NODE_ENV === 'undefined' ? undefined : process.env.NODE_ENV;

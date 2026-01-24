@@ -12,7 +12,7 @@ export const lintConfig = new Config<LintConfigModel, _LintConfigModel>({
   params: () => ({
     configFilename: ESLINT_CONFIG_FILENAME,
 
-    exclude: ['**/node_modules'],
+    exclude: ['**/node_modules', 'generate/templates/**/*'],
 
     include: cartesianString(['src/**/*', 'tests/**/*'], EXTENSIONS_BASE),
 

@@ -59,7 +59,7 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   mainFields?: Array<string>;
 
-  outDir?: string;
+  outDirname?: string;
 
   outExtension?: string;
 

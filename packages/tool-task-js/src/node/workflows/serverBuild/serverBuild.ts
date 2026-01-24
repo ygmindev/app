@@ -16,14 +16,14 @@ export const serverBuild: BuildWorkflowParamsModel<
 
   name: SERVER_BUILD,
 
-  steps: ({ entryFiles = 'src/index.ts', format, outDir, watch }, context) => [
+  steps: ({ entryFiles = 'src/index.ts', format, outDirname, watch }, context) => [
     {
       context,
       name: NODE_BUILD,
       params: {
         entryFiles,
         format,
-        outDir,
+        outDirname,
         watch,
       },
     },

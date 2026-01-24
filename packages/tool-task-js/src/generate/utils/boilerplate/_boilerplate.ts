@@ -7,9 +7,9 @@ import { CaseConverterEnum, generateTemplateFilesBatch } from 'generate-template
 import map from 'lodash/map';
 
 export const _boilerplate = async ({
-  input,
-  output,
+  outPathname,
   template,
+  templatePathname,
   variables,
 }: _BoilerplateParamsModel): Promise<_BoilerplateModel> =>
   new Promise((resolve) => {
@@ -17,10 +17,10 @@ export const _boilerplate = async ({
       {
         defaultCase: CaseConverterEnum.None,
         dynamicReplacers: map(variables, (v, k) => ({ slot: k, slotValue: v })),
-        entry: { folderPath: input },
+        entry: { folderPath: templatePathname },
         onComplete: (result) => resolve(result.output.files),
         option: template,
-        output: { overwrite: true, path: output },
+        output: { overwrite: true, path: outPathname },
       } as IConfigItem,
     ]);
   });

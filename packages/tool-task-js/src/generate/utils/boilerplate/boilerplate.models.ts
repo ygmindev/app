@@ -3,10 +3,13 @@ import {
   type _BoilerplateParamsModel,
 } from '@tool/task/generate/utils/boilerplate/_boilerplate.models';
 
-export type BoilerplateParamsModel = {
-  onSuccess?(params: Omit<BoilerplateParamsModel, 'templateDir'>): Promise<void>;
-  output?: string;
+export type BoilerplateParamsModel = Omit<
+  _BoilerplateParamsModel,
+  'outPathname' | 'templatePathname'
+> & {
+  outPathname?: string;
   templateDir: string;
-} & Omit<_BoilerplateParamsModel, 'input' | 'output'>;
+  onSuccess?(params: Omit<BoilerplateParamsModel, 'templateDir'>): Promise<void>;
+};
 
 export type BoilerplateModel = _BoilerplateModel;

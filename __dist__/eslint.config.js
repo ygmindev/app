@@ -1,61 +1,70 @@
-import j from "app-root-path";
-import v from "lodash/trimStart.js";
-import { join as $, relative as x, dirname as N, resolve as k } from "path";
-import C from "@eslint/js";
-import b from "lodash/isArray.js";
-import p from "lodash/isPlainObject.js";
-import S from "lodash/isString.js";
-import A from "lodash/reduce.js";
-import f from "lodash/trim.js";
-import { flatConfigs as I } from "eslint-plugin-import";
-import R from "eslint-plugin-jsonc";
-import T from "eslint-plugin-prettier/recommended";
-import d from "eslint-plugin-react";
-import F from "eslint-plugin-simple-import-sort";
-import q from "eslint-plugin-sort-destructure-keys";
-import L from "eslint-plugin-sort-keys-fix";
-import O from "eslint-plugin-typescript-sort-keys";
-import W from "eslint-plugin-unused-imports";
-import a from "globals";
-import g from "typescript-eslint";
-import { defineConfig as B } from "eslint/config";
-import { fileURLToPath as K } from "url";
-import { Collection as V } from "@mikro-orm/core";
-import Q from "lodash/mergeWith.js";
-import U from "lodash/uniq.js";
-import X from "lodash/cloneDeep.js";
-const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t, r]) => {
-  let e = $(...E(t));
-  return r?.extension && (e = `${e}.${v(r.extension, ".")}`), e;
-}, J = (...t) => h([H(), ...t]), M = [".tsx", ".ts", ".jsx", ".js"], Z = (...t) => h([process.cwd(), ...t]), Y = ({ from: t = Z(), to: r }) => x(t, r), c = (t) => S(t) ? f(t, " ") : b(t) ? t.map((r) => c(r)) : p(t) ? A(t, (r, e, o) => ({ ...r, [f(o, " ")]: c(e) }), {}) : t, P = N(K(import.meta.url)), G = ({
-  exclude: t,
-  include: r,
-  indentWidth: e,
-  isParenthesis: o,
-  isSameLine: s,
-  isSingleQuote: l,
-  isSpacing: n,
-  isTrailingComma: _,
-  printWidth: w,
-  unusedIgnore: m
-}) => B(
+import appRootPath from "app-root-path";
+import trimStart from "lodash/trimStart.js";
+import { join, relative } from "path";
+import eslintPlugin from "@eslint/js";
+import isArray$2 from "lodash/isArray.js";
+import isPlainObject from "lodash/isPlainObject.js";
+import isString from "lodash/isString.js";
+import reduce from "lodash/reduce.js";
+import trim from "lodash/trim.js";
+import { flatConfigs } from "eslint-plugin-import";
+import jsoncPlugin from "eslint-plugin-jsonc";
+import prettierPlugin from "eslint-plugin-prettier/recommended";
+import reactPlugin from "eslint-plugin-react";
+import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
+import sortDestructureKeysPlugin from "eslint-plugin-sort-destructure-keys";
+import sortKeysFixPlugin from "eslint-plugin-sort-keys-fix";
+import typescriptSortKeysPlugin from "eslint-plugin-typescript-sort-keys";
+import unusedImportsPlugin from "eslint-plugin-unused-imports";
+import globals from "globals";
+import typescriptPlugin from "typescript-eslint";
+import { defineConfig } from "eslint/config";
+import { Collection as Collection$1 } from "@mikro-orm/core";
+import mergeWith from "lodash/mergeWith.js";
+import uniq from "lodash/uniq.js";
+import cloneDeep from "lodash/cloneDeep.js";
+const _getRoot = () => appRootPath.path;
+const getRoot = () => _getRoot();
+const filterNil = (params) => params?.filter(Boolean);
+const joinPaths = (...[paths, options]) => {
+  let path = join(...filterNil(paths));
+  options?.extension && (path = `${path}.${trimStart(options.extension, ".")}`);
+  return path;
+};
+const fromRoot = (...paths) => joinPaths([getRoot(), ...paths]);
+const EXTENSIONS_BASE = [".tsx", ".ts", ".jsx", ".js"];
+const fromWorking = (...paths) => joinPaths([process.cwd(), ...paths]);
+const toRelative = ({ from = fromWorking(), to }) => relative(from, to);
+const trimValue = (params) => isString(params) ? trim(params, " ") : isArray$2(params) ? params.map((v) => trimValue(v)) : isPlainObject(params) ? reduce(params, (r, v, k) => ({ ...r, [trim(k, " ")]: trimValue(v) }), {}) : params;
+const _lint = ({
+  exclude,
+  include,
+  indentWidth,
+  isParenthesis,
+  isSameLine,
+  isSingleQuote,
+  isSpacing,
+  isTrailingComma,
+  printWidth,
+  unusedIgnore
+}) => defineConfig(
   {
-    ignores: [`!(${r.map((D) => Y({ to: D })).join("|")})`, ...t]
+    ignores: [`!(${include.map((v) => toRelative({ to: v })).join("|")})`, ...exclude]
   },
-  C.configs.recommended,
+  eslintPlugin.configs.recommended,
   {
     rules: {
-      "no-empty": ["warn", { allowEmptyCatch: !0 }],
+      "no-empty": ["warn", { allowEmptyCatch: true }],
       "no-param-reassign": "error",
       "no-return-await": "off",
       "no-unused-expressions": "off",
       "no-unused-vars": "off",
       "object-shorthand": "error",
       "prefer-destructuring": "error",
-      quotes: ["error", l ? "single" : "double", { avoidEscape: !0 }]
+      quotes: ["error", isSingleQuote ? "single" : "double", { avoidEscape: true }]
     }
   },
-  ...g.configs.recommended,
+  ...typescriptPlugin.configs.recommended,
   {
     rules: {
       "@typescript-eslint/consistent-type-definitions": ["error", "type"],
@@ -63,7 +72,7 @@ const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t
         "error",
         { fixStyle: "inline-type-imports" }
       ],
-      "@typescript-eslint/explicit-function-return-type": ["warn", { allowExpressions: !0 }],
+      "@typescript-eslint/explicit-function-return-type": ["warn", { allowExpressions: true }],
       "@typescript-eslint/member-ordering": [
         "error",
         {
@@ -74,28 +83,28 @@ const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t
         }
       ],
       "@typescript-eslint/no-empty-interface": "off",
-      "@typescript-eslint/no-floating-promises": ["error", { ignoreVoid: !0 }],
+      "@typescript-eslint/no-floating-promises": ["error", { ignoreVoid: true }],
       "@typescript-eslint/no-require-imports": ["error", { allow: ["/*.js$"] }],
       "@typescript-eslint/no-unnecessary-type-constraint": "off",
       "@typescript-eslint/no-unused-expressions": [
         "warn",
-        { allowShortCircuit: !0, allowTaggedTemplates: !0, allowTernary: !0 }
+        { allowShortCircuit: true, allowTaggedTemplates: true, allowTernary: true }
       ],
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-var-requires": "off",
       "@typescript-eslint/require-await": "off",
       "@typescript-eslint/restrict-template-expressions": [
         "error",
-        { allowBoolean: !0, allowNullish: !0 }
+        { allowBoolean: true, allowNullish: true }
       ],
       "@typescript-eslint/return-await": ["error", "in-try-catch"],
       "@typescript-eslint/unbound-method": "off"
     }
   },
-  d.configs.flat.recommended,
+  reactPlugin.configs.flat.recommended,
   {
     rules: {
-      ...d.configs["jsx-runtime"].rules,
+      ...reactPlugin.configs["jsx-runtime"].rules,
       "react/display-name": "off",
       "react/jsx-key": "off",
       "react/jsx-newline": "error",
@@ -103,8 +112,8 @@ const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t
       "react/prop-types": "off"
     }
   },
-  I.recommended,
-  ...R.configs["flat/recommended-with-jsonc"],
+  flatConfigs.recommended,
+  ...jsoncPlugin.configs["flat/recommended-with-jsonc"],
   {
     rules: {
       "jsonc/sort-keys": ["error"]
@@ -112,7 +121,7 @@ const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t
   },
   {
     plugins: {
-      "simple-import-sort": F
+      "simple-import-sort": simpleImportSortPlugin
     },
     rules: {
       "simple-import-sort/exports": "error",
@@ -121,7 +130,7 @@ const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t
   },
   {
     plugins: {
-      "sort-destructure-keys": q
+      "sort-destructure-keys": sortDestructureKeysPlugin
     },
     rules: {
       "sort-destructure-keys/sort-destructure-keys": "error"
@@ -129,7 +138,7 @@ const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t
   },
   {
     plugins: {
-      "sort-keys-fix": L
+      "sort-keys-fix": sortKeysFixPlugin
     },
     rules: {
       "sort-keys-fix/sort-keys-fix": "error"
@@ -137,7 +146,7 @@ const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t
   },
   {
     plugins: {
-      "typescript-sort-keys": O
+      "typescript-sort-keys": typescriptSortKeysPlugin
     },
     rules: {
       "typescript-sort-keys/string-enum": "error"
@@ -145,7 +154,7 @@ const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t
   },
   {
     plugins: {
-      "unused-imports": W
+      "unused-imports": unusedImportsPlugin
     },
     rules: {
       "unused-imports/no-unused-imports": "error",
@@ -153,27 +162,27 @@ const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t
         "warn",
         {
           args: "after-used",
-          argsIgnorePattern: m,
+          argsIgnorePattern: unusedIgnore,
           vars: "all",
-          varsIgnorePattern: m
+          varsIgnorePattern: unusedIgnore
         }
       ]
     }
   },
-  T,
+  prettierPlugin,
   {
     rules: {
       "prettier/prettier": [
         "error",
         {
-          arrowParens: o ? "always" : "never",
-          bracketSameLine: s,
-          bracketSpacing: n,
-          indentWidth: e,
-          printWidth: w,
-          singleAttributePerLine: s,
-          singleQuote: l,
-          trailingComma: _ ? "all" : "none"
+          arrowParens: isParenthesis ? "always" : "never",
+          bracketSameLine: isSameLine,
+          bracketSpacing: isSpacing,
+          indentWidth,
+          printWidth,
+          singleAttributePerLine: isSameLine,
+          singleQuote: isSingleQuote,
+          trailingComma: isTrailingComma ? "all" : "none"
         }
       ]
     }
@@ -181,113 +190,130 @@ const z = () => j.path, H = () => z(), E = (t) => t?.filter(Boolean), h = (...[t
   {
     languageOptions: {
       ecmaVersion: "latest",
-      globals: c({
-        ...a.browser,
-        ...a.jest,
-        ...a.node,
-        ...a.serviceworker
+      globals: trimValue({
+        ...globals.browser,
+        ...globals.jest,
+        ...globals.node,
+        ...globals.serviceworker
       }),
-      parser: g.parser,
+      parser: typescriptPlugin.parser,
       parserOptions: {
-        allowDefaultProject: !0,
-        extraFileExtensions: [".json"],
-        project: k(P, "../tsconfig.json"),
+        allowDefaultProject: true,
+        extraFileExtensions: [".json"]
+        // project: resolve(__dirname, '../tsconfig.json'),
         // projectService: true,
-        tsconfigRootDir: P
+        // tsconfigRootDir: __dirname,
+        // project: toRelative({ from: fromDist(), to: fromRoot('tsconfig.json') }),
+        // tsconfigRootDir: toRelative({ from: fromDist(), to: fromRoot() }),
       },
       sourceType: "module"
     },
     settings: {
       "import/resolver": {
         typescript: {
-          alwaysTryTypes: !0,
+          alwaysTryTypes: true,
           project: "./tsconfig.json"
         }
       }
     }
   }
-), rr = "eslint.config.mjs";
-class er extends V {
-  constructor(r) {
-    super(r);
+);
+const ESLINT_CONFIG_FILENAME = "eslint.config.mjs";
+class _Collection extends Collection$1 {
+  constructor(root) {
+    super(root);
   }
-  delete(r) {
-    super.remove(r);
+  delete(params) {
+    super.remove(params);
   }
-  filter(r, e) {
-    return super.filter((o, s) => r(o, s, []));
+  filter(cb, _) {
+    return super.filter((x, y) => cb(x, y, []));
   }
-  find(r, e) {
-    return super.find((o, s) => r(o, s, []));
+  find(cb, _) {
+    return super.find((x, y) => cb(x, y, []));
   }
-  map(r, e) {
-    return super.map((o, s) => r(o, s, []));
+  map(cb, _) {
+    return super.map((x, y) => cb(x, y, []));
   }
-  push(...r) {
-    return super.add(r), super.length + 1;
+  push(...items) {
+    super.add(items);
+    return super.length + 1;
   }
-  slice(r, e) {
-    return super.slice(r, e);
+  slice(start, end) {
+    return super.slice(start, end);
   }
 }
-class tr extends er {
+class Collection extends _Collection {
 }
-const or = (t) => Array.isArray(t), y = (t) => !!(or(t) || t instanceof tr);
-var i = /* @__PURE__ */ ((t) => (t.DEEP = "DEEP", t.DEEP_APPEND = "DEEP_APPEND", t.DEEP_PREPEND = "DEEP_PREPEND", t))(i || {});
-const u = (...[t, r = i.DEEP]) => Q({}, ...t, (e, o) => {
-  switch (r) {
-    case i.DEEP:
-      return p(e) && p(o) ? u([e, o], r) : e === void 0 ? o : e;
-    case i.DEEP_APPEND:
-    case i.DEEP_PREPEND:
-      return y(e) && y(o) ? U(r === i.DEEP_APPEND ? [...o, ...e] : [...e, ...o]) : (
+const isArray$1 = (params) => {
+  return Array.isArray(params);
+};
+const isArray = (params) => isArray$1(params) || params instanceof Collection ? true : false;
+var MERGE_STRATEGY = /* @__PURE__ */ ((MERGE_STRATEGY2) => {
+  MERGE_STRATEGY2["DEEP"] = "DEEP";
+  MERGE_STRATEGY2["DEEP_APPEND"] = "DEEP_APPEND";
+  MERGE_STRATEGY2["DEEP_PREPEND"] = "DEEP_PREPEND";
+  return MERGE_STRATEGY2;
+})(MERGE_STRATEGY || {});
+const merge = (...[values, strategy = MERGE_STRATEGY.DEEP]) => mergeWith({}, ...values, (x, y) => {
+  switch (strategy) {
+    case MERGE_STRATEGY.DEEP:
+      return isPlainObject(x) && isPlainObject(y) ? merge([x, y], strategy) : x === void 0 ? y : x;
+    case MERGE_STRATEGY.DEEP_APPEND:
+    case MERGE_STRATEGY.DEEP_PREPEND:
+      return isArray(x) && isArray(y) ? uniq(strategy === MERGE_STRATEGY.DEEP_APPEND ? [...y, ...x] : [...x, ...y]) : (
         // ? uniqBy(strategy === MERGE_STRATEGY.DEEP_APPEND ? [...y, ...x] : [...x, ...y], (v) =>
         //     stringify(v),
         //   )
-        p(e) && p(o) ? u([e, o], r) : e === void 0 ? o : e
+        isPlainObject(x) && isPlainObject(y) ? merge([x, y], strategy) : x === void 0 ? y : x
       );
     default:
-      return e === void 0 ? o : e;
+      return x === void 0 ? y : x;
   }
 });
-class sr {
-  constructor({ config: r, params: e }) {
-    this._params = [], this._params = [e], this._config = r;
+class Config {
+  constructor({ config, params }) {
+    this._params = [];
+    this._params = [params];
+    this._config = config;
   }
-  config(r, e = i.DEEP_PREPEND) {
-    return this._config?.(u(E([r, this.params(e)]))) ?? void 0;
+  config(params, strategy = MERGE_STRATEGY.DEEP_PREPEND) {
+    return this._config?.(merge(filterNil([params, this.params(strategy)]))) ?? void 0;
   }
-  extend(r) {
-    const e = X(this);
-    return e._params = [...e._params, r], e;
+  extend(v) {
+    const config = cloneDeep(this);
+    config._params = [v, ...config._params];
+    return config;
   }
-  params(r = i.DEEP_PREPEND) {
-    return u(
-      this._params.map((e) => e()),
-      r
+  params(strategy = MERGE_STRATEGY.DEEP_PREPEND) {
+    return merge(
+      this._params.map((v) => v()),
+      strategy
     );
   }
 }
-const ir = (...[t, r]) => t.flatMap((e) => r.map((o) => `${e}${o}`)), nr = new sr({
-  config: G,
+const cartesianString = (...[x, y]) => x.flatMap((a) => y.map((b) => `${a}${b}`));
+const lintConfig = new Config({
+  config: _lint,
   params: () => ({
-    configFilename: rr,
-    exclude: ["**/node_modules"],
-    include: ir(["src/**/*", "tests/**/*"], M),
+    configFilename: ESLINT_CONFIG_FILENAME,
+    exclude: ["**/node_modules", "generate/templates/**/*"],
+    include: cartesianString(["src/**/*", "tests/**/*"], EXTENSIONS_BASE),
     indentWidth: 2,
-    isParenthesis: !0,
-    isSameLine: !0,
-    isSingleQuote: !0,
-    isSpacing: !0,
-    isTrailingComma: !0,
+    isParenthesis: true,
+    isSameLine: true,
+    isSingleQuote: true,
+    isSpacing: true,
+    isTrailingComma: true,
     printWidth: 100,
     unusedIgnore: "^_",
-    lintCommand: (t, r, e = !0) => {
-      const { configFilename: o, exclude: s, include: l } = t;
-      return `eslint --config ${J(o)} ${e ? "--fix" : ""} --no-error-on-unmatched-pattern ${s.map((n) => `--ignore-pattern "${n}"`).join(" ")} ${l.map((n) => `${r}/${n}`).join(" ")}`;
+    lintCommand: (config, root, isFix = true) => {
+      const { configFilename, exclude, include } = config;
+      return `eslint --config ${fromRoot(configFilename)} ${isFix ? "--fix" : ""} --no-error-on-unmatched-pattern ${exclude.map((pattern) => `--ignore-pattern "${pattern}"`).join(" ")} ${include.map((v) => `${root}/${v}`).join(" ")}`;
     }
   })
-}), Ir = nr.config();
+});
+const eslint_config = lintConfig.config();
 export {
-  Ir as default
+  eslint_config as default
 };

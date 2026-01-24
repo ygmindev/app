@@ -14,10 +14,8 @@ import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import typescriptPlugin from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
-import { dirname, resolve } from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
+import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 
 
 export const _lint = ({
@@ -202,9 +200,11 @@ export const _lint = ({
         parserOptions: {
           allowDefaultProject: true,
           extraFileExtensions: ['.json'],
-          project: resolve(__dirname, '../tsconfig.json'),
+          // project: resolve(__dirname, '../tsconfig.json'),
           // projectService: true,
-          tsconfigRootDir: __dirname,
+          // tsconfigRootDir: __dirname,
+          // project: toRelative({ from: fromDist(), to: fromRoot('tsconfig.json') }),
+          // tsconfigRootDir: toRelative({ from: fromDist(), to: fromRoot() }),
         },
 
         sourceType: 'module',

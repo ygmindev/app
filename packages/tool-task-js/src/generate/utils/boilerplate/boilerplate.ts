@@ -1,12 +1,12 @@
 import { children } from '@lib/backend/file/utils/children/children';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
-import fileConfig from '@lib/config/file/file';
+import { fileConfig } from '@lib/config/file/file';
+import { generateConfig } from '@lib/config/generate/generate';
 import { sort } from '@lib/shared/core/utils/sort/sort';
 import { prompt } from '@tool/task/core/utils/prompt/prompt';
 import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 import { _boilerplate } from '@tool/task/generate/utils/boilerplate/_boilerplate';
-import { BOILERPLATE_TEMPLATE_VARIABLE_PATTERN } from '@tool/task/generate/utils/boilerplate/boilerplate.constants';
 import {
   type BoilerplateModel,
   type BoilerplateParamsModel,
@@ -19,14 +19,15 @@ import uniq from 'lodash/uniq';
 import { basename, join } from 'path';
 
 const getTemplateVariables = async (from: string): Promise<Array<string>> => {
+  const { variablePattern } = generateConfig.params();
   const base = basename(from);
-  let variables: Array<string> = base.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) ?? [];
+  let variables: Array<string> = base.match(variablePattern) ?? [];
   for (const child of children(from)) {
     if (child.isDirectory) {
       variables = variables.concat((await getTemplateVariables(child.fullPath)).flat());
     } else {
       const content = readFileSync(child.fullPath, 'utf8');
-      variables = variables.concat(content.match(BOILERPLATE_TEMPLATE_VARIABLE_PATTERN) ?? []);
+      variables = variables.concat(content.match(variablePattern) ?? []);
     }
   }
   return variables;
@@ -34,7 +35,7 @@ const getTemplateVariables = async (from: string): Promise<Array<string>> => {
 
 export const boilerplate = async ({
   onSuccess,
-  output,
+  outPathname,
   template,
   templateDir,
   variables,
@@ -46,7 +47,7 @@ export const boilerplate = async ({
     ? pullAll(templateVariables, Object.keys(variables))
     : templateVariables;
 
-  let outputF = output;
+  let outPathnameF = outPathname;
   const variablesF: Record<string, string> = variables ?? {};
   const resolveVariable = async (variable: string): Promise<string> => {
     if (variablesF[variable]) {
@@ -63,14 +64,18 @@ export const boilerplate = async ({
           { basePath, key: 'path', type: PROMPT_TYPE.DIRECTORY },
         ]);
         const pathF = path.replace(basePath, '');
-        outputF = fromPackages(root, `src/${pathF}`);
+        outPathnameF = fromPackages(root, `src/${pathF}`);
         value = trim(join(target, pathF), '/');
         break;
       }
       case '{{ROOT}}': {
         value = (
           await prompt<{ root: string }>([
-            { key: 'root', options: fileConfig.params().packageDirs, type: PROMPT_TYPE.LIST },
+            {
+              key: 'root',
+              options: fileConfig.params().packageDirs.map((v) => ({ id: v })),
+              type: PROMPT_TYPE.LIST,
+            },
           ])
         ).root;
         break;
@@ -99,13 +104,13 @@ export const boilerplate = async ({
     variablesF[k] = await resolveVariable(k);
   }
 
-  outputF = outputF ?? fromPackages();
+  outPathnameF = outPathnameF ?? fromPackages();
   const result = await _boilerplate({
-    input: templateDirF,
-    output: outputF,
+    outPathname: outPathnameF,
     template,
+    templatePathname: templateDirF,
     variables: variablesF,
   });
-  onSuccess && (await onSuccess({ output: outputF, template, variables: variablesF }));
+  await onSuccess?.({ outPathname: outPathnameF, template, variables: variablesF });
   return result;
 };

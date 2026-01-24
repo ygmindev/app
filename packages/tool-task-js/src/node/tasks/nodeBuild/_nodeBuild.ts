@@ -12,13 +12,13 @@ export const _nodeBuild = async ({
   configRaw,
   entryFiles,
   format,
-  outDir,
+  outDirname,
   watch,
 }: _NodeBuildParamsModel): Promise<_NodeBuildModel> => {
   let config: _BundleConfigModel | undefined = configRaw ?? {};
   config = merge(
     [
-      bundleConfig.config({ entryFiles, format, outDir, watch }, MERGE_STRATEGY.DEEP_PREPEND),
+      bundleConfig.config({ entryFiles, format, outDirname, watch }, MERGE_STRATEGY.DEEP_PREPEND),
       config,
     ],
     MERGE_STRATEGY.DEEP_PREPEND,

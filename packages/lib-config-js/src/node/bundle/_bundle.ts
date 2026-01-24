@@ -215,7 +215,7 @@ export const _bundle = ({
   isTranspileProject = false,
   logSuppressPatterns,
   mainFields,
-  outDir,
+  outDirname,
   outExtension,
   platform,
   preBundle,
@@ -323,7 +323,7 @@ export const _bundle = ({
 
       minify: process.env.NODE_ENV === 'production' ? 'terser' : false,
 
-      outDir: fromWorking(outDir ?? buildDir),
+      outDir: outDirname ?? fromWorking(buildDir),
 
       rollupOptions: {
         external: externals
