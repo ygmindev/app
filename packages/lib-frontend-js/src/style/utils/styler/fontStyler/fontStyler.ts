@@ -9,15 +9,7 @@ import { type StylerModel } from '@lib/frontend/style/utils/styler/styler.models
 import isNumber from 'lodash/isNumber';
 
 export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
-  {
-    align,
-    family = FONT_FAMILY.MAIN,
-    fontSize = THEME_SIZE.MEDIUM,
-    fontStyle,
-    isBold,
-    isLineHeight,
-    isUnderline,
-  },
+  { align, family = FONT_FAMILY.MAIN, fontSize, fontStyle, isBold, isLineHeight, isUnderline },
   theme,
 ) => ({
   fontFamily:
@@ -28,11 +20,12 @@ export const fontStyler: StylerModel<FontStylerParamsModel, TextStyleModel> = (
   fontSize: isNumber(fontSize)
     ? fontSize
     : theme.font.size[
-        fontStyle === FONT_STYLE.HEADLINE ||
-        fontStyle === FONT_STYLE.TITLE ||
-        fontStyle === FONT_STYLE.SUBTITLE
-          ? THEME_SIZE.LARGE
-          : fontSize
+        fontSize ??
+          (fontStyle === FONT_STYLE.HEADLINE ||
+          fontStyle === FONT_STYLE.TITLE ||
+          fontStyle === FONT_STYLE.SUBTITLE
+            ? THEME_SIZE.LARGE
+            : THEME_SIZE.MEDIUM)
       ],
 
   fontWeight:

@@ -11,7 +11,6 @@ import { internationalizeConfig } from '@lib/config/locale/internationalize/inte
 import { bundleConfig } from '@lib/config/node/bundle/bundle.web';
 import { serverConfig as configBase } from '@lib/config/node/server/server.base';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import toNumber from 'lodash/toNumber';
 
 export const serverConfig = configBase.extend(() => {
   const environment = Container.get(Environment);
@@ -33,7 +32,5 @@ export const serverConfig = configBase.extend(() => {
         },
       ],
     ] as Array<[ServerPluginModel<unknown>, unknown]>,
-
-    port: toNumber(environment.variables.APP_PORT),
   };
 });

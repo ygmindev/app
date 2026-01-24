@@ -3,7 +3,8 @@ import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 
 export const STYLE_REDUCER: StyleReducerModel = {
   defaultState: {
-    brightness: STYLE_BRIGHTNESS.SYSTEM,
+    // brightness: STYLE_BRIGHTNESS.SYSTEM,
+    brightness: STYLE_BRIGHTNESS.DARK,
   },
 
   persist: true,

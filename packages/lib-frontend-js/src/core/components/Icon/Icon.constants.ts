@@ -63,6 +63,7 @@ export const IONIC_ICONS = {
   hourglass: 'hourglass-outline',
   image: 'image-outline',
   info: 'information-circle',
+  instagram: 'logo-instagram',
   internet: 'wifi-outline',
   invest: 'trending-up-outline',
   language: 'language-outline',

@@ -6,21 +6,23 @@ import { ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { getRoutes } from '@lib/frontend/route/utils/getRoutes/getRoutes';
 import { APP } from '@lib/shared/app/app.constants';
 
-export const routes = getRoutes([
-  {
-    pathname: ORCHESTRATOR,
-    routes: [
-      {
-        element: <OrchestratorPage />,
-        pathname: HOME,
-      },
-      {
-        element: <WorkflowPage />,
-        header: true,
-        pathname: WORKFLOW,
-        previous: `/${APP}/${ORCHESTRATOR}/${HOME}`,
-      },
-    ],
-    transition: ROUTE_TRANSITION.SLIDE,
-  },
-]);
+export const routes = getRoutes({
+  appRoutes: [
+    {
+      pathname: ORCHESTRATOR,
+      routes: [
+        {
+          element: <OrchestratorPage />,
+          pathname: HOME,
+        },
+        {
+          element: <WorkflowPage />,
+          header: true,
+          pathname: WORKFLOW,
+          previous: `/${APP}/${ORCHESTRATOR}/${HOME}`,
+        },
+      ],
+      transition: ROUTE_TRANSITION.SLIDE,
+    },
+  ],
+});

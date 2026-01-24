@@ -1,6 +1,7 @@
 import { AppContainer } from '@lib/frontend/app/containers/AppContainer/AppContainer';
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
+import { NavigationLayout } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { devRoutes } from '@lib/frontend/dev/dev.routes';
 import { PingPage } from '@lib/frontend/http/pages/PingPage/PingPage';
 import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
@@ -18,7 +19,12 @@ import { APP } from '@lib/shared/app/app.constants';
 import { PING } from '@lib/shared/http/http.constants';
 import { trimRoutes } from '@lib/shared/route/utils/trimRoutes/trimRoutes';
 
-export const getRoutes = (routes: GetRoutesParamsModel = []): GetRoutesModel => {
+export const getRoutes = ({
+  appRoutes = [],
+  footerElement,
+  headerElement,
+  routes = [],
+}: GetRoutesParamsModel): GetRoutesModel => {
   let routesF: Array<RouteModel> = trimRoutes([
     {
       element: <PingPage />,
@@ -31,12 +37,24 @@ export const getRoutes = (routes: GetRoutesParamsModel = []): GetRoutesModel => 
     ...settingRoutes,
 
     {
+      pathname: '/',
+      routes: [...routes],
+    },
+
+    {
       pathname: APP,
-      routes: [...routes, ...userRoutes, ...devRoutes, ...testRoutes],
+      routes: [...appRoutes, ...userRoutes, ...devRoutes, ...testRoutes],
     },
   ]);
 
   routesF[routesF.length - 1].element = <AppLayout routes={routesF[routesF.length - 1].routes} />;
+  routesF[routesF.length - 2].element = (
+    <NavigationLayout
+      footerElement={footerElement}
+      headerElement={headerElement}
+      routes={routesF[routesF.length - 2].routes}
+    />
+  );
 
   routesF = [
     ...routesF,

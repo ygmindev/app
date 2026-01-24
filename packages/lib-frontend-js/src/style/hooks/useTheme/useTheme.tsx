@@ -13,10 +13,12 @@ export const useTheme = (): UseThemeModel => {
     const brightnessF =
       !brightness || brightness === STYLE_BRIGHTNESS.SYSTEM ? systemBrightness : brightness;
     switch (brightnessF) {
-      case STYLE_BRIGHTNESS.DARK:
+      case STYLE_BRIGHTNESS.DARK: {
         return configDark.params();
-      default:
+      }
+      default: {
         return configBase.params();
+      }
     }
   }, [brightness, systemBrightness]);
 };

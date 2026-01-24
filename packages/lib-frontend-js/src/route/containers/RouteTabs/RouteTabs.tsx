@@ -5,6 +5,7 @@ import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTra
 import { type RouteTabsPropsModel } from '@lib/frontend/route/containers/RouteTabs/RouteTabs.models';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { useMemo } from 'react';
 
 export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({
@@ -26,16 +27,19 @@ export const RouteTabs: LFCModel<RouteTabsPropsModel> = ({
   return (
     <Tabs
       {...wrapperProps}
-      tabs={routes.map(({ category, fullpath, icon, pathname, title }) => {
-        const pathnameF = fullpath ?? pathname;
-        return {
-          category,
-          icon,
-          id: pathnameF,
-          label: title ? t(title) : pathname.replace('/', ''),
-          onPress: () => push({ pathname: pathnameF }),
-        };
-      })}
+      tabs={filterNil(
+        routes.map(({ category, fullpath, icon, isNavigatable, pathname, title }) => {
+          if (!isNavigatable) return null;
+          const pathnameF = fullpath ?? pathname;
+          return {
+            category,
+            icon,
+            id: pathnameF,
+            label: title ? t(title) : pathname.replace('/', ''),
+            onPress: () => push({ pathname: pathnameF }),
+          };
+        }),
+      )}
       type={type}
       value={value}
     />

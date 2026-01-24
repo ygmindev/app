@@ -8,10 +8,15 @@ import { PUBLIC_DIR } from '@lib/config/file/file.constants';
 import { type ServerConfigModel } from '@lib/config/node/server/server.models';
 import { Config } from '@lib/config/utils/Config/Config';
 import { Container } from '@lib/shared/core/utils/Container/Container';
+import toNumber from 'lodash/toNumber';
 
 export const serverConfig = new Config<ServerConfigModel>({
   params: () => {
     const environment = Container.get(Environment);
+    const port =
+      environment.variables.PORT ??
+      environment.variables.APP_PORT ??
+      environment.variables.SERVER_APP_PORT;
     return {
       certificate:
         environment.variables.NODE_RUNTIME === 'container'
@@ -41,6 +46,8 @@ export const serverConfig = new Config<ServerConfigModel>({
 
         [cookiesPlugin, { secret: environment.variables.SERVER_APP_SECRET }],
       ] as Array<[ServerPluginModel<unknown>, unknown]>,
+
+      port: toNumber(port),
 
       publicDir: PUBLIC_DIR,
     };

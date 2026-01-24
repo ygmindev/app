@@ -7,7 +7,9 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 
 export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
   children,
-  route,
+  footerElement,
+  headerElement,
+  routes,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -17,9 +19,11 @@ export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
       flex
       p
       s={THEME_SIZE.SMALL}>
+      {headerElement}
+
       <RouteTabs
-        depth={route?.depth}
-        routes={route?.routes ?? []}
+        isCenter
+        routes={routes ?? []}
       />
 
       <Wrapper
@@ -27,6 +31,8 @@ export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
         isVerticalScrollable>
         {children}
       </Wrapper>
+
+      {footerElement}
     </Wrapper>
   );
 };

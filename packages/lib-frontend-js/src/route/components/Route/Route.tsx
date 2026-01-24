@@ -54,7 +54,7 @@ export const Route: LFCModel<RoutePropsModel> = ({
     case ROUTE_TRANSITION.SLIDE: {
       elementF = (
         <Slide
-          // defaultState={defaultState}
+          defaultState={defaultState}
           elementState={isMountedF ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.EXIT}
           zIndex={isMountedDelayed ? true : undefined}>
           {elementF}
@@ -66,7 +66,7 @@ export const Route: LFCModel<RoutePropsModel> = ({
       if (isLeaf) {
         elementF = (
           <Appearable
-            // defaultState={defaultState}
+            defaultState={defaultState}
             isAbsoluteFill
             isActive={isMountedF}
             zIndex={isMountedDelayed ? true : undefined}>

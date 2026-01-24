@@ -25,7 +25,7 @@ export class Config<TParams, TType = undefined> implements ConfigModel<TParams, 
 
   extend(v: () => PartialDeepModel<TParams>): Config<TParams, TType> {
     const config = cloneDeep(this);
-    config._params = [...config._params, v];
+    config._params = [v, ...config._params];
     return config;
   }
 
