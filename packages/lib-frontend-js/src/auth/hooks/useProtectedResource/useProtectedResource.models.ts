@@ -5,5 +5,7 @@ import { type ProtectedResourceImplementationModel } from '@lib/model/auth/Prote
 export type UseProtectedResourceParamsModel<TType extends ProtectedResourceModel> =
   UseResourceParamsModel<TType>;
 
-export type UseProtectedResourceModel<TType extends ProtectedResourceModel> =
-  ProtectedResourceImplementationModel<TType>;
+export type UseProtectedResourceModel<TType extends ProtectedResourceModel> = Omit<
+  ProtectedResourceImplementationModel<TType>,
+  'subscribe'
+>;

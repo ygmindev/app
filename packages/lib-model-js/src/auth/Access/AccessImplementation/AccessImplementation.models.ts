@@ -1,4 +1,4 @@
 import { type AccessModel } from '@lib/model/auth/Access/Access.models';
-import { type ProtectedResourceImplementationModel } from '@lib/model/auth/ProtectedResource/ProtectedResourceImplementation/ProtectedResourceImplementation.models';
+import { type EntityResourceImplementationModel } from '@lib/model/resource/EntityResource/EntityResourceImplementation/EntityResourceImplementation.models';
 
-export type AccessImplementationModel = ProtectedResourceImplementationModel<AccessModel>;
+export type AccessImplementationModel = EntityResourceImplementationModel<AccessModel>;

@@ -1,7 +1,7 @@
 import { createProtectedResoureImplementation } from '@lib/backend/resource/utils/createProtectedResourceImplementation/createProtectedResourceImplementation';
-import { Container } from '@lib/shared/core/utils/Container/Container';
-import { TestableProtectedResoureImplementation } from '@lib/model/test/TestableProtectedResoure/TestableProtectedResoureImplementation/TestableProtectedResoureImplementation';
 import { testResourceImplementation } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation';
+import { TestableProtectedResoureImplementation } from '@lib/model/test/TestableProtectedResoure/TestableProtectedResoureImplementation/TestableProtectedResoureImplementation';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { withTest } from '@lib/shared/test/utils/withTest/withTest';
 
 const { displayName } = withTest({ createProtectedResoureImplementation });

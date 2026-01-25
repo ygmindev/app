@@ -3,9 +3,11 @@ import {
   type AuthorizeParamsModel,
 } from '@lib/backend/auth/utils/authorize/authorize.models';
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
+import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 import { ACCESS_ROLE } from '@lib/model/auth/Access/Access.constants';
 import { AccessImplementation } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation';
 import { ROLE_RESOURCE_NAME } from '@lib/model/auth/Role/Role.constants';
+import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import pullAt from 'lodash/pullAt';
 
@@ -18,7 +20,7 @@ export const authorize = async ({
     const userIndex = rolesF.findIndex((v) => v === ACCESS_ROLE.USER);
     if (userIndex >= 0) {
       pullAt(rolesF, userIndex);
-      const access = context.token?.access;
+      const access = context?.token?.access;
       if (access) {
         try {
           const user = await getTokenFromHeader(access);
@@ -28,7 +30,7 @@ export const authorize = async ({
               return true;
             }
             const { result } = await Container.get(AccessImplementation).get({
-              filter: [{ field: '_user', value: user._id }],
+              filter: [{ field: USER_RESOURCE_NAME, value: new ObjectId(user._id) }],
             });
             return result?.[ROLE_RESOURCE_NAME]
               ? rolesF.every((v) => result[ROLE_RESOURCE_NAME]?.includes(v))

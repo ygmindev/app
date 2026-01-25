@@ -173,6 +173,7 @@ export const _withField =
               ...options,
               cascade: [Cascade.ALL],
               entity,
+              ref: true,
             })(target, propertyKey as string);
             break;
           }

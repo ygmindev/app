@@ -11,19 +11,8 @@ import isPlainObject from 'lodash/isPlainObject';
 import isString from 'lodash/isString';
 import last from 'lodash/last';
 
-// const resolveObjectId = <TType extends unknown>(value: TType): TType =>
-//   value instanceof ObjectId
-//     ? value
-//     : ((isString(value)
-//         ? new ObjectId(value)
-//         : isPlainObject(value)
-//           ? reduce(value as object, (result, v, k) => ({ ...result, [k]: resolveObjectId(v) }), {})
-//           : value) as TType);
-
-// const resolveObjectId = <TType extends unknown>(value: TType): TType =>
-//   (isString(value) ? new ObjectId(value) : value) as TType;
 const resolveObjectId = <TType extends unknown>(value: TType): TType =>
-  isString(value) ? value : value;
+  (isString(value) ? new ObjectId(value) : value) as TType;
 
 const keyValueTransformer = <TValue extends unknown>(v: TValue, k?: string): TValue => {
   let vF = v;

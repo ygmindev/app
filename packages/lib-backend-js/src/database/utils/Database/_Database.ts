@@ -124,16 +124,17 @@ export class _Database extends Bootstrappable implements _DatabaseModel {
       create: async ({ form, options } = {}) => {
         try {
           const em = this.getEntityManager();
+          const formF = cleanObject(form);
           const result = em.create(
             name,
-            this.hydrate(name, form) as unknown as RequiredEntityData<
+            this.hydrate(name, formF) as unknown as RequiredEntityData<
               Pick<TType, keyof TType>,
               never,
               false
             >,
             { persist: true },
           );
-          options?.isFlush !== false && (await em.persistAndFlush(result));
+          options?.isFlush !== false && (await em.persist(result).flush());
           return { result: normalize(result) };
         } catch (e) {
           switch ((e as MongoError).code as unknown as number) {
@@ -153,7 +154,7 @@ export class _Database extends Bootstrappable implements _DatabaseModel {
               (await implementation.create({ form: v, options: { isFlush: false } })).result,
           ) ?? [],
         );
-        options?.isFlush !== false && (await em.persistAndFlush(result));
+        options?.isFlush !== false && (await em.persist(result).flush());
         return { result: filterNil(result.map(normalize)) };
       },
 

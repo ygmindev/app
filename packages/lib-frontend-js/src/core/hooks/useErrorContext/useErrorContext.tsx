@@ -18,6 +18,7 @@ export const useErrorContext = (): UseErrorContextModel => {
     let errorContext = errorContextGet && errorContextGet(e);
     if (!errorContext) {
       logger.error(e);
+      console.warn(`@@@ code: ${(e as HttpError).statusCode}`);
       switch ((e as HttpError).statusCode) {
         case HTTP_STATUS_CODE.FORBIDDEN: {
           errorContext = { description: ({ t }) => t('core:errorForbidden'), icon: 'ban' };

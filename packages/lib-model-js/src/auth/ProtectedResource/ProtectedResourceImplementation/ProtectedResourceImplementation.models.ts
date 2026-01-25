@@ -6,7 +6,7 @@ import { type PartialModel } from '@lib/shared/core/core.models';
 
 export type ProtectedResourceImplementationModel<TType extends ProtectedResourceModel> =
   EntityResourceImplementationModel<TType> & {
-    [GROUP_RESOURCE_NAME]?(self: TType): Promise<PartialModel<GroupModel> | null>;
-
     getManyProtected: EntityResourceImplementationModel<TType>['getMany'];
+
+    [GROUP_RESOURCE_NAME]?(self: TType): Promise<PartialModel<GroupModel> | null>;
   };

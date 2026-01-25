@@ -18,10 +18,13 @@ export const formatGraphqlError = (
         originalError?.stack ??
         (params.extensions?.stacktrace as string) ??
         (params as Error)?.stack,
-      statusCode: originalError?.statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
+      statusCode:
+        HTTP_STATUS_CODE[params.extensions.code] ??
+        originalError?.statusCode ??
+        HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
     },
     originalError,
   });
-  logger.error(error.extensions.stack);
+  logger.error(error.extensions.stack as string);
   return error;
 };

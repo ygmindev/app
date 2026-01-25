@@ -14,6 +14,7 @@ import { GroupImplementation } from '@lib/model/group/Group/GroupImplementation/
 import { type GroupImplementationModel } from '@lib/model/group/Group/GroupImplementation/GroupImplementation.models';
 import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
+import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -49,7 +50,7 @@ export const createProtectedResoureImplementation = <TType extends ProtectedReso
       if (uid) {
         const accessAll = (
           await Container.get(AccessImplementation).getMany({
-            filter: [{ field: '_user', value: { _id: uid } }],
+            filter: [{ field: USER_RESOURCE_NAME, value: { _id: new ObjectId(uid) } }],
           })
         ).result;
         if (accessAll) {
@@ -59,7 +60,7 @@ export const createProtectedResoureImplementation = <TType extends ProtectedReso
           ]);
           return this.getMany(input, context);
         }
-        return { result: [] };
+        return { result: { items: [] } };
       }
       throw new UnauthenticatedError();
     }

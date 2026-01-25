@@ -4,7 +4,10 @@ import { AsyncText } from '@lib/frontend/core/components/AsyncText/AsyncText';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { KeyboardContainer } from '@lib/frontend/core/components/KeyboardContainer/KeyboardContainer';
-import { BACKDROP_TEST_ID } from '@lib/frontend/core/components/Modal/Modal.constants';
+import {
+  BACKDROP_TEST_ID,
+  MODAL_MIN_HEIGHT,
+} from '@lib/frontend/core/components/Modal/Modal.constants';
 import {
   type ModalPropsModel,
   type ModalRefModel,
@@ -67,7 +70,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
   const heightF =
     (isFullSize
       ? (deviceHeight ?? 0) - theme.shape.spacing[THEME_SIZE.LARGE]
-      : (height ?? measure?.height)) ?? 0;
+      : (height ?? measure?.height)) || MODAL_MIN_HEIGHT;
 
   useImperativeHandle(ref, () => ({ toggle: valueControlledSet }));
 
