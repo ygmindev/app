@@ -298,12 +298,19 @@ export class _Database extends Bootstrappable implements _DatabaseModel {
         case ReferenceKind.ONE_TO_MANY:
         case ReferenceKind.MANY_TO_MANY: {
           if (isArray(value)) {
-            formF[prop.name] = value.map((v) => this.hydrate(prop.type, v as string));
+            formF[prop.name] = value.map((v) =>
+              value instanceof ObjectId
+                ? em.getReference(prop.type, v as Primary<TType>)
+                : this.hydrate(prop.type, v as string),
+            );
           }
           break;
         }
         case ReferenceKind.MANY_TO_ONE: {
-          formF[prop.name] = this.hydrate(prop.type, value);
+          formF[prop.name] =
+            value instanceof ObjectId
+              ? em.getReference(prop.type, value as Primary<TType>)
+              : this.hydrate(prop.type, value);
           break;
         }
       }

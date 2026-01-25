@@ -29,11 +29,11 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = ({
     value,
   });
 
-  const { search } = useUserResource();
+  const { getMany } = useUserResource();
 
   const handleSearch = async (query?: string): Promise<Array<UserOptionModel>> =>
     query
-      ? ((await search({ query })).result ?? []).map((user) => ({ id: user._id ?? '', user }))
+      ? ((await getMany({ query })).result ?? []).map((user) => ({ id: user._id ?? '', user }))
       : [];
 
   return (
