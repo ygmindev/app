@@ -31,6 +31,7 @@ import { uid } from '@lib/shared/core/utils/uid/uid';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import cloneDeep from 'lodash/cloneDeep';
 import range from 'lodash/range';
+import uniqBy from 'lodash/uniqBy';
 import { type ReactElement, useCallback, useRef, useState } from 'react';
 
 export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
@@ -59,10 +60,10 @@ export const ResourceTable = <TType extends ResourceModel, TRoot = undefined>({
       null,
     );
 
-  const fieldsF: ResourceFieldsModel<TType> = [
-    { id: '_id' as StringKeyModel<TType>, isHidden: true },
-    ...(fields ?? []),
-  ];
+  const fieldsF: ResourceFieldsModel<TType> = uniqBy(
+    [{ id: '_id' as StringKeyModel<TType>, isHidden: true }, ...(fields ?? [])],
+    'id',
+  );
   const tableRef = useRef<TableRefModel<TType>>(null);
   const [selectedRows, selectedRowsSet] = useState<Array<PartialModel<TType>>>([]);
 

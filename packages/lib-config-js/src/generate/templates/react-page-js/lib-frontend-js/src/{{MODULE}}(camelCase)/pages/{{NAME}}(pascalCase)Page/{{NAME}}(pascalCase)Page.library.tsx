@@ -2,7 +2,7 @@ import { type LibraryPropsModel } from '@lib/frontend/library/components/Library
 import { {{NAME}}(pascalCase)Page } from '@lib/frontend/{{MODULE}}(camelCase)/pages/{{NAME}}(pascalCase)Page/{{NAME}}(pascalCase)Page';
 import { type {{NAME}}(pascalCase)PagePropsModel } from '@lib/frontend/{{MODULE}}(camelCase)/pages/{{NAME}}(pascalCase)Page/{{NAME}}(pascalCase)Page.models';
 
-export const props: LibraryPropsModel<{{NAME}}(pascalCase)PropsModel> = {
+export const props: LibraryPropsModel<{{NAME}}(pascalCase)PagePropsModel> = {
   defaultProps: {},
   Component: {{NAME}}(pascalCase)Page,
   variants: [],

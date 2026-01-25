@@ -1,3 +1,4 @@
+import { adminRoutes } from '@lib/frontend/admin/admin.routes';
 import { AppContainer } from '@lib/frontend/app/containers/AppContainer/AppContainer';
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
@@ -43,7 +44,7 @@ export const getRoutes = ({
 
     {
       pathname: APP,
-      routes: [...appRoutes, ...userRoutes, ...devRoutes, ...testRoutes],
+      routes: [...appRoutes, ...userRoutes, ...devRoutes, ...adminRoutes, ...testRoutes],
     },
   ]);
 

@@ -1,6 +1,6 @@
 import appRootPath from "app-root-path";
 import trimStart from "lodash/trimStart.js";
-import { join, relative } from "path";
+import { join, relative, dirname, resolve } from "path";
 import eslintPlugin from "@eslint/js";
 import isArray$2 from "lodash/isArray.js";
 import isPlainObject from "lodash/isPlainObject.js";
@@ -19,6 +19,7 @@ import unusedImportsPlugin from "eslint-plugin-unused-imports";
 import globals from "globals";
 import typescriptPlugin from "typescript-eslint";
 import { defineConfig } from "eslint/config";
+import { fileURLToPath } from "url";
 import { Collection as Collection$1 } from "@mikro-orm/core";
 import mergeWith from "lodash/mergeWith.js";
 import uniq from "lodash/uniq.js";
@@ -36,6 +37,8 @@ const EXTENSIONS_BASE = [".tsx", ".ts", ".jsx", ".js"];
 const fromWorking = (...paths) => joinPaths([process.cwd(), ...paths]);
 const toRelative = ({ from = fromWorking(), to }) => relative(from, to);
 const trimValue = (params) => isString(params) ? trim(params, " ") : isArray$2(params) ? params.map((v) => trimValue(v)) : isPlainObject(params) ? reduce(params, (r, v, k) => ({ ...r, [trim(k, " ")]: trimValue(v) }), {}) : params;
+const __filename$1 = fileURLToPath(import.meta.url);
+const __dirname$1 = dirname(__filename$1);
 const _lint = ({
   exclude,
   include,
@@ -199,10 +202,10 @@ const _lint = ({
       parser: typescriptPlugin.parser,
       parserOptions: {
         allowDefaultProject: true,
-        extraFileExtensions: [".json"]
+        extraFileExtensions: [".json"],
         // project: resolve(__dirname, '../tsconfig.json'),
-        // projectService: true,
-        // tsconfigRootDir: __dirname,
+        projectService: true,
+        tsconfigRootDir: resolve(__dirname$1, "..")
         // project: toRelative({ from: fromDist(), to: fromRoot('tsconfig.json') }),
         // tsconfigRootDir: toRelative({ from: fromDist(), to: fromRoot() }),
       },
