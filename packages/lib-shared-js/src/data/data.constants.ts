@@ -6,6 +6,7 @@ export enum FORM_MODE {
 export enum DATA_TYPE {
   BOOLEAN = 'boolean',
   DATE = 'date',
+  DATE_TIME = 'dateTime',
   JSON = 'json',
   NUMBER = 'number',
   STRING = 'string',

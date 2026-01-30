@@ -8,7 +8,10 @@ import { type ResourceFieldsModel } from '@lib/frontend/resource/resource.models
 import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
-import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
+import {
+  type FilterableResourceMethodTypeModel,
+  RESOURCE_METHOD_TYPE,
+} from '@lib/shared/resource/resource.models';
 import { expandFilter } from '@lib/shared/resource/utils/expandFilter/expandFilter';
 import { getOperationType } from '@lib/shared/resource/utils/getOperationType/getOperationType';
 import { type ResourceImplementationBeforeDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
@@ -53,10 +56,7 @@ export const useResourceMethod = <TMethod extends RESOURCE_METHOD_TYPE, TType, T
       ].includes(method)
     ) {
       const inputFF = inputF as unknown as ResourceInputModel<
-        | RESOURCE_METHOD_TYPE.GET
-        | RESOURCE_METHOD_TYPE.GET_MANY
-        | RESOURCE_METHOD_TYPE.UPDATE_MANY
-        | RESOURCE_METHOD_TYPE.REMOVE,
+        FilterableResourceMethodTypeModel,
         TType,
         TRoot
       >;
@@ -78,7 +78,12 @@ export const useResourceMethod = <TMethod extends RESOURCE_METHOD_TYPE, TType, T
         { input: ResourceInputModel<TMethod, TType, TRoot> }
       >({
         fields: [
-          { result: method === RESOURCE_METHOD_TYPE.GET_MANY ? [{ items: fieldsF }] : fieldsF },
+          {
+            result:
+              method === RESOURCE_METHOD_TYPE.GET_MANY || method === RESOURCE_METHOD_TYPE.SEARCH
+                ? [{ items: fieldsF }]
+                : fieldsF,
+          },
         ] as GraphqlQueryParamsFieldsModel<ResourceOutputModel<TMethod, TType, TRoot>>,
         name: nameF,
         params: { input: `${nameF}Input` },

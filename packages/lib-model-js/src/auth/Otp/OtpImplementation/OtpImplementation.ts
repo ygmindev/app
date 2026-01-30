@@ -11,13 +11,11 @@ import { type OtpModel } from '@lib/model/auth/Otp/Otp.models';
 import { type OtpImplementationModel } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation.models';
 // import { UserImplementation } from '@lib/model/user/User/UserImplementation/UserImplementation';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
-import { PartialModel } from '@lib/shared/core/core.models';
 // import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
 // import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 // import { pick } from '@lib/shared/core/utils/pick/pick';
 import { randomInt } from '@lib/shared/crypto/utils/randomInt/randomInt';
-import { EntityResourceDataModel } from '@lib/shared/resource/resource.models';
 import toNumber from 'lodash/toNumber';
 
 @withContainer()
@@ -80,7 +78,7 @@ export class OtpImplementation
   })
   implements OtpImplementationModel
 {
-  async verify(data: EntityResourceDataModel<OtpModel>): Promise<PartialModel<OtpModel>> {
+  async verify(data: Partial<OtpModel>): Promise<Partial<OtpModel>> {
     const filter = objectToEquality(data);
     const { result } = await this.get({ filter });
     if (!result || result.otp !== data.otp) {

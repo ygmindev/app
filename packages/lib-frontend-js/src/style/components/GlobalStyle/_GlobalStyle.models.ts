@@ -1,3 +1,3 @@
 export type _GlobalStylePropsModel = {
-  sheet: string;
+  sheet?: string;
 };

@@ -38,5 +38,7 @@ export type ThemeColorPropsModel = {
 export type ThemePresetsModel = {
   shapePrimaryMainStyle?: ViewStyleModel;
 
+  shapeSecondaryMainStyle?: ViewStyleModel;
+
   textMainStyle?: TextStyleModel;
 };

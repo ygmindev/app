@@ -1,5 +1,6 @@
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
+import { CalendarInput } from '@lib/frontend/data/components/CalendarInput/CalendarInput';
 import { FormContainer } from '@lib/frontend/data/components/FormContainer/FormContainer';
 import { MenuInput } from '@lib/frontend/data/components/MenuInput/MenuInput';
 import { NumberInput } from '@lib/frontend/data/components/NumberInput/NumberInput';
@@ -45,6 +46,9 @@ export const ResourceForm = <TType extends ResourceModel, TRoot = undefined>({
               //       label={labelF}
               //     />
               //   );
+              case DATA_TYPE.DATE:
+              case DATA_TYPE.DATE_TIME:
+                return <CalendarInput label={labelF} />;
               case DATA_TYPE.NUMBER:
                 return <NumberInput label={labelF} />;
               default:

@@ -6,7 +6,10 @@ import { type Collection, type Document } from 'mongodb';
 
 export type DatabaseModel = _DatabaseModel;
 
-export type RepositoryModel<TType extends unknown> = ResourceImplementationModel<TType> & {
+export type RepositoryModel<TType extends unknown> = Omit<
+  ResourceImplementationModel<TType>,
+  'search'
+> & {
   clear(): Promise<void>;
 
   collection(): Collection<TType & Document>;

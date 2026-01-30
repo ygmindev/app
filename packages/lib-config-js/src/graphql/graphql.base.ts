@@ -13,6 +13,7 @@ import { RoleResolver } from '@lib/model/auth/Role/RoleResolver/RoleResolver';
 import { SignInResolver } from '@lib/model/auth/SignIn/SignInResolver/SignInResolver';
 import { GroupResolver } from '@lib/model/group/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '@lib/model/http/Socket/SocketResolver/SocketResolver';
+import { EventResolver } from '@lib/model/kfn/Event/EventResolver/EventResolver';
 import { UserResolver } from '@lib/model/user/User/UserResolver/UserResolver';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -32,6 +33,7 @@ export const graphqlConfig = new Config<GraphqlConfigModel, _GraphqlConfigModel>
       resolvers: filterNil([
         AccessResolver,
         GroupResolver,
+        EventResolver,
         OtpResolver,
         RoleResolver,
         SignInResolver,

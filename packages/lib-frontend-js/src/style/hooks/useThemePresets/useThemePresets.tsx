@@ -14,6 +14,10 @@ export const useThemePresets = (): UseThemePresetsModel => {
       backgroundColor: theme.color.palette[THEME_COLOR.PRIMARY][THEME_ROLE.MAIN],
     },
 
+    shapeSecondaryMainStyle: {
+      backgroundColor: theme.color.palette[THEME_COLOR.SECONDARY][THEME_ROLE.MAIN],
+    },
+
     textMainStyle: {
       color: theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST],
       fontFamily: theme.font.fontFamily.main,

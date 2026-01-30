@@ -1,5 +1,5 @@
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type FilterOperators } from 'mongodb';
 
 export type _MongoFilterParamsModel<TType extends unknown> = [

@@ -11,6 +11,7 @@ import {
   type DatabaseConfigModel,
 } from '@lib/config/database/database.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
+import { FILTER_COMBINATION } from '@lib/model/resource/Filter/Filter.constants';
 import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { type ClassModel, type PartialArrayModel } from '@lib/shared/core/core.models';
 import { DuplicateError } from '@lib/shared/core/errors/DuplicateError/DuplicateError';
@@ -192,17 +193,19 @@ export class _Database extends Bootstrappable implements _DatabaseModel {
         }
         const sortBy = options?.sortBy ?? [{ key: '_id' }];
         if (isCursor) {
-          console.warn('@@@ options');
-          console.warn(options);
           return {
             result: { items: [] },
           };
         }
         const em = this.getEntityManager();
-        const filterF = mongoFilter<TType>({ filter, id }).reduce(
-          (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
-          {} as FilterQuery<NoInfer<NonNullable<TType>>>,
-        );
+        const filters = mongoFilter<TType>({ filter, id });
+        const filterF =
+          options?.combination === FILTER_COMBINATION.OR
+            ? { $or: filters.map((v) => ({ [v.field]: { [v.condition]: v.value } })) }
+            : filters.reduce(
+                (result, v) => ({ ...result, [v.field]: { [v.condition]: v.value } }),
+                {},
+              );
         const result = await em.find(
           name,
           filterF,

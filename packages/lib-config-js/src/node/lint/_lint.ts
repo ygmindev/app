@@ -100,6 +100,7 @@ export const _lint = ({
         'react/jsx-key': 'off',
         'react/jsx-newline': 'error',
         'react/jsx-sort-props': 'error',
+        'react/no-unknown-property': ['warn', { ignore: ['css'] }],
         'react/prop-types': 'off',
       },
     },

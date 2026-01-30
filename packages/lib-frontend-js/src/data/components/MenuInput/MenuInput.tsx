@@ -68,7 +68,7 @@ export const MenuInput = <TType extends MenuOptionModel = MenuOptionModel>({
 
   const { isLoading, query, result, search } = useSearch({
     keys: ['label', 'id'],
-    // onSearch: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
+    onSearch: () => menuRef.current?.scrollTo({ x: 0, y: 0 }),
     options,
   });
 

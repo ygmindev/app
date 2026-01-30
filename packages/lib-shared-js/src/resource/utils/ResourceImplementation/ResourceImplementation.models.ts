@@ -33,6 +33,11 @@ export type ResourceImplementationModel<TType, TRoot = undefined> = {
     context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>>;
 
+  search(
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>,
+    context?: RequestContextModel,
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>>;
+
   subscribe(
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>,
     payload?: Partial<TType>,

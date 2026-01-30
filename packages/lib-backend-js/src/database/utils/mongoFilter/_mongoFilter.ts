@@ -33,7 +33,7 @@ export const _mongoFilter = <TType extends unknown>(
         switch (condition) {
           case FILTER_CONDITION.LIKE: {
             if (isString(value)) {
-              condition = '$regex' as FILTER_CONDITION;
+              condition = '$re' as FILTER_CONDITION;
               value = new RegExp(value, 'i');
             }
             break;

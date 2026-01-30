@@ -13,7 +13,8 @@ import {
   ResourceInputParamsModel,
 } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { type RootInputModel } from '@lib/model/resource/Root/Root.models';
-import { PartialArrayModel } from '@lib/shared/core/core.models';
+import { SearchOptionsModel } from '@lib/model/resource/SearchOptions/SearchOptions.models';
+import { PartialArrayModel, StringKeyModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
@@ -115,6 +116,24 @@ export const ResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot
 
         @withField({ isArray: true, isOptional: true })
         id?: Array<string>;
+      }
+      return Input as ResourceClassModel<ResourceInputModel<TMethod, TType, TRoot>>;
+    }
+
+    case RESOURCE_METHOD_TYPE.SEARCH: {
+      @withEntity({ name, schemaType: ENTITY_SCHEMA_TYPE.INPUT })
+      class Input
+        extends Root<TRoot>
+        implements ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>
+      {
+        @withField({ isArray: true })
+        fields!: Array<StringKeyModel<TType>>;
+
+        @withField()
+        options?: SearchOptionsModel<TType>;
+
+        @withField()
+        query!: string;
       }
       return Input as ResourceClassModel<ResourceInputModel<TMethod, TType, TRoot>>;
     }

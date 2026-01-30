@@ -1,5 +1,6 @@
 import { databaseConfig as configBase } from '@lib/config/database/database.mongo';
+import { Event } from '@lib/model/kfn/Event/Event';
 
 export const databaseConfig = configBase.extend(() => ({
-  entities: [],
+  entities: [Event],
 }));

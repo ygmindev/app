@@ -4,8 +4,8 @@ import { type RangeModel } from '@lib/shared/data/data.models';
 
 export type _CalendarInputPropsModel = ThemePresetsModel &
   (
-    | ({ isRange?: true } & InputPropsModel<RangeModel<Date>>)
-    | ({ isRange?: false } & InputPropsModel<Date>)
+    | ({ isRange?: true } & InputPropsModel<RangeModel<Date> | undefined>)
+    | ({ isRange?: false } & InputPropsModel<Date | undefined>)
   ) & {
     disable?(date: Date): boolean;
   };

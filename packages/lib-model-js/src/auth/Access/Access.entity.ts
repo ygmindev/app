@@ -12,17 +12,24 @@ import { EntityResource } from '@lib/model/resource/EntityResource/EntityResourc
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { User } from '@lib/model/user/User/User.entity';
 import { type UserModel } from '@lib/model/user/User/User.models';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withDatabaseEntity({ name: ACCESS_RESOURCE_NAME })
-export class Access extends EntityResource implements AccessModel {
+export class Access<TType = Record<string, unknown>>
+  extends EntityResource
+  implements AccessModel<TType>
+{
   @withManyToOneField({ Resource: () => Group, isOptional: true })
   [GROUP_RESOURCE_NAME]?: RefModel<GroupModel>;
 
-  @withDatabaseField({ isArray: true })
-  [ROLE_RESOURCE_NAME]!: Array<ACCESS_ROLE>;
+  @withDatabaseField()
+  [ROLE_RESOURCE_NAME]!: ACCESS_ROLE;
 
   @withManyToOneField({ Resource: () => User })
   [USER_RESOURCE_NAME]!: RefModel<UserModel>;
+
+  @withDatabaseField({ isOptional: true, type: DATA_TYPE.JSON })
+  meta?: TType;
 }
 
 export default Access;

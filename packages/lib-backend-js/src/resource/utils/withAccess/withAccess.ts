@@ -10,7 +10,7 @@ import { withCondition } from '@lib/shared/core/utils/withCondition/withConditio
 export const getAccessRole = (access: ACCESS_LEVEL): Array<ACCESS_ROLE> => {
   switch (access) {
     case ACCESS_LEVEL.RESTRICTED:
-      return [ACCESS_ROLE.ADMIN];
+      return [ACCESS_ROLE.USER, ACCESS_ROLE.ADMIN];
     case ACCESS_LEVEL.PROTECTED:
       return [ACCESS_ROLE.USER];
     default:

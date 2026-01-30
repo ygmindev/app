@@ -20,16 +20,23 @@ export const ResourceOutput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoo
   ResourceOutputModel<TMethod, TType, TRoot>
 > => {
   const nameF = `${name}Output`;
-  const isPaginatable = method === RESOURCE_METHOD_TYPE.GET_MANY;
+  const isPaginatable =
+    method === RESOURCE_METHOD_TYPE.GET_MANY || method === RESOURCE_METHOD_TYPE.SEARCH;
   const RootF = Root({ RootResource, name: nameF });
   const Result = (isPaginatable ? Paginatable({ Resource, name }) : Resource()) ?? Boolean;
 
   @withEntity({ name: nameF })
   class Output extends (RootF ?? class {}) implements ResourceOutputModel<TMethod, TType, TRoot> {
-    @withField<TMethod extends RESOURCE_METHOD_TYPE.GET_MANY ? PaginatableModel<TType> : TType>({
+    @withField<
+      TMethod extends RESOURCE_METHOD_TYPE.GET_MANY | RESOURCE_METHOD_TYPE.SEARCH
+        ? PaginatableModel<TType>
+        : TType
+    >({
       Resource: () =>
         Result as ResourceClassModel<
-          TMethod extends RESOURCE_METHOD_TYPE.GET_MANY ? PaginatableModel<TType> : TType
+          TMethod extends RESOURCE_METHOD_TYPE.GET_MANY | RESOURCE_METHOD_TYPE.SEARCH
+            ? PaginatableModel<TType>
+            : TType
         >,
     })
     result?: ResultModel<TMethod, TType>;

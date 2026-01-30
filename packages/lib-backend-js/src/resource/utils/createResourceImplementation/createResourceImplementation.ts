@@ -4,6 +4,8 @@ import {
   type CreateResourceImplementationParamsModel,
 } from '@lib/backend/resource/utils/createResourceImplementation/createResourceImplementation.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
+import { FILTER_COMBINATION, FILTER_CONDITION } from '@lib/model/resource/Filter/Filter.constants';
+import { type FilterModel } from '@lib/model/resource/Filter/Filter.models';
 import { type ResourceModel } from '@lib/model/resource/Resource/Resource.models';
 import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
@@ -90,6 +92,7 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
       this.update = this.update.bind(this);
       this.updateMany = this.updateMany.bind(this);
       this.remove = this.remove.bind(this);
+      this.search = this.search.bind(this);
       this.subscribe = this.subscribe.bind(this);
     }
 
@@ -202,6 +205,27 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
       return this.decorators.afterRemove
         ? this.decorators.afterRemove({ input: inputF, output }, context)
         : output;
+    }
+
+    async search(
+      input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>,
+      context?: RequestContextModel,
+    ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>> {
+      if (!getMany || !input) {
+        return {};
+      }
+      let filter: Array<FilterModel<TType>> = input.fields.map((v) => ({
+        condition: FILTER_CONDITION.LIKE,
+        field: v,
+        value: input.query,
+      }));
+      filter = cleanObject(filter);
+      const output: ResourceOutputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot> =
+        (await getMany(
+          { filter, options: { ...input.options, combination: FILTER_COMBINATION.OR } },
+          context,
+        )) ?? [];
+      return output;
     }
 
     async subscribe(

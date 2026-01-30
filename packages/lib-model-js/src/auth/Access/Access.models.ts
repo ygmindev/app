@@ -7,10 +7,12 @@ import { type EntityResourceModel } from '@lib/model/resource/EntityResource/Ent
 import { type USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { type UserModel } from '@lib/model/user/User/User.models';
 
-export type AccessModel = EntityResourceModel & {
+export type AccessModel<TType = Record<string, unknown>> = EntityResourceModel & {
   [GROUP_RESOURCE_NAME]?: RefModel<GroupModel>;
 
-  [ROLE_RESOURCE_NAME]: Array<ACCESS_ROLE>;
+  [ROLE_RESOURCE_NAME]: ACCESS_ROLE;
 
   [USER_RESOURCE_NAME]: RefModel<UserModel>;
+
+  meta?: TType;
 };

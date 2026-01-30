@@ -9,3 +9,8 @@ export enum FILTER_CONDITION {
   NOT_EQUAL = '$ne',
   NOT_IN = '$nin',
 }
+
+export enum FILTER_COMBINATION {
+  AND = '$and',
+  OR = '$or',
+}

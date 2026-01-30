@@ -4,10 +4,10 @@ import {
 } from '@lib/backend/resource/utils/withAuthorizer/withAuthorizer.models';
 import { type RequestContextModel } from '@lib/config/api/api.models';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
-import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
-import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
+import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
 export const withAuthorizer =
   <TMethod extends RESOURCE_METHOD_TYPE, TType extends EntityResourceModel, TRoot = undefined>({

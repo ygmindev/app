@@ -89,6 +89,13 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
     root,
   });
 
+  const { query: search } = useResourceMethod<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>({
+    fields,
+    method: RESOURCE_METHOD_TYPE.SEARCH,
+    name,
+    root,
+  });
+
   return {
     create,
 
@@ -101,6 +108,8 @@ export const useResource = <TType extends ResourceModel, TRoot = undefined>({
     name,
 
     remove,
+
+    search,
 
     update,
 

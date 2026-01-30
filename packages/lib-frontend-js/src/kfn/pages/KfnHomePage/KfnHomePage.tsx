@@ -5,6 +5,7 @@ import { type FCModel } from '@lib/frontend/core/core.models';
 import { type KfnHomePagePropsModel } from '@lib/frontend/kfn/pages/KfnHomePage/KfnHomePage.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { KFN } from '@lib/shared/kfn/constants';
 
@@ -19,7 +20,11 @@ export const KfnHomePage: FCModel<KfnHomePagePropsModel> = () => {
       s>
       <Logo src={`/images/logos/kpn_logo${theme.color.isDark ? '_dark' : ''}.png`} />
 
-      <Text fontStyle={FONT_STYLE.HEADLINE}>{t('kfn:koreanFinanceNetwork')}</Text>
+      <Text
+        color={THEME_COLOR.PRIMARY}
+        fontStyle={FONT_STYLE.HEADLINE}>
+        {t('kfn:koreanFinanceNetwork')}
+      </Text>
     </Wrapper>
   );
 };

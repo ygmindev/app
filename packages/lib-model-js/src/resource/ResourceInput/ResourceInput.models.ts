@@ -1,8 +1,10 @@
 import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
+import { type FILTER_COMBINATION } from '@lib/model/resource/Filter/Filter.constants';
 import { type FilterModel } from '@lib/model/resource/Filter/Filter.models';
 import { type GetManyOptionsModel } from '@lib/model/resource/GetManyOptions/GetManyOptions.models';
 import { type InputtableModel } from '@lib/model/resource/Inputtable/Inputtable.models';
 import { type RootInputModel } from '@lib/model/resource/Root/Root.models';
+import { type SearchOptionsModel } from '@lib/model/resource/SearchOptions/SearchOptions.models';
 import {
   type EmptyObjectModel,
   type PartialArrayModel,
@@ -42,6 +44,7 @@ type CreateManyArgsModel<TType> = {
 };
 
 export type GetOptionsModel<TType> = {
+  combination?: FILTER_COMBINATION;
   populate?: Array<StringKeyModel<TType>>;
 };
 
@@ -58,6 +61,7 @@ type GetManyArgsModel<TType> = {
 };
 
 type RemoveOptionsModel = CommonOptionsModel & {
+  combination?: FILTER_COMBINATION;
   isFlush?: boolean;
 };
 
@@ -74,12 +78,20 @@ type SubscribeArgsModel<TType> = {
   options?: SubscribeOptionsModel;
 };
 
+type SearchArgsModel<TType> = {
+  fields: Array<StringKeyModel<TType>>;
+  options?: SearchOptionsModel<TType>;
+  query: string;
+};
+
 type UpdateOptionsModel = {
   isFlush?: boolean;
   isUpsert?: boolean;
 };
 
-type UpdateManyOptionsModel = EmptyObjectModel;
+type UpdateManyOptionsModel = {
+  combination?: FILTER_COMBINATION;
+};
 
 type UpdateArgsModel<TType> = {
   id?: string;
@@ -119,10 +131,12 @@ export type ResourceInputModel<
           ? GetManyArgsModel<TType>
           : TMethod extends RESOURCE_METHOD_TYPE.REMOVE
             ? RemoveArgsModel<TType>
-            : TMethod extends RESOURCE_METHOD_TYPE.SUBSCRIBE
-              ? SubscribeArgsModel<TType>
-              : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
-                ? UpdateArgsModel<TType>
-                : TMethod extends RESOURCE_METHOD_TYPE.UPDATE_MANY
-                  ? UpdateManyArgsModel<TType>
-                  : never);
+            : TMethod extends RESOURCE_METHOD_TYPE.SEARCH
+              ? SearchArgsModel<TType>
+              : TMethod extends RESOURCE_METHOD_TYPE.SUBSCRIBE
+                ? SubscribeArgsModel<TType>
+                : TMethod extends RESOURCE_METHOD_TYPE.UPDATE
+                  ? UpdateArgsModel<TType>
+                  : TMethod extends RESOURCE_METHOD_TYPE.UPDATE_MANY
+                    ? UpdateManyArgsModel<TType>
+                    : never);

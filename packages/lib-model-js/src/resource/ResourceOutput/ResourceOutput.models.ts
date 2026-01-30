@@ -32,7 +32,7 @@ export type ResultModel<TMethod extends RESOURCE_METHOD_TYPE, TType> = TMethod e
         | RESOURCE_METHOD_TYPE.SUBSCRIBE
         | RESOURCE_METHOD_TYPE.UPDATE
     ? Partial<TType>
-    : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY
+    : TMethod extends RESOURCE_METHOD_TYPE.GET_MANY | RESOURCE_METHOD_TYPE.SEARCH
       ? PaginatableModel<TType>
       : TMethod extends RESOURCE_METHOD_TYPE.CREATE_MANY
         ? PartialArrayModel<TType>

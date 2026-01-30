@@ -15,10 +15,7 @@ import { type PartialArrayModel, type StringKeyModel } from '@lib/shared/core/co
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
-import {
-  type FilterableResourceMethodTypeModel,
-  type RESOURCE_METHOD_TYPE,
-} from '@lib/shared/resource/resource.models';
+import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import reduce from 'lodash/reduce';
 import { type Collection, ObjectId, type PullOperator, type PushOperator } from 'mongodb';
 
@@ -103,7 +100,7 @@ export const createEmbeddedResourceImplementation = <
   };
 
   const count = async (
-    input?: ResourceInputModel<FilterableResourceMethodTypeModel, TType, TRoot>,
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>,
   ): Promise<number> => {
     if (!input?.root) throw new NotFoundError('root');
     const filters = mongoFilter({ filter: input.filter, id: input.id }, `$$e`);

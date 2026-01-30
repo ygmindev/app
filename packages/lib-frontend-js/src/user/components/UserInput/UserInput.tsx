@@ -29,11 +29,13 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = ({
     value,
   });
 
-  const { getMany } = useUserResource();
+  const { search } = useUserResource();
 
   const handleSearch = async (query?: string): Promise<Array<UserOptionModel>> =>
     query
-      ? ((await getMany({ query })).result ?? []).map((user) => ({ id: user._id ?? '', user }))
+      ? ((await search({ fields: ['first', 'last', 'email'], query })).result?.items ?? []).map(
+          (user) => ({ id: user._id ?? '', user }),
+        )
       : [];
 
   return (
@@ -41,7 +43,7 @@ export const UserInput: RLFCModel<UserInputRefModel, UserInputPropsModel> = ({
       {...wrapperProps}
       label={t('user:user')}
       onChange={(v) => valueControlledSet(v.user)}
-      onSearch={handleSearch}
+      options={handleSearch}
       renderOption={(option) => (
         <Wrapper
           isAlign
