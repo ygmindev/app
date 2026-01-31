@@ -19,7 +19,7 @@ export const serverConfig = new Config<ServerConfigModel>({
       environment.variables.SERVER_APP_PORT;
     return {
       certificate:
-        environment.variables.NODE_RUNTIME === 'container'
+        process.env.NODE_ENV === 'production'
           ? undefined
           : {
               caFilename: 'rootCA.pem',
