@@ -1,6 +1,6 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
-import { Event } from '@lib/model/kfn/Event/Event';
+import { Event } from '@lib/model/kfn/Event/Event.entity';
 import { EVENT_RESOURCE_NAME } from '@lib/model/kfn/Event/Event.constants';
 import { type EventModel } from '@lib/model/kfn/Event/Event.models';
 import { type EventImplementationModel } from '@lib/model/kfn/Event/EventImplementation/EventImplementation.models';

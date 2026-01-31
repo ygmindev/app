@@ -2,7 +2,7 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEntityResourceResolver } from '@lib/backend/resource/utils/createEntityResourceResolver/createEntityResourceResolver';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
-import { Event } from '@lib/model/kfn/Event/Event';
+import { Event } from '@lib/model/kfn/Event/Event.entity';
 import { EVENT_RESOURCE_NAME } from '@lib/model/kfn/Event/Event.constants';
 import { type EventModel } from '@lib/model/kfn/Event/Event.models';
 import { EventImplementation } from '@lib/model/kfn/Event/EventImplementation/EventImplementation';

@@ -371,6 +371,9 @@ export const _bundle = ({
       ssr: platformF === PLATFORM.NODE ? true : undefined,
 
       terserOptions: {
+        compress: {
+          keep_classnames: true,
+        },
         mangle: {
           keep_classnames: true,
         },
@@ -389,6 +392,7 @@ export const _bundle = ({
     envPrefix,
 
     esbuild: {
+      keepNames: true,
       loader: 'tsx',
     },
 
