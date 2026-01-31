@@ -12,6 +12,7 @@ import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrapp
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
 import { packageInfo } from '@lib/shared/core/utils/packageInfo/packageInfo';
 import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequence';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type TaskModel } from '@tool/task/core/utils/buildTask/buildTask.models';
 import { type CliModel, type CliRegistryModel } from '@tool/task/core/utils/Cli/Cli.models';
 import { parseArgs } from '@tool/task/core/utils/parseArgs/parseArgs';
@@ -92,8 +93,7 @@ export class Cli extends Bootstrappable implements CliModel {
       .map((p) => p.charAt(0))
       .join('');
     if (this._aliases[alias]) {
-      // throw new DuplicateError(`alias ${alias} (${name}) already exists`);
-      console.warn(`alias ${alias} (${name}) already exists`);
+      logger.warn(`alias ${alias} (${name} vs. ${this._aliases[alias]}) already exists`);
     }
     this._registry[name] = params;
     this._aliases[alias] = name;
