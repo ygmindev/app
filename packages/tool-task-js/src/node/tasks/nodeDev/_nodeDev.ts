@@ -3,6 +3,7 @@ import { withDir } from '@lib/backend/file/utils/withDir/withDir';
 import { APP_TYPE } from '@lib/config/node/bundle/bundle.constants';
 import { bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { type BootstrappableModel } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable.models';
+import { handleCleanup } from '@lib/shared/core/utils/handleCleanup/handleCleanup';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
@@ -43,8 +44,12 @@ export const _nodeDev = async ({ pathname }: _NodeDevParamsModel): Promise<_Node
 
   let cleannable: Array<Pick<BootstrappableModel, 'cleanUp'>> = [];
 
-  const runAll = async (): Promise<void> => {
+  const cleanUp = async (): Promise<void> => {
     await Promise.all(cleannable.map(async (p) => p?.cleanUp?.()));
+  };
+
+  const runAll = async (): Promise<void> => {
+    await cleanUp();
     runner.moduleCache.clear();
     cleannable = await Promise.all(entryFiles.map(async (v) => runner.executeFile(v)));
   };
@@ -58,4 +63,13 @@ export const _nodeDev = async ({ pathname }: _NodeDevParamsModel): Promise<_Node
   });
 
   await withDir(root, runAll);
+
+  return new Promise((resolve) => {
+    void handleCleanup({
+      onCleanUp: async () => {
+        await cleanUp();
+        resolve();
+      },
+    });
+  });
 };
