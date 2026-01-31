@@ -463,7 +463,7 @@ export const _bundle = ({
 
       provide && inject(provide),
 
-      platformF === PLATFORM.WEB && vike(),
+      platformF === PLATFORM.WEB && process.env.NODE_ENV !== 'production' && vike(),
 
       barrelFiles && vitePluginBarrel(barrelFiles),
 

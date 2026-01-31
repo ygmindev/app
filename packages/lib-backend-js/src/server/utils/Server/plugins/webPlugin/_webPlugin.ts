@@ -5,7 +5,6 @@ import { _bundle } from '@lib/config/node/bundle/_bundle';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { HTTP_METHOD } from '@lib/shared/http/http.constants';
 import { render } from '@lib/shared/web/utils/render/render';
-import { createDevMiddleware } from 'vike/server';
 
 export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
   server._app.use((req, res, next) => {
@@ -17,6 +16,7 @@ export const _webPlugin: _WebPluginModel = async (server, { config, root }) => {
     (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
     !environment.variables.NODE_RUNTIME
   ) {
+    const { createDevMiddleware } = await import('vike/server');
     const { devMiddleware } = await createDevMiddleware({
       root,
       viteConfig: { configFile: false, ..._bundle(config), root },
