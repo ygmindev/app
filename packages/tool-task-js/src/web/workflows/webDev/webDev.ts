@@ -1,15 +1,24 @@
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { EXECUTE_PARALLEL } from '@tool/task/core/tasks/executeParallel/executeParallel.constants';
 import { type ExecuteParallelParamsModel } from '@tool/task/core/tasks/executeParallel/executeParallel.models';
-import { APP_DEV } from '@tool/task/dev/workflows/appDev/appDev.constants';
-import { type AppDevParamsModel } from '@tool/task/dev/workflows/appDev/appDev.models';
 import { type BuildWorkflowParamsModel } from '@tool/task/orchestrator/utils/buildWorkflow/buildWorkflow.models';
+import { WEB_DEV } from '@tool/task/web/workflows/webDev/webDev.constants';
+import { type WebDevParamsModel } from '@tool/task/web/workflows/webDev/webDev.models';
 
-export const appDev: BuildWorkflowParamsModel<
-  AppDevParamsModel,
+export const webDev: BuildWorkflowParamsModel<
+  WebDevParamsModel,
   void,
   [ExecuteParallelParamsModel]
 > = {
-  name: APP_DEV,
+  context: {
+    environment: ENVIRONMENT.DEVELOPMENT,
+    overrrides: {
+      ENV_PLATFORM: PLATFORM.WEB,
+    },
+  },
+
+  name: WEB_DEV,
 
   steps: ({ name }, context) => [
     {

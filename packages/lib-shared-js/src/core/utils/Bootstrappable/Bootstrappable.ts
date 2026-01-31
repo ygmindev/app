@@ -20,6 +20,7 @@ export class Bootstrappable implements BootstrappableModel {
   async initialize(): Promise<void> {
     if (this._isInitialized) {
       logger.warn(`${this.constructor.name} already initialized`);
+      return;
     } else {
       logger.info(`${this.constructor.name} initializing...`);
       await handleCleanup({ onCleanUp: async () => this.cleanUp() });
@@ -29,6 +30,7 @@ export class Bootstrappable implements BootstrappableModel {
         logger.success(`successfully initialized ${this.constructor.name}`);
       } catch (e) {
         logger.fail(`failed to initialize ${this.constructor.name}: ${e as Error}`);
+        throw e;
       }
     }
   }

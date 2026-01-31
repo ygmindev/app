@@ -13,6 +13,7 @@ export const routes = getRoutes({
     {
       element: <KfnHomePage />,
       pathname: HOME,
+      prerender: true,
     },
 
     {
@@ -20,6 +21,7 @@ export const routes = getRoutes({
       icon: 'people',
       isNavigatable: true,
       pathname: MEMBERS,
+      prerender: true,
     },
 
     {
@@ -27,6 +29,7 @@ export const routes = getRoutes({
       icon: 'calendar',
       isNavigatable: true,
       pathname: EVENTS,
+      prerender: true,
     },
   ],
 });

@@ -5,9 +5,8 @@ import {
 import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 
 export const _onPrerender =
-  ({ getContext, languages, onInitialize }: _OnPrerenderParamsModel): _OnPrerenderModel =>
+  ({ getContext, languages }: _OnPrerenderParamsModel): _OnPrerenderModel =>
   async ({ pageContexts }) => {
-    await onInitialize?.();
     const pageContextPromises: Array<() => Promise<(typeof pageContexts)[number]>> = [];
     languages.forEach(({ id }) =>
       pageContexts.forEach((pageContext) =>

@@ -9,11 +9,14 @@ import { Container } from '@lib/shared/core/utils/Container/Container';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { type ResourceImplementationModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
-import { type SeedModel, type SeedParamsModel } from '@tool/task/database/tasks/seed/seed.models';
+import {
+  type DatabaseSeedModel,
+  type DatabaseSeedParamsModel,
+} from '@tool/task/database/tasks/databaseSeed/databaseSeed.models';
 import camelCase from 'lodash/camelCase';
 import upperFirst from 'lodash/upperFirst';
 
-export const seed = buildTask<SeedParamsModel, SeedModel>({
+export const databaseSeed = buildTask<DatabaseSeedParamsModel, DatabaseSeedModel>({
   task: async ({ entities }) => {
     const database = Container.get(Database, DATABASE_TYPE.MONGO);
 

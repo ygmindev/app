@@ -21,7 +21,6 @@ export const KfnMembersPage: LFCModel<KfnMembersPagePropsModel> = ({ ...props })
   const { wrapperProps } = useLayoutStyles({ props });
   const { getMany } = useAccessResource();
   const { t } = useTranslation();
-
   return (
     <Wrapper
       {...wrapperProps}

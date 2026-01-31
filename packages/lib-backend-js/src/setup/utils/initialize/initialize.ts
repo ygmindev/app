@@ -10,6 +10,7 @@ import {
 import { pubSubConfig } from '@lib/config/pubSub/pubSub';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 
 let isInitialized: boolean = false;
 
@@ -22,19 +23,23 @@ export const initialize = async ({
     await environment.initialize();
     Container.set(Environment, environment);
 
-    const databaseF = database?.();
     try {
       const pubSub = new PubSub(pubSubConfig.params());
       await pubSub.initialize();
       Container.set(PubSub, pubSub);
-    } catch {}
+    } catch (e) {
+      logger.error(e as Error);
+    }
 
-    if (databaseF) {
+    if (database) {
       try {
-        const db = new Database(databaseF);
+        const db = new Database(database?.());
         await db.initialize();
         Container.set(Database, db, DATABASE_TYPE.MONGO);
-      } catch {}
+      } catch (e) {
+        logger.error(e as Error);
+        throw e;
+      }
     }
   }
 };

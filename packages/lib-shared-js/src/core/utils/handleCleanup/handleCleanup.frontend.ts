@@ -1,4 +1,3 @@
-import { _handleCleanup } from '@lib/shared/core/utils/handleCleanup/_handleCleanup';
 import {
   type HandleCleanupModel,
   type HandleCleanupParamsModel,
@@ -6,4 +5,6 @@ import {
 
 export const handleCleanup = async (
   params: HandleCleanupParamsModel,
-): Promise<HandleCleanupModel> => _handleCleanup(params);
+): Promise<HandleCleanupModel> => {
+  return;
+};

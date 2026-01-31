@@ -1,6 +1,7 @@
+import { type InitializeParamsModel } from '@lib/backend/setup/utils/initialize/initialize.models';
 import { type RouteModel } from '@lib/frontend/route/route.models';
 
-export type _OnBeforePrerenderParamsModel = {
+export type _OnBeforePrerenderParamsModel = InitializeParamsModel & {
   routes: Array<RouteModel>;
 };
 

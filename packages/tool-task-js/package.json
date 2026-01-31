@@ -1,8 +1,5 @@
 {
   "name": "@tool/task",
-  "bin": {
-    "run": "./src/cli.js"
-  },
   "dependencies": {
     "0x": "^6.0.0",
     "@anatine/esbuild-decorators": "^0.2.19",

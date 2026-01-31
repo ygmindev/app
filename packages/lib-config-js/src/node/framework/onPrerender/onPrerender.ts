@@ -9,7 +9,7 @@ import { merge } from '@lib/shared/core/utils/merge/merge';
 import { LOCALE } from '@lib/shared/locale/locale.constants';
 import { ROUTE } from '@lib/shared/route/route.constants';
 
-export const onPrerender = (params?: onPrerenderParamsModel): onPrerenderModel => {
+export const onPrerender = (params: onPrerenderParamsModel): onPrerenderModel => {
   const { languageDefault, languages } = internationalizeConfig.params();
   const i18n = internationalizeConfig.config();
   return _onPrerender({
@@ -29,7 +29,5 @@ export const onPrerender = (params?: onPrerenderParamsModel): onPrerenderModel =
     },
 
     languages,
-
-    onInitialize: async () => {},
   });
 };

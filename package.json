@@ -24,6 +24,9 @@
     "private": true,
     "type": "module",
     "version": "0.0.0",
+    "bin": {
+        "run": "./packages/tool-task-js/src/cli.js"
+    },
     "workspaces": [
         "packages/*"
     ],

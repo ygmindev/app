@@ -488,13 +488,13 @@ importers:
         specifier: ^5.1.5
         version: 5.1.6
       react:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3
       react-day-picker:
         specifier: ^9.9.0
         version: 9.13.0(react@19.2.3)
       react-dom:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
       react-markdown:
         specifier: ^10.1.0
@@ -711,13 +711,13 @@ importers:
         specifier: ^5.1.5
         version: 5.1.6
       react:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3
       react-day-picker:
         specifier: ^9.9.0
         version: 9.13.0(react@19.2.3)
       react-dom:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
       react-markdown:
         specifier: ^10.1.0
@@ -925,13 +925,13 @@ importers:
         specifier: ^5.1.5
         version: 5.1.6
       react:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3
       react-day-picker:
         specifier: ^9.9.0
         version: 9.13.0(react@19.2.3)
       react-dom:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
       react-markdown:
         specifier: ^10.1.0
@@ -1008,7 +1008,7 @@ importers:
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.3))(@types/react@19.2.7)(react@19.2.3)
       '@expo/vector-icons':
         specifier: ^15.0.2
-        version: 15.0.3(expo-font@14.0.10(expo@54.0.30(@babel/core@7.28.5)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.3))(react@19.2.3))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.3))(react@19.2.3))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.3))(react@19.2.3))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.3))(react@19.2.3)
+        version: 15.0.3(expo-font@14.0.10(expo@54.0.30(@babel/core@7.28.5)(graphql@16.12.0)(react-native-webview@13.16.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.3))(react@19.2.3))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.3))(react@19.2.3))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.3))(react@19.2.3))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.3))(react@19.2.3)
       '@fastify/middie':
         specifier: ^9.0.3
         version: 9.0.3
@@ -1163,13 +1163,13 @@ importers:
         specifier: ^5.1.5
         version: 5.1.6
       react:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3
       react-day-picker:
         specifier: ^9.9.0
         version: 9.13.0(react@19.2.3)
       react-dom:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
       react-markdown:
         specifier: ^10.1.0
@@ -1398,13 +1398,13 @@ importers:
         specifier: ^5.1.5
         version: 5.1.6
       react:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3
       react-day-picker:
         specifier: ^9.9.0
         version: 9.13.0(react@19.2.3)
       react-dom:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
       react-markdown:
         specifier: ^10.1.0
@@ -1621,13 +1621,13 @@ importers:
         specifier: ^5.1.5
         version: 5.1.6
       react:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3
       react-day-picker:
         specifier: ^9.9.0
         version: 9.13.0(react@19.2.3)
       react-dom:
-        specifier: ^19.0.0
+        specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
       react-markdown:
         specifier: ^10.1.0
@@ -22744,7 +22744,7 @@ snapshots:
       '@expo/xcpretty': 4.3.2
       '@react-native/dev-middleware': 0.81.5
       '@urql/core': 5.2.0(graphql@16.12.0)
-      '@urql/exchange-retry': 1.3.2(@urql/core@5.2.0(graphql@16.12.0))
+      '@urql/exchange-retry': 1.3.2(@urql/core@5.2.0)
       accepts: 1.3.8
       arg: 5.0.2
       better-opn: 3.0.2
@@ -22818,7 +22818,7 @@ snapshots:
       '@expo/xcpretty': 4.3.2
       '@react-native/dev-middleware': 0.81.5
       '@urql/core': 5.2.0(graphql@16.12.0)
-      '@urql/exchange-retry': 1.3.2(@urql/core@5.2.0(graphql@16.12.0))
+      '@urql/exchange-retry': 1.3.2(@urql/core@5.2.0)
       accepts: 1.3.8
       arg: 5.0.2
       better-opn: 3.0.2
@@ -29116,7 +29116,7 @@ snapshots:
     transitivePeerDependencies:
       - graphql
 
-  '@urql/exchange-retry@1.3.2(@urql/core@5.2.0(graphql@16.12.0))':
+  '@urql/exchange-retry@1.3.2(@urql/core@5.2.0)':
     dependencies:
       '@urql/core': 5.2.0(graphql@16.12.0)
       wonka: 6.3.5

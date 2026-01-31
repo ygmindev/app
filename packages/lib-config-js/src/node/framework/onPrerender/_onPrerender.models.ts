@@ -8,8 +8,6 @@ export type _OnPrerenderParamsModel = {
   getContext(
     params: FrameworkRenderParamsModel & { lang: string; pathname: string },
   ): Promise<FrameworkRenderParamsModel & { pathname: string }>;
-
-  onInitialize?(): Promise<void>;
 };
 
 export type _OnPrerenderModel = (params: {

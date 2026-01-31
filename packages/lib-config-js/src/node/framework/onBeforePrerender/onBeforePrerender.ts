@@ -1,3 +1,4 @@
+import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { _onBeforePrerender } from '@lib/config/node/framework/onBeforePrerender/_onBeforePrerender';
 import {
   type OnBeforePrerenderModel,
@@ -28,7 +29,9 @@ const getPrerenderRoutes = (routes?: Array<RouteModel>): Array<RouteModel> => {
   return prerenderRoutes;
 };
 
-export const onBeforePrerender = ({
-  routes,
-}: OnBeforePrerenderParamsModel): OnBeforePrerenderModel =>
-  _onBeforePrerender({ routes: getPrerenderRoutes(routes) });
+export const onBeforePrerender =
+  ({ database, routes }: OnBeforePrerenderParamsModel): OnBeforePrerenderModel =>
+  async () => {
+    database && (await initialize({ database }));
+    return _onBeforePrerender({ routes: getPrerenderRoutes(routes) })();
+  };
