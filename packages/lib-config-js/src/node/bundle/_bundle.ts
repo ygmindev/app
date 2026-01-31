@@ -294,7 +294,6 @@ export const _bundle = ({
       return { entryFiles: { [main]: `virtual:${main}` }, watch: v[0] };
     }) ?? []),
   ];
-
   const config: _BundleConfigModel = {
     appType: appType === APP_TYPE.TOOL ? undefined : 'custom',
 
