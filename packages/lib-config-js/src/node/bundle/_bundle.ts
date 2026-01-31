@@ -358,7 +358,10 @@ export const _bundle = ({
 
         preserveSymlinks: true,
 
-        treeshake: 'recommended',
+        treeshake: {
+          moduleSideEffects: false,
+          preset: 'recommended',
+        },
       },
 
       sourcemap:

@@ -27,9 +27,6 @@
     "bin": {
         "run": "./packages/tool-task-js/src/cli.js"
     },
-    "scripts": {
-        "run": "run"
-    },
     "workspaces": [
         "packages/*"
     ],
