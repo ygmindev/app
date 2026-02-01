@@ -83,7 +83,6 @@ export const bundleConfig = configBase.extend(() => {
         // TODO: fix?
         // process.env.NODE_ENV === 'production' && '@emotion/react',
         process.env.NODE_ENV === 'production' && 'inline-style-prefixer',
-        process.env.NODE_ENV === 'production' && 'react-native-web',
         process.env.NODE_ENV === 'production' && 'react-use',
         // process.env.NODE_ENV === 'production' && 'inversify-react',
       ]) ?? [],
