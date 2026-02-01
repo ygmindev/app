@@ -81,8 +81,9 @@ export const bundleConfig = configBase.extend(() => {
         // 'moti',
         // 'redux-persist',
         // TODO: fix?
+        process.env.NODE_ENV === 'production' && '@emotion/react',
         process.env.NODE_ENV === 'production' && 'react-use',
-        process.env.NODE_ENV === 'production' && 'inversify-react',
+        // process.env.NODE_ENV === 'production' && 'inversify-react',
       ]) ?? [],
 
     transpilePatterns: [
