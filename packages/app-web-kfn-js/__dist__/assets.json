@@ -1,6 +1,6 @@
 {
   "../../node_modules/.pnpm/vike@0.4.250_react-streaming@0.4.15_react-dom@19.2.3_react@19.2.3__react@19.2.3__vite@7_a4cba15f91f90f8df4d5529a44ec2fad/node_modules/vike/dist/client/runtime-client-routing/entry.js": {
-    "file": "assets/entries/entry-client-routing.DWbZlYpE.js",
+    "file": "assets/entries/entry-client-routing.Dta_1oPd.js",
     "name": "entries/entry-client-routing",
     "src": "../../node_modules/.pnpm/vike@0.4.250_react-streaming@0.4.15_react-dom@19.2.3_react@19.2.3__react@19.2.3__vite@7_a4cba15f91f90f8df4d5529a44ec2fad/node_modules/vike/dist/client/runtime-client-routing/entry.js",
     "isEntry": true,
@@ -33,17 +33,17 @@
     "src": "__vite-browser-external",
     "isDynamicEntry": true
   },
-  "_chunk-BIZp4aSv.js": {
-    "file": "assets/chunks/chunk-BIZp4aSv.js",
+  "_chunk-BrjrQUnT.js": {
+    "file": "assets/chunks/chunk-BrjrQUnT.js",
+    "name": "preload-helper"
+  },
+  "_chunk-Cd4PgzQ6.js": {
+    "file": "assets/chunks/chunk-Cd4PgzQ6.js",
     "name": "browser-ponyfill",
     "isDynamicEntry": true,
     "imports": [
       "virtual:vike:page-entry:client:/src/pages"
     ]
-  },
-  "_chunk-BrjrQUnT.js": {
-    "file": "assets/chunks/chunk-BrjrQUnT.js",
-    "name": "preload-helper"
   },
   "_style-052041d4.CbGtfgdF.css": {
     "file": "assets/static/style-052041d4.CbGtfgdF.css",
@@ -53,14 +53,8 @@
     "file": "assets/static/style-269ba50d.D1-0B2xV.css",
     "src": "_style-269ba50d.D1-0B2xV.css"
   },
-  "src/pages/+client.ts": {
-    "file": "assets/entries/src_pages_client.wzvCTo9t.js",
-    "name": "entries/src/pages/_client",
-    "src": "src/pages/+client.ts",
-    "isEntry": true
-  },
   "virtual:vike:page-entry:client:/src/pages": {
-    "file": "assets/entries/src_pages.ZfAJCSwp.js",
+    "file": "assets/entries/src_pages.12XUbYYy.js",
     "name": "entries/src/pages",
     "src": "virtual:vike:page-entry:client:/src/pages",
     "isEntry": true,
@@ -70,7 +64,7 @@
     ],
     "dynamicImports": [
       "__vite-browser-external",
-      "_chunk-BIZp4aSv.js"
+      "_chunk-Cd4PgzQ6.js"
     ],
     "css": [
       "assets/static/style-052041d4.CbGtfgdF.css",
