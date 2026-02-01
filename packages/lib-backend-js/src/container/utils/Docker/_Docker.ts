@@ -2,10 +2,12 @@ import {
   type _DockerModel,
   type _DockerParamsModel,
 } from '@lib/backend/container/utils/Docker/_Docker.models';
+import { type DockerBuildParamsModel } from '@lib/backend/container/utils/Docker/Docker.models';
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { globMatch } from '@lib/backend/file/utils/globMatch/globMatch';
+import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { toRelative } from '@lib/backend/file/utils/toRelative/toRelative';
 import { type ContainerConfigModel } from '@lib/config/container/container.models';
 import { type EnvironmentConfigModel } from '@lib/config/environment/environment.models';
@@ -59,8 +61,8 @@ export class _Docker implements _DockerModel {
     });
   }
 
-  async build(): Promise<void> {
-    const { dirname, ignore, platform } = this.container;
+  async build(params?: DockerBuildParamsModel): Promise<void> {
+    const { dirname = fromWorking(), dockerfilename, ignore, platform } = this.container;
     await this.delete();
     const tarStream = tar.pack(fromRoot(), {
       ignore: (name) =>
@@ -71,8 +73,9 @@ export class _Docker implements _DockerModel {
     });
 
     try {
+      const dockerfilenameF = params?.dockerfilename ?? dockerfilename;
       const environment = Container.get(Environment);
-      const pathname = fromWorking(dirname, 'Dockerfile');
+      const pathname = joinPaths([dirname, dockerfilenameF]);
       const stream = await this.docker.buildImage(tarStream, {
         buildargs: { ...environment.variables },
         dockerfile: toRelative({ from: fromRoot(), to: pathname }),

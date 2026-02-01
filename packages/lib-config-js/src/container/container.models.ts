@@ -1,5 +1,6 @@
 export type ContainerConfigModel = {
-  dirname: string;
+  dirname?: string;
+  dockerfilename: string;
   ignore: Array<string>;
   image?: string;
   password?: string;

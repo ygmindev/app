@@ -10,8 +10,8 @@ import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 export const containerBuild = buildTask<ContainerBuildParamsModel, ContainerBuildModel>({
   name: CONTAINER_BUILD,
 
-  task: async (params, context) => {
-    await Container.get(Docker).build();
+  task: async ({ dockerfilename }, context) => {
+    await Container.get(Docker).build({ dockerfilename });
     return {};
   },
 });

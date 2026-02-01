@@ -9,7 +9,7 @@ export const containerConfig = new Config<ContainerConfigModel>({
   params: () => {
     const environment = Container.get(Environment);
     return {
-      dirname: 'src/container',
+      dockerfilename: 'Dockerfile',
       ignore: EXCLUDE_PATTERNS.filter((v) => v !== BUILD_DIR),
       image: snakeCase(environment.variables.APP_NAME),
       password: environment.variables.GITHUB_TOKEN,

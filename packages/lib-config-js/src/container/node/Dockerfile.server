@@ -1,0 +1,12 @@
+FROM node-base as node-server
+
+ARG PKG
+ARG SERVER_APP_PORT
+
+COPY packages/${PKG} ${TARGET_DIR}/packages/${PKG}
+
+WORKDIR ${TARGET_DIR}/packages/${PKG}
+
+EXPOSE ${SERVER_APP_PORT}
+
+CMD ["node", "__dist__/index.js"]
