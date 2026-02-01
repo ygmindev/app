@@ -248,7 +248,6 @@ export const _bundle = ({
   }
 
   const tsconfigDir = fromWorking(typescript?.configFilename);
-
   const transpiles = [
     ...(transpileModules ?? []),
     ...(transpilePatterns ?? []),

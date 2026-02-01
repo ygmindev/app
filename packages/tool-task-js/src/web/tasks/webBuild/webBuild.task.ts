@@ -1,5 +1,6 @@
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
-import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { DIST_DIR } from '@lib/config/file/file.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
@@ -27,7 +28,7 @@ export const webBuild = buildTask<WebBuildParamsModel, WebBuildModel>({
       `@lib/config/node/bundle/bundle.${environment.variables.ENV_PLATFORM}`
     );
     await _webBuild({
-      bundle: bundleConfig.config({ outDirname: fromDist() }),
+      bundle: bundleConfig.config({ outDirname: fromWorking(DIST_DIR) }),
     });
     return {};
   },

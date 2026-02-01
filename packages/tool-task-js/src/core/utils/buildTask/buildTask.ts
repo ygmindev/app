@@ -23,7 +23,7 @@ export const buildTask =
   async (paramsOverrides, contextOverrides) => {
     let paramsF = merge([cleanObject(paramsOverrides), params]) as TParams;
     const promptsF = prompts?.filter((v) => !(v.key in (paramsF as object)));
-        promptsF?.length && (paramsF = { ...paramsF, ...(await prompt(promptsF)) });
+    promptsF?.length && (paramsF = { ...paramsF, ...(await prompt(promptsF)) });
     const contextF = merge([cleanObject(contextOverrides), context]) as ExecutionContextModel;
     contextF.root = contextF.root ?? (contextF.app ? await getAppRoot(contextF.app) : fromRoot());
     const environment = process.env.NODE_ENV === 'undefined' ? undefined : process.env.NODE_ENV;
