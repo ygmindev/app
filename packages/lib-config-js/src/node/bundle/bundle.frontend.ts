@@ -14,6 +14,11 @@ export const bundleConfig = configBase.extend(() => {
         from: 'react-native-is-edge-to-edge',
         to: 'react-native-is-edge-to-edge/dist/index.mjs',
       },
+
+      {
+        from: /^inline-style-prefixer\/lib\/(.*)/,
+        to: 'inline-style-prefixer/es/$1.js',
+      },
     ],
 
     // externals: [
@@ -82,7 +87,6 @@ export const bundleConfig = configBase.extend(() => {
         // 'redux-persist',
         // TODO: fix?
         // process.env.NODE_ENV === 'production' && '@emotion/react',
-        process.env.NODE_ENV === 'production' && 'inline-style-prefixer',
         process.env.NODE_ENV === 'production' && 'react-use',
         // process.env.NODE_ENV === 'production' && 'inversify-react',
       ]) ?? [],
