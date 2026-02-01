@@ -33,5 +33,5 @@ export const bundleConfig = configBase.extend(() => ({
     certificate: serverConfig.params().certificate,
   },
 
-  transpileModules: ['react-dom/client', 'react-native-web/dist/modules/prefixStyles'],
+  transpileModules: ['react-dom/client', 'react-native-web', 'inline-style-prefixer', 'css-in-js-utils'],
 }));

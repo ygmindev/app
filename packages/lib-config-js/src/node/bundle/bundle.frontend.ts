@@ -23,6 +23,11 @@ export const bundleConfig = configBase.extend(() => {
         from: 'inline-style-prefixer/lib',
         to: 'inline-style-prefixer/es',
       },
+
+      {
+        from: 'css-in-js-utils/lib',
+        to: 'css-in-js-utils/es',
+      },
     ],
 
     // externals: [
@@ -91,7 +96,6 @@ export const bundleConfig = configBase.extend(() => {
         // 'redux-persist',
         // TODO: fix?
         // process.env.NODE_ENV === 'production' && '@emotion/react',
-        // 'inline-style-prefixer',
         process.env.NODE_ENV === 'production' && 'react-use',
         // process.env.NODE_ENV === 'production' && 'inversify-react',
       ]) ?? [],

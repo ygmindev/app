@@ -1111,6 +1111,9 @@ importers:
       cookies-js:
         specifier: ^1.2.3
         version: 1.2.3
+      css-in-js-utils:
+        specifier: ^3.1.0
+        version: 3.1.0
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
