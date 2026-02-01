@@ -21,7 +21,7 @@ export const bundleConfig = configBase.extend(() => ({
     ],
   },
 
-  dedupe: ['react-dom'],
+  dedupe: ['react-dom', 'react-native-web'],
 
   define: {
     global: 'globalThis',
@@ -33,5 +33,5 @@ export const bundleConfig = configBase.extend(() => ({
     certificate: serverConfig.params().certificate,
   },
 
-  transpileModules: ['react-dom/client'],
+  transpileModules: ['react-dom/client', 'react-native-web/dist/modules/prefixStyles'],
 }));
