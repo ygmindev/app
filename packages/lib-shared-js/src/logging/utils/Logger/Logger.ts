@@ -1,10 +1,10 @@
-import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { loggingConfig } from '@lib/config/node/logging/logging';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger';
-import { LogArgsModel, type LoggerModel } from '@lib/shared/logging/utils/Logger/Logger.models';
+import {
+  type LogArgsModel,
+  type LoggerModel,
+} from '@lib/shared/logging/utils/Logger/Logger.models';
 
-@withContainer()
 export class Logger extends _Logger implements LoggerModel {
   constructor() {
     super(loggingConfig.config());
@@ -20,13 +20,37 @@ export class Logger extends _Logger implements LoggerModel {
     this.info(params, ...rest, '✅');
 }
 
-export const logger: LoggerModel = {
-  debug: (params: LogArgsModel) => Container.get(Logger).debug(params),
-  error: (params: LogArgsModel) => Container.get(Logger).error(params),
-  fail: (params: LogArgsModel) => Container.get(Logger).fail(params),
-  info: (params: LogArgsModel) => Container.get(Logger).info(params),
-  progress: (params: LogArgsModel) => Container.get(Logger).progress(params),
-  success: (params: LogArgsModel) => Container.get(Logger).success(params),
-  trace: (params: LogArgsModel) => Container.get(Logger).trace(params),
-  warn: (params: LogArgsModel) => Container.get(Logger).warn(params),
-};
+export const logger: LoggerModel = new Logger();
+
+// import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
+// import { loggingConfig } from '@lib/config/node/logging/logging';
+// import { Container } from '@lib/shared/core/utils/Container/Container';
+// import { _Logger } from '@lib/shared/logging/utils/Logger/_Logger';
+// import { LogArgsModel, type LoggerModel } from '@lib/shared/logging/utils/Logger/Logger.models';
+
+// @withContainer()
+// export class Logger extends _Logger implements LoggerModel {
+//   constructor() {
+//     super(loggingConfig.config());
+//   }
+
+//   fail = (params: LogArgsModel, ...rest: Array<LogArgsModel>): void =>
+//     this.error(params, ...rest, '❌');
+
+//   progress = (params: LogArgsModel, ...rest: Array<LogArgsModel>): void =>
+//     this.debug(params, ...rest, '🕑');
+
+//   success = (params: LogArgsModel, ...rest: Array<LogArgsModel>): void =>
+//     this.info(params, ...rest, '✅');
+// }
+
+// export const logger: LoggerModel = {
+//   debug: (params: LogArgsModel) => Container.get(Logger).debug(params),
+//   error: (params: LogArgsModel) => Container.get(Logger).error(params),
+//   fail: (params: LogArgsModel) => Container.get(Logger).fail(params),
+//   info: (params: LogArgsModel) => Container.get(Logger).info(params),
+//   progress: (params: LogArgsModel) => Container.get(Logger).progress(params),
+//   success: (params: LogArgsModel) => Container.get(Logger).success(params),
+//   trace: (params: LogArgsModel) => Container.get(Logger).trace(params),
+//   warn: (params: LogArgsModel) => Container.get(Logger).warn(params),
+// };
