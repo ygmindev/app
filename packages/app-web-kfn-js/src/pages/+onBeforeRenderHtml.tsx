@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { onBeforeServer } from '@lib/config/node/framework/onBeforeServer/onBeforeServer';
 
 import { databaseConfig } from '../config/database';
