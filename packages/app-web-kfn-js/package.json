@@ -51,6 +51,7 @@
     "framer-motion": "^12.23.12",
     "i18next-fs-backend": "^2.6.1",
     "i18next-http-backend": "^3.0.2",
+    "inline-style-prefixer": "^7.0.1",
     "invariant": "^2.2.4",
     "inversify": "^7.9.1",
     "inversify-react": "^1.2.0",
