@@ -1,11 +1,11 @@
 {
   "../../node_modules/.pnpm/vike@0.4.250_react-streaming@0.4.15_react-dom@19.2.3_react@19.2.3__react@19.2.3__vite@7_a4cba15f91f90f8df4d5529a44ec2fad/node_modules/vike/dist/client/runtime-client-routing/entry.js": {
-    "file": "assets/entries/entry-client-routing.BiYpM7Kp.js",
+    "file": "assets/entries/entry-client-routing.UhkxWyaP.js",
     "name": "entries/entry-client-routing",
     "src": "../../node_modules/.pnpm/vike@0.4.250_react-streaming@0.4.15_react-dom@19.2.3_react@19.2.3__react@19.2.3__vite@7_a4cba15f91f90f8df4d5529a44ec2fad/node_modules/vike/dist/client/runtime-client-routing/entry.js",
     "isEntry": true,
     "imports": [
-      "_chunk-C_pvf_06.js"
+      "_chunk-B68mzQ5r.js"
     ],
     "dynamicImports": [
       "virtual:vike:page-entry:client:/src/pages"
@@ -33,17 +33,17 @@
     "src": "__vite-browser-external",
     "isDynamicEntry": true
   },
-  "_chunk-BQ4zIYyb.js": {
-    "file": "assets/chunks/chunk-BQ4zIYyb.js",
+  "_chunk-B68mzQ5r.js": {
+    "file": "assets/chunks/chunk-B68mzQ5r.js",
+    "name": "preload-helper"
+  },
+  "_chunk-ULetD64f.js": {
+    "file": "assets/chunks/chunk-ULetD64f.js",
     "name": "browser-ponyfill",
     "isDynamicEntry": true,
     "imports": [
       "virtual:vike:page-entry:client:/src/pages"
     ]
-  },
-  "_chunk-C_pvf_06.js": {
-    "file": "assets/chunks/chunk-C_pvf_06.js",
-    "name": "preload-helper"
   },
   "_style-052041d4.CbGtfgdF.css": {
     "file": "assets/static/style-052041d4.CbGtfgdF.css",
@@ -54,17 +54,17 @@
     "src": "_style-269ba50d.D1-0B2xV.css"
   },
   "virtual:vike:page-entry:client:/src/pages": {
-    "file": "assets/entries/src_pages.CEH-hdsv.js",
+    "file": "assets/entries/src_pages.DCzqNMnh.js",
     "name": "entries/src/pages",
     "src": "virtual:vike:page-entry:client:/src/pages",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_chunk-C_pvf_06.js"
+      "_chunk-B68mzQ5r.js"
     ],
     "dynamicImports": [
       "__vite-browser-external",
-      "_chunk-BQ4zIYyb.js"
+      "_chunk-ULetD64f.js"
     ],
     "css": [
       "assets/static/style-052041d4.CbGtfgdF.css",
