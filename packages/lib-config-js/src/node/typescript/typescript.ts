@@ -25,7 +25,7 @@ export const typescriptConfig = new Config<TypescriptConfigModel, _TypescriptCon
 
       paths: {
         // 'css-in-js-utils/lib/*': `${modulesDir}/css-in-js-utils/es/*`,
-        // 'inline-style-prefixer/lib/*': `${modulesDir}/inline-style-prefixer/es/*`,
+        'inline-style-prefixer/lib/*': `${modulesDir}/inline-style-prefixer/es/*`,
         'redux-persist/integration/*': `${modulesDir}/redux-persist/types/integration/*`,
         ...reduce(
           fileConfig.params().packageDirs,
