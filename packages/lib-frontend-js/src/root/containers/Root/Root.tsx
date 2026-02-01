@@ -2,7 +2,7 @@ import { AppProvider } from '@lib/frontend/app/containers/AppProvider/AppProvide
 import { AuthProvider } from '@lib/frontend/auth/containers/AuthProvider/AuthProvider';
 import { OAuthProvider } from '@lib/frontend/auth/containers/OAuthProvider/OAuthProvider';
 import { AsyncBoundary } from '@lib/frontend/core/containers/AsyncBoundary/AsyncBoundary';
-// import { ContainerProvider } from '@lib/frontend/core/containers/ContainerProvider/ContainerProvider';
+import { ContainerProvider } from '@lib/frontend/core/containers/ContainerProvider/ContainerProvider';
 import { type FCModel } from '@lib/frontend/core/core.models';
 import { QueryProvider } from '@lib/frontend/data/containers/QueryProvider/QueryProvider';
 import { DevProvider } from '@lib/frontend/dev/containers/DevProvider/DevProvider';
@@ -53,7 +53,7 @@ export const Root: FCModel<RootPropsModel> = ({ children, context, routes }) => 
         <StyleProvider />,
         <LocaleProvider value={context?.[LOCALE]} />,
         <AppProvider />,
-        // <ContainerProvider />,
+        <ContainerProvider />,
         process.env.NODE_ENV === 'development' && <DevProvider />,
         <store.Provider
           value={{
