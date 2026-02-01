@@ -53,6 +53,12 @@ var e=Object.defineProperty,a=(a,t)=>e(a,"name",{value:t,configurable:!0});impor
     "file": "assets/static/style-269ba50d.D1-0B2xV.css",
     "src": "_style-269ba50d.D1-0B2xV.css"
   },
+  "src/pages/+client.ts": {
+    "file": "assets/entries/src_pages_client.wzvCTo9t.js",
+    "name": "entries/src/pages/_client",
+    "src": "src/pages/+client.ts",
+    "isEntry": true
+  },
   "virtual:vike:page-entry:client:/src/pages": {
     "file": "assets/entries/src_pages.ZfAJCSwp.js",
     "name": "entries/src/pages",
