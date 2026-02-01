@@ -15,9 +15,13 @@ export const bundleConfig = configBase.extend(() => {
         to: 'react-native-is-edge-to-edge/dist/index.mjs',
       },
 
+      // {
+      //   from: /^inline-style-prefixer\/lib\/(.*)/,
+      //   to: 'inline-style-prefixer/es/$1.js',
+      // },
       {
-        from: /^inline-style-prefixer\/lib\/(.*)/,
-        to: 'inline-style-prefixer/es/$1.js',
+        from: 'inline-style-prefixer/lib',
+        to: 'inline-style-prefixer/es',
       },
     ],
 
