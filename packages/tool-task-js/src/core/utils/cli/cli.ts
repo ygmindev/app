@@ -76,10 +76,13 @@ export class Cli extends Bootstrappable implements CliModel {
         let paramsF = params ?? {};
         const promptsF = prompts?.filter((v) => !(v.key in (paramsF as object)));
         promptsF?.length && (paramsF = { ...paramsF, ...(await prompt(promptsF)) });
-        return steps(paramsF, context).map(async (s) =>
-          tasks[s.name](
-            cleanObject({ ...(paramsF ?? {}), ...(s.params ?? {}) }),
-            cleanObject({ ...(context ?? {}), ...(s.context ?? {}) }),
+        return Promise.all(
+          steps(paramsF, context).map(
+            async (s) =>
+              await tasks[s.name](
+                cleanObject({ ...(paramsF ?? {}), ...(s.params ?? {}) }),
+                cleanObject({ ...(context ?? {}), ...(s.context ?? {}) }),
+              ),
           ),
         );
       };
