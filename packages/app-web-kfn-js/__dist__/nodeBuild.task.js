@@ -1,6 +1,6 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-import { f as fromWorking, a as filterNil, I as InvalidArgumentError, b as fromPackages, m as merge, c as cleanObject, g as getAppRoot, d as fromRoot, E as Environment, C as Config, e as fromBuild, h as bundleConfig$1, P as PLATFORM, M as MERGE_STRATEGY } from "./index.js";
+import { f as fromWorking, a as filterNil, I as InvalidArgumentError, b as fromPackages, m as merge, c as cleanObject, g as getAppRoot, d as fromRoot, E as Environment, C as Config, e as fromBuild, h as bundleConfig$1, P as PLATFORM, M as MERGE_STRATEGY, D as DIST_DIR } from "./index.js";
 import { checkbox, search, confirm, input } from "@inquirer/prompts";
 import { Document } from "flexsearch";
 import uniqBy from "lodash/uniqBy.js";
@@ -173,16 +173,16 @@ const taskConfig = new Config({
 const bundleConfig = bundleConfig$1.extend(() => {
   const { taskExtension, tasksPathname, workflowExtension, workflowsPathname } = taskConfig.params();
   return {
-    // barrelFiles: [
-    //   [
-    //     fromGlobs([fromPackages(`*/src/**/*/*${taskExtension}`)], { isAbsolute: true }),
-    //     { outPathname: tasksPathname },
-    //   ],
-    //   [
-    //     fromGlobs([fromPackages(`*/src/**/*/*${workflowExtension}`)], { isAbsolute: true }),
-    //     { outPathname: workflowsPathname },
-    //   ],
-    // ],
+    barrelFiles: [
+      [
+        fromGlobs([fromPackages(`*/src/**/*/*${taskExtension}`)], { isAbsolute: true }),
+        { outPathname: tasksPathname }
+      ],
+      [
+        fromGlobs([fromPackages(`*/src/**/*/*${workflowExtension}`)], { isAbsolute: true }),
+        { outPathname: workflowsPathname }
+      ]
+    ],
     envPrefix: ["SERVER_"],
     externals: [/node_modules/, "@eslint/js", "globals", "canvas"],
     platform: PLATFORM.NODE,
@@ -204,7 +204,10 @@ const _nodeBuild = /* @__PURE__ */ __name(async ({
   let config = configRaw ?? {};
   config = merge(
     [
-      bundleConfig.config({ entryFiles, format, outDirname, watch }, MERGE_STRATEGY.DEEP_PREPEND),
+      bundleConfig.config(
+        { entryFiles, format, outDirname: outDirname ?? fromWorking(DIST_DIR), watch },
+        MERGE_STRATEGY.DEEP_PREPEND
+      ),
       config
     ],
     MERGE_STRATEGY.DEEP_PREPEND

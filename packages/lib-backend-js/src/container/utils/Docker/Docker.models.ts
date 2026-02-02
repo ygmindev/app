@@ -1,6 +1,8 @@
-import { type _DockerModel } from '@lib/backend/container/utils/Docker/_Docker.models';
-import { type ContainerConfigModel } from '@lib/config/container/container.models';
+import {
+  type _DockerModel,
+  type _DockerParamsModel,
+} from '@lib/backend/container/utils/Docker/_Docker.models';
+
+export type DockerParamsModel = Partial<_DockerParamsModel>;
 
 export type DockerModel = _DockerModel;
-
-export type DockerBuildParamsModel = Pick<ContainerConfigModel, 'dockerfilename'>;

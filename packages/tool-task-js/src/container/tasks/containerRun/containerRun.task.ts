@@ -1,5 +1,4 @@
 import { Docker } from '@lib/backend/container/utils/Docker/Docker';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { CONTAINER_RUN } from '@tool/task/container/tasks/containerRun/containerRun.constants';
 import {
   type ContainerRunModel,
@@ -11,7 +10,7 @@ export const containerRun = buildTask<ContainerRunParamsModel, ContainerRunModel
   name: CONTAINER_RUN,
 
   task: async (params, context) => {
-    await Container.get(Docker).run();
+    await new Docker(params).run();
     return {};
   },
 });

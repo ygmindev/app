@@ -1,4 +1,3 @@
-import { fromDist } from '@lib/backend/file/utils/fromDist/fromDist';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { NODE_BUILD } from '@tool/task/node/tasks/nodeBuild/nodeBuild.constants';
 import { type NodeBuildParamsModel } from '@tool/task/node/tasks/nodeBuild/nodeBuild.models';
@@ -17,7 +16,7 @@ export const serverBuild: BuildWorkflowParamsModel<
 
   name: SERVER_BUILD,
 
-  steps: ({ entryFiles = 'src/index.ts', format, outDirname = fromDist(), watch }, context) => [
+  steps: ({ entryFiles = 'src/index.ts', format, outDirname, watch }, context) => [
     {
       context,
       name: NODE_BUILD,

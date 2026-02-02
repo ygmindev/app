@@ -3,7 +3,6 @@ import { type ContainerConfigModel } from '@lib/config/container/container.model
 import { BUILD_DIR, EXCLUDE_PATTERNS } from '@lib/config/file/file.constants';
 import { Config } from '@lib/config/utils/Config/Config';
 import { Container } from '@lib/shared/core/utils/Container/Container';
-import snakeCase from 'lodash/snakeCase';
 
 export const containerConfig = new Config<ContainerConfigModel>({
   params: () => {
@@ -11,7 +10,7 @@ export const containerConfig = new Config<ContainerConfigModel>({
     return {
       dockerfilename: 'Dockerfile',
       ignore: EXCLUDE_PATTERNS.filter((v) => v !== BUILD_DIR),
-      image: snakeCase(environment.variables.APP_NAME),
+      image: environment.variables.APP_NAME,
       password: environment.variables.GITHUB_TOKEN,
       platform: environment.variables.CONTAINER_PLATFORM,
       server: environment.variables.CONTAINER_HOST,

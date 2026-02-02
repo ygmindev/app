@@ -1,3 +1,4 @@
+import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
@@ -7,9 +8,13 @@ import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { withDir } from '@lib/backend/file/utils/withDir/withDir';
 import { taskConfig } from '@lib/config/task/task';
 import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
+import { WORKFLOW_EXECUTION } from '@lib/model/orchestrator/Workflow/Workflow.constants';
+import { WORKFLOW_STEP_TYPE } from '@lib/model/orchestrator/WorkflowStep/WorkflowStep.constants';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
+import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
+import { merge } from '@lib/shared/core/utils/merge/merge';
 import { packageInfo } from '@lib/shared/core/utils/packageInfo/packageInfo';
 import { reduceSequence } from '@lib/shared/core/utils/reduceSequence/reduceSequence';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
@@ -66,7 +71,7 @@ export class Cli extends Bootstrappable implements CliModel {
     );
     for (const pathname of workflowPathnames) {
       const { dirname, main } = fileInfo(pathname);
-      const { prompts, steps } = (
+      const { execution, prompts, steps } = (
         (await import(`${dirname}/${main}`)) as Record<
           string,
           BuildWorkflowParamsModel<unknown, unknown>
@@ -76,16 +81,32 @@ export class Cli extends Bootstrappable implements CliModel {
         let paramsF = params ?? {};
         const promptsF = prompts?.filter((v) => !(v.key in (paramsF as object)));
         promptsF?.length && (paramsF = { ...paramsF, ...(await prompt(promptsF)) });
-        return Promise.all(
-          steps(paramsF, context).map(
-            async (s) =>
-              await tasks[s.name](
-                cleanObject({ ...(paramsF ?? {}), ...(s.params ?? {}) }),
-                cleanObject({ ...(context ?? {}), ...(s.context ?? {}) }),
-              ),
-          ),
-        );
+        const executions = steps(paramsF, context).map((s) => async () => {
+          const funcF =
+            s.type === WORKFLOW_STEP_TYPE.WORKFLOW ? this._registry[s.name].func : tasks[s.name];
+          const stepParams = cleanObject({ ...(paramsF ?? {}), ...(s.params ?? {}) });
+          let stepContext = cleanObject({ ...(context ?? {}), ...(s.context ?? {}) });
+          const pkg =
+            stepContext?.root ?? (stepContext?.app ? await getAppRoot(stepContext.app) : undefined);
+          const rootF = pkg ?? fromRoot();
+          if (pkg) {
+            stepContext = merge([stepContext, { overrrides: { PKG_NAME: fileInfo(rootF).main } }]);
+          }
+          return withDir(rootF, async () => {
+            const environment = new Environment({
+              app: stepContext?.app,
+              environment: stepContext?.environment,
+              overrrides: stepContext?.overrrides,
+            });
+            await environment.initialize();
+            return funcF(stepParams, stepContext);
+          });
+        });
+        return execution === WORKFLOW_EXECUTION.PARALLEL
+          ? Promise.all(executions.map((v) => v()))
+          : mapSequence(executions);
       };
+
       this.register(main, { func, pathname });
     }
   };
@@ -119,22 +140,18 @@ export class Cli extends Bootstrappable implements CliModel {
     const args = parseArgs<ExecutionContextModel>();
     const { func } = v;
     const { app, environment, queue, root, workers, ...rest } = args;
-    const rootF = root ?? (app ? await getAppRoot(app) : fromRoot());
     const { name: appName } = packageInfo();
     const context: ExecutionContextModel = {
       app,
       environment,
       overrrides: { APP_NAME: process.env.NODE_ENV ?? appName },
       queue,
-      root: rootF,
+      root,
     };
-
-    await withDir(rootF, async () => {
-      if (workers) {
-        await Promise.all(new Array(toNumber(workers)).fill(func(rest, context)));
-      } else {
-        await func(rest, context);
-      }
-    });
+    if (workers) {
+      await Promise.all(new Array(toNumber(workers)).fill(func(rest, context)));
+    } else {
+      await func(rest, context);
+    }
   };
 }

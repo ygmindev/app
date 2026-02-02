@@ -2,7 +2,6 @@ import {
   type _DockerModel,
   type _DockerParamsModel,
 } from '@lib/backend/container/utils/Docker/_Docker.models';
-import { type DockerBuildParamsModel } from '@lib/backend/container/utils/Docker/Docker.models';
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
@@ -19,6 +18,7 @@ import { uid } from '@lib/shared/core/utils/uid/uid';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import Docker, { type ContainerCreateOptions } from 'dockerode';
 import isNil from 'lodash/isNil';
+import snakeCase from 'lodash/snakeCase';
 import tar from 'tar-fs';
 
 export class _Docker implements _DockerModel {
@@ -26,12 +26,11 @@ export class _Docker implements _DockerModel {
   docker: Docker;
   url: string;
 
-  constructor({ container }: _DockerParamsModel) {
+  constructor(params: _DockerParamsModel) {
     this.docker = new Docker();
-    this.container = container;
-
-    const { image, server, tag, username } = container;
-    this.url = `${filterNil([server, username, image]).join('/')}:${tag}`;
+    this.container = params;
+    const { image, server, tag, username } = params;
+    this.url = `${filterNil([server, username, snakeCase(image)]).join('/')}:${tag}`;
   }
 
   async _handleStream(stream?: NodeJS.ReadableStream): Promise<void> {
@@ -61,7 +60,7 @@ export class _Docker implements _DockerModel {
     });
   }
 
-  async build(params?: DockerBuildParamsModel): Promise<void> {
+  async build(): Promise<void> {
     const { dirname = fromWorking(), dockerfilename, ignore, platform } = this.container;
     await this.delete();
     const tarStream = tar.pack(fromRoot(), {
@@ -73,9 +72,9 @@ export class _Docker implements _DockerModel {
     });
 
     try {
-      const dockerfilenameF = params?.dockerfilename ?? dockerfilename;
       const environment = Container.get(Environment);
-      const pathname = joinPaths([dirname, dockerfilenameF]);
+      await environment.initialize();
+      const pathname = joinPaths([dirname, dockerfilename]);
       const stream = await this.docker.buildImage(tarStream, {
         buildargs: { ...environment.variables },
         dockerfile: toRelative({ from: fromRoot(), to: pathname }),
@@ -103,10 +102,9 @@ export class _Docker implements _DockerModel {
     }
   }
 
-  async publish(isBuild: boolean = true): Promise<void> {
+  async publish(): Promise<void> {
     const { password, server, username } = this.container;
     try {
-      isBuild && (await this.build());
       const stream = await this.docker.getImage(this.url).push({
         authconfig: {
           password,

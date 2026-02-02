@@ -6082,6 +6082,7 @@ const { cleanUp } = app;
 await app.run();
 export {
   Config as C,
+  DIST_DIR as D,
   Environment as E,
   InvalidArgumentError as I,
   MERGE_STRATEGY as M,

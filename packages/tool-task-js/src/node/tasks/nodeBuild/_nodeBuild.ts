@@ -1,3 +1,5 @@
+import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
+import { DIST_DIR } from '@lib/config/file/file.constants';
 import { type _BundleConfigModel } from '@lib/config/node/bundle/bundle.models';
 import { bundleConfig } from '@lib/config/node/bundle/bundle.node';
 import { merge } from '@lib/shared/core/utils/merge/merge';
@@ -18,7 +20,10 @@ export const _nodeBuild = async ({
   let config: _BundleConfigModel | undefined = configRaw ?? {};
   config = merge(
     [
-      bundleConfig.config({ entryFiles, format, outDirname, watch }, MERGE_STRATEGY.DEEP_PREPEND),
+      bundleConfig.config(
+        { entryFiles, format, outDirname: outDirname ?? fromWorking(DIST_DIR), watch },
+        MERGE_STRATEGY.DEEP_PREPEND,
+      ),
       config,
     ],
     MERGE_STRATEGY.DEEP_PREPEND,

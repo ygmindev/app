@@ -1,5 +1,4 @@
 import { Docker } from '@lib/backend/container/utils/Docker/Docker';
-import { Container } from '@lib/shared/core/utils/Container/Container';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { CONTAINER_PUBLISH } from '@tool/task/container/tasks/containerPublish/containerPublish.constants';
 import {
@@ -15,8 +14,8 @@ export const containerPublish = buildTask<ContainerPublishParamsModel, Container
 
   name: CONTAINER_PUBLISH,
 
-  task: async ({ isBuild = true }, context) => {
-    await Container.get(Docker).publish(isBuild);
+  task: async ({ dockerfilename, image }, context) => {
+    await new Docker({ dockerfilename, image }).publish();
     return {};
   },
 });

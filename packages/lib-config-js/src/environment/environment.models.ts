@@ -34,6 +34,7 @@ export type EnvironmentConfigModel = {
   JEST_WORKER_ID?: string;
   NODE_ENV: string;
   NODE_RUNTIME?: `${RUNTIME}`;
+  PKG_NAME?: string;
   PORT?: string;
   PUPPETEER_EXECUTABLE_PATH?: string;
   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: `${BOOLEAN_STRING}`;
