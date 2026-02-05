@@ -1369,6 +1369,7 @@ let Environment = (_b2 = class extends Bootstrappable {
       NODE_ENV: environmentF
     });
     Object.assign(process.env, this.variables);
+    _Container.set(Environment, this);
   }
 }, __name(_b2, "Environment"), _b2);
 Environment = __decorateClass$$([
@@ -6073,6 +6074,9 @@ const serverConfig = serverConfig$1.extend(() => {
     ]
   };
 });
+{
+  await import(fromWorking("__dist__/server/entry.mjs"));
+}
 const app = new ServerApp({
   database: /* @__PURE__ */ __name(() => databaseConfig.params(), "database"),
   name,

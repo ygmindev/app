@@ -11,6 +11,7 @@ import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
 import { EnvironmentConfigModel } from '@lib/config/environment/environment.models';
 import { StringKeyModel } from '@lib/shared/core/core.models';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
+import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { config } from 'dotenv';
 import { existsSync } from 'fs';
@@ -72,5 +73,6 @@ export class Environment extends Bootstrappable implements EnvironmentModel {
       NODE_ENV: environmentF,
     });
     Object.assign(process.env, this.variables);
+    Container.set(Environment, this);
   }
 }

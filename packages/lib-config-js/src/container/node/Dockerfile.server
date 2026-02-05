@@ -1,10 +1,12 @@
 ARG NODE_VERSION=22
-ARG PKG_NAME
-ARG SERVER_APP_PORT
 
 FROM node:${NODE_VERSION}-slim as node-base
 
+ARG PKG_NAME
+ARG SERVER_APP_PORT
+
 ENV NODE_RUNTIME=CONTAINER
+ENV PKG_NAME=${PKG_NAME}
 
 RUN npm install -g pnpm
 
@@ -24,8 +26,10 @@ COPY packages/lib-config-js ${TARGET_DIR}/packages/lib-config-js
 COPY packages/lib-frontend-js ${TARGET_DIR}/packages/lib-frontend-js
 COPY packages/lib-model-js ${TARGET_DIR}/packages/lib-model-js
 COPY packages/lib-shared-js ${TARGET_DIR}/packages/lib-shared-js
+COPY packages/tool-task-js ${TARGET_DIR}/packages/tool-task-js
 COPY packages/${PKG_NAME} ${TARGET_DIR}/packages/${PKG_NAME}
 
+RUN echo "@@@ PKG NAME: "
 RUN echo ${PKG_NAME}
 
 WORKDIR ${TARGET_DIR}
@@ -36,4 +40,5 @@ WORKDIR ${TARGET_DIR}/packages/${PKG_NAME}
 
 EXPOSE ${SERVER_APP_PORT}
 
-CMD ["node", "__dist__/index.js"]
+ENV NODE_ENV=production
+CMD NODE_ENV=production node __dist__/index.js
