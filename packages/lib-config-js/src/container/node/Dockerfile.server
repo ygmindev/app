@@ -29,9 +29,6 @@ COPY packages/lib-shared-js ${TARGET_DIR}/packages/lib-shared-js
 COPY packages/tool-task-js ${TARGET_DIR}/packages/tool-task-js
 COPY packages/${PKG_NAME} ${TARGET_DIR}/packages/${PKG_NAME}
 
-RUN echo "@@@ PKG NAME: "
-RUN echo ${PKG_NAME}
-
 WORKDIR ${TARGET_DIR}
 
 RUN pnpm install --shamefully-hoist

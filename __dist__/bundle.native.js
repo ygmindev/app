@@ -1,0 +1,6 @@
+import { b as bundleConfig$1 } from "./tasks.js";
+const bundleConfig = bundleConfig$1.extend(() => ({}));
+export {
+  bundleConfig
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnVuZGxlLm5hdGl2ZS5qcyIsInNvdXJjZXMiOlsiLi4vcGFja2FnZXMvbGliLWNvbmZpZy1qcy9zcmMvbm9kZS9idW5kbGUvYnVuZGxlLm5hdGl2ZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBidW5kbGVDb25maWcgYXMgY29uZmlnQmFzZSB9IGZyb20gJ0BsaWIvY29uZmlnL25vZGUvYnVuZGxlL2J1bmRsZS5iYXNlJztcblxuZXhwb3J0IGNvbnN0IGJ1bmRsZUNvbmZpZyA9IGNvbmZpZ0Jhc2UuZXh0ZW5kKCgpID0+ICh7fSkpO1xuIl0sIm5hbWVzIjpbImNvbmZpZ0Jhc2UiXSwibWFwcGluZ3MiOiI7QUFFTyxNQUFNLGVBQWVBLGVBQVcsT0FBTyxPQUFPLEdBQUc7In0=

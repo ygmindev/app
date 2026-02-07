@@ -23,11 +23,8 @@ export const serverConfig = new Config<ServerConfigModel>({
           ? undefined
           : {
               caFilename: 'rootCA.pem',
-
               certificateDir: fromStatic('certificates'),
-
               privateKeyFilename: environment.variables.SERVER_SSL_PRIVATE_KEY ?? '',
-
               publicKeyFilename: environment.variables.SERVER_SSL_PUBLIC_KEY ?? '',
             },
 
@@ -36,13 +33,7 @@ export const serverConfig = new Config<ServerConfigModel>({
       host: environment.variables.SERVER_APP_HOST ?? '',
 
       plugins: [
-        [
-          corsPlugin,
-          {
-            headers: ['*'],
-            origins: ['*'],
-          },
-        ],
+        [corsPlugin, { headers: ['*'], origins: ['*'] }],
 
         [cookiesPlugin, { secret: environment.variables.SERVER_APP_SECRET }],
       ] as Array<[ServerPluginModel<unknown>, unknown]>,

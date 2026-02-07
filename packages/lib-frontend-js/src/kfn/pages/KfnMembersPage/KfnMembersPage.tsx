@@ -16,11 +16,12 @@ import { ACCESS_ROLE } from '@lib/model/auth/Access/Access.constants';
 import { ROLE_RESOURCE_NAME } from '@lib/model/auth/Role/Role.constants';
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { sort } from '@lib/shared/core/utils/sort/sort';
+import { KFN } from '@lib/shared/kfn/constants';
 
 export const KfnMembersPage: LFCModel<KfnMembersPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { getMany } = useAccessResource();
-  const { t } = useTranslation();
+  const { t } = useTranslation([KFN]);
   return (
     <Wrapper
       {...wrapperProps}

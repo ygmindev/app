@@ -1,3 +1,4 @@
+import { appPrompt } from '@tool/task/core/utils/appPrompt/appPrompt';
 import { NODE_DEV } from '@tool/task/node/tasks/nodeDev/nodeDev.constants';
 import { type NodeDevParamsModel } from '@tool/task/node/tasks/nodeDev/nodeDev.models';
 import { SERVER_DEV } from '@tool/task/node/workflows/serverDev/serverDev.constants';
@@ -8,9 +9,11 @@ export const serverDev: BuildWorkflowParamsModel<ServerDevParamsModel, void, [No
   {
     name: SERVER_DEV,
 
-    steps: ({ pathname }, context) => [
+    prompts: [appPrompt()],
+
+    steps: ({ app, pathname }, context) => [
       {
-        context,
+        context: { ...context, app },
         name: NODE_DEV,
         params: { pathname },
       },

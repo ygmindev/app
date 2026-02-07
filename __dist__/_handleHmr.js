@@ -1,0 +1,8 @@
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+const _handleHmr = /* @__PURE__ */ __name(async (onCleanup) => {
+}, "_handleHmr");
+export {
+  _handleHmr
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiX2hhbmRsZUhtci5qcyIsInNvdXJjZXMiOlsiLi4vcGFja2FnZXMvbGliLXNoYXJlZC1qcy9zcmMvY29yZS91dGlscy9oYW5kbGVDbGVhbnVwL19oYW5kbGVIbXIudHMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IF9oYW5kbGVIbXIgPSBhc3luYyAob25DbGVhbnVwPzogKCkgPT4gUHJvbWlzZTx2b2lkPik6IFByb21pc2U8dm9pZD4gPT4ge1xuICBpbXBvcnQubWV0YT8uaG90Py5vbigndml0ZTpiZWZvcmVGdWxsUmVsb2FkJywgYXN5bmMgKCkgPT4ge1xuICAgIGF3YWl0IG9uQ2xlYW51cD8uKCk7XG4gIH0pO1xuICBpbXBvcnQubWV0YT8uaG90Py5kaXNwb3NlKGFzeW5jICgpID0+IHtcbiAgICBhd2FpdCBvbkNsZWFudXA/LigpO1xuICB9KTtcbn07XG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBTyxNQUFNLGFBQWEsOEJBQU8sY0FBbUQ7QUFPcEYsR0FQMEI7In0=

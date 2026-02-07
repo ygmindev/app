@@ -5,6 +5,7 @@ import { KfnEventsPage } from '@lib/frontend/kfn/pages/KfnEventsPage/KfnEventsPa
 import { KfnHomePage } from '@lib/frontend/kfn/pages/KfnHomePage/KfnHomePage';
 import { KfnMembersPage } from '@lib/frontend/kfn/pages/KfnMembersPage/KfnMembersPage';
 import { getRoutes } from '@lib/frontend/route/utils/getRoutes/getRoutes';
+import { KFN } from '@lib/shared/kfn/constants';
 
 export const routes = getRoutes({
   footerElement: <KfnFooter />,
@@ -12,6 +13,7 @@ export const routes = getRoutes({
   routes: [
     {
       element: <KfnHomePage />,
+      namespaces: [KFN],
       pathname: HOME,
       prerender: true,
     },
@@ -20,6 +22,7 @@ export const routes = getRoutes({
       element: <KfnMembersPage />,
       icon: 'people',
       isNavigatable: true,
+      namespaces: [KFN],
       pathname: MEMBERS,
       prerender: true,
     },
@@ -28,6 +31,7 @@ export const routes = getRoutes({
       element: <KfnEventsPage />,
       icon: 'calendar',
       isNavigatable: true,
+      namespaces: [KFN],
       pathname: EVENTS,
       prerender: true,
     },

@@ -18,7 +18,6 @@ export const _internationalize = ({
   modules,
 }: InternationalizeConfigModel): _InternationalizeConfigModel => {
   const languageF = language ?? languageDefault;
-
   const config: InitOptions = {
     // debug: isDebug,
     debug: false,
@@ -31,7 +30,7 @@ export const _internationalize = ({
 
     interpolation: { escapeValue: false },
 
-    lng: language,
+    lng: languageF,
 
     load: 'languageOnly',
 

@@ -1,6 +1,6 @@
 {
   "../../node_modules/.pnpm/vike@0.4.250_react-streaming@0.4.15_react-dom@19.2.3_react@19.2.3__react@19.2.3__vite@7_a4cba15f91f90f8df4d5529a44ec2fad/node_modules/vike/dist/client/runtime-client-routing/entry.js": {
-    "file": "assets/entries/entry-client-routing.Cvmsgs2d.js",
+    "file": "assets/entries/entry-client-routing.CHbuwLNZ.js",
     "name": "entries/entry-client-routing",
     "src": "../../node_modules/.pnpm/vike@0.4.250_react-streaming@0.4.15_react-dom@19.2.3_react@19.2.3__react@19.2.3__vite@7_a4cba15f91f90f8df4d5529a44ec2fad/node_modules/vike/dist/client/runtime-client-routing/entry.js",
     "isEntry": true,
@@ -33,17 +33,17 @@
     "src": "__vite-browser-external",
     "isDynamicEntry": true
   },
-  "_chunk-BrjrQUnT.js": {
-    "file": "assets/chunks/chunk-BrjrQUnT.js",
-    "name": "preload-helper"
-  },
-  "_chunk-cnx94Vxx.js": {
-    "file": "assets/chunks/chunk-cnx94Vxx.js",
+  "_chunk-BZxjT6rl.js": {
+    "file": "assets/chunks/chunk-BZxjT6rl.js",
     "name": "browser-ponyfill",
     "isDynamicEntry": true,
     "imports": [
       "virtual:vike:page-entry:client:/src/pages"
     ]
+  },
+  "_chunk-BrjrQUnT.js": {
+    "file": "assets/chunks/chunk-BrjrQUnT.js",
+    "name": "preload-helper"
   },
   "_style-052041d4.CbGtfgdF.css": {
     "file": "assets/static/style-052041d4.CbGtfgdF.css",
@@ -54,7 +54,7 @@
     "src": "_style-269ba50d.D1-0B2xV.css"
   },
   "virtual:vike:page-entry:client:/src/pages": {
-    "file": "assets/entries/src_pages.u709j3eD.js",
+    "file": "assets/entries/src_pages.D8G7p-bo.js",
     "name": "entries/src/pages",
     "src": "virtual:vike:page-entry:client:/src/pages",
     "isEntry": true,
@@ -64,7 +64,7 @@
     ],
     "dynamicImports": [
       "__vite-browser-external",
-      "_chunk-cnx94Vxx.js"
+      "_chunk-BZxjT6rl.js"
     ],
     "css": [
       "assets/static/style-052041d4.CbGtfgdF.css",
