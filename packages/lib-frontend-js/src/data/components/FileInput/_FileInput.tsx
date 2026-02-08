@@ -6,10 +6,8 @@ import { type _FileInputPropsModel } from '@lib/frontend/data/components/FileInp
 import { type ValuePropsModel } from '@lib/frontend/data/data.models';
 import { type FileModel } from '@lib/shared/data/data.models';
 import { asUploadButton, type UploadButtonProps } from '@rpldy/upload-button';
-import { UploadDropZone } from '@rpldy/upload-drop-zone';
-import { Uploady, type UploadyProps } from '@rpldy/uploady';
-import { useBatchAddListener, useItemProgressListener } from '@rpldy/uploady';
-import { cloneElement, type MouseEvent, type ReactElement, useCallback } from 'react';
+import { Uploady, type UploadyProps, useBatchAddListener } from '@rpldy/uploady';
+import { type MouseEvent, useCallback } from 'react';
 
 export const _FileInput = composeComponent<_FileInputPropsModel, UploadyProps>({
   Component: Uploady,
@@ -22,7 +20,7 @@ export const _FileInput = composeComponent<_FileInputPropsModel, UploadyProps>({
             <_Button
               autoUpload={false}
               extraProps={{ onChange, value }}>
-              {children?.(isActive) ?? null}
+              {children?.(isActive)}
             </_Button>
           </View>
         )}
@@ -39,6 +37,8 @@ const _Component: FCModel<UploadButtonProps & ValuePropsModel<Array<FileModel>>>
   onChange,
   onClick,
 }) => {
+  const handlePress = useCallback((e: MouseEvent) => onClick?.(e), [onClick]);
+
   useBatchAddListener((batch) =>
     onChange?.(
       batch.items.map((item) => ({
@@ -51,19 +51,13 @@ const _Component: FCModel<UploadButtonProps & ValuePropsModel<Array<FileModel>>>
     ),
   );
 
-  useItemProgressListener((item) => {
-    console.warn(item);
-  });
-
-  const handleClick = useCallback((e: MouseEvent) => onClick && onClick(e), [onClick]);
-  return children ? (
-    <UploadDropZone>
-      {/* TODO: fix typing */}
-      {cloneElement(children as ReactElement<{ onPress: (e: MouseEvent) => void }>, {
-        onPress: handleClick,
-      })}
-    </UploadDropZone>
-  ) : null;
+  return (
+    <div
+      onClick={handlePress}
+      style={{ cursor: 'pointer', flex: 1 }}>
+      {children}
+    </div>
+  );
 };
 
 const _Button = asUploadButton(_Component);

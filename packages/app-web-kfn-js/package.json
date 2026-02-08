@@ -38,6 +38,7 @@
     "@reduxjs/toolkit": "2.9.0",
     "@rpldy/upload-button": "^1.11.0",
     "@rpldy/upload-drop-zone": "^1.11.0",
+    "@rpldy/upload-preview": "^1.13.0",
     "@rpldy/uploader": "^1.11.0",
     "@rpldy/uploady": "^1.11.0",
     "@stripe/react-stripe-js": "^4.0.0",

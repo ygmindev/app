@@ -11,7 +11,7 @@ import { DATA_TYPE } from '@lib/shared/data/data.constants';
 @withEntity({
   name: LOG_MESSAGE_RESOURCE_NAME,
 })
-export class LogMessage extends Resource({ isDatabase: false }) implements LogMessageModel {
+export class LogMessage extends Resource() implements LogMessageModel {
   @withField({
     Resource: () => Date,
     defaultValue: () => new Date(),

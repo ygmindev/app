@@ -8,7 +8,7 @@ import { ClassModel } from '@lib/shared/core/core.models';
 import { PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 
 export const Resource = (
-  { isDatabase = true }: ResourceParamsModel = { isDatabase: true },
+  { isDatabase = false }: ResourceParamsModel = { isDatabase: true },
 ): ClassModel<ResourceModel> => {
   @withEntity({ isAbstract: true, isDatabase })
   class Class implements ResourceModel {

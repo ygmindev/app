@@ -9,7 +9,7 @@ import forEach from 'lodash/forEach';
 import isNil from 'lodash/isNil';
 
 @withDatabaseEntity({ isAbstract: true })
-export class EntityResource extends Resource({ isDatabase: true }) implements EntityResourceModel {
+export class EntityResource extends Resource() implements EntityResourceModel {
   @withDatabaseField({
     Resource: () => Date,
     defaultValue: () => new Date(),

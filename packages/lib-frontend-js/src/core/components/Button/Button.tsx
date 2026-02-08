@@ -76,7 +76,7 @@ export const Button = <TType = void,>({
     containerAnimation?: AnimationModel;
   }>(() => {
     const colorF = theme.color.palette[color];
-    const opacity = theme.opaque[THEME_SIZE.SMALL];
+    const opacity = props.isHidden ? 0 : theme.opaque[THEME_SIZE.SMALL];
     const activeColor = colorF[THEME_ROLE.ACTIVE];
     const mainColor = colorF[THEME_ROLE.MAIN];
     const surfaceColor = theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.MAIN];
@@ -96,7 +96,7 @@ export const Button = <TType = void,>({
             states: {
               [ELEMENT_STATE.ACTIVE]: {
                 backgroundColor: activeColor,
-                opacity: 1,
+                opacity: props.isHidden ? 0 : 1,
               },
               [ELEMENT_STATE.DISABLED]: {
                 backgroundColor: activeColor,
@@ -108,7 +108,7 @@ export const Button = <TType = void,>({
               },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: mainColor,
-                opacity: 1,
+                opacity: props.isHidden ? 0 : 1,
               },
             },
           },
@@ -130,7 +130,7 @@ export const Button = <TType = void,>({
             states: {
               [ELEMENT_STATE.ACTIVE]: {
                 backgroundColor: colorF[THEME_ROLE.MUTED],
-                opacity: 1,
+                opacity: props.isHidden ? 0 : 1,
               },
               [ELEMENT_STATE.DISABLED]: {
                 backgroundColor: surfaceColor,
@@ -142,7 +142,7 @@ export const Button = <TType = void,>({
               },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: surfaceColor,
-                opacity: 1,
+                opacity: props.isHidden ? 0 : 1,
               },
             },
           },
@@ -175,7 +175,7 @@ export const Button = <TType = void,>({
             states: {
               [ELEMENT_STATE.ACTIVE]: {
                 backgroundColor: surfaceColor,
-                opacity: 1,
+                opacity: props.isHidden ? 0 : 1,
               },
               [ELEMENT_STATE.DISABLED]: {
                 backgroundColor: surfaceColor,
@@ -187,7 +187,7 @@ export const Button = <TType = void,>({
               },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: surfaceColor,
-                opacity: 1,
+                opacity: props.isHidden ? 0 : 1,
               },
             },
           },

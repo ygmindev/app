@@ -2,6 +2,7 @@ import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { DataBoundary } from '@lib/frontend/data/components/DataBoundary/DataBoundary';
+import { FileInput } from '@lib/frontend/data/components/FileInput/FileInput';
 import { useEventResource } from '@lib/frontend/kfn/hooks/useEventResource/useEventResource';
 import { type KfnEventsPagePropsModel } from '@lib/frontend/kfn/pages/KfnEventsPage/KfnEventsPage.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
@@ -29,6 +30,8 @@ export const KfnEventsPage: LFCModel<KfnEventsPagePropsModel> = ({ ...props }) =
         fontStyle={FONT_STYLE.HEADLINE}>
         {t('kfn:events')}
       </Text>
+
+      <FileInput />
 
       <DataBoundary
         flex
