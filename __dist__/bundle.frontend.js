@@ -1,4 +1,4 @@
-import { b as bundleConfig$1, _ as _Container, E as Environment, f as filterNil, a as fromPublic, A as ASSETS_DIR } from "./tasks.js";
+import { b as bundleConfig$1, _ as _Container, E as Environment, A as ASSETS_DIR, f as filterNil, a as fromPublic } from "./tasks.js";
 const bundleConfig = bundleConfig$1.extend(() => {
   const environment = _Container.get(Environment);
   return {

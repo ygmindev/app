@@ -7,6 +7,8 @@ import { type StorageImplementationModel } from '@lib/model/data/Storage/Storage
 import { ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
+import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { mapSequence } from '@lib/shared/core/utils/mapSequence/mapSequence';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
@@ -18,13 +20,27 @@ export class StorageImplementation implements StorageImplementationModel {
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, StorageModel, undefined>,
     context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, StorageModel, undefined>> {
-    const filename = input?.form?.filename;
-    if (!filename) throw new NotFoundError('filename');
+    if (!input?.form) throw new NotFoundError('file');
+    const { src, uri } = await this.storageClient.signUri(input.form);
     return {
       result: {
-        filename,
-        uri: await this.storageClient.getUri(filename),
+        ...input.form,
+        src,
+        uri,
       },
     };
+  }
+
+  async createMany(
+    input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, StorageModel, undefined>,
+    context?: RequestContextModel,
+  ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, StorageModel, undefined>> {
+    if (!input?.form) throw new NotFoundError('filename');
+    const result = filterNil(
+      await mapSequence(
+        input.form.map((v) => async () => (await this.create({ form: v }, context)).result),
+      ),
+    );
+    return { result };
   }
 }

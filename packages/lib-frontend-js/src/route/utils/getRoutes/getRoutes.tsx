@@ -33,13 +33,9 @@ export const getRoutes = ({
       prerender: true,
     },
 
-    ...authRoutes,
-
-    ...settingRoutes,
-
     {
       pathname: '/',
-      routes: [...routes],
+      routes: [...routes, ...authRoutes, ...settingRoutes],
     },
 
     {

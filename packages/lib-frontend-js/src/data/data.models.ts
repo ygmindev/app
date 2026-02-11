@@ -49,7 +49,7 @@ export type InputRefModel<
   TType = unknown,
   TKey extends StringKeyModel<TType> = StringKeyModel<TType>,
 > = FocusableRefModel &
-  Pick<InputPropsModel<TType[TKey]>, 'beforeSubmit' | 'onChange'> & {
+  Pick<InputPropsModel<TType>, 'beforeSubmit' | 'onChange'> & {
     submit?(): Promise<void>;
   };
 

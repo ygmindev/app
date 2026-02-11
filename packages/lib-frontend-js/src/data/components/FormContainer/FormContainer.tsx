@@ -84,7 +84,6 @@ const FormContainerF = <TType, TResult = void>({
   submitLabel,
   submitType = FORM_SUBMIT_TYPE.BUTTON,
   successMessage,
-
   topElement,
   validators,
   ...props
@@ -180,6 +179,7 @@ const FormContainerF = <TType, TResult = void>({
       elementState: elementStateF ?? element?.props?.elementState,
       error: errors?.[id],
       key: id,
+      label: element?.props?.label ?? id,
       onChange: (v) => {
         element?.props?.onChange?.(v);
         return handleChange(id)(v);

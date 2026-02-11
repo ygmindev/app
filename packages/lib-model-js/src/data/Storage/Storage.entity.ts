@@ -10,5 +10,11 @@ export class Storage extends Resource() implements StorageModel {
   filename!: string;
 
   @withField({ isOptional: true })
+  filetype?: string;
+
+  @withField({ isOptional: true })
+  src?: string;
+
+  @withField({ isOptional: true })
   uri?: string;
 }

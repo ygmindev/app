@@ -79,9 +79,7 @@ export class Cli extends Bootstrappable implements CliModel {
       )[main];
       const func = async (params: unknown, context?: ExecutionContextModel): Promise<unknown> => {
         let paramsF = params ?? {};
-        console.warn(`@@@ params:`, paramsF);
         const promptsF = prompts?.filter((v) => !(v.key in (paramsF as object)));
-        console.warn(`@@@ promptsF:`, promptsF);
         promptsF?.length && (paramsF = { ...paramsF, ...(await prompt(promptsF)) });
         const executions = steps(paramsF, context).map((s) => async () => {
           const funcF =

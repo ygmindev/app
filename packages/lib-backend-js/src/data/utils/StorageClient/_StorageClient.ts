@@ -1,33 +1,31 @@
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { type _StorageClientModel } from '@lib/backend/data/utils/StorageClient/_StorageClient.models';
-import { uid } from '@lib/shared/core/utils/uid/uid';
-import { lookup } from 'mime-types';
+import { storageConfig } from '@lib/config/storage/storage';
+import { type StorageModel } from '@lib/model/data/Storage/Storage.models';
+import { HTTP_METHOD } from '@lib/shared/http/http.constants';
+import { AwsClient } from 'aws4fetch';
 
 export class _StorageClient implements _StorageClientModel {
-  protected _client!: S3Client;
+  protected _client!: AwsClient;
 
   constructor() {
-    this._client = new S3Client({
-      credentials: {
-        accessKeyId: process.env.SERVER_STORAGE_KEY_ID,
-        secretAccessKey: process.env.SERVER_STORAGE_KEY_SECRET,
-      },
-      endpoint: process.env.SERVER_STORAGE_BUCKET_ENDPOINT,
-      region: 'auto',
+    const { accessKeyId, secret } = storageConfig.params();
+    this._client = new AwsClient({
+      accessKeyId,
+      secretAccessKey: secret,
     });
   }
 
-  async getUri(params: string): Promise<string> {
-    const fileType = lookup(params);
-    const key = `${params}-${uid()}`;
-    const command = new PutObjectCommand({
-      Bucket: process.env.SERVER_STORAGE_BUCKET_ID,
-      ContentType: fileType || '',
-      Key: key,
-    });
-    return getSignedUrl(this._client as never, command as never, {
-      expiresIn: 3600,
-    });
+  async signUri(params: Partial<StorageModel>): Promise<Partial<StorageModel>> {
+    const { bucketId, endpoint, endpointPublic } = storageConfig.params();
+    const key = `${Date.now()}-${params.filename}`;
+    const uri = new URL(`${endpoint}/${bucketId}/${key}`);
+    const { url } = await this._client.sign(
+      new Request(uri, {
+        headers: { 'Content-Type': params.filetype ?? '' },
+        method: HTTP_METHOD.PUT,
+      }),
+      { aws: { signQuery: true } },
+    );
+    return { ...params, src: `${endpointPublic}/${key}}`, uri: url };
   }
 }

@@ -72,6 +72,7 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = ({
         <TextInput
           elementState={elementStateControlled}
           icon="calendar"
+          isFullWidth
           label={label}
           mask="[00]{/}[00]{/}[0000]"
           onChange={textValueSet}
@@ -82,7 +83,11 @@ export const DateInput: RLFCModel<DateInputRefModel, DateInputPropsModel> = ({
             onSubmit?.();
             elementStateControlledSet(ELEMENT_STATE.INACTIVE);
           }}
-          value={textValue}
+          value={
+            elementState === ELEMENT_STATE.ACTIVE
+              ? textValue
+              : new DateTime(valueControlled).format('MM/dd/yyyy')
+          }
         />
       }
       isOpen={isActive}

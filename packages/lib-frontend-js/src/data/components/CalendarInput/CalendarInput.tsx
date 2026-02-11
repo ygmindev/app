@@ -6,7 +6,6 @@ import {
   type CalendarInputPropsModel,
   type CalendarInputRefModel,
 } from '@lib/frontend/data/components/CalendarInput/CalendarInput.models';
-import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useThemePresets } from '@lib/frontend/style/hooks/useThemePresets/useThemePresets';
@@ -53,20 +52,9 @@ export const CalendarInput: RLFCModel<CalendarInputRefModel, CalendarInputPropsM
   return (
     <Wrapper
       {...wrapperProps}
-      border
       p
-      round
       s>
       {label && <AsyncText>{label}</AsyncText>}
-
-      <TextInput
-        icon="calendar"
-        label={label}
-        mask="[00]{/}[00]{/}[0000]"
-        onChange={handleInputChange}
-        value={textValue}
-      />
-
       <_CalendarInput
         {...themePresets}
         isRange={isRange as never}

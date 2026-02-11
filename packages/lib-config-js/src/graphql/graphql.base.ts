@@ -11,6 +11,7 @@ import { AccessResolver } from '@lib/model/auth/Access/AccessResolver/AccessReso
 import { OtpResolver } from '@lib/model/auth/Otp/OtpResolver/OtpResolver';
 import { RoleResolver } from '@lib/model/auth/Role/RoleResolver/RoleResolver';
 import { SignInResolver } from '@lib/model/auth/SignIn/SignInResolver/SignInResolver';
+import { StorageResolver } from '@lib/model/data/Storage/StorageResolver/StorageResolver';
 import { GroupResolver } from '@lib/model/group/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '@lib/model/http/Socket/SocketResolver/SocketResolver';
 import { EventResolver } from '@lib/model/kfn/Event/EventResolver/EventResolver';
@@ -38,6 +39,7 @@ export const graphqlConfig = new Config<GraphqlConfigModel, _GraphqlConfigModel>
         RoleResolver,
         SignInResolver,
         SocketResolver,
+        StorageResolver,
         UserResolver,
       ]),
     }) as GraphqlConfigModel,

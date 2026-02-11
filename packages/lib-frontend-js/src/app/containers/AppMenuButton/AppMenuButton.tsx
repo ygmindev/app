@@ -8,21 +8,26 @@ import {
   type MenuOptionModel,
   type MenuRefModel,
 } from '@lib/frontend/core/components/Menu/Menu.models';
-import { DIRECTION, ELEMENT_STATE } from '@lib/frontend/core/core.constants';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { SETTINGS } from '@lib/frontend/settings/settings.constants';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { THEME_COLOR } from '@lib/frontend/style/style.constants';
+import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
+import { THEME_COLOR, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { PROFILE } from '@lib/frontend/user/user.constants';
 import { AUTH, SIGN_IN, SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import { useRef } from 'react';
 
-export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) => {
+export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({
+  isMinimized = false,
+  ...props
+}) => {
   const { t } = useTranslation([AUTH]);
+  const theme = useTheme();
   const { wrapperProps } = useLayoutStyles({ props });
   const { signOut } = useSignInResource();
   const { push } = useRouter();
@@ -38,7 +43,7 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) =
           icon: 'settings',
           id: SETTINGS,
           label: t('settings:settings'),
-          onPress: () => push({ pathname: `/${SETTINGS}/${PROFILE}` }),
+          onPress: () => push({ pathname: `#${SETTINGS}/${PROFILE}` }),
         },
         {
           color: THEME_COLOR.ERROR,
@@ -63,14 +68,14 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) =
       anchor={(isOpen) => (
         <Button
           elementState={isOpen ? ELEMENT_STATE.ACTIVE : undefined}
-          icon={isAuthenticated ? 'menu' : 'signin'}
-          isFullWidth
-          tooltip={t('core:menu')}>
-          {isAuthenticated ? currentUser?.email : t('auth:signIn')}
+          height={isMinimized ? theme.shape.size[THEME_SIZE.MEDIUM] : undefined}
+          icon={isAuthenticated ? 'person' : 'signin'}
+          isFullWidth={!isMinimized}
+          tooltip={t('core:menu')}
+          width={isMinimized ? theme.shape.size[THEME_SIZE.MEDIUM] : undefined}>
+          {isMinimized ? undefined : isAuthenticated ? currentUser?.email : t('auth:signIn')}
         </Button>
       )}
-      direction={DIRECTION.TOP}
-      isFullWidth
       options={optionsF}
       ref={menuRef}
       testID={APP_MENU_BUTTON_TEST_ID}

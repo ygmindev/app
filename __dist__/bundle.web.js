@@ -1,5 +1,5 @@
 import { bundleConfig as bundleConfig$1 } from "./bundle.frontend.js";
-import { s as serverConfig, P as PLATFORM, f as filterNil } from "./tasks.js";
+import { P as PLATFORM, s as serverConfig, f as filterNil } from "./tasks.js";
 const bundleConfig = bundleConfig$1.extend(() => ({
   aliases: filterNil([
     { from: /^react-native$/, to: "react-native-web" },

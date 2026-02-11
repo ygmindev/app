@@ -22,8 +22,7 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_ALIGN } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
-import { variableName } from '@lib/shared/core/utils/variableName/variableName';
-import { type ComponentType, type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { cloneElement, useImperativeHandle, useRef } from 'react';
 
 export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
@@ -166,5 +165,3 @@ export const Menu = <TType extends MenuOptionModel = MenuOptionModel>({
     </Dropdown>
   );
 };
-
-process.env.APP_IS_DEBUG && ((Menu as ComponentType).displayName = variableName({ Menu }));

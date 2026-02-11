@@ -40,15 +40,7 @@ const _Component: FCModel<UploadButtonProps & ValuePropsModel<Array<FileModel>>>
   const handlePress = useCallback((e: MouseEvent) => onClick?.(e), [onClick]);
 
   useBatchAddListener((batch) =>
-    onChange?.(
-      batch.items.map((item) => ({
-        id: item.id,
-        name: item.file.name,
-        size: item.file.size,
-        type: item.file.type,
-        url: item.url,
-      })),
-    ),
+    onChange?.(batch.items.map((item) => ({ file: item.file as File, id: item.id }))),
   );
 
   return (

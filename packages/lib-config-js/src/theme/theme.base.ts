@@ -93,7 +93,7 @@ export const themeConfig = new Config<ThemeConfigModel>({
       },
 
       height: {
-        [THEME_SIZE.SMALL]: 250,
+        [THEME_SIZE.SMALL]: 300,
 
         [THEME_SIZE.MEDIUM]: 500,
 

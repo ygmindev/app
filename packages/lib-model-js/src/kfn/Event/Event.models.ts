@@ -4,6 +4,8 @@ import { type DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 export type EventModel = EntityResourceModel & {
   end?: DateTime;
 
+  images?: Array<string>;
+
   name: string;
 
   start?: DateTime;

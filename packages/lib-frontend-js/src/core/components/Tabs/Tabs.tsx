@@ -165,7 +165,7 @@ export const Tabs: LFCModel<TabsPropsModel> = ({
                 icon={tab.icon}
                 key={tab.id}
                 onPress={() => handlePress(tab)}
-                type={isActiveF ? undefined : BUTTON_TYPE.TRANSPARENT}>
+                type={isActiveF ? undefined : BUTTON_TYPE.INVISIBLE}>
                 {tab.label ? t(tab.label) : tab.id}
               </Button>
             )}

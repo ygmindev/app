@@ -38,6 +38,8 @@ export const ResourceOutput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoo
             ? PaginatableModel<TType>
             : TType
         >,
+      isArray:
+        method === RESOURCE_METHOD_TYPE.CREATE_MANY || method === RESOURCE_METHOD_TYPE.UPDATE_MANY,
     })
     result?: ResultModel<TMethod, TType>;
   }

@@ -11,6 +11,9 @@ export class Event extends EntityResource implements EventModel {
   @withDatabaseField({ isOptional: true, type: DATA_TYPE.DATE })
   end?: DateTime;
 
+  @withDatabaseField({ isArray: true, isOptional: true })
+  images?: Array<string>;
+
   @withDatabaseField()
   name!: string;
 

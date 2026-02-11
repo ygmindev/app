@@ -42,8 +42,9 @@ import posix from 'path/posix';
 import { nodeExternals } from 'rollup-plugin-node-externals';
 import vike from 'vike/plugin';
 import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
-// import circleDependency from 'vite-plugin-circular-dependency';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
+// import circleDependency from 'vite-plugin-circular-dependency';
+// import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 const vitePluginBarrel = (barrelFiles: BundleConfigModel['barrelFiles'] = []): Plugin => {
   const virtualModuleIds = barrelFiles.map((v) => `virtual:${fileInfo(v[1].outPathname).main}`);
@@ -352,6 +353,8 @@ export const _bundle = ({
           }),
 
           nodeResolve({ extensions }),
+
+          // nodePolyfills(),
         ],
 
         preserveSymlinks: true,
@@ -541,7 +544,9 @@ export const _bundle = ({
       middlewareMode: appType !== APP_TYPE.TOOL,
     },
 
-    ssr: { noExternal: transpiles },
+    ssr: {
+      noExternal: transpiles,
+    },
   };
 
   if (server?.certificate && config.server) {

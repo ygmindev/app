@@ -36,8 +36,9 @@ export const _Dropdown: SFCModel<_DropdownPropsModel> = ({
   const { context, floatingStyles, refs } = useFloating({
     middleware: [
       // offset(offsetF),
-      shift({ padding: 0 }),
-      flip({ fallbackAxisSideDirection: 'end' }),
+      // autoPlacement(),
+      shift({ boundary: [], padding: 0 }),
+      flip({ boundary: [], fallbackAxisSideDirection: 'end', rootBoundary: 'viewport' }),
       size({
         apply({ availableHeight, availableWidth, elements, rects }) {
           Object.assign(elements.floating.style, {
