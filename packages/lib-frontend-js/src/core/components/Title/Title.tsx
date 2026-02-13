@@ -38,7 +38,7 @@ export const Title: LFCModel<TitlePropsModel> = ({
       justify={FLEX_JUSTIFY.SPACE_BETWEEN}
       p={isSmall ? THEME_SIZE.SMALL : fontSize}>
       <Wrapper
-        isAlign={!description}
+        isAlign
         isRow
         opacity={
           elementState === ELEMENT_STATE.DISABLED ? theme.opaque[THEME_SIZE.MEDIUM] : undefined

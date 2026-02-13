@@ -8,6 +8,7 @@ export const EVENT_RESOURCE_PARAMS = {
     { id: 'name' },
     { id: 'start', type: DATA_TYPE.DATE_TIME },
     { id: 'end', type: DATA_TYPE.DATE_TIME },
+    { id: 'images' },
   ],
   name: EVENT_RESOURCE_NAME,
 } satisfies ResourceParamsModel<EventModel>;

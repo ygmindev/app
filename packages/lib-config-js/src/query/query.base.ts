@@ -8,6 +8,6 @@ export const queryConfig = new Config<QueryConfigModel, _QueryConfigModel>({
   params: () => ({
     cacheTime: 1e3 * 60 * 60, // 1h
 
-    cacheTimeDefault: 5e2, // 0.5 seconds
+    cacheTimeDefault: 60 * 1e3, // 1 minute
   }),
 });

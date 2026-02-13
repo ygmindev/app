@@ -26,6 +26,6 @@ export class _StorageClient implements _StorageClientModel {
       }),
       { aws: { signQuery: true } },
     );
-    return { ...params, src: `${endpointPublic}/${key}}`, uri: url };
+    return { ...params, src: `${endpointPublic}/${key}`, uri: url };
   }
 }

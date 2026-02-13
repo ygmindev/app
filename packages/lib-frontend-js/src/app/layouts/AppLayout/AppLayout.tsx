@@ -17,8 +17,7 @@ export const AppLayout: LFCModel<AppLayoutPropsModel> = ({ children, routes, ...
 
       <Wrapper
         flex
-        isVerticalScrollable
-        p>
+        isVerticalScrollable>
         {children}
       </Wrapper>
     </Wrapper>

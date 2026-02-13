@@ -8,6 +8,9 @@ import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 
 @withDatabaseEntity({ name: EVENT_RESOURCE_NAME })
 export class Event extends EntityResource implements EventModel {
+  @withDatabaseField({ isOptional: true })
+  description?: string;
+
   @withDatabaseField({ isOptional: true, type: DATA_TYPE.DATE })
   end?: DateTime;
 

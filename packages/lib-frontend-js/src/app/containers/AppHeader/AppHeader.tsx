@@ -27,7 +27,8 @@ export const AppHeader: LFCModel<AppHeaderPropsModel> = ({ routes, ...props }) =
     <Wrapper
       {...wrapperProps}
       isFullWidth
-      isRow>
+      isRow
+      p>
       <Logo src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/ChatGPT-Logo.svg/1024px-ChatGPT-Logo.svg.png?20240214002031" />
 
       <RouteTabs

@@ -2,6 +2,8 @@ import { type EntityResourceModel } from '@lib/model/resource/EntityResource/Ent
 import { type DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 
 export type EventModel = EntityResourceModel & {
+  description?: string;
+
   end?: DateTime;
 
   images?: Array<string>;

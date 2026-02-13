@@ -20,7 +20,7 @@ export class StorageImplementation implements StorageImplementationModel {
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, StorageModel, undefined>,
     context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE, StorageModel, undefined>> {
-    if (!input?.form) throw new NotFoundError('file');
+    if (!input?.form) throw new NotFoundError('form');
     const { src, uri } = await this.storageClient.signUri(input.form);
     return {
       result: {
@@ -35,7 +35,7 @@ export class StorageImplementation implements StorageImplementationModel {
     input?: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, StorageModel, undefined>,
     context?: RequestContextModel,
   ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, StorageModel, undefined>> {
-    if (!input?.form) throw new NotFoundError('filename');
+    if (!input?.form) throw new NotFoundError('form');
     const result = filterNil(
       await mapSequence(
         input.form.map((v) => async () => (await this.create({ form: v }, context)).result),

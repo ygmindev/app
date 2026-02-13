@@ -58,6 +58,7 @@ export const ModalFormButton = <TType, TResult = void>({
           onClose();
         }}
         onValidate={onValidate}
+        p
         redirect={redirect}
         ref={ref}
         submitLabel={submitLabel}

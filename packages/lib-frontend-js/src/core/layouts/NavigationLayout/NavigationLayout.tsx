@@ -17,7 +17,6 @@ export const NavigationLayout: LFCModel<NavigationLayoutPropsModel> = ({
     <Wrapper
       {...wrapperProps}
       flex
-      p
       s={THEME_SIZE.SMALL}>
       {headerElement ?? <AppHeader routes={routes} />}
 

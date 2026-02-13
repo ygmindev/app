@@ -69,7 +69,7 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({
         <Button
           elementState={isOpen ? ELEMENT_STATE.ACTIVE : undefined}
           height={isMinimized ? theme.shape.size[THEME_SIZE.MEDIUM] : undefined}
-          icon={isAuthenticated ? 'person' : 'signin'}
+          icon={isAuthenticated ? 'personCircle' : 'signin'}
           isFullWidth={!isMinimized}
           tooltip={t('core:menu')}
           width={isMinimized ? theme.shape.size[THEME_SIZE.MEDIUM] : undefined}>
