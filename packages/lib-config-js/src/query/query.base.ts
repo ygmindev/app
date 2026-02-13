@@ -6,7 +6,7 @@ export const queryConfig = new Config<QueryConfigModel, _QueryConfigModel>({
   config: _query,
 
   params: () => ({
-    cacheTime: 1e3 * 60 * 60, // 1h
+    cacheTime: 60 * 60 * 1e3, // 1h
 
     cacheTimeDefault: 60 * 1e3, // 1 minute
   }),
