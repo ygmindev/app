@@ -4,7 +4,9 @@ import { DIST_DIR } from '@lib/config/file/file.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
+import { appPrompt } from '@tool/task/core/utils/appPrompt/appPrompt';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
+import { staticServer } from '@tool/task/web/tasks/staticServer/staticServer.task';
 import { _webBuild } from '@tool/task/web/tasks/webBuild/_webBuild';
 import { WEB_BUILD } from '@tool/task/web/tasks/webBuild/webBuild.constants';
 import {
@@ -22,14 +24,15 @@ export const webBuild = buildTask<WebBuildParamsModel, WebBuildModel>({
 
   name: WEB_BUILD,
 
+  prompts: [appPrompt()],
+
   task: async (params, context) => {
     const environment = Container.get(Environment);
     const { bundleConfig } = await import(
       `@lib/config/node/bundle/bundle.${environment.variables.ENV_PLATFORM}`
     );
-    await _webBuild({
-      bundle: bundleConfig.config({ outDirname: fromWorking(DIST_DIR) }),
-    });
+    await _webBuild({ bundle: bundleConfig.config({ outDirname: fromWorking(DIST_DIR) }) });
+    await staticServer({ pathname: fromWorking(DIST_DIR, 'client') });
     return {};
   },
 });

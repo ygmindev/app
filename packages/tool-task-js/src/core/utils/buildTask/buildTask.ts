@@ -6,6 +6,7 @@ import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionCon
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
 import { merge } from '@lib/shared/core/utils/merge/merge';
 import { type ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { type AppTaskParamsModel } from '@tool/task/core/core.models';
 import {
   type TaskModel,
   type TaskParamsModel,
@@ -24,9 +25,15 @@ export const buildTask =
     let paramsF = merge([cleanObject(paramsOverrides), params]) as TParams;
     const promptsF = prompts?.filter((v) => !(v.key in (paramsF as object)));
     promptsF?.length && (paramsF = { ...paramsF, ...(await prompt(promptsF)) });
-    const contextF = merge([cleanObject(contextOverrides), context]) as ExecutionContextModel;
+    const contextF = merge([
+      { app: (paramsF as AppTaskParamsModel).app },
+      cleanObject(contextOverrides),
+      context,
+    ]) as ExecutionContextModel;
     contextF.root = contextF.root ?? (contextF.app ? await getAppRoot(contextF.app) : fromRoot());
-    const environment = process.env.NODE_ENV === 'undefined' ? undefined : process.env.NODE_ENV;
+    const environment =
+      contextF.environment ??
+      (process.env.NODE_ENV === 'undefined' ? undefined : process.env.NODE_ENV);
     const env = new Environment({
       app: contextF.app,
       environment: (environment ?? contextF.environment) as ENVIRONMENT,

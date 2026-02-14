@@ -67,8 +67,8 @@ export class Environment extends Bootstrappable implements EnvironmentModel {
     });
     this.keys = [...keysF];
     Object.assign(this.variables, {
-      ...process.env,
       ...currentEnv,
+      ...process.env,
       ...(this.overrrides ?? {}),
       NODE_ENV: environmentF,
     });

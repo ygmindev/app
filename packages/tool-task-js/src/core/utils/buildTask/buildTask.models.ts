@@ -1,5 +1,5 @@
 import { type ExecutionContextModel } from '@lib/model/orchestrator/ExecutionContext/ExecutionContext.models';
-import { PromptArrayModel } from '@lib/model/orchestrator/Prompt/Prompt.models';
+import { type PromptArrayModel } from '@lib/model/orchestrator/Prompt/Prompt.models';
 
 export type TaskParamsModel<TParams = unknown, TResult = unknown> = {
   context?: ExecutionContextModel;

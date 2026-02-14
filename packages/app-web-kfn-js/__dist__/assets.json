@@ -1,0 +1,80 @@
+{
+  "../../node_modules/.pnpm/vike@0.4.250_react-streaming@0.4.15_react-dom@19.2.3_react@19.2.4__react@19.2.4__vite@7_adaccdf17ebb7fd9ade086636156fafa/node_modules/vike/dist/client/runtime-client-routing/entry.js": {
+    "file": "assets/entries/entry-client-routing.MyOSVhei.js",
+    "name": "entries/entry-client-routing",
+    "src": "../../node_modules/.pnpm/vike@0.4.250_react-streaming@0.4.15_react-dom@19.2.3_react@19.2.4__react@19.2.4__vite@7_adaccdf17ebb7fd9ade086636156fafa/node_modules/vike/dist/client/runtime-client-routing/entry.js",
+    "isEntry": true,
+    "imports": [
+      "_chunk-BrjrQUnT.js"
+    ],
+    "dynamicImports": [
+      "virtual:vike:page-entry:client:/src/pages"
+    ]
+  },
+  "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf": {
+    "file": "assets/static/FontAwesome.CQDK8MU3.ttf",
+    "src": "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"
+  },
+  "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf": {
+    "file": "assets/static/Ionicons.QW6XAr-Y.ttf",
+    "src": "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"
+  },
+  "../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf": {
+    "file": "assets/static/MaterialCommunityIcons.hPx70ptL.ttf",
+    "src": "../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"
+  },
+  "../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf": {
+    "file": "assets/static/Octicons.BfCJ7Phl.ttf",
+    "src": "../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"
+  },
+  "__vite-browser-external": {
+    "file": "assets/chunks/chunk-FmFgRqLi.js",
+    "name": "__vite-browser-external",
+    "src": "__vite-browser-external",
+    "isDynamicEntry": true
+  },
+  "_chunk-BEQDyH4F.js": {
+    "file": "assets/chunks/chunk-BEQDyH4F.js",
+    "name": "browser-ponyfill",
+    "isDynamicEntry": true,
+    "imports": [
+      "virtual:vike:page-entry:client:/src/pages"
+    ]
+  },
+  "_chunk-BrjrQUnT.js": {
+    "file": "assets/chunks/chunk-BrjrQUnT.js",
+    "name": "preload-helper"
+  },
+  "_style-052041d4.CbGtfgdF.css": {
+    "file": "assets/static/style-052041d4.CbGtfgdF.css",
+    "src": "_style-052041d4.CbGtfgdF.css"
+  },
+  "_style-269ba50d.D1-0B2xV.css": {
+    "file": "assets/static/style-269ba50d.D1-0B2xV.css",
+    "src": "_style-269ba50d.D1-0B2xV.css"
+  },
+  "virtual:vike:page-entry:client:/src/pages": {
+    "file": "assets/entries/src_pages.goygb1XO.js",
+    "name": "entries/src/pages",
+    "src": "virtual:vike:page-entry:client:/src/pages",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-BrjrQUnT.js"
+    ],
+    "dynamicImports": [
+      "__vite-browser-external",
+      "_chunk-BEQDyH4F.js"
+    ],
+    "css": [
+      "assets/static/style-269ba50d.D1-0B2xV.css",
+      "assets/static/style-052041d4.CbGtfgdF.css"
+    ],
+    "assets": [
+      "assets/static/FontAwesome.CQDK8MU3.ttf",
+      "assets/static/Ionicons.QW6XAr-Y.ttf",
+      "assets/static/MaterialCommunityIcons.hPx70ptL.ttf",
+      "assets/static/Octicons.BfCJ7Phl.ttf"
+    ]
+  }
+}
