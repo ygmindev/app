@@ -1,6 +1,0 @@
-import { bundleConfig as bundleConfig$1 } from "./bundle.native.js";
-const bundleConfig = bundleConfig$1.extend(() => ({}));
-export {
-  bundleConfig
-};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnVuZGxlLmFuZHJvaWQuanMiLCJzb3VyY2VzIjpbIi4uL3BhY2thZ2VzL2xpYi1jb25maWctanMvc3JjL25vZGUvYnVuZGxlL2J1bmRsZS5hbmRyb2lkLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGJ1bmRsZUNvbmZpZyBhcyBjb25maWdCYXNlIH0gZnJvbSAnQGxpYi9jb25maWcvbm9kZS9idW5kbGUvYnVuZGxlLm5hdGl2ZSc7XG5cbmV4cG9ydCBjb25zdCBidW5kbGVDb25maWcgPSBjb25maWdCYXNlLmV4dGVuZCgoKSA9PiAoe30pKTtcbiJdLCJuYW1lcyI6WyJjb25maWdCYXNlIl0sIm1hcHBpbmdzIjoiO0FBRU8sTUFBTSxlQUFlQSxlQUFXLE9BQU8sT0FBTyxHQUFHOyJ9

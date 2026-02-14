@@ -1,12 +1,14 @@
 import { type ResourceParamsModel } from '@lib/frontend/resource/resource.models';
 import { ACCESS_RESOURCE_NAME } from '@lib/model/auth/Access/Access.constants';
 import { ROLE_RESOURCE_NAME } from '@lib/model/auth/Role/Role.constants';
+import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { type UserModel } from '@lib/model/user/User/User.models';
 
 export const USER_RESOURCE_PARAMS = {
   fields: [
     { id: '_id', isHidden: true },
+    { fields: [{ id: ROLE_RESOURCE_NAME }, { id: GROUP_RESOURCE_NAME }], id: ACCESS_RESOURCE_NAME },
     { id: 'email', width: 300 },
     { id: 'first', width: 300 },
     { id: 'last' },
