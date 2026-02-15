@@ -2,7 +2,7 @@ import 'reflect-metadata';
 
 import { DATABASE_TYPE } from '@lib/backend/database/database.constants';
 import { Database } from '@lib/backend/database/utils/Database/Database';
-import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
+import { withEnvironment } from '@lib/backend/environment/utils/withEnvironment/withEnvironment';
 import {
   type InitializeModel,
   type InitializeParamsModel,
@@ -19,27 +19,26 @@ export const initialize = async ({
 }: InitializeParamsModel = {}): Promise<InitializeModel> => {
   if (!isInitialized) {
     isInitialized = true;
-    const environment = new Environment();
-    await environment.initialize();
-    Container.set(Environment, environment);
 
-    try {
-      const pubSub = new PubSub(pubSubConfig.params());
-      await pubSub.initialize();
-      Container.set(PubSub, pubSub);
-    } catch (e) {
-      logger.error(e as Error);
-    }
-
-    if (database) {
+    await withEnvironment({}, async () => {
       try {
-        const db = new Database(database?.());
-        await db.initialize();
-        Container.set(Database, db, DATABASE_TYPE.MONGO);
+        const pubSub = new PubSub(pubSubConfig.params());
+        await pubSub.initialize();
+        Container.set(PubSub, pubSub);
       } catch (e) {
         logger.error(e as Error);
-        throw e;
       }
-    }
+
+      if (database) {
+        try {
+          const db = new Database(database?.());
+          await db.initialize();
+          Container.set(Database, db, DATABASE_TYPE.MONGO);
+        } catch (e) {
+          logger.error(e as Error);
+          throw e;
+        }
+      }
+    });
   }
 };

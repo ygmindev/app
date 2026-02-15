@@ -608,9 +608,21 @@ const appPrompt = /* @__PURE__ */ __name((params) => {
   );
   return { key: "app", options };
 }, "appPrompt");
+const withEnvironment = /* @__PURE__ */ __name(async (...[params, fn]) => {
+  const current = _Container.get(Environment);
+  const environment = new Environment({
+    environment: params.environment ?? "production"
+  });
+  await environment.initialize();
+  _Container.set(Environment, environment);
+  const result = await fn();
+  await current.initialize();
+  _Container.set(Environment, current);
+  return result;
+}, "withEnvironment");
 const withDir = /* @__PURE__ */ __name(async (...[dirname2, fn]) => {
   const workingDir = fromWorking();
-  process.chdir(dirname2);
+  dirname2 && process.chdir(dirname2);
   const result = await fn();
   process.chdir(workingDir);
   return result;
@@ -792,13 +804,17 @@ const buildTask = /* @__PURE__ */ __name(({
   ]);
   contextF.root = contextF.root ?? (contextF.app ? await getAppRoot(contextF.app) : fromRoot());
   const environment = contextF.environment ?? "production";
-  const env = new Environment({
-    app: contextF.app,
-    environment: environment ?? contextF.environment,
-    overrrides: contextF.overrrides
-  });
-  await env.initialize();
-  return withDir(contextF.root, async () => fn(paramsF, contextF));
+  return withDir(
+    contextF.root,
+    async () => withEnvironment(
+      {
+        app: contextF.app,
+        environment: environment ?? contextF.environment,
+        overrrides: contextF.overrrides
+      },
+      async () => fn(paramsF, contextF)
+    )
+  );
 }, "buildTask");
 const _execute = /* @__PURE__ */ __name(async ({
   command,

@@ -1,4 +1,4 @@
-import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
+import { withEnvironment } from '@lib/backend/environment/utils/withEnvironment/withEnvironment';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
 import { withDir } from '@lib/backend/file/utils/withDir/withDir';
@@ -34,11 +34,15 @@ export const buildTask =
     const environment =
       contextF.environment ??
       (process.env.NODE_ENV === 'undefined' ? undefined : process.env.NODE_ENV);
-    const env = new Environment({
-      app: contextF.app,
-      environment: (environment ?? contextF.environment) as ENVIRONMENT,
-      overrrides: contextF.overrrides,
-    });
-    await env.initialize();
-    return withDir(contextF.root, async () => fn(paramsF, contextF));
+
+    return withDir(contextF.root, async () =>
+      withEnvironment(
+        {
+          app: contextF.app,
+          environment: (environment ?? contextF.environment) as ENVIRONMENT,
+          overrrides: contextF.overrrides,
+        },
+        async () => fn(paramsF, contextF),
+      ),
+    );
   };

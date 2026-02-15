@@ -880,6 +880,18 @@ let Environment = (_b = class extends Bootstrappable {
 Environment = __decorateClass$1([
   withContainer()
 ], Environment);
+const withEnvironment = /* @__PURE__ */ __name(async (...[params, fn]) => {
+  const current = _Container.get(Environment);
+  const environment = new Environment({
+    environment: params.environment ?? "production"
+  });
+  await environment.initialize();
+  _Container.set(Environment, environment);
+  const result = await fn();
+  await current.initialize();
+  _Container.set(Environment, current);
+  return result;
+}, "withEnvironment");
 const _pubSub = /* @__PURE__ */ __name(({
   host,
   port,
@@ -995,26 +1007,25 @@ const initialize = /* @__PURE__ */ __name(async ({
 } = {}) => {
   if (!isInitialized) {
     isInitialized = true;
-    const environment = new Environment();
-    await environment.initialize();
-    _Container.set(Environment, environment);
-    try {
-      const pubSub = new PubSub(pubSubConfig.params());
-      await pubSub.initialize();
-      _Container.set(PubSub, pubSub);
-    } catch (e) {
-      logger.error(e);
-    }
-    if (database) {
+    await withEnvironment({}, async () => {
       try {
-        const db = new Database(database?.());
-        await db.initialize();
-        _Container.set(Database, db, DATABASE_TYPE.MONGO);
+        const pubSub = new PubSub(pubSubConfig.params());
+        await pubSub.initialize();
+        _Container.set(PubSub, pubSub);
       } catch (e) {
         logger.error(e);
-        throw e;
       }
-    }
+      if (database) {
+        try {
+          const db = new Database(database?.());
+          await db.initialize();
+          _Container.set(Database, db, DATABASE_TYPE.MONGO);
+        } catch (e) {
+          logger.error(e);
+          throw e;
+        }
+      }
+    });
   }
 }, "initialize");
 const _NotImplementedError = class _NotImplementedError extends Error {

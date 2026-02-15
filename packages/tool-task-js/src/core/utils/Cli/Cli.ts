@@ -1,4 +1,4 @@
-import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
+import { withEnvironment } from '@lib/backend/environment/utils/withEnvironment/withEnvironment';
 import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromGlobs } from '@lib/backend/file/utils/fromGlobs/fromGlobs';
 import { fromPackages } from '@lib/backend/file/utils/fromPackages/fromPackages';
@@ -92,15 +92,16 @@ export class Cli extends Bootstrappable implements CliModel {
           if (pkg) {
             stepContext = merge([stepContext, { overrrides: { PKG_NAME: fileInfo(rootF).main } }]);
           }
-          return withDir(rootF, async () => {
-            const environment = new Environment({
-              app: stepContext?.app,
-              environment: stepContext?.environment,
-              overrrides: stepContext?.overrrides,
-            });
-            await environment.initialize();
-            return funcF(stepParams, stepContext);
-          });
+          return withDir(rootF, async () =>
+            withEnvironment(
+              {
+                app: stepContext?.app,
+                environment: stepContext?.environment,
+                overrrides: stepContext?.overrrides,
+              },
+              async () => funcF(stepParams, stepContext),
+            ),
+          );
         });
         return execution === WORKFLOW_EXECUTION.PARALLEL
           ? Promise.all(executions.map((v) => v()))
