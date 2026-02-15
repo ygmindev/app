@@ -8,6 +8,7 @@ import { join, normalize as normalize$1, basename, extname, dirname, sep, relati
 import { readdirSync, statSync, readFileSync, existsSync, mkdirSync, renameSync } from "fs";
 import some from "lodash/some.js";
 import fsExtra from "fs-extra";
+import debounceF from "lodash/debounce.js";
 import { AsyncLocalStorage } from "async_hooks";
 import { Collection as Collection$1, wrap, ReferenceKind } from "@mikro-orm/core";
 import isPlainObject from "lodash/isPlainObject.js";
@@ -16,8 +17,16 @@ import uniq from "lodash/uniq.js";
 import cloneDeep from "lodash/cloneDeep.js";
 import { isMainThread } from "worker_threads";
 import pino from "pino";
+import closeWithGrace from "close-with-grace";
 import { config } from "dotenv";
-import isEqual$1 from "react-fast-compare";
+import stringify$1 from "json-stringify-safe";
+import isString from "lodash/isString.js";
+import isEqual$1 from "lodash/isEqual.js";
+import isNil from "lodash/isNil.js";
+import isObject from "lodash/isObject.js";
+import omit from "lodash/omit.js";
+import pick from "lodash/pick.js";
+import zip from "lodash/zip.js";
 import get from "lodash/get.js";
 import intersection from "lodash/intersection.js";
 import isFunction from "lodash/isFunction.js";
@@ -30,6 +39,7 @@ import startCase from "lodash/startCase.js";
 import toString from "lodash/toString.js";
 import { execa } from "execa";
 import { build } from "vike/api";
+import { globSync } from "glob";
 import { esbuildDecorators } from "@anatine/esbuild-decorators";
 import { viteCommonjs, esbuildCommonjs } from "@originjs/vite-plugin-commonjs";
 import { babel } from "@rollup/plugin-babel";
@@ -41,19 +51,14 @@ import esbuildPluginTsc from "esbuild-plugin-tsc";
 import flowRemoveTypes from "flow-remove-types";
 import { getTsconfig } from "get-tsconfig";
 import isArray$2 from "lodash/isArray.js";
-import isString from "lodash/isString.js";
 import posix from "path/posix";
 import { nodeExternals } from "rollup-plugin-node-externals";
 import { createLogger, searchForWorkspaceRoot, createServer, build as build$1 } from "vite";
 import { cjsInterop } from "vite-plugin-cjs-interop";
 import { nanoid } from "nanoid";
-import { fastifyCookie } from "@fastify/cookie";
-import cors from "@fastify/cors";
-import toNumber from "lodash/toNumber.js";
 import trim from "lodash/trim.js";
 import { pathsToModuleNameMapper } from "ts-jest";
 import { runCLI } from "jest";
-import { globSync } from "glob";
 import { ViteNodeRunner } from "vite-node/client";
 import { viteNodeHmrPlugin } from "vite-node/hmr";
 import { ViteNodeServer } from "vite-node/server";
@@ -72,7 +77,6 @@ import globals from "globals";
 import typescriptPlugin from "typescript-eslint";
 import { defineConfig } from "eslint/config";
 import { fileURLToPath } from "url";
-import stringify$1 from "json-stringify-safe";
 import { runExtractor } from "i18next-cli";
 import thenby from "thenby";
 import { generateTemplateFilesBatch, CaseConverterEnum } from "generate-template-files";
@@ -83,11 +87,13 @@ import last from "lodash/last.js";
 import { ObjectId as ObjectId$1 } from "mongodb";
 import { MikroORM } from "@mikro-orm/mongodb";
 import forEach from "lodash/forEach.js";
-import isNil from "lodash/isNil.js";
 import camelCase from "lodash/camelCase.js";
 import upperFirst from "lodash/upperFirst.js";
 import { Socket } from "net";
 import websocket from "@fastify/websocket";
+import { fastifyCookie } from "@fastify/cookie";
+import cors from "@fastify/cors";
+import toNumber from "lodash/toNumber.js";
 import concurrently from "concurrently";
 import { Connection, Client as Client$1 } from "@temporalio/client";
 import picomatch from "picomatch";
@@ -285,9 +291,11 @@ const _writeFile = /* @__PURE__ */ __name(({
   value
 }) => fsExtra.outputFileSync(pathname, value, encoding), "_writeFile");
 const writeFile$1 = /* @__PURE__ */ __name((params) => _writeFile(params), "writeFile$1");
-const handleCleanup = /* @__PURE__ */ __name(async (params) => {
-  return;
-}, "handleCleanup");
+const debounce = /* @__PURE__ */ __name((...[callback, { duration = 0, isLeading = false } = {}]) => debounceF(
+  callback,
+  duration,
+  isLeading ? { leading: true, trailing: false } : { leading: false, trailing: true }
+), "debounce");
 const GlobalRegistry = {
   provide: /* @__PURE__ */ __name((key, factory) => {
     const symbol = Symbol.for(`globalRegistry.${key}`);
@@ -482,6 +490,24 @@ const _Logger2 = class _Logger2 extends _Logger {
 __name(_Logger2, "Logger");
 let Logger = _Logger2;
 const logger = new Logger();
+let instance = null;
+const _handleCleanup = /* @__PURE__ */ __name(async ({
+  onCleanUp
+}) => {
+  instance?.uninstall();
+  const handleCleanup2 = debounce(async () => {
+    logger.debug("cleaning up...");
+    await onCleanUp?.();
+  });
+  instance = closeWithGrace({ delay: 1e3 }, async ({ err, signal }) => {
+    logger.debug(`shutting down due to ${signal} ${err}`);
+    if (err) {
+      logger.trace(err);
+    }
+    await handleCleanup2();
+  });
+}, "_handleCleanup");
+const handleCleanup = /* @__PURE__ */ __name(async (params) => _handleCleanup(params), "handleCleanup");
 const _Bootstrappable = class _Bootstrappable {
   constructor() {
     this._isInitialized = false;
@@ -499,7 +525,7 @@ const _Bootstrappable = class _Bootstrappable {
       return;
     } else {
       logger.info(`${this.constructor.name} initializing...`);
-      await handleCleanup();
+      await handleCleanup({ onCleanUp: /* @__PURE__ */ __name(async () => this.cleanUp(), "onCleanUp") });
       try {
         this._isInitialized = true;
         await this.onInitialize();
@@ -576,6 +602,11 @@ let Environment = (_b = class extends Bootstrappable {
     Object.assign(process.env, this.variables);
     _Container.set(Environment, this);
   }
+  reset() {
+    this.keys?.forEach((key) => {
+      delete process.env[key];
+    });
+  }
 }, __name(_b, "Environment"), _b);
 Environment = __decorateClass$1([
   withContainer()
@@ -610,14 +641,23 @@ const appPrompt = /* @__PURE__ */ __name((params) => {
 }, "appPrompt");
 const withEnvironment = /* @__PURE__ */ __name(async (...[params, fn]) => {
   const current = _Container.get(Environment);
-  const environment = new Environment({
-    environment: params.environment ?? "production"
+  const currentEnv = {
+    app: current.app,
+    environment: current.environment ?? "production",
+    overrrides: { ...current.overrrides }
+  };
+  current.reset();
+  let environment = new Environment({
+    app: params.app,
+    environment: params.environment ?? "production",
+    overrrides: params.overrrides
   });
   await environment.initialize();
-  _Container.set(Environment, environment);
   const result = await fn();
-  await current.initialize();
-  _Container.set(Environment, current);
+  environment.reset();
+  environment = new Environment(currentEnv);
+  await environment.initialize();
+  _Container.set(Environment, environment);
   return result;
 }, "withEnvironment");
 const withDir = /* @__PURE__ */ __name(async (...[dirname2, fn]) => {
@@ -628,7 +668,37 @@ const withDir = /* @__PURE__ */ __name(async (...[dirname2, fn]) => {
   return result;
 }, "withDir");
 const IGNORE_OBJECT_KEYS = ["owner"];
-const _isEqual = /* @__PURE__ */ __name((x, y) => isEqual$1(x, y), "_isEqual");
+const _stringify = /* @__PURE__ */ __name((...[params, options]) => options?.isMinify ?? false ? stringify$1(params) : stringify$1(params, null, "  "), "_stringify");
+const stringify = /* @__PURE__ */ __name((...[params, options]) => isString(params) ? params : params ? _stringify(params, options) : "undefined", "stringify");
+const _isEqual = /* @__PURE__ */ __name((...[x, y, options]) => {
+  if (options) {
+    let [xF, yF] = [
+      isNil(x) ? x : JSON.parse(JSON.stringify(x)),
+      isNil(y) ? y : JSON.parse(JSON.stringify(y))
+    ];
+    let result = false;
+    if (isObject(xF) && isObject(yF)) {
+      options.include && ([xF, yF] = [pick(xF, options.include), pick(yF, options.include)]);
+      options.exclude && ([xF, yF] = [omit(xF, options.exclude), omit(yF, options.exclude)]);
+      result = _isEqual(Object.keys(xF).sort(), Object.keys(yF).sort()) && Object.keys(xF).every(
+        (k) => _isEqual(
+          xF[k],
+          yF[k],
+          options
+        )
+      );
+    } else if (isArray$1(xF) && isArray$1(yF)) {
+      result = xF.length === yF.length && zip(xF.sort(), yF.sort()).every(
+        (v) => _isEqual(v[0], v[1], options)
+      );
+    } else {
+      result = isEqual$1(xF, yF);
+    }
+    !result && (options.isVerbose || false) && logger.debug(`expected: ${stringify(xF)} vs. received: ${stringify(yF)}`);
+    return result;
+  }
+  return isEqual$1(x, y);
+}, "_isEqual");
 const isEqual = /* @__PURE__ */ __name((...params) => _isEqual(...params), "isEqual");
 const isEmpty = /* @__PURE__ */ __name((value) => value === "" || value === null || value === void 0 || isEqual(value, []) || !(value instanceof RegExp) && JSON.stringify(value) === "{}", "isEmpty");
 const isPrimitive = /* @__PURE__ */ __name((params) => params !== Object(params) || params instanceof String || params instanceof Date, "isPrimitive");
@@ -854,7 +924,7 @@ const staticServer = buildTask({
   name: STATIC_SERVER,
   task: /* @__PURE__ */ __name(async ({ host, isOpen = true, pathname, port }) => {
     const hostF = host ?? "app-web-static-67q4.onrender.com";
-    const portF = port ?? "8080";
+    const portF = port ?? process.env.SERVER_APP_STATIC_PORT;
     await execute({
       command: `http-server ${pathname} ${hostF ? `-a ${hostF}` : ""} --cors --port ${portF} ${isOpen ? "--o" : ""}`
     });
@@ -876,14 +946,14 @@ const webBuild = buildTask({
   prompts: [appPrompt()],
   task: /* @__PURE__ */ __name(async (params, context) => {
     const environment = _Container.get(Environment);
-    const { bundleConfig: bundleConfig2 } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/node/bundle/bundle.android.ts": /* @__PURE__ */ __name(() => import("./bundle.android.js"), "../../../../../lib-config-js/src/node/bundle/bundle.android.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.base.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_base), "../../../../../lib-config-js/src/node/bundle/bundle.base.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.constants.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_constants), "../../../../../lib-config-js/src/node/bundle/bundle.constants.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.frontend.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_frontend), "../../../../../lib-config-js/src/node/bundle/bundle.frontend.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.ios.ts": /* @__PURE__ */ __name(() => import("./bundle.ios.js"), "../../../../../lib-config-js/src/node/bundle/bundle.ios.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.models.ts": /* @__PURE__ */ __name(() => import("./bundle.models.js"), "../../../../../lib-config-js/src/node/bundle/bundle.models.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.native.ts": /* @__PURE__ */ __name(() => import("./bundle.native.js"), "../../../../../lib-config-js/src/node/bundle/bundle.native.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.node.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_node), "../../../../../lib-config-js/src/node/bundle/bundle.node.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_node), "../../../../../lib-config-js/src/node/bundle/bundle.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.web.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_web), "../../../../../lib-config-js/src/node/bundle/bundle.web.ts") }), `../../../../../lib-config-js/src/node/bundle/bundle.${environment.variables.ENV_PLATFORM}`, 10);
+    const { bundleConfig: bundleConfig2 } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/node/bundle/bundle.android.ts": /* @__PURE__ */ __name(() => import("./bundle.android.js"), "../../../../../lib-config-js/src/node/bundle/bundle.android.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.base.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_base), "../../../../../lib-config-js/src/node/bundle/bundle.base.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.constants.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_constants), "../../../../../lib-config-js/src/node/bundle/bundle.constants.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.frontend.ts": /* @__PURE__ */ __name(() => import("./bundle.frontend.js"), "../../../../../lib-config-js/src/node/bundle/bundle.frontend.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.ios.ts": /* @__PURE__ */ __name(() => import("./bundle.ios.js"), "../../../../../lib-config-js/src/node/bundle/bundle.ios.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.models.ts": /* @__PURE__ */ __name(() => import("./bundle.models.js"), "../../../../../lib-config-js/src/node/bundle/bundle.models.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.native.ts": /* @__PURE__ */ __name(() => import("./bundle.native.js"), "../../../../../lib-config-js/src/node/bundle/bundle.native.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.node.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_node), "../../../../../lib-config-js/src/node/bundle/bundle.node.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_node), "../../../../../lib-config-js/src/node/bundle/bundle.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.web.ts": /* @__PURE__ */ __name(() => import("./bundle.web.js"), "../../../../../lib-config-js/src/node/bundle/bundle.web.ts") }), `../../../../../lib-config-js/src/node/bundle/bundle.${environment.variables.ENV_PLATFORM}`, 10);
     await _webBuild({ bundle: bundleConfig2.config({ outDirname: fromWorking(DIST_DIR) }) });
     await staticServer({ pathname: fromWorking(DIST_DIR, "client") });
     return {};
   }, "task")
 });
-const fromStatic = /* @__PURE__ */ __name((...paths) => fromPackages("asset-static", ...paths), "fromStatic");
-const fromPublic = /* @__PURE__ */ __name((...paths) => fromStatic(PUBLIC_DIR, ...paths), "fromPublic");
+const _fromGlobs = /* @__PURE__ */ __name((...[globs, { exclude, isAbsolute = false, root = fromWorking() } = {}]) => globs.map((glob) => globSync(glob, { absolute: isAbsolute, cwd: root, ignore: exclude })).flat(1), "_fromGlobs");
+const fromGlobs = /* @__PURE__ */ __name((...params) => _fromGlobs(...params), "fromGlobs");
 const cartesianString = /* @__PURE__ */ __name((...[x, y]) => x.flatMap((a) => y.map((b) => `${a}${b}`)), "cartesianString");
 const fileConfig = new Config({
   params: /* @__PURE__ */ __name(() => {
@@ -1399,7 +1469,7 @@ const typescriptConfig = new Config({
     };
   }, "params")
 });
-const bundleConfig$3 = new Config({
+const bundleConfig$1 = new Config({
   config: _bundle,
   params: /* @__PURE__ */ __name(() => {
     const { extensions, packageDirs } = fileConfig.params();
@@ -1434,132 +1504,48 @@ const bundleConfig$3 = new Config({
     };
   }, "params")
 });
-const bundle_base = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({ __proto__: null, bundleConfig: bundleConfig$3 }, Symbol.toStringTag, { value: "Module" }));
-const bundleConfig$2 = bundleConfig$3.extend(() => {
-  _Container.get(Environment);
+const bundle_base = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({ __proto__: null, bundleConfig: bundleConfig$1 }, Symbol.toStringTag, { value: "Module" }));
+const TASK_QUEUE_DEFAULT = "task-queue";
+const taskConfig = new Config({
+  params: /* @__PURE__ */ __name(() => ({
+    queue: TASK_QUEUE_DEFAULT,
+    taskExtension: ".task.ts",
+    tasksPathname: fromBuild("tasks.js"),
+    wait: {
+      delay: 1e3,
+      interval: 1e3,
+      timeout: 6e4
+    },
+    workerCountDefault: 1,
+    workflowExtension: ".workflow.ts",
+    workflowsPathname: fromBuild("workflows.js")
+  }), "params")
+});
+const bundleConfig = bundleConfig$1.extend(() => {
+  const { taskExtension, tasksPathname, workflowExtension, workflowsPathname } = taskConfig.params();
   return {
-    aliases: [
-      {
-        from: "react-native-is-edge-to-edge",
-        to: "react-native-is-edge-to-edge/dist/index.mjs"
-      },
-      // {
-      //   from: /^inline-style-prefixer\/lib\/(.*)/,
-      //   to: 'inline-style-prefixer/es/$1.js',
-      // },
-      {
-        from: "inline-style-prefixer/lib",
-        to: "inline-style-prefixer/es"
-      },
-      {
-        from: "css-in-js-utils/lib",
-        to: "css-in-js-utils/es"
-      }
-    ],
-    // externals: [
-    //   'json-stringify-safe',
-    //   'normalize-css-color',
-    //   'pino',
-    //   'postcss-value-parser',
-    //   'raf/polyfill.js',
-    //   'react-dom',
-    //   'react',
-    //   'react-fast-compare',
-    //   'react-redux',
-    //   'react/jsx-runtime',
-    //   'setimmediate',
-    //   'styleq',
-    //   'void-elements',
-    //   /lodash/,
-    // ],
-    assetsDir: ASSETS_DIR,
-    babel: {
-      plugins: filterNil([
-        ["transform-react-remove-prop-types", { removeImport: true }],
-        [
-          "react-remove-properties",
-          { properties: ["testID"] }
-        ]
-        // 'react-native-reanimated/plugin',
-      ]),
-      presets: [
-        ["@babel/preset-react", { runtime: "automatic" }],
-        "@babel/preset-flow",
-        "@babel/preset-typescript"
+    barrelFiles: [
+      [
+        fromGlobs([fromPackages(`*/src/**/*/*${taskExtension}`)], { isAbsolute: true }),
+        { outPathname: tasksPathname }
+      ],
+      [
+        fromGlobs([fromPackages(`*/src/**/*/*${workflowExtension}`)], { isAbsolute: true }),
+        { outPathname: workflowsPathname }
       ]
-    },
-    dedupe: ["react"],
-    define: {
-      __DEV__: `${false}`
-    },
-    envPrefix: ["APP_", "SERVER_APP_"],
-    externals: ["firebase"],
-    publicPathname: fromPublic(),
-    transpileModules: filterNil([
-      "react-use"
-      // process.env.NODE_ENV === 'production' && 'inversify-react',
-    ]) ?? [],
-    transpilePatterns: [
-      /^react-native-(?!web)/,
-      /^@react-navigation.*/,
-      /^@react-native.*/,
-      /^expo-.*/,
-      /^@expo.*/
-    ]
+    ],
+    envPrefix: ["SERVER_"],
+    externals: [/node_modules/, "@eslint/js", "globals", "canvas"],
+    platform: PLATFORM.NODE,
+    preBundle: [
+      ...fromGlobs([fromPackages("*/src/**/*.transport.ts")], { isAbsolute: true }).map((v) => ({
+        entryFiles: v
+      }))
+    ],
+    transpilePatterns: filterNil([false])
   };
 });
-const bundle_frontend = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({ __proto__: null, bundleConfig: bundleConfig$2 }, Symbol.toStringTag, { value: "Module" }));
-const _cookiesPlugin = /* @__PURE__ */ __name(async (server, { secret }) => {
-  await server._app.register(fastifyCookie, { secret });
-}, "_cookiesPlugin");
-const cookiesPlugin = _cookiesPlugin;
-const _corsPlugin = /* @__PURE__ */ __name(async (server, { headers, origins }) => {
-  await server._app.register(cors, {
-    allowedHeaders: headers,
-    origin: origins
-  });
-}, "_corsPlugin");
-const corsPlugin = _corsPlugin;
-const serverConfig$1 = new Config({
-  params: /* @__PURE__ */ __name(() => {
-    const environment = _Container.get(Environment);
-    const port = environment.variables.PORT || environment.variables.APP_PORT || environment.variables.SERVER_APP_PORT;
-    return {
-      certificate: void 0,
-      entryPathname: fromWorking("src/index.ts"),
-      host: environment.variables.SERVER_APP_HOST ?? "",
-      plugins: [
-        [corsPlugin, { headers: ["*"], origins: ["*"] }],
-        [cookiesPlugin, { secret: environment.variables.SERVER_APP_SECRET }]
-      ],
-      port: toNumber(port),
-      publicDir: PUBLIC_DIR
-    };
-  }, "params")
-});
-const bundleConfig$1 = bundleConfig$2.extend(() => ({
-  aliases: filterNil([
-    { from: /^react-native$/, to: "react-native-web" },
-    false
-  ]),
-  babel: {
-    plugins: [
-      // For react-native-reanimated
-      // https://docs.swmansion.com/react-native-reanimated/docs/guides/web-support
-      "@babel/plugin-proposal-export-namespace-from"
-    ]
-  },
-  dedupe: ["react-dom", "react-native-web"],
-  define: {
-    global: "globalThis"
-  },
-  platform: PLATFORM.WEB,
-  server: {
-    certificate: serverConfig$1.params().certificate
-  },
-  transpileModules: ["react-dom/client", "react-native-web", "inline-style-prefixer", "css-in-js-utils"]
-}));
-const bundle_web = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({ __proto__: null, bundleConfig: bundleConfig$1 }, Symbol.toStringTag, { value: "Module" }));
+const bundle_node = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({ __proto__: null, bundleConfig }, Symbol.toStringTag, { value: "Module" }));
 const _test = /* @__PURE__ */ __name(({
   buildDir,
   bundle,
@@ -1631,11 +1617,11 @@ const _test = /* @__PURE__ */ __name(({
     watch: isWatch
   };
 }, "_test");
-const testConfig$2 = new Config({
+const testConfig$1 = new Config({
   config: _test,
   params: /* @__PURE__ */ __name(() => ({
     buildDir: BUILD_DIR,
-    bundle: bundleConfig$1.params(),
+    bundle: bundleConfig.params(),
     cacheDir: CACHE_DIR,
     delay: 500,
     eteExtension: ".ete",
@@ -1647,15 +1633,8 @@ const testConfig$2 = new Config({
     typescript: typescriptConfig.params()
   }), "params")
 });
-const testConfig$1 = testConfig$2.extend(() => ({
-  bundle: bundleConfig$2.params(),
-  mocks: [
-    // TODO: fix typing?
-    ["react-native-reanimated", () => jest.requireActual("react-native-reanimated/mock")]
-  ]
-}));
 const testConfig = testConfig$1.extend(() => ({
-  bundle: bundleConfig$1.params()
+  bundle: bundleConfig.params()
 }));
 const TEST = "test";
 const test = buildTask({
@@ -1681,49 +1660,6 @@ const test = buildTask({
     return {};
   }, "task")
 });
-const _fromGlobs = /* @__PURE__ */ __name((...[globs, { exclude, isAbsolute = false, root = fromWorking() } = {}]) => globs.map((glob) => globSync(glob, { absolute: isAbsolute, cwd: root, ignore: exclude })).flat(1), "_fromGlobs");
-const fromGlobs = /* @__PURE__ */ __name((...params) => _fromGlobs(...params), "fromGlobs");
-const TASK_QUEUE_DEFAULT = "task-queue";
-const taskConfig = new Config({
-  params: /* @__PURE__ */ __name(() => ({
-    queue: TASK_QUEUE_DEFAULT,
-    taskExtension: ".task.ts",
-    tasksPathname: fromBuild("tasks.js"),
-    wait: {
-      delay: 1e3,
-      interval: 1e3,
-      timeout: 6e4
-    },
-    workerCountDefault: 1,
-    workflowExtension: ".workflow.ts",
-    workflowsPathname: fromBuild("workflows.js")
-  }), "params")
-});
-const bundleConfig = bundleConfig$3.extend(() => {
-  const { taskExtension, tasksPathname, workflowExtension, workflowsPathname } = taskConfig.params();
-  return {
-    barrelFiles: [
-      [
-        fromGlobs([fromPackages(`*/src/**/*/*${taskExtension}`)], { isAbsolute: true }),
-        { outPathname: tasksPathname }
-      ],
-      [
-        fromGlobs([fromPackages(`*/src/**/*/*${workflowExtension}`)], { isAbsolute: true }),
-        { outPathname: workflowsPathname }
-      ]
-    ],
-    envPrefix: ["SERVER_"],
-    externals: [/node_modules/, "@eslint/js", "globals", "canvas"],
-    platform: PLATFORM.NODE,
-    preBundle: [
-      ...fromGlobs([fromPackages("*/src/**/*.transport.ts")], { isAbsolute: true }).map((v) => ({
-        entryFiles: v
-      }))
-    ],
-    transpilePatterns: filterNil([false])
-  };
-});
-const bundle_node = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({ __proto__: null, bundleConfig }, Symbol.toStringTag, { value: "Module" }));
 const _nodeDev = /* @__PURE__ */ __name(async ({ pathname }) => {
   const entryFiles = isArray(pathname) ? pathname : [pathname];
   const config2 = bundleConfig.config({ appType: APP_TYPE.TOOL, entryFiles });
@@ -1764,7 +1700,12 @@ const _nodeDev = /* @__PURE__ */ __name(async ({ pathname }) => {
   });
   await withDir(root, runAll);
   return new Promise((resolve2) => {
-    void handleCleanup();
+    void handleCleanup({
+      onCleanUp: /* @__PURE__ */ __name(async () => {
+        await cleanUp();
+        resolve2();
+      }, "onCleanUp")
+    });
   });
 }, "_nodeDev");
 const NODE_DEV = "nodeDev";
@@ -2028,8 +1969,6 @@ const lint = buildTask({
   }, "task")
 });
 const fromDist = /* @__PURE__ */ __name((...paths) => fromRoot(DIST_DIR, ...paths), "fromDist");
-const _stringify = /* @__PURE__ */ __name((...[params, options]) => options?.isMinify ?? false ? stringify$1(params) : stringify$1(params, null, "  "), "_stringify");
-const stringify = /* @__PURE__ */ __name((...[params, options]) => isString(params) ? params : params ? _stringify(params, options) : "undefined", "stringify");
 const writeFile = buildTask({
   task: /* @__PURE__ */ __name(async ({ pathname, value }) => {
     writeFile$1({ pathname, value: stringify(value) });
@@ -2060,6 +1999,8 @@ const buildLint = buildTask({
     outDirname: fromDist()
   }), "task")
 });
+const fromStatic = /* @__PURE__ */ __name((...paths) => fromPackages("asset-static", ...paths), "fromStatic");
+const fromPublic = /* @__PURE__ */ __name((...paths) => fromStatic(PUBLIC_DIR, ...paths), "fromPublic");
 const LANGUAGES = [
   { id: "en", label: "English" },
   { id: "kr", label: "한국어" }
@@ -2264,7 +2205,7 @@ const generate = buildTask({
       const { onSuccess, outPathname, prepare } = generator?.[template] || {};
       const params = merge([{ onSuccess, outPathname }, prepare ? await prepare() : {}]);
       const files = await boilerplate({ ...params, template, templateDir: templateDir2 });
-      const { eteExtension, specExtension } = testConfig$2.params();
+      const { eteExtension, specExtension } = testConfig$1.params();
       const testFiles = files.filter(
         (v) => v.includes(eteExtension) || v.includes(specExtension) || v.includes("_test")
       );
@@ -2438,7 +2379,7 @@ uri({
 });
 uri({
   host: "app-web-static-67q4.onrender.com",
-  port: "8080"
+  port: process.env.SERVER_APP_STATIC_PORT ?? void 0
 });
 uri({
   host: "0.0.0.0",
@@ -2467,7 +2408,21 @@ const _UninitializedError = class _UninitializedError extends Error {
 };
 __name(_UninitializedError, "UninitializedError");
 let UninitializedError = _UninitializedError;
-const cleanObject = /* @__PURE__ */ __name((...[value, options, depth]) => cleanObject$1(value, options, depth), "cleanObject");
+const resolveObjectId = /* @__PURE__ */ __name((value) => isString(value) ? new ObjectId(value) : value, "resolveObjectId");
+const keyValueTransformer = /* @__PURE__ */ __name((v, k) => {
+  let vF = v;
+  vF?.entity && (vF = vF.entity);
+  return isArray(vF) ? vF.map((vv) => keyValueTransformer(vv)) : isPlainObject(vF) && isEqual$1(Object.keys(vF), ["_id"]) ? resolveObjectId(vF._id) : isString(vF) && last(k?.split("."))?.startsWith("_") ? resolveObjectId(vF) : vF;
+}, "keyValueTransformer");
+const cleanObject = /* @__PURE__ */ __name((...[value, options, depth]) => cleanObject$1(
+  value,
+  {
+    ...options,
+    keyValueTransformer,
+    primitiveTypes: [...options?.primitiveTypes ?? [], ObjectId]
+  },
+  depth
+), "cleanObject");
 const normalize = /* @__PURE__ */ __name((params) => {
   if (isNil(params)) return void 0;
   const result = params;
@@ -2747,6 +2702,7 @@ const databaseSeed = buildTask({
     return {};
   }, "task")
 });
+const LOG_MESSAGE_RESOURCE_NAME = "LogMessage";
 var LOG_MESSAGE_TYPE = /* @__PURE__ */ ((LOG_MESSAGE_TYPE2) => {
   LOG_MESSAGE_TYPE2["FAIL"] = "fail";
   LOG_MESSAGE_TYPE2["SUCCESS"] = "success";
@@ -2808,6 +2764,34 @@ const _websocketPlugin = /* @__PURE__ */ __name(async (server, { maxPayload }) =
   });
 }, "_websocketPlugin");
 const websocketPlugin = _websocketPlugin;
+const _cookiesPlugin = /* @__PURE__ */ __name(async (server, { secret }) => {
+  await server._app.register(fastifyCookie, { secret });
+}, "_cookiesPlugin");
+const cookiesPlugin = _cookiesPlugin;
+const _corsPlugin = /* @__PURE__ */ __name(async (server, { headers, origins }) => {
+  await server._app.register(cors, {
+    allowedHeaders: headers,
+    origin: origins
+  });
+}, "_corsPlugin");
+const corsPlugin = _corsPlugin;
+const serverConfig$1 = new Config({
+  params: /* @__PURE__ */ __name(() => {
+    const environment = _Container.get(Environment);
+    const port = environment.variables.PORT || environment.variables.APP_PORT || environment.variables.SERVER_APP_PORT;
+    return {
+      certificate: void 0,
+      entryPathname: fromWorking("src/index.ts"),
+      host: environment.variables.SERVER_APP_HOST ?? "",
+      plugins: [
+        [corsPlugin, { headers: ["*"], origins: ["*"] }],
+        [cookiesPlugin, { secret: environment.variables.SERVER_APP_SECRET }]
+      ],
+      port: toNumber(port),
+      publicDir: PUBLIC_DIR
+    };
+  }, "params")
+});
 const serverConfig = serverConfig$1.extend(() => {
   const environment = _Container.get(Environment);
   const port = environment.variables.PORT || environment.variables.APP_PORT || environment.variables.SERVER_APP_PORT;
@@ -2824,6 +2808,7 @@ const selfSignCertificates = buildTask({
     });
   }, "task")
 });
+const fromTemp = /* @__PURE__ */ __name((...paths) => fromRoot(TEMP_DIR, ...paths), "fromTemp");
 const _pubSub = /* @__PURE__ */ __name(({
   host,
   port,
@@ -2848,7 +2833,31 @@ const pubSubConfig$1 = new Config({
     timeout: 1e4
   }), "params")
 });
-const pubSubConfig = pubSubConfig$1.extend(() => ({}));
+const pubSubConfig = pubSubConfig$1.extend(() => {
+  const environment = _Container.get(Environment);
+  return {
+    command: /* @__PURE__ */ __name((config2) => {
+      let command = `nats-server -js`;
+      config2.retention && (command = `${command} -sd ${config2.retention.dirname}`);
+      config2.host && (command = `${command} -a ${config2.host}`);
+      config2.port && (command = `${command} -p ${config2.port}`);
+      return command;
+    }, "command"),
+    host: environment.variables.SERVER_PUBSUB_HOST,
+    port: environment.variables.SERVER_PUBSUB_PORT ? toNumber(environment.variables.SERVER_PUBSUB_PORT) : void 0,
+    retention: {
+      dirname: fromTemp("pubSub"),
+      maxAge: 60 * 60 * 1e3,
+      // 1 hour
+      maxRows: 1e3,
+      maxSize: 10 * 1e6,
+      // 10MB
+      nReplicas: 1,
+      name: LOG_MESSAGE_RESOURCE_NAME,
+      prefixes: [LOG_MESSAGE_RESOURCE_NAME]
+    }
+  };
+});
 const PUB_SUB_RUN = "pubSubRun";
 const pubSubRun = buildTask({
   name: PUB_SUB_RUN,
@@ -3136,7 +3145,12 @@ const containerBuild = buildTask({
   }, "task")
 });
 export {
-  bundleConfig$3 as b,
+  ASSETS_DIR as A,
+  Environment as E,
+  PLATFORM as P,
+  _Container as _,
+  fromPublic as a,
+  bundleConfig$1 as b,
   buildLint,
   buildTypescript,
   clientRun,
@@ -3145,6 +3159,7 @@ export {
   containerRun,
   databaseSeed,
   executeParallel,
+  filterNil as f,
   generate,
   internationalizeParse,
   lint,
@@ -3152,6 +3167,7 @@ export {
   nodeDev,
   pingTask,
   pubSubRun,
+  serverConfig$1 as s,
   selfSignCertificates,
   start,
   staticServer,

@@ -7,6 +7,7 @@ import last from "lodash/last.js";
 import { ObjectId as ObjectId$1 } from "mongodb";
 import trim from "lodash/trim.js";
 import trimStart from "lodash/trimStart.js";
+import debounceF from "lodash/debounce.js";
 import { injectable, Container } from "inversify";
 import { AsyncLocalStorage } from "async_hooks";
 import appRootPath from "app-root-path";
@@ -18,19 +19,26 @@ import uniq from "lodash/uniq.js";
 import cloneDeep from "lodash/cloneDeep.js";
 import { isMainThread } from "worker_threads";
 import pino from "pino";
-import isEqual$1 from "react-fast-compare";
+import closeWithGrace from "close-with-grace";
+import stringify$1 from "json-stringify-safe";
+import isEqual$1 from "lodash/isEqual.js";
+import isNil from "lodash/isNil.js";
+import isObject from "lodash/isObject.js";
+import omit from "lodash/omit.js";
+import pick from "lodash/pick.js";
+import zip from "lodash/zip.js";
 import get from "lodash/get.js";
 import intersection from "lodash/intersection.js";
 import isFunction from "lodash/isFunction.js";
 import some from "lodash/some.js";
 import { MikroORM } from "@mikro-orm/mongodb";
 import forEach from "lodash/forEach.js";
-import isNil from "lodash/isNil.js";
 import toString from "lodash/toString.js";
 import { readdirSync, statSync, readFileSync, existsSync } from "fs";
 import fsExtra from "fs-extra";
 import { config } from "dotenv";
-import mitt from "mitt";
+import toNumber from "lodash/toNumber.js";
+import { JSONCodec, connect, StorageType, RetentionPolicy, DeliverPolicy, AckPolicy } from "nats";
 import build from "pino-abstract-transport";
 import { nanoid } from "nanoid";
 import { TZDate, TZDateMini } from "@date-fns/tz";
@@ -174,7 +182,7 @@ uri({
 });
 uri({
   host: "app-web-static-67q4.onrender.com",
-  port: "8080"
+  port: process.env.SERVER_APP_STATIC_PORT ?? void 0
 });
 uri({
   host: "0.0.0.0",
@@ -214,9 +222,11 @@ const _UninitializedError = class _UninitializedError extends Error {
 };
 __name(_UninitializedError, "UninitializedError");
 let UninitializedError = _UninitializedError;
-const handleCleanup = /* @__PURE__ */ __name(async (params) => {
-  return;
-}, "handleCleanup");
+const debounce = /* @__PURE__ */ __name((...[callback, { duration = 0, isLeading = false } = {}]) => debounceF(
+  callback,
+  duration,
+  isLeading ? { leading: true, trailing: false } : { leading: false, trailing: true }
+), "debounce");
 const _withContainer = injectable;
 const _container = new Container({
   autobind: true,
@@ -295,6 +305,7 @@ const joinPaths = /* @__PURE__ */ __name((...[paths, options]) => {
 }, "joinPaths");
 const fromRoot = /* @__PURE__ */ __name((...paths) => joinPaths([getRoot(), ...paths]), "fromRoot");
 const BUILD_DIR = "__build__";
+const TEMP_DIR = "__temp__";
 const PACKAGE_PREFIXES = ["app", "service", "lib", "tool"];
 const fromBuild = /* @__PURE__ */ __name((...paths) => fromRoot(BUILD_DIR, ...paths), "fromBuild");
 const _logging = /* @__PURE__ */ __name(({
@@ -450,6 +461,24 @@ const _Logger2 = class _Logger2 extends _Logger {
 __name(_Logger2, "Logger");
 let Logger = _Logger2;
 const logger = new Logger();
+let instance = null;
+const _handleCleanup = /* @__PURE__ */ __name(async ({
+  onCleanUp
+}) => {
+  instance?.uninstall();
+  const handleCleanup2 = debounce(async () => {
+    logger.debug("cleaning up...");
+    await onCleanUp?.();
+  });
+  instance = closeWithGrace({ delay: 1e3 }, async ({ err, signal }) => {
+    logger.debug(`shutting down due to ${signal} ${err}`);
+    if (err) {
+      logger.trace(err);
+    }
+    await handleCleanup2();
+  });
+}, "_handleCleanup");
+const handleCleanup = /* @__PURE__ */ __name(async (params) => _handleCleanup(params), "handleCleanup");
 const _Bootstrappable = class _Bootstrappable {
   constructor() {
     this._isInitialized = false;
@@ -467,7 +496,7 @@ const _Bootstrappable = class _Bootstrappable {
       return;
     } else {
       logger.info(`${this.constructor.name} initializing...`);
-      await handleCleanup();
+      await handleCleanup({ onCleanUp: /* @__PURE__ */ __name(async () => this.cleanUp(), "onCleanUp") });
       try {
         this._isInitialized = true;
         await this.onInitialize();
@@ -488,7 +517,37 @@ const _Bootstrappable = class _Bootstrappable {
 __name(_Bootstrappable, "Bootstrappable");
 let Bootstrappable = _Bootstrappable;
 const IGNORE_OBJECT_KEYS = ["owner"];
-const _isEqual = /* @__PURE__ */ __name((x, y) => isEqual$1(x, y), "_isEqual");
+const _stringify = /* @__PURE__ */ __name((...[params, options]) => options?.isMinify ?? false ? stringify$1(params) : stringify$1(params, null, "  "), "_stringify");
+const stringify = /* @__PURE__ */ __name((...[params, options]) => isString(params) ? params : params ? _stringify(params, options) : "undefined", "stringify");
+const _isEqual = /* @__PURE__ */ __name((...[x, y, options]) => {
+  if (options) {
+    let [xF, yF] = [
+      isNil(x) ? x : JSON.parse(JSON.stringify(x)),
+      isNil(y) ? y : JSON.parse(JSON.stringify(y))
+    ];
+    let result = false;
+    if (isObject(xF) && isObject(yF)) {
+      options.include && ([xF, yF] = [pick(xF, options.include), pick(yF, options.include)]);
+      options.exclude && ([xF, yF] = [omit(xF, options.exclude), omit(yF, options.exclude)]);
+      result = _isEqual(Object.keys(xF).sort(), Object.keys(yF).sort()) && Object.keys(xF).every(
+        (k) => _isEqual(
+          xF[k],
+          yF[k],
+          options
+        )
+      );
+    } else if (isArray$1(xF) && isArray$1(yF)) {
+      result = xF.length === yF.length && zip(xF.sort(), yF.sort()).every(
+        (v) => _isEqual(v[0], v[1], options)
+      );
+    } else {
+      result = isEqual$1(xF, yF);
+    }
+    !result && (options.isVerbose || false) && logger.debug(`expected: ${stringify(xF)} vs. received: ${stringify(yF)}`);
+    return result;
+  }
+  return isEqual$1(x, y);
+}, "_isEqual");
 const isEqual = /* @__PURE__ */ __name((...params) => _isEqual(...params), "isEqual");
 const isEmpty = /* @__PURE__ */ __name((value) => value === "" || value === null || value === void 0 || isEqual(value, []) || !(value instanceof RegExp) && JSON.stringify(value) === "{}", "isEmpty");
 const isPrimitive = /* @__PURE__ */ __name((params) => params !== Object(params) || params instanceof String || params instanceof Date, "isPrimitive");
@@ -535,7 +594,21 @@ const cleanObject$1 = /* @__PURE__ */ __name((...[value, options, depth = 0]) =>
   }
   return value;
 }, "cleanObject$1");
-const cleanObject = /* @__PURE__ */ __name((...[value, options, depth]) => cleanObject$1(value, options, depth), "cleanObject");
+const resolveObjectId = /* @__PURE__ */ __name((value) => isString(value) ? new ObjectId(value) : value, "resolveObjectId");
+const keyValueTransformer = /* @__PURE__ */ __name((v, k) => {
+  let vF = v;
+  vF?.entity && (vF = vF.entity);
+  return isArray(vF) ? vF.map((vv) => keyValueTransformer(vv)) : isPlainObject(vF) && isEqual$1(Object.keys(vF), ["_id"]) ? resolveObjectId(vF._id) : isString(vF) && last(k?.split("."))?.startsWith("_") ? resolveObjectId(vF) : vF;
+}, "keyValueTransformer");
+const cleanObject = /* @__PURE__ */ __name((...[value, options, depth]) => cleanObject$1(
+  value,
+  {
+    ...options,
+    keyValueTransformer,
+    primitiveTypes: [...options?.primitiveTypes ?? [], ObjectId]
+  },
+  depth
+), "cleanObject");
 const normalize = /* @__PURE__ */ __name((params) => {
   if (isNil(params)) return void 0;
   const result = params;
@@ -876,22 +949,37 @@ let Environment = (_b = class extends Bootstrappable {
     Object.assign(process.env, this.variables);
     _Container.set(Environment, this);
   }
+  reset() {
+    this.keys?.forEach((key) => {
+      delete process.env[key];
+    });
+  }
 }, __name(_b, "Environment"), _b);
 Environment = __decorateClass$1([
   withContainer()
 ], Environment);
 const withEnvironment = /* @__PURE__ */ __name(async (...[params, fn]) => {
   const current = _Container.get(Environment);
-  const environment = new Environment({
-    environment: params.environment ?? "production"
+  const currentEnv = {
+    app: current.app,
+    environment: current.environment ?? "production",
+    overrrides: { ...current.overrrides }
+  };
+  current.reset();
+  let environment = new Environment({
+    app: params.app,
+    environment: params.environment ?? "production",
+    overrrides: params.overrrides
   });
   await environment.initialize();
-  _Container.set(Environment, environment);
   const result = await fn();
-  await current.initialize();
-  _Container.set(Environment, current);
+  environment.reset();
+  environment = new Environment(currentEnv);
+  await environment.initialize();
+  _Container.set(Environment, environment);
   return result;
 }, "withEnvironment");
+const fromTemp = /* @__PURE__ */ __name((...paths) => fromRoot(TEMP_DIR, ...paths), "fromTemp");
 const _pubSub = /* @__PURE__ */ __name(({
   host,
   port,
@@ -916,74 +1004,132 @@ const pubSubConfig$1 = new Config({
     timeout: 1e4
   }), "params")
 });
-const pubSubConfig = pubSubConfig$1.extend(() => ({}));
-const _AsyncQueue = class _AsyncQueue {
-  constructor() {
-    this._isDone = false;
-    this._queue = [];
-    this._resolvers = [];
-  }
-  [Symbol.asyncIterator]() {
-    return this;
-  }
-  async next() {
-    if (this._queue.length) {
-      return { done: false, value: this._queue.shift() };
+const LOG_MESSAGE_RESOURCE_NAME = "LogMessage";
+const pubSubConfig = pubSubConfig$1.extend(() => {
+  const environment = _Container.get(Environment);
+  return {
+    command: /* @__PURE__ */ __name((config2) => {
+      let command = `nats-server -js`;
+      config2.retention && (command = `${command} -sd ${config2.retention.dirname}`);
+      config2.host && (command = `${command} -a ${config2.host}`);
+      config2.port && (command = `${command} -p ${config2.port}`);
+      return command;
+    }, "command"),
+    host: environment.variables.SERVER_PUBSUB_HOST,
+    port: environment.variables.SERVER_PUBSUB_PORT ? toNumber(environment.variables.SERVER_PUBSUB_PORT) : void 0,
+    retention: {
+      dirname: fromTemp("pubSub"),
+      maxAge: 60 * 60 * 1e3,
+      // 1 hour
+      maxRows: 1e3,
+      maxSize: 10 * 1e6,
+      // 10MB
+      nReplicas: 1,
+      name: LOG_MESSAGE_RESOURCE_NAME,
+      prefixes: [LOG_MESSAGE_RESOURCE_NAME]
     }
-    if (this._isDone) {
-      return { done: true, value: void 0 };
-    }
-    return new Promise((resolve) => {
-      this._resolvers.push(resolve);
-    });
-  }
-  push(value) {
-    if (this._isDone) return;
-    if (this._resolvers.length) {
-      this._resolvers.shift()({ done: false, value });
-    } else {
-      this._queue.push(value);
-    }
-  }
-  async return() {
-    this.stop();
-    return { done: true, value: void 0 };
-  }
-  stop() {
-    this._isDone = true;
-    for (const resolve of this._resolvers) {
-      resolve({ done: true, value: void 0 });
-    }
-    this._resolvers = [];
-  }
-};
-__name(_AsyncQueue, "AsyncQueue");
-let AsyncQueue = _AsyncQueue;
+  };
+});
 const __PubSub = class __PubSub extends Bootstrappable {
   constructor(params) {
     super();
-    this.emitter = mitt();
+    this._codec = JSONCodec();
+    this._config = params;
+    this._subscriptions = /* @__PURE__ */ new Map();
+  }
+  isRetention(topic) {
+    const { prefixes } = this._config.retention ?? {};
+    return !!(prefixes && prefixes.some((v) => topic.startsWith(v)));
   }
   async onCleanUp() {
-    this.emitter.all.clear();
+    await this._client.close();
+    await this._client.closed();
+  }
+  async onInitialize() {
+    this._client = await connect(_pubSub(this._config));
+    if (this._config.retention) {
+      const js = await this._client.jetstreamManager();
+      const { maxAge, maxRows, maxSize, nReplicas, name, prefixes } = this._config.retention;
+      const subjects = prefixes.map((v) => `${v}.*`);
+      try {
+        const info = await js.streams.info(name);
+        await js.streams.update(name, {
+          ...info.config,
+          subjects
+        });
+      } catch (error) {
+        if (error.code === "404") {
+          await js.streams.add({
+            max_age: maxAge * 1e6,
+            max_bytes: maxSize,
+            max_msgs: maxRows,
+            name,
+            num_replicas: nReplicas,
+            retention: RetentionPolicy.Limits,
+            storage: StorageType.File,
+            subjects
+          });
+        } else {
+          throw error;
+        }
+      }
+    }
   }
   async publish(topic, data, id) {
     const topicF = filterNil([topic, ...id ?? []]).join(".");
-    data && this.emitter.emit(topicF, data);
+    try {
+      if (this.isRetention(topicF)) {
+        const js = this._client.jetstream();
+        await js.publish(topicF, this._codec.encode(data));
+      } else {
+        this._client.publish(topicF, this._codec.encode(data));
+      }
+    } catch (e) {
+      logger.error(e);
+    }
   }
   async subscribe(topic, id) {
     const topicF = filterNil([topic, ...id ?? []]).join(".");
-    const queue = new AsyncQueue();
-    const handler = /* @__PURE__ */ __name((payload) => {
-      queue.push(payload);
-    }, "handler");
-    this.emitter.on(topicF, handler);
-    queue.return = async () => {
-      this.emitter.off(topicF, handler);
-      queue.stop();
-      return { done: true, value: void 0 };
-    };
-    return queue;
+    const codec = this._codec;
+    if (this._config.retention && this.isRetention(topicF)) {
+      const js = this._client.jetstream();
+      const jsm = await js.jetstreamManager();
+      const { name } = this._config.retention;
+      const consumer = await jsm.consumers.add(name, {
+        ack_policy: AckPolicy.Explicit,
+        deliver_policy: DeliverPolicy.All,
+        durable_name: void 0,
+        filter_subject: topicF
+      });
+      if (consumer) {
+        const handle = await js?.consumers.get(name, consumer.name);
+        const subscription = await handle?.consume();
+        if (subscription) {
+          return (async function* () {
+            for await (const v of subscription) {
+              try {
+                yield codec.decode(v.data);
+                v.ack();
+              } catch {
+                v.term();
+              }
+            }
+          })();
+        }
+      }
+      throw new NotFoundError(name);
+    } else {
+      const subscription = this._client.subscribe(topicF);
+      return (async function* () {
+        try {
+          for await (const v of subscription) {
+            yield codec.decode(v.data);
+          }
+        } finally {
+          subscription.unsubscribe();
+        }
+      })();
+    }
   }
 };
 __name(__PubSub, "_PubSub");
@@ -1059,7 +1205,6 @@ const _Transport2 = class _Transport2 extends _Transport {
 };
 __name(_Transport2, "Transport");
 let Transport = _Transport2;
-const LOG_MESSAGE_RESOURCE_NAME = "LogMessage";
 const _uid = /* @__PURE__ */ __name((prefix) => `${""}${nanoid()}`, "_uid");
 const uid = /* @__PURE__ */ __name((params) => _uid(), "uid");
 const TIMEZONE_DEFAULT = "America/New_York";

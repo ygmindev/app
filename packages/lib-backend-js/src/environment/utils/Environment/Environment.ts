@@ -76,4 +76,10 @@ export class Environment extends Bootstrappable implements EnvironmentModel {
     Object.assign(process.env, this.variables);
     Container.set(Environment, this);
   }
+
+  reset(): void {
+    this.keys?.forEach((key) => {
+      delete process.env[key];
+    });
+  }
 }
