@@ -144,7 +144,7 @@ export class Cli extends Bootstrappable implements CliModel {
     const context: ExecutionContextModel = {
       app: args.app,
       environment,
-      overrrides: { APP_NAME: process.env.NODE_ENV ?? appName },
+      overrrides: { APP_NAME: appName },
       queue,
       root,
     };

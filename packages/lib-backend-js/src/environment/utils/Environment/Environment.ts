@@ -13,13 +13,14 @@ import { StringKeyModel } from '@lib/shared/core/core.models';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { config } from 'dotenv';
 import { existsSync } from 'fs';
 
 @withContainer()
 export class Environment extends Bootstrappable implements EnvironmentModel {
   public app?: string;
-  public environment?: string;
+  public environment?: ENVIRONMENT;
   public keys: Array<StringKeyModel<EnvironmentConfigModel>> = [];
   public overrrides?: Partial<EnvironmentConfigModel>;
   public variables: Partial<EnvironmentConfigModel> = { ...process.env };
