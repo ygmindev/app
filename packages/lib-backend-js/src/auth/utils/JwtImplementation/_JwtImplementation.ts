@@ -9,7 +9,7 @@ import { AuthTokenError } from '@lib/shared/auth/errors/AuthTokenError/AuthToken
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { pick } from '@lib/shared/core/utils/pick/pick';
-import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
+import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { type AuthError } from 'firebase/auth';
 import admin from 'firebase-admin';
 
@@ -45,7 +45,7 @@ export class _JwtImplementation implements _JwtImplementationModel {
         case 'auth/id-token-expired':
           throw new AuthTokenError();
         case 'auth/argument-error':
-          throw new OfflineError();
+          throw new HttpError();
         default:
           throw e;
       }

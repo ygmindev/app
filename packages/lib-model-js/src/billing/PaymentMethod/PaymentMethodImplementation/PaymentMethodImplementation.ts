@@ -7,6 +7,7 @@ import { BankImplementation } from '@lib/model/billing/Bank/BankImplementation/B
 import { type BankImplementationModel } from '@lib/model/billing/Bank/BankImplementation/BankImplementation.models.js';
 import { CardImplementation } from '@lib/model/billing/Card/CardImplementation/CardImplementation';
 import { type CardImplementationModel } from '@lib/model/billing/Card/CardImplementation/CardImplementation.models';
+import { type PaymentInputModel } from '@lib/model/billing/PaymentInput/PaymentInput.models';
 import {
   PAYMENT_METHOD_TYPE,
   type PaymentMethodModel,
@@ -22,7 +23,6 @@ import { LinkedUserImplementation } from '@lib/model/user/LinkedUser/LinkedUserI
 import { type LinkedUserImplementationModel } from '@lib/model/user/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';
 import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { type ChargeModel } from '@lib/shared/billing/billing.models';
-import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
 import { PartialArrayModel, type StringKeyModel } from '@lib/shared/core/core.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';

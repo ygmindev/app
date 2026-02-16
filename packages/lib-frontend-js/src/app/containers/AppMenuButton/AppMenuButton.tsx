@@ -79,6 +79,7 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({
       options={optionsF}
       ref={menuRef}
       testID={APP_MENU_BUTTON_TEST_ID}
+      title={currentUser?.email}
     />
   );
 };

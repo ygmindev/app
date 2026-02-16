@@ -3,6 +3,7 @@ import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import { type UseSignInResourceModel } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
+import { toGraphqlParamsFields } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { USER_RESOURCE_PARAMS } from '@lib/frontend/user/resources/User/User.constants';
@@ -22,9 +23,7 @@ import { type PartialModel } from '@lib/shared/core/core.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 
-const USER_FIELDS = USER_RESOURCE_PARAMS.fields.map(({ fields, id }) =>
-  fields ? { [id]: fields.map((v) => v.id) } : id,
-);
+const USER_FIELDS = toGraphqlParamsFields(USER_RESOURCE_PARAMS.fields);
 
 export const useSignInResource = (): UseSignInResourceModel => {
   const [currentUser, currentUserSet] = useStore('user.currentUser');

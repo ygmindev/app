@@ -18,6 +18,7 @@ import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useValueControlled } from '@lib/frontend/data/hooks/useValueControlled/useValueControlled';
 import { CountryInput } from '@lib/frontend/locale/components/CountryInput/CountryInput';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
+import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter.base';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { PhoneInput } from '@lib/frontend/user/components/PhoneInput/PhoneInput';
@@ -35,6 +36,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
   onMethodChange,
   onSubmit,
   onSuccess,
+  redirect,
   ...props
 }) => {
   const { t } = useTranslation([AUTH]);
@@ -46,12 +48,13 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
     value: method,
   });
   const [currentUser] = useStore('user.currentUser');
+  const { push, replace } = useRouter();
   const { google } = useOAuth();
 
   const isCheckExists = mode === FORM_MODE.UPDATE;
 
   const handleSubmit = async (data: UsernameFormModel): Promise<void> => {
-    onSubmit && (await onSubmit(data));
+    await onSubmit?.(data);
     const form: OtpFormModel = pick(data, ['callingCode', 'phone', 'email']);
     if (isCheckExists) {
       form.isCheckExists = true;
@@ -86,6 +89,11 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
         return [];
     }
   }, [valueControlled]);
+
+  const handleOAuth = async (): Promise<void> => {
+    await google.signIn();
+    redirect && replace(redirect);
+  };
 
   return (
     <FormContainer
@@ -124,7 +132,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
 
                   <Button
                     imageSrc="assets/images/brands/google.svg"
-                    onPress={google.signIn}
+                    onPress={handleOAuth}
                     type={BUTTON_TYPE.TRANSPARENT}>
                     {t('core:continueWith', { value: t('external:google') })}
                   </Button>

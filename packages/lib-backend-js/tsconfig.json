@@ -1,4 +1,4 @@
 {
     "extends": "../../tsconfig.json",
-    "include": ["../lib-config-js/src/node/typescript/types/index.d.ts", "src/**/*", "tests/**/*", "*.ts", "*.js"]
+    "include": ["../lib-config-js/src/node/typescript/types/index.d.ts", "src/**/*", "tests/**/*", "*.ts", "*.js", "../lib-model-js/src/commerce/PaymentInput"]
 }

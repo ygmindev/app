@@ -49,6 +49,7 @@ export const SignInForm: LFCModel<SignInFormPropsModel> = ({
             <UsernameForm
               method={method}
               mode={mode}
+              redirect={location.params?.redirect ?? { pathname: '' }}
             />
           ),
           id: 'username',

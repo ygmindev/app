@@ -2,6 +2,7 @@ import { JwtImplementation } from '@lib/backend/auth/utils/JwtImplementation/Jwt
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { objectToEquality } from '@lib/backend/resource/utils/objectToEquality/objectToEquality';
 import { RequestContextModel } from '@lib/config/api/api.models';
+import { ACCESS_RESOURCE_NAME } from '@lib/model/auth/Access/Access.constants';
 import { OtpImplementation } from '@lib/model/auth/Otp/OtpImplementation/OtpImplementation';
 import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignIn.constants';
 import { type SignInModel } from '@lib/model/auth/SignIn/SignIn.models';
@@ -50,6 +51,7 @@ export class SignInImplementation implements SignInImplementationModel {
     await this.otpImplementation.verify({ ...inputF, otp });
     let { result: user } = await this.userImplementation.get({
       filter: objectToEquality(inputF),
+      options: { populate: [ACCESS_RESOURCE_NAME] },
     });
     let isNew;
     if (!user) {

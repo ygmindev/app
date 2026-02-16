@@ -1,4 +1,3 @@
-import { PaymentInput } from '@lib/backend/billing/utils/PaymentInput/PaymentInput';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
@@ -7,6 +6,8 @@ import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
 import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
 import { RequestContextModel } from '@lib/config/api/api.models';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
+import { PaymentInput } from '@lib/model/billing/PaymentInput/PaymentInput';
+import { type PaymentInputModel } from '@lib/model/billing/PaymentInput/PaymentInput.models';
 import { PaymentMethod } from '@lib/model/billing/PaymentMethod/PaymentMethod';
 import {
   CREATE_TOKEN,
@@ -18,7 +19,6 @@ import { PaymentMethodImplementation } from '@lib/model/billing/PaymentMethod/Pa
 import { PaymentMethodImplementationModel } from '@lib/model/billing/PaymentMethod/PaymentMethodImplementation/PaymentMethodImplementation.models';
 import { type PaymentMethodResolverModel } from '@lib/model/billing/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver.models';
 import { IdInputModel } from '@lib/model/resource/IdInput/IdInput.models';
-import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
 import { DATA_TYPE } from '@lib/shared/data/data.constants';

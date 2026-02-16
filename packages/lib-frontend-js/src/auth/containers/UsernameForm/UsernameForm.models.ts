@@ -3,6 +3,7 @@ import {
   type SignInFormModel,
 } from '@lib/frontend/auth/containers/OtpForm/OtpForm.models';
 import { type FormStepPropsModel } from '@lib/frontend/data/components/StepForm/StepForm.models';
+import { type LocationModel } from '@lib/frontend/route/route.models';
 import { type SIGN_IN_METHOD } from '@lib/shared/auth/auth.constants';
 import { type FORM_MODE } from '@lib/shared/data/data.constants';
 
@@ -15,5 +16,6 @@ export type UsernameFormPropsModel = FormStepPropsModel<
 > & {
   method?: SIGN_IN_METHOD;
   mode?: FORM_MODE;
+  redirect?: LocationModel<unknown>;
   onMethodChange?(value: SIGN_IN_METHOD): void;
 };

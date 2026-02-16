@@ -1,6 +1,8 @@
 import { type UsePaymentMethodResourceModel } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource.models';
 import { PAYMENT_METHOD_RESOURCE_PARAMS } from '@lib/frontend/billing/resources/PaymentMethod/PaymentMethod.constants';
 import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
+import { PAYMENT_INPUT } from '@lib/model/billing/PaymentInput/PaymentInput.constants';
+import { type PaymentInputModel } from '@lib/model/billing/PaymentInput/PaymentInput.models';
 import {
   CREATE_TOKEN,
   PAYMENT_METHOD_GET_ALL,
@@ -9,8 +11,6 @@ import {
 import { type PaymentMethodModel } from '@lib/model/billing/PaymentMethod/PaymentMethod.models';
 import { ID_INPUT } from '@lib/model/resource/IdInput/IdInput.constants';
 import { type IdInputModel } from '@lib/model/resource/IdInput/IdInput.models';
-import { PAYMENT_INPUT } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.constants';
-import { type PaymentInputModel } from '@lib/shared/billing/utils/PaymentInput/PaymentInput.models';
 import { type PartialArrayModel } from '@lib/shared/core/core.models';
 
 export const usePaymentMethodResource = (): UsePaymentMethodResourceModel => {

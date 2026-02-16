@@ -8,7 +8,10 @@ import { type UserModel } from '@lib/model/user/User/User.models';
 export const USER_RESOURCE_PARAMS = {
   fields: [
     { id: '_id', isHidden: true },
-    { fields: [{ id: ROLE_RESOURCE_NAME }, { id: GROUP_RESOURCE_NAME }], id: ACCESS_RESOURCE_NAME },
+    {
+      fields: [{ id: ROLE_RESOURCE_NAME }, { fields: [{ id: 'name' }], id: GROUP_RESOURCE_NAME }],
+      id: ACCESS_RESOURCE_NAME,
+    },
     { id: 'email', width: 300 },
     { id: 'first', width: 300 },
     { id: 'last' },

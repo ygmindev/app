@@ -65,6 +65,7 @@ surya-ocr = "^0.15.2"
 streamlit = "^1.47.1"
 pdftext = "^0.6.3"
 click = "8.1.8"
+fastapi = {extras = ["standard"], version = "^0.129.0"}
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
