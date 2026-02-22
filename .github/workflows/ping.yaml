@@ -1,5 +1,5 @@
 jobs:
-  "python packages/service-server-py/src/ping.py ":
+  ping:
     runs-on: ubuntu-latest
     steps:
       - name: sign in
