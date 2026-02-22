@@ -2,6 +2,10 @@ export type _JobConfigModel = Array<{
   jobs: Record<
     string,
     {
+      permissions: {
+        contents: 'read';
+        packages: 'read';
+      };
       'runs-on': string;
       steps: Array<{
         name: string;

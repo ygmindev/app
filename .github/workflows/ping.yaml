@@ -1,5 +1,8 @@
 jobs:
   ping:
+    permissions:
+      contents: read
+      packages: read
     runs-on: ubuntu-latest
     steps:
       - name: sign in
@@ -9,55 +12,8 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
       - name: run ping
-        run: "docker run -e NVM_INC=${{ secrets.NVM_INC }} -e TERM_PROGRAM=${{
-          secrets.TERM_PROGRAM }} -e NODE=${{ secrets.NODE }} -e
-          NVM_CD_FLAGS=${{ secrets.NVM_CD_FLAGS }} -e INIT_CWD=${{
-          secrets.INIT_CWD }} -e WARP_HONOR_PS1=${{ secrets.WARP_HONOR_PS1 }} -e
-          TERM=${{ secrets.TERM }} -e SHELL=${{ secrets.SHELL }} -e
-          HOMEBREW_REPOSITORY=${{ secrets.HOMEBREW_REPOSITORY }} -e TMPDIR=${{
-          secrets.TMPDIR }} -e npm_config_global_prefix=${{
-          secrets.npm_config_global_prefix }} -e TERM_PROGRAM_VERSION=${{
-          secrets.TERM_PROGRAM_VERSION }} -e npm_config_node_likner=${{
-          secrets.npm_config_node_likner }} -e COLOR=${{ secrets.COLOR }} -e
-          npm_config_noproxy=${{ secrets.npm_config_noproxy }} -e PNPM_HOME=${{
-          secrets.PNPM_HOME }} -e npm_config_local_prefix=${{
-          secrets.npm_config_local_prefix }} -e NVM_DIR=${{ secrets.NVM_DIR }}
-          -e USER=${{ secrets.USER }} -e COMMAND_MODE=${{ secrets.COMMAND_MODE
-          }} -e npm_config_globalconfig=${{ secrets.npm_config_globalconfig }}
-          -e SSH_AUTH_SOCK=${{ secrets.SSH_AUTH_SOCK }} -e
-          __CF_USER_TEXT_ENCODING=${{ secrets.__CF_USER_TEXT_ENCODING }} -e
-          WARP_IS_LOCAL_SHELL_SESSION=${{ secrets.WARP_IS_LOCAL_SHELL_SESSION }}
-          -e npm_execpath=${{ secrets.npm_execpath }} -e
-          WARP_USE_SSH_WRAPPER=${{ secrets.WARP_USE_SSH_WRAPPER }} -e PATH=${{
-          secrets.PATH }} -e LaunchInstanceID=${{ secrets.LaunchInstanceID }} -e
-          npm_package_json=${{ secrets.npm_package_json }} -e
-          __CFBundleIdentifier=${{ secrets.__CFBundleIdentifier }} -e
-          npm_config_init_module=${{ secrets.npm_config_init_module }} -e
-          npm_config_userconfig=${{ secrets.npm_config_userconfig }} -e PWD=${{
-          secrets.PWD }} -e npm_command=${{ secrets.npm_command }} -e
-          npm_package_bin_run=${{ secrets.npm_package_bin_run }} -e EDITOR=${{
-          secrets.EDITOR }} -e npm_lifecycle_event=${{
-          secrets.npm_lifecycle_event }} -e LANG=${{ secrets.LANG }} -e
-          npm_package_name=${{ secrets.npm_package_name }} -e NODE_PATH=${{
-          secrets.NODE_PATH }} -e XPC_FLAGS=${{ secrets.XPC_FLAGS }} -e
-          npm_config_npm_version=${{ secrets.npm_config_npm_version }} -e
-          npm_config_node_gyp=${{ secrets.npm_config_node_gyp }} -e
-          XPC_SERVICE_NAME=${{ secrets.XPC_SERVICE_NAME }} -e
-          npm_package_version=${{ secrets.npm_package_version }} -e SHLVL=${{
-          secrets.SHLVL }} -e HOME=${{ secrets.HOME }} -e HOMEBREW_PREFIX=${{
-          secrets.HOMEBREW_PREFIX }} -e LOGNAME=${{ secrets.LOGNAME }} -e
-          npm_config_cache=${{ secrets.npm_config_cache }} -e
-          npm_lifecycle_script=${{ secrets.npm_lifecycle_script }} -e
-          SSH_SOCKET_DIR=${{ secrets.SSH_SOCKET_DIR }} -e NVM_BIN=${{
-          secrets.NVM_BIN }} -e npm_config_user_agent=${{
-          secrets.npm_config_user_agent }} -e INFOPATH=${{ secrets.INFOPATH }}
-          -e HOMEBREW_CELLAR=${{ secrets.HOMEBREW_CELLAR }} -e
-          CONDA_CHANGEPS1=${{ secrets.CONDA_CHANGEPS1 }} -e
-          SECURITYSESSIONID=${{ secrets.SECURITYSESSIONID }} -e COLORTERM=${{
-          secrets.COLORTERM }} -e npm_config_prefix=${{
-          secrets.npm_config_prefix }} -e npm_node_execpath=${{
-          secrets.npm_node_execpath }} -e ENV_PLATFORM=${{ secrets.ENV_PLATFORM
-          }} -e SERVER_APP_PYTHON_PORT=${{ secrets.SERVER_APP_PYTHON_PORT }} -e
+        run: "docker run -e ENV_PLATFORM=${{ secrets.ENV_PLATFORM }} -e
+          SERVER_APP_PYTHON_PORT=${{ secrets.SERVER_APP_PYTHON_PORT }} -e
           APP_AMPLITUDE_API_KEY=${{ secrets.APP_AMPLITUDE_API_KEY }} -e
           APP_FIREBASE_API_KEY=${{ secrets.APP_FIREBASE_API_KEY }} -e
           APP_FIREBASE_APP_ID=${{ secrets.APP_FIREBASE_APP_ID }} -e
@@ -120,9 +76,8 @@ jobs:
           secrets.SERVER_APP_WEBSOCKET_PORT }} -e SERVER_PUBSUB_HOST=${{
           secrets.SERVER_PUBSUB_HOST }} -e SERVER_APP_PYTHON_HOST=${{
           secrets.SERVER_APP_PYTHON_HOST }} -e SERVER_DB_MONGO_NAME=${{
-          secrets.SERVER_DB_MONGO_NAME }} -e PKG_NAME=${{ secrets.PKG_NAME }} -e
-          NODE_ENV=${{ secrets.NODE_ENV }} --rm ghcr.io/ygmindev/app python
-          packages/service-server-py/src/ping.py "
+          secrets.SERVER_DB_MONGO_NAME }} --rm ghcr.io/ygmindev/app python
+          /app/packages/service-server-py/src/ping.py "
 name: ping
 on:
   schedule:

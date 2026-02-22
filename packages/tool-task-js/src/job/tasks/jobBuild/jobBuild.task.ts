@@ -38,7 +38,7 @@ export const jobBuild = buildTask<JobBuildParamsModel, JobBuildModel>({
 
     const environment = Container.get(Environment);
     await Promise.all(
-      jobConfig.config({ env: Object.keys(environment.variables) }).map((job) =>
+      jobConfig.config({ env: environment.keys }).map((job) =>
         writeFile({
           pathname: joinPaths([outPathname, `${slug(job.name)}.yaml`]),
           value: yamlBuild(job),

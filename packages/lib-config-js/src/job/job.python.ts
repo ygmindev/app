@@ -8,7 +8,7 @@ export const jobConfig = configBase.extend(() => ({
 
   jobs: [
     {
-      command: 'python packages/service-server-py/src/ping.py ',
+      command: 'python /app/packages/service-server-py/src/ping.py ',
       name: PING,
       schedule: { freq: FREQUENCY.DAILY },
     },

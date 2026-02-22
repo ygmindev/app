@@ -7,7 +7,13 @@ export const _job = ({ container, env, jobs }: JobConfigModel): _JobConfigModel 
   jobs.map(({ command, name, schedule }) => ({
     jobs: {
       [name]: {
+        permissions: {
+          contents: 'read',
+          packages: 'read',
+        },
+
         'runs-on': 'ubuntu-latest',
+
         steps: filterNil([
           container && {
             name: 'sign in',
