@@ -1,3 +1,10 @@
-**/.venv
 **/__build__
+**/__pycache__
+**/.git
+**/.ipynb_checkpoints
+**/.pytest_cache
+**/.venv
+**/*.joblib
+**/*.pkl
+**/*.pyc
 **/node_modules

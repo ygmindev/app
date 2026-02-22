@@ -155,7 +155,7 @@ const packageInfo = /* @__PURE__ */ __name((dirname) => {
   const from = dirname ?? fromWorking();
   return JSON.parse(readFileSync(joinPaths([from, "package.json"])).toString());
 }, "packageInfo");
-const appPrompt = /* @__PURE__ */ __name((params) => {
+const appPrompt = /* @__PURE__ */ __name(({ defaultApp } = {}) => {
   const options = filterNil(
     children(fromPackages()).map((v) => {
       try {
@@ -166,7 +166,7 @@ const appPrompt = /* @__PURE__ */ __name((params) => {
       }
     })
   );
-  return { key: "app", options };
+  return { defaultValue: defaultApp ? [defaultApp] : void 0, key: "app", options };
 }, "appPrompt");
 const SERVER_BUILD = "serverBuild";
 const serverPublish$1 = {

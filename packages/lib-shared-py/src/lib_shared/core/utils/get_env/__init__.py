@@ -16,13 +16,21 @@ CastTypeModel = Union[Type[TType], Callable[[str], TType]]
 
 @overload
 def get_env(
-    key: str, *, cast: Type[str], default: Optional[str] = None, required: bool = False
+    key: str,
+    *,
+    cast: Type[str],
+    default: Optional[str] = None,
+    required: bool = False,
 ) -> Optional[str]: ...
 
 
 @overload
 def get_env(
-    key: str, *, cast: Type[int], default: Optional[int] = None, required: bool = False
+    key: str,
+    *,
+    cast: Type[int],
+    default: Optional[int] = None,
+    required: bool = False,
 ) -> Optional[int]: ...
 
 
@@ -48,7 +56,10 @@ def get_env(
 
 @overload
 def get_env(
-    key: str, *, default: Optional[str] = None, required: bool = False
+    key: str,
+    *,
+    default: Optional[str] = None,
+    required: bool = False,
 ) -> Optional[str]: ...
 
 

@@ -626,7 +626,7 @@ var PLATFORM = /* @__PURE__ */ ((PLATFORM2) => {
   PLATFORM2["WEB"] = "web";
   return PLATFORM2;
 })(PLATFORM || {});
-const appPrompt = /* @__PURE__ */ __name((params) => {
+const appPrompt = /* @__PURE__ */ __name(({ defaultApp } = {}) => {
   const options = filterNil(
     children(fromPackages()).map((v) => {
       try {
@@ -637,7 +637,7 @@ const appPrompt = /* @__PURE__ */ __name((params) => {
       }
     })
   );
-  return { key: "app", options };
+  return { defaultValue: defaultApp ? [defaultApp] : void 0, key: "app", options };
 }, "appPrompt");
 const withEnvironment = /* @__PURE__ */ __name(async (...[params, fn]) => {
   const current = _Container.get(Environment);
@@ -660,6 +660,16 @@ const withEnvironment = /* @__PURE__ */ __name(async (...[params, fn]) => {
   _Container.set(Environment, environment);
   return result;
 }, "withEnvironment");
+const fileInfo = /* @__PURE__ */ __name((params) => {
+  const base = basename(params);
+  return {
+    dirname: dirname(params),
+    extension: extname(params),
+    filename: base,
+    fullname: basename(params, extname(params)),
+    main: base.split(".")[0]
+  };
+}, "fileInfo");
 const withDir = /* @__PURE__ */ __name(async (...[dirname2, fn]) => {
   const workingDir = fromWorking();
   dirname2 && process.chdir(dirname2);
@@ -867,12 +877,17 @@ const buildTask = /* @__PURE__ */ __name(({
   let paramsF = merge([cleanObject$1(paramsOverrides), params]);
   const promptsF = prompts?.filter((v) => !(v.key in paramsF));
   promptsF?.length && (paramsF = { ...paramsF, ...await prompt(promptsF) });
-  const contextF = merge([
+  let contextF = merge([
     { app: paramsF.app },
     cleanObject$1(contextOverrides),
     context
   ]);
-  contextF.root = contextF.root ?? (contextF.app ? await getAppRoot(contextF.app) : fromRoot());
+  const pkg = contextF?.root ?? (contextF?.app ? await getAppRoot(contextF.app) : void 0);
+  const rootF = pkg ?? fromRoot();
+  if (pkg) {
+    contextF = merge([contextF, { overrrides: { PKG_NAME: fileInfo(rootF).main } }]);
+  }
+  contextF.root = rootF;
   const environment = contextF.environment ?? "production";
   return withDir(
     contextF.root,
@@ -946,10 +961,16 @@ const webBuild = buildTask({
   prompts: [appPrompt()],
   task: /* @__PURE__ */ __name(async (params, context) => {
     const environment = _Container.get(Environment);
-    const { bundleConfig: bundleConfig2 } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/node/bundle/bundle.android.ts": /* @__PURE__ */ __name(() => import("./bundle.android.js"), "../../../../../lib-config-js/src/node/bundle/bundle.android.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.base.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_base), "../../../../../lib-config-js/src/node/bundle/bundle.base.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.constants.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_constants), "../../../../../lib-config-js/src/node/bundle/bundle.constants.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.frontend.ts": /* @__PURE__ */ __name(() => import("./bundle.frontend.js"), "../../../../../lib-config-js/src/node/bundle/bundle.frontend.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.ios.ts": /* @__PURE__ */ __name(() => import("./bundle.ios.js"), "../../../../../lib-config-js/src/node/bundle/bundle.ios.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.models.ts": /* @__PURE__ */ __name(() => import("./bundle.models.js"), "../../../../../lib-config-js/src/node/bundle/bundle.models.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.native.ts": /* @__PURE__ */ __name(() => import("./bundle.native.js"), "../../../../../lib-config-js/src/node/bundle/bundle.native.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.node.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_node), "../../../../../lib-config-js/src/node/bundle/bundle.node.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_node), "../../../../../lib-config-js/src/node/bundle/bundle.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.web.ts": /* @__PURE__ */ __name(() => import("./bundle.web.js"), "../../../../../lib-config-js/src/node/bundle/bundle.web.ts") }), `../../../../../lib-config-js/src/node/bundle/bundle.${environment.variables.ENV_PLATFORM}`, 10);
+    const { bundleConfig: bundleConfig2 } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/node/bundle/bundle.android.ts": /* @__PURE__ */ __name(() => import("./bundle.android.js"), "../../../../../lib-config-js/src/node/bundle/bundle.android.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.base.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_base), "../../../../../lib-config-js/src/node/bundle/bundle.base.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.constants.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_constants), "../../../../../lib-config-js/src/node/bundle/bundle.constants.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.frontend.ts": /* @__PURE__ */ __name(() => import("./bundle.frontend.js"), "../../../../../lib-config-js/src/node/bundle/bundle.frontend.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.ios.ts": /* @__PURE__ */ __name(() => import("./bundle.ios.js"), "../../../../../lib-config-js/src/node/bundle/bundle.ios.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.b), "../../../../../lib-config-js/src/node/bundle/bundle.models.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.native.ts": /* @__PURE__ */ __name(() => import("./bundle.native.js"), "../../../../../lib-config-js/src/node/bundle/bundle.native.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.node.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_node), "../../../../../lib-config-js/src/node/bundle/bundle.node.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => bundle_node), "../../../../../lib-config-js/src/node/bundle/bundle.ts"), "../../../../../lib-config-js/src/node/bundle/bundle.web.ts": /* @__PURE__ */ __name(() => import("./bundle.web.js"), "../../../../../lib-config-js/src/node/bundle/bundle.web.ts") }), `../../../../../lib-config-js/src/node/bundle/bundle.${environment.variables.ENV_PLATFORM}`, 10);
     await _webBuild({ bundle: bundleConfig2.config({ outDirname: fromWorking(DIST_DIR) }) });
     await staticServer({ pathname: fromWorking(DIST_DIR, "client") });
     return {};
+  }, "task")
+});
+const runPython = buildTask({
+  prompts: [appPrompt({ defaultApp: "service_server" })],
+  task: /* @__PURE__ */ __name(async ({ pathname = "./src/index.py" }) => {
+    await execute({ command: `poetry run python ${pathname}` });
   }, "task")
 });
 const _fromGlobs = /* @__PURE__ */ __name((...[globs, { exclude, isAbsolute = false, root = fromWorking() } = {}]) => globs.map((glob) => globSync(glob, { absolute: isAbsolute, cwd: root, ignore: exclude })).flat(1), "_fromGlobs");
@@ -992,16 +1013,6 @@ const libraryConfig = new Config({
     patterns: [fromPackages("lib-frontend-js/src/**/components/**/+([A-Za-z]).tsx")]
   }), "params")
 });
-const fileInfo = /* @__PURE__ */ __name((params) => {
-  const base = basename(params);
-  return {
-    dirname: dirname(params),
-    extension: extname(params),
-    filename: base,
-    fullname: basename(params, extname(params)),
-    main: base.split(".")[0]
-  };
-}, "fileInfo");
 var BUNDLE_FORMAT = /* @__PURE__ */ ((BUNDLE_FORMAT2) => {
   BUNDLE_FORMAT2["CJS"] = "cjs";
   BUNDLE_FORMAT2["ESM"] = "esm";
@@ -2386,7 +2397,7 @@ uri({
   port: process.env.PORT ?? "10000"
 });
 const _HttpError = class _HttpError extends Error {
-  constructor(statusCode, message, stack) {
+  constructor(...[statusCode, message]) {
     super(message ?? "HttpError");
     this.statusCode = statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR;
     Error.captureStackTrace(this, _HttpError);
@@ -3037,8 +3048,7 @@ const __Docker = class __Docker {
       for (const image of danglingImages) {
         await this.docker.getImage(image.Id).remove({ force: true });
       }
-    } catch (e) {
-      logger.error(e);
+    } catch {
     }
   }
   async publish() {
@@ -3092,27 +3102,9 @@ const __Docker = class __Docker {
 };
 __name(__Docker, "_Docker");
 let _Docker = __Docker;
-const containerConfig$1 = new Config({
-  params: /* @__PURE__ */ __name(() => {
-    const environment = _Container.get(Environment);
-    return {
-      dockerfilename: "Dockerfile",
-      ignore: EXCLUDE_PATTERNS.filter((v) => v !== BUILD_DIR),
-      image: environment.variables.APP_NAME,
-      password: environment.variables.GITHUB_TOKEN,
-      platform: environment.variables.CONTAINER_PLATFORM,
-      server: environment.variables.CONTAINER_HOST,
-      tag: environment.variables.CONTAINER_TAG,
-      username: environment.variables.CONTAINER_USERNAME
-    };
-  }, "params")
-});
-const containerConfig = containerConfig$1.extend(() => ({
-  dirname: fromConfig("container/node")
-}));
 const _Docker2 = class _Docker2 extends _Docker {
   constructor(params) {
-    super(merge([params, containerConfig.params()]));
+    super(params);
   }
 };
 __name(_Docker2, "Docker");
@@ -3121,7 +3113,8 @@ const CONTAINER_RUN = "containerRun";
 const containerRun = buildTask({
   name: CONTAINER_RUN,
   task: /* @__PURE__ */ __name(async (params, context) => {
-    await new Docker(params).run();
+    const { containerConfig } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => import("./container.base.js"), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => import("./container.node.js"), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts") }), `../../../../../lib-config-js/src/container/container.${process.env.ENV_PLATFORM}`, 9);
+    await new Docker({ ...containerConfig.params() }).run();
     return {};
   }, "task")
 });
@@ -3132,7 +3125,8 @@ const containerPublish = buildTask({
   },
   name: CONTAINER_PUBLISH,
   task: /* @__PURE__ */ __name(async ({ dockerfilename, image }, context) => {
-    await new Docker({ dockerfilename, image }).publish();
+    const { containerConfig } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => import("./container.base.js"), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => import("./container.node.js"), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts") }), `../../../../../lib-config-js/src/container/container.${process.env.ENV_PLATFORM}`, 9);
+    await new Docker(merge([{ dockerfilename, image }, containerConfig.params()])).publish();
     return {};
   }, "task")
 });
@@ -3140,12 +3134,15 @@ const CONTAINER_BUILD = "containerBuild";
 const containerBuild = buildTask({
   name: CONTAINER_BUILD,
   task: /* @__PURE__ */ __name(async ({ dockerfilename, image }, context) => {
-    await new Docker({ dockerfilename, image }).build();
+    const { containerConfig } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => import("./container.base.js"), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => import("./container.node.js"), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts") }), `../../../../../lib-config-js/src/container/container.${process.env.ENV_PLATFORM}`, 9);
+    await new Docker(merge([{ dockerfilename, image }, containerConfig.params()])).build();
     return {};
   }, "task")
 });
 export {
   ASSETS_DIR as A,
+  BUILD_DIR as B,
+  Config as C,
   Environment as E,
   PLATFORM as P,
   _Container as _,
@@ -3153,10 +3150,12 @@ export {
   bundleConfig$1 as b,
   buildLint,
   buildTypescript,
+  fromConfig as c,
   clientRun,
   containerBuild,
   containerPublish,
   containerRun,
+  EXCLUDE_PATTERNS as d,
   databaseSeed,
   executeParallel,
   filterNil as f,
@@ -3167,6 +3166,7 @@ export {
   nodeDev,
   pingTask,
   pubSubRun,
+  runPython,
   serverConfig$1 as s,
   selfSignCertificates,
   start,

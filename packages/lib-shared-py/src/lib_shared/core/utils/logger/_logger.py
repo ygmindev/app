@@ -1,4 +1,4 @@
-from logging import DEBUG, ERROR, INFO, NOTSET, WARN, Logger, getLogger
+from logging import DEBUG, ERROR, INFO, NOTSET, WARN, Logger, getLogger, basicConfig
 from typing import Any
 
 from lib_shared.core.utils.logger._logger_models import _LoggerModel
@@ -22,6 +22,10 @@ class _Logger(_LoggerModel):
 
         self.logger = getLogger()
         self.logger.setLevel(logger_level)
+        basicConfig(
+            level=logger_level,
+            # format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        )
 
     def debug(self, message: Any) -> None:
         self.logger.debug(message)

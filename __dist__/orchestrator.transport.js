@@ -189,7 +189,7 @@ uri({
   port: process.env.PORT ?? "10000"
 });
 const _HttpError = class _HttpError extends Error {
-  constructor(statusCode, message, stack) {
+  constructor(...[statusCode, message]) {
     super(message ?? "HttpError");
     this.statusCode = statusCode ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR;
     Error.captureStackTrace(this, _HttpError);

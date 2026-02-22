@@ -1,0 +1,3 @@
+TrimPathnameParamsModel = str
+
+TrimPathnameModel = str

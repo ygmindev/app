@@ -1,4 +1,5 @@
 import { withEnvironment } from '@lib/backend/environment/utils/withEnvironment/withEnvironment';
+import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
 import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
 import { withDir } from '@lib/backend/file/utils/withDir/withDir';
@@ -25,16 +26,21 @@ export const buildTask =
     let paramsF = merge([cleanObject(paramsOverrides), params]) as TParams;
     const promptsF = prompts?.filter((v) => !(v.key in (paramsF as object)));
     promptsF?.length && (paramsF = { ...paramsF, ...(await prompt(promptsF)) });
-    const contextF = merge([
+    let contextF = merge([
       { app: (paramsF as AppTaskParamsModel).app },
       cleanObject(contextOverrides),
       context,
     ]) as ExecutionContextModel;
-    contextF.root = contextF.root ?? (contextF.app ? await getAppRoot(contextF.app) : fromRoot());
+
+    const pkg = contextF?.root ?? (contextF?.app ? await getAppRoot(contextF.app) : undefined);
+    const rootF = pkg ?? fromRoot();
+    if (pkg) {
+      contextF = merge([contextF, { overrrides: { PKG_NAME: fileInfo(rootF).main } }]);
+    }
+    contextF.root = rootF;
     const environment =
       contextF.environment ??
       (process.env.NODE_ENV === 'undefined' ? undefined : process.env.NODE_ENV);
-
     return withDir(contextF.root, async () =>
       withEnvironment(
         {

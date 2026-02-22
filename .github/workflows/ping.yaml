@@ -1,0 +1,130 @@
+jobs:
+  "python packages/service-server-py/src/ping.py ":
+    runs-on: ubuntu-latest
+    steps:
+      - name: sign in
+        uses: docker/login-action@v2
+        with:
+          password: ${{ github.token }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+      - name: run ping
+        run: "docker run -e NVM_INC=${{ secrets.NVM_INC }} -e TERM_PROGRAM=${{
+          secrets.TERM_PROGRAM }} -e NODE=${{ secrets.NODE }} -e
+          NVM_CD_FLAGS=${{ secrets.NVM_CD_FLAGS }} -e INIT_CWD=${{
+          secrets.INIT_CWD }} -e WARP_HONOR_PS1=${{ secrets.WARP_HONOR_PS1 }} -e
+          TERM=${{ secrets.TERM }} -e SHELL=${{ secrets.SHELL }} -e
+          HOMEBREW_REPOSITORY=${{ secrets.HOMEBREW_REPOSITORY }} -e TMPDIR=${{
+          secrets.TMPDIR }} -e npm_config_global_prefix=${{
+          secrets.npm_config_global_prefix }} -e TERM_PROGRAM_VERSION=${{
+          secrets.TERM_PROGRAM_VERSION }} -e npm_config_node_likner=${{
+          secrets.npm_config_node_likner }} -e COLOR=${{ secrets.COLOR }} -e
+          npm_config_noproxy=${{ secrets.npm_config_noproxy }} -e PNPM_HOME=${{
+          secrets.PNPM_HOME }} -e npm_config_local_prefix=${{
+          secrets.npm_config_local_prefix }} -e NVM_DIR=${{ secrets.NVM_DIR }}
+          -e USER=${{ secrets.USER }} -e COMMAND_MODE=${{ secrets.COMMAND_MODE
+          }} -e npm_config_globalconfig=${{ secrets.npm_config_globalconfig }}
+          -e SSH_AUTH_SOCK=${{ secrets.SSH_AUTH_SOCK }} -e
+          __CF_USER_TEXT_ENCODING=${{ secrets.__CF_USER_TEXT_ENCODING }} -e
+          WARP_IS_LOCAL_SHELL_SESSION=${{ secrets.WARP_IS_LOCAL_SHELL_SESSION }}
+          -e npm_execpath=${{ secrets.npm_execpath }} -e
+          WARP_USE_SSH_WRAPPER=${{ secrets.WARP_USE_SSH_WRAPPER }} -e PATH=${{
+          secrets.PATH }} -e LaunchInstanceID=${{ secrets.LaunchInstanceID }} -e
+          npm_package_json=${{ secrets.npm_package_json }} -e
+          __CFBundleIdentifier=${{ secrets.__CFBundleIdentifier }} -e
+          npm_config_init_module=${{ secrets.npm_config_init_module }} -e
+          npm_config_userconfig=${{ secrets.npm_config_userconfig }} -e PWD=${{
+          secrets.PWD }} -e npm_command=${{ secrets.npm_command }} -e
+          npm_package_bin_run=${{ secrets.npm_package_bin_run }} -e EDITOR=${{
+          secrets.EDITOR }} -e npm_lifecycle_event=${{
+          secrets.npm_lifecycle_event }} -e LANG=${{ secrets.LANG }} -e
+          npm_package_name=${{ secrets.npm_package_name }} -e NODE_PATH=${{
+          secrets.NODE_PATH }} -e XPC_FLAGS=${{ secrets.XPC_FLAGS }} -e
+          npm_config_npm_version=${{ secrets.npm_config_npm_version }} -e
+          npm_config_node_gyp=${{ secrets.npm_config_node_gyp }} -e
+          XPC_SERVICE_NAME=${{ secrets.XPC_SERVICE_NAME }} -e
+          npm_package_version=${{ secrets.npm_package_version }} -e SHLVL=${{
+          secrets.SHLVL }} -e HOME=${{ secrets.HOME }} -e HOMEBREW_PREFIX=${{
+          secrets.HOMEBREW_PREFIX }} -e LOGNAME=${{ secrets.LOGNAME }} -e
+          npm_config_cache=${{ secrets.npm_config_cache }} -e
+          npm_lifecycle_script=${{ secrets.npm_lifecycle_script }} -e
+          SSH_SOCKET_DIR=${{ secrets.SSH_SOCKET_DIR }} -e NVM_BIN=${{
+          secrets.NVM_BIN }} -e npm_config_user_agent=${{
+          secrets.npm_config_user_agent }} -e INFOPATH=${{ secrets.INFOPATH }}
+          -e HOMEBREW_CELLAR=${{ secrets.HOMEBREW_CELLAR }} -e
+          CONDA_CHANGEPS1=${{ secrets.CONDA_CHANGEPS1 }} -e
+          SECURITYSESSIONID=${{ secrets.SECURITYSESSIONID }} -e COLORTERM=${{
+          secrets.COLORTERM }} -e npm_config_prefix=${{
+          secrets.npm_config_prefix }} -e npm_node_execpath=${{
+          secrets.npm_node_execpath }} -e ENV_PLATFORM=${{ secrets.ENV_PLATFORM
+          }} -e SERVER_APP_PYTHON_PORT=${{ secrets.SERVER_APP_PYTHON_PORT }} -e
+          APP_AMPLITUDE_API_KEY=${{ secrets.APP_AMPLITUDE_API_KEY }} -e
+          APP_FIREBASE_API_KEY=${{ secrets.APP_FIREBASE_API_KEY }} -e
+          APP_FIREBASE_APP_ID=${{ secrets.APP_FIREBASE_APP_ID }} -e
+          APP_FIREBASE_AUTH_DOMAIN=${{ secrets.APP_FIREBASE_AUTH_DOMAIN }} -e
+          APP_FIREBASE_MEASUREMENT_ID=${{ secrets.APP_FIREBASE_MEASUREMENT_ID }}
+          -e APP_FIREBASE_PROJECT_ID=${{ secrets.APP_FIREBASE_PROJECT_ID }} -e
+          APP_FIREBASE_SENDER_ID=${{ secrets.APP_FIREBASE_SENDER_ID }} -e
+          APP_FIREBASE_STORAGE_BUCKET=${{ secrets.APP_FIREBASE_STORAGE_BUCKET }}
+          -e SERVER_FIREBASE_ADMIN_EMAIL=${{ secrets.SERVER_FIREBASE_ADMIN_EMAIL
+          }} -e SERVER_FIREBASE_ADMIN_SECRET=${{
+          secrets.SERVER_FIREBASE_ADMIN_SECRET }} -e APP_GOOGLE_OAUTH_APP_ID=${{
+          secrets.APP_GOOGLE_OAUTH_APP_ID }} -e SERVER_APP_GOOGLE_API_KEY=${{
+          secrets.SERVER_APP_GOOGLE_API_KEY }} -e APP_NAME=${{ secrets.APP_NAME
+          }} -e SERVER_APP_IS_HTTPS=${{ secrets.SERVER_APP_IS_HTTPS }} -e
+          SERVER_APP_OTP_LENGTH=${{ secrets.SERVER_APP_OTP_LENGTH }} -e
+          SERVER_ENCRYPTION_ALGORITHM=${{ secrets.SERVER_ENCRYPTION_ALGORITHM }}
+          -e SERVER_IV_LENGTH=${{ secrets.SERVER_IV_LENGTH }} -e
+          SERVER_KEY_LENGTH=${{ secrets.SERVER_KEY_LENGTH }} -e
+          SERVER_SALT_LENGTH=${{ secrets.SERVER_SALT_LENGTH }} -e
+          SERVER_SSL_PRIVATE_KEY=${{ secrets.SERVER_SSL_PRIVATE_KEY }} -e
+          SERVER_SSL_PUBLIC_KEY=${{ secrets.SERVER_SSL_PUBLIC_KEY }} -e
+          GITHUB_REPO=${{ secrets.GITHUB_REPO }} -e GITHUB_TOKEN=${{
+          secrets.GITHUB_TOKEN }} -e GITHUB_USERNAME=${{ secrets.GITHUB_USERNAME
+          }} -e APP_STRIPE_TOKEN=${{ secrets.APP_STRIPE_TOKEN }} -e
+          APP_TELEMETRY_NAME=${{ secrets.APP_TELEMETRY_NAME }} -e
+          SERVER_STRIPE_API_VERSION=${{ secrets.SERVER_STRIPE_API_VERSION }} -e
+          SERVER_STRIPE_TOKEN=${{ secrets.SERVER_STRIPE_TOKEN }} -e
+          APP_UPTRACE_DSN=${{ secrets.APP_UPTRACE_DSN }} -e
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} -e
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e
+          SERVER_DB_MONGO_USERNAME=${{ secrets.SERVER_DB_MONGO_USERNAME }} -e
+          SERVER_DB_MONGO_URL=${{ secrets.SERVER_DB_MONGO_URL }} -e
+          SERVER_DB_MONGO_PASSWORD=${{ secrets.SERVER_DB_MONGO_PASSWORD }} -e
+          SERVER_EMAIL_HOST=${{ secrets.SERVER_EMAIL_HOST }} -e
+          SERVER_EMAIL_PASSWORD=${{ secrets.SERVER_EMAIL_PASSWORD }} -e
+          SERVER_EMAIL_PORT=${{ secrets.SERVER_EMAIL_PORT }} -e
+          SERVER_EMAIL_USERNAME=${{ secrets.SERVER_EMAIL_USERNAME }} -e
+          SERVER_PLAID_CLIENT_ID=${{ secrets.SERVER_PLAID_CLIENT_ID }} -e
+          SERVER_PLAID_SECRET=${{ secrets.SERVER_PLAID_SECRET }} -e
+          SERVER_TWILIO_FROM=${{ secrets.SERVER_TWILIO_FROM }} -e
+          SERVER_TWILIO_SID=${{ secrets.SERVER_TWILIO_SID }} -e
+          SERVER_TWILIO_TOKEN=${{ secrets.SERVER_TWILIO_TOKEN }} -e
+          CONTAINER_HOST=${{ secrets.CONTAINER_HOST }} -e CONTAINER_PLATFORM=${{
+          secrets.CONTAINER_PLATFORM }} -e CONTAINER_TAG=${{
+          secrets.CONTAINER_TAG }} -e CONTAINER_USERNAME=${{
+          secrets.CONTAINER_USERNAME }} -e SERVER_STORAGE_BUCKET_ENDPOINT=${{
+          secrets.SERVER_STORAGE_BUCKET_ENDPOINT }} -e
+          SERVER_STORAGE_BUCKET_ENDPOINT_PUBLIC=${{
+          secrets.SERVER_STORAGE_BUCKET_ENDPOINT_PUBLIC }} -e
+          SERVER_STORAGE_BUCKET_ID=${{ secrets.SERVER_STORAGE_BUCKET_ID }} -e
+          SERVER_STORAGE_KEY_ID=${{ secrets.SERVER_STORAGE_KEY_ID }} -e
+          SERVER_STORAGE_KEY_SECRET=${{ secrets.SERVER_STORAGE_KEY_SECRET }} -e
+          APP_HOST=${{ secrets.APP_HOST }} -e PORT=${{ secrets.PORT }} -e
+          SERVER_APP_HOST=${{ secrets.SERVER_APP_HOST }} -e SERVER_APP_PORT=${{
+          secrets.SERVER_APP_PORT }} -e SERVER_APP_SECRET=${{
+          secrets.SERVER_APP_SECRET }} -e SERVER_APP_SSR_HOST=${{
+          secrets.SERVER_APP_SSR_HOST }} -e SERVER_APP_STATIC_HOST=${{
+          secrets.SERVER_APP_STATIC_HOST }} -e SERVER_APP_WEBSOCKET_HOST=${{
+          secrets.SERVER_APP_WEBSOCKET_HOST }} -e SERVER_APP_WEBSOCKET_PORT=${{
+          secrets.SERVER_APP_WEBSOCKET_PORT }} -e SERVER_PUBSUB_HOST=${{
+          secrets.SERVER_PUBSUB_HOST }} -e SERVER_APP_PYTHON_HOST=${{
+          secrets.SERVER_APP_PYTHON_HOST }} -e SERVER_DB_MONGO_NAME=${{
+          secrets.SERVER_DB_MONGO_NAME }} -e PKG_NAME=${{ secrets.PKG_NAME }} -e
+          NODE_ENV=${{ secrets.NODE_ENV }} --rm ghcr.io/ygmindev/app python
+          packages/service-server-py/src/ping.py "
+name: ping
+on:
+  schedule:
+    - cron: 0 0 * * *
+  workflow_dispatch: {}

@@ -7,7 +7,7 @@ import {
   type AppPromptParamsModel,
 } from '@tool/task/core/utils/appPrompt/appPrompt.models';
 
-export const appPrompt = (params?: AppPromptParamsModel): AppPromptModel => {
+export const appPrompt = ({ defaultApp }: AppPromptParamsModel = {}): AppPromptModel => {
   const options = filterNil(
     children(fromPackages()).map((v) => {
       try {
@@ -18,5 +18,5 @@ export const appPrompt = (params?: AppPromptParamsModel): AppPromptModel => {
       }
     }),
   );
-  return { key: 'app', options };
+  return { defaultValue: defaultApp ? [defaultApp] : undefined, key: 'app', options };
 };

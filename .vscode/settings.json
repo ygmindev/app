@@ -13,8 +13,8 @@
   },
   "[python]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit",
-      "source.organizeImports": "always"
+      "source.organizeImports": "explicit",
+      "source.unusedImports": "explicit"
     },
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true
@@ -54,7 +54,13 @@
   ],
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "pylint.importStrategy": "fromEnvironment",
+  "mypy-type-checker.args": [
+    "--disable-error-code=import-untyped" 
+  ],
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/packages/lib-shared-py",
+    "${workspaceFolder}/packages/service-server-py"
+  ],
   "python.analysis.autoImportCompletions": true,
   "python.analysis.diagnosticSeverityOverrides": {
     "reportMissingTypeStubs": "none",
@@ -62,13 +68,18 @@
     "reportUnusedImport": "none"
   },
   "python.analysis.enablePytestSupport": false,
+  "python.analysis.fixAll" : ["source.unusedImports"],
   "python.analysis.indexing": true,
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.defaultInterpreterPath": "${workspaceFolder}/packages/service-server-py/.venv/bin/python",
-  "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
+  "pylint.importStrategy": "fromEnvironment",
   "pylint.interpreter": [
+    "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
+  ],
+  "black-formatter.importStrategy": "fromEnvironment",
+  "black-formatter.interpreter": [
     "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
   ],
   "typescript.preferences.importModuleSpecifier": "non-relative",
@@ -77,9 +88,5 @@
   "workbench.colorTheme": "Default Dark+",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right",
-  "azureFunctions.createPythonVenv": false,
-  "black-formatter.importStrategy": "fromEnvironment",
-  "black-formatter.cwd": "${workspaceFolder}/packages/service-ai-py",
-  "python-envs.defaultEnvManager": "ms-python.python:system",
   "python-envs.pythonProjects": []
 }

@@ -62,7 +62,7 @@ export class _Docker implements _DockerModel {
 
   async build(): Promise<void> {
     const { dirname = fromWorking(), dockerfilename, ignore, platform } = this.container;
-    await this.delete();
+    // await this.delete();
     const tarStream = tar.pack(fromRoot(), {
       ignore: (name) =>
         globMatch(
@@ -97,9 +97,7 @@ export class _Docker implements _DockerModel {
       for (const image of danglingImages) {
         await this.docker.getImage(image.Id).remove({ force: true });
       }
-    } catch (e) {
-      logger.error(e as Error);
-    }
+    } catch {}
   }
 
   async publish(): Promise<void> {

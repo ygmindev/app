@@ -44,6 +44,8 @@ export type EnvironmentConfigModel = {
   SERVER_APP_IS_HTTPS?: `${BOOLEAN_STRING}`;
   SERVER_APP_OTP_LENGTH: string;
   SERVER_APP_PORT?: string;
+  SERVER_APP_PYTHON_HOST: string;
+  SERVER_APP_PYTHON_PORT?: string;
   SERVER_APP_SECRET: string;
   SERVER_APP_SSR_HOST: string;
   SERVER_APP_SSR_PORT?: string;

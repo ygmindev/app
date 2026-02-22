@@ -10,7 +10,10 @@ export const containerRun = buildTask<ContainerRunParamsModel, ContainerRunModel
   name: CONTAINER_RUN,
 
   task: async (params, context) => {
-    await new Docker(params).run();
+    const { containerConfig } = await import(
+      `@lib/config/container/container.${process.env.ENV_PLATFORM}`
+    );
+    await new Docker({ ...containerConfig.params() }).run();
     return {};
   },
 });

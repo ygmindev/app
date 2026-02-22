@@ -19,7 +19,7 @@ export const createJob = async ({
       await timeit(job);
       logger.success('Completed');
     } catch (e) {
-      logger.fail('Failed', e);
+      logger.fail('Failed', e as Error);
       process.exitCode = 1;
     } finally {
       await onFinish?.();

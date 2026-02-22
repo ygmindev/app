@@ -1,6 +1,13 @@
-from lib_shared.core.utils.is_listlike import is_listlike
+from asyncio import run
+
+from lib_config.http.server.server_base import server_config
+from lib_shared.http.utils.server import Server
+
+server = Server(
+    config=server_config,
+    name="index:server.app",
+)
+app = server.app
 
 if __name__ == "__main__":
-    print("HELLO!")
-    print(is_listlike([]))
-    print(is_listlike(123))
+    run(server.run())

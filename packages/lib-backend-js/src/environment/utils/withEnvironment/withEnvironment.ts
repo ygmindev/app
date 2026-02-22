@@ -19,9 +19,9 @@ export const withEnvironment = async <TType extends unknown>(
 
   current.reset();
   let environment = new Environment({
-    app: params.app,
-    environment: params.environment ?? (process.env.NODE_ENV as ENVIRONMENT),
-    overrrides: params.overrrides,
+    app: params?.app,
+    environment: params?.environment ?? (process.env.NODE_ENV as ENVIRONMENT),
+    overrrides: params?.overrrides,
   });
   await environment.initialize();
   const result = await fn();
