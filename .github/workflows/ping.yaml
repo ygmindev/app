@@ -78,7 +78,7 @@ jobs:
           secrets.SERVER_APP_PYTHON_HOST }} -e SERVER_APP_PYTHON_PORT=${{
           secrets.SERVER_APP_PYTHON_PORT }} -e SERVER_DB_MONGO_NAME=${{
           secrets.SERVER_DB_MONGO_NAME }} -e ENV_PLATFORM=${{
-          secrets.ENV_PLATFORM }} --rm ghcr.io/ygmindev/app python
+          secrets.ENV_PLATFORM }} --rm ghcr.io/ygmindev/python python
           /app/packages/service-server-py/src/ping.py "
 name: ping
 on:

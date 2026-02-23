@@ -3,4 +3,5 @@ import { containerConfig as configBase } from '@lib/config/container/container.b
 
 export const containerConfig = configBase.extend(() => ({
   dirname: fromConfig('container/node'),
+  image: 'node',
 }));

@@ -61,6 +61,7 @@ export class _Docker implements _DockerModel {
   }
 
   async build(): Promise<void> {
+    logger.progress(`building container ${this.url}`);
     const { dirname = fromWorking(), dockerfilename, ignore, platform } = this.container;
     // await this.delete();
     const tarStream = tar.pack(fromRoot(), {
@@ -91,6 +92,7 @@ export class _Docker implements _DockerModel {
   }
 
   async delete(): Promise<void> {
+    logger.progress(`deleting container ${this.url}`);
     try {
       await this.docker.getImage(this.url).remove({ force: true });
       const danglingImages = await this.docker.listImages({ filters: { dangling: ['true'] } });
@@ -101,6 +103,7 @@ export class _Docker implements _DockerModel {
   }
 
   async publish(): Promise<void> {
+    logger.progress(`publishing container ${this.url}`);
     const { password, server, username } = this.container;
     try {
       const stream = await this.docker.getImage(this.url).push({
