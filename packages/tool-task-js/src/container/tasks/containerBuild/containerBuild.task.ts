@@ -1,4 +1,5 @@
 import { Docker } from '@lib/backend/container/utils/Docker/Docker';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { CONTAINER_BUILD } from '@tool/task/container/tasks/containerBuild/containerBuild.constants';
 import {
   type ContainerBuildModel,
@@ -10,6 +11,7 @@ export const containerBuild = buildTask<ContainerBuildParamsModel, ContainerBuil
   name: CONTAINER_BUILD,
 
   task: async ({ name }, context) => {
+    logger.info(`building container ${name}`);
     const { containerConfig } = await import(`@lib/config/container/container.${name}`);
     await new Docker(containerConfig.params()).build();
     return {};

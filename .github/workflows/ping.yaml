@@ -12,9 +12,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
       - name: run ping
-        run: "docker run -e ENV_PLATFORM=${{ secrets.ENV_PLATFORM }} -e
-          SERVER_APP_PYTHON_PORT=${{ secrets.SERVER_APP_PYTHON_PORT }} -e
-          APP_AMPLITUDE_API_KEY=${{ secrets.APP_AMPLITUDE_API_KEY }} -e
+        run: "docker run -e NODE_VERSION=${{ secrets.NODE_VERSION }} -e PNPM_VERSION=${{
+          secrets.PNPM_VERSION }} -e PYTHON_VERSION=${{ secrets.PYTHON_VERSION
+          }} -e APP_AMPLITUDE_API_KEY=${{ secrets.APP_AMPLITUDE_API_KEY }} -e
           APP_FIREBASE_API_KEY=${{ secrets.APP_FIREBASE_API_KEY }} -e
           APP_FIREBASE_APP_ID=${{ secrets.APP_FIREBASE_APP_ID }} -e
           APP_FIREBASE_AUTH_DOMAIN=${{ secrets.APP_FIREBASE_AUTH_DOMAIN }} -e
@@ -75,8 +75,10 @@ jobs:
           secrets.SERVER_APP_WEBSOCKET_HOST }} -e SERVER_APP_WEBSOCKET_PORT=${{
           secrets.SERVER_APP_WEBSOCKET_PORT }} -e SERVER_PUBSUB_HOST=${{
           secrets.SERVER_PUBSUB_HOST }} -e SERVER_APP_PYTHON_HOST=${{
-          secrets.SERVER_APP_PYTHON_HOST }} -e SERVER_DB_MONGO_NAME=${{
-          secrets.SERVER_DB_MONGO_NAME }} --rm ghcr.io/ygmindev/app python
+          secrets.SERVER_APP_PYTHON_HOST }} -e SERVER_APP_PYTHON_PORT=${{
+          secrets.SERVER_APP_PYTHON_PORT }} -e SERVER_DB_MONGO_NAME=${{
+          secrets.SERVER_DB_MONGO_NAME }} -e ENV_PLATFORM=${{
+          secrets.ENV_PLATFORM }} --rm ghcr.io/ygmindev/app python
           /app/packages/service-server-py/src/ping.py "
 name: ping
 on:

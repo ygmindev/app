@@ -1,5 +1,6 @@
 import { Docker } from '@lib/backend/container/utils/Docker/Docker';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { containerBuild } from '@tool/task/container/tasks/containerBuild/containerBuild.task';
 import { CONTAINER_PUBLISH } from '@tool/task/container/tasks/containerPublish/containerPublish.constants';
 import {
@@ -16,6 +17,7 @@ export const containerPublish = buildTask<ContainerPublishParamsModel, Container
   name: CONTAINER_PUBLISH,
 
   task: async ({ isBuild = false, name }, context) => {
+    logger.info(`publishing container ${name}`);
     const { containerConfig } = await import(`@lib/config/container/container.${name}`);
     const container = new Docker(containerConfig.params());
     isBuild && (await containerBuild({ name }));
