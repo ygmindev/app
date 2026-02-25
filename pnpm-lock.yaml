@@ -918,6 +918,9 @@ importers:
       libphonenumber-js:
         specifier: ^1.12.15
         version: 1.12.36
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.23
       moti:
         specifier: ^0.30.0
         version: 0.30.0(react-dom@19.2.3(react@19.2.3))(react-native-reanimated@3.19.5(@babel/core@7.29.0)(react-native@0.81.6(@babel/core@7.29.0)(@types/react@19.2.13)(react@19.2.3))(react@19.2.3))(react@19.2.3)
@@ -2048,6 +2051,8 @@ importers:
       thenby:
         specifier: ^1.3.4
         version: 1.3.4
+
+  packages/service-jobs-py: {}
 
   packages/service-kfn-js:
     dependencies:

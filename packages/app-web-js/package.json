@@ -50,6 +50,7 @@
     "json-stringify-safe": "^5.0.1",
     "lexical": "^0.35.0",
     "libphonenumber-js": "^1.12.15",
+    "lodash": "^4.17.21",
     "moti": "^0.30.0",
     "nanoid": "^5.1.5",
     "react-day-picker": "^9.9.0",

@@ -13,7 +13,7 @@ jobs:
           version: "20.10.24"
       - run:
           name: Build and push
-          command: ./src/cli.js cp --is-build=true --name=python --app=service_server
+          command: /app/packages/tool-task-js/src/cli.js cp --is-build=true --name=python --app=service_server
   run-scheduled-job:
     docker:
       - image: ${CONTAINER_USERNAME}/python:latest
