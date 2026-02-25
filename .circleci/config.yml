@@ -10,12 +10,7 @@ jobs:
           version: "20.10.24"
       - run:
           name: Build and push
-          command: |
-            IMAGE_TAG="${CONTAINER_TAG}"
-            echo "$CONTAINER_PASSWORD" | docker login -u "$CONTAINER_USERNAME" --password-stdin
-            docker build -t $CONTAINER_USERNAME/python:${IMAGE_TAG} -t $CONTAINER_USERNAME/python:latest .
-            docker push $CONTAINER_USERNAME/python:${IMAGE_TAG}
-            docker push $CONTAINER_USERNAME/python:latest
+          command: ./packages/tool-task-js/src/cli.jsn cp --is-build=true --name=python --app=service_server
   run-scheduled-job:
     docker:
       - image: ${CONTAINER_USERNAME}/python:latest

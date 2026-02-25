@@ -13,6 +13,7 @@ RUN npm install -g pnpm
 ARG TARGET_DIR=/app
 RUN mkdir -p ${TARGET_DIR}
 
+COPY .npmrc ${TARGET_DIR}
 COPY pnpm-workspace.yaml ${TARGET_DIR}
 COPY pnpm-lock.yaml ${TARGET_DIR}
 COPY package.json ${TARGET_DIR}
@@ -21,6 +22,7 @@ COPY pnpm-workspace.yaml ${TARGET_DIR}
 COPY tsconfig.json ${TARGET_DIR}
 
 COPY packages/asset-static ${TARGET_DIR}/packages/asset-static
+COPY packages/app-web-js ${TARGET_DIR}/packages/app-web-js
 COPY packages/lib-backend-js ${TARGET_DIR}/packages/lib-backend-js
 COPY packages/lib-config-js ${TARGET_DIR}/packages/lib-config-js
 COPY packages/lib-frontend-js ${TARGET_DIR}/packages/lib-frontend-js
