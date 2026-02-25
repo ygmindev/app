@@ -24,7 +24,7 @@ export const jobBuild = buildTask<JobBuildParamsModel, JobBuildModel>({
 
   name: JOB_BUILD,
 
-  task: async ({ isContainerPublish = true, name }) => {
+  task: async ({ isContainerPublish = false, name }) => {
     const { jobConfig } = (await import(`@lib/config/job/job.${name}`)) as {
       jobConfig: ConfigModel<JobConfigModel, _JobConfigModel>;
     };

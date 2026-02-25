@@ -1,0 +1,45 @@
+version: 2.1
+
+jobs:
+  build-and-publish:
+    docker:
+      - image: cimg/base:2024.01
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: "20.10.24"
+      - run:
+          name: Build and push
+          command: |
+            IMAGE_TAG="${CONTAINER_TAG}"
+            echo "$CONTAINER_PASSWORD" | docker login -u "$CONTAINER_USERNAME" --password-stdin
+            docker build -t $CONTAINER_USERNAME/python:${IMAGE_TAG} -t $CONTAINER_USERNAME/python:latest .
+            docker push $CONTAINER_USERNAME/python:${IMAGE_TAG}
+            docker push $CONTAINER_USERNAME/python:latest
+  run-scheduled-job:
+    docker:
+      - image: ${CONTAINER_USERNAME}/python:latest
+        auth:
+          username: $CONTAINER_USERNAME
+          password: $CONTAINER_PASSWORD
+    environment:
+      NODE_ENV: production
+    steps:
+      - run: python /app/packages/service-server-py/src/ping.py
+
+workflows:
+  build:
+    jobs:
+      - build-and-publish:
+          filters:
+            branches:
+              only: main
+  scheduled:
+    triggers:
+      - schedule:
+          cron: "0 */6 * * *"
+          filters:
+            branches:
+              only: main
+    jobs:
+      - run-scheduled-job

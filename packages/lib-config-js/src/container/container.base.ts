@@ -10,7 +10,7 @@ export const containerConfig = new Config<ContainerConfigModel>({
     return {
       dockerfilename: 'Dockerfile',
       ignore: EXCLUDE_PATTERNS.filter((v) => v !== BUILD_DIR),
-      password: environment.variables.GITHUB_TOKEN,
+      password: environment.variables.CONTAINER_PASSWORD,
       platform: environment.variables.CONTAINER_PLATFORM,
       server: environment.variables.CONTAINER_HOST,
       tag: environment.variables.CONTAINER_TAG,

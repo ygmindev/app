@@ -24,6 +24,7 @@ export type EnvironmentConfigModel = {
   AWS_ACCESS_KEY_ID: string;
   AWS_SECRET_ACCESS_KEY: string;
   CONTAINER_HOST: string;
+  CONTAINER_PASSWORD: string;
   CONTAINER_PLATFORM: string;
   CONTAINER_TAG: string;
   CONTAINER_USERNAME: string;

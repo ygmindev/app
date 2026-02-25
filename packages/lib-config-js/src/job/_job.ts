@@ -17,7 +17,7 @@ export const _job = ({ container, env, jobs }: JobConfigModel): _JobConfigModel 
         steps: filterNil([
           container && {
             name: 'sign in',
-            uses: 'docker/login-action@v2',
+            uses: 'docker/login-action@v3',
             with: {
               password: '${{ github.token }}',
               registry: container?.server ?? '',
