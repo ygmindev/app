@@ -3,7 +3,10 @@ version: 2.1
 jobs:
   build-and-publish:
     docker:
-      - image: cimg/base:2024.01
+      - image: ${CONTAINER_USERNAME}/node:latest
+        auth:
+          username: $CONTAINER_USERNAME
+          password: $CONTAINER_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
