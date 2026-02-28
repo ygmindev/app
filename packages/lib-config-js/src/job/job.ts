@@ -31,7 +31,7 @@ export const jobConfig = new Config<JobConfigModel, _JobConfigModel>({
         trigger: JOB_TRIGGER.SCHEDULE,
       },
     ],
-    outPathname: fromRoot('.circleci/config2.yml'),
+    outPathname: fromRoot('.circleci/config.yml'),
     version: 2.1,
   }),
 });

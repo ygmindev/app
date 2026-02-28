@@ -1,43 +1,17 @@
-version: 2.1
-
 jobs:
-  build-and-publish:
+  ping:
     docker:
-      - image: ${CONTAINER_USERNAME}/node:latest
-        auth:
-          username: $CONTAINER_USERNAME
-          password: $CONTAINER_PASSWORD
+      auth:
+        password: ${CONTAINER_PASSWORD}
+        username: ${CONTAINER_USERNAME}
+      image: docker.io/${CONTAINER_USERNAME}/service_server:latest
     steps:
-      - checkout
-      - setup_remote_docker:
-          version: "20.10.24"
       - run:
-          name: Build and push
-          command: /app/packages/tool-task-js/src/cli.js cp --is-build=true --name=python --app=service_server
-  run-scheduled-job:
-    docker:
-      - image: ${CONTAINER_USERNAME}/python:latest
-        auth:
-          username: $CONTAINER_USERNAME
-          password: $CONTAINER_PASSWORD
-    environment:
-      NODE_ENV: production
-    steps:
-      - run: python /app/packages/service-server-py/src/ping.py
-
+          command: "python /app/packages/service-server-py/src/ping.py "
+          name: ping
+version: 2.1
 workflows:
-  build:
-    jobs:
-      - build-and-publish:
-          filters:
-            branches:
-              only: main
-  scheduled:
+  ping:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only: main
-    jobs:
-      - run-scheduled-job
+          cron: 0 0 * * *
