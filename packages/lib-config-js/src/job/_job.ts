@@ -56,7 +56,7 @@ export const _job = ({ jobs, version }: JobConfigModel): _JobConfigModel => ({
                 {
                   schedule: {
                     cron: `${v.schedule.minute ?? 0} ${v.schedule.hour ?? 0} * * ${v.schedule.freq === FREQUENCY.DAILY ? '*' : FREQUENCY.WEEKLY ? (v.schedule.day ?? 0) : '*'}`,
-                    filters: { branches: { only: branch } },
+                    filters: { branches: { only: [branch] } },
                   },
                 },
               ],
