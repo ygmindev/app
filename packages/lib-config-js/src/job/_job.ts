@@ -39,11 +39,12 @@ export const _job = ({ jobs, version }: JobConfigModel): _JobConfigModel => ({
   workflows: reduce(
     jobs,
     (result, v) => {
+      const branch = v.branch ?? 'main';
       switch (v.trigger) {
         case JOB_TRIGGER.COMMIT: {
           return {
             ...result,
-            [v.name]: { jobs: [v.name], when: `pipeline.git.branch == "${v.branch}"` },
+            [v.name]: { jobs: [v.name], when: `pipeline.git.branch == "${branch}"` },
           };
         }
         case JOB_TRIGGER.SCHEDULE: {
@@ -55,7 +56,7 @@ export const _job = ({ jobs, version }: JobConfigModel): _JobConfigModel => ({
                 {
                   schedule: {
                     cron: `${v.schedule.minute ?? 0} ${v.schedule.hour ?? 0} * * ${v.schedule.freq === FREQUENCY.DAILY ? '*' : FREQUENCY.WEEKLY ? (v.schedule.day ?? 0) : '*'}`,
-                    filter: v.branch ? { branches: { only: v.branch } } : undefined,
+                    filter: { branches: { only: branch } },
                   },
                 },
               ],
