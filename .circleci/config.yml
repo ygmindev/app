@@ -12,6 +12,8 @@ jobs:
 version: 2.1
 workflows:
   ping:
+    jobs:
+      - ping
     triggers:
       - schedule:
           cron: 0 0 * * *

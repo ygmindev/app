@@ -43,13 +43,14 @@ export const _job = ({ jobs, version }: JobConfigModel): _JobConfigModel => ({
         case JOB_TRIGGER.COMMIT: {
           return {
             ...result,
-            [v.name]: { when: `pipeline.git.branch == "${v.branch}"` },
+            [v.name]: { jobs: [v.name], when: `pipeline.git.branch == "${v.branch}"` },
           };
         }
         case JOB_TRIGGER.SCHEDULE: {
           return {
             ...result,
             [v.name]: {
+              jobs: [v.name],
               triggers: [
                 {
                   schedule: {
