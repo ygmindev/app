@@ -12,13 +12,15 @@ export const _job = ({ jobs, version }: JobConfigModel): _JobConfigModel => ({
       const definition: Record<string, unknown> = {};
       if (v.container) {
         const docker = new Docker(v.container);
-        definition.docker = {
-          auth: {
-            password: v.container.password,
-            username: v.container.username,
+        definition.docker = [
+          {
+            auth: {
+              password: v.container.password,
+              username: v.container.username,
+            },
+            image: docker.url,
           },
-          image: docker.url,
-        };
+        ];
       }
       definition.steps = v.commands.map((command) => ({
         run: {
