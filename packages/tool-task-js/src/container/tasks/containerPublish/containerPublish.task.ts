@@ -1,4 +1,5 @@
 import { Docker } from '@lib/backend/container/utils/Docker/Docker';
+import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { containerBuild } from '@tool/task/container/tasks/containerBuild/containerBuild.task';
@@ -7,6 +8,7 @@ import {
   type ContainerPublishModel,
   type ContainerPublishParamsModel,
 } from '@tool/task/container/tasks/containerPublish/containerPublish.models';
+import { appPrompt } from '@tool/task/core/utils/appPrompt/appPrompt';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 
 export const containerPublish = buildTask<ContainerPublishParamsModel, ContainerPublishModel>({
@@ -16,11 +18,14 @@ export const containerPublish = buildTask<ContainerPublishParamsModel, Container
 
   name: CONTAINER_PUBLISH,
 
-  task: async ({ isBuild = false, name }, context) => {
-    logger.info(`publishing container ${name}`);
-    const { containerConfig } = await import(`@lib/config/container/container.${name}`);
-    const container = new Docker(containerConfig.params());
-    isBuild && (await containerBuild({ name }));
+  prompts: [appPrompt()],
+
+  task: async ({ app, isBuild = false, platform }, context) => {
+    if (!platform) throw new NotFoundError('platform');
+    logger.info(`publishing container ${platform}`);
+    const { containerConfig } = await import(`@lib/config/container/container.${platform}`);
+    const container = new Docker({ ...containerConfig.params(), image: app });
+    isBuild && (await containerBuild({ app, platform }));
     await container.publish();
     return {};
   },

@@ -1,0 +1,17 @@
+jobs:
+  ping:
+    docker:
+      auth:
+        password: ${CONTAINER_PASSWORD}
+        username: ${CONTAINER_USERNAME}
+      image: docker.io/${CONTAINER_USERNAME}/service_server:latest
+    steps:
+      - run:
+          command: "python /app/packages/service-server-py/src/ping.py "
+          name: ping
+version: 2.1
+workflows:
+  ping:
+    triggers:
+      - schedule:
+          cron: 0 0 * * *

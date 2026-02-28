@@ -1,30 +1,52 @@
-export type _JobConfigModel = Array<{
+export type _JobConfigModel = {
   jobs: Record<
     string,
     {
-      permissions: {
-        contents: 'read';
-        packages: 'read';
-      };
-      'runs-on': string;
-      steps: Array<{
-        name: string;
-        run?: string;
-        uses?: string;
-        with?: {
+      docker?: {
+        auth: {
           password: string;
-          registry: string;
           username: string;
         };
-      }>;
+        image: string;
+      };
+
+      environment?: Record<string, string>;
+
+      steps: Array<{ command: string; name: string }>;
     }
   >;
 
-  name: string;
+  version: number;
 
-  on: {
-    schedule: Array<{
-      cron: string;
-    }>;
+  workflows: {
+    build?: {
+      jobs:
+        | string
+        | Array<
+            Record<
+              string,
+              {
+                filters: {
+                  branches: {
+                    only: string;
+                  };
+                };
+              }
+            >
+          >;
+    };
+    scheduled?: {
+      jobs: Array<string>;
+      triggers: Array<{
+        schedule: {
+          cron: string;
+          filters?: {
+            branches: {
+              only: string;
+            };
+          };
+        };
+      }>;
+    };
   };
-}>;
+};

@@ -3015,7 +3015,7 @@ const __Docker = class __Docker {
     });
   }
   async build() {
-    const { dirname: dirname2 = fromWorking(), dockerfilename, ignore, platform } = this.container;
+    const { dirname: dirname2 = fromWorking(), dockerPathname, ignore, platform } = this.container;
     await this.delete();
     const tarStream = tar.pack(fromRoot(), {
       ignore: /* @__PURE__ */ __name((name) => globMatch(
@@ -3026,7 +3026,7 @@ const __Docker = class __Docker {
     try {
       const environment = _Container.get(Environment);
       await environment.initialize();
-      const pathname = joinPaths([dirname2, dockerfilename]);
+      const pathname = joinPaths([dirname2, dockerPathname]);
       const stream = await this.docker.buildImage(tarStream, {
         buildargs: { ...environment.variables },
         dockerfile: toRelative({ from: fromRoot(), to: pathname }),
@@ -3124,18 +3124,18 @@ const containerPublish = buildTask({
     environment: ENVIRONMENT.PRODUCTION
   },
   name: CONTAINER_PUBLISH,
-  task: /* @__PURE__ */ __name(async ({ dockerfilename, image }, context) => {
+  task: /* @__PURE__ */ __name(async ({ dockerPathname, image }, context) => {
     const { containerConfig } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => import("./container.base.js"), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => import("./container.node.js"), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts") }), `../../../../../lib-config-js/src/container/container.${process.env.ENV_PLATFORM}`, 9);
-    await new Docker(merge([{ dockerfilename, image }, containerConfig.params()])).publish();
+    await new Docker(merge([{ dockerPathname, image }, containerConfig.params()])).publish();
     return {};
   }, "task")
 });
 const CONTAINER_BUILD = "containerBuild";
 const containerBuild = buildTask({
   name: CONTAINER_BUILD,
-  task: /* @__PURE__ */ __name(async ({ dockerfilename, image }, context) => {
+  task: /* @__PURE__ */ __name(async ({ dockerPathname, image }, context) => {
     const { containerConfig } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => import("./container.base.js"), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => import("./container.node.js"), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts") }), `../../../../../lib-config-js/src/container/container.${process.env.ENV_PLATFORM}`, 9);
-    await new Docker(merge([{ dockerfilename, image }, containerConfig.params()])).build();
+    await new Docker(merge([{ dockerPathname, image }, containerConfig.params()])).build();
     return {};
   }, "task")
 });

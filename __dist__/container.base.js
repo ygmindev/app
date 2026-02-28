@@ -5,7 +5,7 @@ const containerConfig = new Config({
   params: /* @__PURE__ */ __name(() => {
     const environment = _Container.get(Environment);
     return {
-      dockerfilename: "Dockerfile",
+      dockerPathname: "Dockerfile",
       ignore: EXCLUDE_PATTERNS.filter((v) => v !== BUILD_DIR),
       image: environment.variables.APP_NAME,
       password: environment.variables.GITHUB_TOKEN,

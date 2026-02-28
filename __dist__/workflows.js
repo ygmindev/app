@@ -180,12 +180,12 @@ const serverPublish$1 = {
     {
       context: { ...context, app: params.app },
       name: CONTAINER_BUILD,
-      params: { dockerfilename: "Dockerfile.server", image: `${params.app}-server` }
+      params: { dockerPathname: "Dockerfile.server", image: `${params.app}-server` }
     },
     {
       context: { ...context, app: params.app },
       name: CONTAINER_PUBLISH,
-      params: { dockerfilename: "Dockerfile.server", image: `${params.app}-server` }
+      params: { dockerPathname: "Dockerfile.server", image: `${params.app}-server` }
     }
   ], "steps")
 };

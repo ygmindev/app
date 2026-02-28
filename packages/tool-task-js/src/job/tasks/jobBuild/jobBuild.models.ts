@@ -1,7 +1,3 @@
-export type JobBuildParamsModel = {
-  isContainerPublish?: boolean;
-
-  name: string;
-};
+export type JobBuildParamsModel = {};
 
 export type JobBuildModel = void;

@@ -4,16 +4,17 @@ import {
   type ContainerRunModel,
   type ContainerRunParamsModel,
 } from '@tool/task/container/tasks/containerRun/containerRun.models';
+import { appPrompt } from '@tool/task/core/utils/appPrompt/appPrompt';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 
 export const containerRun = buildTask<ContainerRunParamsModel, ContainerRunModel>({
   name: CONTAINER_RUN,
 
-  task: async (params, context) => {
-    const { containerConfig } = await import(
-      `@lib/config/container/container.${process.env.ENV_PLATFORM}`
-    );
-    await new Docker({ ...containerConfig.params() }).run();
+  prompts: [appPrompt()],
+
+  task: async ({ app, platform }, context) => {
+    const { containerConfig } = await import(`@lib/config/container/container.${platform}`);
+    await new Docker({ ...containerConfig.params(), image: app }).run();
     return {};
   },
 });

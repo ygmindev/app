@@ -1,5 +1,5 @@
 import { WORKFLOW_STEP_TYPE } from '@lib/model/orchestrator/WorkflowStep/WorkflowStep.constants';
-import { CONTAINER_BUILD } from '@tool/task/container/tasks/containerBuild/containerBuild.constants';
+import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { type ContainerBuildParamsModel } from '@tool/task/container/tasks/containerBuild/containerBuild.models';
 import { CONTAINER_PUBLISH } from '@tool/task/container/tasks/containerPublish/containerPublish.constants';
 import { type ContainerPublishParamsModel } from '@tool/task/container/tasks/containerPublish/containerPublish.models';
@@ -28,17 +28,10 @@ export const serverPublish: BuildWorkflowParamsModel<
       name: SERVER_BUILD,
       type: WORKFLOW_STEP_TYPE.WORKFLOW,
     },
-
-    {
-      context: { ...context, app: params.app },
-      name: CONTAINER_BUILD,
-      params: { dockerfilename: 'Dockerfile.server', image: `${params.app}-server` },
-    },
-
     {
       context: { ...context, app: params.app },
       name: CONTAINER_PUBLISH,
-      params: { dockerfilename: 'Dockerfile.server', image: `${params.app}-server` },
+      params: { isBuild: true, platform: PLATFORM.NODE },
     },
   ],
 };

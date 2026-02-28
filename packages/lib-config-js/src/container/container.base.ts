@@ -8,7 +8,6 @@ export const containerConfig = new Config<ContainerConfigModel>({
   params: () => {
     const environment = Container.get(Environment);
     return {
-      dockerfilename: 'Dockerfile',
       ignore: EXCLUDE_PATTERNS.filter((v) => v !== BUILD_DIR),
       password: environment.variables.CONTAINER_PASSWORD,
       platform: environment.variables.CONTAINER_PLATFORM,
