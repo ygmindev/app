@@ -34,8 +34,8 @@ export class _Docker implements _DockerModel {
   constructor(params: _DockerParamsModel) {
     this.docker = new Docker();
     this.container = params;
-    const { image, server, tag } = params;
-    this.url = `${filterNil([server, snakeCase(image)]).join('/')}:${tag}`;
+    const { image, server, tag, username } = params;
+    this.url = `${filterNil([server, username, snakeCase(image)]).join('/')}:${tag}`;
     if (params.environment) {
       process.env = { ...process.env, ...params.environment };
     }

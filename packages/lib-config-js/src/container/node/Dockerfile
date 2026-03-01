@@ -27,7 +27,6 @@ COPY packages/lib-config-js ${TARGET_DIR}/packages/lib-config-js
 COPY packages/lib-frontend-js ${TARGET_DIR}/packages/lib-frontend-js
 COPY packages/lib-model-js ${TARGET_DIR}/packages/lib-model-js
 COPY packages/lib-shared-js ${TARGET_DIR}/packages/lib-shared-js
-COPY packages/tool-task-js ${TARGET_DIR}/packages/tool-task-js
 COPY packages/${PKG_NAME} ${TARGET_DIR}/packages/${PKG_NAME}
 
 WORKDIR ${TARGET_DIR}
