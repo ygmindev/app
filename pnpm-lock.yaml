@@ -2617,7 +2617,7 @@ importers:
         version: 25.8.4(typescript@5.9.3)
       i18next-cli:
         specifier: ^1.36.1
-        version: 1.42.3(@types/node@25.2.2)(i18next@25.8.4(typescript@5.9.3))(react-dom@19.2.3(react@19.2.4))(typescript@5.9.3)
+        version: 1.42.3(@types/node@25.2.2)(i18next@25.8.4(typescript@5.9.3))(react-dom@19.2.3(react@19.2.4))(react-native@0.81.6(@babel/core@7.29.0)(@types/react@19.2.13)(react@19.2.4))(typescript@5.9.3)
       inversify:
         specifier: ^7.9.1
         version: 7.11.0(reflect-metadata@0.2.2)
@@ -2824,6 +2824,9 @@ importers:
       '@date-fns/tz':
         specifier: ^1.4.1
         version: 1.4.1
+      '@fastify/websocket':
+        specifier: ^11.2.0
+        version: 11.2.0
       '@inquirer/checkbox':
         specifier: ^4.2.2
         version: 4.3.2(@types/node@25.2.2)
@@ -2848,6 +2851,9 @@ importers:
       '@lib/shared':
         specifier: workspace:^
         version: link:../lib-shared-js
+      '@mikro-orm/mongodb':
+        specifier: ^6.6.7
+        version: 6.6.7(@mikro-orm/core@6.6.6)(socks@2.8.7)
       '@originjs/vite-plugin-commonjs':
         specifier: ^1.0.3
         version: 1.0.3
@@ -2944,6 +2950,9 @@ importers:
       cli-progress:
         specifier: ^3.12.0
         version: 3.12.0
+      close-with-grace:
+        specifier: ^2.4.0
+        version: 2.4.0
       concurrently:
         specifier: ^9.2.1
         version: 9.2.1
@@ -3043,6 +3052,9 @@ importers:
       http-server:
         specifier: ^14.1.1
         version: 14.1.1
+      i18next-cli:
+        specifier: ^1.42.3
+        version: 1.42.3(@types/node@25.2.2)(i18next@25.8.4(typescript@5.9.3))(react-dom@19.2.3(react@19.2.4))(react-native@0.81.6(@babel/core@7.29.0)(@types/react@19.2.13)(react@19.2.4))(typescript@5.9.3)
       i18next-parser:
         specifier: ^9.3.0
         version: 9.3.0
@@ -3208,6 +3220,9 @@ importers:
       tar-fs:
         specifier: ^3.1.0
         version: 3.1.1
+      thenby:
+        specifier: ^1.3.4
+        version: 1.3.4
       ts-json-schema-generator:
         specifier: ^2.4.0
         version: 2.5.0
@@ -7154,6 +7169,12 @@ packages:
 
   '@mikro-orm/mongodb@6.6.6':
     resolution: {integrity: sha512-WuiBn20yYJvAj8Vg5hovcFMfmnykKk4WNZDgdmJ1g18QOXfJNvu75doBXfARKsWXof6CkgRU6HHx8H2yJojzDQ==}
+    engines: {node: '>= 18.12.0'}
+    peerDependencies:
+      '@mikro-orm/core': ^6.0.0
+
+  '@mikro-orm/mongodb@6.6.7':
+    resolution: {integrity: sha512-QgQBa/r11Y5OuD7S9jQ5kEYTs0rWE5g19Poq/Qx6ZkEMPUUigd1megtbUiTIdpLKzmaR8E+4cSepBPtmN2SegA==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
       '@mikro-orm/core': ^6.0.0
@@ -25900,6 +25921,20 @@ snapshots:
       - snappy
       - socks
 
+  '@mikro-orm/mongodb@6.6.7(@mikro-orm/core@6.6.6)(socks@2.8.7)':
+    dependencies:
+      '@mikro-orm/core': 6.6.6
+      bson: 6.10.4
+      mongodb: 6.20.0(socks@2.8.7)
+    transitivePeerDependencies:
+      - '@aws-sdk/credential-providers'
+      - '@mongodb-js/zstd'
+      - gcp-metadata
+      - kerberos
+      - mongodb-client-encryption
+      - snappy
+      - socks
+
   '@mongodb-js/saslprep@1.4.5':
     dependencies:
       sparse-bitfield: 3.0.3
@@ -35617,7 +35652,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  i18next-cli@1.42.3(@types/node@25.2.2)(i18next@25.8.4(typescript@5.9.3))(react-dom@19.2.3(react@19.2.4))(typescript@5.9.3):
+  i18next-cli@1.42.3(@types/node@25.2.2)(i18next@25.8.4(typescript@5.9.3))(react-dom@19.2.3(react@19.2.4))(react-native@0.81.6(@babel/core@7.29.0)(@types/react@19.2.13)(react@19.2.4))(typescript@5.9.3):
     dependencies:
       '@croct/json5-parser': 0.2.2
       '@swc/core': 1.15.11
@@ -35633,7 +35668,7 @@ snapshots:
       minimatch: 10.1.2
       ora: 9.3.0
       react: 19.2.4
-      react-i18next: 16.5.4(i18next@25.8.4(typescript@5.9.3))(react-dom@19.2.3(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
+      react-i18next: 16.5.4(i18next@25.8.4(typescript@5.9.3))(react-dom@19.2.3(react@19.2.4))(react-native@0.81.6(@babel/core@7.29.0)(@types/react@19.2.13)(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       swc-walk: 1.0.1
       yaml: 2.8.2
     transitivePeerDependencies:
@@ -40016,7 +40051,7 @@ snapshots:
       react-native: 0.81.6(@babel/core@7.29.0)(@types/react@19.2.13)(react@19.2.3)
       typescript: 5.9.3
 
-  react-i18next@16.5.4(i18next@25.8.4(typescript@5.9.3))(react-dom@19.2.3(react@19.2.4))(react@19.2.4)(typescript@5.9.3):
+  react-i18next@16.5.4(i18next@25.8.4(typescript@5.9.3))(react-dom@19.2.3(react@19.2.4))(react-native@0.81.6(@babel/core@7.29.0)(@types/react@19.2.13)(react@19.2.4))(react@19.2.4)(typescript@5.9.3):
     dependencies:
       '@babel/runtime': 7.28.6
       html-parse-stringify: 3.0.1
@@ -40025,6 +40060,7 @@ snapshots:
       use-sync-external-store: 1.6.0(react@19.2.4)
     optionalDependencies:
       react-dom: 19.2.3(react@19.2.4)
+      react-native: 0.81.6(@babel/core@7.29.0)(@types/react@19.2.13)(react@19.2.4)
       typescript: 5.9.3
 
   react-is@16.13.1: {}

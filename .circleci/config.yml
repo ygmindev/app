@@ -1,17 +1,49 @@
 jobs:
+  build and publish tools:
+    docker:
+      - auth:
+          password: ${CONTAINER_PASSWORD}
+          username: ${CONTAINER_USERNAME}
+        image: cimg/base:stable
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.14
+      - run:
+          command: docker build --no-cache --file
+            packages/lib-config-js/src/container/node/Dockerfile --tag
+            docker.io/tool_task:latest --platform linux/amd64 --build-arg
+            NODE_VERSION=22 --build-arg PKG_NAME=undefined --build-arg
+            SERVER_APP_PORT=10000 --build-arg TARGET_DIR=undefined
+          name: build
+      - run:
+          command: echo "$CONTAINER_PASSWORD" | docker login "$CONTAINER_HOST" -u
+            "$CONTAINER_USERNAME" --password-stdin && docker push
+            "docker.io/tool_task:latest"
+          name: publish
   ping:
     docker:
       - auth:
           password: ${CONTAINER_PASSWORD}
           username: ${CONTAINER_USERNAME}
-        image: docker.io/${CONTAINER_USERNAME}/tool_task:latest
+        image: docker.io/tool_task:latest
     steps:
       - run:
           command: cd /app && npm run run pt
           name: ping
 version: 2.1
 workflows:
+  build and publish tools:
+    jobs:
+      - build and publish tools
+    when: pipeline.git.branch == "main"
   ping:
     jobs:
       - ping
-    when: pipeline.git.branch == "main"
+    triggers:
+      - schedule:
+          cron: 0 0 * * *
+          filters:
+            branches:
+              only:
+                - main

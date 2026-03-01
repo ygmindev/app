@@ -15,9 +15,16 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { uid } from '@lib/shared/core/utils/uid/uid';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import Docker, { type ContainerCreateOptions } from 'dockerode';
+import { readFileSync } from 'fs';
 import isNil from 'lodash/isNil';
 import snakeCase from 'lodash/snakeCase';
 import tar from 'tar-fs';
+
+const getBuildArgs = (pathname: string): Array<string> => {
+  const content = readFileSync(pathname, 'utf-8');
+  const matches = [...content.matchAll(/^\s*ARG\s+([a-zA-Z_][a-zA-Z0-9_]*)(?:=.*)?$/gm)];
+  return matches.map((match) => match[1]);
+};
 
 export class _Docker implements _DockerModel {
   container: ContainerConfigModel;
@@ -27,8 +34,8 @@ export class _Docker implements _DockerModel {
   constructor(params: _DockerParamsModel) {
     this.docker = new Docker();
     this.container = params;
-    const { image, server, tag, username } = params;
-    this.url = `${filterNil([server, username, snakeCase(image)]).join('/')}:${tag}`;
+    const { image, server, tag } = params;
+    this.url = `${filterNil([server, snakeCase(image)]).join('/')}:${tag}`;
   }
 
   async _handleStream(stream?: NodeJS.ReadableStream): Promise<void> {
@@ -88,6 +95,17 @@ export class _Docker implements _DockerModel {
     }
   }
 
+  buildCommand(): string {
+    const { dockerPathname, platform } = this.container;
+    const buildArgs = getBuildArgs(dockerPathname ?? '');
+    return `docker build \
+--no-cache \
+--file ${toRelative({ from: fromRoot(), to: dockerPathname ?? '' })} \
+--tag ${this.url} \
+--platform ${platform} \
+${buildArgs.map((v) => `--build-arg ${v}=${process.env[v as keyof typeof process.env]}`).join(' ')}`;
+  }
+
   async delete(): Promise<void> {
     logger.progress(`deleting container ${this.url}`);
     try {
@@ -114,8 +132,13 @@ export class _Docker implements _DockerModel {
     } catch (e) {
       logger.error(e as Error);
     } finally {
-      // await this.delete();
+      await this.delete();
     }
+  }
+
+  publishCommand(): string {
+    return `echo "$CONTAINER_PASSWORD" | docker login "$CONTAINER_HOST" -u "$CONTAINER_USERNAME" --password-stdin \
+&& docker push "${this.url}"`;
   }
 
   async run<TType>(

@@ -1,5 +1,6 @@
+import { Docker } from '@lib/backend/container/utils/Docker/Docker';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
-import { containerConfig as nodeContainerConfig } from '@lib/config/container/container.node';
+import { containerConfig as toolTaskContainerConfig } from '@lib/config/container/container.toolTask';
 import { _job } from '@lib/config/job/_job';
 import { type _JobConfigModel } from '@lib/config/job/_job.models';
 import { JOB_TRIGGER } from '@lib/config/job/job.constants';
@@ -16,19 +17,30 @@ export const jobConfig = new Config<JobConfigModel, _JobConfigModel>({
       {
         commands: [
           {
+            command: new Docker(toolTaskContainerConfig.params()).buildCommand(),
+            name: 'build',
+          },
+          {
+            command: new Docker(toolTaskContainerConfig.params()).publishCommand(),
+            name: 'publish',
+          },
+        ],
+        container: { image: 'base', server: 'cimg', tag: 'stable' },
+        name: 'build and publish tools',
+        trigger: JOB_TRIGGER.COMMIT,
+      },
+
+      {
+        commands: [
+          {
             command: 'cd /app && npm run run pt',
             name: PING,
           },
         ],
-        container: {
-          ...nodeContainerConfig.params(),
-          image: 'tool_task',
-          password: '${CONTAINER_PASSWORD}',
-          username: '${CONTAINER_USERNAME}',
-        },
+        container: toolTaskContainerConfig.params(),
         name: PING,
         schedule: { freq: FREQUENCY.DAILY },
-        trigger: JOB_TRIGGER.COMMIT,
+        trigger: JOB_TRIGGER.SCHEDULE,
       },
     ],
     outPathname: fromRoot('.circleci/config.yml'),

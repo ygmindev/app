@@ -10,24 +10,33 @@ export const _job = ({ jobs, version }: JobConfigModel): _JobConfigModel => ({
     jobs,
     (result, v) => {
       const definition: Record<string, unknown> = {};
+      let steps: Array<unknown> = [];
       if (v.container) {
         const docker = new Docker(v.container);
         definition.docker = [
           {
             auth: {
-              password: v.container.password,
-              username: v.container.username,
+              password: '${CONTAINER_PASSWORD}',
+              username: '${CONTAINER_USERNAME}',
             },
             image: docker.url,
           },
         ];
+
+        if (docker.url.includes('cimg')) {
+          steps = ['checkout', { setup_remote_docker: { version: '20.10.14' } }];
+        }
       }
-      definition.steps = v.commands.map((command) => ({
-        run: {
-          command: command.command,
-          name: command.name,
-        },
-      }));
+
+      definition.steps = [
+        ...steps,
+        ...v.commands.map((command) => ({
+          run: {
+            command: command.command,
+            name: command.name,
+          },
+        })),
+      ];
       definition.environment = v.environment;
       return { ...result, [v.name]: definition };
     },
