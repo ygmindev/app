@@ -24,7 +24,7 @@ export const _job = ({ jobs, version }: JobConfigModel): _JobConfigModel => ({
         ];
 
         if (docker.url.includes('cimg')) {
-          steps = ['checkout', { setup_remote_docker: { version: '20.10.14' } }];
+          steps = ['checkout', 'setup_remote_docker'];
         }
       }
 
