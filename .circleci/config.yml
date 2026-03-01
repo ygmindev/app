@@ -4,10 +4,10 @@ jobs:
       - auth:
           password: ${CONTAINER_PASSWORD}
           username: ${CONTAINER_USERNAME}
-        image: docker.io/${CONTAINER_USERNAME}/service_server:latest
+        image: docker.io/${CONTAINER_USERNAME}/tool_task:latest
     steps:
       - run:
-          command: python /app/packages/service-server-py/src/ping.py
+          command: run pt
           name: ping
 version: 2.1
 workflows:
