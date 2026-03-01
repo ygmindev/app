@@ -28,7 +28,7 @@ export const jobConfig = new Config<JobConfigModel, _JobConfigModel>({
         },
         name: PING,
         schedule: { freq: FREQUENCY.DAILY },
-        trigger: JOB_TRIGGER.SCHEDULE,
+        trigger: JOB_TRIGGER.COMMIT,
       },
     ],
     outPathname: fromRoot('.circleci/config.yml'),

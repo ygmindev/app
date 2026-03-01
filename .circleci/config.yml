@@ -14,10 +14,4 @@ workflows:
   ping:
     jobs:
       - ping
-    triggers:
-      - schedule:
-          cron: 0 0 * * *
-          filters:
-            branches:
-              only:
-                - main
+    when: pipeline.git.branch == "main"
