@@ -103,8 +103,7 @@ export class _Docker implements _DockerModel {
 --file ${toRelative({ from: fromRoot(), to: dockerPathname ?? '' })} \
 --tag ${this.url} \
 --platform ${platform} \
-${buildArgs.map((v) => `--build-arg ${v}=${process.env[v as keyof typeof process.env]}`).join(' ')}
-.`;
+${buildArgs.map((v) => `--build-arg ${v}=${process.env[v as keyof typeof process.env]}`).join(' ')} .`;
   }
 
   async delete(): Promise<void> {
