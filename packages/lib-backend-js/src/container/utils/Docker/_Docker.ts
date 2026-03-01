@@ -36,6 +36,9 @@ export class _Docker implements _DockerModel {
     this.container = params;
     const { image, server, tag } = params;
     this.url = `${filterNil([server, snakeCase(image)]).join('/')}:${tag}`;
+    if (params.environment) {
+      process.env = { ...process.env, ...params.environment };
+    }
   }
 
   async _handleStream(stream?: NodeJS.ReadableStream): Promise<void> {
@@ -103,7 +106,12 @@ export class _Docker implements _DockerModel {
 --file ${toRelative({ from: fromRoot(), to: dockerPathname ?? '' })} \
 --tag ${this.url} \
 --platform ${platform} \
-${buildArgs.map((v) => `--build-arg ${v}=${process.env[v as keyof typeof process.env]}`).join(' ')} .`;
+${buildArgs
+  .map((k) => {
+    const v = process.env[k as keyof typeof process.env];
+    return v ? `--build-arg ${k}=${v}` : undefined;
+  })
+  .join(' ')} .`;
   }
 
   async delete(): Promise<void> {

@@ -12,40 +12,46 @@ import { PING } from '@lib/shared/http/http.constants';
 export const jobConfig = new Config<JobConfigModel, _JobConfigModel>({
   config: _job,
 
-  params: () => ({
-    jobs: [
-      {
-        commands: [
-          {
-            command: new Docker(toolTaskContainerConfig.params()).buildCommand(),
-            name: 'build',
-          },
-          {
-            command: new Docker(toolTaskContainerConfig.params()).publishCommand(),
-            name: 'publish',
-          },
-        ],
-        container: { image: 'base', server: 'cimg', tag: 'stable' },
-        name: 'build and publish tools',
-        trigger: JOB_TRIGGER.COMMIT,
-      },
+  params: () => {
+    const docker = new Docker({
+      ...toolTaskContainerConfig.params(),
+      environment: { PKG_NAME: 'tool-task-js' },
+    });
+    return {
+      jobs: [
+        {
+          commands: [
+            {
+              command: docker.buildCommand(),
+              name: 'build',
+            },
+            {
+              command: docker.publishCommand(),
+              name: 'publish',
+            },
+          ],
+          container: { image: 'base', server: 'cimg', tag: 'stable' },
+          name: 'build and publish tools',
+          trigger: JOB_TRIGGER.COMMIT,
+        },
 
-      {
-        commands: [
-          {
-            command: 'cd /app && npm run run pt',
-            name: PING,
-          },
-        ],
-        container: toolTaskContainerConfig.params(),
-        name: PING,
-        schedule: { freq: FREQUENCY.DAILY },
-        trigger: JOB_TRIGGER.SCHEDULE,
-      },
-    ],
-    outPathname: fromRoot('.circleci/config.yml'),
-    version: 2.1,
-  }),
+        {
+          commands: [
+            {
+              command: 'cd /app && npm run run pt',
+              name: PING,
+            },
+          ],
+          container: toolTaskContainerConfig.params(),
+          name: PING,
+          schedule: { freq: FREQUENCY.DAILY },
+          trigger: JOB_TRIGGER.SCHEDULE,
+        },
+      ],
+      outPathname: fromRoot('.circleci/config.yml'),
+      version: 2.1,
+    };
+  },
 });
 
 // import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';

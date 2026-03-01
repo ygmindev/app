@@ -10,6 +10,8 @@ export const _job = ({ jobs, version }: JobConfigModel): _JobConfigModel => ({
     jobs,
     (result, v) => {
       const definition: Record<string, unknown> = {};
+      definition.environment = v.environment;
+
       let steps: Array<unknown> = [];
       if (v.container) {
         const docker = new Docker(v.container);
@@ -37,7 +39,7 @@ export const _job = ({ jobs, version }: JobConfigModel): _JobConfigModel => ({
           },
         })),
       ];
-      definition.environment = v.environment;
+
       return { ...result, [v.name]: definition };
     },
     {},
