@@ -16,7 +16,7 @@ export const jobConfig = new Config<JobConfigModel, _JobConfigModel>({
       {
         commands: [
           {
-            command: 'run pt',
+            command: 'node /app/packages/tool-task-js/src/cli.js pt',
             name: PING,
           },
         ],
