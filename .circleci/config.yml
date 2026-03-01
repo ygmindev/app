@@ -9,11 +9,14 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          command: docker build --no-cache --file
+          command: >-
+            docker build --no-cache --file
             packages/lib-config-js/src/container/node/Dockerfile --tag
             docker.io/tool_task:latest --platform linux/amd64 --build-arg
             NODE_VERSION=22 --build-arg PKG_NAME=undefined --build-arg
             SERVER_APP_PORT=10000 --build-arg TARGET_DIR=undefined
+
+            /Users/yoongeemin/Developer/Projects/app
           name: build
       - run:
           command: echo "$CONTAINER_PASSWORD" | docker login "$CONTAINER_HOST" -u
