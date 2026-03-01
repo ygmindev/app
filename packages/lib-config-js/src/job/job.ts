@@ -16,7 +16,7 @@ export const jobConfig = new Config<JobConfigModel, _JobConfigModel>({
       {
         commands: [
           {
-            command: 'npm run run pt',
+            command: 'cd /app && npm run run pt',
             name: PING,
           },
         ],
