@@ -7,6 +7,9 @@ jobs:
         image: docker.io/${CONTAINER_USERNAME}/tool_task:latest
     steps:
       - run:
+          command: cd /app/packages && ls
+          name: ls
+      - run:
           command: node /app/packages/tool-task-js/src/cli.js pt
           name: ping
 version: 2.1
