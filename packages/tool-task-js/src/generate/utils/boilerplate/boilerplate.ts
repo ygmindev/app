@@ -82,7 +82,7 @@ export const boilerplate = async ({
       }
       case '{{TARGET}}': {
         const root = await resolveVariable('{{ROOT}}');
-        value = isPy ? snakeCase(root) : `@${root.replaceAll('-js', '')}`;
+        value = isPy ? snakeCase(root.replaceAll('-py', '')) : `@${root.replaceAll('-js', '')}`;
         break;
       }
       case '{{PATH}}': {
