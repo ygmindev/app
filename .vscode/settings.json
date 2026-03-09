@@ -13,10 +13,10 @@
   },
   "[python]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit",
-      "source.unusedImports": "explicit"
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
     },
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true
   },
   "[typescript]": {
@@ -48,45 +48,29 @@
     "**/packages/tool-task-js/templates/**/*": "plaintext"
   },
   "files.autoSave": "afterDelay",
-  "isort.args": [
-    "--profile",
-    "black"
-  ],
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "mypy-type-checker.args": [
-    "--disable-error-code=import-untyped" 
+    "--disable-error-code=import-untyped"
   ],
-  "python.analysis.extraPaths": [
-    "${workspaceFolder}/packages/lib-shared-py",
-    "${workspaceFolder}/packages/service-server-py"
+  "pylint.interpreter": [
+    "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
   ],
   "python.analysis.autoImportCompletions": true,
-  "python.analysis.diagnosticSeverityOverrides": {
-    "reportMissingTypeStubs": "none",
-    "reportPrivateUsage": "none",
-    "reportUnusedImport": "none"
-  },
   "python.analysis.enablePytestSupport": false,
-  "python.analysis.fixAll" : ["source.unusedImports"],
   "python.analysis.indexing": true,
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.defaultInterpreterPath": "${workspaceFolder}/packages/service-server-py/.venv/bin/python",
-  "python.languageServer": "Pylance",
   "pylint.importStrategy": "fromEnvironment",
   "pylint.interpreter": [
     "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
   ],
-  "black-formatter.importStrategy": "fromEnvironment",
-  "black-formatter.interpreter": [
-    "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
-  ],
+  "ruff.nativeServer": "auto",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Quiet Light",
+  "workbench.colorTheme": "Default Dark Modern",
   "workbench.iconTheme": "vs-minimal",
-  "workbench.sideBar.location": "right",
-  "python-envs.pythonProjects": []
+  "workbench.sideBar.location": "right"
 }

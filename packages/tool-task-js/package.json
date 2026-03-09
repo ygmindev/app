@@ -23,7 +23,7 @@
     "@lib/config": "workspace:^",
     "@lib/model": "workspace:^",
     "@lib/shared": "workspace:^",
-    "@mikro-orm/mongodb": "^6.6.7",
+    "@mikro-orm/mongodb": "^6.5.2",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.6",

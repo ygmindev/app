@@ -1,4 +1,3 @@
-from lib_shared.core.utils.base_model._base_model import _BaseModel
+from .base_model import BaseModel
 
-
-class BaseModel(_BaseModel): ...
+__all__ = ["BaseModel"]

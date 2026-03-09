@@ -3,6 +3,11 @@ from __future__ import annotations
 from typing import Mapping, Sequence, cast
 
 import numpy as np
+from lib_shared.core.utils.get_item import get_item
+from lib_shared.core.utils.logger import logger
+from lib_shared.core.utils.merge import merge
+from lib_shared.core.utils.not_found_exception import NotFoundException
+
 from lib_ai.core.utils.kfold import kfold
 from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
 from lib_ai.data.base_data.base_data_models import BaseDataModel
@@ -19,10 +24,6 @@ from lib_ai.model.base_model.base_model_models import (
 from lib_ai.optimize.utils.optimize import optimize
 from lib_ai.scoring.scoring_constants import ScoringMode
 from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
-from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.logger import logger
-from lib_shared.core.utils.merge import merge
-from lib_shared.core.utils.not_found_exception import NotFoundException
 
 
 class BaseModel[
@@ -70,7 +71,10 @@ class BaseModel[
             score = instance.evaluate(testset, params=eval_params)[scorer.name]
             scores.append(score)
 
-        result: BaseModelCvModel = {"average": float(np.average(scores)), "scores": scores}
+        result: BaseModelCvModel = {
+            "average": float(np.average(scores)),
+            "scores": scores,
+        }
         logger.debug(result)
         return result
 

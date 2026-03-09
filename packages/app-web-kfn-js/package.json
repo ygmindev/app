@@ -26,7 +26,7 @@
     "@lib/frontend": "workspace:^",
     "@lib/model": "workspace:^",
     "@lib/shared": "workspace:^",
-    "@mikro-orm/mongodb": "^6.6.2",
+    "@mikro-orm/mongodb": "^6.5.2",
     "@mui/x-date-pickers": "^8.26.0",
     "@react-google-maps/api": "^2.20.7",
     "@react-navigation/core": "^7.13.3",

@@ -3,7 +3,7 @@ from json import JSONDecodeError
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from lib_config.http.server.server_models import ServerConfigModel
-from uvicorn import run
+from uvicorn import Config, Server
 
 from lib_shared.core.utils.get_env import get_env
 from lib_shared.core.utils.logger import logger
@@ -24,7 +24,6 @@ class _Server(_ServerModel):
         )
         self.app = FastAPI(title=self.name)
         for route in config.api.routes:
-
             async def endpoint(req: Request) -> JSONResponse:
                 headers = req.headers
                 try:
@@ -41,7 +40,6 @@ class _Server(_ServerModel):
                     content=response.body,
                     status_code=response.status_code.value,
                 )
-
             pathname = trim_pathname(route.pathname)
             self.app.add_api_route(
                 endpoint=endpoint,
@@ -55,9 +53,11 @@ class _Server(_ServerModel):
             logger.info(f"{route.method}: {pathname}")
 
     async def run(self) -> None:
-        run(
+        config = Config(
             self.name,
             host=self.config.host or "",
             port=int(self.config.port) if self.config.port else 5000,
             reload=get_env("NODE_ENV") == "development",
         )
+        server = Server(config)
+        await server.serve()

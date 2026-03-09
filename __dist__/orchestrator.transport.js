@@ -967,9 +967,9 @@ const withEnvironment = /* @__PURE__ */ __name(async (...[params, fn]) => {
   };
   current.reset();
   let environment = new Environment({
-    app: params.app,
-    environment: params.environment ?? "production",
-    overrrides: params.overrrides
+    app: params?.app,
+    environment: params?.environment ?? "production",
+    overrrides: params?.overrrides
   });
   await environment.initialize();
   const result = await fn();

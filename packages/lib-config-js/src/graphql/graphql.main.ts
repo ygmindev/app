@@ -1,10 +1,5 @@
 import { graphqlConfig as configBase } from '@lib/config/graphql/graphql.base';
-import { UtilityResolver } from '@lib/model/admin/Utility/UtilityResolver/UtilityResolver';
-import { VendorResolver } from '@lib/model/admin/Vendor/VendorResolver/VendorResolver';
-import { BankResolver } from '@lib/model/billing/Bank/BankResolver/BankResolver';
-import { CardResolver } from '@lib/model/billing/Card/CardResolver/CardResolver';
 import { PaymentMethodResolver } from '@lib/model/billing/PaymentMethod/PaymentMethodResolver/PaymentMethodResolver';
-import { ChatResolver } from '@lib/model/chat/Chat/ChatResolver/ChatResolver';
 import { MessageResolver } from '@lib/model/chat/Message/MessageResolver/MessageResolver';
 import { OrderResolver } from '@lib/model/commerce/Order/OrderResolver/OrderResolver';
 import { PricingResolver } from '@lib/model/commerce/Pricing/PricingResolver/PricingResolver';
@@ -17,9 +12,6 @@ import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 
 export const graphqlConfig = configBase.extend(() => ({
   resolvers: filterNil([
-    BankResolver,
-    CardResolver,
-    ChatResolver,
     CurveResolver,
     MessageResolver,
     GroupResolver,
@@ -29,8 +21,6 @@ export const graphqlConfig = configBase.extend(() => ({
     PricingResolver,
     ProductResolver,
     SocketResolver,
-    VendorResolver,
-    UtilityResolver,
   ]),
 
   schemaFilename: 'main.gql',

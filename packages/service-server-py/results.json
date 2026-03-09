@@ -1,0 +1,7 @@
+{
+  "products": [],
+  "schemas": {},
+  "errors": [
+    "node_scrape_bestsellers: 'ChatOllama' object has no attribute 'provider'"
+  ]
+}

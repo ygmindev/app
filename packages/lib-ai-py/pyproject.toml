@@ -1,26 +1,51 @@
 [build-system]
-requires = ["poetry_core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.black]
+[tool.hatch.build.targets.wheel]
+packages = ["src/lib_ai"]
+
+[tool.ruff]
 line-length = 88
 
-[tool.isort]
-force_grid_wrap = 0
-line_length = 100
-include_trailing_comma = true
-profile = "black"
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "B"]
+ignore = []
 
-[tool.pytest.ini_options]
-pythonpath = ["src"]
+[tool.ruff.format]
+quote-style = "double"
 
-[tool.poetry]
+[project]
 name = "lib-ai"
 description = ""
 version = "0.0.1"
 license = "MIT"
-authors = ["YG Min <ygmindev@gmail.com>"]
-packages = [{ include = "*", from = "src" }]
+authors = [{ name = "YG Min", email = "ygmindev@gmail.com" }]
+requires-python = "==3.12.12"
+dependencies = [
+    "agno>=2.5.6",
+    "beautifulsoup4>=4.14.3",
+    "browser-use>=0.11.13",
+    "httpx>=0.28.1",
+    "hyperopt>=0.2.7",
+    "langchain>=1.2.10",
+    "langchain-core>=1.2.17",
+    "langchain-ollama>=1.0.1",
+    "langchain-openai>=1.1.10",
+    "langgraph>=1.0.10",
+    "lib-shared",
+    "lxml>=6.0.2",
+    "mcp>=1.26.0",
+    "nest-asyncio>=1.6.0",
+    "openai>=2.24.0",
+    "playwright>=1.58.0",
+    "pydantic>=2.12.5",
+    "pymongo>=4.16.0",
+    "requests>=2.32.5",
+    "scikit-learn>=1.8.0",
+    "setuptools>=82.0.0",
+    "torch>=2.10.0",
+]
 
-[tool.poetry.dependencies]
-python = "3.12.6"
+[tool.uv.sources]
+lib-shared = { path = "../lib-shared-py", editable = true }

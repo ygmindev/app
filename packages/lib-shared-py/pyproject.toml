@@ -1,29 +1,35 @@
 [build-system]
-requires = ["poetry_core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.black]
+[tool.hatch.build.targets.wheel]
+packages = ["src/lib_shared"]
+
+[tool.ruff]
 line-length = 88
 
-[tool.isort]
-force_grid_wrap = 0
-line_length = 100
-include_trailing_comma = true
-profile = "black"
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "B"]
+ignore = []
 
-[tool.pytest.ini_options]
-pythonpath = ["src"]
+[tool.ruff.format]
+quote-style = "double"
 
-[tool.mypy]
-ignore_missing_imports = true
-
-[tool.poetry]
+[project]
 name = "lib-shared"
 description = ""
 version = "0.0.1"
 license = "MIT"
-authors = ["YG Min <ygmindev@gmail.com>"]
-packages = [{ include = "*", from = "src" }]
+authors = [{ name = "YG Min", email = "ygmindev@gmail.com" }]
+requires-python = "==3.12.12"
+dependencies = [
+    "fastapi>=0.135.1",
+    "pydantic>=2.12.5",
+    "pydash>=8.0.6",
+    "uvicorn>=0.41.0"
+]
 
-[tool.poetry.dependencies]
-python = "3.12.6"
+[dependency-groups]
+dev = [
+    "ruff>=0.15.4",
+]

@@ -123,7 +123,6 @@ const orchestratorRun$1 = {
   steps: /* @__PURE__ */ __name(() => [{ name: START, params: { command: "temporal server start-dev" } }], "steps")
 };
 const orchestratorRun = buildWorkflow(orchestratorRun$1);
-const CONTAINER_BUILD = "containerBuild";
 const CONTAINER_PUBLISH = "containerPublish";
 const children = /* @__PURE__ */ __name((...[from, options]) => {
   const root = `/${normalize(from)}`;
@@ -179,13 +178,8 @@ const serverPublish$1 = {
     },
     {
       context: { ...context, app: params.app },
-      name: CONTAINER_BUILD,
-      params: { dockerPathname: "Dockerfile.server", image: `${params.app}-server` }
-    },
-    {
-      context: { ...context, app: params.app },
       name: CONTAINER_PUBLISH,
-      params: { dockerPathname: "Dockerfile.server", image: `${params.app}-server` }
+      params: { isBuild: true, platform: PLATFORM.NODE }
     }
   ], "steps")
 };

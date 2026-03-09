@@ -24,7 +24,7 @@ def main() -> None:
     sources = list(map(lambda s: Path(s.strip()), args.source.split(",")))
     _parser = JsonSchemaParser(
         sources,
-        allow_extra_fields=True,
+        allow_metadata=True,
         capitalise_enum_members=True,
         collapse_root_models=True,
         data_model_type=data_model_types.data_model,

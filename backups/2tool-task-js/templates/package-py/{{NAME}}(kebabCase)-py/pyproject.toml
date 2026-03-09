@@ -2,14 +2,15 @@
 requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.black]
+[tool.ruff]
 line-length = 88
 
-[tool.isort]
-force_grid_wrap = 0
-line_length = 100
-include_trailing_comma = true
-profile = "black"
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "B"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
@@ -23,7 +24,7 @@ authors = ["YG Min <ygmindev@gmail.com>"]
 packages = [{ include = "*", from = "src" }]
 
 [tool.poetry.dependencies]
-python = "3.12.6"
+python = "3.12.12"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"

@@ -78,11 +78,16 @@ import typescriptPlugin from "typescript-eslint";
 import { defineConfig } from "eslint/config";
 import { fileURLToPath } from "url";
 import { runExtractor } from "i18next-cli";
+import { rimraf } from "rimraf";
+import YAML from "yaml";
+import picomatch from "picomatch";
+import Docker$1 from "dockerode";
+import snakeCase from "lodash/snakeCase.js";
+import tar from "tar-fs";
 import thenby from "thenby";
 import { generateTemplateFilesBatch, CaseConverterEnum } from "generate-template-files";
 import map from "lodash/map.js";
 import pullAll from "lodash/pullAll.js";
-import snakeCase from "lodash/snakeCase.js";
 import last from "lodash/last.js";
 import { ObjectId as ObjectId$1 } from "mongodb";
 import { MikroORM } from "@mikro-orm/mongodb";
@@ -96,9 +101,6 @@ import cors from "@fastify/cors";
 import toNumber from "lodash/toNumber.js";
 import concurrently from "concurrently";
 import { Connection, Client as Client$1 } from "@temporalio/client";
-import picomatch from "picomatch";
-import Docker$1 from "dockerode";
-import tar from "tar-fs";
 const __variableDynamicImportRuntimeHelper = /* @__PURE__ */ __name((glob$1, path$13, segs) => {
   const v = glob$1[path$13];
   if (v) return typeof v === "function" ? v() : Promise.resolve(v);
@@ -648,9 +650,9 @@ const withEnvironment = /* @__PURE__ */ __name(async (...[params, fn]) => {
   };
   current.reset();
   let environment = new Environment({
-    app: params.app,
-    environment: params.environment ?? "production",
-    overrrides: params.overrrides
+    app: params?.app,
+    environment: params?.environment ?? "production",
+    overrrides: params?.overrrides
   });
   await environment.initialize();
   const result = await fn();
@@ -2051,6 +2053,393 @@ const internationalizeParse = buildTask({
     return {};
   }, "task")
 });
+const _clean = /* @__PURE__ */ __name(async ({
+  excludes,
+  patterns,
+  root = fromRoot()
+}) => {
+  const pwd = fromWorking();
+  root && process.chdir(root);
+  await rimraf(
+    patterns ?? CLEAN_PATTERNS.map((pattern) => [resolve(root, pattern), join(root, "**/*", pattern)]).flat(),
+    {
+      filter: excludes ? (path) => some(excludes, (exc) => !path.includes(exc)) : void 0,
+      glob: true,
+      preserveRoot: false
+    }
+  );
+  root && process.chdir(pwd);
+}, "_clean");
+const clean = /* @__PURE__ */ __name(async (params) => _clean(params), "clean");
+const _yamlBuild = /* @__PURE__ */ __name((params) => YAML.stringify(params), "_yamlBuild");
+const yamlBuild = /* @__PURE__ */ __name((params) => _yamlBuild(params), "yamlBuild");
+const _globMatch = /* @__PURE__ */ __name((...[value, glob]) => picomatch(glob)(value), "_globMatch");
+const globMatch = /* @__PURE__ */ __name((...params) => _globMatch(...params), "globMatch");
+const getBuildArgs = /* @__PURE__ */ __name((pathname) => {
+  const content = readFileSync(pathname, "utf-8");
+  const matches = [...content.matchAll(/^\s*ARG\s+([a-zA-Z_][a-zA-Z0-9_]*)(?:=.*)?$/gm)];
+  return matches.map((match) => match[1]);
+}, "getBuildArgs");
+const __Docker = class __Docker {
+  constructor(params) {
+    this.docker = new Docker$1();
+    this.container = params;
+    const { image, server, tag, username } = params;
+    this.url = `${filterNil([server, username, snakeCase(image)]).join("/")}:${tag}`;
+    if (params.environment) {
+      process.env = { ...process.env, ...params.environment };
+    }
+  }
+  async _handleStream(stream) {
+    return new Promise((resolve2, reject) => {
+      if (!stream) {
+        return reject(new NotFoundError("Stream missing"));
+      }
+      this.docker.modem.followProgress(
+        stream,
+        (err, res) => {
+          if (err) {
+            return reject(err);
+          }
+          const error = res?.find((err2) => err2.error ?? err2.errorDetail);
+          if (error) {
+            logger.error(error);
+            reject(new Error(error.error || error.errorDetail?.message));
+          }
+          logger.success("complete");
+          return resolve2();
+        },
+        (event) => {
+          event.stream && process.stdout.write(event.stream);
+          event.error && process.stderr.write(event.error);
+        }
+      );
+    });
+  }
+  async build() {
+    logger.progress(`building container ${this.url}`);
+    const { dockerPathname, ignore, platform } = this.container;
+    const tarStream = tar.pack(fromRoot(), {
+      ignore: /* @__PURE__ */ __name((name) => globMatch(
+        name,
+        (ignore ?? []).map((v) => `**/*/${v}`)
+      ), "ignore")
+    });
+    try {
+      const environment = _Container.get(Environment);
+      await environment.initialize();
+      const stream = await this.docker.buildImage(tarStream, {
+        buildargs: { ...environment.variables },
+        dockerfile: toRelative({ from: fromRoot(), to: dockerPathname ?? "" }),
+        nocache: true,
+        platform,
+        pull: false,
+        t: this.url
+      });
+      await this._handleStream(stream);
+    } catch (e) {
+      logger.error(e);
+      await this.delete();
+    }
+  }
+  buildCommand() {
+    const { dockerPathname, platform } = this.container;
+    const buildArgs = getBuildArgs(dockerPathname ?? "");
+    return `docker build --no-cache --file ${toRelative({ from: fromRoot(), to: dockerPathname ?? "" })} --tag ${this.url} --platform ${platform} ${buildArgs.map((k) => {
+      const v = process.env[k];
+      return v ? `--build-arg ${k}=${v}` : void 0;
+    }).join(" ")} .`;
+  }
+  async delete() {
+    logger.progress(`deleting container ${this.url}`);
+    try {
+      await this.docker.getImage(this.url).remove({ force: true });
+      const danglingImages = await this.docker.listImages({ filters: { dangling: ["true"] } });
+      for (const image of danglingImages) {
+        await this.docker.getImage(image.Id).remove({ force: true });
+      }
+    } catch {
+    }
+  }
+  async publish() {
+    logger.progress(`publishing container ${this.url}`);
+    const { password, server, username } = this.container;
+    try {
+      const stream = await this.docker.getImage(this.url).push({
+        authconfig: {
+          password,
+          serveraddress: server,
+          username
+        }
+      });
+      await this._handleStream(stream);
+    } catch (e) {
+      logger.error(e);
+    } finally {
+      await this.delete();
+    }
+  }
+  publishCommand() {
+    return `echo "$CONTAINER_PASSWORD" | docker login "$CONTAINER_HOST" -u "$CONTAINER_USERNAME" --password-stdin && docker push "${this.url}"`;
+  }
+  async run(args = [], env) {
+    const { password, server, username } = this.container;
+    try {
+      await this.docker.getImage(this.url).inspect();
+    } catch {
+      logger.progress(`pulling image: ${this.url}`);
+      const stream = await this.docker.pull(this.url, {
+        authconfig: {
+          password,
+          serveraddress: server,
+          username
+        }
+      });
+      await this._handleStream(stream);
+    }
+    const environment = _Container.get(Environment);
+    const port = environment.variables.PORT ?? environment.variables.SERVER_APP_PORT;
+    const options = {
+      AttachStderr: true,
+      AttachStdout: true,
+      ExposedPorts: { [`${port}/tcp`]: {} },
+      HostConfig: { PortBindings: { [`${port}/tcp`]: [{ HostPort: `${port}` }] } },
+      Image: this.url,
+      name: `container-${uid()}`
+    };
+    const envVars = env ?? environment.variables;
+    if (env) {
+      options.Env = Object.entries(envVars).filter(([_, value]) => !isNil(value)).map(([key, value]) => `${key}=${String(value)}`);
+    }
+    const container = await this.docker.createContainer(options);
+    return container.start();
+  }
+};
+__name(__Docker, "_Docker");
+let _Docker = __Docker;
+const _Docker2 = class _Docker2 extends _Docker {
+  constructor(params) {
+    super(params);
+  }
+};
+__name(_Docker2, "Docker");
+let Docker = _Docker2;
+const containerConfig$2 = new Config({
+  params: /* @__PURE__ */ __name(() => {
+    const environment = _Container.get(Environment);
+    return {
+      ignore: EXCLUDE_PATTERNS.filter((v) => v !== BUILD_DIR),
+      password: environment.variables.CONTAINER_PASSWORD,
+      platform: environment.variables.CONTAINER_PLATFORM,
+      server: environment.variables.CONTAINER_HOST,
+      tag: environment.variables.CONTAINER_TAG,
+      username: environment.variables.CONTAINER_USERNAME
+    };
+  }, "params")
+});
+const container_base = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({ __proto__: null, containerConfig: containerConfig$2 }, Symbol.toStringTag, { value: "Module" }));
+const containerConfig$1 = containerConfig$2.extend(() => ({
+  dockerPathname: fromConfig("container/node/Dockerfile")
+}));
+const container_node = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({ __proto__: null, containerConfig: containerConfig$1 }, Symbol.toStringTag, { value: "Module" }));
+const containerConfig = containerConfig$1.extend(() => ({
+  image: "tool_task"
+}));
+const container_toolTask = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({ __proto__: null, containerConfig }, Symbol.toStringTag, { value: "Module" }));
+var JOB_TRIGGER = /* @__PURE__ */ ((JOB_TRIGGER2) => {
+  JOB_TRIGGER2["COMMIT"] = "commit";
+  JOB_TRIGGER2["SCHEDULE"] = "schedule";
+  return JOB_TRIGGER2;
+})(JOB_TRIGGER || {});
+var FREQUENCY = /* @__PURE__ */ ((FREQUENCY2) => {
+  FREQUENCY2["DAILY"] = "daily";
+  FREQUENCY2["MONTHLY"] = "monthly";
+  FREQUENCY2["QUARTERLY"] = "quarterly";
+  FREQUENCY2["WEEKLY"] = "weekly";
+  return FREQUENCY2;
+})(FREQUENCY || {});
+const _job = /* @__PURE__ */ __name(({ jobs, version }) => ({
+  jobs: reduce(
+    jobs,
+    (result, v) => {
+      const definition = {};
+      definition.environment = v.environment;
+      let steps = [];
+      if (v.container) {
+        const docker = new Docker(v.container);
+        definition.docker = [
+          {
+            auth: {
+              password: "${CONTAINER_PASSWORD}",
+              username: "${CONTAINER_USERNAME}"
+            },
+            image: docker.url
+          }
+        ];
+        if (docker.url.includes("cimg")) {
+          steps = ["checkout", "setup_remote_docker"];
+        }
+      }
+      definition.steps = [
+        ...steps,
+        ...v.commands.map((command) => ({
+          run: {
+            command: command.command,
+            name: command.name
+          }
+        }))
+      ];
+      return { ...result, [v.name]: definition };
+    },
+    {}
+  ),
+  version,
+  workflows: reduce(
+    jobs,
+    (result, v) => {
+      const branch = v.branch ?? "main";
+      switch (v.trigger) {
+        case JOB_TRIGGER.COMMIT: {
+          return {
+            ...result,
+            [v.name]: { jobs: [v.name], when: `pipeline.git.branch == "${branch}"` }
+          };
+        }
+        case JOB_TRIGGER.SCHEDULE: {
+          return {
+            ...result,
+            [v.name]: {
+              jobs: [v.name],
+              triggers: [
+                {
+                  schedule: {
+                    cron: `${v.schedule.minute ?? 0} ${v.schedule.hour ?? 0} * * ${v.schedule.freq === FREQUENCY.DAILY ? "*" : FREQUENCY.WEEKLY ? v.schedule.day ?? 0 : "*"}`,
+                    filters: { branches: { only: [branch] } }
+                  }
+                }
+              ]
+            }
+          };
+        }
+        default:
+          return result;
+      }
+    },
+    {}
+  )
+}), "_job");
+const slug = /* @__PURE__ */ __name((params) => params.normalize("NFKD").replace(/(.+)([A-Z])/g, "$1-$2").toLowerCase().trim().replace(/\//g, "-").replace(/\s+/g, "-").replace(/[^(\w|?)-]+/g, "").replace(/_/g, "-").replace(/--+/g, "-").replace(/-$/g, ""), "slug");
+const trimPathname = /* @__PURE__ */ __name((...[value, options = {}]) => {
+  if (value === "*") return value;
+  const isPrefix = options?.isPrefix ?? true;
+  const isSlug = options?.isSlug ?? true;
+  const [url, hash] = value.split("#");
+  const hashPathname = hash && trimPathname(hash, { isPrefix: false });
+  const pathname = url.split("/").filter(Boolean).map((char) => {
+    let v = trim(char, "/");
+    isSlug && (v = v.replace(/\w\S*/g, slug));
+    return v;
+  }).join("/");
+  const result = trim(pathname, "/");
+  return hash ? `${result}#${hashPathname}` : isPrefix ? `/${result}` : result;
+}, "trimPathname");
+const uri = /* @__PURE__ */ __name(({
+  host = "",
+  isTrim = true,
+  params,
+  pathname,
+  port,
+  protocol = true,
+  subdomain
+}) => {
+  let uri2 = `${host}${port ? `:${port}` : ""}${pathname ? isTrim ? trimPathname(pathname) : pathname : ""}`;
+  if (params) {
+    const queryParams = Object.entries(params).map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join("&");
+    uri2 = `${uri2}?${queryParams}`;
+  }
+  let protocolF = protocol ? "https" : "";
+  const uriSplit = uri2.split("://");
+  if (uriSplit.length > 1) {
+    [protocolF, uri2] = uriSplit;
+  }
+  subdomain && (uri2 = `${subdomain}.${trimStart(uri2, "www.")}`);
+  protocol && (uri2 = `${protocolF}://${uri2}`);
+  return uri2;
+}, "uri");
+const PING = "ping";
+const HTTP_STATUS_CODE = {
+  CONFLICT: 409,
+  INTERNAL_SERVER_ERROR: 500
+};
+uri({
+  host: process.env.APP_HOST,
+  port: process.env.APP_PORT
+});
+uri({
+  host: "app-web-static-67q4.onrender.com",
+  port: process.env.SERVER_APP_STATIC_PORT ?? void 0
+});
+uri({
+  host: "0.0.0.0",
+  port: process.env.PORT ?? "10000"
+});
+const jobConfig = new Config({
+  config: _job,
+  params: /* @__PURE__ */ __name(() => {
+    const docker = new Docker({
+      ...containerConfig.params(),
+      environment: { PKG_NAME: "tool-task-js" }
+    });
+    return {
+      jobs: [
+        {
+          commands: [
+            {
+              command: docker.buildCommand(),
+              name: "build"
+            },
+            {
+              command: docker.publishCommand(),
+              name: "publish"
+            }
+          ],
+          container: { image: "base", server: "cimg", tag: "stable" },
+          name: "build and publish tools",
+          trigger: JOB_TRIGGER.COMMIT
+        },
+        {
+          commands: [
+            {
+              command: "cd /app && npm run run pt",
+              name: PING
+            }
+          ],
+          container: containerConfig.params(),
+          name: PING,
+          schedule: { freq: FREQUENCY.DAILY },
+          trigger: JOB_TRIGGER.SCHEDULE
+        }
+      ],
+      outPathname: fromRoot(".circleci/config.yml"),
+      version: 2.1
+    };
+  }, "params")
+});
+const JOB_BUILD = "buildJob";
+const jobBuild = buildTask({
+  context: {
+    environment: ENVIRONMENT.PRODUCTION
+  },
+  name: JOB_BUILD,
+  task: /* @__PURE__ */ __name(async () => {
+    const { outPathname } = jobConfig.params();
+    await clean({ patterns: [outPathname] });
+    writeFile$1({
+      pathname: outPathname,
+      value: yamlBuild(jobConfig.config())
+    });
+  }, "task")
+});
 const _sort = /* @__PURE__ */ __name((...[value, by]) => [...value].sort(
   by ? reduce(
     by,
@@ -2342,60 +2731,6 @@ const _database = /* @__PURE__ */ __name(({
   }
   return config2;
 }, "_database");
-const slug = /* @__PURE__ */ __name((params) => params.normalize("NFKD").replace(/(.+)([A-Z])/g, "$1-$2").toLowerCase().trim().replace(/\//g, "-").replace(/\s+/g, "-").replace(/[^(\w|?)-]+/g, "").replace(/_/g, "-").replace(/--+/g, "-").replace(/-$/g, ""), "slug");
-const trimPathname = /* @__PURE__ */ __name((...[value, options = {}]) => {
-  if (value === "*") return value;
-  const isPrefix = options?.isPrefix ?? true;
-  const isSlug = options?.isSlug ?? true;
-  const [url, hash] = value.split("#");
-  const hashPathname = hash && trimPathname(hash, { isPrefix: false });
-  const pathname = url.split("/").filter(Boolean).map((char) => {
-    let v = trim(char, "/");
-    isSlug && (v = v.replace(/\w\S*/g, slug));
-    return v;
-  }).join("/");
-  const result = trim(pathname, "/");
-  return hash ? `${result}#${hashPathname}` : isPrefix ? `/${result}` : result;
-}, "trimPathname");
-const uri = /* @__PURE__ */ __name(({
-  host = "",
-  isTrim = true,
-  params,
-  pathname,
-  port,
-  protocol = true,
-  subdomain
-}) => {
-  let uri2 = `${host}${port ? `:${port}` : ""}${pathname ? isTrim ? trimPathname(pathname) : pathname : ""}`;
-  if (params) {
-    const queryParams = Object.entries(params).map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join("&");
-    uri2 = `${uri2}?${queryParams}`;
-  }
-  let protocolF = protocol ? "https" : "";
-  const uriSplit = uri2.split("://");
-  if (uriSplit.length > 1) {
-    [protocolF, uri2] = uriSplit;
-  }
-  subdomain && (uri2 = `${subdomain}.${trimStart(uri2, "www.")}`);
-  protocol && (uri2 = `${protocolF}://${uri2}`);
-  return uri2;
-}, "uri");
-const HTTP_STATUS_CODE = {
-  CONFLICT: 409,
-  INTERNAL_SERVER_ERROR: 500
-};
-uri({
-  host: process.env.APP_HOST,
-  port: process.env.APP_PORT
-});
-uri({
-  host: "app-web-static-67q4.onrender.com",
-  port: process.env.SERVER_APP_STATIC_PORT ?? void 0
-});
-uri({
-  host: "0.0.0.0",
-  port: process.env.PORT ?? "10000"
-});
 const _HttpError = class _HttpError extends Error {
   constructor(...[statusCode, message]) {
     super(message ?? "HttpError");
@@ -2979,142 +3314,28 @@ const clientRun = buildTask({
     }
   }, "task")
 });
-const _globMatch = /* @__PURE__ */ __name((...[value, glob]) => picomatch(glob)(value), "_globMatch");
-const globMatch = /* @__PURE__ */ __name((...params) => _globMatch(...params), "globMatch");
-const __Docker = class __Docker {
-  constructor(params) {
-    this.docker = new Docker$1();
-    this.container = params;
-    const { image, server, tag, username } = params;
-    this.url = `${filterNil([server, username, snakeCase(image)]).join("/")}:${tag}`;
-  }
-  async _handleStream(stream) {
-    return new Promise((resolve2, reject) => {
-      if (!stream) {
-        return reject(new NotFoundError("Stream missing"));
-      }
-      this.docker.modem.followProgress(
-        stream,
-        (err, res) => {
-          if (err) {
-            return reject(err);
-          }
-          const error = res?.find((err2) => err2.error ?? err2.errorDetail);
-          if (error) {
-            logger.error(error);
-            reject(new Error(error.error || error.errorDetail?.message));
-          }
-          logger.success("complete");
-          return resolve2();
-        },
-        (event) => {
-          event.stream && process.stdout.write(event.stream);
-          event.error && process.stderr.write(event.error);
-        }
-      );
-    });
-  }
-  async build() {
-    const { dirname: dirname2 = fromWorking(), dockerPathname, ignore, platform } = this.container;
-    await this.delete();
-    const tarStream = tar.pack(fromRoot(), {
-      ignore: /* @__PURE__ */ __name((name) => globMatch(
-        name,
-        (ignore ?? []).map((v) => `**/*/${v}`)
-      ), "ignore")
-    });
-    try {
-      const environment = _Container.get(Environment);
-      await environment.initialize();
-      const pathname = joinPaths([dirname2, dockerPathname]);
-      const stream = await this.docker.buildImage(tarStream, {
-        buildargs: { ...environment.variables },
-        dockerfile: toRelative({ from: fromRoot(), to: pathname }),
-        nocache: true,
-        platform,
-        pull: false,
-        t: this.url
-      });
-      await this._handleStream(stream);
-    } catch (e) {
-      logger.error(e);
-      await this.delete();
-    }
-  }
-  async delete() {
-    try {
-      await this.docker.getImage(this.url).remove({ force: true });
-      const danglingImages = await this.docker.listImages({ filters: { dangling: ["true"] } });
-      for (const image of danglingImages) {
-        await this.docker.getImage(image.Id).remove({ force: true });
-      }
-    } catch {
-    }
-  }
-  async publish() {
-    const { password, server, username } = this.container;
-    try {
-      const stream = await this.docker.getImage(this.url).push({
-        authconfig: {
-          password,
-          serveraddress: server,
-          username
-        }
-      });
-      await this._handleStream(stream);
-    } catch (e) {
-      logger.error(e);
-    } finally {
-    }
-  }
-  async run(args = [], env) {
-    const { password, server, username } = this.container;
-    try {
-      await this.docker.getImage(this.url).inspect();
-    } catch {
-      logger.progress(`pulling image: ${this.url}`);
-      const stream = await this.docker.pull(this.url, {
-        authconfig: {
-          password,
-          serveraddress: server,
-          username
-        }
-      });
-      await this._handleStream(stream);
-    }
-    const environment = _Container.get(Environment);
-    const port = environment.variables.PORT ?? environment.variables.SERVER_APP_PORT;
-    const options = {
-      AttachStderr: true,
-      AttachStdout: true,
-      ExposedPorts: { [`${port}/tcp`]: {} },
-      HostConfig: { PortBindings: { [`${port}/tcp`]: [{ HostPort: `${port}` }] } },
-      Image: this.url,
-      name: `container-${uid()}`
-    };
-    const envVars = env ?? environment.variables;
-    if (env) {
-      options.Env = Object.entries(envVars).filter(([_, value]) => !isNil(value)).map(([key, value]) => `${key}=${String(value)}`);
-    }
-    const container = await this.docker.createContainer(options);
-    return container.start();
-  }
-};
-__name(__Docker, "_Docker");
-let _Docker = __Docker;
-const _Docker2 = class _Docker2 extends _Docker {
-  constructor(params) {
-    super(params);
-  }
-};
-__name(_Docker2, "Docker");
-let Docker = _Docker2;
 const CONTAINER_RUN = "containerRun";
 const containerRun = buildTask({
   name: CONTAINER_RUN,
-  task: /* @__PURE__ */ __name(async (params, context) => {
-    const { containerConfig } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => import("./container.base.js"), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => import("./container.node.js"), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts") }), `../../../../../lib-config-js/src/container/container.${process.env.ENV_PLATFORM}`, 9);
-    await new Docker({ ...containerConfig.params() }).run();
+  prompts: [appPrompt()],
+  task: /* @__PURE__ */ __name(async ({ app, platform }, context) => {
+    const { containerConfig: containerConfig2 } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => container_base), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => container_node), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts"), "../../../../../lib-config-js/src/container/container.toolTask.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => container_toolTask), "../../../../../lib-config-js/src/container/container.toolTask.ts") }), `../../../../../lib-config-js/src/container/container.${platform}`, 9);
+    await new Docker({ ...containerConfig2.params(), image: app }).run();
+    return {};
+  }, "task")
+});
+const CONTAINER_BUILD = "containerBuild";
+const containerBuild = buildTask({
+  name: CONTAINER_BUILD,
+  prompts: [appPrompt()],
+  task: /* @__PURE__ */ __name(async ({ app, platform }, context) => {
+    if (!platform) throw new NotFoundError("platform");
+    logger.info(`building container ${platform}`);
+    const { containerConfig: containerConfig2 } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => container_base), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => container_node), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts"), "../../../../../lib-config-js/src/container/container.toolTask.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => container_toolTask), "../../../../../lib-config-js/src/container/container.toolTask.ts") }), `../../../../../lib-config-js/src/container/container.${platform}`, 9);
+    await new Docker({
+      ...containerConfig2.params(),
+      image: app
+    }).build();
     return {};
   }, "task")
 });
@@ -3124,25 +3345,19 @@ const containerPublish = buildTask({
     environment: ENVIRONMENT.PRODUCTION
   },
   name: CONTAINER_PUBLISH,
-  task: /* @__PURE__ */ __name(async ({ dockerPathname, image }, context) => {
-    const { containerConfig } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => import("./container.base.js"), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => import("./container.node.js"), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts") }), `../../../../../lib-config-js/src/container/container.${process.env.ENV_PLATFORM}`, 9);
-    await new Docker(merge([{ dockerPathname, image }, containerConfig.params()])).publish();
-    return {};
-  }, "task")
-});
-const CONTAINER_BUILD = "containerBuild";
-const containerBuild = buildTask({
-  name: CONTAINER_BUILD,
-  task: /* @__PURE__ */ __name(async ({ dockerPathname, image }, context) => {
-    const { containerConfig } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => import("./container.base.js"), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => import("./container.node.js"), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts") }), `../../../../../lib-config-js/src/container/container.${process.env.ENV_PLATFORM}`, 9);
-    await new Docker(merge([{ dockerPathname, image }, containerConfig.params()])).build();
+  prompts: [appPrompt()],
+  task: /* @__PURE__ */ __name(async ({ app, isBuild = false, platform }, context) => {
+    if (!platform) throw new NotFoundError("platform");
+    logger.info(`publishing container ${platform}`);
+    const { containerConfig: containerConfig2 } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../../../../lib-config-js/src/container/container.base.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => container_base), "../../../../../lib-config-js/src/container/container.base.ts"), "../../../../../lib-config-js/src/container/container.models.ts": /* @__PURE__ */ __name(() => import("./container.models.js").then((n) => n.c), "../../../../../lib-config-js/src/container/container.models.ts"), "../../../../../lib-config-js/src/container/container.node.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => container_node), "../../../../../lib-config-js/src/container/container.node.ts"), "../../../../../lib-config-js/src/container/container.python.ts": /* @__PURE__ */ __name(() => import("./container.python.js"), "../../../../../lib-config-js/src/container/container.python.ts"), "../../../../../lib-config-js/src/container/container.toolTask.ts": /* @__PURE__ */ __name(() => Promise.resolve().then(() => container_toolTask), "../../../../../lib-config-js/src/container/container.toolTask.ts") }), `../../../../../lib-config-js/src/container/container.${platform}`, 9);
+    const container = new Docker({ ...containerConfig2.params(), image: app });
+    isBuild && await containerBuild({ app, platform });
+    await container.publish();
     return {};
   }, "task")
 });
 export {
   ASSETS_DIR as A,
-  BUILD_DIR as B,
-  Config as C,
   Environment as E,
   PLATFORM as P,
   _Container as _,
@@ -3150,17 +3365,18 @@ export {
   bundleConfig$1 as b,
   buildLint,
   buildTypescript,
-  fromConfig as c,
+  containerConfig$2 as c,
   clientRun,
   containerBuild,
   containerPublish,
   containerRun,
-  EXCLUDE_PATTERNS as d,
+  fromConfig as d,
   databaseSeed,
   executeParallel,
   filterNil as f,
   generate,
   internationalizeParse,
+  jobBuild,
   lint,
   nodeBuild,
   nodeDev,

@@ -3,6 +3,9 @@ from __future__ import annotations
 from typing import Any, Mapping, Tuple, Unpack, cast
 
 from hyperopt import STATUS_OK, Trials, fmin, hp, tpe
+from lib_shared.core.utils.get_item import get_item
+from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
+
 from lib_ai.model.utils.early_stopping import EarlyStopping
 from lib_ai.optimize.utils.optimize._optimize_models import (
     _OptimizeModel,
@@ -11,8 +14,6 @@ from lib_ai.optimize.utils.optimize._optimize_models import (
 )
 from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
 from lib_ai.scoring.scoring_constants import ScoringMode
-from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 
 
 def _get_space(
@@ -46,7 +47,9 @@ def _get_space(
             raise InvalidTypeException()
 
 
-def _optimize[T: Mapping[str, Any]](**params: Unpack[_OptimizeParamsModel[T]]) -> _OptimizeModel[T]:
+def _optimize[T: Mapping[str, Any]](
+    **params: Unpack[_OptimizeParamsModel[T]],
+) -> _OptimizeModel[T]:
     n_trials = get_item(params, "n_trials", 100)
     objective = get_item(params, "objective")
     scoring_mode = get_item(params, "scoring_mode", ScoringMode.MIN)
@@ -58,7 +61,8 @@ def _optimize[T: Mapping[str, Any]](**params: Unpack[_OptimizeParamsModel[T]]) -
 
     spaces = get_item(params, "spaces")
     space = hp.choice(
-        "optimize", [{k: _get_space(k, *v) for k, v in space.items()} for space in spaces]
+        "optimize",
+        [{k: _get_space(k, *v) for k, v in space.items()} for space in spaces],
     )
 
     early_stopping = EarlyStopping()

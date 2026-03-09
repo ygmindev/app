@@ -10,6 +10,6 @@ export const runPython = buildTask<RunPythonParamsModel, RunPythonModel>({
   prompts: [appPrompt({ defaultApp: 'service_server' })],
 
   task: async ({ pathname = './src/index.py' }) => {
-    await execute({ command: `poetry run python ${pathname}` });
+    await execute({ command: `uv run python ${pathname}` });
   },
 });
