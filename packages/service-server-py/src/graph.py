@@ -202,7 +202,7 @@ def route(state: WorkflowState) -> str:
 # Build graph
 # ---------------------------------------------------------------------------
 def build_graph(max_products: int = 3):
-    g = StateGraph(WorkflowState)
+    g = StateGraph[WorkflowState, None, WorkflowState, WorkflowState](WorkflowState)
 
     g.add_node("node_navigate", node_navigate)
     g.add_node("node_scroll_and_extract", node_scroll_and_extract)

@@ -16,5 +16,11 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         str_strip_whitespace=True,
     )
 
+    def model_post_init(
+        self,
+        *args,
+    ) -> None:
+        return self.post_init()
+
 
 class BaseModel(_BaseModel, BaseModelModel): ...

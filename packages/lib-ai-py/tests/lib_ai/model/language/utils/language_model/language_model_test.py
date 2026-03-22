@@ -1,4 +1,4 @@
-from lib_ai.model.language.utils.language_model import LanguageModel
+from lib_ai.model.language.utils.llm import LanguageModel
 
 
 def test_works() -> None:

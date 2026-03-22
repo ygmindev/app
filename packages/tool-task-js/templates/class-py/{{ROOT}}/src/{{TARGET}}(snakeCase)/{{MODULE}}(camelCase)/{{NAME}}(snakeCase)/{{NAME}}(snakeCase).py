@@ -1,6 +1,10 @@
-import { type {{NAME}}(pascalCase)ConfigModel } from '@lib/config/{{NAME}}(camelCase)/{{NAME}}(camelCase).models';
-import { Config } from '@lib/config/utils/Config/Config';
+# template version: 1.0.0
 
-export const {{NAME}}(camelCase)Config = new Config<{{NAME}}(pascalCase)ConfigModel>({
-  params: () => ({}),
-});
+from .{{NAME}}(snakeCase)_models import {{NAME}}(pascalCase)Model, _{{NAME}}(pascalCase)Model
+
+
+class _{{NAME}}(pascalCase)(_{{NAME}}(pascalCase)Model):
+    ...
+
+
+class {{NAME}}(pascalCase)(_{{NAME}}(pascalCase), {{NAME}}(pascalCase)Model): ...

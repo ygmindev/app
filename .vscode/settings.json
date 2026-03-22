@@ -50,9 +50,12 @@
   "files.autoSave": "afterDelay",
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "mypy-type-checker.args": [
-    "--disable-error-code=import-untyped"
+  "mypy-type-checker.enabled": true,
+  "mypy-type-checker.importStrategy": "fromEnvironment",
+  "mypy-type-checker.interpreter": [
+    "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
   ],
+  "mypy-type-checker.reportingScope": "workspace",
   "pylint.interpreter": [
     "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
   ],
@@ -70,7 +73,9 @@
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.colorTheme": "Default Dark+",
   "workbench.iconTheme": "vs-minimal",
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
+  "cursor.composer.suggestNextPrompt": true,
+  "python-envs.defaultEnvManager": "ms-python.python:system"
 }

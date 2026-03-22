@@ -21,11 +21,17 @@ description = ""
 version = "0.0.1"
 license = "MIT"
 authors = [{ name = "YG Min", email = "ygmindev@gmail.com" }]
-requires-python = "==3.12.12"
+requires-python = "==3.13.12"
 dependencies = [
     "lib-shared"
 ]
 
 [tool.uv.sources]
 lib-shared = { path = "../lib-shared-py", editable = true }
-`
+
+[tool.mypy]
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_configs = true

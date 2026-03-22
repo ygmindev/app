@@ -2,6 +2,8 @@
   "recommendations": [
     "charliermarsh.ruff",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "ms-python.mypy-type-checker",
+    "ms-python.pylint"
   ]
 }
