@@ -25,7 +25,7 @@ requires-python = "==3.13.12"
 dependencies = [
     "lib-ai",
     "lib-config",
-    "lib-shared"
+    "lib-shared",
 ]
 
 [tool.uv.sources]

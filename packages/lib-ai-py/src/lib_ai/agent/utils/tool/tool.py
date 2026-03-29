@@ -12,17 +12,20 @@ from .tool_models import ToolModel, TParams, TResult, _ToolModel
 class _Tool(BaseTool, _ToolModel[TParams, TResult]):
     input_type: Type[TParams]
     name: str = ""
-    description: Optional[str] = None
+    description: str = ""
 
     def __init__(
         self,
         input_type: Type[BaseModel],
+        descriptions: Optional[list[str]] = None,
         **kwargs,
     ) -> None:
+        descriptions = descriptions or []
         super().__init__(
             **kwargs,
             input_type=input_type,
             args_schema=input_type,
+            description="\n".join(descriptions),
         )
 
     async def execute(
@@ -43,4 +46,4 @@ class _Tool(BaseTool, _ToolModel[TParams, TResult]):
         return await self.execute(params=self.input_type(**kwargs))
 
 
-class Tool(_Tool, ToolModel): ...
+class Tool(_Tool[TParams, TResult], ToolModel[TParams, TResult]): ...

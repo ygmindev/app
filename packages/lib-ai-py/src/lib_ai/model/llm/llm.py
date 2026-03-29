@@ -1,21 +1,19 @@
 # template version: 1.0.0
 
 
-from typing import Iterator, Optional
+from typing import Iterator, Optional, cast
 
-from langchain_core.language_models import LanguageModelInput
 from langchain_core.language_models.chat_models import BaseChatModel
-from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_ollama import ChatOllama
 from lib_shared.core.utils.base_model import BaseModel
 from lib_shared.core.utils.uninitialized_exception import UninitializedException
 
-from lib_ai.model.llm.constants import LLM_MESSAGE_TYPE, LLM_NAME
+from lib_ai.agent.utils.llm_message import LlmMessage
+from lib_ai.agent.utils.tool import Tool
+from lib_ai.model.llm.constants import LLM_NAME
 
 from .llm_models import (
-    LlmMessage,
     LlmModel,
-    LlmOutput,
     _LlmModel,
 )
 
@@ -36,41 +34,32 @@ class _Llm(BaseModel, _LlmModel):
                     num_predict=self.max_tokens,
                 )
 
-    def _messages(
+    def bind_tools(
         self,
-        messages: list[LlmMessage],
-    ) -> LanguageModelInput:
-        return list(
-            map(
-                lambda x: (
-                    SystemMessage(content=x.message)
-                    if x.type == LLM_MESSAGE_TYPE.SYSTEM
-                    else HumanMessage(content=x.message)
-                ),
-                messages,
-            )
-        )
+        tools: list[Tool],
+    ) -> None:
+        if not self._llm:
+            raise UninitializedException("_llm")
+        self._llm = cast(BaseChatModel, self._llm.bind_tools(tools))
 
     async def invoke(
         self,
         messages: list[LlmMessage],
-    ) -> LlmOutput:
+    ) -> LlmMessage:
         if not self._llm:
             raise UninitializedException("_llm")
-
-        result = await self._llm.ainvoke(self._messages(messages))
-        return LlmOutput(message=str(result.content))
+        result = await self._llm.ainvoke([x.serialize() for x in messages])
+        return LlmMessage.deserialize(result)
 
     async def stream(
         self,
         messages: list[LlmMessage],
-    ) -> Iterator[LlmOutput]:
+    ) -> Iterator[LlmMessage]:
         if not self._llm:
             raise UninitializedException("_llm")
-
         return map(
-            lambda x: LlmOutput(message=str(x.content)),
-            self._llm.stream(self._messages(messages)),
+            LlmMessage.deserialize,
+            self._llm.stream([x.serialize() for x in messages]),
         )
 
 

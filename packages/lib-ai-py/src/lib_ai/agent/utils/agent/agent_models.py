@@ -1,21 +1,30 @@
 # template version: 1.0.0
 
 
-from typing import AsyncIterable
+from typing import AsyncIterable, Generic, TypeVar
 
-from lib_ai.model.llm.llm_models import LlmOutput
+from lib_shared.core.utils.base_model import BaseModel
+
+from lib_ai.agent.utils.llm_message import LlmMessage
 
 
-class _AgentModel:
+class AgentState(BaseModel):
+    messages: list[LlmMessage] = []
+
+
+TState = TypeVar("TState", bound=AgentState)
+
+
+class _AgentModel(Generic[TState]):
     async def run(
         self,
         prompt: str,
-    ) -> list[LlmOutput]: ...
+    ) -> list[LlmMessage]: ...
 
     async def stream(
         self,
         prompt: str,
-    ) -> AsyncIterable[LlmOutput]: ...
+    ) -> AsyncIterable[LlmMessage]: ...
 
 
 class AgentModel(_AgentModel): ...
