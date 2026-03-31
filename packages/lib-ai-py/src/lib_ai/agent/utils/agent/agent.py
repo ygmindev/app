@@ -1,5 +1,6 @@
 # template version: 1.0.0
 
+from functools import partial
 from typing import Any, AsyncIterable, Dict, Optional, cast
 
 from langgraph.checkpoint.memory import MemorySaver
@@ -34,27 +35,29 @@ class _Agent(BaseModel, _AgentModel[TState]):
 
     _graph: Optional[CompiledStateGraph] = None
 
-    middlewares: list[Middleware] = []
+    middlewares: list[Middleware[TState]] = []
     skills: list[Skill] = []
 
     def post_init(self) -> None:
         graph = StateGraph(self.state)
 
         prev = START
-        # for x in self.middlewares:
-        #     async def _handler(
-        #         state: Any,
-        #         *,
-        #         config: RunnableConfig | None = None,
-        #         store: BaseStore | None = None,
-        #     ) -> dict:
-        #         state = self.state.model_validate(state)
-        #         result = await x.before(state, x.name)
-        #         return result.model_dump()
+        for middleware in self.middlewares:
 
-        #     graph.add_node(x.name, _handler)
-        #     graph.add_edge(prev, x.name)
-        #     prev = x.name
+            async def _before(
+                m: Middleware,
+                state: Any,
+                *,
+                config: RunnableConfig | None = None,
+                store: BaseStore | None = None,
+            ) -> dict:
+                result = await m.before(state, f"{m.name} before")
+                return result
+
+            node_name = f"{middleware.name} before"
+            graph.add_node(node_name, partial(_before, middleware))
+            graph.add_edge(prev, node_name)
+            prev = node_name
 
         descriptions: list[str] = [x.strip() for x in self.descriptions]
         tools: Dict[str, Tool] = {}
@@ -96,7 +99,28 @@ class _Agent(BaseModel, _AgentModel[TState]):
 
         graph.add_node("llm", _llm)
         graph.add_edge(prev, "llm")
-        prev = "llm"
+
+        # ── Determine where to go after the llm/tools loop exits ──
+        # Build the "after" middleware chain first so we know the entry point
+        after_nodes: list[str] = []
+        for middleware in reversed(self.middlewares):
+
+            async def _after(
+                m: Middleware,
+                state: Any,
+                *,
+                config: RunnableConfig | None = None,
+                store: BaseStore | None = None,
+            ) -> dict:
+                result = await m.after(state, f"{m.name} after")
+                return result
+
+            node_name = f"{middleware.name} after"
+            graph.add_node(node_name, partial(_after, middleware))
+            after_nodes.append(node_name)
+
+        # The node to jump to when the LLM is "done" (no more tool calls)
+        exit_dest = after_nodes[0] if after_nodes else END
 
         if tools:
 
@@ -128,34 +152,26 @@ class _Agent(BaseModel, _AgentModel[TState]):
             def _tools_condition(state: AgentState) -> str:
                 messages = state.messages
                 if not messages:
-                    return END
+                    return exit_dest  # ← was END
                 last = messages[-1]
                 if last.role == LLM_ROLE.ASSISTANT and last.tool_calls:
                     return "tools"
-                return END
+                return exit_dest  # ← was END
 
             graph.add_node("tools", _tools)
             graph.add_conditional_edges("llm", _tools_condition)
             graph.add_edge("tools", "llm")
+        else:
+            # No tools – go straight from llm to the after chain (or END)
+            graph.add_edge("llm", exit_dest)
 
-        # for i in range(len(self.middlewares) - 1, 0, -1):
-        #     x = self.middlewares[i]
+        # ── Chain the "after" middleware nodes together ──
+        for i in range(len(after_nodes) - 1):
+            graph.add_edge(after_nodes[i], after_nodes[i + 1])
 
-        #     async def _handler(
-        #         state: Any,
-        #         *,
-        #         config: RunnableConfig | None = None,
-        #         store: BaseStore | None = None,
-        #     ) -> dict:
-        #         state = self.state.model_validate(state)
-        #         result = await x.after(state, x.name)
-        #         return result.model_dump()
-
-        #     graph.add_node(x.name, _handler)
-        #     graph.add_edge(prev, x.name)
-        #     prev = x.name
-
-        graph.add_edge(prev, END)
+        # Last after-node → END
+        if after_nodes:
+            graph.add_edge(after_nodes[-1], END)
 
         self._graph = graph.compile(checkpointer=MemorySaver())
 

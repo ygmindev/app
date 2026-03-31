@@ -5,6 +5,7 @@ from typing import Any, Sequence
 import httpx
 from lib_ai.agent.utils.agent import Agent
 from lib_ai.agent.utils.agent.agent_models import AgentState
+from lib_ai.agent.utils.middleware import Middleware
 from lib_ai.agent.utils.skill import Skill
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.model.llm import Llm
@@ -128,15 +129,28 @@ async def run_agent():
 
     class State(AgentState): ...
 
+    class JsonOutputMiddleware(Middleware[State]):
+        name: str = "json"
+
+        async def after(
+            self,
+            state: State,
+            node: str,
+        ) -> State:
+            print(f"@@@AFTER middleware name: {node}")
+            print(state)
+            return state
+
     agent = Agent(
         name="Weather agent",
         descriptions=[
             "When asked about the weather of a location, return ONLY JSON (without any other text) with the following fields:",
             "- 'weather': string (one of 'sunny', 'cloudy', 'snowy', or 'rainy')",
-            "- 'temperature': number (in CELCIUS)",
+            "- 'temperature': number (in FARENHEIGHT)",
         ],
         llm=llm,
         state=State,
+        middlewares=[JsonOutputMiddleware()],
         skills=[
             WeatherSkill(),
         ],

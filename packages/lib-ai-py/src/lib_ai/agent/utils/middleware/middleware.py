@@ -7,7 +7,7 @@ from .middleware_models import MiddlewareModel, TState
 
 
 class Middleware(BaseModel, MiddlewareModel[TState]):
-    name: str
+    name: str = ""
 
     async def before(
         self,
