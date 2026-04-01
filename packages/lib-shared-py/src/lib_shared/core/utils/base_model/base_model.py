@@ -13,6 +13,7 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         arbitrary_types_allowed=True,
         extra="allow",
         populate_by_name=True,
+        revalidate_instances="never",
         str_strip_whitespace=True,
     )
 

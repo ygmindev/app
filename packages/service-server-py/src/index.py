@@ -137,8 +137,7 @@ async def run_agent():
             state: State,
             node: str,
         ) -> State:
-            print(f"@@@AFTER middleware name: {node}")
-            print(state)
+            print("@@@ AFTER STATE:")
             return state
 
     agent = Agent(

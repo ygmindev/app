@@ -35,45 +35,54 @@ class _Agent(BaseModel, _AgentModel[TState]):
 
     _graph: Optional[CompiledStateGraph] = None
 
-    middlewares: list[Middleware[TState]] = []
-    skills: list[Skill] = []
+    middlewares: Optional[list[Middleware[TState]]] = None
+    skills: Optional[list[Skill]] = None
 
     def post_init(self) -> None:
         graph = StateGraph(self.state)
 
-        prev = START
-        for middleware in self.middlewares:
-
-            async def _before(
-                m: Middleware,
-                state: Any,
-                *,
-                config: RunnableConfig | None = None,
-                store: BaseStore | None = None,
-            ) -> dict:
-                result = await m.before(state, f"{m.name} before")
-                return result
-
-            node_name = f"{middleware.name} before"
-            graph.add_node(node_name, partial(_before, middleware))
-            graph.add_edge(prev, node_name)
-            prev = node_name
-
         descriptions: list[str] = [x.strip() for x in self.descriptions]
         tools: Dict[str, Tool] = {}
+
         if self.skills:
             descriptions += ["You MUST follow the protocols below for each skill:"]
-            for skill in self.skills:
+            for skill in self.skills or []:
                 descriptions += [
                     "-" * 10,
                     *skill.descriptions,
                 ]
-                tools.update({x.name: x for x in skill.tools})
+                tools.update({tool.name: tool for tool in skill.tools})
 
         self.llm.bind_tools(list(tools.values()))
 
         system_prompt = "\n".join(descriptions)
         logger.info(f"\nSystem prompt:\n{system_prompt}\n")
+
+        async def _before(
+            middleware: Middleware,
+            state: Any,
+            *,
+            config: RunnableConfig | None = None,
+            store: BaseStore | None = None,
+        ) -> Any:
+            write = get_stream_writer()
+            update = await middleware.before(state, f"{middleware.name} before")
+            if update and update.messages:
+                write([update.messages[-1]])
+            return update
+
+        async def _after(
+            middleware: Middleware,
+            state: Any,
+            *,
+            config: RunnableConfig | None = None,
+            store: BaseStore | None = None,
+        ) -> Any:
+            write = get_stream_writer()
+            update = await middleware.after(state, f"{middleware.name} after")
+            if update and update.messages:
+                write([update.messages[-1]])
+            return update
 
         async def _llm(
             state: AgentState,
@@ -82,7 +91,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
             store: BaseStore | None = None,
         ) -> AgentState:
             write = get_stream_writer()
-            updates = []
+
             result = await self.llm.invoke(
                 [
                     LlmMessage(
@@ -92,84 +101,84 @@ class _Agent(BaseModel, _AgentModel[TState]):
                 ]
                 + state.messages
             )
-            updates.append(result)
+
+            updates = [result]
             write(updates)
             state.messages = [*state.messages, *updates]
             return state
 
+        async def _tools(
+            state: AgentState,
+            *,
+            config: RunnableConfig | None = None,
+            store: BaseStore | None = None,
+        ) -> AgentState:
+            write = get_stream_writer()
+            updates: list[LlmMessage] = []
+
+            messages = state.messages
+            if not messages:
+                write(updates)
+                return state
+
+            last = messages[-1]
+            if last.role == LLM_ROLE.ASSISTANT and last.tool_calls:
+                for tool_call in last.tool_calls:
+                    tool = tools[tool_call.name]
+                    result = await tool.ainvoke(tool_call.params)
+                    updates.append(
+                        LlmMessage(
+                            role=LLM_ROLE.TOOL,
+                            message=str(result),
+                            current_tool_call=tool_call,
+                        )
+                    )
+
+            write(updates)
+            state.messages = [*messages, *updates]
+            return state
+
+        def _llm_route(state: AgentState) -> str:
+            messages = state.messages
+            if not messages:
+                return "after"
+            last = messages[-1]
+            if last.role == LLM_ROLE.ASSISTANT and last.tool_calls:
+                return "tools"
+            return "after"
+
+        prev = START
+        for middleware in self.middlewares or []:
+            node_name = f"{middleware.name} before"
+            graph.add_node(node_name, partial(_before, middleware))
+            graph.add_edge(prev, node_name)
+            prev = node_name
+
         graph.add_node("llm", _llm)
         graph.add_edge(prev, "llm")
 
-        # ── Determine where to go after the llm/tools loop exits ──
-        # Build the "after" middleware chain first so we know the entry point
         after_nodes: list[str] = []
-        for middleware in reversed(self.middlewares):
-
-            async def _after(
-                m: Middleware,
-                state: Any,
-                *,
-                config: RunnableConfig | None = None,
-                store: BaseStore | None = None,
-            ) -> dict:
-                result = await m.after(state, f"{m.name} after")
-                return result
-
+        for middleware in reversed(self.middlewares or []):
             node_name = f"{middleware.name} after"
             graph.add_node(node_name, partial(_after, middleware))
             after_nodes.append(node_name)
 
-        # The node to jump to when the LLM is "done" (no more tool calls)
-        exit_dest = after_nodes[0] if after_nodes else END
+        after_start = after_nodes[0] if after_nodes else END
 
         if tools:
-
-            async def _tools(
-                state: AgentState,
-                *,
-                config: RunnableConfig | None = None,
-                store: BaseStore | None = None,
-            ) -> AgentState:
-                write = get_stream_writer()
-                updates = []
-                messages = state.messages
-                last = messages[-1]
-                if last.role == LLM_ROLE.ASSISTANT and last.tool_calls:
-                    for tool_call in last.tool_calls:
-                        tool = tools[tool_call.name]
-                        result = await tool.ainvoke(tool_call.params)
-                        updates.append(
-                            LlmMessage(
-                                role=LLM_ROLE.TOOL,
-                                message=str(result),
-                                current_tool_call=tool_call,
-                            )
-                        )
-                write(updates)
-                state.messages = [*messages, *updates]
-                return state
-
-            def _tools_condition(state: AgentState) -> str:
-                messages = state.messages
-                if not messages:
-                    return exit_dest  # ← was END
-                last = messages[-1]
-                if last.role == LLM_ROLE.ASSISTANT and last.tool_calls:
-                    return "tools"
-                return exit_dest  # ← was END
-
             graph.add_node("tools", _tools)
-            graph.add_conditional_edges("llm", _tools_condition)
+            graph.add_conditional_edges(
+                "llm",
+                _llm_route,
+                {"tools": "tools", "after": after_start},
+            )
             graph.add_edge("tools", "llm")
         else:
-            # No tools – go straight from llm to the after chain (or END)
-            graph.add_edge("llm", exit_dest)
+            graph.add_edge("llm", after_start)
 
-        # ── Chain the "after" middleware nodes together ──
         for i in range(len(after_nodes) - 1):
             graph.add_edge(after_nodes[i], after_nodes[i + 1])
 
-        # Last after-node → END
         if after_nodes:
             graph.add_edge(after_nodes[-1], END)
 

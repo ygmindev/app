@@ -8,4 +8,17 @@ from lib_shared.core.utils.base_model import BaseModel
 TState = TypeVar("TState", bound=BaseModel)
 
 
-class MiddlewareModel(Generic[TState]): ...
+class MiddlewareModel(Generic[TState]):
+    name: str
+
+    async def before(
+        self,
+        state: TState,
+        node: str,
+    ) -> TState: ...
+
+    async def after(
+        self,
+        state: TState,
+        node: str,
+    ) -> TState: ...
