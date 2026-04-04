@@ -26,5 +26,9 @@ class _AgentModel(Generic[TState]):
         prompt: str,
     ) -> AsyncIterable[LlmMessage]: ...
 
+    async def visualize(
+        self,
+    ) -> None: ...
+
 
 class AgentModel(_AgentModel): ...

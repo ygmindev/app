@@ -112,6 +112,7 @@ buck-out/
 # Python
 **/.venv
 __pycache__
+.mypy_cache
 .pytest_cache
 .test
 

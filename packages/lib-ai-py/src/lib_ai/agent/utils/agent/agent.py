@@ -27,7 +27,7 @@ from lib_ai.model.llm import Llm
 from .agent_models import AgentModel, AgentState, TState, _AgentModel
 
 
-class _Agent(BaseModel, _AgentModel[TState]):
+class _Agent(_AgentModel[TState], BaseModel):
     descriptions: list[str]
     llm: Llm
     name: str
@@ -65,11 +65,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
             config: RunnableConfig | None = None,
             store: BaseStore | None = None,
         ) -> Any:
-            write = get_stream_writer()
-            update = await middleware.before(state, f"{middleware.name} before")
-            if update and update.messages:
-                write([update.messages[-1]])
-            return update
+            return await middleware.before(state, f"{middleware.name} before")
 
         async def _after(
             middleware: Middleware,
@@ -78,11 +74,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
             config: RunnableConfig | None = None,
             store: BaseStore | None = None,
         ) -> Any:
-            write = get_stream_writer()
-            update = await middleware.after(state, f"{middleware.name} after")
-            if update and update.messages:
-                write([update.messages[-1]])
-            return update
+            return await middleware.after(state, f"{middleware.name} after")
 
         async def _llm(
             state: AgentState,
@@ -221,6 +213,13 @@ class _Agent(BaseModel, _AgentModel[TState]):
                     role=LLM_ROLE.SYSTEM,
                     message="\n".join(result),
                 )
+
+    async def visualize(
+        self,
+    ) -> None:
+        if self._graph is None:
+            raise UninitializedException("agent")
+        self._graph.get_graph().draw_mermaid_png(output_file_path="graph.png")
 
 
 class Agent(_Agent, AgentModel): ...

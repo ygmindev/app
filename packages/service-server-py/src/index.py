@@ -1,4 +1,5 @@
 import asyncio
+import json
 from enum import Enum
 from typing import Any, Sequence
 
@@ -81,8 +82,8 @@ class WeatherSkill(Skill):
                     return WeatherFetchToolOutput(
                         description=current["weatherDesc"][0]["value"],
                         temperature=Temperature(
-                            value=current["temp_C"],
-                            unit=TEMPERATURE_UNIT.CELCIUS,
+                            value=current["temp_F"],
+                            unit=TEMPERATURE_UNIT.FARENHEIGHT,
                         ),
                         humidity=current["humidity"],
                         wind_kmph=current["windspeedKmph"],
@@ -92,27 +93,47 @@ class WeatherSkill(Skill):
             from_temperature: Temperature
             to_unit: TEMPERATURE_UNIT
 
-        class TemperatureConversionTool(Tool):
+        class TemperatureConversionToolOutput(BaseModel):
+            temperature: Temperature
+
+        class TemperatureConversionTool(
+            Tool[TemperatureConversionToolInput, TemperatureConversionToolOutput]
+        ):
             name: str = "temperature_conversion"
 
             async def execute(
                 self,
                 params: TemperatureConversionToolInput,
-            ) -> str:
+            ) -> TemperatureConversionToolOutput:
                 if params.from_temperature.unit == params.to_unit:
-                    return f"{params.from_temperature.value}"
+                    return TemperatureConversionToolOutput(
+                        temperature=Temperature(
+                            value=params.from_temperature.value, unit=params.to_unit
+                        )
+                    )
 
                 match params.from_temperature.unit:
                     case TEMPERATURE_UNIT.CELCIUS:
                         match params.to_unit:
                             case TEMPERATURE_UNIT.FARENHEIGHT:
-                                return f"{params.from_temperature.value * 1.8 + 32}"
+                                return TemperatureConversionToolOutput(
+                                    temperature=Temperature(
+                                        value=params.from_temperature.value * 1.8 + 32,
+                                        unit=params.to_unit,
+                                    )
+                                )
                             case _:
                                 raise NotImplementedError()
                     case TEMPERATURE_UNIT.FARENHEIGHT:
                         match params.to_unit:
                             case TEMPERATURE_UNIT.CELCIUS:
-                                return f"{(params.from_temperature.value - 32) / 1.8}"
+                                return TemperatureConversionToolOutput(
+                                    temperature=Temperature(
+                                        value=(params.from_temperature.value - 32)
+                                        / 1.8,
+                                        unit=params.to_unit,
+                                    )
+                                )
                             case _:
                                 raise NotImplementedError()
                     case _:
@@ -137,7 +158,11 @@ async def run_agent():
             state: State,
             node: str,
         ) -> State:
-            print("@@@ AFTER STATE:")
+            last = state.messages[-1]
+            try:
+                json.loads(last.message)
+            except json.JSONDecodeError as e:
+                raise ValueError(f"Output is not a valid JSON: {last.message}") from e
             return state
 
     agent = Agent(
@@ -145,7 +170,8 @@ async def run_agent():
         descriptions=[
             "When asked about the weather of a location, return ONLY JSON (without any other text) with the following fields:",
             "- 'weather': string (one of 'sunny', 'cloudy', 'snowy', or 'rainy')",
-            "- 'temperature': number (in FARENHEIGHT)",
+            "- 'temperature': {'value': number, 'unit': string}",
+            "ALWAYS return temperature in celcius",
         ],
         llm=llm,
         state=State,
@@ -158,7 +184,7 @@ async def run_agent():
     prompt = "what is the weather in New York?"
 
     async for item in agent.stream(prompt=prompt):
-        print(f"\n### ITEM: {item.message}\n")
+        print(f"### ITEM: {item.message}")
 
 
 def main():
