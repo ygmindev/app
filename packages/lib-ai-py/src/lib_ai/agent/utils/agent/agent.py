@@ -1,6 +1,5 @@
 # template version: 1.0.0
 
-from functools import partial
 from typing import Any, AsyncIterable, Dict, Optional, cast
 
 from langgraph.checkpoint.memory import MemorySaver
@@ -19,12 +18,11 @@ from lib_shared.core.utils.uninitialized_exception import UninitializedException
 
 from lib_ai.agent.utils.llm_message import LlmMessage
 from lib_ai.agent.utils.llm_message.constants import LLM_ROLE
-from lib_ai.agent.utils.middleware import Middleware
 from lib_ai.agent.utils.skill import Skill
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.model.llm import Llm
 
-from .agent_models import AgentModel, AgentState, TState, _AgentModel
+from .agent_models import AgentModel, AgentNode, AgentState, TState, _AgentModel
 
 
 class _Agent(_AgentModel[TState], BaseModel):
@@ -32,15 +30,13 @@ class _Agent(_AgentModel[TState], BaseModel):
     llm: Llm
     name: str
     state: Any
+    nodes: Optional[list[AgentNode]] = None
+    skills: Optional[list[Skill]] = None
 
     _graph: Optional[CompiledStateGraph] = None
 
-    middlewares: Optional[list[Middleware[TState]]] = None
-    skills: Optional[list[Skill]] = None
-
     def post_init(self) -> None:
         graph = StateGraph(self.state)
-
         descriptions: list[str] = [x.strip() for x in self.descriptions]
         tools: Dict[str, Tool] = {}
 
@@ -57,24 +53,6 @@ class _Agent(_AgentModel[TState], BaseModel):
 
         system_prompt = "\n".join(descriptions)
         logger.info(f"\nSystem prompt:\n{system_prompt}\n")
-
-        async def _before(
-            middleware: Middleware,
-            state: Any,
-            *,
-            config: RunnableConfig | None = None,
-            store: BaseStore | None = None,
-        ) -> Any:
-            return await middleware.before(state, f"{middleware.name} before")
-
-        async def _after(
-            middleware: Middleware,
-            state: Any,
-            *,
-            config: RunnableConfig | None = None,
-            store: BaseStore | None = None,
-        ) -> Any:
-            return await middleware.after(state, f"{middleware.name} after")
 
         async def _llm(
             state: AgentState,
@@ -130,7 +108,7 @@ class _Agent(_AgentModel[TState], BaseModel):
             state.messages = [*messages, *updates]
             return state
 
-        def _llm_route(state: AgentState) -> str:
+        def _llm_node(state: AgentState) -> str:
             messages = state.messages
             if not messages:
                 return "after"
@@ -140,39 +118,21 @@ class _Agent(_AgentModel[TState], BaseModel):
             return "after"
 
         prev = START
-        for middleware in self.middlewares or []:
-            node_name = f"{middleware.name} before"
-            graph.add_node(node_name, partial(_before, middleware))
-            graph.add_edge(prev, node_name)
-            prev = node_name
 
         graph.add_node("llm", _llm)
+
         graph.add_edge(prev, "llm")
-
-        after_nodes: list[str] = []
-        for middleware in reversed(self.middlewares or []):
-            node_name = f"{middleware.name} after"
-            graph.add_node(node_name, partial(_after, middleware))
-            after_nodes.append(node_name)
-
-        after_start = after_nodes[0] if after_nodes else END
 
         if tools:
             graph.add_node("tools", _tools)
             graph.add_conditional_edges(
                 "llm",
-                _llm_route,
-                {"tools": "tools", "after": after_start},
+                _llm_node,
+                {"tools": "tools", "after": END},
             )
             graph.add_edge("tools", "llm")
         else:
-            graph.add_edge("llm", after_start)
-
-        for i in range(len(after_nodes) - 1):
-            graph.add_edge(after_nodes[i], after_nodes[i + 1])
-
-        if after_nodes:
-            graph.add_edge(after_nodes[-1], END)
+            graph.add_edge("llm", END)
 
         self._graph = graph.compile(checkpointer=MemorySaver())
 

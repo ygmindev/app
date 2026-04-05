@@ -1,12 +1,10 @@
 import asyncio
-import json
 from enum import Enum
 from typing import Any, Sequence
 
 import httpx
 from lib_ai.agent.utils.agent import Agent
 from lib_ai.agent.utils.agent.agent_models import AgentState
-from lib_ai.agent.utils.middleware import Middleware
 from lib_ai.agent.utils.skill import Skill
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.model.llm import Llm
@@ -148,22 +146,7 @@ class WeatherSkill(Skill):
 async def run_agent():
     llm = Llm(name=LLM_NAME.GLM_5)
 
-    class State(AgentState): ...
-
-    class JsonOutputMiddleware(Middleware[State]):
-        name: str = "json"
-
-        async def after(
-            self,
-            state: State,
-            node: str,
-        ) -> State:
-            last = state.messages[-1]
-            try:
-                json.loads(last.message)
-            except json.JSONDecodeError as e:
-                raise ValueError(f"Output is not a valid JSON: {last.message}") from e
-            return state
+    class MyState(AgentState): ...
 
     agent = Agent(
         name="Weather agent",
@@ -174,8 +157,7 @@ async def run_agent():
             "ALWAYS return temperature in celcius",
         ],
         llm=llm,
-        state=State,
-        middlewares=[JsonOutputMiddleware()],
+        state=MyState,
         skills=[
             WeatherSkill(),
         ],
