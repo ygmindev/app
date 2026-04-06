@@ -7,3 +7,4 @@ from .agent_node_models import AgentNodeModel
 
 class AgentNode(BaseModel, AgentNodeModel):
     name: str
+    max_iter: int = 3

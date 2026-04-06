@@ -28,6 +28,7 @@ from lib_ai.agent.utils.handoff_node import HandoffNode
 from lib_ai.agent.utils.llm_message import LlmMessage
 from lib_ai.agent.utils.llm_message.constants import LLM_ROLE
 from lib_ai.agent.utils.skill import Skill
+from lib_ai.agent.utils.supervisor_node.supervisor_node import SupervisorNode
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.model.llm import Llm
 
@@ -95,6 +96,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
                 if isinstance(node, CustomNode):
                     graph.add_node(node_name, _node(node.handler))
                     exit_name = node_name
+
                 elif isinstance(node, HandoffNode):
 
                     async def _handoff(
@@ -104,6 +106,19 @@ class _Agent(BaseModel, _AgentModel[TState]):
                         return await _agent.run(state.messages[-1].message)
 
                     graph.add_node(node_name, _node(_handoff))
+                    exit_name = node_name
+
+                elif isinstance(node, SupervisorNode):
+
+                    async def _supervisor(
+                        state: AgentState,
+                        _agents: list[_Agent] = node.agents,
+                        _finish: str = node.finish_token,
+                    ) -> list[LlmMessage]:
+                        agent_map: Dict[str, _AgentModel] = {a.name: a for a in _agents}
+                        return []
+
+                    graph.add_node(node_name, _node(_supervisor))
                     exit_name = node_name
 
             return (node_name, exit_name)

@@ -1,10 +1,12 @@
 # template version: 1.0.0
-from typing import Self
+from typing import Generic, Self, TypeVar
 
 from langchain_core.messages import BaseMessage
 
+TType = TypeVar("TType", default=str)
 
-class _LlmMessageModel:
+
+class _LlmMessageModel(Generic[TType]):
     def serialize(self) -> BaseMessage: ...
 
     @classmethod

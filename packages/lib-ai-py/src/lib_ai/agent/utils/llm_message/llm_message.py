@@ -1,6 +1,6 @@
 # template version: 1.0.0
 
-from typing import Optional, Self
+from typing import Optional, Self, cast
 
 from langchain_core.messages import (
     AIMessage,
@@ -14,7 +14,7 @@ from lib_shared.core.utils.base_model import BaseModel
 
 from lib_ai.agent.utils.llm_message.constants import LLM_ROLE
 
-from .llm_message_models import LlmMessageModel, _LlmMessageModel
+from .llm_message_models import LlmMessageModel, TType, _LlmMessageModel
 
 
 class ToolCall(BaseModel):
@@ -23,16 +23,16 @@ class ToolCall(BaseModel):
     params: dict
 
 
-class _LlmMessage(BaseModel, _LlmMessageModel):
+class _LlmMessage(BaseModel, _LlmMessageModel[TType]):
     role: LLM_ROLE
-    message: str = ""
+    message: TType
     tool_calls: Optional[list[ToolCall]] = None
     current_tool_call: Optional[ToolCall] = None
 
     def serialize(self) -> BaseMessage:
         match self.role:
             case LLM_ROLE.USER:
-                return HumanMessage(content=self.message)
+                return HumanMessage(content=str(self.message))
             case LLM_ROLE.ASSISTANT:
                 tool_calls = None
                 if self.tool_calls:
@@ -45,15 +45,15 @@ class _LlmMessage(BaseModel, _LlmMessageModel):
                         for tool_call in (self.tool_calls or [])
                     ]
                 return AIMessage(
-                    content=self.message,
+                    content=str(self.message),
                     tool_calls=tool_calls,
                 )
             case LLM_ROLE.SYSTEM:
-                return SystemMessage(content=self.message)
+                return SystemMessage(content=str(self.message))
             case LLM_ROLE.TOOL:
                 if self.current_tool_call:
                     return ToolMessage(
-                        content=self.message,
+                        content=str(self.message),
                         tool_call_id=self.current_tool_call.id,
                     )
                 raise ValueError("current_tool_call is None")
@@ -68,12 +68,12 @@ class _LlmMessage(BaseModel, _LlmMessageModel):
         if isinstance(message, HumanMessage):
             instance = cls(
                 role=LLM_ROLE.USER,
-                message=str(message.content),
+                message=cast(TType, message.content),
             )
         elif isinstance(message, AIMessage):
             instance = cls(
                 role=LLM_ROLE.ASSISTANT,
-                message=str(message.content),
+                message=cast(TType, message.content),
                 tool_calls=[
                     ToolCall(
                         id=str(x["id"]),
@@ -86,12 +86,12 @@ class _LlmMessage(BaseModel, _LlmMessageModel):
         elif isinstance(message, SystemMessage):
             instance = cls(
                 role=LLM_ROLE.SYSTEM,
-                message=str(message.content),
+                message=cast(TType, message.content),
             )
         elif isinstance(message, ToolMessage):
             instance = cls(
                 role=LLM_ROLE.TOOL,
-                message=str(message.content),
+                message=cast(TType, message.content),
                 current_tool_call=ToolCall(
                     id=str(message.tool_call_id),
                     name=str(message.name),
