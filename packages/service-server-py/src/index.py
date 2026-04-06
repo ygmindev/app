@@ -1,10 +1,14 @@
 import asyncio
+import json
 from enum import Enum
 from typing import Any, Sequence
 
 import httpx
 from lib_ai.agent.utils.agent import Agent
 from lib_ai.agent.utils.agent.agent_models import AgentState
+from lib_ai.agent.utils.custom_node import CustomNode
+from lib_ai.agent.utils.llm_message import LlmMessage
+from lib_ai.agent.utils.llm_message.constants import LLM_ROLE
 from lib_ai.agent.utils.skill import Skill
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.model.llm import Llm
@@ -106,7 +110,8 @@ class WeatherSkill(Skill):
                 if params.from_temperature.unit == params.to_unit:
                     return TemperatureConversionToolOutput(
                         temperature=Temperature(
-                            value=params.from_temperature.value, unit=params.to_unit
+                            value=params.from_temperature.value,
+                            unit=params.to_unit,
                         )
                     )
 
@@ -148,6 +153,35 @@ async def run_agent():
 
     class MyState(AgentState): ...
 
+    class PreNode(CustomNode[AgentState]):
+        name: str = "pre"
+
+        async def handler(
+            self,
+            state: AgentState,
+        ) -> list[LlmMessage]:
+            return []
+
+    class PostJsonNode(CustomNode[AgentState]):
+        name: str = "post_json"
+
+        async def handler(
+            self,
+            state: AgentState,
+        ) -> list[LlmMessage]:
+            try:
+                last = state.messages[-1].message
+                return [
+                    LlmMessage(
+                        role=LLM_ROLE.SYSTEM,
+                        message=json.dumps(json.loads(last)),
+                    )
+                ]
+            except json.JSONDecodeError as e:
+                raise ValueError(
+                    f"Failed to parse JSON from the last message: {last}"
+                ) from e
+
     agent = Agent(
         name="Weather agent",
         descriptions=[
@@ -160,6 +194,12 @@ async def run_agent():
         state=MyState,
         skills=[
             WeatherSkill(),
+        ],
+        nodes_pre=[
+            PreNode(),
+        ],
+        nodes_post=[
+            PostJsonNode(),
         ],
     )
 
