@@ -164,9 +164,10 @@ async def run_agent():
     )
 
     prompt = "what is the weather in New York?"
-
     async for item in agent.stream(prompt=prompt):
         print(f"### ITEM: {item.message}")
+
+    await agent.visualize()
 
 
 def main():
