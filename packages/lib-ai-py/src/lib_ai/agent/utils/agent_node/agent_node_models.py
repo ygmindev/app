@@ -1,9 +1,12 @@
 # template version: 1.0.0
 
 
-from typing import Generic, TypeVar
+from typing import TypeVar
 
-TState = TypeVar("TState")
+from lib_ai.agent.utils.agent_state import AgentState
+from lib_ai.agent.utils.graph_node.graph_node_models import GraphNodeModel
+
+TState = TypeVar("TState", bound=AgentState)
 
 
-class AgentNodeModel(Generic[TState]): ...
+class AgentNodeModel(GraphNodeModel[TState]): ...

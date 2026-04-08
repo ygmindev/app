@@ -1,10 +1,9 @@
 # template version: 1.0.0
 
-from lib_shared.core.utils.base_model import BaseModel
+
+from lib_ai.agent.utils.graph_node import GraphNode
 
 from .agent_node_models import AgentNodeModel
 
 
-class AgentNode(BaseModel, AgentNodeModel):
-    name: str
-    max_iter: int = 3
+class AgentNode(GraphNode, AgentNodeModel): ...

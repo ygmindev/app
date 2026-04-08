@@ -3,54 +3,44 @@
 from typing import (
     Any,
     AsyncIterable,
-    Awaitable,
-    Callable,
     Dict,
     Optional,
-    Protocol,
     cast,
 )
 
-from langgraph.checkpoint.memory import MemorySaver
-from langgraph.config import get_stream_writer
-from langgraph.graph.state import (
-    END,
-    START,
-    CompiledStateGraph,
-    StateGraph,
-)
 from lib_shared.core.utils.base_model import BaseModel
 from lib_shared.core.utils.logger import logger
-from lib_shared.core.utils.uninitialized_exception import UninitializedException
+from lib_shared.core.utils.not_implemented_exception import NotImplementedException
 
-from lib_ai.agent.utils.custom_node import CustomNode
-from lib_ai.agent.utils.handoff_node import HandoffNode
+from lib_ai.agent.utils.directed_acyclic_graph import DirectedAcyclicGraph
+from lib_ai.agent.utils.directed_acyclic_graph.directed_acyclic_graph_models import (
+    GraphEdgeModel,
+    GraphNodeType,
+)
+from lib_ai.agent.utils.graph_node import GraphNode
 from lib_ai.agent.utils.llm_message import LlmMessage
 from lib_ai.agent.utils.llm_message.constants import LLM_ROLE
 from lib_ai.agent.utils.skill import Skill
-from lib_ai.agent.utils.supervisor_node.supervisor_node import SupervisorNode
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.model.llm import Llm
 
-from .agent_models import AgentModel, AgentNode, AgentState, TState, _AgentModel
+from .agent_models import AgentModel, AgentState, TState, _AgentModel
 
 
 class _Agent(BaseModel, _AgentModel[TState]):
     descriptions: list[str]
     llm: Llm
     name: str
-    nodes_post: Optional[list[AgentNode]] = None
-    nodes_pre: Optional[list[AgentNode]] = None
+    state_schema: Any
     skills: Optional[list[Skill]] = None
-    state: Any
 
-    _graph: Optional[CompiledStateGraph] = None
+    _graph: Optional[DirectedAcyclicGraph] = None
 
     def post_init(self) -> None:
-        graph = StateGraph(self.state)
-        descriptions: list[str] = [x.strip() for x in self.descriptions]
         tools: Dict[str, Tool] = {}
+        nodes: list[GraphNode] = []
 
+        descriptions: list[str] = [x.strip() for x in self.descriptions]
         if self.skills:
             descriptions += ["You MUST follow the protocols below for each skill:"]
             for skill in self.skills or []:
@@ -61,108 +51,29 @@ class _Agent(BaseModel, _AgentModel[TState]):
                 tools.update({tool.name: tool for tool in skill.tools})
 
         self.llm.bind_tools(list(tools.values()))
-
         system_prompt = "\n".join(descriptions)
         logger.info(f"\nSystem prompt:\n{system_prompt}\n")
 
-        class _Wrapped(Protocol):
-            def __call__(self, state: AgentState) -> Awaitable[AgentState]: ...
+        nodes: list[GraphNode] = []
+        edges: list[GraphEdgeModel] = []
 
-        def _node(
-            handler: Callable[[AgentState], Awaitable[list[LlmMessage]]],
-        ) -> _Wrapped:
-            async def _wrapped(
-                state: AgentState,
-            ) -> AgentState:
-                write = get_stream_writer()
-                messages = state.messages or []
-                result = await handler(state)
-                if result:
-                    write(result)
-                    state.messages = [*messages, *result]
-                return state
+        edges.append((GraphNodeType.START, "llm"))
 
-            return _wrapped
-
-        def _wire_nodes(
-            nodes: list[AgentNode],
-            prefix: str,
-        ) -> tuple[str, str]:
-            node_name: str = ""
-            exit_name: str = ""
-
-            for i, node in enumerate(nodes):
-                node_name = f"{prefix}_{node.name}"
-                if isinstance(node, CustomNode):
-                    graph.add_node(node_name, _node(node.handler))
-                    exit_name = node_name
-
-                elif isinstance(node, HandoffNode):
-
-                    async def _handoff(
-                        state: AgentState,
-                        _agent: _Agent = node.agent,
-                    ) -> list[LlmMessage]:
-                        return await _agent.run(state.messages[-1].message)
-
-                    graph.add_node(node_name, _node(_handoff))
-                    exit_name = node_name
-
-                elif isinstance(node, SupervisorNode):
-
-                    async def _supervisor(
-                        state: AgentState,
-                        _agents: list[_Agent] = node.agents,
-                        _finish: str = node.finish_token,
-                    ) -> list[LlmMessage]:
-                        agent_map: Dict[str, _AgentModel] = {a.name: a for a in _agents}
-                        return []
-
-                    graph.add_node(node_name, _node(_supervisor))
-                    exit_name = node_name
-
-            return (node_name, exit_name)
-
-        # Preprocessing nodes
-        prev = START
-        if self.nodes_pre:
-            node_name, exit_name = _wire_nodes(
-                self.nodes_pre,
-                prefix="pre",
-            )
-            graph.add_edge(prev, node_name)
-            prev = exit_name
-
-        graph.add_edge(prev, "llm")
-
-        # Postprocessing nodes
-        post = END
-        if self.nodes_post:
-            node_name, exit_name = _wire_nodes(
-                self.nodes_post,
-                prefix="post",
-            )
-            graph.add_edge(exit_name, post)
-            post = node_name
-
-        # Main LLM nodes
         async def _llm(
-            state: AgentState,
-        ) -> list[LlmMessage]:
+            state: TState,
+        ) -> TState:
             result = await self.llm.invoke(
-                [
-                    LlmMessage(
-                        role=LLM_ROLE.SYSTEM,
-                        message=system_prompt,
-                    )
-                ]
+                [LlmMessage(role=LLM_ROLE.SYSTEM, message=system_prompt)]
                 + state.messages
             )
-            return [result]
+            state.messages.append(result)
+            return state
+
+        nodes.append(GraphNode(name="llm", handler=_llm))
 
         async def _tools(
-            state: AgentState,
-        ) -> list[LlmMessage]:
+            state: TState,
+        ) -> TState:
             updates: list[LlmMessage] = []
             messages = state.messages or []
             if messages:
@@ -178,29 +89,35 @@ class _Agent(BaseModel, _AgentModel[TState]):
                                 current_tool_call=tool_call,
                             )
                         )
-            return updates
+            state.messages.extend(updates)
+            return state
 
-        def _llm_route(state: AgentState) -> str:
+        def _llm_route(state: TState) -> str:
             messages = state.messages
             if messages:
                 last = messages[-1]
                 if last.role == LLM_ROLE.ASSISTANT and last.tool_calls:
                     return "tools"
-            return "after"
+            return GraphNodeType.END
 
-        graph.add_node("llm", _node(_llm))
         if tools:
-            graph.add_node("tools", _node(_tools))
-            graph.add_conditional_edges(
-                "llm",
-                _llm_route,
-                {"tools": "tools", "after": post},
-            )
-            graph.add_edge("tools", "llm")
+            nodes.append(GraphNode(name="tools", handler=_tools))
+            edges.append(("tools", "llm"))
+            edges.append(("llm", _llm_route))
         else:
-            graph.add_edge("llm", post)
+            edges.append(("llm", GraphNodeType.END))
 
-        self._graph = graph.compile(checkpointer=MemorySaver())
+        self._graph = DirectedAcyclicGraph(
+            state_schema=self.state_schema,
+            nodes=nodes,
+            edges=edges,
+        )
+
+    @property
+    def graph(self) -> DirectedAcyclicGraph:
+        if self._graph is None:
+            raise NotImplementedException("Graph is not initialized")
+        return self._graph
 
     async def run(
         self,
@@ -212,10 +129,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
         self,
         prompt: str,
     ) -> AsyncIterable[LlmMessage]:
-        if not self._graph:
-            raise UninitializedException("agent")
-
-        async for messages in self._graph.astream(
+        async for updates in self.graph.stream(
             AgentState(
                 messages=[
                     LlmMessage(
@@ -224,10 +138,9 @@ class _Agent(BaseModel, _AgentModel[TState]):
                     )
                 ]
             ),
-            stream_mode="custom",
-            config={"configurable": {"thread_id": "conversation_1"}},
         ):
-            messages = cast(list[LlmMessage], messages)
+            print("\n\n@@@updates", updates, "\n\n")
+            messages = cast(list[LlmMessage], updates.messages)
             for message in messages:
                 result: list[str] = [message.message]
                 if message.role == LLM_ROLE.ASSISTANT and message.tool_calls:
@@ -239,13 +152,6 @@ class _Agent(BaseModel, _AgentModel[TState]):
                     role=LLM_ROLE.SYSTEM,
                     message="\n".join(result),
                 )
-
-    async def visualize(
-        self,
-    ) -> None:
-        if self._graph is None:
-            raise UninitializedException("agent")
-        self._graph.get_graph().draw_mermaid_png(output_file_path="graph.png")
 
 
 class Agent(_Agent, AgentModel): ...

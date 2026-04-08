@@ -26,6 +26,7 @@ dependencies = [
     "lib-ai",
     "lib-config",
     "lib-shared",
+    "pydash>=8.0.6",
 ]
 
 [tool.uv.sources]
