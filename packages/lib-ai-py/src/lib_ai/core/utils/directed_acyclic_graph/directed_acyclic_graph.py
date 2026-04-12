@@ -17,7 +17,7 @@ from lib_shared.core.utils.uninitialized_exception.uninitialized_exception impor
     UninitializedException,
 )
 
-from lib_ai.agent.utils.graph_node.graph_node import GraphNode
+from lib_ai.core.utils.directed_acyclic_graph.graph_node import GraphNode
 
 from .directed_acyclic_graph_models import (
     DirectedAcyclicGraphModel,
@@ -50,7 +50,8 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
 
         return _wrapped
 
-    def _get_edge(self, name: GraphNodeType | str) -> str:
+    @staticmethod
+    def _get_edge(name: GraphNodeType | str) -> str:
         match name:
             case GraphNodeType.START:
                 return START
@@ -69,10 +70,14 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
         for edge in self.edges:
             from_edge, to_edge = edge
             if isinstance(to_edge, str):
-                self._graph.add_edge(self._get_edge(from_edge), self._get_edge(to_edge))
+                self._graph.add_edge(
+                    self._get_edge(from_edge),
+                    self._get_edge(to_edge),
+                )
             elif callable(to_edge):
                 self._graph.add_conditional_edges(
-                    self._get_edge(from_edge), lambda x: self._get_edge(to_edge(x))
+                    self._get_edge(from_edge),
+                    lambda x: self._get_edge(to_edge(x)),
                 )
         self._graph_compiled = self._graph.compile(checkpointer=MemorySaver())
 

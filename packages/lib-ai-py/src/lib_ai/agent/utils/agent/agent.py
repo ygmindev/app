@@ -32,25 +32,41 @@ class _Agent(BaseModel, _AgentModel[TState]):
     name: str
     initial_state: TState
     skills: Optional[list[Skill]] = None
+    tools: Optional[list[Tool]] = None
 
     _graph: Optional[DirectedAcyclicGraph] = None
 
     def post_init(self) -> None:
-        tools: Dict[str, Tool] = {}
+        tool_map: Dict[str, Tool] = {}
         nodes: list[GraphNode] = []
         edges: list[GraphEdgeModel] = []
 
         descriptions: list[str] = [x.strip() for x in self.descriptions]
+
         if self.skills:
-            descriptions += ["You MUST follow the protocols below for each skill:"]
+            descriptions += [
+                "### SKILL USAGE RULES",
+                "Identify which Skill is most relevant to the user's request before acting",
+            ]
             for skill in self.skills or []:
                 descriptions += [
                     "-" * 10,
                     *skill.descriptions,
                 ]
-                tools.update({tool.name: tool for tool in skill.tools})
+                tool_map.update({tool.name: tool for tool in skill.tools})
 
-        self.llm.bind_tools(list(tools.values()))
+        if self.tools:
+            descriptions += [
+                "### TOOL USAGE RULES",
+                "Always prefer using a tool over guessing",
+            ]
+            for tool in self.tools or []:
+                descriptions += [
+                    f"- '{tool.name}': {'. '.join(tool.description)}",
+                ]
+                tool_map.update({tool.name: tool})
+
+        self.llm.bind_tools(list(tool_map.values()))
         system_prompt = "\n".join(descriptions)
         system_message = LlmMessage(role=LLM_ROLE.SYSTEM, message=system_prompt)
 
@@ -81,7 +97,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
                 last_message = params.messages[-1]
                 if last_message.role == LLM_ROLE.ASSISTANT and last_message.tool_calls:
                     for tool_call in last_message.tool_calls:
-                        tool = tools[tool_call.name]
+                        tool = tool_map[tool_call.name]
                         result = await tool.ainvoke(tool_call.params)
                         updates.append(
                             LlmMessage(
@@ -101,7 +117,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
                     return "tools"
             return GraphNodeType.END
 
-        if tools:
+        if tool_map:
             nodes.append(_ToolsNode())
             edges.append(("tools", "llm"))
             edges.append(("llm", _llm_route))

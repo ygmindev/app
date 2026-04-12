@@ -1,9 +1,5 @@
-from typing import Any
-
-import pandas as pd
 from img2table.document import Image
 from img2table.ocr import TesseractOCR
-from surya.table_rec import TableCell, TableRecPredictor
 
 ocr = TesseractOCR(n_threads=1, lang="eng")
 doc = Image("/Users/yoongeemin/Documents/image.png")
