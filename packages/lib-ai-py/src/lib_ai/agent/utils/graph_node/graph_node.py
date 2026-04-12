@@ -1,14 +1,11 @@
 # template version: 1.0.0
 
 
-from collections.abc import Awaitable, Callable
-
 from lib_shared.core.utils.base_model import BaseModel
 
-from .graph_node_models import GraphNodeModel, TState
+from lib_ai.agent.utils.graph_node.graph_node_models import GraphNodeModel
+from lib_ai.agent.utils.runnable.runnable import Runnable
 
 
-class GraphNode(BaseModel, GraphNodeModel[TState]):
+class GraphNode(BaseModel, Runnable, GraphNodeModel):
     name: str
-    handler: Callable[[TState], Awaitable[TState]]
-    max_iter: int = 3

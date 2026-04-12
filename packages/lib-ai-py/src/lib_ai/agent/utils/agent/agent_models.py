@@ -6,6 +6,7 @@ from typing import AsyncIterable, Generic, TypeVar
 from lib_shared.core.utils.base_model import BaseModel
 
 from lib_ai.agent.utils.llm_message import LlmMessage
+from lib_ai.agent.utils.runnable.runnable_models import RunnableModel
 
 
 class AgentState(BaseModel):
@@ -15,16 +16,16 @@ class AgentState(BaseModel):
 TState = TypeVar("TState", bound=AgentState)
 
 
-class _AgentModel(Generic[TState]):
-    async def run(
+class _AgentModel(RunnableModel, Generic[TState]):
+    async def run_prompt(
         self,
         prompt: str,
-    ) -> list[LlmMessage]: ...
+    ) -> TState: ...
 
-    async def stream(
+    async def stream_prompt(
         self,
         prompt: str,
-    ) -> AsyncIterable[LlmMessage]: ...
+    ) -> AsyncIterable[TState]: ...
 
 
 class AgentModel(_AgentModel[TState]): ...

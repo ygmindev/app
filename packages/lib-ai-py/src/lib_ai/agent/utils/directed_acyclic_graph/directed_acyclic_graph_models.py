@@ -1,15 +1,16 @@
 # template version: 1.0.0
 
-from enum import Enum
-from typing import AsyncIterable, Callable, Generic, TypeVar
+from enum import StrEnum
+from typing import Callable, Generic, TypeVar
 
 from lib_shared.core.utils.base_model import BaseModel
 
+from lib_ai.agent.utils.runnable.runnable_models import RunnableModel
+
 TState = TypeVar("TState", bound=BaseModel)
-TParams = TypeVar("TParams")
 
 
-class GraphNodeType(str, Enum):
+class GraphNodeType(StrEnum):
     START = "START"
     END = "END"
 
@@ -17,19 +18,13 @@ class GraphNodeType(str, Enum):
 GraphEdgeModel = (
     tuple[GraphNodeType | str, GraphNodeType | str]
     | tuple[GraphNodeType | str, Callable[[TState], str]]
-    # | tuple[GraphNodeType | str, Callable[[TState], str], dict[str, str]]
 )
 
 
-class _DirectedAcyclicGraphModel(Generic[TState, TParams]):
-    async def stream(
-        self,
-        params: TParams,
-    ) -> AsyncIterable[TState]: ...
-
+class _DirectedAcyclicGraphModel(RunnableModel, Generic[TState]):
     async def visualize(
         self,
-        filename: str,
+        filepath: str,
     ) -> None: ...
 
 

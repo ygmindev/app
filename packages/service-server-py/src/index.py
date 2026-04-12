@@ -1,5 +1,5 @@
 import asyncio
-from enum import Enum
+from enum import StrEnum
 from typing import Any, Sequence
 
 import httpx
@@ -18,7 +18,7 @@ class Location(BaseModel):
     longitude: float
 
 
-class WEATHER_CODE(str, Enum):
+class WEATHER_CODE(StrEnum):
     SUNNY = "sunny"
     CLOUDY = "cloudy"
     SNOWY = "snowy"
@@ -44,7 +44,7 @@ class WeatherSkill(Skill):
 
     @property
     def tools(self) -> list[Tool[Any, Any]]:
-        class TEMPERATURE_UNIT(str, Enum):
+        class TEMPERATURE_UNIT(StrEnum):
             CELCIUS = "celcius"
             FARENHEIGHT = "farenheight"
 
@@ -158,16 +158,15 @@ async def run_agent():
             "ALWAYS return temperature in celcius",
         ],
         llm=llm,
-        state_schema=MyState,
+        initial_state=MyState(),
         skills=[
             WeatherSkill(),
         ],
     )
 
     prompt = "what is the weather in New York?"
-    await agent.graph.visualize()
-    async for item in agent.stream(prompt=prompt):
-        print(f"### ITEM: {item.message}")
+    async for item in agent.stream_prompt(prompt=prompt):
+        print("\n", item.messages)
 
 
 def main():

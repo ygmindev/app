@@ -1,6 +1,6 @@
 # template version: 1.0.0
 
-from typing import Any, AsyncIterable, Awaitable, Callable, Optional, cast
+from typing import AsyncIterable, Awaitable, Callable, Optional, cast
 
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.config import get_stream_writer
@@ -23,14 +23,13 @@ from .directed_acyclic_graph_models import (
     DirectedAcyclicGraphModel,
     GraphEdgeModel,
     GraphNodeType,
-    TParams,
     TState,
     _DirectedAcyclicGraphModel,
 )
 
 
-class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState, TParams]):
-    state_schema: Any
+class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
+    initial_state: TState
     nodes: list[GraphNode]
     edges: list[GraphEdgeModel]
 
@@ -61,20 +60,20 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState, TParam
                 return name
 
     def post_init(self) -> None:
-        self._graph = StateGraph(self.state_schema)
+        self._graph = StateGraph(type(self.initial_state))
         for node in self.nodes:
             self._graph.add_node(
                 node.name,
-                cast(StateNode, self._wrap_node(node.handler)),
+                cast(StateNode, self._wrap_node(node.run)),
             )
-
         for edge in self.edges:
             from_edge, to_edge = edge
             if isinstance(to_edge, str):
                 self._graph.add_edge(self._get_edge(from_edge), self._get_edge(to_edge))
-            else:
-                self._graph.add_conditional_edges(self._get_edge(from_edge), to_edge)
-
+            elif callable(to_edge):
+                self._graph.add_conditional_edges(
+                    self._get_edge(from_edge), lambda x: self._get_edge(to_edge(x))
+                )
         self._graph_compiled = self._graph.compile(checkpointer=MemorySaver())
 
     @property
@@ -83,9 +82,16 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState, TParam
             raise NotImplementedException("Graph has not been compiled yet.")
         return self._graph_compiled
 
+    async def run(
+        self,
+        params: TState,
+    ) -> TState:
+        result = await self.graph.ainvoke(params)
+        return cast(TState, result)
+
     async def stream(
         self,
-        params: TParams,
+        params: TState,
     ) -> AsyncIterable[TState]:
         async for result in self.graph.astream(
             params,
@@ -96,11 +102,11 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState, TParam
 
     async def visualize(
         self,
-        filename: str = "graph.png",
+        filepath: str = "./graph.png",
     ) -> None:
         if self._graph is None:
             raise UninitializedException("agent")
-        self.graph.get_graph().draw_mermaid_png(output_file_path=filename)
+        self.graph.get_graph().draw_mermaid_png(output_file_path=filepath)
 
 
 class DirectedAcyclicGraph(_DirectedAcyclicGraph, DirectedAcyclicGraphModel): ...

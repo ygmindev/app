@@ -1,9 +1,7 @@
 # template version: 1.0.0
 
 
-from typing import Generic, TypeVar
-
-TState = TypeVar("TState")
+from lib_ai.agent.utils.runnable.runnable_models import RunnableModel
 
 
-class GraphNodeModel(Generic[TState]): ...
+class GraphNodeModel(RunnableModel): ...

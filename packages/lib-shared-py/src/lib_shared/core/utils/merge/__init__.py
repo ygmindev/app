@@ -1,8 +1,5 @@
-from typing import Unpack
+# template version: 1.0.0
 
-from lib_shared.core.utils.merge._merge import _merge
-from lib_shared.core.utils.merge.merge_models import MergeModel, MergeParamsModel
+from .merge import merge
 
-
-def merge(*params: Unpack[MergeParamsModel]) -> MergeModel:
-    return _merge(*params)
+__all__ = ["merge"]

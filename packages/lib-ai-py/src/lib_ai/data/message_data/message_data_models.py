@@ -1,10 +1,10 @@
-from enum import Enum
+from enum import StrEnum
 from typing import List, NotRequired, TypedDict
 
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 
 
-class MessageRole(str, Enum):
+class MessageRole(StrEnum):
     USER = "user"
     SYSTEM = "system"
 

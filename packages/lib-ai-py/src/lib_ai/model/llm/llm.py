@@ -22,7 +22,7 @@ class _Llm(BaseModel, _LlmModel):
     name: str = LLM_NAME.GLM_5
     temperature: float = 0.0
     max_tokens: int = 4096
-    schema: Optional[BaseModel] = None
+    output_schema: Optional[BaseModel] = None
 
     _llm: Optional[BaseChatModel] = None
 
@@ -34,38 +34,38 @@ class _Llm(BaseModel, _LlmModel):
                     temperature=self.temperature,
                     num_predict=self.max_tokens,
                 )
-        if self._llm is not None and self.schema is not None:
+        if self._llm is not None and self.output_schema is not None:
             self._llm = cast(
                 BaseChatModel,
-                self._llm.with_structured_output(cast(dict, self.schema)),
+                self._llm.with_structured_output(cast(dict, self.output_schema)),
             )
+
+    @property
+    def llm(self) -> BaseChatModel:
+        if not self._llm:
+            raise UninitializedException("_llm")
+        return self._llm
 
     def bind_tools(
         self,
         tools: list[Tool],
     ) -> None:
-        if not self._llm:
-            raise UninitializedException("_llm")
-        self._llm = cast(BaseChatModel, self._llm.bind_tools(tools))
+        self._llm = cast(BaseChatModel, self.llm.bind_tools(tools))
 
     async def invoke(
         self,
         messages: list[LlmMessage],
     ) -> LlmMessage:
-        if not self._llm:
-            raise UninitializedException("_llm")
-        result = await self._llm.ainvoke([x.serialize() for x in messages])
+        result = await self.llm.ainvoke([x.serialize() for x in messages])
         return LlmMessage.deserialize(result)
 
     async def stream(
         self,
         messages: list[LlmMessage],
     ) -> Iterator[LlmMessage]:
-        if not self._llm:
-            raise UninitializedException("_llm")
         return map(
             LlmMessage.deserialize,
-            self._llm.stream([x.serialize() for x in messages]),
+            self.llm.stream([x.serialize() for x in messages]),
         )
 
 
