@@ -9,5 +9,9 @@ from lib_ai.core.utils.directed_acyclic_graph.graph_node.graph_node_models impor
 )
 
 
-class GraphNode(BaseModel, Runnable, GraphNodeModel):
+class GraphNode(
+    BaseModel,
+    Runnable,
+    GraphNodeModel,
+):
     name: str

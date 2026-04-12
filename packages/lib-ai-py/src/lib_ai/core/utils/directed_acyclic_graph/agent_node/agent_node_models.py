@@ -4,7 +4,9 @@
 from typing import TypeVar
 
 from lib_ai.agent.utils.agent_state import AgentState
-from lib_ai.agent.utils.graph_node.graph_node_models import GraphNodeModel
+from lib_ai.core.utils.directed_acyclic_graph.graph_node.graph_node_models import (
+    GraphNodeModel,
+)
 
 TState = TypeVar("TState", bound=AgentState)
 

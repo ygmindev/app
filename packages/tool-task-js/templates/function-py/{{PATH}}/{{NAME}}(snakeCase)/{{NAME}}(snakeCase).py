@@ -1,4 +1,4 @@
-from .{{NAME}}(snakeCase).{{NAME}}(pascalCase)_models import {{NAME}}(pascalCase)Model
+from .{{NAME}}(snakeCase)_models import {{NAME}}(pascalCase)Model
 
 
 def _{{NAME}}(snakeCase)(

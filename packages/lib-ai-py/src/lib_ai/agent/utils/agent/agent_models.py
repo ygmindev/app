@@ -1,7 +1,7 @@
 # template version: 1.0.0
 
 
-from typing import AsyncIterable, Generic, TypeVar
+from typing import AsyncIterable, TypeVar
 
 from lib_shared.core.utils.base_model import BaseModel
 
@@ -16,7 +16,7 @@ class AgentState(BaseModel):
 TState = TypeVar("TState", bound=AgentState)
 
 
-class _AgentModel(RunnableModel, Generic[TState]):
+class _AgentModel(RunnableModel[TState]):
     async def run_prompt(
         self,
         prompt: str,

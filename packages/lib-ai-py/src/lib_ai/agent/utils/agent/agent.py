@@ -11,16 +11,19 @@ from lib_shared.core.utils.base_model import BaseModel
 from lib_shared.core.utils.not_found_exception import NotFoundException
 from lib_shared.core.utils.not_implemented_exception import NotImplementedException
 
-from lib_ai.agent.utils.directed_acyclic_graph import DirectedAcyclicGraph
-from lib_ai.agent.utils.directed_acyclic_graph.directed_acyclic_graph_models import (
-    GraphEdgeModel,
-    GraphNodeType,
-)
-from lib_ai.agent.utils.graph_node import GraphNode
+from lib_ai.agent.utils.agent_state import AgentState
 from lib_ai.agent.utils.llm_message import LlmMessage
 from lib_ai.agent.utils.llm_message.constants import LLM_ROLE
 from lib_ai.agent.utils.skill import Skill
 from lib_ai.agent.utils.tool import Tool
+from lib_ai.core.utils.directed_acyclic_graph.directed_acyclic_graph import (
+    DirectedAcyclicGraph,
+)
+from lib_ai.core.utils.directed_acyclic_graph.directed_acyclic_graph_models import (
+    GraphEdgeModel,
+    GraphNodeType,
+)
+from lib_ai.core.utils.directed_acyclic_graph.graph_node.graph_node import GraphNode
 from lib_ai.model.llm import Llm
 
 from .agent_models import AgentModel, TState, _AgentModel
@@ -30,7 +33,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
     descriptions: list[str]
     llm: Llm
     name: str
-    initial_state: TState
+    initial_state: TState = AgentState()
     skills: Optional[list[Skill]] = None
     tools: Optional[list[Tool]] = None
 
@@ -159,7 +162,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
         params: TState,
     ) -> AsyncIterable[TState]:
         user_message = next(
-            (x for x in params.messages if x.role == LLM_ROLE.USER),
+            (x for x in reversed(params.messages) if x.role == LLM_ROLE.USER),
             None,
         )
         if not user_message:
