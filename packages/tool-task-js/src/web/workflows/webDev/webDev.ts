@@ -2,6 +2,7 @@ import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { PLATFORM } from '@lib/shared/platform/platform.constants';
 import { EXECUTE_PARALLEL } from '@tool/task/core/tasks/executeParallel/executeParallel.constants';
 import { type ExecuteParallelParamsModel } from '@tool/task/core/tasks/executeParallel/executeParallel.models';
+import { appNamePrompt } from '@tool/task/core/utils/appNamePrompt/appNamePrompt';
 import { type BuildWorkflowParamsModel } from '@tool/task/orchestrator/utils/buildWorkflow/buildWorkflow.models';
 import { WEB_DEV } from '@tool/task/web/workflows/webDev/webDev.constants';
 import { type WebDevParamsModel } from '@tool/task/web/workflows/webDev/webDev.models';
@@ -19,6 +20,8 @@ export const webDev: BuildWorkflowParamsModel<
   },
 
   name: WEB_DEV,
+
+  prompts: [appNamePrompt({ prefix: '@app/web' })],
 
   steps: ({ name }, context) => [
     {

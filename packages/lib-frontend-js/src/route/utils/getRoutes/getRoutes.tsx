@@ -21,8 +21,6 @@ import { trimRoutes } from '@lib/shared/route/utils/trimRoutes/trimRoutes';
 
 export const getRoutes = ({
   appRoutes = [],
-  footerElement,
-  headerElement,
   routes = [],
 }: GetRoutesParamsModel): GetRoutesModel => {
   const mainRoutes = trimRoutes([...routes, ...authRoutes, ...settingRoutes]);
@@ -63,13 +61,7 @@ export const getRoutes = ({
 
   return [
     {
-      element: (
-        <AppContainer
-          footerElement={footerElement}
-          headerElement={headerElement}
-          routes={mainRoutes}
-        />
-      ),
+      element: <AppContainer routes={mainRoutes} />,
       pathname: '/',
       routes: routesF,
     },

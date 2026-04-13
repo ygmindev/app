@@ -7,7 +7,7 @@ import {
 } from '@tool/task/python/tasks/runPython/runPython.models';
 
 export const runPython = buildTask<RunPythonParamsModel, RunPythonModel>({
-  prompts: [appPrompt({ defaultApp: 'service_server' })],
+  prompts: [appPrompt({ defaultValue: 'service_server' })],
 
   task: async ({ pathname = './src/index.py' }) => {
     await execute({ command: `uv run python ${pathname}` });

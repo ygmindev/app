@@ -628,7 +628,7 @@ var PLATFORM = /* @__PURE__ */ ((PLATFORM2) => {
   PLATFORM2["WEB"] = "web";
   return PLATFORM2;
 })(PLATFORM || {});
-const appPrompt = /* @__PURE__ */ __name(({ defaultApp } = {}) => {
+const appPrompt = /* @__PURE__ */ __name(({ defaultValue } = {}) => {
   const options = filterNil(
     children(fromPackages()).map((v) => {
       try {
@@ -639,7 +639,7 @@ const appPrompt = /* @__PURE__ */ __name(({ defaultApp } = {}) => {
       }
     })
   );
-  return { defaultValue: defaultApp ? [defaultApp] : void 0, key: "app", options };
+  return { defaultValue: defaultValue ? [defaultValue] : void 0, key: "app", options };
 }, "appPrompt");
 const withEnvironment = /* @__PURE__ */ __name(async (...[params, fn]) => {
   const current = _Container.get(Environment);
@@ -970,9 +970,9 @@ const webBuild = buildTask({
   }, "task")
 });
 const runPython = buildTask({
-  prompts: [appPrompt({ defaultApp: "service_server" })],
+  prompts: [appPrompt({ defaultValue: "service_server" })],
   task: /* @__PURE__ */ __name(async ({ pathname = "./src/index.py" }) => {
-    await execute({ command: `poetry run python ${pathname}` });
+    await execute({ command: `uv run python ${pathname}` });
   }, "task")
 });
 const _fromGlobs = /* @__PURE__ */ __name((...[globs, { exclude, isAbsolute = false, root = fromWorking() } = {}]) => globs.map((glob) => globSync(glob, { absolute: isAbsolute, cwd: root, ignore: exclude })).flat(1), "_fromGlobs");
@@ -2440,6 +2440,11 @@ const jobBuild = buildTask({
     });
   }, "task")
 });
+const moveFile = /* @__PURE__ */ __name(({ from, to }) => {
+  const directory = dirname(to);
+  !existsSync(directory) && mkdirSync(directory, { recursive: true });
+  renameSync(from, to);
+}, "moveFile");
 const _sort = /* @__PURE__ */ __name((...[value, by]) => [...value].sort(
   by ? reduce(
     by,
@@ -2553,7 +2558,7 @@ const boilerplate = /* @__PURE__ */ __name(async ({
       }
       case "{{TARGET}}": {
         const root = await resolveVariable("{{ROOT}}");
-        value = isPy ? snakeCase(root) : `@${root.replaceAll("-js", "")}`;
+        value = isPy ? snakeCase(root.replaceAll("-py", "")) : `@${root.replaceAll("-js", "")}`;
         break;
       }
       case "{{PATH}}": {
@@ -2583,22 +2588,15 @@ const boilerplate = /* @__PURE__ */ __name(async ({
   await onSuccess?.({ outPathname: outPathnameF, template, variables: variablesF });
   return result;
 }, "boilerplate");
-const moveFile = /* @__PURE__ */ __name(({ from, to }) => {
-  const directory = dirname(to);
-  !existsSync(directory) && mkdirSync(directory, { recursive: true });
-  renameSync(from, to);
-}, "moveFile");
 const { templateDir } = generateConfig.params();
 const generate = buildTask({
+  name: GENERATE,
   prompts: [
     {
       key: "template",
-      options: children(templateDir, { isDirectory: true }).map(
-        ({ name }) => ({ id: name })
-      )
+      options: children(templateDir, { isDirectory: true }).map(({ name }) => ({ id: name }))
     }
   ],
-  name: GENERATE,
   task: /* @__PURE__ */ __name(async ({ template }) => {
     if (template) {
       const { generator, templateDir: templateDir2 } = generateConfig.params();

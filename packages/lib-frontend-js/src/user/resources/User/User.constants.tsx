@@ -21,7 +21,7 @@ export const USER_RESOURCE_PARAMS = {
       id: 'phone',
     },
     { fields: [{ id: '_id' }], id: 'paymentMethodPrimary' },
-    { fields: [{ id: ROLE_RESOURCE_NAME }], id: ACCESS_RESOURCE_NAME },
+    // { fields: [{ id: ROLE_RESOURCE_NAME }], id: ACCESS_RESOURCE_NAME },
   ],
   name: USER_RESOURCE_NAME,
 } satisfies ResourceParamsModel<UserModel>;

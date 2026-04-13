@@ -5,6 +5,8 @@ import { readdirSync, statSync, readFileSync } from "fs";
 import { normalize, join } from "path";
 import appRootPath from "app-root-path";
 import trimStart from "lodash/trimStart.js";
+import trim from "lodash/trim.js";
+import uniq from "lodash/uniq.js";
 var LOG_MESSAGE_TYPE = /* @__PURE__ */ ((LOG_MESSAGE_TYPE2) => {
   LOG_MESSAGE_TYPE2["FAIL"] = "fail";
   LOG_MESSAGE_TYPE2["SUCCESS"] = "success";
@@ -96,34 +98,6 @@ var PLATFORM = /* @__PURE__ */ ((PLATFORM2) => {
   return PLATFORM2;
 })(PLATFORM || {});
 const EXECUTE_PARALLEL = "executeParallel";
-const webDev$1 = {
-  context: {
-    overrrides: {
-      ENV_PLATFORM: PLATFORM.WEB
-    }
-  },
-  steps: /* @__PURE__ */ __name(({ name }, context) => [
-    {
-      name: EXECUTE_PARALLEL,
-      params: {
-        commands: [
-          `run serverDev --app=@service/${name} --pathname=src/index.ts`,
-          `run serverDev --app=@app/web-${name} --pathname=src/index.ts`
-        ]
-      }
-    }
-  ], "steps")
-};
-const webDev = buildWorkflow(webDev$1);
-const START = "start";
-const orchestratorRun$1 = {
-  context: {
-    environment: ENVIRONMENT.DEVELOPMENT
-  },
-  steps: /* @__PURE__ */ __name(() => [{ name: START, params: { command: "temporal server start-dev" } }], "steps")
-};
-const orchestratorRun = buildWorkflow(orchestratorRun$1);
-const CONTAINER_PUBLISH = "containerPublish";
 const children = /* @__PURE__ */ __name((...[from, options]) => {
   const root = `/${normalize(from)}`;
   return readdirSync(root, { withFileTypes: true }).map((directory) => {
@@ -154,7 +128,56 @@ const packageInfo = /* @__PURE__ */ __name((dirname) => {
   const from = dirname ?? fromWorking();
   return JSON.parse(readFileSync(joinPaths([from, "package.json"])).toString());
 }, "packageInfo");
-const appPrompt = /* @__PURE__ */ __name(({ defaultApp } = {}) => {
+const appNamePrompt = /* @__PURE__ */ __name(({
+  defaultValue,
+  prefix
+}) => {
+  const names = filterNil(
+    children(fromPackages()).map((v) => {
+      try {
+        const { name } = packageInfo(v.fullPath);
+        if (name?.startsWith(prefix)) {
+          return trim(name?.replace(prefix, ""), "-");
+        }
+        return null;
+      } catch {
+        return null;
+      }
+    })
+  );
+  const options = uniq(names).map((v) => ({ id: v ?? "", label: v }));
+  return { defaultValue: defaultValue ? [defaultValue] : void 0, key: "name", options };
+}, "appNamePrompt");
+const webDev$1 = {
+  context: {
+    overrrides: {
+      ENV_PLATFORM: PLATFORM.WEB
+    }
+  },
+  prompts: [appNamePrompt({ prefix: "@app/web" })],
+  steps: /* @__PURE__ */ __name(({ name }, context) => [
+    {
+      name: EXECUTE_PARALLEL,
+      params: {
+        commands: [
+          `run serverDev --app=@service/${name} --pathname=src/index.ts`,
+          `run serverDev --app=@app/web-${name} --pathname=src/index.ts`
+        ]
+      }
+    }
+  ], "steps")
+};
+const webDev = buildWorkflow(webDev$1);
+const START = "start";
+const orchestratorRun$1 = {
+  context: {
+    environment: ENVIRONMENT.DEVELOPMENT
+  },
+  steps: /* @__PURE__ */ __name(() => [{ name: START, params: { command: "temporal server start-dev" } }], "steps")
+};
+const orchestratorRun = buildWorkflow(orchestratorRun$1);
+const CONTAINER_PUBLISH = "containerPublish";
+const appPrompt = /* @__PURE__ */ __name(({ defaultValue } = {}) => {
   const options = filterNil(
     children(fromPackages()).map((v) => {
       try {
@@ -165,7 +188,7 @@ const appPrompt = /* @__PURE__ */ __name(({ defaultApp } = {}) => {
       }
     })
   );
-  return { defaultValue: defaultApp ? [defaultApp] : void 0, key: "app", options };
+  return { defaultValue: defaultValue ? [defaultValue] : void 0, key: "app", options };
 }, "appPrompt");
 const SERVER_BUILD = "serverBuild";
 const serverPublish$1 = {

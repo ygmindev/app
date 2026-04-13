@@ -5,7 +5,6 @@ import { PortalHost } from '@lib/frontend/core/components/PortalHost/PortalHost'
 import { Title } from '@lib/frontend/core/components/Title/Title';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
-import { NavigationLayout } from '@lib/frontend/core/layouts/NavigationLayout/NavigationLayout';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { Notifications } from '@lib/frontend/notification/containers/Notifications/Notifications';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
@@ -19,13 +18,7 @@ import {
 } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
-export const AppContainer: LFCModel<AppContainerPropsModel> = ({
-  children,
-  footerElement,
-  headerElement,
-  routes,
-  ...props
-}) => {
+export const AppContainer: LFCModel<AppContainerPropsModel> = ({ children, routes, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const [notifications] = useStore('notification.notifications');
   const [isOffline] = useStore('app.isOffline');
@@ -60,12 +53,11 @@ export const AppContainer: LFCModel<AppContainerPropsModel> = ({
                 />
               </Appearable>
 
-              <NavigationLayout
-                footerElement={footerElement}
-                headerElement={headerElement}
-                routes={routes}>
+              <Wrapper
+                flex
+                isVerticalScrollable>
                 {children}
-              </NavigationLayout>
+              </Wrapper>
 
               {(notifications?.length ?? 0) > 0 && <Notifications />}
             </Wrapper>
