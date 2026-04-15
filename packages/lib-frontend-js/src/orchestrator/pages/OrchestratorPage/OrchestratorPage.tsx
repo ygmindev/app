@@ -13,6 +13,7 @@ export const OrchestratorPage: LFCModel<OrchestratorPagePropsModel> = ({ ...prop
     <DataBoundary
       {...wrapperProps}
       id="pipelines"
+      p
       query={getMany}>
       {(result) => (
         <Wrapper s>

@@ -4,7 +4,7 @@ import {
   LAMBDA_PLUGIN,
   LAMBDA_TYPE,
 } from '@lib/backend/serverless/utils/createLambdaHandler/createLambdaHandler.constants';
-import { databaseConfig } from '@lib/config/database/database.mongo';
+import { databaseConfig } from '@lib/config/database/database.base';
 import { initialize } from '@service/lambda/setup/utils/initialize/initialize';
 
 const context: ServerlessRequestContextModel = {};

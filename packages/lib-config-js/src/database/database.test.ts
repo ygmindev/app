@@ -1,4 +1,4 @@
-import { databaseConfig as configBase } from '@lib/config/database/database.mongo';
+import { databaseConfig as configBase } from '@lib/config/database/database.base';
 import { Snapshot } from '@lib/model/test/Snapshot/Snapshot.entity';
 import { TestableEmbeddedResource } from '@lib/model/test/TestableEmbeddedResource/TestableEmbeddedResource.entity';
 import { TestableEntityResource } from '@lib/model/test/TestableEntityResource/TestableEntityResource.entity';

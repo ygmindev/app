@@ -1,4 +1,4 @@
-import { graphqlConfig as configBase } from '@lib/config/graphql/graphql.base';
+import { graphqlConfig as configBase } from '@lib/config/graphql/graphql.admin';
 
 import { name } from '../../package.json';
 

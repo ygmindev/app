@@ -1,4 +1,4 @@
-import { databaseConfig as configBase } from '@lib/config/database/database.mongo';
+import { databaseConfig as configBase } from '@lib/config/database/database.base';
 import { Event } from '@lib/model/kfn/Event/Event.entity';
 
 export const databaseConfig = configBase.extend(() => ({

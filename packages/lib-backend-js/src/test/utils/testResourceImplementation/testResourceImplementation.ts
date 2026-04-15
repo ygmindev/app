@@ -1,6 +1,6 @@
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type TestResourceImplementationParamsModel } from '@lib/backend/test/utils/testResourceImplementation/testResourceImplementation.models';
-import { databaseConfig } from '@lib/config/database/database.mongo';
+import { databaseConfig } from '@lib/config/database/database.base';
 import { type InputtableModel } from '@lib/model/resource/Inputtable/Inputtable.models';
 import { TESTABLE_ENTITY_RESOURCE_NAME } from '@lib/model/test/TestableEntityResource/TestableEntityResource.constants';
 import { type TestableResourceModel } from '@lib/model/test/TestableResource/TestableResource.models';

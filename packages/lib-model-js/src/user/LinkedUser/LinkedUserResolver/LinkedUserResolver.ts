@@ -2,8 +2,8 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createEmbeddedResourceResolver } from '@lib/backend/resource/utils/createEmbeddedResourceResolver/createEmbeddedResourceResolver';
-import { LinkedUser } from '@lib/model/user/LinkedUser/LinkedUser.entity';
 import { LINKED_USER_RESOURCE_NAME } from '@lib/model/user/LinkedUser/LinkedUser.constants';
+import { LinkedUser } from '@lib/model/user/LinkedUser/LinkedUser.entity';
 import { type LinkedUserModel } from '@lib/model/user/LinkedUser/LinkedUser.models';
 import { LinkedUserImplementation } from '@lib/model/user/LinkedUser/LinkedUserImplementation/LinkedUserImplementation';
 import { type LinkedUserImplementationModel } from '@lib/model/user/LinkedUser/LinkedUserImplementation/LinkedUserImplementation.models';

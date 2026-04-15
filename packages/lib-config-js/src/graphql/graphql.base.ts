@@ -11,10 +11,16 @@ import { AccessResolver } from '@lib/model/auth/Access/AccessResolver/AccessReso
 import { OtpResolver } from '@lib/model/auth/Otp/OtpResolver/OtpResolver';
 import { RoleResolver } from '@lib/model/auth/Role/RoleResolver/RoleResolver';
 import { SignInResolver } from '@lib/model/auth/SignIn/SignInResolver/SignInResolver';
+import { BankResolver } from '@lib/model/billing/Bank/BankResolver/BankResolver';
+import { CardResolver } from '@lib/model/billing/Card/CardResolver/CardResolver';
+import { MessageResolver } from '@lib/model/chat/Message/MessageResolver/MessageResolver';
+import { OrderResolver } from '@lib/model/commerce/Order/OrderResolver/OrderResolver';
+import { PricingResolver } from '@lib/model/commerce/Pricing/PricingResolver/PricingResolver';
+import { ProductResolver } from '@lib/model/commerce/Product/ProductResolver/ProductResolver';
 import { StorageResolver } from '@lib/model/data/Storage/StorageResolver/StorageResolver';
 import { GroupResolver } from '@lib/model/group/Group/GroupResolver/GroupResolver';
 import { SocketResolver } from '@lib/model/http/Socket/SocketResolver/SocketResolver';
-import { EventResolver } from '@lib/model/kfn/Event/EventResolver/EventResolver';
+import { LinkedUserResolver } from '@lib/model/user/LinkedUser/LinkedUserResolver/LinkedUserResolver';
 import { UserResolver } from '@lib/model/user/User/UserResolver/UserResolver';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
@@ -33,9 +39,15 @@ export const graphqlConfig = new Config<GraphqlConfigModel, _GraphqlConfigModel>
 
       resolvers: filterNil([
         AccessResolver,
+        BankResolver,
+        CardResolver,
         GroupResolver,
-        EventResolver,
+        LinkedUserResolver,
+        MessageResolver,
+        OrderResolver,
         OtpResolver,
+        ProductResolver,
+        PricingResolver,
         RoleResolver,
         SignInResolver,
         SocketResolver,

@@ -39,7 +39,7 @@ export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
   const getNestedPathname = useCallback(
     (to: string, params: Record<string, unknown> = {}): [string, Record<string, unknown>] => {
       if (to.startsWith('#')) {
-        return [route.name, { ...params, hash: trimStart(to, '#') }];
+        return ['/', { ...params, hash: trimStart(to, '#') }];
       }
       const fromParts = activeChild?.name?.split('/').filter(Boolean) ?? [];
       const toParts = to.split('/').filter(Boolean);
