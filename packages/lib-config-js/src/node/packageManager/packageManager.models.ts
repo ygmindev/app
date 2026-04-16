@@ -22,6 +22,8 @@ export type PackageManagerConfigModel = {
   patchDir(pkg: string): string;
 
   removeCommand(names?: string, packages?: Array<string>): string;
+
+  upgradeCommand(name: string, fixedVersions?: Record<string, string>): string;
 };
 
 export type PackageManagerInstallOptionsModel = {

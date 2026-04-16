@@ -36,5 +36,8 @@ export const packageManagerConfig = new Config<PackageManagerConfigModel>({
 
     removeCommand: (names, packages) =>
       `pnpm remove ${packages ? packages.map((v) => `--filter @${v.replace('-js', '').replace('-', '/')}`).join(' ') : ''} ${names}`,
+
+    upgradeCommand: (name, fixedVersions) =>
+      `npx ncu -i --deep -p ${name} ${fixedVersions ? `-x ${Object.keys(fixedVersions).join(',')}` : ''}`,
   }),
 });
