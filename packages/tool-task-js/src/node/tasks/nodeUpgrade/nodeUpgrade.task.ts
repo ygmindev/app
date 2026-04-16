@@ -12,6 +12,6 @@ export const nodeUpgrade = buildTask<NodeUpgradeParamsModel, NodeUpgradeModel>({
 
   task: async (params) => {
     const { fixedVersions, name, upgradeCommand } = packageManagerConfig.params();
-    return execute({ command: upgradeCommand(name, fixedVersions) });
+    return execute({ command: upgradeCommand(name, fixedVersions), isInteractive: true });
   },
 });
