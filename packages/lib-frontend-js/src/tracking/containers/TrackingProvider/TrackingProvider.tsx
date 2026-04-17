@@ -1,8 +1,8 @@
 import { type SFCModel } from '@lib/frontend/core/core.models';
 import { useChange } from '@lib/frontend/core/hooks/useChange/useChange';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
-import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { type TrackingProviderPropsModel } from '@lib/frontend/tracking/containers/TrackingProvider/TrackingProvider.models';
+import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import { useEffect } from 'react';

@@ -27,7 +27,6 @@ import inject from '@rollup/plugin-inject';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import react from '@vitejs/plugin-react';
 import { type Plugin as EsbuildPlugin } from 'esbuild';
-import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import esbuildPluginTsc from 'esbuild-plugin-tsc';
 import flowRemoveTypes from 'flow-remove-types';
 import { existsSync, readFileSync } from 'fs';
@@ -335,11 +334,10 @@ export const _bundle = ({
           platformF === PLATFORM.NODE
             ? {
                 chunkFileNames: '[name].js',
-                compact: process.env.NODE_ENV === 'production',
+                minify: process.env.NODE_ENV === 'production',
                 entryFileNames: '[name].js',
                 exports: 'named',
                 format: format === BUNDLE_FORMAT.ESM ? 'esm' : 'cjs',
-                interop: 'auto',
                 preserveModules: isPreserveModules,
               }
             : undefined,
@@ -357,11 +355,8 @@ export const _bundle = ({
           // nodePolyfills(),
         ],
 
-        preserveSymlinks: true,
-
         treeshake: {
           moduleSideEffects: false,
-          preset: 'recommended',
         },
       },
 
@@ -439,13 +434,6 @@ export const _bundle = ({
           transpileModulesF?.length && esbuildCommonjs(transpileModulesF),
 
           esbuildPluginExcludeVendorFromSourceMap(),
-
-          externals?.length &&
-            nodeExternalsPlugin({
-              allowList: transpiles,
-              forceExternalList: externals,
-              packagePath: packagePaths,
-            }),
         ]) as Array<EsbuildPlugin>,
 
         resolveExtensions: extensions,

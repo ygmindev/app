@@ -1,5 +1,1 @@
-import { bundleConfig as bundleConfig$1 } from "./bundle.native.js";
-const bundleConfig = bundleConfig$1.extend(() => ({}));
-export {
-  bundleConfig
-};
+import{bundleConfig as e}from"./bundle.native.js";var t=e.extend(()=>({}));export{t as bundleConfig};

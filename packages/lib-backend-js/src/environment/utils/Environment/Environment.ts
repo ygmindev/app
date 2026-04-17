@@ -1,15 +1,15 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import {
-  EnvironmentModel,
-  EnvironmentParamsModel,
+  type EnvironmentModel,
+  type EnvironmentParamsModel,
 } from '@lib/backend/environment/utils/Environment/Environment.models';
 import { fromConfig } from '@lib/backend/file/utils/fromConfig/fromConfig';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { getAppRoot } from '@lib/backend/file/utils/getAppRoot/getAppRoot';
 import { joinPaths } from '@lib/backend/file/utils/joinPaths/joinPaths';
 import { writeFile } from '@lib/backend/file/utils/writeFile/writeFile';
-import { EnvironmentConfigModel } from '@lib/config/environment/environment.models';
-import { StringKeyModel } from '@lib/shared/core/core.models';
+import { type EnvironmentConfigModel } from '@lib/config/environment/environment.models';
+import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { Bootstrappable } from '@lib/shared/core/utils/Bootstrappable/Bootstrappable';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';

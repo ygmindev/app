@@ -1,7 +1,1 @@
-import { c as containerConfig$1, d as fromConfig } from "./tasks.js";
-const containerConfig = containerConfig$1.extend(() => ({
-  dockerPathname: fromConfig("container/python/Dockerfile")
-}));
-export {
-  containerConfig
-};
+import{A as e}from"./Environment.js";import{t}from"./container.base.js";var n=t.extend(()=>({dockerPathname:e(`container/python/Dockerfile`)}));export{n as containerConfig};

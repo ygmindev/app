@@ -8,13 +8,11 @@ import prettierPlugin from 'eslint-plugin-prettier/recommended';
 import reactPlugin from 'eslint-plugin-react';
 import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
 import sortDestructureKeysPlugin from 'eslint-plugin-sort-destructure-keys';
-import sortKeysFixPlugin from 'eslint-plugin-sort-keys-fix';
-import typescriptSortKeysPlugin from 'eslint-plugin-typescript-sort-keys';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import globals from 'globals';
-import typescriptPlugin from 'typescript-eslint';
+import tseslint from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
-
+import perfectionist from 'eslint-plugin-perfectionist';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -53,14 +51,13 @@ export const _lint = ({
       },
     },
 
-    // ...typescriptPlugin.configs.recommendedTypeChecked,
-    ...typescriptPlugin.configs.recommended,
+    ...tseslint.configs.recommended,
     {
       rules: {
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
         '@typescript-eslint/consistent-type-imports': [
           'error',
-          { fixStyle: 'inline-type-imports' },
+          { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
         ],
         '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
         '@typescript-eslint/member-ordering': [
@@ -93,15 +90,20 @@ export const _lint = ({
     },
 
     reactPlugin.configs.flat.recommended,
+    reactPlugin.configs.flat['jsx-runtime'],
     {
       rules: {
-        ...reactPlugin.configs['jsx-runtime'].rules,
         'react/display-name': 'off',
         'react/jsx-key': 'off',
         'react/jsx-newline': 'error',
         'react/jsx-sort-props': 'error',
         'react/no-unknown-property': ['warn', { ignore: ['css'] }],
         'react/prop-types': 'off',
+      },
+      settings: {
+        react: {
+          version: '19',
+        },
       },
     },
 
@@ -132,26 +134,16 @@ export const _lint = ({
         'sort-destructure-keys/sort-destructure-keys': 'error',
       },
     },
-
     {
       plugins: {
-        'sort-keys-fix': sortKeysFixPlugin,
-      },
-      rules: {
-        'sort-keys-fix/sort-keys-fix': 'error',
-      },
-    },
-
-    {
-      plugins: {
-        'typescript-sort-keys': typescriptSortKeysPlugin,
+        perfectionist,
       },
 
       rules: {
-        'typescript-sort-keys/string-enum': 'error',
+        'perfectionist/sort-enums': ['error', { type: 'alphabetical' }],
+    'perfectionist/sort-imports': 'error',
       },
     },
-
     {
       plugins: {
         'unused-imports': unusedImportsPlugin,
@@ -191,6 +183,8 @@ export const _lint = ({
 
     {
       languageOptions: {
+        parser: tseslint.parser,
+        
         ecmaVersion: 'latest',
 
         globals: trimValue({
@@ -199,8 +193,6 @@ export const _lint = ({
           ...globals.node,
           ...globals.serviceworker,
         }),
-
-        parser: typescriptPlugin.parser,
 
         parserOptions: {
           allowDefaultProject: true,

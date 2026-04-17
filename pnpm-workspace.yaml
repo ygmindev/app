@@ -1,7 +1,7 @@
 packages:
   - packages/*
 
-patchedDependencies:
-  react-native-screens@4.16.0: patches/react-native-screens@4.16.0.patch
-
 allowUnusedPatches: true
+
+patchedDependencies:
+  react-native-screens: patches/react-native-screens.patch

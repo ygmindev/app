@@ -3,23 +3,19 @@ import {
   type _WithFieldParamsModel,
 } from '@lib/backend/resource/utils/withField/_withField.models';
 import { FIELD_RELATION } from '@lib/backend/resource/utils/withField/withField.constants';
-import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
 import { Cascade, Collection } from '@mikro-orm/core';
 import {
-  ArrayType,
   Embedded,
-  type EntityClass,
   Index,
   ManyToMany,
   ManyToOne,
-  ObjectId,
   OneToMany,
   OneToOne,
   PrimaryKey,
   Property,
-  type PropertyOptions,
-} from '@mikro-orm/mongodb';
+} from '@mikro-orm/decorators/legacy';
+import { ArrayType, type EntityClass, ObjectId, type PropertyOptions } from '@mikro-orm/mongodb';
 import { GraphQLJSONObject } from 'graphql-type-json';
 import { Field, Float } from 'type-graphql';
 
@@ -92,10 +88,11 @@ export const _withField =
     // Database
     if (isDatabase) {
       if (expire || isUnique) {
-        (Index({ options: expire ? { expireAfterSeconds: expire } : {} }) as PropertyDecorator)(
-          target,
-          propertyKey,
-        );
+        (
+          Index({
+            options: expire ? { expireAfterSeconds: expire } : {},
+          }) as unknown as PropertyDecorator
+        )(target, propertyKey);
       }
       const options: PropertyOptions<object> = { nullable: isOptional, onCreate: defaultValue };
       if (isResource) {
@@ -107,7 +104,7 @@ export const _withField =
               array: isArray,
               entity,
               object: !isArray,
-            })(target, propertyKey as string);
+            })(target, propertyKey);
             break;
           }
           case FIELD_RELATION.MANY_TO_MANY: {
@@ -117,7 +114,7 @@ export const _withField =
               entity,
               mappedBy: root,
               owner: !root,
-            })(target, propertyKey as string);
+            })(target, propertyKey);
 
             if (!Object.prototype.hasOwnProperty.call(target, propertyKey)) {
               Object.defineProperty(target, propertyKey, {
@@ -151,11 +148,11 @@ export const _withField =
               ...options,
               cascade: [Cascade.ALL],
               entity,
-              mappedBy: root as StringKeyModel<TType>,
+              mappedBy: root,
               nullable: true,
               orphanRemoval: true,
               ref: true,
-            })(target, propertyKey as string);
+            })(target, propertyKey);
 
             if (!Object.prototype.hasOwnProperty.call(target, propertyKey)) {
               Object.defineProperty(target, propertyKey, {
@@ -174,7 +171,7 @@ export const _withField =
               cascade: [Cascade.ALL],
               entity,
               ref: true,
-            })(target, propertyKey as string);
+            })(target, propertyKey);
             break;
           }
           case FIELD_RELATION.ONE_TO_ONE: {
@@ -185,11 +182,11 @@ export const _withField =
               mappedBy: root,
               orphanRemoval: true,
               owner: !root,
-            })(target, propertyKey as string);
+            })(target, propertyKey);
             break;
           }
           default: {
-            Property({ ...options, type: () => Resource })(target, propertyKey as string);
+            Property({ ...options, type: () => Resource })(target, propertyKey);
             break;
           }
         }
@@ -197,7 +194,7 @@ export const _withField =
         options.type = ormType;
         (isId ? PrimaryKey({ ...options, fieldName: '_id' }) : Property(options))(
           target,
-          propertyKey as string,
+          propertyKey,
         );
       }
     }

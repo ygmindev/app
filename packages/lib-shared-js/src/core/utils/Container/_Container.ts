@@ -23,7 +23,7 @@ export const _Container: _ContainerModel = {
       | BindInWhenOnFluentSyntax<TType>
       | BindWhenOnFluentSyntax<TType>
       | BindToFluentSyntax<TType> = _container.isBound(type)
-      ? _container.rebindSync(type)
+      ? _container.rebind(type)
       : _container.bind(type);
     if (arguments.length === 2) {
       if (!value || typeof value === 'string') {

@@ -1,0 +1,1 @@
+import{E as e,j as t}from"./Environment.js";var n=(...n)=>((...e)=>t(`asset-static`,...e))(e,...n);export{n as t};

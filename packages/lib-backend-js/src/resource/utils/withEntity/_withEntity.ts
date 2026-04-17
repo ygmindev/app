@@ -4,7 +4,7 @@ import {
 } from '@lib/backend/resource/utils/withEntity/_withEntity.models';
 import { ENTITY_SCHEMA_TYPE } from '@lib/backend/resource/utils/withEntity/withEntity.constants';
 import { type ClassModel } from '@lib/shared/core/core.models';
-import { Embeddable, Entity, Index } from '@mikro-orm/mongodb';
+import { Embeddable, Entity, Index } from '@mikro-orm/decorators/legacy';
 import { InputType, ObjectType } from 'type-graphql';
 
 export const _withEntity = <TType extends unknown>({

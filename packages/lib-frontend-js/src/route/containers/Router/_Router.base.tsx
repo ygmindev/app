@@ -117,7 +117,7 @@ const getRouteConfig = (
         key={route.fullpath ?? route.pathname}
         screenOptions={{
           animation: 'none',
-          cardStyle: { backgroundColor: 'transparent', flex: 1, opacity: 1 },
+          cardStyle: { flex: 1, opacity: 1 },
           gestureEnabled: false,
           headerShown: false,
           presentation: 'transparentModal',

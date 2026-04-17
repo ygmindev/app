@@ -13,6 +13,7 @@ export const packageManagerConfig = new Config<PackageManagerConfigModel>({
     fixedVersions: {
       // https://github.com/software-mansion/react-native-reanimated/issues/8254
       'react-native-reanimated': '^3.19.1',
+      'react-native-screens': '4.24.0', // patched
     },
 
     installCommand: (names, packages, options = {}) =>

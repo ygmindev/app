@@ -1,0 +1,1 @@
+import{t as e}from"./rolldown-runtime.js";var t=e({APP_TYPE:()=>i,BUNDLE_FORMAT:()=>n,BUNDLE_SOURCEMAP:()=>r}),n=function(e){return e.CJS=`cjs`,e.ESM=`esm`,e}({}),r=function(e){return e.INLINE=`inline`,e.OUTPUT=`output`,e}({}),i=function(e){return e.SERVER=`server`,e.TOOL=`tool`,e.WEB=`web`,e}({});export{t as i,n,r,i as t};

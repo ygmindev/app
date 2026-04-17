@@ -1,8 +1,1 @@
-import { c as fromConfig } from "./tasks.js";
-import { containerConfig as containerConfig$1 } from "./container.base.js";
-const containerConfig = containerConfig$1.extend(() => ({
-  dirname: fromConfig("container/node")
-}));
-export {
-  containerConfig
-};
+import{t as e}from"./rolldown-runtime.js";import{A as t}from"./Environment.js";import{t as n}from"./container.base.js";var r=e({containerConfig:()=>i}),i=n.extend(()=>({dockerPathname:t(`container/node/Dockerfile`)}));export{r as n,i as t};

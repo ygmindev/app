@@ -1,5 +1,1 @@
-import { b as bundleConfig$1 } from "./tasks.js";
-const bundleConfig = bundleConfig$1.extend(() => ({}));
-export {
-  bundleConfig
-};
+import{t as e}from"./bundle.base.js";var t=e.extend(()=>({}));export{t as bundleConfig};
