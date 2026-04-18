@@ -9,7 +9,8 @@ export const authRoutes: Array<RouteModel> = [
   {
     element: <SignInPage mode={FORM_MODE.NEW} />,
     namespaces: [AUTH],
-    pathname: SIGN_IN,
+    pathname: `#${SIGN_IN}`,
+    title: ({ t }) => t('auth:signIn'),
   },
 
   {

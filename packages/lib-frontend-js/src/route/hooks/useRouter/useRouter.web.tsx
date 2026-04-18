@@ -11,12 +11,12 @@ export const useRouter = <TType extends unknown>(): UseRouterModel<TType> => {
 
     push: <TTypeNext = undefined,>({ params, pathname }: LocationModel<TTypeNext>) => {
       router.push({ params, pathname });
-      push(pathname);
+      !pathname.startsWith('#') && push(pathname);
     },
 
     replace: <TTypeNext = undefined,>({ params, pathname }: LocationModel<TTypeNext>) => {
       router.replace({ params, pathname });
-      replace(pathname);
+      !pathname.startsWith('#') && replace(pathname);
     },
   };
 };

@@ -2,6 +2,7 @@ import { adminRoutes } from '@lib/frontend/admin/admin.routes';
 import { AppContainer } from '@lib/frontend/app/containers/AppContainer/AppContainer';
 import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
+import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { devRoutes } from '@lib/frontend/dev/dev.routes';
 import { PingPage } from '@lib/frontend/http/pages/PingPage/PingPage';
 import { NotFoundPage } from '@lib/frontend/route/pages/NotFoundPage/NotFoundPage';
@@ -27,16 +28,21 @@ export const getRoutes = ({
 
   let routesF: Array<RouteModel> = trimRoutes([
     {
-      element: <PingPage />,
-      pathname: PING,
-      prerender: true,
+      element: <Wrapper />,
+      pathname: '/',
+    },
+
+    {
+      pathname: APP,
+      routes: [...appRoutes, ...userRoutes, ...devRoutes, ...adminRoutes, ...testRoutes],
     },
 
     ...mainRoutes,
 
     {
-      pathname: APP,
-      routes: [...appRoutes, ...userRoutes, ...devRoutes, ...adminRoutes, ...testRoutes],
+      element: <PingPage />,
+      pathname: PING,
+      prerender: true,
     },
   ]);
 

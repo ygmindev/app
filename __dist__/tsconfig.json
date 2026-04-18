@@ -40,6 +40,9 @@
       "@app/web/*": [
         "packages/app-web-js/src/*"
       ],
+      "@app/web-kfn/*": [
+        "packages/app-web-kfn-js/src/*"
+      ],
       "@app/web-orchestrator/*": [
         "packages/app-web-orchestrator-js/src/*"
       ],
@@ -64,6 +67,9 @@
       "@lib/model/*": [
         "packages/lib-model-js/src/*"
       ],
+      "lib_model/*": [
+        "packages/lib-model-py/src/*"
+      ],
       "lib_quant/*": [
         "packages/lib-quant-py/src/*"
       ],
@@ -73,11 +79,23 @@
       "lib_shared/*": [
         "packages/lib-shared-py/src/*"
       ],
+      "@service/admin/*": [
+        "packages/service-admin-js/src/*"
+      ],
       "service_ai/*": [
         "packages/service-ai-py/src/*"
       ],
+      "@service/internal/*": [
+        "packages/service-internal-js/src/*"
+      ],
       "@service/job/*": [
         "packages/service-job-js/src/*"
+      ],
+      "service_jobs/*": [
+        "packages/service-jobs-py/src/*"
+      ],
+      "@service/kfn/*": [
+        "packages/service-kfn-js/src/*"
       ],
       "@service/lambda/*": [
         "packages/service-lambda-js/src/*"

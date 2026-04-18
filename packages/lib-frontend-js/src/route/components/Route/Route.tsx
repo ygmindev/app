@@ -111,7 +111,7 @@ export const Route: LFCModel<RoutePropsModel> = ({
                 push({ params, pathname: location.pathname });
               }
             }}
-            title={route.title}>
+            title={v.title}>
             <Wrapper
               flex
               p
