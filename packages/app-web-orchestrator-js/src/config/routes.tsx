@@ -7,7 +7,7 @@ import { getRoutes } from '@lib/frontend/route/utils/getRoutes/getRoutes';
 import { APP } from '@lib/shared/app/app.constants';
 
 export const routes = getRoutes({
-  appRoutes: [
+  routes: [
     {
       pathname: ORCHESTRATOR,
       routes: [

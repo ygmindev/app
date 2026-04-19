@@ -1,3 +1,1 @@
-import { apiConfig as configBase } from '@lib/config/api/api';
-
-export const apiConfig = configBase.extend(() => ({}));
+export { apiConfig } from '@lib/config/api/api.admin';

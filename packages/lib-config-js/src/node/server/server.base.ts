@@ -3,14 +3,41 @@ import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { cookiesPlugin } from '@lib/backend/server/utils/Server/plugins/cookiesPlugin/cookiesPlugin';
 import { corsPlugin } from '@lib/backend/server/utils/Server/plugins/corsPlugin/corsPlugin';
+import { graphqlPlugin } from '@lib/backend/server/utils/Server/plugins/graphqlPlugin/graphqlPlugin';
 import { type ServerPluginModel } from '@lib/backend/server/utils/Server/plugins/plugins.models';
 import { PUBLIC_DIR } from '@lib/config/file/file.constants';
-import { type ServerConfigModel } from '@lib/config/node/server/server.models';
+import {
+  type _ServerConfigModel,
+  type ServerConfigModel,
+} from '@lib/config/node/server/server.models';
 import { Config } from '@lib/config/utils/Config/Config';
 import { Container } from '@lib/shared/core/utils/Container/Container';
+import { GRAPHQL } from '@lib/shared/graphql/graphql.constants';
+import { HTTP_METHOD } from '@lib/shared/http/http.constants';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import toNumber from 'lodash/toNumber';
 
-export const serverConfig = new Config<ServerConfigModel>({
+export const serverConfig = new Config<ServerConfigModel, _ServerConfigModel>({
+  config: ({ graphqlConfig, ...params }) => {
+    if (graphqlConfig) {
+      params.plugins = [
+        ...(params.plugins ?? []),
+
+        [
+          graphqlPlugin,
+          {
+            config: graphqlConfig,
+            logger,
+            method: [HTTP_METHOD.GET, HTTP_METHOD.POST, HTTP_METHOD.OPTIONS],
+            pathname: GRAPHQL,
+          },
+        ],
+      ] as Array<[ServerPluginModel<unknown>, unknown]>;
+    }
+
+    return params;
+  },
+
   params: () => {
     const environment = Container.get(Environment);
     const port =

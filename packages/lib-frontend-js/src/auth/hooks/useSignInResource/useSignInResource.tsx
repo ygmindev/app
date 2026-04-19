@@ -86,6 +86,16 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
     signOut: handleSignOut,
 
+    usernameUpdate: async (input) => {
+      const output = await query<SignInModel, { input: SignInInputModel }>({
+        fields: ['token', { user: USER_FIELDS }],
+        name: SIGN_IN_USERNAME_UPDATE,
+        params: { input: `${SIGN_IN_RESOURCE}Input` },
+        variables: { input },
+      });
+      output && (await signIn(output));
+    },
+
     userUpdate: async (input) => {
       const name = SIGN_IN_USER_UPDATE;
       const output = await query<SignInUserUpdateModel, { input: SignInUserUpdateInputModel }>({
@@ -101,16 +111,6 @@ export const useSignInResource = (): UseSignInResourceModel => {
       } else {
         throw new UnauthorizedError();
       }
-    },
-
-    usernameUpdate: async (input) => {
-      const output = await query<SignInModel, { input: SignInInputModel }>({
-        fields: ['token', { user: USER_FIELDS }],
-        name: SIGN_IN_USERNAME_UPDATE,
-        params: { input: `${SIGN_IN_RESOURCE}Input` },
-        variables: { input },
-      });
-      output && (await signIn(output));
     },
 
     verifyToken: async (input) => {

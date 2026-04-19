@@ -10,7 +10,7 @@ import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathnam
 import { type ComponentType } from 'react';
 
 export const routes = getRoutes({
-  appRoutes: [
+  routes: [
     {
       element: <GettingStartedPage />,
       icon: 'rocket',

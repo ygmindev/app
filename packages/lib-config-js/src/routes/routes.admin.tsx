@@ -1,32 +1,29 @@
-import { type RoutesConfigModel } from '@lib/config/routes/routes.models';
-import { defineConfig } from '@lib/config/utils/defineConfig/defineConfig';
-import { resourceRoute } from '@lib/frontend/admin/pages/ResourcePage/ResourcePage.route';
-import { Text } from '@lib/frontend/core/components/Text/Text';
-import { HOME } from '@lib/frontend/core/core.constants';
-import { RESOURCE } from '@lib/frontend/resource/resource.constants';
-import { ROUTE_NAVIGATION } from '@lib/frontend/route/route.constants';
-import { getRoutes } from '@lib/frontend/route/utils/getRoutes/getRoutes';
-import { ROUTE } from '@lib/shared/route/route.constants';
+import { routesConfig as configBase } from '@lib/config/routes/routes.base';
+import { ORCHESTRATOR, WORKFLOW } from '@lib/frontend/orchestrator/orchestrator.constants';
+import { OrchestratorPage } from '@lib/frontend/orchestrator/pages/OrchestratorPage/OrchestratorPage';
+import { WorkflowPage } from '@lib/frontend/orchestrator/pages/WorkflowPage/WorkflowPage';
+import { ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 
-export const routesConfig = defineConfig<RoutesConfigModel>({
-  params: () => ({
-    routes: getRoutes([
-      {
-        isProtectable: true,
-        namespaces: [ROUTE, RESOURCE],
-        navigation: ROUTE_NAVIGATION.NAVIGATION,
-        pathname: '/',
-        routes: [
-          {
-            element: <Text>home</Text>,
-            icon: 'home',
-            pathname: HOME,
-            title: ({ t }) => t('route:home'),
-          },
+// import { resourceRoute } from '@lib/frontend/admin/pages/ResourcePage/ResourcePage.route';
+// resourceRoute,
 
-          resourceRoute,
-        ],
-      },
-    ]),
-  }),
-});
+export const routesConfig = configBase.extend(() => ({
+  routes: [
+    {
+      pathname: ORCHESTRATOR,
+      routes: [
+        {
+          element: <OrchestratorPage />,
+          pathname: '/',
+        },
+        {
+          element: <WorkflowPage />,
+          header: true,
+          pathname: `/${WORKFLOW}/:name`,
+          previous: ORCHESTRATOR,
+        },
+      ],
+      transition: ROUTE_TRANSITION.SLIDE,
+    },
+  ],
+}));
