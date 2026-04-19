@@ -141,7 +141,7 @@ export const _lint = ({
 
       rules: {
         'perfectionist/sort-enums': ['error', { type: 'alphabetical' }],
-        'perfectionist/sort-imports': ['error', { newlinesBetween: 'always' }],
+        'perfectionist/sort-imports': ['error', { type: 'alphabetical', newlinesBetween: 1 }],
         'perfectionist/sort-objects': ['error', { type: 'alphabetical' }],
       },
     },
