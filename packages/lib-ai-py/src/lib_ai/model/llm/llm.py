@@ -28,9 +28,9 @@ class _Llm(BaseModel, _LlmModel):
 
     def post_init(self) -> None:
         match self.name:
-            case LLM_NAME.GLM_5:
+            case LLM_NAME.GLM_5 | LLM_NAME.LLAMA_3_2:
                 self._llm = ChatOllama(
-                    model="glm-5:cloud",
+                    model=self.name,
                     temperature=self.temperature,
                     num_predict=self.max_tokens,
                 )

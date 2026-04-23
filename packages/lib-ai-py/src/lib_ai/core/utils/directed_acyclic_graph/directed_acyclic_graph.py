@@ -62,12 +62,19 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
 
     def post_init(self) -> None:
         self._graph = StateGraph(type(self.initial_state))
+
         for node in self.nodes:
             self._graph.add_node(
                 node.name,
                 cast(StateNode, self._wrap_node(node.run)),
             )
-        for edge in self.edges:
+
+        edges = self.edges
+        if len(edges):
+            if edges[0][0] != GraphNodeType.START:
+                edges.insert(0, (GraphNodeType.START, self._get_edge(edges[0][0])))
+
+        for edge in edges:
             from_edge, to_edge = edge
             if isinstance(to_edge, str):
                 self._graph.add_edge(
@@ -79,6 +86,11 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
                     self._get_edge(from_edge),
                     lambda x: self._get_edge(to_edge(x)),
                 )
+
+        if len(edges):
+            if edges[-1][-1] != GraphNodeType.END:
+                edges.append((self._get_edge(edges[-1][-1]), GraphNodeType.END))
+
         self._graph_compiled = self._graph.compile(checkpointer=MemorySaver())
 
     @property

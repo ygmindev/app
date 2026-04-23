@@ -53,27 +53,27 @@
   "mypy-type-checker.enabled": true,
   "mypy-type-checker.importStrategy": "fromEnvironment",
   "mypy-type-checker.interpreter": [
-    "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
+    "${workspaceFolder}/packages/service-main-py/.venv/bin/python"
   ],
   "mypy-type-checker.reportingScope": "workspace",
   "pylint.interpreter": [
-    "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
+    "${workspaceFolder}/packages/service-main-py/.venv/bin/python"
   ],
   "python.analysis.autoImportCompletions": true,
   "python.analysis.enablePytestSupport": false,
   "python.analysis.indexing": true,
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.typeCheckingMode": "basic",
-  "python.defaultInterpreterPath": "${workspaceFolder}/packages/service-server-py/.venv/bin/python",
+  "python.defaultInterpreterPath": "${workspaceFolder}/packages/service-main-py/.venv/bin/python",
   "pylint.importStrategy": "fromEnvironment",
   "pylint.interpreter": [
-    "${workspaceFolder}/packages/service-server-py/.venv/bin/python"
+    "${workspaceFolder}/packages/service-main-py/.venv/bin/python"
   ],
   "ruff.nativeServer": "auto",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Dark+",
+  "workbench.colorTheme": "Default Dark+",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right",
   "cursor.composer.suggestNextPrompt": true,

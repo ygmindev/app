@@ -31,9 +31,6 @@
       "@app/native/*": [
         "packages/app-native-js/src/*"
       ],
-      "@app/web-admin/*": [
-        "packages/app-web-admin-js/src/*"
-      ],
       "@app/web-internal/*": [
         "packages/app-web-internal-js/src/*"
       ],
@@ -79,9 +76,6 @@
       "lib_shared/*": [
         "packages/lib-shared-py/src/*"
       ],
-      "@service/admin/*": [
-        "packages/service-admin-js/src/*"
-      ],
       "service_ai/*": [
         "packages/service-ai-py/src/*"
       ],
@@ -103,11 +97,11 @@
       "@service/orchestrator/*": [
         "packages/service-orchestrator-js/src/*"
       ],
-      "@service/server/*": [
-        "packages/service-server-js/src/*"
+      "@service/main/*": [
+        "packages/service-main-js/src/*"
       ],
       "service_server/*": [
-        "packages/service-server-py/src/*"
+        "packages/service-main-py/src/*"
       ],
       "@tool/task/*": [
         "packages/tool-task-js/src/*"

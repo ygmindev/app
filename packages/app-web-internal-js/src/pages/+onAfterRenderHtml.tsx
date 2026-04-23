@@ -1,5 +1,5 @@
 import { onAfterServer } from '@lib/config/node/framework/onAfterServer/onAfterServer';
 
-import { routes } from '../config/routes';
+import { routesConfig } from '../config/routes';
 
-export const onAfterRenderHtml = onAfterServer({ routes });
+export const onAfterRenderHtml = onAfterServer({ routes: routesConfig.config() });

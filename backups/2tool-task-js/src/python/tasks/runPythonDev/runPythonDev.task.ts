@@ -6,7 +6,7 @@ const runPythonDev: TaskParamsModel<unknown> = {
 
   name: 'run-python-dev',
 
-  task: [() => 'run rp --package service-server-py --name service_server/dev/scratchpad.py'],
+  task: [() => 'run rp --package service-main-py --name service_main/dev/scratchpad.py'],
 };
 
 export default runPythonDev;

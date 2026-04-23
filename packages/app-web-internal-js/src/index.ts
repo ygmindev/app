@@ -1,16 +1,11 @@
 import 'reflect-metadata';
 
-import { ServerApp } from '@lib/backend/app/utils/ServerApp/ServerApp';
+import { Server } from '@lib/backend/server/utils/Server/Server';
 
-import { name } from '../package.json';
-import { databaseConfig } from './config/database';
 import { serverConfig } from './config/server';
 
-const app = new ServerApp({
-  database: () => databaseConfig.params(),
-  name,
-  server: () => serverConfig.params(),
-});
+const server = new Server(serverConfig.params());
 
-export const { cleanUp } = app;
-await app.run();
+export const { cleanUp } = server;
+
+await server.run();

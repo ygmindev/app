@@ -256,7 +256,7 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
 
-  packages/app-web-admin-js:
+  packages/app-web-internal-js:
     dependencies:
       '@date-fns/tz':
         specifier: ^1.4.1
@@ -399,446 +399,6 @@ importers:
       libphonenumber-js:
         specifier: ^1.12.41
         version: 1.12.41
-      moti:
-        specifier: ^0.30.0
-        version: 0.30.0(react-dom@19.2.3(react@19.2.3))(react-native-reanimated@3.19.5(@babel/core@7.29.0)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react@19.2.3)
-      nanoid:
-        specifier: ^5.1.9
-        version: 5.1.9
-      react:
-        specifier: 19.2.3
-        version: 19.2.3
-      react-day-picker:
-        specifier: ^9.14.0
-        version: 9.14.0(react@19.2.3)
-      react-dom:
-        specifier: 19.2.3
-        version: 19.2.3(react@19.2.3)
-      react-markdown:
-        specifier: ^10.1.0
-        version: 10.1.0(@types/react@19.2.14)(react@19.2.3)
-      react-native-advanced-input-mask:
-        specifier: ^1.4.6
-        version: 1.4.6(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-native-reanimated:
-        specifier: 3.19.5
-        version: 3.19.5(@babel/core@7.29.0)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-native-safe-area-context:
-        specifier: ^5.7.0
-        version: 5.7.0(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-native-screens:
-        specifier: 4.24.0
-        version: 4.24.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-native-type-animation:
-        specifier: ^0.4.4
-        version: 0.4.4(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-native-vector-icons:
-        specifier: ^10.3.0
-        version: 10.3.0
-      react-native-web:
-        specifier: ^0.21.2
-        version: 0.21.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      react-native-webview:
-        specifier: ^13.16.1
-        version: 13.16.1(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-redux:
-        specifier: ^9.2.0
-        version: 9.2.0(@types/react@19.2.14)(react@19.2.3)(redux@5.0.1)
-      redux:
-        specifier: ^5.0.1
-        version: 5.0.1
-      redux-persist:
-        specifier: ^6.0.0
-        version: 6.0.0(react@19.2.3)(redux@5.0.1)
-      redux-persist-cookie-storage:
-        specifier: ^1.0.0
-        version: 1.0.0
-      reflect-metadata:
-        specifier: ^0.2.2
-        version: 0.2.2
-    devDependencies:
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/runtime':
-        specifier: ^7.29.2
-        version: 7.29.2
-      vike:
-        specifier: 0.4.257
-        version: 0.4.257(@cloudflare/workers-types@4.20260417.1)(@types/express@5.0.6)(fastify@5.8.5)(react-streaming@0.4.17(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(srvx@0.11.15)(vite@8.0.8(@types/node@25.6.0)(esbuild@0.28.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
-      vike-react:
-        specifier: ^0.6.21
-        version: 0.6.21(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(vike@0.4.257(@cloudflare/workers-types@4.20260417.1)(@types/express@5.0.6)(fastify@5.8.5)(react-streaming@0.4.17(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(srvx@0.11.15)(vite@8.0.8(@types/node@25.6.0)(esbuild@0.28.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)))
-      vite:
-        specifier: 8.0.8
-        version: 8.0.8(@types/node@25.6.0)(esbuild@0.28.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
-
-  packages/app-web-internal-js:
-    dependencies:
-      '@date-fns/tz':
-        specifier: ^1.4.1
-        version: 1.4.1
-      '@egjs/react-infinitegrid':
-        specifier: ^4.13.0
-        version: 4.13.0
-      '@emotion/react':
-        specifier: ^11.14.0
-        version: 11.14.0(@types/react@19.2.14)(react@19.2.3)
-      '@expo/vector-icons':
-        specifier: ^15.1.1
-        version: 15.1.1(expo-font@55.0.6(expo@55.0.15)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      '@fastify/middie':
-        specifier: ^9.3.1
-        version: 9.3.2
-      '@floating-ui/react':
-        specifier: ^0.27.19
-        version: 0.27.19(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@floating-ui/react-dom':
-        specifier: ^2.1.8
-        version: 2.1.8(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@fragaria/address-formatter':
-        specifier: ^6.7.1
-        version: 6.7.1
-      '@lexical/react':
-        specifier: ^0.43.0
-        version: 0.43.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(yjs@13.6.30)
-      '@lib/config':
-        specifier: workspace:^
-        version: link:../lib-config-js
-      '@lib/frontend':
-        specifier: workspace:^
-        version: link:../lib-frontend-js
-      '@lib/model':
-        specifier: workspace:^
-        version: link:../lib-model-js
-      '@lib/shared':
-        specifier: workspace:^
-        version: link:../lib-shared-js
-      '@react-google-maps/api':
-        specifier: ^2.20.8
-        version: 2.20.8(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@react-navigation/core':
-        specifier: ^7.17.2
-        version: 7.17.2(react@19.2.3)
-      '@react-navigation/elements':
-        specifier: ^2.9.14
-        version: 2.9.14(@react-navigation/native@7.2.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-safe-area-context@5.7.0(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      '@react-navigation/native':
-        specifier: ^7.2.2
-        version: 7.2.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      '@react-navigation/native-stack':
-        specifier: ^7.14.11
-        version: 7.14.11(@react-navigation/native@7.2.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-safe-area-context@5.7.0(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-screens@4.24.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      '@react-navigation/stack':
-        specifier: ^7.8.10
-        version: 7.8.10(@react-navigation/native@7.2.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-gesture-handler@2.31.1(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-safe-area-context@5.7.0(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-screens@4.24.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      '@react-oauth/google':
-        specifier: ^0.13.5
-        version: 0.13.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@reduxjs/toolkit':
-        specifier: 2.11.2
-        version: 2.11.2(react-redux@9.2.0(@types/react@19.2.14)(react@19.2.3)(redux@5.0.1))(react@19.2.3)
-      '@rpldy/upload-button':
-        specifier: ^1.13.0
-        version: 1.13.0(react@19.2.3)
-      '@rpldy/upload-drop-zone':
-        specifier: ^1.13.0
-        version: 1.13.0(react@19.2.3)
-      '@rpldy/uploader':
-        specifier: ^1.13.0
-        version: 1.13.0
-      '@rpldy/uploady':
-        specifier: ^1.13.0
-        version: 1.13.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@stripe/react-stripe-js':
-        specifier: ^6.2.0
-        version: 6.2.0(@stripe/stripe-js@9.2.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@stripe/stripe-js':
-        specifier: ^9.2.0
-        version: 9.2.0
-      '@tanstack/query-async-storage-persister':
-        specifier: ^5.99.0
-        version: 5.99.0
-      '@tanstack/react-query':
-        specifier: ^5.99.0
-        version: 5.99.0(react@19.2.3)
-      '@tanstack/react-query-persist-client':
-        specifier: ^5.99.0
-        version: 5.99.0(@tanstack/react-query@5.99.0(react@19.2.3))(react@19.2.3)
-      '@tanstack/react-table':
-        specifier: ^8.21.3
-        version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@uiw/react-md-editor':
-        specifier: ^4.1.0
-        version: 4.1.0(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      ag-grid-community:
-        specifier: ^35.2.1
-        version: 35.2.1
-      ag-grid-react:
-        specifier: ^35.2.1
-        version: 35.2.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      amplitude-js:
-        specifier: ^8.21.10
-        version: 8.21.10
-      color:
-        specifier: ^5.0.3
-        version: 5.0.3
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
-      escape-string-regexp:
-        specifier: ^5.0.0
-        version: 5.0.0
-      firebase:
-        specifier: ^12.12.0
-        version: 12.12.0(@react-native-async-storage/async-storage@3.0.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))
-      flexsearch:
-        specifier: ^0.8.212
-        version: 0.8.212
-      formik:
-        specifier: ^2.4.9
-        version: 2.4.9(@types/react@19.2.14)(react@19.2.3)
-      framer-motion:
-        specifier: ^12.38.0
-        version: 12.38.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      graphql:
-        specifier: ^16.12.0
-        version: 16.13.2
-      invariant:
-        specifier: ^2.2.4
-        version: 2.2.4
-      inversify:
-        specifier: ^8.1.0
-        version: 8.1.0(reflect-metadata@0.2.2)
-      inversify-react:
-        specifier: ^1.2.0
-        version: 1.2.0(inversify@8.1.0(reflect-metadata@0.2.2))(react@19.2.3)
-      json-stringify-safe:
-        specifier: ^5.0.1
-        version: 5.0.1
-      lexical:
-        specifier: ^0.43.0
-        version: 0.43.0
-      libphonenumber-js:
-        specifier: ^1.12.41
-        version: 1.12.41
-      moti:
-        specifier: ^0.30.0
-        version: 0.30.0(react-dom@19.2.3(react@19.2.3))(react-native-reanimated@3.19.5(@babel/core@7.29.0)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react@19.2.3)
-      nanoid:
-        specifier: ^5.1.9
-        version: 5.1.9
-      react:
-        specifier: 19.2.3
-        version: 19.2.3
-      react-day-picker:
-        specifier: ^9.14.0
-        version: 9.14.0(react@19.2.3)
-      react-dom:
-        specifier: 19.2.3
-        version: 19.2.3(react@19.2.3)
-      react-markdown:
-        specifier: ^10.1.0
-        version: 10.1.0(@types/react@19.2.14)(react@19.2.3)
-      react-native-advanced-input-mask:
-        specifier: ^1.4.6
-        version: 1.4.6(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-native-reanimated:
-        specifier: 3.19.5
-        version: 3.19.5(@babel/core@7.29.0)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-native-safe-area-context:
-        specifier: ^5.7.0
-        version: 5.7.0(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-native-screens:
-        specifier: 4.24.0
-        version: 4.24.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-native-type-animation:
-        specifier: ^0.4.4
-        version: 0.4.4(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-native-vector-icons:
-        specifier: ^10.3.0
-        version: 10.3.0
-      react-native-web:
-        specifier: ^0.21.2
-        version: 0.21.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      react-native-webview:
-        specifier: ^13.16.1
-        version: 13.16.1(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      react-redux:
-        specifier: ^9.2.0
-        version: 9.2.0(@types/react@19.2.14)(react@19.2.3)(redux@5.0.1)
-      redux:
-        specifier: ^5.0.1
-        version: 5.0.1
-      redux-persist:
-        specifier: ^6.0.0
-        version: 6.0.0(react@19.2.3)(redux@5.0.1)
-      redux-persist-cookie-storage:
-        specifier: ^1.0.0
-        version: 1.0.0
-      reflect-metadata:
-        specifier: ^0.2.2
-        version: 0.2.2
-    devDependencies:
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/runtime':
-        specifier: ^7.29.2
-        version: 7.29.2
-      vike:
-        specifier: 0.4.257
-        version: 0.4.257(@cloudflare/workers-types@4.20260417.1)(@types/express@5.0.6)(fastify@5.8.5)(react-streaming@0.4.17(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(srvx@0.11.15)(vite@8.0.8(@types/node@25.6.0)(esbuild@0.28.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
-      vike-react:
-        specifier: ^0.6.21
-        version: 0.6.21(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(vike@0.4.257(@cloudflare/workers-types@4.20260417.1)(@types/express@5.0.6)(fastify@5.8.5)(react-streaming@0.4.17(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(srvx@0.11.15)(vite@8.0.8(@types/node@25.6.0)(esbuild@0.28.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)))
-      vite:
-        specifier: 8.0.8
-        version: 8.0.8(@types/node@25.6.0)(esbuild@0.28.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
-
-  packages/app-web-js:
-    dependencies:
-      '@date-fns/tz':
-        specifier: ^1.4.1
-        version: 1.4.1
-      '@egjs/react-infinitegrid':
-        specifier: ^4.13.0
-        version: 4.13.0
-      '@emotion/react':
-        specifier: ^11.14.0
-        version: 11.14.0(@types/react@19.2.14)(react@19.2.3)
-      '@expo/vector-icons':
-        specifier: ^15.1.1
-        version: 15.1.1(expo-font@55.0.6(expo@55.0.15)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      '@fastify/middie':
-        specifier: ^9.3.1
-        version: 9.3.2
-      '@floating-ui/react':
-        specifier: ^0.27.19
-        version: 0.27.19(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@floating-ui/react-dom':
-        specifier: ^2.1.8
-        version: 2.1.8(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@fragaria/address-formatter':
-        specifier: ^6.7.1
-        version: 6.7.1
-      '@lexical/react':
-        specifier: ^0.43.0
-        version: 0.43.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(yjs@13.6.30)
-      '@lib/config':
-        specifier: workspace:^
-        version: link:../lib-config-js
-      '@lib/frontend':
-        specifier: workspace:^
-        version: link:../lib-frontend-js
-      '@lib/model':
-        specifier: workspace:^
-        version: link:../lib-model-js
-      '@lib/shared':
-        specifier: workspace:^
-        version: link:../lib-shared-js
-      '@react-google-maps/api':
-        specifier: ^2.20.8
-        version: 2.20.8(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@react-navigation/native':
-        specifier: ^7.2.2
-        version: 7.2.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      '@react-navigation/stack':
-        specifier: ^7.8.10
-        version: 7.8.10(@react-navigation/native@7.2.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-gesture-handler@2.31.1(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-safe-area-context@5.7.0(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-screens@4.24.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      '@react-oauth/google':
-        specifier: ^0.13.5
-        version: 0.13.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@reduxjs/toolkit':
-        specifier: 2.11.2
-        version: 2.11.2(react-redux@9.2.0(@types/react@19.2.14)(react@19.2.3)(redux@5.0.1))(react@19.2.3)
-      '@rpldy/upload-button':
-        specifier: ^1.13.0
-        version: 1.13.0(react@19.2.3)
-      '@rpldy/upload-drop-zone':
-        specifier: ^1.13.0
-        version: 1.13.0(react@19.2.3)
-      '@rpldy/uploader':
-        specifier: ^1.13.0
-        version: 1.13.0
-      '@rpldy/uploady':
-        specifier: ^1.13.0
-        version: 1.13.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@shopify/flash-list':
-        specifier: 2.3.1
-        version: 2.3.1(@babel/runtime@7.29.2)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      '@stripe/react-stripe-js':
-        specifier: ^6.2.0
-        version: 6.2.0(@stripe/stripe-js@9.2.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@stripe/stripe-js':
-        specifier: ^9.2.0
-        version: 9.2.0
-      '@tanstack/query-async-storage-persister':
-        specifier: ^5.99.0
-        version: 5.99.0
-      '@tanstack/react-query':
-        specifier: ^5.99.0
-        version: 5.99.0(react@19.2.3)
-      '@tanstack/react-query-persist-client':
-        specifier: ^5.99.0
-        version: 5.99.0(@tanstack/react-query@5.99.0(react@19.2.3))(react@19.2.3)
-      '@tanstack/react-table':
-        specifier: ^8.21.3
-        version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@uiw/react-md-editor':
-        specifier: ^4.1.0
-        version: 4.1.0(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      ag-grid-community:
-        specifier: ^35.2.1
-        version: 35.2.1
-      ag-grid-react:
-        specifier: ^35.2.1
-        version: 35.2.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      amplitude-js:
-        specifier: ^8.21.10
-        version: 8.21.10
-      color:
-        specifier: ^5.0.3
-        version: 5.0.3
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
-      escape-string-regexp:
-        specifier: ^5.0.0
-        version: 5.0.0
-      expo-linking:
-        specifier: ^55.0.13
-        version: 55.0.13(expo@55.0.15)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
-      firebase:
-        specifier: ^12.12.0
-        version: 12.12.0(@react-native-async-storage/async-storage@3.0.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))
-      flexsearch:
-        specifier: ^0.8.212
-        version: 0.8.212
-      formik:
-        specifier: ^2.4.9
-        version: 2.4.9(@types/react@19.2.14)(react@19.2.3)
-      framer-motion:
-        specifier: ^12.38.0
-        version: 12.38.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      inversify:
-        specifier: ^8.1.0
-        version: 8.1.0(reflect-metadata@0.2.2)
-      inversify-react:
-        specifier: ^1.2.0
-        version: 1.2.0(inversify@8.1.0(reflect-metadata@0.2.2))(react@19.2.3)
-      json-stringify-safe:
-        specifier: ^5.0.1
-        version: 5.0.1
-      lexical:
-        specifier: ^0.43.0
-        version: 0.43.0
-      libphonenumber-js:
-        specifier: ^1.12.41
-        version: 1.12.41
-      lodash:
-        specifier: ^4.18.1
-        version: 4.18.1
       moti:
         specifier: ^0.30.0
         version: 0.30.0(react-dom@19.2.3(react@19.2.3))(react-native-reanimated@3.19.5(@babel/core@7.29.0)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react@19.2.3)
@@ -1250,7 +810,7 @@ importers:
         specifier: 8.0.8
         version: 8.0.8(@types/node@25.6.0)(esbuild@0.28.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
 
-  packages/app-web-orchestrator-js:
+  packages/app-web-main-js:
     dependencies:
       '@date-fns/tz':
         specifier: ^1.4.1
@@ -1294,18 +854,9 @@ importers:
       '@react-google-maps/api':
         specifier: ^2.20.8
         version: 2.20.8(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@react-navigation/core':
-        specifier: ^7.17.2
-        version: 7.17.2(react@19.2.3)
-      '@react-navigation/elements':
-        specifier: ^2.9.14
-        version: 2.9.14(@react-navigation/native@7.2.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-safe-area-context@5.7.0(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
       '@react-navigation/native':
         specifier: ^7.2.2
         version: 7.2.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
-      '@react-navigation/native-stack':
-        specifier: ^7.14.11
-        version: 7.14.11(@react-navigation/native@7.2.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-safe-area-context@5.7.0(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-screens@4.24.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
       '@react-navigation/stack':
         specifier: ^7.8.10
         version: 7.8.10(@react-navigation/native@7.2.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-gesture-handler@2.31.1(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-safe-area-context@5.7.0(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native-screens@4.24.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
@@ -1327,6 +878,9 @@ importers:
       '@rpldy/uploady':
         specifier: ^1.13.0
         version: 1.13.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@shopify/flash-list':
+        specifier: 2.3.1
+        version: 2.3.1(@babel/runtime@7.29.2)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
       '@stripe/react-stripe-js':
         specifier: ^6.2.0
         version: 6.2.0(@stripe/stripe-js@9.2.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1360,15 +914,15 @@ importers:
       color:
         specifier: ^5.0.3
         version: 5.0.3
-      cookies-js:
-        specifier: ^1.2.3
-        version: 1.2.3
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
       escape-string-regexp:
         specifier: ^5.0.0
         version: 5.0.0
+      expo-linking:
+        specifier: ^55.0.13
+        version: 55.0.13(expo@55.0.15)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
       firebase:
         specifier: ^12.12.0
         version: 12.12.0(@react-native-async-storage/async-storage@3.0.2(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))
@@ -1381,18 +935,6 @@ importers:
       framer-motion:
         specifier: ^12.38.0
         version: 12.38.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      graphql:
-        specifier: ^16.12.0
-        version: 16.13.2
-      i18next-fs-backend:
-        specifier: ^2.6.3
-        version: 2.6.3
-      i18next-http-backend:
-        specifier: ^3.0.4
-        version: 3.0.4
-      invariant:
-        specifier: ^2.2.4
-        version: 2.2.4
       inversify:
         specifier: ^8.1.0
         version: 8.1.0(reflect-metadata@0.2.2)
@@ -1408,6 +950,9 @@ importers:
       libphonenumber-js:
         specifier: ^1.12.41
         version: 1.12.41
+      lodash:
+        specifier: ^4.18.1
+        version: 4.18.1
       moti:
         specifier: ^0.30.0
         version: 0.30.0(react-dom@19.2.3(react@19.2.3))(react-native-reanimated@3.19.5(@babel/core@7.29.0)(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.3))(react@19.2.3))(react@19.2.3)
@@ -1453,9 +998,6 @@ importers:
       react-redux:
         specifier: ^9.2.0
         version: 9.2.0(@types/react@19.2.14)(react@19.2.3)(redux@5.0.1)
-      react-spinners:
-        specifier: ^0.17.0
-        version: 0.17.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       redux:
         specifier: ^5.0.1
         version: 5.0.1
@@ -1724,7 +1266,9 @@ importers:
 
   packages/lib-shared-py: {}
 
-  packages/service-admin-js:
+  packages/service-ai-py: {}
+
+  packages/service-internal-js:
     dependencies:
       '@aws-sdk/client-s3':
         specifier: ^3.1030.0
@@ -1880,179 +1424,6 @@ importers:
       '@types/mime-types':
         specifier: ^3.0.1
         version: 3.0.1
-
-  packages/service-ai-py: {}
-
-  packages/service-internal-js:
-    dependencies:
-      '@azure/functions':
-        specifier: ^4.12.0
-        version: 4.12.0
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@date-fns/tz':
-        specifier: ^1.4.1
-        version: 1.4.1
-      '@fastify/compress':
-        specifier: ^8.3.1
-        version: 8.3.1
-      '@fastify/cookie':
-        specifier: ^11.0.2
-        version: 11.0.2
-      '@fastify/cors':
-        specifier: ^11.2.0
-        version: 11.2.0
-      '@fastify/error':
-        specifier: ^4.2.0
-        version: 4.2.0
-      '@fastify/middie':
-        specifier: ^9.3.1
-        version: 9.3.2
-      '@fastify/static':
-        specifier: ^9.1.0
-        version: 9.1.1
-      '@fastify/websocket':
-        specifier: ^11.2.0
-        version: 11.2.0
-      '@graphql-yoga/plugin-graphql-sse':
-        specifier: ^3.21.0
-        version: 3.21.0(graphql-yoga@5.21.0(graphql@16.13.2))(graphql@16.13.2)
-      '@graphql-yoga/redis-event-target':
-        specifier: ^3.0.3
-        version: 3.0.3(ioredis@5.10.1)
-      '@lib/backend':
-        specifier: workspace:^
-        version: link:../lib-backend-js
-      '@lib/config':
-        specifier: workspace:^
-        version: link:../lib-config-js
-      '@lib/model':
-        specifier: workspace:^
-        version: link:../lib-model-js
-      '@lib/shared':
-        specifier: workspace:^
-        version: link:../lib-shared-js
-      '@mikro-orm/core':
-        specifier: ^7.0.10
-        version: 7.0.11
-      '@mikro-orm/decorators':
-        specifier: ^7.0.10
-        version: 7.0.11(@mikro-orm/core@7.0.11)(reflect-metadata@0.2.2)
-      '@mikro-orm/mongodb':
-        specifier: ^7.0.10
-        version: 7.0.11(@mikro-orm/core@7.0.11)(socks@2.8.7)
-      '@netlify/functions':
-        specifier: ^5.2.0
-        version: 5.2.0
-      axios:
-        specifier: ^1.15.0
-        version: 1.15.0
-      class-validator:
-        specifier: ^0.15.1
-        version: 0.15.1
-      close-with-grace:
-        specifier: ^2.5.0
-        version: 2.5.0
-      cookie:
-        specifier: ^1.1.1
-        version: 1.1.1
-      core-js:
-        specifier: ^3.49.0
-        version: 3.49.0
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
-      dotenv:
-        specifier: ^17.4.2
-        version: 17.4.2
-      ejs:
-        specifier: ^5.0.2
-        version: 5.0.2
-      email-templates:
-        specifier: ^13.0.1
-        version: 13.0.1(@babel/core@7.29.0)(ejs@5.0.2)(handlebars@4.7.9)(mustache@4.2.0)(pug@3.0.4)(react-dom@19.2.3(react@19.2.5))(react@19.2.5)(underscore@1.13.8)(velocityjs@2.1.5)
-      fastify:
-        specifier: ^5.8.5
-        version: 5.8.5
-      firebase-admin:
-        specifier: ^13.8.0
-        version: 13.8.0
-      fs-extra:
-        specifier: ^11.3.4
-        version: 11.3.4
-      glob:
-        specifier: ^13.0.6
-        version: 13.0.6
-      graphql:
-        specifier: ^16.12.0
-        version: 16.13.2
-      graphql-scalars:
-        specifier: ^1.25.0
-        version: 1.25.0(graphql@16.13.2)
-      graphql-type-json:
-        specifier: ^0.3.2
-        version: 0.3.2(graphql@16.13.2)
-      graphql-yoga:
-        specifier: ^5.21.0
-        version: 5.21.0(graphql@16.13.2)
-      http-errors:
-        specifier: ^2.0.1
-        version: 2.0.1
-      i18next:
-        specifier: ^26.0.5
-        version: 26.0.5(typescript@6.0.3)
-      inversify:
-        specifier: ^8.1.0
-        version: 8.1.0(reflect-metadata@0.2.2)
-      ioredis:
-        specifier: ^5.10.1
-        version: 5.10.1
-      json-stringify-safe:
-        specifier: ^5.0.1
-        version: 5.0.1
-      lodash:
-        specifier: ^4.18.1
-        version: 4.18.1
-      mongodb:
-        specifier: 7.1.1
-        version: 7.1.1(socks@2.8.7)
-      nanoid:
-        specifier: ^5.1.9
-        version: 5.1.9
-      nats:
-        specifier: ^2.29.3
-        version: 2.29.3
-      nodemailer:
-        specifier: ^8.0.5
-        version: 8.0.5
-      p-queue:
-        specifier: ^9.1.2
-        version: 9.1.2
-      pino:
-        specifier: ^10.3.1
-        version: 10.3.1
-      pino-pretty:
-        specifier: ^13.1.3
-        version: 13.1.3
-      reflect-metadata:
-        specifier: ^0.2.2
-        version: 0.2.2
-      stripe:
-        specifier: ^22.0.1
-        version: 22.0.2(@types/node@25.6.0)
-      thenby:
-        specifier: ^1.4.0
-        version: 1.4.0
-      twilio:
-        specifier: ^5.13.1
-        version: 5.13.1
-      type-graphql:
-        specifier: 2.0.0-rc.3
-        version: 2.0.0-rc.3(class-validator@0.15.1)(graphql-scalars@1.25.0(graphql@16.13.2))(graphql@16.13.2)
-      ws:
-        specifier: ^8.20.0
-        version: 8.20.0
 
   packages/service-job-js:
     dependencies:
@@ -2133,163 +1504,6 @@ importers:
         version: 1.4.0
 
   packages/service-jobs-py: {}
-
-  packages/service-kfn-js:
-    dependencies:
-      '@aws-sdk/client-s3':
-        specifier: ^3.1030.0
-        version: 3.1031.0(aws-crt@1.31.0)
-      '@aws-sdk/s3-request-presigner':
-        specifier: ^3.1030.0
-        version: 3.1031.0
-      '@aws-sdk/signature-v4-crt':
-        specifier: ^3.1030.0
-        version: 3.1031.0
-      '@aws-sdk/signature-v4-multi-region':
-        specifier: ^3.996.16
-        version: 3.996.17
-      '@azure/functions':
-        specifier: ^4.12.0
-        version: 4.12.0
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@date-fns/tz':
-        specifier: ^1.4.1
-        version: 1.4.1
-      '@fastify/compress':
-        specifier: ^8.3.1
-        version: 8.3.1
-      '@fastify/cookie':
-        specifier: ^11.0.2
-        version: 11.0.2
-      '@fastify/cors':
-        specifier: ^11.2.0
-        version: 11.2.0
-      '@fastify/error':
-        specifier: ^4.2.0
-        version: 4.2.0
-      '@fastify/static':
-        specifier: ^9.1.0
-        version: 9.1.1
-      '@fastify/websocket':
-        specifier: ^11.2.0
-        version: 11.2.0
-      '@graphql-yoga/plugin-graphql-sse':
-        specifier: ^3.21.0
-        version: 3.21.0(graphql-yoga@5.21.0(graphql@16.13.2))(graphql@16.13.2)
-      '@graphql-yoga/redis-event-target':
-        specifier: ^3.0.3
-        version: 3.0.3(ioredis@5.10.1)
-      '@lib/backend':
-        specifier: workspace:^
-        version: link:../lib-backend-js
-      '@lib/config':
-        specifier: workspace:^
-        version: link:../lib-config-js
-      '@lib/model':
-        specifier: workspace:^
-        version: link:../lib-model-js
-      '@lib/shared':
-        specifier: workspace:^
-        version: link:../lib-shared-js
-      '@mikro-orm/core':
-        specifier: ^7.0.10
-        version: 7.0.11
-      '@mikro-orm/decorators':
-        specifier: ^7.0.10
-        version: 7.0.11(@mikro-orm/core@7.0.11)(reflect-metadata@0.2.2)
-      '@mikro-orm/mongodb':
-        specifier: ^7.0.10
-        version: 7.0.11(@mikro-orm/core@7.0.11)(socks@2.8.7)
-      '@netlify/functions':
-        specifier: ^5.2.0
-        version: 5.2.0
-      aws4fetch:
-        specifier: ^1.0.20
-        version: 1.0.20
-      axios:
-        specifier: ^1.15.0
-        version: 1.15.0
-      class-validator:
-        specifier: ^0.15.1
-        version: 0.15.1
-      cookie:
-        specifier: ^1.1.1
-        version: 1.1.1
-      core-js:
-        specifier: ^3.49.0
-        version: 3.49.0
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
-      ejs:
-        specifier: ^5.0.2
-        version: 5.0.2
-      email-templates:
-        specifier: ^13.0.1
-        version: 13.0.1(@babel/core@7.29.0)(ejs@5.0.2)(handlebars@4.7.9)(mustache@4.2.0)(pug@3.0.4)(react-dom@19.2.3(react@19.2.5))(react@19.2.5)(underscore@1.13.8)(velocityjs@2.1.5)
-      fastify:
-        specifier: ^5.8.5
-        version: 5.8.5
-      firebase-admin:
-        specifier: ^13.8.0
-        version: 13.8.0
-      http-errors:
-        specifier: ^2.0.1
-        version: 2.0.1
-      i18next:
-        specifier: ^26.0.5
-        version: 26.0.5(typescript@6.0.3)
-      inversify:
-        specifier: ^8.1.0
-        version: 8.1.0(reflect-metadata@0.2.2)
-      ioredis:
-        specifier: ^5.10.1
-        version: 5.10.1
-      json-stringify-safe:
-        specifier: ^5.0.1
-        version: 5.0.1
-      lodash:
-        specifier: ^4.18.1
-        version: 4.18.1
-      mime-types:
-        specifier: ^3.0.2
-        version: 3.0.2
-      mongodb:
-        specifier: 7.1.1
-        version: 7.1.1(socks@2.8.7)
-      nanoid:
-        specifier: ^5.1.9
-        version: 5.1.9
-      nodemailer:
-        specifier: ^8.0.5
-        version: 8.0.5
-      p-queue:
-        specifier: ^9.1.2
-        version: 9.1.2
-      pino:
-        specifier: ^10.3.1
-        version: 10.3.1
-      pino-pretty:
-        specifier: ^13.1.3
-        version: 13.1.3
-      stripe:
-        specifier: ^22.0.1
-        version: 22.0.2(@types/node@25.6.0)
-      thenby:
-        specifier: ^1.4.0
-        version: 1.4.0
-      twilio:
-        specifier: ^5.13.1
-        version: 5.13.1
-      ws:
-        specifier: ^8.20.0
-        version: 8.20.0
-    devDependencies:
-      '@types/mime-types':
-        specifier: ^3.0.1
-        version: 3.0.1
 
   packages/service-lambda-crawl:
     dependencies:
@@ -2585,181 +1799,7 @@ importers:
         specifier: ^8.20.0
         version: 8.20.0
 
-  packages/service-orchestrator-js:
-    dependencies:
-      '@azure/functions':
-        specifier: ^4.12.0
-        version: 4.12.0
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@date-fns/tz':
-        specifier: ^1.4.1
-        version: 1.4.1
-      '@fastify/compress':
-        specifier: ^8.3.1
-        version: 8.3.1
-      '@fastify/cookie':
-        specifier: ^11.0.2
-        version: 11.0.2
-      '@fastify/cors':
-        specifier: ^11.2.0
-        version: 11.2.0
-      '@fastify/error':
-        specifier: ^4.2.0
-        version: 4.2.0
-      '@fastify/middie':
-        specifier: ^9.3.1
-        version: 9.3.2
-      '@fastify/static':
-        specifier: ^9.1.0
-        version: 9.1.1
-      '@fastify/websocket':
-        specifier: ^11.2.0
-        version: 11.2.0
-      '@graphql-yoga/plugin-graphql-sse':
-        specifier: ^3.21.0
-        version: 3.21.0(graphql-yoga@5.21.0(graphql@16.13.2))(graphql@16.13.2)
-      '@graphql-yoga/redis-event-target':
-        specifier: ^3.0.3
-        version: 3.0.3(ioredis@5.10.1)
-      '@lib/backend':
-        specifier: workspace:^
-        version: link:../lib-backend-js
-      '@lib/config':
-        specifier: workspace:^
-        version: link:../lib-config-js
-      '@lib/model':
-        specifier: workspace:^
-        version: link:../lib-model-js
-      '@lib/shared':
-        specifier: workspace:^
-        version: link:../lib-shared-js
-      '@mikro-orm/core':
-        specifier: ^7.0.10
-        version: 7.0.11
-      '@mikro-orm/decorators':
-        specifier: ^7.0.10
-        version: 7.0.11(@mikro-orm/core@7.0.11)(reflect-metadata@0.2.2)
-      '@mikro-orm/mongodb':
-        specifier: ^7.0.10
-        version: 7.0.11(@mikro-orm/core@7.0.11)(socks@2.8.7)
-      '@netlify/functions':
-        specifier: ^5.2.0
-        version: 5.2.0
-      axios:
-        specifier: ^1.15.0
-        version: 1.15.0
-      class-validator:
-        specifier: ^0.15.1
-        version: 0.15.1
-      close-with-grace:
-        specifier: ^2.5.0
-        version: 2.5.0
-      cookie:
-        specifier: ^1.1.1
-        version: 1.1.1
-      core-js:
-        specifier: ^3.49.0
-        version: 3.49.0
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
-      dotenv:
-        specifier: ^17.4.2
-        version: 17.4.2
-      ejs:
-        specifier: ^5.0.2
-        version: 5.0.2
-      email-templates:
-        specifier: ^13.0.1
-        version: 13.0.1(@babel/core@7.29.0)(ejs@5.0.2)(handlebars@4.7.9)(mustache@4.2.0)(pug@3.0.4)(react-dom@19.2.3(react@19.2.5))(react@19.2.5)(underscore@1.13.8)(velocityjs@2.1.5)
-      fastify:
-        specifier: ^5.8.5
-        version: 5.8.5
-      firebase-admin:
-        specifier: ^13.8.0
-        version: 13.8.0
-      fs-extra:
-        specifier: ^11.3.4
-        version: 11.3.4
-      glob:
-        specifier: ^13.0.6
-        version: 13.0.6
-      graphql:
-        specifier: ^16.12.0
-        version: 16.13.2
-      graphql-scalars:
-        specifier: ^1.25.0
-        version: 1.25.0(graphql@16.13.2)
-      graphql-type-json:
-        specifier: ^0.3.2
-        version: 0.3.2(graphql@16.13.2)
-      graphql-yoga:
-        specifier: ^5.21.0
-        version: 5.21.0(graphql@16.13.2)
-      http-errors:
-        specifier: ^2.0.1
-        version: 2.0.1
-      i18next:
-        specifier: ^26.0.5
-        version: 26.0.5(typescript@6.0.3)
-      i18next-cli:
-        specifier: ^1.53.2
-        version: 1.53.2(@types/node@25.6.0)(i18next@26.0.5(typescript@6.0.3))(react-dom@19.2.3(react@19.2.5))(react-native@0.85.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.5))(typescript@6.0.3)
-      inversify:
-        specifier: ^8.1.0
-        version: 8.1.0(reflect-metadata@0.2.2)
-      ioredis:
-        specifier: ^5.10.1
-        version: 5.10.1
-      json-stringify-safe:
-        specifier: ^5.0.1
-        version: 5.0.1
-      lodash:
-        specifier: ^4.18.1
-        version: 4.18.1
-      mongodb:
-        specifier: 7.1.1
-        version: 7.1.1(socks@2.8.7)
-      nanoid:
-        specifier: ^5.1.9
-        version: 5.1.9
-      nats:
-        specifier: ^2.29.3
-        version: 2.29.3
-      nodemailer:
-        specifier: ^8.0.5
-        version: 8.0.5
-      p-queue:
-        specifier: ^9.1.2
-        version: 9.1.2
-      pino:
-        specifier: ^10.3.1
-        version: 10.3.1
-      pino-pretty:
-        specifier: ^13.1.3
-        version: 13.1.3
-      reflect-metadata:
-        specifier: ^0.2.2
-        version: 0.2.2
-      stripe:
-        specifier: ^22.0.1
-        version: 22.0.2(@types/node@25.6.0)
-      thenby:
-        specifier: ^1.4.0
-        version: 1.4.0
-      twilio:
-        specifier: ^5.13.1
-        version: 5.13.1
-      type-graphql:
-        specifier: 2.0.0-rc.3
-        version: 2.0.0-rc.3(class-validator@0.15.1)(graphql-scalars@1.25.0(graphql@16.13.2))(graphql@16.13.2)
-      ws:
-        specifier: ^8.20.0
-        version: 8.20.0
-
-  packages/service-server-js:
+  packages/service-main-js:
     dependencies:
       '@azure/functions':
         specifier: ^4.12.0
@@ -16479,10 +15519,6 @@ packages:
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
     hasBin: true
 
-  nats@2.29.3:
-    resolution: {integrity: sha512-tOQCRCwC74DgBTk4pWZ9V45sk4d7peoE2njVprMRCBXrhJ5q5cYM7i6W+Uvw2qUrcfOSnuisrX7bEx3b3Wx4QA==}
-    engines: {node: '>= 14.0.0'}
-
   natural-compare-lite@1.4.0:
     resolution: {integrity: sha512-Tj+HTDSJJKaZnfiuw+iaF9skdPpTo2GtEly5JHnWV/hfv2Qj/9RKsGISQtLh2ox3l5EAGw487hnBee0sIJ6v2g==}
 
@@ -16523,10 +15559,6 @@ packages:
   nexus-rpc@0.0.2:
     resolution: {integrity: sha512-IWjIExdVYlmwXuzHdY/Q3lXCv1gbqoAXPazQhy2w4Xgtgha3H0OOujEESVPQcFUFMWm+pAk2gKnb57g8S41JZg==}
     engines: {node: '>= 20.0.0'}
-
-  nkeys.js@1.1.0:
-    resolution: {integrity: sha512-tB/a0shZL5UZWSwsoeyqfTszONTt4k2YS0tuQioMOD180+MbombYVgzDUYHlx+gejYK6rgf08n/2Df99WY0Sxg==}
-    engines: {node: '>=10.0.0'}
 
   no-case@2.3.2:
     resolution: {integrity: sha512-rmTZ9kz+f3rCvK2TD1Ue/oZlns7OGoIWP4fc3llxxRXlOkHKoWPPWJOfFYpITabSow43QJbRIoHQXtt10VldyQ==}
@@ -19354,9 +18386,6 @@ packages:
 
   tweetnacl@0.14.5:
     resolution: {integrity: sha512-KXXFFdAbFXY4geFIwoyNK+f5Z1b7swfXABfL7HXCmoIWMKU3dmS26672A4EeQtDzLKy7SXmfBu51JolvEKwtGA==}
-
-  tweetnacl@1.0.3:
-    resolution: {integrity: sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==}
 
   twilio@5.13.1:
     resolution: {integrity: sha512-sT+PkhptF4Mf7t8eXFFvPQx4w5VHnBIPXbltGPMFRe+R2GxfRdMuFbuNA/cEm0aQR6LFQOn33+fhClg+TjRVqQ==}
@@ -37086,10 +36115,6 @@ snapshots:
 
   napi-postinstall@0.3.4: {}
 
-  nats@2.29.3:
-    dependencies:
-      nkeys.js: 1.1.0
-
   natural-compare-lite@1.4.0: {}
 
   natural-compare@1.4.0: {}
@@ -37120,10 +36145,6 @@ snapshots:
       - supports-color
 
   nexus-rpc@0.0.2: {}
-
-  nkeys.js@1.1.0:
-    dependencies:
-      tweetnacl: 1.0.3
 
   no-case@2.3.2:
     dependencies:
@@ -40616,8 +39637,6 @@ snapshots:
       safe-buffer: 5.2.1
 
   tweetnacl@0.14.5: {}
-
-  tweetnacl@1.0.3: {}
 
   twilio@5.13.1:
     dependencies:

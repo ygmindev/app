@@ -1,7 +1,6 @@
 import { type _RoutesConfigModel, type RoutesConfigModel } from '@lib/config/routes/routes.models';
 import { Config } from '@lib/config/utils/Config/Config';
-import { adminRoutes } from '@lib/frontend/admin/admin.routes';
-import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
+import { RootLayout } from '@lib/frontend/app/layouts/RootLayout/RootLayout';
 import { authRoutes } from '@lib/frontend/auth/auth.routes';
 import { devRoutes } from '@lib/frontend/dev/dev.routes';
 import { PingPage } from '@lib/frontend/http/pages/PingPage/PingPage';
@@ -27,7 +26,7 @@ export const routesConfig = new Config<RoutesConfigModel, _RoutesConfigModel>({
         },
 
         ...devRoutes,
-        ...adminRoutes,
+
         ...testRoutes,
 
         {
@@ -35,6 +34,7 @@ export const routesConfig = new Config<RoutesConfigModel, _RoutesConfigModel>({
           pathname: PING,
           prerender: true,
         },
+
         {
           element: <NotFoundPage />,
           pathname: '*',
@@ -44,7 +44,7 @@ export const routesConfig = new Config<RoutesConfigModel, _RoutesConfigModel>({
 
     return [
       {
-        element: <AppLayout routes={routesF} />,
+        element: <RootLayout />,
         pathname: '/',
         routes: routesF,
       },

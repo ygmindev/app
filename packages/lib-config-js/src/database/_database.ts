@@ -16,6 +16,7 @@ export const _database = ({
     clientUrl: host,
     dbName: database,
     debug: false,
+    driverOptions: {},
     ensureIndexes: true,
     entities,
     name: type,

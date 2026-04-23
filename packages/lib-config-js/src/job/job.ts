@@ -72,7 +72,7 @@ export const jobConfig = new Config<JobConfigModel, _JobConfigModel>({
 //       {
 //         commands: [
 //           {
-//             command: 'python /app/packages/service-server-py/src/ping.py',
+//             command: 'python /app/packages/service-main-py/src/ping.py',
 //             name: PING,
 //           },
 //         ],

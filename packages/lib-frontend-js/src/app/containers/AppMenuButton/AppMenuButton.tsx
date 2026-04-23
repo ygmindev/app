@@ -58,7 +58,7 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({
           icon: 'signin',
           id: SIGN_IN,
           label: `${t('auth:signIn')} ${t('core:or')} ${t('auth:register')}`,
-          onPress: () => push({ pathname: SIGN_IN }),
+          onPress: () => push({ pathname: `#${SIGN_IN}` }),
         },
       ];
 
