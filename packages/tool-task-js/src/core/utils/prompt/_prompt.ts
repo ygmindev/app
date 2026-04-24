@@ -21,13 +21,14 @@ export const _prompt = async <TType extends unknown>(
     async (
       result,
       {
+        basePath = fromPackages(),
+        defaultValue,
+        isAll,
+        isOptional,
         key,
-        type,
         message = `${startCase(toString(key))}?`,
         options,
-        isOptional,
-        defaultValue,
-        basePath = fromPackages(),
+        type,
       },
     ) => {
       const typeF = type ?? (options ? PROMPT_TYPE.LIST : PROMPT_TYPE.INPUT);
@@ -45,8 +46,13 @@ export const _prompt = async <TType extends unknown>(
           optionsF = await fuzzy.search(query);
         }
 
-        if (defaultValue) {
-          const i = optionsF.findIndex((v) => defaultValue.includes(v.id as never));
+        let defaultValueF = defaultValue;
+        if (type === PROMPT_TYPE.MULTIPLE && isAll) {
+          defaultValueF = optionsF?.map((v) => v.id);
+        }
+
+        if (defaultValueF) {
+          const i = optionsF.findIndex((v) => defaultValueF.includes(v.id as never));
           if (i > 0) {
             const [match] = optionsF.splice(i, 1);
             optionsF.unshift(match);
@@ -55,7 +61,9 @@ export const _prompt = async <TType extends unknown>(
 
         return optionsF.map((option) => ({
           checked:
-            typeF === PROMPT_TYPE.MULTIPLE && options && defaultValue?.includes(option.id as never),
+            typeF === PROMPT_TYPE.MULTIPLE &&
+            options &&
+            defaultValueF?.includes(option.id as never),
           name: option.label,
           value: option.id,
         }));

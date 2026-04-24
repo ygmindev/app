@@ -69,7 +69,7 @@ export class User extends EntityResource implements UserModel {
   @withDatabaseField({ isOptional: true })
   last?: string;
 
-  @withRefField({ Resource: () => PaymentMethod, isDatabase: true, isOptional: true })
+  @withRefField({ isDatabase: true, isOptional: true, Resource: () => PaymentMethod })
   paymentMethodPrimary?: RefModel<PaymentMethodModel>;
 
   @withDatabaseField({ isOptional: true, isUnique: true })

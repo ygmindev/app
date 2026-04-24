@@ -21,18 +21,20 @@ export const _prompt = async <TType extends unknown>(
     async (
       result,
       {
+        basePath = fromPackages(),
+        defaultValue,
+        isAll,
+        isOptional,
         key,
-        type,
         message = `${startCase(toString(key))}?`,
         options,
-        isOptional,
-        defaultValue,
-        basePath = fromPackages(),
+        type,
       },
     ) => {
       const typeF = type ?? (options ? PROMPT_TYPE.LIST : PROMPT_TYPE.INPUT);
 
       const messageF = `${message}${isOptional ? ' (Optional)' : ''}`;
+
       const getChoices = async (
         query?: string,
       ): Promise<Array<{ checked?: boolean; name?: string; value: string }>> => {
@@ -45,8 +47,13 @@ export const _prompt = async <TType extends unknown>(
           optionsF = await fuzzy.search(query);
         }
 
-        if (defaultValue) {
-          const i = optionsF.findIndex((v) => (isString(v) ? v : v.id) === defaultValue);
+        let defaultValueF = defaultValue;
+        if (type === PROMPT_TYPE.MULTIPLE && isAll) {
+          defaultValueF = optionsF?.map((v) => v.id);
+        }
+
+        if (defaultValueF) {
+          const i = optionsF.findIndex((v) => (isString(v) ? v : v.id) === defaultValueF);
           if (i > 0) {
             const [match] = optionsF.splice(i, 1);
             optionsF.unshift(match);
@@ -61,7 +68,7 @@ export const _prompt = async <TType extends unknown>(
             checked:
               typeF === PROMPT_TYPE.MULTIPLE &&
               options &&
-              (defaultValue as Array<string>)?.includes(value),
+              (defaultValueF as Array<string>)?.includes(value),
             name,
             value,
           };
@@ -73,11 +80,17 @@ export const _prompt = async <TType extends unknown>(
           case PROMPT_TYPE.INPUT:
             return input({ message: messageF });
           case PROMPT_TYPE.CONFIRM:
-            return confirm({ default: (defaultValue as boolean) ?? true, message: messageF });
+            return confirm({
+              default: (defaultValue as unknown as boolean) ?? true,
+              message: messageF,
+            });
           case PROMPT_TYPE.LIST:
             return search({ message: messageF, source: getChoices });
           case PROMPT_TYPE.MULTIPLE:
-            return checkbox({ choices: await getChoices(), message: messageF });
+            return checkbox({
+              choices: await getChoices(),
+              message: messageF,
+            });
           case PROMPT_TYPE.DIRECTORY:
             return (
               await fileSelector({

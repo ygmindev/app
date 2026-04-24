@@ -24,6 +24,7 @@ export type PromptArrayModel<TType extends unknown> = Array<
 export type PromptBaseArgsModel<TKey extends string> = {
   basePath?: string | never;
   defaultValue?: Array<string | BOOLEAN_STRING>;
+  isAll?: boolean;
   isOptional?: boolean;
   key: TKey;
   message?: string;
@@ -34,6 +35,7 @@ export type PromptBaseArgsModel<TKey extends string> = {
 export type ConfirmPromptArgsModel = {
   basePath?: never;
   defaultValue?: Array<BOOLEAN_STRING>;
+  isAll?: never;
   type?: PROMPT_TYPE.CONFIRM;
 };
 
@@ -41,11 +43,13 @@ export type StringPromptArgsModel =
   | {
       basePath?: string;
       defaultValue?: Array<string>;
+      isAll?: never;
       type?: PROMPT_TYPE.DIRECTORY;
     }
   | {
       basePath?: never;
       defaultValue?: Array<string>;
+      isAll?: never;
       type?: PROMPT_TYPE.INPUT;
     };
 
@@ -53,6 +57,8 @@ export type ArrayPromptArgsModel = {
   basePath?: never;
 
   defaultValue?: Array<string>;
+
+  isAll?: boolean;
 
   type?: PROMPT_TYPE.MULTIPLE;
 };

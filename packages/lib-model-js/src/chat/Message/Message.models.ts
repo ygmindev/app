@@ -3,7 +3,7 @@ import { type ProtectedResourceModel } from '@lib/model/auth/ProtectedResource/P
 import { type ChatModel } from '@lib/model/chat/Chat/Chat.models';
 
 export type MessageModel = ProtectedResourceModel & {
-  chat: RefModel<ChatModel>;
+  chat?: RefModel<ChatModel>;
 
   text?: string;
 };
