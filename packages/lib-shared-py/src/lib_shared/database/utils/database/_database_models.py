@@ -1,4 +1,4 @@
-from typing import Generic, Optional, Protocol, Type, TypeVar
+from typing import Generic, Optional, Protocol, TypeVar
 
 from beanie import Document
 from lib_config.database.database_models import DatabaseConfigModel
@@ -55,13 +55,13 @@ class _DatabaseModel(Protocol, Generic[TType]):
     async def create_many(
         self,
         data: list[TType],
-        resource: Type[TType],
+        resource: type[TType],
     ) -> CreateManyResultModel[TType]: ...
 
     async def find(
         self,
         query: dict,
-        resource: Type[TType],
+        resource: type[TType],
         limit: Optional[int] = None,
         skip: Optional[int] = None,
     ) -> FindResultModel[TType]: ...
@@ -81,7 +81,7 @@ class _DatabaseModel(Protocol, Generic[TType]):
         self,
         data: TType,
         update: dict,
-        resource: Type[TType],
+        resource: type[TType],
         index_field: str = "_id",
         strategy: UPSERT_STRATEGY = UPSERT_STRATEGY.REPLACE,
     ) -> UpsertResultModel[TType]: ...

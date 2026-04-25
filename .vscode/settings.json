@@ -77,5 +77,8 @@
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right",
   "cursor.composer.suggestNextPrompt": true,
-  "python-envs.defaultEnvManager": "ms-python.python:system"
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "cursorpyright.analysis.autoImportCompletions": true,
+  "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
+  "cursorpyright.analysis.typeCheckingMode": "basic"
 }

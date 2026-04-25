@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/service_server"]
+packages = ["src/service_main"]
 
 [tool.ruff]
 line-length = 88
@@ -16,22 +16,26 @@ ignore = []
 quote-style = "double"
 
 [project]
-name = "service-server"
+name = "service-main"
 description = ""
 version = "0.0.1"
 license = "MIT"
 authors = [{ name = "YG Min", email = "ygmindev@gmail.com" }]
 requires-python = "==3.13.12"
 dependencies = [
+    "beanie>=2.1.0",
     "lib-ai",
     "lib-config",
+    "lib-model",
     "lib-shared",
     "pydash>=8.0.6",
+    "strawberry-graphql>=0.315.1",
 ]
 
 [tool.uv.sources]
 lib-ai = { path = "../lib-ai-py", editable = true }
 lib-config = { path = "../lib-config-py", editable = true }
+lib-model = { path = "../lib-model-py", editable = true }
 lib-shared = { path = "../lib-shared-py", editable = true }
 
 [tool.mypy]

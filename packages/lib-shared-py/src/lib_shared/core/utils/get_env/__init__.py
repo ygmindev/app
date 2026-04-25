@@ -11,7 +11,7 @@ load_dotenv(from_working(f".env.{NODE_ENV}"))
 
 TType = TypeVar("TType")
 
-CastTypeModel = Union[Type[TType], Callable[[str], TType]]
+CastTypeModel = Union[type[TType], Callable[[str], TType]]
 
 
 @overload

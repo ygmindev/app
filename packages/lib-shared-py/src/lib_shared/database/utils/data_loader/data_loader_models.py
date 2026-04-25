@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Generic, Optional, Type, TypeVar
+from typing import Generic, Optional, TypeVar
 
 import attr
 from lib_model.models import SourcedEntityResource
@@ -12,7 +12,7 @@ TType = TypeVar("TType", bound=SourcedEntityResource)
 
 @attr.s(auto_attribs=True, kw_only=True)
 class DataLoaderParams(Generic[TType]):
-    resource: Type[TType]
+    resource: type[TType]
     source: Optional[str] = None
     database: Optional[Database] = db
 

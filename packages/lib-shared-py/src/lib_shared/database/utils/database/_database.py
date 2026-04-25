@@ -1,4 +1,4 @@
-from typing import Generic, Optional, Type
+from typing import Generic, Optional
 
 from beanie import init_beanie
 from lib_config.database.database_models import DatabaseConfigModel
@@ -49,7 +49,7 @@ class _Database(_DatabaseModel, Generic[TType]):
     async def create_many(
         self,
         data: list[TType],
-        resource: Type[TType],
+        resource: type[TType],
     ) -> CreateManyResultModel[TType]:
         count = 0
         success = True
@@ -74,7 +74,7 @@ class _Database(_DatabaseModel, Generic[TType]):
     async def find(
         self,
         query: dict,
-        resource: Type[TType],
+        resource: type[TType],
         limit: Optional[int] = None,
         skip: Optional[int] = None,
     ) -> FindResultModel[TType]:
@@ -113,7 +113,7 @@ class _Database(_DatabaseModel, Generic[TType]):
         self,
         data: TType,
         update: dict,
-        resource: Type[TType],
+        resource: type[TType],
         index_field: str = "_id",
         strategy: UPSERT_STRATEGY = UPSERT_STRATEGY.REPLACE,
     ) -> UpsertResultModel[TType]:

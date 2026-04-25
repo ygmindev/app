@@ -1,8 +1,8 @@
-from typing import Type, TypeVar
+from typing import TypeVar
 
 from pydantic import BaseModel
 
 TType = TypeVar("TType", bound=BaseModel)
 
-PartialParamsModel = Type[TType]
-PartialModel = Type[TType]
+PartialParamsModel = type[TType]
+PartialModel = type[TType]

@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Type, TypeVar, Union, cast
+from typing import Any, Dict, Optional, TypeVar, Union, cast
 
 import httpx
 
@@ -28,7 +28,7 @@ class HttpClient(_HttpClient, HttpClientModel):
         data: Optional[Union[Dict[str, Any], str]] = None,
         json: Optional[Dict[str, Any]] = None,
         headers: Optional[Dict[str, str]] = None,
-        response_type: Type[TType] = Type[Any],
+        response_type: type[TType] = type[Any],
         content_type: Optional[HTTP_CONTENT_TYPE] = HTTP_CONTENT_TYPE.JSON,
     ) -> TType:
         async with httpx.AsyncClient(timeout=self._timeout) as client:
@@ -52,7 +52,7 @@ class HttpClient(_HttpClient, HttpClientModel):
         self,
         url: str,
         params: Optional[Dict[str, Any]] = None,
-        response_type: Type[TType] = Type[Any],
+        response_type: type[TType] = type[Any],
         **kwargs,
     ) -> TType:
         return await self.request(
@@ -68,7 +68,7 @@ class HttpClient(_HttpClient, HttpClientModel):
         url: str,
         json: Optional[Dict[str, Any]] = None,
         data: Any = None,
-        response_type: Type[TType] = Type[Any],
+        response_type: type[TType] = type[Any],
         **kwargs,
     ) -> TType:
         return await self.request(
@@ -85,7 +85,7 @@ class HttpClient(_HttpClient, HttpClientModel):
         url: str,
         json: Optional[Dict[str, Any]] = None,
         data: Any = None,
-        response_type: Type[TType] = Type[Any],
+        response_type: type[TType] = type[Any],
         **kwargs,
     ) -> TType:
         return await self.request(
@@ -100,7 +100,7 @@ class HttpClient(_HttpClient, HttpClientModel):
     async def delete(
         self,
         url: str,
-        response_type: Type[TType] = Type[Any],
+        response_type: type[TType] = type[Any],
         **kwargs,
     ) -> TType:
         return await self.request(
