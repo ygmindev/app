@@ -2,11 +2,9 @@ from typing import Optional
 
 import strawberry
 from lib_model.core.utils.entity.entity import Entity
-from lib_shared.core.utils.dataclass.dataclass import Dataclass
 
 
 @Entity(name="X")
-@Dataclass()
 class X:
     a: float
     b: str

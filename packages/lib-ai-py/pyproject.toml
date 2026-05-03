@@ -35,4 +35,4 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-lib-shared = { path = "../lib-shared-py", editable = true }
+lib-shared = { workspace = true }

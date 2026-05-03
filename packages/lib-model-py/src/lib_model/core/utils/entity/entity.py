@@ -3,10 +3,12 @@ from typing import Any, Callable, Union, cast, get_args, get_origin
 import strawberry
 from beanie import Document
 from bson import ObjectId
-from pydantic import Field
-from strawberry.types.field import StrawberryField
+from lib_shared.core.utils.dataclass import Dataclass
+from lib_shared.core.utils.field import Field
+from lib_shared.core.utils.inspect_class import inspect_class
+from pydantic import Field as PydanticField
 
-from .entity_models import EntityModel, TType
+from .entity_models import EntityModelType, TType
 
 
 def _is_optional(annotation: Any) -> bool:
@@ -49,67 +51,100 @@ def _Entity(
     # _indices: list[str],
 ) -> Callable[[type[TType]], type[TType]]:
     def wrapper(cls: type[TType]) -> type[TType]:
-        annotations: dict[str, Any] = {}
-        defaults: dict[str, Any] = {}
-
-        for base in reversed(cls.__mro__):
-            if base is object:
-                continue
-            annotations.update(getattr(base, "__annotations__", {}))
-            for k, v in vars(base).items():
-                if not k.startswith("_") and not callable(v):
-                    defaults[k] = v
+        inspection = inspect_class(cls, is_deep=False)
+        annotations = inspection["annotations"]
+        defaults = inspection["defaults"]
 
         if is_database:
             database_ns: dict[str, Any] = {"__annotations__": {}}
             for k, v in annotations.items():
                 database_ns["__annotations__"][k] = v
-                if k in defaults:
-                    default = defaults[k]
-                    if isinstance(default, StrawberryField) or not callable(default):
-                        database_ns[k] = (
-                            Field(default=default)
-                            if not isinstance(default, type(Field()))
-                            else default
-                        )
-                elif _is_optional(v):
-                    database_ns[k] = Field(default=None)
+                default = defaults.get(k)
 
-            if name:
-                database_ns["Settings"] = type("Settings", (), {"name": name})
+                if isinstance(default, Field):
+                    default_value = default.default_value
+                    args: dict[str, Any] = {"description": default.description}
+                    if default_value:
+                        if callable(default_value):
+                            args["default_factory"] = default_value
+                        else:
+                            args["default"] = default_value
+                    database_ns[k] = PydanticField(**args)
+                elif default is not None:
+                    database_ns[k] = PydanticField(default=default)
+                elif _is_optional(v):
+                    database_ns[k] = PydanticField(default=None)
+
+            database_ns["Settings"] = type("Settings", (), {"name": name})
 
             for k, v in vars(cls).items():
-                if k.startswith("__"):
-                    continue
-                if callable(v) or isinstance(v, (classmethod, staticmethod)):
+                if not k.startswith("__") and (
+                    callable(v) or isinstance(v, (classmethod, staticmethod))
+                ):
                     database_ns[k] = v
 
-            cls = cast(type[TType], (cls.__name__, (Document,), database_ns))
+            bases = list(inspection["bases"])
+            if Document not in bases:
+                bases.insert(0, Document)
+            cls = cast(type[TType], type(cls.__name__, tuple(bases), database_ns))
 
         if is_graphql:
             graphql_ns: dict[str, Any] = {"__annotations__": {}}
 
             for k, v in annotations.items():
                 graphql_ns["__annotations__"][k] = _get_graphql_annotation(v)
+                default = defaults.get(k)
 
-                if k in defaults:
-                    default = defaults[k]
+                if isinstance(default, Field):
+                    default_value = default.default_value
+                    args: dict[str, Any] = {"description": default.description}
+                    if default_value:
+                        if callable(default_value):
+                            args["default_factory"] = default_value
+                        else:
+                            args["default"] = default_value
+                    graphql_ns[k] = strawberry.field(**args)
+                elif default is not None:
                     graphql_ns[k] = strawberry.field(default=default)
                 elif _is_optional(v):
                     graphql_ns[k] = strawberry.field(default=None)
 
-            for kv, v in vars(cls).items():
-                if kv.startswith("__"):
-                    continue
-                if callable(v):
-                    graphql_ns[kv] = v
+            for k, v in vars(cls).items():
+                if not k.startswith("__") and (
+                    callable(v) or isinstance(v, (classmethod, staticmethod))
+                ):
+                    graphql_ns[k] = v
 
-            cls = cast(type[TType], type(cls.__name__, (), graphql_ns))
-            cls = strawberry.type(cls)
+            cls.__gql__ = strawberry.type(
+                type(f"{cls.__name__}GQL", (object,), graphql_ns)
+            )
 
         return cls
 
     return wrapper
 
 
-Entity: EntityModel = _Entity
+def Entity(
+    name: str,
+    is_database: bool = False,
+    is_graphql: bool = True,
+) -> Callable[[type[TType]], type[TType]]:
+    _wrapper = _Entity(
+        name,
+        is_database,
+        is_graphql,
+    )
+
+    def wrapper(cls: type[TType]) -> type[TType]:
+        new_cls = Dataclass()(cls)
+
+        is_entity = any(
+            isinstance(base, type) and issubclass(base, EntityModelType)
+            for base in cls.__mro__[1:]
+        )
+        if not is_entity:
+            new_cls = type(cls.__name__, (new_cls, EntityModelType), {})
+
+        return _wrapper(new_cls)
+
+    return wrapper

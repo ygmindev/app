@@ -1,9 +1,13 @@
 {
   "recommendations": [
+    "Anthropic.claude-code",
     "charliermarsh.ruff",
+    "Continue.continue",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
     "ms-python.mypy-type-checker",
-    "ms-python.pylint"
+    "ms-python.pylint",
+    "ms-vscode-remote.remote-containers"
   ]
 }

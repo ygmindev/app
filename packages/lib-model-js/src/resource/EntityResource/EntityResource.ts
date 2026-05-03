@@ -11,9 +11,9 @@ import isNil from 'lodash/isNil';
 @withDatabaseEntity({ isAbstract: true })
 export class EntityResource extends Resource() implements EntityResourceModel {
   @withDatabaseField({
-    Resource: () => Date,
     defaultValue: () => new Date(),
     isOptional: true,
+    Resource: () => Date,
   })
   created?: Date;
 

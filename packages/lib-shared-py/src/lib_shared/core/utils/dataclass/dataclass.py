@@ -1,12 +1,19 @@
 from __future__ import annotations
 
-from typing import Any, Callable, Optional, Self, cast
+from typing import Any, Callable, Optional, Self, Union, cast, get_args, get_origin
 
 from pydantic import BaseModel, ConfigDict
+from pydantic import Field as PydanticField
 
+from lib_shared.core.utils.field.field import Field
+from lib_shared.core.utils.inspect_class import inspect_class
 from lib_shared.core.utils.merge.merge_models import MergeStrategy
 
 from .dataclass_models import DataclassModel, TType
+
+
+def is_optional(annotation: Any) -> bool:
+    return get_origin(annotation) is Union and type(None) in get_args(annotation)
 
 
 class _BaseClass(BaseModel):
@@ -70,29 +77,41 @@ class _BaseClass(BaseModel):
         return self.clone(**result)
 
 
-_SKIP_KEYS = {"__dict__", "__weakref__"}
-
-
 def _Dataclass() -> Callable[[type[TType]], type[TType]]:
     def wrapper(cls: type[TType]) -> type[TType]:
-        annotations: dict[str, Any] = (
-            cls.__annotations__.copy() if hasattr(cls, "__annotations__") else {}
-        )
-        ns: dict[str, Any] = {
-            "__annotations__": annotations,
+        inspection = inspect_class(cls, is_deep=False)
+        default_values = inspection["defaults"]
+        defaults: dict[str, Any] = {}
+
+        for k, v in inspection["annotations"].items():
+            default = default_values.get(k)
+            if isinstance(default, Field):
+                default_value = default.default_value
+                args: dict[str, Any] = {"description": default.description}
+                if default_value:
+                    if callable(default_value):
+                        args["default_factory"] = default_value
+                    else:
+                        args["default"] = default_value
+                defaults[k] = PydanticField(**args)
+            elif default is not None:
+                defaults[k] = PydanticField(default=default)
+            elif is_optional(v):
+                defaults[k] = PydanticField(default=None)
+
+        ns = {
+            "__annotations__": inspection["annotations"],
             "__module__": cls.__module__,
             "__qualname__": cls.__qualname__,
+            **defaults,
         }
         if cls.__doc__:
             ns["__doc__"] = cls.__doc__
 
-        for k, v in cls.__dict__.items():
-            if k in _SKIP_KEYS or k == "__annotations__":
-                continue
-            ns[k] = v
-
-        new_cls: type[_BaseClass] = type(cls.__name__, (_BaseClass,), ns)
-        return cast(type[TType], new_cls)
+        bases = tuple(b for b in cls.__bases__ if b is not object)
+        has_base = any(isinstance(b, type) and issubclass(b, _BaseClass) for b in bases)
+        bases = bases if has_base else (_BaseClass,) + bases
+        return cast(type[TType], type(cls.__name__, bases, ns))
 
     return wrapper
 

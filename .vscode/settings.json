@@ -31,6 +31,16 @@
     },
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
+  "claudeCode.disableLoginPrompt": true,
+  "claudeCode.environmentVariables": [
+    { "name": "ANTHROPIC_API_KEY", "value": "not-needed" },
+    { "name": "ANTHROPIC_BASE_URL", "value": "http://localhost:11434" },
+    { "name": "ANTHROPIC_MODEL", "value": "qwen3.5:9b-q8_0" },
+    { "name": "ANTHROPIC_DEFAULT_SONNET_MODEL", "value": "qwen3.5:9b-q8_0" },
+    { "name": "ANTHROPIC_DEFAULT_OPUS_MODEL", "value": "qwen3.5:9b-q8_0" },
+    { "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL", "value": "qwen3.5:9b-q8_0" },
+    { "name": "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC", "value": "1" }
+  ],
   "editor.minimap.enabled": false,
   "eslint.debug": true,
   "eslint.useFlatConfig": true,
@@ -48,37 +58,39 @@
     "**/packages/tool-task-js/templates/**/*": "plaintext"
   },
   "files.autoSave": "afterDelay",
+  "isort.interpreter": [
+    "${workspaceFolder}/.venv/bin/python"
+  ],
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "mypy-type-checker.enabled": true,
-  "mypy-type-checker.importStrategy": "fromEnvironment",
+  "mypy-type-checker.importStrategy": "useBundled",
   "mypy-type-checker.interpreter": [
-    "${workspaceFolder}/packages/service-main-py/.venv/bin/python"
+    "${workspaceFolder}/.venv/bin/python"
   ],
   "mypy-type-checker.reportingScope": "workspace",
-  "pylint.interpreter": [
-    "${workspaceFolder}/packages/service-main-py/.venv/bin/python"
-  ],
+  "pylint.importStrategy": "useBundled",
+  "pylint.interpreter": ["${workspaceFolder}/.venv/bin/python"],
+  "python-envs.defaultEnvManager": "ms-python.python:system",
   "python.analysis.autoImportCompletions": true,
+  "python.analysis.autoSearchPaths": true,
   "python.analysis.enablePytestSupport": false,
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/packages/lib-config-py/src",
+    "${workspaceFolder}/packages/lib-ai-py/src",
+    "${workspaceFolder}/packages/lib-model-py/src",
+    "${workspaceFolder}/packages/lib-shared-py/src"
+  ],
   "python.analysis.indexing": true,
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.typeCheckingMode": "basic",
-  "python.defaultInterpreterPath": "${workspaceFolder}/packages/service-main-py/.venv/bin/python",
-  "pylint.importStrategy": "fromEnvironment",
-  "pylint.interpreter": [
-    "${workspaceFolder}/packages/service-main-py/.venv/bin/python"
-  ],
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "ruff.interpreter": ["${workspaceFolder}/.venv/bin/python"],
   "ruff.nativeServer": "auto",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorTheme": "Dark+",
   "workbench.iconTheme": "vs-minimal",
-  "workbench.sideBar.location": "right",
-  "cursor.composer.suggestNextPrompt": true,
-  "python-envs.defaultEnvManager": "ms-python.python:system",
-  "cursorpyright.analysis.autoImportCompletions": true,
-  "cursorpyright.analysis.inlayHints.functionReturnTypes": true,
-  "cursorpyright.analysis.typeCheckingMode": "basic"
+  "workbench.sideBar.location": "right"
 }

@@ -1,4 +1,14 @@
-from typing import Callable, Protocol, TypeVar
+from datetime import datetime
+from typing import Annotated, Callable, Protocol, TypeVar
+
+from lib_shared.core.utils.dataclass.dataclass import Dataclass
+from lib_shared.core.utils.field.field import Field
+
+
+@Dataclass()
+class EntityModelType:
+    created: Annotated[datetime, Field(default_value=datetime.now)]
+
 
 TType = TypeVar("TType")
 
