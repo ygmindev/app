@@ -5,7 +5,7 @@ from typing import Any, Callable, Optional, Self, Union, cast, get_args, get_ori
 from pydantic import BaseModel, ConfigDict
 from pydantic import Field as PydanticField
 
-from lib_shared.core.utils.field.field import Field
+from lib_shared.core.utils.field.field import _Field
 from lib_shared.core.utils.inspect_class import inspect_class
 from lib_shared.core.utils.merge.merge_models import MergeStrategy
 
@@ -85,10 +85,10 @@ def _Dataclass() -> Callable[[type[TType]], type[TType]]:
 
         for k, v in inspection["annotations"].items():
             default = default_values.get(k)
-            if isinstance(default, Field):
+            if isinstance(default, _Field):
                 default_value = default.default_value
                 args: dict[str, Any] = {"description": default.description}
-                if default_value:
+                if default_value is not None:
                     if callable(default_value):
                         args["default_factory"] = default_value
                     else:
