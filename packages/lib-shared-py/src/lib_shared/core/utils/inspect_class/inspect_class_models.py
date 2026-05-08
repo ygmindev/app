@@ -5,6 +5,7 @@ class InspectClassResultModel(TypedDict):
     annotations: Dict[str, Any]
     bases: list[type]
     defaults: Dict[str, Any]
+    methods: dict[str, Any]
 
 
 class InspectClassModel(Protocol):

@@ -1,50 +1,46 @@
 from dataclasses import dataclass
 from typing import Any, Callable, Generic, Optional, overload
 
-from .field_models import FieldModel, TType
+from lib_shared.core.utils.field.field import _Field
+from lib_shared.core.utils.field.field_models import TType
+
+from .private_field_models import PrivateFieldModel
 
 
 @dataclass
-class _Field(FieldModel, Generic[TType]):
-    default_value: Optional[TType | Callable[[], TType]] = None
-    description: Optional[str] = None
-    is_private: bool = False
+class _PrivateField(_Field, PrivateFieldModel, Generic[TType]):
+    is_private: bool = True
 
 
 @overload
-def Field(
+def PrivateField(
     *,
     default_value: Callable[[], TType],
     description: Optional[str] = None,
-    is_private: bool = False,
 ) -> TType: ...
 
 
 @overload
-def Field(
+def PrivateField(
     *,
     default_value: TType,
     description: Optional[str] = None,
-    is_private: bool = False,
 ) -> TType: ...
 
 
 @overload
-def Field(
+def PrivateField(
     *,
     description: Optional[str] = None,
-    is_private: bool = False,
 ) -> Any: ...
 
 
-def Field(
+def PrivateField(
     *,
     default_value: Any = None,
     description: Optional[str] = None,
-    is_private: bool = False,
 ) -> Any:
-    return _Field(
+    return _PrivateField(
         default_value=default_value,
         description=description,
-        is_private=is_private,
     )

@@ -1,9 +1,5 @@
-from lib_shared.core.utils.logger._logger import _Logger
-from lib_shared.core.utils.logger.logger_constants import LoggerLevel
+# template version: 1.0.0
 
+from .logger import Logger
 
-class Logger(_Logger):
-    pass
-
-
-logger = Logger(level=LoggerLevel.DEBUG)
+__all__ = ["Logger"]

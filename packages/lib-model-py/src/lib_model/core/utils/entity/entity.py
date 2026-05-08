@@ -6,7 +6,6 @@ from bson import ObjectId
 from lib_shared.core.utils.dataclass import Dataclass
 from lib_shared.core.utils.field.field import _Field
 from lib_shared.core.utils.inspect_class import inspect_class
-from pydantic import Field as PydanticField
 
 from .entity_models import EntityModelType, TType
 
@@ -57,23 +56,23 @@ def _Entity(
 
         if is_database:
             database_ns: dict[str, Any] = {"__annotations__": {}}
-            for k, v in annotations.items():
-                database_ns["__annotations__"][k] = v
-                default = defaults.get(k)
+            # for k, v in annotations.items():
+            #     database_ns["__annotations__"][k] = v
+            #     default = defaults.get(k)
 
-                if isinstance(default, _Field):
-                    default_value = default.default_value
-                    args: dict[str, Any] = {"description": default.description}
-                    if default_value is not None:
-                        if callable(default_value):
-                            args["default_factory"] = default_value
-                        else:
-                            args["default"] = default_value
-                    database_ns[k] = PydanticField(**args)
-                elif default is not None:
-                    database_ns[k] = PydanticField(default=default)
-                elif _is_optional(v):
-                    database_ns[k] = PydanticField(default=None)
+            #     if isinstance(default, Field):
+            #         default_value = default.default_value
+            #         args: dict[str, Any] = {"description": default.description}
+            #         if default_value is not None:
+            #             if callable(default_value):
+            #                 args["default_factory"] = default_value
+            #             else:
+            #                 args["default"] = default_value
+            #         database_ns[k] = PydanticField(**args)
+            #     elif default is not None:
+            #         database_ns[k] = PydanticField(default=default)
+            #     elif _is_optional(v):
+            #         database_ns[k] = PydanticField(default=None)
 
             database_ns["Settings"] = type("Settings", (), {"name": name})
 

@@ -1,21 +1,16 @@
-from json import JSONDecodeError
+# template version: 1.0.0
 
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
-from lib_config.http.server.server_models import ServerConfigModel
-from uvicorn import Config, Server
+from lib_config.http.server.server_config import ServerConfig
 
-from lib_shared.core.utils.get_env import get_env
-from lib_shared.core.utils.logger import logger
-from lib_shared.http.utils.models import HttpRequestModel
-from lib_shared.http.utils.server._server_models import _ServerModel
-from lib_shared.route.utils.trim_pathname import trim_pathname
+from .server_models import ServerModel, _ServerModel
 
 
 class _Server(_ServerModel):
+    config: ServerConfig
+
     def __init__(
         self,
-        config: ServerConfigModel,
+        config: ServerConfig,
         name: str,
     ) -> None:
         super().__init__(
@@ -24,6 +19,7 @@ class _Server(_ServerModel):
         )
         self.app = FastAPI(title=self.name)
         for route in config.api.routes:
+
             async def endpoint(req: Request) -> JSONResponse:
                 headers = req.headers
                 try:
@@ -40,6 +36,7 @@ class _Server(_ServerModel):
                     content=response.body,
                     status_code=response.status_code.value,
                 )
+
             pathname = trim_pathname(route.pathname)
             self.app.add_api_route(
                 endpoint=endpoint,
@@ -61,3 +58,6 @@ class _Server(_ServerModel):
         )
         server = Server(config)
         await server.serve()
+
+
+class Server(_Server, ServerModel): ...

@@ -4,7 +4,7 @@ from typing import Mapping, Sequence, cast
 
 import numpy as np
 from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.logger import logger
+from lib_shared.core.utils.logger2 import logger
 from lib_shared.core.utils.merge import merge
 from lib_shared.core.utils.not_found_exception import NotFoundException
 

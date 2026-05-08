@@ -1,6 +1,6 @@
 from typing import Generic
 
-from lib_shared.core.utils.logger import logger
+from lib_shared.core.utils.logger2 import logger
 from lib_shared.database.utils.data_loader.data_loader_models import (
     DataLoaderModel,
     DataLoaderParams,

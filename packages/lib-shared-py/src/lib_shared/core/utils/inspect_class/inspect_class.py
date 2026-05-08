@@ -9,6 +9,7 @@ def _inspect_class(
 ) -> InspectClassResultModel:
     annotations: dict[str, Any] = {}
     defaults: dict[str, Any] = {}
+    methods: dict[str, Any] = {}
 
     bases = reversed(params.__mro__) if is_deep else [params]
     for base in bases:
@@ -17,10 +18,16 @@ def _inspect_class(
         base_annotations = getattr(base, "__annotations__", {})
         annotations.update(base_annotations)
         for k, v in vars(base).items():
+            if callable(v) or isinstance(v, (classmethod, staticmethod, property)):
+                if not (k.startswith("__") and k.endswith("__")):
+                    methods[k] = v
+                continue
+
             if k.startswith("_") or (
                 k not in annotations and k not in base_annotations
             ):
                 continue
+
             defaults[k] = v
 
     bases = set()
@@ -30,11 +37,13 @@ def _inspect_class(
             for other in bases
         ):
             bases.add(base)
+
     bases = list(bases) or [object]
     return {
         "annotations": annotations,
         "bases": bases,
         "defaults": defaults,
+        "methods": methods,
     }
 
 

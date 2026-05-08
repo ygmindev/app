@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Callable, Optional, Self, Union, cast, get_args, get_origin
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, PrivateAttr
 from pydantic import Field as PydanticField
 
 from lib_shared.core.utils.field.field import _Field
@@ -86,6 +86,7 @@ def _Dataclass() -> Callable[[type[TType]], type[TType]]:
         for k, v in inspection["annotations"].items():
             default = default_values.get(k)
             if isinstance(default, _Field):
+                field = PrivateAttr if default.is_private else PydanticField
                 default_value = default.default_value
                 args: dict[str, Any] = {"description": default.description}
                 if default_value is not None:
@@ -93,7 +94,7 @@ def _Dataclass() -> Callable[[type[TType]], type[TType]]:
                         args["default_factory"] = default_value
                     else:
                         args["default"] = default_value
-                defaults[k] = PydanticField(**args)
+                defaults[k] = field(**args)
             elif default is not None:
                 defaults[k] = PydanticField(default=default)
             elif is_optional(v):
@@ -104,6 +105,7 @@ def _Dataclass() -> Callable[[type[TType]], type[TType]]:
             "__module__": cls.__module__,
             "__qualname__": cls.__qualname__,
             **defaults,
+            **inspection["methods"],
         }
         if cls.__doc__:
             ns["__doc__"] = cls.__doc__

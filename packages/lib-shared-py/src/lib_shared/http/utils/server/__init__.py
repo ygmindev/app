@@ -1,5 +1,5 @@
-from lib_shared.http.utils.server._server import _Server
-from lib_shared.http.utils.server.server_models import ServerModel
+# template version: 1.0.0
 
+from .server import Server
 
-class Server(_Server, ServerModel): ...
+__all__ = ["Server"]

@@ -1,5 +1,4 @@
 from pydantic import BaseModel
 
 
-class HttpClientModel(BaseModel):
-    ...
+class HttpClientModel(BaseModel): ...

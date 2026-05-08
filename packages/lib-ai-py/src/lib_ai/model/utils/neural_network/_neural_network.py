@@ -20,7 +20,7 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
 )
 from lib_ai.scoring.scoring_constants import ScoringMode
 from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.logger import logger
+from lib_shared.core.utils.logger2 import logger
 from torch.optim.adam import Adam
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.optim.sgd import SGD
