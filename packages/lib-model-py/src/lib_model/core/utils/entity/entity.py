@@ -3,9 +3,9 @@ from typing import Any, Callable, Union, cast, dataclass_transform, get_args, ge
 import strawberry
 from beanie import Document
 from bson import ObjectId
-from lib_shared.core.utils.dataclass import Dataclass
-from lib_shared.core.utils.field.field import _Field
 from lib_shared.core.utils.inspect_class import inspect_class
+from pydantic.fields import FieldInfo, ModelPrivateAttr
+from pydantic_core import PydanticUndefined
 
 from .entity_models import EntityModelType, TType
 
@@ -94,14 +94,15 @@ def _Entity(
                 graphql_ns["__annotations__"][k] = _get_graphql_annotation(v)
                 default = defaults.get(k)
 
-                if isinstance(default, _Field):
-                    default_value = default.default_value
-                    args: dict[str, Any] = {"description": default.description}
-                    if default_value is not None:
-                        if callable(default_value):
-                            args["default_factory"] = default_value
-                        else:
-                            args["default"] = default_value
+                if isinstance(default, (FieldInfo, ModelPrivateAttr)):
+                    description = getattr(default, "description", None)
+                    default_factory = getattr(default, "default_factory", None)
+                    default_value = getattr(default, "default", PydanticUndefined)
+                    args: dict[str, Any] = {"description": description}
+                    if default_factory is not None:
+                        args["default_factory"] = default_factory
+                    elif default_value is not PydanticUndefined:
+                        args["default"] = default_value
                     graphql_ns[k] = strawberry.field(**args)
                 elif default is not None:
                     graphql_ns[k] = strawberry.field(default=default)
@@ -136,7 +137,7 @@ def Entity(
     )
 
     def wrapper(cls: type[TType]) -> type[TType]:
-        new_cls = Dataclass()(cls)
+        new_cls = cls
         is_entity = any(
             isinstance(base, type) and issubclass(base, EntityModelType)
             for base in cls.__mro__[1:]

@@ -11,8 +11,7 @@ from lib_shared.core.utils.private_field.private_field import PrivateField
 from .logger_models import LoggerModel, _LoggerModel
 
 
-@Dataclass()
-class _Logger(_LoggerModel):
+class _Logger(Dataclass, _LoggerModel):
     name: str = "main"
     level: LoggerLevel = LoggerLevel.INFO
 

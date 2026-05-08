@@ -1,11 +1,22 @@
 import asyncio
 
-from lib_config.http.server.server_config_base import server_config
+from lib_config.http.server.server_config_ai import server_config_ai
+from lib_model.core.utils.entity.entity import Entity
+from lib_shared.core.utils.dataclass.dataclass import Dataclass
 from lib_shared.http.utils.server.server import Server
+
+
+@Entity(name="X")
+class X(Dataclass):
+    a: str
+
+
+x = X(a="a")
+print(x)
 
 server = Server(
     name="server",
-    config=server_config,
+    config=server_config_ai,
 )
 
 

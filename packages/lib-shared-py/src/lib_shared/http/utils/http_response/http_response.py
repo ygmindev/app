@@ -8,7 +8,6 @@ from lib_shared.http.utils.http_response.http_response_models import (
 )
 
 
-@Dataclass()
-class HttpResponse(HttpResponseModel[TType]):
+class HttpResponse(Dataclass, HttpResponseModel[TType]):
     status_code: HTTP_STATUS_CODE
     body: Optional[TType]

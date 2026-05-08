@@ -5,8 +5,7 @@ from lib_shared.core.utils.dataclass.dataclass import Dataclass
 from lib_shared.core.utils.field.field import Field
 
 
-@Dataclass()
-class EntityModelType:
+class EntityModelType(Dataclass):
     created: datetime = Field(default_value=datetime.now)
 
 

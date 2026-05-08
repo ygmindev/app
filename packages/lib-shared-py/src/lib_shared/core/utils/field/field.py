@@ -1,45 +1,26 @@
-from dataclasses import dataclass
-from typing import Any, Callable, Generic, Optional, overload
+from typing import Any, Callable, Optional
 
-from .field_models import FieldModel, TType
+from pydantic import Field as PydanticField
+from pydantic import PrivateAttr
 
-
-@dataclass
-class _Field(FieldModel, Generic[TType]):
-    default_value: Optional[TType | Callable[[], TType]] = None
-    description: Optional[str] = None
-    is_private: bool = False
+from .field_models import TType
 
 
-@overload
-def Field(
-    *,
+def _Field(
     default_value: Callable[[], TType],
     description: Optional[str] = None,
     is_private: bool = False,
-) -> TType: ...
-
-
-@overload
-def Field(
-    *,
-    default_value: TType,
-    description: Optional[str] = None,
-    is_private: bool = False,
-) -> TType: ...
-
-
-@overload
-def Field(
-    *,
-    description: Optional[str] = None,
-    is_private: bool = False,
-) -> Any: ...
+):
+    if is_private:
+        return PrivateAttr(default_factory=default_value)
+    return PydanticField(
+        default_factory=default_value,
+        description=description,
+    )
 
 
 def Field(
-    *,
-    default_value: Any = None,
+    default_value: Callable[[], TType],
     description: Optional[str] = None,
     is_private: bool = False,
 ) -> Any:

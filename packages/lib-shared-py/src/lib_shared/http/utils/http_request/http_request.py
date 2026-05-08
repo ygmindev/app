@@ -7,7 +7,6 @@ from lib_shared.http.utils.http_request.http_request_models import (
 )
 
 
-@Dataclass()
-class HttpRequest(HttpRequestModel[TType]):
+class HttpRequest(Dataclass, HttpRequestModel[TType]):
     body: Optional[TType] = None
     headers: Optional[dict] = None

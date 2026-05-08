@@ -8,14 +8,12 @@ from lib_shared.http.utils.http_response.http_response import HttpResponse
 ApiHandlerModel = Callable[[HttpRequest], Awaitable[HttpResponse]]
 
 
-@Dataclass()
-class ApiEndpoint:
+class ApiEndpoint(Dataclass):
     method: HTTP_METHOD | list[HTTP_METHOD]
     pathname: str
     handler: ApiHandlerModel
 
 
-@Dataclass()
-class ApiConfig:
+class ApiConfig(Dataclass):
     routes: list[ApiEndpoint]
     prefix: Optional[str] = None

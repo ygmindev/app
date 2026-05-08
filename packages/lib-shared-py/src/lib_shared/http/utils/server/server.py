@@ -23,8 +23,7 @@ from .server_models import ServerModel, _ServerModel
 logger = Logger()
 
 
-@Dataclass()
-class _Server(_ServerModel):
+class _Server(Dataclass, _ServerModel):
     name: str
     config: ServerConfig
 
@@ -81,5 +80,4 @@ class _Server(_ServerModel):
         await server.serve()
 
 
-@Dataclass()
 class Server(_Server, ServerModel): ...

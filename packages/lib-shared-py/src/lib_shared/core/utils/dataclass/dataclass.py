@@ -1,22 +1,19 @@
 from __future__ import annotations
 
-from typing import Any, Callable, Optional, Self, Union, cast, get_args, get_origin
+from typing import (
+    Any,
+    Optional,
+    Self,
+)
 
-from pydantic import BaseModel, ConfigDict, PrivateAttr
-from pydantic import Field as PydanticField
+from pydantic import BaseModel, ConfigDict
 
-from lib_shared.core.utils.field.field import _Field
-from lib_shared.core.utils.inspect_class import inspect_class
 from lib_shared.core.utils.merge.merge_models import MergeStrategy
 
-from .dataclass_models import DataclassModel, TType
+from .dataclass_models import DataclassModel, _DataclassModel
 
 
-def is_optional(annotation: Any) -> bool:
-    return get_origin(annotation) is Union and type(None) in get_args(annotation)
-
-
-class _BaseClass(BaseModel):
+class _Dataclass(BaseModel, _DataclassModel):
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
         extra="allow",
@@ -77,45 +74,4 @@ class _BaseClass(BaseModel):
         return self.clone(**result)
 
 
-def _Dataclass() -> Callable[[type[TType]], type[TType]]:
-    def wrapper(cls: type[TType]) -> type[TType]:
-        inspection = inspect_class(cls, is_deep=False)
-        default_values = inspection["defaults"]
-        defaults: dict[str, Any] = {}
-
-        for k, v in inspection["annotations"].items():
-            default = default_values.get(k)
-            if isinstance(default, _Field):
-                field = PrivateAttr if default.is_private else PydanticField
-                default_value = default.default_value
-                args: dict[str, Any] = {"description": default.description}
-                if default_value is not None:
-                    if callable(default_value):
-                        args["default_factory"] = default_value
-                    else:
-                        args["default"] = default_value
-                defaults[k] = field(**args)
-            elif default is not None:
-                defaults[k] = PydanticField(default=default)
-            elif is_optional(v):
-                defaults[k] = PydanticField(default=None)
-
-        ns = {
-            "__annotations__": inspection["annotations"],
-            "__module__": cls.__module__,
-            "__qualname__": cls.__qualname__,
-            **defaults,
-            **inspection["methods"],
-        }
-        if cls.__doc__:
-            ns["__doc__"] = cls.__doc__
-
-        bases = tuple(b for b in cls.__bases__ if b is not object)
-        has_base = any(isinstance(b, type) and issubclass(b, _BaseClass) for b in bases)
-        bases = bases if has_base else (_BaseClass,) + bases
-        return cast(type[TType], type(cls.__name__, bases, ns))
-
-    return wrapper
-
-
-Dataclass: DataclassModel = _Dataclass
+class Dataclass(_Dataclass, DataclassModel): ...

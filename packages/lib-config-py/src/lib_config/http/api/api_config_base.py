@@ -13,7 +13,7 @@ async def ping_handler(request: HttpRequest) -> HttpResponse:
     )
 
 
-api_config = ApiConfig(
+api_config_base = ApiConfig(
     prefix="api",
     routes=[
         ApiEndpoint(
