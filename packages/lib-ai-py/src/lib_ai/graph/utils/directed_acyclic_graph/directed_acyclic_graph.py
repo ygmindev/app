@@ -2,7 +2,6 @@
 
 from typing import AsyncIterable, Awaitable, Callable, Optional, cast
 
-from langgraph.checkpoint.memory import MemorySaver
 from langgraph.config import get_stream_writer
 from langgraph.graph.state import (
     END,
@@ -17,7 +16,7 @@ from lib_shared.core.utils.uninitialized_exception.uninitialized_exception impor
     UninitializedException,
 )
 
-from lib_ai.core.utils.directed_acyclic_graph.graph_node import GraphNode
+from lib_ai.graph.utils.graph_node import GraphNode
 
 from .directed_acyclic_graph_models import (
     DirectedAcyclicGraphModel,
@@ -33,8 +32,7 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
     nodes: list[GraphNode]
     edges: list[GraphEdgeModel]
 
-    _graph: Optional[StateGraph] = None
-    _graph_compiled: Optional[CompiledStateGraph] = None
+    _graph: Optional[CompiledStateGraph] = None
 
     def _wrap_node(
         self,
@@ -51,7 +49,7 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
         return _wrapped
 
     @staticmethod
-    def _get_edge(name: GraphNodeType | str) -> str:
+    def _get_node(name: GraphNodeType | str) -> str:
         match name:
             case GraphNodeType.START:
                 return START
@@ -61,10 +59,10 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
                 return name
 
     def post_init(self) -> None:
-        self._graph = StateGraph(type(self.initial_state))
+        graph = StateGraph(type(self.initial_state))
 
         for node in self.nodes:
-            self._graph.add_node(
+            graph.add_node(
                 node.name,
                 cast(StateNode, self._wrap_node(node.run)),
             )
@@ -72,32 +70,40 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
         edges = self.edges
         if len(edges):
             if edges[0][0] != GraphNodeType.START:
-                edges.insert(0, (GraphNodeType.START, self._get_edge(edges[0][0])))
+                edges.insert(0, (GraphNodeType.START, self._get_node(edges[0][0])))
 
         for edge in edges:
-            from_edge, to_edge = edge
-            if isinstance(to_edge, str):
-                self._graph.add_edge(
-                    self._get_edge(from_edge),
-                    self._get_edge(to_edge),
+            if len(edge) == 2:
+                from_edge, to_edge = edge
+                graph.add_edge(
+                    self._get_node(from_edge),
+                    self._get_node(to_edge),
                 )
-            elif callable(to_edge):
-                self._graph.add_conditional_edges(
-                    self._get_edge(from_edge),
-                    lambda x: self._get_edge(to_edge(x)),
+            else:
+                from_edge, to_edge, edge_map = edge
+                graph.add_conditional_edges(
+                    self._get_node(from_edge),
+                    lambda x, to_edge=to_edge: self._get_node(to_edge(x)),
+                    {
+                        k: self._get_node(v)
+                        for k, v in (
+                            edge_map.items() if isinstance(edge_map, dict) else edge_map
+                        )
+                    },
                 )
 
         if len(edges):
-            if edges[-1][-1] != GraphNodeType.END:
-                edges.append((self._get_edge(edges[-1][-1]), GraphNodeType.END))
+            if len(edges[-1]) == 2 and edges[-1][-1] != GraphNodeType.END:
+                edges.append((self._get_node(edges[-1][-1]), GraphNodeType.END))
 
-        self._graph_compiled = self._graph.compile(checkpointer=MemorySaver())
+        # self._graph = graph.compile(checkpointer=MemorySaver())
+        self._graph = graph.compile()
 
     @property
     def graph(self) -> CompiledStateGraph:
-        if self._graph_compiled is None:
+        if self._graph is None:
             raise NotImplementedException("Graph has not been compiled yet.")
-        return self._graph_compiled
+        return self._graph
 
     async def run(
         self,
@@ -110,16 +116,19 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
         self,
         params: TState,
     ) -> AsyncIterable[TState]:
+        cls = type(params)
         async for result in self.graph.astream(
             params,
             stream_mode="custom",
-            config={"configurable": {"thread_id": "conversation_1"}},
         ):
-            yield cast(TState, result)
+            if isinstance(result, dict):
+                yield cls.model_validate(result)
+            else:
+                yield cast(TState, result)
 
     async def visualize(
         self,
-        filepath: str = "./graph.png",
+        filepath: str,
     ) -> None:
         if self._graph is None:
             raise UninitializedException("agent")

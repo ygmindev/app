@@ -6,6 +6,7 @@ from typing import Awaitable, Callable
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from fastapi.responses import StreamingResponse as StreamingResponseBase
 from lib_config.http.api.api_config import ApiEndpoint
 from lib_config.http.server.server_config import ServerConfig
 from uvicorn import Config
@@ -16,6 +17,10 @@ from lib_shared.core.utils.get_env import get_env
 from lib_shared.core.utils.logger.logger import Logger
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.http.utils.http_request.http_request import HttpRequest
+from lib_shared.http.utils.http_response.http_response import HttpResponse
+from lib_shared.http.utils.streaming_response.streaming_response import (
+    StreamingResponse,
+)
 from lib_shared.route.utils.trim_pathname import trim_pathname
 
 from .server_models import ServerModel, _ServerModel
@@ -36,8 +41,12 @@ class _Server(Dataclass, _ServerModel):
 
         def endpoint(
             route: ApiEndpoint,
-        ) -> Callable[[Request], Awaitable[JSONResponse]]:
-            async def _handler(request: Request) -> JSONResponse:
+        ) -> Callable[
+            [Request], Awaitable[JSONResponse | StreamingResponseBase | None]
+        ]:
+            async def _handler(
+                request: Request,
+            ) -> JSONResponse | StreamingResponseBase | None:
                 headers = request.headers
                 try:
                     body = await request.json()
@@ -49,10 +58,22 @@ class _Server(Dataclass, _ServerModel):
                         headers=dict(headers),
                     )
                 )
-                return JSONResponse(
-                    content=response.body,
-                    status_code=response.status_code.value,
-                )
+                if isinstance(response, HttpResponse):
+                    return JSONResponse(
+                        content=response.body,
+                        status_code=response.status_code.value,
+                    )
+                elif isinstance(response, StreamingResponse):
+                    return StreamingResponseBase(
+                        response.body,
+                        media_type="text/event-stream",
+                        headers={
+                            "Cache-Control": "no-cache",
+                            "X-Accel-Buffering": "no",
+                            "Connection": "keep-alive",
+                        },
+                    )
+                return None
 
             return _handler
 
@@ -62,6 +83,7 @@ class _Server(Dataclass, _ServerModel):
             self._app.add_api_route(
                 path=pathname,
                 endpoint=endpoint(route),
+                response_model=None,
                 methods=(
                     [v.value.upper() for v in route.method]
                     if isinstance(route.method, list)

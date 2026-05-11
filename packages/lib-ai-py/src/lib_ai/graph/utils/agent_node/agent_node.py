@@ -6,7 +6,7 @@ from typing import AsyncIterable, Optional
 from lib_ai.agent.utils.agent import Agent
 from lib_ai.agent.utils.agent.agent import LLM_ROLE
 from lib_ai.agent.utils.llm_message import LlmMessage
-from lib_ai.core.utils.directed_acyclic_graph.graph_node import GraphNode
+from lib_ai.graph.utils.graph_node import GraphNode
 
 from .agent_node_models import AgentNodeModel, TState
 

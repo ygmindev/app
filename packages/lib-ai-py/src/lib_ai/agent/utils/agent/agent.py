@@ -8,6 +8,7 @@ from typing import (
 )
 
 from lib_shared.core.utils.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.not_found_exception import NotFoundException
 from lib_shared.core.utils.not_implemented_exception import NotImplementedException
 
@@ -16,14 +17,14 @@ from lib_ai.agent.utils.llm_message import LlmMessage
 from lib_ai.agent.utils.llm_message.constants import LLM_ROLE
 from lib_ai.agent.utils.skill import Skill
 from lib_ai.agent.utils.tool import Tool
-from lib_ai.core.utils.directed_acyclic_graph.directed_acyclic_graph import (
+from lib_ai.graph.utils.directed_acyclic_graph.directed_acyclic_graph import (
     DirectedAcyclicGraph,
 )
-from lib_ai.core.utils.directed_acyclic_graph.directed_acyclic_graph_models import (
+from lib_ai.graph.utils.directed_acyclic_graph.directed_acyclic_graph_models import (
     GraphEdgeModel,
     GraphNodeType,
 )
-from lib_ai.core.utils.directed_acyclic_graph.graph_node.graph_node import GraphNode
+from lib_ai.graph.utils.graph_node.graph_node import GraphNode
 from lib_ai.model.llm import Llm
 
 from .agent_models import AgentModel, TState, _AgentModel
@@ -31,9 +32,9 @@ from .agent_models import AgentModel, TState, _AgentModel
 
 class _Agent(BaseModel, _AgentModel[TState]):
     descriptions: list[str]
-    llm: Llm
     name: str
-    initial_state: TState = AgentState()
+    llm: Llm = Field(default_value=Llm)
+    initial_state: TState = Field(default_value=AgentState)
     skills: Optional[list[Skill]] = None
     tools: Optional[list[Tool]] = None
 
@@ -123,7 +124,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
         if tool_map:
             nodes.append(_ToolsNode())
             edges.append(("tools", "llm"))
-            edges.append(("llm", _llm_route))
+            edges.append(("llm", _llm_route, ["tools", GraphNodeType.END]))
         else:
             edges.append(("llm", GraphNodeType.END))
 
@@ -188,4 +189,4 @@ class _Agent(BaseModel, _AgentModel[TState]):
             )
 
 
-class Agent(_Agent, AgentModel): ...
+class Agent(_Agent[TState], AgentModel): ...

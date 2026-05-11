@@ -61,3 +61,6 @@ class Logger(_Logger, LoggerModel):
             "✅ ",
             *args,
         )
+
+
+logger = Logger()

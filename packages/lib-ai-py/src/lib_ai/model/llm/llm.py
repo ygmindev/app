@@ -19,7 +19,7 @@ from .llm_models import (
 
 
 class _Llm(BaseModel, _LlmModel):
-    name: str = LLM_NAME.GLM_5
+    name: str = LLM_NAME.QWEN_3
     temperature: float = 0.0
     max_tokens: int = 4096
     output_schema: Optional[BaseModel] = None
@@ -28,7 +28,7 @@ class _Llm(BaseModel, _LlmModel):
 
     def post_init(self) -> None:
         match self.name:
-            case LLM_NAME.GLM_5 | LLM_NAME.LLAMA_3_2:
+            case LLM_NAME.GLM_5 | LLM_NAME.LLAMA_3_2 | LLM_NAME.QWEN_3:
                 self._llm = ChatOllama(
                     model=self.name,
                     temperature=self.temperature,

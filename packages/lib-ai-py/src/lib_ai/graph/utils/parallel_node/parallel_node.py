@@ -7,7 +7,7 @@ from typing import AsyncIterable
 from lib_shared.core.utils.merge.merge_models import MergeStrategy
 
 from lib_ai.agent.utils.runnable.runnable_models import TState
-from lib_ai.core.utils.directed_acyclic_graph.graph_node import GraphNode
+from lib_ai.graph.utils.graph_node import GraphNode
 
 from .parallel_node_models import ParallelNodeModel
 
