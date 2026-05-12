@@ -21,6 +21,7 @@ agent = Agent[AgentState](
 
 async def ai_handler(request: HttpRequest) -> ApiResponseModel:
     async def stream() -> AsyncIterable[str]:
+        print("streaming..")
         async for x in agent.stream_prompt("what is your name?"):
             yield x.messages[-1].message
 

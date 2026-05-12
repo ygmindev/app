@@ -34,9 +34,7 @@ class _Server(Dataclass, _ServerModel):
 
     _app: FastAPI = PrivateField()
 
-    def post_init(
-        self,
-    ) -> None:
+    def post_init(self) -> None:
         self._app = FastAPI(title=self.name)
 
         def endpoint(

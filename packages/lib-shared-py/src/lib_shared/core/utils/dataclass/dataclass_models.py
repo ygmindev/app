@@ -4,10 +4,7 @@ from lib_shared.core.utils.base_model.base_model_models import MergeStrategy
 
 
 class _DataclassModel:
-    def post_init(
-        self: Self,
-        *args,
-    ) -> None:
+    def post_init(self: Self) -> None:
         return None
 
     def clone(

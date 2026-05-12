@@ -22,10 +22,7 @@ class _Dataclass(BaseModel, _DataclassModel):
         str_strip_whitespace=True,
     )
 
-    def post_init(
-        self: Self,
-        *args,
-    ) -> None:
+    def post_init(self: Self) -> None:
         return None
 
     def model_post_init(
