@@ -334,10 +334,10 @@ export const _bundle = ({
           platformF === PLATFORM.NODE
             ? {
                 chunkFileNames: '[name].js',
-                minify: process.env.NODE_ENV === 'production',
                 entryFileNames: '[name].js',
                 exports: 'named',
                 format: format === BUNDLE_FORMAT.ESM ? 'esm' : 'cjs',
+                minify: process.env.NODE_ENV === 'production',
                 preserveModules: isPreserveModules,
               }
             : undefined,
