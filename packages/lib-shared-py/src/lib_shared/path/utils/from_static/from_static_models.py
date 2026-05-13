@@ -1,7 +1,7 @@
 from typing import Protocol, Tuple, Unpack
 
 
-class FromRootModel(Protocol):
+class FromStaticModel(Protocol):
     def __call__(
         self,
         *params: Unpack[Tuple[str, ...]],

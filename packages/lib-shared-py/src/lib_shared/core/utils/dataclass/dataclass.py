@@ -43,6 +43,8 @@ class _Dataclass(BaseModel, _DataclassModel):
                     return current + new
                 case MergeStrategy.DEEP_PREPEND:
                     return new + current
+        elif new is None:
+            return current
         return new
 
     def clone(

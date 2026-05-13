@@ -1,11 +1,5 @@
-from os import path
-from typing import Unpack
+# template version: 1.0.0
 
-from lib_shared.path.utils.from_root.from_root_models import FromRootModel, FromRootParamsModel
+from .from_root import from_root
 
-filepath = path.dirname(path.abspath(__file__))
-
-
-def from_root(*params: Unpack[FromRootParamsModel]) -> FromRootModel:
-    params = params or ()
-    return path.abspath(path.join(filepath, "../../../../../../../", *params))
+__all__ = ["from_root"]

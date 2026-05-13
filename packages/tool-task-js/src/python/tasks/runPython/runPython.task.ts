@@ -1,3 +1,4 @@
+import { ENVIRONMENT } from '@lib/shared/environment/environment.constants';
 import { appPrompt } from '@tool/task/core/utils/appPrompt/appPrompt';
 import { buildTask } from '@tool/task/core/utils/buildTask/buildTask';
 import { execute } from '@tool/task/core/utils/execute/execute';
@@ -7,6 +8,10 @@ import {
 } from '@tool/task/python/tasks/runPython/runPython.models';
 
 export const runPython = buildTask<RunPythonParamsModel, RunPythonModel>({
+  context: {
+    environment: ENVIRONMENT.DEVELOPMENT,
+  },
+
   prompts: [appPrompt({ defaultValue: 'service_server' })],
 
   task: async ({ pathname = './src/index.py' }) => {

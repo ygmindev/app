@@ -40,6 +40,7 @@ export const _useSse = ({
     esRef.current.onerror = (e) => {
       isOpenSet(false);
       onError?.(e as unknown as Error);
+      esRef.current?.close();
     };
     esRef.current.onopen = () => isOpenSet(true);
 

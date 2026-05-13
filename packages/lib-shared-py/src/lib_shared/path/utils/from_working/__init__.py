@@ -1,12 +1,5 @@
-from os import getcwd, path
-from typing import Unpack
+# template version: 1.0.0
 
-from lib_shared.path.utils.from_working.from_working_models import (
-    FromWorkingModel,
-    FromWorkingParamsModel,
-)
+from .from_working import from_working
 
-
-def from_working(*params: Unpack[FromWorkingParamsModel]) -> FromWorkingModel:
-    params = params or ()
-    return path.join(getcwd(), *params)
+__all__ = ["from_working"]

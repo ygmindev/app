@@ -1998,6 +1998,7 @@ dependencies = [
     { name = "lib-ai" },
     { name = "lib-model" },
     { name = "lib-shared" },
+    { name = "sse-starlette" },
 ]
 
 [package.metadata]
@@ -2005,6 +2006,7 @@ requires-dist = [
     { name = "lib-ai", editable = "packages/lib-ai-py" },
     { name = "lib-model", editable = "packages/lib-model-py" },
     { name = "lib-shared", editable = "packages/lib-shared-py" },
+    { name = "sse-starlette", specifier = ">=3.4.1" },
 ]
 
 [[package]]

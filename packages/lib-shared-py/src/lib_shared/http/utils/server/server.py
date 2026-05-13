@@ -2,13 +2,15 @@
 
 
 import json
+from os import path
 from typing import Awaitable, Callable
 
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from fastapi.responses import StreamingResponse as StreamingResponseBase
 from lib_config.http.api.api_config import ApiEndpoint
 from lib_config.http.server.server_config import ServerConfig
+from sse_starlette import EventSourceResponse
 from uvicorn import Config
 from uvicorn import Server as UvicornServer
 
@@ -37,14 +39,20 @@ class _Server(Dataclass, _ServerModel):
     def post_init(self) -> None:
         self._app = FastAPI(title=self.name)
 
+        self._app.add_middleware(
+            CORSMiddleware,
+            allow_origins=["*"],
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
+
         def endpoint(
             route: ApiEndpoint,
-        ) -> Callable[
-            [Request], Awaitable[JSONResponse | StreamingResponseBase | None]
-        ]:
+        ) -> Callable[[Request], Awaitable[JSONResponse | EventSourceResponse | None]]:
             async def _handler(
                 request: Request,
-            ) -> JSONResponse | StreamingResponseBase | None:
+            ) -> JSONResponse | EventSourceResponse | None:
                 headers = request.headers
                 try:
                     body = await request.json()
@@ -62,15 +70,7 @@ class _Server(Dataclass, _ServerModel):
                         status_code=response.status_code.value,
                     )
                 elif isinstance(response, StreamingResponse):
-                    return StreamingResponseBase(
-                        response.body,
-                        media_type="text/event-stream",
-                        headers={
-                            "Cache-Control": "no-cache",
-                            "X-Accel-Buffering": "no",
-                            "Connection": "keep-alive",
-                        },
-                    )
+                    return EventSourceResponse(response.body)
                 return None
 
             return _handler
@@ -90,11 +90,27 @@ class _Server(Dataclass, _ServerModel):
             )
 
     async def run(self) -> None:
+        certificate_dir = self.config.certificate_dir
+        ssl_config = dict()
+        if certificate_dir:
+            ssl_config["ssl_certfile"] = path.join(
+                certificate_dir,
+                self.config.public_key_filename or "",
+            )
+            ssl_config["ssl_ca_certs"] = path.join(
+                certificate_dir,
+                self.config.ca_filename or "",
+            )
+            ssl_config["ssl_keyfile"] = path.join(
+                certificate_dir,
+                self.config.private_key_filename or "",
+            )
         config = Config(
             self._app,
             host=self.config.host or "127.0.0.1",
             port=int(self.config.port) if self.config.port else 5010,
             reload=get_env("NODE_ENV") == "development",
+            **ssl_config,
         )
         server = UvicornServer(config)
         await server.serve()

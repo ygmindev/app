@@ -13,7 +13,7 @@ class GetEnvModel(Protocol):
         *,
         cast: Type[str],
         default: Optional[str] = None,
-        required: bool = False,
+        is_required: bool = False,
     ) -> Optional[str]: ...
 
     @overload
@@ -23,7 +23,7 @@ class GetEnvModel(Protocol):
         *,
         cast: Type[int],
         default: Optional[int] = None,
-        required: bool = False,
+        is_required: bool = False,
     ) -> Optional[int]: ...
 
     @overload
@@ -33,7 +33,7 @@ class GetEnvModel(Protocol):
         *,
         cast: Type[float],
         default: Optional[float] = None,
-        required: bool = False,
+        is_required: bool = False,
     ) -> Optional[float]: ...
 
     @overload
@@ -43,12 +43,12 @@ class GetEnvModel(Protocol):
         *,
         cast: Callable[[str], TType],
         default: Optional[TType] = None,
-        required: bool = False,
+        is_required: bool = False,
     ) -> Optional[TType]: ...
 
     @overload
     def __call__(
-        self, key: str, *, default: Optional[str] = None, required: bool = False
+        self, key: str, *, default: Optional[str] = None, is_required: bool = False
     ) -> Optional[str]: ...
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any: ...

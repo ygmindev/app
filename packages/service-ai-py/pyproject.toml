@@ -25,7 +25,8 @@ requires-python = "==3.13.12"
 dependencies = [
     "lib-ai",
     "lib-model",
-    "lib-shared"
+    "lib-shared",
+    "sse-starlette>=3.4.1",
 ]
 
 [tool.uv.sources]

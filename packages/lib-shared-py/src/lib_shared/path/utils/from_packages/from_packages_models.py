@@ -1,5 +1,8 @@
-from typing import Tuple
+from typing import Protocol, Tuple, Unpack
 
-type FromPackagesParamsModel = Tuple[str, ...]
 
-type FromPackagesModel = str
+class FromPackagesModel(Protocol):
+    def __call__(
+        self,
+        *params: Unpack[Tuple[str, ...]],
+    ) -> str: ...

@@ -18,6 +18,9 @@
         "@lib/shared",
         "@tool/task"
     ],
+    "engines": {
+        "node": "24.x"
+    },
     "license": "MIT",
     "name": "app",
     "private": true,

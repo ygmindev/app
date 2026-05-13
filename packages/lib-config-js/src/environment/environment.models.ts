@@ -74,6 +74,7 @@ export type EnvironmentConfigModel = {
   SERVER_PUBSUB_PORT: string;
   SERVER_SALT_LENGTH: string;
   SERVER_SERVERLESS_REGION: string;
+  SERVER_SSL_CA_FILENAME: string;
   SERVER_SSL_PRIVATE_KEY: string;
   SERVER_SSL_PUBLIC_KEY: string;
   SERVER_STORAGE_BUCKET_ENDPOINT: string;

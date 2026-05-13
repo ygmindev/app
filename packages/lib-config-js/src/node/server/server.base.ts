@@ -49,7 +49,7 @@ export const serverConfig = new Config<ServerConfigModel, _ServerConfigModel>({
         process.env.NODE_ENV === 'production'
           ? undefined
           : {
-              caFilename: 'rootCA.pem',
+              caFilename: environment.variables.SERVER_SSL_CA_FILENAME ?? '',
               certificateDir: fromStatic('certificates'),
               privateKeyFilename: environment.variables.SERVER_SSL_PRIVATE_KEY ?? '',
               publicKeyFilename: environment.variables.SERVER_SSL_PUBLIC_KEY ?? '',

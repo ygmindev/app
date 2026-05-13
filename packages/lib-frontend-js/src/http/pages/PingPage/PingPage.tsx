@@ -1,14 +1,27 @@
 import { Button } from '@lib/frontend/core/components/Button/Button';
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { useSse } from '@lib/frontend/http/hooks/useSse/useSse';
 import { type PingPagePropsModel } from '@lib/frontend/http/pages/PingPage/PingPage.models';
-import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
+import { useState } from 'react';
 
 export const PingPage: LFCModel<PingPagePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
-  const { location, push } = useRouter();
+  const [data, dataSet] = useState<Array<unknown>>([]);
+  useSse({
+    handlers: {
+      data: (x) => console.warn(x),
+    },
+    uri: {
+      host: 'https://127.0.0.1',
+      pathname: 'ai',
+      // port: process.env.SERVER_APP_PYTHON_PORT,
+      port: 5010,
+    },
+  });
+  console.warn('render!');
+
   return (
     <Wrapper
       flex
@@ -18,21 +31,7 @@ export const PingPage: LFCModel<PingPagePropsModel> = ({ testID, ...props }) => 
       <Wrapper
         m="auto"
         width={250}>
-        <Text>{location.pathname.includes('2') ? 'ping1' : 'ping2'}</Text>
-
-        <Button
-          onPress={() =>
-            push({ pathname: location.pathname.includes('2') ? '/1/ping1' : '/1/ping2' })
-          }>{`Switch to ${location.pathname.includes('2') ? 'ping1' : 'ping2'}`}</Button>
-
-        <Button
-          onPress={() =>
-            push({
-              pathname: '/app/settings/profile/name',
-            })
-          }>
-          Settings
-        </Button>
+        <Button onPress={() => {}}>subscribe</Button>
       </Wrapper>
     </Wrapper>
   );

@@ -16,11 +16,11 @@ def _get_env(
     *,
     default: Optional[Any] = None,
     cast: Optional[CastTypeModel] = None,
-    required: bool = False,
+    is_required: bool = False,
 ) -> Any:
     value = os.getenv(key)
     if value is None:
-        if required:
+        if is_required:
             raise EnvironmentError(f"Missing required env var: {key}")
         return default
     return cast(value) if cast else value
