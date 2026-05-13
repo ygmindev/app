@@ -3,7 +3,7 @@
 
 import json
 from os import path
-from typing import Awaitable, Callable
+from typing import AsyncIterable, Awaitable, Callable
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,10 +19,6 @@ from lib_shared.core.utils.get_env import get_env
 from lib_shared.core.utils.logger.logger import Logger
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.http.utils.http_request.http_request import HttpRequest
-from lib_shared.http.utils.http_response.http_response import HttpResponse
-from lib_shared.http.utils.streaming_response.streaming_response import (
-    StreamingResponse,
-)
 from lib_shared.route.utils.trim_pathname import trim_pathname
 
 from .server_models import ServerModel, _ServerModel
@@ -58,19 +54,29 @@ class _Server(Dataclass, _ServerModel):
                     body = await request.json()
                 except json.JSONDecodeError:
                     body = await request.body()
-                response = await route.handler(
+
+                response = route.handler(
                     HttpRequest(
                         body=body,
                         headers=dict(headers),
                     )
                 )
-                if isinstance(response, HttpResponse):
+                if isinstance(response, Awaitable):
+                    result = await response
                     return JSONResponse(
-                        content=response.body,
-                        status_code=response.status_code.value,
+                        content=result.body,
+                        status_code=result.status_code.value,
                     )
-                elif isinstance(response, StreamingResponse):
-                    return EventSourceResponse(response.body)
+                elif isinstance(response, AsyncIterable):
+
+                    async def stream() -> AsyncIterable[dict]:
+                        try:
+                            async for value in response:
+                                yield {"data": value, "event": "message"}
+                        finally:
+                            yield {"data": "", "event": "done"}
+
+                    return EventSourceResponse(stream())
                 return None
 
             return _handler
