@@ -72,7 +72,7 @@ class _Server(Dataclass, _ServerModel):
                     async def stream() -> AsyncIterable[dict]:
                         try:
                             async for value in response:
-                                yield {"data": value, "event": "message"}
+                                yield {"data": json.dumps(value), "event": "message"}
                         finally:
                             yield {"data": "", "event": "done"}
 

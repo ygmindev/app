@@ -1,4 +1,4 @@
-from typing import AsyncIterable
+from typing import Any, AsyncIterable
 
 from lib_ai.agent.utils.agent.agent import Agent
 from lib_ai.agent.utils.agent_state.agent_state import AgentState
@@ -15,9 +15,10 @@ agent = Agent[AgentState](
 )
 
 
-async def ai_handler(_) -> AsyncIterable[str]:
+async def ai_handler(_) -> AsyncIterable[Any]:
     async for x in agent.stream_prompt("what is your name?"):
-        yield x.messages[-1].message
+        value = x.messages[-1]
+        yield {"message": value.message, "role": value.role.value}
 
 
 api_config_ai = api_config_base.update(

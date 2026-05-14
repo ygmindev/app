@@ -9,18 +9,18 @@ import { useState } from 'react';
 export const PingPage: LFCModel<PingPagePropsModel> = ({ testID, ...props }) => {
   const { styles } = useStyles({ props });
   const [data, dataSet] = useState<Array<unknown>>([]);
+
   useSse({
     handlers: {
-      data: (x) => console.warn(x),
+      message: (x) => console.warn(x),
     },
     uri: {
-      host: 'https://127.0.0.1',
+      host: 'http://127.0.0.1',
       pathname: 'ai',
       // port: process.env.SERVER_APP_PYTHON_PORT,
       port: 5010,
     },
   });
-  console.warn('render!');
 
   return (
     <Wrapper
