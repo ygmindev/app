@@ -20,7 +20,6 @@ export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
   const [currentUserState] = useStore('user.currentUser');
   const currentUserF = currentUser ?? currentUserState;
 
-  // const handleAdd = async (message: Partial<MessageModel>): Promise<void> => onSubmit?.(message);
   const { create } = useMessageResource();
   const handleAdd = async (message: Partial<MessageModel>): Promise<void> => {
     await onSubmit?.(message);

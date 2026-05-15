@@ -7,12 +7,18 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const _useSse = ({
   handlers,
+  isActive = false,
   onError,
   uri: uriParams,
 }: _UseSseParamsModel): _UseSseModel => {
   const listenersRef = useRef<Record<string, (e: MessageEvent) => void>>({});
   const esRef = useRef<EventSource>(null);
   const [isOpen, isOpenSet] = useState<boolean>(false);
+
+  const handlersRef = useRef(handlers);
+  handlersRef.current = handlers;
+  const onErrorRef = useRef(onError);
+  onErrorRef.current = onError;
 
   const handleClose = useCallback((): void => {
     if (!esRef.current) return;
@@ -25,7 +31,9 @@ export const _useSse = ({
     isOpenSet(false);
   }, []);
 
-  useEffect(() => {
+  const handleOpen = useCallback((): void => {
+    if (esRef.current) handleClose(); // 👈 prevent double-connections
+
     const url = uri(uriParams);
     const es = new EventSource(url);
     esRef.current = es;
@@ -35,14 +43,13 @@ export const _useSse = ({
     es.addEventListener('done', doneListener);
     listeners['done'] = doneListener;
 
-    for (const [k, v] of Object.entries(handlers ?? {})) {
+    for (const [k, v] of Object.entries(handlersRef.current ?? {})) {
       const listener = (event: MessageEvent): void => {
         try {
           v(JSON.parse(event.data) as never, handleClose);
         } catch (e) {
           console.error(e);
-
-          onError?.(e as Error);
+          onErrorRef.current?.(e as Error);
         }
       };
       listeners[k] = listener;
@@ -50,16 +57,18 @@ export const _useSse = ({
     }
 
     listenersRef.current = listeners;
-
     es.onopen = (): void => isOpenSet(true);
-
     es.onerror = (e): void => {
-      onError?.(e as unknown as Error);
+      onErrorRef.current?.(e as unknown as Error);
       handleClose();
     };
+  }, [JSON.stringify(uriParams), handleClose]);
 
+  useEffect(() => {
+    if (!isActive) return;
+    handleOpen();
     return handleClose;
-  }, [JSON.stringify(uriParams)]);
+  }, [isActive, handleOpen]);
 
-  return { isOpen };
+  return { isOpen, subscribe: handleOpen, unsubscribe: handleClose };
 };
