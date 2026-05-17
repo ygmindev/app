@@ -150,6 +150,7 @@ export const MATERIAL_ICONS = {
   block: 'block',
   brightness: 'brightness-4',
   bulletList: 'format-list-bulleted',
+  chatPlus: 'chat-plus',
   chevronDown: 'chevron-down',
   chevronDownDouble: 'chevron-double-down',
   chevronLeft: 'chevron-left',

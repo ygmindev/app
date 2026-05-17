@@ -18,15 +18,23 @@ import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import toNumber from 'lodash/toNumber';
 
 export const serverConfig = new Config<ServerConfigModel, _ServerConfigModel>({
-  config: ({ graphqlConfig, ...params }) => {
-    if (graphqlConfig) {
-      params.plugins = [
-        ...(params.plugins ?? []),
+  params: (prev) => {
+    const environment = Container.get(Environment);
+
+    let plugins = [
+      [corsPlugin, { headers: ['*'], origins: ['*'] }],
+
+      [cookiesPlugin, { secret: environment.variables.SERVER_APP_SECRET }],
+    ] as Array<[ServerPluginModel<unknown>, unknown]>;
+
+    if (prev?.graphqlConfig) {
+      plugins = [
+        ...(plugins ?? []),
 
         [
           graphqlPlugin,
           {
-            config: graphqlConfig,
+            config: prev.graphqlConfig,
             logger,
             method: [HTTP_METHOD.GET, HTTP_METHOD.POST, HTTP_METHOD.OPTIONS],
             pathname: GRAPHQL,
@@ -35,11 +43,6 @@ export const serverConfig = new Config<ServerConfigModel, _ServerConfigModel>({
       ] as Array<[ServerPluginModel<unknown>, unknown]>;
     }
 
-    return params;
-  },
-
-  params: () => {
-    const environment = Container.get(Environment);
     const port =
       environment.variables.PORT ||
       environment.variables.APP_PORT ||
@@ -59,11 +62,7 @@ export const serverConfig = new Config<ServerConfigModel, _ServerConfigModel>({
 
       host: environment.variables.SERVER_APP_HOST ?? '',
 
-      plugins: [
-        [corsPlugin, { headers: ['*'], origins: ['*'] }],
-
-        [cookiesPlugin, { secret: environment.variables.SERVER_APP_SECRET }],
-      ] as Array<[ServerPluginModel<unknown>, unknown]>,
+      plugins,
 
       port: toNumber(port),
 

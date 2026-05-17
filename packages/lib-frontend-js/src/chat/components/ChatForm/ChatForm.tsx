@@ -7,18 +7,21 @@ import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
+import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 
 export const ChatForm: LFCModel<ChatFormPropsModel> = ({ onAdd, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
+  const currentUser = useCurrentUser();
 
   const { errors, handleChange, handleReset, handleSubmit, values } = useForm<{
     text?: string;
   }>({
     initialValues: { text: '' },
     onSubmit: async ({ text }) => {
-      await onAdd?.({ text });
+      await onAdd?.({ created: new DateTime(), createdBy: currentUser ?? undefined, text });
     },
   });
 

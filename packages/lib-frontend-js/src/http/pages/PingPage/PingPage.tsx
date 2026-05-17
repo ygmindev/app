@@ -1,5 +1,4 @@
-import { ChatContainer } from '@lib/frontend/chat/components/ChatContainer/ChatContainer';
-import { Button } from '@lib/frontend/core/components/Button/Button';
+import { EntityChatContainer } from '@lib/frontend/chat/components/EntityChatContainer/EntityChatContainer';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useSse } from '@lib/frontend/http/hooks/useSse/useSse';
@@ -34,18 +33,22 @@ export const PingPage: LFCModel<PingPagePropsModel> = ({ testID, ...props }) => 
     <Wrapper
       flex
       isCenter
+      p
       style={styles}
       testID={testID}>
-      <ChatContainer
+      <EntityChatContainer
         chat={chat}
         currentUser={currentUser ?? undefined}
         flex
+        onSubmit={async (e) => {
+          console.warn(e);
+        }}
       />
-      <Wrapper
+      {/* <Wrapper
         m="auto"
         width={250}>
         <Button onPress={subscribe}>subscribe</Button>
-      </Wrapper>
+      </Wrapper> */}
     </Wrapper>
   );
 };

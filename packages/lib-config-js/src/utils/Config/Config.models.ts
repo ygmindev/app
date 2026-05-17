@@ -4,7 +4,7 @@ import { type MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constant
 export type ConfigParamsModel<TParams, TType = undefined> = {
   config?: TType extends undefined ? never : (params: TParams) => TType;
 
-  params(): TParams;
+  params(prev?: TParams): TParams;
 };
 
 export type ConfigModel<TParams, TType = undefined> = {

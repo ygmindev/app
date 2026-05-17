@@ -48,12 +48,12 @@ const viewParams = getScrollViewParams<
   Component: _FlatList,
   getProps: ({ divider, isHorizontal, itemSize, items, maxHeight, renderItem, ...props }) => ({
     ...props,
-    ItemSeparatorComponent: divider ? () => divider : undefined,
     data: items,
     getItemLayout: itemSize
       ? (data, index) => ({ index, length: itemSize, offset: itemSize * index })
       : undefined,
     horizontal: isHorizontal,
+    ItemSeparatorComponent: divider ? () => divider : undefined,
     keyExtractor: ({ id }) => id,
     maxHeight,
     onScroll: undefined,

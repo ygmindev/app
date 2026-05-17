@@ -7,7 +7,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 export class Config<TParams, TType = undefined> implements ConfigModel<TParams, TType> {
   protected _config: (TType extends undefined ? never : (params: TParams) => TType) | undefined;
-  protected _params: Array<() => TParams | PartialDeepModel<TParams>> = [];
+  protected _params: Array<(prev?: TParams) => TParams | PartialDeepModel<TParams>> = [];
 
   constructor({ config, params }: ConfigParamsModel<TParams, TType>) {
     this._params = [params];
@@ -30,9 +30,10 @@ export class Config<TParams, TType = undefined> implements ConfigModel<TParams, 
   }
 
   params(strategy: MERGE_STRATEGY = MERGE_STRATEGY.DEEP_PREPEND): TParams {
-    return merge(
-      this._params.map((v) => v()),
-      strategy,
-    );
+    return this._params.reduce((result, v) => merge([v(result), result], strategy), {} as TParams);
+    // return merge(
+    //   this._params.map((v) => v()),
+    //   strategy,
+    // );
   }
 }

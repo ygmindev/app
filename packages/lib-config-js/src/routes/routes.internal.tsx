@@ -1,22 +1,24 @@
 import { routesConfig as configBase } from '@lib/config/routes/routes.base';
 import { ADMIN } from '@lib/frontend/admin/admin.constants';
-import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
-import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { NEW } from '@lib/frontend/ai/ai.constants';
+import { NewChatPage } from '@lib/frontend/ai/pages/NewChatPage/NewChatPage';
 import { ORCHESTRATOR, WORKFLOW } from '@lib/frontend/orchestrator/orchestrator.constants';
 import { OrchestratorPage } from '@lib/frontend/orchestrator/pages/OrchestratorPage/OrchestratorPage';
 import { WorkflowPage } from '@lib/frontend/orchestrator/pages/WorkflowPage/WorkflowPage';
-import { ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
+import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { APP } from '@lib/shared/app/app.constants';
 
 export const routesConfig = configBase.extend(() => ({
   routes: [
     {
-      element: <AppLayout />,
+      navigation: ROUTE_NAVIGATION.NAVIGATION,
       pathname: APP,
       routes: [
         {
-          element: <Wrapper />,
-          pathname: '/',
+          element: <NewChatPage />,
+          icon: 'chatPlus',
+          isNavigatable: true,
+          pathname: NEW,
         },
         {
           pathname: ADMIN,

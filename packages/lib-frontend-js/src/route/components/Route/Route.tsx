@@ -2,6 +2,7 @@ import { Appearable } from '@lib/frontend/animation/components/Appearable/Appear
 import { Slide } from '@lib/frontend/animation/components/Slide/Slide';
 import { useAppPhase } from '@lib/frontend/app/hooks/useAppPhase/useAppPhase';
 import { APP_PHASE } from '@lib/frontend/app/hooks/useAppPhase/useAppPhase.constants';
+import { AppLayout } from '@lib/frontend/app/layouts/AppLayout/AppLayout';
 import { Protectable } from '@lib/frontend/auth/components/Protectable/Protectable';
 import { Modal } from '@lib/frontend/core/components/Modal/Modal';
 import { TABS_TYPE } from '@lib/frontend/core/components/Tabs/Tabs.constants';
@@ -88,6 +89,10 @@ export const Route: LFCModel<RoutePropsModel> = ({
           {elementF}
         </TabLayout>
       );
+      break;
+    }
+    case ROUTE_NAVIGATION.NAVIGATION: {
+      elementF = <AppLayout route={route}>{elementF}</AppLayout>;
       break;
     }
   }

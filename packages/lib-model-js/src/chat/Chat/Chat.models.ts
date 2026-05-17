@@ -4,7 +4,7 @@ import { type UserModel } from '@lib/model/user/User/User.models';
 import { type PartialArrayModel } from '@lib/shared/core/core.models';
 
 export type ChatModel = ProtectedResourceModel & {
-  messsages?: PartialArrayModel<MessageModel>;
+  messages?: PartialArrayModel<MessageModel>;
 
   name?: string;
 
