@@ -1,5 +1,5 @@
 import { type _PressableViewPropsModel } from '@lib/frontend/core/components/PressableView/_PressableView.models';
-import { getViewParams as getViewParamsBase } from '@lib/frontend/core/components/View/_View';
+import { getViewParams as getViewParamsBase } from '@lib/frontend/core/components/View/getViewParams';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
 import { type ComponentType } from 'react';
 import { type PressableProps } from 'react-native';

@@ -1,4 +1,4 @@
-import { getScrollViewParams } from '@lib/frontend/core/components/ScrollView/_ScrollView';
+import { getScrollViewParams } from '@lib/frontend/core/components/ScrollView/getScrollViewParams';
 import {
   type _VirtualizedListPropsModel,
   type _VirtualizedListRefModel,
@@ -9,6 +9,9 @@ import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement, useCallback } from 'react';
 import { useImperativeHandle, useRef } from 'react';
 import { FlatList, type FlatListProps, type ScrollView } from 'react-native';
+
+console.warn('@@@@getScrollViewParams');
+console.warn(getScrollViewParams);
 
 const _FlatList = <TType extends WithIdModel>({
   maxHeight,
@@ -46,7 +49,7 @@ const viewParams = getScrollViewParams<
   _VirtualizedListRefModel
 >({
   Component: _FlatList,
-  getProps: ({ divider, isHorizontal, itemSize, items, maxHeight, renderItem, ...props }) => ({
+  getProps: ({ divider, isHorizontal, items, itemSize, maxHeight, renderItem, ...props }) => ({
     ...props,
     data: items,
     getItemLayout: itemSize
