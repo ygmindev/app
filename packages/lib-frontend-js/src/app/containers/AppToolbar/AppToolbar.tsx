@@ -42,7 +42,9 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
             states: {
               [ELEMENT_STATE.ACTIVE]: {
                 width:
-                  theme.shape.size[THEME_SIZE.LARGE] + theme.shape.spacing[THEME_SIZE.MEDIUM] + 1,
+                  theme.shape.size[THEME_SIZE.MEDIUM] +
+                  theme.shape.spacing[THEME_SIZE.MEDIUM] * 2 +
+                  1,
               },
               [ELEMENT_STATE.INACTIVE]: { width: theme.layout.header.width },
             },
@@ -76,11 +78,9 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
 
               <Wrapper
                 elementState={elementState}
-                height={theme.shape.size[THEME_SIZE.MEDIUM]}
                 position={SHAPE_POSITION.ABSOLUTE}
                 right={0}
-                top={0}
-                width={theme.shape.size[THEME_SIZE.MEDIUM]}>
+                top={0}>
                 <Button
                   icon={isMinimized ? 'sidebarMaximize' : 'sidebarMinimize'}
                   onPress={() => isMinimizedSet(!isMinimized)}

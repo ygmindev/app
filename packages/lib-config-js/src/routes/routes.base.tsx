@@ -15,32 +15,30 @@ import { trimRoutes } from '@lib/shared/route/utils/trimRoutes/trimRoutes';
 
 export const routesConfig = new Config<RoutesConfigModel, _RoutesConfigModel>({
   config: ({ routes = [] }) => {
-    const routesF = [
+    const routesF = trimRoutes([
       ...routes,
 
-      ...trimRoutes([
-        {
-          element: <SitemapPage routes={routes} />,
-          pathname: SITE_MAP,
-          prerender: true,
-        },
+      {
+        element: <SitemapPage routes={routes} />,
+        pathname: SITE_MAP,
+        prerender: true,
+      },
 
-        ...devRoutes,
+      ...devRoutes,
 
-        ...testRoutes,
+      ...testRoutes,
 
-        {
-          element: <PingPage />,
-          pathname: PING,
-          prerender: true,
-        },
+      {
+        element: <PingPage />,
+        pathname: PING,
+        prerender: true,
+      },
 
-        {
-          element: <NotFoundPage />,
-          pathname: '*',
-        },
-      ]),
-    ];
+      {
+        element: <NotFoundPage />,
+        pathname: '*',
+      },
+    ]);
 
     return [
       {
