@@ -6,12 +6,9 @@ import {
 import { type RSFCPropsModel } from '@lib/frontend/core/core.models';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
-import { type ReactElement, useCallback } from 'react';
+import { type ReactElement, useCallback, useMemo } from 'react';
 import { useImperativeHandle, useRef } from 'react';
 import { FlatList, type FlatListProps, type ScrollView } from 'react-native';
-
-console.warn('@@@@getScrollViewParams');
-console.warn(getScrollViewParams);
 
 const _FlatList = <TType extends WithIdModel>({
   maxHeight,
@@ -41,30 +38,6 @@ const _FlatList = <TType extends WithIdModel>({
   );
 };
 
-const viewParams = getScrollViewParams<
-  Omit<_VirtualizedListPropsModel<WithIdModel>, 'render'> & {
-    renderItem: FlatListProps<WithIdModel>['renderItem'];
-  },
-  FlatListProps<WithIdModel> & { maxHeight?: number },
-  _VirtualizedListRefModel
->({
-  Component: _FlatList,
-  getProps: ({ divider, isHorizontal, items, itemSize, maxHeight, renderItem, ...props }) => ({
-    ...props,
-    data: items,
-    getItemLayout: itemSize
-      ? (data, index) => ({ index, length: itemSize, offset: itemSize * index })
-      : undefined,
-    horizontal: isHorizontal,
-    ItemSeparatorComponent: divider ? () => divider : undefined,
-    keyExtractor: ({ id }) => id,
-    maxHeight,
-    onScroll: undefined,
-    removeClippedSubviews: true,
-    renderItem,
-  }),
-});
-
 export const _VirtualizedList = <TType extends WithIdModel>({
   render,
   ...props
@@ -72,6 +45,41 @@ export const _VirtualizedList = <TType extends WithIdModel>({
   RSFCPropsModel<_VirtualizedListRefModel, _VirtualizedListPropsModel<TType>>
 > => {
   const theme = useTheme();
+  const viewParams = useMemo(
+    () =>
+      getScrollViewParams<
+        Omit<_VirtualizedListPropsModel<WithIdModel>, 'render'> & {
+          renderItem: FlatListProps<WithIdModel>['renderItem'];
+        },
+        FlatListProps<WithIdModel> & { maxHeight?: number },
+        _VirtualizedListRefModel
+      >({
+        Component: _FlatList,
+        getProps: ({
+          divider,
+          isHorizontal,
+          itemSize,
+          items,
+          maxHeight,
+          renderItem,
+          ...props
+        }) => ({
+          ...props,
+          data: items,
+          getItemLayout: itemSize
+            ? (data, index) => ({ index, length: itemSize, offset: itemSize * index })
+            : undefined,
+          horizontal: isHorizontal,
+          ItemSeparatorComponent: divider ? () => divider : undefined,
+          keyExtractor: ({ id }) => id,
+          maxHeight,
+          onScroll: undefined,
+          removeClippedSubviews: true,
+          renderItem,
+        }),
+      }),
+    [],
+  );
   const { Component, getProps } = viewParams;
   const renderItem = useCallback(
     ({ index, item }: { index: number; item: WithIdModel }) => render(item as TType, index),

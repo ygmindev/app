@@ -41,7 +41,8 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
           animation={{
             states: {
               [ELEMENT_STATE.ACTIVE]: {
-                width: theme.shape.size[THEME_SIZE.LARGE] + theme.shape.spacing[THEME_SIZE.MEDIUM],
+                width:
+                  theme.shape.size[THEME_SIZE.LARGE] + theme.shape.spacing[THEME_SIZE.MEDIUM] + 1,
               },
               [ELEMENT_STATE.INACTIVE]: { width: theme.layout.header.width },
             },
@@ -99,14 +100,15 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
                   icon={v.icon}
                   key={v.fullpath}
                   onPress={() => push({ pathname: v.fullpath ?? v.pathname })}
+                  tooltip={isMinimized ? v.title : undefined}
                   type={BUTTON_TYPE.INVISIBLE}>
-                  {v.title}
+                  {isMinimized ? undefined : v.title}
                 </Button>
               ))}
             </Wrapper>
           </Wrapper>
 
-          <AppMenuButton />
+          <AppMenuButton isMinimized={isMinimized} />
         </Wrapper>
       )}
     </Activatable>

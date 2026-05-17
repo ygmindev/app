@@ -2,6 +2,7 @@
   "recommendations": [
     "Anthropic.claude-code",
     "charliermarsh.ruff",
+    "Codeium.codeium",
     "Continue.continue",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",

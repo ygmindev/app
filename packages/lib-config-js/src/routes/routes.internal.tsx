@@ -1,6 +1,7 @@
 import { routesConfig as configBase } from '@lib/config/routes/routes.base';
 import { ADMIN } from '@lib/frontend/admin/admin.constants';
-import { NEW } from '@lib/frontend/ai/ai.constants';
+import { CHAT_HISTORY, NEW } from '@lib/frontend/ai/ai.constants';
+import { ChatHistoryPage } from '@lib/frontend/ai/pages/ChatHistoryPage/ChatHistoryPage';
 import { NewChatPage } from '@lib/frontend/ai/pages/NewChatPage/NewChatPage';
 import { ORCHESTRATOR, WORKFLOW } from '@lib/frontend/orchestrator/orchestrator.constants';
 import { OrchestratorPage } from '@lib/frontend/orchestrator/pages/OrchestratorPage/OrchestratorPage';
@@ -19,6 +20,14 @@ export const routesConfig = configBase.extend(() => ({
           icon: 'chatPlus',
           isNavigatable: true,
           pathname: NEW,
+          title: ({ t }) => t('chat:newChat'),
+        },
+        {
+          element: <ChatHistoryPage />,
+          icon: 'chats',
+          isNavigatable: true,
+          pathname: CHAT_HISTORY,
+          title: ({ t }) => t('chat:chatHistory'),
         },
         {
           pathname: ADMIN,

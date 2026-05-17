@@ -1,1 +1,3 @@
-export type AppMenuButtonPropsModel = {};
+export type AppMenuButtonPropsModel = {
+  isMinimized?: boolean;
+};

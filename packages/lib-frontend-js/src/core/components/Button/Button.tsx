@@ -55,6 +55,7 @@ export const Button = <TType = void,>({
   size = THEME_SIZE.MEDIUM,
   tooltip,
   type = BUTTON_TYPE.FILLED,
+  width,
   ...props
 }: RLFCPropsModel<ButtonRefModel, ButtonPropsModel<TType>>): ReactElement<
   RLFCPropsModel<ButtonRefModel, ButtonPropsModel<TType>>
@@ -65,9 +66,10 @@ export const Button = <TType = void,>({
   const { elementStateControlled, elementStateControlledSet, isActive, isLoading } =
     useElementStateControlled({ elementState, onElementStateChange });
 
-  const heightF = isNumber(height) ? height : (height ?? theme.shape.size[size as THEME_SIZE]);
-
   const isIconOnly = icon && !children;
+
+  const heightF = isNumber(height) ? height : theme.shape.size[size as THEME_SIZE];
+  const widthF = isNumber(width) ? width : isIconOnly ? heightF : undefined;
 
   const { borderAnimation, childColor, childColorRole, containerAnimation } = useMemo<{
     borderAnimation?: AnimationModel;
@@ -87,8 +89,8 @@ export const Button = <TType = void,>({
             states: {
               [ELEMENT_STATE.ACTIVE]: { borderColor: activeColor },
               [ELEMENT_STATE.DISABLED]: { borderColor: activeColor },
-              [ELEMENT_STATE.LOADING]: { borderColor: activeColor },
               [ELEMENT_STATE.INACTIVE]: { borderColor: mainColor },
+              [ELEMENT_STATE.LOADING]: { borderColor: activeColor },
             },
           },
           childColorRole: THEME_ROLE.CONTRAST,
@@ -102,13 +104,13 @@ export const Button = <TType = void,>({
                 backgroundColor: activeColor,
                 opacity,
               },
-              [ELEMENT_STATE.LOADING]: {
-                backgroundColor: activeColor,
-                opacity,
-              },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: mainColor,
                 opacity: props.isHidden ? 0 : 1,
+              },
+              [ELEMENT_STATE.LOADING]: {
+                backgroundColor: activeColor,
+                opacity,
               },
             },
           },
@@ -121,8 +123,8 @@ export const Button = <TType = void,>({
             states: {
               [ELEMENT_STATE.ACTIVE]: { borderColor: mainColor },
               [ELEMENT_STATE.DISABLED]: { borderColor: mainColor },
-              [ELEMENT_STATE.LOADING]: { borderColor: mainColor },
               [ELEMENT_STATE.INACTIVE]: { borderColor: mainColor },
+              [ELEMENT_STATE.LOADING]: { borderColor: mainColor },
             },
           },
           childColorRole: THEME_ROLE.MAIN,
@@ -136,13 +138,13 @@ export const Button = <TType = void,>({
                 backgroundColor: surfaceColor,
                 opacity,
               },
-              [ELEMENT_STATE.LOADING]: {
-                backgroundColor: surfaceColor,
-                opacity,
-              },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: surfaceColor,
                 opacity: props.isHidden ? 0 : 1,
+              },
+              [ELEMENT_STATE.LOADING]: {
+                backgroundColor: surfaceColor,
+                opacity,
               },
             },
           },
@@ -160,11 +162,11 @@ export const Button = <TType = void,>({
                 borderColor: mainColor,
                 borderWidth: 1,
               },
-              [ELEMENT_STATE.LOADING]: {
+              [ELEMENT_STATE.INACTIVE]: {
                 borderColor: mainColor,
                 borderWidth: 1,
               },
-              [ELEMENT_STATE.INACTIVE]: {
+              [ELEMENT_STATE.LOADING]: {
                 borderColor: mainColor,
                 borderWidth: 1,
               },
@@ -181,13 +183,13 @@ export const Button = <TType = void,>({
                 backgroundColor: surfaceColor,
                 opacity,
               },
-              [ELEMENT_STATE.LOADING]: {
-                backgroundColor: surfaceColor,
-                opacity,
-              },
               [ELEMENT_STATE.INACTIVE]: {
                 backgroundColor: surfaceColor,
                 opacity: props.isHidden ? 0 : 1,
+              },
+              [ELEMENT_STATE.LOADING]: {
+                backgroundColor: surfaceColor,
+                opacity,
               },
             },
           },
@@ -217,7 +219,7 @@ export const Button = <TType = void,>({
   const iconF = icon ? (
     <Wrapper
       isCenter
-      width={isIconOnly ? undefined : theme.shape.size[THEME_SIZE_MORE.XSMALL]}>
+      width={theme.shape.size[THEME_SIZE_MORE.XSMALL]}>
       <Icon
         color={colorF}
         colorRole={childColorRole}
@@ -282,7 +284,7 @@ export const Button = <TType = void,>({
       position={SHAPE_POSITION.RELATIVE}
       round={isIconOnly ? heightF / 2 : true}
       tooltip={tooltip}
-      width={props.width ?? (children ? undefined : heightF)}>
+      width={widthF}>
       <>
         <Wrapper
           animation={borderAnimation}
@@ -296,7 +298,7 @@ export const Button = <TType = void,>({
         <Appearable
           defaultState={ELEMENT_STATE.ACTIVE}
           isActive={!isLoading}
-          isFullWidth={!isIconOnly}
+          isFullWidth
           isLazy={false}>
           {childrenF}
         </Appearable>

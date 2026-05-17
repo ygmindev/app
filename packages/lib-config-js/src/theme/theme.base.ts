@@ -32,8 +32,8 @@ export const themeConfig = new Config<ThemeConfigModel>({
       palette: {
         [THEME_COLOR_MORE.SURFACE]: {
           [THEME_ROLE.ACTIVE]: palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_ACTIVE }),
-          [THEME_ROLE.MAIN]: COLOR_SURFACE_BASE,
           [THEME_ROLE.CONTRAST]: COLOR_SURFACE_CONTRAST,
+          [THEME_ROLE.MAIN]: COLOR_SURFACE_BASE,
           [THEME_ROLE.MUTED]: palette(COLOR_SURFACE_BASE, { lightness: LIGHTNESS_SURFACE_MUTED }),
         },
 
@@ -45,8 +45,8 @@ export const themeConfig = new Config<ThemeConfigModel>({
               ...result,
               [color]: {
                 [THEME_ROLE.ACTIVE]: palette(tone, { lightness: LIGHTNESS_ACTIVE }),
-                [THEME_ROLE.MAIN]: tone,
                 [THEME_ROLE.CONTRAST]: COLOR_SURFACE_BASE,
+                [THEME_ROLE.MAIN]: tone,
                 [THEME_ROLE.MUTED]: palette(tone, { lightness: LIGHTNESS_THEME_MUTED }),
               },
             };
@@ -58,24 +58,24 @@ export const themeConfig = new Config<ThemeConfigModel>({
 
     font: {
       fontFamily: {
+        [FONT_FAMILY.CODE]: '"Menlo", "Consolas", monospace',
+
         [FONT_FAMILY.MAIN]:
           process.env.ENV_PLATFORM === PLATFORM.IOS
             ? 'Helvetica Neue'
             : 'Lato, "Helvetica Neue", Arial, sans-serif',
 
         [FONT_FAMILY.STYLISH]: 'Merriweather, Georgia, Serif',
-
-        [FONT_FAMILY.CODE]: '"Menlo", "Consolas", monospace',
       },
 
       lineHeight: 25,
 
       size: {
+        [THEME_SIZE_MORE.XLARGE]: 38,
+        [THEME_SIZE_MORE.XSMALL]: 10,
         [THEME_SIZE.LARGE]: 20,
         [THEME_SIZE.MEDIUM]: 14,
         [THEME_SIZE.SMALL]: 12,
-        [THEME_SIZE_MORE.XLARGE]: 38,
-        [THEME_SIZE_MORE.XSMALL]: 10,
       },
 
       weight: {
@@ -93,11 +93,11 @@ export const themeConfig = new Config<ThemeConfigModel>({
       },
 
       height: {
-        [THEME_SIZE.SMALL]: 300,
+        [THEME_SIZE.LARGE]: 750,
 
         [THEME_SIZE.MEDIUM]: 500,
 
-        [THEME_SIZE.LARGE]: 750,
+        [THEME_SIZE.SMALL]: 300,
       },
 
       scrollBar: {
@@ -105,11 +105,11 @@ export const themeConfig = new Config<ThemeConfigModel>({
       },
 
       width: {
-        [THEME_SIZE.SMALL]: 350,
+        [THEME_SIZE.LARGE]: 750,
 
         [THEME_SIZE.MEDIUM]: 500,
 
-        [THEME_SIZE.LARGE]: 750,
+        [THEME_SIZE.SMALL]: 350,
       },
     },
 
@@ -131,25 +131,25 @@ export const themeConfig = new Config<ThemeConfigModel>({
       borderRadius: {
         [THEME_SIZE_MORE.XLARGE]: 30,
 
+        [THEME_SIZE_MORE.XSMALL]: 5,
+
         [THEME_SIZE.LARGE]: 25,
 
         [THEME_SIZE.MEDIUM]: 20,
 
         [THEME_SIZE.SMALL]: 8,
-
-        [THEME_SIZE_MORE.XSMALL]: 5,
       },
 
       height: {
-        [THEME_SIZE.LARGE]: 60,
-
-        [THEME_SIZE.MEDIUM]: 48,
-
-        [THEME_SIZE.SMALL]: 32,
-
         [THEME_SIZE_MORE.XLARGE]: 60,
 
         [THEME_SIZE_MORE.XSMALL]: 20,
+
+        [THEME_SIZE.LARGE]: 60,
+
+        [THEME_SIZE.MEDIUM]: 44,
+
+        [THEME_SIZE.SMALL]: 32,
       },
 
       scaling: {
@@ -169,15 +169,15 @@ export const themeConfig = new Config<ThemeConfigModel>({
       },
 
       size: {
-        [THEME_SIZE.LARGE]: 60,
-
-        [THEME_SIZE.MEDIUM]: 48,
-
-        [THEME_SIZE.SMALL]: 32,
-
         [THEME_SIZE_MORE.XLARGE]: 60,
 
         [THEME_SIZE_MORE.XSMALL]: 20,
+
+        [THEME_SIZE.LARGE]: 60,
+
+        [THEME_SIZE.MEDIUM]: 44,
+
+        [THEME_SIZE.SMALL]: 32,
       },
 
       spacing: {
@@ -189,15 +189,15 @@ export const themeConfig = new Config<ThemeConfigModel>({
       },
 
       width: {
+        [THEME_SIZE_MORE.XLARGE]: 200,
+
+        [THEME_SIZE_MORE.XSMALL]: 25,
+
         [THEME_SIZE.LARGE]: 150,
 
         [THEME_SIZE.MEDIUM]: 100,
 
         [THEME_SIZE.SMALL]: 50,
-
-        [THEME_SIZE_MORE.XLARGE]: 200,
-
-        [THEME_SIZE_MORE.XSMALL]: 25,
       },
     },
   }),

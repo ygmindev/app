@@ -21,7 +21,10 @@ import { PROFILE } from '@lib/frontend/user/user.constants';
 import { AUTH, SIGN_IN, SIGN_OUT } from '@lib/shared/auth/auth.constants';
 import { useRef } from 'react';
 
-export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) => {
+export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({
+  isMinimized = false,
+  ...props
+}) => {
   const { t } = useTranslation([AUTH]);
   const { wrapperProps } = useLayoutStyles({ props });
   const { signOut } = useSignInResource();
@@ -64,11 +67,12 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({ ...props }) =
         <Button
           elementState={isOpen ? ELEMENT_STATE.ACTIVE : undefined}
           icon={isAuthenticated ? 'personCircle' : 'signin'}
-          isFullWidth
-          tooltip={t('core:menu')}>
-          {isAuthenticated ? currentUser?.email : t('auth:signIn')}
+          isFullWidth={!isMinimized}
+          tooltip={isMinimized ? t('core:menu') : undefined}>
+          {isMinimized ? undefined : isAuthenticated ? currentUser?.email : t('auth:signIn')}
         </Button>
       )}
+      isFullWidth
       options={optionsF}
       ref={menuRef}
       testID={APP_MENU_BUTTON_TEST_ID}
