@@ -13,10 +13,12 @@ export type _TextInputPropsModel = {
   maxLength?: number;
   numberOfLines?: number;
   placeholder?: string;
+  selection?: { end: number; start: number };
   value?: string;
   onBlur?(): void;
   onChange?(value?: string): void;
   onFocus?(): void;
   onKey?(key: string, isMeta?: boolean): void;
+  onSelection?(params: { end: number; start: number }): void;
   onSubmit?(value?: string): void;
 };

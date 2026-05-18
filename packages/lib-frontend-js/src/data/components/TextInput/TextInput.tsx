@@ -40,7 +40,7 @@ import { type TextStyleModel } from '@lib/frontend/style/style.models';
 import { FLEX_ALIGN } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 import isNumber from 'lodash/isNumber';
-import { useImperativeHandle, useRef } from 'react';
+import { useImperativeHandle, useRef, useState } from 'react';
 
 export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   autoComplete,
@@ -80,6 +80,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   const { wrapperProps } = useLayoutStyles({ props });
   const focusableRef = useRef<FocusableRefModel>(null);
   const inputRef = useRef<TextInputRefModel>(null);
+  const [selection, selectionSet] = useState<{ end: number; start: number }>({ end: 0, start: 0 });
 
   useImperativeHandle(ref, () => ({
     beforeSubmit,
@@ -219,6 +220,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   };
 
   const Component = mask ? _MaskedInput : _TextInput;
+  console.warn(selection);
 
   return (
     <FocusableWrapper
@@ -300,7 +302,11 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
               switch (key) {
                 case TEXT_INPUT_KEY.ENTER: {
                   if (isMeta) {
-                    return handleChange(`${valueControlled}\n`);
+                    handleChange(
+                      `${valueControlled?.substring(0, selection.start)}\n${valueControlled?.substring(selection.end)}`,
+                    );
+                    selectionSet({ end: selection.start + 1, start: selection.start + 1 });
+                    break;
                   } else {
                     return onSubmit?.(valueControlled);
                   }
@@ -312,9 +318,11 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
               }
               onKey?.(key);
             }}
+            onSelection={selectionSet}
             onSubmit={onSubmit}
             placeholder={isActive ? placeholder : undefined}
             ref={inputRef}
+            selection={selection}
             testID={testID}
             value={valueControlled}
           />

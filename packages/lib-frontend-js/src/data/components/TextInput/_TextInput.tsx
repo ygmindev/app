@@ -32,8 +32,10 @@ export const getTextInputParams = (): ComposeComponentParamsModel<
       onChange,
       onFocus,
       onKey,
+      onSelection,
       onSubmit,
       placeholder,
+      selection,
       value,
     },
     theme,
@@ -74,11 +76,15 @@ export const getTextInputParams = (): ComposeComponentParamsModel<
           }
         }
       : undefined,
+    onSelectionChange: (e) => {
+      onSelection?.({ ...e.nativeEvent.selection });
+    },
     onSubmitEditing: onSubmit ? () => onSubmit(value) : undefined,
     placeholder,
     placeholderTextColor: theme.color.border,
     returnKeyType: 'done',
     secureTextEntry: keyboard === TEXT_INPUT_KEYBOARD.PASSWORD,
+    selection,
     spellCheck: false,
     textColor: foregroundColor,
     textContentType: getTextContentType(autoComplete, keyboard),
