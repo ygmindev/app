@@ -219,7 +219,7 @@ export const Button = <TType = void,>({
   const iconF = icon ? (
     <Wrapper
       isCenter
-      width={theme.shape.size[THEME_SIZE_MORE.XSMALL]}>
+      width={size === THEME_SIZE.MEDIUM ? theme.shape.size[THEME_SIZE_MORE.XSMALL] : undefined}>
       <Icon
         color={colorF}
         colorRole={childColorRole}

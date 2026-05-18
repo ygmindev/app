@@ -46,29 +46,31 @@ export const getTextInputParams = (): ComposeComponentParamsModel<
     editable: !isDisabled,
     inputMode: getKeyboardType(keyboard),
     maxLength,
-    multiline: numberOfLines ? numberOfLines > 1 : undefined,
+    multiline: !!numberOfLines,
     numberOfLines,
     onBlur,
     onChangeText: isDisabled ? undefined : (v) => onChange && onChange(v),
     onFocus,
     onKeyPress: onKey
       ? (e) => {
-          switch (e.nativeEvent.key) {
+          const { key, metaKey } = e.nativeEvent as { key: string; metaKey: boolean };
+          switch (key) {
             case 'ArrowDown':
-              return onKey(TEXT_INPUT_KEY.DOWN);
+              return onKey(TEXT_INPUT_KEY.DOWN, metaKey);
             case 'ArrowLeft':
-              return onKey(TEXT_INPUT_KEY.LEFT);
+              return onKey(TEXT_INPUT_KEY.LEFT, metaKey);
             case 'ArrowRight':
-              return onKey(TEXT_INPUT_KEY.RIGHT);
+              return onKey(TEXT_INPUT_KEY.RIGHT, metaKey);
             case 'ArrowUp':
-              return onKey(TEXT_INPUT_KEY.UP);
+              return onKey(TEXT_INPUT_KEY.UP, metaKey);
             case 'Backspace':
-              return onKey(TEXT_INPUT_KEY.REMOVE);
+              return onKey(TEXT_INPUT_KEY.REMOVE, metaKey);
+            case 'Enter':
+              return onKey(TEXT_INPUT_KEY.ENTER, metaKey);
             case 'Escape':
-              return onKey(TEXT_INPUT_KEY.ESCAPE);
-            default: {
-              return onKey(e.nativeEvent.key);
-            }
+              return onKey(TEXT_INPUT_KEY.ESCAPE, metaKey);
+            default:
+              return onKey(key, metaKey);
           }
         }
       : undefined,

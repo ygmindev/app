@@ -17,6 +17,6 @@ export type _TextInputPropsModel = {
   onBlur?(): void;
   onChange?(value?: string): void;
   onFocus?(): void;
-  onKey?(key: string): void;
+  onKey?(key: string, isMeta?: boolean): void;
   onSubmit?(value?: string): void;
 };

@@ -39,17 +39,20 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({ onAdd, ...props }) => {
         border
         error={errors?.text}
         flex
-        height={theme.shape.height[THEME_SIZE.MEDIUM]}
         isBlurOnSubmit={false}
+        isClearable={false}
+        numberOfLines={3}
         onChange={(v) => handleChange('text')(v)}
         onSubmit={onSubmit}
+        rightElement={
+          <Button
+            icon="arrowUp"
+            onPress={onSubmit}
+            size={THEME_SIZE.SMALL}
+          />
+        }
         round
         value={values.text}
-      />
-
-      <Button
-        icon="send"
-        onPress={onSubmit}
       />
     </Wrapper>
   );

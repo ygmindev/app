@@ -34,7 +34,6 @@ export const EntityChatContainer: LFCModel<EntityChatContainerPropsModel> = ({
     // });
     await onSubmit?.(message);
   };
-  console.warn(valueControlled);
 
   return (
     valueControlled && (

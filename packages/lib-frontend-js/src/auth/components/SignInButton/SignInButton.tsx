@@ -7,6 +7,7 @@ import { useRouter } from '@lib/frontend/route/hooks/useRouter/useRouter';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { AUTH, SIGN_IN } from '@lib/shared/auth/auth.constants';
+import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 
 export const SignInButton: LFCModel<SignInButtonPropsModel> = ({ onPress, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -14,7 +15,8 @@ export const SignInButton: LFCModel<SignInButtonPropsModel> = ({ onPress, ...pro
   const { push } = useRouter();
   const [authStatus] = useStore('auth.status');
   const isAuthenticated = authStatus === AUTH_STATUS.AUTHENTICATED;
-  return isAuthenticated ? null : (
+  if (isServer || isAuthenticated) return null;
+  return (
     <Button
       {...wrapperProps}
       icon="signin"

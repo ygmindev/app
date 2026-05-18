@@ -10,6 +10,7 @@ export enum TEXT_INPUT_KEYBOARD {
 
 export enum TEXT_INPUT_KEY {
   DOWN = 'down',
+  ENTER = 'enter',
   ESCAPE = 'escape',
   LEFT = 'left',
   REMOVE = 'remove',

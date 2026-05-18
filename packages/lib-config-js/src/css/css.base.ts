@@ -67,7 +67,7 @@ export const cssConfig = new Config<CssConfigModel>({
       -webkit-background-clip: text;
     }
   
-    input {
+    input, textarea {
       border: none !important;
       outline: inherit !important;
       cursor: inherit !important;

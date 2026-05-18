@@ -105,8 +105,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       onElementStateChange,
     });
 
-  const sizeF = size ?? THEME_SIZE.MEDIUM;
-
   const theme = useTheme();
   const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,
@@ -197,17 +195,21 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
 
   const isError = !!props.error;
 
+  const sizeF = size ?? THEME_SIZE.MEDIUM;
+  const heightF =
+    height ?? (numberOfLines ? undefined : isNumber(sizeF) ? sizeF : theme.shape.size[sizeF]);
+
   const containerAnimation: AnimationModel = {
     states: {
+      [ELEMENT_STATE.ACTIVE]: {
+        height: theme.shape.size[THEME_SIZE.SMALL],
+        scale: theme.shape.scaling[THEME_SIZE.MEDIUM],
+      },
       [ELEMENT_STATE.INACTIVE]: {
         height: valueControlled
           ? theme.shape.size[THEME_SIZE.SMALL]
           : theme.shape.size[THEME_SIZE.MEDIUM],
         scale: valueControlled ? theme.shape.scaling[THEME_SIZE.MEDIUM] : 1.0,
-      },
-      [ELEMENT_STATE.ACTIVE]: {
-        height: theme.shape.size[THEME_SIZE.SMALL],
-        scale: theme.shape.scaling[THEME_SIZE.MEDIUM],
       },
     },
   };
@@ -223,10 +225,11 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       {...wrapperProps}
       border={!isTransparent}
       elementState={elementStateControlled}
-      height={height ?? (isNumber(sizeF) ? sizeF : theme.shape.size[sizeF])}
+      height={heightF}
       isRow
       isTransparent={isTransparent}
       onElementStateChange={elementStateControlledSet}
+      p={!!numberOfLines}
       pLeft={!isCenter && !leftElementF}
       position={SHAPE_POSITION.RELATIVE}
       ref={focusableRef}
@@ -276,7 +279,12 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
           <Component
             autoComplete={autoComplete}
             foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
-            height={height ?? theme.shape.size[THEME_SIZE.SMALL]}
+            height={
+              height ??
+              (numberOfLines
+                ? theme.font.lineHeight * numberOfLines
+                : theme.shape.size[THEME_SIZE.SMALL])
+            }
             isBlurOnSubmit={isBlurOnSubmit}
             isCenter={isCenter}
             isDisabled={isBlocked}
@@ -288,8 +296,15 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
             onBlur={() => void handleFocus(false)}
             onChange={handleChange}
             onFocus={() => void handleFocus(true)}
-            onKey={(key) => {
+            onKey={(key, isMeta) => {
               switch (key) {
+                case TEXT_INPUT_KEY.ENTER: {
+                  if (isMeta) {
+                    return handleChange(`${valueControlled}\n`);
+                  } else {
+                    return onSubmit?.(valueControlled);
+                  }
+                }
                 case TEXT_INPUT_KEY.ESCAPE: {
                   isClearable && handleChange('');
                   break;
