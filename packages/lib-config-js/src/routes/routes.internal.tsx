@@ -1,6 +1,6 @@
 import { routesConfig as configBase } from '@lib/config/routes/routes.base';
 import { ADMIN } from '@lib/frontend/admin/admin.constants';
-import { CHAT_HISTORY, NEW } from '@lib/frontend/ai/ai.constants';
+import { AI, CHAT_HISTORY, NEW } from '@lib/frontend/ai/ai.constants';
 import { ChatHistoryPage } from '@lib/frontend/ai/pages/ChatHistoryPage/ChatHistoryPage';
 import { NewChatPage } from '@lib/frontend/ai/pages/NewChatPage/NewChatPage';
 import { ORCHESTRATOR, WORKFLOW } from '@lib/frontend/orchestrator/orchestrator.constants';
@@ -12,6 +12,7 @@ import { APP } from '@lib/shared/app/app.constants';
 export const routesConfig = configBase.extend(() => ({
   routes: [
     {
+      namespaces: [AI],
       navigation: ROUTE_NAVIGATION.NAVIGATION,
       pathname: APP,
       routes: [

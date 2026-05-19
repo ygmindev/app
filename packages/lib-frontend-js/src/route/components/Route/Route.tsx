@@ -10,6 +10,7 @@ import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useValueDelayed } from '@lib/frontend/core/hooks/useValueDelayed/useValueDelayed';
+import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { type RoutePropsModel } from '@lib/frontend/route/components/Route/Route.models';
 import { TabLayout } from '@lib/frontend/route/components/TabLayout/TabLayout';
 import { RouteHeader } from '@lib/frontend/route/containers/RouteHeader/RouteHeader';
@@ -30,6 +31,8 @@ export const Route: LFCModel<RoutePropsModel> = ({
   const { isActive, isMounted, location, push } = useRouter();
   const isMountedF = isMountedOverride ?? isMounted;
   const theme = useTheme();
+
+  useTranslation(route?.namespaces ?? []);
 
   const isMountedDelayed = useValueDelayed(isMountedF, theme.animation.transition);
   const appPhase = useAppPhase();

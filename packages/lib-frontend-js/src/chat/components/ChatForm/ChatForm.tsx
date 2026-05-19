@@ -1,3 +1,4 @@
+import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { type ChatFormPropsModel } from '@lib/frontend/chat/components/ChatForm/ChatForm.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
@@ -11,7 +12,12 @@ import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurre
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 
-export const ChatForm: LFCModel<ChatFormPropsModel> = ({ bottomElement, onSubmit, ...props }) => {
+export const ChatForm: LFCModel<ChatFormPropsModel> = ({
+  bottomElement,
+  onSubmit,
+  placeholder,
+  ...props
+}) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
 
@@ -40,11 +46,15 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({ bottomElement, onSubmit
             isRow
             justify={FLEX_JUSTIFY.END}>
             {bottomElement && <Wrapper flex>{bottomElement}</Wrapper>}
-            <Button
-              icon="arrowUp"
-              onPress={_onSubmit}
-              size={THEME_SIZE.SMALL}
-            />
+            <Appearable
+              isActive={!!values.text}
+              isLazy={false}>
+              <Button
+                icon="arrowUp"
+                onPress={_onSubmit}
+                size={THEME_SIZE.SMALL}
+              />
+            </Appearable>
           </Wrapper>
         }
         error={errors?.text}
@@ -52,9 +62,10 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({ bottomElement, onSubmit
         isAutoFocus
         isBlurOnSubmit={false}
         isClearable={false}
-        numberOfLines={3}
+        numberOfLines={2}
         onChange={(v) => handleChange('text')(v)}
         onSubmit={_onSubmit}
+        placeholder={placeholder}
         round
         value={values.text}
       />

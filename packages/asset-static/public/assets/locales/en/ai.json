@@ -1,0 +1,4 @@
+{
+  "hello": "hello {{value}}",
+  "howCanIHelpYouToday": "how can I help you today?"
+}

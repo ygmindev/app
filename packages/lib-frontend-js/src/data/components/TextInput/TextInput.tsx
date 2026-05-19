@@ -304,16 +304,16 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
               onKey={(key, isMeta, preventDefault) => {
                 switch (key) {
                   case TEXT_INPUT_KEY.ENTER: {
+                    if (!valueControlled) {
+                      return preventDefault();
+                    }
                     if (isMeta) {
                       handleChange(
                         `${valueControlled?.substring(0, selection.start)}\n${valueControlled?.substring(selection.end)}`,
                       );
                       selectionSet({ end: selection.start + 1, start: selection.start + 1 });
                     } else {
-                      if (valueControlled) {
-                        return onSubmit?.(valueControlled);
-                      }
-                      preventDefault();
+                      return onSubmit?.(valueControlled);
                     }
                     break;
                   }
@@ -326,7 +326,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
               }}
               onSelection={selectionSet}
               onSubmit={onSubmit}
-              placeholder={isActive ? placeholder : undefined}
+              placeholder={valueControlled ? undefined : placeholder}
               ref={inputRef}
               selection={selection}
               testID={testID}
