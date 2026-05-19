@@ -18,7 +18,7 @@ export type _TextInputPropsModel = {
   onBlur?(): void;
   onChange?(value?: string): void;
   onFocus?(): void;
-  onKey?(key: string, isMeta?: boolean): void;
+  onKey?(key: string, isMeta?: boolean, preventDefault: () => void): void;
   onSelection?(params: { end: number; start: number }): void;
   onSubmit?(value?: string): void;
 };

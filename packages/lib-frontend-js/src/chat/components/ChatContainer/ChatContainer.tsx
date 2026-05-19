@@ -21,7 +21,7 @@ export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
   return (
     <MainLayout
       {...wrapperProps}
-      bottomElement={<ChatForm onAdd={onSubmit} />}
+      bottomElement={<ChatForm onSubmit={onSubmit} />}
       isFullHeight
       isFullWidth
       round>

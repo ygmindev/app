@@ -45,6 +45,7 @@ import { useImperativeHandle, useRef, useState } from 'react';
 export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   autoComplete,
   beforeSubmit,
+  bottomElement,
   defaultValue,
   elementState,
   height,
@@ -54,8 +55,8 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   isCenter,
   isClearable = true,
   isRightElementFixed = true,
-  isTransparent,
-  keyboard, // TODO: keyboard type from data type
+  isTransparent, // TODO: keyboard type from data type
+  keyboard,
   label,
   language,
   leftElement,
@@ -220,7 +221,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
   };
 
   const Component = mask ? _MaskedInput : _TextInput;
-  console.warn(selection);
 
   return (
     <FocusableWrapper
@@ -228,7 +228,6 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       border={!isTransparent}
       elementState={elementStateControlled}
       height={heightF}
-      isRow
       isTransparent={isTransparent}
       onElementStateChange={elementStateControlledSet}
       p={!!numberOfLines}
@@ -236,100 +235,110 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       position={SHAPE_POSITION.RELATIVE}
       ref={focusableRef}
       s={THEME_SIZE.SMALL}>
-      {leftElementF}
-
       <Wrapper
-        bottom={0}
-        flex
-        left={0}
-        position={isCenter ? SHAPE_POSITION.ABSOLUTE : SHAPE_POSITION.RELATIVE}
-        right={0}
-        top={0}>
-        {/* TODO: to item? */}
-        <Wrapper
-          animation={containerAnimation}
-          elementState={elementStateControlled}
-          isAlign
-          isCenter
-          isRow
-          left={0}
-          position={SHAPE_POSITION.ABSOLUTE}
-          right={isCenter ? 0 : undefined}
-          style={isCenter ? { transformOrigin: 'top' } : { transformOrigin: `0px 0px` }}
-          zIndex={-1}>
-          {icon && (
-            <Icon
-              icon={icon}
-              style={elementStateControlled && textAnimation.states?.[elementStateControlled]}
-            />
-          )}
-
-          {label && (
-            <AsyncText
-              animation={textAnimation}
-              casing={TEXT_CASING.CAPITALIZE}
-              elementState={elementStateControlled}>
-              {label}
-            </AsyncText>
-          )}
-        </Wrapper>
+        isRow
+        s={THEME_SIZE.SMALL}>
+        {leftElementF}
 
         <Wrapper
-          align={label ? FLEX_ALIGN.END : FLEX_ALIGN.CENTER}
+          bottom={0}
           flex
-          isRow>
-          <Component
-            autoComplete={autoComplete}
-            foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
-            height={
-              height ??
-              (numberOfLines
-                ? theme.font.lineHeight * numberOfLines
-                : theme.shape.size[THEME_SIZE.SMALL])
-            }
-            isBlurOnSubmit={isBlurOnSubmit}
-            isCenter={isCenter}
-            isDisabled={isBlocked}
-            keyboard={keyboard}
-            language={language}
-            mask={mask}
-            maxLength={maxLength}
-            numberOfLines={numberOfLines}
-            onBlur={() => void handleFocus(false)}
-            onChange={handleChange}
-            onFocus={() => void handleFocus(true)}
-            onKey={(key, isMeta) => {
-              switch (key) {
-                case TEXT_INPUT_KEY.ENTER: {
-                  if (isMeta) {
-                    handleChange(
-                      `${valueControlled?.substring(0, selection.start)}\n${valueControlled?.substring(selection.end)}`,
-                    );
-                    selectionSet({ end: selection.start + 1, start: selection.start + 1 });
+          left={0}
+          position={isCenter ? SHAPE_POSITION.ABSOLUTE : SHAPE_POSITION.RELATIVE}
+          right={0}
+          top={0}>
+          {/* TODO: to item? */}
+          <Wrapper
+            animation={containerAnimation}
+            elementState={elementStateControlled}
+            isAlign
+            isCenter
+            isRow
+            left={0}
+            position={SHAPE_POSITION.ABSOLUTE}
+            right={isCenter ? 0 : undefined}
+            style={isCenter ? { transformOrigin: 'top' } : { transformOrigin: `0px 0px` }}
+            zIndex={-1}>
+            {icon && (
+              <Icon
+                icon={icon}
+                style={elementStateControlled && textAnimation.states?.[elementStateControlled]}
+              />
+            )}
+
+            {label && (
+              <AsyncText
+                animation={textAnimation}
+                casing={TEXT_CASING.CAPITALIZE}
+                elementState={elementStateControlled}>
+                {label}
+              </AsyncText>
+            )}
+          </Wrapper>
+
+          <Wrapper
+            align={label ? FLEX_ALIGN.END : FLEX_ALIGN.CENTER}
+            flex
+            isRow
+            pTop={!!label}>
+            <Component
+              autoComplete={autoComplete}
+              foregroundColor={theme.color.palette[THEME_COLOR_MORE.SURFACE][THEME_ROLE.CONTRAST]}
+              height={
+                height ??
+                (numberOfLines
+                  ? theme.font.lineHeight * numberOfLines
+                  : theme.shape.size[THEME_SIZE.SMALL])
+              }
+              isBlurOnSubmit={isBlurOnSubmit}
+              isCenter={isCenter}
+              isDisabled={isBlocked}
+              keyboard={keyboard}
+              language={language}
+              mask={mask}
+              maxLength={maxLength}
+              numberOfLines={numberOfLines}
+              onBlur={() => void handleFocus(false)}
+              onChange={handleChange}
+              onFocus={() => void handleFocus(true)}
+              onKey={(key, isMeta, preventDefault) => {
+                switch (key) {
+                  case TEXT_INPUT_KEY.ENTER: {
+                    if (isMeta) {
+                      handleChange(
+                        `${valueControlled?.substring(0, selection.start)}\n${valueControlled?.substring(selection.end)}`,
+                      );
+                      selectionSet({ end: selection.start + 1, start: selection.start + 1 });
+                    } else {
+                      if (valueControlled) {
+                        return onSubmit?.(valueControlled);
+                      }
+                      preventDefault();
+                    }
                     break;
-                  } else {
-                    return onSubmit?.(valueControlled);
+                  }
+                  case TEXT_INPUT_KEY.ESCAPE: {
+                    isClearable && handleChange('');
+                    break;
                   }
                 }
-                case TEXT_INPUT_KEY.ESCAPE: {
-                  isClearable && handleChange('');
-                  break;
-                }
-              }
-              onKey?.(key);
-            }}
-            onSelection={selectionSet}
-            onSubmit={onSubmit}
-            placeholder={isActive ? placeholder : undefined}
-            ref={inputRef}
-            selection={selection}
-            testID={testID}
-            value={valueControlled}
-          />
+                onKey?.(key, isMeta, preventDefault);
+              }}
+              onSelection={selectionSet}
+              onSubmit={onSubmit}
+              placeholder={isActive ? placeholder : undefined}
+              ref={inputRef}
+              selection={selection}
+              testID={testID}
+              value={valueControlled}
+            />
+          </Wrapper>
         </Wrapper>
+
+        {rightElementF}
       </Wrapper>
 
-      {rightElementF}
+      {bottomElement}
     </FocusableWrapper>
   );
 };

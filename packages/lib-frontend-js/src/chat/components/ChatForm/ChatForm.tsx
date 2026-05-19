@@ -5,15 +5,14 @@ import { type LFCModel } from '@lib/frontend/core/core.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 
-export const ChatForm: LFCModel<ChatFormPropsModel> = ({ onAdd, ...props }) => {
+export const ChatForm: LFCModel<ChatFormPropsModel> = ({ bottomElement, onSubmit, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const theme = useTheme();
   const currentUser = useCurrentUser();
 
   const { errors, handleChange, handleReset, handleSubmit, values } = useForm<{
@@ -21,11 +20,11 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({ onAdd, ...props }) => {
   }>({
     initialValues: { text: '' },
     onSubmit: async ({ text }) => {
-      await onAdd?.({ created: new DateTime(), createdBy: currentUser ?? undefined, text });
+      await onSubmit?.({ created: new DateTime(), createdBy: currentUser ?? undefined, text });
     },
   });
 
-  const onSubmit = async (): Promise<void> => {
+  const _onSubmit = async (): Promise<void> => {
     handleSubmit();
     void sleep().then(handleReset);
   };
@@ -33,24 +32,29 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({ onAdd, ...props }) => {
   return (
     <Wrapper
       {...wrapperProps}
-      isAlign
-      isRow>
+      s={THEME_SIZE.SMALL}>
       <TextInput
         border
+        bottomElement={
+          <Wrapper
+            isRow
+            justify={FLEX_JUSTIFY.END}>
+            {bottomElement && <Wrapper flex>{bottomElement}</Wrapper>}
+            <Button
+              icon="arrowUp"
+              onPress={_onSubmit}
+              size={THEME_SIZE.SMALL}
+            />
+          </Wrapper>
+        }
         error={errors?.text}
         flex
+        isAutoFocus
         isBlurOnSubmit={false}
         isClearable={false}
         numberOfLines={3}
         onChange={(v) => handleChange('text')(v)}
-        onSubmit={onSubmit}
-        rightElement={
-          <Button
-            icon="arrowUp"
-            onPress={onSubmit}
-            size={THEME_SIZE.SMALL}
-          />
-        }
+        onSubmit={_onSubmit}
         round
         value={values.text}
       />

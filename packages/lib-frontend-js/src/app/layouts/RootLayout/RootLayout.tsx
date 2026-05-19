@@ -1,6 +1,5 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { type RootLayoutPropsModel } from '@lib/frontend/app/layouts/RootLayout/RootLayout.models';
-import { SignInButton } from '@lib/frontend/auth/components/SignInButton/SignInButton';
 import { KeyboardContainer } from '@lib/frontend/core/components/KeyboardContainer/KeyboardContainer';
 import { PortalHost } from '@lib/frontend/core/components/PortalHost/PortalHost';
 import { Title } from '@lib/frontend/core/components/Title/Title';
@@ -52,14 +51,6 @@ export const RootLayout: LFCModel<RootLayoutPropsModel> = ({ children, ...props 
                 p={THEME_SIZE_MORE.XSMALL}
               />
             </Appearable>
-
-            <SignInButton
-              m
-              position={SHAPE_POSITION.ABSOLUTE}
-              right={0}
-              top={0}
-              zIndex={1}
-            />
 
             <Wrapper
               flex

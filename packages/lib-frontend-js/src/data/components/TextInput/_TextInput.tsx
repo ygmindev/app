@@ -51,28 +51,28 @@ export const getTextInputParams = (): ComposeComponentParamsModel<
     multiline: !!numberOfLines,
     numberOfLines,
     onBlur,
-    onChangeText: isDisabled ? undefined : (v) => onChange && onChange(v),
+    onChangeText: isDisabled ? undefined : (v) => onChange?.(v),
     onFocus,
     onKeyPress: onKey
       ? (e) => {
           const { key, metaKey } = e.nativeEvent as { key: string; metaKey: boolean };
           switch (key) {
             case 'ArrowDown':
-              return onKey(TEXT_INPUT_KEY.DOWN, metaKey);
+              return onKey(TEXT_INPUT_KEY.DOWN, metaKey, e.preventDefault);
             case 'ArrowLeft':
-              return onKey(TEXT_INPUT_KEY.LEFT, metaKey);
+              return onKey(TEXT_INPUT_KEY.LEFT, metaKey, e.preventDefault);
             case 'ArrowRight':
-              return onKey(TEXT_INPUT_KEY.RIGHT, metaKey);
+              return onKey(TEXT_INPUT_KEY.RIGHT, metaKey, e.preventDefault);
             case 'ArrowUp':
-              return onKey(TEXT_INPUT_KEY.UP, metaKey);
+              return onKey(TEXT_INPUT_KEY.UP, metaKey, e.preventDefault);
             case 'Backspace':
-              return onKey(TEXT_INPUT_KEY.REMOVE, metaKey);
+              return onKey(TEXT_INPUT_KEY.REMOVE, metaKey, e.preventDefault);
             case 'Enter':
-              return onKey(TEXT_INPUT_KEY.ENTER, metaKey);
+              return onKey(TEXT_INPUT_KEY.ENTER, metaKey, e.preventDefault);
             case 'Escape':
-              return onKey(TEXT_INPUT_KEY.ESCAPE, metaKey);
+              return onKey(TEXT_INPUT_KEY.ESCAPE, metaKey, e.preventDefault);
             default:
-              return onKey(key, metaKey);
+              return onKey(key, metaKey, e.preventDefault);
           }
         }
       : undefined,

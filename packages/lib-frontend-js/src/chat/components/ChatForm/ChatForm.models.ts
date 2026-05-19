@@ -1,7 +1,8 @@
+import { type TextInputPropsModel } from '@lib/frontend/data/components/TextInput/TextInput.models';
 import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
 
-export type ChatFormPropsModel = {
+export type ChatFormPropsModel = Pick<TextInputPropsModel, 'bottomElement'> & {
   currentUser?: Partial<UserModel>;
-  onAdd?(message: Partial<MessageModel>): Promise<void>;
+  onSubmit?(message: Partial<MessageModel>): Promise<void>;
 };

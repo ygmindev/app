@@ -6,6 +6,7 @@ import { type ReactElement } from 'react';
 export type TextInputPropsModel = Omit<InputPropsModel, 'onSubmit'> &
   SizablePropsModel &
   Omit<_TextInputPropsModel, 'foregroundColor' | 'height'> & {
+    bottomElement?: ReactElement | null;
     isAutoFocus?: boolean;
     isClearable?: boolean;
     isRightElementFixed?: boolean;
