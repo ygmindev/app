@@ -110,12 +110,7 @@ export const _lint = ({
     importPlugin.recommended,
 
     ...jsoncPlugin.configs['flat/recommended-with-jsonc'],
-    {
-      rules: {
-        'jsonc/sort-keys': ['error'],
-      },
-    },
-
+    
     {
       plugins: {
         'simple-import-sort': simpleImportSortPlugin,
@@ -140,9 +135,9 @@ export const _lint = ({
       },
 
       rules: {
-        'perfectionist/sort-enums': ['error', { type: 'alphabetical' }],
-        'perfectionist/sort-imports': ['error', { type: 'alphabetical', newlinesBetween: 1 }],
-        'perfectionist/sort-objects': ['error', { type: 'alphabetical' }],
+        'perfectionist/sort-enums': ['error', { type: 'alphabetical', ignoreCase: false }],
+        'perfectionist/sort-imports': ['error', { type: 'alphabetical', newlinesBetween: 1, ignoreCase: false }],
+        'perfectionist/sort-objects': ['error', { type: 'alphabetical', ignoreCase: false }],
       },
     },
     {
