@@ -3,7 +3,6 @@ from typing import Any, Callable, Union, cast, dataclass_transform, get_args, ge
 import strawberry
 from beanie import Document
 from bson import ObjectId
-from lib_shared.core.utils.inspect_class import inspect_class
 from pydantic.fields import FieldInfo, ModelPrivateAttr
 from pydantic_core import PydanticUndefined
 
@@ -49,9 +48,40 @@ def _Entity(
     is_graphql: bool = True,
 ) -> Callable[[type[TType]], type[TType]]:
     def wrapper(cls: type[TType]) -> type[TType]:
-        inspection = inspect_class(cls, is_deep=False)
-        annotations = inspection["annotations"]
-        defaults = inspection["defaults"]
+
+        annotations: dict[str, Any] = {}
+        defaults: dict[str, Any] = {}
+        methods: dict[str, Any] = {}
+
+        bases = reversed(cls.__mro__)
+        for base in bases:
+            if base is object:
+                continue
+            base_annotations = getattr(base, "__annotations__", {})
+            annotations.update(base_annotations)
+            for k, v in vars(base).items():
+                if callable(v) or isinstance(v, (classmethod, staticmethod, property)):
+                    if not (k.startswith("__") and k.endswith("__")):
+                        methods[k] = v
+                    continue
+
+                if k.startswith("_") or (
+                    k not in annotations and k not in base_annotations
+                ):
+                    continue
+
+                defaults[k] = v
+
+        bases = set()
+        for base in cls.__bases__:
+            if base is object:
+                continue
+            if base not in bases and not any(
+                base != other and isinstance(other, type) and issubclass(other, base)
+                for other in bases
+            ):
+                bases.add(base)
+        bases = list(bases) or [object]
 
         if is_database:
             database_ns: dict[str, Any] = {
@@ -65,7 +95,6 @@ def _Entity(
                 ):
                     database_ns[k] = v
 
-            bases = list(inspection["bases"])
             if Document not in bases:
                 bases.insert(0, Document)
             cls = cast(type[TType], type(cls.__name__, tuple(bases), database_ns))

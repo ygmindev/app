@@ -1,40 +1,37 @@
-import asyncio
+from typing import Optional
 
-from lib_config.http.server.server_config_ai import server_config_ai
-from lib_shared.http.utils.server.server import Server
-
-
-async def main():
-    server = Server(
-        name="server",
-        config=server_config_ai,
-    )
-    await server.run()
+from lib_model.core.utils.entity.entity import Entity
+from lib_shared.core.utils.base_model.base_model import BaseModel
 
 
-asyncio.run(main())
+class X(BaseModel):
+    a: str
+    b: Optional[int] = None
+
+
+@Entity(name="XEntity")
+class XEntity(X): ...
+
+
+x = X(a="a")
+print("@@@x", x, "\n")
+
+x_entity = XEntity(a="a")
+print("@@@x_entity", x_entity, "\n")
 
 
 # import asyncio
 
-# from lib_ai.agent.utils.agent.agent import Agent
-# from lib_ai.agent.utils.agent_state.agent_state import AgentState
+# from lib_config.http.server.server_config_ai import server_config_ai
+# from lib_shared.http.utils.server.server import Server
 
 
 # async def main():
-#     state = AgentState()
-#     agent = Agent(
-#         name="test_agent",
-#         descriptions=["", ""],
-#         initial_state=state,
+#     server = Server(
+#         name="server",
+#         config=server_config_ai,
 #     )
-#     async for x in agent.stream_prompt("what is your name?"):
-#         print(x)
-#     # server = Server(
-#     #     name="server",
-#     #     config=server_config_ai,
-#     # )
-#     # await server.run()
+#     await server.run()
 
 
 # asyncio.run(main())
