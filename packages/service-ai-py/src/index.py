@@ -9,7 +9,7 @@ class X(BaseModel):
     b: Optional[int] = None
 
 
-@Entity(name="XEntity")
+@Entity()
 class XEntity(X): ...
 
 

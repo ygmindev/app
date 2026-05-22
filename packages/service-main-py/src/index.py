@@ -4,7 +4,7 @@ import strawberry
 from lib_model.core.utils.entity.entity import Entity
 
 
-@Entity(name="X")
+@Entity()
 class X:
     a: float
     b: str

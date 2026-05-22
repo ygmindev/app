@@ -1,161 +1,131 @@
-from typing import Any, Callable, Union, cast, dataclass_transform, get_args, get_origin
+from __future__ import annotations
+
+import functools
+from typing import Any, Callable, Union, dataclass_transform, get_args, get_origin
 
 import strawberry
-from beanie import Document
+from beanie import Document, PydanticObjectId
 from bson import ObjectId
 from pydantic.fields import FieldInfo, ModelPrivateAttr
 from pydantic_core import PydanticUndefined
 
 from .entity_models import EntityModelType, TType
 
+_ObjectId = strawberry.scalar(
+    ObjectId,
+    name="ObjectId",
+    serialize=str,
+    parse_value=lambda x: ObjectId(str(x)),
+)
+
+_OBJECT_IDS: frozenset[type] = frozenset({ObjectId, PydanticObjectId})
+
 
 def _is_optional(annotation: Any) -> bool:
     return get_origin(annotation) is Union and type(None) in get_args(annotation)
 
 
-_ObjectIDGraphql = strawberry.scalar(
-    ObjectId,
-    name="MongoID",
-    description="MongoDB ObjectId serialised as a string",
-    serialize=str,
-    parse_value=lambda x: ObjectId(str(x)),
-)
+@functools.lru_cache(maxsize=None)
+def _inspect_class(
+    cls: type,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    annotations: dict[str, Any] = {}
+    defaults: dict[str, Any] = {}
+    methods: dict[str, Any] = {}
 
+    for base in reversed(cls.__mro__):
+        if base is object:
+            continue
 
-def _get_graphql_annotation(annotation: Any) -> Any:
-    try:
-        from beanie import PydanticObjectId
+        base_annotations = getattr(base, "__annotations__", {})
+        annotations.update(base_annotations)
 
-        _OBJECT_IDS = (ObjectId, PydanticObjectId)
-    except ImportError:
-        _OBJECT_IDS = (ObjectId,)
-
-    origin = get_origin(annotation)
-
-    if origin is Union:
-        mapped_args = tuple(_get_graphql_annotation(a) for a in get_args(annotation))
-        return Union[mapped_args]
-
-    if annotation in _OBJECT_IDS:
-        return _ObjectIDGraphql
-
-    return annotation
-
-
-def _Entity(
-    name: str,
-    is_database: bool = False,
-    is_graphql: bool = True,
-) -> Callable[[type[TType]], type[TType]]:
-    def wrapper(cls: type[TType]) -> type[TType]:
-
-        annotations: dict[str, Any] = {}
-        defaults: dict[str, Any] = {}
-        methods: dict[str, Any] = {}
-
-        bases = reversed(cls.__mro__)
-        for base in bases:
-            if base is object:
+        for k, v in vars(base).items():
+            if k.startswith("__") and k.endswith("__"):
                 continue
-            base_annotations = getattr(base, "__annotations__", {})
-            annotations.update(base_annotations)
-            for k, v in vars(base).items():
-                if callable(v) or isinstance(v, (classmethod, staticmethod, property)):
-                    if not (k.startswith("__") and k.endswith("__")):
-                        methods[k] = v
-                    continue
-
-                if k.startswith("_") or (
-                    k not in annotations and k not in base_annotations
-                ):
-                    continue
-
-                defaults[k] = v
-
-        bases = set()
-        for base in cls.__bases__:
-            if base is object:
-                continue
-            if base not in bases and not any(
-                base != other and isinstance(other, type) and issubclass(other, base)
-                for other in bases
+            if k in base_annotations:
+                if isinstance(v, (FieldInfo, ModelPrivateAttr)):
+                    defaults[k] = v
+                elif not isinstance(
+                    v, (classmethod, staticmethod, property)
+                ) and not callable(v):
+                    defaults[k] = v
+            elif isinstance(v, (classmethod, staticmethod, property)) or (
+                callable(v) and not isinstance(v, type)
             ):
-                bases.add(base)
-        bases = list(bases) or [object]
+                methods[k] = v
 
-        if is_database:
-            database_ns: dict[str, Any] = {
-                "__annotations__": {},
-                "Settings": type("Settings", (), {"name": name}),
-            }
+    return annotations, defaults, methods
 
-            for k, v in vars(cls).items():
-                if not k.startswith("__") and (
-                    callable(v) or isinstance(v, (classmethod, staticmethod))
-                ):
-                    database_ns[k] = v
 
-            if Document not in bases:
-                bases.insert(0, Document)
-            cls = cast(type[TType], type(cls.__name__, tuple(bases), database_ns))
-
-        if is_graphql:
-            graphql_ns: dict[str, Any] = {"__annotations__": {}}
-
-            for k, v in annotations.items():
-                graphql_ns["__annotations__"][k] = _get_graphql_annotation(v)
-                default = defaults.get(k)
-
-                if isinstance(default, (FieldInfo, ModelPrivateAttr)):
-                    description = getattr(default, "description", None)
-                    default_factory = getattr(default, "default_factory", None)
-                    default_value = getattr(default, "default", PydanticUndefined)
-                    args: dict[str, Any] = {"description": description}
-                    if default_factory is not None:
-                        args["default_factory"] = default_factory
-                    elif default_value is not PydanticUndefined:
-                        args["default"] = default_value
-                    graphql_ns[k] = strawberry.field(**args)
-                elif default is not None:
-                    graphql_ns[k] = strawberry.field(default=default)
-                elif _is_optional(v):
-                    graphql_ns[k] = strawberry.field(default=None)
-
-            for k, v in vars(cls).items():
-                if not k.startswith("__") and (
-                    callable(v) or isinstance(v, (classmethod, staticmethod))
-                ):
-                    graphql_ns[k] = v
-
-            cls.__gql__ = strawberry.type(
-                type(f"{cls.__name__}GQL", (object,), graphql_ns)
-            )
-
-        return cls
-
-    return wrapper
+def _bases(cls: type) -> list[type]:
+    candidates = [b for b in cls.__bases__ if b is not object]
+    if not candidates:
+        return [object]
+    return [
+        base
+        for base in candidates
+        if not any(
+            other is not base and issubclass(other, base) for other in candidates
+        )
+    ] or [object]
 
 
 @dataclass_transform()
 def Entity(
-    name: str,
     is_database: bool = False,
     is_graphql: bool = True,
 ) -> Callable[[type[TType]], type[TType]]:
-    _wrapper = _Entity(
-        name,
-        is_database,
-        is_graphql,
-    )
-
     def wrapper(cls: type[TType]) -> type[TType]:
-        new_cls = cls
-        is_entity = any(
-            isinstance(base, type) and issubclass(base, EntityModelType)
+        if not any(
+            base is not EntityModelType and issubclass(base, EntityModelType)
             for base in cls.__mro__[1:]
-        )
-        if not is_entity:
-            new_cls = type(cls.__name__, (new_cls, EntityModelType), {})
-        return _wrapper(new_cls)
+            if isinstance(base, type)
+        ):
+            cls = type(cls.__name__, (cls, EntityModelType), {})
+
+        annotations, defaults, methods = _inspect_class(cls)
+        bases = _bases(cls)
+
+        if is_database:
+            db_ns: dict[str, Any] = {
+                "__annotations__": {},
+                "Settings": type("Settings", (), {"name": cls.__name__}),
+                **methods,
+            }
+            if Document not in bases:
+                bases.insert(0, Document)
+            cls = type(cls.__name__, tuple(bases), db_ns)
+
+        if is_graphql:
+            gql_ns: dict[str, Any] = {"__annotations__": {}, **methods}
+
+            for k, annotation in annotations.items():
+                default_value = defaults.get(k)
+
+                if isinstance(default_value, (FieldInfo, ModelPrivateAttr)):
+                    description = getattr(default_value, "description", None)
+                    default_factory = getattr(default_value, "default_factory", None)
+                    raw_default = getattr(default_value, "default", PydanticUndefined)
+
+                    kwargs: dict[str, Any] = {"description": description}
+                    if default_factory is not None:
+                        kwargs["default_factory"] = default_factory
+                    elif raw_default is not PydanticUndefined:
+                        kwargs["default"] = raw_default
+                    elif _is_optional(annotation):
+                        kwargs["default"] = None
+                    gql_ns[k] = strawberry.field(**kwargs)
+                if default_value is not None:
+                    gql_ns[k] = strawberry.field(default=default_value)
+                if _is_optional(annotation):
+                    gql_ns[k] = strawberry.field(default=None)
+
+                gql_ns["__annotations__"][k] = (
+                    _ObjectId if annotation in _OBJECT_IDS else annotation
+                )
+            cls.__gql__ = strawberry.type(type(cls.__name__, (object,), gql_ns))
+
+        return cls
 
     return wrapper
