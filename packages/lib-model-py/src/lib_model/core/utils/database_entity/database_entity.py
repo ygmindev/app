@@ -4,11 +4,11 @@ from typing import Any
 
 from beanie import Document
 
-from lib_model.core.utils.entity.entity import _Entity
+from lib_model.core.utils.entity.entity import Entity
 
 
 class _DatabaseEntity(
-    _Entity,
+    Entity,
     Document,
 ):
     def __init_subclass__(

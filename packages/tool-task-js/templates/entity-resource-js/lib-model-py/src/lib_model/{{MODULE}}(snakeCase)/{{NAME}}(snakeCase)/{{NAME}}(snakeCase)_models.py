@@ -1,6 +1,4 @@
-from lib_model.resource.entity_resource.entity_resource_models import EntityResourceModel
+# template version: 1.0.0
 
 
-class {{NAME}}(pascalCase)Model(EntityResourceModel):
-    ...
-
+class {{NAME}}(pascalCase)Model: ...

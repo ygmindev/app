@@ -1,6 +1,7 @@
 import asyncio
 
-from lib_config.database.database import ChatMessage, database_config
+from lib_config.database.database import database_config
+from lib_model.chat.chat.chat import Chat
 from lib_shared.database.utils.database.database import Database
 
 
@@ -9,7 +10,7 @@ async def main():
 
     try:
         await database.initialize()
-        await database.create(ChatMessage(message="hello world!"))
+        await database.create(Chat(content="hello world!"))
     finally:
         await database.close()
 

@@ -1,1 +1,1 @@
-CHAT_RESOURCE_NAME = "chat"
+CHAT_RESOURCE_NAME = "Chat"

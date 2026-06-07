@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Any, ClassVar, Union, get_args, get_origin
 
 import strawberry
 from beanie import PydanticObjectId
 from bson import ObjectId
+from lib_shared.core.utils.field.field import Field
+from lib_shared.core.utils.private_field.private_field import PrivateField
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo, ModelPrivateAttr
 from pydantic_core import PydanticUndefined
@@ -88,4 +91,6 @@ class _Entity(BaseModel):
             cls.__gql__ = strawberry.type(type(cls.__name__, (object,), ns))
 
 
-Entity = _Entity
+class Entity(_Entity):
+    created: datetime = Field(default_value=datetime.now)
+    _id: str = PrivateField(default_value=PydanticObjectId)
