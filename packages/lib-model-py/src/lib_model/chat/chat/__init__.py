@@ -1,5 +1,5 @@
 # template version: 1.0.0
 
-from .message import Chat
+from .chat import Chat
 
 __all__ = ["Chat"]

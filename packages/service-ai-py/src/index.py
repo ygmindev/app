@@ -1,37 +1,17 @@
-from typing import Optional
+import asyncio
 
-from lib_model.core.utils.entity.entity import Entity
-from lib_shared.core.utils.base_model.base_model import BaseModel
-
-
-class X(BaseModel):
-    a: str
-    b: Optional[int] = None
+from lib_config.database.database import ChatMessage, database_config
+from lib_shared.database.utils.database.database import Database
 
 
-@Entity()
-class XEntity(X): ...
+async def main():
+    database = Database(config=database_config)
+
+    try:
+        await database.initialize()
+        await database.create(ChatMessage(message="hello world!"))
+    finally:
+        await database.close()
 
 
-x = X(a="a")
-print("@@@x", x, "\n")
-
-x_entity = XEntity(a="a")
-print("@@@x_entity", x_entity, "\n")
-
-
-# import asyncio
-
-# from lib_config.http.server.server_config_ai import server_config_ai
-# from lib_shared.http.utils.server.server import Server
-
-
-# async def main():
-#     server = Server(
-#         name="server",
-#         config=server_config_ai,
-#     )
-#     await server.run()
-
-
-# asyncio.run(main())
+asyncio.run(main())

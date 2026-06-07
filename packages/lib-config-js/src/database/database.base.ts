@@ -31,6 +31,7 @@ export const databaseConfig = new Config<DatabaseConfigModel, _DatabaseConfigMod
 
     return {
       ...DATABASE_CONFIG,
+
       database: environment.variables.SERVER_DB_MONGO_NAME,
 
       entities: filterNil([

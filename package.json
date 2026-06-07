@@ -1,38 +1,35 @@
 {
-    "$schema": "https://json.schemastore.org/package.json",
-    "bundledDependencies": [
-        "@app/native",
-        "@app/web",
-        "@app/web-internal",
-        "@app/web-orchestrator",
-        "@app/web-template",
-        "@asset/static",
-        "@service/job",
-        "@service/main",
-        "@service/lambda",
-        "@service/lambda-crawl",
-        "@lib/backend",
-        "@lib/config",
-        "@lib/frontend",
-        "@lib/model",
-        "@lib/shared",
-        "@tool/task"
-    ],
-    "engines": {
-        "node": "24.x"
-    },
-    "license": "MIT",
-    "name": "app",
-    "private": true,
-    "type": "module",
-    "version": "0.0.0",
-    "bin": {
-        "run": "./packages/tool-task-js/src/cli.js"
-    },
-    "scripts": {
-        "run": "./packages/tool-task-js/src/cli.js"
-    },
-    "workspaces": [
-        "packages/*"
-    ]
+  "$schema": "https://json.schemastore.org/package.json",
+  "bundledDependencies": [
+    "@app/native",
+    "@app/web",
+    "@app/web-internal",
+    "@app/web-orchestrator",
+    "@app/web-template",
+    "@asset/static",
+    "@service/job",
+    "@service/main",
+    "@service/lambda",
+    "@service/lambda-crawl",
+    "@lib/backend",
+    "@lib/config",
+    "@lib/frontend",
+    "@lib/model",
+    "@lib/shared",
+    "@tool/task"
+  ],
+  "engines": {
+    "node": "24.x"
+  },
+  "license": "MIT",
+  "name": "app",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "bin": {
+    "run": "./packages/tool-task-js/src/cli.js"
+  },
+  "scripts": {
+    "run": "./packages/tool-task-js/src/cli.js"
+  }
 }

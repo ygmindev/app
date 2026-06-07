@@ -1,10 +1,5 @@
-from lib_config.database import database_config
+# template version: 1.0.0
 
-from lib_shared.database.utils.database._database import _Database
-from lib_shared.database.utils.database.database_models import DatabaseModel
+from .database import Database
 
-
-class Database(_Database, DatabaseModel): ...
-
-
-database = Database(database_config)
+__all__ = ["Database"]

@@ -20,7 +20,7 @@ export const _database = ({
     ensureIndexes: true,
     entities,
     name: type,
-    pool: { max: pool.max, min: 0 },
+    pool: { max: pool.max, min: pool.min },
   };
   if (username && password) {
     config.user = username;

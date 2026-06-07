@@ -58,6 +58,7 @@ export type EnvironmentConfigModel = {
   SERVER_DB_MONGO_PASSWORD: string;
   SERVER_DB_MONGO_URL: string;
   SERVER_DB_MONGO_USERNAME: string;
+  SERVER_DB_REDIS_URL: string;
   SERVER_EMAIL_HOST: string;
   SERVER_EMAIL_PASSWORD: string;
   SERVER_EMAIL_PORT?: string;

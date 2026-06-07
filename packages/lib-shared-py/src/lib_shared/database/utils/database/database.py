@@ -1,12 +1,17 @@
+# template version: 1.0.0
+
 from typing import Generic, Optional
 
 from beanie import init_beanie
 from lib_config.database.database_models import DatabaseConfigModel
-from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo import AsyncMongoClient
 
-from lib_shared.database.utils.database._database_models import (
+from lib_shared.database.utils.database.constants import UPSERT_STRATEGY
+
+from .database_models import (
     CreateManyResultModel,
     CreateResultModel,
+    DatabaseModel,
     DeleteResultModel,
     FindResultModel,
     TType,
@@ -14,27 +19,38 @@ from lib_shared.database.utils.database._database_models import (
     UpsertResultModel,
     _DatabaseModel,
 )
-from lib_shared.database.utils.database.constants import UPSERT_STRATEGY
 
 
-class _Database(_DatabaseModel, Generic[TType]):
+class _Database(
+    _DatabaseModel,
+    Generic[TType],
+):
+    config: DatabaseConfigModel
+
+    _client: AsyncMongoClient
+
     def __init__(
         self,
-        params: DatabaseConfigModel,
+        config: DatabaseConfigModel,
     ) -> None:
-        self._params = params
-        self._client = None
-        self._is_initialized = False
+        self.config = config
+        self._client = AsyncMongoClient(
+            host=self.config.host,
+            username=self.config.username,
+            password=self.config.password,
+            minPoolSize=self.config.min_pool,
+            maxPoolSize=self.config.max_pool,
+            connectTimeoutMS=self.config.timeout,
+        )
 
     async def initialize(self) -> None:
-        if self._is_initialized:
-            return
-        self._client = AsyncIOMotorClient(self._params.host)
         await init_beanie(
-            database=self._client[self._params.database],
-            document_models=self._params.resources,
+            database=self._client[self.config.database],
+            document_models=self.config.resources,
         )
-        self._is_initialized = True
+
+    async def close(self) -> None:
+        await self._client.close()
 
     async def create(
         self,
@@ -154,3 +170,9 @@ class _Database(_DatabaseModel, Generic[TType]):
                 success=result.success,
             )
         raise ValueError(f"Unknown upsert strategy: {strategy}")
+
+
+class Database(
+    _Database,
+    DatabaseModel,
+): ...

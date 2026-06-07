@@ -236,6 +236,7 @@ export const TextInput: RLFCModel<TextInputRefModel, TextInputPropsModel> = ({
       ref={focusableRef}
       s={THEME_SIZE.SMALL}>
       <Wrapper
+        flex
         isRow
         s={THEME_SIZE.SMALL}>
         {leftElementF}

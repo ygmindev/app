@@ -19,10 +19,7 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         str_strip_whitespace=True,
     )
 
-    def model_post_init(
-        self,
-        *args,
-    ) -> None:
+    def model_post_init(self, __context: Any) -> None:
         return self.post_init()
 
     def clone(

@@ -4,8 +4,8 @@ from typing import Generic, Optional, TypeVar
 import attr
 from lib_model.models import SourcedEntityResource
 
-from lib_shared.database.utils.database import Database
-from lib_shared.database.utils.database import database as db
+from lib_shared.database.utils.database2 import Database
+from lib_shared.database.utils.database2 import database as db
 
 TType = TypeVar("TType", bound=SourcedEntityResource)
 

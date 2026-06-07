@@ -1,11 +1,15 @@
-from typing import Any, Optional
+from typing import Any
 
 from lib_shared.core.utils.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
 
 
 class DatabaseConfigModel(BaseModel):
-    database: Optional[str] = None
+    database: str = Field()
     resources: list[Any] = []
-    host: Optional[str] = None
-    password: Optional[str] = None
-    username: Optional[str] = None
+    host: str = Field()
+    password: str = Field()
+    username: str = Field()
+    max_pool: int = Field()
+    min_pool: int = Field()
+    timeout: int = Field()

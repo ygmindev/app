@@ -1,4 +1,94 @@
-from lib_shared.database.utils.database._database_models import _DatabaseModel
+# template version: 1.0.0
+
+from typing import Generic, Optional, Protocol, TypeVar
+
+from lib_config.database.database_models import DatabaseConfigModel
+from lib_model.core.utils.database_entity.database_entity import DatabaseEntity
+from pydantic import BaseModel
+
+from lib_shared.database.utils.database.constants import UPSERT_STRATEGY
+
+TType = TypeVar("TType", bound=DatabaseEntity)
+
+
+class CreateResultModel(BaseModel, Generic[TType]):
+    result: TType
+    success: bool
+
+
+class CreateManyResultModel(BaseModel, Generic[TType]):
+    result: list[TType]
+    count: int
+    success: bool
+
+
+class FindResultModel(BaseModel, Generic[TType]):
+    result: list[TType]
+
+
+class UpdateResultModel(BaseModel, Generic[TType]):
+    result: TType
+    success: bool
+
+
+class DeleteResultModel(BaseModel):
+    result: str
+    success: bool
+
+
+class UpsertResultModel(BaseModel, Generic[TType]):
+    result: TType
+    success: bool
+
+
+class _DatabaseModel(Protocol, Generic[TType]):
+    def __init__(
+        self,
+        config: DatabaseConfigModel,
+    ) -> None: ...
+
+    async def initialize(self) -> None: ...
+
+    async def close(self) -> None: ...
+
+    async def create(
+        self,
+        data: TType,
+    ) -> CreateResultModel[TType]: ...
+
+    async def create_many(
+        self,
+        data: list[TType],
+        resource: type[TType],
+    ) -> CreateManyResultModel[TType]: ...
+
+    async def find(
+        self,
+        query: dict,
+        resource: type[TType],
+        limit: Optional[int] = None,
+        skip: Optional[int] = None,
+    ) -> FindResultModel[TType]: ...
+
+    async def update(
+        self,
+        data: TType,
+        update: dict,
+    ) -> UpdateResultModel[TType]: ...
+
+    async def delete(
+        self,
+        data: TType,
+    ) -> DeleteResultModel: ...
+
+    async def upsert(
+        self,
+        data: TType,
+        update: dict,
+        resource: type[TType],
+        index_field: str = "_id",
+        strategy: UPSERT_STRATEGY = UPSERT_STRATEGY.REPLACE,
+    ) -> UpsertResultModel[TType]: ...
 
 
 class DatabaseModel(_DatabaseModel): ...

@@ -1,0 +1,1 @@
+CHAT_RESOURCE_NAME = "chat"

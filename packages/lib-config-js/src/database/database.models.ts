@@ -15,7 +15,7 @@ export type DatabaseConfigModel = {
 
   password?: string;
 
-  pool: { max: number };
+  pool: { max: number; min: number };
 
   resourcePostfix: string;
 

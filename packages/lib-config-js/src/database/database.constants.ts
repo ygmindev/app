@@ -7,7 +7,7 @@ export const DATABASE_CONFIG: Pick<
   // 5 minutes
   expireSeconds: 60 * 5,
 
-  pool: { max: 10 },
+  pool: { max: 10, min: 5 },
 
   resourcePostfix: '.entity.ts',
 };

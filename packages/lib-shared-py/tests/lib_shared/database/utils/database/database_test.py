@@ -1,4 +1,4 @@
-from lib_shared.database.utils.database import Database
+from lib_shared.database.utils.database2 import Database
 
 
 def test_works() -> None:

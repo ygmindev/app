@@ -1,11 +1,13 @@
 from datetime import datetime
 from typing import Callable, Protocol, TypeVar
 
+from beanie import PydanticObjectId
 from lib_shared.core.utils.dataclass.dataclass import Dataclass
 from lib_shared.core.utils.field.field import Field
 
 
 class EntityModelType(Dataclass):
+    _id: str = Field(default_value=PydanticObjectId)
     created: datetime = Field(default_value=datetime.now)
 
 
