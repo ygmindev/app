@@ -22,7 +22,7 @@ class Chat(
     messages: Optional[list[Message]] = Field(
         relation=FieldRelation.ONE_TO_MANY,
         root="chat",
-        # default=None,
+        default=None,
     )
 
     name: Optional[str] = Field()

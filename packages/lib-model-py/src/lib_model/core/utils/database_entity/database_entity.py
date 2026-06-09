@@ -13,7 +13,7 @@ from lib_model.core.utils.entity.entity import Entity
 
 DocumentMeta = type(Document)
 
-_REGISTRY: list[type] = []
+_registry: list[type] = []
 
 
 class _DatabaseEntityMeta(DocumentMeta):
@@ -67,11 +67,11 @@ class _DatabaseEntityMeta(DocumentMeta):
             annotations["Settings"] = ClassVar[type]
 
         namespace["__annotations__"] = annotations
-        cls = super().__new__(mcs, cls_name, bases, namespace, **kwargs)
+        cls = super().__new__(mcs, cls_name, bases, namespace, **kwargs)  # type: ignore
 
-        _REGISTRY.append(cls)
-        types_namespace = {registered.__name__: registered for registered in _REGISTRY}
-        for registered in _REGISTRY:
+        _registry.append(cls)
+        types_namespace = {registered.__name__: registered for registered in _registry}
+        for registered in _registry:
             module = sys.modules.get(registered.__module__, None)
             module_ns = vars(module) if module else {}
             try:
