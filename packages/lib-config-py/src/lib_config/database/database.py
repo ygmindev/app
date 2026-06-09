@@ -1,11 +1,12 @@
 from lib_model.chat.chat.chat import Chat
+from lib_model.chat.message.message import Message
 from lib_shared.core.utils.get_env import get_env
 
 from .database_models import DatabaseConfigModel
 
 database_config = DatabaseConfigModel(
     database=get_env("SERVER_DB_MONGO_NAME") or "",
-    resources=[Chat],
+    resources=[Chat, Message],
     host=get_env("SERVER_DB_MONGO_URL") or "",
     password=get_env("SERVER_DB_MONGO_PASSWORD") or "",
     username=get_env("SERVER_DB_MONGO_USERNAME") or "",

@@ -1,0 +1,1 @@
+USER_RESOURCE_NAME = "User"

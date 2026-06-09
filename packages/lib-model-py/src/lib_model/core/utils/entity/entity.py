@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, ClassVar, Union, get_args, get_origin
+from typing import Any, ClassVar, Optional, Union, get_args, get_origin
 
 import strawberry
-from beanie import PydanticObjectId
+from beanie import BackLink, Link, PydanticObjectId
 from bson import ObjectId
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
@@ -24,6 +24,27 @@ _OBJECT_IDS: frozenset[type] = frozenset({ObjectId, PydanticObjectId})
 
 def _is_optional(annotation: Any) -> bool:
     return get_origin(annotation) is Union and type(None) in get_args(annotation)
+
+
+def _unwrap_beanie_type(annotation: Any) -> Any:
+    origin = get_origin(annotation)
+    args = get_args(annotation)
+
+    # Optional[X] / Union[X, None]
+    if origin is Union and len(args) == 2 and type(None) in args:
+        inner = next(a for a in args if a is not type(None))
+        unwrapped = _unwrap_beanie_type(inner)
+        return Optional[unwrapped]
+
+    # list[X]
+    if origin is list and args:
+        return list[_unwrap_beanie_type(args[0])]
+
+    # Link[X] or BackLink[X]
+    if origin in (Link, BackLink) and args:
+        return args[0]
+
+    return annotation
 
 
 class _Entity(BaseModel):
@@ -56,6 +77,9 @@ class _Entity(BaseModel):
                     continue
                 if get_origin(annotation) is ClassVar:
                     continue
+
+                # Unwrap Link/BackLink before handing to Strawberry
+                annotation = _unwrap_beanie_type(annotation)
 
                 field_info: FieldInfo | None = fields.get(k)
                 defaults = getattr(cls, k, PydanticUndefined)

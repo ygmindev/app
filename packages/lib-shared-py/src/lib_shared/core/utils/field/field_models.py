@@ -1,5 +1,7 @@
 from typing import Callable, Generic, Optional, Protocol, TypeVar
 
+from lib_shared.core.utils.field.field_constants import FieldRelation
+
 TType = TypeVar("TType")
 
 MISSING = object()
@@ -8,8 +10,10 @@ MISSING = object()
 class FieldModel(Protocol, Generic[TType]):
     def __call__(
         self,
-        default: TType = MISSING,
+        default=MISSING,
         default_value: Optional[Callable[[], TType]] = None,
         description: Optional[str] = None,
         is_private: bool = False,
+        relation: Optional[FieldRelation] = None,
+        root: Optional[str] = None,
     ) -> TType: ...

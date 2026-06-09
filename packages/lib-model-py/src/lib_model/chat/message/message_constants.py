@@ -1,1 +1,1 @@
-MESSAGE_RESOURCE_NAME = "message"
+MESSAGE_RESOURCE_NAME = "Message"
