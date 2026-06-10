@@ -6,7 +6,6 @@ TType = TypeVar("TType")
 class _EntityModel(Protocol):
     def __call__(
         self,
-        is_database: bool = False,
         is_graphql: bool = True,
     ) -> Callable[[type[TType]], type[TType]]: ...
 

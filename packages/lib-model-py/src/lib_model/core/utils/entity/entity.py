@@ -26,24 +26,17 @@ def _is_optional(annotation: Any) -> bool:
     return get_origin(annotation) is Union and type(None) in get_args(annotation)
 
 
-def _unwrap_beanie_type(annotation: Any) -> Any:
+def _unwrap(annotation: Any) -> Any:
     origin = get_origin(annotation)
     args = get_args(annotation)
-
-    # Optional[X] / Union[X, None]
     if origin is Union and len(args) == 2 and type(None) in args:
-        inner = next(a for a in args if a is not type(None))
-        unwrapped = _unwrap_beanie_type(inner)
+        inner = next(a for a in args if not isinstance(a, type(None)))
+        unwrapped = _unwrap(inner)
         return Optional[unwrapped]
-
-    # list[X]
     if origin is list and args:
-        return list[_unwrap_beanie_type(args[0])]
-
-    # Link[X] or BackLink[X]
+        return list[_unwrap(args[0])]
     if origin in (Link, BackLink) and args:
         return args[0]
-
     return annotation
 
 
@@ -78,8 +71,7 @@ class _Entity(BaseModel):
                 if get_origin(annotation) is ClassVar:
                     continue
 
-                # Unwrap Link/BackLink before handing to Strawberry
-                annotation = _unwrap_beanie_type(annotation)
+                annotation = _unwrap(annotation)
 
                 field_info: FieldInfo | None = fields.get(k)
                 defaults = getattr(cls, k, PydanticUndefined)
