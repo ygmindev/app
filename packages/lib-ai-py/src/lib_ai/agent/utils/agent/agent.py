@@ -17,13 +17,11 @@ from lib_ai.agent.utils.llm_message import LlmMessage
 from lib_ai.agent.utils.llm_message.constants import LLM_ROLE
 from lib_ai.agent.utils.skill import Skill
 from lib_ai.agent.utils.tool import Tool
+from lib_ai.graph.constants import GraphNodeType
 from lib_ai.graph.utils.directed_acyclic_graph.directed_acyclic_graph import (
     DirectedAcyclicGraph,
 )
-from lib_ai.graph.utils.directed_acyclic_graph.directed_acyclic_graph_models import (
-    GraphEdgeModel,
-    GraphNodeType,
-)
+from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
 from lib_ai.graph.utils.graph_node.graph_node import GraphNode
 from lib_ai.model.llm import Llm
 
@@ -43,7 +41,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
     def post_init(self) -> None:
         tool_map: Dict[str, Tool] = {}
         nodes: list[GraphNode] = []
-        edges: list[GraphEdgeModel] = []
+        edges: list[GraphEdge] = []
 
         descriptions: list[str] = [x.strip() for x in self.descriptions]
 
@@ -87,7 +85,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
                 params.messages.append(result)
                 return params
 
-        edges.append((GraphNodeType.START, "llm"))
+        edges.append(GraphEdge(start=GraphNodeType.START, end="llm"))
         nodes.append(_LlmNode())
 
         class _ToolsNode(GraphNode):
@@ -123,10 +121,16 @@ class _Agent(BaseModel, _AgentModel[TState]):
 
         if tool_map:
             nodes.append(_ToolsNode())
-            edges.append(("tools", "llm"))
-            edges.append(("llm", _llm_route, ["tools", GraphNodeType.END]))
+            edges.append(GraphEdge(start="tools", end="llm"))
+            edges.append(
+                GraphEdge(
+                    start="llm",
+                    end=_llm_route,
+                    mapping={"tools": "tools", GraphNodeType.END: GraphNodeType.END},
+                )
+            )
         else:
-            edges.append(("llm", GraphNodeType.END))
+            edges.append(GraphEdge(start="llm", end=GraphNodeType.END))
 
         self._graph = DirectedAcyclicGraph(
             initial_state=self.initial_state,

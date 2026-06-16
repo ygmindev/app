@@ -1,7 +1,7 @@
 # template version: 1.0.0
 
 
-from typing import Optional
+from typing import Optional, Sequence
 
 from lib_config.redis.redis_models import RedisConfigModel
 
@@ -20,7 +20,7 @@ class _Redis(_RedisModel, BaseModel):
 
     async def initialize(self) -> None:
         pool = redis.ConnectionPool.from_url(
-            self.config.host,
+            self.config.url,
             decode_responses=True,
             max_connections=self.config.max_pool,
         )
@@ -31,16 +31,22 @@ class _Redis(_RedisModel, BaseModel):
 
     def get(
         self,
-        key: str,
-    ) -> Optional[bytes | str]:
-        return self._client.get(key)
+        key: str | Sequence[str],
+    ) -> Optional[str]:
+        key = key if isinstance(key, str) else ":".join(key)
+        return f"{self._client.get(key)}"
 
     def set(
         self,
-        key: str,
+        key: str | Sequence[str],
         value: str,
+        expiration: Optional[int] = None,
     ) -> None:
-        self._client.set(key, value)
+        key = key if isinstance(key, str) else ":".join(key)
+        if expiration:
+            self._client.setex(key, expiration, value)
+        else:
+            self._client.set(key, value)
 
 
 class Redis(_Redis, RedisModel): ...

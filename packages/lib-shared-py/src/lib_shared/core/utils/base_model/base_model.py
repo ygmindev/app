@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any, Optional, Self
 
 from pydantic import BaseModel as PydanticBaseClass
-from pydantic import ConfigDict
+from pydantic import ConfigDict, TypeAdapter
 
 from .base_model_models import BaseModelModel, MergeStrategy, _BaseModelModel
 
@@ -17,15 +17,13 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         populate_by_name=True,
         revalidate_instances="never",
         str_strip_whitespace=True,
+        use_enum_values=True,
     )
 
     def model_post_init(self, __context: Any) -> None:
         return self.post_init()
 
-    def clone(
-        self,
-        **kwargs: Any,
-    ) -> Self:
+    def clone(self, **kwargs: Any) -> Self:
         return self.model_copy(update=kwargs)
 
     def update(
@@ -44,7 +42,8 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
 
         result = {}
         for k, v in value:
-            current = getattr(self, k)
+            # Use a default of None to prevent AttributeError if 'value' has extra fields
+            current = getattr(self, k, None)
             result[k] = self._merge(current, v, merge_strategy=merge_strategy)
 
         return self.clone(**result)
@@ -62,10 +61,15 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
                 case MergeStrategy.PREPEND:
                     return new + current
             return new
+        return new
 
     @classmethod
-    def validate(cls, **kwargs) -> Self:
+    def validate(cls, **kwargs: Any) -> Self:
         return cls.model_validate(kwargs)
+
+    @classmethod
+    def to_list(cls, value: list[Self]) -> list[dict[str, Any]]:
+        return TypeAdapter(list[cls]).dump_python(value)
 
 
 class BaseModel(_BaseModel, BaseModelModel): ...

@@ -7,6 +7,7 @@ from lib_ai.graph.constants import GraphNodeType
 from lib_ai.graph.utils.directed_acyclic_graph.directed_acyclic_graph_models import (
     GraphEdgeModel,
 )
+from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
 from lib_ai.graph.utils.graph_node.graph_node import GraphNode
 
 from .mermaid_chart_models import MermaidChartModel, _MermaidChartModel
@@ -14,7 +15,7 @@ from .mermaid_chart_models import MermaidChartModel, _MermaidChartModel
 
 class _MermaidChart(_MermaidChartModel):
     nodes: list[GraphNode] = Field(default_value=list)
-    edges: list[GraphEdgeModel] = Field(default_value=list)
+    edges: list[GraphEdge] = Field(default_value=list)
 
     @staticmethod
     def _get_node(name: GraphNodeType | str) -> str:
@@ -37,7 +38,7 @@ class _MermaidChart(_MermaidChartModel):
 
     def add_edge(
         self,
-        value: GraphEdgeModel | list[GraphEdgeModel],
+        value: GraphEdge | list[GraphEdge],
     ) -> None:
         if isinstance(value, list):
             self.edges.extend(value)
@@ -54,11 +55,11 @@ class _MermaidChart(_MermaidChartModel):
 
         for node in self.nodes:
             markups.append(node.markup())
-        
+
         for edge in self.edges:
             if len(edge) == 2:
                 from_edge, to_edge = edge
-                
+
             else:
                 ...
 

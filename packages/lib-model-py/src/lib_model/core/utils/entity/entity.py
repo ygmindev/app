@@ -6,9 +6,9 @@ from typing import Any, ClassVar, Optional, Union, get_args, get_origin
 import strawberry
 from beanie import BackLink, Link, PydanticObjectId
 from bson import ObjectId
+from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
-from pydantic import BaseModel
 from pydantic.fields import FieldInfo, ModelPrivateAttr
 from pydantic_core import PydanticUndefined
 

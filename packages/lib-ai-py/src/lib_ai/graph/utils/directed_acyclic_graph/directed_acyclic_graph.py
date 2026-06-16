@@ -16,12 +16,12 @@ from lib_shared.core.utils.uninitialized_exception.uninitialized_exception impor
     UninitializedException,
 )
 
+from lib_ai.graph.constants import GraphNodeType
+from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
 from lib_ai.graph.utils.graph_node import GraphNode
 
 from .directed_acyclic_graph_models import (
     DirectedAcyclicGraphModel,
-    GraphEdgeModel,
-    GraphNodeType,
     TState,
     _DirectedAcyclicGraphModel,
 )
@@ -30,7 +30,7 @@ from .directed_acyclic_graph_models import (
 class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
     initial_state: TState
     nodes: list[GraphNode]
-    edges: list[GraphEdgeModel]
+    edges: list[GraphEdge]
 
     _graph: Optional[CompiledStateGraph] = None
 
@@ -68,33 +68,23 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
             )
 
         edges = self.edges
-        if len(edges):
-            if edges[0][0] != GraphNodeType.START:
-                edges.insert(0, (GraphNodeType.START, self._get_node(edges[0][0])))
 
         for edge in edges:
-            if len(edge) == 2:
-                from_edge, to_edge = edge
-                graph.add_edge(
-                    self._get_node(from_edge),
-                    self._get_node(to_edge),
-                )
-            else:
-                from_edge, to_edge, edge_map = edge
+            end = edge.end
+            if isinstance(end, Callable):
                 graph.add_conditional_edges(
-                    self._get_node(from_edge),
-                    lambda x, to_edge=to_edge: self._get_node(to_edge(x)),
+                    self._get_node(edge.start),
+                    lambda x, end=end: self._get_node(end(x)),
                     {
-                        k: self._get_node(v)
-                        for k, v in (
-                            edge_map.items() if isinstance(edge_map, dict) else edge_map
-                        )
+                        self._get_node(k): self._get_node(v)
+                        for k, v in edge.mapping.items() or {}
                     },
                 )
-
-        if len(edges):
-            if len(edges[-1]) == 2 and edges[-1][-1] != GraphNodeType.END:
-                edges.append((self._get_node(edges[-1][-1]), GraphNodeType.END))
+            else:
+                graph.add_edge(
+                    self._get_node(edge.start),
+                    self._get_node(end),
+                )
 
         # self._graph = graph.compile(checkpointer=MemorySaver())
         self._graph = graph.compile()

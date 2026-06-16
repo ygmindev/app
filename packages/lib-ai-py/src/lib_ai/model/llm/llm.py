@@ -19,7 +19,7 @@ from .llm_models import (
 
 
 class _Llm(BaseModel, _LlmModel):
-    name: str = LLM_NAME.QWEN_3_6
+    name: str = LLM_NAME.QWEN_3_5
     temperature: float = 0.0
     max_tokens: int = 4096
     output_schema: Optional[BaseModel] = None
@@ -28,7 +28,7 @@ class _Llm(BaseModel, _LlmModel):
 
     def post_init(self) -> None:
         match self.name:
-            case LLM_NAME.GLM_5 | LLM_NAME.LLAMA_3_2 | LLM_NAME.QWEN_3_6:
+            case LLM_NAME.GLM_5 | LLM_NAME.LLAMA_3_2 | LLM_NAME.QWEN_3_5:
                 self._llm = ChatOpenAI(
                     api_key="lmstudio",
                     base_url="http://localhost:1234/v1",

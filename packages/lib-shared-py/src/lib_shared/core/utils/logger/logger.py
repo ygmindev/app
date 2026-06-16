@@ -4,14 +4,14 @@ from logging import Logger as LoggerBase
 from logging import basicConfig, getLogger
 from typing import Any
 
-from lib_shared.core.utils.dataclass.dataclass import Dataclass
+from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.logger.constants import LoggerLevel
 from lib_shared.core.utils.private_field.private_field import PrivateField
 
 from .logger_models import LoggerModel, _LoggerModel
 
 
-class _Logger(Dataclass, _LoggerModel):
+class _Logger(BaseModel, _LoggerModel):
     name: str = "main"
     level: LoggerLevel = LoggerLevel.INFO
 

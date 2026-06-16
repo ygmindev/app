@@ -14,7 +14,7 @@ from sse_starlette import EventSourceResponse
 from uvicorn import Config
 from uvicorn import Server as UvicornServer
 
-from lib_shared.core.utils.dataclass.dataclass import Dataclass
+from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.get_env import get_env
 from lib_shared.core.utils.logger.logger import Logger
 from lib_shared.core.utils.private_field.private_field import PrivateField
@@ -26,7 +26,7 @@ from .server_models import ServerModel, _ServerModel
 logger = Logger()
 
 
-class _Server(Dataclass, _ServerModel):
+class _Server(BaseModel, _ServerModel):
     name: str
     config: ServerConfig
 

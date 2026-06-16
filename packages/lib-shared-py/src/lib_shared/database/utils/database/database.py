@@ -1,9 +1,10 @@
 # template version: 1.0.0
 
-from typing import Generic, Optional
+from typing import Literal, Optional, Sequence
 
-from beanie import init_beanie
+from beanie import SortDirection, init_beanie
 from lib_config.database.database_models import DatabaseConfigModel
+from lib_model.core.utils.database_entity.database_entity import DatabaseEntity
 from pymongo import AsyncMongoClient
 
 from lib_shared.database.utils.database.constants import UPSERT_STRATEGY
@@ -14,17 +15,13 @@ from .database_models import (
     DatabaseModel,
     DeleteResultModel,
     FindResultModel,
-    TType,
     UpdateResultModel,
     UpsertResultModel,
     _DatabaseModel,
 )
 
 
-class _Database(
-    _DatabaseModel,
-    Generic[TType],
-):
+class _Database(_DatabaseModel):
     config: DatabaseConfigModel
 
     _client: AsyncMongoClient
@@ -52,7 +49,7 @@ class _Database(
     async def close(self) -> None:
         await self._client.close()
 
-    async def create(
+    async def create[TType: DatabaseEntity](
         self,
         data: TType,
     ) -> CreateResultModel[TType]:
@@ -62,7 +59,7 @@ class _Database(
             success=True,
         )
 
-    async def create_many(
+    async def create_many[TType: DatabaseEntity](
         self,
         data: list[TType],
         resource: type[TType],
@@ -87,22 +84,33 @@ class _Database(
             success=success,
         )
 
-    async def find(
+    async def find[TType: DatabaseEntity](
         self,
         query: dict,
         resource: type[TType],
         limit: Optional[int] = None,
         skip: Optional[int] = None,
+        sort: Optional[Sequence[tuple[str, Literal[-1, 1]]]] = None,
     ) -> FindResultModel[TType]:
         result = resource.find(query)
         if skip:
-            op = result.skip(skip)
+            result = result.skip(skip)
         if limit:
-            op = op.limit(limit)
-        result = await op.to_list()
+            result = result.limit(limit)
+        if sort:
+            result = result.sort(
+                *(
+                    (
+                        s[0],
+                        SortDirection.ASCENDING if s[1] else SortDirection.DESCENDING,
+                    )
+                    for s in sort
+                )
+            )
+        result = await result.to_list()
         return FindResultModel(result=result)
 
-    async def update(
+    async def update[TType: DatabaseEntity](
         self,
         data: TType,
         update: dict,
@@ -115,7 +123,7 @@ class _Database(
             success=True,
         )
 
-    async def delete(
+    async def delete[TType: DatabaseEntity](
         self,
         data: TType,
     ) -> DeleteResultModel:
@@ -125,7 +133,7 @@ class _Database(
             success=True,
         )
 
-    async def upsert(
+    async def upsert[TType: DatabaseEntity](
         self,
         data: TType,
         update: dict,
