@@ -1,7 +1,7 @@
 from typing import NotRequired, Sequence
 
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.model.base_model.base_model_constants import Optimizer
+from lib_ai.model.base_model.constants import Optimizer
 from lib_ai.model.base_model.base_model_models import (
     BaseModelEvalParamsModel,
     BaseModelFitParamsModel,
@@ -12,7 +12,7 @@ from lib_ai.model.base_model.base_model_models import (
 from lib_ai.model.utils.neural_network.layer.base_layer.base_layer_models import (
     BaseLayerModel,
 )
-from lib_ai.scoring.scoring_constants import ScoringMode
+from lib_ai.scoring.constants import ScoringMode
 
 
 class _NeuralNetworkParamsModel(BaseModelParamsModel):

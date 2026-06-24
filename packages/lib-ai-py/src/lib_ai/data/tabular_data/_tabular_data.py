@@ -15,7 +15,7 @@ from lib_ai.data.tabular_data._tabular_data_models import (
     _TabularDataModel,
     _TabularDataStringKeyModel,
 )
-from lib_ai.data.tabular_data.tabular_data_constants import TabularDataType
+from lib_ai.data.tabular_data.constants import TabularDataType
 
 
 class _TabularData(_TabularDataModel):

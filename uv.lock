@@ -2039,6 +2039,11 @@ dependencies = [
     { name = "sse-starlette" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "uvicorn" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "lib-ai", editable = "packages/lib-ai-py" },
@@ -2046,6 +2051,9 @@ requires-dist = [
     { name = "lib-shared", editable = "packages/lib-shared-py" },
     { name = "sse-starlette", specifier = ">=3.4.1" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "uvicorn", specifier = ">=0.46.0" }]
 
 [[package]]
 name = "service-jobs"

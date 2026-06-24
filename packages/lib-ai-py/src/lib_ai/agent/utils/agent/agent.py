@@ -7,14 +7,15 @@ from typing import (
     cast,
 )
 
+from lib_model.chat.message.constants import MessageRole
 from lib_shared.core.utils.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.not_found_exception import NotFoundException
 from lib_shared.core.utils.not_implemented_exception import NotImplementedException
+from lib_shared.core.utils.private_field.private_field import PrivateField
 
 from lib_ai.agent.utils.agent_state import AgentState
 from lib_ai.agent.utils.llm_message import LlmMessage
-from lib_ai.agent.utils.llm_message.constants import LLM_ROLE
 from lib_ai.agent.utils.skill import Skill
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.graph.constants import GraphNodeType
@@ -29,14 +30,15 @@ from .agent_models import AgentModel, TState, _AgentModel
 
 
 class _Agent(BaseModel, _AgentModel[TState]):
-    descriptions: list[str]
-    name: str
+    descriptions: list[str] = Field(default_value=list)
+    name: str = Field(default="Agent")
     llm: Llm = Field(default_value=Llm)
     initial_state: TState = Field(default_value=AgentState)
-    skills: Optional[list[Skill]] = None
-    tools: Optional[list[Tool]] = None
+    skills: Optional[list[Skill]] = Field(default=None)
+    tools: Optional[list[Tool]] = Field(default=None)
 
-    _graph: Optional[DirectedAcyclicGraph] = None
+    _system_message: LlmMessage = PrivateField()
+    _graph: Optional[DirectedAcyclicGraph] = PrivateField()
 
     def post_init(self) -> None:
         tool_map: Dict[str, Tool] = {}
@@ -70,7 +72,11 @@ class _Agent(BaseModel, _AgentModel[TState]):
 
         self.llm.bind_tools(list(tool_map.values()))
         system_prompt = "\n".join(descriptions)
-        system_message = LlmMessage(role=LLM_ROLE.SYSTEM, message=system_prompt)
+        system_message = LlmMessage(
+            role=MessageRole.SYSTEM,
+            content=system_prompt,
+        )
+        self._system_message = system_message
 
         llm = self.llm
 
@@ -81,8 +87,9 @@ class _Agent(BaseModel, _AgentModel[TState]):
                 self,
                 params: TState,
             ) -> TState:
-                result = await llm.invoke([system_message] + params.messages)
-                params.messages.append(result)
+                result = await llm.run([system_message] + params.messages)
+                if result is not None:
+                    params.messages.append(result)
                 return params
 
         edges.append(GraphEdge(start=GraphNodeType.START, end="llm"))
@@ -97,14 +104,14 @@ class _Agent(BaseModel, _AgentModel[TState]):
             ) -> TState:
                 updates: list[LlmMessage] = []
                 last_message = params.messages[-1]
-                if last_message.role == LLM_ROLE.ASSISTANT and last_message.tool_calls:
+                if last_message.role == MessageRole.SYSTEM and last_message.tool_calls:
                     for tool_call in last_message.tool_calls:
                         tool = tool_map[tool_call.name]
                         result = await tool.ainvoke(tool_call.params)
                         updates.append(
                             LlmMessage(
-                                role=LLM_ROLE.TOOL,
-                                message=str(result),
+                                role=MessageRole.TOOL,
+                                content=str(result),
                                 current_tool_call=tool_call,
                             )
                         )
@@ -115,7 +122,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
             messages = state.messages
             if messages:
                 last = messages[-1]
-                if last.role == LLM_ROLE.ASSISTANT and last.tool_calls:
+                if last.role == MessageRole.SYSTEM and last.tool_calls:
                     return "tools"
             return GraphNodeType.END
 
@@ -144,41 +151,36 @@ class _Agent(BaseModel, _AgentModel[TState]):
             raise NotImplementedException("Graph is not initialized")
         return self._graph
 
-    async def run_prompt(
+    async def stream_message(
         self,
-        prompt: str,
-    ) -> TState:
-        messages = [LlmMessage(role=LLM_ROLE.USER, message=prompt)]
-        result = self.initial_state.clone(messages=messages)
-        return await super().run(result)
-
-    async def stream_prompt(
-        self,
-        prompt: str,
-    ) -> AsyncIterable[TState]:
-        result = self.initial_state.clone(
-            messages=[LlmMessage(role=LLM_ROLE.USER, message=prompt)]
+        params: TState,
+    ) -> AsyncIterable[str]:
+        user_message = next(
+            (x for x in reversed(params.messages) if x.role == MessageRole.USER),
+            None,
         )
-        async for updates in self.stream(result):
-            yield updates
+        if not user_message:
+            raise NotFoundException("No user message found in the initial state")
+        params.messages = [user_message]
+        async for chunk in self.graph.stream_message(params):
+            yield chunk
 
     async def stream(
         self,
         params: TState,
     ) -> AsyncIterable[TState]:
         user_message = next(
-            (x for x in reversed(params.messages) if x.role == LLM_ROLE.USER),
+            (x for x in reversed(params.messages) if x.role == MessageRole.USER),
             None,
         )
         if not user_message:
             raise NotFoundException("No user message found in the initial state")
-
         params.messages = [user_message]
         async for updates in self.graph.stream(params):
             messages = cast(list[LlmMessage], updates.messages)
             for message in messages:
-                messages_out: list[str] = [message.message]
-                if message.role == LLM_ROLE.ASSISTANT and message.tool_calls:
+                messages_out: list[str] = [message.content]
+                if message.role == MessageRole.SYSTEM and message.tool_calls:
                     for tool_call in message.tool_calls:
                         messages_out += [
                             f"calling tool: {tool_call.name} with args: {str(tool_call.params)}"
@@ -186,8 +188,8 @@ class _Agent(BaseModel, _AgentModel[TState]):
             yield params.clone(
                 messages=[
                     LlmMessage(
-                        role=LLM_ROLE.SYSTEM,
-                        message="\n".join(messages_out),
+                        role=MessageRole.SYSTEM,
+                        content="\n".join(messages_out),
                     )
                 ]
             )

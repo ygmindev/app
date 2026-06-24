@@ -12,8 +12,8 @@ from lib_ai.optimize.utils.optimize._optimize_models import (
     _OptimizeParamsModel,
     _OptimizeSpaceParamsModel,
 )
-from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
-from lib_ai.scoring.scoring_constants import ScoringMode
+from lib_ai.optimize.utils.optimize.constants import OptimizeSpaceDistribution
+from lib_ai.scoring.constants import ScoringMode
 
 
 def _get_space(

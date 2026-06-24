@@ -3,8 +3,9 @@
 
 from typing import AsyncIterable, Optional
 
+from lib_model.chat.message.constants import MessageRole
+
 from lib_ai.agent.utils.agent import Agent
-from lib_ai.agent.utils.agent.agent import LLM_ROLE
 from lib_ai.agent.utils.llm_message import LlmMessage
 from lib_ai.graph.utils.graph_node import GraphNode
 
@@ -20,10 +21,15 @@ class AgentNode(GraphNode, AgentNodeModel):
         params: TState,
     ) -> AsyncIterable[TState]:
         if self.prompt:
-            params.messages.append(LlmMessage(role=LLM_ROLE.USER, message=self.prompt))
+            params.messages.append(
+                LlmMessage(
+                    role=MessageRole.USER,
+                    content=self.prompt,
+                )
+            )
         else:
             last_message = params.messages[-1]
-            if last_message and last_message.role != LLM_ROLE.USER:
-                last_message.role = LLM_ROLE.USER
+            if last_message and last_message.role != MessageRole.USER:
+                last_message.role = MessageRole.USER
         async for x in self.agent.stream(params):
             yield x

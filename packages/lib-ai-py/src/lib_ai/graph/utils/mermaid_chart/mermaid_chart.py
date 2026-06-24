@@ -4,9 +4,6 @@
 from lib_shared.core.utils.field.field import Field
 
 from lib_ai.graph.constants import GraphNodeType
-from lib_ai.graph.utils.directed_acyclic_graph.directed_acyclic_graph_models import (
-    GraphEdgeModel,
-)
 from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
 from lib_ai.graph.utils.graph_node.graph_node import GraphNode
 

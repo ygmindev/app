@@ -2,8 +2,16 @@
 
 
 import json
+from contextlib import asynccontextmanager
 from os import path
-from typing import AsyncIterable, Awaitable, Callable
+from typing import (
+    Any,
+    AsyncGenerator,
+    AsyncIterable,
+    Awaitable,
+    Callable,
+    Optional,
+)
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -15,7 +23,7 @@ from uvicorn import Config
 from uvicorn import Server as UvicornServer
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
-from lib_shared.core.utils.get_env import get_env
+from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.logger.logger import Logger
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.http.utils.http_request.http_request import HttpRequest
@@ -27,13 +35,26 @@ logger = Logger()
 
 
 class _Server(BaseModel, _ServerModel):
-    name: str
-    config: ServerConfig
+    name: str = Field()
+    config: ServerConfig = Field()
+    initialize: Optional[Callable[[], Awaitable[None]]] = Field(default=None)
+    close: Optional[Callable[[], Awaitable[None]]] = Field(default=None)
 
     _app: FastAPI = PrivateField()
 
     def post_init(self) -> None:
-        self._app = FastAPI(title=self.name)
+        @asynccontextmanager
+        async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:
+            if callable(initialize := self.initialize):
+                await initialize()
+            yield
+            if callable(close := self.close):
+                await close()
+
+        self._app = FastAPI(
+            title=self.name,
+            lifespan=lifespan,
+        )
 
         self._app.add_middleware(
             CORSMiddleware,
@@ -81,8 +102,9 @@ class _Server(BaseModel, _ServerModel):
 
             return _handler
 
+        prefix = self.config.api.prefix
         for route in self.config.api.routes:
-            pathname = trim_pathname(route.pathname)
+            pathname = trim_pathname(f"{prefix}/{route.pathname}")
             logger.info("%s: %s", route.method, pathname)
             self._app.add_api_route(
                 path=pathname,
@@ -91,7 +113,7 @@ class _Server(BaseModel, _ServerModel):
                 methods=(
                     [v.value.upper() for v in route.method]
                     if isinstance(route.method, list)
-                    else [route.method.value.upper()]
+                    else [route.method.upper()]
                 ),
             )
 
@@ -115,11 +137,14 @@ class _Server(BaseModel, _ServerModel):
             self._app,
             host=self.config.host or "127.0.0.1",
             port=int(self.config.port) if self.config.port else 5010,
-            reload=get_env("NODE_ENV") == "development",
             **ssl_config,
         )
         server = UvicornServer(config)
         await server.serve()
+
+    @property
+    def app(self) -> FastAPI:
+        return self._app
 
 
 class Server(_Server, ServerModel): ...

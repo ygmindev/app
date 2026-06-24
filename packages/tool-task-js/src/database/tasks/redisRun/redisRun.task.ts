@@ -8,7 +8,8 @@ import {
 export const redisRun = buildTask<RedisRunParamsModel, RedisRunModel>({
   task: async ({}) => {
     await execute({
-      command: 'docker run --name redis -p 6379:6379 -d redis:7-alpine --appendonly yes',
+      command:
+        'docker start redis 2>/dev/null || docker run --name redis -p 6379:6379 -d redis:7-alpine --appendonly yes',
     });
   },
 });

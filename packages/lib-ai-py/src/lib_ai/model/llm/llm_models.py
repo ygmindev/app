@@ -1,7 +1,7 @@
 # template version: 1.0.0
 
 
-from typing import Iterator
+from typing import AsyncIterator, Optional
 
 from lib_ai.agent.utils.llm_message import LlmMessage
 from lib_ai.agent.utils.tool import Tool
@@ -13,15 +13,15 @@ class _LlmModel:
         tools: list[Tool],
     ) -> None: ...
 
-    async def invoke(
+    async def stream_message(
         self,
-        messages: list[LlmMessage],
-    ) -> LlmMessage: ...
+        prompt: str,
+    ) -> AsyncIterator[str]: ...
 
-    async def stream(
+    async def run(
         self,
         messages: list[LlmMessage],
-    ) -> Iterator[LlmMessage]: ...
+    ) -> Optional[LlmMessage]: ...
 
 
 class LlmModel(_LlmModel): ...

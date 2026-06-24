@@ -1,3 +1,5 @@
-export type PortKillParamsModel = { port: number };
+export type PortKillParamsModel = {
+  port: string;
+};
 
 export type PortKillModel = void;

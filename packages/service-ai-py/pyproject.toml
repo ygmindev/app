@@ -29,6 +29,11 @@ dependencies = [
     "sse-starlette>=3.4.1",
 ]
 
+[dependency-groups]
+dev = [
+    "uvicorn>=0.46.0",
+]
+
 [tool.uv.sources]
 lib-ai = { workspace = true }
 lib-model = { workspace = true }

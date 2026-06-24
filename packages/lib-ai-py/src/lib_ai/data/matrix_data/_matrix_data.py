@@ -9,7 +9,7 @@ from lib_ai.core.utils.get_device import get_device
 from lib_ai.core.utils.get_numpy_type import get_numpy_type
 from lib_ai.core.utils.get_tensor_type import get_tensor_type
 from lib_ai.data.matrix_data._matrix_data_models import _MatrixDataModel
-from lib_ai.data.matrix_data.matrix_data_constants import MatrixDataType
+from lib_ai.data.matrix_data.constants import MatrixDataType
 
 
 class _MatrixData(_MatrixDataModel):

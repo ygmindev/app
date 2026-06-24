@@ -1,13 +1,17 @@
 # template version: 1.0.0
-import asyncio
 import json
-from typing import Any, AsyncIterator
+from typing import AsyncIterable, Optional
 
+from lib_ai.agent.utils.agent.agent import Agent
+from lib_ai.agent.utils.agent_state.agent_state import AgentState
+from lib_ai.agent.utils.llm_message.llm_message import LlmMessage
+from lib_ai.agent.utils.llm_payload.constants import LlmPayloadType
+from lib_ai.agent.utils.llm_payload.llm_payload import LlmPayload
 from lib_config.database.database import database_config
 from lib_config.redis.redis import redis_config
 from lib_model.chat.chat.chat import Chat
+from lib_model.chat.message.constants import MessageRole
 from lib_model.chat.message.message import Message
-from lib_model.chat.message.message_constants import MessageRole
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.private_field.private_field import PrivateField
@@ -24,15 +28,21 @@ _CHAT_MAX_LENGTH = 25
 class ChatService(BaseModel, ChatServiceModel):
     _database: Database = PrivateField()
     _redis: Redis = PrivateField()
+    _agent: Agent = PrivateField()
 
-    def __init__(self, **kwargs: Any) -> None:
-        super().__init__(**kwargs)
+    def post_init(self) -> None:
         self._database = Database(config=database_config)
         self._redis = Redis(config=redis_config)
 
     async def initialize(self) -> None:
         await self._database.initialize()
         await self._redis.initialize()
+        state = AgentState()
+        self._agent = Agent[AgentState](
+            name="test_agent",
+            descriptions=["", ""],
+            initial_state=state,
+        )
 
     async def close(self) -> None:
         await self._database.close()
@@ -51,7 +61,6 @@ class ChatService(BaseModel, ChatServiceModel):
             if not chat.result:
                 raise ValueError(f"chat {id} not found")
             return chat.result[0]
-
         title = message[:_CHAT_MAX_LENGTH] + (
             "..." if len(message) > _CHAT_MAX_LENGTH else ""
         )
@@ -63,11 +72,10 @@ class ChatService(BaseModel, ChatServiceModel):
         self,
         id: str,
     ) -> list[Message]:
-        value = await asyncio.to_thread(
-            self._redis.get,
-            f"chat:history:{id}",
-        )
+        value = await self._redis.get(f"chat:history:{id}")
         if value:
+            print("@@@ VALUE:")
+            print(value)
             return json.loads(value)
 
         result = await self._database.find(
@@ -85,8 +93,7 @@ class ChatService(BaseModel, ChatServiceModel):
         history: list[Message],
     ) -> None:
         value = Message.to_list(history)
-        await asyncio.to_thread(
-            self._redis.set,
+        await self._redis.set(
             f"chat:history:{id}",
             json.dumps(value[-_HISTORY_LIMIT:]),
             3600,
@@ -94,47 +101,65 @@ class ChatService(BaseModel, ChatServiceModel):
 
     async def stream(
         self,
-        id: str,
         message: str,
-    ) -> AsyncIterator[dict]:
-        chat = await self.get_chat(id, message)
-        user_message = Message(
-            chat=chat,
+        chat_id: Optional[str] = None,
+    ) -> AsyncIterable[str | dict]:
+        chat = await self.get_chat(chat_id, message)
+        chat_id = str(chat._id)
+
+        params = AgentState()
+        user_message = LlmMessage(
             content=message,
             role=MessageRole.USER,
         )
-        result = await self._database.create(user_message)
-        yield {
-            "event": "id",
-            "data": {"id": chat.id},
-        }
+        params.messages = [user_message]
+        user_message = (await self._database.create(user_message)).result
+        user_message_id = str(user_message._id)
 
-        history = await self._load_history(chat._id)
+        history = await self._load_history(chat_id)
 
-        node_path: list[str] = []
-        full_response = ""
+        response = ""
+        yield LlmPayload(
+            type=LlmPayloadType.START,
+            chat_id=chat_id,
+            message_id=user_message_id,
+            role=MessageRole.SYSTEM,
+            content="",
+        ).to_dict()
 
-        # async for event in run_graph_stream(message, chat.id, history):
-        #     if event["event"] == "done":
-        #         full_response = event["data"].get("full_response", "")
-        #         node_path = event["data"].get("node_path", [])
-        #     yield event
+        async for chunk in self._agent.stream_message(params):
+            response += chunk
+            yield LlmPayload(
+                type=LlmPayloadType.UPDATE,
+                chat_id=chat_id,
+                message_id=user_message_id,
+                role=MessageRole.SYSTEM,
+                content=chunk,
+            ).to_dict()
 
-        # assistant_message = Message(
-        #     chat=chat,
-        #     role=Role.assistant,
-        #     content=full_response,
-        #     node_path=node_path,
-        # )
-        # await self._database.create(assistant_message)
-
-        # chat.message_count += 2  # user + assistant
-        # chat.updated_at = datetime.now(timezone.utc)
-        # await chat.save()
+        system_message = LlmMessage(
+            content=response,
+            role=MessageRole.SYSTEM,
+        )
+        system_message = (await self._database.create(system_message)).result
+        system_message_id = str(system_message._id)
 
         history.append(user_message)
-        # history.append({"role": "assistant", "content": full_response})
+        history.append(system_message)
+        await self._cache_history(chat_id, history)
+
+        yield LlmPayload(
+            type=LlmPayloadType.END,
+            chat_id=chat_id,
+            message_id=system_message_id,
+            role=MessageRole.SYSTEM,
+            content=response,
+        ).to_dict()
+
         await self._cache_history(
-            chat._id,
+            chat_id,
             history,
         )
+
+
+chat_service = ChatService()

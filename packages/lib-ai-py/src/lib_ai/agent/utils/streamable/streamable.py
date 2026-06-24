@@ -1,20 +1,21 @@
-from typing import AsyncIterable, Optional, Sequence
+from typing import AsyncIterable
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
-from lib_shared.core.utils.logger.logger import logger
 
-from lib_ai.agent.utils.runnable.runnable_models import RunnableModel, TState
+from lib_ai.agent.utils.streamable.streamable_models import (
+    StreamableModel,
+    TState,
+)
 
 
-class Runnable(BaseModel, RunnableModel[TState]):
-    messages: Optional[Sequence[str]] = None
-
+class Streamable(
+    BaseModel,
+    StreamableModel[TState],
+):
     async def run(
         self,
         params: TState,
     ) -> TState:
-        if self.messages:
-            logger.info(*self.messages)
         result = params.clone()
         updates = [x async for x in self.stream(params)]
         for update in updates:

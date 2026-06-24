@@ -1,7 +1,7 @@
 from typing import Any
 
 from lib_ai.optimize.utils.optimize import optimize
-from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
+from lib_ai.optimize.utils.optimize.constants import OptimizeSpaceDistribution
 
 
 def a(xx: Any):

@@ -3,7 +3,7 @@
 
 from typing import Generic
 
-from lib_ai.agent.utils.runnable.runnable_models import TState
+from lib_ai.agent.utils.streamable.streamable_models import TState
 
 
 class GraphEdgeModel(Generic[TState]): ...

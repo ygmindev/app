@@ -10,7 +10,6 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 
 export const ChatForm: LFCModel<ChatFormPropsModel> = ({
   bottomElement,
@@ -26,7 +25,7 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({
   }>({
     initialValues: { text: '' },
     onSubmit: async ({ text }) => {
-      await onSubmit?.({ created: new DateTime(), createdBy: currentUser ?? undefined, text });
+      await onSubmit?.({ createdBy: currentUser ?? undefined, text });
     },
   });
 

@@ -1,6 +1,6 @@
 # template version: 1.0.0
 
-from typing import Optional, Self, cast
+from typing import Optional, Self
 
 from langchain_core.messages import (
     AIMessage,
@@ -10,11 +10,12 @@ from langchain_core.messages import (
     ToolMessage,
 )
 from langchain_core.messages.tool import ToolCall as _ToolCall
+from lib_model.chat.message.constants import MessageRole
+from lib_model.chat.message.message import Message
 from lib_shared.core.utils.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
 
-from lib_ai.agent.utils.llm_message.constants import LLM_ROLE
-
-from .llm_message_models import LlmMessageModel, TType, _LlmMessageModel
+from .llm_message_models import LlmMessageModel, _LlmMessageModel
 
 
 class ToolCall(BaseModel):
@@ -23,18 +24,16 @@ class ToolCall(BaseModel):
     params: dict
 
 
-class _LlmMessage(BaseModel, _LlmMessageModel[TType]):
-    role: LLM_ROLE
-    message: TType
-    tool_calls: Optional[list[ToolCall]] = None
-    current_tool_call: Optional[ToolCall] = None
+class _LlmMessage(Message, _LlmMessageModel):
+    tool_calls: list[ToolCall] = Field(default_value=list)
+    current_tool_call: Optional[ToolCall] = Field(default=None)
 
     def serialize(self) -> BaseMessage:
         match self.role:
-            case LLM_ROLE.USER:
-                return HumanMessage(content=str(self.message))
-            case LLM_ROLE.ASSISTANT:
-                tool_calls = None
+            case MessageRole.USER:
+                return HumanMessage(content=self.content)
+            case MessageRole.ASSISTANT:
+                tool_calls = []
                 if self.tool_calls:
                     tool_calls = [
                         _ToolCall(
@@ -45,16 +44,17 @@ class _LlmMessage(BaseModel, _LlmMessageModel[TType]):
                         for tool_call in (self.tool_calls or [])
                     ]
                 return AIMessage(
-                    content=str(self.message),
+                    content=str(self.content),
                     tool_calls=tool_calls,
                 )
-            case LLM_ROLE.SYSTEM:
-                return SystemMessage(content=str(self.message))
-            case LLM_ROLE.TOOL:
+            case MessageRole.SYSTEM:
+                return SystemMessage(content=str(self.content))
+            case MessageRole.TOOL:
                 if self.current_tool_call:
+                    tool_call = self.current_tool_call
                     return ToolMessage(
-                        content=str(self.message),
-                        tool_call_id=self.current_tool_call.id,
+                        content=str(self.content),
+                        tool_call_id=tool_call.id,
                     )
                 raise ValueError("current_tool_call is None")
             case _:
@@ -67,13 +67,13 @@ class _LlmMessage(BaseModel, _LlmMessageModel[TType]):
     ) -> Self:
         if isinstance(message, HumanMessage):
             instance = cls(
-                role=LLM_ROLE.USER,
-                message=cast(TType, message.content),
+                role=MessageRole.USER,
+                content=str(message.content),
             )
         elif isinstance(message, AIMessage):
             instance = cls(
-                role=LLM_ROLE.ASSISTANT,
-                message=cast(TType, message.content),
+                role=MessageRole.SYSTEM,
+                content=str(message.content),
                 tool_calls=[
                     ToolCall(
                         id=str(x["id"]),
@@ -85,13 +85,13 @@ class _LlmMessage(BaseModel, _LlmMessageModel[TType]):
             )
         elif isinstance(message, SystemMessage):
             instance = cls(
-                role=LLM_ROLE.SYSTEM,
-                message=cast(TType, message.content),
+                role=MessageRole.SYSTEM,
+                content=str(message.content),
             )
         elif isinstance(message, ToolMessage):
             instance = cls(
-                role=LLM_ROLE.TOOL,
-                message=cast(TType, message.content),
+                role=MessageRole.TOOL,
+                content=str(message.content),
                 current_tool_call=ToolCall(
                     id=str(message.tool_call_id),
                     name=str(message.name),

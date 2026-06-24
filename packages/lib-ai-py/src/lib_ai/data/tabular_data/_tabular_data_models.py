@@ -4,7 +4,7 @@ from typing import Any, Callable, Mapping, Self, Sequence, Tuple, overload
 import polars as pl
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.data.tabular_data.tabular_data_constants import TabularDataType
+from lib_ai.data.tabular_data.constants import TabularDataType
 
 type _TabularDataTypeModel = pl.DataFrame
 

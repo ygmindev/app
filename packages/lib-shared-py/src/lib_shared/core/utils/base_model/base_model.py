@@ -56,9 +56,9 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
     ) -> Any:
         if isinstance(current, list) and isinstance(new, list):
             match merge_strategy:
-                case MergeStrategy.APPEND:
+                case MergeStrategy.DEEP_APPEND:
                     return current + new
-                case MergeStrategy.PREPEND:
+                case MergeStrategy.DEEP_PREPEND:
                     return new + current
             return new
         return new
@@ -69,7 +69,13 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
 
     @classmethod
     def to_list(cls, value: list[Self]) -> list[dict[str, Any]]:
-        return TypeAdapter(list[cls]).dump_python(value)
+        return TypeAdapter(list[cls]).dump_python(
+            value,
+            mode="json",
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        return self.model_dump(mode="json")
 
 
 class BaseModel(_BaseModel, BaseModelModel): ...

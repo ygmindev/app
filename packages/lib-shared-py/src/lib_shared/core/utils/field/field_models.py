@@ -1,6 +1,6 @@
 from typing import Callable, Generic, Optional, Protocol, TypeVar
 
-from lib_shared.core.utils.field.field_constants import FieldRelation
+from lib_shared.core.utils.field.constants import FieldRelation
 
 TType = TypeVar("TType")
 

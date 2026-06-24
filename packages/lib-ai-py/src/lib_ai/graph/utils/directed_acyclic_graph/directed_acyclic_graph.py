@@ -1,7 +1,8 @@
 # template version: 1.0.0
 
-from typing import AsyncIterable, Awaitable, Callable, Optional, cast
+from typing import AsyncIterable, Awaitable, Callable, cast
 
+from langchain_core.messages import BaseMessageChunk
 from langgraph.config import get_stream_writer
 from langgraph.graph.state import (
     END,
@@ -11,7 +12,8 @@ from langgraph.graph.state import (
     StateNode,
 )
 from lib_shared.core.utils.base_model import BaseModel
-from lib_shared.core.utils.not_implemented_exception import NotImplementedException
+from lib_shared.core.utils.field.field import Field
+from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.core.utils.uninitialized_exception.uninitialized_exception import (
     UninitializedException,
 )
@@ -27,12 +29,15 @@ from .directed_acyclic_graph_models import (
 )
 
 
-class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
-    initial_state: TState
-    nodes: list[GraphNode]
-    edges: list[GraphEdge]
+class _DirectedAcyclicGraph(
+    BaseModel,
+    _DirectedAcyclicGraphModel[TState],
+):
+    initial_state: TState = Field()
+    nodes: list[GraphNode] = Field(default_value=list)
+    edges: list[GraphEdge] = Field(default_value=list)
 
-    _graph: Optional[CompiledStateGraph] = None
+    _graph: CompiledStateGraph = PrivateField()
 
     def _wrap_node(
         self,
@@ -91,8 +96,6 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
 
     @property
     def graph(self) -> CompiledStateGraph:
-        if self._graph is None:
-            raise NotImplementedException("Graph has not been compiled yet.")
         return self._graph
 
     async def run(
@@ -115,6 +118,21 @@ class _DirectedAcyclicGraph(BaseModel, _DirectedAcyclicGraphModel[TState]):
                 yield cls.model_validate(result)
             else:
                 yield cast(TState, result)
+
+    async def stream_message(
+        self,
+        params: TState,
+    ) -> AsyncIterable[str]:
+        async for chunk, metadata in self.graph.astream(
+            params,
+            stream_mode="messages",
+        ):
+            if hasattr(chunk, "content"):
+                chunk = cast(BaseMessageChunk, chunk)
+                if chunk.content:
+                    yield str(chunk.content)
+            elif isinstance(chunk, str) and chunk:
+                yield chunk
 
     async def visualize(
         self,

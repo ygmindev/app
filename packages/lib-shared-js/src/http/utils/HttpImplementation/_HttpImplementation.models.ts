@@ -4,7 +4,7 @@ export type _HttpRequestParamsModel<TParams> = {
   params?: TParams;
   request?: HttpRequestParamsModel;
   url: string;
-  onMessage?<TType>(data: TType): void;
+  onMessage?<TType>(data: TType, messageType?: string): void;
 };
 
 export type _HttpImplementationModel = {

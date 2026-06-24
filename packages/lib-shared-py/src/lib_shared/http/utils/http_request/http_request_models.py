@@ -1,6 +1,6 @@
-from typing import Generic, TypeVar
+from typing import Any, Generic, TypeVar
 
-TType = TypeVar("TType")
+TType = TypeVar("TType", bound=dict[str, Any])
 
 
 class HttpRequestModel(Generic[TType]): ...

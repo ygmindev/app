@@ -5,7 +5,7 @@ from typing import Optional, Sequence
 
 from lib_config.redis.redis_models import RedisConfigModel
 
-import redis
+import redis.asyncio as aioredis
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
@@ -13,30 +13,31 @@ from lib_shared.core.utils.private_field.private_field import PrivateField
 from .redis_models import RedisModel, _RedisModel
 
 
-class _Redis(_RedisModel, BaseModel):
+class _Redis(BaseModel, _RedisModel):
     config: RedisConfigModel = Field()
 
-    _client: redis.Redis = PrivateField()
+    _client: aioredis.Redis = PrivateField()
 
     async def initialize(self) -> None:
-        pool = redis.ConnectionPool.from_url(
+        pool = aioredis.ConnectionPool.from_url(
             self.config.url,
             decode_responses=True,
             max_connections=self.config.max_pool,
         )
-        self._client = redis.Redis(connection_pool=pool)
+        self._client = aioredis.Redis(connection_pool=pool)
 
     async def close(self) -> None:
-        self._client.close()
+        await self._client.aclose()
 
-    def get(
+    async def get(
         self,
         key: str | Sequence[str],
     ) -> Optional[str]:
         key = key if isinstance(key, str) else ":".join(key)
-        return f"{self._client.get(key)}"
+        value = await self._client.get(key)
+        return f"{value}" if value else None
 
-    def set(
+    async def set(
         self,
         key: str | Sequence[str],
         value: str,
@@ -44,9 +45,9 @@ class _Redis(_RedisModel, BaseModel):
     ) -> None:
         key = key if isinstance(key, str) else ":".join(key)
         if expiration:
-            self._client.setex(key, expiration, value)
+            await self._client.setex(key, expiration, value)
         else:
-            self._client.set(key, value)
+            await self._client.set(key, value)
 
 
 class Redis(_Redis, RedisModel): ...

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Callable, Dict, Mapping, NotRequired, Sequence, Tuple, TypedDict
 
-from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
-from lib_ai.scoring.scoring_constants import ScoringMode
+from lib_ai.optimize.utils.optimize.constants import OptimizeSpaceDistribution
+from lib_ai.scoring.constants import ScoringMode
 
 
 class _OptimizeSpaceMinMaxParamsModel(TypedDict):

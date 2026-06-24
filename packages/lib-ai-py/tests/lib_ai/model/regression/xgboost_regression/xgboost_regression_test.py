@@ -2,7 +2,7 @@ from lib_ai.data.tabular_data import TabularData
 from lib_ai.dataset.utils.download_dataset import download_dataset
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.regression.xgboost_regression import XgboostRegression
-from lib_ai.optimize.utils.optimize.optimize_constants import OptimizeSpaceDistribution
+from lib_ai.optimize.utils.optimize.constants import OptimizeSpaceDistribution
 from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
 from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
     OneHotEncoderTransformer,

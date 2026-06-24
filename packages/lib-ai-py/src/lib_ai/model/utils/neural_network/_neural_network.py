@@ -7,7 +7,7 @@ from lib_ai.core.utils.get_device import get_device
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_dataset import XYDataset
 from lib_ai.model.base_model import BaseModel
-from lib_ai.model.base_model.base_model_constants import Optimizer
+from lib_ai.model.base_model.constants import Optimizer
 from lib_ai.model.base_model.base_model_models import (
     BaseModelEvalParamsModel,
     BaseModelPredParamsModel,
@@ -18,7 +18,7 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
     _NeuralNetworkModel,
     _NeuralNetworkParamsModel,
 )
-from lib_ai.scoring.scoring_constants import ScoringMode
+from lib_ai.scoring.constants import ScoringMode
 from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.logger2 import logger
 from torch.optim.adam import Adam

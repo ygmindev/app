@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List, TypedDict
 
 from lib_ai.data.text_data import TextData
-from lib_ai.database.base_vector_database.base_vector_database_constants import (
+from lib_ai.database.base_vector_database.constants import (
     BaseVectorDatabaseSearchAlgorithm,
 )
 from lib_ai.model.language.text_embedding import TextEmbedding

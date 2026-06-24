@@ -5,21 +5,23 @@ from typing import Any, ClassVar, Optional, Union, get_args, get_origin
 
 import strawberry
 from beanie import BackLink, Link, PydanticObjectId
-from bson import ObjectId
+from bson import ObjectId as BsonObjectId
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from pydantic.fields import FieldInfo, ModelPrivateAttr
 from pydantic_core import PydanticUndefined
 
+from lib_model.core.utils.object_id.object_id import ObjectId
+
 _ObjectId = strawberry.scalar(
-    ObjectId,
+    BsonObjectId,
     name="ObjectId",
     serialize=str,
-    parse_value=lambda x: ObjectId(str(x)),
+    parse_value=lambda x: BsonObjectId(str(x)),
 )
 
-_OBJECT_IDS: frozenset[type] = frozenset({ObjectId, PydanticObjectId})
+_OBJECT_IDS: frozenset[type] = frozenset({BsonObjectId, PydanticObjectId})
 
 
 def _is_optional(annotation: Any) -> bool:
@@ -109,4 +111,4 @@ class _Entity(BaseModel):
 
 class Entity(_Entity):
     created: datetime = Field(default_value=datetime.now)
-    _id: str = PrivateField(default_value=PydanticObjectId)
+    _id: str = PrivateField(default_value=ObjectId)

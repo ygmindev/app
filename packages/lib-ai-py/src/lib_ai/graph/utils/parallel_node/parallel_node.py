@@ -6,7 +6,7 @@ from typing import AsyncIterable
 
 from lib_shared.core.utils.merge.merge_models import MergeStrategy
 
-from lib_ai.agent.utils.runnable.runnable_models import TState
+from lib_ai.agent.utils.streamable.streamable_models import TState
 from lib_ai.graph.utils.graph_node import GraphNode
 
 from .parallel_node_models import ParallelNodeModel
@@ -21,5 +21,8 @@ class ParallelNode(GraphNode, ParallelNodeModel):
     ) -> AsyncIterable[TState]:
         results = await asyncio.gather(*[node.run(params) for node in self.nodes])
         for x in results:
-            params = params.update(x, merge_strategy=MergeStrategy.DEEP_APPEND)
+            params = params.update(
+                x,
+                merge_strategy=MergeStrategy.DEEP_APPEND,
+            )
         yield params

@@ -4,12 +4,12 @@ from typing import TypeVar
 
 from lib_shared.core.utils.base_model import BaseModel
 
-from lib_ai.agent.utils.runnable.runnable_models import RunnableModel
+from lib_ai.agent.utils.streamable.streamable_models import StreamableModel
 
 TState = TypeVar("TState", bound=BaseModel)
 
 
-class _DirectedAcyclicGraphModel(RunnableModel[TState]):
+class _DirectedAcyclicGraphModel(StreamableModel[TState]):
     async def visualize(
         self,
         filepath: str,

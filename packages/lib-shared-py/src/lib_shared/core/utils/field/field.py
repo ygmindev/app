@@ -3,7 +3,7 @@ from typing import Callable, Optional
 from pydantic import Field as PydanticField
 from pydantic import PrivateAttr
 
-from lib_shared.core.utils.field.field_constants import FieldRelation
+from lib_shared.core.utils.field.constants import FieldRelation
 
 from .field_models import MISSING, FieldModel, TType
 

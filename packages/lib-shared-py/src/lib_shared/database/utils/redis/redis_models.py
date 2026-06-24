@@ -9,12 +9,12 @@ class _RedisModel:
 
     async def close(self) -> None: ...
 
-    def get(
+    async def get(
         self,
         key: str | Sequence[str],
     ) -> Optional[str]: ...
 
-    def set(
+    async def set(
         self,
         key: str | Sequence[str],
         value: str,

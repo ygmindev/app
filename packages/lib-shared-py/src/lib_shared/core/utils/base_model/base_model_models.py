@@ -1,13 +1,9 @@
 # template version: 1.0.0
 
 
-from enum import StrEnum
 from typing import Any, Optional, Self
 
-
-class MergeStrategy(StrEnum):
-    APPEND = "append"
-    PREPEND = "prepend"
+from lib_shared.core.utils.merge.merge_models import MergeStrategy
 
 
 class _BaseModelModel:
@@ -30,6 +26,8 @@ class _BaseModelModel:
 
     @classmethod
     def to_list(cls, value: list[Self]) -> list[dict]: ...
+
+    def to_dict(self) -> dict[str, Any]: ...
 
 
 class BaseModelModel(_BaseModelModel): ...

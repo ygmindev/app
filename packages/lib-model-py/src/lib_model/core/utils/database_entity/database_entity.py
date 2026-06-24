@@ -4,7 +4,7 @@ import sys
 from typing import Any, ClassVar, Optional, dataclass_transform, get_args, get_origin
 
 from beanie import BackLink, Document, Link
-from lib_shared.core.utils.field.field_constants import FieldRelation
+from lib_shared.core.utils.field.constants import FieldRelation
 from pydantic import PydanticUndefinedAnnotation
 from pydantic.fields import FieldInfo
 from pydantic_core import PydanticUndefined

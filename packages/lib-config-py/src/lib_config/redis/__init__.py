@@ -1,5 +1,5 @@
 # template version: 1.0.0
 
-from .redis import database_config
+from .redis import redis_config
 
-__all__ = ["database_config"]
+__all__ = ["redis_config"]

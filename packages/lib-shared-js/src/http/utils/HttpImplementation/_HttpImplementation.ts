@@ -7,6 +7,7 @@ import {
 } from '@lib/shared/http/utils/HttpImplementation/_HttpImplementation.models';
 import { type HttpImplementationParamsModel } from '@lib/shared/http/utils/HttpImplementation/HttpImplementation.models';
 import { uri } from '@lib/shared/http/utils/uri/uri';
+import axios from 'axios';
 import {
   type AxiosError,
   type AxiosInstance,
@@ -14,7 +15,6 @@ import {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
-import axios from 'axios';
 
 export class _HttpImplementation implements _HttpImplementationModel {
   protected _instance: AxiosInstance;
@@ -110,33 +110,60 @@ export class _HttpImplementation implements _HttpImplementationModel {
       if (request?.responseType === HTTP_RESPONSE_TYPE.STREAM && onMessage) {
         const reader = (response?.data as ReadableStream<AllowSharedBufferSource>)?.getReader();
         const decoder = new TextDecoder();
+        let buffer = '';
+        let eventType = 'message';
+        const chunks: Array<string> = [];
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-          const chunk = decoder.decode(value, { stream: true });
-          const lines = chunk
-            .split('\n')
-            .reduce(
-              (result, line) =>
-                line.startsWith('data:') ? [...result, line.replace('data:', '')] : result,
-              [] as Array<string>,
-            );
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split(/\r?\n/);
+          buffer = lines.pop() ?? '';
           for (const line of lines) {
-            let data = line as TResult;
+            if (line.startsWith(':')) continue;
+            if (line !== '') {
+              const colonIndex = line.indexOf(':');
+              const field = colonIndex !== -1 ? line.slice(0, colonIndex) : line;
+              const v =
+                colonIndex !== -1
+                  ? line.slice(colonIndex + (line[colonIndex + 1] === ' ' ? 2 : 1))
+                  : '';
+
+              switch (field) {
+                case 'event':
+                  eventType = v;
+                  break;
+                case 'data':
+                  chunks.push(v);
+                  break;
+                case 'id':
+                case 'retry':
+                  break;
+              }
+              continue;
+            }
+            const raw = chunks.join('\n').trim();
+            chunks.length = 0;
+            if (!raw) continue;
+            if (raw === '[DONE]') return null;
+            let parsed: TResult;
             try {
-              ({ data } = JSON.parse(line) as { data: TResult });
-            } catch {}
-            onMessage(data);
+              parsed = JSON.parse(raw) as TResult;
+            } catch {
+              parsed = raw as unknown as TResult;
+            }
+            onMessage(parsed, eventType);
+            eventType = 'message';
           }
         }
       }
+
       return (response?.data as TResult) ?? null;
     } catch (e) {
       console.error(e);
       const eF = new HttpError(
         (e as AxiosError).response?.status ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
         stringify((e as AxiosError).response?.data),
-        (e as AxiosError).stack,
       );
       if (this._onError) {
         await this._onError(eF);

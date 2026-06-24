@@ -1,12 +1,9 @@
 from enum import StrEnum
 
-
-class LLM_NAME(StrEnum):
-    GLM_5 = "glm-5:cloud"
-    LLAMA_3_2 = "llama3.2"
+MESSAGE_RESOURCE_NAME = "Message"
 
 
-class LLM_ROLE(StrEnum):
+class MessageRole(StrEnum):
     ASSISTANT = "assistant"
     SYSTEM = "system"
     TOOL = "tool"

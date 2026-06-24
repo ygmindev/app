@@ -1,5 +1,5 @@
 from lib_ai.model.utils.early_stopping.early_stopping_models import EarlyStoppingModel
-from lib_ai.scoring.scoring_constants import ScoringMode
+from lib_ai.scoring.constants import ScoringMode
 
 
 class EarlyStopping(EarlyStoppingModel):

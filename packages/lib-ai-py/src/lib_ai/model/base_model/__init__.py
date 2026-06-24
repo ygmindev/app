@@ -22,7 +22,7 @@ from lib_ai.model.base_model.base_model_models import (
     OptimizeParamsOptionalModel,
 )
 from lib_ai.optimize.utils.optimize import optimize
-from lib_ai.scoring.scoring_constants import ScoringMode
+from lib_ai.scoring.constants import ScoringMode
 from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
 
 
