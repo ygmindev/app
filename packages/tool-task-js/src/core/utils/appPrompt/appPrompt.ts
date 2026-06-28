@@ -6,11 +6,18 @@ import {
   type AppPromptModel,
   type AppPromptParamsModel,
 } from '@tool/task/core/utils/appPrompt/appPrompt.models';
+import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 
-export const appPrompt = ({ defaultValue }: AppPromptParamsModel = {}): AppPromptModel => {
+export const appPrompt = ({
+  defaultValue,
+  isMultiple = false,
+  key,
+  patterns,
+}: AppPromptParamsModel = {}): AppPromptModel => {
   const options = filterNil(
     children(fromPackages()).map((v) => {
       try {
+        if (patterns && !patterns.some((pattern) => pattern.test(v.fullPath))) return null;
         const { name } = packageInfo(v.fullPath);
         return { id: name ?? '', label: name };
       } catch {
@@ -18,5 +25,10 @@ export const appPrompt = ({ defaultValue }: AppPromptParamsModel = {}): AppPromp
       }
     }),
   );
-  return { defaultValue: defaultValue ? [defaultValue] : undefined, key: 'app', options };
+  return {
+    defaultValue: defaultValue ? [defaultValue] : undefined,
+    key: key ?? 'app',
+    options,
+    type: isMultiple ? PROMPT_TYPE.MULTIPLE : PROMPT_TYPE.LIST,
+  };
 };

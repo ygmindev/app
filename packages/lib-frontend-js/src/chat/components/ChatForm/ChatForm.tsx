@@ -1,7 +1,7 @@
-import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
 import { type ChatFormPropsModel } from '@lib/frontend/chat/components/ChatForm/ChatForm.models';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
+import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
@@ -13,6 +13,8 @@ import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const ChatForm: LFCModel<ChatFormPropsModel> = ({
   bottomElement,
+  elementState,
+  onCancel,
   onSubmit,
   placeholder,
   ...props
@@ -21,11 +23,11 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({
   const currentUser = useCurrentUser();
 
   const { errors, handleChange, handleReset, handleSubmit, values } = useForm<{
-    text?: string;
+    content?: string;
   }>({
-    initialValues: { text: '' },
-    onSubmit: async ({ text }) => {
-      await onSubmit?.({ createdBy: currentUser ?? undefined, text });
+    initialValues: { content: '' },
+    onSubmit: async ({ content }) => {
+      await onSubmit?.({ content, createdBy: currentUser ?? undefined });
     },
   });
 
@@ -33,6 +35,8 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({
     handleSubmit();
     void sleep().then(handleReset);
   };
+
+  const isLoading = elementState === ELEMENT_STATE.LOADING;
 
   return (
     <Wrapper
@@ -45,28 +49,26 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({
             isRow
             justify={FLEX_JUSTIFY.END}>
             {bottomElement && <Wrapper flex>{bottomElement}</Wrapper>}
-            <Appearable
-              isActive={!!values.text}
-              isLazy={false}>
-              <Button
-                icon="arrowUp"
-                onPress={_onSubmit}
-                size={THEME_SIZE.SMALL}
-              />
-            </Appearable>
+            <Button
+              elementState={onCancel ? undefined : elementState}
+              icon={!onCancel ? 'arrowUp' : isLoading ? 'stop' : 'arrowUp'}
+              onPress={isLoading && onCancel ? onCancel : _onSubmit}
+              size={THEME_SIZE.SMALL}
+            />
           </Wrapper>
         }
-        error={errors?.text}
+        elementState={elementState}
+        error={errors?.content}
         flex
         isAutoFocus
         isBlurOnSubmit={false}
         isClearable={false}
         numberOfLines={2}
-        onChange={(v) => handleChange('text')(v)}
+        onChange={(v) => handleChange('content')(v)}
         onSubmit={_onSubmit}
         placeholder={placeholder}
         round
-        value={values.text}
+        value={values.content}
       />
     </Wrapper>
   );

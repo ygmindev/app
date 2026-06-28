@@ -17,7 +17,7 @@ export const FIXTURES: Array<MessageModel> = getEntityResourceFixture({
 
       createdBy: undefined,
 
-      text: `Message ${index}`,
+      content: `Message ${index}`,
     };
     switch (index) {
       case 0: {

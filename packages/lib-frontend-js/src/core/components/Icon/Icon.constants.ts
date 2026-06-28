@@ -36,6 +36,7 @@ export const IONIC_ICONS = {
   chip: 'hardware-chip-outline',
   cloud: 'cloud-outline',
   contrast: 'contrast-outline',
+  copy: 'copy-outline',
   cube: 'cube-outline',
   dark: 'moon',
   developer: 'terminal-outline',

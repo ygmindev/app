@@ -1,6 +1,7 @@
 # template version: 1.0.0
 
 
+from datetime import datetime
 from typing import Optional
 
 from lib_model.chat.message.constants import MessageRole
@@ -18,3 +19,4 @@ class LlmPayload(LlmPayloadModel, BaseModel):
     message_id: str = Field()
     type: LlmPayloadType = Field()
     role: Optional[MessageRole] = Field(default=None)
+    created: datetime = Field(default_value=datetime.now)

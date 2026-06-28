@@ -62,7 +62,7 @@ export class _HttpImplementation implements _HttpImplementationModel {
     params,
     request,
     url,
-  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
+  }: _HttpRequestParamsModel<TParams, TResult>): Promise<TResult | null> =>
     this.request<TParams, TResult>(HTTP_METHOD.DELETE, {
       request,
       url: uri<TParams>({ host: url, params }),
@@ -73,7 +73,7 @@ export class _HttpImplementation implements _HttpImplementationModel {
     params,
     request,
     url,
-  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
+  }: _HttpRequestParamsModel<TParams, TResult>): Promise<TResult | null> =>
     this.request<TParams, TResult>(HTTP_METHOD.GET, {
       onMessage,
       request,
@@ -85,19 +85,19 @@ export class _HttpImplementation implements _HttpImplementationModel {
     params,
     request,
     url,
-  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
+  }: _HttpRequestParamsModel<TParams, TResult>): Promise<TResult | null> =>
     this.request<TParams, TResult>(HTTP_METHOD.POST, { onMessage, params, request, url });
 
   put = async <TParams, TResult>({
     params,
     request,
     url,
-  }: _HttpRequestParamsModel<TParams>): Promise<TResult | null> =>
+  }: _HttpRequestParamsModel<TParams, TResult>): Promise<TResult | null> =>
     this.request<TParams, TResult>(HTTP_METHOD.PUT, { params, request, url });
 
   request = async <TParams, TResult>(
     method: HTTP_METHOD,
-    { onMessage, params, request, url }: _HttpRequestParamsModel<TParams>,
+    { onMessage, params, request, url }: _HttpRequestParamsModel<TParams, TResult>,
   ): Promise<TResult | null> => {
     try {
       const response = await this._instance.request({
@@ -105,6 +105,7 @@ export class _HttpImplementation implements _HttpImplementationModel {
         adapter: 'fetch',
         data: params,
         method,
+        signal: request?.signal,
         url: url ?? '',
       } as AxiosRequestConfig);
       if (request?.responseType === HTTP_RESPONSE_TYPE.STREAM && onMessage) {
@@ -142,9 +143,9 @@ export class _HttpImplementation implements _HttpImplementationModel {
               }
               continue;
             }
-            const raw = chunks.join('\n').trim();
+            const raw = chunks.join('\n');
             chunks.length = 0;
-            if (!raw) continue;
+            if (!raw || raw.trim() === '') continue;
             if (raw === '[DONE]') return null;
             let parsed: TResult;
             try {

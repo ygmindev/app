@@ -16,7 +16,7 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         extra="allow",
         populate_by_name=True,
         revalidate_instances="never",
-        str_strip_whitespace=True,
+        str_strip_whitespace=False,
         use_enum_values=True,
     )
 

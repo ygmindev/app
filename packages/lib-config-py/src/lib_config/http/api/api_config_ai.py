@@ -9,8 +9,8 @@ from lib_config.http.api.api_config_base import api_config_base
 
 
 async def ai_handler(req: HttpRequest) -> AsyncIterable[Any]:
-    text = req.body.get("text", "") if req.body else ""
-    async for x in chat_service.stream(text):
+    content = req.body.get("content", "") if req.body else ""
+    async for x in chat_service.stream(content):
         yield x
 
 

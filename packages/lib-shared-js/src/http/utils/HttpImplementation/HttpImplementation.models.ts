@@ -1,10 +1,12 @@
 import { type HTTP_RESPONSE_TYPE } from '@lib/shared/http/http.constants';
 import { type _HttpImplementationModel } from '@lib/shared/http/utils/HttpImplementation/_HttpImplementation.models';
 import { type UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
+import { type GenericAbortSignal } from 'axios';
 
 export type HttpRequestParamsModel = {
   headers?: object;
   responseType?: HTTP_RESPONSE_TYPE;
+  signal?: GenericAbortSignal;
   timeout?: number;
   withCredentials?: boolean;
 };

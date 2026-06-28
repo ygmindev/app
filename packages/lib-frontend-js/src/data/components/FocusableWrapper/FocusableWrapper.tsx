@@ -35,7 +35,6 @@ export const FocusableWrapper: RLFCModel<FocusableRefModel, FocusableWrapperProp
     <Wrapper
       {...wrapperProps}
       animation={{ states: ANIMATION_STATES_FOCUSABLE({ isBlocked, isError, theme }) }}
-      backgroundColor={'red'}
       border={wrapperProps.border ?? true}
       elementState={elementStateControlled}
       isOverflowHidden

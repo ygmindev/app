@@ -7,40 +7,51 @@ import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { MESSAGE_ROLE } from '@lib/model/ai/LlmPayload/LlmPayload.constants';
+import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
 
 export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
   chat,
-  currentUser,
-  onSubmit,
+  chatFormElement,
+  currentMessage,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const [currentUserState] = useStore('user.currentUser');
-  const currentUserF = currentUser ?? currentUserState;
+  const currentUser = useCurrentUser();
   const messages = chat?.messages;
+  const authStatus = useStore('auth.status');
   return (
     <MainLayout
       {...wrapperProps}
-      bottomElement={<ChatForm onSubmit={onSubmit} />}
+      bottomElement={chatFormElement ?? <ChatForm />}
       isFullHeight
       isFullWidth
       round>
       <Wrapper
         flex
         s={THEME_SIZE.SMALL}>
-        {messages &&
-          messages.map((message, i) => {
-            const isOwn = !!message?.createdBy && message?.createdBy?._id === currentUserF?._id;
-            return (
-              <MessageContainer
-                isOwn={isOwn}
-                key={message._id}
-                message={message}
-                messageNext={i === messages.length - 1 ? undefined : messages[i + 1]}
-                messagePrevious={i === 0 ? undefined : messages[i - 1]}
-              />
-            );
-          })}
+        {messages?.map((message, i) => {
+          const isOwn = authStatus
+            ? !!message?.createdBy && message?.createdBy?._id === currentUser?._id
+            : message.role === MESSAGE_ROLE.USER && isEqual(message?.createdBy, {});
+          return (
+            <MessageContainer
+              isOwn={isOwn}
+              key={message._id}
+              message={message}
+              messageNext={i === messages.length - 1 ? currentMessage : messages[i + 1]}
+              messagePrevious={i === 0 ? undefined : messages[i - 1]}
+            />
+          );
+        })}
+
+        {currentMessage && (
+          <MessageContainer
+            message={currentMessage}
+            messagePrevious={messages?.at(-1)}
+          />
+        )}
       </Wrapper>
     </MainLayout>
   );

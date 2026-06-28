@@ -74,10 +74,7 @@ class ChatService(BaseModel, ChatServiceModel):
     ) -> list[Message]:
         value = await self._redis.get(f"chat:history:{id}")
         if value:
-            print("@@@ VALUE:")
-            print(value)
             return json.loads(value)
-
         result = await self._database.find(
             query={"_id": id},
             resource=Message,
@@ -114,17 +111,21 @@ class ChatService(BaseModel, ChatServiceModel):
         )
         params.messages = [user_message]
         user_message = (await self._database.create(user_message)).result
-        user_message_id = str(user_message._id)
 
         history = await self._load_history(chat_id)
 
+        system_message = LlmMessage(
+            content="",
+            role=MessageRole.SYSTEM,
+        )
+        system_message_id = str(system_message._id)
         response = ""
         yield LlmPayload(
-            type=LlmPayloadType.START,
             chat_id=chat_id,
-            message_id=user_message_id,
-            role=MessageRole.SYSTEM,
             content="",
+            message_id=system_message_id,
+            role=MessageRole.SYSTEM,
+            type=LlmPayloadType.START,
         ).to_dict()
 
         async for chunk in self._agent.stream_message(params):
@@ -132,28 +133,24 @@ class ChatService(BaseModel, ChatServiceModel):
             yield LlmPayload(
                 type=LlmPayloadType.UPDATE,
                 chat_id=chat_id,
-                message_id=user_message_id,
+                message_id=system_message_id,
                 role=MessageRole.SYSTEM,
                 content=chunk,
             ).to_dict()
 
-        system_message = LlmMessage(
-            content=response,
-            role=MessageRole.SYSTEM,
-        )
+        system_message.content = response
         system_message = (await self._database.create(system_message)).result
-        system_message_id = str(system_message._id)
 
         history.append(user_message)
         history.append(system_message)
         await self._cache_history(chat_id, history)
 
         yield LlmPayload(
-            type=LlmPayloadType.END,
             chat_id=chat_id,
+            content=response,
             message_id=system_message_id,
             role=MessageRole.SYSTEM,
-            content=response,
+            type=LlmPayloadType.END,
         ).to_dict()
 
         await self._cache_history(

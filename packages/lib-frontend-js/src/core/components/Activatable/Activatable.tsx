@@ -6,6 +6,7 @@ import {
 } from '@lib/frontend/core/components/Activatable/Activatable.models';
 import { type PressablePropsModel } from '@lib/frontend/core/components/Pressable/Pressable.models';
 import { type RSFCModel } from '@lib/frontend/core/core.models';
+import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { useStyles } from '@lib/frontend/style/hooks/useStyles/useStyles';
 import { type ViewStyleModel } from '@lib/frontend/style/style.models';
 import isFunction from 'lodash/isFunction';
@@ -13,6 +14,7 @@ import { cloneElement, type ReactElement, useImperativeHandle, useState } from '
 
 export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> = ({
   children,
+  isMobileVisible,
   onActive,
   onHoverIn,
   onHoverOut,
@@ -22,7 +24,9 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
   ...props
 }) => {
   const { styles } = useStyles({ props });
-  const [isActive, isActiveSet] = useState<boolean>(false);
+  const isMobile = useIsMobile();
+  const isVisible = !!isMobileVisible && !!isMobile;
+  const [isActive, isActiveSet] = useState<boolean>(isVisible);
   const childrenF: ReactElement<PressablePropsModel> | undefined | null = isFunction(children)
     ? children(isActive)
     : children;
@@ -81,11 +85,13 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
     }
   })();
 
-  return childrenF
-    ? cloneElement(childrenF, {
-        ...triggerProps,
-        // TODO: fix typing
-        style: { ...childrenF.props.style, ...styles } as ViewStyleModel,
-      })
-    : childrenF || null;
+  return isVisible
+    ? childrenF
+    : childrenF
+      ? cloneElement(childrenF, {
+          ...triggerProps,
+          // TODO: fix typing
+          style: { ...childrenF.props.style, ...styles } as ViewStyleModel,
+        })
+      : childrenF || null;
 };
