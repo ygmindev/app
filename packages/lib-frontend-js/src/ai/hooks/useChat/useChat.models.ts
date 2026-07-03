@@ -12,3 +12,10 @@ export type UseChatModel = {
   subscribe(data: Partial<MessageModel>): void;
   unsubscribe(): void;
 };
+
+export type ChatStoreModel = {
+  controller: AbortController | undefined;
+  currentChat: Partial<ChatModel> | undefined;
+  currentMessage: Partial<MessageModel> | undefined;
+  isStreaming: boolean;
+};

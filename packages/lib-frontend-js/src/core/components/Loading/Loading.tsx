@@ -5,7 +5,6 @@ import { composeComponent } from '@lib/frontend/core/utils/composeComponent/comp
 import { THEME_COLOR, THEME_ROLE, THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { variableName } from '@lib/shared/core/utils/variableName/variableName';
 import isNumber from 'lodash/isNumber';
-import isString from 'lodash/isString';
 
 export const Loading = composeComponent<LoadingPropsModel, _LoadingPropsModel>({
   Component: _Loading,
@@ -14,7 +13,7 @@ export const Loading = composeComponent<LoadingPropsModel, _LoadingPropsModel>({
     { color = THEME_COLOR.PRIMARY, colorRole = THEME_ROLE.MAIN, size = THEME_SIZE.MEDIUM },
     theme,
   ) => ({
-    color: isString(color) ? color : theme.color.palette[color as THEME_COLOR][colorRole],
+    color: theme.color.palette?.[color as THEME_COLOR][colorRole] ?? color,
     size: isNumber(size) ? size : theme.font.size[size],
   }),
 });

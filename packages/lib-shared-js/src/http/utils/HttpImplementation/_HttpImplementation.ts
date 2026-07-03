@@ -161,6 +161,8 @@ export class _HttpImplementation implements _HttpImplementationModel {
 
       return (response?.data as TResult) ?? null;
     } catch (e) {
+      const errorName = (e as Error)?.name;
+      if (errorName === 'AbortError' || errorName === 'CanceledError') return null;
       console.error(e);
       const eF = new HttpError(
         (e as AxiosError).response?.status ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,

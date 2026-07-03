@@ -1,12 +1,11 @@
 import { type _LoadingPropsModel } from '@lib/frontend/core/components/Loading/_Loading.models';
 import { composeComponent } from '@lib/frontend/core/utils/composeComponent/composeComponent';
-// import ClockLoader from 'react-spinners/ClockLoader';
 import { type LoaderSizeMarginProps } from 'react-spinners/helpers/props';
 import SyncLoader from 'react-spinners/SyncLoader';
 
-const Compoent = SyncLoader;
+const Component = SyncLoader;
 
-const LoaderF = (Compoent as unknown as { default: typeof Compoent }).default ?? Compoent;
+const LoaderF = (Component as unknown as { default: typeof Component }).default ?? Component;
 
 export const _Loading = composeComponent<_LoadingPropsModel, LoaderSizeMarginProps>({
   Component: LoaderF,

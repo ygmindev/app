@@ -1,4 +1,5 @@
 import {
+  type ChatStoreModel,
   type UseChatModel,
   type UseChatParamsModel,
 } from '@lib/frontend/ai/hooks/useChat/useChat.models';
@@ -6,122 +7,149 @@ import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { LLM_PAYLOAD_TYPE, MESSAGE_ROLE } from '@lib/model/ai/LlmPayload/LlmPayload.constants';
 import { type LlmPayloadModel } from '@lib/model/ai/LlmPayload/LlmPayload.models';
-import { type ChatModel } from '@lib/model/chat/Chat/Chat.models';
+import { MESSAGE_STATUS } from '@lib/model/chat/Message/Message.constants';
 import { type MessageModel } from '@lib/model/chat/Message/Message.models';
+import { uid } from '@lib/shared/core/utils/uid/uid';
 import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { HTTP_RESPONSE_TYPE } from '@lib/shared/http/http.constants';
-import { useRef, useState } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 
-export const useChat = ({ url }: UseChatParamsModel): UseChatModel => {
-  const [isStreaming, isStreamingSet] = useState<boolean>(false);
-  const { post } = useHttp();
-  const [currentMessage, currentMessageSet] = useState<Partial<MessageModel> | undefined>(
-    undefined,
-  );
-  const currentMessageRef = useRef<Partial<MessageModel> | undefined>(undefined);
-  const [currentChat, currentChatSet] = useState<Partial<ChatModel> | undefined>(undefined);
-  const currentChatRef = useRef<Partial<ChatModel> | undefined>(undefined);
-  const abortControllerRef = useRef<AbortController | undefined>(undefined);
+let buffer = '';
 
-  const buffer = useRef<string>('');
-  const currentUser = useCurrentUser();
+const listeners = new Set<() => void>();
 
-  const unsetCurrentMessage = (): void => {
-    buffer.current = '';
-    currentMessageRef.current = undefined;
-    currentMessageSet(undefined);
-    isStreamingSet(false);
-  };
+const store: ChatStoreModel = {
+  controller: undefined,
+  currentChat: undefined,
+  currentMessage: undefined,
+  isStreaming: false,
+};
 
-  const onMessage = (data: Partial<LlmPayloadModel>, messageType: string): void => {
-    switch (data.type) {
-      case LLM_PAYLOAD_TYPE.START: {
-        buffer.current = data.content ?? '';
-        currentChatRef.current = {
-          ...currentChatRef.current,
-          _id: data.chat_id,
-        };
-        currentMessageRef.current = {
-          ...currentMessageRef.current,
+let storeSnapshot = { ...store };
+
+const chatStore = {
+  getSnapshot: () => storeSnapshot,
+  subscribe: (listener: () => void) => {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  },
+  update: (patch: Partial<ChatStoreModel>): void => {
+    Object.assign(store, patch);
+    storeSnapshot = { ...store };
+    listeners.forEach((l) => l());
+  },
+};
+
+const onMessage = (data: Partial<LlmPayloadModel>): void => {
+  const s = chatStore.getSnapshot();
+  switch (data.type) {
+    case LLM_PAYLOAD_TYPE.START: {
+      buffer = data.content ?? '';
+      const chat = { ...s.currentChat, _id: data.chat_id };
+      chatStore.update({
+        currentChat: chat,
+        currentMessage: {
           _id: data.message_id,
-          chat: currentChatRef.current,
-          content: buffer.current,
+          chat,
+          content: buffer,
           created: new DateTime(data.created),
           role: data.role,
-        };
-        currentChatSet(currentChatRef.current);
-        currentMessageSet({ ...currentMessageRef.current });
-        break;
-      }
-
-      case LLM_PAYLOAD_TYPE.UPDATE: {
-        buffer.current += data.content ?? '';
-        currentMessageRef.current = {
-          ...currentMessageRef.current,
-          _id: data.message_id,
-          content: buffer.current,
-          created: new DateTime(data.created),
-        };
-        currentMessageSet({ ...currentMessageRef.current });
-        break;
-      }
-
-      case LLM_PAYLOAD_TYPE.END: {
-        currentChatRef.current = {
-          ...currentChatRef.current,
-          messages: [...(currentChatRef.current?.messages ?? []), { ...currentMessageRef.current }],
-        };
-        currentChatSet(currentChatRef.current);
-        unsetCurrentMessage();
-        break;
-      }
-
-      case LLM_PAYLOAD_TYPE.ERROR: {
-        unsetCurrentMessage();
-        break;
-      }
+          status: MESSAGE_STATUS.STREAMING,
+        },
+      });
+      break;
     }
-  };
 
-  const subscribe = (data: Partial<MessageModel>): void => {
-    abortControllerRef.current?.abort();
-    abortControllerRef.current = new AbortController();
-    const userMessage: Partial<MessageModel> = {
-      ...data,
-      created: new DateTime(),
-      createdBy: currentUser ?? {},
-      role: MESSAGE_ROLE.USER,
-    };
-    isStreamingSet(true);
-    currentChatRef.current = {
-      ...currentChatRef.current,
-      messages: [...(currentChatRef.current?.messages ?? []), userMessage],
-    };
-    currentChatSet(currentChatRef.current);
-    buffer.current = '';
+    case LLM_PAYLOAD_TYPE.UPDATE: {
+      buffer += data.content ?? '';
+      chatStore.update({
+        currentMessage: {
+          ...s.currentMessage,
+          content: buffer,
+          status: MESSAGE_STATUS.STREAMING,
+        },
+      });
+      break;
+    }
 
-    void post({
-      onMessage,
-      params: data,
-      request: {
-        responseType: HTTP_RESPONSE_TYPE.STREAM,
-        signal: abortControllerRef.current.signal,
-      },
-      url,
-    });
-  };
+    case LLM_PAYLOAD_TYPE.END: {
+      const completed = { ...s.currentMessage, status: MESSAGE_STATUS.COMPLETED };
+      const messages = s.currentChat?.messages ?? [];
+      chatStore.update({
+        controller: undefined,
+        currentChat: {
+          ...s.currentChat,
+          messages: messages.some((m) => m._id === completed._id)
+            ? messages
+            : [...messages, completed],
+        },
+        currentMessage: undefined,
+        isStreaming: false,
+      });
+      break;
+    }
 
-  const unsubscribe = (): void => {
-    abortControllerRef.current?.abort();
-    abortControllerRef.current = undefined;
-    unsetCurrentMessage();
-    isStreamingSet(false);
-  };
+    case LLM_PAYLOAD_TYPE.ERROR: {
+      chatStore.update({ controller: undefined, currentMessage: undefined, isStreaming: false });
+      break;
+    }
+  }
+};
+
+export const useChat = ({ url }: UseChatParamsModel): UseChatModel => {
+  const { post } = useHttp();
+  const currentUser = useCurrentUser();
+  const snapshot = useSyncExternalStore(chatStore.subscribe, chatStore.getSnapshot);
+
+  const subscribe = useCallback(
+    (data: Partial<MessageModel>): void => {
+      const s = chatStore.getSnapshot();
+      if (s.controller) return;
+
+      const controller = new AbortController();
+      buffer = '';
+      chatStore.update({
+        controller,
+        currentChat: {
+          ...s.currentChat,
+          messages: [
+            ...(s.currentChat?.messages ?? []),
+            {
+              ...data,
+              _id: uid(),
+              created: new DateTime(),
+              createdBy: currentUser ?? {},
+              role: MESSAGE_ROLE.USER,
+            },
+          ],
+        },
+        isStreaming: true,
+      });
+
+      void post({
+        onMessage,
+        params: data,
+        request: { responseType: HTTP_RESPONSE_TYPE.STREAM, signal: controller.signal },
+        url,
+      }).finally(() => {
+        if (chatStore.getSnapshot().controller === controller) {
+          chatStore.update({ controller: undefined, isStreaming: false });
+        }
+      });
+    },
+    [currentUser, post, url],
+  );
+
+  const unsubscribe = useCallback((): void => {
+    chatStore.getSnapshot().controller?.abort();
+    chatStore.update({ controller: undefined, currentMessage: undefined, isStreaming: false });
+    buffer = '';
+  }, []);
 
   return {
-    chat: currentChat,
-    currentMessage,
-    isStreaming,
+    chat: snapshot.currentChat,
+    currentMessage: snapshot.currentMessage,
+    isStreaming: snapshot.isStreaming,
     subscribe,
     unsubscribe,
   };

@@ -1,3 +1,4 @@
+import { SystemMessageContainer } from '@lib/frontend/ai/components/SystemMessageContainer/SystemMessageContainer';
 import { type ChatContainerPropsModel } from '@lib/frontend/chat/components/ChatContainer/ChatContainer.models';
 import { ChatForm } from '@lib/frontend/chat/components/ChatForm/ChatForm';
 import { MessageContainer } from '@lib/frontend/chat/components/MessageContainer/MessageContainer';
@@ -9,7 +10,9 @@ import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLa
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
 import { MESSAGE_ROLE } from '@lib/model/ai/LlmPayload/LlmPayload.constants';
+import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 import { isEqual } from '@lib/shared/core/utils/isEqual/isEqual';
+import { type ReactElement } from 'react';
 
 export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
   chat,
@@ -21,37 +24,35 @@ export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
   const currentUser = useCurrentUser();
   const messages = chat?.messages;
   const authStatus = useStore('auth.status');
+
+  const chatElement = (message: Partial<MessageModel>): ReactElement => {
+    const isOwn = authStatus
+      ? !!message?.createdBy && message?.createdBy?._id === currentUser?._id
+      : message.role === MESSAGE_ROLE.USER && isEqual(message?.createdBy, {});
+    const Container =
+      message.role === MESSAGE_ROLE.SYSTEM ? SystemMessageContainer : MessageContainer;
+    return (
+      <Container
+        isOwn={isOwn}
+        key={message._id}
+        message={message}
+      />
+    );
+  };
+
   return (
     <MainLayout
       {...wrapperProps}
       bottomElement={chatFormElement ?? <ChatForm />}
+      flex
       isFullHeight
-      isFullWidth
-      round>
+      isFullWidth>
       <Wrapper
         flex
         s={THEME_SIZE.SMALL}>
-        {messages?.map((message, i) => {
-          const isOwn = authStatus
-            ? !!message?.createdBy && message?.createdBy?._id === currentUser?._id
-            : message.role === MESSAGE_ROLE.USER && isEqual(message?.createdBy, {});
-          return (
-            <MessageContainer
-              isOwn={isOwn}
-              key={message._id}
-              message={message}
-              messageNext={i === messages.length - 1 ? currentMessage : messages[i + 1]}
-              messagePrevious={i === 0 ? undefined : messages[i - 1]}
-            />
-          );
-        })}
+        {messages?.map((message) => chatElement(message))}
 
-        {currentMessage && (
-          <MessageContainer
-            message={currentMessage}
-            messagePrevious={messages?.at(-1)}
-          />
-        )}
+        {currentMessage && chatElement(currentMessage)}
       </Wrapper>
     </MainLayout>
   );
