@@ -1,4 +1,4 @@
-import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
+import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import { type EntityResourceModel } from '@lib/model/resource/EntityResource/EntityResource.models';
 import { cleanObject as cleanObjectBase } from '@lib/shared/core/utils/cleanObject/cleanObject.base';
 import {

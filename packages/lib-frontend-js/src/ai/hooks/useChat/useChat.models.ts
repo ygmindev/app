@@ -2,7 +2,7 @@ import { type ChatModel } from '@lib/model/chat/Chat/Chat.models';
 import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 
 export type UseChatParamsModel = {
-  url: string;
+  chatId?: string;
 };
 
 export type UseChatModel = {

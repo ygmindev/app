@@ -1,7 +1,7 @@
 import { StripeAdminImplementation } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation';
 import { type StripeAdminImplementationModel } from '@lib/backend/billing/utils/StripeAdminImplementation/StripeAdminImplementation.models';
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
+import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import { RequestContextModel } from '@lib/config/api/api.models';
 import { BankImplementation } from '@lib/model/billing/Bank/BankImplementation/BankImplementation';
 import { type BankImplementationModel } from '@lib/model/billing/Bank/BankImplementation/BankImplementation.models.js';

@@ -1,6 +1,28 @@
 packages:
   - packages/*
 
+allowBuilds:
+  '@apollo/protobufjs': set this to true or false
+  '@ffmpeg-installer/darwin-arm64': set this to true or false
+  '@firebase/util': set this to true or false
+  '@parcel/watcher': set this to true or false
+  '@swc/core': set this to true or false
+  aws-crt: set this to true or false
+  aws-sdk: set this to true or false
+  azure-functions-core-tools: set this to true or false
+  core-js: set this to true or false
+  cpu-features: set this to true or false
+  dooboolab-welcome: set this to true or false
+  esbuild: set this to true or false
+  keytar: set this to true or false
+  mongodb-memory-server: set this to true or false
+  protobufjs: set this to true or false
+  puppeteer: set this to true or false
+  serverless: set this to true or false
+  spawn-sync: set this to true or false
+  ssh2: set this to true or false
+  unrs-resolver: set this to true or false
+
 allowUnusedPatches: true
 
 patchedDependencies:

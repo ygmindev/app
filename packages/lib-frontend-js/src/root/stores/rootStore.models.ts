@@ -2,6 +2,7 @@ import { type AppStateModel } from '@lib/frontend/app/stores/appStore/appStore.m
 import { type AuthStateModel } from '@lib/frontend/auth/stores/authStore/authStore.models';
 import { type BILLING } from '@lib/frontend/billing/billing.constants';
 import { type BillingStateModel } from '@lib/frontend/billing/stores/billingStore/billingStore.models';
+import { type ChatStateModel } from '@lib/frontend/chat/stores/chatStore/chatStore.models';
 import { type CommerceStateModel } from '@lib/frontend/commerce/stores/commerceStore/commerceStore.models';
 import { type GROUP } from '@lib/frontend/group/group.constants';
 import { type GroupStateModel } from '@lib/frontend/group/stores/groupStore/groupStore.models';
@@ -17,6 +18,7 @@ import { type StyleStateModel } from '@lib/frontend/style/stores/styleStore/styl
 import { type UserStateModel } from '@lib/frontend/user/stores/userStore/userStore.models';
 import { type APP } from '@lib/shared/app/app.constants';
 import { type AUTH } from '@lib/shared/auth/auth.constants';
+import { type CHAT } from '@lib/shared/chat/chat.constants';
 import { type COMMERCE } from '@lib/shared/commerce/commerce.constants';
 import { type LOCALE } from '@lib/shared/locale/locale.constants';
 import { type NOTIFICATION } from '@lib/shared/notification/notification.constants';
@@ -28,6 +30,7 @@ export type RootStateModel = {
   [APP]: AppStateModel;
   [AUTH]: AuthStateModel;
   [BILLING]: BillingStateModel;
+  [CHAT]: ChatStateModel;
   [COMMERCE]: CommerceStateModel;
   [GROUP]: GroupStateModel;
   [LOCALE]: LocaleStateModel;

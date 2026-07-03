@@ -4,7 +4,7 @@ import {
 } from '@lib/backend/database/utils/Database/_Database.models';
 import { type RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
 import { mongoFilter } from '@lib/backend/database/utils/mongoFilter/mongoFilter';
-import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
+import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import { _database } from '@lib/config/database/_database';
 import {
   type _DatabaseConfigModel,

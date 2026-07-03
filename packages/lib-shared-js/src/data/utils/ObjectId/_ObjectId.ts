@@ -1,4 +1,4 @@
-import { type _ObjectIdParamsModel } from '@lib/backend/database/utils/ObjectId/_ObjectId.models';
+import { type _ObjectIdParamsModel } from '@lib/shared/data/utils/ObjectId/_ObjectId.models';
 import { ObjectId } from 'mongodb';
 
 export class _ObjectId extends ObjectId {

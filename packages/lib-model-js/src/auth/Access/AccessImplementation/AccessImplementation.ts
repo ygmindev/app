@@ -1,5 +1,5 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
-import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
+import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';
 import { type RequestContextModel } from '@lib/config/api/api.models';

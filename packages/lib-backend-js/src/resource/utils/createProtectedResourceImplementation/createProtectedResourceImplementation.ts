@@ -1,4 +1,4 @@
-import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
+import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import {
   type CreateProtectedResoureImplementationModel,
