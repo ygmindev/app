@@ -1,6 +1,6 @@
 # template version: 1.0.0
 import json
-from typing import AsyncIterable, Optional
+from typing import AsyncIterable
 
 from lib_ai.agent.utils.agent.agent import Agent
 from lib_ai.agent.utils.agent_state.agent_state import AgentState
@@ -50,23 +50,22 @@ class ChatService(BaseModel, ChatServiceModel):
 
     async def get_chat(
         self,
-        id: str | None,
+        id: str,
         message: str,
     ) -> Chat:
-        if id:
-            chat = await self._database.find(
-                query={"_id": id},
-                resource=Chat,
-            )
-            if not chat.result:
-                raise ValueError(f"chat {id} not found")
-            return chat.result[0]
-        title = message[:_CHAT_MAX_LENGTH] + (
-            "..." if len(message) > _CHAT_MAX_LENGTH else ""
+        chat = await self._database.find(
+            query={"_id": id},
+            resource=Chat,
         )
-        chat = Chat(name=title)
-        result = await self._database.create(chat)
-        return result.result
+        if not chat.result:
+            title = message[:_CHAT_MAX_LENGTH] + (
+                "..." if len(message) > _CHAT_MAX_LENGTH else ""
+            )
+            chat = Chat(name=title)
+            chat._id = id
+            result = await self._database.create(chat)
+            return result.result
+        return chat.result[0]
 
     async def _load_history(
         self,
@@ -99,7 +98,7 @@ class ChatService(BaseModel, ChatServiceModel):
     async def stream(
         self,
         message: str,
-        chat_id: Optional[str] = None,
+        chat_id: str,
     ) -> AsyncIterable[str | dict]:
         chat = await self.get_chat(chat_id, message)
         chat_id = str(chat._id)

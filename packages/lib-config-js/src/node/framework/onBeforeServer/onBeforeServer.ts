@@ -11,7 +11,10 @@ import {
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
 import { QueryClient } from '@lib/frontend/data/utils/QueryClient/QueryClient';
 import { ROOT_REDUCERS } from '@lib/frontend/root/stores/rootStore.constants';
-import { type RootStateModel } from '@lib/frontend/root/stores/rootStore.models';
+import {
+  type RootReducersModel,
+  type RootStateModel,
+} from '@lib/frontend/root/stores/rootStore.models';
 import { Store } from '@lib/frontend/state/utils/Store/Store';
 import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 import { AUTH } from '@lib/shared/auth/auth.constants';
@@ -37,12 +40,11 @@ export const onBeforeServer = ({
     render: async (params) => {
       const { context, headers } = params;
 
-      // 1. initialize backend
       await initialize({ database });
 
-      // 2. hydrate state from cookies and headers
+      // hydrate state from cookies and headers
       const queryClient = new QueryClient();
-      const store = new Store<RootStateModel>({
+      const store = new Store<RootStateModel, RootReducersModel>({
         cookies: context?.[STATE]?.cookies,
         reducers: ROOT_REDUCERS,
       });

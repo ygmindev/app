@@ -20,8 +20,8 @@ import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/sha
 
 export const RootLayout: LFCModel<RootLayoutPropsModel> = ({ children, ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const [notifications] = useStore('notification.notifications');
-  const [isOffline] = useStore('app.isOffline');
+  const { value: notifications } = useStore('notification.notifications');
+  const { value: isOffline } = useStore('app.isOffline');
   const theme = useTheme();
   const { t } = useTranslation();
   return (

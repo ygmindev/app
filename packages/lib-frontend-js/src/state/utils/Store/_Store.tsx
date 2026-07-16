@@ -1,8 +1,12 @@
+import { StoreContext } from '@lib/frontend/root/containers/Root/context';
 import {
-  type ActionsModel,
+  type RootReducersModel,
+  type RootStateModel,
+} from '@lib/frontend/root/stores/rootStore.models';
+import {
+  type DefaultStateModel,
   type NestedActionsModel,
   type NestedDefaultStateModel,
-  type NestedInitialStateModel,
 } from '@lib/frontend/state/state.models';
 import { Storage } from '@lib/frontend/state/utils/Storage/Storage';
 import {
@@ -11,18 +15,22 @@ import {
   type _StoreModel,
   type _StoreParamsModel,
 } from '@lib/frontend/state/utils/Store/_Store.models';
-import { type StateProviderPropsModel } from '@lib/frontend/state/utils/Store/Store.models';
+import {
+  type StoreModel,
+  type StateProviderPropsModel,
+} from '@lib/frontend/state/utils/Store/Store.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { getValue } from '@lib/shared/core/utils/getValue/getValue';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { mapValuesAsync } from '@lib/shared/core/utils/mapValuesAsync/mapValuesAsync';
+import { merge } from '@lib/shared/core/utils/merge/merge';
+import { type MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { isServer } from '@lib/shared/web/utils/isServer/isServer';
 import { type EnhancedStore, original, type PayloadAction, type Reducer } from '@reduxjs/toolkit';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import cloneDeep from 'lodash/cloneDeep';
 import isMatch from 'lodash/isMatch';
-import isNumber from 'lodash/isNumber';
 import isPlainObject from 'lodash/isPlainObject';
 import reduce from 'lodash/reduce';
 import set from 'lodash/set';
@@ -42,60 +50,89 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 
-const StoreContextProvider = <TType extends Record<string, unknown>>({
+const StoreContextProvider = <
+  TType extends Record<string, unknown>,
+  TReducers extends Record<StringKeyModel<TType>, unknown>,
+>({
   actions: baseActions,
   children,
   defaultState: baseDefaultState,
   persistedState,
+  store: baseStore,
   value,
-}: _StoreContextProviderPropsModel<TType>): ReactElement<
-  _StoreContextProviderPropsModel<TType>
+}: _StoreContextProviderPropsModel<TType, TReducers>): ReactElement<
+  _StoreContextProviderPropsModel<TType, TReducers>
 > => {
   const dispatch = useDispatch();
 
-  const nestedActions = <TValue extends Record<string, unknown>>(
-    defaultState: TValue,
-    store: StringKeyModel<TType>,
+  const nestedActions = <TKey extends StringKeyModel<TType>>(
+    defaultState: NestedDefaultStateModel<TType>[TKey],
+    store: TKey,
     paths: Array<string> = [],
-  ): ActionsModel<TValue> =>
+  ): NestedActionsModel<TType, TReducers>[TKey] =>
     reduce(
       defaultState,
       (result, v, k) => {
         const path = [...paths, k].join('.');
-        type TDefault = typeof v;
         let actions = {
-          set: (value?: TDefault) => dispatch(baseActions[store].set({ key: path, value })),
-          unset: () => {},
-        } as ActionsModel<TValue>;
+          set: (value) => dispatch(baseActions[store].set({ key: path, value })),
+          unset: () => dispatch(baseActions[store].unset({ key: path })),
+        } as NestedActionsModel<TType, TReducers>[TKey];
         if (isArray(v)) {
           actions = {
             ...actions,
-            add: (value?: TDefault) => dispatch(baseActions[store].add({ key: path, value })),
-            remove: (value?: Partial<TDefault>) =>
-              dispatch(baseActions[store].remove({ key: path, value })),
-            update: (filter?: number | Partial<TDefault>, value?: Partial<TDefault>) =>
-              dispatch(baseActions[store].update({ filter, key: path, value })),
+            add: (value) => dispatch(baseActions[store].add({ key: path, value })),
+            remove: (value) => dispatch(baseActions[store].remove({ key: path, value })),
           };
         } else if (isPlainObject(v)) {
           actions = {
             ...actions,
-            ...nestedActions(v as Record<string, unknown>, store, [...paths, k]),
+            ...nestedActions(v as DefaultStateModel<TType[TKey]>, store, [...paths, k]),
+            merge: (value, strategy?: MERGE_STRATEGY) =>
+              dispatch(baseActions[store].merge({ key: path, strategy, value })),
           };
         }
         return { ...result, [k]: actions };
       },
-      {} as ActionsModel<TValue>,
+      {} as NestedActionsModel<TType, TReducers>[TKey],
     );
 
+  type StoreActionsModel = NestedActionsModel<TType, TReducers>[StringKeyModel<TType>];
   const actionsF = reduce(
     baseDefaultState,
-    (r, v, k) => ({ ...r, [k]: nestedActions(v, k as StringKeyModel<TType>) }),
-    {} as NestedActionsModel<TType>,
+    (r, v, k) => {
+      const storeActions = nestedActions(v, k as StringKeyModel<TType>);
+      return {
+        ...r,
+        [k]: {
+          ...storeActions,
+          ...reduce(
+            baseActions[k],
+            (rr, vv, kk) =>
+              Object.hasOwn(storeActions, kk)
+                ? rr
+                : {
+                    ...rr,
+                    [kk]: (action: never): void => {
+                      dispatch(vv(action));
+                    },
+                  },
+            {} as StoreActionsModel,
+          ),
+        },
+      };
+    },
+    {} as NestedActionsModel<TType, TReducers>,
   );
 
   const providers = useMemo<Array<ReactElement>>(
     () =>
       filterNil([
+        baseStore && (
+          <StoreContext.Provider
+            value={baseStore as StoreModel<RootStateModel, RootReducersModel>}
+          />
+        ),
         value?.actionContext.Provider && <value.actionContext.Provider value={actionsF} />,
         value?.defaultStateContext.Provider && (
           <value.defaultStateContext.Provider value={baseDefaultState} />
@@ -110,15 +147,18 @@ const StoreContextProvider = <TType extends Record<string, unknown>>({
   return <>{providers.reduce((result, element) => cloneElement(element, {}, result), children)}</>;
 };
 
-export class _Store<TType extends Record<string, unknown>> implements _StoreModel<TType> {
-  protected actions: _StoreActionsModel<TType>;
+export class _Store<
+  TType extends Record<string, unknown>,
+  TReducers extends Record<StringKeyModel<TType>, unknown>,
+> implements _StoreModel<TType, TReducers> {
+  protected _store: EnhancedStore<TType>;
+  protected actions: _StoreActionsModel<TType, TReducers>;
   protected defaultState: NestedDefaultStateModel<TType>;
-  protected persistedState?: NestedDefaultStateModel<TType>;
+  protected persistedState: NestedDefaultStateModel<TType>;
   protected persistor: Persistor;
   protected persistors: { [TKey in StringKeyModel<TType>]?: PersistConfig<TType[TKey]> };
-  protected store: EnhancedStore<TType>;
 
-  constructor({ cookies, initialState, reducers }: _StoreParamsModel<TType>) {
+  constructor({ cookies, initialState, reducers }: _StoreParamsModel<TType, TReducers>) {
     const storage = new Storage({ cookies });
     const {
       actions: actionsF,
@@ -128,14 +168,30 @@ export class _Store<TType extends Record<string, unknown>> implements _StoreMode
     } = reduce(
       reducers,
       (result, reducer, name) => {
-        type StateModel = NestedInitialStateModel<TType>[StringKeyModel<TType>] | undefined;
+        type StateModel = NestedDefaultStateModel<TType>[StringKeyModel<TType>];
         const { actions, reducer: reducerF } = createSlice({
-          initialState:
-            initialState?.[name as StringKeyModel<TType>] ?? (reducer.defaultState as StateModel),
+          initialState: initialState?.[name] ?? reducer.defaultState,
           name,
           reducers: {
+            ...(reducer.reducers
+              ? reduce(
+                  reducer.reducers,
+                  (r, v, k) => ({
+                    ...r,
+                    [k]: (state: StateModel, action: PayloadAction<unknown>) =>
+                      (
+                        v as unknown as (
+                          state: StateModel | undefined,
+                          action: unknown,
+                        ) => StateModel
+                      )(state, action.payload),
+                  }),
+                  {},
+                )
+              : {}),
+
             add: (state, action: PayloadAction<{ key: string; value: unknown }>) => {
-              let currentState = state as object;
+              let currentState = state;
               const values = getValue(original(state), action.payload.key);
               if (isArray(values)) {
                 currentState = set(currentState, action.payload.key, [
@@ -143,23 +199,39 @@ export class _Store<TType extends Record<string, unknown>> implements _StoreMode
                   action.payload.value,
                 ]);
               }
-              return currentState as TType[StringKeyModel<TType>];
+              return currentState;
             },
+
             get: (state, action: PayloadAction<{ key: string }>) =>
               getValue(original(state), action.payload.key),
+
+            merge: (
+              state,
+              action: PayloadAction<{ key: string; strategy?: MERGE_STRATEGY; value: unknown }>,
+            ) => {
+              let currentState = state;
+              const values = cloneDeep(getValue(original(state), action.payload.key));
+              if (isPlainObject(values)) {
+                const merged = merge([action.payload.value, values], action.payload.strategy);
+                currentState = set(currentState, action.payload.key, merged);
+              }
+              return currentState;
+            },
             remove: (state, action: PayloadAction<{ key: string; value: unknown }>) => {
-              let currentState = state as object;
+              let currentState = state;
               const values = getValue(original(currentState), action.payload.key);
               if (isArray(values)) {
                 currentState = set(
                   currentState,
                   action.payload.key,
-                  (values as Array<never>).filter(
-                    (v) => !isMatch(v, action.payload.value as object),
+                  values.filter((v) =>
+                    isPlainObject(v)
+                      ? !isMatch(v as object, action.payload.value as object)
+                      : v !== action.payload.value,
                   ),
                 );
               }
-              return currentState as TType[StringKeyModel<TType>];
+              return currentState;
             },
             set: (state, action: PayloadAction<{ key: string; value: unknown }>) => {
               let currentState = state as object;
@@ -167,29 +239,10 @@ export class _Store<TType extends Record<string, unknown>> implements _StoreMode
               return currentState as TType[StringKeyModel<TType>];
             },
             unset: (state, action: PayloadAction<{ key: string }>) => {
-              const currentState = state as object;
+              const currentState = state;
               unset(currentState, action.payload.key);
               void storage.removeItem(action.payload.key);
-              return currentState as TType[StringKeyModel<TType>];
-            },
-            update: (
-              state,
-              action: PayloadAction<{ filter: unknown; key: string; value: unknown }>,
-            ) => {
-              let currentState = state as unknown as object;
-              const values = cloneDeep(getValue(original(state), action.payload.key));
-              if (isArray(values)) {
-                const index = isNumber(action.payload.filter)
-                  ? action.payload.filter
-                  : (values as Array<never>).findIndex((v) =>
-                      isMatch(v, action.payload.filter as object),
-                    );
-                if (index >= 0) {
-                  values[index] = action.payload.value as never;
-                }
-                currentState = set(currentState, action.payload.key, values);
-              }
-              return currentState as TType[StringKeyModel<TType>];
+              return currentState;
             },
           },
         });
@@ -212,12 +265,12 @@ export class _Store<TType extends Record<string, unknown>> implements _StoreMode
             : result.persistors,
           reducers: {
             ...result.reducers,
-            [name]: persistConfig ? persistReducer(persistConfig, reducerF) : reducerF,
+            [name]: persistConfig ? persistReducer(persistConfig as never, reducerF) : reducerF,
           } as Reducer<TType>,
         };
       },
       {
-        actions: {} as _StoreActionsModel<TType>,
+        actions: {} as _StoreActionsModel<TType, TReducers>,
         defaultState: {} as NestedDefaultStateModel<TType>,
         persistors: {} as { [TKey in StringKeyModel<TType>]?: PersistConfig<TType[TKey]> },
         reducers: {} as Reducer<TType>,
@@ -227,7 +280,8 @@ export class _Store<TType extends Record<string, unknown>> implements _StoreMode
     this.defaultState = defaultStateF;
     this.actions = actionsF;
     this.persistors = process.env.NODE_ENV === 'test' ? {} : persistorsF;
-    this.store = configureStore({
+    this.persistedState = {} as NestedDefaultStateModel<TType>;
+    this._store = configureStore({
       middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
           serializableCheck: {
@@ -237,27 +291,28 @@ export class _Store<TType extends Record<string, unknown>> implements _StoreMode
       preloadedState: initialState as TType,
       reducer: reducersF,
     });
-    this.persistor = persistStore(this.store);
+    this.persistor = persistStore(this._store);
 
     void this.getStatePersisted().then((persistedState) => {
       this.persistedState = persistedState;
     });
   }
 
-  getState = (): TType => this.store.getState();
+  getState = (): TType => this._store.getState();
 
-  getStatePersisted = async (): Promise<TType> =>
+  getStatePersisted = async (): Promise<NestedDefaultStateModel<TType>> =>
     mapValuesAsync(this.persistors, async (v) =>
-      getStoredState(v as PersistConfig<TType[StringKeyModel<TType>]>),
-    ) as Promise<TType>;
+      getStoredState(v as PersistConfig<unknown>),
+    ) as Promise<NestedDefaultStateModel<TType>>;
 
-  get Provider(): ComponentType<StateProviderPropsModel<TType>> {
+  get Provider(): ComponentType<StateProviderPropsModel<TType, TReducers>> {
     return ({ children, value }) => (
-      <_Provider store={this.store}>
+      <_Provider store={this._store}>
         <StoreContextProvider
           actions={this.actions}
           defaultState={this.defaultState}
           persistedState={this.persistedState}
+          store={this}
           value={value}>
           {children}
         </StoreContextProvider>

@@ -1,62 +1,71 @@
 import {
-  type EmptyObjectModel,
+  type PartialDeepModel,
   type PrimitiveModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
+import { type MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
-export type ReducerModel<TType> = {
+export type SliceModel<TType, TReducers = undefined> = {
+  readonly __reducers?: TReducers;
+
   defaultState: DefaultStateModel<TType>;
 
   persist?: Array<StringKeyModel<TType>> | boolean;
+
+  reducers?: {
+    [TKey in StringKeyModel<TReducers>]: (state: TType, action: TReducers[TKey]) => TType;
+  };
+};
+
+export type ActionModel<TType> = {
+  set(value?: TType): void;
+  unset(): void;
+} & (TType extends Array<infer TValue>
+  ? {
+      add(value?: TValue): void;
+      remove(value?: Partial<TValue>): void;
+    }
+  : TType extends Record<string, unknown>
+    ? ActionsModel<TType> & {
+        merge(value?: PartialDeepModel<TType>, strategy?: MERGE_STRATEGY): void;
+      }
+    : unknown);
+
+export type ActionsModel<TType> = {
+  [TKey in StringKeyModel<TType>]: ActionModel<TType[TKey]>;
 };
 
 export type DefaultStateModel<TType> = {
-  [TKey in keyof Required<TType>]:
+  [TKey in StringKeyModel<TType>]:
     | Required<TType>[TKey]
     | (Required<TType>[TKey] extends PrimitiveModel
         ? undefined
         : Required<TType>[TKey] extends Array<unknown>
           ? []
-          : EmptyObjectModel);
+          : undefined);
 };
 
-export type ActionsModel<TType> = {
-  [TKey in StringKeyModel<Required<TType>>]: {
-    set: (value?: Required<TType>[TKey]) => void;
-    unset: () => void;
-  } & (Required<TType>[TKey] extends Array<infer TValue>
-    ? {
-        add: (value?: TValue) => void;
-        remove: (value?: Partial<TValue>) => void;
-        update: (filter?: number | Partial<TValue>, value?: Partial<TValue>) => void;
-      }
-    : Required<TType>[TKey] extends Record<string, unknown>
-      ? ActionsModel<Required<TType>[TKey]>
-      : unknown);
+export type NestedReducerModel<
+  TType extends Record<string, unknown>,
+  TReducers extends Record<StringKeyModel<TType>, unknown>,
+> = {
+  [TKey in StringKeyModel<TType>]: SliceModel<TType[TKey], TReducers[TKey]>;
 };
 
-export type NestedReducerModel<TType extends Record<string, unknown>> = {
-  [TKey in StringKeyModel<TType>]: ReducerModel<TType[TKey]>;
-};
-
-export type NestedDefaultStateModel<TType extends Record<string, unknown>> = {
+export type NestedDefaultStateModel<TType> = {
   [TKey in StringKeyModel<TType>]: DefaultStateModel<TType[TKey]>;
 };
 
-export type NestedActionsModel<TType extends Record<string, unknown>> = {
-  [TKey in StringKeyModel<TType>]: ActionsModel<TType[TKey]>;
+export type NestedActionsModel<TType, TReducers extends Record<StringKeyModel<TType>, unknown>> = {
+  [TKey in StringKeyModel<TType>]: ActionsModel<TType[TKey]> & {
+    [TReducerKey in StringKeyModel<TReducers[TKey]>]: (
+      action: TReducers[TKey][TReducerKey],
+    ) => void;
+  };
 };
 
-export type InitialStateModel<TType> = {
-  [TKey in keyof Required<TType>]:
-    | TType[TKey]
-    | (TType[TKey] extends PrimitiveModel
-        ? undefined
-        : TType[TKey] extends Array<unknown>
-          ? []
-          : EmptyObjectModel);
-};
+export type StoreStateModel<TType> =
+  TType extends SliceModel<infer TState, infer TReducers> ? TState : undefined;
 
-export type NestedInitialStateModel<TType extends Record<string, unknown>> = {
-  [TKey in StringKeyModel<TType>]: InitialStateModel<TType[TKey]>;
-};
+export type StoreReducersModel<TType> =
+  TType extends SliceModel<infer TState, infer TReducers> ? TReducers : undefined;

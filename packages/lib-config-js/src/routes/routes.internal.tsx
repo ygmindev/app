@@ -2,12 +2,14 @@ import { routesConfig as configBase } from '@lib/config/routes/routes.base';
 import { ADMIN } from '@lib/frontend/admin/admin.constants';
 import { AI, CHAT_HISTORY, NEW } from '@lib/frontend/ai/ai.constants';
 import { ChatHistoryPage } from '@lib/frontend/ai/pages/ChatHistoryPage/ChatHistoryPage';
+import { ChatPage } from '@lib/frontend/ai/pages/ChatPage/ChatPage';
 import { NewChatPage } from '@lib/frontend/ai/pages/NewChatPage/NewChatPage';
 import { ORCHESTRATOR, WORKFLOW } from '@lib/frontend/orchestrator/orchestrator.constants';
 import { OrchestratorPage } from '@lib/frontend/orchestrator/pages/OrchestratorPage/OrchestratorPage';
 import { WorkflowPage } from '@lib/frontend/orchestrator/pages/WorkflowPage/WorkflowPage';
 import { ROUTE_NAVIGATION, ROUTE_TRANSITION } from '@lib/frontend/route/route.constants';
 import { APP } from '@lib/shared/app/app.constants';
+import { CHAT } from '@lib/shared/chat/chat.constants';
 
 export const routesConfig = configBase.extend(() => ({
   routes: [
@@ -23,6 +25,15 @@ export const routesConfig = configBase.extend(() => ({
           pathname: NEW,
           title: ({ t }) => t('chat:newChat'),
         },
+
+        {
+          element: <ChatPage />,
+          icon: 'chat',
+          isNavigatable: true,
+          pathname: CHAT,
+          title: ({ t }) => t('chat:chat'),
+        },
+
         {
           element: <ChatHistoryPage />,
           icon: 'chats',

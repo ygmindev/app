@@ -4,7 +4,7 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useEffect } from 'react';
 
 export const useCurrentGroup = (): UseCurrentGroupModel => {
-  const [currentGroup] = useStore('group.currentGroup');
+  const { value: currentGroup } = useStore('group.currentGroup');
   const { replace } = useRouter();
 
   useEffect(() => {

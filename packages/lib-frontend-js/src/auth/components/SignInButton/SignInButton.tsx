@@ -12,7 +12,7 @@ export const SignInButton: LFCModel<SignInButtonPropsModel> = ({ onPress, ...pro
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([AUTH]);
   const { push } = useRouter();
-  const [authStatus] = useStore('auth.status');
+  const { value: authStatus } = useStore('auth.status');
   const isAuthenticated = authStatus === AUTH_STATUS.AUTHENTICATED;
   if (isAuthenticated) return <></>;
   return (

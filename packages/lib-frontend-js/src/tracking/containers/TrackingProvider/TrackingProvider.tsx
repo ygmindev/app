@@ -9,8 +9,7 @@ import { useEffect } from 'react';
 
 export const TrackingProvider: SFCModel<TrackingProviderPropsModel> = ({ children }) => {
   const { identify, initialize } = useTracking();
-  const [currentUser] = useStore('user.currentUser');
-
+  const { value: currentUser } = useStore('user.currentUser');
   useEffect(() => {
     if (!isServer) {
       process.env.APP_AMPLITUDE_API_KEY

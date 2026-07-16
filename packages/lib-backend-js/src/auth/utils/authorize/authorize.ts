@@ -3,12 +3,12 @@ import {
   type AuthorizeParamsModel,
 } from '@lib/backend/auth/utils/authorize/authorize.models';
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
-import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
 import { ACCESS_ROLE } from '@lib/model/auth/Access/Access.constants';
 import { AccessImplementation } from '@lib/model/auth/Access/AccessImplementation/AccessImplementation';
 import { ROLE_RESOURCE_NAME } from '@lib/model/auth/Role/Role.constants';
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { Container } from '@lib/shared/core/utils/Container/Container';
+import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import pullAt from 'lodash/pullAt';
 
 export const authorize = async ({

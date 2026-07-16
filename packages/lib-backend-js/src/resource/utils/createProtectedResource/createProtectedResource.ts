@@ -18,7 +18,7 @@ export const createProtectedResource = (
     // @withManyToOneField({ Resource: () => Group, isDatabase })
     // [GROUP_RESOURCE_NAME]?: RefFieldModel<GroupModel>;
 
-    @withManyToOneField({ Resource: () => User, isDatabase })
+    @withManyToOneField({ isDatabase, Resource: () => User })
     createdBy?: RefModel<UserModel>;
   }
   return ProtectedResource;

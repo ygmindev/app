@@ -1,7 +1,7 @@
-import { type _LoggingConfigModel } from '@lib/config/node/logging/logging.models';
+import { type LoggingConfigModel } from '@lib/config/node/logging/logging.models';
 import { type LogArgsModel } from '@lib/shared/logging/utils/Logger/Logger.models';
 
-export type _LoggerParamsModel = _LoggingConfigModel;
+export type _LoggerParamsModel = LoggingConfigModel;
 
 export type _LoggerModel = {
   debug(params: LogArgsModel, ...rest: Array<LogArgsModel>): void;

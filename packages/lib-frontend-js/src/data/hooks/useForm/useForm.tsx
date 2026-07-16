@@ -33,7 +33,7 @@ export const useForm = <TType, TResult = void>({
   const validate = useValidator();
   const { success } = useNotification();
   const { replace } = useRouter();
-  const [isAppLoading, isAppLoadingSet] = useStore('app.isLoading');
+  const { set: isAppLoadingSet, value: isAppLoading } = useStore('app.isLoading');
   const [isLoading, isLoadingSet] = useState<boolean>();
 
   const handleSubmit = async (values: TType): Promise<TResult | null> => {

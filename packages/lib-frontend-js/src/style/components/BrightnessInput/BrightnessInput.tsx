@@ -13,7 +13,7 @@ export const BrightnessInput: LFCModel<BrightnessInputPropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([STYLE]);
-  const [brightness, brightnessSet] = useStore('style.brightness');
+  const { set: brightnessSet, value: brightness } = useStore('style.brightness');
   return (
     <SelectInput<STYLE_BRIGHTNESS>
       {...wrapperProps}

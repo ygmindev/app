@@ -9,8 +9,8 @@ import { type HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
 import { HTTP_STATUS_CODE } from '@lib/shared/http/http.constants';
 
 export const useAuth = ({ ...props }: UseAuthParamsModel): UseAuthModel => {
-  const [isOffline, isOfflineSet] = useStore('app.isOffline');
-  const [, authStatusSet] = useStore('auth.status');
+  const { set: isOfflineSet, value: isOffline } = useStore('app.isOffline');
+  const { set: authStatusSet } = useStore('auth.status');
 
   _useAuth({
     ...props,

@@ -6,7 +6,8 @@ import { currentCountry } from '@lib/frontend/locale/utils/currentCountry/curren
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
 export const LocaleProvider: FCModel<LocaleProviderPropsModel> = ({ children, value }) => {
-  const [, countryCodeSet] = useStore('locale.countryCode');
+  const { set: countryCodeSet } = useStore('locale.countryCode');
+
   useAsync(async (isMounted) => {
     const country = await currentCountry();
     isMounted() && countryCodeSet(country);

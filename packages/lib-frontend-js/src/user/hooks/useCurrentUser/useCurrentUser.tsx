@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 export const useCurrentUser = (
   { isProtected = true }: UseCurrentUserParamsModel = { isProtected: true },
 ): UseCurrentUserModel => {
-  const [currentUser] = useStore('user.currentUser');
+  const { value: currentUser } = useStore('user.currentUser');
   const { replace } = useRouter();
   useEffect(() => {
     if (isProtected && currentUser === null) {

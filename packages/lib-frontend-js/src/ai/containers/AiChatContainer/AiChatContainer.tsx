@@ -4,13 +4,16 @@ import { useChat } from '@lib/frontend/ai/hooks/useChat/useChat';
 import { ChatContainer } from '@lib/frontend/chat/components/ChatContainer/ChatContainer';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
-import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 import { uri } from '@lib/shared/http/utils/uri/uri';
-import { useCallback } from 'react';
 
-export const AiChatContainer: LFCModel<AiChatContainerPropsModel> = ({ onSubmit, ...props }) => {
+export const AiChatContainer: LFCModel<AiChatContainerPropsModel> = ({
+  chatId,
+  onSubmit,
+  ...props
+}) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { chat, currentMessage, isStreaming, subscribe, unsubscribe } = useChat({
+  const { chat, currentMessage } = useChat({
+    chatId,
     url: uri({
       host: process.env.SERVER_APP_PYTHON_HOST,
       pathname: '/api/ai',
@@ -18,23 +21,14 @@ export const AiChatContainer: LFCModel<AiChatContainerPropsModel> = ({ onSubmit,
     }),
   });
 
-  const handleSubmit = useCallback(
-    async (data: Partial<MessageModel>) => {
-      subscribe(data);
-      await onSubmit?.(data);
-    },
-    [subscribe],
-  );
-
   return (
     <ChatContainer
       {...wrapperProps}
       chat={chat}
       chatFormElement={
         <AiChatForm
-          isStreaming={isStreaming}
-          onCancel={unsubscribe}
-          onSubmit={handleSubmit}
+          chatId={chatId}
+          onSubmit={onSubmit}
         />
       }
       currentMessage={currentMessage}

@@ -8,7 +8,6 @@ import {
   type RouteModel,
 } from '@lib/frontend/route/route.models';
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
-import { type EmptyObjectModel } from '@lib/shared/core/core.models';
 import { APP_URI } from '@lib/shared/http/http.constants';
 import {
   createNavigationContainerRef,
@@ -55,13 +54,13 @@ const getRouteConfig = (
   location?: LocationModel<unknown>,
   depth: number = 0,
 ): {
-  config: LinkingOptions<EmptyObjectModel>['config'];
+  config: LinkingOptions<Record<string, unknown>>['config'];
   element?: ReactElement;
 } => {
   const Stack = createStackNavigator();
   const isLeaf = !route.routes;
   const result = {
-    config: { path: route.pathname ?? '/' } as LinkingOptions<EmptyObjectModel>['config'],
+    config: { path: route.pathname ?? '/' } as LinkingOptions<Record<string, unknown>>['config'],
     element: <Route route={route} />,
   };
   if (isLeaf) {
@@ -84,7 +83,7 @@ const getRouteConfig = (
           ],
           screens: {
             ...r?.screens,
-            [screenName]: v.routes ? childConfig.config : v.pathname,
+            [screenName]: v.routes ? childConfig.config : { path: v.pathname ?? screenName },
           },
         };
       },
@@ -159,6 +158,7 @@ export const _Router: FCModel<_RouterPropsModel> = ({ routes, value }) => {
             }
             return state;
           },
+
           prefixes: process.env.ENV_PLATFORM === 'web' ? [APP_URI] : [],
         }}
         ref={navigationRef}>

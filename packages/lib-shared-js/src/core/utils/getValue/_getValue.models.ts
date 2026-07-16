@@ -28,19 +28,19 @@ export type _GetValueModel<
 > = TPath extends `${infer TLeft}.${infer TRight}`
   ? TLeft extends keyof TType
     ? FieldWithPossiblyUndefined<TType[TLeft], TRight>
-    : TLeft extends `${infer FieldKey}[${infer IndexKey}]`
-      ? FieldKey extends keyof TType
+    : TLeft extends `${infer TField}[${infer TIndex}]`
+      ? TField extends keyof TType
         ? FieldWithPossiblyUndefined<
-            IndexedFieldWithPossiblyUndefined<TType[FieldKey], IndexKey>,
+            IndexedFieldWithPossiblyUndefined<TType[TField], TIndex>,
             TRight
           >
         : undefined
       : undefined
   : TPath extends keyof TType
     ? TType[TPath]
-    : TPath extends `${infer FieldKey}[${infer IndexKey}]`
-      ? FieldKey extends keyof TType
-        ? IndexedFieldWithPossiblyUndefined<TType[FieldKey], IndexKey>
+    : TPath extends `${infer TField}[${infer TIndex}]`
+      ? TField extends keyof TType
+        ? IndexedFieldWithPossiblyUndefined<TType[TField], TIndex>
         : undefined
       : TType extends object
         ? undefined

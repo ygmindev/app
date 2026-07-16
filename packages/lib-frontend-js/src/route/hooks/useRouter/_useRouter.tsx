@@ -36,6 +36,42 @@ export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
   const route = useRoute();
   const isFocused = useIsFocused();
 
+  // const getNestedPathname = useCallback(
+  //   (to: string, params: Record<string, unknown> = {}): [string, Record<string, unknown>] => {
+  //     if (to.startsWith('#')) {
+  //       return ['/', { ...params, hash: trimStart(to, '#') }];
+  //     }
+  //     const fromParts = activeChild?.name?.split('/').filter(Boolean) ?? [];
+  //     const toParts = to.split('/').filter(Boolean);
+  //     let common = 0;
+  //     while (
+  //       common < fromParts.length &&
+  //       common < toParts.length &&
+  //       fromParts[common] === toParts[common]
+  //     )
+  //       common++;
+
+  //     const newParts = toParts.slice(common);
+  //     if (newParts.length === 0) {
+  //       return [trimPathname(to), params];
+  //     }
+
+  //     const getParams = (parts: Array<string>, depth: number): Record<string, unknown> => {
+  //       const screen = trimPathname(toParts.slice(0, common + depth + 1).join('/'));
+  //       if (depth === parts.length - 1) {
+  //         return params;
+  //       }
+  //       return { params: { ...params, ...getParams(parts, depth + 1) }, screen };
+  //     };
+
+  //     return [
+  //       trimPathname(toParts.slice(0, common + 1).join('/')),
+  //       { ...params, ...getParams(newParts, 0) },
+  //     ];
+  //   },
+  //   [activeChild],
+  // );
+
   const getNestedPathname = useCallback(
     (to: string, params: Record<string, unknown> = {}): [string, Record<string, unknown>] => {
       if (to.startsWith('#')) {
@@ -43,31 +79,20 @@ export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
       }
       const fromParts = activeChild?.name?.split('/').filter(Boolean) ?? [];
       const toParts = to.split('/').filter(Boolean);
-      let common = 0;
-      while (
-        common < fromParts.length &&
-        common < toParts.length &&
-        fromParts[common] === toParts[common]
-      )
-        common++;
+      if (toParts.length === 0) return ['/', params];
 
-      const newParts = toParts.slice(common);
-      if (newParts.length === 0) {
-        return [trimPathname(to), params];
-      }
+      const root = trimPathname(toParts[0]);
+      if (toParts.length === 1) return [root, params];
+      const fromDepth = Math.max(1, fromParts.length);
 
-      const getParams = (parts: Array<string>, depth: number): Record<string, unknown> => {
-        const screen = trimPathname(toParts.slice(0, common + depth + 1).join('/'));
-        if (depth === parts.length - 1) {
-          return params;
+      const buildNested = (depth: number): Record<string, unknown> => {
+        const screen = trimPathname(toParts.slice(0, depth + 1).join('/'));
+        if (depth >= fromDepth - 1 || depth >= toParts.length - 1) {
+          return { params, screen };
         }
-        return { params: { ...params, ...getParams(parts, depth + 1) }, screen };
+        return { params: buildNested(depth + 1), screen };
       };
-
-      return [
-        trimPathname(toParts.slice(0, common + 1).join('/')),
-        { ...params, ...getParams(newParts, 0) },
-      ];
+      return [root, buildNested(1)];
     },
     [activeChild],
   );
@@ -104,9 +129,22 @@ export const _useRouter = <TType extends unknown>(): _UseRouterModel<TType> => {
 
     push: <TTypeNext,>({ params, pathname }: LocationModel<TTypeNext>) => {
       void waitFor({ condition: () => navigationRef.isReady() }).then(() => {
-        navigationRef.current?.navigate(...(getNestedPathname(pathname, params) as never));
+        const [rootName, nestedPayload] = getNestedPathname(pathname, params) as [string, object];
+
+        // Use StackActions.push to force a new entry onto the stack
+        // instead of navigation.navigate which attempts to reconcile existing state
+        navigationRef.current?.dispatch(StackActions.push(rootName, nestedPayload));
       });
     },
+
+    // push: <TTypeNext,>({ params, pathname }: LocationModel<TTypeNext>) => {
+    //   void waitFor({ condition: () => navigationRef.isReady() }).then(() => {
+    //     console.warn('@@@ pathname:');
+    //     console.warn(pathname);
+    //     console.warn(getNestedPathname(pathname, params) as never);
+    //     navigationRef.current?.navigate(...(getNestedPathname(pathname, params) as never));
+    //   });
+    // },
 
     replace: <TTypeNext,>({ params, pathname }: LocationModel<TTypeNext>) => {
       void waitFor({ condition: () => navigationRef.isReady() }).then(() => {

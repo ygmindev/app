@@ -14,9 +14,9 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
+import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
 import { COMMERCE } from '@lib/shared/commerce/commerce.constants';
 import { getPrice } from '@lib/shared/commerce/utils/getPrice/getPrice';
-import { type ProductItemModel } from '@lib/model/commerce/ProductItem/ProductItem.models';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { numberFormat } from '@lib/shared/data/utils/numberFormat/numberFormat';
 import { useMemo, useRef } from 'react';
@@ -30,7 +30,7 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([COMMERCE]);
-  const [items, itemsSet] = useStore('commerce.items');
+  const { set: itemsSet, value: items } = useStore('commerce.items');
   const price = useMemo(() => getPrice(items), [items]);
   const tableRef = useRef<TableRefModel<PartialModel<ProductItemModel>>>(null);
   return (

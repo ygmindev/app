@@ -22,6 +22,7 @@ export const MessageContainer: LFCModel<MessageContainerPropsModel> = ({
   isOwn,
   message,
   tooltipElement,
+  topElement,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -56,6 +57,8 @@ export const MessageContainer: LFCModel<MessageContainerPropsModel> = ({
           <Wrapper
             align={isOwn ? FLEX_ALIGN.END : FLEX_ALIGN.START}
             s={THEME_SIZE.SMALL}>
+            {topElement}
+
             {isOwn ? (
               <Wrapper
                 backgroundColor={THEME_COLOR.PRIMARY}

@@ -524,7 +524,7 @@ export const _bundle = ({
       },
 
       hmr: {
-        protocol: 'wss',
+        protocol: 'ws',
       },
 
       host: true,

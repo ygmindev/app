@@ -27,7 +27,7 @@ export const NavigationHeader: LFCModel<NavigationHeaderPropsModel> = ({
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
   const ref = useRef<WrapperRefModel>(null);
-  const [isLoading] = useStore('app.isLoading');
+  const { value: isLoading } = useStore('app.isLoading');
   return (
     <Wrapper
       {...wrapperProps}

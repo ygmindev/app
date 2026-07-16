@@ -19,7 +19,7 @@ export const CountryInput: RLFCModel<CountryInputRefModel, CountryInputPropsMode
   ...props
 }) => {
   const { t } = useTranslation();
-  const [countryCode] = useStore('locale.countryCode');
+  const { value: countryCode } = useStore('locale.countryCode');
   const { wrapperProps } = useLayoutStyles({ props });
   const { valueControlled, valueControlledSet } = useValueControlled({
     defaultValue,

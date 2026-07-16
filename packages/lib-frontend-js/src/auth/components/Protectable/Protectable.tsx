@@ -7,8 +7,8 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { SIGN_IN } from '@lib/shared/auth/auth.constants';
 
 export const Protectable: FCModel<ProtectablePropsModel> = ({ children }) => {
-  const [authStatus] = useStore('auth.status');
-  const [isOffline] = useStore('app.isOffline');
+  const { value: authStatus } = useStore('auth.status');
+  const { value: isOffline } = useStore('app.isOffline');
   const { location } = useRouter();
   return !isOffline && authStatus === AUTH_STATUS.UNAUTHENTICATED ? (
     <Redirect

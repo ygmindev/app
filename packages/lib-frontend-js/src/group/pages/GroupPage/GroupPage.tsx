@@ -13,7 +13,7 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
 export const GroupPage: LFCModel<GroupPagePropsModel> = ({ children }) => {
   useTranslation([]);
-  const [, currentGroupSet] = useStore('group.currentGroup');
+  const { set: currentGroupSet } = useStore('group.currentGroup');
   const { location } = useRouter<GroupPageParamsModel>();
   const { get } = useGroupResource();
   const groupid = location.params?.groupid;

@@ -1,4 +1,5 @@
 import { trimPathname } from '@lib/frontend/route/utils/trimPathname/trimPathname';
+import { HTTP_PROTOCOL } from '@lib/shared/http/http.constants';
 import { type UriParamsModel } from '@lib/shared/http/utils/uri/uri.models';
 import trimStart from 'lodash/trimStart';
 
@@ -8,7 +9,7 @@ export const uri = <TType extends unknown>({
   params,
   pathname,
   port,
-  protocol = true,
+  protocol,
   subdomain,
 }: UriParamsModel<TType>): string => {
   let uri = `${host}${port ? `:${port}` : ''}${pathname ? (isTrim ? trimPathname(pathname) : pathname) : ''}`;
@@ -18,12 +19,15 @@ export const uri = <TType extends unknown>({
       .join('&');
     uri = `${uri}?${queryParams}`;
   }
-  let protocolF = protocol ? (process.env.SERVER_APP_IS_HTTPS === 'true' ? 'https' : 'http') : '';
-  const uriSplit = uri.split('://');
-  if (uriSplit.length > 1) {
-    [protocolF, uri] = uriSplit;
+  let protocolF = `${(protocol ?? process.env.NODE_ENV === 'development') ? HTTP_PROTOCOL.HTTP : HTTP_PROTOCOL.HTTPS}`;
+  if (!protocolF) {
+    const split = uri.split('://');
+    if (split.length > 1) {
+      [protocolF, uri] = split;
+    }
   }
+
   subdomain && (uri = `${subdomain}.${trimStart(uri, 'www.')}`);
-  protocol && (uri = `${protocolF}://${uri}`);
+  protocolF && (uri = `${protocolF}://${uri}`);
   return uri;
 };

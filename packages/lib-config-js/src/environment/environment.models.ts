@@ -42,7 +42,6 @@ export type EnvironmentConfigModel = {
   SERVERLESS_RUNTIME: `${SERVERLESS_RUNTIME}`;
   SERVER_APP_GOOGLE_API_KEY: string;
   SERVER_APP_HOST: string;
-  SERVER_APP_IS_HTTPS?: `${BOOLEAN_STRING}`;
   SERVER_APP_OTP_LENGTH: string;
   SERVER_APP_PORT?: string;
   SERVER_APP_PYTHON_HOST: string;

@@ -1,11 +1,5 @@
-from typing import Mapping, Unpack
+# template version: 1.0.0
 
-from lib_shared.core.utils.get_item._get_item import _get_item
-from lib_shared.core.utils.get_item.get_item_models import (
-    GetItemModel,
-    GetItemParamsModel,
-)
+from .get_item import get_item
 
-
-def get_item[T: Mapping](*params: Unpack[GetItemParamsModel[T]]) -> GetItemModel:
-    return _get_item(*params)
+__all__ = ["get_item"]

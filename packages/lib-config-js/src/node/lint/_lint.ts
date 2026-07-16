@@ -6,7 +6,6 @@ import { flatConfigs as importPlugin } from 'eslint-plugin-import';
 import jsoncPlugin from 'eslint-plugin-jsonc';
 import prettierPlugin from 'eslint-plugin-prettier/recommended';
 import reactPlugin from 'eslint-plugin-react';
-import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
 import sortDestructureKeysPlugin from 'eslint-plugin-sort-destructure-keys';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import globals from 'globals';
@@ -110,16 +109,6 @@ export const _lint = ({
     importPlugin.recommended,
 
     ...jsoncPlugin.configs['flat/recommended-with-jsonc'],
-    
-    {
-      plugins: {
-        'simple-import-sort': simpleImportSortPlugin,
-      },
-      rules: {
-        'simple-import-sort/exports': 'error',
-        'simple-import-sort/imports': 'error',
-      },
-    },
 
     {
       plugins: {

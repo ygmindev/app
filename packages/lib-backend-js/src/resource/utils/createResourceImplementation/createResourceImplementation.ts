@@ -1,4 +1,4 @@
-// import { ObjectId } from '@lib/backend/database/utils/ObjectId/ObjectId';
+// import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import {
   type CreateResourceImplementationModel,
   type CreateResourceImplementationParamsModel,

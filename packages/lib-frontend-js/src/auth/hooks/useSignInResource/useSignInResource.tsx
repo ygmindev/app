@@ -26,11 +26,13 @@ import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
 const USER_FIELDS = toGraphqlParamsFields(USER_RESOURCE_PARAMS.fields);
 
 export const useSignInResource = (): UseSignInResourceModel => {
-  const [currentUser, currentUserSet] = useStore('user.currentUser');
+  const { set: currentUserSet, value: currentUser } = useStore('user.currentUser');
+
   const { identify, reset } = useTracking();
   const { signInWithToken, signOut } = useSession();
-  const [, authStatusSet] = useStore('auth.status');
-  const [, authTokenSet] = useStore('auth.token');
+
+  const { set: authStatusSet } = useStore('auth.status');
+  const { set: authTokenSet } = useStore('auth.token');
 
   const { query } = useAppGraphql();
 

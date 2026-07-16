@@ -1,6 +1,7 @@
 import { routesConfig as configBase } from '@lib/config/routes/routes.base';
 import { AI, CHAT_HISTORY, NEW } from '@lib/frontend/ai/ai.constants';
 import { ChatHistoryPage } from '@lib/frontend/ai/pages/ChatHistoryPage/ChatHistoryPage';
+import { ChatPage } from '@lib/frontend/ai/pages/ChatPage/ChatPage';
 import { NewChatPage } from '@lib/frontend/ai/pages/NewChatPage/NewChatPage';
 import { ROUTE_NAVIGATION } from '@lib/frontend/route/route.constants';
 import { APP } from '@lib/shared/app/app.constants';
@@ -12,6 +13,7 @@ export const routesConfig = configBase.extend(() => ({
       namespaces: [AI, CHAT],
       navigation: ROUTE_NAVIGATION.NAVIGATION,
       pathname: APP,
+
       routes: [
         {
           element: <NewChatPage />,
@@ -20,6 +22,14 @@ export const routesConfig = configBase.extend(() => ({
           pathname: NEW,
           title: ({ t }) => t('chat:newChat'),
         },
+
+        {
+          element: <ChatPage />,
+          icon: 'chat',
+          pathname: `${CHAT}/:chatId`,
+          title: ({ t }) => t('chat:chat'),
+        },
+
         {
           element: <ChatHistoryPage />,
           icon: 'chats',

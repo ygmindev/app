@@ -47,7 +47,7 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
     onChange: onMethodChange,
     value: method,
   });
-  const [currentUser] = useStore('user.currentUser');
+  const { value: currentUser } = useStore('user.currentUser');
   const { push, replace } = useRouter();
   const { google } = useOAuth();
 

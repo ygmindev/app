@@ -14,7 +14,7 @@ export const EntityChatContainer: LFCModel<EntityChatContainerPropsModel> = ({
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const [currentUserState] = useStore('user.currentUser');
+  const { value: currentUserState } = useStore('user.currentUser');
   const currentUserF = currentUser ?? currentUserState;
 
   const { create } = useMessageResource();

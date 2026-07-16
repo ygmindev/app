@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Optional
 
-from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.field.constants import FieldRelation
+from lib_shared.core.utils.field.field import Field
 
 from lib_model.chat.chat.chat_models import ChatModel
 from lib_model.core.utils.database_entity.database_entity import DatabaseEntity

@@ -7,7 +7,7 @@ import { STYLE_BRIGHTNESS } from '@lib/frontend/style/style.constants';
 import { useMemo } from 'react';
 
 export const useTheme = (): UseThemeModel => {
-  const [brightness] = useStore('style.brightness');
+  const { value: brightness } = useStore('style.brightness');
   const { brightness: systemBrightness } = useDevice();
   return useMemo<UseThemeModel>(() => {
     const brightnessF =

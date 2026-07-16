@@ -16,8 +16,10 @@ export enum HTTP_METHOD {
 }
 
 export enum HTTP_PROTOCOL {
-  HTTP = 'HTTP',
-  WEBSOCKET = 'WEBSOCKET',
+  HTTP = 'http',
+  HTTPS = 'https',
+  WEBSOCKET = 'ws',
+  WEBSOCKETS = 'wss',
 }
 
 export enum HTTP_RESPONSE_TYPE {

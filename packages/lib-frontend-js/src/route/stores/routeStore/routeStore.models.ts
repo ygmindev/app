@@ -1,4 +1,4 @@
-import { type ReducerModel } from '@lib/frontend/state/state.models';
+import { type SliceModel } from '@lib/frontend/state/state.models';
 
 export type RouteHeaderModel = {
   title?: string;
@@ -6,4 +6,4 @@ export type RouteHeaderModel = {
 
 export type RouteStateModel = {};
 
-export type RouteReducerModel = ReducerModel<RouteStateModel>;
+export type RouteReducerModel = SliceModel<RouteStateModel>;

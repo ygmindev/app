@@ -23,7 +23,8 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
   const { t } = useTranslation();
   const { push } = useRouter();
   const { wrapperProps } = useLayoutStyles({ props });
-  const [isMinimized, isMinimizedSet] = useStore('app.layout.isMinimized');
+  const { set: isMinimizedSet, value: isMinimized } = useStore('app.layout.isMinimized');
+
   const elementState = isMinimized ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
 
   const getRoutes = (value?: Array<RouteModel>): Array<RouteModel> =>

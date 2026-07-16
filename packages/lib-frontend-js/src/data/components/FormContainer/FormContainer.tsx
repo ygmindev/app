@@ -93,7 +93,7 @@ const FormContainerF = <TType, TResult = void>({
 >): ReactElement<
   RLFCPropsModel<FormContainerRefModel<TType>, FormContainerPropsModel<TType, TResult>>
 > => {
-  const [isAppLoading] = useStore('app.isLoading');
+  const { value: isAppLoading } = useStore('app.isLoading');
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
 

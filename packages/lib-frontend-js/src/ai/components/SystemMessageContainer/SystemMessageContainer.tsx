@@ -17,11 +17,6 @@ export const SystemMessageContainer: LFCModel<SystemMessageContainerPropsModel> 
   return (
     <MessageContainer
       {...props}
-      bottomElement={
-        <Appearable isActive={isStreaming}>
-          <Loading />
-        </Appearable>
-      }
       tooltipElement={
         <Button
           icon="refresh"
@@ -30,6 +25,13 @@ export const SystemMessageContainer: LFCModel<SystemMessageContainerPropsModel> 
           tooltip={t('core:retry')}
           type={BUTTON_TYPE.INVISIBLE}
         />
+      }
+      topElement={
+        <Appearable
+          isActive={isStreaming}
+          isLazy={false}>
+          <Loading />
+        </Appearable>
       }
     />
   );

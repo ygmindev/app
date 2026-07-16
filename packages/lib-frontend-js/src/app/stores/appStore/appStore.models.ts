@@ -1,5 +1,5 @@
 import { type DimensionModel } from '@lib/frontend/core/core.models';
-import { type ReducerModel } from '@lib/frontend/state/state.models';
+import { type SliceModel } from '@lib/frontend/state/state.models';
 
 export type AppStateModel = {
   dimension: DimensionModel;
@@ -10,4 +10,4 @@ export type AppStateModel = {
   };
 };
 
-export type AppReducerModel = ReducerModel<AppStateModel>;
+export type AppSliceModel = SliceModel<AppStateModel>;

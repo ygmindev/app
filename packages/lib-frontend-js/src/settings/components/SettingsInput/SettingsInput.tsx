@@ -18,7 +18,7 @@ export const SettingsInput = <TType = string,>({
 > => {
   useTranslation([SETTINGS]);
   const { wrapperProps } = useLayoutStyles({ props });
-  const [value, valueSet] = useStore(id);
+  const { set, value } = useStore(id);
   return (
     <Tile
       {...wrapperProps}
@@ -27,7 +27,7 @@ export const SettingsInput = <TType = string,>({
         flex
         s>
         {cloneElement(element, {
-          onChange: valueSet as (value: TType) => void,
+          onChange: set as (value: TType) => void,
           value: value as TType,
         })}
       </Wrapper>

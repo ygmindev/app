@@ -9,8 +9,8 @@ import { type UserModel } from '@lib/model/user/User/User.models';
 
 export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const { get } = useUserResource();
-  const [authStatus] = useStore('auth.status');
-  const [, authTokenSet] = useStore('auth.token');
+  const { value: authStatus } = useStore('auth.status');
+  const { set: authTokenSet } = useStore('auth.token');
   const { setAuth } = useSignInResource();
 
   useAuth({

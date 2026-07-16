@@ -1,3 +1,4 @@
+import { _logging } from '@lib/config/node/logging/_logging';
 import {
   type _LoggerModel,
   type _LoggerParamsModel,
@@ -10,7 +11,7 @@ export class _Logger implements _LoggerModel {
   protected _logger!: Logger;
 
   constructor(params: _LoggerParamsModel) {
-    this._logger = pino(params);
+    this._logger = pino(_logging(params));
   }
 
   debug(params: LogArgsModel, ...rest: Array<LogArgsModel>): void {

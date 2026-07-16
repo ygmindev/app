@@ -18,6 +18,7 @@ export const trimPathname = (
     .filter(Boolean)
     .map((char) => {
       let v = trim(char, '/');
+      if (v.startsWith(':')) return v;
       isSlug && (v = v.replace(/\w\S*/g, slug));
       return v;
     })

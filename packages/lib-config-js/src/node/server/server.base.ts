@@ -1,5 +1,5 @@
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
-import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
+// import { fromStatic } from '@lib/backend/file/utils/fromStatic/fromStatic';
 import { fromWorking } from '@lib/backend/file/utils/fromWorking/fromWorking';
 import { cookiesPlugin } from '@lib/backend/server/utils/Server/plugins/cookiesPlugin/cookiesPlugin';
 import { corsPlugin } from '@lib/backend/server/utils/Server/plugins/corsPlugin/corsPlugin';
@@ -48,15 +48,15 @@ export const serverConfig = new Config<ServerConfigModel, _ServerConfigModel>({
       environment.variables.APP_PORT ||
       environment.variables.SERVER_APP_PORT;
     return {
-      certificate:
-        process.env.NODE_ENV === 'production'
-          ? undefined
-          : {
-              caFilename: environment.variables.SERVER_SSL_CA_FILENAME ?? '',
-              certificateDir: fromStatic('certificates'),
-              privateKeyFilename: environment.variables.SERVER_SSL_PRIVATE_KEY ?? '',
-              publicKeyFilename: environment.variables.SERVER_SSL_PUBLIC_KEY ?? '',
-            },
+      // certificate:
+      //   process.env.NODE_ENV === 'production'
+      //     ? undefined
+      //     : {
+      //         caFilename: environment.variables.SERVER_SSL_CA_FILENAME ?? '',
+      //         certificateDir: fromStatic('certificates'),
+      //         privateKeyFilename: environment.variables.SERVER_SSL_PRIVATE_KEY ?? '',
+      //         publicKeyFilename: environment.variables.SERVER_SSL_PUBLIC_KEY ?? '',
+      //       },
 
       entryPathname: fromWorking('src/index.ts'),
 

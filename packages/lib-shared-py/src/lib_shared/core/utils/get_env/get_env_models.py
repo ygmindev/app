@@ -1,8 +1,6 @@
-from typing import Any, Callable, Optional, Protocol, Type, TypeVar, Union, overload
+from typing import Optional, Protocol, Type, TypeVar, overload
 
 TType = TypeVar("TType")
-
-CastTypeModel = Union[type[TType], Callable[[str], TType]]
 
 
 class GetEnvModel(Protocol):
@@ -10,45 +8,24 @@ class GetEnvModel(Protocol):
     def __call__(
         self,
         key: str,
-        *,
-        cast: Type[str],
-        default: Optional[str] = None,
-        is_required: bool = False,
-    ) -> Optional[str]: ...
-
-    @overload
-    def __call__(
-        self,
-        key: str,
-        *,
-        cast: Type[int],
-        default: Optional[int] = None,
-        is_required: bool = False,
-    ) -> Optional[int]: ...
-
-    @overload
-    def __call__(
-        self,
-        key: str,
-        *,
-        cast: Type[float],
-        default: Optional[float] = None,
-        is_required: bool = False,
-    ) -> Optional[float]: ...
-
-    @overload
-    def __call__(
-        self,
-        key: str,
-        *,
-        cast: Callable[[str], TType],
-        default: Optional[TType] = None,
-        is_required: bool = False,
+        cast: Type[TType],
+        default: Optional[TType] = ...,
+        is_required: bool = ...,
     ) -> Optional[TType]: ...
 
     @overload
     def __call__(
-        self, key: str, *, default: Optional[str] = None, is_required: bool = False
+        self,
+        key: str,
+        cast: None = ...,
+        default: Optional[str] = ...,
+        is_required: bool = ...,
     ) -> Optional[str]: ...
 
-    def __call__(self, *args: Any, **kwargs: Any) -> Any: ...
+    def __call__(
+        self,
+        key: str,
+        cast: Optional[Type[TType]] = None,
+        default: Optional[TType] = None,
+        is_required: bool = False,
+    ) -> Optional[TType]: ...
