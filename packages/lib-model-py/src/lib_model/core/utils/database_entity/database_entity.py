@@ -1,7 +1,15 @@
 from __future__ import annotations
 
 import sys
-from typing import Any, ClassVar, Optional, dataclass_transform, get_args, get_origin
+from typing import (
+    Any,
+    ClassVar,
+    Optional,
+    Union,
+    dataclass_transform,
+    get_args,
+    get_origin,
+)
 
 from beanie import BackLink, Document, Link
 from lib_shared.core.utils.field.constants import FieldRelation
@@ -14,6 +22,15 @@ from lib_model.core.utils.entity.entity import Entity
 DocumentMeta = type(Document)
 
 _registry: list[type] = []
+
+
+def _unwrap(value: Any) -> tuple[Any, bool]:
+    if get_origin(value) is Union:
+        args = get_args(value)
+        types = [x for x in args if x is not type(None)]
+        if len(types) == 1 and type(None) in args:
+            return types[0], True
+    return value, False
 
 
 class _DatabaseEntityMeta(DocumentMeta):
@@ -39,8 +56,9 @@ class _DatabaseEntityMeta(DocumentMeta):
             root = schema.get("root")
 
             if relation:
-                origin = get_origin(v)
-                args = get_args(v)
+                unwrapped, is_optional = _unwrap(v)
+                origin = get_origin(unwrapped)
+                args = get_args(unwrapped)
                 match relation:
                     case FieldRelation.ONE_TO_MANY | FieldRelation.MANY_TO_MANY:
                         if origin is list and args:
@@ -54,12 +72,14 @@ class _DatabaseEntityMeta(DocumentMeta):
                                 ):
                                     value.default = None
                             else:
-                                annotations[k] = list[Link[target]]
+                                result = list[Link[target]]
+                                annotations[k] = (
+                                    Optional[result] if is_optional else result
+                                )
                     case FieldRelation.MANY_TO_ONE | FieldRelation.ONE_TO_ONE:
-                        if root:
-                            annotations[k] = BackLink[v]
-                        else:
-                            annotations[k] = Link[v]
+                        target = unwrapped
+                        new_type = BackLink[target] if root else Link[target]
+                        annotations[k] = Optional[new_type] if is_optional else new_type
 
         name = kwargs.pop("name", None)
         if name:

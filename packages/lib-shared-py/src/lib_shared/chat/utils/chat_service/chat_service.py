@@ -24,6 +24,8 @@ _HISTORY_LIMIT = 20
 
 _CHAT_MAX_LENGTH = 25
 
+# TODO: add createdBy
+
 
 class ChatService(BaseModel, ChatServiceModel):
     _database: Database = PrivateField()
@@ -105,6 +107,7 @@ class ChatService(BaseModel, ChatServiceModel):
 
         params = AgentState()
         user_message = LlmMessage(
+            chat=chat,
             content=message,
             role=MessageRole.USER,
         )
@@ -114,6 +117,7 @@ class ChatService(BaseModel, ChatServiceModel):
         history = await self._load_history(chat_id)
 
         system_message = LlmMessage(
+            chat=chat,
             content="",
             role=MessageRole.SYSTEM,
         )
@@ -140,10 +144,6 @@ class ChatService(BaseModel, ChatServiceModel):
         system_message.content = response
         system_message = (await self._database.create(system_message)).result
 
-        history.append(user_message)
-        history.append(system_message)
-        await self._cache_history(chat_id, history)
-
         yield LlmPayload(
             chat_id=chat_id,
             content=response,
@@ -152,6 +152,8 @@ class ChatService(BaseModel, ChatServiceModel):
             type=LlmPayloadType.END,
         ).to_dict()
 
+        history.append(user_message)
+        history.append(system_message)
         await self._cache_history(
             chat_id,
             history,

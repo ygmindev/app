@@ -7,12 +7,14 @@ import strawberry
 from beanie import BackLink, Link, PydanticObjectId
 from bson import ObjectId as BsonObjectId
 from lib_shared.core.utils.base_model.base_model import BaseModel
+from lib_shared.core.utils.field.constants import FieldRelation
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from pydantic.fields import FieldInfo, ModelPrivateAttr
 from pydantic_core import PydanticUndefined
 
 from lib_model.core.utils.object_id.object_id import ObjectId
+from lib_model.user.user.user import User
 
 _ObjectId = strawberry.scalar(
     BsonObjectId,
@@ -111,4 +113,8 @@ class _Entity(BaseModel):
 
 class Entity(_Entity):
     created: datetime = Field(default_value=datetime.now)
+    createdBy: Optional[User] = Field(
+        relation=FieldRelation.MANY_TO_ONE,
+        default=None,
+    )
     _id: str = PrivateField(default_value=ObjectId)
