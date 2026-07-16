@@ -163,7 +163,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
             raise NotFoundException("No user message found in the initial state")
         params.messages = [user_message]
         async for chunk in self.graph.stream_message(params):
-            yield chunk.lstrip()
+            yield chunk
 
     async def stream(
         self,
