@@ -27,6 +27,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
 
   barrelFiles?: Array<[globs: Array<string>, config: { outPathname: string }]>;
 
+  clientMarker: string;
+
   commonjsDeps?: Array<string>;
 
   configFilename: string;
@@ -80,6 +82,8 @@ export type BundleConfigModel = Pick<FileConfigModel, 'buildDir'> & {
   };
 
   serverExtension?: string;
+
+  serverMarker: string;
 
   sourcemap?: BUNDLE_SOURCEMAP;
 

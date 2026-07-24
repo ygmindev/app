@@ -1,0 +1,2 @@
+class AuthTokenError(Exception):
+    pass

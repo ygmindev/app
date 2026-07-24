@@ -60,7 +60,7 @@ export const StepFormF = <TType, TResult = void>({
   LFCPropsModel<StepFormPropsModel<TType, TResult>>
 > => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { value: width } = useStore('app.dimension.width');
+  const [width] = useStore('app.dimension.width');
 
   const theme = useTheme();
   const [current, currentSet] = useState<number>(0);

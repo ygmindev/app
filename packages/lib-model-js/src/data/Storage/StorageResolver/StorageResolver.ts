@@ -10,8 +10,8 @@ import { type StorageResolverModel } from '@lib/model/data/Storage/StorageResolv
 @withResolver({ Resource: () => Storage })
 export class StorageResolver
   extends createEntityResourceResolver({
+    name: STORAGE_RESOURCE_NAME,
     Resource: () => Storage,
     ResourceImplementation: StorageImplementation,
-    name: STORAGE_RESOURCE_NAME,
   })
   implements StorageResolverModel {}

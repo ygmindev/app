@@ -4,10 +4,10 @@
 from datetime import datetime
 from typing import Optional
 
-from lib_model.chat.message.constants import MessageRole
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 
+from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.agent.utils.llm_payload.constants import LlmPayloadType
 
 from .llm_payload_models import LlmPayloadModel

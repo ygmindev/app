@@ -15,12 +15,10 @@ type GetIndexedField<TType, TPath extends string> = TPath extends keyof TType
     : undefined;
 
 type FieldWithPossiblyUndefined<TType, TPath extends string> =
-  | _GetValueModel<Exclude<TType, undefined>, TPath>
-  | Extract<TType, undefined>;
+  _GetValueModel<Exclude<TType, undefined>, TPath> | Extract<TType, undefined>;
 
 type IndexedFieldWithPossiblyUndefined<TType, TPath extends string> =
-  | GetIndexedField<Exclude<TType, undefined>, TPath>
-  | Extract<TType, undefined>;
+  GetIndexedField<Exclude<TType, undefined>, TPath> | Extract<TType, undefined>;
 
 export type _GetValueModel<
   TType,

@@ -1,4 +1,7 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
+import { transform as babelTrasform, types as babelTypes } from '@babel/core';
+import syntaxJsx from '@babel/plugin-syntax-jsx';
+import syntaxTypeScript from '@babel/plugin-syntax-typescript';
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
 import { fileInfo } from '@lib/backend/file/utils/fileInfo/fileInfo';
 import { fromRoot } from '@lib/backend/file/utils/fromRoot/fromRoot';
@@ -42,6 +45,7 @@ import { nodeExternals } from 'rollup-plugin-node-externals';
 import vike from 'vike/plugin';
 import { type Alias, createLogger, type Logger, type Plugin, searchForWorkspaceRoot } from 'vite';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
+
 // import circleDependency from 'vite-plugin-circular-dependency';
 // import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
@@ -163,6 +167,42 @@ export const esbuildPluginResolveAlias = (
   },
 });
 
+const esbuildPluginServerOnly = (
+  serverMarker: string,
+  clientMarker: string,
+  isSsr: boolean,
+): EsbuildPlugin => ({
+  name: 'esbuild-plugin-server-only',
+  setup(build) {
+    build.onLoad({ filter: /\.(t|j)sx?$/ }, (args) => {
+      if (args.path.includes('\0')) return undefined;
+      const code = readFileSync(args.path, 'utf8');
+      if (!code.includes(serverMarker) && !code.includes(clientMarker)) return undefined;
+      const result = stripMarkers({
+        clientMarker,
+        code,
+        id: args.path,
+        isSsr,
+        serverMarker,
+        skipNodeModules: false,
+      });
+      return result?.code ? { contents: result.code, loader: 'tsx' } : undefined;
+    });
+  },
+});
+
+export const esbuildPluginJsToJsx = (): EsbuildPlugin =>
+  ({
+    name: 'js-to-jsx',
+    setup(build) {
+      build.onLoad({ filter: /node_modules\/.*\.(js|ts)x?$/ }, (args) => {
+        let contents = readFileSync(args.path, 'utf8');
+        /@flow\b/.test(contents) && (contents = flowRemoveTypes(contents).toString());
+        return { contents, loader: 'tsx' };
+      });
+    },
+  }) as EsbuildPlugin;
+
 function vitePluginIsomorphicImport(serverExtension: string): Plugin {
   return {
     enforce: 'pre',
@@ -193,6 +233,87 @@ function vitePluginIsomorphicImport(serverExtension: string): Plugin {
   };
 }
 
+const stripMarkers = ({
+  clientMarker,
+  code,
+  id,
+  isSsr,
+  serverMarker,
+  skipNodeModules = true,
+}: {
+  clientMarker: string;
+  code: string;
+  id: string;
+  isSsr: boolean;
+  serverMarker: string;
+  skipNodeModules?: boolean;
+}): { code: string } | null => {
+  const [idRaw] = id.split('?');
+  if ((skipNodeModules && idRaw.includes('node_modules')) || !/\.(t|j)sx?$/.test(idRaw))
+    return null;
+  if (!code.includes(serverMarker) && !code.includes(clientMarker)) return null;
+
+  const stripMarker = isSsr ? clientMarker : serverMarker;
+  const keepMarker = isSsr ? serverMarker : clientMarker;
+
+  const result = babelTrasform(code, {
+    babelrc: false,
+    configFile: false,
+    filename: idRaw,
+    plugins: [
+      [syntaxTypeScript, { isTSX: idRaw.endsWith('.tsx') }],
+      syntaxJsx,
+      {
+        visitor: {
+          CallExpression(path) {
+            if (path.node.callee.type !== 'Identifier') return;
+            const { name } = path.node.callee;
+            if (name === stripMarker) {
+              path.replaceWith(babelTypes.identifier('undefined'));
+            } else if (name === keepMarker) {
+              const [arg] = path.node.arguments;
+              path.replaceWith(arg ?? babelTypes.identifier('undefined'));
+            }
+          },
+        },
+      },
+      {
+        visitor: {
+          Program: {
+            exit(path) {
+              path.scope.crawl();
+              for (const v of path.get('body')) {
+                if (!v.isImportDeclaration()) continue;
+                if (v.node.specifiers.length === 0) continue;
+                const isUsed = v.node.specifiers.some((s) => {
+                  const binding = path.scope.getBinding(s.local.name);
+                  return binding && binding.referencePaths.length > 0;
+                });
+                if (!isUsed) v.remove();
+              }
+            },
+          },
+        },
+      },
+    ],
+    sourceMaps: true,
+  });
+
+  return result?.code ? { code: result.code } : null;
+};
+
+function viteServerOnlyPlugin(serverMarker: string, clientMarker: string): Plugin {
+  return {
+    enforce: 'pre',
+    name: 'vite-plugin-server-only',
+    transform(code, id, options) {
+      return (
+        stripMarkers({ clientMarker, code, id, isSsr: !!options?.ssr, serverMarker }) ?? undefined
+      );
+    },
+  };
+}
+
 export const _bundle = ({
   aliases,
   appType,
@@ -200,6 +321,7 @@ export const _bundle = ({
   babel,
   barrelFiles,
   buildDir,
+  clientMarker,
   commonjsDeps,
   dedupe,
   define,
@@ -224,6 +346,7 @@ export const _bundle = ({
   rootDirs,
   server,
   serverExtension,
+  serverMarker,
   sourcemap,
   transpileModules,
   transpilePatterns,
@@ -290,9 +413,13 @@ export const _bundle = ({
     ...(preBundle ?? []),
     ...(barrelFiles?.map((v) => {
       const { main } = fileInfo(v[1].outPathname);
-      return { entryFiles: { [main]: `virtual:${main}` }, watch: v[0] };
+      return {
+        entryFiles: { [main]: `virtual:${main}` },
+        watch: v[0],
+      };
     }) ?? []),
   ];
+
   const config: _BundleConfigModel = {
     appType: appType === APP_TYPE.TOOL ? undefined : 'custom',
 
@@ -322,6 +449,10 @@ export const _bundle = ({
       minify: process.env.NODE_ENV === 'production' ? 'terser' : false,
 
       outDir: outDirname ?? fromWorking(buildDir),
+
+      // rolldownOptions: {
+      //   plugins: [rolldownServerOnlyPlugin(serverMarker, clientMarker)],
+      // },
 
       rollupOptions: {
         external: externals
@@ -416,16 +547,9 @@ export const _bundle = ({
         platform: platformF === PLATFORM.NODE ? 'node' : undefined,
 
         plugins: filterNil([
-          {
-            name: 'js-to-jsx',
-            setup(build) {
-              build.onLoad({ filter: /node_modules\/.*\.(js|ts)x?$/ }, (args) => {
-                let contents = readFileSync(args.path, 'utf8');
-                /@flow\b/.test(contents) && (contents = flowRemoveTypes(contents).toString());
-                return { contents, loader: 'tsx' };
-              });
-            },
-          } as EsbuildPlugin,
+          esbuildPluginServerOnly(serverMarker, clientMarker, false),
+
+          esbuildPluginJsToJsx(),
 
           esbuildPluginTsc({ tsconfigPath: tsconfigDir }),
 
@@ -452,6 +576,8 @@ export const _bundle = ({
       // circleDependency(),
 
       // platformF === PLATFORM.NODE && nodePolyfills(),
+
+      viteServerOnlyPlugin(serverMarker, clientMarker),
 
       provide && inject(provide),
 
@@ -534,6 +660,11 @@ export const _bundle = ({
 
     ssr: {
       noExternal: transpiles,
+      optimizeDeps: {
+        esbuildOptions: {
+          plugins: [esbuildPluginServerOnly(serverMarker, clientMarker, true)],
+        },
+      },
     },
   };
 

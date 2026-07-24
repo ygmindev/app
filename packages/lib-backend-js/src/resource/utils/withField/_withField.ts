@@ -4,7 +4,7 @@ import {
 } from '@lib/backend/resource/utils/withField/_withField.models';
 import { FIELD_RELATION } from '@lib/backend/resource/utils/withField/withField.constants';
 import { DATA_TYPE, PROPERTY_TYPE } from '@lib/shared/data/data.constants';
-import { Cascade, Collection } from '@mikro-orm/core';
+import { Cascade } from '@mikro-orm/core';
 import {
   Embedded,
   Index,
@@ -21,7 +21,6 @@ import { Field, Float } from 'type-graphql';
 
 export const _withField =
   <TType extends unknown>({
-    Resource,
     defaultValue,
     expire,
     isArray,
@@ -30,6 +29,7 @@ export const _withField =
     isSchema = true,
     isUnique,
     relation,
+    Resource,
     root,
     type = DATA_TYPE.STRING,
   }: _WithFieldParamsModel<TType> = {}): _WithFieldModel =>
@@ -115,32 +115,38 @@ export const _withField =
               mappedBy: root,
               owner: !root,
             })(target, propertyKey);
+            // if (!Object.prototype.hasOwnProperty.call(target, propertyKey)) {
+            //   const cacheKey = Symbol(propertyKey);
 
-            if (!Object.prototype.hasOwnProperty.call(target, propertyKey)) {
-              Object.defineProperty(target, propertyKey, {
-                configurable: true,
-                enumerable: true,
-                get() {
-                  const collection = new Collection(this);
-                  Object.defineProperty(this, propertyKey, {
-                    configurable: true,
-                    enumerable: true,
-                    value: collection,
-                    writable: true,
-                  });
-                  return collection;
-                },
-                set(value) {
-                  Object.defineProperty(this, propertyKey, {
-                    configurable: true,
-                    enumerable: true,
-                    value: value instanceof Collection ? value : new Collection(this, value),
-                    writable: true,
-                  });
-                },
-              });
-            }
+            //   Object.defineProperty(target, propertyKey, {
+            //     configurable: true,
+            //     enumerable: true,
+            //     get() {
+            //       // 1. Check if the ORM has already set a value on this instance
+            //       // This is the key: if the ORM populated the field, use that.
+            //       if (this[cacheKey]) return this[cacheKey];
 
+            //       // 2. Otherwise, return an empty, initialized collection
+            //       // We set isInitialized: true so toJSON() doesn't hide it
+            //       const collection = new Collection(this);
+            //       collection.populated(true);
+
+            //       this[cacheKey] = collection;
+            //       return collection;
+            //     },
+            //     set(value) {
+            //       // 3. Handle incoming values (either from ORM or user)
+            //       if (value instanceof Collection) {
+            //         this[cacheKey] = value;
+            //       } else {
+            //         const collection = new Collection(this, value, Array.isArray(value));
+            //         // If we are setting a value, mark it as populated so toJSON() sees it
+            //         collection.populated(true);
+            //         this[cacheKey] = collection;
+            //       }
+            //     },
+            //   });
+            // }
             break;
           }
           case FIELD_RELATION.ONE_TO_MANY: {
@@ -151,18 +157,40 @@ export const _withField =
               mappedBy: root,
               nullable: true,
               orphanRemoval: true,
-              ref: true,
+              // ref: true,
             })(target, propertyKey);
+            // if (!Object.prototype.hasOwnProperty.call(target, propertyKey)) {
+            //   const cacheKey = Symbol(propertyKey);
 
-            if (!Object.prototype.hasOwnProperty.call(target, propertyKey)) {
-              Object.defineProperty(target, propertyKey, {
-                configurable: true,
-                enumerable: true,
-                value: new Collection(target),
-                writable: true,
-              });
-            }
+            //   Object.defineProperty(target, propertyKey, {
+            //     configurable: true,
+            //     enumerable: true,
+            //     get() {
+            //       // 1. Check if the ORM has already set a value on this instance
+            //       // This is the key: if the ORM populated the field, use that.
+            //       if (this[cacheKey]) return this[cacheKey];
 
+            //       // 2. Otherwise, return an empty, initialized collection
+            //       // We set isInitialized: true so toJSON() doesn't hide it
+            //       const collection = new Collection(this);
+            //       collection.populated(true);
+
+            //       this[cacheKey] = collection;
+            //       return collection;
+            //     },
+            //     set(value) {
+            //       // 3. Handle incoming values (either from ORM or user)
+            //       if (value instanceof Collection) {
+            //         this[cacheKey] = value;
+            //       } else {
+            //         const collection = new Collection(this, value, Array.isArray(value));
+            //         // If we are setting a value, mark it as populated so toJSON() sees it
+            //         collection.populated(true);
+            //         this[cacheKey] = collection;
+            //       }
+            //     },
+            //   });
+            // }
             break;
           }
           case FIELD_RELATION.MANY_TO_ONE: {

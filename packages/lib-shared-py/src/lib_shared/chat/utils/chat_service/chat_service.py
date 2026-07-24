@@ -1,17 +1,19 @@
 # template version: 1.0.0
 import json
-from typing import AsyncIterable
+from typing import AsyncIterable, Optional
 
+from beanie import PydanticObjectId
 from lib_ai.agent.utils.agent.agent import Agent
 from lib_ai.agent.utils.agent_state.agent_state import AgentState
-from lib_ai.agent.utils.llm_message.llm_message import LlmMessage
+from lib_ai.agent.utils.ai_message.ai_message import AIMessage
+from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.agent.utils.llm_payload.constants import LlmPayloadType
 from lib_ai.agent.utils.llm_payload.llm_payload import LlmPayload
 from lib_config.database.database import database_config
 from lib_config.redis.redis import redis_config
 from lib_model.chat.chat.chat import Chat
-from lib_model.chat.message.constants import MessageRole
 from lib_model.chat.message.message import Message
+from lib_model.user.user.user import User
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.private_field.private_field import PrivateField
@@ -56,15 +58,14 @@ class ChatService(BaseModel, ChatServiceModel):
         message: str,
     ) -> Chat:
         chat = await self._database.find(
-            query={"_id": id},
+            query={"_id": PydanticObjectId(id)},
             resource=Chat,
         )
         if not chat.result:
             title = message[:_CHAT_MAX_LENGTH] + (
                 "..." if len(message) > _CHAT_MAX_LENGTH else ""
             )
-            chat = Chat(name=title)
-            chat._id = id
+            chat = Chat(name=title, id=PydanticObjectId(id))
             result = await self._database.create(chat)
             return result.result
         return chat.result[0]
@@ -101,25 +102,32 @@ class ChatService(BaseModel, ChatServiceModel):
         self,
         message: str,
         chat_id: str,
+        user: Optional[User] = None,
     ) -> AsyncIterable[str | dict]:
         chat = await self.get_chat(chat_id, message)
         chat_id = str(chat._id)
 
         params = AgentState()
-        user_message = LlmMessage(
+        user_message = Message(
             chat=chat,
             content=message,
-            role=MessageRole.USER,
+            createdBy=user,
         )
-        params.messages = [user_message]
+        user_dict = user_message.to_dict()
+        user_dict["chat"] = chat
+        params.messages = [
+            AIMessage(
+                **user_dict,
+                role=MessageRole.USER,
+            )
+        ]
         user_message = (await self._database.create(user_message)).result
 
         history = await self._load_history(chat_id)
 
-        system_message = LlmMessage(
+        system_message = Message(
             chat=chat,
             content="",
-            role=MessageRole.SYSTEM,
         )
         system_message_id = str(system_message._id)
         response = ""

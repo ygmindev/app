@@ -18,7 +18,7 @@ export const SettingsInput = <TType = string,>({
 > => {
   useTranslation([SETTINGS]);
   const { wrapperProps } = useLayoutStyles({ props });
-  const { set, value } = useStore(id);
+  const [value, set] = useStore(id);
   return (
     <Tile
       {...wrapperProps}

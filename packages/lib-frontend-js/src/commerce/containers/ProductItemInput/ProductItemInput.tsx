@@ -30,7 +30,7 @@ export const ProductItemInput: RLFCModel<ProductItemInputRefModel, ProductItemIn
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([COMMERCE]);
-  const { set: itemsSet, value: items } = useStore('commerce.items');
+  const [items, itemsSet] = useStore('commerce.items');
   const price = useMemo(() => getPrice(items), [items]);
   const tableRef = useRef<TableRefModel<PartialModel<ProductItemModel>>>(null);
   return (

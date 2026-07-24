@@ -1,8 +1,10 @@
 import {
+  type DeepKeyModel,
   type PartialDeepModel,
   type PrimitiveModel,
   type StringKeyModel,
 } from '@lib/shared/core/core.models';
+import { type GetValueModel } from '@lib/shared/core/utils/getValue/getValue.models';
 import { type MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 
 export type SliceModel<TType, TReducers = undefined> = {
@@ -18,21 +20,28 @@ export type SliceModel<TType, TReducers = undefined> = {
 };
 
 export type ActionModel<TType> = {
-  set(value?: TType): void;
-  unset(): void;
-} & (TType extends Array<infer TValue>
-  ? {
-      add(value?: TValue): void;
-      remove(value?: Partial<TValue>): void;
-    }
-  : TType extends Record<string, unknown>
-    ? ActionsModel<TType> & {
-        merge(value?: PartialDeepModel<TType>, strategy?: MERGE_STRATEGY): void;
-      }
-    : unknown);
-
-export type ActionsModel<TType> = {
-  [TKey in StringKeyModel<TType>]: ActionModel<TType[TKey]>;
+  add<TKey extends DeepKeyModel<TType>>(
+    key: TKey,
+    value: NonNullable<GetValueModel<TType, TKey>> extends Array<infer TValue> ? TValue : never,
+  ): void;
+  merge<TKey extends DeepKeyModel<TType>>(
+    key: TKey,
+    value: NonNullable<GetValueModel<TType, TKey>> extends Record<string, unknown>
+      ? PartialDeepModel<GetValueModel<TType, TKey>>
+      : never,
+    strategy?: MERGE_STRATEGY,
+  ): void;
+  remove<TKey extends DeepKeyModel<TType>>(
+    key: TKey,
+    value: NonNullable<GetValueModel<TType, TKey>> extends Array<infer TValue>
+      ? Partial<TValue>
+      : never,
+  ): void;
+  set<TKey extends DeepKeyModel<TType> | ''>(
+    key: TKey,
+    value?: TKey extends '' ? TType : GetValueModel<TType, TKey>,
+  ): void;
+  unset<TKey extends DeepKeyModel<TType>>(key: TKey): void;
 };
 
 export type DefaultStateModel<TType> = {
@@ -56,12 +65,16 @@ export type NestedDefaultStateModel<TType> = {
   [TKey in StringKeyModel<TType>]: DefaultStateModel<TType[TKey]>;
 };
 
-export type NestedActionsModel<TType, TReducers extends Record<StringKeyModel<TType>, unknown>> = {
-  [TKey in StringKeyModel<TType>]: ActionsModel<TType[TKey]> & {
-    [TReducerKey in StringKeyModel<TReducers[TKey]>]: (
-      action: TReducers[TKey][TReducerKey],
-    ) => void;
-  };
+export type StoreActionsModel<TType, TReducers extends Record<StringKeyModel<TType>, unknown>> = {
+  [TKey in StringKeyModel<TType>]: ActionModel<TType[TKey]> &
+    Omit<
+      {
+        [TReducerKey in StringKeyModel<TReducers[TKey]>]: (
+          action: TReducers[TKey][TReducerKey],
+        ) => void;
+      },
+      StringKeyModel<ActionModel<TType[TKey]>>
+    >;
 };
 
 export type StoreStateModel<TType> =

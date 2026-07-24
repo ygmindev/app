@@ -13,7 +13,7 @@ export const useQuery = <TParams = undefined, TResult = void>(
 ): UseQueryModel<TResult> => {
   const { cacheTime, cacheTimeDefault } = queryConfig.params();
   const { handleError } = useErrorContext();
-  const { set: isLoadingSet } = useStore('app.isLoading');
+  const [, isLoadingSet] = useStore('app.isLoading');
   const cache = options?.cache;
   const cacheF = (cache === true ? cacheTime : cache) ?? cacheTimeDefault;
   return _useQuery(

@@ -3,10 +3,9 @@
 
 from typing import AsyncIterable, Optional
 
-from lib_model.chat.message.constants import MessageRole
-
 from lib_ai.agent.utils.agent import Agent
-from lib_ai.agent.utils.llm_message import LlmMessage
+from lib_ai.agent.utils.ai_message.ai_message import AIMessage
+from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.graph.utils.graph_node import GraphNode
 
 from .agent_node_models import AgentNodeModel, TState
@@ -22,7 +21,7 @@ class AgentNode(GraphNode, AgentNodeModel):
     ) -> AsyncIterable[TState]:
         if self.prompt:
             params.messages.append(
-                LlmMessage(
+                AIMessage(
                     role=MessageRole.USER,
                     content=self.prompt,
                 )

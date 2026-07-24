@@ -37,7 +37,12 @@ export const _useAuth = ({
       user
         ? user
             .getIdTokenResult(true)
-            .then(({ claims, token }) => onAuthenticate(claims as SignInTokenModel, token))
+            .then(({ claims, token }) =>
+              onAuthenticate(
+                { ...claims, isAnonymous: user.isAnonymous } as SignInTokenModel,
+                token,
+              ),
+            )
             .catch((e) => {
               const error =
                 (e as AuthError).code === 'auth/network-request-failed'

@@ -1,14 +1,14 @@
 import { useQuery } from '@lib/frontend/data/hooks/useQuery/useQuery';
 import { useQueryClient } from '@lib/frontend/data/hooks/useQueryClient/useQueryClient';
-import { graphqlQuery } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery';
-import { type GraphqlHttpResponseModel } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import {
   type UseGraphqlSseModel,
   type UseGraphqlSseParamsModel,
 } from '@lib/frontend/http/hooks/useGraphqlSse/useGraphqlSse.models';
 import { useSse } from '@lib/frontend/http/hooks/useSse/useSse';
 import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
-import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
+import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
+import { formatQuery } from '@lib/shared/graphql/utils/formatQuery/formatQuery';
+import { type GraphqlHttpResponseModel } from '@lib/shared/graphql/utils/graphqlQuery/graphqlQuery.models';
 import { useMemo } from 'react';
 
 export const useGraphqlSse = <
@@ -33,11 +33,11 @@ export const useGraphqlSse = <
   const queryClient = useQueryClient();
   const paramsF = useMemo(
     () => ({
-      query: graphqlQuery<TResult, TParams, TName>({
+      query: formatQuery<TResult, TParams, TName>({
         fields,
         name,
+        operation: GRAPHQL_OPERATION.SUBSCRIPTION,
         params,
-        type: GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,
       }),
       variables: variables && cleanObject(variables),
     }),

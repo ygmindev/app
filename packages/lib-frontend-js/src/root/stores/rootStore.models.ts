@@ -10,7 +10,7 @@ import { type LocaleReducerModel as LocaleSliceModel } from '@lib/frontend/local
 import { type NotificationReducerModel as NotificationSliceModel } from '@lib/frontend/notification/stores/notificationStore/notificationStore.models';
 import { type RouteReducerModel as RouteSliceModel } from '@lib/frontend/route/stores/routeStore/routeStore.models';
 import {
-  type NestedActionsModel,
+  type StoreActionsModel,
   type NestedDefaultStateModel,
   type StoreReducersModel,
   type StoreStateModel,
@@ -51,7 +51,7 @@ export type RootReducersModel = {
   [TKey in StringKeyModel<RootSliceModel>]: StoreReducersModel<RootSliceModel[TKey]>;
 };
 
-export type RootActionsModel = NestedActionsModel<RootStateModel, RootReducersModel>;
+export type RootActionsModel = StoreActionsModel<RootStateModel, RootReducersModel>;
 
 export type RootDefaultStateModel = NestedDefaultStateModel<RootStateModel>;
 

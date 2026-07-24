@@ -1,5 +1,5 @@
 import { type UseQueryModel } from '@lib/frontend/data/hooks/useQuery/useQuery.models';
-import { type GraphqlQueryHttpParamsModel } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
+import { type GraphqlQueryHttpParamsModel } from '@lib/shared/graphql/utils/graphqlQuery/graphqlQuery.models';
 import { type UriModel } from '@lib/shared/route/route.models';
 
 export type UseGraphqlSseParamsModel<

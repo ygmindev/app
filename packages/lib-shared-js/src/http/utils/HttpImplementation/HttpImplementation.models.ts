@@ -20,6 +20,7 @@ export type HttpReponseModel<TResult> = {
 
 export type HttpImplementationParamsModel = {
   baseUri?: UriParamsModel;
+  isCredentials?: boolean;
   request?: HttpRequestParamsModel;
   onError?(error: Error): Promise<void>;
   onRequest?(request: HttpRequestParamsModel): Promise<HttpRequestParamsModel>;

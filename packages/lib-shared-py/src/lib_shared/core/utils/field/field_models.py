@@ -16,4 +16,5 @@ class FieldModel(Protocol, Generic[TType]):
         is_private: bool = False,
         relation: Optional[FieldRelation] = None,
         root: Optional[str] = None,
+        alias: Optional[str] = None,
     ) -> TType: ...

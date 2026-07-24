@@ -21,7 +21,7 @@ import { SignInUserUpdateInput } from '@lib/model/auth/SignIn/SignInUserUpdateIn
 import { SignInUserUpdateInputModel } from '@lib/model/auth/SignIn/SignInUserUpdateInput/SignInUserUpdateInput.model';
 import { SIGN_IN, VERIFY_TOKEN } from '@lib/shared/auth/auth.constants';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
-import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
+import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 
 @withContainer()
 @withResolver({ Resource: () => SignIn })
@@ -29,9 +29,9 @@ export class SignInResolver implements SignInResolverModel {
   @withInject(SignInImplementation) protected signInImplementation!: SignInImplementation;
 
   @withOutput({
-    Resource: () => SignIn,
     access: ACCESS_LEVEL.PUBLIC,
     name: SIGN_IN,
+    Resource: () => SignIn,
   })
   async signIn(
     @withInput({ Resource: () => SignInInput })
@@ -41,10 +41,10 @@ export class SignInResolver implements SignInResolverModel {
   }
 
   @withOutput({
-    Resource: () => SignInUserUpdate,
     access: ACCESS_LEVEL.PROTECTED,
     name: SIGN_IN_USER_UPDATE,
-    operation: GRAPHQL_OPERATION_TYPE.MUTATION,
+    operation: GRAPHQL_OPERATION.MUTATION,
+    Resource: () => SignInUserUpdate,
   })
   async userUpdate(
     @withInput({ Resource: () => SignInUserUpdateInput })
@@ -56,9 +56,9 @@ export class SignInResolver implements SignInResolverModel {
   }
 
   @withOutput({
-    Resource: () => SignIn,
     access: ACCESS_LEVEL.PROTECTED,
     name: SIGN_IN_USERNAME_UPDATE,
+    Resource: () => SignIn,
   })
   async usernameUpdate(
     @withInput({ Resource: () => SignInInput })
@@ -70,9 +70,9 @@ export class SignInResolver implements SignInResolverModel {
   }
 
   @withOutput({
-    Resource: () => SignIn,
     access: ACCESS_LEVEL.PUBLIC,
     name: VERIFY_TOKEN,
+    Resource: () => SignIn,
   })
   async verifyToken(
     @withInput({ Resource: () => String })

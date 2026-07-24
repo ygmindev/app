@@ -55,7 +55,7 @@ export const Modal: RLFCModel<ModalRefModel, ModalPropsModel> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const { value: deviceHeight } = useStore('app.dimension.height');
+  const [deviceHeight] = useStore('app.dimension.height');
   const [measure, measureSet] = useState<MeasureModel>();
   const measureSetF = debounce(measureSet, { duration: theme.animation.effect });
   const isOpenF = useValueDelayed(isOpen ?? false);

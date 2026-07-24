@@ -8,7 +8,7 @@ import { type ChatImplementationModel } from '@lib/model/chat/Chat/ChatImplement
 @withContainer()
 export class ChatImplementation
   extends createProtectedResoureImplementation<ChatModel>({
-    Resource: Chat,
     name: CHAT_RESOURCE_NAME,
+    Resource: Chat,
   })
   implements ChatImplementationModel {}

@@ -12,9 +12,9 @@ import { type MessageResolverModel } from '@lib/model/chat/Message/MessageResolv
 @withResolver({ Resource: () => Message })
 export class MessageResolver
   extends createProtectedResourceResolver<MessageModel>({
+    access: { default: ACCESS_LEVEL.PUBLIC },
+    name: MESSAGE_RESOURCE_NAME,
     Resource: () => Message,
     ResourceImplementation: MessageImplementation,
-    access: { default: ACCESS_LEVEL.PROTECTED },
-    name: MESSAGE_RESOURCE_NAME,
   })
   implements MessageResolverModel {}

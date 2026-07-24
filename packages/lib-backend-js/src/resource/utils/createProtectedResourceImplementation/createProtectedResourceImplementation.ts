@@ -1,4 +1,3 @@
-import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import { createEntityResourceImplementation } from '@lib/backend/resource/utils/createEntityResourceImplementation/createEntityResourceImplementation';
 import {
   type CreateProtectedResoureImplementationModel,
@@ -19,6 +18,7 @@ import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedErr
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
+import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
 export const createProtectedResoureImplementation = <TType extends ProtectedResourceModel>({

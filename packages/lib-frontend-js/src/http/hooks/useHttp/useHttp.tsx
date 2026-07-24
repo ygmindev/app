@@ -1,3 +1,4 @@
+import { useCredentials } from '@lib/frontend/auth/hooks/useCredentials/useCredentials';
 import { useErrorContext } from '@lib/frontend/core/hooks/useErrorContext/useErrorContext';
 import {
   type UseHttpModel,
@@ -9,9 +10,15 @@ import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { OfflineError } from '@lib/shared/http/errors/OfflineError/OfflineError';
 import { HttpImplementation } from '@lib/shared/http/utils/HttpImplementation/HttpImplementation';
 
-export const useHttp = (params: UseHttpParamsModel = {}): UseHttpModel => {
+export const useHttp = ({
+  isCredentials,
+  onRequest,
+  onResponse,
+  ...params
+}: UseHttpParamsModel = {}): UseHttpModel => {
   const { handleError } = useErrorContext();
-  const { set: isOfflineSet, value: isOffline } = useStore('app.isOffline');
+  const [isOffline, isOfflineSet] = useStore('app.isOffline');
+  const { getCredentials } = useCredentials();
   return new HttpImplementation({
     ...params,
     onError: async (e) => {
@@ -21,9 +28,13 @@ export const useHttp = (params: UseHttpParamsModel = {}): UseHttpModel => {
       const eF = isOfflineError ? new OfflineError() : e;
       handleError(eF);
     },
+    onRequest: async (config) => {
+      isCredentials && (config.headers = { ...config.headers, ...(await getCredentials()) });
+      return onRequest ? onRequest(config) : config;
+    },
     onResponse: async (response) => {
       isOffline && isOfflineSet(false);
-      return response;
+      return onResponse ? onResponse(response) : response;
     },
   });
 };

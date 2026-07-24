@@ -39,7 +39,7 @@ export type _StoreActionsModel<
   [TKey in StringKeyModel<TType>]: CaseReducerActions<
     {
       add(state: TType[TKey], action: PayloadAction<{ key: string; value: unknown }>): TType[TKey];
-      get(state: TType[TKey], action: PayloadAction<{ key: string }>): TType[TKey];
+      get(state: TType[TKey], action: PayloadAction<{ key: string }>): unknown;
       merge(
         state: TType[TKey],
         action: PayloadAction<{ key: string; strategy?: MERGE_STRATEGY; value: unknown }>,

@@ -10,7 +10,7 @@ import { Z_INDEX_TOP } from '@lib/frontend/style/style.constants';
 import { SHAPE_POSITION } from '@lib/frontend/style/utils/styler/shapeStyler/shapeStyler.constants';
 
 export const Notifications: SFCModel<NotificationsPropsModel> = () => {
-  const { value: notifications } = useStore('notification.notifications');
+  const [notifications] = useStore('notification.notifications');
   const theme = useTheme();
   return (
     <Portal>

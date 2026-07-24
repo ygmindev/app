@@ -1,5 +1,5 @@
 import { InvalidTypeError } from '@lib/shared/core/errors/InvalidTypeError/InvalidTypeError';
-import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
+import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import {
   type GetOperationTypeModel,
@@ -11,15 +11,15 @@ export const getOperationType = (params: GetOperationTypeParamsModel): GetOperat
     case RESOURCE_METHOD_TYPE.GET:
     case RESOURCE_METHOD_TYPE.GET_MANY:
     case RESOURCE_METHOD_TYPE.SEARCH:
-      return GRAPHQL_OPERATION_TYPE.QUERY;
+      return GRAPHQL_OPERATION.QUERY;
     case RESOURCE_METHOD_TYPE.SUBSCRIBE:
-      return GRAPHQL_OPERATION_TYPE.SUBSCRIPTION;
+      return GRAPHQL_OPERATION.SUBSCRIPTION;
     case RESOURCE_METHOD_TYPE.CREATE:
     case RESOURCE_METHOD_TYPE.CREATE_MANY:
     case RESOURCE_METHOD_TYPE.UPDATE:
     case RESOURCE_METHOD_TYPE.UPDATE_MANY:
     case RESOURCE_METHOD_TYPE.REMOVE:
-      return GRAPHQL_OPERATION_TYPE.MUTATION;
+      return GRAPHQL_OPERATION.MUTATION;
     default:
       throw new InvalidTypeError(params, RESOURCE_METHOD_TYPE);
   }

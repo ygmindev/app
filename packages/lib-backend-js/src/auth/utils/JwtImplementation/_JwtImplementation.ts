@@ -6,12 +6,12 @@ import { SIGN_IN_TOKEN_CLAIM_KEYS } from '@lib/model/auth/SignIn/SignIn.constant
 import { type SignInTokenModel } from '@lib/model/auth/SignIn/SignIn.models';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { AuthTokenError } from '@lib/shared/auth/errors/AuthTokenError/AuthTokenError';
+import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedError/UnauthenticatedError';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { pick } from '@lib/shared/core/utils/pick/pick';
-import { HttpError } from '@lib/shared/http/errors/HttpError/HttpError';
-import { type AuthError } from 'firebase/auth';
 import admin from 'firebase-admin';
+import { type AuthError } from 'firebase/auth';
 
 export class _JwtImplementation implements _JwtImplementationModel {
   constructor({ email, projectId, secret }: _JwtImplementationParamsModel) {
@@ -39,13 +39,14 @@ export class _JwtImplementation implements _JwtImplementationModel {
       return {
         ...((decoded.additionalClaims as SignInTokenModel) ?? {}),
         ...pick(decoded, SIGN_IN_TOKEN_CLAIM_KEYS),
+        isAnonymous: decoded.firebase.sign_in_provider === 'anonymous',
       };
     } catch (e) {
       switch ((e as AuthError).code) {
         case 'auth/id-token-expired':
           throw new AuthTokenError();
         case 'auth/argument-error':
-          throw new HttpError();
+          throw new UnauthenticatedError();
         default:
           throw e;
       }

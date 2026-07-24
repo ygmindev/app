@@ -1,3 +1,5 @@
+export {};
+
 declare module '@bunchtogether/vite-plugin-flow';
 declare module 'eslint-plugin-import';
 declare module 'eslint-plugin-sort-destructure-keys';
@@ -18,4 +20,9 @@ declare namespace NodeJS {
   type ProcessEnv =
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
     import('@lib/config/environment/environment.models').EnvironmentConfigModel;
+}
+
+declare global {
+  function __CLIENT_ONLY__<TType>(value: TType): TType | undefined;
+  function __SERVER_ONLY__<TType>(value: TType): TType | undefined;
 }

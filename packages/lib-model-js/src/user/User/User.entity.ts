@@ -30,6 +30,7 @@ import { type LinkedUserModel } from '@lib/model/user/LinkedUser/LinkedUser.mode
 import { USER_RESOURCE_NAME } from '@lib/model/user/User/User.constants';
 import { type UserModel } from '@lib/model/user/User/User.models';
 import { PartialArrayModel } from '@lib/shared/core/core.models';
+import { DATA_TYPE } from '@lib/shared/data/data.constants';
 
 @withDatabaseEntity({
   indices: [{ keys: ['first', 'last', 'email', 'phone'], type: 'text' }],
@@ -65,6 +66,9 @@ export class User extends EntityResource implements UserModel {
 
   @withDatabaseField({ isOptional: true })
   first?: string;
+
+  @withDatabaseField({ isOptional: true, type: DATA_TYPE.BOOLEAN })
+  isAnonymous?: boolean;
 
   @withDatabaseField({ isOptional: true })
   last?: string;

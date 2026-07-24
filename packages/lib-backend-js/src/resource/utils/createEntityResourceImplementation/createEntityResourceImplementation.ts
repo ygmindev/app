@@ -10,7 +10,6 @@ import { type EntityResourceModel } from '@lib/model/resource/EntityResource/Ent
 import { Container } from '@lib/shared/core/utils/Container/Container';
 
 export const createEntityResourceImplementation = <TType extends EntityResourceModel>({
-  Resource,
   afterCreate,
   afterCreateMany,
   afterGet,
@@ -28,6 +27,7 @@ export const createEntityResourceImplementation = <TType extends EntityResourceM
   beforeUpdate,
   beforeUpdateMany,
   name,
+  Resource,
 }: CreateEntityResourceImplementationParamsModel<TType>): CreateEntityResourceImplementationModel<TType> => {
   let repositry: RepositoryModel<TType>;
 
@@ -37,7 +37,6 @@ export const createEntityResourceImplementation = <TType extends EntityResourceM
   };
 
   return createResourceImplementation<TType>({
-    Resource,
     afterCreate,
     afterCreateMany,
     afterGet,
@@ -61,6 +60,7 @@ export const createEntityResourceImplementation = <TType extends EntityResourceM
     getMany: async (...input) => getRepository().getMany(...input),
     name,
     remove: async (...input) => getRepository().remove(...input),
+    Resource,
     subscribe: async (...input) => getRepository().subscribe(...input),
     update: async (...input) => getRepository().update(...input),
     updateMany: async (...input) => getRepository().updateMany(...input),

@@ -5,17 +5,17 @@ import { type AsyncPropsModel } from '@lib/frontend/data/data.models';
 import { type UseMutationParamsModel } from '@lib/frontend/data/hooks/useMutation/useMutation.models';
 import { type UseQueryParamsModel } from '@lib/frontend/data/hooks/useQuery/useQuery.models';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
-import { type GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
+import { type GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 import { type ReactElement } from 'react';
 
 export type DataBoundaryPropsModel<
   TParams = undefined,
   TResult = void,
-  TOperation extends GRAPHQL_OPERATION_TYPE = GRAPHQL_OPERATION_TYPE.QUERY,
+  TOperation extends GRAPHQL_OPERATION = GRAPHQL_OPERATION.QUERY,
 > = Omit<AsyncBoundaryPropsModel, 'children'> &
   WithIdModel &
   AsyncPropsModel &
-  (TOperation extends GRAPHQL_OPERATION_TYPE.MUTATION
+  (TOperation extends GRAPHQL_OPERATION.MUTATION
     ? { mutate: UseMutationParamsModel<TParams, TResult>[1]; query?: never }
     : { mutate?: never; query: UseQueryParamsModel<TParams, TResult>[1] }) &
   ChildPropsModel<DataBoundaryChildProps<TResult, TOperation>> & {
@@ -27,7 +27,7 @@ export type DataBoundaryPropsModel<
 
 export type DataBoundaryChildProps<
   TResult = void,
-  TOperation extends GRAPHQL_OPERATION_TYPE = GRAPHQL_OPERATION_TYPE.QUERY,
+  TOperation extends GRAPHQL_OPERATION = GRAPHQL_OPERATION.QUERY,
 > = (
   props: ElementStatePropsModel &
     Pick<DataBoundaryRefModel<TResult, TOperation>, 'reset' | 'setData'> & {
@@ -38,8 +38,8 @@ export type DataBoundaryChildProps<
 
 export type DataBoundaryRefModel<
   TResult = void,
-  TOperation extends GRAPHQL_OPERATION_TYPE = GRAPHQL_OPERATION_TYPE.QUERY,
-> = (TOperation extends GRAPHQL_OPERATION_TYPE.MUTATION
+  TOperation extends GRAPHQL_OPERATION = GRAPHQL_OPERATION.QUERY,
+> = (TOperation extends GRAPHQL_OPERATION.MUTATION
   ? { query?: never; mutate?(): Promise<void> }
   : { mutate?: never; query?(): Promise<void> }) & {
   getData(): TResult | null | undefined;

@@ -9,16 +9,15 @@ import { type UserModel } from '@lib/model/user/User/User.models';
 
 export const AuthProvider: FCModel<AuthProviderPropsModel> = ({ children }) => {
   const { get } = useUserResource();
-  const { value: authStatus } = useStore('auth.status');
-  const { set: authTokenSet } = useStore('auth.token');
+  const [authStatus] = useStore('auth.status');
+  const [, authTokenSet] = useStore('auth.token');
   const { setAuth } = useSignInResource();
 
   useAuth({
     onAuthenticate: async (signInToken, token) => {
-      let user: Partial<UserModel> | undefined = signInToken;
-      // TODO: handle security concerns in backend (separate auth user get endpoint?)
-      signInToken?._id &&
-        (user = (await get({ filter: [{ field: '_id', value: signInToken._id }] }))?.result);
+      const user: Partial<UserModel> | undefined = signInToken?._id
+        ? (await get({ filter: [{ field: '_id', value: signInToken._id }] }))?.result
+        : undefined;
       await setAuth(token, user);
     },
 

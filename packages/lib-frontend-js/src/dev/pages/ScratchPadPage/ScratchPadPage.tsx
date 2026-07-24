@@ -38,7 +38,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
 // import { CHAT_RESOURCE_NAME } from '@lib/model/chat/Chat/Chat.constants';
 // // import { CHAT_RESOURCE_NAME } from '@lib/model/chat/Chat/Chat.constants';
 // import { type PartialModel } from '@lib/shared/core/core.models';
-// import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
+// import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 // import { type UserModel } from '@lib/model/user/User/User.models';
 // import { useEffect } from 'react';
 
@@ -56,7 +56,7 @@ export const ScratchPadPage: LFCModel<ScratchPadPagePropsModel> = ({ ...props })
 //       void graphql.query<any>({
 //         fields: [{ result: ['text'] }],
 //         name: 'ChatSubscribe',
-//         type: GRAPHQL_OPERATION_TYPE.SUBSCRIPTION,
+//         type: GRAPHQL_OPERATION.SUBSCRIPTION,
 //       });
 //   }, []);
 

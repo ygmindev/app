@@ -25,6 +25,8 @@ export const bundleConfig = new Config<BundleConfigModel, _BundleConfigModel>({
 
       buildDir: BUILD_DIR,
 
+      clientMarker: '__CLIENT_ONLY__',
+
       configFilename: 'bundle.ts',
 
       envFilename: '.env.build',
@@ -54,6 +56,8 @@ export const bundleConfig = new Config<BundleConfigModel, _BundleConfigModel>({
       rootDirs: [fromRoot(), ...packageDirs.map((path) => fromPackages(path))],
 
       serverExtension: '.node',
+
+      serverMarker: '__SERVER_ONLY__',
 
       sourcemap: process.env.NODE_ENV === 'development' ? BUNDLE_SOURCEMAP.INLINE : undefined,
 

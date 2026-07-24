@@ -22,15 +22,15 @@ export const createProtectedResourceResolver = <TType extends ProtectedResourceM
     protected implementation = Container.get(params.ResourceImplementation);
 
     @withResourceOutput({
-      Resource: params.Resource,
       method: RESOURCE_METHOD_TYPE.GET_MANY,
       name: `${params.name}${RESOURCE_METHOD_TYPE.GET_MANY}Protected`,
+      Resource: params.Resource,
     })
     async getManyProtected(
       @withResourceInput({
-        Resource: params.Resource,
         method: RESOURCE_METHOD_TYPE.GET_MANY,
         name: `${params.name}${RESOURCE_METHOD_TYPE.GET_MANY}Protected`,
+        Resource: params.Resource,
       })
       input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType> = {},
       @withContext()

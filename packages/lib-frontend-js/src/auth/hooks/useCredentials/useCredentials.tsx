@@ -8,8 +8,8 @@ import { GROUP_RESOURCE_NAME } from '@lib/model/group/Group/Group.constants';
 import { type CredentialsModel } from '@lib/shared/auth/auth.models';
 
 export const useCredentials = ({}: UseCredentialsParamsModel = {}): UseCredentialsModel => {
-  const { value: token } = useStore('auth.token.access');
-  const { value: currentGroup } = useStore('group.currentGroup');
+  const [token] = useStore('auth.token.access');
+  const [currentGroup] = useStore('group.currentGroup');
   const { refreshToken } = useSession();
   return {
     getCredentials: async () => {

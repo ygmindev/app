@@ -1,6 +1,7 @@
 import { withContainer } from '@lib/backend/core/utils/withContainer/withContainer';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { createProtectedResourceResolver } from '@lib/backend/resource/utils/createProtectedResourceResolver/createProtectedResourceResolver';
+import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { CHAT_RESOURCE_NAME } from '@lib/model/chat/Chat/Chat.constants';
 import { Chat } from '@lib/model/chat/Chat/Chat.entity';
 import { type ChatModel } from '@lib/model/chat/Chat/Chat.models';
@@ -11,28 +12,9 @@ import { type ChatResolverModel } from '@lib/model/chat/Chat/ChatResolver/ChatRe
 @withResolver({ Resource: () => Chat })
 export class ChatResolver
   extends createProtectedResourceResolver<ChatModel>({
+    access: { default: ACCESS_LEVEL.PUBLIC },
+    name: CHAT_RESOURCE_NAME,
     Resource: () => Chat,
     ResourceImplementation: ChatImplementation,
-    name: CHAT_RESOURCE_NAME,
   })
-  implements ChatResolverModel {
-  // @withResourceOutput({
-  //   Resource: () => Message,
-  //   access: ACCESS_LEVEL.PROTECTED,
-  //   method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
-  //   name: CHAT_RESOURCE_NAME,
-  //   topic: () => 'message',
-  // })
-  // async messageSubscribe(
-  //   @withResourceInput({
-  //     Resource: () => Message,
-  //     method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
-  //     name: CHAT_RESOURCE_NAME,
-  //   })
-  //   input: ResourceInputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, ChatModel> = {},
-  //   @withRoot()
-  //   root?: MessageModel,
-  // ): Promise<ResourceOutputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, MessageModel>> {
-  //   return { result: root };
-  // }
-}
+  implements ChatResolverModel {}

@@ -18,7 +18,7 @@ import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 export const OrderProductsPage: LFCModel<OrderProductsPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([BILLING]);
-  const { set: itemsSet, value: items } = useStore('commerce.items');
+  const [items, itemsSet] = useStore('commerce.items');
   const { push } = useRouter();
   return (items?.length ?? 0) > 0 ? (
     <FormContainer

@@ -1,11 +1,21 @@
 import { routesConfig as configBase } from '@lib/config/routes/routes.base';
 import { AI, CHAT_HISTORY, NEW } from '@lib/frontend/ai/ai.constants';
 import { ChatHistoryPage } from '@lib/frontend/ai/pages/ChatHistoryPage/ChatHistoryPage';
-import { ChatPage } from '@lib/frontend/ai/pages/ChatPage/ChatPage';
+import { chatPageRoute } from '@lib/frontend/ai/pages/ChatPage/ChatPage.route';
 import { NewChatPage } from '@lib/frontend/ai/pages/NewChatPage/NewChatPage';
 import { ROUTE_NAVIGATION } from '@lib/frontend/route/route.constants';
 import { APP } from '@lib/shared/app/app.constants';
 import { CHAT } from '@lib/shared/chat/chat.constants';
+
+// const { get } = useChatResource();
+// useEffect(() => {
+//   void get({
+//     filter: [{ field: '_id', value: chatId }],
+//     options: {
+//       populate: ['messages'],
+//     },
+//   }).then(console.warn);
+// }, [chatId]);
 
 export const routesConfig = configBase.extend(() => ({
   routes: [
@@ -23,19 +33,14 @@ export const routesConfig = configBase.extend(() => ({
           title: ({ t }) => t('chat:newChat'),
         },
 
-        {
-          element: <ChatPage />,
-          icon: 'chat',
-          pathname: `${CHAT}/:chatId`,
-          title: ({ t }) => t('chat:chat'),
-        },
+        chatPageRoute,
 
         {
           element: <ChatHistoryPage />,
           icon: 'chats',
           isNavigatable: true,
           pathname: CHAT_HISTORY,
-          title: ({ t }) => t('chat:chatHistory'),
+          title: ({ t }) => t('chat:chats'),
         },
       ],
     },

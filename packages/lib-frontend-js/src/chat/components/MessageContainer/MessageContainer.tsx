@@ -52,7 +52,7 @@ export const MessageContainer: LFCModel<MessageContainerPropsModel> = ({
         <Divider>{new DateTime(message.created).format(DATETIME_FORMAT.DATE)}</Divider>
       )} */}
 
-      <Activatable isMobileVisible>
+      <Activatable>
         {(isActive) => (
           <Wrapper
             align={isOwn ? FLEX_ALIGN.END : FLEX_ALIGN.START}
@@ -75,14 +75,17 @@ export const MessageContainer: LFCModel<MessageContainerPropsModel> = ({
 
             {bottomElement}
 
-            <Appearable
-              isActive={!isStreaming && isActive}
-              isLazy={false}>
-              <Wrapper
-                isAlign
-                isRow>
-                {created && <Text color={theme.color.border}>{created}</Text>}
+            <Wrapper
+              isAlign
+              isReverse={isOwn}
+              isRow>
+              {created && <Text color={theme.color.border}>{created}</Text>}
 
+              <Appearable
+                isActive={!isStreaming && isActive}
+                isAlign
+                isLazy={false}
+                isRow>
                 <Button
                   icon="copy"
                   onPress={async () => message.content && copy(message.content)}
@@ -92,8 +95,8 @@ export const MessageContainer: LFCModel<MessageContainerPropsModel> = ({
                 />
 
                 {tooltipElement}
-              </Wrapper>
-            </Appearable>
+              </Appearable>
+            </Wrapper>
           </Wrapper>
         )}
       </Activatable>

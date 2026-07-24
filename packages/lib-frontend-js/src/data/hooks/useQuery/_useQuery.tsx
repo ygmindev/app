@@ -26,9 +26,6 @@ export const _useQuery = <TParams = undefined, TResult = void>(
   });
 
   const refetchF = debounce(async () => refetch());
-  const setData = async (values: TResult): Promise<void> => {
-    await queryClient.set(idF, values);
-  };
 
   return {
     data,
@@ -38,6 +35,8 @@ export const _useQuery = <TParams = undefined, TResult = void>(
     reset: async () => {
       await queryClient.set(idF, undefined);
     },
-    setData,
+    setData: async (value) => {
+      await queryClient.set(idF, value);
+    },
   };
 };

@@ -4,7 +4,7 @@ export const useMapRoutes = (): UseMapRoutesModel => {};
 
 // import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
 // import { type UseMapRoutesModel } from '@lib/frontend/map/hooks/useMapRoutes/useMapRoutes.models';
-// import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
+// import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 // import { MAP_ROUTE_RESOURCE } from '@lib/model/map/MapRoute/MapRoute.constants';
 // import { type MapRouteModel } from '@lib/model/map/MapRoute/MapRoute.models';
 // import { type GetRouteInputModel } from '@lib/model/map/MapRoute/MapRouteImplementation/MapRouteImplementation.models';
@@ -18,7 +18,7 @@ export const useMapRoutes = (): UseMapRoutesModel => {};
 //         fields: ['distance', 'duration', 'polyline', { priceTiers: ['price', 'timing'] }],
 //         name: `${RESOURCE_METHOD_TYPE.GET}${MAP_ROUTE_RESOURCE}`,
 //         params: { input: 'GetRouteInput' },
-//         type: GRAPHQL_OPERATION_TYPE.QUERY,
+//         type: GRAPHQL_OPERATION.QUERY,
 //         variables: { input },
 //       });
 //       return output;

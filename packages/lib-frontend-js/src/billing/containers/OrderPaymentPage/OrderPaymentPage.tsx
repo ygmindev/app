@@ -17,7 +17,7 @@ import { useRef } from 'react';
 export const OrderPaymentPage: LFCModel<OrderPaymentPagePropsModel> = ({ ...props }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const ref = useRef<PaymentMethodInputRefModel>(null);
-  const { set: itemsSet, value: items } = useStore('commerce.items');
+  const [items, itemsSet] = useStore('commerce.items');
   const { create } = useOrderResource();
   const { replace } = useRouter();
 

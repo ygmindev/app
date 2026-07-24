@@ -12,6 +12,7 @@ class ApiEndpoint(BaseModel):
     method: HTTP_METHOD | list[HTTP_METHOD]
     pathname: str
     handler: ApiHandlerModel
+    is_protected: bool = False
 
 
 class ApiConfig(BaseModel):

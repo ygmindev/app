@@ -23,7 +23,7 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
   const { t } = useTranslation();
   const { push } = useRouter();
   const { wrapperProps } = useLayoutStyles({ props });
-  const { set: isMinimizedSet, value: isMinimized } = useStore('app.layout.isMinimized');
+  const [isMinimized, isMinimizedSet] = useStore('app.layout.isMinimized');
 
   const elementState = isMinimized ? ELEMENT_STATE.ACTIVE : ELEMENT_STATE.INACTIVE;
 
@@ -93,8 +93,7 @@ export const AppToolbar: LFCModel<AppToolbarPropsModel> = ({ routes, ...props })
 
             <Wrapper
               flex
-              isVerticalScrollable
-              s={THEME_SIZE.SMALL}>
+              isVerticalScrollable>
               {getRoutes(routes).map((v) => (
                 <Button
                   fontAlign={FONT_ALIGN.LEFT}

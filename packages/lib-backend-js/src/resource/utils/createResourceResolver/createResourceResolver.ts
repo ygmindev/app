@@ -20,12 +20,12 @@ import { withCondition } from '@lib/shared/core/utils/withCondition/withConditio
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
 export const createResourceResolver = <TType extends ResourceModel, TRoot = undefined>({
-  Resource,
-  ResourceImplementation,
-  RootResource,
   access = { default: ACCESS_LEVEL.PROTECTED },
   authorizer,
   name,
+  Resource,
+  ResourceImplementation,
+  RootResource,
 }: CreateResourceResolverParamsModel<TType, TRoot>): CreateResourceResolverModel<TType, TRoot> => {
   const { create, createMany, get, getMany, remove, search, subscribe, update, updateMany } =
     ResourceImplementation.prototype;
@@ -54,11 +54,11 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
             authorizer?.default ?? authorizer?.write ?? authorizer?.[RESOURCE_METHOD_TYPE.CREATE],
         }),
         withResourceOutput({
-          Resource,
-          RootResource,
           access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.CREATE],
           method: RESOURCE_METHOD_TYPE.CREATE,
           name,
+          Resource,
+          RootResource,
         }),
       ],
     )
@@ -67,9 +67,9 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
         () => createExists,
         () =>
           withResourceInput({
-            Resource,
             method: RESOURCE_METHOD_TYPE.CREATE,
             name,
+            Resource,
           }),
       )
       input: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE, TType, TRoot> = {},
@@ -92,11 +92,11 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
             authorizer?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
         }),
         withResourceOutput({
-          Resource,
-          RootResource,
           access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.CREATE_MANY],
           method: RESOURCE_METHOD_TYPE.CREATE_MANY,
           name,
+          Resource,
+          RootResource,
         }),
       ],
     )
@@ -105,9 +105,9 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
         () => createManyExists,
         () =>
           withResourceInput({
-            Resource,
             method: RESOURCE_METHOD_TYPE.CREATE_MANY,
             name,
+            Resource,
           }),
       )
       input: ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot> = {},
@@ -128,18 +128,18 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
             authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.GET],
         }),
         withResourceOutput({
-          Resource,
-          RootResource,
           access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET],
           method: RESOURCE_METHOD_TYPE.GET,
           name,
+          Resource,
+          RootResource,
         }),
       ],
     )
     async get(
       @withCondition(
         () => getExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.GET, name }),
+        () => withResourceInput({ method: RESOURCE_METHOD_TYPE.GET, name, Resource }),
       )
       input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot> = {},
       @withContext()
@@ -159,18 +159,18 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
             authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.GET_MANY],
         }),
         withResourceOutput({
-          Resource,
-          RootResource,
           access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.GET_MANY],
           method: RESOURCE_METHOD_TYPE.GET_MANY,
           name,
+          Resource,
+          RootResource,
         }),
       ],
     )
     async getMany(
       @withCondition(
         () => getManyExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.GET_MANY, name }),
+        () => withResourceInput({ method: RESOURCE_METHOD_TYPE.GET_MANY, name, Resource }),
       )
       input: ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot> = {},
       @withContext()
@@ -190,18 +190,18 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
             authorizer?.default ?? authorizer?.write ?? authorizer?.[RESOURCE_METHOD_TYPE.REMOVE],
         }),
         withResourceOutput({
-          Resource,
-          RootResource,
           access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.REMOVE],
           method: RESOURCE_METHOD_TYPE.REMOVE,
           name,
+          Resource,
+          RootResource,
         }),
       ],
     )
     async remove(
       @withCondition(
         () => removeExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.REMOVE, name }),
+        () => withResourceInput({ method: RESOURCE_METHOD_TYPE.REMOVE, name, Resource }),
       )
       input: ResourceInputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot> = {},
       @withContext()
@@ -221,11 +221,11 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
             authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.SEARCH],
         }),
         withResourceOutput<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>({
-          Resource,
-          RootResource,
           access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.SEARCH],
           method: RESOURCE_METHOD_TYPE.SEARCH,
           name,
+          Resource,
+          RootResource,
           topic: (input) => `${name}.${input?.id}`,
         }),
       ],
@@ -233,7 +233,7 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
     async search(
       @withCondition(
         () => subscribeExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.SEARCH, name }),
+        () => withResourceInput({ method: RESOURCE_METHOD_TYPE.SEARCH, name, Resource }),
       )
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SEARCH, TType, TRoot>,
       @withContext()
@@ -253,11 +253,11 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
             authorizer?.default ?? authorizer?.read ?? authorizer?.[RESOURCE_METHOD_TYPE.SUBSCRIBE],
         }),
         withResourceOutput<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>({
-          Resource,
-          RootResource,
           access: access?.default ?? access?.read ?? access?.[RESOURCE_METHOD_TYPE.SUBSCRIBE],
           method: RESOURCE_METHOD_TYPE.SUBSCRIBE,
           name,
+          Resource,
+          RootResource,
           topic: (input) => `${name}.${input?.id}`,
         }),
       ],
@@ -265,7 +265,7 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
     async subscribe(
       @withCondition(
         () => subscribeExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.SUBSCRIBE, name }),
+        () => withResourceInput({ method: RESOURCE_METHOD_TYPE.SUBSCRIBE, name, Resource }),
       )
       input?: ResourceInputModel<RESOURCE_METHOD_TYPE.SUBSCRIBE, TType, TRoot>,
       @withRoot()
@@ -287,18 +287,18 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
             authorizer?.default ?? authorizer?.write ?? authorizer?.[RESOURCE_METHOD_TYPE.UPDATE],
         }),
         withResourceOutput({
-          Resource,
-          RootResource,
           access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.UPDATE],
           method: RESOURCE_METHOD_TYPE.UPDATE,
           name,
+          Resource,
+          RootResource,
         }),
       ],
     )
     async update(
       @withCondition(
         () => updateExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.UPDATE, name }),
+        () => withResourceInput({ method: RESOURCE_METHOD_TYPE.UPDATE, name, Resource }),
       )
       input: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE, TType, TRoot> = {},
       @withContext()
@@ -320,18 +320,18 @@ export const createResourceResolver = <TType extends ResourceModel, TRoot = unde
             authorizer?.[RESOURCE_METHOD_TYPE.UPDATE_MANY],
         }),
         withResourceOutput({
-          Resource,
-          RootResource,
           access: access?.default ?? access?.write ?? access?.[RESOURCE_METHOD_TYPE.UPDATE_MANY],
           method: RESOURCE_METHOD_TYPE.UPDATE_MANY,
           name,
+          Resource,
+          RootResource,
         }),
       ],
     )
     async updateMany(
       @withCondition(
         () => updateManyExists,
-        () => withResourceInput({ Resource, method: RESOURCE_METHOD_TYPE.UPDATE_MANY, name }),
+        () => withResourceInput({ method: RESOURCE_METHOD_TYPE.UPDATE_MANY, name, Resource }),
       )
       input: ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot> = {},
       @withContext()

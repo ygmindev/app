@@ -41,6 +41,7 @@ class _Database(_DatabaseModel):
         )
 
     async def initialize(self) -> None:
+        DatabaseEntity.initialize()
         await init_beanie(
             database=self._client[self.config.database],
             document_models=self.config.resources,
@@ -92,7 +93,7 @@ class _Database(_DatabaseModel):
         skip: Optional[int] = None,
         sort: Optional[Sequence[tuple[str, Literal[-1, 1]]]] = None,
     ) -> FindResultModel[TType]:
-        result = resource.find(query)
+        result = resource.find(query, fetch_links=True)
         if skip:
             result = result.skip(skip)
         if limit:

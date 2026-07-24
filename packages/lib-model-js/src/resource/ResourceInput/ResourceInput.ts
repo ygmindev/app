@@ -6,6 +6,8 @@ import { Filter } from '@lib/model/resource/Filter/Filter';
 import { type FilterModel } from '@lib/model/resource/Filter/Filter.models';
 import { GetManyOptions } from '@lib/model/resource/GetManyOptions/GetManyOptions';
 import { GetManyOptionsModel } from '@lib/model/resource/GetManyOptions/GetManyOptions.models';
+import { GetOptions } from '@lib/model/resource/GetOptions/GetOptions';
+import { GetOptionsModel } from '@lib/model/resource/GetOptions/GetOptions.models';
 import { Inputtable } from '@lib/model/resource/Inputtable/Inputtable';
 import { InputtableModel } from '@lib/model/resource/Inputtable/Inputtable.models';
 import {
@@ -25,13 +27,13 @@ class Root<TRoot = undefined> implements RootInputModel<TRoot> {
 }
 
 export const ResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot = undefined>({
-  Resource,
   method,
   name,
+  Resource,
 }: ResourceInputParamsModel<TMethod, TType>): ResourceClassModel<
   ResourceInputModel<TMethod, TType, TRoot>
 > => {
-  const InputtableF = Inputtable({ Resource, name: `${name}Input` });
+  const InputtableF = Inputtable({ name: `${name}Input`, Resource });
 
   switch (method) {
     case RESOURCE_METHOD_TYPE.GET: {
@@ -41,14 +43,20 @@ export const ResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot
         implements ResourceInputModel<RESOURCE_METHOD_TYPE.GET, TType, TRoot>
       {
         @withField({
-          Resource: () => Filter as ResourceClassModel<FilterModel<TType>>,
           isArray: true,
           isOptional: true,
+          Resource: () => Filter as ResourceClassModel<FilterModel<TType>>,
         })
         filter?: Array<FilterModel<TType>>;
 
         @withField({ isOptional: true })
         id?: string;
+
+        @withField({
+          isOptional: true,
+          Resource: () => GetOptions as ResourceClassModel<GetOptionsModel<TType>>,
+        })
+        options?: GetOptionsModel<TType>;
       }
       return Input as ResourceClassModel<ResourceInputModel<TMethod, TType, TRoot>>;
     }
@@ -60,9 +68,9 @@ export const ResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot
         implements ResourceInputModel<RESOURCE_METHOD_TYPE.GET_MANY, TType, TRoot>
       {
         @withField({
-          Resource: () => Filter as ResourceClassModel<FilterModel<TType>>,
           isArray: true,
           isOptional: true,
+          Resource: () => Filter as ResourceClassModel<FilterModel<TType>>,
         })
         filter?: Array<FilterModel<TType>>;
 
@@ -70,8 +78,8 @@ export const ResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot
         id?: Array<string>;
 
         @withField({
-          Resource: () => GetManyOptions as ResourceClassModel<GetManyOptionsModel<TType>>,
           isOptional: true,
+          Resource: () => GetManyOptions as ResourceClassModel<GetManyOptionsModel<TType>>,
         })
         options?: GetManyOptionsModel<TType>;
       }
@@ -95,7 +103,7 @@ export const ResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot
         extends Root<TRoot>
         implements ResourceInputModel<RESOURCE_METHOD_TYPE.CREATE_MANY, TType, TRoot>
       {
-        @withField({ Resource: () => InputtableF, isArray: true })
+        @withField({ isArray: true, Resource: () => InputtableF })
         form!: PartialArrayModel<TType>;
       }
       return Input as ResourceClassModel<ResourceInputModel<TMethod, TType, TRoot>>;
@@ -108,9 +116,9 @@ export const ResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot
         implements ResourceInputModel<RESOURCE_METHOD_TYPE.REMOVE, TType, TRoot>
       {
         @withField({
-          Resource: () => Filter as ResourceClassModel<FilterModel<TType>>,
           isArray: true,
           isOptional: true,
+          Resource: () => Filter as ResourceClassModel<FilterModel<TType>>,
         })
         filter?: Array<FilterModel<TType>>;
 
@@ -172,9 +180,9 @@ export const ResourceInput = <TMethod extends RESOURCE_METHOD_TYPE, TType, TRoot
         implements ResourceInputModel<RESOURCE_METHOD_TYPE.UPDATE_MANY, TType, TRoot>
       {
         @withField({
-          Resource: () => Filter as ResourceClassModel<FilterModel<TType>>,
           isArray: true,
           isOptional: true,
+          Resource: () => Filter as ResourceClassModel<FilterModel<TType>>,
         })
         filter?: Array<FilterModel<TType>>;
 

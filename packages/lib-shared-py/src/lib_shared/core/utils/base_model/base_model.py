@@ -20,6 +20,10 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         use_enum_values=True,
     )
 
+    @classmethod
+    def __pydantic_init_subclass__(cls, **kwargs: Any) -> None:
+        super().__pydantic_init_subclass__(**kwargs)
+
     def model_post_init(self, __context: Any) -> None:
         return self.post_init()
 
@@ -42,7 +46,6 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
 
         result = {}
         for k, v in value:
-            # Use a default of None to prevent AttributeError if 'value' has extra fields
             current = getattr(self, k, None)
             result[k] = self._merge(current, v, merge_strategy=merge_strategy)
 

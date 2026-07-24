@@ -15,6 +15,7 @@ def _Field(
     is_private: bool = False,
     relation: Optional[FieldRelation] = None,
     root: Optional[str] = None,
+    alias: Optional[str] = None,
 ) -> TType:
     default_params = {}
     if default_value:
@@ -33,6 +34,7 @@ def _Field(
 
     return PydanticField(
         **default_params,
+        alias=alias,
         description=description,
         json_schema_extra=extra_metadata if extra_metadata else None,
     )

@@ -1,5 +1,4 @@
 import 'raf/polyfill.js';
-
 import { getTokenFromHeader } from '@lib/backend/auth/utils/getTokenFromHeader/getTokenFromHeader';
 import { initialize } from '@lib/backend/setup/utils/initialize/initialize';
 import { type RequestContextModel } from '@lib/config/api/api.models';
@@ -63,7 +62,7 @@ export const onBeforeServer = ({
         initialState[AUTH] = { status: AUTH_STATUS.AUTHENTICATED, token };
         initialState[USER] = { currentUser: { _id: userId } };
       } else {
-        initialState[AUTH] = { status: AUTH_STATUS.UNAUTHENTICATED };
+        initialState[AUTH] = { status: AUTH_STATUS.UNAUTHENTICATED, token: undefined };
       }
 
       // hydrate brightness
@@ -79,20 +78,23 @@ export const onBeforeServer = ({
 
       // hydrate data
       const { loaders: loadersF } = (matchedRoutes ?? []).reduce(
-        (result, { isProtectable, loaders }) => ({
-          isProtectable: result.isProtectable || isProtectable || false,
-          loaders: loaders
-            ? [
-                ...result.loaders,
-                ...reduce(
-                  loaders({ pathname }),
-                  (r, v, k) =>
-                    v ? [...r, queryClient.prefetch(k, async () => v(requestContext))] : r,
-                  [] as Array<Promise<unknown>>,
-                ),
-              ]
-            : result.loaders,
-        }),
+        (result, v) => {
+          const { isProtectable, loaders } = v.route;
+          return {
+            isProtectable: result.isProtectable || isProtectable || false,
+            loaders: loaders
+              ? [
+                  ...result.loaders,
+                  ...reduce(
+                    loaders({ params: v.params, pathname }),
+                    (r, v, k) =>
+                      v ? [...r, queryClient.prefetch(k, async () => v(requestContext))] : r,
+                    [] as Array<Promise<unknown>>,
+                  ),
+                ]
+              : result.loaders,
+          };
+        },
         { isProtectable: false, loaders: [] as Array<Promise<unknown>> },
       );
       loadersF && (await Promise.all(loadersF));

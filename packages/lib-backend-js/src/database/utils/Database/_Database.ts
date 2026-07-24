@@ -4,7 +4,6 @@ import {
 } from '@lib/backend/database/utils/Database/_Database.models';
 import { type RepositoryModel } from '@lib/backend/database/utils/Database/Database.models';
 import { mongoFilter } from '@lib/backend/database/utils/mongoFilter/mongoFilter';
-import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import { _database } from '@lib/config/database/_database';
 import {
   type _DatabaseConfigModel,
@@ -23,6 +22,7 @@ import { cleanObject } from '@lib/shared/core/utils/cleanObject/cleanObject';
 import { filterNil } from '@lib/shared/core/utils/filterNil/filterNil';
 import { isArray } from '@lib/shared/core/utils/isArray/isArray';
 import { isEmpty } from '@lib/shared/core/utils/isEmpty/isEmpty';
+import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import {
   type EntityName,
@@ -182,7 +182,9 @@ export class _Database extends Bootstrappable implements _DatabaseModel {
               never
             >),
         );
-        return { result: normalize(result as Partial<TType>) ?? undefined };
+        return {
+          result: result ? (normalize(wrap(result).toJSON()) as Partial<TType>) : undefined,
+        };
       },
 
       getMany: async ({ filter, id, options } = {}) => {
@@ -219,7 +221,10 @@ export class _Database extends Bootstrappable implements _DatabaseModel {
         );
         return {
           result: {
-            items: filterNil(result.map(normalize)) as PartialArrayModel<TType>,
+            // items: filterNil(result.map(normalize)) as PartialArrayModel<TType>,
+            items: result.map((entity) =>
+              normalize(wrap(entity).toJSON()),
+            ) as PartialArrayModel<TType>,
           },
         };
       },
@@ -311,9 +316,9 @@ export class _Database extends Bootstrappable implements _DatabaseModel {
         }
         case ReferenceKind.MANY_TO_ONE: {
           formF[prop.name] =
-            value instanceof ObjectId
-              ? em.getReference(prop.type, value as Primary<TType>)
-              : this.hydrate(prop.type, value);
+            value instanceof ObjectId || typeof value === 'string'
+              ? em.getReference(prop.type, new ObjectId(value) as Primary<TType>)
+              : this.hydrate(prop.type, value as Partial<TType>);
           break;
         }
       }

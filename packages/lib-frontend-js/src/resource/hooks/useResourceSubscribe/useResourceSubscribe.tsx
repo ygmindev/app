@@ -1,6 +1,5 @@
-import { type GraphqlQueryParamsFieldsModel } from '@lib/frontend/data/utils/graphqlQuery/graphqlQuery.models';
 import { useAppGraphqlSse } from '@lib/frontend/http/hooks/useAppGraphqlSse/useAppGraphqlSse';
-import { toGraphqlParamsFields } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { toGraphqlParamsFields } from '@lib/frontend/resource/hooks/useResourceQuery/useResourceQuery';
 import {
   type UseResourceSubscribeModel,
   type UseResourceSubscribeParamsModel,
@@ -8,6 +7,7 @@ import {
 import { type ResourceInputModel } from '@lib/model/resource/ResourceInput/ResourceInput.models';
 import { type ResourceOutputModel } from '@lib/model/resource/ResourceOutput/ResourceOutput.models';
 import { type StringKeyModel } from '@lib/shared/core/core.models';
+import { type GraphqlQueryParamsFieldsModel } from '@lib/shared/graphql/utils/graphqlQuery/graphqlQuery.models';
 import { RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 import uniqBy from 'lodash/uniqBy';
 

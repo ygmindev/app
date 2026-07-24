@@ -3,7 +3,7 @@
 
 from typing import AsyncIterator, Optional
 
-from lib_ai.agent.utils.llm_message import LlmMessage
+from lib_ai.agent.utils.ai_message.ai_message import AIMessage
 from lib_ai.agent.utils.tool import Tool
 
 
@@ -20,8 +20,8 @@ class _LlmModel:
 
     async def run(
         self,
-        messages: list[LlmMessage],
-    ) -> Optional[LlmMessage]: ...
+        messages: list[AIMessage],
+    ) -> Optional[AIMessage]: ...
 
 
 class LlmModel(_LlmModel): ...

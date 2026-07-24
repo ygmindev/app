@@ -15,12 +15,12 @@ class User(
 ):
     # Chat: list = Field(default_value=list)
 
-    callingCode: Optional[str] = Field()
+    callingCode: Optional[str] = Field(default=None)
 
-    email: Optional[str] = Field()
+    email: Optional[str] = Field(default=None)
 
-    first: Optional[str] = Field()
+    first: Optional[str] = Field(default=None)
 
-    last: Optional[str] = Field()
+    last: Optional[str] = Field(default=None)
 
-    phone: Optional[str] = Field()
+    phone: Optional[str] = Field(default=None)

@@ -22,6 +22,7 @@ from sse_starlette import EventSourceResponse
 from uvicorn import Config
 from uvicorn import Server as UvicornServer
 
+from lib_shared.auth.utils.jwt_service.jwt_service import jwt_service
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.logger.logger import Logger
@@ -76,12 +77,20 @@ class _Server(BaseModel, _ServerModel):
                 except json.JSONDecodeError:
                     body = await request.body()
 
-                response = route.handler(
-                    HttpRequest(
-                        body=body,
-                        headers=dict(headers),
-                    )
+                http_request = HttpRequest(
+                    body=body,
+                    headers=dict(headers),
                 )
+
+                if route.is_protected:
+                    header = headers.get("Authorization")
+                    try:
+                        user = jwt_service.verify_token(header)
+                        http_request.user = user
+                    except Exception as e:
+                        print(e)
+
+                response = route.handler(http_request)
                 if isinstance(response, Awaitable):
                     result = await response
                     return JSONResponse(

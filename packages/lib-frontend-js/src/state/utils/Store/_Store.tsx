@@ -4,9 +4,9 @@ import {
   type RootStateModel,
 } from '@lib/frontend/root/stores/rootStore.models';
 import {
-  type DefaultStateModel,
-  type NestedActionsModel,
+  type StoreActionsModel,
   type NestedDefaultStateModel,
+  type ActionModel,
 } from '@lib/frontend/state/state.models';
 import { Storage } from '@lib/frontend/state/utils/Storage/Storage';
 import {
@@ -56,7 +56,7 @@ const StoreContextProvider = <
 >({
   actions: baseActions,
   children,
-  defaultState: baseDefaultState,
+  defaultState,
   persistedState,
   store: baseStore,
   value,
@@ -65,64 +65,43 @@ const StoreContextProvider = <
 > => {
   const dispatch = useDispatch();
 
-  const nestedActions = <TKey extends StringKeyModel<TType>>(
-    defaultState: NestedDefaultStateModel<TType>[TKey],
-    store: TKey,
-    paths: Array<string> = [],
-  ): NestedActionsModel<TType, TReducers>[TKey] =>
-    reduce(
-      defaultState,
-      (result, v, k) => {
-        const path = [...paths, k].join('.');
-        let actions = {
-          set: (value) => dispatch(baseActions[store].set({ key: path, value })),
-          unset: () => dispatch(baseActions[store].unset({ key: path })),
-        } as NestedActionsModel<TType, TReducers>[TKey];
-        if (isArray(v)) {
-          actions = {
-            ...actions,
-            add: (value) => dispatch(baseActions[store].add({ key: path, value })),
-            remove: (value) => dispatch(baseActions[store].remove({ key: path, value })),
+  const actions = useMemo(
+    () =>
+      reduce(
+        Object.keys(defaultState),
+        (r, k) => {
+          const mainActions: ActionModel<TType[StringKeyModel<TType>]> = {
+            add: (path, value) => dispatch(baseActions[k].add({ key: path, value })),
+            merge: (path, value, strategy) =>
+              dispatch(baseActions[k].merge({ key: path, strategy, value })),
+            remove: (path, value) => dispatch(baseActions[k].remove({ key: path, value })),
+            set: (path, value) => dispatch(baseActions[k].set({ key: path, value })),
+            unset: (path: string) => dispatch(baseActions[k].unset({ key: path })),
           };
-        } else if (isPlainObject(v)) {
-          actions = {
-            ...actions,
-            ...nestedActions(v as DefaultStateModel<TType[TKey]>, store, [...paths, k]),
-            merge: (value, strategy?: MERGE_STRATEGY) =>
-              dispatch(baseActions[store].merge({ key: path, strategy, value })),
+          const mainMethods = new Set(Object.keys(mainActions));
+          return {
+            ...r,
+            [k]: {
+              ...mainActions,
+              ...reduce(
+                baseActions[k],
+                (rr, vv, kk) =>
+                  mainMethods.has(kk)
+                    ? rr
+                    : {
+                        ...rr,
+                        [kk]: (value: never): void => {
+                          dispatch(vv(value));
+                        },
+                      },
+                {} as StoreActionsModel<TType, TReducers>[StringKeyModel<TType>],
+              ),
+            },
           };
-        }
-        return { ...result, [k]: actions };
-      },
-      {} as NestedActionsModel<TType, TReducers>[TKey],
-    );
-
-  type StoreActionsModel = NestedActionsModel<TType, TReducers>[StringKeyModel<TType>];
-  const actionsF = reduce(
-    baseDefaultState,
-    (r, v, k) => {
-      const storeActions = nestedActions(v, k as StringKeyModel<TType>);
-      return {
-        ...r,
-        [k]: {
-          ...storeActions,
-          ...reduce(
-            baseActions[k],
-            (rr, vv, kk) =>
-              Object.hasOwn(storeActions, kk)
-                ? rr
-                : {
-                    ...rr,
-                    [kk]: (action: never): void => {
-                      dispatch(vv(action));
-                    },
-                  },
-            {} as StoreActionsModel,
-          ),
         },
-      };
-    },
-    {} as NestedActionsModel<TType, TReducers>,
+        {} as StoreActionsModel<TType, TReducers>,
+      ),
+    [defaultState, dispatch],
   );
 
   const providers = useMemo<Array<ReactElement>>(
@@ -133,9 +112,9 @@ const StoreContextProvider = <
             value={baseStore as StoreModel<RootStateModel, RootReducersModel>}
           />
         ),
-        value?.actionContext.Provider && <value.actionContext.Provider value={actionsF} />,
+        value?.actionContext.Provider && <value.actionContext.Provider value={actions} />,
         value?.defaultStateContext.Provider && (
-          <value.defaultStateContext.Provider value={baseDefaultState} />
+          <value.defaultStateContext.Provider value={defaultState} />
         ),
         value?.persistedStateContext.Provider && (
           <value.persistedStateContext.Provider value={persistedState} />
@@ -168,7 +147,15 @@ export class _Store<
     } = reduce(
       reducers,
       (result, reducer, name) => {
-        type StateModel = NestedDefaultStateModel<TType>[StringKeyModel<TType>];
+        type StateModel = TType[StringKeyModel<TType>];
+
+        const _unset = (state: StateModel, key: string): StateModel => {
+          const currentState = state;
+          unset(currentState, key);
+          void storage.removeItem(key);
+          return currentState;
+        };
+
         const { actions, reducer: reducerF } = createSlice({
           initialState: initialState?.[name] ?? reducer.defaultState,
           name,
@@ -193,9 +180,9 @@ export class _Store<
             add: (state, action: PayloadAction<{ key: string; value: unknown }>) => {
               let currentState = state;
               const values = getValue(original(state), action.payload.key);
-              if (isArray(values)) {
+              if (isArray(values) || values === undefined) {
                 currentState = set(currentState, action.payload.key, [
-                  ...values,
+                  ...((values as Array<unknown>) ?? []),
                   action.payload.value,
                 ]);
               }
@@ -203,7 +190,7 @@ export class _Store<
             },
 
             get: (state, action: PayloadAction<{ key: string }>) =>
-              getValue(original(state), action.payload.key),
+              getValue(original(state), action.payload.key) as never,
 
             merge: (
               state,
@@ -211,12 +198,14 @@ export class _Store<
             ) => {
               let currentState = state;
               const values = cloneDeep(getValue(original(state), action.payload.key));
-              if (isPlainObject(values)) {
-                const merged = merge([action.payload.value, values], action.payload.strategy);
+              if (isPlainObject(values) || values === undefined) {
+                const merged = merge([action.payload.value, values ?? {}], action.payload.strategy);
                 currentState = set(currentState, action.payload.key, merged);
               }
+
               return currentState;
             },
+
             remove: (state, action: PayloadAction<{ key: string; value: unknown }>) => {
               let currentState = state;
               const values = getValue(original(currentState), action.payload.key);
@@ -233,17 +222,26 @@ export class _Store<
               }
               return currentState;
             },
+
             set: (state, action: PayloadAction<{ key: string; value: unknown }>) => {
-              let currentState = state as object;
-              currentState = set(currentState, action.payload.key, action.payload.value);
-              return currentState as TType[StringKeyModel<TType>];
+              let currentState = state as StateModel;
+              if (action.payload.key) {
+                if (action.payload.value === undefined) {
+                  currentState = _unset(currentState as StateModel, action.payload.key);
+                } else {
+                  currentState = set(
+                    currentState as object,
+                    action.payload.key,
+                    action.payload.value,
+                  ) as StateModel;
+                }
+                return currentState as StateModel;
+              }
+              return state;
             },
-            unset: (state, action: PayloadAction<{ key: string }>) => {
-              const currentState = state;
-              unset(currentState, action.payload.key);
-              void storage.removeItem(action.payload.key);
-              return currentState;
-            },
+
+            unset: (state, action: PayloadAction<{ key: string }>) =>
+              _unset(state as StateModel, action.payload.key),
           },
         });
 

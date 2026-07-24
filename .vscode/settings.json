@@ -31,14 +31,6 @@
     },
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "claudeCode.disableLoginPrompt": true,
-  "claudeCode.environmentVariables": [
-    { "name": "ANTHROPIC_API_KEY", "value": "" },
-    { "name": "ANTHROPIC_BASE_URL", "value": "http://localhost:1234" },
-    { "name": "ANTHROPIC_AUTH_TOKEN", "value": "lmstudio" },
-    { "name": "ANTHROPIC_MODEL", "value": "qwen/qwen3.5-9b" },
-    { "name": "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC", "value": "1" }
-  ],
   "editor.minimap.enabled": false,
   "eslint.debug": true,
   "eslint.useFlatConfig": true,
@@ -83,6 +75,8 @@
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.envFile": "${workspaceFolder}/.env.public",
+  "python.terminal.useEnvFile": true,
   "ruff.interpreter": ["${workspaceFolder}/.venv/bin/python"],
   "ruff.nativeServer": "auto",
   "typescript.preferences.importModuleSpecifier": "non-relative",

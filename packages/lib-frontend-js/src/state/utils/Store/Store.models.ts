@@ -1,6 +1,6 @@
 import { type ProviderPropsModel } from '@lib/frontend/core/core.models';
 import {
-  type NestedActionsModel,
+  type StoreActionsModel,
   type NestedDefaultStateModel,
 } from '@lib/frontend/state/state.models';
 import {
@@ -24,7 +24,7 @@ export type StateProviderPropsModel<
   TType extends Record<string, unknown>,
   TReducers extends Record<StringKeyModel<TType>, unknown>,
 > = ProviderPropsModel<{
-  actionContext: Context<NestedActionsModel<TType, TReducers> | undefined>;
+  actionContext: Context<StoreActionsModel<TType, TReducers> | undefined>;
   defaultStateContext: Context<NestedDefaultStateModel<TType> | undefined>;
   persistedStateContext: Context<NestedDefaultStateModel<TType> | undefined>;
 }>;

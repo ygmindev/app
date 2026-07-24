@@ -7,44 +7,45 @@ import {
   type UseStoreParamsModel,
 } from '@lib/frontend/state/hooks/useStore/useStore.models';
 import { type ActionModel } from '@lib/frontend/state/state.models';
-import { type DeepKeyModel } from '@lib/shared/core/core.models';
+import { type StringKeyModel, type DeepKeyModel } from '@lib/shared/core/core.models';
 import { getValue } from '@lib/shared/core/utils/getValue/getValue';
-import { isArray } from '@lib/shared/core/utils/isArray/isArray';
-import isPlainObject from 'lodash/isPlainObject';
-import { useContext, useMemo } from 'react';
+import { type GetValueModel } from '@lib/shared/core/utils/getValue/getValue.models';
+import { useCallback, useContext } from 'react';
 
 export const useStore = <TKey extends DeepKeyModel<RootStateModel>>(
   key: UseStoreParamsModel<TKey>,
 ): UseStoreModel<TKey> => {
-  const defaultState = useContext(DefaultStateContext);
+  const defaultStateContext = useContext(DefaultStateContext);
+  const storeContext = useContext(StoreContext);
+  const actions = useActions();
   const value = _useStore<RootStateModel, TKey>(key);
-  const rootActions = useActions();
-  const baseStore = useContext(StoreContext);
 
-  return useMemo(() => {
-    const defaultValue = getValue(defaultState, key);
-    const actions = getValue(rootActions, key) as ActionModel<unknown>;
-    const valueF = value === undefined ? defaultValue : value;
-    const result = {
-      get: () => baseStore && getValue(baseStore?.getState(), key),
+  const setter = useCallback(
+    (value: GetValueModel<RootStateModel, TKey>) => {
+      type StoreNameModel = StringKeyModel<RootStateModel>;
+      type StoreModel = RootStateModel[StoreNameModel];
+      const idx = key.indexOf('.');
+      if (idx === -1) {
+        return (actions[key as StoreNameModel] as ActionModel<StoreModel>).set('', value);
+      }
+      const [storeName, path] = [
+        key.slice(0, idx) as StoreNameModel,
+        key.slice(idx + 1) as DeepKeyModel<StoreModel>,
+      ];
+      const store = actions[storeName] as ActionModel<StoreModel>;
+      return store.set(path, value);
+    },
+    [actions, key],
+  );
 
-      set: actions?.set,
+  const getter = useCallback(
+    () => storeContext && getValue(storeContext.getState(), key),
+    [key, storeContext],
+  );
 
-      unset: actions?.unset,
-
-      value: value === undefined ? defaultValue : value,
-    } as UseStoreModel<TKey>;
-
-    if (isArray(valueF)) {
-      const arrayActions = actions as ActionModel<Array<unknown>>;
-      (result as unknown as ActionModel<Array<unknown>>).add = arrayActions?.add;
-
-      (result as unknown as ActionModel<Array<unknown>>).remove = arrayActions?.remove;
-    } else if (isPlainObject(valueF)) {
-      const objectActions = actions as ActionModel<Record<string, unknown>>;
-      (result as unknown as ActionModel<Record<string, unknown>>).merge = objectActions?.merge;
-    }
-
-    return result;
-  }, [baseStore, rootActions, defaultState, key, value]);
+  return [
+    value === undefined ? getValue(defaultStateContext, key) : value,
+    setter,
+    getter,
+  ] as UseStoreModel<TKey>;
 };

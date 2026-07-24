@@ -7,7 +7,6 @@ from typing import (
     cast,
 )
 
-from lib_model.chat.message.constants import MessageRole
 from lib_shared.core.utils.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.not_found_exception import NotFoundException
@@ -15,7 +14,8 @@ from lib_shared.core.utils.not_implemented_exception import NotImplementedExcept
 from lib_shared.core.utils.private_field.private_field import PrivateField
 
 from lib_ai.agent.utils.agent_state import AgentState
-from lib_ai.agent.utils.llm_message import LlmMessage
+from lib_ai.agent.utils.ai_message.ai_message import AIMessage
+from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.agent.utils.skill import Skill
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.graph.constants import GraphNodeType
@@ -37,7 +37,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
     skills: Optional[list[Skill]] = Field(default=None)
     tools: Optional[list[Tool]] = Field(default=None)
 
-    _system_message: LlmMessage = PrivateField()
+    _system_message: AIMessage = PrivateField()
     _graph: Optional[DirectedAcyclicGraph] = PrivateField()
 
     def post_init(self) -> None:
@@ -72,7 +72,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
 
         self.llm.bind_tools(list(tool_map.values()))
         system_prompt = "\n".join(descriptions)
-        system_message = LlmMessage(
+        system_message = AIMessage(
             role=MessageRole.SYSTEM,
             content=system_prompt,
         )
@@ -102,14 +102,14 @@ class _Agent(BaseModel, _AgentModel[TState]):
                 self,
                 params: TState,
             ) -> TState:
-                updates: list[LlmMessage] = []
+                updates: list[AIMessage] = []
                 last_message = params.messages[-1]
                 if last_message.role == MessageRole.SYSTEM and last_message.tool_calls:
                     for tool_call in last_message.tool_calls:
                         tool = tool_map[tool_call.name]
                         result = await tool.ainvoke(tool_call.params)
                         updates.append(
-                            LlmMessage(
+                            AIMessage(
                                 role=MessageRole.TOOL,
                                 content=str(result),
                                 current_tool_call=tool_call,
@@ -177,7 +177,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
             raise NotFoundException("No user message found in the initial state")
         params.messages = [user_message]
         async for updates in self.graph.stream(params):
-            messages = cast(list[LlmMessage], updates.messages)
+            messages = cast(list[AIMessage], updates.messages)
             for message in messages:
                 messages_out: list[str] = [message.content]
                 if message.role == MessageRole.SYSTEM and message.tool_calls:
@@ -187,7 +187,7 @@ class _Agent(BaseModel, _AgentModel[TState]):
                         ]
             yield params.clone(
                 messages=[
-                    LlmMessage(
+                    AIMessage(
                         role=MessageRole.SYSTEM,
                         content="\n".join(messages_out),
                     )

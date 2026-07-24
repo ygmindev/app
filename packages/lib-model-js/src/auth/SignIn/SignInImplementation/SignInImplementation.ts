@@ -44,9 +44,7 @@ export class SignInImplementation implements SignInImplementationModel {
 
   async signIn(input: SignInInputModel): Promise<SignInModel> {
     const { otp } = input;
-    if (!otp) {
-      throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
-    }
+    if (!otp) throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
     const inputF = cleanObject(pick(input, JWT_CLAIM_KEYS));
     await this.otpImplementation.verify({ ...inputF, otp });
     let { result: user } = await this.userImplementation.get({
@@ -88,9 +86,7 @@ export class SignInImplementation implements SignInImplementationModel {
       throw new UnauthorizedError();
     }
     const { otp } = input;
-    if (!otp) {
-      throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
-    }
+    if (!otp) throw new HttpError(HTTP_STATUS_CODE.BAD_REQUEST, 'otp');
 
     const inputF = cleanObject(input);
     const otpVerified = await this.otpImplementation.verify(inputF);

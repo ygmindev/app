@@ -47,7 +47,7 @@ export const PortalContext = createContext<PortalsContextModel>({
 });
 
 export const AppProvider: FCModel<AppProviderPropsModel> = ({ children }) => {
-  const { set: dimensionSet } = useStore('app.dimension');
+  const [, dimensionSet] = useStore('app.dimension');
   const [portals, dispatch] = useReducer(portalsReducer, {});
 
   // const pubSub = useContainer(PubSub);

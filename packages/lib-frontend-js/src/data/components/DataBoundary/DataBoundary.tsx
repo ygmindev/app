@@ -14,7 +14,7 @@ import { useQuery } from '@lib/frontend/data/hooks/useQuery/useQuery';
 import { THEME_ROLE } from '@lib/frontend/style/style.constants';
 import { FONT_STYLE } from '@lib/frontend/style/utils/styler/fontStyler/fontStyler.constants';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { type GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
+import { type GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 import {
   cloneElement,
   type ReactElement,
@@ -32,12 +32,12 @@ const QueryComponent = <TParams = undefined, TResult = void>({
   query,
   ref,
 }: RLFCPropsModel<
-  DataBoundaryRefModel<TResult, GRAPHQL_OPERATION_TYPE.QUERY>,
-  DataBoundaryPropsModel<TParams, TResult, GRAPHQL_OPERATION_TYPE.QUERY>
+  DataBoundaryRefModel<TResult, GRAPHQL_OPERATION.QUERY>,
+  DataBoundaryPropsModel<TParams, TResult, GRAPHQL_OPERATION.QUERY>
 >): ReactElement<
   RLFCPropsModel<
-    DataBoundaryRefModel<TResult, GRAPHQL_OPERATION_TYPE.QUERY>,
-    DataBoundaryPropsModel<TParams, TResult, GRAPHQL_OPERATION_TYPE.QUERY>
+    DataBoundaryRefModel<TResult, GRAPHQL_OPERATION.QUERY>,
+    DataBoundaryPropsModel<TParams, TResult, GRAPHQL_OPERATION.QUERY>
   >
 > => {
   const {
@@ -78,12 +78,12 @@ const MutateComponent = <TParams = undefined, TResult = void>({
   params,
   ref,
 }: RLFCPropsModel<
-  DataBoundaryRefModel<TResult, GRAPHQL_OPERATION_TYPE.MUTATION>,
-  DataBoundaryPropsModel<TParams, TResult, GRAPHQL_OPERATION_TYPE.MUTATION>
+  DataBoundaryRefModel<TResult, GRAPHQL_OPERATION.MUTATION>,
+  DataBoundaryPropsModel<TParams, TResult, GRAPHQL_OPERATION.MUTATION>
 >): ReactElement<
   RLFCPropsModel<
-    DataBoundaryRefModel<TResult, GRAPHQL_OPERATION_TYPE.MUTATION>,
-    DataBoundaryPropsModel<TParams, TResult, GRAPHQL_OPERATION_TYPE.MUTATION>
+    DataBoundaryRefModel<TResult, GRAPHQL_OPERATION.MUTATION>,
+    DataBoundaryPropsModel<TParams, TResult, GRAPHQL_OPERATION.MUTATION>
   >
 > => {
   const {
@@ -113,7 +113,7 @@ const MutateComponent = <TParams = undefined, TResult = void>({
 export const DataBoundary = <
   TParams = undefined,
   TResult = void,
-  TOperation extends GRAPHQL_OPERATION_TYPE = GRAPHQL_OPERATION_TYPE.QUERY,
+  TOperation extends GRAPHQL_OPERATION = GRAPHQL_OPERATION.QUERY,
 >({
   children,
   elementState,
@@ -189,8 +189,8 @@ export const DataBoundary = <
             await sleep();
             return query(v);
           }}
-          ref={refFF as RefObject<DataBoundaryRefModel<TResult, GRAPHQL_OPERATION_TYPE.QUERY>>}>
-          {children as DataBoundaryChildProps<TResult, GRAPHQL_OPERATION_TYPE.QUERY>}
+          ref={refFF as RefObject<DataBoundaryRefModel<TResult, GRAPHQL_OPERATION.QUERY>>}>
+          {children as DataBoundaryChildProps<TResult, GRAPHQL_OPERATION.QUERY>}
         </QueryComponent>
       ) : mutate ? (
         <MutateComponent<TParams, TResult>
@@ -203,8 +203,8 @@ export const DataBoundary = <
             return mutate(v);
           }}
           params={params}
-          ref={refFF as RefObject<DataBoundaryRefModel<TResult, GRAPHQL_OPERATION_TYPE.MUTATION>>}>
-          {children as DataBoundaryChildProps<TResult, GRAPHQL_OPERATION_TYPE.MUTATION>}
+          ref={refFF as RefObject<DataBoundaryRefModel<TResult, GRAPHQL_OPERATION.MUTATION>>}>
+          {children as DataBoundaryChildProps<TResult, GRAPHQL_OPERATION.MUTATION>}
         </MutateComponent>
       ) : (
         emptyElementF

@@ -47,8 +47,8 @@ export const UsernameForm: LFCModel<UsernameFormPropsModel> = ({
     onChange: onMethodChange,
     value: method,
   });
-  const { value: currentUser } = useStore('user.currentUser');
-  const { push, replace } = useRouter();
+  const [currentUser] = useStore('user.currentUser');
+  const { replace } = useRouter();
   const { google } = useOAuth();
 
   const isCheckExists = mode === FORM_MODE.UPDATE;

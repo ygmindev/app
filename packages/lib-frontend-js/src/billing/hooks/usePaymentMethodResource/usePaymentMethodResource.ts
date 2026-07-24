@@ -1,6 +1,6 @@
 import { type UsePaymentMethodResourceModel } from '@lib/frontend/billing/hooks/usePaymentMethodResource/usePaymentMethodResource.models';
 import { PAYMENT_METHOD_RESOURCE_PARAMS } from '@lib/frontend/billing/resources/PaymentMethod/PaymentMethod.constants';
-import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
+import { useGraphql } from '@lib/frontend/data/hooks/useGraphql/useGraphql';
 import { PAYMENT_INPUT } from '@lib/model/billing/PaymentInput/PaymentInput.constants';
 import { type PaymentInputModel } from '@lib/model/billing/PaymentInput/PaymentInput.models';
 import {
@@ -14,7 +14,7 @@ import { type IdInputModel } from '@lib/model/resource/IdInput/IdInput.models';
 import { type PartialArrayModel } from '@lib/shared/core/core.models';
 
 export const usePaymentMethodResource = (): UsePaymentMethodResourceModel => {
-  const { query } = useAppGraphql();
+  const { query } = useGraphql();
   return {
     createToken: async (input) => {
       const output = await query<string, { input: PaymentInputModel }>({

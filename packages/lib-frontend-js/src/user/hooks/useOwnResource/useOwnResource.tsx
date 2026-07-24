@@ -16,7 +16,7 @@ export const useOwnResource = <TType extends EntityResourceModel>({
   name,
   ...params
 }: UseOwnResourceParamsModel<TType>): UseOwnResourceModel<TType> => {
-  const { set: currentUserSet, value: currentUser } = useStore('user.currentUser');
+  const [currentUser, currentUserSet] = useStore('user.currentUser');
   return useResource({
     ...params,
     afterCreate: async (params) => {

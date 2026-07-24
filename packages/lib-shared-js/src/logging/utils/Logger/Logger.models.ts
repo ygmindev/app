@@ -6,4 +6,4 @@ export type LoggerModel = _LoggerModel & {
   success: (params: LogArgsModel, ...rest: Array<LogArgsModel>) => void;
 };
 
-export type LogArgsModel = string | Error | Record<string, unknown>;
+export type LogArgsModel = string | Error | Record<string, unknown> | null;

@@ -19,7 +19,7 @@ export const AddToCartButton: LFCModel<AddToCartButtonPropsModel> = ({ item, ...
   const actions = useActions();
   const { success } = useNotification();
   const { t } = useTranslation([COMMERCE]);
-  const { value: items } = useStore('commerce.items');
+  const [items] = useStore('commerce.items');
   const { push } = useRouter();
   const ref = useRef<ModalButtonRefModel>(null);
 

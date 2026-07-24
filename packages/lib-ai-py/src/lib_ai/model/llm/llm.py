@@ -6,13 +6,13 @@ from typing import AsyncIterator, Optional, cast
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessageChunk
 from langchain_openai import ChatOpenAI
-from lib_model.chat.message.constants import MessageRole
 from lib_shared.core.utils.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.core.utils.uninitialized_exception import UninitializedException
 
-from lib_ai.agent.utils.llm_message import LlmMessage
+from lib_ai.agent.utils.ai_message.ai_message import AIMessage
+from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.model.llm.constants import LLM_NAME
 
@@ -60,7 +60,7 @@ class _Llm(BaseModel, _LlmModel):
 
     async def _chunks(
         self,
-        messages: list[LlmMessage],
+        messages: list[AIMessage],
     ) -> AsyncIterator[AIMessageChunk]:
         serialized = [x.serialize() for x in messages]
         async for chunk in self.llm.astream(serialized):
@@ -70,7 +70,7 @@ class _Llm(BaseModel, _LlmModel):
         self,
         prompt: str,
     ) -> AsyncIterator[str]:
-        user_message = LlmMessage(
+        user_message = AIMessage(
             role=MessageRole.USER,
             content=prompt,
         )
@@ -80,13 +80,13 @@ class _Llm(BaseModel, _LlmModel):
 
     async def run(
         self,
-        messages: list[LlmMessage],
-    ) -> Optional[LlmMessage]:
+        messages: list[AIMessage],
+    ) -> Optional[AIMessage]:
         result: Optional[AIMessageChunk] = None
         async for chunk in self._chunks(messages):
             result = chunk if result is None else result + chunk
         if result is not None:
-            return LlmMessage.deserialize(result)
+            return AIMessage.deserialize(result)
         return None
 
 

@@ -2,114 +2,139 @@ from __future__ import annotations
 
 import sys
 from typing import (
+    Annotated,
     Any,
     ClassVar,
     Optional,
     Union,
-    dataclass_transform,
     get_args,
     get_origin,
+    get_type_hints,
 )
 
-from beanie import BackLink, Document, Link
+from beanie import BackLink, Document, Link, PydanticObjectId
 from lib_shared.core.utils.field.constants import FieldRelation
-from pydantic import PydanticUndefinedAnnotation
-from pydantic.fields import FieldInfo
-from pydantic_core import PydanticUndefined
+from pydantic import BeforeValidator
 
 from lib_model.core.utils.entity.entity import Entity
 
-DocumentMeta = type(Document)
 
-_registry: list[type] = []
-
-
-def _unwrap(value: Any) -> tuple[Any, bool]:
-    if get_origin(value) is Union:
-        args = get_args(value)
-        types = [x for x in args if x is not type(None)]
-        if len(types) == 1 and type(None) in args:
-            return types[0], True
-    return value, False
+def _extract_id(x: Any) -> Any:
+    if isinstance(x, dict):
+        return x.get("_id", x.get("id", x))
+    return getattr(x, "id", getattr(x, "_id", x))
 
 
-class _DatabaseEntityMeta(DocumentMeta):
-    def __new__(
-        mcs: type["_DatabaseEntityMeta"],
-        cls_name: str,
-        bases: tuple[type[Any], ...],
-        namespace: dict[str, Any],
+class _DatabaseEntity(Document):
+    _registry: ClassVar[list[type["_DatabaseEntity"]]] = []
+
+    def __init_subclass__(
+        cls,
+        *,
+        name: Optional[str] = None,
         **kwargs: Any,
-    ) -> type[Any]:
-        annotations = namespace.get("__annotations__", {})
+    ) -> None:
+        super().__init_subclass__(**kwargs)
+        if name is not None:
+            cls.Settings = type("Settings", (), {"name": name})
+        _DatabaseEntity._registry.append(cls)
 
-        for k, v in list(annotations.items()):
-            value = namespace.get(k)
-            if not isinstance(value, FieldInfo):
-                continue
+    @classmethod
+    def initialize(cls) -> None:
+        models = list(dict.fromkeys(_DatabaseEntity._registry))
+        ns = {
+            "Document": Document,
+            "PydanticObjectId": PydanticObjectId,
+            "Optional": Optional,
+            "Union": Union,
+            "Any": Any,
+            "Annotated": Annotated,
+            "BeforeValidator": BeforeValidator,
+            "_extract_id": _extract_id,
+        }
+        model_ns = {m.__name__: m for m in models}
+        full_ns = {**ns, **model_ns}
+        for model in models:
+            module = sys.modules.get(model.__module__, None)
+            localns = {**(vars(module) if module else {}), **ns, **model_ns}
+            hints = get_type_hints(model, localns=localns)
 
-            schema = value.json_schema_extra
-            if not isinstance(schema, dict):
-                continue
+            for field_name, field_info in model.model_fields.items():
+                if field_name not in hints:
+                    continue
 
-            relation = schema.get("relation")
-            root = schema.get("root")
+                schema = field_info.json_schema_extra or {}
+                relation = schema.get("relation")
 
-            if relation:
-                unwrapped, is_optional = _unwrap(v)
-                origin = get_origin(unwrapped)
-                args = get_args(unwrapped)
+                if not isinstance(schema, dict) or not relation:
+                    continue
+
+                root = schema.get("root")
+                annotation = hints[field_name]
+                origin = get_origin(annotation)
+                args = get_args(annotation)
+
+                if origin in (Link, BackLink):
+                    continue
+                if (
+                    origin is list
+                    and args
+                    and (get_origin(args[0]) in (Link, BackLink))
+                ):
+                    continue
+
+                is_optional = False
+                if origin is Union and len(args) == 2 and type(None) in args:
+                    annotation = next(a for a in args if not isinstance(a, type(None)))
+                    if get_origin(annotation) in (Link, BackLink):
+                        continue
+
+                    is_optional = True
+
                 match relation:
-                    case FieldRelation.ONE_TO_MANY | FieldRelation.MANY_TO_MANY:
+                    case FieldRelation.MANY_TO_ONE | FieldRelation.ONE_TO_ONE:
+                        if root:
+                            annotation_new = annotation
+                            field_info.exclude = True
+                        else:
+                            annotation_new = Annotated[
+                                PydanticObjectId,
+                                BeforeValidator(_extract_id),
+                            ]
+                    case FieldRelation.MANY_TO_MANY | FieldRelation.ONE_TO_MANY:
                         if origin is list and args:
                             target = args[0]
                             if root:
-                                annotations[k] = Optional[list[BackLink[target]]]
-                                if (
-                                    isinstance(value, FieldInfo)
-                                    and value.default is PydanticUndefined
-                                    and value.default_factory is None
-                                ):
-                                    value.default = None
+                                annotation_new = list[target]
+                                field_info.exclude = True
                             else:
-                                result = list[Link[target]]
-                                annotations[k] = (
-                                    Optional[result] if is_optional else result
-                                )
-                    case FieldRelation.MANY_TO_ONE | FieldRelation.ONE_TO_ONE:
-                        target = unwrapped
-                        new_type = BackLink[target] if root else Link[target]
-                        annotations[k] = Optional[new_type] if is_optional else new_type
+                                annotation_new = list[
+                                    Annotated[
+                                        PydanticObjectId,
+                                        BeforeValidator(_extract_id),
+                                    ]
+                                ]
 
-        name = kwargs.pop("name", None)
-        if name:
-            namespace["Settings"] = type("Settings", (), {"name": name})
-            annotations["Settings"] = ClassVar[type]
-
-        namespace["__annotations__"] = annotations
-        cls = super().__new__(mcs, cls_name, bases, namespace, **kwargs)  # type: ignore
-
-        _registry.append(cls)
-        types_namespace = {registered.__name__: registered for registered in _registry}
-        for registered in _registry:
-            module = sys.modules.get(registered.__module__, None)
-            module_ns = vars(module) if module else {}
-            try:
-                registered.model_rebuild(
-                    _types_namespace={**module_ns, **types_namespace},
-                    force=True,
+                annotation_new = (
+                    Optional[annotation_new] if is_optional else annotation_new
                 )
-            except PydanticUndefinedAnnotation:
-                pass
+                field_info.annotation = annotation_new
+                if hasattr(field_info, "_original_annotation"):
+                    field_info._original_annotation = annotation_new
+                model.__annotations__[field_name] = annotation_new
 
-        return cls
+        for model in models:
+            module = sys.modules.get(model.__module__, None)
+            rebuild_ns = {
+                **(vars(module) if module else {}),
+                **full_ns,
+            }
+            model.model_rebuild(force=True, _types_namespace=rebuild_ns)
 
 
-@dataclass_transform(kw_only_default=True)
-class _DatabaseEntity(
+class DatabaseEntity(
     Entity,
-    Document,
-    metaclass=_DatabaseEntityMeta,
+    _DatabaseEntity,
 ):
     def __init_subclass__(
         cls,
@@ -120,6 +145,3 @@ class _DatabaseEntity(
             **args,
             is_graphql=is_graphql,
         )
-
-
-DatabaseEntity = _DatabaseEntity

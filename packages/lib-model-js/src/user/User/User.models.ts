@@ -37,6 +37,8 @@ export type UserModel = EntityResourceModel & {
 
   first?: string;
 
+  isAnonymous?: boolean;
+
   last?: string;
 
   paymentMethodPrimary?: RefModel<PaymentMethodModel>;

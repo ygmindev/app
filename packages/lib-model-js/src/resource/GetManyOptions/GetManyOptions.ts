@@ -30,9 +30,9 @@ export class GetManyOptions<TType> implements GetManyOptionsModel<TType> {
   populate?: Array<StringKeyModel<TType>>;
 
   @withField({
-    Resource: () => SortBy as ResourceClassModel<SortByModel<TType>>,
     isArray: true,
     isOptional: true,
+    Resource: () => SortBy as ResourceClassModel<SortByModel<TType>>,
   })
   sortBy?: Array<SortByModel<TType>>;
 }

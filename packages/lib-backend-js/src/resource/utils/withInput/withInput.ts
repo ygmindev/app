@@ -5,7 +5,7 @@ import {
 } from '@lib/backend/resource/utils/withInput/withInput.models';
 
 export const withInput = <TType extends unknown>({
-  Resource,
   isOptional,
   name = 'input',
-}: WithInputParamsModel<TType>): WithInputModel => _withInput({ Resource, isOptional, name });
+  Resource,
+}: WithInputParamsModel<TType>): WithInputModel => _withInput({ isOptional, name, Resource });

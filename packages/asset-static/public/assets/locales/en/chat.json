@@ -1,4 +1,5 @@
 {
-  "chatHistory": "chat history",
+  "chat": "chat",
+  "chats": "chats",
   "newChat": "new chat"
 }

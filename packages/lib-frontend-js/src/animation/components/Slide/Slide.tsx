@@ -23,7 +23,7 @@ export const Slide: LFCModel<SlidePropsModel> = ({
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const theme = useTheme();
-  const { value: width } = useStore('app.dimension.width');
+  const [width] = useStore('app.dimension.width');
   const animation: AnimationModel = useMemo(
     () => ({
       ...animationBase,

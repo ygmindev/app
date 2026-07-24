@@ -29,7 +29,7 @@ export const AppMenuButton: LFCModel<AppMenuButtonPropsModel> = ({
   const { wrapperProps } = useLayoutStyles({ props });
   const { signOut } = useSignInResource();
   const { push } = useRouter();
-  const { value: authStatus } = useStore('auth.status');
+  const [authStatus] = useStore('auth.status');
 
   const menuRef = useRef<MenuRefModel>(null);
   const isAuthenticated = authStatus === AUTH_STATUS.AUTHENTICATED;

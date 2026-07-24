@@ -7,6 +7,7 @@ import {
 } from '@lib/shared/http/utils/HttpImplementation/_HttpImplementation.models';
 import { type HttpImplementationParamsModel } from '@lib/shared/http/utils/HttpImplementation/HttpImplementation.models';
 import { uri } from '@lib/shared/http/utils/uri/uri';
+import { logger } from '@lib/shared/logging/utils/Logger/Logger';
 import axios from 'axios';
 import {
   type AxiosError,
@@ -35,25 +36,19 @@ export class _HttpImplementation implements _HttpImplementationModel {
     this._onError = onError;
     onRequest &&
       this._instance.interceptors.request.use(
-        ({ headers, responseType, timeout, withCredentials, ...params }) =>
+        ({ responseType, ...params }) =>
           onRequest({
             ...params,
-            headers,
             responseType: responseType as HTTP_RESPONSE_TYPE,
-            timeout,
-            withCredentials,
           }) as unknown as InternalAxiosRequestConfig,
       );
 
     onResponse &&
       this._instance.interceptors.response.use(
-        async ({ data, headers, status, statusText, ...params }) =>
+        async ({ data, ...params }) =>
           onResponse({
             ...params,
             data: data as object,
-            headers,
-            status,
-            statusText,
           }) as Promise<AxiosResponse>,
       );
   }
@@ -158,12 +153,11 @@ export class _HttpImplementation implements _HttpImplementationModel {
           }
         }
       }
-
       return (response?.data as TResult) ?? null;
     } catch (e) {
       const errorName = (e as Error)?.name;
       if (errorName === 'AbortError' || errorName === 'CanceledError') return null;
-      console.error(e);
+      logger.error(e);
       const eF = new HttpError(
         (e as AxiosError).response?.status ?? HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR,
         stringify((e as AxiosError).response?.data),

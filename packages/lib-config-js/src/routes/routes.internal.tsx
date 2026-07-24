@@ -39,7 +39,7 @@ export const routesConfig = configBase.extend(() => ({
           icon: 'chats',
           isNavigatable: true,
           pathname: CHAT_HISTORY,
-          title: ({ t }) => t('chat:chatHistory'),
+          title: ({ t }) => t('chat:chats'),
         },
         {
           pathname: ADMIN,

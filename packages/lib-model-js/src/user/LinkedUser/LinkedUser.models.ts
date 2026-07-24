@@ -7,5 +7,6 @@ export type LinkedUserModel = EntityResourceModel & {
 };
 
 export enum LINKED_USER_TYPE {
+  FIREBASE = 'firebase',
   STRIPE = 'stripe',
 }

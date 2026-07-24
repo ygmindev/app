@@ -2,6 +2,7 @@ import { type ResourceClassModel } from '@lib/backend/resource/resource.models';
 import { type FILTER_COMBINATION } from '@lib/model/resource/Filter/Filter.constants';
 import { type FilterModel } from '@lib/model/resource/Filter/Filter.models';
 import { type GetManyOptionsModel } from '@lib/model/resource/GetManyOptions/GetManyOptions.models';
+import { type GetOptionsModel } from '@lib/model/resource/GetOptions/GetOptions.models';
 import { type InputtableModel } from '@lib/model/resource/Inputtable/Inputtable.models';
 import { type RootInputModel } from '@lib/model/resource/Root/Root.models';
 import { type SearchOptionsModel } from '@lib/model/resource/SearchOptions/SearchOptions.models';
@@ -41,11 +42,6 @@ type CreateResourceInputModel<TType> = {
 type CreateManyArgsModel<TType> = {
   form?: PartialArrayModel<TType>;
   options?: CreateOptionsModel;
-};
-
-export type GetOptionsModel<TType> = {
-  combination?: FILTER_COMBINATION;
-  populate?: Array<StringKeyModel<TType>>;
 };
 
 type GetArgsModel<TType> = {

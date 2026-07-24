@@ -4,7 +4,7 @@ import { type ChildPropsModel } from '@lib/frontend/core/core.models';
 import { type ReactElement } from 'react';
 
 export type ActivatablePropsModel = {
-  isMobileVisible?: boolean;
+  isDisabled?: boolean;
   trigger?: ACTIVATABLE_TRIGGER;
   onActive?(): void;
   onHoverIn?(): void;

@@ -14,7 +14,7 @@ import { cloneElement, type ReactElement, useImperativeHandle, useState } from '
 
 export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> = ({
   children,
-  isMobileVisible,
+  isDisabled,
   onActive,
   onHoverIn,
   onHoverOut,
@@ -25,7 +25,7 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
 }) => {
   const { styles } = useStyles({ props });
   const isMobile = useIsMobile();
-  const isVisible = !!isMobileVisible && !!isMobile;
+  const isVisible = isDisabled || (isMobile && trigger == ACTIVATABLE_TRIGGER.HOVER);
   const [isActive, isActiveSet] = useState<boolean>(isVisible);
   const childrenF: ReactElement<PressablePropsModel> | undefined | null = isFunction(children)
     ? children(isActive)

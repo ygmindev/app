@@ -20,7 +20,7 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
-  const { value: width } = useStore('app.dimension.width');
+  const [width] = useStore('app.dimension.width');
   const isMobile = useIsMobile();
   const isFullWidthF = isFullWidth || isMobile;
   const theme = useTheme();

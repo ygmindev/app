@@ -5,7 +5,7 @@ import {
   type WithOutputParamsModel,
 } from '@lib/backend/resource/utils/withOutput/withOutput.models';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
-import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
+import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 
 export const withOutput =
   <TType extends unknown>({
@@ -13,7 +13,7 @@ export const withOutput =
     access = ACCESS_LEVEL.RESTRICTED,
     isArray,
     name,
-    operation = GRAPHQL_OPERATION_TYPE.QUERY,
+    operation = GRAPHQL_OPERATION.QUERY,
     topic,
     type,
   }: WithOutputParamsModel<TType>): WithOutputModel =>

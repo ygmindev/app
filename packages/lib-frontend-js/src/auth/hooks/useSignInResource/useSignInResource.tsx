@@ -2,8 +2,7 @@ import { sleepForTransition } from '@lib/frontend/animation/utils/sleepForTransi
 import { useSession } from '@lib/frontend/auth/hooks/useSession/useSession';
 import { type UseSignInResourceModel } from '@lib/frontend/auth/hooks/useSignInResource/useSignInResource.models';
 import { AUTH_STATUS } from '@lib/frontend/auth/stores/authStore/authStore.constants';
-import { useAppGraphql } from '@lib/frontend/data/hooks/useAppGraphql/useAppGraphql';
-import { toGraphqlParamsFields } from '@lib/frontend/resource/hooks/useResourceMethod/useResourceMethod';
+import { useGraphql } from '@lib/frontend/data/hooks/useGraphql/useGraphql';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useTracking } from '@lib/frontend/tracking/hooks/useTracking/useTracking';
 import { USER_RESOURCE_PARAMS } from '@lib/frontend/user/resources/User/User.constants';
@@ -21,23 +20,26 @@ import { SIGN_IN, VERIFY_TOKEN } from '@lib/shared/auth/auth.constants';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { GRAPHQL_OPERATION_TYPE } from '@lib/shared/graphql/graphql.constants';
+import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
+import { type GraphqlQueryParamsFieldsModel } from '@lib/shared/graphql/utils/graphqlQuery/graphqlQuery.models';
+import { toGraphqlParamsFields } from '@lib/shared/graphql/utils/resourceQuery/resourceQuery';
 
-const USER_FIELDS = toGraphqlParamsFields(USER_RESOURCE_PARAMS.fields);
+const USER_FIELDS = toGraphqlParamsFields(
+  USER_RESOURCE_PARAMS.fields,
+) as GraphqlQueryParamsFieldsModel<Partial<UserModel>>;
 
 export const useSignInResource = (): UseSignInResourceModel => {
-  const { set: currentUserSet, value: currentUser } = useStore('user.currentUser');
+  const [currentUser, currentUserSet] = useStore('user.currentUser');
 
   const { identify, reset } = useTracking();
   const { signInWithToken, signOut } = useSession();
 
-  const { set: authStatusSet } = useStore('auth.status');
-  const { set: authTokenSet } = useStore('auth.token');
+  const [, authStatusSet] = useStore('auth.status');
+  const [, authTokenSet] = useStore('auth.token');
 
-  const { query } = useAppGraphql();
+  const { query } = useGraphql();
 
   const signIn = async (signIn?: PartialModel<SignInModel>): Promise<void> => {
-    // await handleSignOut();
     if (signIn) {
       const { token, user } = signIn;
       user && currentUserSet(user);
@@ -53,6 +55,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
     let authStatusF: AUTH_STATUS = currentUser?._id
       ? AUTH_STATUS.AUTHENTICATED
       : AUTH_STATUS.UNAUTHENTICATED;
+
     // TODO: load full user from fields
     if (!token || currentUser?._id !== user?._id || !currentUser?.email) {
       if (user) {
@@ -103,8 +106,8 @@ export const useSignInResource = (): UseSignInResourceModel => {
       const output = await query<SignInUserUpdateModel, { input: SignInUserUpdateInputModel }>({
         fields: [{ result: USER_FIELDS, signIn: ['token', { user: USER_FIELDS }] }],
         name,
+        operation: GRAPHQL_OPERATION.MUTATION,
         params: { input: `${name}Input` },
-        type: GRAPHQL_OPERATION_TYPE.MUTATION,
         variables: { input },
       });
       if (output) {

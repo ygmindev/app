@@ -17,7 +17,6 @@ import { collapseFilter } from '@lib/shared/resource/utils/collapseFilter/collap
 import { type ResourceImplementationDecoratorModel } from '@lib/shared/resource/utils/ResourceImplementation/ResourceImplementation.models';
 
 export const createResourceImplementation = <TType extends ResourceModel, TRoot = undefined>({
-  Resource,
   afterCreate,
   afterCreateMany,
   afterGet,
@@ -41,6 +40,7 @@ export const createResourceImplementation = <TType extends ResourceModel, TRoot 
   getMany,
   name,
   remove,
+  Resource,
   subscribe,
   update,
   updateMany,

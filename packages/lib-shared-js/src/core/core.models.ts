@@ -30,11 +30,11 @@ export type NilModel = false | undefined | null | '';
 
 export type NillableArrayModel<TType> = Array<TType | NilModel>;
 
+export type MakeOptionalModel<TType, TKey extends keyof TType> = Omit<TType, TKey> &
+  Partial<Pick<TType, TKey>>;
+
 export type DecoratorModel =
-  | ClassDecorator
-  | MethodDecorator
-  | ParameterDecorator
-  | PropertyDecorator;
+  ClassDecorator | MethodDecorator | ParameterDecorator | PropertyDecorator;
 
 export type CallableModel<TType = unknown, TParams extends Array<unknown> = Array<unknown>> = (
   ...args: TParams
@@ -46,8 +46,7 @@ export type AsyncCallableModel<
 > = CallableModel<Promise<TType>, TParams>;
 
 export type ReturnTypeModel<TType> = TType extends
-  | ((args?: unknown) => Promise<infer TReturn>)
-  | ((args?: unknown) => Promise<Array<infer TReturn>>)
+  ((args?: unknown) => Promise<infer TReturn>) | ((args?: unknown) => Promise<Array<infer TReturn>>)
   ? Awaited<TReturn>
   : TType extends ((args?: unknown) => infer TReturn) | ((args?: unknown) => Array<infer TReturn>)
     ? TReturn
@@ -99,10 +98,11 @@ export type ExtractPropertiesModel<TType, TParams> = ConditionalKeys<TType, TPar
 export type DepthArray = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 export type DeepKeyModel<TType, TDepth extends number = 10> = [TDepth] extends [0]
   ? never
-  :
-      | StringKeyModel<TType>
-      | {
-          [TKey in StringKeyModel<TType>]: Required<TType>[TKey] extends object
-            ? `${TKey}.${DeepKeyModel<Required<TType>[TKey], DepthArray[TDepth]>}`
-            : `${TKey}`;
-        }[StringKeyModel<TType>];
+  : | StringKeyModel<TType>
+    | {
+        [TKey in StringKeyModel<TType>]: Required<TType>[TKey] extends object
+          ? `${TKey}.${DeepKeyModel<Required<TType>[TKey], DepthArray[TDepth]>}`
+          : `${TKey}`;
+      }[StringKeyModel<TType>];
+
+export type CastModel<X, Y> = X extends Y ? X : Y;

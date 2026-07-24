@@ -2,8 +2,9 @@ import {
   type UseChatModel,
   type UseChatParamsModel,
 } from '@lib/frontend/ai/hooks/useChat/useChat.models';
-import { type ChatStreamModel } from '@lib/frontend/chat/stores/chatStore/chatStore.models';
-import { useHttp } from '@lib/frontend/http/hooks/useHttp/useHttp';
+import { useChatResource } from '@lib/frontend/chat/hooks/useChatResource/useChatResource';
+import { useQuery } from '@lib/frontend/data/hooks/useQuery/useQuery';
+import { useApi } from '@lib/frontend/http/hooks/useApi/useApi';
 import { useActions } from '@lib/frontend/state/hooks/useActions/useActions';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
@@ -11,9 +12,10 @@ import { LLM_PAYLOAD_TYPE, MESSAGE_ROLE } from '@lib/model/ai/LlmPayload/LlmPayl
 import { type LlmPayloadModel } from '@lib/model/ai/LlmPayload/LlmPayload.models';
 import { MESSAGE_STATUS } from '@lib/model/chat/Message/Message.constants';
 import { type MessageModel } from '@lib/model/chat/Message/Message.models';
+import { CHAT } from '@lib/shared/chat/chat.constants';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
-import { MERGE_STRATEGY } from '@lib/shared/core/utils/merge/merge.constants';
 import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
+import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { HTTP_RESPONSE_TYPE } from '@lib/shared/http/http.constants';
 import { useCallback, useRef } from 'react';
 
@@ -31,123 +33,134 @@ export const useChat = ({
   onSubscribe,
   url,
 }: UseChatParamsModel): UseChatModel => {
-  const { post } = useHttp();
+  const { post } = useApi({ baseUri: { port: process.env.SERVER_APP_PYTHON_PORT } });
   const currentUser = useCurrentUser();
-  const chatIdRef = useRef<string>(chatId ?? new ObjectId().toString());
-  const { merge: chatsMerge } = useStore('chat.chats');
-  const { get: getChat, value: chat } = useStore(`chat.chats.${chatIdRef.current}`);
+
+  const isNew = chatId === undefined;
+  const fallback = useRef<string | null>(null);
+  if (!chatId && fallback.current === null) {
+    fallback.current = new ObjectId().toString();
+  }
+  const id = chatId ?? fallback.current!;
+
+  const { get } = useChatResource();
+  const { data: chat, setData: setChat } = useQuery(
+    `${CHAT}.${id}`,
+    async () => {
+      if (isNew) return {};
+      return (await get({ filter: [{ field: '_id', value: id }] })).result;
+    },
+    undefined,
+    { initialData: isNew ? {} : undefined },
+  );
+
   const actions = useActions();
+  const [currentMessage, setCurrentMessage, getCurrentMessage] = useStore(
+    `chat.chats.${id}.currentMessage`,
+  );
+  const mergeCurrentMessage = useCallback(
+    (value: Partial<MessageModel>) => actions.chat.merge(`chats.${id}.currentMessage`, value),
+    [actions, id],
+  );
 
   const subscribe = useCallback(
     (data: Partial<MessageModel>) => {
-      const key = chatIdRef.current;
-      if (streamMap.has(key)) return;
-      const stream: Partial<ChatStreamModel> = {
-        _id: key,
-        currentMessage: undefined,
+      if (streamMap.has(id)) return;
+      void setChat((prev) => ({
+        ...prev,
         messages: [
+          ...(prev?.messages ?? []),
           {
             _id: new ObjectId().toString(),
             content: data.content,
+            created: new DateTime(),
             createdBy: currentUser ?? {},
             role: MESSAGE_ROLE.USER,
           },
         ],
-      };
-      onSubscribe?.(stream);
-      chatsMerge({ [key]: stream }, MERGE_STRATEGY.DEEP_APPEND);
+      }));
+      onSubscribe?.(id);
+      setCurrentMessage(undefined);
 
       const controller = new AbortController();
       const promise = post({
         onMessage: (data: Partial<LlmPayloadModel>): void => {
-          const key = chatIdRef.current;
           const { chat_id, content, message_id, role, type } = data;
 
           if (!chat_id) throw new NotFoundError('chat id');
           if (!message_id) throw new NotFoundError('message id');
-          if (chat_id !== key) {
-            streamMap.get(key)?.controller.abort();
-            streamMap.delete(key);
-            throw new Error(`chat_id_mismatch: expected ${key}, got ${chat_id}`);
+          if (chat_id !== id) {
+            streamMap.get(id)?.controller.abort();
+            streamMap.delete(id);
+            throw new Error(`chat_id_mismatch: expected ${id}, got ${chat_id}`);
           }
 
           switch (type) {
             case LLM_PAYLOAD_TYPE.START: {
-              chatsMerge({
-                [key]: {
-                  _id: key,
-                  currentMessage: {
-                    _id: message_id,
-                    content: content ?? '',
-                    role,
-                    status: MESSAGE_STATUS.STREAMING,
-                  },
-                },
+              mergeCurrentMessage({
+                _id: message_id,
+                content: content ?? '',
+                role,
+                status: MESSAGE_STATUS.STREAMING,
               });
               onStart?.(data);
               break;
             }
 
             case LLM_PAYLOAD_TYPE.UPDATE: {
-              const currentMessage = getChat()?.currentMessage;
+              const currentMessage = getCurrentMessage();
               if (!currentMessage) return;
-              chatsMerge({
-                [key]: {
-                  _id: key,
-                  currentMessage: {
-                    content: (currentMessage.content ?? '') + (content ?? ''),
-                  },
-                },
+              mergeCurrentMessage({
+                content: (currentMessage.content ?? '') + (content ?? ''),
               });
               break;
             }
 
             case LLM_PAYLOAD_TYPE.END: {
-              const currentMessage = getChat()?.currentMessage;
+              const currentMessage = getCurrentMessage();
               if (!currentMessage) return;
-              actions?.chat.streamEnd({ chatId: key });
+              void setChat((prev) => ({
+                ...prev,
+                messages: [
+                  ...(prev?.messages ?? []),
+                  { ...currentMessage, created: new DateTime(), status: MESSAGE_STATUS.COMPLETED },
+                ],
+              }));
+              setCurrentMessage(undefined);
               break;
             }
 
             case LLM_PAYLOAD_TYPE.ERROR: {
-              chatsMerge({
-                [key]: {
-                  _id: key,
-                  currentMessage: undefined,
-                },
-              });
+              setCurrentMessage(undefined);
               break;
             }
           }
         },
-        params: { ...data, chat: { _id: key } },
-        request: { responseType: HTTP_RESPONSE_TYPE.STREAM, signal: controller.signal },
+        params: { ...data, chat: { _id: id } },
+        request: {
+          responseType: HTTP_RESPONSE_TYPE.STREAM,
+          signal: controller.signal,
+        },
         url,
       }).finally(() => {
-        streamMap.delete(key);
+        streamMap.delete(id);
       });
 
-      streamMap.set(key, { controller, promise });
+      streamMap.set(id, { controller, promise });
     },
-    [currentUser, chatsMerge, post, url],
+    [id, currentUser, mergeCurrentMessage, setCurrentMessage, getCurrentMessage, post, url],
   );
 
   const unsubscribe = useCallback((): void => {
-    const key = chatIdRef.current;
-    streamMap.get(key)?.controller.abort();
-    streamMap.delete(key);
-    chatsMerge({
-      [key]: {
-        _id: key,
-        currentMessage: undefined,
-      },
-    });
-  }, [chatsMerge]);
+    streamMap.get(id)?.controller.abort();
+    streamMap.delete(id);
+    setCurrentMessage(undefined);
+  }, [id, setCurrentMessage]);
 
   return {
-    chat,
-    currentMessage: chat?.currentMessage,
-    isStreaming: chat?.currentMessage?.status === MESSAGE_STATUS.STREAMING,
+    chat: chat ?? undefined,
+    currentMessage,
+    isStreaming: currentMessage?.status === MESSAGE_STATUS.STREAMING,
     subscribe,
     unsubscribe,
   };

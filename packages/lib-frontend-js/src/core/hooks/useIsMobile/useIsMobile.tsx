@@ -3,6 +3,6 @@ import { type UseIsMobileModel } from '@lib/frontend/core/hooks/useIsMobile/useI
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
 
 export const useIsMobile = (): UseIsMobileModel => {
-  const { value: width } = useStore('app.dimension.width');
+  const [width] = useStore('app.dimension.width');
   return width !== undefined && width < MOBILE_WIDTH_THRESHOLD;
 };

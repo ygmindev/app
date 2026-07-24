@@ -34,8 +34,8 @@ export type RouteModel<
     routes?: Array<RouteModel>;
     title?: AsyncTextModel;
     transition?: ROUTE_TRANSITION;
-    loaders?(params: { pathname?: string }): {
-      [TKey in StringKeyModel<TType>]?: (params?: RequestContextModel) => Promise<TType[TKey]>;
+    loaders?(params: { params?: TParams; pathname?: string }): {
+      [TKey in StringKeyModel<TType>]?: (context?: RequestContextModel) => Promise<TType[TKey]>;
     };
   };
 

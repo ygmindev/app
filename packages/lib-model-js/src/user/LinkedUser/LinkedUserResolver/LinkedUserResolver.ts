@@ -14,10 +14,10 @@ import { type UserModel } from '@lib/model/user/User/User.models';
 @withResolver({ Resource: () => LinkedUser })
 export class LinkedUserResolver
   extends createEmbeddedResourceResolver<LinkedUserModel, UserModel>({
+    // authorizer: { default: selfAuthorizer },
+    name: LINKED_USER_RESOURCE_NAME,
     Resource: () => LinkedUser,
     ResourceImplementation: LinkedUserImplementation,
     RootResource: () => User,
-    // authorizer: { default: selfAuthorizer },
-    name: LINKED_USER_RESOURCE_NAME,
   })
   implements LinkedUserImplementationModel {}
