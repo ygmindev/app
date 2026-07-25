@@ -115,12 +115,8 @@ class ChatService(BaseModel, ChatServiceModel):
         )
         user_dict = user_message.to_dict()
         user_dict["chat"] = chat
-        params.messages = [
-            AIMessage(
-                **user_dict,
-                role=MessageRole.USER,
-            )
-        ]
+        user_dict["role"] = MessageRole.USER
+        params.messages = [AIMessage(**user_dict)]
         user_message = (await self._database.create(user_message)).result
 
         history = await self._load_history(chat_id)
@@ -128,6 +124,7 @@ class ChatService(BaseModel, ChatServiceModel):
         system_message = Message(
             chat=chat,
             content="",
+            role=MessageRole.SYSTEM,
         )
         system_message_id = str(system_message._id)
         response = ""

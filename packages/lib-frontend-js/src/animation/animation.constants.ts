@@ -12,20 +12,26 @@ import { merge } from '@lib/shared/core/utils/merge/merge';
 
 export const ANIMATION_STATES_APPEARABLE: AnimationStatesModel<StyleModel> = {
   [ELEMENT_STATE.ACTIVE]: { opacity: 1 },
-  [ELEMENT_STATE.INACTIVE]: { opacity: 0 },
   [ELEMENT_STATE.EXIT]: { opacity: 0 },
+  [ELEMENT_STATE.INACTIVE]: { opacity: 0 },
 };
 
 export const ANIMATION_STATES_APPEARABLE_OPAQUE: AnimationStatesModel<StyleModel> = {
   [ELEMENT_STATE.ACTIVE]: { opacity: 0.5 },
-  [ELEMENT_STATE.INACTIVE]: { opacity: 0 },
   [ELEMENT_STATE.EXIT]: { opacity: 0 },
+  [ELEMENT_STATE.INACTIVE]: { opacity: 0 },
 };
 
 export const ANIMATION_STATES_SCALABLE: AnimationStatesModel<StyleModel> = {
   [ELEMENT_STATE.ACTIVE]: { scale: 1.0 },
-  [ELEMENT_STATE.INACTIVE]: { scale: 0.9 },
   [ELEMENT_STATE.EXIT]: { scale: 0.9 },
+  [ELEMENT_STATE.INACTIVE]: { scale: 0.9 },
+};
+
+export const ANIMATION_STATES_ZOOMABLE: AnimationStatesModel<StyleModel> = {
+  [ELEMENT_STATE.ACTIVE]: { scale: 1.1 },
+  [ELEMENT_STATE.EXIT]: { scale: 1.0 },
+  [ELEMENT_STATE.INACTIVE]: { scale: 1.0 },
 };
 
 export const ANIMATION_STATES_APPEAR_SCALABLE: AnimationStatesModel<StyleModel> = merge([
@@ -38,8 +44,8 @@ export const ANIMATION_STATES_SLIDABLE_HORIZONTAL = ({
   width,
 }: { width?: number } & Pick<SlidePropsModel, 'isBack'>): AnimationStatesModel<StyleModel> => ({
   [ELEMENT_STATE.ACTIVE]: { left: 0 },
-  [ELEMENT_STATE.INACTIVE]: width ? (isBack ? { left: -width } : { left: width }) : { left: 0 },
   [ELEMENT_STATE.EXIT]: width ? (isBack ? { left: width } : { left: -width }) : { left: 0 },
+  [ELEMENT_STATE.INACTIVE]: width ? (isBack ? { left: -width } : { left: width }) : { left: 0 },
 });
 
 export const ANIMATION_STATES_SLIDABLE_VERTICAL = ({
@@ -52,8 +58,8 @@ export const ANIMATION_STATES_SLIDABLE_VERTICAL = ({
   offset?: number;
 }): AnimationStatesModel<StyleModel> => ({
   [ELEMENT_STATE.ACTIVE]: { top: deviceHeight - (height ?? 0) + (offset ?? 0) },
-  [ELEMENT_STATE.INACTIVE]: { top: deviceHeight + (offset ?? 0) },
   [ELEMENT_STATE.EXIT]: { top: deviceHeight + (offset ?? 0) },
+  [ELEMENT_STATE.INACTIVE]: { top: deviceHeight + (offset ?? 0) },
 });
 
 export const ANIMATION_STATES_FOCUSABLE = ({
@@ -77,12 +83,12 @@ export const ANIMATION_STATES_FOCUSABLE = ({
   const colorField = isText ? 'color' : 'borderColor';
   const backgroundColor = isText ? undefined : theme.color.palette[THEME_COLOR_MORE.SURFACE][role];
   return {
-    [ELEMENT_STATE.INACTIVE]: { backgroundColor, [colorField]: inactiveColor, opacity: 1.0 },
     [ELEMENT_STATE.ACTIVE]: { backgroundColor, [colorField]: activeColor, opacity: 1.0 },
     [ELEMENT_STATE.DISABLED]: {
       [colorField]: inactiveColor,
       opacity: theme.opaque[THEME_SIZE.LARGE],
     },
+    [ELEMENT_STATE.INACTIVE]: { backgroundColor, [colorField]: inactiveColor, opacity: 1.0 },
     [ELEMENT_STATE.LOADING]: {
       [colorField]: inactiveColor,
       opacity: theme.opaque[THEME_SIZE.LARGE],

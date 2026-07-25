@@ -20,7 +20,6 @@ export const AiChatContainer: LFCModel<AiChatContainerPropsModel> = ({
       port: process.env.SERVER_APP_PYTHON_PORT,
     }),
   });
-  console.warn(chat);
 
   return (
     <ChatContainer
