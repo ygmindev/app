@@ -6,5 +6,4 @@ export type MessageContainerPropsModel = {
   isOwn?: boolean;
   message: Partial<MessageModel>;
   tooltipElement?: ReactNode;
-  topElement?: ReactNode;
 };

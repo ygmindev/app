@@ -4,6 +4,7 @@ import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 
 export const MESSAGE_RESOURCE_PARAMS = {
   fields: [
+    { id: '_id' },
     { id: 'created' },
     { id: 'content' },
     { id: 'role' },

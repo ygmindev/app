@@ -21,7 +21,6 @@ export const NewChatPage: LFCModel<NewChatPagePropsModel> = ({ ...props }) => {
   const { t } = useTranslation([AI]);
   const currentUser = useCurrentUser();
   const router = useRouter();
-
   return (
     <Wrapper
       {...wrapperProps}
@@ -36,9 +35,8 @@ export const NewChatPage: LFCModel<NewChatPagePropsModel> = ({ ...props }) => {
         </Text>
 
         <AiChatForm
-          // chatId={chatId}
           onSubscribe={(chatId) => {
-            router.push({ params: { chatId }, pathname: `/${APP}/${CHAT}` });
+            chatId && router.push({ params: { chatId }, pathname: `/${APP}/${CHAT}` });
           }}
         />
       </Wrapper>

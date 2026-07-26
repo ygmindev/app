@@ -3,6 +3,7 @@ import { type MessageContainerPropsModel } from '@lib/frontend/chat/components/M
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
+import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
@@ -22,7 +23,6 @@ export const MessageContainer: LFCModel<MessageContainerPropsModel> = ({
   isOwn,
   message,
   tooltipElement,
-  topElement,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -39,25 +39,22 @@ export const MessageContainer: LFCModel<MessageContainerPropsModel> = ({
     [message.created],
   );
 
-  // const isDateChanged =
-  //   message.created?.toLocaleDateString() !== messagePrevious?.created?.toLocaleDateString();
-
   const element = message.content && <Text>{message.content}</Text>;
 
   return (
     <Wrapper
       {...wrapperProps}
       s={THEME_SIZE.SMALL}>
-      {/* {isDateChanged && (
-        <Divider>{new DateTime(message.created).format(DATETIME_FORMAT.DATE)}</Divider>
-      )} */}
-
       <Activatable>
         {(isActive) => (
           <Wrapper
             align={isOwn ? FLEX_ALIGN.END : FLEX_ALIGN.START}
             s={THEME_SIZE.SMALL}>
-            {topElement}
+            <Appearable
+              isActive={isStreaming}
+              isLazy={false}>
+              <Loading />
+            </Appearable>
 
             {isOwn ? (
               <Wrapper

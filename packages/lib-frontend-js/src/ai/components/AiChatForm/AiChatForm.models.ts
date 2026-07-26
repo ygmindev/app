@@ -2,4 +2,6 @@ import { type UseChatParamsModel } from '@lib/frontend/ai/hooks/useChat/useChat.
 import { type ChatFormPropsModel } from '@lib/frontend/chat/components/ChatForm/ChatForm.models';
 
 export type AiChatFormPropsModel = ChatFormPropsModel &
-  Pick<UseChatParamsModel, 'chatId' | 'onStart' | 'onSubscribe'>;
+  Pick<UseChatParamsModel, 'chatId'> & {
+    onSubscribe?(chatId?: string): void;
+  };

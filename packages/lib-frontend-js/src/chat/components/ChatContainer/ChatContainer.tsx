@@ -1,7 +1,7 @@
-import { SystemMessageContainer } from '@lib/frontend/ai/components/SystemMessageContainer/SystemMessageContainer';
 import { type ChatContainerPropsModel } from '@lib/frontend/chat/components/ChatContainer/ChatContainer.models';
 import { ChatForm } from '@lib/frontend/chat/components/ChatForm/ChatForm';
 import { MessageContainer } from '@lib/frontend/chat/components/MessageContainer/MessageContainer';
+import { StreamingChatContainer } from '@lib/frontend/chat/components/StreamingChatContainer/StreamingChatContainer';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { type LFCModel } from '@lib/frontend/core/core.models';
 import { MainLayout } from '@lib/frontend/core/layouts/MainLayout/MainLayout';
@@ -17,7 +17,6 @@ import { type ReactElement } from 'react';
 export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
   chat,
   chatFormElement,
-  currentMessage,
   ...props
 }) => {
   const { wrapperProps } = useLayoutStyles({ props });
@@ -29,10 +28,8 @@ export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
     const isOwn = authStatus
       ? !!message?.createdBy && message?.createdBy?._id === currentUser?._id
       : message.role === MESSAGE_ROLE.USER && isEqual(message?.createdBy, {});
-    const Container =
-      message.role === MESSAGE_ROLE.SYSTEM ? SystemMessageContainer : MessageContainer;
     return (
-      <Container
+      <MessageContainer
         isOwn={isOwn}
         key={message._id}
         message={message}
@@ -52,7 +49,7 @@ export const ChatContainer: LFCModel<ChatContainerPropsModel> = ({
         s={THEME_SIZE.SMALL}>
         {messages?.map((message) => chatElement(message))}
 
-        {currentMessage && chatElement(currentMessage)}
+        {chat?._id && <StreamingChatContainer chatId={chat._id} />}
       </Wrapper>
     </MainLayout>
   );
