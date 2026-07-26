@@ -17,6 +17,7 @@ export const MainLayout: RLFCModel<WrapperRefModel, MainLayoutPropsModel> = ({
   isFullWidth,
   p,
   ref,
+  scrollType,
   size = THEME_SIZE.MEDIUM,
   topElement,
   ...props
@@ -50,8 +51,10 @@ export const MainLayout: RLFCModel<WrapperRefModel, MainLayoutPropsModel> = ({
         isFullHeight={isFullHeight}
         isFullWidth
         isVerticalScrollable={isFullHeight}
+        isVerticalScrollableVisible
         p={p}
-        ref={ref}>
+        ref={ref}
+        scrollType={scrollType}>
         <Wrapper
           flex={isFullHeight}
           isFullWidth={isFullWidthF}

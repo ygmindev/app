@@ -74,9 +74,16 @@ class _Llm(BaseModel, _LlmModel):
             role=MessageRole.USER,
             content=prompt,
         )
+        is_started = False
         async for chunk in self._chunks([user_message]):
             if isinstance(chunk.content, str) and chunk.content:
-                yield chunk.content
+                content = chunk.content
+                if not is_started:
+                    content = content.lstrip()
+                    if not content:
+                        continue
+                    is_started = True
+                yield content
 
     async def run(
         self,
@@ -86,7 +93,10 @@ class _Llm(BaseModel, _LlmModel):
         async for chunk in self._chunks(messages):
             result = chunk if result is None else result + chunk
         if result is not None:
-            return AIMessage.deserialize(result)
+            message = AIMessage.deserialize(result)
+            if isinstance(message.content, str):
+                message.content = message.content.lstrip()
+            return message
         return None
 
 

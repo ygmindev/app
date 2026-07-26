@@ -18,6 +18,7 @@ export type PressablePropsModel<TType = void> = TestIdPropsModel &
   > & {
     confirmColor?: THEME_COLOR;
     confirmMessage?: AsyncTextModel;
+    isVertical?: boolean;
     onPress?: (() => TType | undefined) | (() => Promise<TType | undefined>);
     tooltip?: AsyncTextModel;
   };

@@ -4,4 +4,5 @@ import { type ReactElement } from 'react';
 
 export type ButtonGroupPropsModel = Omit<ButtonPropsModel, 'children' | 'onPress'> & {
   children: Array<ReactElement<ButtonPropsModel | DividerPropsModel>>;
+  isVertical?: boolean;
 };

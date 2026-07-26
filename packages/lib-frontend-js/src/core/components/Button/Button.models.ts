@@ -30,6 +30,7 @@ export type ButtonPropsModel<TType = void> = ChildrenPropsModel<AsyncTextModel |
     | 'height'
     | 'isFocusable'
     | 'isFullWidth'
+    | 'isVertical'
     | 'onActive'
     | 'onInactive'
     | 'onPress'

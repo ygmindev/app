@@ -27,6 +27,7 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
         bottom={isHorizontal ? 0 : undefined}
         isActive={isScrollDownVisible}
         isCenter
+        isLazy={false}
         left={isHorizontal ? 0 : undefined}
         pLeft
         position={SHAPE_POSITION.ABSOLUTE}
@@ -36,6 +37,7 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
         <ButtonGroup
           elementState={isScrollDownVisible ? undefined : ELEMENT_STATE.INACTIVE}
           isShadow
+          isVertical={!isHorizontal}
           size={THEME_SIZE.SMALL}
           type={BUTTON_TYPE.INVISIBLE}>
           <Button
@@ -67,15 +69,17 @@ export const ScrollButton: LFCModel<ScrollButtonPropsModel> = ({
         bottom={0}
         isActive={isScrollUpVisible}
         isCenter
-        left={isHorizontal ? undefined : 0}
+        isLazy={false}
+        left={isHorizontal ? 0 : undefined}
         pRight
         position={SHAPE_POSITION.ABSOLUTE}
-        right={0}
+        right={isHorizontal ? undefined : 0}
         top={isHorizontal ? 0 : undefined}
         zIndex>
         <ButtonGroup
           elementState={isScrollUpVisible ? undefined : ELEMENT_STATE.INACTIVE}
           isShadow
+          isVertical={!isHorizontal}
           size={THEME_SIZE.SMALL}
           type={BUTTON_TYPE.INVISIBLE}>
           <Button

@@ -48,6 +48,7 @@ export const Button = <TType = void,>({
   iconText,
   imageSrc,
   isShadow,
+  isVertical,
   leftElement,
   onElementStateChange,
   rightElement,
@@ -232,7 +233,7 @@ export const Button = <TType = void,>({
   childrenF = childrenF ? (
     <Wrapper
       align={align}
-      isRow
+      isRow={!isVertical}
       s={s ?? THEME_SIZE.SMALL}>
       {isFunction(leftElement) ? leftElement(isActive) : leftElement}
 
@@ -277,8 +278,9 @@ export const Button = <TType = void,>({
       animation={containerAnimation}
       confirmColor={color}
       elementState={elementStateControlled}
-      height={heightF}
+      height={isVertical ? undefined : heightF}
       isOverflowHidden
+      isVertical={isVertical}
       justify={FLEX_JUSTIFY.CENTER}
       onElementStateChange={elementStateControlledSet}
       position={SHAPE_POSITION.RELATIVE}
@@ -298,7 +300,7 @@ export const Button = <TType = void,>({
         <Appearable
           defaultState={ELEMENT_STATE.ACTIVE}
           isActive={!isLoading}
-          isFullWidth
+          isFullWidth={!isVertical}
           isLazy={false}>
           {childrenF}
         </Appearable>

@@ -51,7 +51,7 @@ export const getScrollViewParams = <
         partionObject(
           StyleSheet.flatten(props.style) as Record<string, unknown>,
           (_, k) =>
-            ['alignSelf', 'justifySelf', 'flex', 'width', 'overflow'].includes(k) ||
+            ['alignSelf', 'justifySelf', 'flex', 'width', 'height', 'overflow'].includes(k) ||
             k.startsWith('margin') ||
             k.startsWith('border') ||
             k.startsWith('background'),

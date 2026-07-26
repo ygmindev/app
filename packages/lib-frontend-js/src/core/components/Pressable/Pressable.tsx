@@ -25,6 +25,7 @@ export const Pressable = <TType = void,>({
   confirmColor,
   confirmMessage,
   elementState,
+  isVertical,
   onActive,
   onElementStateChange,
   onHoverIn,
@@ -119,7 +120,7 @@ export const Pressable = <TType = void,>({
           onPress={handleButtonPress}
           onPressIn={onPressIn}
           onPressOut={onPressOut}
-          pHorizontal
+          pHorizontal={isVertical ? undefined : true}
           pVertical={THEME_SIZE.SMALL}
           ref={ref}
           round={round}>

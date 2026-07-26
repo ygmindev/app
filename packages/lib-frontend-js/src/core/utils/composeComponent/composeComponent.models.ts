@@ -16,9 +16,7 @@ export type ComposeComponentParamsModel<
   TRef = unknown,
 > = {
   Component:
-    | RSFCModel<TRef, TResult, TStyle>
-    | ComponentType<TResult & RefPropsModel<TRef>>
-    | string;
+    RSFCModel<TRef, TResult, TStyle> | ComponentType<TResult & RefPropsModel<TRef>> | string;
 
   isWeb?: boolean;
 

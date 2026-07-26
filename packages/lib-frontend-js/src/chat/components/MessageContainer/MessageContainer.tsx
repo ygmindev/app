@@ -1,12 +1,15 @@
 import { Appearable } from '@lib/frontend/animation/components/Appearable/Appearable';
-import { type MessageContainerPropsModel } from '@lib/frontend/chat/components/MessageContainer/MessageContainer.models';
+import {
+  type MessageContainerRefModel,
+  type MessageContainerPropsModel,
+} from '@lib/frontend/chat/components/MessageContainer/MessageContainer.models';
 import { Activatable } from '@lib/frontend/core/components/Activatable/Activatable';
 import { Button } from '@lib/frontend/core/components/Button/Button';
 import { BUTTON_TYPE } from '@lib/frontend/core/components/Button/Button.constants';
 import { Loading } from '@lib/frontend/core/components/Loading/Loading';
 import { Text } from '@lib/frontend/core/components/Text/Text';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '@lib/frontend/core/core.models';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useClipboard } from '@lib/frontend/core/hooks/useClipboard/useClipboard';
 import { useTranslation } from '@lib/frontend/locale/hooks/useTranslation/useTranslation';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
@@ -18,10 +21,12 @@ import { DateTime } from '@lib/shared/datetime/utils/DateTime/DateTime';
 import { DATETIME_FORMAT } from '@lib/shared/datetime/utils/DateTime/DateTime.constants';
 import { useMemo } from 'react';
 
-export const MessageContainer: LFCModel<MessageContainerPropsModel> = ({
+export const MessageContainer: RLFCModel<MessageContainerRefModel, MessageContainerPropsModel> = ({
   bottomElement,
   isOwn,
   message,
+  onMeasure,
+  ref,
   tooltipElement,
   ...props
 }) => {
@@ -44,6 +49,8 @@ export const MessageContainer: LFCModel<MessageContainerPropsModel> = ({
   return (
     <Wrapper
       {...wrapperProps}
+      onMeasure={onMeasure}
+      ref={ref}
       s={THEME_SIZE.SMALL}>
       <Activatable>
         {(isActive) => (

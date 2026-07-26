@@ -14,6 +14,7 @@ import { cloneElement, useMemo } from 'react';
 export const ButtonGroup: LFCModel<ButtonGroupPropsModel> = ({
   children,
   height,
+  isVertical,
   size = THEME_SIZE.MEDIUM,
   type,
   ...props
@@ -30,13 +31,12 @@ export const ButtonGroup: LFCModel<ButtonGroupPropsModel> = ({
       ],
     [height, size],
   );
-
   return (
     <Button
       {...props}
       align={FLEX_ALIGN.CENTER}
-      height={height}
-      isRow
+      height={isVertical ? undefined : height}
+      isVertical={isVertical}
       p={THEME_SIZE.SMALL}
       s={THEME_SIZE.SMALL}
       size={size}
@@ -49,6 +49,7 @@ export const ButtonGroup: LFCModel<ButtonGroupPropsModel> = ({
                 ...props,
                 height: heightF,
                 isShadow: false,
+                isVertical,
                 key: child.key ?? i,
                 type:
                   (child.props as ButtonPropsModel).type ??
@@ -56,7 +57,7 @@ export const ButtonGroup: LFCModel<ButtonGroupPropsModel> = ({
               }
             : {
                 alignSelf: FLEX_ALIGN.STRETCH,
-                isVertical: true,
+                isVertical,
                 key: child.key ?? i,
                 mVertical: THEME_SIZE.SMALL,
                 p: THEME_SIZE.SMALL,
