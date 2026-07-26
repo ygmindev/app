@@ -1,5 +1,6 @@
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { type LFCModel } from '@lib/frontend/core/core.models';
+import { type WrapperRefModel } from '@lib/frontend/core/components/Wrapper/Wrapper.models';
+import { type RLFCModel } from '@lib/frontend/core/core.models';
 import { useIsMobile } from '@lib/frontend/core/hooks/useIsMobile/useIsMobile';
 import { type MainLayoutPropsModel } from '@lib/frontend/core/layouts/MainLayout/MainLayout.models';
 import { useStore } from '@lib/frontend/state/hooks/useStore/useStore';
@@ -8,13 +9,14 @@ import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import isNumber from 'lodash/isNumber';
 
-export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
+export const MainLayout: RLFCModel<WrapperRefModel, MainLayoutPropsModel> = ({
   bottomElement,
   children,
   isCenter,
   isFullHeight,
   isFullWidth,
   p,
+  ref,
   size = THEME_SIZE.MEDIUM,
   topElement,
   ...props
@@ -48,7 +50,8 @@ export const MainLayout: LFCModel<MainLayoutPropsModel> = ({
         isFullHeight={isFullHeight}
         isFullWidth
         isVerticalScrollable={isFullHeight}
-        p={p}>
+        p={p}
+        ref={ref}>
         <Wrapper
           flex={isFullHeight}
           isFullWidth={isFullWidthF}

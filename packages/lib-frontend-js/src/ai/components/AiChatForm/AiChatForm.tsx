@@ -11,7 +11,12 @@ import { ObjectId } from '@lib/shared/data/utils/ObjectId/ObjectId';
 import { uri } from '@lib/shared/http/utils/uri/uri';
 import { useCallback, useRef } from 'react';
 
-export const AiChatForm: LFCModel<AiChatFormPropsModel> = ({ chatId, onSubscribe, ...props }) => {
+export const AiChatForm: LFCModel<AiChatFormPropsModel> = ({
+  chatId,
+  onSubmit,
+  onSubscribe,
+  ...props
+}) => {
   const { wrapperProps } = useLayoutStyles({ props });
   const { t } = useTranslation([AI]);
 
@@ -29,6 +34,7 @@ export const AiChatForm: LFCModel<AiChatFormPropsModel> = ({ chatId, onSubscribe
 
   const handleSubmit = useCallback(
     async (data: Partial<MessageModel>) => {
+      void onSubmit?.(data);
       onSubscribe?.(id);
       void subscribe(data);
     },
