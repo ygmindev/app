@@ -16,7 +16,9 @@ from lib_ai.graph.utils.graph_node import GraphNode
 TState = TypeVar("TState", bound=BaseModel)
 
 
-class _DirectedAcyclicGraphModel(StreamableModel[TState]):
+class _DirectedAcyclicGraphModel(
+    StreamableModel[TState],
+):
     initial_state: TState = Field()
     nodes: list[GraphNode] = Field(default_value=list)
     edges: list[GraphEdge] = Field(default_value=list)

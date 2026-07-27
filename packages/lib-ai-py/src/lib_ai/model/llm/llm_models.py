@@ -22,7 +22,12 @@ class _LlmModel(BaseModel):
         tools: list[Tool],
     ) -> None: ...
 
-    async def stream_message(
+    async def stream(
+        self,
+        messages: list[AIMessage],
+    ) -> AsyncIterator[str]: ...
+
+    async def stream_prompt(
         self,
         prompt: str,
     ) -> AsyncIterator[str]: ...

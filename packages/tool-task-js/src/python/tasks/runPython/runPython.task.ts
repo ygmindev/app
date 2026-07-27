@@ -15,6 +15,6 @@ export const runPython = buildTask<RunPythonParamsModel, RunPythonModel>({
   prompts: [appPrompt({ defaultValue: 'service_server' })],
 
   task: async ({ pathname = './src/index.py' }) => {
-    await execute({ command: `uv run python ${pathname}` });
+    await execute({ command: `PYTHONUNBUFFERED=1 uv run python ${pathname}` });
   },
 });

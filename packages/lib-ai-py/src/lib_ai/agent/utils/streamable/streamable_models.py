@@ -17,11 +17,6 @@ class StreamableModel(
         params: TState,
     ) -> AsyncIterable[TState]: ...
 
-    async def stream_message(
-        self,
-        params: TState,
-    ) -> AsyncIterable[str]: ...
-
     async def run(
         self,
         params: TState,

@@ -44,7 +44,7 @@ class ChatService(BaseModel, ChatServiceModel):
         state = AgentState()
         self._agent = Agent[AgentState](
             name="test_agent",
-            descriptions=["", ""],
+            descriptions=[""],
             initial_state=state,
         )
 
@@ -111,7 +111,7 @@ class ChatService(BaseModel, ChatServiceModel):
         user_message = Message(
             chat=chat,
             content=message,
-            createdBy=user,
+            # createdBy=user,
         )
         user_dict = user_message.to_dict()
         user_dict["chat"] = chat
@@ -127,7 +127,7 @@ class ChatService(BaseModel, ChatServiceModel):
             role=MessageRole.SYSTEM,
         )
         system_message_id = str(system_message._id)
-        response = ""
+        content = ""
         yield LlmPayload(
             chat_id=chat_id,
             content="",
@@ -136,22 +136,23 @@ class ChatService(BaseModel, ChatServiceModel):
             type=LlmPayloadType.START,
         ).to_dict()
 
-        async for chunk in self._agent.stream_message(params):
-            response += chunk
+        async for chunk in self._agent.stream(params):
+            update = getattr(chunk, "update", None) or ""
+            content += update
             yield LlmPayload(
                 type=LlmPayloadType.UPDATE,
                 chat_id=chat_id,
                 message_id=system_message_id,
                 role=MessageRole.SYSTEM,
-                content=chunk,
+                content=update,
             ).to_dict()
 
-        system_message.content = response
+        system_message.content = content
         system_message = (await self._database.create(system_message)).result
 
         yield LlmPayload(
             chat_id=chat_id,
-            content=response,
+            content=content,
             message_id=system_message_id,
             role=MessageRole.SYSTEM,
             type=LlmPayloadType.END,

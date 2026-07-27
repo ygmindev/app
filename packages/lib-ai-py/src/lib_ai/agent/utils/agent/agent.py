@@ -1,5 +1,6 @@
 # template version: 1.0.0
 
+from inspect import isawaitable
 from typing import (
     AsyncIterable,
     Dict,
@@ -75,6 +76,23 @@ class _Agent(_AgentModel[TState]):
                     params.messages.append(result)
                 return params
 
+            async def stream(
+                self,
+                params: TState,
+            ) -> AsyncIterable[TState]:
+                stream = llm.stream([system_message] + params.messages)
+                stream = await stream if isawaitable(stream) else stream
+
+                message = AIMessage(role=MessageRole.SYSTEM, content="")
+                params.messages.append(message)
+
+                async for chunk in stream:
+                    delta = str(chunk)
+                    message.content += delta
+                    yield params.clone(delta=delta)
+
+                yield params
+
         edges.append(GraphEdge(start=GraphNodeType.START, end="llm"))
         nodes.append(_LlmNode())
 
@@ -134,20 +152,6 @@ class _Agent(_AgentModel[TState]):
             raise NotImplementedException("Graph is not initialized")
         return self._graph
 
-    async def stream_message(
-        self,
-        params: TState,
-    ) -> AsyncIterable[str]:
-        user_message = next(
-            (x for x in reversed(params.messages) if x.role == MessageRole.USER),
-            None,
-        )
-        if not user_message:
-            raise NotFoundException("No user message found in the initial state")
-        params.messages = [user_message]
-        async for chunk in self.graph.stream_message(params):
-            yield chunk
-
     async def stream(
         self,
         params: TState,
@@ -160,22 +164,23 @@ class _Agent(_AgentModel[TState]):
             raise NotFoundException("No user message found in the initial state")
         params.messages = [user_message]
         async for updates in self.graph.stream(params):
-            messages = cast(list[AIMessage], updates.messages)
-            for message in messages:
-                messages_out: list[str] = [message.content]
-                if message.role == MessageRole.SYSTEM and message.tool_calls:
-                    for tool_call in message.tool_calls:
-                        messages_out += [
-                            f"calling tool: {tool_call.name} with args: {str(tool_call.params)}"
-                        ]
-            yield params.clone(
-                messages=[
-                    AIMessage(
-                        role=MessageRole.SYSTEM,
-                        content="\n".join(messages_out),
+            delta = getattr(updates, "delta", None)
+            if delta:
+                yield params.clone(delta=delta)
+            else:
+                messages = cast(list[AIMessage], updates.messages)
+
+                content: str = ""
+                for message in messages:
+                    content += str(message.content)
+                    if message.role == MessageRole.SYSTEM and message.tool_calls:
+                        for tool_call in message.tool_calls:
+                            content += f"calling tool: {tool_call.name} with args: {tool_call.params}"
+
+                if content:
+                    yield params.clone(
+                        messages=[AIMessage(role=MessageRole.SYSTEM, content=content)]
                     )
-                ]
-            )
 
 
 class Agent(_Agent[TState], AgentModel): ...

@@ -16,7 +16,7 @@ from lib_ai.agent.utils.tool import Tool
 from lib_ai.graph.utils.directed_acyclic_graph.directed_acyclic_graph import (
     DirectedAcyclicGraph,
 )
-from lib_ai.model.llm import Llm
+from lib_ai.model.llm.llm import Llm
 
 TState = TypeVar("TState", bound=AgentState)
 

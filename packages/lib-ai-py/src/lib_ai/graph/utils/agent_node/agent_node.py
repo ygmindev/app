@@ -14,21 +14,35 @@ class AgentNode(
     GraphNode,
     AgentNodeModel,
 ):
+    def _prepare(
+        self,
+        params: TState,
+    ) -> TState:
+        if self.prompt:
+            params = params.clone(
+                messages=params.messages
+                + [AIMessage(role=MessageRole.USER, content=self.prompt)]
+            )
+        elif params.messages:
+            last_message = params.messages[-1]
+            if last_message.role != MessageRole.USER:
+                params = params.clone(
+                    messages=params.messages
+                    + [AIMessage(role=MessageRole.USER, content=last_message.content)]
+                )
+        return params
+
+    async def run(
+        self,
+        params: TState,
+    ) -> TState:
+        params = self._prepare(params)
+        return await self.agent.run(params)
+
     async def stream(
         self,
         params: TState,
     ) -> AsyncIterable[TState]:
-        if self.prompt:
-            params.messages.append(
-                AIMessage(
-                    role=MessageRole.USER,
-                    content=self.prompt,
-                )
-            )
-        else:
-            last_message = params.messages[-1]
-            if last_message and last_message.role != MessageRole.USER:
-                last_message.role = MessageRole.USER
-
+        params = self._prepare(params)
         async for x in self.agent.stream(params):
             yield x

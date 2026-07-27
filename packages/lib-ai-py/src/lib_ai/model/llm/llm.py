@@ -6,6 +6,7 @@ from typing import AsyncIterator, cast
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessageChunk
 from langchain_openai import ChatOpenAI
+from lib_shared.core.utils.logger.logger import logger
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.core.utils.uninitialized_exception import UninitializedException
 
@@ -59,16 +60,13 @@ class _Llm(_LlmModel):
         async for chunk in self.llm.astream(serialized):
             yield cast(AIMessageChunk, chunk)
 
-    async def stream_message(
+    async def stream(
         self,
-        prompt: str,
+        messages: list[AIMessage],
     ) -> AsyncIterator[str]:
-        user_message = AIMessage(
-            role=MessageRole.USER,
-            content=prompt,
-        )
+        logger.info("...streaming LLM response %s" % self.name)
         is_started = False
-        async for chunk in self._chunks([user_message]):
+        async for chunk in self._chunks(messages):
             if isinstance(chunk.content, str) and chunk.content:
                 content = chunk.content
                 if not is_started:
@@ -78,6 +76,12 @@ class _Llm(_LlmModel):
                     is_started = True
                 yield content
 
+    async def stream_prompt(
+        self,
+        prompt: str,
+    ) -> AsyncIterator[str]:
+        return self.stream([AIMessage(role=MessageRole.USER, content=prompt)])
+
     async def run(
         self,
         messages: list[AIMessage],
@@ -86,10 +90,7 @@ class _Llm(_LlmModel):
         async for chunk in self._chunks(messages):
             result = chunk if result is None else result + chunk
         if result is not None:
-            message = AIMessage.deserialize(result)
-            if isinstance(message.content, str):
-                message.content = message.content.lstrip()
-            return message
+            return AIMessage.deserialize(result)
         return None
 
 

@@ -12,9 +12,10 @@ from lib_ai.graph.utils.graph_node import GraphNode
 from .parallel_node_models import ParallelNodeModel
 
 
-class ParallelNode(GraphNode, ParallelNodeModel):
-    nodes: list[GraphNode]
-
+class ParallelNode(
+    GraphNode,
+    ParallelNodeModel,
+):
     async def stream(
         self,
         params: TState,

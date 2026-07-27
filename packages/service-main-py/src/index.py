@@ -23,12 +23,10 @@ async def run_agent() -> None:
         nodes=[
             AgentNode(
                 name="agent1",
-                prompt="what is the weather in new york?",
+                prompt="what's your name?",
                 agent=Agent(
                     name="agent1",
-                    descriptions=[
-                        "if you're not sure, come up with a better, different question"
-                    ],
+                    descriptions=["you are a chatbot developed in South Korea"],
                     llm=llm,
                     initial_state=initial_state,
                 ),
@@ -41,8 +39,7 @@ async def run_agent() -> None:
     )
 
     async for item in dag.stream(initial_state):
-        print(item)
-        # print("\n", item.messages)
+        print("\n", item)
 
 
 def main():
