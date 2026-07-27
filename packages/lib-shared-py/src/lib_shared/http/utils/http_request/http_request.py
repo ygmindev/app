@@ -1,5 +1,3 @@
-from typing import Optional
-
 from lib_model.user.user.user import User
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
@@ -11,6 +9,6 @@ from lib_shared.http.utils.http_request.http_request_models import (
 
 
 class HttpRequest(BaseModel, HttpRequestModel[TType]):
-    body: Optional[TType] = Field(default=None)
-    headers: Optional[dict] = Field(default=None)
-    user: Optional[User] = Field(default=None)
+    body: TType | None = Field(default=None)
+    headers: dict | None = Field(default=None)
+    user: User | None = Field(default=None)

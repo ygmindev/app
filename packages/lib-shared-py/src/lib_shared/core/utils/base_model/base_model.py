@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, Self
+from typing import Any, ClassVar, Self
 
 from pydantic import BaseModel as PydanticBaseClass
 from pydantic import ConfigDict, TypeAdapter
@@ -20,9 +20,17 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         use_enum_values=True,
     )
 
+    _registry: ClassVar[dict[str, type[_BaseModel]]] = {}
+
     @classmethod
     def __pydantic_init_subclass__(cls, **kwargs: Any) -> None:
         super().__pydantic_init_subclass__(**kwargs)
+        _BaseModel._registry[cls.__name__] = cls
+
+    @classmethod
+    def rebuild(cls) -> None:
+        for model_cls in cls._registry.values():
+            model_cls.model_rebuild(_types_namespace=cls._registry, force=True)
 
     def model_post_init(self, __context: Any) -> None:
         return self.post_init()
@@ -34,7 +42,7 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         self,
         value: Self,
         is_inplace: bool = False,
-        merge_strategy: Optional[MergeStrategy] = None,
+        merge_strategy: MergeStrategy | None = None,
     ) -> Self:
         if is_inplace:
             for k, v in value:
@@ -55,7 +63,7 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         self,
         current: Any,
         new: Any,
-        merge_strategy: Optional[MergeStrategy] = None,
+        merge_strategy: MergeStrategy | None = None,
     ) -> Any:
         if isinstance(current, list) and isinstance(new, list):
             match merge_strategy:

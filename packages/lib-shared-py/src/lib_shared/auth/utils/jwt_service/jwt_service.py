@@ -1,5 +1,4 @@
 import re
-from typing import Optional
 
 from firebase_admin import (
     auth,
@@ -37,7 +36,7 @@ class _JwtService(_JwtServiceModel):
 
     def verify_token(
         self,
-        header: Optional[str],
+        header: str | None = None,
     ) -> User:
         if not header or not header.startswith("Bearer "):
             raise UnauthenticatedError()

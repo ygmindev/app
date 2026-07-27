@@ -2,7 +2,10 @@ import asyncio
 
 from lib_config.http.server.server_config_ai import server_config_ai
 from lib_shared.chat.utils.chat_service.chat_service import chat_service
+from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.http.utils.server.server import Server
+
+BaseModel.rebuild()
 
 server = Server(
     name="server",
@@ -15,6 +18,7 @@ app = server.app
 
 
 async def run() -> None:
+
     await server.run()
 
 

@@ -1,4 +1,4 @@
-from typing import Any, Optional, TypeVar
+from typing import Any, TypeVar
 
 import pydash as _
 
@@ -10,8 +10,8 @@ TType = TypeVar("TType")
 def _get_item(
     params: Any,
     path: str,
-    default: Optional[Any] = None,
-    cast: Optional[type[Any]] = None,
+    default: Any | None = None,
+    cast: type[Any] | None = None,
 ) -> Any:
     value = _.get(params, path)
     if value is None:

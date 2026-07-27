@@ -1,6 +1,6 @@
 # template version: 1.0.0
 
-from typing import Generic, Literal, Optional, Protocol, Sequence, TypeVar
+from typing import Generic, Literal, Protocol, Sequence, TypeVar
 
 from lib_config.database.database_models import DatabaseConfigModel
 from lib_model.core.utils.database_entity.database_entity import DatabaseEntity
@@ -66,9 +66,9 @@ class _DatabaseModel(Protocol):
         self,
         query: dict,
         resource: type[TType],
-        limit: Optional[int] = None,
-        skip: Optional[int] = None,
-        sort: Optional[Sequence[tuple[str, Literal[-1, 1]]]] = None,
+        limit: int | None = None,
+        skip: int | None = None,
+        sort: Sequence[tuple[str, Literal[-1, 1]]] | None = None,
     ) -> FindResultModel[TType]: ...
 
     async def update[TType: DatabaseEntity](

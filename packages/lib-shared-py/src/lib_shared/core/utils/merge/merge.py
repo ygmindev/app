@@ -1,5 +1,5 @@
 from functools import reduce
-from typing import Any, Optional, Sequence, cast
+from typing import Any, Sequence, cast
 
 import pydash as _
 
@@ -12,7 +12,7 @@ from lib_shared.core.utils.merge.merge_models import (
 
 def _merge(
     params: Sequence[TType],
-    merge_strategy: Optional[MergeStrategy] = None,
+    merge_strategy: MergeStrategy | None = None,
 ) -> TType:
     def merger(value: Any, src: Any, *args: Any) -> Any:
         if isinstance(value, list) and isinstance(src, list):

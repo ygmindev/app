@@ -10,7 +10,6 @@ from typing import (
     AsyncIterable,
     Awaitable,
     Callable,
-    Optional,
 )
 
 from fastapi import FastAPI, Request
@@ -38,8 +37,8 @@ logger = Logger()
 class _Server(BaseModel, _ServerModel):
     name: str = Field()
     config: ServerConfig = Field()
-    initialize: Optional[Callable[[], Awaitable[None]]] = Field(default=None)
-    close: Optional[Callable[[], Awaitable[None]]] = Field(default=None)
+    initialize: Callable[[], Awaitable[None]] | None = Field(default=None)
+    close: Callable[[], Awaitable[None]] | None = Field(default=None)
 
     _app: FastAPI = PrivateField()
 

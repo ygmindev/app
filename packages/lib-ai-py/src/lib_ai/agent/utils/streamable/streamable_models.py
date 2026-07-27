@@ -8,7 +8,10 @@ from lib_shared.core.utils.base_model.base_model import BaseModel
 TState = TypeVar("TState", bound=BaseModel)
 
 
-class StreamableModel(Generic[TState]):
+class StreamableModel(
+    BaseModel,
+    Generic[TState],
+):
     async def stream(
         self,
         params: TState,

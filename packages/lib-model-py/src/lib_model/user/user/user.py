@@ -1,5 +1,3 @@
-from typing import Optional
-
 from lib_shared.core.utils.field.field import Field
 
 from lib_model.core.utils.database_entity.database_entity import DatabaseEntity
@@ -15,12 +13,12 @@ class User(
 ):
     # Chat: list = Field(default_value=list)
 
-    callingCode: Optional[str] = Field(default=None)
+    callingCode: str | None = Field(default=None)
 
-    email: Optional[str] = Field(default=None)
+    email: str | None = Field(default=None)
 
-    first: Optional[str] = Field(default=None)
+    first: str | None = Field(default=None)
 
-    last: Optional[str] = Field(default=None)
+    last: str | None = Field(default=None)
 
-    phone: Optional[str] = Field(default=None)
+    phone: str | None = Field(default=None)

@@ -1,7 +1,7 @@
 # template version: 1.0.0
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.constants import FieldRelation
@@ -12,9 +12,9 @@ if TYPE_CHECKING:
 
 
 class ChatModel(BaseModel):
-    name: Optional[str] = Field()
+    name: str | None = Field(default=None)
 
-    messages: Optional[list[Message]] = Field(
+    messages: list[Message] | None = Field(
         relation=FieldRelation.ONE_TO_MANY,
         root="chat",
         default=None,

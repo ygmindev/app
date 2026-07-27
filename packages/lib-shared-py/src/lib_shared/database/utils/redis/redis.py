@@ -1,7 +1,7 @@
 # template version: 1.0.0
 
 
-from typing import Optional, Sequence
+from typing import Sequence
 
 from lib_config.redis.redis_models import RedisConfigModel
 
@@ -32,7 +32,7 @@ class _Redis(BaseModel, _RedisModel):
     async def get(
         self,
         key: str | Sequence[str],
-    ) -> Optional[str]:
+    ) -> str | None:
         key = key if isinstance(key, str) else ":".join(key)
         value = await self._client.get(key)
         return f"{value}" if value else None
@@ -41,7 +41,7 @@ class _Redis(BaseModel, _RedisModel):
         self,
         key: str | Sequence[str],
         value: str,
-        expiration: Optional[int] = None,
+        expiration: int | None = None,
     ) -> None:
         key = key if isinstance(key, str) else ":".join(key)
         if expiration:

@@ -1,14 +1,14 @@
-from typing import Optional, Protocol
+from typing import Protocol
 
 
 class _PromptModel(Protocol):
     async def __call__(
         self,
         key: str,
-        message: Optional[str] = None,
-        options: Optional[list[str]] = None,
+        message: str | None = None,
+        options: list[str] | None = None,
         is_multiple: bool = False,
-        default_value: Optional[str] = None,
+        default_value: str | None = None,
     ) -> str | list[str]: ...
 
 

@@ -1,4 +1,4 @@
-from typing import Callable, Generic, Optional, Protocol, TypeVar
+from typing import Callable, Generic, Protocol, TypeVar
 
 from lib_shared.core.utils.field.constants import FieldRelation
 
@@ -11,10 +11,10 @@ class FieldModel(Protocol, Generic[TType]):
     def __call__(
         self,
         default=MISSING,
-        default_value: Optional[Callable[[], TType]] = None,
-        description: Optional[str] = None,
+        default_value: Callable[[], TType] | None = None,
+        description: str | None = None,
         is_private: bool = False,
-        relation: Optional[FieldRelation] = None,
-        root: Optional[str] = None,
-        alias: Optional[str] = None,
+        relation: FieldRelation | None = None,
+        root: str | None = None,
+        alias: str | None = None,
     ) -> TType: ...

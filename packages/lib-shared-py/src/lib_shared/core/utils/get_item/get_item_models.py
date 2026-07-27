@@ -1,4 +1,4 @@
-from typing import Any, Optional, Protocol, TypeVar, overload
+from typing import Any, Protocol, TypeVar, overload
 
 TType = TypeVar("TType")
 
@@ -9,23 +9,23 @@ class GetItemModel(Protocol):
         self,
         params: Any,
         path: str,
-        default: Optional[TType] = ...,
+        default: TType | None = ...,
         cast: type[TType] = ...,
-    ) -> Optional[TType]: ...
+    ) -> TType | None: ...
 
     @overload
     def __call__(
         self,
         params: Any,
         path: str,
-        default: Optional[str] = ...,
+        default: str | None = ...,
         cast: None = ...,
-    ) -> Optional[str]: ...
+    ) -> str | None: ...
 
     def __call__(
         self,
         params: Any,
         path: str,
-        default: Optional[Any] = None,
-        cast: Optional[type[Any]] = None,
-    ) -> Optional[Any]: ...
+        default: Any | None = None,
+        cast: type[Any] | None = None,
+    ) -> Any | None: ...

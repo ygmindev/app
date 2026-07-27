@@ -4,7 +4,6 @@ import sys
 from typing import (
     Annotated,
     Any,
-    ClassVar,
     Optional,
     Union,
     get_args,
@@ -13,6 +12,7 @@ from typing import (
 )
 
 from beanie import BackLink, Document, Link, PydanticObjectId
+from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.constants import FieldRelation
 from pydantic import BeforeValidator
 
@@ -26,26 +26,27 @@ def _extract_id(x: Any) -> Any:
 
 
 class _DatabaseEntity(Document):
-    _registry: ClassVar[list[type["_DatabaseEntity"]]] = []
-
     def __init_subclass__(
         cls,
         *,
-        name: Optional[str] = None,
+        name: str | None = None,
         **kwargs: Any,
     ) -> None:
         super().__init_subclass__(**kwargs)
         if name is not None:
             cls.Settings = type("Settings", (), {"name": name})
-        _DatabaseEntity._registry.append(cls)
 
     @classmethod
     def initialize(cls) -> None:
-        models = list(dict.fromkeys(_DatabaseEntity._registry))
+        models = [
+            m
+            for m in BaseModel._registry.values()
+            if issubclass(m, _DatabaseEntity) and m is not _DatabaseEntity
+        ]
+        models = list(dict.fromkeys(models))
         ns = {
             "Document": Document,
             "PydanticObjectId": PydanticObjectId,
-            "Optional": Optional,
             "Union": Union,
             "Any": Any,
             "Annotated": Annotated,
@@ -91,10 +92,10 @@ class _DatabaseEntity(Document):
 
                     is_optional = True
 
+                annotation_new = annotation
                 match relation:
                     case FieldRelation.MANY_TO_ONE | FieldRelation.ONE_TO_ONE:
                         if root:
-                            annotation_new = annotation
                             field_info.exclude = True
                         else:
                             annotation_new = Annotated[

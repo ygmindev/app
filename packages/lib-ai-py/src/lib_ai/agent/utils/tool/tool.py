@@ -1,23 +1,18 @@
 # template version: 1.0.0
 
 import asyncio
-from typing import Optional, Type
+from typing import Type
 
-from langchain.tools import BaseTool
 from lib_shared.core.utils.base_model import BaseModel
 
 from .tool_models import ToolModel, TParams, TResult, _ToolModel
 
 
-class _Tool(BaseTool, _ToolModel[TParams, TResult]):
-    input_type: Type[TParams]
-    name: str = ""
-    description: str = ""
-
+class _Tool(_ToolModel[TParams, TResult]):
     def __init__(
         self,
         input_type: Type[BaseModel],
-        descriptions: Optional[list[str]] = None,
+        descriptions: list[str] | None = None,
         **kwargs,
     ) -> None:
         descriptions = descriptions or []

@@ -1,4 +1,4 @@
-from typing import Callable, Optional
+from typing import Callable
 
 from pydantic import Field as PydanticField
 from pydantic import PrivateAttr
@@ -10,12 +10,12 @@ from .field_models import MISSING, FieldModel, TType
 
 def _Field(
     default=MISSING,
-    default_value: Optional[Callable[[], TType]] = None,
-    description: Optional[str] = None,
+    default_value: Callable[[], TType] | None = None,
+    description: str | None = None,
     is_private: bool = False,
-    relation: Optional[FieldRelation] = None,
-    root: Optional[str] = None,
-    alias: Optional[str] = None,
+    relation: FieldRelation | None = None,
+    root: str | None = None,
+    alias: str | None = None,
 ) -> TType:
     default_params = {}
     if default_value:

@@ -1,5 +1,5 @@
 import os
-from typing import Any, Optional, Type
+from typing import Any, Type
 
 from dotenv import load_dotenv
 
@@ -13,8 +13,8 @@ load_dotenv(from_working(f".env.{NODE_ENV}"))
 
 def _get_env(
     key: str,
-    cast: Optional[Type[Any]] = None,
-    default: Optional[Any] = None,
+    cast: Type[Any] | None = None,
+    default: Any | None = None,
     is_required: bool = False,
 ) -> Any:
     value = os.getenv(key)

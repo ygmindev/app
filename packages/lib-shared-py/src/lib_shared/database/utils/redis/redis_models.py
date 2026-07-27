@@ -1,7 +1,7 @@
 # template version: 1.0.0
 
 
-from typing import Optional, Sequence
+from typing import Sequence
 
 
 class _RedisModel:
@@ -12,7 +12,7 @@ class _RedisModel:
     async def get(
         self,
         key: str | Sequence[str],
-    ) -> Optional[str]: ...
+    ) -> str | None: ...
 
     async def set(
         self,

@@ -11,16 +11,13 @@ from langgraph.graph.state import (
     StateGraph,
     StateNode,
 )
-from lib_shared.core.utils.base_model import BaseModel
-from lib_shared.core.utils.field.field import Field
-from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.core.utils.uninitialized_exception.uninitialized_exception import (
     UninitializedException,
 )
 
 from lib_ai.graph.constants import GraphNodeType
 from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
-from lib_ai.graph.utils.graph_node import GraphNode
+from lib_ai.graph.utils.graph_node.graph_node import GraphNode
 
 from .directed_acyclic_graph_models import (
     DirectedAcyclicGraphModel,
@@ -30,24 +27,24 @@ from .directed_acyclic_graph_models import (
 
 
 class _DirectedAcyclicGraph(
-    BaseModel,
     _DirectedAcyclicGraphModel[TState],
 ):
-    initial_state: TState = Field()
-    nodes: list[GraphNode] = Field(default_value=list)
-    edges: list[GraphEdge] = Field(default_value=list)
-
-    _graph: CompiledStateGraph = PrivateField()
-
     def _wrap_node(
         self,
-        handler: Callable[[TState], Awaitable[TState]],
+        node: GraphNode,
     ) -> Callable[[TState], Awaitable[TState]]:
         async def _wrapped(
             state: TState,
         ) -> TState:
             write = get_stream_writer()
-            result = await handler(state)
+            if hasattr(node, "stream") and callable(node.stream):
+                final_state = state
+                async for chunk in node.stream(state):
+                    write(chunk)
+                    final_state = chunk
+                return final_state
+
+            result = await node.run(state)
             write(result)
             return result
 
@@ -69,10 +66,21 @@ class _DirectedAcyclicGraph(
         for node in self.nodes:
             graph.add_node(
                 node.name,
-                cast(StateNode, self._wrap_node(node.run)),
+                cast(StateNode, self._wrap_node(node)),
             )
 
         edges = self.edges
+        if edges:
+            first_edge, last_edge = edges[0], edges[-1]
+            if first_edge.start != GraphNodeType.START:
+                edges.insert(
+                    0,
+                    GraphEdge(start=GraphNodeType.START, end=first_edge.start),
+                )
+            if last_edge.end != GraphNodeType.END and not isinstance(
+                last_edge.end, Callable
+            ):
+                edges.append(GraphEdge(start=last_edge.end, end=GraphNodeType.END))
 
         for edge in edges:
             end = edge.end

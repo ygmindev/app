@@ -1,4 +1,4 @@
-from typing import Optional, Protocol, Type, TypeVar, overload
+from typing import Protocol, Type, TypeVar, overload
 
 TType = TypeVar("TType")
 
@@ -9,23 +9,23 @@ class GetEnvModel(Protocol):
         self,
         key: str,
         cast: Type[TType],
-        default: Optional[TType] = ...,
+        default: TType | None = ...,
         is_required: bool = ...,
-    ) -> Optional[TType]: ...
+    ) -> TType | None: ...
 
     @overload
     def __call__(
         self,
         key: str,
         cast: None = ...,
-        default: Optional[str] = ...,
+        default: str | None = ...,
         is_required: bool = ...,
-    ) -> Optional[str]: ...
+    ) -> str | None: ...
 
     def __call__(
         self,
         key: str,
-        cast: Optional[Type[TType]] = None,
-        default: Optional[TType] = None,
+        cast: Type[TType] | None = None,
+        default: TType | None = None,
         is_required: bool = False,
-    ) -> Optional[TType]: ...
+    ) -> TType | None: ...

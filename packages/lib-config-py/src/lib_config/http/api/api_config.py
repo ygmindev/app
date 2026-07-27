@@ -1,4 +1,4 @@
-from typing import Any, AsyncIterable, Awaitable, Callable, Optional
+from typing import Any, AsyncIterable, Awaitable, Callable
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.http.utils.constants import HTTP_METHOD
@@ -17,4 +17,4 @@ class ApiEndpoint(BaseModel):
 
 class ApiConfig(BaseModel):
     routes: list[ApiEndpoint]
-    prefix: Optional[str] = None
+    prefix: str | None = None

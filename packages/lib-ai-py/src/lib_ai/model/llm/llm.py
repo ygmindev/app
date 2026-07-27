@@ -1,13 +1,11 @@
 # template version: 1.0.0
 
 
-from typing import AsyncIterator, Optional, cast
+from typing import AsyncIterator, cast
 
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessageChunk
 from langchain_openai import ChatOpenAI
-from lib_shared.core.utils.base_model import BaseModel
-from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.core.utils.uninitialized_exception import UninitializedException
 
@@ -22,13 +20,8 @@ from .llm_models import (
 )
 
 
-class _Llm(BaseModel, _LlmModel):
-    name: str = Field(default=LLM_NAME.QWEN_3_5)
-    temperature: float = Field(default=0.0)
-    max_tokens: int = Field(default=4096)
-    output_schema: Optional[BaseModel] = Field(default=None)
-
-    _llm: Optional[BaseChatModel] = PrivateField()
+class _Llm(_LlmModel):
+    _llm: BaseChatModel | None = PrivateField()
 
     def post_init(self) -> None:
         match self.name:
@@ -88,8 +81,8 @@ class _Llm(BaseModel, _LlmModel):
     async def run(
         self,
         messages: list[AIMessage],
-    ) -> Optional[AIMessage]:
-        result: Optional[AIMessageChunk] = None
+    ) -> AIMessage | None:
+        result: AIMessageChunk | None = None
         async for chunk in self._chunks(messages):
             result = chunk if result is None else result + chunk
         if result is not None:

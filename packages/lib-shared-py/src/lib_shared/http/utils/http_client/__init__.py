@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, TypeVar, Union, cast
+from typing import Any, Dict, TypeVar, Union, cast
 
 import httpx
 
@@ -13,7 +13,7 @@ class HttpClient(_HttpClient, HttpClientModel):
     def __init__(
         self,
         base_url: str = "",
-        headers: Optional[Dict[str, str]] = None,
+        headers: Dict[str, str] | None = None,
         timeout: int = 10,
     ):
         self._base_url = base_url.rstrip("/")
@@ -24,12 +24,12 @@ class HttpClient(_HttpClient, HttpClientModel):
         self,
         method: HTTP_METHOD,
         url: str,
-        params: Optional[Dict[str, Any]] = None,
-        data: Optional[Union[Dict[str, Any], str]] = None,
-        json: Optional[Dict[str, Any]] = None,
-        headers: Optional[Dict[str, str]] = None,
+        params: Dict[str, Any] | None = None,
+        data: Union[Dict[str, Any], str] | None = None,
+        json: Dict[str, Any] | None = None,
+        headers: Dict[str, str] | None = None,
         response_type: type[TType] = type[Any],
-        content_type: Optional[HTTP_CONTENT_TYPE] = HTTP_CONTENT_TYPE.JSON,
+        content_type: HTTP_CONTENT_TYPE | None = HTTP_CONTENT_TYPE.JSON,
     ) -> TType:
         async with httpx.AsyncClient(timeout=self._timeout) as client:
             full_url = f"{self._base_url}{url}"
@@ -51,7 +51,7 @@ class HttpClient(_HttpClient, HttpClientModel):
     async def get(
         self,
         url: str,
-        params: Optional[Dict[str, Any]] = None,
+        params: Dict[str, Any] | None = None,
         response_type: type[TType] = type[Any],
         **kwargs,
     ) -> TType:
@@ -66,7 +66,7 @@ class HttpClient(_HttpClient, HttpClientModel):
     async def post(
         self,
         url: str,
-        json: Optional[Dict[str, Any]] = None,
+        json: Dict[str, Any] | None = None,
         data: Any = None,
         response_type: type[TType] = type[Any],
         **kwargs,
@@ -83,7 +83,7 @@ class HttpClient(_HttpClient, HttpClientModel):
     async def put(
         self,
         url: str,
-        json: Optional[Dict[str, Any]] = None,
+        json: Dict[str, Any] | None = None,
         data: Any = None,
         response_type: type[TType] = type[Any],
         **kwargs,

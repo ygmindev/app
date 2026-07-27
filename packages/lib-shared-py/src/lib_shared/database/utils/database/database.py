@@ -1,6 +1,6 @@
 # template version: 1.0.0
 
-from typing import Literal, Optional, Sequence
+from typing import Literal, Sequence
 
 from beanie import SortDirection, init_beanie
 from lib_config.database.database_models import DatabaseConfigModel
@@ -89,9 +89,9 @@ class _Database(_DatabaseModel):
         self,
         query: dict,
         resource: type[TType],
-        limit: Optional[int] = None,
-        skip: Optional[int] = None,
-        sort: Optional[Sequence[tuple[str, Literal[-1, 1]]]] = None,
+        limit: int | None = None,
+        skip: int | None = None,
+        sort: Sequence[tuple[str, Literal[-1, 1]]] | None = None,
     ) -> FindResultModel[TType]:
         result = resource.find(query, fetch_links=True)
         if skip:

@@ -1,6 +1,6 @@
 # template version: 1.0.0
 import json
-from typing import AsyncIterable, Optional
+from typing import AsyncIterable
 
 from beanie import PydanticObjectId
 from lib_ai.agent.utils.agent.agent import Agent
@@ -102,7 +102,7 @@ class ChatService(BaseModel, ChatServiceModel):
         self,
         message: str,
         chat_id: str,
-        user: Optional[User] = None,
+        user: User | None = None,
     ) -> AsyncIterable[str | dict]:
         chat = await self.get_chat(chat_id, message)
         chat_id = str(chat._id)

@@ -1,4 +1,4 @@
-from typing import Callable, Generic, Optional, Type, TypeVar
+from typing import Callable, Generic, Type, TypeVar
 
 import attr
 
@@ -16,11 +16,11 @@ TResponse = TypeVar("TResponse")
 class ApiDataLoaderParams(DataLoaderParams[TType], Generic[TType, TResponse]):
     uri: str
     transformer: Callable[[TResponse], list[TType]]
-    response: Optional[Type[TResponse]]
-    method: Optional[HTTP_METHOD] = HTTP_METHOD.GET
-    content_type: Optional[HTTP_CONTENT_TYPE] = HTTP_CONTENT_TYPE.JSON
-    headers: Optional[dict] = {}
-    params: Optional[dict] = {}
+    response: Type[TResponse] | None = None
+    method: HTTP_METHOD | None = HTTP_METHOD.GET
+    content_type: HTTP_CONTENT_TYPE | None = HTTP_CONTENT_TYPE.JSON
+    headers: dict | None = {}
+    params: dict | None = {}
 
 
 class ApiDataLoaderModel(DataLoaderModel):

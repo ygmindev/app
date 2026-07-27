@@ -1,7 +1,5 @@
 from typing import AsyncIterable
 
-from lib_shared.core.utils.base_model.base_model import BaseModel
-
 from lib_ai.agent.utils.streamable.streamable_models import (
     StreamableModel,
     TState,
@@ -9,7 +7,6 @@ from lib_ai.agent.utils.streamable.streamable_models import (
 
 
 class Streamable(
-    BaseModel,
     StreamableModel[TState],
 ):
     async def run(

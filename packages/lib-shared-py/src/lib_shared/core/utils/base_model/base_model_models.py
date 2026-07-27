@@ -1,7 +1,7 @@
 # template version: 1.0.0
 
 
-from typing import Any, Optional, Self
+from typing import Any, Self
 
 from lib_shared.core.utils.merge.merge_models import MergeStrategy
 
@@ -18,7 +18,7 @@ class _BaseModelModel:
         self,
         value: Self,
         is_inplace: bool = False,
-        merge_strategy: Optional[MergeStrategy] = None,
+        merge_strategy: MergeStrategy | None = None,
     ) -> Self: ...
 
     @classmethod
