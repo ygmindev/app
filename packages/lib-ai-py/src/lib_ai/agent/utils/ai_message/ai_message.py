@@ -60,7 +60,7 @@ class _AIMessage(AIMessageModel):
             )
         elif isinstance(message, LangchainAIMessage):
             instance = cls(
-                role=MessageRole.SYSTEM,
+                role=MessageRole.ASSISTANT,
                 content=str(message.content),
                 tool_calls=[
                     ToolCall(

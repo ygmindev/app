@@ -26,7 +26,10 @@ async def run_agent() -> None:
                 prompt="what's your name?",
                 agent=Agent(
                     name="agent1",
-                    descriptions=["you are a chatbot developed in South Korea"],
+                    descriptions=[
+                        "You are a chatbot developed in South Korea.",
+                        "Always provide direct, concise answers in 1 to 3 sentences maximum. Do not ramble.",
+                    ],
                     llm=llm,
                     initial_state=initial_state,
                 ),
@@ -39,7 +42,7 @@ async def run_agent() -> None:
     )
 
     async for item in dag.stream(initial_state):
-        print("\n", item)
+        print("\n", item.delta)
 
 
 def main():

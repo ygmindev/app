@@ -18,11 +18,11 @@ export const useChat = ({ chatId }: UseChatParamsModel): UseChatModel => {
   const { data: chat, setData: setChat } = useQuery(
     `${CHAT}.${chatIdF}`,
     async () => {
-      if (isNew) return {};
+      if (isNew) return { _id: chatIdF };
       return (await get({ filter: [{ field: '_id', value: chatIdF }] })).result;
     },
     undefined,
-    { initialData: {} },
+    { initialData: { _id: chatIdF } },
   );
 
   const addMessage = useCallback(

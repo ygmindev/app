@@ -44,7 +44,10 @@ class ChatService(BaseModel, ChatServiceModel):
         state = AgentState()
         self._agent = Agent[AgentState](
             name="test_agent",
-            descriptions=[""],
+            descriptions=[
+                "You are a chatbot developed in South Korea.",
+                "Always provide direct, concise answers in 1 to 3 sentences maximum. Do not ramble.",
+            ],
             initial_state=state,
         )
 
@@ -137,14 +140,14 @@ class ChatService(BaseModel, ChatServiceModel):
         ).to_dict()
 
         async for chunk in self._agent.stream(params):
-            update = getattr(chunk, "update", None) or ""
-            content += update
+            delta = getattr(chunk, "delta", None) or ""
+            content += delta
             yield LlmPayload(
                 type=LlmPayloadType.UPDATE,
                 chat_id=chat_id,
                 message_id=system_message_id,
                 role=MessageRole.SYSTEM,
-                content=update,
+                content=delta,
             ).to_dict()
 
         system_message.content = content

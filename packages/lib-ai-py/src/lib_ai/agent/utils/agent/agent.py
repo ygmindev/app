@@ -54,7 +54,9 @@ class _Agent(_AgentModel[TState]):
                 ]
                 tool_map.update({tool.name: tool})
 
-        self.llm.bind_tools(list(tool_map.values()))
+        if tool_map:
+            self.llm.bind_tools(list(tool_map.values()))
+
         system_prompt = "\n".join(descriptions)
         system_message = AIMessage(
             role=MessageRole.SYSTEM,

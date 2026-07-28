@@ -26,13 +26,19 @@ class _Llm(_LlmModel):
 
     def post_init(self) -> None:
         match self.name:
-            case LLM_NAME.GLM_5 | LLM_NAME.LLAMA_3_2 | LLM_NAME.QWEN_3_5:
+            case (
+                LLM_NAME.GLM_5
+                | LLM_NAME.LLAMA_3_2
+                | LLM_NAME.QWEN_3_5
+                | LLM_NAME.GEMMA_4_E4B
+            ):
                 self._llm = ChatOpenAI(
                     api_key="lmstudio",
                     base_url="http://localhost:1234/v1",
                     model=self.name,
                     temperature=self.temperature,
                     max_tokens=self.max_tokens,
+                    extra_body={"chat_template_kwargs": {"enable_thinking": False}},
                 )
         if self._llm is not None and self.output_schema is not None:
             self._llm = cast(
