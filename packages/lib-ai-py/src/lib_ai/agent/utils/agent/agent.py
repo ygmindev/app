@@ -110,7 +110,7 @@ class _Agent(_AgentModel[TState]):
                 if last_message.role == MessageRole.SYSTEM and last_message.tool_calls:
                     for tool_call in last_message.tool_calls:
                         tool = tool_map[tool_call.name]
-                        result = await tool.ainvoke(tool_call.params)
+                        result = await tool.execute(tool_call.params)
                         updates.append(
                             AIMessage(
                                 role=MessageRole.TOOL,

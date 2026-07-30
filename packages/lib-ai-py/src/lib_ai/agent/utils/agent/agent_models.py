@@ -2,6 +2,7 @@
 
 
 from typing import (
+    Generic,
     TypeVar,
 )
 
@@ -23,6 +24,7 @@ TState = TypeVar("TState", bound=AgentState)
 
 class _AgentModel(
     StreamableModel[TState],
+    Generic[TState],
 ):
     descriptions: list[str] = Field(default_value=list)
     name: str = Field(default="Agent")
