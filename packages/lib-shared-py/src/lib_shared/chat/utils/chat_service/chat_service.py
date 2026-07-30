@@ -114,9 +114,10 @@ class ChatService(BaseModel, ChatServiceModel):
         user_message = Message(
             chat=chat,
             content=message,
-            # createdBy=user,
+            createdBy=user,
         )
         user_dict = user_message.to_dict()
+        del user_dict["createdBy"]
         user_dict["chat"] = chat
         user_dict["role"] = MessageRole.USER
         params.messages = [AIMessage(**user_dict)]

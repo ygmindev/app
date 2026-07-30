@@ -22,10 +22,6 @@ class Entity(
     BaseModel,
 ):
     created: datetime = Field(default_value=datetime.now)
-    # createdBy: User | None = Field(
-    #     relation=FieldRelation.MANY_TO_ONE,
-    #     default=None,
-    # )
     id: PydanticObjectId = Field(
         default_value=PydanticObjectId,
         alias="_id",

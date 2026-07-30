@@ -1,13 +1,14 @@
-from typing import Callable, Protocol, TypeVar
+from typing import TypeVar
 
 TType = TypeVar("TType")
 
 
-class _EntityModel(Protocol):
-    def __call__(
-        self,
-        is_graphql: bool = True,
-    ) -> Callable[[type[TType]], type[TType]]: ...
+class _EntityModel:
+    ...
+    # def __call__(
+    #     self,
+    #     is_graphql: bool = True,
+    # ) -> Callable[[type[TType]], type[TType]]: ...
 
 
-EntityModel = _EntityModel
+class EntityModel(_EntityModel): ...
