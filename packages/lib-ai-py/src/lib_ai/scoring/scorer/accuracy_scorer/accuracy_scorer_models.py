@@ -1,7 +1,16 @@
-from lib_ai.scoring.scorer.accuracy_scorer._accuracy_scorer_models import (
-    _AccuracyScorerModel,
-    _AccuracyScorerParamsModel,
-)
+# template version: 1.0.0
 
-type AccuracyScorerParamsModel = _AccuracyScorerParamsModel
-type AccuracyScorerModel = _AccuracyScorerModel
+from typing import Protocol
+
+from lib_ai.data.matrix_data import MatrixData
+
+
+class _AccuracyScorerModel(Protocol):
+    def __call__(
+        self,
+        y_pred: MatrixData,
+        y: MatrixData,
+    ) -> float: ...
+
+
+AccuracyScorerModel = _AccuracyScorerModel

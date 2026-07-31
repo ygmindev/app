@@ -1,0 +1,8 @@
+name: Local Config
+version: 0.0.1
+models:
+  - name: NVIDIA Nemotron 3 Ultra
+    provider: openrouter
+    model: nvidia/nemotron-3-ultra-550b-a55b
+    apiBase: https://openrouter.ai/api/v1
+    apiKey: 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
