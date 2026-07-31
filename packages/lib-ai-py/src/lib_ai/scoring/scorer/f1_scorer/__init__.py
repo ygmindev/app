@@ -1,13 +1,5 @@
-from typing import Unpack
+# template version: 1.0.0
 
-from lib_ai.scoring.scorer.f1_scorer._f1_scorer import _f1_scorer
-from lib_ai.scoring.scorer.f1_scorer.f1_scorer_models import (
-    F1ScorerModel,
-    F1ScorerParamsModel,
-)
-from lib_ai.scoring.utils.scorer import scorer
+from .f1_scorer import f1_scorer
 
-
-@scorer(name="f1")
-def f1_scorer(*params: Unpack[F1ScorerParamsModel]) -> F1ScorerModel:
-    return _f1_scorer(*params)
+__all__ = ["f1_scorer"]

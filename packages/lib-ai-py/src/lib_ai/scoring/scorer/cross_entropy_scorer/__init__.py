@@ -1,15 +1,5 @@
-from typing import Unpack
+# template version: 1.0.0
 
-from lib_ai.scoring.scorer.cross_entropy_scorer._cross_entropy_scorer import (
-    _cross_entropy_scorer,
-)
-from lib_ai.scoring.scorer.cross_entropy_scorer.cross_entropy_scorer_models import (
-    CrossEntropyScorerModel,
-    CrossEntropyScorerParamsModel,
-)
-from lib_ai.scoring.utils.scorer import scorer
+from .cross_entropy_scorer import cross_entropy_scorer
 
-
-@scorer(is_loss=True, name="cross entropy")
-def cross_entropy_scorer(*params: Unpack[CrossEntropyScorerParamsModel]) -> CrossEntropyScorerModel:
-    return _cross_entropy_scorer(*params)
+__all__ = ["cross_entropy_scorer"]

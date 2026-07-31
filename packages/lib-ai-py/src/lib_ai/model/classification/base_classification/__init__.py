@@ -14,9 +14,9 @@ from lib_ai.model.classification.base_classification.base_classification_models 
     BaseClassificationPredParamsModel,
 )
 from lib_ai.scoring.scorer.accuracy_scorer import accuracy_scorer
-from lib_ai.scoring.scorer.cross_entropy_scorer import cross_entropy_scorer
-from lib_ai.scoring.scorer.f1_scorer import f1_scorer
-from lib_ai.scoring.scorer.recall_scorer import recall_scorer
+from lib_ai.scoring.scorer.cross_entropy_scorer_bu import cross_entropy_scorer
+from lib_ai.scoring.scorer.f1_scorer_bu import f1_scorer
+from lib_ai.scoring.scorer.recall_scorer_bu import recall_scorer
 
 
 class BaseClassification[

@@ -9,7 +9,7 @@ from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_dataset.xy_dataset import XYDataset
 from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
-from lib_ai.scoring.utils.scorer.scorer_models import ScorerCallableModel
+from lib_ai.scoring.utils.scorable.scorable_models import ScorerCallableModel
 
 
 class CvResultModel(BaseModel):

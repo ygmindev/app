@@ -1,8 +1,12 @@
-from lib_ai.scoring.scorer.mse_scorer._mse_scorer_models import (
-    _MseScorerModel,
-    _MseScorerParamsModel,
+# template version: 1.0.0
+
+
+from lib_ai.scoring.utils.scorable.scorable_models import (
+    DecoratedScorerModel,
+    ScorerModel,
 )
 
-type MseScorerParamsModel = _MseScorerParamsModel
+_MseScorerModel = ScorerModel
 
-type MseScorerModel = _MseScorerModel
+
+MseScorerModel = DecoratedScorerModel[_MseScorerModel]

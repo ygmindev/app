@@ -1,20 +1,20 @@
 # template version: 1.0.0
 
-from torcheval.metrics.classification.accuracy import MulticlassAccuracy
+from torcheval.metrics.classification.recall import MulticlassRecall
 
 from lib_ai.data.matrix_data.matrix_data import MatrixData
 from lib_ai.scoring.utils.scorable.scorable import scorable
 
-from .accuracy_scorer_models import AccuracyScorerModel
+from .recall_scorer_models import RecallScorerModel
 
 
-@scorable(name="accuracy")
-def _accuracy_scorer(
+@scorable(name="recall")
+def _recall_scorer(
     y_pred: MatrixData,
     y: MatrixData,
 ) -> float:
     return (
-        MulticlassAccuracy()
+        MulticlassRecall()
         .update(
             y_pred.to_tensor(),
             y.to_tensor(),
@@ -24,4 +24,4 @@ def _accuracy_scorer(
     )
 
 
-accuracy_scorer: AccuracyScorerModel = _accuracy_scorer
+recall_scorer: RecallScorerModel = _recall_scorer

@@ -1,20 +1,20 @@
 # template version: 1.0.0
 
-from torcheval.metrics.classification.accuracy import MulticlassAccuracy
+from torcheval.metrics.classification.f1_score import MulticlassF1Score
 
 from lib_ai.data.matrix_data.matrix_data import MatrixData
 from lib_ai.scoring.utils.scorable.scorable import scorable
 
-from .accuracy_scorer_models import AccuracyScorerModel
+from .f1_scorer_models import F1ScorerModel
 
 
-@scorable(name="accuracy")
-def _accuracy_scorer(
+@scorable(name="f1")
+def _f1_scorer(
     y_pred: MatrixData,
     y: MatrixData,
 ) -> float:
     return (
-        MulticlassAccuracy()
+        MulticlassF1Score()
         .update(
             y_pred.to_tensor(),
             y.to_tensor(),
@@ -24,4 +24,4 @@ def _accuracy_scorer(
     )
 
 
-accuracy_scorer: AccuracyScorerModel = _accuracy_scorer
+f1_scorer: F1ScorerModel = _f1_scorer

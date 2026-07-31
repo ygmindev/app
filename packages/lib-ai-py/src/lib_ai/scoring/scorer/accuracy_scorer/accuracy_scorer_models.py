@@ -1,16 +1,12 @@
 # template version: 1.0.0
 
-from typing import Protocol
 
-from lib_ai.data.matrix_data import MatrixData
+from lib_ai.scoring.utils.scorable.scorable_models import (
+    DecoratedScorerModel,
+    ScorerModel,
+)
 
-
-class _AccuracyScorerModel(Protocol):
-    def __call__(
-        self,
-        y_pred: MatrixData,
-        y: MatrixData,
-    ) -> float: ...
+_AccuracyScorerModel = ScorerModel
 
 
-AccuracyScorerModel = _AccuracyScorerModel
+AccuracyScorerModel = DecoratedScorerModel[_AccuracyScorerModel]

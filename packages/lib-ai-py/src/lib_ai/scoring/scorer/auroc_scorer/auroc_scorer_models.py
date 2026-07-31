@@ -1,7 +1,12 @@
-from lib_ai.scoring.scorer.auroc_scorer._auroc_scorer_models import (
-    _AurocScorerModel,
-    _AurocScorerParamsModel,
+# template version: 1.0.0
+
+
+from lib_ai.scoring.utils.scorable.scorable_models import (
+    DecoratedScorerModel,
+    ScorerModel,
 )
 
-type AurocScorerParamsModel = _AurocScorerParamsModel
-type AurocScorerModel = _AurocScorerModel
+_AurocScorerModel = ScorerModel
+
+
+AurocScorerModel = DecoratedScorerModel[_AurocScorerModel]

@@ -1,7 +1,12 @@
-from lib_ai.scoring.scorer.cross_entropy_scorer._cross_entropy_scorer_models import (
-    _CrossEntropyScorerModel,
-    _CrossEntropyScorerParamsModel,
+# template version: 1.0.0
+
+
+from lib_ai.scoring.utils.scorable.scorable_models import (
+    DecoratedScorerModel,
+    ScorerModel,
 )
 
-type CrossEntropyScorerParamsModel = _CrossEntropyScorerParamsModel
-type CrossEntropyScorerModel = _CrossEntropyScorerModel
+_CrossEntropyScorerModel = ScorerModel
+
+
+CrossEntropyScorerModel = DecoratedScorerModel[_CrossEntropyScorerModel]

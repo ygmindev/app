@@ -1,13 +1,5 @@
-from typing import Unpack
+# template version: 1.0.0
 
-from lib_ai.scoring.scorer.auroc_scorer._auroc_scorer import _auroc_scorer
-from lib_ai.scoring.scorer.auroc_scorer.auroc_scorer_models import (
-    AurocScorerModel,
-    AurocScorerParamsModel,
-)
-from lib_ai.scoring.utils.scorer import scorer
+from .auroc_scorer import auroc_scorer
 
-
-@scorer(name="AUROC")
-def auroc_scorer(*params: Unpack[AurocScorerParamsModel]) -> AurocScorerModel:
-    return _auroc_scorer(*params)
+__all__ = ["auroc_scorer"]

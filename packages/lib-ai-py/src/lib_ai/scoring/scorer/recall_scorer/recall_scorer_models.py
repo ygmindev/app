@@ -1,7 +1,12 @@
-from lib_ai.scoring.scorer.recall_scorer._recall_scorer_models import (
-    _RecallScorerModel,
-    _RecallScorerParamsModel,
+# template version: 1.0.0
+
+
+from lib_ai.scoring.utils.scorable.scorable_models import (
+    DecoratedScorerModel,
+    ScorerModel,
 )
 
-type RecallScorerParamsModel = _RecallScorerParamsModel
-type RecallScorerModel = _RecallScorerModel
+_RecallScorerModel = ScorerModel
+
+
+RecallScorerModel = DecoratedScorerModel[_RecallScorerModel]
