@@ -1,5 +1,5 @@
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.model.base_model.base_model_models import (
+from lib_ai.model.trainable.trainable_models import (
     BaseModelEvalParamsModel,
     BaseModelPredParamsModel,
 )

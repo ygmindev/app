@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.dataset.xy_dataset.xy_dataset import XYDataset
 from lib_ai.model.regression.base_regression import BaseRegression
 from lib_ai.model.regression.xgboost_regression._xgboost_regression_models import (
     _XgboostRegressionEvalParamsModel,

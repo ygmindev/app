@@ -1,6 +1,5 @@
-from lib_ai.core.utils.get_device._get_device import _get_device
-from lib_ai.core.utils.get_device.get_device_models import GetDeviceModel
+# template version: 1.0.0
 
+from .get_device import get_device
 
-def get_device() -> GetDeviceModel:
-    return _get_device()
+__all__ = ["get_device"]

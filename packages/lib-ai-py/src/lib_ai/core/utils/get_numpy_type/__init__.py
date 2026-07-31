@@ -1,21 +1,5 @@
-import numpy as np
-from lib_shared.core.constants import DATA_TYPE
+# template version: 1.0.0
 
-from lib_ai.core.utils.get_numpy_type.get_numpy_type_models import (
-    GetNumpyTypeModel,
-    GetNumpyTypeParamsModel,
-)
+from .get_numpy_type import get_numpy_type
 
-
-def get_numpy_type(params: GetNumpyTypeParamsModel) -> GetNumpyTypeModel:
-    match params:
-        case DATA_TYPE.FLOAT:
-            return np.float64
-        case DATA_TYPE.INT:
-            return np.int64
-        case DATA_TYPE.LONG:
-            return np.long
-        case _:
-            return np.float64
-            return np.float64
-            return np.float64
+__all__ = ["get_numpy_type"]

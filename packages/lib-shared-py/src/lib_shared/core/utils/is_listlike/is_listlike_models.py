@@ -1,4 +1,8 @@
-from typing import Any
+from typing import Any, Protocol
 
-type IsListlikeParamsModel = Any
-type IsListlikeModel = bool
+
+class IsListlikeModel(Protocol):
+    def __call__(
+        self,
+        params: Any,
+    ) -> bool: ...

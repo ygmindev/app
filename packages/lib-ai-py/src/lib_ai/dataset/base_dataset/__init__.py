@@ -1,5 +1,5 @@
-from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetModel
+# template version: 1.0.0
 
+from .base_dataset import BaseDataset
 
-class BaseDataset(BaseDatasetModel):
-    pass
+__all__ = ["BaseDataset"]

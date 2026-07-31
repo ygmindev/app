@@ -1,6 +1,6 @@
 from lib_ai.data.answer_data import AnswerData
 from lib_ai.data.question_data import QuestionData
-from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.dataset.xy_dataset.xy_dataset import XYDataset
 from lib_ai.model.language.question_answer import QuestionAnswer
 from lib_ai.model.language.question_answer.question_answer_constants import (
     QuestionAnswerKey,

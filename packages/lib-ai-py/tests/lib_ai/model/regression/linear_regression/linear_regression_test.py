@@ -1,6 +1,6 @@
 from lib_ai.data.tabular_data import TabularData
 from lib_ai.dataset.utils.download_dataset import download_dataset
-from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.dataset.xy_dataset.xy_dataset import XYDataset
 from lib_ai.model.regression.linear_regression import LinearRegression
 from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
 from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (

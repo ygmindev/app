@@ -1,34 +1,19 @@
+from lib_shared.core.utils.base_model.base_model import BaseModel
+
 from lib_ai.data.base_data.base_data_models import BaseDataModel
-from lib_ai.model.base_model.base_model_models import (
-    BaseModelEvalParamsModel,
-    BaseModelFitParamsModel,
-    BaseModelModel,
-    BaseModelParamsModel,
-    BaseModelPredParamsModel,
-)
-
-
-class BaseRegressionParamsModel(BaseModelParamsModel): ...
-
-
-class BaseRegressionEvalParamsModel(BaseModelEvalParamsModel): ...
-
-
-class BaseRegressionFitParamsModel(BaseModelFitParamsModel): ...
-
-
-class BaseRegressionPredParamsModel(BaseModelEvalParamsModel): ...
+from lib_ai.model.trainable.trainable_models import TrainableModel
+from lib_ai.scoring.scorer.mse_scorer import mse_scorer
 
 
 class BaseRegressionModel[
-    TParams: BaseRegressionParamsModel,
-    TFit: BaseModelFitParamsModel,
-    TEval: BaseModelEvalParamsModel,
-    TPred: BaseModelPredParamsModel,
+    TParams: BaseModel,
+    TFit,
+    TEval,
+    TPred,
     TX: BaseDataModel,
     TY: BaseDataModel | None,
 ](
-    BaseModelModel[
+    TrainableModel[
         TParams,
         TFit,
         TEval,
@@ -36,4 +21,5 @@ class BaseRegressionModel[
         TX,
         TY,
     ]
-): ...
+):
+    scorer = [mse_scorer]

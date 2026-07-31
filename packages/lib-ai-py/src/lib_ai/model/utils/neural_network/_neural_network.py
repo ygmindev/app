@@ -5,10 +5,10 @@ from accelerate import Accelerator
 from lib_ai.core.utils.batch import batch
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.dataset.xy_dataset import XYDataset
-from lib_ai.model.base_model import BaseModel
-from lib_ai.model.base_model.constants import Optimizer
-from lib_ai.model.base_model.base_model_models import (
+from lib_ai.dataset.xy_dataset.xy_dataset import XYDataset
+from lib_ai.model.trainable import BaseModel
+from lib_ai.model.trainable.constants import Optimizer
+from lib_ai.model.trainable.trainable_models import (
     BaseModelEvalParamsModel,
     BaseModelPredParamsModel,
 )

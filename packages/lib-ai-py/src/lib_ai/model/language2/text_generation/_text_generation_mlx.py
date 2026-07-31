@@ -5,7 +5,7 @@ from lib_ai.data.message_data import MessageData
 from lib_ai.data.message_data.message_data_models import MessageModel
 from lib_ai.data.text_output_data import TextOutputData
 from lib_ai.data.text_output_data.text_output_data_models import TextOutputModel
-from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.dataset.xy_dataset.xy_dataset import XYDataset
 from lib_ai.model.language.text_generation._text_generation_models import (
     _TextGenerationFitParamsModel,
     _TextGenerationModel,

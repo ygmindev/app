@@ -1,6 +1,6 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class ScoringMode(Enum):
+class ScoringMode(StrEnum):
     MAX = "MAX"
     MIN = "MIN"

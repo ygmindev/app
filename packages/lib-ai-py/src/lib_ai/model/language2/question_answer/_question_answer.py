@@ -6,7 +6,7 @@ from lib_ai.data.answer_data import AnswerData
 from lib_ai.data.answer_data.answer_data_models import AnswerInstanceModel, AnswerModel
 from lib_ai.data.question_data import QuestionData
 from lib_ai.data.question_data.question_data_models import QuestionModel
-from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.dataset.xy_dataset.xy_dataset import XYDataset
 from lib_ai.model.language.question_answer._question_answer_models import (
     _QuestionAnswerFitParamsModel,
     _QuestionAnswerModel,

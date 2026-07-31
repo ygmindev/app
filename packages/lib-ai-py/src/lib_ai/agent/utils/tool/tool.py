@@ -3,12 +3,16 @@
 import asyncio
 from typing import Type
 
+from langchain_core.tools import BaseTool
 from lib_shared.core.utils.base_model import BaseModel
 
 from .tool_models import ToolModel, TParams, TResult, _ToolModel
 
 
-class _Tool(_ToolModel[TParams, TResult]):
+class _Tool(
+    BaseTool,
+    _ToolModel[TParams, TResult],
+):
     def __init__(
         self,
         input_type: Type[BaseModel],
@@ -41,4 +45,7 @@ class _Tool(_ToolModel[TParams, TResult]):
         return await self.execute(params=self.input_type(**kwargs))
 
 
-class Tool(_Tool[TParams, TResult], ToolModel[TParams, TResult]): ...
+class Tool(
+    _Tool[TParams, TResult],
+    ToolModel[TParams, TResult],
+): ...

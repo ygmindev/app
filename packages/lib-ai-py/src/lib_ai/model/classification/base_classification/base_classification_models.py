@@ -4,7 +4,7 @@ from abc import abstractmethod
 
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.model.base_model.base_model_models import (
+from lib_ai.model.trainable.trainable_models import (
     BaseModelEvalParamsModel,
     BaseModelFitParamsModel,
     BaseModelModel,

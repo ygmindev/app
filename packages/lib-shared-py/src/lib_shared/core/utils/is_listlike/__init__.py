@@ -1,8 +1,5 @@
-from lib_shared.core.utils.is_listlike.is_listlike_models import (
-    IsListlikeModel,
-    IsListlikeParamsModel,
-)
+# template version: 1.0.0
 
+from .is_listlike import is_listlike
 
-def is_listlike(params: IsListlikeParamsModel) -> IsListlikeModel:
-    return isinstance(params, (list, tuple))
+__all__ = ["is_listlike"]

@@ -1,3 +1,12 @@
-from lib_ai.core.utils.get_device._get_device_models import _GetDeviceModel
+from typing import Protocol
 
-type GetDeviceModel = _GetDeviceModel
+import torch
+
+
+class _GetDeviceModel(Protocol):
+    def __call__(
+        self,
+    ) -> torch.device: ...
+
+
+GetDeviceModel = _GetDeviceModel

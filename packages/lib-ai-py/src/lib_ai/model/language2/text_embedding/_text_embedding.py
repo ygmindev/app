@@ -1,6 +1,6 @@
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.data.text_data import TextData
-from lib_ai.dataset.xy_dataset import XYDataset
+from lib_ai.dataset.xy_dataset.xy_dataset import XYDataset
 from lib_ai.model.language.text_embedding._text_embedding_models import (
     _TextEmbeddingFitParamsModel,
     _TextEmbeddingModel,

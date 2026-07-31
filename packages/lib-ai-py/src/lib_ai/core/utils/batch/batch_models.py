@@ -1,12 +1,17 @@
-from typing import Generator, NotRequired, TypedDict
+from typing import Generator, Protocol, TypeVar
 
 from lib_shared.core.utils.indexable.indexable_models import IndexableModel
 
-
-class BatchParamsModel[T](TypedDict):
-    data: IndexableModel[T]
-    batch_size: int
-    is_shuffle: NotRequired[bool]
+TType = TypeVar("TType")
 
 
-type BatchModel[T] = Generator[T, T, T]
+class _BatchModel(Protocol[TType]):
+    def __call__(
+        self,
+        data: IndexableModel[TType],
+        batch_size: int,
+        is_shuffle: bool = False,
+    ) -> Generator[TType, TType, TType]: ...
+
+
+BatchModel = _BatchModel

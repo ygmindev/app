@@ -1,12 +1,5 @@
-from lib_ai.data.base_data import BaseData
-from lib_ai.data.tabular_data._tabular_data import _TabularData
-from lib_ai.data.tabular_data._tabular_data_models import _TabularDataTypeModel
-from lib_ai.data.tabular_data.tabular_data_models import TabularDataModel
+# template version: 1.0.0
 
+from .tabular_data import TabularData
 
-class TabularData(
-    _TabularData,
-    TabularDataModel,
-    BaseData[_TabularDataTypeModel],
-):
-    pass
+__all__ = ["TabularData"]

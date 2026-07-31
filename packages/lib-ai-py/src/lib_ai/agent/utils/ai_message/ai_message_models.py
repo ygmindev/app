@@ -12,9 +12,9 @@ from lib_shared.core.utils.field.field import Field
 
 
 class ToolCall(BaseModel):
-    id: str
-    name: str
-    params: dict
+    id: str = Field()
+    name: str = Field()
+    params: dict = Field()
 
 
 class AIMessageModel(MessageModel):

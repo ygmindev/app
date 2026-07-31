@@ -12,12 +12,12 @@ class StreamableModel(
     BaseModel,
     Generic[TState],
 ):
-    async def stream(
-        self,
-        params: TState,
-    ) -> AsyncIterable[TState]: ...
-
     async def run(
         self,
         params: TState,
     ) -> TState: ...
+
+    async def stream(
+        self,
+        params: TState,
+    ) -> AsyncIterable[TState]: ...

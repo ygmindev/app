@@ -28,7 +28,6 @@ class _Agent(_AgentModel[TState]):
         tool_map: Dict[str, Tool] = {}
         nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []
-
         descriptions: list[str] = [x.strip() for x in self.descriptions]
 
         if self.skills:
@@ -185,4 +184,7 @@ class _Agent(_AgentModel[TState]):
                     )
 
 
-class Agent(_Agent[TState], AgentModel): ...
+class Agent(
+    _Agent[TState],
+    AgentModel,
+): ...

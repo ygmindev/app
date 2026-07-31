@@ -1,23 +1,5 @@
-from typing import Unpack, cast
+# template version: 1.0.0
 
-from lib_ai.core.utils.split_indices._split_indices import _split_indices
-from lib_ai.core.utils.split_indices.split_indices_models import (
-    SplitIndicesModel,
-    SplitIndicesParamsModel,
-)
-from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.merge import merge
+from .split_indices import split_indices
 
-
-def split_indices(**params: Unpack[SplitIndicesParamsModel]) -> SplitIndicesModel:
-    stratify = get_item(params, "stratify", None)
-    shuffle = get_item(params, "shuffle", False)
-    return _split_indices(
-        **merge(
-            params,
-            {
-                "size": 0.8,
-                "shuffle": True if stratify else shuffle,
-            },
-        )
-    )
+__all__ = ["split_indices"]

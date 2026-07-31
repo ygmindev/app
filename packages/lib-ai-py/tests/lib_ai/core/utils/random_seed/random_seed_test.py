@@ -1,4 +1,4 @@
-from lib_ai.core.utils.random_seed import random_seed
+from lib_ai.core.utils.set_random_seed import random_seed
 
 
 def test_works() -> None:

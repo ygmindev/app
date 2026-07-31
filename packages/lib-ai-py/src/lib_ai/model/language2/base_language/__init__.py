@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from lib_ai.data.base_data.base_data_models import BaseDataModel
-from lib_ai.model.base_model import BaseModel
+from lib_ai.model.trainable import BaseModel
 from lib_ai.model.language.base_language.base_language_models import (
     BaseLanguageEvalParamsModel,
     BaseLanguageFitParamsModel,

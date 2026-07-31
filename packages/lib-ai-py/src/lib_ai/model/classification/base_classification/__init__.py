@@ -5,7 +5,7 @@ from typing import cast
 from lib_shared.core.utils.merge import merge
 
 from lib_ai.data.base_data.base_data_models import BaseDataModel
-from lib_ai.model.base_model import BaseModel
+from lib_ai.model.trainable import BaseModel
 from lib_ai.model.classification.base_classification.base_classification_models import (
     BaseClassificationEvalParamsModel,
     BaseClassificationFitParamsModel,
