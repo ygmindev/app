@@ -9,12 +9,16 @@ from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.dataset.xy_dataset.xy_dataset import XYDataset
 from lib_ai.optimize.utils.optimize.optimize_models import OptimizeParamsModel
-from lib_ai.scoring.utils.scorable.scorable_models import ScorerCallableModel
+from lib_ai.scoring.utils.scorable.scorable_models import DecoratedScorerModel
 
 
 class CvResultModel(BaseModel):
     average: float
     scores: list[float]
+
+
+class EvaluationResultModel(BaseModel):
+    scores: Mapping[str, float]
 
 
 class TrainableModel[
@@ -25,10 +29,10 @@ class TrainableModel[
     TX: BaseDataModel,
     TY: BaseDataModel | None,
 ](BaseModel):
-    scorer: ScorerCallableModel | list[ScorerCallableModel]
+    scorer: DecoratedScorerModel | list[DecoratedScorerModel]
     params: TParams | None = None
-    scorers: Sequence[ScorerCallableModel] | None = []
-    objective: ScorerCallableModel | None = None
+    scorers: Sequence[DecoratedScorerModel] | None = []
+    objective: DecoratedScorerModel | None = None
 
     def cv(
         self,
@@ -59,7 +63,7 @@ class TrainableModel[
         self,
         dataset: XYDataset[TX, TY],
         params: TEval | None = None,
-    ) -> Mapping[str, float]: ...
+    ) -> EvaluationResultModel: ...
 
     def fit(
         self,

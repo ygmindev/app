@@ -1,6 +1,6 @@
 from lib_ai.data.tabular_data.tabular_data_fixtures import TABULAR_DATA_FIXTURE_1
 from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
-from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
+from lib_ai.transform.utils.transformer.one_hot_encoder_transformer_bu import (
     OneHotEncoderTransformer,
 )
 

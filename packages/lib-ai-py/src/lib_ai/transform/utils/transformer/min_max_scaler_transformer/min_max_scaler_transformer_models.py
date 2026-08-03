@@ -1,5 +1,15 @@
-from lib_ai.transform.utils.transformer.min_max_scaler_transformer._min_max_scaler_transformer_models import _MinMaxScalerTransformerModel
+from lib_ai.data.tabular_data import TabularData
+from lib_ai.transform.utils.transformer.transformable.transformable_models import (
+    TransformableModel,
+)
 
 
-class MinMaxScalerTransformerModel(_MinMaxScalerTransformerModel):
-    pass
+class _MinMaxScalerTransformerModel(
+    TransformableModel[
+        TabularData,
+        None,
+    ]
+): ...
+
+
+class MinMaxScalerTransformerModel(_MinMaxScalerTransformerModel): ...

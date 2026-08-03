@@ -1,20 +1,16 @@
-from typing import Any, Sequence
-
 from lib_ai.data.tabular_data import TabularData
 from lib_ai.transform.utils.transformer.transformable.transformable_models import (
     TransformableModel,
 )
 
-type TableTransformerModel = tuple[
-    Sequence[str],
-    TransformableModel[TabularData, Any],
-]
 
-
-class TablePipelineModel(
+class _OneHotTransformerModel(
     TransformableModel[
         TabularData,
         None,
     ]
 ):
-    transformers: Sequence[TableTransformerModel]
+    is_drop_first: bool = False
+
+
+class OneHotTransformerModel(_OneHotTransformerModel): ...

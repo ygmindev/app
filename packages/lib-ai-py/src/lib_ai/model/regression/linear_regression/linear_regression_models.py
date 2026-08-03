@@ -1,11 +1,11 @@
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.model.trainable.trainable_models import (
-    BaseModelEvalParamsModel,
-    BaseModelPredParamsModel,
-)
 from lib_ai.model.regression.base_regression.base_regression_models import (
     BaseRegressionModel,
     BaseRegressionParamsModel,
+)
+from lib_ai.model.trainable.trainable_models import (
+    BaseModelEvalParamsModel,
+    BaseModelPredParamsModel,
 )
 from lib_ai.model.utils.neural_network._neural_network_models import (
     _NeuralNetworkFitParamsModel,

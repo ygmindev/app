@@ -1,5 +1,5 @@
 from lib_ai.data.tabular_data import TabularData
-from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
+from lib_ai.transform.utils.transformer.one_hot_encoder_transformer_bu import (
     OneHotEncoderTransformer,
 )
 

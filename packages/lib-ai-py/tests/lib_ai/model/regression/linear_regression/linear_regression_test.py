@@ -3,7 +3,7 @@ from lib_ai.dataset.utils.download_dataset import download_dataset
 from lib_ai.dataset.xy_dataset.xy_dataset import XYDataset
 from lib_ai.model.regression.linear_regression import LinearRegression
 from lib_ai.transform.utils.pipeline.table_pipeline import TablePipeline
-from lib_ai.transform.utils.transformer.one_hot_encoder_transformer import (
+from lib_ai.transform.utils.transformer.one_hot_encoder_transformer_bu import (
     OneHotEncoderTransformer,
 )
 from lib_ai.transform.utils.transformer.standard_scaler_transformer import (

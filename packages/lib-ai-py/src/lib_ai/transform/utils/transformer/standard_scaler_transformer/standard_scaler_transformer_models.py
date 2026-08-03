@@ -1,7 +1,15 @@
-from lib_ai.transform.utils.transformer.standard_scaler_transformer._standard_scaler_transformer_models import (
-    _StandardScalerTransformerModel,
+from lib_ai.data.tabular_data import TabularData
+from lib_ai.transform.utils.transformer.transformable.transformable_models import (
+    TransformableModel,
 )
 
 
-class StandardScalerTransformerModel(_StandardScalerTransformerModel):
-    pass
+class _StandardScalerTransformerModel(
+    TransformableModel[
+        TabularData,
+        None,
+    ]
+): ...
+
+
+class StandardScalerTransformerModel(_StandardScalerTransformerModel): ...

@@ -1,16 +1,16 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
+
+from lib_shared.core.utils.base_model.base_model import BaseModel
 
 from lib_ai.scoring.constants import ScoringMode
 
 
-class EarlyStoppingModel(ABC):
-    @abstractmethod
-    def __init__(
-        self,
-        scoring_mode: ScoringMode,
-        patience: int = 10,
-        tolerance: float = 0.0,
-    ) -> None: ...
+class EarlyStoppingModel(BaseModel):
+    best: float | None = None
+    count: int = 0
+    patience: int = 100
+    tolerance: float = 1e-1
+    scoring_mode: ScoringMode = ScoringMode.MIN
 
     @abstractmethod
     def is_improved(

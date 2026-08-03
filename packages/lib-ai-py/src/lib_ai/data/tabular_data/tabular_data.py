@@ -9,6 +9,7 @@ from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.core.utils.get_numpy_type import get_numpy_type
 from lib_ai.core.utils.get_tensor_type import get_tensor_type
+from lib_ai.data.base_data.base_data import BaseData
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.data.tabular_data.constants import TabularDataType
 from lib_ai.data.tabular_data.tabular_data_models import (
@@ -184,4 +185,8 @@ class _TabularData(_TabularDataModel):
                 raise InvalidTypeException()
 
 
-class TabularData(_TabularData, TabularDataModel): ...
+class TabularData(
+    _TabularData,
+    BaseData,
+    TabularDataModel,
+): ...

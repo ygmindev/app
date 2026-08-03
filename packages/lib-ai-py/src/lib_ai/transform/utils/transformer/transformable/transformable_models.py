@@ -1,29 +1,26 @@
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
+from lib_shared.core.utils.base_model.base_model import BaseModel
 
-from lib_ai.data.base_data import BaseData
+from lib_ai.data.base_data.base_data import BaseData
 
 
-class BaseTransformerModel[
+class TransformableModel[
     TData: BaseData,
-    TFit,
-](ABC):
-    @abstractmethod
+    TFit = None,
+](BaseModel):
     def fit(
         self,
-        _data: TData,
-        _params: TFit | None = None,
+        data: TData,
+        params: TFit | None = None,
     ) -> None: ...
 
-    @abstractmethod
     def fit_transform(
         self,
         data: TData,
         params: TFit | None = None,
     ) -> TData: ...
 
-    @abstractmethod
     def transform(
         self,
         data: TData,

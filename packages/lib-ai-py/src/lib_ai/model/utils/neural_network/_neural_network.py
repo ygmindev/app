@@ -2,6 +2,12 @@ from __future__ import annotations
 
 import torch
 from accelerate import Accelerator
+from lib_shared.core.utils.get_item import get_item
+from lib_shared.core.utils.logger2 import logger
+from torch.optim.adam import Adam
+from torch.optim.lr_scheduler import ReduceLROnPlateau
+from torch.optim.sgd import SGD
+
 from lib_ai.core.utils.batch import batch
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.data.matrix_data import MatrixData
@@ -19,11 +25,6 @@ from lib_ai.model.utils.neural_network._neural_network_models import (
     _NeuralNetworkParamsModel,
 )
 from lib_ai.scoring.constants import ScoringMode
-from lib_shared.core.utils.get_item import get_item
-from lib_shared.core.utils.logger2 import logger
-from torch.optim.adam import Adam
-from torch.optim.lr_scheduler import ReduceLROnPlateau
-from torch.optim.sgd import SGD
 
 accelerator = Accelerator()
 
@@ -33,7 +34,9 @@ class _Module(torch.nn.Module):
         super().__init__()
         layers = get_item(params, "layers")
         device = get_device()
-        self._layers = torch.nn.Sequential(*list(map(lambda x: x.layer, layers))).to(device)
+        self._layers = torch.nn.Sequential(*list(map(lambda x: x.layer, layers))).to(
+            device
+        )
 
     def forward(self, x) -> torch.Tensor:
         return self._layers(x)
