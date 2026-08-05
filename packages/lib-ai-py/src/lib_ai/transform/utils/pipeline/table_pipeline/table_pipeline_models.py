@@ -1,19 +1,19 @@
 from typing import Any, Sequence
 
-from lib_ai.data.tabular_data import TabularData
+from lib_ai.data.table_data import TableData
 from lib_ai.transform.utils.transformer.transformable.transformable_models import (
     TransformableModel,
 )
 
 type TableTransformerModel = tuple[
     Sequence[str],
-    TransformableModel[TabularData, Any],
+    TransformableModel[TableData, Any],
 ]
 
 
 class TablePipelineModel(
     TransformableModel[
-        TabularData,
+        TableData,
         None,
     ]
 ):

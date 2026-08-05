@@ -1,4 +1,4 @@
-from lib_ai.data.tabular_data import TabularData
+from lib_ai.data.table_data import TableData
 from lib_ai.transform.utils.transformer.transformable.transformable_models import (
     TransformableModel,
 )
@@ -6,7 +6,7 @@ from lib_ai.transform.utils.transformer.transformable.transformable_models impor
 
 class _StandardScalerTransformerModel(
     TransformableModel[
-        TabularData,
+        TableData,
         None,
     ]
 ): ...

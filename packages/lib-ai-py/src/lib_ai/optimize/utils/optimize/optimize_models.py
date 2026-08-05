@@ -4,10 +4,8 @@ from typing import (
     Any,
     Callable,
     Mapping,
-    NotRequired,
     Protocol,
     Sequence,
-    TypedDict,
 )
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
@@ -16,25 +14,25 @@ from lib_ai.optimize.utils.optimize.constants import OptimizeSpaceDistribution
 from lib_ai.scoring.constants import ScoringMode
 
 
-class OptimizeSpaceMinMaxParamsModel(TypedDict):
+class OptimizeSpaceMinMaxParamsModel(BaseModel):
     lower: float
     upper: float
 
 
 class OptimizeSpaceQMinMaxParamsModel(OptimizeSpaceMinMaxParamsModel):
-    q: NotRequired[int]
+    q: int | None = None
 
 
-class OptimizeSpaceNormalParamsModel(TypedDict):
+class OptimizeSpaceNormalParamsModel(BaseModel):
     lower: float
     upper: float
 
 
 class OptimizeSpaceQNormalParamsModel(OptimizeSpaceNormalParamsModel):
-    q: NotRequired[int]
+    q: int | None = None
 
 
-class OptimizeSpaceOptionsParamsModel(TypedDict):
+class OptimizeSpaceOptionsParamsModel(BaseModel):
     options: Sequence[Any]
 
 

@@ -1,6 +1,6 @@
 import polars as pl
 
-from lib_ai.data.tabular_data.tabular_data import TabularData
+from lib_ai.data.table_data.table_data import TableData
 from lib_ai.transform.utils.transformer.standard_scaler_transformer.standard_scaler_transformer_models import (
     StandardScalerTransformerModel,
     _StandardScalerTransformerModel,
@@ -10,8 +10,8 @@ from lib_ai.transform.utils.transformer.standard_scaler_transformer.standard_sca
 class _StandardScalerTransformer(_StandardScalerTransformerModel):
     def transform(
         self,
-        data: TabularData,
-    ) -> TabularData:
+        data: TableData,
+    ) -> TableData:
         data.data = data.to_dataframe().select(
             (pl.all() - pl.all().mean()) / pl.all().std()
         )

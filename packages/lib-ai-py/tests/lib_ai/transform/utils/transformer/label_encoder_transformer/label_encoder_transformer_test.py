@@ -1,4 +1,4 @@
-from lib_ai.data.tabular_data import TabularData
+from lib_ai.data.table_data import TabularData
 from lib_ai.transform.utils.transformer.label_encoder_transformer_bu import (
     LabelEncoderTransformer,
 )

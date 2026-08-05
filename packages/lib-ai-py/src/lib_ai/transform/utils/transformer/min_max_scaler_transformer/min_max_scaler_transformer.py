@@ -1,6 +1,6 @@
 import polars as pl
 
-from lib_ai.data.tabular_data.tabular_data import TabularData
+from lib_ai.data.table_data.table_data import TableData
 from lib_ai.transform.utils.transformer.min_max_scaler_transformer.min_max_scaler_transformer_models import (
     MinMaxScalerTransformerModel,
     _MinMaxScalerTransformerModel,
@@ -10,8 +10,8 @@ from lib_ai.transform.utils.transformer.min_max_scaler_transformer.min_max_scale
 class _MinMaxScalerTransformer(_MinMaxScalerTransformerModel):
     def transform(
         self,
-        data: TabularData,
-    ) -> TabularData:
+        data: TableData,
+    ) -> TableData:
         data.data = data.to_dataframe().select(
             (pl.all() - pl.all().min()) / (pl.all().max() - pl.all().min())
         )

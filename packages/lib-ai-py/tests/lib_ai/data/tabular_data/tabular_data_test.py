@@ -1,5 +1,5 @@
 import numpy as np
-from lib_ai.data.tabular_data.tabular_data_fixtures import (
+from lib_ai.data.table_data.table_data_fixtures import (
     TABULAR_DATA_FIXTURE_1,
     TABULAR_DATA_FIXTURE_2,
 )

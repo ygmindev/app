@@ -11,31 +11,31 @@ from lib_ai.core.utils.get_numpy_type import get_numpy_type
 from lib_ai.core.utils.get_tensor_type import get_tensor_type
 from lib_ai.data.base_data.base_data import BaseData
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.data.tabular_data.constants import TabularDataType
-from lib_ai.data.tabular_data.tabular_data_models import (
-    TabularDataKeyModel,
-    TabularDataModel,
-    TabularDataStringKeyModel,
-    _TabularDataModel,
+from lib_ai.data.table_data.constants import TableDataType
+from lib_ai.data.table_data.table_data_models import (
+    TableDataKeyModel,
+    TableDataModel,
+    TableDataStringKeyModel,
+    _TableDataModel,
 )
 
 
-class _TabularData(_TabularDataModel):
+class _TableData(_TableDataModel):
     @overload
     def __getitem__(
         self,
-        key: TabularDataStringKeyModel,
+        key: TableDataStringKeyModel,
     ) -> MatrixData: ...
 
     @overload
     def __getitem__(
         self,
-        key: TabularDataKeyModel,
+        key: TableDataKeyModel,
     ) -> Self: ...
 
     def __getitem__(
         self,
-        key: TabularDataStringKeyModel | TabularDataKeyModel,
+        key: TableDataStringKeyModel | TableDataKeyModel,
     ) -> MatrixData | Self:
         if isinstance(key, str):
             if isinstance(self.data, pl.DataFrame):
@@ -53,25 +53,25 @@ class _TabularData(_TabularDataModel):
     ) -> Self:
         result = self.data
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 result = pl.concat([cast(pl.DataFrame, result), other.to_dataframe()])
         return type(self)(data=result)
 
     def drop_columns(self, columns: Sequence[str]) -> Self:
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 result = self.to_dataframe().drop(columns)
         return type(self)(data=result)
 
     def drop_na(self) -> Self:
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 result = self.to_dataframe().drop_nulls()
         return type(self)(data=result)
 
     def equals(self, other: Self) -> bool:
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 return self.to_dataframe().equals(other.to_dataframe())
         raise InvalidTypeException()
 
@@ -79,11 +79,11 @@ class _TabularData(_TabularDataModel):
     def from_csv(
         cls,
         pathname: str,
-        to: TabularDataType = TabularDataType.DATAFRAME,
+        to: TableDataType = TableDataType.DATAFRAME,
     ) -> Self:
         result = None
         match to:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 result = pl.read_csv(
                     pathname,
                     null_values=["NA"],
@@ -96,26 +96,26 @@ class _TabularData(_TabularDataModel):
     def from_dict(
         cls,
         data: Mapping[str, Sequence[Any]],
-        to: TabularDataType = TabularDataType.DATAFRAME,
+        to: TableDataType = TableDataType.DATAFRAME,
     ) -> Self:
         result = None
         match to:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 result = pl.DataFrame(data)
         if result is None:
             raise InvalidTypeException()
         return cls(data=result)
 
     @property
-    def data_type(self) -> TabularDataType:
+    def data_type(self) -> TableDataType:
         if isinstance(self.data, pl.DataFrame):
-            return TabularDataType.DATAFRAME
+            return TableDataType.DATAFRAME
         raise InvalidTypeException()
 
     def head(self, n_rows: int = 1) -> Self:
         result = self.data
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 result = self.to_dataframe().head(n_rows)
         return type(self)(data=result)
 
@@ -126,7 +126,7 @@ class _TabularData(_TabularDataModel):
     ) -> Self:
         result = self.data
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 result = self.to_dataframe().with_columns(
                     pl.struct(pl.all()).map_elements(func).alias(column)
                 )
@@ -135,7 +135,7 @@ class _TabularData(_TabularDataModel):
     @property
     def shape(self) -> Tuple[int, ...]:
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 return self.to_dataframe().shape
             case _:
                 raise InvalidTypeException()
@@ -146,7 +146,7 @@ class _TabularData(_TabularDataModel):
     ) -> np.ndarray:
         to_type = get_numpy_type(dtype)
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 # return cast(pl.DataFrame, self.data).to_numpy().astype(to_type)
                 return cast(pl.DataFrame, self.data).to_numpy()
             case _:
@@ -158,7 +158,7 @@ class _TabularData(_TabularDataModel):
     ) -> torch.Tensor:
         to_type = get_tensor_type(dtype)
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 device = get_device()
                 return cast(pl.DataFrame, self.data).to_torch().to(to_type).to(device)
             case _:
@@ -166,14 +166,14 @@ class _TabularData(_TabularDataModel):
 
     def to_dataframe(self) -> pl.DataFrame:
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 return cast(pl.DataFrame, self.data)
             case _:
                 raise InvalidTypeException()
 
     def to_matrix(self) -> MatrixData:
         match self.data_type:
-            case TabularDataType.DATAFRAME:
+            case TableDataType.DATAFRAME:
                 data = cast(pl.DataFrame, self.data)
                 device = get_device()
                 return MatrixData(
@@ -185,8 +185,8 @@ class _TabularData(_TabularDataModel):
                 raise InvalidTypeException()
 
 
-class TabularData(
-    _TabularData,
+class TableData(
+    _TableData,
     BaseData,
-    TabularDataModel,
+    TableDataModel,
 ): ...

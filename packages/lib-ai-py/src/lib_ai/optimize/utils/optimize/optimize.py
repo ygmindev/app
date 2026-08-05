@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Any, Mapping, Tuple, cast
 
 from hyperopt import STATUS_OK, Trials, fmin, hp, tpe
-from lib_shared.core.utils.get_item import get_item
 from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 
 from lib_ai.model.utils.early_stopping import EarlyStopping
@@ -11,6 +10,7 @@ from lib_ai.optimize.utils.optimize.constants import OptimizeSpaceDistribution
 from lib_ai.optimize.utils.optimize.optimize_models import (
     OptimizeModel,
     OptimizeParamsModel,
+    OptimizeSpaceMinMaxParamsModel,
     OptimizeSpaceParamsModel,
 )
 from lib_ai.scoring.constants import ScoringMode
@@ -19,29 +19,30 @@ from lib_ai.scoring.constants import ScoringMode
 def _get_space(
     name: str,
     dist: OptimizeSpaceDistribution,
-    dist_params: OptimizeSpaceParamsModel,
+    params: OptimizeSpaceParamsModel,
 ) -> Any:
     match dist:
         case OptimizeSpaceDistribution.LOG_NORMAL:
-            mu = get_item(dist_params, "mu")
-            sigma = get_item(dist_params, "sigma")
+            dist_params = cast(OptimizeSpaceMinMaxParamsModel, params)
+            mu = params.mu
+            sigma = params.sigma
             return hp.lognormal(name, mu, sigma)
         case OptimizeSpaceDistribution.OPTIONS:
-            options = get_item(dist_params, "options")
+            options = params.options
             return hp.choice(name, options)
         case OptimizeSpaceDistribution.Q_LOG_NORMAL:
-            mu = get_item(dist_params, "mu")
-            sigma = get_item(dist_params, "sigma")
-            q = get_item(dist_params, "q", 1)
-            return hp.qlognormal(name, mu, sigma, q)
+            mu = params.mu
+            sigma = params.sigma
+            q = params.q
+            return hp.qlognormal(name, mu, sigma, q[1])
         case OptimizeSpaceDistribution.Q_UNIFORM:
-            lower = get_item(dist_params, "lower")
-            upper = get_item(dist_params, "upper")
-            q = get_item(dist_params, "q", 1)
-            return hp.uniformint(name, lower, upper, q=q)
+            lower = params.lower
+            upper = params.upper
+            q = params.q
+            return hp.uniformint(name, lower, upper, q=q[1])
         case OptimizeSpaceDistribution.UNIFORM:
-            lower = get_item(dist_params, "lower")
-            upper = get_item(dist_params, "upper")
+            lower = params.lower
+            upper = params.upper
             return hp.uniform(name, lower, upper)
         case _:
             raise InvalidTypeException()
@@ -62,7 +63,7 @@ def _optimize[TType: Mapping[str, Any]](
 
     early_stopping = EarlyStopping()
 
-    def _early_stopping(trials, *args) -> Tuple[bool, Tuple[Any, ...]]:
+    def _early_stopping(trials, *args) -> tuple[bool, Tuple[Any, ...]]:
         return early_stopping.stop(score=trials.losses()[-1]), args
 
     trials = Trials()

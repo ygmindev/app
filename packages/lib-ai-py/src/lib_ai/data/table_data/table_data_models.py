@@ -4,26 +4,26 @@ import polars as pl
 
 from lib_ai.data.base_data.base_data_models import BaseDataModel
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.data.tabular_data.constants import TabularDataType
+from lib_ai.data.table_data.constants import TableDataType
 
-type TabularDataStringKeyModel = str
+type TableDataStringKeyModel = str
 
-type TabularDataIndexKeyModel = int
+type TableDataIndexKeyModel = int
 
-type TabularDataMultiKeyModel = Sequence[int] | slice
+type TableDataMultiKeyModel = Sequence[int] | slice
 
-type TabularDataKeyModel = (
-    TabularDataIndexKeyModel
-    | TabularDataMultiKeyModel
-    | tuple[TabularDataIndexKeyModel, str]
-    | tuple[TabularDataMultiKeyModel, Sequence[str]]
+type TableDataKeyModel = (
+    TableDataIndexKeyModel
+    | TableDataMultiKeyModel
+    | tuple[TableDataIndexKeyModel, str]
+    | tuple[TableDataMultiKeyModel, Sequence[str]]
 )
 
 
-class _TabularDataModel(BaseDataModel[pl.DataFrame]):
+class _TableDataModel(BaseDataModel[pl.DataFrame]):
     def __getitem__(
         self,
-        key: TabularDataStringKeyModel | TabularDataKeyModel,
+        key: TableDataStringKeyModel | TableDataKeyModel,
     ) -> MatrixData | Self: ...
 
     @property
@@ -40,18 +40,18 @@ class _TabularDataModel(BaseDataModel[pl.DataFrame]):
     def from_csv(
         cls,
         pathname: str,
-        _to: TabularDataType | None = TabularDataType.DATAFRAME,
+        _to: TableDataType | None = TableDataType.DATAFRAME,
     ) -> Self: ...
 
     @classmethod
     def from_dict(
         cls,
         data: Mapping[str, Sequence[Any]],
-        to: TabularDataType | None = TabularDataType.DATAFRAME,
+        to: TableDataType | None = TableDataType.DATAFRAME,
     ) -> Self: ...
 
     @property
-    def data_type(self) -> TabularDataType: ...
+    def data_type(self) -> TableDataType: ...
 
     def map(
         self,
@@ -64,4 +64,4 @@ class _TabularDataModel(BaseDataModel[pl.DataFrame]):
     def to_matrix(self) -> MatrixData: ...
 
 
-class TabularDataModel(_TabularDataModel): ...
+class TableDataModel(_TableDataModel): ...

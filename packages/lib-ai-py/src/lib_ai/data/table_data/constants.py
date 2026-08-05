@@ -1,5 +1,5 @@
 from enum import Enum
 
 
-class TabularDataType(Enum):
+class TableDataType(Enum):
     DATAFRAME = "DATAFRAME"

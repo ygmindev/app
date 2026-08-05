@@ -1,6 +1,6 @@
 import numpy as np
 from lib_ai.data.matrix_data import MatrixData
-from lib_ai.data.tabular_data import TabularData
+from lib_ai.data.table_data import TabularData
 from lib_ai.transform.utils.transformer.standard_scaler_transformer import (
     StandardScalerTransformer,
 )

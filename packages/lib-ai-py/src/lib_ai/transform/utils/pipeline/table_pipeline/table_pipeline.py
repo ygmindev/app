@@ -6,7 +6,7 @@ from lib_shared.core.utils.private_field.private_field import PrivateField
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer
 
-from lib_ai.data.tabular_data import TabularData
+from lib_ai.data.table_data import TableData
 from lib_ai.transform.utils.pipeline.table_pipeline.table_pipeline_models import (
     TablePipelineModel,
 )
@@ -20,7 +20,7 @@ class _Transformer(
     BaseEstimator,
     BaseModel,
 ):
-    transformer: TransformableModel[TabularData]
+    transformer: TransformableModel[TableData]
     _columns: Sequence[str] = PrivateField()
 
     def fit(
@@ -28,7 +28,7 @@ class _Transformer(
         x: pl.DataFrame,
         _y=None,
     ) -> Self:
-        data = TabularData(x)
+        data = TableData(x)
         if self.transformer.fit:
             self.transformer.fit(data)
         return self
@@ -37,7 +37,7 @@ class _Transformer(
         self,
         x: pl.DataFrame,
     ) -> pl.DataFrame:
-        data = TabularData(x)
+        data = TableData(x)
         data = self.transformer.transform(data)
         self._columns = data.columns
         return data.to_dataframe()
@@ -64,14 +64,14 @@ class TablePipeline(TablePipelineModel):
 
     def fit(
         self,
-        data: TabularData,
-        params: None,
+        data: TableData,
+        params: None = None,
     ) -> None:
         self._transformer.fit(data.to_dataframe())
 
     def transform(
         self,
-        data: TabularData,
-        params: None,
-    ) -> TabularData:
-        return TabularData(data=self._transformer.transform(data.to_dataframe()))
+        data: TableData,
+        params: None = None,
+    ) -> TableData:
+        return TableData(data=self._transformer.transform(data.to_dataframe()))
