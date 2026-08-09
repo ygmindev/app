@@ -3,15 +3,18 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.constants import FieldRelation
 from lib_shared.core.utils.field.field import Field
+
+from lib_model.core.utils.protected_resource.protected_resource_models import (
+    ProtectedResourceModel,
+)
 
 if TYPE_CHECKING:
     from lib_model.chat.message.message import Message
 
 
-class ChatModel(BaseModel):
+class ChatModel(ProtectedResourceModel):
     name: str | None = Field(default=None)
 
     messages: list[Message] | None = Field(

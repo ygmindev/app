@@ -9,9 +9,9 @@ from lib_shared.core.utils.base_model import BaseModel
 from .tool_models import ToolModel, TParams, TResult, _ToolModel
 
 
-class _Tool(
+class _Tool[TParams, TResult](
     BaseTool,
-    _ToolModel[TParams, TResult],
+    _ToolModel,
 ):
     def __init__(
         self,

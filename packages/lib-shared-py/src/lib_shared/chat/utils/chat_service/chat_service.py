@@ -1,6 +1,6 @@
 # template version: 1.0.0
 import json
-from typing import AsyncIterable
+from typing import AsyncIterable, cast
 
 from beanie import PydanticObjectId
 from lib_ai.agent.utils.agent.agent import Agent
@@ -12,7 +12,6 @@ from lib_ai.agent.utils.llm_payload.llm_payload import LlmPayload
 from lib_config.database.database import database_config
 from lib_config.redis.redis import redis_config
 from lib_model.chat.chat.chat import Chat
-from lib_model.chat.message.message import Message
 from lib_model.user.user.user import User
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
@@ -23,10 +22,9 @@ from lib_shared.database.utils.redis.redis import Redis
 from .chat_service_models import ChatServiceModel
 
 _HISTORY_LIMIT = 20
-
 _CHAT_MAX_LENGTH = 25
 
-# TODO: add createdBy
+_MAX_HISTORY_TOKENS = 6000  # tune to your model's context window minus reply headroom
 
 
 class ChatService(BaseModel, ChatServiceModel):
@@ -59,6 +57,7 @@ class ChatService(BaseModel, ChatServiceModel):
         self,
         id: str,
         message: str,
+        user: User | None = None,
     ) -> Chat:
         chat = await self._database.find(
             query={"_id": PydanticObjectId(id)},
@@ -68,38 +67,59 @@ class ChatService(BaseModel, ChatServiceModel):
             title = message[:_CHAT_MAX_LENGTH] + (
                 "..." if len(message) > _CHAT_MAX_LENGTH else ""
             )
-            chat = Chat(name=title, id=PydanticObjectId(id))
+            chat = Chat(
+                name=title,
+                id=PydanticObjectId(id),
+                createdBy=user,
+            )
             result = await self._database.create(chat)
             return result.result
         return chat.result[0]
 
     async def _load_history(
         self,
-        id: str,
-    ) -> list[Message]:
-        value = await self._redis.get(f"chat:history:{id}")
+        chat_id: str,
+    ) -> list[AIMessage]:
+        value = await self._redis.get(f"chat:history:{chat_id}")
         if value:
-            return json.loads(value)
+            value = cast(list[dict], json.loads(value))
+            return list(map(AIMessage.from_dict, value))
         result = await self._database.find(
-            query={"_id": id},
-            resource=Message,
+            query={"chat": PydanticObjectId(chat_id)},
+            resource=AIMessage,
             limit=_HISTORY_LIMIT,
-            sort=[("created_at", -1)],
+            sort=[("created", -1)],
         )
-        await self._cache_history(id, result.result)
-        return result.result
+        value = list(reversed(result.result))
+        await self._cache_history(chat_id, value)
+        return value
 
     async def _cache_history(
         self,
-        id: str,
-        history: list[Message],
+        chat_id: str,
+        history: list[AIMessage],
     ) -> None:
-        value = Message.to_list(history)
+        value = [x.to_dict() for x in history]
         await self._redis.set(
-            f"chat:history:{id}",
+            f"chat:history:{chat_id}",
             json.dumps(value[-_HISTORY_LIMIT:]),
             3600,
         )
+
+    def _trim(
+        self,
+        messages: list[AIMessage],
+        max_tokens: int,
+    ) -> list[AIMessage]:
+        result: list[AIMessage] = []
+        total = 0
+        for msg in reversed(messages):
+            n = self._agent.llm.n_tokens([msg])
+            if total + n > max_tokens and result:
+                break
+            result.append(msg)
+            total += n
+        return list(reversed(result))
 
     async def stream(
         self,
@@ -108,29 +128,28 @@ class ChatService(BaseModel, ChatServiceModel):
         user: User | None = None,
     ) -> AsyncIterable[str | dict]:
         chat = await self.get_chat(chat_id, message)
-        chat_id = str(chat._id)
-
-        params = AgentState()
-        user_message = Message(
-            chat=chat,
-            content=message,
-            createdBy=user,
-        )
-        user_dict = user_message.to_dict()
-        del user_dict["createdBy"]
-        user_dict["chat"] = chat
-        user_dict["role"] = MessageRole.USER
-        params.messages = [AIMessage(**user_dict)]
-        user_message = (await self._database.create(user_message)).result
+        chat_id = chat._id
 
         history = await self._load_history(chat_id)
 
-        system_message = Message(
+        params = AgentState()
+        history_messages = self._trim(history, _MAX_HISTORY_TOKENS)
+
+        user_message = AIMessage(
+            chat=chat,
+            content=message,
+            createdBy=user,
+            role=MessageRole.USER,
+        )
+        params.messages = [*history_messages, user_message]
+        user_message = (await self._database.create(user_message)).result
+
+        system_message = AIMessage(
             chat=chat,
             content="",
             role=MessageRole.SYSTEM,
         )
-        system_message_id = str(system_message._id)
+        system_message_id = system_message._id
         content = ""
         yield LlmPayload(
             chat_id=chat_id,

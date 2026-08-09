@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import sys
+from contextlib import contextmanager
+from copy import copy
 from typing import (
     Annotated,
     Any,
+    Generator,
     Optional,
+    Self,
     Union,
     get_args,
     get_origin,
@@ -34,7 +38,46 @@ class _DatabaseEntity(Document):
     ) -> None:
         super().__init_subclass__(**kwargs)
         if name is not None:
-            cls.Settings = type("Settings", (), {"name": name})
+            cls.Settings = type(
+                "Settings",
+                (),
+                {
+                    "name": name,
+                    "keep_nulls": False,
+                },
+            )
+
+    @contextmanager
+    def _clean(self) -> Generator[Self, Any, None]:
+        fields = []
+        for field_name, field_info in type(self).model_fields.items():
+            schema = field_info.json_schema_extra
+            if isinstance(schema, dict) and schema.get("relation"):
+                continue
+            value = getattr(self, field_name, None)
+            if isinstance(value, (list, dict, set, tuple)) and len(value) == 0:
+                fields.append(field_name)
+
+        originals = {name: getattr(self, name) for name in fields}
+        for name in originals:
+            setattr(self, name, None)
+        try:
+            yield self
+        finally:
+            for name, value in originals.items():
+                setattr(self, name, value)
+
+    async def insert(self, *args: Any, **kwargs: Any):
+        with self._clean():
+            return await super().insert(*args, **kwargs)
+
+    async def save(self, *args: Any, **kwargs: Any):
+        with self._clean():
+            return await super().save(*args, **kwargs)
+
+    async def replace(self, *args: Any, **kwargs: Any):
+        with self._clean():
+            return await super().replace(*args, **kwargs)
 
     @classmethod
     def initialize(cls) -> None:
@@ -59,6 +102,9 @@ class _DatabaseEntity(Document):
             module = sys.modules.get(model.__module__, None)
             localns = {**(vars(module) if module else {}), **ns, **model_ns}
             hints = get_type_hints(model, localns=localns)
+
+            if "__annotations__" not in model.__dict__:
+                model.__annotations__ = dict(getattr(model, "__annotations__", {}))
 
             for field_name, field_info in model.model_fields.items():
                 if field_name not in hints:
@@ -119,9 +165,11 @@ class _DatabaseEntity(Document):
                 annotation_new = (
                     Optional[annotation_new] if is_optional else annotation_new
                 )
+                field_info = copy(field_info)
                 field_info.annotation = annotation_new
-                if hasattr(field_info, "_original_annotation"):
-                    field_info._original_annotation = annotation_new
+                if root:
+                    field_info.exclude = True
+                model.model_fields[field_name] = field_info
                 model.__annotations__[field_name] = annotation_new
 
         for model in models:

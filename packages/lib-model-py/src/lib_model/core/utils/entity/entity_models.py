@@ -1,14 +1,11 @@
 from typing import TypeVar
 
+from lib_shared.core.utils.base_model.base_model import BaseModel
+
 TType = TypeVar("TType")
 
 
-class _EntityModel:
-    ...
-    # def __call__(
-    #     self,
-    #     is_graphql: bool = True,
-    # ) -> Callable[[type[TType]], type[TType]]: ...
+class _EntityModel(BaseModel): ...
 
 
 class EntityModel(_EntityModel): ...

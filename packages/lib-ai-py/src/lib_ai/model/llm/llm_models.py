@@ -22,6 +22,11 @@ class _LlmModel(BaseModel):
         tools: list[Tool],
     ) -> None: ...
 
+    def n_tokens(
+        self,
+        messages: list[AIMessage],
+    ) -> int: ...
+
     async def stream(
         self,
         messages: list[AIMessage],

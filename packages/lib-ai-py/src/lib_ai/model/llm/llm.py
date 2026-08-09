@@ -66,6 +66,15 @@ class _Llm(_LlmModel):
         async for chunk in self.llm.astream(serialized):
             yield cast(AIMessageChunk, chunk)
 
+    def n_tokens(
+        self,
+        messages: list[AIMessage],
+    ) -> int:
+        if not self._llm:
+            raise UninitializedException("_llm")
+        serialized = [x.serialize() for x in messages]
+        return self._llm.get_num_tokens_from_messages(serialized)
+
     async def stream(
         self,
         messages: list[AIMessage],

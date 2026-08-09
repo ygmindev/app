@@ -11,6 +11,7 @@ from langchain_core.messages import (
     ToolMessage,
 )
 from langchain_core.messages.tool import ToolCall as LangchainToolCall
+from lib_model.chat.message.message import Message
 
 from lib_ai.agent.utils.ai_message.ai_message_models import AIMessageModel, ToolCall
 from lib_ai.agent.utils.ai_message.constants import MessageRole
@@ -91,4 +92,7 @@ class _AIMessage(AIMessageModel):
         return instance
 
 
-class AIMessage(_AIMessage): ...
+class AIMessage(
+    _AIMessage,
+    Message,
+): ...

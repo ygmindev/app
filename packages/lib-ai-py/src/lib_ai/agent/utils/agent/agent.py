@@ -1,5 +1,6 @@
 # template version: 1.0.0
 
+import asyncio
 from inspect import isawaitable
 from typing import (
     AsyncIterable,
@@ -7,7 +8,6 @@ from typing import (
     cast,
 )
 
-from lib_shared.core.utils.not_found_exception import NotFoundException
 from lib_shared.core.utils.not_implemented_exception import NotImplementedException
 
 from lib_ai.agent.utils.ai_message.ai_message import AIMessage
@@ -84,7 +84,7 @@ class _Agent(_AgentModel[TState]):
                 stream = llm.stream([system_message] + params.messages)
                 stream = await stream if isawaitable(stream) else stream
 
-                message = AIMessage(role=MessageRole.SYSTEM, content="")
+                message = AIMessage(role=MessageRole.ASSISTANT, content="")
                 params.messages.append(message)
 
                 async for chunk in stream:
@@ -104,27 +104,32 @@ class _Agent(_AgentModel[TState]):
                 self,
                 params: TState,
             ) -> TState:
-                updates: list[AIMessage] = []
                 last_message = params.messages[-1]
-                if last_message.role == MessageRole.SYSTEM and last_message.tool_calls:
-                    for tool_call in last_message.tool_calls:
+                if (
+                    last_message.role == MessageRole.ASSISTANT
+                    and last_message.tool_calls
+                ):
+
+                    async def _run(tool_call) -> AIMessage:
                         tool = tool_map[tool_call.name]
                         result = await tool.execute(tool_call.params)
-                        updates.append(
-                            AIMessage(
-                                role=MessageRole.TOOL,
-                                content=str(result),
-                                current_tool_call=tool_call,
-                            )
+                        return AIMessage(
+                            role=MessageRole.TOOL,
+                            content=str(result),
+                            current_tool_call=tool_call,
                         )
-                params.messages.extend(updates)
+
+                    updates = await asyncio.gather(
+                        *(_run(tc) for tc in last_message.tool_calls)
+                    )
+                    params.messages.extend(updates)
                 return params
 
         def _llm_route(state: TState) -> str:
             messages = state.messages
             if messages:
                 last = messages[-1]
-                if last.role == MessageRole.SYSTEM and last.tool_calls:
+                if last.role == MessageRole.ASSISTANT and last.tool_calls:
                     return "tools"
             return GraphNodeType.END
 
@@ -157,30 +162,33 @@ class _Agent(_AgentModel[TState]):
         self,
         params: TState,
     ) -> AsyncIterable[TState]:
-        user_message = next(
-            (x for x in reversed(params.messages) if x.role == MessageRole.USER),
-            None,
-        )
-        if not user_message:
-            raise NotFoundException("No user message found in the initial state")
-        params.messages = [user_message]
+        # user_message = next(
+        #     (x for x in reversed(params.messages) if x.role == MessageRole.USER),
+        #     None,
+        # )
+        # if not user_message:
+        #     raise NotFoundException("No user message found in the initial state")
+        # params.messages = [user_message]
+
+        start = len(params.messages)
         async for updates in self.graph.stream(params):
             delta = getattr(updates, "delta", None)
             if delta:
                 yield params.clone(delta=delta)
             else:
-                messages = cast(list[AIMessage], updates.messages)
-
+                messages = cast(list[AIMessage], updates.messages)[start:]
                 content: str = ""
                 for message in messages:
                     content += str(message.content)
-                    if message.role == MessageRole.SYSTEM and message.tool_calls:
+                    if message.role == MessageRole.ASSISTANT and message.tool_calls:
                         for tool_call in message.tool_calls:
                             content += f"calling tool: {tool_call.name} with args: {tool_call.params}"
 
                 if content:
                     yield params.clone(
-                        messages=[AIMessage(role=MessageRole.SYSTEM, content=content)]
+                        messages=[
+                            AIMessage(role=MessageRole.ASSISTANT, content=content)
+                        ]
                     )
 
 

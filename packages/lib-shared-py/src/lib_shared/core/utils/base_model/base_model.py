@@ -5,7 +5,9 @@ from __future__ import annotations
 from typing import Any, ClassVar, Self
 
 from pydantic import BaseModel as PydanticBaseClass
-from pydantic import ConfigDict, TypeAdapter
+from pydantic import ConfigDict
+
+from lib_shared.core.utils.base_model.constants import ExportMode
 
 from .base_model_models import BaseModelModel, MergeStrategy, _BaseModelModel
 
@@ -75,18 +77,21 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         return new
 
     @classmethod
-    def validate(cls, **kwargs: Any) -> Self:
-        return cls.model_validate(kwargs)
+    def from_dict(
+        cls: type[Self],
+        data: dict[str, Any],
+    ) -> Self:
+        return cls.model_validate(data)
 
-    @classmethod
-    def to_list(cls, value: list[Self]) -> list[dict[str, Any]]:
-        return TypeAdapter(list[cls]).dump_python(
-            value,
-            mode="json",
+    def to_dict(
+        self,
+        mode: ExportMode = ExportMode.JSON,
+        exclude: set[str] | None = None,
+    ) -> dict[str, Any]:
+        return self.model_dump(
+            mode=mode.value,
+            exclude=exclude,
         )
-
-    def to_dict(self) -> dict[str, Any]:
-        return self.model_dump(mode="json")
 
 
 class BaseModel(_BaseModel, BaseModelModel): ...
