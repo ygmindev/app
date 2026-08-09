@@ -147,7 +147,7 @@ class ChatService(BaseModel, ChatServiceModel):
         system_message = AIMessage(
             chat=chat,
             content="",
-            role=MessageRole.SYSTEM,
+            role=MessageRole.ASSISTANT,
         )
         system_message_id = system_message._id
         content = ""
@@ -155,7 +155,7 @@ class ChatService(BaseModel, ChatServiceModel):
             chat_id=chat_id,
             content="",
             message_id=system_message_id,
-            role=MessageRole.SYSTEM,
+            role=MessageRole.ASSISTANT,
             type=LlmPayloadType.START,
         ).to_dict()
 
@@ -166,7 +166,7 @@ class ChatService(BaseModel, ChatServiceModel):
                 type=LlmPayloadType.UPDATE,
                 chat_id=chat_id,
                 message_id=system_message_id,
-                role=MessageRole.SYSTEM,
+                role=MessageRole.ASSISTANT,
                 content=delta,
             ).to_dict()
 
@@ -177,7 +177,7 @@ class ChatService(BaseModel, ChatServiceModel):
             chat_id=chat_id,
             content=content,
             message_id=system_message_id,
-            role=MessageRole.SYSTEM,
+            role=MessageRole.ASSISTANT,
             type=LlmPayloadType.END,
         ).to_dict()
 

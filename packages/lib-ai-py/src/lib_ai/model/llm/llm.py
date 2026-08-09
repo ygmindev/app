@@ -14,7 +14,7 @@ from lib_shared.core.utils.uninitialized_exception import UninitializedException
 from lib_ai.agent.utils.ai_message.ai_message import AIMessage
 from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.agent.utils.tool import Tool
-from lib_ai.model.llm.constants import LLM_NAME
+from lib_ai.model.llm.constants import LLM_PROVIDER
 
 from .llm_models import (
     LlmModel,
@@ -26,13 +26,8 @@ class _Llm(_LlmModel):
     _llm: BaseChatModel | None = PrivateField()
 
     def post_init(self) -> None:
-        match self.name:
-            case (
-                LLM_NAME.GLM_5
-                | LLM_NAME.LLAMA_3_2
-                | LLM_NAME.QWEN_3_5
-                | LLM_NAME.GEMMA_4_E4B
-            ):
+        match self.provider:
+            case LLM_PROVIDER.LMSTUDIO:
                 self._llm = ChatOpenAI(
                     api_key="lmstudio",
                     base_url="http://localhost:1234/v1",
@@ -41,6 +36,19 @@ class _Llm(_LlmModel):
                     max_tokens=self.max_tokens,
                     extra_body={"chat_template_kwargs": {"enable_thinking": False}},
                 )
+            case LLM_PROVIDER.OPENROUTER:
+                self._llm = ChatOpenAI(
+                    api_key=self.secrets.get(LLM_PROVIDER.OPENROUTER, ""),
+                    base_url="https://openrouter.ai/api/v1",
+                    model=self.name,
+                    temperature=self.temperature,
+                    max_tokens=self.max_tokens,
+                    # default_headers={
+                    #     "HTTP-Referer": "https://your-website-url.com",  # Optional
+                    #     "X-Title": "Your App Name",  # Optional
+                    # },
+                )
+
         if self._llm is not None and self.output_schema is not None:
             self._llm = cast(
                 BaseChatModel,
