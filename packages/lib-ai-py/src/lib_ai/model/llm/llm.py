@@ -3,6 +3,7 @@
 
 from typing import AsyncIterator, cast
 
+import tiktoken
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessageChunk
 from langchain_openai import ChatOpenAI
@@ -73,7 +74,15 @@ class _Llm(_LlmModel):
         if not self._llm:
             raise UninitializedException("_llm")
         serialized = [x.serialize() for x in messages]
-        return self._llm.get_num_tokens_from_messages(serialized)
+        try:
+            return self._llm.get_num_tokens_from_messages(serialized)
+        except (NotImplementedError, KeyError, ValueError):
+            enc = tiktoken.get_encoding("cl100k_base")
+            total_text = ""
+            for msg in messages:
+                if isinstance(msg.content, str):
+                    total_text += msg.content
+            return len(enc.encode(total_text))
 
     async def stream(
         self,
