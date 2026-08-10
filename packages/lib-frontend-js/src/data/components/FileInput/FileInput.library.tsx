@@ -4,8 +4,8 @@ import { LIBRARY_CATEGORY_FORM } from '@lib/frontend/library/components/Library/
 import { type LibraryPropsModel } from '@lib/frontend/library/components/Library/Library.models';
 
 export const props: LibraryPropsModel<FileInputPropsModel> = {
-  Component: FileInput,
   category: LIBRARY_CATEGORY_FORM,
+  Component: FileInput,
   defaultProps: {},
   variants: [{ props: { label: 'file input' } }],
 };

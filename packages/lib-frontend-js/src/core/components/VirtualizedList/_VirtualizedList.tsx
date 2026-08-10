@@ -70,6 +70,7 @@ export const _VirtualizedList = <TType extends WithIdModel>({
             ? (data, index) => ({ index, length: itemSize, offset: itemSize * index })
             : undefined,
           horizontal: isHorizontal,
+          isHorizontalScrollable: isHorizontal,
           ItemSeparatorComponent: divider ? () => divider : undefined,
           keyExtractor: ({ id }) => id,
           maxHeight,

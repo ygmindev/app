@@ -12,7 +12,7 @@ export const CHAT_REDUCER: ChatReducerModel = {
       set(state, `chats.${chatId}.streams.${messageId}`, {
         ...stream,
         ...message,
-        content: (stream?.content ?? '') + (message.content ?? ''),
+        text: (stream?.text ?? '') + (message.text ?? ''),
       });
       return state;
     },

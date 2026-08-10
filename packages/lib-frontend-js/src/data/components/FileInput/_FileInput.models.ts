@@ -6,5 +6,10 @@ import { type ReactElement } from 'react';
 
 export type _FileInputPropsModel = ValuePropsModel<Array<FileModel>> &
   ChildPropsModel<(isActive?: boolean) => ReactElement<PressablePropsModel>> & {
+    isButton?: boolean;
     isMultiple?: boolean;
   };
+
+export type _FileInputRefModel = {
+  open?(): void;
+};

@@ -15,10 +15,10 @@ import { UserModel } from '@lib/model/user/User/User.models';
 @withResolver({ Resource: () => Access })
 export class AccessResolver
   extends createEntityResourceResolver<AccessModel>({
-    Resource: () => Access,
-    ResourceImplementation: AccessImplementation,
     access: { read: ACCESS_LEVEL.PUBLIC },
     name: ACCESS_RESOURCE_NAME,
+    Resource: () => Access,
+    ResourceImplementation: AccessImplementation,
   })
   implements AccessResolverModel
 {

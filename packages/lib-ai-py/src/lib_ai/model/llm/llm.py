@@ -88,8 +88,9 @@ class _Llm(_LlmModel):
             enc = tiktoken.get_encoding("cl100k_base")
             total_text = ""
             for msg in messages:
-                if isinstance(msg.content, str):
-                    total_text += msg.content
+                for c in msg.content or []:
+                    if not c.content_type and c.value:
+                        total_text += c.value
             return len(enc.encode(total_text))
 
     async def stream(
@@ -112,7 +113,7 @@ class _Llm(_LlmModel):
         self,
         prompt: str,
     ) -> AsyncIterator[str]:
-        return self.stream([AIMessage(role=MessageRole.USER, content=prompt)])
+        return self.stream([AIMessage(role=MessageRole.USER, text=prompt)])
 
     async def run(
         self,

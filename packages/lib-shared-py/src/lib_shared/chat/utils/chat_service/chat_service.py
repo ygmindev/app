@@ -50,7 +50,7 @@ class ChatService(ChatServiceModel):
     async def get_chat(
         self,
         id: str,
-        message: str,
+        text: str,
         user: User | None = None,
     ) -> Chat:
         chat = await self._database.find(
@@ -58,8 +58,8 @@ class ChatService(ChatServiceModel):
             resource=Chat,
         )
         if not chat.result:
-            title = message[:_CHAT_MAX_LENGTH] + (
-                "..." if len(message) > _CHAT_MAX_LENGTH else ""
+            title = text[:_CHAT_MAX_LENGTH] + (
+                "..." if len(text) > _CHAT_MAX_LENGTH else ""
             )
             chat = Chat(
                 name=title,
@@ -117,13 +117,12 @@ class ChatService(ChatServiceModel):
 
     async def stream(
         self,
-        message: str,
+        text: str,
         chat_id: str,
         user: User | None = None,
     ) -> AsyncIterable[str | dict]:
-        chat = await self.get_chat(chat_id, message)
+        chat = await self.get_chat(chat_id, text)
         chat_id = chat._id
-
         history = await self._load_history(chat_id)
 
         params = AgentState()
@@ -131,7 +130,7 @@ class ChatService(ChatServiceModel):
 
         user_message = AIMessage(
             chat=chat,
-            content=message,
+            text=text,
             createdBy=user,
             role=MessageRole.USER,
         )
@@ -140,14 +139,13 @@ class ChatService(ChatServiceModel):
 
         system_message = AIMessage(
             chat=chat,
-            content="",
             role=MessageRole.ASSISTANT,
         )
         system_message_id = system_message._id
-        content = ""
+        text = ""
         yield LlmPayload(
             chat_id=chat_id,
-            content="",
+            text="",
             message_id=system_message_id,
             role=MessageRole.ASSISTANT,
             type=LlmPayloadType.START,
@@ -155,21 +153,21 @@ class ChatService(ChatServiceModel):
 
         async for chunk in self._agent.stream(params):
             delta = getattr(chunk, "delta", None) or ""
-            content += delta
+            text += delta
             yield LlmPayload(
                 type=LlmPayloadType.UPDATE,
                 chat_id=chat_id,
                 message_id=system_message_id,
                 role=MessageRole.ASSISTANT,
-                content=delta,
+                text=delta,
             ).to_dict()
 
-        system_message.content = content
+        system_message.text = text
         system_message = (await self._database.create(system_message)).result
 
         yield LlmPayload(
             chat_id=chat_id,
-            content=content,
+            text=text,
             message_id=system_message_id,
             role=MessageRole.ASSISTANT,
             type=LlmPayloadType.END,

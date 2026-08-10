@@ -4,7 +4,7 @@
   "address": "address",
   "all": "{{value}} all",
   "any": "any",
-  "browseFiles": "TRANSLATION_MISSING",
+  "browse": "browse",
   "cancel": "cancel",
   "condition": "condition",
   "confirmRemove": "Are you sure you want to remove {{value}}?",

@@ -90,13 +90,15 @@ export const getScrollViewParams = <
       { duration: SCROLL_EVENT_THROTTLE, isLeading: true },
     );
 
+    const customProps = getProps?.(props, theme);
+
     const propsF = {
       ...viewParamsBase.getProps?.(props, theme),
-      ...getProps?.(props, theme),
+      ...customProps,
       alwaysBounceHorizontal: false,
       alwaysBounceVertical: false,
       contentContainerStyle: { ...stylesContainer, flexGrow: 1 },
-      horizontal: props.isHorizontalScrollable ?? false,
+      horizontal: customProps?.horizontal ?? props.isHorizontalScrollable ?? false,
       onContentSizeChange: (width, height) => measureContentSet({ height, width }),
       onLayout: ({
         nativeEvent: {

@@ -10,10 +10,10 @@ from lib_config.http.api.api_config_base import api_config_base
 
 
 async def ai_handler(req: HttpRequest) -> AsyncIterable[Any]:
-    content = get_item(req.body, "content", default="") or ""
+    text = get_item(req.body, "text", default="") or ""
     chat_id = get_item(req.body, "chat._id", default="") or ""
     async for x in chat_service.stream(
-        content,
+        text,
         chat_id,
         user=req.user,
     ):

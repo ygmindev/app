@@ -44,7 +44,7 @@ export const MessageContainer: RLFCModel<MessageContainerRefModel, MessageContai
     [message.created],
   );
 
-  const element = message.content && <Text>{message.content}</Text>;
+  const element = message.text && <Text>{message.text}</Text>;
 
   return (
     <Wrapper
@@ -92,7 +92,7 @@ export const MessageContainer: RLFCModel<MessageContainerRefModel, MessageContai
                 isRow>
                 <Button
                   icon="copy"
-                  onPress={async () => message.content && copy(message.content)}
+                  onPress={async () => message.text && copy(message.text)}
                   size={THEME_SIZE.SMALL}
                   tooltip={t('core:copyToClipboard')}
                   type={BUTTON_TYPE.INVISIBLE}

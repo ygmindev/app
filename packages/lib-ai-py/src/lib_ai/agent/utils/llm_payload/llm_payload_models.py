@@ -12,8 +12,8 @@ from lib_ai.agent.utils.llm_payload.constants import LlmPayloadType
 
 class LlmPayloadModel(BaseModel):
     chat_id: str = Field()
-    content: str = Field()
-    message_id: str = Field()
-    type: LlmPayloadType = Field()
-    role: MessageRole | None = Field(default=None)
     created: datetime = Field(default_value=datetime.now)
+    message_id: str = Field()
+    role: MessageRole | None = Field(default=None)
+    text: str | None = Field(default=None)
+    type: LlmPayloadType = Field()

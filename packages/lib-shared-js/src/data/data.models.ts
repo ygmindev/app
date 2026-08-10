@@ -14,4 +14,5 @@ export type RangeModel<TType> = {
 
 export type FileModel = WithIdModel & {
   file: File;
+  name: string;
 };

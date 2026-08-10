@@ -67,7 +67,7 @@ export const useChatStream = ({ chatId, url }: UseChatStreamParamsModel): UseCha
 
       void post({
         onMessage: (payload: Partial<LlmPayloadModel>): void => {
-          const { chat_id, content, message_id, role, type } = payload;
+          const { chat_id, message_id, role, text, type } = payload;
 
           if (!chat_id) throw new NotFoundError('chat id');
           if (!message_id) throw new NotFoundError('message id');
@@ -80,15 +80,15 @@ export const useChatStream = ({ chatId, url }: UseChatStreamParamsModel): UseCha
             case LLM_PAYLOAD_TYPE.START: {
               abortRegistry.set(chatIdF, message_id, controller);
               streamMessage(message_id, {
-                content: content ?? '',
                 role,
                 status: MESSAGE_STATUS.STREAMING,
+                text: text ?? '',
               });
               break;
             }
 
             case LLM_PAYLOAD_TYPE.UPDATE: {
-              streamMessage(message_id, { content: content ?? '' });
+              streamMessage(message_id, { text: text ?? '' });
               break;
             }
 

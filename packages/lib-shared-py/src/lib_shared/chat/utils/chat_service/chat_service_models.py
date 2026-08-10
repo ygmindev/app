@@ -5,6 +5,7 @@ from typing import AsyncIterable
 
 from lib_ai.agent.utils.agent.agent import Agent
 from lib_model.chat.chat.chat import Chat
+from lib_model.user.user.user import User
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.private_field.private_field import PrivateField
@@ -19,12 +20,14 @@ class ChatServiceModel(BaseModel):
 
     async def stream(
         self,
-        message: str,
+        text: str,
         chat_id: str,
+        user: User | None = None,
     ) -> AsyncIterable[str | dict]: ...
 
     async def get_chat(
         self,
         id: str,
-        message: str,
+        text: str,
+        user: User | None = None,
     ) -> Chat: ...

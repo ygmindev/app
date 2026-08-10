@@ -59,7 +59,7 @@ class _Agent(_AgentModel[TState]):
         system_prompt = "\n".join(descriptions)
         system_message = AIMessage(
             role=MessageRole.SYSTEM,
-            content=system_prompt,
+            text=system_prompt,
         )
         self._system_message = system_message
 
@@ -84,12 +84,14 @@ class _Agent(_AgentModel[TState]):
                 stream = llm.stream([system_message] + params.messages)
                 stream = await stream if isawaitable(stream) else stream
 
-                message = AIMessage(role=MessageRole.ASSISTANT, content="")
+                message = AIMessage(role=MessageRole.ASSISTANT)
                 params.messages.append(message)
 
+                buffer = ""
                 async for chunk in stream:
                     delta = str(chunk)
-                    message.content += delta
+                    buffer += delta
+                    message.text = buffer
                     yield params.clone(delta=delta)
 
                 yield params
@@ -115,7 +117,7 @@ class _Agent(_AgentModel[TState]):
                         result = await tool.execute(tool_call.params)
                         return AIMessage(
                             role=MessageRole.TOOL,
-                            content=str(result),
+                            text=result,
                             current_tool_call=tool_call,
                         )
 
@@ -162,14 +164,6 @@ class _Agent(_AgentModel[TState]):
         self,
         params: TState,
     ) -> AsyncIterable[TState]:
-        # user_message = next(
-        #     (x for x in reversed(params.messages) if x.role == MessageRole.USER),
-        #     None,
-        # )
-        # if not user_message:
-        #     raise NotFoundException("No user message found in the initial state")
-        # params.messages = [user_message]
-
         start = len(params.messages)
         async for updates in self.graph.stream(params):
             delta = getattr(updates, "delta", None)
@@ -177,17 +171,21 @@ class _Agent(_AgentModel[TState]):
                 yield params.clone(delta=delta)
             else:
                 messages = cast(list[AIMessage], updates.messages)[start:]
-                content: str = ""
+                text: str = ""
                 for message in messages:
-                    content += str(message.content)
+                    if message.text is not None:
+                        text += message.text
                     if message.role == MessageRole.ASSISTANT and message.tool_calls:
                         for tool_call in message.tool_calls:
-                            content += f"calling tool: {tool_call.name} with args: {tool_call.params}"
+                            text += f"calling tool: {tool_call.name} with args: {tool_call.params}"
 
-                if content:
+                if text:
                     yield params.clone(
                         messages=[
-                            AIMessage(role=MessageRole.ASSISTANT, content=content)
+                            AIMessage(
+                                role=MessageRole.ASSISTANT,
+                                text=text,
+                            )
                         ]
                     )
 

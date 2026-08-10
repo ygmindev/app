@@ -3,12 +3,14 @@ import { Button } from '@lib/frontend/core/components/Button/Button';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
 import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCModel } from '@lib/frontend/core/core.models';
+import { FileInput } from '@lib/frontend/data/components/FileInput/FileInput';
 import { TextInput } from '@lib/frontend/data/components/TextInput/TextInput';
 import { useForm } from '@lib/frontend/data/hooks/useForm/useForm';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { THEME_SIZE } from '@lib/frontend/style/style.constants';
 import { FLEX_JUSTIFY } from '@lib/frontend/style/utils/styler/flexStyler/flexStyler.constants';
 import { useCurrentUser } from '@lib/frontend/user/hooks/useCurrentUser/useCurrentUser';
+import { type MessageModel } from '@lib/model/chat/Message/Message.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
 
 export const ChatForm: LFCModel<ChatFormPropsModel> = ({
@@ -22,12 +24,12 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({
   const { wrapperProps } = useLayoutStyles({ props });
   const currentUser = useCurrentUser();
 
-  const { errors, handleChange, handleReset, handleSubmit, values } = useForm<{
-    content?: string;
-  }>({
-    initialValues: { content: '' },
-    onSubmit: async ({ content }) => {
-      await onSubmit?.({ content, createdBy: currentUser ?? undefined });
+  const { errors, handleChange, handleReset, handleSubmit, values } = useForm<
+    Partial<MessageModel>
+  >({
+    initialValues: { text: '' },
+    onSubmit: async ({ text }) => {
+      await onSubmit?.({ createdBy: currentUser ?? undefined, text });
     },
   });
 
@@ -42,6 +44,15 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({
     <Wrapper
       {...wrapperProps}
       s={THEME_SIZE.SMALL}>
+      <FileInput
+        defaultValue={[
+          { file: new File([''], 'file1.txt'), id: '1', name: 'file 1' },
+          { file: new File([''], 'file2.txt'), id: '2', name: 'file 2' },
+          { file: new File([''], 'file3.txt'), id: '3', name: 'file 3' },
+        ]}
+        isButton={false}
+      />
+
       <TextInput
         border
         bottomElement={
@@ -58,17 +69,17 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({
           </Wrapper>
         }
         elementState={elementState}
-        error={errors?.content}
+        error={errors?.text}
         flex
         isAutoFocus
         isBlurOnSubmit={false}
         isClearable={false}
         numberOfLines={2}
-        onChange={(v) => handleChange('content')(v)}
+        onChange={(v) => handleChange('text')(v)}
         onSubmit={_onSubmit}
         placeholder={placeholder}
         round
-        value={values.content}
+        value={values.text}
       />
     </Wrapper>
   );
