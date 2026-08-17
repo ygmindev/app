@@ -77,7 +77,7 @@ importers:
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       axios:
-        specifier: ^1.15.0
+        specifier: ^1.18.1
         version: 1.18.1(supports-color@5.5.0)
       color:
         specifier: ^5.0.3
@@ -358,6 +358,9 @@ importers:
       amplitude-js:
         specifier: ^8.21.10
         version: 8.21.10
+      axios:
+        specifier: ^1.18.1
+        version: 1.18.1(supports-color@5.5.0)
       color:
         specifier: ^5.0.3
         version: 5.0.3
@@ -424,6 +427,9 @@ importers:
       react-native-advanced-input-mask:
         specifier: ^1.4.6
         version: 1.4.6(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
+      react-native-is-edge-to-edge:
+        specifier: ^1.3.1
+        version: 1.3.1(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
       react-native-reanimated:
         specifier: 3.19.5
         version: 3.19.5(@babel/core@7.29.7)(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
@@ -581,6 +587,9 @@ importers:
       amplitude-js:
         specifier: ^8.21.10
         version: 8.21.10
+      axios:
+        specifier: ^1.18.1
+        version: 1.18.1(supports-color@5.5.0)
       color:
         specifier: ^5.0.3
         version: 5.0.3
@@ -647,6 +656,9 @@ importers:
       react-native-advanced-input-mask:
         specifier: ^1.4.6
         version: 1.4.6(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
+      react-native-is-edge-to-edge:
+        specifier: ^1.3.1
+        version: 1.3.1(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
       react-native-reanimated:
         specifier: 3.19.5
         version: 3.19.5(@babel/core@7.29.7)(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
@@ -843,6 +855,9 @@ importers:
       amplitude-js:
         specifier: ^8.21.10
         version: 8.21.10
+      axios:
+        specifier: ^1.18.1
+        version: 1.18.1(supports-color@5.5.0)
       color:
         specifier: ^5.0.3
         version: 5.0.3
@@ -975,6 +990,9 @@ importers:
       react-native-advanced-input-mask:
         specifier: ^1.4.6
         version: 1.4.6(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
+      react-native-is-edge-to-edge:
+        specifier: ^1.3.1
+        version: 1.3.1(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
       react-native-reanimated:
         specifier: 3.19.5
         version: 3.19.5(@babel/core@7.29.7)(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
@@ -1144,6 +1162,9 @@ importers:
       amplitude-js:
         specifier: ^8.21.10
         version: 8.21.10
+      axios:
+        specifier: ^1.18.1
+        version: 1.18.1(supports-color@5.5.0)
       color:
         specifier: ^5.0.3
         version: 5.0.3
@@ -1213,6 +1234,9 @@ importers:
       react-native-advanced-input-mask:
         specifier: ^1.4.6
         version: 1.4.6(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
+      react-native-is-edge-to-edge:
+        specifier: ^1.3.1
+        version: 1.3.1(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
       react-native-reanimated:
         specifier: 3.19.5
         version: 3.19.5(@babel/core@7.29.7)(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
@@ -1370,6 +1394,9 @@ importers:
       amplitude-js:
         specifier: ^8.21.10
         version: 8.21.10
+      axios:
+        specifier: ^1.18.1
+        version: 1.18.1(supports-color@5.5.0)
       color:
         specifier: ^5.0.3
         version: 5.0.3
@@ -1436,6 +1463,9 @@ importers:
       react-native-advanced-input-mask:
         specifier: ^1.4.6
         version: 1.4.6(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
+      react-native-is-edge-to-edge:
+        specifier: ^1.3.1
+        version: 1.3.1(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
       react-native-reanimated:
         specifier: 3.19.5
         version: 3.19.5(@babel/core@7.29.7)(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
@@ -1514,16 +1544,16 @@ importers:
   packages/service-ai-js:
     dependencies:
       '@aws-sdk/client-s3':
-        specifier: ^3.1030.0
+        specifier: ^3.1086.0
         version: 3.1086.0
       '@aws-sdk/s3-request-presigner':
-        specifier: ^3.1030.0
+        specifier: ^3.1086.0
         version: 3.1086.0
       '@aws-sdk/signature-v4-crt':
-        specifier: ^3.1030.0
+        specifier: ^3.1086.0
         version: 3.1086.0(supports-color@5.5.0)
       '@aws-sdk/signature-v4-multi-region':
-        specifier: ^3.996.16
+        specifier: ^3.996.39
         version: 3.996.39
       '@azure/functions':
         specifier: ^4.12.0
@@ -1586,7 +1616,7 @@ importers:
         specifier: ^1.0.20
         version: 1.0.20
       axios:
-        specifier: ^1.15.0
+        specifier: ^1.18.1
         version: 1.18.1(supports-color@5.5.0)
       class-validator:
         specifier: ^0.15.1
@@ -1676,16 +1706,16 @@ importers:
   packages/service-internal-js:
     dependencies:
       '@aws-sdk/client-s3':
-        specifier: ^3.1030.0
+        specifier: ^3.1086.0
         version: 3.1086.0
       '@aws-sdk/s3-request-presigner':
-        specifier: ^3.1030.0
+        specifier: ^3.1086.0
         version: 3.1086.0
       '@aws-sdk/signature-v4-crt':
-        specifier: ^3.1030.0
+        specifier: ^3.1086.0
         version: 3.1086.0(supports-color@5.5.0)
       '@aws-sdk/signature-v4-multi-region':
-        specifier: ^3.996.16
+        specifier: ^3.996.39
         version: 3.996.39
       '@azure/functions':
         specifier: ^4.12.0
@@ -1748,7 +1778,7 @@ importers:
         specifier: ^1.0.20
         version: 1.0.20
       axios:
-        specifier: ^1.15.0
+        specifier: ^1.18.1
         version: 1.18.1(supports-color@5.5.0)
       class-validator:
         specifier: ^0.15.1
@@ -1848,7 +1878,7 @@ importers:
         specifier: ^147.0.0
         version: 147.0.2
       axios:
-        specifier: ^1.15.0
+        specifier: ^1.18.1
         version: 1.18.1(supports-color@5.5.0)
       class-validator:
         specifier: ^0.15.1
@@ -1910,114 +1940,6 @@ importers:
 
   packages/service-jobs-py: {}
 
-  packages/service-lambda-crawl:
-    dependencies:
-      '@apollo/server':
-        specifier: ^5.5.0
-        version: 5.5.1(graphql@16.14.2)(supports-color@5.5.0)
-      '@as-integrations/aws-lambda':
-        specifier: ^4.0.1
-        version: 4.1.0(@apollo/server@5.5.1(graphql@16.14.2))
-      '@azure/functions':
-        specifier: ^4.12.0
-        version: 4.16.2
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.7(supports-color@5.5.0)
-      '@fastify/cors':
-        specifier: ^11.2.0
-        version: 11.3.0
-      '@fastify/error':
-        specifier: ^4.2.0
-        version: 4.2.0
-      '@netlify/functions':
-        specifier: ^5.2.0
-        version: 5.3.0
-      '@sparticuz/chromium':
-        specifier: ^147.0.0
-        version: 147.0.2
-      apollo-server-lambda:
-        specifier: ^3.13.0
-        version: 3.13.0(graphql@16.14.2)
-      aws-lambda:
-        specifier: ^1.0.7
-        version: 1.0.7
-      axios:
-        specifier: ^1.15.0
-        version: 1.18.1(supports-color@5.5.0)
-      class-validator:
-        specifier: ^0.15.1
-        version: 0.15.1
-      close-with-grace:
-        specifier: ^2.5.0
-        version: 2.5.0
-      cookie:
-        specifier: ^1.1.1
-        version: 1.1.1
-      core-js:
-        specifier: ^3.49.0
-        version: 3.49.0
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.4.0
-      ejs:
-        specifier: ^5.0.2
-        version: 5.0.2
-      email-templates:
-        specifier: ^13.0.1
-        version: 13.0.1(@babel/core@7.29.7)(ejs@5.0.2)(handlebars@4.7.9)(mustache@4.2.0)(pug@3.0.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(underscore@1.13.8)(velocityjs@2.1.6)
-      google-auth-library:
-        specifier: ^10.6.2
-        version: 10.9.0
-      google-spreadsheet:
-        specifier: ^5.2.0
-        version: 5.3.0(google-auth-library@10.9.0)
-      http-errors:
-        specifier: ^2.0.1
-        version: 2.0.1
-      i18next:
-        specifier: ^26.0.5
-        version: 26.3.6(typescript@6.0.3)
-      inversify:
-        specifier: ^8.1.3
-        version: 8.1.3(reflect-metadata@0.2.2)
-      ioredis:
-        specifier: ^5.10.1
-        version: 5.11.1
-      json-stringify-safe:
-        specifier: ^5.0.1
-        version: 5.0.1
-      lodash:
-        specifier: ^4.18.1
-        version: 4.18.1
-      nanoid:
-        specifier: ^5.1.9
-        version: 5.1.16
-      p-queue:
-        specifier: ^9.1.2
-        version: 9.3.1
-      pino:
-        specifier: ^10.3.1
-        version: 10.3.1
-      pino-pretty:
-        specifier: ^13.1.3
-        version: 13.1.3
-      puppeteer:
-        specifier: ^24.41.0
-        version: 24.43.1(typescript@6.0.3)
-      puppeteer-extra:
-        specifier: ^3.3.6
-        version: 3.3.6(puppeteer-core@24.43.1)(puppeteer@24.43.1(typescript@6.0.3))(supports-color@5.5.0)
-      puppeteer-extra-plugin-stealth:
-        specifier: ^2.11.2
-        version: 2.11.2(puppeteer-extra@3.3.6(puppeteer-core@24.43.1)(puppeteer@24.43.1(typescript@6.0.3)))
-      thenby:
-        specifier: ^1.4.0
-        version: 1.4.1
-      ws:
-        specifier: ^8.20.0
-        version: 8.21.1
-
   packages/service-lambda-js:
     dependencies:
       '@apollo/server':
@@ -2025,7 +1947,7 @@ importers:
         version: 5.5.1(graphql@16.14.2)(supports-color@5.5.0)
       '@as-integrations/aws-lambda':
         specifier: ^4.0.1
-        version: 4.1.0(@apollo/server@5.5.1(graphql@16.14.2))
+        version: 4.1.0(@apollo/server@5.5.1(graphql@16.14.2)(supports-color@5.5.0))
       '@azure/functions':
         specifier: ^4.12.0
         version: 4.16.2
@@ -2120,7 +2042,7 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7
       axios:
-        specifier: ^1.15.0
+        specifier: ^1.18.1
         version: 1.18.1(supports-color@5.5.0)
       class-validator:
         specifier: ^0.15.1
@@ -2264,7 +2186,7 @@ importers:
         specifier: ^5.2.0
         version: 5.3.0
       axios:
-        specifier: ^1.15.0
+        specifier: ^1.18.1
         version: 1.18.1(supports-color@5.5.0)
       class-validator:
         specifier: ^0.15.1
@@ -13246,14 +13168,6 @@ packages:
     resolution: {integrity: sha512-eAmLkjDjAFCVXg7A1unxHsLf961m6y17QFqXqAXGj/gVkKFrEICfStRfwUlGNfeCEjNRa32JEWOUTlYXPyyKvA==}
     engines: {node: '>=14'}
 
-  google-spreadsheet@5.3.0:
-    resolution: {integrity: sha512-hsMI2hc1aqDgZsfOEvJ+M4vwH6h8OuXKdxwKPPQq/OKs2dYnuaD8qx3GtiPyYcXRSN60j7EHbaHBPihOhzwY/A==}
-    peerDependencies:
-      google-auth-library: '>=8.8.0'
-    peerDependenciesMeta:
-      google-auth-library:
-        optional: true
-
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
     engines: {node: '>= 0.4'}
@@ -14713,10 +14627,6 @@ packages:
   ky@1.14.3:
     resolution: {integrity: sha512-9zy9lkjac+TR1c2tG+mkNSVlyOpInnWdSMiue4F+kq8TwJSgv6o8jhLRg8Ho6SnZ9wOYUq/yozts9qQCfk7bIw==}
     engines: {node: '>=18'}
-
-  ky@2.0.2:
-    resolution: {integrity: sha512-/GmXpo9F9W+f8n4Ivr2iH+7h7wL7jLbLKWkMlpflcCRb6kGjBfTlASEXaZ9qUgNTn4VgS0P2pwxxzQ4EM6Ulgg==}
-    engines: {node: '>=22'}
 
   labeled-stream-splicer@2.0.2:
     resolution: {integrity: sha512-Ca4LSXFFZUjPScRaqOcFxneA0VpKZr4MMYCljyQr4LIewTLb3Y0IUTIsnBBsVubIeEfxeSZpSjSsRM8APEQaAw==}
@@ -19792,7 +19702,7 @@ snapshots:
     dependencies:
       xss: 1.0.15
 
-  '@as-integrations/aws-lambda@4.1.0(@apollo/server@5.5.1(graphql@16.14.2))':
+  '@as-integrations/aws-lambda@4.1.0(@apollo/server@5.5.1(graphql@16.14.2)(supports-color@5.5.0))':
     dependencies:
       '@apollo/server': 5.5.1(graphql@16.14.2)(supports-color@5.5.0)
       '@types/aws-lambda': 8.10.162
@@ -32766,13 +32676,6 @@ snapshots:
 
   google-logging-utils@1.1.3: {}
 
-  google-spreadsheet@5.3.0(google-auth-library@10.9.0):
-    dependencies:
-      es-toolkit: 1.49.0
-      ky: 2.0.2
-    optionalDependencies:
-      google-auth-library: 10.9.0
-
   gopd@1.2.0: {}
 
   graceful-fs@4.2.10: {}
@@ -34780,8 +34683,6 @@ snapshots:
   kleur@3.0.3: {}
 
   ky@1.14.3: {}
-
-  ky@2.0.2: {}
 
   labeled-stream-splicer@2.0.2:
     dependencies:
@@ -37679,6 +37580,11 @@ snapshots:
     dependencies:
       react: 19.2.7
       react-native: 0.85.3(@babel/core@7.29.7(supports-color@5.5.0))(@types/react@19.2.17)(react@19.2.7)(supports-color@5.5.0)
+
+  react-native-is-edge-to-edge@1.3.1(react-native@0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7):
+    dependencies:
+      react: 19.2.7
+      react-native: 0.85.3(@babel/core@7.29.7)(@types/react@19.2.17)(react@19.2.7)
 
   react-native-keyboard-controller@1.22.1(react-native-reanimated@3.19.5(@babel/core@7.29.7(supports-color@5.5.0))(react-native@0.85.3(@babel/core@7.29.7(supports-color@5.5.0))(@types/react@19.2.17)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.85.3(@babel/core@7.29.7(supports-color@5.5.0))(@types/react@19.2.17)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7):
     dependencies:

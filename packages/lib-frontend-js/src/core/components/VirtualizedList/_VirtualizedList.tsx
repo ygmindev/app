@@ -33,7 +33,7 @@ const _FlatList = <TType extends WithIdModel>({
     <FlatList
       {...props}
       ref={flatListRef}
-      style={{ maxHeight }}
+      style={{ maxHeight, overflow: 'visible' }}
     />
   );
 };

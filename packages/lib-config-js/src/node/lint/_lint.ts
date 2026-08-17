@@ -6,7 +6,7 @@ import { flatConfigs as importPlugin } from 'eslint-plugin-import';
 import jsoncPlugin from 'eslint-plugin-jsonc';
 import prettierPlugin from 'eslint-plugin-prettier/recommended';
 import reactPlugin from 'eslint-plugin-react';
-import sortDestructureKeysPlugin from 'eslint-plugin-sort-destructure-keys';
+// import sortDestructureKeysPlugin from 'eslint-plugin-sort-destructure-keys';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -110,14 +110,14 @@ export const _lint = ({
 
     ...jsoncPlugin.configs['flat/recommended-with-jsonc'],
 
-    {
-      plugins: {
-        'sort-destructure-keys': sortDestructureKeysPlugin,
-      },
-      rules: {
-        'sort-destructure-keys/sort-destructure-keys': 'error',
-      },
-    },
+    // {
+    //   plugins: {
+    //     'sort-destructure-keys': sortDestructureKeysPlugin,
+    //   },
+    //   rules: {
+    //     'sort-destructure-keys/sort-destructure-keys': ["error", { "caseSensitive": true }],
+    //   },
+    // },
     {
       plugins: {
         perfectionist,

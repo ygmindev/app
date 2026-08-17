@@ -20,3 +20,9 @@ export enum PROPERTY_TYPE {
   ID = 'id',
   PRIMARY_KEY = 'primaryKey',
 }
+
+export enum FILE_STATUS {
+  DONE = 'done',
+  ERROR = 'error',
+  UPLOADING = 'uploading',
+}

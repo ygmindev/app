@@ -51,7 +51,7 @@ export class _PubSub<TType extends Record<string, unknown>>
     this._client = await connect(_pubSub(this._config));
     if (this._config.retention) {
       const js = await this._client.jetstreamManager();
-      const { maxAge, maxRows, maxSize, nReplicas, name, prefixes } = this._config.retention;
+      const { maxAge, maxRows, maxSize, name, nReplicas, prefixes } = this._config.retention;
       const subjects = prefixes.map((v) => `${v}.*`);
       try {
         const info = await js.streams.info(name);

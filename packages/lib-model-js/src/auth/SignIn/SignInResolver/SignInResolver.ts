@@ -2,7 +2,8 @@ import { withContainer } from '@lib/backend/core/utils/withContainer/withContain
 import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
-import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
+import { withMutationOutput } from '@lib/backend/resource/utils/withMutationOutput/withMutationOutput';
+import { withQueryOutput } from '@lib/backend/resource/utils/withQueryOutput/withQueryOutput';
 import { RequestContextModel } from '@lib/config/api/api.models';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import {
@@ -21,14 +22,13 @@ import { SignInUserUpdateInput } from '@lib/model/auth/SignIn/SignInUserUpdateIn
 import { SignInUserUpdateInputModel } from '@lib/model/auth/SignIn/SignInUserUpdateInput/SignInUserUpdateInput.model';
 import { SIGN_IN, VERIFY_TOKEN } from '@lib/shared/auth/auth.constants';
 import { withInject } from '@lib/shared/core/utils/withInject/withInject';
-import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 
 @withContainer()
 @withResolver({ Resource: () => SignIn })
 export class SignInResolver implements SignInResolverModel {
   @withInject(SignInImplementation) protected signInImplementation!: SignInImplementation;
 
-  @withOutput({
+  @withQueryOutput({
     access: ACCESS_LEVEL.PUBLIC,
     name: SIGN_IN,
     Resource: () => SignIn,
@@ -40,10 +40,9 @@ export class SignInResolver implements SignInResolverModel {
     return this.signInImplementation.signIn(input);
   }
 
-  @withOutput({
+  @withMutationOutput({
     access: ACCESS_LEVEL.PROTECTED,
     name: SIGN_IN_USER_UPDATE,
-    operation: GRAPHQL_OPERATION.MUTATION,
     Resource: () => SignInUserUpdate,
   })
   async userUpdate(
@@ -55,7 +54,7 @@ export class SignInResolver implements SignInResolverModel {
     return this.signInImplementation.userUpdate(input, context);
   }
 
-  @withOutput({
+  @withQueryOutput({
     access: ACCESS_LEVEL.PROTECTED,
     name: SIGN_IN_USERNAME_UPDATE,
     Resource: () => SignIn,
@@ -69,7 +68,7 @@ export class SignInResolver implements SignInResolverModel {
     return this.signInImplementation.usernameUpdate(input, context);
   }
 
-  @withOutput({
+  @withQueryOutput({
     access: ACCESS_LEVEL.PUBLIC,
     name: VERIFY_TOKEN,
     Resource: () => SignIn,

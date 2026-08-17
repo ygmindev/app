@@ -1,19 +1,20 @@
+import { Badgeable } from '@lib/frontend/core/components/Badgeable/Badgeable';
+import { Button } from '@lib/frontend/core/components/Button/Button';
+import { Image } from '@lib/frontend/core/components/Image/Image';
 import { type PreviewListPropsModel } from '@lib/frontend/core/components/PreviewList/PreviewList.models';
-import { Text } from '@lib/frontend/core/components/Text/Text';
 import { VirtualizedList } from '@lib/frontend/core/components/VirtualizedList/VirtualizedList';
 import { Wrapper } from '@lib/frontend/core/components/Wrapper/Wrapper';
-import { ELEMENT_STATE } from '@lib/frontend/core/core.constants';
 import { type LFCPropsModel } from '@lib/frontend/core/core.models';
 import { useLayoutStyles } from '@lib/frontend/style/hooks/useLayoutStyles/useLayoutStyles';
 import { useTheme } from '@lib/frontend/style/hooks/useTheme/useTheme';
-import { THEME_SIZE } from '@lib/frontend/style/style.constants';
+import { THEME_SIZE, THEME_SIZE_MORE } from '@lib/frontend/style/style.constants';
 import { type WithIdModel } from '@lib/shared/core/utils/withId/withId.models';
 import { type ReactElement } from 'react';
 
 export const PreviewList = <TType extends WithIdModel>({
   elementState,
-  emptyString = ({ t }) => t('core:nothingToShow'),
   items,
+  onDelete,
   ...props
 }: LFCPropsModel<PreviewListPropsModel<TType>>): ReactElement<
   LFCPropsModel<PreviewListPropsModel<TType>>
@@ -25,27 +26,36 @@ export const PreviewList = <TType extends WithIdModel>({
       {...wrapperProps}
       isHorizontal
       itemSize={theme.shape.size[THEME_SIZE.LARGE]}
-      items={
-        (items?.length ?? 0) > 0
-          ? (items ?? [])
-          : [
-              {
-                elementState: ELEMENT_STATE.DISABLED,
-                icon: 'empty',
-                id: 'empty',
-                title: emptyString,
-              } as unknown as TType,
-            ]
-      }
+      items={items ?? []}
       render={(item) => (
-        <Wrapper
-          border
-          height={theme.shape.height[THEME_SIZE.LARGE]}
-          key={item.id}
-          round={theme.shape.borderRadius[THEME_SIZE.SMALL]}
-          width={theme.shape.height[THEME_SIZE.LARGE]}>
-          <Text>{item.id}</Text>
-        </Wrapper>
+        <Badgeable
+          badgeElement={
+            onDelete ? (
+              <Button
+                icon="times"
+                onPress={async () => onDelete(item)}
+                p={0}
+                size={THEME_SIZE_MORE.XSMALL}
+              />
+            ) : undefined
+          }
+          isHoverable
+          key={item.id}>
+          <Wrapper
+            border
+            height={theme.shape.height[THEME_SIZE.LARGE]}
+            isOverflowHidden
+            round={theme.shape.borderRadius[THEME_SIZE.SMALL]}
+            width={theme.shape.height[THEME_SIZE.LARGE]}>
+            {item.image && (
+              <Image
+                height={theme.shape.height[THEME_SIZE.LARGE]}
+                src={item.image}
+                width={theme.shape.height[THEME_SIZE.LARGE]}
+              />
+            )}
+          </Wrapper>
+        </Badgeable>
       )}
       s
     />

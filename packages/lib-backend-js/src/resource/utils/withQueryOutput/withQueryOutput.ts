@@ -1,25 +1,25 @@
 import { withAccess } from '@lib/backend/resource/utils/withAccess/withAccess';
-import { _withOutput } from '@lib/backend/resource/utils/withOutput/_withOutput';
+import { _withQueryOutput } from '@lib/backend/resource/utils/withQueryOutput/_withQueryOutput';
 import {
-  type WithOutputModel,
-  type WithOutputParamsModel,
-} from '@lib/backend/resource/utils/withOutput/withOutput.models';
+  type WithQueryOutputModel,
+  type WithQueryOutputParamsModel,
+} from '@lib/backend/resource/utils/withQueryOutput/withQueryOutput.models';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 
-export const withOutput =
+export const withQueryOutput =
   <TType extends unknown>({
-    Resource,
     access = ACCESS_LEVEL.RESTRICTED,
     isArray,
     name,
     operation = GRAPHQL_OPERATION.QUERY,
+    Resource,
     topic,
     type,
-  }: WithOutputParamsModel<TType>): WithOutputModel =>
+  }: WithQueryOutputParamsModel<TType>): WithQueryOutputModel =>
   (target, propertyKey, descriptor) => {
     withAccess({ access })(target, propertyKey, descriptor);
-    _withOutput({ Resource, isArray, name, operation, topic, type })(
+    _withQueryOutput({ isArray, name, operation, Resource, topic, type })(
       target,
       propertyKey,
       descriptor,

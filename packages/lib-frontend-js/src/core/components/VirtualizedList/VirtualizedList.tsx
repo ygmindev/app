@@ -39,7 +39,8 @@ export const VirtualizedList = <TType extends WithIdModel>({
           item = (
             <Wrapper
               height={isHorizontal ? undefined : props.itemSize}
-              width={isHorizontal ? props.itemSize : undefined}>
+              width={isHorizontal ? props.itemSize : undefined}
+              zIndex>
               {item}
             </Wrapper>
           );

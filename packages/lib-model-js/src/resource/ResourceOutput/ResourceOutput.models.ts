@@ -23,8 +23,7 @@ export type ResourceOutputModel<
 };
 
 export type ResultModel<TMethod extends RESOURCE_METHOD_TYPE, TType> = TMethod extends
-  | RESOURCE_METHOD_TYPE.REMOVE
-  | RESOURCE_METHOD_TYPE.UPDATE_MANY
+  RESOURCE_METHOD_TYPE.REMOVE | RESOURCE_METHOD_TYPE.UPDATE_MANY
   ? boolean
   : TMethod extends
         | RESOURCE_METHOD_TYPE.CREATE

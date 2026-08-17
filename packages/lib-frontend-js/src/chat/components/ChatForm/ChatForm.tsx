@@ -45,12 +45,7 @@ export const ChatForm: LFCModel<ChatFormPropsModel> = ({
       {...wrapperProps}
       s={THEME_SIZE.SMALL}>
       <FileInput
-        defaultValue={[
-          { file: new File([''], 'file1.txt'), id: '1', name: 'file 1' },
-          { file: new File([''], 'file2.txt'), id: '2', name: 'file 2' },
-          { file: new File([''], 'file3.txt'), id: '3', name: 'file 3' },
-        ]}
-        isButton={false}
+      // isButton={false}
       />
 
       <TextInput

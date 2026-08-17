@@ -3,7 +3,7 @@ import { withContext } from '@lib/backend/http/utils/withContext/withContext';
 import { withResolver } from '@lib/backend/http/utils/withResolver/withResolver';
 import { withIdInput } from '@lib/backend/resource/utils/withIdInput/withIdInput';
 import { withInput } from '@lib/backend/resource/utils/withInput/withInput';
-import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
+import { withQueryOutput } from '@lib/backend/resource/utils/withQueryOutput/withQueryOutput';
 import { RequestContextModel } from '@lib/config/api/api.models';
 import { ACCESS_LEVEL } from '@lib/model/auth/Access/Access.constants';
 import { PaymentInput } from '@lib/model/billing/PaymentInput/PaymentInput';
@@ -29,7 +29,7 @@ export class PaymentMethodResolver implements PaymentMethodResolverModel {
   @withInject(PaymentMethodImplementation)
   protected paymentMethodImplementation!: PaymentMethodImplementationModel;
 
-  @withOutput({
+  @withQueryOutput({
     access: ACCESS_LEVEL.PROTECTED,
     name: CREATE_TOKEN,
     type: DATA_TYPE.STRING,
@@ -42,11 +42,11 @@ export class PaymentMethodResolver implements PaymentMethodResolverModel {
     return this.paymentMethodImplementation.createToken(input, context);
   }
 
-  @withOutput({
-    Resource: () => PaymentMethod,
+  @withQueryOutput({
     access: ACCESS_LEVEL.PROTECTED,
     isArray: true,
     name: PAYMENT_METHOD_GET_ALL,
+    Resource: () => PaymentMethod,
   })
   async getAll(
     @withContext() context?: RequestContextModel,
@@ -54,7 +54,7 @@ export class PaymentMethodResolver implements PaymentMethodResolverModel {
     return this.paymentMethodImplementation.getAll(context);
   }
 
-  @withOutput({
+  @withQueryOutput({
     access: ACCESS_LEVEL.PROTECTED,
     name: REMOVE_TOKEN,
     type: DATA_TYPE.BOOLEAN,

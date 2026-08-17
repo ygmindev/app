@@ -20,7 +20,6 @@ import { SIGN_IN, VERIFY_TOKEN } from '@lib/shared/auth/auth.constants';
 import { UnauthorizedError } from '@lib/shared/auth/errors/UnauthorizedError/UnauthorizedError';
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { sleep } from '@lib/shared/core/utils/sleep/sleep';
-import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 import { type GraphqlQueryParamsFieldsModel } from '@lib/shared/graphql/utils/graphqlQuery/graphqlQuery.models';
 import { toGraphqlParamsFields } from '@lib/shared/graphql/utils/resourceQuery/resourceQuery';
 
@@ -37,7 +36,7 @@ export const useSignInResource = (): UseSignInResourceModel => {
   const [, authStatusSet] = useStore('auth.status');
   const [, authTokenSet] = useStore('auth.token');
 
-  const { query } = useGraphql();
+  const { mutate, query } = useGraphql();
 
   const signIn = async (signIn?: PartialModel<SignInModel>): Promise<void> => {
     if (signIn) {
@@ -103,10 +102,9 @@ export const useSignInResource = (): UseSignInResourceModel => {
 
     userUpdate: async (input) => {
       const name = SIGN_IN_USER_UPDATE;
-      const output = await query<SignInUserUpdateModel, { input: SignInUserUpdateInputModel }>({
+      const output = await mutate<SignInUserUpdateModel, { input: SignInUserUpdateInputModel }>({
         fields: [{ result: USER_FIELDS, signIn: ['token', { user: USER_FIELDS }] }],
         name,
-        operation: GRAPHQL_OPERATION.MUTATION,
         params: { input: `${name}Input` },
         variables: { input },
       });

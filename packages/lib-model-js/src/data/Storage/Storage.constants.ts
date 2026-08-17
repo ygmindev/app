@@ -1,3 +1,5 @@
 export const STORAGE_RESOURCE_NAME = 'Storage';
 
-export const GET_URI = 'getUri';
+export const PRESIGN = 'presign';
+
+export const PRESIGN_MANY = 'presignMany';

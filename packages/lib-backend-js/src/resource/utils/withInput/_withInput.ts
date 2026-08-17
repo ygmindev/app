@@ -5,8 +5,8 @@ import {
 import { Arg } from 'type-graphql';
 
 export const _withInput = <TType extends unknown>({
-  Resource,
   isOptional = true,
   name = 'input',
+  Resource,
 }: _WithInputParamsModel<TType>): _WithInputModel =>
   Arg(name, Resource, { nullable: isOptional }) as _WithInputModel;

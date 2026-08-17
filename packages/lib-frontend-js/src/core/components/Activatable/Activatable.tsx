@@ -27,7 +27,7 @@ export const Activatable: RSFCModel<ActivatableRefModel, ActivatablePropsModel> 
   const isMobile = useIsMobile();
   const isVisible = isDisabled || (isMobile && trigger == ACTIVATABLE_TRIGGER.HOVER);
   const [isActive, isActiveSet] = useState<boolean>(isVisible);
-  const childrenF: ReactElement<PressablePropsModel> | undefined | null = isFunction(children)
+  const childrenF: ReactElement | undefined | null = isFunction(children)
     ? children(isActive)
     : children;
 

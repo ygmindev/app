@@ -10,9 +10,7 @@ export type ActivatablePropsModel = {
   onHoverIn?(): void;
   onHoverOut?(): void;
   onInactive?(): void;
-} & ChildPropsModel<
-  ReactElement<PressablePropsModel> | ((isActive?: boolean) => ReactElement<PressablePropsModel>)
->;
+} & ChildPropsModel<ReactElement | ((isActive?: boolean) => ReactElement)>;
 
 export type ActivatableRefModel = {
   press: PressablePropsModel['onPress'];

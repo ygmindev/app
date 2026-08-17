@@ -5,7 +5,7 @@ import { type DATA_TYPE } from '@lib/shared/data/data.constants';
 import { type GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 import { type RESOURCE_METHOD_TYPE } from '@lib/shared/resource/resource.models';
 
-export type _WithOutputParamsModel<TType extends unknown> = {
+export type _WithQueryOutputParamsModel<TType extends unknown> = {
   isArray?: boolean;
 
   name: string;
@@ -22,4 +22,4 @@ export type _WithOutputParamsModel<TType extends unknown> = {
   ): string;
 };
 
-export type _WithOutputModel = MethodDecorator;
+export type _WithQueryOutputModel = MethodDecorator;

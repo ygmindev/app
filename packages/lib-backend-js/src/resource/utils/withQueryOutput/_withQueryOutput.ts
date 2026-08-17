@@ -1,7 +1,7 @@
 import {
-  type _WithOutputModel,
-  type _WithOutputParamsModel,
-} from '@lib/backend/resource/utils/withOutput/_withOutput.models';
+  type _WithQueryOutputModel,
+  type _WithQueryOutputParamsModel,
+} from '@lib/backend/resource/utils/withQueryOutput/_withQueryOutput.models';
 import { InvalidArgumentError } from '@lib/shared/core/errors/InvalidArgumentError/InvalidArgumentError';
 import { Container } from '@lib/shared/core/utils/Container/Container';
 import { PubSub } from '@lib/shared/core/utils/PubSub/PubSub';
@@ -10,14 +10,14 @@ import { GRAPHQL_OPERATION } from '@lib/shared/graphql/graphql.constants';
 import { GraphQLDateTime, GraphQLUnsignedFloat } from 'graphql-scalars';
 import { Mutation, Query, Subscription } from 'type-graphql';
 
-export const _withOutput = <TType extends unknown>({
-  Resource,
+export const _withQueryOutput = <TType extends unknown>({
   isArray,
   name,
   operation = GRAPHQL_OPERATION.QUERY,
+  Resource,
   topic,
   type,
-}: _WithOutputParamsModel<TType>): _WithOutputModel => {
+}: _WithQueryOutputParamsModel<TType>): _WithQueryOutputModel => {
   const ResourceF = Resource
     ? () => (isArray ? [Resource()] : Resource())
     : (() => {

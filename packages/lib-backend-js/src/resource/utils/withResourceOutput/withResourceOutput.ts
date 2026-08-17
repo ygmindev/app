@@ -1,4 +1,4 @@
-import { withOutput } from '@lib/backend/resource/utils/withOutput/withOutput';
+import { withQueryOutput } from '@lib/backend/resource/utils/withQueryOutput/withQueryOutput';
 import {
   type WithResourceOutputModel,
   type WithResourceOutputParamsModel,
@@ -21,7 +21,7 @@ export const withResourceOutput =
   (target, propertyKey, descriptor) => {
     const nameF = `${name}${method}`;
     const OutputF = ResourceOutput({ Resource, RootResource, method, name: nameF });
-    withOutput({
+    withQueryOutput({
       Resource: () => OutputF ?? Boolean,
       access,
       name: nameF,
