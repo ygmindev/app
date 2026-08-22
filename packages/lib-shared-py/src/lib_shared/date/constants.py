@@ -1,14 +1,3 @@
-from enum import Enum
-
-
-class DATE_UNIT(Enum):
-    DAY = "DAY"
-    WEEK = "WEEK"
-    MONTH = "MONTH"
-    QUARTER = "QUARTER"
-    YEAR = "YEAR"
-
-
 CURVE_TENORS = [
     {"tenor_unit": DATE_UNIT.MONTH, "tenor": 1},
     {"tenor_unit": DATE_UNIT.MONTH, "tenor": 3},

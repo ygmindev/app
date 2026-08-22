@@ -72,7 +72,6 @@ export const FileInput: RSFCModel<FileInputRefModel, FileInputPropsModel> = ({
 
       <PreviewList
         items={valueControlled?.map(({ id, name, preview, src, status }) => ({
-          // description: fileSizeFormat(size ?? 0),
           icon: 'image',
           id,
           image: status === FILE_STATUS.UPLOADING ? preview : (src ?? preview),

@@ -1,5 +1,6 @@
 export const IONIC_ICONS = {
-  add: 'add-circle-outline',
+  add: 'add',
+  addCircle: 'add-circle-outline',
   alarm: 'alarm-outline',
   analytics: 'analytics-outline',
   apps: 'apps-outline',
@@ -162,6 +163,7 @@ export const MATERIAL_ICONS = {
   chevronUpDouble: 'chevron-double-up',
   monitor: 'monitor',
   numberList: 'format-list-numbered',
+  paperclip: 'paperclip',
   text: 'format-text',
   textbox: 'form-textbox',
 };

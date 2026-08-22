@@ -2,7 +2,7 @@ import datetime
 
 import QuantLib as ql
 
-from lib_quant.date.constants import FREQUENCY
+from lib_quant.date.constants import Frequency
 from lib_quant.date.utils.date_convention import DateConvention
 from lib_quant.pricing.utils.bond_price.bond_price_models import BondPriceModel
 from lib_quant.pricing.utils.bond_yield.bond_yield_models import BondYieldModel
@@ -19,11 +19,11 @@ class _FixedRateBond(_FixedRateBondModel):
         super().__init__(**kwargs)
 
         match self.coupon_frequency:
-            case FREQUENCY.ANNUAL:
+            case Frequency.ANNUAL:
                 period = ql.Period(1, ql.Years)
-            case FREQUENCY.MONTHLY:
+            case Frequency.MONTHLY:
                 period = ql.Period(1, ql.Months)
-            case FREQUENCY.QUARTERLY:
+            case Frequency.QUARTERLY:
                 period = ql.Period(3, ql.Months)
             case _:
                 period = ql.Period(6, ql.Months)
