@@ -1,5 +1,5 @@
 # template version: 1.0.0
 
-from .security import Security
+from .asset import Asset
 
-__all__ = ["Security"]
+__all__ = ["Asset"]

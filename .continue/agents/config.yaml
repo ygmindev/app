@@ -6,3 +6,7 @@ models:
     model: nvidia/nemotron-3-ultra-550b-a55b:free
     apiBase: https://openrouter.ai/api/v1
     apiKey: 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
+  - name: Autodetect
+    provider: lmstudio
+    model: AUTODETECT
+    apiBase: http://localhost:1234/v1/
