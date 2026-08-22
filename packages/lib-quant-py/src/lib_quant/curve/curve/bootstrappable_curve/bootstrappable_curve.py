@@ -21,10 +21,10 @@ class BootstrappableCurve(Curve):
         quotes: list[Quote],
     ) -> None:
         helpers = [self._get_helper(q) for q in quotes]
-        self._curve = self._interpolator(
+        self._curve = self.interpolation.ql(
             ql.Date(self.as_of_date.day, self.as_of_date.month, self.as_of_date.year),
             helpers,
-            self.calendar.day_count.to_ql(),
+            self.calendar.day_count.ql,
         )
         self._curve.enableExtrapolation()
         self._handle.linkTo(self._curve)
@@ -38,7 +38,7 @@ class BootstrappableCurve(Curve):
             raise ValueError("Curve is not initialized")
         return self._curve.zeroRate(
             ql.Date(timestamp.day, timestamp.month, timestamp.year),
-            self.calendar.day_count.to_ql(),
+            self.calendar.day_count.ql,
             ql.Annual,
             ql.Continuous,
         ).rate()

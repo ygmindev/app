@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Type
 
 import QuantLib as ql
 from lib_shared.core.utils.base_model.base_model import BaseModel
@@ -20,22 +19,6 @@ class Curve(BaseModel):
 
     _curve: ql.YieldTermStructure = PrivateField()
     _handle: ql.RelinkableYieldTermStructureHandle = PrivateField()
-
-    @property
-    def _interpolator(self) -> Type:
-        match self.interpolation:
-            case InterpolationMethod.LINEAR:
-                return ql.Linear
-            case InterpolationMethod.LOG_LINEAR:
-                return ql.LogLinear
-            case InterpolationMethod.PIECEWISE_LINEAR:
-                return ql.PiecewiseLinearForward
-            case InterpolationMethod.PIECEWISE_LOG_CUBIC:
-                return ql.PiecewiseLogCubicDiscount
-            case InterpolationMethod.PIECEWISE_SPLINE_CUBIC:
-                return ql.PiecewiseSplineCubicDiscount
-            case _:
-                raise ValueError(f"Invalid interpolation: {self.interpolation}")
 
     @property
     def curve(self) -> ql.YieldTermStructure:
@@ -74,8 +57,8 @@ class Curve(BaseModel):
         return self.curve.forwardRate(
             ql.Date(start.day, start.month, start.year),
             ql.Date(end.day, end.month, end.year),
-            self.calendar.day_count.to_ql(),
-            compounding.to_ql(),
+            self.calendar.day_count.ql,
+            compounding.ql,
         )
 
     def zero_rate(
@@ -85,9 +68,9 @@ class Curve(BaseModel):
     ) -> float:
         return self.curve.zeroRate(
             ql.Date(date.day, date.month, date.year),
-            self.calendar.day_count.to_ql(),
+            self.calendar.day_count.ql,
             ql.Annual,
-            compounding.to_ql(),
+            compounding.ql,
         )
 
     def shifted(self, bps: float) -> "Curve":

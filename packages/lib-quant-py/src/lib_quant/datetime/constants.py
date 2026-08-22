@@ -1,4 +1,5 @@
 from enum import StrEnum
+from typing import Any
 
 import QuantLib as ql
 
@@ -9,8 +10,18 @@ class BusinessDayConvention(StrEnum):
     FOLLOWING = "Following"
     MODIFIED_FOLLOWING = "Modified_Following"
     PRECEDING = "Preceding"
-    MODIFIED_PREFEDING = "Modified_Preceding"
+    MODIFIED_PRECEDING = "Modified_Preceding"
     UNADJUSTED = "Unadjusted"
+
+    @property
+    def ql(self) -> Any:
+        return {
+            BusinessDayConvention.FOLLOWING: ql.Following,
+            BusinessDayConvention.MODIFIED_FOLLOWING: ql.ModifiedFollowing,
+            BusinessDayConvention.PRECEDING: ql.Preceding,
+            BusinessDayConvention.MODIFIED_PRECEDING: ql.ModifiedPreceding,
+            BusinessDayConvention.UNADJUSTED: ql.Unadjusted,
+        }[self]
 
 
 class Frequency(StrEnum):
@@ -62,6 +73,13 @@ class Direction(StrEnum):
     FORWARD = "FORWARD"
     BACKWARD = "BACKWARD"
 
+    @property
+    def ql(self) -> Any:
+        return {
+            Direction.FORWARD: ql.DateGeneration.Forward,
+            Direction.BACKWARD: ql.DateGeneration.Backward,
+        }[self]
+
 
 class DayCount(StrEnum):
     ACT_360 = "ACT/360"
@@ -69,16 +87,26 @@ class DayCount(StrEnum):
     ACT_ACT = "ACT/ACT"
     THIRTY_360 = "THIRTY/360"
 
-    def to_ql(self) -> ql.DayCounter:
-        return _DAY_COUNT_MAP[self]
+    @property
+    def ql(self) -> ql.DayCounter:
+        return {
+            DayCount.ACT_360: ql.Actual360(),
+            DayCount.ACT_365: ql.Actual365Fixed(),
+            DayCount.ACT_ACT: ql.ActualActual(),
+            DayCount.THIRTY_360: ql.Thirty360(),
+        }[self]
 
 
-_DAY_COUNT_MAP: dict[DayCount, ql.DayCounter] = {
-    DayCount.ACT_360: ql.Actual360(),
-    DayCount.ACT_365: ql.Actual365Fixed(),
-    DayCount.ACT_ACT: ql.ActualActual(),
-    DayCount.THIRTY_360: ql.Thirty360(),
-}
+class Region(StrEnum):
+    US = "US"
+    UK = "UK"
+
+    @property
+    def ql(self) -> ql.Calendar:
+        return {
+            Region.US: ql.UnitedStates(ql.UnitedStates.NYSE),
+            Region.UK: ql.UnitedKingdom(),
+        }[self]
 
 
 class DateUnit(StrEnum):

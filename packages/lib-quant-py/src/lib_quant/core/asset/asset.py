@@ -14,7 +14,8 @@ class Asset(BaseModel):
     currency: str | None = None
     tenor: Period | datetime.date | None = None
 
-    def to_ql(self) -> ql.Observable:
+    @property
+    def ql(self) -> ql.Observable:
         raise NotImplementedError("subclasses must implement this method")
 
     @property

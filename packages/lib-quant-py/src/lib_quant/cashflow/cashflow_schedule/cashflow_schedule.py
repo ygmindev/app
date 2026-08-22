@@ -45,8 +45,8 @@ class CashflowSchedule(BaseModel):
             return ql.CashFlows.yieldRate(
                 self.leg,
                 0.0,
-                calendar.day_count.to_ql(),
-                compounding.to_ql(),
+                calendar.day_count.ql,
+                compounding.ql,
                 ql.Annual,
                 True,
                 as_of,

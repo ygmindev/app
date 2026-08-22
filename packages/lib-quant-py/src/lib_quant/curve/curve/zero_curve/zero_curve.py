@@ -15,7 +15,9 @@ class ZeroCurve(Curve):
         compounding: Compounding = Compounding.CONTINUOUS,
     ) -> None:
         tenors = [
-            self.calendar.year_fraction(t) if isinstance(t, Period) else t
+            self.calendar.year_fraction(self.calendar.advance(t))
+            if isinstance(t, Period)
+            else t
             for t in tenors
         ]
         pairs = sorted(zip(tenors, rates, strict=True), key=lambda x: x[0])
@@ -27,15 +29,15 @@ class ZeroCurve(Curve):
         curve = ql.ZeroCurve(
             [ql.Date(d.day, d.month, d.year) for d in dates],
             rates,
-            self.calendar.day_count.to_ql(),
-            compounding.to_ql(),
-            self.calendar.day_count.to_ql(),
-            ql.NullCalendar(),
-            self._interpolator,
-            compounding.to_ql(),
+            self.calendar.day_count.ql,
+            compounding.ql,
+            self.calendar.day_count.ql,
+            self.calendar.region.ql,
+            self.interpolation.ql,
+            compounding.ql,
             ql.Annual,
         )
         curve.enableExtrapolation()
         self.curve = curve
-        self.handle = ql.YieldTermStructureHandle(curve)
+        self.handle = ql.RelinkableYieldTermStructureHandle(curve)
         self.is_initialized = True

@@ -32,19 +32,19 @@ class OisCurve(BootstrappableCurve):
         if type(asset) is Ois:
             return ql.OISRateHelper(
                 self.calendar.settlement_days,
-                asset.tenor.to_ql(),
+                asset.tenor.ql,
                 ql.QuoteHandle(ql.SimpleQuote(value)),
                 ql.Sofr(self.handle),
             )
         elif type(asset) is Deposit:
             return ql.DepositRateHelper(
                 ql.QuoteHandle(ql.SimpleQuote(value)),
-                asset.tenor.to_ql(),
+                asset.tenor.ql,
                 self.calendar.settlement_days,
                 self.calendar.region,
                 self.calendar.business_day_convention,
                 True,
-                self.calendar.day_count.to_ql(),
+                self.calendar.day_count.ql,
             )
         else:
             raise ValueError("Unknown asset type")

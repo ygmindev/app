@@ -31,7 +31,8 @@ class Period(BaseModel):
     def __floordiv__(self, other: "Period") -> int:
         return int(self.__truediv__(other))
 
-    def to_ql(self) -> ql.Period:
+    @property
+    def ql(self) -> ql.Period:
         period = ql.Period()
         if self.years is not None:
             period += ql.Period(int(self.years), ql.Years)
