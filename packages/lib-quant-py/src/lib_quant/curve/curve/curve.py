@@ -5,13 +5,14 @@ from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 
+from lib_quant.app.utils.quant_settings.quant_settings import QuantSettings
 from lib_quant.curve.curve.constants import Compounding, InterpolationMethod
 from lib_quant.datetime.utils.calendar.calendar import Calendar
 
 
 class Curve(BaseModel):
     as_of_date: datetime
-    calendar: Calendar = Field()
+    calendar: Calendar = Field(default_factory=lambda: QuantSettings.get().calendar)
     interpolation: InterpolationMethod = Field(
         default=InterpolationMethod.PIECEWISE_LOG_CUBIC
     )

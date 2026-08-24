@@ -12,9 +12,7 @@ from lib_quant.datetime.utils.calendar.calendar import Calendar
 class CashflowEvent(BaseModel):
     balance_end: float | None = None
     balance_start: float | None = None
-    calendar: Calendar = Field(
-        default_factory=lambda: QuantSettings.get_settings().calendar
-    )
+    calendar: Calendar = Field(default_factory=lambda: QuantSettings.get().calendar)
     date: datetime.date
     interest: float = 0.0
     principal: float = 1.0

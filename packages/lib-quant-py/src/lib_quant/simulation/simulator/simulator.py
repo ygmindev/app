@@ -2,8 +2,10 @@ from typing import Generic, TypeVar
 
 import numpy as np
 from lib_shared.core.utils.base_model.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 
+from lib_quant.app.utils.quant_settings.quant_settings import QuantSettings
 from lib_quant.datetime.utils.calendar.calendar import Calendar
 from lib_quant.simulation.utils.calibration_params.calibration_params import (
     CalibrationParams,
@@ -34,7 +36,7 @@ class Simulator(
     ],
 ):
     params: TParams
-    calendar: Calendar
+    calendar: Calendar = Field(default_factory=lambda: QuantSettings.get().calendar)
     seed: int | None = 42
     is_calibrated: bool = False
 

@@ -4,6 +4,7 @@ import QuantLib as ql
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 
+from lib_quant.app.utils.quant_settings.quant_settings import QuantSettings
 from lib_quant.cashflow.cashflow_event.cashflow_event import CashflowEvent
 from lib_quant.curve.curve.constants import Compounding
 from lib_quant.datetime.utils.calendar.calendar import Calendar
@@ -11,6 +12,7 @@ from lib_quant.datetime.utils.calendar.calendar import Calendar
 
 class CashflowSchedule(BaseModel):
     events: list[CashflowEvent] = Field(default_factory=list)
+    calendar: Calendar = Field(default_factory=lambda: QuantSettings.get().calendar)
 
     @property
     def leg(self) -> ql.Leg:
@@ -35,7 +37,6 @@ class CashflowSchedule(BaseModel):
 
     def xirr(
         self,
-        calendar: Calendar,
         compounding: Compounding = Compounding.CONTINUOUS,
         guess: float = 0.1,
     ) -> float:
@@ -45,7 +46,7 @@ class CashflowSchedule(BaseModel):
             return ql.CashFlows.yieldRate(
                 self.leg,
                 0.0,
-                calendar.day_count.ql,
+                self.calendar.day_count.ql,
                 compounding.ql,
                 ql.Annual,
                 True,

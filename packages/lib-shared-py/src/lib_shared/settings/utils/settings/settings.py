@@ -16,7 +16,7 @@ class _Settings(BaseSettings):
         cls._context = ContextVar(f"{cls.__name__}_context", default=None)
 
     @classmethod
-    def get_settings(cls: type[TType]) -> TType:
+    def get(cls: type[TType]) -> TType:
         instance = cls._context.get()
         if instance is None:
             instance = cls()
@@ -24,14 +24,14 @@ class _Settings(BaseSettings):
         return cast(TType, instance)
 
     @classmethod
-    def set_context(
+    def set(
         cls: type[TType],
         instance: TType,
     ) -> Token:
         return cls._context.set(instance)
 
     @classmethod
-    def reset_context(
+    def reset(
         cls,
         token: Token,
     ) -> None:
