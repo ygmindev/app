@@ -9,10 +9,8 @@ from lib_shared.core.utils.field.field import Field
 from pydantic import model_validator
 from pydantic.fields import FieldInfo
 
-from lib_model.core.utils.entity.entity_models import EntityModel, _EntityModel
 
-
-class _Entity(_EntityModel):
+class _Entity:
     def __init_subclass__(
         cls,
         is_graphql: bool = True,
@@ -21,13 +19,10 @@ class _Entity(_EntityModel):
         super().__init_subclass__(**args)
 
 
-class Entity(
-    _Entity,
-    EntityModel,
-):
-    created: datetime = Field(default_value=datetime.now)
+class Entity(_Entity):
+    created: datetime = Field(default_factory=datetime.now)
     id: PydanticObjectId = Field(
-        default_value=PydanticObjectId,
+        default_factory=PydanticObjectId,
         alias="_id",
     )
 

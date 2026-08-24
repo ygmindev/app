@@ -5,32 +5,48 @@ from typing import Literal, Sequence
 from beanie import SortDirection, init_beanie
 from lib_config.database.database_models import DatabaseConfigModel
 from lib_model.core.utils.database_entity.database_entity import DatabaseEntity
+from pydantic import BaseModel
 from pymongo import AsyncMongoClient
 
-from lib_shared.database.utils.database.constants import UPSERT_STRATEGY
-
-from .database_models import (
-    CreateManyResultModel,
-    CreateResultModel,
-    DatabaseModel,
-    DeleteResultModel,
-    FindResultModel,
-    UpdateResultModel,
-    UpsertResultModel,
-    _DatabaseModel,
-)
+from lib_shared.database.utils.database.constants import UpsertStrategy
 
 
-class _Database(_DatabaseModel):
+class CreateResultModel[TType: DatabaseEntity](BaseModel):
+    result: TType
+    success: bool
+
+
+class CreateManyResultModel[TType: DatabaseEntity](BaseModel):
+    result: list[TType]
+    count: int
+    success: bool
+
+
+class FindResultModel[TType: DatabaseEntity](BaseModel):
+    result: list[TType]
+
+
+class UpdateResultModel[TType: DatabaseEntity](BaseModel):
+    result: TType
+    success: bool
+
+
+class DeleteResultModel(BaseModel):
+    result: str
+    success: bool
+
+
+class UpsertResultModel[TType: DatabaseEntity](BaseModel):
+    result: TType
+    success: bool
+
+
+class _Database(BaseModel):
     config: DatabaseConfigModel
 
     _client: AsyncMongoClient
 
-    def __init__(
-        self,
-        config: DatabaseConfigModel,
-    ) -> None:
-        self.config = config
+    def post_init(self) -> None:
         self._client = AsyncMongoClient(
             host=self.config.host,
             username=self.config.username,
@@ -140,7 +156,7 @@ class _Database(_DatabaseModel):
         update: dict,
         resource: type[TType],
         index_field: str = "_id",
-        strategy: UPSERT_STRATEGY = UPSERT_STRATEGY.REPLACE,
+        strategy: UpsertStrategy = UpsertStrategy.REPLACE,
     ) -> UpsertResultModel[TType]:
         index_value = getattr(data, index_field, None)
         if index_value is None:
@@ -157,19 +173,19 @@ class _Database(_DatabaseModel):
                 result=result.result,
                 success=result.success,
             )
-        if strategy == UPSERT_STRATEGY.IGNORE:
+        if strategy == UpsertStrategy.IGNORE:
             return UpsertResultModel(
                 result=existing,
                 success=True,
             )
-        if strategy == UPSERT_STRATEGY.REPLACE:
+        if strategy == UpsertStrategy.REPLACE:
             data.id = existing.id
             await data.replace()
             return UpsertResultModel(
                 result=data,
                 success=True,
             )
-        if strategy == UPSERT_STRATEGY.UPDATE:
+        if strategy == UpsertStrategy.UPDATE:
             result = await self.update(
                 data=data,
                 update=update,
@@ -181,7 +197,4 @@ class _Database(_DatabaseModel):
         raise ValueError(f"Unknown upsert strategy: {strategy}")
 
 
-class Database(
-    _Database,
-    DatabaseModel,
-): ...
+class Database(_Database): ...

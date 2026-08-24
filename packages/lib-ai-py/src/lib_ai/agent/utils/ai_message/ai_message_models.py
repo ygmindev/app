@@ -20,7 +20,7 @@ class ToolCall(BaseModel):
 class AIMessageModel(MessageModel):
     current_tool_call: ToolCall | None = Field(default=None)
 
-    tool_calls: list[ToolCall] = Field(default_value=list)
+    tool_calls: list[ToolCall] = Field(default_factory=list)
 
     def serialize(self) -> BaseMessage: ...
 

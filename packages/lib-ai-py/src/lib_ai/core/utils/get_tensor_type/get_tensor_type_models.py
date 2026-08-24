@@ -1,13 +1,13 @@
 from typing import Protocol
 
 import torch
-from lib_shared.core.constants import DATA_TYPE
+from lib_shared.core.constants import DataType
 
 
 class _GetTensorTypeModel(Protocol):
     def __call__(
         self,
-        params: DATA_TYPE | None,
+        params: DataType | None,
     ) -> torch.dtype: ...
 
 

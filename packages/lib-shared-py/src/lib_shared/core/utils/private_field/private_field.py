@@ -9,17 +9,10 @@ def _PrivateField(
     description: str | None = None,
 ) -> Any:
     return _Field(
-        default_value=default_value,
+        default_factory=default_value,
         description=description,
         is_private=True,
     )
 
 
-def PrivateField(
-    default_value: Any = None,
-    description: str | None = None,
-) -> Any:
-    return _PrivateField(
-        default_value=default_value,
-        description=description,
-    )
+PrivateField = _PrivateField

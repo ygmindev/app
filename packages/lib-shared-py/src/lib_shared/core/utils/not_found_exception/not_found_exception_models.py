@@ -1,1 +1,0 @@
-type NotFoundExceptionParams = str

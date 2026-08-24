@@ -1,16 +1,18 @@
-from typing import Callable
+from typing import Callable, TypeVar
 
 from pydantic import Field as PydanticField
 from pydantic import PrivateAttr
 
 from lib_shared.core.utils.field.constants import FieldRelation
 
-from .field_models import MISSING, FieldModel, TType
+TType = TypeVar("TType")
+
+MISSING = object()
 
 
 def _Field(
     default=MISSING,
-    default_value: Callable[[], TType] | None = None,
+    default_factory: Callable[[], TType] | None = None,
     description: str | None = None,
     is_private: bool = False,
     relation: FieldRelation | None = None,
@@ -18,8 +20,8 @@ def _Field(
     alias: str | None = None,
 ) -> TType:
     default_params = {}
-    if default_value:
-        default_params["default_factory"] = default_value
+    if default_factory:
+        default_params["default_factory"] = default_factory
     if default is not MISSING:
         default_params["default"] = default
     if is_private:
@@ -40,4 +42,4 @@ def _Field(
     )
 
 
-Field: FieldModel = _Field
+Field = _Field

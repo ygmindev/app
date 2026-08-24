@@ -1,5 +1,5 @@
 import numpy as np
-from lib_shared.core.constants import DATA_TYPE
+from lib_shared.core.constants import DataType
 
 from lib_ai.core.utils.get_numpy_type.get_numpy_type_models import (
     GetNumpyTypeModel,
@@ -7,14 +7,14 @@ from lib_ai.core.utils.get_numpy_type.get_numpy_type_models import (
 
 
 def _get_numpy_type(
-    params: DATA_TYPE | None,
+    params: DataType | None,
 ) -> type:
     match params:
-        case DATA_TYPE.FLOAT:
+        case DataType.FLOAT:
             return np.float64
-        case DATA_TYPE.INT:
+        case DataType.INT:
             return np.int64
-        case DATA_TYPE.LONG:
+        case DataType.LONG:
             return np.long
         case _:
             return np.float64

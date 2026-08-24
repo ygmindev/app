@@ -10,10 +10,8 @@ from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 
-from .redis_models import RedisModel, _RedisModel
 
-
-class _Redis(BaseModel, _RedisModel):
+class _Redis(BaseModel):
     config: RedisConfigModel = Field()
 
     _client: aioredis.Redis = PrivateField()
@@ -50,4 +48,4 @@ class _Redis(BaseModel, _RedisModel):
             await self._client.set(key, value)
 
 
-class Redis(_Redis, RedisModel): ...
+Redis = _Redis

@@ -2,7 +2,7 @@ from typing import Any, Self, Sequence, cast, overload
 
 import numpy as np
 import torch
-from lib_shared.core.constants import DATA_TYPE
+from lib_shared.core.constants import DataType
 from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 from lib_shared.core.utils.is_listlike.is_listlike import is_listlike
 
@@ -104,7 +104,7 @@ class _MatrixData(_MatrixDataModel):
 
     def to_numpy(
         self,
-        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DataType | None = DataType.FLOAT,
     ) -> np.ndarray:
         to_type = get_numpy_type(dtype)
         match self.data_type:
@@ -117,7 +117,7 @@ class _MatrixData(_MatrixDataModel):
 
     def to_tensor(
         self,
-        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DataType | None = DataType.FLOAT,
     ) -> torch.Tensor:
         to_type = get_tensor_type(dtype)
         device = get_device()

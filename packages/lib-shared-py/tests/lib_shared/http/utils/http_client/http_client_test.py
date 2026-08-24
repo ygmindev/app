@@ -1,4 +1,4 @@
-from lib_shared.http.utils.http_client import HttpClient
+from lib_shared.http.utils.http_client.http_client import HttpClient
 
 
 def test_works() -> None:

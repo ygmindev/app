@@ -3,7 +3,7 @@ from typing import Any, Callable, Mapping, Self, Sequence, Tuple, cast, overload
 import numpy as np
 import polars as pl
 import torch
-from lib_shared.core.constants import DATA_TYPE
+from lib_shared.core.constants import DataType
 from lib_shared.core.utils.invalid_type_exception import InvalidTypeException
 
 from lib_ai.core.utils.get_device import get_device
@@ -142,7 +142,7 @@ class _TableData(_TableDataModel):
 
     def to_numpy(
         self,
-        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DataType | None = DataType.FLOAT,
     ) -> np.ndarray:
         to_type = get_numpy_type(dtype)
         match self.data_type:
@@ -154,7 +154,7 @@ class _TableData(_TableDataModel):
 
     def to_tensor(
         self,
-        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DataType | None = DataType.FLOAT,
     ) -> torch.Tensor:
         to_type = get_tensor_type(dtype)
         match self.data_type:

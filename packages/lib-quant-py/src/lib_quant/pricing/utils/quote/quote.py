@@ -3,7 +3,7 @@ from typing import Generic, TypeVar
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
 
-from lib_quant.asset.asset.asset import Asset
+from lib_quant.core.asset.asset import Asset
 from lib_quant.pricing.utils.quote.constants import QuoteType
 
 TType = TypeVar("TType", bound=Asset)

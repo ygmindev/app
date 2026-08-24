@@ -20,8 +20,8 @@ class _DirectedAcyclicGraphModel(
     StreamableModel[TState],
 ):
     initial_state: TState = Field()
-    nodes: list[GraphNode] = Field(default_value=list)
-    edges: list[GraphEdge] = Field(default_value=list)
+    nodes: list[GraphNode] = Field(default_factory=list)
+    edges: list[GraphEdge] = Field(default_factory=list)
 
     _graph: CompiledStateGraph = PrivateField()
 

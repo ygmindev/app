@@ -82,7 +82,7 @@
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Quiet Light",
+  "workbench.colorTheme": "Dark+",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right",
   "editor.quickSuggestionsDelay": 100

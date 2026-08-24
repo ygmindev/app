@@ -14,10 +14,10 @@ from lib_config.redis.redis import redis_config
 from lib_model.chat.chat.chat import Chat
 from lib_model.user.user.user import User
 
+from lib_shared.core.utils.base_model.base_model import BaseModel
+from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.database.utils.database.database import Database
 from lib_shared.database.utils.redis.redis import Redis
-
-from .chat_service_models import ChatServiceModel
 
 _HISTORY_LIMIT = 20
 _CHAT_MAX_LENGTH = 25
@@ -25,7 +25,11 @@ _CHAT_MAX_LENGTH = 25
 _MAX_HISTORY_TOKENS = 6000
 
 
-class ChatService(ChatServiceModel):
+class ChatService(BaseModel):
+    _database: Database = PrivateField()
+    _redis: Redis = PrivateField()
+    _agent: Agent = PrivateField()
+
     def post_init(self) -> None:
         self._database = Database(config=database_config)
         self._redis = Redis(config=redis_config)

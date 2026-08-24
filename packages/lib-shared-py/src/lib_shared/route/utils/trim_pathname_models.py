@@ -1,3 +1,0 @@
-TrimPathnameParamsModel = str
-
-TrimPathnameModel = str

@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class UPSERT_STRATEGY(Enum):
+class UpsertStrategy(StrEnum):
     REPLACE = "replace"
     UPDATE = "update"
     IGNORE = "ignore"

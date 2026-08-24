@@ -10,7 +10,7 @@ from lib_quant.datetime.utils.calendar.calendar import Calendar
 
 
 class CashflowSchedule(BaseModel):
-    events: list[CashflowEvent] = Field(default_value=list)
+    events: list[CashflowEvent] = Field(default_factory=list)
 
     @property
     def leg(self) -> ql.Leg:

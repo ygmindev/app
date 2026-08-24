@@ -1,8 +1,8 @@
-from lib_shared.http.utils.uri.uri_models import TType, UriModel
+from lib_shared.core.utils.base_model.base_model import BaseModel
 
 
-class Uri(UriModel[TType]):
+class Uri(BaseModel):
     host: str | None = None
-    params: TType | None = None
+    params: dict | None = None
     pathname: str | None = None
     port: str | int | None = None

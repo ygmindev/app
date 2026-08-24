@@ -1,14 +1,14 @@
 from enum import StrEnum
 
 
-class HTTP_METHOD(StrEnum):
+class HttpMethod(StrEnum):
     GET = "GET"
     POST = "POST"
     PUT = "PUT"
     DELETE = "DELETE"
 
 
-class HTTP_CONTENT_TYPE(StrEnum):
+class HttpContentType(StrEnum):
     JSON = "application/json"
     XML = "application/xml"
 

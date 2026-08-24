@@ -6,9 +6,9 @@ from lib_shared.database.utils.api_data_loader.api_data_loader_models import (
     ApiDataLoaderParams,
 )
 from lib_shared.database.utils.data_loader import DataLoader
-from lib_shared.database.utils.data_loader.data_loader_models import TType
-from lib_shared.http.utils.constants import HTTP_CONTENT_TYPE
-from lib_shared.http.utils.http_client import http_client
+from lib_shared.database.utils.data_loader.data_loader import TType
+from lib_shared.http.utils.constants import HttpContentType
+from lib_shared.http.utils.http_client.http_client import http_client
 
 
 class ApiDataLoader(DataLoader, ApiDataLoaderModel, Generic[TType]):
@@ -22,7 +22,7 @@ class ApiDataLoader(DataLoader, ApiDataLoaderModel, Generic[TType]):
     async def load(
         self,
     ) -> list[TType]:
-        content_type = self._params.content_type or HTTP_CONTENT_TYPE.JSON
+        content_type = self._params.content_type or HttpContentType.JSON
         result = await http_client.get(
             self._params.uri,
             response_type=self._params.response,

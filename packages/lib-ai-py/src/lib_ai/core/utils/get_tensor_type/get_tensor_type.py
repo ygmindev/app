@@ -1,5 +1,5 @@
 import torch
-from lib_shared.core.constants import DATA_TYPE
+from lib_shared.core.constants import DataType
 
 from lib_ai.core.utils.get_tensor_type.get_tensor_type_models import (
     GetTensorTypeModel,
@@ -7,14 +7,14 @@ from lib_ai.core.utils.get_tensor_type.get_tensor_type_models import (
 
 
 def _get_tensor_type(
-    params: DATA_TYPE | None,
+    params: DataType | None,
 ) -> torch.dtype:
     match params:
-        case DATA_TYPE.FLOAT:
+        case DataType.FLOAT:
             return torch.float
-        case DATA_TYPE.INT:
+        case DataType.INT:
             return torch.int
-        case DATA_TYPE.LONG:
+        case DataType.LONG:
             return torch.long
         case _:
             return torch.float

@@ -3,7 +3,6 @@ from typing import Any, Type
 
 from dotenv import load_dotenv
 
-from lib_shared.core.utils.get_env.get_env_models import GetEnvModel
 from lib_shared.path.utils.from_working import from_working
 
 NODE_ENV = os.environ.get("NODE_ENV", "development")
@@ -25,4 +24,4 @@ def _get_env(
     return cast(value) if cast is not None else value
 
 
-get_env: GetEnvModel = _get_env
+get_env = _get_env

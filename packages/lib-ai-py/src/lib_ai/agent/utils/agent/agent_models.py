@@ -26,10 +26,10 @@ class _AgentModel(
     StreamableModel[TState],
     Generic[TState],
 ):
-    descriptions: list[str] = Field(default_value=list)
+    descriptions: list[str] = Field(default_factory=list)
     name: str = Field(default="Agent")
-    llm: Llm = Field(default_value=Llm)
-    initial_state: TState = Field(default_value=AgentState)
+    llm: Llm = Field(default_factory=Llm)
+    initial_state: TState = Field(default_factory=AgentState)
     skills: list[Skill] | None = Field(default=None)
     tools: list[Tool] | None = Field(default=None)
 

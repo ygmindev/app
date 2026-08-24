@@ -1,14 +1,14 @@
 from typing import Generic
 
-from lib_shared.core.utils.logger2 import logger
-from lib_shared.database.utils.data_loader.data_loader_models import (
+from lib_shared.core.utils.logger.logger import logger
+from lib_shared.database.utils.data_loader.data_loader import (
     DataLoaderModel,
     DataLoaderParams,
     TType,
 )
 
 
-class DataLoader(DataLoaderModel, Generic[TType]):
+class DataLoader(Generic[TType]):
     def __init__(
         self,
         params: DataLoaderParams,

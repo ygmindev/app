@@ -8,11 +8,10 @@ from pydantic import BaseModel as PydanticBaseClass
 from pydantic import ConfigDict
 
 from lib_shared.core.utils.base_model.constants import ExportMode
+from lib_shared.core.utils.merge.merge_models import MergeStrategy
 
-from .base_model_models import BaseModelModel, MergeStrategy, _BaseModelModel
 
-
-class _BaseModel(PydanticBaseClass, _BaseModelModel):
+class _BaseModel(PydanticBaseClass):
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
         extra="allow",
@@ -33,6 +32,8 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
     def rebuild(cls) -> None:
         for model_cls in cls._registry.values():
             model_cls.model_rebuild(_types_namespace=cls._registry, force=True)
+
+    def post_init(self) -> None: ...
 
     def model_post_init(self, __context: Any) -> None:
         return self.post_init()
@@ -94,4 +95,4 @@ class _BaseModel(PydanticBaseClass, _BaseModelModel):
         )
 
 
-class BaseModel(_BaseModel, BaseModelModel): ...
+class BaseModel(_BaseModel): ...

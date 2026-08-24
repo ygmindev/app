@@ -78,3 +78,6 @@ class Calendar(BaseModel):
                 if date not in dates:
                     dates.append(datetime.date(date.day, date.month, date.year))
         return sorted(dates)
+
+
+calendar = Calendar()

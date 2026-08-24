@@ -11,8 +11,8 @@ from .mermaid_chart_models import MermaidChartModel, _MermaidChartModel
 
 
 class _MermaidChart(_MermaidChartModel):
-    nodes: list[GraphNode] = Field(default_value=list)
-    edges: list[GraphEdge] = Field(default_value=list)
+    nodes: list[GraphNode] = Field(default_factory=list)
+    edges: list[GraphEdge] = Field(default_factory=list)
 
     @staticmethod
     def _get_node(name: GraphNodeType | str) -> str:

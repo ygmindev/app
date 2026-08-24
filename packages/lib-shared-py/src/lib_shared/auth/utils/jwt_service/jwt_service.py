@@ -13,14 +13,16 @@ from lib_shared.auth.errors.auth_token_error.auth_token_error import (
 from lib_shared.auth.errors.unauthenticated_error.unauthenticated_error import (
     UnauthenticatedError,
 )
-from lib_shared.auth.utils.jwt_service.jwt_service_models import (
-    JwtServiceModel,
-    _JwtServiceModel,
-)
+from lib_shared.core.utils.base_model.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.get_env import get_env
 
 
-class _JwtService(_JwtServiceModel):
+class _JwtService(BaseModel):
+    email: str = Field()
+    project_id: str = Field()
+    secret: str = Field()
+
     def post_init(self) -> None:
         initialize_app(
             credentials.Certificate(
@@ -61,7 +63,7 @@ class _JwtService(_JwtServiceModel):
         return user
 
 
-class JwtService(_JwtService, JwtServiceModel): ...
+class JwtService(_JwtService): ...
 
 
 jwt_service = JwtService(

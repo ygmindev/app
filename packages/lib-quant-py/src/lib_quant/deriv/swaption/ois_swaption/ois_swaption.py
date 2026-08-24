@@ -6,4 +6,4 @@ from lib_quant.swap.ois.ois import Ois
 
 
 class OisSwaption(Swaption):
-    underlying: Asset = Field(default_value=lambda: Ois())
+    underlying: Asset = Field(default_factory=lambda: Ois())

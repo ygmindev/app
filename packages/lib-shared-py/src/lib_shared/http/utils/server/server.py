@@ -24,17 +24,13 @@ from uvicorn import Server as UvicornServer
 from lib_shared.auth.utils.jwt_service.jwt_service import jwt_service
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
-from lib_shared.core.utils.logger.logger import Logger
+from lib_shared.core.utils.logger.logger import logger
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.http.utils.http_request.http_request import HttpRequest
-from lib_shared.route.utils.trim_pathname import trim_pathname
-
-from .server_models import ServerModel, _ServerModel
-
-logger = Logger()
+from lib_shared.route.utils.trim_pathname.trim_pathname import trim_pathname
 
 
-class _Server(BaseModel, _ServerModel):
+class _Server(BaseModel):
     name: str = Field()
     config: ServerConfig = Field()
     initialize: Callable[[], Awaitable[None]] | None = Field(default=None)
@@ -155,4 +151,4 @@ class _Server(BaseModel, _ServerModel):
         return self._app
 
 
-class Server(_Server, ServerModel): ...
+class Server(_Server): ...

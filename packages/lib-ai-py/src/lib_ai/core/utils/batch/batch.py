@@ -1,13 +1,13 @@
 from typing import Generator
 
 import numpy as np
-from lib_shared.core.utils.indexable.indexable_models import IndexableModel
+from lib_shared.core.utils.indexable.indexable import Indexable
 
 from .batch_models import BatchModel
 
 
 def _batch[TType](
-    data: IndexableModel[TType],
+    data: Indexable[TType],
     batch_size: int,
     is_shuffle: bool = False,
 ) -> Generator[TType, TType, TType]:

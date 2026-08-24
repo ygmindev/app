@@ -3,14 +3,10 @@ from typing import Any, Sequence, cast
 
 import pydash as _
 
-from lib_shared.core.utils.merge.merge_models import (
-    MergeModel,
-    MergeStrategy,
-    TType,
-)
+from lib_shared.core.utils.merge.constants import MergeStrategy
 
 
-def _merge(
+def _merge[TType: dict](
     params: Sequence[TType],
     merge_strategy: MergeStrategy | None = None,
 ) -> TType:
@@ -33,4 +29,4 @@ def _merge(
     )
 
 
-merge: MergeModel = _merge
+merge = _merge

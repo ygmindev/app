@@ -1,12 +1,7 @@
 from lib_shared.core.utils.base_model.base_model import BaseModel
-from lib_shared.core.utils.field.field import Field
-from lib_shared.http.utils.http_response.constants import HTTP_STATUS_CODE
-from lib_shared.http.utils.http_response.http_response_models import (
-    HttpResponseModel,
-    TType,
-)
+from lib_shared.http.utils.http_response.constants import HttpStatusCode
 
 
-class HttpResponse(BaseModel, HttpResponseModel[TType]):
-    status_code: HTTP_STATUS_CODE = Field()
-    body: TType | None = Field(default=None)
+class HttpResponse(BaseModel):
+    status_code: HttpStatusCode = HttpStatusCode.OK
+    body: dict | None = None

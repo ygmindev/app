@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class HTTP_STATUS_CODE(Enum):
+class HttpStatusCode(Enum):
     BAD_REQUEST = 400
     CONFLICT = 409
     FORBIDDEN = 403

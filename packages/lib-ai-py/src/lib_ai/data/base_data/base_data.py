@@ -4,7 +4,7 @@ from typing import Self
 
 import numpy as np
 import torch
-from lib_shared.core.constants import DATA_TYPE
+from lib_shared.core.constants import DataType
 from lib_shared.core.utils.not_implemented_exception import NotImplementedException
 
 from lib_ai.data.base_data.base_data_models import BaseDataModel
@@ -54,12 +54,12 @@ class BaseData[TType](BaseDataModel[TType]):
 
     def to_numpy(
         self,
-        dtype: DATA_TYPE | None = DATA_TYPE.FLOAT,
+        dtype: DataType | None = DataType.FLOAT,
     ) -> np.ndarray:
         return np.array(self.data)
 
     def to_tensor(
         self,
-        dtype: DATA_TYPE | None = DATA_TYPE.STRING,
+        dtype: DataType | None = DataType.STRING,
     ) -> torch.Tensor:
         raise NotImplementedException()

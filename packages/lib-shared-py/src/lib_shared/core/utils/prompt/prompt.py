@@ -1,7 +1,5 @@
 import questionary
 
-from .prompt_models import PromptModel
-
 
 async def _prompt(
     key: str,
@@ -38,4 +36,4 @@ async def _prompt(
     ).ask_async()
 
 
-prompt: PromptModel = _prompt
+prompt = _prompt

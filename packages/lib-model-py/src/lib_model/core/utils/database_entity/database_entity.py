@@ -41,10 +41,7 @@ class _DatabaseEntity(Document):
             cls.Settings = type(
                 "Settings",
                 (),
-                {
-                    "name": name,
-                    "keep_nulls": False,
-                },
+                {"name": name, "keep_nulls": False},
             )
 
     @contextmanager

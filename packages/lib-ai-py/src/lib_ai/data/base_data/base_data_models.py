@@ -4,7 +4,7 @@ from typing import Self
 
 import numpy as np
 import torch
-from lib_shared.core.constants import DATA_TYPE
+from lib_shared.core.constants import DataType
 
 
 class BaseDataModel[TType]:
@@ -44,10 +44,10 @@ class BaseDataModel[TType]:
 
     def to_numpy(
         self,
-        dtype: DATA_TYPE | None,
+        dtype: DataType | None,
     ) -> np.ndarray: ...
 
     def to_tensor(
         self,
-        dtype: DATA_TYPE | None,
+        dtype: DataType | None,
     ) -> torch.Tensor: ...

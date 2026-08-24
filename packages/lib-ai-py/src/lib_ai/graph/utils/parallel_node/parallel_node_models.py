@@ -12,4 +12,4 @@ from lib_ai.graph.utils.graph_node.graph_node_models import (
 class ParallelNodeModel(
     GraphNodeModel,
 ):
-    nodes: list[GraphNode] = Field(default_value=list)
+    nodes: list[GraphNode] = Field(default_factory=list)

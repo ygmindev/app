@@ -10,7 +10,7 @@ from lib_ai.agent.utils.tool import Tool
 
 
 class SkillModel(BaseModel):
-    descriptions: Sequence[str] = Field(default_value=list)
+    descriptions: Sequence[str] = Field(default_factory=list)
     name: str = Field()
 
     @property
