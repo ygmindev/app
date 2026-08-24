@@ -1,11 +1,12 @@
 import datetime
-import math
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 
 from lib_quant.app.utils.quant_settings.quant_settings import QuantSettings
+from lib_quant.cashflow.utils.discount_factor.discount_factor import discount_factor
 from lib_quant.curve.curve.constants import Compounding
+from lib_quant.datetime.constants import Frequency
 from lib_quant.datetime.utils.calendar.calendar import Calendar
 
 
@@ -26,15 +27,15 @@ class CashflowEvent(BaseModel):
         as_of_date: datetime.date,
         rate: float,
         compounding: Compounding = Compounding.CONTINUOUS,
+        frequency: Frequency = Frequency.ANNUAL,
     ) -> float:
         if self.date <= as_of_date:
             return self.amount
         t = self.calendar.year_fraction(as_of_date, self.date)
-        match compounding:
-            case Compounding.COMPOUNDED:
-                discount_factor = (1.0 + rate) ** (-t)
-            case Compounding.CONTINUOUS:
-                discount_factor = math.exp(-rate * (self.date - as_of_date).days)
-            case _:
-                raise ValueError(f"Invalid compounding: {compounding}")
-        return self.amount * discount_factor
+        return discount_factor(
+            rate,
+            t,
+            compounding,
+            self.calendar.day_count,
+            frequency,
+        )
