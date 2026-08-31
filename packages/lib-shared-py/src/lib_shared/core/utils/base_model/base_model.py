@@ -8,7 +8,7 @@ from pydantic import BaseModel as PydanticBaseClass
 from pydantic import ConfigDict
 
 from lib_shared.core.utils.base_model.constants import ExportMode
-from lib_shared.core.utils.merge.merge_models import MergeStrategy
+from lib_shared.core.utils.merge.constants import MergeStrategy
 
 
 class _BaseModel(PydanticBaseClass):

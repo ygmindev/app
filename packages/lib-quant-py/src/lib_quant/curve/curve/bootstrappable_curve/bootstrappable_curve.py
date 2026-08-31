@@ -20,6 +20,8 @@ class BootstrappableCurve(Curve):
         self,
         quotes: list[Quote],
     ) -> None:
+        if not quotes:
+            raise ValueError("no quotes provided")
         helpers = [self._get_helper(q) for q in quotes]
         self._curve = self.interpolation.ql(
             ql.Date(self.as_of_date.day, self.as_of_date.month, self.as_of_date.year),
@@ -30,7 +32,7 @@ class BootstrappableCurve(Curve):
         self._handle.linkTo(self._curve)
         self.is_initialized = True
 
-    def get(
+    def zero_rate(
         self,
         timestamp: datetime,
     ) -> float:

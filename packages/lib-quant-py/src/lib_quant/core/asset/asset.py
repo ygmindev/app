@@ -11,7 +11,7 @@ from lib_quant.datetime.utils.period.period import Period
 
 class Asset(BaseModel):
     calendar: Calendar = Field(default_factory=lambda: QuantSettings.get().calendar)
-    issue_date: datetime.date
+    issue_date: datetime.date | None = Field(default_factory=datetime.date.today)
     size: float = 0.0
     currency: str | None = None
     tenor: Period | datetime.date | None = None

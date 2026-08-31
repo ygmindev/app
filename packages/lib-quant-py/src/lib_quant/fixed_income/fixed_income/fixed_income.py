@@ -8,5 +8,6 @@ class FixedIncome(Asset):
     frequency: Frequency
     rate: Rate
 
+    @property
     def schedule(self) -> CashflowSchedule:
         raise NotImplementedError("Subclasses must implement this method")

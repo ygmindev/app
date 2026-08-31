@@ -92,8 +92,8 @@ class DayCount(StrEnum):
         return {
             DayCount.ACT_360: ql.Actual360(),
             DayCount.ACT_365: ql.Actual365Fixed(),
-            DayCount.ACT_ACT: ql.ActualActual(),
-            DayCount.THIRTY_360: ql.Thirty360(),
+            DayCount.ACT_ACT: ql.ActualActual(ql.ActualActual.ISDA),
+            DayCount.THIRTY_360: ql.Thirty360(ql.Thirty360.ISDA),
         }[self]
 
 

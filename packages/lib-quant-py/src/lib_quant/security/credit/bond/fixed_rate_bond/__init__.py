@@ -1,6 +1,5 @@
-from lib_quant.security.credit.bond.fixed_rate_bond._fixed_rate_bond import _FixedRateBond
-from lib_quant.security.credit.bond.fixed_rate_bond.fixed_rate_bond_models import FixedRateBondModel
+# template version: 1.0.0
 
+from .fixed_rate_bond import FixedRateBond
 
-class FixedRateBond(_FixedRateBond, FixedRateBondModel):
-    ...
+__all__ = ["FixedRateBond"]

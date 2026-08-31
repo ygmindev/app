@@ -14,11 +14,12 @@ from lib_quant.datetime.utils.period.period import Period
 
 
 class Calendar(BaseModel):
-    business_day_convention: BusinessDayConvention = (
-        BusinessDayConvention.MODIFIED_FOLLOWING
+    business_day_convention: BusinessDayConvention = Field(
+        default=BusinessDayConvention.MODIFIED_FOLLOWING
     )
-    day_count: DayCount = DayCount.ACT_360
+    day_count: DayCount = Field(default=DayCount.ACT_360)
     region: Region = Field(default=Region.US)
+    settlement_days: int = Field(default=2)
 
     def advance(
         self,
@@ -29,9 +30,9 @@ class Calendar(BaseModel):
         start_date = ql.Date(start.day, start.month, start.year)
         end_date = start_date + period.ql
         return datetime.date(
-            end_date.day,
-            end_date.month,
-            end_date.year,
+            end_date.year(),
+            end_date.month(),
+            end_date.dayOfMonth(),
         )
 
     def year_fraction(
@@ -78,6 +79,3 @@ class Calendar(BaseModel):
                 if date not in dates:
                     dates.append(datetime.date(date.day, date.month, date.year))
         return sorted(dates)
-
-
-calendar = Calendar()

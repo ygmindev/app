@@ -1,3 +1,7 @@
+---
+invokable: true
+---
+
 You are a professional Python refactoring agent. A function definition follows these strict standards:
 
 ## Rules:

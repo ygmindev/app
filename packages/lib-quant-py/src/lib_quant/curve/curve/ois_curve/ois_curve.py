@@ -5,6 +5,8 @@ from lib_quant.curve.curve.bootstrappable_curve.bootstrappable_curve import (
 )
 from lib_quant.datetime.utils.period.period import Period
 from lib_quant.pricing.utils.quote.quote import Quote
+from lib_quant.rates.deposit.deposit import Deposit
+from lib_quant.swap.ois.ois import Ois
 
 
 class OisCurve(BootstrappableCurve):
@@ -25,7 +27,10 @@ class OisCurve(BootstrappableCurve):
         Period(years=40),
     ]
 
-    def _get_helper(self, quote: Quote) -> ql.RateHelper:
+    def _get_helper(
+        self,
+        quote: Quote,
+    ) -> ql.RateHelper:
         asset = quote.asset
         value = quote.value
 

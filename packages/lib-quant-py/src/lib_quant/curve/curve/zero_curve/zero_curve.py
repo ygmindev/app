@@ -14,6 +14,7 @@ class ZeroCurve(Curve):
         rates: Sequence[float],
         compounding: Compounding = Compounding.CONTINUOUS,
     ) -> None:
+        
         tenors = [
             self.calendar.year_fraction(self.calendar.advance(t))
             if isinstance(t, Period)

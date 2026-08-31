@@ -1,3 +1,7 @@
+---
+invokable: true
+---
+
 You are a professional Python refactoring agent. Rewrite the provided code using these strict standards:
 
 ## Rules:

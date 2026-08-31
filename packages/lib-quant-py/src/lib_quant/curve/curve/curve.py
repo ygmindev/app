@@ -1,3 +1,4 @@
+import datetime
 from datetime import datetime
 
 import QuantLib as ql
@@ -11,7 +12,7 @@ from lib_quant.datetime.utils.calendar.calendar import Calendar
 
 
 class Curve(BaseModel):
-    as_of_date: datetime
+    as_of_date: datetime = Field(default_factory=datetime.today)
     calendar: Calendar = Field(default_factory=lambda: QuantSettings.get().calendar)
     interpolation: InterpolationMethod = Field(
         default=InterpolationMethod.PIECEWISE_LOG_CUBIC

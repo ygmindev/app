@@ -1,48 +1,20 @@
 import asyncio
+import datetime
 
-from lib_ai.agent.utils.agent import Agent
-from lib_ai.agent.utils.agent.agent import DirectedAcyclicGraph
-from lib_ai.agent.utils.agent.agent_models import AgentState
-from lib_ai.graph.constants import GraphNodeType
-from lib_ai.graph.utils.agent_node.agent_node import AgentNode
-from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
-from lib_ai.model.llm import Llm
+from lib_quant.datetime.utils.period.period import Period
+from lib_quant.security.credit.bond.fixed_rate_bond.fixed_rate_bond import FixedRateBond
 from lib_shared.core.utils.base_model.base_model import BaseModel
 
 
 async def run_agent() -> None:
     BaseModel.rebuild()
-    llm = Llm()
-
-    class MyState(AgentState): ...
-
-    initial_state = MyState()
-
-    dag = DirectedAcyclicGraph(
-        initial_state=initial_state,
-        nodes=[
-            AgentNode(
-                name="agent1",
-                prompt="what's your name?",
-                agent=Agent(
-                    name="agent1",
-                    descriptions=[
-                        "You are a chatbot developed in South Korea.",
-                        "Always provide direct, concise answers in 1 to 3 sentences maximum. Do not ramble.",
-                    ],
-                    llm=llm,
-                    initial_state=initial_state,
-                ),
-            ),
-        ],
-        edges=[
-            GraphEdge(start=GraphNodeType.START, end="agent1"),
-            GraphEdge(start="agent1", end=GraphNodeType.END),
-        ],
+    print("\n\n\n@@@@")
+    frb = FixedRateBond(
+        issue_date=datetime.date.today(),
+        tenor=Period(years=10),
+        coupon=0.05,
     )
-
-    async for item in dag.stream(initial_state):
-        print("\n", item.delta)
+    print(frb)
 
 
 def main():
@@ -51,3 +23,57 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# import asyncio
+
+# from lib_ai.agent.utils.agent import Agent
+# from lib_ai.agent.utils.agent.agent import DirectedAcyclicGraph
+# from lib_ai.agent.utils.agent.agent_models import AgentState
+# from lib_ai.graph.constants import GraphNodeType
+# from lib_ai.graph.utils.agent_node.agent_node import AgentNode
+# from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
+# from lib_ai.model.llm import Llm
+# from lib_shared.core.utils.base_model.base_model import BaseModel
+
+
+# async def run_agent() -> None:
+#     BaseModel.rebuild()
+#     llm = Llm()
+
+#     class MyState(AgentState): ...
+
+#     initial_state = MyState()
+
+#     dag = DirectedAcyclicGraph(
+#         initial_state=initial_state,
+#         nodes=[
+#             AgentNode(
+#                 name="agent1",
+#                 prompt="what's your name?",
+#                 agent=Agent(
+#                     name="agent1",
+#                     descriptions=[
+#                         "You are a chatbot developed in South Korea.",
+#                         "Always provide direct, concise answers in 1 to 3 sentences maximum. Do not ramble.",
+#                     ],
+#                     llm=llm,
+#                     initial_state=initial_state,
+#                 ),
+#             ),
+#         ],
+#         edges=[
+#             GraphEdge(start=GraphNodeType.START, end="agent1"),
+#             GraphEdge(start="agent1", end=GraphNodeType.END),
+#         ],
+#     )
+
+#     async for item in dag.stream(initial_state):
+#         print("\n", item.delta)
+
+
+# def main():
+#     asyncio.run(run_agent())
+
+
+# if __name__ == "__main__":
+#     main()

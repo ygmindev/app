@@ -4,7 +4,7 @@
 import asyncio
 from typing import AsyncIterable
 
-from lib_shared.core.utils.merge.merge_models import MergeStrategy
+from lib_shared.core.utils.merge.constants import MergeStrategy
 
 from lib_ai.agent.utils.streamable.streamable_models import TState
 from lib_ai.graph.utils.graph_node import GraphNode

@@ -85,5 +85,6 @@
   "workbench.colorTheme": "Dark+",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right",
-  "editor.quickSuggestionsDelay": 100
+  "editor.quickSuggestionsDelay": 100,
+  "chat.disableAIFeatures": false
 }
