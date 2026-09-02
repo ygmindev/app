@@ -120,4 +120,4 @@ __pycache__
 .wrangler
 
 # Continue
-.continue/agents/config.yaml
+**/.continue/agents/config.yaml
