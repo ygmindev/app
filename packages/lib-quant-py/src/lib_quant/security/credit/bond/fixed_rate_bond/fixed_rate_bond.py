@@ -94,12 +94,11 @@ class FixedRateBond(Bond):
     ) -> float:
         return ql.BondFunctions.cleanPrice(
             self.ql,
-            curve.handle,
+            curve.curve,
             value,
             self._day_count,
             ql.Compounded,
             self.frequency.ql,
-            self.calendar.settlement_days,
         )
 
     def zspread_from_price(
@@ -109,12 +108,11 @@ class FixedRateBond(Bond):
     ) -> float:
         return ql.BondFunctions.zSpread(
             self.ql,
-            value,
-            curve.handle,
+            ql.BondPrice(value, ql.BondPrice.Clean),
+            curve.curve,
             self._day_count,
             ql.Compounded,
             self.frequency.ql,
-            self.calendar.settlement_days,
         )
 
     @property

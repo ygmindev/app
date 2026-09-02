@@ -17,7 +17,7 @@ class Calendar(BaseModel):
     business_day_convention: BusinessDayConvention = Field(
         default=BusinessDayConvention.MODIFIED_FOLLOWING
     )
-    day_count: DayCount = Field(default=DayCount.ACT_360)
+    day_count: DayCount = Field(default=DayCount.ACT_ACT)
     region: Region = Field(default=Region.US)
     settlement_days: int = Field(default=2)
     as_of_date: datetime.date = Field(default_factory=datetime.date.today)

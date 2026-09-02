@@ -30,19 +30,19 @@ async def run_agent() -> None:
             SwapQuote(
                 asset=Ois(tenor=Period(years=1)),
                 quote_type=SwapQuoteType.YIELD,
-                value=0.05,
+                value=0.01,
             ),
             SwapQuote(
                 asset=Ois(tenor=Period(years=40)),
                 quote_type=SwapQuoteType.YIELD,
-                value=0.05,
+                value=0.10,
             ),
         ]
     )
     benchmark_yield_curve = BenchmarkYieldCurve()
     benchmark_yield_curve.fit(
-        tenors=[Period(years=1), Period(years=10)],
-        rates=[0.05, 0.05],
+        tenors=[Period(years=1), Period(years=40)],
+        rates=[0.01, 0.10],
     )
     pe = CreditPricingEngine(
         swap_curve=swap_curve,
@@ -55,7 +55,7 @@ async def run_agent() -> None:
         value=0.05,
     )
 
-    result = pe.convert(quote, CreditQuoteType.PRICE)
+    result = pe.convert(quote, CreditQuoteType.Z_SPREAD)
     print("\n\n\n@@@@")
     print(result)
     print("\n\n\n@@@@")
