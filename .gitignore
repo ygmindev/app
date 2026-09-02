@@ -118,3 +118,6 @@ __pycache__
 
 # Cloudfare
 .wrangler
+
+# Continue
+.continue/agents/config.yaml
