@@ -25,8 +25,8 @@ from lib_shared.core.utils.base_model.base_model import BaseModel
 async def run_agent() -> None:
     BaseModel.rebuild()
 
-    swap_curve = OisCurve()
-    swap_curve.fit(
+    ois_curve = OisCurve()
+    ois_curve.fit(
         quotes=[
             SwapQuote(
                 asset=Ois(tenor=Period(years=1)),
@@ -52,14 +52,14 @@ async def run_agent() -> None:
     bond = FloatingRateBond(
         tenor=Period(years=10),
         rate=Rate(
-            benchmark=DailySofr(curve=swap_curve),
+            benchmark=DailySofr(curve=ois_curve),
             spread=0.05,
         ),
-        curve=swap_curve,
+        curve=ois_curve,
     )
 
     pe = CreditPricingEngine(
-        swap_curve=swap_curve,
+        swap_curve=ois_curve,
         benchmark_yield_curve=benchmark_yield_curve,
     )
 

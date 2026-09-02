@@ -1,9 +1,0 @@
-from enum import StrEnum
-
-
-class AmortizationType(StrEnum):
-    BULLET = "BULLET"
-    INTEREST_ONLY = "INTEREST_ONLY"
-    IO_THEN_AMORTIZING = "IO_THEN_AMORTIZING"
-    LEVEL_PAYMENT = "LEVEL_PAYMENT"
-    STRAIGHT_LINE = "STRAIGHT_LINE"

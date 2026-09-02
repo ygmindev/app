@@ -1,3 +1,5 @@
+import datetime
+
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 
@@ -14,8 +16,10 @@ class Rate(BaseModel):
     gearing: float | None = Field(default=None)
     fixing_days: int | None = Field(default=None)
 
-    @property
-    def all_in_rate(self) -> float:
+    def all_in_rate(
+        self,
+        as_of_date: datetime.date,
+    ) -> float:
         if self.rate_type == RateType.FLOATING:
             if not self.benchmark:
                 raise ValueError("missing benchmark for floating")

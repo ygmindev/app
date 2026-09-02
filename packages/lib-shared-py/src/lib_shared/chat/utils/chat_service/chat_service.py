@@ -81,7 +81,7 @@ class ChatService(BaseModel):
         value = await self._redis.get(f"chat:history:{chat_id}")
         if value:
             value = cast(list[dict], json.loads(value))
-            return list(map(AIMessage.from_dict, value))
+            return [AIMessage.from_dict(x) for x in value]
         result = await self._database.find(
             query={"chat": PydanticObjectId(chat_id)},
             resource=AIMessage,

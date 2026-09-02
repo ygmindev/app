@@ -51,7 +51,7 @@ class InterpolatableCurve(Curve):
         tenors: Sequence[float | Period | datetime.date],
         rates: Sequence[float],
     ) -> None:
-        tenor_values = list(map(self._tenor_to_float, tenors))
+        tenor_values = [self._tenor_to_float(x) for x in tenors]
         pairs = sorted(zip(tenor_values, rates, strict=True), key=lambda x: x[0])
         self._tenors = [p[0] for p in pairs]
         self._rates = [p[1] for p in pairs]

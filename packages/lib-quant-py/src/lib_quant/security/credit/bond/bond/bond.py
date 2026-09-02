@@ -14,6 +14,7 @@ from lib_quant.curve.bootstrappable_curve.bootstrappable_curve import (
 )
 from lib_quant.datetime.constants import Direction
 from lib_quant.deriv.option.option import Option
+from lib_quant.fixed_income.amortization.amortization.amortization import Amortization
 from lib_quant.fixed_income.credit.credit import Credit
 
 TType = TypeVar("TType", bound=ql.Bond)
@@ -25,6 +26,7 @@ class Bond(
 ):
     options: list[Option] = Field(default_factory=list)
     curve: BootstrappableCurve | None = Field(default=None)
+    amortization: Amortization | None = Field(default=None)
 
     _security: TType = PrivateField()
     _day_count: "ql.DayCounter | None" = PrivateField()
