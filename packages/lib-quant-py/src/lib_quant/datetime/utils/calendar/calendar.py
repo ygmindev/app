@@ -19,7 +19,7 @@ class Calendar(BaseModel):
     )
     day_count: DayCount = Field(default=DayCount.ACT_360)
     region: Region = Field(default=Region.US)
-    settlement_days: int = Field(default=0)
+    settlement_days: int = Field(default=2)
     as_of_date: datetime.date = Field(default_factory=datetime.date.today)
 
     def post_init(self) -> None:
