@@ -69,7 +69,8 @@
     "${workspaceFolder}/packages/lib-config-py/src",
     "${workspaceFolder}/packages/lib-ai-py/src",
     "${workspaceFolder}/packages/lib-model-py/src",
-    "${workspaceFolder}/packages/lib-shared-py/src"
+    "${workspaceFolder}/packages/lib-shared-py/src",
+    "${workspaceFolder}/packages/lib-quant-py/src"
   ],
   "python.analysis.indexing": true,
   "python.analysis.inlayHints.functionReturnTypes": true,

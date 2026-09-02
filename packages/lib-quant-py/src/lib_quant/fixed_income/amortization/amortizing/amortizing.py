@@ -1,30 +1,30 @@
+from lib_quant.cashflow.cashflow.cashflow import Cashflow
 from lib_quant.cashflow.cashflow_event.cashflow_event import CashflowEvent
-from lib_quant.cashflow.cashflow_schedule.cashflow_schedule import CashflowSchedule
-from lib_quant.cashflow.utils.schedule.schedule import schedule
+from lib_quant.cashflow.utils.schedule.schedule import Schedule
 from lib_quant.datetime.utils.period.period import Period
 from lib_quant.fixed_income.amortization.amortizing.constants import AmortizationType
-from lib_quant.fixed_income.fixed_income.fixed_income import FixedIncome
+from lib_quant.fixed_income.credit.credit import Credit
 
 
-class Amortizing(FixedIncome):
+class Amortizing(Credit):
     amortization_type: AmortizationType
     io_period: Period | None = None
     rate: float
 
     @property
-    def schedule(self) -> CashflowSchedule:
-        result: list[CashflowEvent] = []
+    def cashflows(self) -> Cashflow:
+        events: list[CashflowEvent] = []
         rate = self.rate / self.frequency.frequency_per_year
         balance = 1.0
         unit_period = self.frequency.unit_period
 
         if self.maturity_date is not None:
-            dates = schedule(
-                start_date=self.issue_date,
-                maturity_date=self.maturity_date,
+            dates = Schedule(
+                start_date=self.issue_date or self.calendar.as_of_date,
+                end_date=self.maturity_date,
                 frequency=self.frequency,
                 calendar=self.calendar,
-            )
+            ).dates
             io_periods = (
                 self.io_period // unit_period if self.io_period is not None else 0
             )
@@ -51,7 +51,7 @@ class Amortizing(FixedIncome):
                     principal = 0
 
                 balance_end = balance - principal
-                result.append(
+                events.append(
                     CashflowEvent(
                         date=date,
                         balance_start=balance,
@@ -62,4 +62,4 @@ class Amortizing(FixedIncome):
                     )
                 )
                 balance = balance_end
-        return CashflowSchedule(events=result)
+        return Cashflow(events=events)

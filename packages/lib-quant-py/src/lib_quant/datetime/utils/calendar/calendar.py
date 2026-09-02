@@ -19,14 +19,22 @@ class Calendar(BaseModel):
     )
     day_count: DayCount = Field(default=DayCount.ACT_360)
     region: Region = Field(default=Region.US)
-    settlement_days: int = Field(default=2)
+    settlement_days: int = Field(default=0)
+    as_of_date: datetime.date = Field(default_factory=datetime.date.today)
+
+    def post_init(self) -> None:
+        ql.Settings.instance().evaluationDate = ql.Date(
+            self.as_of_date.day,
+            self.as_of_date.month,
+            self.as_of_date.year,
+        )
 
     def advance(
         self,
         period: Period,
         start: datetime.date | None = None,
     ) -> datetime.date:
-        start = start or datetime.date.today()
+        start = start or self.as_of_date
         start_date = ql.Date(start.day, start.month, start.year)
         end_date = start_date + period.ql
         return datetime.date(
@@ -40,8 +48,20 @@ class Calendar(BaseModel):
         end: datetime.date,
         start: datetime.date | None = None,
     ) -> int:
-        start = start or datetime.date.today()
+        start = start or self.as_of_date
         return self.day_count.ql.yearFraction(
+            ql.Date(start.day, start.month, start.year),
+            ql.Date(end.day, end.month, end.year),
+        )
+
+    def n_days(
+        self,
+        period: Period,
+        start: datetime.date | None = None,
+    ) -> int:
+        start = start or self.as_of_date
+        end = self.advance(period, start)
+        return self.day_count.ql.dayCount(
             ql.Date(start.day, start.month, start.year),
             ql.Date(end.day, end.month, end.year),
         )
@@ -53,22 +73,20 @@ class Calendar(BaseModel):
         step: Period | None = None,
         direction: Direction = Direction.FORWARD,
     ) -> list[datetime.date]:
+        from lib_quant.cashflow.utils.schedule.schedule import Schedule
+
         step = step or Period(days=1)
         bdc = self.business_day_convention.ql
         region = self.region
-        schedule = ql.Schedule(
-            ql.Date(start.day, start.month, start.year),
-            ql.Date(end.day, end.month, end.year),
-            step.ql,
-            region.ql,
-            bdc,
-            bdc,
-            direction.ql,
-            False,
+        schedule = Schedule(
+            start_date=start,
+            end_date=end,
+            step=step,
+            direction=direction,
+            calendar=self,
         )
-
         dates = []
-        for date in schedule:
+        for date in schedule.ql:
             if region.ql.isBusinessDay(date):
                 dates.append(datetime.date(date.day, date.month, date.year))
             else:
@@ -78,4 +96,16 @@ class Calendar(BaseModel):
                 )
                 if date not in dates:
                     dates.append(datetime.date(date.day, date.month, date.year))
-        return sorted(dates)
+        return dates
+
+    def ratio(
+        self,
+        start: Period,
+        end: Period,
+        anchor: datetime.date | None = None,
+    ) -> float:
+        anchor = anchor or self.as_of_date
+        end_days = self.n_days(end, anchor)
+        if end_days == 0:
+            raise ValueError("Divide by zero")
+        return self.n_days(start, anchor) / end_days

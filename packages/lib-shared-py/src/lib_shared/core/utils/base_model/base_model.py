@@ -57,8 +57,9 @@ class _BaseModel(PydanticBaseClass):
 
         result = {}
         for k, v in value:
-            current = getattr(self, k, None)
-            result[k] = self._merge(current, v, merge_strategy=merge_strategy)
+            if hasattr(self, k):
+                current = getattr(self, k)
+                result[k] = self._merge(current, v, merge_strategy=merge_strategy)
 
         return self.clone(**result)
 

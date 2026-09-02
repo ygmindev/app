@@ -1,9 +1,11 @@
 from enum import StrEnum
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import QuantLib as ql
 
-from lib_quant.datetime.utils.period.period import Period
+if TYPE_CHECKING:
+    from lib_quant.cashflow.utils.schedule.schedule import Schedule
+    from lib_quant.datetime.utils.period.period import Period
 
 
 class BusinessDayConvention(StrEnum):
@@ -51,7 +53,9 @@ class Frequency(StrEnum):
                 raise ValueError(f"Invalid frequency: {self}")
 
     @property
-    def unit_period(self) -> Period:
+    def unit_period(self) -> "Period":
+        from lib_quant.datetime.utils.period.period import Period
+
         match self:
             case Frequency.DAILY:
                 return Period(days=1)
@@ -65,6 +69,24 @@ class Frequency(StrEnum):
                 return Period(months=6)
             case Frequency.ANNUAL:
                 return Period(years=1)
+            case _:
+                raise ValueError(f"Invalid frequency: {self}")
+
+    @property
+    def ql(self) -> int:
+        match self:
+            case Frequency.ANNUAL:
+                return ql.Annual
+            case Frequency.SEMI_ANNUAL:
+                return ql.Semiannual
+            case Frequency.QUARTERLY:
+                return ql.Quarterly
+            case Frequency.MONTHLY:
+                return ql.Monthly
+            case Frequency.WEEKLY:
+                return ql.Weekly
+            case Frequency.DAILY:
+                return ql.Daily
             case _:
                 raise ValueError(f"Invalid frequency: {self}")
 
@@ -87,14 +109,22 @@ class DayCount(StrEnum):
     ACT_ACT = "ACT/ACT"
     THIRTY_360 = "THIRTY/360"
 
+    def ql_schedule(self, schedule: "Schedule | None") -> ql.DayCounter:
+        if self is DayCount.ACT_360:
+            return ql.Actual360()
+        if self is DayCount.ACT_365:
+            return ql.Actual365Fixed()
+        if self is DayCount.ACT_ACT:
+            if schedule is not None:
+                return ql.ActualActual(ql.ActualActual.ISMA, schedule.ql)
+            return ql.ActualActual(ql.ActualActual.ISMA)
+        if self is DayCount.THIRTY_360:
+            return ql.Thirty360(ql.Thirty360.ISMA)
+        raise ValueError(self)
+
     @property
     def ql(self) -> ql.DayCounter:
-        return {
-            DayCount.ACT_360: ql.Actual360(),
-            DayCount.ACT_365: ql.Actual365Fixed(),
-            DayCount.ACT_ACT: ql.ActualActual(ql.ActualActual.ISDA),
-            DayCount.THIRTY_360: ql.Thirty360(ql.Thirty360.ISDA),
-        }[self]
+        return self.ql_schedule(None)
 
 
 class Region(StrEnum):

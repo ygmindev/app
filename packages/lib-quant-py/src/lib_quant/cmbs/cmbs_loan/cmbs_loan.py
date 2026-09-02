@@ -1,8 +1,8 @@
-from lib_quant.cashflow.cashflow_schedule.cashflow_schedule import CashflowSchedule
-from lib_quant.fixed_income.fixed_income.fixed_income import FixedIncome
+from lib_quant.cashflow.cashflow.cashflow import Cashflow
+from lib_quant.fixed_income.credit.credit import Credit
 
 
-class CMBSLoan(FixedIncome):
+class CMBSLoan(Credit):
     property_value: float = 0.0
     noi: float = 0.0
     prepay_penalty_months: int = 0
@@ -11,7 +11,7 @@ class CMBSLoan(FixedIncome):
     def coupon(self) -> float:
         return self.rate.spread
 
-    def schedule(self) -> CashflowSchedule: ...
+    def cashflows(self) -> Cashflow: ...
 
     @property
     def ltv(self) -> float:
@@ -26,7 +26,7 @@ class CMBSLoan(FixedIncome):
         return self.noi / self.size
 
     def annual_debt_service(self) -> float:
-        schedule = self.schedule
+        schedule = self.cashflows
         periods_per_year = self.payments_per_year
         return sum(p.payment for p in schedule[:periods_per_year])
 
@@ -38,7 +38,7 @@ class CMBSLoan(FixedIncome):
         return self.noi / ads
 
     def maturity_balance(self) -> float:
-        schedule = self.schedule()
+        schedule = self.cashflows()
         return schedule[-1].balance if schedule else self.size
 
     def is_baloon(self) -> bool:

@@ -1,9 +1,9 @@
 import datetime
 
-from lib_quant.fixed_income.fixed_income.fixed_income import FixedIncome
+from lib_quant.fixed_income.credit.credit import Credit
 
 
-class Tranche(FixedIncome):
+class Tranche(Credit):
     balance: float
     interest_shortfall: float = 0.0
     realized_loss: float = 0.0

@@ -2,15 +2,14 @@ from datetime import datetime
 from typing import Generic, TypeVar
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
 
 from lib_quant.core.asset.asset import Asset
-from lib_quant.pricing.utils.quote.constants import QuoteType
 
 TType = TypeVar("TType", bound=Asset)
 
 
 class Quote(BaseModel, Generic[TType]):
     value: float
-    timestamp: datetime
-    asset: TType | None = None
-    quote_type: QuoteType | None = QuoteType.PRICE
+    timestamp: datetime = Field(default_factory=datetime.now)
+    asset: TType | None = Field(default=None)

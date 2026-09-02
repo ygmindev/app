@@ -15,7 +15,7 @@ def _discount_factor(
         rate,
         day_count.ql,
         compounding.ql,
-        frequency.unit_period.ql,
+        frequency.ql,
     ).discountFactor(t)
 
 

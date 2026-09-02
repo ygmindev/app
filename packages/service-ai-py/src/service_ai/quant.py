@@ -17,7 +17,7 @@ bond = FixedRateBond(
 )
 
 yld = bond.yield_from_price(
-    price=BondPrice(value=105.0),
+    value=BondPrice(value=105.0),
     as_of_date=datetime.date.today(),
 )
 print(yld)

@@ -11,21 +11,26 @@ from lib_quant.datetime.utils.period.period import Period
 
 class Asset(BaseModel):
     calendar: Calendar = Field(default_factory=lambda: QuantSettings.get().calendar)
-    issue_date: datetime.date | None = Field(default_factory=datetime.date.today)
-    size: float = 0.0
+    issue_date: datetime.date = Field(
+        default_factory=lambda: QuantSettings.get().calendar.as_of_date
+    )
+    size: float = 1.0
     currency: str | None = None
-    tenor: Period | datetime.date | None = None
+    tenor: Period | None = None
+    maturity_date: datetime.date | None = None
+
+    def post_init(self) -> None:
+        if self.tenor is not None:
+            self.maturity_date = self.calendar.advance(
+                self.tenor,
+                self.calendar.as_of_date,
+            )
+        if self.maturity_date is not None:
+            self.tenor = Period.from_date(
+                self.maturity_date,
+                self.calendar.as_of_date,
+            )
 
     @property
     def ql(self) -> ql.Observable:
         raise NotImplementedError("subclasses must implement this method")
-
-    @property
-    def maturity_date(self) -> datetime.date | None:
-        if self.tenor is None:
-            return None
-        return (
-            self.tenor
-            if isinstance(self.tenor, datetime.date)
-            else self.calendar.advance(self.tenor, self.issue_date)
-        )

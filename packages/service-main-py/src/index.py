@@ -1,20 +1,64 @@
 import asyncio
-import datetime
 
+from lib_quant.curve.benchmark_yield_curve.benchmark_yield_curve import (
+    BenchmarkYieldCurve,
+)
+from lib_quant.curve.ois_curve.ois_curve import OisCurve
 from lib_quant.datetime.utils.period.period import Period
+from lib_quant.pricing.utils.pricing_engine.credit_pricing_engine.credit_pricing_engine import (
+    CreditPricingEngine,
+)
+from lib_quant.pricing.utils.quote.credit_quote.constants import CreditQuoteType
+from lib_quant.pricing.utils.quote.credit_quote.credit_quote import CreditQuote
+from lib_quant.pricing.utils.quote.swap_quote.constants import SwapQuoteType
+from lib_quant.pricing.utils.quote.swap_quote.swap_quote import SwapQuote
 from lib_quant.security.credit.bond.fixed_rate_bond.fixed_rate_bond import FixedRateBond
+from lib_quant.swap.ois.ois import Ois
 from lib_shared.core.utils.base_model.base_model import BaseModel
 
 
 async def run_agent() -> None:
     BaseModel.rebuild()
-    print("\n\n\n@@@@")
-    frb = FixedRateBond(
-        issue_date=datetime.date.today(),
+    bond = FixedRateBond(
         tenor=Period(years=10),
         coupon=0.05,
     )
-    print(frb)
+
+    swap_curve = OisCurve()
+    swap_curve.fit(
+        quotes=[
+            SwapQuote(
+                asset=Ois(tenor=Period(years=1)),
+                quote_type=SwapQuoteType.YIELD,
+                value=0.05,
+            ),
+            SwapQuote(
+                asset=Ois(tenor=Period(years=40)),
+                quote_type=SwapQuoteType.YIELD,
+                value=0.05,
+            ),
+        ]
+    )
+    benchmark_yield_curve = BenchmarkYieldCurve()
+    benchmark_yield_curve.fit(
+        tenors=[Period(years=1), Period(years=10)],
+        rates=[0.05, 0.05],
+    )
+    pe = CreditPricingEngine(
+        swap_curve=swap_curve,
+        benchmark_yield_curve=benchmark_yield_curve,
+    )
+
+    quote = CreditQuote(
+        asset=bond,
+        quote_type=CreditQuoteType.YIELD,
+        value=0.05,
+    )
+
+    result = pe.convert(quote, CreditQuoteType.PRICE)
+    print("\n\n\n@@@@")
+    print(result)
+    print("\n\n\n@@@@")
 
 
 def main():
