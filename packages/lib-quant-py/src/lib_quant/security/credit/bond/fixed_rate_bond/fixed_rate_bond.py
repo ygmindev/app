@@ -9,11 +9,11 @@ from lib_quant.rates.rate.rate import Rate
 from lib_quant.security.credit.bond.bond import Bond
 
 
-class FixedRateBond(Bond[ql.FixedRateBond]):
+class FixedRateBond(Bond[ql.FixedRateBond | ql.AmortizingFixedRateBond]):
     coupon: float
-    frequency: Frequency = Field(default=Frequency.SEMI_ANNUAL)
+    frequency: Frequency = Field(default_factory=lambda: Frequency.SEMI_ANNUAL)
 
-    _security: "ql.FixedRateBond" = PrivateField()
+    _security: "ql.FixedRateBond | ql.AmortizingFixedRateBond" = PrivateField()
 
     def __init__(
         self,
@@ -28,15 +28,34 @@ class FixedRateBond(Bond[ql.FixedRateBond]):
 
     def post_init(self) -> None:
         super().post_init()
-        self._security = ql.FixedRateBond(
-            self.calendar.settlement_days,
-            self.size,
-            self._schedule.ql,
-            [self.coupon],
-            self._day_count,
-            self.calendar.business_day_convention.ql,
-            100.0,
-            ql.Date(self.issue_date.day, self.issue_date.month, self.issue_date.year),
-        )
+        if self.amortization is not None:
+            self._security = ql.AmortizingFixedRateBond(
+                self.calendar.settlement_days,
+                self.notionals,
+                self._schedule.ql,
+                [self.coupon],
+                self._day_count,
+                self.calendar.business_day_convention.ql,
+                ql.Date(
+                    self.issue_date.day,
+                    self.issue_date.month,
+                    self.issue_date.year,
+                ),
+            )
+        else:
+            self._security = ql.FixedRateBond(
+                self.calendar.settlement_days,
+                self.size,
+                self._schedule.ql,
+                [self.coupon],
+                self._day_count,
+                self.calendar.business_day_convention.ql,
+                100.0,
+                ql.Date(
+                    self.issue_date.day,
+                    self.issue_date.month,
+                    self.issue_date.year,
+                ),
+            )
         if self.curve is not None:
             self.set_curve(self.curve)

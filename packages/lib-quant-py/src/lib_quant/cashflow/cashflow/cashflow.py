@@ -1,5 +1,6 @@
 import datetime
 
+import pandas as pd
 import QuantLib as ql
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
@@ -24,6 +25,11 @@ class Cashflow(BaseModel):
                 )
             )
         return _leg
+
+    @property
+    def df(self) -> pd.DataFrame:
+        data = [x.to_dict(exclude=set(["calendar"])) for x in self.events]
+        return pd.DataFrame(data=data)
 
     def npv(
         self,

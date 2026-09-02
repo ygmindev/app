@@ -5,6 +5,7 @@ from lib_quant.curve.benchmark_yield_curve.benchmark_yield_curve import (
 )
 from lib_quant.curve.ois_curve.ois_curve import OisCurve
 from lib_quant.datetime.utils.period.period import Period
+from lib_quant.fixed_income.credit.constants import AmortizationType
 from lib_quant.pricing.utils.pricing_engine.credit_pricing_engine.credit_pricing_engine import (
     CreditPricingEngine,
 )
@@ -12,14 +13,15 @@ from lib_quant.pricing.utils.quote.credit_quote.constants import CreditQuoteType
 from lib_quant.pricing.utils.quote.credit_quote.credit_quote import CreditQuote
 from lib_quant.pricing.utils.quote.swap_quote.constants import SwapQuoteType
 from lib_quant.pricing.utils.quote.swap_quote.swap_quote import SwapQuote
-from lib_quant.rates.daily_sofr.daily_sofr import DailySofr
-from lib_quant.rates.rate.rate import Rate
 from lib_quant.security.credit.bond.fixed_rate_bond.fixed_rate_bond import FixedRateBond
-from lib_quant.security.credit.bond.floating_rate_bond.floating_rate_bond import (
-    FloatingRateBond,
-)
 from lib_quant.swap.ois.ois import Ois
 from lib_shared.core.utils.base_model.base_model import BaseModel
+
+# from lib_quant.rates.daily_sofr.daily_sofr import DailySofr
+# from lib_quant.rates.rate.rate import Rate
+# from lib_quant.security.credit.bond.floating_rate_bond.floating_rate_bond import (
+#     FloatingRateBond,
+# )
 
 
 async def run_agent() -> None:
@@ -48,15 +50,20 @@ async def run_agent() -> None:
     bond = FixedRateBond(
         tenor=Period(years=10),
         coupon=0.05,
+        amortization=AmortizationType.INTEREST_ONLY,
     )
-    bond = FloatingRateBond(
-        tenor=Period(years=10),
-        rate=Rate(
-            benchmark=DailySofr(curve=ois_curve),
-            spread=0.05,
-        ),
-        curve=ois_curve,
-    )
+    # bond = FloatingRateBond(
+    #     tenor=Period(years=10),
+    #     rate=Rate(
+    #         benchmark=DailySofr(curve=ois_curve),
+    #         spread=0.05,
+    #     ),
+    #     curve=ois_curve,
+    # )
+
+    print("\n\n\n@@@@ cashflows")
+    print(bond.cashflows.df)
+    print("\n\n\n@@@@")
 
     pe = CreditPricingEngine(
         swap_curve=ois_curve,
@@ -70,7 +77,7 @@ async def run_agent() -> None:
     )
 
     result = pe.convert(quote, CreditQuoteType.PRICE)
-    print("\n\n\n@@@@")
+    print("\n\n\n@@@@ PRICING")
     print(result)
     print("\n\n\n@@@@")
 
