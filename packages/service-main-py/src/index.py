@@ -19,10 +19,6 @@ from lib_shared.core.utils.base_model.base_model import BaseModel
 
 async def run_agent() -> None:
     BaseModel.rebuild()
-    bond = FixedRateBond(
-        tenor=Period(years=10),
-        coupon=0.05,
-    )
 
     swap_curve = OisCurve()
     swap_curve.fit(
@@ -44,6 +40,11 @@ async def run_agent() -> None:
         tenors=[Period(years=1), Period(years=40)],
         rates=[0.01, 0.10],
     )
+    bond = FixedRateBond(
+        tenor=Period(years=10),
+        coupon=0.05,
+    )
+
     pe = CreditPricingEngine(
         swap_curve=swap_curve,
         benchmark_yield_curve=benchmark_yield_curve,

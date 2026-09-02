@@ -15,7 +15,7 @@ from lib_quant.datetime.constants import Direction, Frequency
 from lib_quant.security.credit.bond.bond import Bond
 
 
-class FloatingRateBond(Bond):
+class FloatingRateBond(Bond[ql.FloatingRateBond]):
     frequency: Frequency = Field(default=Frequency.QUARTERLY)
 
     _security: "ql.FloatingRateBond" = PrivateField()
@@ -28,7 +28,7 @@ class FloatingRateBond(Bond):
         if self.maturity_date is None:
             raise ValueError("missing maturity_date")
         if self.rate.benchmark is None:
-            ...
+            raise ValueError("missing benchmark")
 
         schedule = Schedule(
             start_date=self.issue_date,
@@ -45,19 +45,15 @@ class FloatingRateBond(Bond):
             self.rate.benchmark.ql,
             self._day_count,
             self.calendar.business_day_convention.ql,
-            fixing_days,
-            [self.gearing],
-            [self.spread],
-            [],  # caps
-            [],  # floors
-            self.in_arrears,
+            self.rate.fixing_days or 0,
+            [self.rate.gearing],
+            [self.rate.spread],
+            [self.rate.cap],
+            [self.rate.floor],
+            False,  # self.in_arrears,
             100.0,
             ql.Date(self.issue_date.day, self.issue_date.month, self.issue_date.year),
         )
-
-    @property
-    def ql(self) -> ql.FixedRateBond:
-        return self._security
 
     def yield_from_price(
         self,

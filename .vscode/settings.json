@@ -87,5 +87,6 @@
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right",
   "editor.quickSuggestionsDelay": 100,
-  "chat.disableAIFeatures": false
+  "chat.disableAIFeatures": false,
+  "continue.enableConsole": true
 }

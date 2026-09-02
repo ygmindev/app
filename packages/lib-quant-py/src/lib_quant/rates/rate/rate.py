@@ -10,6 +10,7 @@ class Rate(BaseModel):
     rate_type: RateType = RateType.FIXED
     spread: float = Field(default=0.0)
     floor: float | None = Field(default=None)
+    cap: float | None = Field(default=None)
     gearing: float | None = Field(default=None)
     fixing_days: int | None = Field(default=None)
 
@@ -22,6 +23,8 @@ class Rate(BaseModel):
             base = 0.0
             if self.floor is not None:
                 base = max(base, self.floor)
+            if self.cap is not None:
+                base = min(base, self.cap)
             if self.gearing is not None:
                 base *= self.gearing
             return base + self.spread

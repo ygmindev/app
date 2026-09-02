@@ -17,8 +17,9 @@ from lib_quant.rates.rate.rate import Rate
 from lib_quant.security.credit.bond.bond import Bond
 
 
-class FixedRateBond(Bond):
+class FixedRateBond(Bond[ql.FixedRateBond]):
     coupon: float
+    curve: BootstrappableCurve | None = Field(default=None)
     frequency: Frequency = Field(default=Frequency.SEMI_ANNUAL)
 
     _security: "ql.FixedRateBond" = PrivateField()
@@ -60,10 +61,14 @@ class FixedRateBond(Bond):
             100.0,
             ql.Date(self.issue_date.day, self.issue_date.month, self.issue_date.year),
         )
+        if self.curve is not None:
+            self.set_curve(self.curve)
 
-    @property
-    def ql(self) -> ql.FixedRateBond:
-        return self._security
+    def set_curve(
+        self,
+        curve: BootstrappableCurve,
+    ) -> None:
+        self._security.setPricingEngine(ql.DiscountingBondEngine(curve.curve))
 
     def yield_from_price(
         self,
