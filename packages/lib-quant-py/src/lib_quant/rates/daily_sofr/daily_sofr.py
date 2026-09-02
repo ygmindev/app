@@ -1,6 +1,9 @@
 import QuantLib as ql
+from lib_shared.core.utils.private_field.private_field import PrivateField
 
-from lib_quant.curve.curve.curve import Curve
+from lib_quant.curve.bootstrappable_curve.bootstrappable_curve import (
+    BootstrappableCurve,
+)
 from lib_quant.datetime.utils.period.period import Period
 from lib_quant.rates.benchmark.benchmark import Benchmark
 
@@ -8,15 +11,21 @@ from lib_quant.rates.benchmark.benchmark import Benchmark
 class DailySofr(Benchmark):
     tenor: Period = Period(days=1)
     currency: str = "USD"
-    curve: Curve | None = None
+    curve: BootstrappableCurve | None = None
+
+    _index: "ql.Sofr" = PrivateField()
 
     def post_init(self) -> None:
         super().post_init()
         if self.curve:
-            self._curve = ql.Sofr(self.curve.curve)
+            self._index = ql.Sofr(self.curve.handle)
         else:
-            self._curve = ql.Sofr()
+            self._index = ql.Sofr()
 
     @property
     def description(self) -> str:
         return "SOFR 1D"
+
+    @property
+    def ql(self) -> ql.Sofr:
+        return self._index

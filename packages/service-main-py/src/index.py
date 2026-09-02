@@ -12,7 +12,12 @@ from lib_quant.pricing.utils.quote.credit_quote.constants import CreditQuoteType
 from lib_quant.pricing.utils.quote.credit_quote.credit_quote import CreditQuote
 from lib_quant.pricing.utils.quote.swap_quote.constants import SwapQuoteType
 from lib_quant.pricing.utils.quote.swap_quote.swap_quote import SwapQuote
+from lib_quant.rates.daily_sofr.daily_sofr import DailySofr
+from lib_quant.rates.rate.rate import Rate
 from lib_quant.security.credit.bond.fixed_rate_bond.fixed_rate_bond import FixedRateBond
+from lib_quant.security.credit.bond.floating_rate_bond.floating_rate_bond import (
+    FloatingRateBond,
+)
 from lib_quant.swap.ois.ois import Ois
 from lib_shared.core.utils.base_model.base_model import BaseModel
 
@@ -44,6 +49,14 @@ async def run_agent() -> None:
         tenor=Period(years=10),
         coupon=0.05,
     )
+    bond = FloatingRateBond(
+        tenor=Period(years=10),
+        rate=Rate(
+            benchmark=DailySofr(curve=swap_curve),
+            spread=0.05,
+        ),
+        curve=swap_curve,
+    )
 
     pe = CreditPricingEngine(
         swap_curve=swap_curve,
@@ -56,7 +69,7 @@ async def run_agent() -> None:
         value=0.05,
     )
 
-    result = pe.convert(quote, CreditQuoteType.Z_SPREAD)
+    result = pe.convert(quote, CreditQuoteType.PRICE)
     print("\n\n\n@@@@")
     print(result)
     print("\n\n\n@@@@")
