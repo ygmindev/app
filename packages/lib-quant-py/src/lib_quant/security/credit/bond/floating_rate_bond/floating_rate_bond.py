@@ -28,7 +28,7 @@ class FloatingRateBond(Bond):
         if self.maturity_date is None:
             raise ValueError("missing maturity_date")
         if self.rate.benchmark is None:
-            raise
+            ...
 
         schedule = Schedule(
             start_date=self.issue_date,
