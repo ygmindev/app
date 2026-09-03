@@ -5,7 +5,10 @@ from lib_quant.curve.benchmark_yield_curve.benchmark_yield_curve import (
 )
 from lib_quant.curve.ois_curve.ois_curve import OisCurve
 from lib_quant.datetime.utils.period.period import Period
-from lib_quant.fixed_income.credit.constants import AmortizationType
+from lib_quant.instruments.fixed_income.credit.credit.constants import AmortizationType
+from lib_quant.instruments.fixed_income.credit.fixed_rate_credit.fixed_rate_credit import (
+    FixedRateCredit,
+)
 from lib_quant.pricing.utils.pricing_engine.credit_pricing_engine.credit_pricing_engine import (
     CreditPricingEngine,
 )
@@ -13,14 +16,13 @@ from lib_quant.pricing.utils.quote.credit_quote.constants import CreditQuoteType
 from lib_quant.pricing.utils.quote.credit_quote.credit_quote import CreditQuote
 from lib_quant.pricing.utils.quote.swap_quote.constants import SwapQuoteType
 from lib_quant.pricing.utils.quote.swap_quote.swap_quote import SwapQuote
-from lib_quant.security.credit.bond.fixed_rate_bond.fixed_rate_bond import FixedRateBond
 from lib_quant.swap.ois.ois import Ois
 from lib_shared.core.utils.base_model.base_model import BaseModel
 
 # from lib_quant.rates.daily_sofr.daily_sofr import DailySofr
 # from lib_quant.rates.rate.rate import Rate
-# from lib_quant.security.credit.bond.floating_rate_bond.floating_rate_bond import (
-#     FloatingRateBond,
+# from lib_quant.instruments.credit.bond.floating_rate_bond.floating_rate_bond import (
+#     FloatingRateCredit,
 # )
 
 
@@ -47,12 +49,12 @@ async def run_agent() -> None:
         tenors=[Period(years=1), Period(years=40)],
         rates=[0.01, 0.10],
     )
-    bond = FixedRateBond(
+    bond = FixedRateCredit(
         tenor=Period(years=10),
         coupon=0.05,
         amortization=AmortizationType.INTEREST_ONLY,
     )
-    # bond = FloatingRateBond(
+    # bond = FloatingRateCredit(
     #     tenor=Period(years=10),
     #     rate=Rate(
     #         benchmark=DailySofr(curve=ois_curve),

@@ -3,10 +3,12 @@ from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 
 from lib_quant.datetime.constants import Frequency
-from lib_quant.security.credit.bond.bond import Bond
+from lib_quant.instruments.fixed_income.credit.floating_rate_credit.floating_rate_credit import (
+    FloatingRateCredit,
+)
 
 
-class FloatingRateBond(Bond[ql.FloatingRateBond]):
+class FloatingRateBond(FloatingRateCredit):
     frequency: Frequency = Field(default=Frequency.QUARTERLY)
 
     _security: "ql.FloatingRateBond" = PrivateField()

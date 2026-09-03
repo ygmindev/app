@@ -4,7 +4,7 @@ from lib_quant.curve.benchmark_yield_curve.benchmark_yield_curve import (
 from lib_quant.curve.bootstrappable_curve.bootstrappable_curve import (
     BootstrappableCurve,
 )
-from lib_quant.fixed_income.credit.credit import Credit
+from lib_quant.instruments.fixed_income.credit.credit.credit import Credit
 from lib_quant.pricing.utils.pricing_engine.pricing_engine.pricing_engine import (
     PricingEngine,
 )

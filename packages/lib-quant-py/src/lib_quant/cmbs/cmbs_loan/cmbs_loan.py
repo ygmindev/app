@@ -1,5 +1,5 @@
 from lib_quant.cashflow.cashflow.cashflow import Cashflow
-from lib_quant.fixed_income.credit.credit import Credit
+from lib_quant.instruments.fixed_income.credit.credit.credit import Credit
 
 
 class CMBSLoan(Credit):

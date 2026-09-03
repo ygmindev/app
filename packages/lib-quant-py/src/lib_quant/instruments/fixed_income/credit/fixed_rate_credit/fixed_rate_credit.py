@@ -5,11 +5,11 @@ from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 
 from lib_quant.datetime.constants import Frequency
+from lib_quant.instruments.fixed_income.credit.credit.credit import Credit
 from lib_quant.rates.rate.rate import Rate
-from lib_quant.security.credit.bond.bond import Bond
 
 
-class FixedRateBond(Bond[ql.FixedRateBond | ql.AmortizingFixedRateBond]):
+class FixedRateCredit(Credit[ql.FixedRateBond | ql.AmortizingFixedRateBond]):
     coupon: float
     frequency: Frequency = Field(default_factory=lambda: Frequency.SEMI_ANNUAL)
 

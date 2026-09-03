@@ -3,13 +3,13 @@ import QuantLib as ql
 from lib_quant.curve.bootstrappable_curve.bootstrappable_curve import (
     BootstrappableCurve,
 )
+from lib_quant.instruments.fixed_income.credit.usd.us_treasury.us_treasury import USTreasury
+from lib_quant.instruments.fixed_income.credit.usd.us_treasury_bill.us_treasury_bill import (
+    USTreasuryBill,
+)
 from lib_quant.pricing.utils.quote.credit_quote.constants import CreditQuoteType
 from lib_quant.pricing.utils.quote.credit_quote.credit_quote import (
     CreditQuote,
-)
-from lib_quant.security.credit.bond.usd.us_treasury.us_treasury import USTreasury
-from lib_quant.security.credit.bond.usd.us_treasury_bill.us_treasury_bill import (
-    USTreasuryBill,
 )
 
 

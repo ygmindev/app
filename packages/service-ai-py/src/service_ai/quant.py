@@ -1,13 +1,13 @@
 import datetime
 
 from lib_quant.date.constants import Frequency
+from lib_quant.instruments.fixed_income.credit.fixed_rate_credit import FixedRateCredit
 from lib_quant.pricing.utils.bond_price import BondPrice
 from lib_quant.pricing.utils.bond_yield import BondYield
-from lib_quant.security.credit.bond.fixed_rate_bond import FixedRateBond
 
 # 4cacf5310e674dc617b8152061d223af
 
-bond = FixedRateBond(
+bond = FixedRateCredit(
     issue_date=datetime.date(2022, 1, 1),
     maturity_date=datetime.date(2030, 1, 1),
     coupon_frequency=Frequency.SEMI_ANNUAL,

@@ -21,7 +21,8 @@ class Cashflow(BaseModel):
         for cf in self.events:
             _leg.append(
                 ql.SimpleCashFlow(
-                    cf.amount, ql.Date(cf.date.day, cf.date.month, cf.date.year)
+                    cf.amount,
+                    ql.Date(cf.date.day, cf.date.month, cf.date.year),
                 )
             )
         return _leg

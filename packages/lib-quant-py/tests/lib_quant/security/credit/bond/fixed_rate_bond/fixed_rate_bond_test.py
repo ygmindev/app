@@ -1,4 +1,4 @@
-from lib_quant.security.credit.bond.fixed_rate_bond import fixed_rate_bond
+from lib_quant.instruments.fixed_income.credit.fixed_rate_credit import fixed_rate_credit
 
 
 def test_works() -> None:
