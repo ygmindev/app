@@ -51,7 +51,7 @@ async def run_agent() -> None:
     bond = FixedRateCredit(
         tenor=Period(years=10),
         coupon=0.05,
-        amortization=AmortizationType.INTEREST_ONLY,
+        amortization_type=AmortizationType.INTEREST_ONLY,
     )
     bond = FloatingRateCredit(
         tenor=Period(years=10),

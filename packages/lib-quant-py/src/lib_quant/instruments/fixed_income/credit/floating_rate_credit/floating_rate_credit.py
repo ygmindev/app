@@ -17,7 +17,7 @@ class FloatingRateCredit(Credit[ql.FloatingRateBond]):
         if self.rate.benchmark is None:
             raise ValueError("missing benchmark")
 
-        if self.amortization is not None:
+        if self.amortization_type is not None:
             self._security = ql.AmortizingFloatingRateBond(
                 self.calendar.settlement_days,
                 self.notionals,

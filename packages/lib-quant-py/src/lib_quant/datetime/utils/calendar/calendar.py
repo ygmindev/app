@@ -47,7 +47,7 @@ class Calendar(BaseModel):
         self,
         end: datetime.date,
         start: datetime.date | None = None,
-    ) -> int:
+    ) -> float:
         start = start or self.as_of_date
         return self.day_count.ql.yearFraction(
             ql.Date(start.day, start.month, start.year),

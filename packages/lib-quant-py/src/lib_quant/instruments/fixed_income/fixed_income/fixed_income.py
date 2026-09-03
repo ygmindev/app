@@ -10,6 +10,5 @@ class FixedIncome(Asset):
     frequency: Frequency
     rate: Rate | None = Field(default=None)
 
-    @property
     def cashflows(self) -> Cashflow:
         raise NotImplementedError("Subclasses must implement this method")

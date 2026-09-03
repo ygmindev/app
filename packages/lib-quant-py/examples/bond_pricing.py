@@ -53,7 +53,7 @@ async def main() -> None:
     bond = FixedRateBond(
         tenor=Period(years=10),
         coupon=0.05,
-        amortization=AmortizationType.INTEREST_ONLY,
+        amortization_type=AmortizationType.INTEREST_ONLY,
     )
     bond = FloatingRateBond(
         tenor=Period(years=10),

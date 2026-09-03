@@ -6,7 +6,11 @@ from lib_quant.instruments.fixed_income.credit.loan.floating_rate_loan.floating_
 class RealEstateCredit(FloatingRateLoan):
     property_value: float = 0.0
     net_operating_income: float = 0.0
-    # prepayment
+
+    # prepayment_provision
+    # default_rate_model
+    # prepayment_model
+    # severity: float
 
     def ltv(
         self,

@@ -26,10 +26,15 @@ class Credit(
     FixedIncome,
     Generic[TType],
 ):
-    amortization: AmortizationType | None = Field(default=None)
+    amortization_type: AmortizationType | None = Field(default=None)
+    amortization_period: Period | None = Field(default=None)
+    amortization_reset_period: Period | None = Field(default=None)
     io_period: Period | None = Field(default=None)
     options: list[Option] = Field(default_factory=list)
     curve: BootstrappableCurve | None = Field(default=None)
+
+    pik_period: Period | None = Field(default=None)
+    pik_rate: float = Field(default=1.0)
 
     _security: TType = PrivateField()
     _day_count: "ql.DayCounter | None" = PrivateField()
@@ -107,6 +112,21 @@ class Credit(
             self.frequency.ql,
         )
 
+    @staticmethod
+    def _level_payment(
+        balance: float,
+        rates: list[float],
+        times: list[float],
+        start: int,
+        end: int,
+    ) -> float:
+        denominator_sum = 0.0
+        cumulative = 1.0
+        for i in range(start, end):
+            cumulative *= 1.0 + rates[i] * times[i]
+            denominator_sum += 1.0 / cumulative
+        return balance / denominator_sum if denominator_sum > 0 else 0.0
+
     def cashflows(self) -> Cashflow:
         by_date = defaultdict(
             lambda: {
@@ -165,44 +185,91 @@ class Credit(
         ).dates
         n_periods = len(dates) - 1
 
-        match self.amortization:
+        match self.amortization_type:
             case AmortizationType.STRAIGHT_LINE:
                 step = self.size / n_periods
                 return np.linspace(self.size, step, n_periods).tolist()
             case AmortizationType.LEVEL_PAY:
-                times = [
-                    self.calendar.year_fraction(dates[i], dates[i + 1])
-                    for i in range(len(dates) - 1)
-                ]
-                n_periods = len(dates) - 1
-                rates = [
-                    self.rate.all_in_rate(x) if self.rate is not None else 0.0
-                    for x in dates
-                ]
                 if self.io_period is None:
                     n_io_periods = 0
-                    notionals_io = []
                 else:
                     n_io_periods = self.io_period // self.frequency.unit_period
-                    notionals_io = [self.size] * n_io_periods
+
+                if self.pik_period is None:
+                    n_pik_periods = 0
+                else:
+                    n_pik_periods = self.pik_period // self.frequency.unit_period
+
+                if self.amortization_period is not None:
+                    amort_end_date = self.calendar.advance(
+                        self.amortization_period,
+                        self.issue_date,
+                    )
+                    amort_dates = Schedule(
+                        start_date=self.issue_date,
+                        end_date=amort_end_date,
+                        step=self.frequency.unit_period,
+                        calendar=self.calendar,
+                    ).dates
+                else:
+                    amort_dates = dates
+
+                n_amort_periods = len(amort_dates) - 1
+                if n_amort_periods < n_periods:
+                    raise ValueError(
+                        "amortization_period must be >= loan term "
+                        f"({n_amort_periods} < {n_periods})"
+                    )
+
+                rates = [
+                    self.rate.all_in_rate(d) if self.rate is not None else 0.0
+                    for d in amort_dates
+                ]
+                times = [
+                    self.calendar.year_fraction(amort_dates[i], amort_dates[i + 1])
+                    for i in range(n_amort_periods)
+                ]
+                if self.amortization_reset_period is not None:
+                    n_reset_periods = (
+                        self.amortization_reset_period // self.frequency.unit_period
+                    )
+                    if n_reset_periods < 1:
+                        raise ValueError("reset_frequency must be >= payment frequency")
+                else:
+                    n_reset_periods = None
 
                 balance = self.size
-                denominator_sum = 0.0
-                cumulative = 1.0
+                pmt = None
+                notionals = []
 
-                for i in range(n_io_periods, n_periods):
-                    cumulative *= 1.0 + rates[i] * times[i]
-                    denominator_sum += 1.0 / cumulative
+                for idx, i in enumerate(range(n_periods)):
+                    if i < n_pik_periods:
+                        accrued = balance * rates[i] * times[i]
+                        balance = balance + accrued * self.pik_rate
+                        notionals.append(balance)
+                        continue
 
-                pmt = self.size / denominator_sum if denominator_sum > 0 else 0.0
-                notionals_amort = []
-                balance = self.size
-                for i in range(n_io_periods, n_periods):
+                    if i < n_pik_periods + n_io_periods:
+                        notionals.append(balance)
+                        continue
+
+                    amort_idx = idx - (n_pik_periods + n_io_periods)
+                    is_reset = pmt is None or (
+                        n_reset_periods is not None and amort_idx % n_reset_periods == 0
+                    )
+                    if is_reset:
+                        pmt = self._level_payment(
+                            balance,
+                            rates,
+                            times,
+                            i,
+                            n_amort_periods,
+                        )
+
                     interest = balance * rates[i] * times[i]
-                    principal_paid = pmt - interest
-                    balance = max(0.0, balance - principal_paid)
-                    notionals_amort.append(balance)
-                return notionals_io + notionals_amort
+                    balance = max(0.0, balance - ((pmt or 0.0) - interest))
+                    notionals.append(balance)
+                return notionals
             case _:
                 return [self.size] * n_periods
 
