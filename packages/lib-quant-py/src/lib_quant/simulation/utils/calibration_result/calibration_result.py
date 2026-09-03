@@ -1,8 +1,8 @@
-from typing import Generic
+from typing import Generic, TypeVar
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
 
-from lib_quant.simulation.simulator.simulator import TParams
+TParams = TypeVar("TParams", bound=BaseModel)
 
 
 class CalibrationResult(BaseModel, Generic[TParams]):

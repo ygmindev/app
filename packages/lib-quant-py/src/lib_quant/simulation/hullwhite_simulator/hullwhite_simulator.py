@@ -1,7 +1,7 @@
 import numpy as np
 from lib_shared.core.utils.base_model.base_model import BaseModel
 
-from lib_quant.simulation.simulator.rates.rates_simulator.rates_simulator import (
+from lib_quant.simulation.rates_simulator.rates_simulator import (
     RatesSimulator,
 )
 from lib_quant.simulation.utils.calibration_params.calibration_params import (
@@ -42,7 +42,8 @@ class HullWhiteSimulator(
     ]
 ):
     def _calibrate(
-        self, params: HullWhiteCalibParams
+        self,
+        params: HullWhiteCalibParams,
     ) -> CalibrationResult[HullWhiteParams]:
         return CalibrationResult(
             params=HullWhiteParams(),

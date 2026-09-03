@@ -175,7 +175,10 @@ class Credit(
                     for i in range(len(dates) - 1)
                 ]
                 n_periods = len(dates) - 1
-                rates = [self.rate.all_in_rate(x) for x in dates]
+                rates = [
+                    self.rate.all_in_rate(x) if self.rate is not None else 0.0
+                    for x in dates
+                ]
                 if self.io_period is None:
                     n_io_periods = 0
                     notionals_io = []

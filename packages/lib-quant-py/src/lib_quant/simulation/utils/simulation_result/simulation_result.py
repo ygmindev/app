@@ -10,7 +10,8 @@ class SimulationResult(BaseModel):
     values: np.ndarray
     dates: list[datetime.date]
 
-    def to_df(self) -> pd.DataFrame:
+    @property
+    def df(self) -> pd.DataFrame:
         data = self.values.T
         return pd.DataFrame(
             data,
@@ -22,7 +23,6 @@ class SimulationResult(BaseModel):
         self,
         file_path: str,
     ) -> None:
-        df = self.to_df()
         wb = xw.Book(file_path)
         sheet = wb.sheets.active
-        sheet.range("A1").value = df
+        sheet.range("A1").value = self.df

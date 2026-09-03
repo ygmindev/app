@@ -2,20 +2,20 @@ import datetime
 
 import numpy as np
 
-from lib_quant.simulation.simulator.simulator import (
-    Simulator,
+from lib_quant.simulation.base_simulator.base_simulator import (
+    BaseSimulator,
     TCalib,
-    TParams,
     TResult,
     TSim,
 )
+from lib_quant.simulation.utils.calibration_result.calibration_result import TParams
 from lib_quant.simulation.utils.simulation_result.simulation_result import (
     SimulationResult,
 )
 
 
 class RatesSimulator(
-    Simulator[
+    BaseSimulator[
         TParams,
         TCalib,
         TSim,
@@ -35,14 +35,15 @@ class RatesSimulator(
         self,
         params: TSim,
         n_steps: int,
+        dt: float,
     ) -> np.ndarray:
         z = self._rng.standard_normal((params.n_paths, n_steps))
-        return z * np.sqrt(params.T / n_steps)
+        return z * np.sqrt(dt)
 
     def _simulate(
         self,
         params: TSim,
-    ) -> TResult:
+    ) -> SimulationResult:
         start = params.start
         step = params.step
         period = params.period
@@ -65,7 +66,7 @@ class RatesSimulator(
         n_steps = len(dates) - 1
         dt = T / n_steps
 
-        dW = self._draw(params, n_steps)
+        dW = self._draw(params, n_steps, dt)
         values = np.zeros((n_paths, n_steps + 1))
         values[:, 0] = params.initial_value
         times = np.linspace(0.0, T, n_steps + 1)

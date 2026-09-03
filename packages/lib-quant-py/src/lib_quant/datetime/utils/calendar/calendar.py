@@ -88,14 +88,18 @@ class Calendar(BaseModel):
         dates = []
         for date in schedule.ql:
             if region.ql.isBusinessDay(date):
-                dates.append(datetime.date(date.day, date.month, date.year))
+                dates.append(
+                    datetime.date(date.year(), date.month(), date.dayOfMonth())
+                )
             else:
                 date = region.ql.adjust(
                     date,
                     bdc,
                 )
                 if date not in dates:
-                    dates.append(datetime.date(date.day, date.month, date.year))
+                    dates.append(
+                        datetime.date(date.year(), date.month(), date.dayOfMonth())
+                    )
         return dates
 
     def ratio(

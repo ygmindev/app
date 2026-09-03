@@ -8,13 +8,13 @@ from lib_quant.curve.benchmark_yield_curve.benchmark_yield_curve import (
 )
 from lib_quant.curve.ois_curve.ois_curve import OisCurve
 from lib_quant.datetime.utils.period.period import Period
+from lib_quant.instruments.fixed_income.credit.bond.fixed_rate_bond.fixed_rate_bond import (
+    FixedRateBond,
+)
+from lib_quant.instruments.fixed_income.credit.bond.floating_rate_bond.floating_rate_bond import (
+    FloatingRateBond,
+)
 from lib_quant.instruments.fixed_income.credit.credit.constants import AmortizationType
-from lib_quant.instruments.fixed_income.credit.fixed_rate_credit.fixed_rate_credit import (
-    FixedRateCredit,
-)
-from lib_quant.instruments.fixed_income.credit.floating_rate_credit.floating_rate_credit import (
-    FloatingRateCredit,
-)
 from lib_quant.pricing.utils.pricing_engine.credit_pricing_engine.credit_pricing_engine import (
     CreditPricingEngine,
 )
@@ -27,7 +27,7 @@ from lib_quant.rates.rate.rate import Rate
 from lib_quant.swap.ois.ois import Ois
 
 
-async def run() -> None:
+async def main() -> None:
     BaseModel.rebuild()
 
     ois_curve = OisCurve()
@@ -50,12 +50,12 @@ async def run() -> None:
         tenors=[Period(years=1), Period(years=40)],
         rates=[0.01, 0.10],
     )
-    bond = FixedRateCredit(
+    bond = FixedRateBond(
         tenor=Period(years=10),
         coupon=0.05,
         amortization=AmortizationType.INTEREST_ONLY,
     )
-    bond = FloatingRateCredit(
+    bond = FloatingRateBond(
         tenor=Period(years=10),
         rate=Rate(
             benchmark=DailySofr(curve=ois_curve),
@@ -84,5 +84,5 @@ async def run() -> None:
     logger.info("\n\n\n@@@@")
 
 
-def main() -> None:
-    asyncio.run(run())
+if __name__ == "__main__":
+    asyncio.run(main())

@@ -45,6 +45,12 @@ class _Logger(BaseModel):
             *args,
         )
 
+    def warn(self, *args: Any) -> None:
+        self._log(
+            LoggerLevel.WARN,
+            *args,
+        )
+
     def info(self, *args: Any) -> None:
         self._log(
             LoggerLevel.INFO,
