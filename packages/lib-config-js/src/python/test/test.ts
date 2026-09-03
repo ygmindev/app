@@ -4,8 +4,15 @@ import { Config } from '@lib/config/utils/Config/Config';
 
 export const testConfig = new Config<TestConfigModel>({
   params: () => ({
-    command: ({ outDir, testDir }) =>
-      `poetry run python -m pytest --capture=no --log-cli-level=DEBUG --cov=src --cov-report=html:${outDir}/html ${testDir}`,
+    command: ({ include, outDir, testDir }) =>
+      `PYTHONUNBUFFERED=1 uv run pytest --capture=no --log-cli-level=DEBUG --cov=src --cov-report=html:${outDir}/html ${
+        include
+          ? include
+              .split(',')
+              .map((v) => `${testDir}/${v.trim()}`)
+              .join(' ')
+          : testDir
+      }`,
 
     outDir: fromWorking('.test'),
 

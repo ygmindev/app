@@ -1,0 +1,1 @@
+run rp --app=lib_quant --patterns="examples/**/*.py"

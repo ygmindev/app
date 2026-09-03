@@ -15,7 +15,7 @@ from lib_quant.curve.bootstrappable_curve.bootstrappable_curve import (
 )
 from lib_quant.datetime.constants import Direction, Frequency
 from lib_quant.datetime.utils.period.period import Period
-from lib_quant.deriv.option.option import Option
+from lib_quant.derivs.option.option import Option
 from lib_quant.instruments.fixed_income.credit.credit.constants import AmortizationType
 from lib_quant.instruments.fixed_income.fixed_income.fixed_income import FixedIncome
 
@@ -107,10 +107,13 @@ class Credit(
             self.frequency.ql,
         )
 
-    @property
     def cashflows(self) -> Cashflow:
         by_date = defaultdict(
-            lambda: {"interest": 0.0, "principal": 0.0, "nominal": None}
+            lambda: {
+                "interest": 0.0,
+                "principal": 0.0,
+                "nominal": None,
+            }
         )
 
         security = self.ql

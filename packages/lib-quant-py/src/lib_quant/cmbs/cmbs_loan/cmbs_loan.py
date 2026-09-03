@@ -26,7 +26,7 @@ class CMBSLoan(Credit):
         return self.noi / self.size
 
     def annual_debt_service(self) -> float:
-        schedule = self.cashflows
+        schedule = self.cashflows()
         periods_per_year = self.payments_per_year
         return sum(p.payment for p in schedule[:periods_per_year])
 

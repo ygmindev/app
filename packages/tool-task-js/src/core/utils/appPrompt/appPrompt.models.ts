@@ -3,6 +3,7 @@ import { type AppTaskParamsModel } from '@tool/task/core/core.models';
 
 export type AppPromptParamsModel = {
   defaultValue?: string;
+  isAll?: boolean;
   isMultiple?: boolean;
   key?: string;
   patterns?: Array<RegExp>;

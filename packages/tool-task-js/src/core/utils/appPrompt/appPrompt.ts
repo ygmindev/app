@@ -10,6 +10,7 @@ import { PROMPT_TYPE } from '@tool/task/core/utils/prompt/prompt.constants';
 
 export const appPrompt = ({
   defaultValue,
+  isAll = false,
   isMultiple = false,
   key,
   patterns,
@@ -26,7 +27,7 @@ export const appPrompt = ({
     }),
   );
   return {
-    defaultValue: defaultValue ? [defaultValue] : undefined,
+    defaultValue: defaultValue ? [defaultValue] : isAll ? options.map((v) => v.id) : undefined,
     key: key ?? 'app',
     options,
     type: isMultiple ? PROMPT_TYPE.MULTIPLE : PROMPT_TYPE.LIST,

@@ -3,7 +3,9 @@ import QuantLib as ql
 from lib_quant.curve.bootstrappable_curve.bootstrappable_curve import (
     BootstrappableCurve,
 )
-from lib_quant.instruments.fixed_income.credit.usd.us_treasury.us_treasury import USTreasury
+from lib_quant.instruments.fixed_income.credit.usd.us_treasury.us_treasury import (
+    USTreasury,
+)
 from lib_quant.instruments.fixed_income.credit.usd.us_treasury_bill.us_treasury_bill import (
     USTreasuryBill,
 )
@@ -34,7 +36,7 @@ class TreasuryCurve(BootstrappableCurve[CreditQuote]):
             dates = list(
                 map(
                     lambda cf: ql.Date(cf.date.year, cf.date.month, cf.date.day),
-                    asset.cashflows.events,
+                    asset.cashflows().events,
                 )
             )
             return ql.FixedRateBondHelper(

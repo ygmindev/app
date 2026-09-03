@@ -1,7 +1,7 @@
 import datetime
 
 from lib_quant.core.asset.asset import Asset
-from lib_quant.deriv.option.constants import ExerciseType, OptionType
+from lib_quant.derivs.option.constants import ExerciseType, OptionType
 
 
 class Option(Asset):
