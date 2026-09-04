@@ -8,7 +8,6 @@ from lib_quant.datetime.utils.period.period import Period
 from lib_quant.instruments.fixed_income.credit.bond.fixed_rate_bond.fixed_rate_bond import (
     FixedRateBond,
 )
-from lib_quant.instruments.fixed_income.credit.credit.constants import AmortizationType
 from lib_quant.pricing.utils.quote.swap_quote.constants import SwapQuoteType
 from lib_quant.pricing.utils.quote.swap_quote.swap_quote import SwapQuote
 from lib_quant.simulation.hullwhite_simulator.hullwhite_simulator import (
@@ -40,7 +39,6 @@ async def main() -> None:
     bond = FixedRateBond(
         tenor=Period(years=10),
         coupon=0.05,
-        amortization=AmortizationType.INTEREST_ONLY,
     )
 
     simulator = HullWhiteSimulator(

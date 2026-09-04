@@ -33,7 +33,7 @@ class RealEstateCredit(FloatingRateLoan):
     def annual_debt_service(self) -> float:
         schedule = self.cashflows()
         first_year = schedule.events[: self.frequency.frequency_per_year]
-        return sum(x.amount for x in first_year)
+        return sum(x.amount_scheduled for x in first_year)
 
     def dscr(self) -> float:
         ads = self.annual_debt_service()

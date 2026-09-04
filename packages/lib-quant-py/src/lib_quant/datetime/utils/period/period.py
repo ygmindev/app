@@ -67,8 +67,6 @@ class Period(BaseModel):
         from lib_quant.app.utils.quant_settings.quant_settings import QuantSettings
 
         start = start or QuantSettings.get().calendar.as_of_date
-        if end < start:
-            raise ValueError("end must be on or after start")
 
         match unit:
             case DateUnit.DAY:

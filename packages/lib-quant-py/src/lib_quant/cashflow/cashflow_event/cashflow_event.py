@@ -15,12 +15,19 @@ class CashflowEvent(BaseModel):
     balance_start: float | None = Field(default=None)
     calendar: Calendar = Field(default_factory=lambda: QuantSettings.get().calendar)
     date: datetime.date
-    interest: float = Field(default=0.0)
-    principal: float = Field(default=1.0)
+    interest_paid: float = Field(default=0.0)
+    interest_scheduled: float = Field(default=0.0)
+    pik_capitalized: float = Field(0.0)
+    principal_paid: float = Field(default=1.0)
+    principal_scheduled: float = Field(default=1.0)
 
     @property
-    def amount(self) -> float:
-        return self.principal + self.interest
+    def amount_scheduled(self) -> float:
+        return self.principal_scheduled + self.interest_scheduled
+
+    @property
+    def amount_paid(self) -> float:
+        return self.principal_paid + self.interest_paid
 
     def present_value(
         self,
@@ -30,7 +37,7 @@ class CashflowEvent(BaseModel):
         frequency: Frequency = Frequency.ANNUAL,
     ) -> float:
         if self.date <= as_of_date:
-            return self.amount
+            return self.amount_scheduled
         t = self.calendar.year_fraction(as_of_date, self.date)
         return discount_factor(
             rate,
