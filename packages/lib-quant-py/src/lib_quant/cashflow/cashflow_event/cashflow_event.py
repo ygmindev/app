@@ -11,15 +11,19 @@ from lib_quant.datetime.utils.calendar.calendar import Calendar
 
 
 class CashflowEvent(BaseModel):
+    date: datetime.date
     balance_end: float | None = Field(default=None)
     balance_start: float | None = Field(default=None)
     calendar: Calendar = Field(default_factory=lambda: QuantSettings.get().calendar)
-    date: datetime.date
+    defaulted: float | None = Field(default=None)
     interest_paid: float = Field(default=0.0)
     interest_scheduled: float = Field(default=0.0)
+    loss: float | None = Field(default=None)
     pik_capitalized: float = Field(0.0)
-    principal_paid: float = Field(default=1.0)
-    principal_scheduled: float = Field(default=1.0)
+    prepayment: float | None = Field(default=None)
+    principal_paid: float = Field(default=0.0)
+    principal_scheduled: float = Field(default=0.0)
+    recovery: float | None = Field(default=None)
 
     @property
     def amount_scheduled(self) -> float:

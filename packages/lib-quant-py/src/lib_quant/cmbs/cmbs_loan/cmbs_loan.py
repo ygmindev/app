@@ -1,4 +1,4 @@
-from lib_quant.cashflow.cashflow.cashflow import Cashflow
+from lib_quant.cashflow.cashflow_schedule.cashflow_schedule import CashflowSchedule
 from lib_quant.instruments.fixed_income.credit.credit.credit import Credit
 
 
@@ -11,7 +11,7 @@ class CMBSLoan(Credit):
     def coupon(self) -> float:
         return self.rate.spread
 
-    def cashflows(self) -> Cashflow: ...
+    def cashflows(self) -> CashflowSchedule: ...
 
     @property
     def ltv(self) -> float:

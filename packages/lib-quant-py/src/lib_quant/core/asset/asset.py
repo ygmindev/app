@@ -14,7 +14,7 @@ class Asset(BaseModel):
     issue_date: datetime.date = Field(
         default_factory=lambda: QuantSettings.get().calendar.as_of_date
     )
-    size: float = 1.0
+    size: float = Field(default=1.0)
     currency: str | None = None
     tenor: Period | None = None
     maturity_date: datetime.date | None = None

@@ -11,7 +11,7 @@ from lib_quant.curve.curve.constants import Compounding
 from lib_quant.datetime.utils.calendar.calendar import Calendar
 
 
-class Cashflow(BaseModel):
+class CashflowSchedule(BaseModel):
     events: list[CashflowEvent] = Field(default_factory=list)
     calendar: Calendar = Field(default_factory=lambda: QuantSettings.get().calendar)
 

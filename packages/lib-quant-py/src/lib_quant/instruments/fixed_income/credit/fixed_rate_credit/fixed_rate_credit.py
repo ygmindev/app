@@ -28,7 +28,14 @@ class FixedRateCredit(Credit[ql.FixedRateBond | ql.AmortizingFixedRateBond]):
 
     def post_init(self) -> None:
         super().post_init()
-        if self.amortization_type is not None:
+
+        is_amortizing = (
+            self.amortization_type is not None
+            or self.prepayment_rate is not None
+            or self.default_rate is not None
+        )
+
+        if is_amortizing:
             self._security = ql.AmortizingFixedRateBond(
                 self.calendar.settlement_days,
                 self.notionals,
