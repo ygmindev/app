@@ -74,12 +74,25 @@ class Credit(
     ) -> None:
         self._security.setPricingEngine(ql.DiscountingBondEngine(curve.curve))
 
+    def accrued_interest(
+        self,
+        settlement_date: datetime.date | None = None,
+    ) -> float:
+        settlement_date = settlement_date or self.calendar.as_of_date
+        return self._security.accruedAmount(
+            ql.Date(
+                settlement_date.day,
+                settlement_date.month,
+                settlement_date.year,
+            ),
+        )
+
     def yield_from_price(
         self,
         value: float,
     ) -> float:
         return self.ql.bondYield(
-            value,
+            ql.BondPrice(value, ql.BondPrice.Clean),
             self._day_count,
             ql.Compounded,
             self.frequency.ql,
@@ -122,6 +135,46 @@ class Credit(
             self._day_count,
             ql.Compounded,
             self.frequency.ql,
+        )
+
+    def duration_from_yield(
+        self,
+        value: float,
+        is_modified: bool = True,
+    ) -> float:
+        return ql.BondFunctions.duration(
+            self.ql,
+            value,
+            self._day_count,
+            ql.Compounded,
+            self.frequency.ql,
+            ql.Duration.Modified if is_modified else ql.Duration.Macaulay,
+        )
+
+    def convexity_from_yield(
+        self,
+        value: float,
+    ) -> float:
+        return ql.BondFunctions.convexity(
+            self.ql,
+            value,
+            self._day_count,
+            ql.Compounded,
+            self.frequency.ql,
+        )
+
+    def dv01_from_yield(
+        self,
+        value: float,
+    ) -> float:
+        return abs(
+            ql.BondFunctions.basisPointValue(
+                self.ql,
+                value,
+                self._day_count,
+                ql.Compounded,
+                self.frequency.ql,
+            )
         )
 
     @staticmethod

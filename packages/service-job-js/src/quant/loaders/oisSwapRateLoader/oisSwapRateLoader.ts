@@ -9,8 +9,6 @@ import { type OisSwapRateLoaderModel } from '@service/job/quant/loaders/oisSwapR
 import toNumber from 'lodash/toNumber';
 
 export const oisSwapRateLoader: OisSwapRateLoaderModel = new MultiSourceDataLoader({
-  ResourceImplementation: CurveImplementation,
-
   loaders: [
     new TableCrawlDataLoader<CurveModel>({
       lastUpdatedSelector: { value: 'footer' },
@@ -44,4 +42,6 @@ export const oisSwapRateLoader: OisSwapRateLoaderModel = new MultiSourceDataLoad
       uri: 'https://www.chathamfinancial.com/technology/us-market-rates',
     }),
   ],
+
+  ResourceImplementation: CurveImplementation,
 });

@@ -1,4 +1,4 @@
-from lib_quant.features.prepayment.prepayment.prepayment import Prepayment
+from lib_quant.features.prepayment.base_prepayment.base_prepayment import BasePrepayment
 
 
-class Defeasance(Prepayment): ...
+class Defeasance(BasePrepayment): ...

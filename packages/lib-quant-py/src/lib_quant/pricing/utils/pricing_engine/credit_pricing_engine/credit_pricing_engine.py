@@ -79,7 +79,7 @@ class CreditPricingEngine(PricingEngine):
                         benchmark_yld = self._benchmark_yield_interpolated(asset)
                         value = value - benchmark_yld
                     case CreditQuoteType.Z_SPREAD:
-                        prc = asset.price_from_zspread(value, self.swap_curve)
+                        prc = asset.price_from_yield(value)
                         value = asset.zspread_from_price(prc, self.swap_curve)
                     case _:
                         value = None
