@@ -244,69 +244,69 @@ class Credit(
                 if n_reset_periods < 1:
                     raise ValueError("reset_frequency must be >= payment frequency")
 
-        balance_post_pik = self.size
-        for i in range(n_pik_periods):
-            balance_post_pik += balance_post_pik * rates[i] * times[i] * self.pik_rate
-
-        step = 0.0
-        if (
-            self.amortization_type == AmortizationType.STRAIGHT_LINE
-            and n_periods > n_pik_periods
-        ):
-            step = balance_post_pik / (n_periods - n_pik_periods)
+        straight_line_balance = self.size
+        straight_line_step = 0.0
+        if self.amortization_type == AmortizationType.STRAIGHT_LINE:
+            for i in range(n_pik_periods):
+                straight_line_balance += (
+                    straight_line_balance * rates[i] * times[i] * self.pik_rate
+                )
+            if n_periods > n_pik_periods:
+                straight_line_step = straight_line_balance / (n_periods - n_pik_periods)
 
         recovery_lag_periods = self.n_periods(self.recovery_lag_period)
-
         recovery_pending: dict[int, float] = defaultdict(float)
         events: list[CashflowEvent] = []
-        balance_scheduled = self.size
-        balance_paid = self.size
+        balance_actual = balance_scheduled = self.size
         pmt = None
 
         for i in range(n_periods):
             rate, time = rates[i], times[i]
-            is_pik = i < n_pik_periods
 
             balance_scheduled_start = balance_scheduled
+            is_pik = i < n_pik_periods
             if is_pik:
                 balance_scheduled_end = balance_scheduled_start * (
                     1 + rate * time * self.pik_rate
                 )
-            else:
-                k = i - n_pik_periods
-                match self.amortization_type:
-                    case AmortizationType.STRAIGHT_LINE:
-                        balance_scheduled_end = balance_post_pik - (k + 1) * step
-                    case AmortizationType.LEVEL_PAY:
-                        if k < n_io_periods:
-                            balance_scheduled_end = balance_scheduled_start
-                        else:
-                            amort_idx = k - n_io_periods
-                            is_reset = (
-                                n_reset_periods is not None
-                                and amort_idx % n_reset_periods == 0
-                            )
-                            if pmt is None or is_reset:
-                                pmt = self._level_payment(
-                                    balance_scheduled_start,
-                                    rates,
-                                    times,
-                                    i,
-                                    n_amort_periods,
-                                )
-                            interest = balance_scheduled_start * rate * time
-                            balance_scheduled_end = max(
-                                0.0,
-                                balance_scheduled_start - (pmt - interest),
-                            )
-                    case _:
+                continue
+
+            k = i - n_pik_periods
+            match self.amortization_type:
+                case AmortizationType.STRAIGHT_LINE:
+                    balance_scheduled_end = (
+                        straight_line_balance - (k + 1) * straight_line_step
+                    )
+                case AmortizationType.LEVEL_PAY:
+                    if k < n_io_periods:
                         balance_scheduled_end = balance_scheduled_start
+                    else:
+                        amort_idx = k - n_io_periods
+                        is_reset = (
+                            n_reset_periods is not None
+                            and amort_idx % n_reset_periods == 0
+                        )
+                        if pmt is None or is_reset:
+                            pmt = self._level_payment(
+                                balance_scheduled_start,
+                                rates,
+                                times,
+                                i,
+                                n_amort_periods,
+                            )
+                        interest = balance_scheduled_start * rate * time
+                        balance_scheduled_end = max(
+                            0.0,
+                            balance_scheduled_start - (pmt - interest),
+                        )
+                case _:
+                    balance_scheduled_end = balance_scheduled_start
 
             if i == n_periods - 1:
                 balance_scheduled_end = 0.0
 
             balance_scheduled = balance_scheduled_end
-            balanace_start = balance_paid
+            balanace_start = balance_actual
             interest_scheduled = balanace_start * rate * time
             pik_capitalized = interest_scheduled * self.pik_rate if is_pik else 0.0
             balance = balanace_start + pik_capitalized
@@ -371,7 +371,7 @@ class Credit(
                     recovery=recovery_period,
                 )
             )
-            balance_paid = balance_end
+            balance_actual = balance_end
 
         if recovery_pending:
             last_date = dates[-1]
