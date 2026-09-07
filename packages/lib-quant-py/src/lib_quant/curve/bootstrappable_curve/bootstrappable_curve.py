@@ -84,7 +84,7 @@ class BootstrappableCurve(
         self,
         start: datetime.date,
         end: datetime.date,
-        compounding: Compounding = Compounding.CONTINUOUS,
+        compounding: Compounding = Compounding.COMPOUNDED,
     ) -> float:
         return self.curve.forwardRate(
             ql.Date(start.day, start.month, start.year),
@@ -96,7 +96,7 @@ class BootstrappableCurve(
     def zero_rate(
         self,
         at: datetime.date | Period,
-        compounding: Compounding = Compounding.CONTINUOUS,
+        compounding: Compounding = Compounding.COMPOUNDED,
     ) -> float:
         date = (
             self.calendar.advance(

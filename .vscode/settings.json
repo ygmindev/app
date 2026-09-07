@@ -88,5 +88,6 @@
   "workbench.sideBar.location": "right",
   "editor.quickSuggestionsDelay": 100,
   "chat.disableAIFeatures": false,
-  "continue.enableConsole": true
+  "continue.enableConsole": true,
+  "editor.inlineSuggest.enabled": true
 }

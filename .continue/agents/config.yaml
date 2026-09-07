@@ -9,6 +9,9 @@ open_router: &open_router
   apiKey: ${{ secrets.OPENAI_API_KEY }}
 ollama: &ollama
   provider: ollama
+openai: &openai
+  provider: openai
+  apiBase: http://localhost:11434/v1/
 models:
   - name: NVIDIA Nemotron 3 Ultra (Chat)
     <<: *open_router
@@ -18,11 +21,14 @@ models:
       - edit
       - apply
   - name: Qwen 2.5 Coder
-    <<: *ollama
-    model: qwen2.5-coder:1.5b
+    <<: *openai
+    model: qwen2.5-coder:1.5b-base
     roles:
       - autocomplete
-    autocompleteOptions:
-      debounceDelay: 350
-      maxPromptTokens: 2048
-      multilineCompletions: "always"
+    contextLength: 8192
+    completionOptions:
+      maxTokens: 256
+      temperature: 0.0
+    requestOptions:
+      extraBodyProperties:
+        think: false

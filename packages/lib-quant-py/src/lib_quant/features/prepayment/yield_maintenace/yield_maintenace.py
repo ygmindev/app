@@ -1,5 +1,0 @@
-from lib_quant.features.prepayment.base_prepayment.base_prepayment import BasePrepayment
-
-
-class YieldMaintenance(BasePrepayment):
-    spread: float

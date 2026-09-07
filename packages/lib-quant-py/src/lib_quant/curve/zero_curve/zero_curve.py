@@ -12,7 +12,7 @@ class ZeroCurve(Curve):
         self,
         tenors: Sequence[float | Period],
         rates: Sequence[float],
-        compounding: Compounding = Compounding.CONTINUOUS,
+        compounding: Compounding = Compounding.COMPOUNDED,
     ) -> None:
         tenors = [
             self.calendar.year_fraction(self.calendar.advance(t))

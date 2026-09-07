@@ -1,4 +1,5 @@
 import datetime
+from typing import Callable
 
 import pandas as pd
 import QuantLib as ql
@@ -8,6 +9,7 @@ from lib_shared.core.utils.field.field import Field
 from lib_quant.app.utils.quant_settings.quant_settings import QuantSettings
 from lib_quant.cashflow.cashflow_event.cashflow_event import CashflowEvent
 from lib_quant.curve.curve.constants import Compounding
+from lib_quant.datetime.constants import Frequency
 from lib_quant.datetime.utils.calendar.calendar import Calendar
 
 
@@ -35,16 +37,23 @@ class CashflowSchedule(BaseModel):
     def npv(
         self,
         as_of_date: datetime.date,
-        rate: float,
-        compounding: Compounding = Compounding.CONTINUOUS,
+        rate: float | Callable[[datetime.date], float],
+        compounding: Compounding = Compounding.COMPOUNDED,
+        frequency: Frequency = Frequency.ANNUAL,
     ) -> float:
         return sum(
-            cf.present_value(as_of_date, rate, compounding) for cf in self.events
+            cf.present_value(
+                as_of_date=as_of_date,
+                rate=rate(cf.date) if callable(rate) else rate,
+                compounding=compounding,
+                frequency=frequency,
+            )
+            for cf in self.events
         )
 
     def xirr(
         self,
-        compounding: Compounding = Compounding.CONTINUOUS,
+        compounding: Compounding = Compounding.COMPOUNDED,
         guess: float = 0.1,
     ) -> float:
         as_of = self.events[0].date

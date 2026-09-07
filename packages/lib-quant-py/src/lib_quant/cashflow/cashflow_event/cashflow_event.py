@@ -21,6 +21,7 @@ class CashflowEvent(BaseModel):
     loss: float | None = Field(default=None)
     pik_capitalized: float = Field(0.0)
     prepayment: float | None = Field(default=None)
+    prepayment_penalty: float | None = Field(default=None)
     principal_paid: float = Field(default=0.0)
     principal_scheduled: float = Field(default=0.0)
     recovery: float | None = Field(default=None)
@@ -37,7 +38,7 @@ class CashflowEvent(BaseModel):
         self,
         as_of_date: datetime.date,
         rate: float,
-        compounding: Compounding = Compounding.CONTINUOUS,
+        compounding: Compounding = Compounding.COMPOUNDED,
         frequency: Frequency = Frequency.ANNUAL,
     ) -> float:
         if self.date <= as_of_date:

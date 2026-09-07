@@ -15,6 +15,7 @@ from lib_quant.curve.bootstrappable_curve.bootstrappable_curve import (
 from lib_quant.datetime.constants import Direction, Frequency
 from lib_quant.datetime.utils.period.period import Period
 from lib_quant.derivs.option.option import Option
+from lib_quant.features.prepayment.base_provision.base_provision import BaseProvision
 from lib_quant.instruments.fixed_income.credit.credit.constants import AmortizationType
 from lib_quant.instruments.fixed_income.fixed_income.fixed_income import FixedIncome
 
@@ -34,6 +35,7 @@ class Credit(
     pik_period: Period | None = Field(default=None)
     pik_rate: float = Field(default=1.0)
 
+    prepayment_provision: BaseProvision | None = Field(default=None)
     prepayment_rate: (
         float | list[float] | Callable[[int, datetime.date, float], float] | None
     ) = Field(default=None)
@@ -215,11 +217,10 @@ class Credit(
             return 0.0
         if callable(curve):
             return curve(period_index, date, balance)
-        elif isinstance(curve, list):
+        if isinstance(curve, list):
             idx = min(period_index, len(curve) - 1)
             return curve[idx]
-        else:
-            return curve
+        return curve
 
     def _amount_from_curve(
         self,
@@ -247,6 +248,80 @@ class Credit(
         if period is None:
             return 0
         return period // self.frequency.unit_period
+
+    def _cashflows_scheduled(
+        self,
+        dates: list[datetime.date],
+        rates: list[float],
+        times: list[float],
+        n_periods: int,
+        n_pik_periods: int,
+        n_io_periods: int,
+        n_reset_periods: int | None,
+        n_amort_periods: int,
+        straight_line_balance: float,
+        straight_line_step: float,
+    ) -> list[CashflowEvent | None]:
+        balance_scheduled = self.size
+        pmt = None
+        result: list[CashflowEvent | None] = []
+
+        for i in range(n_periods):
+            rate, time = rates[i], times[i]
+            balance_scheduled_start = balance_scheduled
+
+            if i < n_pik_periods:
+                result.append(None)
+                continue
+
+            k = i - n_pik_periods
+            match self.amortization_type:
+                case AmortizationType.STRAIGHT_LINE:
+                    balance_scheduled_end = (
+                        straight_line_balance - (k + 1) * straight_line_step
+                    )
+                case AmortizationType.LEVEL_PAY:
+                    if k < n_io_periods:
+                        balance_scheduled_end = balance_scheduled_start
+                    else:
+                        amort_idx = k - n_io_periods
+                        is_reset = (
+                            n_reset_periods is not None
+                            and amort_idx % n_reset_periods == 0
+                        )
+                        if pmt is None or is_reset:
+                            pmt = self._level_payment(
+                                balance_scheduled_start,
+                                rates,
+                                times,
+                                i,
+                                n_amort_periods,
+                            )
+                        interest = balance_scheduled_start * rate * time
+                        balance_scheduled_end = max(
+                            0.0,
+                            balance_scheduled_start - (pmt - interest),
+                        )
+                case _:
+                    balance_scheduled_end = balance_scheduled_start
+
+            if i == n_periods - 1:
+                balance_scheduled_end = 0.0
+
+            result.append(
+                CashflowEvent(
+                    date=dates[i + 1],
+                    balance_start=balance_scheduled_start,
+                    balance_end=balance_scheduled_end,
+                    interest_scheduled=balance_scheduled_start * rate * time,
+                    principal_scheduled=max(
+                        0.0,
+                        balance_scheduled_start - balance_scheduled_end,
+                    ),
+                )
+            )
+            balance_scheduled = balance_scheduled_end
+        return result
 
     def _build_cashflows(self) -> CashflowSchedule:
         if self.maturity_date is None:
@@ -307,58 +382,44 @@ class Credit(
             if n_periods > n_pik_periods:
                 straight_line_step = straight_line_balance / (n_periods - n_pik_periods)
 
+        cfs = self._cashflows_scheduled(
+            dates,
+            rates,
+            times,
+            n_periods,
+            n_pik_periods,
+            n_io_periods,
+            n_reset_periods,
+            n_amort_periods,
+            straight_line_balance,
+            straight_line_step,
+        )
+
+        if self.prepayment_provision is not None:
+            self.prepayment_provision.bind(
+                start_date=self.issue_date,
+                cashflows=CashflowSchedule(events=[e for e in cfs if e is not None]),
+                frequency=self.frequency,
+            )
+
         recovery_lag_periods = self.n_periods(self.recovery_lag_period)
         recovery_pending: dict[int, float] = defaultdict(float)
         events: list[CashflowEvent] = []
-        balance_actual = balance_scheduled = self.size
-        pmt = None
+        balance_actual = self.size
 
         for i in range(n_periods):
-            rate, time = rates[i], times[i]
-
-            balance_scheduled_start = balance_scheduled
-            is_pik = i < n_pik_periods
-            if is_pik:
-                balance_scheduled_end = balance_scheduled_start * (
-                    1 + rate * time * self.pik_rate
-                )
+            cf = cfs[i]
+            if cf is None:
                 continue
 
-            k = i - n_pik_periods
-            match self.amortization_type:
-                case AmortizationType.STRAIGHT_LINE:
-                    balance_scheduled_end = (
-                        straight_line_balance - (k + 1) * straight_line_step
-                    )
-                case AmortizationType.LEVEL_PAY:
-                    if k < n_io_periods:
-                        balance_scheduled_end = balance_scheduled_start
-                    else:
-                        amort_idx = k - n_io_periods
-                        is_reset = (
-                            n_reset_periods is not None
-                            and amort_idx % n_reset_periods == 0
-                        )
-                        if pmt is None or is_reset:
-                            pmt = self._level_payment(
-                                balance_scheduled_start,
-                                rates,
-                                times,
-                                i,
-                                n_amort_periods,
-                            )
-                        interest = balance_scheduled_start * rate * time
-                        balance_scheduled_end = max(
-                            0.0,
-                            balance_scheduled_start - (pmt - interest),
-                        )
-                case _:
-                    balance_scheduled_end = balance_scheduled_start
+            rate, time = rates[i], times[i]
+            is_pik = i < n_pik_periods
+            if is_pik:
+                continue
 
-            if i == n_periods - 1:
-                balance_scheduled_end = 0.0
+            balance_scheduled_start = cf.balance_start or 0.0
+            balance_scheduled_end = cf.balance_end or 0.0
 
-            balance_scheduled = balance_scheduled_end
             balanace_start = balance_actual
             interest_scheduled = balanace_start * rate * time
             pik_capitalized = interest_scheduled * self.pik_rate if is_pik else 0.0
@@ -371,18 +432,32 @@ class Credit(
                 else 0.0
             )
             principal_scheduled = min(balance, balance * paydown_rate)
-
             balanace_remaining = balance - principal_scheduled
 
-            prepayment = self._amount_from_curve(
-                self.prepayment_rate,
-                i,
-                dates[i + 1],
-                balanace_remaining,
-                time,
+            # prepayment
+            prepayment = None
+            prepayment_penalty = None
+            is_prepayable = (
+                False
+                if self.prepayment_provision is None
+                else self.prepayment_provision.is_prepayable(dates[i + 1])
             )
-            balanace_remaining -= prepayment
+            if self.prepayment_provision is not None and is_prepayable:
+                prepayment = self._amount_from_curve(
+                    self.prepayment_rate,
+                    i,
+                    dates[i + 1],
+                    balanace_remaining,
+                    time,
+                )
+                prepayment_penalty = (
+                    self.prepayment_provision.penalty(dates[i + 1], prepayment)
+                    if prepayment > 0.0
+                    else 0.0
+                )
+                balanace_remaining -= prepayment
 
+            # default
             defaulted = self._amount_from_curve(
                 self.default_rate,
                 i,
@@ -390,7 +465,6 @@ class Credit(
                 balanace_remaining,
                 time,
             )
-
             severity = self._rate_from_curve(
                 self.severity,
                 i,
@@ -419,6 +493,7 @@ class Credit(
                     pik_capitalized=pik_capitalized,
                     principal_scheduled=principal_scheduled,
                     prepayment=prepayment,
+                    prepayment_penalty=prepayment_penalty,
                     defaulted=defaulted,
                     loss=loss,
                     recovery=recovery_period,
@@ -436,12 +511,7 @@ class Credit(
                     if self.recovery_lag_period is not None
                     else last_date
                 )
-                events.append(
-                    CashflowEvent(
-                        date=recovery_date,
-                        recovery=amount,
-                    )
-                )
+                events.append(CashflowEvent(date=recovery_date, recovery=amount))
 
         return CashflowSchedule(events=events)
 
