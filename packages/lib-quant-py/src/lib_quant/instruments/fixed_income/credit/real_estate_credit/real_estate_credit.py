@@ -1,5 +1,8 @@
 import datetime
 
+from lib_shared.core.utils.field.field import Field
+
+from lib_quant.assets.real_estate_asset.real_estate_asset import RealEstateAsset
 from lib_quant.datetime.utils.period.period import Period
 from lib_quant.instruments.fixed_income.credit.loan.floating_rate_loan.floating_rate_loan import (
     FloatingRateLoan,
@@ -7,17 +10,29 @@ from lib_quant.instruments.fixed_income.credit.loan.floating_rate_loan.floating_
 
 
 class RealEstateCredit(FloatingRateLoan):
-    property_value: float = 0.0
-    net_operating_income: float = 0.0
+    properties: list[RealEstateAsset] = Field(default_factory=list)
+
+    @property
+    def property_count(self) -> int:
+        return len(self.properties)
+
+    @property
+    def property_value(self) -> float:
+        return sum(p.value for p in self.properties)
+
+    @property
+    def net_operating_income(self) -> float:
+        return sum(p.net_operating_income for p in self.properties)
 
     def ltv(
         self,
         balance: float | None = None,
     ) -> float:
         size = self.size if balance is None else balance
-        if self.property_value <= 0:
+        value = self.property_value
+        if value <= 0:
             raise ValueError("property value must be positive")
-        return size / self.property_value
+        return size / value
 
     def debt_yield(
         self,
@@ -53,6 +68,7 @@ class RealEstateCredit(FloatingRateLoan):
         return self.dscr(as_of_date=self.issue_date)
 
     def cap_rate(self) -> float:
-        if self.property_value <= 0:
+        value = self.property_value
+        if value <= 0:
             raise ValueError("property value must be positive")
-        return self.net_operating_income / self.property_value
+        return self.net_operating_income / value

@@ -34,6 +34,16 @@ class CashflowEvent(BaseModel):
     def amount_paid(self) -> float:
         return self.principal_paid + self.interest_paid
 
+    # @property
+    # def amount_total(self) -> float:
+    #     return (
+    #         (self.interest_paid or 0.0)
+    #         + (self.principal_scheduled or 0.0)
+    #         + (self.prepayment or 0.0)
+    #         + (self.prepayment_penalty or 0.0)
+    #         + (self.recovery or 0.0)
+    #     )
+
     def present_value(
         self,
         as_of_date: datetime.date,
