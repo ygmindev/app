@@ -38,20 +38,20 @@ class _Llm(BaseModel):
         match self.provider:
             case LLM_PROVIDER.LMSTUDIO:
                 self._llm = ChatOpenAI(
-                    api_key="lmstudio",
+                    api_key=lambda: "lmstudio",
                     base_url="http://localhost:1234/v1",
                     model=self.name,
                     temperature=self.temperature,
-                    max_tokens=self.max_tokens,
+                    max_completion_tokens=self.max_tokens,
                     extra_body={"chat_template_kwargs": {"enable_thinking": False}},
                 )
             case LLM_PROVIDER.OPENROUTER:
                 self._llm = ChatOpenAI(
-                    api_key=self.secrets.get(LLM_PROVIDER.OPENROUTER, ""),
+                    api_key=lambda: self.secrets.get(LLM_PROVIDER.OPENROUTER, ""),
                     base_url="https://openrouter.ai/api/v1",
                     model=self.name,
                     temperature=self.temperature,
-                    max_tokens=self.max_tokens,
+                    max_completion_tokens=self.max_tokens,
                     # default_headers={
                     #     "HTTP-Referer": "https://your-website-url.com",  # Optional
                     #     "X-Title": "Your App Name",  # Optional
