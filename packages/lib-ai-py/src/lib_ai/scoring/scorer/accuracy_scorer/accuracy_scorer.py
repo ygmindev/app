@@ -5,8 +5,6 @@ from torcheval.metrics.classification.accuracy import MulticlassAccuracy
 from lib_ai.data.matrix_data.matrix_data import MatrixData
 from lib_ai.scoring.utils.scorable.scorable import scorable
 
-from .accuracy_scorer_models import AccuracyScorerModel
-
 
 @scorable(name="accuracy")
 def _accuracy_scorer(
@@ -24,4 +22,4 @@ def _accuracy_scorer(
     )
 
 
-accuracy_scorer: AccuracyScorerModel = _accuracy_scorer
+accuracy_scorer = _accuracy_scorer

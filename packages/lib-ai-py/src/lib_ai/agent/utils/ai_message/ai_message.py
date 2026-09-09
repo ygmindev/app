@@ -14,12 +14,23 @@ from langchain_core.messages.tool import ToolCall as LangchainToolCall
 from lib_model.chat.content.constants import ContentType
 from lib_model.chat.content.content import Content
 from lib_model.chat.message.message import Message
+from lib_shared.core.utils.base_model.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
 
-from lib_ai.agent.utils.ai_message.ai_message_models import AIMessageModel, ToolCall
 from lib_ai.agent.utils.ai_message.constants import MessageRole
 
 
-class _AIMessage(AIMessageModel):
+class ToolCall(BaseModel):
+    id: str = Field()
+    name: str = Field()
+    params: dict = Field()
+
+
+class _AIMessage(Message):
+    current_tool_call: ToolCall | None = Field(default=None)
+
+    tool_calls: list[ToolCall] = Field(default_factory=list)
+
     def _serialize_content(
         self,
         content: Content,

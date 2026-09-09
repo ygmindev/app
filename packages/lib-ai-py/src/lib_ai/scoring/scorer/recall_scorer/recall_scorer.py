@@ -5,8 +5,6 @@ from torcheval.metrics.classification.recall import MulticlassRecall
 from lib_ai.data.matrix_data.matrix_data import MatrixData
 from lib_ai.scoring.utils.scorable.scorable import scorable
 
-from .recall_scorer_models import RecallScorerModel
-
 
 @scorable(name="recall")
 def _recall_scorer(
@@ -24,4 +22,4 @@ def _recall_scorer(
     )
 
 
-recall_scorer: RecallScorerModel = _recall_scorer
+recall_scorer = _recall_scorer

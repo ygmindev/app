@@ -1,10 +1,6 @@
 import torch
 from lib_shared.core.constants import DataType
 
-from lib_ai.core.utils.get_tensor_type.get_tensor_type_models import (
-    GetTensorTypeModel,
-)
-
 
 def _get_tensor_type(
     params: DataType | None,
@@ -20,4 +16,4 @@ def _get_tensor_type(
             return torch.float
 
 
-get_tensor_type: GetTensorTypeModel = _get_tensor_type
+get_tensor_type = _get_tensor_type

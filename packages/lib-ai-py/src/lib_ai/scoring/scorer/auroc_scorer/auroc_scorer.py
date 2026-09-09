@@ -5,8 +5,6 @@ from torcheval.metrics.classification.auroc import MulticlassAUROC
 from lib_ai.data.matrix_data.matrix_data import MatrixData
 from lib_ai.scoring.utils.scorable.scorable import scorable
 
-from .auroc_scorer_models import AurocScorerModel
-
 
 @scorable(name="auroc")
 def _auroc_scorer(
@@ -25,4 +23,4 @@ def _auroc_scorer(
     )
 
 
-auroc_scorer: AurocScorerModel = _auroc_scorer
+auroc_scorer = _auroc_scorer

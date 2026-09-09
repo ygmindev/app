@@ -1,6 +1,6 @@
 # template version: 1.0.0
 from inspect import isawaitable
-from typing import AsyncIterable, Awaitable, Callable, Generic, cast
+from typing import AsyncIterable, Awaitable, Callable, Generic, TypeVar, cast
 
 from langgraph.config import get_stream_writer
 from langgraph.graph.state import (
@@ -11,25 +11,31 @@ from langgraph.graph.state import (
     StateGraph,
     StateNode,
 )
+from lib_shared.core.utils.base_model.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
+from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.core.utils.uninitialized_exception.uninitialized_exception import (
     UninitializedException,
 )
 
+from lib_ai.agent.utils.streamable.streamable import Streamable
 from lib_ai.graph.constants import GraphNodeType
 from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
 from lib_ai.graph.utils.graph_node.graph_node import GraphNode
 
-from .directed_acyclic_graph_models import (
-    DirectedAcyclicGraphModel,
-    TState,
-    _DirectedAcyclicGraphModel,
-)
+TState = TypeVar("TState", bound=BaseModel)
 
 
 class _DirectedAcyclicGraph(
-    _DirectedAcyclicGraphModel[TState],
+    Streamable[TState],
     Generic[TState],
 ):
+    initial_state: TState = Field()
+    nodes: list[GraphNode] = Field(default_factory=list)
+    edges: list[GraphEdge] = Field(default_factory=list)
+
+    _graph: CompiledStateGraph = PrivateField()
+
     def _wrap_node(
         self,
         node: GraphNode,
@@ -165,4 +171,4 @@ class _DirectedAcyclicGraph(
         self.graph.get_graph().draw_mermaid_png(output_file_path=filepath)
 
 
-class DirectedAcyclicGraph(_DirectedAcyclicGraph, DirectedAcyclicGraphModel): ...
+class DirectedAcyclicGraph(_DirectedAcyclicGraph): ...

@@ -5,9 +5,10 @@ from typing import Literal, Sequence
 from beanie import SortDirection, init_beanie
 from lib_config.database.database_models import DatabaseConfigModel
 from lib_model.core.utils.database_entity.database_entity import DatabaseEntity
-from pydantic import BaseModel
 from pymongo import AsyncMongoClient
 
+from lib_shared.core.utils.base_model.base_model import BaseModel
+from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.database.utils.database.constants import UpsertStrategy
 
 
@@ -44,7 +45,7 @@ class UpsertResultModel[TType: DatabaseEntity](BaseModel):
 class _Database(BaseModel):
     config: DatabaseConfigModel
 
-    _client: AsyncMongoClient
+    _client: AsyncMongoClient = PrivateField()
 
     def post_init(self) -> None:
         self._client = AsyncMongoClient(

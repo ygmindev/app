@@ -1,6 +1,9 @@
-from .agent_state_models import AgentStateModel
+from lib_shared.core.utils.base_model.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
+
+from lib_ai.agent.utils.ai_message.ai_message import AIMessage
 
 
-class AgentState(
-    AgentStateModel,
-): ...
+class AgentState(BaseModel):
+    messages: list[AIMessage] = Field(default_factory=list)
+    delta: str | None = Field(default=None)

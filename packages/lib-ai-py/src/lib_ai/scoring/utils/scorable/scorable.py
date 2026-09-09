@@ -1,23 +1,27 @@
-from typing import Callable, cast
+from typing import Callable, Protocol, cast
 
-from lib_ai.scoring.utils.scorable.scorable_models import (
-    DecoratedScorerModel,
-    ScorableModel,
-    ScorerModel,
-)
+from lib_ai.data.matrix_data import MatrixData
+
+Scorer = Callable[[MatrixData, MatrixData], float]
 
 
-def _scorable[TType: ScorerModel](
+class DecoratedScorer[TType: Scorer](Protocol):
+    name: str
+    is_loss: bool = False
+    __call__: TType
+
+
+def _scorable[TType: Scorer](
     name: str | None = None,
     is_loss: bool = False,
-) -> Callable[[TType], DecoratedScorerModel[TType]]:
+) -> Callable[[TType], DecoratedScorer[TType]]:
 
-    def decorator(func: ScorerModel) -> DecoratedScorerModel:
+    def decorator(func: Scorer) -> DecoratedScorer:
         func.name = name or getattr(func, "__name__", "")
         func.is_loss = is_loss
-        return cast(DecoratedScorerModel[TType], func)
+        return cast(DecoratedScorer[TType], func)
 
     return decorator
 
 
-scorable: ScorableModel = _scorable
+scorable = _scorable

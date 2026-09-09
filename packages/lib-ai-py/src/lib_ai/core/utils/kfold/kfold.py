@@ -4,7 +4,7 @@ import numpy as np
 from lib_shared.core.errors.invalid_argument_error import InvalidArgumentError
 from sklearn.model_selection import KFold, StratifiedKFold
 
-from lib_ai.core.utils.kfold.kfold_models import KfoldModel, KfoldParamsModel
+from lib_ai.core.utils.kfold.kfold_models import KfoldParamsModel
 
 
 def _kfold(
@@ -28,4 +28,4 @@ def _kfold(
     return fold.split(x)
 
 
-kfold: KfoldModel = _kfold
+kfold = _kfold

@@ -1,19 +1,25 @@
 # template version: 1.0.0
 
 
-from typing import AsyncIterable
+from typing import AsyncIterable, TypeVar
 
+from lib_shared.core.utils.field.field import Field
+
+from lib_ai.agent.utils.agent.agent import Agent
+from lib_ai.agent.utils.agent_state import AgentState
 from lib_ai.agent.utils.ai_message.ai_message import AIMessage
 from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.graph.utils.graph_node import GraphNode
 
-from .agent_node_models import AgentNodeModel, TState
+TState = TypeVar("TState", bound=AgentState)
 
 
 class AgentNode(
     GraphNode,
-    AgentNodeModel,
 ):
+    agent: Agent = Field()
+    prompt: str | None = Field(default=None)
+
     def _prepare(
         self,
         params: TState,

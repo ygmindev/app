@@ -4,26 +4,17 @@ from typing import Self, Tuple
 
 import numpy as np
 
-from lib_ai.core.utils.split_indices import split_indices
-from lib_ai.data.base_data.base_data_models import BaseDataModel
-from lib_ai.dataset.base_dataset.base_dataset_models import BaseDatasetKeyModel
-from lib_ai.dataset.xy_dataset.xy_dataset_models import XYDatasetModel
+from lib_ai.core.utils.split_indices.split_indices import split_indices
+from lib_ai.data.base_data.base_data import BaseData
+from lib_ai.dataset.base_dataset.base_dataset import BaseDataset, BaseDatasetKeyModel
 
 
 class XYDataset[
-    TX: BaseDataModel,
-    TY: BaseDataModel | None,
-](
-    XYDatasetModel[TX, TY],
-    BaseDataModel,
-):
-    def __init__(
-        self,
-        x: TX,
-        y: TY | None = None,
-    ) -> None:
-        self._x = x
-        self._y = y
+    TX: BaseData,
+    TY: BaseData | None,
+](BaseDataset):
+    x: TX
+    y: TY | None = None
 
     def __getitem__(
         self,
@@ -61,25 +52,3 @@ class XYDataset[
             random_seed=random_seed,
         )
         return self[train_indices], self[test_indices]
-
-    @property
-    def x(self) -> TX:
-        return self._x
-
-    @x.setter
-    def x(
-        self,
-        value: TX,
-    ) -> None:
-        self._x = value
-
-    @property
-    def y(self) -> TY | None:
-        return self._y
-
-    @y.setter
-    def y(
-        self,
-        value: TY | None = None,
-    ) -> None:
-        self._y = value

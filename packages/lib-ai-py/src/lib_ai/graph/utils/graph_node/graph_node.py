@@ -1,14 +1,14 @@
 # template version: 1.0.0
 
 
-from lib_ai.graph.utils.graph_node.graph_node_models import (
-    GraphNodeModel,
-)
+from lib_shared.core.utils.field.field import Field
+
+from lib_ai.agent.utils.streamable.streamable import Streamable
 
 
-class GraphNode(
-    GraphNodeModel,
-):
+class GraphNode(Streamable):
+    name: str = Field()
+
     def edges(self) -> tuple[str, str]:
         return (
             self.name,

@@ -12,15 +12,22 @@ from lib_ai.core.utils.get_tensor_type import get_tensor_type
 from lib_ai.data.base_data.base_data import BaseData
 from lib_ai.data.matrix_data import MatrixData
 from lib_ai.data.table_data.constants import TableDataType
-from lib_ai.data.table_data.table_data_models import (
-    TableDataKeyModel,
-    TableDataModel,
-    TableDataStringKeyModel,
-    _TableDataModel,
+
+type TableDataStringKeyModel = str
+
+type TableDataIndexKeyModel = int
+
+type TableDataMultiKeyModel = Sequence[int] | slice
+
+type TableDataKeyModel = (
+    TableDataIndexKeyModel
+    | TableDataMultiKeyModel
+    | tuple[TableDataIndexKeyModel, str]
+    | tuple[TableDataMultiKeyModel, Sequence[str]]
 )
 
 
-class _TableData(_TableDataModel):
+class _TableData(BaseData[pl.DataFrame]):
     @overload
     def __getitem__(
         self,
@@ -39,7 +46,7 @@ class _TableData(_TableDataModel):
     ) -> MatrixData | Self:
         if isinstance(key, str):
             if isinstance(self.data, pl.DataFrame):
-                return MatrixData(self.data[key].to_numpy())
+                return MatrixData(data=self.data[key].to_numpy())
             raise InvalidTypeException()
         return type(self)(data=self.data[cast(int | Sequence[int] | slice, key)])
 
@@ -177,7 +184,7 @@ class _TableData(_TableDataModel):
                 data = cast(pl.DataFrame, self.data)
                 device = get_device()
                 return MatrixData(
-                    pl.select(v.cast(pl.Float32, strict=False) for v in data)
+                    data=pl.select(v.cast(pl.Float32, strict=False) for v in data)
                     .to_torch()
                     .to(device)
                 )
@@ -185,8 +192,4 @@ class _TableData(_TableDataModel):
                 raise InvalidTypeException()
 
 
-class TableData(
-    _TableData,
-    BaseData,
-    TableDataModel,
-): ...
+class TableData(_TableData): ...

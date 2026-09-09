@@ -1,13 +1,13 @@
-from typing import AsyncIterable
+from typing import AsyncIterable, Generic, TypeVar
 
-from lib_ai.agent.utils.streamable.streamable_models import (
-    StreamableModel,
-    TState,
-)
+from lib_shared.core.utils.base_model.base_model import BaseModel
+
+TState = TypeVar("TState", bound=BaseModel)
 
 
 class Streamable(
-    StreamableModel[TState],
+    BaseModel,
+    Generic[TState],
 ):
     async def run(
         self,

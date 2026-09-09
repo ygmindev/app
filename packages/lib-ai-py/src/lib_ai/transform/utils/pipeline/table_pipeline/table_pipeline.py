@@ -1,4 +1,4 @@
-from typing import Self, Sequence
+from typing import Any, Self, Sequence
 
 import polars as pl
 from lib_shared.core.utils.base_model.base_model import BaseModel
@@ -6,13 +6,13 @@ from lib_shared.core.utils.private_field.private_field import PrivateField
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer
 
-from lib_ai.data.table_data import TableData
-from lib_ai.transform.utils.pipeline.table_pipeline.table_pipeline_models import (
-    TablePipelineModel,
-)
-from lib_ai.transform.utils.transformer.transformable.transformable_models import (
-    TransformableModel,
-)
+from lib_ai.data.table_data.table_data import TableData
+from lib_ai.transform.utils.transformer.transformable.transformable import Transformable
+
+type TableTransformer = tuple[
+    Sequence[str],
+    Transformable[TableData, Any],
+]
 
 
 class _Transformer(
@@ -20,15 +20,15 @@ class _Transformer(
     BaseEstimator,
     BaseModel,
 ):
-    transformer: TransformableModel[TableData]
-    _columns: Sequence[str] = PrivateField()
+    transformer: Transformable[TableData, Any]
+    _columns: list[str] = PrivateField(default_factory=list)
 
     def fit(
         self,
         x: pl.DataFrame,
         _y=None,
     ) -> Self:
-        data = TableData(x)
+        data = TableData(data=x)
         if self.transformer.fit:
             self.transformer.fit(data)
         return self
@@ -37,7 +37,7 @@ class _Transformer(
         self,
         x: pl.DataFrame,
     ) -> pl.DataFrame:
-        data = TableData(x)
+        data = TableData(data=x)
         data = self.transformer.transform(data)
         self._columns = data.columns
         return data.to_dataframe()
@@ -46,7 +46,9 @@ class _Transformer(
         return self._columns
 
 
-class TablePipeline(TablePipelineModel):
+class TablePipeline(BaseModel):
+    transformers: list[TableTransformer]
+
     _transformer: ColumnTransformer = PrivateField()
 
     def post_init(
@@ -67,11 +69,13 @@ class TablePipeline(TablePipelineModel):
         data: TableData,
         params: None = None,
     ) -> None:
-        self._transformer.fit(data.to_dataframe())
+        self._transformer.fit(data.to_dataframe().to_pandas())
 
     def transform(
         self,
         data: TableData,
         params: None = None,
     ) -> TableData:
-        return TableData(data=self._transformer.transform(data.to_dataframe()))
+        return TableData(
+            data=self._transformer.transform(data.to_dataframe().to_pandas())
+        )

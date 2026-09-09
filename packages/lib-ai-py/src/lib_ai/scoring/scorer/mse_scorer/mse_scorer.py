@@ -5,8 +5,6 @@ from torch.nn import MSELoss
 from lib_ai.data.matrix_data.matrix_data import MatrixData
 from lib_ai.scoring.utils.scorable.scorable import scorable
 
-from .mse_scorer_models import MseScorerModel
-
 
 @scorable(name="mse", is_loss=True)
 def _mse_scorer(
@@ -25,4 +23,4 @@ def _mse_scorer(
     return loss.item()
 
 
-mse_scorer: MseScorerModel = _mse_scorer
+mse_scorer = _mse_scorer

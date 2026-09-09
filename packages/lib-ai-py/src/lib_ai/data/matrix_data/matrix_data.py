@@ -9,16 +9,15 @@ from lib_shared.core.utils.is_listlike.is_listlike import is_listlike
 from lib_ai.core.utils.get_device import get_device
 from lib_ai.core.utils.get_numpy_type import get_numpy_type
 from lib_ai.core.utils.get_tensor_type import get_tensor_type
+from lib_ai.data.base_data.base_data import BaseData
 from lib_ai.data.matrix_data.constants import MatrixDataType
-from lib_ai.data.matrix_data.matrix_data_models import (
-    IndexableMultiKeyModel,
-    IndexableSingleKeyModel,
-    MatrixDataModel,
-    _MatrixDataModel,
-)
+
+type IndexableSingleKeyModel = int
+
+type IndexableMultiKeyModel = Sequence[int] | slice | np.ndarray
 
 
-class _MatrixData(_MatrixDataModel):
+class _MatrixData(BaseData[torch.Tensor | np.ndarray]):
     @overload
     def __getitem__(
         self,
@@ -130,7 +129,4 @@ class _MatrixData(_MatrixDataModel):
                 raise InvalidTypeException()
 
 
-class MatrixData(
-    _MatrixData,
-    MatrixDataModel,
-): ...
+class MatrixData(_MatrixData): ...

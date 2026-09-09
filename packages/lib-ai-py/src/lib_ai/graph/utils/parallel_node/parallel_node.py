@@ -4,18 +4,18 @@
 import asyncio
 from typing import AsyncIterable
 
+from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.merge.constants import MergeStrategy
 
-from lib_ai.agent.utils.streamable.streamable_models import TState
+from lib_ai.agent.utils.streamable.streamable import TState
 from lib_ai.graph.utils.graph_node import GraphNode
-
-from .parallel_node_models import ParallelNodeModel
 
 
 class ParallelNode(
     GraphNode,
-    ParallelNodeModel,
 ):
+    nodes: list[GraphNode] = Field(default_factory=list)
+
     async def stream(
         self,
         params: TState,

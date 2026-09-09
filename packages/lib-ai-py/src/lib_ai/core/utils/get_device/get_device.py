@@ -1,7 +1,5 @@
 import torch
 
-from lib_ai.core.utils.get_device.get_device_models import GetDeviceModel
-
 
 def _get_device() -> torch.device:
     return torch.device(
@@ -13,4 +11,4 @@ def _get_device() -> torch.device:
     )
 
 
-get_device: GetDeviceModel = _get_device
+get_device = _get_device

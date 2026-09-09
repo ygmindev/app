@@ -3,13 +3,12 @@ from lib_shared.core.utils.private_field.private_field import PrivateField
 from sklearn.preprocessing import OrdinalEncoder
 
 from lib_ai.data.table_data.table_data import TableData
-from lib_ai.transform.utils.transformer.label_encoder_transformer.label_encoder_transformer_models import (
-    LabelEncoderTransformerModel,
-    _LabelEncoderTransformerModel,
-)
+from lib_ai.transform.utils.transformer.transformable.transformable import Transformable
 
 
-class _LabelEncoderTransformer(_LabelEncoderTransformerModel):
+class _LabelEncoderTransformer(Transformable[TableData, None]):
+    labels: list[list[str]] | None = None
+
     _encoder: OrdinalEncoder = PrivateField()
 
     def post_init(self) -> None:
@@ -42,5 +41,4 @@ class _LabelEncoderTransformer(_LabelEncoderTransformerModel):
 
 class LabelEncoderTransformer(
     _LabelEncoderTransformer,
-    LabelEncoderTransformerModel,
 ): ...

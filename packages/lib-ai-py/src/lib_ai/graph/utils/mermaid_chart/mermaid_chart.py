@@ -1,16 +1,15 @@
 # template version: 1.0.0
 
 
+from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 
 from lib_ai.graph.constants import GraphNodeType
 from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
 from lib_ai.graph.utils.graph_node.graph_node import GraphNode
 
-from .mermaid_chart_models import MermaidChartModel, _MermaidChartModel
 
-
-class _MermaidChart(_MermaidChartModel):
+class _MermaidChart(BaseModel):
     nodes: list[GraphNode] = Field(default_factory=list)
     edges: list[GraphEdge] = Field(default_factory=list)
 
@@ -61,4 +60,4 @@ class _MermaidChart(_MermaidChartModel):
                 ...
 
 
-class MermaidChart(_MermaidChart, MermaidChartModel): ...
+class MermaidChart(_MermaidChart): ...

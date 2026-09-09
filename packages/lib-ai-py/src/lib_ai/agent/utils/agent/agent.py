@@ -5,13 +5,19 @@ from inspect import isawaitable
 from typing import (
     AsyncIterable,
     Dict,
+    Generic,
+    TypeVar,
     cast,
 )
 
-from lib_shared.core.utils.not_implemented_exception import NotImplementedException
+from lib_shared.core.utils.field.field import Field
+from lib_shared.core.utils.private_field.private_field import PrivateField
 
+from lib_ai.agent.utils.agent_state import AgentState
 from lib_ai.agent.utils.ai_message.ai_message import AIMessage
 from lib_ai.agent.utils.ai_message.constants import MessageRole
+from lib_ai.agent.utils.skill import Skill
+from lib_ai.agent.utils.streamable.streamable import Streamable
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.graph.constants import GraphNodeType
 from lib_ai.graph.utils.directed_acyclic_graph.directed_acyclic_graph import (
@@ -19,11 +25,25 @@ from lib_ai.graph.utils.directed_acyclic_graph.directed_acyclic_graph import (
 )
 from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
 from lib_ai.graph.utils.graph_node.graph_node import GraphNode
+from lib_ai.model.llm.llm import Llm
 
-from .agent_models import AgentModel, TState, _AgentModel
+TState = TypeVar("TState", bound=AgentState)
 
 
-class _Agent(_AgentModel[TState]):
+class _Agent(
+    Streamable[TState],
+    Generic[TState],
+):
+    descriptions: list[str] = Field(default_factory=list)
+    name: str = Field(default="Agent")
+    llm: Llm = Field(default_factory=Llm)
+    initial_state: TState = Field(default_factory=lambda: cast(TState, AgentState()))
+    skills: list[Skill] | None = Field(default=None)
+    tools: list[Tool] | None = Field(default=None)
+
+    _system_message: AIMessage = PrivateField()
+    _graph: DirectedAcyclicGraph | None = PrivateField()
+
     def post_init(self) -> None:
         tool_map: Dict[str, Tool] = {}
         nodes: list[GraphNode] = []
@@ -157,7 +177,7 @@ class _Agent(_AgentModel[TState]):
     @property
     def graph(self) -> DirectedAcyclicGraph:
         if self._graph is None:
-            raise NotImplementedException("Graph is not initialized")
+            raise NotImplementedError("Graph is not initialized")
         return self._graph
 
     async def stream(
@@ -190,7 +210,4 @@ class _Agent(_AgentModel[TState]):
                     )
 
 
-class Agent(
-    _Agent[TState],
-    AgentModel,
-): ...
+class Agent(_Agent[TState]): ...

@@ -1,10 +1,6 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 
-from lib_ai.core.utils.split_indices.split_indices_models import (
-    SplitIndicesModel,
-)
-
 
 def _split_indices(
     n_rows: int,
@@ -23,4 +19,4 @@ def _split_indices(
     return train, test
 
 
-split_indices: SplitIndicesModel = _split_indices
+split_indices = _split_indices

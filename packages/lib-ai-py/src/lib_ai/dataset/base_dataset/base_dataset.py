@@ -1,11 +1,12 @@
 from typing import Self, Sequence
 
 import numpy as np
+from lib_shared.core.utils.base_model.base_model import BaseModel
 
 type BaseDatasetKeyModel = int | slice | Sequence[int]
 
 
-class BaseDatasetModel:
+class BaseDataset(BaseModel):
     def head(
         self,
         n_rows: int = 1,

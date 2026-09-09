@@ -7,6 +7,9 @@ import tiktoken
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessageChunk
 from langchain_openai import ChatOpenAI
+from lib_shared.core.utils.base_model.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
+from lib_shared.core.utils.get_env.get_env import get_env
 from lib_shared.core.utils.logger.logger import logger
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.core.utils.uninitialized_exception import UninitializedException
@@ -14,15 +17,21 @@ from lib_shared.core.utils.uninitialized_exception import UninitializedException
 from lib_ai.agent.utils.ai_message.ai_message import AIMessage
 from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.agent.utils.tool import Tool
-from lib_ai.model.llm.constants import LLM_PROVIDER
-
-from .llm_models import (
-    LlmModel,
-    _LlmModel,
-)
+from lib_ai.model.llm.constants import LLM_NAME, LLM_PROVIDER
 
 
-class _Llm(_LlmModel):
+class _Llm(BaseModel):
+    provider: str = Field(default=LLM_PROVIDER.OPENROUTER)
+    name: str = Field(default=LLM_NAME.GEMMA_4_31B_FREE)
+    temperature: float = Field(default=0.0)
+    max_tokens: int = Field(default=4096)
+    output_schema: BaseModel | None = Field(default=None)
+    secrets: dict[str, str] = Field(
+        default_factory=lambda: {
+            LLM_PROVIDER.OPENROUTER: get_env("SERVER_APP_OPENROUTER_SECRET"),
+        }
+    )
+
     _llm: BaseChatModel | None = PrivateField()
 
     def post_init(self) -> None:
@@ -127,4 +136,4 @@ class _Llm(_LlmModel):
         return None
 
 
-class Llm(_Llm, LlmModel): ...
+class Llm(_Llm): ...

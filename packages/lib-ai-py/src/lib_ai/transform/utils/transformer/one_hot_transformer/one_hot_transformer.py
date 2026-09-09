@@ -1,11 +1,10 @@
 from lib_ai.data.table_data.table_data import TableData
-from lib_ai.transform.utils.transformer.one_hot_transformer.one_hot_transformer_models import (
-    OneHotTransformerModel,
-    _OneHotTransformerModel,
-)
+from lib_ai.transform.utils.transformer.transformable.transformable import Transformable
 
 
-class _OneHotTransformer(_OneHotTransformerModel):
+class _OneHotTransformer(Transformable[TableData, None]):
+    is_drop_first: bool = False
+
     def transform(
         self,
         data: TableData,
@@ -16,5 +15,4 @@ class _OneHotTransformer(_OneHotTransformerModel):
 
 class OneHotTransformer(
     _OneHotTransformer,
-    OneHotTransformerModel,
 ): ...

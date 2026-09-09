@@ -1,18 +1,23 @@
 # template version: 1.0.0
 
 import asyncio
-from typing import Type
+from typing import Type, TypeVar
 
 from langchain_core.tools import BaseTool
 from lib_shared.core.utils.base_model import BaseModel
+from lib_shared.core.utils.field.field import Field
 
-from .tool_models import ToolModel, TParams, TResult, _ToolModel
+TParams = TypeVar("TParams", bound=BaseModel)
+TResult = TypeVar("TResult", default=str)
 
 
 class _Tool[TParams, TResult](
     BaseTool,
-    _ToolModel,
 ):
+    input_type: Type[TParams]
+    name: str = Field(default="")
+    description: str = Field(default="")
+
     def __init__(
         self,
         input_type: Type[BaseModel],
@@ -45,7 +50,4 @@ class _Tool[TParams, TResult](
         return await self.execute(params=self.input_type(**kwargs))
 
 
-class Tool(
-    _Tool[TParams, TResult],
-    ToolModel[TParams, TResult],
-): ...
+class Tool(_Tool[TParams, TResult]): ...

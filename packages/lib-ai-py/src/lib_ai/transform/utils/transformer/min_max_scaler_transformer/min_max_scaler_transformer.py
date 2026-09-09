@@ -1,13 +1,13 @@
 import polars as pl
-
-from lib_ai.data.table_data.table_data import TableData
 from lib_ai.transform.utils.transformer.min_max_scaler_transformer.min_max_scaler_transformer_models import (
     MinMaxScalerTransformerModel,
-    _MinMaxScalerTransformerModel,
 )
 
+from lib_ai.data.table_data.table_data import TableData
+from lib_ai.transform.utils.transformer.transformable.transformable import Transformable
 
-class _MinMaxScalerTransformer(_MinMaxScalerTransformerModel):
+
+class _MinMaxScalerTransformer(Transformable[TableData, None]):
     def transform(
         self,
         data: TableData,

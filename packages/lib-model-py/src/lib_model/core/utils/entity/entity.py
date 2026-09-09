@@ -4,13 +4,14 @@ from datetime import datetime
 from typing import Any, cast, get_args, get_origin
 
 from beanie import PydanticObjectId
+from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.base_model.constants import ExportMode
 from lib_shared.core.utils.field.field import Field
 from pydantic import model_validator
 from pydantic.fields import FieldInfo
 
 
-class _Entity:
+class _Entity(BaseModel):
     def __init_subclass__(
         cls,
         is_graphql: bool = True,

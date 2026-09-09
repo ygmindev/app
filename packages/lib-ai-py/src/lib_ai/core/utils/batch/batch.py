@@ -3,8 +3,6 @@ from typing import Generator
 import numpy as np
 from lib_shared.core.utils.indexable.indexable import Indexable
 
-from .batch_models import BatchModel
-
 
 def _batch[TType](
     data: Indexable[TType],
@@ -22,4 +20,4 @@ def _batch[TType](
         yield data[idx]
 
 
-batch: BatchModel = _batch
+batch = _batch

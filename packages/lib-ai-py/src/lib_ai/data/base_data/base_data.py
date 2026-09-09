@@ -5,37 +5,20 @@ from typing import Self
 import numpy as np
 import torch
 from lib_shared.core.constants import DataType
-from lib_shared.core.utils.not_implemented_exception import NotImplementedException
-
-from lib_ai.data.base_data.base_data_models import BaseDataModel
+from lib_shared.core.utils.base_model.base_model import BaseModel
 
 
-class BaseData[TType](BaseDataModel[TType]):
-    def __init__(
-        self,
-        data: TType,
-    ) -> None:
-        self._data = data
+class BaseData[TType](BaseModel):
+    data: TType
 
     def __len__(self) -> int:
-        return len(self._data)
+        return len(self.data)
 
     def concat(
         self,
         other: Self,
     ) -> Self:
         return type(self)(data=self.data + other.data)
-
-    @property
-    def data(self) -> TType:
-        return self._data
-
-    @data.setter
-    def data(
-        self,
-        value: TType,
-    ) -> None:
-        self._data = value
 
     def equals(
         self,
@@ -62,4 +45,4 @@ class BaseData[TType](BaseDataModel[TType]):
         self,
         dtype: DataType | None = DataType.STRING,
     ) -> torch.Tensor:
-        raise NotImplementedException()
+        raise NotImplementedError()
