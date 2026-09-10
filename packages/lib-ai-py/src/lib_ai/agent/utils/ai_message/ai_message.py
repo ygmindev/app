@@ -1,6 +1,7 @@
 # template version: 1.0.0
 
 
+import base64
 from typing import Self
 
 from langchain_core.messages import AIMessage as LangchainAIMessage
@@ -43,6 +44,17 @@ class _AIMessage(Message):
                     "type": "image_url",
                     "image_url": {"url": value},
                 }
+            case ContentType.PDF:
+                with open(value, "rb") as pdf_file:
+                    pdf_base64 = base64.b64encode(pdf_file.read()).decode("utf-8")
+                    return {
+                        "type": "file",
+                        "file_url": {
+                            # "url": f"data:application/pdf;base64,{pdf_base64}"
+                            "filename": "corporate_hybrid.pdf",
+                            "file_data": f"data:application/pdf;base64,{pdf_base64}",
+                        },
+                    }
             case _:
                 return {"type": "text", "text": value}
 

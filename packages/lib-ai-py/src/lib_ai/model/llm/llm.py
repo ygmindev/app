@@ -1,6 +1,7 @@
 # template version: 1.0.0
 
 
+import asyncio
 from typing import AsyncIterator, cast
 
 import tiktoken
@@ -18,6 +19,8 @@ from lib_ai.agent.utils.ai_message.ai_message import AIMessage
 from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.agent.utils.tool import Tool
 from lib_ai.model.llm.constants import LLM_NAME, LLM_PROVIDER
+
+LLM_SEMAPHORE = asyncio.Semaphore(4)
 
 
 class _Llm(BaseModel):
@@ -43,7 +46,17 @@ class _Llm(BaseModel):
                     model=self.name,
                     temperature=self.temperature,
                     max_completion_tokens=self.max_tokens,
-                    extra_body={"chat_template_kwargs": {"enable_thinking": False}},
+                    # extra_body={"chat_template_kwargs": {"enable_thinking": False}},
+                    extra_body={
+                        "plugins": [
+                            {
+                                "id": "file-parser",
+                                "pdf": {
+                                    "engine": "cloudflare-ai"  # Free built-in parser engine
+                                },
+                            }
+                        ]
+                    },
                 )
             case LLM_PROVIDER.OPENROUTER:
                 self._llm = ChatOpenAI(
@@ -52,10 +65,16 @@ class _Llm(BaseModel):
                     model=self.name,
                     temperature=self.temperature,
                     max_completion_tokens=self.max_tokens,
-                    # default_headers={
-                    #     "HTTP-Referer": "https://your-website-url.com",  # Optional
-                    #     "X-Title": "Your App Name",  # Optional
-                    # },
+                    extra_body={
+                        "plugins": [
+                            {
+                                "id": "file-parser",
+                                "pdf": {
+                                    "engine": "cloudflare-ai"  # Free built-in parser engine
+                                },
+                            }
+                        ]
+                    },
                 )
 
         if self._llm is not None and self.output_schema is not None:
@@ -81,8 +100,9 @@ class _Llm(BaseModel):
         messages: list[AIMessage],
     ) -> AsyncIterator[AIMessageChunk]:
         serialized = [x.serialize() for x in messages]
-        async for chunk in self.llm.astream(serialized):
-            yield cast(AIMessageChunk, chunk)
+        async with LLM_SEMAPHORE:
+            async for chunk in self.llm.astream(serialized):
+                yield cast(AIMessageChunk, chunk)
 
     def n_tokens(
         self,

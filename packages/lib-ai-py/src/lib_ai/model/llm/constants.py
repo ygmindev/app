@@ -12,4 +12,5 @@ class LLM_NAME(StrEnum):
     GLM_5 = "glm-5:cloud"
     LLAMA_3_2 = "llama3.2"
     QWEN_3_5 = "qwen/qwen3.5-9b"
-    NEMOTRON_3 = "nvidia/nemotron-3-ultra-550b-a55b:free"
+    NEMOTRON_ULTRA_3 = "nvidia/nemotron-3-ultra-550b-a55b:free"
+    NEMOTRON_OMNI_3 = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free"
