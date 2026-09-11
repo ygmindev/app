@@ -9,8 +9,6 @@ from lib_model.chat.content.content import Content
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.database.utils.database.database import Database
 
-filepath = "/Users/yoongeemin/Downloads/corporate_hybrid.pdf"
-
 
 async def run_agent() -> None:
     try:

@@ -17,8 +17,8 @@ class BaseProvision(BaseModel):
     lockout_period: Period | None = Field(default=None)
 
     _start_date: datetime.date | None = PrivateField(default=None)
-    _cashflows: CashflowSchedule | None = Field(default=None)
-    _frequency: Frequency | None = Field(default=None)
+    _cashflows: CashflowSchedule | None = PrivateField(default=None)
+    _frequency: Frequency | None = PrivateField(default=None)
     _lockout_end_date: datetime.date | None = PrivateField(default=None)
 
     def bind(
