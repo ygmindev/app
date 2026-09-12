@@ -26,8 +26,8 @@ class FixedRateCredit(Credit[ql.FixedRateBond | ql.AmortizingFixedRateBond]):
             rate=Rate(spread=kwargs.get("coupon", 0.0)),
         )
 
-    def post_init(self) -> None:
-        super().post_init()
+    def model_post_init(self, __context: Any) -> None:
+        super().model_post_init(__context)
 
         is_amortizing = (
             self.amortization_type is not None

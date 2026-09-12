@@ -1,4 +1,5 @@
 import datetime
+from typing import Any
 
 import QuantLib as ql
 from lib_shared.core.utils.base_model.base_model import BaseModel
@@ -19,7 +20,7 @@ class Asset(BaseModel):
     tenor: Period | None = None
     maturity_date: datetime.date | None = None
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         if self.tenor is not None:
             self.maturity_date = self.calendar.advance(
                 self.tenor,

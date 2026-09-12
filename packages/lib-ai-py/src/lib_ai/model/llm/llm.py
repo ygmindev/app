@@ -2,7 +2,7 @@
 
 
 import asyncio
-from typing import AsyncIterator, cast
+from typing import Any, AsyncIterator, cast
 
 import tiktoken
 from langchain_core.language_models.chat_models import BaseChatModel
@@ -37,7 +37,7 @@ class _Llm(BaseModel):
 
     _llm: BaseChatModel | None = PrivateField()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         match self.provider:
             case LLM_PROVIDER.LMSTUDIO:
                 self._llm = ChatOpenAI(

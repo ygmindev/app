@@ -1,3 +1,5 @@
+from typing import Any
+
 import polars as pl
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from sklearn.preprocessing import OrdinalEncoder
@@ -11,7 +13,7 @@ class _LabelEncoderTransformer(Transformable[TableData, None]):
 
     _encoder: OrdinalEncoder = PrivateField()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         labels = self.labels or "auto"
         self._encoder = OrdinalEncoder(
             categories=labels,

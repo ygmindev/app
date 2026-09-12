@@ -1,6 +1,6 @@
 # template version: 1.0.0
 import json
-from typing import AsyncIterable, cast
+from typing import Any, AsyncIterable, cast
 
 from beanie import PydanticObjectId
 from lib_ai.agent.utils.agent.agent import Agent
@@ -30,7 +30,7 @@ class ChatService(BaseModel):
     _redis: Redis = PrivateField()
     _agent: Agent = PrivateField()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         self._database = Database(config=database_config)
         self._redis = Redis(config=redis_config)
 

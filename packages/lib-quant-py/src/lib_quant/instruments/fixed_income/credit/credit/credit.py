@@ -1,6 +1,6 @@
 import datetime
 from collections import defaultdict
-from typing import Callable, Generic, TypeVar
+from typing import Any, Callable, Generic, TypeVar
 
 import QuantLib as ql
 from lib_shared.core.utils.field.field import Field
@@ -52,8 +52,8 @@ class Credit(
     _schedule: Schedule = PrivateField()
     _cashflows: CashflowSchedule = PrivateField()
 
-    def post_init(self) -> None:
-        super().post_init()
+    def model_post_init(self, __context: Any) -> None:
+        super().model_post_init(__context)
         if self.issue_date is None:
             raise ValueError("missing issue_date")
         if self.maturity_date is None:

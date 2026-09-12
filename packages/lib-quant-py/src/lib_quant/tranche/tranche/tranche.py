@@ -1,4 +1,5 @@
 import datetime
+from typing import Any
 
 from lib_quant.instruments.fixed_income.credit.credit.credit import Credit
 
@@ -8,7 +9,7 @@ class Tranche(Credit):
     interest_shortfall: float = 0.0
     realized_loss: float = 0.0
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         if self.balance == 0.0:
             self.balance = self.size
 

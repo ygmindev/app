@@ -1,4 +1,4 @@
-from typing import Self
+from typing import Any, Self
 
 import QuantLib as ql
 from lib_shared.core.utils.private_field.private_field import PrivateField
@@ -11,8 +11,8 @@ class FlatCurve(Curve):
 
     _curve: ql.YieldTermStructure = PrivateField()
 
-    def post_init(self) -> None:
-        super().post_init()
+    def model_post_init(self, __context: Any) -> None:
+        super().model_post_init(__context)
         as_of_date = self.calendar.as_of_date
         self._curve = ql.FlatForward(
             ql.Date(

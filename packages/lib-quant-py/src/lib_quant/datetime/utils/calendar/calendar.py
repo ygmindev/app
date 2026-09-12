@@ -22,7 +22,7 @@ class Calendar(BaseModel):
     settlement_days: int = Field(default=2)
     as_of_date: datetime.date = Field(default_factory=datetime.date.today)
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         ql.Settings.instance().evaluationDate = ql.Date(
             self.as_of_date.day,
             self.as_of_date.month,

@@ -1,3 +1,5 @@
+from typing import Any
+
 import QuantLib as ql
 from lib_shared.core.utils.private_field.private_field import PrivateField
 
@@ -15,8 +17,8 @@ class DailySofr(Benchmark):
 
     _index: "ql.Sofr" = PrivateField()
 
-    def post_init(self) -> None:
-        super().post_init()
+    def model_post_init(self, __context: Any) -> None:
+        super().model_post_init(__context)
         if self.curve:
             self._index = ql.Sofr(self.curve.handle)
         else:

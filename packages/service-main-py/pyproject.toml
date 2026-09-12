@@ -29,6 +29,7 @@ dependencies = [
     "lib-model",
     "lib-shared",
     "pyjwt>=2.12.1",
+    "pymupdf>=1.28.2",
 ]
 
 [tool.uv.sources]

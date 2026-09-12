@@ -1,4 +1,5 @@
 import re
+from typing import Any
 
 from firebase_admin import (
     auth,
@@ -23,7 +24,7 @@ class _JwtService(BaseModel):
     project_id: str = Field()
     secret: str = Field()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         initialize_app(
             credentials.Certificate(
                 {

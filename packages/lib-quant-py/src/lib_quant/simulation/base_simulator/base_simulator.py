@@ -43,7 +43,7 @@ class BaseSimulator(
 
     _rng: np.random.Generator = PrivateField()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         self._rng = np.random.default_rng(self.seed)
 
     def _calibrate(

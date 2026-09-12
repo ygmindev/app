@@ -1,6 +1,6 @@
 # template version: 1.0.0
 
-from typing import Literal, Sequence
+from typing import Any, Literal, Sequence
 
 from beanie import SortDirection, init_beanie
 from lib_config.database.database_models import DatabaseConfigModel
@@ -47,7 +47,7 @@ class _Database(BaseModel):
 
     _client: AsyncMongoClient = PrivateField()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         self._client = AsyncMongoClient(
             host=self.config.host,
             username=self.config.username,

@@ -38,7 +38,7 @@ class _Server(BaseModel):
 
     _app: FastAPI = PrivateField()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         @asynccontextmanager
         async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:
             if callable(initialize := self.initialize):

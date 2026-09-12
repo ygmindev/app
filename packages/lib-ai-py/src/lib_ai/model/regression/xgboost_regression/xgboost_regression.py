@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from lib_shared.core.errors.invalid_argument_error.invalid_argument_error import (
     InvalidArgumentError,
 )
@@ -18,7 +20,7 @@ from lib_ai.model.regression.xgboost_regression.xgboost_regression_models import
 class _XgboostRegression(_XgboostRegressionModel):
     _instance: XGBRegressor = PrivateField()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         if not self.params:
             raise InvalidArgumentError("params")
         self._instance = XGBRegressor(

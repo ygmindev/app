@@ -3,6 +3,7 @@
 import asyncio
 from inspect import isawaitable
 from typing import (
+    Any,
     AsyncIterable,
     Dict,
     Generic,
@@ -44,7 +45,7 @@ class _Agent(
     _system_message: AIMessage = PrivateField()
     _graph: DirectedAcyclicGraph | None = PrivateField()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         tool_map: Dict[str, Tool] = {}
         nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []

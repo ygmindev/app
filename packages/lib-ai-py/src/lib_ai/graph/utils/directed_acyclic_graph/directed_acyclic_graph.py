@@ -1,6 +1,6 @@
 # template version: 1.0.0
 from inspect import isawaitable
-from typing import AsyncIterable, Awaitable, Callable, Generic, TypeVar, cast
+from typing import Any, AsyncIterable, Awaitable, Callable, Generic, TypeVar, cast
 
 from langgraph.config import get_stream_writer
 from langgraph.graph.state import (
@@ -72,7 +72,7 @@ class _DirectedAcyclicGraph(
             case _:
                 return name
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         graph = StateGraph(type(self.initial_state))
 
         for node in self.nodes:

@@ -33,11 +33,6 @@ class _BaseModel(PydanticBaseClass):
         for model_cls in cls._registry.values():
             model_cls.model_rebuild(_types_namespace=cls._registry, force=True)
 
-    def post_init(self) -> None: ...
-
-    def model_post_init(self, __context: Any) -> None:
-        return self.post_init()
-
     def clone(self, **kwargs: Any) -> Self:
         return self.model_copy(update=kwargs)
 

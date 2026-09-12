@@ -15,7 +15,7 @@ class _Logger(BaseModel):
 
     _logger: LoggerBase = PrivateField()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         self._logger = getLogger(name=self.name)
         self._logger.setLevel(self.level.value)
         basicConfig(

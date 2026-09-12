@@ -1,5 +1,5 @@
 import datetime
-from typing import cast
+from typing import Any, cast
 
 import QuantLib as ql
 from lib_shared.core.utils.base_model.base_model import BaseModel
@@ -23,7 +23,7 @@ class Schedule(BaseModel):
 
     _schedule: "ql.Schedule" = PrivateField()
 
-    def post_init(self) -> None:
+    def model_post_init(self, __context: Any) -> None:
         bdc = self.calendar.business_day_convention.ql
         self._schedule = ql.Schedule(
             ql.Date(self.start_date.day, self.start_date.month, self.start_date.year),
