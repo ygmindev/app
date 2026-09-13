@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "exports": {
+    "./*.node": "./src/*.node.ts",
     "./*": {
       "development": "./src/*",
       "default": "./src/*"
