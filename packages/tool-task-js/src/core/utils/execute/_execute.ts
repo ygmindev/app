@@ -28,8 +28,8 @@ export const _execute = async ({
     pidF && onFinish?.(pidF);
   };
 
-  cp.once('SIGTERM', handleFinish);
-  cp.once('SIGINT', handleFinish);
+  cp.stdout.on('SIGTERM', handleFinish);
+  cp.stdout.on('SIGINT', handleFinish);
 
   try {
     const { stdout } = await cp;
