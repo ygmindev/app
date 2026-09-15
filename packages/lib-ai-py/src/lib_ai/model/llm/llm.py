@@ -25,7 +25,7 @@ LLM_SEMAPHORE = asyncio.Semaphore(4)
 
 class _Llm(BaseModel):
     provider: str = Field(default=LLM_PROVIDER.OPENROUTER)
-    name: str = Field(default=LLM_NAME.GEMMA_4_31B_FREE)
+    name: str = Field(default=LLM_NAME.NEMOTRON_ULTRA_3)
     temperature: float = Field(default=0.0)
     max_tokens: int = Field(default=4096)
     output_schema: BaseModel | None = Field(default=None)
