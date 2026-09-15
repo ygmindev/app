@@ -152,7 +152,7 @@ importers:
         version: 7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-navigation/stack':
         specifier: ^7.10.24
-        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@reduxjs/toolkit':
         specifier: 2.12.0
         version: 2.12.0(react-redux@9.3.0(@types/react@19.3.0)(react@19.2.7)(redux@5.0.1))(react@19.2.7)
@@ -164,7 +164,7 @@ importers:
         version: 1.13.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@shopify/flash-list':
         specifier: 2.3.2
-        version: 2.3.2(@babel/runtime@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 2.3.2(@babel/runtime@7.29.7)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@tanstack/query-async-storage-persister':
         specifier: ^5.102.8
         version: 5.102.8
@@ -202,8 +202,8 @@ importers:
         specifier: ^57.0.1
         version: 57.0.2(expo@57.0.4)(react@19.2.7)
       expo-modules-core:
-        specifier: 57.0.17
-        version: 57.0.17(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        specifier: 2.3.13
+        version: 2.3.13
       expo-network:
         specifier: ^57.0.1
         version: 57.0.2(expo@57.0.4)(react@19.2.7)
@@ -227,7 +227,7 @@ importers:
         version: 2.12.7(graphql@16.14.2)
       graphql-ws:
         specifier: ^6.2.1
-        version: 6.2.1(@fastify/websocket@11.3.0)(graphql@16.14.2)(ws@8.21.1)
+        version: 6.2.1(@fastify/websocket@11.3.0)(graphql@16.14.2)(ws@8.21.3)
       http-errors:
         specifier: ^2.0.1
         version: 2.0.1
@@ -289,16 +289,16 @@ importers:
         specifier: ^3.11.0
         version: 3.11.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-gesture-handler:
-        specifier: ^3.2.1
-        version: 3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        specifier: ^2.28.0
+        version: 2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-gifted-chat:
         specifier: ^3.4.0
-        version: 3.4.0(@types/react@19.3.0)(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-keyboard-controller@1.22.1(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 3.4.0(@types/react@19.3.0)(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-keyboard-controller@1.22.1(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-is-edge-to-edge:
         specifier: ^1.3.1
         version: 1.3.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-reanimated:
-        specifier: 3.19.5
+        specifier: ^3.19.1
         version: 3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0)
       react-native-safe-area-context:
         specifier: ^5.9.1
@@ -407,7 +407,7 @@ importers:
         version: 7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-navigation/stack':
         specifier: ^7.10.24
-        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-oauth/google':
         specifier: ^0.13.5
         version: 0.13.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -428,7 +428,7 @@ importers:
         version: 1.13.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@shopify/flash-list':
         specifier: 2.3.2
-        version: 2.3.2(@babel/runtime@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 2.3.2(@babel/runtime@7.29.7)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@stripe/react-stripe-js':
         specifier: ^6.9.0
         version: 6.10.0(@stripe/stripe-js@9.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -532,7 +532,7 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-reanimated:
-        specifier: 3.19.5
+        specifier: ^3.19.1
         version: 3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0)
       react-native-safe-area-context:
         specifier: ^5.9.1
@@ -572,8 +572,8 @@ importers:
         specifier: ^8.0.1
         version: 8.0.5
       '@babel/runtime':
-        specifier: ^8.0.0
-        version: 8.0.5
+        specifier: ^7.29.7
+        version: 7.29.7
       vike:
         specifier: 0.4.266
         version: 0.4.266(@cloudflare/workers-types@4.20260702.1)(@types/express@5.0.6)(fastify@5.10.0)(react-streaming@0.4.20(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(srvx@0.12.8)(supports-color@5.5.0)(vite@8.2.2(@types/node@26.1.1)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.1)(yaml@2.9.0))
@@ -636,7 +636,7 @@ importers:
         version: 7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-navigation/stack':
         specifier: ^7.10.24
-        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-oauth/google':
         specifier: ^0.13.5
         version: 0.13.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -657,7 +657,7 @@ importers:
         version: 1.13.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@shopify/flash-list':
         specifier: 2.3.2
-        version: 2.3.2(@babel/runtime@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 2.3.2(@babel/runtime@7.29.7)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@stripe/react-stripe-js':
         specifier: ^6.9.0
         version: 6.10.0(@stripe/stripe-js@9.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -761,7 +761,7 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-reanimated:
-        specifier: 3.19.5
+        specifier: ^3.19.1
         version: 3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0)
       react-native-safe-area-context:
         specifier: ^5.9.1
@@ -801,8 +801,8 @@ importers:
         specifier: ^8.0.1
         version: 8.0.5
       '@babel/runtime':
-        specifier: ^8.0.0
-        version: 8.0.5
+        specifier: ^7.29.7
+        version: 7.29.7
       vike:
         specifier: 0.4.266
         version: 0.4.266(@cloudflare/workers-types@4.20260702.1)(@types/express@5.0.6)(fastify@5.10.0)(react-streaming@0.4.20(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(srvx@0.11.22)(supports-color@5.5.0)(vite@8.2.2(@types/node@26.1.1)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.1)(yaml@2.9.0))
@@ -904,7 +904,7 @@ importers:
         version: 7.18.10(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-navigation/stack':
         specifier: ^7.10.24
-        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-oauth/google':
         specifier: ^0.13.5
         version: 0.13.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -1095,7 +1095,7 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-reanimated:
-        specifier: 3.19.5
+        specifier: ^3.19.1
         version: 3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0)
       react-native-safe-area-context:
         specifier: ^5.9.1
@@ -1150,8 +1150,8 @@ importers:
         specifier: ^8.0.1
         version: 8.0.5
       '@babel/runtime':
-        specifier: ^8.0.0
-        version: 8.0.5
+        specifier: ^7.29.7
+        version: 7.29.7
       vike:
         specifier: 0.4.266
         version: 0.4.266(@cloudflare/workers-types@4.20260702.1)(@types/express@5.0.6)(fastify@5.12.4)(react-streaming@0.4.20(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(srvx@0.11.22)(supports-color@5.5.0)(vite@8.2.2(@types/node@26.1.1)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.1)(yaml@2.9.0))
@@ -1211,7 +1211,7 @@ importers:
         version: 7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-navigation/stack':
         specifier: ^7.10.24
-        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-oauth/google':
         specifier: ^0.13.5
         version: 0.13.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -1232,7 +1232,7 @@ importers:
         version: 1.13.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@shopify/flash-list':
         specifier: 2.3.2
-        version: 2.3.2(@babel/runtime@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 2.3.2(@babel/runtime@7.29.7)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@stripe/react-stripe-js':
         specifier: ^6.9.0
         version: 6.10.0(@stripe/stripe-js@9.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -1339,7 +1339,7 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-reanimated:
-        specifier: 3.19.5
+        specifier: ^3.19.1
         version: 3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0)
       react-native-safe-area-context:
         specifier: ^5.9.1
@@ -1379,8 +1379,8 @@ importers:
         specifier: ^8.0.1
         version: 8.0.5
       '@babel/runtime':
-        specifier: ^8.0.0
-        version: 8.0.5
+        specifier: ^7.29.7
+        version: 7.29.7
       vike:
         specifier: 0.4.266
         version: 0.4.266(@cloudflare/workers-types@4.20260702.1)(@types/express@5.0.6)(fastify@5.10.0)(react-streaming@0.4.20(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(srvx@0.11.22)(supports-color@5.5.0)(vite@8.2.2(@types/node@26.1.1)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.1)(yaml@2.9.0))
@@ -1443,7 +1443,7 @@ importers:
         version: 7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-navigation/stack':
         specifier: ^7.10.24
-        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-oauth/google':
         specifier: ^0.13.5
         version: 0.13.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -1464,7 +1464,7 @@ importers:
         version: 1.13.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@shopify/flash-list':
         specifier: 2.3.2
-        version: 2.3.2(@babel/runtime@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+        version: 2.3.2(@babel/runtime@7.29.7)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@stripe/react-stripe-js':
         specifier: ^6.9.0
         version: 6.10.0(@stripe/stripe-js@9.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -1568,7 +1568,7 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-reanimated:
-        specifier: 3.19.5
+        specifier: ^3.19.1
         version: 3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0)
       react-native-safe-area-context:
         specifier: ^5.9.1
@@ -1608,8 +1608,8 @@ importers:
         specifier: ^8.0.1
         version: 8.0.5
       '@babel/runtime':
-        specifier: ^8.0.0
-        version: 8.0.5
+        specifier: ^7.29.7
+        version: 7.29.7
       vike:
         specifier: 0.4.266
         version: 0.4.266(@cloudflare/workers-types@4.20260702.1)(@types/express@5.0.6)(fastify@5.10.0)(react-streaming@0.4.20(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(srvx@0.11.22)(supports-color@5.5.0)(vite@8.2.2(@types/node@26.1.1)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.1)(yaml@2.9.0))
@@ -4530,9 +4530,6 @@ packages:
     resolution: {integrity: sha512-Nq8OhGWiZIZGV6hLHoyAKLLcJihP/xFeBMGJoUrxTX2psI8dCifzLhZISFb+VWS3wFMRDmCGw5R+dOySCqPLhw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/runtime@8.0.5':
-    resolution: {integrity: sha512-7NK+Lz3spQ52XsUGTxIEVU4jYN2/dIaX8sTxRFAUtYmttYZnVh3aehiihv+/Gb7+duMNHl2OrFcBQRyOHScxpg==}
-
   '@babel/template@7.29.7':
     resolution: {integrity: sha512-puq+Gf35oI24FeN11LkoUQFqv9uwNeWpxXZi/Ji3rRIoKAzKnxRaZ+Gkj0vKS9ZCiTESfng1N9LyOyXvo+m+Gg==}
     engines: {node: '>=6.9.0'}
@@ -4683,6 +4680,10 @@ packages:
 
   '@egjs/grid@1.18.0':
     resolution: {integrity: sha512-4iTFbSwk4/XEciFRh0ggpFz3dzja24JQ9dn3/7u3tz0E1YLvtoM0FfcQOwkV+g8P+XNb90L2ZICLhy4OIpW0mw==}
+
+  '@egjs/hammerjs@2.0.17':
+    resolution: {integrity: sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==}
+    engines: {node: '>=0.8.0'}
 
   '@egjs/imready@1.4.2':
     resolution: {integrity: sha512-ckV7KlBa23Bw6iZP59W2cMZfAmV5q0BtMoOz7ZkzIvjoOtkxfLZkqVJROSgDP5Ha0hsnskyL4vtom9Bt7FZSRQ==}
@@ -10543,6 +10544,9 @@ packages:
   '@types/gulp@4.0.18':
     resolution: {integrity: sha512-IqkYa4sXkwH2uwqO2aXYOoAisJpLX13BPaS6lmEAoG4BbgOay3qqGQFsT9LMSSQVMQlEKU7wTUW0sPV46V0olw==}
 
+  '@types/hammerjs@2.0.46':
+    resolution: {integrity: sha512-ynRvcq6wvqexJ9brDMS4BnBLzmr0e14d6ZJTEShTBWKymQiHwlAyGu0ZPEFI2Fh1U53F7tN9ufClWM5KvqkKOw==}
+
   '@types/hast@3.0.5':
     resolution: {integrity: sha512-rp/ezSWaD1m44dPKICGhiskI13nVr7qTloFwDa/IYkhhf5nzwP+zIQcIJh3WIFSBOy/H1PzB40jPjMDksN4F+g==}
 
@@ -13935,6 +13939,9 @@ packages:
   expo-modules-autolinking@57.0.5:
     resolution: {integrity: sha512-Vv2PVeEUN0/VW19ItkVA8LxAuH8SV8cjui0MKhJxCKrNyCAGGZU6sRsBJciYXR4uVxuXWKiepGW6E3k/c+Ytdg==}
     hasBin: true
+
+  expo-modules-core@2.3.13:
+    resolution: {integrity: sha512-vmKHv7tEo2wUQoYDV6grhsLsQfD3DUnew5Up3yNnOE1gHGQE+zhV1SBYqaPMPB12OvpyD1mlfzGhu6r9PODnng==}
 
   expo-modules-core@57.0.17:
     resolution: {integrity: sha512-hHJwGHW0sMQiOLzEEl1QbJeWkBEBgjlPjrdBVGWlzvgUbCXJfFbDU2nhxoyzLMZnvHkpIzpiJjj5cM5W8gbudA==}
@@ -18513,8 +18520,8 @@ packages:
       react: '>=17.0.1'
       react-native: '>=0.64.0'
 
-  react-native-gesture-handler@3.3.0:
-    resolution: {integrity: sha512-ZCTlJ09nE3GPbm7J74lvwpxmx1TQ/7MDlHZNLARVYTN82k21mJUJ7BmI9eWjEi8eevHiAudI5O1Cpnt0rJfoJA==}
+  react-native-gesture-handler@2.32.0:
+    resolution: {integrity: sha512-uYIMOKlKENORq2SABE+jIjbPU+h5I/sQKcq2v16zRq848nwEp1fWRVwML4QWqijc8UcXJC25o54S8GQd4Mf2OA==}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -23476,8 +23483,6 @@ snapshots:
 
   '@babel/runtime@7.29.7': {}
 
-  '@babel/runtime@8.0.5': {}
-
   '@babel/template@7.29.7':
     dependencies:
       '@babel/code-frame': 7.29.7
@@ -23654,6 +23659,10 @@ snapshots:
       '@egjs/children-differ': 1.0.1
       '@egjs/component': 3.0.5
       '@egjs/imready': 1.4.2
+
+  '@egjs/hammerjs@2.0.17':
+    dependencies:
+      '@types/hammerjs': 2.0.46
 
   '@egjs/imready@1.4.2':
     dependencies:
@@ -29305,14 +29314,14 @@ snapshots:
     dependencies:
       nanoid: 3.3.16
 
-  '@react-navigation/stack@7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)':
+  '@react-navigation/stack@7.10.24(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-screens@4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)':
     dependencies:
       '@react-navigation/elements': 2.9.40(@react-navigation/native@7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       '@react-navigation/native': 7.3.18(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       color: 4.2.3
       react: 19.2.7
       react-native: 0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0)
-      react-native-gesture-handler: 3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+      react-native-gesture-handler: 2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-safe-area-context: 5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-screens: 4.27.0(patch_hash=ca0f274bb750aaeb10d3524c41f9ff390934600281ed29dc992b2d4c2c520d4f)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       use-latest-callback: 0.2.6(react@19.2.7)
@@ -29687,9 +29696,9 @@ snapshots:
 
   '@serverless/typescript@4.30.0': {}
 
-  '@shopify/flash-list@2.3.2(@babel/runtime@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)':
+  '@shopify/flash-list@2.3.2(@babel/runtime@7.29.7)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)':
     dependencies:
-      '@babel/runtime': 8.0.5
+      '@babel/runtime': 7.29.7
       react: 19.2.7
       react-native: 0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0)
 
@@ -30356,6 +30365,8 @@ snapshots:
       '@types/undertaker': 1.2.12
       '@types/vinyl-fs': 3.0.8
       chokidar: 3.6.0
+
+  '@types/hammerjs@2.0.46': {}
 
   '@types/hast@3.0.5':
     dependencies:
@@ -34756,6 +34767,10 @@ snapshots:
       - supports-color
       - typescript
 
+  expo-modules-core@2.3.13:
+    dependencies:
+      invariant: 2.2.4
+
   expo-modules-core@57.0.17(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7):
     dependencies:
       '@expo/expo-modules-macros-plugin': 0.6.1
@@ -35852,6 +35867,13 @@ snapshots:
     optionalDependencies:
       '@fastify/websocket': 11.3.0
       ws: 8.21.1
+
+  graphql-ws@6.2.1(@fastify/websocket@11.3.0)(graphql@16.14.2)(ws@8.21.3):
+    dependencies:
+      graphql: 16.14.2
+    optionalDependencies:
+      '@fastify/websocket': 11.3.0
+      ws: 8.21.3
 
   graphql-yoga@5.23.0(graphql@15.10.3):
     dependencies:
@@ -41082,14 +41104,16 @@ snapshots:
       react: 19.2.7
       react-native: 0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0)
 
-  react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7):
+  react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7):
     dependencies:
+      '@egjs/hammerjs': 2.0.17
       '@types/react-test-renderer': 19.1.0
+      hoist-non-react-statics: 3.3.2
       invariant: 2.2.4
       react: 19.2.7
       react-native: 0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0)
 
-  react-native-gifted-chat@3.4.0(@types/react@19.3.0)(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-keyboard-controller@1.22.1(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7):
+  react-native-gifted-chat@3.4.0(@types/react@19.3.0)(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-keyboard-controller@1.22.1(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native-safe-area-context@5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7):
     dependencies:
       '@expo/react-native-action-sheet': 4.1.1(@types/react@19.3.0)(react@19.2.7)
       '@types/lodash.isequal': 4.5.8
@@ -41097,11 +41121,11 @@ snapshots:
       lodash.isequal: 4.5.0
       react: 19.2.7
       react-native: 0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0)
-      react-native-gesture-handler: 3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+      react-native-gesture-handler: 2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-keyboard-controller: 1.22.1(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-reanimated: 3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0)
       react-native-safe-area-context: 5.9.1(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
-      react-native-zoom-reanimated: 1.5.4(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+      react-native-zoom-reanimated: 1.5.4(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
     transitivePeerDependencies:
       - '@types/react'
 
@@ -41207,11 +41231,11 @@ snapshots:
       react: 19.2.7
       react-native: 0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0)
 
-  react-native-zoom-reanimated@1.5.4(react-native-gesture-handler@3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7):
+  react-native-zoom-reanimated@1.5.4(react-native-gesture-handler@2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7))(react-native-reanimated@3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0))(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7):
     dependencies:
       react: 19.2.7
       react-native: 0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0)
-      react-native-gesture-handler: 3.3.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
+      react-native-gesture-handler: 2.32.0(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)
       react-native-reanimated: 3.19.5(@babel/core@8.0.5)(react-native@0.87.1(@babel/core@8.0.5)(@types/react@19.3.0)(react@19.2.7)(supports-color@5.5.0))(react@19.2.7)(supports-color@5.5.0)
 
   react-native@0.85.3(@babel/core@7.29.7(supports-color@5.5.0))(@types/react@19.3.0)(react@19.3.0)(supports-color@5.5.0):

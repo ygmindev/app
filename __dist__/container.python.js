@@ -1,1 +1,1 @@
-import{A as e}from"./Environment.js";import{t}from"./container.base.js";var n=t.extend(()=>({dockerPathname:e(`container/python/Dockerfile`)}));export{n as containerConfig};
+import{t as e}from"./container.base.js";import{A as t}from"./Environment.js";var n=e.extend(()=>({dockerPathname:t(`container/python/Dockerfile`)}));export{n as containerConfig};

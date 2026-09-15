@@ -1,1 +1,1 @@
-import{t as e}from"./bundle.base.js";var t=e.extend(()=>({}));export{t as bundleConfig};
+import{r as e}from"./tasks.js";var t=e.extend(()=>({}));export{t as bundleConfig};

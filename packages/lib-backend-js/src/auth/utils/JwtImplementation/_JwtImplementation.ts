@@ -10,14 +10,15 @@ import { UnauthenticatedError } from '@lib/shared/auth/errors/UnauthenticatedErr
 import { type PartialModel } from '@lib/shared/core/core.models';
 import { NotFoundError } from '@lib/shared/core/errors/NotFoundError/NotFoundError';
 import { pick } from '@lib/shared/core/utils/pick/pick';
-import admin from 'firebase-admin';
+import { cert, getApps, initializeApp } from 'firebase-admin/app';
+import { getAuth } from 'firebase-admin/auth';
 import { type AuthError } from 'firebase/auth';
 
 export class _JwtImplementation implements _JwtImplementationModel {
   constructor({ email, projectId, secret }: _JwtImplementationParamsModel) {
-    !admin.apps.length &&
-      admin.initializeApp({
-        credential: admin.credential.cert({
+    !getApps().length &&
+      initializeApp({
+        credential: cert({
           clientEmail: email,
           privateKey: secret?.replace(/\\n/gm, '\n'),
           projectId,
@@ -28,14 +29,14 @@ export class _JwtImplementation implements _JwtImplementationModel {
   createToken = async (claims: PartialModel<UserModel>): Promise<string> => {
     const uid = claims._id;
     if (uid) {
-      return admin.auth().createCustomToken(uid, claims);
+      return getAuth().createCustomToken(uid, claims);
     }
     throw new NotFoundError('uid');
   };
 
   verifyToken = async (token: string): Promise<SignInTokenModel | null> => {
     try {
-      const decoded = await admin.auth().verifyIdToken(token);
+      const decoded = await getAuth().verifyIdToken(token);
       return {
         ...((decoded.additionalClaims as SignInTokenModel) ?? {}),
         ...pick(decoded, SIGN_IN_TOKEN_CLAIM_KEYS),

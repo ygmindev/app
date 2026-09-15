@@ -15,10 +15,6 @@ export const bundleConfig = configBase.extend(() => {
         to: 'react-native-is-edge-to-edge/dist/index.mjs',
       },
 
-      // {
-      //   from: /^inline-style-prefixer\/lib\/(.*)/,
-      //   to: 'inline-style-prefixer/es/$1.js',
-      // },
       {
         from: 'inline-style-prefixer/lib',
         to: 'inline-style-prefixer/es',
@@ -77,6 +73,8 @@ export const bundleConfig = configBase.extend(() => {
         (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') &&
         !environment.variables.NODE_RUNTIME
       }`,
+
+      global: 'globalThis',
     },
 
     envPrefix: ['APP_', 'SERVER_APP_'],
@@ -85,20 +83,7 @@ export const bundleConfig = configBase.extend(() => {
 
     publicPathname: fromPublic(),
 
-    transpileModules:
-      filterNil([
-        // '@egjs/react-infinitegrid',
-        // '@expo/react-native-action-sheet',
-        // '@shopify/flash-list',
-        // '@uiw/react-md-editor',
-        // 'countries-list',
-        // 'moti',
-        // 'redux-persist',
-        // TODO: fix?
-        // process.env.NODE_ENV === 'production' && '@emotion/react',
-        process.env.NODE_ENV === 'production' && 'react-use',
-        // process.env.NODE_ENV === 'production' && 'inversify-react',
-      ]) ?? [],
+    transpileModules: filterNil([process.env.NODE_ENV === 'production' && 'react-use']) ?? [],
 
     transpilePatterns: [
       /^react-native-(?!web)/,

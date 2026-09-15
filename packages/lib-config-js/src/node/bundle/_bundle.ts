@@ -1,5 +1,5 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
-import { transform as babelTrasform, types as babelTypes } from '@babel/core';
+import { transformSync, types as babelTypes, type NodePath } from '@babel/core';
 import syntaxJsx from '@babel/plugin-syntax-jsx';
 import syntaxTypeScript from '@babel/plugin-syntax-typescript';
 import { Environment } from '@lib/backend/environment/utils/Environment/Environment';
@@ -256,7 +256,7 @@ const stripMarkers = ({
   const stripMarker = isSsr ? clientMarker : serverMarker;
   const keepMarker = isSsr ? serverMarker : clientMarker;
 
-  const result = babelTrasform(code, {
+  const result = transformSync(code, {
     babelrc: false,
     configFile: false,
     filename: idRaw,
@@ -280,7 +280,7 @@ const stripMarkers = ({
       {
         visitor: {
           Program: {
-            exit(path) {
+            exit(path: NodePath) {
               path.scope.crawl();
               for (const v of path.get('body')) {
                 if (!v.isImportDeclaration()) continue;
@@ -567,16 +567,14 @@ export const _bundle = ({
         tsconfig: tsconfigDir,
       },
 
+      exclude,
+
       force: true,
 
       include: transpileModulesF,
     },
 
     plugins: filterNil([
-      // circleDependency(),
-
-      // platformF === PLATFORM.NODE && nodePolyfills(),
-
       viteServerOnlyPlugin(serverMarker, clientMarker),
 
       provide && inject(provide),

@@ -11,7 +11,9 @@ import { uid } from '@lib/shared/core/utils/uid/uid';
 export const packageManagerConfig = new Config<PackageManagerConfigModel>({
   params: () => ({
     fixedVersions: {
+      'expo-modules-core': '2.3.13', // https://github.com/expo/expo/pull/38649; without this, 
       // https://github.com/software-mansion/react-native-reanimated/issues/8254
+      'react-native-gesture-handler': '^2.28.0',
       'react-native-reanimated': '^3.19.1',
       // 'react-native-screens': '4.24.0', // patched
     },
