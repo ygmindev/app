@@ -1,7 +1,5 @@
 # template version: 1.0.0
 
-from __future__ import annotations
-
 from typing import Any, ClassVar, Self
 
 from pydantic import BaseModel as PydanticBaseClass
@@ -14,7 +12,7 @@ from lib_shared.core.utils.merge.constants import MergeStrategy
 class _BaseModel(PydanticBaseClass):
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
-        extra="allow",
+        extra="ignore",
         populate_by_name=True,
         revalidate_instances="never",
         str_strip_whitespace=False,

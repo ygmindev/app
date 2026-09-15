@@ -20,35 +20,33 @@ class AgentNode(
     agent: Agent = Field()
     prompt: str | None = Field(default=None)
 
-    def _prepare(
+    def _inner_state(
         self,
         params: TState,
     ) -> TState:
-        if self.prompt:
-            params = params.clone(
-                messages=params.messages
-                + [AIMessage(role=MessageRole.USER, content=self.prompt)]
-            )
-        elif params.messages:
-            last_message = params.messages[-1]
-            if last_message.role != MessageRole.USER:
-                params = params.clone(
-                    messages=params.messages
-                    + [AIMessage(role=MessageRole.USER, content=last_message.content)]
-                )
-        return params
+        if not self.prompt:
+            return params
+        extra = AIMessage(role=MessageRole.USER, text=self.prompt)
+        return params.clone(messages=list(params.messages) + [extra])
 
     async def run(
         self,
         params: TState,
     ) -> TState:
-        params = self._prepare(params)
-        return await self.agent.run(params)
+        inner = self._inner_state(params)
+        result = await self.agent.run(inner)
+        new_messages = list(result.messages[len(params.messages) :])
+        return params.event(messages=new_messages)
 
     async def stream(
         self,
         params: TState,
     ) -> AsyncIterable[TState]:
-        params = self._prepare(params)
-        async for x in self.agent.stream(params):
-            yield x
+        inner = self._inner_state(params)
+        new_messages: list[AIMessage] = []
+        async for chunk in self.agent.graph.stream(inner):
+            if getattr(chunk, "delta", None):
+                yield params.event(delta=chunk.delta)
+            elif getattr(chunk, "messages", None):
+                new_messages.extend(chunk.messages)
+        yield params.event(messages=new_messages)

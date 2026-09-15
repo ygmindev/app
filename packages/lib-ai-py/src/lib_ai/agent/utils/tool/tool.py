@@ -17,7 +17,8 @@ class _Tool[TParams, TResult](
     input_type: Type[TParams]
     name: str = Field(default="")
     description: str = Field(default="")
-
+    requires_approval: bool = Field(default=False)
+    
     def __init__(
         self,
         input_type: Type[BaseModel],

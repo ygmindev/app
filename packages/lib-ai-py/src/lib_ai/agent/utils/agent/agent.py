@@ -5,7 +5,6 @@ from inspect import isawaitable
 from typing import (
     Any,
     AsyncIterable,
-    Dict,
     Generic,
     TypeVar,
     cast,
@@ -38,18 +37,21 @@ class _Agent(
     descriptions: list[str] = Field(default_factory=list)
     name: str = Field(default="Agent")
     llm: Llm = Field(default_factory=Llm)
-    initial_state: TState = Field(default_factory=lambda: cast(TState, AgentState()))
+    initial_state: TState = Field(default_factory=AgentState)  # type: ignore[assignment]
     skills: list[Skill] | None = Field(default=None)
     tools: list[Tool] | None = Field(default=None)
+    max_tool_rounds: int = Field(default=10)
+    interrupt_before_tools: bool = Field(default=False)
 
-    _system_message: AIMessage = PrivateField()
-    _graph: DirectedAcyclicGraph | None = PrivateField()
+    _system_message: AIMessage = PrivateAttr()
+    _graph: DirectedAcyclicGraph | None = PrivateAttr(default=None)
 
     def model_post_init(self, __context: Any) -> None:
-        tool_map: Dict[str, Tool] = {}
+        tool_map: dict[str, Tool] = {}
         nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []
         descriptions: list[str] = [x.strip() for x in self.descriptions]
+        max_tool_rounds = self.max_tool_rounds
 
         if self.skills:
             descriptions += [
@@ -70,7 +72,7 @@ class _Agent(
             ]
             for tool in self.tools or []:
                 descriptions += [
-                    f"- '{tool.name}': {'. '.join(tool.description)}",
+                    f"- '{tool.name}': {tool.description}",
                 ]
                 tool_map.update({tool.name: tool})
 
@@ -93,29 +95,27 @@ class _Agent(
                 self,
                 params: TState,
             ) -> TState:
-                result = await llm.run([system_message] + params.messages)
-                if result is not None:
-                    params.messages.append(result)
-                return params
+                result = await llm.run([system_message] + list(params.messages))
+                if result is None:
+                    return params.event(messages=[])
+                return params.event(messages=[result])
 
             async def stream(
                 self,
                 params: TState,
             ) -> AsyncIterable[TState]:
-                stream = llm.stream([system_message] + params.messages)
+                stream = llm.stream([system_message] + list(params.messages))
                 stream = await stream if isawaitable(stream) else stream
-
-                message = AIMessage(role=MessageRole.ASSISTANT)
-                params.messages.append(message)
-
-                buffer = ""
+                final: AIMessage | None = None
                 async for chunk in stream:
-                    delta = str(chunk)
-                    buffer += delta
-                    message.text = buffer
-                    yield params.clone(delta=delta)
-
-                yield params
+                    if chunk.delta:
+                        yield params.event(delta=chunk.delta)
+                    if chunk.message is not None:
+                        final = chunk.message
+                if final is not None:
+                    yield params.event(messages=[final])
+                elif final is None:
+                    yield params.event(messages=[])
 
         edges.append(GraphEdge(start=GraphNodeType.START, end="llm"))
         nodes.append(_LlmNode())
@@ -127,28 +127,71 @@ class _Agent(
                 self,
                 params: TState,
             ) -> TState:
+                if not params.messages:
+                    return params.event(messages=[])
                 last_message = params.messages[-1]
                 if (
-                    last_message.role == MessageRole.ASSISTANT
-                    and last_message.tool_calls
+                    last_message.role != MessageRole.ASSISTANT
+                    or not last_message.tool_calls
                 ):
+                    return params.event(messages=[])
 
-                    async def _run(tool_call) -> AIMessage:
-                        tool = tool_map[tool_call.name]
-                        result = await tool.execute(tool_call.params)
+                async def _run(tool_call: ToolCall) -> AIMessage:
+                    tool = tool_map.get(tool_call.name)
+                    if tool is None:
                         return AIMessage(
                             role=MessageRole.TOOL,
-                            text=result,
+                            text=f"Unknown tool: {tool_call.name}",
                             current_tool_call=tool_call,
                         )
-
-                    updates = await asyncio.gather(
-                        *(_run(tc) for tc in last_message.tool_calls)
+                    if tool.requires_approval:
+                        decision = interrupt(
+                            {
+                                "type": "tool_approval",
+                                "name": tool_call.name,
+                                "params": tool_call.params,
+                            }
+                        )
+                        if decision in (False, "reject", "denied"):
+                            return AIMessage(
+                                role=MessageRole.TOOL,
+                                text="Tool execution rejected",
+                                current_tool_call=tool_call,
+                            )
+                    try:
+                        result = await tool.invoke_args(tool_call.params)
+                    except (ValidationError, TypeError, ValueError) as exc:
+                        return AIMessage(
+                            role=MessageRole.TOOL,
+                            text=f"Tool '{tool_call.name}' failed: {exc}",
+                            current_tool_call=tool_call,
+                        )
+                    except Exception as exc:
+                        return AIMessage(
+                            role=MessageRole.TOOL,
+                            text=(
+                                f"Tool '{tool_call.name}' failed: "
+                                f"{type(exc).__name__}"
+                            ),
+                            current_tool_call=tool_call,
+                        )
+                    return AIMessage(
+                        role=MessageRole.TOOL,
+                        text=str(result),
+                        current_tool_call=tool_call,
                     )
-                    params.messages.extend(updates)
-                return params
+
+                updates = await asyncio.gather(
+                    *(_run(tc) for tc in last_message.tool_calls)
+                )
+                return params.event(
+                    messages=list(updates),
+                    tool_round=params.tool_round + 1,
+                )
 
         def _llm_route(state: TState) -> str:
+            if state.tool_round >= max_tool_rounds:
+                return GraphNodeType.END
             messages = state.messages
             if messages:
                 last = messages[-1]
@@ -173,6 +216,8 @@ class _Agent(
             initial_state=self.initial_state,
             nodes=nodes,
             edges=edges,
+            recursion_limit=max(25, max_tool_rounds * 2 + 5),
+            interrupt_before=["tools"] if self.interrupt_before_tools else [],
         )
 
     @property
@@ -181,34 +226,21 @@ class _Agent(
             raise NotImplementedError("Graph is not initialized")
         return self._graph
 
+    async def run(
+        self,
+        params: TState,
+    ) -> TState:
+        return await self.graph.run(params)
+
     async def stream(
         self,
         params: TState,
     ) -> AsyncIterable[TState]:
-        start = len(params.messages)
         async for updates in self.graph.stream(params):
-            delta = getattr(updates, "delta", None)
-            if delta:
-                yield params.clone(delta=delta)
-            else:
-                messages = cast(list[AIMessage], updates.messages)[start:]
-                text: str = ""
-                for message in messages:
-                    if message.text is not None:
-                        text += message.text
-                    if message.role == MessageRole.ASSISTANT and message.tool_calls:
-                        for tool_call in message.tool_calls:
-                            text += f"calling tool: {tool_call.name} with args: {tool_call.params}"
+            if getattr(updates, "delta", None):
+                yield updates
 
-                if text:
-                    yield params.clone(
-                        messages=[
-                            AIMessage(
-                                role=MessageRole.ASSISTANT,
-                                text=text,
-                            )
-                        ]
-                    )
+
 
 
 class Agent(_Agent[TState]): ...

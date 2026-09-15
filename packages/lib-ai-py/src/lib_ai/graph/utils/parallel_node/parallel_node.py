@@ -16,14 +16,25 @@ class ParallelNode(
 ):
     nodes: list[GraphNode] = Field(default_factory=list)
 
+    async def run(
+        self,
+        params: TState,
+    ) -> TState:
+        copies = [params.clone() for _ in self.nodes]
+        results = await asyncio.gather(
+            *[node.run(copy) for node, copy in zip(self.nodes, copies, strict=True)]
+        )
+        messages: list[AIMessage] = []
+        for result in results:
+            incoming = getattr(result, "messages", None)
+            if incoming:
+                messages.extend(incoming)
+        if hasattr(params, "event"):
+            return params.event(messages=messages)
+        return params.clone(messages=messages)
+
     async def stream(
         self,
         params: TState,
     ) -> AsyncIterable[TState]:
-        results = await asyncio.gather(*[node.run(params) for node in self.nodes])
-        for x in results:
-            params = params.update(
-                x,
-                merge_strategy=MergeStrategy.DEEP_APPEND,
-            )
-        yield params
+        yield await self.run(params)

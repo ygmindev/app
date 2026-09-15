@@ -1,7 +1,10 @@
 # template version: 1.0.0
 from inspect import isawaitable
 from typing import Any, AsyncIterable, Awaitable, Callable, Generic, TypeVar, cast
+from uuid import uuid4
 
+from langgraph.checkpoint.base import BaseCheckpointSaver
+from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.config import get_stream_writer
 from langgraph.graph.state import (
     END,
@@ -33,6 +36,9 @@ class _DirectedAcyclicGraph(
     initial_state: TState = Field()
     nodes: list[GraphNode] = Field(default_factory=list)
     edges: list[GraphEdge] = Field(default_factory=list)
+    recursion_limit: int = Field(default=25)
+    interrupt_before: list[str] = Field(default_factory=list)
+    checkpointer: BaseCheckpointSaver | None = Field(default=None)
 
     _graph: CompiledStateGraph = PrivateField()
 
@@ -72,6 +78,28 @@ class _DirectedAcyclicGraph(
             case _:
                 return name
 
+    def _run_config(
+        self,
+        params: TState,
+        exec_mode: str,
+    ) -> dict[str, Any]:
+        thread_id = getattr(params, "thread_id", None) or str(uuid4())
+        return {
+            "recursion_limit": self.recursion_limit,
+            "configurable": {
+                "exec_mode": exec_mode,
+                "thread_id": thread_id,
+            },
+        }
+
+    def _coerce_state(self, params: TState, result: Any) -> TState:
+        cls = type(params)
+        if isinstance(result, cls):
+            return result
+        if isinstance(result, dict):
+            return cls.model_validate(result)
+        return cast(TState, result)
+
     def model_post_init(self, __context: Any) -> None:
         graph = StateGraph(type(self.initial_state))
 
@@ -81,18 +109,32 @@ class _DirectedAcyclicGraph(
                 cast(StateNode, self._wrap_node(node)),
             )
 
-        edges = self.edges
-        if edges:
-            first_edge, last_edge = edges[0], edges[-1]
-            if first_edge.start != GraphNodeType.START:
-                edges.insert(
-                    0,
-                    GraphEdge(start=GraphNodeType.START, end=first_edge.start),
-                )
-            if last_edge.end != GraphNodeType.END and not isinstance(
-                last_edge.end, Callable
-            ):
-                edges.append(GraphEdge(start=last_edge.end, end=GraphNodeType.END))
+        edges = list(self.edges)
+        node_names = [node.name for node in self.nodes]
+        has_start = any(edge.start == GraphNodeType.START for edge in edges)
+        if not has_start and node_names:
+            edges.insert(0, GraphEdge(start=GraphNodeType.START, end=node_names[0]))
+
+        referenced_starts = {
+            edge.start for edge in edges if not isinstance(edge.start, Callable)
+        }
+        has_end = any(
+            edge.end == GraphNodeType.END
+            or (
+                isinstance(edge.end, Callable)
+                and edge.mapping is not None
+                and GraphNodeType.END in edge.mapping.values()
+            )
+            for edge in edges
+        )
+        if not has_end and node_names:
+            tails = [
+                name
+                for name in node_names
+                if name not in referenced_starts or name == node_names[-1]
+            ]
+            if tails:
+                edges.append(GraphEdge(start=tails[-1], end=GraphNodeType.END))
 
         for edge in edges:
             end = edge.end
@@ -111,8 +153,10 @@ class _DirectedAcyclicGraph(
                     self._get_node(end),
                 )
 
-        # self._graph = graph.compile(checkpointer=MemorySaver())
-        self._graph = graph.compile()
+        self._graph = graph.compile(
+            checkpointer=self.checkpointer or InMemorySaver(),
+            interrupt_before=self.interrupt_before or None,
+        )
 
     @property
     def graph(self) -> CompiledStateGraph:
@@ -124,9 +168,9 @@ class _DirectedAcyclicGraph(
     ) -> TState:
         result = await self.graph.ainvoke(
             params,
-            config={"configurable": {"exec_mode": "run"}},
+            config=self._run_config(params, "run"),
         )
-        return cast(TState, result)
+        return self._coerce_state(params, result)
 
     async def stream(
         self,
@@ -136,38 +180,25 @@ class _DirectedAcyclicGraph(
 
         async for event in self.graph.astream(
             params,
-            stream_mode=["updates", "custom"],
+            stream_mode=["custom"],
             subgraphs=True,
-            config={"configurable": {"exec_mode": "stream"}},
+            config=self._run_config(params, "stream"),
         ):
-            if len(event) == 3:
-                _, mode, data = event
-                if mode == "custom":
-                    if isinstance(data, cls):
-                        yield data
-                    elif hasattr(cls, "model_validate") and isinstance(data, dict):
-                        yield cls.model_validate(data)
-                elif mode == "updates":
-                    if isinstance(data, dict):
-                        for _, state_update in data.items():
-                            if isinstance(state_update, cls):
-                                yield state_update
-                            elif isinstance(state_update, dict):
-                                try:
-                                    yield cls.model_validate(state_update)
-                                except Exception:
-                                    pass
-            elif len(event) == 2:
-                _, data = event
-                if isinstance(data, cls):
-                    yield data
+            data = event[-1] if isinstance(event, tuple) else event
+            if isinstance(data, cls):
+                yield data
+            elif hasattr(cls, "model_validate") and isinstance(data, dict):
+                try:
+                    yield cls.model_validate(data)
+                except Exception:
+                    pass
 
     async def visualize(
         self,
         filepath: str,
     ) -> None:
         if self._graph is None:
-            raise UninitializedException("agent")
+            raise UninitializedException("graph is not compiled")
         self.graph.get_graph().draw_mermaid_png(output_file_path=filepath)
 
 

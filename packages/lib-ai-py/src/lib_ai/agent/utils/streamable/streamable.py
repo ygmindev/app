@@ -13,15 +13,10 @@ class Streamable(
         self,
         params: TState,
     ) -> TState:
-        result = params.clone()
-        updates = [x async for x in self.stream(params)]
-        for update in updates:
-            result = result.update(update)
-        return result
+        raise NotImplementedError(f"{type(self).__name__}.run is not implemented")
 
     async def stream(
         self,
         params: TState,
     ) -> AsyncIterable[TState]:
-        return
-        yield
+        yield await self.run(params)

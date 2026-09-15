@@ -40,19 +40,39 @@ class _AIMessage(Message):
         content_type = content.content_type
         match content_type:
             case ContentType.IMAGE:
+                if value.startswith("data:"):
+                    return {
+                        "type": "image_url",
+                        "image_url": {"url": value},
+                    }
+                if value.startswith("http://") or value.startswith("https://"):
+                    return {
+                        "type": "image_url",
+                        "image_url": {"url": value},
+                    }
+                path = from_working(value)
+                with open(path, "rb") as image_file:
+                    image_base64 = base64.b64encode(image_file.read()).decode("utf-8")
+                ext = path.suffix.lstrip(".").lower()
+                mime = {
+                    "jpg": "image/jpeg",
+                    "jpeg": "image/jpeg",
+                    "png": "image/png",
+                    "gif": "image/gif",
+                    "webp": "image/webp",
+                }.get(ext, "image/png")
                 return {
                     "type": "image_url",
-                    "image_url": {"url": value},
+                    "image_url": {"url": f"data:{mime};base64,{image_base64}"},
                 }
             case ContentType.PDF:
-                with open(value, "rb") as pdf_file:
+                path = from_working(value)
+                with open(path, "rb") as pdf_file:
                     pdf_base64 = base64.b64encode(pdf_file.read()).decode("utf-8")
                     return {
                         "type": "file",
                         "file_url": {
-                            # "url": f"data:application/pdf;base64,{pdf_base64}"
-                            "filename": "corporate_hybrid.pdf",
-                            "file_data": f"data:application/pdf;base64,{pdf_base64}",
+                            "file_data": f"data:application/pdf;base64,{pdf_base64}"
                         },
                     }
             case _:
@@ -81,9 +101,23 @@ class _AIMessage(Message):
                         content.append(Content(value=x.get("text", str(x))))
         return (None, content)
 
+    @staticmethod
+    def _from_langchain_tool_call(raw: dict | object) -> ToolCall:
+        if isinstance(raw, dict):
+            return ToolCall(
+                id=str(raw.get("id") or ""),
+                name=str(raw.get("name") or ""),
+                params=dict(raw.get("args") or {}),
+            )
+        return ToolCall(
+            id=str(getattr(raw, "id", "") or ""),
+            name=str(getattr(raw, "name", "") or ""),
+            params=dict(getattr(raw, "args", None) or {}),
+        )
+
     def serialize(self) -> BaseMessage:
         text, content = [self.text, self.content]
-        contents: str | list[dict | str] | None = text
+        contents: str | list[dict | str] | None = text if text is not None else ""
         if text is None and content is None:
             return LangchainAIMessage(content="")
 
@@ -140,14 +174,7 @@ class _AIMessage(Message):
                 role=MessageRole.ASSISTANT,
                 content=content,
                 text=text,
-                tool_calls=[
-                    ToolCall(
-                        id=str(x["id"]),
-                        name=x["name"],
-                        params=x["args"],
-                    )
-                    for x in message.tool_calls
-                ],
+                tool_calls=[cls._from_langchain_tool_call(x) for x in (message.tool_calls or [])],
             )
         elif isinstance(message, SystemMessage):
             instance = cls(

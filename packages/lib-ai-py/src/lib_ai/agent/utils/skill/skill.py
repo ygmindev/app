@@ -10,7 +10,4 @@ from lib_ai.agent.utils.tool import Tool
 class Skill(BaseModel):
     descriptions: list[str] = Field(default_factory=list)
     name: str = Field()
-
-    @property
-    def tools(self) -> list[Tool]:
-        return []
+    tools: list[Tool] = Field(default_factory=list)
