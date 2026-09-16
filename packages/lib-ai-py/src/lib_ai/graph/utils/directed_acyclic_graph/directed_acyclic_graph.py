@@ -16,6 +16,7 @@ from langgraph.graph.state import (
 )
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
+from lib_shared.core.utils.logger.logger import logger
 from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_shared.core.utils.uninitialized_exception.uninitialized_exception import (
     UninitializedException,
@@ -51,6 +52,10 @@ class _DirectedAcyclicGraph(
             state: TState,
             config: RunnableConfig,
         ) -> TState:
+            if node.messages is not None:
+                for message in node.messages(state):
+                    logger.info(message)
+
             exec_mode = config.get("configurable", {}).get("exec_mode", "run")
             match exec_mode:
                 case "stream":
