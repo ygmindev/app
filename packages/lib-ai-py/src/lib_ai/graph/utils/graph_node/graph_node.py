@@ -9,6 +9,7 @@ from lib_ai.agent.utils.streamable.streamable import Streamable
 
 class GraphNode[TState: BaseModel](Streamable[BaseModel]):
     name: str = Field()
+    messages: callable[[TState], list[str]] | None = Field(default=None)
 
     def edges(self) -> tuple[str, str]:
         return (
