@@ -33,7 +33,7 @@ class _DirectedAcyclicGraph(
     Streamable[TState],
     Generic[TState],
 ):
-    initial_state: TState = Field()
+    state_type: type[TState] = Field()
     nodes: list[GraphNode] = Field(default_factory=list)
     edges: list[GraphEdge] = Field(default_factory=list)
     recursion_limit: int = Field(default=25)
@@ -101,7 +101,7 @@ class _DirectedAcyclicGraph(
         return cast(TState, result)
 
     def model_post_init(self, __context: Any) -> None:
-        graph = StateGraph(type(self.initial_state))
+        graph = StateGraph(self.state_type)
 
         for node in self.nodes:
             graph.add_node(
