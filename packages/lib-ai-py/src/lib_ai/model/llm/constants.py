@@ -4,6 +4,7 @@ from enum import StrEnum
 class LLM_PROVIDER(StrEnum):
     LMSTUDIO = "lmstudio"
     OPENROUTER = "openrouter"
+    LITELLM = "litellm"
 
 
 class LLM_NAME(StrEnum):
