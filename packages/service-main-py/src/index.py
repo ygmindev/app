@@ -4,12 +4,8 @@ from lib_ai.agent.utils.ai_message.ai_message import AIMessage
 from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.model.llm.llm import Llm
 from lib_config.database.database import database_config
-from lib_model.chat.content.constants import ContentType
-from lib_model.chat.content.content import Content
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.database.utils.database.database import Database
-
-filepath = "/Users/yoongeemin/Downloads/corporate_hybrid.pdf"
 
 
 async def run_agent() -> None:
@@ -22,9 +18,8 @@ async def run_agent() -> None:
         response = await llm.run(
             [
                 AIMessage(
-                    text="describe this file",
+                    text="hello world!",
                     role=MessageRole.USER,
-                    content=[Content(content_type=ContentType.PDF, value=filepath)],
                 )
             ]
         )

@@ -7,7 +7,6 @@ from typing import (
     AsyncIterable,
     Generic,
     TypeVar,
-    cast,
 )
 
 from lib_shared.core.utils.field.field import Field
@@ -43,8 +42,8 @@ class _Agent(
     max_tool_rounds: int = Field(default=10)
     interrupt_before_tools: bool = Field(default=False)
 
-    _system_message: AIMessage = PrivateAttr()
-    _graph: DirectedAcyclicGraph | None = PrivateAttr(default=None)
+    _system_message: AIMessage = PrivateField()
+    _graph: DirectedAcyclicGraph | None = PrivateField(default=None)
 
     def model_post_init(self, __context: Any) -> None:
         tool_map: dict[str, Tool] = {}
@@ -170,8 +169,7 @@ class _Agent(
                         return AIMessage(
                             role=MessageRole.TOOL,
                             text=(
-                                f"Tool '{tool_call.name}' failed: "
-                                f"{type(exc).__name__}"
+                                f"Tool '{tool_call.name}' failed: {type(exc).__name__}"
                             ),
                             current_tool_call=tool_call,
                         )
@@ -239,8 +237,6 @@ class _Agent(
         async for updates in self.graph.stream(params):
             if getattr(updates, "delta", None):
                 yield updates
-
-
 
 
 class Agent(_Agent[TState]): ...
