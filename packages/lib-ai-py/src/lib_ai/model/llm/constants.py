@@ -14,3 +14,4 @@ class LLM_NAME(StrEnum):
     QWEN_3_5 = "qwen/qwen3.5-9b"
     NEMOTRON_ULTRA_3 = "nvidia/nemotron-3-ultra-550b-a55b:free"
     NEMOTRON_OMNI_3 = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free"
+    NEMOTRON_3_5_LIGHTNING = "nvidia/nemotron-3.5-lightning:free"

@@ -9,7 +9,7 @@ allowBuilds:
   '@swc/core': true
   aws-crt: true
   aws-sdk: true
-  azure-functions-core-tools: true
+  azure-functions-core-tools: false
   core-js: true
   cpu-features: true
   dooboolab-welcome: true

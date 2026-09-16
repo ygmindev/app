@@ -22,6 +22,7 @@ from lib_ai.model.llm.constants import LLM_NAME, LLM_PROVIDER
 
 LLM_SEMAPHORE = asyncio.Semaphore(4)
 
+
 class LlmChunk(BaseModel):
     delta: str | None = Field(default=None)
     message: AIMessage | None = Field(default=None)
@@ -52,7 +53,7 @@ class _Llm(BaseModel):
     def model_post_init(self, __context: Any) -> None:
         if self._llm is not None:
             return
-        self._http_client = httpx.AsyncClient(verify=False) # TODO: verify=True
+        self._http_client = httpx.AsyncClient(verify=False)  # TODO: verify=True
 
         match self.provider:
             case LLM_PROVIDER.LMSTUDIO:
@@ -83,7 +84,6 @@ class _Llm(BaseModel):
                     max_completion_tokens=self.max_tokens,
                     http_async_client=self._http_client,
                 )
-
 
         if self._llm is not None and self.output_schema is not None:
             schema = (
@@ -181,9 +181,7 @@ class _Llm(BaseModel):
         self,
         prompt: str,
     ) -> AsyncIterator[LlmChunk]:
-        async for chunk in self.stream(
-            [AIMessage(role=MessageRole.USER, text=prompt)]
-        ):
+        async for chunk in self.stream([AIMessage(role=MessageRole.USER, text=prompt)]):
             yield chunk
 
     async def run(

@@ -19,7 +19,7 @@ class _BaseModel(PydanticBaseClass):
         use_enum_values=True,
     )
 
-    _registry: ClassVar[dict[str, type[_BaseModel]]] = {}
+    _registry: ClassVar[dict[str, type["_BaseModel"]]] = {}
 
     @classmethod
     def __pydantic_init_subclass__(cls, **kwargs: Any) -> None:
