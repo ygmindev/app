@@ -1,6 +1,7 @@
 # template version: 1.0.0
 
 import asyncio
+import contextlib
 from typing import Any, AsyncIterator, cast
 
 import httpx
@@ -52,12 +53,12 @@ class _Llm(BaseModel):
     def model_post_init(self, __context: Any) -> None:
         if self._llm is not None:
             return
-        self._http_client = httpx.AsyncClient(verify=False)  # TODO: verify=True
+        self._http_client = httpx.AsyncClient(verify=True)
 
         match self.provider:
             case LLM_PROVIDER.LMSTUDIO:
                 self._llm = ChatOpenAI(
-                    api_key=lambda: "lmstudio",
+                    api_key="lmstudio",
                     base_url="http://localhost:1234/v1",
                     model=self.name,
                     temperature=self.temperature,
@@ -67,7 +68,7 @@ class _Llm(BaseModel):
                 )
             case LLM_PROVIDER.OPENROUTER:
                 self._llm = ChatOpenAI(
-                    api_key=lambda: self._secret(LLM_PROVIDER.OPENROUTER),
+                    api_key=self._secret(LLM_PROVIDER.OPENROUTER),
                     base_url="https://openrouter.ai/api/v1",
                     model=self.name,
                     temperature=self.temperature,
@@ -76,25 +77,13 @@ class _Llm(BaseModel):
                 )
             case LLM_PROVIDER.LITELLM:
                 self._llm = ChatOpenAI(
-                    api_key=lambda: self._secret(LLM_PROVIDER.LITE_LLM),
+                    api_key=self._secret(LLM_PROVIDER.LITELLM),
                     base_url=get_env("LITELLM_PROXY_URL"),
                     model=self.name,
                     temperature=self.temperature,
                     max_completion_tokens=self.max_tokens,
                     http_async_client=self._http_client,
                 )
-
-        if self._llm is not None and self.output_schema is not None:
-            schema = (
-                self.output_schema
-                if isinstance(self.output_schema, type)
-                else type(self.output_schema)
-            )
-            self._llm = cast(
-                BaseChatModel,
-                self._llm.with_structured_output(cast(dict, self.output_schema)),
-                self._llm.with_structured_output(schema),
-            )
 
     async def aclose(self) -> None:
         if self._http_client is not None:
