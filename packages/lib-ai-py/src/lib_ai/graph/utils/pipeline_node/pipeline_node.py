@@ -4,14 +4,16 @@
 from typing import AsyncIterable
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
-from lib_shared.core.utils.field.field import Field
 
 from lib_ai.graph.utils.graph_node import GraphNode
 
 
 class PipelineMode[TState: BaseModel](GraphNode[TState]):
     name: str = "chain"
-    nodes: list[GraphNode] = Field(default_factory=list)
+
+    @property
+    def nodes(self) -> list[GraphNode]:
+        return []
 
     def messages(
         self,
