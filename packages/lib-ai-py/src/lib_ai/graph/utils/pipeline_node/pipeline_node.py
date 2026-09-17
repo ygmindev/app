@@ -13,7 +13,7 @@ class PipelineMode[TState: BaseModel](GraphNode[TState]):
 
     @property
     def nodes(self) -> list[GraphNode]:
-        return []
+        raise NotImplementedError("PipelineNode.nodes is not implemented")
 
     def messages(
         self,
