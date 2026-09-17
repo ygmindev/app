@@ -14,6 +14,18 @@ class StructuredLlm(BaseModel):
     llm: Llm = Field(default_factory=Llm)
     output_schema: type[TSchema] | None = Field(default=None)
 
+    @property
+    def input_tokens(self) -> int:
+        return self.llm.input_tokens
+
+    @property
+    def output_tokens(self) -> int:
+        return self.llm.output_tokens
+
+    @property
+    def total_tokens(self) -> int:
+        return self.llm.total_tokens
+
     async def aclose(self) -> None:
         await self.llm.aclose()
 
@@ -50,6 +62,15 @@ class StructuredLlm(BaseModel):
         structured = self.llm.llm.with_structured_output(
             schema,
             method="function_calling",
+            include_raw=True,
         )
         result = await structured.ainvoke(serialized)
+        if isinstance(result, dict):
+            raw = result.get("raw")
+            if raw is not None:
+                self.llm._record_usage(raw)
+            parsed = result.get("parsed")
+            if parsed is None:
+                raise ValueError("structured output parsing failed")
+            return self._coerce(parsed, schema)
         return self._coerce(result, schema)
