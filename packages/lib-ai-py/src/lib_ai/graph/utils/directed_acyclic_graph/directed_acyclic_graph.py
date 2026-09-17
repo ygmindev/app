@@ -32,19 +32,13 @@ class _DirectedAcyclicGraph(
     Generic[TState],
 ):
     state_type: type[TState] = Field()
+    nodes: list[GraphNode] = Field(default_factory=list)
+    edges: list[GraphEdge] = Field(default_factory=list)
     recursion_limit: int = Field(default=25)
     interrupt_before: list[str] = Field(default_factory=list)
     checkpointer: BaseCheckpointSaver | None = Field(default=None)
 
     _graph: CompiledStateGraph = PrivateField()
-
-    @property
-    def nodes(self) -> list[GraphNode]:
-        raise NotImplementedError("nodes is not implemented")
-
-    @property
-    def edges(self) -> list[GraphEdge]:
-        raise NotImplementedError("edges is not implemented")
 
     def _wrap_node(
         self,
