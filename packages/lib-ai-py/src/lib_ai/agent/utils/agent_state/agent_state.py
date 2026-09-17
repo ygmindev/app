@@ -15,8 +15,6 @@ def append_messages(
         return left
     return left + right
 
-
-
 class AgentState(BaseModel):
     messages: list[AIMessage] = Field(default_factory=list)
     delta: str | None = Field(default=None)
