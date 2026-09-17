@@ -9,7 +9,7 @@ from lib_shared.core.utils.field.field import Field
 from lib_ai.graph.utils.graph_node import GraphNode
 
 
-class ChainNode[TState: BaseModel](GraphNode[TState]):
+class PipelineMode[TState: BaseModel](GraphNode[TState]):
     name: str = "chain"
     nodes: list[GraphNode] = Field(default_factory=list)
 
