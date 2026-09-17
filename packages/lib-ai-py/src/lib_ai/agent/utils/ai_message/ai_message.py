@@ -197,3 +197,6 @@ class _AIMessage(Message):
         else:
             raise ValueError(f"Unknown message type: {type(message)}")
         return instance
+
+
+class AIMessage(_AIMessage): ...

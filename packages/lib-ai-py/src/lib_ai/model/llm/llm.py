@@ -55,12 +55,14 @@ class _Llm(BaseModel):
             return
         self._http_client = httpx.AsyncClient(verify=True)
 
+        name = LLM_PROVIDER_MODEL[self.provider][self.name]
+
         match self.provider:
             case LLM_PROVIDER.LMSTUDIO:
                 self._llm = ChatOpenAI(
                     api_key="lmstudio",
                     base_url="http://localhost:1234/v1",
-                    model=self.name,
+                    model=name,
                     temperature=self.temperature,
                     max_completion_tokens=self.max_tokens,
                     extra_body={"chat_template_kwargs": {"enable_thinking": False}},
@@ -70,7 +72,7 @@ class _Llm(BaseModel):
                 self._llm = ChatOpenAI(
                     api_key=self._secret(LLM_PROVIDER.OPENROUTER),
                     base_url="https://openrouter.ai/api/v1",
-                    model=self.name,
+                    model=name,
                     temperature=self.temperature,
                     max_completion_tokens=self.max_tokens,
                     http_async_client=self._http_client,
@@ -79,7 +81,7 @@ class _Llm(BaseModel):
                 self._llm = ChatOpenAI(
                     api_key=self._secret(LLM_PROVIDER.LITELLM),
                     base_url=get_env("LITELLM_PROXY_URL"),
-                    model=self.name,
+                    model=name,
                     temperature=self.temperature,
                     max_completion_tokens=self.max_tokens,
                     http_async_client=self._http_client,
