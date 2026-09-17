@@ -4,15 +4,15 @@
 import asyncio
 from typing import AsyncIterable
 
+from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
-from lib_shared.core.utils.merge.constants import MergeStrategy
 
-from lib_ai.agent.utils.streamable.streamable import TState
+from lib_ai.agent.utils.ai_message.ai_message import AIMessage
 from lib_ai.graph.utils.graph_node import GraphNode
 
 
-class ParallelNode(
-    GraphNode,
+class ParallelNode[TState: BaseModel](
+    GraphNode[TState],
 ):
     nodes: list[GraphNode] = Field(default_factory=list)
 

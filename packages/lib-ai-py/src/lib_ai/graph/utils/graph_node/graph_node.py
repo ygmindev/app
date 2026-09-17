@@ -22,3 +22,6 @@ class GraphNode[TState: BaseModel](Streamable[BaseModel]):
 
     def messages(self, state: TState) -> list[str] | None:
         return None
+
+    def should_retry(self, state: TState) -> bool:
+        return False
