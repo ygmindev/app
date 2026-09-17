@@ -50,10 +50,9 @@ class _AIMessage(Message):
                         "type": "image_url",
                         "image_url": {"url": value},
                     }
-                path = from_working(value)
-                with open(path, "rb") as image_file:
+                with open(value, "rb") as image_file:
                     image_base64 = base64.b64encode(image_file.read()).decode("utf-8")
-                ext = path.suffix.lstrip(".").lower()
+                ext = value.rsplit(".", 1)[-1].lower() if "." in value else "png"
                 mime = {
                     "jpg": "image/jpeg",
                     "jpeg": "image/jpeg",
@@ -66,15 +65,18 @@ class _AIMessage(Message):
                     "image_url": {"url": f"data:{mime};base64,{image_base64}"},
                 }
             case ContentType.PDF:
-                path = from_working(value)
-                with open(path, "rb") as pdf_file:
+                with open(value, "rb") as pdf_file:
                     pdf_base64 = base64.b64encode(pdf_file.read()).decode("utf-8")
-                    return {
-                        "type": "file",
-                        "file_url": {
-                            "file_data": f"data:application/pdf;base64,{pdf_base64}"
-                        },
-                    }
+                filename = value.rsplit("/", 1)[-1] or "document.pdf"
+                if not filename.lower().endswith(".pdf"):
+                    filename = f"{filename}.pdf"
+                return {
+                    "type": "file",
+                    "file": {
+                        "filename": filename,
+                        "file_data": f"data:application/pdf;base64,{pdf_base64}",
+                    },
+                }
             case _:
                 return {"type": "text", "text": value}
 
@@ -118,9 +120,6 @@ class _AIMessage(Message):
     def serialize(self) -> BaseMessage:
         text, content = [self.text, self.content]
         contents: str | list[dict | str] | None = text if text is not None else ""
-        if text is None and content is None:
-            return LangchainAIMessage(content="")
-
         if content is not None and len(content) > 0:
             contents = [
                 self._serialize_content(c)
@@ -174,7 +173,9 @@ class _AIMessage(Message):
                 role=MessageRole.ASSISTANT,
                 content=content,
                 text=text,
-                tool_calls=[cls._from_langchain_tool_call(x) for x in (message.tool_calls or [])],
+                tool_calls=[
+                    cls._from_langchain_tool_call(x) for x in (message.tool_calls or [])
+                ],
             )
         elif isinstance(message, SystemMessage):
             instance = cls(
@@ -196,9 +197,3 @@ class _AIMessage(Message):
         else:
             raise ValueError(f"Unknown message type: {type(message)}")
         return instance
-
-
-class AIMessage(
-    _AIMessage,
-    Message,
-): ...
