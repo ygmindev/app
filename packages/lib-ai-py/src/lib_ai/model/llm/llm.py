@@ -18,7 +18,7 @@ from lib_shared.core.utils.private_field.private_field import PrivateField
 from lib_ai.agent.utils.ai_message.ai_message import AIMessage
 from lib_ai.agent.utils.ai_message.constants import MessageRole
 from lib_ai.agent.utils.tool import Tool
-from lib_ai.model.llm.constants import LLM_NAME, LLM_PROVIDER
+from lib_ai.model.llm.constants import LLM_NAME, LLM_PROVIDER, LLM_PROVIDER_MODEL
 
 LLM_SEMAPHORE = asyncio.Semaphore(4)
 
@@ -67,6 +67,7 @@ class _Llm(BaseModel):
                     max_completion_tokens=self.max_tokens,
                     extra_body={"chat_template_kwargs": {"enable_thinking": False}},
                     http_async_client=self._http_client,
+                    stream_usage=True,
                 )
             case LLM_PROVIDER.OPENROUTER:
                 self._llm = ChatOpenAI(
@@ -76,6 +77,7 @@ class _Llm(BaseModel):
                     temperature=self.temperature,
                     max_completion_tokens=self.max_tokens,
                     http_async_client=self._http_client,
+                    stream_usage=True,
                 )
             case LLM_PROVIDER.LITELLM:
                 self._llm = ChatOpenAI(
@@ -85,6 +87,7 @@ class _Llm(BaseModel):
                     temperature=self.temperature,
                     max_completion_tokens=self.max_tokens,
                     http_async_client=self._http_client,
+                    stream_usage=True,
                 )
 
     async def aclose(self) -> None:
@@ -97,6 +100,43 @@ class _Llm(BaseModel):
         if not self._llm:
             raise ValueError("_llm")
         return self._llm
+
+    @property
+    def input_tokens(self) -> int:
+        return self._input_tokens
+
+    @property
+    def output_tokens(self) -> int:
+        return self._output_tokens
+
+    @property
+    def total_tokens(self) -> int:
+        return self._input_tokens + self._output_tokens
+
+    def reset_usage(self) -> None:
+        self._input_tokens = 0
+        self._output_tokens = 0
+
+    def _record_usage(self, message: AIMessageChunk) -> None:
+        usage = getattr(message, "usage_metadata", None)
+        if isinstance(usage, dict):
+            self._input_tokens += int(usage.get("input_tokens") or 0)
+            self._output_tokens += int(usage.get("output_tokens") or 0)
+            return
+        metadata = getattr(message, "response_metadata", None)
+        if not isinstance(metadata, dict):
+            return
+        token_usage = metadata.get("token_usage") or metadata.get("usage") or {}
+        if not isinstance(token_usage, dict):
+            return
+        self._input_tokens += int(
+            token_usage.get("prompt_tokens") or token_usage.get("input_tokens") or 0
+        )
+        self._output_tokens += int(
+            token_usage.get("completion_tokens")
+            or token_usage.get("output_tokens")
+            or 0
+        )
 
     def bind_tools(
         self,
@@ -165,6 +205,7 @@ class _Llm(BaseModel):
                     is_started = True
                 yield LlmChunk(delta=text)
         if assembled is not None:
+            self._record_usage(assembled)
             yield LlmChunk(message=AIMessage.deserialize(assembled))
 
     async def stream_prompt(
@@ -182,6 +223,7 @@ class _Llm(BaseModel):
         serialized = [x.serialize() for x in messages]
         result = await self.llm.ainvoke(serialized)
         if result is not None:
+            self._record_usage(result)
             return AIMessage.deserialize(result)
         return None
 
