@@ -18,9 +18,6 @@ from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.logger.logger import logger
 from lib_shared.core.utils.private_field.private_field import PrivateField
-from lib_shared.core.utils.uninitialized_exception.uninitialized_exception import (
-    UninitializedException,
-)
 
 from lib_ai.agent.utils.streamable.streamable import Streamable
 from lib_ai.graph.constants import GraphNodeType
@@ -97,14 +94,6 @@ class _DirectedAcyclicGraph(
             },
         }
 
-    def _coerce_state(self, params: TState, result: Any) -> TState:
-        cls = type(params)
-        if isinstance(result, cls):
-            return result
-        if isinstance(result, dict):
-            return cls.model_validate(result)
-        return cast(TState, result)
-
     def model_post_init(self, __context: Any) -> None:
         graph = StateGraph(self.state_type)
 
@@ -147,9 +136,11 @@ class _DirectedAcyclicGraph(
                 graph.add_conditional_edges(
                     self._get_node(edge.start),
                     lambda x, end=end: self._get_node(end(x)),
-                    {
+                    None
+                    if edge.mapping is None
+                    else {
                         self._get_node(k): self._get_node(v)
-                        for k, v in edge.mapping.items() or {}
+                        for k, v in edge.mapping.items()
                     },
                 )
             else:
@@ -166,6 +157,14 @@ class _DirectedAcyclicGraph(
     @property
     def graph(self) -> CompiledStateGraph:
         return self._graph
+
+    def _coerce_state(self, params: TState, result: Any) -> TState:
+        cls = type(params)
+        if isinstance(result, cls):
+            return result
+        if isinstance(result, dict):
+            return cls.model_validate(result)
+        return cast(TState, result)
 
     async def run(
         self,
@@ -203,7 +202,7 @@ class _DirectedAcyclicGraph(
         filepath: str,
     ) -> None:
         if self._graph is None:
-            raise UninitializedException("graph is not compiled")
+            raise ValueError("Graph is not compiled")
         self.graph.get_graph().draw_mermaid_png(output_file_path=filepath)
 
 
