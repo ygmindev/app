@@ -82,10 +82,12 @@ class _BaseModel(PydanticBaseClass):
         self,
         mode: ExportMode = ExportMode.JSON,
         exclude: set[str] | None = None,
+        exclude_none: bool = False,
     ) -> dict[str, Any]:
         return self.model_dump(
             mode=mode.value,
             exclude=exclude,
+            exclude_none=exclude_none,
         )
 
 
