@@ -12,7 +12,7 @@ TSchema = TypeVar("TSchema", bound=BaseModel)
 
 class StructuredLlm(BaseModel):
     llm: Llm = Field(default_factory=Llm)
-    output_schema: type[TSchema] | None = Field(default=None)
+    output_schema: type[BaseModel] | None = Field(default=None)
 
     @property
     def input_tokens(self) -> int:

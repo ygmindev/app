@@ -38,6 +38,8 @@ class _Llm(BaseModel):
 
     _http_client: httpx.AsyncClient | None = PrivateField(default=None)
     _llm: BaseChatModel | None = PrivateField(default=None)
+    _input_tokens: int = PrivateField(default=0)
+    _output_tokens: int = PrivateField(default=0)
 
     def _secret(self, provider: str) -> str:
         if provider in self.secrets:
@@ -54,9 +56,7 @@ class _Llm(BaseModel):
         if self._llm is not None:
             return
         self._http_client = httpx.AsyncClient(verify=True)
-
         name = LLM_PROVIDER_MODEL[self.provider][self.name]
-
         match self.provider:
             case LLM_PROVIDER.LMSTUDIO:
                 self._llm = ChatOpenAI(

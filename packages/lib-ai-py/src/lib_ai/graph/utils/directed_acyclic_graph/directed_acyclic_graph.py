@@ -17,11 +17,14 @@ from langgraph.graph.state import (
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.logger.logger import logger
+from lib_shared.core.utils.private_field.private_field import PrivateField
 
 from lib_ai.agent.utils.streamable.streamable import Streamable
 from lib_ai.graph.constants import GraphNodeType
 from lib_ai.graph.utils.graph_edge.graph_edge import GraphEdge
 from lib_ai.graph.utils.graph_node.graph_node import GraphNode
+from lib_ai.graph.utils.stream_event.constants import StreamEventType
+from lib_ai.graph.utils.stream_event.stream_event import StreamEvent
 
 TState = TypeVar("TState", bound=BaseModel)
 
@@ -36,7 +39,7 @@ class _DirectedAcyclicGraph(
     interrupt_before: list[str] = Field(default_factory=list)
     checkpointer: BaseCheckpointSaver | None = Field(default=None)
 
-    _graph: CompiledStateGraph = PrivateAttr()
+    _graph: CompiledStateGraph = PrivateField()
 
     @property
     def nodes(self) -> list[GraphNode]:
