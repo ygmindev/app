@@ -17,7 +17,6 @@ from langgraph.graph.state import (
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.logger.logger import logger
-from lib_shared.core.utils.private_field.private_field import PrivateField
 
 from lib_ai.agent.utils.streamable.streamable import Streamable
 from lib_ai.graph.constants import GraphNodeType
@@ -31,12 +30,13 @@ class _DirectedAcyclicGraph(
     Streamable[TState],
     Generic[TState],
 ):
+    name: str = Field(default="")
     state_type: type[TState] = Field()
     recursion_limit: int = Field(default=25)
     interrupt_before: list[str] = Field(default_factory=list)
     checkpointer: BaseCheckpointSaver | None = Field(default=None)
 
-    _graph: CompiledStateGraph = PrivateField()
+    _graph: CompiledStateGraph = PrivateAttr()
 
     @property
     def nodes(self) -> list[GraphNode]:
@@ -55,22 +55,54 @@ class _DirectedAcyclicGraph(
             state: TState,
             config: RunnableConfig,
         ) -> TState:
-            if node.messages is not None:
-                for message in node.messages(state):
+            messages = node.messages(state)
+            if messages:
+                for message in messages:
                     logger.info(message)
 
             exec_mode = config.get("configurable", {}).get("exec_mode", "run")
             match exec_mode:
                 case "stream":
                     writer = get_stream_writer()
-                    final_state = state
-                    stream = node.stream(state)
-                    stream = await stream if isawaitable(stream) else stream
-                    async for chunk in stream:
-                        if isinstance(chunk, type(state)):
-                            final_state = chunk
-                        writer(chunk)
-                    return final_state
+                    writer(
+                        StreamEvent(
+                            type=StreamEventType.STATUS,
+                            node=node.name,
+                            message="started",
+                            data={"lifecycle": "started"},
+                        )
+                    )
+                    try:
+                        final_state = state
+                        stream = node.stream(state)
+                        stream = await stream if isawaitable(stream) else stream
+                        async for chunk in stream:
+                            if isinstance(chunk, type(state)):
+                                final_state = chunk
+                            writer(chunk)
+
+                        writer(
+                            StreamEvent(
+                                type=StreamEventType.STATUS,
+                                node=node.name,
+                                message="completed",
+                                data={"lifecycle": "completed"},
+                            )
+                        )
+                        return final_state
+                    except Exception as exc:
+                        writer(
+                            StreamEvent(
+                                type=StreamEventType.STATUS,
+                                node=node.name,
+                                message="failed",
+                                data={
+                                    "lifecycle": "failed",
+                                    "error": str(exc),
+                                },
+                            )
+                        )
+                        raise
                 case _:
                     return await node.run(state)
 
@@ -160,8 +192,12 @@ class _DirectedAcyclicGraph(
             interrupt_before=self.interrupt_before or None,
         )
 
+        super().model_post_init(__context)
+
     @property
     def graph(self) -> CompiledStateGraph:
+        if self._graph is None:
+            raise ValueError("Graph is not compiled")
         return self._graph
 
     def _coerce_state(self, params: TState, result: Any) -> TState:
@@ -185,7 +221,7 @@ class _DirectedAcyclicGraph(
     async def stream(
         self,
         params: TState,
-    ) -> AsyncIterable[TState]:
+    ) -> AsyncIterable[TState | StreamEvent]:
         cls = type(params)
 
         async for event in self.graph.astream(
@@ -195,7 +231,10 @@ class _DirectedAcyclicGraph(
             config=self._run_config(params, "stream"),
         ):
             data = event[-1] if isinstance(event, tuple) else event
-            if isinstance(data, cls):
+            stream_event = StreamEvent.from_chunk(data)
+            if stream_event is not None:
+                yield stream_event
+            elif isinstance(data, cls):
                 yield data
             elif hasattr(cls, "model_validate") and isinstance(data, dict):
                 try:
