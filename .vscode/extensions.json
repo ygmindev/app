@@ -4,6 +4,7 @@
     "charliermarsh.ruff",
     "Codeium.codeium",
     "Continue.continue",
+    "detachhead.basedpyright",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "ms-azuretools.vscode-docker",

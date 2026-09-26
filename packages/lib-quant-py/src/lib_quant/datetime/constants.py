@@ -4,8 +4,8 @@ from typing import TYPE_CHECKING, Any
 import QuantLib as ql
 
 if TYPE_CHECKING:
-    from lib_quant.cashflow.utils.schedule.schedule import Schedule
-    from lib_quant.datetime.utils.period.period import Period
+    from lib_quant.cashflow.models.schedule.schedule import Schedule
+    from lib_quant.datetime.models.period.period import Period
 
 
 class BusinessDayConvention(StrEnum):
@@ -54,7 +54,7 @@ class Frequency(StrEnum):
 
     @property
     def unit_period(self) -> "Period":
-        from lib_quant.datetime.utils.period.period import Period
+        from lib_quant.datetime.models.period.period import Period
 
         match self:
             case Frequency.DAILY:

@@ -5,9 +5,9 @@ import QuantLib as ql
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.field.field import Field
 
-from lib_quant.app.utils.quant_settings.quant_settings import QuantSettings
-from lib_quant.datetime.utils.calendar.calendar import Calendar
-from lib_quant.datetime.utils.period.period import Period
+from lib_quant.app.models.quant_settings.quant_settings import QuantSettings
+from lib_quant.datetime.models.calendar.calendar import Calendar
+from lib_quant.datetime.models.period.period import Period
 
 
 class Asset(BaseModel):

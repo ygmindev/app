@@ -1,9 +1,9 @@
 import datetime
 
 from lib_quant.date.constants import Frequency
-from lib_quant.instruments.fixed_income.credit.fixed_rate_credit import FixedRateCredit
-from lib_quant.pricing.utils.bond_price import BondPrice
-from lib_quant.pricing.utils.bond_yield import BondYield
+from lib_quant.fixed_income.credit.fixed_rate_credit import FixedRateCredit
+from lib_quant.pricing.models.bond_price import BondPrice
+from lib_quant.pricing.models.bond_yield import BondYield
 
 # 4cacf5310e674dc617b8152061d223af
 

@@ -7,17 +7,17 @@ from lib_quant.curve.benchmark_yield_curve.benchmark_yield_curve import (
     BenchmarkYieldCurve,
 )
 from lib_quant.curve.ois_curve.ois_curve import OisCurve
-from lib_quant.datetime.utils.period.period import Period
+from lib_quant.datetime.models.period.period import Period
 from lib_quant.instruments.fixed_income.credit.bond.fixed_rate_bond.fixed_rate_bond import (
     FixedRateBond,
 )
-from lib_quant.pricing.utils.pricing_engine.credit_pricing_engine.credit_pricing_engine import (
+from lib_quant.pricing.models.pricing_engine.credit_pricing_engine.credit_pricing_engine import (
     CreditPricingEngine,
 )
-from lib_quant.pricing.utils.quote.credit_quote.constants import CreditQuoteType
-from lib_quant.pricing.utils.quote.credit_quote.credit_quote import CreditQuote
-from lib_quant.pricing.utils.quote.swap_quote.constants import SwapQuoteType
-from lib_quant.pricing.utils.quote.swap_quote.swap_quote import SwapQuote
+from lib_quant.pricing.models.quote.credit_quote.constants import CreditQuoteType
+from lib_quant.pricing.models.quote.credit_quote.credit_quote import CreditQuote
+from lib_quant.pricing.models.quote.swap_quote.constants import SwapQuoteType
+from lib_quant.pricing.models.quote.swap_quote.swap_quote import SwapQuote
 from lib_quant.swap.ois.ois import Ois
 
 # as of 9/4/2026

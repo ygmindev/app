@@ -1,11 +1,11 @@
 from typing import Any
 
 import QuantLib as ql
+from lib_quant.fixed_income.credit.credit.credit import Credit
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 
 from lib_quant.datetime.constants import Frequency
-from lib_quant.instruments.fixed_income.credit.credit.credit import Credit
 
 
 class FloatingRateCredit(Credit[ql.FloatingRateBond]):

@@ -6,7 +6,7 @@ from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.logger.logger import logger
 
 from lib_quant.datetime.constants import Frequency
-from lib_quant.datetime.utils.period.period import Period
+from lib_quant.datetime.models.period.period import Period
 from lib_quant.instruments.fixed_income.credit.bond.fixed_rate_bond.fixed_rate_bond import (
     FixedRateBond,
 )

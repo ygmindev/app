@@ -1,8 +1,7 @@
 from typing import TypeVar
 
 import QuantLib as ql
-
-from lib_quant.instruments.fixed_income.credit.fixed_rate_credit.fixed_rate_credit import (
+from lib_quant.fixed_income.credit.fixed_rate_credit.fixed_rate_credit import (
     FixedRateCredit,
 )
 

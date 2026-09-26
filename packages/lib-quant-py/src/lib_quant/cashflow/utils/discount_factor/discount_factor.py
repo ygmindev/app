@@ -1,6 +1,6 @@
 import QuantLib as ql
+from lib_quant.curve.models.curve.constants import Compounding
 
-from lib_quant.curve.curve.constants import Compounding
 from lib_quant.datetime.constants import DayCount, Frequency
 
 

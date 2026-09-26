@@ -1,12 +1,12 @@
 import datetime
 
-from lib_shared.core.utils.field.field import Field
-
-from lib_quant.assets.real_estate_asset.real_estate_asset import RealEstateAsset
-from lib_quant.datetime.utils.period.period import Period
-from lib_quant.instruments.fixed_income.credit.loan.floating_rate_loan.floating_rate_loan import (
+from lib_quant.fixed_income.credit.loan.floating_rate_loan.floating_rate_loan import (
     FloatingRateLoan,
 )
+from lib_shared.core.utils.field.field import Field
+
+from lib_quant.asset.models.real_estate_asset.real_estate_asset import RealEstateAsset
+from lib_quant.datetime.models.period.period import Period
 
 
 class RealEstateCredit(FloatingRateLoan):

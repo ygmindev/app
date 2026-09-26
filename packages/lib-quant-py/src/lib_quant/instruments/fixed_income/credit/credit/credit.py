@@ -3,21 +3,23 @@ from collections import defaultdict
 from typing import Any, Callable, Generic, TypeVar
 
 import QuantLib as ql
+from lib_quant.fixed_income.credit.credit.constants import AmortizationType
+from lib_quant.fixed_income.fixed_income.fixed_income import FixedIncome
 from lib_shared.core.utils.field.field import Field
 from lib_shared.core.utils.private_field.private_field import PrivateField
 
-from lib_quant.cashflow.cashflow_event.cashflow_event import CashflowEvent
-from lib_quant.cashflow.cashflow_schedule.cashflow_schedule import CashflowSchedule
-from lib_quant.cashflow.utils.schedule.schedule import Schedule
-from lib_quant.curve.bootstrappable_curve.bootstrappable_curve import (
+from lib_quant.cashflow.models.cashflow_event.cashflow_event import CashflowEvent
+from lib_quant.cashflow.models.cashflow_schedule.cashflow_schedule import (
+    CashflowSchedule,
+)
+from lib_quant.cashflow.models.schedule.schedule import Schedule
+from lib_quant.curve.models.bootstrappable_curve.bootstrappable_curve import (
     BootstrappableCurve,
 )
 from lib_quant.datetime.constants import Direction, Frequency
-from lib_quant.datetime.utils.period.period import Period
-from lib_quant.derivs.option.option import Option
-from lib_quant.features.prepayment.base_provision.base_provision import BaseProvision
-from lib_quant.instruments.fixed_income.credit.credit.constants import AmortizationType
-from lib_quant.instruments.fixed_income.fixed_income.fixed_income import FixedIncome
+from lib_quant.datetime.models.period.period import Period
+from lib_quant.derivs.models.option.option import Option
+from lib_quant.prepayment.models.base_provision.base_provision import BaseProvision
 
 TType = TypeVar("TType", bound=ql.Bond)
 

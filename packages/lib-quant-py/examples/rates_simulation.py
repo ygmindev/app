@@ -4,12 +4,12 @@ from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.logger.logger import logger
 
 from lib_quant.curve.ois_curve.ois_curve import OisCurve
-from lib_quant.datetime.utils.period.period import Period
+from lib_quant.datetime.models.period.period import Period
 from lib_quant.instruments.fixed_income.credit.bond.fixed_rate_bond.fixed_rate_bond import (
     FixedRateBond,
 )
-from lib_quant.pricing.utils.quote.swap_quote.constants import SwapQuoteType
-from lib_quant.pricing.utils.quote.swap_quote.swap_quote import SwapQuote
+from lib_quant.pricing.models.quote.swap_quote.constants import SwapQuoteType
+from lib_quant.pricing.models.quote.swap_quote.swap_quote import SwapQuote
 from lib_quant.simulation.hullwhite_simulator.hullwhite_simulator import (
     HullWhiteParams,
     HullWhiteSimParams,

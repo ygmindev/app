@@ -90,11 +90,18 @@
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Dark+",
+  "workbench.colorTheme": "Default Light+",
   "workbench.iconTheme": "vs-minimal",
   "workbench.sideBar.location": "right",
   "editor.quickSuggestionsDelay": 100,
   "chat.disableAIFeatures": false,
   "continue.enableConsole": true,
-  "editor.inlineSuggest.enabled": true
+  "editor.inlineSuggest.enabled": true,
+  "basedpyright.analysis.extraPaths": [
+    "${workspaceFolder}/packages/lib-config-py/src",
+    "${workspaceFolder}/packages/lib-ai-py/src",
+    "${workspaceFolder}/packages/lib-model-py/src",
+    "${workspaceFolder}/packages/lib-shared-py/src",
+    "${workspaceFolder}/packages/lib-quant-py/src"
+  ]
 }
