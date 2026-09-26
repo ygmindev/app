@@ -7,10 +7,10 @@ from lib_shared.core.utils.logger.logger import logger
 
 from lib_quant.datetime.constants import Frequency
 from lib_quant.datetime.models.period.period import Period
-from lib_quant.instruments.fixed_income.credit.bond.fixed_rate_bond.fixed_rate_bond import (
+from lib_quant.fixed_income.models.credit.bond.fixed_rate_bond.fixed_rate_bond import (
     FixedRateBond,
 )
-from lib_quant.instruments.fixed_income.credit.credit.constants import AmortizationType
+from lib_quant.fixed_income.models.credit.credit.constants import AmortizationType
 
 pd.set_option("display.max_columns", None)
 

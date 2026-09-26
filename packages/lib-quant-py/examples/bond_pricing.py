@@ -3,12 +3,13 @@ import datetime
 
 from lib_shared.core.utils.base_model.base_model import BaseModel
 
-from lib_quant.curve.benchmark_yield_curve.benchmark_yield_curve import (
+from lib_quant.curve.models.benchmark_yield_curve.benchmark_yield_curve import (
     BenchmarkYieldCurve,
 )
-from lib_quant.curve.ois_curve.ois_curve import OisCurve
+from lib_quant.curve.models.ois_curve.ois_curve import OisCurve
 from lib_quant.datetime.models.period.period import Period
-from lib_quant.instruments.fixed_income.credit.bond.fixed_rate_bond.fixed_rate_bond import (
+from lib_quant.derivs.models.swap.ois.ois import Ois
+from lib_quant.fixed_income.models.credit.bond.fixed_rate_bond.fixed_rate_bond import (
     FixedRateBond,
 )
 from lib_quant.pricing.models.pricing_engine.credit_pricing_engine.credit_pricing_engine import (
@@ -18,7 +19,6 @@ from lib_quant.pricing.models.quote.credit_quote.constants import CreditQuoteTyp
 from lib_quant.pricing.models.quote.credit_quote.credit_quote import CreditQuote
 from lib_quant.pricing.models.quote.swap_quote.constants import SwapQuoteType
 from lib_quant.pricing.models.quote.swap_quote.swap_quote import SwapQuote
-from lib_quant.swap.ois.ois import Ois
 
 # as of 9/4/2026
 OIS_QUOTES = [
@@ -59,7 +59,7 @@ OIS_QUOTES = [
     ),
 ]
 
-UST_QUOTES = [
+UST_QUOTES: tuple[list[Period], list[float]] = (
     [
         Period(years=2),
         Period(years=3),
@@ -76,7 +76,7 @@ UST_QUOTES = [
         0.0478,
         0.0523,
     ],
-]
+)
 
 
 async def main() -> None:

@@ -3,19 +3,19 @@ import asyncio
 from lib_shared.core.utils.base_model.base_model import BaseModel
 from lib_shared.core.utils.logger.logger import logger
 
-from lib_quant.curve.ois_curve.ois_curve import OisCurve
+from lib_quant.curve.models.ois_curve.ois_curve import OisCurve
 from lib_quant.datetime.models.period.period import Period
-from lib_quant.instruments.fixed_income.credit.bond.fixed_rate_bond.fixed_rate_bond import (
+from lib_quant.derivs.models.swap.ois import Ois
+from lib_quant.fixed_income.models.credit.bond.fixed_rate_bond.fixed_rate_bond import (
     FixedRateBond,
 )
 from lib_quant.pricing.models.quote.swap_quote.constants import SwapQuoteType
 from lib_quant.pricing.models.quote.swap_quote.swap_quote import SwapQuote
-from lib_quant.simulation.hullwhite_simulator.hullwhite_simulator import (
+from lib_quant.simulation.models.hullwhite_simulator import HullWhiteSimulator
+from lib_quant.simulation.models.hullwhite_simulator.hullwhite_simulator import (
     HullWhiteParams,
     HullWhiteSimParams,
-    HullWhiteSimulator,
 )
-from lib_quant.swap.ois.ois import Ois
 
 
 async def main() -> None:
