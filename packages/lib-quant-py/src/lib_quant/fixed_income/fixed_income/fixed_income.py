@@ -4,7 +4,7 @@ from lib_shared.core.utils.field.field import Field
 from lib_quant.cashflow.models.cashflow_schedule.cashflow_schedule import (
     CashflowSchedule,
 )
-from lib_quant.core.models.base_instrument.base_instrument import BaseInstrument
+from lib_quant.instrument.models.base_instrument.base_instrument import BaseInstrument
 from lib_quant.datetime.constants import Frequency
 
 
